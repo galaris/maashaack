@@ -10,3 +10,4 @@ build_global.bat
 and/or
 build_shell.bat
 
+the resulting *.abc files can be found in /src subdirectory
