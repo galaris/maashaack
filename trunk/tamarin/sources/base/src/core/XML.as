@@ -20,6 +20,7 @@
  *
  * Contributor(s):
  *   Adobe AS3 Team
+ *   zwetan <zwetan@gmail.com>
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -174,9 +175,10 @@ public final dynamic class XML extends Object
    	XML.settings = function():Object {
 		return AS3::settings()
 	}
-	XML.setSettings = function(o=undefined):void {
+	XML.setSettings = function(o:Object=null):void {
 		AS3::setSettings(o)
 	}
+	
 	XML.defaultSettings = function():Object {
 		return AS3::defaultSettings()
 	}
