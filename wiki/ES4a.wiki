@@ -1,0 +1,24 @@
+#summary ECMAScript 4 MaasHaack framework
+#labels ES4a,Featured
+
+= Introduction =
+
+*ES4a* is an application framework for ECMAScript 4
+which have the only purpose to provide portable
+cross-platform and standard packages, libraries, etc.
+
+= Portability =
+
+ * Flash 9
+ * [http://labs.adobe.com/technologies/apollo/ Apollo]
+ * [http://code.google.com/p/redtamarin/ RedTamarin]
+
+= Details =
+
+Inspired by such projects as Mono, Python, Ruby, etc.
+the goal here is to provide a set of libraries that
+are made right from the start portable in the ES4 world.
+
+The focus is on the ES4 language, APIs available in
+Flash 9, Apollo, ActionScript 3 or any other ES4 host
+(like RedTamarin ;)).
