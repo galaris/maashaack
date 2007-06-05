@@ -20,5 +20,5 @@ the goal here is to provide a set of libraries that
 are made right from the start portable in the ES4 world.
 
 The focus is on the ES4 language, APIs available in
-Flash 9, Apollo, ActionScript 3 or any other ES4 host
-(like RedTamarin ;)).
+Flash 9, Apollo, !ActionScript 3 or any other ES4 host
+(like !RedTamarin ;)).
