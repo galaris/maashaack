@@ -31,9 +31,12 @@ package
             Serializer.prettyPrinting = true;
             system.info( true, true );
             
+            import buRRRn.ASTUce.tests.AllTests;
             import tests.ES4a.AllTests;
             import buRRRn.ASTUce.Runner;
-            Runner.main( AllTests.suite() );
+            
+            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
+                         tests.ES4a.AllTests.suite() );
             
             }
         

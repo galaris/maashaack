@@ -72,7 +72,7 @@ package system
                class eden
                namespace eden1
             */
-            import buRRRn.eden;
+            import buRRRn.eden.eden;
             import system.serializers.Basic;
             import system.serializers.WDDX;
             import system.serializers.PHP;
@@ -148,7 +148,7 @@ package system
         
         eden1 static function serialize( value:* ):String
             {
-            import buRRRn.eden;
+            import buRRRn.eden.eden;
             return eden.serialize( value );
             }
         
