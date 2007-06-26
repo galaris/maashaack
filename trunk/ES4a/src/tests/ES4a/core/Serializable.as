@@ -25,7 +25,7 @@ package tests.ES4a.core
     
     import system.ISerializable;
     import system.Strings;
-    import buRRRn.eden;
+    import buRRRn.eden.eden;
     
     public class Serializable implements ISerializable
         {
