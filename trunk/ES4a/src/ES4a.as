@@ -33,10 +33,12 @@ package
             
             import buRRRn.ASTUce.tests.AllTests;
             import tests.ES4a.AllTests;
+            import tests.eden.AllTests;
             import buRRRn.ASTUce.Runner;
             
             Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         tests.ES4a.AllTests.suite() );
+                         tests.ES4a.AllTests.suite(),
+                         tests.eden.AllTests.suite() );
             
             }
         
