@@ -92,6 +92,30 @@ package system
     		return __::getClassByName( name );
     	    }
         
+        /* Method: getDefinitionByName
+           Returns the instance of a public definition in the current Domain.
+           The definition can be a class, namespace, function or object.
+        */
+        unknown static function getDefinitionByName( name:String ):Object
+            {
+            return {};
+            }
+        
+        flash static function getDefinitionByName( name:String ):Object
+            {
+            import flash.system.ApplicationDomain;
+            return ApplicationDomain.currentDomain.getDefinition( name );
+            }
+        
+        redtamarin static function getDefinitionByName( name:String ):Object
+            {
+            throw new Error( "not implemented" );
+            }
+        
+    	public static function getDefinitionByName( name:String ):Object
+    	    {
+    		return __::getDefinitionByName( name );
+    	    }
         
         /* Method: getClassName
            Returns the class name as string of an object.
