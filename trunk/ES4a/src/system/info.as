@@ -2,7 +2,7 @@
 package system
     {
     import system.Version;
-     
+    
     /* Function: info
        basic system info
     */
