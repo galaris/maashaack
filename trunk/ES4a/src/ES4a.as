@@ -31,6 +31,9 @@ package
             Serializer.prettyPrinting = true;
             system.info( true, true );
             
+            import buRRRn.eden.info;
+            buRRRn.eden.info( true );
+            
             import buRRRn.ASTUce.tests.AllTests;
             import tests.ES4a.AllTests;
             import tests.eden.AllTests;
