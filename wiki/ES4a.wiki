@@ -29,7 +29,7 @@ Flash 9, Apollo, !ActionScript 3 or any other ES4 host
 full ES4a API.
 
 === core ===
-*[system system]*
+[system *system*]
 
 inherited from [http://code.google.com/p/core2/ core2]
  * [Globals Globals]
