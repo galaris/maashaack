@@ -1,5 +1,5 @@
 #summary ECMAScript 4 MaasHaack framework
-#labels ES4a,Featured
+#labels ES4a,Projects-X,Featured
 
 = Introduction =
 
@@ -10,7 +10,7 @@ cross-platform and standard packages, libraries, etc.
 = Portability =
 
  * Flash 9
- * [http://labs.adobe.com/technologies/apollo/ Apollo]
+ * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
  * [http://code.google.com/p/redtamarin/ RedTamarin]
 
 = Details =
@@ -22,3 +22,19 @@ are made right from the start portable in the ES4 world.
 The focus is on the ES4 language, APIs available in
 Flash 9, Apollo, !ActionScript 3 or any other ES4 host
 (like !RedTamarin ;)).
+
+= Documentation =
+
+*API*
+full ES4a API.
+
+[system system]
+ * [Globals Globals]
+ * [Arrays Arrays]
+ * [Booleans Booleans]
+ * [Dates Dates]
+ * [Errors Errors]
+ * [Functions Functions]
+ * [Numbers Numbers]
+ * [Objects Objects]
+ * [Strings Strings]
