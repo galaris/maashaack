@@ -1,4 +1,5 @@
 #summary A static class for String utilities.
+#labels Code,ES4a,core2
 
 = Introduction =
 
