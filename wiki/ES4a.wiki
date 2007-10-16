@@ -30,6 +30,9 @@ full ES4a API.
 
 === core ===
 *[system system]*
+ * config
+ * info
+ * SystemConfigurator
 
 inherited from [http://code.google.com/p/core2/ core2]
  * [Globals Globals]
@@ -42,12 +45,33 @@ inherited from [http://code.google.com/p/core2/ core2]
  * [Objects Objects]
  * [Strings Strings]
 
-[ES4aInterfaces interfaces]
-[ES4aSerializers serializers]
-[ES4aConfigurators configurators]
+interfaces
+ * IComparable
+ * ICopyable
+ * IHashable
+
+utils
+ * Configurator
+ * Console
+ * Enum
+ * Random
+ * Reflection
+ * Version
+
+multiple hosts
+ * Environment
+ * Ghosts
+ * Ghost
+ * Host
+ * HostID
+ * OperatingSystem
+ * PlatformID
+
 
 *[IO system.IO]*
 
-*[text system.text]*
-
 *[network system.network]*
+
+*[text system.serializers]*
+
+*[text system.text]*
