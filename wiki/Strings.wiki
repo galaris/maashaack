@@ -36,7 +36,12 @@ Strings.format( "the {0} is not {1}", "toString", "available" )
  }}}
  
  note:
+ 
  You can not have more than 10 indexes (0 to 9).
+ 
+ If the token is null the "null" string is returned.
+ 
+ If the token is undefined the "undefined" string is returned.
 
  * alignment
  This optionnal integer allow you to align and pad your token.
