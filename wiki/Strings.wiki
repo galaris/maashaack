@@ -1,14 +1,41 @@
 #summary A static class for String utilities.
 #labels Code,ES4a,core2
 
-*Introduction*
+=== static ===
 
-Add your content here.
+*compare*
 
+*endsWith*
 
-*Details*
+*format*
+format a string.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+usage:
+{{{
+Strings.format( format:String, ...args )
+Strings.format( format:String, [arg0:*,arg1:*,arg2:*, ...] )
+Strings.format( format:String, [arg0:*,arg1:*,arg2:*, ...], ...args )
+Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...} )
+Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ...args )
+}}}
+
+ * token
+   A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
+
+*indexOfAny*
+
+*insert*
+
+*padLeft*
+
+*padRight*
+
+*startsWith*
+
+*trim*
+
+*trimEnd*
+
+*trimStart*
+
+*whiteSpaceChars*
