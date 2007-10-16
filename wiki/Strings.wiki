@@ -8,7 +8,7 @@
 == endsWith ==
 
 == format ==
-Format a string.
+Format a string using indexed or named parameters.
 
 *method call:*
 {{{
@@ -24,11 +24,55 @@ Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ..
 {token[,alignment][:paddingChar]}
 }}}
 
+*example:*
+{{{
+//indexed from the arguments
+Strings.format( "hello {1} {0} world", "big", "the" ); //"hello the big world"
+
+//named from an object
+Strings.format( "hello I'm {name}", {name:"HAL"} ); //"hello I'm HAL"
+
+//passing reference and padding
+var what = "answer"
+Strings.format( "your {0} is within {answer,20:.}", {answer:"my answer"}, what ); //"your answer is within ...........my answer"
+
+//indexed from an array
+var names:Array = ["A","B","C","D"];
+var scores:Array = [16,32,128,1024];
+for( var i:int=0; i<names.length; i++ )
+    {
+    trace( Strings.format( "{0} scored {1,5}", [names[i], scores[i]] ) );
+    }
+//"A scored    16"
+//"B scored    32"
+//"C scored   128"
+//"D scored  1024"
+
+//resolve toString
+var x:Object = {};
+    x.toString = function() { return "john doe"; };
+trace( Strings.format( "Who is {0} ?", x ) ); //"Who is john doe ?"
+
+//you can off course reuse the index
+var fruits:Array = ["apple", "banana", "pineapple"];
+trace( Strings.format( "I like all fruits {0},{1},{2}, etc. but still I prefer above all {0}", fruits ) ); //"I like all fruits apple,banana,pineapple, etc. but still I prefer above all apple"
+
+//indexed from an array + the arguments
+var fruits:Array = ["apple", "banana", "pineapple"];
+trace( Strings.format( "fruits: {0}, {1}, {2}, {3}, {4}, {5}", fruits, "grape", "tomato" ) ); //"fruits: apple, banana, pineapple, grape, tomato, undefined"
+}}}
+
+If you want to use the "{" and "}" chars use "{{" and "}}"
+{{{
+"some {{formatitem}} to be escaped" -> "some {formatitem} to be escaped"
+"some {{format {0} item}} to be escaped", "my" -> "some {format my titem} to be escaped"
+}}}
+
 *parameters:*
  * token
  A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
  
- ex:
+ example:
  {{{
 Strings.format( "the {method} is not {state}", {method:"toString",state:"available"} )
 Strings.format( "the {0} is not {1}", ["toString","available"] )
@@ -43,9 +87,28 @@ Strings.format( "the {0} is not {1}", "toString", "available" )
 
  * alignment
  This optionnal integer allow you to align and pad your token.
+ The alignement is right-justified if positive and left-justified if negative.
+ 
+ example:
+ {{{
+ Strings.format( "hello {0,10}", "world" );  //"hello      world"
+ Strings.format( "hello {0,-10}", "world" ); //"hello world     "
+ }}}
+ 
+ This integer also indicate the minimum width of the padding,
+ if the length of your token is less than the padding
+ then the token will be padded with spaces.
 
  * paddingChar
  The padding char by default is the space char.
+ 
+ example:
+ {{{
+ Strings.format( "hello {0,10:_}", "world" );  //"hello _____world"
+ Strings.format( "hello {0,-10:.}", "world" ); //"hello world....."
+ }}}
+ 
+ You can define any other padding char.
 
 == indexOfAny ==
 
