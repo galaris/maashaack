@@ -1,12 +1,12 @@
 #summary A static class for String utilities.
 #labels Code,ES4a,core2
 
-=== Introduction ===
+*Introduction*
 
 Add your content here.
 
 
-=== Details ===
+*Details*
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
