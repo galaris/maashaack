@@ -43,5 +43,11 @@ inherited from [http://code.google.com/p/core2/ core2]
  * [Strings Strings]
 
 [ES4aInterfaces interfaces]
-
 [ES4aSerializers serializers]
+[ES4aConfigurators configurators]
+
+*[IO system.IO]*
+
+*[text system.text]*
+
+*[network system.network]*
