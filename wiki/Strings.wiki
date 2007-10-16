@@ -24,10 +24,23 @@ Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ..
 {token[,alignment][:paddingChar]}
 }}}
 
+*parameters:*
  * token
  A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
+ 
+ ex:
+ {{{
+Strings.format( "the {method} is not {state}", {method:"toString",state:"available"} )
+Strings.format( "the {0} is not {1}", ["toString","available"] )
+Strings.format( "the {0} is not {1}", "toString", "available" )
+ }}}
+ 
+ note:
+ You can not have more than 10 indexes (0 to 9).
+
  * alignment
  This optionnal integer allow you to align and pad your token.
+
  * paddingChar
  The padding char by default is the space char.
 
