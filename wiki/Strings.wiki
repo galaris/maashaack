@@ -8,9 +8,9 @@
 == endsWith ==
 
 == format ==
-format a string.
+Format a string.
 
-usage:
+*method call:*
 {{{
 Strings.format( format:String, ...args )
 Strings.format( format:String, [arg0:*,arg1:*,arg2:*, ...] )
@@ -19,8 +19,17 @@ Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...} )
 Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ...args )
 }}}
 
+*formats item:*
+{{{
+{token[,alignment][:paddingChar]}
+}}}
+
  * token
-   A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
+ A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
+ * alignment
+ This optionnal integer allow you to align and pad your token.
+ * paddingChar
+ The padding char by default is the space char.
 
 == indexOfAny ==
 
