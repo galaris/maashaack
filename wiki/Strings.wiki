@@ -1,13 +1,13 @@
 #summary A static class for String utilities.
 #labels Code,ES4a,core2
 
-=== static ===
+= static =
 
-*compare*
+== compare ==
 
-*endsWith*
+== endsWith ==
 
-*format*
+== format ==
 format a string.
 
 usage:
@@ -22,20 +22,20 @@ Strings.format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ..
  * token
    A numeric `[0-9]` or named `[a-zA-Z]` index to indicate which element to format.
 
-*indexOfAny*
+== indexOfAny ==
 
-*insert*
+== insert ==
 
-*padLeft*
+== padLeft ==
 
-*padRight*
+== padRight ==
 
-*startsWith*
+== startsWith ==
 
-*trim*
+== trim ==
 
-*trimEnd*
+== trimEnd ==
 
-*trimStart*
+== trimStart ==
 
-*whiteSpaceChars*
+== whiteSpaceChars ==
