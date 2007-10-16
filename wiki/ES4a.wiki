@@ -25,9 +25,10 @@ Flash 9, Apollo, !ActionScript 3 or any other ES4 host
 
 = Documentation =
 
-*API*
+== API ==
 full ES4a API.
 
+=== core ===
 [system system]
  * [Globals Globals]
  * [Arrays Arrays]
@@ -38,3 +39,7 @@ full ES4a API.
  * [Numbers Numbers]
  * [Objects Objects]
  * [Strings Strings]
+
+[ES4aInterfaces interfaces]
+
+[ES4aSerializers serializers]
