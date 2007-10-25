@@ -23,11 +23,13 @@ package
     {
     import flash.display.Sprite;
     
+    
     public class ES4a extends Sprite
         {
         public function ES4a()
             {
             import system.*;
+            
             Serializer.prettyPrinting = true;
             system.info( true, true );
             
@@ -39,10 +41,16 @@ package
             import tests.eden.AllTests;
             import buRRRn.ASTUce.Runner;
             
+            import buRRRn.ASTUce.config;
+            buRRRn.ASTUce.config.showConstructorList = true;
+            
+            Runner.main( tests.ES4a.AllTests.suite() );
+            
+            /*
             Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
                          tests.ES4a.AllTests.suite(),
                          tests.eden.AllTests.suite() );
-            
+            */
             }
         
         }
