@@ -37,6 +37,10 @@ package tests.ES4a.core
             {
             var suite:TestSuite = new TestSuite( "core tests" );
             
+            //core2
+            suite.addTestSuite( StringsTest );
+            
+            //others
             suite.addTestSuite( VersionTest );
             suite.addTestSuite( ReflectionTest );
             suite.addTestSuite( EqualityTest );
