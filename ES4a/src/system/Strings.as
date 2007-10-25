@@ -23,189 +23,138 @@ package system
     {
     
     /* Class: Strings
-       A clone of the builtin String class with some extensions.
+       A static class for String utilities.
     */
     public class Strings
         {
-        private var _value:String;
         
-        public function Strings( str:String = "" )
-            {
-            _value = str;
-            }
-        
-        public function get length():int
-            {
-            return _value.length;
-            }
-        
-        public function valueOf():String
-            {
-            return _value.valueOf();
-            }
-        
-        public function toString():String
-            {
-            return _value;
-            }
-        
-        /* group: native
-           
-           note:
-           as String class is final in AS3
-           we have to reimplement all the native String methods,
-           keeping the same function signatures.
-           
-           For now we use by default the AS3 namespace b/c it is more optimized,
-           this could evolve later to provide better portability,
-           for ex if JS2 would introduce a JS2 namespace.
+        /* Method: _PadHelper
+           Helper method for the padLeft and padRight method.
         */
-		
-		public function indexOf( s:String="undefined", i:Number=0 ):int 
-		    {
-			return String(this).AS3::indexOf( s, i );
-		    }
+        private static function _padHelper( str:String, totalWidth:int, paddingChar:String = " ", isRightPadded:Boolean = true ):String
+            {
+            if( (totalWidth < str.length) || (totalWidth < 0) )
+                {
+                return str;
+                }
+            
+            /* note:
+               we want to limit the string to ONLY ONE char
+               
+               for now we do that but perharps it would better
+               to throw an Error
+            */
+            if( paddingChar.length > 1 )
+                {
+                paddingChar = paddingChar.charAt( 0 );
+                }
+            
+            while( str.length != totalWidth )
+                {
+                if( isRightPadded == true )
+                    {
+                    str += paddingChar;
+                    }
+                else
+                    {
+                    str = paddingChar + str;
+                    }
+                }
+            
+            return str;
+            }
         
-		public function charAt( i:Number=0 ):String
-		    {
-			return String(this).AS3::charAt( i );
-		    }
-        
-		public function charCodeAt( i:Number=0 ):Number
-		    {
-			return String(this).AS3::charCodeAt( i );
-		    }
-        
-		public function concat( ...args ):String
-		    {
-			var s:String = String(this);
-			for( var i:uint = 0, n:uint = args.length; i < n; i++ )
-			    {
-				s = s + String( args[i] );
-			    }
-			return s;
-		    }
-        
-		public function localeCompare( other:String=void 0 ):int 
-		    {
-			return String(this).AS3::localeCompare(other);
-		    }
-        
-		public function match( p:*=void 0 ):Array
-		    {
-			return String(this).AS3::match( p );
-		    }
-        
-		public function replace( p:*=void, repl:*=void ):String
-		    {
-			return String(this).AS3::replace( p, repl );
-		    }
-        
-		public function search( p:*=void 0 ):int
-		    {
-			return String(this).AS3::search( p );
-		    }
-        
-		public function slice( start:Number=0, end:Number=0x7fffffff ):String
-		    {
-			return String(this).AS3::slice( start, end );
-		    }
-        
-		public function split( delim:*=void 0, limit:Number=0xffffffff ):Array
-		    {
-			return String(this).AS3::split( delim, limit );
-		    }
-        
-		public function substring( start:Number=0, end:Number=0x7fffffff ):String
-		    {
-			return String(this).AS3::substring( start, end );
-		    }
-        
-		public function substr( start:Number=0, len:Number=0x7fffffff ):String
-		    {
-			return String(this).AS3::substr( start, len );
-		    }
-
-		public function toLowerCase():String
-		    {
-			return String(this).AS3::toLowerCase();
-		    }
-        
-		public function toLocaleLowerCase():String
-		    {
-			return String(this).AS3::toLowerCase();
-		    }
-        
-		public function toUpperCase():String
-		    {
-			return String(this).AS3::toUpperCase();
-		    }
-        
-		public function toLocaleUpperCase():String
-		    {
-			return String(this).AS3::toUpperCase();
-		    }        
-        
-        
-        /* group: core2 extended
-           
-           note:
-           we keep it simple for now, more to come ;)
+        /* Method: _trimHelper
+           Helper method used by trim, trimStart and trimEnd methods.
         */
+        private static function _trimHelper( str:String, trimChars:Array, trimStart:Boolean = false, trimEnd:Boolean = false ):String
+            {
+            var iLeft:int;
+            var iRight:int;
+            
+            if( trimStart )
+                {
+                for( iLeft=0; (iLeft<str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > -1); iLeft++ )
+                    {
+                    }
+                
+                str = str.substr( iLeft );
+                }
+            
+            if( trimEnd )
+                {
+                for( iRight=str.length-1; (iRight>=0) && (trimChars.indexOf( str.charAt( iRight ) ) > -1); iRight-- )
+                    {            
+                    }
+                
+                str = str.substring( 0, iRight+1 );
+                }
+            
+            return str;
+            }
         
         /* Method: compare
            Compares the two specified String objects.
            
            Parameters:
-             strA       - first string to compare
-             strB       - with second string
-             ignoreCase - optionnal, allow to take into account the case for comparison
+             o1     - first string to compare
+             o2     - with second string
+             strict - optionnal ignoreCase boolean, default to false.
+                      allows to take into account the string case for comparison.
              
            note:
            we don't do a string diff, we just compare the length of the strings
            and if the length are equals only then we compare by value.
+           
+           attention
+           if you have used core2 before
+           where you were used to a compare(o1, o2, ignoreCase = false) signature
+           note that the default parameter have changed
+           (ignoreCase = false) != (strict = false)
         */
-        public static function compare( strA:String, strB:String, ignoreCase:Boolean = true ):int
+        public static function compare( o1:*, o2:*, strict:Boolean = false ):int
             {
-            if( (strA == null) || (strB == null) )
+            
+            if( (o1 == null) || (o2 == null) )
                 {
-                if( strA == strB )
+                if( o1 == o2 )
                     {
                     return 0; //both null
                     }
-                else if( strA == null )
+                else if( o1 == null )
                     {
-                    return -1; //strA is null -1
+                    return -1; //o1 is null -1
                     }
                 else
                     {
-                    return 1; //strB is null 1
+                    return 1; //o2 is null 1
                     }
                 }
             
-            /* note:
-               little hack in the case we cannot inherit from String
-               we then use the primitive valueOf
-            */
-            strA = strA.valueOf();
-            strB = strB.valueOf();   
-            
-            if( !(strA is String) || !(strB is String) )
+            if( !(o1 is String) || !(o2 is String) )
                 {
                 throw new Error( "Arguments String expected." );
                 }
             
-            if( ignoreCase == true )
+            if( !strict == true )
                 {
-                strA = strA.toLowerCase();
-                strB = strB.toLowerCase();
+                o1 = o1.toLowerCase();
+                o2 = o2.toLowerCase();
                 }
             
-            if( strA == strB )
+            if( o1 == o2 )
                 {
                 return 0;
                 }
-            else if( strA.length > strB.length )
+            else if( o1.length == o2.length )
+                {
+                /* TODO:
+                   implement a string diff algorithm
+                */
+                //return difference( o1, o2, option );
+                return 0;
+                }
+            else if( o1.length > o2.length )
                 {
                 return 1;
                 }
@@ -215,9 +164,21 @@ package system
                 }
             }
         
+        /* Method: endsWith
+           Determines whether the end of this instance matches the specified String.
+        */
+        public static function endsWith( str:String, value:String ):Boolean
+            {
+            if( (value == null) || (str.length < value.length) )
+                {
+                return false;
+                }
+            
+            return compare( str.substr( str.length-value.length ), value) == 0;
+            }
         
         /* Method: format
-           format a string.
+           Format a string using indexed or named parameters.
            
            method call:
            format( format:String, ...args )
@@ -227,21 +188,23 @@ package system
            format( format:String, {name0:value0,name1:value1,name2:value2, ...}, ...args )
            
            formats item:
+           (code)
            {token[,alignment][:paddingChar]}
+           (end)
            
            If you want to use the "{" and "}" chars use "{{" and "}}"
            "some {{formatitem}} to be escaped" -> "some {formatitem} to be escaped"
            "some {{format {0} item}} to be escaped", "my" -> "some {format my titem} to be escaped"
            
-           
+           parameters:
            token       - A numeric [0-9] or named [a-zA-Z] index to indicate
                          which element to format.
                          
-                         ex:
+                         example:
                          (code)
-                         String.format( "the {method} is not {state}", {method:"toString",state:"available"} )
-                         String.format( "the {0} is not {1}", ["toString","available"] )
-                         String.format( "the {0} is not {1}", "toString", "available" )
+                         Strings.format( "the {method} is not {state}", {method:"toString",state:"available"} );
+                         Strings.format( "the {0} is not {1}", ["toString","available"] );
+                         Strings.format( "the {0} is not {1}", "toString", "available" );
                          (end)
                          
                          note:
@@ -252,38 +215,87 @@ package system
            alignment   - This optionnal integer allow you to align and pad your token.
                          The alignement is right-justified if positive
                          and left-justified if negative.
+                         
+                         example:
+                         (code)
+                         Strings.format( "hello {0,10}", "world" );  //"hello      world"
+                         Strings.format( "hello {0,-10}", "world" ); //"hello world     "
+                         (end)
+                         
                          This integer also indicate the minimum width of the padding,
                          if the length of your token is less than the padding
                          then the token will be padded with spaces. 
                          
            
            paddingChar - The padding char by default is the space char.
+                         
+                         example:
+                         (code)
+                         Strings.format( "hello {0,10:_}", "world" );  //"hello _____world"
+                         Strings.format( "hello {0,-10:.}", "world" ); //"hello world....."
+                         (end)
+                         
                          You can define any other padding char.
+           
+           more example:
+           (code)
+            //indexed from the arguments
+            Strings.format( "hello {1} {0} world", "big", "the" ); //"hello the big world"
+            
+            //named from an object
+            Strings.format( "hello I'm {name}", {name:"HAL"} ); //"hello I'm HAL"
+            
+            //passing reference and padding
+            var what = "answer"
+            Strings.format( "your {0} is within {answer,20:.}", {answer:"my answer"}, what ); //"your answer is within ...........my answer"
+            
+            //indexed from an array
+            var names:Array = ["A","B","C","D"];
+            var scores:Array = [16,32,128,1024];
+            for( var i:int=0; i<names.length; i++ )
+                {
+                trace( Strings.format( "{0} scored {1,5}", [names[i], scores[i]] ) );
+                }
+            //"A scored    16"
+            //"B scored    32"
+            //"C scored   128"
+            //"D scored  1024"
+            
+            //resolve toString
+            var x:Object = {};
+                x.toString = function() { return "john doe"; };
+            trace( Strings.format( "Who is {0} ?", x ) ); //"Who is john doe ?"
+            
+            //you can off course reuse the index
+            var fruits:Array = ["apple", "banana", "pineapple"];
+            trace( Strings.format( "I like all fruits {0},{1},{2}, etc. but still I prefer above all {0}", fruits ) ); //"I like all fruits apple,banana,pineapple, etc. but still I prefer above all apple"
+            
+            //indexed from an array + the arguments
+            var fruits:Array = ["apple", "banana", "pineapple"];
+            trace( Strings.format( "fruits: {0}, {1}, {2}, {3}, {4}, {5}", fruits, "grape", "tomato" ) ); //"fruits: apple, banana, pineapple, grape, tomato, undefined"
+           (end)
            
         */
         public static function format( format:String, ...args ):String
             {
            if( (args == null) || (args.length == 0) || (format == "") )
                 {
-                trace( "#shortcut" );
                 return format; //nothing to format
                 }
             
             var paddingChar:String  = " "; //default padding char is SPC
             var indexedValues:Array = [];  //cf {0} {1} etc.
             var namedValues:Object  = {};  //cf {toto} {titi} etc.
-            var hasIndexes:Boolean  = false;
-            var hasNames:Boolean    = false;
-            var numeric:RegExp      = /^[0-9]*/;
-            var alphabetic:RegExp   = /^[A-Za-z]./;
-            var alphaLetter:RegExp  = /^[A-Za-z]/;
+            //var numeric:RegExp      = /^[0-9]*/;
+            //var alphabetic:RegExp   = /^[A-Za-z]./;
+            //var alphaLetter:RegExp  = /^[A-Za-z]/;
             
+            //parse arguments
             if( args.length >= 1 )
                 {
                 if( args[0] is Array )
                     {
                     indexedValues = indexedValues.concat( args[0] );
-                    hasIndexes = true;
                     args.shift();
                     }
                 else if( (args[0] is Object) && (String(args[0]) == "[object Object]") )
@@ -292,7 +304,6 @@ package system
                         {
                         namedValues[ prop ] = args[0][ prop ];
                         }
-                    hasNames = true;
                     args.shift();
                     }
                 }
@@ -302,15 +313,27 @@ package system
             //escape {{ and }}
             var ORC1:String = "\uFFFC"; //Object Replacement Character
             var ORC2:String = "\uFFFD"; //Object Replacement Character
-            if( new Strings(format).indexOfAny( [ "{{", "}}" ] ) > -1 )
+            if( indexOfAny( format, [ "{{", "}}" ] ) > -1 )
                 {
+                /* note:
+                   little limitation here
+                   we cover the case of {{{0}}} -> to be able
+                   to escape and inject within the escaped
+                   Strings.format( "{{{0}}}", "hello" ) -> "{hello}"
+                   but in more complex cases as {{{{{0}}}}} this scenario will fail
+                   
+                   workaround:
+                   if you really really really need to escape
+                   as much as {{{{ and }}}} do that
+                   Strings.format( "{left}{0}{right}", {left:"{{{{", "}}}}"}, "hello" ) -> "{{{{hello}}}}"
+                   
+                   TODO:
+                   use regexp once String.format for JS/AS1 is stable
+                */
+                format = format.split( "{{{" ).join( ORC1+"{" );
                 format = format.split( "{{" ).join( ORC1 );
+                format = format.split( "}}}" ).join( "}"+ORC2 );
                 format = format.split( "}}" ).join( ORC2 );
-                }
-            
-            if( indexedValues.length > 0 )
-                {
-                hasIndexes = true;
                 }
             
             // {0} {1}
@@ -327,7 +350,7 @@ package system
                 var isAligned:Boolean = false;
                 var padding:String    = paddingChar; //default
                 
-                if( new Strings(expression).indexOfAny( [ ",", ":" ] ) > -1 )
+                if( indexOfAny( expression, [ ",", ":" ] ) > -1 )
                     {
                     var vPos:int = expression.indexOf( "," );
                     if( vPos == -1 )
@@ -371,6 +394,8 @@ package system
                     or an internal function outside a package
                     the AS3 namespace is not found anymore
                 */
+                
+                /*
                 if( alphabetic.test(expression) || alphaLetter.test(expression) )
                     {
                     value = String( namedValues[ expression ] );
@@ -379,20 +404,30 @@ package system
                     {
                     value = String( indexedValues[ int(expression) ] );
                     }
+                */
+                var c:String = expression.split("")[0];
+                if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
+                    {
+                    value = String( namedValues[ expression ] );
+                    }
+                else if( ("0" <= c) && (c <= "9") )
+                    {
+                    value = String( indexedValues[ int(expression) ] );
+                    }
                 
                 if( isAligned )
                     {
                     if( (spaceAlign > 0) && (value.length < spaceAlign) )
                         {
-                        value = new Strings(value).padLeft( spaceAlign, padding );
+                        value = padLeft( value, spaceAlign, padding );
                         }
                     else( -value.length < spaceAlign )
                         {
-                        value = new Strings(value).padRight( -spaceAlign, padding );
+                        value = padRight( value, -spaceAlign, padding );
                         }
                     }
                 
-                return value.toString();
+                return value;
                 }
             
             var expression:String = "";
@@ -408,6 +443,7 @@ package system
                 return ch;
                 }
             
+            //parsing
             while( pos < len )
                 {
                 next();
@@ -426,149 +462,23 @@ package system
                     }
                 }
             
-            if( new Strings(format).indexOfAny( [ ORC1, ORC2 ] ) > -1 )
+            if( indexOfAny( format, [ ORC1, ORC2 ] ) > -1 )
                 {
-                formated = formated.split( ORC1 ).join( "{{" );
-                formated = formated.split( ORC2 ).join( "}}" );
+                formated = formated.split( ORC1 ).join( "{" );
+                formated = formated.split( ORC2 ).join( "}" );
                 }
             
             return formated;
             }
         
-        
-        
-        
-        /* Method: _PadHelper
-           Helper method for the padLeft and padRight method.
-        */
-        private function _padHelper( totalWidth:int, paddingChar:String = " ", isRightPadded:Boolean = true ):String
-            {
-            if( (totalWidth < this.length) || (totalWidth < 0) )
-                {
-                return this.toString();
-                }
-            
-            var str:String = this.toString();
-            
-            /* note:
-               we want to limit the string to ONLY ONE char
-               
-               for now we do that but perharps it would better
-               to throw an Error
-            */
-            if( paddingChar.length > 1 )
-                {
-                paddingChar = paddingChar.charAt( 0 );
-                }
-            
-            while( str.length != totalWidth )
-                {
-                if( isRightPadded == true )
-                    {
-                    str += paddingChar;
-                    }
-                else
-                    {
-                    str = paddingChar + str;
-                    }
-                }
-            
-            return str;
-            }
-        
-        /* Method: _trimHelper
-           Helper method used by trim, trimStart and trimEnd methods.
-        */
-        private function _trimHelper( trimChars:Array, trimStart:Boolean = false, trimEnd:Boolean = false ):String
-            {
-            var str:String = this.toString();
-            var iLeft:int;
-            var iRight:int;
-            
-            if( trimStart )
-                {
-                for( iLeft=0; (iLeft<str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > -1); iLeft++ )
-                    {
-                    }
-                
-                str = str.substr( iLeft );
-                }
-            
-            if( trimEnd )
-                {
-                for( iRight=str.length-1; (iRight>=0) && (trimChars.indexOf( str.charAt( iRight ) ) > -1); iRight-- )
-                    {            
-                    }
-                
-                str = str.substring( 0, iRight+1 );
-                }
-            
-            return str;
-            }
-        
-
-        /* Method: endsWith
-           Determines whether the end of this instance matches the specified String.
-        */
-        public function endsWith( value:String ):Boolean
-            {
-            if( (value == null) || (this.length < value.length) )
-                {
-                return false;
-                }
-            
-            return compare( this.substr( this.length-value.length ), value) == 0;
-            }
-
-        /* Method: startsWith
-           Determines whether a specified string is a prefix
-           of the current instance.
-        */
-        public function startsWith( value:String ):Boolean
-            {
-            if( (value == null) || (this.length < value.length) )
-                {
-                return false;
-                }
-            
-            if( this.charAt( 0 ) != value.charAt( 0 ) )
-                {
-                return false;
-                }
-            
-            return compare( this.substr( 0, value.length), value) == 0;
-            }
-
-
-        
-        /* Method: padLeft
-           Right-aligns the characters in this instance,
-           padding with paddingChar (or spaces if not precised)
-           on the left for a specified total length.
-        */
-        public function padLeft( totalWidth:int, paddingChar:String = " " ):String
-            {
-            return _padHelper( totalWidth, paddingChar, false );
-            }
-        
-        /* Method: padRight
-           Left-aligns the characters in this string,
-           padding with paddingChar (or spaces if not precised)
-           on the right for a specified total length.
-        */
-        public function padRight( totalWidth:int, paddingChar:String = " " ):String
-            {
-            return _padHelper( totalWidth, paddingChar, true );
-            }
-        
         /* Method: indexOfAny
         */
-        public function indexOfAny( anyOf:Array, startIndex:int = 0, count:int = -1 ):int
+        public static function indexOfAny( str:String, anyOf:Array, startIndex:int = 0, count:int = -1 ):int
             {
             var i:int;
             var endIndex:int;
             
-            if( this.length == 0 )
+            if( str.length == 0 )
                 {
                 return -1;
                 }
@@ -589,7 +499,7 @@ package system
             
             for( i=startIndex; i<=endIndex ; i++ )
                 {
-                if( this.indexOf( anyOf[i] ) > -1 )
+                if( str.indexOf( anyOf[i] ) > -1 )
                     {
                     return i;
                     }
@@ -607,9 +517,8 @@ package system
            
            if index is zero, we directly insert it to the begining of the string.
         */
-        public function insert( startIndex:int, value:String ):String
-            {    
-            var str:String = this.toString();
+        public function insert( str:String, startIndex:int, value:String ):String
+            {
             var strA:String = "";
             var strB:String = "";
             
@@ -628,46 +537,85 @@ package system
             return strA + value + strB;
             }
         
+        /* Method: padLeft
+           Right-aligns the characters in this instance,
+           padding with paddingChar (or spaces if not precised)
+           on the left for a specified total length.
+        */
+        public static function padLeft( str:String, totalWidth:int, paddingChar:String = " " ):String
+            {
+            return _padHelper( str, totalWidth, paddingChar, false );
+            }
+        
+        /* Method: padRight
+           Left-aligns the characters in this string,
+           padding with paddingChar (or spaces if not precised)
+           on the right for a specified total length.
+        */
+        public static function padRight( str:String, totalWidth:int, paddingChar:String = " " ):String
+            {
+            return _padHelper( str, totalWidth, paddingChar, true );
+            }
+        
+        /* Method: startsWith
+           Determines whether a specified string is a prefix
+           of the current instance.
+        */
+        public static function startsWith( str:String, value:String ):Boolean
+            {
+            if( (value == null) || (str.length < value.length) )
+                {
+                return false;
+                }
+            
+            if( str.charAt( 0 ) != value.charAt( 0 ) )
+                {
+                return false;
+                }
+            
+            return compare( str.substr( 0, value.length), value) == 0;
+            }
+        
         /* Method: trim
            Removes all occurrences of a set of specified characters (or strings)
            from the beginning and end of this instance.
         */
-        public function trim( trimChars:Array = null ):String
+        public static function trim( str:String, trimChars:Array = null ):String
             {
             if( trimChars == null )
                 {
                 trimChars = whiteSpaceChars;
                 }
             
-            return _trimHelper( trimChars, true, true );
+            return _trimHelper( str, trimChars, true, true );
             }
 
         /* Method: trimEnd
            Removes all occurrences of a set of characters specified
            in an array from the end of this instance.
         */
-        public function trimEnd( trimChars:Array = null ):String
+        public static function trimEnd( str:String, trimChars:Array = null ):String
             {
             if( trimChars == null )
                 {
                 trimChars = whiteSpaceChars;
                 }
             
-            return _trimHelper( trimChars, false, true );
+            return _trimHelper( str, trimChars, false, true );
             }
 
         /* Method: trimStart
            Removes all occurrences of a set of characters specified
            in an array from the beginning of this instance.
         */
-        public function trimStart( trimChars:Array = null ):String
+        public static function trimStart( str:String, trimChars:Array = null ):String
             {
             if( trimChars == null )
                 {
                 trimChars = whiteSpaceChars;
                 }
             
-            return _trimHelper( trimChars, true, false );
+            return _trimHelper( str, trimChars, true, false );
             }
         
         

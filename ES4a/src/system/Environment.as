@@ -168,11 +168,10 @@ package system
                MAC 7,0,25,0   // Flash Player 7 for Macintosh
                UNIX 5,0,55,0  // Flash Player 5 for UNIX
             */
-            var str:Strings = new Strings( Capabilities.version );
-            var str2:String = str.trimStart( "WINMACUNIX ".split("") );
-                str2        = str2.split( "," ).join( "." );
+            var str:String = Strings.trimStart( Capabilities.version, "WINMACUNIX ".split("") );
+                str        = str.split( "," ).join( "." );
             
-            return Version.fromString( str2 );
+            return Version.fromString( str );
             }
 
         apollo static function getHostVersion():Version
