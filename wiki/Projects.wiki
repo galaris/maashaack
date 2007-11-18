@@ -1,0 +1,42 @@
+#labels Code,Projects-X
+#list of different projects.
+
+= Introduction =
+
+As the goal is to write first applications and then reinject the general code into a framework, here is the list of differents projects worked upon.
+
+
+= List of Projects =
+
+Off course if you feel you're into that [Philosophy], you're welcome to participate
+with your own project or into one of the following projects.
+
+
+== Self hosted projects ==
+
+  * [http://code.google.com/p/astuce/ ASTUce]
+  A xUnit framework.
+  *goal:* related to the system.Reflection logic
+  
+  * [http://code.google.com/p/edenrr/ eden RR]
+  A serializer/deserializer.
+  *goal:* related to the config logic
+   
+  * [http://code.google.com/p/console1/ console1]
+  A GUI console, mainly used for runtime debug.
+  *goal:* related to the CLI logic
+
+== MaasHaack hosted projects ==
+
+  * [ES4a]
+  the general framework
+
+  * FTP4a
+  related to system.network, implemented using Flash player socket API.
+  Here the goal is to see what is needed to implement a FTP protocol
+  and reinject general utils not dependant on the flash player API
+  like a URL/URI class into the framework.
+
+  * SpellChecker
+  related to system.text, implemented into Flash/Flex/AIR btu allow
+  to reinject general libraries as system.text.Metrics into the framework
