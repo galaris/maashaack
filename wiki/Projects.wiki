@@ -23,7 +23,7 @@ with your own project or into one of the following projects.
   * [http://code.google.com/p/console1/ console1]
   A GUI console, mainly used for runtime debug. *goal:* related to the CLI logic
 
-== MaasHaack hosted projects ==
+== !MaasHaack hosted projects ==
 
   * [ES4a]
   the general framework
