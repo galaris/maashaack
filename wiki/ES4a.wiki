@@ -11,7 +11,7 @@ cross-platform and standard packages, libraries, etc.
 
  * Flash 9
  * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
- * [http://code.google.com/p/redtamarin/ RedTamarin]
+ * ~~[http://code.google.com/p/redtamarin/ RedTamarin]~~ too much of a moving target
 
 = Details =
 
