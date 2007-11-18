@@ -15,16 +15,13 @@ with your own project or into one of the following projects.
 == Self hosted projects ==
 
   * [http://code.google.com/p/astuce/ ASTUce]
-  A xUnit framework.
-  *goal:* related to the system.Reflection logic
+  A xUnit framework. *goal:* related to the system.Reflection logic
   
   * [http://code.google.com/p/edenrr/ eden RR]
-  A serializer/deserializer.
-  *goal:* related to the config logic
+  A serializer/deserializer. *goal:* related to the config logic
    
   * [http://code.google.com/p/console1/ console1]
-  A GUI console, mainly used for runtime debug.
-  *goal:* related to the CLI logic
+  A GUI console, mainly used for runtime debug. *goal:* related to the CLI logic
 
 == MaasHaack hosted projects ==
 
