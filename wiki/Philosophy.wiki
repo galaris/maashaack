@@ -1,0 +1,23 @@
+#labels Featured,Phase-Design
+#the dirty secrets behind writing portable ES4 code.
+
+= Introduction =
+
+Considering that [http://www.ecmascript.org/ ECMAScript 4 specification] is not final
+the simple answer would be "you can't", but being the impatient kind I say "f*ck it".
+
+Right now we have a good subset of ES4 impersonated as ActionScript 3 (AS3),
+the good folks at Adobe are actively participating in ECMA TG1 and seems to have
+the will to not add incompatible features.
+
+Let's target AS3 code, and then refactor later, at least it would be a good
+use of that good yer old svn, but let's do it with a grain of brain.
+
+= Details =
+
+let's establish some rules, you would not think we gonna code all that in the wild
+not thinking about forward compatiblity do you ?
+
+ * rule #1
+ embrace ECMAScript, you're not coding Java or .NET here, so as a first rule
+ never ever fall in the trap of thinking AS3 is ever related to those other guys.
