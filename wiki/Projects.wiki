@@ -34,6 +34,6 @@ with your own project or into one of the following projects.
   and reinject general utils not dependant on the flash player API
   like a URL/URI class into the framework.
 
-  * SpellChecker
+  * !SpellChecker
   related to system.text, implemented into Flash/Flex/AIR btu allow
   to reinject general libraries as system.text.Metrics into the framework
