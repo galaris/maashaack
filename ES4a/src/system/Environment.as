@@ -25,41 +25,11 @@ package system
     
     /* Class: Environment
     */
-    public class Environment extends Ghosts
+    public class Environment
         {
-        private static var __:Namespace        = null;
         private static var _hostid:HostID      = _getHostID();
         private static var _host:Host          = null;
         private static var _os:OperatingSystem = null;
-        
-        private static function init():void
-            {
-            /* note:
-               We don't want to use the Ghost class here.
-            */
-            switch( _hostid )
-                {
-                case HostID.Flash:
-                __ = flash;
-                break;
-                
-                case HostID.Apollo:
-                __ = apollo;
-                break;
-                
-                case HostID.RedTamarin:
-                __ = redtamarin;
-                break;
-                
-                case HostID.Tamarin:
-                __ = tamarin;
-                break;
-                
-                case HostID.Unknown:
-                default:
-                __ = unknown;
-                }
-            }
         
         private static function _getHostID():HostID
             {
@@ -76,12 +46,6 @@ package system
                 case "Desktop":
                 return HostID.Apollo;
                 
-                case "AVMPlus":
-                return HostID.Tamarin;
-                
-                case "RedTamarin":
-                return HostID.RedTamarin;
-                
                 default:
                 return HostID.Unknown;
                 }
@@ -89,7 +53,7 @@ package system
         
         private static function _getPlatformID():PlatformID
             {
-            var platform:String = getPlatformStringInternal();
+            var platform:String = Capabilities.os;
             
             switch( platform )
                 {
@@ -122,47 +86,8 @@ package system
                 }
             }
         
-        
-        /* Method: getPlatformStringInternal
-        */
-        unknown static function getPlatformStringInternal():String
+        private static function _getHostVersion():Version
             {
-            return "unknown";
-            }
-        
-        flash static function getPlatformStringInternal():String
-            {
-            import flash.system.Capabilities;
-            
-            return Capabilities.os;
-            }
-        
-        apollo static function getPlatformStringInternal():String
-            {
-            return flash::getPlatformStringInternal();
-            }
-        
-        redtamarin static function getPlatformStringInternal():String
-            {
-            import avmplus.System;
-            return System.getPlatformString();
-            }
-        
-        internal static function getPlatformStringInternal():String
-            {
-            return __::getPlatformStringInternal();
-            }
-        
-        /* Method: getHostVersion
-        */
-        unknown static function getHostVersion():Version
-            {
-            return new Version(); //0.0.0.0
-            }
-        
-        flash static function getHostVersion():Version
-            {
-            import flash.system.Capabilities;
             /* note:
                WIN 9,0,0,0    // Flash Player 9 for Windows
                MAC 7,0,25,0   // Flash Player 7 for Macintosh
@@ -173,38 +98,6 @@ package system
             
             return Version.fromString( str );
             }
-
-        apollo static function getHostVersion():Version
-            {
-            return flash::getHostVersion();
-            }
-        
-        tamarin static function getHostVersion():Version
-            {
-            import avmplus.System;
-            var str:String = System.getAvmplusVersion();
-                str        = str.split( " " )[0];
-            
-            return Version.fromString( str );
-            }
-        
-        redtamarin static function getHostVersion():Version
-            {
-            import avmplus.System;
-            /* note:
-               0.1 red_dzwetan_2007-05-30_01-06
-            */
-            var str:String = System.getRedTamarinVersion();
-                str        = str.split( " " )[0];
-            
-            return Version.fromString( str );
-            }
-        
-        internal static function getHostVersion():Version
-            {
-            return __::getHostVersion();
-            }
-        
         
         public static function get host():Host
             {
@@ -214,7 +107,7 @@ package system
                 }
             
             var _id:HostID   = _getHostID();
-            var _ver:Version = getHostVersion();
+            var _ver:Version = _getHostVersion();
             
             _host = new Host( _id, _ver );
             
@@ -255,7 +148,6 @@ package system
             return "\n";
             }
         
-        init(); //dynamically select our current environment
         }
     
     }
