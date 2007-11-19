@@ -69,7 +69,7 @@ package system
        This logic and these limitations can change later.
        
     */
-    public class Version
+    public class Version implements IEquatable
         {
         private var _major:uint;
         private var _minor:uint;
@@ -243,8 +243,10 @@ package system
            a cast to Number/int force the valueOf,
            not ideal but sufficient, and the same
            for any other operators.
+           
+           But as we keep IEquatable for now, then we have
+           no reason to not use it.
         */
-        /*
         public function equals( o:* ):Boolean
             {
             if( !(o is Version) )
@@ -262,8 +264,7 @@ package system
             
             return false;
             }
-         */
-        
+         
         /* Method: toString
            Return the primitive value of the object.
         */
