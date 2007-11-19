@@ -21,6 +21,7 @@
 
 package system
     {
+    import flash.system.Capabilities;
     
     public class Host
         {
@@ -45,7 +46,6 @@ package system
         
         public function isDebug():Boolean
             {
-            import flash.system.Capabilities;
             return Capabilities.isDebugger;
             }
         

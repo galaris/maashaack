@@ -21,22 +21,16 @@
 
 package system
     {
+    import flash.utils.*;
     
-    public class Console extends Ghost
+    /* TODO: improve all that
+    */
+    public class Console
         {
         private static var _buffer:String  = "";
         
-        public static function read():String
-            {
-            //return __::read();
-            return ""; //not implemented for anyone yet
-            }
-        
-        public static function readLine():String
-            {
-            //return __::readLine();
-            return ""; //not implemented for anyone yet
-            }
+        private static var _reader:* = null;
+        private static var _writer:* = trace;
         
         internal static function formatMessage( messages:Array ):String
             {
@@ -56,9 +50,34 @@ package system
             return Strings.format.apply( Strings, messages );
             }
         
-        flash static function write( messages:Array ):void
+        public static function set reader( reader:* ):void
             {
-            _buffer += formatMessage( messages );
+            _reader = reader;
+            }
+        
+        public static function set writer( writer:* ):void
+            {
+            _writer = writer;
+            }
+        
+        public static function read():String
+            {
+            if( _reader === null )
+                {
+                return "";
+                }
+            
+            return "";
+            }
+        
+        public static function readLine():String
+            {
+            if( _reader === null )
+                {
+                return "";
+                }
+            
+            return "";
             }
         
         public static function write( ...messages ):void
@@ -68,21 +87,19 @@ package system
                 return;
                 }
             
-            //__::write( messages );
-            flash::write( messages );
-            }
-        
-        flash static function writeLine( messages:Array ):void
-            {
-            var msg:String = formatMessage( messages );
-            trace( _buffer + msg ); //flash.utils.trace
-            _buffer = "";
+            _buffer += formatMessage( messages );
             }
         
         public static function writeLine( ...messages ):void
             {
-            //__::writeLine( messages );
-            flash::writeLine( messages );
+            var msg:String = formatMessage( messages );
+            
+            if( _writer !== null )
+                {
+                _writer( _buffer + msg );
+                }
+            
+            _buffer = "";
             }
         
         

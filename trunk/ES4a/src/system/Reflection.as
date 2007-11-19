@@ -21,24 +21,20 @@
 
 package system
     {
-    import system.Arrays;
+    
+    //Flash player API
+    import flash.system.ApplicationDomain;
+    import flash.utils.getQualifiedClassName;
+    import flash.utils.describeType;
+    
     /* Class: Reflection
        Provide basic reflection mecanisms on the language.
+       
+       note:
+       This is a public API and will need different implementation for different hosts.
      */
-    public class Reflection extends Ghost
+    public class Reflection
         {
-        
-        private static var _buildins:Array = [ "Array", "String", "Number" ];
-        
-        private static function _isBuildIn( name:String ):Boolean
-            {
-            if( _buildins.indexOf( name ) > -1 )
-                {
-                return true;
-                }
-            
-            return false;
-            }
         
         /* Method: hasClassByName
            Returns a boolean telling if the class exists from a string name.
@@ -69,66 +65,26 @@ package system
            but you have ot provide the full qualified path of the class
            "Capabilities" alone will not work
         */
-        
-        unknown static function getClassByName( name:String ):Class
+        public static function getClassByName( name:String ):Class
             {
-            return Object;
-            }
-        
-        flash static function getClassByName( name:String ):Class
-            {
-            import flash.system.ApplicationDomain;
             return ApplicationDomain.currentDomain.getDefinition( name ) as Class;
             }
         
-        redtamarin static function getClassByName( name:String ):Class
-            {
-            import avmplus.Domain;
-            return Domain.currentDomain.getClass( name );
-            }
-        
-    	public static function getClassByName( name:String ):Class
-    	    {
-    		return __::getClassByName( name );
-    	    }
         
         /* Method: getDefinitionByName
            Returns the instance of a public definition in the current Domain.
            The definition can be a class, namespace, function or object.
         */
-        unknown static function getDefinitionByName( name:String ):Object
+        public static function getDefinitionByName( name:String ):Object
             {
-            return {};
-            }
-        
-        flash static function getDefinitionByName( name:String ):Object
-            {
-            import flash.system.ApplicationDomain;
             return ApplicationDomain.currentDomain.getDefinition( name );
             }
-        
-        redtamarin static function getDefinitionByName( name:String ):Object
-            {
-            throw new Error( "not implemented" );
-            }
-        
-    	public static function getDefinitionByName( name:String ):Object
-    	    {
-    		return __::getDefinitionByName( name );
-    	    }
         
         /* Method: getClassName
            Returns the class name as string of an object.
         */
-        
-        unknown static function getClassName( o:*, path:Boolean = false ):String
+        public static function getClassName( o:*, path:Boolean = false ):String
             {
-            return "";
-            }
-        
-        flash static function getClassName( o:*, path:Boolean = false ):String
-            {
-            import flash.utils.getQualifiedClassName;
             var str:String = getQualifiedClassName( o );
             
             if( !path && (str.indexOf( "::" ) > -1) )
@@ -137,23 +93,6 @@ package system
                 }
             
             return str;
-            }
-        
-        redtamarin static function getClassName( o:*, path:Boolean = false ):String
-            {
-            import avmplus.Reflection;
-            var R:* = avmplus.Reflection;
-            if( !path )
-                {
-                return R.findClassName( o );
-                }
-            
-            return R.findQualifiedClassName( o );
-            }
-        
-        public static function getClassName( o:*, path:Boolean = false ):String
-            {
-            return __::getClassName( o, path );
             }
         
         /* Method: getClassMethods
@@ -166,20 +105,10 @@ package system
              - prototype methods
              etc.
         */
-        
-        unknown static function getClassMethods( o:*, inherited:Boolean = false ):Array
+        public static function getClassMethods( o:*, inherited:Boolean = false ):Array
             {
-            return [];
-            }
-        
-        flash static function getClassMethods( o:*, inherited:Boolean = false ):Array
-            {
-            import flash.utils.describeType;
-            
             var type:XML = describeType( o );
-            //trace( type );
             var fullname:String = getClassName( o, true );
-            //trace( "fullname: " + fullname );
             var member:XML;
             var members:Array = [];
             
@@ -196,77 +125,6 @@ package system
                 }
             
             return members;
-            }
-        
-        redtamarin static function getClassMethods( o:*, inherited:Boolean = false ):Array
-            {
-            import avmplus.Reflection;
-            var R:* = avmplus.Reflection;
-            
-            var methods:Array   = R._findQualifiedMethodsName( o );
-            var fullname:String = R.findQualifiedClassName( o );
-            var found:Array     = [];
-            
-            var startswith:Function = function( src:String, head:String ):Boolean
-                {
-                src = src.substring( 0, head.length );
-                if( src == head )
-                    {
-                    return true;
-                    }
-                
-                return false;
-                }
-            
-            var parse:Function = function( meth:String ):String
-                {
-                var base:int = meth.indexOf( "/" );
-                if( base > -1 )
-                    {
-                    meth = meth.substr( base + 1 );
-                    }
-                
-                var pos:int = meth.lastIndexOf( "::" );
-                if( pos > -1 )
-                    {
-                    meth = meth.substr( pos + 2 );
-                    }
-                
-                return meth;
-                }
-            
-            var m:String;
-            var i:int;
-            for( i=0; i< methods.length; i++ )
-                {
-                if( inherited ) 
-                    {
-                    m = parse( methods[i] );
-                    if( !startswith( m, "get" ) && !startswith( m, "set" ) )
-                        {
-                        found.push( m );
-                        }
-                    }
-                else
-                    {
-                    if( startswith( methods[i], fullname ) )
-                        {
-                        m = parse( methods[i] );
-                        if( !startswith( m, "get" ) && !startswith( m, "set" ) )
-                            {
-                            found.push( m );
-                            }
-                        }
-                    
-                    }
-                }
-            
-            return found;
-            }
-        
-        public static function getClassMethods( o:*, inherited:Boolean = false  ):Array
-            {
-            return __::getClassMethods( o, inherited );
             }
         
         public static function getMethodByName( o:*, name:String ):Function

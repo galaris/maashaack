@@ -99,22 +99,25 @@ package system
            Parameters:
              o1     - first string to compare
              o2     - with second string
-             strict - optionnal ignoreCase boolean, default to false.
+             strict - optionnal useCase boolean, default to false.
                       allows to take into account the string case for comparison.
              
            note:
            we don't do a string diff, we just compare the length of the strings
            and if the length are equals only then we compare by value.
            
-           attention
+           attention:
            if you have used core2 before
            where you were used to a compare(o1, o2, ignoreCase = false) signature
            note that the default parameter have changed
+           (code)
            (ignoreCase = false) != (strict = false)
+           (end)
         */
         public static function compare( o1:*, o2:*, strict:Boolean = false ):int
             {
             
+            /* TODO: review and test the logic */
             if( (o1 == null) || (o2 == null) )
                 {
                 if( o1 == o2 )
@@ -136,7 +139,7 @@ package system
                 throw new Error( "Arguments String expected." );
                 }
             
-            if( !strict == true )
+            if( !strict )
                 {
                 o1 = o1.toLowerCase();
                 o2 = o2.toLowerCase();

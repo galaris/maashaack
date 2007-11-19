@@ -95,14 +95,6 @@ package system
                 __ = flash;
                 break;
                 
-                case HostID.RedTamarin:
-                __ = redtamarin;
-                break;
-                
-                case HostID.Tamarin:
-                __ = tamarin;
-                break;
-                
                 case HostID.Unknown:
                 default:
                 __ = unknown;

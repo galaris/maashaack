@@ -36,9 +36,15 @@ package system
         public static const Unknown:HostID    = new HostID( 0, "Unknown" );
         public static const Flash:HostID      = new HostID( 1, "Flash" );
         public static const Apollo:HostID     = new HostID( 2, "Apollo" );
+        
+        /* note:
+           We will take into account only hosts upon which you can build
+           "real" application, no moving target.
+        */
+        /*
         public static const Tamarin:HostID    = new HostID( 3, "Tamarin" );
         public static const RedTamarin:HostID = new HostID( 4, "RedTamarin" );
-        
+        */
         }
     
     }
