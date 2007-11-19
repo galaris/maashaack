@@ -69,7 +69,7 @@ package system
        This logic and these limitations can change later.
        
     */
-    public class Version implements IEquatable
+    public class Version
         {
         private var _major:uint;
         private var _minor:uint;
@@ -231,6 +231,20 @@ package system
             _revision = Math.min( value, _maxRevision );
             }
         
+        /* note:
+           we don't really need an equals method
+           as we override the valueOf, we can do
+           something as
+           (code)
+           var v1:Version = new Version( 1,0,0,0 );
+           var v2:Version = new Version( 1,0,0,0 );
+           trace( int(v1) == int(v2) ); //true
+           (end)
+           a cast to Number/int force the valueOf,
+           not ideal but sufficient, and the same
+           for any other operators.
+        */
+        /*
         public function equals( o:* ):Boolean
             {
             if( !(o is Version) )
@@ -248,6 +262,7 @@ package system
             
             return false;
             }
+         */
         
         /* Method: toString
            Return the primitive value of the object.
