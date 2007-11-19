@@ -1,0 +1,12 @@
+#labels ES4a
+#configuring an application.
+
+= Introduction =
+
+explain Configurator, config, SystemConfigurator, etc.
+and how it can be combined with eden to dynamically load configuration
+
+
+= Details =
+
+FIXME
