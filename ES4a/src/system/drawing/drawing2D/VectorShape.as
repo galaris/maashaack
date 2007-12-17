@@ -29,8 +29,8 @@ package system.drawing.drawing2D
     import flash.display.LineScaleMode;
     import flash.display.JointStyle;
     
-    import system.drawing.FillStyle;
-    import system.drawing.LineStyle;
+    import system.drawing.ILine;
+    import system.drawing.IFill;
     
     /* Class: VectorShape
        Represents a geometric vector shape.
@@ -45,9 +45,11 @@ package system.drawing.drawing2D
         
         private var _closed:Boolean;
         private var _changed:Boolean;
+        private var _line:ILine;
+        private var _fill:IFill;
         
-        public var lineStyle:LineStyle = new LineStyle( 1 );
-        public var fillStyle:FillStyle = new FillStyle( 0xFFFFFF );
+        //public var lineStyle:LineStyle = new LineStyle( 1 );
+        //public var fillStyle:FillStyle = new FillStyle( 0xFFFFFF );
         
         public function VectorShape()
             {
@@ -144,6 +146,28 @@ package system.drawing.drawing2D
                 {
                 redraw();
                 }
+            }
+        
+        public function get fill():IFill
+            {
+            return _fill;
+            }
+        
+        public function set fill( value:IFill ):void
+            {
+            _fill = value;
+            changed = true;
+            }
+        
+        public function get line():ILine
+            {
+            return _line;
+            }
+        
+        public function set line( value:ILine ):void
+            {
+            _line = value;
+            changed = true;
             }
         
         public function isClosed():Boolean
