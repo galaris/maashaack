@@ -23,10 +23,10 @@ package system.drawing
     {
     import flash.display.Graphics;
     
-    /* Class: LineStyle
-       Define a LineStyle structure to be used with flash.display.graphics.lineStyle
+    /* Class: Line
+       Define a plain Line Style structure to be used with flash.display.graphics.lineStyle
     */
-    public class LineStyle
+    public class Line implements ILine
         {
         
         public var thickness:Number;
@@ -38,10 +38,10 @@ package system.drawing
         public var joints:String;
         public var miterLimit:Number;
         
-        public function LineStyle( thickness:Number,
-                                   color:uint = 0, alpha:Number = 1.0, pixelHinting:Boolean = false,
-                                   scaleMode:String = "normal", caps:String = null, joints:String = null,
-                                   miterLimit:Number = 3 )
+        public function Line( thickness:Number,
+                              color:uint = 0, alpha:Number = 1.0, pixelHinting:Boolean = false,
+                              scaleMode:String = "normal", caps:String = null, joints:String = null,
+                              miterLimit:Number = 3 )
             {
             this.thickness    = thickness;
             this.color        = color;
@@ -53,16 +53,31 @@ package system.drawing
             this.miterLimit   = miterLimit;
             }
         
+        public function isPlain():Boolean
+            {
+            return true;
+            }
+        
+        public function isGradient():Boolean
+            {
+            return false;
+            }
+        
         public function applyTo( graphic:Graphics ):void
             {
-            graphic.lineStyle( this.thickness,
-                               this.color,
-                               this.alpha,
-                               this.pixelHinting,
-                               this.scaleMode,
-                               this.caps,
-                               this.joints,
-                               this.miterLimit );
+            graphic.lineStyle( thickness,
+                               color,
+                               alpha,
+                               pixelHinting,
+                               scaleMode,
+                               caps,
+                               joints,
+                               miterLimit );
+            }
+        
+        public function toString():String
+            {
+            return "Line{ thickness:"+thickness+", color:"+color.toString(16)+" }";
             }
         
         }
