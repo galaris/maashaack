@@ -28,6 +28,9 @@ with your own project or into one of the following projects.
   * [ES4a]
   the general framework
 
+  * [Prettifier]
+  A code prettifier (syntax highlighting) small library
+
   * FTP4a
   related to system.network, implemented using Flash player socket API.
   Here the goal is to see what is needed to implement a FTP protocol
