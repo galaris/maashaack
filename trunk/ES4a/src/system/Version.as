@@ -83,7 +83,7 @@ package system
         
         private var _separator:String = ".";
         
-        private function get _fields():int
+        private function getFields():int
             {
             var f:int = 4;
             
@@ -306,7 +306,7 @@ package system
             
             if( (fields <= 0) || (fields > 4) )
                 {
-                fields = _fields; //get the default fields
+                fields = getFields(); //get the default fields
                 }
             
             switch( fields )
