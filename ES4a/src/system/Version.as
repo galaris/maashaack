@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -16,61 +16,54 @@
   Portions created by the Initial Developer are Copyright (C) 2006-2007
   the Initial Developer. All Rights Reserved.
   
-  Contributor(s):
-*/
+Contributor(s):
 
+	- Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
+	  Documentation with JAVADOC
+
+*/
 package system
     {
     
-    /* Class: Version
-       A basic Version class which is composed
-       by four fields: major, minor, build and revision.
-       
-       implementation note:
-       internaly we stock the value of a version (the total of each fields)
-       as a uint which max value is 4294967295 (0xFFFFFFFF)
-       this is done to be able to use operators
-       (code)
-       var v1:Version = new Version( 1, 0 );
-       var v2:Version = new Version( 2, 0 );
-       trace( v1 < v2 ); //true
-       (end)
-       by default operators in ECMAScript will use the valueOf of the class
-       and this is neat because we can use operators without the need to
-       really implement them.
-       
-       But this cause some little limitations
-       on how much data each fields of a version object
-       can stock
-       
-       > 0x  F F FF FFFF
-       >     | |  |   |
-       >     | |  |   \revision (max 65535)
-       >     | |  \build (max 255)
-       >     | \minor (max 15)
-       >     \major (max 15)
-
-       Here the choice has been to favorise a lot the revision field,
-       favorise a little the build  field, and well give the rest to
-       the major and minor fields.
-       
-       The logic behind that is:
-       - revision should be able to cover
-         the full cycle of a project during all its life
-       - build should be able to cover all the different builds
-         between two minor update
-       - major and minor should cover all the different
-         versions of a project
-         considering you don't update them that much
-       
-       So the max version you can have is
-       v15.15.255.65535
-       
-       This logic and these limitations can change later.
-       
-    */
+	/**
+     * A basic Version class which is composed by four fields: major, minor, build and revision.
+     * <p>implementation note:</p>
+     * <p>internaly we stock the value of a version (the total of each fields) 
+     * as a uint which max value is 4294967295 (0xFFFFFFFF) this is done to be able to use operators 
+     * <pre class="prettyprint">
+     * var v1:Version = new Version( 1, 0 );
+     * var v2:Version = new Version( 2, 0 );
+     * trace( v1 < v2 ); //true
+     * </pre>
+     * by default operators in ECMAScript will use the valueOf of the class and this is neat because 
+     * we can use operators without the need to really implement them.
+     * 
+     * But this cause some little limitations on how much data each fields of a version object can stock
+     * <pre class="prettyprint">
+     * > 0x  F F FF FFFF
+     * >     | |  |   |
+     * >     | |  |   \revision (max 65535)
+     * >     | |  \build (max 255)
+     * >     | \minor (max 15)
+     * >     \major (max 15)
+     * </pre>
+     * Here the choice has been to favorise a lot the revision field,
+     * favorise a little the build  field, and well give the rest to 
+     * the major and minor fields.
+     * 
+     * The logic behind that is:
+     * - revision should be able to cover the full cycle of a project during all its life
+     * - build should be able to cover all the different builds between two minor update
+     * - major and minor should cover all the different versions of a project considering you don't update them that much
+     * 
+     * So the max version you can have is v15.15.255.65535
+     * 
+     * This logic and these limitations can change later.
+     */
     public class Version implements IEquatable
         {
+        	
+        
         private var _major:uint;
         private var _minor:uint;
         private var _build:uint;
@@ -83,6 +76,9 @@ package system
         
         private var _separator:String = ".";
         
+        /**
+         * @private
+         */
         private function getFields():int
             {
             var f:int = 4;
@@ -106,8 +102,13 @@ package system
             }
         
         
-        /* Constructor: Version
-        */
+        /**
+         * Creates a new Version instance.
+         * @param major The major value of the version.
+         * @param minor The minor value of the version.
+         * @param build The build value of the version.
+         * @param revision The revision value of the version.
+         */
         public function Version( major:uint = 0,
                                  minor:uint = 0,
                                  build:uint = 0,
@@ -132,10 +133,10 @@ package system
             
             }
         
-        /* Method: fromString
-           Constructs a Version object from a string.
-        */
-        static public function fromString( value:String = "" ):Version
+        /**
+         * Constructs a Version object from a string.
+         */
+        public static function fromString( value:String = "" ):Version
             {
             var v:Version = new Version();
             
@@ -160,15 +161,11 @@ package system
             return v;
             }
         
-        /* Method: fromNumber
-           Constructs a Version object from a number.
-           
-           note:
-           if the number is zero or negative,
-           or is NaN or Infity
-           returns an empty version object.
-        */
-        static public function fromNumber( value:Number = 0 ):Version
+        /**
+         * Constructs a Version object from a number.
+         * If the number is zero or negative, or is NaN or Infity returns an empty version object.
+         */
+        public static function fromNumber( value:Number = 0 ):Version
             {
             var v:Version = new Version();
             
@@ -191,62 +188,80 @@ package system
             return v;
             }
         
+        /**
+         * Indicates the major value of this version.
+         */        
         public function get major():uint
             {
             return _major;
             }
         
+        /**
+         * @private
+         */        
         public function set major( value:uint ):void
             {
             _major = Math.min( value, _maxMajor );
             }
-        
+
+        /**
+         * Indicates the minor value of this version.
+         */
         public function get minor():uint
             {
             return _minor;
             }
-        
+      
+        /**
+         * @private
+         */ 
         public function set minor( value:uint ):void
             {
             _minor = Math.min( value, _maxMinor );
             }
         
+        /**
+         * Indicates the build value of this version.
+         */
         public function get build():uint
             {
             return _build;
             }
-        
+     	
+     	/**
+         * @private
+         */
         public function set build( value:uint ):void
             {
             _build = Math.min( value, _maxBuild );
             }
-        
+
+        /**
+         * Indicates the revision value of this version.
+         */
         public function get revision():uint
             {
             return _revision;
             }
-        
+
+        /**
+         * @private
+         */
         public function set revision( value:uint ):void
             {
             _revision = Math.min( value, _maxRevision );
             }
         
-        /* note:
-           we don't really need an equals method
-           as we override the valueOf, we can do
-           something as
-           (code)
-           var v1:Version = new Version( 1,0,0,0 );
-           var v2:Version = new Version( 1,0,0,0 );
-           trace( int(v1) == int(v2) ); //true
-           (end)
-           a cast to Number/int force the valueOf,
-           not ideal but sufficient, and the same
-           for any other operators.
-           
-           But as we keep IEquatable for now, then we have
-           no reason to not use it.
-        */
+        /**
+         * We don't really need an equals method as we override the valueOf, we can do something as
+         * <pre class="prettyprint">
+         * var v1:Version = new Version( 1,0,0,0 );
+         * var v2:Version = new Version( 1,0,0,0 );
+         * trace( int(v1) == int(v2) ); //true
+         * </pre>
+         * A cast to Number/int force the valueOf, not ideal but sufficient, and the same for any other operators.
+         * But as we keep IEquatable for now, then we have no reason to not use it.
+         */
         public function equals( o:* ):Boolean
             {
             if( !(o is Version) )
@@ -265,9 +280,10 @@ package system
             return false;
             }
          
-        /* Method: toString
-           Return the primitive value of the object.
-        */
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
         public function valueOf():uint
             {
             /* 0xF F FF FFFF
@@ -275,31 +291,26 @@ package system
             return (major << 28) | (minor << 24) | (build << 16) | revision;
             }
         
-        /* Method: toString
-           Returns a string representation of the object.
-           
-           By default, the format returned will include only
-           the fields greater than zero
-           (code)
-           var v:Version = new Version( 1, 5 );
-           trace( v ); // "1.5"
-           (end)
-           
-           note:
-           the fields parameter allow you to force
-           or limit the output format
-           (code)
-           var v:Version = new Version( 1, 5 );
-           trace( v.toString( 1 ) ); // "1"
-           trace( v.toString( 4 ) ); // "1.5.0.0"
-           (end)
-           
-           format:
-           major.minor.build.revision
-           major.minor.build
-           major.minor
-           major
-        */
+        /**
+         * Returns a string representation of the object.
+         * By default, the format returned will include only the fields greater than zero
+         * <pre class="prettyprint">
+         * var v:Version = new Version( 1, 5 );
+         * trace( v ); // "1.5"
+         * </pre>
+         * note :
+         * the fields parameter allow you to force or limit the output format
+         * <pre class="prettyprint">
+         * var v:Version = new Version( 1, 5 );
+         * trace( v.toString( 1 ) ); // "1"
+         * trace( v.toString( 4 ) ); // "1.5.0.0"
+         * </pre>
+         * <p>format :</p>
+         * <li>major.minor.build.revision</li>
+         * <li>major.minor.build</li>
+         * <li>major.minor</li>
+         * <li>major</li>
+         */
         public function toString( fields:int = 0 ):String
             {
             var arr:Array;
