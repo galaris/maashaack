@@ -22,12 +22,11 @@
 package system
     {
     
-    public dynamic class Arrays extends Array
+    public class Arrays
         {
         
-        public function Arrays( numElements:int = 0 )
+        public function Arrays()
             {
-            super(numElements);
             }
         
         /* Method: initialize
@@ -55,7 +54,12 @@ package system
             return arr;
             }
         
-        _dontEnumPrototype( prototype );
+        /* TODO:
+           - method inserInto (Python inspired), implement also a ProxyArray class where we can access Array indexes like in Python (flash_proxy)
+           - method reduce, see: http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Objects:Array:reduce
+           - some methods for sorting Arrays
+        */
+        
         }
     
     }
