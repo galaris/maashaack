@@ -11,10 +11,14 @@ package system.text.html
         
         public function HTML( text:String = "", convert:Boolean = true )
             {
+            if( convert )
+                {
+                text = HTML.encode( text );
+                }
             _data = text;
             }
         
-        static public function encode( text:String ):String
+        public static function encode( text:String ):String
             {
             var html:String = "";
             var c:String;
@@ -46,7 +50,7 @@ package system.text.html
             return html;
             }
         
-        static public function decode( html:String ):String
+        public static function decode( html:String ):String
             {
             var text:String = "";
             var c:String;
@@ -82,6 +86,10 @@ package system.text.html
         
         public function append( text:String, convert:Boolean = true ):void
             {
+            if( convert )
+                {
+                text = HTML.encode( text );
+                }
             _data += text;
             }
         
@@ -90,6 +98,11 @@ package system.text.html
             return _data;
             }
         
+        /* TODO:
+           - method toXML or toXMLString
+           - method valueOf ? doing an HTML decode to obtain the raw string ? or toHTMLString method
+           - static methods to handle HTML tags as bold, paragraph, font, etc. (or a Tag class, BoldTag class, FontTag class, etc...)
+        */
         
         }
     }

@@ -18,7 +18,7 @@ package system.text.prettifier
             {
             }
         
-        static private function _addArray( words:Array ):void
+        private static function _addArray( words:Array ):void
             {
             var word:String;
             var letter:String;
@@ -35,7 +35,7 @@ package system.text.prettifier
                 }
             }
         
-        static public function list( letter:String = "" ):Array
+        public static function list( letter:String = "" ):Array
             {
             if( letter == "" )
                 {
@@ -56,7 +56,7 @@ package system.text.prettifier
                 }
             }
         
-        static public function add( ...words ):void
+        public static function add( ...words ):void
             {
             var word:*;
             
@@ -83,7 +83,7 @@ package system.text.prettifier
                 }
             }
         
-        static public function search( keyword:String ):Boolean
+        public static function search( keyword:String ):Boolean
             {
             keyword = Strings.trim( keyword );
             
