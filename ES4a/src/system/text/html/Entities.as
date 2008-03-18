@@ -14,12 +14,12 @@ package system.text.html
             {
             }
         
-        static public function add( entity:Entity ):void
+        public static function add( entity:Entity ):void
             {
             _e.push( entity );
             } 
         
-        static public function findByChar( char:String ):Boolean
+        public static function findByChar( char:String ):Boolean
             {
             if( _fastSearch[ char ] )
                 {
@@ -38,7 +38,7 @@ package system.text.html
             return false;
             }
         
-        static public function findByName( name:String ):Boolean
+        public static function findByName( name:String ):Boolean
             {
             if( _fastSearch[ name ] )
                 {
@@ -57,7 +57,7 @@ package system.text.html
             return false;
             }
         
-        static public function toHTML( char:String ):String
+        public static function toHTML( char:String ):String
             {
             if( _fastSearch[ char ] )
                 {
@@ -75,7 +75,7 @@ package system.text.html
             return "";
             }
         
-        static public function fromName( name:String ):String
+        public static function fromName( name:String ):String
             {
             if( _fastSearch[ name ] )
                 {
