@@ -29,6 +29,7 @@ package system
     //Flash player API
     import flash.system.ApplicationDomain;
     import flash.utils.getQualifiedClassName;
+    import flash.utils.getQualifiedSuperclassName;
     import flash.utils.describeType;
     
 	/**
