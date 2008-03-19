@@ -173,8 +173,6 @@ package system
             return null;
             }
         
-        }
-    
 		/**
 		 * Returns the super class name as string of an object.
 		 * @return the super class name as string of an object.
@@ -246,6 +244,8 @@ package system
 		//{
 		//	return describeType( o ).@isStatic == "true" ;
 		//}    
+    
+        }
     
     }
 
