@@ -1,4 +1,24 @@
+﻿/*
+  
+  The contents of this file are subject to the Mozilla Public License Version
+  1.1 (the "License"); you may not use this file except in compliance with
+  the License. You may obtain a copy of the License at 
+  http://www.mozilla.org/MPL/ 
+  
+  Software distributed under the License is distributed on an "AS IS" basis,
+  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  for the specific language governing rights and limitations under the License. 
+  
+  The Original Code is eden: ECMAScript data exchange notation AS2. 
+  
+  The Initial Developer of the Original Code is
+  Zwetan Kjukov <zwetan@gmail.com>.
+  Portions created by the Initial Developer are Copyright (C) 2004-2006
+  the Initial Developer. All Rights Reserved.
+  
+  Contributor(s):
 
+*/	
 package system.text.prettifier
     {
     import system.Strings;
@@ -6,7 +26,7 @@ package system.text.prettifier
     public class Keywords
         {
         
-        static private var _k:Object = { a:[], b:[], c:[], d:[],
+        private static var _k:Object = { a:[], b:[], c:[], d:[],
                                          e:[], f:[], g:[], h:[],
                                          i:[], j:[], k:[], l:[],
                                          m:[], n:[], o:[], p:[],
@@ -115,7 +135,7 @@ package system.text.prettifier
             return false;
             }
         
-        static public var CPP_KEYWORDS:String = "abstract bool break case catch char class const " +
+        public static var CPP_KEYWORDS:String = "abstract bool break case catch char class const " +
                                                 "const_cast continue default delete deprecated dllexport dllimport do " +
                                                 "double dynamic_cast else enum explicit extern false float for friend " +
                                                 "goto if inline int long mutable naked namespace new noinline noreturn " +
@@ -125,28 +145,30 @@ package system.text.prettifier
                                                 "typeid typename union unsigned using declaration, directive uuid " +
                                                 "virtual void volatile while typeof";
         
-        static public var CSHARP_KEYWORDS:String = "as base by byte checked decimal delegate descending " +
+        public static var CSHARP_KEYWORDS:String = "as base by byte checked decimal delegate descending " +
                                                    "event finally fixed foreach from group implicit in interface internal " +
                                                    "into is lock null object out override orderby params readonly ref sbyte " +
                                                    "sealed stackalloc string select uint ulong unchecked unsafe ushort var";
         
-        static public var JAVA_KEYWORDS:String = "package synchronized boolean implements import throws " +
+        public static var JAVA_KEYWORDS:String = "package synchronized boolean implements import throws " +
                                                  "instanceof transient extends final strictfp native super";
         
-        static public var JSCRIPT_KEYWORDS:String = "debugger export function with NaN Infinity";
+        public static var JSCRIPT_KEYWORDS:String = "debugger export function with NaN Infinity";
         
-        static public var PERL_KEYWORDS:String = "require sub unless until use elsif BEGIN END";
+        public static var PERL_KEYWORDS:String = "require sub unless until use elsif BEGIN END";
         
-        static public var PYTHON_KEYWORDS:String = "and assert def del elif except exec global lambda " +
+        public static var PYTHON_KEYWORDS:String = "and assert def del elif except exec global lambda " +
                                                    "not or pass print raise yield False True None";
         
-        static public var RUBY_KEYWORDS:String = "then end begin rescue ensure module when undef next " +
+        public static var RUBY_KEYWORDS:String = "then end begin rescue ensure module when undef next " +
                                                  "redo retry alias defined";
         
-        static public var SH_KEYWORDS:String = "done fi";
+        public static var SH_KEYWORDS:String = "done fi";
         
         
         add( CPP_KEYWORDS, CSHARP_KEYWORDS, JAVA_KEYWORDS, JSCRIPT_KEYWORDS, PERL_KEYWORDS, PYTHON_KEYWORDS, RUBY_KEYWORDS, SH_KEYWORDS );
+        
         }
+    
     }
 
