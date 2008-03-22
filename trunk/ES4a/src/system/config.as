@@ -22,8 +22,8 @@
 package system
     {
     public var config:SystemConfigurator = new SystemConfigurator( {
-                                                                   verbose: false,
-                                                                   serializer: SerializationFormat.eden1
+                                                                   verbose: false/*,
+                                                                   serializer: SerializationFormat.eden1*/
                                                                    } );
     }
 

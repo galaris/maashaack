@@ -45,8 +45,8 @@ package system
                            version:version,
                            host: Environment.host,
                            isdebug: Environment.host.isDebug() ? " (debug)": "",
-                           os: Environment.os,
-                           config: Serializer.serialize( config )
+                           os: Environment.os/*,
+                           config: Serializer.serialize( config )*/
                            }
                          );
         }

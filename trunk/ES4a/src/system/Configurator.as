@@ -42,7 +42,8 @@ package system
         
         public function toSource( indent:int = 0 ):String
             {
-            return Serializer.serialize( _config );
+            //return Serializer.serialize( _config );
+            return "";
             }
         
         public function toString():String

@@ -23,8 +23,8 @@ package system
     {
 
     import system.Configurator;
-    import system.SerializationFormat;
-    import system.Serializer;
+    //import system.SerializationFormat;
+    //import system.Serializer;
     
     public class SystemConfigurator extends Configurator
         {
@@ -43,7 +43,7 @@ package system
             {
             _config.verbose = value;
             }
-        
+        /*
         public function get serializer():SerializationFormat
             {
             return _config.serializer;
@@ -54,7 +54,7 @@ package system
             _config.serializer = value;
             Serializer.format  = value;
             }
-        
+        */
         }
 
     }
