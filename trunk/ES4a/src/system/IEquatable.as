@@ -1,5 +1,4 @@
-
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,18 +12,29 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
+*/
 package system
     {
     
+	/**
+	 * This interface is implemented by classes that can compare an object with their objects.
+	 */    
     public interface IEquatable
         {
+        	
+		/**
+		 * Compares the specified object with this object for equality.
+		 * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
+		 */
         function equals( o:* ):Boolean;
+        
         }
     
     }

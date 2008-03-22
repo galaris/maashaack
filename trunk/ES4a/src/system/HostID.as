@@ -1,5 +1,4 @@
-
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,29 +12,50 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
+*/
 package system
     {
     
-    /* Class: HostID
-       Host identifier.
-     */
+	/**
+	 * This static enumeration class defines all host identifiers.
+	 */
     public class HostID extends Enum
         {
-        
+
+     	/**
+     	 * Creates a new HostID instance.
+     	 */   
         public function HostID( value:int, name:String )
             {
             super( value, name );
             }
         
-        public static const Unknown:HostID    = new HostID( 0, "Unknown" );
-        public static const Flash:HostID      = new HostID( 1, "Flash" );
-        public static const Apollo:HostID     = new HostID( 2, "Apollo" );
+        /**
+         * The 'Unknow' host id constant.
+         */
+        public static const Unknown:HostID = new HostID( 0, "Unknown" );
+
+        /**
+         * The 'Flash' host id constant.
+         */
+        public static const Flash:HostID = new HostID( 1, "Flash" );
+
+        /**
+         * The 'Flex' host id constant.
+         */
+        public static const Apollo:HostID = new HostID( 2, "Apollo" );
+
+        /**
+         * The 'Air' host id constant.
+         */
+        public static const Air:HostID = new HostID( 3, "Air" );
         
         /* note:
            We will take into account only hosts upon which you can build

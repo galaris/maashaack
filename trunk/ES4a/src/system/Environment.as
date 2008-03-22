@@ -1,5 +1,4 @@
-
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,24 +12,42 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
+*/
 package system
     {
     import flash.system.Capabilities;
     
-    /* Class: Environment
-    */
+	/**
+	 * This class defines the environment of the client application.
+	 */
     public class Environment
         {
+        	
+		/**
+		 * @private
+		 */
         private static var _hostid:HostID      = _getHostID();
+        
+		/**
+		 * @private
+		 */
         private static var _host:Host          = null;
+        
+		/**
+		 * @private
+		 */
         private static var _os:OperatingSystem = null;
         
+		/**
+		 * @private
+		 */
         private static function _getHostID():HostID
             {
             var runtime:String = Capabilities.playerType;
@@ -50,7 +67,10 @@ package system
                 return HostID.Unknown;
                 }
             }
-        
+
+		/**
+		 * @private
+		 */
         private static function _getPlatformID():PlatformID
             {
             var platform:String = Capabilities.os;
@@ -85,7 +105,10 @@ package system
                 return PlatformID.Unknown;
                 }
             }
-        
+
+		/**
+		 * @private
+		 */
         private static function _getHostVersion():Version
             {
             /* note:
@@ -99,6 +122,10 @@ package system
             return Version.fromString( str );
             }
         
+		/**
+		 * Returns the Host reference of the client application.
+		 * @return the Host reference of the client application.
+		 */
         public static function get host():Host
             {
             if( _host != null )
@@ -113,7 +140,11 @@ package system
             
             return _host;
             }
-        
+            
+		/**
+		 * Returns the os OperatingSystem value of the current client application.
+		 * @return the os OperatingSystem value of the current client application.
+		 */        
         public static function get os():OperatingSystem
             {
             if( _os != null )
@@ -134,7 +165,10 @@ package system
             return _os;
             }
         
-        
+		/**
+		 * Returns the new line string value in the current environment.
+		 * @return the new line string value in the current environment.
+		 */
         public static function get newLine():String
             {
             /* FIXME:

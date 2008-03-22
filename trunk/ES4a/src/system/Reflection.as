@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,21 +12,18 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
-Contributor(s):
-
-	- Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
-	  Documentation with JAVADOC + proposal methods
+  Contributor(s):
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
 */
-
 package system
     {
     
-    //Flash player API
-    import flash.system.ApplicationDomain;
+    import flash.system.ApplicationDomain ;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getQualifiedSuperclassName;
     import flash.utils.describeType;

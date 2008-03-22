@@ -9,7 +9,7 @@
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the License. 
   
-  The Original Code is eden: ECMAScript data exchange notation AS2. 
+  The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
@@ -17,15 +17,23 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  
+  	- Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
 
-*/	
+*/        
 package system.text.prettifier
     {
     import system.Strings;
     
+    /**
+     * This class manage all prettify keywords in the Prettify tool class.
+     */
     public class Keywords
         {
         
+        /**
+         * @private
+         */
         private static var _k:Object = { a:[], b:[], c:[], d:[],
                                          e:[], f:[], g:[], h:[],
                                          i:[], j:[], k:[], l:[],
@@ -33,11 +41,9 @@ package system.text.prettifier
                                          q:[], r:[], s:[], t:[],
                                          u:[], v:[], w:[], x:[],
                                          y:[], z:[] };
-        
-        public function Keywords()
-            {
-            }
-        
+        /**
+         * @private
+         */
         private static function _addArray( words:Array ):void
             {
             var word:String;
@@ -55,6 +61,11 @@ package system.text.prettifier
                 }
             }
         
+        /**
+         * Returns the list Array representation of the keyword specified by the passed-in letter or the list of all keywords.
+         * @param letter the optional character (letter) who want use to returns the list of keywords. 
+         * @return the list Array representation of the keyword specified by the passed-in letter or the list of all keywords.
+         */
         public static function list( letter:String = "" ):Array
             {
             if( letter == "" )
@@ -76,6 +87,9 @@ package system.text.prettifier
                 }
             }
         
+        /**
+         * This method add words in the dictionnary of all keywords.
+         */
         public static function add( ...words ):void
             {
             var word:*;
@@ -103,6 +117,10 @@ package system.text.prettifier
                 }
             }
         
+        /**
+         * Search the specified keyword in the Keywords list.
+         * @return <code class="prettyPrint">true</code>  if the specified keyword is find.
+         */
         public static function search( keyword:String ):Boolean
             {
             keyword = Strings.trim( keyword );
@@ -135,6 +153,9 @@ package system.text.prettifier
             return false;
             }
         
+        /**
+         * The String list of all C++ keywords.
+         */
         public static var CPP_KEYWORDS:String = "abstract bool break case catch char class const " +
                                                 "const_cast continue default delete deprecated dllexport dllimport do " +
                                                 "double dynamic_cast else enum explicit extern false float for friend " +
@@ -145,24 +166,45 @@ package system.text.prettifier
                                                 "typeid typename union unsigned using declaration, directive uuid " +
                                                 "virtual void volatile while typeof";
         
+        /**
+         * The String list of all C# keywords.
+         */        
         public static var CSHARP_KEYWORDS:String = "as base by byte checked decimal delegate descending " +
                                                    "event finally fixed foreach from group implicit in interface internal " +
                                                    "into is lock null object out override orderby params readonly ref sbyte " +
                                                    "sealed stackalloc string select uint ulong unchecked unsafe ushort var";
-        
+
+        /**
+         * The String list of all JAVA keywords.
+         */        
         public static var JAVA_KEYWORDS:String = "package synchronized boolean implements import throws " +
                                                  "instanceof transient extends final strictfp native super";
-        
+
+        /**
+         * The String list of all JavaScript keywords.
+         */        
         public static var JSCRIPT_KEYWORDS:String = "debugger export function with NaN Infinity";
-        
+
+        /**
+         * The String list of all Perl keywords.
+         */     
         public static var PERL_KEYWORDS:String = "require sub unless until use elsif BEGIN END";
-        
+
+        /**
+         * The String list of all Python keywords.
+         */     
         public static var PYTHON_KEYWORDS:String = "and assert def del elif except exec global lambda " +
                                                    "not or pass print raise yield False True None";
         
+        /**
+         * The String list of all Ruby keywords.
+         */             
         public static var RUBY_KEYWORDS:String = "then end begin rescue ensure module when undef next " +
                                                  "redo retry alias defined";
         
+        /**
+         * The String list of all Sh keywords.
+         */    
         public static var SH_KEYWORDS:String = "done fi";
         
         
