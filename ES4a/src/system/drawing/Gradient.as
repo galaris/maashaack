@@ -39,8 +39,8 @@ package system.drawing
         
         public function Gradient( type:String, colors:Array, alphas:Array, ratios:Array,
                                   matrix:Matrix = null,
-                                  spreadMethod:String = SpreadMethod.PAD,
-                                  interpolationMethod:String = InterpolationMethod.RGB,
+                                  spreadMethod:String = "PAD"/*SpreadMethod.PAD*/,
+                                  interpolationMethod:String = "RGB" /*InterpolationMethod.RGB*/,
                                   focalPointRatio:Number = 0 )
             {
             
