@@ -9,7 +9,7 @@
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the License. 
   
-  The Original Code is eden: ECMAScript data exchange notation AS2. 
+  The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
@@ -18,7 +18,7 @@
   
   Contributor(s):
   
-  	- Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
+      - Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
 
 */
 package system.text.html
@@ -30,8 +30,19 @@ package system.text.html
     public class Entity
         {
         
+        /**
+         * The String char value of the entity.
+         */
         public var char:String;
+
+        /**
+         * The String name value of the entity.
+         */
         public var name:String;
+
+        /**
+         * The Number value of the entity.
+         */
         public var number:int;
         
         /**

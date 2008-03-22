@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,19 +12,18 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
-Contributor(s):
-
-	- Alcaraz Marc (aka eKameleon) <vegas@ekameleon.net> (2007-2008)
-	  Documentation with JAVADOC
+  Contributor(s):
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
 */
 package system
     {
     
-	/**
+    /**
      * A basic Version class which is composed by four fields: major, minor, build and revision.
      * <p>implementation note:</p>
      * <p>internaly we stock the value of a version (the total of each fields) 
@@ -62,7 +60,7 @@ package system
      */
     public class Version implements IEquatable
         {
-        	
+            
         
         private var _major:uint;
         private var _minor:uint;
@@ -227,8 +225,8 @@ package system
             {
             return _build;
             }
-     	
-     	/**
+         
+        /**
          * @private
          */
         public function set build( value:uint ):void
@@ -322,21 +320,28 @@ package system
             
             switch( fields )
                 {
-                case 1:
-                arr = [ major ];
-                break;
-                
-                case 2:
-                arr = [ major, minor ];
-                break;
+                case 1 :
+                    {
+                    arr = [ major ];
+                    break;
+                    }                
+                case 2 :
+                    {
+                    arr = [ major, minor ];
+                    break;
+                    }
                 
                 case 3:
-                arr = [ major, minor, build ];
-                break;
+                    {
+                    arr = [ major, minor, build ];
+                    break;
+                    }
                 
                 case 4:
                 default:
-                arr = [ major, minor, build, revision ];
+                    {
+                        arr = [ major, minor, build, revision ];
+                    }
                 }
             
             return arr.join( _separator );

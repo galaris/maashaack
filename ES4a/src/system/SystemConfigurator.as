@@ -1,5 +1,4 @@
-
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -13,49 +12,50 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
+  
+  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
+*/
 package system
     {
 
     import system.Configurator;
-    //import system.SerializationFormat;
-    //import system.Serializer;
     
+    /**
+     * The system configurator class.
+     */
     public class SystemConfigurator extends Configurator
         {
         
+        /**
+         * Creates a new SystemConfigurator instance.
+         * @param config This argument initialize the configurator with a generic object.
+         */
         public function SystemConfigurator( config:Object )
             {
             super( config );
             }
         
+        /**
+         * Indicates if the config use the verbose mode or not.
+         */
         public function get verbose():Boolean
             {
             return _config.verbose;
             }
         
+        /**
+         * @private
+         */
         public function set verbose( value:Boolean ):void
             {
             _config.verbose = value;
             }
-        /*
-        public function get serializer():SerializationFormat
-            {
-            return _config.serializer;
-            }
-        
-        public function set serializer( value:SerializationFormat ):void
-            {
-            _config.serializer = value;
-            Serializer.format  = value;
-            }
-        */
+
         }
 
     }
-
