@@ -21,8 +21,9 @@
 
 package system.drawing
     {
-    import flash.display.SpreadMethod;
     import flash.display.InterpolationMethod;
+    import flash.display.SpreadMethod;
+    import flash.geom.Matrix;
     
     public class Gradient
         {
