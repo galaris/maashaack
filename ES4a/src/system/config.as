@@ -22,9 +22,11 @@
 */
 package system
     {
+    import buRRRn.eden.eden;
+    
     public var config:SystemConfigurator = new SystemConfigurator( {
-                                                                   verbose: false/*,
-                                                                   serializer: SerializationFormat.eden1*/
+                                                                   verbose: false,
+                                                                   serializer: eden
                                                                    } );
     }
 

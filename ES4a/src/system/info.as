@@ -23,6 +23,7 @@
 package system
     {
     import system.Version;
+    import system.config;
     
     /**
 	 * The basic system info.
@@ -76,8 +77,8 @@ package system
                            version:version,
                            host: Environment.host,
                            isdebug: Environment.host.isDebug() ? " (debug)": "",
-                           os: Environment.os/*,
-                           config: Serializer.serialize( config )*/
+                           os: Environment.os,
+                           config: config.toSource()
                            }
                          );
         }
