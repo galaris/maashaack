@@ -24,7 +24,7 @@ package system
     {
     
     /**
-     * Array static tool class.
+     * A static class for Array utilities.
      */
 	public dynamic class Arrays
 		{
@@ -104,6 +104,7 @@ package system
 		public static function spliceInto( inserted:Array, container:Array, containerPosition:Number=0 , countReplaced:Number=0 ):void
 			{
   			inserted.unshift( containerPosition, isNaN( countReplaced ) ? 0 : countReplaced );
+  			
   			try 
   				{
     			container.splice.apply( container, inserted ) ;

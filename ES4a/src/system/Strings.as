@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -20,25 +21,26 @@
       - Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
 */
+
 package system
-{
+    {
 
     /**
      * A static class for String utilities.
      */
     public class Strings
-    {
+        {
 
         /**
          * Helper method for the padLeft and padRight method.
          * @private
          */
         private static function _padHelper( str:String, totalWidth:int, paddingChar:String = " ", isRightPadded:Boolean = true ):String
-        {
-            if( (totalWidth < str.length) || (totalWidth < 0) )
             {
+            if( (totalWidth < str.length) || (totalWidth < 0) )
+                {
                 return str;
-            }
+                }
             
             /* note:
             we want to limit the string to ONLY ONE char
@@ -47,54 +49,54 @@ package system
             to throw an Error
              */
             if( paddingChar.length > 1 )
-            {
+                {
                 paddingChar = paddingChar.charAt( 0 );
-            }
+                }
             
             while( str.length != totalWidth )
-            {
+                {
                 if( isRightPadded == true )
-                {
+                    {
                     str += paddingChar;
-                }
+                    }
                 else
-                {
+                    {
                     str = paddingChar + str;
+                    }
                 }
-            }
             
             return str;
-        }
+            }
 
         /**
          * Helper method used by trim, trimStart and trimEnd methods.
          * @private
          */
         private static function _trimHelper( str:String, trimChars:Array, trimStart:Boolean = false, trimEnd:Boolean = false ):String
-        {
+            {
             var iLeft:int;
             var iRight:int;
             
             if( trimStart )
-            {
+                {
                 for( iLeft = 0; (iLeft < str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > -1) ; iLeft++ )
                     {
                     }
                 
                 str = str.substr( iLeft );
-            }
+                }
             
             if( trimEnd )
-            {
+                {
                 for( iRight = str.length - 1; (iRight >= 0) && (trimChars.indexOf( str.charAt( iRight ) ) > -1) ; iRight-- )
                     {            
                     }
                 
                 str = str.substring( 0, iRight + 1 );
-            }
+                }
             
             return str;
-        }
+            }
 
         /**
          * Compares the two specified String objects.
@@ -104,57 +106,68 @@ package system
          * allows to take into account the string case for comparison. 
          */    
         public static function compare( o1:*, o2:*, strict:Boolean = false ):int
-        {
+            {
             
             /* TODO: review and test the logic */
             if( (o1 == null) || (o2 == null) )
-            {
+                {
                 if( o1 == o2 )
-                {
+                    {
                     return 0; //both null
-                }
+                    }
                 else if( o1 == null )
-                {
+                    {
                     return -1; //o1 is null -1
-                }
+                    }
                 else
-                {
+                    {
                     return 1; //o2 is null 1
+                    }
                 }
-            }
             
             if( !(o1 is String) || !(o2 is String) )
-            {
+                {
                 throw new Error( "Arguments String expected." );
-            }
+                }
             
             if( !strict )
-            {
+                {
                 o1 = o1.toLowerCase( );
                 o2 = o2.toLowerCase( );
-            }
+                }
             
             if( o1 == o2 )
-            {
+                {
                 return 0;
-            }
+                }
             else if( o1.length == o2.length )
-            {
-                /* TODO:
-                implement a string diff algorithm
-                 */
-                //return difference( o1, o2, option );
-                return 0;
-            }
-            else if( o1.length > o2.length )
-            {
-                return 1;
-            }
-            else
-            {
+                {
+                /* info:
+                   localCompare return the char difference soe we reuse that
+                */
+                
+                var lc = o1.localeCompare( o2 );
+                
+                if( lc == 0 )
+                    {
+                    return 0;
+                    }
+                else if( lc > 0 )
+                    {
+                    return 1;
+                    }
+                
                 return -1;
+                }
+            else if( o1.length > o2.length )
+                {
+                return 1;
+                }
+            else
+                {
+                return -1;
+                }
             }
-        }
 
         /**
          * Determines whether the end of this instance matches the specified String.
@@ -172,14 +185,14 @@ package system
          * </pre>
          */
         public static function endsWith( str:String, value:String ):Boolean
-        {
-            if( (value == null) || (str.length < value.length) )
             {
+            if( (value == null) || (str.length < value.length) )
+                {
                 return false;
-            }
+                }
             
             return compare( str.substr( str.length - value.length ), value ) == 0;
-        }
+            }
 
         /** 
          * Format a string using indexed or named parameters.
@@ -254,11 +267,11 @@ package system
          * </pre>
          */
         public static function format( format:String, ...args ):String
-        {
-            if( (args == null) || (args.length == 0) || (format == "") )
             {
+            if( (args == null) || (args.length == 0) || (format == "") )
+                {
                 return format; //nothing to format
-            }
+                }
             
             var paddingChar:String = " "; 
             //default padding char is SPC
@@ -272,21 +285,21 @@ package system
             
             //parse arguments
             if( args.length >= 1 )
-            {
-                if( args[0] is Array )
                 {
+                if( args[0] is Array )
+                    {
                     indexedValues = indexedValues.concat( args[0] );
                     args.shift( );
-                }
-                else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
-                {
-                    for( var prop:String in args[0] )
-                    {
-                        namedValues[ prop ] = args[0][ prop ];
                     }
+                else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
+                    {
+                    for( var prop:String in args[0] )
+                        {
+                        namedValues[ prop ] = args[0][ prop ];
+                        }
                     args.shift( );
+                    }
                 }
-            }
             
             indexedValues = indexedValues.concat( args );
             
@@ -296,7 +309,7 @@ package system
             var ORC2:String = "\uFFFD"; 
             //Object Replacement Character
             if( indexOfAny( format, [ "{{", "}}" ] ) > -1 )
-            {
+                {
                 /* note:
                 little limitation here
                 we cover the case of {{{0}}} -> to be able
@@ -316,7 +329,7 @@ package system
                 format = format.split( "{{" ).join( ORC1 );
                 format = format.split( "}}}" ).join( "}" + ORC2 );
                 format = format.split( "}}" ).join( ORC2 );
-            }
+                }
             
             // {0} {1}
             // {0,5} {0,-5}
@@ -325,7 +338,7 @@ package system
             // {toto,5} {toto,-5}
             // {titi,5:_} {titi,-5:_}
             var parseExpression:Function = function( expression:String ):String
-            {
+                {
                 use namespace AS3; 
                 //to avoid 3594 warning
                 var value:String = "";
@@ -334,28 +347,28 @@ package system
                 var padding:String = paddingChar; 
                 //default
                 if( indexOfAny( expression, [ ",", ":" ] ) > -1 )
-                {
+                    {
                     var vPos:int = expression.indexOf( "," );
                     if( vPos == -1 )
-                    {
+                        {
                         throw new Error( "malformed format, could not find [,] before [:]." );
-                    }
+                        }
                     
                     var fPos:int = expression.indexOf( ":" );
                     
                     if( fPos == -1 )
-                    {
+                        {
                         spaceAlign = int( expression.substr( vPos + 1 ) );
-                    }
+                        }
                     else
-                    {
+                        {
                         spaceAlign = int( expression.substring( vPos + 1, fPos ) );
                         padding = expression.substr( fPos + 1 );
-                    }
+                        }
                     
                     isAligned = true;
                     expression = expression.substring( 0, vPos );
-                }
+                    }
                 
                 /* note:
                 there must be a bug in playerglobal.swc
@@ -390,28 +403,28 @@ package system
                  */
                 var c:String = expression.split( "" )[0];
                 if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
-                {
+                    {
                     value = String( namedValues[ expression ] );
-                }
+                    }
                 else if( ("0" <= c) && (c <= "9") )
-                {
+                    {
                     value = String( indexedValues[ int( expression ) ] );
-                }
+                    }
                 
                 if( isAligned )
-                {
+                    {
                     if( (spaceAlign > 0) && (value.length < spaceAlign) )
-                    {
+                        {
                         value = padLeft( value, spaceAlign, padding );
-                    }
+                        }
                     else if ( -value.length < spaceAlign )
-                    {
+                        {
                         value = padRight( value, -spaceAlign, padding );
+                        }
                     }
-                }
                 
                 return value;
-            } ;
+                };
             
             var expression:String = "";
             var formated:String = "";
@@ -420,86 +433,86 @@ package system
             var len:int = format.length;
             
             var next:Function = function():String
-            {
+                {
                 ch = format.charAt( pos );
                 pos++;
                 return ch;
-            } ;
+                };
             
             //parsing
             while( pos < len )
-            {
+                {
                 next( );
                 if( ch == "{" )
-                {
+                    {
                     expression = next( );
                     while( next( ) != "}" )
-                    {
+                        {
                         expression += ch;
-                    }
+                        }
                     formated += parseExpression( expression );
-                }
+                    }
                 else
-                {
+                    {
                     formated += ch;
+                    }
                 }
-            }
             
             if( indexOfAny( format, [ ORC1, ORC2 ] ) > -1 )
-            {
+                {
                 formated = formated.split( ORC1 ).join( "{" );
                 formated = formated.split( ORC2 ).join( "}" );
-            }
+                }
             
             return formated;
-        }
+            }
 
          /**
          * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * import system.Strings ;
+         * import system.Strings;
          * 
-         * Strings.indexOfAny("hello world", [2, "hello", 5]) ; // 0
-         * Strings.indexOfAny("Five = 5", [2, "hello", 5]) ; // 7
-         * Strings.indexOfAny("actionscript is good", [2, "hello", 5]) ; // -1
+         * Strings.indexOfAny("hello world", [2, "hello", 5]); // 0
+         * Strings.indexOfAny("Five = 5", [2, "hello", 5]); // 7
+         * Strings.indexOfAny("actionscript is good", [2, "hello", 5]); // -1
          * </pre>
          * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          */
         public static function indexOfAny( str:String, anyOf:Array, startIndex:int = 0, count:int = -1 ):int
-        {
+            {
             var i:int;
             var endIndex:int;
             
             if( str.length == 0 )
-            {
+                {
                 return -1;
-            }
+                }
             
             if( startIndex < 0 )
-            {
+                {
                 startIndex = 0;
-            }
+                }
             
             if( (count < 0) || (count > anyOf.length - startIndex) )
-            {
+                {
                 endIndex = anyOf.length - 1;
-            }
+                }
             else
-            {
+                {
                 endIndex = startIndex + count - 1;
-            }
+                }
             
             for( i = startIndex; i <= endIndex ; i++ )
-            {
-                if( str.indexOf( anyOf[i] ) > -1 )
                 {
+                if( str.indexOf( anyOf[i] ) > -1 )
+                    {
                     return i;
+                    }
                 }
-            }
             
             return -1;
-        }
+            }
 
         /**
          * Inserts a specified instance of String at a specified index position in this instance.
@@ -508,53 +521,56 @@ package system
          * if index is zero, we directly insert it to the begining of the string.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * import system.Strings ;
+         * import system.Strings;
          * 
-         * var result:String ;
+         * var result:String;
          * 
-         * result = Strings.insert("hello", 0, "a" ) ;  // ahello
+         * result = Strings.insert("hello", 0, "a" );  // ahello
          * trace(result) ;
          * 
-         * result = Strings.insert("hello", -1, "a" ) ; // ahello
+         * result = Strings.insert("hello", -1, "a" ); // hellao
          * trace(result) ;
          * 
-         * result = Strings.insert("hello", 10, "a" ) ; // helloa
+         * result = Strings.insert("hello", 10, "a" ); // helloa
          * trace(result) ;
          * 
-         * result = Strings.insert("hello", 1, "a" ) ;  // haello
+         * result = Strings.insert("hello", 1, "a" );  // haello
          * trace(result) ;
          * </pre>
          * @return the string modified by the method.
-         */        
-        public function insert( str:String, startIndex:int, value:String ):String
-        {
+         */
+        public static function insert( str:String, startIndex:int, value:String ):String
+            {
             var strA:String = "";
             var strB:String = "";
             
             if( startIndex == 0 )
-            {
+                {
                 return value + str;
-            }
+                }
             else if( startIndex == str.length )
-            {
+                {
                 return str + value;
-            }
+                }
             
+            /* TODO:
+               review the logic when startIndex == -1
+            */
             strA = str.substr( 0, startIndex );
             strB = str.substr( startIndex );
             
             return strA + value + strB;
-        }
+            }
 
         /**
          * Reports the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint"> 
-         * trace( Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]) ) ; // 0
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["2", "hello", "5"]) ) ; // 19
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] ) ) ; // 9
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8 ) ) ; // 5
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8 , 3) ) ; // -1
+         * trace( Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]) ); // 0
+         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["2", "hello", "5"]) ); // 19
+         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"]) ); // 9
+         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8) ); // 5
+         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8 , 3) ); // -1
          * </pre> 
          * @param str The String to ckeck.
          * @param anyOf The Array of Unicode characters to find in the String.
@@ -630,9 +646,9 @@ package system
          * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          */
         public static function padLeft( str:String, totalWidth:int, paddingChar:String = " " ):String
-        {
+            {
             return _padHelper( str, totalWidth, paddingChar, false );
-        }
+            }
 
         /**
          * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
@@ -651,9 +667,9 @@ package system
          * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
          */
         public static function padRight( str:String, totalWidth:int, paddingChar:String = " " ):String
-        {
+            {
             return _padHelper( str, totalWidth, paddingChar, true );
-        }
+            }
 
         /**
          * Determines whether a specified string is a prefix of the current instance. 
@@ -668,79 +684,79 @@ package system
          * @return <code class="prettyprint">true</code> if the specified string is a prefix of the current instance.
          */
         public static function startsWith( str:String, value:String ):Boolean
-        {
-            if( (value == null) || (str.length < value.length) )
             {
+            if( (value == null) || (str.length < value.length) )
+                {
                 return false;
-            }
+                }
             
             if( str.charAt( 0 ) != value.charAt( 0 ) )
-            {
+                {
                 return false;
-            }
+                }
             
             return compare( str.substr( 0, value.length ), value ) == 0;
-        }
+            }
 
         /**
          * Removes all occurrences of a set of specified characters (or strings) from the beginning and end of this instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * trace( Strings.trim("\r\t   hello world   \t ") ) ; // hello world
+         * trace( Strings.trim("\r\t   hello world   \t ") ); // hello world
          * </pre>
          * @param str The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new string when is trimed.
+         * @return The new trimed string.
          */
         public static function trim( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
             {
+            if( trimChars == null )
+                {
                 trimChars = whiteSpaceChars;
-            }
+                }
             
             return _trimHelper( str, trimChars, true, true );
-        }
+            }
 
         /**
          * Removes all occurrences of a set of characters specified in an array from the end of this instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * trace( Strings.trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-")  ) ) ; // ---hello world
+         * trace( Strings.trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // ---hello world
          * </pre>
          * @param str The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new string when is trimed.
+         * @return The new trimed string.
          */
         public static function trimEnd( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
             {
+            if( trimChars == null )
+                {
                 trimChars = whiteSpaceChars;
-            }
+                }
             
             return _trimHelper( str, trimChars, false, true );
-        }
+            }
 
         /**
          * Removes all occurrences of a set of characters specified in an array from the beginning of this instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * trace( Strings.trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-")  ) ) ; // hello world---
+         * trace( Strings.trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // hello world---
          * </pre>
          * @param str The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new string when is trimed.
+         * @return The new trimed string.
          */
         public static function trimStart( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
             {
+            if( trimChars == null )
+                {
                 trimChars = whiteSpaceChars;
-            }
+                }
             
             return _trimHelper( str, trimChars, true, false );
-        }
+            }
 
         // TODO We maybe could also define 0xFFEF and/or 0x2060, but not completely sure of all the implication, 
         // 0xFFEF in byte order mark etc.
@@ -748,6 +764,7 @@ package system
         /**
          * Contains a read-only list of white space chars.
          * <p><b>Note :</b></p>
+         * <ul>
          * <li>http://developer.mozilla.org/es4/proposals/string.html</li>
          * <li>http://www.fileformat.info/info/unicode/category/Zs/list.htm</li>
          * <li>http://www.fileformat.info/info/unicode/category/Zl/list.htm</li>
@@ -755,33 +772,34 @@ package system
          * <li>http://www.fileformat.info/info/unicode/char/200b/index.htm</li>
          * <li>http://www.fileformat.info/info/unicode/char/feff/index.htm</li>
          * <li>http://www.fileformat.info/info/unicode/char/2060/index.htm</li>
+         * </ul>
          */
         public static const whiteSpaceChars:Array = [ "\u0009" /*Horizontal tab*/,
-                                                         "\u000A" /*Line feed or New line*/,
-                                                         "\u000B" /*Vertical tab*/,
-                                                         "\u000C" /*Formfeed*/,
-                                                         "\u000D" /*Carriage return*/,
-                                                         "\u0020" /*Space*/,
-                                                         "\u00A0" /*Non-breaking space*/,
-                                                         "\u1680" /*Ogham space mark*/,
-                                                         "\u180E" /*Mongolian vowel separator*/,
-                                                         "\u2000" /*En quad*/,
-                                                         "\u2001" /*Em quad*/,
-                                                         "\u2002" /*En space*/,
-                                                         "\u2003" /*Em space*/,
-                                                         "\u2004" /*Three-per-em space*/,
-                                                         "\u2005" /*Four-per-em space*/,
-                                                         "\u2006" /*Six-per-em space*/,
-                                                         "\u2007" /*Figure space*/,
-                                                         "\u2008" /*Punctuation space*/,
-                                                         "\u2009" /*Thin space*/,
-                                                         "\u200A" /*Hair space*/,
-                                                         "\u200B" /*Zero width space*/,
-                                                         "\u2028" /*Line separator*/,
-                                                         "\u2029" /*Paragraph separator*/,
-                                                         "\u202F" /*Narrow no-break space*/,
-                                                         "\u205F" /*Medium mathematical space*/,
-                                                         "\u3000" /*Ideographic space*/ ];
+                                                      "\u000A" /*Line feed or New line*/,
+                                                      "\u000B" /*Vertical tab*/,
+                                                      "\u000C" /*Formfeed*/,
+                                                      "\u000D" /*Carriage return*/,
+                                                      "\u0020" /*Space*/,
+                                                      "\u00A0" /*Non-breaking space*/,
+                                                      "\u1680" /*Ogham space mark*/,
+                                                      "\u180E" /*Mongolian vowel separator*/,
+                                                      "\u2000" /*En quad*/,
+                                                      "\u2001" /*Em quad*/,
+                                                      "\u2002" /*En space*/,
+                                                      "\u2003" /*Em space*/,
+                                                      "\u2004" /*Three-per-em space*/,
+                                                      "\u2005" /*Four-per-em space*/,
+                                                      "\u2006" /*Six-per-em space*/,
+                                                      "\u2007" /*Figure space*/,
+                                                      "\u2008" /*Punctuation space*/,
+                                                      "\u2009" /*Thin space*/,
+                                                      "\u200A" /*Hair space*/,
+                                                      "\u200B" /*Zero width space*/,
+                                                      "\u2028" /*Line separator*/,
+                                                      "\u2029" /*Paragraph separator*/,
+                                                      "\u202F" /*Narrow no-break space*/,
+                                                      "\u205F" /*Medium mathematical space*/,
+                                                      "\u3000" /*Ideographic space*/ ];
+        }
     }
-}
 
