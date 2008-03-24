@@ -74,7 +74,7 @@ package system
         private static function _getPlatformID():PlatformID
             {
             var platform:String = Capabilities.os;
-            
+            trace( "platform: " + platform );
             switch( platform )
                 {
                 case "Windows 95":
@@ -86,6 +86,7 @@ package system
                 case "win32":
                 return PlatformID.Windows;
                 
+                case "Mac OS 10.5.2":
                 case "MacOS":
                 case "mac":
                 return PlatformID.Macintosh;
