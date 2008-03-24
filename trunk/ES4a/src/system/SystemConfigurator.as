@@ -55,7 +55,23 @@ package system
             {
             _config.verbose = value;
             }
-
+        
+        /**
+         * The current serializer used used by the system 
+         */        
+        public function get serializer():ISerializer
+            {
+            return _config.serializer;
+            }
+        
+        /**
+         * @private
+         */
+        public function set serializer( value:ISerializer ):void
+            {
+            _config.serializer = value;
+            }
+        
         }
 
     }
