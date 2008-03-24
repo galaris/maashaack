@@ -74,7 +74,7 @@ package system
         private static function _getPlatformID():PlatformID
             {
             var platform:String = Capabilities.os;
-            trace( "platform: " + platform );
+            
             switch( platform )
                 {
                 case "Windows 95":
