@@ -61,7 +61,7 @@ package system
                 return HostID.Flash;
                 
                 case "Desktop":
-                return HostID.Apollo;
+                return HostID.Air;
                 
                 default:
                 return HostID.Unknown;

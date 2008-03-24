@@ -41,21 +41,16 @@ package system
          * The 'Unknow' host id constant.
          */
         public static const Unknown:HostID = new HostID( 0, "Unknown" );
-
+        
         /**
          * The 'Flash' host id constant.
          */
         public static const Flash:HostID = new HostID( 1, "Flash" );
-
-        /**
-         * The 'Flex' host id constant.
-         */
-        public static const Apollo:HostID = new HostID( 2, "Apollo" );
-
+        
         /**
          * The 'Air' host id constant.
          */
-        public static const Air:HostID = new HostID( 3, "Air" );
+        public static const Air:HostID = new HostID( 2, "Air" );
         
         /* note:
            We will take into account only hosts upon which you can build
