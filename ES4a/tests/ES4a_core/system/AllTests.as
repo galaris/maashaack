@@ -19,7 +19,7 @@
   Contributor(s):
 */
 
-package tests.ES4a.core
+package system
     {
     import buRRRn.ASTUce.framework.*;
     
@@ -35,7 +35,7 @@ package tests.ES4a.core
         
         static public function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "core tests" );
+            var suite:TestSuite = new TestSuite( "ES4a core tests" );
             
             //core2
             suite.addTestSuite( StringsTest );

@@ -19,7 +19,7 @@
   Contributor(s):
 */
 
-package tests.ES4a.core
+package system
     {
     import system.IEquatable;
     
