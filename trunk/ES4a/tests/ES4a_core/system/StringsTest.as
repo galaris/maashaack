@@ -40,13 +40,15 @@ package system
             var str3:String = "hello worl";
             var str4:String = "HELLO WORLD";
             
-            assertEquals( Strings.compare( str1, null ),  1 );
-            assertEquals( Strings.compare( null, str1 ), -1 );
+            assertEquals( Strings.compare( "A", "a", true ),  1 );
+            assertEquals( Strings.compare( "a", "A", true ), -1 );
+            assertEquals( Strings.compare( str1, "" ),  1 );
+            assertEquals( Strings.compare( "", str1 ), -1 );
             assertEquals( Strings.compare( str1, str2 ),  0 );
             assertEquals( Strings.compare( str2, str3 ),  1 );
             assertEquals( Strings.compare( str3, str2 ), -1 );
-            assertEquals( Strings.compare( null, null ),  0 );
-            assertEquals( Strings.compare( str2, str4, true ),  1 );
+            assertEquals( Strings.compare( "", "" ),  0 );
+            assertEquals( Strings.compare( str2, str4, true ),  -1 );
             }
         
         public function testStaticFormat():void
