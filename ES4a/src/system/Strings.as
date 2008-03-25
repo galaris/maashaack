@@ -145,7 +145,6 @@ package system
                 /* info:
                    localCompare return the char difference soe we reuse that
                 */
-                
                 var lc:Number = o1.localeCompare( o2 );
                 
                 if( lc == 0 )
