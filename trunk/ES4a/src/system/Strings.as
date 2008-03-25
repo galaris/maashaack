@@ -417,7 +417,7 @@ package system
                         {
                         value = padLeft( value, spaceAlign, padding );
                         }
-                    else if ( -value.length < spaceAlign )
+                    else if ( spaceAlign < -value.length )
                         {
                         value = padRight( value, -spaceAlign, padding );
                         }

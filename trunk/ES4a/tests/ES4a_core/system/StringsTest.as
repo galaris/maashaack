@@ -46,7 +46,7 @@ package system
             assertEquals( Strings.compare( str2, str3 ),  1 );
             assertEquals( Strings.compare( str3, str2 ), -1 );
             assertEquals( Strings.compare( null, null ),  0 );
-            assertEquals( Strings.compare( str2, str4, true ),  0 );
+            assertEquals( Strings.compare( str2, str4, true ),  1 );
             }
         
         public function testStaticFormat():void
@@ -81,12 +81,13 @@ package system
             var str5:String = "my {token,-10}";
             var str6:String = "my {token,10:.}";
             
-            assertEquals( "hello      world", Strings.format( str1, "world" ) );
-            assertEquals( "hello world     ", Strings.format( str2, "world" ) );
-            assertEquals( "hello world_____", Strings.format( str3, "world" ) );
-            assertEquals( "my      token", Strings.format( str4, {token:"token"} ) );
-            assertEquals( "my token     ", Strings.format( str5, {token:"token"} ) );
-            assertEquals( "my .....token", Strings.format( str6, {token:"token"} ) );
+            assertEquals( "hello      world", Strings.format( str1, "world" ), "A" );
+            trace( "["+Strings.format( str2, "world" )+"]" )
+            assertEquals( "hello world     ", Strings.format( str2, "world" ), "B" );
+            assertEquals( "hello world_____", Strings.format( str3, "world" ), "C" );
+            assertEquals( "my      token", Strings.format( str4, {token:"token"} ), "D" );
+            assertEquals( "my token     ", Strings.format( str5, {token:"token"} ), "E" );
+            assertEquals( "my .....token", Strings.format( str6, {token:"token"} ), "F" );
             }
         
         }

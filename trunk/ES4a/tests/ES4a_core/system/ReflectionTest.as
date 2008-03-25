@@ -38,8 +38,8 @@ package system
             assertTrue( Reflection.hasClassByName( "Array" ) );
             assertFalse( Reflection.hasClassByName( "" ) );
             assertFalse( Reflection.hasClassByName( "IdontExistsClass" ) );
-            assertTrue( Reflection.hasClassByName( "tests.ES4a.core.ReflectMe" ) );
-            assertTrue( Reflection.hasClassByName( "tests.ES4a.core::ReflectMe" ) );
+            assertTrue( Reflection.hasClassByName( "system.ReflectMe" ) );
+            assertTrue( Reflection.hasClassByName( "system::ReflectMe" ) );
             }
         
         public function testShortName():void
@@ -49,7 +49,7 @@ package system
         
         public function testLongName():void
             {
-            assertEquals( Reflection.getClassName( ReflectMe, true ), "tests.ES4a.core::ReflectMe" );
+            assertEquals( Reflection.getClassName( ReflectMe, true ), "system::ReflectMe" );
             }
         
         public function testFindMethods():void
