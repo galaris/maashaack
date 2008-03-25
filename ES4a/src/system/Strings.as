@@ -105,30 +105,8 @@ package system
          * @param strict (optionnal) useCase boolean, default to false.
          * allows to take into account the string case for comparison. 
          */    
-        public static function compare( o1:*, o2:*, strict:Boolean = false ):int
+        public static function compare( o1:String, o2:String, strict:Boolean = false ):int
             {
-            
-            /* TODO: review and test the logic */
-            if( (o1 == null) || (o2 == null) )
-                {
-                if( o1 == o2 )
-                    {
-                    return 0; //both null
-                    }
-                else if( o1 == null )
-                    {
-                    return -1; //o1 is null -1
-                    }
-                else
-                    {
-                    return 1; //o2 is null 1
-                    }
-                }
-            
-            if( !(o1 is String) || !(o2 is String) )
-                {
-                throw new Error( "Arguments String expected." );
-                }
             
             if( !strict )
                 {
@@ -143,16 +121,33 @@ package system
             else if( o1.length == o2.length )
                 {
                 /* info:
-                   localCompare return the char difference soe we reuse that
+                   localCompare return the char difference so we reuse that
                 */
                 
                 var localcomp:Number = o1.localeCompare( o2 );
                 
+                /* note:
+                   by default we want an ascending alphabetic order
+                   with minuscule weighting less than majuscule
+                   but as char value of majuscule are smaller
+                   we have to inverse the negative/positive to obtain
+                   the right order
+                   
+                   ex:
+                   "a".charAt(0) = 97
+                   "A".charAt(0) = 65
+                   that means that "a" weight more than "A"
+                   "a".localeCompare( "A" ) -> 32
+                   but in our case we want a negative, because we consider
+                   that "a" weight less than "A"
+                   so to get the correct result we need to negate the result
+                   -("a".localeCompare( "A" )) -> -32
+                */
                 if( localcomp == 0 )
                     {
                     return 0;
                     }
-                else if( localcomp > 0 )
+                else if( localcomp < 0 )
                     {
                     return 1;
                     }
