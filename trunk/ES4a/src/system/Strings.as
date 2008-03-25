@@ -146,7 +146,7 @@ package system
                    localCompare return the char difference soe we reuse that
                 */
                 
-                var lc = o1.localeCompare( o2 );
+                var lc:Number = o1.localeCompare( o2 );
                 
                 if( lc == 0 )
                     {
