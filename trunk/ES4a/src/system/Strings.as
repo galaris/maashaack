@@ -145,13 +145,14 @@ package system
                 /* info:
                    localCompare return the char difference soe we reuse that
                 */
-                var lc:Number = o1.localeCompare( o2 );
                 
-                if( lc == 0 )
+                var localcomp:Number = o1.localeCompare( o2 );
+                
+                if( localcomp == 0 )
                     {
                     return 0;
                     }
-                else if( lc > 0 )
+                else if( localcomp > 0 )
                     {
                     return 1;
                     }
