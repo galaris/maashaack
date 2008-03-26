@@ -33,7 +33,7 @@ package system
             super( name );
             }
         
-        public function testStaticCompare():void
+        public function testCompare():void
             {
             var str1:String = new String("hello world");
             var str2:String = "hello world";
@@ -51,7 +51,7 @@ package system
             assertEquals( Strings.compare( str2, str4, true ),  -1 );
             }
         
-        public function testStaticFormat():void
+        public function testFormat():void
             {
             var str1:String = "hello {0}";
             var str2:String = "hello {{escape}} world";
@@ -74,7 +74,7 @@ package system
             
             }
         
-        public function testStaticFormatOptions():void
+        public function testFormatOptions():void
             {
             var str1:String = "hello {0,10}";
             var str2:String = "hello {0,-10}";
@@ -84,12 +84,95 @@ package system
             var str6:String = "my {token,10:.}";
             
             assertEquals( "hello      world", Strings.format( str1, "world" ), "A" );
-            trace( "["+Strings.format( str2, "world" )+"]" )
             assertEquals( "hello world     ", Strings.format( str2, "world" ), "B" );
             assertEquals( "hello world_____", Strings.format( str3, "world" ), "C" );
             assertEquals( "my      token", Strings.format( str4, {token:"token"} ), "D" );
             assertEquals( "my token     ", Strings.format( str5, {token:"token"} ), "E" );
             assertEquals( "my .....token", Strings.format( str6, {token:"token"} ), "F" );
+            }
+        
+        public function testEndsWith():void
+            {
+            assertEquals( true, Strings.endsWith( "hello world", "world" ) );
+            assertEquals( true, Strings.endsWith( "hello world", "d" ) );
+            assertEquals( true, Strings.endsWith( "hello world", "" ) );
+            assertEquals( true, Strings.endsWith( "", "" ) );
+            assertEquals( false, Strings.endsWith( "", "hello" ) );
+            assertEquals( false, Strings.endsWith( "", null ) );
+            assertEquals( false, Strings.endsWith( null, null ) );
+            assertEquals( false, Strings.endsWith( null, "" ) );
+            assertEquals( false, Strings.endsWith( null, "hello" ) );
+            }
+        
+        public function testStartsWith():void
+            {
+            assertEquals( true, Strings.startsWith( "hello world", "hello" ) );
+            assertEquals( true, Strings.startsWith( "hello world", "h" ) );
+            assertEquals( true, Strings.startsWith( "hello world", "" ) );
+            assertEquals( true, Strings.startsWith( "", "" ) );
+            assertEquals( false, Strings.startsWith( "", "hello" ) );
+            assertEquals( false, Strings.startsWith( "", null ) );
+            assertEquals( false, Strings.startsWith( null, null ) );
+            assertEquals( false, Strings.startsWith( null, "" ) );
+            assertEquals( false, Strings.startsWith( null, "hello" ) );
+            }
+        
+        public function testPadLeft():void
+            {
+            assertEquals( "   hello", Strings.padLeft( "hello", 8 ) );
+            assertEquals( "...hello", Strings.padLeft( "hello", 8, "." ) );
+            assertEquals( "hello___", Strings.padLeft( "hello", -8, "_" ) );
+            assertEquals( "***hello", Strings.padLeft( "hello", 8, "*.!" ) );
+            }
+        
+        public function testPadRight():void
+            {
+            assertEquals( "hello   ", Strings.padRight( "hello", 8 ) );
+            assertEquals( "hello...", Strings.padRight( "hello", 8, "." ) );
+            assertEquals( "___hello", Strings.padRight( "hello", -8, "_" ) );
+            assertEquals( "hello***", Strings.padRight( "hello", 8, "*.!" ) );
+            }
+        
+        public function testTrimEnd():void
+            {
+            assertEquals( "hello", Strings.trimEnd( "hello   " ) );
+            assertEquals( "hello", Strings.trimEnd( "hello  \n  \t   \r " ) );
+            assertEquals( "---hello world", Strings.trimEnd( "---hello world---", ["-"] ) );
+            assertEquals( "---hello world", Strings.trimEnd( "---hello world---", Strings.whiteSpaceChars.concat("-") ) );
+            assertEquals( "---hello world", Strings.trimEnd( "---hello world--  -----  \r\n---\t-- ---", Strings.whiteSpaceChars.concat("-") ) );
+            }
+        
+        public function testTrimStart():void
+            {
+            assertEquals( "hello", Strings.trimStart( "   hello" ) );
+            assertEquals( "hello", Strings.trimStart( "  \n  \t   \r hello" ) );
+            assertEquals( "hello world---", Strings.trimStart( "---hello world---", ["-"] ) );
+            assertEquals( "hello world---", Strings.trimStart( "---hello world---", Strings.whiteSpaceChars.concat("-") ) );
+            assertEquals( "hello world---", Strings.trimStart( "--  -----  \r\n---\t-- ---hello world---", Strings.whiteSpaceChars.concat("-") ) );
+            }
+        
+        public function testTrim():void
+            {
+            assertEquals( "hello", Strings.trim( "   hello   " ) );
+            assertEquals( "hello", Strings.trim( "  \n  \t   \r hello  \n  \t   \r " ) );
+            assertEquals( "hello world", Strings.trim( "---hello world---", ["-"] ) );
+            assertEquals( "hello world", Strings.trim( "---hello world---", Strings.whiteSpaceChars.concat("-") ) );
+            assertEquals( "hello world", Strings.trim( "--  -----  \r\n---\t-- ---hello world--  -----  \r\n---\t-- ---", Strings.whiteSpaceChars.concat("-") ) );
+            }
+        
+        public function testIndexOfAny():void
+            {
+            assertTrue( false, "not implemented" );
+            }
+        
+        public function testLastIndexOfAny():void
+            {
+            assertTrue( false, "not implemented" );
+            }
+        
+        public function testInsert():void
+            {
+            assertTrue( false, "not implemented" );
             }
         
         }
