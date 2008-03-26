@@ -181,7 +181,7 @@ package system
          */
         public static function endsWith( str:String, value:String ):Boolean
             {
-            if( (value == null) || (str.length < value.length) )
+            if( (str == null) || (value == null) || (str.length < value.length) )
                 {
                 return false;
                 }
@@ -479,7 +479,7 @@ package system
             var i:int;
             var endIndex:int;
             
-            if( str.length == 0 )
+            if( (str == null) || (str == "") )
                 {
                 return -1;
                 }
@@ -628,21 +628,29 @@ package system
         /**
          * Right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          * <pre class="prettyprint">
-         * import system.Strings ;
+         * import system.Strings;
          * 
-         * var result:String ;
+         * var result:String;
          * 
-         * result = Strings.padLeft("hello", 8) ;
-         * trace(result) ; //  "   hello"
+         * result = Strings.padLeft("hello", 8);
+         * trace(result); //  "   hello"
          * 
          * result = Strings.padLeft("hello", 8, ".") ;
-         * trace(result) ; //  "...hello" 
+         * trace(result); //  "...hello" 
          * </pre>
          * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          */
         public static function padLeft( str:String, totalWidth:int, paddingChar:String = " " ):String
             {
-            return _padHelper( str, totalWidth, paddingChar, false );
+            var isRightPadded:Boolean = false;
+            
+            if( totalWidth < 0 )
+                {
+                totalWidth    = -totalWidth;
+                isRightPadded = true;
+                }
+            
+            return _padHelper( str, totalWidth, paddingChar, isRightPadded );
             }
 
         /**
@@ -663,7 +671,15 @@ package system
          */
         public static function padRight( str:String, totalWidth:int, paddingChar:String = " " ):String
             {
-            return _padHelper( str, totalWidth, paddingChar, true );
+            var isRightPadded:Boolean = true;
+            
+            if( totalWidth < 0 )
+                {
+                totalWidth    = -totalWidth;
+                isRightPadded = false;
+                }
+            
+            return _padHelper( str, totalWidth, paddingChar, isRightPadded );
             }
 
         /**
@@ -680,11 +696,18 @@ package system
          */
         public static function startsWith( str:String, value:String ):Boolean
             {
-            if( (value == null) || (str.length < value.length) )
+            //special case
+            if( (value == "") && (str != null) )
+                {
+                return true;
+                }
+            
+            if( (str == "") || (str == null) || (value == null) || (str.length < value.length) )
                 {
                 return false;
                 }
             
+            //shortcut
             if( str.charAt( 0 ) != value.charAt( 0 ) )
                 {
                 return false;
