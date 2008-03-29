@@ -29,6 +29,26 @@ package system
 	public dynamic class Arrays
 		{
         
+        /**
+         * Returns whether the Array contains a particular item.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Arrays ;
+         * 
+         * var ar:Array = [2, 3, 4] ;
+         * 
+         * trace( Arrays.contains(ar, 3) ) ; // true
+         * trace( Arrays.contains(ar, 5) ) ; // false
+         * </pre>
+         * @param ar The search Array.
+         * @param value The value to search.
+         * @return whether the Array contains a particular item.
+         */
+        public static function contains( ar:Array , value:Object):Boolean 
+        {
+            return ar.indexOf(value) > -1 ;
+        }
+        
 		/**
 		 * Initializes a new Array with an arbitrary number of elements (index), 
 		 * with every element containing the passed parameter value or by default the null value.
@@ -53,6 +73,36 @@ package system
             
             return arr;
             }
+        
+        /**
+         * Returns a new Array who contains the specified Array elements repeated count times.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Arrays ;
+         * 
+         * var ar:Array = [2, 3, 4] ;
+         * 
+         * trace( Arrays.repeat(ar, 0) ) ; // 2,3,4
+         * trace( Arrays.repeat(ar, 3) ) ; // 2,3,4,2,3,4,2,3,4
+         * </pre>
+         * @return a new Array who contains the specified Array elements repeated count times.
+         */
+        public static function repeat( ar:Array , count:uint=0 ):Array
+        {
+            var result:Array = [] ;
+            if ( count > 0 )
+            {
+                for( var i:uint = 0 ; i<count ; i++)
+                {
+                    result = result.concat(ar) ;
+                }
+            }
+            else
+            {
+                result = [].concat(ar) ;    
+            }
+            return  result ;
+        }
         
 		/** 
 		 * Splice one array into another.
