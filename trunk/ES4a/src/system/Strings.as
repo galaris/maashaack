@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -21,7 +20,6 @@
       - Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
 
 */
-
 package system
     {
 
@@ -98,6 +96,31 @@ package system
             return str;
             }
 
+        /**
+         * Returns the center String representation of the specified String value.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Strings ;
+         * trace( Strings.center("hello world", 0) )         ; // hello world
+         * trace( Strings.center("hello world", 20) )        ; //     hello world
+         * trace( Strings.center("hello world", 20, "_" ) )  ; // ____hello world_____
+         * </pre>
+         * @param str The String to center.
+         * @param size The number of character to center the String expression. (default 0)
+         * @param separator The optional separator character use before and after the String to center. (default " ")
+         * @return the center String representation of the specified String value.
+         */
+        public static function center( str:String, size:uint=0 , separator:String=" " ):String 
+        {
+            var n:uint = str.length ;
+            if (size <= n)
+            {
+                return str ;
+            }
+            var m:int = Math.floor( ( size - n ) / 2 ) ;
+            return repeat(separator, m) + str + repeat(separator, size - n - m) ;
+        }
+        
         /**
          * Compares the two specified String objects.
          * @param o1 first string to compare with the second string.
@@ -681,6 +704,34 @@ package system
             
             return _padHelper( str, totalWidth, paddingChar, isRightPadded );
             }
+
+        /**
+         * Returns a new String value who contains the specified String characters repeated count times.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Strings ;
+         * 
+         * trace( Strings.repeat("hello", 0) ) ; // hello
+         * trace( Strings.repeat("hello", 3) ) ; // hellohellohello
+         * </pre>
+         * @return a new String value who contains the specified String characters repeated count times.
+         */
+        public static function repeat( str:String="" , count:uint=0 ):String
+        {
+            var result:String = "" ;
+            if ( count > 0 )
+            {
+                for( var i:uint = 0 ; i<count ; i++)
+                {
+                    result = result.concat(str) ;
+                }
+            }
+            else
+            {
+                result = str ;    
+            }
+            return  result ;
+        }
 
         /**
          * Determines whether a specified string is a prefix of the current instance. 
