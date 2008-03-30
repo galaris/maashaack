@@ -21,10 +21,9 @@
 
 */
 package system
-    {
-    import flash.utils.*;
-    
-    /* TODO: improve all that
+{
+
+	/* TODO: improve all that
     */
     public class Console
         {

@@ -52,7 +52,7 @@ package system
             {
             for( var member:String in config )
                 {
-                _config[member] = config[member]
+                _config[member] = config[member] ;
                 }
             }
         
