@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,30 +19,32 @@
 */
 
 package
-    {
-    import flash.display.Sprite;
+{
+	import flash.display.Sprite;
+	
+	import buRRRn.ASTUce.Runner;
+	import buRRRn.ASTUce.config;
+	import buRRRn.ASTUce.tests.AllTests;
+	import buRRRn.eden.AllTests;
+	import buRRRn.eden.info;
+	
+	import system.*;
+	import system.AllTests;    
 
-    public class ES4a_TestRunner extends Sprite
+	public class ES4a_TestRunner extends Sprite
         {
         
         public function ES4a_TestRunner()
             {
             
-            import system.*;
-            
             system.config.serializer.prettyPrinting = true;
             system.info( true, true );
             
-            import buRRRn.eden.info;
+
             buRRRn.eden.info( true );
             
             //tests
-            import buRRRn.ASTUce.tests.AllTests;
-            import system.AllTests;
-            import buRRRn.eden.AllTests;
-            
-            import buRRRn.ASTUce.Runner;
-            import buRRRn.ASTUce.config;
+
             buRRRn.ASTUce.config.showConstructorList = false;
             
             //testing ES4a core only
