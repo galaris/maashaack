@@ -17,7 +17,7 @@
   
   Contributor(s):
   
-  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
+  	- Marc Alcaraz <ekameleon@gmail.com>
 
 */
 package system
