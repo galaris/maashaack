@@ -134,6 +134,11 @@ package system.evaluators
             assertEquals( (78 * (96 + 3 + 45)), _ME.eval( "78 * (96 + 3 + 45)" ) );
             }
         
+        public function testEmpty():void
+            {
+            assertEquals( 0, _ME.eval( "" ) );
+            }
+        
         }
     }
 
