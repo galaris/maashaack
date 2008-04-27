@@ -16,17 +16,18 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  
-  	- Alcaraz Marc (aka eKameleon) <ekameleon@gmail.com> (2007-2008)
+  	- Marc Alcaraz <ekameleon@gmail.com>
 
 */
 package system
     {
     
-    import flash.system.ApplicationDomain ;
+    import flash.system.ApplicationDomain;
+    import flash.utils.describeType;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getQualifiedSuperclassName;
-    import flash.utils.describeType;
+    
+    import system.reflection.*;
     
 	/**
 	 * Provides a basic reflection mecanisms on the language.
@@ -198,6 +199,14 @@ package system
 			{
 			return _formatPath( getQualifiedSuperclassName( o ) ) ;
 			}
+        
+        /**
+        * Returns the type info
+        */
+        public static function getTypeInfo( o:* ):TypeInfo
+            {
+            return new _TypeInfo( o );
+            }
         
 		/**
 		 * Returns a boolean telling if the class exists from a string name.
