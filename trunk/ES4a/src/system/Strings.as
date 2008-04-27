@@ -491,8 +491,8 @@ package system
          * <pre class="prettyprint">
          * import system.Strings;
          * 
-         * Strings.indexOfAny("hello world", [2, "hello", 5]); // 0
-         * Strings.indexOfAny("Five = 5", [2, "hello", 5]); // 7
+         * Strings.indexOfAny("hello world", [2, "hello", 5]); // 1
+         * Strings.indexOfAny("Five = 5", [2, "hello", 5]); // 2
          * Strings.indexOfAny("actionscript is good", [2, "hello", 5]); // -1
          * </pre>
          * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
