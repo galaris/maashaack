@@ -1,4 +1,3 @@
-
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -17,15 +16,23 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-    - Zwetan Kjukov <zwetan@gmail.com>
-*/
+    
+     - Zwetan Kjukov <zwetan@gmail.com>
 
+*/
 package system.formatters
     {
     
+    /**
+     * Interface implemented by classes that can format a value in a specific string expression.
+     */
     public interface IFormatter
         {
         
+        /**
+         * Formats the specified value.
+         * @return the string representation of the formatted value. 
+         */
         function format( value:* = null ):String;
         
         }

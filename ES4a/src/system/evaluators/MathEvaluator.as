@@ -16,15 +16,17 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
 
+    - Marc ALCARAZ <ekameleon@gmail.com>
+
+*/
 package system.evaluators
     {
     
     import system.Strings;
     
     /**
-    * Evaluate mathematical string expressions.
+    * Evaluates mathematical string expressions.
     */
     public class MathEvaluator implements IEvaluator
         {
