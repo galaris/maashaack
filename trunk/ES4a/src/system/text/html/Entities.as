@@ -24,7 +24,7 @@
 package system.text.html
     {
     import flash.utils.Dictionary;
-        
+    
     /**
      * The HTML entities tool class.
      */
@@ -40,6 +40,8 @@ package system.text.html
          * @private
          */
         private static var _fastSearch:Dictionary = new Dictionary() ;
+        
+        public static var support_ISO_8859_15:Boolean = false;
         
         /**
          * Inserts a new Entity element in the entities definitions.
@@ -141,28 +143,22 @@ package system.text.html
             }
         
         //ASCII Entities
-        
         add( new Entity( "\"" , "quot" , 34 ) ) ; // quotation mark 
         add( new Entity(  "&" , "amp"  , 38 ) ) ; // ampersand
         add( new Entity( "\'" , "apos" , 39 ) ) ; // apostrophe
         add( new Entity(  "<" , "lt"   , 60 ) ) ; // less-than sign 
         add( new Entity(  ">" , "gt"   , 62 ) ) ; // greater-than sign  
-
-        //ISO 8859-15 Symbol Entities
-        
-        // FIXME add( new Entity(  "€" ,   "euro" , 8364 ) ) ; // euro sign ???
         
         //ISO 8859-1 Symbol Entities
-        
         add( new Entity(  " " ,   "nbsp" , 160 ) ) ; // non-breaking space 
         add( new Entity(  "¡" ,  "iexcl" , 161 ) ) ; // inverted exclamation mark 
         add( new Entity(  "¢" ,   "cent" , 162 ) ) ; // cent sign
         add( new Entity(  "£" ,  "pound" , 163 ) ) ; // pound sign
-        add( new Entity(  "¤" , "curren" , 164 ) ) ; // currency sign
+        
         add( new Entity(  "¥" ,    "yen" , 165 ) ) ; // yen sign
-        add( new Entity(  "¦" , "brvbar" , 166 ) ) ; // broken vertical bar
+        
         add( new Entity(  "§" ,   "sect" , 167 ) ) ; // section sign
-        add( new Entity(  "¨" ,    "uml" , 168 ) ) ; // spacing diaresis
+        
         add( new Entity(  "©" ,   "copy" , 169 ) ) ; // copyright sign 
         add( new Entity(  "ª" ,   "ordf" , 170 ) ) ; // feminine ordinal indicator
         add( new Entity(  "«" ,  "laquo" , 171 ) ) ; // angle quotation mark, left
@@ -174,23 +170,20 @@ package system.text.html
         add( new Entity(  "±" , "plusmn" , 177 ) ) ; // plus-or-minus sign
         add( new Entity(  "²" ,   "sup2" , 178 ) ) ; // superscript 2
         add( new Entity(  "³" ,   "sup3" , 179 ) ) ; // superscript 3 
-        add( new Entity(  "´" ,  "acute" , 180 ) ) ; // spacing acute
+        
         add( new Entity(  "µ" ,  "micro" , 181 ) ) ; // micro sign
         add( new Entity(  "¶" ,   "para" , 182 ) ) ; // paragraph sign
         add( new Entity(  "·" , "middot" , 183 ) ) ; // middle dot
-        add( new Entity(  "¸" ,  "cedil" , 184 ) ) ; // spacing cedilla
+        
         add( new Entity(  "¹" ,   "sup1" , 185 ) ) ; // superscript 1
         add( new Entity(  "º" ,   "ordm" , 186 ) ) ; // masculine ordinal indicator
         add( new Entity(  "»" ,  "raquo" , 187 ) ) ; // angle quotation mark, right
-        add( new Entity(  "¼" , "frac14" , 188 ) ) ; // fraction 1/4
-        add( new Entity(  "½" , "frac12" , 189 ) ) ; // fraction 1/2 
-        add( new Entity(  "¾" , "frac34" , 190 ) ) ; // fraction 3/4  
+          
         add( new Entity(  "¿" , "iquest" , 191 ) ) ; // inverted question mark  
         add( new Entity(  "×" , "times"  , 215 ) ) ; // multiplication sign
         add( new Entity(  "÷" , "divide" , 247 ) ) ; // division sign 
          
         //ISO 8859-1 Character Entities
-
         add( new Entity(  "À" , "Agrave" , 192 ) ) ; // capital a , grave accent
         add( new Entity(  "Á" , "Aacute" , 193 ) ) ; // capital a , acute accent
         add( new Entity(  "Â" , "Acirc"  , 194 ) ) ; // capital a , circumflex accent
@@ -253,6 +246,40 @@ package system.text.html
         add( new Entity(  "ý" , "yacute" , 253 ) ) ; // small y, acute accent
         add( new Entity(  "þ" ,  "thorn" , 254 ) ) ; // small thorn, Icelandic
         add( new Entity(  "ÿ" ,   "yuml" , 255 ) ) ; // small y, umlaut mark
+        
+        // FIXME add( new Entity(  "€" ,   "euro" , 8364 ) ) ; // euro sign ???
+        
+        /* ISO 8859-15 Symbol Entities
+           see http://fr.wikipedia.org/wiki/ISO_8859-15
+           
+           when the option support_ISO_8859_15 is true
+           the following table will be used
+           
+           Position 0xA4 0xA6 0xA8 0xB4 0xB8 0xBC 0xBD 0xBE
+           8859-1      ¤    ¦    ¨    ´    ¸    ¼    ½    ¾
+           8859-15     €    Š    š    Ž    ž    Œ    œ    Ÿ
+        */
+        if( Entities.support_ISO_8859_15 )
+            {
+            /* TODO:
+               either we can switch
+               but in theory we could use both 8859-1 and 8859-15
+               as we have only findByChar and findByName methods
+               
+               need to be unit tested to be 100% sure
+            */
+            }
+        else
+            {
+            add( new Entity(  "¤" , "curren" , 164 ) ) ; // currency sign
+            add( new Entity(  "¦" , "brvbar" , 166 ) ) ; // broken vertical bar
+            add( new Entity(  "¨" ,    "uml" , 168 ) ) ; // spacing diaresis
+            add( new Entity(  "´" ,  "acute" , 180 ) ) ; // spacing acute
+            add( new Entity(  "¸" ,  "cedil" , 184 ) ) ; // spacing cedilla
+            add( new Entity(  "¼" , "frac14" , 188 ) ) ; // fraction 1/4
+            add( new Entity(  "½" , "frac12" , 189 ) ) ; // fraction 1/2 
+            add( new Entity(  "¾" , "frac34" , 190 ) ) ; // fraction 3/4
+            }
         
         }
 
