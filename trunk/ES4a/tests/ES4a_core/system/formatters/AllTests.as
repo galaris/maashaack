@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -12,35 +11,38 @@
   The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
   
   The Initial Developer of the Original Code is
-  Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Marc Alcaraz <ekameleon@gmail.com>.
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
+  
+    - Zwetan Kjukov <zwetan@gmail.com>
 
-package system
-    {
-    
-    public class SuperReflectMe
+*/
+package system.formatters  
+{
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;    
+
+    /**
+	 * This class launch all tests.
+	 * @author eKameleon
+	 */
+	public class AllTests
+	{
+		
+        /**
+         * Creates the Test list.
+         */		
+        public static function suite():ITest
         {
-        
-        public function SuperReflectMe()
-            {
-            
-            }
-        
-        static public function X():void { }
-        
-        static public function Y():void { }
-        
-        static public function Z():void { }
-        
-        public function A():void { }
-        
-        public function B():void { }
-                
-        public function C():void { }        
+            var suite:TestSuite = new TestSuite( "system.formatters" );
+
+            suite.addTestSuite( IFormatterTest ) ;
+
+            return suite;
         }
-    
-    }
+	}
+}
+

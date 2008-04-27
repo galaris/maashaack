@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -20,13 +20,12 @@
 */
 
 package system
-    {
-    import buRRRn.ASTUce.framework.*;
-    
-    import system.ISerializable;
-    import system.Strings;
+{
     import buRRRn.eden.eden;
     
+    import system.ISerializable;
+    import system.Strings;    
+
     public class Serializable implements ISerializable
         {
         public var a:String;

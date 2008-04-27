@@ -17,16 +17,21 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-*/
 
+    - Marc ALCARAZ <ekameleon@gmail.com>
+
+*/
 package system
     {
     import buRRRn.ASTUce.framework.*;
     
     import system.evaluators.AllTests;
-    
-    /* TestSuite that runs all the ES4a tests
-    */
+    import system.formatters.AllTests;
+    import system.numeric.AllTests;
+        
+    /**
+      * TestSuite that runs all the ES4a tests
+      */
     public class AllTests
         {
         
@@ -50,7 +55,9 @@ package system
             
             //evaluators
             suite.addTest( system.evaluators.AllTests.suite() );
-            
+            suite.addTest( system.formatters.AllTests.suite() );
+            suite.addTest( system.numeric.AllTests.suite() );
+                        
             return suite;
             }
         
