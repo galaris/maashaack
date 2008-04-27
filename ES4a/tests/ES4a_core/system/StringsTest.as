@@ -162,19 +162,33 @@ package system
         
         public function testIndexOfAny():void
             {
-            assertTrue( false, "not implemented" );
+            assertEquals( 1, Strings.indexOfAny("hello world", [2, "hello", 5]) );
+            assertEquals( 2, Strings.indexOfAny("Five = 5", [2, "hello", 5]) );
+            assertEquals( -1, Strings.indexOfAny("actionscript is good", [2, "hello", 5]) );
+            assertEquals( 1, Strings.indexOfAny("hello world", ["2", "hello", "5"]) );
+            assertEquals( 2, Strings.indexOfAny("Five = 5", ["2", "hello", "5"]) );
+            assertEquals( 1, Strings.indexOfAny("hello world", [2, "hello", 5], -5) );
+            assertEquals( 1, Strings.indexOfAny("hello world", [2, "hello", 5], 1) );
+            assertEquals( 0, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 0) );
+            assertEquals( 1, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 1) );
+            assertEquals( 2, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 2) );
+            assertEquals( 3, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 3) );
+            assertEquals( -1, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 2) );
+            assertEquals( 3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 3) );
+            assertEquals( 3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 3, 3) );
             }
         
         public function testLastIndexOfAny():void
             {
-            assertTrue( false, "not implemented" );
+            assertEquals( 0, Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]) );
+            assertEquals( 19, Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["2", "hello", "5"]) );
             }
-        
+        /*
         public function testInsert():void
             {
             assertTrue( false, "not implemented" );
             }
-        
+        */
         }
     
     }
