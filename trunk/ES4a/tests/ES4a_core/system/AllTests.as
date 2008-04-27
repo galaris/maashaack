@@ -44,6 +44,8 @@ package system
             {
             var suite:TestSuite = new TestSuite( "ES4a core tests" );
             
+            /* core framework */
+            
             //core2
             suite.addTestSuite( StringsTest );
             
@@ -53,9 +55,15 @@ package system
             suite.addTestSuite( EqualityTest );
             suite.addTestSuite( SerializationTest );
             
+            /* packages */
+            
             //evaluators
             suite.addTest( system.evaluators.AllTests.suite() );
+            
+            //formatters
             suite.addTest( system.formatters.AllTests.suite() );
+            
+            //numeric
             suite.addTest( system.numeric.AllTests.suite() );
                         
             return suite;
