@@ -23,6 +23,8 @@ package system
     {
     import buRRRn.ASTUce.framework.*;
     
+    import system.evaluators.AllTests;
+    
     /* TestSuite that runs all the ES4a tests
     */
     public class AllTests
@@ -45,6 +47,9 @@ package system
             suite.addTestSuite( ReflectionTest );
             suite.addTestSuite( EqualityTest );
             suite.addTestSuite( SerializationTest );
+            
+            //evaluators
+            suite.addTest( system.evaluators.AllTests.suite() );
             
             return suite;
             }
