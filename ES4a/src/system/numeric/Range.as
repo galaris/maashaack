@@ -171,7 +171,7 @@ package system.numeric
          * @return The expanded range.
          * @throws Error if the range argument is <code class="prettyprint">null</code>
          */
-        public static function expand(range:Range, lowerMargin:Number, upperMargin:Number):Range
+        public static function expand(range:Range, lowerMargin:Number=1, upperMargin:Number=1):Range
             {
             if (range == null)
                 {
@@ -238,7 +238,7 @@ package system.numeric
          */
         public function overlap(r:Range):Boolean 
             {
-            return max > r.min && r.max > min ;
+            return max >= r.min && r.max >= min ;
             }
         
         /**
