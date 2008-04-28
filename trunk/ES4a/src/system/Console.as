@@ -23,15 +23,33 @@
 package system
 {
 
-	/* TODO: improve all that
-    */
+	// TODO: improve all that
+
+	/**
+	 * The Console class. 
+     */  
     public class Console
         {
+        
+        /**
+         * @private
+         */
         private static var _buffer:String  = "";
         
+        /**
+         * @private
+         */        
         private static var _reader:* = null;
+        
+        /**
+         * @private
+         */
         private static var _writer:* = trace;
         
+        /**
+         * Formats the specific messages.
+         * @param messages The Array representation of all message to format.
+         */
         internal static function formatMessage( messages:Array ):String
             {
             if( messages.length == 0 )
@@ -50,16 +68,25 @@ package system
             return Strings.format.apply( Strings, messages );
             }
         
+        /**
+         * Sets the reader object of thie console.
+         */
         public static function set reader( reader:* ):void
             {
             _reader = reader;
             }
         
+        /**
+         * Sets the writer object of thie console.
+         */
         public static function set writer( writer:* ):void
             {
             _writer = writer;
             }
         
+        /**
+         * Returns an empty string.
+         */        
         public static function read():String
             {
             if( _reader === null )
@@ -90,6 +117,9 @@ package system
             _buffer += formatMessage( messages );
             }
         
+        /**
+         * The readLine method.
+         */
         public static function writeLine( ...messages ):void
             {
             var msg:String = formatMessage( messages );

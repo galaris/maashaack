@@ -40,6 +40,7 @@ package system.numeric
             var suite:TestSuite = new TestSuite( "system.numeric" );
 
             suite.addTestSuite( MathematicsTest ) ;
+            suite.addTestSuite( RangeTest ) ;
 
             return suite;
         }
