@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,22 +16,155 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
-    - Marc ALCARAZ <ekameleon@gmail.com>
+  
+    - Marc Alcaraz <ekameleon@gmail.com>
 
 */
 package system.evaluators
-    {
-    
-    import system.Strings;
-    
+{
+    import system.Strings;    
+
     /**
-    * Evaluates mathematical string expressions.
-    */
+     * Evaluates mathematical string expressions.
+     * <p><b>The MathEvaluator implementation</b>, support all of the following :</p>
+     * <p><b>Decimal, hexadecimal, octal notation :</b></p>
+     * <pre class="prettyprint">
+     * 1 + 1
+     * 0.5 + 0.7
+     * 0xff + 0xbb
+     * 010 + 5
+     * etc.
+     * </pre>
+     * <p>operators : </p>
+     * <pre class="prettyprint">
+     * % / *
+     * + -
+     * << >> >>>
+     * & ^ | ~
+     * </pre>
+     * <p>functions :</p>
+     * <pre class="prettyprint">
+     * abs acos asin atan atan2
+     * ceil cos
+     * exp
+     * floor
+     * log
+     * max min
+     * pow
+     * random round
+     * sin sqrt
+     * tan
+     * </pre>
+     * Those functions replicate exactly what you can find in the Math object.
+     * <p>operators priority : from higher to lower priority</p>
+     * <p><b>Example :</b> multiplication is performed before addition</p>
+     * <pre class="prettyprint">
+     * (14) fcn(...) (...)
+     * </pre>
+     * <p>function call and expression grouping</p>
+     * <p><b>example :</b> <code class="prettyprint">sin(4) + 25</code></p>
+     * <p>sin(4) will be evaluated first</p>
+     * <p><b>example :</b> <code class="prettyprint">5 * (4 + 0.5)</code></p>
+     * <p>the expression within the parenthesis will occurs first</p>
+     * <pre class="prettyprint">
+     * (13) ~ + - 
+     * </pre>
+     * <p>unary operators</p>
+     * <p>ex: +5 - +5 translate to (+5) - (+5)</p>
+     * <p>ex: -5 + -5 translate to (-5) + (-5)</p>
+     * <p>ex: ~3 - 7  translate to (~3) - 7</p>
+     * <p>any unary operators will be evaluated first</p>
+     * <pre class="prettyprint">
+     * (12) * / %
+     * </pre>
+     * <p><b>multiplication, division, modulo division</p></b>
+     * <p>ex: 5 * 3 + 1 translate to (5 * 3) + 1</p>
+     * <p>ex: 2 % 8 - 4 translate to (2 % 8) - 4</p>
+     * <pre class="prettyprint">
+     * (11) + -
+     * </pre>
+     * <p><b>addition, subtraction</b></p>
+     * <pre class="prettyprint">
+     * (10) << >> <<<
+     * </pre>
+     * <p><b>bit shifting</b></p>
+     * <pre class="prettyprint">
+     * (7)  &
+     * </pre>
+     * <p><b>bitwise AND</b></p>
+     * <pre class="prettyprint">
+     * (6)  ^
+     * </pre>
+     * <p><b>bitwise XOR</b></p>
+     * <pre class="prettyprint">
+     * (5)  |
+     * </pre>
+     * bitwise OR
+     *       
+     *     - context
+     *       when instanciating the MathEvaluator you can pass a context
+     *       containing either variables or functions
+     *       
+     *       ex:
+     *       var me:MathEvaluator = new MathEvaluator( {x:100, test:function(a:Number):Number {return a*a;} );
+     *       trace( me.eval( "test(100) + 1" ) ); //return 10001
+     *       
+     *       but there are some limitations
+     *        * your variable or function name must me lowercase
+     *        * your variable or function name must contains only letter from a to z
+     *         and can end with only one digit
+     *         ex:
+     *         test()  //OK
+     *         test2() //OK
+     *         2test() //BAD
+     *         te2st() //BAD
+     *         etc.
+     *       * your function can only have one argument
+     *       * your function name can not override default math functions as cos, sin, etc.
+     *  
+     *   
+     *   we do not support logical ( || && !)
+     *  or assignement operators (= == += etc.)
+     *   
+     *   reasons:
+     *  * logical operators deal with boolean, here we want to deal only with numbers and math expression
+     *  * we do not support variables nor variable assignation
+     *  
+     *  
+     *  Parenthesis are used to alter the order of evaluation determined by operator precedence.
+     *  Operators with the same priority are evaluated left to right.
+     *  
+     *  how the parser work:
+     *   1) we first filter some multiple char operators to single chars
+     *    ex: << translate to «
+     *    and other filtering
+     *    
+     *   2) then we parse char by char (top to bottom parsing)
+     *    to generate tokens in postfix order (reverse polish notation)
+     *    the expression 5 + 4 become [5,4,+]
+     *    but while doing that we also do a lot of other things
+     *    - evaluate function call
+     *    - remove space chars
+     *    - re-order tokens by operators priority
+     *    - evaluate  hexadecimal notation to decimal
+     *    - etc.
+     *    
+     *  3) finally we iterate trough our tokens
+     *    and evaluate them by operators
+     *    ex: [5,4,+]
+     *    we find the op +, then addition the 2 values
+     *    etc.
+     *    till the end of the tokens list
+     */
     public class MathEvaluator implements IEvaluator
         {
+        	
         use namespace mathparser;
         
+        /**
+         * Creates a new MathsEvaluator instance.
+         * @param context When instanciating the MathEvaluator you can pass a context containing either variables or functions.
+         */
         public function MathEvaluator( context:Object = null )
             {
             if( context != null )
@@ -39,170 +172,96 @@ package system.evaluators
                 _context = context;
                 }
             }
-
+        
+        /**
+         * Evaluates the specified object.
+         */
         public function eval( o:* ):*
             {
             return parse( o );
             }
-        
-        
-        /* MathParser implementation */
-        
-        /* notes:
-           we support all of the following
-           
-           - decimal, hexadecimal, octal notation:
-             1 + 1
-             0.5 + 0.7
-             0xff + 0xbb
-             010 + 5
-             etc.
-             
-           - operators:
-             * / %
-             + -
-             << >> >>>
-             & ^ | ~
-           
-           - functions:
-             abs acos asin atan atan2
-             ceil cos
-             exp
-             floor
-             log
-             max min
-             pow
-             random round
-             sin sqrt
-             tan
-             
-             those functions replicate exactly what you can find
-             in the Math object.
-             
-           - operators priority:
-             from higher to lower priority
-             ex: multiplication is performed before addition
-             
-             (14) fcn(...) (...)
-                  function call and expression grouping
-             
-             ex: sin(4) + 25
-             sin(4) will be evaluated first
-             
-             ex: 5 * (4 + 0.5)
-             the expression within the parenthesis will occurs first
-             
-             (13) ~ + -
-                  unary operators
-             
-             ex: +5 - +5 translate to (+5) - (+5)
-             ex: -5 + -5 translate to (-5) + (-5)
-             ex: ~3 - 7  translate to (~3) - 7
-             any unary operators will be evaluated first
-             
-             (12) * / %
-                  multiplication, division, modulo division
-             
-             ex: 5 * 3 + 1 translate to (5 * 3) + 1
-             ex: 2 % 8 - 4 translate to (2 % 8) - 4
-             
-             (11) + -
-                  addition, subtraction
-             
-             (10) << >> <<<
-                  bit shifting
-             
-             (7)  &
-                  bitwise AND
-             
-             (6)  ^
-                  bitwise XOR
-             
-             (5)  |
-                  bitwise OR
-             
-           - context
-             when instanciating the MathEvaluator you can pass a context
-             containing either variables or functions
-             
-             ex:
-             var me:MathEvaluator = new MathEvaluator( {x:100, test:function(a:Number):Number {return a*a;} );
-             trace( me.eval( "test(100) + 1" ) ); //return 10001
-             
-             but there are some limitations
-              * your variable or function name must me lowercase
-              * your variable or function name must contains only letter from a to z
-                and can end with only one digit
-                ex:
-                test()  //OK
-                test2() //OK
-                2test() //BAD
-                te2st() //BAD
-                etc.
-              * your function can only have one argument
-              * your function name can not override default math functions as cos, sin, etc.
-        
-        
-        we do not support logical ( || && !)
-        or assignement operators (= == += etc.)
-        
-        reasons:
-         * logical operators deal with boolean, here we want to deal only with numbers and math expression
-         * we do not support variables nor variable assignation
-        
-        
-        Parenthesis are used to alter the order of evaluation determined by operator precedence.
-        Operators with the same priority are evaluated left to right.
-        
-        how the parser work:
-        1) we first filter some multiple char operators to single chars
-           ex: << translate to «
-           and other filtering
-           
-        2) then we parse char by char (top to bottom parsing)
-           to generate tokens in postfix order (reverse polish notation)
-           the expression 5 + 4 become [5,4,+]
-           but while doing that we also do a lot of other things
-           - evaluate function call
-           - remove space chars
-           - re-order tokens by operators priority
-           - evaluate  hexadecimal notation to decimal
-           - etc.
-           
-        3) finally we iterate trough our tokens
-           and evaluate them by operators
-           ex: [5,4,+]
-           we find the op +, then addition the 2 values
-           etc.
-           till the end of the tokens list
-        
-        */
-        
+                
+        /**
+         * @private
+         */
         private namespace mathparser;
-        private var _value:Number = 0;
+        
+        /**
+         * @private
+         */
         private var _context:Object = {};
         
+        /**
+         * The max hexadecimal value.
+         */
         mathparser const maxHexValue:Number = 0xFFFFFF;
         
+        /**
+         * The expression value.
+         */
         mathparser var expression:String;
+        
+        /**
+         * The current position.
+         */
         mathparser var currentPos:uint;
+        
+        /**
+         * The Array representation of the tokens of this evaluator.
+         */
         mathparser var tokens:Array;
         
+        /**
+         * Adds the specified value to the last token.
+         */
+        mathparser function addToLastToken( value:String ):void
+            {
+            tokens[ tokens.length-1 ] += value;
+            }          
+        
+        /**
+         * Adds the specified value to the next token.
+         */
+        mathparser function addToNextToken( value:String ):void
+            {
+            tokens.push( value );
+            }
+                
+        /**
+         * Indicates if the passed-in value is a alpha character.
+         */
+        mathparser function isAlpha( c:String ):Boolean
+            {
+            return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z"));
+            }        
+        
+        /**
+         * Indicates if the passed-in string value is a digit.
+         */
         mathparser function isDigit( c:String ):Boolean
             {
             return ("0" <= c) && (c <= "9");
             }
-        
+
+        /**
+         * Indicates if the passed-in string value is a hexadecimal digit.
+         */
         mathparser function isHexDigit( c:String ):Boolean
             {
             return isDigit( c ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f"));
             }
         
+        /**
+         * Indicates if the passed-in string value is a octal digit.
+         */
         mathparser function isOctalDigit( c:String ):Boolean
             {
             return ("0" <= c) && (c <= "7");
             }
-        
+       
+        /**
+         * Indicates if the passed-in string value is a operator digit.
+         */
         mathparser function isOperator( c:String ):Boolean
             {
             switch( c )
@@ -219,16 +278,18 @@ package system.evaluators
                 }
             }
         
-        mathparser function isAlpha( c:String ):Boolean
-            {
-            return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z"));
-            }
-        
+        /**
+         * Indicates if has more char.
+         */
         mathparser function hasMoreChar():Boolean
             {
             return currentPos < expression.length;
             }
         
+        /**
+         * Returns the char with the specified position.
+         * @return the char with the specified position.
+         */
         mathparser function getChar( pos:int = -1 ):String
             {
             if( pos < 0 )
@@ -239,27 +300,29 @@ package system.evaluators
             return expression.charAt( pos );
             }
         
+        /**
+         * Returns the next char.
+         * @return the next char.
+         */
         mathparser function getNextChar():String
             {
             currentPos++;
             return getChar();
             }
-        
-        mathparser function addToNextToken( value:String ):void
-            {
-            tokens.push( value );
-            }
-        
-        mathparser function addToLastToken( value:String ):void
-            {
-            tokens[ tokens.length-1 ] += value;
-            }
-        
+
+        /**
+         * Returns the last token string.
+         * @return the last token string.
+         */
         mathparser function getLastToken():String
             {
             return tokens[ tokens.length-1 ];
             }
         
+        /**
+         * Returns the value of the specified numeric expression.
+         * @return the value of the specified numeric expression.
+         */
         mathparser function getValue( num:String ):Number
             {
             var ch0:String;
@@ -308,6 +371,12 @@ package system.evaluators
             
             }
         
+        /**
+         * Returns The string function value representation.
+         * @param name The name of the function.
+         * @param expressions The arguments as math expression.
+         * @return The result string of the evaluated function.
+         */
         mathparser function getFunctionValue( name:String, expressions:Array ):String
             {
             var args:Array = [];
@@ -405,6 +474,10 @@ package system.evaluators
             return "";
             }
         
+        /**
+         * Returns the variable value with the internal context of the evaluator.
+         * @return the variable value with the internal context of the evaluator.
+         */
         mathparser function getVariableValue( name:String ):String
             {
             if( _context[ name ] )
@@ -415,6 +488,10 @@ package system.evaluators
             return "";
             }
         
+        /**
+         * Filters and returns special char passed-in argument.
+         * @return special char passed-in argument.
+         */
         mathparser function filterSpecialChars( expression:String ):String
             {
             /* note:
@@ -443,6 +520,10 @@ package system.evaluators
             return expression;
             }
         
+        /**
+         * Returns the array representation of all elements in a parenthesis block.
+         * @return the array representation of all elements in a parenthesis block.
+         */
         mathparser function getParenthesisBlock():Array
             {
             var startNode:uint = 0;
@@ -489,6 +570,10 @@ package system.evaluators
             return expressions;
             }
         
+        /**
+         * Returns the operator priority value.
+         * @return the operator priority value.
+         */
         mathparser function getOperatorPriority( op:String ):uint
             {
             /* note:
@@ -526,6 +611,9 @@ package system.evaluators
                 }
             }
         
+        /**
+         * The toPostfixNotation method.
+         */
         mathparser function toPostfixNotation():void
             {
             var ch:String;
@@ -806,6 +894,9 @@ package system.evaluators
             //trace( "RPN: ["+this.tokens+"]" );
             }
         
+        /**
+         * Launchs the evaluation process.
+         */
         mathparser function evaluate():Number
             {
             var op:String;
@@ -892,13 +983,9 @@ package system.evaluators
                 }
             }
         
-        mathparser function reset():void
-            {
-            expression = "";
-            currentPos =  0;
-            tokens     = [];
-            }
-        
+        /**
+         * Parses the specified expression.
+         */
         mathparser function parse( expression:String ):Number
             {
             reset();
@@ -907,6 +994,17 @@ package system.evaluators
             return evaluate();
             }
         
-        }
+        /**
+         * Resets the evaluator.
+         */
+        mathparser function reset():void
+            {
+            expression = "";
+            currentPos =  0;
+            tokens     = [];
+            }
+        
+        }    
+
     }
 

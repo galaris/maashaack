@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -22,13 +22,13 @@
 
 */
 package system
-    {
+{
     import buRRRn.ASTUce.framework.*;
     
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
-    import system.numeric.AllTests;
-        
+    import system.numeric.AllTests;    
+
     /**
       * TestSuite that runs all the ES4a tests
       */
