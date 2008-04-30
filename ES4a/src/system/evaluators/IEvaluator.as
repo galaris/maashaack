@@ -19,22 +19,21 @@
     - Zwetan Kjukov <zwetan@gmail.com>
 */
 package system.evaluators 
-    {
-    
+{
+
     /**
      * An Evaluator is a class that can interpret an object to another object.
      * <p>It's not necessary a parser, but the most common cases would be a string being evaluated to an object structure.</p>
      * <p><b>Note:</b> eval always take one and only one argument, if you need to configure the evaluator pass different arguments in the constructor.</p>
      */
-	public interface IEvaluator
-        {
+	public interface IEvaluator 
+	{
 	
 		/**
 		 * Evaluates the specified object.
 		 */
-		function eval( o:* ):*;
-        
-        }
-    
-    }
+		function eval( o:* ):* ;
 
+	}
+
+}

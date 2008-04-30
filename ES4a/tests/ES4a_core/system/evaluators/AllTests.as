@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -20,9 +20,9 @@
 */
 
 package system.evaluators
-    {
-    import buRRRn.ASTUce.framework.*;
-    
+{
+    import buRRRn.ASTUce.framework.*;    
+
     public class AllTests
         {
         
@@ -34,7 +34,8 @@ package system.evaluators
         static public function suite():ITest
             {
             var suite:TestSuite = new TestSuite( "Evaluators tests" );
-            
+
+            suite.addTestSuite( DateEvaluatorTest );            
             suite.addTestSuite( MathEvaluatorTest );
             
             return suite;

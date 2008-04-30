@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -69,7 +69,7 @@ package system.evaluators
         
         public function testContextCall():void
             {
-            var ctx:Object = {x:100, test:function(a:Number):Number {return a*a;}, test2:function(a:Number):Number {return a*a*2;} }
+            var ctx:Object = {x:100, test:function(a:Number):Number {return a*a;}, test2:function(a:Number):Number {return a*a*2;} } ;
             assertEquals( (ctx.test( 10 ) ) , _ME2.eval( "test( 10 )" ) );
             assertEquals( (100 + ctx.x ) , _ME2.eval( "100 + x" ) );
             assertEquals( (ctx.test( ctx.x ) ) , _ME2.eval( "test(x)" ) );

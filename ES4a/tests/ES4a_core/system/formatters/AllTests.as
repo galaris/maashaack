@@ -37,8 +37,9 @@ package system.formatters
          */		
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite( "system.formatters" );
+            var suite:TestSuite = new TestSuite( "Formatters tests" );
 
+            suite.addTestSuite( DateFormatterTest ) ;
             suite.addTestSuite( IFormatterTest ) ;
 
             return suite;
