@@ -34,27 +34,17 @@ package system.evaluators
      * 
      * var evaluator:DateEvaluator = new DateEvaluator() ;
      * 
-     * evaluator.pattern = "yyyy DDDD d MMMM - hh 'h' nn 'mn' ss 's'" ;
-     * var result:String = evaluator.format() ;
-     * 
-     * trace("evaluator.pattern:" + evaluator.pattern + ", result:" + result) ;
-     * 
-     * trace("----") ;
-     * 
      * evaluator.pattern = "DDDD d MMMM yyyy" ;
-     * var result:String = evaluator.format(new Date(2005, 10, 22)) ;
-     * trace("evaluator.pattern:" + evaluator.pattern + ", result:" + result) ;
-     * 
-     * trace("----") ;
+     * trace( evaluator.eval( new Date(2008,1,21,10,15,0,0) ) ) ;
      * 
      * evaluator.pattern = "hh 'h' nn 'mn' ss 's' tt" ;
-     * trace( evaluator.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s am
+     * trace( evaluator.eval( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s am
      * 
      * evaluator.pattern = "hh 'h' nn 'mn' ss 's' t" ;
-     * trace( evaluator.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s a
+     * trace( evaluator.eval( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s a
      * 
      * evaluator.pattern = "hh 'h' nn 'mn' ss 's' TT" ; // capitalize the pm expression.
-     * trace( evaluator.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
+     * trace( evaluator.eval( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
      * </pre>
      */
     public class DateEvaluator implements IEvaluator 

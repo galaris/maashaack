@@ -37,23 +37,13 @@ package system.evaluators
      * </pre>
      * <p>operators : </p>
      * <pre class="prettyprint">
-     * % / *
-     * + -
-     * << >> >>>
-     * & ^ | ~
+     * % / &#8727; + - << >> >>> & ^ | ~
      * </pre>
      * <p>functions :</p>
      * <pre class="prettyprint">
-     * abs acos asin atan atan2
-     * ceil cos
-     * exp
-     * floor
-     * log
-     * max min
-     * pow
-     * random round
-     * sin sqrt
-     * tan
+     * abs acos asin atan atan2 ceil cos exp
+     * floor log max min pow random round
+     * sin sqrt tan 
      * </pre>
      * Those functions replicate exactly what you can find in the Math object.
      * <p>operators priority : from higher to lower priority</p>
@@ -64,21 +54,21 @@ package system.evaluators
      * <p>function call and expression grouping</p>
      * <p><b>example :</b> <code class="prettyprint">sin(4) + 25</code></p>
      * <p>sin(4) will be evaluated first</p>
-     * <p><b>example :</b> <code class="prettyprint">5 * (4 + 0.5)</code></p>
+     * <p><b>example :</b> <code class="prettyprint">5 &#8727; (4 + 0.5)</code></p>
      * <p>the expression within the parenthesis will occurs first</p>
      * <pre class="prettyprint">
      * (13) ~ + - 
      * </pre>
      * <p>unary operators</p>
-     * <p>ex: +5 - +5 translate to (+5) - (+5)</p>
-     * <p>ex: -5 + -5 translate to (-5) + (-5)</p>
-     * <p>ex: ~3 - 7  translate to (~3) - 7</p>
+     * <p>ex: <code class="prettyprint">+5 - +5</code> translate to <code class="prettyprint">(+5) - (+5)</code></p>
+     * <p>ex: <code class="prettyprint">-5 + -5</code> translate to <code class="prettyprint">(-5) + (-5)</code></p>
+     * <p>ex: <code class="prettyprint">~3 - 7</code>  translate to <code class="prettyprint">(~3) - 7</code></p>
      * <p>any unary operators will be evaluated first</p>
      * <pre class="prettyprint">
-     * (12) * / %
+     * (12) &#8727; / %
      * </pre>
      * <p><b>multiplication, division, modulo division</p></b>
-     * <p>ex: 5 * 3 + 1 translate to (5 * 3) + 1</p>
+     * <p>ex: 5 &#8727; 3 + 1 translate to (5 &#8727; 3) + 1</p>
      * <p>ex: 2 % 8 - 4 translate to (2 % 8) - 4</p>
      * <pre class="prettyprint">
      * (11) + -
@@ -99,62 +89,47 @@ package system.evaluators
      * <pre class="prettyprint">
      * (5)  |
      * </pre>
-     * bitwise OR
-     *       
-     *     - context
-     *       when instanciating the MathEvaluator you can pass a context
-     *       containing either variables or functions
-     *       
-     *       ex:
-     *       var me:MathEvaluator = new MathEvaluator( {x:100, test:function(a:Number):Number {return a*a;} );
-     *       trace( me.eval( "test(100) + 1" ) ); //return 10001
-     *       
-     *       but there are some limitations
-     *        * your variable or function name must me lowercase
-     *        * your variable or function name must contains only letter from a to z
-     *         and can end with only one digit
-     *         ex:
-     *         test()  //OK
-     *         test2() //OK
-     *         2test() //BAD
-     *         te2st() //BAD
-     *         etc.
-     *       * your function can only have one argument
-     *       * your function name can not override default math functions as cos, sin, etc.
-     *  
-     *   
-     *   we do not support logical ( || && !)
-     *  or assignement operators (= == += etc.)
-     *   
-     *   reasons:
-     *  * logical operators deal with boolean, here we want to deal only with numbers and math expression
-     *  * we do not support variables nor variable assignation
-     *  
-     *  
-     *  Parenthesis are used to alter the order of evaluation determined by operator precedence.
-     *  Operators with the same priority are evaluated left to right.
-     *  
-     *  how the parser work:
-     *   1) we first filter some multiple char operators to single chars
-     *    ex: << translate to «
-     *    and other filtering
-     *    
-     *   2) then we parse char by char (top to bottom parsing)
-     *    to generate tokens in postfix order (reverse polish notation)
-     *    the expression 5 + 4 become [5,4,+]
-     *    but while doing that we also do a lot of other things
-     *    - evaluate function call
-     *    - remove space chars
-     *    - re-order tokens by operators priority
-     *    - evaluate  hexadecimal notation to decimal
-     *    - etc.
-     *    
-     *  3) finally we iterate trough our tokens
-     *    and evaluate them by operators
-     *    ex: [5,4,+]
-     *    we find the op +, then addition the 2 values
-     *    etc.
-     *    till the end of the tokens list
+     * <p><b> bitwise OR</b></p>
+     * <p>context</p>
+     * <p>When instanciating the MathEvaluator you can pass a context containing either variables or functions</p>
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * var me:MathEvaluator = new MathEvaluator( {x:100, test:function(a:Number):Number {return a*a;} );
+     * trace( me.eval( "test(100) + 1" ) ); //return 10001
+     * </pre>
+     * <p>but there are some limitations</p>
+     * <li>your variable or function name must me lowercase</li>
+     * <li>your variable or function name must contains only letter from a to z and can end with only one digit</li>
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * test()  //OK
+     * test2() //OK
+     * 2test() //BAD
+     * te2st() //BAD
+     * etc.
+     * </pre>
+     * <li>your function can only have one argument<\li>
+     * <li>your function name can not override default math functions as cos, sin, etc.<\li>
+     * <p>we do not support logical ( || && !) or assignement operators (= == += etc.)</p>
+     * <p><b>reasons:</b></p>
+     * <p>logical operators deal with boolean, here we want to deal only with numbers and math expression we do not support variables nor variable assignation</p>
+     * <p>Parenthesis are used to alter the order of evaluation determined by operator precedence.</p>
+     * <p>Operators with the same priority are evaluated left to right.</p>
+     * <p><b>How the parser work :</b></p>
+     * <p><b>1)</b> we first filter some multiple char operators to single chars</p>
+     * <p><b>ex:</b> << translate to « and other filtering</p>
+     * <p><b>2)</b> then we parse char by char (top to bottom parsing) to generate tokens in postfix order(reverse polish notation)</p>
+     * <p>the expression 5 + 4 become <code class="prettyprint">[5,4,+]</code> but while doing that we also do a lot of other things</p>
+     * <li>evaluate function call</li>
+     * <li>remove space chars</li>
+     * <li>re-order tokens by operators priority</li>
+     * <li>evaluate  hexadecimal notation to decimal</li>
+     * <li>etc.</li>
+     * <p>3) finally we iterate trough our tokens and evaluate them by operators</p>
+     * <p><b>ex:</b> [5,4,+]</p>
+     * <p>we find the op +, then addition the 2 values, etc.</p>
+     * <p>till the end of the tokens list</p>
+     * </p>
      */
     public class MathEvaluator implements IEvaluator
         {
