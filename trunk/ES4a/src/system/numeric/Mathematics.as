@@ -16,14 +16,13 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  
     - Zwetan Kjukov <zwetan@gmail.com>
 
 */
 package system.numeric
-{
+    {
     import flash.errors.IllegalOperationError;        
-
+    
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
      */ 
@@ -48,7 +47,7 @@ package system.numeric
          * @return the ceil value of a number by a count of floating points.
          */
         public static function ceil( n:Number, floatCount:Number ):Number 
-        {
+            {
             if (isNaN(n)) 
                 {
                 return NaN ;
@@ -60,7 +59,7 @@ package system.numeric
                 r *= 10 ;
                 }
             return Math.ceil(n*r) / r  ;
-        }     
+            }     
         
         /**
          * Bounds a numeric value between 2 numbers.
@@ -86,7 +85,7 @@ package system.numeric
          * @return a bound numeric value between 2 numbers.
          */
         public static function clamp(value:Number, min:Number, max:Number):Number 
-        {
+            {
             if (isNaN(value)) 
                 {
                 return NaN ;
@@ -100,7 +99,7 @@ package system.numeric
                 max = value ;
                 }
             return Math.max(Math.min(value, max), min) ;
-        }
+            }
         
         /**
          * Rounds and returns a number by a count of floating points.
@@ -219,7 +218,7 @@ package system.numeric
          * @return the round of a number by a count of floating points.
          */
         public static function round(n:Number, floatCount:Number):Number 
-        {
+            {
             if (isNaN(n)) 
                 {
                 return NaN ;
@@ -260,8 +259,7 @@ package system.numeric
                 }
             return ( n < 0 ) ? -1 : 1 ;
             }
-            
-
+        
         }
 
     }
