@@ -21,37 +21,39 @@
 
 package system.reflection
     {
-    
-    public interface ClassInfo extends TypeInfo
+    import system.Configurator;
+
+    public class ReflectionConfigurator extends Configurator
         {
         
-        function get name():String;
-        
-        function get superClass():ClassInfo;
-        
-        function get members():Array;
-        
-        function get staticMembers():Array;
-        
-        function get methods():Array;
-        
-        function get staticMethods():Array;
+        public function ReflectionConfigurator( config:Object )
+            {
+            super( config );
+            }
         
         /**
-        * Indicates if the specified object is dynamic.
-        */
-        function isDynamic():Boolean;
+         * Allow to replace "::" by "." for string class representation
+         * <p><b>example:</b></p>
+         * <p>
+         * with normalizePath=false
+         * you obtain "system.reflection::ClassInfoTest"
+         * and with normalizePath=true
+         * you obtain "system.reflection.ClassInfoTest"
+         * </p>
+         */
+        public function get normalizePath():Boolean
+            {
+            return _config.normalizePath;
+            }
         
         /**
-        * Indicates if the specified object is final.
-        */
-        function isFinal():Boolean;
+         * @private
+         */
+        public function set normalizePath( value:Boolean ):void
+            {
+            _config.normalizePath = value;
+            }
         
-        function isStatic():Boolean;
-        
-        function isInstance():Boolean;
         }
-    
-    
     }
 
