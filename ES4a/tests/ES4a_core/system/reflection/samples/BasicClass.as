@@ -1,4 +1,4 @@
-
+﻿
 package system.reflection.samples
     {
     
@@ -23,7 +23,7 @@ package system.reflection.samples
         
         public function set accessor( value:String ):void
             {
-            return _accessor;
+            _accessor = value ;
             }
         
         public function method1():String
@@ -36,7 +36,7 @@ package system.reflection.samples
             return "hello " + param;
             }
         
-        public function method3( args... ):String
+        public function method3( ...args:Array ):String
             {
             return args.join( "," );
             }

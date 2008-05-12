@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,17 +16,26 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     
+    /**
+     * This interface is implemented in all the member information objects.
+     */
     public interface MemberInfo
         {
         
+        /**
+         * Indicates the name of the member object.
+         */
         function get name():String;
-        
+
+        /**
+         * Indicates the String representation of the type of the member object.
+         */
         function get type():String;
         
         }

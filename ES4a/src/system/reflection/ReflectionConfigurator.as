@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,9 +16,9 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     import system.Configurator;
@@ -26,6 +26,10 @@ package system.reflection
     public class ReflectionConfigurator extends Configurator
         {
         
+        /**
+         * Creates a new ReflectionConfigurator instance.
+         * @param config The generic object who initialize the instance.
+         */
         public function ReflectionConfigurator( config:Object )
             {
             super( config );
@@ -34,12 +38,8 @@ package system.reflection
         /**
          * Allow to replace "::" by "." for string class representation
          * <p><b>example:</b></p>
-         * <p>
-         * with normalizePath=false
-         * you obtain "system.reflection::ClassInfoTest"
-         * and with normalizePath=true
-         * you obtain "system.reflection.ClassInfoTest"
-         * </p>
+         * <p>With <code class="prettyprint">normalizePath = false</code> you obtain <code class="prettyprint">"system.reflection::ClassInfoTest"</code>
+         * and with <code class="prettyprint">normalizePath=true</code> you obtain <code class="prettyprint">"system.reflection.ClassInfoTest"</code>.</p>
          */
         public function get normalizePath():Boolean
             {

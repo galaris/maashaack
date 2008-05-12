@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,15 +16,21 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     
+    /**
+     * This interface defines the argument information tool objects.
+     */
     public interface ArgumentInfo extends MemberInfo
         {
         
+        /**
+         * Indicates if the current argument is optional.
+         */
         function isOptional():Boolean;
         
         }

@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,24 +16,43 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     import system.Enum;
 
+    /**
+     * This enumeration contains all accessor types.
+     */
     public class AccessorType extends Enum
         {
         
+        /**
+         * Creates a new AccessorType instance.
+         * @param value The value of the enumeration.
+         * @param name The name key of the enumeration.
+         */
         public function AccessorType( value:int, name:String )
             {
             super(value, name);
             }
         
-        public const readOnly:AccessorType  = new AccessorType( 1, "readonly" );
-        public const writeOnly:AccessorType = new AccessorType( 2, "writeonly" );
-        public const readWrite:AccessorType = new AccessorType( 3, "readwrite" );
+        /**
+         * Determinates the "readOnly" accessor type value.
+         */
+        public static const readOnly:AccessorType  = new AccessorType( 1, "readonly" );
+
+        /**
+         * Determinates the "writeOnly" accessor type value.
+         */
+        public static const writeOnly:AccessorType = new AccessorType( 2, "writeonly" );
+        
+        /**
+         * Determinates the "readWrite" accessor type value.
+         */
+        public static const readWrite:AccessorType = new AccessorType( 3, "readwrite" );
         
         }
     }

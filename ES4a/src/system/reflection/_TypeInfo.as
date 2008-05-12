@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,28 +16,41 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     
     [ExcludeClass]
+
+    /**
+     * The concrete class of the TypeInfo interface.
+     */
     public class _TypeInfo implements TypeInfo
         {
         
         private var _type:*;
         
+        /**
+         * Creates a new _TypeInfo instance.
+         */
         public function _TypeInfo( o:* )
             {
             _type = o;
             }
         
+        /**
+         * Indicates if the specified Class can be convert to an other with the "as" keyword.
+         */
         public function canConvertTo( o:Class ):Boolean
             {
             return (_type as o) != null;
             }
-        
+
+        /**
+         * Indicates if the specified Class be used with the "is" keyword.
+         */
         public function isSubtypeOf( o:Class ):Boolean
             {
             return _type is o;
