@@ -16,9 +16,7 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
-    - Marc ALCARAZ <ekameleon@gmail.com>
-
+  Marc Alcaraz <ekameleon@gmail.com>
 */
 package system
     {
@@ -69,12 +67,11 @@ package system
 			{
 			return (path.split( "::" )).join( "." ) ;
 			}        	
-
         
 		/**
 		 * Returns the class reference from a string class name.
 		 * The string name notation can be either "flash.system::Capabilities" or "flash.system.Capabilities" 
-		 * but you have ot provide the full qualified path of the class "Capabilities" alone will not work.
+		 * but you have to provide the full qualified path of the class "Capabilities" alone will not work.
 		 * @return the class reference from a string class name.
 		 */
         public static function getClassByName( name:String ):Class
@@ -209,6 +206,14 @@ package system
             return new _TypeInfo( o );
             }
         
+        /**
+        * Returns the class info
+        */
+        public static function getClassInfo( o:* ):ClassInfo
+            {
+            return new _ClassInfo( o );
+            }
+        
 		/**
 		 * Returns a boolean telling if the class exists from a string name.
 		 * @return a boolean telling if the class exists from a string name.
@@ -226,32 +231,7 @@ package system
             
             return true;
             }
-    
-		// Proposal (ekameleon) or in other class ?
-		///**
-		// * Indicates if the specified object is dynamic (true).
-		// */
-		//public static function isDynamic( o:* ):Boolean 
-		//{
-		//	return describeType( o ).@isDynamic == "true" ;
-		//}
-
-		///**
-		// * Indicates if the specified object is final (true).
-		// */
-		//public static function isFinal( o:* ):Boolean 
-		//{
-		//	return describeType( o ).@isFinal == "true" ;
-		//}
-
-		///**
-		// * Indicates if the specified object is static (true).
-		// */
-		//public static function isStatic( o:* ):Boolean 
-		//{
-		//	return describeType( o ).@isStatic == "true" ;
-		//}    
-    
+        
         }
     
     }
