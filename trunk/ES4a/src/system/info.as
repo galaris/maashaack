@@ -24,7 +24,7 @@ package system
     {
     import system.Version;
     import system.config;
-    
+     
     /**
 	 * The basic system info.
 	 * @param verbose The flag to indicates if the log information use verbose mode or not.
