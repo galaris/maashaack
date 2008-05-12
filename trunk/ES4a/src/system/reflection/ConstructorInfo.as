@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,18 +16,27 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     
+    /**
+     * This interface defines the constructor informations in a class info.
+     */
     public interface ConstructorInfo
         {
         
+        /**
+         * Indicates the Array represent of all arguments in a constructor.
+         */
         function get arguments():Array;
         
-        function construct( args... ):*;
+        /**
+         * Creates the constructor representation.
+         */
+        function construct( ...args:Array ):*;
         
         }
     }

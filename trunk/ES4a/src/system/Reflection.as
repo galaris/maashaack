@@ -17,18 +17,25 @@
   
   Contributor(s):
   Marc Alcaraz <ekameleon@gmail.com>
+
 */
 package system
-    {
-    
+{
     import flash.system.ApplicationDomain;
-    import flash.utils.describeType;
-    import flash.utils.getQualifiedClassName;
-    import flash.utils.getQualifiedSuperclassName;
+    import flash.utils.*;
     
-    import system.reflection.*;
-    
-	/**
+    import system.reflection.*;    
+
+    /* 
+           TODO:
+           - add options to return
+             - class methods
+             - static methods
+             - prototype methods
+             etc.
+     */
+
+    /**
 	 * Provides a basic reflection mecanisms on the language.
 	 */
     public class Reflection
@@ -79,6 +86,15 @@ package system
             return ApplicationDomain.currentDomain.getDefinition( name ) as Class;
             }
 
+        /**
+         * Returns the ClassInfo object of the specified object.
+         * @return the ClassInfo object of the specified object.
+         */
+        public static function getClassInfo( o:* ):ClassInfo
+            {
+            return new _ClassInfo( o );
+            }
+        
 		/**
 		 * Returns an array of public methods defined in the class of an object.
 		 * @return an array of public methods defined in the class of an object.
@@ -104,14 +120,7 @@ package system
             
             return members;
             }
-        /* 
-           TODO:
-           - add options to return
-             - class methods
-             - static methods
-             - prototype methods
-             etc.
-        */
+
         
 		/**
 		 * Returns the class name as string of an object.
@@ -141,9 +150,7 @@ package system
 			{
 			return _formatPath( getQualifiedClassName( o ) ) ;
 			}
-
-        
-        
+                
 		/**
 		 * Returns the instance of a public definition in the current Domain.
 		 * The definition can be a class, namespace, function or object.
@@ -199,21 +206,15 @@ package system
 			}
         
         /**
-        * Returns the type info
-        */
+         * Returns the TypeInfo object of the specified object.
+         * @return the TypeInfo object of the specified object.
+         */
         public static function getTypeInfo( o:* ):TypeInfo
             {
             return new _TypeInfo( o );
             }
         
-        /**
-        * Returns the class info
-        */
-        public static function getClassInfo( o:* ):ClassInfo
-            {
-            return new _ClassInfo( o );
-            }
-        
+
 		/**
 		 * Returns a boolean telling if the class exists from a string name.
 		 * @return a boolean telling if the class exists from a string name.

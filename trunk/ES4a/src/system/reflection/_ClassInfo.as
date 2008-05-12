@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -17,8 +17,8 @@
   
   Contributor(s):
   Marc Alcaraz <ekameleon@gmail.com>
-*/
 
+*/
 package system.reflection
     {
     import flash.utils.describeType;
@@ -26,11 +26,21 @@ package system.reflection
     import system.Reflection;
     
     [ExcludeClass]
+    
+    /**
+     * The concrete class of the ClassInfo interface.
+     */
     public class _ClassInfo extends _TypeInfo implements ClassInfo
         {
         
+        /**
+         * @private
+         */
         private var _class:XML;
         
+        /**
+         * Creates a new _ClassInfo instance.
+         */
         public function _ClassInfo( o:* )
             {
             super( o );
@@ -50,11 +60,17 @@ package system.reflection
             */
             }
         
+        /**
+         * @private
+         */
         private function _normalize( value:String ):String
             {
             return value.replace( "::", "." );
             }
-        
+                
+        /**
+         * Indicates the name of the class.
+         */
         public function get name():String
             {
             var path:String = _class.@name;
@@ -66,7 +82,39 @@ package system.reflection
             
             return path;
             }
+                
+        /**
+         * Indicates the Array representation of all members in the class.
+         */
+        public function get members():Array
+            {
+            return null;
+            }
         
+        /**
+         * Indicates the Array representation of all methods in the class.
+         */
+        public function get methods():Array
+            {
+            return null;
+            }
+            
+        /**
+         * Indicates the Array representation of all static member informations.
+         */   
+        public function get staticMembers():Array
+            {
+            return null;
+            }            
+        
+        public function get staticMethods():Array
+            {
+            return null;
+            }
+            
+        /**
+         * Indicates the ClassInfo object of the super class.
+         */
         public function get superClass():ClassInfo
             {
             var path:String = "";
@@ -90,47 +138,41 @@ package system.reflection
                 {
                 return null;
                 }
-            }
+            }            
         
-        public function get members():Array
-            {
-            return null;
-            }
-        
-        public function get staticMembers():Array
-            {
-            return null;
-            }
-        
-        public function get methods():Array
-            {
-            return null;
-            }
-        
-        public function get staticMethods():Array
-            {
-            return null;
-            }
-        
+        /**
+         * Indicates if the specified object is dynamic.
+         */        
         public function isDynamic():Boolean
             {
             return _class.@isDynamic == "true";
             }
         
+        /**
+         * Indicates if the specified object is final.
+         */        
         public function isFinal():Boolean
             {
             return _class.@isFinal == "true";
             }
         
+        /**
+         * Indicates if the specified object is instance.
+         */        
+        public function isInstance():Boolean
+            {
+            return _class.@base != "Class";
+            }        
+        
+        /**
+         * Indicates if the specified object is static.
+         */
         public function isStatic():Boolean
             {
             return _class.@isStatic == "true";
             }
         
-        public function isInstance():Boolean
-            {
-            return _class.@base != "Class";
-            }
+
         }
     }
 

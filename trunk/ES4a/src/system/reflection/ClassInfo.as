@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,40 +16,68 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>
 
 */
-
 package system.reflection
     {
     
+    /**
+     * This interface defines the object who indicates all informations about a class in the reflection pattern of system.
+     */
     public interface ClassInfo extends TypeInfo
         {
-        
-        function get name():String;
-        
-        function get superClass():ClassInfo;
-        
+        	
+        /**
+         * Indicates the Array representation of all members in the class.
+         */
         function get members():Array;
         
+        /**
+         * Indicates the Array representation of all methods in the class.
+         */
+        function get methods():Array;        
+        
+        /**
+         * Indicates the name of the class.
+         */
+        function get name():String;
+        
+        /**
+         * Indicates the Array representation of all static member informations.
+         */   
         function get staticMembers():Array;
-        
-        function get methods():Array;
-        
+
+        /**
+         * Indicates the Array representation of all static method informations.
+         */   
         function get staticMethods():Array;
         
         /**
-        * Indicates if the specified object is dynamic.
-        */
+         * Indicates the ClassInfo object of the super class.
+         */
+        function get superClass():ClassInfo;
+        
+        /**
+         * Indicates if the specified object is dynamic.
+         */
         function isDynamic():Boolean;
         
         /**
-        * Indicates if the specified object is final.
-        */
+         * Indicates if the specified object is final.
+         */
         function isFinal():Boolean;
+
+        /**
+         * Indicates if the specified object is instance.
+         */
+        function isInstance():Boolean;   
         
-        function isStatic():Boolean;
+        /**
+         * Indicates if the specified object is static.
+         */
+        function isStatic():Boolean;        
         
-        function isInstance():Boolean;
         }
     
     
