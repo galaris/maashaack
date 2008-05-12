@@ -1,0 +1,51 @@
+
+package system.reflection.samples
+    {
+    
+    public class BasicClass
+        {
+        
+        public const constant:String = "constant";
+        
+        public var variable:String = "variable";
+        
+        private var _accessor:String = "accessor";
+        
+        public function BasicClass()
+            {
+            
+            }
+        
+        public function get accessor():String
+            {
+            return _accessor;
+            }
+        
+        public function set accessor( value:String ):void
+            {
+            return _accessor;
+            }
+        
+        public function method1():String
+            {
+            return "hello world";
+            }
+        
+        public function method2( param:String ):String
+            {
+            return "hello " + param;
+            }
+        
+        public function method3( args... ):String
+            {
+            return args.join( "," );
+            }
+        
+        public function method4():void
+            {
+            //do nothing
+            }
+        
+        }
+    }
+
