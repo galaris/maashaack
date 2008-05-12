@@ -22,36 +22,12 @@
 package system.reflection
     {
     
-    public interface ClassInfo extends TypeInfo
+    public interface ArgumentInfo extends MemberInfo
         {
         
-        function get name():String;
+        function isOptional():Boolean;
         
-        function get superClass():ClassInfo;
-        
-        function get members():Array;
-        
-        function get staticMembers():Array;
-        
-        function get methods():Array;
-        
-        function get staticMethods():Array;
-        
-        /**
-        * Indicates if the specified object is dynamic.
-        */
-        function isDynamic():Boolean;
-        
-        /**
-        * Indicates if the specified object is final.
-        */
-        function isFinal():Boolean;
-        
-        function isStatic():Boolean;
-        
-        function isInstance():Boolean;
         }
-    
     
     }
 
