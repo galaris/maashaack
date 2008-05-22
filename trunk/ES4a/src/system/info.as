@@ -24,13 +24,13 @@ package system
     {
     import system.Version;
     import system.config;
-     
+    
     /**
 	 * The basic system info.
 	 * @param verbose The flag to indicates if the log information use verbose mode or not.
 	 * @param showConfig Indicates if the log information show config values.
      */
-    public function info( verbose:Boolean = false, showConfig:Boolean = false ):void
+    public function info( verbose:Boolean = false, showConfig:Boolean = false ):String
         {
         
         var separator:String = "----------------------------------------------------------------";
@@ -68,19 +68,19 @@ package system
             	str += "{sep}";
             	}
             
-        Console.writeLine( str,
-                           {
-                           sep:separator,
-                           crlf:CRLF,
-                           name:name,
-                           fullname:fullname,
-                           version:version,
-                           host: Environment.host,
-                           isdebug: Environment.host.isDebug() ? " (debug)": "",
-                           os: Environment.os,
-                           config: config.toSource()
-                           }
-                         );
+        return Strings.format( str,
+                               {
+                               sep:separator,
+                               crlf:CRLF,
+                               name:name,
+                               fullname:fullname,
+                               version:version,
+                               host: Environment.host,
+                               isdebug: Environment.host.isDebug() ? " (debug)": "",
+                               os: Environment.os,
+                               config: config.toSource()
+                               }
+                             );
         }
     
     }
