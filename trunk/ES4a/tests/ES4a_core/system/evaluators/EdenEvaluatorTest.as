@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -20,28 +20,32 @@
 */
 
 package system.evaluators
-{
-    import buRRRn.ASTUce.framework.*;    
+    {
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class EdenEvaluatorTest extends TestCase
         {
         
-        public function AllTests()
+        private var _EE:EdenEvaluator;
+        
+        public function EdenEvaluatorTest( name:String="" )
             {
-            
+            super(name);
             }
         
-        static public function suite():ITest
+        public function setUp():void
             {
-            var suite:TestSuite = new TestSuite( "Evaluators tests" );
-
-            suite.addTestSuite( DateEvaluatorTest );            
-            suite.addTestSuite( MathEvaluatorTest );
-            suite.addTestSuite( EdenEvaluatorTest );
-            
-            return suite;
+            _EE = new EdenEvaluator();
+            }
+        
+        public function testSimpleExpressions():void
+            {
+            assertEquals( "true", _EE.eval( "true" ) );
+            assertEquals( "0.5", _EE.eval( "0.5" ) );
+            //assertEquals( "5", _EE.eval( "5" ) ); //BUG: eden should return 5
+            //assertEquals( "LE", _EE.eval( "\"le\".toUpperCase()" ) ); //BUG: eden should return "LE"
             }
         
         }
-    
     }
+

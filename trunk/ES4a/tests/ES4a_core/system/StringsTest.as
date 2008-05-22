@@ -1,4 +1,3 @@
-
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -13,24 +12,39 @@
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2007
+  Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  
 */
 
 package system
     {
     import buRRRn.ASTUce.framework.*;
     
-    import system.Strings;
+    import system.evaluators.DateEvaluator;
+    import system.evaluators.EdenEvaluator;
+    import system.evaluators.MathEvaluator;
     
     public class StringsTest extends TestCase
         {
         
+        private var _originalEvaluators:Object;
+        
         public function StringsTest( name:String="" )
             {
             super( name );
+            }
+        
+        public function setUp():void
+            {
+            _originalEvaluators = Strings.evaluators;
+            }
+        
+        public function tearDown():void
+            {
+            Strings.evaluators = _originalEvaluators;
             }
         
         public function testCompare():void
@@ -50,6 +64,7 @@ package system
             assertEquals( Strings.compare( "", "" ),  0 );
             assertEquals( Strings.compare( str2, str4, true ),  -1 );
             }
+        
         
         public function testFormat():void
             {
@@ -74,6 +89,45 @@ package system
             
             }
         
+        public function testFormatBigIndexes():void
+            {
+            var str1:String = "hello {0}, {1} {2} {3} ? {4} {5} {6} {7} {8} {9} {10} {11} ? {12} {13} {14} {15} {16} ? {99}";
+            
+            assertEquals( "hello world, how are you ? would you like some formating in your strings ? and maybe some evaluators too ? you got it", Strings.format(
+                                                                                                        str1,
+                                                                                                        "world",
+                                                                                                        "how", "are", "you",
+                                                                                                        "would", "you", "like", "some", "formating", "in", "your", "strings",
+                                                                                                        "and", "maybe", "some", "evaluators", "too",
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, "you got it" ) );
+            
+            assertEquals( "hello world, how are you ? would you like some formating in your strings ? and maybe some evaluators too ? you got it", Strings.format(
+                                                                                                        str1,
+                                                                                                        ["world",
+                                                                                                        "how", "are", "you",
+                                                                                                        "would", "you", "like", "some", "formating", "in", "your", "strings",
+                                                                                                        "and", "maybe", "some", "evaluators", "too",
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, null, null, null, null, null, null, null, null,
+                                                                                                        null, "you got it"] ) );
+            }
+        
         public function testFormatOptions():void
             {
             var str1:String = "hello {0,10}";
@@ -89,6 +143,76 @@ package system
             assertEquals( "my      token", Strings.format( str4, {token:"token"} ), "D" );
             assertEquals( "my token     ", Strings.format( str5, {token:"token"} ), "E" );
             assertEquals( "my .....token", Strings.format( str6, {token:"token"} ), "F" );
+            }
+        
+        public function testFormatMathEvaluators():void
+            {
+            var str1:String = "my result is ${2+3}math$";
+            var str2:String = "my result is ${2+3}math,math2$";
+            var str3:String = "my result is ${5*x+55}math2$";
+            
+            Strings.evaluators = { math: new MathEvaluator(), math2: new MathEvaluator( {x:100} ) };
+            
+            assertEquals( "my result is 5", Strings.format( str1 ) );
+            assertEquals( "my result is 5", Strings.format( str2 ) );
+            assertEquals( "my result is 555", Strings.format( str3 ) );
+            
+            }
+        
+        public function testFormatEdenEvaluators():void
+            {
+            var str1:String = "my result is ${{a:1,b:2}}$";
+            var str2:String = "my result is ${{a:1,b:2}}eden$";
+            var str3:String = "my result is ${{a:1,b:2}}eden2$";
+            
+            Strings.evaluators = { eden: new EdenEvaluator(), eden2: new EdenEvaluator(false) };
+            
+            assertEquals( "my result is {a:1,b:2}", Strings.format( str1 ) );
+            assertEquals( "my result is {a:1,b:2}", Strings.format( str2 ) );
+            assertEquals( "my result is [object Object]", Strings.format( str3 ) );
+            
+            }
+        
+        public function testFormatEvaluatorsParsing():void
+            {
+            var str1:String = "${{a:1,b:\"}\",c:\"$\",d:\"}\",e:\"$\"}}$";
+            //var str2:String = "${{a:1,b:\"}\",c:\"$\",d:\"}\",e:\"$\"}}"; //cause infinite loop - fixed
+            
+            assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", Strings.format( str1 ) );
+            //assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", Strings.format( str2 ) ); //throw an error
+            }
+        
+        public function testFormatDateEvaluators():void
+            {
+            var str1:String = "my result is ${new Date(2007,4,22,13,13,13)}eden,date$";
+            var str2:String = "my result is ${new Date(2007,4,22,1,2,3)}eden,time$";
+            var str3:String = "my result is ${new Date(2007,4,22,13,13,13)}eden$";
+            var str4:String = "my result is ${new Date(2007,4,22,13,13,13)}$";
+            
+            Strings.evaluators = { eden: new EdenEvaluator(false), date: new DateEvaluator(), time: new DateEvaluator( "hh 'h' nn 'mn' ss 's'" ) };
+            
+            assertEquals( "my result is 22.05.2007 13:13:13", Strings.format( str1 ) );
+            assertEquals( "my result is 01 h 02 mn 03 s", Strings.format( str2 ) );
+            assertEquals( "my result is Tue May 22 13:13:13 GMT+0100 2007", Strings.format( str3 ) );
+            assertEquals( "my result is new Date(2007,4,22,13,13,13)", Strings.format( str4 ) );
+            
+            }
+        
+        public function testFormatAndEvaluators():void
+            {
+            /* TODO:
+               need more tests and more evaluators :p
+            */
+            
+            var str1:String = "hello {0}, the result is ${sin(0.5)*80/100}math$";
+            //var str2:String = "bonjour ${\"le\".toUpperCase();}eden$ monde"; //BUG in eden \"le\".toUpperCase(); should give LE
+            var str3:String = "the host is ${system.Environment.host}eden$";
+            
+            Strings.evaluators = { math: new MathEvaluator(), eden: new EdenEvaluator(false) };
+            
+            assertEquals( "hello world, the result is 0.3835404308833624", Strings.format( str1, "world" )  );
+            //assertEquals( "bonjour LE monde", Strings.format( str2 )  );
+            assertEquals( "the host is "+system.Environment.host, Strings.format( str3 ) );
             }
         
         public function testEndsWith():void
@@ -192,3 +316,4 @@ package system
         }
     
     }
+
