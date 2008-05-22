@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,40 +19,36 @@
   
 */
 
-package
+package system.evaluators
     {
-	import flash.display.Sprite;
-	import buRRRn.eden.eden;
-	import buRRRn.ASTUce.*;
-	import buRRRn.ASTUce.tests.*;
-	import system.*;
-	
-	public class ES4a_TestRunner extends Sprite
+    import buRRRn.eden.eden;
+    
+    /**
+    * Evaluates eden expression.
+    */
+    public class EdenEvaluator implements IEvaluator
         {
+        private var _serialized:Boolean;
         
-        public function ES4a_TestRunner()
+        public function EdenEvaluator( serialized:Boolean = true )
             {
-            
-            system.config.serializer.prettyPrinting = true;
-            system.info( true, true );
-            
-
-            buRRRn.eden.info( true );
-            
-            //tests
-
-            buRRRn.ASTUce.config.showConstructorList = false;
-            
-            //testing ES4a core only
-            //Runner.main( system.AllTests.suite() );
-            
-            //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         buRRRn.eden.AllTests.suite(),
-                         system.AllTests.suite() );
-            
+            _serialized = serialized;
             }
+        
+        public function eval(o:*):*
+            {
+            var result:* = eden.deserialize( o );
+            
+            if( _serialized )
+                {
+                return eden.serialize( result );
+                }
+            else
+                {
+                return result;
+                }
+            }
+        
         }
     }
-
 

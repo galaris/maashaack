@@ -16,13 +16,13 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
-    - Marc ALCARAZ <ekameleon@gmail.com>
-
+  - Marc Alcaraz <ekameleon@gmail.com>.
 */
+
 package system
     {
-
+    import system.evaluators.EdenEvaluator;
+    
     /**
      * A static class for String utilities.
      */
@@ -211,9 +211,271 @@ package system
             
             return compare( str.substr( str.length - value.length ), value ) == 0;
             }
-
+        
+        /**
+        * Contain a list of evaluators to be used in Strings.format
+        * 
+        * ex:
+        * Strings.evaluators = { math: new MathEvaluator() };
+        * Strings.format( "my result is ${2+3}math$" ); // "my result is 5"
+        * 
+        * note:
+        * property names in the evaluators object can only contains
+        * lower case alphabetical chars and digit chars
+        */
+        public static var evaluators:Object = {};
+        
+        /* internal:
+           Strings.format can take index from 0 to infinity
+           {0}, {1}, ..., {99}, etc.
+           
+           but _evaluate need to sync its indexes with the _format _indexes
+           so we pick an arbitrary number: 100
+           
+           officially indexed token can go from {0} to {99}
+           to avoid a conflict with that arbitrary number
+        */
+        private static var _hiddenIndex:uint = 100;
+        
+        /* internal:
+           supported format
+           ${...}$ default to EdenEvaluator
+           ${...}name1,name2,...$
+           
+           TODO:
+           there are no test for }...$ sequence
+           so yeah it's weak and yeah you could break it with something like
+           ${{a:1,b:"}",c:"$"}}$
+        */
+        private static function _evaluate( value:String ):Object
+            {
+            var obj:Object  = {};
+                obj.format  = "";
+                obj.indexes = [];
+            
+            var defaultEvaluator:EdenEvaluator = new EdenEvaluator();
+            var evaluators:Array = [];
+            
+            var evaluate:Function = function( expression:* ):String
+                {
+                for( var i:uint = 0; i< evaluators.length; i++ )
+                    {
+                    expression = evaluators[i].eval( expression );
+                    }
+                return String( expression );
+                }
+            
+            var evalSequence:String = "";
+            var evalString:String   = "";
+            var evalValue:String    = "";
+            var inBetween:String    = "";
+            var pos1:int;
+            var pos2:int;
+            var lpos:int;
+            
+            var isValidChar:Function = function( c:String ):Boolean
+                {
+                if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
+                    {
+                    return true;
+                    }
+                return false;
+                }
+            
+            var isValid:Function = function( str:String ):Boolean
+                {
+                if( str == "" )
+                    {
+                    return true;
+                    }
+                var test:Array = str.split( "" );
+                for( var i:uint = 0; i<test.length; i++ )
+                    {
+                    if( !isValidChar( test[i] ) )
+                        {
+                        return false;
+                        } 
+                    }
+                return true;
+                }
+            
+            while( value.indexOf( "${" ) > -1 )
+                {
+                pos1 = value.indexOf( "${" );
+                pos2 = value.indexOf( "$", pos1+2 );
+                if( pos2 == -1 )
+                    {
+                    throw new Error( "malformed evaluator, could not find [$] after [}]." );
+                    }
+                evalSequence = value.slice( pos1+2, pos2 );
+                lpos = evalSequence.lastIndexOf( "}" );
+                inBetween = evalSequence.substring( lpos+1 );
+                
+                while( !isValid(inBetween) )
+                    {
+                    pos2 = value.indexOf( "$", pos1+2+pos2 );
+                    if( pos2 == -1 )
+                        {
+                        throw new Error( "malformed evaluator, could not find [$] after [}]." );
+                        }
+                    evalSequence = value.slice( pos1+2, pos2 );
+                    lpos = evalSequence.lastIndexOf( "}" );
+                    inBetween = evalSequence.substring( lpos+1 );
+                    }
+                
+                if( lpos != evalSequence.length-1 )
+                    {
+                    var tmp:String = evalSequence.substring( lpos+1 );
+                    var evaluatorsAlias:Array;
+                    
+                    if( tmp.indexOf(",") > -1 )
+                        {
+                        evaluatorsAlias = tmp.split( "," );
+                        }
+                    else
+                        {
+                        evaluatorsAlias = [ tmp ];
+                        }
+                    
+                    for( var i:uint = 0; i<evaluatorsAlias.length; i++ )
+                        {
+                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
+                            {
+                            evaluators.push( Strings.evaluators[ evaluatorsAlias[i] ] );
+                            }
+                        else
+                            {
+                            /* TODO:
+                               throw an error here ?
+                            */
+                            trace( "## Warning: \"" +evaluatorsAlias[i]+ "\" is not a valid evaluator ##"  );
+                            }
+                        }
+                    
+                    }
+                
+                if( evaluators.length == 0 )
+                    {
+                    evaluators = [ defaultEvaluator ];
+                    }
+                
+                evalString = evalSequence.substring( 0, lpos );
+                
+                obj.indexes.push( evaluate( evalString ) );
+                value = value.split( "${"+evalSequence+"$" ).join( "{" + (_hiddenIndex+ (obj.indexes.length-1)) + "}" );
+                }
+            
+            obj.format = value;
+            return obj;
+            }
+        
+        /* internal:
+           supported format
+           {0} {1}
+           {0,5} {0,-5}
+           {0,5:_} {0,-5:_}
+           {toto} {titi}
+           {toto,5} {toto,-5}
+           {titi,5:_} {titi,-5:_}
+           
+           TODO:
+           to {0,5} {0,-5} add something like {0,~5} to support padding to center
+        */
+        private static function _format( stringvalue:String, indexed:Array, named:Object, paddingChar:String = " " ):String
+            {
+            
+            var parseExpression:Function = function( expression:String ):String
+                {
+                var value:String = "";
+                var spaceAlign:int = 0;
+                var isAligned:Boolean = false;
+                var padding:String = paddingChar; 
+                
+                if( indexOfAny( expression, [ ",", ":" ] ) > -1 )
+                    {
+                    var vPos:int = expression.indexOf( "," );
+                    if( vPos == -1 )
+                        {
+                        throw new Error( "malformed format, could not find [,] before [:]." );
+                        }
+                    
+                    var fPos:int = expression.indexOf( ":" );
+                    
+                    if( fPos == -1 )
+                        {
+                        spaceAlign = int( expression.substr( vPos + 1 ) );
+                        }
+                    else
+                        {
+                        spaceAlign = int( expression.substring( vPos + 1, fPos ) );
+                        padding = expression.substr( fPos + 1 );
+                        }
+                    
+                    isAligned = true;
+                    expression = expression.substring( 0, vPos );
+                    }
+                
+                var c:String = expression.split( "" )[0];
+                if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
+                    {
+                    value = String( named[ expression ] );
+                    }
+                else if( ("0" <= c) && (c <= "9") )
+                    {
+                    value = String( indexed[ int( expression ) ] );
+                    }
+                
+                if( isAligned )
+                    {
+                    if( (spaceAlign > 0) && (value.length < spaceAlign) )
+                        {
+                        value = padLeft( value, spaceAlign, padding );
+                        }
+                    else if ( spaceAlign < -value.length )
+                        {
+                        value = padRight( value, -spaceAlign, padding );
+                        }
+                    }
+                
+                return value;
+                }
+            
+            var expression:String = "";
+            var formated:String   = "";
+            var ch:String         = "";
+            var pos:int           = 0;
+            var len:int           = stringvalue.length;
+            
+            var next:Function = function():String
+                {
+                ch = stringvalue.charAt( pos );
+                pos++;
+                return ch;
+                }
+            
+            while( pos < len )
+                {
+                next();
+                if( ch == "{" )
+                    {
+                    expression = next();
+                    while( next( ) != "}" )
+                        {
+                        expression += ch;
+                        }
+                    formated += parseExpression( expression );
+                    }
+                else
+                    {
+                    formated += ch;
+                    }
+                }
+            
+            return formated;
+            }
+        
         /** 
-         * Format a string using indexed or named parameters.
+         * Format a string using indexed, named and/or evaluated parameters.
          * <p>Method call :</p>
          * <li>StringUtil.format(pattern:String, ...arguments:Array):String</li>
          * <li>StringUtil.format(pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</li>
@@ -222,7 +484,7 @@ package system
          * <li>StringUtil.format(pattern:String, {name0:value0,name1:value1,name2:value2, ...} , ...args:Array ) :String</li>
          * <p>Replaces the pattern item in a specified String with the text equivalent of the value of a specified Object instance.</p>
          * <p>Formats item : {token[,alignment][:paddingChar]}</p>
-         * <p>If you want to use the "{" and "}" chars use "{{" and "}}"
+         * <p>If you want to escape the "{" and "}" chars use "{{" and "}}"
          * <li>"some {{formatitem}} to be escaped" -> "some {formatitem} to be escaped"</li>
          * <li>"some {{format {0} item}} to be escaped", "my" -> "some {format my titem} to be escaped"</li>
          * </p>
@@ -282,50 +544,80 @@ package system
          * var what = "answer" ;
          * result = Strings.format( "your {0} is within {answer,20:.}", {answer:"my answer"}, what ) ; 
          * trace("> " + result ) // "your answer is within ...........my answer"
+         * 
+         * // using evaluated parameters
+         * Strings.evaluators = { math: new MathEvaluator() };
+         * Strings.format( "my result is ${2+3}math$" ); // "my result is 5"
+         * 
+         * //by default evaluated parameters use EdenEvaluator with serialized result
+         * Strings.format( "here some object '${ {a:1,b:2} }$'" ); //"here some object '{a:1,b:2}'"
+         * 
+         * //use EdenEvaluator with stringified result
+         * Strings.evaluators = { math: new EdenEvaluator(false) };
+         * Strings.format( "here some object '${ {a:1,b:2} }eden$'" ); //"here some object '[object Object]'"
+         * Strings.format( "the host is ${system.Environment.host}eden$" ); //"the host is Flash 9.0.115.0"
+         * 
+         * //use chained evaluators
+         * Strings.evaluators = { eden: new EdenEvaluator(false), date: new DateEvaluator() ];
+         * Strings.format( "my date is ${new Date(2007,4,22,13,13,13)}eden,date$" ); //"my date is 22.05.2007 13:13:13"
+         * 
          * </pre>
          */
         public static function format( format:String, ...args ):String
             {
-            if( (args == null) || (args.length == 0) || (format == "") )
+            var indexedValues:Array = [];
+            var namedValues:Object  = {};
+            
+            if( format == "" )
+                {
+                return format;
+                }
+            
+            var evaluated:Object = _evaluate( format );
+            
+            if( (evaluated.indexes.length == 0) && ((args == null) || (args.length == 0)) )
                 {
                 return format; //nothing to format
                 }
             
-            var paddingChar:String = " "; 
-            //default padding char is SPC
-            var indexedValues:Array = [];  
-            //cf {0} {1} etc.
-            var namedValues:Object = {};  
-            //cf {toto} {titi} etc.
-            //var numeric:RegExp      = /^[0-9]*/;
-            //var alphabetic:RegExp   = /^[A-Za-z]./;
-            //var alphaLetter:RegExp  = /^[A-Za-z]/;
+            format = evaluated.format;
             
-            //parse arguments
             if( args.length >= 1 )
                 {
                 if( args[0] is Array )
                     {
                     indexedValues = indexedValues.concat( args[0] );
-                    args.shift( );
+                    args.shift();
                     }
                 else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
                     {
-                    for( var prop:String in args[0] )
+                    var prop:String;
+                    for( prop in args[0] )
                         {
                         namedValues[ prop ] = args[0][ prop ];
                         }
-                    args.shift( );
+                    args.shift();
                     }
                 }
             
             indexedValues = indexedValues.concat( args );
             
-            //escape {{ and }}
-            var ORC1:String = "\uFFFC"; 
-            //Object Replacement Character
-            var ORC2:String = "\uFFFD"; 
-            //Object Replacement Character
+            if( indexedValues.length-1 >= _hiddenIndex )
+                {
+                /* TODO:
+                   throw an error here ?
+                */
+                trace( "## Warning : indexed tokens are too big ##" );
+                }
+            
+            for( var i:uint = 0; i< evaluated.indexes.length; i++ )
+                {
+                indexedValues[ (_hiddenIndex + i) ] =  evaluated.indexes[i];
+                }
+            
+            var ORC1:String = "\uFFFC"; //Object Replacement Character
+            var ORC2:String = "\uFFFD"; //Object Replacement Character
+            
             if( indexOfAny( format, [ "{{", "}}" ] ) > -1 )
                 {
                 /* note:
@@ -334,7 +626,7 @@ package system
                 to escape and inject within the escaped
                 Strings.format( "{{{0}}}", "hello" ) -> "{hello}"
                 but in more complex cases as {{{{{0}}}}} this scenario will fail
-                   
+                
                 workaround:
                 if you really really really need to escape
                 as much as {{{{ and }}}} do that
@@ -349,132 +641,7 @@ package system
                 format = format.split( "}}" ).join( ORC2 );
                 }
             
-            // {0} {1}
-            // {0,5} {0,-5}
-            // {0,5:_} {0,-5:_}
-            // {toto} {titi}
-            // {toto,5} {toto,-5}
-            // {titi,5:_} {titi,-5:_}
-            var parseExpression:Function = function( expression:String ):String
-                {
-                use namespace AS3; 
-                //to avoid 3594 warning
-                var value:String = "";
-                var spaceAlign:int = 0;
-                var isAligned:Boolean = false;
-                var padding:String = paddingChar; 
-                //default
-                if( indexOfAny( expression, [ ",", ":" ] ) > -1 )
-                    {
-                    var vPos:int = expression.indexOf( "," );
-                    if( vPos == -1 )
-                        {
-                        throw new Error( "malformed format, could not find [,] before [:]." );
-                        }
-                    
-                    var fPos:int = expression.indexOf( ":" );
-                    
-                    if( fPos == -1 )
-                        {
-                        spaceAlign = int( expression.substr( vPos + 1 ) );
-                        }
-                    else
-                        {
-                        spaceAlign = int( expression.substring( vPos + 1, fPos ) );
-                        padding = expression.substr( fPos + 1 );
-                        }
-                    
-                    isAligned = true;
-                    expression = expression.substring( 0, vPos );
-                    }
-                
-                /* note:
-                there must be a bug in playerglobal.swc
-                when compiling this warning occurs
-                "3594: test is not a recognized method of the dynamic class RegExp"
-                but Global.as shows
-                (code)
-                public dynamic class RegExp
-                {
-                //...
-                public native function test(str:String):Boolean;
-                //...
-                }
-                (end)
-                    
-                to solve that little bug:
-                use namespace AS3;
-                apparently when you define an inner function
-                or an internal function outside a package
-                the AS3 namespace is not found anymore
-                 */
-                
-                /*
-                if( alphabetic.test(expression) || alphaLetter.test(expression) )
-                {
-                value = String( namedValues[ expression ] );
-                }
-                else if( numeric.test(expression) )
-                {
-                value = String( indexedValues[ int(expression) ] );
-                }
-                 */
-                var c:String = expression.split( "" )[0];
-                if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
-                    {
-                    value = String( namedValues[ expression ] );
-                    }
-                else if( ("0" <= c) && (c <= "9") )
-                    {
-                    value = String( indexedValues[ int( expression ) ] );
-                    }
-                
-                if( isAligned )
-                    {
-                    if( (spaceAlign > 0) && (value.length < spaceAlign) )
-                        {
-                        value = padLeft( value, spaceAlign, padding );
-                        }
-                    else if ( spaceAlign < -value.length )
-                        {
-                        value = padRight( value, -spaceAlign, padding );
-                        }
-                    }
-                
-                return value;
-                };
-            
-            var expression:String = "";
-            var formated:String = "";
-            var ch:String = "";
-            var pos:int = 0;
-            var len:int = format.length;
-            
-            var next:Function = function():String
-                {
-                ch = format.charAt( pos );
-                pos++;
-                return ch;
-                };
-            
-            //parsing
-            while( pos < len )
-                {
-                next( );
-                if( ch == "{" )
-                    {
-                    expression = next( );
-                    while( next( ) != "}" )
-                        {
-                        expression += ch;
-                        }
-                    formated += parseExpression( expression );
-                    }
-                else
-                    {
-                    formated += ch;
-                    }
-                }
+            var formated:String = _format( format, indexedValues, namedValues );
             
             if( indexOfAny( format, [ ORC1, ORC2 ] ) > -1 )
                 {

@@ -16,12 +16,11 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  
-    - Marc Alcaraz <ekameleon@gmail.com>
-
+  - Marc Alcaraz <ekameleon@gmail.com>
 */
+
 package system.evaluators
-{
+    {
     import system.Strings;    
 
     /**
@@ -245,7 +244,6 @@ package system.evaluators
                 case "+": case "-":
                 case "«": case "»": case "›":
                 case "&": case "^": case "|":
-                case "sin":
                 return true;
                 
                 default:
@@ -840,7 +838,7 @@ package system.evaluators
                     
                     
                     default:
-                    /* NOTE: by default we ignore anyother chars */
+                    /* note: by default we ignore anyother chars */
                     currentPos++;
                     }
                 
