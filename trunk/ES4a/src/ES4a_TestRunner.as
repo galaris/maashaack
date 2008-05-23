@@ -34,7 +34,7 @@ package
             {
             
             system.config.serializer.prettyPrinting = true;
-            system.info( true, true );
+            system.about( true, true );
             
 
             buRRRn.eden.info( true );
