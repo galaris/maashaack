@@ -7,7 +7,7 @@ package system.reflection.samples
         
         public const constant:String = "constant";
         
-        public var variable:String = "variable";
+        public var variable1:String = "variable1";
         
         private var _accessor:String = "accessor";
         

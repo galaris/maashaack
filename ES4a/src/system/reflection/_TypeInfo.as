@@ -30,14 +30,14 @@ package system.reflection
     public class _TypeInfo implements TypeInfo
         {
         
-        private var _type:*;
+        protected var type:*;
         
         /**
          * Creates a new _TypeInfo instance.
          */
         public function _TypeInfo( o:* )
             {
-            _type = o;
+            type = o;
             }
         
         /**
@@ -45,7 +45,7 @@ package system.reflection
          */
         public function canConvertTo( o:Class ):Boolean
             {
-            return (_type as o) != null;
+            return (type as o) != null;
             }
 
         /**
@@ -53,7 +53,7 @@ package system.reflection
          */
         public function isSubtypeOf( o:Class ):Boolean
             {
-            return _type is o;
+            return type is o;
             }
         
         }

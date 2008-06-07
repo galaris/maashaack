@@ -16,9 +16,9 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  Marc Alcaraz <ekameleon@gmail.com>
-
+  - Marc Alcaraz <ekameleon@gmail.com>.
 */
+
 package system
 {
     import flash.system.ApplicationDomain;
@@ -90,9 +90,22 @@ package system
          * Returns the ClassInfo object of the specified object.
          * @return the ClassInfo object of the specified object.
          */
-        public static function getClassInfo( o:* ):ClassInfo
+        public static function getClassInfo( o:*, ...filters ):ClassInfo
             {
-            return new _ClassInfo( o );
+            var filter:FilterType = FilterType.none; //default
+            var value:int = 0;
+            
+            for( var i:uint = 0; i<filters.length; i++ )
+            	{
+            	value |= int(filters[i]);
+            	}
+            
+            if( value > 0 )
+            	{
+            	filter = new FilterType( value );
+            	}
+            
+            return new _ClassInfo( o, filter );
             }
         
 		/**

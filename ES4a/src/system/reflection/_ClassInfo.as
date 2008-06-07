@@ -28,7 +28,7 @@ package system.reflection
     [ExcludeClass]
     
     /**
-     * The concrete class of the ClassInfo interface.
+     * Implementation of the ClassInfo interface.
      */
     public class _ClassInfo extends _TypeInfo implements ClassInfo
         {
@@ -37,27 +37,17 @@ package system.reflection
          * @private
          */
         private var _class:XML;
+        private var _filter:FilterType;
         
         /**
          * Creates a new _ClassInfo instance.
          */
-        public function _ClassInfo( o:* )
+        public function _ClassInfo( o:*, applyFilter:FilterType )
             {
             super( o );
-            _class = describeType( o );
-            /*
-            trace( _class );
             
-            if( _class.hasOwnProperty( "extendsClass" ) )
-                {
-                trace( "Super: " + _class.extendsClass[0].@type );
-                }
-            else
-                {
-                trace( "no super" );
-                }
-            trace( "--------" );
-            */
+            _class = describeType( o );
+            _filter = applyFilter;
             }
         
         /**
@@ -67,9 +57,78 @@ package system.reflection
             {
             return value.replace( "::", "." );
             }
-                
+        
         /**
-         * Indicates the name of the class.
+         * @private
+         */
+        private function _isDeclaredLocaly( origin:String ):Boolean
+            {
+            if( config.normalizePath )
+                {
+                origin = _normalize( origin );
+                }
+            
+            return name == origin;
+            }
+        
+        /**
+         * @private
+         */
+        private function _getTraitMemberHelper( member:MemberType ):Array
+        	{
+        	var members:Array = [];
+        	var node:XML;
+        	var m:String;
+        	var name:String = member.toString();
+        	
+        	if( isInstance() )
+        		{
+        		for( m in _class[name] )
+        			{
+        			node = _class[name][m];
+        			
+        			if( !filter.showInherited &&
+        			    (node.@declaredBy != undefined) &&
+        			    !_isDeclaredLocaly(String(node.@declaredBy)) )
+        			    {
+        			    continue;
+        			    }
+        		    
+        		    members.push( String(node.@name) );
+        			}
+        		}
+        	else
+        		{
+        		for( m in _class.factory[name] )
+        			{
+        			node = _class.factory[name][m];
+        			
+        			if( !filter.showInherited &&
+        			    (node.@declaredBy != undefined) &&
+        			    !_isDeclaredLocaly(String(node.@declaredBy)) )
+        			    {
+        			    continue;
+        			    }
+        		    
+        			members.push( String(node.@name) );
+        			}
+        		}
+        	
+        	return members;
+        	}
+        
+        public function get filter():FilterType
+        	{
+        	return _filter;
+        	}
+        
+        public function set filter( value:FilterType ):void
+        	{
+        	_filter = value;
+        	}
+        
+        /**
+         * Returns the name of the class.
          */
         public function get name():String
             {
@@ -91,27 +150,137 @@ package system.reflection
             return null;
             }
         
+
+        
+
+        
         /**
-         * Indicates the Array representation of all methods in the class.
+        * List all variables in the class.
+        */
+        public function get variables():Array
+        	{
+        	return _getTraitMemberHelper( MemberType.variable );
+        	}
+        
+        /**
+        * List all constants in the class.
+        */
+        public function get constants():Array
+        	{
+        	return _getTraitMemberHelper( MemberType.constant );
+        	}
+        
+        /**
+        * List all accessors in the class.
+        */
+        public function get accessors():Array
+        	{
+        	return _getTraitMemberHelper( MemberType.accessor );
+        	}
+        
+        public function get properties():Array
+            {
+            var props:Array = [];
+            var p:String;
+            
+            if( filter.usePrototypeInfo )
+            	{
+            	if( isInstance() )
+            		{
+            		for( p in type )
+            			{
+            			if( typeof type[p] != "function" )
+            				{
+            				if( !filter.showInherited && 
+            				    (!type.hasOwnProperty( p ) && !type.constructor.prototype.hasOwnProperty( p )) )
+            				    {
+            				    continue;
+            				    }
+            				
+            				props.push( p );
+            				} 
+            			}
+            		}
+            	else
+            		{
+            		for( p in type.prototype )
+            			{
+            			if( typeof type.prototype[p] != "function" )
+            				{
+            				if( !filter.showInherited && 
+            				    !type.prototype.hasOwnProperty( p ) )
+            				    {
+            				    continue;
+            				    }
+            				
+            				props.push( p );
+            				} 
+            			}
+            		}
+            	}
+            
+            if( filter.useTraitInfo )
+            	{
+            	props = props.concat( variables );
+            	props = props.concat( constants );
+            	props = props.concat( accessors );
+            	}
+            
+            return props;
+            }
+        
+        /**
+         * List all methods in the class.
          */
         public function get methods():Array
             {
-            return null;
-            }
+            var meths:Array = [];
+            var m:String;
             
-        /**
-         * Indicates the Array representation of all static member informations.
-         */   
-        public function get staticMembers():Array
-            {
-            return null;
-            }            
+            if( filter.usePrototypeInfo )
+            	{
+            	if( isInstance() )
+            		{
+            		for( m in type )
+            			{
+            			if( typeof type[m] == "function" )
+            				{
+            				if( !filter.showInherited && 
+            				    (!type.hasOwnProperty( m ) && !type.constructor.prototype.hasOwnProperty( m )) )
+            				    {
+            				    continue;
+            				    }
+            				
+            				meths.push( m );
+            				} 
+            			}
+            		}
+            	else
+            		{
+            		for( m in type.prototype )
+            			{
+            			if( typeof type.prototype[m] == "function" )
+            				{
+            				if( !filter.showInherited && 
+            				    !type.prototype.hasOwnProperty( m ) )
+            				    {
+            				    continue;
+            				    }
+            				
+            				meths.push( m );
+            				} 
+            			}
+            		}
+            	}
+            
+            if( filter.useTraitInfo )
+            	{
+            	meths = meths.concat( _getTraitMemberHelper( MemberType.method ) );
+            	}
+            
+            return meths;
+            }
         
-        public function get staticMethods():Array
-            {
-            return null;
-            }
-            
         /**
          * Indicates the ClassInfo object of the super class.
          */
@@ -132,7 +301,7 @@ package system.reflection
             if( path != "" )
                 {
                 c = Reflection.getClassByName( path );
-                return new _ClassInfo( c );
+                return new _ClassInfo( c, filter );
                 }
             else
                 {
@@ -172,6 +341,10 @@ package system.reflection
             return _class.@isStatic == "true";
             }
         
+        public function toXML():XML
+        	{
+        	return _class;
+        	}
 
         }
     }
