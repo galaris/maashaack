@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -16,20 +16,25 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
+  Marc Alcaraz <ekameleon@gmail.com>
 */
 
 package system.reflection
     {
-    
-    /**
-     * The Reflection configurator.
-     */
-    public var config:ReflectionConfigurator = new ReflectionConfigurator( {
-                                                                            normalizePath: true,
-                                                                            useTraitInfo: true,
-                                                                            usePrototypeInfo: false
-                                                                           } );
-    
+    import system.Enum;
+
+    public class MemberType extends Enum
+        {
+        
+        public function MemberType( value:int=0, name:String="" )
+            {
+            super( value, name );
+            }
+        
+        public static const variable:MemberType = new MemberType( 1, "variable" );
+        public static const constant:MemberType = new MemberType( 2, "constant" );
+        public static const accessor:MemberType = new MemberType( 3, "accessor" );
+        public static const method:MemberType   = new MemberType( 4, "method" );
+        }
     }
 
