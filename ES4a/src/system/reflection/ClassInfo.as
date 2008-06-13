@@ -16,9 +16,9 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  - Marc Alcaraz <ekameleon@gmail.com>.
-*/
+  Marc Alcaraz <ekameleon@gmail.com>
 
+*/
 package system.reflection
     {
     
@@ -28,8 +28,14 @@ package system.reflection
     public interface ClassInfo extends TypeInfo
         {
         
+        /**
+         * The filter type reference of this class info.
+         */
         function get filter():FilterType;
         
+        /**
+         * @private
+         */
         function set filter( value:FilterType ):void;
         
         /**
@@ -94,6 +100,10 @@ package system.reflection
          */
         function isStatic():Boolean;        
         
+        /**
+         * Returns the XML representation of the class.
+         * @return the XML representation of the class.
+         */
         function toXML():XML;
         
         }

@@ -20,11 +20,11 @@
 
 */
 package system.reflection
-    {
+{
     import flash.utils.describeType;
     
-    import system.Reflection;
-    
+    import system.Reflection;    
+
     [ExcludeClass]
     
     /**
@@ -117,11 +117,17 @@ package system.reflection
         	return members;
         	}
         
+        /**
+         * Indicates the filter type value used in this class.
+         */
         public function get filter():FilterType
         	{
         	return _filter;
         	}
         
+        /**
+         * @private
+         */        
         public function set filter( value:FilterType ):void
         	{
         	_filter = value;
@@ -149,35 +155,35 @@ package system.reflection
             {
             return null;
             }
-        
-
-        
-
-        
+                
         /**
-        * List all variables in the class.
-        */
+         * List all variables in the class.
+         */
         public function get variables():Array
         	{
         	return _getTraitMemberHelper( MemberType.variable );
         	}
         
         /**
-        * List all constants in the class.
-        */
+         * List all constants in the class.
+         */
         public function get constants():Array
         	{
         	return _getTraitMemberHelper( MemberType.constant );
         	}
         
         /**
-        * List all accessors in the class.
-        */
+         * List all accessors in the class.
+         */
         public function get accessors():Array
         	{
         	return _getTraitMemberHelper( MemberType.accessor );
         	}
         
+        /**
+         * List all properties in the class.
+         * Properties are the combination of variables, constants and accessors.
+         */
         public function get properties():Array
             {
             var props:Array = [];
@@ -341,6 +347,10 @@ package system.reflection
             return _class.@isStatic == "true";
             }
         
+        /**
+         * Returns the XML representation of the class.
+         * @return the XML representation of the class.
+         */
         public function toXML():XML
         	{
         	return _class;
