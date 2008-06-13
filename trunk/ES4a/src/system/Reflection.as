@@ -17,8 +17,8 @@
   
   Contributor(s):
   - Marc Alcaraz <ekameleon@gmail.com>.
-*/
 
+*/
 package system
 {
     import flash.system.ApplicationDomain;
@@ -94,8 +94,8 @@ package system
             {
             var filter:FilterType = FilterType.none; //default
             var value:int = 0;
-            
-            for( var i:uint = 0; i<filters.length; i++ )
+            var len:uint  = filters.length ;
+            for( var i:uint = 0; i<len; i++ )
             	{
             	value |= int(filters[i]);
             	}

@@ -17,8 +17,8 @@
   
   Contributor(s):
   Marc Alcaraz <ekameleon@gmail.com>
-*/
 
+*/
 package system.reflection
     {
     import system.Enum;
