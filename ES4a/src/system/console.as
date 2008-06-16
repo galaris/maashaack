@@ -20,12 +20,13 @@
 
 package system
     {
+    import system.terminals.Console;
     import system.diagnostics.TraceConsole;
     
 	/**
-	 * The system console implementation. 
-     */  
-    public var console:* = new TraceConsole();
+	 * The system default console implementation.
+     */
+    public var console:system.terminals.Console = new TraceConsole();
     
     }
 

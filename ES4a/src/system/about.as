@@ -21,14 +21,14 @@
 
 package system
     {
-    import system.Console;
+    import system.console;
     
     /**
      * Display ES4a about.
      */
     public function about( verbose:Boolean = false, showConfig:Boolean = false ):void
         {
-        Console.writeLine( info( verbose, showConfig ) );
+        console.writeLine( info( verbose, showConfig ) );
         }
     }
 
