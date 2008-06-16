@@ -16,20 +16,19 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
-    - Marc ALCARAZ <ekameleon@gmail.com>
-
+  - Marc Alcaraz <ekameleon@gmail.com>
 */
-package system
-{
-    import flash.system.Capabilities;    
 
+package system
+    {
+    import flash.system.Capabilities;
+    
     /**
 	 * This class defines the environment of the client application.
 	 */
     public class Environment
         {
-        	
+        
 		///**
 		// * @private
 		// */
