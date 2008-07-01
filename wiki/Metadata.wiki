@@ -1,0 +1,12 @@
+#labels Code,AS3
+#metadata tags in AS3 and Flex.
+
+= Introduction =
+
+from the Flex documentation
+ Metadata statements are associated with a class declaration, an individual data field,
+ or a method. They are bound to the next line in the file. When you define a component
+ property or method, add the metadata tag on the line before the property
+ or method declaration.
+
+see a list of [http://livedocs.adobe.com/flex/3/html/metadata_3.html officially supported metadata tags]
