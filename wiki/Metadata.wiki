@@ -68,3 +68,19 @@ from [http://blogs.adobe.com/rgonzalez/2006/06/modular_applications_part_2.html 
  daisy-chain these frames; you could (although why?) build a 10-frame bootstrapped movie
  this way. Note that the metadata is actually just an inline alias for the "frames"
  compiler configuration option, which lets you explicitly specify the frame classes.
+
+`[Mixin]`
+usage
+{{{
+[Mixin]
+public class Something
+{
+    public static function init( systemManager:ISystemManager )
+    {
+    trace( "call me first" );
+    }
+}
+}}}
+see [StaticCodeBlock]
+
+
