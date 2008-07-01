@@ -13,18 +13,18 @@ see a list of [http://livedocs.adobe.com/flex/3/html/metadata_3.html officially 
 
 amongst the more interesting are
 
- * `[Exclude]`
-   Omits the class element from the Flex Builder tag inspector.
-   {{{
+`[Exclude]`
+Omits the class element from the Flex Builder tag inspector.
+{{{
 [Exclude(name="label", kind="property")]
-   }}}
+}}}
 
 and some undocumented
 
- * `[SWF]`
-   {{{
-   [SWF width="#" height="#" widthPercent="#" heightPercent="#" \
-        scriptRecursionLimit="#" scriptTimeLimit="#" frameRate="#" \
-        backgroundColor="#" pageTitle="<String>"]
-   }}}
-   Allows to define SWF parameters in an AS3 project
+`[SWF]`
+{{{
+[SWF width="#" height="#" widthPercent="#" heightPercent="#" \
+     scriptRecursionLimit="#" scriptTimeLimit="#" frameRate="#" \
+     backgroundColor="#" pageTitle="<String>"]
+}}}
+Allows to define SWF parameters in an AS3 project.
