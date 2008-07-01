@@ -15,6 +15,9 @@ amongst the more interesting are
 
  * `[Exclude]`
    Omits the class element from the Flex Builder tag inspector.
+   {{{
+[Exclude(name="label", kind="property")]
+   }}}
 
 and some undocumented
 
