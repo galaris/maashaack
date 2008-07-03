@@ -27,10 +27,15 @@ package system.reflection
     import system.Reflection;
     import system.reflection.samples.Basic2BasicClass;
     import system.reflection.samples.Basic2DynamicClass;
+    import system.reflection.samples.Basic3Class;
     import system.reflection.samples.BasicClass;
+    import system.reflection.samples.BasicClassInterface1;
+    import system.reflection.samples.BasicClassInterface1and2;
     import system.reflection.samples.Dynamic2BasicClass;
     import system.reflection.samples.Dynamic2DynamicClass;
     import system.reflection.samples.DynamicClass;
+    import system.reflection.samples.IBasicInterface1;
+    import system.reflection.samples.IBasicInterface2;
     
     public class ClassInfoTest extends TestCase
         {
@@ -183,19 +188,70 @@ package system.reflection
        	    var c4:ClassInfo = Reflection.getClassInfo( Basic2BasicClass, FilterType.declaredOnly );
        	    
        	    //trace( c1.toXML() );
-       	    trace( c3.toXML() );
-       	    trace( c1.properties );
-       	    trace( c1.methods );
-       	    trace( "---" );
-       	    trace( c2.properties );
-       	    trace( c2.methods );
-       	    trace( "---------------------" );
-       	    trace( c3.properties );
-       	    trace( c3.methods );
-       	    trace( "---" );
-       	    trace( c4.properties );
-       	    trace( c4.methods );
+//       	    trace( c3.toXML() );
+//       	    trace( c1.properties );
+//       	    trace( c1.methods );
+//       	    trace( "---" );
+//       	    trace( c2.properties );
+//       	    trace( c2.methods );
+//       	    trace( "---------------------" );
+//       	    trace( c3.properties );
+//       	    trace( c3.methods );
+//       	    trace( "---" );
+//       	    trace( c4.properties );
+//       	    trace( c4.methods );
        	    }
+       	
+       	public function testHasInterface():void
+       		{
+       		var i1:IBasicInterface1;
+       		var i2:IBasicInterface2;
+       		var bci1:BasicClassInterface1 = new BasicClassInterface1();
+       		var bci1and2:BasicClassInterface1and2 = new BasicClassInterface1and2();
+       		
+       		var c1:ClassInfo = Reflection.getClassInfo( BasicClassInterface1 );
+       		var c2:ClassInfo = Reflection.getClassInfo( bci1 );
+       		var c3:ClassInfo = Reflection.getClassInfo( BasicClassInterface1and2 );
+       		var c4:ClassInfo = Reflection.getClassInfo( bci1and2 );
+       		
+       		assertTrue( c1.hasInterface( IBasicInterface1 ) );
+       		assertTrue( c2.hasInterface( IBasicInterface1 ) );
+       		assertFalse( c1.hasInterface( IBasicInterface2 ) );
+       		assertFalse( c2.hasInterface( IBasicInterface2 ) );
+       		
+       		assertFalse( c1.hasInterface( IBasicInterface1, IBasicInterface2 ) );
+       		assertFalse( c2.hasInterface( IBasicInterface1, IBasicInterface2 ) );
+       		
+       		assertTrue( c3.hasInterface( IBasicInterface1, IBasicInterface2 ) );
+       		assertTrue( c4.hasInterface( IBasicInterface1, IBasicInterface2 ) );
+       		}
+       	
+       	public function testInheritFrom():void
+       		{
+       		var b3:Basic3Class = new Basic3Class();
+       		var b:BasicClass   = new BasicClass();
+       		
+       		var c1:ClassInfo = Reflection.getClassInfo( Basic3Class );
+       		var c2:ClassInfo = Reflection.getClassInfo( b3 );
+       		var c3:ClassInfo = Reflection.getClassInfo( BasicClass );
+       		var c4:ClassInfo = Reflection.getClassInfo( b );
+       		
+       		assertTrue( c1.inheritFrom( Basic2BasicClass ) );
+       		assertTrue( c1.inheritFrom( BasicClass ) );
+       		assertTrue( c1.inheritFrom( BasicClass, Basic2BasicClass ) );
+       		
+       		assertTrue( c2.inheritFrom( Basic2BasicClass ) );
+       		assertTrue( c2.inheritFrom( BasicClass ) );
+       		assertTrue( c2.inheritFrom( BasicClass, Basic2BasicClass ) );
+       		
+       		assertFalse( c3.inheritFrom( Basic2BasicClass ) );
+       		assertFalse( c3.inheritFrom( Basic3Class ) );
+       		assertFalse( c3.inheritFrom( Basic3Class, Basic2BasicClass ) );
+       		
+       		assertFalse( c4.inheritFrom( Basic2BasicClass ) );
+       		assertFalse( c4.inheritFrom( Basic3Class ) );
+       		assertFalse( c4.inheritFrom( Basic3Class, Basic2BasicClass ) );
+       		}
        	
         /*
         public function testMisc():void

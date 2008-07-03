@@ -80,6 +80,10 @@ package system.reflection
          */
         function get superClass():ClassInfo;
         
+        function hasInterface( ...interfaces ):Boolean;
+        
+        function inheritFrom( ...classes ):Boolean;
+        
         /**
          * Indicates if the specified object is dynamic.
          */
