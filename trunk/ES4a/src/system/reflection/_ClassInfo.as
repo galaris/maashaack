@@ -316,6 +316,9 @@ package system.reflection
                 }
             }            
         
+        /**
+         * @private
+         */
         private function _hasInterface( interfaceRef:Class ):Boolean
         	{
         	var path:XMLList;
@@ -343,6 +346,11 @@ package system.reflection
         	return false;
         	}
         
+        /**
+         * Indicates if the specified class implements all interfaces passed-in arguments.
+         * @param ...interfaces All the interfaces to search in the current ClassInfo.
+         * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
+         */        
         public function hasInterface( ...interfaces ):Boolean
         	{
         	if( interfaces.length == 0 )
@@ -361,6 +369,9 @@ package system.reflection
         	return true;
         	}
         
+        /**
+         * @private
+         */        
         private function _inheritFrom( classRef:Class ):Boolean
         	{
         	var path:XMLList;
@@ -388,6 +399,11 @@ package system.reflection
         	return false;
         	}
         
+        /**
+         * Indicates if the specified class inherit fromm all class passed-in arguments.
+         * @param ...interfaces All the interfaces to search in the current ClassInfo.
+         * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
+         */
         public function inheritFrom( ...classes ):Boolean
         	{
         	if( classes.length == 0 )

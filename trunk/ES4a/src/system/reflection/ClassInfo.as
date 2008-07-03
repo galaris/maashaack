@@ -80,9 +80,19 @@ package system.reflection
          */
         function get superClass():ClassInfo;
         
-        function hasInterface( ...interfaces ):Boolean;
-        
-        function inheritFrom( ...classes ):Boolean;
+        /**
+         * Indicates if the specified class implements all interfaces passed-in arguments.
+         * @param ...interfaces All the interfaces to search in the current ClassInfo.
+         * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
+         */
+        function hasInterface( ...interfaces ):Boolean ;
+           
+        /**
+         * Indicates if the specified class inherit fromm all class passed-in arguments.
+         * @param ...interfaces All the interfaces to search in the current ClassInfo.
+         * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
+         */
+        function inheritFrom( ...classes ):Boolean ;
         
         /**
          * Indicates if the specified object is dynamic.
