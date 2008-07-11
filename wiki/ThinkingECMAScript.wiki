@@ -16,4 +16,5 @@ This page will list some point of view, approach, etc. on common code organizati
 
 = Misc =
 
+[StaticCodeBlock]
 [Metadata]
