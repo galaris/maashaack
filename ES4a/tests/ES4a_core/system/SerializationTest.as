@@ -33,7 +33,7 @@ package system
         
         public function testBasic():void
             {
-            var s:Serializable = new Serializable( "a", "b" );
+            var s:SerializableClass = new SerializableClass( "a", "b" );
             assertEquals( "new Serializable( \"a\", \"b\" );", s.toSource() );
             }
         

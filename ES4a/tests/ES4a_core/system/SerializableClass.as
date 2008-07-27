@@ -26,12 +26,12 @@ package system
     import system.ISerializable;
     import system.Strings;    
 
-    public class Serializable implements ISerializable
+    public class SerializableClass implements ISerializable
         {
         public var a:String;
         public var b:String;
         
-        public function Serializable( a:String, b:String )
+        public function SerializableClass( a:String, b:String )
             {
             this.a = a;
             this.b = b;
