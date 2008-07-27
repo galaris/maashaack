@@ -58,7 +58,7 @@ package system
      * 
      * This logic and these limitations can change later.
      */
-    public class Version implements IEquatable
+    public class Version implements Equatable
         {
             
         
