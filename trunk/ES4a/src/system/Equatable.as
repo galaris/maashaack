@@ -16,17 +16,16 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-
-    - Marc ALCARAZ <ekameleon@gmail.com>
-
+    - Marc Alcaraz <ekameleon@gmail.com>
 */
+
 package system
     {
     
 	/**
 	 * This interface is implemented by classes that can compare an object with their objects.
 	 */    
-    public interface IEquatable
+    public interface Equatable
         {
         	
 		/**
