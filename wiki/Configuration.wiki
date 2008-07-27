@@ -3,10 +3,57 @@
 
 = Introduction =
 
-explain Configurator, config, SystemConfigurator, etc.
-and how it can be combined with eden to dynamically load configuration
-
+A Configurator allow you to configure options of an application and/or packages.
 
 = Details =
 
-FIXME
+By default, at the root of your application you can have a config variable
+that can allow you to configure (duh!) the application.
+
+By extension, this main config also allow you to configure packages within the application.
+
+Ideally you would want this configuration to be dynamically loaded,
+so you could change behaviours within your application at runtime,
+but you also want to have the default configuration hardcoded for cases
+where someone forgot to copy this config file, or delete it, or if you simply
+don't need it.
+
+
+== Configurator ==
+
+The usage is pretty basic, let's see how to create a default config.
+
+define your custom configurator
+{{{
+package
+{
+    import system.Configurator;
+    
+    public class ApplicationConfigurator extends Configurator
+    {
+        public function ApplicationConfigurator( config:Object )
+        {
+            super( config );
+        }
+
+        public function get debug():Boolean
+        {
+            return _config.debug;
+        }
+
+        public function set debug( value:Boolean ):void
+        {
+            _config.debug = value;
+        }
+    }
+}
+
+then instanciate it
+{{{
+package
+{
+    public var config:ApplicationConfigurator = new ApplicationConfigurator( {debug:false} );
+}
+}}}
+
+}}}
