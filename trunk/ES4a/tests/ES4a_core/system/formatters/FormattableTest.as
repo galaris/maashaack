@@ -16,10 +16,9 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  
     - Zwetan Kjukov <zwetan@gmail.com>
-
 */
+
 package system.formatters 
 {
     import buRRRn.ASTUce.framework.TestCase;                
@@ -27,13 +26,13 @@ package system.formatters
     /**
      * The IFormatterTest test case.
      */
-    public class IFormatterTest extends TestCase 
+    public class FormattableTest extends TestCase 
     {
 
        /**
         * Creates a new IFormatterTest instance.
         */ 
-        public function IFormatterTest(name:String = "")
+        public function FormattableTest(name:String = "")
         {
             super( name );
         }
@@ -51,9 +50,9 @@ package system.formatters
     }
 }
 
-import system.formatters.IFormatter;
+import system.formatters.Formattable;
 
-class ConcreteFormatter implements IFormatter
+class ConcreteFormatter implements Formattable
 {
 
     public function format(value:* = null):String

@@ -66,7 +66,7 @@ package system.formatters
         
         public function testInterfaces():void
             {
-            assertTrue( formatter is IFormatter    , "01 - The DateFormatter implements IFormatter failed.") ;
+            assertTrue( formatter is Formattable    , "01 - The DateFormatter implements IFormatter failed.") ;
             assertTrue( formatter is Serializable , "02 - The DateFormatter implements ISerializable failed.") ;
             }        
         

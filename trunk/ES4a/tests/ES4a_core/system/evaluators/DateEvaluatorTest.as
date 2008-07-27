@@ -42,7 +42,7 @@ package system.evaluators
         
         public function testInterfaces():void
             {
-            assertTrue( evaluator is IEvaluator, "The DateEvaluator instance implements IEvaluator failed.") ;
+            assertTrue( evaluator is Evaluable, "The DateEvaluator instance implements IEvaluator failed.") ;
             }           
         
         public function testPattern():void

@@ -23,7 +23,7 @@ package system
     {
     import buRRRn.ASTUce.framework.*;
     
-    import system.IEquatable;
+    import system.Equatable;
     
     public class EqualityTest extends TestCase
         {
@@ -38,7 +38,7 @@ package system
             var eq1:EquatableClass = new EquatableClass( "a", "b" );
             var eq2:EquatableClass = new EquatableClass( "a", "b" );
             
-            assertTrue( eq1 is IEquatable );
+            assertTrue( eq1 is Equatable );
             assertEquals( eq1, eq2 );
             assertEquals( eq1, new EquatableClass( "a", "b" ) );
             }
