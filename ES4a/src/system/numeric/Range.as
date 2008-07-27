@@ -23,7 +23,7 @@
 package system.numeric
     {
     import system.IEquatable;
-    import system.ISerializable;
+    import system.Serializable;
     import system.numeric.Mathematics;    
 
     /**
@@ -46,7 +46,7 @@ package system.numeric
      * </pre>
      * @author eKameleon
      */
-    public class Range implements IEquatable, ISerializable
+    public class Range implements IEquatable, Serializable
         {
         
         /**

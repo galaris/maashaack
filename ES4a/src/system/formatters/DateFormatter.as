@@ -22,7 +22,7 @@ package system.formatters
 {
     import flash.utils.getDefinitionByName;
     
-    import system.ISerializable;
+    import system.Serializable;
     import system.Reflection;
     import system.numeric.Range;    
 
@@ -61,7 +61,7 @@ package system.formatters
      * trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
      * </pre>
      */
-    public class DateFormatter implements IFormatter, ISerializable 
+    public class DateFormatter implements IFormatter, Serializable 
         {
         
         use namespace dateparser;

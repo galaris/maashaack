@@ -26,7 +26,7 @@ package system
 	/**
 	 * The Configurator class defines the basic class used to creates custom configurations.
 	 */    
-    public class Configurator implements ISerializable
+    public class Configurator implements Serializable
         {
         
         /**

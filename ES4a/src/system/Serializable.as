@@ -25,7 +25,7 @@ package system
 	/**
 	 * Allows an object to control its own serialization and deserialization.
 	 */
-    public interface ISerializable
+    public interface Serializable
         {
         
 		/**
