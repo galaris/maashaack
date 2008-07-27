@@ -23,12 +23,12 @@ package system
     {
     import system.IEquatable;
     
-    public class Equatable implements IEquatable
+    public class EquatableClass implements IEquatable
         {
         public var a:String;
         public var b:String;
         
-        public function Equatable( a:String, b:String )
+        public function EquatableClass( a:String, b:String )
             {
             this.a = a;
             this.b = b;
@@ -36,7 +36,7 @@ package system
         
         public function equals( o:* ):Boolean
             {
-            if( !(o is Equatable) )
+            if( !(o is EquatableClass) )
                 {
                 return false;
                 }
