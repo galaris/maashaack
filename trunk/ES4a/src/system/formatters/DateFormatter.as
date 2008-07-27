@@ -61,7 +61,7 @@ package system.formatters
      * trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
      * </pre>
      */
-    public class DateFormatter implements IFormatter, Serializable 
+    public class DateFormatter implements Formattable, Serializable 
         {
         
         use namespace dateparser;
