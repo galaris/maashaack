@@ -47,6 +47,7 @@ package
         }
     }
 }
+}}}
 
 then instanciate it
 {{{
@@ -54,6 +55,4 @@ package
 {
     public var config:ApplicationConfigurator = new ApplicationConfigurator( {debug:false} );
 }
-}}}
-
 }}}
