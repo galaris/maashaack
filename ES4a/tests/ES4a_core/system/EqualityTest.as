@@ -35,12 +35,12 @@ package system
         
         public function testBasic():void
             {
-            var eq1:Equatable = new Equatable( "a", "b" );
-            var eq2:Equatable = new Equatable( "a", "b" );
+            var eq1:EquatableClass = new EquatableClass( "a", "b" );
+            var eq2:EquatableClass = new EquatableClass( "a", "b" );
             
             assertTrue( eq1 is IEquatable );
             assertEquals( eq1, eq2 );
-            assertEquals( eq1, new Equatable( "a", "b" ) );
+            assertEquals( eq1, new EquatableClass( "a", "b" ) );
             }
         
         }

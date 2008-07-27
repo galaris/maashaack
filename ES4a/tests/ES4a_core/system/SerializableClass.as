@@ -23,10 +23,10 @@ package system
 {
     import buRRRn.eden.eden;
     
-    import system.ISerializable;
+    import system.Serializable;
     import system.Strings;    
 
-    public class SerializableClass implements ISerializable
+    public class SerializableClass implements Serializable
         {
         public var a:String;
         public var b:String;

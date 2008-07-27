@@ -24,7 +24,7 @@ package system.formatters
     {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.ISerializable;
+    import system.Serializable;
     import system.numeric.Range;    
 
     /**
@@ -67,7 +67,7 @@ package system.formatters
         public function testInterfaces():void
             {
             assertTrue( formatter is IFormatter    , "01 - The DateFormatter implements IFormatter failed.") ;
-            assertTrue( formatter is ISerializable , "02 - The DateFormatter implements ISerializable failed.") ;
+            assertTrue( formatter is Serializable , "02 - The DateFormatter implements ISerializable failed.") ;
             }        
         
         public function testAM_PM():void

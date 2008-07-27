@@ -4,7 +4,7 @@ package system.numeric
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.IEquatable;
-    import system.ISerializable;    
+    import system.Serializable;    
 
     /**
      * @author eKameleon
@@ -52,7 +52,7 @@ package system.numeric
         {
             assertTrue( range is Range , "Range object type failed.") ;
             assertTrue( range is IEquatable , "Range object must implement the IEquatable interface.") ;
-            assertTrue( range is ISerializable , "Range object must implement the ISerializable interface.") ;
+            assertTrue( range is Serializable , "Range object must implement the ISerializable interface.") ;
         }        
         
         public function testDEGREE_RANGE():void
