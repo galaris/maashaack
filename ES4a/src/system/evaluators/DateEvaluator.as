@@ -20,7 +20,7 @@
 */
 package system.evaluators 
     {
-    import system.evaluators.IEvaluator;
+    import system.evaluators.Evaluable;
     import system.formatters.DateFormatter;    
 
     /**
@@ -46,7 +46,7 @@ package system.evaluators
      * trace( evaluator.eval( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
      * </pre>
      */
-    public class DateEvaluator implements IEvaluator 
+    public class DateEvaluator implements Evaluable 
         {
 
         /**

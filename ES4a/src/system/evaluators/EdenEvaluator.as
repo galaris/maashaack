@@ -26,7 +26,7 @@ package system.evaluators
     /**
     * Evaluates eden expression.
     */
-    public class EdenEvaluator implements IEvaluator
+    public class EdenEvaluator implements Evaluable
         {
         private var _serialized:Boolean;
         
