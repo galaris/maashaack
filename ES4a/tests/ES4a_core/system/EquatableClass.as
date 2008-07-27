@@ -21,9 +21,9 @@
 
 package system
     {
-    import system.IEquatable;
+    import system.Equatable;
     
-    public class EquatableClass implements IEquatable
+    public class EquatableClass implements Equatable
         {
         public var a:String;
         public var b:String;

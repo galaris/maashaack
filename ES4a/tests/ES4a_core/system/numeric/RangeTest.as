@@ -3,7 +3,7 @@ package system.numeric
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.IEquatable;
+    import system.Equatable;
     import system.Serializable;    
 
     /**
@@ -51,7 +51,7 @@ package system.numeric
         public function testInherit():void
         {
             assertTrue( range is Range , "Range object type failed.") ;
-            assertTrue( range is IEquatable , "Range object must implement the IEquatable interface.") ;
+            assertTrue( range is Equatable , "Range object must implement the IEquatable interface.") ;
             assertTrue( range is Serializable , "Range object must implement the ISerializable interface.") ;
         }        
         

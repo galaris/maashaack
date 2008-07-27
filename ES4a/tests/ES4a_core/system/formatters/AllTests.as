@@ -40,7 +40,7 @@ package system.formatters
             var suite:TestSuite = new TestSuite( "Formatters tests" );
 
             suite.addTestSuite( DateFormatterTest ) ;
-            suite.addTestSuite( IFormatterTest ) ;
+            suite.addTestSuite( FormattableTest ) ;
 
             return suite;
         }
