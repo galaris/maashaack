@@ -20,7 +20,6 @@
 */
 package system.evaluators 
     {
-    import system.evaluators.Evaluable;
     
     /**
      * This <code class="prettyprint">IEvaluator</code> use a <code class="prettyprint">Array</code> collection of evaluators to evaluate the specified value.
