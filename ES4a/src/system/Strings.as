@@ -263,11 +263,11 @@ package system
                     expression = evaluators[i].eval( expression );
                     }
                 return String( expression );
-                }
+                };
             
             var evalSequence:String = "";
             var evalString:String   = "";
-            var evalValue:String    = "";
+            // var evalValue:String    = "" ; // FIXME not use this variable for the moment
             var inBetween:String    = "";
             var pos1:int;
             var pos2:int;
@@ -280,7 +280,7 @@ package system
                     return true;
                     }
                 return false;
-                }
+                };
             
             var isValid:Function = function( str:String ):Boolean
                 {
@@ -297,7 +297,7 @@ package system
                         } 
                     }
                 return true;
-                }
+                };
             
             while( value.indexOf( "${" ) > -1 )
                 {
@@ -438,7 +438,7 @@ package system
                     }
                 
                 return value;
-                }
+                };
             
             var expression:String = "";
             var formated:String   = "";
@@ -451,7 +451,7 @@ package system
                 ch = stringvalue.charAt( pos );
                 pos++;
                 return ch;
-                }
+                };
             
             while( pos < len )
                 {
