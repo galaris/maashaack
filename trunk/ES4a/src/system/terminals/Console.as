@@ -16,6 +16,8 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>.
+
 */
 
 package system.terminals
@@ -24,8 +26,8 @@ package system.terminals
     import system.IO.Writeable;
     
     /**
-    * A Comsole can read and write.
-    */
+     * A Console can read and write.
+     */
     public interface Console extends Readable, Writeable
         {
         

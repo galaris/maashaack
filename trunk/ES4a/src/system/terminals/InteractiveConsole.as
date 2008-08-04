@@ -16,59 +16,60 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>.
+
 */
 
 package system.terminals
     {
     
     /**
-    * An InteractiveConsole can interact with the user and the system
-    * using standard streams: standard input (stdin), standard output (stdout) and standard error (stderr).
-    * See <http://en.wikipedia.org/wiki/Standard_streams>.
-    */
+     * An InteractiveConsole can interact with the user and the system
+     * using standard streams: standard input (stdin), standard output (stdout) and standard error (stderr).
+     * See <http://en.wikipedia.org/wiki/Standard_streams>.
+     */
     public interface InteractiveConsole extends Console
         {
+			
+        /**
+         * Standard error is another output stream typically used by programs to output error messages or diagnostics. 
+         * It is a stream independent of standard output and can be redirected separately.
+         */
+        function get stderr():String ;
         
         /**
-        * Standard output is the stream where a program writes its output data.
-        * The program requests data transfer with the write operation.
-        * Not all programs generate output.
-        */
-        function get stdout():String;
+         * @private
+         */
+        function set stderr( value:String ):void ;
         
         /**
-        * @private
-        */
-        function set stdout( value:String ):void;
+         * Standard input is data (often text) going into a program. 
+         * The program requests data transfers by use of the read operation.
+         * Not all programs require input.
+         */
+        function get stdin():String ;
         
         /**
-        * Standard error is another output stream typically used by programs to
-        * output error messages or diagnostics.
-        * It is a stream independent of standard output and can be redirected separately.
-        */
-        function get stderr():String;
-        
-        /**
-        * @private
-        */
-        function set stderr( value:String ):void;
-        
-        /**
-        * Standard input is data (often text) going into a program.
-        * The program requests data transfers by use of the read operation.
-        * Not all programs require input.
-        */
-        function get stdin():String;
-        
-        /**
-        * @private
-        */
+         * @private
+         */
         function set stdin( value:String ):void;
         
         /**
-        * Clear all standard streams.
-        */
-        function clear():void;
+         * Standard output is the stream where a program writes its output data. 
+         * The program requests data transfer with the write operation.
+         * Not all programs generate output.
+         */
+        function get stdout():String ;
+        
+        /**
+         * @private
+         */
+        function set stdout( value:String ):void ;        
+        
+        /**
+         * Clear all standard streams.
+         */
+        function clear():void ;
         
         }
     
