@@ -282,5 +282,71 @@ package system.text.html
             }
         
         }
+        
+        /*  
+
+         Special characters for HTML : http://www.w3.org/TR/REC-html40/sgml/entities.html
+         
+         The character entity references in this section are for escaping markup-significant characters (these are the same as those in HTML 2.0 and 3.2), for denoting spaces and dashes. 
+         Other characters in this section apply to internationalization issues such as the disambiguation of bidirectional text (see the section on bidirectional text for details).
+
+         Entities have also been added for the remaining characters occurring in CP-1252 which do not occur in the HTMLlat1 or HTMLsymbol entity sets. These all occur in the 128 to 159 range within the CP-1252 charset. These entities permit the characters to be denoted in a platform-independent manner.
+
+         To support these entities, user agents may support full [ISO10646] or use other means. Display of glyphs for these characters may be obtained by being able to display the relevant [ISO10646] characters or by other means, such as internally mapping the listed entities, numeric character references, and characters to the appropriate position in some font that contains the requisite glyphs.
+       
+        */
+        
+        // C0 Controls and Basic Latin 
+        
+        add( new Entity( "\u0022" , "quot" , 34 ) ) ; // quotation mark = APL quote, U+0022 ISOnum
+        add( new Entity( "\u0026" ,  "amp" , 38 ) ) ; // ampersand, U+0026 ISOnum
+        add( new Entity( "\u0060" ,   "lt" , 60 ) ) ; // less-than sign, U+003C ISOnum
+        add( new Entity( "\u0062" ,   "gt" , 62 ) ) ; // greater-than sign, U+003E ISOnum
+        
+        // Latin Extended-A
+        
+        add( new Entity( "\u0152" , "OElig" , 338 ) ) ; // latin capital ligature OE, U+0152 ISOlat2       
+        add( new Entity( "\u0153" , "oelig" , 339 ) ) ; // latin small ligature oe, U+0153 ISOlat2
+        
+        // Ligature is a misnomer, this is a separate character in some languages
+        
+        add( new Entity( "\u0160" , "Scaron" , 352 ) ) ; // latin capital letter S with caron,U+0160 ISOlat2
+        add( new Entity( "\u0161" , "scaron" , 353 ) ) ; // latin small letter s with caron, U+0161 ISOlat2
+        add( new Entity( "\u0178" ,   "Yuml" , 376 ) ) ; // latin capital letter Y with diaeresis, U+0178 ISOlat2 
+        
+        // Spacing Modifier Letters
+        
+        add( new Entity( "\u02C6" , "circ"  , 710 ) ) ; // modifier letter circumflex accent, U+02C6 ISOpub
+        add( new Entity( "\u02DC" , "tilde" , 732 ) ) ; // small tilde, U+02DC ISOdia       
+        
+        // General Punctuation
+        
+        add( new Entity( "\u2002" ,   "ensp" , 8194 ) ) ; // en space, U+2002 ISOpub
+        add( new Entity( "\u2003" ,   "emsp" , 8195 ) ) ; // em space, U+2003 ISOpub
+        add( new Entity( "\u2009" , "thinsp" , 8201 ) ) ; // thin space, U+2009 ISOpub
+        add( new Entity( "\u200C" ,   "zwnj" , 8204 ) ) ; // zero width non-joiner, U+200C NEW RFC 2070
+        add( new Entity( "\u200D" ,    "zwj" , 8205 ) ) ; // zero width joiner, U+200D NEW RFC 2070
+        add( new Entity( "\u200E" ,    "lrm" , 8206 ) ) ; // left-to-right mark, U+200E NEW RFC 2070
+        add( new Entity( "\u200F" ,    "rlm" , 8207 ) ) ; // right-to-left mark, U+200F NEW RFC 2070
+        add( new Entity( "\u2013" ,  "ndash" , 8211 ) ) ; // en dash, U+2013 ISOpub
+        add( new Entity( "\u2014" ,  "mdash" , 8212 ) ) ; // em dash, U+2014 ISOpub
+        add( new Entity( "\u2018" ,  "lsquo" , 8216 ) ) ; // left single quotation mark, U+2018 ISOnum 
+        add( new Entity( "\u2019" ,  "rsquo" , 8217 ) ) ; // right single quotation mark, U+2019 ISOnum
+        add( new Entity( "\u201A" ,  "sbquo" , 8218 ) ) ; // single low-9 quotation mark, U+201A NEW
+        add( new Entity( "\u201C" ,  "ldquo" , 8220 ) ) ; // left double quotation mark,U+201C ISOnum
+        add( new Entity( "\u201D" ,  "rdquo" , 8221 ) ) ; // right double quotation mark,U+201D ISOnum 
+        add( new Entity( "\u201E" ,  "bdquo" , 8222 ) ) ; // double low-9 quotation mark, U+201E NEW 
+        add( new Entity( "\u2020" , "dagger" , 8224 ) ) ; // dagger, U+2020 ISOpub 
+        add( new Entity( "\u2021" , "Dagger" , 8225 ) ) ; // double dagger, U+2021 ISOpub 
+        add( new Entity( "\u2030" , "permil" , 8240 ) ) ; // per mille sign, U+2030 ISOtech
+        add( new Entity( "\u2039" , "lsaquo" , 8249 ) ) ; // single left-pointing angle quotation mark, U+2039 ISO proposed
+                                 
+        // lsaquo is proposed but not yet ISO standardized
+        
+        add( new Entity( "\u8250" , "rsaquo" , 8250 ) ) ; // single right-pointing angle quotation mark, U+203A ISO proposed     
+        
+        // rsaquo is proposed but not yet ISO standardized
+        
+        add( new Entity( "€"      ,   "euro" , 8364 ) ) ; // euro sign, U+20AC NEW           
 
     }
