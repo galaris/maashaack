@@ -53,17 +53,21 @@ package system
             
             switch( runtime )
                 {
-                case "ActiveX":
-                case "External":
-                case "PlugIn":
-                case "StandAlone":
-                return HostID.Flash;
-                
+                case "ActiveX"    :
+                case "External"   :
+                case "PlugIn"     :
+                case "StandAlone" :
+                    {
+                    return HostID.Flash ;
+                    }
                 case "Desktop":
-                return HostID.Air;
-                
+                    {
+                    return HostID.Air ;
+                    }
                 default:
-                return HostID.Unknown;
+                    {
+                    return HostID.Unknown ;
+                    }
                 }
             }
 
@@ -76,33 +80,46 @@ package system
             
             switch( platform )
                 {
-                case "Windows 95":
-                case "Windows 98/ME":
-                case "Windows NT":
-                case "Windows 2000":
-                case "Windows XP":
-                case "Windows CE":
-                case "win32":
-                return PlatformID.Windows;
+                case "Windows Vista" :
+                case "Windows 95"    :
+                case "Windows 98/ME" :
+                case "Windows NT"    :
+                case "Windows 2000"  :
+                case "Windows XP"    :
+                case "Windows CE"    :
+                case "win32"         :
+                    {
+                    return PlatformID.Windows ;
+                    }
                 
-                case "Mac OS 10.5.2":
-                case "MacOS":
-                case "mac":
-                return PlatformID.Macintosh;
+                case "Mac OS 10.5.2" :
+                case "MacOS"         :
+                case "mac"           :
+                    {
+                    return PlatformID.Macintosh ;
+                    }
                 
-                case "Linux":
-                case "unix":
-                return PlatformID.Unix;
+                case "Linux" :
+                case "unix"  :
+                    {
+                    return PlatformID.Unix;
+                    }
                 
                 case "arm":
-                return PlatformID.Arm;
+                    {
+                    return PlatformID.Arm ;
+                    }
 
-                case "web":
-                return PlatformID.Web;
+                case "web" :
+                    {
+                    return PlatformID.Web ;
+                    }
                 
-                case "unknown":
-                default:
-                return PlatformID.Unknown;
+                case "unknown" :
+                default        :
+                    {
+                    return PlatformID.Unknown;
+                    }
                 }
             }
 
