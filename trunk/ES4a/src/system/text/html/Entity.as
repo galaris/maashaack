@@ -18,7 +18,7 @@
   
   Contributor(s):
 
-    - Marc ALCARAZ <ekameleon@gmail.com>
+    - Marc Alcaraz <ekameleon@gmail.com>
 
 */
 package system.text.html
