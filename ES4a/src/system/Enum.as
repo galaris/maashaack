@@ -23,6 +23,12 @@
 package system
     {
     	
+	/**
+	 * This class determinates a basic implementation to creates enumeration objects.
+	 */
+    public class Enum implements Serializable
+        {    	
+    	
         /**
          * @private
          */
