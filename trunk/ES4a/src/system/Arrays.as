@@ -62,7 +62,7 @@ package system
 		 * @return a new Array with an arbitrary number of elements (index), 
 		 * with every element containing the passed parameter value or by default the null value.
 		 */
-        public static function initialize( elements:int = 0, value:* = null ):Array
+        public static function initialize( elements:uint = 0, value:* = null ):Array
             {
             var arr:Array = [];
             
