@@ -16,9 +16,10 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  Marc Alcaraz <ekameleon@gmail.com>
+  Marc Alcaraz <ekameleon@gmail.com>.
 
 */
+
 package system.reflection
     {
     
@@ -37,6 +38,11 @@ package system.reflection
          * Creates the constructor representation.
          */
         function construct( ...args:Array ):*;
+        
+        /**
+         * Invoke the constructor representation with an array of parameters.
+         */
+        function invoke( params:Array ):*;        
         
         }
     }
