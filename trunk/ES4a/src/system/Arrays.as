@@ -26,7 +26,7 @@ package system
     /**
      * A static class for Array utilities.
      */
-	public dynamic class Arrays
+	public class Arrays
 		{
         
         /**

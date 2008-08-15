@@ -31,6 +31,9 @@ package system.text.html
     public class HTML
         {
         
+        /**
+         * @private
+         */        
         private var _data:String;
         
         /**
@@ -111,7 +114,7 @@ package system.text.html
 	     * trace( HTML.decode("&lt;b&gt;hello world&lt;/b&gt;" ) ) ; // <b>hello world</b>
 	     * </pre>
 	     * @return the decode string.
-	     */        
+	     */  
         public static function decode( html:String ):String
             {
             var text:String = "";
