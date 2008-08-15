@@ -20,7 +20,7 @@
   
 */
 
-package system.CLI
+package system.cli
     {
     import system.Enum;
     
