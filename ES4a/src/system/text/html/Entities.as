@@ -41,6 +41,9 @@ package system.text.html
          */
         private static var _fastSearch:Dictionary = new Dictionary() ;
         
+        /**
+         * Indicates if the class support ISO-8859-15.
+         */        
         public static var support_ISO_8859_15:Boolean = false;
         
         /**
@@ -143,6 +146,7 @@ package system.text.html
             }
         
         //ASCII Entities
+        
         add( new Entity( "\"" , "quot" , 34 ) ) ; // quotation mark 
         add( new Entity(  "&" , "amp"  , 38 ) ) ; // ampersand
         add( new Entity( "\'" , "apos" , 39 ) ) ; // apostrophe
@@ -150,6 +154,7 @@ package system.text.html
         add( new Entity(  ">" , "gt"   , 62 ) ) ; // greater-than sign  
         
         //ISO 8859-1 Symbol Entities
+        
         add( new Entity(  " " ,   "nbsp" , 160 ) ) ; // non-breaking space 
         add( new Entity(  "¡" ,  "iexcl" , 161 ) ) ; // inverted exclamation mark 
         add( new Entity(  "¢" ,   "cent" , 162 ) ) ; // cent sign
@@ -184,6 +189,7 @@ package system.text.html
         add( new Entity(  "÷" , "divide" , 247 ) ) ; // division sign 
          
         //ISO 8859-1 Character Entities
+        
         add( new Entity(  "À" , "Agrave" , 192 ) ) ; // capital a , grave accent
         add( new Entity(  "Á" , "Aacute" , 193 ) ) ; // capital a , acute accent
         add( new Entity(  "Â" , "Acirc"  , 194 ) ) ; // capital a , circumflex accent
@@ -246,8 +252,6 @@ package system.text.html
         add( new Entity(  "ý" , "yacute" , 253 ) ) ; // small y, acute accent
         add( new Entity(  "þ" ,  "thorn" , 254 ) ) ; // small thorn, Icelandic
         add( new Entity(  "ÿ" ,   "yuml" , 255 ) ) ; // small y, umlaut mark
-        
-        // FIXME add( new Entity(  "€" ,   "euro" , 8364 ) ) ; // euro sign ???
         
         /* ISO 8859-15 Symbol Entities
            see http://fr.wikipedia.org/wiki/ISO_8859-15
