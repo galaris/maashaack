@@ -27,7 +27,7 @@ package system
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
-    import system.CLI.AllTests;
+    import system.cli.AllTests;
 
     /**
       * TestSuite that runs all the ES4a tests
@@ -70,7 +70,7 @@ package system
             suite.addTest( system.numeric.AllTests.suite() );
             
             //CLI
-            suite.addTest( system.CLI.AllTests.suite() );
+            suite.addTest( system.cli.AllTests.suite() );
                         
             return suite;
             }

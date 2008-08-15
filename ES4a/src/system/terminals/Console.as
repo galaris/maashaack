@@ -22,8 +22,8 @@
 
 package system.terminals
     {
-    import system.IO.Readable;
-    import system.IO.Writeable;
+    import system.io.Readable;
+    import system.io.Writeable;
     
     /**
      * A Console can read and write.
