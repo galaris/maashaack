@@ -18,7 +18,7 @@
   Contributor(s):
 */
 
-package system.IO
+package system.io
     {
     
     public interface Writeable
