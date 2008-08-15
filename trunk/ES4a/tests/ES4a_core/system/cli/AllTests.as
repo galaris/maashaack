@@ -19,7 +19,7 @@
   
 */
 
-package system.CLI
+package system.cli
     {
     import buRRRn.ASTUce.framework.*;
     

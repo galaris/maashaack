@@ -19,7 +19,7 @@
   
 */
 
-package system.CLI
+package system.cli
     {
     
     public class SimpleArgumentsParser extends ArgumentsParser
