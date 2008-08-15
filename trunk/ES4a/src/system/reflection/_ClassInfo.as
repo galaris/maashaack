@@ -16,16 +16,17 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  Marc Alcaraz <ekameleon@gmail.com>
+  Marc Alcaraz <ekameleon@gmail.com>.
 
 */
+
 package system.reflection
-{
+    {
     import flash.utils.describeType;
     import flash.utils.getDefinitionByName;
     
     import system.Reflection;    
-	    
+
     [ExcludeClass]
     
     /**
@@ -38,7 +39,71 @@ package system.reflection
          * @private
          */
         private var _class:XML;
+
+        /**
+         * @private
+         */
         private var _filter:FilterType;
+        
+        /**
+         * @private
+         */
+        private function _hasInterface( interfaceRef:Class ):Boolean
+            {
+            var path:XMLList;
+            var found:Class;
+            
+            if( isInstance() &&  _class.hasOwnProperty( "implementsInterface" ) )
+                {
+                path = _class.implementsInterface;
+                }
+            else if( !isInstance() && _class.factory.hasOwnProperty( "implementsInterface" ) )
+                {
+                path = _class.factory.implementsInterface;
+                }
+            
+            for each( var property:XML in path )
+                {
+                found = getDefinitionByName( property.@type ) as Class;
+                
+                if( found == interfaceRef )
+                    {
+                    return true;
+                    }
+                }
+            
+            return false;
+            }        
+        
+        /**
+         * @private
+         */
+        private function _inheritFrom( classRef:Class ):Boolean
+            {
+            var path:XMLList;
+            var found:Class;
+            
+            if( isInstance() &&  _class.hasOwnProperty( "extendsClass" ) )
+                {
+                path = _class.extendsClass;
+                }
+            else if( !isInstance() && _class.factory.hasOwnProperty( "extendsClass" ) )
+                {
+                path = _class.factory.extendsClass;
+                }
+            
+            for each( var property:XML in path )
+                {
+                found = getDefinitionByName( property.@type ) as Class;
+                
+                if( found == classRef )
+                    {
+                    return true;
+                    }
+                }
+            
+            return false;
+            }        
         
         /**
          * Creates a new _ClassInfo instance.
@@ -315,89 +380,29 @@ package system.reflection
                 return null;
                 }
             }            
-        
-        /**
-         * @private
-         */
-        private function _hasInterface( interfaceRef:Class ):Boolean
-        	{
-        	var path:XMLList;
-            var found:Class;
-            
-        	if( isInstance() &&  _class.hasOwnProperty( "implementsInterface" ) )
-        		{
-        		path = _class.implementsInterface;
-        		}
-        	else if( !isInstance() && _class.factory.hasOwnProperty( "implementsInterface" ) )
-        		{
-        		path = _class.factory.implementsInterface;
-        		}
-        	
-        	for each( var property:XML in path )
-        		{
-        		found = getDefinitionByName( property.@type ) as Class;
-        		
-        		if( found == interfaceRef )
-        			{
-        			return true;
-        			}
-        		}
-        	
-        	return false;
-        	}
-        
+
         /**
          * Indicates if the specified class implements all interfaces passed-in arguments.
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
          * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
-         */        
+         */
         public function hasInterface( ...interfaces ):Boolean
-        	{
-        	if( interfaces.length == 0 )
-        		{
-        		return false;
-        		}
-        	
-        	for( var i:int=0; i<interfaces.length; i++ )
-        		{
-        		if( !_hasInterface( interfaces[i] ) )
-        			{
-        			return false;
-        			}
-        		}
-        	
-        	return true;
-        	}
-        
-        /**
-         * @private
-         */        
-        private function _inheritFrom( classRef:Class ):Boolean
-        	{
-        	var path:XMLList;
-            var found:Class;
+            {
+            if( interfaces.length == 0 )
+                {
+                return false;
+                }
             
-        	if( isInstance() &&  _class.hasOwnProperty( "extendsClass" ) )
-        		{
-        		path = _class.extendsClass;
-        		}
-        	else if( !isInstance() && _class.factory.hasOwnProperty( "extendsClass" ) )
-        		{
-        		path = _class.factory.extendsClass;
-        		}
-        	
-        	for each( var property:XML in path )
-        		{
-        		found = getDefinitionByName( property.@type ) as Class;
-        		
-        		if( found == classRef )
-        			{
-        			return true;
-        			}
-        		}
-        	
-        	return false;
-        	}
+            for( var i:int=0; i<interfaces.length; i++ )
+                {
+                if( !_hasInterface( interfaces[i] ) )
+                    {
+                    return false;
+                    }
+                }
+            
+            return true;
+            }
         
         /**
          * Indicates if the specified class inherit fromm all class passed-in arguments.
@@ -405,22 +410,22 @@ package system.reflection
          * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
          */
         public function inheritFrom( ...classes ):Boolean
-        	{
-        	if( classes.length == 0 )
-        		{
-        		return false;
-        		}
-        	
-        	for( var i:int=0; i<classes.length; i++ )
-        		{
-        		if( !_inheritFrom( classes[i] ) )
-        			{
-        			return false;
-        			}
-        		}
-        	
-        	return true;
-        	}
+            {
+            if( classes.length == 0 )
+                {
+                return false;
+                }
+            
+            for( var i:int=0; i<classes.length; i++ )
+                {
+                if( !_inheritFrom( classes[i] ) )
+                    {
+                    return false;
+                    }
+                }
+            
+            return true;
+            }        
         
         /**
          * Indicates if the specified object is dynamic.
@@ -453,6 +458,15 @@ package system.reflection
             {
             return _class.@isStatic == "true";
             }
+            
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public override function toString():String
+            {
+            return "[ClassInfo]" ;
+            }                
         
         /**
          * Returns the XML representation of the class.

@@ -16,9 +16,10 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  - Marc Alcaraz <ekameleon@gmail.com>.
+  Marc Alcaraz <ekameleon@gmail.com>.
 
 */
+    
 package system
 {
     import flash.system.ApplicationDomain;
@@ -49,7 +50,7 @@ package system
 			var a:Array = path.split( "." ) ;
 			return (a.length > 1) ? a.pop( ) : path ;
 			}
-
+        
 		/**
 		 * @private
 		 */
@@ -66,7 +67,7 @@ package system
 				return null ;
 				}
 			}
-
+        
 		/**
 		 * @private
 		 */
@@ -85,7 +86,7 @@ package system
             {
             return ApplicationDomain.currentDomain.getDefinition( name ) as Class;
             }
-
+        
         /**
          * Returns the ClassInfo object of the specified object.
          * @return the ClassInfo object of the specified object.
@@ -93,9 +94,9 @@ package system
         public static function getClassInfo( o:*, ...filters ):ClassInfo
             {
             var filter:FilterType = FilterType.none; //default
-            var value:int = 0;
-            var len:uint  = filters.length ;
-            for( var i:uint = 0; i<len; i++ )
+            var value:int  = 0;
+            var len:int    = filters.length ;
+            for( var i:int = 0 ; i<len ; i++ )
             	{
             	value |= int(filters[i]);
             	}
@@ -133,7 +134,6 @@ package system
             
             return members;
             }
-
         
 		/**
 		 * Returns the class name as string of an object.
@@ -173,7 +173,7 @@ package system
             {
             return ApplicationDomain.currentDomain.getDefinition( name );
             }        
-
+        
 		/**
 		 * Returns the method reference of the specified object with the passed-in property name.
 		 * @return the method reference of the specified object with the passed-in property name.
@@ -197,7 +197,7 @@ package system
 			{
 			return _formatName( getSuperClassPath( o ) ) ;
 			}
-
+        
 		/**
 		 * Returns the super class package string representation of the specified instance passed in arguments.
 		 * @param o the reference of the object to apply reflexion.
@@ -207,7 +207,7 @@ package system
 			{
 			return _formatPackage( getSuperClassPath( o ) ) ;
 			}
-
+        
 		/**
 		 * Returns the super class path string representation of the specified instance passed in arguments.
 		 * @param o the reference of the object to apply reflexion.
@@ -227,7 +227,6 @@ package system
             return new _TypeInfo( o );
             }
         
-
 		/**
 		 * Returns a boolean telling if the class exists from a string name.
 		 * @return a boolean telling if the class exists from a string name.
@@ -246,6 +245,101 @@ package system
             return true;
             }
         
+        /**
+         * Wrapping method which select which build method use according to the argument count (32 max).
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Arrays ;
+         * import system.Reflection ;
+         * 
+         * Array.prototype.toString = function():String
+         * {
+         *     return "[" + this.join(",") + "]" ;
+         * }
+         * 
+         * var ar:Array
+         * 
+         * // test with no argument
+         * ar = Reflection.invokeClass( Array ) ;
+         * trace( ar ) ;
+         * //output: []
+         * 
+         * // test with 0 argument
+         * ar = Reflection.invokeClass( Array , [] ) ;
+         * trace( ar ) ;
+         * //output: []
+         * 
+         * // test with 2 arguments
+         * ar = Reflection.invokeClass( Array , Arrays.initialize(2,0) ) ;
+         * trace( ar ) ;
+         * //output: [0,0]
+         * 
+         * // test with 32 arguments
+         * ar = Reflection.invokeClass( Array , Arrays.initialize(32,0) ) ;
+         * trace( ar ) ;
+         * //output: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+         * 
+         * // test with 33 arguments
+         * ar = Reflection.invokeClass( Array , Arrays.initialize(33,0) ) ;
+         * trace( ar ) ;
+         * 
+         * //output:
+         * // ArgumentError: Reflection.invokeClass() method failed : arguments limit exceeded, you can pass a maximum of 32 arguments.
+         * </pre>
+         * @param c The Class of the instance to build.
+         * @param args The array of all arguments to passed-in the constructor of the specified class.
+         */
+        public static function invokeClass( c:Class, args:Array=null ):*
+            {
+            if ( args != null && args.length > 0 )
+                {
+                var a:Array = args ;
+                switch( a.length )
+                    {
+                    case  1 : return new c(a[0]) ;
+                    case  2 : return new c(a[0],a[1]) ;
+                    case  3 : return new c(a[0],a[1],a[2]) ;                
+                    case  4 : return new c(a[0],a[1],a[2],a[3]) ;
+                    case  5 : return new c(a[0],a[1],a[2],a[3],a[4]) ;
+                    case  6 : return new c(a[0],a[1],a[2],a[3],a[4],a[5]) ;
+                    case  7 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6]) ;
+                    case  8 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7]) ;
+                    case  9 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8]) ;
+                    case 10 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9]) ;
+                    case 11 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10]) ;
+                    case 12 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11]) ;
+                    case 13 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12]) ;
+                    case 14 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13]) ;
+                    case 15 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14]) ;
+                    case 16 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15]) ;
+                    case 17 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16]) ;
+                    case 18 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17]) ;
+                    case 19 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18]) ;
+                    case 20 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19]) ;
+                    case 21 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20]) ;
+                    case 22 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21]) ;
+                    case 23 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22]) ;
+                    case 24 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23]) ;
+                    case 25 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24]) ;
+                    case 26 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25]) ;
+                    case 27 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26]) ;
+                    case 28 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26],a[27]) ;
+                    case 29 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26],a[27],a[28]) ;
+                    case 30 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26],a[27],a[28],a[29]) ;
+                    case 31 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26],a[27],a[28],a[29],a[30]) ;
+                    case 32 : return new c(a[0],a[1],a[2],a[3],a[4],a[5],a[6],a[7],a[8],a[9],a[10],a[11],a[12],a[13],a[14],a[15],a[16],a[17],a[18],a[19],a[20],a[21],a[22],a[23],a[24],a[25],a[26],a[27],a[28],a[29],a[30],a[31]) ;
+                    default :
+                        {
+                        throw new ArgumentError( "Reflection.invokeClass() method failed : arguments limit exceeded, you can pass a maximum of 32 arguments.") ; 
+                        }
+                    }
+                }
+            else
+                {
+                return new c() ;
+                }
+            }        
+            
         }
     
     }

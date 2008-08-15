@@ -16,9 +16,10 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  Marc Alcaraz <ekameleon@gmail.com>
+  Marc Alcaraz <ekameleon@gmail.com>.
 
 */
+
 package system.reflection
     {
     
@@ -55,6 +56,15 @@ package system.reflection
             {
             return type is o;
             }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+            {
+            return "[TypeInfo]" ;
+            }          
         
         }
     }
