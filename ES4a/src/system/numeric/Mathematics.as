@@ -17,8 +17,8 @@
   
   Contributor(s):
     - Zwetan Kjukov <zwetan@gmail.com>
-
 */
+
 package system.numeric
     {
     import flash.errors.IllegalOperationError;        
