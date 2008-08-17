@@ -130,7 +130,7 @@ package system.serializers.eden
 		 */
         public static function evaluate( source:String ):*
             {
-            var parser:GenericParser = new buRRRn.eden.GenericParser( source );
+            var parser:GenericParser = new GenericParser( source );
             return parser.eval();
             }
         

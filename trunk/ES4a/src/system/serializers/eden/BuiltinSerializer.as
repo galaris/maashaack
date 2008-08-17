@@ -23,6 +23,7 @@ package system.serializers.eden
     {
     import system.Environment;
     import system.Arrays;
+    import system.eden;
     
 	/**
 	 * The BuiltinSerializer class.

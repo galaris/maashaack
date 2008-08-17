@@ -21,7 +21,7 @@
 
 package system
 {
-    import buRRRn.eden.eden;
+    import system.eden;
     
     import system.Serializable;
     import system.Strings;    

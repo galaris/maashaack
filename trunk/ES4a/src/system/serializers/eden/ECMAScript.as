@@ -111,7 +111,7 @@ package system.serializers.eden
 		 */
         public static function evaluate( source:String ):*
             {
-            var parser:ECMAScript = new buRRRn.eden.ECMAScript( source );
+            var parser:ECMAScript = new ECMAScript( source );
             return parser.eval();
             }
         

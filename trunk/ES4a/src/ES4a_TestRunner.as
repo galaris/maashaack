@@ -21,11 +21,13 @@
 
 package
     {
-	import flash.display.Sprite;
-	import buRRRn.eden.eden;
 	import buRRRn.ASTUce.*;
 	import buRRRn.ASTUce.tests.*;
+	
+	import flash.display.Sprite;
+	
 	import system.*;
+	import system.serializers.eden.AllTests;
 	
 	public class ES4a_TestRunner extends Sprite
         {
@@ -36,9 +38,6 @@ package
             system.config.serializer.prettyPrinting = true;
             system.about( true, true );
             
-
-            buRRRn.eden.info( true );
-            
             //tests
 
             buRRRn.ASTUce.config.showConstructorList = false;
@@ -48,7 +47,7 @@ package
             
             //testing everything
             Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         buRRRn.eden.AllTests.suite(),
+                         system.serializers.eden.AllTests.suite(),
                          system.AllTests.suite() );
             
             }
