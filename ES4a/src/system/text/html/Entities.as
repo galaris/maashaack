@@ -20,13 +20,29 @@
 
     - Marc Alcaraz <ekameleon@gmail.com>
 
-*/	
+*/  
 package system.text.html
     {
     import flash.utils.Dictionary;
     
     /**
      * The HTML entities tool class.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.text.html.Entities ;
+     * 
+     * var findByChar:Boolean = Entities.findByChar("€") ;
+     * trace( findByChar ) ;  // true
+     * 
+     * var findByName:Boolean = Entities.findByName("&euro;") ;
+     * trace( findByName ) ;  // true
+     * 
+     * var toHTML:String = Entities.toHTML("€") ;
+     * trace( toHTML ) ; // &euro;
+     * 
+     * var fromName:String = Entities.fromName("&euro;") ;
+     * trace( fromName ) ;  // €
+     * </pre>
      */
     public class Entities
         {
@@ -56,6 +72,12 @@ package system.text.html
         
         /**
          * Finds the entity by character.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.text.html.Entities ;
+         * var findByChar:Boolean = Entities.findByChar("€") ;
+         * trace( findByChar ) ; // true
+         * </pre>
          * @return <code class="prettyprint">true</code> if the entity is register with the specified character.
          */
         public static function findByChar( char:String ):Boolean
@@ -79,6 +101,12 @@ package system.text.html
 
         /**
          * Finds the entity by name.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.text.html.Entities ;
+         * var findByName:Boolean = Entities.findByName("&euro;") ;
+         * trace( findByName ) ; // true
+         * </pre>
          * @return <code class="prettyprint">true</code> if the entity is register with the specified name.
          */
         public static function findByName( name:String ):Boolean
@@ -103,6 +131,12 @@ package system.text.html
         
         /**
          * Transforms the characters in HTML entity format.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.text.html.Entities ;
+         * var toHTML:String = Entities.toHTML("€") ;
+         * trace( toHTML ) ;  // &euro;
+         * </pre>
          */
         public static function toHTML( char:String ):String
             {
@@ -125,6 +159,12 @@ package system.text.html
         
         /**
          * Returns the character determinates by the name in argument.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.text.html.Entities ;
+         * var fromName:String = Entities.fromName("&euro;") ;
+         * trace( fromName ) ;  // €
+         * </pre>
          * @return the character determinates by the name in argument.
          */        
         public static function fromName( name:String ):String
@@ -285,8 +325,6 @@ package system.text.html
             add( new Entity(  "¾" , "frac34" , 190 ) ) ; // fraction 3/4
             }
         
-        }
-        
         /*  
 
          Special characters for HTML : http://www.w3.org/TR/REC-html40/sgml/entities.html
@@ -353,4 +391,6 @@ package system.text.html
         
         add( new Entity( "€"      ,   "euro" , 8364 ) ) ; // euro sign, U+20AC NEW           
 
+        }
+    
     }
