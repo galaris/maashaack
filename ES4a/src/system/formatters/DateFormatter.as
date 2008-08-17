@@ -20,10 +20,8 @@
 */
 package system.formatters 
 {
-    import flash.utils.getDefinitionByName;
-    
-    import system.Serializable;
     import system.Reflection;
+    import system.Serializable;
     import system.numeric.Range;    
 
     /**
@@ -211,8 +209,7 @@ package system.formatters
          */ 
         public function clone():*
             {
-            var clazz:Class = getDefinitionByName( Reflection.getClassPath(this) ) as Class;
-            return new clazz( pattern )  ;
+            return new DateFormatter( pattern )  ;
             }
          
         /**

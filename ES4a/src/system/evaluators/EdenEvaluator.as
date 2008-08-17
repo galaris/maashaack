@@ -24,17 +24,34 @@ package system.evaluators
     import system.eden;
     
     /**
-    * Evaluates eden expression.
-    */
+     * Evaluates eden expression.
+     * <pre class="prettyprint">
+     * import system.evaluators.* ;
+     * var e:EdenEvaluator = new EdenEvaluator(false) ;
+     * var result:* = e.eval("new Date(2007,5,12,22,10,5)") ;
+     * trace("evaluate new Date(2007,5,12,22,10,5) : " + result ) ; // evaluate new Date(2007,5,12,22,10,5) : Tue Jun 12 22:10:05 GMT+0200 2007
+     * </pre>
+     */
     public class EdenEvaluator implements Evaluable
         {
+        	
+        /**
+         * @private
+         */
         private var _serialized:Boolean;
         
+        /**
+         * Creates a new EdenEvaluator instance.
+         * @param serialized This Boolean flag indicates if the object must be evaluates with a final serialized or not value.
+         */
         public function EdenEvaluator( serialized:Boolean = true )
             {
             _serialized = serialized;
             }
         
+        /**
+         * Evaluates the specified object.
+         */        
         public function eval(o:*):*
             {
             var result:* = eden.deserialize( o );
