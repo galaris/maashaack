@@ -16,13 +16,22 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
+  Marc Alcaraz <ekameleon@gmail.com>.
+
 */
 
 package system
 {
     
+    /**
+     * The ResourceString class.
+     */    
     public class ResourceString implements Resource
     {
+        
+    	/**
+    	 * Creates a new ResourceString instance.
+    	 */
         public function ResourceString()
         {
         }
