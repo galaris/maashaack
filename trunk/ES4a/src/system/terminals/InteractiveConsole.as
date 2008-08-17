@@ -24,9 +24,9 @@ package system.terminals
     {
     
     /**
-     * An InteractiveConsole can interact with the user and the system
-     * using standard streams: standard input (stdin), standard output (stdout) and standard error (stderr).
-     * See <http://en.wikipedia.org/wiki/Standard_streams>.
+     * An InteractiveConsole can interact with the user and the system using standard streams : 
+     * standard input (stdin), standard output (stdout) and standard error (stderr).
+     * <p><b>See :</b> <http://en.wikipedia.org/wiki/Standard_streams>.</p>
      */
     public interface InteractiveConsole extends Console
         {

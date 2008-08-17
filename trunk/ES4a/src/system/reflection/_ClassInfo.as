@@ -48,6 +48,52 @@ package system.reflection
         /**
          * @private
          */
+        private function _getTraitMemberHelper( member:MemberType ):Array
+            {
+            var members:Array = [];
+            var node:XML;
+            var m:String;
+            var name:String = member.toString();
+            
+            if( isInstance() )
+                {
+                for( m in _class[name] )
+                    {
+                    node = _class[name][m];
+                    
+                    if( !filter.showInherited &&
+                        (node.@declaredBy != undefined) &&
+                        !_isDeclaredLocaly(String(node.@declaredBy)) )
+                        {
+                        continue;
+                        }
+                    
+                    members.push( String(node.@name) );
+                    }
+                }
+            else
+                {
+                for( m in _class.factory[name] )
+                    {
+                    node = _class.factory[name][m];
+                    
+                    if( !filter.showInherited &&
+                        (node.@declaredBy != undefined) &&
+                        !_isDeclaredLocaly(String(node.@declaredBy)) )
+                        {
+                        continue;
+                        }
+                    
+                    members.push( String(node.@name) );
+                    }
+                }
+            
+            return members;
+            }        
+                
+        /**
+         * @private
+         */
         private function _hasInterface( interfaceRef:Class ):Boolean
             {
             var path:XMLList;
@@ -106,25 +152,6 @@ package system.reflection
             }        
         
         /**
-         * Creates a new _ClassInfo instance.
-         */
-        public function _ClassInfo( o:*, applyFilter:FilterType )
-            {
-            super( o );
-            
-            _class = describeType( o );
-            _filter = applyFilter;
-            }
-        
-        /**
-         * @private
-         */
-        private function _normalize( value:String ):String
-            {
-            return value.replace( "::", "." );
-            }
-        
-        /**
          * @private
          */
         private function _isDeclaredLocaly( origin:String ):Boolean
@@ -140,48 +167,37 @@ package system.reflection
         /**
          * @private
          */
-        private function _getTraitMemberHelper( member:MemberType ):Array
-        	{
-        	var members:Array = [];
-        	var node:XML;
-        	var m:String;
-        	var name:String = member.toString();
-        	
-        	if( isInstance() )
-        		{
-        		for( m in _class[name] )
-        			{
-        			node = _class[name][m];
-        			
-        			if( !filter.showInherited &&
-        			    (node.@declaredBy != undefined) &&
-        			    !_isDeclaredLocaly(String(node.@declaredBy)) )
-        			    {
-        			    continue;
-        			    }
-        		    
-        		    members.push( String(node.@name) );
-        			}
-        		}
-        	else
-        		{
-        		for( m in _class.factory[name] )
-        			{
-        			node = _class.factory[name][m];
-        			
-        			if( !filter.showInherited &&
-        			    (node.@declaredBy != undefined) &&
-        			    !_isDeclaredLocaly(String(node.@declaredBy)) )
-        			    {
-        			    continue;
-        			    }
-        		    
-        			members.push( String(node.@name) );
-        			}
-        		}
-        	
-        	return members;
-        	}
+        private function _normalize( value:String ):String
+            {
+            return value.replace( "::", "." );
+            }
+            
+        /**
+         * Creates a new _ClassInfo instance.
+         */
+        public function _ClassInfo( o:*, applyFilter:FilterType )
+            {
+            super( o );
+            
+            _class = describeType( o );
+            _filter = applyFilter;
+            }
+        
+        /**
+         * List all accessors in the class.
+         */
+        public function get accessors():Array
+            {
+            return _getTraitMemberHelper( MemberType.accessor );
+            }        
+        
+        /**
+         * List all constants in the class.
+         */
+        public function get constants():Array
+            {
+            return _getTraitMemberHelper( MemberType.constant );
+            }
         
         /**
          * Indicates the filter type value used in this class.
@@ -200,7 +216,67 @@ package system.reflection
         	}
         
         /**
-         * Returns the name of the class.
+         * List all members in the class.
+         */
+        public function get members():Array
+            {
+            return null;
+            }        
+                
+        /**
+         * List all methods in the class.
+         */
+        public function get methods():Array
+            {
+            var meths:Array = [];
+            var m:String;
+            
+            if( filter.usePrototypeInfo )
+                {
+                if( isInstance() )
+                    {
+                    for( m in type )
+                        {
+                        if( typeof type[m] == "function" )
+                            {
+                            if( !filter.showInherited && 
+                                (!type.hasOwnProperty( m ) && !type.constructor.prototype.hasOwnProperty( m )) )
+                                {
+                                continue;
+                                }
+                            
+                            meths.push( m );
+                            } 
+                        }
+                    }
+                else
+                    {
+                    for( m in type.prototype )
+                        {
+                        if( typeof type.prototype[m] == "function" )
+                            {
+                            if( !filter.showInherited && 
+                                !type.prototype.hasOwnProperty( m ) )
+                                {
+                                continue;
+                                }
+                            
+                            meths.push( m );
+                            } 
+                        }
+                    }
+                }
+            
+            if( filter.useTraitInfo )
+                {
+                meths = meths.concat( _getTraitMemberHelper( MemberType.method ) );
+                }
+            
+            return meths;
+            }
+        
+        /**
+         * Indicates the name of the class.
          */
         public function get name():String
             {
@@ -213,41 +289,9 @@ package system.reflection
             
             return path;
             }
-                
+
         /**
-         * Indicates the Array representation of all members in the class.
-         */
-        public function get members():Array
-            {
-            return null;
-            }
-                
-        /**
-         * List all variables in the class.
-         */
-        public function get variables():Array
-        	{
-        	return _getTraitMemberHelper( MemberType.variable );
-        	}
-        
-        /**
-         * List all constants in the class.
-         */
-        public function get constants():Array
-        	{
-        	return _getTraitMemberHelper( MemberType.constant );
-        	}
-        
-        /**
-         * List all accessors in the class.
-         */
-        public function get accessors():Array
-        	{
-        	return _getTraitMemberHelper( MemberType.accessor );
-        	}
-        
-        /**
-         * List all properties in the class.
+         * List all properties in the class. 
          * Properties are the combination of variables, constants and accessors.
          */
         public function get properties():Array
@@ -256,101 +300,49 @@ package system.reflection
             var p:String;
             
             if( filter.usePrototypeInfo )
-            	{
-            	if( isInstance() )
-            		{
-            		for( p in type )
-            			{
-            			if( typeof type[p] != "function" )
-            				{
-            				if( !filter.showInherited && 
-            				    (!type.hasOwnProperty( p ) && !type.constructor.prototype.hasOwnProperty( p )) )
-            				    {
-            				    continue;
-            				    }
-            				
-            				props.push( p );
-            				} 
-            			}
-            		}
-            	else
-            		{
-            		for( p in type.prototype )
-            			{
-            			if( typeof type.prototype[p] != "function" )
-            				{
-            				if( !filter.showInherited && 
-            				    !type.prototype.hasOwnProperty( p ) )
-            				    {
-            				    continue;
-            				    }
-            				
-            				props.push( p );
-            				} 
-            			}
-            		}
-            	}
+                {
+                if( isInstance() )
+                    {
+                    for( p in type )
+                        {
+                        if( typeof type[p] != "function" )
+                            {
+                            if( !filter.showInherited && 
+                                (!type.hasOwnProperty( p ) && !type.constructor.prototype.hasOwnProperty( p )) )
+                                {
+                                continue;
+                                }
+                            
+                            props.push( p );
+                            } 
+                        }
+                    }
+                else
+                    {
+                    for( p in type.prototype )
+                        {
+                        if( typeof type.prototype[p] != "function" )
+                            {
+                            if( !filter.showInherited && 
+                                !type.prototype.hasOwnProperty( p ) )
+                                {
+                                continue;
+                                }
+                            
+                            props.push( p );
+                            } 
+                        }
+                    }
+                }
             
             if( filter.useTraitInfo )
-            	{
-            	props = props.concat( variables );
-            	props = props.concat( constants );
-            	props = props.concat( accessors );
-            	}
+                {
+                props = props.concat( variables );
+                props = props.concat( constants );
+                props = props.concat( accessors );
+                }
             
             return props;
-            }
-        
-        /**
-         * List all methods in the class.
-         */
-        public function get methods():Array
-            {
-            var meths:Array = [];
-            var m:String;
-            
-            if( filter.usePrototypeInfo )
-            	{
-            	if( isInstance() )
-            		{
-            		for( m in type )
-            			{
-            			if( typeof type[m] == "function" )
-            				{
-            				if( !filter.showInherited && 
-            				    (!type.hasOwnProperty( m ) && !type.constructor.prototype.hasOwnProperty( m )) )
-            				    {
-            				    continue;
-            				    }
-            				
-            				meths.push( m );
-            				} 
-            			}
-            		}
-            	else
-            		{
-            		for( m in type.prototype )
-            			{
-            			if( typeof type.prototype[m] == "function" )
-            				{
-            				if( !filter.showInherited && 
-            				    !type.prototype.hasOwnProperty( m ) )
-            				    {
-            				    continue;
-            				    }
-            				
-            				meths.push( m );
-            				} 
-            			}
-            		}
-            	}
-            
-            if( filter.useTraitInfo )
-            	{
-            	meths = meths.concat( _getTraitMemberHelper( MemberType.method ) );
-            	}
-            
-            return meths;
             }
         
         /**
@@ -380,7 +372,15 @@ package system.reflection
                 return null;
                 }
             }            
-
+        
+        /**
+         * List all variables in the class.
+         */
+        public function get variables():Array
+            {
+            return _getTraitMemberHelper( MemberType.variable );
+            }
+        
         /**
          * Indicates if the specified class implements all interfaces passed-in arguments.
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
@@ -409,7 +409,7 @@ package system.reflection
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
          * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
          */
-        public function inheritFrom( ...classes ):Boolean
+        public function inheritFrom( ...classes:Array ):Boolean
             {
             if( classes.length == 0 )
                 {
@@ -429,7 +429,12 @@ package system.reflection
         
         /**
          * Indicates if the specified object is dynamic.
-         */        
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Reflection ;
+         * trace( Reflection.getClassInfo(Object).isDynamic() ) ; // true
+         * </pre>
+         */    
         public function isDynamic():Boolean
             {
             return _class.@isDynamic == "true";
@@ -437,6 +442,11 @@ package system.reflection
         
         /**
          * Indicates if the specified object is final.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Reflection ;
+         * trace( Reflection.getClassInfo(String).isFinal() ) ; // true
+         * </pre>
          */        
         public function isFinal():Boolean
             {
@@ -445,6 +455,13 @@ package system.reflection
         
         /**
          * Indicates if the specified object is instance.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Reflection ;
+         * 
+         * trace( Reflection.getClassInfo( Array ).isInstance() ) ; // false
+         * trace( Reflection.getClassInfo( new Array() ).isInstance() ) ; // true
+         * </pre>
          */        
         public function isInstance():Boolean
             {
@@ -453,6 +470,11 @@ package system.reflection
         
         /**
          * Indicates if the specified object is static.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Reflection ;
+         * trace( Reflection.getClassInfo(Math).isStatic() ) ; // true
+         * </pre>
          */
         public function isStatic():Boolean
             {
@@ -476,7 +498,7 @@ package system.reflection
         	{
         	return _class;
         	}
-
+        
         }
     }
 

@@ -26,8 +26,7 @@ package system.terminals
     import system.Strings;
     
     /**
-    * The VirtualConsole class emulate a console
-    * with stdout, stderr and stdin streams.
+    * The VirtualConsole class emulate a console with stdout, stderr and stdin streams.
     */
     public class VirtualConsole implements InteractiveConsole
         {
