@@ -41,7 +41,7 @@ package system.serializers.eden
            (yeah this could be surely optimized with a Dictionnary)
            ex:
            (code)
-           _globalPool[ "buRRRn.eden.config" ] = buRRRn.eden.config;
+           _globalPool[ "system.serializers.eden.config" ] = system.serializers.eden.config;
            _localPool[ "x.y.z" ] = localScope.x.y.z;
            (end)
            

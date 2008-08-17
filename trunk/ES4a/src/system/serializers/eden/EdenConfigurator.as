@@ -219,7 +219,7 @@ package system.serializers.eden
 		/**
 		 * Parameter setting on (true) or off (false) the security.
 		 * If true, all object path, function or constructor will be scanned at interpretation time against the authorized list.
-		 * @see buRRRn.eden.config.authorized.
+		 * @see system.serializers.eden.config.authorized.
 		 */
         public function get security():Boolean
             {
