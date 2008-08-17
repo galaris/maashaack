@@ -1212,30 +1212,7 @@ package system.serializers.eden
                     try
                         {
                         
-                        switch( args.length )
-                            {
-                            case 9:
-                            return new fcnObj( args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8] );
-                            case 8:
-                            return new fcnObj( args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7] );
-                            case 7:
-                            return new fcnObj( args[0], args[1], args[2], args[3], args[4], args[5], args[6] );
-                            case 6:
-                            return new fcnObj( args[0], args[1], args[2], args[3], args[4], args[5] );
-                            case 5:
-                            return new fcnObj( args[0], args[1], args[2], args[3], args[4] );
-                            case 4:
-                            return new fcnObj( args[0], args[1], args[2], args[3] );
-                            case 3:
-                            return new fcnObj( args[0], args[1], args[2] );
-                            case 2:
-                            return new fcnObj( args[0], args[1] );
-                            case 1:
-                            return new fcnObj( args[0] );
-                            case 0:
-                            default:
-                            return new fcnObj();
-                            }
+                        return Reflection.invokeClass(fcnObj as Class, args) ;
                         
                         }
                     catch( e:Error )
