@@ -43,3 +43,11 @@ Flash 9, Apollo, !ActionScript 3 or any other ES4 host.
  * better setup for unit tests
  * code review and refactor
  * more unit tests
+
+features:
+ * configurator
+ * evaluator
+ * reflection API
+ * core object utils: Strings, Arrays, Objects, etc.
+ * cli
+ * ui
