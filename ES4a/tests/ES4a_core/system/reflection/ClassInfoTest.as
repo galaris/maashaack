@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -20,7 +20,7 @@
 */
 
 package system.reflection
-    {
+{
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
@@ -31,12 +31,11 @@ package system.reflection
     import system.reflection.samples.BasicClass;
     import system.reflection.samples.BasicClassInterface1;
     import system.reflection.samples.BasicClassInterface1and2;
-    import system.reflection.samples.Dynamic2BasicClass;
     import system.reflection.samples.Dynamic2DynamicClass;
     import system.reflection.samples.DynamicClass;
     import system.reflection.samples.IBasicInterface1;
-    import system.reflection.samples.IBasicInterface2;
-    
+    import system.reflection.samples.IBasicInterface2;    
+
     public class ClassInfoTest extends TestCase
         {
         
@@ -167,9 +166,9 @@ package system.reflection
        	
        	public function testProperties4():void
        	    {
-       	    var d2bc:Dynamic2BasicClass = new Dynamic2BasicClass();
+       	    //var d2bc:Dynamic2BasicClass = new Dynamic2BasicClass();
        	    
-       	    var c1:ClassInfo = Reflection.getClassInfo( d2bc );
+       	    //var c1:ClassInfo = Reflection.getClassInfo( d2bc );
        	    
        	    //trace( c1.toXML() );
        	    }
@@ -179,13 +178,13 @@ package system.reflection
        	    var d2dc:Dynamic2DynamicClass = new Dynamic2DynamicClass();
        	        d2dc.test = 123;
        	    
-       	    var c1:ClassInfo = Reflection.getClassInfo( Dynamic2DynamicClass );
-       	    var c2:ClassInfo = Reflection.getClassInfo( Dynamic2DynamicClass, FilterType.declaredOnly );
+       	    //var c1:ClassInfo = Reflection.getClassInfo( Dynamic2DynamicClass );
+       	    //var c2:ClassInfo = Reflection.getClassInfo( Dynamic2DynamicClass, FilterType.declaredOnly );
        	    
-       	    var b2bc:Basic2BasicClass = new Basic2BasicClass();
+       	    //var b2bc:Basic2BasicClass = new Basic2BasicClass();
        	    
-       	    var c3:ClassInfo = Reflection.getClassInfo( Basic2BasicClass );
-       	    var c4:ClassInfo = Reflection.getClassInfo( Basic2BasicClass, FilterType.declaredOnly );
+       	    //var c3:ClassInfo = Reflection.getClassInfo( Basic2BasicClass );
+       	    //var c4:ClassInfo = Reflection.getClassInfo( Basic2BasicClass, FilterType.declaredOnly );
        	    
        	    //trace( c1.toXML() );
 //       	    trace( c3.toXML() );
@@ -204,8 +203,8 @@ package system.reflection
        	
        	public function testHasInterface():void
        		{
-       		var i1:IBasicInterface1;
-       		var i2:IBasicInterface2;
+       		//var i1:IBasicInterface1;
+       		//var i2:IBasicInterface2;
        		var bci1:BasicClassInterface1 = new BasicClassInterface1();
        		var bci1and2:BasicClassInterface1and2 = new BasicClassInterface1and2();
        		
