@@ -23,7 +23,10 @@ package system.serializers.eden
     {
     import buRRRn.ASTUce.framework.*;
     
+    import system.Version;
     import system.eden;
+    import system.serializers.eden.samples.CtorNoDefaultValue;
+    import system.serializers.eden.samples.BasicClass;
     
     public class DeserializeTest extends TestCase
         {
@@ -117,7 +120,7 @@ package system.serializers.eden
             assertEquals( system.serializers.eden.config, ECMAScript.evaluate( "system.serializers.eden.config" ) );
             assertEquals( system.serializers.eden.config.authorized, ECMAScript.evaluate( "system.serializers.eden.config.authorized" ) );
             assertEquals( system.serializers.eden.config.compress, ECMAScript.evaluate( "system.serializers.eden.config.compress" ) );
-            assertEquals( system.serializers.eden.config, ECMAScript.evaluate( "buRRRn.eden.config" ) );
+            assertEquals( system.serializers.eden.config, ECMAScript.evaluate( "system.serializers.eden.config" ) );
             
             var original:Boolean = system.serializers.eden.config.verbose;
             var result:* = ECMAScript.evaluate( "system.serializers.eden.config.verbose = " + (!original).toString() + ";" );
@@ -316,7 +319,6 @@ package system.serializers.eden
         
         public function testConstructorInstanciation():void
             {
-            import system.Version;
             var r1:* = ECMAScript.evaluate( "a = new system.Version(1,2,3,4);" );
             
             assertEquals( r1.a.toString(), "1.2.3.4" );
@@ -329,10 +331,9 @@ package system.serializers.eden
         */
         public function testConstructorWithoutDefaultValue():void
             {
-            import buRRRn.eden.samples.CtorNoDefaultValue;
             var misc:* = CtorNoDefaultValue; //you HAVE TO force the inclusion of your class
-            var r1:* = ECMAScript.evaluate( "a = new buRRRn.eden.samples.CtorNoDefaultValue();" );
-            var r2:* = ECMAScript.evaluate( "a = new buRRRn.eden.samples.CtorNoDefaultValue(1);" );
+            var r1:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.CtorNoDefaultValue();" );
+            var r2:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.CtorNoDefaultValue(1);" );
             
             assertUndefined( r1.a );
             assertNotUndefined( r2.a );
@@ -342,12 +343,11 @@ package system.serializers.eden
         
         public function testMissingEndSemiColon():void
             {
-            import buRRRn.eden.samples.BasicClass;
             var misc:* = BasicClass;
-            var r1:* = ECMAScript.evaluate( "a = new buRRRn.eden.samples.BasicClass();" );
-            var r2:* = ECMAScript.evaluate( "a = new buRRRn.eden.samples.BasicClass()" );
-            var r3:* = ECMAScript.evaluate( "new buRRRn.eden.samples.BasicClass()" );
-            var r4:* = ECMAScript.evaluate( "new buRRRn.eden.samples.BasicClass() " );
+            var r1:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.BasicClass();" );
+            var r2:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.BasicClass()" );
+            var r3:* = ECMAScript.evaluate( "new system.serializers.eden.samples.BasicClass()" );
+            var r4:* = ECMAScript.evaluate( "new system.serializers.eden.samples.BasicClass() " );
             
             assertNotUndefined( r1.a );
             assertEquals( "[object BasicClass]", r1.a.toString() );
@@ -360,7 +360,6 @@ package system.serializers.eden
             
             assertNotUndefined( r4 );
             assertEquals( "[object BasicClass]", r4.toString() );
-            
             }
         
         public function testMissingEndSemiColon2():void
