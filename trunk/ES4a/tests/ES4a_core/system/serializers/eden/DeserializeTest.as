@@ -20,14 +20,15 @@
 */
 
 package system.serializers.eden
-    {
+{
     import buRRRn.ASTUce.framework.*;
     
     import system.Version;
     import system.eden;
-    import system.serializers.eden.samples.CtorNoDefaultValue;
+    import system.serializers.eden.config;
     import system.serializers.eden.samples.BasicClass;
-    
+    import system.serializers.eden.samples.CtorNoDefaultValue;    
+
     public class DeserializeTest extends TestCase
         {
         
@@ -331,7 +332,7 @@ package system.serializers.eden
         */
         public function testConstructorWithoutDefaultValue():void
             {
-            var misc:* = CtorNoDefaultValue; //you HAVE TO force the inclusion of your class
+            CtorNoDefaultValue; //you HAVE TO force the inclusion of your class
             var r1:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.CtorNoDefaultValue();" );
             var r2:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.CtorNoDefaultValue(1);" );
             
@@ -343,7 +344,7 @@ package system.serializers.eden
         
         public function testMissingEndSemiColon():void
             {
-            var misc:* = BasicClass;
+            BasicClass;
             var r1:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.BasicClass();" );
             var r2:* = ECMAScript.evaluate( "a = new system.serializers.eden.samples.BasicClass()" );
             var r3:* = ECMAScript.evaluate( "new system.serializers.eden.samples.BasicClass()" );
@@ -412,5 +413,5 @@ package system.serializers.eden
             }
         
         }
-    
-    }
+}
+

@@ -26,7 +26,7 @@ package system
 	/**
 	 * The eden singleton serializer.
 	 */
-    public var eden:EdenSerializer = new EdenSerializer();
+    public const eden:EdenSerializer = new EdenSerializer();
     
     }
 

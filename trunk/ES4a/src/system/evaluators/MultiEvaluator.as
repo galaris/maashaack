@@ -50,7 +50,6 @@ package system.evaluators
      * 
      * trace("evaluate new Date(2007,5,12,22,10,5) : " + result ) ; // evaluate new Date(2007,5,12,22,10,5) :  07.06.2008 09:10:53
      * </pre>
-     * @author eKameleon
      */
     public class MultiEvaluator implements Evaluable
         {
