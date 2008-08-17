@@ -43,7 +43,7 @@ package system.reflection
          */        
         public function get arguments():Array
             {
-            return ;
+            return null ;
             }        
         
         /**
@@ -51,7 +51,7 @@ package system.reflection
          */        
         public function construct( ...args:Array ):*
             {
-            return ;
+            return null ;
             }
         
         /**
@@ -77,7 +77,7 @@ package system.reflection
          */
         public function toXML():XML
         	{
-        	return ;
+        	return null ;
             }
                 
         }
