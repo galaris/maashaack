@@ -23,6 +23,8 @@ package system.serializers.eden
     {
     import buRRRn.ASTUce.framework.*;
     
+    import system.eden;
+    
     public class DeserializeTest extends TestCase
         {
         
@@ -111,17 +113,18 @@ package system.serializers.eden
         
         public function testGlobalKeywords():void
             {
-            assertEquals( buRRRn.eden.config, ECMAScript.evaluate( "buRRRn.eden.config" ) );
-            assertEquals( buRRRn.eden.config.authorized, ECMAScript.evaluate( "buRRRn.eden.config.authorized" ) );
-            assertEquals( buRRRn.eden.config.compress, ECMAScript.evaluate( "buRRRn.eden.config.compress" ) );
-            assertEquals( buRRRn.eden.config, ECMAScript.evaluate( "buRRRn.eden.config" ) );
+                
+            assertEquals( system.serializers.eden.config, ECMAScript.evaluate( "system.serializers.eden.config" ) );
+            assertEquals( system.serializers.eden.config.authorized, ECMAScript.evaluate( "system.serializers.eden.config.authorized" ) );
+            assertEquals( system.serializers.eden.config.compress, ECMAScript.evaluate( "system.serializers.eden.config.compress" ) );
+            assertEquals( system.serializers.eden.config, ECMAScript.evaluate( "buRRRn.eden.config" ) );
             
-            var original:Boolean = buRRRn.eden.config.verbose;
-            var result:* = ECMAScript.evaluate( "buRRRn.eden.config.verbose = " + (!original).toString() + ";" );
-            assertEquals( buRRRn.eden.config.verbose, !original );
-            assertEquals( !buRRRn.eden.config.verbose, original );
+            var original:Boolean = system.serializers.eden.config.verbose;
+            var result:* = ECMAScript.evaluate( "system.serializers.eden.config.verbose = " + (!original).toString() + ";" );
+            assertEquals( system.serializers.eden.config.verbose, !original );
+            assertEquals( !system.serializers.eden.config.verbose, original );
             assertEquals( eden.serialize( {} ), eden.serialize( result ) );
-            buRRRn.eden.config.compress = original;
+            system.serializers.eden.config.verbose = original;
             }
         
         public function testObject():void
@@ -183,9 +186,9 @@ package system.serializers.eden
                 s1  += "m.o.n.o = \"space\";\r\n";
                 s1  += "space = m.o.n.o;"; //fixed: #1
                 s1  += "j2 = i[0];\r\n"; //fixed: #2
-                s1  += "ext1 = buRRRn.eden.GlobalAccessTest.bool;"; //you can assign a global scope on the RHS
-                s1  += "word = buRRRn.eden.GlobalAccessTest.arr[0];";//fixed: #3
-                s1  += "buRRRn.eden.GlobalAccessTest.arr[1] = \"eden_deserialize_test\";\r\n"; //you can redefine a value in the global scope
+                s1  += "ext1 = system.serializers.eden.GlobalAccessTest.bool;"; //you can assign a global scope on the RHS
+                s1  += "word = system.serializers.eden.GlobalAccessTest.arr[0];";//fixed: #3
+                s1  += "system.serializers.eden.GlobalAccessTest.arr[1] = \"eden_deserialize_test\";\r\n"; //you can redefine a value in the global scope
             
             var r1:* = ECMAScript.evaluate( s1 );
             //trace( eden.serialize( r1 ) );
@@ -204,9 +207,9 @@ package system.serializers.eden
             assertEquals( r1.m.o.n.o, "space" );
             assertEquals( r1.space, "space" );
             assertEquals( r1.j2, r1.i[0] );
-            assertEquals( r1.ext1, buRRRn.eden.GlobalAccessTest.bool );
-            assertEquals( r1.word, buRRRn.eden.GlobalAccessTest.arr[0] );
-            assertEquals( buRRRn.eden.GlobalAccessTest.arr[1], "eden_deserialize_test" );
+            assertEquals( r1.ext1, system.serializers.eden.GlobalAccessTest.bool );
+            assertEquals( r1.word, system.serializers.eden.GlobalAccessTest.arr[0] );
+            assertEquals( system.serializers.eden.GlobalAccessTest.arr[1], "eden_deserialize_test" );
             
             //ECMAScript.tracePools();
             }

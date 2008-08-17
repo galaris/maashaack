@@ -22,6 +22,7 @@
 package system.serializers.eden
     {
     import system.Configurator;
+    import system.eden;
     
 	/**
 	 * The configurator object of the eden parser.
