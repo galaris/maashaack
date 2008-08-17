@@ -26,6 +26,7 @@ package system
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
+    import system.serializers.eden.config;
     
     public class StringsTest extends TestCase
         {
@@ -161,6 +162,7 @@ package system
         
         public function testFormatEdenEvaluators():void
             {
+            trace( "eden config:" + system.serializers.eden.config.compress );
             var str1:String = "my result is ${{a:1,b:2}}$";
             var str2:String = "my result is ${{a:1,b:2}}eden$";
             var str3:String = "my result is ${{a:1,b:2}}eden2$";
