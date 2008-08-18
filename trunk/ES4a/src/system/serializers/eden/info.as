@@ -36,8 +36,8 @@ package system.serializers.eden
         var name:String      = "eden";
         var fullname:String  = "ECMASCript data exchange notation";
         var version:Version  = new Version( 0, 1 );
-            version.revision = parseInt( "$Rev: 88 $".split( " " )[1] );
-         
+          //version.revision = parseInt( "$Rev: 88 $".split( " " )[1] );
+        
         var str:String = "";
             if( !verbose && config.verbose )
                 {
