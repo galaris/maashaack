@@ -24,6 +24,7 @@ package system
     import buRRRn.ASTUce.framework.*;
     
     import system.reflection.AllTests;
+    import system.serializers.AllTests;
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
@@ -59,6 +60,9 @@ package system
             
             //reflection
             suite.addTest( system.reflection.AllTests.suite() );
+            
+            //serializers
+            suite.addTest( system.serializers.AllTests.suite() );
             
             //evaluators
             suite.addTest( system.evaluators.AllTests.suite() );
