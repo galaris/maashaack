@@ -26,7 +26,6 @@ package system
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
-    import system.serializers.eden.config;
     
     public class StringsTest extends TestCase
         {
@@ -162,7 +161,8 @@ package system
         
         public function testFormatEdenEvaluators():void
             {
-            trace( "eden config:" + system.serializers.eden.config.compress );
+            var original:Boolean = system.eden.prettyPrinting;
+            system.eden.prettyPrinting = false;
             var str1:String = "my result is ${{a:1,b:2}}$";
             var str2:String = "my result is ${{a:1,b:2}}eden$";
             var str3:String = "my result is ${{a:1,b:2}}eden2$";
@@ -173,15 +173,27 @@ package system
             assertEquals( "my result is {a:1,b:2}", Strings.format( str2 ) );
             assertEquals( "my result is [object Object]", Strings.format( str3 ) );
             
+            system.eden.prettyPrinting = original;
             }
         
         public function testFormatEvaluatorsParsing():void
             {
+            var original:Boolean = system.eden.prettyPrinting;
+            system.eden.prettyPrinting = false;
+            
             var str1:String = "${{a:1,b:\"}\",c:\"$\",d:\"}\",e:\"$\"}}$";
             //var str2:String = "${{a:1,b:\"}\",c:\"$\",d:\"}\",e:\"$\"}}"; //cause infinite loop - fixed
             
             assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", Strings.format( str1 ) );
+            
+            /* TODO:
+               try to fix that
+               throw an error
+               Error: malformed evaluator, could not find [$] after [}].
+            */
             //assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", Strings.format( str2 ) ); //throw an error
+            
+            system.eden.prettyPrinting = original;
             }
         
         public function testFormatDateEvaluators():void
