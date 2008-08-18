@@ -16,41 +16,31 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  
+
 */
 
-package
+package system.serializers
     {
-	import buRRRn.ASTUce.*;
-	import buRRRn.ASTUce.tests.*;
-	
-	import flash.display.Sprite;
-	
-	import system.*;
-	import system.serializers.eden.AllTests;
-	
-	public class ES4a_TestRunner extends Sprite
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;  
+    
+    import system.serializers.eden.AllTests;
+    
+    public class AllTests
         {
         
-        public function ES4a_TestRunner()
+        public function AllTests()
             {
-            
-            system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
-            
-            //tests
+            }
 
-            buRRRn.ASTUce.config.showConstructorList = false;
+        public static function suite():ITest
+            {
+            var suite:TestSuite = new TestSuite( "system.serializers" );
             
-            //testing ES4a core only
-            //Runner.main( system.AllTests.suite() );
+            suite.addTest( system.serializers.eden.AllTests.suite() );
             
-            //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         system.AllTests.suite() );
-            
+            return suite;
             }
         }
     }
-
 
