@@ -48,6 +48,9 @@ features:
  * configurator
  * evaluator
  * reflection API
+ * serializers
+   * eden is now part of system
+   * more serializers (WDDX, PHP, JSON, etc.)
  * core object utils: Strings, Arrays, Objects, etc.
  * cli
  * ui
