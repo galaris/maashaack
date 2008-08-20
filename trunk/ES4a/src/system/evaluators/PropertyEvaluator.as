@@ -116,7 +116,7 @@ package system.evaluators
         public var undefineable:* = null ;
         
         /**
-         * Indicates if the eval method throws errors or return null when an error is throwing.
+         * Indicates if the eval() method throws errors or return null when an error is throwing.
          */
         public var throwError:Boolean ;
         
