@@ -20,16 +20,14 @@
 */
 
 package
-    {
-	import buRRRn.ASTUce.*;
-	import buRRRn.ASTUce.tests.*;
-	
-	import flash.display.Sprite;
-	
-	import system.*;
-	import system.serializers.eden.AllTests;
-	
-	public class ES4a_TestRunner extends Sprite
+{
+    import flash.display.Sprite;
+    
+    import buRRRn.ASTUce.*;
+    
+    import system.*;    
+
+    public class ES4a_TestRunner extends Sprite
         {
         
         public function ES4a_TestRunner()
@@ -46,8 +44,9 @@ package
             //Runner.main( system.AllTests.suite() );
             
             //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         system.AllTests.suite() );
+            // Runner.main( buRRRn.ASTUce.tests.AllTests.suite(), system.AllTests.suite() );
+            
+            Runner.main( system.AllTests.suite() );
             
             }
         }
