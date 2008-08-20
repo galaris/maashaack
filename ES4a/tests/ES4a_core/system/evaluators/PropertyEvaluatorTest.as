@@ -1,7 +1,7 @@
 ﻿
 package system.evaluators 
-    {
-    import buRRRn.ASTUce.framework.TestCase;                                            
+{
+    import buRRRn.ASTUce.framework.TestCase;    
 
     /**
      * The PropertyEvaluatorTest test case.
@@ -93,7 +93,7 @@ package system.evaluators
                 try
                 {    
                     e2.eval( "unknow" ) ;
-                    fail( "04.1 - The eval method failed with the expression : '" + expression + "' the throwError mode is true and an excaption must be throwing." ) ;
+                    fail( "04.1 - The eval method failed with the expression : '" + expression + "' the throwError mode is true and an exception must be throwing." ) ;
                 }
                 catch( e:Error )
                 {
