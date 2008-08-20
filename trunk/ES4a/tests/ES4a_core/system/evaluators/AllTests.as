@@ -21,7 +21,7 @@
 
 package system.evaluators
 {
-    import buRRRn.ASTUce.framework.*;    
+    import buRRRn.ASTUce.framework.*;        
 
     public class AllTests
         {
@@ -31,14 +31,16 @@ package system.evaluators
             
             }
         
-        static public function suite():ITest
+        public static function suite():ITest
             {
             var suite:TestSuite = new TestSuite( "Evaluators tests" );
 
-            suite.addTestSuite( DateEvaluatorTest );            
-            suite.addTestSuite( MathEvaluatorTest );
-            suite.addTestSuite( EdenEvaluatorTest );
-            
+            suite.addTestSuite( DateEvaluatorTest     ) ;            
+            suite.addTestSuite( MathEvaluatorTest     ) ;
+            suite.addTestSuite( EdenEvaluatorTest     ) ;
+            suite.addTestSuite( MultiEvaluatorTest    ) ;
+            suite.addTestSuite( PropertyEvaluatorTest ) ;  
+                      
             return suite;
             }
         
