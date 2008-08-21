@@ -595,14 +595,15 @@ package system.serializers.eden
         
         /**
          * Scan the whitespaces.  
-         * note:
-         * White Space
+         * <p><b>White Space :</b></p>
+         * <pre class="prettyprint">
          * "\t" - \u0009 - TAB
          * "\v" - \u000B - VT
          * "\f" - \u000C - FF
          * " "  - \u0020 - SP
          * ???  - \u00A0 - NBSP
-         * see: ECMA-262 spec 7.2 (PDF p23/188)
+         * </pre>
+         * <p><b>See :</b> ECMA-262 spec 7.2 (PDF p23/188)</p>
          */
         public function scanWhiteSpace():void
             {
