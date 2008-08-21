@@ -245,10 +245,10 @@ package system.serializers.eden
 		 * Inidcates if the specified character is a line terminator.
 		 * <p>Note: line terminators</p>
 		 * <pre class="prettyprint">
-		 * "\n" - \u000A - LF
-		 * "\R" - \u000D - CR
-		 * ???  - \u2028 - LS
-		 * ???  - \u2029 - PS
+		 * "\n" - u000A - LF
+		 * "\R" - u000D - CR
+		 * ???  - u2028 - LS
+		 * ???  - u2029 - PS
 		 * see: ECMA-262 spec 7.3 (PDF p24/188)
 		 * </p>
 		 */
@@ -597,11 +597,11 @@ package system.serializers.eden
          * Scan the whitespaces.  
          * <p><b>White Space :</b></p>
          * <pre class="prettyprint">
-         * "\t" - \u0009 - TAB
-         * "\v" - \u000B - VT
-         * "\f" - \u000C - FF
-         * " "  - \u0020 - SP
-         * ???  - \u00A0 - NBSP
+         * "\t" - u0009 - TAB
+         * "\v" - u000B - VT
+         * "\f" - u000C - FF
+         * " "  - u0020 - SP
+         * ???  - u00A0 - NBSP
          * </pre>
          * <p><b>See :</b> ECMA-262 spec 7.2 (PDF p23/188)</p>
          */
