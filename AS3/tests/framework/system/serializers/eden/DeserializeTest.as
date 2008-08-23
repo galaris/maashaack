@@ -372,9 +372,7 @@ package system.serializers.eden
             var r4:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13" );
             
             assertTrue( r1 is Date );
-            
-            trace(">>>>>>>>" + r1.valueOf()) ;
-            
+                        
             assertEquals( 1179835993000, r1.valueOf() );
             
             assertUndefined( r2 );
