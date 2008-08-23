@@ -372,11 +372,11 @@ package system.serializers.eden
             var r4:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13" );
             
             assertTrue( r1 is Date );
-            assertEquals( "Tue May 22 13:13:13 GMT+0100 2007", r1.toString() );
+            assertEquals( "Tue May 22 12:13:13 2007 UTC", r1.toUTCString() );
             
             assertUndefined( r2 );
             
-            assertEquals( "Tue May 22 13:13:13 GMT+0100 2007", r3.toString() );
+            assertEquals( "Tue May 22 12:13:13 2007 UTC", r3.toUTCString() );
             
             assertUndefined( r4 );
             
