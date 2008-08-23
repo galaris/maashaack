@@ -37,19 +37,11 @@ package system.diagnostics
         protected var _buffer:String = "" ;
         
         /**
-         * Creates a new TraceConsole instance.
-         */
-        public function TraceConsole()
-            {
-            
-            }
-        
-        /**
          * Formats the specific messages.
          * @param messages The Array representation of all message to format.
          * @private 
          */
-        private function _formatMessage( messages:Array ):String
+        protected function _formatMessage( messages:Array ):String
             {
             if( messages.length == 0 )
                 {
@@ -65,8 +57,16 @@ package system.diagnostics
             
             messages.unshift(msg);
             return Strings.format.apply( Strings, messages );
-            }
+            }        
         
+        /**
+         * Creates a new TraceConsole instance.
+         */
+        public function TraceConsole()
+            {
+            
+            }
+                
         /**
          * Returns the last char.
          * @return the last char.
