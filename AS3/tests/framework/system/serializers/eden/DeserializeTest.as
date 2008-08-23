@@ -8,7 +8,7 @@
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
+  The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
@@ -372,6 +372,9 @@ package system.serializers.eden
             var r4:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13" );
             
             assertTrue( r1 is Date );
+            
+            trace(">>>>>>>>" + r1.valueOf()) ;
+            
             assertEquals( 1179835993000, r1.valueOf() );
             
             assertUndefined( r2 );
