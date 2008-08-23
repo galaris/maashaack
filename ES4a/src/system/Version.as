@@ -60,18 +60,50 @@ package system
      */
     public class Version implements Equatable
         {
-            
         
+        /**
+         * @private
+         */
+        private var _build:uint;        
+        
+        /**
+         * @private
+         */
         private var _major:uint;
-        private var _minor:uint;
-        private var _build:uint;
-        private var _revision:uint;
         
-        private var _maxMajor:uint    = 0xf;
-        private var _maxMinor:uint    = 0xf;
+        /**
+         * @private
+         */
         private var _maxBuild:uint    = 0xff;
-        private var _maxRevision:uint = 0xffff;
         
+        /**
+         * @private
+         */
+        private var _maxMajor:uint    = 0xf;
+        
+        /**
+         * @private
+         */
+        private var _maxMinor:uint    = 0xf;
+                
+        /**
+         * @private
+         */
+        private var _maxRevision:uint = 0xffff;        
+        
+        /**
+         * @private
+         */
+        private var _minor:uint;
+                
+        /**
+         * @private
+         */
+        private var _revision:uint;
+                
+        /**
+         * @private
+         */
         private var _separator:String = ".";
         
         /**
@@ -187,6 +219,22 @@ package system
             }
         
         /**
+         * Indicates the build value of this version.
+         */
+        public function get build():uint
+            {
+            return _build;
+            }
+         
+        /**
+         * @private
+         */
+        public function set build( value:uint ):void
+            {
+            _build = Math.min( value, _maxBuild );
+            }        
+        
+        /**
          * Indicates the major value of this version.
          */        
         public function get major():uint
@@ -218,21 +266,7 @@ package system
             _minor = Math.min( value, _maxMinor );
             }
         
-        /**
-         * Indicates the build value of this version.
-         */
-        public function get build():uint
-            {
-            return _build;
-            }
-         
-        /**
-         * @private
-         */
-        public function set build( value:uint ):void
-            {
-            _build = Math.min( value, _maxBuild );
-            }
+
 
         /**
          * Indicates the revision value of this version.
@@ -278,17 +312,6 @@ package system
             return false;
             }
          
-        /**
-         * Returns the primitive value of the object.
-         * @return the primitive value of the object.
-         */
-        public function valueOf():uint
-            {
-            /* 0xF F FF FFFF
-            */
-            return (major << 28) | (minor << 24) | (build << 16) | revision;
-            }
-        
         /**
          * Returns a string representation of the object.
          * By default, the format returned will include only the fields greater than zero
@@ -346,7 +369,18 @@ package system
             
             return arr.join( _separator );
             }
-        
-        }
+                 
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():uint
+            {
+            /* 0xF F FF FFFF
+            */
+            return (major << 28) | (minor << 24) | (build << 16) | revision;
+            }
+
+        }   
     
     }

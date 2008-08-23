@@ -34,7 +34,7 @@ package system.diagnostics
         /**
          * @private
          */
-        private var _buffer:String = "";
+        protected var _buffer:String = "" ;
         
         /**
          * Creates a new TraceConsole instance.
@@ -88,7 +88,7 @@ package system.diagnostics
         /**
          * Appends the message format.
          */        
-        public function write( ...messages ):void
+        public function write( ...messages:Array ):void
             {
             _buffer += _formatMessage( messages );
             }
@@ -96,7 +96,7 @@ package system.diagnostics
         /**
          * Appends the message format and add newline character.
          */        
-        public function writeLine( ...messages ):void
+        public function writeLine( ...messages:Array ):void
             {
             var msg:String = _formatMessage( messages );
             trace( _buffer + msg );
