@@ -1,4 +1,5 @@
 #summary maashaack framework
+#labels Framework,Projects-X,Featured
 
 = Introduction =
 
