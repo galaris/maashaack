@@ -28,10 +28,10 @@ package
     
     import system.*;    
 
-    public class ES4a_TestRunner extends Sprite
+    public class Framework_TestRunner extends Sprite
         {
         
-        public function ES4a_TestRunner()
+        public function Framework_TestRunner()
             {
             
             system.config.serializer.prettyPrinting = true;
