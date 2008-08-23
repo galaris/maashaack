@@ -24,6 +24,7 @@ package
     import flash.display.Sprite;
     
     import buRRRn.ASTUce.*;
+    import buRRRn.ASTUce.tests.AllTests;
     
     import system.*;    
 
@@ -44,9 +45,9 @@ package
             //Runner.main( system.AllTests.suite() );
             
             //testing everything
-            // Runner.main( buRRRn.ASTUce.tests.AllTests.suite(), system.AllTests.suite() );
+            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(), system.AllTests.suite() );
             
-            Runner.main( system.AllTests.suite() );
+            //Runner.main( system.AllTests.suite() );
             
             }
         }
