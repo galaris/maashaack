@@ -366,17 +366,17 @@ package system.serializers.eden
         public function testMissingEndSemiColon2():void
         	{
             //error found in ES4a StringsTest
-            var r1:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13)" );
+            var r1:Date = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13)" );
             var r2:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13 " );
             var r3:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13   )" );
             var r4:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13" );
             
             assertTrue( r1 is Date );
-            assertEquals( "Tue May 22 12:13:13 2007 UTC", r1.toUTCString() );
+            assertEquals( 1179835993000, r1.valueOf() );
             
             assertUndefined( r2 );
             
-            assertEquals( "Tue May 22 12:13:13 2007 UTC", r3.toUTCString() );
+            assertEquals( 1179835993000, r3.valueOf() );
             
             assertUndefined( r4 );
             
