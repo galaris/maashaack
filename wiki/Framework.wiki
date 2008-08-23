@@ -1,0 +1,55 @@
+#summary maashaack framework
+
+= Introduction =
+
+This is the application framework for !ActionScript 3
+which have the only purpose to provide portable
+cross-platform and standard packages, libraries, etc.
+
+= Portability =
+
+ * Flash 9
+ * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
+ * [http://code.google.com/p/redtamarin/ RedTamarin] (will be implemented in a different branch)
+
+= Details =
+
+Inspired by such projects as Mono, Python, Ruby, etc.
+the goal here is to provide a set of libraries that
+are made right from the start portable in the AS3 world.
+
+The focus is on the AS3 language, APIs available in
+Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
+
+= Documentation =
+
+[Configuration]
+
+[Serialization]
+
+[Evaluators]
+
+
+= Roadmap =
+
+== v0.1.0 ==
+
+*You Only Live Twice*
+
+ * build based on ant
+ * asdoc documentation
+ * build as a swc for easy use
+ * better setup for unit tests
+ * code review and refactor
+ * more unit tests
+
+features:
+ * configurator
+ * evaluator
+ * reflection API
+ * serializers
+   * eden is now part of system
+   * more serializers (WDDX, PHP, JSON, etc.)
+ * core object utils: Strings, Arrays, Objects, etc.
+ * cli
+ * ui
