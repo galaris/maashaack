@@ -1,4 +1,4 @@
-
+﻿
 /*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -9,7 +9,7 @@
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
+  The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.

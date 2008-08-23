@@ -8,7 +8,7 @@
   WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
   for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [ES4a: ECMAScript 4 MaasHaack framework].
+  The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
   Zwetan Kjukov <zwetan@gmail.com>.
@@ -41,7 +41,7 @@ package
 
             buRRRn.ASTUce.config.showConstructorList = false;
             
-            //testing ES4a core only
+            //testing MaasHaack core only
             //Runner.main( system.AllTests.suite() );
             
             //testing everything
