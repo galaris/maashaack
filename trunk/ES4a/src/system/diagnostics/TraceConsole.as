@@ -21,6 +21,8 @@
 
 package system.diagnostics
 {
+    import flash.errors.IllegalOperationError;
+    
     import system.Strings;
     import system.terminals.Console;    
 
@@ -68,21 +70,21 @@ package system.diagnostics
             }
                 
         /**
-         * Returns the last char.
-         * @return the last char.
+         * Not supported, the console isn't interactive.
+         * @throws flash.errors.IllegalOperationError The read() method is illegal in this console
          */        
         public function read():String
             {
-            return null;
+            throw new IllegalOperationError( this + " read() method is illegal in this console." ) ;
             }
         
         /**
-         * Returns the last line.
-         * @return the last line.
-         */        
+         * Not supported, the console isn't interactive.
+         * @throws flash.errors.IllegalOperationError The read() method is illegal in this console
+         */      
         public function readLine():String
             {
-            return null;
+            throw new IllegalOperationError( this + " readLine() method is illegal in this console." ) ;
             }
         
         /**
