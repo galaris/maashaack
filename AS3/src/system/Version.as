@@ -166,7 +166,7 @@ package system
         /**
          * Constructs a Version object from a string.
          */
-        public static function fromString( value:String = "" ):Version
+        public static function fromString( value:String = "", separator:String = "." ):Version
             {
             var v:Version = new Version();
             
@@ -175,9 +175,9 @@ package system
                 return v;
                 }
             
-            if( value.indexOf( "." ) > -1 )
+            if( value.indexOf( separator ) > -1 )
                 {
-                var values:Array = value.split( "." );
+                var values:Array = value.split( separator );
                 v.major    = parseInt( values[0] );
                 v.minor    = parseInt( values[1] );
                 v.build    = parseInt( values[2] );
