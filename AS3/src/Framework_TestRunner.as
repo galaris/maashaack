@@ -20,14 +20,14 @@
 */
 
 package
-{
+    {
     import flash.display.Sprite;
     
     import buRRRn.ASTUce.*;
     import buRRRn.ASTUce.tests.AllTests;
     
-    import system.*;    
-
+    import system.*;
+    
     public class Framework_TestRunner extends Sprite
         {
         
@@ -38,16 +38,14 @@ package
             system.about( true, true );
             
             //tests
-
             buRRRn.ASTUce.config.showConstructorList = false;
             
             //testing MaasHaack core only
             //Runner.main( system.AllTests.suite() );
             
             //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(), system.AllTests.suite() );
-            
-            //Runner.main( system.AllTests.suite() );
+            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
+                         system.AllTests.suite() );
             
             }
         }
