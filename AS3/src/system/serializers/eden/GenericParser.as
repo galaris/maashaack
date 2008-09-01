@@ -21,7 +21,7 @@
 
 package system.serializers.eden
     {
-    import system.serializers.eden.debug;
+//  import system.serializers.eden.debug;
     import system.serializers.eden.release;
     
 	/**
@@ -60,7 +60,7 @@ package system.serializers.eden
 		/**
 		 * Indicates if the parser use the verbose mode.
 		 */
-        //public static var verbose:Boolean = false;
+        public static var verbose:Boolean = false;
         
 		/**
 		 * Creates a new GenericParser instance.
@@ -76,23 +76,24 @@ package system.serializers.eden
 		/**
 		 * Debugs the parser if the verbose mode is <code class="prettyprint">true</code>.
 		 */
-//        public function debug( str:String ):void
+       public function debug( str:String ):void
+            {
+                if( verbose )
+                {
+                trace( str );
+                }
+            }
+
+// FIXME Don't work in Flash CS3 !     
+//        debug function debugGP( message:String ):void
 //            {
-//            if( verbose )
-//                {
-//                trace( str );
-//                }
+//            trace( message );
 //            }
-        
-        debug function debugGP( message:String ):void
-            {
-            public::trace( message );
-            }
-        
-        release function debugGP( message:String ):void
-            {
-            //do nothing
-            }
+//        
+//        release function debugGP( message:String ):void
+//            {
+//            //do nothing
+//            }
 
         
 		/**
@@ -121,7 +122,7 @@ package system.serializers.eden
             {
             ch = getChar();
             pos++;
-            debugGP( "next() - ["+ch+"]" );
+            //debugGP( "next() - ["+ch+"]" );
             return ch;
             }
                 

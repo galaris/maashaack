@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -20,25 +20,67 @@
 */
 
 package system.diagnostics
-    {
+{
     import flash.trace.Trace;
     
     import system.Strings;
     import system.console;
-    import system.io.Writeable;
-    
+    import system.io.Writeable;    
+
+    /**
+     * The internal VirtualMachine class.
+     */
     public class _VirtualMachine
         {
+        
+        /**
+         * @private
+         */
         private var _tracing:Boolean     = false;
+        
+        /**
+         * @private
+         */
         private var _writer:Writeable    = console;
         
+        /**
+         * Indicates if the machine filter the methods.
+         */
         public var filterMethods:Boolean = true;
-        public var showPackages:Boolean  = true;
-        public var formatter:String      = "  * {method}({args})";
+        
+        /**
+         * Indicates the list of the filtered methods.
+         */
         public var filteredMethods:Array = [ "flash.trace::Trace$/setLevel",
                                              "system.diagnostics::_VirtualMachine/beginTrace",
-                                             "system.diagnostics::_VirtualMachine/endTrace" ];
+                                             "system.diagnostics::_VirtualMachine/endTrace" ];        
+        /**
+         * Indicates the formatter pattern.
+         */
+        public var formatter:String      = "  * {method}({args})";
         
+        /**
+         * Indicates if show the packages.
+         */
+        public var showPackages:Boolean  = true;
+        
+        /**
+         * @private
+         */
+        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
+            {
+            if( Strings.startsWith( str, beginWith ) )
+                {
+                str = str.split( beginWith ).join( replaceWith );
+                }
+            
+            return str;
+            }        
+        
+        /**
+         * Creates a new VirtualMachine instance.
+         * @param listener The callback listener function use to dispatch the messages.
+         */
         public function _VirtualMachine( listener:Function = null )
             {
             if( listener == null )
@@ -51,21 +93,17 @@ package system.diagnostics
                 }
             }
         
-        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
-            {
-            if( Strings.startsWith( str, beginWith ) )
-                {
-                str = str.split( beginWith ).join( replaceWith );
-                }
-            
-            return str;
-            }
-        
+        /**
+         * Indicates if the machine is tracing.
+         */
         public function isTracing():Boolean
             {
             return _tracing;
             }
         
+        /**
+         * Trace the messages in the console.
+         */
         public function traceListener( line:String, index:int, method:String, args:String ):void
             {
             if( filterMethods )
@@ -99,6 +137,9 @@ package system.diagnostics
             _writer.writeLine( method+"("+args+")" );
             }
         
+        /**
+         * Insert in the console the header (begin trace).
+         */
         public function beginTrace():void
             {
             _tracing = true;
@@ -106,6 +147,9 @@ package system.diagnostics
             Trace.setLevel( Trace.METHODS_WITH_ARGS, Trace.LISTENER );
             }
         
+        /**
+         * Insert in the console the footer (begin trace).
+         */
         public function endTrace():void
             {
             Trace.setLevel( Trace.OFF, Trace.LISTENER );

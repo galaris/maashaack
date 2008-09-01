@@ -20,12 +20,12 @@
 */
 
 package system
-    {
-    import system.serializers.eden.EdenSerializer;
+{
+    import system.serializers.eden.EdenSerializer;    
     
-    import system.serializers.eden.debug;
     
-    use namespace debug;
+    
+    // use namespace debug;
     
 	/**
 	 * The eden singleton serializer.
