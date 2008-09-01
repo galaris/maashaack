@@ -21,13 +21,19 @@
 
 package system.serializers.eden
     {
+    import system.serializers.eden.debug;
+    import system.serializers.eden.release;
     
 	/**
 	 * The GenericParser static tool class.
 	 */
     public class GenericParser
         {
-        	
+        /* note:
+           Always commit changes with the release namespace
+        */
+        use namespace release;
+        
         /**
          * @private
          */
@@ -54,7 +60,7 @@ package system.serializers.eden
 		/**
 		 * Indicates if the parser use the verbose mode.
 		 */
-        public static var verbose:Boolean = false;
+        //public static var verbose:Boolean = false;
         
 		/**
 		 * Creates a new GenericParser instance.
@@ -70,13 +76,24 @@ package system.serializers.eden
 		/**
 		 * Debugs the parser if the verbose mode is <code class="prettyprint">true</code>.
 		 */
-        public function debug( str:String ):void
+//        public function debug( str:String ):void
+//            {
+//            if( verbose )
+//                {
+//                trace( str );
+//                }
+//            }
+        
+        debug function debugGP( message:String ):void
             {
-            if( verbose )
-                {
-                trace( str );
-                }
+            public::trace( message );
             }
+        
+        release function debugGP( message:String ):void
+            {
+            //do nothing
+            }
+
         
 		/**
 		 * Returns the current char in the parse process.
@@ -104,10 +121,10 @@ package system.serializers.eden
             {
             ch = getChar();
             pos++;
-            debug( "["+ch+"]" );
+            debugGP( "next() - ["+ch+"]" );
             return ch;
             }
-        
+                
 		/**
 		 * Indicates if the source parser has more char.
 		 */
@@ -115,7 +132,7 @@ package system.serializers.eden
             {
             return pos <= (source.length-1);
             }
-
+        
 		/**
 		 * The evaluate process.
 		 * This method must be overriding.
@@ -139,14 +156,16 @@ package system.serializers.eden
 		 */
         public static function isAlpha( c:String ):Boolean
             {
+            //debug( "isAlpha( "+c+" )" );
             return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z"));
             }
-    
+        
 		/**
 		 * Indicates if the specified character is an ASCII character.
 		 */
         public static function isASCII( c:String ):Boolean
             {
+            //debug( "isASCII( "+c+" )" );
             return c.charCodeAt( 0 ) <= 255;
             }
         
@@ -155,6 +174,7 @@ package system.serializers.eden
 		 */
         public static function isDigit( c:String ):Boolean
             {
+            //debug( "isDigit( "+c+" )" );
             return ("0" <= c) && (c <= "9");
             }
         
@@ -163,6 +183,7 @@ package system.serializers.eden
 		 */
         public static function isHexDigit( c:String ):Boolean
             {
+            //debug( "isHexDigit( "+c+" )" );
             return isDigit( c ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f"));
             }
         
@@ -171,6 +192,7 @@ package system.serializers.eden
 		 */
         public static function isUnicode( c:String ):Boolean
             {
+            //debug( "isUnicode( "+c+" )" );
             return c.charCodeAt( 0 ) > 255;
             }
         

@@ -72,7 +72,7 @@ package system.serializers.eden
 		 */
         public function get arrayIndexAsBracket():Boolean
             {
-            return _config.arrayIndexAsBracket; // TODO : may become obsolete for AS3/ES4 but let's keep it for now for configuration file bacward compatibility
+            return _config.arrayIndexAsBracket; // TODO : may become obsolete for AS3/ES4 but let's keep it for now for configuration file backward compatibility
             }
         
 		/**
