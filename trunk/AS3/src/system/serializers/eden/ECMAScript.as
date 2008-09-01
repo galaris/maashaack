@@ -103,47 +103,76 @@ package system.serializers.eden
 		 */
         public var localscope:*;
         
-        debug function traceGlobalPool():void
+        public function traceGlobalPool():void
             {
-            trace( "---------------------" );
-            trace( "global pool:" );
-            for( var member:String in _globalPool )
-                {
-                trace( member + " = " + _globalPool[member] );
+            if ( verbose )
+                {            	
+                trace( "---------------------" );
+                trace( "global pool:" );
+                for( var member:String in _globalPool )
+                    {
+                    trace( member + " = " + _globalPool[member] );
+                    }
+                trace( "---------------------" );
                 }
-            trace( "---------------------" );
-            }
-        
-        release function traceGlobalPool():void
+            } 
+            
+        public function tracePool():void
             {
-            //do nothing;
-            }
-        
-        debug function tracePool():void
-            {
-            debug( "---------------------" );
-            debug( "local pool:" );
-            for( var member:String in _localPool )
+            if ( verbose )
                 {
-                debug( member );
+                this.debug( "---------------------" );
+                this.debug( "local pool:" );
+                for( var member:String in _localPool )
+                    {
+                    this.debug( member );
+                    }
+                this.debug( "---------------------" );
                 }
-            debug( "---------------------" );
             }
+                  
         
-        release function tracePool():void
-            {
-            //do nothing
-            }
-        
-        debug function debug( message:String ):void
-            {
-            trace( message );
-            }
-        
-        release function debug( message:String ):void
-            {
-            //do nothing
-            }
+//        debug function traceGlobalPool():void
+//            {
+//            trace( "---------------------" );
+//            trace( "global pool:" );
+//            for( var member:String in _globalPool )
+//                {
+//                trace( member + " = " + _globalPool[member] );
+//                }
+//            trace( "---------------------" );
+//            }
+//        
+//        release function traceGlobalPool():void
+//            {
+//            //do nothing;
+//            }
+//        
+//        debug function tracePool():void
+//            {
+//            this.debug( "---------------------" );
+//            this.debug( "local pool:" );
+//            for( var member:String in _localPool )
+//                {
+//                this.debug( member );
+//                }
+//            this.debug( "---------------------" );
+//            }
+//        
+//        release function tracePool():void
+//            {
+//            //do nothing
+//            }
+//        
+//        debug function debug( message:String ):void
+//            {
+//            trace( message );
+//            }
+//        
+//        release function debug( message:String ):void
+//            {
+//            //do nothing
+//            }
         
         /**
         * Hook to catch the global trace function call
@@ -194,7 +223,7 @@ package system.serializers.eden
 		 */
         public override function eval():*
             {
-            debug( "eval()" );
+            this.debug( "eval()" );
             comments = ""; //clean comments before starting a new eval
             var value:* = _ORC;
             var tmp:*;
@@ -260,7 +289,7 @@ package system.serializers.eden
 		 */
         public function isDigitNumber( num:String ):Boolean
             {
-            debug( "isDigitNumber( \""+num+"\" )" );
+            this.debug( "isDigitNumber( \""+num+"\" )" );
             var numarr:Array = num.split( "" );
             
             for( var i:int=0; i<numarr.length; i++ )
@@ -280,7 +309,7 @@ package system.serializers.eden
 		 */
         public function isIdentifierStart( c:String ):Boolean
             {
-            debug( "isIdentifierStart( \""+c+"\" )" );
+            this.debug( "isIdentifierStart( \""+c+"\" )" );
             if( isAlpha( c ) || (c == "_") || (c == "$" ) )
                 {
                 return true;
@@ -299,7 +328,7 @@ package system.serializers.eden
 		 */
         public function isIdentifierPart( c:String ):Boolean
             {
-            debug( "isIdentifierPart( \""+c+"\" )" );
+            this.debug( "isIdentifierPart( \""+c+"\" )" );
             if( isIdentifierStart( c ) )
                 {
                 return true;
@@ -331,7 +360,7 @@ package system.serializers.eden
 		 */
         public function isLineTerminator( c:String ):Boolean
             {
-            debug( "isLineTerminator( \""+c+"\" )" );
+            this.debug( "isLineTerminator( \""+c+"\" )" );
             switch( c )
                 {
                 case "\u000A": case "\u000D": case "\u2028": case "\u2029":
@@ -348,7 +377,7 @@ package system.serializers.eden
 		 */
         public function isReservedKeyword( identifier:String ):Boolean
             {
-            debug( "isReservedKeyword( \""+identifier+"\" )" );
+            this.debug( "isReservedKeyword( \""+identifier+"\" )" );
             if( !config.strictMode )
                 {
                 identifier = identifier.toLowerCase();
@@ -382,7 +411,7 @@ package system.serializers.eden
 		 */
         public function isFutureReservedKeyword( identifier:String ):Boolean
             {
-            debug( "isFutureReservedKeyword( \""+identifier+"\" )" );
+            this.debug( "isFutureReservedKeyword( \""+identifier+"\" )" );
             if( !config.strictMode )
                 {
                 identifier = identifier.toLowerCase();
@@ -417,7 +446,7 @@ package system.serializers.eden
 		 */
         public function isValidPath( path:String ):Boolean
             {
-            debug( "isValidPath( \""+path+"\" )" );
+            this.debug( "isValidPath( \""+path+"\" )" );
             var paths:Array = _pathAsArray( path );
             var subpath:String;
             
@@ -446,7 +475,7 @@ package system.serializers.eden
 		 */
         public function doesExistInLocalScope( path:String ):Boolean
             {
-            debug( "doesExistInLocalScope( \""+path+"\" )" );
+            this.debug( "doesExistInLocalScope( \""+path+"\" )" );
             if( _localPool[ path ] != undefined )
                 {
                 return true;
@@ -489,7 +518,7 @@ package system.serializers.eden
 		 */
         public function doesExistInGlobalScope( path:String ):Boolean
             {
-            debug( "doesExistInGlobalScope( \""+path+"\" )" );
+            this.debug( "doesExistInGlobalScope( \""+path+"\" )" );
             if( _globalPool[ path ] != undefined )
                 {
                 traceGlobalPool();
@@ -526,7 +555,7 @@ package system.serializers.eden
                         {
                         foundScope = true;
                         scope =  Reflection.getDefinitionByName( scopepath );
-                        debug( "GLOBAL POOL: " + scopepath );
+                        this.debug( "GLOBAL POOL: " + scopepath );
                         _globalPool[ scopepath ] = scope;
                         }
                     }
@@ -548,12 +577,12 @@ package system.serializers.eden
                     
                     if( arrayIndex )
                         {
-                        debug( ">> GLOBAL POOL : " + scopepath+"."+paths[i-1]+"."+subpath );
+                        this.debug( ">> GLOBAL POOL : " + scopepath+"."+paths[i-1]+"."+subpath );
                         _globalPool[ scopepath+"."+paths[i-1]+"."+subpath ] = scope[ subpath ];
                         }
                     else
                         {
-                        debug( ">> GLOBAL POOL : " + scopepath+"."+subpath );
+                        this.debug( ">> GLOBAL POOL : " + scopepath+"."+subpath );
                         _globalPool[ scopepath+"."+subpath ] = scope[ subpath ];
                         }
                     scope = scope[ subpath ];
@@ -580,7 +609,7 @@ package system.serializers.eden
          */
         public function scanComments():void
             {
-            debug( "scanComments()" );
+            this.debug( "scanComments()" );
             next();
             
             switch( ch )
@@ -628,7 +657,7 @@ package system.serializers.eden
          */
         public function scanSeparators():void
             {
-            debug( "scanSeparators()" );
+            this.debug( "scanSeparators()" );
             var scan:Boolean = true;
             
             while( scan )
@@ -685,7 +714,7 @@ package system.serializers.eden
          */
         public function scanWhiteSpace():void
             {
-            debug( "scanWhiteSpace()" );
+            this.debug( "scanWhiteSpace()" );
             var scan:Boolean = true;
             
             while( scan )
@@ -711,7 +740,7 @@ package system.serializers.eden
          */
         public function scanIdentifier():String
             {
-            debug( "scanIdentifier()" );
+            this.debug( "scanIdentifier()" );
             var id:String = "";
             
             if( isIdentifierStart( ch ) )
@@ -738,7 +767,7 @@ package system.serializers.eden
          */
         public function scanPath():String
             {
-            debug( "scanPath()" );
+            this.debug( "scanPath()" );
             var path:String = "";
             var subpath:String = "";
             
@@ -806,7 +835,7 @@ package system.serializers.eden
                 return scanFunction( path );
                 }
             */
-            debug( "scanPath returns ["+path+"]" );
+            this.debug( "scanPath returns ["+path+"]" );
             return path;
             }
         
@@ -817,7 +846,7 @@ package system.serializers.eden
          */
         private function _pathAsArray( path:String ):Array
             {
-            debug( "_pathAsArray( \""+path+"\" )" );
+            this.debug( "_pathAsArray( \""+path+"\" )" );
             var paths:Array;
             if( path.indexOf( "." ) > -1 )
                 {
@@ -827,7 +856,7 @@ package system.serializers.eden
                 {
                 paths = [ path ];
                 }
-            debug( "_pathAsArray returns ["+path+"]" );
+            this.debug( "_pathAsArray returns ["+path+"]" );
             return paths;
             }
         
@@ -836,7 +865,7 @@ package system.serializers.eden
          */
         private function _createPath( path:String ):void
             {
-            debug( "_createPath( \""+path+"\" )" );
+            this.debug( "_createPath( \""+path+"\" )" );
             var paths:Array    = _pathAsArray( path );
             var prop:*         = paths.shift();
             var subpath:String = "";
@@ -885,7 +914,7 @@ package system.serializers.eden
 		 */
         public function scanString( quote:String ):String
             {
-            debug( "scanString( "+quote+" )" );
+            this.debug( "scanString( "+quote+" )" );
             var str:String = "";
             
             if( ch == quote )
@@ -985,7 +1014,7 @@ package system.serializers.eden
 		 */
         public function scanNumber():Number
             {
-            debug( "scanNumber()" );
+            this.debug( "scanNumber()" );
             var value:Number;
             
             var num:String  = "";
@@ -1095,7 +1124,7 @@ package system.serializers.eden
         
         public function scanObject():Object
             {
-            debug( "scanObject()" );
+            this.debug( "scanObject()" );
             var obj:Object = {};
             var member:String;
             var value:*;
@@ -1155,7 +1184,7 @@ package system.serializers.eden
         
         public function scanArray():Array
             {
-            debug( "scanArray()" );
+            this.debug( "scanArray()" );
             var arr:Array = [];
             
             if( ch == "[" )
@@ -1198,7 +1227,7 @@ package system.serializers.eden
 		 */
         public function scanFunction( fcnPath:String, pool:*, ref:* = null ):*
             {
-            debug( "scanFunction( " + fcnPath + " )" );
+            this.debug( "scanFunction( " + fcnPath + " )" );
             var args:Array = [];
             var fcnName:String;
             var fcnObj:*;
@@ -1274,7 +1303,7 @@ package system.serializers.eden
                 }
     //         else
     //             {
-    //             debug( fcnPath + " is authorized (scanFunction)" );
+    //             this.debug( fcnPath + " is authorized (scanFunction)" );
     //             }
             */
             
@@ -1338,7 +1367,7 @@ package system.serializers.eden
          */
         public function scanKeyword( pre:String = "" ):*
             {
-            debug( "scanKeyword( "+pre+" )" );
+            this.debug( "scanKeyword( "+pre+" )" );
             
             var word:String = "";
             var baseword:String = scanPath();
@@ -1470,7 +1499,7 @@ package system.serializers.eden
 		 */
         public function scanGlobalAssignement( path:String ):void
             {
-            debug( "scanGlobalAssignement( "+path+" )" );
+            this.debug( "scanGlobalAssignement( "+path+" )" );
             var scope:*;
             var scopepath:String = "";
             var subpath:*        = "";
@@ -1546,7 +1575,7 @@ package system.serializers.eden
 		 */
         public function scanRootLocalAssignement( name:String ):void
             {
-            debug( "scanRootLocalAssignement( "+name+" )" );
+            this.debug( "scanRootLocalAssignement( "+name+" )" );
             scanWhiteSpace();
             
             if( ch == "=" )
@@ -1583,7 +1612,7 @@ package system.serializers.eden
 		 */        
         public function scanLocalAssignement( path:String ):void
             {
-            debug( "scanLocalAssignement( "+path+" )" );
+            this.debug( "scanLocalAssignement( "+path+" )" );
             
             if( path.indexOf( "." ) == -1 )
                 {
@@ -1660,17 +1689,17 @@ package system.serializers.eden
 		 */
         public function scanValue():*
             {
-            debug( "scanValue() - ch:"+ch );
+            this.debug( "scanValue() - ch:"+ch );
             scanSeparators();
-            debug( "after scan - ch:"+ch );
+            this.debug( "after scan - ch:"+ch );
             
             if( pos == source.length )
                 {
-                debug( "prevent unecessary scan" );
+                this.debug( "prevent unecessary scan" );
                 
                 if( _inAssignement )
                     {
-                    debug( "RHS is missing" );
+                    this.debug( "RHS is missing" );
                     }
                 
                 return;
