@@ -20,11 +20,13 @@
 */
 
 package system.serializers.eden
-    {
+{
     import system.Reflection;
     import system.Strings;
-    import system.console;
-    
+    import system.console;    
+
+    //import system.serializers.eden.debug;    
+
     /* note:
        how to debug eden (part 1)
        
@@ -72,7 +74,7 @@ package system.serializers.eden
         /* note:
            Always commit changes with the release namespace
         */
-        use namespace release;
+        //use namespace release;
         
         private var _ORC:String            = "\uFFFC";
         private var _singleValue:Boolean   = true;
