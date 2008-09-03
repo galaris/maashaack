@@ -19,13 +19,15 @@
   
 */
 
-package system.core 
+package system 
 {
-    import buRRRn.ASTUce.framework.TestCase;                    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Cloneable;    
 
     public class CloneableTest extends TestCase 
     {
-
+        
         public function CloneableTest(name:String = "")
         {
             super( name );
@@ -48,7 +50,7 @@ package system.core
     }
 }
 
-import system.core.Cloneable;
+import system.Cloneable;
 
 class CloneableClass implements Cloneable
 {

@@ -19,8 +19,7 @@
   
 */
 
-
-package system.core
+package system
 {
 
     /**

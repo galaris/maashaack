@@ -19,25 +19,27 @@
   
 */
 
-
-package system.core
+package system.process
 {
+    import buRRRn.ASTUce.framework.*;    
 
-    /**
-	 * This interface defines a common structure for identifiable classes (has an "id" property).
-	 */
-	public interface Identifiable
+    public class AllTests
     {
-		
-		/**
-		 * Indicates the id value of this object.
-		 */
-		function get id():* ;
-	
-		/**
-	 	 * @private
-	 	 */
-		function set id( id:* ):void ;
-		 
-	}
+        
+        public function AllTests()
+        {
+            
+        }
+        
+        public static function suite():ITest
+        {
+            var suite:TestSuite = new TestSuite( "system process tests" );
+            
+            suite.addTestSuite( RunnableTest );
+            
+            return suite;
+        }
+        
+    }
+    
 }

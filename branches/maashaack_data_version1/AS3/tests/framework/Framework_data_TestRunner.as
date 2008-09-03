@@ -31,8 +31,8 @@ package
     import buRRRn.ASTUce.*;
     
     import system.*;
-    import system.core.*;
     import system.data.*;
+    import system.process.*;    
     import system.ui.TextFieldConsole;    
 
     public class Framework_data_TestRunner extends Sprite
@@ -68,7 +68,13 @@ package
             
             
             
-            Runner.main( system.core.AllTests.suite() , system.data.AllTests.suite() );
+            Runner.main( 
+            
+                system.AllTests.suite() , 
+                system.data.AllTests.suite() ,
+                system.process.AllTests.suite() 
+            
+            );
             
         }
             

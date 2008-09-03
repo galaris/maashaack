@@ -19,31 +19,20 @@
   
 */
 
-package system.core
+package system.process
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import system.core.AllTests;    
 
-    public class AllTests
-    {
-        
-        public function AllTests()
-        {
-            
-        }
-        
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite( "core tests" );
-            
-            suite.addTestSuite( CloneableTest ) ;
-            suite.addTestSuite( IdentifiableTest ) ;
-            suite.addTestSuite( RunnableTest ) ;
-                        
-            return suite;
-        }
-        
-    }
-    
+    /**
+	 * This interface should be implemented by any class whose instances are intended to be executed.
+	 */	
+	public interface Runnable
+	{
+	
+		/**
+		 * Run the process.
+		 */
+		function run( ...arguments:Array ):void ;
+	
+	}
+
 }

@@ -19,27 +19,20 @@
   
 */
 
-package system.data
+package system
 {
-    import buRRRn.ASTUce.framework.*;    
 
-    public class AllTests
-    {
-        
-        public function AllTests()
-        {
-            
-        }
-        
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite( "system data tests" );
-            
-            suite.addTestSuite( IdentifiableTest  );
-            
-            return suite;
-        }
-        
-    }
-    
+    /**
+	 * Supports cloning, which creates a new instance of a class with the same value as an existing instance.
+	 */
+	public interface Cloneable 
+	{
+
+		/**
+		 * Creates and returns a shallow copy of the object.
+		 * @return A new object that is a shallow copy of this instance.
+		 */	
+		function clone():* ;
+		
+	}
 }

@@ -21,8 +21,8 @@
 
 package system.data
 {
+    import system.Cloneable;
     import system.Serializable;
-    import system.core.Cloneable;
     import system.data.iterator.Iterable;    
 
     /**
