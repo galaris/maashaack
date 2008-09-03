@@ -19,20 +19,25 @@
   
 */
 
-package system
+
+package system.core
 {
 
     /**
-	 * The IRunnable interface should be implemented by any class whose instances are intended to be executed by a "thread".
-	 */	
-	public interface Runnable
-	{
+	 * This interface defines a common structure for identifiable classes (has an "id" property).
+	 */
+	public interface Identifiable
+    {
+		
+		/**
+		 * Indicates the id value of this object.
+		 */
+		function get id():* ;
 	
 		/**
-		 * Run the process.
-		 */
-		function run( ...arguments:Array ):void ;
-	
+	 	 * @private
+	 	 */
+		function set id( id:* ):void ;
+		 
 	}
-
 }

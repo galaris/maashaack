@@ -11,7 +11,7 @@
   The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
-  Zwetan Kjukov <zwetan@gmail.com>.
+  Marc Alcaraz <ekameleon@gmail.com>.
   Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
@@ -19,32 +19,31 @@
   
 */
 
-package
+package system.core
+{
+    import buRRRn.ASTUce.framework.*;
+    
+    import system.core.AllTests;    
+
+    public class AllTests
     {
-    import flash.display.Sprite;
-    
-    import buRRRn.ASTUce.*;
-    import buRRRn.ASTUce.tests.AllTests;
-    
-    import system.data.*;
-    
-    public class Framework_data_TestRunner extends Sprite
-        {
         
-        public function Framework_data_TestRunner()
-            {
+        public function AllTests()
+        {
             
-            system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
-            
-            //tests
-            
-            buRRRn.ASTUce.config.showConstructorList = false;
-            
-            Runner.main( system.data.AllTests.suite() );
-            
-            }
         }
+        
+        public static function suite():ITest
+        {
+            var suite:TestSuite = new TestSuite( "core tests" );
+            
+            suite.addTestSuite( CloneableTest ) ;
+            suite.addTestSuite( IdentifiableTest ) ;
+            suite.addTestSuite( RunnableTest ) ;
+                        
+            return suite;
+        }
+        
     }
-
-
+    
+}

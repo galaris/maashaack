@@ -19,27 +19,49 @@
   
 */
 
-package system.data
+package system.core 
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;                    
+
+    public class CloneableTest extends TestCase 
     {
-        
-        public function AllTests()
+
+        public function CloneableTest(name:String = "")
         {
-            
+            super( name );
         }
         
-        public static function suite():ITest
+        public function testInterface():void
         {
-            var suite:TestSuite = new TestSuite( "data tests" );
             
-            //suite.addTestSuite(  );
+            var c:CloneableClass = new CloneableClass();
             
-            return suite;
-        }
+            assertTrue( c is Cloneable ) ;
+            
+            var clone:CloneableClass = c.clone() ;
+            
+            assertNotSame( c , clone ) ;
+            assertEquals( c.index , clone.index ) ;
+            
+        }        
         
     }
+}
+
+import system.core.Cloneable;
+
+class CloneableClass implements Cloneable
+{
     
+    public function CloneableClass( index:uint=0 )
+    {
+        this.index = index ;	
+    }
+    
+    public var index:uint ;
+    
+    public function clone():*
+    {
+    	return new CloneableClass( index ) ;
+    }
 }
