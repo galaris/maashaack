@@ -23,12 +23,12 @@ package system
 {
     import buRRRn.ASTUce.framework.*;
     
-    import system.reflection.AllTests;
-    import system.serializers.AllTests;
+    import system.cli.AllTests;
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
-    import system.cli.AllTests;
+    import system.reflection.AllTests;
+    import system.serializers.AllTests;    
 
     /**
       * TestSuite that runs all the ES4a tests
@@ -51,6 +51,8 @@ package system
             suite.addTestSuite( StringsTest );
             
             //others
+            
+            suite.addTestSuite( CloneableTest );
             suite.addTestSuite( VersionTest );
             suite.addTestSuite( ReflectionTest );
             suite.addTestSuite( EqualityTest );
