@@ -27,6 +27,7 @@ package system
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
+    import system.process.AllTests;
     import system.reflection.AllTests;
     import system.serializers.AllTests;    
 
@@ -74,10 +75,13 @@ package system
             
             //numeric
             suite.addTest( system.numeric.AllTests.suite() );
-            
+              
             //CLI
             suite.addTest( system.cli.AllTests.suite() );
-                        
+            
+            //process
+            suite.addTest( system.process.AllTests.suite() );            
+                      
             return suite;
             }
         
