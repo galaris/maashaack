@@ -19,20 +19,27 @@
   
 */
 
-package system
+package system.process
 {
+    import buRRRn.ASTUce.framework.*;    
 
-    /**
-	 * Supports cloning, which creates a new instance of a class with the same value as an existing instance.
-	 */
-	public interface Cloneable 
-	{
-
-		/**
-		 * Creates and returns a shallow copy of the object.
-		 * @return A new object that is a shallow copy of this instance.
-		 */	
-		function clone():* ;
-		
-	}
+    public class AllTests
+    {
+        
+        public function AllTests()
+        {
+            
+        }
+        
+        public static function suite():ITest
+        {
+            var suite:TestSuite = new TestSuite( "system process tests" );
+            
+            suite.addTestSuite( RunnableTest );
+            
+            return suite;
+        }
+        
+    }
+    
 }

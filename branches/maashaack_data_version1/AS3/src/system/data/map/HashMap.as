@@ -124,7 +124,7 @@ package system.data.map
             
         }
         
-       /**
+        /**
          * Overrides the behavior of an object property that can be called as a function. 
          * When a method of the object is invoked, this method is called. 
          * While some objects can be called as functions, some object properties can also be called as functions. 
@@ -366,9 +366,9 @@ package system.data.map
          */
         public function toString():String
         {
-            return MapStringifier.toString( this ) ;
+            return MapFormatter.format( this ) ;
         }
-        
+                
         /**
          * @private
          */

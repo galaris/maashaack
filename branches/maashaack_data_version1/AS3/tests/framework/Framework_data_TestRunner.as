@@ -32,7 +32,6 @@ package
     
     import system.*;
     import system.data.*;
-    import system.process.*;    
     import system.ui.TextFieldConsole;    
 
     public class Framework_data_TestRunner extends Sprite
@@ -71,8 +70,7 @@ package
             Runner.main( 
             
                 system.AllTests.suite() , 
-                system.data.AllTests.suite() ,
-                system.process.AllTests.suite() 
+                system.data.AllTests.suite() 
             
             );
             
