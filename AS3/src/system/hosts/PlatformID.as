@@ -20,9 +20,10 @@
     - Marc Alcaraz <ekameleon@gmail.com>
 
 */
-package system
-    {
-    
+package system.hosts
+{
+    import system.Enum;    
+
     /**
      * This enumeration defines the sort of plateforms used in your application. 
      */

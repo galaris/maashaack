@@ -20,10 +20,11 @@
     - Marc Alcaraz <ekameleon@gmail.com>
 
 */
-package system
-    {
-    
-	/**
+package system.hosts
+{
+    import system.Enum;    
+
+    /**
 	 * This static enumeration class defines all host identifiers.
 	 */
     public class HostID extends Enum
