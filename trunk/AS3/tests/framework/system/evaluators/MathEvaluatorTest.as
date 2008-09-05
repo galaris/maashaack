@@ -23,6 +23,8 @@ package system.evaluators
     {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.numeric.Mathematics;
+    
     public class MathEvaluatorTest extends TestCase
         {
         
@@ -51,7 +53,7 @@ package system.evaluators
             assertEquals( Math.cos(3), _ME.eval( "cos(3)" ) );
             assertEquals( Math.exp(5), _ME.eval( "exp(5)" ) );
             assertEquals( Math.floor(0.06), _ME.eval( "floor(0.06)" ) );
-            assertEquals( Math.log(7), _ME.eval( "log(7)" ) );
+            assertEquals( Mathematics.ceil(Math.log(7), 15) , Mathematics.ceil(_ME.eval( "log(7)" ),15) );
             assertEquals( Math.max(2,8), _ME.eval( "max(2,8)" ) );
             assertEquals( Math.min(2,8), _ME.eval( "min(2,8)" ) );
             assertEquals( Math.pow(2,8), _ME.eval( "pow(2,8)" ) );
