@@ -251,16 +251,16 @@ package system.serializers.eden
             
             while( hasMoreChar() )
                 {
-                scanSeparators();
+                _scanSeparators();
                 
                 if( !GenericParser.isAlpha( ch ) )
                     {
                     next();
                     }
                 
-                tmp = scanValue();
+                tmp = _scanValue();
                 
-                scanSeparators();
+                _scanSeparators();
                 
                 if( tmp != _ORC )
                     {
@@ -494,7 +494,7 @@ package system.serializers.eden
 		/**
 		 * Indicates if the specified path does exist in the local scope.
 		 */
-        public function doesExistInLocalScope( path:String ):Boolean
+        private function _doesExistInLocalScope( path:String ):Boolean
             {
             debug( "doesExistInLocalScope( \""+path+"\" )" );
             if( _localPool[ path ] != undefined )
@@ -537,7 +537,7 @@ package system.serializers.eden
 		/**
 		 * Indicates if the specified path does exist in the global scope.
 		 */
-        public function doesExistInGlobalScope( path:String ):Boolean
+        private function _doesExistInGlobalScope( path:String ):Boolean
             {
             debug( "doesExistInGlobalScope( \""+path+"\" )" );
             if( _globalPool[ path ] != undefined )
@@ -628,7 +628,7 @@ package system.serializers.eden
          *   of the parsing result
          *   -> could be usefull to parse code for documentation
          */
-        public function scanComments():void
+        private function _scanComments():void
             {
             debug( "scanComments()" );
             next();
@@ -643,7 +643,7 @@ package system.serializers.eden
                     comments += ch;
                     }
                 
-                scanSeparators();
+                _scanSeparators();
                 break;
                 
                 case "*":
@@ -676,7 +676,7 @@ package system.serializers.eden
         /**
          * Scan the separators.
          */
-        public function scanSeparators():void
+        private function _scanSeparators():void
             {
             debug( "scanSeparators()" );
             var scan:Boolean = true;
@@ -711,7 +711,7 @@ package system.serializers.eden
                     break;
                     
                     case "/":
-                    scanComments();
+                    _scanComments();
                     break;
                     
                     default:
@@ -733,7 +733,7 @@ package system.serializers.eden
          * </pre>
          * <p><b>See :</b> ECMA-262 spec 7.2 (PDF p23/188)</p>
          */
-        public function scanWhiteSpace():void
+        private function _scanWhiteSpace():void
             {
             debug( "scanWhiteSpace()" );
             var scan:Boolean = true;
@@ -747,7 +747,7 @@ package system.serializers.eden
                     break;
                     
                     case "/":
-                    scanComments();
+                    _scanComments();
                     break;
                     
                     default:
@@ -759,7 +759,7 @@ package system.serializers.eden
         /**
          * Scans the identifiers.
          */
-        public function scanIdentifier():String
+        private function _scanIdentifier():String
             {
             debug( "scanIdentifier()" );
             var id:String = "";
@@ -786,7 +786,7 @@ package system.serializers.eden
         /**
          * Scan the paths.
          */
-        public function scanPath():String
+        private function _scanPath():String
             {
             debug( "scanPath()" );
             var path:String = "";
@@ -805,18 +805,18 @@ package system.serializers.eden
                     if( ch == "[" )
                         {
                         next();
-                        scanWhiteSpace();
+                        _scanWhiteSpace();
                         
                         if( GenericParser.isDigit( ch ) )
                             {
-                            subpath = String( scanNumber() );
-                            scanWhiteSpace();
+                            subpath = String( _scanNumber() );
+                            _scanWhiteSpace();
                             path += "." + subpath;
                             }
                         else if( (this.ch == "\"") || (this.ch == "\'") )
                             {
-                            subpath = scanString( ch );
-                            scanWhiteSpace();
+                            subpath = _scanString( ch );
+                            _scanWhiteSpace();
                             path += "." + subpath;
                             }
                         
@@ -933,7 +933,7 @@ package system.serializers.eden
 		/**
 		 * Scans the Strings.
 		 */
-        public function scanString( quote:String ):String
+        private function _scanString( quote:String ):String
             {
             debug( "scanString( "+quote+" )" );
             var str:String = "";
@@ -1033,7 +1033,7 @@ package system.serializers.eden
 		/**
 		 * Scans Numbers.
 		 */
-        public function scanNumber():Number
+        private function _scanNumber():Number
             {
             debug( "scanNumber()" );
             var value:Number;
@@ -1143,7 +1143,10 @@ package system.serializers.eden
                 }
             }
         
-        public function scanObject():Object
+        /**
+        * Scans an objet litteral.
+        */
+        private function _scanObject():Object
             {
             debug( "scanObject()" );
             var obj:Object = {};
@@ -1153,7 +1156,7 @@ package system.serializers.eden
             if( ch == "{" )
                 {
                 next();
-                scanSeparators();
+                _scanSeparators();
                 
                 if( ch == "}" )
                     {
@@ -1163,8 +1166,8 @@ package system.serializers.eden
                 
                 while( ch != "" )
                     {
-                    member = scanIdentifier();
-                    scanWhiteSpace();
+                    member = _scanIdentifier();
+                    _scanWhiteSpace();
                     
                     if( ch != ":" )
                         {
@@ -1173,7 +1176,7 @@ package system.serializers.eden
                     
                     next();
                     _inAssignement = true;
-                    value = scanValue();
+                    value = _scanValue();
                     _inAssignement = false;
                     
                     if( !isReservedKeyword( member ) &&
@@ -1182,7 +1185,7 @@ package system.serializers.eden
                         obj[member] = value;
                         }
                     
-                    scanSeparators();
+                    _scanSeparators();
                     
                     if( ch == "}" )
                         {
@@ -1195,7 +1198,7 @@ package system.serializers.eden
                         }
                     
                     next();
-                    scanSeparators();
+                    _scanSeparators();
                     }
                 }
             
@@ -1203,7 +1206,10 @@ package system.serializers.eden
             return undefined;
             }
         
-        public function scanArray():Array
+        /**
+        * Scan an array litteral
+        */
+        private function _scanArray():Array
             {
             debug( "scanArray()" );
             var arr:Array = [];
@@ -1211,7 +1217,7 @@ package system.serializers.eden
             if( ch == "[" )
                 {
                 next();
-                scanSeparators();
+                _scanSeparators();
                 
                 if( ch == "]" )
                     {
@@ -1221,8 +1227,8 @@ package system.serializers.eden
                 
                 while( ch != "" )
                     {
-                    arr.push( scanValue() );
-                    scanSeparators();
+                    arr.push( _scanValue() );
+                    _scanSeparators();
                     
                     if( ch == "]" )
                         {
@@ -1235,7 +1241,7 @@ package system.serializers.eden
                         }
                     
                     next();
-                    scanSeparators();
+                    _scanSeparators();
                     }
                 }
             
@@ -1246,7 +1252,7 @@ package system.serializers.eden
 		/**
 		 * Scans the Functions.
 		 */
-        public function scanFunction( fcnPath:String, pool:*, ref:* = null ):*
+        private function _scanFunction( fcnPath:String, pool:*, ref:* = null ):*
             {
             debug( "scanFunction( " + fcnPath + " )" );
             var args:Array = [];
@@ -1270,9 +1276,9 @@ package system.serializers.eden
                 fcnPath = fcnPath.split( "."+fcnName ).join("");
                 }
             
-            scanWhiteSpace();
+            _scanWhiteSpace();
             next();
-            scanSeparators();
+            _scanSeparators();
             var foundEndParenthesis:Boolean = false;
             while( ch != "" )
                 {
@@ -1283,13 +1289,13 @@ package system.serializers.eden
                     break;
                     }
                 
-                args.push( scanValue() );
-                scanSeparators();
+                args.push( _scanValue() );
+                _scanSeparators();
                 
                 if( ch == "," )
                     {
                     next();
-                    scanSeparators();
+                    _scanSeparators();
                     }
                 
                 if( (pos == source.length) && (ch != ")") )
@@ -1367,7 +1373,7 @@ package system.serializers.eden
                 if( ch == "." )
                     {
                     next();
-                    return scanFunction( scanPath(), pool, result );
+                    return _scanFunction( _scanPath(), pool, result );
                     }
                 else
                     {
@@ -1386,12 +1392,12 @@ package system.serializers.eden
         /**
          * Scans the keywords.
          */
-        public function scanKeyword( pre:String = "" ):*
+        private function _scanKeyword( pre:String = "" ):*
             {
             debug( "scanKeyword( "+pre+" )" );
             
             var word:String = "";
-            var baseword:String = scanPath();
+            var baseword:String = _scanPath();
             
             word = pre + baseword;
             
@@ -1434,19 +1440,19 @@ package system.serializers.eden
                 
                 case "new":
                 _inConstructor = true;
-                scanWhiteSpace();
-                baseword = scanPath();
+                _scanWhiteSpace();
+                baseword = _scanPath();
                 
                 default:
                 var localRef:Boolean  = false;
                 var globalRef:Boolean = false;
                 var result:*;
                 
-                if( doesExistInGlobalScope( baseword ) )
+                if( _doesExistInGlobalScope( baseword ) )
                     {
                     globalRef = true;
                     }
-                else if( doesExistInLocalScope( baseword ) )
+                else if( _doesExistInLocalScope( baseword ) )
                     {
                     localRef     = true;
                     _singleValue = false;
@@ -1466,11 +1472,11 @@ package system.serializers.eden
                     
                     if( localRef )
                         {
-                        scanLocalAssignement( baseword );
+                        _scanLocalAssignement( baseword );
                         }
                     else if( globalRef )
                         {
-                        scanGlobalAssignement( baseword );
+                        _scanGlobalAssignement( baseword );
                         }
                     
                     }
@@ -1485,7 +1491,7 @@ package system.serializers.eden
                     {
                     if( ch == "(" )
                         {
-                        result = scanFunction( baseword, _localPool );
+                        result = _scanFunction( baseword, _localPool );
                         }
                     else
                         {
@@ -1499,7 +1505,7 @@ package system.serializers.eden
                     {
                     if( ch == "(" )
                         {
-                        result = scanFunction( baseword, _globalPool );
+                        result = _scanFunction( baseword, _globalPool );
                         }
                     else
                         {
@@ -1518,7 +1524,7 @@ package system.serializers.eden
 		/**
 		 * Scans the global assignement of the specified path.
 		 */
-        public function scanGlobalAssignement( path:String ):void
+        private function _scanGlobalAssignement( path:String ):void
             {
             debug( "scanGlobalAssignement( "+path+" )" );
             var scope:*;
@@ -1566,14 +1572,14 @@ package system.serializers.eden
                     }
                 }
             
-            scanWhiteSpace();
+            _scanWhiteSpace();
             
             if( ch == "=" )
                 {
                 _singleValue = false;
                 _inAssignement = true;
                 next();
-                scanWhiteSpace();
+                _scanWhiteSpace();
                 
                 if( isLineTerminator( ch ) )
                     {
@@ -1582,7 +1588,7 @@ package system.serializers.eden
                     return;
                     }
                 
-                var value:* = scanValue();
+                var value:* = _scanValue();
                 scope[ member ] = value;
                 _globalPool[ path ] = scope[member];
                 
@@ -1594,10 +1600,10 @@ package system.serializers.eden
 		/**
 		 * Scans the root local assignement of the specified name value..
 		 */
-        public function scanRootLocalAssignement( name:String ):void
+        private function _scanRootLocalAssignement( name:String ):void
             {
             debug( "scanRootLocalAssignement( "+name+" )" );
-            scanWhiteSpace();
+            _scanWhiteSpace();
             
             if( ch == "=" )
                 {
@@ -1605,7 +1611,7 @@ package system.serializers.eden
                 _inAssignement = true;
                 next();
                 //scanWhiteSpace();
-                scanSeparators();
+                _scanSeparators();
                 
                 if( isLineTerminator( ch ) )
                     {
@@ -1614,7 +1620,7 @@ package system.serializers.eden
                     return;
                     }
                 
-                var value:* = scanValue();
+                var value:* = _scanValue();
                 
                 if( value == _ORC )
                     {
@@ -1631,13 +1637,13 @@ package system.serializers.eden
 		/**
 		 * Scans the local assigment of the specified path.
 		 */        
-        public function scanLocalAssignement( path:String ):void
+        private function _scanLocalAssignement( path:String ):void
             {
             debug( "scanLocalAssignement( "+path+" )" );
             
             if( path.indexOf( "." ) == -1 )
                 {
-                scanRootLocalAssignement( path );
+                _scanRootLocalAssignement( path );
                 return;
                 }
             
@@ -1679,7 +1685,7 @@ package system.serializers.eden
                 scope = scope[ subpath ];
                 }
             
-            scanWhiteSpace();
+            _scanWhiteSpace();
             
             if( ch == "=" )
                 {
@@ -1687,7 +1693,7 @@ package system.serializers.eden
                 _inAssignement = true;
                 next();
                 //scanWhiteSpace();
-                scanSeparators();
+                _scanSeparators();
                 
                 if( isLineTerminator( ch ) )
                     {
@@ -1696,7 +1702,7 @@ package system.serializers.eden
                     return;
                     }
                 
-                var value:* = scanValue();
+                var value:* = _scanValue();
                 scope[ member ] = value;
                 _localPool[ path ] = scope[ member ];
                 tracePool();
@@ -1708,10 +1714,10 @@ package system.serializers.eden
 		/**
 		 * Scans the values.
 		 */
-        public function scanValue():*
+        private function _scanValue():*
             {
             debug( "scanValue() - ch:"+ch );
-            scanSeparators();
+            _scanSeparators();
             debug( "after scan - ch:"+ch );
             
             if( pos == source.length )
@@ -1729,32 +1735,32 @@ package system.serializers.eden
             switch( ch )
                 {
                 case "{":
-                return scanObject();
+                return _scanObject();
                 
                 case "[":
-                return scanArray();
+                return _scanArray();
                 
                 case "\"": case "\'":
-                return scanString( ch );
+                return _scanString( ch );
                 
                 case "-": case "+":
                 if( GenericParser.isDigit( source.charAt( pos ) ) )
                     {
-                    return scanNumber();
+                    return _scanNumber();
                     }
                 else
                     {
                     var ch_:String = ch;
                     next();
-                    return scanKeyword( ch_ );
+                    return _scanKeyword( ch_ );
                     }
                 
                 case "0": case "1": case "2": case "3": case "4":
                 case "5": case "6": case "7": case "8": case "9":
-                return scanNumber();
+                return _scanNumber();
                 
                 default:
-                return scanKeyword();
+                return _scanKeyword();
                 }
             
             }
