@@ -1,38 +1,12 @@
-﻿/*
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at 
-  http://www.mozilla.org/MPL/ 
-  
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the License. 
-  
-  The Original Code is [MaasHaack framework]
-  
-  The Initial Developer of the Original Code is
-  Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2004-2008
-  the Initial Developer. All Rights Reserved.
-  
-  Contributor(s):
-  - Marc Alcaraz <ekameleon@gmail.com>
-*/
 
-package system.serializers.eden
+package system.text.parser
     {
-//  import system.serializers.eden.debug;
-    import system.serializers.eden.release;
     
 	/**
 	 * The GenericParser static tool class.
 	 */
     public class GenericParser
         {
-        /* note:
-           Always commit changes with the release namespace
-        */
-        use namespace release;
         
         /**
          * @private
@@ -58,11 +32,6 @@ package system.serializers.eden
             }
         
 		/**
-		 * Indicates if the parser use the verbose mode.
-		 */
-        public static var verbose:Boolean = false;
-        
-		/**
 		 * Creates a new GenericParser instance.
 		 * @param source The string expression to parse.
 		 */
@@ -72,29 +41,6 @@ package system.serializers.eden
             pos    = 0;
             ch     = "";
             }
-
-		/**
-		 * Debugs the parser if the verbose mode is <code class="prettyprint">true</code>.
-		 */
-       public function debug( str:String ):void
-            {
-                if( verbose )
-                {
-                trace( str );
-                }
-            }
-
-// FIXME Don't work in Flash CS3 !     
-//        debug function debugGP( message:String ):void
-//            {
-//            trace( message );
-//            }
-//        
-//        release function debugGP( message:String ):void
-//            {
-//            //do nothing
-//            }
-
         
 		/**
 		 * Returns the current char in the parse process.
@@ -122,7 +68,6 @@ package system.serializers.eden
             {
             ch = getChar();
             pos++;
-            //debugGP( "next() - ["+ch+"]" );
             return ch;
             }
                 
@@ -132,24 +77,6 @@ package system.serializers.eden
         public function hasMoreChar():Boolean
             {
             return pos <= (source.length-1);
-            }
-        
-		/**
-		 * The evaluate process.
-		 * This method must be overriding.
-		 */
-        public function eval():*
-            {
-            return undefined;
-            }
-        
-		/**
-		 * Evaluates the passed-in source and returns the 
-		 */
-        public static function evaluate( source:String ):*
-            {
-            var parser:GenericParser = new GenericParser( source );
-            return parser.eval();
             }
         
 		/**
@@ -198,6 +125,5 @@ package system.serializers.eden
             }
         
         }
-    
     }
 

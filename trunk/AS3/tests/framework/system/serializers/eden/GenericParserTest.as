@@ -19,10 +19,14 @@
   - Marc Alcaraz <ekameleon@gmail.com>
 */
 
+/* note:
+   this test should move to system.text.parser
+   but we can keep it here for now
+*/
 package system.serializers.eden
     {
     import buRRRn.ASTUce.framework.*;
-    import system.serializers.eden.GenericParser;
+    import system.text.parser.GenericParser;
     
     public class GenericParserTest extends TestCase
         {
