@@ -20,9 +20,14 @@
 */
 
 package system
-    {
+{
     import flash.system.Capabilities;
     
+    import system.hosts.Host;
+    import system.hosts.HostID;
+    import system.hosts.OperatingSystem;
+    import system.hosts.PlatformID;    
+
     /**
 	 * This class defines the environment of the client application.
 	 */

@@ -20,63 +20,71 @@
     - Marc Alcaraz <ekameleon@gmail.com>
 
 */
-package system
-    {
+package system.hosts
+{
+    import flash.system.Capabilities;
     
-	/**
-	 * Represents information about an operating system, such as the version and platform identifier. 
-	 * This class cannot be inherited.
-	 */
-    public class OperatingSystem
+    import system.Version;    
+
+    /**
+	 * The Host class.
+	 */    
+    public class Host
         {
-		
+        	
+		/**
+		 * @private
+		 */        	
+        private var _id:HostID;
+        
 		/**
 		 * @private
 		 */
-		private var _platform:PlatformID ;
-		
+        private var _version:Version;
+        
 		/**
-		 * @private
-		 */
-		private var _version:Version ;
-
-		/**
-		 * Creates a new OperatingSystem instance.
-		 * @param platform The PlatformID of the application operating system.
-		 * @param version The Version of the application operating system.
-		 */
-        public function OperatingSystem( platform:PlatformID, version:Version )
+		 * Creates a new Host instance.
+		 * @param id The HostID of this host.
+		 * @param version The Version of this host.
+		 */        
+        public function Host( id:HostID, version:Version )
             {
-            _platform = platform;
-            _version  = version;
+            _id      = id;
+            _version = version;
             }
-
+        
 		/**
-		 * Returns the platform id of this operating system.
-		 * @return the platform id of this operating system.
+		 * Returns the id of the Host object.
+		 * @return the id of the Host object.
 		 */
-        public function get platform():PlatformID
+        public function get id():HostID
             {
-            return _platform;
+            return _id;
             }
-
+        
 		/**
-		 * Returns the version of this operating system.
-		 * @return the version of this operating system.
+		 * The version of this Host object.
 		 */
         public function get version():Version
             {
             return _version;
             }
-
+        
 		/**
-		 * Returns the String representation of the object.
-		 * @return the String representation of the object.
+		 * Indicates if the host of the application is a debugger.
 		 */
+        public function isDebug():Boolean
+            {
+            return Capabilities.isDebugger;
+            }
+        
+		/**
+		 * Returns the string representation of the object.
+		 * @return the string representation of the object.
+		 */        
         public function toString():String
             {
-            //return platform.toString() + " " + version.toString();
-            return platform.toString();
+            return id.toString() + " " + version.toString( 4 );
             }
         
         }
