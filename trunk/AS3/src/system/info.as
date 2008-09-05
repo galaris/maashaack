@@ -40,7 +40,7 @@ package system
         var fullname:String  = "ECMAScript 4 MaasHaack framework";
         var version:Version  = new Version( 0, 1 );
             version.revision = parseInt( "$Rev$".split( " " )[1] );
-        
+         
         var str:String = "";
             if( !verbose && config.verbose )
                 {
