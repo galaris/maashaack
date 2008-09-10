@@ -36,7 +36,7 @@ package system.reflection
         //function contruct( args... ):*;        
         
         /**
-         * Indicates if the method returs nothing.
+         * Indicates if the method returns nothing.
          */
         function isVoid():Boolean;
         
