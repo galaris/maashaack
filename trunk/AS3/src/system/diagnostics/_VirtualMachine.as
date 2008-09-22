@@ -21,6 +21,9 @@
 
 package system.diagnostics
 {
+    import flash.net.LocalConnection;
+    import flash.system.Capabilities;
+    import flash.system.System;
     import flash.trace.Trace;
     
     import system.Strings;
@@ -65,19 +68,6 @@ package system.diagnostics
         public var showPackages:Boolean  = true;
         
         /**
-         * @private
-         */
-        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
-            {
-            if( Strings.startsWith( str, beginWith ) )
-                {
-                str = str.split( beginWith ).join( replaceWith );
-                }
-            
-            return str;
-            }        
-        
-        /**
          * Creates a new VirtualMachine instance.
          * @param listener The callback listener function use to dispatch the messages.
          */
@@ -94,7 +84,62 @@ package system.diagnostics
             }
         
         /**
-         * Indicates if the machine is tracing.
+         * @private
+         */
+        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
+            {
+            if( Strings.startsWith( str, beginWith ) )
+                {
+                str = str.split( beginWith ).join( replaceWith );
+                }
+            
+            return str;
+            }
+        
+        /**
+         * @private
+         */
+        private function _forceMarkSweep():void
+            {
+            try
+                {
+                var lc1:LocalConnection = new LocalConnection();
+                var lc2:LocalConnection = new LocalConnection();
+                lc1.connect( "force_garbage_collection" );
+                lc2.connect( "force_garbage_collection" );
+                }
+            catch( e:* )
+                {
+                
+                }
+            
+            }
+        
+        /**
+        * The Virtual Machine version
+        */
+        public function get version():String
+            {
+            return System.vmVersion;
+            }
+        
+        /**
+        * Force the garbage collection on the Virtual Machine
+        */
+        public function garbageCollection():void
+        {
+            if( Capabilities.isDebugger )
+            {
+                System.gc();
+            }
+            else
+            {
+                _forceMarkSweep();
+            }
+        }
+        
+        /**
+         * Indicates if we are tracing.
          */
         public function isTracing():Boolean
             {
