@@ -22,8 +22,7 @@
 package system.data
 {
     import system.Cloneable;
-    import system.Serializable;
-    import system.data.iterator.Iterable;    
+    import system.Serializable;    
 
     /**
 	 * The root interface in the collection hierarchy. 
@@ -36,7 +35,7 @@ package system.data
         /**
          * Ensures that this collection contains the specified element (optional operation).
          */
-        function add(o:*):Boolean ;        
+        function add( o:* ):Boolean ;        
         
 		/**
 		 * Removes all of the elements from this collection (optional operation).
@@ -45,11 +44,13 @@ package system.data
 
 		/**
 		 * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
+		 * @return <code class="prettyprint">true</code> if this collection contains the specified element.
 		 */
-    	function contains(o:*):Boolean ;
+    	function contains( o:* ):Boolean ;
 	
 		/**
 		 * Returns the element from this collection at the passed index.
+		 * @return the element from this collection at the passed index.
 		 */
     	function get( key:* ) :* ;
 

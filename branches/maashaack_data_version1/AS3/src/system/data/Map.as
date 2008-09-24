@@ -22,9 +22,7 @@
 package system.data
 {
     import system.Cloneable;
-    import system.Serializable;
-    import system.data.iterator.Iterable;
-    import system.data.iterator.Iterator;    
+    import system.Serializable;    
 
     /**
 	 * An object that maps keys to values. A map cannot contain duplicate keys. Each key can map to at most one value.

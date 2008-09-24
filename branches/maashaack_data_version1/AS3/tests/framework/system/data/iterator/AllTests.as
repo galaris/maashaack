@@ -11,7 +11,7 @@
   The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
-  Marc Alcaraz <ekameleon@gmail.com>.
+  Zwetan Kjukov <zwetan@gmail.com>.
   Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
@@ -21,24 +21,25 @@
 
 package system.data.iterator
 {
+    import buRRRn.ASTUce.framework.*;                
 
-    /**
-     * Defines an iterator that operates over an ordered collection. This iterator allows both forward and reverse iteration through the collection.
-     * @author eKameleon
-     */
-    public interface OrderedIterator extends Iterator
-    {
-
-        /**
-         * Checks to see if there is a previous element that can be iterated to.
-         */
-        function hasPrevious():Boolean ;
-
-        /**
-         * Returns the previous element in the collection.
-         * @return the previous element in the collection.
-         */
-        function previous():* ;
+    public class AllTests
+        {
         
+        public function AllTests()
+            {
+            
+            }
+        
+        public static function suite():ITest
+            {
+            var suite:TestSuite = new TestSuite( "Maashaack data iterator tests" );
+
+            // suite.addTestSuite( HashMapTest ) ;            
+                      
+            return suite;
+            }
+        
+        }
+    
     }
-}

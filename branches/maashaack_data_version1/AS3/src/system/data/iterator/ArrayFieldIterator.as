@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -71,13 +71,18 @@ package system.data.iterator
         public var fieldName:String ;
         
         /**
+         * The default undefineable value use if the field don't exist in the current object in the iterator. 
+         */
+        public var undefineable:* = null ;
+        
+        /**
          * Returns the next field element in the iteration.
          * @return the next field element in the iteration.
          */
         public override function next():* 
         {
             var o:* = _a[++_k] ;
-            return (fieldName != null) ? o[fieldName] : o ;
+            return ( fieldName != null ) ? ( fieldName in o ? o[fieldName] : null ) : o ;
         }
         
 

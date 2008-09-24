@@ -21,9 +21,10 @@
 
 package system.data.iterator
 {
-    import flash.errors.IllegalOperationError;
+    import system.data.OrderedIterator;
+    import system.numeric.Mathematics;
     
-    import system.numeric.Mathematics;    
+    import flash.errors.IllegalOperationError;    
 
     /**
      * An iterator page by page over an array who return an new array of elements.

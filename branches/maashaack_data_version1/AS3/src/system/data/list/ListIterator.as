@@ -19,11 +19,12 @@
   
 */
 
-package system.data.iterator
+package system.data.list
 {
-
+    import system.data.OrderedIterator;    
+    
     /**
-     * Defines an itesystsystem.data.iterator.ListIteratorist. This iterator allows both forward and reverse iteration through the list.
+     * Defines an itesystem.data.list.ListIteratoratorist. This iterator allows both forward and reverse iteration through the list.
      * @author eKameleon
      */
     public interface ListIterator extends OrderedIterator

@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -11,7 +11,7 @@
   The Original Code is [MaasHaack framework]
   
   The Initial Developer of the Original Code is
-  Marc Alcaraz <ekameleon@gmail.com>.
+  Zwetan Kjukov <zwetan@gmail.com>.
   Portions created by the Initial Developer are Copyright (C) 2006-2008
   the Initial Developer. All Rights Reserved.
   
@@ -19,24 +19,25 @@
   
 */
 
-package system.data
+package system.data.map
 {
+    import buRRRn.ASTUce.framework.*;                
 
-    /**
-	 * This interface defines a common structure for identifiable classes (has an "id" property).
-	 */
-	public interface Identifiable
-    {
-		
-		/**
-		 * Indicates the id value of this object.
-		 */
-		function get id():* ;
-	
-		/**
-	 	 * @private
-	 	 */
-		function set id( id:* ):void ;
-		 
-	}
-}
+    public class AllTests
+        {
+        
+        public function AllTests()
+            {
+            
+            }
+        
+        public static function suite():ITest
+            {
+            var suite:TestSuite = new TestSuite( "Maashaack data map tests" );
+                                  
+            return suite;
+            }
+        
+        }
+    
+    }

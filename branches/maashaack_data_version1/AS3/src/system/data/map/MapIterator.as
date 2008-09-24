@@ -21,11 +21,11 @@
 
 package system.data.map
 {
-    import flash.errors.IllegalOperationError;
-    
+    import system.data.Iterator;
     import system.data.Map;
     import system.data.iterator.ArrayIterator;
-    import system.data.iterator.Iterator;    
+    
+    import flash.errors.IllegalOperationError;    
 
     /**
      * Converts a <code class="prettyprint">Map</code> to an iterator.

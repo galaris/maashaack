@@ -21,18 +21,18 @@
 
 package
 {
+    import buRRRn.ASTUce.*;
+    
+    import system.*;
+    import system.data.*;
+    import system.ui.TextFieldConsole;
+    
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.text.TextField;
-    import flash.text.TextFormat;
-    
-    import buRRRn.ASTUce.*;
-    
-    import system.*;
-    import system.data.*;
-    import system.ui.TextFieldConsole;    
+    import flash.text.TextFormat;    
 
     public class Framework_data_TestRunner extends Sprite
     {
@@ -59,7 +59,7 @@ package
             console = new TextFieldConsole( textfield ) ;            
             
             system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
+            system.about( false, false );
             
             //tests
             
@@ -69,7 +69,7 @@ package
             
             Runner.main( 
             
-                system.AllTests.suite() , 
+                // system.AllTests.suite() , 
                 system.data.AllTests.suite() 
             
             );

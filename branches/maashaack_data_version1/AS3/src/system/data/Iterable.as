@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -23,20 +23,16 @@ package system.data
 {
 
     /**
-	 * This interface defines a common structure for identifiable classes (has an "id" property).
-	 */
-	public interface Identifiable
+     * Implementing this interface allows an object to be iterable.
+     */    
+    public interface Iterable
     {
-		
-		/**
-		 * Indicates the id value of this object.
-		 */
-		function get id():* ;
-	
-		/**
-	 	 * @private
-	 	 */
-		function set id( id:* ):void ;
-		 
-	}
+
+        /**
+         * Returns the iterator reference of the object.
+         * @return the iterator reference of the object.
+         */
+        function iterator():Iterator ;
+    
+    }
 }

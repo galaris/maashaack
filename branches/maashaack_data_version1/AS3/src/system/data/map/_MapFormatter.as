@@ -1,4 +1,4 @@
-﻿/*
+/*
 
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -23,9 +23,9 @@
 
 package system.data.map
 {
+    import system.data.Iterator;
     import system.data.Map;
     import system.data.iterator.ArrayIterator;
-    import system.data.iterator.Iterator;
     import system.formatters.Formattable;    
 
     [ExcludeClass]

@@ -19,20 +19,26 @@
   
 */
 
-package system.data.iterator
+package system.data
 {
-
+    import system.data.Iterator;    
+    
     /**
-     * Implementing this interface allows an object to be iterable.
-     */    
-    public interface Iterable
+     * Defines an iterator that operates over an ordered collection. This iterator allows both forward and reverse iteration through the collection.
+     */
+    public interface OrderedIterator extends Iterator
     {
 
         /**
-         * Returns the iterator reference of the object.
-         * @return the iterator reference of the object.
+         * Checks to see if there is a previous element that can be iterated to.
          */
-        function iterator():Iterator ;
-    
+        function hasPrevious():Boolean ;
+
+        /**
+         * Returns the previous element in the collection.
+         * @return the previous element in the collection.
+         */
+        function previous():* ;
+        
     }
 }

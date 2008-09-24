@@ -1,4 +1,4 @@
-﻿/*
+/*
 
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -23,14 +23,14 @@
 
 package system.data.map
 {
-    import flash.utils.Dictionary;
-    import flash.utils.Proxy;
-    import flash.utils.flash_proxy;
-    
+    import system.data.Iterator;
     import system.data.Map;
     import system.data.iterator.ArrayIterator;
-    import system.data.iterator.Iterator;
-    import system.eden;    
+    import system.eden;
+    
+    import flash.utils.Dictionary;
+    import flash.utils.Proxy;
+    import flash.utils.flash_proxy;    
 
     /**
      * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
@@ -114,8 +114,8 @@ package system.data.map
             {
                 if (k.length > 0 && k.length == v.length)
                 {
-                    var count:uint = k.length ;
-                    for(var i:uint = 0 ; i<count ; i++) 
+                    var count:int = k.length ;
+                    for(var i:int = 0 ; i < count ; i++) 
                     {
                         put(k[i], v[i]) ;
                     }
@@ -357,7 +357,7 @@ package system.data.map
          */        
         public function toSource( indent:int = 0 ):String 
         {
-            return "new system.data.map.HashMap(" + eden.serialize( [getKeys(), getValues()] ) + ")" ;
+            return "new system.data.map.HashMap(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
         }
  
         /**

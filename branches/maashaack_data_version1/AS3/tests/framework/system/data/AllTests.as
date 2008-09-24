@@ -21,14 +21,18 @@
 
 package system.data
 {
-    import buRRRn.ASTUce.framework.*;    
+    import buRRRn.ASTUce.framework.*;
+    
+    import system.data.iterator.*;
+    import system.data.list.*;
+    import system.data.map.*;    
 
     public class AllTests
     {
         
         public function AllTests()
         {
-            
+            //
         }
         
         public static function suite():ITest
@@ -36,6 +40,18 @@ package system.data
             var suite:TestSuite = new TestSuite( "system data tests" );
             
             suite.addTestSuite( IdentifiableTest  );
+            
+            // iterator
+            
+            suite.addTest( system.data.iterator.AllTests.suite() );
+            
+            // list
+            
+            suite.addTest( system.data.list.AllTests.suite() );                        
+            
+            // map
+            
+            suite.addTest( system.data.map.AllTests.suite() );
             
             return suite;
         }
