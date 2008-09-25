@@ -28,9 +28,9 @@ package system.data.iterators
      * Converts an object to an iterator of all enumerable properties of the Object.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.ObjectIterator ;
-     * import system.iterator.Iterator ;
-     * 
+     * import system.data.Iterator ;
+     * import system.data.iterators.ObjectIterator ;
+     *  
      * var o:Object = {} ;
      * for (var i:Number = 0 ; i<5; i++)
      * {
@@ -101,7 +101,7 @@ package system.data.iterators
          */    
         public function hasNext():Boolean
         {
-            return _k <  (_len - 1) ;
+            return _k < ( _len - 1 ) ;
         }
 
         /**
@@ -128,7 +128,7 @@ package system.data.iterators
          */
         public function next():*
         {
-            return _o[ _a[++_k] ] ;
+            return _o[ _a[ ++_k ] ] ;
         }
 
         /**
@@ -136,9 +136,9 @@ package system.data.iterators
          */
         public function remove():*
         {
-            var p:String = _a[_k] ;
-            _a.splice(_k--, 1) ;
-            delete _o[p] ;
+            var p:String = _a[ _k ] ;
+            _a.splice( _k-- , 1 ) ;
+            delete _o[ p ] ;
             _len -- ;
             return p ;
         }
@@ -154,9 +154,9 @@ package system.data.iterators
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
          */
-        public function seek(position:*):void
+        public function seek( position:* ):void
         {
-            _k = Mathematics.clamp ((position-1), -1, _len) ;
+            _k = Mathematics.clamp( ( position - 1 ) , -1, _len) ;
         }
         
         /**

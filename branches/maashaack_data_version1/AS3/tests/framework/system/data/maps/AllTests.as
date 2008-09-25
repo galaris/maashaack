@@ -21,7 +21,7 @@
 
 package system.data.maps
 {
-    import buRRRn.ASTUce.framework.*;                
+    import buRRRn.ASTUce.framework.*;                    
 
     public class AllTests
         {
@@ -34,7 +34,10 @@ package system.data.maps
         public static function suite():ITest
             {
             var suite:TestSuite = new TestSuite( "Maashaack data maps tests" );
-                                  
+            
+            suite.addTestSuite( HashMapTest ) ;            
+            suite.addTestSuite( MapFormatterTest ) ;
+                      
             return suite;
             }
         

@@ -37,10 +37,30 @@ package system.data
         
         public static function suite():ITest
         {
+            
             var suite:TestSuite = new TestSuite( "system data tests" );
             
-            suite.addTestSuite( IdentifiableTest  );
+            // test system.data interfaces
             
+            suite.addTestSuite( CollectionTest      ) ;
+            suite.addTestSuite( EntryTest           ) ;
+            suite.addTestSuite( IdentifiableTest    ) ;
+            suite.addTestSuite( IterableTest        ) ;
+            suite.addTestSuite( IteratorTest        ) ;
+            suite.addTestSuite( ListTest            ) ;
+            suite.addTestSuite( ListIterableTest    ) ;
+            suite.addTestSuite( ListIteratorTest    ) ;
+            suite.addTestSuite( MapTest             ) ;
+            suite.addTestSuite( MultiMapTest        ) ;
+            suite.addTestSuite( OrderedIteratorTest ) ;
+            suite.addTestSuite( QueueTest           ) ;
+            suite.addTestSuite( SetTest             ) ;
+            suite.addTestSuite( StackTest           ) ;
+                                    
+            // arrays
+            
+            // collections
+                                 
             // iterators
             
             suite.addTest( system.data.iterators.AllTests.suite() );
@@ -52,6 +72,12 @@ package system.data
             // maps
             
             suite.addTest( system.data.maps.AllTests.suite() );
+
+            // queues
+            
+            // sets           
+            
+            // stacks
             
             return suite;
         }

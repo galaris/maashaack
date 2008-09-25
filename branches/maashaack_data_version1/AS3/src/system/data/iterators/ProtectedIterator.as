@@ -29,8 +29,8 @@ package system.data.iterators
      * Protect an iterator. This class protect the remove, reset and seek method.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.StringIterator ;
-     * import system.iterator.ProtectedIterator ;
+     * import system.data.iterators.StringIterator ;
+     * import system.data.iterators.ProtectedIterator ;
      * 
      * var it:ProtectedIterator = new ProtectedIterator( new StringIterator( "hello world" ) ) ;
      * while (it.hasNext())
@@ -38,7 +38,6 @@ package system.data.iterators
      *     trace( it.next() ) ;
      * }
      * </pre>
-     * @author eKameleon 
      */
     public class ProtectedIterator implements Iterator
     {

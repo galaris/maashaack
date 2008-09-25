@@ -51,7 +51,7 @@ package system.data
 		 * Returns the value to which this map maps the specified key.
 		 * @return the value to which this map maps the specified key.
 		 */
-	    function get(key:*):* ;
+	    function get( key:* ):* ;
 	
 		/**
 		 * Returns an array of all the keys in the map.

@@ -28,8 +28,8 @@ package system.data.iterators
      * Converts an <code class="prettyprint">Array</code> to an iterator.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.ArrayIterator ;
-     * import system.iterator.Iterator ;
+     * import system.iterators.ArrayIterator ;
+     * import system.Iterator ;
      * 
      * var ar:Array = ["item1", "item2", "item3", "item4"] ;
      * var it:Iterator = new ArrayIterator(ar) ;
@@ -57,7 +57,6 @@ package system.data.iterators
      * 
      * trace ("---") ;
      * </pre>
-     * @author eKameleon
      */
     public class ArrayIterator implements Iterator
     {

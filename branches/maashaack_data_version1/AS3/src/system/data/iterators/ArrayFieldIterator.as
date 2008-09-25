@@ -26,7 +26,7 @@ package system.data.iterators
      * Converts an array to an iterator but this iterator return the value of a specific field if the array is an array of objects.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.ArrayFieldIterator ;
+     * import system.iterators.ArrayFieldIterator ;
      * 
      * var ar:Array = 
      * [
@@ -51,7 +51,6 @@ package system.data.iterators
      *     trace (it.next() + " : " + it.key()) ;
      * }
      * </pre>
-     * @author eKameleon
      */
     public class ArrayFieldIterator extends ArrayIterator
     {

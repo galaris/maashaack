@@ -21,30 +21,32 @@
 
 package system.data.iterators
 {
-    import system.data.Iterator;
-    import system.numeric.Mathematics;
+    import system.data.Iterator ;
+    import system.numeric.Mathematics ;
     
-    import flash.errors.IllegalOperationError;    
+    import flash.errors.IllegalOperationError ;    
 
     /**
      * Converts a string to an iterator.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.Iterator ;
-     * import system.iterator.StringIterator ;
+     * import system.data.Iterator ;
+     * import system.data.iterators.StringIterator ;
      * 
-     * var s = "Hello world" ;
+     * var s:String = "Hello world" ;
      * 
      * var it:Iterator = new StringIterator(s) ;
-     * it.seek(1) ;
-     * while(it.hasNext())
+     * 
+     * it.seek( 1 ) ;
+     * 
+     * while( it.hasNext() )
      * {
      *     var char:String = it.next() ;
-     *     trace (it.key() + ' : ' + char) ;
+     *     trace( it.key() + ' : ' + char ) ;
      * }
+     * 
      * trace (s) ;
      * </pre>
-     * @author eKameleon
      */
     public class StringIterator implements Iterator
     {
@@ -55,8 +57,8 @@ package system.data.iterators
          */
         public function StringIterator(s:String)
         {
-            _s = s ;
-            _k = -1 ;
+            _s    = s  ;
+            _k    = -1 ;
             _size = s.length ;
         }
 
@@ -66,7 +68,7 @@ package system.data.iterators
          */    
         public function hasNext():Boolean
         {
-            return _k < _size-1  ;
+            return _k < _size - 1  ;
         }
 
         /**
@@ -109,7 +111,7 @@ package system.data.iterators
          */
         public function seek(position:*):void
         {
-            _k = Mathematics.clamp ((position-1), -1, _size-1) ;
+            _k = Mathematics.clamp ( ( position - 1 ) , -1 , _size - 1 ) ;
         }
         
         /**

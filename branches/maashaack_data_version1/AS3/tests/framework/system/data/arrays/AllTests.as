@@ -19,9 +19,9 @@
   
 */
 
-package system.data.iterators
+package system.data.arrays
 {
-    import buRRRn.ASTUce.framework.*;                        
+    import buRRRn.ASTUce.framework.*;                            
 
     public class AllTests
         {
@@ -33,15 +33,9 @@ package system.data.iterators
         
         public static function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "Maashaack data iterators tests" );
+            var suite:TestSuite = new TestSuite( "Maashaack data arrays tests" );
 
-            suite.addTestSuite( ArrayFieldIteratorTest ) ;
-            suite.addTestSuite( ArrayIteratorTest ) ;
-            suite.addTestSuite( MapIteratorTest ) ;
-            suite.addTestSuite( ObjectIteratorTest ) ;
-            suite.addTestSuite( PageByPageIteratorTest ) ;
-            suite.addTestSuite( ProtectedIteratorTest ) ;
-            suite.addTestSuite( StringIteratorTest ) ;            
+            // suite.addTestSuite( ArrayProxyTest ) ;            
                       
             return suite;
             }

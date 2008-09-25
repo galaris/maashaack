@@ -19,24 +19,22 @@
   
 */
 
-package system.data
+package system.data.maps 
 {
+    import buRRRn.ASTUce.framework.TestCase;        
 
-    /**
-	 * This interface defines a common structure for identifiable classes (has an "id" property).
-	 */
-	public interface Identifiable
+    public class HashMapTest extends TestCase 
     {
-		
-		/**
-		 * Indicates the id value of this object.
-		 */
-		function get id():* ;
-	
-		/**
-	 	 * @private
-	 	 */
-		function set id( id:* ):void ;
-		 
-	}
+
+        public function HashMapTest( name:String = "" )
+        {
+            super( name );
+        }
+        
+        public function testInterface():void
+        {
+        	
+        }         
+        
+    }
 }
