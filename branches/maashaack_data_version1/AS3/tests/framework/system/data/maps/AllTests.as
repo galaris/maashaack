@@ -19,7 +19,7 @@
   
 */
 
-package system.data.iterator
+package system.data.maps
 {
     import buRRRn.ASTUce.framework.*;                
 
@@ -33,10 +33,8 @@ package system.data.iterator
         
         public static function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "Maashaack data iterator tests" );
-
-            // suite.addTestSuite( HashMapTest ) ;            
-                      
+            var suite:TestSuite = new TestSuite( "Maashaack data maps tests" );
+                                  
             return suite;
             }
         

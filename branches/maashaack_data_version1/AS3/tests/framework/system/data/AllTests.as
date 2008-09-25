@@ -23,9 +23,9 @@ package system.data
 {
     import buRRRn.ASTUce.framework.*;
     
-    import system.data.iterator.*;
-    import system.data.list.*;
-    import system.data.map.*;    
+    import system.data.iterators.*;
+    import system.data.lists.*;
+    import system.data.maps.*;    
 
     public class AllTests
     {
@@ -41,17 +41,17 @@ package system.data
             
             suite.addTestSuite( IdentifiableTest  );
             
-            // iterator
+            // iterators
             
-            suite.addTest( system.data.iterator.AllTests.suite() );
+            suite.addTest( system.data.iterators.AllTests.suite() );
             
-            // list
+            // lists
             
-            suite.addTest( system.data.list.AllTests.suite() );                        
+            suite.addTest( system.data.lists.AllTests.suite() );                        
             
-            // map
+            // maps
             
-            suite.addTest( system.data.map.AllTests.suite() );
+            suite.addTest( system.data.maps.AllTests.suite() );
             
             return suite;
         }

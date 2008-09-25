@@ -19,9 +19,9 @@
   
 */
 
-package system.data.list
+package system.data.iterators
 {
-    import buRRRn.ASTUce.framework.*;                    
+    import buRRRn.ASTUce.framework.*;                
 
     public class AllTests
         {
@@ -33,7 +33,9 @@ package system.data.list
         
         public static function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "Maashaack data list tests" );
+            var suite:TestSuite = new TestSuite( "Maashaack data iterators tests" );
+
+            // suite.addTestSuite( HashMapTest ) ;            
                       
             return suite;
             }

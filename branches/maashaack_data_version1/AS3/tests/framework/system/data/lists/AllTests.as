@@ -19,9 +19,9 @@
   
 */
 
-package system.data.map
+package system.data.lists
 {
-    import buRRRn.ASTUce.framework.*;                
+    import buRRRn.ASTUce.framework.*;                    
 
     public class AllTests
         {
@@ -33,8 +33,8 @@ package system.data.map
         
         public static function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "Maashaack data map tests" );
-                                  
+            var suite:TestSuite = new TestSuite( "Maashaack data lists tests" );
+                      
             return suite;
             }
         
