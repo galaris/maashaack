@@ -18,30 +18,58 @@
   Contributor(s):
   
 */
-
-package system.data.map
+    
+package system.data.iterators
 {
     import system.data.Iterator;
-    import system.data.Map;
-    import system.data.iterator.ArrayIterator;
-    
-    import flash.errors.IllegalOperationError;    
+    import system.numeric.Mathematics;        
 
     /**
-     * Converts a <code class="prettyprint">Map</code> to an iterator.
+     * Converts an <code class="prettyprint">Array</code> to an iterator.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.iterator.ArrayIterator ;
+     * import system.iterator.Iterator ;
+     * 
+     * var ar:Array = ["item1", "item2", "item3", "item4"] ;
+     * var it:Iterator = new ArrayIterator(ar) ;
+     * 
+     * while (it.hasNext())
+     * {
+     *     trace (it.next()) ;
+     * }
+     * 
+     * trace ("--- it reset") ;
+     * 
+     * it.reset() ;
+     * while (it.hasNext()) 
+     * {
+     *     trace (it.next() + " : " + it.key()) ;
+     * }
+     * 
+     * trace ("--- it seek 2") ;
+     * 
+     * it.seek(2) ;
+     * while (it.hasNext())
+     * {
+     *     trace (it.next()) ;
+     * }
+     * 
+     * trace ("---") ;
+     * </pre>
+     * @author eKameleon
      */
-    public class MapIterator implements Iterator
+    public class ArrayIterator implements Iterator
     {
         
-       /**
-        * Creates a new MapIterator instance.
-        * @param m the Map reference of this iterator. 
-        */
-        public function MapIterator(m:Map)
+        /**
+         * Creates a new ArrayIterator instance.
+         * @param a the array to enumerate with the iterator.
+         */
+        public function ArrayIterator( a:Array )
         {
-            _m = m ;
-            _i = new ArrayIterator(m.getKeys()) ;
-            _k = null ;
+            _a = a ;
+           _k = -1 ;
         }
         
         /**
@@ -50,9 +78,9 @@ package system.data.map
          */    
         public function hasNext():Boolean
         {
-            return _i.hasNext() ;
+            return (_k < _a.length - 1);
         }
-
+        
         /**
          * Returns the current key of the internal pointer of the iterator (optional operation).
          * @return the current key of the internal pointer of the iterator (optional operation).
@@ -62,57 +90,48 @@ package system.data.map
             return _k ;
         }
         
-           /**
+        /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
          */
         public function next():*
         {
-            _k = _i.next() ;
-            return _m.get(_k) ;
+           return _a[++_k] ;
         }
-
+        
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
         public function remove():*
         {
-            _i.remove() ;
-            return _m.remove(_k) ;
+            return _a.splice( _k-- , 1 );
         }
-
+        
         /**
          * Reset the internal pointer of the iterator (optional operation).
          */
         public function reset():void
         {
-            _i.reset() ;
+            _k = -1 ;
         }        
 
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
-         */    
+         */        
         public function seek(position:*):void
         {
-            throw new IllegalOperationError( "This Iterator does not support the seek() method.") ;
+            _k = Mathematics.clamp((position-1), -1, _a.length) ;
         }
         
         /**
-         * @private
+         * current array
          */
-        private var _m:Map ; 
+        protected var _a:Array ; 
 
         /**
-         * @private
+         *  current key
          */
-        private var _i:ArrayIterator ; 
+        protected var _k:Number ;
 
-        /**
-         * @private
-         */
-        private var _k:* ;
     }
 }
-
-
-

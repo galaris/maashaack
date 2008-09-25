@@ -60,7 +60,7 @@ package system.data
 		 * @param fromIndex the index to begin the search in the collection.
 		 * @return the index of the object or -1 if the object isn't find in the collection.
 		 */
-		function indexOf(o:*, fromIndex:uint=0):int
+		function indexOf(o:*, fromIndex:uint = 0 ):int
         
 		/**
 		 * Returns <code class="prettyprint">true</code> if this collection contains no elements.

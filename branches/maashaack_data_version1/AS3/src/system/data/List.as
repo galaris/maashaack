@@ -21,25 +21,19 @@
 
 package system.data
 {
-    import system.Equatable;
-    import system.data.list.ListIterator;    
+    import system.Equatable;        
 
     /**
 	 * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
 	 */
     public interface List extends Collection, Equatable
     {
-    
+
         /**
-         * Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator (optional operation).
+         * Inserts the specified element at the specified position in this list (optional operation).
          */
-        function addAll(c:Collection):Boolean ;    
-    
-        /**
-         * Inserts all of the elements in the specified collection into this list at the specified position (optional operation).
-         */
-        function addAllAt(id:uint, c:Collection):Boolean ;    
-    
+        function addAt( id:uint , o:* ):void ;
+            
     	/**
 		 * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
 		 * @return <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
@@ -47,42 +41,25 @@ package system.data
     	function containsAll(c:Collection):Boolean ;
         
 		/**
-		 * Inserts the specified element at the specified position in this list (optional operation).
-		 */
-    	function insertAt(id:uint, o:*):void ;
-
-		/**
 		 * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 */
     	function lastIndexOf(o:*):int ;
-
+        
 		/**
-		 * Returns a list iterator of the elements in this list (in proper sequence).
-		 * @return a list iterator of the elements in this list (in proper sequence).
+		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
+		 * @param id The index of the element or the first element to remove.
+		 * @param len The number of elements to remove (default 1).  
 		 */
-    	function listIterator( position:uint=0 ):ListIterator ;
-
-		/**
-		 * Removes from this list all the elements that are contained in the specified collection (optional operation).
-		 */
-    	function removeAll(c:Collection):Boolean ;
-
-		/**
-		 * Removes the element at the specified position in this list (optional operation).
-		 */
-    	function removeAt(id:uint):* ;
+    	function removeAt( id:uint , len:int = 1 ):* ;
 
 		/**
 		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">from</code> and the specific <code class="prettyprint">to</code> position in this list (optional operation).
+		 * @param fromIndex The from index to remove elements in the list.
+		 * @param toIndex The to index to remove elements in the list.
 		 */
-    	function removeRange(fromIndex:uint, toIndex:uint):void ;
+    	function removeRange( fromIndex:uint , toIndex:uint ):void ;
 	
-		/**
-		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
-		 */
-    	function removesAt(id:uint, len:uint):* ;
-
 		/**
 		 * Retains only the elements in this list that are contained in the specified collection (optional operation).
 		 */
@@ -93,7 +70,7 @@ package system.data
 	     * @param id index of element to replace.
 	     * @param o element to be stored at the specified position.
 		 */
-    	function setAt(id:uint, o:*):* ;
+    	function setAt( id:uint , o:* ):* ;
 	
 		/**
 		 * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.

@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -18,69 +18,57 @@
   Contributor(s):
   
 */
-    
-package system.data.iterator
+
+package system.data.iterators
 {
     import system.data.Iterator;
-    import system.numeric.Mathematics;        
+    import system.numeric.Mathematics;
+    
+    import flash.errors.IllegalOperationError;    
 
     /**
-     * Converts an <code class="prettyprint">Array</code> to an iterator.
+     * Converts a string to an iterator.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.ArrayIterator ;
      * import system.iterator.Iterator ;
+     * import system.iterator.StringIterator ;
      * 
-     * var ar:Array = ["item1", "item2", "item3", "item4"] ;
-     * var it:Iterator = new ArrayIterator(ar) ;
+     * var s = "Hello world" ;
      * 
-     * while (it.hasNext())
+     * var it:Iterator = new StringIterator(s) ;
+     * it.seek(1) ;
+     * while(it.hasNext())
      * {
-     *     trace (it.next()) ;
+     *     var char:String = it.next() ;
+     *     trace (it.key() + ' : ' + char) ;
      * }
-     * 
-     * trace ("--- it reset") ;
-     * 
-     * it.reset() ;
-     * while (it.hasNext()) 
-     * {
-     *     trace (it.next() + " : " + it.key()) ;
-     * }
-     * 
-     * trace ("--- it seek 2") ;
-     * 
-     * it.seek(2) ;
-     * while (it.hasNext())
-     * {
-     *     trace (it.next()) ;
-     * }
-     * 
-     * trace ("---") ;
+     * trace (s) ;
      * </pre>
      * @author eKameleon
      */
-    public class ArrayIterator implements Iterator
+    public class StringIterator implements Iterator
     {
         
         /**
-         * Creates a new ArrayIterator instance.
-         * @param a the array to enumerate with the iterator.
+         * Creates a new StringIterator instance.
+         * @param s the String object to enumerate.
          */
-        public function ArrayIterator( a:Array )
+        public function StringIterator(s:String)
         {
-            _a = a ;
-           _k = -1 ;
+            _s = s ;
+            _k = -1 ;
+            _size = s.length ;
         }
-        
+
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
          */    
         public function hasNext():Boolean
         {
-            return (_k < _a.length - 1);
+            return _k < _size-1  ;
         }
-        
+
         /**
          * Returns the current key of the internal pointer of the iterator (optional operation).
          * @return the current key of the internal pointer of the iterator (optional operation).
@@ -89,49 +77,55 @@ package system.data.iterator
         {
             return _k ;
         }
-        
+
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
          */
         public function next():*
         {
-           return _a[++_k] ;
+            return _s.charAt( ++_k );
         }
-        
+
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
         public function remove():*
         {
-            return _a.splice( _k-- , 1 );
+            throw new IllegalOperationError( "This " + this + " does not support the reset() method.") ;
+            return null ;
         }
-        
+
         /**
          * Reset the internal pointer of the iterator (optional operation).
          */
         public function reset():void
         {
             _k = -1 ;
-        }        
+        }
 
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
-         */        
+         */
         public function seek(position:*):void
         {
-            _k = Mathematics.clamp((position-1), -1, _a.length) ;
+            _k = Mathematics.clamp ((position-1), -1, _size-1) ;
         }
         
         /**
-         * current array
+         * @private
          */
-        protected var _a:Array ; 
+        private var _k:Number ;
 
         /**
-         *  current key
+         * @private
          */
-        protected var _k:Number ;
+        private var _s:String ;
 
+        /**
+         * @private
+         */
+        private var _size:Number ;
+    
     }
 }

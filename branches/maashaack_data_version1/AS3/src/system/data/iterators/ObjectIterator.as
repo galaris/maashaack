@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,10 +19,10 @@
   
 */
 
-package system.data.iterator
+package system.data.iterators
 {
     import system.data.Iterator;
-    import system.numeric.Mathematics;        
+    import system.numeric.Mathematics;    
 
     /**
      * Converts an object to an iterator of all enumerable properties of the Object.

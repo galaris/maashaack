@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,37 +19,28 @@
   
 */
 
-package system.data.iterator
+package system.data.iterators
 {
     import system.data.Iterator;
+    import system.data.Map;
     
-    import flash.errors.IllegalOperationError;        
+    import flash.errors.IllegalOperationError;    
 
     /**
-     * Protect an iterator. This class protect the remove, reset and seek method.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import system.iterator.StringIterator ;
-     * import system.iterator.ProtectedIterator ;
-     * 
-     * var it:ProtectedIterator = new ProtectedIterator( new StringIterator( "hello world" ) ) ;
-     * while (it.hasNext())
-     * {
-     *     trace( it.next() ) ;
-     * }
-     * </pre>
-     * @author eKameleon 
+     * Converts a <code class="prettyprint">Map</code> to an iterator.
      */
-    public class ProtectedIterator implements Iterator
+    public class MapIterator implements Iterator
     {
         
-        /**
-         * Creates a new ProtectedIterator instance.
-         * @param iterator the iterator to protected.
-         */
-        public function ProtectedIterator(i:Iterator)
+       /**
+        * Creates a new MapIterator instance.
+        * @param m the Map reference of this iterator. 
+        */
+        public function MapIterator(m:Map)
         {
-            _i = i ;
+            _m = m ;
+            _i = new ArrayIterator(m.getKeys()) ;
+            _k = null ;
         }
         
         /**
@@ -67,50 +58,60 @@ package system.data.iterator
          */
         public function key():*
         {
-            return _i.key() ;
+            return _k ;
         }
-
-        /**
+        
+           /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
          */
         public function next():*
         {
-            return _i.next() ;
+            _k = _i.next() ;
+            return _m.get(_k) ;
         }
 
         /**
-         * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the remove method is unsupported in a ProtectedIterator instance.
+         * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
         public function remove():*
         {
-            throw new IllegalOperationError("This Iterator does not support the remove() method.") ;
+            _i.remove() ;
+            return _m.remove(_k) ;
         }
- 
+
         /**
-         * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the reset method is unsupported in a ProtectedIterator instance.
+         * Reset the internal pointer of the iterator (optional operation).
          */
         public function reset():void
         {
-            throw new IllegalOperationError("This Iterator does not support the reset() method.") ;
-        }
+            _i.reset() ;
+        }        
 
         /**
-         * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the seek method is unsupported in a ProtectedIterator instance.
-         */
+         * Change the position of the internal pointer of the iterator (optional operation).
+         */    
         public function seek(position:*):void
         {
-            throw new IllegalOperationError("This Iterator does not support the seek() method.") ;
+            throw new IllegalOperationError( "This Iterator does not support the seek() method.") ;
         }
         
         /**
-         * Internal iterator.
+         * @private
          */
-        private var _i:Iterator ;
-        
-    }
+        private var _m:Map ; 
 
+        /**
+         * @private
+         */
+        private var _i:ArrayIterator ; 
+
+        /**
+         * @private
+         */
+        private var _k:* ;
+    }
 }
+
+
+

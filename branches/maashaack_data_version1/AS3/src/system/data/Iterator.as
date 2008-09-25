@@ -24,7 +24,6 @@ package system.data
 
     /**
      * This interface defines the iterator pattern over a collection. 
-     * @author eKameleon
      */
     public interface Iterator
     {

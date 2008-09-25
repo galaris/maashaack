@@ -80,13 +80,8 @@ package system.data
 		/**
 		 * Associates the specified value with the specified key in this map (optional operation).
 		 */
-    	function put(key:*, value:*):*  ;
-	
-		/**
-		 * Copies all of the mappings from the specified map to this map (optional operation).
-		 */	
-    	function putAll(m:Map):void ;
-    	
+    	function put( key:* , value:* ):*  ;
+        	
 		/**
 		 * Removes the mapping for this key from this map if it is present (optional operation).
 		 */

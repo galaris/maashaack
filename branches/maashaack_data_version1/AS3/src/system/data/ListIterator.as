@@ -19,13 +19,12 @@
   
 */
 
-package system.data.list
+package system.data
 {
     import system.data.OrderedIterator;    
     
     /**
-     * Defines an itesystem.data.list.ListIteratoratorist. This iterator allows both forward and reverse iteration through the list.
-     * @author eKameleon
+     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
      */
     public interface ListIterator extends OrderedIterator
     {
@@ -36,13 +35,13 @@ package system.data.list
         function insert(o:*):void ;
 
         /**
-          * Returns the index of the element that would be returned by a subsequent call to next.
+         * Returns the index of the element that would be returned by a subsequent call to next.
          * @return the index of the element that would be returned by a subsequent call to next.
          */
         function nextIndex():uint ;    
 
         /**
-          * Returns the index of the element that would be returned by a subsequent call to previous.
+         * Returns the index of the element that would be returned by a subsequent call to previous.
          * @return the index of the element that would be returned by a subsequent call to previous.
          */
         function previousIndex():int ;

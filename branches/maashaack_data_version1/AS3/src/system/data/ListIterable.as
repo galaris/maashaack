@@ -23,28 +23,17 @@ package system.data
 {
 
     /**
-	 * This interface defines a Map with multiple values to keys.
-	 */
-    public interface MultiMap extends Map
+     * Implementing this interface allows a List to be iterable.
+     */    
+    public interface ListIterable
     {
-        
-		/**
-		 * Returns the total count of elements in all the collection in the MultiMap.
-		 * @return the total count of elements in all the collection in the MultiMap.
-		 */
-    	function totalSize():uint ;
-	
-		/**
-		 * Returns a collection of all values associated with all the keys in this map.
-		 * @return a collection of all values associated with all the keys in this map.
-		 */
-    	function values():Collection ;
-
-		/**
-		 * Returns an iterator fo all the values in the map.
-		 * @return an iterator fo all the values in the map.
-		 */
-	    function valueIterator():Iterator ;
-	    
+    
+        /**
+         * Returns a list iterator of the elements in this list (in proper sequence).
+         * @return a list iterator of the elements in this list (in proper sequence).
+         */
+        function listIterator( position:uint=0 ):ListIterator ;
+            
     }
+
 }

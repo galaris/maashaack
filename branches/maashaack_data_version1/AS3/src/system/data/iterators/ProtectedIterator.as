@@ -1,4 +1,4 @@
-/*
+﻿/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,54 +19,46 @@
   
 */
 
-package system.data.iterator
+package system.data.iterators
 {
     import system.data.Iterator;
-    import system.numeric.Mathematics;
     
     import flash.errors.IllegalOperationError;    
 
     /**
-     * Converts a string to an iterator.
+     * Protect an iterator. This class protect the remove, reset and seek method.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.iterator.Iterator ;
      * import system.iterator.StringIterator ;
+     * import system.iterator.ProtectedIterator ;
      * 
-     * var s = "Hello world" ;
-     * 
-     * var it:Iterator = new StringIterator(s) ;
-     * it.seek(1) ;
-     * while(it.hasNext())
+     * var it:ProtectedIterator = new ProtectedIterator( new StringIterator( "hello world" ) ) ;
+     * while (it.hasNext())
      * {
-     *     var char:String = it.next() ;
-     *     trace (it.key() + ' : ' + char) ;
+     *     trace( it.next() ) ;
      * }
-     * trace (s) ;
      * </pre>
-     * @author eKameleon
+     * @author eKameleon 
      */
-    public class StringIterator implements Iterator
+    public class ProtectedIterator implements Iterator
     {
         
         /**
-         * Creates a new StringIterator instance.
-         * @param s the String object to enumerate.
+         * Creates a new ProtectedIterator instance.
+         * @param iterator the iterator to protected.
          */
-        public function StringIterator(s:String)
+        public function ProtectedIterator(i:Iterator)
         {
-            _s = s ;
-            _k = -1 ;
-            _size = s.length ;
+            _i = i ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
          */    
         public function hasNext():Boolean
         {
-            return _k < _size-1  ;
+            return _i.hasNext() ;
         }
 
         /**
@@ -75,7 +67,7 @@ package system.data.iterator
          */
         public function key():*
         {
-            return _k ;
+            return _i.key() ;
         }
 
         /**
@@ -84,48 +76,41 @@ package system.data.iterator
          */
         public function next():*
         {
-            return _s.charAt( ++_k );
+            return _i.next() ;
         }
 
         /**
-         * Removes from the underlying collection the last element returned by the iterator (optional operation).
+         * Unsupported method in all ProtectedIterator.
+         * @throws UnsupportedOperation the remove method is unsupported in a ProtectedIterator instance.
          */
         public function remove():*
         {
-            throw new IllegalOperationError( "This " + this + " does not support the reset() method.") ;
-            return null ;
+            throw new IllegalOperationError("This Iterator does not support the remove() method.") ;
         }
-
+ 
         /**
-         * Reset the internal pointer of the iterator (optional operation).
+         * Unsupported method in all ProtectedIterator.
+         * @throws UnsupportedOperation the reset method is unsupported in a ProtectedIterator instance.
          */
         public function reset():void
         {
-            _k = -1 ;
+            throw new IllegalOperationError("This Iterator does not support the reset() method.") ;
         }
 
         /**
-         * Change the position of the internal pointer of the iterator (optional operation).
+         * Unsupported method in all ProtectedIterator.
+         * @throws UnsupportedOperation the seek method is unsupported in a ProtectedIterator instance.
          */
         public function seek(position:*):void
         {
-            _k = Mathematics.clamp ((position-1), -1, _size-1) ;
+            throw new IllegalOperationError("This Iterator does not support the seek() method.") ;
         }
         
         /**
-         * @private
+         * Internal iterator.
          */
-        private var _k:Number ;
-
-        /**
-         * @private
-         */
-        private var _s:String ;
-
-        /**
-         * @private
-         */
-        private var _size:Number ;
-    
+        private var _i:Iterator ;
+        
     }
+
 }

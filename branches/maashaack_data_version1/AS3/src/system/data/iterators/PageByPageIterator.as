@@ -19,7 +19,7 @@
   
 */
 
-package system.data.iterator
+package system.data.iterators
 {
     import system.data.OrderedIterator;
     import system.numeric.Mathematics;
