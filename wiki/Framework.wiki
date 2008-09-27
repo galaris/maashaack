@@ -39,9 +39,11 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
  * ADT (list, collection, map, queue, etc.)
  * BigNumber
+ * Math library
  * Encryption library
  * build as `abc` for redtamarin
  * unit tests should run on the command line
+ * support and test for FP10
 
 == v0.1.0 ==
 
