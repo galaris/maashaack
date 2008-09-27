@@ -33,6 +33,16 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
 = Roadmap =
 
+== v0.2.0 ==
+
+*For Your Eyes Only*
+
+ * ADT (list, collection, map, queue, etc.)
+ * BigNumber
+ * Encryption library
+ * build as `abc` for redtamarin
+ * unit tests should run on the command line
+
 == v0.1.0 ==
 
 *You Only Live Twice*
@@ -42,15 +52,18 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
  * build as a swc for easy use
  * better setup for unit tests
  * code review and refactor
+   * Environment
+   * standardize singletons
  * more unit tests
 
 features:
  * configurator
+ * ressources
  * evaluator
  * reflection API
  * serializers
    * eden is now part of system
    * more serializers (WDDX, PHP, JSON, etc.)
  * core object utils: Strings, Arrays, Objects, etc.
- * cli
- * ui
+ * cli: utils for command line tools
+ * ui: basic layout library, mainly for debug/diagnostic tools
