@@ -21,7 +21,7 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;        
+    import buRRRn.ASTUce.framework.TestCase;                
 
     public class MapFormatterTest extends TestCase 
     {
@@ -31,9 +31,26 @@ package system.data.maps
             super( name );
         }
         
-        public function testInterface():void
+        public function testFormat():void
         {
-                        
+            var result:String ;
+            
+            result = MapFormatter.format() ;
+            assertEquals(result, "", "1 - The MapFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
+            
+            result = MapFormatter.format(new HashMap()) ;   
+            assertEquals(result, "{}" , "2 - The MapFormatter format method failed with an empty Map.") ;
+            
+            result = MapFormatter.format(new HashMap(["key1"], ["value1"])) ;   
+            assertEquals(result, "{key1:value1}" , "3 - The MapFormatter format method failed with a Map whith one entry inside.") ;
+            
+            result = MapFormatter.format(new HashMap(["key1", "key2"], ["value1", "value2"])) ;   
+            assertTrue
+            (
+                result == "{key1:value1,key2:value2}" || "{key2:value2,key1:value1}" , 
+                "4 - The MapFormatter format method failed with a Map whith two entries inside."
+            ) ;
+            
         }         
         
     }
