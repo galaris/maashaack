@@ -1,34 +1,35 @@
-﻿/*
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at 
-  http://www.mozilla.org/MPL/ 
+﻿
+/*
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at 
+http://www.mozilla.org/MPL/ 
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the License. 
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [MaasHaack framework]
+The Original Code is [MaasHaack framework]
   
-  The Initial Developer of the Original Code is
-  Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2008
-  the Initial Developer. All Rights Reserved.
+The Initial Developer of the Original Code is
+Marc Alcaraz <ekameleon@gmail.com>.
+Portions created by the Initial Developer are Copyright (C) 2006-2008
+the Initial Developer. All Rights Reserved.
   
-  Contributor(s):
-    - Zwetan Kjukov <zwetan@gmail.com>
-*/
+Contributor(s):
+- Zwetan Kjukov <zwetan@gmail.com>
+ */
 
 package system.numeric
-    {
+{
     import flash.errors.IllegalOperationError;        
-    
+
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
      */ 
     public class Mathematics
-        {
-        
+    {
+
         /**
          * Rounds and returns the ceiling of the specified number or expression. 
          * The ceiling of a number is the closest integer that is greater than or equal to the number.
@@ -47,20 +48,20 @@ package system.numeric
          * @return the ceil value of a number by a count of floating points.
          */
         public static function ceil( n:Number, floatCount:Number ):Number 
+        {
+            if (isNaN( n )) 
             {
-            if (isNaN(n)) 
-                {
                 return NaN ;
-                }   
+            }   
             var r:Number = 1 ;
-            var i:Number = -1 ;
-            while (++i < floatCount) 
-                {
+            var i:Number = - 1 ;
+            while (++ i < floatCount) 
+            {
                 r *= 10 ;
-                }
-            return Math.ceil(n*r) / r  ;
-            }     
-        
+            }
+            return Math.ceil( n * r ) / r  ;
+        }     
+
         /**
          * Bounds a numeric value between 2 numbers.
          * <p><b>Example :</b></p>
@@ -85,22 +86,22 @@ package system.numeric
          * @return a bound numeric value between 2 numbers.
          */
         public static function clamp(value:Number, min:Number, max:Number):Number 
+        {
+            if (isNaN( value )) 
             {
-            if (isNaN(value)) 
-                {
                 return NaN ;
-                }
-            if (isNaN(min)) 
-                {
-                min = value ;
-                }
-            if (isNaN(max)) 
-                {
-                max = value ;
-                }
-            return Math.max(Math.min(value, max), min) ;
             }
-        
+            if (isNaN( min )) 
+            {
+                min = value ;
+            }
+            if (isNaN( max )) 
+            {
+                max = value ;
+            }
+            return Math.max( Math.min( value, max ), min ) ;
+        }
+
         /**
          * Rounds and returns a number by a count of floating points.
          * <p><b>Example :</b></p>
@@ -118,20 +119,20 @@ package system.numeric
          * @return the floor value of a number by a count of floating points.
          */
         public static function floor(n:Number, floatCount:Number):Number 
+        {
+            if (isNaN( n )) 
             {
-            if (isNaN(n)) 
-                {
                 return NaN ;
-                }
-            var r:Number = 1 ;
-            var i:Number = -1 ;
-            while (++i < floatCount) 
-                {
-                r *= 10 ;
-                }
-            return Math.floor(n*r) / r  ;
             }
-        
+            var r:Number = 1 ;
+            var i:Number = - 1 ;
+            while (++ i < floatCount) 
+            {
+                r *= 10 ;
+            }
+            return Math.floor( n * r ) / r  ;
+        }
+
         /**
          * Returns a percentage or null.
          * <p><b>Example :</b></p>
@@ -145,11 +146,11 @@ package system.numeric
          * @return a percentage value or null.
          */
         public static function percentage(value:Number = NaN, maximum:Number = NaN):Number 
-            {
+        {
             var p:Number = (value / maximum) * 100 ;
-            return (isNaN(p) || !isFinite(p)) ? NaN : p ;
-            }
-        
+            return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
+        }
+
         /**
          * With a number value and a range this method returns the actual value for the interpolated value in that range.
          * <pre class="prettyprint">
@@ -162,10 +163,10 @@ package system.numeric
          * @return the actual value for the interpolated value in that range.
          */
         public static function interpolate( value:Number, minimum:Number, maximum:Number ):Number
-            {
+        {
             return minimum + (maximum - minimum) * value ;
-            } 
-        
+        } 
+
         /**
          * Takes a value in a given range (minimum1, maximum1) and finds the corresponding value in the next range(minimum2, maximum2).
          * <pre class="prettyprint">
@@ -181,10 +182,10 @@ package system.numeric
          * @return value in a given range (minimum1, maximum1) and finds the corresponding value in the next range(minimum2, maximum2).
          */
         public static function map( value:Number, minimum1:Number, maximum1:Number, minimum2:Number, maximum2:Number):Number
-            {
-            return interpolate( normalize(value, minimum1, maximum1), minimum2, maximum2);
-            }
-                
+        {
+            return interpolate( normalize( value, minimum1, maximum1 ), minimum2, maximum2 );
+        }
+
         /**
          * Takes a value within a given range and converts it to a number between 0 and 1.
          * Actually it can be outside that range if the original value is outside its range.
@@ -197,10 +198,10 @@ package system.numeric
          * @param maximum The maximum value of the normalization.
          */
         public static function normalize(value:Number, minimum:Number, maximum:Number):Number
-            {
-           return (value - minimum) / (maximum - minimum) ;
-            }
-                
+        {
+            return (value - minimum) / (maximum - minimum) ;
+        }
+
         /**
          * Rounds and returns a number by a count of floating points.
          * <p><b>Example :</b></p>
@@ -218,20 +219,20 @@ package system.numeric
          * @return the round of a number by a count of floating points.
          */
         public static function round(n:Number, floatCount:Number):Number 
+        {
+            if (isNaN( n )) 
             {
-            if (isNaN(n)) 
-                {
                 return NaN ;
-                }
-            var r:Number = 1 ;
-            var i:Number = -1 ;
-            while (++i < floatCount) 
-                {
-                r *= 10 ;
-                }
-            return Math.round(n*r) / r  ;
             }
-        
+            var r:Number = 1 ;
+            var i:Number = - 1 ;
+            while (++ i < floatCount) 
+            {
+                r *= 10 ;
+            }
+            return Math.round( n * r ) / r  ;
+        }
+
         /**
          * Returns 1 if the value is positive or -1.
          * <p><b>Example :</b></p>
@@ -252,15 +253,13 @@ package system.numeric
          * @throws IllegalOperationError if the passed-in value is NaN.
          */
         public static function sign( n:Number ):Number 
+        {
+            if (isNaN( n )) 
             {
-            if (isNaN(n)) 
-                {
-                throw new IllegalOperationError( "Mathematics.sign, the passed-in value not must be NaN.") ;
-                }
-            return ( n < 0 ) ? -1 : 1 ;
+                throw new IllegalOperationError( "Mathematics.sign, the passed-in value not must be NaN." ) ;
             }
-            
+            return ( n < 0 ) ? - 1 : 1 ;
         }
-
     }
+}
 

@@ -1,23 +1,23 @@
 ﻿/*
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at 
-  http://www.mozilla.org/MPL/ 
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at 
+http://www.mozilla.org/MPL/ 
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the License. 
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [MaasHaack framework]
+The Original Code is [MaasHaack framework]
   
-  The Initial Developer of the Original Code is
-  Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2008
-  the Initial Developer. All Rights Reserved.
+The Initial Developer of the Original Code is
+Marc Alcaraz <ekameleon@gmail.com>.
+Portions created by the Initial Developer are Copyright (C) 2006-2008
+the Initial Developer. All Rights Reserved.
   
-  Contributor(s):
+Contributor(s):
   
-*/
+ */
 
 package system.evaluators 
 {
@@ -79,7 +79,7 @@ package system.evaluators
      */
     public class PropertyEvaluator implements Evaluable 
     {
-        
+
         /**
          * Creates a new PropertyEvaluator instance.
          * @param target the target object use in the evaluator.
@@ -88,7 +88,7 @@ package system.evaluators
         {
             this.target = target ;
         }
-        
+
         /**
          * The target reference use in the evaluator.
          */
@@ -96,7 +96,7 @@ package system.evaluators
         {
             return _target ;
         }
-        
+
         /**
          * @private
          */
@@ -104,22 +104,22 @@ package system.evaluators
         {
             _target = o ;
         }        
-        
+
         /**
          * The separator of the expression evaluator.
          */
         public var separator:String = "." ;
-        
+
         /**
          * This attributs defines the value returns from the eval() method if the expression can't be evaluate.
          */
         public var undefineable:* = null ;
-        
+
         /**
          * Indicates if the eval() method throws errors or return null when an error is throwing.
          */
         public var throwError:Boolean ;
-        
+
         /**
          * Evaluates the specified object.
          */
@@ -130,10 +130,10 @@ package system.evaluators
                 var exp:String = o as String ;
                 if ( exp.length > 0 )
                 {
-                    var value:*       = target ;
+                    var value:* = target ;
                     var members:Array = exp.split( separator ) ;
-                    var len:int       = members.length ;
-                    for ( var i:int ; i<len ; i++ )
+                    var len:int = members.length ;
+                    for ( var i:int ; i < len ; i++ )
                     {
                         if ( members[i] in value )
                         {
@@ -141,11 +141,11 @@ package system.evaluators
                         }
                         else
                         {
-                        	if ( throwError )
-                        	{
+                            if ( throwError )
+                            {
                                 throw new EvalError( this + " eval failed with the expression : " + o ) ;
-                        	}
-                        	return undefineable ;
+                            }
+                            return undefineable ;
                         }
                     }
                     return value ;
@@ -153,11 +153,10 @@ package system.evaluators
             }
             return undefineable ;
         }
-        
+
         /**
          * @private
          */
         private var _target:* ;
-        
     }
 }

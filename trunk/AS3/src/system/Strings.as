@@ -1,44 +1,45 @@
-﻿/*
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at 
-  http://www.mozilla.org/MPL/ 
+﻿
+/*
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at 
+http://www.mozilla.org/MPL/ 
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the License. 
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [MaasHaack framework]
+The Original Code is [MaasHaack framework]
   
-  The Initial Developer of the Original Code is
-  Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2008
-  the Initial Developer. All Rights Reserved.
+The Initial Developer of the Original Code is
+Zwetan Kjukov <zwetan@gmail.com>.
+Portions created by the Initial Developer are Copyright (C) 2006-2008
+the Initial Developer. All Rights Reserved.
   
-  Contributor(s):
-  - Marc Alcaraz <ekameleon@gmail.com>.
-*/
+Contributor(s):
+- Marc Alcaraz <ekameleon@gmail.com>.
+ */
 
 package system
-    {
+{
     import system.evaluators.EdenEvaluator;
-    
+
     /**
      * A static class for String utilities.
      */
     public class Strings
-        {
+    {
 
         /**
          * Helper method for the padLeft and padRight method.
          * @private
          */
         private static function _padHelper( str:String, totalWidth:int, paddingChar:String = " ", isRightPadded:Boolean = true ):String
-            {
+        {
             if( (totalWidth < str.length) || (totalWidth < 0) )
-                {
+            {
                 return str;
-                }
+            }
             
             /* note:
             we want to limit the string to ONLY ONE char
@@ -47,54 +48,54 @@ package system
             to throw an Error
              */
             if( paddingChar.length > 1 )
-                {
+            {
                 paddingChar = paddingChar.charAt( 0 );
-                }
+            }
             
             while( str.length != totalWidth )
-                {
+            {
                 if( isRightPadded == true )
-                    {
+                {
                     str += paddingChar;
-                    }
-                else
-                    {
-                    str = paddingChar + str;
-                    }
                 }
+                else
+                {
+                    str = paddingChar + str;
+                }
+            }
             
             return str;
-            }
+        }
 
         /**
          * Helper method used by trim, trimStart and trimEnd methods.
          * @private
          */
         private static function _trimHelper( str:String, trimChars:Array, trimStart:Boolean = false, trimEnd:Boolean = false ):String
-            {
+        {
             var iLeft:int;
             var iRight:int;
             
             if( trimStart )
+            {
+                for( iLeft = 0; (iLeft < str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > - 1) ; iLeft++ )
                 {
-                for( iLeft = 0; (iLeft < str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > -1) ; iLeft++ )
-                    {
-                    }
+                }
                 
                 str = str.substr( iLeft );
-                }
+            }
             
             if( trimEnd )
-                {
-                for( iRight = str.length - 1; (iRight >= 0) && (trimChars.indexOf( str.charAt( iRight ) ) > -1) ; iRight-- )
-                    {            
-                    }
+            {
+                for( iRight = str.length - 1; (iRight >= 0) && (trimChars.indexOf( str.charAt( iRight ) ) > - 1) ; iRight-- )
+                {            
+                }
                 
                 str = str.substring( 0, iRight + 1 );
-                }
+            }
             
             return str;
-            }
+        }
 
         /**
          * Returns the center String representation of the specified String value.
@@ -110,7 +111,7 @@ package system
          * @param separator The optional separator character use before and after the String to center. (default " ")
          * @return the center String representation of the specified String value.
          */
-        public static function center( str:String, size:uint=0 , separator:String=" " ):String 
+        public static function center( str:String, size:uint = 0 , separator:String = " " ):String 
         {
             var n:uint = str.length ;
             if (size <= n)
@@ -118,9 +119,9 @@ package system
                 return str ;
             }
             var m:int = Math.floor( ( size - n ) / 2 ) ;
-            return repeat(separator, m) + str + repeat(separator, size - n - m) ;
+            return repeat( separator, m ) + str + repeat( separator, size - n - m ) ;
         }
-        
+
         /**
          * Compares the two specified String objects.
          * @param o1 first string to compare with the second string.
@@ -129,63 +130,62 @@ package system
          * allows to take into account the string case for comparison. 
          */    
         public static function compare( o1:String, o2:String, strict:Boolean = false ):int
-            {
+        {
             
-            if( !strict )
-                {
+            if( ! strict )
+            {
                 o1 = o1.toLowerCase( );
                 o2 = o2.toLowerCase( );
-                }
+            }
             
             if( o1 == o2 )
-                {
+            {
                 return 0;
-                }
+            }
             else if( o1.length == o2.length )
-                {
+            {
                 /* info:
-                   localCompare return the char difference so we reuse that
-                */
-                
+                localCompare return the char difference so we reuse that
+                 */
                 var localcomp:Number = o1.localeCompare( o2 );
                 
                 /* note:
-                   by default we want an ascending alphabetic order
-                   with minuscule weighting less than majuscule
-                   but as char value of majuscule are smaller
-                   we have to inverse the negative/positive to obtain
-                   the right order
+                by default we want an ascending alphabetic order
+                with minuscule weighting less than majuscule
+                but as char value of majuscule are smaller
+                we have to inverse the negative/positive to obtain
+                the right order
                    
-                   ex:
-                   "a".charAt(0) = 97
-                   "A".charAt(0) = 65
-                   that means that "a" weight more than "A"
-                   "a".localeCompare( "A" ) -> 32
-                   but in our case we want a negative, because we consider
-                   that "a" weight less than "A"
-                   so to get the correct result we need to negate the result
-                   -("a".localeCompare( "A" )) -> -32
-                */
+                ex:
+                "a".charAt(0) = 97
+                "A".charAt(0) = 65
+                that means that "a" weight more than "A"
+                "a".localeCompare( "A" ) -> 32
+                but in our case we want a negative, because we consider
+                that "a" weight less than "A"
+                so to get the correct result we need to negate the result
+                -("a".localeCompare( "A" )) -> -32
+                 */
                 if( localcomp == 0 )
-                    {
+                {
                     return 0;
-                    }
+                }
                 else if( localcomp < 0 )
-                    {
+                {
                     return 1;
-                    }
+                }
                 
-                return -1;
-                }
-            else if( o1.length > o2.length )
-                {
-                return 1;
-                }
-            else
-                {
-                return -1;
-                }
+                return - 1;
             }
+            else if( o1.length > o2.length )
+            {
+                return 1;
+            }
+            else
+            {
+                return - 1;
+            }
+        }
 
         /**
          * Determines whether the end of this instance matches the specified String.
@@ -203,277 +203,276 @@ package system
          * </pre>
          */
         public static function endsWith( str:String, value:String ):Boolean
-            {
+        {
             if( (str == null) || (value == null) || (str.length < value.length) )
-                {
+            {
                 return false;
-                }
+            }
             
             return compare( str.substr( str.length - value.length ), value ) == 0;
-            }
-        
+        }
+
         /**
-        * Contain a list of evaluators to be used in Strings.format
-        * 
-        * ex:
-        * Strings.evaluators = { math: new MathEvaluator() };
-        * Strings.format( "my result is ${2+3}math$" ); // "my result is 5"
-        * 
-        * note:
-        * property names in the evaluators object can only contains
-        * lower case alphabetical chars and digit chars
-        */
+         * Contain a list of evaluators to be used in Strings.format
+         * 
+         * ex:
+         * Strings.evaluators = { math: new MathEvaluator() };
+         * Strings.format( "my result is ${2+3}math$" ); // "my result is 5"
+         * 
+         * note:
+         * property names in the evaluators object can only contains
+         * lower case alphabetical chars and digit chars
+         */
         public static var evaluators:Object = {};
-        
+
         /* internal:
-           Strings.format can take index from 0 to infinity
-           {0}, {1}, ..., {99}, etc.
+        Strings.format can take index from 0 to infinity
+        {0}, {1}, ..., {99}, etc.
            
-           but _evaluate need to sync its indexes with the _format _indexes
-           so we pick an arbitrary number: 100
+        but _evaluate need to sync its indexes with the _format _indexes
+        so we pick an arbitrary number: 100
            
-           officially indexed token can go from {0} to {99}
-           to avoid a conflict with that arbitrary number
-        */
+        officially indexed token can go from {0} to {99}
+        to avoid a conflict with that arbitrary number
+         */
         private static var _hiddenIndex:uint = 100;
-        
+
         /* internal:
-           supported format
-           ${...}$ default to EdenEvaluator
-           ${...}name1,name2,...$
+        supported format
+        ${...}$ default to EdenEvaluator
+        ${...}name1,name2,...$
            
-           TODO:
-           there are no test for }...$ sequence
-           so yeah it's weak and yeah you could break it with something like
-           ${{a:1,b:"}",c:"$"}}$
-        */
+        TODO:
+        there are no test for }...$ sequence
+        so yeah it's weak and yeah you could break it with something like
+        ${{a:1,b:"}",c:"$"}}$
+         */
         private static function _evaluate( value:String ):Object
-            {
-            var obj:Object  = {};
-                obj.format  = "";
-                obj.indexes = [];
+        {
+            var obj:Object = {};
+            obj.format = "";
+            obj.indexes = [];
             
-            var defaultEvaluator:EdenEvaluator = new EdenEvaluator();
+            var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
             var evaluators:Array = [];
             
             var evaluate:Function = function( expression:* ):String
+            {
+                for( var i:uint = 0; i < evaluators.length ; i++ )
                 {
-                for( var i:uint = 0; i< evaluators.length; i++ )
-                    {
                     expression = evaluators[i].eval( expression );
-                    }
+                }
                 return String( expression );
-                };
+            };
             
             var evalSequence:String = "";
-            var evalString:String   = "";
+            var evalString:String = "";
             // var evalValue:String    = "" ; // FIXME not use this variable for the moment
-            var inBetween:String    = "";
+            var inBetween:String = "";
             var pos1:int;
             var pos2:int;
             var lpos:int;
             
             var isValidChar:Function = function( c:String ):Boolean
-                {
+            {
                 if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
-                    {
+                {
                     return true;
-                    }
+                }
                 return false;
-                };
+            };
             
             var isValid:Function = function( str:String ):Boolean
-                {
+            {
                 if( str == "" )
-                    {
-                    return true;
-                    }
-                var test:Array = str.split( "" );
-                for( var i:uint = 0; i<test.length; i++ )
-                    {
-                    if( !isValidChar( test[i] ) )
-                        {
-                        return false;
-                        } 
-                    }
-                return true;
-                };
-            
-            while( value.indexOf( "${" ) > -1 )
                 {
+                    return true;
+                }
+                var test:Array = str.split( "" );
+                for( var i:uint = 0; i < test.length ; i++ )
+                {
+                    if( ! isValidChar( test[i] ) )
+                    {
+                        return false;
+                    } 
+                }
+                return true;
+            };
+            
+            while( value.indexOf( "${" ) > - 1 )
+            {
                 pos1 = value.indexOf( "${" );
-                pos2 = value.indexOf( "$", pos1+2 );
-                if( pos2 == -1 )
-                    {
+                pos2 = value.indexOf( "$", pos1 + 2 );
+                if( pos2 == - 1 )
+                {
                     throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                    }
-                evalSequence = value.slice( pos1+2, pos2 );
+                }
+                evalSequence = value.slice( pos1 + 2, pos2 );
                 lpos = evalSequence.lastIndexOf( "}" );
-                inBetween = evalSequence.substring( lpos+1 );
+                inBetween = evalSequence.substring( lpos + 1 );
                 
-                while( !isValid(inBetween) )
+                while( ! isValid( inBetween ) )
+                {
+                    pos2 = value.indexOf( "$", pos1 + 2 + pos2 );
+                    if( pos2 == - 1 )
                     {
-                    pos2 = value.indexOf( "$", pos1+2+pos2 );
-                    if( pos2 == -1 )
-                        {
                         throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                        }
-                    evalSequence = value.slice( pos1+2, pos2 );
-                    lpos = evalSequence.lastIndexOf( "}" );
-                    inBetween = evalSequence.substring( lpos+1 );
                     }
+                    evalSequence = value.slice( pos1 + 2, pos2 );
+                    lpos = evalSequence.lastIndexOf( "}" );
+                    inBetween = evalSequence.substring( lpos + 1 );
+                }
                 
-                if( lpos != evalSequence.length-1 )
-                    {
-                    var tmp:String = evalSequence.substring( lpos+1 );
+                if( lpos != evalSequence.length - 1 )
+                {
+                    var tmp:String = evalSequence.substring( lpos + 1 );
                     var evaluatorsAlias:Array;
                     
-                    if( tmp.indexOf(",") > -1 )
-                        {
+                    if( tmp.indexOf( "," ) > - 1 )
+                    {
                         evaluatorsAlias = tmp.split( "," );
-                        }
-                    else
-                        {
-                        evaluatorsAlias = [ tmp ];
-                        }
-                    
-                    for( var i:uint = 0; i<evaluatorsAlias.length; i++ )
-                        {
-                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
-                            {
-                            evaluators.push( Strings.evaluators[ evaluatorsAlias[i] ] );
-                            }
-                        else
-                            {
-                            /* TODO:
-                               throw an error here ?
-                            */
-                            trace( "## Warning: \"" +evaluatorsAlias[i]+ "\" is not a valid evaluator ##"  );
-                            }
-                        }
-                    
                     }
+                    else
+                    {
+                        evaluatorsAlias = [ tmp ];
+                    }
+                    
+                    for( var i:uint = 0; i < evaluatorsAlias.length ; i++ )
+                    {
+                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
+                        {
+                            evaluators.push( Strings.evaluators[ evaluatorsAlias[i] ] );
+                        }
+                        else
+                        {
+                            /* TODO:
+                            throw an error here ?
+                             */
+                            trace( "## Warning: \"" + evaluatorsAlias[i] + "\" is not a valid evaluator ##" );
+                        }
+                    }
+                }
                 
                 if( evaluators.length == 0 )
-                    {
+                {
                     evaluators = [ defaultEvaluator ];
-                    }
+                }
                 
                 evalString = evalSequence.substring( 0, lpos );
                 
                 obj.indexes.push( evaluate( evalString ) );
-                value = value.split( "${"+evalSequence+"$" ).join( "{" + (_hiddenIndex+ (obj.indexes.length-1)) + "}" );
-                }
+                value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
+            }
             
             obj.format = value;
             return obj;
-            }
-        
+        }
+
         /* internal:
-           supported format
-           {0} {1}
-           {0,5} {0,-5}
-           {0,5:_} {0,-5:_}
-           {toto} {titi}
-           {toto,5} {toto,-5}
-           {titi,5:_} {titi,-5:_}
+        supported format
+        {0} {1}
+        {0,5} {0,-5}
+        {0,5:_} {0,-5:_}
+        {toto} {titi}
+        {toto,5} {toto,-5}
+        {titi,5:_} {titi,-5:_}
            
-           TODO:
-           to {0,5} {0,-5} add something like {0,~5} to support padding to center
-        */
+        TODO:
+        to {0,5} {0,-5} add something like {0,~5} to support padding to center
+         */
         private static function _format( stringvalue:String, indexed:Array, named:Object, paddingChar:String = " " ):String
-            {
+        {
             
             var parseExpression:Function = function( expression:String ):String
-                {
+            {
                 var value:String = "";
                 var spaceAlign:int = 0;
                 var isAligned:Boolean = false;
                 var padding:String = paddingChar; 
                 
-                if( indexOfAny( expression, [ ",", ":" ] ) > -1 )
-                    {
+                if( indexOfAny( expression, [ ",", ":" ] ) > - 1 )
+                {
                     var vPos:int = expression.indexOf( "," );
-                    if( vPos == -1 )
-                        {
+                    if( vPos == - 1 )
+                    {
                         throw new Error( "malformed format, could not find [,] before [:]." );
-                        }
+                    }
                     
                     var fPos:int = expression.indexOf( ":" );
                     
-                    if( fPos == -1 )
-                        {
+                    if( fPos == - 1 )
+                    {
                         spaceAlign = int( expression.substr( vPos + 1 ) );
-                        }
+                    }
                     else
-                        {
+                    {
                         spaceAlign = int( expression.substring( vPos + 1, fPos ) );
                         padding = expression.substr( fPos + 1 );
-                        }
+                    }
                     
                     isAligned = true;
                     expression = expression.substring( 0, vPos );
-                    }
+                }
                 
                 var c:String = expression.split( "" )[0];
                 if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
-                    {
+                {
                     value = String( named[ expression ] );
-                    }
+                }
                 else if( ("0" <= c) && (c <= "9") )
-                    {
+                {
                     value = String( indexed[ int( expression ) ] );
-                    }
+                }
                 
                 if( isAligned )
-                    {
+                {
                     if( (spaceAlign > 0) && (value.length < spaceAlign) )
-                        {
+                    {
                         value = padLeft( value, spaceAlign, padding );
-                        }
-                    else if ( spaceAlign < -value.length )
-                        {
-                        value = padRight( value, -spaceAlign, padding );
-                        }
                     }
+                    else if ( spaceAlign < - value.length )
+                    {
+                        value = padRight( value, - spaceAlign, padding );
+                    }
+                }
                 
                 return value;
-                };
+            };
             
             var expression:String = "";
-            var formated:String   = "";
-            var ch:String         = "";
-            var pos:int           = 0;
-            var len:int           = stringvalue.length;
+            var formated:String = "";
+            var ch:String = "";
+            var pos:int = 0;
+            var len:int = stringvalue.length;
             
             var next:Function = function():String
-                {
+            {
                 ch = stringvalue.charAt( pos );
                 pos++;
                 return ch;
-                };
+            };
             
             while( pos < len )
-                {
-                next();
+            {
+                next( );
                 if( ch == "{" )
-                    {
-                    expression = next();
+                {
+                    expression = next( );
                     while( next( ) != "}" )
-                        {
-                        expression += ch;
-                        }
-                    formated += parseExpression( expression );
-                    }
-                else
                     {
-                    formated += ch;
+                        expression += ch;
                     }
+                    formated += parseExpression( expression );
                 }
+                else
+                {
+                    formated += ch;
+                }
+            }
             
             return formated;
-            }
-        
+        }
+
         /** 
          * Format a string using indexed, named and/or evaluated parameters.
          * <p>Method call :</p>
@@ -564,62 +563,63 @@ package system
          * </pre>
          */
         public static function format( format:String, ...args ):String
-            {
+        {
             var indexedValues:Array = [];
-            var namedValues:Object  = {};
+            var namedValues:Object = {};
             
             if( format == "" )
-                {
+            {
                 return format;
-                }
+            }
             
             var evaluated:Object = _evaluate( format );
             
             if( (evaluated.indexes.length == 0) && ((args == null) || (args.length == 0)) )
-                {
+            {
                 return format; //nothing to format
-                }
+            }
             
             format = evaluated.format;
             
             if( args.length >= 1 )
-                {
+            {
                 if( args[0] is Array )
-                    {
+                {
                     indexedValues = indexedValues.concat( args[0] );
-                    args.shift();
-                    }
+                    args.shift( );
+                }
                 else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
-                    {
+                {
                     var prop:String;
                     for( prop in args[0] )
-                        {
+                    {
                         namedValues[ prop ] = args[0][ prop ];
-                        }
-                    args.shift();
                     }
+                    args.shift( );
                 }
+            }
             
             indexedValues = indexedValues.concat( args );
             
-            if( indexedValues.length-1 >= _hiddenIndex )
-                {
+            if( indexedValues.length - 1 >= _hiddenIndex )
+            {
                 /* TODO:
-                   throw an error here ?
-                */
+                throw an error here ?
+                 */
                 trace( "## Warning : indexed tokens are too big ##" );
-                }
+            }
             
-            for( var i:uint = 0; i< evaluated.indexes.length; i++ )
-                {
-                indexedValues[ (_hiddenIndex + i) ] =  evaluated.indexes[i];
-                }
+            for( var i:uint = 0; i < evaluated.indexes.length ; i++ )
+            {
+                indexedValues[ (_hiddenIndex + i) ] = evaluated.indexes[i];
+            }
             
-            var ORC1:String = "\uFFFC"; //Object Replacement Character
-            var ORC2:String = "\uFFFD"; //Object Replacement Character
-            
-            if( indexOfAny( format, [ "{{", "}}" ] ) > -1 )
-                {
+            var ORC1:String = "\uFFFC"; 
+            //Object Replacement Character
+            var ORC2:String = "\uFFFD"; 
+            //Object Replacement Character
+            if( indexOfAny( format, [ "{{", "}}" ] ) > - 1 )
+            {
                 /* note:
                 little limitation here
                 we cover the case of {{{0}}} -> to be able
@@ -639,20 +639,20 @@ package system
                 format = format.split( "{{" ).join( ORC1 );
                 format = format.split( "}}}" ).join( "}" + ORC2 );
                 format = format.split( "}}" ).join( ORC2 );
-                }
+            }
             
             var formated:String = _format( format, indexedValues, namedValues );
             
-            if( indexOfAny( format, [ ORC1, ORC2 ] ) > -1 )
-                {
+            if( indexOfAny( format, [ ORC1, ORC2 ] ) > - 1 )
+            {
                 formated = formated.split( ORC1 ).join( "{" );
                 formated = formated.split( ORC2 ).join( "}" );
-                }
+            }
             
             return formated;
-            }
+        }
 
-         /**
+        /**
          * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
@@ -664,40 +664,40 @@ package system
          * </pre>
          * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          */
-        public static function indexOfAny( str:String, anyOf:Array, startIndex:int = 0, count:int = -1 ):int
-            {
+        public static function indexOfAny( str:String, anyOf:Array, startIndex:int = 0, count:int = - 1 ):int
+        {
             var i:int;
             var endIndex:int;
             
             if( (str == null) || (str == "") )
-                {
-                return -1;
-                }
+            {
+                return - 1;
+            }
             
             if( startIndex < 0 )
-                {
+            {
                 startIndex = 0;
-                }
+            }
             
             if( (count < 0) || (count > anyOf.length - startIndex) )
-                {
+            {
                 endIndex = anyOf.length - 1;
-                }
+            }
             else
-                {
+            {
                 endIndex = startIndex + count - 1;
-                }
+            }
             
             for( i = startIndex; i <= endIndex ; i++ )
+            {
+                if( str.indexOf( anyOf[i] ) > - 1 )
                 {
-                if( str.indexOf( anyOf[i] ) > -1 )
-                    {
                     return i;
-                    }
                 }
-            
-            return -1;
             }
+            
+            return - 1;
+        }
 
         /**
          * Inserts a specified instance of String at a specified index position in this instance.
@@ -725,27 +725,27 @@ package system
          * @return the string modified by the method.
          */
         public static function insert( str:String, startIndex:int, value:String ):String
-            {
+        {
             var strA:String = "";
             var strB:String = "";
             
             if( startIndex == 0 )
-                {
+            {
                 return value + str;
-                }
+            }
             else if( startIndex == str.length )
-                {
+            {
                 return str + value;
-                }
+            }
             
             /* TODO:
-               review the logic when startIndex == -1
-            */
+            review the logic when startIndex == -1
+             */
             strA = str.substr( 0, startIndex );
             strB = str.substr( startIndex );
             
             return strA + value + strB;
-            }
+        }
 
         /**
          * Reports the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
@@ -765,55 +765,55 @@ package system
          * @throws ArgumentError if the anyOf argument is 'null' or 'undefined'.
          */
         public static function lastIndexOfAny( str:String, anyOf:Array, startIndex:int = 0x7FFFFFFF, count:int = 0x7FFFFFFF ):int 
-            {
+        {
             var i:int;
             var index:int ;
             
             if ( anyOf == null )
-                {
-                throw new ArgumentError( "Strings.lastIndexOfAny failed with an empty 'anyOf' Array.") ;
-                }
+            {
+                throw new ArgumentError( "Strings.lastIndexOfAny failed with an empty 'anyOf' Array." ) ;
+            }
             
             if( str == null || str.length == 0 )
-                {
-                return -1;
-                }
+            {
+                return - 1;
+            }
             
-            if ( isNaN(count) || count < 0 )
-                {
+            if ( isNaN( count ) || count < 0 )
+            {
                 count = 0x7FFFFFFF ;    
-                }
+            }
             
-            if ( isNaN(startIndex) || startIndex > str.length )
-                {
+            if ( isNaN( startIndex ) || startIndex > str.length )
+            {
                 startIndex = str.length ;
-                }
+            }
             else if( startIndex < 0 )
-                {
-                return -1 ;
-                }
+            {
+                return - 1 ;
+            }
             
             var endIndex:int = startIndex - count + 1 ;
             
             if ( endIndex < 0 )
-                {
+            {
                 endIndex = 0 ;    
-                }
+            }
             
-            str = str.slice( endIndex , startIndex+1 ) ;
+            str = str.slice( endIndex, startIndex + 1 ) ;
             
             var len:uint = anyOf.length ;
-            for ( i = 0 ; i < len ; i ++ )
+            for ( i = 0 ; i < len ; i++ )
+            {
+                index = str.lastIndexOf( anyOf[i], startIndex ) ;
+                if (index > - 1) 
                 {
-                index = str.lastIndexOf( anyOf[i] , startIndex ) ;
-                if (index > -1) 
-                    {
                     return index + endIndex;
-                    }
                 }
+            }
             
-            return -1 ;
-            }    
+            return - 1 ;
+        }    
 
         /**
          * Right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
@@ -831,17 +831,17 @@ package system
          * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          */
         public static function padLeft( str:String, totalWidth:int, paddingChar:String = " " ):String
-            {
+        {
             var isRightPadded:Boolean = false;
             
             if( totalWidth < 0 )
-                {
-                totalWidth    = -totalWidth;
+            {
+                totalWidth = - totalWidth;
                 isRightPadded = true;
-                }
+            }
             
             return _padHelper( str, totalWidth, paddingChar, isRightPadded );
-            }
+        }
 
         /**
          * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
@@ -860,17 +860,17 @@ package system
          * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
          */
         public static function padRight( str:String, totalWidth:int, paddingChar:String = " " ):String
-            {
+        {
             var isRightPadded:Boolean = true;
             
             if( totalWidth < 0 )
-                {
-                totalWidth    = -totalWidth;
+            {
+                totalWidth = - totalWidth;
                 isRightPadded = false;
-                }
+            }
             
             return _padHelper( str, totalWidth, paddingChar, isRightPadded );
-            }
+        }
 
         /**
          * Returns a new String value who contains the specified String characters repeated count times.
@@ -883,14 +883,14 @@ package system
          * </pre>
          * @return a new String value who contains the specified String characters repeated count times.
          */
-        public static function repeat( str:String="" , count:uint=0 ):String
+        public static function repeat( str:String = "" , count:uint = 0 ):String
         {
             var result:String = "" ;
             if ( count > 0 )
             {
-                for( var i:uint = 0 ; i<count ; i++)
+                for( var i:uint = 0 ; i < count ; i++)
                 {
-                    result = result.concat(str) ;
+                    result = result.concat( str ) ;
                 }
             }
             else
@@ -913,26 +913,26 @@ package system
          * @return <code class="prettyprint">true</code> if the specified string is a prefix of the current instance.
          */
         public static function startsWith( str:String, value:String ):Boolean
-            {
+        {
             //special case
             if( (value == "") && (str != null) )
-                {
+            {
                 return true;
-                }
+            }
             
             if( (str == "") || (str == null) || (value == null) || (str.length < value.length) )
-                {
+            {
                 return false;
-                }
+            }
             
             //shortcut
             if( str.charAt( 0 ) != value.charAt( 0 ) )
-                {
+            {
                 return false;
-                }
+            }
             
             return compare( str.substr( 0, value.length ), value ) == 0;
-            }
+        }
 
         /**
          * Removes all occurrences of a set of specified characters (or strings) from the beginning and end of this instance.
@@ -945,14 +945,14 @@ package system
          * @return The new trimed string.
          */
         public static function trim( str:String, trimChars:Array = null ):String
-            {
+        {
             if( trimChars == null )
-                {
+            {
                 trimChars = whiteSpaceChars;
-                }
+            }
             
             return _trimHelper( str, trimChars, true, true );
-            }
+        }
 
         /**
          * Removes all occurrences of a set of characters specified in an array from the end of this instance.
@@ -965,14 +965,14 @@ package system
          * @return The new trimed string.
          */
         public static function trimEnd( str:String, trimChars:Array = null ):String
-            {
+        {
             if( trimChars == null )
-                {
+            {
                 trimChars = whiteSpaceChars;
-                }
+            }
             
             return _trimHelper( str, trimChars, false, true );
-            }
+        }
 
         /**
          * Removes all occurrences of a set of characters specified in an array from the beginning of this instance.
@@ -985,14 +985,14 @@ package system
          * @return The new trimed string.
          */
         public static function trimStart( str:String, trimChars:Array = null ):String
-            {
+        {
             if( trimChars == null )
-                {
+            {
                 trimChars = whiteSpaceChars;
-                }
+            }
             
             return _trimHelper( str, trimChars, true, false );
-            }
+        }
 
         // TODO We maybe could also define 0xFFEF and/or 0x2060, but not completely sure of all the implication, 
         // 0xFFEF in byte order mark etc.
@@ -1036,6 +1036,6 @@ package system
                                                       "\u202F" /*Narrow no-break space*/,
                                                       "\u205F" /*Medium mathematical space*/,
                                                       "\u3000" /*Ideographic space*/ ];
-        }
     }
+}
 

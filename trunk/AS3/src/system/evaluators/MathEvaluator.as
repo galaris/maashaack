@@ -1,26 +1,26 @@
 ﻿/*
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at 
-  http://www.mozilla.org/MPL/ 
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at 
+http://www.mozilla.org/MPL/ 
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the License. 
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the License. 
   
-  The Original Code is [MaasHaack framework]
+The Original Code is [MaasHaack framework]
   
-  The Initial Developer of the Original Code is
-  Zwetan Kjukov <zwetan@gmail.com>.
-  Portions created by the Initial Developer are Copyright (C) 2006-2008
-  the Initial Developer. All Rights Reserved.
+The Initial Developer of the Original Code is
+Zwetan Kjukov <zwetan@gmail.com>.
+Portions created by the Initial Developer are Copyright (C) 2006-2008
+the Initial Developer. All Rights Reserved.
   
-  Contributor(s):
-  - Marc Alcaraz <ekameleon@gmail.com>
-*/
+Contributor(s):
+- Marc Alcaraz <ekameleon@gmail.com>
+ */
 
 package system.evaluators
-    {
+{
     import system.Strings;    
 
     /**
@@ -131,219 +131,225 @@ package system.evaluators
      * </p>
      */
     public class MathEvaluator implements Evaluable
-        {
+    {
         	
         use namespace mathparser;
-        
+
         /**
          * Creates a new MathsEvaluator instance.
          * @param context When instanciating the MathEvaluator you can pass a context containing either variables or functions.
          */
         public function MathEvaluator( context:Object = null )
-            {
+        {
             if( context != null )
-                {
+            {
                 _context = context;
-                }
             }
-        
+        }
+
         /**
          * Evaluates the specified object.
          */
         public function eval( o:* ):*
-            {
+        {
             return parse( o );
-            }
+        }
                 
         /**
          * @private
          */
         private namespace mathparser;
-        
+
         /**
          * @private
          */
         private var _context:Object = {};
-        
+
         /**
          * The max hexadecimal value.
          */
         mathparser const maxHexValue:Number = 0xFFFFFF;
-        
+
         /**
          * The expression value.
          */
         mathparser var expression:String;
-        
+
         /**
          * The current position.
          */
         mathparser var currentPos:uint;
-        
+
         /**
          * The Array representation of the tokens of this evaluator.
          */
         mathparser var tokens:Array;
-        
+
         /**
          * Adds the specified value to the last token.
          */
         mathparser function addToLastToken( value:String ):void
-            {
-            tokens[ tokens.length-1 ] += value;
-            }          
-        
+        {
+            tokens[ tokens.length - 1 ] += value;
+        }          
+
         /**
          * Adds the specified value to the next token.
          */
         mathparser function addToNextToken( value:String ):void
-            {
+        {
             tokens.push( value );
-            }
-                
+        }
+
         /**
          * Indicates if the passed-in value is a alpha character.
          */
         mathparser function isAlpha( c:String ):Boolean
-            {
+        {
             return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z"));
-            }        
-        
+        }        
+
         /**
          * Indicates if the passed-in string value is a digit.
          */
         mathparser function isDigit( c:String ):Boolean
-            {
+        {
             return ("0" <= c) && (c <= "9");
-            }
+        }
 
         /**
          * Indicates if the passed-in string value is a hexadecimal digit.
          */
         mathparser function isHexDigit( c:String ):Boolean
-            {
+        {
             return isDigit( c ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f"));
-            }
-        
+        }
+
         /**
          * Indicates if the passed-in string value is a octal digit.
          */
         mathparser function isOctalDigit( c:String ):Boolean
-            {
+        {
             return ("0" <= c) && (c <= "7");
-            }
-       
+        }
+
         /**
          * Indicates if the passed-in string value is a operator digit.
          */
         mathparser function isOperator( c:String ):Boolean
-            {
+        {
             switch( c )
-                {
-                case "*": case "/": case "%":
-                case "+": case "-":
-                case "«": case "»": case "›":
-                case "&": case "^": case "|":
-                return true;
+            {
+                case "*": 
+                case "/": 
+                case "%":
+                case "+": 
+                case "-":
+                case "«": 
+                case "»": 
+                case "›":
+                case "&": 
+                case "^": 
+                case "|":
+                    return true;
                 
                 default:
-                return false;
-                }
+                    return false;
             }
-        
+        }
+
         /**
          * Indicates if has more char.
          */
         mathparser function hasMoreChar():Boolean
-            {
+        {
             return currentPos < expression.length;
-            }
-        
+        }
+
         /**
          * Returns the char with the specified position.
          * @return the char with the specified position.
          */
-        mathparser function getChar( pos:int = -1 ):String
-            {
+        mathparser function getChar( pos:int = - 1 ):String
+        {
             if( pos < 0 )
-                {
+            {
                 pos = currentPos;
-                }
+            }
             
             return expression.charAt( pos );
-            }
-        
+        }
+
         /**
          * Returns the next char.
          * @return the next char.
          */
         mathparser function getNextChar():String
-            {
+        {
             currentPos++;
-            return getChar();
-            }
+            return getChar( );
+        }
 
         /**
          * Returns the last token string.
          * @return the last token string.
          */
         mathparser function getLastToken():String
-            {
-            return tokens[ tokens.length-1 ];
-            }
-        
+        {
+            return tokens[ tokens.length - 1 ];
+        }
+
         /**
          * Returns the value of the specified numeric expression.
          * @return the value of the specified numeric expression.
          */
         mathparser function getValue( num:String ):Number
-            {
+        {
             var ch0:String;
             var ch1:String;
             var isBitNot:Boolean = false;
-            var isNeg:String     = "";
+            var isNeg:String = "";
             
-            if( num.charAt(0) == "~" )
-                {
-                num      = num.substr(1);
+            if( num.charAt( 0 ) == "~" )
+            {
+                num = num.substr( 1 );
                 isBitNot = true;
-                }
+            }
             
-            if( num.charAt(0) == "-" )
-                {
-                num   = num.substr(1);
+            if( num.charAt( 0 ) == "-" )
+            {
+                num = num.substr( 1 );
                 isNeg = "-";
-                }
+            }
             
-            ch0 = num.charAt(0);
-            ch1 = num.charAt(1);
+            ch0 = num.charAt( 0 );
+            ch1 = num.charAt( 1 );
             
             if( (ch0 == "0") && num.length > 1 )
+            {
+                if( isOctalDigit( ch1 ) && (num.indexOf( "." ) == - 1) && (num.indexOf( "e" ) == - 1) )
                 {
-                if( isOctalDigit( ch1 ) && (num.indexOf(".") == -1) && (num.indexOf("e") == -1) )
-                    {
                     if( isBitNot )
-                        {
-                        return ~parseInt( isNeg + num );
-                        }
+                    {
+                        return ~ parseInt( isNeg + num );
+                    }
                     else
-                        {
+                    {
                         return parseInt( isNeg + num );
-                        }
                     }
                 }
+            }
             
             if( isBitNot )
-                {
-                return ~Number( isNeg + num );
-                }
-            else
-                {
-                return Number( isNeg + num );
-                }
-            
+            {
+                return ~ Number( isNeg + num );
             }
-        
+            else
+            {
+                return Number( isNeg + num );
+            }
+        }
+
         /**
          * Returns The string function value representation.
          * @param name The name of the function.
@@ -351,244 +357,254 @@ package system.evaluators
          * @return The result string of the evaluated function.
          */
         mathparser function getFunctionValue( name:String, expressions:Array ):String
-            {
+        {
             var args:Array = [];
             var me:MathEvaluator = new MathEvaluator( _context );
             
-            for( var i:uint = 0; i<expressions.length; i++ )
-                {
+            for( var i:uint = 0; i < expressions.length ; i++ )
+            {
                 if( expressions[i] != "" )
-                    {
+                {
                     args.push( me.eval( expressions[i] ) );
-                    }
                 }
+            }
             
             switch( name )
-                {
+            {
                 case "abs":
-                return String( Math.abs( args[0] ) );
-                break;
+                    return String( Math.abs( args[0] ) );
+                    break;
                 
                 case "acos":
-                return String( Math.acos( args[0] ) );
-                break;
+                    return String( Math.acos( args[0] ) );
+                    break;
                 
                 case "asin":
-                return String( Math.asin( args[0] ) );
-                break;
+                    return String( Math.asin( args[0] ) );
+                    break;
                 
                 case "atan":
-                return String( Math.atan( args[0] ) );
-                break;
+                    return String( Math.atan( args[0] ) );
+                    break;
                 
-                case "atan2": //2
-                return String( Math.atan2( args[0], args[1] ) );
-                break;
+                case "atan2": 
+                    //2
+                    return String( Math.atan2( args[0], args[1] ) );
+                    break;
                 
                 case "ceil":
-                return String( Math.ceil( args[0] ) );
-                break;
+                    return String( Math.ceil( args[0] ) );
+                    break;
                 
                 case "cos":
-                return String( Math.cos( args[0] ) );
-                break;
+                    return String( Math.cos( args[0] ) );
+                    break;
                 
                 case "exp":
-                return String( Math.exp( args[0] ) );
-                break;
+                    return String( Math.exp( args[0] ) );
+                    break;
                 
                 case "floor":
-                return String( Math.floor( args[0] ) );
-                break;
+                    return String( Math.floor( args[0] ) );
+                    break;
                 
                 case "log":
-                return String( Math.log( args[0] ) );
-                break;
+                    return String( Math.log( args[0] ) );
+                    break;
                 
-                case "max": //2
-                return String( Math.max( args[0], args[1] ) );
-                break;
+                case "max": 
+                    //2
+                    return String( Math.max( args[0], args[1] ) );
+                    break;
                 
-                case "min": //2
-                return String( Math.min( args[0], args[1] ) );
-                break;
+                case "min": 
+                    //2
+                    return String( Math.min( args[0], args[1] ) );
+                    break;
                 
-                case "pow": //2
-                return String( Math.pow( args[0], args[1] ) );
-                break;
+                case "pow": 
+                    //2
+                    return String( Math.pow( args[0], args[1] ) );
+                    break;
                 
-                case "random": //0
-                return String( Math.random() );
-                break;
+                case "random": 
+                    //0
+                    return String( Math.random( ) );
+                    break;
                 
                 case "round":
-                return String( Math.round( args[0] ) );
-                break;
+                    return String( Math.round( args[0] ) );
+                    break;
                 
                 case "sin":
-                return String( Math.sin( args[0] ) );
-                break;
+                    return String( Math.sin( args[0] ) );
+                    break;
                 
                 case "sqrt":
-                return String( Math.sqrt( args[0] ) );
-                break;
+                    return String( Math.sqrt( args[0] ) );
+                    break;
                 
                 case "tan":
-                return String( Math.tan( args[0] ) );
-                break;
+                    return String( Math.tan( args[0] ) );
+                    break;
                 
                 default:
-                if( _context[ name ] )
+                    if( _context[ name ] )
                     {
-                    return _context[ name ]( args[0] );
+                        return _context[ name ]( args[0] );
                     }
-                }
+            }
             
             return "";
-            }
-        
+        }
+
         /**
          * Returns the variable value with the internal context of the evaluator.
          * @return the variable value with the internal context of the evaluator.
          */
         mathparser function getVariableValue( name:String ):String
-            {
+        {
             if( _context[ name ] )
-                {
+            {
                 return _context[ name ];
-                }
+            }
             
             return "";
-            }
-        
+        }
+
         /**
          * Filters and returns special char passed-in argument.
          * @return special char passed-in argument.
          */
         mathparser function filterSpecialChars( expression:String ):String
-            {
+        {
             /* note:
-               for case 1E5, SIN(4), 0Xff, etc.
-            */
-            expression = expression.toLowerCase();
+            for case 1E5, SIN(4), 0Xff, etc.
+             */
+            expression = expression.toLowerCase( );
             
             /* note:
-               optimize multi char to single char
-            */
+            optimize multi char to single char
+             */
             expression = expression.split( "<<" ).join( "«" );
             expression = expression.split( ">>>" ).join( "›" );
             expression = expression.split( ">>" ).join( "»" );
             
             /* note:
-               for case +5 - +5 -> +5 - 5
-            */
+            for case +5 - +5 -> +5 - 5
+             */
             expression = expression.split( "- +" ).join( "- " );
             
             /* note:
-               for case +-5 * -+10 -> -5 * -10 
-            */
+            for case +-5 * -+10 -> -5 * -10 
+             */
             expression = expression.split( "+-" ).join( "-" );
             expression = expression.split( "-+" ).join( "-" );
             
             return expression;
-            }
-        
+        }
+
         /**
          * Returns the array representation of all elements in a parenthesis block.
          * @return the array representation of all elements in a parenthesis block.
          */
         mathparser function getParenthesisBlock():Array
-            {
+        {
             var startNode:uint = 0;
-            var endNode:uint   = 0;
+            var endNode:uint = 0;
             
-            var expressions:Array = ["",""];
-            var num:uint  = 0;
+            var expressions:Array = [ "","" ];
+            var num:uint = 0;
             var ch:String = "";
             
-            for( ;; )
-                {
-                ch = getNextChar();
+            for( ; ; )
+            {
+                ch = getNextChar( );
                 
                 switch( ch )
-                    {
+                {
                     case "(":
-                    startNode++;
-                    expressions[num] += ch;
-                    break;
+                        startNode++;
+                        expressions[num] += ch;
+                        break;
                     
                     case ")":
-                    endNode++;
-                    expressions[num] += ch;
-                    break;
+                        endNode++;
+                        expressions[num] += ch;
+                        break;
                     
                     case ",":
-                    num++;
-                    break;
+                        num++;
+                        break;
                     
                     default:
-                    expressions[num] += ch;
-                    }
+                        expressions[num] += ch;
+                }
                 
                 if( startNode == endNode )
-                    {
+                {
                     break;
-                    }
-                
                 }
+            }
             
             currentPos++;
-            expressions[0] = expressions[0].substr( 1 ); //remove the first (
-            expressions[num] = expressions[num].substr( 0, expressions[num].length-1 ); //remove the last ) 
+            expressions[0] = expressions[0].substr( 1 ); 
+            //remove the first (
+            expressions[num] = expressions[num].substr( 0, expressions[num].length - 1 ); 
+            //remove the last ) 
             return expressions;
-            }
-        
+        }
+
         /**
          * Returns the operator priority value.
          * @return the operator priority value.
          */
         mathparser function getOperatorPriority( op:String ):uint
-            {
+        {
             /* note:
-               function call and expression grouping priorities
-               and unary priorities
-               are dealt inside toPostfixNotation().
-            */
+            function call and expression grouping priorities
+            and unary priorities
+            are dealt inside toPostfixNotation().
+             */
             switch( op )
-                {
+            {
                 case "*":
                 case "/":
                 case "%":
-                return 12;
+                    return 12;
                 
                 case "+":
                 case "-":
-                return 11;
+                    return 11;
                 
                 case "«": // <<
                 case "»": // >>
-                case "›": // >>>
-                return 10;
+                case "›": 
+                    // >>>
+                    return 10;
                 
-                case "&": //bitwise AND
-                return 7;
+                case "&": 
+                    //bitwise AND
+                    return 7;
                 
-                case "^": //bitwise XOR
-                return 6;
+                case "^": 
+                    //bitwise XOR
+                    return 6;
                 
-                case "|": //bitwise OR
-                return 5;
+                case "|": 
+                    //bitwise OR
+                    return 5;
                 
                 default:
-                return 0;
-                }
+                    return 0;
             }
-        
+        }
+
         /**
          * The toPostfixNotation method.
          */
         mathparser function toPostfixNotation():void
-            {
+        {
             var ch:String;
             var ch2:String;
             var bitNot:String;
@@ -601,179 +617,194 @@ package system.evaluators
             
             var stack:Array = [];
             
-            while( hasMoreChar() )
-                {
-                ch = getChar();
+            while( hasMoreChar( ) )
+            {
+                ch = getChar( );
                 
                 bitNot = "";
-                neg    = "";
+                neg = "";
                 
                 switch( ch )
-                    {
+                {
                     case " ":
                     case "\t":
                     case "\r":
                     case "\n":
-                    currentPos++;
-                    break;
+                        currentPos++;
+                        break;
                     
                     case "(":
-                    stack.push( ch );
-                    currentPos++;
-                    break;
+                        stack.push( ch );
+                        currentPos++;
+                        break;
                     
                     case ")":
-                    opr = stack.pop();
+                        opr = stack.pop( );
                     
-                    while( opr != "(" )
+                        while( opr != "(" )
                         {
-                        addToNextToken( opr );
-                        opr = stack.pop();
+                            addToNextToken( opr );
+                            opr = stack.pop( );
                         }
                     
-                    currentPos++;
-                    break;
+                        currentPos++;
+                        break;
                     
-                    case "*": case "/": case "%":
-                    case "+": case "-":
-                    case "«": case "»": case "›": // << >> >>>
-                    case "&": case "^": case "|":
-                    if( stack.length != 0 )
+                    case "*": 
+                    case "/": 
+                    case "%":
+                    case "+": 
+                    case "-":
+                    case "«": 
+                    case "»": 
+                    case "›": // << >> >>>
+                    case "&": 
+                    case "^": 
+                    case "|":
+                        if( stack.length != 0 )
                         {
-                        opr = stack.pop();
+                            opr = stack.pop( );
                         
-                        while( getOperatorPriority( opr ) >= getOperatorPriority( ch ) )
+                            while( getOperatorPriority( opr ) >= getOperatorPriority( ch ) )
                             {
-                            addToNextToken( opr );
-                            opr = stack.pop();
+                                addToNextToken( opr );
+                                opr = stack.pop( );
                             }
                         
-                        stack.push( opr );
-                        stack.push( ch );
-                        addToNextToken( "" );
+                            stack.push( opr );
+                            stack.push( ch );
+                            addToNextToken( "" );
                         }
                     else
                         {
-                        stack.push( ch );
-                        addToNextToken( "" );
+                            stack.push( ch );
+                            addToNextToken( "" );
                         }
                     
-                    currentPos++;
-                    break;
+                        currentPos++;
+                        break;
                     
-                    case "0": case "1": case "2": case "3": case "4":
-                    case "5": case "6": case "7": case "8": case "9":
+                    case "0": 
+                    case "1": 
+                    case "2": 
+                    case "3": 
+                    case "4":
+                    case "5": 
+                    case "6": 
+                    case "7": 
+                    case "8": 
+                    case "9":
                     case "~":
-                    if( tokens.length == 0 )
+                        if( tokens.length == 0 )
                         {
-                        addToNextToken( "" );
+                            addToNextToken( "" );
                         }          
                     
-                    /* note:
-                       unary priorities
-                    */
-                    if( ch == "~" )
+                        /* note:
+                        unary priorities
+                         */
+                        if( ch == "~" )
                         {
-                        bitNot = "~";
-                        ch = getNextChar();
+                            bitNot = "~";
+                            ch = getNextChar( );
                         }
                     
-                    if( ch == "+" )
+                        if( ch == "+" )
                         {
-                        ch = getNextChar();
+                            ch = getNextChar( );
                         }
                     
-                    if( ch == "-" )
+                        if( ch == "-" )
                         {
-                        neg = "-";
-                        ch  = getNextChar();
+                            neg = "-";
+                            ch = getNextChar( );
                         }
                     
-                    if( ch == "0" )
+                        if( ch == "0" )
                         {
-                        while( ch == "0" )
+                            while( ch == "0" )
                             {
-                            ch = getNextChar();
+                                ch = getNextChar( );
                             }
                         
-                        currentPos--;
-                        ch = getChar();
+                            currentPos--;
+                            ch = getChar( );
                         }
                     
-                    ch2 = getChar( currentPos + 1 );
+                        ch2 = getChar( currentPos + 1 );
                     
-                    if( (ch == "0") && (ch2 == "x") )
+                        if( (ch == "0") && (ch2 == "x") )
                         {
-                        hex         = "";
-                        currentPos += 2;
-                        ch          = getChar();
+                            hex = "";
+                            currentPos += 2;
+                            ch = getChar( );
                         
-                        while( isHexDigit( ch ) )
+                            while( isHexDigit( ch ) )
                             {
-                            hex += ch;
-                            ch   = getNextChar();
+                                hex += ch;
+                                ch = getNextChar( );
                             }
                         
-                        if( hex.length > maxHexValue )
+                            if( hex.length > maxHexValue )
                             {
-                            hex = hex.substr( 0, maxHexValue );
+                                hex = hex.substr( 0, maxHexValue );
                             }
                         
-                        if( hex == "" )
+                            if( hex == "" )
                             {
-                            hex = "0";
+                                hex = "0";
                             }
                         
-                        addToLastToken( bitNot + neg + "0x" + hex );
+                            addToLastToken( bitNot + neg + "0x" + hex );
                         }
                     else
                         {
-                        dot   = false;
-                        exp   = false;
-                        digit = "";
+                            dot = false;
+                            exp = false;
+                            digit = "";
                         
-                        while( isDigit( ch ) || (ch == ".") || (ch == "e") )
+                            while( isDigit( ch ) || (ch == ".") || (ch == "e") )
                             {
-                            if( ch == "e" )
+                                if( ch == "e" )
                                 {
-                                if( exp )
+                                    if( exp )
                                     {
-                                    ch = getNextChar();
-                                    continue;
+                                        ch = getNextChar( );
+                                        continue;
                                     }
                                 
-                                exp    = true;
-                                digit += ch;
-                                ch     = getNextChar();
-                                
-                                if( (ch == "+") || (ch == "-") )
-                                    {
+                                    exp = true;
                                     digit += ch;
-                                    ch     = getNextChar();
-                                    }
+                                    ch = getNextChar( );
                                 
-                                continue;
-                                }
-                            
-                            if( ch == "." )
-                                {
-                                if( dot )
+                                    if( (ch == "+") || (ch == "-") )
                                     {
-                                    ch = getNextChar();
-                                    continue;
+                                        digit += ch;
+                                        ch = getNextChar( );
                                     }
                                 
-                                dot = true;
+                                    continue;
                                 }
                             
-                            digit += ch;
-                            ch     = getNextChar();
+                                if( ch == "." )
+                                {
+                                    if( dot )
+                                    {
+                                        ch = getNextChar( );
+                                        continue;
+                                    }
+                                
+                                    dot = true;
+                                }
+                            
+                                digit += ch;
+                                ch = getNextChar( );
                             }
                         
-                        addToLastToken( bitNot + neg + digit );
+                            addToLastToken( bitNot + neg + digit );
                         }
                     
-                    break;
+                        break;
                     
                     case "a": //abs, acos, asin, atan, atan2
                     case "b":
@@ -802,182 +833,182 @@ package system.evaluators
                     case "y":
                     case "z":
                     
-                    var name:String = ch;
+                        var name:String = ch;
                     
-                    while( isAlpha( ch ) )
+                        while( isAlpha( ch ) )
                         {
-                        ch = getNextChar();
-                        if( isAlpha( ch ) || isDigit( ch ) )
+                            ch = getNextChar( );
+                            if( isAlpha( ch ) || isDigit( ch ) )
                             {
-                            name += ch;
+                                name += ch;
                             }
                         else
                             {
-                            currentPos--;
+                                currentPos--;
                             }
                         }
                     
-                    if( tokens.length == 0 )
+                        if( tokens.length == 0 )
                         {
-                        addToNextToken( "" );
+                            addToNextToken( "" );
                         }
                     
-                    var peek:String = getChar( currentPos + 1 );
+                        var peek:String = getChar( currentPos + 1 );
                     
-                    if( Strings.endsWith( peek, "(" ) )
+                        if( Strings.endsWith( peek, "(" ) )
                         {
-                        addToLastToken( getFunctionValue( name , getParenthesisBlock() ) );
+                            addToLastToken( getFunctionValue( name, getParenthesisBlock( ) ) );
                         }
                     else
                         {
-                        addToLastToken( getVariableValue( name ) );
-                        currentPos++;
+                            addToLastToken( getVariableValue( name ) );
+                            currentPos++;
                         }
                     
-                    break;
+                        break;
                     
                     
                     default:
-                    /* note: by default we ignore anyother chars */
-                    currentPos++;
-                    }
-                
+                        /* note: by default we ignore anyother chars */
+                        currentPos++;
                 }
+            }
             
             while( stack.length != 0 )
-                {
-                opr = stack.pop();
+            {
+                opr = stack.pop( );
                 
                 if( opr != "" )
-                    {
+                {
                     addToNextToken( opr );
-                    }
                 }
+            }
             
-            if( (getLastToken() == "") || (getLastToken() == null) )
-                {
-                tokens.pop();
-                }
+            if( (getLastToken( ) == "") || (getLastToken( ) == null) )
+            {
+                tokens.pop( );
+            }
             
-            if( tokens.length%2 == 0 )
-                {
+            if( tokens.length % 2 == 0 )
+            {
                 tokens.unshift( "0" );
-                }
+            }
             
             //trace( "RPN: ["+this.tokens+"]" );
-            }
-        
+        }
+
         /**
          * Launchs the evaluation process.
          */
         mathparser function evaluate():Number
-            {
+        {
             var op:String;
             var value:*;
             var valueA:*;
             var valueB:*;
             
-            for( var i:uint = 0; i < tokens.length; i++ )
-                {
-                op    = tokens[i];
+            for( var i:uint = 0; i < tokens.length ; i++ )
+            {
+                op = tokens[i];
                 value = null;
                 
                 if( isOperator( op ) )
-                    {
-                    valueA = getValue( tokens[ i-2 ] );
-                    valueB = getValue( tokens[ i-1 ] );
+                {
+                    valueA = getValue( tokens[ i - 2 ] );
+                    valueB = getValue( tokens[ i - 1 ] );
                     
                     switch( op )
-                        {
+                    {
                         case "+":
-                        value = valueA + valueB;
-                        break;
+                            value = valueA + valueB;
+                            break;
                         
                         case "-":
-                        value = valueA - valueB;
-                        break;
+                            value = valueA - valueB;
+                            break;
                         
                         case "*":
-                        value = valueA * valueB;
-                        break;
+                            value = valueA * valueB;
+                            break;
                         
                         case "/":
-                        value = valueA / valueB;
-                        break;
+                            value = valueA / valueB;
+                            break;
                         
                         case "%":
-                        value = valueA % valueB;
-                        break;
+                            value = valueA % valueB;
+                            break;
                         
                         case "^":
-                        value = valueA ^ valueB;
-                        break;
+                            value = valueA ^ valueB;
+                            break;
                         
                         case "&":
-                        value = valueA & valueB;
-                        break;
+                            value = valueA & valueB;
+                            break;
                         
                         case "|":
-                        value = valueA | valueB;
-                        break;
+                            value = valueA | valueB;
+                            break;
                         
-                        case "«": // <<
-                        value = valueA << valueB;
-                        break;
+                        case "«": 
+                            // <<
+                            value = valueA << valueB;
+                            break;
                         
-                        case "»": // >>
-                        value = valueA >> valueB;
-                        break;
+                        case "»": 
+                            // >>
+                            value = valueA >> valueB;
+                            break;
                         
-                        case "›": // >>>
-                        value = valueA >>> valueB;
-                        break;
+                        case "›": 
+                            // >>>
+                            value = valueA >>> valueB;
+                            break;
                         
                         default:
-                        /* NOTE: this CANNOT happen */
-                        trace( "## ERROR : unsupported operator \"" + op + "\" ##" );
-                        }
+                            /* NOTE: this CANNOT happen */
+                            trace( "## ERROR : unsupported operator \"" + op + "\" ##" );
                     }
+                }
                 
                 if( value != null )
-                    {
-                    tokens.splice( i-2, 3, value );
-                    return evaluate();
-                    }
-                }
-            
-            if( tokens.length > 1 )
                 {
-                return evaluate();
-                }
-            else
-                {
-                return getValue( tokens[0] );
+                    tokens.splice( i - 2, 3, value );
+                    return evaluate( );
                 }
             }
-        
+            
+            if( tokens.length > 1 )
+            {
+                return evaluate( );
+            }
+            else
+            {
+                return getValue( tokens[0] );
+            }
+        }
+
         /**
          * Parses the specified expression.
          */
         mathparser function parse( expression:String ):Number
-            {
-            reset();
+        {
+            reset( );
             this.expression = filterSpecialChars( expression );
-            toPostfixNotation();
-            return evaluate();
-            }
-        
+            toPostfixNotation( );
+            return evaluate( );
+        }
+
         /**
          * Resets the evaluator.
          */
         mathparser function reset():void
-            {
+        {
             expression = "";
-            currentPos =  0;
-            tokens     = [];
-            }
-        
-        }    
-
-    }
+            currentPos = 0;
+            tokens = [];
+        }
+    }    
+}
 
