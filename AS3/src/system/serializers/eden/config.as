@@ -20,7 +20,8 @@
 */
 
 package system.serializers.eden
-    {
+{
+
     import system.serializers.eden.EdenConfigurator;
     
     /**
@@ -46,6 +47,5 @@ package system.serializers.eden
                                                                    autoAddScopePath: false,
                                                                    arrayIndexAsBracket: false
                                                                    } );
-    
-    }
+}
 
