@@ -23,7 +23,9 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Iterator;    
+    import system.console;
+    import system.data.Iterator;
+    import system.eden;    
 
     public class ArrayIteratorTest extends TestCase 
     {
@@ -97,7 +99,8 @@ package system.data.iterators
         public function testRemove():void
         {
         	it.next() ;
-            assertEquals( it.remove() , "item1" , "01 remove() method failed" ) ;
+        	var result:* = it.remove() ; 
+            assertEquals( result , "item1" , "01 remove() method failed" ) ;
             assertEquals( it.next()   , "item2" , "02 remove() method failed" ) ;
             it.reset() ;
             assertEquals( it.next() , "item2" , "03 remove() method failed" ) ;

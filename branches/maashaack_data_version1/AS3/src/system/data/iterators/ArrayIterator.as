@@ -111,7 +111,7 @@ package system.data.iterators
          */
         public function remove():*
         {
-            return _a.splice( _k-- , 1 );
+            return _a.splice( _k-- , 1 )[0] ; // AS3 splice returns an Array
         }
         
         /**
