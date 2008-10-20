@@ -22,7 +22,7 @@
 package system.data.iterators
 {
     import system.data.Iterator;
-    import system.numeric.Mathematics;        
+    import system.numeric.Mathematics;    
 
     /**
      * Converts an <code class="prettyprint">Array</code> to an iterator.
@@ -64,11 +64,19 @@ package system.data.iterators
         /**
          * Creates a new ArrayIterator instance.
          * @param a the array to enumerate with the iterator.
+         * @throws ArgumentError If the the passed-in Array argument is 'null'.
          */
         public function ArrayIterator( a:Array )
         {
-            _a = a ;
-           _k = -1 ;
+        	if ( a == null )
+        	{
+        	   throw new ArgumentError( this + " constructor failed, the passed-in Array argument not must be 'null'.") ;  	
+            }
+        	else
+        	{
+                _a = a  ;    
+                _k = -1 ;
+        	}
         }
         
         /**

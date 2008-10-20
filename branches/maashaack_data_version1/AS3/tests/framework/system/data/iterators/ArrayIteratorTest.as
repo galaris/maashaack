@@ -21,7 +21,9 @@
 
 package system.data.iterators 
 {
-    import buRRRn.ASTUce.framework.TestCase;        
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.Iterator;    
 
     public class ArrayIteratorTest extends TestCase 
     {
@@ -31,10 +33,93 @@ package system.data.iterators
             super( name );
         }
         
-        public function testInterface():void
+        public var ar:Array = ["item1", "item2", "item3"] ;
+        
+        public var it:Iterator ;
+        
+        public function setUp():void
         {
-                        
+            it = new ArrayIterator(ar) ;
+        }
+
+        public function tearDown():void
+        {
+            it = undefined ;
         }         
+        
+        public function testConstructor():void
+        {
+        	var i:Iterator ;
+            try
+            {
+                i = new ArrayIterator(null) ;
+                fail( this + " test constructor failed if the passed-in Array is a null object.") ;  	
+            }
+            catch( e:Error )
+            {
+            	assertEquals( e.message , "[object ArrayIterator] constructor failed, the passed-in Array argument not must be 'null'." , this + " test constructor failed.");
+            }
+            assertNotNull(it, this + " the ArrayIterator not must be null") ; 
+        }         
+
+        public function testHasNext():void
+        {
+            assertTrue(it.hasNext(), "01 hasNext method failed") ;
+            it.next() ; // item1
+            assertTrue(it.hasNext(), "02 hasNext method failed") ;
+            it.next() ; // item2
+            assertTrue(it.hasNext(), "03 hasNext method failed") ;
+            it.next() ; // item3
+            assertFalse(it.hasNext(), "04 hasNext method failed") ;
+            it.reset() ;
+        }
+    
+        public function testKey():void
+        {
+            assertEquals(it.key(), -1, "01 key() method failed") ;
+            it.next() ; // item1
+            assertEquals(it.key(), 0, "02 key() method failed") ;
+            it.next() ; // item2
+            assertEquals(it.key(), 1, "03 key() method failed") ;
+            it.next() ; // item3
+            assertEquals(it.key(), 2, "04 key() method failed") ;
+            it.reset() ;
+        }    
+    
+        public function testNext():void
+        {
+            assertEquals( it.next() , "item1" , "01 next() method failed" ) ;
+            assertEquals( it.next() , "item2" , "02 next() method failed" ) ;
+            assertEquals( it.next() , "item3" , "03 next() method failed" ) ;
+            it.reset() ;
+        }
+        
+        public function testRemove():void
+        {
+        	it.next() ;
+            assertEquals( it.remove() , "item1" , "01 remove() method failed" ) ;
+            assertEquals( it.next()   , "item2" , "02 remove() method failed" ) ;
+            it.reset() ;
+            assertEquals( it.next() , "item2" , "03 remove() method failed" ) ;
+            it.reset() ;
+        }           
+    
+        public function testReset():void
+        {
+            it.next() ;
+            it.next() ;
+            it.reset() ;
+            assertEquals( it.next() , "item1" , "reset() method failed" ) ;
+            it.reset() ;
+        }           
+        
+        public function testSeek():void
+        {
+            it.seek(1) ;
+            it.next() ;
+            assertEquals( it.next() , "item3" , "seek(1) method failed" ) ;
+            it.reset() ;
+        } 
         
     }
 }
