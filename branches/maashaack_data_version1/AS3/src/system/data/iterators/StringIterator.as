@@ -55,8 +55,12 @@ package system.data.iterators
          * Creates a new StringIterator instance.
          * @param s the String object to enumerate.
          */
-        public function StringIterator(s:String)
+        public function StringIterator( s:String )
         {
+            if ( s == null )
+            {
+               throw new ArgumentError( this + " constructor failed, the passed-in String argument not must be 'null'.") ;   
+            }        	
             _s    = s  ;
             _k    = -1 ;
             _size = s.length ;
