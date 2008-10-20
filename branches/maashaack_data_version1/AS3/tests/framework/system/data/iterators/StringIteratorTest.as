@@ -23,7 +23,7 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.errors.IllegalOperationError;    
+    import flash.errors.IllegalOperationError; 
 
     public class StringIteratorTest extends TestCase 
     {

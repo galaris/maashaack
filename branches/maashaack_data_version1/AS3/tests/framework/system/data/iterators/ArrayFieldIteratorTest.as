@@ -23,7 +23,7 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Iterator;            
+    import system.data.Iterator;    
 
     public class ArrayFieldIteratorTest extends TestCase 
     {
@@ -33,14 +33,12 @@ package system.data.iterators
             super( name );
         }
         
-        public var item1:Object = { label : "item1", date : new Date(2005, 10, 12) } ;
-        public var item2:Object = { label : "item2", date : new Date(2004, 2, 22)  } ;
-        public var item3:Object = { label : "item3", date : new Date(2005, 4, 3) } ;
+        public var item1:Object = { label : "item1" , date : new Date(2005 , 10 , 12 ) } ;
+        public var item2:Object = { label : "item2" , date : new Date(2004 , 2  , 22 ) } ;
+        public var item3:Object = { label : "item3" , date : new Date(2005 , 4  , 3  ) } ;
         
         public var ar:Array = [ item1 , item2  , item3 ] ;
-        
         public var it1:ArrayFieldIterator ;
-        
         public var it2:ArrayFieldIterator ;
         
         public function setUp():void
@@ -67,12 +65,8 @@ package system.data.iterators
             {
                 assertEquals( e.message , "[object ArrayFieldIterator] constructor failed, the passed-in Array argument not must be 'null'." , this + " test constructor failed.");
             }
-            
             assertNotNull( it1 , "01 - The ArrayFieldIterator not must be null." ) ; 
-            
             assertNotNull( it2 , "02 - The ArrayFieldIterator not must be null." ) ;
-            
-            
         }         
 
         public function testHasNext():void
@@ -94,7 +88,6 @@ package system.data.iterators
             it1.next() ; 
             assertFalse(it1.hasNext(), "02-04 hasNext method failed") ;
             it1.reset() ;
-            
         }
     
         public function testKey():void
