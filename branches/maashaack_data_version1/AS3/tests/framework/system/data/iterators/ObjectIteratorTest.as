@@ -23,7 +23,6 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.console;
     import system.data.Iterator;    
 
     public class ObjectIteratorTest extends TestCase 
