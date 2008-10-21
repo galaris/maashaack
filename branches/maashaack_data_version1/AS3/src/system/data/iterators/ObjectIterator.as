@@ -78,8 +78,12 @@ package system.data.iterators
          * Creates a new ObjectIterator instance.
          * @param o The object to iterate.
          */
-        public function ObjectIterator(o:Object)
+        public function ObjectIterator( o:Object )
         {
+            if ( o == null )
+            {
+               throw new ArgumentError( this + " constructor failed, the passed-in Object argument not must be 'null'.") ;   
+            }      	
             _o = o ;
             _a = new Array() ;
             _k = -1 ;

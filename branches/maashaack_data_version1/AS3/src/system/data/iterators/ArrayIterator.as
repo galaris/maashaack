@@ -72,11 +72,8 @@ package system.data.iterators
         	{
         	   throw new ArgumentError( this + " constructor failed, the passed-in Array argument not must be 'null'.") ;  	
             }
-        	else
-        	{
-                _a = a  ;    
-                _k = -1 ;
-        	}
+            _a = a  ;    
+            _k = -1 ;
         }
         
         /**
