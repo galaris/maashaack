@@ -4,12 +4,7 @@
 
 [http://www.ohloh.net/accounts/20780?ref=sample http://www.ohloh.net/accounts/20780/widgets/account_detailed.gif]
 
-
-
-<wiki:gadget url="http://www.ohloh.net/accounts/zwetan/widgets/account_detailed.xml" width="220" height="60"  border="0" />
-
-<wiki:gadget url="http://www.ohloh.net/accounts/ekameleon/widgets/account_detailed.xml" height="55"  border="0" />
-
+[http://www.ohloh.net/accounts/20784?ref=sample http://www.ohloh.net/accounts/20784/widgets/account_detailed.gif]
 
 
 = Become a contributor =
