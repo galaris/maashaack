@@ -2,7 +2,7 @@
 
 = Contributors =
 
-<wiki:gadget url="http://www.ohloh.net/accounts/zwetan/widgets/account_detailed.xml" height="55"  border="0" scrolling="false" />
+<wiki:gadget url="http://www.ohloh.net/accounts/zwetan/widgets/account_detailed.xml" width="200" height="55"  border="0" />
 
 <wiki:gadget url="http://www.ohloh.net/accounts/ekameleon/widgets/account_detailed.xml" height="55"  border="0" />
 
