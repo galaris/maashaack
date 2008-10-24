@@ -1,0 +1,10 @@
+#summary list of people contributing to the project.
+
+= Contributors =
+
+
+
+
+= Become a contributor =
+
+<wiki:gadget url="http://maashaack.googlecode.com/svn/gadgets/contributor_form.xml" width="480" height="1075" border="0" />
