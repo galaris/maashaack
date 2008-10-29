@@ -21,7 +21,7 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                            
+    import buRRRn.ASTUce.framework.TestCase;                                                
 
     public class IterableTest extends TestCase 
     {
@@ -38,6 +38,7 @@ package system.data
             
             assertTrue( i is Iterable ) ;
             
+            assertTrue( i.iterator() is Iterator , "test Iterable interface failed with the iterator method." ) ;
             
         }         
         

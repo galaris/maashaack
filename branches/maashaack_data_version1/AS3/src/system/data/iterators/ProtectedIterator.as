@@ -33,7 +33,7 @@ package system.data.iterators
      * import system.data.iterators.ProtectedIterator ;
      * 
      * var it:ProtectedIterator = new ProtectedIterator( new StringIterator( "hello world" ) ) ;
-     * while (it.hasNext())
+     * while ( it.hasNext() )
      * {
      *     trace( it.next() ) ;
      * }
@@ -45,9 +45,14 @@ package system.data.iterators
         /**
          * Creates a new ProtectedIterator instance.
          * @param iterator the iterator to protected.
+         * @throws ArgumentError If the iterator the passed-in parameter is null or undefined.
          */
-        public function ProtectedIterator(i:Iterator)
+        public function ProtectedIterator( i:Iterator )
         {
+        	if ( i == null )
+        	{
+        	   throw new ArgumentError( "ProtectedIterator constructor don't support a null iterator in argument.") ;	
+            }
             _i = i ;
         }
         
@@ -80,7 +85,7 @@ package system.data.iterators
 
         /**
          * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the remove method is unsupported in a ProtectedIterator instance.
+         * @throws IllegalOperationError the remove method is unsupported in a ProtectedIterator instance.
          */
         public function remove():*
         {
@@ -89,7 +94,7 @@ package system.data.iterators
  
         /**
          * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the reset method is unsupported in a ProtectedIterator instance.
+         * @throws IllegalOperationError the reset method is unsupported in a ProtectedIterator instance.
          */
         public function reset():void
         {
@@ -98,7 +103,7 @@ package system.data.iterators
 
         /**
          * Unsupported method in all ProtectedIterator.
-         * @throws UnsupportedOperation the seek method is unsupported in a ProtectedIterator instance.
+         * @throws IllegalOperationError the seek method is unsupported in a ProtectedIterator instance.
          */
         public function seek(position:*):void
         {
@@ -106,7 +111,7 @@ package system.data.iterators
         }
         
         /**
-         * Internal iterator.
+         * @private
          */
         private var _i:Iterator ;
         

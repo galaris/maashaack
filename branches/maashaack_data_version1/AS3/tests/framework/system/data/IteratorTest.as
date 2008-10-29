@@ -40,6 +40,31 @@ package system.data
             
             assertTrue( i is Iterator ) ;
             
+            assertTrue( i.hasNext() , "test Iterator interface failed with the hasNext method." ) ;
+            assertEquals( i.key() , "key" , "test Iterator interface failed with the key method." ) ;
+            assertEquals( i.next() , "next" , "test Iterator interface failed with the next method." ) ;
+            assertEquals( i.remove() , "remove" , "test Iterator interface failed with the remove method." ) ;
+            
+            try
+            {
+            	i.reset() ;
+            	fail( "01 - test Iterator interface failed with the reset method." ) ;           	
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message , "reset" , "01 - test Iterator interface failed with the reset method." ) ;
+            }
+
+            try
+            {
+                i.seek(10) ;
+                fail( "02 - test Iterator interface failed with the seek method." ) ;               
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message , "seek:10" , "02 - test Iterator interface failed with the seek method." ) ;
+            }
+
             
         }         
         

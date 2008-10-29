@@ -65,13 +65,9 @@ package
             
             buRRRn.ASTUce.config.showConstructorList = false;
             
-            
-            
-            Runner.main( 
-            
-                // system.AllTests.suite() , 
-                system.data.AllTests.suite() 
-            
+            Runner.main
+            ( 
+                system.data.AllTests.suite() // , system.AllTests.suite() 
             );
             
         }

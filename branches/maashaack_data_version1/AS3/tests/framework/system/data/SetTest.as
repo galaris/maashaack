@@ -21,7 +21,7 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;        
+    import buRRRn.ASTUce.framework.TestCase;                                    
 
     public class SetTest extends TestCase 
     {
@@ -33,8 +33,109 @@ package system.data
         
         public function testInterface():void
         {
-                        
+            var s:SetClass = new SetClass();
+            assertTrue( s is Set ) ;      
         }         
         
+    }
+}
+
+import system.data.Iterator;
+import system.data.Set;
+
+class SetClass implements Set
+{
+
+    public function add(o:*):Boolean
+    {
+    	return o == "add" ;
+    }
+    
+    public function clear():void
+    {
+    	throw new Error("clear") ;
+    }
+    
+    public function clone():*
+    {
+    	return null ;
+    }    
+    
+    public function contains(o:*):Boolean
+    {
+    	 return o == "test" ;   	
+    }
+    
+    public function get(key:*):*
+    {
+    	return key ;
+    }
+    
+    public function indexOf(o:*, fromIndex:uint = 0):int
+    {
+    	return -1 ;
+    }
+    
+    public function isEmpty():Boolean
+    {
+    	return true ;
+    }
+    
+    public function iterator():Iterator
+    {
+    	return new IteratorClass() ;
+    }    
+    
+    public function remove(o:*):*
+    {
+    	return "remove" ;
+    }
+    
+    public function size():uint
+    {
+    	return 0 ;
+    }
+    
+    public function toSource(indent:int = 0):String
+    {
+    	return "toSource" ;
+    }
+}
+
+class IteratorClass implements Iterator
+{
+
+    public function IteratorClass()
+    {
+    }
+
+    public function hasNext():Boolean
+    {
+        return true ;
+    }
+    
+    public function key():*
+    {
+        return "key" ;
+    }
+    
+    public function next():*
+    {
+        return "next" ;
+    }
+    
+    public function remove():*
+    {
+        return "remove" ;
+    }
+    
+    public function reset():void
+    {
+        throw new Error("reset") ;
+    }
+    
+    public function seek(position:*):void
+    {
+        throw new Error( "seek:" + position ) ;
     }
 }

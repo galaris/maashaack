@@ -1500,12 +1500,12 @@ package system.serializers.eden
                     {
                         globalRef = true;
                     }
-                else if( _doesExistInLocalScope( baseword ) )
+                    else if( _doesExistInLocalScope( baseword ) )
                     {
                         localRef = true;
                         _singleValue = false;
                     }
-                else if( isValidPath( baseword ) && ! _inAssignement && ! _inConstructor )
+                    else if( isValidPath( baseword ) && ! _inAssignement && ! _inConstructor )
                     {
                         _createPath( baseword );
                         localRef = true;    
