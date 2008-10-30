@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                            
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.MapClass;                                                                                                
 
     public class MapTest extends TestCase 
     {
@@ -33,8 +35,13 @@ package system.data
         
         public function testInterface():void
         {
-            
+            var m:MapClass = new MapClass();
+            assertTrue( m is Map ) ;
         }         
         
     }
 }
+
+
+
+

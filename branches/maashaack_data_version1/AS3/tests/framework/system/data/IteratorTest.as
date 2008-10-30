@@ -23,7 +23,8 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Iterator;                                        
+    import system.data.Iterator;
+    import system.data._facks.IteratorClass;    
 
     public class IteratorTest extends TestCase 
     {
@@ -32,19 +33,46 @@ package system.data
         {
             super( name );
         }
+
+        public var i:IteratorClass ;
+        
+        public function setUp():void
+        {
+            i = new IteratorClass() ;
+        }
+
+        public function tearDown():void
+        {
+            i = undefined ;
+        }            
         
         public function testInterface():void
         {
-            
-            var i:IteratorClass = new IteratorClass();
-            
             assertTrue( i is Iterator ) ;
-            
+        }
+        
+        public function testHasNext():void
+        {
             assertTrue( i.hasNext() , "test Iterator interface failed with the hasNext method." ) ;
+        }
+        
+        public function testKey():void
+        {
             assertEquals( i.key() , "key" , "test Iterator interface failed with the key method." ) ;
+        }
+        
+        public function testNext():void
+        {
             assertEquals( i.next() , "next" , "test Iterator interface failed with the next method." ) ;
+        }
+        
+        public function testRemove():void 
+        {
             assertEquals( i.remove() , "remove" , "test Iterator interface failed with the remove method." ) ;
-            
+        }
+        
+        public function testReset():void
+        {    
             try
             {
             	i.reset() ;
@@ -54,7 +82,10 @@ package system.data
             {
                 assertEquals( e.message , "reset" , "01 - test Iterator interface failed with the reset method." ) ;
             }
-
+        }
+        
+        public function testSeek():void
+        {
             try
             {
                 i.seek(10) ;
@@ -64,49 +95,7 @@ package system.data
             {
                 assertEquals( e.message , "seek:10" , "02 - test Iterator interface failed with the seek method." ) ;
             }
-
-            
         }         
         
-    }
-}
-
-import system.data.Iterator;
-
-class IteratorClass implements Iterator
-{
-
-    public function IteratorClass()
-    {
-    }
-
-    public function hasNext():Boolean
-    {
-    	return true ;
-    }
-    
-    public function key():*
-    {
-    	return "key" ;
-    }
-    
-    public function next():*
-    {
-    	return "next" ;
-    }
-    
-    public function remove():*
-    {
-    	return "remove" ;
-    }
-    
-    public function reset():void
-    {
-    	throw new Error("reset") ;
-    }
-    
-    public function seek(position:*):void
-    {
-    	throw new Error( "seek:" + position ) ;
     }
 }

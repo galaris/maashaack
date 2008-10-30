@@ -19,26 +19,21 @@
   
 */
 
-package system.data 
+package system.data._facks 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data._facks.CollectionClass;    
+    import system.data.ListIterable;
+    import system.data.ListIterator;    
 
-    public class CollectionTest extends TestCase 
+    public class ListIterableClass implements ListIterable
     {
-
-        public function CollectionTest( name:String = "" )
+    
+        public function ListIterableClass()
         {
-            super( name );
         }
-        
-        public function testInterface():void
+                
+        public function listIterator(position:uint = 0):ListIterator
         {
-            var c:CollectionClass = new CollectionClass();
-            assertTrue( c is Collection ) ;
-        }         
-        
+        	return new ListIteratorClass() ;
+        } 
     }
 }
-

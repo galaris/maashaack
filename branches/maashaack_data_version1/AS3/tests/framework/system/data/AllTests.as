@@ -23,10 +23,15 @@ package system.data
 {
     import buRRRn.ASTUce.framework.*;
     
+    import system.data.arrays.*;
+    import system.data.collections.*;
     import system.data.iterators.*;
     import system.data.lists.*;
-    import system.data.maps.*;    
-
+    import system.data.maps.*;
+    import system.data.queues.*;
+    import system.data.sets.*;
+    import system.data.stacks.*;
+    
     public class AllTests
     {
         
@@ -59,7 +64,11 @@ package system.data
                                     
             // arrays
             
+            suite.addTest( system.data.arrays.AllTests.suite() );
+            
             // collections
+                 
+            suite.addTest( system.data.collections.AllTests.suite() );  
                                  
             // iterators
             
@@ -75,9 +84,15 @@ package system.data
 
             // queues
             
+            suite.addTest( system.data.queues.AllTests.suite() );            
+            
             // sets           
             
+            suite.addTest( system.data.sets.AllTests.suite() );
+            
             // stacks
+            
+            suite.addTest( system.data.stacks.AllTests.suite() );
             
             return suite;
         }

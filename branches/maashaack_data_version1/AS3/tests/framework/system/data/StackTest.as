@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.StackClass;    
 
     public class StackTest extends TestCase 
     {
@@ -33,63 +35,13 @@ package system.data
         
         public function testInterface():void
         {
-            var c:StackClass = new StackClass();
-            assertTrue( c is Stack ) ;
+            var s:StackClass = new StackClass();
+            assertTrue( s is Stack ) ;
         }         
     }
 }
 
-import system.data.Iterator;
-import system.data.Stack;
 
-class StackClass implements Stack
-{
 
-    public function clear():void
-    {
-    }
-    
-    public function clone():*
-    {
-        return null ;
-    }
-      
-    public function isEmpty():Boolean
-    {
-    	return false ;    
-    }
-    
-    public function iterator():Iterator
-    {
-        return null ;
-    }  
-    
-    public function peek():*
-    {
-    	return null ;
-    }
-    
-    public function pop():*
-    {
-    	return null ;
-    }
-    
-    public function push(o:*):void
-    {
-    }
-    
-    public function search(o:*):uint
-    {
-    	return 0 ;
-    }
-    
-    public function size():uint
-    {
-    	return 0 ;
-    }
-        
-    public function toSource(indent:int = 0):String
-    {
-    	return null ;
-    }
-}
+
+

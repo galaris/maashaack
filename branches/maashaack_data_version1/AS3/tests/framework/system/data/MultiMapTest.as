@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                            
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.MultiMapClass;                                                                                                
 
     public class MultiMapTest extends TestCase 
     {
@@ -33,8 +35,12 @@ package system.data
         
         public function testInterface():void
         {
-            
+            var m:MultiMapClass = new MultiMapClass();
+            assertTrue( m is MultiMap ) ;
+            assertTrue( m is Map ) ;
         }         
         
     }
 }
+
+

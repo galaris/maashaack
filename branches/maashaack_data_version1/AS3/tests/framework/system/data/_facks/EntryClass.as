@@ -19,26 +19,41 @@
   
 */
 
-package system.data 
+package system.data._facks 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import system.data.Entry;        
     
-    import system.data._facks.CollectionClass;    
-
-    public class CollectionTest extends TestCase 
+    public class EntryClass implements Entry
     {
 
-        public function CollectionTest( name:String = "" )
+        private var _key:* ;
+        
+        private var _value:* ;
+    
+        public function EntryClass( key:* , value:* )
         {
-            super( name );
+            _key   = key ;
+            _value = value ;
         }
         
-        public function testInterface():void
+        public function get key():*
         {
-            var c:CollectionClass = new CollectionClass();
-            assertTrue( c is Collection ) ;
-        }         
+            return _key ;
+        }
         
+        public function set key( key:* ):void
+        {
+            _key = key ;
+        }    
+        
+        public function get value():*
+        {
+            return _value ;
+        }
+            
+        public function set value( value:* ):void
+        {
+            _value = value ;
+        }
     }
 }
-

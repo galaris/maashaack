@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.EntryClass;                
 
     public class EntryTest extends TestCase 
     {
@@ -31,55 +33,36 @@ package system.data
             super( name );
         }
         
+        public var entry:EntryClass ;
+        
+        public function setUp():void
+        {
+            entry = new EntryClass( "key", "value" );
+        }
+
+        public function tearDown():void
+        {
+            entry = undefined ;
+        }           
+        
         public function testInterface():void
         {
-            
-            var i:EntryClass = new EntryClass( "key", "value" );
-            
-            assertTrue( i is Entry ) ;
-            
-            assertEquals( i.key   , "key"   , "Entry interface failed with the key method" ) ;
-            
-            assertEquals( i.value , "value" , "Entry interface failed with the value method" ) ;
-            
-            
-        }         
+            assertTrue( entry is Entry ) ;
+        } 
+        
+        public function testKey():void
+        {
+            assertEquals( entry.key , "key" , "Entry interface failed with the key method" ) ;
+        }     
+
+        public function testValue():void
+        {
+            assertEquals( entry.value , "value" , "Entry interface failed with the value method" ) ;
+        }     
+
         
     }
 }
 
-import system.data.Entry;
 
-class EntryClass implements Entry
-{
 
-    private var _key:* ;
-    
-    private var _value:* ;
-
-    public function EntryClass( key:* , value:* )
-    {
-        _key   = key ;
-        _value = value ;
-    }
-    
-    public function get key():*
-    {
-    	return _key ;
-    }
-    
-    public function set key( key:* ):void
-    {
-        _key = key ;
-    }    
-    
-    public function get value():*
-    {
-    	return _value ;
-    }
-        
-    public function set value( value:* ):void
-    {
-    	_value = value ;
-    }
-}

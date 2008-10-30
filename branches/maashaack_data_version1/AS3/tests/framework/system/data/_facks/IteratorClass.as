@@ -19,26 +19,46 @@
   
 */
 
-package system.data 
+package system.data._facks 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data._facks.CollectionClass;    
+    import system.data.Iterator;        
 
-    public class CollectionTest extends TestCase 
+    public class IteratorClass implements Iterator
     {
 
-        public function CollectionTest( name:String = "" )
+        public function IteratorClass()
         {
-            super( name );
+        }
+    
+        public function hasNext():Boolean
+        {
+            return true ;
         }
         
-        public function testInterface():void
+        public function key():*
         {
-            var c:CollectionClass = new CollectionClass();
-            assertTrue( c is Collection ) ;
-        }         
+            return "key" ;
+        }
         
+        public function next():*
+        {
+            return "next" ;
+        }
+        
+        public function remove():*
+        {
+            return "remove" ;
+        }
+        
+        public function reset():void
+        {
+            throw new Error("reset") ;
+        }
+        
+        public function seek(position:*):void
+        {
+            throw new Error( "seek:" + position ) ;
+        }
     }
-}
 
+}

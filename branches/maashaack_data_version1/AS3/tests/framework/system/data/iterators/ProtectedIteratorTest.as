@@ -23,7 +23,9 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.errors.IllegalOperationError;                
+    import system.data._facks.IteratorClass;
+    
+    import flash.errors.IllegalOperationError;    
 
     public class ProtectedIteratorTest extends TestCase 
     {
@@ -119,42 +121,3 @@ package system.data.iterators
     }
 }
 
-import system.data.Iterator;
-
-class IteratorClass implements Iterator
-{
-
-    public function IteratorClass()
-    {
-    }
-
-    public function hasNext():Boolean
-    {
-        return true ;
-    }
-    
-    public function key():*
-    {
-        return "key" ;
-    }
-    
-    public function next():*
-    {
-        return "next" ;
-    }
-    
-    public function remove():*
-    {
-        return "remove" ;
-    }
-    
-    public function reset():void
-    {
-        throw new Error("reset") ;
-    }
-    
-    public function seek(position:*):void
-    {
-        throw new Error( "seek:" + position ) ;
-    }
-}

@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                        
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.ListIterableClass;    
 
     public class ListIterableTest extends TestCase 
     {
@@ -33,8 +35,15 @@ package system.data
         
         public function testInterface():void
         {
-            
-        }         
+            var i:ListIterableClass = new ListIterableClass();
+            assertTrue( i is ListIterable ) ;
+        }
+        
+        public function testIterator():void
+        {
+            var i:ListIterableClass = new ListIterableClass();
+            assertTrue( i.listIterator() is ListIterator , "test ListIterable interface failed with the iterator method." ) ;
+        }       
         
     }
 }

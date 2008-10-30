@@ -19,26 +19,30 @@
   
 */
 
-package system.data 
+package system.data._facks 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data._facks.CollectionClass;    
+    import system.data.Identifiable;        
 
-    public class CollectionTest extends TestCase 
+    public class IdentifiableClass implements Identifiable
     {
-
-        public function CollectionTest( name:String = "" )
+    
+        public function IdentifiableClass( index:uint=0 )
         {
-            super( name );
+            this.id = index ;    
         }
         
-        public function testInterface():void
+        private var _id:uint ;
+    
+        public function get id():*
         {
-            var c:CollectionClass = new CollectionClass();
-            assertTrue( c is Collection ) ;
-        }         
+            return _id ;
+        }
         
+        public function set id(id:*):void
+        {
+            _id = id ;
+        }
+    
     }
-}
 
+}

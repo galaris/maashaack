@@ -23,7 +23,8 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.OrderedIterator;                                                
+    import system.data.OrderedIterator;
+    import system.data._facks.OrderedIteratorClass;    
 
     public class OrderedIteratorTest extends TestCase 
     {
@@ -35,67 +36,9 @@ package system.data
         
         public function testInterface():void
         {
-            
             var i:OrderedIteratorClass = new OrderedIteratorClass();
-            
             assertTrue( i is OrderedIterator ) ;
-            
-            
         }         
         
     }
-}
-
-import system.data.OrderedIterator;
-
-class OrderedIteratorClass implements OrderedIterator
-{
-
-    public function OrderedIteratorClass()
-    {
-    }
-
-    public function hasNext():Boolean
-    {
-    	return true ;
-    }
-    
-    public function hasPrevious():Boolean
-    {
-    	return true ;
-    }    
-    
-    public function key():*
-    {
-    	return "key" ;
-    }
-    
-    public function next():*
-    {
-    	return "next" ;
-    }
-    
-    public function previous():*
-    {
-    	return "previous" ;
-    }    
-    
-    public function remove():*
-    {
-    	return "remove" ;
-    }
-    
-    public function reset():void
-    {
-    	throw new Error("reset") ;
-    }
-    
-    public function seek(position:*):void
-    {
-    	throw new Error( "seek:" + position ) ;
-    }
-    
-
-    
-
 }

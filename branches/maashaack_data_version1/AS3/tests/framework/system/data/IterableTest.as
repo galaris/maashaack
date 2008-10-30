@@ -21,11 +21,13 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                                
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.IterableClass;    
 
     public class IterableTest extends TestCase 
     {
-
+        
         public function IterableTest( name:String = "" )
         {
             super( name );
@@ -33,69 +35,17 @@ package system.data
         
         public function testInterface():void
         {
-            
             var i:IterableClass = new IterableClass();
-            
             assertTrue( i is Iterable ) ;
-            
+        }
+        
+        public function testIterator():void
+        {
+            var i:IterableClass = new IterableClass();
             assertTrue( i.iterator() is Iterator , "test Iterable interface failed with the iterator method." ) ;
-            
-        }         
+        }        
         
     }
 }
 
-import system.data.Iterable;
-import system.data.Iterator;
 
-class IterableClass implements Iterable
-{
-
-    public function IterableClass()
-    {
-    }
-    
-    public function iterator():Iterator
-    {
-        return new IteratorClass() ;
-    } 
-    
-}
-
-class IteratorClass implements Iterator
-{
-
-    public function IteratorClass()
-    {
-    }
-
-    public function hasNext():Boolean
-    {
-        return true ;
-    }
-    
-    public function key():*
-    {
-        return "key" ;
-    }
-    
-    public function next():*
-    {
-        return "next" ;
-    }
-    
-    public function remove():*
-    {
-        return "remove" ;
-    }
-    
-    public function reset():void
-    {
-        throw new Error("reset") ;
-    }
-    
-    public function seek(position:*):void
-    {
-        throw new Error( "seek:" + position ) ;
-    }
-}

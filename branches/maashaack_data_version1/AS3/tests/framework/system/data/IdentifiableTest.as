@@ -23,7 +23,8 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Identifiable;                
+    import system.data.Identifiable;
+    import system.data._facks.IdentifiableClass;    
 
     public class IdentifiableTest extends TestCase 
     {
@@ -35,37 +36,16 @@ package system.data
         
         public function testInterface():void
         {
-            
-            var c:IdentifiableClass = new IdentifiableClass( 9999 );
-            
-            assertTrue( c is Identifiable ) ;
-            
-            assertEquals( c.id , 9999 ) ;
-            
-        }         
+            var i:IdentifiableClass = new IdentifiableClass( 9999 );
+            assertTrue( i is Identifiable ) ;
+        }    
         
-    }
-}
-
-import system.data.Identifiable;
-
-class IdentifiableClass implements Identifiable
-{
-
-    public function IdentifiableClass( index:uint=0 )
-    {
-        this.id = index ;    
-    }
-    
-    private var _id:uint ;
-
-    public function get id():*
-    {
-    	return _id ;
-    }
-    
-    public function set id(id:*):void
-    {
-    	_id = id ;
+        public function testId():void
+        {
+            var i:IdentifiableClass = new IdentifiableClass( 9999 );
+            assertEquals( i.id , 9999 ) ;
+        }           
+            
+                    
     }
 }

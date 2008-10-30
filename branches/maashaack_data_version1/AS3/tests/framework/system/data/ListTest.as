@@ -21,7 +21,9 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                        
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data._facks.ListClass;    
 
     public class ListTest extends TestCase 
     {
@@ -33,7 +35,8 @@ package system.data
         
         public function testInterface():void
         {
-            
+            var l:ListClass = new ListClass();
+            assertTrue( l is List ) ;
         }         
         
     }
