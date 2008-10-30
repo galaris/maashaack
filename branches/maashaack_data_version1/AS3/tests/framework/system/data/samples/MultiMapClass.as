@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,32 +19,42 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
+    import system.data.Collection;
     import system.data.Iterator;
-    import system.data.Set;
-    
-    public class SetClass implements Set
+    import system.data.MultiMap;    
+
+    public class MultiMapClass implements MultiMap
     {
 
-        public function add(o:*):Boolean
+        public function totalSize():uint
         {
-            return o == "add" ;
+            return 0 ;
+        }
+        
+        public function values():Collection
+        {
+            return new CollectionClass() ;
+        }
+        
+        public function valueIterator():Iterator
+        {
+            return new IteratorClass() ;
         }
         
         public function clear():void
         {
-            throw new Error("clear") ;
         }
         
-        public function clone():*
+        public function containsKey(key:*):Boolean
         {
-            return null ;
-        }    
+            return true ;
+        }
         
-        public function contains(o:*):Boolean
+        public function containsValue(value:*):Boolean
         {
-            return o == "test" ;       
+            return true ;
         }
         
         public function get(key:*):*
@@ -52,9 +62,14 @@ package system.data._facks
             return key ;
         }
         
-        public function indexOf(o:*, fromIndex:uint = 0):int
+        public function getKeys():Array
         {
-            return -1 ;
+            return [] ;
+        }
+        
+        public function getValues():Array
+        {
+            return [] ;
         }
         
         public function isEmpty():Boolean
@@ -62,14 +77,19 @@ package system.data._facks
             return true ;
         }
         
-        public function iterator():Iterator
+        public function keyIterator():Iterator
         {
             return new IteratorClass() ;
-        }    
+        }
+            
+        public function put(key:*, value:*):*
+        {
+            return key.toString() + ":" + value.toString() ;
+        }
         
         public function remove(o:*):*
         {
-            return "remove" ;
+            return o ;
         }
         
         public function size():uint
@@ -77,11 +97,19 @@ package system.data._facks
             return 0 ;
         }
         
+        public function clone():*
+        {
+            return new MultiMapClass() ;
+        }
+        
+        public function iterator():Iterator
+        {
+            return new IteratorClass() ;
+        }
+        
         public function toSource(indent:int = 0):String
         {
-            return "toSource" ;
+            return "" ;
         }
     }
-    
 }
-    

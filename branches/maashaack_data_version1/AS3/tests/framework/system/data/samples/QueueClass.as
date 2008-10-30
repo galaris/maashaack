@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,61 +19,74 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
     import system.data.Iterator;
-    import system.data.Stack;    
+    import system.data.Queue;    
 
-    public class StackClass implements Stack
+    public class QueueClass implements Queue
     {
-
+    
         public function clear():void
         {
         }
         
-        public function clone():*
+        public function contains(o:*):Boolean
         {
-            return null ;
-        }
-          
-        public function isEmpty():Boolean
-        {
-            return false ;    
+            return true ;
         }
         
-        public function iterator():Iterator
+        public function dequeue():Boolean
         {
-            return new IteratorClass() ;
-        }  
+            return true ;
+        }
+        
+        public function element():*
+        {
+        return null ;
+        }
+        
+        public function enqueue(o:*):Boolean
+        {
+            return true ;
+        }
+        
+        public function isEmpty():Boolean
+        {
+            return true ;
+        }
         
         public function peek():*
         {
             return null ;
         }
         
-        public function pop():*
+        public function poll():*
         {
             return null ;
-        }
-        
-        public function push(o:*):void
-        {
-        }
-        
-        public function search(o:*):uint
-        {
-            return 0 ;
         }
         
         public function size():uint
         {
             return 0 ;
         }
-            
+        
+        public function clone():*
+        {
+            return new QueueClass() ;
+        }
+        
+        public function iterator():Iterator
+        {
+            return new IteratorClass() ;
+        }
+        
         public function toSource(indent:int = 0):String
         {
-            return null ;
+            return "" ;
         }
+
     }
 
 }
+    

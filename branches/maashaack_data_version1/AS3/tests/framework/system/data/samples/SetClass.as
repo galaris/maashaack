@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,37 +19,42 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
     import system.data.Iterator;
-    import system.data.Queue;
-    import system.data._facks.IteratorClass;    
+    import system.data.Set;    
 
-    public class QueueClass implements Queue
+    public class SetClass implements Set
     {
-    
+
+        public function add(o:*):Boolean
+        {
+            return o == "add" ;
+        }
+        
         public function clear():void
         {
+            throw new Error("clear") ;
         }
+        
+        public function clone():*
+        {
+            return null ;
+        }    
         
         public function contains(o:*):Boolean
         {
-            return true ;
+            return o == "test" ;       
         }
         
-        public function dequeue():Boolean
+        public function get(key:*):*
         {
-            return true ;
+            return key ;
         }
         
-        public function element():*
+        public function indexOf(o:*, fromIndex:uint = 0):int
         {
-        return null ;
-        }
-        
-        public function enqueue(o:*):Boolean
-        {
-            return true ;
+            return -1 ;
         }
         
         public function isEmpty():Boolean
@@ -57,14 +62,14 @@ package system.data._facks
             return true ;
         }
         
-        public function peek():*
+        public function iterator():Iterator
         {
-            return null ;
-        }
+            return new IteratorClass() ;
+        }    
         
-        public function poll():*
+        public function remove(o:*):*
         {
-            return null ;
+            return "remove" ;
         }
         
         public function size():uint
@@ -72,22 +77,11 @@ package system.data._facks
             return 0 ;
         }
         
-        public function clone():*
-        {
-            return new QueueClass() ;
-        }
-        
-        public function iterator():Iterator
-        {
-            return new IteratorClass() ;
-        }
-        
         public function toSource(indent:int = 0):String
         {
-            return "" ;
+            return "toSource" ;
         }
-
     }
-
+    
 }
     

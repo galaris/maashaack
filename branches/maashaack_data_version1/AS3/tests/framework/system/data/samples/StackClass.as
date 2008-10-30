@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,57 +19,61 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.OrderedIterator;        
+    import system.data.Iterator;
+    import system.data.Stack;    
 
-    public class OrderedIteratorClass implements OrderedIterator
+    public class StackClass implements Stack
     {
-    
-        public function OrderedIteratorClass()
+
+        public function clear():void
         {
-        }
-    
-        public function hasNext():Boolean
-        {
-            return true ;
         }
         
-        public function hasPrevious():Boolean
+        public function clone():*
         {
-            return true ;
-        }    
-        
-        public function key():*
+            return null ;
+        }
+          
+        public function isEmpty():Boolean
         {
-            return "key" ;
+            return false ;    
         }
         
-        public function next():*
+        public function iterator():Iterator
         {
-            return "next" ;
-        }
-    
-        public function previous():*
-        {
-            return "previous" ;
-        }    
+            return new IteratorClass() ;
+        }  
         
-        public function remove():*
+        public function peek():*
         {
-            return "remove" ;
+            return null ;
         }
         
-        public function reset():void
+        public function pop():*
         {
-            throw new Error("reset") ;
+            return null ;
         }
         
-        public function seek(position:*):void
+        public function push(o:*):void
         {
-            throw new Error( "seek:" + position ) ;
         }
-    
+        
+        public function search(o:*):uint
+        {
+            return 0 ;
+        }
+        
+        public function size():uint
+        {
+            return 0 ;
+        }
+            
+        public function toSource(indent:int = 0):String
+        {
+            return null ;
+        }
     }
 
 }

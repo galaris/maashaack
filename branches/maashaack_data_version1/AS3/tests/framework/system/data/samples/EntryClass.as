@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,30 +19,41 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.Identifiable;        
-
-    public class IdentifiableClass implements Identifiable
+    import system.data.Entry;                
+    
+    public class EntryClass implements Entry
     {
-    
-        public function IdentifiableClass( index:uint=0 )
-        {
-            this.id = index ;    
-        }
-        
-        private var _id:uint ;
-    
-        public function get id():*
-        {
-            return _id ;
-        }
-        
-        public function set id(id:*):void
-        {
-            _id = id ;
-        }
-    
-    }
 
+        private var _key:* ;
+        
+        private var _value:* ;
+    
+        public function EntryClass( key:* , value:* )
+        {
+            _key   = key ;
+            _value = value ;
+        }
+        
+        public function get key():*
+        {
+            return _key ;
+        }
+        
+        public function set key( key:* ):void
+        {
+            _key = key ;
+        }    
+        
+        public function get value():*
+        {
+            return _value ;
+        }
+            
+        public function set value( value:* ):void
+        {
+            _value = value ;
+        }
+    }
 }

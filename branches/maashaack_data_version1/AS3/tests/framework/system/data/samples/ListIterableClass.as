@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,46 +19,21 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.Iterator;        
+    import system.data.ListIterable;
+    import system.data.ListIterator;    
 
-    public class IteratorClass implements Iterator
+    public class ListIterableClass implements ListIterable
     {
-
-        public function IteratorClass()
-        {
-        }
     
-        public function hasNext():Boolean
+        public function ListIterableClass()
         {
-            return true ;
         }
-        
-        public function key():*
+                
+        public function listIterator(position:uint = 0):ListIterator
         {
-            return "key" ;
-        }
-        
-        public function next():*
-        {
-            return "next" ;
-        }
-        
-        public function remove():*
-        {
-            return "remove" ;
-        }
-        
-        public function reset():void
-        {
-            throw new Error("reset") ;
-        }
-        
-        public function seek(position:*):void
-        {
-            throw new Error( "seek:" + position ) ;
-        }
+        	return new ListIteratorClass() ;
+        } 
     }
-
 }

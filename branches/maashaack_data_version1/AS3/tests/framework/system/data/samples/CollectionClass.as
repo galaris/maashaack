@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,68 +19,58 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.Iterator;
-    import system.data.Map;    
+    import system.data.Collection;
+    import system.data.Iterator;    
 
-    public class MapClass implements Map
+    public class CollectionClass implements Collection
     {
+
+        public function CollectionClass()
+        {
+        }
     
+        public function add(o:*):Boolean
+        {
+            return o === true ;
+        }
+        
         public function clear():void
         {
+            
         }
         
         public function clone():*
         {
-            return new MapClass() ;
-        }
-                
-        public function containsKey(key:*):Boolean
-        {
-            return true ;
-        }
+            return new CollectionClass() ;
+        }    
         
-        public function containsValue(value:*):Boolean
+        public function contains(o:*):Boolean
         {
-            return true ;
+            return o === true ;
         }
         
         public function get(key:*):*
         {
-            return "key" ;
+            return key ;
         }
         
-        public function getKeys():Array
+        public function indexOf(o:*, fromIndex:uint = 0):int
         {
-            return [] ;
-        }
-                
-        public function getValues():Array
-        {
-            return [] ;
+            return -1 ;
         }
         
         public function isEmpty():Boolean
         {
             return true ;
         }
-        
+    
         public function iterator():Iterator
         {
             return new IteratorClass() ;
-        }        
-        
-        public function keyIterator():Iterator
-        {
-            return new IteratorClass() ;
-        }
-        
-        public function put(key:*, value:*):*
-        {
-            return key.toString() + ":" + value.toString() ;
-        }
-        
+        }    
+    
         public function remove(o:*):*
         {
             return o ;
@@ -90,11 +80,11 @@ package system.data._facks
         {
             return 0 ;
         }
-                
+            
         public function toSource(indent:int = 0):String
         {
-            return "" ;
+            return "source" ;
         }
-    } 
-
+    }
+   
 }

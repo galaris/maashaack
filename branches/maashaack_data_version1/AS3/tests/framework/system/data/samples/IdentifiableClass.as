@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,21 +19,30 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.ListIterable;
-    import system.data.ListIterator;    
+    import system.data.Identifiable;            
 
-    public class ListIterableClass implements ListIterable
+    public class IdentifiableClass implements Identifiable
     {
     
-        public function ListIterableClass()
+        public function IdentifiableClass( index:uint=0 )
         {
+            this.id = index ;    
         }
-                
-        public function listIterator(position:uint = 0):ListIterator
+        
+        private var _id:uint ;
+    
+        public function get id():*
         {
-        	return new ListIteratorClass() ;
-        } 
+            return _id ;
+        }
+        
+        public function set id(id:*):void
+        {
+            _id = id ;
+        }
+    
     }
+
 }

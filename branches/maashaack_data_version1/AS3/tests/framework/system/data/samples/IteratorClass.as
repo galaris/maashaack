@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -19,41 +19,46 @@
   
 */
 
-package system.data._facks 
+package system.data.samples 
 {
-    import system.data.Entry;        
-    
-    public class EntryClass implements Entry
+    import system.data.Iterator;            
+
+    public class IteratorClass implements Iterator
     {
 
-        private var _key:* ;
-        
-        private var _value:* ;
+        public function IteratorClass()
+        {
+        }
     
-        public function EntryClass( key:* , value:* )
+        public function hasNext():Boolean
         {
-            _key   = key ;
-            _value = value ;
+            return true ;
         }
         
-        public function get key():*
+        public function key():*
         {
-            return _key ;
+            return "key" ;
         }
         
-        public function set key( key:* ):void
+        public function next():*
         {
-            _key = key ;
-        }    
-        
-        public function get value():*
-        {
-            return _value ;
+            return "next" ;
         }
-            
-        public function set value( value:* ):void
+        
+        public function remove():*
         {
-            _value = value ;
+            return "remove" ;
+        }
+        
+        public function reset():void
+        {
+            throw new Error("reset") ;
+        }
+        
+        public function seek(position:*):void
+        {
+            throw new Error( "seek:" + position ) ;
         }
     }
+
 }

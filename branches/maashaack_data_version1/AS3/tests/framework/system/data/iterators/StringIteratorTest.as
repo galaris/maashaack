@@ -1,4 +1,4 @@
-﻿/*
+/*
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
   the License. You may obtain a copy of the License at 
@@ -23,7 +23,7 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.errors.IllegalOperationError; 
+    import flash.errors.IllegalOperationError;    
 
     public class StringIteratorTest extends TestCase 
     {
