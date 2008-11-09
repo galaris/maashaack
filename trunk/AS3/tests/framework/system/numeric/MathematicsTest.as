@@ -100,29 +100,39 @@ package system.numeric
             
         }
         
-        public function testPercentage():void
+
+        public function testGcd():void
         {
             var result:* ;
             
-            result = Mathematics.percentage( 10, 100 ) ;
-            assertEquals( result , 10 , "Mathematics.getPercent( 10, 100 ) failed" ) ;
+            result = Mathematics.gcd( 320 , 240 ) ;
+            assertEquals( result , 80 , "Mathematics.Mathematics.gcd( 320 , 240 ) failed" ) ;         
             
-            result = Mathematics.percentage( 50, 100 ) ;
-            assertEquals( result , 50 , "Mathematics.getPercent( 50, 100 ) failed" ) ;            
+            result = Mathematics.gcd( 320 , 0 ) ;
+            assertEquals( result , 320 , "Mathematics.Mathematics.gcd( 320 , 0 ) failed" ) ;
             
-            result = Mathematics.percentage( 68, 425 ) ;
-            assertEquals( result , 16 , "Mathematics.getPercent( 68, 425 ) failed" ) ;
+            result = Mathematics.gcd( 320 , 1 ) ;
+            assertEquals( result , 1 , "Mathematics.Mathematics.gcd( 320 , 1 ) failed" ) ;
             
-            result = Mathematics.percentage( NaN, NaN ) ;
-            assertEquals( result , NaN , "Mathematics.getPercent( NaN, NaN ) failed" ) ;            
-
-            result = Mathematics.percentage( NaN, 100 ) ;
-            assertEquals( result , NaN , "Mathematics.getPercent( NaN, 100 ) failed" ) ;   
+            result = Mathematics.gcd( 320 , 2 ) ;
+            assertEquals( result , 2 , "Mathematics.Mathematics.gcd( 320 , 2 ) failed" ) ;    
             
-            result = Mathematics.percentage( 25, NaN ) ;
-            assertEquals( result , NaN , "Mathematics.getPercent( 25, NaN ) failed" ) ;             
+            result = Mathematics.gcd( 320 , 320 ) ;
+            assertEquals( result , 320 , "Mathematics.Mathematics.gcd( 320 , 2 ) failed" ) ;    
             
-        }
+            result = Mathematics.gcd( 640 , 480 ) ;
+            assertEquals( result , 160 , "Mathematics.Mathematics.gcd( 640 , 480 ) failed" ) ;       
+            
+            result = Mathematics.gcd( -640 , 480 ) ;
+            assertEquals( result , -160 , "Mathematics.Mathematics.gcd( -640 , 480 ) failed" ) ; 
+            
+            result = Mathematics.gcd( 640 , -480 ) ;
+            assertEquals( result , 160 , "Mathematics.Mathematics.gcd( 640 , -480 ) failed" ) ;                                      
+            
+            result = Mathematics.gcd( -640 , -480 ) ;
+            assertEquals( result , -160 , "Mathematics.Mathematics.gcd( -640 , -480 ) failed" ) ;              
+              
+        }        
         
         public function testInterpolate():void
         {
@@ -164,6 +174,30 @@ package system.numeric
             
             result = Mathematics.normalize( 10, 25 , 500 ) ;
             assertEquals( result , -0.031578947368421054 , "Mathematics.normalize( 10, 25 , 500 ) failed" ) ;
+        }
+        
+        public function testPercentage():void
+        {
+            var result:* ;
+            
+            result = Mathematics.percentage( 10, 100 ) ;
+            assertEquals( result , 10 , "Mathematics.getPercent( 10, 100 ) failed" ) ;
+            
+            result = Mathematics.percentage( 50, 100 ) ;
+            assertEquals( result , 50 , "Mathematics.getPercent( 50, 100 ) failed" ) ;            
+            
+            result = Mathematics.percentage( 68, 425 ) ;
+            assertEquals( result , 16 , "Mathematics.getPercent( 68, 425 ) failed" ) ;
+            
+            result = Mathematics.percentage( NaN, NaN ) ;
+            assertEquals( result , NaN , "Mathematics.getPercent( NaN, NaN ) failed" ) ;            
+
+            result = Mathematics.percentage( NaN, 100 ) ;
+            assertEquals( result , NaN , "Mathematics.getPercent( NaN, 100 ) failed" ) ;   
+            
+            result = Mathematics.percentage( 25, NaN ) ;
+            assertEquals( result , NaN , "Mathematics.getPercent( 25, NaN ) failed" ) ;             
+            
         }        
         
         public function testRound():void
