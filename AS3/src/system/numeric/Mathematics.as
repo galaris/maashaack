@@ -17,8 +17,9 @@ Portions created by the Initial Developer are Copyright (C) 2006-2008
 the Initial Developer. All Rights Reserved.
   
 Contributor(s):
-- Zwetan Kjukov <zwetan@gmail.com>
- */
+    - Zwetan Kjukov <zwetan@gmail.com>
+
+*/
 
 package system.numeric
 {
@@ -132,25 +133,32 @@ package system.numeric
             }
             return Math.floor( n * r ) / r  ;
         }
-
+        
         /**
-         * Returns a percentage or null.
+         * Returns the greatest common divisor with the Euclidean algorithm.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.numeric.Mathematics ;
-         * trace( Mathematics.percentage( 50 , 100 ) + "%" ) ; // 50%
-         * trace( Mathematics.percentage( 68 , 425 ) + "%" ) ; // 16% 
+         * 
+         * var gcd:int = Mathematics.gcd(320,240) ;
+         * trace("Mathematics.gcd(320,240) : " + Mathematics.gcd(320,240) ) ; // Mathematics.gcd(320,240) : 80
          * </pre>
-         * @param value the current value.
-         * @param maximum the max value.
-         * @return a percentage value or null.
+         * @param i1 The first integer value.
+         * @param i2 The second integer value.
+         * @return the greatest common divisor with the Euclidean algorithm.
          */
-        public static function percentage(value:Number = NaN, maximum:Number = NaN):Number 
+        public static function gcd( i1:int , i2:int ):int
         {
-            var p:Number = (value / maximum) * 100 ;
-            return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
+           var t:int ;
+           while( i2 != 0 )
+           {
+               t  = i2 ;
+               i2 = i1 % i2 ;
+               i1 = t ;
+           }
+           return i1 ;
         }
-
+        
         /**
          * With a number value and a range this method returns the actual value for the interpolated value in that range.
          * <pre class="prettyprint">
@@ -200,6 +208,24 @@ package system.numeric
         public static function normalize(value:Number, minimum:Number, maximum:Number):Number
         {
             return (value - minimum) / (maximum - minimum) ;
+        }
+
+        /**
+         * Returns a percentage or null.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.numeric.Mathematics ;
+         * trace( Mathematics.percentage( 50 , 100 ) + "%" ) ; // 50%
+         * trace( Mathematics.percentage( 68 , 425 ) + "%" ) ; // 16% 
+         * </pre>
+         * @param value the current value.
+         * @param maximum the max value.
+         * @return a percentage value or null.
+         */
+        public static function percentage(value:Number = NaN, maximum:Number = NaN):Number 
+        {
+            var p:Number = (value / maximum) * 100 ;
+            return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
         }
 
         /**
