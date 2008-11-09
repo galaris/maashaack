@@ -104,6 +104,9 @@ package system.numeric
         public function testGcd():void
         {
             var result:* ;
+
+            result = Mathematics.gcd( 320 , 320 ) ;
+            assertEquals( result , 320 , "Mathematics.Mathematics.gcd( 320 , 320 ) failed" ) ;   
             
             result = Mathematics.gcd( 320 , 240 ) ;
             assertEquals( result , 80 , "Mathematics.Mathematics.gcd( 320 , 240 ) failed" ) ;         

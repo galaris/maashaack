@@ -23,7 +23,7 @@ Contributor(s):
 
 package system.numeric
 {
-    import flash.errors.IllegalOperationError;        
+    import flash.errors.IllegalOperationError;
 
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
@@ -149,14 +149,25 @@ package system.numeric
          */
         public static function gcd( i1:int , i2:int ):int
         {
-           var t:int ;
-           while( i2 != 0 )
-           {
-               t  = i2 ;
-               i2 = i1 % i2 ;
-               i1 = t ;
-           }
-           return i1 ;
+            if ( i2 == 0 )
+            {
+            	return i1 ;
+            }
+            else if ( i1 == i2 ) 
+            {
+                return i1 ;
+            }
+            else 
+            {
+                var t:int ;
+                while( i2 != 0 )
+                {
+                    t  = i2 ;
+                    i2 = i1 % i2 ;
+                    i1 = t ;
+                }
+                return i1 ;
+            }
         }
         
         /**
