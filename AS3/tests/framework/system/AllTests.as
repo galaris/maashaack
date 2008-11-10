@@ -58,7 +58,7 @@ package system
         
         static public function suite():ITest
             {
-            var suite:TestSuite = new TestSuite( "ES4a core tests" );
+            var suite:TestSuite = new TestSuite( "x4a core tests" );
             
             /* core framework */
             
