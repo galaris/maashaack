@@ -59,6 +59,7 @@ package system.data.iterators
 
         public function tearDown():void
         {
+        	o  = undefined ;
             it = undefined ;
         }         
         
@@ -68,7 +69,7 @@ package system.data.iterators
             try
             {
                 i = new ObjectIterator(null) ;
-                fail( this + " test constructor failed if the passed-in Array is a null object.") ;     
+                fail( this + " test constructor failed if the passed-in Object is a null object.") ;     
             }
             catch( e:Error )
             {

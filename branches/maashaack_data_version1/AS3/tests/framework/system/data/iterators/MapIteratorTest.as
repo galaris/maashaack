@@ -35,7 +35,12 @@
 
 package system.data.iterators 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.Iterator;
+    import system.data.Map;
+    import system.data.maps.HashMap;
+    import system.data.maps.MapEntry;    
 
     public class MapIteratorTest extends TestCase 
     {
@@ -45,10 +50,110 @@ package system.data.iterators
             super( name );
         }
         
-        public function testInterface():void
+        public var m:Map ;
+        
+        public var it:MapIterator ;
+        
+        public function setUp():void
         {
-                        
-        }         
+        	m  = new HashMap(["key1","key2"],["value1","value2"]) ; 
+            it = new MapIterator(m) ;
+        }
+      
+        public function tearDown():void
+        {
+        	m  = undefined ;
+            it = undefined ;
+        }             
+
+        public function testConstructor():void
+        {
+            var i:Iterator ;
+            try
+            {
+                i = new MapIterator(null) ;
+                fail( "01 - test constructor failed if the passed-in Map is a null object.") ;     
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message , "[object MapIterator] constructor failed, the passed-in Map argument not must be 'null'." , "02 - test constructor failed.");
+            }
+            assertNotNull(it, "03 - the MapIterator not must be null") ; 
+        } 
+      
+        public function testHasNext():void
+        {
+            assertTrue( it.hasNext(), "01 hasNext method failed" ) ;
+            it.next() ;
+            assertTrue( it.hasNext(), "02 hasNext method failed" ) ;
+            it.next() ;
+            assertFalse( it.hasNext(), "03 hasNext method failed" ) ;
+            it.reset() ;
+        }
+
+        public function testKey():void
+        {
+            it.next() ; 
+            assertTrue(it.key() == "key1" || "key2" , "01 - key() method failed") ;
+            
+            it.next() ; 
+            assertTrue(it.key() == "key1" || "key2" , "02 - key() method failed") ;
+            
+            it.reset() ;
+        }    
+    
+        public function testNext():void
+        {
+        	var r:* ;
+        	r = it.next() ;
+            assertTrue( r == "value1" || r == "value2" , "01 next() method failed" ) ;
+            r = it.next() ;
+            assertTrue( r == "value1" || r == "value2" , "01 next() method failed" ) ;
+            it.reset() ;
+        }
+        
+        public function testRemove():void
+        {
+			
+        	var map:Map      = new HashMap(["key1","key2"],["value1","value2"]) ; 
+            var itr:Iterator = new MapIterator( map ) ;
+            
+            itr.next() ;
+            
+            var entry:MapEntry = itr.remove() as MapEntry;
+			         	
+         	assertNotNull( entry , "02 - reset() method failed and not return a MapEntry object." ) ;
+         	assertTrue
+         	( 
+         		( entry.key == "key1" && entry.value == "value1" ) 
+         			|| ( entry.key == "key2" && entry.value == "value2" ) ,  
+         		"02 - reset() method failed" 
+         	) ;
+        }           
+    
+        public function testReset():void
+        {
+            it.next() ;
+            it.next() ;
+            it.reset() ;
+            var r:* = it.next() ;
+            assertTrue( it.hasNext() , "01 - reset() method failed, the iterator.hasNext() method must return true." ) ;
+            assertTrue( r == "value1" || r == "value2" , "02 - reset() method failed" ) ;
+            it.reset() ;
+        }           
+        
+        public function testSeek():void
+        {
+            try
+            {
+                it.seek(0) ;
+                fail( "01 - seek() method failed must throw an Error.") ;     
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message , "This Iterator does not support the seek() method." , "02 - seek() failed.");
+            }
+        } 
         
     }
 }

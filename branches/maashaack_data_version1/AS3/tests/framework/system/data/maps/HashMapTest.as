@@ -192,8 +192,10 @@ package system.data.maps
         public function testRemove():void
         {
         	map.put("key3", "value3") ;
-            assertEquals( map.remove("key3"), "value3", "1 - The HashMap remove method failed.") ;
-            assertNull( map.remove("key4"), "2 - The HashMap remove method failed.") ;
+        	var entry:MapEntry = map.remove("key3") ;
+        	assertEquals( entry.key , "key3", "1 - The HashMap remove method failed.") ;
+            assertEquals( entry.value , "value3" , "2 - The HashMap remove method failed.") ;
+            assertNull( map.remove("key4"), "3 - The HashMap remove method failed.") ;
         }        
        
         public function testSize():void

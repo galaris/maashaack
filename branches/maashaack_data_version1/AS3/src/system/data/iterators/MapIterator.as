@@ -50,8 +50,12 @@ package system.data.iterators
         * Creates a new MapIterator instance.
         * @param m the Map reference of this iterator. 
         */
-        public function MapIterator(m:Map)
+        public function MapIterator( m:Map )
         {
+            if ( m == null )
+            {
+               throw new ArgumentError( this + " constructor failed, the passed-in Map argument not must be 'null'.") ;   
+            }         	
             _m = m ;
             _i = new ArrayIterator(m.getKeys()) ;
             _k = null ;

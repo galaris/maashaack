@@ -76,6 +76,7 @@ package
 			
             //tests
             
+            buRRRn.ASTUce.config.maxColumn = 60 ;
             buRRRn.ASTUce.config.showConstructorList = false;
             
             Runner.main

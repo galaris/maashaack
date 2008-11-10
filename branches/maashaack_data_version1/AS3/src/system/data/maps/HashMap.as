@@ -117,12 +117,9 @@ package system.data.maps
          */
         public function HashMap( ...arguments:Array )
         {
-            
             clear() ;
-            
             var k:Array = (arguments[0] as Array) ;
             var v:Array = (arguments[1] as Array) ;
-            
             if ( k != null && v != null )
             {
                 if (k.length > 0 && k.length == v.length)
@@ -134,7 +131,6 @@ package system.data.maps
                     }
                 }
             }
-            
         }
         
         /**
@@ -318,6 +314,7 @@ package system.data.maps
  
         /**
          * Removes the mapping for this key from this map if present.
+         * @return A MapEntry object who contains the key and the value removed from the Map (or null).
          */
         public function remove(o:*):*
         {
@@ -337,7 +334,7 @@ package system.data.maps
                     delete _values[ value ];
                 }
                 delete _keys[ key ] ;
-                return value ;
+                return new MapEntry(key,value) ;
             }
             else 
             {
