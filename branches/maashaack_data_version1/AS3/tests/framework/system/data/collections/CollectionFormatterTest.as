@@ -51,13 +51,13 @@ package system.data.collections
         {
             var result:String ;
             
-            result = CollectionFormatter.format() ;
+            result = formatter.format() ;
             assertEquals(result, "", "1 - The CollectionFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
             
-            result = CollectionFormatter.format(new CollectionClass()) ;   
+            result = formatter.format(new CollectionClass()) ;   
             assertEquals(result, "{}" , "2 - The CollectionFormatter format method failed with an empty Collection.") ;
             
-            result = CollectionFormatter.format(new CollectionClass(["value1", "value2"])) ;
+            result = formatter.format(new CollectionClass(["value1", "value2"])) ;
             
             assertEquals(result, "{value1,value2}" , "3 - The CollectionFormatter format method failed with a Collection whith one entry inside.") ;
 			

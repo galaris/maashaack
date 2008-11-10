@@ -33,39 +33,12 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.maps 
+package system.data.collections 
 {
-    import buRRRn.ASTUce.framework.TestCase;                        
 
-    public class MapFormatterTest extends TestCase 
-    {
+    /**
+ 	 * Converts a Collection to a custom string representation.
+	 */
+	public const formatter:_CollectionFormatter = new _CollectionFormatter() ;
 
-        public function MapFormatterTest( name:String = "" )
-        {
-            super( name );
-        }
-        
-        public function testFormat():void
-        {
-            var result:String ;
-            
-            result = formatter.format() ;
-            assertEquals(result, "", "1 - The MapFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
-            
-            result = formatter.format(new HashMap()) ;   
-            assertEquals(result, "{}" , "2 - The MapFormatter format method failed with an empty Map.") ;
-            
-            result = formatter.format(new HashMap(["key1"], ["value1"])) ;   
-            assertEquals(result, "{key1:value1}" , "3 - The MapFormatter format method failed with a Map whith one entry inside.") ;
-            
-            result = formatter.format(new HashMap(["key1", "key2"], ["value1", "value2"])) ;   
-            assertTrue
-            (
-                result == "{key1:value1,key2:value2}" || "{key2:value2,key1:value1}" , 
-                "4 - The MapFormatter format method failed with a Map whith two entries inside."
-            ) ;
-            
-        }         
-        
-    }
 }

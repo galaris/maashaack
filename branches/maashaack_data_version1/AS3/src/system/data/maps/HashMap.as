@@ -376,7 +376,7 @@ package system.data.maps
          */
         public function toString():String
         {
-            return MapFormatter.format( this ) ;
+            return formatter.format( this ) ;
         }
                 
         /**

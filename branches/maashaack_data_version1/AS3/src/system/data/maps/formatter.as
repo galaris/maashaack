@@ -33,12 +33,12 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data.maps
 {
 
     /**
- 	 * Converts a Collection to a custom string representation.
+ 	 * This singleton format a Map to a custom string representation.
 	 */
-	public const CollectionFormatter:_CollectionFormatter = new _CollectionFormatter() ;
+	public const formatter:MapFormatter = new MapFormatter() ;
 
 }

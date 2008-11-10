@@ -40,18 +40,16 @@ package system.data.maps
     import system.data.iterators.ArrayIterator;
     import system.formatters.Formattable;    
 
-    [ExcludeClass]
-    
     /**
      * Converts a Map to a custom string representation.
      */
-    public class _MapFormatter implements Formattable 
+    public class MapFormatter implements Formattable 
     {
             
         /**
          * Creates a new MapFormatter instance.
          */
-        public function _MapFormatter()
+        public function MapFormatter()
         {
             //  
         }
