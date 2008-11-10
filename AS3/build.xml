@@ -108,18 +108,18 @@
     
     <target name="clean">
         <delete dir="${release.dir}" />
-        <delete dir="${release.tmp.core}" />
+        <delete dir="${release.tmp}" />
     </target>
     
     <target name="init">
         <mkdir dir="${release.dir}" />
-        
+    	<mkdir dir="${release.tmp}" />
         <!--
            export the source code to a temporary location
            to be able to manipulate some files and/or directories
          -->
         <svn>
-            <export srcPath="${x4a.src}" destPath="${x4a.tmp.core}" />
+            <export srcPath="${x4a.src}" destPath="${release.tmp.core}" />
         </svn>
         
         <!-- delete some files we don't want to be included in the documentation or the component -->
@@ -151,7 +151,7 @@
         <!-- run asdoc -->
         <exec executable="${asdoc.exe}">
             <arg line="-verbose-stacktraces" />
-            <arg line="-doc-sources ${release.tmp}" />
+            <arg line="-doc-sources ${release.tmp.core}" />
             <arg line="-output ${asdoc.output}" />
             <arg line="-package system 'maashaack core library'" />
             <arg line="-templates-path ${asdoc.template}" />
