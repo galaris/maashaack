@@ -46,6 +46,7 @@ package system
         public static var version:Version = new Version();
         include "version.properties";
         version.revision = parseInt( "$Rev$".split( " " )[1] );
+        
     }
     
 }
