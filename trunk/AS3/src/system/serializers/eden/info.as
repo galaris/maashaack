@@ -76,6 +76,6 @@ package system.serializers.eden
         return Strings.format( str, {
                                sep:separator , crlf:CRLF , name:name , fullname:fullname , version:version , config: eden.serialize( config )
                                } );
-    }
+    };
 }
 

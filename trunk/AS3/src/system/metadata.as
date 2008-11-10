@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -41,10 +41,15 @@ package system
     */
     public class metadata
     {
+        
         public static var name:String = "x4a";
+        
         public static var fullname:String = "maashaack framework";
+        
         public static var version:Version = new Version();
-        include "version.properties";
+        
+        include "version.properties"
+        
         version.revision = parseInt( "$Rev$".split( " " )[1] );
         
     }

@@ -86,6 +86,6 @@ package system
                                        os: Environment.os,
                                        config: system.config.toSource()
                                     } );
-    }
+    };
 }
 
