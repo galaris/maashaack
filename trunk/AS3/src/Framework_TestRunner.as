@@ -43,10 +43,10 @@ package
     import flash.display.Sprite;
 
     public class Framework_TestRunner extends Sprite
-        {
+    {
         
         public function Framework_TestRunner()
-            {
+        {
             
             system.config.serializer.prettyPrinting = true;
             system.about( true, true );
@@ -61,8 +61,8 @@ package
             Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
                          system.AllTests.suite() );
             
-            }
         }
     }
+}
 
 
