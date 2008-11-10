@@ -38,18 +38,16 @@ package system.data.collections
     import system.data.Collection;
     import system.formatters.Formattable;    
 
-    [ExcludeClass]
-
     /**
      * Converts a Collection to a custom string representation.
      */
-    public class _CollectionFormatter implements Formattable 
+    public class CollectionFormatter implements Formattable 
     {
 
         /**
-         * Creates a new _CollectionFormatter instance.
+         * Creates a new CollectionFormatter instance.
          */
-        public function _CollectionFormatter()
+        public function CollectionFormatter()
         {
             //  
         }
