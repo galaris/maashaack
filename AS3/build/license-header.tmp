@@ -1,4 +1,4 @@
-﻿/*
+
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -31,38 +31,3 @@
   and other provisions required by the LGPL or the GPL. If you do not delete
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
-*/
-
-package
-    {
-    import flash.display.Sprite;
-    
-    import buRRRn.ASTUce.*;
-    import buRRRn.ASTUce.tests.AllTests;
-    
-    import system.*;
-    
-    public class Framework_TestRunner extends Sprite
-        {
-        
-        public function Framework_TestRunner()
-            {
-            
-            system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
-            
-            //tests
-            buRRRn.ASTUce.config.showConstructorList = false;
-            
-            //testing MaasHaack core only
-            //Runner.main( system.AllTests.suite() );
-            
-            //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         system.AllTests.suite() );
-            
-            }
-        }
-    }
-
-

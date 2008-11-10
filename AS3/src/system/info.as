@@ -25,6 +25,7 @@ package system
 {
     import system.Version;
     import system.config;
+    import system.metadata;
     
     /**
 	 * The basic system info.
@@ -35,19 +36,14 @@ package system
     {
         
         var separator:String = "----------------------------------------------------------------";
-        
         var CRLF:String = "\n";
-        var name:String = "ES4a";
-        var fullname:String = "ECMAScript 4 MaasHaack framework";
-        var version:Version = new Version( 0, 1 );
-        version.revision = parseInt( "$Rev$".split( " " )[1] );
-         
         var str:String = "";
-        if( ! verbose && config.verbose )
+        
+        if( !verbose && config.verbose )
         {
             verbose = true;
         }
-            
+        
         if( verbose ) 
         {
             str += "{sep}{crlf}";
@@ -60,17 +56,25 @@ package system
         {
             str += "{name} v{version}"; 
         }
-            
+        
         if( showConfig ) 
         {
             str += "{crlf}config:";
             str += "{config}{crlf}";
             str += "{sep}";
         }
-            
+        
         return Strings.format( str, {
-                               sep:separator , crlf:CRLF , name:name , fullname:fullname , version:version , host: Environment.host , isdebug: Environment.host.isDebug( ) ? " (debug)" : "" , os: Environment.os , config: config.toSource( )
-                               } );
+                                       sep: separator,
+                                       crlf: CRLF,
+                                       name: metadata.name ,
+                                       fullname: metadata.fullname,
+                                       version: metadata.version,
+                                       host: Environment.host ,
+                                       isdebug: Environment.host.isDebug( ) ? " (debug)" : "",
+                                       os: Environment.os,
+                                       config: config.toSource()
+                                    } );
     }
 }
 
