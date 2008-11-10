@@ -34,12 +34,13 @@
 */
 
 package
-    {
-    import flash.display.Sprite;
+{
+    import buRRRn.ASTUce.about;
     
-    import system.*;
     import system.diagnostics.VirtualMachine;
     
+    import flash.display.Sprite;    
+
     /* to help diagnose the order of initialization
        
        example of result:
@@ -80,7 +81,7 @@ package
             {
             VirtualMachine.beginTrace();
             
-            system.about( true, true );
+            about( true, true );
             
             VirtualMachine.endTrace();
             }
