@@ -37,7 +37,6 @@ package system.data.collections
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.console;
     import system.data.samples.CollectionClass;    
 
     public class CollectionFormatterTest extends TestCase 
@@ -60,8 +59,6 @@ package system.data.collections
             
             result = CollectionFormatter.format(new CollectionClass(["value1", "value2"])) ;
             
-            console.writeLine(">>>>> " + result + "\r") ;
-               
             assertEquals(result, "{value1,value2}" , "3 - The CollectionFormatter format method failed with a Collection whith one entry inside.") ;
 			
             
