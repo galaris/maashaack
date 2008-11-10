@@ -40,7 +40,7 @@ package
     
     import system.*;
     
-    import flash.display.Sprite;    
+    import flash.display.Sprite;
 
     public class Framework_TestRunner extends Sprite
         {
@@ -49,7 +49,7 @@ package
             {
             
             system.config.serializer.prettyPrinting = true;
-            about( true, true );
+            system.about( true, true );
             
             //tests
             buRRRn.ASTUce.config.showConstructorList = false;
