@@ -22,15 +22,14 @@ Contributor(s):
 
 package system.serializers.eden
 {
-    import system.Version;
     import system.Strings;
-    import system.serializers.eden.config;
+    import system.Version;
     import system.eden;
     
     /**
      * Basic eden info.
      */
-    public function info( verbose:Boolean = false, showConfig:Boolean = false ):String
+    public var info:Function = function( verbose:Boolean = false, showConfig:Boolean = false ):String
     {
         var separator:String = "----------------------------------------------------------------";
         var CRLF:String = "\n";

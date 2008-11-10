@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,14 +35,20 @@
 
 package system
 {
-    import system.console;
+    import flash.display.Sprite;
     
     /**
-     * Display framework about.
+     * The basic framework Library to be included in the SWC.
+     * <p><b>Note :</b> This class is not a component, it just
+     * a shim that allow to declare the SWC manifest and associate an icon file.</p>
      */
-    public var about:Function = function( verbose:Boolean = false, showConfig:Boolean = false ):void
+    [IconFile("maashaack.png")]
+    public class Library extends Sprite
     {
-        console.writeLine( info( verbose, showConfig ) );
+        public function Library()
+        {
+            super();
+        }
+        
     }
 }
-

@@ -22,13 +22,11 @@ Contributor(s):
 
 package system
 {
-    import system.serializers.eden.EdenSerializer;    
+    import system.serializers.eden.EdenSerializer;
     
-    // use namespace debug;
-    
-	/**
-	 * The eden singleton serializer.
-	 */
+    /**
+     * The eden singleton serializer.
+     */
     public const eden:EdenSerializer = new EdenSerializer( );
 }
 

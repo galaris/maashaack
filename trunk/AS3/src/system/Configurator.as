@@ -62,8 +62,6 @@ package system
          */
         public function toSource( indent:int = 0 ):String
         {
-            //return Serializer.serialize( _config );
-            //return "";
             config.serializer.prettyIndent = indent;
             return config.serializer.serialize( _config );
         }
