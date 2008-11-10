@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,36 +33,19 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package
+package system
+{
+    
+    /**
+    * stores static metadata about the project
+    */
+    public class metadata
     {
-    import flash.display.Sprite;
-    
-    import buRRRn.ASTUce.*;
-    import buRRRn.ASTUce.tests.AllTests;
-    
-    import system.*;
-    
-    public class Framework_TestRunner extends Sprite
-        {
-        
-        public function Framework_TestRunner()
-            {
-            
-            system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
-            
-            //tests
-            buRRRn.ASTUce.config.showConstructorList = false;
-            
-            //testing MaasHaack core only
-            //Runner.main( system.AllTests.suite() );
-            
-            //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         system.AllTests.suite() );
-            
-            }
-        }
+        public static var name:String = "x4a";
+        public static var fullname:String = "maashaack framework";
+        public static var version:Version = new Version();
+        include "version.properties";
+        version.revision = parseInt( "$Rev$".split( " " )[1] );
     }
-
-
+    
+}
