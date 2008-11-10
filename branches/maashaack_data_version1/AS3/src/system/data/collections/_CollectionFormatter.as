@@ -33,81 +33,57 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.samples 
+package system.data.collections 
 {
-    import system.data.Iterator;
-    import system.data.Set;    
+    import system.data.Collection;
+    import system.formatters.Formattable;    
 
-    public class SetClass implements Set
+    [ExcludeClass]
+
+    /**
+     * Converts a Collection to a custom string representation.
+     */
+    public class _CollectionFormatter implements Formattable 
     {
 
-        public function SetClass( ar:Array = null )
+        /**
+         * Creates a new _CollectionFormatter instance.
+         */
+        public function _CollectionFormatter()
         {
-        	_ar = ar ;
+            //  
         }
 
-        public function add(o:*):Boolean
+        /**
+         * Formats the specified value.
+         * @return the string representation of the formatted value. 
+         */
+        public function format( value:* = null ):String
         {
-            return o == "add" ;
+			if ( value != null && value is Collection )
+			{
+				var r:String = "{";
+				var c:Collection = value as Collection ;
+				if ( c.size() > 0 ) 
+				{
+					var ar:Array = c.toArray() ;
+					var l:int    = ar.length   ;
+					for (var i:int ; i < l ; i++) 
+					{
+						r += ar[i] ;
+						if (i < (l-1)) 
+						{
+							r += "," ;
+						}
+					}
+				}
+				r += "}";
+				return r ;
+			}
+			else 
+			{
+				return "" ;
+			}
         }
-        
-        public function clear():void
-        {
-            throw new Error("clear") ;
-        }
-        
-        public function clone():*
-        {
-            return null ;
-        }    
-        
-        public function contains(o:*):Boolean
-        {
-            return o == "test" ;       
-        }
-        
-        public function get(key:*):*
-        {
-            return key ;
-        }
-        
-        public function indexOf(o:*, fromIndex:uint = 0):int
-        {
-            return -1 ;
-        }
-        
-        public function isEmpty():Boolean
-        {
-            return true ;
-        }
-        
-        public function iterator():Iterator
-        {
-            return new IteratorClass() ;
-        }    
-        
-        public function remove(o:*):*
-        {
-            return "remove" ;
-        }
-        
-        public function size():uint
-        {
-            return 0 ;
-        }
-        
-        public function toSource(indent:int = 0):String
-        {
-            return "toSource" ;
-        }
-        
-        public function toArray():Array
-        {
-        	return _ar ;
-        }
-        
-        private var _ar:Array ;
     }
-    
 }
-    

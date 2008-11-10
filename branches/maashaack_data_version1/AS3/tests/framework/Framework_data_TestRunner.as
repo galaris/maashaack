@@ -73,8 +73,7 @@ package
             console = new TextFieldConsole( textfield ) ;            
             
             system.config.serializer.prettyPrinting = false;
-            system.about( false, false );
-            
+			
             //tests
             
             buRRRn.ASTUce.config.showConstructorList = false;

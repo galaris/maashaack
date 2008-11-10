@@ -92,6 +92,12 @@ package system.data
 		 * @return the number of elements in this collection.
 		 */
     	function size():uint ;
-    
+    	
+    	/**
+    	 * Returns an array containing all of the elements in this collection.
+    	 * @return an array containing all of the elements in this collection.
+    	 */
+    	function toArray():Array ;
+    	
     }
 }

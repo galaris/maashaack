@@ -136,12 +136,16 @@ package system.data.samples
         {
             return null;
         }
-                        
+                  
+        public function toArray():Array
+        {
+        	return [] ;
+        }
+                       
         public function toSource(indent:int = 0):String
         {
             return "toSource" ;
         }
         
-
     }
 }

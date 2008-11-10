@@ -41,8 +41,9 @@ package system.data.samples
     public class CollectionClass implements Collection
     {
 
-        public function CollectionClass()
+        public function CollectionClass( ar:Array = null )
         {
+        	_ar = ar ;
         }
     
         public function add(o:*):Boolean
@@ -92,13 +93,20 @@ package system.data.samples
         
         public function size():uint
         {
-            return 0 ;
+            return _ar != null ? _ar.length : 0 ;
         }
             
         public function toSource(indent:int = 0):String
         {
             return "source" ;
         }
+        
+        public function toArray():Array
+        {
+        	return _ar ;
+        }
+        
+        private var _ar:Array ;
     }
    
 }
