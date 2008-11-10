@@ -52,7 +52,7 @@ Just drop the maashaack.swc file into your Flex project /libs directory
 
 Documentation
 =============
-Documentation of the @project_name@ is in the /doc directory.
+Documentation of the @project_fullname@ is in the /doc directory.
 You can also find more informations on the project wiki
 @project_wiki@
 
