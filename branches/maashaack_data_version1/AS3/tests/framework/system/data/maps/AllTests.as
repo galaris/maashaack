@@ -41,20 +41,15 @@ package system.data.maps
     public class AllTests
     {
 
-        public function AllTests()
-        {
-        	
-        	//
-        }
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data maps tests");
             
-            suite.addTestSuite( ArrayMapTest     ) ;
-            suite.addTestSuite( MapEntryTest     ) ; 
-            suite.addTestSuite( HashMapTest      ) ;            
-            suite.addTestSuite( MapFormatterTest ) ;
+            suite.addTestSuite( ArrayMapTest       ) ;
+            suite.addTestSuite( MapEntryTest       ) ; 
+            suite.addTestSuite( HashMapTest        ) ;            
+            suite.addTestSuite( MapFormatterTest   ) ;
+            suite.addTestSuite( SortedArrayMapTest ) ;
                       
             return suite;
         }

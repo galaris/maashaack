@@ -362,12 +362,12 @@ package system.data.maps
         /**
          * @private
          */
-        private var _keys:Array ;
+        protected var _keys:Array ;
                 
         /**
          * @private
          */
-        private var _values:Array ;
+        protected var _values:Array ;
         
     }
 }

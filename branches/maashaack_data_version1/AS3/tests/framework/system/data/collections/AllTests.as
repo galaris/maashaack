@@ -36,14 +36,10 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.collections
 {
-    import buRRRn.ASTUce.framework.*;                                            
+    import buRRRn.ASTUce.framework.*;                                                
 
     public class AllTests
     {
-
-        public function AllTests()
-        {
-        }
 
         public static function suite():ITest
         {
