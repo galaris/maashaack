@@ -35,13 +35,12 @@
 
 package system.data.maps
 {
+    import system.Reflection;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;
-    import system.eden;
-    
-    import flash.utils.Dictionary;    
+    import system.eden;    
 
     /**
      * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
@@ -49,10 +48,10 @@ package system.data.maps
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.Map ;
-     * import system.data.maps.HashMap;
+     * import system.data.map.ArrayMap;
      * import system.data.iterator.Iterator;
      * 
-     * var map:Map = new HashMap() ;
+     * var map:Map = new ArrayMap() ;
      * 
      * trace("put key1 -> value0 : " + map.put("key1", "value0") ) ;
      * trace("put key1 -> value1 : " + map.put("key1", "value1") ) ;
@@ -79,22 +78,9 @@ package system.data.maps
      *     var k:* = it.key() ;
      *     trace( "   -> " + k + " : " + v ) ;
      * }
-     * 
-     * trace("--- dynamic insertion ") ;
-     * 
-     * map["key4"] = "value4" ; // dynamic insertion
-     * 
      * trace("map : " + map) ;
      * 
-     * trace("--- use delete") ;
-     * 
-     * delete map["key4"] ;
-     * 
-     * trace(" map : " + map) ;
-     * 
-     * trace("--- remove 'key1'") ;
-     * 
-     * trace("remove key1 : " + (delete map["key1"]) ) ; //.remove("key1")) ;
+     * trace("remove key1 : " + map.remove("key1")) ;
      * 
      * trace("size : " + map.size()) ;
      * 
@@ -107,27 +93,28 @@ package system.data.maps
      * trace("isEmpty : " + map.isEmpty()) ;  
      * </pre>
      */
-    public dynamic class HashMap implements Map
+    public dynamic class ArrayMap implements Map
     {
         
         /**
-         * Creates a new HashMap instance.
+         * Creates a new ArrayMap instance.
+         * @param keys An optional Array of all keys to fill in this Map.
+         * @param values An optional Array of all values to fill in this Map. This Array must have the same size like the 'keys' argument.
          */
-        public function HashMap( ...arguments:Array )
+        public function ArrayMap( ...arguments:Array )
         {
-            clear() ;
-            var k:Array = (arguments[0] as Array) ;
-            var v:Array = (arguments[1] as Array) ;
-            if ( k != null && v != null )
+            var k:Array = arguments[0] as Array ;
+            var v:Array = arguments[1] as Array ;
+            if ( k == null ||  v == null ) 
             {
-                if (k.length > 0 && k.length == v.length)
-                {
-                    var count:int = k.length ;
-                    for(var i:int = 0 ; i < count ; i++) 
-                    {
-                        put(k[i], v[i]) ;
-                    }
-                }
+                _keys   = [] ;
+                _values = [] ;
+            }
+            else 
+            {
+                var b:Boolean =  ( k.length > 0 && k.length == v.length ) ;
+                _keys   = b ? [].concat(k) : [] ;
+                _values = b ? [].concat(v) : [] ;
             }
         }
                 
@@ -136,9 +123,8 @@ package system.data.maps
          */  
         public function clear():void
         {
-			_keys   = new Dictionary(true) ;
-            _values = new Dictionary(true) ;
-            _size = 0 ;
+            _keys   = [] ;
+            _values = [] ;
         }
         
         /**
@@ -147,7 +133,7 @@ package system.data.maps
          */
         public function clone():*
         {
-            var m:HashMap = new HashMap() ;
+            var m:ArrayMap = new ArrayMap() ;
             m.putAll(this) ;
             return m ;
         }
@@ -158,7 +144,7 @@ package system.data.maps
          */
         public function containsKey(key:*):Boolean
         {
-            return _keys[ key ] != null ;
+            return indexOfKey(key) > -1 ;
         }
   
         /**
@@ -167,7 +153,7 @@ package system.data.maps
          */
         public function containsValue(value:*):Boolean
         {
-            return _values[ value ] != null ;
+            return indexOfValue(value) > -1 ;
         }
         
         /**
@@ -176,7 +162,7 @@ package system.data.maps
          */
         public function get(key:*):* 
         {
-            return _keys[ key ] ;
+            return _values[ indexOfKey(key) ] ;
         }
 
         /**
@@ -185,12 +171,7 @@ package system.data.maps
          */
         public function getKeys():Array
         {
-            var ar:Array = [] ;
-            for (var key:* in _keys) 
-            {
-                ar.push( key ) ;
-            }
-            return ar ;
+            return _keys.slice() ;
         }
         
         /**
@@ -199,13 +180,26 @@ package system.data.maps
          */
         public function getValues():Array
         {
-            var ar:Array = [] ;
-            for each (var value:* in _keys) 
-            {
-                ar.push(value) ;
-            }
-            return ar ;
+            return _values.slice() ;
         }
+        
+        /**
+         * Returns the index position in the ArrayMap of the specified key.
+         * @return the index position in the ArrayMap of the specified key.
+         */
+        public function indexOfKey( key:* ):int 
+        {
+            return _keys.indexOf( key ) ;
+        }
+
+        /**
+         * Returns the index position in the ArrayMap of the specified value.
+         * @return the index position in the ArrayMap of the specified value.
+         */
+        public function indexOfValue( value:* ):int
+        {
+            return _values.indexOf(value) ;
+        }        
         
         /**
          * Returns true if this map contains no key-value mappings.
@@ -213,7 +207,7 @@ package system.data.maps
          */
         public function isEmpty():Boolean
         {
-            return _size == 0 ;
+            return size() < 1 ;
         }
 
         /**
@@ -231,25 +225,28 @@ package system.data.maps
          */
         public function keyIterator():Iterator
         {
-            return new ArrayIterator(getKeys()) ;
+            return new ArrayIterator( _keys ) ;
         }
 
         /**
          * Associates the specified value with the specified key in this map.
          */
-        public function put(key:*, value:*):*
+        public function put( key:* , value:* ):*
         {
-            var r:* = null ;
-            if ( containsKey( key ) )
+            var r:* ;
+            var i:int = indexOfKey( key ) ;
+            if ( i < 0 ) 
             {
-                r = _keys[ key ] ;
-                remove( key );
+                _keys.push( key ) ;
+                _values.push( value ) ;
+                return null ;
             }
-            var count:uint   = _values[ value ] ;
-            _values[ value ] = (count > 0) ? count+1 : 1 ;
-            _size++ ;
-            _keys[ key ] = value ;
-            return r ;
+            else 
+            {
+                r = _values[i] ;
+                _values[i] = value ;
+                return r ;
+            }
         }
  
         /**
@@ -257,12 +254,12 @@ package system.data.maps
          */
         public function putAll( m:Map ):void
         {
-            var v:Array = m.getValues() ;
-            var k:Array = m.getKeys() ;
-            var l:int   = k.length ;
-            for ( var i:int = 0 ; i < l ; i = i - (-1) ) 
+            var aV:Array = m.getValues() ;
+            var aK:Array = m.getKeys() ;
+            var l:int    = aK.length ;
+            for (var i:int ; i < l ; i = i - (-1) ) 
             {
-                put( k[i] , v[i] ) ;
+                put(aK[i], aV[i]) ;
             }
         }
  
@@ -270,39 +267,64 @@ package system.data.maps
          * Removes the mapping for this key from this map if present.
          * @return A MapEntry object who contains the key and the value removed from the Map (or null).
          */
-        public function remove(o:*):*
+        public function remove( o:* ):*
         {
-            var key:* = o ;
-            var value:* ;
-            if ( containsKey( key ) ) 
+            var r:*   = null ;
+            var i:int = indexOfKey( o ) ;
+            if (i > -1) 
             {
-                _size -- ;
-                value = _keys[ key ];
-                var count:uint = _values[ value ];
-                if (count > 1)
-                {
-                    _values[ value ] = count - 1;
-                } 
-                else
-                {
-                    delete _values[ value ];
-                }
-                delete _keys[ key ] ;
-                return new MapEntry(key,value) ;
+                var k:* = _keys[i]   ;
+                var v:* = _values[i] ;
+                r = new MapEntry(k,v) ;
+                _values.splice(i, 1) ;
+                _keys.splice(i, 1) ;                
             }
-            else 
+            return r ;
+        }
+
+        /**
+         * Sets the value of the "key" in the ArrayMap with the specified index.
+         * @return A MapEntry who corresponding the old key/value entry or null if the key already exist or the specified index don't exist.
+         */
+        public function setKeyAt( index:uint, key:* ):* 
+        {
+        	if ( containsKey(key) ) // TODO refactoring
+        	{
+        		return null ;
+        	}
+            var k:* = _keys[index] ;
+            if (k === undefined)
             {
-                return null ;
+                return null ;   
             }
+            var v:* = _keys[index] ; 
+            _keys[index] = k ;
+            return new MapEntry(k,v) ;
         }
         
+        /**
+         * Sets the value of the "value" in the ArrayMap with the specified index.
+         * @return A MapEntry who corresponding the old key/value entry or null if no value exist with the specified index.
+         */
+        public function setValueAt( index:Number, value:* ):* 
+        {
+            var v:* = _values[index] ;  // TODO refactoring
+            if (v === undefined)
+            {
+                return null ;   
+            }
+            var k:* = _keys[index] ;
+            _values[index] = value ;
+            return new MapEntry(k,v) ;
+        }
+
         /**
          * Returns the number of key-value mappings in this map.
          * @return the number of key-value mappings in this map.
          */
         public function size():uint
         {
-            return _size ;
+            return _keys.length ;
         }
 
         /**
@@ -311,7 +333,7 @@ package system.data.maps
          */        
         public function toSource( indent:int = 0 ):String 
         {
-            return "new system.data.map.HashMap(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
+            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
         }
  
         /**
@@ -326,17 +348,12 @@ package system.data.maps
         /**
          * @private
          */
-        private var _keys:* ;
-
+        private var _keys:Array ;
+                
         /**
          * @private
          */
-        private var _size:uint ;
-        
-        /**
-         * @private
-         */
-        private var _values:* ;
+        private var _values:Array ;
         
     }
 }

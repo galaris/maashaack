@@ -77,15 +77,6 @@ package system.data.maps
         	
         }         
         
-        public function testProxy():void
-        {
-            map["key3"] = "value3" ;
-            assertEquals(map["key3"] , "value3", "1 - The HashMap proxy failed with the [] notation") ;
-            assertTrue( delete map["key3"] , "2 - The HashMap proxy failed with the [] notation") ;
-            assertFalse( map.containsKey("key3") , "3 - The HashMap proxy failed with the [] notation") ;
-            assertFalse( delete map["key4"] , "4 - The HashMap proxy failed with the [] notation") ;
-        }        
-        
         public function testClear():void
         {
             var m:HashMap = new HashMap(["key1", "key2"],["value1", "value2"]) ;
@@ -166,13 +157,8 @@ package system.data.maps
         public function testPut():void
         {
             assertNull(map.put("key3","value3"), "1 - The HashMap put method failed, with a new key must return null.") ;
-            assertEquals(map["key3"] , "value3", "2 - The HashMap put method failed the key and the value must exist in the map.") ;
-            
             assertEquals(map.put("key3","value4"), "value3", "3 - The HashMap put method failed, with a key who already exist in the map, must return a value.") ;
-            assertEquals(map["key3"] , "value4", "4 - The HashMap put method failed the key and the value must exist in the map.") ;
-            
-            delete map["key3"] ;
-            
+            map.remove("key3") ;
         }        
         
         public function testPutAll():void

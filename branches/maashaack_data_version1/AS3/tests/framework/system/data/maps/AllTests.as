@@ -51,9 +51,10 @@ package system.data.maps
         {
             var suite:TestSuite = new TestSuite("Maashaack data maps tests");
             
-            suite.addTestSuite(MapEntryTest) ; 
-            suite.addTestSuite(HashMapTest) ;            
-            suite.addTestSuite(MapFormatterTest) ;
+            suite.addTestSuite( ArrayMapTest     ) ;
+            suite.addTestSuite( MapEntryTest     ) ; 
+            suite.addTestSuite( HashMapTest      ) ;            
+            suite.addTestSuite( MapFormatterTest ) ;
                       
             return suite;
         }
