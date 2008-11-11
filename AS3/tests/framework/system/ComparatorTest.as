@@ -58,6 +58,10 @@ package system
             assertEquals( c.compare(10,10) ,  0 , "02 - compare(10,10) method failed." ) ;
             assertEquals( c.compare(20,10) ,  1 , "03 - compare(20,10) method failed." ) ;
             
+            assertEquals( c.compare(10,20,ComparatorClass.INVERSE) ,  1 , "04 - compare(10,20,true) method failed." ) ;
+            assertEquals( c.compare(10,10,ComparatorClass.INVERSE) ,  0 , "05 - compare(10,10,true) method failed." ) ;
+            assertEquals( c.compare(20,10,ComparatorClass.INVERSE) , -1 , "06 - compare(20,10,true) method failed." ) ;            
+            
         }        
         
     }

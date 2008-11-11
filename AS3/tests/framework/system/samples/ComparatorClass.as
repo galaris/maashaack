@@ -35,25 +35,28 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.samples 
 {
-    import system.Comparator;
-    
+    import system.Comparator;        
+
     public class ComparatorClass implements Comparator 
     {
         
         public function ComparatorClass()
         {
             
-        }        
+        }
         
-        public function compare(o1:*, o2:*):int
+        public static const INVERSE:Boolean = true ;
+        
+        public function compare(o1:*, o2:* , options:* = null ):int
         {
+        	var i:int = ( options === INVERSE ) ? -1 : 1 ;
         	if ( o1 < o2 )
         	{
-                return -1 ;
+                return -1 * i ;
         	}
         	else if ( o1 > o2 )
         	{
-        		return 1 ;
+        		return 1 * i ;
         	}
         	else
         	{

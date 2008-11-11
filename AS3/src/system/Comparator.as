@@ -43,10 +43,13 @@ package system
     {
 
         /**
-         * Compares its two arguments for order. Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+         * Compares two arguments for order. Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+         * @param o1 The first object to compare.
+         * @param o2 The second object to compare.
+         * @param options An optional object used to compare the two objects.
          * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
          */ 
-        function compare( o1:* , o2:* ):int ;
+        function compare( o1:* , o2:* , options:* = null ):int ;
 
     }
 }
