@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -32,26 +31,38 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
- */
+*/
 
-package system
+package system.samples
 {
-    import buRRRn.ASTUce.framework.*;
+    import system.Equatable;
 
-    import system.samples.SerializableClass;    
-
-    public class SerializationTest extends TestCase
+    public class EquatableClass implements Equatable
     {
 
-        public function SerializationTest( name:String = "" )
+        public var a:String;
+
+        public var b:String;
+
+        public function EquatableClass( a:String, b:String )
         {
-            super(name);
+            this.a = a;
+            this.b = b;
         }
 
-        public function testBasic():void
+        public function equals( o:* ):Boolean
         {
-            var s:SerializableClass = new SerializableClass("a", "b");
-            assertEquals("new Serializable( \"a\", \"b\" );", s.toSource());
+            if( !(o is EquatableClass) )
+            {
+                return false;
+            }
+            
+            if( (a == o.a) && (b == o.b) )
+            {
+                return true;
+            }
+            
+            return false;
         }
     }
 }

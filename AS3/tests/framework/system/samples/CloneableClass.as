@@ -33,31 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system
+package system.samples 
 {
-    import system.eden;
-    
-    import system.Serializable;
-    import system.Strings;    
+    import system.Cloneable;    
 
-    public class SerializableClass implements Serializable
+    public class CloneableClass implements Cloneable 
+    {
+    	
+        public function CloneableClass( index:uint=0 )
         {
-        public var a:String;
-        public var b:String;
-        
-        public function SerializableClass( a:String, b:String )
-            {
-            this.a = a;
-            this.b = b;
-            }
-        
-        public function toSource( indent:int = 0 ):String
-            {
-            var mask:String = "new Serializable( {a}, {b} );";
-            var str:String  = Strings.format( mask, {a:eden.serialize( a ), b:eden.serialize( b )} );
-            return str;
-            }
-        
+            this.index = index ;    
         }
-    
+        
+        public var index:uint ;
+
+        public function clone():*
+        {
+            return new CloneableClass( index ) ;
+        }
     }
+}
