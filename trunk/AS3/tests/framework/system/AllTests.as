@@ -64,6 +64,7 @@ package system
             //others
             suite.addTestSuite(CloneableTest);
             suite.addTestSuite(ComparatorTest);
+            suite.addTestSuite(SortableTest);
             suite.addTestSuite(VersionTest);
             suite.addTestSuite(ReflectionTest);
             suite.addTestSuite(EqualityTest);
