@@ -35,7 +35,13 @@
 
 package system.data.iterators 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.Iterator;
+    import system.data.OrderedIterator;
+    
+    import flash.errors.IllegalOperationError;    
 
     public class PageByPageIteratorTest extends TestCase 
     {
@@ -45,10 +51,199 @@ package system.data.iterators
             super( name );
         }
         
+        
+        public var i:PageByPageIterator ;
+
+        public function setUp():void
+        {
+            i = new PageByPageIterator([1,2,3,4,5,6], 2) ;
+        }
+
+        public function tearDown():void
+        {
+            i = undefined ;
+        }
+        
+        public function testConstructor():void
+        {
+            
+            var it:PageByPageIterator ;
+            
+            assertNotNull( i , "01 - constructor failed, the instance not must be null." ) ;
+            
+            try
+            {
+                it = new PageByPageIterator(null) ;
+                fail("02-01 - The PageByPageIterator constructor first argument (Array) not must be null.") ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is IllegalOperationError , "02-02 - PageByPageIterator constructor failed." ) ;
+            	assertEquals
+            	( 
+            	   e.message , 
+            	   "PageByPageIterator constructor failed, data length not must be empty" ,
+            	   "02-03 - PageByPageIterator constructor failed." 
+            	  ) ;
+            }
+            
+            try
+            {
+                it = new PageByPageIterator([]) ;
+                fail("03-01 The PageByPageIterator constructor first argument (Array) not must be empty.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError , "03-02 - PageByPageIterator constructor failed." ) ;
+                assertEquals
+                ( 
+                   e.message , 
+                   "PageByPageIterator constructor failed, data length not must be empty" ,
+                   "03-03 - PageByPageIterator constructor failed." 
+                ) ;
+            } 
+            
+            it = new PageByPageIterator([2,3,4], 0) ;
+            assertEquals( it.getStepSize() , PageByPageIterator.DEFAULT_STEP, "04-01 - constructor failed." ) ;
+                  
+            it = new PageByPageIterator([2,3,4], 1) ;
+            assertEquals( it.getStepSize() , PageByPageIterator.DEFAULT_STEP, "04-02 - constructor failed." ) ;
+            
+            it = new PageByPageIterator([2,3,4], 2) ;
+            assertEquals( it.getStepSize() , 2, "04-03 - constructor failed." ) ;
+              	
+        }
+        
         public function testInterface():void
         {
-                        
+            assertTrue( i is Iterator        , "The instance must implements the Iterator interface") ;
+            assertTrue( i is OrderedIterator , "The instance must implements the OrderedIterator interface") ;
         }         
+        
+        public function testDEFAULT_STEP():void
+        {
+            assertEquals(PageByPageIterator.DEFAULT_STEP, 1, "The PageByPageIterator.DEFAULT_STEP value isn't valid.") ;     
+        }          
+        
+        public function testCurrentPage():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
+            assertEquals( it.currentPage() , 0, "01 - currentPage failed." ) ;
+            it.next() ;
+            assertEquals( it.currentPage() , 1, "02 - currentPage failed." ) ;
+        }
+
+        public function testGetStepSize():void
+        {
+            var it:PageByPageIterator ;
+            
+            it = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
+            assertEquals( it.getStepSize() , 2, "01 - getStepSize() failed." ) ;
+            
+            it = new PageByPageIterator( [1,2,3,4,5,6]) ;
+            assertEquals( it.getStepSize() , PageByPageIterator.DEFAULT_STEP, "02 - getStepSize() failed." ) ;
+        }
+        
+        public function testHasNext():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2) ;
+            assertTrue( it.hasNext() , "hasNext() failed : " + it.hasNext() ) ;
+        }
+        
+        public function testHasPrevious():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2) ;
+            
+            assertFalse( it.hasPrevious() , "01 - hasPrevious() failed." ) ;
+            
+            it.next() ; it.next() ;
+            
+            assertTrue( it.hasPrevious() , "02 - hasPrevious() failed." ) ;
+        }
+        
+        public function testKey():void
+        {        
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2) ;
+            assertEquals( it.key() , 0, "01 -key() failed." ) ;
+            it.next() ;
+            assertEquals( it.key() , 1, "02 - key() failed." ) ;
+        }
+        
+        public function testLastPage():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
+            it.lastPage() ;
+            assertEquals( it.key() , 4, "lastPage() failed." ) ;
+        }
+        
+        public function testNext():void
+        {
+        	var it:PageByPageIterator ;
+
+            ArrayAssert.assertEquals( i.next() , [1,2], "01 : next() failed." ) ;
+            ArrayAssert.assertEquals( i.next() , [3,4], "02 - next() failed." ) ;
+            ArrayAssert.assertEquals( i.next() , [5,6], "03 - next() failed." ) ;
+
+            i.reset() ;
+            
+            it = new PageByPageIterator( [1,2,3,4,5,6] ) ;
+            
+            assertEquals  ( it.next() , 1, "04 : next() failed." ) ;
+            
+        }
+        
+        public function testPageCount():void
+        {
+        	assertEquals( i.pageCount() , 3, "pageCount() method failed.") ;
+        }
+        
+        public function testPrevious():void
+        {
+            i.lastPage() ;
+            
+            ArrayAssert.assertEquals  ( i.previous() , [5,6], "01 - previous() failed." ) ;
+            ArrayAssert.assertEquals  ( i.previous() , [3,4], "02 - previous() failed." ) ;
+            ArrayAssert.assertEquals  ( i.previous() , [1,2], "03 - previous() failed." ) ;
+            
+            i.reset() ;
+            
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] ) ;
+            it.lastPage() ;
+            assertEquals ( it.previous() , 6, "04 - previous() failed." ) ;     
+        }
+        
+        public function testRemove():void
+        {
+             var it:PageByPageIterator = new PageByPageIterator( [1,2,3] , 2 ) ;
+             try
+             {
+                it.remove() ;
+                fail("PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
+                	
+             }
+             catch(e:Error)
+             {
+             	assertTrue(e is IllegalOperationError, "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
+             	assertEquals(e.message, "The PageByPageIterator remove method is unsupported.", "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
+             }
+            
+        }
+        
+        public function testReset():void
+        {
+            i.next() ;
+            i.next() ;
+            i.reset() ;
+            assertEquals ( i.key() , 0, "01 - reset() failed." ) ;
+            ArrayAssert.assertEquals ( i.next() , [1,2], "02 - reset() failed." ) ;
+            i.reset() ;
+        }
+        
+        public function testSeek():void
+        {
+        	i.seek(1) ;
+            ArrayAssert.assertEquals ( i.next() , [3,4], "seek() failed." ) ;
+        }
         
     }
 }

@@ -61,6 +61,7 @@ package system.data
             
             // test system.data interfaces
             
+            suite.addTestSuite( BoundableTest       ) ;
             suite.addTestSuite( CollectionTest      ) ;
             suite.addTestSuite( EntryTest           ) ;
             suite.addTestSuite( IdentifiableTest    ) ;

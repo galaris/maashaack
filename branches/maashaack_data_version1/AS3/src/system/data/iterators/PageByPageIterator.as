@@ -84,29 +84,25 @@ package system.data.iterators
         
         /**
          * Creates a new PageByPageIterator.
-         * @param stepSize the step size value.
          * @param data the array to enumerate.
+         * @param stepSize the step size value.
          * @throws IllegalOperationError if the data array is empty.
          */
-        public function PageByPageIterator( stepSize:uint = 1 , data:Array = null )
+        public function PageByPageIterator( data:Array , stepSize:uint = 1 )
         {
             super();
-            if (data == null)
+            if ( data == null || data.length == 0 )
             {
-                throw new IllegalOperationError(this + " constructor failed, the array passed-in argument not must be empty or 'null'.") ;
-            }
-            var len:Number = data.length ;
-            if (len > 0)
-            {
-                _data = data ;
-                _key = 0 ;
-                _currentPage = 0 ;
-                _step = (stepSize > 1) ? stepSize : PageByPageIterator.DEFAULT_STEP ; 
-                _pageCount =  Math.ceil(len / _step) ;
+                throw new IllegalOperationError( "PageByPageIterator constructor failed, data length not must be empty" ) ;    	
             }
             else
             {
-                throw new IllegalOperationError( this + " constructor failed, data length not must be empty") ;
+                var len:int = data.length ;
+                 _data = data ;
+                 _key = 0 ;
+                 _currentPage = 0 ;
+                 _step = (stepSize > 1) ? stepSize : PageByPageIterator.DEFAULT_STEP ; 
+                 _pageCount =  Math.ceil( len / _step ) ;
             }
         }
         
@@ -219,7 +215,7 @@ package system.data.iterators
          */
         public function remove():*
         {
-            throw new IllegalOperationError(this + " remove method is unsupported by this instance.") ;
+            throw new IllegalOperationError("The PageByPageIterator remove method is unsupported.") ;
         }
         
         /**
