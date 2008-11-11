@@ -37,13 +37,12 @@ package system
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Cloneable;
-    import system.samples.CloneableClass;    
+    import system.samples.ComparatorClass;    
 
-    public class CloneableTest extends TestCase 
+    public class ComparatorTest extends TestCase 
     {
         
-        public function CloneableTest(name:String = "")
+        public function ComparatorTest(name:String = "")
         {
             super( name );
         }
@@ -51,14 +50,13 @@ package system
         public function testInterface():void
         {
             
-            var c:CloneableClass = new CloneableClass();
+            var c:ComparatorClass = new ComparatorClass();
             
-            assertTrue( c is Cloneable ) ;
+            assertTrue( c is Comparator ) ;
             
-            var clone:CloneableClass = c.clone() ;
-            
-            assertNotSame( c , clone ) ;
-            assertEquals( c.index , clone.index ) ;
+            assertEquals( c.compare(10,20) , -1 , "01 - compare(10,20) method failed." ) ;
+            assertEquals( c.compare(10,10) ,  0 , "02 - compare(10,10) method failed." ) ;
+            assertEquals( c.compare(20,10) ,  1 , "03 - compare(20,10) method failed." ) ;
             
         }        
         

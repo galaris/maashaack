@@ -34,24 +34,30 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package system
+package system.samples
 {
-    import buRRRn.ASTUce.framework.*;
+    import system.eden;
+    import system.Serializable;
+    import system.Strings;    
 
-    import system.samples.SerializableClass;    
-
-    public class SerializationTest extends TestCase
+    public class SerializableClass implements Serializable
     {
 
-        public function SerializationTest( name:String = "" )
+        public var a:String;
+
+        public var b:String;
+
+        public function SerializableClass( a:String, b:String )
         {
-            super(name);
+            this.a = a;
+            this.b = b;
         }
 
-        public function testBasic():void
+        public function toSource( indent:int = 0 ):String
         {
-            var s:SerializableClass = new SerializableClass("a", "b");
-            assertEquals("new Serializable( \"a\", \"b\" );", s.toSource());
+            var mask:String = "new Serializable( {a}, {b} );";
+            var str:String = Strings.format(mask, {a:eden.serialize(a), b:eden.serialize(b)});
+            return str;
         }
     }
 }

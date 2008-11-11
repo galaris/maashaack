@@ -33,36 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system
+package system 
+{
+
+    /**
+     * A comparison function, which imposes a total ordering on some collection of objects.
+     */
+    public interface Comparator 
     {
-    import system.Equatable;
-    
-    public class EquatableClass implements Equatable
-        {
-        public var a:String;
-        public var b:String;
-        
-        public function EquatableClass( a:String, b:String )
-            {
-            this.a = a;
-            this.b = b;
-            }
-        
-        public function equals( o:* ):Boolean
-            {
-            if( !(o is EquatableClass) )
-                {
-                return false;
-                }
-            
-            if( (a == o.a) && (b == o.b) )
-                {
-                return true;
-                }
-            
-            return false;
-            }
-        
-        }
-    
+
+        /**
+         * Compares its two arguments for order. Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+         * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+         */ 
+        function compare( o1:* , o2:* ):int ;
+
     }
+}
