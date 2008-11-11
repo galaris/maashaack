@@ -35,6 +35,7 @@
 
 package system.data.maps
 {
+    import system.Reflection;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
@@ -311,7 +312,7 @@ package system.data.maps
          */        
         public function toSource( indent:int = 0 ):String 
         {
-            return "new system.data.map.HashMap(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
+            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
         }
  
         /**

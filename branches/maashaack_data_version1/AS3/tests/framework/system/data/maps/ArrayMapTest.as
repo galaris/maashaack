@@ -70,10 +70,10 @@ package system.data.maps
             
             var m1:ArrayMap = new ArrayMap() ;
             
-            assertEquals( m1.size() , 0 , "3 - The ArrayMap constructor failed : m.get('key1')") ;
+            assertEquals( m1.size() , 0 , "3 - The ArrayMap constructor failed") ;
             
             var m2:ArrayMap = new ArrayMap(null,["value1", "value2"]) ;
-            assertEquals( m2.size() , 0 , "3 - The ArrayMap constructor failed : m.get('key1')") ;
+            assertEquals( m2.size() , 0 , "4 - The ArrayMap constructor failed") ;
             
         }         
                 
@@ -130,6 +130,20 @@ package system.data.maps
             assertTrue( values.indexOf("value3") == -1 , "3 - The ArrayMap getValues method failed.") ;
         }
         
+        public function testIndexOfKey():void
+        {
+            assertEquals( map.indexOfKey("key1") , 0,  "1 - The ArrayMap indexOfKey method failed." )  ;
+            assertEquals( map.indexOfKey("key2") , 1,  "2 - The ArrayMap indexOfKey method failed." )  ;
+            assertEquals( map.indexOfKey("key3") , -1,  "3 - The ArrayMap indexOfKey method failed." )  ;
+        }  
+        
+        public function testIndexOfValue():void
+        {
+            assertEquals( map.indexOfValue("value1") , 0,  "1 - The ArrayMap indexOfValue method failed." )  ;
+            assertEquals( map.indexOfValue("value2") , 1,  "2 - The ArrayMap indexOfValue method failed." )  ;
+            assertEquals( map.indexOfValue("value3") , -1,  "3 - The ArrayMap indexOfValue method failed." )  ;
+        }                  
+        
         public function testIsEmpty():void
         {
             var m:ArrayMap = new ArrayMap() ;
@@ -183,6 +197,16 @@ package system.data.maps
             assertEquals( entry.value , "value3" , "2 - The ArrayMap remove method failed.") ;
             assertNull( map.remove("key4"), "3 - The ArrayMap remove method failed.") ;
         }        
+       
+        public function testSetKeyAt():void
+        {
+            //var entry:MapEntry = map.setKeyAt("key3") ;
+        }        
+
+        public function testSetValueAt():void
+        {
+            
+        }
        
         public function testSize():void
         {
