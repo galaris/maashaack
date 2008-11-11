@@ -284,11 +284,18 @@ package system.data.maps
 
         /**
          * Sets the value of the "key" in the ArrayMap with the specified index.
+         * @param index The position of the entry in the ArrayMap.
+         * @param value The value of the entry to change. 
          * @return A MapEntry who corresponding the old key/value entry or null if the key already exist or the specified index don't exist.
+         * @throws RangeError If the index is out of the range of the Map size.
          */
         public function setKeyAt( index:uint, key:* ):* 
         {
-        	if ( containsKey(key) ) // TODO refactoring
+        	if ( index >= size() )
+        	{
+        		throw new RangeError( "ArrayMap.setKeyAt(" + index + ") failed with an index out of the range.") ;
+            }
+        	if ( containsKey( key ) )
         	{
         		return null ;
         	}
@@ -297,17 +304,24 @@ package system.data.maps
             {
                 return null ;   
             }
-            var v:* = _keys[index] ; 
-            _keys[index] = k ;
+            var v:* = _values[index] ; 
+            _keys[index] = key ;
             return new MapEntry(k,v) ;
         }
         
         /**
          * Sets the value of the "value" in the ArrayMap with the specified index.
+         * @param index The position of the entry in the ArrayMap.
+         * @param value The value of the entry to change.
          * @return A MapEntry who corresponding the old key/value entry or null if no value exist with the specified index.
+         * @throws RangeError If the index is out of the range of the Map size.
          */
-        public function setValueAt( index:Number, value:* ):* 
+        public function setValueAt( index:uint, value:* ):* 
         {
+        	if ( index >= size() )
+        	{
+        		throw new RangeError( "ArrayMap.setValueAt(" + index + ") failed with an index out of the range.") ;
+            }        	
             var v:* = _values[index] ;  // TODO refactoring
             if (v === undefined)
             {
