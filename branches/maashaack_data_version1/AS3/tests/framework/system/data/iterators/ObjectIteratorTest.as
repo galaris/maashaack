@@ -115,7 +115,7 @@ package system.data.iterators
         	var i:ObjectIterator = new ObjectIterator( v ) ;
             i.next() ;
             var r:* = i.remove() ; 
-            assertTrue( r == "x" , "remove() method failed" ) ;
+            assertTrue( r == "x" || r == "y" , "remove() method failed" ) ;
             it.reset() ;
         }           
     
@@ -132,7 +132,8 @@ package system.data.iterators
             var v:Object         = { x:100 , y : 200} ;
             var i:ObjectIterator = new ObjectIterator( v ) ;        	
             i.seek(1) ;
-            assertEquals( i.next() , 200 , "seek(1) method failed" ) ;
+            var r:* = i.next() ;
+            assertTrue( r == 200 || r == 100 , "seek(1) method failed" ) ;
             it.reset() ;
         }        
         

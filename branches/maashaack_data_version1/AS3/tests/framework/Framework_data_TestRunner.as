@@ -81,7 +81,7 @@ package
             
             Runner.main
             ( 
-                system.data.AllTests.suite() // , system.AllTests.suite() 
+                system.data.AllTests.suite() , system.AllTests.suite() 
             );
             
         }
