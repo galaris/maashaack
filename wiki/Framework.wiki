@@ -33,7 +33,7 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
 = Roadmap =
 
-== v0.2.0 ==
+== (v0.2.0) ==
 
 *For Your Eyes Only*
 
@@ -69,3 +69,5 @@ features:
  * core object utils: Strings, Arrays, Objects, etc.
  * cli: utils for command line tools
  * ui: basic layout library, mainly for debug/diagnostic tools
+
+tag: [http://maashaack.googlecode.com/svn/tags/0.1.0 0.1.0]
