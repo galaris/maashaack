@@ -21,7 +21,7 @@ Before you begin to use the @project_fullname@ within Flash CS3,
 you first need to add the @project_shortname@ SWC to Flash CS3.
 
 To do so:
-1. If you have Flash CS3 currently open, quit the application.
+1. If you have Flash CS3 currently open, NO NEED to quit the application.
 
 2. Navigate to the location where you unzipped the @project_shortname@ zip
    and find the swc (e.g. lib/maashaack.swc).
@@ -29,6 +29,8 @@ To do so:
 3. Copy the SWC file there:
    - (Windows) C:\Program Files\Adobe\ Adobe Flash CS3\language\Configuration\Components
    - (Mac OS X) Macintosh HD/Applications/Adobe Flash CS3/Configuration/Components
+
+4. In the Component panel options click "reload".
 
 Flash CS3 is now set up to support the @project_fullname@.
 
