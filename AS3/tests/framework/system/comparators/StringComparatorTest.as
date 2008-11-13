@@ -61,9 +61,17 @@ package system.comparators
         
         public function testConstructor():void
         {
+
+            assertNotNull( comparator , "01 - The StringComparator constructor failed." ) ;
+            assertFalse( comparator.ignoreCase  , "02 - The StringComparator constructor failed." ) ;
             
-            assertNotNull( comparator , "The StringComparator constructor failed." ) ;
+            var c:StringComparator ;
             
+            c = new StringComparator(true) ;
+            assertTrue( c.ignoreCase  , "03 - The StringComparator constructor failed." ) ;
+            
+            c = new StringComparator(false) ;
+            assertFalse( c.ignoreCase  , "04 - The StringComparator constructor failed." ) ;
             
         }
         
@@ -71,20 +79,34 @@ package system.comparators
         {
             comparator.ignoreCase = true ;
             
-            assertTrue( comparator.ignoreCase , "") ;
+            assertTrue( comparator.ignoreCase , "01 - The StringComparator ignoreCase failed.") ;
             
             comparator.ignoreCase = false ;	
             
-            assertFalse( comparator.ignoreCase , "") ;
+            assertFalse( comparator.ignoreCase , "02 - The StringComparator ignoreCase failed.") ;
         }
         
         
         public function testCompare():void
         {
+
+            var comp1:StringComparator = new StringComparator() ;
+            var comp2:StringComparator = new StringComparator(true) ; // ignore case
+
+            var s0:String = "HELLO" ;
+            var s1:String = "hello" ;
+            var s2:String = "welcome" ;
+            var s3:String = "world" ;
+            
+            assertEquals( comp1.compare(s1, s2) , -1 , "01 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s2, s1) ,  1 , "02 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s3) ,  1 , "03 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s1) ,  0 , "04 - The StringComparator compare failed." ) ;
+
+            assertEquals( comp1.compare(s1, s0) ,  0 , "05 - The StringComparator compare failed." ) ;
+            assertEquals( comp2.compare(s1, s0) , -1 , "06 - The StringComparator compare failed." ) ;
             
         } 
-        
-        
         
         public function testGetIgnoreCaseStringComparator():void
         {

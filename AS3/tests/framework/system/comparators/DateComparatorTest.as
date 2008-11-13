@@ -73,13 +73,13 @@ package system.comparators
             var d3:Date   = new Date(2007, 2, 2, 0, 0, 0, 0) ;
             var d4:Number = 1172790000000 ;
         	
-            assertEquals( comparator.compare(d1, d1) ,  0 , "01-01 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d1, d2) ,  0 , "01-02 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d2, d1) ,  0 , "01-03 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d1, d3) , -1 , "01-04 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d1, d4) , -1 , "01-05 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d3, d1) ,  1 , "01-06 - The DateComparator compare failed." ) ;
-            assertEquals( comparator.compare(d4, d1) ,  1 , "01-07 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d1) ,  0 , "01 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d2) ,  0 , "02 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d2, d1) ,  0 , "03 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d3) , -1 , "04 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d4) , -1 , "05 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d3, d1) ,  1 , "06 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d4, d1) ,  1 , "07 - The DateComparator compare failed." ) ;
             
         }
         
