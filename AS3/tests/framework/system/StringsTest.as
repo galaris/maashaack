@@ -165,8 +165,6 @@ package system
             var str3:String = "my result is ${{a:1,b:2}}eden2$";
             
             Strings.evaluators = { eden: new EdenEvaluator(), eden2: new EdenEvaluator(false) };
-                       
-            Strings.evaluators = { eden: new EdenEvaluator(), eden2: new EdenEvaluator(false) };
                         
             assertTrue(Strings.format(str1) == "my result is {a:1,b:2}" || Strings.format(str1) == "my result is {b:2,a:1}"); // TODO FP10 hack 
             assertTrue( Strings.format(str2) == "my result is {a:1,b:2}" || Strings.format(str2) == "my result is {b:2,a:1}" ); // TODO FP10 hack
