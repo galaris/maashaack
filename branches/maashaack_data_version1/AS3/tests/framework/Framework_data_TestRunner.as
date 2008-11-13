@@ -39,7 +39,6 @@ package
     
     import system.*;
     import system.data.*;
-    import system.evaluators.EdenEvaluator;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
