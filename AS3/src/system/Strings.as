@@ -36,6 +36,7 @@
 package system
 {
     import system.evaluators.EdenEvaluator;
+    import system.evaluators.MultiEvaluator;    
 
     /**
      * A static class for String utilities.
@@ -267,16 +268,7 @@ package system
             obj.indexes = [];
             
             var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
-            var evaluators:Array = [];
-            
-            var evaluate:Function = function( expression:* ):String
-            {
-                for( var i:uint = 0; i < evaluators.length ; i++ )
-                {
-                    expression = evaluators[i].eval( expression );
-                }
-                return String( expression );
-            };
+            var evaluators:MultiEvaluator = new MultiEvaluator();
             
             var evalSequence:String = "";
             var evalString:String = "";
@@ -302,7 +294,8 @@ package system
                     return true;
                 }
                 var test:Array = str.split( "" );
-                for( var i:uint = 0; i < test.length ; i++ )
+                var l:int      = test.length ;
+                for( var i:int = 0; i < l ; i++ )
                 {
                     if( ! isValidChar( test[i] ) )
                     {
@@ -314,15 +307,18 @@ package system
             
             while( value.indexOf( "${" ) > - 1 )
             {
+                
                 pos1 = value.indexOf( "${" );
                 pos2 = value.indexOf( "$", pos1 + 2 );
+                
                 if( pos2 == - 1 )
                 {
                     throw new Error( "malformed evaluator, could not find [$] after [}]." );
                 }
+                
                 evalSequence = value.slice( pos1 + 2, pos2 );
-                lpos = evalSequence.lastIndexOf( "}" );
-                inBetween = evalSequence.substring( lpos + 1 );
+                lpos         = evalSequence.lastIndexOf( "}" );
+                inBetween    = evalSequence.substring( lpos + 1 );
                 
                 while( ! isValid( inBetween ) )
                 {
@@ -350,11 +346,12 @@ package system
                         evaluatorsAlias = [ tmp ];
                     }
                     
-                    for( var i:uint = 0; i < evaluatorsAlias.length ; i++ )
+                    var l:int = evaluatorsAlias.length ;
+                    for( var i:uint = 0; i < l ; i++ )
                     {
                         if( Strings.evaluators[ evaluatorsAlias[i] ] )
                         {
-                            evaluators.push( Strings.evaluators[ evaluatorsAlias[i] ] );
+                            evaluators.add( Strings.evaluators[ evaluatorsAlias[i] ] );
                         }
                         else
                         {
@@ -366,14 +363,14 @@ package system
                     }
                 }
                 
-                if( evaluators.length == 0 )
+                if( evaluators.size() == 0 )
                 {
-                    evaluators = [ defaultEvaluator ];
+                    evaluators.add( defaultEvaluator ) ;
                 }
                 
                 evalString = evalSequence.substring( 0, lpos );
                 
-                obj.indexes.push( evaluate( evalString ) );
+                obj.indexes.push( evaluators.eval( evalString ) );
                 value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
             }
             
@@ -577,17 +574,18 @@ package system
          */
         public static function format( format:String, ...args ):String
         {
-            var indexedValues:Array = [];
-            var namedValues:Object = {};
+        	
+            var indexedValues:Array = [] ;
+            var namedValues:Object  = {} ;
             
             if( format == "" )
             {
-                return format;
+                return format ;
             }
             
             var evaluated:Object = _evaluate( format );
             
-            if( (evaluated.indexes.length == 0) && ((args == null) || (args.length == 0)) )
+            if( evaluated != null && (evaluated.indexes.length == 0) && ((args == null) || (args.length == 0)) )
             {
                 return format; //nothing to format
             }
@@ -613,7 +611,7 @@ package system
             }
             
             indexedValues = indexedValues.concat( args );
-            
+
             if( indexedValues.length - 1 >= _hiddenIndex )
             {
                 /* TODO:
@@ -622,7 +620,8 @@ package system
                 trace( "## Warning : indexed tokens are too big ##" );
             }
             
-            for( var i:uint = 0; i < evaluated.indexes.length ; i++ )
+            var l:int = evaluated.indexes.length ;
+            for( var i:uint = 0; i < l ; i++ )
             {
                 indexedValues[ (_hiddenIndex + i) ] = evaluated.indexes[i];
             }
