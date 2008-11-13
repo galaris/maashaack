@@ -37,7 +37,8 @@ package system.comparators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Comparator;    
+    import system.Comparator;
+    import system.Sortable;    
 
     public class ReverseComparatorTest extends TestCase 
     {
@@ -47,27 +48,92 @@ package system.comparators
             super(name);
         }
         
-        public var comparator:Comparator ;
-        
-        public function setUp():void
-        {
-            comparator = new ReverseComparator() ;
-        }
-
-        public function tearDown():void
-        {
-            comparator = null ;
-        }
-        
         public function testConstructor():void
         {
-            assertNotNull( comparator , "The ReverseComparator constructor failed." ) ;
+                        
+            var c:ReverseComparator ;
+            var s:StringComparator  = StringComparator.getStringComparator() ;
+                
+            c = new ReverseComparator( s ) ;
+            
+            assertNotNull ( c               , "01-01 - The ReverseComparator constructor failed." ) ;
+            assertTrue    ( c is Comparator , "01-02 - The ReverseComparator constructor failed." ) ;
+            
+            try
+            {
+                c = new ReverseComparator( null ) ;
+                fail( "02-01 - The ReverseComparator constructor failed." ) ;
+            }
+            catch(e:Error)
+            {
+                assertEquals
+                ( 
+                   e.message ,
+                   "The ReverseComparator 'comparator' property not must be 'null'" , 
+                   "02-02 - The ReverseComparator constructor failed."
+                ) ;
+            }
+                    
+        }
+        
+        public function testInterface():void
+        {
+            var c:ReverseComparator = new ReverseComparator( StringComparator.getStringComparator() ) ;
+            assertTrue( c is Sortable , "The ReverseComparator must implement the system.Sortable interface." ) ;
+        }
+        
+        public function testComparator():void
+        {
+            var c:ReverseComparator ;
+            var s:StringComparator  = StringComparator.getStringComparator() ;
+                
+            c = new ReverseComparator( s ) ; 
+            
+            assertEquals( c.comparator , s, "01 - The ReverseComparator comparator property failed." ) ;
+            
+            try
+            {
+                c.comparator = null ;
+                fail( "02 - The ReverseComparator comparator property failed." ) ;
+            }
+            catch(e:Error)
+            {
+                assertEquals
+                ( 
+                   e.message ,
+                   "The ReverseComparator 'comparator' property not must be 'null'" , 
+                   "03 - The ReverseComparator comparator property failed." 
+                ) ;
+            }            
+            
         }
         
         public function testCompare():void
         {
             
-        }        
+            var c:ReverseComparator ;
+            var s:StringComparator  = StringComparator.getStringComparator() ;
+            
+            var s1:Object = "1"   ;
+            var s2:Object = "1"   ;
+            var s3:Object = "11"  ;
+            var s4:Object = "111" ;
+            
+            c = new ReverseComparator( s ) ;
+            
+            assertEquals( c.compare( s1 , s1 ) ,  0 , "01 - The ReverseComparator compare method failed." ) ;
+            assertEquals( c.compare( s1 , s2 ) ,  0 , "02 - The ReverseComparator compare method failed." ) ;
+            assertEquals( c.compare( s2 , s1 ) ,  0 , "03 - The ReverseComparator compare method failed." ) ;
+            assertEquals( c.compare( s2 , s2 ) ,  0 , "04 - The ReverseComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( s1 , s3 ) ,  1 , "05 - The ReverseComparator compare method failed." ) ;
+            assertEquals( c.compare( s1 , s4 ) ,  1 , "06 - The ReverseComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( s3 , s1 ) ,  -1 , "07 - The ReverseComparator compare method failed." ) ;
+            assertEquals( c.compare( s4 , s2 ) ,  -1 , "08 - The ReverseComparator compare method failed." ) ;
+            
+        }
+               
         
     }
 }

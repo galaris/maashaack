@@ -61,7 +61,7 @@ package system.comparators
             try
             {
                 c = new GenericComparator( null, s ) ;
-                fail( "02-01 - The ComparableComparator compare failed." ) ;
+                fail( "02-01 - The GenericComparator constructor failed." ) ;
             }
             catch(e:Error)
             {
@@ -69,14 +69,14 @@ package system.comparators
                 ( 
                    e.message ,
                    "The GenericComparator 'sortBy' property not must be 'null'" , 
-                   "02-02 - The ComparableComparator constructor failed."
+                   "02-02 - The GenericComparator constructor failed."
                 ) ;
             }
             
             try
             {
                 c = new GenericComparator( "label", null ) ;
-                fail( "03-01 - The ComparableComparator compare failed." ) ;
+                fail( "03-01 - The GenericComparator constructor failed." ) ;
             }
             catch(e:Error)
             {
@@ -84,7 +84,7 @@ package system.comparators
                 ( 
                    e.message ,
                    "The GenericComparator 'comparator' property not must be 'null'" , 
-                   "03-02 - The ComparableComparator constructor failed."
+                   "03-02 - The GenericComparator constructor failed."
                 ) ;
             }
                     
