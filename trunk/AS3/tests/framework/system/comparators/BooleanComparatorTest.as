@@ -35,9 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.comparators 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.Comparator;    
+    import buRRRn.ASTUce.framework.TestCase;    
 
     public class BooleanComparatorTest extends TestCase 
     {
@@ -47,7 +45,7 @@ package system.comparators
             super(name);
         }
         
-        public var comparator:Comparator ;
+        public var comparator:BooleanComparator ;
         
         public function setUp():void
         {
@@ -61,12 +59,46 @@ package system.comparators
         
         public function testConstructor():void
         {
-        	assertNotNull( comparator , "The BooleanComparator constructor failed." ) ;
+        	assertNotNull( comparator , "01 - The BooleanComparator constructor failed." ) ;
+        	
+        	var c1:BooleanComparator = new BooleanComparator(true) ;
+        	assertTrue( c1.trueFirst , "02 - The BooleanComparator constructor failed.") ;
+        	
+        	var c2:BooleanComparator = new BooleanComparator(true) ;
+        	assertTrue( c2.trueFirst , "03 - The BooleanComparator constructor failed.") ;
+        	
+        	var c3:BooleanComparator = new BooleanComparator(false) ;
+        	assertFalse( c3.trueFirst , "04 - The BooleanComparator constructor failed.") ;
+        	
         }
         
         public function testCompare():void
         {
-        	
+        	comparator.trueFirst = true ;
+            assertEquals( comparator.compare(true, true)   ,  0 , "01 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(true, false)  ,  1 , "02 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(false, true)  , -1 , "03 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(false, false) ,  0 , "04 - The BooleanComparator compare method failed." ) ;
+            
+            comparator.trueFirst = false ;
+            assertEquals( comparator.compare(true, true)   ,  0  ,  "01 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(true, false)  , -1  ,  "02 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(false, true)  ,  1  ,  "03 - The BooleanComparator compare method failed." ) ;
+            assertEquals( comparator.compare(false, false) ,  0  ,  "04 - The BooleanComparator compare method failed." ) ;
+        }
+        
+        public function testGetFalseFirstComparator():void
+        {
+            var c:BooleanComparator = BooleanComparator.getFalseFirstComparator() ;
+            assertNotNull( c , "The BooleanComparator.getTrueFirstComparator singleton not must be null.") ;
+            assertFalse( c.trueFirst , "The BooleanComparator.getTrueFirstComparator.trueFirst value must be false.") ;
+        }
+        
+        public function testGetTrueFirstComparator():void
+        {
+            var c:BooleanComparator = BooleanComparator.getTrueFirstComparator() ;
+            assertNotNull( c , "The BooleanComparator.getTrueFirstComparator singleton not must be null.") ;
+            assertTrue( c.trueFirst , "The BooleanComparator.getTrueFirstComparator.trueFirst value must be true.") ;
         }
         
     }

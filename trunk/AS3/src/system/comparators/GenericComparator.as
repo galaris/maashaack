@@ -35,27 +35,13 @@
 
 package system.comparators
 {
-    import system.Comparator;                                        
+    import system.Comparator;
+    import system.Sortable;    
 
     /**
 	 * This comparator compare two Objects by field.
 	 * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.comparators.GenericComparator ;
-     * import system.comparators.StringComparator ;
-     * 
-     * var write:Function = function( ar:Array ):void
-     * {
-     *     var result:Array = [] ;
-     *     var size:uint = ar.length ;
-     *     for (var i:uint = 0 ; i<size ; i++)
-     *     {
-     *         result[i] = ar[i].label ;
-     *     }
-     *     trace( result.join('|') ) ;
-     * }
-     * 
-     * var ar:Array =
      * import system.comparators.GenericComparator ;
      * import system.comparators.StringComparator ;
      * 
@@ -87,7 +73,7 @@ package system.comparators
      * write(ar) ; // Paris|Marseille|Lyon|Bordeaux
      * </pre>
      */
-	public class GenericComparator implements Comparator
+	public class GenericComparator implements Comparator, Sortable
 	{
 		
 		/**
@@ -99,34 +85,58 @@ package system.comparators
 	     */
 		public function GenericComparator( sortBy:String , comparator:Comparator )
 		{
-			if ( sortBy != null  )
-			{
-				this.sortBy = sortBy ;
-			}
-			else
-			{
-				throw new ArgumentError(this + " constructor failed, the 'sortBy' argument not must be 'null' or 'undefined'.") ;
-			}
-			
-			if ( comparator != null )
-			{
-				this.comparator = comparator ;
-			}
-			else
-			{
-				throw new ArgumentError( this + " constructor failed, the 'comparator' argument not must be 'null' or 'undefined'.") ;	
-			}
+            this.comparator = comparator ;
+            this.sortBy     = sortBy     ;
 		}
 
-		/**
-		 * The internal Comparator used by this Comparator to compare two objects with the specified field.
+        /**
+         * Determinates the Comparator strategy used to sort the instance.
+		 * <p>The internal Comparator used by this Comparator to compare two objects with the specified field.</p>
+		 * @throws ArgumentError If the 'comparator' property is 'null'.
 		 */
-		public var comparator:Comparator ;
+		public function get comparator():Comparator
+		{
+			return _comparator ;
+		}
+		
+        /**
+         * @private
+         */
+        public function set comparator( comp:Comparator ):void 
+        {
+            if ( comp != null )
+            {
+                _comparator = comp ;
+            }
+            else
+            {
+                throw new Error( "The GenericComparator 'comparator' property not must be 'null'") ;  
+            }       	
+        }
+        
+		/**
+	     * Determinates a String who represents a property name to compare the two objects.
+	     * @throws ArgumentError If the 'sortBy' property is 'null'.
+	     */
+		public function get sortBy():String
+		{
+			return _sortBy ;
+		}
 		
 		/**
-	     * A String who represents a property name to compare the two objects.
-	     */
-		public var sortBy:String;
+		 * @private
+		 */
+        public function set sortBy( value:String ):void
+        {
+            if ( value != null  )
+            {
+                _sortBy = value ;
+            }
+            else
+            {
+                throw new Error( "The GenericComparator 'sortBy' property not must be 'null'") ;
+            }
+        }		
         
 		/**
 		 * Returns an integer value to compare two objects.
@@ -141,22 +151,25 @@ package system.comparators
 	     */
 		public function compare(o1:*, o2:*, options:* = null):int
 		{
-			if ( o1 != null && o2 != null ) 
+			if ( o1 == null || o2 == null ) 
 			{
-				if ( comparator == null )
-				{
-					throw new Error( "GenericComparator failed, the 'comparator' argument not must be 'null' or 'undefined'.") ;
-				}
-				else
-				{
-					return comparator.compare( o1[sortBy] , o2[sortBy] , options ) ;
-				}
+                throw new ArgumentError( "The GenericComparator.compare method failed, The two arguments not must be null.") ;	
 			}
-			else 
-			{
-				throw new ArgumentError( "The GenericComparator.compare method failed, The two arguments not must be null.") ;
+            else
+            {
+                return comparator.compare( o1[sortBy] , o2[sortBy] , options ) ;
 			}
 		}
-        		
+		
+		/**
+		 * @private
+		 */
+		private var _comparator:Comparator ;
+        
+        /**
+         * @private
+         */
+        private var _sortBy:String ;        
+        	
 	}
 }

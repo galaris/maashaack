@@ -47,7 +47,7 @@ package system.comparators
             super(name);
         }
         
-        public var comparator:Comparator ;
+        public var comparator:StringComparator ;
         
         public function setUp():void
         {
@@ -61,13 +61,55 @@ package system.comparators
         
         public function testConstructor():void
         {
+            
             assertNotNull( comparator , "The StringComparator constructor failed." ) ;
+            
+            
         }
+        
+        public function testIgnoreCase():void
+        {
+            comparator.ignoreCase = true ;
+            
+            assertTrue( comparator.ignoreCase , "") ;
+            
+            comparator.ignoreCase = false ;	
+            
+            assertFalse( comparator.ignoreCase , "") ;
+        }
+        
         
         public function testCompare():void
         {
             
-        }        
+        } 
+        
+        
+        
+        public function testGetIgnoreCaseStringComparator():void
+        {
+
+            var c1:StringComparator = StringComparator.getIgnoreCaseStringComparator() ;
+            var c2:StringComparator = StringComparator.getIgnoreCaseStringComparator() ;
+            
+            assertNotNull( c1 as Comparator , "01 - StringComparator.getIgnoreCaseStringComparator failed." ) ;
+            assertNotNull( c2 as Comparator , "02 - StringComparator.getIgnoreCaseStringComparator failed." ) ;
+            assertSame(c1, c2 , "03 - StringComparator.getIgnoreCaseStringComparator failed." );
+        	
+        }
+        
+        public function testGetStringComparator():void
+        {
+
+            var c1:StringComparator = StringComparator.getStringComparator() ;
+            var c2:StringComparator = StringComparator.getStringComparator() ;
+            
+            assertNotNull( c1 as Comparator , "01 - StringComparator.getStringComparator failed." ) ;
+            assertNotNull( c2 as Comparator , "02 - StringComparator.getStringComparator failed." ) ;
+            assertSame(c1, c2 , "03 - StringComparator.getStringComparator failed." );
+        	
+        } 
+        
         
     }
 }
