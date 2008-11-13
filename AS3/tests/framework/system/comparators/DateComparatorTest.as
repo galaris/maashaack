@@ -62,10 +62,24 @@ package system.comparators
         public function testConstructor():void
         {
             assertNotNull( comparator , "The DateComparator constructor failed." ) ;
+            assertTrue( comparator is Comparator , "The DateComparator constructor failed." ) ;
         }
         
         public function testCompare():void
         {
+        	
+        	var d1:Date   = new Date(2007, 1, 1, 0, 0, 0, 0) ;
+            var d2:Number = 1170284400000 ;
+            var d3:Date   = new Date(2007, 2, 2, 0, 0, 0, 0) ;
+            var d4:Number = 1172790000000 ;
+        	
+            assertEquals( comparator.compare(d1, d1) ,  0 , "01-01 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d2) ,  0 , "01-02 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d2, d1) ,  0 , "01-03 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d3) , -1 , "01-04 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d1, d4) , -1 , "01-05 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d3, d1) ,  1 , "01-06 - The DateComparator compare failed." ) ;
+            assertEquals( comparator.compare(d4, d1) ,  1 , "01-07 - The DateComparator compare failed." ) ;
             
         }
         

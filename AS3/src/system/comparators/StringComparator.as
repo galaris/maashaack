@@ -106,7 +106,7 @@ package system.comparators
 		 * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
 	     * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
 	     */
-		public static function getStringComparator():Comparator
+		public static function getStringComparator():StringComparator
 		{
 			if ( _comparator == null )
 			{
@@ -120,11 +120,11 @@ package system.comparators
 	     * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
 		 * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
 	     */
-		public static function getIgnoreCaseStringComparator():Comparator
+		public static function getIgnoreCaseStringComparator():StringComparator
 		{
 			if ( _ignoreCaseComparator == null )
 			{
-				_ignoreCaseComparator = new StringComparator(true) ;	
+				_ignoreCaseComparator = new StringComparator( true ) ;	
 			}
 			return _ignoreCaseComparator ;
 		}

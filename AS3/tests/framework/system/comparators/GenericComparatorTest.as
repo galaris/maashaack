@@ -46,26 +46,73 @@ package system.comparators
         {
             super(name);
         }
-        
-        public var comparator:Comparator ;
-        
-        public function setUp():void
-        {
-
-        }
-
-        public function tearDown():void
-        {
-
-        }
-        
+                
         public function testConstructor():void
         {
+        	            
+            var c:GenericComparator ;
+            var s:StringComparator  = StringComparator.getStringComparator() ;
+                
+            c = new GenericComparator( "label", s ) ;
             
+            assertNotNull ( c               , "01-01 - The GenericComparator constructor failed." ) ;
+            assertTrue    ( c is Comparator , "01-02 - The GenericComparator constructor failed." ) ;
+            
+            try
+            {
+                c = new GenericComparator( null, s ) ;
+                fail( "02-01 - The ComparableComparator compare failed." ) ;
+            }
+            catch(e:Error)
+            {
+                assertEquals
+                ( 
+                   e.message ,
+                   "The GenericComparator 'sortBy' property not must be 'null'" , 
+                   "02-02 - The ComparableComparator constructor failed."
+                ) ;
+            }
+            
+            try
+            {
+                c = new GenericComparator( "label", null ) ;
+                fail( "03-01 - The ComparableComparator compare failed." ) ;
+            }
+            catch(e:Error)
+            {
+                assertEquals
+                ( 
+                   e.message ,
+                   "The GenericComparator 'comparator' property not must be 'null'" , 
+                   "03-02 - The ComparableComparator constructor failed."
+                ) ;
+            }
+                    
         }
         
         public function testCompare():void
         {
+            
+            var c:GenericComparator ;
+            var s:StringComparator  = StringComparator.getStringComparator() ;
+            
+            var o1:Object = { label:"1"   } ;
+            var o2:Object = { label:"1"   } ;
+            var o3:Object = { label:"11"  } ;
+            var o4:Object = { label:"111" } ;
+            
+            c = new GenericComparator( "label", s ) ;
+            
+            assertEquals( c.compare( o1 , o1 ) ,  0 , "01 - The ComparableComparator compare method failed." ) ;
+            assertEquals( c.compare( o1 , o2 ) ,  0 , "02 - The ComparableComparator compare method failed." ) ;
+            assertEquals( c.compare( o2 , o1 ) ,  0 , "03 - The ComparableComparator compare method failed." ) ;
+            assertEquals( c.compare( o2 , o2 ) ,  0 , "04 - The ComparableComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( o1 , o3 ) ,  -1 , "05 - The ComparableComparator compare method failed." ) ;
+            assertEquals( c.compare( o1 , o4 ) ,  -1 , "06 - The ComparableComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( o3 , o1 ) ,  1 , "07 - The ComparableComparator compare method failed." ) ;
+            assertEquals( c.compare( o4 , o2 ) ,  1 , "08 - The ComparableComparator compare method failed." ) ;
             
         }
         

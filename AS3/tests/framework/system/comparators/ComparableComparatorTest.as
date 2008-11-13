@@ -37,7 +37,8 @@ package system.comparators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Comparator;    
+    import system.Comparable;
+    import system.samples.ComparableClass;    
 
     public class ComparableComparatorTest extends TestCase 
     {
@@ -46,26 +47,58 @@ package system.comparators
         {
             super(name);
         }
-        
-        public var comparator:Comparator ;
-        
-        public function setUp():void
-        {
-
-        }
-
-        public function tearDown():void
-        {
-
-        }
-        
+                
         public function testConstructor():void
         {
-            
+            var c:ComparableComparator = new ComparableComparator() ;
+            assertNotNull(c , "01 - The ComparableComparator constructor failed." ) ;
         }
         
         public function testCompare():void
         {
+            
+            var comparable:Comparable = new ComparableClass(200) ;
+            var c:ComparableComparator = new ComparableComparator() ;
+            
+            assertEquals( c.compare(comparable, 100) ,  1 , "01-01 - The ComparableComparator compare failed." ) ;
+            assertEquals( c.compare(comparable, 200) ,  0 , "01-02 - The ComparableComparator compare failed." ) ;
+            assertEquals( c.compare(comparable, 300) , -1 , "01-03 - The ComparableComparator compare failed." ) ;
+            
+            assertEquals( c.compare( 100 , comparable ) ,  1 , "02-01 - The ComparableComparator compare failed." ) ;
+            assertEquals( c.compare( 200 , comparable ) ,  0 , "02-02 - The ComparableComparator compare failed." ) ;
+            assertEquals( c.compare( 300 , comparable ) , -1 , "02-03 - The ComparableComparator compare failed." ) ;            
+            
+            try
+            {
+            	c.compare(null, null) ;
+            	fail( "03-01 - The ComparableComparator compare failed." ) ;
+            }
+            catch(e:Error)
+            {
+            	assertTrue( e is ArgumentError , "03-02 The ComparableComparator compare failed.") ;
+            	assertEquals
+            	( 
+            	   e.message ,
+            	   "[object ComparableComparator] compare method failed, the o1 or the o2 arguments are not a Comparable objects : null,null" , 
+            	   "03-03 The ComparableComparator compare failed."
+            	) ;
+            }
+            
+            try
+            {
+                c.compare(100, 200) ;
+                fail( "04-01 - The ComparableComparator compare failed." ) ;
+            }
+            catch(e:Error)
+            {
+                assertTrue( e is ArgumentError , "04-02 The ComparableComparator compare failed.") ;
+                assertEquals
+                ( 
+                   e.message ,
+                   "[object ComparableComparator] compare method failed, the o1 or the o2 arguments are not a Comparable objects : 100,200" , 
+                   "04-03 The ComparableComparator compare failed."
+                ) ;
+            }            
             
         }        
         
