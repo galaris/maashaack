@@ -33,29 +33,40 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.comparators
+package system.comparators 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;  
+    import buRRRn.ASTUce.framework.TestCase;    
 
-    public class AllTests
+    public class NumberComparatorTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function NumberComparatorTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system.comparators");
-            
-            suite.addTestSuite(BooleanComparatorTest);
-            suite.addTestSuite(ComparableComparatorTest) ;
-            suite.addTestSuite(DateComparatorTest) ;
-            suite.addTestSuite(GenericComparatorTest) ;
-            suite.addTestSuite(NullComparatorTest) ;
-            suite.addTestSuite(NumberComparatorTest) ;
-            suite.addTestSuite(ReverseComparatorTest) ;
-            suite.addTestSuite(StringComparatorTest) ;
-            
-            return suite;
+            super(name);
         }
+        
+        
+        public function testConstructor():void
+        {
+        	var c:NumberComparator = new NumberComparator() ;
+            assertNotNull( c , "The NullComparator constructor failed." ) ;
+        }
+        
+        public function testCompare():void
+        {
+            var c:NumberComparator = new NumberComparator() ;
+
+            assertEquals( c.compare(  0   ,  0   ) ,  0 , "01 - The NumberComparator compare method failed." ) ;
+            assertEquals( c.compare(  1   ,  1   ) ,  0 , "02 - The NumberComparator compare method failed." ) ;
+            assertEquals( c.compare( -1   , -1   ) ,  0 , "03 - The NumberComparator compare method failed." ) ;
+            assertEquals( c.compare(  0.1 ,  0.1 ) ,  0 , "04 - The NumberComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( Number(Math.cos(25)) , 0.9912028118634736 ) ,  0 , "05 - The NumberComparator compare method failed." ) ;
+            
+            assertEquals( c.compare( 1 , 0 ) ,   1 , "06 - The NumberComparator compare method failed." ) ;
+            assertEquals( c.compare( 0 , 1 ) ,  -1 , "07 - The NumberComparator compare method failed." ) ;
+
+        }
+        
     }
 }
-

@@ -35,7 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;            
+    import system.Comparator;
+    import system.Sortable;                
 
     /**
 	 * Reverse a Comparator object. For example if the comparator must return 1 the reverse comparator return -1.
@@ -51,7 +52,7 @@ package system.comparators
 	 * trace( s.compare( "hello", "world" ) ) ; // 1
 	 * </pre>
 	 */
-	public class ReverseComparator implements Comparator
+	public class ReverseComparator implements Comparator, Sortable
 	{
 		
 		/**
@@ -63,11 +64,30 @@ package system.comparators
 			comparator = comp ;
 		}
 
-		/**
-		 * The <code class="prettyprint">Comparator</code> instance to reverse.
-		 */	
-		public var comparator:Comparator ;
+        /**
+         * Determinates the internal <code class="prettyprint">Comparator</code> instance to reverse.
+         * @throws ArgumentError If the 'comparator' property is 'null'.
+         */
+        public function get comparator():Comparator
+        {
+            return _comparator ;
+        }
         
+        /**
+         * @private
+         */
+        public function set comparator( comp:Comparator ):void 
+        {
+            if ( comp != null )
+            {
+                _comparator = comp ;
+            }
+            else
+            {
+                throw new Error( "The ReverseComparator 'comparator' property not must be 'null'") ;  
+            }           
+        }
+                
 		/**
 		 * Returns an integer value to compare two objects (reverse the value).
 		 * @param o1 the first object to compare.
@@ -83,6 +103,11 @@ package system.comparators
 		{
 			return comparator.compare( o2, o1, options) ;
 		}
+        
+        /**
+         * @private
+         */
+        private var _comparator:Comparator ;        
         
 	}
 }
