@@ -39,6 +39,7 @@ package
     
     import system.*;
     import system.data.*;
+    import system.evaluators.EdenEvaluator;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -78,6 +79,8 @@ package
             
             buRRRn.ASTUce.config.maxColumn = 60 ;
             buRRRn.ASTUce.config.showConstructorList = false;
+            
+         
             
             Runner.main
             ( 

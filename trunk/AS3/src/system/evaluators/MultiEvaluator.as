@@ -70,16 +70,6 @@ package system.evaluators
     {
 
         /**
-         * @private
-         */
-        private var _evaluators:Array ; 
-
-        /**
-         * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">IEvaluator</code> objects (in the insert method).
-         */
-        public var autoClear:Boolean ;
-
-        /**
          * Creates a new MultiEvaluator instance.
          * @param ...evaluators The enumeration list of <code class="prettyprint">IEvaluator</code> objets or Arrays of IEvaluator. Only Array and IEvaluator are compatible to fill the MultiEvaluator.
          */
@@ -88,6 +78,11 @@ package system.evaluators
             _evaluators = [] ;
             add.apply( this, evaluators ) ;
         }
+        
+        /**
+         * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">IEvaluator</code> objects (in the insert method).
+         */
+        public var autoClear:Boolean ;        
 
         /**
          * Inserts <code class="prettyprint">IEvaluator</code> objects in the MultiEvaluator.  
@@ -123,9 +118,9 @@ package system.evaluators
                         }
                     }
                     else
-                        {
+                    {
                         // nothing    
-                        }
+                    }
                 }
             }
         }         
@@ -172,6 +167,20 @@ package system.evaluators
             {
                 return false ;
             }
-        }           
+        }
+        
+        /**
+         * Clear all the <code class="prettyprint">IEvaluator</code> objects.
+         */
+        public function size():Number
+        {
+            return _evaluators.length ;
+        }
+        
+        /**
+         * @private
+         */
+        private var _evaluators:Array ; // TODO use a Set 
+            
     }
 }
