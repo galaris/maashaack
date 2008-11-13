@@ -39,6 +39,7 @@ package system
     import buRRRn.ASTUce.framework.*;
     
     import system.cli.AllTests;
+    import system.comparators.AllTests;
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
@@ -78,6 +79,9 @@ package system
             
             //serializers
             suite.addTest(system.serializers.AllTests.suite());
+            
+            //comparators
+            suite.addTest(system.comparators.AllTests.suite());            
             
             //evaluators
             suite.addTest(system.evaluators.AllTests.suite());
