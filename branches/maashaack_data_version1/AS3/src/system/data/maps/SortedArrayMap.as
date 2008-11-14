@@ -36,6 +36,7 @@
 package system.data.maps 
 {
     import system.Comparator;
+    import system.Sortable;
     import system.data.maps.ArrayMap;    
 
     /**
@@ -88,7 +89,7 @@ package system.data.maps
      * trace( map ) ;
      * </pre>
      */
-    public class SortedArrayMap extends ArrayMap 
+    public class SortedArrayMap extends ArrayMap implements Sortable
     {
 
         /**

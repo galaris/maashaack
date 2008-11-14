@@ -35,7 +35,10 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Sortable;
+    import system.comparators.StringComparator;    
 
     public class SortedArrayMapTest extends TestCase 
     {
@@ -59,52 +62,76 @@ package system.data.maps
         
         public function testCASEINSENSITIVE():void
         {
-            assertEquals(SortedArrayMap.CASEINSENSITIVE, 1, "SortedArrayMap.CASEINSENSITIVE value failed.") ;
+            assertEquals( SortedArrayMap.CASEINSENSITIVE , 1 , "SortedArrayMap.CASEINSENSITIVE value failed." ) ;
         }
 
         public function testDESCENDING():void
         {
-            assertEquals(SortedArrayMap.DESCENDING, 2, "SortedArrayMap.DESCENDING value failed.") ;
+            assertEquals( SortedArrayMap.DESCENDING , 2 , "SortedArrayMap.DESCENDING value failed." ) ;
         }
         
         public function testKEY():void
         {
-            assertEquals(SortedArrayMap.KEY, "key", "SortedArrayMap.KEY value failed.") ;
+            assertEquals( SortedArrayMap.KEY , "key" , "SortedArrayMap.KEY value failed." ) ;
         }                
 
         public function testNONE():void
         {
-            assertEquals(SortedArrayMap.NONE, 0 , "SortedArrayMap.NONE value failed.") ;
+            assertEquals( SortedArrayMap.NONE , 0 , "SortedArrayMap.NONE value failed." ) ;
         }    
      
         public function testNUMERIC():void
         {
-            assertEquals(SortedArrayMap.NUMERIC, 16, "SortedArrayMap.NUMERIC value failed.") ;
+            assertEquals( SortedArrayMap.NUMERIC , 16 , "SortedArrayMap.NUMERIC value failed." ) ;
         }       
 
         public function testRETURNINDEXEDARRAY():void
         {
-            assertEquals(SortedArrayMap.RETURNINDEXEDARRAY, 8, "SortedArrayMap.RETURNINDEXEDARRAY value failed.") ;
+            assertEquals( SortedArrayMap.RETURNINDEXEDARRAY , 8 , "SortedArrayMap.RETURNINDEXEDARRAY value failed." ) ;
         }    
         
         public function testUNIQUESORT():void
         {
-            assertEquals(SortedArrayMap.UNIQUESORT, 4, "SortedArrayMap.UNIQUESORT value failed.") ;
+            assertEquals( SortedArrayMap.UNIQUESORT , 4 , "SortedArrayMap.UNIQUESORT value failed." ) ;
         }  
         
         public function testVALUE():void
         {
-            assertEquals(SortedArrayMap.VALUE, "value", "SortedArrayMap.VALUE value failed.") ;
+            assertEquals( SortedArrayMap.VALUE , "value" , "SortedArrayMap.VALUE value failed." ) ;
         }
         
         public function testConstructor():void
         {
+        	var map:SortedArrayMap = new SortedArrayMap( ["key1","key2"] , ["value1","value2"] ) ;
         	
+            assertNotNull( map , "0 - The SortedArrayMap constructor failed." ) ;
+            
+            assertEquals( map.sortBy , SortedArrayMap.KEY,  "0 - The SortedArrayMap constructor failed, the sortBy property must be initialize with the 'key' flag." ) ;
+            
+            assertEquals( map.get("key1") , "value1" , "1 - The SortedArrayMap constructor failed : map.get('key1')." ) ;
+            assertEquals( map.get("key2") , "value2" , "2 - The SortedArrayMap constructor failed : map.get('key2')." ) ;        
+            
+            var m1:SortedArrayMap = new SortedArrayMap() ;
+            assertEquals( m1.size() , 0 , "3 - The SortedArrayMap constructor failed." ) ;
+            
+            var m2:SortedArrayMap = new SortedArrayMap( null , ["value1", "value2"] ) ;
+            assertEquals( m2.size() , 0 , "4 - The SortedArrayMap constructor failed." ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( m is Sortable , "SortedArrayMap must implement the system.Sortable interface." ) ;   
         }
         
         public function testComparator():void
         {
+            var s:StringComparator = new StringComparator() ;
+                
+            m.comparator = s ;
+            assertEquals( m.comparator , s , "01 - The SortedArrayMap comparator property failed." ) ;
             
+            m.comparator = null ;
+            assertNull( m.comparator , "02 - The SortedArrayMap comparator property failed." ) ;
         }
         
         public function testOptions():void
