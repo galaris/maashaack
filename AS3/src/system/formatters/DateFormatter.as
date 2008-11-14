@@ -256,6 +256,7 @@ package system.formatters
          * f.pattern = "hh 'h' nn 'mn' ss 's' TT" ; // capitalize the pm expression.
          * trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
          * </pre>
+         * @param value The object to format.
          * @return the string representation of the formatted value. 
          */
         public function format( value:* = null ):String
