@@ -54,6 +54,7 @@ package system.data.collections
 
         /**
          * Formats the specified value.
+         * @param value The object to format.
          * @return the string representation of the formatted value. 
          */
         public function format( value:* = null ):String

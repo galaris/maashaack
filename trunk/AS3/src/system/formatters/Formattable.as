@@ -44,6 +44,7 @@ package system.formatters
 
         /**
          * Formats the specified value.
+         * @param value The object to format.
          * @return the string representation of the formatted value. 
          */
         function format( value:* = null ):String;

@@ -33,56 +33,78 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.maps
+package system.data.collections 
 {
-    import system.data.Iterator;
-    import system.data.Map;
-    import system.data.iterators.ArrayIterator;
-    import system.formatters.Formattable;    
+    import buRRRn.ASTUce.framework.TestCase;    
 
-    /**
-     * Converts a Map to a custom string representation.
-     */
-    public class MapFormatter implements Formattable 
+    public class SimpleCollectionTest extends TestCase
     {
-            
-        /**
-         * Creates a new MapFormatter instance.
-         */
-        public function MapFormatter()
+
+        public function SimpleCollectionTest(name:String = "")
         {
-            //  
+            super( name );
         }
-            
-        /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
-         */
-        public function format( value:* = null ):String
+        
+        public var c:SimpleCollection ;
+        
+        public function setUp():void
         {
-            var m:Map = value as Map ;
-            if ( m == null ) 
-            {
-                return "" ;
-            }
-            var r:String = "{";
-            var vIterator:Iterator = new ArrayIterator( m.getValues() ) ;
-            var kIterator:Iterator = new ArrayIterator( m.getKeys()   ) ;
-            while( kIterator.hasNext() ) 
-            {
-                var k:* = kIterator.next() ;
-                var v:* = vIterator.next() ;
-                r += k + ":" + v ;
-                if ( kIterator.hasNext() ) 
-                {
-                    r += "," ;
-                }
-            }
-            r += "}" ;
-            return r ;
+            c = new SimpleCollection() ;
         }
+
+        public function tearDown():void
+        {
+            c = undefined ;
+        }             
+        
+        public function testAdd():void
+        {
+        }
+        
+        public function testClear():void
+        {
+        }
+        
+        public function testClone():void
+        {
+        }
+        
+        public function testContains():void
+        {
+        
+        }
+        
+        public function testGet():void
+        {
+        }
+        
+        public function testIndexOf():void
+        {
+        }
+        
+        public function testIsEmpty():void
+        {
+        }
+        
+        public function testIterator():void
+        {
+        }        
+        
+        public function testRemove():void
+        {
+        }
+        
+        public function testSize():void
+        {
+        }
+        
+        public function testToArray():void
+        {
+        }
+                
+        public function testToSource():void
+        {
+        }
+        
     }
 }
-
-
