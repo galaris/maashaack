@@ -77,6 +77,26 @@ package system.data.collections
         }
         
         /**
+         * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
+         */
+        public function addAll(c:Collection):Boolean 
+        {
+            if ( c.size() > 0 ) 
+            {
+                var it:Iterator = c.iterator() ;
+                while(it.hasNext()) 
+                {
+                	add( it.next() ) ;
+                }
+                return true ;
+            }
+            else 
+            {
+                return false ;
+            }
+        }        
+        
+        /**
          * Removes all elements in the collection.
          */        
         public function clear():void
@@ -101,6 +121,23 @@ package system.data.collections
         {
             return _a.indexOf( o ) >- 1  ;
         }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains all of the elements of the specified collection.
+         * @return <code class="prettyprint">true</code> if this collection contains all of the elements of the specified collection.
+         */
+        public function containsAll( c:Collection ):Boolean 
+        {
+            var it:Iterator = c.iterator() ;
+            while(it.hasNext()) 
+            {
+                if ( ! contains(it.next()) ) 
+                {
+                    return false ;
+                }
+            }
+            return true ;
+        }        
         
         /**
          * Returns the element from this collection at the passed key index.
@@ -169,6 +206,42 @@ package system.data.collections
             }
             return false ;
         }
+        
+        /**
+         * Removes from this Collection all the elements that are contained in the specified Collection (optional operation).
+         */
+        public function removeAll(c:Collection):Boolean 
+        {
+            var b:Boolean = false ;
+            var it:Iterator = iterator() ;
+            while (it.hasNext()) 
+            {
+                if ( c.contains(it.next()) ) 
+                {
+                    it.remove() ;
+                    b = true ;
+                }
+            }
+            return b ;
+        }        
+        
+        /**
+         * Retains only the elements in this Collection that are contained in the specified Collection (optional operation).
+         */
+        public function retainAll(c:Collection):Boolean 
+        {
+            var b:Boolean = false ;
+            var it:Iterator = iterator() ;
+            while(it.hasNext()) 
+            {
+                if ( ! c.contains(it.next()) ) 
+                {
+                    it.remove() ;
+                    b = true ;
+                }
+            }
+            return b ;
+        }        
         
         /**
          * Returns the number of elements in this collection.

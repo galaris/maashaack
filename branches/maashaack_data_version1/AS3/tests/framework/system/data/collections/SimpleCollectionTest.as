@@ -35,7 +35,12 @@
 
 package system.data.collections 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Cloneable;
+    import system.Serializable;
+    import system.data.Collection;
+    import system.data.Iterable;    
 
     public class SimpleCollectionTest extends TestCase
     {
@@ -57,9 +62,34 @@ package system.data.collections
             c = undefined ;
         }             
         
+        public function testConstructor():void
+        {
+        	assertNotNull(c, "01 - SimpleCollection constructor failed.") ;
+        	
+        	var ar:Array = [2,3,4] ;
+        	
+        	var co:SimpleCollection = new SimpleCollection(ar) ; 
+        	
+        	assertNotNull(co, "02 - SimpleCollection constructor failed.") ;
+        	assertEquals(co.size(), ar.length, "03 - SimpleCollection constructor failed.") ;
+        	
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( c is Collection   , "01 - SimpleCollection implements the Collection interface.") ;
+            assertTrue( c is Cloneable    , "02 - SimpleCollection implements the Collection interface.") ;
+            assertTrue( c is Iterable     , "03 - SimpleCollection implements the Collection interface.") ;
+            assertTrue( c is Serializable , "04 - SimpleCollection implements the Collection interface.") ;
+        }        
+        
         public function testAdd():void
         {
         }
+        
+        public function testAddAll():void
+        {
+        }        
         
         public function testClear():void
         {
@@ -73,6 +103,11 @@ package system.data.collections
         {
         
         }
+        
+        public function testContainsAll():void
+        {
+        
+        }        
         
         public function testGet():void
         {
@@ -93,6 +128,16 @@ package system.data.collections
         public function testRemove():void
         {
         }
+        
+        public function testRemoveAll():void
+        {
+        
+        }        
+        
+        public function testRetainAll():void
+        {
+        
+        } 
         
         public function testSize():void
         {
