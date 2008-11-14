@@ -40,16 +40,66 @@ package system.data.maps
 
     /**
      * This <code class="prettyprint">ArrayMap</code> can be sorted with a <code class="prettyprint">Comparator</code> object.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.data.maps.SortedArrayMap ;
+     * 
+     * import system.comparators.NumberComparator ;
+     * import system.comparators.StringComparator ;
+     * 
+     * var map:SortedArrayMap = new SortedArrayMap( [0] , ["item0"] ) ;
+     * 
+     * map.put( 1 , "item8" ) ;
+     * map.put( 3 , "item7" ) ;
+     * map.put( 2 , "item6" ) ;
+     * map.put( 5 , "item5" ) ;
+     * map.put( 4 , "item4" ) ;
+     * map.put( 7 , "item3" ) ;
+     * map.put( 6 , "item2" ) ;
+     * map.put( 8 , "item1" ) ;
+     * 
+     * trace("----- original Map") ;
+     * 
+     * trace( map ) ;
+     * 
+     * trace("----- sort by key with sort() method") ;
+     * 
+     * map.comparator = new NumberComparator() ;
+     * 
+     * map.options = SortedArrayMap.NUMERIC | SortedArrayMap.DESCENDING ;
+     * map.sort() ;
+     * trace( map ) ;
+     * 
+     * map.options = SortedArrayMap.NUMERIC ;
+     * map.sort() ;
+     * trace( map ) ;
+     * 
+     * trace("----- sort by value with sort() method") ;
+     * 
+     * map.comparator = new StringComparator() ;
+     * map.sortBy = SortedArrayMap.VALUE ;
+     * 
+     * map.options = SortedArrayMap.DESCENDING ;
+     * map.sort() ;
+     * trace( map ) ;
+     * 
+     * map.options = SortedArrayMap.NONE ;
+     * map.sort() ;
+     * trace( map ) ;
+     * </pre>
      */
     public class SortedArrayMap extends ArrayMap 
     {
 
         /**
          * Creates a new SortedArrayMap instance.
-         */     
-        public function SortedArrayMap(...arguments:Array)
+         * @param keys An optional Array of all keys to fill in this Map.
+         * @param values An optional Array of all values to fill in this Map. This Array must have the same size like the 'keys' argument.
+         */  
+        public function SortedArrayMap( ...arguments:Array )
         {
             super( arguments[0] , arguments[1] ) ;
+            sortBy = SortedArrayMap.KEY ;
         }
         
         /**
@@ -174,6 +224,9 @@ package system.data.maps
          * <code class="prettyprint">
          * import system.data.maps.SortedArrayMap ;
          * 
+         * import system.comparators.NumberComparator ;
+         * import system.comparators.StringComparator ;
+         * 
          * var map:SortedArrayMap = new SortedArrayMap() ;
          * 
          * map.put( "key1", "value4" ) ;
@@ -183,7 +236,7 @@ package system.data.maps
          * 
          * trace(map) ; // {key1:value4,key3:value2,key4:value3,key2:value1}
          * 
-         * map.comparator = StringComparator.getStringComparator() ;
+         * map.comparator = new StringComparator() ;
          * 
          * map.options = SortedArrayMap.DESCENDING ;
          * map.sort() ;
@@ -250,7 +303,7 @@ package system.data.maps
          * Sorts the elements in the list according to one or more fields in the array.
          * <p><b>Example :</b></p>
          * <code class="prettyprint">
-         * import system.data.iterators.Iterator ;
+         * import system.data.Iterator ;
          * import system.data.Map ;
          * import system.data.maps.SortedArrayMap ;
          * 
