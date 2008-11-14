@@ -37,7 +37,8 @@ package system.comparators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Comparator;    
+    import system.Comparator;
+    import system.samples.ComparableClass;    
 
     public class NullComparatorTest extends TestCase 
     {
@@ -47,25 +48,105 @@ package system.comparators
             super(name);
         }
         
-        public var comparator:Comparator ;
-        
-        public function setUp():void
-        {
-            comparator = new NullComparator() ;
-        }
-
-        public function tearDown():void
-        {
-            comparator = null ;
-        }
-        
         public function testConstructor():void
         {
-            assertNotNull( comparator , "The NullComparator constructor failed." ) ;
+        	var comp1:NullComparator = new NullComparator(null, true) ;
+        	var comp2:NullComparator = new NullComparator(null, false) ;
+        	var comp3:NullComparator = new NullComparator( new NumberComparator() , true) ;
+            
+            assertNotNull( comp1 , "01-01 - The NullComparator constructor failed." ) ;
+            assertNotNull( comp2 , "01-02 -The NullComparator constructor failed." ) ;
+            assertNotNull( comp3 , "01-03 -The NullComparator constructor failed." ) ;
+            
+        }
+
+        public function testNonNullComparator():void
+        {
+            var comp:NullComparator = new NullComparator() ;
+            
+            assertNull( comp.nonNullComparator, "01 - NullComparator nonNullComparator failed." ) ;
+            
+            var nc:Comparator = new NumberComparator() ;
+            
+            comp.nonNullComparator = nc ;
+            
+            assertEquals( comp.nonNullComparator, nc, "02 - NullComparator nonNullComparator failed." ) ;
+            
+            comp.nonNullComparator = null ;
+            
+            assertNull( comp.nonNullComparator, "03 - NullComparator nonNullComparator failed." ) ;
+            
+        }
+        
+        public function testNullsAreHigh():void
+        {
+            var comp:NullComparator = new NullComparator() ;
+            
+            assertFalse( comp.nullsAreHigh , "01 - NullComparator nullsAreHigh failed." ) ;
+            
+            comp.nullsAreHigh = true ;
+            
+            assertTrue( comp.nullsAreHigh , "02 - NullComparator nullsAreHigh failed." ) ;
+            
+            comp.nullsAreHigh = false ;
+            
+            assertFalse( comp.nullsAreHigh , "01 - NullComparator nullsAreHigh failed." ) ;
         }
         
         public function testCompare():void
         {
+            var comp1:NullComparator = new NullComparator(null, true) ;
+            var comp2:NullComparator = new NullComparator(null, false) ;
+            
+            var n:* = null ;
+            var o:Object = {} ;
+            
+            // compare with one or two null objects.
+            
+            assertEquals( comp1.compare(n, n) , 0  , "01-01 - NullComparator compare failed." ) ;
+            assertEquals( comp1.compare(n, o) , 1  , "01-02 - NullComparator compare failed." ) ;
+            assertEquals( comp1.compare(o, n) , -1 , "01-03 - NullComparator compare failed." ) ;
+            
+            assertEquals( comp2.compare(n, n) ,  0 , "02-01 - NullComparator compare failed." ) ;
+            assertEquals( comp2.compare(n, o) , -1 , "02-02 - NullComparator compare failed." ) ;
+            assertEquals( comp2.compare(o, n) ,  1 , "02-03 - NullComparator compare failed." ) ;
+            
+            // Try compare two object within initialize the nonNullComparator property.
+            
+            try
+            {
+            	comp2.compare(1, 2) ;
+            	fail("02-04 - NullComparator compare failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue(e is ArgumentError , "02-05 - NullComparator compare failed.") ;
+                assertEquals
+                (
+                    e.message , 
+                    "[object ComparableComparator] compare method failed, the o1 or the o2 arguments are not a Comparable objects : 1,2" ,
+                    "02-06 - NullComparator compare failed."
+                    
+                ) ;	
+            }
+            
+            // use the internal ComparableComparator object by default.
+            
+            var c:ComparableClass = new ComparableClass(1) ;
+            
+            assertEquals( comp2.compare(c, 2) , -1 , "03-01 - NullComparator compare failed." ) ;
+            assertEquals( comp2.compare(2, c) , -1 , "03-02 - NullComparator compare failed." ) ;
+            
+            // use a custom comparator.
+            
+            var comp3:NullComparator = new NullComparator( new NumberComparator() , true) ;            
+            
+            assertNotNull( comp3.nonNullComparator            , "04-01 - NullComparator compare failed.") ;
+            assertTrue( comp3.nonNullComparator is Comparator , "04-02 - NullComparator compare failed." ) ;
+            assertEquals( comp3.compare(1, 2) , -1            , "04-03 - NullComparator compare failed." ) ;
+            assertEquals( comp3.compare(2, 2) ,  0            , "04-02 - NullComparator compare failed." ) ;
+            assertEquals( comp3.compare(2, 1) ,  1            , "04-03 - NullComparator compare failed." ) ;            
+                        
             
         }
         

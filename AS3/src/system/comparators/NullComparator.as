@@ -71,9 +71,9 @@ package system.comparators
 		 */
 		public function NullComparator( nonNullComparator:Comparator = null , nullsAreHigh:Boolean = false )
 		{
-			_comp = new ComparableComparator() ;
 			this.nonNullComparator = nonNullComparator ;
 			this.nullsAreHigh      = nullsAreHigh      ;
+            _comp = new ComparableComparator() ;			
 		}
 
 		/**
@@ -115,17 +115,14 @@ package system.comparators
 			{
 				return nullsAreHigh ? -1 : 1 ;
 			}
-			else
-			{
-				if ( nonNullComparator != null )
-				{
-					return nonNullComparator.compare(o1, o2, options) ;	
-				}
-				else
-				{
-					return _comp.compare(o1, o2,options) ;
-				}
-			}
+			else if ( nonNullComparator != null )
+            {
+                return nonNullComparator.compare(o1, o2, options) ;	
+            }
+            else
+            {
+                return _comp.compare(o1, o2, options) ;
+            }
 		}
 		
 		/**
