@@ -226,40 +226,39 @@ package system.data.maps
          * import system.data.maps.SortedArrayMap ;
          * 
          * import system.comparators.NumberComparator ;
-         * import system.comparators.StringComparator ;
          * 
          * var map:SortedArrayMap = new SortedArrayMap() ;
          * 
-         * map.put( "key1", "value4" ) ;
-         * map.put( "key3", "value2" ) ;
-         * map.put( "key4", "value3" ) ;
-         * map.put( "key2", "value1" ) ;
+         * map.comparator = new NumberComparator() ;
          * 
-         * trace(map) ; // {key1:value4,key3:value2,key4:value3,key2:value1}
+         * map.put( 1 , 4 ) ;
+         * map.put( 3 , 2 ) ;
+         * map.put( 4 , 3 ) ;
+         * map.put( 2 , 1 ) ;
          * 
-         * map.comparator = new StringComparator() ;
+         * trace(map) ; // {1:4,3:2,4:3,2:1}
          * 
          * map.options = SortedArrayMap.DESCENDING ;
          * map.sort() ;
          * 
-         * trace(map) ; // {key4:value3,key3:value2,key2:value1,key1:value4}
+         * trace(map) ; // {4:3,3:2,2:1,1:4}
          * 
          * map.options = SortedArrayMap.NONE ;
          * map.sort() ;
          * 
-         * trace(map) ; // {key1:value4,key2:value1,key3:value2,key4:value3}
+         * trace(map) ; // {1:4,2:1,3:2,4:3}
          * 
          * map.sortBy = SortedArrayMap.VALUE ;
          * 
          * map.options = SortedArrayMap.DESCENDING ;
          * map.sort() ;
          * 
-         * trace(map) ; // {key1:value4,key4:value3,key3:value2,key2:value1}
+         * trace(map) ; // {1:4,4:3,3:2,2:1}
          * 
          * map.options = SortedArrayMap.NONE ;
          * map.sort() ;
          * 
-         * trace(map) ; // {key2:value1,key3:value2,key4:value3,key1:value4}
+         * trace(map) ; // {2:1,3:2,4:3,1:4}
          * </code>
          * @see SortedArrayMap#sortBy
          */
@@ -322,11 +321,14 @@ package system.data.maps
          *     var vit:Iterator = map.iterator() ;
          *     var kit:Iterator = map.keyIterator() ;
          *     var str:String = "{" ;
-         * 
+         *     
+         *     var key:* ;
+         *     var value:* ;
+         *              *     
          *     while( vit.hasNext() )
          *     {
-         *         var value = vit.next() ;
-         *         var key   = kit.next() ;
+         *         value = vit.next() ;
+         *         key   = kit.next() ;
          *         str += key.id + ":" + value.name ;
          *         if (vit.hasNext())
          *         {

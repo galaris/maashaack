@@ -38,7 +38,10 @@ package system.data.maps
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Sortable;
-    import system.comparators.StringComparator;    
+    import system.comparators.NumberComparator;
+    import system.comparators.StringComparator;
+    import system.data.Iterator;
+    import system.data.Map;    
 
     public class SortedArrayMapTest extends TestCase 
     {
@@ -137,20 +140,188 @@ package system.data.maps
         public function testOptions():void
         {
             
+            m.options = SortedArrayMap.CASEINSENSITIVE ;
+            assertEquals( m.options , SortedArrayMap.CASEINSENSITIVE , "01 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.DESCENDING ;
+            assertEquals( m.options , SortedArrayMap.DESCENDING , "02 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.NONE ;
+            assertEquals( m.options , SortedArrayMap.NONE , "03 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.NUMERIC ;
+            assertEquals( m.options , SortedArrayMap.NUMERIC , "04 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.RETURNINDEXEDARRAY;
+            assertEquals( m.options , SortedArrayMap.RETURNINDEXEDARRAY , "05 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.UNIQUESORT;
+            assertEquals( m.options , SortedArrayMap.UNIQUESORT , "06 - The SortedArrayMap options property failed." ) ;
+            
+            m.options = SortedArrayMap.DESCENDING | SortedArrayMap.CASEINSENSITIVE ;
+            assertEquals( m.options , SortedArrayMap.DESCENDING | SortedArrayMap.CASEINSENSITIVE , "06 - The SortedArrayMap options property failed." ) ;            
+            
         }                
 
         public function testSortBy():void
         {
+            m.sortBy = SortedArrayMap.KEY ;
+            assertEquals( m.sortBy , SortedArrayMap.KEY , "01 - The SortedArrayMap sortBy property failed." ) ;
+            
+            m.sortBy = SortedArrayMap.VALUE ;
+            assertEquals( m.sortBy , SortedArrayMap.VALUE , "02 - The SortedArrayMap sortBy property failed." ) ;
+            
+            m.sortBy = "test" ;
+            assertEquals( m.sortBy , SortedArrayMap.KEY , "03 - The SortedArrayMap sortBy property failed." ) ;
+
+            m.sortBy = null ;
+            assertEquals( m.sortBy , SortedArrayMap.KEY , "04 - The SortedArrayMap sortBy property failed." ) ;            
             
         }
         
         public function testSort():void
         {
+            var map:SortedArrayMap = new SortedArrayMap() ;
+            
+            map.put( 1 , 4 ) ;
+            map.put( 3 , 2 ) ;
+            map.put( 4 , 3 ) ;
+            map.put( 2 , 1 ) ;
+            
+            map.comparator = new NumberComparator() ;
+            
+            map.options = SortedArrayMap.DESCENDING ;
+            map.sort() ;
+            
+            assertEquals
+            ( 
+                map.toString() , 
+                "{4:3,3:2,2:1,1:4}" , 
+                "01 - The SortedArrayMap sort() method failed with sortBy='key'." 
+            ) ;
+            
+            map.options = SortedArrayMap.NONE ;
+            map.sort() ;
+
+            assertEquals
+            ( 
+                map.toString() , 
+                "{1:4,2:1,3:2,4:3}" , 
+                "02 - The SortedArrayMap sort() method failed with sortBy='key'." 
+            ) ;
+            
+            map.sortBy = SortedArrayMap.VALUE ;
+            
+            map.options = SortedArrayMap.DESCENDING ;
+            map.sort() ;
+            
+            assertEquals
+            ( 
+                map.toString() , 
+                "{1:4,4:3,3:2,2:1}" , 
+                "03 - The SortedArrayMap sort() method failed with sortBy='value'." 
+            ) ;            
+            
+            map.options = SortedArrayMap.NONE ;
+            map.sort() ;
+            
+            assertEquals
+            ( 
+                map.toString() , 
+                "{2:1,3:2,4:3,1:4}" , 
+                "04 - The SortedArrayMap sort() method failed with sortBy='value'." 
+            ) ;              
             
         }         
         
         public function testSortOn():void
         {
+            var map:SortedArrayMap = new SortedArrayMap() ;
+            
+            map.put( { id:5 } , { name:'name4' } ) ;
+            map.put( { id:1 } , { name:'name1' } ) ;
+            map.put( { id:3 } , { name:'name5' } ) ;
+            map.put( { id:2 } , { name:'name2' } ) ;
+            map.put( { id:4 } , { name:'name3' } ) ;
+            
+            var formatResult:Function = function( map:Map ):String
+            {
+            
+                var vit:Iterator = map.iterator() ;
+                var kit:Iterator = map.keyIterator() ;
+                var str:String = "{" ;
+            
+                var key:*   ;
+                var value:* ;
+                
+                while( vit.hasNext() )
+                {
+                    value = vit.next() ;
+                    key   = kit.next() ;
+                    str += key.id + ":" + value.name ;
+                    if (vit.hasNext())
+                    {
+                        str += "," ;
+                    }
+                }
+                str += "}" ;
+                return str ;
+            };
+            
+            // original Map
+            
+            assertEquals
+            (
+                formatResult( map ) ,
+                "{5:name4,1:name1,3:name5,2:name2,4:name3}" ,
+                "01 - The SortedArrayMap sortOn() method failed."
+            ) ;
+            
+            // sort by key with sort() method
+            
+            map.sortBy = SortedArrayMap.KEY ; // default
+            map.options = SortedArrayMap.NUMERIC | SortedArrayMap.DESCENDING ;
+            map.sortOn("id") ;
+
+            assertEquals
+            (
+                formatResult( map ) ,
+                "{5:name4,4:name3,3:name5,2:name2,1:name1}" ,
+                "02 - The SortedArrayMap sortOn() method failed."
+            ) ;            
+            
+            map.options = SortedArrayMap.NUMERIC | SortedArrayMap.DESCENDING ;
+            map.sortOn("id") ;
+            
+            assertEquals
+            (
+                formatResult( map ) ,
+                "{5:name4,4:name3,3:name5,2:name2,1:name1}" ,
+                "03 - The SortedArrayMap sortOn() method failed."
+            ) ;             
+            
+            // sort by value with sort() method
+            
+            map.sortBy = SortedArrayMap.VALUE ;
+            map.options = SortedArrayMap.DESCENDING ;
+            map.sortOn("name") ;
+                        
+            assertEquals
+            (
+                formatResult( map ) ,
+                "{3:name5,5:name4,4:name3,2:name2,1:name1}" ,
+                "04 - The SortedArrayMap sortOn() method failed."
+            ) ;             
+                        
+            map.options = SortedArrayMap.NONE ;
+            map.sortOn("name") ;
+            
+            assertEquals
+            (
+                formatResult( map ) ,
+                "{1:name1,2:name2,4:name3,5:name4,3:name5}" ,
+                "04 - The SortedArrayMap sortOn() method failed."
+            ) ;                
             
         }        
         
