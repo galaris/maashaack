@@ -83,7 +83,7 @@ package system.data.collections
         /**
          * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
          */
-        public function addAll(c:Collection):Boolean 
+        public function addAll( c:Collection ):Boolean 
         {
             if ( c.size() > 0 ) 
             {
@@ -135,7 +135,7 @@ package system.data.collections
             var it:Iterator = c.iterator() ;
             while(it.hasNext()) 
             {
-                if ( ! contains(it.next()) ) 
+                if ( !contains(it.next()) ) 
                 {
                     return false ;
                 }
@@ -214,9 +214,9 @@ package system.data.collections
         /**
          * Removes from this Collection all the elements that are contained in the specified Collection (optional operation).
          */
-        public function removeAll(c:Collection):Boolean 
+        public function removeAll( c:Collection ):Boolean 
         {
-            var b:Boolean = false ;
+            var b:Boolean ;
             var it:Iterator = iterator() ;
             while (it.hasNext()) 
             {
@@ -234,11 +234,11 @@ package system.data.collections
          */
         public function retainAll(c:Collection):Boolean 
         {
-            var b:Boolean = false ;
+            var b:Boolean ;
             var it:Iterator = iterator() ;
-            while(it.hasNext()) 
+            while( it.hasNext() ) 
             {
-                if ( ! c.contains(it.next()) ) 
+                if ( ! c.contains( it.next() ) ) 
                 {
                     it.remove() ;
                     b = true ;

@@ -145,7 +145,15 @@ package system.data.collections
         
         public function testContainsAll():void
         {
-        
+            var c1:SimpleCollection = new SimpleCollection([1,2,3,4]) ;
+            var c2:SimpleCollection = new SimpleCollection([2,3]) ;
+            var c3:SimpleCollection = new SimpleCollection() ;
+            
+            assertTrue( c1.containsAll(c2) , "01 - SimpleCollection containsAll failed.") ;
+            assertTrue( c1.containsAll(c3) , "02 - SimpleCollection containsAll failed.") ;
+            
+            assertFalse( c2.containsAll(c1) , "03 - SimpleCollection containsAll failed.") ;
+            
         }        
         
         public function testGet():void
@@ -207,12 +215,32 @@ package system.data.collections
         
         public function testRemoveAll():void
         {
-        
+            var c1:SimpleCollection = new SimpleCollection([1,2,3,4]) ;
+            var c2:SimpleCollection = new SimpleCollection([2,3]) ;
+            var c3:SimpleCollection = new SimpleCollection() ;
+            
+            assertTrue( c1.removeAll( c2 ) , "01 - SimpleCollection removeAll failed.") ;
+            
+            ArrayAssert.assertEquals( c1.toArray() , [1,4], "02 - SimpleCollection removeAll failed.") ;
+            
+            assertFalse( c1.removeAll(c3) , "03 - SimpleCollection removeAll failed.") ;
         }        
         
         public function testRetainAll():void
         {
-        
+            var c1:SimpleCollection = new SimpleCollection([1,2,3,4]) ;
+            var c2:SimpleCollection = new SimpleCollection([2,3]) ;
+            var c3:SimpleCollection = new SimpleCollection() ;
+            var c4:SimpleCollection = new SimpleCollection([5,6]) ;
+            
+            assertTrue( c1.retainAll(c2) , "01 - SimpleCollection retainAll failed.") ;
+            ArrayAssert.assertEquals( c1.toArray() , [2,3], "02 - retainAll removeAll failed.") ;   
+            
+            assertTrue( c1.retainAll(c3) , "03 - SimpleCollection retainAll failed.") ;
+            assertEquals( c1.toString(), "{}" , "04 - SimpleCollection retainAll failed.") ;
+            
+            assertFalse( c1.retainAll(c4) , "05 - SimpleCollection retainAll failed.") ;
+            
         } 
         
         public function testSize():void
