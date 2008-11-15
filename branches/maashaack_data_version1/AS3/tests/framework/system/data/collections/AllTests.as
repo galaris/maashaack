@@ -45,8 +45,8 @@ package system.data.collections
         {
             var suite:TestSuite = new TestSuite("Maashaack data collections tests");
 
-            suite.addTestSuite(CollectionFormatterTest) ;
-            suite.addTestSuite(SimpleCollectionTest) ;
+            suite.addTestSuite( CollectionFormatterTest ) ;
+            suite.addTestSuite( ArrayCollectionTest ) ;
 
             return suite;
         }

@@ -43,15 +43,65 @@ package system.data.collections
 
     /**
      * This class provides a basic implementation of the <code class="prettyprint">Collection</code> interface, to minimize the effort required to implement this interface.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.data.collections.ArrayCollection ;
+     * import system.data.Iterator ;
+     * 
+     * var ar:Array           = ["item1", "item2", "item3", "item4"] ;
+     * var co:ArrayCollection = new ArrayCollection( ar ) ;
+     * 
+     * trace ("---- Collection methods") ;
+     * 
+     * trace ( "insert item5 : " + co.add("item5") ) ;
+     * trace ( "contains items : " + co.contains("item2") ) ;
+     * trace ( "get(2) : " + co.get(2) ) ;
+     * trace ( "isEmpty : " + co.isEmpty() ) ;
+     * 
+     * trace ( "remove : " + co.remove("item5") ) ;
+     * 
+     * trace ( "size : " + co.size() ) ;
+     * 
+     * trace ("toArray : " + co.toArray() ) ;
+     * trace ( "toString : " + co.toString() ) ;
+     * trace ( "toSource : " + co.toSource()) ;
+     * 
+     * trace ("---- iterator") ;
+     * 
+     * var it:Iterator = co.iterator() ;
+     * 
+     * while ( it.hasNext() )
+     * {
+     *     trace ( it.next() ) ;
+     * }
+     * 
+     * trace ("---- optional methods") ;
+     * 
+     * var c1:ArrayCollection = new ArrayCollection(["item1", "item3"]) ;
+     * var c2:ArrayCollection = new ArrayCollection(["item5", "item6"]) ;
+     * var c3:ArrayCollection = new ArrayCollection(["item2", "item4"]) ;
+     * 
+     * trace("co : " + co) ;
+     * trace("c1 : " + c1) ;
+     * trace("c2 : " + c2) ;
+     * 
+     * trace("co containsAll c1 : " + co.containsAll( c1 ) ) ;
+     * trace("co containsAll c2 : " + co.containsAll( c2 ) ) ;
+     * trace("co insertAll c2 : " + co.addAll( c2 ) ) ;
+     * trace("co removeAll c2 : " + co.removeAll( c1 ) ) ;
+     * trace("co retainAll c3 : " + co.retainAll( c3 ) ) ;
+     * 
+     * trace("co : " + co) ;
+     * </pre>
      */
-    public class SimpleCollection implements Collection 
+    public class ArrayCollection implements Collection 
     {
 
         /**
-         * Creates a new SimpleCollection instance.
+         * Creates a new ArrayCollection instance.
          * @param ar An optional Array or Collection to fill the collection.
          */
-        public function SimpleCollection( co:* = null )
+        public function ArrayCollection( co:* = null )
         {
         	if ( co is Collection )
         	{
@@ -114,7 +164,7 @@ package system.data.collections
          */        
         public function clone():*
         {
-            return new SimpleCollection(toArray()) ;
+            return new ArrayCollection(toArray()) ;
         }        
         
         /**
