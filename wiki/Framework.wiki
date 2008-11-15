@@ -38,6 +38,7 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 *For Your Eyes Only*
 
  * ADT (list, collection, map, queue, etc.)
+ * Comparator, Sortable, Comparable interface and implementations
  * BigNumber
  * Math library
  * Encryption library
