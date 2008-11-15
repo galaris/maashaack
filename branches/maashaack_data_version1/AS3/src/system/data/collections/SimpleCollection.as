@@ -39,7 +39,7 @@ package system.data.collections
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.serializers.eden.BuiltinSerializer;        
+    import system.serializers.eden.BuiltinSerializer;    
 
     /**
      * This class provides a basic implementation of the <code class="prettyprint">Collection</code> interface, to minimize the effort required to implement this interface.
@@ -49,17 +49,21 @@ package system.data.collections
 
         /**
          * Creates a new SimpleCollection instance.
-         * @param ar An optional Array to fill the collection.
+         * @param ar An optional Array or Collection to fill the collection.
          */
-        public function SimpleCollection( ar:Array = null )
+        public function SimpleCollection( co:* = null )
         {
-            if( ar as Array != null && ar.length > 0 ) 
+        	if ( co is Collection )
+        	{
+        		co = co.toArray() ;
+        	}
+            if( co as Array != null && co.length > 0 ) 
             {   
-                _a = ar.slice() ;   
+                _a = co.slice() ;   
             }
             else 
             {
-                _a = new Array() ;
+                _a = [] ;
             }
         }
 
@@ -192,8 +196,8 @@ package system.data.collections
                     }
                 }   
             }
-            else {
-                
+            else 
+            {
                 while ( it.hasNext() ) 
                 {
                     var v:* = it.next() ;
@@ -254,11 +258,12 @@ package system.data.collections
         
         /**
          * Returns an array containing all of the elements in this collection.
+         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
          * @return an array containing all of the elements in this collection.
          */
         public function toArray():Array
         {
-            return [].concat(_a) ;
+            return _a ;
         }
         
         /**
@@ -267,7 +272,13 @@ package system.data.collections
          */
         public function toSource(indent:int = 0):String
         {
-            return "new " + Reflection.getClassName(this) + "(" + BuiltinSerializer.emitArray(toArray()) + ")" ;
+            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            if ( _a.length > 0 )
+            {
+                source += BuiltinSerializer.emitArray( _a ) ;
+            } 
+            source += ")" ;
+            return source ;
         }
         
         /**
@@ -279,6 +290,9 @@ package system.data.collections
             return formatter.format( this ) ;
         }
         
+        /**
+         * @private
+         */
         protected var _a:Array ;        
         
     }
