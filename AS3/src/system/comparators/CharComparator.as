@@ -39,6 +39,36 @@ package system.comparators
     
     /**
      * This comparator compare characters (String with one character) objects.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.comparators.CharComparator ;
+     * 
+     * var c:CharComparator = new CharComparator() ;
+     * 
+     * trace( c.compare( "A" , "A" ) ) ; // 0
+     * trace( c.compare( "A" , "a" ) ) ; // 1
+     * trace( c.compare( "A" , "b" ) ) ; // 1
+     * 
+     * trace("--") ;
+     * 
+     * trace( c.compare( "a" , "A" ) ) ; // -1
+     * trace( c.compare( "a" , "a" ) ) ; //  0
+     * trace( c.compare( "a" , "b" ) ) ; // -1
+     * trace( c.compare( "a" , "B" ) ) ; // -1
+     * 
+     * trace("--") ;
+     * 
+     * trace( c.compare( "b" , "A" ) ) ; // -1
+     * trace( c.compare( "b" , "a" ) ) ; //  1
+     * trace( c.compare( "b" , "b" ) ) ; //  0
+     * trace( c.compare( "b" , "B" ) ) ; // -1
+     * 
+     * trace("--") ;
+     * 
+     * trace( c.compare( "B" , "a" ) ) ; // 1
+     * trace( c.compare( "B" , "b" ) ) ; // 1
+     * trace( c.compare( "B" , "B" ) ) ; // 0
+     * </pre>
      */
     public class CharComparator implements Comparator 
     {
@@ -55,7 +85,7 @@ package system.comparators
          * Returns 0 if the passed string is lower case else 1.
          * @return 0 if the passed string is lower case else 1.
          */
-        public static function caseValue( str:String ):Number
+        public static function caseValue( str:String ):uint
         {
             return ( str.toLowerCase() == str ) ? 0 : 1 ;
         }
