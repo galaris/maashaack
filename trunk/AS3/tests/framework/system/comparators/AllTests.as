@@ -45,6 +45,7 @@ package system.comparators
         {
             var suite:TestSuite = new TestSuite("system.comparators");
             
+            suite.addTestSuite(AlphaComparatorTest);
             suite.addTestSuite(BooleanComparatorTest);
             suite.addTestSuite(CharComparatorTest);
             suite.addTestSuite(ComparableComparatorTest) ;

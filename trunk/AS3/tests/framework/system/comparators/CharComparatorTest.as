@@ -80,20 +80,20 @@ package system.comparators
             assertEquals( comparator.compare(c1, c3) , -1 , "01-02 - The CharComparator compare failed." ) ;
             assertEquals( comparator.compare(c1, c4) , -1 , "01-03 - The CharComparator compare failed." ) ;
             
-            assertEquals( comparator.compare(c2, c2) , 0 , "02-00 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c2, c1) , 1 , "02-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c2, c3) , -1 , "02-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c2, c4) , -1 , "02-01 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c2, c2) , 0  , "02-00 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c2, c1) , 1  , "02-01 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c2, c3) , -1 , "02-02 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c2, c4) , -1 , "02-03 - The CharComparator compare failed." ) ;
             
             assertEquals( comparator.compare(c3, c3) , 0  , "03-00 - The CharComparator compare failed." ) ;
             assertEquals( comparator.compare(c3, c1) , 1  , "03-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c3, c2) , 1  , "03-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c3, c4) , -1 , "03-01 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c3, c2) , 1  , "03-02 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c3, c4) , -1 , "03-03 - The CharComparator compare failed." ) ;
             
             assertEquals( comparator.compare(c4, c4) , 0 , "04-00 - The CharComparator compare failed." ) ;
             assertEquals( comparator.compare(c4, c1) , 1 , "04-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c4, c2) , 1 , "04-01 - The CharComparator compare failed." ) ;
-            assertEquals( comparator.compare(c4, c3) , 1 , "04-01 - The CharComparator compare failed." ) ;            
+            assertEquals( comparator.compare(c4, c2) , 1 , "04-02 - The CharComparator compare failed." ) ;
+            assertEquals( comparator.compare(c4, c3) , 1 , "04-03 - The CharComparator compare failed." ) ;            
             
         } 
                 
