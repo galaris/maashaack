@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.comparators
 {
     import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;  
+    import buRRRn.ASTUce.framework.TestSuite;    
 
     public class AllTests
     {
@@ -46,6 +46,7 @@ package system.comparators
             var suite:TestSuite = new TestSuite("system.comparators");
             
             suite.addTestSuite(BooleanComparatorTest);
+            suite.addTestSuite(CharComparatorTest);
             suite.addTestSuite(ComparableComparatorTest) ;
             suite.addTestSuite(DateComparatorTest) ;
             suite.addTestSuite(GenericComparatorTest) ;
