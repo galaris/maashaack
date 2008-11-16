@@ -179,7 +179,7 @@ package system.data.sets
         {
             return _map.getKeys() ;
         }
-
+        
         /**
          * @private
          */
@@ -189,6 +189,7 @@ package system.data.sets
          * @private
          */        
         private static const PRESENT:Object = new Object() ;        
+        
         
     }
 }

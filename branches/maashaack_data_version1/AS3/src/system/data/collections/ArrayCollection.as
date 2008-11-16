@@ -209,7 +209,7 @@ package system.data.collections
                 return false ;
             }
             var c:Collection = o as Collection ;
-            if (c == null || ( c.size() != size()) ) 
+            if (c == null || ( c.size() != size() ) )
             {
                 return false ;
             }       
@@ -346,7 +346,7 @@ package system.data.collections
         public function toSource(indent:int = 0):String
         {
             var source:String = "new " + Reflection.getClassPath(this) + "(" ;
-            var ar:Array      = toArray() ;
+            var ar:Array = toArray() ;
             if ( ar.length > 0 )
             {
                 source += BuiltinSerializer.emitArray( ar ) ;
