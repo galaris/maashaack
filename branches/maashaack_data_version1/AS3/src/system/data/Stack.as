@@ -77,7 +77,7 @@ package system.data
 		 * Search a value in the stack.
 		 * @return the index position of a value in the stack.
 		 */
-		function search(o:*):uint ;
+		function search(o:*):int ;
 
 		/**
 		 * Returns the number of pushed values.

@@ -33,61 +33,78 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.samples 
+package system.data.stacks 
 {
-    import system.data.Iterator;
-    import system.data.Stack;    
+    import system.data.Stack;
+    import system.data.collections.ArrayCollection;    
 
-    public class StackClass implements Stack
+    /**
+     * The based implementation of the Stack interface. 
+     * The Stack interface represents a last-in-first-out (LIFO) stack of objects.
+     * <pre class="prettyprint">
+     * import system.data.stacks.ArrayStack ;
+     * 
+     * var stack:ArrayStack = new ArrayStack(["item1", "item2"]) ;
+     * trace("push : " + stack.push("item3")) ;
+     * trace("toSource : " + stack.toSource()) ;
+     * trace("pop : " + stack.pop()) ;
+     * trace("stack : " + stack) ;
+     * </pre>
+     */
+    public class ArrayStack extends ArrayCollection implements Stack
     {
 
-        public function clear():void
+        /**
+         * Creates a new SimpleStack instance.
+         * @param init An optional Array or Collection to fill the collection.
+         */
+        public function ArrayStack( init:* = null )
         {
+            super( init );
         }
         
-        public function clone():*
+        /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():* 
         {
-            return null ;
-        }
-          
-        public function isEmpty():Boolean
-        {
-            return false ;    
-        }
+            return new ArrayStack( toArray() ) ;
+        }        
         
-        public function iterator():Iterator
-        {
-            return new IteratorClass() ;
-        }  
-        
+        /**
+         * Looks at the object at the top of this stack without removing it from the stack.
+         */        
         public function peek():*
         {
-            return null ;
+        	return _a[_a.length - 1] ;
         }
         
+        /**
+         * Removes the object at the top of this stack and returns that object as the value of this function.
+         * @return the removed object value.
+         */        
         public function pop():*
         {
-            return null ;
+        	return isEmpty() ? null : _a.pop() ;
         }
         
-        public function push(o:*):void
+        /**
+         * Pushes an item into the top of this stack.
+         */        
+        public function push( o:* ):void
         {
+        	_a.push( o ) ;
         }
         
+        /**
+         * Returns the index of an element in the Stack.
+         * @return the index of an element in the Stack.
+         */        
         public function search(o:*):int
         {
-            return 0 ;
+        	return indexOf(o) ;
         }
-        
-        public function size():uint
-        {
-            return 0 ;
-        }
-            
-        public function toSource(indent:int = 0):String
-        {
-            return null ;
-        }
+          
     }
-
 }

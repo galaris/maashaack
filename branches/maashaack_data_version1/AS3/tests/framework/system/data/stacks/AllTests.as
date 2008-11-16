@@ -44,7 +44,9 @@ package system.data.stacks
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data stacks tests");
-
+            
+            suite.addTestSuite( ArrayStackTest ) ;
+            
             return suite;
         }
     }

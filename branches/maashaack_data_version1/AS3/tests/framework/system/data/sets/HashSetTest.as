@@ -258,10 +258,10 @@ package system.data.sets
             var ar:Array = ["item1", "item2"] ;
             
             s = new HashSet() ;
-            assertEquals(s.toSource() , "new system.data.sets.HashSet()" ) ;
+            assertEquals(s.toSource() , "new system.data.sets.HashSet()" , "01 - HashSet toSource failed" ) ;
             
             s = new HashSet( ar ) ;
-            assertEquals(s.toSource() , "new system.data.sets.HashSet([\"item1\",\"item2\"])" ) ;
+            assertEquals(s.toSource() , "new system.data.sets.HashSet([\"item1\",\"item2\"])" , "02 - HashSet toSource failed" ) ;
         }
         
         public function testToString():void

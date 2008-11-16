@@ -311,10 +311,10 @@ package system.data.collections
         	var ar:Array = ["item1", "item2"] ;
         	
         	co = new ArrayCollection() ;
-            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection()" ) ;
+            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection()" , "01 - ArrayCollection toSource failed") ;
         	
             co = new ArrayCollection( ar ) ;
-            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection([\"item1\",\"item2\"])" ) ;
+            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection([\"item1\",\"item2\"])" , "02 - ArrayCollection toSource failed") ;
         }
         
         public function testToString():void

@@ -100,17 +100,17 @@ package system.data.collections
 
         /**
          * Creates a new ArrayCollection instance.
-         * @param ar An optional Array or Collection to fill the collection.
+         * @param init An optional Array or Collection to fill the collection.
          */
-        public function ArrayCollection( co:* = null )
+        public function ArrayCollection( init:* = null )
         {
-        	if ( co is Collection )
+        	if ( init is Collection )
         	{
-        		co = co.toArray() ;
+        		init = init.toArray() ;
         	}
-            if( co as Array != null && co.length > 0 ) 
+            if( init as Array != null && init.length > 0 ) 
             {   
-                _a = co.slice() ;   
+                _a = init.slice() ;   
             }
             else 
             {
