@@ -98,14 +98,28 @@ package system.comparators
             var s2:String = "welcome" ;
             var s3:String = "world" ;
             
-            assertEquals( comp1.compare(s1, s2) , -1 , "01 - The StringComparator compare failed." ) ;
-            assertEquals( comp1.compare(s2, s1) ,  1 , "02 - The StringComparator compare failed." ) ;
-            assertEquals( comp1.compare(s1, s3) ,  1 , "03 - The StringComparator compare failed." ) ;
-            assertEquals( comp1.compare(s1, s1) ,  0 , "04 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s2) , -1 , "01-01 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s2, s1) ,  1 , "01-02 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s3) ,  1 , "01-03 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s1) ,  0 , "01-04 - The StringComparator compare failed." ) ;
 
-            assertEquals( comp1.compare(s1, s0) ,  0 , "05 - The StringComparator compare failed." ) ;
-            assertEquals( comp2.compare(s1, s0) , -1 , "06 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare(s1, s0) , -1 , "01-05 - The StringComparator compare failed." ) ;
+            assertEquals( comp2.compare(s1, s0) ,  0 , "01-06 - The StringComparator compare failed." ) ;
             
+            // test the "options" argument
+
+            assertEquals( comp1.compare("aa", "aa", true) , 0 , "02-01 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare("AA", "aa", true) , 0 , "02-02 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare("aa", "AA", true) , 0 , "02-03 - The StringComparator compare failed." ) ;
+            
+            assertTrue( comp1.ignoreCase  , "02-04 - The StringComparator compare failed." ) ;
+            
+            assertEquals( comp1.compare("aa", "aa", false) ,  0 , "03-01 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare("AA", "aa", false) ,  1 , "03-02 - The StringComparator compare failed." ) ;
+            assertEquals( comp1.compare("aa", "AA", false) , -1 , "03-03 - The StringComparator compare failed." ) ;
+            
+            assertFalse( comp1.ignoreCase  , "03-04 - The StringComparator compare failed." ) ;            
+                        
         } 
         
         public function testGetIgnoreCaseStringComparator():void

@@ -35,6 +35,7 @@
 
 package system
 {
+    import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;    
 
@@ -44,6 +45,12 @@ package system
     public class Strings
     {
 
+        /**
+         * @private
+         * @see system.Strings#compare
+         */
+        private static var _sComparator:StringComparator = new StringComparator() ;
+        
         /**
          * Helper method for the padLeft and padRight method.
          * @private
@@ -135,70 +142,18 @@ package system
             var m:int = Math.floor( ( size - n ) / 2 ) ;
             return repeat( separator, m ) + str + repeat( separator, size - n - m ) ;
         }
+        
 
+        
         /**
-         * Compares the two specified String objects.
+         * Compares the two specified String objects. Allows to take into account the string case for comparison. 
          * @param o1 first string to compare with the second string.
          * @param o2 second string to compare with the first string.
          * @param strict (optionnal) useCase boolean, default to false.
-         * allows to take into account the string case for comparison. 
          */    
         public static function compare( o1:String, o2:String, strict:Boolean = false ):int
         {
-            
-            if( ! strict )
-            {
-                o1 = o1.toLowerCase( );
-                o2 = o2.toLowerCase( );
-            }
-            
-            if( o1 == o2 )
-            {
-                return 0;
-            }
-            else if( o1.length == o2.length )
-            {
-                /* info:
-                localCompare return the char difference so we reuse that
-                 */
-                var localcomp:Number = o1.localeCompare( o2 );
-                
-                /* note:
-                by default we want an ascending alphabetic order
-                with minuscule weighting less than majuscule
-                but as char value of majuscule are smaller
-                we have to inverse the negative/positive to obtain
-                the right order
-                   
-                ex:
-                "a".charAt(0) = 97
-                "A".charAt(0) = 65
-                that means that "a" weight more than "A"
-                "a".localeCompare( "A" ) -> 32
-                but in our case we want a negative, because we consider
-                that "a" weight less than "A"
-                so to get the correct result we need to negate the result
-                -("a".localeCompare( "A" )) -> -32
-                 */
-                if( localcomp == 0 )
-                {
-                    return 0;
-                }
-                else if( localcomp < 0 )
-                {
-                    return 1;
-                }
-                
-                return - 1;
-            }
-            else if( o1.length > o2.length )
-            {
-                return 1;
-            }
-            else
-            {
-                return - 1;
-            }
+            return _sComparator.compare(o1,o2, !strict) ;
         }
 
         /**

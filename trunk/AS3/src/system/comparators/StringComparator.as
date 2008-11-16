@@ -35,8 +35,7 @@
 
 package system.comparators
 {
-    import system.Comparator;
-    import system.Strings;    
+    import system.Comparator;    
 
     /**
 	 * This comparator compare String objects.
@@ -92,12 +91,65 @@ package system.comparators
 	     */
 		public function compare(o1:*, o2:*, options:* = null ):int
 		{
-			//var b:Boolean = ignoreCase ;
-			//if ( options != null && options is Boolean )
-			//{
-			//	b = options as Boolean ;
-			//}
-			return Strings.compare( o1, o2, ignoreCase );
+			if ( options is Boolean )
+			{
+                ignoreCase = options ;
+			}
+
+            if( ignoreCase )
+            {
+                o1 = o1.toLowerCase() ;
+                o2 = o2.toLowerCase() ;
+            }
+            
+            if( o1 == o2 )
+            {
+                return 0;
+            }
+            else if( o1.length == o2.length )
+            {
+                /* info:
+                localCompare return the char difference so we reuse that
+                 */
+                var localcomp:Number = o1.localeCompare( o2 );
+                
+                /* note:
+                by default we want an ascending alphabetic order
+                with minuscule weighting less than majuscule
+                but as char value of majuscule are smaller
+                we have to inverse the negative/positive to obtain
+                the right order
+                   
+                ex:
+                "a".charAt(0) = 97
+                "A".charAt(0) = 65
+                that means that "a" weight more than "A"
+                "a".localeCompare( "A" ) -> 32
+                but in our case we want a negative, because we consider
+                that "a" weight less than "A"
+                so to get the correct result we need to negate the result
+                -("a".localeCompare( "A" )) -> -32
+                 */
+                if( localcomp == 0 )
+                {
+                    return 0;
+                }
+                else if( localcomp < 0 )
+                {
+                    return 1;
+                }
+                
+                return - 1;
+            }
+            else if( o1.length > o2.length )
+            {
+                return 1;
+            }
+            else
+            {
+                return - 1;
+            }
+  
 		}
         
 		/**
