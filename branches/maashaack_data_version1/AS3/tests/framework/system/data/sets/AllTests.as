@@ -45,6 +45,8 @@ package system.data.sets
         {
             var suite:TestSuite = new TestSuite("Maashaack data sets tests");
 
+            suite.addTestSuite( HashSetTest ) ;
+
             return suite;
         }
     }

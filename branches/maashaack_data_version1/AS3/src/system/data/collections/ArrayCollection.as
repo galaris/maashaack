@@ -40,9 +40,7 @@ package system.data.collections
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.serializers.eden.BuiltinSerializer;
-    
-    import flash.utils.getDefinitionByName;    
+    import system.serializers.eden.BuiltinSerializer;    
 
     /**
      * This class provides a basic implementation of the <code class="prettyprint">Collection</code> interface, to minimize the effort required to implement this interface.
@@ -206,17 +204,12 @@ package system.data.collections
             {
                 return true ;
             }
-            if ( !Reflection.getClassInfo(o).hasInterface(Collection) )
-            {
-            	return false ;
-            }
-            var clazz:Class = getDefinitionByName( Reflection.getClassPath(this)) as Class ;
-            if ( clazz != null && !( o is clazz ) ) 
+            if ( Reflection.getClassPath(this) != Reflection.getClassPath(o) ) 
             {
                 return false ;
             }
             var c:Collection = o as Collection ;
-            if (c.size() != size()) 
+            if (c == null || ( c.size() != size()) ) 
             {
                 return false ;
             }       
@@ -353,9 +346,10 @@ package system.data.collections
         public function toSource(indent:int = 0):String
         {
             var source:String = "new " + Reflection.getClassPath(this) + "(" ;
-            if ( _a.length > 0 )
+            var ar:Array      = toArray() ;
+            if ( ar.length > 0 )
             {
-                source += BuiltinSerializer.emitArray( _a ) ;
+                source += BuiltinSerializer.emitArray( ar ) ;
             } 
             source += ")" ;
             return source ;

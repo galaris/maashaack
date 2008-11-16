@@ -39,11 +39,13 @@ package system.data.collections
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Cloneable;
+    import system.Equatable;
     import system.Serializable;
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
-    import system.data.iterators.ArrayIterator;    
+    import system.data.iterators.ArrayIterator;
+    import system.data.sets.HashSet;    
 
     public class ArrayCollectionTest extends TestCase
     {
@@ -80,9 +82,10 @@ package system.data.collections
         {
         	var c:ArrayCollection = new ArrayCollection() ;
             assertTrue( c is Collection   , "01 - ArrayCollection implements the Collection interface.") ;
-            assertTrue( c is Cloneable    , "02 - ArrayCollection implements the Collection interface.") ;
-            assertTrue( c is Iterable     , "03 - ArrayCollection implements the Collection interface.") ;
-            assertTrue( c is Serializable , "04 - ArrayCollection implements the Collection interface.") ;
+            assertTrue( c is Cloneable    , "02 - ArrayCollection implements the Cloneable interface.") ;
+            assertTrue( c is Equatable    , "03 - ArrayCollection implements the Equatable interface.") ;
+            assertTrue( c is Iterable     , "04 - ArrayCollection implements the Iterable interface.") ;
+            assertTrue( c is Serializable , "05 - ArrayCollection implements the Serializable interface.") ;
         }        
         
         public function testAdd():void
@@ -118,16 +121,14 @@ package system.data.collections
             co.clear() ; 
             assertTrue( old > co.size(), "01 - ArrayCollection clear failed.") ;
             ArrayAssert.assertEquals( co.toArray(), [], "02 - ArrayCollection clear failed.") ;
-            assertTrue( co.isEmpty(), "03 - ArrayCollection clear failed.") ;        	
+            assertTrue( co.isEmpty(), "03 - ArrayCollection clear failed.") ; 	
         	
         }
         
         public function testClone():void
         {
-            
             var co:ArrayCollection = new ArrayCollection([2,3,4]) ;
             var cl:ArrayCollection = co.clone() as ArrayCollection ;
-            
             assertNotNull( cl, "01 - ArrayCollection clone failed.") ;
             assertFalse( cl == co, "02 - ArrayCollection clone failed.") ;  
             ArrayAssert.assertEquals( cl.toArray(), co.toArray(), "03 - ArrayCollection clone failed.") ;   	
@@ -162,10 +163,12 @@ package system.data.collections
             var c1:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
             var c2:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
             var c3:ArrayCollection = new ArrayCollection([2,3]) ;
+        	var c4:ArrayCollection = new ArrayCollection([5,6,7,8]) ;
         	
         	assertTrue  ( c1.equals(c1) , "01-01 - ArrayCollection equals failed." ) ;
         	assertTrue  ( c1.equals(c2) , "01-02 - ArrayCollection equals failed." ) ;
         	assertFalse ( c1.equals(c3) , "01-03 - ArrayCollection equals failed." ) ;
+            assertFalse ( c1.equals(c4) , "01-04 - ArrayCollection equals failed." ) ; // same size
             
             assertTrue  ( c2.equals(c1) , "02-01 - ArrayCollection equals failed." ) ;
             assertTrue  ( c2.equals(c2) , "02-02 - ArrayCollection equals failed." ) ;
@@ -175,7 +178,8 @@ package system.data.collections
             assertFalse ( c3.equals(c2) , "03-02 - ArrayCollection equals failed." ) ;
             assertTrue  ( c3.equals(c3) , "03-03 - ArrayCollection equals failed." ) ;
             
-            // TODO test with a other Collection object
+            var s:HashSet = new HashSet([1,2,3,4]) ;
+            assertFalse( c1.equals(s) , "04 - ArrayCollection equals failed." ) ;
         	
         }
         
