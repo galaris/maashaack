@@ -38,6 +38,8 @@ package system.data.arrays
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Reflection;
+    import system.data.Iterator;
+    import system.data.iterators.ArrayIterator;
     
     import flash.utils.Proxy;    
 
@@ -64,6 +66,14 @@ package system.data.arrays
             assertNotNull(ar, "02-01 - The ProxyArray constructor failed.") ;
             assertEquals(ar.length , 3 , "02-02 - The ProxyArray constructor failed.") ;
         } 
+        
+        public function testIterator():void
+        {
+            var ar:ProxyArray = new ProxyArray() ;
+            var it:Iterator   = ar.iterator() ;
+            assertNotNull( it , "01 - The iterator failed." ) ;
+            assertTrue( it is ArrayIterator , "02 - The iterator failed." ) ;
+        }          
         
         public function testProxy():void
         {
@@ -114,7 +124,6 @@ package system.data.arrays
             ar.push( "item3" ) ;            
             
             assertEquals( ar.toSource() , 'new system.data.arrays.ProxyArray(["item1","item2","item3"])' , "01 - The ProxyArray proxy failed." ) ;            
-            
         }          
         
         public function testToString():void
