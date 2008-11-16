@@ -46,7 +46,7 @@ package system.data.arrays
             var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
             
             suite.addTestSuite( ArrayFilterTest ) ;
-            suite.addTestSuite( ArrayProxyTest ) ;
+            suite.addTestSuite( ProxyArrayTest ) ;
                         
             return suite;
         }

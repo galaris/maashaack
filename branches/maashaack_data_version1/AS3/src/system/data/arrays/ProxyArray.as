@@ -192,7 +192,7 @@ package system.data.arrays
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + BuiltinSerializer.emitArray( _ar ) + ")" ;
+            return "new " + Reflection.getClassPath(this) + "(" + (_ar.length > 0 ? BuiltinSerializer.emitArray( _ar ) : "" ) + ")" ;
         }
 
         /**
