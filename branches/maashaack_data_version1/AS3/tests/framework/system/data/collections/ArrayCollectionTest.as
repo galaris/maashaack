@@ -154,7 +154,30 @@ package system.data.collections
             
             assertFalse( c2.containsAll(c1) , "03 - ArrayCollection containsAll failed.") ;
             
-        }        
+        }
+        
+        public function testEquals():void
+        {
+        	
+            var c1:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
+            var c2:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
+            var c3:ArrayCollection = new ArrayCollection([2,3]) ;
+        	
+        	assertTrue  ( c1.equals(c1) , "01-01 - ArrayCollection equals failed." ) ;
+        	assertTrue  ( c1.equals(c2) , "01-02 - ArrayCollection equals failed." ) ;
+        	assertFalse ( c1.equals(c3) , "01-03 - ArrayCollection equals failed." ) ;
+            
+            assertTrue  ( c2.equals(c1) , "02-01 - ArrayCollection equals failed." ) ;
+            assertTrue  ( c2.equals(c2) , "02-02 - ArrayCollection equals failed." ) ;
+            assertFalse ( c2.equals(c3) , "02-03 - ArrayCollection equals failed." ) ;
+            
+            assertFalse ( c3.equals(c1) , "03-01 - ArrayCollection equals failed." ) ;
+            assertFalse ( c3.equals(c2) , "03-02 - ArrayCollection equals failed." ) ;
+            assertTrue  ( c3.equals(c3) , "03-03 - ArrayCollection equals failed." ) ;
+            
+            // TODO test with a other Collection object
+        	
+        }
         
         public function testGet():void
         {

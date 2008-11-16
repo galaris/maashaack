@@ -35,11 +35,14 @@
 
 package system.data.collections 
 {
+    import system.Equatable;
     import system.Reflection;
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.serializers.eden.BuiltinSerializer;    
+    import system.serializers.eden.BuiltinSerializer;
+    
+    import flash.utils.getDefinitionByName;    
 
     /**
      * This class provides a basic implementation of the <code class="prettyprint">Collection</code> interface, to minimize the effort required to implement this interface.
@@ -94,7 +97,7 @@ package system.data.collections
      * trace("co : " + co) ;
      * </pre>
      */
-    public class ArrayCollection implements Collection 
+    public class ArrayCollection implements Collection, Equatable
     {
 
         /**
@@ -191,6 +194,33 @@ package system.data.collections
                 }
             }
             return true ;
+        }
+        
+        /**
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
+         */
+        public function equals( o:* ):Boolean 
+        {
+            if (o == this) 
+            {
+                return true ;
+            }
+            if ( !Reflection.getClassInfo(o).hasInterface(Collection) )
+            {
+            	return false ;
+            }
+            var clazz:Class = getDefinitionByName( Reflection.getClassPath(this)) as Class ;
+            if ( clazz != null && !( o is clazz ) ) 
+            {
+                return false ;
+            }
+            var c:Collection = o as Collection ;
+            if (c.size() != size()) 
+            {
+                return false ;
+            }       
+            return this.containsAll(c) ;
         }        
         
         /**
