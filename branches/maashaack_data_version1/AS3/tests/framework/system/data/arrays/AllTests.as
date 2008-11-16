@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.arrays
 {
-    import buRRRn.ASTUce.framework.*;                                
+    import buRRRn.ASTUce.framework.*;                                        
 
     public class AllTests
     {
@@ -44,8 +44,10 @@ package system.data.arrays
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
-
-            // suite.addTestSuite( ArrayProxyTest ) ;            
+            
+            suite.addTestSuite( ArrayFilterTest ) ;
+            suite.addTestSuite( ArrayProxyTest ) ;
+                        
             return suite;
         }
     }
