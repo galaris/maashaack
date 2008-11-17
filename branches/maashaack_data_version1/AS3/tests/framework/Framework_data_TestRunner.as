@@ -48,6 +48,8 @@ package
     import flash.text.TextField;
     import flash.text.TextFormat;    
 
+    [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
+
     public class Framework_data_TestRunner extends Sprite
     {
         

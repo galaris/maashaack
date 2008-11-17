@@ -59,9 +59,9 @@ package system.comparators
      * var ar:Array =
      * [
      *     { id : 0 , label : "Paris"     } ,
-     *     { id : 0 , label : "Marseille" } ,
-     *     { id : 0 , label : "Lyon"      } ,
-     *     { id : 0 , label : "Bordeaux"  }
+     *     { id : 1 , label : "Marseille" } ,
+     *     { id : 2 , label : "Lyon"      } ,
+     *     { id : 3 , label : "Bordeaux"  }
      * ] ;
      * 
      * var c:GenericComparator = new GenericComparator( "label", StringComparator.getStringComparator() ) ;
