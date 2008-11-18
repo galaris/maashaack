@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -32,7 +31,7 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
- */
+*/
 
 package system.data.stacks
 {
