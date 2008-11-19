@@ -39,7 +39,7 @@ package system.data.queues
     import system.data.collections.ArrayCollection;    
 
     /**
-     * LinearQueue stores values in a 'first-in, first-out' manner.
+     * LinearQueue is a collection and stores values in a 'first-in, first-out' manner.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.queues.LinearQueue ;

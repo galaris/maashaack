@@ -45,10 +45,12 @@ package system.data.stacks
      * import system.data.stacks.ArrayStack ;
      * 
      * var stack:ArrayStack = new ArrayStack(["item1", "item2"]) ;
-     * trace("push : " + stack.push("item3")) ;
+     * 
+     * stack.push("item3") ;
+     * 
      * trace("toSource : " + stack.toSource()) ;
-     * trace("pop : " + stack.pop()) ;
-     * trace("stack : " + stack) ;
+     * trace("pop      : " + stack.pop()) ;
+     * trace("stack    : " + stack) ;
      * </pre>
      */
     public class ArrayStack extends ArrayCollection implements Stack

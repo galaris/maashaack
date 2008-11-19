@@ -40,9 +40,8 @@ package system.data.arrays
      * This filter contains all constants and methods to sort the Arrays in the application.
      * <p><b>Example : </b></p>
      * <pre class="prettyprint">
-     * import system.data.arrays.ArrayFilter ;
-     * 
      * import flash.events.Event ;
+     * import system.data.arrays.ArrayFilter ;
      * 
      * var debug:Function = function ():Void
      * {
@@ -61,7 +60,8 @@ package system.data.arrays
      *     trace( e ) ;
      * }
      * 
-     * var af:ArrayFilter = ArrayFilter.getInstance() ;
+     * var af:ArrayFilter = new ArrayFilter() ;
+     * 
      * af.addEventListener( ArrayFilter.CHANGE, change ) ;
      * 
      * debug() ;
