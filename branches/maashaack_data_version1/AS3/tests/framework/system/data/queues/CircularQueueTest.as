@@ -35,6 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
  
 package system.data.queues 
 {
+    import flash.errors.IllegalOperationError;    
+    
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
@@ -79,6 +81,21 @@ package system.data.queues
             assertEquals( q.size(), 4 , "07-02 - The CircularQueue constructor failed." ) ;            
             
         }        
+        
+        public function testAdd():void
+        {
+            var q:CircularQueue = new CircularQueue() ;
+            try
+            {
+                q.add("item") ;
+                fail( "01 - The CircularQueue add() method failed." ) ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is IllegalOperationError , "02 - The CircularQueue add() method failed." ) ;
+            	assertEquals( e.message , "The CircularQueue class does support the add() method." , "03 - The CircularQueue add() method failed." ) ;
+            }
+        }
         
         public function testInterface():void
         {
@@ -166,6 +183,36 @@ package system.data.queues
             
         }        
         
+        public function testGet():void
+        {
+            var q:CircularQueue = new CircularQueue() ;
+            try
+            {
+                q.get("item") ;
+                fail( "01 - The CircularQueue get() method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError , "02 - The CircularQueue get() method failed." ) ;
+                assertEquals( e.message , "The CircularQueue class does support the get() method." , "03 - The CircularQueue get() method failed." ) ;
+            }
+        }
+        
+        public function testIndexOf():void
+        {
+            var q:CircularQueue = new CircularQueue() ;
+            try
+            {
+                q.indexOf("item") ;
+                fail( "01 - The CircularQueue indexOf() method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError , "02 - The CircularQueue indexOf() method failed." ) ;
+                assertEquals( e.message , "The CircularQueue class does support the indexOf() method." , "03 - The CircularQueue indexOf() method failed." ) ;
+            }
+        }        
+        
         public function testIsEmpty():void
         {
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
@@ -229,6 +276,21 @@ package system.data.queues
             assertEquals( q.poll() , 4 , "04-01 - The CircularQueue dequeue failed." ) ;
             assertEquals( q.size()    , 0 , "04-02 - The CircularQueue dequeue failed." ) ;
         }
+        
+        public function testRemove():void
+        {
+            var q:CircularQueue = new CircularQueue() ;
+            try
+            {
+                q.remove("item") ;
+                fail( "01 - The CircularQueue remove() method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError , "02 - The CircularQueue remove() method failed." ) ;
+                assertEquals( e.message , "The CircularQueue class does support the remove() method." , "03 - The CircularQueue remove() method failed." ) ;
+            }
+        }          
 
         public function testSize():void
         {

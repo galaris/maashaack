@@ -57,7 +57,6 @@ package system.data.collections
         
         public function testConstructor():void
         {
-        	
         	var c:ArrayCollection = new ArrayCollection() ;
         	
         	assertNotNull(c, "01-01 - ArrayCollection constructor failed.") ;
@@ -74,8 +73,6 @@ package system.data.collections
             var co2:ArrayCollection = new ArrayCollection(co1) ; 
             assertNotNull(co2, "03-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( co2.toArray(), [2,3,4], "03-02 - ArrayCollection constructor failed.") ;
-            
-        	
         }
         
         public function testInterface():void

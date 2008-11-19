@@ -38,6 +38,7 @@ package system.data.collections
     import system.Equatable;
     import system.Reflection;
     import system.data.Collection;
+    import system.data.Iterable;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
     import system.serializers.eden.BuiltinSerializer;    
@@ -108,10 +109,20 @@ package system.data.collections
         	{
         		init = init.toArray() ;
         	}
+            else if ( init is Iterable )
+            {
+                var ar:Array    = [] ;
+                var it:Iterator = (init as Iterable).iterator() ;
+                while( it.hasNext() )
+                {
+                	ar.push(it.next()) ;
+                }
+                init = ar ;
+            }
             if( init as Array != null && init.length > 0 ) 
             {   
                 _a = init.slice() ;   
-            }
+            }            
             else 
             {
                 _a = [] ;

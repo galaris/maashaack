@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.queues
 {
-    import buRRRn.ASTUce.framework.*;                                        
+    import buRRRn.ASTUce.framework.*;                                            
 
     public class AllTests
     {
@@ -46,6 +46,7 @@ package system.data.queues
             var suite:TestSuite = new TestSuite("Maashaack data queues tests");
             
             suite.addTestSuite( CircularQueueTest ) ;
+            suite.addTestSuite( LinearQueueTest ) ;
             
             return suite;
         }

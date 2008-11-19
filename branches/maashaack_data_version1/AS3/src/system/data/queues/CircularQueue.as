@@ -41,7 +41,9 @@ package system.data.queues
     import system.data.Queue;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.ProtectedIterator;
-    import system.serializers.eden.BuiltinSerializer;    
+    import system.serializers.eden.BuiltinSerializer;
+    
+    import flash.errors.IllegalOperationError;    
 
     /**
      * The CircularQueue class allows for storing objects in a circular queue of a predefined size.
@@ -141,6 +143,16 @@ package system.data.queues
         public static var MAX_CAPACITY:uint = uint.MAX_VALUE ;
 
         /**
+         * Unsupported method in all CircularQueue objects.
+         * @throws IllegalOperationError the add() method is unsupported in a CircularQueue instance.
+         */
+        public function add(o:*):Boolean
+        {
+        	throw new IllegalOperationError("The CircularQueue class does support the add() method.") ;
+        	return false ;
+        }
+        
+        /**
          * Clear all elements in the queue.
          */
         public function clear():void
@@ -212,6 +224,27 @@ package system.data.queues
         }
         
         /**
+         * Unsupported method in all CircularQueue objects.
+         * @throws IllegalOperationError the get() method is unsupported in a CircularQueue instance.
+         */        
+        public function get(key:*):*
+        {
+            throw new IllegalOperationError("The CircularQueue class does support the get() method.") ;
+        }
+        
+        /**
+         * Unsupported method in all CircularQueue objects.
+         * @throws IllegalOperationError the indexOf() method is unsupported in a CircularQueue instance.
+         */         
+        public function indexOf(o:*, fromIndex:uint = 0):int
+        {
+            throw new IllegalOperationError("The CircularQueue class does support the indexOf() method.") ;
+            return 0 ;
+        }
+        
+      
+        
+        /**
          * Returns <code class="prettyprint">true</code> if the queue is empty.
          * @return <code class="prettyprint">true</code> if the queue is empty.
          */        
@@ -280,6 +313,16 @@ package system.data.queues
                 return mem ; // return mem object
             }
         }
+        
+        /**
+         * Unsupported method in all CircularQueue objects.
+         * @throws IllegalOperationError the remove() method is unsupported in a CircularQueue instance.
+         */          
+        public function remove(o:*):*
+        {
+            throw new IllegalOperationError("The CircularQueue class does support the remove() method.") ;
+            return null ;           
+        }         
         
         /**
          * Returns the number of elements in the CircularQueue.
@@ -373,6 +416,7 @@ package system.data.queues
          * @private
          */
         private var _rear:uint ;
-         
+        
+
     }
 }

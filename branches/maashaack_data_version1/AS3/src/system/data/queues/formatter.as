@@ -38,7 +38,7 @@ package system.data.queues
     import system.data.iterators.IterableFormatter;    
     
     /**
- 	 * Converts a Collection to a custom string representation.
+ 	 * Converts a Queue to a custom string representation.
 	 */
 	public const formatter:IterableFormatter = new IterableFormatter() ;
 

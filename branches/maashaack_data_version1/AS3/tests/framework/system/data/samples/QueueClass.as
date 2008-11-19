@@ -41,6 +41,14 @@ package system.data.samples
     public class QueueClass implements Queue
     {
     
+        public function add(o:*):Boolean
+        {
+            return true ;
+        }
+        
+
+            
+    
         public function clear():void
         {
         }
@@ -65,6 +73,16 @@ package system.data.samples
             return true ;
         }
         
+        public function get(key:*):*
+        {
+            return key ;
+        }
+        
+        public function indexOf(o:*, fromIndex:uint = 0):int
+        {
+            return 0 ;
+        }
+            
         public function isEmpty():Boolean
         {
             return true ;
@@ -79,6 +97,11 @@ package system.data.samples
         {
             return null ;
         }
+        
+        public function remove(o:*):*
+        {
+            return o ;
+        }            
         
         public function size():uint
         {
@@ -99,7 +122,11 @@ package system.data.samples
         {
             return "" ;
         }
-
+        
+        public function toArray():Array
+        {
+        	return [] ;
+        }
     }
 
 }

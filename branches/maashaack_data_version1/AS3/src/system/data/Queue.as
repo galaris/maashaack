@@ -35,27 +35,14 @@
 
 package system.data
 {
-    import system.Cloneable;
-    import system.Serializable;    
 
     /**
 	 * A collection designed for holding elements prior to processing. Besides basic Collection operations, queues provide additional insertion, extraction, and inspection operations.
 	 * <p>Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner.</p>
 	 * <p>Whatever the ordering used, the head of the queue is that element which would be removed by a call to remove() or poll().</p>
 	 */
-    public interface Queue extends Cloneable, Iterable, Serializable
+    public interface Queue extends Collection
     {
-    	
-		/**
-		 * Removes all of the elements from this queue (optional operation).
-		 */
-    	function clear():void ;
-	
-		/**
-		 * Returns <code class="prettyprint">true</code> if the queue contains value.
-		 * @return <code class="prettyprint">true</code> if the queue contains value.
-		 */
-    	function contains(o:*):Boolean ;
     	
         /**
          * Retrieves and removes the head of this queue.
@@ -71,13 +58,7 @@ package system.data
 	     * Inserts the specified element into this queue, if possible.
 	     */
     	function enqueue(o:*):Boolean ;
-
-        /**
-         * Returns <code class="prettyprint">true</code> if the queue is empty.
-         * @return <code class="prettyprint">true</code> if the queue is empty.
-         */
-    	function isEmpty():Boolean ;
-
+        
         /**
          * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
          */
@@ -87,12 +68,7 @@ package system.data
 	     * Retrieves and removes the head of this queue.
 	     */
     	function poll():* ;
-	
-	    /**
-	     * Retrieves the size of the queue.
-	     */
-    	function size():uint ;
-
+                
     }
 
 }

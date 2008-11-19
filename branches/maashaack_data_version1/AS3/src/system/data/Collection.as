@@ -88,7 +88,7 @@ package system.data
     	function remove( o:* ):* ;
 	
 		/**
-		 * Returns the number of elements in this collection.
+		 * Retrieves the number of elements in this collection.
 		 * @return the number of elements in this collection.
 		 */
     	function size():uint ;

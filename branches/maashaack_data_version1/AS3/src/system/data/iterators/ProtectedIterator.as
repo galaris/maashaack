@@ -98,8 +98,8 @@ package system.data.iterators
         }
 
         /**
-         * Unsupported method in all ProtectedIterator.
-         * @throws IllegalOperationError the remove method is unsupported in a ProtectedIterator instance.
+         * Unsupported method in all ProtectedIterator objects.
+         * @throws IllegalOperationError the remove() method is unsupported in a ProtectedIterator instance.
          */
         public function remove():*
         {
@@ -108,7 +108,7 @@ package system.data.iterators
  
         /**
          * Unsupported method in all ProtectedIterator.
-         * @throws IllegalOperationError the reset method is unsupported in a ProtectedIterator instance.
+         * @throws IllegalOperationError the reset() method is unsupported in a ProtectedIterator instance.
          */
         public function reset():void
         {
@@ -117,7 +117,7 @@ package system.data.iterators
 
         /**
          * Unsupported method in all ProtectedIterator.
-         * @throws IllegalOperationError the seek method is unsupported in a ProtectedIterator instance.
+         * @throws IllegalOperationError the seek() method is unsupported in a ProtectedIterator instance.
          */
         public function seek(position:*):void
         {

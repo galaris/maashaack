@@ -43,7 +43,8 @@ package system.data.stacks
     import system.Serializable;
     import system.data.Collection;
     import system.data.Iterable;
-    import system.data.Stack;    
+    import system.data.Stack;
+    import system.data.maps.ArrayMap;    
 
     public class ArrayStackTest extends TestCase 
     {
@@ -71,6 +72,13 @@ package system.data.stacks
             var s2:ArrayStack = new ArrayStack(s1) ; 
             assertNotNull(s2, "03-01 - ArrayStack constructor failed.") ;
             ArrayAssert.assertEquals( s2.toArray(), [2,3,4], "03-02 - ArrayStack constructor failed.") ;
+            
+            // initialize with an Iterable object
+            
+            s = new ArrayStack(new ArrayMap(["key1","key2","key3"],["value1","value2","value3"])) ; 
+            assertNotNull(s, "04-01 - ArrayStack constructor failed.") ;
+            ArrayAssert.assertEquals( s.toArray(), ["value1","value2","value3"], "04-02 - ArrayStack constructor failed.") ;
+                        
             
         }
          
