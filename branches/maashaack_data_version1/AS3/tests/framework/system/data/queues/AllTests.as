@@ -46,7 +46,8 @@ package system.data.queues
             var suite:TestSuite = new TestSuite("Maashaack data queues tests");
             
             suite.addTestSuite( CircularQueueTest ) ;
-            suite.addTestSuite( LinearQueueTest ) ;
+            suite.addTestSuite( LinearQueueTest   ) ;
+            suite.addTestSuite( PriorityQueueTest ) ;
             
             return suite;
         }

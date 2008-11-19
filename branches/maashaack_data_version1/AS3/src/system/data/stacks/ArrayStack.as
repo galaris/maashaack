@@ -77,7 +77,7 @@ package system.data.stacks
         /**
          * Looks at the object at the top of this stack without removing it from the stack.
          */        
-        public function peek():*
+        public function peek():* 
         {
         	return _a[_a.length - 1] ;
         }

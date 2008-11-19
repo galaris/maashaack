@@ -101,7 +101,7 @@ package system.data.collections
 
         /**
          * Creates a new ArrayCollection instance.
-         * @param init An optional Array or Collection to fill the collection.
+         * @param init An optional Array or Collection or Iterable object to fill the collection.
          */
         public function ArrayCollection( init:* = null )
         {

@@ -74,7 +74,7 @@ package system.data.queues
 
         /**
          * Creates a new LinearQueue instance.
-         * @param ar an optional array to fill the collection.
+         * @param init An optional Array or Collection or Iterable object to fill the collection.
          */
         public function LinearQueue(init:* = null)
         {
