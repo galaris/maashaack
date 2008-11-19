@@ -90,6 +90,131 @@ package system.data.queues
         	assertTrue( q is Queue , "01 - LinearQueue must implements the Queue interface.") ;        	
         	assertTrue( q is Collection , "02 - LinearQueue must implements the Queue interface.") ;
         }
+        
+        public function testClone():void
+        {
+            var q:LinearQueue = new LinearQueue([1,2,3,4]) ;
+            var c:LinearQueue ;
+            c = q.clone() as LinearQueue ;
+            assertNotNull( c , "01 - The LinearQueue clone failed." ) ;
+            assertEquals( q.size()    , c.size()    , "02 - The LinearQueue clone failed." ) ;   
+            ArrayAssert.assertEquals( q.toArray() , c.toArray() , "03 - The LinearQueue clone failed." ) ;
+        }
+        
+        public function testDequeue():void
+        {
+            var q:LinearQueue = new LinearQueue([1,2,3,4]) ;
+            
+            assertTrue( q.dequeue() , "01-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()  , 3 , "01-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertTrue( q.dequeue() , "02-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()  , 2 , "02-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertTrue( q.dequeue() , "03-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()  , 1 , "03-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertTrue( q.dequeue() , "04-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()  , 0 , "04-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertFalse( q.dequeue() , "05-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()  , 0 , "05-02 - The LinearQueue dequeue failed." ) ;
+        }
+
+        public function testElement():void
+        {
+            var q:LinearQueue ;
+            
+            q = new LinearQueue([1,2,3,4]) ;
+            assertEquals( q.element() , 1 , "The LinearQueue element method failed." ) ;
+            
+            q = new LinearQueue() ;
+            assertUndefined( q.element(), "The LinearQueue element method failed." ) ;            
+        }
+        
+        public function testEnqueue():void
+        {
+            var q:LinearQueue = new LinearQueue() ;
+            
+            assertTrue(q.enqueue(1)       , "01-01 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.size()    , 1 , "01-02 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.element() , 1 , "01-03 - The LinearQueue enqueue method failed." ) ;
+            
+            assertTrue(q.enqueue(2)       , "02-01 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.size()    , 2 , "02-02 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.element() , 1 , "02-03 - The LinearQueue enqueue method failed." ) ;
+            
+            assertTrue( q.enqueue(3)     , "03-01 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.size()    , 3 , "03-02 - The LinearQueue enqueue method failed." ) ;
+            assertEquals( q.element() , 1 , "03-03 - The LinearQueue enqueue method failed." ) ;            
+            
+        }   
+        
+        public function testPeek():void
+        {
+            var q:LinearQueue ;
+            
+            q = new LinearQueue([1,2,3,4]) ;
+            assertEquals( q.peek() , 1 , "The LinearQueue peek method failed." ) ;
+            
+            q = new LinearQueue() ;
+            assertNotUndefined( q.peek(), "The LinearQueue peek method failed." ) ;
+            assertNull( q.peek(), "The LinearQueue peek method failed." ) ;            
+        }        
+        
+        public function testPoll():void
+        {
+            var q:LinearQueue = new LinearQueue([1,2,3,4]) ;
+            
+            assertEquals( q.poll() , 1 , "01-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()    , 3 , "01-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertEquals( q.poll() , 2 , "02-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()    , 2 , "02-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertEquals( q.poll() , 3 , "03-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()    , 1 , "03-02 - The LinearQueue dequeue failed." ) ;
+            
+            assertEquals( q.poll() , 4 , "04-01 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.size()    , 0 , "04-02 - The LinearQueue dequeue failed." ) ;
+        }
+        
+        public function testToArray():void
+        {
+            var q:LinearQueue ;
+                        
+            q = new LinearQueue([1,2,3,4]) ;
+            ArrayAssert.assertEquals( q.toArray() , [1,2,3,4], "01 - The LinearQueue toArray method failed.") ;
+            
+            q = new LinearQueue() ;
+            ArrayAssert.assertEquals( q.toArray() , [], "02 - The LinearQueue toArray method failed.") ;          
+                    
+        }
+        
+        public function testToSource():void
+        {
+            var q:LinearQueue ;     
+            
+            q = new LinearQueue() ;
+            assertEquals(q.toSource() , "new system.data.queues.LinearQueue()", "01 - LinearQueue toSource failed") ;
+            
+            q = new LinearQueue([1,2] ) ;
+            assertEquals(q.toSource() , "new system.data.queues.LinearQueue([1,2])" , "02 - LinearQueue toSource failed") ;
+            
+        }   
+
+        public function testToString():void
+        {
+            
+            var q:LinearQueue ;           
+                
+            q = new LinearQueue() ;
+            assertEquals( q.toString() , "{}", "01 - LinearQueue toString failed") ;            
+            
+            q = new LinearQueue(["item1", "item2", "item3", "item4"] ) ;
+            assertEquals(q.toString() , "{item1,item2,item3,item4}", "02 - LinearQueue toString failed") ;
+            
+        }        
 
     }
 
