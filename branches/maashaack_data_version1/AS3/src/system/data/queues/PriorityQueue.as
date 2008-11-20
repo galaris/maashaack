@@ -44,27 +44,17 @@ package system.data.queues
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.queues.PriorityQueue ;
-     * 
      * import system.comparators.AlphaComparator ;
      * import system.comparators.NumberComparator ;
      * 
      * var init:Array = [5, 4, 3, 2, 1] ;
-     * var q:PriorityQueue = new PriorityQueue( NumberComparator.getInstance() , PriorityQueue.NUMERIC , init )  ;
+     * var q:PriorityQueue = new PriorityQueue( init , new NumberComparator() , Array.NUMERIC  )  ;
      * 
      * trace ("queue size : " + q.size()) ;
      * trace("queue " + q) ;
      * 
-     * q.options = PriorityQueue.NUMERIC + PriorityQueue.DESCENDING ;
+     * q.options = Array.NUMERIC + Array.DESCENDING ;
      * trace("queue " + q) ;
-     * 
-     * try
-     * {
-     *     trace ( em4 : " + q.enqueue ("item4")) ;
-     * }
-     * catch( e:Error )
-     * {
-     *     trace( e ) ;
-     * }
      * 
      * q.clear() ;
      * 
@@ -75,10 +65,10 @@ package system.data.queues
      * trace ("enqueue item2 : " + q.enqueue ("item2")) ;
      * trace ("enqueue item3 : " + q.enqueue ("item3")) ;
      * trace ("enqueue item1 : " + q.enqueue ("item1")) ;
-     *
+     * 
      * trace("queue " + q) ;
      * 
-     * q.options = PriorityQueue.CASEINSENSITIVE ;
+     * q.options = Array.CASEINSENSITIVE ;
      * trace("queue " + q) ;
      * </pre>
      */
@@ -87,14 +77,22 @@ package system.data.queues
 
         /**
          * Creates a new PriorityQueue instance.
+         * @param init An optional <code class="prettyprint">Array</code> or <code class="prettyprint">Collection</code> or <code class="prettyprint">Iterable</code> object to fill the collection.
          * @param comp An optional <code class="prettyprint">Comparator</code> object used in the <code class="prettyprint">PriorityQueue</code> to defined the sort model when enqueue or modify the queue.
          * @param options The optional "options" value use to sort the priority queue.
-         * @param init An optional <code class="prettyprint">Array</code> or <code class="prettyprint">Collection</code> or <code class="prettyprint">Iterable</code> object to fill the collection.
          */
-        public function PriorityQueue( comp:Comparator=null, options:uint = 0 , init:* = null)
+        public function PriorityQueue( init:* = null , comp:Comparator=null, options:uint = 0 )
         {
             super( init );
+            _comparator = comp ;
+            _options    = options ;
+            sort() ;
         }
+        
+        /**
+         * The default options value.
+         */
+        public static const NONE:uint = 0 ;
         
         /**
          * Determinates the <code class="prettyprint">Comparator</code> strategy used to sort the instance.
@@ -136,7 +134,7 @@ package system.data.queues
          */
         public override function clone():* 
         {
-            return new PriorityQueue(comparator, options, toArray());
+            return new PriorityQueue( toArray() , comparator , options );
         }        
         
         /**
@@ -171,7 +169,7 @@ package system.data.queues
         /**
          * @private
          */
-        protected var _options:uint = 0 ;        
+        protected var _options:uint ;        
         
     }
 }

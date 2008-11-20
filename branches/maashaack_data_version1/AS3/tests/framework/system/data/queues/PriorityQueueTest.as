@@ -35,8 +35,15 @@
 
 package system.data.queues 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.Comparator;
+    import system.comparators.NumberComparator;
+    import system.comparators.StringComparator;
+    import system.data.collections.ArrayCollection;
+    import system.data.maps.ArrayMap;    
+
     public class PriorityQueueTest extends TestCase 
     {
 
@@ -47,9 +54,94 @@ package system.data.queues
         
         public function testConstructor():void
         {
-            	
-        }
 
+            var q:PriorityQueue = new PriorityQueue() ;
+            
+            assertNotNull(q, "01-01 - PriorityQueue constructor failed.") ;
+            ArrayAssert.assertEquals( q.toArray(), [], "01-02 - PriorityQueue constructor failed.") ;
+            
+            // initialize with an Array
+                        
+            q = new PriorityQueue([2,3,4]) ; 
+            assertNotNull(q, "02-01 - PriorityQueue constructor failed.") ;
+            ArrayAssert.assertEquals( q.toArray(), [2,3,4], "02-02 - PriorityQueue constructor failed.") ;
+            
+            // initialize with a Collection
+            
+            q = new PriorityQueue(new ArrayCollection([2,3,4])) ; 
+            assertNotNull(q, "03-01 - PriorityQueue constructor failed.") ;
+            ArrayAssert.assertEquals( q.toArray(), [2,3,4], "03-02 - PriorityQueue constructor failed.") ;
+            
+            // initialize with an Iterable object
+            
+            q = new PriorityQueue(new ArrayMap(["key1","key2","key3"],["value1","value2","value3"])) ; 
+            assertNotNull(q, "04-01 - PriorityQueue constructor failed.") ;
+            ArrayAssert.assertEquals( q.toArray(), ["value1","value2","value3"], "04-02 - PriorityQueue constructor failed.") ;
+            
+            // initialize with a Comparator and an option value.
+          
+            var c:Comparator = new StringComparator() ;
+            
+            q = new PriorityQueue(null, c , Array.DESCENDING) ; 
+            assertNotNull(q, "05-01 - PriorityQueue constructor failed.") ;
+            assertEquals( q.comparator, c, "05-02 - PriorityQueue constructor failed.") ;
+            assertEquals( q.options, Array.DESCENDING, "05-03 - PriorityQueue constructor failed.") ;
+            
+        }
+        
+        public function testComparator():void
+        {
+            var q:PriorityQueue = new PriorityQueue([3,1,2]) ;
+            
+            q.comparator = new NumberComparator() ;
+            
+            ArrayAssert.assertEquals( q.toArray(), [1,2,3], "01 - PriorityQueue comparator property failed.") ;
+            
+           	q.comparator = new StringComparator() ;
+           	
+           	ArrayAssert.assertEquals( q.toArray(), [3,2,1], "01 - PriorityQueue comparator property failed.") ;
+            
+        }
+        
+        public function testOptions():void
+        {
+            var c:Comparator    = new NumberComparator() ;
+            var q:PriorityQueue = new PriorityQueue([10,2,11,1], c ) ;
+            
+            q.options = PriorityQueue.NONE ;
+            ArrayAssert.assertEquals( q.toArray(), [1,2,10,11], "01 - PriorityQueue options property failed.") ;
+            
+            q.options = Array.DESCENDING ;
+            ArrayAssert.assertEquals( q.toArray(), [11,10,2,1], "02 - PriorityQueue options property failed.") ;
+           
+            q.options = Array.NUMERIC ;                   
+            ArrayAssert.assertEquals( q.toArray(), [1,2,10,11], "03 - PriorityQueue options property failed.") ;         
+                        
+        }
+        
+        public function testClone():void
+        {
+            var comp:Comparator = new NumberComparator() ;
+            
+            var q:PriorityQueue = new PriorityQueue([1,2], comp , Array.DESCENDING) ;
+            var c:PriorityQueue = q.clone() as PriorityQueue ;
+            
+            assertNotNull(c, "01 - The PriorityQueue clone method failed.") ;
+            ArrayAssert.assertEquals( c.toArray(), q.toArray(), "02 - PriorityQueue clone method failed.") ;
+            
+        }
+        
+        public function testEnqueue():void
+        {
+            var comp:Comparator   = new NumberComparator() ;
+            
+            var q:PriorityQueue = new PriorityQueue([1,2], comp , Array.DESCENDING) ;
+            
+            assertTrue( q.enqueue(4) , "01 - The PriorityQueue enqueue method failed.") ;
+                        
+            ArrayAssert.assertEquals( q.toArray(), [4,2,1], "02 - PriorityQueue enqueue method failed.") ;
+            
+        }
     }
 
 }
