@@ -64,7 +64,7 @@ package system.comparators
 		{
 			//
 		}
-        
+                
 		/**
 	     * Returns an integer value to compare two Number objects.
 		 * @param o1 the first Number object to compare.
@@ -80,9 +80,9 @@ package system.comparators
 		{
 			if ( (o1 is Number) && (o2 is Number ) ) 
 			{
-				// fix float bug with Math methods and float number operations.
-				o1 = (o1 as Number).toString() ; 
-				o2 = (o2 as Number).toString() ;
+				// TODO fix float bug with Math methods and float number operations.
+				//o1 = (o1 as Number).toString() ; 
+				//o2 = (o2 as Number).toString() ;
 				if( o1 < o2 )
 				{
 					return -1;

@@ -35,66 +35,69 @@
 
 package system.comparators
 {
-    import system.Comparator;    
+    import system.Comparator;        
 
     /**
-	 * This comparator compare String objects.
-	 * <p><b>Example :</b></p>
-	 * <pre class="prettyprint">
-	 * import system.comparators.StringComparator ;
-	 * 
-	 * var comp1:StringComparator = new StringComparator() ;
-	 * var comp2:StringComparator = new StringComparator(true) ; // ignore case
-	 * 
-	 * var s0:String = "HELLO" ;
-	 * var s1:String = "hello" ;
-	 * var s2:String = "welcome" ;
-	 * var s3:String = "world" ;
-	 * 
-	 * trace( comp1.compare(s1, s2) ) ; //  -1
-	 * trace( comp1.compare(s2, s1) ) ; //  1
-	 * trace( comp1.compare(s1, s3) ) ; // 1
-	 * trace( comp1.compare(s1, s1) ) ; // 0
-	 * 
-	 * trace( comp1.compare(s1, s0) ) ; // 0
-	 * trace( comp2.compare(s1, s0) ) ; // -1
-	 * </pre>
-	 * @see system.Strings#compare
+     * This comparator compare String objects.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.comparators.StringComparator ;
+     * 
+     * var comp1:StringComparator = new StringComparator() ;
+     * var comp2:StringComparator = new StringComparator(true) ; // ignore case
+     * 
+     * var s0:String = "HELLO" ;
+     * var s1:String = "hello" ;
+     * var s2:String = "welcome" ;
+     * var s3:String = "world" ;
+     * 
+     * trace( comp1.compare(s1, s2) ) ; //  -1
+     * trace( comp1.compare(s2, s1) ) ; //  1
+     * trace( comp1.compare(s1, s3) ) ; // 1
+     * trace( comp1.compare(s1, s1) ) ; // 0
+     * 
+     * trace( comp1.compare(s1, s0) ) ; // 0
+     * trace( comp2.compare(s1, s0) ) ; // -1
+     * </pre>
+     * @see system.Strings#compare
      */
-	public class StringComparator implements Comparator
-	{
-		
-		/**
-		 * Creates a new StringComparator instance.
-		 * @param ignoreCase a boolean to define if the comparator ignore case or not.
-	     */
-		public function StringComparator( ignoreCase:Boolean=false )
-		{
-			this.ignoreCase = ignoreCase ;
-		}
-
-		/**
-		 * Allow to take into account the case for comparison.
-		 */
-		public var ignoreCase:Boolean ;
+    public class StringComparator implements Comparator
+    {
         
-		/**
-		 * Returns an integer value to compare two String objects.
-	     * @param o1 the first String object to compare.
-	     * @param o2 the second String object to compare.
-	     * @param options A boolean who indicates if the Comparator ignore the case or not. If this parameter is null the internal ignoreCase property is used.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-	     * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-		 * <li> 0 if o1 and o2 are equal.</li>
-		 * </p>
-	     */
-		public function compare(o1:*, o2:*, options:* = null ):int
-		{
-			if ( options is Boolean )
-			{
+        /**
+         * Creates a new StringComparator instance.
+         * @param ignoreCase a boolean to define if the comparator ignore case or not.
+         */
+        public function StringComparator( ignoreCase:Boolean=false )
+        {
+            this.ignoreCase = ignoreCase ;
+        }
+
+        /**
+         * Allow to take into account the case for comparison.
+         */
+        public var ignoreCase:Boolean ;
+        
+        /**
+         * Returns an integer value to compare two String objects.
+         * @param o1 the first String object to compare.
+         * @param o2 the second String object to compare.
+         * @param options A boolean who indicates if the Comparator ignore the case or not. If this parameter is null the internal ignoreCase property is used.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         */
+        public function compare(o1:*, o2:*, options:* = null ):int
+        {
+            o1 = o1.toString() ;
+            o2 = o2.toString() ;
+            
+            if ( options is Boolean )
+            {
                 ignoreCase = options ;
-			}
+            }
 
             if( ignoreCase )
             {
@@ -150,46 +153,46 @@ package system.comparators
                 return - 1;
             }
   
-		}
+        }
         
-		/**
-		 * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
-		 * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
-	     * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
-	     */
-		public static function getStringComparator():StringComparator
-		{
-			if ( _comparator == null )
-			{
-				_comparator = new StringComparator(false) ;	
-			}
-			return _comparator ;
-		}
-		
-		/**
-		 * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
-	     * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
-		 * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
-	     */
-		public static function getIgnoreCaseStringComparator():StringComparator
-		{
-			if ( _ignoreCaseComparator == null )
-			{
-				_ignoreCaseComparator = new StringComparator( true ) ;	
-			}
-			return _ignoreCaseComparator ;
-		}
+        /**
+         * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
+         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
+         * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
+         */
+        public static function getStringComparator():StringComparator
+        {
+            if ( _comparator == null )
+            {
+                _comparator = new StringComparator(false) ;    
+            }
+            return _comparator ;
+        }
         
-		/**
-	      * The internal Case StringComparator.
-	     */
-		private static var _comparator:StringComparator ;
+        /**
+         * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
+         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
+         * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
+         */
+        public static function getIgnoreCaseStringComparator():StringComparator
+        {
+            if ( _ignoreCaseComparator == null )
+            {
+                _ignoreCaseComparator = new StringComparator( true ) ;    
+            }
+            return _ignoreCaseComparator ;
+        }
+        
+        /**
+         * The internal Case StringComparator.
+         */
+        private static var _comparator:StringComparator ;
 
-		/**
-	     * The internal ignoreCase StringComparator.
-		 */
-		private static var _ignoreCaseComparator:StringComparator ;
-		
-	}
+        /**
+         * The internal ignoreCase StringComparator.
+         */
+        private static var _ignoreCaseComparator:StringComparator ;
+        
+    }
 
 }
