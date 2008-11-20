@@ -151,13 +151,17 @@ package system.data.queues
         }        
         
         /**
-         * Sorts the queue with the internal Comparator.
+         * Sorts the queue with the internal Comparator or with the Array.sort method if the method a.
          */
         public function sort( ...arguments:Array ):void 
         {
-            if ( size() > 0 && _comparator != null) 
+        	if ( arguments.length > 0 )
             {
-                _a.sort( _comparator.compare, _options ) ;
+                _a.sort.apply(_a, arguments ) ; 
+            }
+            else if ( size() > 0 && _comparator != null) 
+            {
+          		_a.sort( _comparator.compare, _options ) ;
             }
         }        
         

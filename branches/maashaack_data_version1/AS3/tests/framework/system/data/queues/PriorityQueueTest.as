@@ -133,13 +133,24 @@ package system.data.queues
         
         public function testEnqueue():void
         {
-            var comp:Comparator   = new NumberComparator() ;
-            
+            var comp:Comparator = new NumberComparator() ;
             var q:PriorityQueue = new PriorityQueue([1,2], comp , Array.DESCENDING) ;
             
             assertTrue( q.enqueue(4) , "01 - The PriorityQueue enqueue method failed.") ;
-                        
             ArrayAssert.assertEquals( q.toArray(), [4,2,1], "02 - PriorityQueue enqueue method failed.") ;
+        }
+        
+        public function testSort():void
+        {
+            var q:PriorityQueue = new PriorityQueue([1,4,10,2,11,3]) ;
+            
+            q.sort( Array.DESCENDING ) ;
+            
+            ArrayAssert.assertEquals( q.toArray(), [4,3,2,11,10,1], "01 - PriorityQueue sort method failed.") ;	
+            
+            q.comparator = new NumberComparator() ;
+            
+            ArrayAssert.assertEquals( q.toArray(), [1,2,3,4,10,11], "02 - PriorityQueue sort method failed.") ;
             
         }
     }
