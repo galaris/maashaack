@@ -35,7 +35,7 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;            
 
     public class MultiHashMapTest extends TestCase 
     {
@@ -47,7 +47,8 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	
+        	var map:MultiHashMap = new MultiHashMap () ;
+        	assertNotNull(map) ;
         }
 
         public function testInterface():void

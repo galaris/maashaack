@@ -77,7 +77,7 @@ package system.data
 		/**
 		 * Retains only the elements in this list that are contained in the specified collection (optional operation).
 		 */
-    	function retainAll(c:Collection):Boolean ;
+    	function retainAll( c:Collection ):Boolean ;
 
 		/**
 		 * Replaces the element at the specified position in this list with the specified element (optional operation).
@@ -90,7 +90,7 @@ package system.data
 		 * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
 		 * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
 		 */
-	    function subList(fromIndex:uint, toIndex:uint):List ;
+	    function subList( fromIndex:uint , toIndex:uint ):List ;
     
     }
 
