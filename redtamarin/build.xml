@@ -129,7 +129,6 @@
         <delete>
             <fileset dir="${release.tmp.core}">
               <include name="*.as"/>
-              <include name="*.mxml"/>
             </fileset>
         </delete>
         
@@ -137,7 +136,7 @@
         
     </target>
     
-    <target name="main" depends="clean,init,documentation,library_component,library_bytecode,templates,commonfiles,package">
+    <target name="main" depends="clean,init,library_bytecode,templates,commonfiles,package">
     </target>
     
     <target name="clean-documentation">
@@ -169,60 +168,8 @@
         
     </target>
     
-    <target name="library_component" description="build the Library SWC component">
-        <echo message="building library component" level="verbose" />
-        <!--
-            iterate trough the src and generate the list of classes to insert in the component
-            this way we are assured that all classes without exception will be included
-            in thebytecode and no need to edit by hand a "library" class.
-        -->
-        <fileset id="sources" dir="${release.tmp.core}">
-            <include name="**/*.as"/>
-        </fileset>
-        <pathconvert property="classes" pathsep=" " refid="sources">
-            <chainedmapper>
-                <globmapper from="${basedir}/build/tmp/core/*" to="*"/>
-                <mapper type="package" from="*.as" to="*"/>
-            </chainedmapper>
-        </pathconvert>
-        <echo message="classes is set to = ${classes}" level="verbose" />
-        
-        <!-- 
-            generate the Library SWC component
-            this SWC is compatible Flash and Flex
-         -->
-        <compc
-            output="${release.dir}/lib/${x4a.swc}"
-            include-classes="${classes}"
-            target-player="9.0.45"
-        >
-            <namespace uri="${x4a.namespace}" manifest="${x4a.manifest}" />
-            <include-namespaces uri="${x4a.namespace}" />
-            <strict>true</strict>
-            <optimize>true</optimize>
-            <warnings>true</warnings>
-            <verbose-stacktraces>false</verbose-stacktraces>
-            <compute-digest>false</compute-digest>
-            <source-path path-element="${release.tmp.core}" />
-            <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
-            <external-library-path dir="${flex.libs}" includes="flex.swc" />
-            <metadata date="${TODAY}" title="${project.name}">
-                <creator name="Zwetan Kjukov" />
-                <creator name="Marc Alcaraz" />
-           <!-- <contributor name="Marc Alcaraz" /> -->
-            </metadata>
-        </compc>
-        
-    </target>
-    
     <target name="library_bytecode" description="build the Library ABC" if="buildABC">
         <echo message="ABC here" />
-        
-        <delete file="${release.tmp.core}/system/Library.as" />
-        <delete file="${release.tmp.core}/system/Environment.as" />
-        <delete file="${release.tmp.core}/system/Reflection.as" />
-        <delete dir="${release.tmp.core}/system/reflection" />
-        <delete file="${release.tmp.core}/system/ui/TextFieldConsole.as" />
         
         <fileset id="sources" dir="${release.tmp.core}">
             <include name="**/*.as"/>
@@ -232,13 +179,13 @@
         <echo message="includes is set to = ${includes}" />
         
         <exec executable="java">
-            <arg line="-jar ${flex.sdk}/lib/asc.jar" />
-            <arg line="-AS3 -strict -builtin" />
-            <arg line="-import ${abc.libs}/builtin.abc" />
-            <arg line="-import ${abc.libs}/toplevel.abc" />
+            <arg line="-jar ${redshell}/asc.jar" />
+            <arg line="-AS3 -strict" />
+            <arg line="-import ${redshell}/builtin.abc" />
+            <arg line="-import ${redshell}/toplevel.abc" />
             <!-- <arg line="-import ${abc.libs}/playerglobal.abc" /> -->
             <arg line="-in ${includes}" />
-            <arg line="test.as" />
+            <arg line="src/framework_redtamarin.as" />
         </exec>
     	
     </target>
