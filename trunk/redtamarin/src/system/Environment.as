@@ -35,13 +35,12 @@
 
 package system
 {
-    import flash.system.Capabilities;
-
+    
     import system.hosts.Host;
     import system.hosts.HostID;
     import system.hosts.OperatingSystem;
-    import system.hosts.PlatformID;    
-
+    import system.hosts.PlatformID;
+    
     /**
      * This class defines the environment of the client application.
      */
@@ -68,26 +67,28 @@ package system
          */
         private static function _getHostID():HostID
         {
-            var runtime:String = Capabilities.playerType;
+//            var runtime:String = Capabilities.playerType;
+//            
+//            switch( runtime )
+//            {
+//                case "ActiveX"    :
+//                case "External"   :
+//                case "PlugIn"     :
+//                case "StandAlone" :
+//                {
+//                    return HostID.Flash ;
+//                }
+//                case "Desktop":
+//                {
+//                    return HostID.Air ;
+//                }
+//                default:
+//                {
+//                    return HostID.Unknown ;
+//                }
+//            }
             
-            switch( runtime )
-            {
-                case "ActiveX"    :
-                case "External"   :
-                case "PlugIn"     :
-                case "StandAlone" :
-                {
-                    return HostID.Flash ;
-                }
-                case "Desktop":
-                {
-                    return HostID.Air ;
-                }
-                default:
-                {
-                    return HostID.Unknown ;
-                }
-            }
+            return HostID.Unknown;
         }
 
         /**
@@ -95,51 +96,53 @@ package system
          */
         private static function _getPlatformID():PlatformID
         {
-            var platform:String = Capabilities.os;
+//            var platform:String = Capabilities.os;
+//            
+//            switch( platform )
+//            {
+//                case "Windows Vista" :
+//                case "Windows 95"    :
+//                case "Windows 98/ME" :
+//                case "Windows NT"    :
+//                case "Windows 2000"  :
+//                case "Windows XP"    :
+//                case "Windows CE"    :
+//                case "win32"         :
+//                {
+//                    return PlatformID.Windows ;
+//                }
+//                
+//                case "Mac OS 10.5.2" :
+//                case "MacOS"         :
+//                case "mac"           :
+//                {
+//                    return PlatformID.Macintosh ;
+//                }
+//                
+//                case "Linux" :
+//                case "unix"  :
+//                {
+//                    return PlatformID.Unix;
+//                }
+//                
+//                case "arm":
+//                {
+//                    return PlatformID.Arm ;
+//                }
+//
+//                case "web" :
+//                {
+//                    return PlatformID.Web ;
+//                }
+//                
+//                case "unknown" :
+//                default        :
+//                {
+//                    return PlatformID.Unknown;
+//                }
+//            }
             
-            switch( platform )
-            {
-                case "Windows Vista" :
-                case "Windows 95"    :
-                case "Windows 98/ME" :
-                case "Windows NT"    :
-                case "Windows 2000"  :
-                case "Windows XP"    :
-                case "Windows CE"    :
-                case "win32"         :
-                {
-                    return PlatformID.Windows ;
-                }
-                
-                case "Mac OS 10.5.2" :
-                case "MacOS"         :
-                case "mac"           :
-                {
-                    return PlatformID.Macintosh ;
-                }
-                
-                case "Linux" :
-                case "unix"  :
-                {
-                    return PlatformID.Unix;
-                }
-                
-                case "arm":
-                {
-                    return PlatformID.Arm ;
-                }
-
-                case "web" :
-                {
-                    return PlatformID.Web ;
-                }
-                
-                case "unknown" :
-                default        :
-                {
-                    return PlatformID.Unknown;
-                }
-            }
+            return PlatformID.Unknown;
         }
 
         /**
@@ -152,10 +155,10 @@ package system
             MAC 7,0,25,0   // Flash Player 7 for Macintosh
             UNIX 5,0,55,0  // Flash Player 5 for UNIX
              */
-            var str:String = Strings.trimStart( Capabilities.version, "WINMACUNIX ".split( "" ) );
-            str = str.split( "," ).join( "." );
-            
-            return Version.fromString( str );
+//            var str:String = Strings.trimStart( Capabilities.version, "WINMACUNIX ".split( "" ) );
+//            str = str.split( "," ).join( "." );
+//            
+            return Version.fromString( "0.0.0.0" );
         }
 
         /**

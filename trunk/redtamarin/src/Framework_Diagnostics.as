@@ -35,12 +35,10 @@
 
 package
 {
-    import buRRRn.ASTUce.about;
+//    import buRRRn.ASTUce.about;
+//    
+//    import system.diagnostics.VirtualMachine;
     
-    import system.diagnostics.VirtualMachine;
-    
-    import flash.display.Sprite;    
-
     /* to help diagnose the order of initialization
        
        example of result:
@@ -74,16 +72,16 @@ package
         system::Environment$/_getHostID()
         etc.
     */
-    public class Framework_Diagnostics extends Sprite
+    public class Framework_Diagnostics
         {
         
         public function Framework_Diagnostics()
             {
-            VirtualMachine.beginTrace();
-            
-            about( true, true );
-            
-            VirtualMachine.endTrace();
+//            VirtualMachine.beginTrace();
+//            
+//            about( true, true );
+//            
+//            VirtualMachine.endTrace();
             }
         
         }

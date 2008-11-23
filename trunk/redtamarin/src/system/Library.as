@@ -35,15 +35,13 @@
 
 package system
 {
-    import flash.display.Sprite;
-    
     /**
      * The basic framework Library to be included in the SWC.
      * <p><b>Note :</b> This class is not a component, it just
      * a shim that allow to declare the SWC manifest and associate an icon file.</p>
      */
     [IconFile("maashaack.png")]
-    public class Library extends Sprite
+    public class Library
     {
         public function Library()
         {

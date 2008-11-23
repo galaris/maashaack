@@ -38,7 +38,7 @@ package system
     import flash.system.ApplicationDomain;
     import flash.utils.*;
 
-    import system.reflection.*;    
+//    import system.reflection.*;
 
     /* 
     TODO:
@@ -104,50 +104,50 @@ package system
          * Returns the ClassInfo object of the specified object.
          * @return the ClassInfo object of the specified object.
          */
-        public static function getClassInfo( o:*, ...filters ):ClassInfo
-        {
-            var filter:FilterType = FilterType.none; 
-            //default
-            var value:int = 0;
-            var len:int = filters.length ;
-            for( var i:int = 0 ; i < len ; i++ )
-            {
-                value |= int( filters[i] );
-            }
-            
-            if( value > 0 )
-            {
-                filter = new FilterType( value );
-            }
-            
-            return new _ClassInfo( o, filter );
-        }
+//        public static function getClassInfo( o:*, ...filters ):ClassInfo
+//        {
+//            var filter:FilterType = FilterType.none; 
+//            //default
+//            var value:int = 0;
+//            var len:int = filters.length ;
+//            for( var i:int = 0 ; i < len ; i++ )
+//            {
+//                value |= int( filters[i] );
+//            }
+//            
+//            if( value > 0 )
+//            {
+//                filter = new FilterType( value );
+//            }
+//            
+//            return new _ClassInfo( o, filter );
+//        }
 
         /**
          * Returns an array of public methods defined in the class of an object.
          * @return an array of public methods defined in the class of an object.
          */
-        public static function getClassMethods( o:*, inherited:Boolean = false ):Array
-        {
-            var type:XML = describeType( o );
-            var fullname:String = getClassName( o, true );
-            var member:XML;
-            var members:Array = [];
-            
-            for each( member in type.method )
-            {
-                if( inherited )
-                {
-                    members.push( String( member.@name ) );
-                }
-                else if( String( member.@declaredBy ) == fullname )
-                {
-                    members.push( String( member.@name ) );
-                }
-            }
-            
-            return members;
-        }
+//        public static function getClassMethods( o:*, inherited:Boolean = false ):Array
+//        {
+//            var type:XML = describeType( o );
+//            var fullname:String = getClassName( o, true );
+//            var member:XML;
+//            var members:Array = [];
+//            
+//            for each( member in type.method )
+//            {
+//                if( inherited )
+//                {
+//                    members.push( String( member.@name ) );
+//                }
+//                else if( String( member.@declaredBy ) == fullname )
+//                {
+//                    members.push( String( member.@name ) );
+//                }
+//            }
+//            
+//            return members;
+//        }
 
         /**
          * Returns the class name as string of an object.
@@ -192,54 +192,54 @@ package system
          * Returns the method reference of the specified object with the passed-in property name.
          * @return the method reference of the specified object with the passed-in property name.
          */
-        public static function getMethodByName( o:*, name:String ):Function
-        {
-            var methods:Array = getClassMethods( o );
-            if( methods.indexOf( name ) > - 1 )
-            {
-                return o[name] as Function ;
-            }
-            
-            return null;
-        }
+//        public static function getMethodByName( o:*, name:String ):Function
+//        {
+//            var methods:Array = getClassMethods( o );
+//            if( methods.indexOf( name ) > - 1 )
+//            {
+//                return o[name] as Function ;
+//            }
+//            
+//            return null;
+//        }
 
         /**
          * Returns the super class name as string of an object.
          * @return the super class name as string of an object.
          */
-        public static function getSuperClassName(o:*):String 
-        {
-            return _formatName( getSuperClassPath( o ) ) ;
-        }
+//        public static function getSuperClassName(o:*):String 
+//        {
+//            return _formatName( getSuperClassPath( o ) ) ;
+//        }
 
         /**
          * Returns the super class package string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
          * @return the super class package string representation of the specified instance passed in arguments.
          */
-        public static function getSuperClassPackage(o:*):String 
-        {
-            return _formatPackage( getSuperClassPath( o ) ) ;
-        }
+//        public static function getSuperClassPackage(o:*):String 
+//        {
+//            return _formatPackage( getSuperClassPath( o ) ) ;
+//        }
 
         /**
          * Returns the super class path string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
          * @return the super class path string representation of the specified instance passed in arguments.
          */
-        public static function getSuperClassPath(o:*):String 
-        {
-            return _formatPath( getQualifiedSuperclassName( o ) ) ;
-        }
+//        public static function getSuperClassPath(o:*):String 
+//        {
+//            return _formatPath( getQualifiedSuperclassName( o ) ) ;
+//        }
 
         /**
          * Returns the TypeInfo object of the specified object.
          * @return the TypeInfo object of the specified object.
          */
-        public static function getTypeInfo( o:* ):TypeInfo
-        {
-            return new _TypeInfo( o );
-        }
+//        public static function getTypeInfo( o:* ):TypeInfo
+//        {
+//            return new _TypeInfo( o );
+//        }
 
         /**
          * Returns a boolean telling if the class exists from a string name.
