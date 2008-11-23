@@ -35,9 +35,9 @@
 
 package system
 {
-    import system.comparators.StringComparator;
-    import system.evaluators.EdenEvaluator;
-    import system.evaluators.MultiEvaluator;    
+//    import system.comparators.StringComparator;
+//    import system.evaluators.EdenEvaluator;
+//    import system.evaluators.MultiEvaluator;    
 
     /**
      * A static class for String utilities.
@@ -49,7 +49,7 @@ package system
          * @private
          * @see system.Strings#compare
          */
-        private static var _sComparator:StringComparator = new StringComparator() ;
+        //private static var _sComparator:StringComparator = new StringComparator() ;
         
         /**
          * Helper method for the padLeft and padRight method.
@@ -153,7 +153,8 @@ package system
          */    
         public static function compare( o1:String, o2:String, strict:Boolean = false ):int
         {
-            return _sComparator.compare(o1,o2, !strict) ;
+            return 0;
+            //return _sComparator.compare(o1,o2, !strict) ;
         }
 
         /**
@@ -216,122 +217,122 @@ package system
         so yeah it's weak and yeah you could break it with something like
         ${{a:1,b:"}",c:"$"}}$
          */
-        private static function _evaluate( value:String ):Object
-        {
-            var obj:Object = {};
-            obj.format = "";
-            obj.indexes = [];
-            
-            var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
-            var evaluators:MultiEvaluator = new MultiEvaluator();
-            
-            var evalSequence:String = "";
-            var evalString:String = "";
-            // var evalValue:String    = "" ; // FIXME not use this variable for the moment
-            var inBetween:String = "";
-            var pos1:int;
-            var pos2:int;
-            var lpos:int;
-            
-            var isValidChar:Function = function( c:String ):Boolean
-            {
-                if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
-                {
-                    return true;
-                }
-                return false;
-            };
-            
-            var isValid:Function = function( str:String ):Boolean
-            {
-                if( str == "" )
-                {
-                    return true;
-                }
-                var test:Array = str.split( "" );
-                var l:int      = test.length ;
-                for( var i:int = 0; i < l ; i++ )
-                {
-                    if( ! isValidChar( test[i] ) )
-                    {
-                        return false;
-                    } 
-                }
-                return true;
-            };
-            
-            while( value.indexOf( "${" ) > - 1 )
-            {
-                
-                pos1 = value.indexOf( "${" );
-                pos2 = value.indexOf( "$", pos1 + 2 );
-                
-                if( pos2 == - 1 )
-                {
-                    throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                }
-                
-                evalSequence = value.slice( pos1 + 2, pos2 );
-                lpos         = evalSequence.lastIndexOf( "}" );
-                inBetween    = evalSequence.substring( lpos + 1 );
-                
-                while( ! isValid( inBetween ) )
-                {
-                    pos2 = value.indexOf( "$", pos1 + 2 + pos2 );
-                    if( pos2 == - 1 )
-                    {
-                        throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                    }
-                    evalSequence = value.slice( pos1 + 2, pos2 );
-                    lpos = evalSequence.lastIndexOf( "}" );
-                    inBetween = evalSequence.substring( lpos + 1 );
-                }
-                
-                if( lpos != evalSequence.length - 1 )
-                {
-                    var tmp:String = evalSequence.substring( lpos + 1 );
-                    var evaluatorsAlias:Array;
-                    
-                    if( tmp.indexOf( "," ) > - 1 )
-                    {
-                        evaluatorsAlias = tmp.split( "," );
-                    }
-                    else
-                    {
-                        evaluatorsAlias = [ tmp ];
-                    }
-                    
-                    var l:int = evaluatorsAlias.length ;
-                    for( var i:uint = 0; i < l ; i++ )
-                    {
-                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
-                        {
-                            evaluators.add( Strings.evaluators[ evaluatorsAlias[i] ] );
-                        }
-                        else
-                        {
-                            /* TODO:
-                            throw an error here ?
-                             */
-                            trace( "## Warning: \"" + evaluatorsAlias[i] + "\" is not a valid evaluator ##" );
-                        }
-                    }
-                }
-                
-                if( evaluators.size() == 0 )
-                {
-                    evaluators.add( defaultEvaluator ) ;
-                }
-                
-                evalString = evalSequence.substring( 0, lpos );
-                
-                obj.indexes.push( evaluators.eval( evalString ) );
-                value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
-            }
-            
-            obj.format = value;
-            return obj;
-        }
+//        private static function _evaluate( value:String ):Object
+//        {
+//            var obj:Object = {};
+//            obj.format = "";
+//            obj.indexes = [];
+//            
+//            var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
+//            var evaluators:MultiEvaluator = new MultiEvaluator();
+//            
+//            var evalSequence:String = "";
+//            var evalString:String = "";
+//            // var evalValue:String    = "" ; // FIXME not use this variable for the moment
+//            var inBetween:String = "";
+//            var pos1:int;
+//            var pos2:int;
+//            var lpos:int;
+//            
+//            var isValidChar:Function = function( c:String ):Boolean
+//            {
+//                if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
+//                {
+//                    return true;
+//                }
+//                return false;
+//            };
+//            
+//            var isValid:Function = function( str:String ):Boolean
+//            {
+//                if( str == "" )
+//                {
+//                    return true;
+//                }
+//                var test:Array = str.split( "" );
+//                var l:int      = test.length ;
+//                for( var i:int = 0; i < l ; i++ )
+//                {
+//                    if( ! isValidChar( test[i] ) )
+//                    {
+//                        return false;
+//                    } 
+//                }
+//                return true;
+//            };
+//            
+//            while( value.indexOf( "${" ) > - 1 )
+//            {
+//                
+//                pos1 = value.indexOf( "${" );
+//                pos2 = value.indexOf( "$", pos1 + 2 );
+//                
+//                if( pos2 == - 1 )
+//                {
+//                    throw new Error( "malformed evaluator, could not find [$] after [}]." );
+//                }
+//                
+//                evalSequence = value.slice( pos1 + 2, pos2 );
+//                lpos         = evalSequence.lastIndexOf( "}" );
+//                inBetween    = evalSequence.substring( lpos + 1 );
+//                
+//                while( ! isValid( inBetween ) )
+//                {
+//                    pos2 = value.indexOf( "$", pos1 + 2 + pos2 );
+//                    if( pos2 == - 1 )
+//                    {
+//                        throw new Error( "malformed evaluator, could not find [$] after [}]." );
+//                    }
+//                    evalSequence = value.slice( pos1 + 2, pos2 );
+//                    lpos = evalSequence.lastIndexOf( "}" );
+//                    inBetween = evalSequence.substring( lpos + 1 );
+//                }
+//                
+//                if( lpos != evalSequence.length - 1 )
+//                {
+//                    var tmp:String = evalSequence.substring( lpos + 1 );
+//                    var evaluatorsAlias:Array;
+//                    
+//                    if( tmp.indexOf( "," ) > - 1 )
+//                    {
+//                        evaluatorsAlias = tmp.split( "," );
+//                    }
+//                    else
+//                    {
+//                        evaluatorsAlias = [ tmp ];
+//                    }
+//                    
+//                    var l:int = evaluatorsAlias.length ;
+//                    for( var i:uint = 0; i < l ; i++ )
+//                    {
+//                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
+//                        {
+//                            evaluators.add( Strings.evaluators[ evaluatorsAlias[i] ] );
+//                        }
+//                        else
+//                        {
+//                            /* TODO:
+//                            throw an error here ?
+//                             */
+//                            trace( "## Warning: \"" + evaluatorsAlias[i] + "\" is not a valid evaluator ##" );
+//                        }
+//                    }
+//                }
+//                
+//                if( evaluators.size() == 0 )
+//                {
+//                    evaluators.add( defaultEvaluator ) ;
+//                }
+//                
+//                evalString = evalSequence.substring( 0, lpos );
+//                
+//                obj.indexes.push( evaluators.eval( evalString ) );
+//                value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
+//            }
+//            
+//            obj.format = value;
+//            return obj;
+//        }
 
         /* internal:
         supported format
@@ -538,14 +539,15 @@ package system
                 return format ;
             }
             
-            var evaluated:Object = _evaluate( format );
+            //var evaluated:Object = _evaluate( format );
+            var evaluated:Object = null;
             
             if( evaluated != null && (evaluated.indexes.length == 0) && ((args == null) || (args.length == 0)) )
             {
                 return format; //nothing to format
             }
             
-            format = evaluated.format;
+            //format = evaluated.format;
             
             if( args.length >= 1 )
             {

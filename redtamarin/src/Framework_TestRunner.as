@@ -35,31 +35,29 @@
 
 package
 {
-    import buRRRn.ASTUce.*;
-    import buRRRn.ASTUce.tests.AllTests;
+//    import buRRRn.ASTUce.*;
+//    import buRRRn.ASTUce.tests.AllTests;
+//    
+//    import system.*;
     
-    import system.*;
-    
-    import flash.display.Sprite;
-
-    public class Framework_TestRunner extends Sprite
+    public class Framework_TestRunner
     {
         
         public function Framework_TestRunner()
         {
             
-            system.config.serializer.prettyPrinting = true;
-            system.about( true, true );
-            
-            //tests
-            buRRRn.ASTUce.config.showConstructorList = false;
-            
-            //testing MaasHaack core only
-            //Runner.main( system.AllTests.suite() );
-            
-            //testing everything
-            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
-                         system.AllTests.suite() );
+//            system.config.serializer.prettyPrinting = true;
+//            system.about( true, true );
+//            
+//            //tests
+//            buRRRn.ASTUce.config.showConstructorList = false;
+//            
+//            //testing MaasHaack core only
+//            //Runner.main( system.AllTests.suite() );
+//            
+//            //testing everything
+//            Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
+//                         system.AllTests.suite() );
             
         }
     }
