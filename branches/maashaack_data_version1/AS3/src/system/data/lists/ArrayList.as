@@ -197,7 +197,12 @@ package system.data.lists
         public function subList(fromIndex:uint, toIndex:uint):List
         {
         	var l:List = new ArrayList() ;
-        	//
+            var it:ListIterator = listIterator() ;
+            var d:Number = (toIndex - fromIndex) + 1 ; 
+            for ( var i:int = fromIndex ; i<= d ; i++ ) 
+            {
+                l.add(it.next()) ;
+            }
         	return l ;
         }        
      
