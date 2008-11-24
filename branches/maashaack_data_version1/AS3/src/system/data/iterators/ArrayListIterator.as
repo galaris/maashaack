@@ -46,7 +46,8 @@ package system.data.iterators
     [ExcludeClass]
 
     /**
-     * The basic implementation of the ListIterator used in the ArrayList class.
+     * The basic implementation of the <code class="prettyprint">ListIterator</code> used in the <code class="prettyprint">ArrayList</code> class.
+     * <p>This class is public but you not must use it directly.</p>
      */
     public class ArrayListIterator implements ListIterator 
     {

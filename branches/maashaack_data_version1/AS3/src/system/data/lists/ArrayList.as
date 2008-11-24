@@ -42,17 +42,32 @@ package system.data.lists
     import system.data.iterators.ArrayListIterator;    
 
     /**
-     * @author eKameleon
+     * Resizable-array implementation of the List interface. Implements all optional list operations, and permits all elements, including null.
      */
     public class ArrayList extends ArrayCollection implements List
     {
         
         /**
          * Creates a new ArrayList instance.
+         * <p><b>Usage </b></p>
+         * <pre class="prettyprint">
+         *  new ArrayList() ;
+         *  new ArrayList(ar:Array) ;
+         *  new ArrayList(it:Iterable) ;
+         *  new ArrayList(co:Collection) ;
+         *  new ArrayList( capacity:uint ) ;
+         * </pre>
+         * @param init An optional Array or Collection or Iterable object to fill the collection. 
+         * This parameter can be an uint value to determinates the default capacity of the list.
+         * @see ensureCapacity 
          */
-        public function ArrayList(init:* = null)
+        public function ArrayList( init:* = null )
         {
             super(init);
+            if (init is uint)
+            {
+                ensureCapacity( init as uint ) ;
+            }
         }
         
         /**
@@ -146,6 +161,12 @@ package system.data.lists
             }        	
         }
         
+        /**
+         * Replaces the element at the specified position in this list with the specified element (optional operation).
+         * @param id index of element to replace.
+         * @param o element to be stored at the specified position.
+         * @return the element previously at the specified position.
+         */        
         public function setAt(id:uint, o:*):*
         {
             var i:ListIterator = listIterator(id) ;
