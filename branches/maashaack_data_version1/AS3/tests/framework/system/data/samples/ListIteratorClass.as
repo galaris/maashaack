@@ -35,10 +35,15 @@
 
 package system.data.samples 
 {
-    import system.data.ListIterator;                
+    import system.data.ListIterator;                    
 
     public class ListIteratorClass implements ListIterator 
     {
+    	
+        public function add(o:*):void
+        {
+            throw new Error( "insert:" + o.toString() ) ;
+        }    	
 
         public function hasNext():Boolean
         {
@@ -49,12 +54,7 @@ package system.data.samples
         {
             return true ;
         }        
-
-        public function insert(o:*):void
-        {
-            throw new Error( "insert:" + o.toString() ) ;
-        }
-        
+                
         public function key():*
         {
             return "key" ;

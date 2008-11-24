@@ -33,27 +33,20 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.iterators
+package system.data.errors
 {
-    import buRRRn.ASTUce.framework.*;                                    
+    import buRRRn.ASTUce.framework.*;                                
 
     public class AllTests
     {
 
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("Maashaack data iterators tests");
-
-            suite.addTestSuite(ArrayFieldIteratorTest) ;
-            suite.addTestSuite(ArrayIteratorTest) ;
-            suite.addTestSuite(ArrayListIteratorTest) ;
-            suite.addTestSuite(IterableFormatterTest) ;
-            suite.addTestSuite(MapIteratorTest) ;
-            suite.addTestSuite(ObjectIteratorTest) ;
-            suite.addTestSuite(PageByPageIteratorTest) ;
-            suite.addTestSuite(ProtectedIteratorTest) ;
-            suite.addTestSuite(StringIteratorTest) ;            
-                      
+            var suite:TestSuite = new TestSuite("Maashaack data errors tests");
+            
+            suite.addTestSuite(ConcurrentModificationErrorTest) ;
+            suite.addTestSuite(NoSuchElementErrorTest) ;
+                            
             return suite;
         }
     }

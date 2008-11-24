@@ -46,6 +46,11 @@ package system.data.samples
         {
             return true ;
         }
+        
+        public function addAll( c:Collection ):Boolean
+        {
+        	return true ; 
+        }
 
         public function addAt(id:uint, o:*):void
         {
@@ -71,12 +76,7 @@ package system.data.samples
         {
             return c is Collection ;
         }
-        
-        public function equals(o:*):Boolean
-        {
-            return true ; // TODO remove in the List interface ?
-        }        
-        
+                
         public function get(key:*):*
         {
             return key ;

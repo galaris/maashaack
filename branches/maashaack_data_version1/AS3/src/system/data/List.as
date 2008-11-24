@@ -35,13 +35,18 @@
 
 package system.data
 {
-    import system.Equatable;        
 
     /**
 	 * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
 	 */
-    public interface List extends Collection, Equatable
+    public interface List extends Collection
     {
+
+        /**
+         * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
+         * @return <code class="prettyprint">true</code> if this list changed as a result of the call.
+         */
+        function addAll( c:Collection ):Boolean ; 
 
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
@@ -52,13 +57,13 @@ package system.data
 		 * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
 		 * @return <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
 		 */
-    	function containsAll(c:Collection):Boolean ;
+    	function containsAll( c:Collection ):Boolean ;
         
 		/**
 		 * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 */
-    	function lastIndexOf(o:*):int ;
+    	function lastIndexOf( o:* ):int ;
         
 		/**
 		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
@@ -83,6 +88,7 @@ package system.data
 		 * Replaces the element at the specified position in this list with the specified element (optional operation).
 	     * @param id index of element to replace.
 	     * @param o element to be stored at the specified position.
+	     * @return the element previously at the specified position.
 		 */
     	function setAt( id:uint , o:* ):* ;
 	

@@ -33,37 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.data.errors 
 {
-    import system.data.OrderedIterator;    
-    
+
     /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
+     * The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
      */
-    public interface ListIterator extends OrderedIterator
+    public class ConcurrentModificationError extends Error 
     {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
 
         /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
+         * Creates a new ConcurrentModificationError instance. If message is specified, its value is assigned to the object's ConcurrentModificationError.message property.
+         * @param message A string associated with the ConcurrentModificationError object ; this parameter is optional.
+         * @param id A reference number to associate with the specific error message.
          */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
-    
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
-        
+        public function ConcurrentModificationError(message:String = "", id:int = 0)
+        {
+            super( message , id );
+        }
     }
 }

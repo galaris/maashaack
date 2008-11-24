@@ -65,6 +65,19 @@ package system.data
             assertTrue( i is Iterator ) ;
         }
         
+        public function testAdd():void
+        {    
+            try
+            {
+                i.add("item") ;
+                fail( "01 - test ListIterator interface failed with the add method." ) ;              
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message , "insert:item" , "02 - test ListIterator interface failed with the add method." ) ;
+            }
+        }     
+        
         public function testHasNext():void
         {
             assertTrue( i.hasNext() , "test ListIterator interface failed with the hasNext method." ) ;
@@ -73,20 +86,7 @@ package system.data
         public function testHasPrevious():void
         {
             assertTrue( i.hasPrevious() , "test ListIterator interface failed with the hasPrevious method." ) ;
-        }        
-        
-        public function testInsert():void
-        {    
-            try
-            {
-                i.insert("item") ;
-                fail( "01 - test ListIterator interface failed with the insert method." ) ;              
-            }
-            catch( e:Error )
-            {
-                assertEquals( e.message , "insert:item" , "02 - test ListIterator interface failed with the insert method." ) ;
-            }
-        }        
+        } 
         
         public function testKey():void
         {

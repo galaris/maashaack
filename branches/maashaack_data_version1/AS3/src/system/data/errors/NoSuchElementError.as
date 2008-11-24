@@ -33,37 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.data.errors 
 {
-    import system.data.OrderedIterator;    
-    
+
     /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
+     * Thrown by an Iterator to indicate that there are no more elements in the iteration.
      */
-    public interface ListIterator extends OrderedIterator
+    public class NoSuchElementError extends Error 
     {
-        
+     
         /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
-    
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
-        
+         * Creates a new NoSuchElementError instance. If message is specified, its value is assigned to the object's NoSuchElementError.message property.
+         * @param message A string associated with the NoSuchElementError object ; this parameter is optional.
+         * @param id A reference number to associate with the specific error message.
+         */  
+        public function NoSuchElementError( message:String = "", id:int = 0 )
+        {
+            super(message, id);
+        }
     }
 }

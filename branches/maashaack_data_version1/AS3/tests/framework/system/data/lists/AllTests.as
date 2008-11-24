@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.lists
 {
-    import buRRRn.ASTUce.framework.*;                        
+    import buRRRn.ASTUce.framework.*;                            
 
     public class AllTests
     {
@@ -44,7 +44,9 @@ package system.data.lists
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data lists tests");
-                      
+            
+            suite.addTestSuite( ArrayListTest ) ;            
+                
             return suite;
         }
     }

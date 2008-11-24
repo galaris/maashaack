@@ -144,6 +144,7 @@ package system.data.collections
         
         /**
          * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
+         * @return <code class="prettyprint">true</code> if this list changed as a result of the call.
          */
         public function addAll( c:Collection ):Boolean 
         {
