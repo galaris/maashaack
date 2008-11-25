@@ -97,7 +97,7 @@ package system.data.samples
             return new IteratorClass() ;
         }
         
-        public function lastIndexOf(o:*):int
+        public function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         {
             return 0;
         }

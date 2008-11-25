@@ -35,7 +35,14 @@
 
 package system.data.lists 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Equatable;
+    import system.data.Collection;
+    import system.data.List;
+    import system.data.ListIterator;
+    import system.data.collections.ArrayCollection;    
 
     public class ArrayListTest extends TestCase 
     {
@@ -47,16 +54,172 @@ package system.data.lists
         
         public function testConstructor():void
         {
+        	var list:ArrayList ;
         	
-        	var list:ArrayList = new ArrayList() ;
-        	
+        	list = new ArrayList() ;
         	assertNotNull( list , "The ArrayList constructor failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), [], "01-02 - ArrayList constructor failed.") ;
+            
+            // initialize with an Array
+                        
+            list = new ArrayList([2,3,4]) ; 
+            assertNotNull(list, "02-01 - ArrayCollection constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [2,3,4], "02-02 - ArrayList constructor failed.") ;
+            
+            // initialize with a Collection
+            
+            list = new ArrayList( new ArrayCollection([2,3,4])) ; 
+            assertNotNull(list, "03-01 - ArrayList constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [2,3,4], "03-02 - ArrayList constructor failed.") ;
+            
+            // initialize with the capacity value
+            
+            list = new ArrayList( 3 ) ; 
+            assertNotNull(list, "04-01 - ArrayList constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [undefined,undefined,undefined], "04-02 - ArrayList constructor failed.") ;            
         	
         }
         
         public function testInterface():void
         {
-        	
+            var list:ArrayList = new ArrayList() ;
+            assertTrue( list is Collection , "01 - ArrayList must implement the Collection interface" ) ;
+            assertTrue( list is Equatable  , "02 - ArrayList must implement the Equatable interface" ) ;
+            assertTrue( list is List       , "03 - ArrayList must implement the List interface" ) ;
         }
+        
+        public function testModcount():void
+        {
+            var list:ArrayList = new ArrayList() ;
+            assertEquals( list.modCount , 0 , "01 - ArrayList modCount property failed."  ) ;
+            list.modCount = 2 ;
+            assertEquals( list.modCount , 2 , "02 - ArrayList modCount property failed."  ) ;
+        }
+        
+        public function testAdd():void
+        {
+            var list:ArrayList = new ArrayList() ;
+            var count:int = list.modCount ;
+            assertTrue( list.add("item1") , "01 - ArrayList add method failed." ) ;
+            assertEquals( list.modCount , count + 1  , "02 - ArrayList modCount property failed."  ) ;
+            assertEquals( list.size() , 1 , "03 - ArrayList add method failed." ) ;
+        }      
+
+        public function testAddAll():void
+        {
+            var list:ArrayList = new ArrayList() ;
+            var count:int = list.modCount ;
+            assertTrue( list.addAll( new ArrayCollection(["item1","item2"]) ) , "01 - ArrayList addAll method failed." ) ;
+            assertEquals( list.modCount , count + 3  , "02 - ArrayList addAll method failed."  ) ; // count + number of items in added in the collection + one modification == 3
+            assertEquals( list.size() , 2 , "03 - ArrayList addAll method failed." ) ;
+            assertFalse( list.addAll( new ArrayCollection() ) , "04 - ArrayList addAll method failed." ) ;            
+            assertFalse( list.addAll(null) , "05 - ArrayList addAll method failed." ) ;
+        }
+        
+        public function testAddAt():void
+        {
+            var list:ArrayList = new ArrayList([ "item1", "item2", "item3" ] ) ;
+            var count:int = list.modCount ;
+            list.addAt( 1 , "item4" ) ;
+            assertEquals( list.modCount , count + 1  , "01 - ArrayList addAt method failed."  ) ; // count + number of items in added in the collection + one modification == 3
+            assertEquals( list.size() , 4 , "02 - ArrayList addAt method failed." ) ;
+            try
+            {
+            	list.addAt(100, "value");
+                fail(  "03-01 - ArrayList addAt method failed, must throw a RangeError." ) ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is RangeError , "03-02 - ArrayList addAt method failed, must throw a RangeError.") ;
+            	assertEquals( e.message , "ArrayList.addAt method failed, the specified index '100' is out of bounds.", "03-03 - ArrayList addAt method failed, must throw a RangeError.") ;
+            }
+        }         
+        
+        public function testClear():void
+        {
+            var list:ArrayList = new ArrayList([ "item1", "item2", "item3" ] ) ;
+            var count:int = list.modCount ;
+            list.clear() ;
+            assertEquals( list.modCount , count + 1  , "01 - ArrayList clear method failed."  ) ; 
+            assertEquals( list.size() , 0 , "02 - ArrayList clear method failed." ) ;
+        }     
+        
+        public function testClone():void
+        {
+            var list:ArrayList = new ArrayList([ "item1", "item2", "item3" ] ) ;
+            var clone:ArrayList = list.clone() as ArrayList ;
+            assertNotNull( clone , "01 - ArrayList clone method failed." ) ;
+            assertEquals( list.size() , 3 , "02 - ArrayList clone method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), clone.toArray(), "03 - ArrayList clone method failed.") ;              
+        }
+        
+        public function testEnsureCapacity():void
+        {
+            var list:ArrayList = new ArrayList() ;
+            list.ensureCapacity( 0 ) ;
+            assertEquals( list.size() , 0 , "01 - ArrayList ensureCapacity method failed." ) ;
+            list.ensureCapacity( 2 ) ;
+            assertEquals( list.size() , 2 , "02-01 - ArrayList ensureCapacity method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), [undefined, undefined], "02-02 - ArrayList ensureCapacity method failed.") ;
+            list.ensureCapacity( 0 ) ;            
+            assertEquals( list.size() , 0 , "02-01 - ArrayList ensureCapacity method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), [], "03 - ArrayList ensureCapacity method failed.") ;              
+        } 
+        
+        public function testLastIndexOf():void
+        {
+            var list:ArrayList = new ArrayList( ["item1", "item2" , "item3" , "item2" , "item4" ]) ;
+            assertEquals( list.lastIndexOf("item2") , 3 , "01 - ArrayList lastIndexOf method failed." ) ;            
+            assertEquals( list.lastIndexOf("item2", 2) , 1 , "02 - ArrayList lastIndexOf method failed." ) ;
+            assertEquals( list.lastIndexOf("item10") , -1 , "03 - ArrayList lastIndexOf method failed." ) ;
+        }
+        
+        public function testListIterator():void
+        {
+            var list:ArrayList = new ArrayList( ["item1", "item2" , "item3" , "item4" ]) ;
+            var it:ListIterator = list.listIterator() ;
+            
+            assertNotNull( it , "01 - ArrayList listIterator method failed.") ;
+            
+            assertTrue(it.hasNext(), "02-01 - ArrayList listIterator method failed.") ;
+            assertEquals(it.next(), "item1", "02-02 - ArrayList listIterator method failed.") ;
+            
+            assertTrue(it.hasNext(), "03-01 - ArrayList listIterator method failed.") ;
+            assertEquals(it.next(), "item2", "03-02 - ArrayList listIterator method failed.") ;
+
+            assertTrue(it.hasPrevious(), "04-01 - ArrayList listIterator method failed.") ;
+            assertEquals(it.previous(), "item2", "04-02 - ArrayList listIterator method failed.") ;
+
+            assertTrue(it.hasPrevious(), "05-01 - ArrayList listIterator method failed.") ;
+            assertEquals(it.previous(), "item1" , "05-02 - ArrayList listIterator method failed.") ;
+        }
+        
+        public function testRemove():void
+        {
+            
+            var list:ArrayList = new ArrayList( ["item1", "item2" , "item3" , "item4" ] ) ;
+            
+            var count:int = list.modCount ;
+            
+            assertTrue   ( list.remove("item3") , "01 - ArrayList remove method failed." ) ;
+            assertEquals ( list.modCount        , count + 1  , "02 - ArrayList remove method failed."  ) ;
+            assertEquals ( list.size()          , 3          , "03 - ArrayList remove method failed." ) ;
+            
+            assertFalse( list.remove("item10") , "04 - ArrayList remove method failed." ) ;
+            
+            ArrayAssert.assertEquals( list.toArray(), ["item1", "item2" ,  "item4"], "05 - ArrayList remove method failed.") ;
+            
+            list = new ArrayList( ["item1", null , "item2" , null , "item3"] ) ;
+            
+            assertTrue( list.remove(null) , "06-01 - ArrayList remove method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), ["item1", "item2" , null,  "item3"], "06-02 - ArrayList remove method failed.") ;
+            
+            assertTrue( list.remove(null) , "06-03 - ArrayList remove method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), ["item1", "item2" , "item3"], "06-04 - ArrayList remove method failed.") ;
+            
+            assertFalse(list.remove(null) , "06-05 - ArrayList remove method failed." ) ;
+                                
+        }
+        
     }
 }

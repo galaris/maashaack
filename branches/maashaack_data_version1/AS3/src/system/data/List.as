@@ -63,7 +63,7 @@ package system.data
 		 * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
 		 */
-    	function lastIndexOf( o:* ):int ;
+    	function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         
 		/**
 		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).

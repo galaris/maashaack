@@ -103,7 +103,7 @@ package system.data.lists
          */
         public override function addAll( c:Collection ):Boolean 
         {
-            _modCount ++ ;
+        	_modCount ++ ;
             return super.addAll( c ) ;
         }         
         
@@ -114,7 +114,7 @@ package system.data.lists
         {
             if ( id > size() ) 
             {
-                throw new RangeError( this + " insertAt method failed, the specified index '" + id + "' is out of bounds.") ;
+                throw new RangeError( "ArrayList.addAt method failed, the specified index '" + id + "' is out of bounds.") ;
             }
             _modCount++ ;
             _a.splice(id, 0, o) ;        	
@@ -151,9 +151,9 @@ package system.data.lists
          * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
          * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
          */        
-        public function lastIndexOf( o:* ):int
+        public function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         {
-        	return _a.lastIndexOf(o) ;
+        	return _a.lastIndexOf( o , fromIndex ) ;
         }
         
         /**

@@ -148,6 +148,10 @@ package system.data.collections
          */
         public function addAll( c:Collection ):Boolean 
         {
+        	if ( c == null )
+        	{
+        		return false ;
+        	}
             if ( c.size() > 0 ) 
             {
                 var it:Iterator = c.iterator() ;
@@ -160,7 +164,7 @@ package system.data.collections
             else 
             {
                 return false ;
-            }
+        	}
         }        
         
         /**
