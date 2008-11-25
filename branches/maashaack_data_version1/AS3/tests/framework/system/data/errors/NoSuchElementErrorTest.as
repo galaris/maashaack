@@ -47,12 +47,27 @@ package system.data.errors
         
         public function testConstructor():void
         {
-            
             var e:NoSuchElementError = new NoSuchElementError() ;
-            
             assertNotNull( e , "The NoSuchElementError constructor failed." ) ;
-            
-        }        
+        }      
+
+        public function testErrorID():void
+        {
+            var e:NoSuchElementError = new NoSuchElementError("message", 0) ;
+            assertEquals( e.errorID , 0 , "NoSuchElementError errorID property failed.") ;    
+        } 
+                
+        public function testMessage():void
+        {
+            var e:NoSuchElementError = new NoSuchElementError("message", 0) ;
+            assertEquals( e.message , "message"  , "NoSuchElementError message property failed.") ;    
+        }           
         
+        public function testName():void
+        {
+            var e:NoSuchElementError = new NoSuchElementError() ;
+            assertEquals( e.name , "NoSuchElementError"  , "NoSuchElementError name property failed.") ;    
+        }        
+                
     }
 }

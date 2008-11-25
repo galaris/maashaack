@@ -55,7 +55,7 @@ package system.data.iterators
         /**
          * Creates a new ArrayListIterator instance.
          */
-        public function ArrayListIterator( li:ArrayList )
+        public function ArrayListIterator( li:ArrayList , position:uint = 0 )
         {
             if ( li == null ) 
             {
@@ -64,7 +64,8 @@ package system.data.iterators
             _list             = li ;
             _key              = 0 ;
             _listast          = -1 ;
-            _expectedModCount = (_list as ArrayList).getModCount() ;        	
+            _expectedModCount = _list.modCount ;  
+            seek( position ) ;     	
         }
         
         /**
@@ -77,7 +78,7 @@ package system.data.iterators
             {
                 _list.addAt( _key++ , o ) ;
                 _listast = -1 ;
-                _expectedModCount = _list.getModCount() ;
+                _expectedModCount = _list.modCount ;
             } 
             catch ( e:Error ) 
             {
@@ -87,13 +88,39 @@ package system.data.iterators
         
         /**
          * Invoked to check for comodification.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.lists.ArrayList ;
+         * import system.data.Iterator ;
+         * 
+         * var list:ArrayList = new ArrayList() ;
+         * 
+         * list.add("item1") ;
+         * list.add("item2") ;
+         * list.add("item3") ;
+         * 
+         * trace( list.modCount ) ;
+         * 
+         * var next:* ;
+         * 
+         * var it:Iterator = list.listIterator() ;
+         * 
+         * while( it.hasNext() )
+         * {
+         *     next = it.next() ;
+         *     if ( next == "item2")
+         *     {
+         *         list.add("item4") ; // enforce a modification in the list but not use the iterator.
+         *         it.remove() ; // ConcurrentModificationError: ListIterator modification failed, the list is changed during the iteration.
+         *     }
+         * }
+         * </pre>
          */
         public function checkForComodification():void 
         {
-            var l:ArrayList = _list as ArrayList ;
-            if (l != null && l.getModCount() != _expectedModCount) 
+            if ( _list.modCount != _expectedModCount) 
             {
-                throw new ConcurrentModificationError( "ListIterator modification impossible.") ;
+                throw new ConcurrentModificationError( "ListIterator modification failed, the list is changed during the iteration.") ;
             }
         }
     
@@ -199,7 +226,7 @@ package system.data.iterators
                 	_key -- ;
                 }
                 _listast = -1 ;
-                _expectedModCount = _list.getModCount() ;
+                _expectedModCount = _list.modCount ;
             } 
             catch ( e:ConcurrentModificationError ) 
             {
@@ -218,9 +245,9 @@ package system.data.iterators
         /**
         * Change the position of the internal pointer of the iterator (optional operation).
         */
-        public function seek(position:*):void 
+        public function seek( position:* ):void 
         {
-            _key = Mathematics.clamp(position, 0, _list.size()) ;
+            _key = Mathematics.clamp( position, 0, _list.size() ) ;
             _listast = _key - 1 ;
         }
             
@@ -237,9 +264,9 @@ package system.data.iterators
             try 
             {
                 _list.setAt( _listast , o ) ;
-                _expectedModCount = _list.getModCount() ;
+                _expectedModCount = _list.modCount ;
             }
-            catch ( e:ConcurrentModificationError ) 
+            catch ( e:Error ) 
             {
                 throw e ;
             }

@@ -50,6 +50,7 @@ package system.data.errors
         public function NoSuchElementError( message:String = "", id:int = 0 )
         {
             super(message, id);
+            name = "NoSuchElementError" ;
         }
     }
 }

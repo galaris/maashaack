@@ -35,7 +35,7 @@
 
 package system.data.errors 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;                
 
     public class ConcurrentModificationErrorTest extends TestCase 
     {
@@ -53,6 +53,25 @@ package system.data.errors
             assertNotNull( e , "The ConcurrentModificationError constructor failed." ) ;
             
         }
+
+        public function testErrorID():void
+        {
+            var e:ConcurrentModificationError = new ConcurrentModificationError("message", 0) ;
+            assertEquals( e.errorID , 0 , "ConcurrentModificationError errorID property failed.") ;    
+        } 
+                
+        public function testMessage():void
+        {
+            var e:ConcurrentModificationError = new ConcurrentModificationError("message", 0) ;
+            assertEquals( e.message , "message"  , "ConcurrentModificationError message property failed.") ;    
+        }           
+        
+        public function testName():void
+        {
+            var e:ConcurrentModificationError = new ConcurrentModificationError() ;
+            assertEquals( e.name , "ConcurrentModificationError"  , "ConcurrentModificationError name property failed.") ;    
+        }
+        
                 
     }
 }

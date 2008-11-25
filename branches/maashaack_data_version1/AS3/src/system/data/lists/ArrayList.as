@@ -35,10 +35,11 @@
 
 package system.data.lists 
 {
+    import system.data.Collection;
     import system.data.List;
     import system.data.ListIterator;
     import system.data.collections.ArrayCollection;
-    import system.data.errors.NoSuchElementError;
+    import system.data.errors.ConcurrentModificationError;
     import system.data.iterators.ArrayListIterator;    
 
     /**
@@ -68,7 +69,43 @@ package system.data.lists
             {
                 ensureCapacity( init as uint ) ;
             }
+            _modCount = 0 ;
         }
+        
+        /**
+         * This property is a protector used in the ListIterator object of this List.
+         */
+        public function get modCount():int 
+        {
+            return _modCount ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set modCount( i:int ):void
+        {
+            _modCount = i ;
+        }
+        
+        /**
+         * Inserts an element in the collection.
+         */
+        public override function add( o:* ):Boolean
+        {
+        	_modCount ++ ;
+            return super.add( o ) ;
+        }
+        
+        /**
+         * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
+         * @return <code class="prettyprint">true</code> if this list changed as a result of the call.
+         */
+        public override function addAll( c:Collection ):Boolean 
+        {
+            _modCount ++ ;
+            return super.addAll( c ) ;
+        }         
         
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
@@ -79,8 +116,18 @@ package system.data.lists
             {
                 throw new RangeError( this + " insertAt method failed, the specified index '" + id + "' is out of bounds.") ;
             }
+            _modCount++ ;
             _a.splice(id, 0, o) ;        	
         }
+        
+        /**
+         * Removes all elements in the collection.
+         */        
+        public override function clear():void
+        {
+        	_modCount ++ ;
+            super.clear() ;
+        }        
         
         /**
          * Returns a shallow copy of this collection (optional operation).
@@ -96,17 +143,10 @@ package system.data.lists
          */
         public function ensureCapacity( capacity:uint ):void 
         {
+        	_modCount++ ;
             _a.length = capacity ;
         }        
         
-        /**
-         * This method is used by the <code class="prettyprint">ListItr</code> class only.
-         */
-        public function getModCount():Number 
-        {
-            return _modCount ;
-        }
-
         /**
          * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
          * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
@@ -122,10 +162,17 @@ package system.data.lists
          */
         public function listIterator( position:uint=0 ):ListIterator 
         {
-            var li:ListIterator = new ArrayListIterator( this ) ;
-            li.seek(position) ;
-            return li ;
+            return new ArrayListIterator( this , position) ;
         }        
+
+        /**
+         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         */     
+        public override function remove( o:* ):*
+        {
+        	_modCount++ ;
+            return super.remove( o ) ;
+        }
 
         /**
          * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
@@ -134,6 +181,7 @@ package system.data.lists
          */        
         public function removeAt(id:uint, len:int = 1):*
         {
+        	_modCount ++ ;
         	len = len > 1 ? len : 1 ;
             var d:uint = len - id ;
             var old:* = _a.slice(id, d) ;
@@ -148,10 +196,7 @@ package system.data.lists
          */        
         public function removeRange( fromIndex:uint , toIndex:uint ):void
         {
-            if ( fromIndex == 0 ) 
-            {
-            	return ;
-            }
+            _modCount ++ ;
             var it:ListIterator = listIterator(fromIndex) ;
             var l:int = toIndex - fromIndex ;
             for (var i:int = 0 ; i<l ; i++) 
@@ -169,27 +214,20 @@ package system.data.lists
          */        
         public function setAt(id:uint, o:*):*
         {
-            var i:ListIterator = listIterator(id) ;
+        	var i:ListIterator = listIterator(id) ;
             try 
             {
                 var old:* = i.next() ;
                 i.set(o) ;
+                _modCount++ ;
                 return old ;
             }
-            catch( e:NoSuchElementError ) 
+            catch( e:Error ) 
             {
-                throw new RangeError("LinkedList setAt method failed, index:" + id ) ;
+                throw new ConcurrentModificationError( "ListIterator modification failed in the setAt() method.") ;
             }        	
         }
-        
-        /**
-         * Sets the modCount property of this list.
-         */
-        public function setModCount( n:uint ):void
-        {
-            _modCount = n ;
-        }        
-        
+          
         /**
          * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
@@ -209,7 +247,7 @@ package system.data.lists
         /**
          * @private
          */
-        private var _modCount:Number = 0 ;     
+        protected var _modCount:int ;     
         
     }
 }
