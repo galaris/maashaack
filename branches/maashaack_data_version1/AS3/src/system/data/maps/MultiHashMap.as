@@ -56,11 +56,7 @@ package system.data.maps
         public function MultiHashMap( map:Map = null )
         {
             _map = new HashMap() ;
-            if (map == null) 
-            {
-                return ;
-            }
-            if ( map.size() > 0 ) 
+            if (map != null && map.size() > 0 ) 
             {
                 putAll( map.clone() ) ;
             }
@@ -80,13 +76,15 @@ package system.data.maps
          */
         public function clone():* 
         {
+        	var key:*   ;
+        	var value:* ;
             var m:MultiHashMap = new MultiHashMap() ;
             var kItr:Iterator = keyIterator() ;
             var vItr:Iterator = valueIterator() ;
             while (kItr.hasNext()) 
             {
-                var key:*   = kItr.next() ;
-                var value:* = vItr.next() ;
+                key   = kItr.next() ;
+                value = vItr.next() ;
                 m.putCollection( key , value ) ;
             }
             return m ;
@@ -166,8 +164,8 @@ package system.data.maps
         }
         
         /**
-         * Returns an array containing the combination of values from all keys.
-         * @return An array containing the combination of values from all keys.
+         * Returns an Array containing the combination of values from all keys.
+         * @return An Array containing the combination of values from all keys.
          */
         public function getValues():Array 
         {
@@ -238,7 +236,7 @@ package system.data.maps
             while (it.hasNext()) 
             {
                 var value:* = it.next() ;
-                var key:* = it.key() ;
+                var key:*   = it.key() ;
                 if (value is Collection) 
                 {
                     putCollection(key, value) ;
@@ -253,13 +251,33 @@ package system.data.maps
         /**
          * Adds a collection of values to the collection associated with the specified key.
          */
-        public function putCollection(key:*, c:Collection):void 
+        public function putCollection( key:* , c:Collection ):void 
         {
+        	if ( c.size() == 0 )
+        	{
+        		return ;
+        	}
+        	var co:Collection ;
             if (!containsKey(key)) 
             {
-                _map.put(key , createCollection()) ;
+            	co = createCollection() ;
+            	if ( co != null )
+            	{
+                    _map.put(key , co ) ;
+            	}
             }
-            _map.get(key).insertAll(c) ;
+            else
+            {
+            	co = _map.get(key) as Collection ;
+            }
+            if ( co != null )
+            {
+                var it:Iterator = co.iterator() ;
+                while(it.hasNext()) 
+                {
+                    co.add( it.next() ) ;
+                }            
+            }
         }
         
         /**
@@ -315,7 +333,7 @@ package system.data.maps
          */
         public function toString():String 
         {
-            return formatter.format(this) ;
+            return MultiMapFormatter.instance.format(this) ;
         }
 
         /**

@@ -35,7 +35,10 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.Map;
+    import system.data.MultiMap;    
 
     public class MultiHashMapTest extends TestCase 
     {
@@ -47,134 +50,157 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	var map:MultiHashMap = new MultiHashMap () ;
-        	assertNotNull(map) ;
+        	
+        	var init:Map = new HashMap() ;
+        	init.put( "key1" , "value1" ) ;
+        	
+        	var map:MultiHashMap ;
+        	
+        	map = new MultiHashMap () ;
+        	assertNotNull(map , "1 - The MultiHashMap constructor failed.") ;
+        	
+        	map = new MultiHashMap( init ) ;
+        	
+        	assertEquals
+        	( 
+        	   map.toString() , 
+        	   "{key1:{value1}}" ,
+        	   "2 - The MultiHashMap constructor failed." 
+        	);
+        	
         }
 
         public function testInterface():void
         {
-        	
+            var map:MultiHashMap = new MultiHashMap () ;
+            assertTrue( map is MultiMap , "1 - The MultiHashMap must implement the MultiMap interface." ) ;
+            assertTrue( map is Map      , "2 - The MultiHashMap must implement the Map interface." ) ;
         }
 
         public function testClear():void 
         {
-            
+            var map:MultiHashMap = new MultiHashMap () ;
+            map.put("key1" , "value1") ;
+            map.clear() ;
+            assertTrue( map.isEmpty() , "The MultiHashMap clear failed.") ;
         }
         
-        public function testClone():void 
-        {
-            
-        }
 
-        public function testContainsKey():void 
-        {
-            
-        }
-        
-        public function testContainsValue():void 
-        {
-            
-        } 
-        
-        public function testContainsValueByKey():void 
-        {
-            
-        }
-            
-        public function testCreateCollection():void
-        {
-            
-        }
-
-        public function testGet():void
-        {
-            
-        }
-
-        public function testGetKeys():void 
-        {
-            
-        }
-    
-        public function testGetValues():void 
-        {
-            
-        }
-
+//        public function testContainsKey():void 
+//        {
+//            
+//        }
+//        
+//        public function testContainsValue():void 
+//        {
+//            
+//        } 
+//        
+//        public function testContainsValueByKey():void 
+//        {
+//            
+//        }
+//            
+//        public function testCreateCollection():void
+//        {
+//            
+//        }
+//
+//        public function testGet():void
+//        {
+//            
+//        }
+//
+//        public function testGetKeys():void 
+//        {
+//            
+//        }
+//    
+//        public function testGetValues():void 
+//        {
+//            
+//        }
+//
         public function testIsEmpty():void 
         {
-            
+            var map:MultiHashMap = new MultiHashMap () ;
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            assertFalse( map.isEmpty() , "1 - The MultiHashMap isEmpty failed.") ;
+            map.clear() ;
+            assertTrue( map.isEmpty() , "2 - The MultiHashMap isEmpty failed.") ;
         }
-        
-        public function testIterator():void 
-        {
-            
-        }
-
-        public function testIteratorByKey():void
-        {
-            
-        }
-    
-        public function testKeyIterator():void 
-        {
-            
-        }       
-        
-        public function testPut():void
-        {
-            
-        }   
-        
-        public function testPutAll():void
-        {
-            
-        }
-        
-        public function testPutCollection():void 
-        {
-            
-        }
-        
-        public function testRemove():void
-        {
-            
-        }
-        
-        public function testRemoveByKey():void
-        {
-            
-        }
-        
-        public function testSize():void
-        {
-            
-        }
-        
-        public function testToSource():void 
-        {
-            
-        }
-        
-        public function testToString():void 
-        {
-            
-        }
-                
-        public function testTotalSize():void 
-        {
-            
-        }
-        
-        public function testValues():void 
-        {
-                        
-        }
-            
-        public function testValueIterator():void 
-        {
-            
-        }
+//        
+//        public function testIterator():void 
+//        {
+//            
+//        }
+//
+//        public function testIteratorByKey():void
+//        {
+//            
+//        }
+//    
+//        public function testKeyIterator():void 
+//        {
+//            
+//        }       
+//        
+//        public function testPut():void
+//        {
+//            
+//        }   
+//        
+//        public function testPutAll():void
+//        {
+//            
+//        }
+//        
+//        public function testPutCollection():void 
+//        {
+//            
+//        }
+//        
+//        public function testRemove():void
+//        {
+//            
+//        }
+//        
+//        public function testRemoveByKey():void
+//        {
+//            
+//        }
+//        
+//        public function testSize():void
+//        {
+//            
+//        }
+//        
+//        public function testToSource():void 
+//        {
+//            
+//        }
+//        
+//        public function testToString():void 
+//        {
+//            
+//        }
+//                
+//        public function testTotalSize():void 
+//        {
+//            
+//        }
+//        
+//        public function testValues():void 
+//        {
+//                        
+//        }
+//            
+//        public function testValueIterator():void 
+//        {
+//            
+//        }
         
     }
 }

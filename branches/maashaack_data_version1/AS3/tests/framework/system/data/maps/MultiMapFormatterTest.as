@@ -33,54 +33,39 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.maps
+package system.data.maps 
 {
-    import system.data.Iterator;
-    import system.data.Map;
-    import system.data.iterators.ArrayIterator;
-    import system.formatters.Formattable;    
+    import buRRRn.ASTUce.framework.TestCase;                                    
 
-    /**
-     * Converts a Map to a custom string representation.
-     */
-    public class MapFormatter implements Formattable 
+    public class MultiMapFormatterTest extends TestCase 
     {
-            
-        /**
-         * Creates a new MapFormatter instance.
-         */
-        public function MapFormatter()
+
+        public function MultiMapFormatterTest( name:String = "" )
         {
-            //  
+            super( name );
         }
-            
-        /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
-         */
-        public function format( value:* = null ):String
+        
+        public function testFormat():void
         {
-            var m:Map = value as Map ;
-            if ( m == null ) 
-            {
-                return "" ;
-            }
-            var r:String = "{";
-            var vIterator:Iterator = new ArrayIterator( m.getValues() ) ;
-            var kIterator:Iterator = new ArrayIterator( m.getKeys()   ) ;
-            while( kIterator.hasNext() ) 
-            {
-                r += kIterator.next() + ":" + vIterator.next() ;
-                if ( kIterator.hasNext() ) 
-                {
-                    r += "," ;
-                }
-            }
-            r += "}" ;
-            return r ;
-        }
+            var result:String ;
+            
+            result = MultiMapFormatter.instance.format() ;
+            assertEquals(result, "", "1 - The MultiMapFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
+            
+            result = MultiMapFormatter.instance.format(new MultiHashMap()) ;   
+            assertEquals(result, "{}" , "2 - The MultiMapFormatter format method failed with an empty Map.") ;
+            
+            result = MultiMapFormatter.instance.format(new MultiHashMap(new HashMap(["key1"], ["value1"]))) ;   
+            assertEquals(result, "{key1:{value1}}" , "3 - The MultiMapFormatter format method failed with a Map whith one entry inside.") ;
+            
+            result = MultiMapFormatter.instance.format(new MultiHashMap(new HashMap(["key1", "key2"], ["value1", "value2"]))) ;   
+            assertTrue
+            (
+                result == "{key1:{value1},key2:{value2}}" || "{key2:{value2},key1:{value1}}" , 
+                "4 - The MultiMapFormatter format method failed with a Map whith two entries inside."
+            ) ;
+            
+        }         
+        
     }
 }
-
-

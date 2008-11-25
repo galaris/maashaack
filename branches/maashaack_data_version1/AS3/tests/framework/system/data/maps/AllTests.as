@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.maps
 {
-    import buRRRn.ASTUce.framework.*;                                
+    import buRRRn.ASTUce.framework.*;                                    
 
     public class AllTests
     {
@@ -45,12 +45,13 @@ package system.data.maps
         {
             var suite:TestSuite = new TestSuite("Maashaack data maps tests");
             
-            suite.addTestSuite( ArrayMapTest       ) ;
-            suite.addTestSuite( MapEntryTest       ) ; 
-            suite.addTestSuite( HashMapTest        ) ;            
-            suite.addTestSuite( MapFormatterTest   ) ;
-            suite.addTestSuite( MultiHashMapTest   ) ;
-            suite.addTestSuite( SortedArrayMapTest ) ;
+            suite.addTestSuite( ArrayMapTest          ) ;
+            suite.addTestSuite( MapEntryTest          ) ; 
+            suite.addTestSuite( HashMapTest           ) ;            
+            suite.addTestSuite( MapFormatterTest      ) ;
+            suite.addTestSuite( MultiHashMapTest      ) ;
+            suite.addTestSuite( MultiMapFormatterTest ) ;
+            suite.addTestSuite( SortedArrayMapTest    ) ;
                       
             return suite;
         }

@@ -37,22 +37,27 @@ package system.data.maps
 {
     import system.data.Iterator;
     import system.data.Map;
-    import system.data.iterators.ArrayIterator;
+    import system.data.MultiMap;
     import system.formatters.Formattable;    
 
     /**
-     * Converts a Map to a custom string representation.
+     * Converts a MultiMap to a custom string representation.
      */
-    public class MapFormatter implements Formattable 
+    public class MultiMapFormatter implements Formattable 
     {
             
         /**
-         * Creates a new MapFormatter instance.
+         * Creates a new MultiMapFormatter instance.
          */
-        public function MapFormatter()
+        public function MultiMapFormatter()
         {
             //  
         }
+        
+        /**
+         * The singleton reference of the MultiMapFormatter class.
+         */
+        public static const instance:MultiMapFormatter = new MultiMapFormatter() ;
             
         /**
          * Formats the specified value.
@@ -61,14 +66,14 @@ package system.data.maps
          */
         public function format( value:* = null ):String
         {
-            var m:Map = value as Map ;
+            var m:MultiMap = value as MultiMap ;
             if ( m == null ) 
             {
                 return "" ;
             }
             var r:String = "{";
-            var vIterator:Iterator = new ArrayIterator( m.getValues() ) ;
-            var kIterator:Iterator = new ArrayIterator( m.getKeys()   ) ;
+            var vIterator:Iterator = m.valueIterator() ;
+            var kIterator:Iterator = m.keyIterator() ;
             while( kIterator.hasNext() ) 
             {
                 r += kIterator.next() + ":" + vIterator.next() ;
