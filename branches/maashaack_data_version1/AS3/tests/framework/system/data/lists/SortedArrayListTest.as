@@ -35,7 +35,8 @@
 
 package system.data.lists 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;        
 
     public class SortedArrayListTest extends TestCase 
     {
@@ -47,7 +48,30 @@ package system.data.lists
         
         public function testConstructor():void
         {
-            //  
+            var list:ArrayList ;
+            
+            list = new SortedArrayList() ;
+            assertNotNull( list , "The SortedArrayList constructor failed." ) ;
+            ArrayAssert.assertEquals( list.toArray(), [], "01-02 - SortedArrayList constructor failed.") ;
+            
+            // initialize with an Array
+                        
+            list = new SortedArrayList([2,3,4]) ; 
+            assertNotNull(list, "02-01 - SortedArrayList constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [2,3,4], "02-02 - SortedArrayList constructor failed.") ;
+            
+            // initialize with a Collection
+            
+            list = new SortedArrayList( new SortedArrayList([2,3,4])) ; 
+            assertNotNull(list, "03-01 - SortedArrayList constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [2,3,4], "03-02 - SortedArrayList constructor failed.") ;
+            
+            // initialize with the capacity value
+            
+            list = new SortedArrayList( 3 ) ; 
+            assertNotNull(list, "04-01 - SortedArrayList constructor failed.") ;
+            ArrayAssert.assertEquals( list.toArray(), [undefined,undefined,undefined], "04-02 - SortedArrayList constructor failed.") ;            
+            
         }        
         
     }
