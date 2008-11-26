@@ -35,11 +35,8 @@
 
 package system.data.lists 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.TestCase;                
     
-    /**
-     * @author eKameleon
-     */
     public class LinkedListEntryTest extends TestCase 
     {
 
