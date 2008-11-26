@@ -112,9 +112,10 @@ package system.data.samples
             return "removeAt:" + id +",len:" + len ;
         }
         
-        public function removeRange(fromIndex:uint, toIndex:uint):void
+        public function removeRange(fromIndex:uint, toIndex:uint):*
         {
         	throw new Error("removeRange fromIndex:" + fromIndex + " toIndex:" + toIndex) ;
+        	return null ;
         }
         
         public function retainAll( c:Collection ):Boolean

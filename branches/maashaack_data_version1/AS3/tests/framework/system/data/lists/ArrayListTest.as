@@ -221,5 +221,63 @@ package system.data.lists
                                 
         }
         
+        public function testRemoveAt():void
+        {
+            var list:ArrayList ;
+            
+            list = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            
+            var count:int ;
+            
+            count = list.modCount ;
+            
+            ArrayAssert.assertEquals( list.removeAt(1) , ["item2"] , "01-01 - ArrayList removeAt method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "01-02 - ArrayList removeAt method failed."  ) ;
+            assertEquals( list.size()      , 4         , "01-03 - ArrayList removeAt method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item3","item4", "item5"] , "01-04 - ArrayList removeAt method failed." ) ;
+            
+            count = list.modCount ;
+            
+            ArrayAssert.assertEquals( list.removeAt(1,2) , ["item3","item4"] , "02-01 - ArrayList removeAt method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "02-02 - ArrayList removeAt method failed."  ) ;
+            assertEquals( list.size()      , 2         , "02-03 - ArrayList removeAt method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1", "item5"] , "02-04 - ArrayList removeAt method failed." ) ;
+            
+        }
+        
+        public function testRemoveRange():void
+        {
+            var list:ArrayList ;
+            var count:int ;
+            var result:* ;
+            
+            list   = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            count  = list.modCount ;
+            result = list.removeRange(1,1) ;
+            assertNull( result , "01-01 - ArrayList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count     , "01-02 - ArrayList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 5         , "01-03 - ArrayList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item2","item3","item4", "item5"] , "01-04 - ArrayList removeRange method failed." ) ;
+            
+            list   = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            count  = list.modCount ;
+            result = list.removeRange(1,2) ;
+            assertNotNull( result as Array             , "02-01 - ArrayList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "02-02 - ArrayList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 4         , "02-03 - ArrayList removeAt method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item2"] , "02-04 - ArrayList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item3","item4", "item5"] , "02-05 - ArrayList removeRange method failed." ) ;         
+
+            list   = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            count  = list.modCount ;
+            result = list.removeRange(1,3) ;
+            assertNotNull( result as Array             , "03-01 - ArrayList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "03-02 - ArrayList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 3         , "03-03 - ArrayList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item2","item3"] , "03-04 - ArrayList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item4", "item5"] , "03-05 - ArrayList removeRange method failed." ) ;    
+             
+        }
+        
     }
 }

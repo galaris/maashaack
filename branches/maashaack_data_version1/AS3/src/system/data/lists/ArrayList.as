@@ -178,32 +178,31 @@ package system.data.lists
          * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
          * @param id The index of the element or the first element to remove.
          * @param len The number of elements to remove (default 1).  
+         * @return The Array representation of all elements removed in the original list.
          */        
         public function removeAt(id:uint, len:int = 1):*
         {
         	_modCount ++ ;
         	len = len > 1 ? len : 1 ;
-            var d:uint = len - id ;
-            var old:* = _a.slice(id, d) ;
-            _a.splice(id, len);
+            var old:* = _a.splice(id, len);
             return old ; 
         }
         
         /**
-         * Removes from this list all the elements that are contained between the specific <code class="prettyprint">from</code> and the specific <code class="prettyprint">to</code> position in this list (optional operation).
-         * @param fromIndex The from index to remove elements in the list.
-         * @param toIndex The to index to remove elements in the list.
+         * Removes from this List all of the elements whose index is between fromIndex, inclusive and toIndex, exclusive. 
+         * <p>Shifts any succeeding elements to the left (reduces their index).</p> 
+         * <p>This call shortens the list by (toIndex - fromIndex) elements. (If toIndex==fromIndex, this operation has no effect.)</p>
+         * @param fromIndex The from index (inclusive) to remove elements in the list.
+         * @param toIndex The to index (exclusive) to remove elements in the list.
          */        
-        public function removeRange( fromIndex:uint , toIndex:uint ):void
+        public function removeRange( fromIndex:uint , toIndex:uint ):*
         {
-            _modCount ++ ;
-            var it:ListIterator = listIterator(fromIndex) ;
-            var l:int = toIndex - fromIndex ;
-            for (var i:int = 0 ; i<l ; i++) 
+            if ( fromIndex == toIndex )
             {
-                it.next() ; 
-                it.remove() ;
-            }        	
+            	return null ;
+            }
+            var len:int = toIndex - fromIndex ;
+            return removeAt( fromIndex , len ) ;
         }
         
         /**

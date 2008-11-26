@@ -73,11 +73,13 @@ package system.data
     	function removeAt( id:uint , len:int = 1 ):* ;
 
 		/**
-		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">from</code> and the specific <code class="prettyprint">to</code> position in this list (optional operation).
-		 * @param fromIndex The from index to remove elements in the list.
-		 * @param toIndex The to index to remove elements in the list.
+		 * Removes from this List all of the elements whose index is between fromIndex, inclusive and toIndex, exclusive. 
+         * <p>Shifts any succeeding elements to the left (reduces their index).</p> 
+         * <p>This call shortens the list by (toIndex - fromIndex) elements. (If toIndex==fromIndex, this operation has no effect.)</p>
+         * @param fromIndex The from index (inclusive) to remove elements in the list.
+         * @param toIndex The to index (exclusive) to remove elements in the list.
 		 */
-    	function removeRange( fromIndex:uint , toIndex:uint ):void ;
+    	function removeRange( fromIndex:uint , toIndex:uint ):* ;
 	
 		/**
 		 * Retains only the elements in this list that are contained in the specified collection (optional operation).
