@@ -123,7 +123,7 @@ package system.data.samples
             return true ; // TODO remove in the interface ?
         }
         
-        public function setAt(id:uint, o:*):*
+        public function set(index:uint, o:*):*
         {
             return null;
         }

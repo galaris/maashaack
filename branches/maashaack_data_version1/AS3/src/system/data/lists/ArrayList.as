@@ -35,15 +35,28 @@
 
 package system.data.lists 
 {
+    import system.Reflection;
     import system.data.Collection;
     import system.data.List;
     import system.data.ListIterator;
     import system.data.collections.ArrayCollection;
-    import system.data.errors.ConcurrentModificationError;
     import system.data.iterators.ArrayListIterator;    
 
     /**
      * Resizable-array implementation of the List interface. Implements all optional list operations, and permits all elements, including null.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.data.lists.ArrayList ;
+     * 
+     * var list:ArrayList = new ArrayList() ;
+     * 
+     * list.add("item1") ;
+     * list.add("item3") ;
+     * list.addAt( 1 , "item2" ) ;
+     *  
+     * trace( list ) ; // {item1,item2,item3}
+     * trace( list.toSource() ) ; // new system.data.lists.ArrayList(["item1","item2","item3"])
+     * </pre>
      */
     public class ArrayList extends ArrayCollection implements List
     {
@@ -53,9 +66,9 @@ package system.data.lists
          * <p><b>Usage </b></p>
          * <pre class="prettyprint">
          *  new ArrayList() ;
-         *  new ArrayList(ar:Array) ;
-         *  new ArrayList(it:Iterable) ;
-         *  new ArrayList(co:Collection) ;
+         *  new ArrayList( ar:Array ) ;
+         *  new ArrayList( it:Iterable ) ;
+         *  new ArrayList( co:Collection ) ;
          *  new ArrayList( capacity:uint ) ;
          * </pre>
          * @param init An optional Array or Collection or Iterable object to fill the collection. 
@@ -114,7 +127,7 @@ package system.data.lists
         {
             if ( id > size() ) 
             {
-                throw new RangeError( "ArrayList.addAt method failed, the specified index '" + id + "' is out of bounds.") ;
+                throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + id + "' is out of bounds.") ;
             }
             _modCount++ ;
             _a.splice(id, 0, o) ;        	
@@ -207,40 +220,71 @@ package system.data.lists
         
         /**
          * Replaces the element at the specified position in this list with the specified element (optional operation).
-         * @param id index of element to replace.
-         * @param o element to be stored at the specified position.
-         * @return the element previously at the specified position.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.lists.ArrayList ;
+         * 
+         * var list:ArrayList = new ArrayList( [ "item1", "item2", "item3", "item4" ] ) ;
+         * 
+         * list.set(0, "item") ;
+         * trace(list) ;
+         * // {item,item2,item3,item4}
+         * 
+         * list.set(1, undefined) ;
+         * trace(list) ;
+         * // {item,item3,item4}
+         * 
+         * list.set( 5 , "item" ) ;
+         * trace(list) ;
+         * // RangeError: The ArrayList.set() method failed, the index '5' argument is out of the size limit.
+         * </pre>
+         * @param index index of element to replace.
+         * @param o element to be stored at the specified position or if o is <code class="prettyprint">undefined</code> the stored value is remove (like with the removeAt() method).
+         * @return the element previously at the specified position or undefined.
          */        
-        public function setAt(id:uint, o:*):*
+        public function set( index:uint , o:*):*
         {
-        	var i:ListIterator = listIterator(id) ;
-            try 
+        	if ( index > size() - 1 )
+        	{
+        		throw new RangeError( "The " + Reflection.getClassName(this) + ".set() method failed, the index '" + index + "' argument is out of the size limit." ) ;
+        	}
+        	var old:* = _a[index] ;
+        	if ( old === undefined )
+        	{
+        		return undefined ;
+        	}
+            if ( o === undefined )
             {
-                var old:* = i.next() ;
-                i.set(o) ;
-                _modCount++ ;
-                return old ;
+            	removeAt( index ) ;
             }
-            catch( e:Error ) 
+            else
             {
-                throw new ConcurrentModificationError( "ListIterator modification failed in the setAt() method.") ;
-            }        	
+            	_modCount++ ;
+                _a[index] = o ;	
+            }
+            return old ;
         }
           
         /**
          * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          */        
-        public function subList(fromIndex:uint, toIndex:uint):List
+        public function subList( fromIndex:uint , toIndex:uint ):List
         {
-        	var l:List = new ArrayList() ;
-            var it:ListIterator = listIterator() ;
-            var d:Number = (toIndex - fromIndex) + 1 ; 
-            for ( var i:int = fromIndex ; i<= d ; i++ ) 
+            if ( fromIndex > size()  )
             {
-                l.add(it.next()) ;
+                throw new RangeError( "The " + Reflection.getClassName(this) + ".subList() method failed, the fromIndex '" + fromIndex + "' argument is out of the size limit." ) ;
+            }  
+            else if ( toIndex > size() )
+            {
+                throw new RangeError( "The " + Reflection.getClassName(this) + ".subList() method failed, the toIndex '" + toIndex + "' argument is out of the size limit." ) ;
             }
-        	return l ;
+            var ar:Array = [] ;
+            for ( var i:int = fromIndex ; i < toIndex ; i++ ) 
+            {
+                ar.push( get(i) ) ;
+            }
+            return new ArrayList( ar ) ;
         }        
      
         /**

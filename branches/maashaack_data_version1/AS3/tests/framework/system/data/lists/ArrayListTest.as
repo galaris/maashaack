@@ -250,7 +250,7 @@ package system.data.lists
             var list:ArrayList ;
             var count:int ;
             var result:* ;
-            
+                        
             list   = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
             count  = list.modCount ;
             result = list.removeRange(1,1) ;
@@ -267,7 +267,7 @@ package system.data.lists
             assertEquals( list.size()      , 4         , "02-03 - ArrayList removeAt method failed." ) ;
             ArrayAssert.assertEquals( result           , ["item2"] , "02-04 - ArrayList removeRange method failed." ) ;
             ArrayAssert.assertEquals( list.toArray()   , ["item1","item3","item4", "item5"] , "02-05 - ArrayList removeRange method failed." ) ;         
-
+            
             list   = new ArrayList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
             count  = list.modCount ;
             result = list.removeRange(1,3) ;
@@ -276,8 +276,125 @@ package system.data.lists
             assertEquals( list.size()      , 3         , "03-03 - ArrayList removeRange method failed." ) ;
             ArrayAssert.assertEquals( result           , ["item2","item3"] , "03-04 - ArrayList removeRange method failed." ) ;
             ArrayAssert.assertEquals( list.toArray()   , ["item1","item4", "item5"] , "03-05 - ArrayList removeRange method failed." ) ;    
-             
         }
+        
+        public function testSet():void
+        {
+        	var count:int ; 
+            var list:ArrayList = new ArrayList( [ "item1", "item2", "item3", "item4" ] ) ;
+            
+            count = list.modCount ;
+            assertEquals( list.set(0, "hello") , "item1" , "01-01 - ArrayList set method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray() , ["hello","item2","item3","item4"] , "01-02 - ArrayList set method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "01-03 - ArrayList set method failed."  ) ;
+            
+            // set use the removeAt method
+            
+            count = list.modCount ;
+            assertEquals( list.set(1, undefined) , "item2" , "02-01 - ArrayList set method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray() , ["hello","item3","item4"] , "02-02 - ArrayList set method failed." ) ;
+            assertEquals( list.modCount , count + 1 , "01-03 - ArrayList set method failed."  ) ;
+            
+            try
+            {
+                list.set( 3 , "hello" ) ;
+                fail("03-01 - ArrayList set method failed, must throw a RangeError.") ;
+            }
+            catch( e:Error )
+            {
+                
+                assertTrue
+                ( 
+                    e is RangeError , 
+                    "03-02 - ArrayList set method failed, must throw a RangeError."
+                ) ;
+                
+                assertEquals
+                ( 
+                    e.message , 
+                    "The ArrayList.set() method failed, the index '3' argument is out of the size limit." , 
+                    "03-02 - ArrayList set method failed."
+                ) ;
+                
+            }
+
+        }
+
+        public function testSubList():void
+        {
+            var sub:List ;
+            var list:ArrayList = new ArrayList( [ "item1", "item2", "item3", "item4" ] ) ;
+            
+            sub = list.subList( 0, 0 ) as ArrayList ;
+            assertNotNull(sub, "01-01 - ArrayList.subList method failed.") ;
+            ArrayAssert.assertEquals( sub.toArray() , [] , "01-02 - ArrayList.subList method failed." ) ;
+
+            sub = list.subList( 0, 1 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1"] , "02 - ArrayList.subList method failed." ) ;
+            
+            sub = list.subList( 0, 2 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1","item2"] , "03 - ArrayList.subList method failed." ) ;
+
+            sub = list.subList( 0, 3 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1", "item2","item3"] , "04 - ArrayList.subList method failed." ) ;
+
+            sub = list.subList( 0, 4 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1", "item2","item3","item4"] , "05 - ArrayList.subList method failed." ) ;
+
+            sub = list.subList( 1, 3 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item2","item3"] , "06 - ArrayList.subList method failed." ) ;
+
+            sub = list.subList( 4, 4 ) as ArrayList ;
+            ArrayAssert.assertEquals( sub.toArray() , [] , "07 - ArrayList.subList method failed." ) ;
+
+            try
+            {
+                sub = list.subList( 5, 5 ) as ArrayList ;
+                fail("08-01 - ArrayList subList method failed, must throw a RangeError.") ;
+            }
+            catch( e:Error )
+            {
+                
+                assertTrue
+                ( 
+                    e is RangeError , 
+                    "08-02 - ArrayList subList method failed, must throw a RangeError."
+                ) ;
+                
+                assertEquals
+                ( 
+                    e.message , 
+                    "The ArrayList.subList() method failed, the fromIndex '5' argument is out of the size limit." , 
+                    "08-03 - ArrayList set method failed."
+                ) ;
+                
+            }
+
+            try
+            {
+                sub = list.subList( 2, 5 ) as ArrayList ;
+                fail("09-01 - ArrayList subList method failed, must throw a RangeError.") ;
+            }
+            catch( e:Error )
+            {
+                
+                assertTrue
+                ( 
+                    e is RangeError , 
+                    "09-02 - ArrayList subList method failed, must throw a RangeError."
+                ) ;
+                
+                assertEquals
+                ( 
+                    e.message , 
+                    "The ArrayList.subList() method failed, the toIndex '5' argument is out of the size limit." , 
+                    "09-03 - ArrayList set method failed."
+                ) ;
+                
+            }
+
+        }
+        
         
     }
 }

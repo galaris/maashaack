@@ -263,7 +263,7 @@ package system.data.iterators
             checkForComodification() ;
             try 
             {
-                _list.setAt( _listast , o ) ;
+                _list.set( _listast , o ) ;
                 _expectedModCount = _list.modCount ;
             }
             catch ( e:Error ) 

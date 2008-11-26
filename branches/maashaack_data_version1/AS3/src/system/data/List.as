@@ -92,7 +92,7 @@ package system.data
 	     * @param o element to be stored at the specified position.
 	     * @return the element previously at the specified position.
 		 */
-    	function setAt( id:uint , o:* ):* ;
+    	function set( index:uint , o:* ):* ;
 	
 		/**
 		 * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
