@@ -51,7 +51,7 @@ package system.data
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
          */
-        function addAt( id:uint , o:* ):void ;
+        function addAt( index:uint , o:* ):void ;
             
     	/**
 		 * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.

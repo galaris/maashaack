@@ -123,14 +123,14 @@ package system.data.lists
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
          */        
-        public function addAt(id:uint, o:*):void
+        public function addAt( index:uint, o:*):void
         {
-            if ( id > size() ) 
+            if ( index > size() ) 
             {
-                throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + id + "' is out of bounds.") ;
+                throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + index + "' is out of bounds.") ;
             }
             _modCount++ ;
-            _a.splice(id, 0, o) ;        	
+            _a.splice( index , 0 , o ) ;        	
         }
         
         /**

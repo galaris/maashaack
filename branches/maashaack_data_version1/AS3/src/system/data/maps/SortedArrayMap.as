@@ -188,7 +188,7 @@ package system.data.maps
         }    
     
         /**
-         * Indicates the options to sort the elements in the list.
+         * Indicates the options to sort the elements in the Map.
          */
         public function get options():uint
         {

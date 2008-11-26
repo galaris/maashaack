@@ -52,9 +52,9 @@ package system.data.samples
         	return true ; 
         }
 
-        public function addAt(id:uint, o:*):void
+        public function addAt( index:uint , o:*):void
         {
-        	throw new Error("addAt id:" + id + " o:" + o) ;
+        	throw new Error("addAt id:" + index + " o:" + o) ;
         }
         
         public function clear():void
