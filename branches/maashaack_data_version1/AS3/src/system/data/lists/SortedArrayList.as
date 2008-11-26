@@ -107,7 +107,7 @@ package system.data.lists
          */
         public override function addAll( c:Collection ):Boolean 
         {
-            var b:Boolean =  super.addAll( c ) ;
+            var b:Boolean = super.addAll( c ) ;
             _sort() ;
             return b ;
         }         

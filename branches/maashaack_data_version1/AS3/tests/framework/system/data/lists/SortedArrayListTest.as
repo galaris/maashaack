@@ -48,7 +48,7 @@ package system.data.lists
         
         public function testConstructor():void
         {
-            var list:ArrayList ;
+            var list:SortedArrayList ;
             
             list = new SortedArrayList() ;
             assertNotNull( list , "The SortedArrayList constructor failed." ) ;
