@@ -171,6 +171,35 @@ package system.data.lists
         
         /**
          * Returns a ListIterator of the elements in this list (in proper sequence).
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.lists.ArrayList ;
+         * import system.data.ListIterator ;
+         * 
+         * var a:Array = ["item0", "item1", "item2", "item3", "item4"] ;
+         * 
+         * var list:ArrayList = new ArrayList( a ) ;
+         * var it:ListIterator = list.listIterator(2) ;
+         * 
+         * trace ("---- ListIterator hasPrevious/previous") ;
+         * 
+         * while(it.hasNext())
+         * {
+         *     trace(">> " + it.next() + " : " + it.key()) ;
+         *     it.remove() ;
+         * }
+         * trace ("next : " + list) ;
+         * 
+         * trace ("---- ListIterator hasPrevious/previous") ;
+         * 
+         * var cpt:uint = list.size() ;
+         * while(it.hasPrevious())
+         * {
+         *     it.previous() ;
+         *     it.set("element" +  cpt--) ;
+         * }
+         * trace ("list : " + list) ;
+         * </pre>
          * @return a ListIterator of the elements in this list (in proper sequence).
          */
         public function listIterator( position:uint=0 ):ListIterator 
