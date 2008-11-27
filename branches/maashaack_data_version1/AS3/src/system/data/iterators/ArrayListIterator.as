@@ -54,14 +54,17 @@ package system.data.iterators
         
         /**
          * Creates a new ArrayListIterator instance.
+         * @param li The ArrayList reference of this Iterator.
+         * @param position The optional position of the iterator (default 0).
+         * @throws ArgumentError If the 'list' argument is 'null' or 'undefined'.
          */
-        public function ArrayListIterator( li:ArrayList , position:uint = 0 )
+        public function ArrayListIterator( list:ArrayList , position:uint = 0 )
         {
-            if ( li == null ) 
+            if ( list == null ) 
             {
-                throw new ArgumentError( "ListIterator.constructor, the 'list' argument in the constructor not must be 'null' or 'undefined'.") ;
+                throw new ArgumentError( "ListIterator constructor failed, the 'list' argument not must be 'null' or 'undefined'.") ;
             }
-            _list             = li ;
+            _list             = list ;
             _key              = 0 ;
             _listast          = -1 ;
             _expectedModCount = _list.modCount ;  

@@ -36,7 +36,13 @@
 package system.data.lists 
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;        
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Comparator;
+    import system.Sortable;
+    import system.comparators.AlphaComparator;
+    import system.comparators.NumberComparator;
+    import system.comparators.StringComparator;    
 
     public class SortedArrayListTest extends TestCase 
     {
@@ -72,7 +78,88 @@ package system.data.lists
             assertNotNull(list, "04-01 - SortedArrayList constructor failed.") ;
             ArrayAssert.assertEquals( list.toArray(), [undefined,undefined,undefined], "04-02 - SortedArrayList constructor failed.") ;            
             
-        }        
+            // initialize with comparator and options
+            
+            var comp:Comparator = new NumberComparator() ;
+            
+            list = new SortedArrayList( [4,2,3] , comp , 0 ) ; 
+            
+            assertNotNull( list                      , "05-01 - SortedArrayList constructor failed." ) ;
+            assertEquals( list.comparator , comp     , "05-02 - SortedArrayList constructor failed." ) ;
+            assertEquals( list.options    , 0        , "05-03 - SortedArrayList constructor failed." ) ;
+            ArrayAssert.assertEquals( list.toArray() , [2,3,4], "05-04 - SortedArrayList constructor failed." ) ;
+             
+        } 
+
+        public function testInterface():void
+        {
+            var list:SortedArrayList = new SortedArrayList() ;
+            assertTrue( list is Sortable , "SortedArrayList must implement the Sortable interface" ) ;
+        }      
+
+        public function testComparator():void
+        {
+            var s:StringComparator = new StringComparator() ;
+            var l:SortedArrayList = new SortedArrayList() ;
+            
+            l.comparator = s ;
+            assertEquals( l.comparator , s , "01 - The SortedArrayList comparator property failed." ) ;
+            
+            l.comparator = null ;
+            assertNull( l.comparator , "02 - The SortedArrayMap SortedArrayList property failed." ) ;
+        }
+        
+        public function testOptions():void
+        {
+            var l:SortedArrayList = new SortedArrayList() ;
+            l.options = 0 ;
+            assertEquals( l.options , 0 , "01 - The SortedArrayList options property failed." ) ;
+            
+            l.options = Array.DESCENDING ;
+            assertEquals( l.options , Array.DESCENDING , "02 - The SortedArrayList options property failed." ) ;
+        }                
+
+        public function testSort():void
+        {
+            var list:SortedArrayList ;
+            
+            list = new SortedArrayList( ["pink" , "red" , "blue" , "black" ] ) ;
+            list.sort( new AlphaComparator() ) ;
+            assertEquals ( list.toString() , "{black,blue,pink,red}" , "01 - The SortedArrayList sort() method failed." ) ;
+            
+            list = new SortedArrayList( [ 4 ,3 , 24, 12 ] ) ;
+            list.comparator = new NumberComparator() ; 
+            assertEquals ( list.toString() , "{3,4,12,24}" , "02 - The SortedArrayList sort() method failed." ) ;
+            
+        }         
+        
+        public function testSortOn():void
+        {
+            var list:SortedArrayList = new SortedArrayList() ;
+            
+            list.add( { name:'name4' } ) ;
+            list.add( { name:'name1' } ) ;
+            list.add( { name:'name5' } ) ;
+            list.add( { name:'name2' } ) ;
+            list.add( { name:'name3' } ) ;
+            
+            list.sortOn("name", Array.DESCENDING) ;
+
+            assertEquals( (list.get(0)).name , "name5" , "01-01 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(1)).name , "name4" , "01-02 - The SortedArrayList sortOn() method failed." ) ;            
+            assertEquals( (list.get(2)).name , "name3" , "01-03 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(3)).name , "name2" , "01-04 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(4)).name , "name1" , "01-05 - The SortedArrayList sortOn() method failed." ) ;
+            
+            list.sortOn("name") ;
+
+            assertEquals( (list.get(0)).name , "name1" , "02-01 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(1)).name , "name2" , "02-02 - The SortedArrayList sortOn() method failed." ) ;            
+            assertEquals( (list.get(2)).name , "name3" , "02-03 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(3)).name , "name4" , "02-04 - The SortedArrayList sortOn() method failed." ) ;
+            assertEquals( (list.get(4)).name , "name5" , "02-05 - The SortedArrayList sortOn() method failed." ) ;
+            
+        } 
         
     }
 }

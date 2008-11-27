@@ -50,11 +50,27 @@ package system.data.iterators
         public function testConstructor():void
         {
             
-            var li:ArrayList         = new ArrayList() ;
-            var it:ArrayListIterator = new ArrayListIterator( li ) ;
+            var li:ArrayList         = new ArrayList([1,2,3,4]) ;
+            var it:ArrayListIterator ;
             
-            assertNotNull( it , "The ArrayListIterator constructor failed." ) ;
+            it = new ArrayListIterator( li ) ;
+            assertNotNull( it , "01 - The ArrayListIterator constructor failed." ) ;
             
+            it = new ArrayListIterator( li , 2 ) ;
+            assertNotNull( it , "02-01 - The ArrayListIterator constructor failed." ) ;
+            assertEquals( it.key() , 2 , "02-02 - The ArrayListIterator constructor failed." ) ;
+            
+            try
+            {
+            	it = new ArrayListIterator( null ) ;
+            	fail( "03-01 - The ArrayListIterator constructor failed." ) ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is ArgumentError , "03-02 - The ArrayListIterator constructor failed." ) ;
+                assertEquals( e.message , "ListIterator constructor failed, the 'list' argument not must be 'null' or 'undefined'." , "03-03 - The ArrayListIterator constructor failed." ) ;	
+            }
+                        
         }        
         
     }

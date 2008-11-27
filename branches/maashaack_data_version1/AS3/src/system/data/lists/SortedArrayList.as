@@ -48,15 +48,45 @@ package system.data.lists
         
         /**
          * Creates a new SortedArrayList instance.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.lists.SortedArrayList ;
+         * 
+         * import system.comparators.AlphaComparator ;
+         * import system.comparators.NumberComparator ;
+         * 
+         * trace( "-----" ) ;
+         * 
+         * var list:SortedArrayList ;
+         * 
+         * list = new SortedArrayList( [ 4 , 3 , 12, 24 ] ) ;
+         * 
+         * trace( list ) ;
+         * 
+         * list.comparator = new NumberComparator() ;
+         * 
+         * trace( list ) ;
+         * 
+         * trace( "-----" ) ;
+         * 
+         * list = new SortedArrayList( ["pink" , "red" , "blue" , "black" ] ) ;
+         * 
+         * trace( list ) ;
+         * 
+         * list.sort( new AlphaComparator() ) ;
+         * 
+         * trace( list ) ;
+         * </pre>
          * @param init An optional Array or Collection or Iterable object to fill the collection. This parameter can be an uint value to determinates the default capacity of the list.
          * @param comp The Comparator object used in the map to sort the entries.
          * @param opts The options to sort the elements in the list.
          */
         public function SortedArrayList( init:* = null , comp:Comparator = null , opts:uint = 0 )
         {
+            _comparator = comp ;
+            _options    = opts ;            
             super( init );
-            comparator = comp ;
-            options    = opts ;            
+            _sort() ;            
         }
         
         /**
@@ -73,6 +103,7 @@ package system.data.lists
         public function set comparator( comp:Comparator ):void 
         {
             _comparator = comp ;
+            _sort() ;
         }
         
         /**
@@ -89,6 +120,7 @@ package system.data.lists
         public function set options( o:uint ):void 
         {
             _options = o ;
+            _sort() ;
         }
         
         /**
@@ -135,7 +167,10 @@ package system.data.lists
          */
         public function sort( compare:* = null , opts:uint = 0 ):Array  
         {
-            if ( compare == null) return null ;
+            if ( compare == null) 
+            {
+            	return null ;
+            }
             var f:Function ;
             if (compare is Comparator) 
             {
@@ -179,7 +214,7 @@ package system.data.lists
          */
         private function _sort():void 
         {
-            sort( _comparator.compare , _options) ;
+            sort( _comparator, _options) ;
         }        
         
     }
