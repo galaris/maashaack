@@ -396,7 +396,7 @@ package system.data.lists
          * Returns the element at the specified position in this list.
          * @param index index of element to return.
          * @return the element at the specified position in this list.  
-         * @throws IndexOutOfBoundsException if the specified index is out of range.
+         * @throws NoSuchElementError No value exist at the specified index.
          */
         public function get( key :* ) :*
         {
@@ -407,7 +407,7 @@ package system.data.lists
             } 
             catch( e:NoSuchElementError ) 
             {
-                throw new NoSuchElementError("LinkedList.get() method failed, index:" + key ) ;
+                throw new NoSuchElementError("LinkedList.get() no value exist at " + key ) ;
             }
         }
         
@@ -420,7 +420,7 @@ package system.data.lists
         {
             if (_size == 0)
             {
-                throw new NoSuchElementError("LinkedList.getFirstList() method failed, the list is empty.") ;    
+                throw new NoSuchElementError("LinkedList.getFirst() method failed, the list is empty.") ;    
             }
             return _header.next.element ;
         }
@@ -454,9 +454,9 @@ package system.data.lists
          * @param fromIndex the index to begin the search in the collection.
          * @return the index of the object or -1 if the object isn't find in the collection.
          */
-        public function indexOf(o:*, fromIndex:uint=0):int
+        public function indexOf( o:*, fromIndex:uint = 0 ):int
         {
-            var index:int = 0 ;
+            var index:int ;
             var e:LinkedListEntry ;
             if ( o == null ) 
             {
@@ -655,7 +655,7 @@ package system.data.lists
          */
         public function removeAll( c:Collection ):Boolean 
         {
-            if (c.size() > 0)
+            if ( c != null && c.size() > 0)
             {
                 var b:Boolean ;
                 var result:Boolean = true ;

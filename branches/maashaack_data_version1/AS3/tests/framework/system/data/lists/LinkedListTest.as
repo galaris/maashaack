@@ -39,9 +39,12 @@ package system.data.lists
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Equatable;
+    import system.data.Iterator;
     import system.data.List;
+    import system.data.ListIterator;
     import system.data.Queue;
     import system.data.collections.ArrayCollection;
+    import system.data.errors.NoSuchElementError;
     import system.data.maps.ArrayMap;
     import system.data.sets.HashSet;    
 
@@ -247,5 +250,247 @@ package system.data.lists
             assertEquals ( l.size() , 2, "03 - LinkedList equals failed." ) ;
         }
         
+        public function testGet():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            
+            assertEquals ( l.get(0), "item1" , "01 - LinkedList get failed.") ;
+            assertEquals ( l.get(1), "item2" , "02 - LinkedList get failed.") ;
+            
+            try
+            {
+            	l.get(2) ;
+            	fail("03-01 - LinkedList get failed.") ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is NoSuchElementError , "03-02 - LinkedList get failed.") ;
+            	assertEquals( e.message , "LinkedList.get() no value exist at 2" , "03-03 - LinkedList get failed.") ;
+            }
+            
+        }
+        
+        public function testGetFirst():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            
+            assertEquals ( l.getFirst(), "item1" , "01 - LinkedList getFirst failed.") ;
+            
+            l.clear() ;
+            
+            try
+            {
+                l.getFirst() ;
+                fail("02-01 - LinkedList getFirst failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is NoSuchElementError , "02-02 - LinkedList getFirst failed.") ;
+                assertEquals( e.message , "LinkedList.getFirst() method failed, the list is empty." , "02-03 - LinkedList getFirst failed.") ;
+            }
+        }
+        
+        public function testGetHeader():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            var e:LinkedListEntry = l.getHeader() ;
+            
+            assertNotNull( e , "01 - LinkedList getHeader failed." ) ;
+            
+            assertNull( e.element , "02 - LinkedList getHeader failed." ) ;
+            
+            assertNotNull( e.previous , "03-01 - LinkedList getHeader failed." ) ;
+            assertEquals( e.previous.element , "item2", "03-02 - LinkedList getHeader failed." ) ;
+            
+            assertNotNull( e.next     , "04-01 - LinkedList getHeader failed." ) ;
+            assertEquals( e.next.element , "item1", "04-02 - LinkedList getHeader failed." ) ;
+        }
+        
+        public function testGetLast():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            
+            assertEquals ( l.getLast(), "item2" , "01 - LinkedList getLast failed.") ;
+            
+            l.clear() ;
+            
+            try
+            {
+                l.getLast() ;
+                fail("02-01 - LinkedList get failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is NoSuchElementError , "02-02 - LinkedList getLast failed.") ;
+                assertEquals( e.message , "LinkedList.getLast() method failed, the list is empty." , "02-03 - LinkedList getLast failed.") ;
+            }
+        }
+         
+        public function testIndexOf():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            
+            assertEquals ( l.indexOf("item2"), 1 , "01 - LinkedList indexOf failed.") ;        	
+            assertEquals ( l.indexOf("item4"), -1 , "02 - LinkedList indexOf failed.") ;
+            
+            // TODO finalize the method and test it with the fromIndex argument !!! 	
+        }         
+
+        public function testIsEmpty():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2"]) ;
+            assertFalse ( l.isEmpty() , "01 - LinkedList isEmpty failed.") ;
+            l.clear() ;
+            assertTrue ( l.isEmpty() , "02 - LinkedList isEmpty failed.") ;
+        }
+        
+        public function testIterator():void 
+        {
+            var it:Iterator ;
+            
+            var l:LinkedList = new LinkedList() ;
+            
+            it = l.iterator() ;
+            assertFalse( it.hasNext() , "01 - LinkedList iterator failed.") ;
+            
+            l.add("item1") ;
+            it = l.iterator() ;
+            assertTrue( it.hasNext() , "02 - LinkedList iterator failed.") ;
+            assertEquals( it.next() , "item1", "03 - LinkedList iterator failed.") ;
+            assertFalse( it.hasNext() , "04 - LinkedList iterator failed.") ;
+        }
+        
+        public function testLastIndexOf():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3","item2","item4" ]) ;
+            
+            assertEquals ( l.lastIndexOf("item2"), 3 , "01 - LinkedList lastIndexOf failed.") ;         
+            assertEquals ( l.lastIndexOf("item5"), -1 , "02 - LinkedList lastIndexOf failed.") ;
+            
+            // TODO finalize the method and test it with the fromIndex argument !!!     
+        }  
+        
+        public function testListIterator():void
+        {
+             var it:ListIterator ;
+            
+            var l:LinkedList = new LinkedList() ;
+            
+            it = l.listIterator() ;
+            assertFalse( it.hasNext() , "01 - LinkedList listIterator failed.") ;
+            
+            l.add("item1") ;
+            
+            it = l.listIterator() ;
+            assertTrue( it.hasNext() , "02-01 - LinkedList listIterator failed.") ;
+            assertEquals( it.next() , "item1", "02-02 - LinkedList listIterator failed.") ;
+            assertFalse( it.hasNext() , "02-03 - LinkedList listIterator failed.") ;
+            
+            assertTrue( it.hasPrevious() , "03-01 - LinkedList listIterator failed.") ;
+            assertEquals( it.previous() , "item1", "03-02 - LinkedList listIterator failed.") ;
+            
+            l.add("item2") ;
+            l.add("item3") ;
+            
+            it = l.listIterator(2) ;         
+            assertTrue( it.hasPrevious() , "04-01 - LinkedList listIterator failed.") ;
+            assertEquals( it.previous() , "item2", "04-02 - LinkedList listIterator failed.") ;
+            
+            // TODO finalize all test of the LinkedListIterator class
+            
+        }
+        
+        public function testPeek():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3"]) ;
+            assertEquals( l.peek(), "item1", "01 - LinkedList peek failed." ) ;
+            assertEquals( l.size(), 3, "02 - LinkedList peek failed." ) ;
+        }
+        
+        public function testPoll():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3"]) ;
+            assertEquals( l.poll(), "item1", "01 - LinkedList poll failed." ) ;
+            assertEquals( l.size(), 2, "02 - LinkedList poll failed." ) ;
+        } 
+        
+        public function testRemove():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3"]) ;
+            assertTrue( l.remove("item2"), "01 - LinkedList remove failed." ) ;
+            assertEquals( l.size(), 2, "02 - LinkedList remove failed." ) ;
+            
+            // TODO : test Equatable object to remove and null object
+        }         
+     
+        public function testRemoveAll():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3"]) ;
+            
+            assertFalse( l.removeAll( null ) , "01 - LinkedList removeAll failed." ) ;
+            assertTrue( l.removeAll( new ArrayCollection(["item1", "item2"] ) ) , "02 - LinkedList removeAll failed." ) ;
+            assertEquals( l.size(), 1, "03 - LinkedList removeAll failed." ) ;     
+        } 
+        
+//        public function testRemoveAt():void
+//        {
+//        	
+//        }
+//        
+//        public function testRemoveEntry():void
+//        {
+//        	
+//        }
+//        
+//        public function testRemoveFirst():void
+//        {
+//        	
+//        }
+//        
+//        public function testRemoveLast():void
+//        {
+//        	
+//        }
+//        
+//        public function testRemoveRange():void
+//        {
+//        	
+//        }
+//        
+//        public function testRetainAll():void
+//        {
+//        	
+//        }
+//        
+//        public function testSet():void
+//        {
+//        	
+//        }
+//        
+//        public function testSize():void
+//        {
+//        	
+//        }
+//        
+//        public function testSubList():void
+//        {
+//        	
+//        }
+//        
+//        public function testToArray():void
+//        {
+//        	
+//        }
+//        
+//        public function testToSource():void
+//        {
+//        	
+//        }
+//        
+//        public function testToString():void
+//        {
+//        	
+//        }
+                
     }
 }
