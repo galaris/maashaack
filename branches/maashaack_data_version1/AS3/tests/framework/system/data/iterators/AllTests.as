@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.iterators
 {
-    import buRRRn.ASTUce.framework.*;                                    
+    import buRRRn.ASTUce.framework.*;                                        
 
     public class AllTests
     {
@@ -48,6 +48,7 @@ package system.data.iterators
             suite.addTestSuite(ArrayIteratorTest) ;
             suite.addTestSuite(ArrayListIteratorTest) ;
             suite.addTestSuite(IterableFormatterTest) ;
+            suite.addTestSuite(LinkedListIteratorTest) ;
             suite.addTestSuite(MapIteratorTest) ;
             suite.addTestSuite(ObjectIteratorTest) ;
             suite.addTestSuite(PageByPageIteratorTest) ;

@@ -33,36 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.lists 
+package system.data.iterators 
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Equatable;
-    import system.data.List;
-    import system.data.Queue;    
+    import system.data.lists.LinkedList;    
 
-    public class LinkedListTest extends TestCase 
+    public class LinkedListIteratorTest extends TestCase 
     {
 
-        public function LinkedListTest(name:String = "")
+        public function LinkedListIteratorTest(name:String = "")
         {
-            super( name );
+            super(name);
         }
         
         public function testConstructor():void
         {
-            var list:LinkedList = new LinkedList() ;
-            assertNotNull( list , "LinkedList constructor failed.");
-        }
-        
-        public function testInterface():void
-        {
-            var list:LinkedList = new LinkedList() ;
             
-            assertTrue( list is Equatable , "01 - LinkedList must implement the Equatable interface.");
-            assertTrue( list is List      , "02 - LinkedList must implement the List interface.");
-            assertTrue( list is Queue     , "03 - LinkedList must implement the Queue interface.");
-        }        
+            var li:LinkedList         = new LinkedList() ;
+            var it:LinkedListIterator ;
+            
+            it = new LinkedListIterator( li ) ;
+            assertNotNull( it , "01 - The ArrayListIterator constructor failed." ) ;
+            
+                        
+        }             
         
     }
 }

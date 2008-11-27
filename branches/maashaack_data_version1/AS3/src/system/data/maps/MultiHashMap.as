@@ -359,8 +359,7 @@ package system.data.maps
          */
         public function values():Collection 
         {
-            var ar:Array = getValues() ;
-            return new ArrayCollection(ar) ;
+            return new ArrayCollection( getValues() ) ;
         }
     
         /**
