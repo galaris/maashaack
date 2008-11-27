@@ -38,17 +38,19 @@ package system.data.lists
     import system.Equatable;
     import system.Reflection;
     import system.data.Collection;
+    import system.data.Iterable;
     import system.data.Iterator;
     import system.data.List;
     import system.data.ListIterator;
     import system.data.Queue;
     import system.data.collections.formatter;
     import system.data.errors.NoSuchElementError;
+    import system.data.iterators.ArrayIterator;
     import system.data.iterators.LinkedListIterator;
     import system.serializers.eden.BuiltinSerializer;    
 
     /**
-     *  Linked list implementation of the List and Queue interface. 
+     * Linked list implementation of the List and Queue interface. 
      * <p>Implements all optional list operations, and permits all elements (including null).</p>
      * <p>In addition to implementing the List interface, the <code class="prettyprint">LinkedList</code> class provides uniformly named methods to get, remove and insert an element at the beginning and end of the list.</p>
      * <p>These operations allow linked lists to be used as a stack, queue, etc.</p>
@@ -62,17 +64,37 @@ package system.data.lists
          * <pre class="prettyprint">
          * var list:LinkedList = new LinkedList() ;
          * </pre>
-         * @param c The optional Collection used to fill and initialize this LinkedList instance.
+         * @param init An optional Array or Collection or Iterable object to fill the collection.
          */
-        public function LinkedList( c:Collection = null )
+        public function LinkedList( init:* = null )
         {
-           _header      = new LinkedListEntry( null, null, null ) ;
-           _header.next = _header.previous = _header ;
-           if ( c != null && c.size() > 0 )
-           {
-                addAll( c ) ;
-           }
-        }
+            _header      = new LinkedListEntry( null, null, null ) ;
+            _header.next = _header.previous = _header ;
+            if ( init == null )
+            {
+            	return ;
+            }
+            else if ( init is Collection )
+            {
+            	addAll( init as Collection ) ;
+            }
+            else if ( init is Array )
+            {
+                init = new ArrayIterator( init as Array ) ;
+            }
+            else if ( init is Iterable )
+            {
+                init = (init as Iterable).iterator() ;
+            }
+            if ( init != null && init is Iterator )
+            {
+              	while( (init as Iterator).hasNext() )
+                {
+                    add( (init as Iterator).next()) ;
+                }
+            }
+            _modCount = 0 ;
+         }
         
         /**
          * This property is a protector used in the ListIterator object of this List.
@@ -121,8 +143,19 @@ package system.data.lists
          */        
         public function addAt(index:uint, o:*):void
         {
-            var i:ListIterator = listIterator( index ) ;
-            i.add(o);
+        	try
+        	{
+                var i:ListIterator = listIterator( index ) ;
+                i.add(o);
+        	}
+        	catch( e:RangeError )
+        	{
+        		throw new RangeError("LinkedList.addAt() method failed, the specified index '" + index +  "' is out of bounds." ) ;
+        	}
+        	catch( e:Error )
+        	{
+        		throw e ;
+        	}
         }
         
         /**
@@ -134,7 +167,7 @@ package system.data.lists
         {
             if ( index > _size)
             {
-                throw new RangeError("LinkedList insertAllAt method failed, index:"+index+ ", size: " + _size + "." ) ;
+                throw new RangeError("LinkedList.addAllAt() method failed, the specified index '" + index +  "' is out of bounds." ) ;
             }
             
             if ( c == null )
@@ -163,7 +196,7 @@ package system.data.lists
             
             var e:LinkedListEntry ;
             
-            for ( var i:Number = 0 ; i < l ; i++) 
+            for ( var i:int = 0 ; i < l ; i++ ) 
             {
                 e = new LinkedListEntry( a[i] , successor, predecessor ) ;
                 predecessor.next = e ;
@@ -180,6 +213,17 @@ package system.data.lists
         /**
          * Inserts the given element in the list before the given entry.
          * This method is "protected" only the LinkedList and the LinkedListIterator must use this method.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.lists.LinkedList ;
+         * import system.data.lists.LinkedListEntry ;
+         * 
+         * var l:LinkedList = new LinkedList( ["item1", "item2", "item3"] ) ;
+         * var e:LinkedListEntry = l.getHeader() ;
+         * 
+         * e = e.next() ;
+         * trace( e.element ) ; // "item1"
+         * </pre>
          * @param o the element to be inserted at the beginning of this list.
          * @param e the entry instance to defined where inserted the element.
          * @private
@@ -308,19 +352,19 @@ package system.data.lists
          */
         public function equals( o:* ):Boolean 
         {
-            
             if (o == null)
             {
                 return false ;
             }
-            if ( ! o is LinkedList )
+            else if ( o == this )
             {
-                return false ;
+            	return true ;
             }
-            else
+            else if ( o is LinkedList )
             {
             	var l:LinkedList = o as LinkedList ;
-                if ( l.size() != size())
+
+                if ( l.size() != size() )
                 {
                     return false ;    
                 } 
@@ -335,6 +379,7 @@ package system.data.lists
                 }
                 return true ;
             }
+            return false ;
         }        
         
         /**
@@ -381,6 +426,15 @@ package system.data.lists
         }
         
         /**
+         * Returns the header entry of this list.
+         * @return the header entry of this list.
+         */
+        public function getHeader():LinkedListEntry
+        {
+            return _header ;    
+        }        
+        
+        /**
          * Returns the last element in the list.
          * @return the last element in the list.
          * @throws NoSuchElementException if this list is empty.
@@ -393,16 +447,7 @@ package system.data.lists
             }
             return _header.previous.element ;
         }        
-        
-        /**
-         * Returns the header entry of this list.
-         * @return the header entry of this list.
-         */
-        public function getHeader():LinkedListEntry
-        {
-            return _header ;    
-        }        
-        
+          
         /**
          * Returns the position of the passed object in the collection.
          * @param o the object to search in the collection.
@@ -650,7 +695,7 @@ package system.data.lists
          * @param id index of the element to be removed from the List.
          * @return the Array representation of all removed elements in the list.
          */
-        public function removeAt( index:uint , len:int=1):* 
+        public function removeAt( index:uint , len:int = 1 ):* 
         {
         	len = len > 1 ? len : 1 ;
         	if ( len == 1 )
@@ -987,7 +1032,7 @@ package system.data.lists
             var i:int ;
             if ( index < (_size >> 1))
             {
-                for ( i = 0 ; i<= index ; i++ )
+                for ( i = 0 ; i <= index ; i++ )
                 {
                     e = e.next ;
                 }
