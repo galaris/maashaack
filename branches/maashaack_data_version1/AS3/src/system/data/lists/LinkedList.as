@@ -798,18 +798,17 @@ package system.data.lists
          * 
          * trace(list) ; // {item1,item2,item5}
          * </pre>
-         * @throws ArgumentError if the 'from' or 'to' argument is NaN.
-         * @throws RangeError if the 'to' > 'from'
+         * @throws RangeError if the 'toIndex' value > 'fromIndex' value.
          */
         public function removeRange( fromIndex:uint, toIndex:uint ):*
         {
             if ( fromIndex >= _size )
             {
-                throw new RangeError( "LinkedList.removeRange() failed with a fromIndex '" + fromIndex + "' value out of bounds, fromIndex > size().") ;
+                throw new RangeError( "LinkedList.removeRange(" + fromIndex + "," + toIndex + ") failed with a fromIndex value out of bounds, fromIndex > size().") ;
             }            
             if ( toIndex < fromIndex )
             {
-                throw new RangeError( "LinkedList.removeRange() failed if the toIndex > from value : " + toIndex ) ;
+                throw new RangeError( "LinkedList.removeRange(" + fromIndex + "," + toIndex + ") failed if the toIndex > fromIndex value." ) ;
             }
             else if ( fromIndex == toIndex )
             {
@@ -822,9 +821,9 @@ package system.data.lists
                 var l:int = toIndex - fromIndex ;
                 for (var i:int ; i<l ; i++) 
                 {
-                    ar.push(it.next()) ; 
+                    ar.push( it.next() ) ; 
                     it.remove() ;
-                }   
+                }
                 return ar ; 
             }
         }
@@ -886,14 +885,15 @@ package system.data.lists
          */        
         public function set( index:uint , o:* ):*
         {
-            var i:ListIterator = listIterator( index ) ;
             try 
-            {
+            {        	
+                var i:ListIterator = listIterator( index ) ;
                 var old:* = i.next() ;
                 i.set(o) ;
+                _modCount++ ;
                 return old ;
             }
-            catch( e:NoSuchElementError ) 
+            catch( e:Error ) 
             {
                 throw new NoSuchElementError("LinkedList.set() method failed at:" + index ) ;
             }
@@ -920,7 +920,7 @@ package system.data.lists
         }
         
         /**
-         * Returns a subList of the LinkedList.
+         * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.lists.LinkedList ;
@@ -933,33 +933,34 @@ package system.data.lists
          * list.add("item4") ;
          * list.add("item5") ;
          * 
-         * trace( list.subList(2, 10) ) ; // {item3,item4,item5}
-         * trace( list.subList(2, -1) ) ; // {}
-         * trace( list.subList(2, 3) ) ; // {item3}
-         * trace( list.subList() ) ; // {item1,item2,item3,item4,item5}
+         * trace( list.subList( 0 , 0 ) ) ; // {}
+         * trace( list.subList( 0 , 1 ) ) ; // {item1}
+         * trace( list.subList( 0 , 2 ) ) ; // {item1,item2}
+         * trace( list.subList( 0 , 3 ) ) ; // {item1,item2,item3}
+         * trace( list.subList( 0 , 4 ) ) ; // {item1,item2,item3,item4}
+         * trace( list.subList( 0 , 5 ) ) ; // {item1,item2,item3,item4,item5}
+         * trace( list.subList( 0 , 6 ) ) ; // {item1,item2,item3,item4,item5}
+         * 
+         * trace( list.subList(2, 4) ) ; // {item3,item4}
+         * trace( list.subList(3, 1) ) ; // {}
          * </pre>
-         * @return a subList of the LinkedList. The subList is an ArrayList instance.
+         * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          */        
-        public function subList(fromIndex:uint, toIndex:uint):List
+        public function subList(fromIndex:uint, toIndex:uint ):List
         {
-            if ( fromIndex == 0 )
-            {
-                return clone() ;    
-            }
             if (toIndex < fromIndex)
             {
                 toIndex = fromIndex ;
             }
-            else if (toIndex > size())
+            else if ( toIndex > size() )
             {
                 toIndex = size() ;    
             }
             var l:List = new LinkedList() ;
-            var it:ListIterator = listIterator(fromIndex) ;
-            var d:Number = (toIndex - fromIndex) + 1 ; 
-            for ( var i:int = fromIndex ; i<= d ; i++ ) 
+            var i:ListIterator = listIterator( fromIndex ) ;
+            for ( var j:int = fromIndex ; j < toIndex ; j++ ) 
             {
-                l.add( it.next() ) ;
+            	l.add( i.next() ) ;
             }
             return l ;
         }        

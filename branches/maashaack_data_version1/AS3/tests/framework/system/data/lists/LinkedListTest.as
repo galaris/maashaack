@@ -60,7 +60,13 @@ package system.data.lists
         {
             var list:LinkedList = new LinkedList() ;
             assertNotNull( list , "LinkedList constructor failed.");
-            
+        }
+        
+        public function testConstructorWithArguments():void
+        {   
+        	
+        	var list:LinkedList ;
+        	
             // initialize with an Array
                         
             list = new LinkedList([2,3,4]) ; 
@@ -443,11 +449,20 @@ package system.data.lists
             ArrayAssert.assertEquals( l.toArray()      , [ "item1" , "item4" ] , "05-02 - LinkedList removeAt failed." ) ;            
             
         }
-//        
-//        public function testRemoveEntry():void
-//        {
-//        	
-//        }
+        
+        public function testRemoveEntry():void
+        {
+            var l:LinkedList = new LinkedList([ "item1" , "item2" ] ) ;
+            var e:LinkedListEntry = l.getHeader() ; 
+            
+            e = e.next ; // "item1"
+            
+            var count:uint = l.modCount ;
+            
+            assertEquals( l.removeEntry( e ) , "item1"   , "01 - LinkedList removeEntry failed." );
+            assertEquals( l.modCount         , count + 1 , "02 - LinkedList removeEntry failed." ) ;
+            assertEquals( l.toString()       , "{item2}" , "03 - LinkedList removeEntry failed." ) ;
+        }
         
         public function testRemoveFirst():void
         {
@@ -463,10 +478,92 @@ package system.data.lists
             ArrayAssert.assertEquals( l.toArray(), [ "item1" ], "LinkedList removeLast method failed.") ;
         } 
         
-//        public function testRemoveRange():void
-//        {
-//        	
-//        }
+        public function testRemoveRange():void
+        {
+            var list:LinkedList ;
+            var count:int ;
+            var result:* ;
+            
+            //// list.removeRange(0,1) :: fromIndex == toIndex
+                        
+            list   = new LinkedList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            count  = list.modCount ;
+            
+            result = list.removeRange(0,1) as Array ; 
+            
+            assertNotNull( result , "00-01 - LinkedList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "00-02 - LinkedList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 4         , "00-03 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item2","item3","item4", "item5"] , "00-04 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item1"] , "00-05 - LinkedList removeRange method failed." ) ;
+                        
+            
+            //// list.removeRange(1,1) :: fromIndex == toIndex
+                        
+            list   = new LinkedList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            count  = list.modCount ;
+            
+            result = list.removeRange(1,1) as Array ; 
+            
+            assertNotNull( result , "01-01 - LinkedList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "01-02 - LinkedList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 4         , "01-03 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item3","item4", "item5"] , "01-04 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item2"] , "01-05 - LinkedList removeRange method failed." ) ;
+            
+            //// list.removeRange(1,2) :: fromIndex < toIndex
+            
+            list   = new LinkedList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            
+            count  = list.modCount ;
+            result = list.removeRange(1,2) as Array ;
+            
+            assertNotNull( result , "02-01 - LinkedList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "02-02 - LinkedList removeRange method failed."  ) ;
+            assertEquals( list.size()      , 4         , "02-03 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item3","item4", "item5"] , "02-04 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item2"] , "02-05 - LinkedList removeRange method failed." ) ;     
+            
+            //// list.removeRange(1,3)
+            
+            list   = new LinkedList( ["item1", "item2" , "item3" , "item4" , "item5" ] ) ; 
+            
+            count  = list.modCount ;
+            result = list.removeRange(1,3) as Array ;
+            
+            assertNotNull( result , "03-01 - LinkedList removeRange method failed." ) ;
+            assertEquals( list.modCount    , count + 2 , "03-02 - LinkedList removeRange method failed."  ) ; // count + number of removed items
+            assertEquals( list.size()      , 3         , "03-03 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray()   , ["item1","item4", "item5"] , "03-04 - LinkedList removeRange method failed." ) ;
+            ArrayAssert.assertEquals( result           , ["item2","item3"] , "03-05 - LinkedList removeRange method failed." ) ;     
+            
+            //// list.removeRange(6,10)
+            
+            try
+            {
+            	list.removeRange(6,10) ;
+            	fail("04-01 - LinkedList removeRange method failed.") ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is RangeError , "04-02 - LinkedList removeRange method failed." ) ;
+            	assertEquals( e.message , "LinkedList.removeRange(6,10) failed with a fromIndex value out of bounds, fromIndex > size()." , "04-03 - LinkedList removeRange method failed." ) ;
+            }
+            
+            //// list.removeRange(3,1)
+            
+            try
+            {
+                list.removeRange(3,1) ;
+                fail("05-01 - LinkedList removeRange method failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is RangeError , "05-02 - LinkedList removeRange method failed." ) ;
+                assertEquals( e.message , "LinkedList.removeRange(3,1) failed with a fromIndex value out of bounds, fromIndex > size()." , "05-03 - LinkedList removeRange method failed." ) ;
+            }            
+            
+        }
         
         public function testRetainAll():void
         {
@@ -484,10 +581,28 @@ package system.data.lists
             assertFalse( l1.retainAll( l4 ) , "05 - LinkedList retainAll failed.") ;        	
         }
         
-//        public function testSet():void
-//        {
-//        	
-//        }
+        public function testSet():void
+        {
+
+            var count:int ; 
+            var list:LinkedList = new LinkedList( [ "item1", "item2", "item3", "item4" ] ) ;
+            
+            count = list.modCount ;
+            assertEquals( list.set(0, "hello") , "item1" , "01-01 - LinkedList set method failed." ) ;
+            ArrayAssert.assertEquals( list.toArray() , ["hello","item2","item3","item4"] , "01-02 - LinkedList set method failed." ) ;
+            assertEquals( list.modCount    , count + 1 , "01-03 - LinkedList set method failed."  ) ;
+            
+            try
+            {
+                list.set( 10 , "foo" ) ;
+                fail("02-01 - LinkedList set method failed.") ;
+            }
+            catch( e:Error )
+            {
+            	assertTrue( e is NoSuchElementError  , "02-02 - LinkedList set method failed." ) ;
+                assertEquals( e.message , "LinkedList.set() method failed at:10" , "02-03 - LinkedList set method failed." ) ;
+            }
+        }
         
         public function testSize():void
         {
@@ -505,10 +620,34 @@ package system.data.lists
             assertEquals( l.size() , 0 , "04 - LinkedList size() failed.") ;
         }
         
-//        public function testSubList():void
-//        {
-//        	
-//        }
+        public function testSubList():void
+        {
+            var sub:List ;
+            
+            var list:LinkedList = new LinkedList( [ "item1", "item2", "item3", "item4" ] ) ;
+            
+            sub = list.subList( 0, 0 ) as LinkedList ;
+            assertNotNull(sub, "01-01 - LinkedList.subList method failed.") ;
+            ArrayAssert.assertEquals( sub.toArray() , [] , "01-02 - LinkedList.subList method failed." ) ;
+
+            sub = list.subList( 0, 1 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1"] , "02 - LinkedList.subList method failed." ) ;
+            
+            sub = list.subList( 0, 2 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1","item2"] , "03 - LinkedList.subList method failed." ) ;
+
+            sub = list.subList( 0, 3 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1", "item2","item3"] , "04 - LinkedList.subList method failed." ) ;
+
+            sub = list.subList( 0, 4 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item1", "item2","item3","item4"] , "05 - LinkedList.subList method failed." ) ;
+
+            sub = list.subList( 2, 4 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , ["item3","item4"] , "06 - LinkedList.subList method failed." ) ;
+
+            sub = list.subList( 3, 1 ) as LinkedList ;
+            ArrayAssert.assertEquals( sub.toArray() , [] , "07 - LinkedList.subList method failed." ) ;
+        }
         
         public function testToArray():void
         {
