@@ -707,7 +707,7 @@ package system.data.lists
         		var ar:Array = [] ;
         		while( len-- > 0 )
         		{
-        			removeEntry( _entry( index ) ) ;
+        			ar.push( removeEntry( _entry( index ) ) ) ;
         		}
         		return ar ;
         	}
@@ -722,11 +722,11 @@ package system.data.lists
             {
                 throw new NoSuchElementError("LinkedList.removeEntry() method failed.");
             }
-            var result:* = e.element ;
-            e.previous.next = e.next;
-            e.next.previous = e.previous;
+            var result:*        = e.element ;
+            e.previous.next     = e.next ;
+            e.next.previous     = e.previous ;
             e.next = e.previous = null ;
-            e.element = null ;
+            e.element           = null ;
             _size-- ;
             _modCount++ ;
             return result ;
@@ -873,10 +873,10 @@ package system.data.lists
          * 
          * var list:LinkedList = new LinkedList() ;
          * 
-         * list.add("item1") ;
-         * list.add("item2") ;
+         * list.add( "item1" ) ;
+         * list.add( "item2" ) ;
          * 
-         * var old:* = list.setAt( 1, "ITEM2" ) ;
+         * var old:* = list.set( 1 , "ITEM2" ) ;
          * 
          * trace("list : " + list + ", old : " + old) ; // list : {item1,ITEM2}, old : item2
          * </pre>
@@ -884,7 +884,7 @@ package system.data.lists
          * @param o element to be stored at the specified position.
          * @return the element previously at the specified position.
          */        
-        public function set( index:uint, o:*):*
+        public function set( index:uint , o:* ):*
         {
             var i:ListIterator = listIterator( index ) ;
             try 
@@ -895,7 +895,7 @@ package system.data.lists
             }
             catch( e:NoSuchElementError ) 
             {
-                throw new RangeError("LinkedList.setAt() method failed, index:" + index ) ;
+                throw new NoSuchElementError("LinkedList.set() method failed at:" + index ) ;
             }
         }        
         

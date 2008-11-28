@@ -144,21 +144,21 @@ package system.data.lists
             e = e.next ; // "item1"
             
             e = l.addBefore( "item0" , e ) ;  
-            ArrayAssert.assertEquals( l.toArray(), [ "item0" , "item1" ], "LinkedList addBefore method failed.") ;
+            ArrayAssert.assertEquals( l.toArray(), [ "item0" , "item1" ] , "LinkedList addBefore method failed.") ;
         }
         
         public function testAddFirst():void
         {
             var l:LinkedList = new LinkedList([ "item1" ] ) ;
             l.addFirst( "item0" ) ;  
-            ArrayAssert.assertEquals( l.toArray(), [ "item0" , "item1" ], "LinkedList addFirst method failed.") ;
+            ArrayAssert.assertEquals( l.toArray(), [ "item0" , "item1" ] , "LinkedList addFirst method failed.") ;
         } 
         
         public function testAddLast():void
         {
             var l:LinkedList = new LinkedList([ "item1" , "item2" ] ) ;
             l.addLast( "item3" ) ;  
-            ArrayAssert.assertEquals( l.toArray(), [ "item1" , "item2" , "item3"], "LinkedList addLast method failed.") ;
+            ArrayAssert.assertEquals( l.toArray(), [ "item1" , "item2" , "item3"] , "LinkedList addLast method failed.") ;
         }          
         
         public function testClear():void
@@ -183,10 +183,8 @@ package system.data.lists
         {
             var l:LinkedList = new LinkedList() ;
             l.add("item") ;
-            
             assertTrue( l.contains("item") ,  "01 - LinkedList contains failed.") ;
             assertFalse( l.contains("test") ,  "02 - LinkedList contains failed.") ;
-            
         } 
         
         public function testContainsAll():void
@@ -194,12 +192,9 @@ package system.data.lists
             var l1:LinkedList = new LinkedList([1,2,3,4]) ;
             var l2:LinkedList = new LinkedList([2,3]) ;
             var l3:LinkedList = new LinkedList() ;
-            
             assertTrue( l1.containsAll(l2) , "01 - LinkedList containsAll failed.") ;
             assertTrue( l1.containsAll(l3) , "02 - LinkedList containsAll failed.") ;
-            
             assertFalse( l2.containsAll(l1) , "03 - LinkedList containsAll failed.") ;
-            
         }       
         
         public function testDequeue():void
@@ -253,10 +248,8 @@ package system.data.lists
         public function testGet():void
         {
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
-            
             assertEquals ( l.get(0), "item1" , "01 - LinkedList get failed.") ;
             assertEquals ( l.get(1), "item2" , "02 - LinkedList get failed.") ;
-            
             try
             {
             	l.get(2) ;
@@ -267,17 +260,13 @@ package system.data.lists
             	assertTrue( e is NoSuchElementError , "03-02 - LinkedList get failed.") ;
             	assertEquals( e.message , "LinkedList.get() no value exist at 2" , "03-03 - LinkedList get failed.") ;
             }
-            
         }
         
         public function testGetFirst():void
         {
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
-            
             assertEquals ( l.getFirst(), "item1" , "01 - LinkedList getFirst failed.") ;
-            
             l.clear() ;
-            
             try
             {
                 l.getFirst() ;
@@ -311,7 +300,6 @@ package system.data.lists
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
             
             assertEquals ( l.getLast(), "item2" , "01 - LinkedList getLast failed.") ;
-            
             l.clear() ;
             
             try
@@ -426,71 +414,139 @@ package system.data.lists
         public function testRemoveAll():void
         {
             var l:LinkedList = new LinkedList(["item1","item2","item3"]) ;
-            
             assertFalse( l.removeAll( null ) , "01 - LinkedList removeAll failed." ) ;
             assertTrue( l.removeAll( new ArrayCollection(["item1", "item2"] ) ) , "02 - LinkedList removeAll failed." ) ;
             assertEquals( l.size(), 1, "03 - LinkedList removeAll failed." ) ;     
         } 
         
-//        public function testRemoveAt():void
-//        {
-//        	
-//        }
+        public function testRemoveAt():void
+        {
+            
+            var l:LinkedList ;
+            
+            l = new LinkedList(["item1","item2","item3","item4"]) ;
+            ArrayAssert.assertEquals( l.removeAt(0), ["item1"] , "01-01 - LinkedList removeAt failed." ) ;
+            ArrayAssert.assertEquals( l.toArray() , [ "item2" , "item3" , "item4" ] , "01-02 - LinkedList removeAt failed." ) ;
+            
+            l = new LinkedList(["item1","item2","item3","item4"]) ;
+            ArrayAssert.assertEquals( l.removeAt(1) , [ "item2" ] , "02-01 - LinkedList removeAt failed." ) ; 
+            ArrayAssert.assertEquals( l.toArray()   , ["item1" , "item3" , "item4" ] , "02-02 - LinkedList removeAt failed." ) ;
+            
+            l = new LinkedList(["item1","item2","item3","item4"]) ;
+            ArrayAssert.assertEquals( l.removeAt(1,0) , [ "item2" ] , "03 - LinkedList removeAt failed." ) ; 
+            
+            l = new LinkedList(["item1","item2","item3","item4"]) ;
+            ArrayAssert.assertEquals( l.removeAt(1,1) , [ "item2" ] , "04 - LinkedList removeAt failed." ) ;
+            
+            l = new LinkedList(["item1","item2","item3","item4"]) ;
+            ArrayAssert.assertEquals( l.removeAt(1,2 ) , [ "item2" , "item3" ] , "05-01 - LinkedList removeAt failed." ) ; 
+            ArrayAssert.assertEquals( l.toArray()      , [ "item1" , "item4" ] , "05-02 - LinkedList removeAt failed." ) ;            
+            
+        }
 //        
 //        public function testRemoveEntry():void
 //        {
 //        	
 //        }
-//        
-//        public function testRemoveFirst():void
-//        {
-//        	
-//        }
-//        
-//        public function testRemoveLast():void
-//        {
-//        	
-//        }
-//        
+        
+        public function testRemoveFirst():void
+        {
+            var l:LinkedList = new LinkedList([ "item1" , "item2" ] ) ;
+            l.removeFirst() ;  
+            ArrayAssert.assertEquals( l.toArray(), [ "item2" ], "LinkedList removeFirst method failed.") ;
+        } 
+        
+        public function testRemoveLast():void
+        {
+            var l:LinkedList = new LinkedList([ "item1" , "item2" ] ) ;
+            l.removeLast() ;  
+            ArrayAssert.assertEquals( l.toArray(), [ "item1" ], "LinkedList removeLast method failed.") ;
+        } 
+        
 //        public function testRemoveRange():void
 //        {
 //        	
 //        }
-//        
-//        public function testRetainAll():void
-//        {
-//        	
-//        }
-//        
+        
+        public function testRetainAll():void
+        {
+            var l1:LinkedList = new LinkedList([1,2,3,4]) ;
+            var l2:LinkedList = new LinkedList([2,3]) ;
+            var l3:LinkedList = new LinkedList() ;
+            var l4:LinkedList = new LinkedList([5,6]) ;
+            
+            assertTrue( l1.retainAll( l2 ) , "01 - LinkedList retainAll failed.") ;
+            ArrayAssert.assertEquals( l1.toArray() , [2,3], "02 - LinkedList retainAll removeAll failed.") ;   
+            
+            assertTrue( l1.retainAll( l3 ) , "03 - LinkedList retainAll failed.") ;
+            assertEquals( l1.toString(), "{}" , "04 - LinkedList retainAll failed.") ;
+            
+            assertFalse( l1.retainAll( l4 ) , "05 - LinkedList retainAll failed.") ;        	
+        }
+        
 //        public function testSet():void
 //        {
 //        	
 //        }
-//        
-//        public function testSize():void
-//        {
-//        	
-//        }
-//        
+        
+        public function testSize():void
+        {
+            var l:LinkedList = new LinkedList() ;
+
+            assertEquals( l.size() , 0 , "01 - LinkedList size() failed.") ;
+            
+            l.add("item1") ;
+            assertEquals( l.size() , 1 , "02 - LinkedList size() failed.") ;
+            
+            l.add("item2") ;
+            assertEquals( l.size() , 2 , "03 - LinkedList size() failed.") ;
+            
+            l.clear() ;
+            assertEquals( l.size() , 0 , "04 - LinkedList size() failed.") ;
+        }
+        
 //        public function testSubList():void
 //        {
 //        	
 //        }
-//        
-//        public function testToArray():void
-//        {
-//        	
-//        }
-//        
-//        public function testToSource():void
-//        {
-//        	
-//        }
-//        
-//        public function testToString():void
-//        {
-//        	
-//        }
+        
+        public function testToArray():void
+        {
+            var l:LinkedList ;
+            var a:Array ;
+            l = new LinkedList() ;
+            a = l.toArray() ;
+            assertNotNull( a , "01-02 - LinkedList toArray failed.") ;
+            ArrayAssert.assertEquals( a , [], "01-02 - LinkedList toArray failed.") ;            
+            l.add(2) ;
+            l.add(3) ;
+            l.add(4) ; 
+            a = l.toArray() ;
+            assertNotNull( a , "02-02 - LinkedList constructor failed.") ;
+            ArrayAssert.assertEquals( a , [2,3,4], "02-02 - LinkedList constructor failed.") ;
+        }
+        
+        public function testToSource():void
+        {
+            var li:LinkedList ;
+            var ar:Array = ["item1", "item2"] ;
+            
+            li = new LinkedList() ;
+            assertEquals(li.toSource() , "new system.data.lists.LinkedList()" , "01 - LinkedList toSource failed") ;
+            
+            li = new LinkedList( ar ) ;
+            assertEquals(li.toSource() , "new system.data.lists.LinkedList([\"item1\",\"item2\"])" , "02 - LinkedList toSource failed") ;
+        }
+        
+        public function testToString():void
+        {
+            var li:LinkedList ;        	
+            var ar:Array = ["item1", "item2", "item3", "item4"] ;
+            li = new LinkedList() ;
+            assertEquals(li.toString() , "{}", "01 - LinkedList toString failed") ;
+            li = new LinkedList( ar ) ;
+            assertEquals(li.toString() , "{item1,item2,item3,item4}", "02 - LinkedList toString failed") ;
+        }      
                 
     }
 }

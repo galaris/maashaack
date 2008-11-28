@@ -242,11 +242,8 @@ package system.data.collections
             var c1:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
             var c2:ArrayCollection = new ArrayCollection([2,3]) ;
             var c3:ArrayCollection = new ArrayCollection() ;
-            
             assertTrue( c1.removeAll( c2 ) , "01 - ArrayCollection removeAll failed.") ;
-            
             ArrayAssert.assertEquals( c1.toArray() , [1,4], "02 - ArrayCollection removeAll failed.") ;
-            
             assertFalse( c1.removeAll(c3) , "03 - ArrayCollection removeAll failed.") ;
         }        
         
