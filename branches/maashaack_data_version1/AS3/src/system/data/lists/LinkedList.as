@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -44,9 +44,9 @@ package system.data.lists
     import system.data.ListIterator;
     import system.data.Queue;
     import system.data.collections.formatter;
-    import system.data.errors.NoSuchElementError;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.LinkedListIterator;
+    import system.errors.NoSuchElementError;
     import system.serializers.eden.BuiltinSerializer;    
 
     /**

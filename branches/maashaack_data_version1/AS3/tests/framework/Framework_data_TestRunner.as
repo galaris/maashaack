@@ -81,8 +81,6 @@ package
             buRRRn.ASTUce.config.maxColumn = 64 ;
             buRRRn.ASTUce.config.showConstructorList = false;
             
-         
-            
             Runner.main
             ( 
                 system.data.AllTests.suite() , system.AllTests.suite() 

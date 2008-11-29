@@ -1,4 +1,4 @@
-﻿/*
+/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -35,15 +35,15 @@ the terms of any one of the MPL, the GPL or the LGPL.
  
 package system.data.queues 
 {
-    import flash.errors.IllegalOperationError;    
-    
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.data.Boundable;
     import system.data.Iterator;
     import system.data.Queue;
-    import system.data.iterators.ProtectedIterator;    
+    import system.data.iterators.ProtectedIterator;
+    
+    import flash.errors.IllegalOperationError;        
 
     public class CircularQueueTest extends TestCase 
     {

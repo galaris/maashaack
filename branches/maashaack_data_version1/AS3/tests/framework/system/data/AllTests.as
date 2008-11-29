@@ -37,10 +37,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.data
 {
     import buRRRn.ASTUce.framework.*;
-
+    
     import system.data.arrays.*;
     import system.data.collections.*;
-    import system.data.errors.*;
     import system.data.iterators.*;
     import system.data.lists.*;
     import system.data.maps.*;
@@ -78,9 +77,6 @@ package system.data
             
             // collections
             suite.addTest(system.data.collections.AllTests.suite());  
-                 
-            // errors
-            suite.addTest(system.data.errors.AllTests.suite());                 
                                  
             // iterators
             suite.addTest(system.data.iterators.AllTests.suite());

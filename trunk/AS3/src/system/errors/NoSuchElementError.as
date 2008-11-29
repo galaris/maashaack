@@ -33,42 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.errors 
+package system.errors 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
 
-    public class ConcurrencyErrorTest extends TestCase 
+    /**
+     * Thrown by an Iterator to indicate that there are no more elements in the iteration.
+     */
+    public class NoSuchElementError extends Error 
     {
-
-        public function ConcurrencyErrorTest(name:String = "")
+     
+        /**
+         * Creates a new NoSuchElementError instance. If message is specified, its value is assigned to the object's NoSuchElementError.message property.
+         * @param message A string associated with the NoSuchElementError object ; this parameter is optional.
+         * @param id A reference number to associate with the specific error message.
+         */  
+        public function NoSuchElementError( message:String = "", id:int = 0 )
         {
-            super(name);
+            super(message, id);
+            name = "NoSuchElementError" ;
         }
-        
-        public function testConstructor():void
-        {
-            var e:ConcurrencyError = new ConcurrencyError() ;
-            assertNotNull( e , "The ConcurrencyError constructor failed." ) ;
-        }
-
-        public function testErrorID():void
-        {
-            var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
-            assertEquals( e.errorID , 0 , "ConcurrencyError errorID property failed.") ;    
-        } 
-                
-        public function testMessage():void
-        {
-            var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
-            assertEquals( e.message , "message"  , "ConcurrencyError message property failed.") ;    
-        }           
-        
-        public function testName():void
-        {
-            var e:ConcurrencyError = new ConcurrencyError() ;
-            assertEquals( e.name , "ConcurrencyError"  , "ConcurrencyError name property failed.") ;    
-        }
-        
-                
     }
 }

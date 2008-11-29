@@ -36,9 +36,9 @@
 package system.data.iterators 
 {
     import system.data.ListIterator;
-    import system.data.errors.ConcurrencyError;
-    import system.data.errors.NoSuchElementError;
     import system.data.lists.ArrayList;
+    import system.errors.ConcurrencyError;
+    import system.errors.NoSuchElementError;
     import system.numeric.Mathematics;
     
     import flash.errors.IllegalOperationError;    

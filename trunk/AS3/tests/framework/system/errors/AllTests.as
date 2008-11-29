@@ -33,9 +33,9 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.errors
+package system.errors
 {
-    import buRRRn.ASTUce.framework.*;                                
+    import buRRRn.ASTUce.framework.*;                                    
 
     public class AllTests
     {

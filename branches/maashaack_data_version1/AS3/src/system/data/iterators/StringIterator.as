@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,10 +35,10 @@
 
 package system.data.iterators
 {
-    import system.data.Iterator ;
-    import system.numeric.Mathematics ;
+    import system.data.Iterator;
+    import system.numeric.Mathematics;
     
-    import flash.errors.IllegalOperationError ;    
+    import flash.errors.IllegalOperationError;    
 
     /**
      * Converts a string to an iterator.

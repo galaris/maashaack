@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,10 +36,10 @@
 package system.data.iterators 
 {
     import system.data.ListIterator;
-    import system.data.errors.ConcurrencyError;
-    import system.data.errors.NoSuchElementError;
     import system.data.lists.LinkedList;
     import system.data.lists.LinkedListEntry;
+    import system.errors.ConcurrencyError;
+    import system.errors.NoSuchElementError;
     
     import flash.errors.IllegalOperationError;    
 

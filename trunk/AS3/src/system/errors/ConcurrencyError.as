@@ -33,24 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.errors 
+package system.errors 
 {
 
     /**
-     * Thrown by an Iterator to indicate that there are no more elements in the iteration.
+     * The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
      */
-    public class NoSuchElementError extends Error 
+    public class ConcurrencyError extends Error 
     {
-     
+
         /**
-         * Creates a new NoSuchElementError instance. If message is specified, its value is assigned to the object's NoSuchElementError.message property.
-         * @param message A string associated with the NoSuchElementError object ; this parameter is optional.
+         * Creates a new ConcurrencyError instance. If message is specified, its value is assigned to the object's ConcurrencyError.message property.
+         * @param message A string associated with the ConcurrencyError object ; this parameter is optional.
          * @param id A reference number to associate with the specific error message.
-         */  
-        public function NoSuchElementError( message:String = "", id:int = 0 )
+         */
+        public function ConcurrencyError(message:String = "", id:int = 0)
         {
-            super(message, id);
-            name = "NoSuchElementError" ;
+            super( message , id );
+            name = "ConcurrencyError" ;
         }
     }
 }

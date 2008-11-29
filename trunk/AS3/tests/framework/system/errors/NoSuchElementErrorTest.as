@@ -33,9 +33,11 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.errors 
+package system.errors 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.errors.NoSuchElementError;        
 
     public class NoSuchElementErrorTest extends TestCase 
     {

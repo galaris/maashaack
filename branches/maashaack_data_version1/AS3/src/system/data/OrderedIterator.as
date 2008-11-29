@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,8 +35,8 @@
 
 package system.data
 {
-    import system.data.Iterator;    
-    
+    import system.data.Iterator;        
+
     /**
      * Defines an iterator that operates over an ordered collection. This iterator allows both forward and reverse iteration through the collection.
      */
