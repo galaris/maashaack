@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -159,7 +159,7 @@ package system.data.maps
          */
         public function containsKey(key:*):Boolean
         {
-            return _keys[ key ] != null ;
+            return _keys[ key ] !== undefined ;
         }
   
         /**
@@ -168,7 +168,7 @@ package system.data.maps
          */
         public function containsValue(value:*):Boolean
         {
-            return _values[ value ] != null ;
+            return _values[ value ] !== undefined ;
         }
         
         /**

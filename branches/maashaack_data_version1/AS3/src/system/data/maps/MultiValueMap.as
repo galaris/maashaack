@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -66,6 +66,19 @@ package system.data.maps
 
         /**
          * Removes all elements in this map.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * map.clear() ;
+         * 
+         * trace( map ) ; // {}
+         * </pre>
          */
         public function clear():void 
         {
@@ -74,30 +87,49 @@ package system.data.maps
         
         /**
          * Returns a shallow copy of this object.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put("keyA" , "itemA_1" ) ;
+         * map.put("keyA" , "itemA_2" ) ;
+         * map.put("keyB" , "itemB_2" ) ;
+         * 
+         * var clone:MultiValueMap = map.clone() ;
+         * trace( clone ) ;
+         * </pre>
          * @return a shallow copy of this object.
          */
         public function clone():* 
         {
-        	var key:*   ;
-        	var value:* ;
             var m:MultiValueMap = new MultiValueMap() ;
             var kItr:Iterator = keyIterator() ;
             var vItr:Iterator = valueIterator() ;
             while (kItr.hasNext()) 
             {
-                key   = kItr.next() ;
-                value = vItr.next() ;
+                var key:*   = kItr.next() ;
+                var value:* = vItr.next() ;
                 m.putCollection( key , value ) ;
             }
-            return m ;
+            return m ;            
+            
         }
        
         /**
          * Checks whether the map contains the key specified.
          * <p><b>Example :</b></p>
-         * <code class="prettyprint">
-         * var b:Boolean = map.containsKey( "key" ) ;
-         * </code>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello world" ) ;
+         * 
+         * trace( map.containsKey( "key1" ) ) ; // true
+         * trace( map.containsKey( "key2" ) ) ; // false
+         * </pre>
          * @return <code class="prettyprint">true</code> if the Map contains the specified key.
          */
         public function containsKey( key:* ):Boolean 
@@ -108,20 +140,30 @@ package system.data.maps
         /**
          * Checks whether the map contains the value specified.
          * <p><b>Example :</b></p>
-         * <code class="prettyprint">
-         * var b:Boolean = map.containsValue( "value" ) ;
-         * </code>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * trace( map.containsValue( "hello"       ) ) ; // true
+         * trace( map.containsValue( "bonjour"     ) ) ; // true
+         * trace( map.containsValue( "buenos dias" ) ) ; // false
+         * </pre>
          * @return <code class="prettyprint">true</code> if the List contains the specified value.
          */
         public function containsValue( value:* ):Boolean 
         {
+        	var c:Collection ;
             var it:Iterator = _map.iterator() ;
             while (it.hasNext()) 
             {
-                var cur:Collection = it.next() as Collection ;
-                if ( cur != null && cur.contains(value) ) 
+                c = it.next() as Collection ;
+                if ( c != null && c.contains(value) ) 
                 {
-                    return true;
+                    return true ;
                 }
             }
             return false ;
@@ -130,9 +172,20 @@ package system.data.maps
         /**
          * Checks whether the map contains the value specified or at the specified key contains the value.
          * <p><b>Example :</b></p>
-         * <code class="prettyprint">
-         * var b:Boolean = map.containsValueByKey("key", "value") ;
-         * </code>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * trace( map.containsValueByKey( "key1" , "hello"   ) ) ; // true
+         * trace( map.containsValueByKey( "key1" , "bonjour" ) ) ; // false
+         * 
+         * trace( map.containsValueByKey( "key2" , "hello"       ) ) ; // false
+         * trace( map.containsValueByKey( "key2" , "bonjour"     ) ) ; // true
+         * </pre>
          */
         public function containsValueByKey( key:*, value:* ):Boolean 
         {
@@ -150,7 +203,19 @@ package system.data.maps
         
         /**
          * Gets the collection mapped to the specified key.
-         * <p> This method is a convenience method to typecast the result of get(key).</p>
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * trace( map.get( "key1"  ) ) ; // {hello}
+         * trace( map.get( "key2"  ) ) ; // {bonjour}
+         * trace( map.get( "key3"  ) ) ; // undefined
+         * </pre>
          */
         public function get( key:* ):*
         {
@@ -158,7 +223,41 @@ package system.data.maps
         }
         
         /**
-         * Checks whether the map contains the key specified .
+         * Gets the collection mapped to the specified key.
+         * <p> This method is a convenience method to typecast the result of get(key).</p>
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * trace( map.getCollection( "key1"  ) ) ; // {hello}
+         * trace( map.getCollection( "key2"  ) ) ; // {bonjour}
+         * trace( map.getCollection( "key3"  ) ) ; // null
+         * </pre>
+         */
+        public function getCollection( key:* ):Collection
+        {
+            return _map.get(key) as Collection ;
+        }        
+        
+        /**
+         * Returns an Array containing the combination of all keys in the Map.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "hello"   ) ;
+         * map.put( "key2" , "bonjour" ) ;
+         * 
+         * trace( map.getKeys() ) ; // key1,key2
+         * </pre>
+         * @return An Array containing the combination of all keys in the Map.
          */        
         public function getKeys():Array
         {
@@ -167,14 +266,27 @@ package system.data.maps
         
         /**
          * Returns an Array containing the combination of values from all keys.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "A1"   ) ;
+         * map.put( "key2" , "B1" ) ;
+         * map.put( "key2" , "B2" ) ;
+         * map.put( "key3" , "C1" ) ;
+         * 
+         * trace( map.getValues() ) ; // no order if the internal Map is a HashMap (default)
+         * </pre>
          * @return An Array containing the combination of values from all keys.
          */
         public function getValues():Array 
         {
             var result:Array = [] ;
             var values:Array = _map.getValues() ;
-            var l:int = values.length ;
-            for ( var i:int = 0 ; i<l ; i++ ) 
+            var l:int   = values.length ;
+            for ( var i:int ; i < l ; i++ ) 
             {
                 result = result.concat( values[i].toArray() ) ;
             }
@@ -183,6 +295,17 @@ package system.data.maps
         
         /**
          * Returns whether this object contains any mappings.
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * trace( map.isEmpty() ) ;  // true
+         * 
+         * map.put( "key" , "value"   ) ;
+         * 
+         * trace( map.isEmpty() ) ; // false
+         * </pre>
          * @return <code class="prettyprint">true</code> if this MultiHashSet contains any mappings else <code class="prettyprint">false</code>
          */
         public function isEmpty():Boolean 
@@ -217,6 +340,19 @@ package system.data.maps
         
         /**
          * Adds the value to the collection associated with the specified key.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put("keyA" , "itemA_1" ) ;
+         * map.put("keyA" , "itemA_2" ) ;
+         * 
+         * map.put("keyB" , "itemB_2" ) ;
+         * 
+         * trace( map ) ; // {keyB:{itemB_2},keyA:{itemA_1,itemA_2}}
+         * </pre>
          */        
         public function put( key:*, value:* ):*
         {
@@ -255,12 +391,12 @@ package system.data.maps
          */
         public function putCollection( key:* , c:Collection ):void 
         {
-        	if ( c.size() == 0 )
+        	if ( c == null || c.size() == 0 )
         	{
         		return ;
         	}
         	var co:Collection ;
-            if (!containsKey(key)) 
+            if (! containsKey(key) ) 
             {
             	co = createCollection() ;
             	if ( co != null )
@@ -274,7 +410,7 @@ package system.data.maps
             }
             if ( co != null )
             {
-                var it:Iterator = co.iterator() ;
+                var it:Iterator = c.iterator() ;
                 while(it.hasNext()) 
                 {
                     co.add( it.next() ) ;
@@ -288,7 +424,7 @@ package system.data.maps
          */
         public function remove( o:* ):*
         {
-            return _map.remove(o) ; // TODO use MapEntry ????
+            return _map.remove(o) ;
         }
         
         /**
