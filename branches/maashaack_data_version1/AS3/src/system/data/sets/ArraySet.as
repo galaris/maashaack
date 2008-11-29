@@ -36,22 +36,22 @@
 package system.data.sets 
 {
     import system.data.Set;
-    import system.data.maps.HashMap;    
+    import system.data.maps.ArrayMap;    
 
     /**
-     * HashSet based implementation of the Set interface and use a HashMap inside. 
+     * This class implement the Set interface and use an ArrayMap inside. 
      */
-    public class HashSet extends CoreSet implements Set
+    public class ArraySet extends CoreSet implements Set
     {
 
         /**
-         * Creates a new HashSet instance.
+         * Creates a new ArraySet instance.
          * <p>You can use an optional parameter in this constructor with different type : an Array or a Collection instance to fill the Set object.</p>
          * @param init An optional Array or Iterable object to fill the collection.
          */
-        public function HashSet( init:* = null )
+        public function ArraySet( init:* = null )
         {
-        	super( new HashMap() , init ) ;
+        	super( new ArrayMap() , init ) ;
         }
         
         /**
@@ -60,7 +60,7 @@ package system.data.sets
          */
         public override function clone():*
         {
-            return new HashSet( toArray() ) ;
+            return new ArraySet( toArray() ) ;
         }        
         
     }

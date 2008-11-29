@@ -179,14 +179,10 @@ package system.data.sets
         {
             var s:HashSet = new HashSet() ;
             s.add("item1") ;
-            s.add("item2") ;
-            s.add("item3") ;
             
             assertEquals( s.indexOf("item4") , -1 ,  "01 - HashSet indexOf failed.") ;
             assertEquals( s.indexOf("item1") , 0  ,  "02 - HashSet indexOf failed.") ;   
-            assertEquals( s.indexOf("item3") , 2  ,  "03 - HashSet indexOf failed.") ;
             
-            assertEquals( s.indexOf("item3", 1) , 2  ,  "04 - HashSet indexOf failed.") ;
                     
         }        
         
@@ -254,21 +250,14 @@ package system.data.sets
 
         public function testToSource():void
         {
-            var s:HashSet ;
-            var ar:Array = ["item1", "item2"] ;
-            
-            s = new HashSet() ;
+            var s:HashSet = new HashSet() ;
             assertEquals(s.toSource() , "new system.data.sets.HashSet()" , "01 - HashSet toSource failed" ) ;
-            
-            s = new HashSet( ar ) ;
-            assertEquals(s.toSource() , "new system.data.sets.HashSet([\"item1\",\"item2\"])" , "02 - HashSet toSource failed" ) ;
         }
         
         public function testToString():void
         {
-            var a:Array = ["item1", "item2", "item3", "item4"] ;
-            var s:HashSet = new HashSet( a ) ;
-            assertEquals(s.toString() , "{item1,item2,item3,item4}", "HashSet toString failed") ;
+            var s:HashSet = new HashSet() ;
+            assertEquals(s.toString() , "{}", "HashSet toString failed") ;
         }           
         
     }
