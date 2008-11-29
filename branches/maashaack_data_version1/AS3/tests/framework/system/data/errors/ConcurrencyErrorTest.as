@@ -35,22 +35,40 @@
 
 package system.data.errors 
 {
+    import buRRRn.ASTUce.framework.TestCase;                
 
-    /**
-     * The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
-     */
-    public class ConcurrentModificationError extends Error 
+    public class ConcurrencyErrorTest extends TestCase 
     {
 
-        /**
-         * Creates a new ConcurrentModificationError instance. If message is specified, its value is assigned to the object's ConcurrentModificationError.message property.
-         * @param message A string associated with the ConcurrentModificationError object ; this parameter is optional.
-         * @param id A reference number to associate with the specific error message.
-         */
-        public function ConcurrentModificationError(message:String = "", id:int = 0)
+        public function ConcurrencyErrorTest(name:String = "")
         {
-            super( message , id );
-            name = "ConcurrentModificationError" ;
+            super(name);
         }
+        
+        public function testConstructor():void
+        {
+            var e:ConcurrencyError = new ConcurrencyError() ;
+            assertNotNull( e , "The ConcurrencyError constructor failed." ) ;
+        }
+
+        public function testErrorID():void
+        {
+            var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
+            assertEquals( e.errorID , 0 , "ConcurrencyError errorID property failed.") ;    
+        } 
+                
+        public function testMessage():void
+        {
+            var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
+            assertEquals( e.message , "message"  , "ConcurrencyError message property failed.") ;    
+        }           
+        
+        public function testName():void
+        {
+            var e:ConcurrencyError = new ConcurrencyError() ;
+            assertEquals( e.name , "ConcurrencyError"  , "ConcurrencyError name property failed.") ;    
+        }
+        
+                
     }
 }

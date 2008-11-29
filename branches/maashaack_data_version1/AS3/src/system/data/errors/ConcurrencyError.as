@@ -35,43 +35,22 @@
 
 package system.data.errors 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
 
-    public class ConcurrentModificationErrorTest extends TestCase 
+    /**
+     * The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
+     */
+    public class ConcurrencyError extends Error 
     {
 
-        public function ConcurrentModificationErrorTest(name:String = "")
+        /**
+         * Creates a new ConcurrentModificationError instance. If message is specified, its value is assigned to the object's ConcurrentModificationError.message property.
+         * @param message A string associated with the ConcurrentModificationError object ; this parameter is optional.
+         * @param id A reference number to associate with the specific error message.
+         */
+        public function ConcurrencyError(message:String = "", id:int = 0)
         {
-            super(name);
+            super( message , id );
+            name = "ConcurrencyError" ;
         }
-        
-        public function testConstructor():void
-        {
-            
-            var e:ConcurrentModificationError = new ConcurrentModificationError() ;
-            
-            assertNotNull( e , "The ConcurrentModificationError constructor failed." ) ;
-            
-        }
-
-        public function testErrorID():void
-        {
-            var e:ConcurrentModificationError = new ConcurrentModificationError("message", 0) ;
-            assertEquals( e.errorID , 0 , "ConcurrentModificationError errorID property failed.") ;    
-        } 
-                
-        public function testMessage():void
-        {
-            var e:ConcurrentModificationError = new ConcurrentModificationError("message", 0) ;
-            assertEquals( e.message , "message"  , "ConcurrentModificationError message property failed.") ;    
-        }           
-        
-        public function testName():void
-        {
-            var e:ConcurrentModificationError = new ConcurrentModificationError() ;
-            assertEquals( e.name , "ConcurrentModificationError"  , "ConcurrentModificationError name property failed.") ;    
-        }
-        
-                
     }
 }

@@ -36,7 +36,7 @@
 package system.data.iterators 
 {
     import system.data.ListIterator;
-    import system.data.errors.ConcurrentModificationError;
+    import system.data.errors.ConcurrencyError;
     import system.data.errors.NoSuchElementError;
     import system.data.lists.LinkedList;
     import system.data.lists.LinkedListEntry;
@@ -108,7 +108,7 @@ package system.data.iterators
         {
             if ( this._list.modCount != this._expectedModCount )
             {
-                throw new ConcurrentModificationError("LinkedListIterator check for comodification failed with a LinkedList." ) ;
+                throw new ConcurrencyError("LinkedListIterator check for comodification failed with a LinkedList." ) ;
             }
         }        
 

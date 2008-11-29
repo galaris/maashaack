@@ -36,7 +36,7 @@
 package system.data.iterators 
 {
     import system.data.ListIterator;
-    import system.data.errors.ConcurrentModificationError;
+    import system.data.errors.ConcurrencyError;
     import system.data.errors.NoSuchElementError;
     import system.data.lists.ArrayList;
     import system.numeric.Mathematics;
@@ -123,7 +123,7 @@ package system.data.iterators
         {
             if ( _list.modCount != _expectedModCount) 
             {
-                throw new ConcurrentModificationError( "ListIterator modification failed, the list is changed during the iteration.") ;
+                throw new ConcurrencyError( "ListIterator modification failed, the list is changed during the iteration.") ;
             }
         }
     
@@ -231,9 +231,9 @@ package system.data.iterators
                 _listast = -1 ;
                 _expectedModCount = _list.modCount ;
             } 
-            catch ( e:ConcurrentModificationError ) 
+            catch ( e:ConcurrencyError ) 
             {
-                throw new ConcurrentModificationError( "ListIterator.remove() method failed.") ;
+                throw new ConcurrencyError( "ListIterator.remove() method failed.") ;
             }
         }   
 

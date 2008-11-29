@@ -44,7 +44,7 @@ package system.data.errors
         {
             var suite:TestSuite = new TestSuite("Maashaack data errors tests");
             
-            suite.addTestSuite(ConcurrentModificationErrorTest) ;
+            suite.addTestSuite(ConcurrencyErrorTest) ;
             suite.addTestSuite(NoSuchElementErrorTest) ;
                             
             return suite;
