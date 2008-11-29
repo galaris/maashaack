@@ -46,14 +46,14 @@ package system.data.maps
     /**
      * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface. 
      */
-    public class MultiHashMap implements MultiMap 
+    public class MultiValueMap implements MultiMap 
     {
 
         /**
-         * Creates a new MultiHashMap instance.
+         * Creates a new MultiValueMap instance.
          * @param map Optional Map reference to initialize this MultiMap.
          */
-        public function MultiHashMap( map:Map = null )
+        public function MultiValueMap( map:Map = null )
         {
             _map = new HashMap() ;
             if (map != null && map.size() > 0 ) 
@@ -78,7 +78,7 @@ package system.data.maps
         {
         	var key:*   ;
         	var value:* ;
-            var m:MultiHashMap = new MultiHashMap() ;
+            var m:MultiValueMap = new MultiValueMap() ;
             var kItr:Iterator = keyIterator() ;
             var vItr:Iterator = valueIterator() ;
             while (kItr.hasNext()) 

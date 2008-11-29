@@ -52,13 +52,13 @@ package system.data.maps
             result = MultiMapFormatter.instance.format() ;
             assertEquals(result, "", "1 - The MultiMapFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
             
-            result = MultiMapFormatter.instance.format(new MultiHashMap()) ;   
+            result = MultiMapFormatter.instance.format(new MultiValueMap()) ;   
             assertEquals(result, "{}" , "2 - The MultiMapFormatter format method failed with an empty Map.") ;
             
-            result = MultiMapFormatter.instance.format(new MultiHashMap(new HashMap(["key1"], ["value1"]))) ;   
+            result = MultiMapFormatter.instance.format(new MultiValueMap(new HashMap(["key1"], ["value1"]))) ;   
             assertEquals(result, "{key1:{value1}}" , "3 - The MultiMapFormatter format method failed with a Map whith one entry inside.") ;
             
-            result = MultiMapFormatter.instance.format(new MultiHashMap(new HashMap(["key1", "key2"], ["value1", "value2"]))) ;   
+            result = MultiMapFormatter.instance.format(new MultiValueMap(new HashMap(["key1", "key2"], ["value1", "value2"]))) ;   
             assertTrue
             (
                 result == "{key1:{value1},key2:{value2}}" || "{key2:{value2},key1:{value1}}" , 

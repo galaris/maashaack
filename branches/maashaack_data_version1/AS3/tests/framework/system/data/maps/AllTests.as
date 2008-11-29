@@ -49,7 +49,7 @@ package system.data.maps
             suite.addTestSuite( MapEntryTest          ) ; 
             suite.addTestSuite( HashMapTest           ) ;            
             suite.addTestSuite( MapFormatterTest      ) ;
-            suite.addTestSuite( MultiHashMapTest      ) ;
+            suite.addTestSuite( MultiValueMapTest      ) ;
             suite.addTestSuite( MultiMapFormatterTest ) ;
             suite.addTestSuite( SortedArrayMapTest    ) ;
                       

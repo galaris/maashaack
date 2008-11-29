@@ -40,10 +40,10 @@ package system.data.maps
     import system.data.Map;
     import system.data.MultiMap;    
 
-    public class MultiHashMapTest extends TestCase 
+    public class MultiValueMapTest extends TestCase 
     {
 
-        public function MultiHashMapTest(name:String = "")
+        public function MultiValueMapTest(name:String = "")
         {
             super( name );
         }
@@ -54,12 +54,12 @@ package system.data.maps
         	var init:Map = new HashMap() ;
         	init.put( "key1" , "value1" ) ;
         	
-        	var map:MultiHashMap ;
+        	var map:MultiValueMap ;
         	
-        	map = new MultiHashMap () ;
+        	map = new MultiValueMap () ;
         	assertNotNull(map , "1 - The MultiHashMap constructor failed.") ;
         	
-        	map = new MultiHashMap( init ) ;
+        	map = new MultiValueMap( init ) ;
         	
         	assertEquals
         	( 
@@ -72,14 +72,14 @@ package system.data.maps
 
         public function testInterface():void
         {
-            var map:MultiHashMap = new MultiHashMap () ;
+            var map:MultiValueMap = new MultiValueMap () ;
             assertTrue( map is MultiMap , "1 - The MultiHashMap must implement the MultiMap interface." ) ;
             assertTrue( map is Map      , "2 - The MultiHashMap must implement the Map interface." ) ;
         }
 
         public function testClear():void 
         {
-            var map:MultiHashMap = new MultiHashMap () ;
+            var map:MultiValueMap = new MultiValueMap () ;
             map.put("key1" , "value1") ;
             map.clear() ;
             assertTrue( map.isEmpty() , "The MultiHashMap clear failed.") ;
@@ -123,7 +123,7 @@ package system.data.maps
 //
         public function testIsEmpty():void 
         {
-            var map:MultiHashMap = new MultiHashMap () ;
+            var map:MultiValueMap = new MultiValueMap () ;
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
             map.put("key2" , "value3") ;
