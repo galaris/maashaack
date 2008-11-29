@@ -13,7 +13,7 @@ The Original Code is [MaasHaack framework]
   
 The Initial Developer of the Original Code is
 Marc Alcaraz <ekameleon@gmail.com>.
-Portions created by the Initial Developer are Copyright (C) 2006-2008
+Portions created by the Initial Developer are Copyright (C) 2006-2009
 the Initial Developer. All Rights Reserved.
   
 Contributor(s):
