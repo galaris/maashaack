@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -47,18 +47,24 @@ package system.data
 		 * @return the total count of elements in all the collection in the MultiMap.
 		 */
     	function totalSize():uint ;
-	
+        
 		/**
-		 * Returns a collection of all values associated with all the keys in this map.
-		 * @return a collection of all values associated with all the keys in this map.
-		 */
-    	function values():Collection ;
-
-		/**
-		 * Returns an iterator fo all the values in the map.
-		 * @return an iterator fo all the values in the map.
+		 * Returns the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
+		 * @return the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
 		 */
 	    function valueIterator():Iterator ;
+	    
+        /**
+         * Returns a collection of all values associated with all the keys in this map.
+         * @return a collection of all values associated with all the keys in this map.
+         */
+        function values():Collection ;	    
+	    
+        /**
+         * Returns an Iterator representation of all values in the MultiHashMap.
+         * @return an Iterator representation of all values in the MultiHashMap.
+         */
+        function valuesIterator():Iterator ;  	    
 	    
     }
 }

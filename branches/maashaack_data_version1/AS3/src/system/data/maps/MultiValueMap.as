@@ -114,7 +114,6 @@ package system.data.maps
                 m.putCollection( key , value ) ;
             }
             return m ;            
-            
         }
        
         /**
@@ -295,6 +294,7 @@ package system.data.maps
         
         /**
          * Returns whether this object contains any mappings.
+         * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.maps.MultiValueMap ;
          * 
@@ -449,6 +449,20 @@ package system.data.maps
         
         /**
          * Returns the size of the collection mapped to the specified key.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * trace( map.size() ) ;  // 0
+         * 
+         * map.put( "key1" , "value1" ) ;
+         * map.put( "key1" , "value2" ) ;
+         * map.put( "key2" , "value3" ) ;
+         * 
+         * trace( map.size() ) ; // 2
+         * </pre>
          * @return the size of the collection mapped to the specified key.
          */
         public function size():uint
@@ -457,8 +471,8 @@ package system.data.maps
         }     
 
         /**
-         * Returns a Eden representation of the object.
-         * @return a string representing the source code of the object.
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
          */
         public function toSource(indent:int = 0):String
         {
@@ -476,6 +490,20 @@ package system.data.maps
 
         /**
          * Returns the total size of the map by counting all the values.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * trace( map.totalSize() ) ;  // 0
+         * 
+         * map.put( "key1" , "value1" ) ;
+         * map.put( "key1" , "value2" ) ;
+         * map.put( "key2" , "value3" ) ;
+         * 
+         * trace( map.totalSize() ) ; // 3
+         * </pre>
          * @return the total size of the map by counting all the values.
          */
         public function totalSize():uint 
@@ -490,24 +518,90 @@ package system.data.maps
             }
             return result ;
         }
-        
+            
         /**
-         * Returns a Collection of all values in the MultiHashMap.
-         * @return a Collection of all values in the MultiHashMap.
-         */
-        public function values():Collection 
-        {
-            return new ArrayCollection( getValues() ) ;
-        }
-    
-        /**
-         * Returns the iterator of all values in the MultiHashMap.
-         * @return the iterator of all values in the MultiHashMap.
+         * Returns the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.Iterator ;
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "A1"   ) ;
+         * map.put( "key2" , "B1" ) ;
+         * map.put( "key2" , "B2" ) ;
+         * map.put( "key3" , "C1" ) ;
+         * 
+         * var it:Iterator = map.valueIterator() ;
+         * 
+         * trace( it ) ;
+         * 
+         * while( it.hasNext() )
+         * {
+         *     trace( it.next() ) ;
+         * }
+         * </pre>
+         * @return the iterator representation of all Collections of values in the MultiHashMap.
          */
         public function valueIterator():Iterator 
         {
             return new ArrayIterator( _map.getValues() ) ;
         }
+        
+        /**
+         * Returns a Collection of all values in the MultiHashMap.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.Collection ;
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "A1"   ) ;
+         * map.put( "key2" , "B1" ) ;
+         * map.put( "key2" , "B2" ) ;
+         * map.put( "key3" , "C1" ) ;
+         * 
+         * var c:Collection = map.values() ;
+         * 
+         * trace( c ) ;
+         * </pre> 
+         * @return a Collection of all values in the MultiHashMap.
+         */
+        public function values():Collection 
+        {
+            return new ArrayCollection( getValues() ) ;
+        }        
+        
+        /**
+         * Returns an Iterator representation of all values in the MultiHashMap.
+         * <pre class="prettyprint">
+         * import system.data.Iterator ;
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put( "key1" , "A1"   ) ;
+         * map.put( "key2" , "B1" ) ;
+         * map.put( "key2" , "B2" ) ;
+         * map.put( "key3" , "C1" ) ;
+         * 
+         * var it:Iterator = map.valuesIterator() ;
+         * 
+         * trace( it ) ;
+         * 
+         * while( it.hasNext() )
+         * {
+         *     trace( it.next() ) ;
+         * }
+         * </pre>
+         * @return an Iterator representation of all values in the MultiHashMap.
+         */
+        public function valuesIterator():Iterator  
+        {
+            return new ArrayIterator( getValues() ) ;
+        }         
         
         /**
          * The internal Map of this MultiHashMap class.

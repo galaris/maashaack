@@ -38,9 +38,11 @@ package system.data.maps
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.data.Collection;
+    import system.data.Iterator;
     import system.data.Map;
     import system.data.MultiMap;
-    import system.data.collections.ArrayCollection;    
+    import system.data.collections.ArrayCollection;
+    import system.data.iterators.ArrayIterator;    
 
     public class MultiValueMapTest extends TestCase 
     {
@@ -222,7 +224,6 @@ package system.data.maps
 
         public function testIsEmpty():void 
         {
-            var map:MultiValueMap = new MultiValueMap () ;
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
             map.put("key2" , "value3") ;
@@ -271,35 +272,85 @@ package system.data.maps
 //            
 //        }
 //        
-//        public function testSize():void
-//        {
-//            
-//        }
+        public function testSize():void
+        {
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            assertEquals( map.size() , 2, "1 - The MultiHashMap size method failed.") ;
+            map.clear() ;
+            assertEquals( map.size() , 0 ,  "2 - The MultiHashMap size method failed.") ;
+        }
 //        
 //        public function testToSource():void 
 //        {
 //            
 //        }
-//        
-//        public function testToString():void 
-//        {
-//            
-//        }
-//                
-//        public function testTotalSize():void 
-//        {
-//            
-//        }
-//        
-//        public function testValues():void 
-//        {
-//                        
-//        }
-//            
-//        public function testValueIterator():void 
-//        {
-//            
-//        }
+        
+        public function testToString():void 
+        {
+            map.put("key1" , "value1") ;      
+            assertEquals( map.toString() , "{key1:{value1}}"  , "1 - The MultiHashMap toString method failed.") ;
+            map.clear() ;    
+            assertEquals( map.toString() , "{}" , "2 - The MultiHashMap toString method failed.") ;
+        }
+                
+        public function testTotalSize():void 
+        {
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            assertEquals( map.totalSize() , 3, "1 - The MultiHashMap totalSize method failed.") ;
+            map.clear() ;
+            assertEquals( map.totalSize() , 0 ,  "2 - The MultiHashMap totalSize method failed.") ;
+        }
+        
+        public function testValues():void 
+        {
+            map.put("key1" , "value1") ;      
+            var c:Collection = map.values() ;
+            assertNotNull( c , "1 - The MultiHashMap values method failed.") ;
+            assertTrue( c is ArrayCollection , "2 - The MultiHashMap values method failed.") ;
+            assertEquals( c.size() , 1 , "3 - The MultiHashMap values method failed.") ;
+            assertEquals( (c as ArrayCollection).toString() , "{value1}" , "3 - The MultiHashMap values method failed.") ;
+            map.clear() ;            
+        }
+            
+        public function testValueIterator():void 
+        {
+
+            // ArrayIterator of all collections of values        	
+        	
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            
+            var it:Iterator = map.valueIterator() ;
+            
+            assertNotNull( it , "1 - The MultiHashMap valueIterator method failed.") ;
+            assertTrue( it is ArrayIterator , "2 - The MultiHashMap valueIterator method failed.") ;
+            
+            assertTrue( it.hasNext() , "3 - The MultiHashMap size method failed.") ;
+            map.clear() ; 
+        }
+        
+        public function testValuesIterator():void 
+        {
+        	
+        	// ArrayIterator of all values
+        	
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            
+            var it:Iterator = map.valueIterator() ;
+            
+            assertNotNull( it , "1 - The MultiHashMap valueIterator method failed.") ;
+            assertTrue( it is ArrayIterator , "2 - The MultiHashMap valueIterator method failed.") ;
+            
+            assertTrue( it.hasNext() , "3 - The MultiHashMap size method failed.") ;
+            map.clear() ; 
+        }        
         
     }
 }

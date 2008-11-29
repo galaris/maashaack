@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -41,25 +41,20 @@ package system.data.samples
 
     public class MultiMapClass implements MultiMap
     {
-
-        public function totalSize():uint
-        {
-            return 0 ;
-        }
         
-        public function values():Collection
+        public function MultiMapClass()
         {
-            return new CollectionClass() ;
-        }
-        
-        public function valueIterator():Iterator
-        {
-            return new IteratorClass() ;
+        	        	
         }
         
         public function clear():void
         {
         }
+        
+        public function clone():*
+        {
+            return new MultiMapClass() ;
+        }        
         
         public function containsKey(key:*):Boolean
         {
@@ -111,10 +106,7 @@ package system.data.samples
             return 0 ;
         }
         
-        public function clone():*
-        {
-            return new MultiMapClass() ;
-        }
+
         
         public function iterator():Iterator
         {
@@ -125,5 +117,28 @@ package system.data.samples
         {
             return "" ;
         }
+        
+        public function totalSize():uint
+        {
+            return 0 ;
+        }
+        
+        
+        
+        public function values():Collection
+        {
+            return new CollectionClass() ;
+        }
+        
+        public function valueIterator():Iterator
+        {
+            return new IteratorClass() ;
+        }
+        
+        public function valuesIterator():Iterator
+        {
+            return new IteratorClass() ;
+        }        
+                
     }
 }
