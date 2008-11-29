@@ -40,6 +40,7 @@ package system
     
     import system.cli.AllTests;
     import system.comparators.AllTests;
+    import system.errors.AllTests;
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
@@ -82,6 +83,9 @@ package system
             
             //comparators
             suite.addTest(system.comparators.AllTests.suite());            
+
+            //errors
+            suite.addTest(system.errors.AllTests.suite());
             
             //evaluators
             suite.addTest(system.evaluators.AllTests.suite());
