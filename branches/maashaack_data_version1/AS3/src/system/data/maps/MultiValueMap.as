@@ -35,13 +35,15 @@
 
 package system.data.maps 
 {
+    import system.Reflection;
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.MultiMap;
     import system.data.collections.ArrayCollection;
-    import system.data.iterators.ArrayIterator;    
+    import system.data.iterators.ArrayIterator;
+    import system.eden;    
 
     /**
      * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface. 
@@ -324,8 +326,8 @@ package system.data.maps
          */
         public function toSource(indent:int = 0):String
         {
-            return null;
-        }   
+             return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( _map ) + ")" ;
+        } 
 
         /**
          * Returns the string representation of this instance.
