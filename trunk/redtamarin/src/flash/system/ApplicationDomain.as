@@ -1,4 +1,4 @@
-package flash.system
+﻿package flash.system
 {
     import avmplus.Domain;
     
