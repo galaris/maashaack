@@ -46,7 +46,19 @@ package system.data.maps
     import system.eden;    
 
     /**
-     * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface. 
+     * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.data.maps.MultiValueMap ;
+     * 
+     * var map:MultiValueMap = new MultiValueMap() ;
+     * 
+     * map.put("key1" , "value1") ;
+     * map.put("key1" , "value2") ;
+     * map.put("key2" , "value3") ;
+     * 
+     * trace( map ) ;
+     * </pre>
      */
     public class MultiValueMap implements MultiMap 
     {
@@ -324,11 +336,25 @@ package system.data.maps
         
         /**
          * Gets an Iterator for the collection mapped to the specified key.
-         * @return the iterator of the collection at the key, empty iterator if key not in map
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put("key1" , "value1") ;
+         * map.put("key1" , "value2") ;
+         * map.put("key2" , "value3") ;
+         * 
+         * trace( map.iteratorByKey( "key1" ) ) ; // [object ArrayIterator]
+         * trace( map.iteratorByKey( "key3" ) ) ; // null
+         * </pre>
+         * @return the iterator of the collection at the key, null if key not in map
          */
         public function iteratorByKey( key:* ):Iterator
         {
-            return ( _map.get(key) as Iterable ).iterator() ;
+        	var it:Iterable = _map.get(key) as Iterable ;
+            return it == null ? null : it.iterator() ; // TODO implement an EmptyIterator ??
         }     
      
         /**

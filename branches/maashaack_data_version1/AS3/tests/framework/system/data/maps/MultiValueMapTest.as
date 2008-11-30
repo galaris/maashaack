@@ -249,15 +249,49 @@ package system.data.maps
             map.clear() ;
         }
 
-//        public function testIteratorByKey():void
-//        {
-//            
-//        }
+        public function testIteratorByKey():void
+        {
+            
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            
+            var it:Iterator ;
+            
+            it = map.iteratorByKey( undefined ) ;
+            assertNull( it , "1 - The MultiHashMap iteratorByKey method failed." ) ;
+                        
+            it = map.iteratorByKey( null ) ;
+            assertNull( it , "2 - The MultiHashMap iteratorByKey method failed." ) ;
+
+            it = map.iteratorByKey( "key3" ) ;
+            assertNull( it , "3 - The MultiHashMap iteratorByKey method failed." ) ;
+
+            it = map.iteratorByKey( "key1" ) ;
+            assertNotNull( it , "4-1 - The MultiHashMap iteratorByKey method failed." ) ;            
+            assertTrue( it is ArrayIterator , "4-2 - The MultiHashMap iteratorByKey method failed." ) ;
+            assertTrue( it.hasNext() , "4-3 - The MultiHashMap iteratorByKey method failed." ) ;
+            
+            map.clear() ;            
+            
+        }
         
-//        public function testKeyIterator():void 
-//        {
-//                
-//        }
+        public function testKeyIterator():void 
+        {
+         
+            map.put("key1" , "value1") ;
+            
+            var it:Iterator ;
+            
+            it = map.keyIterator() ;
+            assertNotNull( it , "1 - The MultiHashMap keyIterator method failed." ) ;            
+            assertTrue( it is ArrayIterator , "2 - The MultiHashMap keyIterator method failed." ) ;
+            assertTrue( it.hasNext() , "3 - The MultiHashMap keyIterator method failed." ) ;
+            assertEquals( it.next() , "key1" , "4 - The MultiHashMap keyIterator method failed." ) ;
+            
+            map.clear() ;         
+                
+        }
          
         public function testPut():void
         {
