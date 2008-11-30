@@ -49,8 +49,8 @@ package system.data
     	function totalSize():uint ;
         
 		/**
-		 * Returns the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
-		 * @return the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
+		 * Returns the iterator representation of all Collections register in the MultiMap, all collections represents a key.
+		 * @return the iterator representation of all Collections register in the MultiMap, all collections represents a key.
 		 */
 	    function valueIterator():Iterator ;
 	    
@@ -61,8 +61,8 @@ package system.data
         function values():Collection ;	    
 	    
         /**
-         * Returns an Iterator representation of all values in the MultiHashMap.
-         * @return an Iterator representation of all values in the MultiHashMap.
+         * Returns an Iterator representation of all values in the MultiMap.
+         * @return an Iterator representation of all values in the MultiMap.
          */
         function valuesIterator():Iterator ;  	    
 	    

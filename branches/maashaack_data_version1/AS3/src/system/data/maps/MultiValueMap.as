@@ -619,7 +619,7 @@ package system.data.maps
         }
             
         /**
-         * Returns the iterator representation of all Collections register in the MultiHashMap, all collections represents a key.
+         * Returns the iterator representation of all Collections register in the MultiValueMap, all collections represents a key.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.Iterator ;
@@ -641,7 +641,7 @@ package system.data.maps
          *     trace( it.next() ) ;
          * }
          * </pre>
-         * @return the iterator representation of all Collections of values in the MultiHashMap.
+         * @return the iterator representation of all Collections of values in the MultiValueMap.
          */
         public function valueIterator():Iterator 
         {
@@ -649,7 +649,7 @@ package system.data.maps
         }
         
         /**
-         * Returns a Collection of all values in the MultiHashMap.
+         * Returns a Collection of all values in the MultiValueMap.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.Collection ;
@@ -666,7 +666,7 @@ package system.data.maps
          * 
          * trace( c ) ;
          * </pre> 
-         * @return a Collection of all values in the MultiHashMap.
+         * @return a Collection of all values in the MultiValueMap.
          */
         public function values():Collection 
         {
@@ -674,7 +674,7 @@ package system.data.maps
         }        
         
         /**
-         * Returns an Iterator representation of all values in the MultiHashMap.
+         * Returns an Iterator representation of all values in the MultiValueMap.
          * <pre class="prettyprint">
          * import system.data.Iterator ;
          * import system.data.maps.MultiValueMap ;
@@ -695,7 +695,7 @@ package system.data.maps
          *     trace( it.next() ) ;
          * }
          * </pre>
-         * @return an Iterator representation of all values in the MultiHashMap.
+         * @return an Iterator representation of all values in the MultiValueMap.
          */
         public function valuesIterator():Iterator  
         {
@@ -703,7 +703,7 @@ package system.data.maps
         }         
         
         /**
-         * The internal Map of this MultiHashMap class.
+         * The internal Map of this MultiValueMap class.
          * @private
          */
         protected var _map:HashMap ;
