@@ -65,6 +65,12 @@ package system.data.maps
 
         /**
          * Creates a new MultiValueMap instance.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * trace( map ) ;
+         * </pre>
          * @param map Optional Map reference to initialize this MultiMap.
          */
         public function MultiValueMap( map:Map = null )
