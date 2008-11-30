@@ -324,6 +324,7 @@ package system.data.maps
         
         /**
          * Gets an Iterator for the collection mapped to the specified key.
+         * @return the iterator of the collection at the key, empty iterator if key not in map
          */
         public function iteratorByKey( key:* ):Iterator
         {
@@ -340,6 +341,7 @@ package system.data.maps
         
         /**
          * Adds the value to the collection associated with the specified key.
+         * <p>Unlike a normal Map the previous value is not replaced. Instead the new value is added to the collection stored against the key.</p>
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.maps.MultiValueMap ;
@@ -353,10 +355,13 @@ package system.data.maps
          * 
          * trace( map ) ; // {keyB:{itemB_2},keyA:{itemA_1,itemA_2}}
          * </pre>
+         * @param key the key to store against.
+         * @param value the value to add to the collection at the key.
+         * @return the value added if the map changed and null if the map did not change.
          */        
         public function put( key:*, value:* ):*
         {
-            if (!containsKey(key)) 
+            if ( !containsKey(key) ) 
             {
                 _map.put( key , createCollection() ) ;
             }
@@ -367,27 +372,62 @@ package system.data.maps
         
         /**
          * Override superclass to ensure that MultiMap instances are correctly handled.
+         * <p>If you call this method with a normal map, each entry is added using put(key:*,value:*). 
+         * If you call this method with a multi map, each entry is added using putCollection( key:*, co:Collection ).</p>
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.collections.ArrayCollection ;
+         * 
+         * import system.data.maps.ArrayMap ;
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var am1:ArrayMap = new ArrayMap( [ "key1" , "key2" ] , ["value1" , "value2" ] ) ;
+         * var am2:ArrayMap = new ArrayMap( [ "key1" ]          , [ new ArrayCollection( [ "value3" ] ) ] ) ;
+         * 
+         * var mm:MultiValueMap = new MultiValueMap() ;
+         * 
+         * mm.putAll( am1 ) ; // {key2:{value2},key1:{value1}}
+         * 
+         * trace( mm ) ;
+         * 
+         * mm.putAll( am2 ) ; // {key2:{value2},key1:{value1,value3}}
+         * 
+         * trace( mm ) ;
+         * </pre>
          */
         public function putAll( map:Map ):void
         {
             var it:Iterator = map.iterator() ;
-            while (it.hasNext()) 
+            while ( it.hasNext() ) 
             {
                 var value:* = it.next() ;
                 var key:*   = it.key() ;
-                if (value is Collection) 
+                if ( value is Collection ) 
                 {
-                    putCollection(key, value) ;
+                    putCollection( key , value ) ;
                 }
                 else 
                 {
-                    put(key, value) ;
+                    put( key , value ) ;
                 }
             }
         }      
         
         /**
          * Adds a collection of values to the collection associated with the specified key.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.collections.ArrayCollection ;
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.putCollection( "key1" , new ArrayCollection(["value1", "value2"])) ;
+         * map.putCollection( "key1" , new ArrayCollection(["value3", "value4"])) ;
+         * map.putCollection( "key2" , new ArrayCollection(["value5"])) ;
+         * 
+         * trace( map ) ; // {key2:{value5},key1:{value1,value2,value3,value4}}
+         * </pre>
          */
         public function putCollection( key:* , c:Collection ):void 
         {
@@ -420,6 +460,18 @@ package system.data.maps
         
         /**
          * Removes a specific value from map with a specific key.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put("key1" , "value1") ;
+         * map.put("key1" , "value2") ;
+         * map.put("key2" , "value3") ;
+         * 
+         * trace( map.remove("key1") ) ; // [MapEntry key:key1 value:{value1,value2}]
+         * </pre>
          * @param o the key to remove in the map.
          */
         public function remove( o:* ):*
@@ -429,6 +481,21 @@ package system.data.maps
         
         /**
          * Removes a specific value from all the map.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.maps.MultiValueMap ;
+         * 
+         * var map:MultiValueMap = new MultiValueMap() ;
+         * 
+         * map.put("key1" , "value1") ;
+         * map.put("key1" , "value2") ;
+         * map.put("key2" , "value3") ;
+         * 
+         * trace( map.removeByKey("key1" , "value1" ) ) ; // true
+         * trace( map.removeByKey("key1" , "value5" ) ) ; // false
+         * 
+         * trace( map ) ; // {key2:{value3},key1:{value2}}
+         * </pre>
          * @param key the key to remove in the map
          * @param value (optional) if this value is defined removes a specific value from map else removes all values associated with the specified key.
          * @return the removed value.

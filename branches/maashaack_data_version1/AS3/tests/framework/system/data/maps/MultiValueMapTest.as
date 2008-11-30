@@ -231,47 +231,123 @@ package system.data.maps
             map.clear() ;
             assertTrue( map.isEmpty() , "2 - The MultiHashMap isEmpty failed.") ;
         }
-//        
-//        public function testIterator():void 
-//        {
-//            
-//        }
-//
+        
+        public function testIterator():void 
+        {
+            map.put("key1" , "value1") ;
+            
+            var it:Iterator = map.iterator() ;
+            
+            assertNotNull( it , "1 - The MultiHashMap iterator method failed." ) ;
+            
+            assertTrue( it.hasNext() , "2 - The MultiHashMap iterator method failed." ) ;
+            
+            var r:* = it.next() ;
+            
+            assertTrue( r is Collection , "3 - The MultiHashMap iterator method failed." ) ;
+            
+            map.clear() ;
+        }
+
 //        public function testIteratorByKey():void
 //        {
 //            
 //        }
-//    
+        
 //        public function testKeyIterator():void 
 //        {
-//            
-//        }       
-//        
-//        public function testPut():void
-//        {
-//            
-//        }   
-//        
-//        public function testPutAll():void
-//        {
-//            
+//                
 //        }
-//        
-//        public function testPutCollection():void 
-//        {
-//            
-//        }
-//        
-//        public function testRemove():void
-//        {
-//            
-//        }
-//        
-//        public function testRemoveByKey():void
-//        {
-//            
-//        }
-//        
+         
+        public function testPut():void
+        {
+            assertEquals ( map.put("key1" , "value1") , "value1" , "1-1 - The MultiHashMap size method failed." )  ;
+            assertEquals ( map.size() , 1 , "1-2 - The MultiHashMap size method failed." )  ;
+            
+            assertEquals ( map.put("key1" , "value2") , "value2" , "2-1 - The MultiHashMap size method failed." )  ;
+            assertEquals ( map.size() , 1 , "2-2 - The MultiHashMap size method failed." )  ;
+            
+            assertEquals ( map.put("key2" , "value3") , "value3" , "3-1 - The MultiHashMap size method failed." )  ;
+            assertEquals ( map.size() , 2 , "3-2 - The MultiHashMap size method failed." )  ;
+            
+            map.clear() ;
+        }   
+        
+        public function testPutAll():void
+        {
+         
+            var am1:ArrayMap = new ArrayMap( [ "key1" , "key2" ] , ["value1" , "value2" ] ) ;
+            var am2:ArrayMap = new ArrayMap( [ "key1" ]          , [ new ArrayCollection( [ "value3" ] ) ] ) ;
+            
+            var mm:MultiValueMap = new MultiValueMap() ;
+            
+            mm.putAll( am1 ) ; 
+            
+            assertEquals( mm.size()      , 2 , "1-1 - The MultiHashMap putAll method failed." ) ;
+            assertEquals( mm.totalSize() , 2 , "1-2 - The MultiHashMap putAll method failed." ) ;
+            
+            mm.putAll( am2 ) ;
+            
+            assertEquals( mm.size()      , 2 , "2-1 - The MultiHashMap putAll method failed." ) ;
+            assertEquals( mm.totalSize() , 3 , "2-2 - The MultiHashMap putAll method failed." ) ;
+            
+        }
+        
+        public function testPutCollection():void 
+        {
+            
+            map.putCollection( "key1" , new ArrayCollection(["value1", "value2"])) ;
+            map.putCollection( "key1" , new ArrayCollection(["value3", "value4"])) ;
+            map.putCollection( "key2" , new ArrayCollection(["value5"])) ;
+            
+            assertEquals( map.size()      , 2 , "1 - The MultiHashMap putCollection method failed." ) ;
+            assertEquals( map.totalSize() , 5 , "2 - The MultiHashMap putCollection method failed." ) ;            
+            
+            map.clear() ;
+            
+        }
+        
+        public function testRemove():void
+        {
+            
+            var e:MapEntry ;
+            
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            
+            e = map.remove( "key1" ) as MapEntry ;
+            
+            assertNotNull( e , "1-1 - The MultiHashMap remove method failed." ) ;
+            assertEquals( map.size() , 1 , "1-2 - The MultiHashMap remove method failed." ) ;
+            
+            e = map.remove( "key10" ) as MapEntry ;
+            assertNull( e , "2-1 - The MultiHashMap remove method failed." ) ;
+            assertEquals( map.size() , 1 , "2-2 - The MultiHashMap remove method failed." ) ;
+            
+            e = map.remove( "key2" ) as MapEntry ;
+            assertNotNull( e , "3-1 - The MultiHashMap remove method failed." ) ;
+            assertEquals( map.size() , 0 , "3-2 - The MultiHashMap remove method failed." ) ;            
+            
+              
+            
+            map.clear() ;
+        }
+        
+        public function testRemoveByKey():void
+        {
+            map.put("key1" , "value1") ;
+            map.put("key1" , "value2") ;
+            map.put("key2" , "value3") ;
+            
+            assertTrue  ( map.removeByKey("key1" , "value1" ) , "1 - The MultiHashMap removeByKey method failed." ) ;
+            assertFalse ( map.removeByKey("key1" , "value5" ) , "2 - The MultiHashMap removeByKey method failed." ) ;
+                    	
+            assertEquals( map.totalSize() , 2 ,  "3 - The MultiHashMap removeByKey method failed.") ;
+                    	
+            map.clear() ;
+        }
+
         public function testSize():void
         {
             map.put("key1" , "value1") ;
@@ -281,11 +357,20 @@ package system.data.maps
             map.clear() ;
             assertEquals( map.size() , 0 ,  "2 - The MultiHashMap size method failed.") ;
         }
-//        
-//        public function testToSource():void 
-//        {
-//            
-//        }
+        
+        public function testToSource():void 
+        {
+            map.put("key1" , "value1") ;
+            
+            assertEquals
+            (
+                map.toSource() , 
+                'new system.data.maps.MultiValueMap(new system.data.maps.HashMap(["key1"],[new system.data.collections.ArrayCollection(["value1"])]))' , 
+                "The MultiHashMap toSource method failed." 
+            ) ;
+            
+            map.clear() ;
+        }
         
         public function testToString():void 
         {
