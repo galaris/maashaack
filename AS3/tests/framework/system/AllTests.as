@@ -40,6 +40,7 @@ package system
     
     import system.cli.AllTests;
     import system.comparators.AllTests;
+    import system.data.AllTests;
     import system.errors.AllTests;
     import system.evaluators.AllTests;
     import system.formatters.AllTests;
@@ -80,6 +81,9 @@ package system
             
             //serializers
             suite.addTest(system.serializers.AllTests.suite());
+            
+            //data
+            suite.addTest(system.data.AllTests.suite());                 
             
             //comparators
             suite.addTest(system.comparators.AllTests.suite());            
