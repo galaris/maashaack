@@ -95,7 +95,12 @@ package system.data
 		 * Associates the specified value with the specified key in this map (optional operation).
 		 */
     	function put( key:* , value:* ):*  ;
-        	
+        
+        /**
+         * Copies all of the mappings from the specified map to this one.
+         */
+        function putAll( m:Map ):void ;        
+        
 		/**
 		 * Removes the mapping for this key from this map if it is present (optional operation).
 		 */

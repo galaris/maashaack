@@ -37,6 +37,7 @@ package system.data.samples
 {
     import system.data.Collection;
     import system.data.Iterator;
+    import system.data.Map;
     import system.data.MultiMap;    
 
     public class MultiMapClass implements MultiMap
@@ -96,6 +97,11 @@ package system.data.samples
             return key.toString() + ":" + value.toString() ;
         }
         
+        public function putAll( m:Map ):void
+        {
+            //
+        }           
+        
         public function remove(o:*):*
         {
             return o ;
@@ -105,8 +111,6 @@ package system.data.samples
         {
             return 0 ;
         }
-        
-
         
         public function iterator():Iterator
         {
