@@ -343,27 +343,14 @@ package system.data.maps
         
         public function testRemove():void
         {
-            
-            var e:MapEntry ;
-            
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
             map.put("key2" , "value3") ;
             
-            e = map.remove( "key1" ) as MapEntry ;
+            var c:Collection = map.remove( "key1" ) as Collection ;
             
-            assertNotNull( e , "1-1 - The MultiValueMap remove method failed." ) ;
+            assertNotNull( c , "1-1 - The MultiValueMap remove method failed." ) ;
             assertEquals( map.size() , 1 , "1-2 - The MultiValueMap remove method failed." ) ;
-            
-            e = map.remove( "key10" ) as MapEntry ;
-            assertNull( e , "2-1 - The MultiValueMap remove method failed." ) ;
-            assertEquals( map.size() , 1 , "2-2 - The MultiValueMap remove method failed." ) ;
-            
-            e = map.remove( "key2" ) as MapEntry ;
-            assertNotNull( e , "3-1 - The MultiValueMap remove method failed." ) ;
-            assertEquals( map.size() , 0 , "3-2 - The MultiValueMap remove method failed." ) ;            
-            
-              
             
             map.clear() ;
         }

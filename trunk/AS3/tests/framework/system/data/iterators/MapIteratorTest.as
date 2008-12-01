@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,8 +39,8 @@ package system.data.iterators
     
     import system.data.Iterator;
     import system.data.Map;
-    import system.data.maps.HashMap;
-    import system.data.maps.MapEntry;    
+    import system.data.maps.ArrayMap;
+    import system.data.maps.HashMap;    
 
     public class MapIteratorTest extends TestCase 
     {
@@ -115,20 +115,22 @@ package system.data.iterators
         public function testRemove():void
         {
 			
-        	var map:Map      = new HashMap(["key1","key2"],["value1","value2"]) ; 
+        	var map:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ; 
             var itr:Iterator = new MapIterator( map ) ;
             
             itr.next() ;
             
-            var entry:MapEntry = itr.remove() as MapEntry;
+            var r:* = itr.remove() ;
 			         	
-         	assertNotNull( entry , "02 - reset() method failed and not return a MapEntry object." ) ;
-         	assertTrue
-         	( 
-         		( entry.key == "key1" && entry.value == "value1" ) 
-         			|| ( entry.key == "key2" && entry.value == "value2" ) ,  
-         		"02 - reset() method failed" 
-         	) ;
+         	assertEquals( r , "value1" , "01-01 - remove() method." ) ;
+         	assertEquals( map.size()   , 1 , "01-02 - remove() method." ) ;
+            
+            itr.next() ;
+            r = itr.remove() ;
+            
+            assertEquals( r , "value2" , "02-01 - remove() method." ) ;
+            assertEquals( map.size()   , 0 , "02-02 - remove() method." ) ;
+
         }           
     
         public function testReset():void

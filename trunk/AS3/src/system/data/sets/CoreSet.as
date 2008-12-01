@@ -41,8 +41,7 @@ package system.data.sets
     import system.data.Map;
     import system.data.Set;
     import system.data.collections.ArrayCollection;
-    import system.data.iterators.ArrayIterator;
-    import system.data.maps.MapEntry;    
+    import system.data.iterators.ArrayIterator;    
 
     /**
      * The basic implementation of the Set interface. 
@@ -164,8 +163,7 @@ package system.data.sets
          */
         public override function remove(o:*):* 
         {
-        	var e:MapEntry = (_map.remove(o) as MapEntry) as MapEntry;
-            return e == null ? false : ( e.value == PRESENT ) ;
+            return _map.remove(o) == PRESENT ;
         }
 
         /**
