@@ -265,21 +265,22 @@ package system.data.maps
  
         /**
          * Removes the mapping for this key from this map if present.
-         * @return A MapEntry object who contains the key and the value removed from the Map (or null).
+         * @param o The key whose mapping is to be removed from the map.
+         * @return previous value associated with specified key, or null if there was no mapping for key. A null return can also indicate that the map previously associated null with the specified key.
          */
         public function remove( o:* ):*
         {
-            var r:*   = null ;
+        	var k:* ;
+            var v:*   = null ;
             var i:int = indexOfKey( o ) ;
-            if (i > -1) 
+            if ( i > -1 ) 
             {
-                var k:* = _keys[i]   ;
-                var v:* = _values[i] ;
-                r = new MapEntry(k,v) ;
+                k = _keys[i]   ;
+                v = _values[i] ;
                 _values.splice(i, 1) ;
                 _keys.splice(i, 1) ;                
             }
-            return r ;
+            return v ;
         }
 
         /**

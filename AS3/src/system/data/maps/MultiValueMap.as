@@ -502,7 +502,7 @@ package system.data.maps
          * map.put("key1" , "value2") ;
          * map.put("key2" , "value3") ;
          * 
-         * trace( map.remove("key1") ) ; // [MapEntry key:key1 value:{value1,value2}]
+         * trace( map.remove("key1") ) ; // {value1,value2}
          * </pre>
          * @param o the key to remove in the map.
          */
@@ -541,7 +541,7 @@ package system.data.maps
             else
             {
                 var c:Collection = _map.get(key) ;
-                var r:*          = c.remove(value) ; // TODO use MapEntry ?????
+                var r:*          = c.remove(value) ;
                 return (r != null) ? r : null ;
             }
         }        

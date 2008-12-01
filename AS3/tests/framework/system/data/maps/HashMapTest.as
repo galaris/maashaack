@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -178,9 +178,7 @@ package system.data.maps
         public function testRemove():void
         {
         	map.put("key3", "value3") ;
-        	var entry:MapEntry = map.remove("key3") ;
-        	assertEquals( entry.key , "key3", "1 - The HashMap remove method failed.") ;
-            assertEquals( entry.value , "value3" , "2 - The HashMap remove method failed.") ;
+        	assertEquals( map.remove("key3") ,"value3", "1 - The HashMap remove method failed.") ;
             assertNull( map.remove("key4"), "3 - The HashMap remove method failed.") ;
         }        
        
