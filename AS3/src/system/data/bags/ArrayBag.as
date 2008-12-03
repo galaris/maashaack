@@ -38,14 +38,14 @@ package system.data.bags
     import system.Reflection;
     import system.data.Collection;
     import system.data.List;
-    import system.data.maps.HashMap;    
+    import system.data.maps.ArrayMap;    
 
     /**
-	 * Implements Bag, using a HashMap to provide the data storage. This is the standard implementation of a bag.
+	 * Implements Bag, using a ArrayMap to provide the data storage. This is the standard implementation of a bag.
 	 * <p><b>Example : </b></p>
 	 * <pre class="prettyprint">
 	 * import system.data.Bag ;
-	 * import system.data.bags.HashBag ;
+	 * import system.data.bags.ArrayBag ;
 	 * 
 	 * import system.data.Collection ;
 	 * import system.data.collections.ArrayCollection ;
@@ -59,7 +59,7 @@ package system.data.bags
 	 * 
 	 * trace ("---- create a new HashBag") ;
 	 * 
-	 * var bag:Bag = new HashBag() ;
+	 * var bag:Bag = new ArrayBag() ;
 	 * 
 	 * trace ("---- add") ;
 	 * trace (" + bag addAll c1 : " + bag.addAll(c1)) ;
@@ -94,16 +94,16 @@ package system.data.bags
 	 * trace("bag uniqueSet : " + s) ;
 	 * </pre>
  	 */
-	public class HashBag extends CoreBag
+	public class ArrayBag extends CoreBag
 	{
 		
 		/**
-	 	 * Creates a new HashBag instance.
+	 	 * Creates a new ArrayBag instance.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
          */
-		public function HashBag( co:Collection=null )
+		public function ArrayBag( co:Collection = null )
 		{
-			super( new HashMap() , co ) ;
+			super( new ArrayMap() , co ) ;
 		}
 	
 		/**
@@ -112,7 +112,7 @@ package system.data.bags
 	 	 */
 		public override function clone():*
 		{
-			return new HashBag( _getMap().clone() ) ;
+			return new ArrayBag( _getMap().clone() ) ;
 		}
         
         /**
