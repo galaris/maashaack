@@ -33,56 +33,60 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data
 {
     import system.data.Collection;
-    import system.formatters.Formattable;    
+    import system.data.Set;	
 
     /**
-     * Converts a Collection to a custom string representation.
-     */
-    public class CollectionFormatter implements Formattable 
+	 * Defines a collection that counts the number of times an object appears in the collection.
+	 */
+    public interface Bag extends Collection
     {
 
         /**
-         * Creates a new CollectionFormatter instance.
+         * Adds n copies of the given object to the bag and keep a count. 
          */
-        public function CollectionFormatter()
-        {
-            //  
-        }
-
+        function addCopies(o:*, nCopies:uint):Boolean ;
+            	
         /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
+         * Insert all elements represented in the given collection.
          */
-        public function format( value:* = null ):String
-        {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
-        }
+        function addAll(c:Collection):Boolean ;
+        
+        /**
+		 * (Violation) Returns <code class="prettyprint">true</code> if the bag contains all elements in the given collection, respecting cardinality.
+		 * @return <code class="prettyprint">true</code> if the bag contains all elements in the given collection, respecting cardinality.
+		 */
+	    function containsAll( c:Collection ):Boolean ;
+	    
+		/**
+		 * Returns the number of occurrences (cardinality) of the given object currently in the bag.
+		 * @return the number of occurrences (cardinality) of the given object currently in the bag.
+		 */
+    	function getCount( o:* ):uint ;
+
+		/**
+		 * (Violation) Removes all elements represented in the given collection, respecting cardinality.
+		 */
+    	function removeAll(c:Collection):Boolean ;
+
+		/**
+		 * Removes the given number of occurrences from the bag.
+		 */
+    	function removeCopies(o:*, nCopies:uint):Boolean ; 
+
+		/**
+		 * (Violation) Removes any members of the bag that are not in the given collection, respecting cardinality.
+		 */
+    	function retainAll(c:Collection):Boolean ;
+
+		/**
+		 * Returns the Set of unique members that represent all members in the bag.
+		 * @return the Set of unique members that represent all members in the bag.
+		 */
+    	function uniqueSet():Set ;
+ 
     }
+
 }

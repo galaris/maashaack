@@ -33,56 +33,60 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data.samples 
 {
+    import system.data.Bag;
     import system.data.Collection;
-    import system.formatters.Formattable;    
+    import system.data.Set;
+    import system.data.sets.ArraySet;    
 
-    /**
-     * Converts a Collection to a custom string representation.
-     */
-    public class CollectionFormatter implements Formattable 
+    public class BagClass extends CollectionClass implements Bag
     {
 
-        /**
-         * Creates a new CollectionFormatter instance.
-         */
-        public function CollectionFormatter()
+        public function BagClass( ar:Array = null )
         {
-            //  
+        	super(ar) ;
         }
-
-        /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
-         */
-        public function format( value:* = null ):String
+                
+        public function addAll(c:Collection):Boolean
         {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
+        	return false ;
+        }
+        
+        public function addCopies(o:*, nCopies:uint):Boolean
+        {
+        	return false ;
+        }        
+        
+        public function containsAll(c:Collection):Boolean
+        {
+        	return false ;
+        }
+        
+        public function getCount(o:*):uint
+        {
+        	return 1 ;
+        }
+        
+        public function removeAll(c:Collection):Boolean
+        {
+        	return false ;
+        }
+        
+        public function removeCopies(o:*, nCopies:uint):Boolean
+        {
+        	return false ;
+        }
+        
+        public function retainAll(c:Collection):Boolean
+        {
+        	return false ;
+        }
+        
+        public function uniqueSet():Set
+        {
+        	return new ArraySet(toArray()) ;
         }
     }
+   
 }

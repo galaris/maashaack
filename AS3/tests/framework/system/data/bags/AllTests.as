@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -34,26 +33,21 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package system.data.maps
+package system.data.bags
 {
-    import buRRRn.ASTUce.framework.*;                                        
+    import buRRRn.ASTUce.framework.*;                                                                    
 
     public class AllTests
     {
 
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("Maashaack data maps tests");
+            var suite:TestSuite = new TestSuite("Maashaack data collections tests");
+
+            suite.addTestSuite( BagFormatterTest ) ;
+            suite.addTestSuite( CoreBagTest ) ;
+            suite.addTestSuite( HashBagTest ) ;
             
-            suite.addTestSuite( ArrayMapTest          ) ;
-            suite.addTestSuite( HashMapTest           ) ;
-            suite.addTestSuite( MapEntryTest          ) ;            
-            suite.addTestSuite( MapFormatterTest      ) ;
-            suite.addTestSuite( MapUtilsTest          ) ;
-            suite.addTestSuite( MultiValueMapTest     ) ;
-            suite.addTestSuite( MultiMapFormatterTest ) ;
-            suite.addTestSuite( SortedArrayMapTest    ) ;
-                      
             return suite;
         }
     }
