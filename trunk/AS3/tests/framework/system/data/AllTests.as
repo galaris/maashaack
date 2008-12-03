@@ -39,6 +39,7 @@ package system.data
     import buRRRn.ASTUce.framework.*;
     
     import system.data.arrays.*;
+    import system.data.bags.*;    
     import system.data.collections.*;
     import system.data.iterators.*;
     import system.data.lists.*;
@@ -56,6 +57,8 @@ package system.data
             var suite:TestSuite = new TestSuite("system data tests");
             
             // test system.data interfaces
+            
+            suite.addTestSuite(BagTest) ;
             suite.addTestSuite(BoundableTest) ;
             suite.addTestSuite(CollectionTest) ;
             suite.addTestSuite(EntryTest) ;
@@ -75,6 +78,9 @@ package system.data
             // arrays
             suite.addTest(system.data.arrays.AllTests.suite());
             
+            // bags
+            suite.addTest(system.data.bags.AllTests.suite());
+                        
             // collections
             suite.addTest(system.data.collections.AllTests.suite());  
                                  

@@ -1,4 +1,4 @@
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.iterators
 {
-    import buRRRn.ASTUce.framework.*;                                            
+    import buRRRn.ASTUce.framework.*;                                                
 
     public class AllTests
     {
@@ -47,6 +47,7 @@ package system.data.iterators
             suite.addTestSuite(ArrayFieldIteratorTest) ;
             suite.addTestSuite(ArrayIteratorTest) ;
             suite.addTestSuite(ArrayListIteratorTest) ;
+            suite.addTestSuite(BagIteratorTest) ;
             suite.addTestSuite(IterableFormatterTest) ;
             suite.addTestSuite(LinkedListIteratorTest) ;
             suite.addTestSuite(MapIteratorTest) ;

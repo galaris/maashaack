@@ -33,56 +33,34 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data.maps 
 {
-    import system.data.Collection;
-    import system.formatters.Formattable;    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.Map;            
 
-    /**
-     * Converts a Collection to a custom string representation.
-     */
-    public class CollectionFormatter implements Formattable 
+    public class MapUtilsTest extends TestCase 
     {
 
-        /**
-         * Creates a new CollectionFormatter instance.
-         */
-        public function CollectionFormatter()
+        public function MapUtilsTest(name:String = "")
         {
-            //  
+            super( name );
+        }
+        
+        public function testGetNumber():void
+        {
+        	var map:Map = new ArrayMap() ;
+        	
+        	map.put("key1" , 5 ) ;
+        	map.put("key2" , "value" ) ;
+        	map.put("key3" , "123" ) ;
+        	map.put("key4" , "123a" ) ;
+        	        	
+            assertEquals( MapUtils.getNumber(map, "key1") , 5   , "01 - MapUtils.getNumber failed" ) ;
+            assertEquals( MapUtils.getNumber(map, "key2") , NaN , "02 - MapUtils.getNumber failed" ) ;
+            assertEquals( MapUtils.getNumber(map, "key3") , 123 , "03 - MapUtils.getNumber failed" ) ;
+            assertEquals( MapUtils.getNumber(map, "key4") , 123 , "04 - MapUtils.getNumber failed" ) ;
         }
 
-        /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
-         */
-        public function format( value:* = null ):String
-        {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
-        }
     }
 }

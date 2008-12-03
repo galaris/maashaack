@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -95,8 +95,8 @@ package system.data.iterators
         public function add(o:*):void
         {
             checkForComodification();
-            _lastReturned = this._list.getHeader() ;
-            _list.addBefore(o, this._next) ;
+            _lastReturned = _list.getHeader() ;
+            _list.addBefore(o, _next) ;
             _nextIndex ++ ;
             _expectedModCount ++ ;        	
         }
@@ -106,7 +106,7 @@ package system.data.iterators
          */
         public function checkForComodification():void 
         {
-            if ( this._list.modCount != this._expectedModCount )
+            if ( _list.modCount != _expectedModCount )
             {
                 throw new ConcurrencyError("LinkedListIterator check for comodification failed with a LinkedList." ) ;
             }
@@ -118,7 +118,7 @@ package system.data.iterators
          */    
         public function hasNext():Boolean
         {
-            return this._nextIndex != this._list.size() ;
+            return _nextIndex != _list.size() ;
         }        
         
         /**
@@ -210,26 +210,26 @@ package system.data.iterators
          */
         public function remove():* 
         {
-            this.checkForComodification() ;
-            var lastNext:LinkedListEntry = this._lastReturned.next;
+            checkForComodification() ;
+            var lastNext:LinkedListEntry = _lastReturned.next;
             try 
             {
-                this._list.removeEntry( this._lastReturned ) ;
+                _list.removeEntry( _lastReturned ) ;
             }
             catch ( e:NoSuchElementError ) 
             {
                 throw new NoSuchElementError( "LinkedListIterator.remove() method failed.") ;
             }
-            if ( this._next == this._lastReturned)
+            if ( _next == _lastReturned)
             {
-                this._next = lastNext ;
+                _next = lastNext ;
             }
             else
             {
-                this._nextIndex-- ;
+                _nextIndex-- ;
             }
-            this._lastReturned = this._list.getHeader() ;
-            this._expectedModCount++;
+            _lastReturned = this._list.getHeader() ;
+            _expectedModCount++;
         }
         
         /**
@@ -315,7 +315,7 @@ package system.data.iterators
          * The next entry.
          * @private
          */
-        private var _next:LinkedListEntry = null ;
+        private var _next:LinkedListEntry ;
         
         /**
          * The next index in the iterator.

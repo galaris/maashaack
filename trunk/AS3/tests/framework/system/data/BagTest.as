@@ -33,56 +33,26 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data 
 {
-    import system.data.Collection;
-    import system.formatters.Formattable;    
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.samples.BagClass;    
 
-    /**
-     * Converts a Collection to a custom string representation.
-     */
-    public class CollectionFormatter implements Formattable 
+    public class BagTest extends TestCase 
     {
 
-        /**
-         * Creates a new CollectionFormatter instance.
-         */
-        public function CollectionFormatter()
+        public function BagTest( name:String = "" )
         {
-            //  
+            super( name );
         }
-
-        /**
-         * Formats the specified value.
-         * @param value The object to format.
-         * @return the string representation of the formatted value. 
-         */
-        public function format( value:* = null ):String
+        
+        public function testInterface():void
         {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
-        }
+            var c:BagClass = new BagClass();
+            assertTrue( c is Bag ) ;
+        }         
+        
     }
 }
+

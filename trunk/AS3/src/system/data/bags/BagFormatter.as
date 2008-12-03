@@ -33,21 +33,22 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data.bags 
 {
-    import system.data.Collection;
+    import system.data.Bag;
+    import system.data.Iterator;
     import system.formatters.Formattable;    
 
     /**
-     * Converts a Collection to a custom string representation.
+     * Converts a Bag to a custom string representation.
      */
-    public class CollectionFormatter implements Formattable 
+    public class BagFormatter implements Formattable 
     {
 
         /**
-         * Creates a new CollectionFormatter instance.
+         * Creates a new BagFormatter instance.
          */
-        public function CollectionFormatter()
+        public function BagFormatter()
         {
             //  
         }
@@ -57,32 +58,31 @@ package system.data.collections
          * @param value The object to format.
          * @return the string representation of the formatted value. 
          */
-        public function format( value:* = null ):String
+        public function format(value:* = null):String
         {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
+            if ( value != null && value is Bag ) 
+            {
+                var s:String = "{" ;
+                var it:Iterator = (value as Bag).uniqueSet().iterator() ;
+                var cur:* ;
+                var count:uint ;
+                while (it.hasNext()) 
+                {
+                    cur = it.next() ;
+                    count = (value as Bag).getCount( cur ) ;
+                    s += count + ":" + cur ;
+                    if ( it.hasNext() )
+                    {
+                        s += "," ;
+                    }
+                }
+                s += "}" ;
+                return s ;
+            }
+            else
+            {
+            	return "" ;
+            }
         }
     }
 }
