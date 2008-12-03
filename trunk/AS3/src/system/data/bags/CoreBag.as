@@ -45,7 +45,7 @@ package system.data.bags
     import system.data.iterators.BagIterator;
     import system.data.lists.ArrayList;
     import system.data.maps.MapUtils;
-    import system.data.sets.HashSet;
+    import system.data.sets.ArraySet;
     
     import flash.errors.IllegalOperationError;    
 
@@ -58,14 +58,16 @@ package system.data.bags
 		
 		/**
 	 	 * Creates a new CoreBag instance.
-	 	 * @param m a Map reference.
-	 	 */
-		public function CoreBag( map:Map )
+	 	 * @param map a Map reference used to register all elements in the Bag.
+         * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
+         */
+		public function CoreBag( map:Map = null , co:Collection = null )
 		{
-			if ( map != null ) 
-			{
-				_setMap( map ) ;
-			}
+			_setMap( map ) ;
+            if ( co != null ) 
+            {
+                addAll(co) ;
+            }
 		}
 		
         /**
@@ -95,14 +97,14 @@ package system.data.bags
         /**
          * Insert all elements represented in the given collection.
          */         
-        public function addAll(c:Collection):Boolean 
+        public function addAll( c:Collection ):Boolean 
         {
             var changed:Boolean = false;
             var i:Iterator = c.iterator() ;
             var added:Boolean ;
             while (i.hasNext()) 
             {
-                added = add(i.next());
+                added   = addCopies( i.next() , 1 )  ;
                 changed = changed || added ;
             }
             return changed;
@@ -110,15 +112,16 @@ package system.data.bags
         
         /**
          * Add n copies of the given object to the bag and keep a count. 
+         * @return <code class="prettyprint">true</code> if the object was not already in the <code>uniqueSet</code>
          */
         public function addCopies(o:*, nCopies:uint):Boolean 
         {
+        	_modCount++ ;
             if ( nCopies > 0 ) 
             {
-                var count:uint = nCopies + getCount(o) ;
-                _map.put(o, count) ;
-                _total += nCopies ;
-                _modCount++ ;
+                var count:int = nCopies + getCount(o) ;
+                _map.put( o , count ) ;
+                _size += nCopies ;
                 return count == nCopies ;
             }
             else 
@@ -134,7 +137,7 @@ package system.data.bags
 		{
 			_modCount ++ ;
 			_map.clear() ;
-			_total = 0 ;
+			_size = 0 ;
 		}
 	 
 		/**
@@ -170,13 +173,15 @@ package system.data.bags
 		 */     
 		public function containsAllInBag( b:Bag ):Boolean 
 		{
+			var current:* ;
+			var contains:Boolean ;
 			var result:Boolean = true ;
 			var i:Iterator = b.uniqueSet().iterator() ;
-	        while (i.hasNext()) 
+			while (i.hasNext()) 
 	        {
-				var current:* = i.next();
-	            var contains:Boolean = getCount(current) >= b.getCount(current) ;
-	            result = result && contains ;
+				current  = i.next();
+	            contains = getCount(current) >= b.getCount(current) ;
+	            result   = result && contains ;
 	        }
 	        return result;
 		}
@@ -272,18 +277,18 @@ package system.data.bags
 	        	return false ;
 	        }
             var result:Boolean ;
-	        var count:uint = getCount(o) ;
-	        if (count > nCopies) 
+	        var count:uint = getCount( o ) ;
+	        if ( count > nCopies ) 
 	        {
 	            _map.put( o, new int(count - nCopies)) ;
 	            result = true ;
-	            _total -= nCopies ;
+	            _size -= nCopies ;
 	        }
 	        else
 	        { 
 	        	// count > 0 && count <= i  
 	            result = (_map.remove(o) != null) ; // need to remove all
-	            _total -= count ;
+	            _size -= count ;
 	        }
     	    return result;
     	} 
@@ -331,7 +336,7 @@ package system.data.bags
 		 */
 		public function size():uint
 		{
-			return _total ;
+			return _size ;
 		}
 	
 		/**
@@ -370,16 +375,16 @@ package system.data.bags
 		 */
     	public function uniqueSet():Set 
     	{
-    		return new HashSet(_map.getKeys()) ;
+    		return new ArraySet( _map.getKeys() ) ;
     	}
 
 		/**
 		 * @private
 		 */
-		protected function _calcTotalSize():uint
+		protected function _calculateTotalSize():uint
 		{
-    	    _total = _extractList().size() ;
-	        return _total ;
+    	    _size = _extractList().size() ;
+	        return _size ;
 	    }
 
 		/**
@@ -412,13 +417,16 @@ package system.data.bags
 		/**
 		 * @private
 		 */	
-		protected function _setMap(m:Map):void
+		protected function _setMap( m:Map ):void
 		{
-			if (m == null || m.isEmpty() == false) 
+			if ( m != null && m.isEmpty() ) 
 			{
-	            throw new ArgumentError(this + ", the map must be non-null and empty.") ;
+	           _map = m ;    
 	        }
-	        _map = m ;
+	        else
+	        {
+	           throw new ArgumentError("CoreBag set the internal Map failed, the Map must be non-null and empty.") ;
+	        }
 		}
 
 		/**
@@ -434,7 +442,7 @@ package system.data.bags
 		/**
 		 * @private
 		 */		
-		private var _total:uint = 0 ;
+		private var _size:uint = 0 ;
         
 	}
 }

@@ -51,10 +51,10 @@ package system.data.maps
 		 */
 		public static function getNumber( map:Map , key:* ):Number 
 		{
-        	if (map != null) 
+        	if ( map != null ) 
         	{
 	            var answer:* = map.get(key) ;
-	            if (answer != null) 
+	            if ( answer != null ) 
 	            {
 	                if (answer is Number) 
 	                {
@@ -62,8 +62,7 @@ package system.data.maps
 	                }
 	                else if (answer is String) 
 	                {
-	                    var r:Number = parseInt(answer) ;
-						return isNaN(r) ? NaN : r ;
+						return parseInt(answer) ;
 	                }
 	            }
 	        }
