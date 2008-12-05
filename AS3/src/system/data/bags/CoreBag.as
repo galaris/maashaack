@@ -44,6 +44,7 @@ package system.data.bags
     import system.data.Set;
     import system.data.iterators.BagIterator;
     import system.data.lists.ArrayList;
+    import system.data.maps.HashMap;
     import system.data.maps.MapUtils;
     import system.data.sets.ArraySet;
     
@@ -102,7 +103,7 @@ package system.data.bags
             var changed:Boolean = false;
             var i:Iterator = c.iterator() ;
             var added:Boolean ;
-            while (i.hasNext()) 
+            while ( i.hasNext() ) 
             {
                 added   = addCopies( i.next() , 1 )  ;
                 changed = changed || added ;
@@ -114,7 +115,7 @@ package system.data.bags
          * Add n copies of the given object to the bag and keep a count. 
          * @return <code class="prettyprint">true</code> if the object was not already in the <code>uniqueSet</code>
          */
-        public function addCopies(o:*, nCopies:uint):Boolean 
+        public function addCopies( o:* , nCopies:uint ):Boolean 
         {
         	_modCount++ ;
             if ( nCopies > 0 ) 
@@ -146,7 +147,10 @@ package system.data.bags
 		 */
 		public function clone():*
 		{
-			return null ;
+			var m:Map        = _getMap().clone() ;
+			var c:Collection = _extractList() ;
+			m.clear() ;
+			return new CoreBag( m , (c != null && c.size()) > 0 ? c : null ) ;
 		}
 
 		/**
@@ -177,7 +181,7 @@ package system.data.bags
 			var contains:Boolean ;
 			var result:Boolean = true ;
 			var i:Iterator = b.uniqueSet().iterator() ;
-			while (i.hasNext()) 
+			while ( i.hasNext() ) 
 	        {
 				current  = i.next();
 	            contains = getCount(current) >= b.getCount(current) ;
@@ -185,21 +189,12 @@ package system.data.bags
 	        }
 	        return result;
 		}
-
-		/**
-		 * Returns the deep copy of this bag.
-		 * @return the deep copy of this bag.
-		 */
-		public function copy():*
-		{
-			return null ;
-		}
-	
-		/**
+        
+        /**
 		 * Unsupported by bag objects.
-		 * @throws UnsupportedOperation the 'get' method is unsupported with a bag object.
+		 * @throws IllegalOperationError the 'get' method is unsupported with a bag object.
 		 */	
-		public function get(key:*):*
+		public function get( key:* ):*
 		{
 			throw new IllegalOperationError( this + " 'get' method is unsupported.") ;
 		}
@@ -425,7 +420,7 @@ package system.data.bags
 	        }
 	        else
 	        {
-	           throw new ArgumentError("CoreBag set the internal Map failed, the Map must be non-null and empty.") ;
+	           throw new ArgumentError( Reflection.getClassName(this) + ", set the internal Map failed. The Map must be non-null and empty.") ;
 	        }
 		}
 

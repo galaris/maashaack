@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -82,8 +82,7 @@ package system.data.sets
             
             s2 = new HashSet( new ArrayMap(["key1","key2"], ["value1","value2"]) as Iterable ) ; 
             assertNotNull(s2, "04-01 - HashSet constructor failed.") ;
-            ArrayAssert.assertEquals( s2.toArray(), ["value1","value2"], "04-02 - HashSet constructor failed.") ;
-                        
+            assertEquals(s2.size(), 2 , "04-02 - HashSet constructor failed.") ;
             
             // duplicate entries
             
