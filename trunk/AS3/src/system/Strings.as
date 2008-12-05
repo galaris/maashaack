@@ -576,7 +576,7 @@ package system
             }
             
             var l:int = evaluated.indexes.length ;
-            for( var i:uint = 0; i < l ; i++ )
+            for( var i:int = 0 ; i < l ; i++ )
             {
                 indexedValues[ (_hiddenIndex + i) ] = evaluated.indexes[i];
             }

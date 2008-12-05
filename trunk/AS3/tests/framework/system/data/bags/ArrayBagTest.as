@@ -31,25 +31,24 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
- */
-
-package system.data.bags
+*/
+ 
+package system.data.bags 
 {
-    import buRRRn.ASTUce.framework.*;                                                                        
+    import buRRRn.ASTUce.framework.TestCase;            
 
-    public class AllTests
+    public class ArrayBagTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function ArrayBagTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("Maashaack data bags tests");
-
-            suite.addTestSuite( ArrayBagTest ) ;
-            suite.addTestSuite( BagFormatterTest ) ;
-            suite.addTestSuite( CoreBagTest ) ;
-            suite.addTestSuite( HashBagTest ) ;
-            
-            return suite;
+            super( name );
         }
+        
+        public function testConstructor():void
+        {
+            // TODO	
+        }
+        
     }
 }
