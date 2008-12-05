@@ -65,10 +65,10 @@ package system.formatters
      * trace("----") ;
      * 
      * f.pattern = "hh 'h' nn 'mn' ss 's' tt" ;
-     * trace( f.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s am
+     * trace( f.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 10 h 15 mn 00 s am
      * 
      * f.pattern = "hh 'h' nn 'mn' ss 's' t" ;
-     * trace( formatter.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 02 h 15 mn 00 s a
+     * trace( formatter.format( new Date(2008,1,21,10,15,0,0) ) ) ; // 10 h 15 mn 00 s a
      * 
      * f.pattern = "hh 'h' nn 'mn' ss 's' TT" ; // capitalize the pm expression.
      * trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
