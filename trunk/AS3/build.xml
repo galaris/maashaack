@@ -74,6 +74,14 @@
         <os family="windows" />
     </condition>
     
+    <condition property="sep" value="${SEPARATOR_MAC}">
+        <os family="mac" />
+    </condition>
+    
+    <condition property="sep" value="${SEPARATOR_WIN}">
+        <os family="windows" />
+    </condition>
+    
     <!-- define flexTasks -->
     <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
     
@@ -178,7 +186,7 @@
         </fileset>
         <pathconvert property="classes" pathsep=" " refid="sources">
             <chainedmapper>
-                <globmapper from="${basedir}/build/tmp/core/*" to="*"/>
+                <globmapper from="${basedir}${sep}build${sep}tmp${sep}core${sep}*" to="*"/>
                 <mapper type="package" from="*.as" to="*"/>
             </chainedmapper>
         </pathconvert>
@@ -206,7 +214,7 @@
             <metadata date="${TODAY}" title="${project.name}">
                 <creator name="Zwetan Kjukov" />
                 <creator name="Marc Alcaraz" />
-           <!-- <contributor name="Marc Alcaraz" /> -->
+           <!-- <contributor name="Niko Bellic" /> -->
             </metadata>
         </compc>
         
