@@ -326,7 +326,6 @@ package system.data.bags
 	        }
 	        else
 	        { 
-	        	// count > 0 && count <= i  
 	            result = (_map.remove(o) != null) ; // need to remove all
 	            _size -= count ;
 	        }
@@ -335,6 +334,29 @@ package system.data.bags
 
 		/**
 		 * Removes any members of the bag that are not in the given collection, respecting cardinality.
+		 * <p><b>Example :</b></p>
+		 * <pre class="prettyprint">
+		 * import system.data.Collection;
+		 * import system.data.collections.ArrayCollection;
+		 * import system.data.bags.CoreMapBag;
+		 * import system.data.maps.ArrayMap;
+		 * 
+		 * var bag:CoreMapBag = new CoreMapBag( new ArrayMap() ) ;
+		 * 
+		 * bag.add("item1") ;
+		 * bag.add("item2") ;
+		 * bag.add("item2") ;
+		 * bag.add("item3") ;
+		 * bag.add("item3") ;
+		 * bag.add("item3") ;
+		 * 
+		 * var col:Collection = new ArrayCollection(["item1","item2","item3"]) ;
+		 * bag.retainAll(col) ;
+		 * trace( bag ) ; // {1:item1,2:item2}
+         * </pre>
+		 * @param c the collection to retain.
+		 * @return <code class="prettyprint">true</code> if this call changed the collection.
+		 * @see #retainAllInBag(b:Bag)
 		 */
     	public function retainAll( c:Collection ):Boolean 
     	{
@@ -342,18 +364,28 @@ package system.data.bags
     	}
 
 		/**
-		 * Removes any members of the bag that are not in the given bag.
+		 * Removes any members of the bag that are not in the given bag, respecting cardinality.
+		 * @param b the bag to retain.
+		 * @return <code class="prettyprint">true</code> if this call changed the collection.
+         * @see #retainAll(c:Collection)
 		 */
 		public function retainAllInBag( b:Bag ):Boolean 
 		{
-	    	var result:Boolean = false ;
+			if ( b == null )
+			{
+				b = new HashBag() ;
+			}
+			var cur:* ;
+			var count1:uint ;
+			var count2:uint ;
+	    	var result:Boolean ;
 	        var excess:Bag = new HashBag() ;
 	        var i:Iterator = uniqueSet().iterator() ;
 	        while (i.hasNext()) 
 	        {
-	            var cur:* = i.next() ;
-	            var count1:uint = getCount(cur) ;
-	            var count2:uint = b.getCount(cur) ;
+	            cur = i.next() ;
+	            count1 = getCount(cur) ;
+	            count2 = b.getCount(cur) ;
 	            if ( 1 <= count2 && count2 <= count1) 
 	            {
 	                excess.addCopies(cur, count1 - count2) ;
@@ -363,7 +395,7 @@ package system.data.bags
 	                excess.addCopies(cur, count1) ;
 	            }
 	        }
-	        if (!excess.isEmpty() ) 
+	        if ( !excess.isEmpty() ) 
 	        {
 	        	result = removeAll(excess) ;
 	        }

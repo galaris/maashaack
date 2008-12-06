@@ -87,6 +87,11 @@ package system.data.samples
         {
         	return new ArraySet(toArray()) ;
         }
+        
+        public function equals(o:*):Boolean
+        {
+        	return false ;
+        }
     }
    
 }
