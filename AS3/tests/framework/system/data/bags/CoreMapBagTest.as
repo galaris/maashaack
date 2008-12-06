@@ -62,14 +62,14 @@ package system.data.bags
             
             var b:Bag ;
             
-            // 01
+            // 01 - classic usage
             
             b = new CoreMapBag( new ArrayMap() ) ;
             
             assertNotNull( b , "01 - CoreMapBag constructor failed." ) ;
             
             
-            // 02
+            // 02 - no argument passed-in
             
             try
             {
@@ -82,7 +82,7 @@ package system.data.bags
                 assertEquals( e.message , "CoreMapBag, set the internal Map failed. The Map must be non-null and empty.", "02-03 - CoreMapBag constructor failed."  ) ;
             }
             
-            // 03
+            // 03 - Map argument is null
             
             try
             {
@@ -106,9 +106,20 @@ package system.data.bags
             assertEquals( b.getCount(3) , 2 , "04-04 - CoreMapBag constructor failed."  ) ;
             assertEquals( b.getCount(4) , 1 , "04-05 - CoreMapBag constructor failed."  ) ;
             
-            // TODO test with a passed-in Map no empty
+            // 04 - no empty map
+
+            ma = new ArrayMap(["item1"],[1]) ;
             
-            
+            try
+            {
+                b = new CoreMapBag(ma) ;
+                fail( "05-01 - CoreMapBag constructor failed."  ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError ,  "05-02 - CoreMapBag constructor failed."  ) ;
+                assertEquals( e.message , "CoreMapBag, set the internal Map failed. The Map must be non-null and empty.", "05-03 - CoreMapBag constructor failed."  ) ;
+            }
         }
         
         public function testInterface():void
