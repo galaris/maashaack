@@ -94,7 +94,7 @@ package system.data.bags
 	 * trace("bag uniqueSet : " + s) ;
 	 * </pre>
  	 */
-	public class HashBag extends CoreBag
+	public class HashBag extends CoreMapBag
 	{
 		
 		/**
@@ -112,7 +112,7 @@ package system.data.bags
 	 	 */
 		public override function clone():*
 		{
-			return new HashBag( _getMap().clone() ) ;
+			return new HashBag( getMap().clone() ) ;
 		}
         
         /**
