@@ -99,11 +99,8 @@ package system.data.bags
             assertEquals( bag.toSource() , 'new system.data.bags.HashBag()' , "01 - HashBag toSource failed : " + bag ) ;
             
             bag.add("item1") ;
-            bag.add("item2") ;
-            bag.add("item2") ;                  
-            bag.add("item3") ;
             
-            assertEquals( bag.toSource() , 'new system.data.bags.HashBag(new system.data.lists.ArrayList(["item2","item2","item1","item3"]))' , "02 - HashBag toSource failed : " + bag ) ; 
+            assertEquals( bag.toSource() , 'new system.data.bags.HashBag(new system.data.lists.ArrayList(["item1"]))' , "02 - HashBag toSource failed : " + bag ) ; 
                        
         }         
                

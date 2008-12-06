@@ -33,37 +33,36 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.process 
 {
-    import system.data.OrderedIterator;        
-
-    /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
-     */
-    public interface ListIterator extends OrderedIterator
-    {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
+    import buRRRn.ASTUce.framework.TestCase;
     
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
+    import system.process.samples.ResetableClass;    
+
+    public class ResetableTest extends TestCase 
+    {
+
+        public function ResetableTest(name:String = "")
+        {
+            super( name );
+        }
+
+        public function testInterface():void
+        {
+            var r:ResetableClass = new ResetableClass();
+            assertTrue( r is Resetable ) ;
+            
+            try
+            {
+            	r.reset() ;
+            	fail( "01 - The Resetable interface must implement the reset method.") ;
+            }
+            catch( e:Error )
+            {
+            	assertEquals(e.message, "reset", "02 - The Resetable interface must implement the reset method.");
+            }
+
+        }            
         
     }
 }

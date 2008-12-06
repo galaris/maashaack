@@ -33,24 +33,21 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process
+package system.process.samples 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
-
-    public class AllTests
+    import system.process.Stoppable;
+        
+    public class StoppableClass implements Stoppable 
     {
-
-        public static function suite():ITest
+        
+        public function StoppableClass()
         {
-            var suite:TestSuite = new TestSuite("system process tests");
-            
-            suite.addTestSuite( LockableTest  );
-            suite.addTestSuite( ResetableTest );
-            suite.addTestSuite( RunnableTest  );
-            suite.addTestSuite( StoppableTest );
-            
-            return suite;
+            //    
+        }    
+        
+        public function stop(...args:Array):*
+        {
+            return args ;
         }
     }
 }

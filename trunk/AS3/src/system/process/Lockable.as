@@ -33,37 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.process
 {
-    import system.data.OrderedIterator;        
 
     /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
+     * This interface is implemented by all objects lockable.
      */
-    public interface ListIterator extends OrderedIterator
-    {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
+	public interface Lockable
+	{
 
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
-    
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
-        
-    }
+    	/**
+    	 * Returns <code class="prettyprint">true</code> if the object is locked.
+    	 * @return <code class="prettyprint">true</code> if the object is locked.
+    	 */
+    	function isLocked():Boolean ;
+	
+    	/**
+	     * Locks the object.
+    	 */
+    	function lock():void ;
+	
+    	/**
+    	 * Unlocks the object.
+	     */
+	    function unlock():void ; 
+		
+	}
+	
 }
