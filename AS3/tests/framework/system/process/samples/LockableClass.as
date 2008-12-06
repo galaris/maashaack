@@ -33,37 +33,33 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.process.samples 
 {
-    import system.data.OrderedIterator;        
+    import system.process.Lockable;    
 
-    /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
-     */
-    public interface ListIterator extends OrderedIterator
+    public class LockableClass implements Lockable 
     {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
 
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
+        public function LockableClass()
+        {
+            //    
+        }   
 
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
-    
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
+        public var flag:Boolean ;
+
+        public function isLocked():Boolean
+        {
+            return flag ;
+        }
         
+        public function lock():void
+        {
+        	flag = true ;
+        }
+        
+        public function unlock():void
+        {
+        	flag = false ;
+        }
     }
 }

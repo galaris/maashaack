@@ -33,37 +33,22 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.process.samples 
 {
-    import system.data.OrderedIterator;        
+    import system.process.Resetable;        
 
-    /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
-     */
-    public interface ListIterator extends OrderedIterator
+    public class ResetableClass implements Resetable 
     {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
+    	
+        public function ResetableClass()
+        {
+            //    
+        }    	
 
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
-    
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
+        public function reset():void
+        {
+            throw new Error( "reset" ) ;
+        }
         
     }
 }

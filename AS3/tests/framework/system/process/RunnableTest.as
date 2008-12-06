@@ -37,7 +37,8 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.process.Runnable;                        
+    import system.process.Runnable;
+    import system.process.samples.RunnableClass;    
 
     public class RunnableTest extends TestCase 
     {
@@ -59,9 +60,9 @@ package system.process
             	c.run() ;
             	fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
             }
-            catch( e1:Error )
+            catch( e:Error )
             {
-            	//assertEquals( e1.toString() , "run invoked 0" , "The Runnable interface failed.") ;
+            	assertEquals( e.message , "run invoked 0" , "The Runnable interface failed.") ;
             }
 
             try
@@ -69,31 +70,14 @@ package system.process
                 c.run(2,3,4) ;
                 fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
             }
-            catch( e2:Error )
+            catch( e:Error )
             {
-                //assertEquals( e2.toString() , "run invoked 3" , "The Runnable interface failed.") ;
+                assertEquals( e.message , "run invoked 3" , "The Runnable interface failed.") ;
             }
 
             
         }
-    
         
         
-    }
-}
-
-import system.process.Runnable;
-
-class RunnableClass implements Runnable
-{
-
-    public function RunnableClass()
-    {
-        //    
-    }
-    
-    public function run(...arguments:Array):void
-    {
-    	throw new Error( "run invoked " + arguments.length ) ;
     }
 }

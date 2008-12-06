@@ -33,37 +33,52 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data
+package system.process 
 {
-    import system.data.OrderedIterator;        
-
-    /**
-     * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
-     */
-    public interface ListIterator extends OrderedIterator
-    {
-        
-        /**
-         * Inserts the specified element into the list (optional operation).
-         */
-        function add(o:*):void ;
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to next.
-         * @return the index of the element that would be returned by a subsequent call to next.
-         */
-        function nextIndex():uint ;    
-
-        /**
-         * Returns the index of the element that would be returned by a subsequent call to previous.
-         * @return the index of the element that would be returned by a subsequent call to previous.
-         */
-        function previousIndex():int ;
+    import buRRRn.ASTUce.framework.TestCase;
     
-        /**
-         * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */
-        function set(o:*):void ;
+    import system.process.samples.LockableClass;    
+
+    public class LockableTest extends TestCase 
+    {
+
+        public function LockableTest(name:String = "")
+        {
+            super( name );
+        }
+        
+        public function testInterface():void
+        {
+            var s:LockableClass = new LockableClass();
+            assertTrue( s is Lockable ) ;
+        }        
+
+        public function testIsLocked():void
+        {
+            var s:LockableClass = new LockableClass();
+            assertFalse( s.isLocked() ) ;
+            s.lock() ;
+            assertTrue( s.isLocked() ) ;
+            s.unlock() ;
+            assertFalse( s.isLocked() ) ;
+        }
+        
+        public function testLock():void
+        {
+            var s:LockableClass = new LockableClass();
+            s.flag = false ;
+            s.lock() ;
+            assertTrue( s.flag ) ;
+        }
+        
+        public function testUnlock():void
+        {
+            var s:LockableClass = new LockableClass();
+            s.flag = true ;
+            s.unlock() ;
+            assertFalse( s.flag ) ;
+        } 
+
         
     }
 }
