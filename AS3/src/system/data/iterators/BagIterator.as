@@ -36,7 +36,7 @@
 package system.data.iterators
 {
     import system.data.Iterator;
-    import system.data.bags.CoreBag;
+    import system.data.bags.CoreMapBag;
     import system.errors.ConcurrencyError;
     
     import flash.errors.IllegalOperationError;    
@@ -49,10 +49,10 @@ package system.data.iterators
         
         /**
          * Creates a new BagIterator instance.
-         * @param parent the bag (@code CoreBag) used in this iterator.
+         * @param parent the bag <code class="prettyprint">CoreMapBag</code> used in this iterator.
          * @param support the iterator to support this iterator.
          */
-        public function BagIterator( parent:CoreBag , support:Iterator  )
+        public function BagIterator( parent:CoreMapBag , support:Iterator  )
         {
             if ( parent == null )
             {
@@ -67,6 +67,9 @@ package system.data.iterators
             _expectedModCount = _parent.modCount ;
         }
         
+        /**
+         * The default comodification message.
+         */
         public static var DEFAULT_COMODIFICATION_MESSAGE:String = "BagIterator check for comodification failed with a Bag." ;
         
         /**
@@ -153,7 +156,7 @@ package system.data.iterators
         /**
          * @private
          */
-        private var _parent:CoreBag ;
+        private var _parent:CoreMapBag ;
         
         /**
          * @private

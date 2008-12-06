@@ -53,17 +53,17 @@ package system.data.bags
 	 * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
 	 * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
 	 */
-	public class CoreBag implements Bag
+	public class CoreMapBag implements Bag
 	{
 		
 		/**
-	 	 * Creates a new CoreBag instance.
+	 	 * Creates a new CoreMapBag instance.
 	 	 * @param map a Map reference used to register all elements in the Bag.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
          */
-		public function CoreBag( map:Map = null , co:Collection = null )
+		public function CoreMapBag( map:Map = null , co:Collection = null )
 		{
-			_setMap( map ) ;
+			setMap( map ) ;
             if ( co != null ) 
             {
                 addAll(co) ;
@@ -146,10 +146,10 @@ package system.data.bags
 		 */
 		public function clone():*
 		{
-			var m:Map        = _getMap().clone() ;
+			var m:Map        = getMap().clone() ;
 			var c:Collection = _extractList() ;
 			m.clear() ;
-			return new CoreBag( m , (c != null && c.size()) > 0 ? c : null ) ;
+			return new CoreMapBag( m , (c != null && c.size()) > 0 ? c : null ) ;
 		}
 
 		/**
@@ -301,17 +301,17 @@ package system.data.bags
     	} 
 
 		/**
-		 * (Violation) Removes any members of the bag that are not in the given collection, respecting cardinality.
+		 * Removes any members of the bag that are not in the given collection, respecting cardinality.
 		 */
-    	public function retainAll(c:Collection):Boolean 
+    	public function retainAll( c:Collection ):Boolean 
     	{
     		return retainAllInBag( new HashBag(c) ) ;
     	}
 
 		/**
-		 * (Violation) Removes any members of the bag that are not in the given bag.
+		 * Removes any members of the bag that are not in the given bag.
 		 */
-		public function retainAllInBag(b:Bag):Boolean 
+		public function retainAllInBag( b:Bag ):Boolean 
 		{
 	    	var result:Boolean = false ;
 	        var excess:Bag = new HashBag() ;
@@ -416,7 +416,7 @@ package system.data.bags
 		/**
 		 * @private
 		 */
-		protected function _getMap():Map 
+		protected function getMap():Map 
 		{
 			return _map ;
 		}
@@ -424,7 +424,7 @@ package system.data.bags
 		/**
 		 * @private
 		 */	
-		protected function _setMap( m:Map ):void
+		protected function setMap( m:Map ):void
 		{
 			if ( m != null && m.isEmpty() ) 
 			{

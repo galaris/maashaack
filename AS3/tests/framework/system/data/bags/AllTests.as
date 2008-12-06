@@ -46,7 +46,7 @@ package system.data.bags
 
             suite.addTestSuite( ArrayBagTest ) ;
             suite.addTestSuite( BagFormatterTest ) ;
-            suite.addTestSuite( CoreBagTest ) ;
+            suite.addTestSuite( CoreMapBagTest ) ;
             suite.addTestSuite( HashBagTest ) ;
             
             return suite;
