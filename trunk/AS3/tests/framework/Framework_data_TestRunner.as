@@ -38,6 +38,7 @@ package
     import buRRRn.ASTUce.*;
     
     import system.*;
+    import system.data.bags.CoreBagTest;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -45,7 +46,7 @@ package
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.text.TextField;
-    import flash.text.TextFormat;    
+    import flash.text.TextFormat;        
 
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
 
@@ -85,6 +86,7 @@ package
                 //system.data.AllTests.suite() , 
                 
                 system.AllTests.suite() 
+                // CoreBagTest 
             );
             
         }

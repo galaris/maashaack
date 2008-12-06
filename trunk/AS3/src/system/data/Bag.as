@@ -55,7 +55,7 @@ package system.data
         function addAll(c:Collection):Boolean ;
         
         /**
-		 * (Violation) Returns <code class="prettyprint">true</code> if the bag contains all elements in the given collection, respecting cardinality.
+		 * Returns <code class="prettyprint">true</code> if the bag contains all elements in the given collection, respecting cardinality.
 		 * @return <code class="prettyprint">true</code> if the bag contains all elements in the given collection, respecting cardinality.
 		 */
 	    function containsAll( c:Collection ):Boolean ;
@@ -67,17 +67,22 @@ package system.data
     	function getCount( o:* ):uint ;
 
 		/**
-		 * (Violation) Removes all elements represented in the given collection, respecting cardinality.
-		 */
+		 * Removes objects from the bag according to their count in the specified collection.
+         * @param c the collection to use.
+         * @return true if the bag changed.
+         */
     	function removeAll(c:Collection):Boolean ;
 
-		/**
-		 * Removes the given number of occurrences from the bag.
-		 */
+        /**
+         * Removes a specified number of copies of an object from the bag.
+         * @param o the object to remove
+         * @param nCopies the number of copies to remove
+         * @return true if the bag changed
+         */
     	function removeCopies(o:*, nCopies:uint):Boolean ; 
 
 		/**
-		 * (Violation) Removes any members of the bag that are not in the given collection, respecting cardinality.
+		 * Removes any members of the bag that are not in the given collection, respecting cardinality.
 		 */
     	function retainAll(c:Collection):Boolean ;
 
