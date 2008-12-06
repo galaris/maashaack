@@ -39,9 +39,13 @@ package system.data.bags
     
     import system.data.Bag;
     import system.data.Collection;
+    import system.data.Iterator;
     import system.data.collections.ArrayCollection;
+    import system.data.iterators.BagIterator;
     import system.data.maps.ArrayMap;
-    import system.data.maps.HashMap;    
+    import system.data.maps.HashMap;
+    
+    import flash.errors.IllegalOperationError;    
 
     public class CoreBagTest extends TestCase 
     {
@@ -204,19 +208,207 @@ package system.data.bags
             var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
             
             bag.add("item1") ;
+            bag.add("item2") ;
             bag.add("item2") ;                  
             bag.add("item3") ;
             bag.add("item4") ;
             bag.add("item5") ;
             
-            var c1:Collection = new ArrayCollection( ["item1", "item2", "item3", "item4", "item5"] ) ;
+            var c1:Collection = new ArrayCollection( ["item1", "item2", "item2", "item3", "item4", "item5"] ) ;
             var c2:Collection = new ArrayCollection( ["item1", "item2"] ) ;
-            // TODO var c3:Collection = new ArrayCollection( ["item5", "item4"] ) ;
+            var c3:Collection = new ArrayCollection( ["item5", "item4"] ) ;
+            var c4:Collection = new ArrayCollection( ["item5", "item6"] ) ;
             
-            assertTrue ( bag.containsAll( c1 ) , "01 - CoreBag containsAll failed : " + bag ) ;
-            assertTrue ( bag.containsAll( c2 ) , "02 - CoreBag containsAll failed : " + bag ) ;
-            // TODO assertFalse( bag.containsAll( c3 ) , "03 - CoreBag containsAll failed : " + bag ) ;
+            assertTrue ( bag.containsAll( c1   ) , "01 - CoreBag containsAll failed : " + bag ) ;
+            assertTrue ( bag.containsAll( c2   ) , "02 - CoreBag containsAll failed : " + bag ) ;
+            assertTrue ( bag.containsAll( c3   ) , "03 - CoreBag containsAll failed : " + bag ) ;
+            assertFalse( bag.containsAll( c4   ) , "04 - CoreBag containsAll failed : " + bag ) ;
+            assertFalse( bag.containsAll( null ) , "05 - CoreBag containsAll failed : " + bag ) ;
+            
+        }   
+        
+        public function testContainsAllInBag():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;
+            
+            var b1:HashBag = new HashBag( new ArrayCollection(["item1", "item2", "item2", "item3", "item4", "item5"] ) ) ;
+            var b2:HashBag = new HashBag( new ArrayCollection(["item1", "item2"] ) ) ;
+            var b3:HashBag = new HashBag( new ArrayCollection(["item5", "item4"] ) ) ;
+            var b4:HashBag = new HashBag( new ArrayCollection(["item5", "item6"] ) ) ;
+            
+            assertTrue ( bag.containsAllInBag( b1   ) , "01 - CoreBag containsAllInBag failed : " + bag ) ;
+            assertTrue ( bag.containsAllInBag( b2   ) , "02 - CoreBag containsAllInBag failed : " + bag ) ;
+            assertTrue ( bag.containsAllInBag( b3   ) , "03 - CoreBag containsAllInBag failed : " + bag ) ;
+            assertFalse( bag.containsAllInBag( b4   ) , "04 - CoreBag containsAllInBag failed : " + bag ) ;
+            assertFalse( bag.containsAllInBag( null ) , "05 - CoreBag containsAllInBag failed : " + bag ) ;
+            
+        }         
+             
+        public function testGet():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+        	try
+        	{
+                bag.get("key") ;
+                fail( "01 - CoreBag get method failed." ) ;  
+        	}
+        	catch( e:Error )
+        	{
+                assertTrue( e is IllegalOperationError ,  "02 - CoreBag get method failed."  ) ;
+                assertEquals( e.message , "CoreBag, the get() method is unsupported.", "03 - CoreBag get method failed."  ) ;
+            }
+        }
+        
+        public function testGetCount():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;
+            
+            assertEquals( bag.getCount('item1') , 1 , "01 - CoreBag getCount('item1') failed : " + bag ) ;              
+            assertEquals( bag.getCount('item2') , 2 , "02 - CoreBag getCount('item2') failed : " + bag ) ;
+            assertEquals( bag.getCount('item3') , 0 , "03 - CoreBag getCount('item3') failed : " + bag ) ;
+            
+        }
+        
+        public function testIndexOf():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            try
+            {
+                bag.indexOf("key", 0) ;
+                fail( "01 - CoreBag indexOf method failed." ) ;  
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError ,  "02 - CoreBag indexOf method failed."  ) ;
+                assertEquals( e.message , "CoreBag, the indexOf() method is unsupported.", "03 - CoreBag indexOf method failed."  ) ;
+            }
         }        
+        
+        public function testIsEmpty():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            assertTrue( bag.isEmpty() , "01 - CoreBag isEmpty method failed." ) ;
+            bag.add("item1") ;
+            assertFalse( bag.isEmpty() , "02 - CoreBag isEmpty method failed." ) ;
+        }        
+        
+        public function testIterator():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;
+            
+            var it:Iterator = bag.iterator() ;
+            
+            assertNotNull( it , "01 - CoreBag iterator method failed."  )  ;
+            assertTrue( it is BagIterator , "02 - CoreBag iterator method failed."  )  ;
+            assertTrue( it.hasNext() , "03 - CoreBag iterator method failed."  )  ;
+            assertEquals( it.next() , "item1", "04 - CoreBag iterator method failed."  )  ;
+            
+        }           
+        
+        public function testRemove():void 
+        {
+            var bag:CoreBag = new CoreBag( new ArrayMap() ) ;
+            
+            var modCount:uint = bag.modCount ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;
+            
+            assertTrue( bag.remove("item1") , "01-01 - CoreBag remove method failed." ) ;
+            assertEquals( bag.getCount("item1") , 0, "01-02 - CoreBag remove method failed." ) ;
+            
+            assertTrue( bag.remove("item2") , "02-01 - CoreBag remove method failed." ) ;
+            assertEquals( bag.getCount("item2") , 0, "02-02 - CoreBag remove method failed." ) ;
+            
+            assertFalse( bag.remove("item3") , "03-01 - CoreBag remove method failed." ) ;
+            assertEquals( bag.getCount("item3") , 0, "03-02 - CoreBag remove method failed." ) ;
+            
+            assertTrue( bag.modCount > modCount , "04 - CoreBag remove method failed." ) ; 
+            
+        }
+        
+        public function testRemoveAll():void 
+        {
+            var bag:CoreBag  ;
+            var col:Collection ;
+            
+            // 01
+            
+            bag = new CoreBag( new ArrayMap() ) ;
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;
+            
+            col = new ArrayCollection(["item1", "item2", "item2", "item3", "item4", "item5"] ) ;
+            
+            assertTrue ( bag.removeAll( col  ) , "01-01 - CoreBag removeAll failed : " + bag ) ;
+            assertEquals( bag.size() , 0 , "01-02 - CoreBag removeAll failed : " + bag ) ;
+
+            // 02
+
+            bag = new CoreBag( new ArrayMap() ) ;
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;
+             
+            col = new ArrayCollection(["item1", "item2"] ) ;
+            
+            assertTrue ( bag.removeAll( col  ) , "02-01 - CoreBag removeAll failed : " + bag ) ;
+            assertEquals( bag.size() , 4 , "02-02 - CoreBag removeAll failed : " + bag ) ;
+            assertEquals( bag.getCount("item2") , 1 , "02-03 - CoreBag removeAll failed : " + bag ) ;
+
+            // 03
+
+            bag = new CoreBag( new ArrayMap() ) ;
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;
+            
+            col = new ArrayCollection(["item5", "item4", "item2"] ) ;
+            
+            assertTrue ( bag.removeAll( col  ) , "03-01 - CoreBag removeAll failed : " + bag ) ;
+            assertEquals( bag.size() , 3 , "03-02 - CoreBag removeAll failed : " + bag ) ;            
+            
+            // 03
+
+            bag = new CoreBag( new ArrayMap() ) ;
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;
+                         
+            
+            col = new ArrayCollection(["item6"] ) ;
+            
+            assertFalse( bag.removeAll( col  ) , "04 - CoreBag removeAll failed : " + bag ) ;
+                        
+        }         
         
     }
 }

@@ -44,7 +44,6 @@ package system.data.bags
     import system.data.Set;
     import system.data.iterators.BagIterator;
     import system.data.lists.ArrayList;
-    import system.data.maps.HashMap;
     import system.data.maps.MapUtils;
     import system.data.sets.ArraySet;
     
@@ -168,6 +167,10 @@ package system.data.bags
 		 */
 	    public function containsAll( c:Collection ):Boolean 
 	    {
+	    	if ( c == null ) 
+	    	{
+	    		return false ;
+	    	}
 	    	return containsAllInBag( new HashBag(c) ) ;
 	    }
 
@@ -177,6 +180,10 @@ package system.data.bags
 		 */     
 		public function containsAllInBag( b:Bag ):Boolean 
 		{
+			if ( b == null )
+			{
+				return false ;
+			}
 			var current:* ;
 			var contains:Boolean ;
 			var result:Boolean = true ;
@@ -184,7 +191,7 @@ package system.data.bags
 			while ( i.hasNext() ) 
 	        {
 				current  = i.next();
-	            contains = getCount(current) >= b.getCount(current) ;
+				contains = getCount(current) >= b.getCount(current) ;
 	            result   = result && contains ;
 	        }
 	        return result;
@@ -196,7 +203,7 @@ package system.data.bags
 		 */	
 		public function get( key:* ):*
 		{
-			throw new IllegalOperationError( this + " 'get' method is unsupported.") ;
+			throw new IllegalOperationError( Reflection.getClassName(this) + ", the get() method is unsupported.") ;
 		}
 
 		/**
@@ -214,7 +221,7 @@ package system.data.bags
 		 */	
 		public function indexOf(o:*, fromIndex:uint=0):int
 		{
-			throw new IllegalOperationError( this + " 'indexOf' method is unsupported.") ;
+			throw new IllegalOperationError( Reflection.getClassName(this) + ", the indexOf() method is unsupported.") ;
 		}
         
 		/**
@@ -227,8 +234,8 @@ package system.data.bags
     	}
         
 		/**
-	 	 * Returns the bag iterator.
-		 * @return the bag iterator.
+	 	 * Returns the Iterator representation of the Bag.
+		 * @return the Iterator representation of the Bag.
 	 	 */
 		public function iterator():Iterator 
 		{
@@ -244,7 +251,9 @@ package system.data.bags
 		}
 
 		/**
-		 * (Violation) Removes all elements represented in the given collection, respecting cardinality.
+		 * Removes objects from the bag according to their count in the specified collection.
+         * @param c the collection to use.
+         * @return true if the bag changed.
 		 */
     	public function removeAll(c:Collection):Boolean 
     	{
@@ -262,12 +271,15 @@ package system.data.bags
     	}
         
 		/**
-		 * Removes the given number of occurrences from the bag.
+		 * Removes a specified number of copies of an object from the bag.
+		 * @param o the object to remove
+		 * @param nCopies the number of copies to remove
+		 * @return true if the bag changed
 		 */
     	public function removeCopies(o:*, nCopies:uint):Boolean 
     	{
 			_modCount++;
-	        if ( nCopies <= 0 ) 
+	        if ( nCopies == 0 ) 
 	        {
 	        	return false ;
 	        }
