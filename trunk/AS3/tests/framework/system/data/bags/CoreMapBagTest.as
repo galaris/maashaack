@@ -37,6 +37,7 @@ package system.data.bags
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.Equatable;
     import system.data.Bag;
     import system.data.Collection;
     import system.data.Iterator;
@@ -105,15 +106,16 @@ package system.data.bags
             assertEquals( b.getCount(1) , 1 , "04-02 - CoreMapBag constructor failed."  ) ;
             assertEquals( b.getCount(2) , 1 , "04-03 - CoreMapBag constructor failed."  ) ;
             assertEquals( b.getCount(3) , 2 , "04-04 - CoreMapBag constructor failed."  ) ;
-            assertEquals( b.getCount(4) , 1 , "04-04 - CoreMapBag constructor failed."  ) ;
+            assertEquals( b.getCount(4) , 1 , "04-05 - CoreMapBag constructor failed."  ) ;
             
             
         }
         
         public function testInterface():void
         {
-            assertTrue( bag is Bag        , "CoreMapBag must implement the Bag interface." ) ;
-            assertTrue( bag is Collection , "CoreMapBag must implement the Collection interface." ) ;    
+            assertTrue( bag is Bag        , "01 - CoreMapBag must implement the Bag interface." ) ;
+            assertTrue( bag is Collection , "02 - CoreMapBag must implement the Collection interface." ) ;
+            assertTrue( bag is Equatable  , "03 - CoreMapBag must implement the Equatable interface." ) ;        
         }
         
         public function testModCount():void
@@ -249,7 +251,32 @@ package system.data.bags
             assertFalse( bag.containsAllInBag( b4   ) , "04 - CoreMapBag containsAllInBag failed : " + bag ) ;
             assertFalse( bag.containsAllInBag( null ) , "05 - CoreMapBag containsAllInBag failed : " + bag ) ;
             
-        }         
+        }  
+        
+        public function testEquals():void 
+        {
+        	
+            var bag:CoreMapBag = new CoreMapBag( new ArrayMap() ) ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            bag.add("item4") ;
+            bag.add("item5") ;        	
+        	
+            var b1:Bag  = new HashBag( new ArrayCollection(["item1", "item2", "item2", "item3", "item4", "item5"] ) ) ;
+            var b2:Bag  = new ArrayBag( new ArrayCollection(["item1", "item2", "item2", "item3", "item4", "item5"] ) ) ;
+            var b3:Bag  = new HashBag( new ArrayCollection(["item1", "item2"] ) ) ;
+
+            assertTrue ( bag.equals( bag  ) , "00 - CoreMapBag equals failed : " + bag ) ;
+            assertTrue ( bag.equals( b1   ) , "01 - CoreMapBag equals failed : " + bag ) ;
+            assertTrue ( bag.equals( b2   ) , "02 - CoreMapBag equals failed : " + bag ) ;
+            
+            assertFalse( bag.equals( b3   ) , "03 - CoreMapBag equals failed : " + bag ) ;
+            assertFalse( bag.equals( null ) , "04 - CoreMapBag equals failed : " + bag ) ;
+ 
+        }
              
         public function testGet():void 
         {
@@ -393,7 +420,7 @@ package system.data.bags
             assertTrue ( bag.removeAll( col  ) , "03-01 - CoreMapBag removeAll failed : " + bag ) ;
             assertEquals( bag.size() , 3 , "03-02 - CoreMapBag removeAll failed : " + bag ) ;            
             
-            // 03
+            // 04
 
             bag = new CoreMapBag( new ArrayMap() ) ;
             bag.add("item1") ;
@@ -402,7 +429,6 @@ package system.data.bags
             bag.add("item3") ;
             bag.add("item4") ;
             bag.add("item5") ;
-                         
             
             col = new ArrayCollection(["item6"] ) ;
             

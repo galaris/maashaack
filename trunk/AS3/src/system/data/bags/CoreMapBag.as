@@ -35,6 +35,7 @@
 
 package system.data.bags
 {
+    import system.Equatable;
     import system.Reflection;
     import system.data.Bag;
     import system.data.Collection;
@@ -53,7 +54,7 @@ package system.data.bags
 	 * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
 	 * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
 	 */
-	public class CoreMapBag implements Bag
+	public class CoreMapBag implements Bag, Equatable
 	{
 		
 		/**
@@ -196,6 +197,39 @@ package system.data.bags
 	        }
 	        return result;
 		}
+        
+        /**
+         * Compares this Bag to another. This Bag equals another Bag if it contains the same number of occurrences of the same elements.
+         * @param o the Bag to compare to.
+         * @return true if equal.
+         */        
+        public function equals( o:* ):Boolean
+        {
+            if (o == this) 
+            {
+                return true;
+            }
+            if ( o is Bag == false ) 
+            {
+                return false;
+            }
+            var other:Bag = o as Bag ;
+            if (other.size() != size()) 
+            {
+                return false;
+            }
+            var it:Iterator = uniqueSet().iterator() ;
+            var element:* ;
+            while(it.hasNext())
+            {
+                element = it.next();
+                if (other.getCount(element) != getCount(element)) 
+                {
+                    return false;
+                }
+            }
+            return true ;
+        }
         
         /**
 		 * Unsupported by bag objects.
