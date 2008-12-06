@@ -38,6 +38,7 @@ package system.data.bags
     import system.Reflection;
     import system.data.Collection;
     import system.data.List;
+    import system.data.collections.ArrayCollection;
     import system.data.maps.HashMap;    
 
     /**
@@ -112,7 +113,7 @@ package system.data.bags
 	 	 */
 		public override function clone():*
 		{
-			return new HashBag( getMap().clone() ) ;
+			return new HashBag( new ArrayCollection( toArray() ) ) ;
 		}
         
         /**

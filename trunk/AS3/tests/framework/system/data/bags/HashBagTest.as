@@ -35,7 +35,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
  
 package system.data.bags 
 {
-    import buRRRn.ASTUce.framework.TestCase;        
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.collections.ArrayCollection;            
 
     public class HashBagTest extends TestCase 
     {
@@ -47,8 +49,64 @@ package system.data.bags
         
         public function testConstructor():void
         {
-            // TODO	
+            var b:HashBag ;
+                        
+            b = new HashBag() ;
+            
+            assertNotNull( b , "01 - HashBag constructor failed." ) ;
+            
+            b = new HashBag(null) ;
+            
+            assertNotNull( b , "02 - HashBag constructor failed." ) ;
+            
+            var co:ArrayCollection = new ArrayCollection([1,2,3,3,4]) ;
+            
+            b = new HashBag( co ) ;            
+            
+            assertEquals( b.size()      , 5 , "03-01 - HashBag constructor failed."  ) ;
+            assertEquals( b.getCount(1) , 1 , "03-02 - HashBag constructor failed."  ) ;
+            assertEquals( b.getCount(2) , 1 , "03-03 - HashBag constructor failed."  ) ;
+            assertEquals( b.getCount(3) , 2 , "03-04 - HashBag constructor failed."  ) ;
+            assertEquals( b.getCount(4) , 1 , "03-05 - HashBag constructor failed."  ) ;
+            
         }
+        
+        public function testClone():void 
+        {
+            var bag:HashBag = new HashBag() ;
+            bag.add("item1") ;
+            bag.add("item2") ;                  
+            bag.add("item2") ;
+            
+            var clone:HashBag = bag.clone() as HashBag ;
+            
+            assertNotNull( clone         , "01 - HashBag clone failed." ) ;
+            assertNotSame( bag   , clone , "02 - HashBag clone failed." ) ;
+            
+            assertEquals( clone.size() , bag.size() , "03 - HashBag clone failed." ) ;
+            
+            assertEquals( clone.getCount("item1") , bag.getCount("item1") , "04-01 - HashBag clone failed." ) ;
+            assertEquals( clone.getCount("item2") , bag.getCount("item2") , "04-02 - HashBag clone failed." ) ;
+            
+        }   
+        
+        public function testToSource():void 
+        {
+            var bag:HashBag  ;
+
+            bag = new HashBag() ;
+            
+            assertEquals( bag.toSource() , 'new system.data.bags.HashBag()' , "01 - HashBag toSource failed : " + bag ) ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            
+            assertEquals( bag.toSource() , 'new system.data.bags.HashBag(new system.data.lists.ArrayList(["item2","item2","item1","item3"]))' , "02 - HashBag toSource failed : " + bag ) ; 
+                       
+        }         
+               
         
     }
 }

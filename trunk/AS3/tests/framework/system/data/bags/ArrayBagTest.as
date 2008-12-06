@@ -35,7 +35,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
  
 package system.data.bags 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.data.collections.ArrayCollection;    
 
     public class ArrayBagTest extends TestCase 
     {
@@ -47,8 +49,63 @@ package system.data.bags
         
         public function testConstructor():void
         {
-            // TODO	
+            var b:ArrayBag ;
+                        
+            b = new ArrayBag() ;
+            
+            assertNotNull( b , "01 - CoreMapBag constructor failed." ) ;
+            
+            b = new ArrayBag(null) ;
+            
+            assertNotNull( b , "02 - ArrayBag constructor failed." ) ;
+            
+            var co:ArrayCollection = new ArrayCollection([1,2,3,3,4]) ;
+            
+            b = new ArrayBag( co ) ;            
+            
+            assertEquals( b.size()      , 5 , "03-01 - ArrayBag constructor failed."  ) ;
+            assertEquals( b.getCount(1) , 1 , "03-02 - ArrayBag constructor failed."  ) ;
+            assertEquals( b.getCount(2) , 1 , "03-03 - ArrayBag constructor failed."  ) ;
+            assertEquals( b.getCount(3) , 2 , "03-04 - ArrayBag constructor failed."  ) ;
+            assertEquals( b.getCount(4) , 1 , "03-05 - ArrayBag constructor failed."  ) ;
+            
         }
+        
+        public function testClone():void 
+        {
+            var bag:ArrayBag = new ArrayBag() ;
+            bag.add("item1") ;
+            bag.add("item2") ;                  
+            bag.add("item2") ;
+            
+            var clone:ArrayBag = bag.clone() as ArrayBag ;
+            
+            assertNotNull( clone         , "01 - ArrayBag clone failed." ) ;
+            assertNotSame( bag   , clone , "02 - ArrayBag clone failed." ) ;
+            
+            assertEquals( clone.size() , bag.size() , "03 - ArrayBag clone failed." ) ;
+            
+            assertEquals( clone.getCount("item1") , bag.getCount("item1") , "04-01 - ArrayBag clone failed." ) ;
+            assertEquals( clone.getCount("item2") , bag.getCount("item2") , "04-02 - ArrayBag clone failed." ) ;
+            
+        }     
+        
+        public function testToSource():void 
+        {
+            var bag:ArrayBag  ;
+
+            bag = new ArrayBag() ;
+            
+            assertEquals( bag.toSource() , 'new system.data.bags.ArrayBag()' , "01 - ArrayBag toSource failed : " + bag ) ;
+            
+            bag.add("item1") ;
+            bag.add("item2") ;
+            bag.add("item2") ;                  
+            bag.add("item3") ;
+            
+            assertEquals( bag.toSource() , 'new system.data.bags.ArrayBag(new system.data.lists.ArrayList(["item1","item2","item2","item3"]))' , "02 - ArrayBag toSource failed : " + bag ) ; 
+                       
+        }           
         
     }
 }
