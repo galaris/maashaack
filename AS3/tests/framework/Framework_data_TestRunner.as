@@ -85,8 +85,8 @@ package
             ( 
                 //system.data.AllTests.suite() , 
                 
-                system.AllTests.suite() 
-                //CoreMapBagTest 
+                // system.AllTests.suite() 
+                CoreMapBagTest 
             );
             
         }
