@@ -38,7 +38,6 @@ package
     import buRRRn.ASTUce.*;
     
     import system.*;
-    import system.data.bags.CoreMapBagTest;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -85,8 +84,8 @@ package
             ( 
                 //system.data.AllTests.suite() , 
                 
-                // system.AllTests.suite() 
-                CoreMapBagTest 
+                system.AllTests.suite() 
+                 
             );
             
         }
