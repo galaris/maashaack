@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -97,7 +97,7 @@ package system.data.iterators
             if ( o == null )
             {
                throw new ArgumentError( this + " constructor failed, the passed-in Object argument not must be 'null'.") ;   
-            }      	
+            }
             _o = o ;
             _a = new Array() ;
             _k = -1 ;

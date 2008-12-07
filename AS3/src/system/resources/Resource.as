@@ -41,7 +41,7 @@ package system.resources
      */
     public interface Resource
     {
-    	//
+        //
     }
 }
 

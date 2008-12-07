@@ -38,69 +38,69 @@ package system.comparators
     import system.Comparator;                    
 
     /**
-	 * This comparator compare two Number objects.
-	 * <p><b>Example :</b></p>
-	 * <pre class="prettyprint">
-	 * import system.comparators.NumberComparator ;
-	 * 
-	 * var c:NumberComparator = new NumberComparator() ;
+     * This comparator compare two Number objects.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.comparators.NumberComparator ;
+     * 
+     * var c:NumberComparator = new NumberComparator() ;
      * 
      * trace( c.compare(0,0) ) ; // 0
-	 * trace( c.compare(1,1) ) ; // 0
-	 * trace( c.compare(-1,-1) ) ; // 0
-	 * trace( c.compare(0.1,0.1) ) ; // 0
-	 * trace( c.compare( Number(Math.cos(25)) , 0.9912028118634736 ) ) ; // 0
-	 * trace( c.compare(1, 0) ) ; // 1
-	 * trace( c.compare(0, 1) ) ; // -1
-	 * </pre>
+     * trace( c.compare(1,1) ) ; // 0
+     * trace( c.compare(-1,-1) ) ; // 0
+     * trace( c.compare(0.1,0.1) ) ; // 0
+     * trace( c.compare( Number(Math.cos(25)) , 0.9912028118634736 ) ) ; // 0
+     * trace( c.compare(1, 0) ) ; // 1
+     * trace( c.compare(0, 1) ) ; // -1
+     * </pre>
      */
-	public class NumberComparator implements Comparator
-	{
-		
-		/**
-		 * Creates a new NumberComparator instance.
-		 */
-		public function NumberComparator() 
-		{
-			//
-		}
-                
-		/**
-	     * Returns an integer value to compare two Number objects.
-		 * @param o1 the first Number object to compare.
-		 * @param o2 the second Number object to compare.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-		 * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-		 * <li> 0 if o1 and o2 are equal.</li>
-		 * </p>
-		 * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Number objects.
-		 */
-		public function compare(o1:*, o2:*, options:* = null):int
-		{
-			if ( (o1 is Number) && (o2 is Number ) ) 
-			{
-				// TODO fix float bug with Math methods and float number operations.
-				//o1 = (o1 as Number).toString() ; 
-				//o2 = (o2 as Number).toString() ;
-				if( o1 < o2 )
-				{
-					return -1;
-				}
-				else if( o1 > o2 )
-				{
-					return 1;
-				}
-				else 
-				{
-					return 0 ;
-				}
-			}
-			else 
-			{
-				throw new ArgumentError(this + " compare method failed, The two arguments must be Number objects.") ;
-			}	
-		}
+    public class NumberComparator implements Comparator
+    {
         
-	}
+        /**
+         * Creates a new NumberComparator instance.
+         */
+        public function NumberComparator() 
+        {
+            //
+        }
+                
+        /**
+         * Returns an integer value to compare two Number objects.
+         * @param o1 the first Number object to compare.
+         * @param o2 the second Number object to compare.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Number objects.
+         */
+        public function compare(o1:*, o2:*, options:* = null):int
+        {
+            if ( (o1 is Number) && (o2 is Number ) ) 
+            {
+                // TODO fix float bug with Math methods and float number operations.
+                //o1 = (o1 as Number).toString() ; 
+                //o2 = (o2 as Number).toString() ;
+                if( o1 < o2 )
+                {
+                    return -1;
+                }
+                else if( o1 > o2 )
+                {
+                    return 1;
+                }
+                else 
+                {
+                    return 0 ;
+                }
+            }
+            else 
+            {
+                throw new ArgumentError(this + " compare method failed, The two arguments must be Number objects.") ;
+            }    
+        }
+        
+    }
 }

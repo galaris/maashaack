@@ -270,7 +270,7 @@ package system.data.maps
          */
         public function remove( o:* ):*
         {
-        	var k:* ;
+            var k:* ;
             var v:*   = null ;
             var i:int = indexOfKey( o ) ;
             if ( i > -1 ) 
@@ -292,14 +292,14 @@ package system.data.maps
          */
         public function setKeyAt( index:uint, key:* ):* 
         {
-        	if ( index >= size() )
-        	{
-        		throw new RangeError( "ArrayMap.setKeyAt(" + index + ") failed with an index out of the range.") ;
+            if ( index >= size() )
+            {
+                throw new RangeError( "ArrayMap.setKeyAt(" + index + ") failed with an index out of the range.") ;
             }
-        	if ( containsKey( key ) )
-        	{
-        		return null ;
-        	}
+            if ( containsKey( key ) )
+            {
+                return null ;
+            }
             var k:* = _keys[index] ;
             if (k === undefined)
             {
@@ -319,10 +319,10 @@ package system.data.maps
          */
         public function setValueAt( index:uint, value:* ):* 
         {
-        	if ( index >= size() )
-        	{
-        		throw new RangeError( "ArrayMap.setValueAt(" + index + ") failed with an index out of the range.") ;
-            }        	
+            if ( index >= size() )
+            {
+                throw new RangeError( "ArrayMap.setValueAt(" + index + ") failed with an index out of the range.") ;
+            }
             var v:* = _values[index] ;  // TODO refactoring
             if (v === undefined)
             {

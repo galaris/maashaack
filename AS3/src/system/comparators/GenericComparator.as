@@ -39,8 +39,8 @@ package system.comparators
     import system.Sortable;    
 
     /**
-	 * This comparator compare two Objects by field.
-	 * <p><b>Example :</b></p>
+     * This comparator compare two Objects by field.
+     * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.comparators.GenericComparator ;
      * import system.comparators.StringComparator ;
@@ -73,32 +73,32 @@ package system.comparators
      * write(ar) ; // Paris|Marseille|Lyon|Bordeaux
      * </pre>
      */
-	public class GenericComparator implements Comparator, Sortable
-	{
-		
-		/**
-		 * Creates a new GenericComparator instance.
-	     * @param sortBy A String who represents a property name to compare the two objects.
-	     * @param comparator An Comparator use to compare the two objects with the specified property names. 
-	     * @throws ArgumentError If the 'sortBy' argument is 'null'.
-	     * @throws ArgumentError If the 'comparator' argument is 'null'.		 
-	     */
-		public function GenericComparator( sortBy:String , comparator:Comparator )
-		{
+    public class GenericComparator implements Comparator, Sortable
+    {
+        
+        /**
+         * Creates a new GenericComparator instance.
+         * @param sortBy A String who represents a property name to compare the two objects.
+         * @param comparator An Comparator use to compare the two objects with the specified property names. 
+         * @throws ArgumentError If the 'sortBy' argument is 'null'.
+         * @throws ArgumentError If the 'comparator' argument is 'null'.         
+         */
+        public function GenericComparator( sortBy:String , comparator:Comparator )
+        {
             this.comparator = comparator ;
             this.sortBy     = sortBy     ;
-		}
+        }
 
         /**
          * Determinates the Comparator strategy used to sort the instance.
-		 * <p>The internal Comparator used by this Comparator to compare two objects with the specified field.</p>
-		 * @throws ArgumentError If the 'comparator' property is 'null'.
-		 */
-		public function get comparator():Comparator
-		{
-			return _comparator ;
-		}
-		
+         * <p>The internal Comparator used by this Comparator to compare two objects with the specified field.</p>
+         * @throws ArgumentError If the 'comparator' property is 'null'.
+         */
+        public function get comparator():Comparator
+        {
+            return _comparator ;
+        }
+        
         /**
          * @private
          */
@@ -111,21 +111,21 @@ package system.comparators
             else
             {
                 throw new Error( "The GenericComparator 'comparator' property not must be 'null'") ;  
-            }       	
+            }           
         }
         
-		/**
-	     * Determinates a String who represents a property name to compare the two objects.
-	     * @throws ArgumentError If the 'sortBy' property is 'null'.
-	     */
-		public function get sortBy():String
-		{
-			return _sortBy ;
-		}
-		
-		/**
-		 * @private
-		 */
+        /**
+         * Determinates a String who represents a property name to compare the two objects.
+         * @throws ArgumentError If the 'sortBy' property is 'null'.
+         */
+        public function get sortBy():String
+        {
+            return _sortBy ;
+        }
+        
+        /**
+         * @private
+         */
         public function set sortBy( value:String ):void
         {
             if ( value != null  )
@@ -136,40 +136,40 @@ package system.comparators
             {
                 throw new Error( "The GenericComparator 'sortBy' property not must be 'null'") ;
             }
-        }		
+        }        
         
-		/**
-		 * Returns an integer value to compare two objects.
-		 * @param o1 the first Number object to compare.
-		 * @param o2 the second Number object to compare.
-	     * @return <p>
-	     * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-	     * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-	     * <li> 0 if o1 and o2 are equal.</li>
-	     * </p>
-	     * @throws ArgumentError if the two arguments are null.
-	     */
-		public function compare(o1:*, o2:*, options:* = null):int
-		{
-			if ( o1 == null || o2 == null ) 
-			{
-                throw new ArgumentError( "The GenericComparator.compare method failed, The two arguments not must be null.") ;	
-			}
+        /**
+         * Returns an integer value to compare two objects.
+         * @param o1 the first Number object to compare.
+         * @param o2 the second Number object to compare.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         * @throws ArgumentError if the two arguments are null.
+         */
+        public function compare(o1:*, o2:*, options:* = null):int
+        {
+            if ( o1 == null || o2 == null ) 
+            {
+                throw new ArgumentError( "The GenericComparator.compare method failed, The two arguments not must be null.") ;    
+            }
             else
             {
                 return comparator.compare( o1[sortBy] , o2[sortBy] , options ) ;
-			}
-		}
-		
-		/**
-		 * @private
-		 */
-		private var _comparator:Comparator ;
+            }
+        }
+        
+        /**
+         * @private
+         */
+        private var _comparator:Comparator ;
         
         /**
          * @private
          */
         private var _sortBy:String ;        
-        	
-	}
+            
+    }
 }

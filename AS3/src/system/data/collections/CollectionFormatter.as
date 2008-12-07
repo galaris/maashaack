@@ -59,30 +59,30 @@ package system.data.collections
          */
         public function format( value:* = null ):String
         {
-			if ( value != null && value is Collection )
-			{
-				var r:String = "{";
-				var c:Collection = value as Collection ;
-				if ( c.size() > 0 ) 
-				{
-					var ar:Array = c.toArray() ;
-					var l:int    = ar.length   ;
-					for (var i:int ; i < l ; i++) 
-					{
-						r += ar[i] ;
-						if (i < (l-1)) 
-						{
-							r += "," ;
-						}
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
+            if ( value != null && value is Collection )
+            {
+                var r:String = "{";
+                var c:Collection = value as Collection ;
+                if ( c.size() > 0 ) 
+                {
+                    var ar:Array = c.toArray() ;
+                    var l:int    = ar.length   ;
+                    for (var i:int ; i < l ; i++) 
+                    {
+                        r += ar[i] ;
+                        if (i < (l-1)) 
+                        {
+                            r += "," ;
+                        }
+                    }
+                }
+                r += "}";
+                return r ;
+            }
+            else 
+            {
+                return "" ;
+            }
         }
     }
 }

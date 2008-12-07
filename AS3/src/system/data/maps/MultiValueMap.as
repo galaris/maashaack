@@ -173,7 +173,7 @@ package system.data.maps
          */
         public function containsValue( value:* ):Boolean 
         {
-        	var c:Collection ;
+            var c:Collection ;
             var it:Iterator = _map.iterator() ;
             while (it.hasNext()) 
             {
@@ -359,7 +359,7 @@ package system.data.maps
          */
         public function iteratorByKey( key:* ):Iterator
         {
-        	var it:Iterable = _map.get(key) as Iterable ;
+            var it:Iterable = _map.get(key) as Iterable ;
             return it == null ? null : it.iterator() ; // TODO implement an EmptyIterator ??
         }     
      
@@ -463,22 +463,22 @@ package system.data.maps
          */
         public function putCollection( key:* , c:Collection ):void 
         {
-        	if ( c == null || c.size() == 0 )
-        	{
-        		return ;
-        	}
-        	var co:Collection ;
+            if ( c == null || c.size() == 0 )
+            {
+                return ;
+            }
+            var co:Collection ;
             if (! containsKey(key) ) 
             {
-            	co = createCollection() ;
-            	if ( co != null )
-            	{
+                co = createCollection() ;
+                if ( co != null )
+                {
                     _map.put(key , co ) ;
-            	}
+                }
             }
             else
             {
-            	co = _map.get(key) as Collection ;
+                co = _map.get(key) as Collection ;
             }
             if ( co != null )
             {

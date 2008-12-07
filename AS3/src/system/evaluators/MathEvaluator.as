@@ -146,7 +146,7 @@ package system.evaluators
      */
     public class MathEvaluator implements Evaluable
     {
-        	
+        
         use namespace mathparser;
 
         /**

@@ -43,24 +43,24 @@ package system.data.maps
      */
     public class MapEntry implements Cloneable, Entry
     {
-    	
-    	/**
-    	 * Creates a new MapEntry instance.
-    	 * @param key The key representation of the entry.
-    	 * @param value The value representation of the entry.
-    	 */
-    	public function MapEntry( key:* = null , value:* = null )
-    	{
-    		_key   = key   ;
-    		_value = value ;
+        
+        /**
+         * Creates a new MapEntry instance.
+         * @param key The key representation of the entry.
+         * @param value The value representation of the entry.
+         */
+        public function MapEntry( key:* = null , value:* = null )
+        {
+            _key   = key   ;
+            _value = value ;
         }
         
-	 	/**
-		 * Indicates the key corresponding to this entry.
-		 */        
+         /**
+         * Indicates the key corresponding to this entry.
+         */        
         public function get key():*
         {
-        	return _key ;
+            return _key ;
         }
         
         /**
@@ -68,52 +68,52 @@ package system.data.maps
          */        
         public function set key( key:* ):void
         {
-        	_key = key ;
+            _key = key ;
         }        
         
-		/**
-		 * Indicates the value corresponding to this entry.
-		 */        
+        /**
+         * Indicates the value corresponding to this entry.
+         */        
         public function get value():*
         {
-        	return _value ;
+            return _value ;
         }
         
-		/**
-		 * @private
-		 */        
-		public function set value( value:* ):void
+        /**
+         * @private
+         */        
+        public function set value( value:* ):void
         {
-        	_value = value ;
+            _value = value ;
         }        
-		
-		/**
-		 * Creates and returns a shallow copy of the object.
-		 * @return A new object that is a shallow copy of this instance.
-		 */	
+        
+        /**
+         * Creates and returns a shallow copy of the object.
+         * @return A new object that is a shallow copy of this instance.
+         */    
         public function clone():*
         {
-        	return new MapEntry(key,value);
-        }		
-		
-		/**
-		 * Returns the String representation of the object.
-		 * @return the String representation of the object.
-		 */
-		public function toString():String
-		{
-			return "[MapEntry key:" + key + " value:" + value + "]" ;	
-		}
-		
-		/**
-		 * @private
-		 */
-		private var _key:* ;
-		
-		/**
-		 * @private
-		 */
-		private var _value:* ;
+            return new MapEntry(key,value);
+        }        
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return "[MapEntry key:" + key + " value:" + value + "]" ;    
+        }
+        
+        /**
+         * @private
+         */
+        private var _key:* ;
+        
+        /**
+         * @private
+         */
+        private var _value:* ;
         
 
     }

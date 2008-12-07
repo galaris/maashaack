@@ -39,30 +39,30 @@ package system.comparators
     import system.Sortable;                
 
     /**
-	 * Reverse a Comparator object. For example if the comparator must return 1 the reverse comparator return -1.
-	 * <p><b>Example :</b></p>
-	 * <pre class="prettyprint">
-	 * import system.comparators.ReverseComparator ;
-	 * import system.comparators.StringComparator ;
-	 * 
-	 * var c:StringComparator  = new StringComparator() ;
-	 * var s:ReverseComparator = new ReverseComparator( c ) ;
-	 * 
-	 * trace( c.compare( "hello", "world" ) ) ; // -1
-	 * trace( s.compare( "hello", "world" ) ) ; // 1
-	 * </pre>
-	 */
-	public class ReverseComparator implements Comparator, Sortable
-	{
-		
-		/**
-		 * Creates a new ReverseComparator instance.
-	     * @param comp the <code class="prettyprint">Comparator</code> to be reverse.
-	     */
-	    public function ReverseComparator( comp:Comparator=null )
-		{
-			comparator = comp ;
-		}
+     * Reverse a Comparator object. For example if the comparator must return 1 the reverse comparator return -1.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.comparators.ReverseComparator ;
+     * import system.comparators.StringComparator ;
+     * 
+     * var c:StringComparator  = new StringComparator() ;
+     * var s:ReverseComparator = new ReverseComparator( c ) ;
+     * 
+     * trace( c.compare( "hello", "world" ) ) ; // -1
+     * trace( s.compare( "hello", "world" ) ) ; // 1
+     * </pre>
+     */
+    public class ReverseComparator implements Comparator, Sortable
+    {
+        
+        /**
+         * Creates a new ReverseComparator instance.
+         * @param comp the <code class="prettyprint">Comparator</code> to be reverse.
+         */
+        public function ReverseComparator( comp:Comparator=null )
+        {
+            comparator = comp ;
+        }
 
         /**
          * Determinates the internal <code class="prettyprint">Comparator</code> instance to reverse.
@@ -88,26 +88,26 @@ package system.comparators
             }           
         }
                 
-		/**
-		 * Returns an integer value to compare two objects (reverse the value).
-		 * @param o1 the first object to compare.
-		 * @param o2 the second object to compare.
-		 * @param options An optional object used to compare the two objects.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-		 * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-		 * <li> 0 if o1 and o2 are equal.</li>
-		 * </p>
-		 */
-		public function compare(o1:*, o2:*, options:*=null):int
-		{
-			return comparator.compare( o2, o1, options) ;
-		}
+        /**
+         * Returns an integer value to compare two objects (reverse the value).
+         * @param o1 the first object to compare.
+         * @param o2 the second object to compare.
+         * @param options An optional object used to compare the two objects.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         */
+        public function compare(o1:*, o2:*, options:*=null):int
+        {
+            return comparator.compare( o2, o1, options) ;
+        }
         
         /**
          * @private
          */
         private var _comparator:Comparator ;        
         
-	}
+    }
 }

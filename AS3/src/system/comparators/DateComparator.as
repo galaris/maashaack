@@ -38,69 +38,69 @@ package system.comparators
     import system.Comparator;                
 
     /**
-	 * This comparator compare Date objects.
-	 * <p><b>Example :</b></p>
+     * This comparator compare Date objects.
+     * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.comparators.DateComparator;
-	 * 
+     * 
      * var comp:DateComparator = new DateComparator() ;
      * 
      * var d1:Date   = new Date(2007, 1, 1) ;
      * var d2:Number =  1170284400000 ;
-	 * var d3:Date   = new Date(2007, 2, 2) ;
+     * var d3:Date   = new Date(2007, 2, 2) ;
      * var d4:Number = 1172790000000 ;
      * 
-	 * trace( comp.compare(d1, d1) ) ; // 0
-	 * trace( comp.compare(d1, d2) ) ; // 0
-	 * trace( comp.compare(d2, d1) ) ; // 0
-	 * trace( comp.compare(d1, d3) ) ; // -1
-	 * trace( comp.compare(d1, d4) ) ; // -1
-	 * trace( comp.compare(d3, d1) ) ; // 1
-	 * trace( comp.compare(d4, d1) ) ; // 1
+     * trace( comp.compare(d1, d1) ) ; // 0
+     * trace( comp.compare(d1, d2) ) ; // 0
+     * trace( comp.compare(d2, d1) ) ; // 0
+     * trace( comp.compare(d1, d3) ) ; // -1
+     * trace( comp.compare(d1, d4) ) ; // -1
+     * trace( comp.compare(d3, d1) ) ; // 1
+     * trace( comp.compare(d4, d1) ) ; // 1
      * </pre>
      */
-	public class DateComparator implements Comparator
-	{
-		
-		/**
-		 * Creates a new DateComparator instance.
-		 */
-		public function DateComparator()
-		{
-			_comp = new NumberComparator() ;
-		}
+    public class DateComparator implements Comparator
+    {
         
-		/**
-		 * Returns an integer value to compare two Date objects.
-		 * @param o1 the first Date object to compare.
-		 * @param o2 the second Date object to compare.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-		 * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-		 * <li> 0 if o1 and o2 are equal.</li>
-		 * </p>
-		 * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Date or uint objects.
-	     */
-		public function compare(o1:*, o2:*, options:* = null):int
-		{
-			var b1:Boolean = (o1 is Number) || (o1 is Date) ;
-			var b2:Boolean = (o2 is Number) || (o2 is Date) ;
-			if ( b1 && b2 ) 
-			{
-				var a:Number = (o1 is Date) ? (o1 as Date).valueOf() : o1 ;
-				var b:Number = (o2 is Date) ? (o2 as Date).valueOf() : o2 ;
-				return _comp.compare(a, b, options) ;
-			}
-			else 
-			{
-				throw new ArgumentError(this + ".compare(a, b), 'a' and 'b' must be Date or Number objects.") ;
-			}
-		}
+        /**
+         * Creates a new DateComparator instance.
+         */
+        public function DateComparator()
+        {
+            _comp = new NumberComparator() ;
+        }
         
-		/**
-	     * @private
-	     */
-		private static var _comp:NumberComparator ;
-		
-	}
+        /**
+         * Returns an integer value to compare two Date objects.
+         * @param o1 the first Date object to compare.
+         * @param o2 the second Date object to compare.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Date or uint objects.
+         */
+        public function compare(o1:*, o2:*, options:* = null):int
+        {
+            var b1:Boolean = (o1 is Number) || (o1 is Date) ;
+            var b2:Boolean = (o2 is Number) || (o2 is Date) ;
+            if ( b1 && b2 ) 
+            {
+                var a:Number = (o1 is Date) ? (o1 as Date).valueOf() : o1 ;
+                var b:Number = (o2 is Date) ? (o2 as Date).valueOf() : o2 ;
+                return _comp.compare(a, b, options) ;
+            }
+            else 
+            {
+                throw new ArgumentError(this + ".compare(a, b), 'a' and 'b' must be Date or Number objects.") ;
+            }
+        }
+        
+        /**
+         * @private
+         */
+        private static var _comp:NumberComparator ;
+        
+    }
 }

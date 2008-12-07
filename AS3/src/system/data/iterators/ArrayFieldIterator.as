@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -98,6 +98,5 @@ package system.data.iterators
             return ( fieldName != null ) ? ( fieldName in o ? o[fieldName] : null ) : o ;
         }
         
-
     }
 }

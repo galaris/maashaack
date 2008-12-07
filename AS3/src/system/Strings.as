@@ -529,7 +529,7 @@ package system
          */
         public static function format( format:String, ...args ):String
         {
-        	
+            
             var indexedValues:Array = [] ;
             var namedValues:Object  = {} ;
             

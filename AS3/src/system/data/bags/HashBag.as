@@ -42,86 +42,86 @@ package system.data.bags
     import system.data.maps.HashMap;    
 
     /**
-	 * Implements Bag, using a HashMap to provide the data storage. This is the standard implementation of a bag.
-	 * <p><b>Example : </b></p>
-	 * <pre class="prettyprint">
-	 * import system.data.Bag ;
-	 * import system.data.bags.HashBag ;
-	 * 
-	 * import system.data.Collection ;
-	 * import system.data.collections.ArrayCollection ;
-	 * import system.data.Set ;
-	 * 
-	 * var c1:Collection = new ArrayCollection( ["item1", "item1", "item3"] ) ;
-	 * var c2:Collection = new ArrayCollection( ["item1", "item2", "item3", "item4", "item5"] ) ;
-	 * 
-	 * trace ("c1 collection : " + c1) ;
-	 * trace ("c2 collection : " + c2) ;
-	 * 
-	 * trace ("---- create a new HashBag") ;
-	 * 
-	 * var bag:Bag = new HashBag() ;
-	 * 
-	 * trace ("---- add") ;
-	 * trace (" + bag addAll c1 : " + bag.addAll(c1)) ;
-	 * trace (" + bag addAll c2 : " + bag.addAll(c2)) ;
-	 * trace (" > bag : " + bag) ;
-	 * trace (" > bag.toSource : " + bag.toSource()) ;
-	 * 
-	 * trace ("---- contains") ;
-	 * trace (" > bag containsAll c2 : " + bag.containsAll(c2)) ;
-	 * 
-	 * trace ("---- add") ;
-	 * trace (" + bag add item2 : " + bag.add("item2") ) ;
-	 * trace (" > bag : " + bag ) ;
-	 * trace (" + bag addCopies 2xitem2 : " + bag.addCopies("item2", 2)) ;
-	 * trace (" > bag : " + bag) ;
-	 *
-	 * trace ("---- remove") ;
-	 * trace (" > bag removeCopies 1 x item2 : " + bag.removeCopies("item2", 1)) ;
-	 * 
-	 * trace ("---- size") ;
-	 * trace (" - bag getCount item2 : " + bag.getCount("item2")) ;
-	 * trace (" > bag size : " + bag.size()) ;
-	 * 
-	 * trace ("---- retain") ;
-	 * trace (" > bag : " + bag) ;
-	 * trace (" > bag retainAll c1 : " + bag.retainAll(c1)) ;
-	 * trace (" > bag : " + bag) ;
-	 * 
-	 * trace ("----") ;
-	 * 
-	 * var s:Set = bag.uniqueSet() ;
-	 * trace("bag uniqueSet : " + s) ;
-	 * </pre>
- 	 */
-	public class HashBag extends CoreMapBag
-	{
-		
-		/**
-	 	 * Creates a new HashBag instance.
+     * Implements Bag, using a HashMap to provide the data storage. This is the standard implementation of a bag.
+     * <p><b>Example : </b></p>
+     * <pre class="prettyprint">
+     * import system.data.Bag ;
+     * import system.data.bags.HashBag ;
+     * 
+     * import system.data.Collection ;
+     * import system.data.collections.ArrayCollection ;
+     * import system.data.Set ;
+     * 
+     * var c1:Collection = new ArrayCollection( ["item1", "item1", "item3"] ) ;
+     * var c2:Collection = new ArrayCollection( ["item1", "item2", "item3", "item4", "item5"] ) ;
+     * 
+     * trace ("c1 collection : " + c1) ;
+     * trace ("c2 collection : " + c2) ;
+     * 
+     * trace ("---- create a new HashBag") ;
+     * 
+     * var bag:Bag = new HashBag() ;
+     * 
+     * trace ("---- add") ;
+     * trace (" + bag addAll c1 : " + bag.addAll(c1)) ;
+     * trace (" + bag addAll c2 : " + bag.addAll(c2)) ;
+     * trace (" > bag : " + bag) ;
+     * trace (" > bag.toSource : " + bag.toSource()) ;
+     * 
+     * trace ("---- contains") ;
+     * trace (" > bag containsAll c2 : " + bag.containsAll(c2)) ;
+     * 
+     * trace ("---- add") ;
+     * trace (" + bag add item2 : " + bag.add("item2") ) ;
+     * trace (" > bag : " + bag ) ;
+     * trace (" + bag addCopies 2xitem2 : " + bag.addCopies("item2", 2)) ;
+     * trace (" > bag : " + bag) ;
+     *
+     * trace ("---- remove") ;
+     * trace (" > bag removeCopies 1 x item2 : " + bag.removeCopies("item2", 1)) ;
+     * 
+     * trace ("---- size") ;
+     * trace (" - bag getCount item2 : " + bag.getCount("item2")) ;
+     * trace (" > bag size : " + bag.size()) ;
+     * 
+     * trace ("---- retain") ;
+     * trace (" > bag : " + bag) ;
+     * trace (" > bag retainAll c1 : " + bag.retainAll(c1)) ;
+     * trace (" > bag : " + bag) ;
+     * 
+     * trace ("----") ;
+     * 
+     * var s:Set = bag.uniqueSet() ;
+     * trace("bag uniqueSet : " + s) ;
+     * </pre>
+     */
+    public class HashBag extends CoreMapBag
+    {
+        
+        /**
+         * Creates a new HashBag instance.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
          */
-		public function HashBag( co:Collection=null )
-		{
-			super( new HashMap() , co ) ;
-		}
-	
-		/**
-		 * Returns the shallow copy of this bag.
-	 	 * @return the shallow copy of this bag.
-	 	 */
-		public override function clone():*
-		{
-			return new HashBag( new ArrayCollection( toArray() ) ) ;
-		}
+        public function HashBag( co:Collection=null )
+        {
+            super( new HashMap() , co ) ;
+        }
+    
+        /**
+         * Returns the shallow copy of this bag.
+         * @return the shallow copy of this bag.
+         */
+        public override function clone():*
+        {
+            return new HashBag( new ArrayCollection( toArray() ) ) ;
+        }
         
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */
-		public override function toSource( indent:int = 0 ):String 
-		{
+        public override function toSource( indent:int = 0 ):String 
+        {
             var source:String = "new " + Reflection.getClassPath(this) + "(" ;
             var li:List = _extractList() ;
             if ( li.size() > 0 )
@@ -129,8 +129,8 @@ package system.data.bags
                 source += li.toSource() ;
             } 
             source += ")" ;
-            return source ;			
-		}
-		
-	}
+            return source ;            
+        }
+        
+    }
 }

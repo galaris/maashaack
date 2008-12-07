@@ -68,7 +68,7 @@ package system.data.iterators
             _key              = 0 ;
             _listast          = -1 ;
             _expectedModCount = _list.modCount ;  
-            seek( position ) ;     	
+            seek( position ) ;         
         }
         
         /**
@@ -218,7 +218,7 @@ package system.data.iterators
         {
             if (_listast == -1) 
             {
-            	throw new IllegalOperationError( "ListIterator.remove() failed, the iterator state is not valid.") ;
+                throw new IllegalOperationError( "ListIterator.remove() failed, the iterator state is not valid.") ;
             }
             checkForComodification() ;
             try 
@@ -226,7 +226,7 @@ package system.data.iterators
                 _list.removeAt(_listast) ;
                 if (_listast < _key) 
                 {
-                	_key -- ;
+                    _key -- ;
                 }
                 _listast = -1 ;
                 _expectedModCount = _list.modCount ;

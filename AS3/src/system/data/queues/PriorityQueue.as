@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -99,7 +99,7 @@ package system.data.queues
          */        
         public function get comparator():Comparator
         {
-        	return _comparator ;
+            return _comparator ;
         }
         
         /**
@@ -108,7 +108,7 @@ package system.data.queues
         public function set comparator( comp:Comparator ):void
         {
             _comparator = comp ;
-            sort() ;        	
+            sort() ;            
         }
         
         /**
@@ -155,13 +155,13 @@ package system.data.queues
          */
         public function sort( ...arguments:Array ):void 
         {
-        	if ( arguments.length > 0 )
+            if ( arguments.length > 0 )
             {
                 _a.sort.apply(_a, arguments ) ; 
             }
             else if ( size() > 0 && _comparator != null) 
             {
-          		_a.sort( _comparator.compare, _options ) ;
+                _a.sort( _comparator.compare, _options ) ;
             }
         }        
         

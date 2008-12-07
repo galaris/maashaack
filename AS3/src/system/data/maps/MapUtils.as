@@ -35,40 +35,39 @@
 
 package system.data.maps
 {
-    import system.data.Map;	
+    import system.data.Map;    
 
     /**
-	 * The MapUtils utility class is an all-static class with methods for working with map.
-	 */
-	public class MapUtils
-	{
-		
-		/**
-		 * Returns the value of the specified key in the map with a Number representation.
-		 * @param map the map used by this method.
-		 * @param key the key in the map to used to return the number value.
-		 * @return the value of the specified key in the map with a Number representation.
-		 */
-		public static function getNumber( map:Map , key:* ):Number 
-		{
-        	if ( map != null ) 
-        	{
-	            var answer:* = map.get(key) ;
-	            if ( answer != null ) 
-	            {
-	                if (answer is Number) 
-	                {
-	                    return Number(answer) ;
-	                }
-	                else if (answer is String) 
-	                {
-						return parseInt(answer) ;
-	                }
-	            }
-	        }
-    	    return NaN ;
-	    }
-		
-	}
-	
+     * The MapUtils utility class is an all-static class with methods for working with map.
+     */
+    public class MapUtils
+    {
+        
+        /**
+         * Returns the value of the specified key in the map with a Number representation.
+         * @param map the map used by this method.
+         * @param key the key in the map to used to return the number value.
+         * @return the value of the specified key in the map with a Number representation.
+         */
+        public static function getNumber( map:Map , key:* ):Number 
+        {
+            if ( map != null ) 
+            {
+                var answer:* = map.get(key) ;
+                if ( answer != null ) 
+                {
+                    if (answer is Number) 
+                    {
+                        return Number(answer) ;
+                    }
+                    else if (answer is String) 
+                    {
+                        return parseInt(answer) ;
+                    }
+                }
+            }
+            return NaN ;
+        }
+        
+    }
 }

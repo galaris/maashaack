@@ -37,8 +37,8 @@ package system.data
 {
 
     /**
-	 * A collection that contains no duplicate elements.
-	 */
+     * A collection that contains no duplicate elements.
+     */
     public interface Set extends Collection
     {
         

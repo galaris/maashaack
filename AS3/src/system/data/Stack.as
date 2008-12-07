@@ -39,51 +39,51 @@ package system.data
     import system.Serializable;    
 
     /**
-	 * A collection designed for holding elements prior to processing. 
-	 * <p>Stacks typically, but do not necessarily, order elements in a LIFO (last-in-first-out) manner.</p>
-	 */
+     * A collection designed for holding elements prior to processing. 
+     * <p>Stacks typically, but do not necessarily, order elements in a LIFO (last-in-first-out) manner.</p>
+     */
     public interface Stack extends Cloneable, Iterable, Serializable
     {
 
-		/**
-		 * Removes all of the elements from this stack (optional operation).
-		 */
-		function clear():void ;
-	
-		/**
-		 * Returns <code class="prettyprint">true</code> if this stack contains no elements.
-		 * @return <code class="prettyprint">true</code> if this stack is empty else <code class="prettyprint">false</code>.
-		 */
-		function isEmpty():Boolean ;
+        /**
+         * Removes all of the elements from this stack (optional operation).
+         */
+        function clear():void ;
+    
+        /**
+         * Returns <code class="prettyprint">true</code> if this stack contains no elements.
+         * @return <code class="prettyprint">true</code> if this stack is empty else <code class="prettyprint">false</code>.
+         */
+        function isEmpty():Boolean ;
 
-		/**
-		 * Returns the lastly pushed value without removing it.
-		 * @throws the lastly pushed value.
-		 */
-		function peek():* ;
-		
-		/**
-		 * Removes and returns the lastly pushed value.
-		 * @return the lastly pushed value
-		 */
-		function pop():* ;
+        /**
+         * Returns the lastly pushed value without removing it.
+         * @throws the lastly pushed value.
+         */
+        function peek():* ;
+        
+        /**
+         * Removes and returns the lastly pushed value.
+         * @return the lastly pushed value
+         */
+        function pop():* ;
 
-		/**
-		 * Pushes the passed-in value to this stack.
-		 */
-		function push(o:*):void ;
+        /**
+         * Pushes the passed-in value to this stack.
+         */
+        function push(o:*):void ;
 
-		/**
-		 * Search a value in the stack.
-		 * @return the index position of a value in the stack.
-		 */
-		function search(o:*):int ;
+        /**
+         * Search a value in the stack.
+         * @return the index position of a value in the stack.
+         */
+        function search(o:*):int ;
 
-		/**
-		 * Returns the number of pushed values.
-		 * @return the number of pushed values.
-		 */
-		function size():uint ;
-        	
+        /**
+         * Returns the number of pushed values.
+         * @return the number of pushed values.
+         */
+        function size():uint ;
+        
     }
 }

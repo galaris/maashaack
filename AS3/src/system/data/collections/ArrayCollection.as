@@ -105,17 +105,17 @@ package system.data.collections
          */
         public function ArrayCollection( init:* = null )
         {
-        	if ( init is Collection )
-        	{
-        		init = init.toArray() ;
-        	}
+            if ( init is Collection )
+            {
+                init = init.toArray() ;
+            }
             else if ( init is Iterable )
             {
                 var ar:Array    = [] ;
                 var it:Iterator = (init as Iterable).iterator() ;
                 while( it.hasNext() )
                 {
-                	ar.push(it.next()) ;
+                    ar.push(it.next()) ;
                 }
                 init = ar ;
             }
@@ -136,7 +136,7 @@ package system.data.collections
         {
             if ( o === undefined ) 
             {
-            	return false ;
+                return false ;
             }
             _a.push(o) ;
             return true ;
@@ -148,23 +148,23 @@ package system.data.collections
          */
         public function addAll( c:Collection ):Boolean 
         {
-        	if ( c == null )
-        	{
-        		return false ;
-        	}
+            if ( c == null )
+            {
+                return false ;
+            }
             if ( c.size() > 0 ) 
             {
                 var it:Iterator = c.iterator() ;
                 while(it.hasNext()) 
                 {
-                	add( it.next() ) ;
+                    add( it.next() ) ;
                 }
                 return true ;
             }
             else 
             {
                 return false ;
-        	}
+            }
         }        
         
         /**
@@ -172,7 +172,7 @@ package system.data.collections
          */        
         public function clear():void
         {
-        	_a.splice(0) ;
+            _a.splice(0) ;
         }
         
         /**

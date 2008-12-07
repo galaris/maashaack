@@ -39,10 +39,10 @@ package system.data
     import system.Serializable;    
 
     /**
-	 * The root interface in the collection hierarchy. 
-	 * <p>A collection represents a group of objects, known as its elements.</p> 
-	 * <p>Some collections allow duplicate elements and others do not. Some are ordered and others unordered.</p> 
-	 */
+     * The root interface in the collection hierarchy. 
+     * <p>A collection represents a group of objects, known as its elements.</p> 
+     * <p>Some collections allow duplicate elements and others do not. Some are ordered and others unordered.</p> 
+     */
     public interface Collection extends Cloneable, Iterable, Serializable
     {
         
@@ -51,53 +51,53 @@ package system.data
          */
         function add( o:* ):Boolean ;        
         
-		/**
-		 * Removes all of the elements from this collection (optional operation).
-		 */
+        /**
+         * Removes all of the elements from this collection (optional operation).
+         */
         function clear():void ;
 
-		/**
-		 * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
-		 * @return <code class="prettyprint">true</code> if this collection contains the specified element.
-		 */
-    	function contains( o:* ):Boolean ;
-	
-		/**
-		 * Returns the element from this collection at the passed index.
-		 * @return the element from this collection at the passed index.
-		 */
-    	function get( key:* ) :* ;
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
+         * @return <code class="prettyprint">true</code> if this collection contains the specified element.
+         */
+        function contains( o:* ):Boolean ;
+    
+        /**
+         * Returns the element from this collection at the passed index.
+         * @return the element from this collection at the passed index.
+         */
+        function get( key:* ) :* ;
 
-		/**
-		 * Returns the position of the passed object in the collection.
-		 * @param o the object to search in the collection.
-		 * @param fromIndex the index to begin the search in the collection.
-		 * @return the index of the object or -1 if the object isn't find in the collection.
-		 */
-		function indexOf( o:* , fromIndex:uint = 0 ):int
+        /**
+         * Returns the position of the passed object in the collection.
+         * @param o the object to search in the collection.
+         * @param fromIndex the index to begin the search in the collection.
+         * @return the index of the object or -1 if the object isn't find in the collection.
+         */
+        function indexOf( o:* , fromIndex:uint = 0 ):int
         
-		/**
-		 * Returns <code class="prettyprint">true</code> if this collection contains no elements.
-		 * @return <code class="prettyprint">true</code> if this collection is empty else <code class="prettyprint">false</code>.
-		 */
-    	function isEmpty():Boolean ;
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains no elements.
+         * @return <code class="prettyprint">true</code> if this collection is empty else <code class="prettyprint">false</code>.
+         */
+        function isEmpty():Boolean ;
 
-		/**
-		 * Removes a single instance of the specified element from this collection, if it is present (optional operation).
-		 */
-    	function remove( o:* ):* ;
-	
-		/**
-		 * Retrieves the number of elements in this collection.
-		 * @return the number of elements in this collection.
-		 */
-    	function size():uint ;
-    	
-    	/**
-    	 * Returns an array containing all of the elements in this collection.
-    	 * @return an array containing all of the elements in this collection.
-    	 */
-    	function toArray():Array ;
-    	
+        /**
+         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         */
+        function remove( o:* ):* ;
+    
+        /**
+         * Retrieves the number of elements in this collection.
+         * @return the number of elements in this collection.
+         */
+        function size():uint ;
+        
+        /**
+         * Returns an array containing all of the elements in this collection.
+         * @return an array containing all of the elements in this collection.
+         */
+        function toArray():Array ;
+        
     }
 }

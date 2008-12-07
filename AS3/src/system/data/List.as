@@ -37,8 +37,8 @@ package system.data
 {
 
     /**
-	 * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
-	 */
+     * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
+     */
     public interface List extends Collection
     {
 
@@ -53,52 +53,52 @@ package system.data
          */
         function addAt( index:uint , o:* ):void ;
             
-    	/**
-		 * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
-		 * @return <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
-		 */
-    	function containsAll( c:Collection ):Boolean ;
+        /**
+         * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
+         * @return <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
+         */
+        function containsAll( c:Collection ):Boolean ;
         
-		/**
-		 * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
-		 * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
-		 */
-    	function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
+        /**
+         * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
+         * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
+         */
+        function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         
-		/**
-		 * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
-		 * @param id The index of the element or the first element to remove.
-		 * @param len The number of elements to remove (default 1).  
-		 */
-    	function removeAt( id:uint , len:int = 1 ):* ;
+        /**
+         * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
+         * @param id The index of the element or the first element to remove.
+         * @param len The number of elements to remove (default 1).  
+         */
+        function removeAt( id:uint , len:int = 1 ):* ;
 
-		/**
-		 * Removes from this List all of the elements whose index is between fromIndex, inclusive and toIndex, exclusive. 
+        /**
+         * Removes from this List all of the elements whose index is between fromIndex, inclusive and toIndex, exclusive. 
          * <p>Shifts any succeeding elements to the left (reduces their index).</p> 
          * <p>This call shortens the list by (toIndex - fromIndex) elements. (If toIndex==fromIndex, this operation has no effect.)</p>
          * @param fromIndex The from index (inclusive) to remove elements in the list.
          * @param toIndex The to index (exclusive) to remove elements in the list.
-		 */
-    	function removeRange( fromIndex:uint , toIndex:uint ):* ;
-	
-		/**
-		 * Retains only the elements in this list that are contained in the specified collection (optional operation).
-		 */
-    	function retainAll( c:Collection ):Boolean ;
+         */
+        function removeRange( fromIndex:uint , toIndex:uint ):* ;
+    
+        /**
+         * Retains only the elements in this list that are contained in the specified collection (optional operation).
+         */
+        function retainAll( c:Collection ):Boolean ;
 
-		/**
-		 * Replaces the element at the specified position in this list with the specified element (optional operation).
-	     * @param id index of element to replace.
-	     * @param o element to be stored at the specified position.
-	     * @return the element previously at the specified position.
-		 */
-    	function set( index:uint , o:* ):* ;
-	
-		/**
-		 * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
-		 * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
-		 */
-	    function subList( fromIndex:uint , toIndex:uint ):List ;
+        /**
+         * Replaces the element at the specified position in this list with the specified element (optional operation).
+         * @param id index of element to replace.
+         * @param o element to be stored at the specified position.
+         * @return the element previously at the specified position.
+         */
+        function set( index:uint , o:* ):* ;
+    
+        /**
+         * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
+         * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
+         */
+        function subList( fromIndex:uint , toIndex:uint ):List ;
     
     }
 
