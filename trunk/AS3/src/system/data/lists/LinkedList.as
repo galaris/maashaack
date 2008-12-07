@@ -72,11 +72,11 @@ package system.data.lists
             _header.next = _header.previous = _header ;
             if ( init == null )
             {
-            	return ;
+                return ;
             }
             else if ( init is Collection )
             {
-            	addAll( init as Collection ) ;
+                addAll( init as Collection ) ;
             }
             else if ( init is Array )
             {
@@ -88,7 +88,7 @@ package system.data.lists
             }
             if ( init != null && init is Iterator )
             {
-              	while( (init as Iterator).hasNext() )
+                  while( (init as Iterator).hasNext() )
                 {
                     add( (init as Iterator).next()) ;
                 }
@@ -143,19 +143,19 @@ package system.data.lists
          */        
         public function addAt(index:uint, o:*):void
         {
-        	try
-        	{
+            try
+            {
                 var i:ListIterator = listIterator( index ) ;
                 i.add(o);
-        	}
-        	catch( e:RangeError )
-        	{
-        		throw new RangeError("LinkedList.addAt() method failed, the specified index '" + index +  "' is out of bounds." ) ;
-        	}
-        	catch( e:Error )
-        	{
-        		throw e ;
-        	}
+            }
+            catch( e:RangeError )
+            {
+                throw new RangeError("LinkedList.addAt() method failed, the specified index '" + index +  "' is out of bounds." ) ;
+            }
+            catch( e:Error )
+            {
+                throw e ;
+            }
         }
         
         /**
@@ -358,11 +358,11 @@ package system.data.lists
             }
             else if ( o == this )
             {
-            	return true ;
+                return true ;
             }
             else if ( o is LinkedList )
             {
-            	var l:LinkedList = o as LinkedList ;
+                var l:LinkedList = o as LinkedList ;
 
                 if ( l.size() != size() )
                 {
@@ -518,7 +518,7 @@ package system.data.lists
          */
         public function lastIndexOf( o:*  , fromIndex:int = 0x7FFFFFFF ):int 
         {
-        	// TODO implement the fromIndex argument !!!
+            // TODO implement the fromIndex argument !!!
             var index:int = _size ;
             var e:LinkedListEntry ;
             if ( o == null ) 
@@ -697,20 +697,20 @@ package system.data.lists
          */
         public function removeAt( index:uint , len:int = 1 ):* 
         {
-        	len = len > 1 ? len : 1 ;
-        	if ( len == 1 )
-        	{
+            len = len > 1 ? len : 1 ;
+            if ( len == 1 )
+            {
                 return [ removeEntry( _entry( index ) ) ] ;
-        	}
-        	else
-        	{
-        		var ar:Array = [] ;
-        		while( len-- > 0 )
-        		{
-        			ar.push( removeEntry( _entry( index ) ) ) ;
-        		}
-        		return ar ;
-        	}
+            }
+            else
+            {
+                var ar:Array = [] ;
+                while( len-- > 0 )
+                {
+                    ar.push( removeEntry( _entry( index ) ) ) ;
+                }
+                return ar ;
+            }
         }        
         
         /**
@@ -816,7 +816,7 @@ package system.data.lists
             } 
             else
             {
-            	var ar:Array = [] ;
+                var ar:Array = [] ;
                 var it:ListIterator = listIterator( fromIndex ) ;
                 var l:int = toIndex - fromIndex ;
                 for (var i:int ; i<l ; i++) 
@@ -886,7 +886,7 @@ package system.data.lists
         public function set( index:uint , o:* ):*
         {
             try 
-            {        	
+            {            
                 var i:ListIterator = listIterator( index ) ;
                 var old:* = i.next() ;
                 i.set(o) ;
@@ -960,7 +960,7 @@ package system.data.lists
             var i:ListIterator = listIterator( fromIndex ) ;
             for ( var j:int = fromIndex ; j < toIndex ; j++ ) 
             {
-            	l.add( i.next() ) ;
+                l.add( i.next() ) ;
             }
             return l ;
         }        

@@ -57,14 +57,14 @@ package system.data.sets
          */
         public function CoreSet( map:Map , init:* = null )
         {
-        	if ( map == null )
-        	{
-        		throw new ArgumentError( Reflection.getClassName(this) + " constructor failed, the internal Map not must be null.") ;
-        	}
-        	_map = map ;
+            if ( map == null )
+            {
+                throw new ArgumentError( Reflection.getClassName(this) + " constructor failed, the internal Map not must be null.") ;
+            }
+            _map = map ;
             if ( init == null )
             {
-            	return ;
+                return ;
             }
             var it:Iterator = null ;
             if (init is Array) 
@@ -89,10 +89,10 @@ package system.data.sets
          */
         public override function add(o:*):Boolean 
         {
-        	if ( o === undefined )
-        	{
-        		return false ;
-        	}
+            if ( o === undefined )
+            {
+                return false ;
+            }
             return _map.put(o, PRESENT) == null ;
         }        
         

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -82,9 +82,9 @@ package system.data.iterators
          */
         public function ArrayIterator( a:Array )
         {
-        	if ( a == null )
-        	{
-        	   throw new ArgumentError( this + " constructor failed, the passed-in Array argument not must be 'null'.") ;  	
+            if ( a == null )
+            {
+               throw new ArgumentError( this + " constructor failed, the passed-in Array argument not must be 'null'.") ; 
             }
             _a = a  ;    
             _k = -1 ;

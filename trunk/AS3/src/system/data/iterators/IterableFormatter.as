@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -60,25 +60,25 @@ package system.data.iterators
          */
         public function format( value:* = null ):String
         {
-			if ( value != null && value is Iterable )
-			{
-				var r:String = "{";
-				var it:Iterator = (value as Iterable).iterator() ; 
-				while(it.hasNext())
-				{
-					r += it.next() ;
-					if ( it.hasNext() )
-					{
-						r += "," ;
-					}
-				}
-				r += "}";
-				return r ;
-			}
-			else 
-			{
-				return "" ;
-			}
+            if ( value != null && value is Iterable )
+            {
+                var r:String = "{";
+                var it:Iterator = (value as Iterable).iterator() ; 
+                while(it.hasNext())
+                {
+                    r += it.next() ;
+                    if ( it.hasNext() )
+                    {
+                        r += "," ;
+                    }
+                }
+                r += "}";
+                return r ;
+            }
+            else 
+            {
+                return "" ;
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ package system.data.iterators
             if ( m == null )
             {
                throw new ArgumentError( this + " constructor failed, the passed-in Map argument not must be 'null'.") ;   
-            }         	
+            }
             _m = m ;
             _i = new ArrayIterator(m.getKeys()) ;
             _k = null ;

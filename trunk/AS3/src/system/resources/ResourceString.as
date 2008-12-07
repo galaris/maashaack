@@ -42,9 +42,9 @@ package system.resources
     public class ResourceString implements Resource
     {
         
-    	/**
-    	 * Creates a new ResourceString instance.
-    	 */
+        /**
+         * Creates a new ResourceString instance.
+         */
         public function ResourceString()
         {
         }

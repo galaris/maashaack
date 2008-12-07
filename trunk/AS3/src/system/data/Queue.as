@@ -37,37 +37,37 @@ package system.data
 {
 
     /**
-	 * A collection designed for holding elements prior to processing. Besides basic Collection operations, queues provide additional insertion, extraction, and inspection operations.
-	 * <p>Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner.</p>
-	 * <p>Whatever the ordering used, the head of the queue is that element which would be removed by a call to remove() or poll().</p>
-	 */
+     * A collection designed for holding elements prior to processing. Besides basic Collection operations, queues provide additional insertion, extraction, and inspection operations.
+     * <p>Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner.</p>
+     * <p>Whatever the ordering used, the head of the queue is that element which would be removed by a call to remove() or poll().</p>
+     */
     public interface Queue extends Collection
     {
-    	
+        
         /**
          * Retrieves and removes the head of this queue.
          */
-    	function dequeue():Boolean ;
+        function dequeue():Boolean ;
 
-	    /**
-	     * Retrieves, but does not remove, the head of this queue.
-	     */
-    	function element():* ;
-    	
-	    /**
-	     * Inserts the specified element into this queue, if possible.
-	     */
-    	function enqueue(o:*):Boolean ;
+        /**
+         * Retrieves, but does not remove, the head of this queue.
+         */
+        function element():* ;
+        
+        /**
+         * Inserts the specified element into this queue, if possible.
+         */
+        function enqueue(o:*):Boolean ;
         
         /**
          * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
          */
-    	function peek():* ;
-	
-	    /**
-	     * Retrieves and removes the head of this queue.
-	     */
-    	function poll():* ;
+        function peek():* ;
+    
+        /**
+         * Retrieves and removes the head of this queue.
+         */
+        function poll():* ;
                 
     }
 

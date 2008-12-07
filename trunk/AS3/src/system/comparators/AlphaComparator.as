@@ -38,53 +38,53 @@ package system.comparators
     import system.Comparator;                            
 
     /**
-	 * This comparator compare String objects with an alphabetic order.
-	 * <p><b>Example :</b></p>
-	 * <pre class="prettyprint">
-	 * import system.comparators.AlphaComparator ;
-	 * 
-	 * var comp1:AlphaComparator = new AlphaComparator() ;
-	 * var comp2:AlphaComparator = new AlphaComparator( true ) ; // ignore case
-	 * 
-	 * var s0:String = "HELLO" ;
-	 * var s1:String = "hello" ;
-	 * var s2:String = "welcome" ;
-	 * var s3:String = "world" ;
-	 * 
-	 * trace( comp1.compare(s1, s2) ) ; // -1
-	 * trace( comp1.compare(s2, s1) ) ; //  1
-	 * trace( comp1.compare(s1, s3) ) ; // -1
-	 * trace( comp1.compare(s1, s1) ) ; //  0
-	 * 
-	 * trace( comp1.compare(s1, s0) ) ; // -1
-	 * trace( comp2.compare(s1, s0) ) ; //  0
-	 * </pre>
+     * This comparator compare String objects with an alphabetic order.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.comparators.AlphaComparator ;
+     * 
+     * var comp1:AlphaComparator = new AlphaComparator() ;
+     * var comp2:AlphaComparator = new AlphaComparator( true ) ; // ignore case
+     * 
+     * var s0:String = "HELLO" ;
+     * var s1:String = "hello" ;
+     * var s2:String = "welcome" ;
+     * var s3:String = "world" ;
+     * 
+     * trace( comp1.compare(s1, s2) ) ; // -1
+     * trace( comp1.compare(s2, s1) ) ; //  1
+     * trace( comp1.compare(s1, s3) ) ; // -1
+     * trace( comp1.compare(s1, s1) ) ; //  0
+     * 
+     * trace( comp1.compare(s1, s0) ) ; // -1
+     * trace( comp2.compare(s1, s0) ) ; //  0
+     * </pre>
      */
-	public class AlphaComparator implements Comparator
-	{
-		
-		/**
-		 * Creates a new AlphaComparator instance.
-		 * @param ignoreCase a boolean to define if the comparator ignore case or not.
-	     */
-		public function AlphaComparator( ignoreCase:Boolean=false )
-		{
-			this.ignoreCase = ignoreCase ;
-			_ccomp = new CharComparator() ;
-			_ncomp = new NullComparator() ;
-		}
+    public class AlphaComparator implements Comparator
+    {
+        
+        /**
+         * Creates a new AlphaComparator instance.
+         * @param ignoreCase a boolean to define if the comparator ignore case or not.
+         */
+        public function AlphaComparator( ignoreCase:Boolean=false )
+        {
+            this.ignoreCase = ignoreCase ;
+            _ccomp = new CharComparator() ;
+            _ncomp = new NullComparator() ;
+        }
 
-		/**
-		 * Allow to take into account the case for comparison.
-		 */
-		public var ignoreCase:Boolean ;
+        /**
+         * Allow to take into account the case for comparison.
+         */
+        public var ignoreCase:Boolean ;
         
         /**
          * Defines that null should be compared as higher than a non-null object (default false). 
          */
         public function get nullsAreHigh():Boolean
         {
-        	return _ncomp.nullsAreHigh ;
+            return _ncomp.nullsAreHigh ;
         }
         
         /**
@@ -95,25 +95,25 @@ package system.comparators
             _ncomp.nullsAreHigh = b ;
         }        
         
-		/**
-		 * Returns an integer value to compare two String objects with an alphabetic order.
-	     * @param o1 the first String object to compare.
-	     * @param o2 the second String object to compare.
-	     * @param options A boolean who indicates if the Comparator ignore the case or not. If this parameter is null the internal ignoreCase property is used.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-	     * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-		 * <li> 0 if o1 and o2 are equal.</li>
-		 * </p>
-		 * @throws ArgumentError If the two objects isn't Strings.
-	     */
-		public function compare(o1:*, o2:*, options:* = null ):int
-		{
-			//var b:Boolean = ignoreCase ;
-			//if ( options != null && options is Boolean )
-			//{
-			//	b = options as Boolean ;
-			//}
+        /**
+         * Returns an integer value to compare two String objects with an alphabetic order.
+         * @param o1 the first String object to compare.
+         * @param o2 the second String object to compare.
+         * @param options A boolean who indicates if the Comparator ignore the case or not. If this parameter is null the internal ignoreCase property is used.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         * @throws ArgumentError If the two objects isn't Strings.
+         */
+        public function compare(o1:*, o2:*, options:* = null ):int
+        {
+            //var b:Boolean = ignoreCase ;
+            //if ( options != null && options is Boolean )
+            //{
+            //    b = options as Boolean ;
+            //}
             if ( o1 == null || o2 == null) 
             {
                 return _ncomp.compare(o1, o2) ;
@@ -167,7 +167,7 @@ package system.comparators
                     return 0 ;
                 }
             }
-		}
+        }
         
         /**
          * @private
@@ -179,6 +179,6 @@ package system.comparators
          */
         private var _ncomp:NullComparator ;
         
-	}
+    }
 
 }

@@ -60,7 +60,7 @@ package system.data.iterators
      */
     public class LinkedListIterator implements ListIterator 
     {
-    	
+        
         /**
          * Creates a new LinkedListIterator instance.
          * @param index The position of the internal pointer of this Iterator
@@ -70,7 +70,7 @@ package system.data.iterators
         {
             this._list = list ;
             seek(index) ;
-        }    	
+        }        
 
         /**
          * Inserts the specified element into the list (optional operation).
@@ -98,7 +98,7 @@ package system.data.iterators
             _lastReturned = _list.getHeader() ;
             _list.addBefore(o, _next) ;
             _nextIndex ++ ;
-            _expectedModCount ++ ;        	
+            _expectedModCount ++ ;
         }
         
         /**

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -38,8 +38,8 @@ package system.data.queues
     import system.data.iterators.IterableFormatter;        
     
     /**
- 	 * Converts a Queue to a custom string representation.
-	 */
-	public const formatter:IterableFormatter = new IterableFormatter() ;
+     * Converts a Queue to a custom string representation.
+     */
+    public const formatter:IterableFormatter = new IterableFormatter() ;
 
 }

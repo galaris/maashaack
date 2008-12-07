@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -106,7 +106,7 @@ package system.data.lists
          */
         public override function add( o:* ):Boolean
         {
-        	_modCount ++ ;
+            _modCount ++ ;
             return super.add( o ) ;
         }
         
@@ -116,7 +116,7 @@ package system.data.lists
          */
         public override function addAll( c:Collection ):Boolean 
         {
-        	_modCount ++ ;
+            _modCount ++ ;
             return super.addAll( c ) ;
         }         
         
@@ -130,7 +130,7 @@ package system.data.lists
                 throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + index + "' is out of bounds.") ;
             }
             _modCount++ ;
-            _a.splice( index , 0 , o ) ;        	
+            _a.splice( index , 0 , o ) ;            
         }
         
         /**
@@ -138,7 +138,7 @@ package system.data.lists
          */        
         public override function clear():void
         {
-        	_modCount ++ ;
+            _modCount ++ ;
             super.clear() ;
         }        
         
@@ -156,7 +156,7 @@ package system.data.lists
          */
         public function ensureCapacity( capacity:uint ):void 
         {
-        	_modCount++ ;
+            _modCount++ ;
             _a.length = capacity ;
         }        
         
@@ -166,7 +166,7 @@ package system.data.lists
          */        
         public function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         {
-        	return _a.lastIndexOf( o , fromIndex ) ;
+            return _a.lastIndexOf( o , fromIndex ) ;
         }
         
         /**
@@ -212,7 +212,7 @@ package system.data.lists
          */     
         public override function remove( o:* ):*
         {
-        	_modCount++ ;
+            _modCount++ ;
             return super.remove( o ) ;
         }
 
@@ -224,8 +224,8 @@ package system.data.lists
          */        
         public function removeAt(id:uint, len:int = 1):*
         {
-        	_modCount ++ ;
-        	len = len > 1 ? len : 1 ;
+            _modCount ++ ;
+            len = len > 1 ? len : 1 ;
             var old:* = _a.splice(id, len);
             return old ; 
         }
@@ -241,7 +241,7 @@ package system.data.lists
         {
             if ( fromIndex == toIndex )
             {
-            	return null ;
+                return null ;
             }
             var len:int = toIndex - fromIndex ;
             return removeAt( fromIndex , len ) ;
@@ -273,23 +273,23 @@ package system.data.lists
          */        
         public function set( index:uint , o:*):*
         {
-        	if ( index > size() - 1 )
-        	{
-        		throw new RangeError( "The " + Reflection.getClassName(this) + ".set() method failed, the index '" + index + "' argument is out of the size limit." ) ;
-        	}
-        	var old:* = _a[index] ;
-        	if ( old === undefined )
-        	{
-        		return undefined ;
-        	}
+            if ( index > size() - 1 )
+            {
+                throw new RangeError( "The " + Reflection.getClassName(this) + ".set() method failed, the index '" + index + "' argument is out of the size limit." ) ;
+            }
+            var old:* = _a[index] ;
+            if ( old === undefined )
+            {
+                return undefined ;
+            }
             if ( o === undefined )
             {
-            	removeAt( index ) ;
+                removeAt( index ) ;
             }
             else
             {
-            	_modCount++ ;
-                _a[index] = o ;	
+                _modCount++ ;
+                _a[index] = o ;
             }
             return old ;
         }

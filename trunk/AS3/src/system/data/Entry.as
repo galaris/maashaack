@@ -37,29 +37,29 @@ package system.data
 {
 
     /**
-	 * A map entry (key-value pair).
-	 */
+     * A map entry (key-value pair).
+     */
     public interface Entry
     {
-    	
-	 	/**
-		 * Indicates the key corresponding to this entry.
-		 */
-	    function get key():* ;
+        
+        /**
+         * Indicates the key corresponding to this entry.
+         */
+        function get key():* ;
         
         /**
          * @private
          */
         function set key( key:* ):void ;
         
-		/**
-		 * Indicates the value corresponding to this entry.
-		 */
-    	function get value():* ; 
+        /**
+         * Indicates the value corresponding to this entry.
+         */
+        function get value():* ; 
         
-		/**
-		 * @private
-		 */
-    	function set value( value:* ):void ;
+        /**
+         * @private
+         */
+        function set value( value:* ):void ;
     }
 }

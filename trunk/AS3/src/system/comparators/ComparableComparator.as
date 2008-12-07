@@ -41,44 +41,44 @@ package system.comparators
     /**
      * A Comparator that compares object if one of them is a Comparable object.
      */
-	public class ComparableComparator implements Comparator
-	{
-		
-		/**
-		 * Creates a new ComparableComparator instance.
-	     * This constructor whose use should be avoided.
-		 */
-		public function ComparableComparator()
-		{
-			super();
-		}
+    public class ComparableComparator implements Comparator
+    {
         
-		/**
-		 * Returns an integer value to compare two objects in parameters.
-		 * @param o1 the first object to compare.
-	     * @param o2 the second object to compare.
-		 * @return <p>
-		 * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-		 * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-	     * <li> 0 if o1 and o2 are equal.</li>
-	     * </p>
-		 * @throws ArgumentError it the <code class="prettyprint">o1</code> object is not a <code class="prettyprint">IComparable</code> object.
-		 */
-		public function compare(o1:*, o2:*, options:* = null):int
-		{
-			if ( o1 is Comparable )
-			{
-				return (o1 as Comparable).compareTo(o2) ;	
-			}
-			else if ( o2 is Comparable )
-			{
-				return (o2 as Comparable).compareTo(o1) ;
-			}
-			else
-			{
-				throw new ArgumentError(this + " compare method failed, the o1 or the o2 arguments are not a Comparable objects : " + o1 + "," + o2 ) ;    
-			}
-		}
+        /**
+         * Creates a new ComparableComparator instance.
+         * This constructor whose use should be avoided.
+         */
+        public function ComparableComparator()
+        {
+            super();
+        }
         
-	}
+        /**
+         * Returns an integer value to compare two objects in parameters.
+         * @param o1 the first object to compare.
+         * @param o2 the second object to compare.
+         * @return <p>
+         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
+         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
+         * <li> 0 if o1 and o2 are equal.</li>
+         * </p>
+         * @throws ArgumentError it the <code class="prettyprint">o1</code> object is not a <code class="prettyprint">IComparable</code> object.
+         */
+        public function compare(o1:*, o2:*, options:* = null):int
+        {
+            if ( o1 is Comparable )
+            {
+                return (o1 as Comparable).compareTo(o2) ;    
+            }
+            else if ( o2 is Comparable )
+            {
+                return (o2 as Comparable).compareTo(o1) ;
+            }
+            else
+            {
+                throw new ArgumentError(this + " compare method failed, the o1 or the o2 arguments are not a Comparable objects : " + o1 + "," + o2 ) ;    
+            }
+        }
+        
+    }
 }

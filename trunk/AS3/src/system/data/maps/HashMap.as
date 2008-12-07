@@ -137,7 +137,7 @@ package system.data.maps
          */  
         public function clear():void
         {
-			_keys   = new Dictionary(true) ;
+            _keys   = new Dictionary(true) ;
             _values = new Dictionary(true) ;
             _size = 0 ;
         }

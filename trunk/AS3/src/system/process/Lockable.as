@@ -39,25 +39,25 @@ package system.process
     /**
      * This interface is implemented by all objects lockable.
      */
-	public interface Lockable
-	{
+    public interface Lockable
+    {
 
-    	/**
-    	 * Returns <code class="prettyprint">true</code> if the object is locked.
-    	 * @return <code class="prettyprint">true</code> if the object is locked.
-    	 */
-    	function isLocked():Boolean ;
-	
-    	/**
-	     * Locks the object.
-    	 */
-    	function lock():void ;
-	
-    	/**
-    	 * Unlocks the object.
-	     */
-	    function unlock():void ; 
-		
-	}
-	
+        /**
+         * Returns <code class="prettyprint">true</code> if the object is locked.
+         * @return <code class="prettyprint">true</code> if the object is locked.
+         */
+        function isLocked():Boolean ;
+    
+        /**
+         * Locks the object.
+         */
+        function lock():void ;
+    
+        /**
+         * Unlocks the object.
+         */
+        function unlock():void ; 
+        
+    }
+    
 }

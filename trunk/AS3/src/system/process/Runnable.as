@@ -37,16 +37,16 @@ package system.process
 {
 
     /**
-	 * This interface should be implemented by any class whose instances are intended to be executed.
-	 */	
-	public interface Runnable
-	{
-	
-		/**
-		 * Run the process.
-		 */
-		function run( ...arguments:Array ):void ;
-	
-	}
+     * This interface should be implemented by any class whose instances are intended to be executed.
+     */    
+    public interface Runnable
+    {
+    
+        /**
+         * Run the process.
+         */
+        function run( ...arguments:Array ):void ;
+    
+    }
 
 }

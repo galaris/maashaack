@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -95,7 +95,7 @@ package system.data.queues
          */        
         public function dequeue():Boolean
         {
-        	return poll() != null  ;
+            return poll() != null  ;
         }
         
         /**
@@ -123,7 +123,7 @@ package system.data.queues
         {
             if ( isEmpty() ) 
             {
-            	return null ;
+                return null ;
             }
             return _a[0] ;
         }
@@ -135,9 +135,9 @@ package system.data.queues
         {
             if ( isEmpty() ) 
             {
-            	return null ;
+                return null ;
             }
-            return _a.shift() ;            	
+            return _a.shift() ;
         }
     }
 }

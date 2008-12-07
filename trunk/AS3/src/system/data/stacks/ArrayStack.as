@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -79,7 +79,7 @@ package system.data.stacks
          */        
         public function peek():* 
         {
-        	return _a[_a.length - 1] ;
+            return _a[_a.length - 1] ;
         }
         
         /**
@@ -88,7 +88,7 @@ package system.data.stacks
          */        
         public function pop():*
         {
-        	return isEmpty() ? null : _a.pop() ;
+            return isEmpty() ? null : _a.pop() ;
         }
         
         /**
@@ -96,7 +96,7 @@ package system.data.stacks
          */        
         public function push( o:* ):void
         {
-        	_a.push( o ) ;
+            _a.push( o ) ;
         }
         
         /**
@@ -105,7 +105,7 @@ package system.data.stacks
          */        
         public function search(o:*):int
         {
-        	return indexOf(o) ;
+            return indexOf(o) ;
         }
           
     }

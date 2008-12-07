@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -148,8 +148,8 @@ package system.data.queues
          */
         public function add(o:*):Boolean
         {
-        	throw new IllegalOperationError("The CircularQueue class does support the add() method.") ;
-        	return false ;
+            throw new IllegalOperationError("The CircularQueue class does support the add() method.") ;
+            return false ;
         }
         
         /**
@@ -160,7 +160,7 @@ package system.data.queues
             _queue = new Array(_qSize) ;
             _count = 0 ;
             _rear  = 0 ;
-            _front = 0 ;        	
+            _front = 0 ;            
         }
         
         /**
@@ -371,7 +371,7 @@ package system.data.queues
             
             if ( ar.length > 0 )
             {
-            	source += "," ;
+                source += "," ;
                 source += BuiltinSerializer.emitArray( ar ) ;
             } 
             
