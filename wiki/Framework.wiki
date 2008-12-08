@@ -28,6 +28,8 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
 [Serialization]
 
+[errors Errors]
+
 [Evaluators]
 
 
