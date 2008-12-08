@@ -92,7 +92,7 @@ package system.comparators
         /**
          * Determinates the Comparator strategy used to sort the instance.
          * <p>The internal Comparator used by this Comparator to compare two objects with the specified field.</p>
-         * @throws ArgumentError If the 'comparator' property is 'null'.
+         * @throws ReferenceError If the 'comparator' property is 'null'.
          */
         public function get comparator():Comparator
         {
@@ -110,7 +110,7 @@ package system.comparators
             }
             else
             {
-                throw new Error( "The GenericComparator 'comparator' property not must be 'null'") ;  
+                throw new ReferenceError( "The GenericComparator 'comparator' property not must be 'null'") ;  
             }           
         }
         
