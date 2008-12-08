@@ -78,8 +78,8 @@ package system.comparators
          * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
          * <li> 0 if o1 and o2 are equal.</li>
          * </p>
-         * @throws NullPointerError if the first argument is null and not a Boolean object.
-         * @throws ClassCastError when either argument is not Boolean
+         * @throws ArgumentError if the first argument is null and not a Boolean object.
+         * @throws ArgumentError when either argument is not Boolean
          */
         public function compare(o1:*, o2:*, options:* = null ):int
         {

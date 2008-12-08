@@ -66,7 +66,7 @@ package system.comparators
 
         /**
          * Determinates the internal <code class="prettyprint">Comparator</code> instance to reverse.
-         * @throws ArgumentError If the 'comparator' property is 'null'.
+         * @throws ReferenceError If the 'comparator' property is 'null'.
          */
         public function get comparator():Comparator
         {
@@ -84,7 +84,7 @@ package system.comparators
             }
             else
             {
-                throw new Error( "The ReverseComparator 'comparator' property not must be 'null'") ;  
+                throw new ReferenceError( "The ReverseComparator 'comparator' property not must be 'null'") ;  
             }           
         }
                 
