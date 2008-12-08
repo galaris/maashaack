@@ -5,25 +5,27 @@
 
 ===top-level===
 
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/ArgumentError.html ArgumentError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/DefinitionError.html DefinitionError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/EvalError.html EvalError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/RangeError.html RangeError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/ReferenceError.html ReferenceError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/SecurityError.html SecurityError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/SyntaxError.html SyntaxError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/TypeError.html TypeError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/URIError.html URIError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/VerifyError.html VerifyError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/Error.html Error]
+
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/ArgumentError.html ArgumentError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/DefinitionError.html DefinitionError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/EvalError.html EvalError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/RangeError.html RangeError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/ReferenceError.html ReferenceError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/SecurityError.html SecurityError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/SyntaxError.html SyntaxError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/TypeError.html TypeError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/URIError.html URIError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/VerifyError.html VerifyError]
 
 ===flash.errors package===
 
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/IllegalOperationError.html flash.errors.IllegalOperationError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/InvalidSWFError.html flash.errors.InvalidSWFError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/IOError.html flash.errors.IOError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/MemoryError.html flash.errors.MemoryError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/ScriptTimeoutError.html flash.errors.ScriptTimeoutError]
- * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/StackOverflowError.html flash.errors.StackOverflowError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/IllegalOperationError.html flash.errors.IllegalOperationError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/InvalidSWFError.html flash.errors.InvalidSWFError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/IOError.html flash.errors.IOError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/MemoryError.html flash.errors.MemoryError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/ScriptTimeoutError.html flash.errors.ScriptTimeoutError]
+ * [http://livedocs.adobe.com/flash/9.0/ActionScriptLangRefV3/flash/errors/StackOverflowError.html flash.errors.StackOverflowError]
 
 ==The Error class in Maashaack==
 
