@@ -18,12 +18,12 @@
 
 ===flash.errors package===
 
- * flash.errors.IllegalOperationError
- * flash.errors.InvalidSWFError
- * flash.errors.IOError
- * flash.errors.MemoryError
- * flash.errors.ScriptTimeoutError
- * flash.errors.StackOverflowError
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/IllegalOperationError.html flash.errors.IllegalOperationError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/InvalidSWFError.html flash.errors.InvalidSWFError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/IOError.html flash.errors.IOError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/MemoryError.html flash.errors.MemoryError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/ScriptTimeoutError.html flash.errors.ScriptTimeoutError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/flash/errors/StackOverflowError.html flash.errors.StackOverflowError]
 
 ==The Error class in Maashaack==
 
