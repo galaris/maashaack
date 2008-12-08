@@ -1,0 +1,40 @@
+#labels Phase-Design,Framework,Projects-X
+#the errors in AS3 and in Maashaack
+
+==The Error class in AS3==
+
+===top-level===
+
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/ArgumentError.html ArgumentError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/DefinitionError.html DefinitionError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/EvalError.html EvalError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/RangeError.html RangeError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/ReferenceError.html ReferenceError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/SecurityError.html SecurityError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/SyntaxError.html SyntaxError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/TypeError.html TypeError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/URIError.html URIError]
+ * [http://livedocs.adobe.com/flash/9.0_fr/ActionScriptLangRefV3/VerifyError.html VerifyError]
+
+===flash.errors package===
+
+ * flash.errors.IllegalOperationError
+ * flash.errors.InvalidSWFError
+ * flash.errors.IOError
+ * flash.errors.MemoryError
+ * flash.errors.ScriptTimeoutError
+ * flash.errors.StackOverflowError
+
+==The Error class in Maashaack==
+
+===system.errors package===
+
+ * system.errors.ConcurrencyError : The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
+ * system.errors.NoSuchElementError : Thrown by an Iterator to indicate that there are no more elements in the iteration.
+
+===Proposals===
+
+ * system.errors.ClassCastError   : The value not must be null.
+ * system.errors.IllegalStateError : Signals that a method has been invoked at an illegal or inappropriate time.
+ * system.errors.NullPointerError : Thrown when an application attempts to use 'null' in a case where an object is required.
+ * system.errors.TypeMismatchError : Throwns on a type mismatch when trying to set a bean property.
