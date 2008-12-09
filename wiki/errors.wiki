@@ -33,10 +33,3 @@
 
  * system.errors.ConcurrencyError : The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
  * system.errors.NoSuchElementError : Thrown by an Iterator to indicate that there are no more elements in the iteration.
-
-===Proposals===
-
- * system.errors.ClassCastError   : The value not must be null.
- * system.errors.IllegalStateError : Signals that a method has been invoked at an illegal or inappropriate time.
- * system.errors.NullPointerError : Thrown when an application attempts to use 'null' in a case where an object is required.
- * system.errors.TypeMismatchError : Throwns on a type mismatch when trying to set a bean property.
