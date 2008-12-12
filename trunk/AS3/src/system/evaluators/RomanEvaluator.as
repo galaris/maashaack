@@ -36,7 +36,7 @@
 package system.evaluators 
 {
     import system.evaluators.Evaluable;
-    import system.numeric.Range;        
+    import system.numeric.RomanNumber;    
 
     /**
      * Evaluates an int value and transform it in roman numeral expression.
@@ -55,6 +55,20 @@ package system.evaluators
      * trace( evaluator.eval( 10 ) ) ; // X 
      * trace( evaluator.eval( 50 ) ) ; // L 
      * trace( evaluator.eval( 2459 ) ) ; // MMCDLIX
+     * trace( evaluator.eval( 3999 ) ) ;  // MMMCMXCIX
+     * 
+     * // roman string to number
+     * 
+     * trace( evaluator.eval( "I" ) ) ; // 1
+     * trace( evaluator.eval( "II" ) ) ; // 2
+     * trace( evaluator.eval( "III" ) ) ; // 3
+     * trace( evaluator.eval( "IV" ) ) ; // 4
+     * trace( evaluator.eval( "V" ) ) ; // 5
+     * trace( evaluator.eval( "IX" ) ) ; // 9
+     * trace( evaluator.eval( "X" ) ) ; // 10
+     * trace( evaluator.eval( "L" ) ) ; // 50
+     * trace( evaluator.eval( "MMCDLIX" ) ) ; // 2459
+     * trace( evaluator.eval( "MMMCMXCIX" ) ) ; // 3999
      * 
      * try
      * {
@@ -62,7 +76,16 @@ package system.evaluators
      * }
      * catch( e:Error )
      * {
-     *     trace( e.message ) ; // RomanEvaluator.eval(4000) failed, the value is out of the range [Range<1,3999>]
+     *     trace( e.message ) ;  // Max value for a RomanNumber is 3999
+     * }
+     * 
+     * try
+     * {
+     *     evaluator.eval( -1 ) ;
+     * }
+     * catch( e:Error )
+     * {
+     *     trace( e.message ) ; // Min value for a RomanNumber is 0
      * }
      * </pre>
      */
@@ -82,39 +105,15 @@ package system.evaluators
          */
         public function eval( o:* ):*
         {
-            var s:String = "" ;
-            var value:int = int(o) ;
-            if ( LIMIT.isOutOfRange(value) )
+            if( o is String )
             {
-                throw RangeError( "RomanEvaluator.eval(" + o + ") failed, the value is out of the range " + LIMIT ) ;
+               return RomanNumber.parseRomanString( o );
             }
-            var t:int = value ;
-            var l:int = VALUES.length ;
-            for ( var i:int ; i < l ; i++ ) 
+            else if ( o is Number )
             {
-                while ( t >= VALUES[i] ) 
-                {
-                    s += ROMANS[i] ;
-                    t -= VALUES[i] ;
-                }
+                return RomanNumber.parse( o ); 
             }
-            return s ;       
         }
-        
-        /**
-         * @private
-         */
-        private static var LIMIT:Range = new Range(1, 3999) ;
-        
-        /**
-         * @private
-         */
-        private static var ROMANS:Array = [ "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" ] ;
-        
-        /**
-         * @private
-         */
-        private static var VALUES:Array = [ 1000,  900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4,  1] ;        
         
     }
 

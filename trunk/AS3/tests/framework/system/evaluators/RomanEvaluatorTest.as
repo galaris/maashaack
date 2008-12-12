@@ -65,7 +65,7 @@ package system.evaluators
         	assertTrue(e is Evaluable, "The RomanEvaluator must implement the Evaluable interface.") ;
         }
 
-        public function testEval():void
+        public function testEvalRange():void
         {
 
             var e:RomanEvaluator = new RomanEvaluator() ;
@@ -74,13 +74,13 @@ package system.evaluators
               
             try
             {    
-                e.eval(0) ;
+                e.eval(-1) ;
                 fail( "01-01 - The eval method failed." ) ;
             }
             catch( er:Error )
             {
             	assertTrue( er is RangeError , "01-02 - The eval method failed." ) ;
-                assertEquals( er.message , "RomanEvaluator.eval(0) failed, the value is out of the range [Range<1,3999>]" , "01-03 - The eval method failed." ) ;
+                assertEquals( er.message , "Min value for a RomanNumber is 0" , "01-03 - The eval method failed." ) ;
             }
 
             try
@@ -91,25 +91,54 @@ package system.evaluators
             catch( er:Error )
             {
                 assertTrue( er is RangeError , "02-02 - The eval method failed." ) ;
-                assertEquals(er.message , "RomanEvaluator.eval(4000) failed, the value is out of the range [Range<1,3999>]" , "02-03 - The eval method failed." ) ;
+                assertEquals(er.message , "Max value for a RomanNumber is 3999" , "02-03 - The eval method failed." ) ;
             }
+        }
+           
+        public function testEvalNumberToString():void
+        {
+        	
+            var e:RomanEvaluator = new RomanEvaluator() ;        	
+        	
+            assertEquals( e.eval( 1 )    , "I"         , "01 - eval( 1 ) failed." ) ;
+            assertEquals( e.eval( 2 )    , "II"        , "02 - eval( 2 ) failed." ) ;
+            assertEquals( e.eval( 3 )    , "III"       , "03 - eval( 3 ) failed." ) ;
+            assertEquals( e.eval( 4 )    , "IV"        , "04 - eval( 4 ) failed." ) ;
+            assertEquals( e.eval( 5 )    , "V"         , "05 - eval( 5 ) failed." ) ;
+            assertEquals( e.eval( 6 )    , "VI"        , "06 - eval( 6 ) failed." ) ;
+            assertEquals( e.eval( 9 )    , "IX"        , "07 - eval( 9 ) failed." ) ;
+            assertEquals( e.eval( 10 )   , "X"         , "08 - eval( 10 ) failed." ) ;
+            assertEquals( e.eval( 11 )   , "XI"        , "09 - eval( 11 ) failed." ) ;
+            assertEquals( e.eval( 50 )   , "L"         , "10 - eval( 50 ) failed." ) ;
             
-            // evaluate 
-            
-            assertEquals( e.eval( 1 )    , "I"         , "03-01 - eval( 1 ) failed." ) ;
-            assertEquals( e.eval( 2 )    , "II"        , "03-02 - eval( 2 ) failed." ) ;
-            assertEquals( e.eval( 3 )    , "III"       , "03-03 - eval( 3 ) failed." ) ;
-            assertEquals( e.eval( 4 )    , "IV"        , "03-04 - eval( 4 ) failed." ) ;
-            assertEquals( e.eval( 5 )    , "V"         , "03-05 - eval( 5 ) failed." ) ;
-            assertEquals( e.eval( 6 )    , "VI"        , "03-06 - eval( 6 ) failed." ) ;
-            assertEquals( e.eval( 9 )    , "IX"        , "03-07 - eval( 9 ) failed." ) ;
-            assertEquals( e.eval( 10 )   , "X"         , "03-08 - eval( 10 ) failed." ) ;
-            assertEquals( e.eval( 11 )   , "XI"        , "03-09 - eval( 11 ) failed." ) ;
-            assertEquals( e.eval( 50 )   , "L"         , "03-10 - eval( 50 ) failed." ) ;
-            assertEquals( e.eval( 2459 ) , "MMCDLIX"   , "03-11 - eval( 2459 ) failed." ) ;
-            assertEquals( e.eval( 3999 ) , "MMMCMXCIX" , "03-12 - eval( 3999 ) failed." ) ;
+            assertEquals( e.eval( 2459 ) , "MMCDLIX"   , "11 - eval( 2459 ) failed." ) ;
+            assertEquals( e.eval( 3999 ) , "MMMCMXCIX" , "12 - eval( 3999 ) failed." ) ;
+            assertEquals( e.eval( 1997 ) , "MCMXCVII"  , "13 - eval( 1997 ) failed." ) ;
             
         }
+        
+        public function testEvalStringToNumber():void
+        {
+            
+            var e:RomanEvaluator = new RomanEvaluator() ;           
+            
+            assertEquals( e.eval(   "I" ) ,  1  , "01 - eval(  'I'  ) failed." ) ;
+            assertEquals( e.eval(  "II" ) ,  2  , "02 - eval(  'II' ) failed." ) ;
+            assertEquals( e.eval( "III" ) ,  3  , "03 - eval( 'III' ) failed." ) ;
+            assertEquals( e.eval(  "IV" ) ,  4  , "04 - eval(  'IV' ) failed." ) ;
+            assertEquals( e.eval(   "V" ) ,  5  , "05 - eval(   'V' ) failed." ) ;
+            assertEquals( e.eval(  "VI" ) ,  6  , "06 - eval(  'VI' ) failed." ) ;
+            assertEquals( e.eval(  "IX" ) ,  9  , "07 - eval(  'IX' ) failed." ) ;
+            assertEquals( e.eval(   "X" ) , 10  , "08 - eval(   'X' ) failed." ) ;
+            assertEquals( e.eval(  "XI" ) , 11  , "08 - eval(  'XI' ) failed." ) ;
+            assertEquals( e.eval(   "L" ) , 50  , "08 - eval(   'L' ) failed." ) ;
+            
+            assertEquals( e.eval(   "MMCDLIX" ) , 2459 , "11 - eval(   'MMCDLIX' ) failed." ) ;
+            assertEquals( e.eval( "MMMCMXCIX" ) , 3999 , "12 - eval( 'MMMCMXCIX' ) failed." ) ;
+            assertEquals( e.eval(  "MCMXCVII" ) , 1997 , "13 - eval(  'MCMXCVII' ) failed." ) ;
+            
+        }        
+        
     }
 }
 
