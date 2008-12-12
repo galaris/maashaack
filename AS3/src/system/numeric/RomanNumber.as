@@ -62,7 +62,7 @@ package system.numeric
         /**
          * @private
          */        
-        private static var NUMERIC:Array = [  1000, 500, 100,  50,  10,   5,   1 ];
+        private static var NUMERIC:Array = [ 1000, 500, 100,  50, 10, 5, 1 ];
         
         //range values
         
