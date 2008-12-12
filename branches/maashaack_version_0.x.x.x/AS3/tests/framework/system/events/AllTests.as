@@ -34,20 +34,21 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package system.data.arrays
+package system.events
 {
-    import buRRRn.ASTUce.framework.*;                                            
+    import buRRRn.ASTUce.framework.*;            
 
     public class AllTests
     {
 
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
             
-            suite.addTestSuite( ArrayFilterTest ) ;
-            suite.addTestSuite( ProxyArrayTest ) ;
-                        
+            var suite:TestSuite = new TestSuite("system events tests");
+            
+            suite.addTestSuite( DelegateTest ) ;
+            suite.addTestSuite( EventListenerTest ) ;
+
             return suite;
         }
     }

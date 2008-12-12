@@ -37,8 +37,8 @@ package
 {
     import buRRRn.ASTUce.*;
     
-    import system.*;
-    import system.data.*;
+    import system.console;
+    import system.events.*;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -50,10 +50,10 @@ package
 
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
 
-    public class Framework_data_TestRunner extends Sprite
+    public class Framework_X_TestRunner extends Sprite
     {
         
-        public function Framework_data_TestRunner()
+        public function Framework_X_TestRunner()
         {
             
             // init
@@ -83,7 +83,7 @@ package
             
             Runner.main
             ( 
-                system.data.AllTests.suite() , system.AllTests.suite() 
+                system.events.AllTests.suite()  
             );
             
         }

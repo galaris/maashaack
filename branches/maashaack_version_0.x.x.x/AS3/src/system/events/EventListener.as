@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -32,23 +31,29 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
- */
 
-package system.data.arrays
+*/
+
+package system.events
 {
-    import buRRRn.ASTUce.framework.*;                                            
-
-    public class AllTests
+    import flash.events.Event;
+    
+    /**
+     * The <code class="prettyprint">EventListener</code> interface is the primary method for handling events. 
+     * Users implement the <code class="prettyprint">EventListener</code> interface and register their listener on an 
+     * <code class="prettyprint">EventTarget</code> using the <code class="prettyprint">addEventListener method</code>. 
+     * The users should also remove their<code class="prettyprint">EventTarget</code> from its <code class="prettyprint">EventTarget</code> 
+     * after they have completed using the listener.
+     */
+    public interface EventListener
     {
-
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
-            
-            suite.addTestSuite( ArrayFilterTest ) ;
-            suite.addTestSuite( ProxyArrayTest ) ;
-                        
-            return suite;
-        }
+        
+        /**
+         * This method is called whenever an event occurs of the type for which the <code class="prettyprint">EventListener</code> interface was registered.
+         * @param e The Event contains contextual information about the event.
+         */
+        function handleEvent( e:Event ):void ;
+        
     }
+    
 }
