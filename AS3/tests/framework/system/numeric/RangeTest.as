@@ -39,10 +39,7 @@ package system.numeric
     
     import system.Equatable;
     import system.Serializable;    
-
-    /**
-     * @author eKameleon
-     */
+    
     public class RangeTest extends TestCase 
     {
 

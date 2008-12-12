@@ -40,7 +40,6 @@ package system.numeric
 
     /**
 	 * This class launch all tests.
-	 * @author eKameleon
 	 */
 	public class AllTests
 	{
@@ -54,6 +53,7 @@ package system.numeric
 
             suite.addTestSuite( MathematicsTest ) ;
             suite.addTestSuite( RangeTest ) ;
+            suite.addTestSuite( RomanNumberTest ) ;
 
             return suite;
         }

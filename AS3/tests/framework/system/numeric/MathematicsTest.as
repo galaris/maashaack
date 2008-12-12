@@ -45,15 +45,12 @@ package system.numeric
     public class MathematicsTest extends TestCase 
     {
 
-       /**
-        * Creates a new MathematicsTest instance.
-        */ 
         public function MathematicsTest(name:String = "")
         {
             super( name );
         }
         
-       public function testCeil():void
+        public function testCeil():void
         {
             var result:* ;
             
