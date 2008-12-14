@@ -39,7 +39,7 @@ package system.data
     import buRRRn.ASTUce.framework.*;
     
     import system.data.arrays.*;
-    import system.data.bags.*;    
+    import system.data.bags.*;
     import system.data.collections.*;
     import system.data.iterators.*;
     import system.data.lists.*;
@@ -74,6 +74,8 @@ package system.data
             suite.addTestSuite(QueueTest) ;
             suite.addTestSuite(SetTest) ;
             suite.addTestSuite(StackTest) ;
+            suite.addTestSuite(TypeableTest) ;
+            suite.addTestSuite(ValidatorTest) ;
                                     
             // arrays
             suite.addTest(system.data.arrays.AllTests.suite());
