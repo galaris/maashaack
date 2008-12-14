@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.collections
 {
-    import buRRRn.ASTUce.framework.*;                                                        
+    import buRRRn.ASTUce.framework.*;                                                            
 
     public class AllTests
     {
@@ -46,6 +46,7 @@ package system.data.collections
 
             suite.addTestSuite( CollectionFormatterTest ) ;
             suite.addTestSuite( ArrayCollectionTest ) ;
+            suite.addTestSuite( TypedCollectionTest ) ;
 
             return suite;
         }
