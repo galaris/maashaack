@@ -45,6 +45,26 @@ package system.data.collections
 
     /**
      * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.data.collections.ArrayCollection ;
+     * import system.data.collections.TypedCollection ;
+     * 
+     * var co:ArrayCollection = new ArrayCollection(["item1", "item2"]) ;
+     * var tc:TypedCollection = new TypedCollection( String , co ) ;
+     * 
+     * tc.add( "item3" ) ;
+     * trace( tc ) ; // {item1,item2,item3}
+     * 
+     * try
+     * {
+     *     tc.add( 10 ) ;
+     * }
+     * catch( e:Error )
+     * {
+     *     trace( e.message ) ; // system.data.collections.TypedCollection.validate(10) is mismatch.
+     * }
+     * </pre>
      */
     public class TypedCollection implements Collection, Typeable, Validator
     {
