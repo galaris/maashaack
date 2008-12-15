@@ -60,15 +60,14 @@ package system.data.arrays
         public function TypedArray( type:* , ...args:Array )
         {
             this.type = type ;
-            var ar:Array = args[1] as Array ;
-            if (ar != null)
+            if (args != null && args.length > 0 )
             {
-                var l:int = ar.length ;
+                var l:int = args.length ;
                 if (l > 0) 
                 {
                     for (var i:int = 0 ; i<l ; i++) 
                     {
-                        var value:* = ar[i] ;
+                        var value:* = args[i] ;
                         if ( supports(value) ) 
                         {
                         	_ar[i] = value ;
