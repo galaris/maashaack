@@ -32,23 +32,23 @@ and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.data.arrays
+ 
+package system.data.arrays 
 {
-    import buRRRn.ASTUce.framework.*;                                                
+    import buRRRn.ASTUce.framework.TestCase;    
 
-    public class AllTests
+    public class TypedArrayTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function TypedArrayTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
-            
-            suite.addTestSuite( ArrayFilterTest ) ;
-            suite.addTestSuite( ProxyArrayTest ) ;
-            suite.addTestSuite( TypedArrayTest ) ;
-                        
-            return suite;
+            super(name);
+        }
+        
+        public function testConstructor():void
+        {
+            var ta:TypedArray = new TypedArray(String) ;
+            assertNotNull( ta , "TypedArray constructor failed." ) ;	
         }
     }
 }

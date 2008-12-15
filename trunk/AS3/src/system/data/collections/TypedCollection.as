@@ -71,7 +71,7 @@ package system.data.collections
     
         /**
          * Creates a new TypedCollection instance.
-         * @param type the Type of this Typeable object.
+         * @param type the type of this Typeable object (a Class or a Function).
          * @param collection The Collection reference of this wrapper.
          * @throws ArgumentError if the type is null or undefined.
          * @throws TypeError if a value in the init object isn't valid.
