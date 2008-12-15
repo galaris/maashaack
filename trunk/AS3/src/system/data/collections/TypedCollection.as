@@ -203,7 +203,7 @@ package system.data.collections
          */        
         public function toSource(indent:int = 0):String
         {
-        	var s:String = "new " + Reflection.getClassName(this) + "(" ;
+        	var s:String = "new " + Reflection.getClassPath(this) + "(" ;
         	s += Reflection.getClassPath( type ) ;
         	if ( size() >  0 )
         	{
@@ -213,6 +213,19 @@ package system.data.collections
         	return s ;
         }        
         
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */        
+        public function toString(indent:int = 0):String
+        {
+            return (_co as Object).toString() ;
+            
+        }
         /**
          * Evaluates the condition it checks and updates the IsValid property.
          */
