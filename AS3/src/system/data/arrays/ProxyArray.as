@@ -115,6 +115,14 @@ package system.data.arrays
             }
             return res ;
         }        
+
+        /**
+         * Removes all elements in the array.
+         */ 
+        public function clear():void
+        {
+            _ar = [] ;
+        }
            
         /**
          * Creates and returns a shallow copy of the object.
@@ -134,6 +142,15 @@ package system.data.arrays
         {
             return _ar[name];
         }
+        
+        /**
+         * Indicates if the array is empty or not.
+         * @return <code class="prettyprint">true</code> if the array is empty.
+         */
+        public function isEmpty():Boolean 
+        {
+            return _ar.length == 0 ;
+        }        
         
         /**
          * Returns the iterator of the object.
@@ -187,8 +204,17 @@ package system.data.arrays
         }
         
         /**
-         * Returns a eden String representation of the object.
-         * @return a string representation the source code of the object.
+         * Returns the Array representation of the object.
+         * @return the Array representation of the object.
+         */
+        public function toArray():Array 
+        {
+            return [].concat(_ar) ;
+        }        
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
          */
         public function toSource( indent:int = 0 ):String 
         {
@@ -196,8 +222,8 @@ package system.data.arrays
         }
 
         /**
-         * Returns the string representation of this instance.
-         * @return the string representation of this instance
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
          */
         public function toString():String
         {

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,6 +35,7 @@
 
 package system.data.arrays 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Reflection;
@@ -66,6 +67,23 @@ package system.data.arrays
             assertNotNull(ar, "02-01 - The ProxyArray constructor failed.") ;
             assertEquals(ar.length , 3 , "02-02 - The ProxyArray constructor failed.") ;
         } 
+        
+        public function testClear():void
+        {
+            var ar:ProxyArray = new ProxyArray() ;
+            ar.push( "item2" ) ;
+            ar.push( "item3" ) ;
+            ar.clear() ;
+            assertEquals( ar.length , 0 , "The ProxyArray clear method failed." ) ;
+        }          
+        
+        public function testIsEmpty():void
+        {
+            var ar:ProxyArray = new ProxyArray() ;
+            assertTrue( ar.isEmpty() , "01 - The ProxyArray isEmpty method failed." ) ;
+            ar.push( "item2" ) ;
+            assertFalse( ar.isEmpty() , "02 - The ProxyArray isEmpty method failed." ) ;
+        }         
         
         public function testIterator():void
         {
@@ -112,6 +130,20 @@ package system.data.arrays
             assertEquals( count , 3 , "05 - The ProxyArray proxy failed." ) ;
             
         }
+        
+        public function testToArray():void
+        {
+            var ar:ProxyArray = new ProxyArray() ;
+            
+            ArrayAssert.assertEquals( ar.toArray() , [] , "01 - The ProxyArray toArray failed." ) ;
+            
+            ar.push( "item1" ) ;
+            ar.push( "item2" ) ;
+            ar.push( "item3" ) ;            
+            
+            ArrayAssert.assertEquals( ar.toArray() , ["item1", "item2", "item3"] , "02 - The ProxyArray toArray failed." ) ;            
+        }          
+                
         
         public function testToSource():void
         {

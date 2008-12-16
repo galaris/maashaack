@@ -27,7 +27,7 @@ package system.data.arrays
     import system.data.Typeable;
     import system.data.Validator;
     import system.data.arrays.ProxyArray;
-    import system.serializers.eden.BuiltinSerializer;    
+    import system.eden;    
 
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
@@ -48,29 +48,29 @@ package system.data.arrays
      * }
      * </pre>
      */
-    public class TypedArray extends ProxyArray implements Typeable, Validator
+    public dynamic class TypedArray extends ProxyArray implements Typeable, Validator
     {
         
         /**
          * Creates a new TypedArray instance.
          * @param type the type of this Typeable object (a Class or a Function).
-         * @param ...args All values to insert in the Array if the value is valid.
-         * @throw TypeError if the 'type' argument is not a valid Class object (not must be 'null' or 'undefined').
+         * @param ...values All values to insert in the Array, all invalid values are ignored.
          */
-        public function TypedArray( type:* , ...args:Array )
+        public function TypedArray( type:* = null , ...values:Array )
         {
             this.type = type ;
-            if (args != null && args.length > 0 )
+            if (values != null && values.length > 0 )
             {
-                var l:int = args.length ;
+                var l:int = values.length ;
                 if (l > 0) 
                 {
+                	var cpt:int ;
                     for (var i:int = 0 ; i<l ; i++) 
                     {
-                        var value:* = args[i] ;
+                        var value:* = values[i] ;
                         if ( supports(value) ) 
                         {
-                        	_ar[i] = value ;
+                        	_ar[cpt++] = value ;
                         }
                     }
                 }
@@ -98,7 +98,16 @@ package system.data.arrays
          */    
         public override function clone():*
         {
-            return new TypedArray(_type, _ar.slice()) ;
+            var c:TypedArray = new TypedArray(_type) ;
+            if ( _ar.length > 0 )
+            {
+            	var l:int = _ar.length ;
+                for (var i:int ; i<l ; i++) 
+                {
+                   c[i] = _ar[i] ;
+                }
+            }
+            return c ;
         }
         
         /**
@@ -107,7 +116,7 @@ package system.data.arrays
          */
         public function concat( ...arguments:Array ):TypedArray 
         {
-            var r:TypedArray = new TypedArray(_type) ;
+            var r:TypedArray = new TypedArray( _type ) ;
             var i:int = _ar.length ;
             while(--i>-1) 
             {
@@ -126,12 +135,12 @@ package system.data.arrays
                     k = -1 ;
                     while (++k < l2) 
                     {
-                        _ar.push( cur[k] );
+                        r.push( cur[k] );
                     }
                 } 
                 else 
                 {
-                    _ar.push(cur);
+                    r.push(cur);
                 }
             }
             return r ;
@@ -140,24 +149,20 @@ package system.data.arrays
         /**
          * Adds one or more elements to the end of this array and returns the new length of this array.
          * @return the new length of this array
-         * @throws TypeError 
+         * @throws TypeError If a value is invalid.
          */
-        public function push( ...arguments:Array ):uint 
+        public function push( ...args:Array ):uint 
         {
-            if (arguments.length > 1) 
-            {
-                var l:uint = arguments.length;
-                var i:uint = 0 ;
-                while (++i < l)
+            if (args.length > 0) {
+                
+                var l:uint = args.length ;
+                var i:int = -1 ;
+                while (++i < l ) 
                 {
-                    validate( arguments[i] ) ;
+                    validate(args[i]);
                 }
             }
-            else
-            {
-                validate(arguments[0]) ;
-            }
-            return Number( _ar.push.apply(_ar, arguments) ) ;
+            return _ar.push.apply( _ar, args ) ;
         }
             
         /**
@@ -166,7 +171,7 @@ package system.data.arrays
          */
         public function supports( value:* ):Boolean
         {
-            return type == null || value is _type ;
+            return _type == null || value is _type ;
         }
         
         /**
@@ -175,29 +180,55 @@ package system.data.arrays
          */
         public override function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + Reflection.getClassPath(_type) + "," + BuiltinSerializer.emitArray( _ar ) + ")" ;
+            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
+            s +=  _type != null ? Reflection.getClassPath(_type) : "null" ;
+            if ( _ar.length > 0 )
+            {
+            	var l:int = _ar.length ;
+            	for (var i:int ; i<l ; i++ )
+            	{
+            	   s += "," + eden.serialize( _ar[i] )  ;
+            	}
+            }
+            s += ")" ;
+            return s ;
         }        
         
         /**
          * Adds one or more elements to the beginning of an array and returns the new length of the array. 
-         * The other elements in the array are moved from their original position, i, to i+1. 
+         * The other elements in the array are moved from their original position, i, to i+1.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.data.arrays.TypedArray ;
+         * 
+         * var ta:TypedArray = new TypedArray( String ) ;
+         * 
+         * trace( ta.unshift( "value1", "value2" ) ) ; // 2
+         * trace( ta ) ; // [value1,value2]
+         * 
+         * try
+         * {
+         *     ta.unshift(1) ;
+         * }
+         * catch( e:Error )
+         * {
+         *     trace( e.message ) ; // system.data.arrays.TypedArray.validate(1) is mismatch.
+         * }    
+         * </pre> 
+         * @throws TypeError If a value is invalid.
          */
-        public function unshift( ...arguments:Array ):uint
+        public function unshift( ...args:Array ):uint
         {
-            if (arguments.length > 1) {
+            if (args.length > 0) {
                 
-                var l:uint = arguments.length ;
+                var l:uint = args.length ;
                 var i:int = -1 ;
                 while (++i < l ) 
                 {
-                    validate(arguments[i]);
+                    validate(args[i]);
                 }
             }
-            else 
-            {
-                validate(arguments[0]) ;
-            }
-            return _ar.unshift.apply(_ar, arguments) as uint ;
+            return _ar.unshift.apply(_ar, args) as uint ;
         }
   
         /**
@@ -208,7 +239,7 @@ package system.data.arrays
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassPath(this) + ".validate("+ value + ") is mismatch") ;
+                throw new TypeError( Reflection.getClassPath(this) + ".validate("+ value + ") is mismatch.") ;
             }
         }
                 
