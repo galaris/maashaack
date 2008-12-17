@@ -36,32 +36,19 @@
 package system.comparators
 {
     import system.Comparator;
-    import system.Reflection;                        
+    import system.Reflection;
+    import system.process.Priority;    
 
     /**
-     * This comparator compare two Number objects.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import system.comparators.NumberComparator ;
-     * 
-     * var c:NumberComparator = new NumberComparator() ;
-     * 
-     * trace( c.compare(0,0) ) ; // 0
-     * trace( c.compare(1,1) ) ; // 0
-     * trace( c.compare(-1,-1) ) ; // 0
-     * trace( c.compare(0.1,0.1) ) ; // 0
-     * trace( c.compare( Number(Math.cos(25)) , 0.9912028118634736 ) ) ; // 0
-     * trace( c.compare(1, 0) ) ; // 1
-     * trace( c.compare(0, 1) ) ; // -1
-     * </pre>
+     * This comparator compare two Priority objects and use the priority property of this Priority objects.
      */
-    public class NumberComparator implements Comparator
+    public class PriorityComparator implements Comparator
     {
         
         /**
-         * Creates a new NumberComparator instance.
+         * Creates a new PriorityComparator instance.
          */
-        public function NumberComparator() 
+        public function PriorityComparator() 
         {
             //
         }
@@ -71,26 +58,25 @@ package system.comparators
          * @param o1 the first Number object to compare.
          * @param o2 the second Number object to compare.
          * @return <p>
-         * <li>-1 if o1 is "lower" than (less than, before, etc.) o2 ;</li>
-         * <li> 1 if o1 is "higher" than (greater than, after, etc.) o2 ;</li>
-         * <li> 0 if o1 and o2 are equal.</li>
+         * <li>  1 if the priority property of o1 is "lower" than (less than, before, etc.) the priority property of o2 ;</li>
+         * <li> -1 if the priority property of o1 is "higher" than (greater than, after, etc.) the priority property of o2 ;</li>
+         * <li>  0 if the priority property of o1 and the priority property of o2 are equal.</li>
          * </p>
-         * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Number objects.
+         * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Priority objects.
          */
         public function compare(o1:*, o2:*, options:* = null):int
         {
-            if ( (o1 is Number) && (o2 is Number ) ) 
+            if ( (o1 is Priority) && (o2 is Priority ) ) 
             {
-                // TODO fix float bug with Math methods and float number operations.
-                //o1 = (o1 as Number).toString() ; 
-                //o2 = (o2 as Number).toString() ;
-                if( o1 < o2 )
-                {
-                    return -1 ;
-                }
-                else if( o1 > o2 )
+            	var p1:int = (o1 as Priority).priority ;
+            	var p2:int = (o2 as Priority).priority ;
+                if( p1 < p2 )
                 {
                     return 1 ;
+                }
+                else if( p1 > p2 )
+                {
+                    return -1 ;
                 }
                 else 
                 {
@@ -99,7 +85,7 @@ package system.comparators
             }
             else 
             {
-                throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Number objects." ) ;
+                throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Priority objects.") ;
             }    
         }
         
