@@ -68,5 +68,46 @@ package system.comparators
 
         }
         
+        public function testCompareErrors():void
+        {
+            
+            var c:NumberComparator = new NumberComparator() ;
+            
+            try
+            {
+                 c.compare( "hello" , 2 ) ;
+                 fail( "01-01 - The NumberComparator compare method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError , "01-02 - The NumberComparator compare method failed." ) ;
+                assertEquals( e.message,  "NumberComparator compare(hello,2) failed, the two arguments must be Number objects."  , "01-03 - The NumberComparator compare method failed." ) ;
+            }
+            
+            try
+            {
+                 c.compare( 1 , "world" ) ;
+                 fail( "02-01 - The NumberComparator compare method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError , "02-02 - The NumberComparator compare method failed." ) ;
+                assertEquals( e.message,  "NumberComparator compare(1,world) failed, the two arguments must be Number objects."  , "02-03 - The NumberComparator compare method failed." ) ;
+            }
+            
+            try
+            {
+                 c.compare( "hello" , "world" ) ;
+                 fail( "03-01 - The NumberComparator compare method failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError , "03-02 - The NumberComparator compare method failed." ) ;
+                assertEquals( e.message,  "NumberComparator compare(hello,world) failed, the two arguments must be Number objects."  , "03-03 - The NumberComparator compare method failed." ) ;
+            } 
+            
+        }        
+        
+        
     }
 }

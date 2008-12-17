@@ -53,6 +53,7 @@ package system.comparators
             suite.addTestSuite(GenericComparatorTest) ;
             suite.addTestSuite(NullComparatorTest) ;
             suite.addTestSuite(NumberComparatorTest) ;
+            suite.addTestSuite(PriorityComparatorTest) ;
             suite.addTestSuite(ReverseComparatorTest) ;
             suite.addTestSuite(StringComparatorTest) ;
             
