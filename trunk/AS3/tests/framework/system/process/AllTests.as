@@ -46,6 +46,7 @@ package system.process
             var suite:TestSuite = new TestSuite("system process tests");
             
             suite.addTestSuite( LockableTest  );
+            suite.addTestSuite( PriorityTest  );
             suite.addTestSuite( ResetableTest );
             suite.addTestSuite( RunnableTest  );
             suite.addTestSuite( StoppableTest );
