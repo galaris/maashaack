@@ -33,46 +33,46 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.maps 
+package system.data.queues 
 {
     import system.Reflection;
     import system.data.Iterator;
-    import system.data.Map;
+    import system.data.Queue;
     import system.data.Typeable;
     import system.data.Validator;
     import system.eden;    
 
     /**
-     * TypedMap is a wrapper for Map instances that ensures that only values of a specific type can be added to the wrapped Map.
+     * TypedQueue is a wrapper for Queue instances that ensures that only values of a specific type can be added to the wrapped queue.
      */
-    public class TypedMap implements Map, Typeable, Validator 
+    public class TypedQueue implements Queue, Typeable, Validator
     {
 
         /**
-         * Creates a new TypedMap instance.
+         * Creates a new TypedQueue instance.
          * @param type the type of this Typeable object (a Class or a Function).
-         * @param map The Map reference of this wrapper.
+         * @param queue The Queue reference of this wrapper.
          * @throws ArgumentError if the type is null or undefined.
-         * @throws TypeError if a value in the init object isn't valid.
+         * @throws TypeError if a value in the passed-in Queue object isn't valid.
          */ 
-        public function TypedMap( type:* , map:Map )
+        public function TypedQueue( type:* , queue:Queue )
         {
-            if ( map == null ) 
+            if (queue == null) 
             {
-                throw new ArgumentError("The passed-in Map argument not must be 'null' or 'undefined'.") ;
+                throw new ArgumentError("The passed-in Queue argument not must be 'null' or 'undefined'.") ;
             }
             this.type = type ;
-            if ( map.size() > 0 ) 
+            if ( queue.size() > 0 ) 
             {
-                var it:Iterator = map.iterator() ;
+                var it:Iterator = queue.iterator() ;
                 while ( it.hasNext() ) 
                 {
-                    validate( it.next() ) ;
+                    validate(it.next()) ;
                 }
             }
-            _map = map ;
-        }        
-        
+            _queue = queue ;
+        }
+
         /**
          * Indicates the type of the Typeable object.
          */
@@ -87,134 +87,135 @@ package system.data.maps
         public function set type( type:* ):void
         {
             _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
-        }       
+        }
+
+        /**
+         * Inserts an element in the collection.
+         */ 
+        public function add(o:*):Boolean
+        {
+            validate(o) ;
+            return _queue.add( o ) ;   
+        }
         
         /**
-         * Removes all mappings from this map (optional operation).
-         */        
+         * Removes all elements in the collection.
+         */
         public function clear():void
         {
-        	_map.clear() ;
+        	_queue.clear() ;
         }
         
         /**
-         * Returns a shallow copy of the map.
-         * @return a shallow copy of the map.
-         */
+         * Returns a shallow copy of this collection.
+         * @return a shallow copy of this collection.
+         */        
         public function clone():*
         {
-            return new TypedMap( type , _map ) ;
+            return new TypedQueue( type , _queue ) ;
         }        
         
         /**
-         * Returns <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
-         * @return <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
-         */        
-        public function containsKey(key:*):Boolean
+         * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
+         * @return <code class="prettyprint">true</code> if this collection contains the specified element.
+         */         
+        public function contains(o:*):Boolean
         {
-            return _map.containsKey(key) ;
+            return _queue.contains(o) ;
+        }        
+
+        /**
+         * Retrieves and removes the head of this queue.
+         */
+        public function dequeue():Boolean
+        {
+            return _queue.dequeue() ;
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
-         * @return <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
-         */        
-        public function containsValue(value:*):Boolean
+         * Retrieves, but does not remove, the head of this queue.
+         */
+        public function element():*
         {
-            return _map.containsValue(value) ;
+            return _queue.element() ;
         }
         
         /**
-         * Returns the value to which this map maps the specified key.
-         * @return the value to which this map maps the specified key.
-         */        
-        public function get( key:* ):*
+         * Inserts the specified element into this queue, if possible.
+         */
+        public function enqueue(o:*):Boolean
         {
-            return _map.get(key) ;
+        	validate( o ) ;
+            return _queue.enqueue(o) ;
+        }
+        
+         /**
+         * Returns the element from this collection at the passed key index.
+         * @return the element from this collection at the passed key index.
+         */
+        public function get(key:*):*
+        {
+            return _queue.get(key) ;
+        }        
+        
+        /**
+         * Returns the index of an element in the collection.
+         * @return the index of an element in the collection.
+         */ 
+        public function indexOf(o:*, fromIndex:uint = 0):int
+        {
+            return _queue.indexOf( o , fromIndex ) ;
         }
         
         /**
-         * Returns an Array of all the keys in the map.
-         * @return an Array of all the keys in the map.
-         */        
-        public function getKeys():Array
-        {
-            return _map.getKeys() ;
-        }
-        
-        /**
-         * Returns an Array of all the values in the map.
-         * @return an Array of all the values in the map.
-         */        
-        public function getValues():Array
-        {
-            return _map.getValues() ;
-        }
-        
-        /**
-         * Returns <code class="prettyprint">true</code> if this map contains no key-value mappings.
-         * @return <code class="prettyprint">true</code> if this map contains no key-value mappings.
-         */        
+         * Returns <code class="prettyprint">true</code> if this collection contains no elements.
+         * @return <code class="prettyprint">true</code> if this collection contains no elements.
+         */           
         public function isEmpty():Boolean
         {
-            return _map.isEmpty() ;
-        }
-        
+            return _queue.isEmpty() ;
+        }        
+
         /**
-         * Returns the iterator reference of the object.
-         * @return the iterator reference of the object.
-         */        
+         * Returns an iterator over the elements in this collection.
+         * @return an iterator over the elements in this collection.
+         */ 
         public function iterator():Iterator
         {
-            return _map.iterator() ;
+            return _queue.iterator();
         }        
         
         /**
-         * Returns the keys iterator of this map.
-         * @return the keys iterator of this map.
+         * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
          */        
-        public function keyIterator():Iterator
+        public function peek():*
         {
-            return _map.keyIterator() ;
+            return _queue.peek() ;
         }
-        
+
         /**
-         * Associates the specified value with the specified key in this map (optional operation).
-         */        
-        public function put(key:*, value:*):*
+         * Retrieves and removes the head of this queue.
+         */
+        public function poll():*
         {
-            validate(value) ;
-            return _map.put(key, value) ;
+            return _queue.poll() ;
         }
-        
+
         /**
-         * Copies all of the mappings from the specified map to this one.
-         */        
-        public function putAll(m:Map):void
-        {
-            var it:Iterator = m.iterator() ;
-            while(it.hasNext()) 
-            {
-                validate( it.next() ) ;
-            }
-            _map.putAll( m ) ;        	
-        }
-        
-        /**
-         * Removes the mapping for this key from this map if it is present (optional operation).
-         */        
+         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         */  
         public function remove(o:*):*
         {
-            return _map.remove(o) ;
+            return _queue.remove(o);
         }
         
         /**
-         * Returns the number of key-value mappings in this map.
-         * @return the number of key-value mappings in this map.
-         */        
+         * Returns the number of elements in this collection.
+         * @return the number of elements in this collection.
+         */    
         public function size():uint
         {
-            return _map.size() ;
+            return _queue.size() ;
         }
         
         /**
@@ -227,16 +228,26 @@ package system.data.maps
         }
         
         /**
+         * Returns an array containing all of the elements in this collection.
+         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
+         * @return an array containing all of the elements in this collection.
+         */  
+        public function toArray():Array
+        {
+            return _queue.toArray() ;
+        }
+        
+        /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
-         */        
+         */
         public function toSource(indent:int = 0):String
         {
             var s:String = "new " + Reflection.getClassPath(this) + "(" ;
             s += Reflection.getClassPath( type ) ;
             if ( size() >  0 )
             {
-                s += "," + eden.serialize(_map) ;
+                s += "," + eden.serialize(_queue) ;
             }
             s += ")" ;
             return s ;
@@ -245,12 +256,12 @@ package system.data.maps
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
-         */        
-        public function toString():String
+         */
+        public function toString(indent:int = 0):String
         {
-            return (_map as Object).toString() ;
-        }
-                
+            return (_queue as Object).toString() ;
+        }        
+        
         /**
          * Evaluates the condition it checks and updates the IsValid property.
          */
@@ -260,12 +271,12 @@ package system.data.maps
             {
                 throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
-        }
+        }        
         
         /**
          * @private
          */
-        private var _map:Map ;
+        private var _queue:Queue ;        
         
         /**
          * The internal type function.

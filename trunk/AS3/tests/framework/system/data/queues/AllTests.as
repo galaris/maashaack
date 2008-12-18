@@ -1,4 +1,4 @@
-
+﻿
 /*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.queues
 {
-    import buRRRn.ASTUce.framework.*;                                                
+    import buRRRn.ASTUce.framework.*;                                                    
 
     public class AllTests
     {
@@ -48,6 +48,7 @@ package system.data.queues
             suite.addTestSuite( CircularQueueTest ) ;
             suite.addTestSuite( LinearQueueTest   ) ;
             suite.addTestSuite( PriorityQueueTest ) ;
+            suite.addTestSuite( TypedQueueTest    ) ;
             
             return suite;
         }

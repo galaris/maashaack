@@ -74,7 +74,7 @@ package system.data.collections
          * @param type the type of this Typeable object (a Class or a Function).
          * @param collection The Collection reference of this wrapper.
          * @throws ArgumentError if the type is null or undefined.
-         * @throws TypeError if a value in the init object isn't valid.
+         * @throws TypeError if a value in the passed-in Collection object isn't valid.
          */ 
         public function TypedCollection( type:* , collection:Collection )
         {
@@ -240,7 +240,6 @@ package system.data.collections
         public function toString(indent:int = 0):String
         {
             return (_co as Object).toString() ;
-            
         }
         
         /**
