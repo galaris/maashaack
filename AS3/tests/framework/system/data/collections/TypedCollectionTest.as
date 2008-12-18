@@ -56,11 +56,8 @@ package system.data.collections
         public function testConstructorBasic():void
         {
         	var co:Collection = new ArrayCollection() ;
-        	var tc:TypedCollection ;
-        	
-        	// 01 - basic test
-            tc = new TypedCollection( String , co ) ;
-            assertNotNull(tc, "01 - TypedCollection constructor failed.") ;
+        	var tc:TypedCollection = new TypedCollection( String , co ) ;
+            assertNotNull(tc, "TypedCollection constructor failed.") ;
         }
         
         public function testConstructorTypeArgument():void
