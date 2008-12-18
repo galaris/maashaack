@@ -62,7 +62,7 @@ package system.data.collections
      * }
      * catch( e:Error )
      * {
-     *     trace( e.message ) ; // system.data.collections.TypedCollection.validate(10) is mismatch.
+     *     trace( e.message ) ; // TypedCollection.validate(10) is mismatch.
      * }
      * </pre>
      */
@@ -250,7 +250,7 @@ package system.data.collections
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassPath(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         

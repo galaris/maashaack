@@ -114,7 +114,7 @@ package system.data.collections
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "03-02 - TypedCollection constructor failed." ) ;
-                assertEquals( e.message , "system.data.collections.TypedCollection.validate(1) is mismatch.", "03-03 - TypedCollection constructor failed." ) ;
+                assertEquals( e.message , "TypedCollection.validate(1) is mismatch.", "03-03 - TypedCollection constructor failed." ) ;
             }
         }
         
@@ -172,7 +172,7 @@ package system.data.collections
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - The TypedCollection add method failed.") ;
-                assertEquals( e.message, "system.data.collections.TypedCollection.validate(3) is mismatch." , "02-03 - The TypedCollection add method failed." ) ;
+                assertEquals( e.message, "TypedCollection.validate(3) is mismatch." , "02-03 - The TypedCollection add method failed." ) ;
             }
         }
         
@@ -292,7 +292,7 @@ package system.data.collections
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
-                assertEquals( e.message , "system.data.collections.TypedCollection.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
+                assertEquals( e.message , "TypedCollection.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
             
         }        
