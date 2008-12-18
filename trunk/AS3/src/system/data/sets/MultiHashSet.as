@@ -43,7 +43,9 @@ package system.data.sets
     import system.data.sets.HashSet;
     
     import flash.errors.IllegalOperationError;    
-
+    
+    // TODO finalize this class or refactoring !!
+    
     /**
 	 * The MultiHashSet is a MutliHashMap that contains no duplicate elements in a specified key.
 	 * <p><b>Example :</b></p>
@@ -99,7 +101,7 @@ package system.data.sets
 	 * trace("s.toString : " + s) ;
 	 * </pre>
 	 * @author eKameleon
-	 * @see MultiMap
+	 * @see system.data.MultiMap
 	 */
 	public class MultiHashSet extends MultiValueMap implements Set
 	{
