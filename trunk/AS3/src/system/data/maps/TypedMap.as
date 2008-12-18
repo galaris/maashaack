@@ -33,66 +33,45 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.collections 
+package system.data.maps 
 {
     import system.Reflection;
-    import system.data.Collection;
-    import system.data.Iterable;
     import system.data.Iterator;
+    import system.data.Map;
     import system.data.Typeable;
     import system.data.Validator;
     import system.eden;    
 
     /**
-     * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import system.data.collections.ArrayCollection ;
-     * import system.data.collections.TypedCollection ;
-     * 
-     * var co:ArrayCollection = new ArrayCollection(["item1", "item2"]) ;
-     * var tc:TypedCollection = new TypedCollection( String , co ) ;
-     * 
-     * tc.add( "item3" ) ;
-     * trace( tc ) ; // {item1,item2,item3}
-     * 
-     * try
-     * {
-     *     tc.add( 10 ) ;
-     * }
-     * catch( e:Error )
-     * {
-     *     trace( e.message ) ; // system.data.collections.TypedCollection.validate(10) is mismatch.
-     * }
-     * </pre>
+     * TypedMap is a wrapper for Map instances that ensures that only values of a specific type can be added to the wrapped Map.
      */
-    public class TypedCollection implements Collection, Typeable, Validator
+    public class TypedMap implements Map, Typeable, Validator 
     {
-    
+
         /**
          * Creates a new TypedCollection instance.
          * @param type the type of this Typeable object (a Class or a Function).
-         * @param collection The Collection reference of this wrapper.
+         * @param map The Map reference of this wrapper.
          * @throws ArgumentError if the type is null or undefined.
          * @throws TypeError if a value in the init object isn't valid.
          */ 
-        public function TypedCollection( type:* , collection:Collection )
+        public function TypedMap( type:* , map:Map )
         {
-            if (collection == null) 
+            if ( map == null ) 
             {
-                throw new ArgumentError("The passed-in 'collection' argument not must be 'null' or 'undefined'.") ;
+                throw new ArgumentError("The passed-in Map argument not must be 'null' or 'undefined'.") ;
             }
             this.type = type ;
-            if ( collection.size() > 0 ) 
+            if ( map.size() > 0 ) 
             {
-                var it:Iterator = collection.iterator() ;
+                var it:Iterator = map.iterator() ;
                 while ( it.hasNext() ) 
                 {
-                    validate(it.next()) ;
+                    validate( it.next() ) ;
                 }
             }
-            _co = collection ;
-        }
+            _map = map ;
+        }        
         
         /**
          * Indicates the type of the Typeable object.
@@ -108,95 +87,135 @@ package system.data.collections
         public function set type( type:* ):void
         {
             _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
-        }
+        }       
         
         /**
-         * Inserts an element in the collection.
-         */        
-        public function add( o:* ):Boolean
-        {
-            validate(o) ;
-            return _co.add( o ) ;        	
-        }
-        
-        /**
-         * Removes all elements in the collection.
+         * Removes all mappings from this map (optional operation).
          */        
         public function clear():void
         {
-        	_co.clear() ;
+        	_map.clear() ;
         }
         
         /**
-         * Returns a shallow copy of this collection.
-         * @return a shallow copy of this collection.
-         */        
+         * Returns a shallow copy of the map.
+         * @return a shallow copy of the map.
+         */
         public function clone():*
         {
-        	return new TypedCollection( type , _co ) ;
+            return new TypedMap( type , _map ) ;
         }        
         
         /**
-         * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
-         * @return <code class="prettyprint">true</code> if this collection contains the specified element.
+         * Returns <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
+         * @return <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
          */        
-        public function contains(o:*):Boolean
+        public function containsKey(key:*):Boolean
         {
-        	return _co.contains(o) ;
+            return _map.containsKey(key) ;
         }
         
         /**
-         * Returns the element from this collection at the passed key index.
-         * @return the element from this collection at the passed key index.
-         */
+         * Returns <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
+         * @return <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
+         */        
+        public function containsValue(value:*):Boolean
+        {
+            return _map.containsValue(value) ;
+        }
+        
+        /**
+         * Returns the value to which this map maps the specified key.
+         * @return the value to which this map maps the specified key.
+         */        
         public function get( key:* ):*
         {
-            return _co.get(key) ;
+            return _map.get(key) ;
         }
         
         /**
-         * Returns the index of an element in the collection.
-         * @return the index of an element in the collection.
+         * Returns an Array of all the keys in the map.
+         * @return an Array of all the keys in the map.
          */        
-        public function indexOf(o:*, fromIndex:uint = 0):int
+        public function getKeys():Array
         {
-        	return _co.indexOf( o , fromIndex ) ;
+            return _map.getKeys() ;
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if this collection contains no elements.
-         * @return <code class="prettyprint">true</code> if this collection contains no elements.
+         * Returns an Array of all the values in the map.
+         * @return an Array of all the values in the map.
+         */        
+        public function getValues():Array
+        {
+            return _map.getValues() ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this map contains no key-value mappings.
+         * @return <code class="prettyprint">true</code> if this map contains no key-value mappings.
          */        
         public function isEmpty():Boolean
         {
-        	return _co.isEmpty() ;
+            return _map.isEmpty() ;
         }
         
         /**
-         * Returns an iterator over the elements in this collection.
-         * @return an iterator over the elements in this collection.
+         * Returns the iterator reference of the object.
+         * @return the iterator reference of the object.
          */        
         public function iterator():Iterator
         {
-        	return _co.iterator();
+            return _map.iterator() ;
         }        
-
+        
         /**
-         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         * Returns the keys iterator of this map.
+         * @return the keys iterator of this map.
+         */        
+        public function keyIterator():Iterator
+        {
+            return _map.keyIterator() ;
+        }
+        
+        /**
+         * Associates the specified value with the specified key in this map (optional operation).
+         */        
+        public function put(key:*, value:*):*
+        {
+            validate(value) ;
+            return _map.put(key, value) ;
+        }
+        
+        /**
+         * Copies all of the mappings from the specified map to this one.
+         */        
+        public function putAll(m:Map):void
+        {
+            var it:Iterator = m.iterator() ;
+            while(it.hasNext()) 
+            {
+                validate( it.next() ) ;
+            }
+            _map.putAll( m ) ;        	
+        }
+        
+        /**
+         * Removes the mapping for this key from this map if it is present (optional operation).
          */        
         public function remove(o:*):*
         {
-        	return _co.remove(o);
-        }        
-                
+            return _map.remove(o) ;
+        }
+        
         /**
-         * Returns the number of elements in this collection.
-         * @return the number of elements in this collection.
+         * Returns the number of key-value mappings in this map.
+         * @return the number of key-value mappings in this map.
          */        
         public function size():uint
         {
-        	return _co.size() ;
-        }        
+            return _map.size() ;
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if the specific value is valid.
@@ -208,41 +227,30 @@ package system.data.collections
         }
         
         /**
-         * Returns an array containing all of the elements in this collection.
-         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
-         * @return an array containing all of the elements in this collection.
-         */        
-        public function toArray():Array
-        {
-        	return _co.toArray() ;
-        }
-        
-        /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */        
         public function toSource(indent:int = 0):String
         {
-        	var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-        	s += Reflection.getClassPath( type ) ;
-        	if ( size() >  0 )
-        	{
-        		s += "," + eden.serialize(_co) ;
+            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
+            s += Reflection.getClassPath( type ) ;
+            if ( size() >  0 )
+            {
+                s += "," + eden.serialize(_map) ;
             }
-        	s += ")" ;
-        	return s ;
-        }        
+            s += ")" ;
+            return s ;
+        }
         
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
-         */
-        public function toString(indent:int = 0):String
+         */        
+        public function toString():String
         {
-            return (_co as Object).toString() ;
-            
+            return (_map as Object).toString() ;
         }
-        
+                
         /**
          * Evaluates the condition it checks and updates the IsValid property.
          */
@@ -255,15 +263,14 @@ package system.data.collections
         }
         
         /**
-         * The internal collection of this wrapped Collection.
+         * @private
          */
-        private var _co:Collection ;
+        private var _map:Map ;
         
         /**
          * The internal type function.
          */
-        private var _type:* ;
+        private var _type:* ;        
         
-
     }
 }
