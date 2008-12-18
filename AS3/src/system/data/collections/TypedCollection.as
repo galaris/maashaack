@@ -237,15 +237,16 @@ package system.data.collections
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
-        public function toString(indent:int = 0):String
+        public function toString():String
         {
             return (_co as Object).toString() ;
         }
         
         /**
-         * Evaluates the condition it checks and updates the IsValid property.
+         * Evaluates the specified value and throw a <code class="prettyprint">TypeError</code> object if the value is not valid.
+         * @throws TypeError if the value is not valid.
          */
-        public function validate(value:*):void
+        public function validate( value:* ):void
         {
             if (!supports(value)) 
             {
@@ -254,15 +255,14 @@ package system.data.collections
         }
         
         /**
-         * The internal collection of this wrapped Collection.
+         * @private
          */
-        private var _co:Collection ;
+        protected var _co:Collection ;
         
         /**
-         * The internal type function.
+         * @private
          */
         private var _type:* ;
-        
-
+       
     }
 }

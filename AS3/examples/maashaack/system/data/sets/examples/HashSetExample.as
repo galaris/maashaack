@@ -34,23 +34,79 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package system.data.sets
+package examples 
 {
-    import buRRRn.ASTUce.framework.*;                                                    
+    import system.data.Iterator;
+    import system.data.Set;
+    import system.data.sets.HashSet;
 
-    public class AllTests
+    import flash.display.Sprite;    
+
+    /**
+     * Test the HashSet class.
+     */
+    public class HashSetExample extends Sprite 
     {
 
-        public static function suite():ITest
+        /**
+         * Creates a new HashSetExample.
+         */
+        public function HashSetExample()
         {
-            var suite:TestSuite = new TestSuite("Maashaack data sets tests");
 
-            suite.addTestSuite( CoreSetTest ) ;
-            suite.addTestSuite( ArraySetTest ) ;
-            suite.addTestSuite( HashSetTest ) ;
-            suite.addTestSuite( TypedSetTest ) ;
+            var s:HashSet = new HashSet([17, 68]) ;
 
-            return suite;
+            trace("set add 12 : " + s.add(12)) ;
+            trace("set add 24 : " + s.add(24)) ;
+            trace("set add 48 : " + s.add(48)) ;
+
+            trace("set : " + s) ;
+
+            trace("set.toSource : " + s.toSource()) ;
+
+            trace("---- iterator()") ;
+
+            var it:Iterator = s.iterator() ;
+            while( it.hasNext() ) 
+            {
+                trace(it.next()) ;
+            }
+
+            trace("---- clone()") ;
+
+            var s2:Set = s.clone() ;
+
+            trace("clone : " + s2) ;
+
+            trace("---- equals()") ;
+
+            trace("equals : " + s.equals(s2)) ;
+
+            trace("---- add()") ;
+
+            s.add("test") ;
+            s.add("coucou") ;
+
+            s2.add(150) ;
+            s2.add("hello") ;
+            s2.add(true) ;
+            s2.add("world") ;
+
+            // remove
+            
+            s2.remove(17) ;
+
+            trace("s : " + s) ;
+            trace("s2 : " + s2) ;
+
+            // --- removeAll
+            
+            trace("removeAll : " + s.removeAll(s2)) ;
+
+            trace("s : " + s) ;
+
+            trace("---- set.toArray : " + s.toArray()) ;
+               	
         }
     }
 }
