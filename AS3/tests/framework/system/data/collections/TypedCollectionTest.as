@@ -117,11 +117,8 @@ package system.data.collections
         
         public function testInterface():void
         {
-            var co:Collection = new ArrayCollection() ;
-            var tc:TypedCollection ;
-            
-            // 01 - basic test
-            tc = new TypedCollection( String , co ) ;
+            var co:Collection      = new ArrayCollection() ;
+            var tc:TypedCollection = new TypedCollection( String , co ) ;
             
             assertTrue( tc is Collection , "01 - The TypedCollection class must implement the Collection interface." ) ;
             assertTrue( tc is Typeable   , "02 - The TypedCollection class must implement the Typeable interface." ) ;
