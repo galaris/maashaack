@@ -258,7 +258,7 @@ package system.data.maps
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassPath(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         

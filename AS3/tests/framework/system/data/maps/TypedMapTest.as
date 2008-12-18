@@ -35,6 +35,7 @@
 
 package system.data.maps 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.data.Iterator;
@@ -93,8 +94,8 @@ package system.data.maps
                         
             // 02 - basic test with a no empty Collection
             
-            ma.put("key1", "item1") ;
-            ma.put("key2", "item2") ;
+            ma.put("key1", "value1") ;
+            ma.put("key2", "value2") ;
             
             tm = new TypedMap( String , ma ) ;
             assertNotNull(tm, "02-01 - TypedMap constructor failed with a no empty collection of String values.") ;          
@@ -110,7 +111,7 @@ package system.data.maps
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "03-02 - TypedMap constructor failed." ) ;
-                assertEquals( e.message , "system.data.maps.TypedMap.validate(1) is mismatch.", "03-03 - TypedMap constructor failed." ) ;
+                assertEquals( e.message , "TypedMap.validate(1) is mismatch.", "03-03 - TypedMap constructor failed." ) ;
             }
         }
         
@@ -128,7 +129,7 @@ package system.data.maps
         
         public function testType():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             
             assertEquals( tm.type , String , "01 - The TypedMap type property failed." ) ;
@@ -149,7 +150,7 @@ package system.data.maps
         
         public function testClear():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             tm.clear() ;
             assertEquals( tm.size() , 0 , "The TypedMap clear method failed." ) ;
@@ -157,41 +158,54 @@ package system.data.maps
         
         public function testClone():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             var clone:TypedMap = tm.clone() as TypedMap ;
             assertNotNull( clone , "01 - The TypedMap clone method failed." ) ;
             assertEquals( tm.size() , clone.size() , "02 - The TypedMap clone method failed." ) ;
         }         
 
-//        public function testContainsKey():void
-//        {
-//                      
-//        }  
+        public function testContainsKey():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            assertTrue( tm.containsKey("key1") , "01 - The TypedMap containsKey method failed." ) ;      
+            assertFalse( tm.containsKey("key3") , "02 - The TypedMap containsKey method failed." ) ;
+        }  
 
-//        public function testContainsValue():void
-//        {
-//                      
-//        }  
+        public function testContainsValue():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            assertTrue( tm.containsValue("value1") , "01 - The TypedMap containsValue method failed." ) ;      
+            assertFalse( tm.containsValue("value3") , "02 - The TypedMap containsValue method failed." ) ;
+        }  
 
-//        public function testGet():void
-//        {
-//                      
-//        }   
+        public function testGet():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            assertEquals( tm.get("key1") , "value1",  "01 - The TypedMap get method failed." ) ;      
+            assertNull( tm.get("key3") , "02 - The TypedMap get method failed." ) ;
+        }   
 
-//        public function testGetKeys():void
-//        {
-//                      
-//        }     
+        public function testGetKeys():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            ArrayAssert.assertEquals( tm.getKeys() , ["key1","key2"] , "The TypedMap getKeys method failed." ) ;
+        }     
 
-//        public function testGetValues():void
-//        {
-//                      
-//        }     
+        public function testGetValues():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            ArrayAssert.assertEquals( tm.getValues() , ["value1","value2"] , "The TypedMap getValues method failed." ) ;      
+        }     
 
         public function testIsEmpty():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             assertFalse(tm.isEmpty() , "01 - The TypedMap isEmpty method failed." ) ;     
             tm.clear() ;
@@ -200,46 +214,97 @@ package system.data.maps
         
         public function testIterator():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             var it:Iterator = tm.iterator() ;
             assertNotNull( it, "The TypedMap iterator method failed." ) ;     
         }
      
-//        public function testKeyIterator():void
-//        {
-//                      
-//        }     
+        public function testKeyIterator():void
+        {
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            var it:Iterator = tm.keyIterator() ;
+            assertNotNull( it, "The TypedMap keyIterator method failed." ) ;       
+        }     
         
-//        public function testPut():void
-//        {
-//                      
-//        }
+        public function testPut():void
+        {
+            var ma:Map      = new ArrayMap() ;
+            var tm:TypedMap = new TypedMap( String , ma ) ;
+            
+            assertNull( tm.put("key1", "value1") , "01-01 - The TypedMap put method failed." ) ;       
+            assertEquals( tm.put("key1", "value2") , "value1", "01-02 - The TypedMap put method failed." ) ;
+            
+            try
+            {
+                tm.put( "key3", 1 ) ;
+                fail("02-01 - the put method must throw a TypeError.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is TypeError , "02-02 - the put method must throw a TypeError.") ;   
+                assertEquals( e.message , "TypedMap.validate(1) is mismatch." , "03-02 - the put method must throw a TypeError.") ;
+            }
+            
+        }
         
-//        public function testPutAll():void
-//        {
-//        	        	
-//        }
+        public function testPutAll():void
+        {
+            var ma1:Map      = new ArrayMap() ;
+            var ma2:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
+            var ma3:Map      = new ArrayMap(["key1","key2"],[1,2]) ;
+            var tm:TypedMap = new TypedMap( String , ma1 ) ;
+            
+            try
+            {
+                tm.putAll(ma1) ;
+            }
+            catch( e:Error )
+            {
+                fail( "00 - The TypedMap putAll method failed." ) ;
+            }            
+            
+            try
+            {
+            	tm.putAll(ma2) ;
+            }
+            catch( e:Error )
+            {
+            	fail( "01 - The TypedMap putAll method failed." ) ;
+            }
+            
+            try
+            {
+                tm.putAll(ma3) ;
+                fail("02-01 - the putAll method must throw a TypeError.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is TypeError , "02-02 - the putAll method must throw a TypeError.") ;   
+                assertEquals( e.message , "TypedMap.validate(1) is mismatch." , "03-02 - the putAll method must throw a TypeError.") ;
+            }  	
+        }
         
         public function testRemove():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             
-            assertEquals( tm.remove("key1"), "item1", "01 - The TypedMap remove method failed." ) ;     
+            assertEquals( tm.remove("key1"), "value1", "01 - The TypedMap remove method failed." ) ;     
             assertNull( tm.remove("key5"), "02 - The TypedMap remove method failed." ) ;
         }         
         
         public function testSize():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             assertEquals( tm.size() , ma.size() , "The TypedMap size method failed." ) ;     
         }         
         
         public function testSupports():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             assertTrue( tm.supports("hello") , "01 - Must support a String value in argument.") ;
             assertFalse( tm.supports(1) , "02 - Must support a String value in argument and not a number.") ;
@@ -247,14 +312,14 @@ package system.data.maps
         
         public function testToSource():void
         {
-            var ma:Map      = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
-            assertEquals( tm.toSource() , 'new system.data.maps.TypedMap(String,new system.data.maps.ArrayMap(["key1","key2"],["item1","item2"]))' , "The TypedMap toSource method failed." ) ;     
+            assertEquals( tm.toSource() , 'new system.data.maps.TypedMap(String,new system.data.maps.ArrayMap(["key1","key2"],["value1","value2"]))' , "The TypedMap toSource method failed." ) ;     
         }
 
         public function testToString():void
         {
-            var ma:ArrayMap = new ArrayMap(["key1","key2"],["item1","item2"]) ;
+            var ma:ArrayMap = new ArrayMap(["key1","key2"],["value1","value2"]) ;
             var tm:TypedMap = new TypedMap( String , ma ) ;
             assertEquals( tm.toString() , ma.toString() , "The TypedMap toString method failed." ) ;     
         }        
@@ -281,7 +346,7 @@ package system.data.maps
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
-                assertEquals( e.message , "system.data.maps.TypedMap.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
+                assertEquals( e.message , "TypedMap.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
             
         }         

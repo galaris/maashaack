@@ -165,7 +165,7 @@ package system.data.arrays
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - TypedArray concat failed." ) ;
-                assertEquals( e.message , "system.data.arrays.TypedArray.validate(1) is mismatch." , "02-03 - TypedArray concat failed." ) ;
+                assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - TypedArray concat failed." ) ;
             } 
             
             try
@@ -176,7 +176,7 @@ package system.data.arrays
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "03-02 - TypedArray concat failed." ) ;
-                assertEquals( e.message , "system.data.arrays.TypedArray.validate(2) is mismatch." , "03-03 - TypedArray concat failed." ) ;
+                assertEquals( e.message , "TypedArray.validate(2) is mismatch." , "03-03 - TypedArray concat failed." ) ;
             }              
              
         }        
@@ -202,7 +202,7 @@ package system.data.arrays
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - TypedArray push failed." ) ;
-                assertEquals( e.message , "system.data.arrays.TypedArray.validate(1) is mismatch." , "02-03 - TypedArray push failed." ) ;
+                assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - TypedArray push failed." ) ;
             }        	
         }
         
@@ -252,7 +252,7 @@ package system.data.arrays
             catch( e:Error )
             {
             	assertTrue( e is TypeError , "02-02 - TypedArray unshift failed." ) ;
-                assertEquals( e.message , "system.data.arrays.TypedArray.validate(1) is mismatch." , "02-03 - TypedArray unshift failed." ) ;
+                assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - TypedArray unshift failed." ) ;
             }        	 
         }
         
@@ -276,7 +276,7 @@ package system.data.arrays
             catch( e:Error )
             {
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
-                assertEquals( e.message , "system.data.arrays.TypedArray.validate(1) is mismatch." , "02-03 - the validate method must throw a TypeError.") ;
+                assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - the validate method must throw a TypeError.") ;
             }
         }            
                 
