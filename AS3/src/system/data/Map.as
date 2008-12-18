@@ -68,14 +68,14 @@ package system.data
         function get( key:* ):* ;
     
         /**
-         * Returns an array of all the keys in the map.
-         * @return an array of all the keys in the map.
+         * Returns an Array of all the keys in the map.
+         * @return an Array of all the keys in the map.
          */
         function getKeys():Array ;
 
         /**
-         * Returns an array of all the values in the map.
-         * @return an array of all the values in the map.
+         * Returns an Array of all the values in the map.
+         * @return an Array of all the values in the map.
          */
         function getValues():Array ;
 

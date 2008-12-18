@@ -260,7 +260,7 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.toSource() , 'new system.data.collections.TypedCollection(String,["item1","item2"])' , "The TypedCollection toSource method failed." ) ;     
+            assertEquals( tc.toSource() , 'new system.data.collections.TypedCollection(String,new system.data.collections.ArrayCollection(["item1","item2"]))' , "The TypedCollection toSource method failed." ) ;     
         }
 
         public function testToString():void
