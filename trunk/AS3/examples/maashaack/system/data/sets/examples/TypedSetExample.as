@@ -34,23 +34,41 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package system.data.sets
+package examples 
 {
-    import buRRRn.ASTUce.framework.*;                                                    
+    import system.data.sets.ArraySet;
+    import system.data.sets.TypedSet;
+    
+    import flash.display.Sprite;    
 
-    public class AllTests
+    /**
+     * Test the TypedSet class.
+     */
+    public class TypedSetExample extends Sprite 
     {
 
-        public static function suite():ITest
+        /**
+         * Creates a new TypedSetExample.
+         */
+        public function TypedSetExample()
         {
-            var suite:TestSuite = new TestSuite("Maashaack data sets tests");
 
-            suite.addTestSuite( CoreSetTest ) ;
-            suite.addTestSuite( ArraySetTest ) ;
-            suite.addTestSuite( HashSetTest ) ;
-            suite.addTestSuite( TypedSetTest ) ;
 
-            return suite;
+            var co:ArraySet = new ArraySet(["item1", "item2"]) ;
+            var ts:TypedSet = new TypedSet(String, co) ;
+
+            ts.add("item3") ;
+            
+            trace(ts) ; // {item1,item2,item3}
+            
+            try
+            {
+                ts.add(10) ;
+            }
+            catch( e:Error )
+            {
+                trace(e.message) ; // TypedSet.validate(10) is mismatch.
+            }        	
         }
     }
 }
