@@ -280,9 +280,7 @@ package system.serializers.eden
             var paths:* ;
             var i:int ;
             var found:* ;
-    	    
             paths = [].concat( arguments ) ;
-			
             var l:int = paths.length ;
             for( i = 0; i < l ; i++ )
             {
