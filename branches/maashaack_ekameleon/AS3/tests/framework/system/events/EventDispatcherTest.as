@@ -31,29 +31,39 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
+
 */
 
-package system.events
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                                
+    import buRRRn.ASTUce.framework.TestCase;                
 
-    public class AllTests
+    public class EventDispatcherTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function EventDispatcherTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("system events tests");
-            
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-
-            return suite;
+            super( name );
         }
+        
+        public function testConstructor():void
+        {
+        	var dispatcher:EventDispatcher = new EventDispatcher() ;
+        	assertNotNull( dispatcher , "EventDispatcher constructor failed") ;
+        }
+        
+        public function testInherit():void
+        {
+            var dispatcher:EventDispatcher = new EventDispatcher() ;
+            assertTrue( dispatcher is InternalDispatcher , "EventDispatcher must inherit the InternalDispatcher class.") ;
+        }    
+        
+        public function testInterface():void
+        {
+            var dispatcher:EventDispatcher = new EventDispatcher() ;
+            assertTrue( dispatcher is IEventDispatcher , "EventDispatcher must implements the IEventDispatcher class.") ;
+        }       
+            
+        
     }
 }

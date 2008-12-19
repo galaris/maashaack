@@ -44,12 +44,12 @@ package system.events
     {
     	
        /**
-        * Registers an <code class="prettyprint">EventListener</code> object with an EventDispatcher object so that the listener receives notification of an event.
+        * Registers an <code class="prettyprint">EventListener</code> object with an <code class="prettyprint">system.events.EventDispatcher</code> object so that the listener receives notification of an event.
         */
        function registerEventListener( type:String , listener:* , useCapture:Boolean = false , priority:int = 0 , useWeakReference:Boolean = false ):void
        
        /**
-        * Removes an <code class="prettyprint">EventListener</code> from the EventDispatcher object.
+        * Removes an <code class="prettyprint">EventListener</code> from the <code class="prettyprint">system.events.EventDispatcher</code> object.
         */
        function unregisterEventListener( type:String , listener:* , useCapture:Boolean = false ):void ;    	
     	

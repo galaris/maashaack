@@ -31,29 +31,36 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
+
 */
 
-package system.events
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                                
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import flash.events.Event;            
 
-    public class AllTests
+    public class BasicEventTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function BasicEventTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("system events tests");
-            
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-
-            return suite;
+            super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" ) ;
+            
+            assertNotNull( e , "BasicEvent constructor failed.") ;	
+        }
+        
+        public function testInherit():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" ) ;
+            assertTrue( e is Event , "EventDispatcher must inherit the flash.events.Event class.") ;
+        }    
+        
+    
     }
 }

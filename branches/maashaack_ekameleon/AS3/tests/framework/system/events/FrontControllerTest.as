@@ -33,27 +33,24 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                                
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class FrontControllerTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function FrontControllerTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("system events tests");
-            
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-
-            return suite;
+            super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var fc:FrontController = new FrontController() ;
+            
+            assertNotNull( fc , "FrontController constructor failed.") ;  
+        }        
+        
     }
 }
