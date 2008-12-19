@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -32,25 +31,62 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
- */
 
-package system.events
+*/
+
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                
+    import system.data.Iterator;
+    import system.data.collections.ArrayCollection;
+    import system.data.collections.TypedCollection;
+    
+    import flash.events.Event;    
 
-    public class AllTests
+    /**
+     * The EventListenerBatch objects handle several <code class="prettyprint">EventListener</code> as one <code class="prettyprint">EventListener</code>.
+     */
+    public class EventListenerBatch extends TypedCollection implements EventListener
     {
 
-        public static function suite():ITest
+        /**
+         * Creates a new EventListenerBatch instance.
+         */
+        public function EventListenerBatch()
         {
-            
-            var suite:TestSuite = new TestSuite("system events tests");
-            
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-
-            return suite;
+            super( EventListener, new ArrayCollection() );
         }
+        
+        /**
+         * Returns a shallow copy of this instance.
+         * @return a shallow copy of this instance.
+         */ 
+        public override function clone():* 
+        {
+            var b:EventListenerBatch = new EventListenerBatch() ;
+            var it:Iterator = iterator() ;
+            while ( it.hasNext() ) 
+            {
+                b.add( it.next() ) ;
+            }
+            return b ;
+        }
+        
+        /**
+         * Handles the event.
+         */
+        public function handleEvent( e:Event ):void
+        {
+            var ar:Array = toArray() ;
+            var i:int = -1 ;
+            var l:int = ar.length ;
+            if ( l > 0 )
+            {
+                while (++i < l) 
+                { 
+                    (ar[i] as EventListener).handleEvent(e) ; 
+                }
+            }
+        }        
+        
     }
 }
