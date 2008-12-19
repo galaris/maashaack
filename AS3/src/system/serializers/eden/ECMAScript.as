@@ -37,8 +37,8 @@ package system.serializers.eden
 {
     import system.Reflection;
     import system.Strings;
-    import system.console;    
-    import system.text.parser.GenericParser;
+    import system.console;
+    import system.text.parser.GenericParser;    
 
     /* note:
     how to debug eden (part 1)
@@ -100,7 +100,7 @@ package system.serializers.eden
 
         private var _inAssignement:Boolean = false;
 
-        private var _inConstructor:Boolean = false;
+        private var _inConstructor:int ;
 
         // private var _inFunction:Boolean    = false;
         
@@ -1319,16 +1319,17 @@ package system.serializers.eden
         private function _scanFunction( fcnPath:String, pool:*, ref:* = null ):*
         {
             debug( "scanFunction( " + fcnPath + " )" );
+            
             var args:Array = [];
             var fcnName:String;
             var fcnObj:*;
             var fcnObjScope:*;
             
             var isClass:Boolean = pool[ fcnPath ] is Class;
-            
+                        
             if( fcnPath.indexOf( "." ) > - 1 )
             {
-                fcnName = fcnPath.split( "." ).pop( );
+                fcnName = fcnPath.split( "." ).pop();
             }
             else
             {
@@ -1341,9 +1342,13 @@ package system.serializers.eden
             }
             
             _scanWhiteSpace( );
+            
             next( );
+            
             _scanSeparators( );
+            
             var foundEndParenthesis:Boolean = false;
+            
             while( ch != "" )
             {
                 if( ch == ")" )
@@ -1377,13 +1382,13 @@ package system.serializers.eden
             
             if( isClass || (fcnPath == fcnName) )
             {
-                fcnObj = pool[ fcnPath ];
-                fcnObjScope = null;
+                fcnObj      = pool[ fcnPath ] ;
+                fcnObjScope = null ;
             }
             else
             {
-                fcnObj = pool[ fcnPath ][ fcnName ];
-                fcnObjScope = pool[ fcnPath ];
+                fcnObj      = pool[ fcnPath ][ fcnName ] ;
+                fcnObjScope = pool[ fcnPath ] ;
             }
             
             /*
@@ -1404,13 +1409,12 @@ package system.serializers.eden
             }
             else
             {
-                if( _inConstructor )
+            	
+                if( _inConstructor > 0 )
                 {
-                    _inConstructor = false;
-                    
+                    _inConstructor-- ;
                     try
                     {
-                        
                         return Reflection.invokeClass( fcnObj as Class, args ) ;
                     }
                     catch( e:Error )
@@ -1420,7 +1424,6 @@ package system.serializers.eden
                     }
                 }
                 
-                //return fcnObj.apply( fcnObjScope, args );
                 var result:*;
                 
                 if( ref != null )
@@ -1447,6 +1450,8 @@ package system.serializers.eden
                     return result;
                 }
             }
+            
+            
             
             log( strings.errorFunction );
         }
@@ -1500,8 +1505,9 @@ package system.serializers.eden
                     return Infinity;
                 
                 
-                case "new":
-                    _inConstructor = true;
+                case "new" :
+                    
+                    _inConstructor ++;
                     _scanWhiteSpace( );
                     baseword = _scanPath( );
                 
