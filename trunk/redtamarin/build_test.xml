@@ -46,6 +46,7 @@
         
         <fileset id="sources" dir="${x4a.src}">
             <include name="**/*.as"/>
+            <exclude name="**/framework_redtamarin.as" />
             <!-- <exclude name="**/_VirtualMachine.as" /> -->
             <!-- <exclude name="**/VirtualMachine.as" /> -->
             
@@ -55,6 +56,7 @@
             <exclude name="**/formatters/*.as" />
             <exclude name="**/comparators/*.as" />
             <exclude name="**/reflection/*.as" />
+        	<exclude name="**/html/*.as" />
         </fileset>
         <pathconvert property="includes" pathsep=" -in " refid="sources">
         </pathconvert>
@@ -94,7 +96,7 @@ Usage:
         
         <exec executable="java">
             <arg line="-jar ${redshell}/asc.jar" />
-            <arg line="-AS3 -strict" />
+            <arg line="-AS3 -strict -d" />
             <arg line="-import ${redshell}/builtin.abc" />
             <arg line="-import ${redshell}/toplevel.abc" />
             <arg line="-in ${includes}" />
@@ -103,6 +105,7 @@ Usage:
         
         <echo message="-----------" />
         <exec executable="./${redshell}/redshell">
+            <!--<arg line="-Dverbose" />-->
             <arg line="${x4a.src}/framework_redtamarin.abc" />
         </exec>
         

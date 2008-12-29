@@ -207,30 +207,30 @@ package system
          * Returns the super class name as string of an object.
          * @return the super class name as string of an object.
          */
-//        public static function getSuperClassName(o:*):String 
-//        {
-//            return _formatName( getSuperClassPath( o ) ) ;
-//        }
+        public static function getSuperClassName(o:*):String 
+        {
+            return _formatName( getSuperClassPath( o ) ) ;
+        }
 
         /**
          * Returns the super class package string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
          * @return the super class package string representation of the specified instance passed in arguments.
          */
-//        public static function getSuperClassPackage(o:*):String 
-//        {
-//            return _formatPackage( getSuperClassPath( o ) ) ;
-//        }
+        public static function getSuperClassPackage(o:*):String 
+        {
+            return _formatPackage( getSuperClassPath( o ) ) ;
+        }
 
         /**
          * Returns the super class path string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
          * @return the super class path string representation of the specified instance passed in arguments.
          */
-//        public static function getSuperClassPath(o:*):String 
-//        {
-//            return _formatPath( getQualifiedSuperclassName( o ) ) ;
-//        }
+        public static function getSuperClassPath(o:*):String 
+        {
+            return _formatPath( getQualifiedSuperclassName( o ) ) ;
+        }
 
         /**
          * Returns the TypeInfo object of the specified object.
