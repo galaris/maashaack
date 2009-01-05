@@ -48,7 +48,7 @@ package
         public function Framework_TestRunner()
         {
             
-            system.config.serializer.prettyPrinting = true;
+            system.config.serializer.prettyPrinting = false;
             system.about( true, true );
             
             //tests
