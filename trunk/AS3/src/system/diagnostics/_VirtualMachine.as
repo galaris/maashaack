@@ -35,53 +35,48 @@
 
 package system.diagnostics
 {
-    import flash.net.LocalConnection;
+    //import flash.net.LocalConnection;
     import flash.system.Capabilities;
     import flash.system.System;
     import flash.trace.Trace;
-
+    import flash.utils.getDefinitionByName;
+    
     import system.Strings;
     import system.console;
-    import system.io.Writeable;    
-
+    import system.io.Writeable;
+    
     /**
      * The internal VirtualMachine class.
      */
     public class _VirtualMachine
     {
-
-        /**
-         * @private
-         */
+        
         private var _tracing:Boolean = false;
-
-        /**
-         * @private
-         */
+        
         private var _writer:Writeable = console;
-
+        
         /**
          * Indicates if the machine filter the methods.
          */
         public var filterMethods:Boolean = true;
-
+        
         /**
          * Indicates the list of the filtered methods.
          */
         public var filteredMethods:Array = [ "flash.trace::Trace$/setLevel",
                                              "system.diagnostics::_VirtualMachine/beginTrace",
                                              "system.diagnostics::_VirtualMachine/endTrace" ];        
-
+        
         /**
          * Indicates the formatter pattern.
          */
         public var formatter:String = "  * {method}({args})";
-
+        
         /**
          * Indicates if show the packages.
          */
         public var showPackages:Boolean = true;
-
+        
         /**
          * Creates a new VirtualMachine instance.
          * @param listener The callback listener function use to dispatch the messages.
@@ -97,10 +92,7 @@ package system.diagnostics
                 Trace.setListener( listener );
             }
         }
-
-        /**
-         * @private
-         */
+        
         private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
         {
             if( Strings.startsWith( str, beginWith ) )
@@ -110,16 +102,14 @@ package system.diagnostics
             
             return str;
         }
-
-        /**
-         * @private
-         */
+        
         private function _forceMarkSweep():void
         {
             try
             {
-                var lc1:LocalConnection = new LocalConnection( );
-                var lc2:LocalConnection = new LocalConnection( );
+                var LCclass:Object = getDefinitionByName( "flash.net::LocalConnection" );
+                var lc1:* = new LCclass( );
+                var lc2:* = new LCclass( );
                 lc1.connect( "force_garbage_collection" );
                 lc2.connect( "force_garbage_collection" );
             }
