@@ -109,38 +109,30 @@ package system
         private static function _getPlatformID():PlatformID
         {
             var platform:String = Capabilities.os;
-            
             if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
             {
                 return PlatformID.Windows;
             }
-            
-            if( Strings.indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
+            else if( Strings.indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
             {
                 return PlatformID.Macintosh;
             }
-            
-            if( Strings.indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
+            else if( Strings.indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
             {
                 return PlatformID.Unix;
             }
-            
-            if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
-            {
-                return PlatformID.Windows;
-            }
-            
-            if( Strings.indexOfAny( platform, ["arm"] ) > -1 )
+            else if( Strings.indexOfAny( platform, ["arm"] ) > -1 )
             {
                 return PlatformID.Arm;
             }
-            
-            if( Strings.indexOfAny( platform, ["web"] ) > -1 )
+            else if( Strings.indexOfAny( platform, ["web"] ) > -1 )
             {
                 return PlatformID.Web;
             }
-            
-            return PlatformID.Unknown;
+            else
+            {
+                return PlatformID.Unknown;
+            }
         }
 
         /**

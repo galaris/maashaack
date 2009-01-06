@@ -36,24 +36,63 @@
 package system.diagnostics
 {
     //import flash.net.LocalConnection;
-    import flash.system.Capabilities;
-    import flash.system.System;
-    import flash.trace.Trace;
-    import flash.utils.getDefinitionByName;
     
     import system.Strings;
     import system.console;
     import system.io.Writeable;
     
+    import flash.system.Capabilities;
+    import flash.system.System;
+    import flash.trace.Trace;
+    import flash.utils.getDefinitionByName;    
+
     /**
      * The internal VirtualMachine class.
      */
     public class _VirtualMachine
     {
         
+        /**
+         * @private
+         */
         private var _tracing:Boolean = false;
         
+        /**
+         * @private
+         */
         private var _writer:Writeable = console;
+        
+        /**
+         * @private
+         */
+        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
+        {
+            if( Strings.startsWith( str, beginWith ) )
+            {
+                str = str.split( beginWith ).join( replaceWith );
+            }
+            
+            return str;
+        }
+        
+        /**
+         * @private
+         */
+        private function _forceMarkSweep():void
+        {
+            try
+            {
+                var LCclass:Class = getDefinitionByName( "flash.net::LocalConnection" ) as Class ;
+                var lc1:* = new LCclass( );
+                var lc2:* = new LCclass( );
+                lc1.connect( "force_garbage_collection" );
+                lc2.connect( "force_garbage_collection" );
+            }
+            catch( e:* )
+            {
+                //
+            }
+        }        
         
         /**
          * Indicates if the machine filter the methods.
@@ -93,31 +132,6 @@ package system.diagnostics
             }
         }
         
-        private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
-        {
-            if( Strings.startsWith( str, beginWith ) )
-            {
-                str = str.split( beginWith ).join( replaceWith );
-            }
-            
-            return str;
-        }
-        
-        private function _forceMarkSweep():void
-        {
-            try
-            {
-                var LCclass:Object = getDefinitionByName( "flash.net::LocalConnection" );
-                var lc1:* = new LCclass( );
-                var lc2:* = new LCclass( );
-                lc1.connect( "force_garbage_collection" );
-                lc2.connect( "force_garbage_collection" );
-            }
-            catch( e:* )
-            {
-            }
-        }
-
         /**
          * The Virtual Machine version
          */
