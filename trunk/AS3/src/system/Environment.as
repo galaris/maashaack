@@ -36,7 +36,8 @@
 package system
 {
     import flash.system.Capabilities;
-
+    
+    import system.Strings;
     import system.hosts.Host;
     import system.hosts.HostID;
     import system.hosts.OperatingSystem;
@@ -79,10 +80,22 @@ package system
                 {
                     return HostID.Flash ;
                 }
+                
                 case "Desktop":
                 {
                     return HostID.Air ;
                 }
+                
+                case "RedTamarin":
+                {
+                    return HostID.RedTamarin;
+                }
+                
+                case "AVMPlus":
+                {
+                    return HostID.Tamarin;
+                }
+                
                 default:
                 {
                     return HostID.Unknown ;
@@ -97,49 +110,37 @@ package system
         {
             var platform:String = Capabilities.os;
             
-            switch( platform )
+            if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
             {
-                case "Windows Vista" :
-                case "Windows 95"    :
-                case "Windows 98/ME" :
-                case "Windows NT"    :
-                case "Windows 2000"  :
-                case "Windows XP"    :
-                case "Windows CE"    :
-                case "win32"         :
-                {
-                    return PlatformID.Windows ;
-                }
-                
-                case "Mac OS 10.5.2" :
-                case "MacOS"         :
-                case "mac"           :
-                {
-                    return PlatformID.Macintosh ;
-                }
-                
-                case "Linux" :
-                case "unix"  :
-                {
-                    return PlatformID.Unix;
-                }
-                
-                case "arm":
-                {
-                    return PlatformID.Arm ;
-                }
-
-                case "web" :
-                {
-                    return PlatformID.Web ;
-                }
-                
-                case "unknown" :
-                default        :
-                {
-                    return PlatformID.Unknown;
-                }
+                return PlatformID.Windows;
             }
+            
+            if( Strings.indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
+            {
+                return PlatformID.Macintosh;
+            }
+            
+            if( Strings.indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
+            {
+                return PlatformID.Unix;
+            }
+            
+            if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
+            {
+                return PlatformID.Windows;
+            }
+            
+            if( Strings.indexOfAny( platform, ["arm"] ) > -1 )
+            {
+                return PlatformID.Arm;
+            }
+            
+            if( Strings.indexOfAny( platform, ["web"] ) > -1 )
+            {
+                return PlatformID.Web;
+            }
+            
+            return PlatformID.Unknown;
         }
 
         /**

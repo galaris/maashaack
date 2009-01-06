@@ -41,7 +41,7 @@ package system
      * The System configurator.
      */
     public var config:SystemConfigurator = new SystemConfigurator( {
-                                                                   verbose: false , serializer: eden
+                                                                   verbose: false , serializer: system.eden
                                                                    } );
 }
 

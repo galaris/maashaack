@@ -70,10 +70,10 @@ package system.hosts
            We will take into account only hosts upon which you can build
            "real" application, no moving target.
         */
-        /*
+        
         public static const Tamarin:HostID    = new HostID( 3, "Tamarin" );
         public static const RedTamarin:HostID = new HostID( 4, "RedTamarin" );
-        */
+        
     }
 }
 

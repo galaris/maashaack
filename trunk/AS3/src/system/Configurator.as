@@ -35,7 +35,8 @@
 
 package system
 {
-
+    import system.eden;
+    
     /**
      * The Configurator class defines the basic class used to creates custom configurations.
      */    
@@ -75,8 +76,16 @@ package system
          */
         public function toSource( indent:int = 0 ):String
         {
+            
             config.serializer.prettyIndent = indent;
             return config.serializer.serialize( _config );
+            /*
+            var original:int = eden.prettyIndent;
+            eden.prettyIndent = indent;
+            var str:String = eden.serialize( _config );
+            eden.prettyIndent = original;
+            return str;
+            */
         }
 
         /**
