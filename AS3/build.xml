@@ -188,6 +188,23 @@
             
         </exec>
         
+        <exec executable="java">
+             <arg line="-jar ${redshell}/asc.jar" />
+             <arg line="-AS3 -strict -md -optimize" />
+             <arg line="-avmtarget 2" />
+             <arg line="-import ${redshell}/builtin.abc" />
+             <arg line="-import ${redshell}/toplevel.abc" />
+             <arg line="-import ${x4a.src}/maashaack.abc" />
+             <arg line="${x4a.src}/test.as" />
+             
+         </exec>
+        
+        <exec executable="./${redshell}/redshell_d">
+            <arg line="-Dastrace 0" />
+            <arg line="${x4a.src}/maashaack.abc" />
+            <arg line="${x4a.src}/test.abc" />
+        </exec>
+        
         <copy file="${x4a.src}/maashaack.abc" todir="${release.dir}/lib" />
         
     </target>

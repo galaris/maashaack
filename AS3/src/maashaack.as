@@ -153,12 +153,12 @@ include "system/SystemConfigurator.as";
 include "system/Version.as";
   //statics
   include "system/metadata.as";
+  //objects
+  include "system/console.as";
+  include "system/eden.as";
+  include "system/config.as";
   //functions
   include "system/about.as";
   include "system/info.as";
-  //objects
-  include "system/config.as";
-  include "system/console.as";
-  include "system/eden.as";
 
 
