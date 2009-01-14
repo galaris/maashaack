@@ -37,11 +37,11 @@ package system.reflection
 {
     import flash.utils.describeType;
     import flash.utils.getDefinitionByName;
-
-    import system.Reflection;    
-
+    
+    import system.Reflection;
+    
     [ExcludeClass]
-
+    
     /**
      * Implementation of the ClassInfo interface.
      */

@@ -83,11 +83,11 @@ package system
             suite.addTest(system.serializers.AllTests.suite());
             
             //data
-            suite.addTest(system.data.AllTests.suite());                 
+            suite.addTest(system.data.AllTests.suite());
             
             //comparators
-            suite.addTest(system.comparators.AllTests.suite());            
-
+            suite.addTest(system.comparators.AllTests.suite());
+            
             //errors
             suite.addTest(system.errors.AllTests.suite());
             
@@ -104,8 +104,8 @@ package system
             suite.addTest(system.cli.AllTests.suite());
             
             //process
-            suite.addTest(system.process.AllTests.suite());            
-                      
+            suite.addTest(system.process.AllTests.suite());
+            
             return suite;
         }
     }

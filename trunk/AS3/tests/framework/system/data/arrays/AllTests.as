@@ -35,8 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.arrays
 {
-    import buRRRn.ASTUce.framework.*;                                                
-
+    import buRRRn.ASTUce.framework.*;
+    
     public class AllTests
     {
 
@@ -44,10 +44,15 @@ package system.data.arrays
         {
             var suite:TestSuite = new TestSuite("Maashaack data arrays tests");
             
+            /* note:
+               removed, redtamarin having problem with flash_proxy
+               and some methods overriding not implemented yet
+            */
+            /*
             suite.addTestSuite( ArrayFilterTest ) ;
             suite.addTestSuite( ProxyArrayTest ) ;
             suite.addTestSuite( TypedArrayTest ) ;
-                        
+            */
             return suite;
         }
     }
