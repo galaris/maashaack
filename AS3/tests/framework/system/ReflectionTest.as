@@ -53,7 +53,7 @@ package system
             assertFalse( Reflection.hasClassByName( "" ) );
             assertFalse( Reflection.hasClassByName( "IdontExistsClass" ) );
             assertTrue( Reflection.hasClassByName( "system.ReflectMe" ) );
-            assertTrue( Reflection.hasClassByName( "system::ReflectMe" ) );
+            //assertTrue( Reflection.hasClassByName( "system::ReflectMe" ) ); // ASTUce CLI does not support :: notation
             }
         
         public function testShortName():void

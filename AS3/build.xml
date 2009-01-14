@@ -106,7 +106,43 @@
     
     <!-- general properties of the project -->
     <property file="build/build.properties"/>
-
+    
+    <condition property="REDSHELL" value="${redshell.mac}">
+        <os family="mac"/>
+    </condition>
+    
+    <condition property="REDSHELL_DEBUG" value="${redshell.debug.mac}">
+        <os family="mac"/>
+    </condition>
+    
+    <condition property="REDSHELL" value="${redshell.win}">
+        <os family="windows" />
+    </condition>
+    
+    <condition property="REDSHELL_DEBUG" value="${redshell.debug.win}">
+        <os family="windows" />
+    </condition>
+    
+    <condition property="REDSHELL" value="${redshell.nix}">
+        <os family="unix" />
+    </condition>
+    
+    <condition property="REDSHELL_DEBUG" value="${redshell.debug.nix}">
+        <os family="unix" />
+    </condition>
+    
+    <condition property="ASTUCE" value="${astuce.mac}">
+        <os family="mac"/>
+    </condition>
+    
+    <condition property="ASTUCE" value="${astuce.win}">
+        <os family="windows" />
+    </condition>
+    
+    <condition property="ASTUCE" value="${astuce.nix}">
+        <os family="unix" />
+    </condition>
+    
     <echo message="${release.fullname} v${release.version}"/>
     
     <condition property="includesource">
@@ -143,7 +179,7 @@
         
     </target>
     
-    <target name="main" depends="clean,init,documentation,library_bytecode, library_component,templates,commonfiles,package">
+    <target name="main" depends="clean,init,unit_tests,documentation,library_bytecode,library_component,templates,commonfiles,package">
     </target>
     
     <target name="clean-documentation">
@@ -179,33 +215,16 @@
         <echo message="building library bytecode" level="verbose" />
         
         <exec executable="java">
-            <arg line="-jar ${redshell}/asc.jar" />
+            <arg line="-jar ${redshell.asc}" />
             <arg line="-AS3 -strict -md -optimize" />
             <arg line="-avmtarget 2" />
-            <arg line="-import ${redshell}/builtin.abc" />
-            <arg line="-import ${redshell}/toplevel.abc" />
+            <arg line="-import ${redshell.builtin}" />
+            <arg line="-import ${redshell.toplevel}" />
             <arg line="${x4a.src}/maashaack.as" />
             
         </exec>
         
-        <exec executable="java">
-             <arg line="-jar ${redshell}/asc.jar" />
-             <arg line="-AS3 -strict -md -optimize" />
-             <arg line="-avmtarget 2" />
-             <arg line="-import ${redshell}/builtin.abc" />
-             <arg line="-import ${redshell}/toplevel.abc" />
-             <arg line="-import ${x4a.src}/maashaack.abc" />
-             <arg line="${x4a.src}/test.as" />
-             
-         </exec>
-        
-        <exec executable="./${redshell}/redshell_d">
-            <arg line="-Dastrace 0" />
-            <arg line="${x4a.src}/maashaack.abc" />
-            <arg line="${x4a.src}/test.abc" />
-        </exec>
-        
-        <copy file="${x4a.src}/maashaack.abc" todir="${release.dir}/lib" />
+        <move file="${x4a.src}/maashaack.abc" todir="${release.dir}/lib" />
         
     </target>
     
@@ -252,6 +271,34 @@
            <!-- <contributor name="Niko Bellic" /> -->
             </metadata>
         </compc>
+        
+    </target>
+    
+    <target name="unit_tests" description="build and run the Library unit tests">
+        
+        <echo message="building library unit tests" level="verbose" />
+        <mxmlc
+            file="${x4a.src}/Framework_TestRunner.as"
+            output="${astuce.path}/x4a-tests.swf"
+            
+        >
+            <strict>true</strict>
+            <debug>true</debug>
+            <default-size width="128" height="128" />
+            <source-path path-element="${release.tmp.core}" />
+            <source-path path-element="${x4a.lib}" />
+            <source-path path-element="${x4a.tests}/framework" />
+            <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
+        </mxmlc>
+        
+        <echo message="running library unit tests" level="verbose" />
+        <exec executable="${ASTUCE}" failonerror="true">
+            <arg line="-s" />
+            <arg line="-l:x4a-tests.swf" />
+            <arg line="system.AllTests" />
+        </exec>
+        
+        <delete file="${astuce.path}/x4a-tests.swf"/>
         
     </target>
     
