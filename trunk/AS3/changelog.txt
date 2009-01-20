@@ -1,3 +1,10 @@
+* 0.1.1.500
+- updated redshell to 0.2.5
+- integrated dynamic build
+  of ASTUce CLI so maashaack
+  AS3 lib and unit tests can be
+  in perfect sync 
+
 * 0.1.0.343
 - first stable release
 - build based on ant
