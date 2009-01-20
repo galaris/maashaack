@@ -197,9 +197,10 @@ package system
          */
         public static function getClassByName( name:String ):Class
         {
+            name = _formatPath( name );
             return ApplicationDomain.currentDomain.getDefinition( name ) as Class;
         }
-
+        
         /**
          * Returns the ClassInfo object of the specified object.
          * @return the ClassInfo object of the specified object.
