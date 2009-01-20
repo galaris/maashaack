@@ -48,8 +48,10 @@ package system.reflection
     import system.reflection.samples.Dynamic2DynamicClass;
     import system.reflection.samples.DynamicClass;
     import system.reflection.samples.IBasicInterface1;
-    import system.reflection.samples.IBasicInterface2;    
-
+    import system.reflection.samples.IBasicInterface2;
+    import flash.utils.describeType;
+    import flash.utils.getQualifiedClassName;
+    
     public class ClassInfoTest extends TestCase
         {
         
@@ -114,13 +116,11 @@ package system.reflection
         
         
         /* note:
-           removed till the DOmain/ApplicationDomain problem is solved
+           no more problem when ASTUce CLI is compiled dynamically :)
         */
-        /*
         public function testSuperClass2():void
         {
-            //var c1:ClassInfo = Reflection.getClassInfo( this ); //problem with ASTUce CLI
-            var c1:ClassInfo = Reflection.getClassInfo( ClassInfoTest );
+            var c1:ClassInfo = Reflection.getClassInfo( this ); //problem with ASTUce CLI
             var c2:ClassInfo = c1.superClass;
             var c3:ClassInfo = c2.superClass;
             
@@ -128,7 +128,7 @@ package system.reflection
             assertEquals( "buRRRn.ASTUce.framework.Assert", c2.superClass.name );
             assertEquals( "Object", c3.superClass.name );
         }
-        */
+        
         
         public function testProperties1():void
         	{
@@ -222,16 +222,8 @@ package system.reflection
 //       	    trace( c4.methods );
        	    }
         
-        
-        /* note:
-           again removed till we find the problem in ASTUce CLI
-           yeah it gonna be fun to mess with memory and stuff
-        */
-        /*
         public function testHasInterface():void
         {
-            //var i1:IBasicInterface1;
-            //var i2:IBasicInterface2;
             var bci1:BasicClassInterface1 = new BasicClassInterface1();
             var bci1and2:BasicClassInterface1and2 = new BasicClassInterface1and2();
             
@@ -251,20 +243,7 @@ package system.reflection
             assertTrue( c3.hasInterface( IBasicInterface1, IBasicInterface2 ) );
             assertTrue( c4.hasInterface( IBasicInterface1, IBasicInterface2 ) );
         }
-        */
         
-        /* note:
-           problem with ASTUce CLI
-           ----
-           ReferenceError: Error #1065: Variable samples::Basic2BasicClass is not defined.
-                at avmplus::Domain/getClass()
-                at global/flash.utils::getDefinitionByName()
-                ...
-           
-           again problem between redshell VM Domain and Flash ApplicationDomain
-           we gonna need to do some spikes to find out where exactly the problem is
-        */
-        /*
         public function testInheritFrom():void
         {
             var b3:Basic3Class = new Basic3Class();
@@ -291,7 +270,6 @@ package system.reflection
             assertFalse( c4.inheritFrom( Basic3Class ) );
             assertFalse( c4.inheritFrom( Basic3Class, Basic2BasicClass ) );
         }
-        */
         
         /*
         public function testMisc():void
