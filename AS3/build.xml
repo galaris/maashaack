@@ -131,6 +131,7 @@
         <os family="unix" />
     </condition>
     
+    <!--
     <condition property="ASTUCE" value="${astuce.mac}">
         <os family="mac"/>
     </condition>
@@ -142,6 +143,7 @@
     <condition property="ASTUCE" value="${astuce.nix}">
         <os family="unix" />
     </condition>
+    -->
     
     <echo message="${release.fullname} v${release.version}"/>
     
@@ -226,6 +228,21 @@
         
         <move file="${x4a.src}/maashaack.abc" todir="${release.dir}/lib" />
         
+        <!--
+        <exec executable="java">
+            <arg line="-jar ${redshell.asc}" />
+            <arg line="-AS3 -strict -md -optimize" />
+            <arg line="-avmtarget 2" />
+            <arg line="-import ${redshell.builtin}" />
+            <arg line="-import ${redshell.toplevel}" />
+            <arg line="-import ${release.dir}/lib/maashaack.abc" />
+            <arg line="${x4a.lib.ASTUce}/ASTUce.as" />
+            
+        </exec>
+        
+        <move file="${x4a.lib.ASTUce}/ASTUce.abc" todir="${x4a.libs}" />
+        -->
+        
     </target>
     
     <target name="library_component" description="build the Library SWC component">
@@ -274,7 +291,33 @@
         
     </target>
     
-    <target name="unit_tests" description="build and run the Library unit tests">
+    <!--
+        We keep this target for documentation but we don't use it,
+        here the full explanation:
+        
+        When we compile ASTUce CLI we embed the whole maashaack and ASTUce AS3 library
+        in the executable
+        with this we can update the maashaack unit tests and run them with ASTUce CLI
+        but if we update the maashaack source code, the update is ignored
+        because we don't know (yet) how to override the embedded maashaack.abc
+        by a new maashaack.abc inside the ASTUce exe
+        
+        to solve that code sync problem look at src/testrunner.as
+        it's a lightweight version of the ASTUce CLI that get
+        compiled dynamically and is meant to be run by the redshell exe
+        
+        so yes we eat or own dog food :)
+        but in a slightly different way than a third party project
+        whith or without maashaack dependencies
+        
+        if you write your unit tests with ASTUce and don't care about maashaack
+        just use the different ASTUce exe and the 'unit_tests_statics' setup
+        
+        but if your main code base link to the trunk of maashaack and you
+        want the lib to be last version use the other setup 'unit_tests'
+        
+     -->
+    <target name="unit_tests_statics" description="build and run the Library unit tests">
         
         <echo message="building library unit tests" level="verbose" />
         <mxmlc
@@ -299,6 +342,50 @@
         </exec>
         
         <delete file="${astuce.path}/x4a-tests.swf"/>
+        
+    </target>
+    
+    <target name="unit_tests" description="build and run the Library unit tests">
+        
+        <echo message="building library unit tests" level="verbose" />
+        <mxmlc
+            file="${x4a.src}/Framework_TestRunner.as"
+            output="${astuce.path}/x4a-tests.swf"
+            
+        >
+            <strict>true</strict>
+            <debug>true</debug>
+            <default-size width="128" height="128" />
+            <source-path path-element="${release.tmp.core}" />
+            <source-path path-element="${x4a.lib.ASTUce}" />
+            <source-path path-element="${x4a.tests}/framework" />
+            <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
+        </mxmlc>
+        
+        <echo message="building ASTUce exe dynamically" level="verbose" />
+        <exec executable="java">
+            <arg line="-jar ${redshell.asc}" />
+            <arg line="-AS3 -strict -md -optimize" />
+            <arg line="-avmtarget 2" />
+            <arg line="-exe ${REDSHELL_DEBUG}" />
+            <arg line="-import ${redshell.builtin}" />
+            <arg line="-import ${redshell.toplevel}" />
+            <arg line="${astuce.path}/ASTUce.as" />
+            
+        </exec>
+        
+        <chmod file="${astuce.path}/ASTUce.exe" perm="+x"/>
+        
+        <echo message="running library unit tests" level="verbose" />
+        <exec executable="${astuce.path}/ASTUce.exe" failonerror="true">
+            <arg line="-s" />
+            <arg line="-l:x4a-tests.swf" />
+            <arg line="system.AllTests" />
+        </exec>
+        
+        <delete file="${astuce.path}/x4a-tests.swf"/>
+        <delete file="${astuce.path}/ASTUce.abc"/>
+        <delete file="${astuce.path}/ASTUce.exe"/>
         
     </target>
     
