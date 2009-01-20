@@ -37,6 +37,7 @@ package system.reflection
 {
     import flash.utils.describeType;
     import flash.utils.getDefinitionByName;
+    import flash.utils.getQualifiedClassName;
     
     import system.Reflection;
     
@@ -47,15 +48,8 @@ package system.reflection
      */
     public class _ClassInfo extends _TypeInfo implements ClassInfo
     {
-
-        /**
-         * @private
-         */
+        
         private var _class:XML;
-
-        /**
-         * @private
-         */
         private var _filter:FilterType;
 
         /**
@@ -103,23 +97,32 @@ package system.reflection
         /**
          * @private
          */
-        private function _hasInterface( interfaceRef:Class ):Boolean
+        private function _hasInterface( interfaceRef:* ):Boolean
         {
             var path:XMLList;
-            var found:Class;
+            var found:String;
             
             if( isInstance( ) && _class.hasOwnProperty( "implementsInterface" ) )
             {
                 path = _class.implementsInterface;
             }
-            else if( ! isInstance( ) && _class.factory.hasOwnProperty( "implementsInterface" ) )
+            else if( !isInstance( ) && _class.factory.hasOwnProperty( "implementsInterface" ) )
             {
                 path = _class.factory.implementsInterface;
             }
             
+            /* note:
+               even if we receive a class/object reference
+               we force a string comparison which will work everywhere (eg tamarin/redtamarin)
+            */
+            if( !(interfaceRef is String) )
+            {
+                interfaceRef = getQualifiedClassName( interfaceRef );
+            }
+            
             for each( var property:XML in path )
             {
-                found = getDefinitionByName( property.@type ) as Class;
+                found = String( property.@type );
                 
                 if( found == interfaceRef )
                 {
@@ -128,15 +131,15 @@ package system.reflection
             }
             
             return false;
-        }        
-
+        }
+        
         /**
          * @private
          */
-        private function _inheritFrom( classRef:Class ):Boolean
+        private function _inheritFrom( classRef:* ):Boolean
         {
             var path:XMLList;
-            var found:Class;
+            var found:String;
             
             if( isInstance( ) && _class.hasOwnProperty( "extendsClass" ) )
             {
@@ -147,9 +150,18 @@ package system.reflection
                 path = _class.factory.extendsClass;
             }
             
+            /* note:
+               even if we receive a class/object reference
+               we force a string comparison which will work everywhere (eg tamarin/redtamarin)
+            */
+            if( !(classRef is String) )
+            {
+                classRef = getQualifiedClassName( classRef );
+            }
+            
             for each( var property:XML in path )
             {
-                found = getDefinitionByName( property.@type ) as Class;
+                found = String( property.@type );
                 
                 if( found == classRef )
                 {
@@ -158,8 +170,8 @@ package system.reflection
             }
             
             return false;
-        }        
-
+        }
+        
         /**
          * @private
          */
@@ -400,7 +412,7 @@ package system.reflection
             
             for( var i:int = 0; i < interfaces.length ; i++ )
             {
-                if( ! _hasInterface( interfaces[i] ) )
+                if( !_hasInterface( interfaces[i] ) )
                 {
                     return false;
                 }
@@ -408,7 +420,7 @@ package system.reflection
             
             return true;
         }
-
+        
         /**
          * Indicates if the specified class inherit fromm all class passed-in arguments.
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
@@ -423,15 +435,15 @@ package system.reflection
             
             for( var i:int = 0; i < classes.length ; i++ )
             {
-                if( ! _inheritFrom( classes[i] ) )
+                if( !_inheritFrom( classes[i] ) )
                 {
                     return false;
                 }
             }
             
             return true;
-        }        
-
+        }
+        
         /**
          * Indicates if the specified object is dynamic.
          * <p><b>Example :</b></p>
