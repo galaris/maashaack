@@ -595,6 +595,57 @@ package system.serializers.eden
                 return true;
             }
             
+            //fix for global function in redtamarin
+            if( path.indexOf( "." ) == -1 )
+            {
+                switch( path )
+                {
+                    case "decodeURI":
+                    _globalPool[ path ] = decodeURI;
+                    return true;
+                    
+                    case "decodeURIComponent":
+                    _globalPool[ path ] = decodeURIComponent;
+                    return true;
+                    
+                    case "encodeURI":
+                    _globalPool[ path ] = encodeURI;
+                    return true;
+                    
+                    case "encodeURIComponent":
+                    _globalPool[ path ] = encodeURIComponent;
+                    return true;
+                    
+                    case "isNaN":
+                    _globalPool[ path ] = isNaN;
+                    return true;
+                    
+                    case "isFinite":
+                    _globalPool[ path ] = isFinite;
+                    return true;
+                    
+                    case "parseInt":
+                    _globalPool[ path ] = parseInt;
+                    return true;
+                    
+                    case "parseFloat":
+                    _globalPool[ path ] = parseFloat;
+                    return true;
+                    
+                    case "escape":
+                    _globalPool[ path ] = escape;
+                    return true;
+                    
+                    case "unescape":
+                    _globalPool[ path ] = unescape;
+                    return true;
+                    
+                    case "isXMLName":
+                    _globalPool[ path ] = isXMLName;
+                    return true;
+                }
+            }
+            
             var scope:*;
             var scopepath:String = "";
             var subpath:* = "";
@@ -1359,6 +1410,7 @@ package system.serializers.eden
                 }
                 
                 args.push( _scanValue( ) );
+                
                 _scanSeparators( );
                 
                 if( ch == "," )
@@ -1564,7 +1616,8 @@ package system.serializers.eden
                         {
                             result = _localPool[ baseword ];
                         }
-                    
+                        
+                        
                         return (pre == "-") ? - result : result;
                     }
                 
@@ -1578,7 +1631,7 @@ package system.serializers.eden
                         {
                             result = _globalPool[ baseword ];
                         }
-                    
+                        
                         return (pre == "-") ? - result : result;
                     }
                 

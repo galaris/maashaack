@@ -45,12 +45,16 @@ include "system/Configurator.as";
 include "system/cli/ArgumentsParser.as";
 include "system/cli/SwitchStatus.as";
 
+//numeric
+include "system/numeric/Mathematics.as";
+include "system/numeric/Range.as";
+
 //comparators
 include "system/comparators/AlphaComparator.as";
 include "system/comparators/BooleanComparator.as";
 include "system/comparators/CharComparator.as";
 include "system/comparators/ComparableComparator.as";
-//include "system/comparators/DateComparator.as";
+include "system/comparators/DateComparator.as";
 include "system/comparators/GenericComparator.as";
 include "system/comparators/NullComparator.as";
 include "system/comparators/NumberComparator.as";
@@ -63,15 +67,15 @@ include "system/diagnostics/TraceConsole.as";
 include "system/diagnostics/VirtualMachine.as";
 
 //evaluators
-//include "system/evaluators/DateEvaluator.as";
+include "system/evaluators/DateEvaluator.as";
 include "system/evaluators/EdenEvaluator.as";
 include "system/evaluators/Evaluable.as";
-//include "system/evaluators/MathEvaluator.as";
+include "system/evaluators/MathEvaluator.as";
 include "system/evaluators/MultiEvaluator.as";
 include "system/evaluators/PropertyEvaluator.as";
 
 //formatters
-//include "system/formatters/DateFormatter.as";
+include "system/formatters/DateFormatter.as";
 include "system/formatters/Formattable.as";
 
 //hosts
@@ -87,9 +91,6 @@ include "system/io/Writeable.as";
 
 //network
 
-//numeric
-include "system/numeric/Mathematics.as";
-include "system/numeric/Range.as";
 
 //process
 
@@ -114,15 +115,15 @@ include "system/reflection/TypeInfo.as";
 
 //serializers
   //eden
-  include "system/serializers/eden/BuiltinSerializer.as";
-  include "system/serializers/eden/config.as";
   include "system/serializers/eden/debug.as";
+  include "system/serializers/eden/release.as";
+  include "system/serializers/eden/strings.as";
+  include "system/serializers/eden/config.as";
+  include "system/serializers/eden/info.as";
+  include "system/serializers/eden/BuiltinSerializer.as";
   include "system/serializers/eden/ECMAScript.as";
   include "system/serializers/eden/EdenConfigurator.as";
   include "system/serializers/eden/EdenSerializer.as";
-  include "system/serializers/eden/info.as";
-  include "system/serializers/eden/release.as";
-  include "system/serializers/eden/strings.as";
 
 
 //terminals

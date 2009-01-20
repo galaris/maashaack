@@ -125,7 +125,7 @@ package system.serializers.eden
             assertEquals( eden.serialize( {x:{y:{z:{}}}} ), eden.serialize( ECMAScript.evaluate( "x.y.z" ) ) );
             assertEquals( eden.serialize( {x:{y:{z:123}}} ), eden.serialize( ECMAScript.evaluate( "x.y.z = 123;" ) ) );
             assertEquals( 123, ECMAScript.evaluate( "x.y.z = 123;" ).x.y.z );
-
+            
             //assertEquals( eden.serialize( {x:{y:{z:{a:false,b:true}}}} ), eden.serialize( ECMAScript.evaluate( "x.y.z.a = false; x.y.z.b = true;" ) ) );
             }
         
@@ -303,7 +303,7 @@ package system.serializers.eden
             var s1:* = "\r\n";
                 s1  += "a = \"123\";\r\n";
                 s1  += "b = a.split(\"\");\r\n"; //object method call
-                s1  += "c = parseInt( \"0xFF\" );\r\n"; //global function
+                s1  += "c = parseInt( 0xFF );\r\n"; //global function
                 s1  += "d = b.concat();\r\n"; //copy
                 s1  += "d.push( c.toString(16) );\r\n"; //object method call in function argument
                 s1  += "e = d.join( \"-\" );\r\n";
@@ -317,15 +317,15 @@ package system.serializers.eden
             assertEquals( r1.b[2], "3" );
             assertEquals( r1.b.length, 3 );
             
-            //assertEquals( r1.c, 0xFF ); //problem with ASTUce CLI
+            assertEquals( r1.c, 0xFF );
             
             assertEquals( r1.d[0], "1" );
             assertEquals( r1.d[1], "2" );
             assertEquals( r1.d[2], "3" );
-            //assertEquals( r1.d[3], "ff" ); //problem with ASTUce CLI
+            assertEquals( r1.d[3], "ff" );
             assertEquals( r1.d.length, 4 );
             
-            //assertEquals( r1.e, "1-2-3-ff" ); //problem with ASTUce CLI
+            assertEquals( r1.e, "1-2-3-ff" );
             }
         
         public function testFunctionChainedCall():void
