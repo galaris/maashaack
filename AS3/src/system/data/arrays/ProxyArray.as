@@ -44,8 +44,10 @@ package system.data.arrays
     import system.serializers.eden.BuiltinSerializer;
     
     import flash.utils.Proxy;
-    import flash.utils.flash_proxy;    
-
+    import flash.utils.flash_proxy;
+    
+    trace( flash.utils.flash_proxy );
+    
     /**
      * The ProxyArray class extends the flash.utils.Proxy class and use a composition with an Array to extends the Array class.
      * <p><b>Example :</b></p>
@@ -88,7 +90,7 @@ package system.data.arrays
      */
     public dynamic class ProxyArray extends Proxy implements Cloneable, Iterable, Serializable
     {
-
+        
         /**
          * Creates a new ProxyArray instance.
          */  
@@ -166,7 +168,7 @@ package system.data.arrays
          * However, you cannot enumerate the properties of the Proxy class themselves. 
          * This function supports implementing for...in and for each..in loops on the object to retrieve the desired names. 
          */
-        flash_proxy override function nextName( index:int ):String 
+        flash_proxy override function nextName( index:int ):String
         {
             return _index.toString() ;
         }

@@ -48,11 +48,11 @@ package system.data.arrays
                removed, redtamarin having problem with flash_proxy
                and some methods overriding not implemented yet
             */
-            /*
-            suite.addTestSuite( ArrayFilterTest ) ;
-            suite.addTestSuite( ProxyArrayTest ) ;
-            suite.addTestSuite( TypedArrayTest ) ;
-            */
+            
+            //suite.addTestSuite( ArrayFilterTest ) ;
+            //suite.addTestSuite( ProxyArrayTest ) ;
+            //suite.addTestSuite( TypedArrayTest ) ;
+            
             return suite;
         }
     }
