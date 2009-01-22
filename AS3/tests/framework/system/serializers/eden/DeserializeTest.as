@@ -39,10 +39,9 @@ package system.serializers.eden
     
     import system.Version;
     import system.eden;
-    import system.serializers.eden.config;
     import system.serializers.eden.samples.BasicClass;
-    import system.serializers.eden.samples.CtorNoDefaultValue;
-    
+    import system.serializers.eden.samples.CtorNoDefaultValue;    
+
     public class DeserializeTest extends TestCase
         {
         
