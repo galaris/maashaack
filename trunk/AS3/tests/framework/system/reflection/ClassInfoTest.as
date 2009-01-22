@@ -48,10 +48,8 @@ package system.reflection
     import system.reflection.samples.Dynamic2DynamicClass;
     import system.reflection.samples.DynamicClass;
     import system.reflection.samples.IBasicInterface1;
-    import system.reflection.samples.IBasicInterface2;
-    import flash.utils.describeType;
-    import flash.utils.getQualifiedClassName;
-    
+    import system.reflection.samples.IBasicInterface2;    
+
     public class ClassInfoTest extends TestCase
         {
         
