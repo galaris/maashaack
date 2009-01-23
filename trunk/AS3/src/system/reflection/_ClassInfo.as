@@ -35,12 +35,11 @@
 
 package system.reflection
 {
-    import flash.utils.describeType;
-    import flash.utils.getDefinitionByName;
-    import flash.utils.getQualifiedClassName;
-    
     import system.Reflection;
     
+    import flash.utils.describeType;
+    import flash.utils.getQualifiedClassName;    
+
     [ExcludeClass]
     
     /**
@@ -49,7 +48,14 @@ package system.reflection
     public class _ClassInfo extends _TypeInfo implements ClassInfo
     {
         
+        /**
+         * @private
+         */
         private var _class:XML;
+        
+        /**
+         * @private
+         */
         private var _filter:FilterType;
 
         /**
