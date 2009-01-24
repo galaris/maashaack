@@ -36,8 +36,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-        
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;        
+
     public class ArrayEventTest extends TestCase 
     {
 
@@ -48,10 +49,34 @@ package system.events
         
         public function testConstructor():void
         {
-            //var e:ArrayEvent = new ArrayEvent( "type" ) ;
+            var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
             
-            //assertNotNull( e , "ArrayEvent constructor failed.") ;  
+            assertNotNull( e , "01 - ArrayEvent constructor failed.") ;
+            
+            ArrayAssert.assertEquals( e.array , [2,3,4], "02 - ArrayEvent constructor failed.") ;  
         }        
+        
+        public function testInherit():void
+        {
+            var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
+            assertNotNull( e is BasicEvent, "01 - ArrayEvent must extends the BasicEvent class.") ;
+        }          
+        
+        public function testArray():void
+        {
+            var e:ArrayEvent = new ArrayEvent( "type" ) ;
+            assertNull( e.array , "01 - ArrayEvent array property failed.") ;  
+            e.array = [1,2,3] ;
+            ArrayAssert.assertEquals( e.array , [1,2,3], "02 - ArrayEvent array property failed.") ;  
+        }        
+        
+        public function testClone():void
+        {
+            var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
+            var c:ArrayEvent = e.clone() as ArrayEvent ;
+            assertNotNull( c is BasicEvent, "01 - ArrayEvent clone() failed.") ;
+            ArrayAssert.assertEquals( e.array , c.array, "02 - ArrayEvent clone() failed.") ;  
+        }              
         
     }
 }
