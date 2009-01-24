@@ -31,36 +31,19 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
+
 */
 
-package system.events
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                                
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+        
+    public class NumberEventTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function NumberEventTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            // suite.addTestSuite( BooleanEventTest ) ;
-            // suite.addTestSuite( CoreEventDispatcherTest ) ;
-            // suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            // suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            // suite.addTestSuite( NumberEventTest ) ;
-            // suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
+            super( name );
         }
     }
 }
