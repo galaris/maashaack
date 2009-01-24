@@ -36,38 +36,38 @@
 package system.data
 {
     import system.Sortable;
-    import system.data.Map;        	
-
+    import system.data.Map;
+    
     /**
-	 * Map that further guarantees that it will be in ascending key order, sorted according to the natural ordering of its keys.
-	 */
-	public interface SortedMap extends Map, Sortable 
-	{
-		
-		/**
-		 * Returns the first (lowest) key currently in this sorted map.
-		 */
-		function firstKey():* ;
-	
-		/**
-		 * Returns a view of the portion of this sorted map whose keys are strictly less than toKey.
-		 */
-		function heapMap( toKey:* ):SortedMap ;
-
-		/**
-		 * Returns the last (highest) key currently in this sorted map.
-		 */
-		function lastKey():* ;
-
-		/**
-		 * Returns a view of the portion of this sorted map whose keys range from fromKey, inclusive, to toKey, exclusive.
-		 */
-		function subMap( fromKey:* , toKey:* ):SortedMap ;
-
-		/**
-		 * Returns a view of the portion of this sorted map whose keys are greater than or equal to fromKey.
-		 */
-		function tailMap( fromKey:* ):SortedMap ;
-		
-	}
+     * Map that further guarantees that it will be in ascending key order, sorted according to the natural ordering of its keys.
+     */
+    public interface SortedMap extends Map, Sortable 
+    {
+        
+        /**
+         * Returns the first (lowest) key currently in this sorted map.
+         */
+        function firstKey():* ;
+        
+        /**
+         * Returns a view of the portion of this sorted map whose keys are strictly less than toKey.
+         */
+        function heapMap( toKey:* ):SortedMap ;
+        
+        /**
+         * Returns the last (highest) key currently in this sorted map.
+         */
+        function lastKey():* ;
+        
+        /**
+         * Returns a view of the portion of this sorted map whose keys range from fromKey, inclusive, to toKey, exclusive.
+         */
+        function subMap( fromKey:* , toKey:* ):SortedMap ;
+        
+        /**
+         * Returns a view of the portion of this sorted map whose keys are greater than or equal to fromKey.
+         */
+        function tailMap( fromKey:* ):SortedMap ;
+        
+    }
 }

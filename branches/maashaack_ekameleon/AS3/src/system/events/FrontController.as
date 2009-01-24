@@ -282,7 +282,7 @@ package system.events
          * The static internal hashmap to register all global instances in your applications.
          */    
         private static var _instances:HashMap = new HashMap() ;
-
+        
         /**
          * Internal HashMap reference.
          */

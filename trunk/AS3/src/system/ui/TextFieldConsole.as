@@ -68,7 +68,7 @@ package system.ui
 
         /**
          * Appends the message format and add newline character.
-         */        
+         */
         public override function writeLine( ...messages ):void
         {
             var msg:String = _formatMessage( messages ) ;

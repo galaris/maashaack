@@ -35,18 +35,18 @@
 
 package system.data
 {
-    import system.data.Map;	
+    import system.data.Map;    
 
     /**
-	 * Defines a map that allows bidirectional lookup between key and values.
-	 */
-	public interface BidiMap extends Map
-	{
-		
-		/**
-		 * Gets a view of this map where the keys and values are reversed.
-		 */
-		function inverseBidiMap():Map ;
-		
-	}
+     * Defines a map that allows bidirectional lookup between key and values.
+     */
+    public interface BidiMap extends Map
+    {
+        
+        /**
+         * Gets a view of this map where the keys and values are reversed.
+         */
+        function inverseBidiMap():Map ;
+        
+    }
 }
