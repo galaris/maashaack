@@ -35,25 +35,25 @@
 
 package system.data
 {
-    import system.Sortable;	
+    import system.Sortable;    
 
     /**
-	 * Defines a type of Bag that maintains a sorted order among its unique representative members.
-	 */	
-	public interface SortedBag extends Bag, Sortable
-	{
-	
-		/**
-		 * Returns the first (lowest) member.
-		 * @return the first (lowest) member.
-		 */
-		function first():* ;
-	
-		/**
-		 * Returns the last (highest) member.
-		 * @return the last (highest) member.
-		 */
-		function last():* ;
-		
-	}
+     * Defines a type of Bag that maintains a sorted order among its unique representative members.
+     */    
+    public interface SortedBag extends Bag, Sortable
+    {
+    
+        /**
+         * Returns the first (lowest) member.
+         * @return the first (lowest) member.
+         */
+        function first():* ;
+    
+        /**
+         * Returns the last (highest) member.
+         * @return the last (highest) member.
+         */
+        function last():* ;
+        
+    }
 }

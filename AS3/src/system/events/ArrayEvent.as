@@ -47,55 +47,54 @@ package system.events
      * trace( e.array ) ; // 2,3,4
      * </pre>
      */
-	public class ArrayEvent extends BasicEvent 
-	{
+    public class ArrayEvent extends BasicEvent 
+    {
         
-		/**
-		 * Creates a new <code class="prettyprint">ArrayEvent</code> instance.
-		 * @param type the string type of the instance. 
-		 * @param ar the array object of this event. 
-		 * @param target the target of the event.
-		 * @param context the optional context object of the event.
-		 * @param bubbles indicates if the event is a bubbling event.
-		 * @param cancelable indicates if the event is a cancelable event.
-		 * @param time this optional parameter is used in the eden deserialization to copy the timestamp value of this event.
-	 	 */
-		public function ArrayEvent( type:String , ar:Array = null , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
-		{
-			super(type, target, context, bubbles, cancelable, time) ;
-			_ar = ar ;
-		}
-        
-		/**
-		 * Returns the shallow copy of this event.
-		 * @return the shallow copy of this event.
-		 */
-		public override function clone():Event 
-		{
-			return new ArrayEvent( type, array, target, context) ;
-		}
-		
         /**
-    	 * Determinates the Array reference of this custom event.
-    	 */
-    	public function get array():Array
-	    {
-    		return _ar ;	
-    	}
+         * Creates a new <code class="prettyprint">ArrayEvent</code> instance.
+         * @param type the string type of the instance. 
+         * @param ar the array object of this event. 
+         * @param target the target of the event.
+         * @param context the optional context object of the event.
+         * @param bubbles indicates if the event is a bubbling event.
+         * @param cancelable indicates if the event is a cancelable event.
+         * @param time this optional parameter is used in the eden deserialization to copy the timestamp value of this event.
+         */
+        public function ArrayEvent( type:String , ar:Array = null , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
+        {
+            super(type, target, context, bubbles, cancelable, time) ;
+            _ar = ar ;
+        }
+        
+        /**
+         * Returns the shallow copy of this event.
+         * @return the shallow copy of this event.
+         */
+        public override function clone():Event 
+        {
+            return new ArrayEvent( type, array, target, context) ;
+        }
+        
+        /**
+         * Determinates the Array reference of this custom event.
+         */
+        public function get array():Array
+        {
+            return _ar ;    
+        }
         
         /**
          * @private
          */
         public function set array( ar:Array ):void
         {
-            _ar = ar ;	
+            _ar = ar ;    
         }
         
         /**
          * The internal array instance.
          */
-		private var _ar:Array ;	
+        private var _ar:Array ;    
         
     }
-		
 }

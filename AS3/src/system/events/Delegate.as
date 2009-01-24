@@ -148,7 +148,7 @@ package system.events
         {
             Delegate.create.apply( this, [_s].concat([_m], [].concat(e, _a)) )() ;
         }
-
+        
         /**
          * Run the proxy method in the provided context. 
          */
@@ -165,7 +165,7 @@ package system.events
          * @private
          */
         private var _m:Function ;
-
+        
         /**
          * @private
          */

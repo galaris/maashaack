@@ -40,57 +40,57 @@ package system.events
     import flash.events.EventDispatcher;    
 
     /**
-	 * This abstract class provides all basic methods of the system.events.EventDispatcher.
-	 */
-	public class InternalDispatcher extends flash.events.EventDispatcher implements IEventDispatcher
-	{
-		
-		/**
-		 * Creates a new InternalDispatcher instance.
-		 */
-		public function InternalDispatcher( target:IEventDispatcher = null )
-		{
-			super( target );
+     * This abstract class provides all basic methods of the system.events.EventDispatcher.
+     */
+    public class InternalDispatcher extends flash.events.EventDispatcher implements IEventDispatcher
+    {
+        
+        /**
+         * Creates a new InternalDispatcher instance.
+         */
+        public function InternalDispatcher( target:IEventDispatcher = null )
+        {
+            super( target );
             this.target = (target == null) ? this : target ;
-		}
-
+        }
+        
         /**
          * Indicates the optional target reference of the instance.
          */
-        public var target:IEventDispatcher ;		
- 		
- 		/**
- 		 * Dispatches an event into the event flow.
-		 * @param event The Event object that is dispatched into the event flow (a String or an Event object).
-		 * @param target the target of the event.
-		 * @param context the context of the event.
- 		 */
- 		public function fireEvent( event:* , target:*=null, context:*=null , bubbles:Boolean=false ):Boolean
- 		{
- 			if ( event is String )
- 			{
-				return super.dispatchEvent( new BasicEvent( event as String, target, context ) ); 				
- 			}
- 			else if ( event is Event )
- 			{
- 				if ( event is BasicEvent )
- 				{
- 					if ( target != null )
- 					{
- 						event.target = target ;
- 					}
- 					if ( context != null )
- 					{
- 						event.context = context ;	
- 					}
- 				}
- 				return super.dispatchEvent( event ) ;
- 			}
- 			else
- 			{
- 				return false ;	
- 			}
- 		}
+        public var target:IEventDispatcher ;        
+         
+         /**
+          * Dispatches an event into the event flow.
+         * @param event The Event object that is dispatched into the event flow (a String or an Event object).
+         * @param target the target of the event.
+         * @param context the context of the event.
+          */
+         public function fireEvent( event:* , target:*=null, context:*=null , bubbles:Boolean=false ):Boolean
+         {
+             if ( event is String )
+             {
+                return super.dispatchEvent( new BasicEvent( event as String, target, context ) );                 
+             }
+             else if ( event is Event )
+             {
+                 if ( event is BasicEvent )
+                 {
+                     if ( target != null )
+                     {
+                         event.target = target ;
+                     }
+                     if ( context != null )
+                     {
+                         event.context = context ;    
+                     }
+                 }
+                 return super.dispatchEvent( event ) ;
+             }
+             else
+             {
+                 return false ;    
+             }
+         }
         
         /**
          * Registers an <code class="prettyprint">system.events.EventListener</code> object with an <code class="prettyprint">system.events.EventDispatcher</code> object so that the listener receives notification of an event.
@@ -124,7 +124,7 @@ package system.events
                 func = (listener as EventListener).handleEvent ;
             }
             super.removeEventListener(type, func, useCapture) ;
-        }        
-        		
-	}
+        }
+   
+    }
 }
