@@ -104,9 +104,9 @@ package system.events
         }
                 
         /**
-         * Removes a global EventDispatcher instance.
+         * Removes a global EventDispatcher singleton.
          */
-        public static function removeInstance(name:String=null):Boolean 
+        public static function removeInstance( name:String = null ):Boolean 
         {
             if( name == null ) 
             {
