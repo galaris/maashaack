@@ -44,11 +44,9 @@ package system
      */
     public class Char
     {
-    	
-    	/**
-    	 * @private
-    	 */
         private var _c:String;
+        
+        private static var _ch:Char = new Char( "" ); //char reused in static methods
         
         /**
          * The "null" unicode character.
@@ -69,7 +67,7 @@ package system
          * The "end of test" unicode character.
          */        
         public static const ETX:Char  = new Char( "\u0003" );
-
+        
         /**
          * The "end of transmission" unicode character.
          */        
@@ -382,7 +380,6 @@ package system
          */
         public static const tilde:Char = new Char( "~" ); 
         
-        //////
         
         /**
          * The Array representation of all UTF8 controls characters.
@@ -425,14 +422,14 @@ package system
         
         public static function isASCII( c:String, index:uint = 0, extended:Boolean = false ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isASCII( extended );
+            _ch.value = c.charAt( index );
+            return _ch.isASCII( extended );
         }
         
         public static function isControl( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isControl();
+            _ch.value = c.charAt( index );
+            return _ch.isControl();
         }
         
         /**
@@ -440,26 +437,26 @@ package system
          */
         public static function isDigit( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isDigit();
+            _ch.value = c.charAt( index );
+            return _ch.isDigit();
         }
         
         /**
          * Indicates if the specified character is an hexadecimal digit character.
-         */        
+         */
         public static function isHexDigit( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isHexDigit();
+            _ch.value = c.charAt( index );
+            return _ch.isHexDigit();
         }
         
         /**
          * Indicates if the specified character is a letter.
-         */          
+         */
         public static function isLetter( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isLetter();
+            _ch.value = c.charAt( index );
+            return _ch.isLetter();
         }
         
         /**
@@ -467,8 +464,8 @@ package system
          */
         public static function isLetterOrDigit( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isLetterOrDigit();
+            _ch.value = c.charAt( index );
+            return _ch.isLetterOrDigit();
         }
         
         /**
@@ -476,8 +473,8 @@ package system
          */
         public static function isLower( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isLower();
+            _ch.value = c.charAt( index );
+            return _ch.isLower();
         }
         
         /**
@@ -485,58 +482,82 @@ package system
          */        
         public static function isSymbol( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isSymbol();
+            _ch.value = c.charAt( index );
+            return _ch.isSymbol();
         }
         
         /**
          * Indicates if the specified character is a unicode char.
-         */         
+         */
         public static function isUnicode( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isUnicode();
+            _ch.value = c.charAt( index );
+            return _ch.isUnicode();
         }
         
         /**
          * Indicates if the specified character is a upper char.
-         */          
+         */
         public static function isUpper( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isUpper();
+            _ch.value = c.charAt( index );
+            return _ch.isUpper();
         }
         
         
         /**
          * Indicates if the specified character is a whitespace char.
-         */          
+         */
         public static function isWhiteSpace( c:String, index:uint = 0 ):Boolean
         {
-            var ch:Char = new Char( c, index );
-            return ch.isWhiteSpace();
+            _ch.value = c.charAt( index );
+            return _ch.isWhiteSpace();
         }
+        
+        public function get code():Number
+        {
+            return _c.charCodeAt( 0 );
+        }
+        
+        public function set code( num:Number ):void
+        {
+            _c = String.fromCharCode( num );
+        }
+        
+        public function get value():String
+        {
+            return _c;
+        }
+        
+        public function set value( str:String ):void
+        {
+            _c = str.charAt( 0 );
+        }
+        
         
         /**
          * Indicates if the character is an ASCII character.
          * @param extended Indicates if the method test an extented ASCII character.
-         */        
+         */
         public function isASCII( extended:Boolean = false ):Boolean
         {
             var max:uint = 128;
+            
             if( extended )
             {
                 max = 255;
             }
+            
             return _c.charCodeAt( 0 ) < max ;
         }
         
         /**
          * Indicates if the character is a control representation.
-         */         
+         */
         public function isControl():Boolean
         {
-        	var l:int = controls.length ;
+            var l:int = controls.length;
+            
             for( var i:int = 0; i < l ; i++ )
             {
                 if( _c == controls[i].toString() )
@@ -544,12 +565,13 @@ package system
                     return true;
                 }
             }
+            
             return false;
         }
         
         /**
          * Indicates if the character is a digit representation.
-         */  
+         */
         public function isDigit():Boolean
         {
             return ("0" <= _c) && (_c <= "9") ;
@@ -557,7 +579,7 @@ package system
         
         /**
          * Indicates if the character is a hexadecimal digit representation.
-         */     
+         */
         public function isHexDigit():Boolean
         {
             return isDigit() || (("A" <= _c) && (_c <= "F")) || (("a" <= _c) && (_c <= "f")) ;
@@ -573,7 +595,7 @@ package system
         
         /**
          * Indicates if the character is a letter or a digit.
-         */     
+         */
         public function isLetterOrDigit():Boolean
         {
             return isLetter() || isDigit();
@@ -589,10 +611,11 @@ package system
         
         /**
          * Indicates if the character is a symbol.
-         */     
+         */
         public function isSymbol():Boolean
         {
-        	var l:int = symbols.length ;
+            var l:int = symbols.length;
+            
             for( var i:int = 0; i<l ; i++ )
             {
                 if( _c == symbols[i].toString() )
@@ -600,6 +623,7 @@ package system
                     return true;
                 }
             }
+            
             return false;
         }
         
@@ -629,15 +653,17 @@ package system
                we should refactore Strings
                to separate white spaces, separatores, etc.
             */
-            var ws:Array = Strings.whiteSpaceChars ;
-            var le:int   = ws.length ;
-            for( var i:int =0 ; i < le ; i++ )
+            var ws:Array = Strings.whiteSpaceChars;
+            var l:int    = ws.length;
+            
+            for( var i:int =0 ; i < l ; i++ )
             {
                 if( _c == ws[i] )
                 {
                     return true;
                 }
             }
+            
             return false;
         }
         
@@ -651,7 +677,7 @@ package system
         
         /**
          * Converts the character in this hexadecimal code number representation.
-         */        
+         */
         public function toHexadecimal():String
         {
             var hex:String = _c.charCodeAt( 0 ).toString( 16 );
@@ -664,10 +690,12 @@ package system
         public function toOctal():String
         {
             var oct:String = _c.charCodeAt( 0 ).toString( 8 );
+            
             while( oct.length < 3 )
             {
                 oct = "0"+oct;
             }
+            
             return oct;
         }
         
