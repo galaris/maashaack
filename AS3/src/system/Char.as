@@ -412,6 +412,39 @@ package system
         }
         
         /**
+         * Determinates the code of the character.
+         */
+        public function get code():Number
+        {
+            return _c.charCodeAt( 0 );
+        }
+        
+        /**
+         * @private
+         */
+        public function set code( num:Number ):void
+        {
+            _c = String.fromCharCode( num );
+        }
+        
+        /**
+         * Determinates the value of the character.
+         */        
+        public function get value():String
+        {
+            return _c;
+        }
+        
+        /**
+         * @private
+         */
+        public function set value( str:String ):void
+        {
+            _c = str.charAt( 0 );
+        }
+                
+        
+        /**
          * Returns the Char representation of the specified Number value.
          * @return the Char representation of the specified Number value.
          */
@@ -513,27 +546,7 @@ package system
             _ch.value = c.charAt( index );
             return _ch.isWhiteSpace();
         }
-        
-        public function get code():Number
-        {
-            return _c.charCodeAt( 0 );
-        }
-        
-        public function set code( num:Number ):void
-        {
-            _c = String.fromCharCode( num );
-        }
-        
-        public function get value():String
-        {
-            return _c;
-        }
-        
-        public function set value( str:String ):void
-        {
-            _c = str.charAt( 0 );
-        }
-        
+
         
         /**
          * Indicates if the character is an ASCII character.
