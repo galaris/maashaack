@@ -130,6 +130,14 @@ package system.data.iterators
         {
             return _currentPage ;
         }
+        
+        /**
+         * Seek the iterator in the first page of this object.
+         */
+        public function firstPage():void
+        {
+            seek( 1 ) ;
+        }        
 
         /**
          * Returns the step size of this PageByPageIterator.
@@ -172,8 +180,9 @@ package system.data.iterators
          */
         public function lastPage():void
         {
-            seek( _pageCount + 1 ) ;
+            seek( _pageCount ) ;
         }
+        
         /**
          * Returns the next Array page of elements or the next element in the Array if the getStepSize() value is 1.
          * @return the next Array page of elements or the next element in the Array if the getStepSize() value is 1.
