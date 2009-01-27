@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -38,6 +38,7 @@ package system.data.iterators
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.console;
     import system.data.Iterator;
     import system.data.OrderedIterator;
     
@@ -125,6 +126,18 @@ package system.data.iterators
             assertEquals(PageByPageIterator.DEFAULT_STEP, 1, "The PageByPageIterator.DEFAULT_STEP value isn't valid.") ;     
         }          
         
+        public function testCurrent():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
+            assertUndefined( it.current() , "01 - current failed." ) ;
+            it.next() ;
+            ArrayAssert.assertEquals( it.current() , [1,2], "02 - current failed." ) ;
+            it.seek(3) ;
+            ArrayAssert.assertEquals( it.current() , [5,6], "03 - current failed." ) ;
+            it.previous() ;
+            ArrayAssert.assertEquals( it.current() , [3,4], "04 - current failed." ) ;
+        }        
+        
         public function testCurrentPage():void
         {
             var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
@@ -169,11 +182,19 @@ package system.data.iterators
             assertEquals( it.key() , 1, "02 - key() failed." ) ;
         }
         
+        public function testFirstPage():void
+        {
+            var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
+            it.firstPage() ;
+            assertEquals( it.key() , 1, "01 - firstPage() failed." ) ;
+            ArrayAssert.assertEquals( it.current() , [1,2], "02 - firstPage() failed." ) ;
+        }        
+        
         public function testLastPage():void
         {
             var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] , 2 ) ;
             it.lastPage() ;
-            assertEquals( it.key() , 4, "lastPage() failed." ) ;
+            assertEquals( it.key() , 3, "lastPage() failed." ) ;
         }
         
         public function testNext():void
@@ -200,16 +221,13 @@ package system.data.iterators
         public function testPrevious():void
         {
             i.lastPage() ;
-            
-            ArrayAssert.assertEquals  ( i.previous() , [5,6], "01 - previous() failed." ) ;
-            ArrayAssert.assertEquals  ( i.previous() , [3,4], "02 - previous() failed." ) ;
+            ArrayAssert.assertEquals ( i.previous() , [3,4] , "01 - previous() failed." ) ;
             ArrayAssert.assertEquals  ( i.previous() , [1,2], "03 - previous() failed." ) ;
-            
             i.reset() ;
-            
+
             var it:PageByPageIterator = new PageByPageIterator( [1,2,3,4,5,6] ) ;
             it.lastPage() ;
-            assertEquals ( it.previous() , 6, "04 - previous() failed." ) ;     
+            assertEquals ( it.previous() , 5, "04 - previous() failed." ) ;     
         }
         
         public function testRemove():void
