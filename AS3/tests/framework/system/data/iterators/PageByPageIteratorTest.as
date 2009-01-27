@@ -38,7 +38,6 @@ package system.data.iterators
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.console;
     import system.data.Iterator;
     import system.data.OrderedIterator;
     
