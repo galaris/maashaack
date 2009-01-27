@@ -77,6 +77,8 @@ package system.data.iterators
      * next() ; // > 7,8 : 4
      * next() ; // > 1,2 : 1
      * prev() ; // > 7,8 : 4
+     * 
+     * trace( "> current : " + it.current() ) ;
      * </pre>
      */
     public class PageByPageIterator implements OrderedIterator
@@ -110,6 +112,15 @@ package system.data.iterators
          * The default step value in all the PageByPageIterators.
          */
         public static var DEFAULT_STEP:Number = 1 ;
+ 
+        /**
+         * Returns the current value.
+         * @return the current value.
+         */
+        public function current():*
+        {
+            return _current ;
+        }
  
         /**
          * Returns the current page value.
@@ -170,15 +181,16 @@ package system.data.iterators
         public function next():*
         {
             var index:Number = _step * _key++ ;
-            _currentPage = _key ;
+            _currentPage     = _key ;
             if (_step > 1)
             {
-                return _data.slice(index, index + _step) ;
+                _current = _data.slice(index, index + _step) ;
             }
             else
             {
-                return _data[index] ;
+                _current = _data[index] ;
             }
+            return _current ;
         }
 
         /**
@@ -201,12 +213,13 @@ package system.data.iterators
             var index:Number = _step * (_key-1) ;
             if (_step > 1)
             {
-                return _data.slice(index, index + _step) ;
+                _current = _data.slice(index, index + _step) ;
             }
             else
             {
-                return _data[index] ;    
+                _current = _data[index] ;    
             }
+            return _current ;
         }
 
         /**
@@ -223,8 +236,9 @@ package system.data.iterators
          */
         public function reset():void
         {
-            _key = 0 ;
+            _key         = 0 ;
             _currentPage = 0 ;
+            _current     = undefined ;
         }
 
         /**
@@ -234,30 +248,45 @@ package system.data.iterators
         {
             _key = Mathematics.clamp( position++, 0, _pageCount+1 ) ;
             _currentPage = _key ;
+            var index:Number = _step * (_key-1) ;
+            if (_step > 1)
+            {
+                _current = _data.slice(index, index + _step) ;
+            }
+            else
+            {
+                _current = _data[index] ;    
+            }
         }
         
         /**
-         * The currentPage value.
+         * @private
+         */
+        private var _current:* ;
+        
+        /**
+         * @private
          */
         private var _currentPage:Number ;
 
         /**
-         * The data to iterate.
+         * @private
          */
         private var _data:Array ;
 
         /**
-         * The current key of the iterator. 
+         * @private
          */
         private var _key:int ;
     
         /**
-         * Count of pages.
+         * @private
          */
         private var _pageCount:Number ;
         
         /**
          * The numbers of lines in a page.
+         * @private
          */
         private var _step:Number ;
         
