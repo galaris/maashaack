@@ -49,7 +49,7 @@ package system.data.iterators
      * 
      * var ar:Array = [1, 2, 3, 4, 5, 6, 7, 8] ;
      * 
-     * var it:PageByPageIterator = new PageByPageIterator(2, ar) ;
+     * var it:PageByPageIterator = new PageByPageIterator( a, 2 ) ;
      * 
      * var next:Function = function():void
      * {
