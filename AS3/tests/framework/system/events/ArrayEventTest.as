@@ -62,7 +62,7 @@ package system.events
             assertNotNull( e is BasicEvent, "01 - ArrayEvent must extends the BasicEvent class.") ;
         }          
         
-        public function testArray():void
+        public function testArrayProperty():void
         {
             var e:ArrayEvent = new ArrayEvent( "type" ) ;
             assertNull( e.array , "01 - ArrayEvent array property failed.") ;  
@@ -74,7 +74,7 @@ package system.events
         {
             var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
             var c:ArrayEvent = e.clone() as ArrayEvent ;
-            assertNotNull( c is BasicEvent, "01 - ArrayEvent clone() failed.") ;
+            assertNotNull( c , "01 - ArrayEvent clone() failed.") ;
             ArrayAssert.assertEquals( e.array , c.array, "02 - ArrayEvent clone() failed.") ;  
         }              
         
