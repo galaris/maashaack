@@ -51,7 +51,7 @@ package system.events
             // suite.addTestSuite( CoreEventDispatcherTest ) ;
             // suite.addTestSuite( DateEventTest ) ;
             suite.addTestSuite( DelegateTest ) ;
-            // suite.addTestSuite( DynamicEventTest ) ;
+            suite.addTestSuite( DynamicEventTest ) ;
             suite.addTestSuite( EventDispatcherTest ) ;
             suite.addTestSuite( EventListenerTest ) ;
             suite.addTestSuite( EventListenerBatchTest ) ;
