@@ -39,33 +39,31 @@ package system.events
     import flash.events.Event;    
 
     /**
-     * ﻿The <code class="prettyprint">DynamicEvent</code> to dispatch a dynamic event with dynamic properties.
+     * The <code class="prettyprint">DateEvent</code> to dispatch an event who contains a specific Date context.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.events.DynamicEvent ;
-     * 
-     * var e:DynamicEvent = new DynamicEvent("change") ;
-     * 
-     * e.test = "hello world" ; // dynamic property
-     * 
-     * trace( e.test ) ; // hello world
+     * import system.events.DateEvent ;
+     * var e:DateEvent = new DateEvent("change", new Date()) ;
+     * trace( e.date ) ; // true
      * </pre>
      */
-    public dynamic class DynamicEvent extends BasicEvent 
+    public class DateEvent extends BasicEvent 
     {
         
         /**
-         * Creates a new <code class="prettyprint">DynamicEvent</code> instance.
+         * Creates a new <code class="prettyprint">DateEvent</code> instance.
          * @param type the string type of the instance. 
+         * ﻿@param date the Date object of this event.
          * @param target the target of the event.
          * @param context the optional context object of the event.
          * @param bubbles indicates if the event is a bubbling event.
          * @param cancelable indicates if the event is a cancelable event.
          * @param time this optional parameter is used in the eden deserialization to copy the timestamp value of this event.
          */
-        public function DynamicEvent( type:String , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
+        public function DateEvent( type:String , date:Date = null , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
         {
             super(type, target, context, bubbles, cancelable, time) ;
+            _date = date ;
         }
         
         /**
@@ -74,8 +72,29 @@ package system.events
          */
         public override function clone():Event 
         {
-            return new DynamicEvent( type , target , context ) ;
+            return new DateEvent( type, date, target, context) ;
         }
-    
+        
+        /**
+         * Determinates the Date value of this custom event.
+         */
+        public function get date():Date
+        {
+            return _date ;    
+        }
+        
+        /**
+         * @private
+         */
+        public function set date( d:Date ):void
+        {
+            _date = d ;    
+        }
+        
+        /**
+         * @private
+         */
+        private var _date:Date ;    
+        
     }
 }

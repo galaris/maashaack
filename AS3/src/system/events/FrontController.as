@@ -66,7 +66,58 @@ package system.events
             _map        = new ArrayMap() ;
             _dispatcher = target || EventDispatcher.getInstance( channel ) ; 
         }
-
+        
+        /**
+         * Add a new entry into the FrontController.
+         * @param eventName:String
+         * @param listener:EventListener or listener:Function
+         * @throws ArgumentError If the 'eventName' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
+         * @throws ArgumentError If the 'listener' object in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
+         */
+        public function add( eventName:String , listener:* ):void 
+        {
+            if ( eventName == null )
+            {
+                throw new ArgumentError( "FrontController.insert() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+            }
+            if ( listener == null )
+            {
+                throw new ArgumentError( "FrontController.insert() method failed with the event type '" + eventName + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
+            }
+            _map.put.apply( this, arguments ) ;
+            _dispatcher.registerEventListener( eventName, listener ) ;
+        }
+        
+        /**
+         * Adds a new EventListener into an EventListenerBatch in the FrontController.
+         * If this <code class="prettyprint">listener</code> argument is 'null' or 'undefined' and if the <code class="prettyprint">eventName</code> argument isn't register with an EventListenerBatch in the FrontController, 
+         * an empty EventListenerBatch is created and register in the FrontController with the specified 'eventName'.
+         * @param eventName The name of the event type.
+         * @param listener (optional) The <code class="prettyprint">EventListener</code> mapped in the FrontController with the specified event type (This listener is added in an EventListenerBatch). 
+         * @throws ArgumentError If the 'eventName' value in argument not must be 'null' or 'undefined'.
+         */
+        public function insertBatch( eventName:String, listener:EventListener ):void
+        {
+            if ( eventName == null )
+            {
+                throw new ArgumentError( this + " insertBatch method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+            }
+            if ( _map.containsKey(eventName) )
+            {
+                if ( _map.get( eventName ) is EventListenerBatch && listener != null )
+                {
+                    ( _map.get( eventName ) as EventListenerBatch ).add( listener ) ;
+                    return ;                
+                }
+            }
+            var batch:EventListenerBatch = new EventListenerBatch() ;
+            if ( listener != null )
+            {
+                batch.add( listener ) ;
+            }
+            add( eventName , batch ) ;
+        }
+        
         /**
          * Removes all entries in the FrontController. 
          */
@@ -158,58 +209,7 @@ package system.events
         {
             return _map.get(eventName) ;
         }
-    
-        /**
-         * Add a new entry into the FrontController.
-         * @param eventName:String
-         * @param listener:EventListener or listener:Function
-         * @throws ArgumentError If the 'eventName' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
-         * @throws ArgumentError If the 'listener' object in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
-         */
-        public function insert(eventName:String, listener:* ):void 
-        {
-            if ( eventName == null )
-            {
-                throw new ArgumentError( "FrontController.insert() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
-            }
-            if ( listener == null )
-            {
-                throw new ArgumentError( "FrontController.insert() method failed with the event type '" + eventName + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
-            }
-            _map.put.apply( this, arguments ) ;
-            _dispatcher.registerEventListener( eventName, listener ) ;
-        }
-        
-        /**
-         * Adds a new EventListener into an EventListenerBatch in the FrontController.
-         * If this <code class="prettyprint">listener</code> argument is 'null' or 'undefined' and if the <code class="prettyprint">eventName</code> argument isn't register with an EventListenerBatch in the FrontController, 
-         * an empty EventListenerBatch is created and register in the FrontController with the specified 'eventName'.
-         * @param eventName The name of the event type.
-         * @param listener (optional) The <code class="prettyprint">EventListener</code> mapped in the FrontController with the specified event type (This listener is added in an EventListenerBatch). 
-         * @throws ArgumentError If the 'eventName' value in argument not must be 'null' or 'undefined'.
-         */
-        public function insertBatch( eventName:String, listener:EventListener ):void
-        {
-            if ( eventName == null )
-            {
-                throw new ArgumentError( this + " insertBatch method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
-            }
-            if ( _map.containsKey(eventName) )
-            {
-                if ( _map.get( eventName ) is EventListenerBatch && listener != null )
-                {
-                    ( _map.get( eventName ) as EventListenerBatch ).add( listener ) ;
-                    return ;                
-                }
-            }
-            var batch:EventListenerBatch = new EventListenerBatch() ;
-            if ( listener != null )
-            {
-                batch.add( listener ) ;
-            }
-            insert( eventName , batch ) ;
-        }
-        
+                
         /**
          * Indicates if the specified EventListener or listener registered with the 'eventName' value in argument is an EventListenerBatch instance.
          * @return <code class="prettyprint">true</code> if the specified EventListener or listener function registered with the 'eventName' value in argument is an EventListenerBatch instance.

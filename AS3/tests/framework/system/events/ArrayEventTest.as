@@ -59,7 +59,7 @@ package system.events
         public function testInherit():void
         {
             var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
-            assertNotNull( e is BasicEvent, "01 - ArrayEvent must extends the BasicEvent class.") ;
+            assertTrue( e is BasicEvent, "01 - ArrayEvent must extends the BasicEvent class.") ;
         }          
         
         public function testArrayProperty():void
