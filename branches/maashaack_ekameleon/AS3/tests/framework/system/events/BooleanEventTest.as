@@ -45,5 +45,51 @@ package system.events
         {
             super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var e:BooleanEvent ;
+            
+            e = new BooleanEvent( "type" , true ) ;
+            assertNotNull( e , "01-01 - BooleanEvent constructor failed.") ;
+            assertTrue( e.boolean, "01-02 - BooleanEvent constructor failed.") ;
+            
+            e = new BooleanEvent( "type" , false ) ;
+            assertNotNull( e , "02-01 - BooleanEvent constructor failed.") ;
+            assertFalse( e.boolean, "02-02 - BooleanEvent constructor failed.") ; 
+            
+            e = new BooleanEvent( "type" ) ;
+            assertNotNull( e , "03-01 - BooleanEvent constructor failed.") ;
+            assertFalse( e.boolean, "03-02 - BooleanEvent constructor failed.") ;             
+            
+        }        
+        
+        public function testInherit():void
+        {
+            var e:BooleanEvent = new BooleanEvent( "type" ) ;
+            assertNotNull( e is BasicEvent, "01 - BooleanEvent must extends the BasicEvent class.") ;
+        }          
+        
+        public function testBooleanProperty():void
+        {
+            var e:BooleanEvent = new BooleanEvent( "type" ) ;
+            
+            assertFalse( e.boolean , "01 - BooleanEvent boolean property failed.") ;  
+            
+            e.boolean = true ;
+            assertTrue( e.boolean , "02 - BooleanEvent boolean property failed.") ;  
+            
+            e.boolean = false ;
+            assertFalse( e.boolean , "03 - BooleanEvent boolean property failed.") ;  
+        }        
+        
+        public function testClone():void
+        {
+            var e:BooleanEvent = new BooleanEvent( "type" , true) ;
+            var c:BooleanEvent = e.clone() as BooleanEvent ;
+            assertNotNull( c , "01 - BooleanEvent clone() failed.") ;
+            assertEquals( e.boolean , c.boolean, "02 - BooleanEvent clone() failed.") ;  
+        }         
+        
     }
 }
