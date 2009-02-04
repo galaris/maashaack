@@ -36,38 +36,46 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    
-    public class DynamicEventTest extends TestCase 
-    {
+    import flash.events.Event;    
 
-        public function DynamicEventTest(name:String = "")
+    /**
+     * ﻿The <code class="prettyprint">DynamicEvent</code> to dispatch a dynamic event with dynamic properties.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.events.DynamicEvent ;
+     * 
+     * var e:DynamicEvent = new DynamicEvent("change") ;
+     * 
+     * e.test = "hello world" ; // dynamic property
+     * 
+     * trace( e.test ) ; // hello world
+     * </pre>
+     */
+    public dynamic class DynamicEvent extends BasicEvent 
+    {
+        
+        /**
+         * Creates a new <code class="prettyprint">DynamicEvent</code> instance.
+         * @param type the string type of the instance. 
+         * @param target the target of the event.
+         * @param context the optional context object of the event.
+         * @param bubbles indicates if the event is a bubbling event.
+         * @param cancelable indicates if the event is a cancelable event.
+         * @param time this optional parameter is used in the eden deserialization to copy the timestamp value of this event.
+         */
+        public function DynamicEvent( type:String , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
         {
-            super( name );
+            super(type, target, context, bubbles, cancelable, time) ;
         }
         
-        public function testConstructor():void
+        /**
+         * Returns the shallow copy of this event.
+         * @return the shallow copy of this event.
+         */
+        public override function clone():Event 
         {
-            var e:DynamicEvent = new DynamicEvent( "type" ) ;
-            assertNotNull( e , "DynamicEvent constructor failed.") ;
-        }        
-        
-        public function testInherit():void
-        {
-            var e:DynamicEvent = new DynamicEvent( "type" ) ;
-            assertNotNull( e is BasicEvent, "DynamicEvent must extends the BasicEvent class.") ;
-        }          
-        
-        public function testIsDynamic():void
-        {
-            assertTrue( Reflection.getClassInfo(DynamicEvent).isDynamic() , "DynamicEvent must be a dynamic class") ;
-        }        
-        
-        public function testClone():void
-        {
-            var e:DynamicEvent = new DynamicEvent( "type" ) ;
-            var c:DynamicEvent = e.clone() as DynamicEvent ;
-            assertNotNull( c , "DynamicEvent clone() failed.") ;
-        } 
-        
+            return new DynamicEvent( type , target , context ) ;
+        }
+
     }
 }
