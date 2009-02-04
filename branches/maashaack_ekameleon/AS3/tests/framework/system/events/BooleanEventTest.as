@@ -67,7 +67,7 @@ package system.events
         public function testInherit():void
         {
             var e:BooleanEvent = new BooleanEvent( "type" ) ;
-            assertNotNull( e is BasicEvent, "01 - BooleanEvent must extends the BasicEvent class.") ;
+            assertTrue( e is BasicEvent, "01 - BooleanEvent must extends the BasicEvent class.") ;
         }          
         
         public function testBooleanProperty():void

@@ -54,7 +54,7 @@ package system.events
         public function testInherit():void
         {
             var e:DynamicEvent = new DynamicEvent( "type" ) ;
-            assertNotNull( e is BasicEvent, "DynamicEvent must extends the BasicEvent class.") ;
+            assertTrue( e is BasicEvent, "DynamicEvent must extends the BasicEvent class.") ;
         }          
         
         public function testIsDynamic():void

@@ -49,7 +49,7 @@ package system.events
             suite.addTestSuite( BasicEventTest ) ;
             suite.addTestSuite( BooleanEventTest ) ;
             // suite.addTestSuite( CoreEventDispatcherTest ) ;
-            // suite.addTestSuite( DateEventTest ) ;
+            suite.addTestSuite( DateEventTest ) ;
             suite.addTestSuite( DelegateTest ) ;
             suite.addTestSuite( DynamicEventTest ) ;
             suite.addTestSuite( EventDispatcherTest ) ;

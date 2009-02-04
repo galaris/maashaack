@@ -36,8 +36,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-        
+    import buRRRn.ASTUce.framework.DateAssert;
+    import buRRRn.ASTUce.framework.TestCase;    
+
     public class DateEventTest extends TestCase 
     {
 
@@ -45,5 +46,47 @@ package system.events
         {
             super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var e:DateEvent ;
+            
+            var d:Date = new Date() ;
+            
+            e = new DateEvent( "type" , d ) ;
+            assertNotNull( e , "01-01 - DateEvent constructor failed.") ;
+            
+            DateAssert.assertEquals( e.date, d, "01-02 - DateEvent constructor failed.") ;
+            
+        }        
+        
+        public function testInherit():void
+        {
+            var e:DateEvent = new DateEvent( "type" ) ;
+            assertNotNull( e is BasicEvent, "01 - DateEvent must extends the BasicEvent class.") ;
+        }          
+        
+        public function testDateProperty():void
+        {
+        	var e:DateEvent ;
+            var d:Date = new Date() ;
+            
+            e = new DateEvent( "type" ) ;
+            
+            assertNotNull( e is BasicEvent, "01 - DateEvent must extends the BasicEvent class.") ;
+            
+            e.date = d ;
+            DateAssert.assertEquals( e.date, d, "02 - DateEvent date property failed.") ;
+        }        
+        
+        public function testClone():void
+        {
+        	var d:Date = new Date() ;
+            var e:DateEvent = new DateEvent( "type" , d) ;
+            var c:DateEvent = e.clone() as DateEvent ;
+            assertNotNull( c , "01 - DateEvent clone() failed.") ;
+            assertEquals( e.date , c.date, "02 - DateEvent clone() failed.") ;  
+        }           
+        
     }
 }
