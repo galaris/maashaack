@@ -47,6 +47,7 @@ package system.events
         
         /**
          * Creates a new InternalDispatcher instance.
+         * @param target The target object for events dispatched to the EventDispatcher object. This parameter is used when the EventDispatcher instance is aggregated by a class that implements IEventDispatcher; it is necessary so that the containing object can be the target for events. Do not use this parameter in simple cases in which a class extends EventDispatcher.
          */
         public function InternalDispatcher( target:IEventDispatcher = null )
         {

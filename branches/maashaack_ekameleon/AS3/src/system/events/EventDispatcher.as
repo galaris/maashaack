@@ -50,7 +50,7 @@ package system.events
         public static const DEFAULT_SINGLETON_CHANNEL:String = "__default__" ;
         
         /**
-         * Indicates the channel of the display.
+         * Indicates the channel of the dispatcher.
          */
         public function get channel():String
         {
@@ -82,13 +82,22 @@ package system.events
         {
             instances.clear() ;
         }
+        
+        /**
+         * Returns the Array representation of all channels register in the EventDispatcher factory or <code class="prettyprint">null</code> if no singletons are registered.
+         * @return the Array representation of all channels register in the EventDispatcher factory or <code class="prettyprint">null</code> if no singletons are registered.
+         */
+        public static function getChannels():Array
+        {
+        	return ( instances.size() > 0 ) ? instances.getKeys() : null ; 
+        }
 
         /**
          * Creates and returns a singleton EventDispatcher reference specified by the passed-in name identifier.
          * @param name The name of the singleton reference to return or create (If this value is Null, the DEFAULT_SINGLETON_NAME static value is used).
          * @return The singleton EventDispatcher reference specified by the passed-in name identifier.
          */
-        public static function getInstance( channel:String=null ):EventDispatcher
+        public static function getInstance( channel:String = null ):EventDispatcher
         {
             if (channel == null) 
             {
@@ -105,6 +114,7 @@ package system.events
                 
         /**
          * Removes a global EventDispatcher singleton.
+         * @return <code class="prettyprint">true</code> if a singleton is removed in the EventDispatcher factory.
          */
         public static function removeInstance( name:String = null ):Boolean 
         {
