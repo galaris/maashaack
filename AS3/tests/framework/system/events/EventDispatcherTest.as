@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
+    import buRRRn.ASTUce.framework.ArrayAssert;    import buRRRn.ASTUce.framework.TestCase;                    
 
     public class EventDispatcherTest extends TestCase 
     {
@@ -63,7 +63,89 @@ package system.events
             var dispatcher:EventDispatcher = new EventDispatcher() ;
             assertTrue( dispatcher is IEventDispatcher , "EventDispatcher must implements the IEventDispatcher class.") ;
         }       
+
+        public function testChannel():void
+        {
+            var dispatcher:EventDispatcher = new EventDispatcher(null, "my_channel") ;
             
+            assertEquals( dispatcher.channel , "my_channel" , "01 - EventDispatcher channel failed.") ;
+        
+            dispatcher.channel = null ;
+            
+            assertNull( dispatcher.channel , "02 - EventDispatcher channel failed.") ;
+        
+            dispatcher.channel = "my_channel" ;
+        
+            assertEquals( dispatcher.channel , "my_channel" , "03 - EventDispatcher channel failed.") ;
+        }
+          
+        public function testContainsInstance():void
+        {
+            assertFalse( EventDispatcher.containsInstance("my_channel") , "01 - EventDispatcher containsInstance failed." );
+            
+            EventDispatcher.getInstance("my_channel1") ;
+            assertTrue( EventDispatcher.containsInstance("my_channel1") , "02 - EventDispatcher containsInstance failed." );
+            
+            EventDispatcher.getInstance("my_channel2") ;
+            assertTrue( EventDispatcher.containsInstance("my_channel2") , "03 - EventDispatcher containsInstance failed." );
+            
+            EventDispatcher.flush() ;
+        }
+        
+        public function testFlush():void
+        {
+            EventDispatcher.getInstance("my_channel1") ;
+            EventDispatcher.getInstance("my_channel2") ;
+            
+            EventDispatcher.flush() ;
+
+            assertFalse( EventDispatcher.containsInstance("my_channel") , "01 - EventDispatcher flush failed." );
+            assertFalse( EventDispatcher.containsInstance("my_channe2") , "02 - EventDispatcher flush failed." );
+        }
+        
+        public function testGetChannels():void
+        {
+        	assertNull( EventDispatcher.getChannels() , "01 - EventDispatcher getChannels failed if no singletons are registered in the factory." ) ;
+            EventDispatcher.getInstance("my_channel1") ;
+            EventDispatcher.getInstance("my_channel2") ;
+        	ArrayAssert.assertEquals( EventDispatcher.getChannels() , ["my_channel1", "my_channel2"] , "02 - EventDispatcher getChannels failed." ) ;
+        	EventDispatcher.flush() ;
+        }
+
+        public function testGetInstanceWithANullArgument():void
+        {
+            var d1:EventDispatcher = EventDispatcher.getInstance() ;
+            assertEquals( d1.channel , EventDispatcher.DEFAULT_SINGLETON_CHANNEL , "01 - EventDispatcher getInstance() failed with 0 argument.") ;
+            var d2:EventDispatcher = EventDispatcher.getInstance() ;
+            assertEquals( d1 , d2 , "02 - EventDispatcher getInstance() failed with 0 argument.") ;
+            EventDispatcher.flush() ;
+        }
+
+        public function testGetInstance():void
+        {
+            var d1:EventDispatcher = EventDispatcher.getInstance("channel1") ;
+            assertEquals( d1.channel , "channel1" , "01 - EventDispatcher getInstance('channel1') failed.") ;
+            var d2:EventDispatcher = EventDispatcher.getInstance("channel1") ;
+            assertEquals( d1 , d2 , "02 - EventDispatcher getInstance('channel1') failed.") ;
+            var d3:EventDispatcher = EventDispatcher.getInstance("channel2") ;
+            assertFalse( d1 == d3 , "03 - EventDispatcher getInstance('channel1') failed.") ;
+            EventDispatcher.flush() ;
+        }
+        
+        public function testRemoveInstance():void
+        {
+            
+            assertFalse(  EventDispatcher.removeInstance() , "01-01 - EventDispatcher removeInstance failed." );
+            EventDispatcher.getInstance() ;
+            assertTrue(  EventDispatcher.removeInstance() , "01-02 - EventDispatcher removeInstance failed." );
+            
+            assertFalse( EventDispatcher.removeInstance("channel1") , "02-01 - EventDispatcher removeInstance failed." );
+            EventDispatcher.getInstance("channel1") ;
+            assertTrue(  EventDispatcher.removeInstance("channel1") , "02-02 - EventDispatcher removeInstance failed." );
+
+            EventDispatcher.flush() ;
+        }
         
     }
+
 }

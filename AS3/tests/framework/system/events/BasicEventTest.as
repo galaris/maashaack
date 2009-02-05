@@ -51,7 +51,6 @@ package system.events
         public function testConstructor():void
         {
             var e:BasicEvent = new BasicEvent( "type" ) ;
-            
             assertNotNull( e , "BasicEvent constructor failed.") ;	
         }
         
