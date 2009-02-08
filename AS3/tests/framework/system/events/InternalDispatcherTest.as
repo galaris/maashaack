@@ -39,6 +39,7 @@ package system.events
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.events.EventDispatcher;
+    import system.events.mocks.MockEventListener;
     
     import flash.events.Event;
     import flash.events.EventDispatcher;    
@@ -86,21 +87,40 @@ package system.events
             assertEquals( dispatcher.target, target , "02 - InternalDispatcher target failed.") ;
         }  
         
-        public function testFireEvent():void
+        public function testFireEventNoCompatibleArgument():void
         {
-        	var dispatcher:InternalDispatcher ;
-        	dispatcher = new InternalDispatcher() ;
+            var dispatcher:InternalDispatcher = new InternalDispatcher() ;
+            assertFalse( dispatcher.fireEvent(2) , "01 - InternalDispatcher fireEvent failed with a no valid argument value.") ;
+            assertFalse( dispatcher.fireEvent(null) , "02 - InternalDispatcher fireEvent failed with a no valid argument value.") ;
+        }        
+        
+        public function testFireEventWithStringArgument():void
+        {
+        	var listener:MockEventListener = new MockEventListener() ;
         	
-        	assertTrue( dispatcher.fireEvent("fire") , "01 - InternalDispatcher fireEvent failed with a String event argument.") ;
+        	var dispatcher:InternalDispatcher = new InternalDispatcher() ;
+        	dispatcher.addEventListener("fire", listener.handleEvent ) ;
+       	
+            // 01 - one argument + first is a String
+            
+            listener.event = null ;
+
+            assertTrue( dispatcher.fireEvent("fire")  , "01 - InternalDispatcher fireEvent failed with a String event argument." ) ;
+            assertNotNull( listener.event             , "02 - InternalDispatcher fireEvent failed with a String event argument." ) ;
+            assertTrue( listener.event is BasicEvent  , "03 - InternalDispatcher fireEvent failed with a String event argument." ) ;        	
         	
-        	assertTrue( dispatcher.fireEvent(new Event("fire")) , "02 - InternalDispatcher fireEvent failed with an Event in the first argument.") ;
+        }
         	
-        	assertTrue( dispatcher.fireEvent(new Event("fire"), "target", "context") , "03 - InternalDispatcher fireEvent failed.") ;
-        	
-        	assertFalse( dispatcher.fireEvent(2) , "04 - InternalDispatcher fireEvent failed with a no String or no Event argument.") ;
-        	
-        	assertFalse( dispatcher.fireEvent(null) , "04 - InternalDispatcher fireEvent failed with a null value in argument.") ;
-        	
+        public function testFireEventWithEventArgument():void
+        {
+            var listener:MockEventListener    = new MockEventListener() ;
+            var dispatcher:InternalDispatcher = new InternalDispatcher() ;
+            var event:Event                   = new Event("fire") ;
+
+            dispatcher.addEventListener("fire", listener.handleEvent ) ;
+
+            assertTrue( dispatcher.fireEvent( event ) , "01 - InternalDispatcher fireEvent failed with an Event in the first argument.") ;
+        	assertEquals( listener.event , event , "02 - InternalDispatcher fireEvent failed with an Event in the first argument.") ;
         }
 
 //        public function testRegisterEventListener():void
