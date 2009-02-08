@@ -96,7 +96,7 @@ package system.events
          * @param listener (optional) The <code class="prettyprint">EventListener</code> mapped in the FrontController with the specified event type (This listener is added in an EventListenerBatch). 
          * @throws ArgumentError If the 'eventName' value in argument not must be 'null' or 'undefined'.
          */
-        public function insertBatch( eventName:String, listener:EventListener ):void
+        public function addBatch( eventName:String, listener:EventListener ):void
         {
             if ( eventName == null )
             {
@@ -171,6 +171,15 @@ package system.events
         {
             _instances.clear() ;
         }
+        
+        /**
+         * Returns the Array representation of all channels register in the FrontController factory or <code class="prettyprint">null</code> if no singletons are registered.
+         * @return the Array representation of all channels register in the FrontController factory or <code class="prettyprint">null</code> if no singletons are registered.
+         */
+        public static function getChannels():Array
+        {
+            return ( _instances.size() > 0 ) ? _instances.getKeys() : null ; 
+        }        
 
         /**
          * Returns the internal EventDispatcher singleton reference of this FrontController.
@@ -274,17 +283,17 @@ package system.events
         }
  
         /**
-         * Internal EventDispatcher instance.
+         * @private
          */
         private var _dispatcher:EventDispatcher ;
          
         /**
-         * The static internal hashmap to register all global instances in your applications.
+         * @private
          */    
         private static var _instances:HashMap = new HashMap() ;
         
         /**
-         * Internal HashMap reference.
+         * @private
          */
         private var _map:ArrayMap ;
         
