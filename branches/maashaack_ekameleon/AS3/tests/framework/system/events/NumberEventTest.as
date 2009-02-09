@@ -36,8 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-        
+    import buRRRn.ASTUce.framework.TestCase;    
+
     public class NumberEventTest extends TestCase 
     {
 
@@ -45,5 +45,47 @@ package system.events
         {
             super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var e:NumberEvent ;
+            
+            e = new NumberEvent( "type" , 10 ) ;
+            assertNotNull( e , "01-01 - NumberEvent constructor failed.") ;
+            assertEquals( e.number, 10, "01-02 - NumberEvent constructor failed.") ;
+            
+            e = new NumberEvent( "type" ) ;
+            assertNotNull( e , "02-01 - NumberEvent constructor failed.") ;
+            assertEquals( e.number, NaN, "02-02 - NumberEvent constructor failed.") ;             
+            
+        }        
+        
+        public function testInherit():void
+        {
+            var e:NumberEvent = new NumberEvent( "type" ) ;
+            assertTrue( e is BasicEvent, "01 - NumberEvent must extends the BasicEvent class.") ;
+        }          
+        
+        public function testNumberProperty():void
+        {
+            var e:NumberEvent = new NumberEvent( "type" ) ;
+            
+            assertEquals( e.number , NaN,  "01 - NumberEvent string number failed.") ;  
+            
+            e.number = -10.5 ;
+            assertEquals( e.number, -10.5 , "02 - NumberEvent number number failed.") ;  
+            
+            e.number = 101 ;
+            assertEquals( e.number, 101 , "03 - NumberEvent number number failed.") ;  
+        }        
+        
+        public function testClone():void
+        {
+            var e:NumberEvent = new NumberEvent( "type" , 999999) ;
+            var c:NumberEvent = e.clone() as NumberEvent ;
+            assertNotNull( c , "01 - NumberEvent clone() failed.") ;
+            assertEquals( e.number , c.number, "02 - NumberEvent clone() failed.") ;  
+        }   
+        
     }
 }

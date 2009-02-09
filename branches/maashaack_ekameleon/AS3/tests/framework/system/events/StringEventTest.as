@@ -66,7 +66,7 @@ package system.events
             assertTrue( e is BasicEvent, "01 - StringEvent must extends the BasicEvent class.") ;
         }          
         
-        public function testBooleanProperty():void
+        public function testStringProperty():void
         {
             var e:StringEvent = new StringEvent( "type" ) ;
             
