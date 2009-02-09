@@ -139,11 +139,11 @@ package system.events
             dispatcher.registerEventListener("fire", listener ) ; // EventListener
         
             var event:Event = new Event("fire") ;
-            dispatcher.fireEvent( event ) ;
+            dispatcher.dispatchEvent( event ) ;
             assertNotNull( listener.event , "01-01 - InternalDispatcher registerEventListener failed." ) ;
             assertEquals( listener.count , 1  , "01-02 - InternalDispatcher registerEventListener failed." ) ;            
             
-            dispatcher.fireEvent( event ) ;
+            dispatcher.dispatchEvent( event ) ;
             
             assertNotNull( listener.event , "02-01 - InternalDispatcher registerEventListener failed." ) ;
             assertEquals( listener.count , 2  , "02-02 - InternalDispatcher registerEventListener failed." ) ; 
