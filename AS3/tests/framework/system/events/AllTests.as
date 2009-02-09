@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events
 {
-    import buRRRn.ASTUce.framework.*;                                            
+    import buRRRn.ASTUce.framework.*;                                                
 
     public class AllTests
     {
@@ -48,7 +48,7 @@ package system.events
             suite.addTestSuite( ArrayEventTest ) ;
             suite.addTestSuite( BasicEventTest ) ;
             suite.addTestSuite( BooleanEventTest ) ;
-            // suite.addTestSuite( CoreEventDispatcherTest ) ;
+            suite.addTestSuite( CoreEventDispatcherTest ) ;
             suite.addTestSuite( DateEventTest ) ;
             suite.addTestSuite( DelegateTest ) ;
             suite.addTestSuite( DynamicEventTest ) ;
