@@ -38,7 +38,8 @@ package system.events
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.events.Event;            
+    import flash.events.Event;
+    import flash.utils.getTimer;    
 
     public class BasicEventTest extends TestCase 
     {
@@ -54,12 +55,95 @@ package system.events
             assertNotNull( e , "BasicEvent constructor failed.") ;	
         }
         
+        public function testConstructorWithArguments():void
+        {
+        	var time:uint = getTimer() ;
+            var e:BasicEvent = new BasicEvent( "type" , "target", "context", true , true , time) ;
+
+            assertNotNull( e , "00 - BasicEvent constructor failed.") ;  
+
+            assertEquals ( e.type       , "type"    , "01 - BasicEvent constructor failed.") ;
+            assertEquals ( e.target     , "target"  , "02 - BasicEvent constructor failed.") ;
+            assertEquals ( e.context    , "context" , "03 - BasicEvent constructor failed.") ;
+            assertTrue   ( e.bubbles    , "04 - BasicEvent constructor failed.") ;
+            assertTrue   ( e.cancelable , "05 - BasicEvent constructor failed.") ;
+            assertEquals ( e.timeStamp  , time , "06 - BasicEvent constructor failed.") ;
+
+        }
+                
         public function testInherit():void
         {
             var e:BasicEvent = new BasicEvent( "type" ) ;
             assertTrue( e is Event , "EventDispatcher must inherit the flash.events.Event class.") ;
         }    
+
+        public function testContext():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" ) ;
+            e.context = "context" ;
+            assertEquals ( e.context , "context" , "BasicEvent context failed.") ;
+        } 
         
+        public function testTarget():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" ) ;
+            assertEquals ( e.target , null , "BasicEvent target failed.") ;
+            e.target = "target" ;
+            assertEquals ( e.target , "target" , "BasicEvent target failed.") ;
+        }
+        
+        public function testTimeStamp():void
+        {
+        	var time:uint = getTimer() ;
+            var e:BasicEvent = new BasicEvent( "type" , null, null, false, false, time ) ;
+            assertEquals ( e.timeStamp ,  time , "BasicEvent timeStamp failed.") ;
+        } 
+        
+        public function testType():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" ) ;
+            e.type = "otherType" ;
+            assertEquals ( e.type , "type" , "BasicEvent type failed.") ;
+        }
+        
+        public function testClone():void
+        {
+            var e:BasicEvent = new BasicEvent( "type" , "target" , "context" ) ;
+            var c:BasicEvent = e.clone() as BasicEvent ;
+            assertNotNull( c , "01 - BasicEvent clone() failed.") ;
+            assertEquals( e.type    , c.type    , "02 - BasicEvent clone() failed.") ;
+            assertEquals( e.context , c.context , "03 - BasicEvent clone() failed.") ;  
+            assertEquals( e.target  , c.target  , "04 - BasicEvent clone() failed.") ;  
+        } 
+        
+        public function testDispatch():void
+        {
+        	var test:Boolean ;
+        	var debug:Function = function( e:Event ):void
+        	{
+        	   test = true ;	
+        	};
+        	EventDispatcher.getInstance("channel").addEventListener("test",debug) ;
+        	var e:BasicEvent = new BasicEvent("test") ;
+        	e.dispatch("channel") ;
+        	
+        	EventDispatcher.flush() ;
+        }
+        
+        public function testToString():void
+        {
+            var e:BasicEvent ;
+            
+            e = new BasicEvent( "type" ) ;
+            assertEquals ( e.toString() , '[BasicEvent type="type" target=null context=null bubbles=false cancelable=false eventPhase=2]' , "01 - BasicEvent toString() failed.") ;               
+
+            e = new BasicEvent( "type" , "target", "context" ) ;
+            assertEquals ( e.toString() , '[BasicEvent type="type" target="target" context="context" bubbles=false cancelable=false eventPhase=2]' , "01 - BasicEvent toString() failed.") ;               
+
+            e = new BasicEvent( "type" , {}, 2 ) ;
+            assertEquals ( e.toString() , '[BasicEvent type="type" target=[object Object] context=2 bubbles=false cancelable=false eventPhase=2]' , "01 - BasicEvent toString() failed.") ;               
+
+        }
     
     }
 }

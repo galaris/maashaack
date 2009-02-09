@@ -39,7 +39,7 @@ package system.events
     import system.Reflection;
     
     import flash.events.Event;    
-    
+
     /**
      * <code class="prettyprint">system.events.BasicEvent</code> is the basical event structure to work with <code class="prettyprint">system.events.EventDispatcher</code>.
      * <p><b>Example</b></p>
@@ -92,11 +92,11 @@ package system.events
         }
         
         /**
-         * Indicates the event target.
+         * Indicates the custom event target.
          */
         public override function get target():Object
         {
-            return _target ;    
+            return _target || super.target ;    
         }
     
         /**
@@ -104,7 +104,7 @@ package system.events
          */
         public function set target( o:Object ):void 
         {
-            _target = o || null ;
+            _target = o ;
         }
         
         /**
@@ -127,18 +127,9 @@ package system.events
         /**
          * Sets the type of event.
          */
-        public function set type(s:String):void 
+        public function set type( s:String ):void 
         {
-            _type = type || null ;
-        }
-        
-        /**
-         * Dispatch the event with the global event flow.
-         * @see EventDispatcher.getInstance(channel:String) static method.
-         */
-        public function dispatch( channel:String=null ):void
-        {
-            EventDispatcher.getInstance( channel ).dispatchEvent( this ) ;
+            _type = type ;
         }
         
         /**
@@ -149,7 +140,16 @@ package system.events
         {
             return new BasicEvent( type , target , context ) ;
         }
-            
+        
+        /**
+         * Dispatch the event with the global event flow.
+         * @see EventDispatcher.getInstance(channel:String) static method.
+         */
+        public function dispatch( channel:String=null ):void
+        {
+            EventDispatcher.getInstance( channel ).dispatchEvent( this ) ;
+        }
+         
         /**
          * Returns the string representation of this event.
          * @return the string representation of this event.
