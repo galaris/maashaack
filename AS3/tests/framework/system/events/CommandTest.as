@@ -33,36 +33,25 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.events 
 {
-    import buRRRn.ASTUce.framework.*;                                                
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class CommandTest extends TestCase 
     {
 
-        public static function suite():ITest
+        public function CommandTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
+            super( name );
         }
+        
+        public function testConstructor():void
+        {
+            var c:Command = new Command() ;
+            assertNotNull( c , "01 - Command constructor failed.") ;  
+        }        
+        
+        // TODO finish all tests.
+        
     }
 }
