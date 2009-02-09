@@ -33,30 +33,32 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.formatters  
+package system.formatters.samples 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
+    import system.formatters.Formattable;            
 
     /**
-	 * This class launch all tests.
-	 */
-	public class AllTests
-	{
-		
+     * The basic implementation of the Formattable interface.
+     */
+    public class FormattableClass implements Formattable 
+    {
+    
         /**
-         * Creates the Test list.
-         */		
-        public static function suite():ITest
+         * Creates a new FormattableClass instance.
+         */
+        public function FormattableClass()
         {
-            var suite:TestSuite = new TestSuite( "Formatters tests" );
-
-            suite.addTestSuite( DateFormatterTest ) ;
-            suite.addTestSuite( ExpressionFormatterTest ) ;
-            suite.addTestSuite( FormattableTest ) ;
-
-            return suite;
+        	//
         }
-	}
+        
+        /**
+         * Formats the specified value.
+         * @param value The object to format.
+         * @return the string representation of the formatted value. 
+         */
+        public function format(value:* = null):String
+        {
+            return value.toString() ;
+        }
+    }
 }
-
