@@ -70,7 +70,7 @@ package system.events
         /**
          * Add a new entry into the FrontController.
          * @param eventName:String
-         * @param listener:EventListener or listener:Function
+         * @param listener A listener Function or an EventListener object.
          * @throws ArgumentError If the 'eventName' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          * @throws ArgumentError If the 'listener' object in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          */
@@ -78,11 +78,11 @@ package system.events
         {
             if ( eventName == null )
             {
-                throw new ArgumentError( "FrontController.insert() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( this + " add() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
             }
             if ( listener == null )
             {
-                throw new ArgumentError( "FrontController.insert() method failed with the event type '" + eventName + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( this + " add() method failed with the event type '" + eventName + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
             }
             _map.put.apply( this, arguments ) ;
             _dispatcher.registerEventListener( eventName, listener ) ;
@@ -96,11 +96,11 @@ package system.events
          * @param listener (optional) The <code class="prettyprint">EventListener</code> mapped in the FrontController with the specified event type (This listener is added in an EventListenerBatch). 
          * @throws ArgumentError If the 'eventName' value in argument not must be 'null' or 'undefined'.
          */
-        public function addBatch( eventName:String, listener:EventListener ):void
+        public function addBatch( eventName:String , listener:EventListener ):void
         {
             if ( eventName == null )
             {
-                throw new ArgumentError( this + " insertBatch method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( this + " addBatch method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
             }
             if ( _map.containsKey(eventName) )
             {
