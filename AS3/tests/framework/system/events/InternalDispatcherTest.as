@@ -123,15 +123,61 @@ package system.events
         	assertEquals( listener.event , event , "02 - InternalDispatcher fireEvent failed with an Event in the first argument.") ;
         }
 
-//        public function testRegisterEventListener():void
-//        {
-//            
-//        }
-//
-//        public function testUnregisterEventListener():void
-//        {
-//            
-//        }
+        public function testRegisterEventListener():void
+        {
+            var listener:MockEventListener = new MockEventListener() ;
+            
+            var dispatcher:InternalDispatcher = new InternalDispatcher() ;
+            
+            var test:Boolean ;
+            var fListener:Function = function( e:Event ):void
+            {
+            	test = true ;
+            };
+            
+            dispatcher.registerEventListener("fire", fListener ) ; // function
+            dispatcher.registerEventListener("fire", listener ) ; // EventListener
+        
+            var event:Event = new Event("fire") ;
+            dispatcher.fireEvent( event ) ;
+            assertNotNull( listener.event , "01-01 - InternalDispatcher registerEventListener failed." ) ;
+            assertEquals( listener.count , 1  , "01-02 - InternalDispatcher registerEventListener failed." ) ;            
+            
+            dispatcher.fireEvent( event ) ;
+            
+            assertNotNull( listener.event , "02-01 - InternalDispatcher registerEventListener failed." ) ;
+            assertEquals( listener.count , 2  , "02-02 - InternalDispatcher registerEventListener failed." ) ; 
+            
+            assertTrue( test , "03 - InternalDispatcher registerEventListener failed." ) ;
+  
+        }
+
+        public function testUnregisterEventListener():void
+        {
+            var listener:MockEventListener = new MockEventListener() ;
+            
+            var dispatcher:InternalDispatcher = new InternalDispatcher() ;
+            
+            var test:Boolean ;
+            var fListener:Function = function( e:Event ):void
+            {
+                test = true ;
+            };
+            
+            dispatcher.registerEventListener("fire", fListener ) ; // function
+            dispatcher.registerEventListener("fire", listener ) ; // EventListener
+        
+            dispatcher.unregisterEventListener("fire", fListener ) ; // function
+            dispatcher.unregisterEventListener("fire", listener ) ; // EventListener        
+        
+            var event:Event = new Event("fire") ;
+            dispatcher.fireEvent( event ) ;
+            assertNull( listener.event , "01-01 - InternalDispatcher registerEventListener failed." ) ;
+            assertEquals( listener.count , 0  , "01-02 - InternalDispatcher registerEventListener failed." ) ;            
+            
+            assertFalse( test , "02 - InternalDispatcher registerEventListener failed." ) ;
+  
+        }
 
     }
 
