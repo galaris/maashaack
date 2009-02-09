@@ -35,17 +35,13 @@
 
 package system.formatters 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.formatters.samples.FormattableClass;    
 
-    /**
-     * The IFormatterTest test case.
-     */
     public class FormattableTest extends TestCase 
     {
 
-       /**
-        * Creates a new IFormatterTest instance.
-        */ 
         public function FormattableTest(name:String = "")
         {
             super( name );
@@ -53,24 +49,9 @@ package system.formatters
         
         public function testFormat():void
         {
-            
-            var formatter:ConcreteFormatter = new ConcreteFormatter() ;
-            
+            var formatter:FormattableClass = new FormattableClass() ;
             assertEquals( formatter.format(2) , "2" , "format method failed.") ;
-            
-            
         }
         
-    }
-}
-
-import system.formatters.Formattable;
-
-class ConcreteFormatter implements Formattable
-{
-
-    public function format(value:* = null):String
-    {
-    	return value.toString() ;
     }
 }
