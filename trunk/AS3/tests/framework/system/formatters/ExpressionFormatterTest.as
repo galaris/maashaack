@@ -83,15 +83,33 @@ package system.formatters
         	assertEquals(ExpressionFormatter.MAX_RECURSION, 200, "The ExpressionFormatter.MAX_RECURSION value failed.") ; 
         }
         
-//        public function testBeginSeparator():void
-//        {
-//        	//
-//        }
-//        
-//        public function testEndSeparator():void
-//        {
-//        	//
-//        }
+        public function testBeginSeparator():void
+        {
+        	var f:ExpressionFormatter = new ExpressionFormatter() ;
+        	
+        	f.beginSeparator = "%" ;
+        	assertEquals(f.beginSeparator , "%" , "01 - The ExpressionFormatter beginSeparator failed.") ;
+        	
+        	f.beginSeparator = null ;
+        	assertEquals(f.beginSeparator , "{" , "02 - The ExpressionFormatter beginSeparator failed.") ;
+        	
+        	f.beginSeparator = "{" ;
+        	assertEquals(f.beginSeparator , "{" , "03 - The ExpressionFormatter beginSeparator failed.") ;
+        }
+        
+        public function testEndSeparator():void
+        {
+            var f:ExpressionFormatter = new ExpressionFormatter() ;
+            
+            f.endSeparator = "%" ;
+            assertEquals(f.endSeparator , "%" , "01 - The ExpressionFormatter endSeparator failed.") ;
+            
+            f.endSeparator = null ;
+            assertEquals(f.endSeparator , "}" , "02 - The ExpressionFormatter endSeparator failed.") ;
+            
+            f.endSeparator = "}" ;
+            assertEquals(f.endSeparator , "}" , "03 - The ExpressionFormatter endSeparator failed.") ;
+        }
                         
         public function testFormat():void
         {
@@ -122,6 +140,9 @@ package system.formatters
             var source:String = "the root : %root% - the class : %HashMap%" ;
             var result:String = "the root : c: - the class : c:/project/system/data/map/HashMap.as" ;
             assertEquals( formatter.format( source ) , result , "ExpressionFormatter format() failed.") ;
+            
+            formatter.beginSeparator = null ;
+            formatter.endSeparator   = null ;
             
         }
 

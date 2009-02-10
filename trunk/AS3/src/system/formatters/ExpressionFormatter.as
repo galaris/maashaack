@@ -122,7 +122,7 @@ package system.formatters
          */
         public function set endSeparator( str:String ):void
         {
-            _endSeparator = str || "{" ;
+            _endSeparator = str || "}" ;
             _reset() ;
         }        
         
