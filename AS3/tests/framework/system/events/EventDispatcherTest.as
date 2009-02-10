@@ -46,6 +46,16 @@ package system.events
             super( name );
         }
         
+        public function setUp():void
+        {
+        	EventDispatcher.flush() ;
+        }
+        
+        public function tearDown():void
+        {
+            EventDispatcher.flush() ;
+        }
+        
         public function testConstructor():void
         {
         	var dispatcher:EventDispatcher = new EventDispatcher() ;
@@ -105,6 +115,7 @@ package system.events
         
         public function testGetChannels():void
         {
+        	EventDispatcher.flush() ;
         	assertNull( EventDispatcher.getChannels() , "01 - EventDispatcher getChannels failed if no singletons are registered in the factory." ) ;
             EventDispatcher.getInstance("my_channel1") ;
             EventDispatcher.getInstance("my_channel2") ;
@@ -114,6 +125,7 @@ package system.events
 
         public function testGetInstanceWithANullArgument():void
         {
+        	EventDispatcher.flush() ;
             var d1:EventDispatcher = EventDispatcher.getInstance() ;
             assertEquals( d1.channel , EventDispatcher.DEFAULT_SINGLETON_CHANNEL , "01 - EventDispatcher getInstance() failed with 0 argument.") ;
             var d2:EventDispatcher = EventDispatcher.getInstance() ;
