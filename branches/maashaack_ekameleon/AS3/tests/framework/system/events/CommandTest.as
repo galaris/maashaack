@@ -37,6 +37,8 @@ package system.events
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.events.mocks.MockEventListener;    
+
     public class CommandTest extends TestCase 
     {
 
@@ -48,10 +50,113 @@ package system.events
         public function testConstructor():void
         {
             var c:Command = new Command() ;
-            assertNotNull( c , "01 - Command constructor failed.") ;  
+            assertNotNull( c , "Command constructor failed.") ;  
         }        
         
-        // TODO finish all tests.
+        public function testCONSTRUCTOR_ERROR():void
+        {
+        	assertEquals( Command.CONSTRUCTOR_ERROR , "{0}, can't create this instance without a valid 'name' definition : {1}" , "Command.CONSTRUCTOR_ERROR static property failed." ) ;
+        }
         
+        public function testChannel():void
+        {
+        	var co:Command = new Command() ;
+        	assertNull(co.channel , "01 - Command channel failed." ) ;
+            co.channel = "myChannel" ;
+            assertEquals( co.channel , "myChannel" , "02 - Command channel failed." ) ;
+            
+            // TODO finalize the constructor tests.
+        }
+        
+        public function testController():void
+        {
+            var co:Command = new Command() ;
+            
+            assertEquals( co.controller , FrontController.getInstance() , "01 - Command controller failed." ) ;
+            
+            co.channel = "myChannel" ;
+            assertEquals( co.controller , FrontController.getInstance("myChannel") , "02 - Command controller failed." ) ;
+            
+            var controller:FrontController = new FrontController() ;
+            co.controller = controller ;
+            assertEquals( co.controller , controller , "03 - Command controller failed." ) ;
+            
+            co.controller = null ;
+            assertEquals( co.controller , FrontController.getInstance("myChannel") , "04 - Command controller failed." ) ;
+        }        
+   
+        public function testName():void
+        {
+            var co:Command = new Command() ;
+            assertNull(co.name , "01 - Command name failed." ) ;
+            co.name = "myName" ;
+            assertEquals( co.name , "myName" , "02 - Command name failed." ) ;
+        }  
+        
+        public function testValue():void
+        {
+            var co:Command = new Command() ;
+            assertNull(co.value , "01 - Command value failed." ) ;
+            co.value = "hello world" ;
+            assertEquals( co.value , "hello world" , "02 - Command value failed." ) ;
+        } 
+        
+        public function testRun():void
+        {
+        	var listener:MockEventListener = new MockEventListener() ;
+        	var command:Command            = new Command( "type" , "value", "channel" ) ; 
+        	
+        	var fc:FrontController = FrontController.getInstance( "channel" )  ;
+        	
+            fc.add("type", listener) ;
+        	
+        	command.run() ;
+        	
+        	assertNotNull( listener.event as BasicEvent , "01 - Command run failed.") ;
+        	
+        	var e:BasicEvent = listener.event as BasicEvent ;
+        	assertEquals( e.type    , "type"  , "02-01 - Command run failed." ) ;
+        	assertEquals( e.context , "value" , "02-02 - Command run failed." ) ;
+        	
+        	FrontController.getInstance("channel").remove("type") ;
+        	
+        	// The "type" event name isn't register in the frontcontroller
+        	
+        	try
+        	{
+        		command.run() ; 
+        		fail("03-01 - Command failed, the name property isn't register in the FrontController.") ;
+        	}
+        	catch( er:Error )
+        	{
+        	   assertTrue( er is Error , "03-02 - Command failed, the name property isn't register in the FrontController.") ;
+        	   //assertEquals( er.message , "" , "03-03 - Command failed, the name property isn't register in the FrontController.") ;	
+        	}
+        	
+        }
+     
+        public function testObject():void
+        {
+
+            var c:Command = new Command( "type" , "value", "channel" ) ; 
+            var o:Object  = c.toObject() ;
+            
+            assertEquals( o.name    , c.name    , "01 - Command toObject() failed with the name property." ) ;
+            assertEquals( o.channel , c.channel , "02 - Command toObject() failed with the channel property." ) ;
+            assertEquals( o.value   , c.value   , "03 - Command toObject() failed with the value property." ) ;
+            
+        }     
+
+        public function testToString():void
+        {
+            var c:Command ;
+            c = new Command() ; 
+            assertEquals( c.toString() , "[Command]"  , "01 - Command toString() failed." ) ;
+
+            c = new Command("name", "value", "channel") ; 
+            assertEquals( c.toString() , '[Command name:"name" channel:"channel"]'  , "01 - Command toString() failed." ) ;
+
+        }    
+
     }
 }

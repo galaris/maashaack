@@ -63,10 +63,10 @@ package system.events
          */
         public function FrontController( channel:String = null, target:EventDispatcher = null )
         {
-            _map        = new ArrayMap() ;
-            _dispatcher = target || EventDispatcher.getInstance( channel ) ; 
+            _map         = new ArrayMap() ;
+            _dispatcher  = target || EventDispatcher.getInstance( channel ) ; 
         }
-        
+                
         /**
          * Add a new entry into the FrontController.
          * @param eventName:String
@@ -74,18 +74,18 @@ package system.events
          * @throws ArgumentError If the 'eventName' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          * @throws ArgumentError If the 'listener' object in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          */
-        public function add( eventName:String , listener:* ):void 
+        public function add( type:String , listener:* ):void 
         {
-            if ( eventName == null )
+            if ( type == null )
             {
                 throw new ArgumentError( this + " add() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
             }
             if ( listener == null )
             {
-                throw new ArgumentError( this + " add() method failed with the event type '" + eventName + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( this + " add() method failed with the event type '" + type + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
             }
             _map.put.apply( this, arguments ) ;
-            _dispatcher.registerEventListener( eventName, listener ) ;
+            _dispatcher.registerEventListener( type, listener ) ;
         }
         
         /**
@@ -201,11 +201,11 @@ package system.events
             {
                 channel = EventDispatcher.DEFAULT_SINGLETON_CHANNEL ;
             }
-            if ( _instances.containsKey( channel ) ) 
+            if ( !FrontController._instances.containsKey( channel ) ) 
             {
-                _instances.put( channel , new FrontController( channel ) ) ;
+                FrontController._instances.put( channel , new FrontController( channel ) ) ;
             }
-            return _instances.get(channel) as FrontController ;
+            return FrontController._instances.get(channel) as FrontController ;
         }
 
         /**
@@ -254,7 +254,7 @@ package system.events
          */
         public static function removeInstance( channel:String ):Boolean 
         {
-            if (!_instances.containsKey(channel)) 
+            if ( _instances.containsKey(channel) ) 
             {
                 return _instances.remove(channel) != null ;
             }
