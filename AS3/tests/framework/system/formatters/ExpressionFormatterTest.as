@@ -123,6 +123,19 @@ package system.formatters
             var source:String = "the root : {root} - the class : {map}" ;
             assertEquals( formatter.format( source ) , "the root : c: - the class : c:/project/system/data/maps/HashMap.as" , "ExpressionFormatter format() failed.") ;
         }
+      
+        public function testFormatUppercase():void
+        {
+            var formatter:ExpressionFormatter = new ExpressionFormatter() ;
+            
+            formatter["root"]      = "c:" ;
+            formatter["SYSTEM"]    = "{root}/project/system" ;
+            formatter["data.maps"] = "{SYSTEM}/data/maps" ;
+            formatter["DATA.TEST"] = "{data.maps}/HashMap.as" ;
+            
+            var source:String = "{DATA.TEST}" ;
+            assertEquals( formatter.format( source ) , "c:/project/system/data/maps/HashMap.as" , "ExpressionFormatter format() failed with uppercase key words.") ;
+        }
         
         public function testFormatWithOtherSeparators():void
         {            
