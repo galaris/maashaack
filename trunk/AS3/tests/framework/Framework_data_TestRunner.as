@@ -74,7 +74,7 @@ package
             console = new TextFieldConsole( textfield ) ;            
             
             system.config.serializer.prettyPrinting = false;
-            
+                                    
             //tests
             
             buRRRn.ASTUce.config.maxColumn = 64 ;
@@ -84,7 +84,7 @@ package
             ( 
                 //system.data.AllTests.suite() , 
                 
-                system.AllTests.suite() 
+                system.AllTests.suite()
                  
             );
             
