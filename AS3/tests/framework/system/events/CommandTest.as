@@ -35,11 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.events.mocks.MockEventListener;    
-
-    public class CommandTest extends TestCase 
+    import buRRRn.ASTUce.framework.TestCase;        import system.events.mocks.MockEventListener;    
+    public class CommandTest extends TestCase 
     {
 
         public function CommandTest(name:String = "")
@@ -51,21 +48,72 @@ package system.events
         {
             var c:Command = new Command() ;
             assertNotNull( c , "Command constructor failed.") ;  
-        }        
+        }  
         
-        public function testCONSTRUCTOR_ERROR():void
+        public function testConstructorWithBadArguments():void
         {
-        	assertEquals( Command.CONSTRUCTOR_ERROR , "{0}, can't create this instance without a valid 'name' definition : {1}" , "Command.CONSTRUCTOR_ERROR static property failed." ) ;
+        	var c:Command ;
+            try 
+            {
+               c = new Command( 2 ) ;
+            }
+            catch( er:Error )
+            {
+               fail("Command constructor failed.") ;
+            }
         }
-        
+            
+        public function testConstructorWithNullArgument():void
+        {
+            var c:Command ;
+            try 
+            {
+               c = new Command( null ) ;
+            }
+            catch( er:Error )
+            {
+               fail("Command constructor failed.") ;
+            }          
+        }               
+
+        public function testConstructorGenericObjectChannelOnly():void
+        {
+            var c:Command = new Command( { channel:"channel" }  ) ;
+            assertEquals( c.channel   , "channel" , "01 - Command constructor failed with a generic init object." ) ;
+            assertNull( c.name        , "02 - Command constructor failed with a generic init object." ) ;
+            assertUndefined( c.value  , "03 - Command constructor failed with a generic init object." ) ;
+        } 
+
+        public function testConstructorGenericObjectNameOnly():void
+        {
+            var c:Command = new Command( { name:"type" }  ) ;
+            assertEquals( c.name , "type" , "01 - Command constructor failed with a generic init object." ) ;
+            assertNull( c.channel    , "02 - Command constructor failed with a generic init object." ) ;
+            assertUndefined( c.value      , "03 - Command constructor failed with a generic init object." ) ;
+        }  
+
+        public function testConstructorGenericObjectValueOnly():void
+        {
+            var c:Command = new Command( { value:999 }  ) ;
+            assertEquals( c.value , 999 , "01 - Command constructor failed with a generic init object." ) ;
+            assertNull( c.channel , "02 - Command constructor failed with a generic init object." ) ;
+            assertNull( c.channel , "03 - Command constructor failed with a generic init object." ) ;
+        }  
+
+        public function testConstructorWithGenericObjectFull():void
+        {
+            var c:Command = new Command( { name:"type", value:"value", channel:"channel"}  ) ;
+            assertEquals( c.name    , "type"    , "01 - Command constructor failed with the name property." ) ;
+            assertEquals( c.channel , "channel" , "02 - Command constructor failed with the channel property." ) ;
+            assertEquals( c.value   , "value"   , "03 - Command constructor failed with the value property." ) ;
+        }  
+                
         public function testChannel():void
         {
         	var co:Command = new Command() ;
         	assertNull(co.channel , "01 - Command channel failed." ) ;
             co.channel = "myChannel" ;
             assertEquals( co.channel , "myChannel" , "02 - Command channel failed." ) ;
-            
-            // TODO finalize the constructor tests.
         }
         
         public function testController():void
