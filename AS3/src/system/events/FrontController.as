@@ -84,6 +84,10 @@ package system.events
             {
                 throw new ArgumentError( this + " add() method failed with the event type '" + type + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
             }
+            if ( contains( type ) )
+            {
+            	remove( type ) ;
+            }
             _map.put.apply( this, arguments ) ;
             _dispatcher.registerEventListener( type, listener ) ;
         }
@@ -209,8 +213,7 @@ package system.events
         }
 
         /**
-         * Returns a EventListener
-         * @usage  myController.get( myEvent:String ) ;    
+         * Returns the listener register in the frontcontroller with the specified event name.
          * @param  eventName:String
          * @return an EventListener or a event callback Function.
          */
@@ -239,10 +242,10 @@ package system.events
          * Remove an entry into the FrontController.
          * @param eventName The name of the event type.
          */
-        public function remove(eventName:String):void
+        public function remove( eventName:String ):void
         {
         	var listener:* = _map.remove( eventName ) ;
-            if ( listener ) 
+            if ( listener != null ) 
             {
                 _dispatcher.unregisterEventListener( eventName , listener ) ;
             }

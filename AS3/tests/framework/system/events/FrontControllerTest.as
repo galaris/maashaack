@@ -37,6 +37,8 @@ package system.events
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.events.mocks.MockEventListener;    
+
     public class FrontControllerTest extends TestCase 
     {
 
@@ -47,10 +49,125 @@ package system.events
         
         public function testConstructor():void
         {
-            var fc:FrontController = new FrontController() ;
+            var fc:FrontController ;
             
-            assertNotNull( fc , "FrontController constructor failed.") ;  
-        }        
+            fc = new FrontController() ;
+            assertNotNull( fc , "01-01 - FrontController constructor failed.") ;
+            assertEquals( fc.getEventDispatcher() , EventDispatcher.getInstance(), "01-02 - FrontController constructor failed.") ;
+                        
+            fc = new FrontController("channel") ;
+            assertEquals( fc.getEventDispatcher() , EventDispatcher.getInstance("channel"), "02 - FrontController constructor failed.") ;
+
+            var d:EventDispatcher = new EventDispatcher() ;
+
+            fc = new FrontController(null, d) ;
+            assertEquals( fc.getEventDispatcher() , d, "03 - FrontController constructor failed.") ;
+        }       
         
+        public function testAdd():void
+        {
+        	var listener:MockEventListener = new MockEventListener() ;
+        	var fc:FrontController         = new FrontController() ;
+        	
+        	fc.add( "type1", listener ) ;
+        	assertEquals( fc.size() , 1 , "01-01 - FrontController add() method failed." ) ;
+
+            fc.add( "type1", listener ) ;
+            assertEquals( fc.size() , 1 , "01-02 - FrontController add() method failed." ) ;        	
+        	
+        	////
+        	
+            fc.add( "type2", listener.handleEvent ) ;
+            assertEquals( fc.size() , 2 , "02-01 - FrontController add() method failed." ) ;
+
+            fc.add( "type2", listener.handleEvent ) ;
+            assertEquals( fc.size() , 2 , "02-02 - FrontController add() method failed." ) ; 
+                        
+        }
+
+        public function testAddExceptions():void
+        {
+            var fc:FrontController = new FrontController() ;
+            try
+            {
+                fc.add( null , null ) ;
+                fail("01-01 - The FrontController add method must throw an error.");
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError , "01-02 - The FrontController add method must throw an error." ) ;
+            }
+        }
+
+//        public function testAddBatch():void
+//        {
+//            
+//        }
+//        
+//        public function testClear():void
+//        {
+//            
+//        }
+//
+//        public function testContains():void
+//        {
+//            
+//        }
+//
+//        public function testFireEvent():void
+//        {
+//            
+//        }
+//
+//        public function testFlush():void
+//        {
+//            
+//        }
+//
+//        public function testGetChannels():void
+//        {
+//            
+//        }
+//
+//        public function testGetEventDispatcher():void
+//        {
+//            
+//        }
+//
+//        public function testGetInstance():void
+//        {
+//            
+//        }
+//
+//        public function testGetListener():void
+//        {
+//            
+//        }
+//
+//        public function testIsEventListenerBatch():void
+//        {
+//            
+//        }
+//
+//        public function testRemove():void
+//        {
+//            
+//        }
+//        
+//        public function testRemoveInstance():void
+//        {
+//            
+//        }        
+//
+//        public function testSetEventDispatcher():void
+//        {
+//            
+//        }  
+//
+//        public function testSize():void
+//        {
+//            
+//        }  
+
     }
 }
