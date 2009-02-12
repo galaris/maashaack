@@ -4,7 +4,7 @@
  * [http://code.google.com/p/maashaack/ HomePage]
    * [events Returns events]
 
-You can create instances of the *system.events!EventDispatcher* class with the *new* key words, but you can creates statically singleton references of the class with the static method *getInstance()*.
+You can create instances of the *system.events.!EventDispatcher* class with the *new* key words, but you can creates statically singleton references of the class with the static method *getInstance()*.
 
 The big difference between the *flash.events.!EventDispatcher* class and the *system.events.!EventDispatcher* class are :
 
