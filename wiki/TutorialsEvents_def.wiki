@@ -1,6 +1,9 @@
 #labels Code,Projects-X,Framework
 = Definitions = 
 
+ * [http://code.google.com/p/maashaack/ HomePage]
+   * [events Returns events]
+
 == Event ==
 
 The *Event* interface is used to provide contextual information about an event to the handler processing the event. An object which implements the Event interface is generally passed as the first parameter to an event handler. More specific context information is passed to event handlers by deriving additional interfaces from Event which contain information directly relating to the type of event they accompany. These derived interfaces are also implemented by the object passed to the event listener.
