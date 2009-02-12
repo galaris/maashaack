@@ -3,7 +3,7 @@
 
 == Description ==
 
-If you need to remove an event listener, that has been added before, you can use the *removeEventListener()* or the *unregisterEventListener()* methods of *!system.events.EventDispatcher*.
+If you need to remove an event listener, that has been added before, you can use the *removeEventListener()* or the *unregisterEventListener()* methods of *system.events.!EventDispatcher*.
 
 {{{
 import system.events.EventDispatcher ;
