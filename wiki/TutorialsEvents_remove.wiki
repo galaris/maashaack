@@ -1,0 +1,100 @@
+#labels Code,Framework,Projects-X
+= Remove listeners =
+
+== Description ==
+
+If you need to remove an event listener, that has been added before, you can use the *removeEventListener()* or the *unregisterEventListener()* methods of *!system.events.EventDispatcher*.
+
+{{{
+import system.events.EventDispatcher ;
+import system.events.EventListener   ;
+
+import examples.events.DebugHandler ;
+
+var dispatcher:EventDispatcher = EventDispatcher.getInstance() ;
+
+var one:EventListener = new DebugHandler("one") ;
+var two:EventListener = new DebugHandler("two") ;
+
+dispatcher.registerEventListener("onLogin", one ) ;
+dispatcher.registerEventListener("onLogin", two ) ;
+
+var removed:Boolean ;
+
+removed = dispatcher.unregisterEventListener( "onLogin", one ) ;
+if ( removed ) 
+{
+    trace("The event listener 'one' has succesfully been removed.") ;
+}
+
+dispatcher.dispatchEvent("onLogin") ;
+
+removed = dispatcher.removeEventListener( "onLogin", two.handleEvent ) ;
+if ( removed ) 
+{
+    trace("The event listener 'two' has succesfully been removed.") ;
+}
+
+dispatcher.dispatchEvent("onLogin") ;
+
+}}}
+
+The first time, the triggered event will be only caught by the *!DebugHandler* named _two_ . The second time when the two listeners are unregister no event is dispatched.
+
+To complete this example we can read the content of the *!DebugHandler* class :
+
+{{{
+
+import system.events.Event ;
+import system.events.EventListener;
+
+/**
+ * The DebugHandler class.
+ */
+class examples.events.DebugHandler implements EventListener 
+{
+
+    /**
+     * Creates a new DebugHandler instance.
+     */
+    public function DebugHandler(name) 
+    {
+        _name = name || "default" ;
+    }
+    
+    /**
+     * Returns tne name of the debugger.
+     */
+    public function getName():String 
+    {
+        return _name || "" ;
+    }
+
+    /**
+     * Handles the event.
+     */
+    public function handleEvent(e:Event) 
+    {
+        trace( this + " handle : " + e ) ;
+        trace( "event-type     : " + e.type   ) ;
+        trace( "event-target   : " + e.target ) ;
+        trace("---") ;
+    }
+    
+    /**
+     * Returns the String representation of the object.
+     * @return the String representation of the object.
+     */
+    public function toString():String 
+    {
+        return "[DebugHandler name:" + _name + "]" ;
+    }
+    
+    /**
+     * The internal private name property of this instance.
+     */
+    private var _name:String ;
+    
+}
+
+}}}
