@@ -63,9 +63,9 @@ class examples.events.DebugHandler implements EventListener
     }
     
     /**
-     * Returns tne name of the debugger.
+     * Indicates the name of the debugger.
      */
-    public function getName():String 
+    public function get name():String 
     {
         return _name || "" ;
     }
