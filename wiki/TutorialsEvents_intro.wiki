@@ -41,9 +41,8 @@ class test.events.DebugHandler implements EventListener
     public function handleEvent(e:Event) 
     {
         trace( "-------- DebugHandler : Event has been triggered." ) ;
-        trace( "Event type     : " + e.getType()    ) ;
-        trace( "Event target   : " + e.getTarget()  ) ;
-        trace( "Event context  : " + e.getContext() ) ;
+        trace( "Event type     : " + e.type    ) ;
+        trace( "Event target   : " + e.target  ) ;
     }
 	
     /**
@@ -103,13 +102,13 @@ import system.events.BasicEvent ;
 import system.events.EventListener ;
 import system.events.EventDispatcher ;
 
-import test.events.DebugHandler ;
+import examples.events.DebugHandler ;
 
 var listener:EventListener = new DebugHandler();
 
 var dispatcher:EventDispatcher = new EventDispatcher() ;
 dispatcher.addEventListener( "onLogin", listener ) ;
 
-dispatcher.dispatchEvent( new BasicEvent("onLogin", this, "the context") ;
+dispatcher.dispatchEvent( new BasicEvent("onLogin") ) ;
 
 }}}
