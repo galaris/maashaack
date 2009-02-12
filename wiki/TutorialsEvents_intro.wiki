@@ -15,54 +15,58 @@ The !EventListener interface must be implemented by your listener with the *hand
 For example you can create a new class to debug the propagation of the events with all your *!EventDispatcher* reference or singletons.
 
 {{{
-import flash.events.Event ;
-import system.events.EventListener;
-
-/**
- * The DebugHandler class.
- */
-class test.events.DebugHandler implements EventListener 
+package examples.events
 {
+    import flash.events.Event ;
+    import system.events.EventListener;
+    
+    /**
+     * The DebugHandler class.
+     */
+    public class DebugHandler implements EventListener 
+    {
+    
+        /**
+         * Creates a new DebugHandler instance.
+         */
+        public function DebugHandler(name) 
+        {
+            _name = name || "default" ;
+        }
+        
+        /**
+         * Returns tne name of the debugger.
+         */
+        public function get name():String 
+        {
+            return _name || "" ;
+        }
+        
+        /**
+         * Handles the event.
+         */
+        public function handleEvent(e:Event):void
+        {
+            trace( "-------- DebugHandler : Event has been triggered." ) ;
+            trace( "Event type     : " + e.type    ) ;
+            trace( "Event target   : " + e.target  ) ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         */
+        public function toString():String 
+        {
+           return "[DebugHandler name:" + _name + "]" ;
+        }
+        
+        /**
+         * @private
+         */
+        private var _name:String ;
+	
+    }
 
-    /**
-     * Creates a new DebugHandler instance.
-     */
-    public function DebugHandler(name) 
-    {
-        _name = name || "default" ;
-    }
-	
-    /**
-     * Returns tne name of the debugger.
-     */
-    public function get name():String 
-    {
-        return _name || "" ;
-    }
-
-    /**
-     * Handles the event.
-     */
-    public function handleEvent(e:Event):void
-    {
-        trace( "-------- DebugHandler : Event has been triggered." ) ;
-        trace( "Event type     : " + e.type    ) ;
-        trace( "Event target   : " + e.target  ) ;
-    }
-	
-    /**
-     * Returns the String representation of the object.
-     */
-     public function toString():String 
-     {
-          return "[DebugHandler name:" + _name + "]" ;
-     }
-	
-     /**
-      * @private
-      */
-     private var _name:String ;
-	
 }
 }}}
 
