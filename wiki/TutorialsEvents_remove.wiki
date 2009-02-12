@@ -73,7 +73,7 @@ class examples.events.DebugHandler implements EventListener
     /**
      * Handles the event.
      */
-    public function handleEvent(e:Event) 
+    public function handleEvent( e:Event ):void
     {
         trace( this + " handle : " + e ) ;
         trace( "event-type     : " + e.type   ) ;
@@ -91,7 +91,7 @@ class examples.events.DebugHandler implements EventListener
     }
     
     /**
-     * The internal private name property of this instance.
+     * @private
      */
     private var _name:String ;
     
