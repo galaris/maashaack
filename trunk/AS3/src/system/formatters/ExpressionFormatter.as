@@ -62,7 +62,7 @@ package system.formatters
      * trace( "----" ) ;
      * 
      * formatter["system"]    = "%root%/project/system" ;
-     * formatter["data.maps"] = "%system%/data/map" ;
+     * formatter["data.maps"] = "%system%/data/maps" ;
      * formatter["HashMap"]   = "%data.maps%/HashMap.as" ;
      * 
      * formatter.beginSeparator = "%" ;
@@ -71,7 +71,7 @@ package system.formatters
      * source = "the root : %root% - the class : %HashMap%" ;
      * 
      * trace( formatter.format( source ) ) ;
-     * // the root : c: - the class : c:/project/system/data/map/HashMap.as
+     * // the root : c: - the class : c:/project/system/data/maps/HashMap.as
      * </pre>
      */
     public dynamic class ExpressionFormatter extends Dictionary implements Formattable

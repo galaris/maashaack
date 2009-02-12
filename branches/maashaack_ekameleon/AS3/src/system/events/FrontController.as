@@ -69,20 +69,20 @@ package system.events
                 
         /**
          * Add a new entry into the FrontController.
-         * @param eventName:String
+         * @param type The type used to register the specified listener.
          * @param listener A listener Function or an EventListener object.
-         * @throws ArgumentError If the 'eventName' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
+         * @throws ArgumentError If the 'type' value in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          * @throws ArgumentError If the 'listener' object in argument is <code class="prettyprint">null</code> or <code class="prettyprint">undefined</code>.
          */
         public function add( type:String , listener:* ):void 
         {
             if ( type == null )
             {
-                throw new ArgumentError( this + " add() method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( "The FrontController add() method failed, the 'type' argument not must be null.") ;    
             }
             if ( listener == null )
             {
-                throw new ArgumentError( this + " add() method failed with the event type '" + type + "' failed, the 'listener' object in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( "The FrontController add() method failed, the event type '" + type + "' failed, the 'listener' argument not must be null.") ;    
             }
             if ( contains( type ) )
             {
@@ -94,23 +94,23 @@ package system.events
         
         /**
          * Adds a new EventListener into an EventListenerBatch in the FrontController.
-         * If this <code class="prettyprint">listener</code> argument is 'null' or 'undefined' and if the <code class="prettyprint">eventName</code> argument isn't register with an EventListenerBatch in the FrontController, 
+         * If this <code class="prettyprint">listener</code> argument is null' and if the <code class="prettyprint">eventName</code> argument isn't register with an EventListenerBatch in the FrontController, 
          * an empty EventListenerBatch is created and register in the FrontController with the specified 'eventName'.
-         * @param eventName The name of the event type.
+         * @param type The type to register the specified listener.
          * @param listener (optional) The <code class="prettyprint">EventListener</code> mapped in the FrontController with the specified event type (This listener is added in an EventListenerBatch). 
-         * @throws ArgumentError If the 'eventName' value in argument not must be 'null' or 'undefined'.
+         * @throws ArgumentError If the 'type' argument not must be null.
          */
-        public function addBatch( eventName:String , listener:EventListener ):void
+        public function addBatch( type:String , listener:EventListener = null ):void
         {
-            if ( eventName == null )
+            if ( type == null )
             {
-                throw new ArgumentError( this + " addBatch method failed, the 'eventName' value in argument not must be 'null' or 'undefined'.") ;    
+                throw new ArgumentError( "FrontController addBatch method failed, the type argument not must be null.") ;    
             }
-            if ( _map.containsKey(eventName) )
+            if ( _map.containsKey( type ) )
             {
-                if ( _map.get( eventName ) is EventListenerBatch && listener != null )
+                if ( _map.get( type ) is EventListenerBatch && listener != null )
                 {
-                    ( _map.get( eventName ) as EventListenerBatch ).add( listener ) ;
+                    ( _map.get( type ) as EventListenerBatch ).add( listener ) ;
                     return ;                
                 }
             }
@@ -119,7 +119,7 @@ package system.events
             {
                 batch.add( listener ) ;
             }
-            add( eventName , batch ) ;
+            add( type , batch ) ;
         }
         
         /**
@@ -130,21 +130,39 @@ package system.events
             if ( size() > 0 )
             {
                 var it:Iterator = _map.keyIterator() ;
-                while(it.hasNext())
+                var name:String ;
+                var listener:* ;
+                while( it.hasNext() )
                 {
-                    remove(it.next()) ;    
+                	name     = it.next() ;
+                    listener = _map.get( name ) ;
+                    if ( listener != null ) 
+                    {
+                        _dispatcher.unregisterEventListener( name , listener ) ;
+                    }                	
                 }
                 _map.clear() ;
             }    
         }
 
         /**
-         * Returns 'true' if the eventName is registered in the FrontController.
-         * @param eventName:String
+         * Returns <code class="prettyprint">true</code> if the specified type is registered in the FrontController.
+         * @param type The search type value.
+         * @return <code class="prettyprint">true</code> if the specified type is registered in the FrontController.
          */
-        public function contains( eventName:String ):Boolean 
+        public function contains( type:String ):Boolean 
         {
-            return _map.containsKey(eventName) ;    
+            return _map.containsKey( type ) ;    
+        }
+        
+        /**
+         * Indicates if the specified singleton reference is register.
+         * @param channel the channel value of the singleton reference register in the factory.
+         * @return <code class="prettyprint">true</code> If the specified singleton reference is register.
+         */
+        public static function containsInstance( channel:String ):Boolean
+        {
+            return _instances.containsKey( channel ) ;
         }
         
         /**
@@ -214,23 +232,24 @@ package system.events
 
         /**
          * Returns the listener register in the frontcontroller with the specified event name.
-         * @param  eventName:String
+         * @param type The type of the listener register.
          * @return an EventListener or a event callback Function.
          */
-        public function getListener(eventName:String):* 
+        public function getListener( type:String ):* 
         {
-            return _map.get(eventName) ;
+            return _map.get( type ) ;
         }
                 
         /**
-         * Indicates if the specified EventListener or listener registered with the 'eventName' value in argument is an EventListenerBatch instance.
+         * Indicates if the specified <code class="prettyprint">EventListener</code> registered with the specified type in argument is an EventListenerBatch instance.
+         * @param type The type to indicates if an EventListenerBatch is registered.
          * @return <code class="prettyprint">true</code> if the specified EventListener or listener function registered with the 'eventName' value in argument is an EventListenerBatch instance.
          */
-        public function isEventListenerBatch( eventName:String ):Boolean
+        public function isEventListenerBatch( type:String ):Boolean
         {
-            if ( contains( eventName ) )
+            if ( contains( type ) )
             {
-            	return getListener( eventName ) is EventListenerBatch ;
+            	return getListener( type ) is EventListenerBatch ;
             }
             else
             {
@@ -254,9 +273,14 @@ package system.events
         /**
          * Removes a global FrontController singleton.
          * @param channel The channel of the FrontController to remove.
+         * @return <code class="prettyprint">true</code> if a singleton is removed with the specified channel.
          */
-        public static function removeInstance( channel:String ):Boolean 
+        public static function removeInstance( channel:String = null ):Boolean 
         {
+            if( channel == null ) 
+            {
+                channel = EventDispatcher.DEFAULT_SINGLETON_CHANNEL ;
+            }        	
             if ( _instances.containsKey(channel) ) 
             {
                 return _instances.remove(channel) != null ;

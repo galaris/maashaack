@@ -72,7 +72,7 @@ package system.events
          */
         public static function containsInstance( channel:String ):Boolean
         {
-        	return instances.containsKey( channel ) ;
+        	return _instances.containsKey( channel ) ;
         }
         
         /**
@@ -80,7 +80,7 @@ package system.events
          */
         public static function flush():void 
         {
-            instances.clear() ;
+            _instances.clear() ;
         }
         
         /**
@@ -89,7 +89,7 @@ package system.events
          */
         public static function getChannels():Array
         {
-        	return ( instances.size() > 0 ) ? instances.getKeys() : null ; 
+        	return ( _instances.size() > 0 ) ? _instances.getKeys() : null ; 
         }
 
         /**
@@ -103,28 +103,28 @@ package system.events
             {
                 channel = DEFAULT_SINGLETON_CHANNEL ;
             }
-            if ( !instances.containsKey(channel) ) 
+            if ( !_instances.containsKey(channel) ) 
             {
             	var dispatcher:EventDispatcher = new EventDispatcher() ;
             	dispatcher.channel = channel ;
-                instances.put( channel , dispatcher ) ;
+                _instances.put( channel , dispatcher ) ;
             }
-            return instances.get( channel ) as EventDispatcher ;
+            return _instances.get( channel ) as EventDispatcher ;
         }
                 
         /**
          * Removes a global EventDispatcher singleton.
          * @return <code class="prettyprint">true</code> if a singleton is removed in the EventDispatcher factory.
          */
-        public static function removeInstance( name:String = null ):Boolean 
+        public static function removeInstance( channel:String = null ):Boolean 
         {
-            if( name == null ) 
+            if( channel == null ) 
             {
-            	name = DEFAULT_SINGLETON_CHANNEL ;
+            	channel = DEFAULT_SINGLETON_CHANNEL ;
             }
-            if ( instances.containsKey( name ) ) 
+            if ( _instances.containsKey( channel ) ) 
             {
-                return instances.remove( name ) != null ;
+                return _instances.remove( channel ) != null ;
             }
             return false ;
         }
@@ -137,7 +137,7 @@ package system.events
         /**
          * @private
          */    
-        private static var instances:ArrayMap = new ArrayMap() ;
+        private static var _instances:ArrayMap = new ArrayMap() ;
         
     }
     
