@@ -1,6 +1,9 @@
 #labels Code,Framework,Projects-X
 = Remove listeners =
 
+ * [http://code.google.com/p/maashaack/ HomePage]
+   * [events Returns events]
+
 == Description ==
 
 If you need to remove an event listener, that has been added before, you can use the *removeEventListener()* or the *unregisterEventListener()* methods of *system.events.!EventDispatcher*.
