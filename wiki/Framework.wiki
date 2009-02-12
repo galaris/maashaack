@@ -30,6 +30,8 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
 [errors Errors]
 
+[events Event model - DOM 2/3 W3C]
+
 [Evaluators]
 
 
