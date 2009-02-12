@@ -3,7 +3,7 @@
 
 The event model of *Maashaack* is based on the [http://www.w3.org/TR/DOM-Level-2-Events/events.html DOM2/3 W3C model events] and the implementation of the flash.events.* package in the !FlashPlayer 9 and 10.
 
-== Use the !EventDispatcher, !EventListener, !Event class and interfaces ==
+== Use the !EventDispatcher, !EventListener, Event class and interfaces ==
 
  # [TutorialsEvents_def Definitions]
  # [TutorialsEvents_intro Introduction]
