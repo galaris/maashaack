@@ -47,57 +47,57 @@ The first time, the triggered event will be only caught by the *!DebugHandler* n
 To complete this example we can read the content of the *!DebugHandler* class :
 
 {{{
-
-import system.events.Event ;
-import system.events.EventListener;
-
-/**
- * The DebugHandler class.
- */
-class examples.events.DebugHandler implements EventListener 
+package examples.events
 {
+    import flash.events.Event ;
+    import system.events.EventListener;
+    
+    /**
+     * The DebugHandler class.
+     */
+    public class DebugHandler implements EventListener 
+    {
+    
+        /**
+         * Creates a new DebugHandler instance.
+         */
+        public function DebugHandler(name) 
+        {
+            _name = name || "default" ;
+        }
+        
+        /**
+         * Returns tne name of the debugger.
+         */
+        public function get name():String 
+        {
+            return _name || "" ;
+        }
+        
+        /**
+         * Handles the event.
+         */
+        public function handleEvent(e:Event):void
+        {
+            trace( "-------- DebugHandler : Event has been triggered." ) ;
+            trace( "Event type     : " + e.type    ) ;
+            trace( "Event target   : " + e.target  ) ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         */
+        public function toString():String 
+        {
+           return "[DebugHandler name:" + _name + "]" ;
+        }
+        
+        /**
+         * @private
+         */
+        private var _name:String ;
+	
+    }
 
-    /**
-     * Creates a new DebugHandler instance.
-     */
-    public function DebugHandler(name) 
-    {
-        _name = name || "default" ;
-    }
-    
-    /**
-     * Indicates the name of the debugger.
-     */
-    public function get name():String 
-    {
-        return _name || "" ;
-    }
-
-    /**
-     * Handles the event.
-     */
-    public function handleEvent( e:Event ):void
-    {
-        trace( this + " handle : " + e ) ;
-        trace( "event-type     : " + e.type   ) ;
-        trace( "event-target   : " + e.target ) ;
-        trace("---") ;
-    }
-    
-    /**
-     * Returns the String representation of the object.
-     * @return the String representation of the object.
-     */
-    public function toString():String 
-    {
-        return "[DebugHandler name:" + _name + "]" ;
-    }
-    
-    /**
-     * @private
-     */
-    private var _name:String ;
-    
 }
-
 }}}
