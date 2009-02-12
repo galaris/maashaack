@@ -8,7 +8,7 @@ The event model of *Maashaack* is based on the [http://www.w3.org/TR/DOM-Level-2
  # [TutorialsEvents_def Definitions]
  # [TutorialsEvents_intro Introduction]
  # [TutorialsEvents_basic Basic example]
- # [TutorialsEvents_multi MultiCore EventDispatcher references]
+ # [TutorialsEvents_multi MultiCore EventDispatcher factory]
  # [TutorialsEvents_remove Removing listeners]
  # [TutorialsEvents_priority Eventlistener priority]
  # [TutorialsEvents_delegate The Delegate EventListener]
