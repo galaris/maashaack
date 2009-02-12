@@ -1,7 +1,7 @@
 #labels Code,Projects-X,Framework
 = Introduction =
 
-To use the *system.events.EventDispatcher* class you must creates 3 objects : the dispatcher, the listener and the event.
+To use the *system.events.!EventDispatcher* class you must creates 3 objects : the dispatcher, the listener and the event.
 
 To explain how *!EventDispatcher* works, i start off with a suite of very simple examples :
 
