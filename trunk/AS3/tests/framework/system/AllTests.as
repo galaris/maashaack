@@ -43,6 +43,7 @@ package system
     import system.data.AllTests;
     import system.errors.AllTests;
     import system.evaluators.AllTests;
+    import system.events.AllTests;
     import system.formatters.AllTests;
     import system.numeric.AllTests;
     import system.process.AllTests;
@@ -93,6 +94,9 @@ package system
             
             //evaluators
             suite.addTest(system.evaluators.AllTests.suite());
+            
+            //events
+            suite.addTest(system.events.AllTests.suite());            
             
             //formatters
             suite.addTest(system.formatters.AllTests.suite());
