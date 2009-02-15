@@ -79,7 +79,7 @@ done:
 todo:
  * Environment class (refactor)
  * reflection API
- * finnish all core objects: Strings, Arrays, Objects, etc.
+ * finish and fully review all core objects: Strings, Arrays, Objects, etc.
  * URI class
  * reorganization of the documentation (wiki)
  * explain the architecture
