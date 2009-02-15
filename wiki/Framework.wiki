@@ -71,6 +71,7 @@ todo:
  * finnish all core objects: Strings, Arrays, Objects, etc.
  * URI class
  * documentation / wiki
+ * explain the architecture: core / system / openscreens / libraries
  * support and test for FP10
 
 
