@@ -94,7 +94,6 @@ todo:
 
 *You Only Live Twice*
 
-done:
  * build based on ant
  * asdoc documentation
  * build as a swc for easy use
