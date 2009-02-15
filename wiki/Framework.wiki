@@ -11,7 +11,7 @@ cross-platform and standard packages, libraries, etc.
 
  * Flash 9
  * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
- * [http://code.google.com/p/redtamarin/ RedTamarin] (will be implemented in a different branch)
+ * [http://code.google.com/p/redtamarin/ redtamarin] (will be implemented in a different branch)
 
 = Details =
 
@@ -37,11 +37,18 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
 
 = Roadmap =
 
+== (maybe) ==
+
+ * ui: basic layout library, mainly for debug/diagnostic tools
+ * logger logic
+ * console (redtamarin vs flash player, also console1)
+
+
 == (v0.4.0) ==
 
 *Diamonds Are Forever*
 
- * BigNumber
+ * !BigNumber class
  * Math library
  * Encryption library
 
@@ -53,8 +60,10 @@ Flash 9, Apollo, !ActionScript 3 or any other AS3 host.
  * clean up eden code
  * add security features in eden
  * add sub-project to test eden files on the command-line
- * add inline errors in eden
- * add blocking/unblocking mode for eden (blocking: throw errors, unblocking: no errors)
+ * add inline errors in eden (line and column)
+ * add blocking/unblocking mode for eden (blocking: throw errors, unblocking: no errors that block the execution of the parsing)
+ * more serializers (WDDX, PHP, JSON, etc.)
+ * ressources logic (load/save etc.)
 
 == (v0.2.0) ==
 
@@ -68,10 +77,16 @@ done:
  * unit tests should run on the command line
 
 todo:
+ * Environment class (refactor)
+ * reflection API
  * finnish all core objects: Strings, Arrays, Objects, etc.
  * URI class
- * documentation / wiki
- * explain the architecture: core / system / openscreens / libraries
+ * reorganization of the documentation (wiki)
+ * explain the architecture
+   * core : very low-level classes without dependencies
+   * system : framework classes (which can have dependencies within the framework)
+   * openscreens : flash platform related libraries (SWF, AMF, SOL, etc.)
+   * libraries : 3rd party libraries (zlib, ogg, etc.)
  * support and test for FP10
 
 
@@ -79,25 +94,17 @@ todo:
 
 *You Only Live Twice*
 
+done:
  * build based on ant
  * asdoc documentation
  * build as a swc for easy use
  * better setup for unit tests
- * code review and refactor
-   * Environment
-   * standardize singletons
- * more unit tests
-
-features:
+ * standardize singletons
  * configurator
- * ressources
  * evaluator
- * reflection API
- * serializers
-   * eden is now part of system
-   * more serializers (WDDX, PHP, JSON, etc.)
- * core object utils: Strings, Arrays, Objects, etc.
+ * serializers logic (refactor)
+ * more unit tests
+ * eden is now part of system
  * cli: utils for command line tools
- * ui: basic layout library, mainly for debug/diagnostic tools
 
 tag: [http://maashaack.googlecode.com/svn/tags/0.1.0 0.1.0]
