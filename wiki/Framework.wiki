@@ -100,8 +100,8 @@ done:
  * build as a swc for easy use
  * better setup for unit tests
  * standardize singletons
- * configurator
- * evaluator
+ * configurator logic
+ * evaluator logic
  * serializers logic (refactor)
  * more unit tests
  * eden is now part of system
