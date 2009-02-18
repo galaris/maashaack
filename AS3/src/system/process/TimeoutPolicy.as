@@ -33,24 +33,67 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
-    
-	public class AllTests
+    import system.Reflection;
+    import system.Serializable;    
+
+    /**
+     * Defines the policy of the timeout states in the application.
+     */
+	public class TimeoutPolicy implements Serializable
 	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
+		
+    	/**
+    	 * Creates a new TimeoutPolicy instance.
+	     * @param the value of this policy object.
+	     */ 
+		public function TimeoutPolicy( value:uint )
+		{
+			_value = value ;
+		}
 
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
+    	/**
+	     * This constant defines the 'infinity' timeout policy value(0).
+	     */
+		public static const INFINITY:TimeoutPolicy = new TimeoutPolicy(0) ;
 
-            return suite;
-            
-        }
-        
+	    /**
+    	 * This constant defines the 'limit' timeout policy value(1).
+    	 */
+		public static const LIMIT:TimeoutPolicy = new TimeoutPolicy(1) ;
+
+	    /**
+    	 * Returns the eden string representation of this object.
+    	 * @return the eden string representation of this object.
+    	 */		
+		public function toSource( indent:int = 0 ):String 
+		{
+			return "new " + Reflection.getClassPath(this) + "(" + _value + ")" ;
+		}
+
+    	/**
+    	 * Returns the string representation of this object.
+    	 * @return the string representation of this object.
+    	 */	
+		public function toString():String
+		{
+			return String(_value) ;	
+		}
+
+    	/**
+    	 * Returns the primitive value of this object.
+    	 * @return the primitive value of this object.
+    	 */
+		public function valueOf():*
+		{
+			return _value ;
+		}
+		
+		/**
+		 * @private
+		 */
+		private var _value:uint ;
+		
 	}
 }

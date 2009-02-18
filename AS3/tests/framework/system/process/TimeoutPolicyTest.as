@@ -33,24 +33,44 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
-    
-	public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;        
+
+    public class TimeoutPolicyTest extends TestCase 
 	{
-        
-        public static function suite():ITest
+
+		public function TimeoutPolicyTest(name:String = "")
+		{
+			super(name);
+		}
+                
+        public function testConstructor():void
         {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
-
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
+        	var policy:TimeoutPolicy = new TimeoutPolicy(9999) ;
+            assertNotNull( policy , "TimeoutPolicy constructor failed, the instance not must be null." ) ;
         }
+
+                
+        public function testToSource():void
+        {
+            var source:String ;
+            
+            source = TimeoutPolicy.INFINITY.toSource() ;
+            assertEquals( source , "new system.process.TimeoutPolicy(0)"  , "01 - TimeoutPolicy toSource() failed." ) ;
         
+            source = TimeoutPolicy.LIMIT.toSource() ;
+            assertEquals( source , "new system.process.TimeoutPolicy(1)"  , "02 - TimeoutPolicy toSource() failed." ) ;
+        }
+   		
+        public function testToStringe():void
+        {
+            var source:String ;
+            
+            source = TimeoutPolicy.INFINITY.toString() ;
+            assertEquals( source , "0"  , "01 - TimeoutPolicy toString() failed." ) ;
+        
+        }		
+		
 	}
 }

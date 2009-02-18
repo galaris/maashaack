@@ -33,24 +33,65 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process.mocks 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
-    
-	public class AllTests
+    import system.process.CoreAction;											
+
+	/**
+	 * This mock simulate a conctrete Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
+	 */
+	public class MockAction extends CoreAction 
 	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
-
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
-        }
-        
+		
+		/**
+		 * Creates a new MockAction instance.
+		 */
+		public function MockAction()
+		{
+			super() ;
+		}
+		
+		/**
+		 * The counter of this class.
+		 */
+		public static var COUNT:uint = 0 ;
+		
+		/**
+		 * Reset the static counter.
+		 */
+		public static function reset():void
+		{
+			COUNT = 0 ;	
+		}
+		
+		/**
+		 * Notify all events to simulate the event flow of the object.
+		 */
+		public function notifyAll():void
+		{
+			notifyChanged() ;
+			notifyCleared() ;
+			notifyFinished() ;
+			notifyInfo("hello world") ;
+			notifyLooped() ;
+			notifyProgress() ;
+			notifyResumed() ;
+			notifyStarted() ;
+			notifyStopped() ;
+			notifyTimeOut() ;
+		}
+		
+		/**
+		 * Run the process.
+		 */
+		public override function run(...arguments:Array):void
+		{
+			setRunning(true) ;
+			notifyStarted() ;
+			COUNT ++ ;	
+			setRunning(false) ;
+			notifyFinished() ;
+		}
+		
 	}
 }

@@ -33,24 +33,76 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
+    import buRRRn.ASTUce.framework.TestCase;
     
-	public class AllTests
+    import system.process.samples.ActionClass;    																
+    
+	public class ActionTest extends TestCase 
 	{
-        
-        public static function suite():ITest
+
+		public function ActionTest(name:String = "")
+		{
+			super(name);
+		}
+		
+		public var action:ActionClass ;
+		
+        public function setUp():void
         {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
-
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
+			action = new ActionClass() ;
         }
         
+        public function tearDown():void
+        {
+			action = null ;
+        }		
+
+		public function testClone():void
+		{
+			assertNotNull( action.clone() as Action , "IAction clone method failed." ) ;
+		}
+		
+		public function testNotifyFinished():void
+		{
+			try
+			{
+				action.notifyFinished() ;
+				fail("01 - Action.notifyFinished method failed.") ;
+			}	
+			catch( e:Error )
+			{
+				assertEquals(e.message, "finished" , "02 - Action.notifyFinished method failed.") ;	
+			}
+		}
+	
+		public function testNotifyStarted():void
+		{
+			try
+			{
+				action.notifyStarted() ;
+				fail("IAction 01 notifyStarted method failed.") ;
+			}	
+			catch( e:Error )
+			{
+				assertEquals(e.message, "started" , "IAction 02 notifyStarted method failed.") ;	
+			}
+	
+		}	
+		
+		public function testRun():void
+		{
+			try
+			{
+				action.run() ;
+			}	
+			catch( e:Error )
+			{
+				assertEquals(e.message, "run" , "IAction run method failed.") ;	
+			}
+		}			
+		
 	}
 }
+
