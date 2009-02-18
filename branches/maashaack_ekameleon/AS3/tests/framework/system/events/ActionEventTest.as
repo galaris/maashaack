@@ -35,22 +35,15 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events  
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
+	
+	import buRRRn.ASTUce.framework.TestCase;
     
-	public class AllTests
+	public class ActionEventTest extends TestCase 
 	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
 
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
-        }
-        
+		public function ActionEventTest(name:String = "")
+		{
+			super(name);
+		}
 	}
 }

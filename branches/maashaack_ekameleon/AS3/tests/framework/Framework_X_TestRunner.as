@@ -39,7 +39,7 @@ package
     
     import system.* ;
     import system.console;
-    import system.events.*;
+    import system.process.*;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -85,7 +85,7 @@ package
             Runner.main
             ( 
                 //system.AllTests, 
-                system.events.AllTests.suite()  
+                system.process.AllTests.suite()  
             );
             
         }

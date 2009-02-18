@@ -33,24 +33,37 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
-{
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
+package system.process.samples 
+{    import system.events.EventDispatcher;
+    import system.process.Action;    
     
-	public class AllTests
-	{
-        
-        public static function suite():ITest
+    public class ActionClass extends EventDispatcher implements Action
+    {    
+        public function ActionClass()
         {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
-
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
+        	//
         }
-        
-	}
-}
+    
+        public function clone():*
+        {
+            return new ActionClass() ;
+        }
+    
+        public function notifyFinished():void
+        {
+            throw new Error("finished") ;
+        }
+    
+        public function notifyStarted():void
+        {
+            throw new Error("started") ;
+        }
+
+        public function run(...arguments:Array):void
+        {
+            throw new Error("run") ;
+        }       
+    
+    }
+    
+    }

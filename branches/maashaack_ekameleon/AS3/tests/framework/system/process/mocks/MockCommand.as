@@ -33,24 +33,28 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process.mocks 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
+    import system.process.Runnable;            
     
-	public class AllTests
+	public class MockCommand implements Runnable
 	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
 
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
-
-            return suite;
-            
-        }
-        
+		public function MockCommand()
+		{
+			super();
+		}
+		
+		public static var COUNT:uint = 0 ;
+		
+		public static function reset():void
+		{
+			COUNT = 0 ;	
+		}
+		
+		public function run(...arguments:Array):void
+		{
+			COUNT ++ ;	
+		}
 	}
 }

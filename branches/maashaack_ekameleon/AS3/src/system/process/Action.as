@@ -33,24 +33,42 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events  
+package system.process 
 {
-    import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
+    import system.Cloneable;
+    import system.events.IEventDispatcher;
+    import system.process.Runnable;    
+
+    /**
+     * Dispatched when a process is finished.
+     * @eventType system.events.ActionEvent.FINISH
+     * @see #notifyFinished
+     */
+    [Event(name="onFinished", type="system.events.ActionEvent")]
     
-	public class AllTests
-	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
+    /**
+     * Dispatched when a process is started.
+     * @eventType system.events.ActionEvent.START
+     * @see #notifyStarted
+     */
+    [Event(name="onStarted", type="system.events.ActionEvent")]
+    
+    /**
+     * This interface represents a process object.
+     */
+    public interface Action extends Cloneable, IEventDispatcher, Runnable
+    {
 
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
+        /**
+         * Notify an ActionEvent when the process is finished.
+         */
+        function notifyFinished():void ;
 
-            return suite;
-            
-        }
+        /**
+         * Notify an ActionEvent when the process is started.
+         */
+        function notifyStarted():void ;
         
-	}
+    }
+    
 }
