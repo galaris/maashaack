@@ -38,8 +38,8 @@ package system.process
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.events.ActionEvent;
-    import system.process.mocks.MockSimpleAction;
-    import system.process.mocks.MockSimpleActionListener;	
+    import system.process.mocks.MockTask;
+    import system.process.mocks.MockTaskListener;	
     
     public class BatchProcessTest extends TestCase 
 	{
@@ -51,18 +51,18 @@ package system.process
 		
         public var batch:BatchProcess ;		
 		
-		public var mockListener:MockSimpleActionListener ;		
+		public var mockListener:MockTaskListener ;		
 		
         public function setUp():void
         {
             batch = new BatchProcess() ;
             
-            batch.addAction(new MockSimpleAction()) ;
-            batch.addAction(new MockSimpleAction()) ;
-            batch.addAction(new MockSimpleAction()) ;
-            batch.addAction(new MockSimpleAction()) ;
+            batch.addAction(new MockTask()) ;
+            batch.addAction(new MockTask()) ;
+            batch.addAction(new MockTask()) ;
+            batch.addAction(new MockTask()) ;
             
-            mockListener = new MockSimpleActionListener(batch) ;
+            mockListener = new MockTaskListener(batch) ;
         }
         
         public function tearDown():void
@@ -70,7 +70,7 @@ package system.process
             mockListener.unregister() ;
             mockListener = undefined ;
             batch        = undefined ; 
-            MockSimpleAction.reset() ;	   
+            MockTask.reset() ;	   
         }		
 		
         public function testClone():void
@@ -82,10 +82,10 @@ package system.process
         
         public function testRun():void
         {
-			MockSimpleAction.reset() ;
+			MockTask.reset() ;
         	batch.run() ;
         	assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-        	assertEquals( MockSimpleAction.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
+        	assertEquals( MockTask.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
         	assertFalse( batch.running , "The running property of the BatchProcess must be false after the process." ) ;
         }
 		

@@ -41,7 +41,7 @@ package system.process.mocks
     /**
      * This Mock object listen all events dispatched from a Action object.
      */
-	public class MockActionListener extends MockSimpleActionListener
+	public class MockActionListener extends MockTaskListener
     {
         
         /**

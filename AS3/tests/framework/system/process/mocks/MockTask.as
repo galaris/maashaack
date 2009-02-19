@@ -36,19 +36,19 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process.mocks 
 {
     import system.Reflection;
-    import system.process.SimpleAction;    
+    import system.process.Task;    
 
     /**
-	 * This mock simulate an IAction object who increments a static counter "COUNT" when the run method of all instance of this class are called.
+	 * This mock simulate an Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
 	 * @author eKameleon
 	 */
-	public class MockSimpleAction extends SimpleAction 
+	public class MockTask extends Task 
 	{
 		
 		/**
-		 * Creates a new MockAction instance.
+		 * Creates a new MockTask instance.
 		 */
-		public function MockSimpleAction( id:*=null , verbose:Boolean=false )
+		public function MockTask( id:*=null , verbose:Boolean=false )
 		{
 			super() ;
 			this.id = id ;
@@ -75,7 +75,7 @@ package system.process.mocks
          */
         public override function clone():*
         {
-            return new MockSimpleAction(id, verbose) ;
+            return new MockTask(id, verbose) ;
         }
 		
 		/**

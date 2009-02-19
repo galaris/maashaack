@@ -75,7 +75,7 @@ package system.process
      * // [ActionEvent type="onFinished" target=[ActionProxy] context=null bubbles=false cancelable=false eventPhase=2]
      * </pre>
      */
-    public class ActionProxy extends SimpleAction
+    public class ActionProxy extends Task
     {
     
         /**
@@ -124,14 +124,12 @@ package system.process
         public override function run( ...arguments:Array ):void 
         {
             notifyStarted() ;
-            setRunning(true) ;
             var params:Array = [scope, method] ;
             if ( args != null && args.length > 0 )
             {
                 params = params.concat(args) ;
             }
             Delegate.create.apply(this, params)();
-            setRunning(false) ;
             notifyFinished() ;
         }
 

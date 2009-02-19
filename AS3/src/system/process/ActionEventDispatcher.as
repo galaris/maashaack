@@ -40,34 +40,49 @@ package system.process
     import flash.events.Event;    
 
     /**
-     * A process who dispatch events in the global event flow with a singleton reference of the EventDispatcher class with a specified channel.
+     * A process who dispatch events in the global event flow or locally.
      */
-    public class EventDispatcherProcess extends SimpleAction 
+    public class ActionEventDispatcher extends Task 
     {
 
         /**
-         * Creates a new EventDispatcherProcess instance.
+         * Creates a new ActionEventDispatcher instance.
          * @param event The event to dispatch.
          * @param global the flag to use a global event flow or a local event flow.
          * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function EventDispatcherProcess( event:* = null , global:Boolean = false, channel:String = null)
+        public function ActionEventDispatcher( event:* = null , global:Boolean = false, channel:String = null)
         {
             super( global, channel ) ;
-            if ( event is String )
-            {
-                this.event = new BasicEvent( event as String ) ;
-            }
-            else if ( event is Event )
-            {
-                this.event = event as Event ;
-            }
+            this.event = event ;
         }
         
         /**
          * The event to dispatch in this process.
          */
-        public var event:Event ;
+        public function get event():*
+        {
+        	return _event ;
+        }
+
+        /**
+         * The event to dispatch in this process.
+         */
+        public function set event( e:* ):void
+        {
+        	if ( e is String )
+            {
+                _event = new BasicEvent( e as String ) ;
+            }
+            else if ( e is Event )
+            {
+                _event = e as Event ;
+            }
+            else
+            {
+                _event = null ;	
+            }
+        }
         
         /**
          * Returns a shallow copy of this object.
@@ -75,24 +90,28 @@ package system.process
          */
         public override function clone():*
         {
-            return new EventDispatcherProcess( event , isGlobal() , channel ) ;
+            return new ActionEventDispatcher( event , isGlobal() , channel ) ;
         }
-
+        
         /**
          * Run the process.
          */
         public override function run( ...arguments:Array ):void 
         {
-        	setRunning(true) ;
             notifyStarted() ;
-            if ( event != null )
+            if ( _event != null )
             {
-                dispatchEvent( event ) ;
+                dispatchEvent( _event ) ;
             }
-            setRunning(false) ;
             notifyFinished() ;
         }
         
+        /**
+         * @private
+         */
+        private var _event:Event ;
+    
     }
+
 }
 

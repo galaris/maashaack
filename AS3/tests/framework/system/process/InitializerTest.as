@@ -37,17 +37,17 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;                								
     
-	public class InitProcessTest extends TestCase 
+	public class InitializerTest extends TestCase 
 	{
 
-		public function InitProcessTest(name:String = "")
+		public function InitializerTest(name:String = "")
 		{
 			super(name);
 		}
                 
 		public function testInitialize():void
 		{
-            var action:InitProcess = new InitProcess() ;
+            var action:Initializer = new Initializer() ;
             action.initialize = function():void
             {
                 throw new Error("init") ;
@@ -55,11 +55,11 @@ package system.process
 			try
 			{
 				action.initialize() ;
-				fail("01 - InitProcess initialize failed.");
+				fail("01 - Initializer initialize failed.");
 			}
 			catch( e:Error )
 			{
-				assertEquals(e.message, "init" , "02 - InitProcess initialize failed.") ;
+				assertEquals(e.message, "init" , "02 - Initializer initialize failed.") ;
 			}
 		}		
 		

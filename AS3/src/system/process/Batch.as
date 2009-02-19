@@ -43,67 +43,7 @@ package system.process
 
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
-     * This class use an internal typed <code class="prettyprint">SimpleCollection</code> to register all <code class="prettyprint">Action</code> objects.  
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import flash.display.StageAlign ;
-     * import flash.display.StageScaleMode ;
-     * 
-     * import system.events.ActionEvent ;
-     * import system.process.Batch ;
-     * 
-     * import pegas.transitions.easing.Back ;
-     * import pegas.transitions.easing.Bounce ;
-     * import pegas.transitions.easing.Elastic ;
-     * import pegas.transitions.Tween ;
-     * 
-     * Stage.align     = StageAlign.TOP_LEFT ;
-     * Stage.scaleMode = StageScaleMode.NO_SCALE ;
-     * 
-     * var batch:Batch = new Batch();
-     * 
-     * var change:Function = function( e:ActionEvent ):void
-     * {
-     *     if ( e.target is Tween )
-     *     {
-     *         var tw:Tween = e.target as Tween ;
-     *         var display:Shape = (tw.target as Shape) ;
-     *         display.scaleY  = display.scaleX ;
-     *     }
-     * }
-     * 
-     * var max:int = 50 ;
-     * for ( var i:int = 0; i < max ; i++ )
-     * {
-     *     var rec:Shape = addChild( new Shape() ) ;
-     *     rec.x = Math.random()*740 ;
-     *     rec.y = Math.random()*400 ;
-     *     rec.graphics.beginFill( Math.round( Math.random() * 0xFFFFFF ) , 1) ;
-     *     rec.graphics.drawRect(0,0,20,20) ;
-     *     rec.filters = [ new BlurFilter( Math.random() * 12 , Math.random() * 12 , 2 ) ] ;
-     *     
-     *     var tw:Tween = new Tween( rec ) ;
-     *     tw.addEventListener( ActionEvent.CHANGE , change , false, 0, true ) ;
-     *     tw.duration = 10 + Math.round( Math.random() * 24 ) ;
-     *     tw.insertProperty( "x"      , Bounce.easeOut  , rec.x      , Math.random() * 740 ) ;
-     *     tw.insertProperty( "y"      , Back.easeOut    , rec.y      , Math.random() * 400 ) ;
-     *     tw.insertProperty( "scaleX" , Elastic.easeOut , rec.scaleX , Math.random() ) ;
-     *     tw.insertProperty( "scaleY" , Back.easeOut    , rec.scaleY , Math.random() ) ;
-     *     
-     *     batch.insert( tw );
-     *     
-     * }
-     * 
-     * trace ("Press a key or your mouse to run the process...") ;
-     * 
-     * var run:Function = function ( e:Event ):void
-     * {
-     *     batch.run() ;
-     * }
-     * 
-     * stage.addEventListener( KeyboardEvent.KEY_DOWN , run ) ;
-     * stage.addEventListener( MouseEvent.MOUSE_DOWN  , run ) ;
-     * </pre>
+     * This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.  
      */
     public class Batch extends TypedCollection implements Runnable, Stoppable
     {
@@ -139,9 +79,12 @@ package system.process
             var ar:Array = toArray() ;
             var i:Number = -1 ;
             var l:Number = ar.length ;
-            if (l>0) while (++i < l) 
-            { 
-                ar[i].run() ; 
+            if (l>0) 
+            {
+            	while (++i < l) 
+                { 
+                    ar[i].run() ; 
+                }
             }
         }
         

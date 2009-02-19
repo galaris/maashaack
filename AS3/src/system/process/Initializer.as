@@ -37,53 +37,37 @@ package system.process
 {
 
     /**
-     * This Action launch the init method of ths process but notify an event before (ActionEvent.START) and after(ActionEvent.FINISH) the process.
-     * This class is a pseudo abstract class. Don't instanciate this class but create a custom class with it.
-     * @example
+     * This Action launch the initialize method of the object but notify an event before (ActionEvent.START) and after(ActionEvent.FINISH) the process.
+     * <p>You can override the initialize method of the object or extends the class.</p>
+     * <p><b>Example :</b></p>
      * You must use this class with a custom class who extends this class.
      * <pre class="prettyprint">
      * import system.events.ActionEvent ;
-     * import examples.InitTest ; // extends InitProcess.
+     * import system.process.Initializer ;
      * 
      * var debug:Function = function( e:ActionEvent ):void
      * {
-     *     trace ( e ) ;
+     *     trace ( e.type ) ;
      * }
      * 
-     * var p:InitTest = new InitTest() ;
+     * var process:Initializer = new Initializer() ;
      * 
-     * p.addEventListener( ActionEvent.START  , debug ) ;
-     * p.addEventListener( ActionEvent.FINISH , debug ) ;
-     * 
-     * p.run() ;
-     * 
-     * // [ActionEvent type="onStarted" target=[InitTest] context=null bubbles=false cancelable=false eventPhase=2]
-     * // [InitTest] custom initialize
-     * // [ActionEvent type="onFinished" target=[InitTest] context=null bubbles=false cancelable=false eventPhase=2]
-     * </pre>
-     * <code class="prettyprint">InitTest</code> is the child class of the <code class="prettyprint">InitProcess</code> pseudo abstract class :
-     * <pre class="prettyprint">
-     * package examples
+     * process.initialize = function():void
      * {
-     *     import system.process.InitProcess ;
-     *     
-     *     public class InitTest extends InitProcess
-     *     {
-     *     
-     *         public function InitTest( global:Boolean = false , channel:String = null )
-     *         {
-     *             super( global, channel );
-     *         }
-     *         
-     *         public function init():void
-     *         {
-     *             trace( this + " custom initialize") ;
-     *         }
-     *     }
+     *     trace( "hello world" ) ;
      * }
+     * 
+     * process.addEventListener( ActionEvent.START  , debug ) ;
+     * process.addEventListener( ActionEvent.FINISH , debug ) ;
+     * 
+     * process.run() ;
+     * 
+     * // start
+     * // "custom init process!"
+     * // finish
      * </pre>
      */
-    public dynamic class InitProcess extends ActionProxy
+    public dynamic class Initializer extends ActionProxy
     {
 
         /**
@@ -91,7 +75,7 @@ package system.process
          * @param global the flag to use a global event flow or a local event flow.
          * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function InitProcess( global:Boolean = false , channel:String = null ) 
+        public function Initializer( global:Boolean = false , channel:String = null ) 
         {
             super( this, this["init"], null, global, channel);
         }

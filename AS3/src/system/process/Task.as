@@ -36,7 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process 
 {
     import system.events.ActionEvent;
-    import system.events.CoreEventDispatcher;    
+    import system.events.CoreEventDispatcher;    
+
     /**
      * Dispatched when a process is finished.
      * @eventType system.events.ActionEvent.FINISH
@@ -54,7 +55,7 @@ package system.process
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
-    public class SimpleAction extends CoreEventDispatcher implements Action
+    public dynamic class Task extends CoreEventDispatcher implements Action
     {
     
         /**
@@ -62,7 +63,7 @@ package system.process
          * @param global the flag to use a global event flow or a local event flow.
          * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        function SimpleAction( global:Boolean = false , channel:String = null ) 
+        function Task( global:Boolean = false , channel:String = null ) 
         {
             super( global , channel ) ;        
         }
@@ -81,7 +82,7 @@ package system.process
          */
         public function clone():*
         {
-            return new SimpleAction( isGlobal(), channel ) ;
+            return new Task( isGlobal(), channel ) ;
         }
         
         /**
@@ -89,6 +90,8 @@ package system.process
          */
         public function notifyFinished():void 
         {
+        	setRunning( false ) ;
+        	finishIt() ;
             dispatchEvent( new ActionEvent( ActionEvent.FINISH , this ) ) ;
         }
 
@@ -97,6 +100,8 @@ package system.process
          */
         public function notifyStarted():void
         {
+        	setRunning( true ) ;
+        	startIt() ;
             dispatchEvent( new ActionEvent( ActionEvent.START , this ) ) ;
         }
         
@@ -108,7 +113,15 @@ package system.process
         {
             // overrides this method.
         }
-        
+
+        /**
+         * Called in the notifyFinished method.
+         */
+        protected function finishIt():void
+        {
+            // overrides
+        };
+                
         /**
          * Changes the running property value.
          */
@@ -116,6 +129,14 @@ package system.process
         {
             _isRunning = b ;    
         }
+
+        /**
+         * Called in the notifyStarted method.
+         */
+        protected function startIt():void
+        {
+            // overrides
+        };
 
         /**
          * @private

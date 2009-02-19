@@ -45,18 +45,18 @@ package system.process
         {
             
             var suite:TestSuite = new TestSuite( "system process package TESTS" ) ;
-            			
+
+            suite.addTestSuite( ActionEventDispatcherTest ) ;            			
             suite.addTestSuite( ActionProxyTest ) ;
             suite.addTestSuite( ActionTest ) ;
             suite.addTestSuite( BatchTest ) ;
             suite.addTestSuite( BatchProcessTest ) ;
             suite.addTestSuite( CoreActionTest ) ;
-            suite.addTestSuite( EventDispatcherProcessTest ) ;
-            suite.addTestSuite( InitProcessTest ) ;
+            suite.addTestSuite( InitializerTest ) ;
             suite.addTestSuite( MessageTest ) ;
             suite.addTestSuite( PauseTest ) ;
             suite.addTestSuite( SequencerTest ) ;
-            suite.addTestSuite( SimpleActionTest ) ;
+            suite.addTestSuite( TaskTest ) ;
             suite.addTestSuite( TimeoutPolicyTest ) ;
             
             return suite;

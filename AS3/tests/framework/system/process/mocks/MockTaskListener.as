@@ -37,23 +37,23 @@ package system.process.mocks
 {
     import system.events.ActionEvent;
     import system.process.Action;
-    import system.process.SimpleAction;	
+    import system.process.Task;    
 
     /**
      * This Mock object listen all events dispatched from a Action object.
      */
-	public class MockSimpleActionListener 
+	public class MockTaskListener 
     {
     
         /**
          * Creates a new MockSimpleActionListener instance.
-         * @param action The IAction of this mock to register.
+         * @param action The Action reference.
          */
-        public function MockSimpleActionListener( action:Action=null )
+        public function MockTaskListener( action:Action = null )
 		{
 			if ( action != null )
 			{
-        		register(action) ;
+        		register( action ) ;
 			}	
         }
         
@@ -103,9 +103,9 @@ package system.process.mocks
         {
             startCalled = true ;
             startType   = e.type ;
-            if ( action is SimpleAction )
+            if ( action is Task )
             {
-            	isRunning = (action as SimpleAction).running ;
+            	isRunning = (action as Task).running ;
             }
         }
         

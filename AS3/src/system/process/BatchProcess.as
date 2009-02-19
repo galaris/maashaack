@@ -87,7 +87,7 @@ package system.process
      * // onFinished
      * </pre>
      */
-    public class BatchProcess extends SimpleAction implements Stoppable
+    public class BatchProcess extends Task implements Stoppable
     {
         
         /**
@@ -159,16 +159,7 @@ package system.process
             }
             return b ;
         }
-        
-        /**
-         * Invoked before the notifyFinished method is invoked.
-         * Overrides this method.
-         */
-        public function finish():void
-        {
-            // overrides
-        }
-            
+                    
         /**
          * Returns the internal Batch reference of this layout manager.
          * @return the internal Batch reference of this layout manager.
@@ -213,33 +204,13 @@ package system.process
         }        
         
         /**
-         * Notify an ActionEvent when the process is finished.
-         */
-        public override function notifyFinished():void 
-        {
-            setRunning(false) ;
-            finish() ;
-            super.notifyFinished() ;
-        }
-         
-        /**
          * Notify an ActionEvent when the process is in progress.
          */
         public function notifyProgress( action:Action ):void 
         {
             dispatchEvent( new ActionEvent( _sTypeProgress, this , null, action ) ) ;
         }
-
-        /**
-         * Notify an ActionEvent when the process is started.
-         */
-        public override function notifyStarted():void 
-        {
-            start() ;
-            setRunning(true) ;
-            super.notifyStarted() ;
-        }
-
+        
         /**
          * Removes an <code class="prettyprint">Action</code> object in the internal batch collection.
          */
@@ -293,14 +264,6 @@ package system.process
         public function size():uint
         {
             return _batch.size() ;
-        }
-        
-        /**
-         * Invoked before the notifyStarted method is invoked. Overrides this method.
-         */
-        public function start():void
-        {
-            // overrides
         }
         
         /**
