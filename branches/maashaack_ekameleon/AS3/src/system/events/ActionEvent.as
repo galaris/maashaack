@@ -41,7 +41,6 @@ package system.events
 
     /**
      * The ActionEvent is notify by all the objects who implements the Action interface.
-     * @author eKameleon
      */
     public class ActionEvent extends BasicEvent
     {

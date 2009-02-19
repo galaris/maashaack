@@ -38,7 +38,7 @@ package system.process
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.events.ActionEvent;
-    import system.process.mocks.MockSimpleActionListener;    
+    import system.process.mocks.MockTaskListener;    
     
 	public class ActionProxyTest extends TestCase 
 	{
@@ -50,7 +50,7 @@ package system.process
 		
         public var action:ActionProxy ;		
 		
-		public var mockListener:MockSimpleActionListener ;		
+		public var mockListener:MockTaskListener ;		
 		
 		public var scope:Object ;
 		
@@ -69,7 +69,7 @@ package system.process
             };
         	
             action = new ActionProxy(scope, method, ["hello world", "hello city", "hello actionscript"] ) ;
-            mockListener = new MockSimpleActionListener(action) ;
+            mockListener = new MockTaskListener(action) ;
             
         }
         

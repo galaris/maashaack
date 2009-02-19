@@ -54,11 +54,16 @@ package system.process
     [Event(name="onStarted", type="system.events.ActionEvent")]
     
     /**
-     * This interface represents a process object.
+     * This interface represents the methods implemented in the Action objects.
      */
     public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
 
+        /**
+         * Indicates <code class="prettyprint">true</code> if the action is in progress.
+         */
+        function get running():Boolean ; 
+        
         /**
          * Notify an ActionEvent when the process is finished.
          */

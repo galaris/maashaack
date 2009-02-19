@@ -36,13 +36,18 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process.samples 
 {    import system.events.EventDispatcher;
     import system.process.Action;    
-    
+
     public class ActionClass extends EventDispatcher implements Action
     {    
         public function ActionClass()
         {
         	//
         }
+    
+        public function get running():Boolean
+        {
+        	return true ;
+        }     
     
         public function clone():*
         {
@@ -62,7 +67,9 @@ package system.process.samples
         public function run(...arguments:Array):void
         {
             throw new Error("run") ;
-        }       
+        }
+        
+      
     
     }
     

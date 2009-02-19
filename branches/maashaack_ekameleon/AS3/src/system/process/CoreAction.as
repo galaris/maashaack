@@ -96,7 +96,7 @@ package system.process
     /**
      * This class simplify a full implementation of the <code class="prettyprint">Action</code> interface.
      */
-    public class CoreAction extends SimpleAction
+    public class CoreAction extends Task
     {
         
         /**
@@ -264,6 +264,7 @@ package system.process
          */
         protected function notifyStopped():void
         {
+        	setRunning(false) ;
             dispatchEvent( new ActionEvent( _sTypeStop, this ) ) ;
         }
 

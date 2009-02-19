@@ -144,7 +144,6 @@ package system.process
             {
                 return ;
             }
-            setRunning( true ) ;
             notifyStarted() ;
             _timer.start() ;
         }
@@ -164,7 +163,6 @@ package system.process
         {
             if (_timer.running) 
             {
-                setRunning(false) ;
                 _timer.stop()     ;
                 notifyStopped()   ;
                 notifyFinished()  ;
@@ -209,7 +207,6 @@ package system.process
          */
         private function _onFinished(e:TimerEvent):void
         {
-            setRunning( false ) ;
             notifyFinished() ;
         }
         

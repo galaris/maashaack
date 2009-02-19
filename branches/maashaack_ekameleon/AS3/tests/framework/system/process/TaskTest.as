@@ -39,27 +39,27 @@ package system.process
     
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
-    import system.process.mocks.MockSimpleActionListener;    
+    import system.process.mocks.MockTaskListener;    
 
     /**
 	 * @author eKameleon
 	 */
-	public class SimpleActionTest extends TestCase 
+	public class TaskTest extends TestCase 
 	{
 
-		public function SimpleActionTest(name:String = "")
+		public function TaskTest(name:String = "")
 		{
 			super(name);
 		}
 		
-		public var action:SimpleAction ;
+		public var action:Task ;
 		
-		public var mockListener:MockSimpleActionListener ;
+		public var mockListener:MockTaskListener ;
 		
         public function setUp():void
         {
-            action       = new SimpleAction() ;
-            mockListener = new MockSimpleActionListener(action) ;
+            action       = new Task() ;
+            mockListener = new MockTaskListener(action) ;
 		}
         
         public function tearDown():void
@@ -71,21 +71,24 @@ package system.process
         
         public function testConstructor():void
         {
-            assertNotNull( action , "Action constructor failed, the instance not must be null." ) ;
-            assertTrue( action is SimpleAction , "Action is SimpleAction failed." ) ;
+            assertNotNull( action , "Task constructor failed, the instance not must be null." ) ;
         }
         
         public function testInherit():void
         {
             assertTrue( action is CoreEventDispatcher , "Action inherit CoreEventDispatcher failed.") ;
-            assertTrue( action is Action , "Action implements the IAction interface" ) ;    	
         }   
+        
+        public function testInterface():void
+        {
+            assertTrue( action is Action , "Task implements the Action interface" ) ;     
+        }
                 
         public function testClone():void
         {
-            var clone:SimpleAction = action.clone() as SimpleAction ;
-            assertNotNull( clone , "Action clone 01 method failed." ) ;
-            assertFalse( clone == action  , "Action 02 clone method failed." ) ;
+            var clone:Task = action.clone() as Task ;
+            assertNotNull( clone , "01 - Task clone() failed." ) ;
+            assertFalse( clone == action  , "02 - Task clone() failed." ) ;
         }
         
         public function testRunning():void
@@ -110,7 +113,6 @@ package system.process
         public function testRun():void
         {
             assertTrue( "run" in action           , "Action run 01 method exist." ) ;
-            assertTrue( action["run"] is Function , "Action run 02 method exist." ) ;
         }     		
         		
 		

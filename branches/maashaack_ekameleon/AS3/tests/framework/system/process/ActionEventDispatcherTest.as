@@ -40,32 +40,32 @@ package system.process
     import system.events.ActionEvent;
     import system.events.BasicEvent;
     import system.events.FrontController;
-    import system.process.mocks.MockSimpleActionListener;
+    import system.process.mocks.MockTaskListener;
     
     import flash.events.Event;    
 
-    public class EventDispatcherProcessTest extends TestCase 
+    public class ActionEventDispatcherTest extends TestCase 
 	{
 
-		public function EventDispatcherProcessTest(name:String = "")
+		public function ActionEventDispatcherTest(name:String = "")
 		{
 			super(name);
 		}
 		
-        public var action:EventDispatcherProcess ;		
+        public var action:ActionEventDispatcher ;		
 		
-		public var mockListener:MockSimpleActionListener ;			
+		public var mockListener:MockTaskListener ;			
 		
         public function setUp():void
         {
         	FrontController.getInstance("myChannel").add("test" , _testHandleEvent ) ;
-            action       = new EventDispatcherProcess("test", true , "myChannel" ) ;
-            mockListener = new MockSimpleActionListener( action ) ;
+            action       = new ActionEventDispatcher("test", true , "myChannel" ) ;
+            mockListener = new MockTaskListener( action ) ;
         }
         
         public function tearDown():void
         {
-        	FrontController.getInstance().remove("test") ;
+        	FrontController.getInstance("myChannel").remove("test") ;
             mockListener.unregister() ;
             mockListener = undefined  ;
             action       = undefined  ;
@@ -74,13 +74,13 @@ package system.process
 		public function testConstructor():void
 		{
 		
-			var p:EventDispatcherProcess ;
+			var p:ActionEventDispatcher ;
 			
-			p = new EventDispatcherProcess("test") ;			
+			p = new ActionEventDispatcher("test") ;			
 			
-			assertNotNull ( p , "constructor failed, The instance not must be null") ;
-			assertTrue    ( p is SimpleAction , "constructor failed, the EventDispatcherProcess class must inherit SimpleAction.") ;
-			assertNotNull ( p.event   , "constructor failed, the EventDispatcherProcess event property not must be null.") ;
+			assertNotNull ( p , "01 - ActionEventDispatcher constructor failed.") ;
+			assertTrue    ( p is Task , "02 - ActionEventDispatcher constructor failed.") ;
+			assertNotNull ( p.event   , "03 - ActionEventDispatcher constructor failed.") ;
 			
 		}
 		
@@ -92,10 +92,9 @@ package system.process
 		
 		public function testClone():void
         {
-        	var clone:EventDispatcherProcess = action.clone() ;
-        	assertNotNull ( clone  , "clone method failed, with a null shallow copy object." ) ;
-        	assertNotSame ( clone  , EventDispatcherProcess  , "clone method failed, the shallow copy isn't the same with the BatchProcess object." ) ;
-        	assertSame    ( clone.event, action.event , "The event of the clone must be the same in the EventDispatcherProcess object") ;
+        	var clone:ActionEventDispatcher = action.clone() as  ActionEventDispatcher;
+        	assertNotNull ( clone  , "01 - clone method failed, with a null shallow copy object." ) ;
+        	assertNotSame ( clone  , ActionEventDispatcher  , "02 - clone method failed, the shallow copy isn't the same with the ActionEventDispatcher object." ) ;
 		}
         
         public function testRun():void
@@ -108,7 +107,7 @@ package system.process
 			assertTrue   ( mockListener.startCalled   , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals ( mockListener.startType     , ActionEvent.START   , "run method failed, bad type found when the process is started." );
             
-            assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
+            assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.FINISH event isn't notify" ) ;
             assertEquals ( mockListener.finishType    , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
             
             assertTrue    ( _testHandleEventCalled , "The global event isn't dispatched in the global event flow with the FrontController") ;

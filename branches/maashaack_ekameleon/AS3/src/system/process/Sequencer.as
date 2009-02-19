@@ -183,7 +183,6 @@ package system.process
             {
                 if ( !running ) 
                 {
-                    setRunning( true ) ;
                     notifyStarted() ;
                 }
                 else
@@ -218,7 +217,6 @@ package system.process
                 }
                 if ( running == true ) 
                 {
-                    setRunning(false) ;
                     notifyFinished() ;
                 }
             }
@@ -254,7 +252,7 @@ package system.process
          */
         public function start():void 
         {
-            if ( !running ) 
+            if ( ! running ) 
             {
                 run() ;
             }
