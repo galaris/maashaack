@@ -139,7 +139,7 @@ package system.evaluators
          */
         public function eval( o:* ):*
         {
-            if ( o is String && target != null )
+            if ( o != null && o is String && target != null )
             {
                 var exp:String = o as String ;
                 if ( exp.length > 0 )
