@@ -35,7 +35,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;                								
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Reflection;                            								
     
 	public class InitializerTest extends TestCase 
 	{
@@ -44,7 +46,25 @@ package system.process
 		{
 			super(name);
 		}
-                
+
+        public function testConstructor():void
+        {
+        	var action:Initializer = new Initializer() ;
+        	assertNotNull( action , "Initializer constructor failed.") ;
+        }
+
+        public function testInherit():void
+        {
+            var action:Initializer = new Initializer() ;
+            assertTrue( action is ActionProxy , "Initializer inherit ActionProxy failed.") ;
+        }
+
+        public function testIsDynamic():void
+        {
+            var action:Initializer = new Initializer() ;
+            assertTrue( Reflection.getClassInfo(action).isDynamic() , "Initializer is dynamic.") ;
+        }
+        
 		public function testInitialize():void
 		{
             var action:Initializer = new Initializer() ;
