@@ -69,15 +69,15 @@ package system.process
         /**
          * Creates a new Pause instance.
          * @param duration the duration of the pause.
-         * @param seconds the flag to indicates if the duration is in second or not.
-         * @param bGlobal the flag to use a global event flow or a local event flow.
-         * @param sChannel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param useSeconds the flag to indicates if the duration is in second or not.
+         * @param global the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function Pause( duration:uint = 0 , seconds:Boolean = false , bGlobal:Boolean = false , sChannel:String = null )
+        public function Pause( duration:Number = 0 , useSeconds:Boolean = true , global:Boolean = false , channel:String = null )
         {
-            super(bGlobal, sChannel) ;
+            super( global , channel ) ;
             _setDuration( duration ) ;
-            _setUseSeconds( seconds ) ;
+            _setUseSeconds( useSeconds ) ;
             _timer = new Timer( delay , 1 ) ;
             _timer.addEventListener( TimerEvent.TIMER_COMPLETE , _onFinished ) ;
             _timer.addEventListener( TimerEvent.TIMER , _onTimer ) ;
@@ -95,7 +95,7 @@ package system.process
         /**
          * Indicates the duration of the process.
          */
-        public function get duration():uint
+        public function get duration():Number
         {
             return ( isNaN(_duration) && !isFinite(_duration) ) ? 1 : _duration ;
         }
@@ -103,7 +103,7 @@ package system.process
         /**
          * @private
          */
-        public function set duration( n:uint ):void 
+        public function set duration( n:Number ):void 
         {
             _duration = (isNaN(n) && n < 0 && !isFinite(n) ) ? 0 : n ;
             _timer.delay = delay ;
@@ -190,7 +190,7 @@ package system.process
         /**
          * @private
          */
-        private var _duration:uint = 0;
+        private var _duration:Number = 0;
 
         /**
          * @private
