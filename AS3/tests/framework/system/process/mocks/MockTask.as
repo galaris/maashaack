@@ -40,7 +40,6 @@ package system.process.mocks
 
     /**
 	 * This mock simulate an Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
-	 * @author eKameleon
 	 */
 	public class MockTask extends Task 
 	{
