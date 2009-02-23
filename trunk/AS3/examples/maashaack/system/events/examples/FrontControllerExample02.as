@@ -7,16 +7,17 @@ package examples
     import flash.display.Sprite;
     import flash.events.Event;    
 
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
     /**
      * This class provides an example of the FrontController class 
      * with this static method getInstance().
      */
-    public class FrontController_01 extends Sprite 
+    public class FrontControllerExample02 extends Sprite 
     {
 
-        public function FrontController_01()
+        public function FrontControllerExample02()
         {
-        
             var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
             var dispatcher:EventDispatcher = EventDispatcher.getInstance( "myChannel" ) ;
             
@@ -25,7 +26,6 @@ package examples
             
             dispatcher.dispatchEvent( new Event( "type1" ) ) ; // # action1 : type1
             dispatcher.dispatchEvent( new Event( "type2" ) ) ; // # action2 : type2
-            
         }
         
         public function listener1( e:Event ):void 
