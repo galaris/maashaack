@@ -53,7 +53,6 @@ package system.process
             suite.addTestSuite( BatchProcessTest ) ;
             suite.addTestSuite( CoreActionTest ) ;
             suite.addTestSuite( InitializerTest ) ;
-            suite.addTestSuite( MessageTest ) ;
             suite.addTestSuite( PauseTest ) ;
             suite.addTestSuite( SequencerTest ) ;
             suite.addTestSuite( TaskTest ) ;
