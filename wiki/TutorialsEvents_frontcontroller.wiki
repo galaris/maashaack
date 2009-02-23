@@ -1,0 +1,121 @@
+#labels Projects-X,Code
+= Design pattern FrontController based on the W3C event propagation =
+
+ * [http://code.google.com/p/maashaack/ HomePage]
+   * [events Returns events]
+
+The *front controller* design pattern defines a single *system.events.!EventDispatcher* object that is responsible for processing application requests.
+
+The front controller centralizes functions such as view selection, security, and templating, and applies them consistently across all pages or views. Consequently, when the behavior of these functions need to change, only a small part of the application needs to be changed : the controller and its helper classes.
+
+{{{
+package examples 
+{
+    import system.events.EventDispatcher;
+    import system.events.EventListener;
+    import system.events.FrontController;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;    
+
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
+    /**
+     * Basic example to use the FrontController class and register an EventListener
+     * and a simple function.
+     */
+    public class FrontControllerExample01 extends Sprite implements EventListener
+    {
+
+        public function FrontControllerExample01()
+        {
+            var controller:FrontController = new FrontController() ;
+            var dispatcher:EventDispatcher = EventDispatcher.getInstance() ;
+            
+            controller.add( "type1" , this     ) ;
+            controller.add( "type2" , listener ) ;
+            
+            dispatcher.dispatchEvent( new Event( "type1" ) ) ; // # action1 : type1
+            dispatcher.dispatchEvent( new Event( "type2" ) ) ; // # action2 : type2
+        }
+        
+        /**
+         * Handles the event with an EventListener object 
+         * (implementation with the EventListener interface).
+         */
+        public function handleEvent(e:Event):void
+        {
+            trace("# handleEvent : " + e.type ) ; 
+        }
+
+        /**
+         * Handles the event with a basic listener function.
+         */
+        public function listener( e:Event ):void 
+        {
+            trace("# handleEvent : " + e.type ) ; 
+        }
+
+    }
+}
+}}}
+
+You can defines a channel when you initialize your front controller :
+
+{{{
+var controller:FrontController = new FrontController( "myChannel" ) ;
+
+EventDispatcher.getInstance("myChannel").dispatchEvent( new Event("type") ) ; 
+}}}
+
+This channel link your front controller with the *!system.events.EventDispatcher* singleton with the same channel.
+
+The FrontController class use the "locator" design pattern and can be use with the factory static method *getInstance( channel:String )* :
+
+{{{
+package examples 
+{
+    import system.events.EventDispatcher;
+    import system.events.FrontController;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;    
+
+    /**
+     * This class provides an example of the FrontController class 
+     * with this static method getInstance().
+     */
+    public class FrontControllerExample02 extends Sprite 
+    {
+
+        public function FrontControllerExample02()
+        {
+        
+            var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
+            var dispatcher:EventDispatcher = EventDispatcher.getInstance( "myChannel" ) ;
+            
+            controller.add( "type1" , listener1 ) ;
+            controller.add( "type2" , listener2 ) ;
+            
+            dispatcher.dispatchEvent( new Event( "type1" ) ) ; // # action1 : type1
+            dispatcher.dispatchEvent( new Event( "type2" ) ) ; // # action2 : type2
+            
+        }
+        
+        public function listener1( e:Event ):void 
+        {
+            trace("# action1 : " + e.type ) ; 
+        }
+
+        public function listener2( e:Event ):void 
+        {
+            trace("# action2 : " + e.type ) ; 
+        }
+        
+    }
+}
+
+}}}
+
+// TODO : fireEvent method
+// TODO : addBatch method
