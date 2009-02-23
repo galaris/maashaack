@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;    			
+    import buRRRn.ASTUce.framework.TestCase;        			
 
     public class PauseTest extends TestCase 
 	{
@@ -60,22 +60,66 @@ package system.process
         public function testConstructor():void
         {
             assertNotNull( pause , "Pause constructor failed, the instance not must be null." ) ;
-            assertTrue( pause is Pause , "Pause constructor failed, bad type." ) ;
         }
-        
+
+        public function testInherit():void
+        {
+            assertTrue( pause is CoreAction , "Pause must inherit the CoreAction class." ) ;
+        }
+
         public function testDelay():void
         {
-        	assertEquals( pause.delay, 0  , "Pause default delay failed." ) ;
+            var pause:Pause ;
+            
+            pause = new Pause() ;
+            assertEquals( pause.delay , 0 , "01 - Pause delay failed." ) ;
+            
+            pause = new Pause(1) ;
+            assertEquals( pause.delay , 1000 , "02 - Pause delay failed." ) ;
+
+            pause = new Pause(1, true) ;
+            assertEquals( pause.delay , 1000 , "02 - Pause delay failed." ) ;
+
+            pause = new Pause(1000, false) ;
+            assertEquals( pause.delay , 1000 , "03 - Pause delay failed." ) ;
+        
         }
         
         public function testDuration():void
         {
-        	assertEquals( pause.duration, 0  , "Pause default duration failed." ) ;
+            pause = new Pause() ;        	
+        	assertEquals( pause.duration, 0  , "01 - Pause default duration failed." ) ;
+        	try
+        	{
+        	   pause.duration = -1 ;
+        	   fail( "02-01 - Pause default duration failed." ) ;
+        	}
+        	catch( e:Error )
+            {
+                assertTrue( e is RangeError , "02-02 - Pause default duration failed." ) ;	
+            }
+            
+            try
+            {
+               pause.duration = Number.MAX_VALUE ;
+               fail( "03-01 - Pause default duration failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is RangeError , "03-02 - Pause default duration failed." ) ;  
+            }
         }
         
         public function testUseSeconds():void
         {
-        	assertFalse( pause.useSeconds , "Pause default useSeconds failed." ) ;
+        	var pause:Pause = new Pause() ;
+        	assertTrue( pause.useSeconds , "01 - Pause useSeconds failed." ) ;
+        	
+        	pause.useSeconds = false ;
+        	assertFalse( pause.useSeconds , "02 - Pause useSeconds failed." ) ;
+        	
+        	pause.useSeconds = true ;
+            assertTrue( pause.useSeconds , "03 - Pause useSeconds failed." ) ;
         }
                 
         public function testClone():void
