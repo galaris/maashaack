@@ -8,8 +8,8 @@ You can create instances of the *system.events.!EventDispatcher* class with the 
 
 The big difference between the *flash.events.!EventDispatcher* class and the *system.events.!EventDispatcher* class are :
 
- * The method *registerEventListener* and *unregisterEventListener* to register EventLister objects and not only the functions. 
- * The factory static methods getInstance(channel:String) defines in the system.events.EventDispatcher implementation to create global event dispatcher in your applications.
+ * The method *registerEventListener* and *unregisterEventListener* to register *!EventLister* objects and not only the functions. 
+ * The factory static methods *getInstance(channel:String)* defines in the *system.events.!EventDispatcher* implementation to create global event dispatcher in your applications.
 
 This approach has been taken, to be able to allow more than one global dispatcher instance per application. 
 
