@@ -40,10 +40,7 @@ package system.process
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
     import system.process.mocks.MockTaskListener;    
-
-    /**
-	 * @author eKameleon
-	 */
+    
 	public class TaskTest extends TestCase 
 	{
 
@@ -112,7 +109,7 @@ package system.process
         
         public function testRun():void
         {
-            assertTrue( "run" in action           , "Action run 01 method exist." ) ;
+            assertTrue( "run" in action , "Action run 01 method exist." ) ;
         }     		
         		
 		
