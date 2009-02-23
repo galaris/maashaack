@@ -59,9 +59,14 @@ package system.process
 			action = null ;
         }		
 
+        public function testRunning():void
+        {
+            assertTrue( action.running , "Action running property failed." ) ;
+        }
+
 		public function testClone():void
 		{
-			assertNotNull( action.clone() as Action , "IAction clone method failed." ) ;
+			assertNotNull( action.clone() as Action , "Action clone method failed." ) ;
 		}
 		
 		public function testNotifyFinished():void
@@ -69,11 +74,11 @@ package system.process
 			try
 			{
 				action.notifyFinished() ;
-				fail("01 - Action.notifyFinished method failed.") ;
+				fail("01 - Action.notifyFinished failed.") ;
 			}	
 			catch( e:Error )
 			{
-				assertEquals(e.message, "finished" , "02 - Action.notifyFinished method failed.") ;	
+				assertEquals(e.message, "finished" , "02 - Action notifyFinished failed.") ;	
 			}
 		}
 	
@@ -82,11 +87,11 @@ package system.process
 			try
 			{
 				action.notifyStarted() ;
-				fail("IAction 01 notifyStarted method failed.") ;
+				fail("01 - Action notifyStarted failed.") ;
 			}	
 			catch( e:Error )
 			{
-				assertEquals(e.message, "started" , "IAction 02 notifyStarted method failed.") ;	
+				assertEquals(e.message, "started" , "02 - Action notifyStarted failed.") ;	
 			}
 	
 		}	
