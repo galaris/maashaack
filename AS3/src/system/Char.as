@@ -48,6 +48,9 @@ package system
         
         private static var _ch:Char = new Char( "" ); //char reused in static methods
         
+        private static var _alphabetic:String = "abcdefghijklmnopqrstuvwxyz";
+        private static var _digit:String      = "0123456789";
+        
         /**
          * The "null" unicode character.
          */
@@ -213,7 +216,6 @@ package system
          */
         public static const DEL:Char  = new Char( "\u007F" );
         
-        //////
         
         /**
          * The "space" unicode character.
@@ -341,37 +343,37 @@ package system
         public static const backslash:Char = new Char( "\\" ); 
         
         /**
-         * The "" unicode character.
+         * The closing bracket "]" character.
          */
         public static const closingBracket:Char = new Char( "]" );
         
         /**
-         * The "" unicode character.
+         * The circumflex "^" character.
          */
         public static const circumflex:Char = new Char( "^" );
         
         /**
-         * The underline "_" unicode character.
+         * The underline "_" character.
          */
         public static const underline:Char = new Char( "_" );
         
         /**
-         * The graveAccent "`" unicode character.
+         * The grave accent "`" character.
          */
         public static const graveAccent:Char = new Char( "`" );
         
         /**
-         * The openingBrace "{" unicode character.
+         * The opening brace "{" character.
          */
         public static const openingBrace:Char = new Char( "{" );
         
         /**
-         * The vertical line "|" unicode character.
+         * The vertical line "|" character.
          */
         public static const pipe:Char = new Char( "|" ); //
         
         /**
-         * The closingBrace "}" unicode character.
+         * The closing brace "}" character.
          */
         public static const closingBrace:Char = new Char( "}" );
         
@@ -382,7 +384,7 @@ package system
         
         
         /**
-         * The Array representation of all UTF8 controls characters.
+         * The Array representation of all ASCII controls characters.
          */
         public static var controls:Array = [ NUL, SOH, STX, ETX, EOT, ENQ, ACK, BEL,
                                               BS, TAB,  LF,  VT,  FF,  CR,  SO,  SI,
@@ -391,7 +393,7 @@ package system
                                              DEL ];
         
         /**
-         * The Array representation of all UTF8 symbols characters.
+         * The Array representation of all ASCII symbols characters.
          */
         public static var symbols:Array  = [ space, exclamationPoint, quotationMarks, numberSign, dollarSign,
                                              percent, ampersand, apostrophe, openingParenthesis, closingParenthesis,
@@ -400,6 +402,39 @@ package system
                                              openingBracket, backslash, closingBracket, circumflex, underline,
                                              graveAccent, openingBrace, pipe, closingBrace, tilde ];
         
+        
+        private static var _alphabetics:Array;
+        private static var _alphabeticsUpper:Array;
+        
+        /**
+        * The Array representation of all ASCII alphabetics characters
+        */
+        public static function get alphabetics():Array
+        {
+            if( _alphabetics )
+            {
+                return _alphabetics;
+            }
+            
+            _alphabetics = Strings.splitToChars( _alphabetic );
+            
+            return _alphabetics;
+        }
+        
+        /**
+        * The Array representation of all ASCII alphabetics characters (upper case).
+        */
+        public static function get alphabeticsUpper():Array
+        {
+            if( _alphabeticsUpper )
+            {
+                return _alphabeticsUpper;
+            }
+            
+            _alphabeticsUpper = Strings.splitToChars( _alphabetic, "toUpperCase" );
+            
+            return _alphabeticsUpper;
+        }
         
         /**
          * Creates a new Char instance.
@@ -457,6 +492,12 @@ package system
         {
             _ch.value = c.charAt( index );
             return _ch.isASCII( extended );
+        }
+        
+        public static function isContained( c:String, index:uint = 0, charset:String = "" ):Boolean
+        {
+            _ch.value = c.charAt( index );
+            return _ch.isContained( charset );
         }
         
         public static function isControl( c:String, index:uint = 0 ):Boolean
@@ -537,7 +578,6 @@ package system
             return _ch.isUpper();
         }
         
-        
         /**
          * Indicates if the specified character is a whitespace char.
          */
@@ -561,7 +601,29 @@ package system
                 max = 255;
             }
             
-            return _c.charCodeAt( 0 ) < max ;
+            return code < max ;
+        }
+        
+        /**
+        * Indicates if the character is contained in a serie of chars (or charset)
+        * @param charset a list of characters
+        */
+        public function isContained( charset:String ):Boolean
+        {
+            if( (charset == null) || (charset.length == 0) )
+            {
+                return false;
+            }
+            
+            for( var i:int = 0; i< charset.length; i++ )
+            {
+                if( _c == charset.charAt( i ) )
+                {
+                    return true;
+                }
+            }
+            
+            return false;
         }
         
         /**
@@ -685,7 +747,7 @@ package system
          */
         public function toNumber():Number
         {
-            return _c.charCodeAt( 0 );
+            return code;
         }
         
         /**
@@ -693,7 +755,7 @@ package system
          */
         public function toHexadecimal():String
         {
-            var hex:String = _c.charCodeAt( 0 ).toString( 16 );
+            var hex:String = code.toString( 16 );
             return (hex.length == 1) ? "0" + hex : hex ;
         }
         
@@ -702,7 +764,7 @@ package system
          */
         public function toOctal():String
         {
-            var oct:String = _c.charCodeAt( 0 ).toString( 8 );
+            var oct:String = code.toString( 8 );
             
             while( oct.length < 3 )
             {
@@ -710,6 +772,16 @@ package system
             }
             
             return oct;
+        }
+        
+        public function toLower():Char
+        {
+            return new Char( _c.toLowerCase() );
+        }
+        
+        public function toUpper():Char
+        {
+            return new Char( _c.toUpperCase() );
         }
         
         /**
