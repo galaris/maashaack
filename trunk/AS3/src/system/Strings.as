@@ -900,7 +900,25 @@ package system
             
             return compare( str.substr( 0, value.length ), value ) == 0;
         }
-
+        
+        /**
+        * Split every individual char in a string to an array of Char instances.
+        * @param str The string to split
+        * @param modifier The optional string modifier name (a function to apply)
+        */
+        public static function splitToChars( str:String, modifier:String = "toString" ):Array
+        {
+            var arr:Array = []
+            var i:int;
+            
+            for( i=0; i<str.length; i++ )
+            {
+                arr.push( new Char( str[modifier](), i ) );
+            }
+            
+            return arr;
+        }
+        
         /**
          * Removes all occurrences of a set of specified characters (or strings) from the beginning and end of this instance.
          * <p><b>Example :</b></p>

@@ -73,52 +73,52 @@ package system
      */
     public class Version implements Equatable
     {
-
+        
         /**
          * @private
          */
-        private var _build:uint;        
-
+        private var _build:uint;
+        
         /**
          * @private
          */
         private var _major:uint;
-
+        
         /**
          * @private
          */
         private var _maxBuild:uint = 0xff;
-
+        
         /**
          * @private
          */
         private var _maxMajor:uint = 0xf;
-
+        
         /**
          * @private
          */
         private var _maxMinor:uint = 0xf;
-
+        
         /**
          * @private
          */
-        private var _maxRevision:uint = 0xffff;        
-
+        private var _maxRevision:uint = 0xffff;
+        
         /**
          * @private
          */
         private var _minor:uint;
-
+        
         /**
          * @private
          */
         private var _revision:uint;
-
+        
         /**
          * @private
          */
         private var _separator:String = ".";
-
+        
         /**
          * @private
          */
@@ -143,7 +143,7 @@ package system
             
             return f; //we always have a minimum field of 1, the major field
         }
-
+        
         /**
          * Creates a new Version instance.
          * @param major The major value of the version.
@@ -166,12 +166,12 @@ package system
                 revision      = v.revision;
             }
             
-            this.major = major;
-            this.minor = minor;
-            this.build = build;
+            this.major    = major;
+            this.minor    = minor;
+            this.build    = build;
             this.revision = revision;
         }
-
+        
         /**
          * Constructs a Version object from a string.
          */
@@ -199,7 +199,7 @@ package system
             
             return v;
         }
-
+        
         /**
          * Constructs a Version object from a number.
          * If the number is zero or negative, or is NaN or Infity returns an empty version object.
@@ -223,7 +223,7 @@ package system
             
             return v;
         }
-
+        
         /**
          * Indicates the build value of this version.
          */
@@ -231,23 +231,23 @@ package system
         {
             return _build;
         }
-
+        
         /**
          * @private
          */
         public function set build( value:uint ):void
         {
             _build = Math.min( value, _maxBuild );
-        }        
-
+        }
+        
         /**
          * Indicates the major value of this version.
-         */        
+         */
         public function get major():uint
         {
             return _major;
         }
-
+        
         /**
          * @private
          */        
@@ -255,7 +255,7 @@ package system
         {
             _major = Math.min( value, _maxMajor );
         }
-
+        
         /**
          * Indicates the minor value of this version.
          */
@@ -263,7 +263,7 @@ package system
         {
             return _minor;
         }
-
+        
         /**
          * @private
          */ 
@@ -271,7 +271,7 @@ package system
         {
             _minor = Math.min( value, _maxMinor );
         }
-
+        
         /**
          * Indicates the revision value of this version.
          */
@@ -279,7 +279,7 @@ package system
         {
             return _revision;
         }
-
+        
         /**
          * @private
          */
@@ -287,7 +287,7 @@ package system
         {
             _revision = Math.min( value, _maxRevision );
         }
-
+        
         /**
          * We don't really need an equals method as we override the valueOf, we can do something as
          * <pre class="prettyprint">
@@ -312,7 +312,7 @@ package system
             
             return false;
         }
-
+        
         /**
          * Returns a string representation of the object.
          * By default, the format returned will include only the fields greater than zero
@@ -370,7 +370,7 @@ package system
             
             return arr.join( _separator );
         }
-
+        
         /**
          * Returns the primitive value of the object.
          * @return the primitive value of the object.
@@ -381,5 +381,5 @@ package system
              */
             return (major << 28) | (minor << 24) | (build << 16) | revision;
         }
-    }   
+    }
 }
