@@ -48,8 +48,9 @@ package system
     import system.numeric.AllTests;
     import system.process.AllTests;
     import system.reflection.AllTests;
-    import system.serializers.AllTests;    
-
+    import system.serializers.AllTests;
+    import system.network.AllTests;
+    
     /**
      * TestSuite that runs all the Maashaack tests
      */
@@ -58,57 +59,62 @@ package system
 
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            var suite:TestSuite = new TestSuite("x4a system tests");
             
             /* core framework */
             
             //core2
             suite.addTestSuite( StringsTest );
+            suite.addTestSuite( CharTest );
             
             //others
-            suite.addTestSuite(CloneableTest);
-            suite.addTestSuite(ComparableTest);
-            suite.addTestSuite(ComparatorTest);
-            suite.addTestSuite(SortableTest);
-            suite.addTestSuite(VersionTest);
-            suite.addTestSuite(ReflectionTest);
-            suite.addTestSuite(EqualityTest);
-            suite.addTestSuite(SerializationTest);
+            suite.addTestSuite( CloneableTest );
+            suite.addTestSuite( ComparableTest );
+            suite.addTestSuite( ComparatorTest );
+            suite.addTestSuite( SortableTest );
+            suite.addTestSuite( VersionTest );
+            suite.addTestSuite( ReflectionTest );
+            suite.addTestSuite( EqualityTest );
+            suite.addTestSuite( SerializationTest) ;
+            suite.addTestSuite( URITest );
             
             /* packages */
             
             //reflection
-            suite.addTest(system.reflection.AllTests.suite());
+            suite.addTest( system.reflection.AllTests.suite() );
             
             //serializers
-            suite.addTest(system.serializers.AllTests.suite());
+            suite.addTest( system.serializers.AllTests.suite() );
             
             //data
-            suite.addTest(system.data.AllTests.suite());
+            suite.addTest( system.data.AllTests.suite() );
             
             //comparators
-            suite.addTest(system.comparators.AllTests.suite());
+            suite.addTest( system.comparators.AllTests.suite() );
             
             //errors
-            suite.addTest(system.errors.AllTests.suite());
+            suite.addTest( system.errors.AllTests.suite() );
             
             //evaluators
-            suite.addTest(system.evaluators.AllTests.suite());
+            suite.addTest( system.evaluators.AllTests.suite() );
             
             //events
-            suite.addTest(system.events.AllTests.suite());            
+            suite.addTest( system.events.AllTests.suite() );
             
             //formatters
-            suite.addTest(system.formatters.AllTests.suite());
+            suite.addTest( system.formatters.AllTests.suite() );
             
             //numeric
-            suite.addTest(system.numeric.AllTests.suite());
+            suite.addTest( system.numeric.AllTests.suite() );
               
             //CLI
-            suite.addTest(system.cli.AllTests.suite());
+            suite.addTest( system.cli.AllTests.suite());
             
             //process
-            suite.addTest(system.process.AllTests.suite());
+            suite.addTest( system.process.AllTests.suite() );
+            
+            //network
+            suite.addTest( system.network.AllTests.suite() );
             
             return suite;
         }
