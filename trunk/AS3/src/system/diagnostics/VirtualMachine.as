@@ -39,5 +39,6 @@ package system.diagnostics
     /**
      * The VirtualMachine singleton instance.
      */
-    public const VirtualMachine:_VirtualMachine = new _VirtualMachine( );
+    public const VirtualMachine:_VirtualMachine = new _VirtualMachine();
+    
 }
