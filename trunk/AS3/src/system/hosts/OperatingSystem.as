@@ -35,36 +35,42 @@
 
 package system.hosts
 {
-    import system.Version;    
-
+    import system.Version;
+    
     /**
      * Represents information about an operating system, such as the version and platform identifier. 
      * This class cannot be inherited.
      */
     public class OperatingSystem
     {
-
+        
         /**
          * @private
          */
-        private var _platform:PlatformID ;
-
+        private var _platform:PlatformID;
+        
         /**
          * @private
          */
-        private var _version:Version ;
-
+        private var _version:Version;
+        
+        /**
+         * @private
+         */
+        private var _signature:String;
+        
         /**
          * Creates a new OperatingSystem instance.
          * @param platform The PlatformID of the application operating system.
          * @param version The Version of the application operating system.
          */
-        public function OperatingSystem( platform:PlatformID, version:Version )
+        public function OperatingSystem( platform:PlatformID, version:Version, signature:String = "" )
         {
-            _platform = platform;
-            _version = version;
+            _platform  = platform;
+            _version   = version;
+            _signature = signature;
         }
-
+        
         /**
          * Returns the platform id of this operating system.
          * @return the platform id of this operating system.
@@ -73,7 +79,7 @@ package system.hosts
         {
             return _platform;
         }
-
+        
         /**
          * Returns the version of this operating system.
          * @return the version of this operating system.
@@ -82,7 +88,16 @@ package system.hosts
         {
             return _version;
         }
-
+        
+        /**
+         * Returns the signature of this operating system.
+         * @return the signature of this operating system.
+         */
+        public function get signature():String
+        {
+            return _signature;
+        }
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.

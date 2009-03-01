@@ -36,25 +36,24 @@
 package system.hosts
 {
     import flash.system.Capabilities;
-
-    import system.Version;    
-
+    import system.Version;
+    
     /**
      * The Host class.
-     */    
+     */
     public class Host
     {
-
+        
         /**
          * @private
-         */        	
+         */
         private var _id:HostID;
 
         /**
          * @private
          */
         private var _version:Version;
-
+        
         /**
          * Creates a new Host instance.
          * @param id The HostID of this host.
@@ -65,7 +64,7 @@ package system.hosts
             _id = id;
             _version = version;
         }
-
+        
         /**
          * Returns the id of the Host object.
          * @return the id of the Host object.
@@ -74,7 +73,7 @@ package system.hosts
         {
             return _id;
         }
-
+        
         /**
          * The version of this Host object.
          */
@@ -82,7 +81,7 @@ package system.hosts
         {
             return _version;
         }
-
+        
         /**
          * Indicates if the host of the application is a debugger.
          */
@@ -90,11 +89,11 @@ package system.hosts
         {
             return Capabilities.isDebugger;
         }
-
+        
         /**
          * Returns the string representation of the object.
          * @return the string representation of the object.
-         */        
+         */
         public function toString():String
         {
             return id.toString( ) + " " + version.toString( 4 );
