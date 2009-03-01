@@ -35,8 +35,6 @@
 
 package system.diagnostics
 {
-    //import flash.net.LocalConnection;
-    
     import system.Strings;
     import system.console;
     import system.io.Writeable;
@@ -44,8 +42,8 @@ package system.diagnostics
     import flash.system.Capabilities;
     import flash.system.System;
     import flash.trace.Trace;
-    import flash.utils.getDefinitionByName;    
-
+    import flash.utils.getDefinitionByName;
+    
     /**
      * The internal VirtualMachine class.
      */
@@ -90,9 +88,9 @@ package system.diagnostics
             }
             catch( e:* )
             {
-                //
+                //nothing
             }
-        }        
+        }
         
         /**
          * Indicates if the machine filter the methods.
@@ -139,7 +137,7 @@ package system.diagnostics
         {
             return System.vmVersion;
         }
-
+        
         /**
          * Force the garbage collection on the Virtual Machine
          */
@@ -154,7 +152,7 @@ package system.diagnostics
                 _forceMarkSweep( );
             }
         }
-
+        
         /**
          * Indicates if we are tracing.
          */
@@ -162,7 +160,7 @@ package system.diagnostics
         {
             return _tracing;
         }
-
+        
         /**
          * Trace the messages in the console.
          */
@@ -198,7 +196,7 @@ package system.diagnostics
             //_writer.writeLine( formatter, {line:line,index:index,method:method,args:args} );
             _writer.writeLine( method + "(" + args + ")" );
         }
-
+        
         /**
          * Insert in the console the header (begin trace).
          */
@@ -208,7 +206,7 @@ package system.diagnostics
             _writer.writeLine( "------------------------------------------------------" );
             Trace.setLevel( Trace.METHODS_WITH_ARGS, Trace.LISTENER );
         }
-
+        
         /**
          * Insert in the console the footer (begin trace).
          */
