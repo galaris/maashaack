@@ -38,6 +38,7 @@ package
     import buRRRn.ASTUce.*;
     import buRRRn.ASTUce.tests.AllTests;
     
+    import core.*;
     import system.*;
     
     import flash.display.Sprite;
@@ -59,6 +60,7 @@ package
             
             //testing everything
             Runner.main( buRRRn.ASTUce.tests.AllTests.suite(),
+                         core.AllTests.suite(),
                          system.AllTests.suite() );
             
         }
