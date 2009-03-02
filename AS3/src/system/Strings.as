@@ -908,7 +908,7 @@ package system
         */
         public static function splitToChars( str:String, modifier:String = "toString" ):Array
         {
-            var arr:Array = []
+            var arr:Array = [];
             var i:int;
             
             for( i=0; i<str.length; i++ )

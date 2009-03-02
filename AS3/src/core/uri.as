@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,35 +36,29 @@
 package core
 {
     /**
-    * the core uri class
-    * 
-    * note:
-    * - no external dependencies
-    * - this is a non-validating parser
-    *   for ex, we don;t validate a scheme
-    * - this is a non-blocking parser,
-    *   we don't throw errors
-    * 
-    */
+     * the core uri class
+     * 
+     * note:
+     * - no external dependencies
+     * - this is a non-validating parser
+     *   for ex, we don;t validate a scheme
+     * - this is a non-blocking parser,
+     *   we don't throw errors
+     * 
+     */
     public class uri
     {
         private var _source:String = "";
         
-        private var _scheme:String   = "";
-        private var _host:String     = "";
-        private var _username:String = "";
-        private var _password:String = "";
-        private var _port:int        = -1;
-        private var _path:String     = "";
-        private var _query:String    = "";
-        private var _fragment:String = "";
-        
-        public function uri( raw:String )
-        {
-            _source = raw;
-            _parse( raw );
-        }
-        
+        private var _scheme:String   = "" ;
+        private var _host:String     = "" ;
+        private var _username:String = "" ;
+        private var _password:String = "" ;
+        private var _port:int        = -1 ;
+        private var _path:String     = "" ;
+        private var _query:String    = "" ;
+        private var _fragment:String = "" ;
+                
         private function _parseUnixAbsoluteFilePath( str:String ):void
         {
             this.scheme = "file";
@@ -104,7 +98,7 @@ package core
             _fragment = "";
             _query    = "";
             _host     = "";
-            _path     = "/"+str.replace( /\\/g, "/" );
+            _path     = "/" + str.replace( _r , "/" );
         }
         
         private function _parseWindowsUNC( str:String ):void
@@ -133,7 +127,7 @@ package core
                 _path = "";
             }
             
-            _path = _path.replace( /\\/g, "/" );
+            _path = _path.replace( _r , "/" );
         }
         
         private function _parse( str:String ):void
@@ -160,7 +154,7 @@ package core
                 return;
             }
             
-            var p:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" );
+            var p:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" , null );
             var r:Object = p.exec( str );
             
             //scheme
@@ -244,58 +238,21 @@ package core
             {
                 _fragment = r[9];
             }
-            
         }
-        
-        public function get source():String
+                
+        /**
+         * Creates a new uri instance.
+         * @param raw The value expression of the uri.
+         */
+        public function uri( raw:String )
         {
-            return _source;
+            _source = raw;
+            _parse( raw );
         }
         
-        public function get scheme():String
-        {
-            return _scheme;
-        }
-        
-        public function set scheme( value:String ):void
-        {
-            _scheme = value;
-        }
-        
-        public function get host():String
-        {
-            return _host;
-        }
-        
-        public function set host( value:String ):void
-        {
-            _host = value;
-        }
-        
-        public function get port():int
-        {
-            return _port;
-        }
-        
-        public function set port( value:int ):void
-        {
-            _port = value;
-        }
-        
-        public function get userinfo():String
-        {
-            if( !_username )
-            {
-                return "";
-            }
-            
-            var str:String = ""
-            str += _username;
-            str += ":" + _password;
-            
-            return str;
-        }
-        
+        /**
+         * Indicates authority value of the uri.
+         */
         public function get authority():String
         {
             var str:String = "";
@@ -314,37 +271,130 @@ package core
             
             return str;
         }
-        
-        public function get path():String
-        {
-            return _path;
-        }
-        
-        public function set path( value:String ):void
-        {
-            _path = value;
-        }
-        
-        public function get query():String
-        {
-            return _query;
-        }
-        
-        public function set query( value:String ):void
-        {
-            _query = value;
-        }
-        
+
+        /**
+         * Determinates the fragment value of the uri.
+         */
         public function get fragment():String
         {
             return _fragment;
         }
         
+        /**
+         * @private
+         */
         public function set fragment( value:String ):void
         {
             _fragment = value;
         }
         
+        /**
+         * Determinates the host value of the uri.
+         */
+        public function get host():String
+        {
+            return _host;
+        }
+
+        /**
+         * @private
+         */
+        public function set host( value:String ):void
+        {
+            _host = value;
+        }
+        
+        /**
+         * Determinates the path value of the uri.
+         */
+        public function get path():String
+        {
+            return _path;
+        }
+        
+        /**
+         * @private
+         */
+        public function set path( value:String ):void
+        {
+            _path = value;
+        }
+        
+        /**
+         * Determinates the port value of the uri.
+         */
+        public function get port():int
+        {
+            return _port;
+        }
+        
+        /**
+         * @private
+         */
+        public function set port( value:int ):void
+        {
+            _port = value;
+        }
+
+        /**
+         * Determinates the scheme value of the uri.
+         */
+        public function get scheme():String
+        {
+            return _scheme;
+        }
+        
+        /**
+         * @private
+         */
+        public function set scheme( value:String ):void
+        {
+            _scheme = value;
+        }
+
+        /**
+         * Determinates the source value of the uri.
+         */
+        public function get source():String
+        {
+            return _source;
+        }
+
+        /**
+         * Determinates the user info value of the uri.
+         */
+        public function get userinfo():String
+        {
+            if( !_username )
+            {
+                return "";
+            }
+            var str:String = "" ;
+            str += _username;
+            str += ":" + _password;
+            return str;
+        }
+
+        /**
+         * Determinates the user info value of the uri.
+         */   
+        public function get query():String
+        {
+            return _query;
+        }
+        
+        /**
+         * @private
+         */ 
+        public function set query( value:String ):void
+        {
+            _query = value;
+        }
+
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
         public function toString():String
         {
             var str:String = "";
@@ -371,19 +421,26 @@ package core
             {
                 str += "?" + query;
             }
-            
             if( fragment )
             {
                 str += "#" + fragment;
             }
-            
             return str;
         }
         
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
         public function valueOf():String
         {
             return toString();
         }
-        
+
+        /**
+         * @private
+         */
+        private var _r:RegExp = /\\/g ;
+
     }
 }

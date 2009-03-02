@@ -36,7 +36,8 @@
 package
 {
     import buRRRn.ASTUce.*;
-    
+
+    import core.*;    
     import system.*;
     import system.ui.TextFieldConsole;
     
@@ -82,10 +83,8 @@ package
             
             Runner.main
             ( 
-                //system.data.AllTests.suite() , 
-                
+                core.AllTests.suite() , 
                 system.AllTests.suite()
-                 
             );
             
         }

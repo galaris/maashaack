@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -349,26 +349,26 @@ package system
         
         public function testParse():void
         {
-            var s1:String = "http://www.ics.uci.edu/pub/ietf/uri/#Related";
-            var s2:String = "http://www.ics.uci.edu/pub/ietf/uri/?a=1&b=2#Related";
+//            var s1:String = "http://www.ics.uci.edu/pub/ietf/uri/#Related";
+//            var s2:String = "http://www.ics.uci.edu/pub/ietf/uri/?a=1&b=2#Related";
             var s3:String = "http://username:password@www.ics.uci.edu:8080/pub/ietf/uri/?a=1&b=2#Related";
-            var s4:String = "tel:+1-816-555-1212";
-            var s5:String = "mailto:John.Doe@example.com";
-            var s6:String = "news:comp.infosystems.www.servers.unix";
-            var s7:String = "telnet://192.0.2.16:80/";
-            var s8:String = "ldap://[2001:db8::7]/c=GB?objectClass?one";
-            var s9:String = "urn:oasis:names:specification:docbook:dtd:xml:4.1.2";
-            var s10:String = "//server/my/path/file.txt";
-            var s11:String = "file:///some/path/and/file.txt";
-            var s12:String = "\\\\server\\my\\path\\file.txt";
-            var s13:String = "C:\\directory\\file.txt";
-            var s14:String = "file:///C:/Documents%20and%20Settings/bob/Desktop";
-            var s15:String = "file:///Users/bob/Desktop";
-            var s16:String = "\\\\ComputerName\\SharedFolder\\Resource";
-            var s17:String = "hostname:/directorypath/resource";
-            var s18:String = "smb://hostname/directorypath/resource";
-            var s19:String = "///server/my/path/file.txt";
-            var s20:String = "http://www.ics.uci.edu/pub/ietf/uri/?"
+//            var s4:String = "tel:+1-816-555-1212";
+//            var s5:String = "mailto:John.Doe@example.com";
+//            var s6:String = "news:comp.infosystems.www.servers.unix";
+//            var s7:String = "telnet://192.0.2.16:80/";
+//            var s8:String = "ldap://[2001:db8::7]/c=GB?objectClass?one";
+//            var s9:String = "urn:oasis:names:specification:docbook:dtd:xml:4.1.2";
+//            var s10:String = "//server/my/path/file.txt";
+//            var s11:String = "file:///some/path/and/file.txt";
+//            var s12:String = "\\\\server\\my\\path\\file.txt";
+//            var s13:String = "C:\\directory\\file.txt";
+//            var s14:String = "file:///C:/Documents%20and%20Settings/bob/Desktop";
+//            var s15:String = "file:///Users/bob/Desktop";
+//            var s16:String = "\\\\ComputerName\\SharedFolder\\Resource";
+//            var s17:String = "hostname:/directorypath/resource";
+//            var s18:String = "smb://hostname/directorypath/resource";
+//            var s19:String = "///server/my/path/file.txt";
+//            var s20:String = "http://www.ics.uci.edu/pub/ietf/uri/?";
             //URI.parse( s1 );
             //var u1:URI = new URI( s1 );
             //var u2:URI = new URI( s2 );

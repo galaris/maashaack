@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,19 +37,40 @@ package openscreen
 {
     import system.Enum;
     
+    /**
+     * The enumeration of all file types.
+     */
     public class FileType extends Enum
     {
+    	
+    	/**
+    	 * Creates a new FileType instance.
+         * @param value The value of the enumeration.
+         * @param name The name key of the enumeration.
+         */
         public function FileType( value:int = 0 , name:String = "" )
         {
             super( value, name );
         }
         
+        /**
+         * Indicates an unknow file type.
+         */
         public static const unknown:FileType    = new FileType( 0, "unknown" );
-        
+
+        /**
+         * Indicates an ".abc" file type.
+         */        
         public static const abc:FileType        = new FileType( 1, "abc" );
-        
+
+        /**
+         * Indicates an ".swf" file type.
+         */  
         public static const swf:FileType        = new FileType( 2, "swf" );
         
+        /**
+         * Indicates an ".zippedSWF" file type.
+         */  
         public static const zipppedSwf:FileType = new FileType( 3, "zipppedSwf" );
         
     }

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,9 +37,8 @@ package system
 {
     import system.Char;
     import system.Strings;
-    
-    import system.network.URIScheme;
-    
+    import system.network.URIScheme;    
+
     /**
     * Uniform Resource Identifier class
     * 
@@ -60,15 +59,15 @@ package system
     public class URI
     {
         
-        private var _relative:Boolean     = false;
-        private var _opaque:Boolean       = false;
-        private var _unixFilePath:Boolean = false;
-        private var _UNC:Boolean          = false;
+//        private var _relative:Boolean     ;
+//        private var _opaque:Boolean       ;
+        private var _unixFilePath:Boolean ;
+        private var _UNC:Boolean          ;
         
-        private var _generalDelimiters:String = ":/?#[]@";
-        private var _subDelimiters:String     = "!$&'()*+,;=";
-        private var _reserved:String          = _generalDelimiters+_subDelimiters;
-        private var _unreserved:String        = "-._~";
+//        private var _generalDelimiters:String = ":/?#[]@";
+//        private var _subDelimiters:String     = "!$&'()*+,;=";
+//        private var _reserved:String          = _generalDelimiters+_subDelimiters;
+//        private var _unreserved:String        = "-._~";
         
         private var _source:String = "";
         
@@ -85,13 +84,13 @@ package system
         private var _hasFragment:Boolean = false;
         
         /**
-        * Allows to support deprecated behaviour or not
-        * 
-        * ex:
-        * with userinfo
-        * if strict, we do not display the password
-        * if not strict we display the password
-        */
+         * Allows to support deprecated behaviour or not
+         * 
+         * ex:
+         * with userinfo
+         * if strict, we do not display the password
+         * if not strict we display the password
+         */
         public static var strict:Boolean = true;
         
         /**
@@ -160,7 +159,7 @@ package system
             _fragment = "";
             _query    = "";
             _host     = "";
-            _path     = "/"+str.replace( /\\/g, "/" );
+            _path     = "/"+str.replace( _r , "/" );
         }
         
         private function _parseWindowsUNC( str:String ):void
@@ -186,7 +185,7 @@ package system
                 _path = "";
             }
             
-            _path = _path.replace( /\\/g, "/" );
+            _path = _path.replace( _r, "/" );
         }
         
         private function _parse( str:String ):void
@@ -206,7 +205,7 @@ package system
                 }
                 else
                 {
-                    throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." )
+                    throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
                 }
                 
                 return;
@@ -226,7 +225,7 @@ package system
             /* from RFC
                  ^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?
             */
-            var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" );
+            var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" , null );
             var results:Object = pattern.exec( str );
             
 //            trace( "$1: " + results[1] ); //raw scheme
@@ -588,7 +587,7 @@ package system
                 return "";
             }
             
-            var str:String = ""
+            var str:String = "" ;
             str += _username;
             
             if( !strict )
@@ -688,6 +687,9 @@ package system
             return toString();
         }
         
-        
+        /**
+         * @private
+         */
+        private var _r:RegExp = /\\/g ;
     }
 }
