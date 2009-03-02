@@ -160,7 +160,7 @@ package system
             _fragment = "";
             _query    = "";
             _host     = "";
-            _path     = str.replace( /\\/g, "/" );
+            _path     = "/"+str.replace( /\\/g, "/" );
         }
         
         private function _parseWindowsUNC( str:String ):void
@@ -229,15 +229,15 @@ package system
             var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" );
             var results:Object = pattern.exec( str );
             
-            trace( "$1: " + results[1] ); //raw scheme
-            trace( "$2: " + results[2] ); //scheme
-            trace( "$3: " + results[3] ); //raw authority
-            trace( "$4: " + results[4] ); //authority
-            trace( "$5: " + results[5] ); //path
-            trace( "$6: " + results[6] ); //raw query
-            trace( "$7: " + results[7] ); //query
-            trace( "$8: " + results[8] ); //raw fragment
-            trace( "$9: " + results[9] ); //fragment
+//            trace( "$1: " + results[1] ); //raw scheme
+//            trace( "$2: " + results[2] ); //scheme
+//            trace( "$3: " + results[3] ); //raw authority
+//            trace( "$4: " + results[4] ); //authority
+//            trace( "$5: " + results[5] ); //path
+//            trace( "$6: " + results[6] ); //raw query
+//            trace( "$7: " + results[7] ); //query
+//            trace( "$8: " + results[8] ); //raw fragment
+//            trace( "$9: " + results[9] ); //fragment
             
             //scheme
             if( results[1] && results[2] && Strings.endsWith( results[1], ":" ) )
