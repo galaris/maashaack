@@ -104,7 +104,7 @@ package core
             _fragment = "";
             _query    = "";
             _host     = "";
-            _path     = str.replace( /\\/g, "/" );
+            _path     = "/"+str.replace( /\\/g, "/" );
         }
         
         private function _parseWindowsUNC( str:String ):void
@@ -201,11 +201,26 @@ package core
                 if( host.indexOf( ":" ) > -1 )
                 {
                     var port:String = host.split( ":" )[1];
-                    host = host.split( ":" )[0];
+                    var i:int;
+                    var c:String;
+                    var validPort:Boolean = true;
                     
-                    if( port && (port.length > 0) )
+                    for( i=0; i<port.length; i++ )
                     {
-                        this.port = parseInt( port );
+                        c = port.charAt( i );
+                        if( !(("0" <= c) && (c <= "9")) )
+                        {
+                            validPort = false;
+                        }
+                    }
+                    
+                    if( validPort )
+                    {
+                        host = host.split( ":" )[0];
+                        if( port && (port.length > 0) )
+                        {
+                            this.port = parseInt( port );
+                        }
                     }
                 }
                 

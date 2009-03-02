@@ -89,9 +89,14 @@ include "system/io/Readable.as";
 include "system/io/Writeable.as";
 
 //network
-
+include "system/network/URI.as";
 
 //process
+include "system/process/Lockable.as";
+include "system/process/Priority.as";
+include "system/process/Resetable.as";
+include "system/process/Runnable.as";
+include "system/process/Stoppable.as";
 
 //reflection
 include "system/reflection/_TypeInfo.as"; //fwd ref
@@ -141,6 +146,8 @@ include "system/terminals/VirtualConsole.as";
 
 //system
 include "system/Arrays.as";
+include "system/Strings.as";
+
 include "system/Cloneable.as";
 include "system/Comparable.as";
 include "system/Comparator.as";
@@ -148,9 +155,10 @@ include "system/Environment.as";
 include "system/Equatable.as";
 include "system/Reflection.as";
 include "system/Sortable.as";
-include "system/Strings.as";
 include "system/SystemConfigurator.as";
+
 include "system/Version.as";
+include "system/Char.as";
   //statics
   include "system/metadata.as";
   //objects
