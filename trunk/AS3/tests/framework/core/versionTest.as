@@ -1,6 +1,6 @@
-package core
+﻿package core
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import buRRRn.ASTUce.framework.TestCase;    
 
     public class versionTest extends TestCase
     {
@@ -12,6 +12,7 @@ package core
         public function testBasic():void
         {
             var v:version = new version();
+            assertNotNull(v) ;
         }
         
     }

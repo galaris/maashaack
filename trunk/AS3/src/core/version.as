@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,6 +39,9 @@ package core
     {
         private var _value:Number = 0;
         
+        /**
+         * Creates a new version instance.
+         */
         public function version( major:uint = 0,
                                  minor:uint = 0,
                                  build:uint = 0,
@@ -46,47 +49,75 @@ package core
         {
             _value = (major << 28) | (minor << 24) | (build << 16) | revision;
         }
-        
-        public function get major():uint
-        {
-            return _value >>> 28;
-        }
-        
-        public function set major( value:uint ):void
-        {
-            _value = (_value & 0x0fffffff) | (value << 28);
-        }
-        
-        public function get minor():uint
-        {
-            return (_value & 0x0f000000) >>> 24;
-        }
-        
-        public function set minor( value:uint ):void
-        {
-            _value = (_value & 0xf0ffffff) | (value << 24);
-        }
-        
+
+        /**
+         * Indicates the build value of this version.
+         */
         public function get build():uint
         {
             return (_value & 0x00ff0000) >>> 16;
         }
         
+        /**
+         * @private
+         */ 
         public function set build( value:uint ):void
         {
             _value = (_value & 0xff00ffff) | (value << 16);
         }
+
+        /**
+         * Indicates the major value of this version.
+         */
+        public function get major():uint
+        {
+            return _value >>> 28;
+        }
         
+        /**
+         * @private
+         */ 
+        public function set major( value:uint ):void
+        {
+            _value = (_value & 0x0fffffff) | (value << 28);
+        }
+
+        /**
+         * Indicates the minor value of this version.
+         */
+        public function get minor():uint
+        {
+            return (_value & 0x0f000000) >>> 24;
+        }
+
+        /**
+         * @private
+         */ 
+        public function set minor( value:uint ):void
+        {
+            _value = (_value & 0xf0ffffff) | (value << 24);
+        }
+        
+        /**
+         * Indicates the revision value of this version.
+         */
         public function get revision():uint
         {
             return _value & 0x0000ffff;
         }
         
+        /**
+         * @private
+         */ 
         public function set revision( value:uint ):void
         {
             _value = (_value & 0xffff0000) | value;
         }
-        
+
+        /**
+         * Returns a string representation of the object.
+         * @return a string representation of the object.
+         */
         public function toString( fields:int = 0, separator:String = "." ):String
         {
             var data:Array = [major,minor,build,revision];
@@ -114,7 +145,11 @@ package core
             
             return data.join( separator );
         }
-        
+
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
         public function valueOf():Number
         {
             return _value;

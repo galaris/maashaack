@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -51,6 +51,9 @@ package system
         private var _host:Host = null;
         private var _os:OperatingSystem = null;
         
+        /**
+         * Creates a new _Environment instance.
+         */
         public function _Environment()
         {
             /* note:
@@ -154,7 +157,7 @@ package system
         {
             if( _host )
             {
-                return _host
+                return _host;
             }
             
             var _id:HostID   = _getHostID();

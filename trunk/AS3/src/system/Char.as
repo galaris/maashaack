@@ -35,8 +35,8 @@
 
 package system
 {
-    import system.Strings;
-    
+    import system.Strings;    
+
     /**
      * The Char class.
      * <p><b>Note:</b> Very basic implementation for now based on ASCII and so <a href='http://www.ietf.org/rfc/rfc20.txt'>http://www.ietf.org/rfc/rfc20.txt</a>
@@ -49,7 +49,7 @@ package system
         private static var _ch:Char = new Char( "" ); //char reused in static methods
         
         private static var _alphabetic:String = "abcdefghijklmnopqrstuvwxyz";
-        private static var _digit:String      = "0123456789";
+        //private static var _digit:String      = "0123456789";
         
         /**
          * The "null" unicode character.

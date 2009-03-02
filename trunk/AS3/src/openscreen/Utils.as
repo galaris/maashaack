@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,11 +36,17 @@
 package openscreen
 {
     import flash.utils.ByteArray;
-    import flash.utils.Endian;
-    
+    import flash.utils.Endian;    
+
+    /**
+     * The openscreen tool class.
+     */
     public class Utils
     {
-        
+        /**
+         * Returns the FileType value of the specified ByteArray object.
+         * @return the FileType value of the specified ByteArray object.
+         */
         public static function fingerprint( data:ByteArray ):FileType
         {
             data.endian = Endian.LITTLE_ENDIAN;
@@ -50,31 +56,38 @@ package openscreen
             
             switch( version )
             {
-                case 46<<16|14:
-                case 46<<16|15:
-                case 46<<16|16:
-                found = FileType.abc;
-                break;
+                case 46<<16|14 :
+                case 46<<16|15 :
+                case 46<<16|16 :
+                {
+                    found = FileType.abc ;
+                    break;
+                }
                 
-         ﻿       case 70|87<<8|83<<16|9<<24: // SWC9
-                case 70|87<<8|83<<16|8<<24: // SWC8
-                case 70|87<<8|83<<16|7<<24: // SWC7
-                case 70|87<<8|83<<16|6<<24: // SWC6
-                case 70|87<<8|83<<16|5<<24: // SWC5
-                case 70|87<<8|83<<16|4<<24: // SWC4
-                found = FileType.swf;
-                break;
+         ﻿       case 70|87<<8|83<<16|9<<24 : // SWC9
+                case 70|87<<8|83<<16|8<<24 : // SWC8
+                case 70|87<<8|83<<16|7<<24 : // SWC7
+                case 70|87<<8|83<<16|6<<24 : // SWC6
+                case 70|87<<8|83<<16|5<<24 : // SWC5
+                case 70|87<<8|83<<16|4<<24 : // SWC4
+                {
+                    found = FileType.swf ;
+                    break;
+                }
                 
-                case 67|87<<8|83<<16|9<<24: // SWC9
-                case 67|87<<8|83<<16|8<<24: // SWC8
-                case 67|87<<8|83<<16|7<<24: // SWC7
-                case 67|87<<8|83<<16|6<<24: // SWC6
-                found = FileType.zipppedSwf;
-                break;
+                case 67|87<<8|83<<16|9<<24 : // SWC9
+                case 67|87<<8|83<<16|8<<24 : // SWC8
+                case 67|87<<8|83<<16|7<<24 : // SWC7
+                case 67|87<<8|83<<16|6<<24 : // SWC6
+                {
+                    found = FileType.zipppedSwf ;
+                    break;
+                }
                 
-                default:
-                found = FileType.unknown;
-                
+                default :
+                {
+                    found = FileType.unknown ;
+                }
             }
             
             return found;

@@ -1,4 +1,4 @@
-package core
+﻿package core
 {
     import buRRRn.ASTUce.framework.TestCase;
     
