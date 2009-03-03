@@ -35,27 +35,23 @@
 
 package system
 {
-    import system.Char;
-    import system.Strings;
-    import system.network.URIScheme;    
-
-    /**
-    * Uniform Resource Identifier class
-    * 
-    * note:
-    * based on RFC 3986 <http://www.ietf.org/rfc/rfc3986.txt>
-    * 
-    * examples of valid URIs:
-    * ftp://ftp.is.co.za/rfc/rfc1808.txt
-    * http://www.ietf.org/rfc/rfc2396.txt
-    * ldap://[2001:db8::7]/c=GB?objectClass?one
-    * mailto:John.Doe@example.com
-    * news:comp.infosystems.www.servers.unix
-    * tel:+1-816-555-1212
-    * telnet://192.0.2.16:80/
-    * urn:oasis:names:specification:docbook:dtd:xml:4.1.2
-    * 
-    */
+    import system.network.URIScheme;        
+    /**
+     * The "Uniform Resource Identifier" class.
+     * <p><b>note:</b></p>
+     * <p>based on <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a></p>
+     * <p><b>examples of valid URIs :</b></p>
+     * <pre>
+     * ftp://ftp.is.co.za/rfc/rfc1808.txt
+     * http://www.ietf.org/rfc/rfc2396.txt
+     * ldap://[2001:db8::7]/c=GB?objectClass?one
+     * mailto:John.Doe@example.com
+     * news:comp.infosystems.www.servers.unix
+     * tel:+1-816-555-1212
+     * telnet://192.0.2.16:80/
+     * urn:oasis:names:specification:docbook:dtd:xml:4.1.2
+     * </pre>
+     */
     public class URI
     {
         
@@ -71,18 +67,33 @@ package system
         
         private var _source:String = "";
         
-        private var _scheme:String   = "";
-        private var _host:String     = "";
-        private var _username:String = "";
-        private var _password:String = "";
-        private var _port:int        = -1;
-        private var _path:String     = "";
-        private var _query:String    = "";
-        private var _fragment:String = "";
+        private var _scheme:String   = "" ;
+        private var _host:String     = "" ;
+        private var _username:String = "" ;
+        private var _password:String = "" ;
+        private var _port:int        = -1 ;
+        private var _path:String     = "" ;
+        private var _query:String    = "" ;
+        private var _fragment:String = "" ;
         
-        private var _hasQuery:Boolean = false;
-        private var _hasFragment:Boolean = false;
-        
+        private var _hasQuery:Boolean ;
+        private var _hasFragment:Boolean ;
+
+        /**
+         * Allows to alter the tring representation of the URI
+         * 
+         * ex:
+         * for a raw URI "http://www.domain.com/path/file.html?"
+         * after parsing
+         * 
+         * if greedy render as
+         * "http://www.domain.com/path/file.html"
+         * 
+         * if not greedy render as
+         * "http://www.domain.com/path/file.html?"
+         */
+        public static var greedy:Boolean ;
+
         /**
          * Allows to support deprecated behaviour or not
          * 
@@ -93,22 +104,13 @@ package system
          */
         public static var strict:Boolean = true;
         
+
         /**
-        * Allows to alter the tring representation of the URI
-        * 
-        * ex:
-        * for a raw URI "http://www.domain.com/path/file.html?"
-        * after parsing
-        * 
-        * if greedy render as
-        * "http://www.domain.com/path/file.html"
-        * 
-        * if not greedy render as
-        * "http://www.domain.com/path/file.html?"
-        */
-        public static var greedy:Boolean = false;
-        
-        public function URI( any:*, relativeURI:String = "" )
+         * Creates a new URI instance.
+         * @param any An URI object or a String expression to initialize the instance.
+         * @param relativeURI The relative URI reference.
+         */
+        public function URI( any:* , relativeURI:String = "" )
         {
             if( any is String )
             {
@@ -119,7 +121,6 @@ package system
             {
                 
             }
-            
         }
         
         private function _parseUnixAbsoluteFilePath( str:String ):void
@@ -335,25 +336,202 @@ package system
             }
             
         }
+
+
+
+        /**
+         * Indicates the authority of the URI.
+         * syntax:
+         * authority   = [ userinfo "@" ] host [ ":" port ]
+         */
+        public function get authority():String
+        {
+            var str:String = "";
+            
+            if( userinfo )
+            {
+                str += userinfo + "@";
+            }
+            
+            str += host;
+            
+            if( (host != "") && (port > -1) )
+            {
+                str += ":" + port;
+            }
+            
+            return str;
+        }
+
+        /**
+         * Indicates the fragment expression of the URI.
+         */
+        public function get fragment():String
+        {
+            return _fragment;
+        }
+
+        /**
+         * Determinaes the host of the URI.
+         */
+        public function get host():String
+        {
+            return _host;
+        }
+
+        /**
+         * @private
+         */
+        public function set host( value:String ):void
+        {
+            _host = value;
+        }
         
         /**
-        * 
-        * RFC:
-        * 3.1.  Scheme
-        * [...]
-        *    Scheme names consist of a sequence of characters beginning with a
-        *    letter and followed by any combination of letters, digits, plus
-        *    ("+"), period ("."), or hyphen ("-").  Although schemes are case-
-        *    insensitive, the canonical form is lowercase and documents that
-        *    specify schemes must do so with lowercase letters.  An implementation
-        *    should accept uppercase letters as equivalent to lowercase in scheme
-        *    names (e.g., allow "HTTP" as well as "http") for the sake of
-        *    robustness but should only produce lowercase scheme names for
-        *    consistency.
-        * 
-        *       scheme      = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-        * 
-        */
+         * Determinates the path of the URI.
+         */
+        public function get path():String
+        {
+            return _path;
+        }
+        
+        /**
+         * @private
+         */
+        public function set path( value:String ):void
+        {
+            _path = value;
+        }
+
+        /**
+         * Determinates the port of the URI.
+         */
+        public function get port():int
+        {
+            return _port;
+        }
+        
+        /**
+         * @private
+         */
+        public function set port( value:int ):void
+        {
+            if( isValidPort( value ) )
+            {
+                _port = value;
+            }
+            else
+            {
+                throw new RangeError( "\""+value+"\" port is out of range" );
+            }
+        }
+
+        /**
+         * Indicates the query String representation of the URI.
+         */
+        public function get query():String
+        {
+            return _query;
+        }
+      
+        /**
+         * Determinates the scheme of the URI.
+         */
+        public function get scheme():String
+        {
+            return _scheme;
+        }
+        
+        /**
+         * @private
+         */
+        public function set scheme( value:String ):void
+        {
+            if( isValidScheme( value ) )
+            {
+                _scheme = value;
+            }
+            else
+            {
+                throw new SyntaxError( "\""+value+"\" is not a valid scheme" );
+            }
+        }
+        
+        /**
+         * Original string source of the URI
+         */
+        public function get source():String
+        {
+            return _source;
+        }
+        
+        /**
+         * Indicates the user info expression of the URI.
+         */
+        public function get userinfo():String
+        {
+            if( !_username )
+            {
+                return "";
+            }
+            
+            var str:String = "" ;
+            str += _username;
+            
+            if( !strict )
+            {
+                str += ":" + _password;
+            }
+            
+            return str;
+        }
+        
+        /**
+         * Indicates if the specified host expression is valid (ipv4 or domain address).
+         */
+        public static function isValidHost( str:String ):Boolean
+        {
+            if( isIPv4Address( str ) )
+            {
+                return true;
+            }
+            if( isDomainAddress( str ) )
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        /**
+         * Indicates if the specified port is valid.
+         */
+        public static function isValidPort( num:int ):Boolean
+        {
+            if( (num >= 0) && (num <= 0xffff) )
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        /**
+         * Indicates if the scheme of the uri is valid.
+         * <p>RFC: <b>3.1. Scheme</b></p>
+         * <p>[...]</p>
+         * <pre>
+         *    Scheme names consist of a sequence of characters beginning with a
+         *    letter and followed by any combination of letters, digits, plus
+         *    ("+"), period ("."), or hyphen ("-").  Although schemes are case-
+         *    insensitive, the canonical form is lowercase and documents that
+         *    specify schemes must do so with lowercase letters.  An implementation
+         *    should accept uppercase letters as equivalent to lowercase in scheme
+         *    names (e.g., allow "HTTP" as well as "http") for the sake of
+         *    robustness but should only produce lowercase scheme names for
+         *    consistency.
+         * </pre>
+         * <pre>scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )</pre>
+         * </p>
+         */
         public static function isValidScheme( str:String ):Boolean
         {
             if( (str == null) || (str.length == 0) )
@@ -378,43 +556,18 @@ package system
             
             return true;
         }
-        
-        public static function isValidHost( str:String ):Boolean
-        {
-            if( isIPv4Address( str ) )
-            {
-                return true;
-            }
-            
-            if( isDomainAddress( str ) )
-            {
-                return true;
-            }
-            
-            return false;
-        }
-        
-        public static function isValidPort( num:int ):Boolean
-        {
-            if( (num >= 0) && (num <= 0xffff) )
-            {
-                return true;
-            }
-            
-            return false;
-        }
-        
+                
         /**
-        * 
-        * syntax:
-        *       IPv4address = dec-octet "." dec-octet "." dec-octet "." dec-octet
-        * 
-        *       dec-octet   = DIGIT                 ; 0-9
-        *                   / %x31-39 DIGIT         ; 10-99
-        *                   / "1" 2DIGIT            ; 100-199
-        *                   / "2" %x30-34 DIGIT     ; 200-249
-        *                   / "25" %x30-35          ; 250-255
-        */
+         * 
+         * syntax:
+         *       IPv4address = dec-octet "." dec-octet "." dec-octet "." dec-octet
+         * 
+         *       dec-octet   = DIGIT                 ; 0-9
+         *                   / %x31-39 DIGIT         ; 10-99
+         *                   / "1" 2DIGIT            ; 100-199
+         *                   / "2" %x30-34 DIGIT     ; 200-249
+         *                   / "25" %x30-35          ; 250-255
+         */
         public static function isIPv4Address( str:String ):Boolean
         {
             var address:Array = str.split( "." );
@@ -529,124 +682,17 @@ package system
         }
         
         /**
-        * Original string source of the URI
-        */
-        public function get source():String
-        {
-            return _source;
-        }
-        
-        public function get scheme():String
-        {
-            return _scheme;
-        }
-        
-        public function set scheme( value:String ):void
-        {
-            if( isValidScheme( value ) )
-            {
-                _scheme = value;
-            }
-            else
-            {
-                throw new SyntaxError( "\""+value+"\" is not a valid scheme" );
-            }
-        }
-        
-        public function get host():String
-        {
-            return _host;
-        }
-        
-        public function set host( value:String ):void
-        {
-            _host = value;
-        }
-        
-        public function get port():int
-        {
-            return _port;
-        }
-        
-        public function set port( value:int ):void
-        {
-            if( isValidPort( value ) )
-            {
-                _port = value;
-            }
-            else
-            {
-                throw new RangeError( "\""+value+"\" port is out of range" );
-            }
-        }
-        
-        public function get userinfo():String
-        {
-            if( !_username )
-            {
-                return "";
-            }
-            
-            var str:String = "" ;
-            str += _username;
-            
-            if( !strict )
-            {
-                str += ":" + _password;
-            }
-            
-            return str;
-        }
-        
-        /**
-        * 
-        * syntax:
-        * authority   = [ userinfo "@" ] host [ ":" port ]
-        */
-        public function get authority():String
-        {
-            var str:String = "";
-            
-            if( userinfo )
-            {
-                str += userinfo + "@";
-            }
-            
-            str += host;
-            
-            if( (host != "") && (port > -1) )
-            {
-                str += ":" + port;
-            }
-            
-            return str;
-        }
-        
-        public function get path():String
-        {
-            return _path;
-        }
-        
-        public function set path( value:String ):void
-        {
-            _path = value;
-        }
-        
-        public function get query():String
-        {
-            return _query;
-        }
-        
-        public function get fragment():String
-        {
-            return _fragment;
-        }
-        
+         * Indicates if the URI is UNC.
+         */
         public function isUNC():Boolean
         {
             return _UNC;
         }
         
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
         public function toString():String
         {
             var str:String = "";
@@ -681,7 +727,11 @@ package system
             
             return str;
         }
-        
+
+        /**
+         * Returns the primitive value of the object.
+         * @return the primivite value of the object.
+         */        
         public function valueOf():String
         {
             return toString();
