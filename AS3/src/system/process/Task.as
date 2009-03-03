@@ -59,11 +59,11 @@ package system.process
     {
     
         /**
-         * Creates a new SimpleAction instance.
+         * Creates a new Task instance.
          * @param global the flag to use a global event flow or a local event flow.
          * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        function Task( global:Boolean = false , channel:String = null ) 
+        public function Task( global:Boolean = false , channel:String = null ) 
         {
             super( global , channel ) ;        
         }
