@@ -36,9 +36,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events  
 {
     import buRRRn.ASTUce.framework.ITest;
-	import buRRRn.ASTUce.framework.TestSuite;	
-    
-	public class AllTests
+    import buRRRn.ASTUce.framework.TestSuite;    
+
+    public class AllTests
 	{
         
         public static function suite():ITest
@@ -46,7 +46,7 @@ package system.events
             
             var suite:TestSuite = new TestSuite( "system events TESTS" );
 
-            // FIXME suite.addTestSuite( ActionEventTest ) ;
+            suite.addTestSuite( ActionEventTest ) ;
 
             return suite;
             
