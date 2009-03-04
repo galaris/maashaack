@@ -79,7 +79,7 @@ package system.process
         {
             super( this, this["init"], null, global, channel);
         }
-
+        
         /**
          * Invoked when the process is run. 
          * Overrides this method.

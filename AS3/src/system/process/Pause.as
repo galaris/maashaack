@@ -41,12 +41,13 @@ package system.process
     
     import flash.events.TimerEvent;
     import flash.utils.Timer;    
-
+    
     /**
      * This <code class="prettyprint">Action</code> object create a pause in the process.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.events.ActionEvent ;
+     * import system.process.Pause ;
      * 
      * var handleEvent:Function = function( e:ActionEvent ) :void
      * {

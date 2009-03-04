@@ -35,22 +35,22 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;                
+    import buRRRn.ASTUce.framework.TestCase ;
 
     public class TimeoutPolicyTest extends TestCase 
-	{
+    {
         
-		public function TimeoutPolicyTest( name:String = "" )
-		{
-			super(name);
-		}
-                
+        public function TimeoutPolicyTest( name:String = "" )
+        {
+            super(name);
+        }
+        
         public function testConstructor():void
         {
-        	var policy:TimeoutPolicy = new TimeoutPolicy(9999) ;
+            var policy:TimeoutPolicy = new TimeoutPolicy(9999) ;
             assertNotNull( policy , "TimeoutPolicy constructor failed, the instance not must be null." ) ;
         }
-
+        
         public function testINFINITY():void
         {
             var policy:TimeoutPolicy = TimeoutPolicy.INFINITY ;
@@ -61,14 +61,14 @@ package system.process
         {
             var policy:TimeoutPolicy = TimeoutPolicy.LIMIT ;
             assertEquals( policy.valueOf() , 1, "TimeoutPolicy.LIMIT failed." ) ;
-        }        
-
+        }
+        
         public function testValueOf():void
         {
             var policy:TimeoutPolicy = new TimeoutPolicy(9999) ;
             assertEquals( policy.valueOf() , 9999, "TimeoutPolicy valueOf() failed." ) ;
         }
-                        
+        
         public function testToSource():void
         {
             var source:String ;
@@ -79,7 +79,7 @@ package system.process
             source = TimeoutPolicy.LIMIT.toSource() ;
             assertEquals( source , "new system.process.TimeoutPolicy(1)"  , "02 - TimeoutPolicy toSource() failed." ) ;
         }
-   		
+           
         public function testToString():void
         {
             var source:String ;
@@ -87,7 +87,7 @@ package system.process
             source = TimeoutPolicy.INFINITY.toString() ;
             assertEquals( source , "0"  , "01 - TimeoutPolicy toString() failed." ) ;
         
-        }		
-		
-	}
+        }
+        
+    }
 }

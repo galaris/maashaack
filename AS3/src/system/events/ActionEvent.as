@@ -37,8 +37,8 @@ package system.events
 {
     import system.events.BasicEvent;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * The ActionEvent is notify by all the objects who implements the Action interface.
      */
@@ -90,37 +90,37 @@ package system.events
          * @eventType onLooped
          */
         public static const LOOP:String = "loop" ;
-
+        
         /**
          * The name of the event when the process is in pause.
          * @eventType onPaused
          */
         public static const PAUSE:String = "pause" ;
-
+        
         /**
          * The name of the event when the process is in progress.
          * @eventType onProgress
          */
         public static const PROGRESS:String = "progress" ;
-
+        
         /**
          * The name of the event when the process is resumed.
          * @eventType onResumed
          */
         public static const RESUME:String = "resume" ;
-
+        
         /**
          * The name of the event when the process is started.
          * @eventType onStarted
          */         
         public static const START:String = "start" ;
-
+        
         /**
          * The name of the event when the process is stopped.
          * @eventType onStopped
          */        
         public static const STOP:String = "stop" ;    
-
+        
         /**
          * The name of the event when the process is cleared.
          * @eventType onTimeOut
@@ -134,15 +134,15 @@ package system.events
         {
             return _info ;
         }
-
+        
         /**
          * @private
          */
         public function set info( info:* ):void 
         {
-            _info = info ;    
+            _info = info ;
         }
-
+        
         /**
          * Returns the shallow copy of this object.
          * @return the shallow copy of this object.

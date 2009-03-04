@@ -37,8 +37,8 @@ package system.process
 {
     import system.Cloneable;
     import system.events.IEventDispatcher;
-    import system.process.Runnable;    
-
+    import system.process.Runnable;
+    
     /**
      * Dispatched when a process is finished.
      * @eventType system.events.ActionEvent.FINISH
@@ -58,22 +58,21 @@ package system.process
      */
     public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
-
+        
         /**
          * Indicates <code class="prettyprint">true</code> if the action is in progress.
          */
-        function get running():Boolean ; 
+        function get running():Boolean ;
         
         /**
          * Notify an ActionEvent when the process is finished.
          */
         function notifyFinished():void ;
-
+        
         /**
          * Notify an ActionEvent when the process is started.
          */
         function notifyStarted():void ;
         
     }
-    
 }

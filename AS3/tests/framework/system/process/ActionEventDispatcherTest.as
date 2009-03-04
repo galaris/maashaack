@@ -43,36 +43,36 @@ package system.process
     import system.process.mocks.MockTaskListener;
     
     import flash.events.Event;    
-
+    
     public class ActionEventDispatcherTest extends TestCase 
-	{
-
-		public function ActionEventDispatcherTest(name:String = "")
-		{
-			super(name);
-		}
-		
-        public var action:ActionEventDispatcher ;		
-		
-		public var mockListener:MockTaskListener ;			
-		
+    {
+        
+        public function ActionEventDispatcherTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var action:ActionEventDispatcher ;        
+        
+        public var mockListener:MockTaskListener ;            
+        
         public function setUp():void
         {
-        	FrontController.getInstance("myChannel").add("test" , _testHandleEvent ) ;
+            FrontController.getInstance("myChannel").add("test" , _testHandleEvent ) ;
             action       = new ActionEventDispatcher("test", true , "myChannel" ) ;
             mockListener = new MockTaskListener( action ) ;
         }
         
         public function tearDown():void
         {
-        	FrontController.getInstance("myChannel").remove("test") ;
+            FrontController.getInstance("myChannel").remove("test") ;
             mockListener.unregister() ;
             mockListener = undefined  ;
             action       = undefined  ;
-        }		
+        }        
         
         // constructor and inherit
-
+        
         public function testConstructorEmpty():void
         {
             var p:ActionEventDispatcher ;
@@ -80,24 +80,24 @@ package system.process
             assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with 0 argument.") ;
             assertNull ( p.event   , "02 - ActionEventDispatcher constructor failed with 0 argument.") ;
         }
-		
-		public function testConstructorBasic():void
-		{
-			var p:ActionEventDispatcher ;
-			p = new ActionEventDispatcher("test") ;			
-			assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one String argument.") ;
-			assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one String argument.") ;
-		}
-
+        
+        public function testConstructorBasic():void
+        {
+            var p:ActionEventDispatcher ;
+            p = new ActionEventDispatcher("test") ;            
+            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one String argument.") ;
+            assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one String argument.") ;
+        }
+        
         public function testConstructorEvent():void
         {
-        	var e:Event                 = new Event("test") ;
+            var e:Event                 = new Event("test") ;
             var p:ActionEventDispatcher = new ActionEventDispatcher( e ) ;         
             assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one Event argument.") ;
             assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one Event argument.") ;
             assertEquals ( p.event , e , "03 - ActionEventDispatcher constructor failed with one Event argument.") ;            
         }
-
+        
         public function testInherit():void
         {
             var p:ActionEventDispatcher = new ActionEventDispatcher() ;         
@@ -106,22 +106,22 @@ package system.process
         
         // attributes
         
-		public function testEvent():void
-		{
-			assertTrue( action.event is Event, "01 - The event attribute failed, must inherit Event class.") ;
-			assertTrue( action.event is BasicEvent , "01 - The event attribute failed, must be a BasicEvent class.") ;
-
-		}
-		
-		public function testEventWithString():void
-		{
-			var p:ActionEventDispatcher = new ActionEventDispatcher() ;
-			p.event = "test" ;  
+        public function testEvent():void
+        {
+            assertTrue( action.event is Event, "01 - The event attribute failed, must inherit Event class.") ;
+            assertTrue( action.event is BasicEvent , "01 - The event attribute failed, must be a BasicEvent class.") ;
+        
+        }
+        
+        public function testEventWithString():void
+        {
+            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
+            p.event = "test" ;  
             assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with a String value.") ;
             assertTrue( p.event is BasicEvent , "02 - ActionEventDispatcher event attribute failed with a String value.") ; 
             assertEquals( p.event.type , "test" , "03 - ActionEventDispatcher event attribute failed with a String value.") ;  
-		}
-
+        }
+        
         public function testEventWithEvent():void
         {
             var e:Event                 = new Event("test") ;
@@ -130,7 +130,7 @@ package system.process
             assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with an Event value.") ;
             assertEquals( p.event , e , "02 - ActionEventDispatcher event attribute failed with an Event value.") ;  
         }
-
+        
         public function testEventWithNullValue():void
         {
             var p:ActionEventDispatcher = new ActionEventDispatcher("type") ;
@@ -139,24 +139,24 @@ package system.process
             p.event = 2 ;
             assertNull( p.event , "02 - The event attribute failed, must be null with a Number value.") ;            
         }
-
-		// methods	
-		
-		public function testClone():void
+        
+        // methods
+        
+        public function testClone():void
         {
-        	var clone:ActionEventDispatcher = action.clone() as  ActionEventDispatcher;
-        	assertNotNull ( clone  , "01 - clone method failed, with a null shallow copy object." ) ;
-        	assertNotSame ( clone  , ActionEventDispatcher  , "02 - clone method failed, the shallow copy isn't the same with the ActionEventDispatcher object." ) ;
-		}
+            var clone:ActionEventDispatcher = action.clone() as  ActionEventDispatcher;
+            assertNotNull ( clone  , "01 - clone method failed, with a null shallow copy object." ) ;
+            assertNotSame ( clone  , ActionEventDispatcher  , "02 - clone method failed, the shallow copy isn't the same with the ActionEventDispatcher object." ) ;
+        }
         
         public function testRun():void
         {
-        	action.run() ;
-        	
-        	assertTrue   ( mockListener.isRunning     , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-        	assertFalse  ( action.running             , "The running property of the BatchProcess must be false after the process." ) ;        
-			
-			assertTrue   ( mockListener.startCalled   , "run method failed, the ActionEvent.START event isn't notify" ) ;
+            action.run() ;
+            
+            assertTrue   ( mockListener.isRunning     , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
+            assertFalse  ( action.running             , "The running property of the BatchProcess must be false after the process." ) ;        
+            
+            assertTrue   ( mockListener.startCalled   , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals ( mockListener.startType     , ActionEvent.START   , "run method failed, bad type found when the process is started." );
             
             assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.FINISH event isn't notify" ) ;
@@ -165,16 +165,16 @@ package system.process
             assertTrue    ( _testHandleEventCalled , "The global event isn't dispatched in the global event flow with the FrontController") ;
             
         }
-
+        
         // private
-
-		private var _testHandleEventCalled:Boolean ;
-        		
-		private function _testHandleEvent(e:Event):void
-		{
-			_testHandleEventCalled = true ;
-		}
-	
-	}
+        
+        private var _testHandleEventCalled:Boolean ;
+        
+        private function _testHandleEvent(e:Event):void
+        {
+            _testHandleEventCalled = true ;
+        }
+    
+    }
 
 }

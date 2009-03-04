@@ -44,7 +44,7 @@ package system.process
     import system.data.queues.TypedQueue;
     import system.events.ActionEvent;
     import system.process.Stoppable;    
-
+    
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>
@@ -70,14 +70,14 @@ package system.process
         /**
          * Creates a new Sequencer instance.
          * @param ar An Array of <code class="prettyprint">Action</code> objects.
-         * @param bGlobal the flag to use a global event flow or a local event flow.
-         * @param sChannel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param global the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          * @param queue This optional parameter defines the Queue reference use inside the sequencer, by default the sequencer use a LinearQueue reference.
          */
-        public function Sequencer( ar:Array = null , bGlobal:Boolean = false , sChannel:String = null , queue:Queue=null )
+        public function Sequencer( ar:Array = null , global:Boolean = false , channel:String = null , queue:Queue=null )
         {
             
-            super(bGlobal, sChannel);
+            super( global, channel) ;
             
             setQueue( queue ) ; 
             
@@ -115,7 +115,7 @@ package system.process
             }
             return isEnqueue ;
         }
-
+        
         /**
          * Removes all process in the Sequencer.
          * @param noEvent A boolean flag to disabled the events dispatched by this method if is <code class="prettyprint">true</code>.
@@ -140,7 +140,7 @@ package system.process
             }
             notifyCleared() ;
         }
-
+        
         /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
@@ -191,7 +191,7 @@ package system.process
                 }
                 
                 _cur = _queue.poll() ;
-    
+                
                 try
                 {
                     _cur.run() ;
@@ -230,14 +230,14 @@ package system.process
          */
         public function setQueue( q:Queue ):void
         {
-        	if ( running )
-        	{
-        		stop() ;
-        	}
-        	_internalQueue = q || new LinearQueue() ;
+            if ( running )
+            {
+                stop() ;
+            }
+            _internalQueue = q || new LinearQueue() ;
             _queue         = new TypedQueue( Action, _internalQueue ) ;
         } 
-
+        
         /**
          * Returns the numbers of process in this Sequencer.
          * @return the numbers of process in this Sequencer.
@@ -246,7 +246,7 @@ package system.process
         {
             return _queue.size() ;
         }
-
+        
         /**
          * Starts the Sequencer if is not in progress.
          */
@@ -265,8 +265,8 @@ package system.process
          */
         public function stop( ...args:Array ):*
         {
-        	var noEvent:Boolean   = new Boolean( args[0] as Boolean ) ;
-        	var callback:Function = args[1] as Function ;
+            var noEvent:Boolean   = new Boolean( args[0] as Boolean ) ;
+            var callback:Function = args[1] as Function ;
             if ( running ) 
             {
                 _cur.addEventListener(ActionEvent.FINISH, run) ;
@@ -293,10 +293,10 @@ package system.process
             }
             else
             {
-            	return false ;
+                return false ;
             }
         }
-
+        
         /**
          * Returns the array representation of all process in this Sequencer.
          * @return the array representation of all process in this Sequencer.
@@ -305,7 +305,7 @@ package system.process
         {
             return _queue.toArray() ;    
         }
-
+        
         /**
          * Returns the source of the specified object passed in argument.
          * @return the source of the specified object passed in argument.

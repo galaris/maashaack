@@ -39,31 +39,31 @@ package system.process
     
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
-    import system.process.mocks.MockTaskListener;    
+    import system.process.mocks.MockTaskListener;
     
-	public class TaskTest extends TestCase 
-	{
-
-		public function TaskTest(name:String = "")
-		{
-			super(name);
-		}
-		
-		public var action:Task ;
-		
-		public var mockListener:MockTaskListener ;
-		
+    public class TaskTest extends TestCase 
+    {
+        
+        public function TaskTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var action:Task ;
+        
+        public var mockListener:MockTaskListener ;
+        
         public function setUp():void
         {
             action       = new Task() ;
             mockListener = new MockTaskListener(action) ;
-		}
+        }
         
         public function tearDown():void
         {
             mockListener.unregister() ;
-            mockListener = undefined ;
-            action       = undefined ;            
+            mockListener = undefined  ;
+            action       = undefined  ;
         }
         
         public function testConstructor():void
@@ -74,13 +74,13 @@ package system.process
         public function testInherit():void
         {
             assertTrue( action is CoreEventDispatcher , "Action inherit CoreEventDispatcher failed.") ;
-        }   
+        }
         
         public function testInterface():void
         {
             assertTrue( action is Action , "Task implements the Action interface" ) ;     
         }
-                
+        
         public function testClone():void
         {
             var clone:Task = action.clone() as Task ;
@@ -91,7 +91,7 @@ package system.process
         public function testRunning():void
         {
             assertFalse( action.running  , "Action running failed, default property value must be false." ) ;
-        }	           
+        }
         
         public function testNotifyFinished():void
         {
@@ -99,7 +99,7 @@ package system.process
             assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "Action notifyStarted failed, bad type found." );
         }
-    
+        
         public function testNotifyStarted():void
         {
             action.notifyStarted() ;
@@ -110,8 +110,6 @@ package system.process
         public function testRun():void
         {
             assertTrue( "run" in action , "Action run 01 method exist." ) ;
-        }     		
-        		
-		
-	}
+        }
+    }
 }

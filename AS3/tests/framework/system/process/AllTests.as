@@ -38,15 +38,15 @@ package system.process
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;    
     
-	public class AllTests
-	{
+    public class AllTests
+    {
         
         public static function suite():ITest
         {
             
             var suite:TestSuite = new TestSuite( "system process package TESTS" ) ;
-
-            suite.addTestSuite( ActionEventDispatcherTest ) ;            			
+            
+            suite.addTestSuite( ActionEventDispatcherTest ) ;                        
             suite.addTestSuite( ActionProxyTest ) ;
             suite.addTestSuite( ActionTest ) ;
             suite.addTestSuite( BatchTest ) ;
@@ -62,5 +62,5 @@ package system.process
             
         }
         
-	}
+    }
 }

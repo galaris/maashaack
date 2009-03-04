@@ -70,7 +70,7 @@ package system.process
             }
             return b ;
         }
-    
+        
         /**
          * Runs the process.
          */
@@ -81,7 +81,7 @@ package system.process
             var l:Number = ar.length ;
             if (l>0) 
             {
-            	while (++i < l) 
+                while (++i < l) 
                 { 
                     ar[i].run() ; 
                 }
@@ -94,20 +94,20 @@ package system.process
          */
         public function stop( ...args:Array ):*
         {
-        	var b:Boolean ;
+            var b:Boolean ;
             var ar:Array = toArray() ;
             var i:Number = -1 ;
             var l:Number = ar.length ;
             if (l>0) while (++i < l) 
             { 
-            	if ( ar[i] is Stoppable )
-            	{
+                if ( ar[i] is Stoppable )
+                {
                     (ar[i] as Stoppable).stop() ;
                     b = true ;
-            	} 
+                } 
             }
             return b ;
-        }        
+        }
         
     }
 }

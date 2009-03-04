@@ -38,7 +38,7 @@ package system.process
     import system.data.Iterator;
     import system.events.ActionEvent;
     import system.process.Stoppable;    
-
+    
     /**
      * This <code class="prettyprint">Action</code> object register <code class="prettyprint">Action</code> objects in a batch process.
      * @example
@@ -144,7 +144,7 @@ package system.process
         {
             // overrides this method
         }
-
+        
         /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
@@ -159,7 +159,7 @@ package system.process
             }
             return b ;
         }
-                    
+        
         /**
          * Returns the internal Batch reference of this layout manager.
          * @return the internal Batch reference of this layout manager.
@@ -222,7 +222,7 @@ package system.process
                 _batch.remove( action ) ;
             }
         }
-
+        
         /**
          * Runs the process.
          */
@@ -298,6 +298,6 @@ package system.process
                 notifyFinished() ;
             }
         }
-
+    
     }
 }

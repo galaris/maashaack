@@ -37,52 +37,52 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Reflection;                            								
+    import system.Reflection;
     
-	public class InitializerTest extends TestCase 
-	{
-
-		public function InitializerTest(name:String = "")
-		{
-			super(name);
-		}
-
+    public class InitializerTest extends TestCase 
+    {
+        
+        public function InitializerTest(name:String = "")
+        {
+            super(name);
+        }
+        
         public function testConstructor():void
         {
-        	var action:Initializer = new Initializer() ;
-        	assertNotNull( action , "Initializer constructor failed.") ;
+            var action:Initializer = new Initializer() ;
+            assertNotNull( action , "Initializer constructor failed.") ;
         }
-
+        
         public function testInherit():void
         {
             var action:Initializer = new Initializer() ;
             assertTrue( action is ActionProxy , "Initializer inherit ActionProxy failed.") ;
         }
-
+        
         public function testIsDynamic():void
         {
             var action:Initializer = new Initializer() ;
             assertTrue( Reflection.getClassInfo(action).isDynamic() , "Initializer is dynamic.") ;
         }
         
-		public function testInitialize():void
-		{
+        public function testInitialize():void
+        {
             var action:Initializer = new Initializer() ;
             action.initialize = function():void
             {
                 throw new Error("init") ;
-            };			
-			try
-			{
-				action.initialize() ;
-				fail("01 - Initializer initialize failed.");
-			}
-			catch( e:Error )
-			{
-				assertEquals(e.message, "init" , "02 - Initializer initialize failed.") ;
-			}
-		}		
-		
-	}
+            };            
+            try
+            {
+                action.initialize() ;
+                fail("01 - Initializer initialize failed.");
+            }
+            catch( e:Error )
+            {
+                assertEquals(e.message, "init" , "02 - Initializer initialize failed.") ;
+            }
+        }
+        
+    }
 }
 
