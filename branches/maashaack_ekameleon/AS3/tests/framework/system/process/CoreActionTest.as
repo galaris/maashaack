@@ -40,7 +40,7 @@ package system.process
     import system.events.ActionEvent;
     import system.process.mocks.MockAction;
     import system.process.mocks.MockActionListener;    
-    
+
     public class CoreActionTest extends TestCase 
     {
         
@@ -70,18 +70,39 @@ package system.process
             mockListener = undefined ;
             action       = undefined ;
         }
+
+        public function testConstructor():void
+        {
+            var a:CoreAction = new MockAction() as CoreAction ;
+            assertNotNull( a , "CoreAction constructor method failed." ) ;
+        }
+
+        public function testInherit():void
+        {
+            var a:CoreAction = new MockAction() as CoreAction ;
+            assertTrue( a is CoreAction , "01 - must extends the CoreAction class." ) ;
+            assertTrue( a is Action , "02 - must extends the Action class." ) ;
+        }
+
+        public function testLooping():void
+        {
+            var a:CoreAction = new MockAction() as CoreAction ;
+            assertFalse( a.looping , "01 - CoreAction looping failed." ) ;
+            a.looping = true ;
+            assertTrue( a.looping , "02 - CoreAction looping failed." ) ;
+        }
         
         public function testClone():void
         {
             var clone:CoreAction = action.clone() as CoreAction ;
-            assertNotNull( clone , "Action clone 01 method failed." ) ;
-            assertFalse( clone == action  , "Action 02 clone method failed." ) ;
+            assertNotNull( clone , "01 - CoreAction clone method failed." ) ;
+            assertFalse( clone == action  , "02 - CoreAction clone method failed." ) ;
         }
         
         public function testNotifyChanged():void
         {
-            assertTrue   ( mockListener.changeCalled , "notify event method failed, the ActionEvent.CHANGE event isn't notify" ) ;
-            assertEquals ( mockListener.changeType   , ActionEvent.CHANGE  , "notify event method failed, bad type found when the process is changed." );
+            assertTrue   ( mockListener.changeCalled , "01 - notify event method failed, the ActionEvent.CHANGE event isn't notify" ) ;
+            assertEquals ( mockListener.changeType   , ActionEvent.CHANGE  , "02 - notify event method failed, bad type found when the process is changed." );
         }
         
         public function testNotifyCleared():void
