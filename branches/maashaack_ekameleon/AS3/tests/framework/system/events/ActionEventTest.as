@@ -35,15 +35,103 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events  
 {
-	
-	import buRRRn.ASTUce.framework.TestCase;
+    import buRRRn.ASTUce.framework.TestCase;
     
-	public class ActionEventTest extends TestCase 
+    import system.process.Task;    
+
+    public class ActionEventTest extends TestCase 
 	{
 
 		public function ActionEventTest(name:String = "")
 		{
 			super(name);
 		}
+        
+        public function testConstructorBasic():void
+        {
+        	var t:Task = new Task() ;
+            var e:ActionEvent = new ActionEvent( "type" , t ) ;
+            assertNotNull( e , "01 - ActionEvent constructor failed.") ;
+            assertEquals( e.type   , "type" , "02 - ActionEvent constructor failed.") ;
+            assertEquals( e.target , t      , "03 - ActionEvent constructor failed.") ;
+        }
+        
+        public function testInherit():void
+        {
+            var e:ActionEvent = new ActionEvent( "type" ) ;
+            assertTrue( e is BasicEvent, "01 - ActionEvent must extends the BasicEvent class.") ;
+        } 
+
+        public function testInfo():void
+        {
+            var e:ActionEvent = new ActionEvent( "type" ) ;
+            assertNull( e.info , "01 - ActionEvent info failed.") ;
+            e.info = "hello world" ;
+            assertEquals( e.info , "hello world" , "02 - ActionEvent info failed.") ;
+        }
+
+        public function testClone():void
+        {
+            var e:ActionEvent = new ActionEvent( "type" , new Task() , "info" , "context") ;
+            var c:ActionEvent = e.clone() as ActionEvent ;
+            assertNotNull( c , "01 - ActionEvent clone() failed.") ;
+            assertEquals( e.info , c.info, "02 - ActionEvent clone() failed.") ;
+            assertEquals( e.context , c.context, "03 - ActionEvent clone() failed.") ;               
+        }  
+        
+        public function testCHANGE():void
+        {
+        	assertEquals( ActionEvent.CHANGE , "change" , "ActionEvent.CHANGE constant failed.") ;     
+        }
+
+        public function testCLEAR():void
+        {
+            assertEquals( ActionEvent.CLEAR , "clear" , "ActionEvent.CLEAR constant failed.") ;     
+        }
+
+        public function testFINISH():void
+        {
+            assertEquals( ActionEvent.FINISH , "finish" , "ActionEvent.FINISH constant failed.") ;     
+        }        
+
+        public function testINFO():void
+        {
+            assertEquals( ActionEvent.INFO , "info" , "ActionEvent.INFO constant failed.") ;     
+        }     
+        
+        public function testLOOP():void
+        {
+            assertEquals( ActionEvent.LOOP , "loop" , "ActionEvent.LOOP constant failed.") ;     
+        }   
+        
+        public function testPAUSE():void
+        {
+            assertEquals( ActionEvent.PAUSE , "pause" , "ActionEvent.PAUSE constant failed.") ;     
+        }
+        
+        public function testPROGRESS():void
+        {
+            assertEquals( ActionEvent.PROGRESS , "progress" , "ActionEvent.PROGRESS constant failed.") ;     
+        }
+        
+        public function testRESUME():void
+        {
+            assertEquals( ActionEvent.RESUME , "resume" , "ActionEvent.RESUME constant failed.") ;     
+        }
+
+        public function testSTART():void
+        {
+            assertEquals( ActionEvent.START , "start" , "ActionEvent.START constant failed.") ;     
+        }
+        
+        public function testSTOP():void
+        {
+            assertEquals( ActionEvent.STOP , "stop" , "ActionEvent.STOP constant failed.") ;     
+        }
+        
+        public function testTIMEOUT():void
+        {
+            assertEquals( ActionEvent.TIMEOUT , "timeout" , "ActionEvent.TIMEOUT constant failed.") ;     
+        }
 	}
 }
