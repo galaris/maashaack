@@ -85,6 +85,7 @@ todo:
  * Environment class (refactor)
  * reflection API
  * finish and fully review all core objects: Strings, Arrays, Objects, etc.
+ * define the common namespaces standard/optimized/experimental
  * URI class
  * Process and Action engine
  * reorganization of the documentation (wiki)
@@ -93,6 +94,7 @@ todo:
    * system : framework classes (which can have dependencies within the framework)
    * openscreens : flash platform related libraries (SWF, AMF, SOL, etc.)
    * libraries : 3rd party libraries (zlib, ogg, etc.)
+   * explain the common namespaces standard/optimized/experimental
  * support and test for FP10
 
 
