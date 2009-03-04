@@ -70,25 +70,77 @@ package system.process
             mockListener = undefined  ;
             action       = undefined  ;
         }		
+        
+        // constructor and inherit
+
+        public function testConstructorEmpty():void
+        {
+            var p:ActionEventDispatcher ;
+            p = new ActionEventDispatcher() ;         
+            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with 0 argument.") ;
+            assertNull ( p.event   , "02 - ActionEventDispatcher constructor failed with 0 argument.") ;
+        }
 		
-		public function testConstructor():void
+		public function testConstructorBasic():void
 		{
-		
 			var p:ActionEventDispatcher ;
-			
 			p = new ActionEventDispatcher("test") ;			
-			
-			assertNotNull ( p , "01 - ActionEventDispatcher constructor failed.") ;
-			assertTrue    ( p is Task , "02 - ActionEventDispatcher constructor failed.") ;
-			assertNotNull ( p.event   , "03 - ActionEventDispatcher constructor failed.") ;
-			
+			assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one String argument.") ;
+			assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one String argument.") ;
 		}
-		
+
+        public function testConstructorEvent():void
+        {
+        	var e:Event                 = new Event("test") ;
+            var p:ActionEventDispatcher = new ActionEventDispatcher( e ) ;         
+            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one Event argument.") ;
+            assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one Event argument.") ;
+            assertEquals ( p.event , e , "03 - ActionEventDispatcher constructor failed with one Event argument.") ;            
+        }
+
+        public function testInherit():void
+        {
+            var p:ActionEventDispatcher = new ActionEventDispatcher() ;         
+            assertTrue    ( p is Task , "01 - ActionEventDispatcher must extends the Task class.") ;
+        }
+        
+        // attributes
+        
 		public function testEvent():void
 		{
-			assertTrue( action.event is Event, "The event property failed, must inherit Event class.") ;
-			assertTrue( action.event is BasicEvent , "The event property failed, must inherit BasicEvent class.") ;
-		}	
+			assertTrue( action.event is Event, "01 - The event attribute failed, must inherit Event class.") ;
+			assertTrue( action.event is BasicEvent , "01 - The event attribute failed, must be a BasicEvent class.") ;
+
+		}
+		
+		public function testEventWithString():void
+		{
+			var p:ActionEventDispatcher = new ActionEventDispatcher() ;
+			p.event = "test" ;  
+            assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with a String value.") ;
+            assertTrue( p.event is BasicEvent , "02 - ActionEventDispatcher event attribute failed with a String value.") ; 
+            assertEquals( p.event.type , "test" , "03 - ActionEventDispatcher event attribute failed with a String value.") ;  
+		}
+
+        public function testEventWithEvent():void
+        {
+            var e:Event                 = new Event("test") ;
+            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
+            p.event                     = e ;
+            assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with an Event value.") ;
+            assertEquals( p.event , e , "02 - ActionEventDispatcher event attribute failed with an Event value.") ;  
+        }
+
+        public function testEventWithNullValue():void
+        {
+            var p:ActionEventDispatcher = new ActionEventDispatcher("type") ;
+            p.event = null ;
+            assertNull( p.event , "01 - The event attribute failed, must be null with a null value.") ;
+            p.event = 2 ;
+            assertNull( p.event , "02 - The event attribute failed, must be null with a Number value.") ;            
+        }
+
+		// methods	
 		
 		public function testClone():void
         {
@@ -113,6 +165,8 @@ package system.process
             assertTrue    ( _testHandleEventCalled , "The global event isn't dispatched in the global event flow with the FrontController") ;
             
         }
+
+        // private
 
 		private var _testHandleEventCalled:Boolean ;
         		
