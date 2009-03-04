@@ -35,18 +35,18 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;        			
-
+    import buRRRn.ASTUce.framework.TestCase;
+    
     public class PauseTest extends TestCase 
-	{
-
-		public function PauseTest(name:String = "")
-		{
-			super(name);
-		}
-		
-		public var pause:Pause ;
-		
+    {
+        
+        public function PauseTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var pause:Pause ;
+        
         public function setUp():void
         {
             pause = new Pause() ;
@@ -61,12 +61,12 @@ package system.process
         {
             assertNotNull( pause , "Pause constructor failed, the instance not must be null." ) ;
         }
-
+        
         public function testInherit():void
         {
             assertTrue( pause is CoreAction , "Pause must inherit the CoreAction class." ) ;
         }
-
+        
         public function testDelay():void
         {
             var pause:Pause ;
@@ -76,10 +76,10 @@ package system.process
             
             pause = new Pause(1) ;
             assertEquals( pause.delay , 1000 , "02 - Pause delay failed." ) ;
-
+            
             pause = new Pause(1, true) ;
             assertEquals( pause.delay , 1000 , "02 - Pause delay failed." ) ;
-
+            
             pause = new Pause(1000, false) ;
             assertEquals( pause.delay , 1000 , "03 - Pause delay failed." ) ;
         
@@ -87,16 +87,16 @@ package system.process
         
         public function testDuration():void
         {
-            pause = new Pause() ;        	
-        	assertEquals( pause.duration, 0  , "01 - Pause default duration failed." ) ;
-        	try
-        	{
-        	   pause.duration = -1 ;
-        	   fail( "02-01 - Pause default duration failed." ) ;
-        	}
-        	catch( e:Error )
+            pause = new Pause() ;            
+            assertEquals( pause.duration, 0  , "01 - Pause default duration failed." ) ;
+            try
             {
-                assertTrue( e is RangeError , "02-02 - Pause default duration failed." ) ;	
+               pause.duration = -1 ;
+               fail( "02-01 - Pause default duration failed." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is RangeError , "02-02 - Pause default duration failed." ) ;    
             }
             
             try
@@ -112,16 +112,16 @@ package system.process
         
         public function testUseSeconds():void
         {
-        	var pause:Pause = new Pause() ;
-        	assertTrue( pause.useSeconds , "01 - Pause useSeconds failed." ) ;
-        	
-        	pause.useSeconds = false ;
-        	assertFalse( pause.useSeconds , "02 - Pause useSeconds failed." ) ;
-        	
-        	pause.useSeconds = true ;
+            var pause:Pause = new Pause() ;
+            assertTrue( pause.useSeconds , "01 - Pause useSeconds failed." ) ;
+            
+            pause.useSeconds = false ;
+            assertFalse( pause.useSeconds , "02 - Pause useSeconds failed." ) ;
+            
+            pause.useSeconds = true ;
             assertTrue( pause.useSeconds , "03 - Pause useSeconds failed." ) ;
         }
-                
+        
         public function testClone():void
         {
             var clone:Pause = pause.clone() as Pause ;
@@ -131,7 +131,6 @@ package system.process
             assertEquals( clone.duration , pause.duration  , "Pause clone 04 method failed." ) ;
             assertEquals( clone.useSeconds , pause.useSeconds  , "Pause clone 05 method failed." ) ;
         }
-                
-		
-	}
+        
+    }
 }

@@ -44,7 +44,7 @@ package system.process
      */
     public class ActionEventDispatcher extends Task 
     {
-
+        
         /**
          * Creates a new ActionEventDispatcher instance.
          * @param event The event to dispatch.
@@ -64,13 +64,13 @@ package system.process
         {
         	return _event ;
         }
-
+        
         /**
          * The event to dispatch in this process.
          */
         public function set event( e:* ):void
         {
-        	if ( e is String )
+            if ( e is String )
             {
                 _event = new BasicEvent( e as String ) ;
             }
@@ -80,7 +80,7 @@ package system.process
             }
             else
             {
-                _event = null ;	
+                _event = null ;
             }
         }
         

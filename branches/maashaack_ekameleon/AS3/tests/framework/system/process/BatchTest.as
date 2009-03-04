@@ -41,15 +41,15 @@ package system.process
     import system.process.mocks.MockCommand;    
 
     public class BatchTest extends TestCase 
-	{
+    {
 
-		public function BatchTest(name:String = "")
-		{
-			super(name);
-		}
-		
-        public var batch:Batch ;		
-
+        public function BatchTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var batch:Batch ;
+        
         public function setUp():void
         {
             batch = new Batch() ;
@@ -61,44 +61,44 @@ package system.process
         
         public function tearDown():void
         {
-        	batch.clear() ;
-            batch = undefined ;      
-        }		
-		
+            batch.clear() ;
+            batch = undefined ;
+        }
+        
         public function testConstructor():void
         {
             assertNotNull( batch , "Batch constructor failed, the instance not must be null." ) ;
             assertTrue( batch is Batch , "batch must be a Batch object." ) ;
             assertTrue( batch is Runnable , "batch implements the Runnable interface." ) ;
         }
-		
+        
         public function testClear():void
         {
-        	var clone:Batch = batch.clone() ;
-        	clone.clear() ;
-        	assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
+            var clone:Batch = batch.clone() ;
+            clone.clear() ;
+            assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
         }
-		
+        
         public function testClone():void
         {
-        	var clone:Batch = batch.clone() ;
-        	assertNotNull( clone , "clone method failed, with a null shallow copy object." ) ;
-        	assertNotSame( clone , batch , "clone method failed, the shallow copy isn't the same with the action object." ) ;
+            var clone:Batch = batch.clone() ;
+            assertNotNull( clone , "clone method failed, with a null shallow copy object." ) ;
+            assertNotSame( clone , batch , "clone method failed, the shallow copy isn't the same with the action object." ) ;
         }
         
         public function testRun():void
         {
-        	MockCommand.reset() ;
-        	batch.run() ;
-        	assertEquals( MockCommand.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
+            MockCommand.reset() ;
+            batch.run() ;
+            assertEquals( MockCommand.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
         }
         
         public function testSize():void
         {
-        	var clone:Batch = batch.clone() ;
-        	clone.clear() ;
-        	assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
-        }        
-		
-	}
+            var clone:Batch = batch.clone() ;
+            clone.clear() ;
+            assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
+        }
+        
+    }
 }

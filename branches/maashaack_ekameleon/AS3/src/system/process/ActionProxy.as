@@ -35,8 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import system.events.Delegate;                
-
+    import system.events.Delegate ;
+    
     /**
      * This <code class="prettyprint">Action</code> object run a proxy method.
      * <p><b>Example :</b></p>
@@ -108,7 +108,7 @@ package system.process
          * The scope reference of the proxy method of this process.
          */
         public var scope:Object ;
-
+        
         /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
@@ -117,7 +117,7 @@ package system.process
         {
             return new ActionProxy( scope, method, args ) ;
         }
-
+        
         /**
          * Run the process.
          */
@@ -132,7 +132,7 @@ package system.process
             Delegate.create.apply(this, params)();
             notifyFinished() ;
         }
-
+    
     }
 
 }

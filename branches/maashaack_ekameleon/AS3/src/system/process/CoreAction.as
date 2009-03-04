@@ -35,7 +35,7 @@
 
 package system.process
 {
-    import system.events.ActionEvent;                        
+    import system.events.ActionEvent;
 
     /**
      * Dispatched when a process is changed.
@@ -107,9 +107,9 @@ package system.process
         public function CoreAction( global:Boolean = false , channel:String = null )
         {
             super( global, channel ) ;
-            initEventType() ;            
+            initEventType() ;
         }
-
+        
         /**
          * The flag to determinate if the Action object is looped.
          */
@@ -210,7 +210,7 @@ package system.process
             _sTypeStop     = ActionEvent.STOP     ;
             _sTypeTimeout  = ActionEvent.TIMEOUT  ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is changed.
          */
@@ -218,7 +218,7 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeChange, this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is cleared.
          */
@@ -226,7 +226,7 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeClear, this ) ) ;
         }    
-
+        
         /**
          * Notify an ActionEvent when the process info is changed.
          */
@@ -234,7 +234,7 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeInfo, this , info ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is looped.
          */
@@ -242,7 +242,7 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeLoop, this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is in progress.
          */
@@ -250,7 +250,7 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeProgress, this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is resumed.
          */
@@ -258,16 +258,16 @@ package system.process
         {
             dispatchEvent( new ActionEvent( _sTypeResume, this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is stopped.
          */
         protected function notifyStopped():void
         {
-        	setRunning(false) ;
+            setRunning(false) ;
             dispatchEvent( new ActionEvent( _sTypeStop, this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is out of time.
          */
@@ -344,37 +344,37 @@ package system.process
          * @private
          */
         private var _sTypeChange:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeClear:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeInfo:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeLoop:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeProgress:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeResume:String ;
-
+        
         /**
          * @private
          */
         private var _sTypeStop:String ;
-
+        
         /**
          * @private
          */

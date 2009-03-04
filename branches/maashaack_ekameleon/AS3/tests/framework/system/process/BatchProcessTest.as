@@ -39,20 +39,20 @@ package system.process
     
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;	
+    import system.process.mocks.MockTaskListener;    
     
     public class BatchProcessTest extends TestCase 
-	{
-
-		public function BatchProcessTest(name:String = "")
-		{
-			super(name);
-		}
-		
-        public var batch:BatchProcess ;		
-		
-		public var mockListener:MockTaskListener ;		
-		
+    {
+        
+        public function BatchProcessTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var batch:BatchProcess ;        
+        
+        public var mockListener:MockTaskListener ;
+        
         public function setUp():void
         {
             batch = new BatchProcess() ;
@@ -62,7 +62,7 @@ package system.process
             batch.addAction(new MockTask()) ;
             batch.addAction(new MockTask()) ;
             
-            mockListener = new MockTaskListener(batch) ;
+            mockListener = new MockTaskListener( batch ) ;
         }
         
         public function tearDown():void
@@ -70,34 +70,32 @@ package system.process
             mockListener.unregister() ;
             mockListener = undefined ;
             batch        = undefined ; 
-            MockTask.reset() ;	   
-        }		
-		
+            MockTask.reset() ;       
+        }        
+        
         public function testClone():void
         {
-        	var clone:BatchProcess = batch.clone() ;
-        	assertNotNull( clone  , "clone method failed, with a null shallow copy object." ) ;
-        	assertNotSame( clone  , batch  , "clone method failed, the shallow copy isn't the same with the BatchProcess object." ) ;
+            var clone:BatchProcess = batch.clone() ;
+            assertNotNull( clone  , "clone method failed, with a null shallow copy object." ) ;
+            assertNotSame( clone  , batch  , "clone method failed, the shallow copy isn't the same with the BatchProcess object." ) ;
         }
         
         public function testRun():void
         {
-			MockTask.reset() ;
-        	batch.run() ;
-        	assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-        	assertEquals( MockTask.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
-        	assertFalse( batch.running , "The running property of the BatchProcess must be false after the process." ) ;
+            MockTask.reset() ;
+            batch.run() ;
+            assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
+            assertEquals( MockTask.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
+            assertFalse( batch.running , "The running property of the BatchProcess must be false after the process." ) ;
         }
-		
-		public function testEvents():void
-		{
-        	batch.run() ;
+        
+        public function testEvents():void
+        {
+            batch.run() ;
             assertTrue( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
             assertTrue( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
-		}		
-
-	}
-		
+        }
+    }
 }

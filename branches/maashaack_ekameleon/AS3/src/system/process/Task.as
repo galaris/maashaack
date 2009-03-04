@@ -37,7 +37,7 @@ package system.process
 {
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;    
-
+    
     /**
      * Dispatched when a process is finished.
      * @eventType system.events.ActionEvent.FINISH
@@ -51,7 +51,7 @@ package system.process
      * @see #notifyStarted
      */
     [Event(name="onStarted", type="system.events.ActionEvent")]
-
+    
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
@@ -65,17 +65,17 @@ package system.process
          */
         public function Task( global:Boolean = false , channel:String = null ) 
         {
-            super( global , channel ) ;        
+            super( global , channel ) ;
         }
-
+        
         /**
          * (read-only) Indicates <code class="prettyprint">true</code> if the process is in progress.
          */
         public function get running():Boolean 
         {
-            return _isRunning ;    
+            return _isRunning ;
         }
-
+        
         /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
@@ -94,7 +94,7 @@ package system.process
         	finishIt() ;
             dispatchEvent( new ActionEvent( ActionEvent.FINISH , this ) ) ;
         }
-
+        
         /**
          * Notify an ActionEvent when the process is started.
          */
@@ -113,7 +113,7 @@ package system.process
         {
             // overrides this method.
         }
-
+        
         /**
          * Called in the notifyFinished method.
          */
@@ -121,15 +121,15 @@ package system.process
         {
             // overrides
         };
-                
+        
         /**
          * Changes the running property value.
          */
         protected function setRunning( b:Boolean ):void
         {
-            _isRunning = b ;    
+            _isRunning = b ;
         }
-
+        
         /**
          * Called in the notifyStarted method.
          */
@@ -137,13 +137,12 @@ package system.process
         {
             // overrides
         };
-
+        
         /**
          * @private
          */
         private var _isRunning:Boolean ;
         
-
     }
 
 }

@@ -37,77 +37,77 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.process.samples.ActionClass;    																
+    import system.process.samples.ActionClass ;
     
-	public class ActionTest extends TestCase 
-	{
-
-		public function ActionTest(name:String = "")
-		{
-			super(name);
-		}
-		
-		public var action:ActionClass ;
-		
+    public class ActionTest extends TestCase 
+    {
+        
+        public function ActionTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public var action:ActionClass ;
+        
         public function setUp():void
         {
-			action = new ActionClass() ;
+            action = new ActionClass() ;
         }
         
         public function tearDown():void
         {
-			action = null ;
-        }		
-
+            action = null ;
+        }
+        
         public function testRunning():void
         {
             assertTrue( action.running , "Action running property failed." ) ;
         }
-
-		public function testClone():void
-		{
-			assertNotNull( action.clone() as Action , "Action clone method failed." ) ;
-		}
-		
-		public function testNotifyFinished():void
-		{
-			try
-			{
-				action.notifyFinished() ;
-				fail("01 - Action.notifyFinished failed.") ;
-			}	
-			catch( e:Error )
-			{
-				assertEquals(e.message, "finished" , "02 - Action notifyFinished failed.") ;	
-			}
-		}
-	
-		public function testNotifyStarted():void
-		{
-			try
-			{
-				action.notifyStarted() ;
-				fail("01 - Action notifyStarted failed.") ;
-			}	
-			catch( e:Error )
-			{
-				assertEquals(e.message, "started" , "02 - Action notifyStarted failed.") ;	
-			}
-	
-		}	
-		
-		public function testRun():void
-		{
-			try
-			{
-				action.run() ;
-			}	
-			catch( e:Error )
-			{
-				assertEquals(e.message, "run" , "IAction run method failed.") ;	
-			}
-		}			
-		
-	}
+        
+        public function testClone():void
+        {
+            assertNotNull( action.clone() as Action , "Action clone method failed." ) ;
+        }
+        
+        public function testNotifyFinished():void
+        {
+            try
+            {
+                action.notifyFinished() ;
+                fail("01 - Action.notifyFinished failed.") ;
+            }    
+            catch( e:Error )
+            {
+                assertEquals(e.message, "finished" , "02 - Action notifyFinished failed.") ;    
+            }
+        }
+        
+        public function testNotifyStarted():void
+        {
+            try
+            {
+                action.notifyStarted() ;
+                fail("01 - Action notifyStarted failed.") ;
+            }    
+            catch( e:Error )
+            {
+                assertEquals(e.message, "started" , "02 - Action notifyStarted failed.") ;    
+            }
+        
+        }
+        
+        public function testRun():void
+        {
+            try
+            {
+                action.run() ;
+            }    
+            catch( e:Error )
+            {
+                assertEquals(e.message, "run" , "IAction run method failed.") ;    
+            }
+        }
+        
+    }
 }
 
