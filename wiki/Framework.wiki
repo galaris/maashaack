@@ -74,7 +74,12 @@ done:
  * event model based on W3C DOM 2/3
  * Comparator, Sortable, Comparable interface and implementations
  * build as `abc` for redtamarin
- * unit tests should run on the command line
+   * core.abc
+   * maashaack.abc
+ * new component core.swc
+ * unit tests run on the command line
+   * we dynamically generate ASTUce.exe
+   * we run ASTUce, core, system, etc. unit tests
 
 todo:
  * Environment class (refactor)
