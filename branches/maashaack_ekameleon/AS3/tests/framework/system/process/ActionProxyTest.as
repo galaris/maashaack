@@ -35,12 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.events.ActionEvent;
-    import system.process.mocks.MockTaskListener;    
-    
-	public class ActionProxyTest extends TestCase 
+    import buRRRn.ASTUce.framework.TestCase;        import system.events.ActionEvent;    import system.process.mocks.MockTaskListener;    
+    public class ActionProxyTest extends TestCase 
 	{
 
 		public function ActionProxyTest(name:String = "")
@@ -79,6 +75,11 @@ package system.process
             mockListener = undefined  ;
             action       = undefined  ;
         }
+
+        public function testInherit():void
+        {
+            assertTrue ( action is Task, "The ActionProxy class must extends the Task class." ) ;
+        }
         
         public function testArgs():void
         {
@@ -104,7 +105,7 @@ package system.process
         public function testClone():void
         {
         	
-        	var clone:ActionProxy = action.clone() ;
+        	var clone:ActionProxy = action.clone() as ActionProxy ;
 
         	assertNotNull( clone                      , "clone method failed, with a null shallow copy object." ) ;
         	assertNotSame( clone       , action       , "clone method failed, the shallow copy isn't the same with the action object." ) ;
