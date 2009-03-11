@@ -1,5 +1,5 @@
 #labels Projects-X,Code
-= Design pattern FrontController based on the W3C event propagation =
+= Design pattern !FrontController based on the W3C event propagation =
 
  * [http://code.google.com/p/maashaack/ HomePage]
    * [events Returns events]
@@ -72,9 +72,9 @@ var controller:FrontController = new FrontController( "myChannel" ) ;
 EventDispatcher.getInstance("myChannel").dispatchEvent( new Event("type") ) ; 
 }}}
 
-This channel link your front controller with the *!system.events.EventDispatcher* singleton with the same channel.
+This channel link your front controller with the *system.events.!EventDispatcher* singleton with the same channel.
 
-The FrontController class use the "locator" design pattern and can be use with the factory static method *getInstance( channel:String )* :
+The *!FrontController* class use the "locator" design pattern and can be use with the factory static method *getInstance( channel:String )* :
 
 {{{
 package examples 
@@ -121,9 +121,9 @@ package examples
 
 }}}
 
-== Use the fireEvent method to dispatch your events in the FrontController ==
+== Use the fireEvent method to dispatch your events in the !FrontController ==
 
-In the FrontController you can call the *fireEvent()* method to dispatch an event with no direct dependencies in your code, example :
+With a *!FrontController* object you can call the *fireEvent()* method to dispatch an event with no direct dependencies in your code, example :
 
 {{{
 package examples 
@@ -169,6 +169,6 @@ The *fireEvent()* method can be use with :
  * A *String* parameter, the method dispatch a *system.events.!BasicEvent* and the type of the event is the parameter value.
  * An Event object to dispatch in the frontController.
 
-== Batch your event listeners in a FrontController with the same event type == 
+== Batch your event listeners in a !FrontController with the same event type == 
 
 // TODO : addBatch method
