@@ -76,7 +76,9 @@ EventDispatcher.getInstance("myChannel").dispatchEvent( new Event("type") ) ;
 
 This channel link your front controller with the *system.events.!EventDispatcher* singleton with the same channel.
 
-The *!FrontController* class use the "locator" design pattern and can be use with the factory static method *getInstance( channel:String )* :
+The *!FrontController* class use the "locator" design pattern and can be use with the factory static method *getInstance( channel:String )*.
+
+Example ([http://code.google.com/p/maashaack/source/browse/trunk/AS3/examples/maashaack/system/events/examples/FrontControllerExample02.as see the source]) :
 
 {{{
 package examples 
@@ -125,7 +127,9 @@ package examples
 
 == Use the fireEvent method to dispatch your events in the !FrontController ==
 
-With a *!FrontController* object you can call the *fireEvent()* method to dispatch an event with no direct dependencies in your code, example :
+With a *!FrontController* object you can call the *fireEvent()* method to dispatch an event with no direct dependencies in your code.
+
+Example ([http://code.google.com/p/maashaack/source/browse/trunk/AS3/examples/maashaack/system/events/examples/FrontControllerExample03.as see the source]) :
 
 {{{
 package examples 
@@ -177,7 +181,7 @@ The !FrontController centralizes the event propagation in your application. The 
 
 This method group your event listeners to handle all events with a specific type register in the front controller.
 
-*Example :*
+Example ([http://code.google.com/p/maashaack/source/browse/trunk/AS3/examples/maashaack/system/events/examples/FrontControllerExample04.as see the source]) :
 
 {{{
 package examples 
