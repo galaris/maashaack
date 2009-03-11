@@ -4,6 +4,8 @@
  * [http://code.google.com/p/maashaack/ HomePage]
    * [events Returns events]
 
+== Generality ==
+
 The *front controller* design pattern defines a single *system.events.!EventDispatcher* object that is responsible for processing application requests.
 
 The front controller centralizes functions such as view selection, security, and templating, and applies them consistently across all pages or views. Consequently, when the behavior of these functions need to change, only a small part of the application needs to be changed : the controller and its helper classes.
@@ -59,6 +61,8 @@ package examples
     }
 }
 }}}
+
+== FrontController with a global multi-channel factory ==
 
 You can defines a channel when you initialize your front controller :
 
@@ -117,5 +121,54 @@ package examples
 
 }}}
 
-// TODO : fireEvent method
+== Use the fireEvent method to dispatch your events in the FrontController ==
+
+In the FrontController you can call the *fireEvent()* method to dispatch an event with no direct dependencies in your code, example :
+
+{{{
+package examples 
+{
+    import system.events.FrontController;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;    
+
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
+    /**
+     * This class provides an example of the FrontController class and this method fireEvent().
+     */
+    public class FrontControllerExample03 extends Sprite 
+    {
+
+        public function FrontControllerExample03()
+        {
+            var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
+            
+            controller.add( "type" , listener ) ;
+            
+            controller.fireEvent( "type" ) ; 
+            // # listener : [BasicEvent type="type" target=[object EventDispatcher] context=null bubbles=false cancelable=false eventPhase=2]
+            
+            controller.fireEvent( new Event( "type" ) ) ; 
+            // [Event type="type" bubbles=false cancelable=false eventPhase=2]
+            
+        }
+        
+        public function listener( e:Event ):void 
+        {
+            trace("# listener : " + e ) ; 
+        }
+
+    }
+}
+}}} 
+
+The *fireEvent()* method can be use with :
+
+ * A *String* parameter, the method dispatch a *system.events.!BasicEvent* and the type of the event is the parameter value.
+ * An Event object to dispatch in the frontController.
+
+== Batch your event listeners in a FrontController with the same event type == 
+
 // TODO : addBatch method
