@@ -1,4 +1,4 @@
-#labels Projects-X,Code
+#labels Projects-X,Code,Framework
 = Design pattern !FrontController based on the W3C event propagation =
 
  * [http://code.google.com/p/maashaack/ HomePage]
@@ -9,6 +9,8 @@
 The *front controller* design pattern defines a single *system.events.!EventDispatcher* object that is responsible for processing application requests.
 
 The front controller centralizes functions such as view selection, security, and templating, and applies them consistently across all pages or views. Consequently, when the behavior of these functions need to change, only a small part of the application needs to be changed : the controller and its helper classes.
+
+Example ([http://code.google.com/p/maashaack/source/browse/trunk/AS3/examples/maashaack/system/events/examples/FrontControllerExample01.as see the source]) :
 
 {{{
 package examples 
