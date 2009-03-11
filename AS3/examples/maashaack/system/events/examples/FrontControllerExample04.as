@@ -35,7 +35,6 @@
 
 package examples 
 {
-    import system.events.EventDispatcher;
     import system.events.FrontController;
     
     import flash.display.Sprite;
@@ -44,33 +43,61 @@ package examples
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
 
     /**
-     * This class provides an example of the FrontController class with this static method 
-     * getInstance() and with a specific channel to dispatch the global events.
+     * This class provides an example of the FrontController class and this addBatch method.
      */
-    public class FrontControllerExample02 extends Sprite 
+    public class FrontControllerExample04 extends Sprite 
     {
 
-        public function FrontControllerExample02()
+        public function FrontControllerExample04()
         {
             var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
-            var dispatcher:EventDispatcher = EventDispatcher.getInstance( "myChannel" ) ;
             
-            controller.add( "type1" , listener1 ) ;
-            controller.add( "type2" , listener2 ) ;
+            controller.addBatch( "type1" , new MyListener("listener1") ) ;
+            controller.addBatch( "type1" , new MyListener("listener2") ) ;
             
-            dispatcher.dispatchEvent( new Event( "type1" ) ) ; // # action1 : type1
-            dispatcher.dispatchEvent( new Event( "type2" ) ) ; // # action2 : type2
-        }
-        
-        public function listener1( e:Event ):void 
-        {
-            trace("# action1 : " + e.type ) ; 
+            controller.addBatch( "type2" , new MyListener("listener3") ) ;
+            controller.addBatch( "type2" , new MyListener("listener4") ) ;
+            
+            controller.fireEvent( new Event( "type1" ) ) ; 
+            
+            // [MyListener listener1] handleEvent : type1
+            // [MyListener listener2] handleEvent : type1
+            
+            controller.fireEvent( new Event( "type2" ) ) ;
+
+            // [MyListener listener3] handleEvent : type2
+            // [MyListener listener4] handleEvent : type2
+            
+            controller.remove( "type2" ) ;
+            controller.fireEvent( new Event( "type2" ) ) ;
+            
+            // nothing
         }
 
-        public function listener2( e:Event ):void 
-        {
-            trace("# action2 : " + e.type ) ; 
-        }
-        
+    }
+}
+
+import system.events.EventListener;
+
+import flash.events.Event;
+
+class MyListener implements EventListener
+{
+
+    public function MyListener( name:String = "" )
+    {
+        this.name = name ;
+    }
+    
+    public var name:String ;
+
+    public function handleEvent(e:Event):void
+    {
+        trace( this + " handleEvent : " + e.type ) ; 
+    }
+
+    public function toString():String
+    {
+        return "[MyListener " + name + "]" ;  
     }
 }
