@@ -62,7 +62,7 @@ package examples
 }
 }}}
 
-== FrontController with a global multi-channel factory ==
+== !FrontController with a global multi-channel factory ==
 
 You can defines a channel when you initialize your front controller :
 
@@ -171,4 +171,79 @@ The *fireEvent()* method can be use with :
 
 == Batch your event listeners in a !FrontController with the same event type == 
 
-// TODO : addBatch method
+The !FrontController centralizes the event propagation in your application. The easy usage of the design pattern use a front controller to register one event type and one event listener. But in the *system.events.!FrontController* class you can create a collection of *EventListener* objects with the method *addBatch()* 
+
+This method group your event listeners to handle all events with a specific type register in the front controller.
+
+*Example :*
+
+{{{
+package examples 
+{
+    import system.events.FrontController;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;    
+
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
+    /**
+     * This class provides an example of the FrontController class and this addBatch method.
+     */
+    public class FrontControllerExample04 extends Sprite 
+    {
+
+        public function FrontControllerExample04()
+        {
+            var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
+            
+            controller.addBatch( "type1" , new MyListener("listener1") ) ;
+            controller.addBatch( "type1" , new MyListener("listener2") ) ;
+            
+            controller.addBatch( "type2" , new MyListener("listener3") ) ;
+            controller.addBatch( "type2" , new MyListener("listener4") ) ;
+            
+            controller.fireEvent( new Event( "type1" ) ) ; 
+            
+            // [MyListener listener1] handleEvent : type1
+            // [MyListener listener2] handleEvent : type1
+            
+            controller.fireEvent( new Event( "type2" ) ) ;
+
+            // [MyListener listener3] handleEvent : type2
+            // [MyListener listener4] handleEvent : type2
+            
+            controller.remove( "type2" ) ;
+            controller.fireEvent( new Event( "type2" ) ) ;
+            
+            // nothing
+        }
+
+    }
+}
+
+import system.events.EventListener;
+
+import flash.events.Event;
+
+class MyListener implements EventListener
+{
+
+    public function MyListener( name:String = "" )
+    {
+        this.name = name ;
+    }
+    
+    public var name:String ;
+
+    public function handleEvent(e:Event):void
+    {
+        trace( this + " handleEvent : " + e.type ) ; 
+    }
+
+    public function toString():String
+    {
+        return "[MyListener " + name + "]" ;  
+    }
+}
+}}}
