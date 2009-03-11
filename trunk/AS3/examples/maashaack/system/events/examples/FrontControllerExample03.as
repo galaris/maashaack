@@ -35,42 +35,32 @@
 
 package examples 
 {
-    import system.events.EventDispatcher;
-    import system.events.FrontController;
-    
-    import flash.display.Sprite;
-    import flash.events.Event;    
-
-    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+    import system.events.FrontController;        import flash.display.Sprite;    import flash.events.Event;    
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
 
     /**
-     * This class provides an example of the FrontController class with this static method 
-     * getInstance() and with a specific channel to dispatch the global events.
+     * This class provides an example of the FrontController class and this method fireEvent().
      */
-    public class FrontControllerExample02 extends Sprite 
+    public class FrontControllerExample03 extends Sprite 
     {
 
-        public function FrontControllerExample02()
+        public function FrontControllerExample03()
         {
             var controller:FrontController = FrontController.getInstance( "myChannel" ) ;
-            var dispatcher:EventDispatcher = EventDispatcher.getInstance( "myChannel" ) ;
             
-            controller.add( "type1" , listener1 ) ;
-            controller.add( "type2" , listener2 ) ;
+            controller.add( "type" , listener ) ;
             
-            dispatcher.dispatchEvent( new Event( "type1" ) ) ; // # action1 : type1
-            dispatcher.dispatchEvent( new Event( "type2" ) ) ; // # action2 : type2
+            controller.fireEvent( "type" ) ; 
+            // # listener : [BasicEvent type="type" target=[object EventDispatcher] context=null bubbles=false cancelable=false eventPhase=2]
+            
+            controller.fireEvent( new Event( "type" ) ) ; 
+            // # listener : [Event type="type" bubbles=false cancelable=false eventPhase=2]
         }
         
-        public function listener1( e:Event ):void 
+        public function listener( e:Event ):void 
         {
-            trace("# action1 : " + e.type ) ; 
+            trace("# listener : " + e ) ; 
         }
 
-        public function listener2( e:Event ):void 
-        {
-            trace("# action2 : " + e.type ) ; 
-        }
-        
     }
 }
