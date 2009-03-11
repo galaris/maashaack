@@ -1,5 +1,5 @@
 #labels Projects-X,Framework,Code
-= Multi-core EventDispatcher factory =
+= Multi-core !EventDispatcher factory =
 
  * [http://code.google.com/p/maashaack/ HomePage]
    * [events Returns events]
