@@ -185,14 +185,12 @@ package system.events
      
         public function testObject():void
         {
-
             var c:Command = new Command( "type" , "value", "channel" ) ; 
             var o:Object  = c.toObject() ;
             
             assertEquals( o.name    , c.name    , "01 - Command toObject() failed with the name property." ) ;
             assertEquals( o.channel , c.channel , "02 - Command toObject() failed with the channel property." ) ;
             assertEquals( o.value   , c.value   , "03 - Command toObject() failed with the value property." ) ;
-            
         }     
 
         public function testToString():void
@@ -202,9 +200,18 @@ package system.events
             assertEquals( c.toString() , "[Command]"  , "01 - Command toString() failed." ) ;
 
             c = new Command("name", "value", "channel") ; 
-            assertEquals( c.toString() , '[Command name:"name" channel:"channel"]'  , "01 - Command toString() failed." ) ;
-
+            assertEquals( c.toString() , '[Command name:"name" channel:"channel"]'  , "02 - Command toString() failed." ) ;
         }    
+
+        public function testToStringWithVerbose():void
+        {
+            var c:Command ;
+            c = new Command() ; 
+            assertEquals( c.toString(true) , "[Command]"  , "01 - Command toString(true) failed." ) ;
+
+            c = new Command("name", "value", "channel") ; 
+            assertEquals( c.toString(true) , '[Command name:"name" channel:"channel" value:"value"]'  , "02 - Command toString(true) failed." ) ;
+        }  
 
     }
 }
