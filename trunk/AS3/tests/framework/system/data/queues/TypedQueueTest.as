@@ -38,7 +38,6 @@ package system.data.queues
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Collection;
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.Typeable;

@@ -35,12 +35,8 @@
 
 package system.data.maps
 {
-    import system.data.Iterator;
-    import system.data.Map;
-    import system.data.MultiMap;
-    import system.formatters.Formattable;    
-
-    /**
+    import system.data.Iterator;    import system.data.MultiMap;    import system.formatters.Formattable;    
+    /**
      * Converts a MultiMap to a custom string representation.
      */
     public class MultiMapFormatter implements Formattable 

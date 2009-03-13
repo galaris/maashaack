@@ -38,11 +38,9 @@ package system.events
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.events.EventDispatcher;
     import system.events.mocks.MockEventListener;
     
-    import flash.events.Event;
-    import flash.events.EventDispatcher;    
+    import flash.events.Event;    
 
     public class InternalDispatcherTest extends TestCase 
     {
