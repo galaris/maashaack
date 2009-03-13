@@ -37,7 +37,6 @@ package system.data.collections
 {
     import system.Reflection;
     import system.data.Collection;
-    import system.data.Iterable;
     import system.data.Iterator;
     import system.data.Typeable;
     import system.data.Validator;

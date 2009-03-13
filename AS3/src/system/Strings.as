@@ -556,8 +556,7 @@ package system
                 }
                 else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
                 {
-                    var prop:String;
-                    for( prop in args[0] )
+                    for( var prop:String in args[0] )
                     {
                         namedValues[ prop ] = args[0][ prop ];
                     }

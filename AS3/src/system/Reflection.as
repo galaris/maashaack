@@ -232,10 +232,8 @@ package system
         {
             var type:XML = describeType( o );
             var fullname:String = getClassName( o, true );
-            var member:XML;
             var members:Array = [];
-            
-            for each( member in type.method )
+            for each( var member:XML in type.method )
             {
                 if( inherited )
                 {
@@ -246,7 +244,6 @@ package system
                     members.push( String( member.@name ) );
                 }
             }
-            
             return members;
         }
 
