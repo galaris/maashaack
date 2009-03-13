@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,20 +36,41 @@
 package system.network
 {
     import system.Enum;
-
+    
+    /**
+     * The enumeration class of all host name types.
+     */
     public class HostnameType extends Enum
     {
+    	
+    	/**
+    	 * Creates a new HostnameType instance.
+         * @param value The value of the enumeration.
+         * @param name The name key of the enumeration.
+         */
         public function HostnameType(value:int=0, name:String="")
         {
             super(value, name);
         }
         
+        /**
+         * The "unknow" HostnameType value.
+         */
         public static const unknown:HostnameType = new HostnameType( 0, "unknown" );
-        
+
+        /**
+         * The "basic" HostnameType value.
+         */        
         public static const basic:HostnameType = new HostnameType( 1, "basic" );
-        
+
+        /**
+         * The "DNS" HostnameType value.
+         */           
         public static const DNS:HostnameType = new HostnameType( 2, "DNS" );
         
+        /**
+         * The "IPv4" HostnameType value.
+         */
         public static const IPv4:HostnameType = new HostnameType( 0, "IPv4" );
         
     }

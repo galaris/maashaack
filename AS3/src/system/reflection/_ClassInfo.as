@@ -65,14 +65,12 @@ package system.reflection
         {
             var members:Array = [];
             var node:XML;
-            var m:String;
             var name:String = member.toString( );
-            
             if( isInstance( ) )
             {
-                for( m in _class[name] )
+                for( var m1:String in _class[name] )
                 {
-                    node = _class[name][m];
+                    node = _class[name][m1];
                     
                     if( ! filter.showInherited && (node.@declaredBy != undefined) && ! _isDeclaredLocaly( String( node.@declaredBy ) ) )
                     {
@@ -84,9 +82,9 @@ package system.reflection
             }
             else
             {
-                for( m in _class.factory[name] )
+                for( var m2:String in _class.factory[name] )
                 {
-                    node = _class.factory[name][m];
+                    node = _class.factory[name][m2];
                     
                     if( ! filter.showInherited && (node.@declaredBy != undefined) && ! _isDeclaredLocaly( String( node.@declaredBy ) ) )
                     {
@@ -256,47 +254,41 @@ package system.reflection
         public function get methods():Array
         {
             var meths:Array = [];
-            var m:String;
-            
             if( filter.usePrototypeInfo )
             {
                 if( isInstance( ) )
                 {
-                    for( m in type )
+                    for( var m1:String in type )
                     {
-                        if( typeof type[m] == "function" )
+                        if( typeof type[m1] == "function" )
                         {
-                            if( ! filter.showInherited && (! type.hasOwnProperty( m ) && ! type.constructor.prototype.hasOwnProperty( m )) )
+                            if( ! filter.showInherited && (! type.hasOwnProperty( m1 ) && ! type.constructor.prototype.hasOwnProperty( m1 )) )
                             {
                                 continue;
                             }
-                            
-                            meths.push( m );
+                            meths.push( m1 );
                         } 
                     }
                 }
                 else
                 {
-                    for( m in type.prototype )
+                    for( var m2:String in type.prototype )
                     {
-                        if( typeof type.prototype[m] == "function" )
+                        if( typeof type.prototype[m2] == "function" )
                         {
-                            if( ! filter.showInherited && ! type.prototype.hasOwnProperty( m ) )
+                            if( ! filter.showInherited && ! type.prototype.hasOwnProperty( m2 ) )
                             {
                                 continue;
                             }
-                            
-                            meths.push( m );
+                            meths.push( m2 );
                         } 
                     }
                 }
             }
-            
             if( filter.useTraitInfo )
             {
                 meths = meths.concat( _getTraitMemberHelper( MemberType.method ) );
             }
-            
             return meths;
         }
 
@@ -306,12 +298,10 @@ package system.reflection
         public function get name():String
         {
             var path:String = _class.@name;
-            
             if( config.normalizePath )
             {
                 path = _normalize( path );
             }
-            
             return path;
         }
 
@@ -322,37 +312,33 @@ package system.reflection
         public function get properties():Array
         {
             var props:Array = [];
-            var p:String;
-            
             if( filter.usePrototypeInfo )
             {
                 if( isInstance( ) )
                 {
-                    for( p in type )
+                    for( var p1:String in type )
                     {
-                        if( typeof type[p] != "function" )
+                        if( typeof type[p1] != "function" )
                         {
-                            if( ! filter.showInherited && (! type.hasOwnProperty( p ) && ! type.constructor.prototype.hasOwnProperty( p )) )
+                            if( ! filter.showInherited && (! type.hasOwnProperty( p1 ) && ! type.constructor.prototype.hasOwnProperty( p1 )) )
                             {
                                 continue;
                             }
-                            
-                            props.push( p );
+                            props.push( p1 );
                         } 
                     }
                 }
                 else
                 {
-                    for( p in type.prototype )
+                    for( var p2:String in type.prototype )
                     {
-                        if( typeof type.prototype[p] != "function" )
+                        if( typeof type.prototype[p2] != "function" )
                         {
-                            if( ! filter.showInherited && ! type.prototype.hasOwnProperty( p ) )
+                            if( ! filter.showInherited && ! type.prototype.hasOwnProperty( p2 ) )
                             {
                                 continue;
                             }
-                            
-                            props.push( p );
+                            props.push( p2 );
                         } 
                     }
                 }

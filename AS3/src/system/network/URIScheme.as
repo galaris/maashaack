@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,23 +37,41 @@ package system.network
 {
     
     /**
-    * URIScheme clas
-    * 
-    * see:
-    * http://en.wikipedia.org/wiki/URI_scheme
-    * http://esw.w3.org/topic/UriSchemes/
-    * 
-    * generic syntax:
-    * <scheme>://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
-    */
+     * The URIScheme class.
+     * <p><b>see:</b></p>
+     * <p>
+     * <li><a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a></li>
+     * <li><a href="http://esw.w3.org/topic/UriSchemes/">http://esw.w3.org/topic/UriSchemes/</a></li>
+     * <p>
+     * <p><b>generic syntax :/<b></p>
+     * <pre>
+     * <scheme>://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+     * </pre>
+     */
     public class URIScheme
     {
+    	
+    	/**
+    	 * The scheme expression.
+    	 */
         public var scheme:String;
         
+        /**
+         * The delimiter value.
+         */
         public var delimiter:String;
         
+        /**
+         * The default port of the scheme.
+         */
         public var defaultPort:int;
         
+        /**
+         * Creates a new URIScheme instance.
+         * @param scheme The String representation of the uri scheme.
+         * @param delimiter The delimiter value.
+         * @param defaultPort The default port of the scheme.
+         */
         public function URIScheme( scheme:String, delimiter:String, defaultPort:int = -1 )
         {
             this.scheme      = scheme;
@@ -62,79 +80,93 @@ package system.network
         }
         
         /**
-        * HTTP resources
-        * 
-        * syntax:
-        * http://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
-        * 
-        * example:
-        * http://www.ietf.org/rfc/rfc2396.txt
-        */
-        public static const HTTP:URIScheme           = new URIScheme( "http", "://", 80 );
+         * HTTP resources
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * http://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * http://www.ietf.org/rfc/rfc2396.txt
+         * </pre>
+         */
+        public static const HTTP:URIScheme = new URIScheme( "http", "://" , 80 );
         
         /**
-        * HTTP connections secured using SSL/TLS
-        * 
-        * syntax:
-        * https://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
-        */
-        public static const HTTPS:URIScheme          = new URIScheme( "https", "://", 443 );
+         * HTTP connections secured using SSL/TLS
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * https://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * </pre>
+         */
+        public static const HTTPS:URIScheme = new URIScheme( "https", "://" , 443 );
         
         /**
-        * FTP resources
-        * 
-        * syntax:
-        * ftp://[<username>[:<password>]@]<host>[:<port>]/<path>
-        * 
-        * example:
-        * ftp://ftp.is.co.za/rfc/rfc1808.txt
-        */
-        public static const FTP:URIScheme            = new URIScheme( "ftp", "://", 21 );
+         * FTP resources
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * ftp://[<username>[:<password>]@]<host>[:<port>]/<path>
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * ftp://ftp.is.co.za/rfc/rfc1808.txt
+         * </pre>
+         */
+        public static const FTP:URIScheme = new URIScheme( "ftp", "://" , 21 );
         
         /**
-        * Addressing files on local or network file systems
-        * 
-        * syntax:
-        * file://[<host>]/<path>
-        * 
-        * example:
-        * file:///C:/Documents%20and%20Settings/bob/Desktop
-        * file:///Users/bob/Desktop
-        * file://alpha.hut.fi/u/lai/tik/tik76002/public_html/lerman.files/chaps
-        * file:///u/lai/tik/tik76002/public_html/lerman.files/chaps
-        * file:///etc/motd
-        */
-        public static const FILE:URIScheme           = new URIScheme( "file", "://", -1 );
+         * Addressing files on local or network file systems
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * file://[<host>]/<path>
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * file:///C:/Documents%20and%20Settings/bob/Desktop
+         * file:///Users/bob/Desktop
+         * file://alpha.hut.fi/u/lai/tik/tik76002/public_html/lerman.files/chaps
+         * file:///u/lai/tik/tik76002/public_html/lerman.files/chaps
+         * file:///etc/motd
+         * </pre>
+         */
+        public static const FILE:URIScheme = new URIScheme( "file", "://", -1 );
         
         /**
-        * 
-        * syntax:
-        * mailto:<address>[?<header1>=<value1>[&<header2>=<value2>]]
-        * 
-        * example:
-        * mailto:John.Doe@example.com
-        * mailto:jsmith@example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
-        */
-        public static const MAILTO:URIScheme         = new URIScheme( "mailto", ":", 25 );
+         * Mail to
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * mailto:<address>[?<header1>=<value1>[&<header2>=<value2>]]
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * mailto:John.Doe@example.com
+         * mailto:jsmith@example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
+         * </pre>
+         */
+        public static const MAILTO:URIScheme = new URIScheme( "mailto", ":", 25 );
         
         /**
-        * Newsgroups and postings
-        * 
-        * syntax:
-        * news:<newsgroupname>
-        * news:<message-id>
-        * 
-        * example:
-        * news:comp.infosystems.www.servers.unix
-        */
-        public static const NEWS:URIScheme           = new URIScheme( "news", ":", -1 );
+         * Newsgroups and postings
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * news:<newsgroupname>
+         * news:<message-id>
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * news:comp.infosystems.www.servers.unix
+         * </pre>
+         */
+        public static const NEWS:URIScheme = new URIScheme( "news", ":", -1 );
         
         /**
-        * Usenet NNTP (Network News Transfer Protocol)
-        * syntax:
-        * nntp://<host>:<port>/<newsgroup-name>/<article-number>
-        */
-        public static const NNTP:URIScheme           = new URIScheme( "nntp", "://", 119 );
+         * Usenet NNTP (Network News Transfer Protocol)
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * nntp://<host>:<port>/<newsgroup-name>/<article-number>
+         * </pre>
+         */
+        public static const NNTP:URIScheme = new URIScheme( "nntp", "://", 119 );
         
         /**
         * Gopher protocol
@@ -142,29 +174,33 @@ package system.network
         * syntax:
         * gopher://<host>:<port>/<item type>/<path>
         */
-        public static const GOPHER:URIScheme         = new URIScheme( "gopher", "://", 70 );
+        public static const GOPHER:URIScheme = new URIScheme( "gopher", "://", 70 );
         
         /**
-        * AIR Application protocol
-        * 
-        * syntax:
-        * app:<path>
-        * 
-        * example:
-        * app:/DesktopPathTest.xml
-        */
+         * AIR Application protocol
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * app:<path>
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * app:/DesktopPathTest.xml
+         * </pre>
+         */
         public static const AIRAPPLICATION:URIScheme = new URIScheme( "app", ":", -1 );
         
         /**
-        * AIR Storage protocol
-        * 
-        * syntax:
-        * app-storage:<path>
-        * 
-        * example:
-        * app-storage:/preferences.xml
-        */
-        public static const AIRSTORAGE:URIScheme     = new URIScheme( "app-storage", ":", -1 );
+         * AIR Storage protocol
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * app-storage:<path>
+         * </pre>
+         * <p><b>Example:</b></p>
+         * <pre>
+         * app-storage:/preferences.xml
+         * </pre>
+         */
+        public static const AIRSTORAGE:URIScheme = new URIScheme( "app-storage", ":", -1 );
         
     }
 }
