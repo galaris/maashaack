@@ -119,9 +119,8 @@ package system.data.arrays
             
             // for..in
             
-            var prop:String ;
             var count:uint ;
-            for( prop in ar )
+            for( var prop:String in ar )
             {
             	prop ;
             	count ++ ;
