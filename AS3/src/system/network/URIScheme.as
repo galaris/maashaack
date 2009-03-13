@@ -45,7 +45,7 @@ package system.network
      * <p>
      * <p><b>generic syntax :/<b></p>
      * <pre>
-     * <scheme>://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+     * <scheme>://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
      * </pre>
      */
     public class URIScheme
@@ -83,7 +83,7 @@ package system.network
          * HTTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * http://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * http://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -96,7 +96,7 @@ package system.network
          * HTTP connections secured using SSL/TLS
          * <p><b>Syntax:</b></p>
          * <pre>
-         * https://[<username>[:<password>]@]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * https://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
          * </pre>
          */
         public static const HTTPS:URIScheme = new URIScheme( "https", "://" , 443 );
@@ -105,7 +105,7 @@ package system.network
          * FTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * ftp://[<username>[:<password>]@]<host>[:<port>]/<path>
+         * ftp://[<username>[:<password>]&64;]<host>[:<port>]/<path>
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -139,8 +139,8 @@ package system.network
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
-         * mailto:John.Doe@example.com
-         * mailto:jsmith@example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
+         * mailto:John.Doe&64;example.com
+         * mailto:jsmith&64;example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
          * </pre>
          */
         public static const MAILTO:URIScheme = new URIScheme( "mailto", ":", 25 );
@@ -169,11 +169,12 @@ package system.network
         public static const NNTP:URIScheme = new URIScheme( "nntp", "://", 119 );
         
         /**
-        * Gopher protocol
-        * 
-        * syntax:
-        * gopher://<host>:<port>/<item type>/<path>
-        */
+         * Gopher protocol
+         * <p><b>Syntax:</b></p>
+         * <pre>
+         * gopher://<host>:<port>/<item type>/<path>
+         * </pre>
+         */
         public static const GOPHER:URIScheme = new URIScheme( "gopher", "://", 70 );
         
         /**
