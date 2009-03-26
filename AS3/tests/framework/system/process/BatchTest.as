@@ -37,6 +37,7 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.data.collections.TypedCollection;
     import system.process.Runnable;
     import system.process.mocks.MockCommand;    
 
@@ -68,8 +69,13 @@ package system.process
         public function testConstructor():void
         {
             assertNotNull( batch , "Batch constructor failed, the instance not must be null." ) ;
-            assertTrue( batch is Batch , "batch must be a Batch object." ) ;
-            assertTrue( batch is Runnable , "batch implements the Runnable interface." ) ;
+            assertTrue( batch is TypedCollection , "batch must be a TypedCollection object." ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( batch is Runnable  , "batch implements the Runnable interface."  ) ;
+            assertTrue( batch is Stoppable , "batch implements the Stoppable interface." ) ;            
         }
         
         public function testClear():void

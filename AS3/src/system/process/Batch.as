@@ -43,7 +43,7 @@ package system.process
 
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
-     * This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.  
+     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>  
      */
     public class Batch extends TypedCollection implements Runnable, Stoppable
     {
@@ -76,14 +76,14 @@ package system.process
          */
         public function run( ...arguments:Array ):void
         {
-            var ar:Array = toArray() ;
-            var i:Number = -1 ;
-            var l:Number = ar.length ;
+            var a:Array = toArray() ;
+            var i:int   = -1 ;
+            var l:int   = a.length ;
             if (l>0) 
             {
                 while (++i < l) 
                 { 
-                    ar[i].run() ; 
+                    a[i].run() ; 
                 }
             }
         }
@@ -95,15 +95,18 @@ package system.process
         public function stop( ...args:Array ):*
         {
             var b:Boolean ;
-            var ar:Array = toArray() ;
-            var i:Number = -1 ;
-            var l:Number = ar.length ;
-            if (l>0) while (++i < l) 
-            { 
-                if ( ar[i] is Stoppable )
-                {
-                    (ar[i] as Stoppable).stop() ;
-                    b = true ;
+            var a:Array = toArray() ;
+            var i:int   = -1 ;
+            var l:int   = a.length ;
+            if (l>0) 
+            {
+            	while (++i < l) 
+                { 
+                    if ( a[i] is Stoppable )
+                    {
+                        (a[i] as Stoppable).stop() ;
+                        b = true ;
+                    }
                 } 
             }
             return b ;
