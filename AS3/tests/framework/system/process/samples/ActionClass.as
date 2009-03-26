@@ -43,7 +43,23 @@ package system.process.samples
         {
         	//
         }
-    
+        
+        /**
+         * Determinates the parent Action reference of the current Action.
+         */
+        public function get parent():Action
+        {
+            return _parent ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set parent( action:Action ):void
+        {
+            _parent = action ;
+        }
+        
         public function get running():Boolean
         {
         	return true ;
@@ -69,7 +85,7 @@ package system.process.samples
             throw new Error("run") ;
         }
         
-      
+        private var _parent:Action ;
     
     }
     

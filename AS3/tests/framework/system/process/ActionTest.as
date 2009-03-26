@@ -37,8 +37,8 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.process.samples.ActionClass ;
-    
+    import system.process.samples.ActionClass;    
+
     public class ActionTest extends TestCase 
     {
         
@@ -59,6 +59,15 @@ package system.process
             action = null ;
         }
         
+        public function testParent():void
+        {
+            var t1:Action = new ActionClass() ;
+            var t2:Action = new ActionClass() ;
+            assertNull( t1.parent , "01 - Action parent failed." ) ;
+            t2.parent = t1 ;
+            assertEquals( t2.parent , t1 , "02 - Action parent failed." ) ;            
+        }
+
         public function testRunning():void
         {
             assertTrue( action.running , "Action running property failed." ) ;

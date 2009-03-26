@@ -39,8 +39,8 @@ package system.process
     
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
-    import system.process.mocks.MockTaskListener;
-    
+    import system.process.mocks.MockTaskListener;    
+
     public class TaskTest extends TestCase 
     {
         
@@ -81,6 +81,15 @@ package system.process
             assertTrue( action is Action , "Task implements the Action interface" ) ;     
         }
         
+        public function testParent():void
+        {
+            var t1:Task = new Task() ;
+            var t2:Task = new Task() ;
+            assertNull( t1.parent , "01 - Task parent failed." ) ;
+            t2.parent = t1 ;
+            assertEquals( t2.parent , t1 , "02 - Task parent failed." ) ;            
+        }
+        
         public function testClone():void
         {
             var clone:Task = action.clone() as Task ;
@@ -96,7 +105,7 @@ package system.process
         public function testNotifyFinished():void
         {
             action.notifyFinished() ;
-            assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.START event isn't notify" ) ;
+            assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.FINISH event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "Action notifyStarted failed, bad type found." );
         }
         
@@ -110,6 +119,32 @@ package system.process
         public function testRun():void
         {
             assertTrue( "run" in action , "Action run 01 method exist." ) ;
+        }
+        
+        public function testFinishIt():void
+        {
+        	var test:Boolean ;
+            action.finishIt = function():void
+            {
+                test = true ;    
+            };
+            action.notifyFinished() ;
+            assertTrue(test , "The dynamic Action.finishIt method failed.") ;
+            action.finishIt = null ;
+            assertNull( action.finishIt , "The Action.finishIt member must be null.") ;
+        }
+        
+        public function testStartIt():void
+        {
+            var test:Boolean ;
+            action.startIt = function():void
+            {
+                test = true ;    
+            };
+            action.notifyStarted() ;
+            assertTrue(test , "The dynamic Action.startIt method failed.") ;
+            action.startIt = null ;
+            assertNull( action.startIt , "The Action.startIt member must be null.") ;
         }
     }
 }
