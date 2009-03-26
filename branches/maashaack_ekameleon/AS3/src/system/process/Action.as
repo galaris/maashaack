@@ -44,20 +44,30 @@ package system.process
      * @eventType system.events.ActionEvent.FINISH
      * @see #notifyFinished
      */
-    [Event(name="onFinished", type="system.events.ActionEvent")]
+    [Event(name="finish", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is started.
      * @eventType system.events.ActionEvent.START
      * @see #notifyStarted
      */
-    [Event(name="onStarted", type="system.events.ActionEvent")]
+    [Event(name="start", type="system.events.ActionEvent")]
     
     /**
      * This interface represents the methods implemented in the Action objects.
      */
     public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
+
+        /**
+         * Determinates the parent Action reference of the current Action.
+         */
+        function get parent():Action ;
+                
+        /**
+         * @private
+         */
+        function set parent( action:Action ):void ;
         
         /**
          * Indicates <code class="prettyprint">true</code> if the action is in progress.

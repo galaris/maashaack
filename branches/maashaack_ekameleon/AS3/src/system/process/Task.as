@@ -37,20 +37,20 @@ package system.process
 {
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;    
-    
+
     /**
      * Dispatched when a process is finished.
      * @eventType system.events.ActionEvent.FINISH
      * @see #notifyFinished
      */
-    [Event(name="onFinished", type="system.events.ActionEvent")]
+    [Event(name="finish", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is started.
      * @eventType system.events.ActionEvent.START
      * @see #notifyStarted
      */
-    [Event(name="onStarted", type="system.events.ActionEvent")]
+    [Event(name="start", type="system.events.ActionEvent")]
     
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
@@ -69,7 +69,23 @@ package system.process
         }
         
         /**
-         * (read-only) Indicates <code class="prettyprint">true</code> if the process is in progress.
+         * Determinates the parent Action reference of the current Action.
+         */
+        public function get parent():Action
+        {
+            return _parent ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set parent( action:Action ):void
+        {
+            _parent = action ;
+        }
+        
+        /**
+         * Indicates <code class="prettyprint">true</code> if the process is in progress.
          */
         public function get running():Boolean 
         {
@@ -91,7 +107,7 @@ package system.process
         public function notifyFinished():void 
         {
         	setRunning( false ) ;
-        	finishIt() ;
+        	this["finishIt"]() ;
             dispatchEvent( new ActionEvent( ActionEvent.FINISH , this ) ) ;
         }
         
@@ -101,7 +117,7 @@ package system.process
         public function notifyStarted():void
         {
         	setRunning( true ) ;
-        	startIt() ;
+        	this["startIt"]() ;
             dispatchEvent( new ActionEvent( ActionEvent.START , this ) ) ;
         }
         
@@ -116,8 +132,9 @@ package system.process
         
         /**
          * Called in the notifyFinished method.
+         * <p>This method it's special and can be override. In the future can be used in the Sequencer Class to optimiser the process.</p>
          */
-        protected function finishIt():void
+        prototype.finishIt = function():void
         {
             // overrides
         };
@@ -132,8 +149,9 @@ package system.process
         
         /**
          * Called in the notifyStarted method.
+         * <p>This method it's special and can be override. In the future can be used in the Sequencer Class to optimiser the process.</p>
          */
-        protected function startIt():void
+        prototype.startIt = function():void
         {
             // overrides
         };
@@ -142,6 +160,11 @@ package system.process
          * @private
          */
         private var _isRunning:Boolean ;
+
+        /**
+         * @private
+         */
+        private var _parent:Action ;
         
     }
 
