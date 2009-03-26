@@ -35,27 +35,33 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import system.serializers.eden.BuiltinSerializer;    
     import system.Reflection;
     import system.Serializable;
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.queues.LinearQueue;
     import system.data.queues.TypedQueue;
+    import system.eden;
     import system.events.ActionEvent;
     import system.process.Stoppable;    
-    
+
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.process.Sequencer ;
+     * import system.events.ActionEvent ;
+     * import system.process.Sequencer  ;
+     * 
+     * var handleEvent:Function = function( e:ActionEvent ):void
+     * {
+     *     trace(e) ;
+     * }
      * 
      * var seq:Sequencer = new Sequencer() ;
      * 
-     * seq.addEventListener( ActionEvent.START  , handleEvent ) ;
+     * seq.addEventListener( ActionEvent.START    , handleEvent ) ;
      * seq.addEventListener( ActionEvent.PROGRESS , handleEvent ) ;
-     * seq.addEventListener( ActionEvent.FINISH , handleEvent ) ;
+     * seq.addEventListener( ActionEvent.FINISH   , handleEvent ) ;
      * 
      * seq.addAction( new Pause( 10 , true ) );
      * seq.addAction( new Pause(  2 , true ) ) ;
@@ -76,11 +82,8 @@ package system.process
          */
         public function Sequencer( ar:Array = null , global:Boolean = false , channel:String = null , queue:Queue=null )
         {
-            
             super( global, channel) ;
-            
             setQueue( queue ) ; 
-            
             if (ar != null)
             {
                 var l:Number = ar.length ;
@@ -95,6 +98,14 @@ package system.process
                     }
                 }
             }
+        }
+        
+        /**
+         * Indicates the current Action reference in progress.
+         */
+        public function current():Action
+        {
+            return _cur ;
         }
         
         /**
@@ -157,15 +168,6 @@ package system.process
         }
         
         /**
-         * Returns the current process in progress.
-         * @return the current process in progress.
-         */
-        public function getCurrent():Action
-        {
-            return _cur ;
-        }
-        
-        /**
          * Returns the internal Queue reference used in the sequencer. 
          * @return the internal Queue reference used in the sequencer.
          */
@@ -189,19 +191,15 @@ package system.process
                 {
                     notifyProgress() ;
                 }
-                
-                _cur = _queue.poll() ;
-                
-                try
+                _cur = _queue.poll() as Action ;
+                if ( _cur != null )
                 {
                     _cur.run() ;
                 }
-                catch( e:Error )
+                else
                 {
-                    trace( this + " run failed : " + e.toString() ) ; // TODO use logs
                     run() ;
                 }
-                
             }
             else 
             {
@@ -312,7 +310,7 @@ package system.process
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + BuiltinSerializer.emitArray(toArray()) + ")" ;
+            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize(toArray()) + ")" ;
         }
         
         /**

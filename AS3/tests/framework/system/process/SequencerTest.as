@@ -39,8 +39,8 @@ package system.process
     
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;	
-    
+    import system.process.mocks.MockTaskListener;    
+
     // TODO test progress event !!
     
     public class SequencerTest extends TestCase 
@@ -76,6 +76,11 @@ package system.process
         public function testInherit():void
         {
             assertTrue( seq is CoreAction , "inherit Action failed.");
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( seq is Stoppable , "Must implement the Stoppable interface.");
         }
         
         public function testClear():void
@@ -163,8 +168,7 @@ package system.process
             
             var size:uint = c.size() ;
             
-               c.run() ;
-            
+            c.run() ;
             
             assertEquals( MockTask.COUNT , size , "run method failed, the sequencer must launch " + s.size() + " Runnable objects." ) ;
             assertEquals( c.size()               ,    0 , "run method failed, the sequencer must be empty after the run process." ) ;
