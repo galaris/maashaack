@@ -38,7 +38,7 @@ package system.process
     import system.data.Iterator;
     import system.events.ActionEvent;
     import system.process.Stoppable;    
-    
+
     /**
      * This <code class="prettyprint">Action</code> object register <code class="prettyprint">Action</code> objects in a batch process.
      * @example
@@ -99,22 +99,27 @@ package system.process
         {
             super( global , channel ) ;
             _batch = new Batch() ;
-            initEventType() ;
-            initialize() ;
-        }
+         }
         
         /**
-         * Indicates if the BatchProcess is cleared when all the process are finished.
+         * Indicates if all elements in the batch are removed when all the process are finished.
          */
-        public var autoClear:Boolean = false ;
+        public var autoClear:Boolean ;
         
         /**
          * Inserts a new Action object in the batch process collection.
          */
-        public function addAction( action:Action , useWeakReference:Boolean=false ):void
+        public function addAction( action:Action , useWeakReference:Boolean=false ):Boolean
         {
-            action.addEventListener( ActionEvent.FINISH, _onFinished , false, 0 , useWeakReference ) ;
-            _batch.add( action ) ;
+        	if ( action != null )
+        	{
+                action.addEventListener( ActionEvent.FINISH, _onFinished , false, 0 , useWeakReference ) ;
+                return _batch.add( action ) ;
+        	}
+        	else
+        	{
+        		return false ;
+        	}
         }
         
         /**
@@ -170,31 +175,6 @@ package system.process
         }
         
         /**
-         * Returns the event name use in the notifyProgress method.
-         * @return the event name use in the notifyProgress method.
-         */
-        public function getEventTypePROGRESS():String
-        {
-            return _sTypeProgress ;
-        }
-        
-        /**
-         * Initialize the internal events of this process.
-         */
-        public function initEventType():void
-        {
-            _sTypeProgress = ActionEvent.PROGRESS ; 
-        }
-                
-        /**
-         * Initialize the layout. Overrides this method.
-         */
-        public function initialize():void
-        {
-            // overrides this method.
-        }
-        
-        /**
          * Returns an iterator over the elements in this collection.
          * @return an iterator over the elements in this collection.
          */
@@ -208,18 +188,24 @@ package system.process
          */
         public function notifyProgress( action:Action ):void 
         {
-            dispatchEvent( new ActionEvent( _sTypeProgress, this , null, action ) ) ;
+            dispatchEvent( new ActionEvent( ActionEvent.PROGRESS, this , null, action ) ) ;
         }
         
         /**
          * Removes an <code class="prettyprint">Action</code> object in the internal batch collection.
+         * @return <code class="prettyprint">true</code> if the passed-in action reference is removed in the batch. 
          */
-        public function removeAction( action:CoreAction ):void
+        public function removeAction( action:Action ):Boolean
         {
             if ( _batch.contains( action ) )
             {
                 action.removeEventListener( ActionEvent.FINISH, _onFinished ) ;
                 _batch.remove( action ) ;
+                return true ;
+            }
+            else
+            {
+                return false ;
             }
         }
         
@@ -241,15 +227,7 @@ package system.process
         }
         
         /**
-         * Sets the event name use in the notifyProgress method.
-         */
-        public function setEventTypePROGRESS( type:String ):void
-        {
-            _sTypeProgress = type || ActionEvent.PROGRESS ;
-        }
-        
-        /**
-         * Stops the tweened animation at its current position.
+         * Stops all process in the batch.
          * @return <code class="prettyprint">true</code> if one or more process in the batch is stopped (must be IStoppable).
          */
         public function stop( ...args:Array ):*
@@ -275,11 +253,6 @@ package system.process
          * Internal count use in the _onFinished method.
          */
         private var _cpt:Number ;
-
-        /**
-         * The event type of the event invoked during the progress of the process.
-         */
-        private var _sTypeProgress:String ;
         
         /**
          * Invoked when a tween finish this movement.

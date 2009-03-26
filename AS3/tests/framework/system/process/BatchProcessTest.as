@@ -40,7 +40,7 @@ package system.process
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
     import system.process.mocks.MockTaskListener;    
-    
+
     public class BatchProcessTest extends TestCase 
     {
         
@@ -73,11 +73,84 @@ package system.process
             MockTask.reset() ;       
         }        
         
+        public function testConstructor():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertNotNull( p  , "BatchProcess constructor failed." ) ;
+        }
+        
+        public function testInterface():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertTrue( p is Stoppable , "BatchProcess must implement the Stoppable interface." ) ;
+        }
+        
+        public function testAutoClear():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertFalse(p.autoClear , "01 - BatchProcess autoClear failed." ) ;
+            p.autoClear = true ;
+            assertTrue(p.autoClear , "02 - BatchProcess autoClear failed." ) ;
+            p.autoClear = false ;
+            assertFalse(p.autoClear , "03 - BatchProcess autoClear failed." ) ;
+        }
+        
+        public function testAddAction():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertTrue( p.addAction( new Task() ) , "01 - BatchProcess addAction failed." ) ;
+            assertTrue( p.addAction( new Task() ) , "02 - BatchProcess addAction failed." ) ;
+            assertFalse( p.addAction( null ) , "03 - BatchProcess addAction failed with a null object." ) ;
+            assertEquals( p.size() , 2 , "04 - BatchProcess addAction failed." ) ;
+        }
+        
+        public function testClear():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            p.addAction( new Task() ) ;
+            p.addAction( new Task() ) ;
+            p.clear() ;
+            assertEquals( p.size() , 0 , "BatchProcess clear failed." ) ;
+        }
+        
         public function testClone():void
         {
             var clone:BatchProcess = batch.clone() ;
             assertNotNull( clone  , "clone method failed, with a null shallow copy object." ) ;
             assertNotSame( clone  , batch  , "clone method failed, the shallow copy isn't the same with the BatchProcess object." ) ;
+        }
+        
+        public function testGetBatch():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertNotNull( p.getBatch() , "BatchProcess getBatch failed." ) ;
+        }
+        
+        public function testIterator():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            assertNotNull( p.iterator() , "BatchProcess iterator failed." ) ;
+        }
+        
+        public function testRemoveAction():void
+        {
+        	var a1:Action = new Task() ;
+        	var a2:Action = new Task() ;
+            
+            var p:BatchProcess = new BatchProcess() ;
+            
+            p.addAction( a1 ) ;
+            p.addAction( a2 ) ;
+            
+            assertTrue( p.removeAction( a1 ) , "01-01 - BatchProcess removeAction failed." ) ;
+            assertFalse( p.removeAction( a1 ) , "01-02 - BatchProcess removeAction failed." ) ;
+            
+            assertEquals( p.size() , 1 , "01-03 - BatchProcess removeAction failed." ) ;
+            
+            assertTrue( p.removeAction( a2 ) , "02-01 - BatchProcess removeAction failed." ) ;
+            assertFalse( p.removeAction( a2 ) , "02-02 - BatchProcess removeAction failed." ) ;
+            
+            assertEquals( p.size() , 0 , "02-03 - BatchProcess removeAction failed." ) ;
         }
         
         public function testRun():void
@@ -96,6 +169,14 @@ package system.process
             assertEquals( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
             assertTrue( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
+        }
+        
+        public function testSize():void
+        {
+            var p:BatchProcess = new BatchProcess() ;
+            p.addAction( new Task() ) ;
+            p.addAction( new Task() ) ;
+            assertEquals( p.size() , 2 , "BatchProcess size failed." ) ;
         }
     }
 }
