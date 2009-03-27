@@ -54,7 +54,7 @@ package system.process
      * 
      * process.initialize = function():void
      * {
-     *     trace( "hello world" ) ;
+     *     trace( "custom init process !" ) ;
      * }
      * 
      * process.addEventListener( ActionEvent.START  , debug ) ;
@@ -63,7 +63,7 @@ package system.process
      * process.run() ;
      * 
      * // start
-     * // "custom init process!"
+     * // "custom init process !"
      * // finish
      * </pre>
      */

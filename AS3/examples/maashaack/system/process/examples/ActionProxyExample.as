@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,33 +36,39 @@
 package examples
 {
     import system.events.ActionEvent;
-    import system.process.Initializer;
+    import system.process.ActionProxy;
     
     import flash.display.Sprite;    
 
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
 
     /**
-     * Basic example to use the system.process.Initializer.
+     * Basic example to use the system.process.ActionProxy.
      */
-    public class InitializerExample extends Sprite
+    public class ActionProxyExample extends Sprite
     {
         
-        public function InitializerExample()
+        public function ActionProxyExample()
         {
-            var process:Initializer = new Initializer() ;
-            
-            process.initialize = function():void
+            var scope:Object = {} ;
+            scope.toString = function():String 
             {
-                trace(this + "  initialize." ) ;
+                return "scope" ;
             };
             
-            process.addEventListener( ActionEvent.START  , debug ) ;
-            process.addEventListener( ActionEvent.FINISH , debug ) ;
+            var execute:Function = function ():void 
+            {
+                trace ( this + " :: execute.") ;
+            };
             
-            process.run() ;
+            var proxy:ActionProxy = new ActionProxy(scope, execute) ;
+            
+            proxy.addEventListener( ActionEvent.FINISH , debug ) ;
+            proxy.addEventListener( ActionEvent.START  , debug ) ;
+            
+            proxy.run() ;
         }
-        
+                
         public function debug( e:ActionEvent ):void 
         {
             trace ( e ) ;
