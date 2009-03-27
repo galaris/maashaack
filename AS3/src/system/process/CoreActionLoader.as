@@ -43,8 +43,8 @@ package system.process
     import flash.events.SecurityErrorEvent;
     import flash.events.TimerEvent;
     import flash.net.URLRequest;
-    import flash.utils.Timer;
-    
+    import flash.utils.Timer;    
+
     /**
      * This core command object run a "loader" object and notify ActionEvent during a load process.
      */
@@ -269,7 +269,6 @@ package system.process
             notifyFinished() ;
         }
         
-        
         /**
          * This protected method contains the invokation of the load method of the current loader of this process.
          */
@@ -323,16 +322,16 @@ package system.process
         /**
          * @private
          */
-          private var _policy:TimeoutPolicy = null ;
+        private var _policy:TimeoutPolicy = null ;
         
-          /**
-           * @private
-           */
-          private function _onTimeOut(e:TimerEvent):void
-          {
+        /**
+         * @private
+         */
+        private function _onTimeOut(e:TimerEvent):void
+        {
             notifyTimeOut() ;
-             close() ;
-          }
+            close() ;
+        }
         
     }
 }
