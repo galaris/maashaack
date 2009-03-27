@@ -35,13 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.events.ActionEvent;
-    import system.events.CoreEventDispatcher;
-    import system.process.mocks.MockTaskListener;    
-
-    public class TaskTest extends TestCase 
+    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    import system.events.ActionEvent;    import system.events.CoreEventDispatcher;    import system.process.mocks.MockTaskListener;    
+    public class TaskTest extends TestCase 
     {
         
         public function TaskTest(name:String = "")
@@ -79,6 +74,12 @@ package system.process
         public function testInterface():void
         {
             assertTrue( action is Action , "Task implements the Action interface" ) ;     
+        }
+        
+        public function testIsDynamic():void
+        {
+            var action:Task = new Task() ;
+            assertTrue( Reflection.getClassInfo(action).isDynamic() , "Task is dynamic.") ;
         }
         
         public function testParent():void

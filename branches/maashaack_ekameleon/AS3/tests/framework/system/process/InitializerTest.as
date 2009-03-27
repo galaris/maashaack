@@ -56,7 +56,7 @@ package system.process
         public function testInherit():void
         {
             var action:Initializer = new Initializer() ;
-            assertTrue( action is ActionProxy , "Initializer inherit ActionProxy failed.") ;
+            assertTrue( action is Task , "Initializer must extends the Task class.") ;
         }
         
         public function testIsDynamic():void
