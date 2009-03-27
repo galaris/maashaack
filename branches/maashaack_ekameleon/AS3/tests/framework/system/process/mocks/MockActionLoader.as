@@ -33,35 +33,20 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process 
+package system.process.mocks 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
 
-    public class AllTests
+    /**
+     * This mock simulate a conctrete CoreActionLoader object who increments a static counter "COUNT" when the run method of all instance of this class are called.
+     */
+    public class MockActionLoader extends MockAction
     {
-        
-        public static function suite():ITest
+        /**
+         * Creates a new MockActionLoader instance.
+         */
+        public function MockActionLoader()
         {
-            
-            var suite:TestSuite = new TestSuite( "system process package TESTS" ) ;
-            
-            suite.addTestSuite( ActionEventDispatcherTest ) ;                        
-            suite.addTestSuite( ActionProxyTest ) ;
-            suite.addTestSuite( ActionTest ) ;
-            suite.addTestSuite( BatchTest ) ;
-            suite.addTestSuite( BatchProcessTest ) ;
-            suite.addTestSuite( CoreActionTest ) ;
-            suite.addTestSuite( CoreActionLoaderTest ) ;
-            suite.addTestSuite( InitializerTest ) ;
-            suite.addTestSuite( PauseTest ) ;
-            suite.addTestSuite( SequencerTest ) ;
-            suite.addTestSuite( TaskTest ) ;
-            suite.addTestSuite( TimeoutPolicyTest ) ;
-            
-            return suite;
-            
+            super() ;
         }
-        
     }
 }
