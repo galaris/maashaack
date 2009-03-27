@@ -54,9 +54,7 @@ package system.process
      *     trace( this + " " + args) ;
      * }
      * 
-     * var p:Pause = new Pause(10, true) ;
-     * 
-     * p.duration = 2 ;
+     * var p:Pause = new Pause( 10 ) ; // 10 seconds
      * 
      * p.addEventListener( ActionEvent.START  , handleEvent ) ;
      * p.addEventListener( ActionEvent.FINISH , handleEvent ) ;
@@ -64,7 +62,7 @@ package system.process
      * p.run() ;
      * </pre>
      */
-    public class Pause extends CoreAction implements Serializable
+    public dynamic class Pause extends CoreAction implements Serializable
     {
         
         /**
