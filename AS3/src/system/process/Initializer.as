@@ -67,7 +67,7 @@ package system.process
      * // finish
      * </pre>
      */
-    public dynamic class Initializer extends ActionProxy
+    public dynamic class Initializer extends Task
     {
 
         /**
@@ -77,16 +77,25 @@ package system.process
          */
         public function Initializer( global:Boolean = false , channel:String = null ) 
         {
-            super( this, this["init"], null, global, channel);
+            super( global, channel );
         }
         
         /**
-         * Invoked when the process is run. 
-         * Overrides this method.
+         * The initialize method.
          */
         prototype.initialize = function():void
         {
             // override
+        };
+        
+        /**
+         * Invoked when the process is run. 
+         */
+        public override function run( ...arguments:Array ):void
+        {
+            notifyStarted() ;
+            this["initialize"]() ; 
+            notifyFinished() ;
         };
         
     }
