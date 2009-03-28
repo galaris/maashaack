@@ -52,8 +52,7 @@ package system.process
      * import flash.display.Loader ;
      * import flash.net.URLRequest ;
      * 
-     * var url:String = "library/picture.jpg" ;
-     * 
+     * var url:String    = "library/picture.jpg" ;
      * var loader:Loader = new Loader() ;
      * 
      * loader.x = 50 ;
@@ -66,7 +65,7 @@ package system.process
      *     trace(e) ;
      * }
      * 
-     * function initHandler(event:Event):void
+     * function init(event:Event):void
      * {
      *     trace("init currentTarget:" + event.currentTarget + " target:" + event.target ) ;
      * }
@@ -76,7 +75,7 @@ package system.process
      * process.addEventListener( ActionEvent.START  , debug ) ;
      * process.addEventListener( ActionEvent.FINISH , debug ) ;
      * 
-     * process.addEventListener(Event.INIT, initHandler);
+     * process.addEventListener(Event.INIT, init) ;
      * 
      * process.request = new URLRequest( url ) ;
      * 
