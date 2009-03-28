@@ -142,13 +142,14 @@ package system.process
          */
         public function set timeoutPolicy( policy:TimeoutPolicy ):void 
         {
-            _policy = policy ;
-            if (_policy == TimeoutPolicy.LIMIT) 
+            if ( policy == TimeoutPolicy.LIMIT ) 
             {
+                _policy = TimeoutPolicy.LIMIT ;
                 _timer.addEventListener(TimerEvent.TIMER_COMPLETE, _onTimeOut) ;
             }
             else 
             {
+                _policy = TimeoutPolicy.INFINITY ;
                 _timer.removeEventListener(TimerEvent.TIMER_COMPLETE, _onTimeOut) ;
             }
         }
@@ -334,7 +335,7 @@ package system.process
         /**
          * @private
          */
-        private var _policy:TimeoutPolicy = null ;
+        private var _policy:TimeoutPolicy ;
         
         /**
          * @private
