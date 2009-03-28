@@ -47,16 +47,6 @@ package system.process
             super(name);
         }
         
-        public function setUp():void
-        {
-            //
-        }
-        
-        public function tearDown():void
-        {
-            //
-        }
-        
         public function testConstructor():void
         {
             var a:ActionURLLoader = new ActionURLLoader() ;
@@ -81,6 +71,7 @@ package system.process
             var a:ActionURLLoader = new ActionURLLoader() ;
             assertTrue( a is CoreActionLoader , "ActionURLLoader must extends the CoreActionLoader class." ) ;
         }
+
         
         public function testClone():void
         {
