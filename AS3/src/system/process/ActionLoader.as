@@ -101,7 +101,7 @@ package system.process
          */
         public override function get bytesLoaded():uint
         {
-            return (_loader as Loader).contentLoaderInfo.bytesLoaded ;
+            return contentLoaderInfo != null ? contentLoaderInfo.bytesLoaded : 0 ;
         }
         
         /**
@@ -109,7 +109,7 @@ package system.process
          */
         public override function get bytesTotal():uint
         {
-            return (_loader as Loader).contentLoaderInfo.bytesTotal ;
+            return contentLoaderInfo != null ? contentLoaderInfo.bytesTotal : 0 ;
         }
 
         /**
@@ -136,7 +136,7 @@ package system.process
          */
         public function get context():LoaderContext
         {
-            return _context || null ;
+            return _context ;
         }
         
         /**

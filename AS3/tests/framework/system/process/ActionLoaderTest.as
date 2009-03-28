@@ -37,7 +37,8 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.display.Loader;    
+    import flash.display.Loader;
+    import flash.system.LoaderContext;    
 
     public class ActionLoaderTest extends TestCase 
     {
@@ -45,16 +46,6 @@ package system.process
         public function ActionLoaderTest(name:String = "")
         {
             super(name);
-        }
-        
-        public function setUp():void
-        {
-            //
-        }
-        
-        public function tearDown():void
-        {
-            //
         }
         
         public function testConstructor():void
@@ -72,7 +63,7 @@ package system.process
             assertNotNull( a.loader , "01-02 ActionLoader constructor method failed, the loader property not must be null." ) ;
             
             a = new ActionLoader( null ) ;
-            assertNotNull( a        , "02-01 ActionLoader constructor method failed." ) ;
+            assertNotNull( a     , "02-01 ActionLoader constructor method failed." ) ;
             assertNull( a.loader , "02-02 ActionLoader constructor method failed, the loader property not must be null." ) ;
         }
         
@@ -81,7 +72,17 @@ package system.process
             var a:ActionLoader = new ActionLoader() ;
             assertTrue( a is CoreActionLoader , "ActionLoader must extends the CoreActionLoader class." ) ;
         }
-        
+                
+        public function testContext():void
+        {
+            var a:ActionLoader = new ActionLoader() ;
+            assertNull( a.context , "01 - ActionLoader context property failed." ) ;
+            var context:LoaderContext = new LoaderContext() ;
+            a.context = context ;
+            assertNotNull( a.context , "02-01 - ActionLoader context property failed." ) ;
+            assertTrue( a.context == context , "02-02 - ActionLoader context property failed." ) ;
+        }
+                
         public function testClone():void
         {
             var loader:Loader       = new Loader() ;
