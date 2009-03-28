@@ -53,14 +53,16 @@ package system.process
         
         /**
          * Creates a new CoreActionLoader instance.
+         * @param loader The loader reference.
          * @param global the flag to use a global event flow or a local event flow.
          * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function CoreActionLoader( global:Boolean = false, channel:String = null)
+        public function CoreActionLoader( loader:IEventDispatcher=null , global:Boolean = false, channel:String = null)
         {
             super( global, channel );
-            _timer        = new Timer(DEFAULT_DELAY, 1) ;
-            timeoutPolicy =  TimeoutPolicy.LIMIT ;
+            _timer             = new Timer(DEFAULT_DELAY, 1) ;
+            this.timeoutPolicy = TimeoutPolicy.LIMIT ;
+            this.loader        = loader ;
         }
         
         /**
@@ -69,7 +71,7 @@ package system.process
         public static const DEFAULT_DELAY:uint = 8000 ; // 8 secondes
         
         /**
-         * (read-only) Indicates the number of bytes that have been loaded thus far during the load operation.
+         * Indicates the number of bytes that have been loaded thus far during the load operation.
          */
         public function get bytesLoaded():uint
         {
@@ -77,7 +79,7 @@ package system.process
         }
         
         /**
-         * (read-write) Indicates the total number of bytes in the downloaded data.
+         * Indicates the total number of bytes in the downloaded data.
          */
         public function get bytesTotal():uint
         {
@@ -95,7 +97,7 @@ package system.process
         /**
          * Indicates the loader object of this process.
          */
-        public function get loader():*
+        public function get loader():IEventDispatcher
         {
             return _loader ;    
         }
@@ -152,6 +154,15 @@ package system.process
         }
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new CoreActionLoader(loader) ;
+        }
+        
+        /**
          * Cancels a load() method operation that is currently in progress for the Loader instance.
          */
         public function close():void
@@ -174,9 +185,8 @@ package system.process
          */
         public override function notifyStarted():void
         {
-               setRunning(true) ;
-            _timer.start() ;
             super.notifyStarted() ;
+            _timer.start() ;
         }
         
         /**
@@ -216,7 +226,9 @@ package system.process
         }
         
         /**
-         * Set timeout interval duration.
+         * Sets the timeout interval duration.
+         * @param time The time interval of the timeout limit.
+         * @param useSeconds This optional boolean indicates if the time parameter is in seconds or milliseconds.
          */
         public function setDelay( time:uint , useSeconds:Boolean=false):void 
         {
@@ -228,7 +240,7 @@ package system.process
         }    
         
         /**
-         * Unregister the loader object.
+         * Unregisters the loader object.
          */
         public function unregister( dispatcher:IEventDispatcher ):void
         {

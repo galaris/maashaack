@@ -39,34 +39,57 @@ package system.process
     
     import flash.display.Loader;    
 
-    public class CoreActionLoaderTest extends TestCase 
+    public class ActionLoaderTest extends TestCase 
     {
         
-        public function CoreActionLoaderTest(name:String = "")
+        public function ActionLoaderTest(name:String = "")
         {
             super(name);
         }
         
+        public function setUp():void
+        {
+            //
+        }
+        
+        public function tearDown():void
+        {
+            //
+        }
+        
         public function testConstructor():void
         {
-            var a:CoreActionLoader = new CoreActionLoader() ;
-            assertNotNull( a , "CoreActionLoader constructor method failed." ) ;
+            var a:ActionLoader = new ActionLoader() ;
+            assertNotNull( a , "ActionLoader constructor method failed." ) ;
         }
-
+        
+        public function testConstructorWithLoaderParameter():void
+        {
+            var a:ActionLoader ;
+            
+            a = new ActionLoader( new Loader() ) ;
+            assertNotNull( a        , "01-01 ActionLoader constructor method failed." ) ;
+            assertNotNull( a.loader , "01-02 ActionLoader constructor method failed, the loader property not must be null." ) ;
+            
+            a = new ActionLoader( null ) ;
+            assertNotNull( a        , "02-01 ActionLoader constructor method failed." ) ;
+            assertNull( a.loader , "02-02 ActionLoader constructor method failed, the loader property not must be null." ) ;
+        }
+        
         public function testInherit():void
         {
-            var a:CoreActionLoader = new CoreActionLoader() ;
-            assertTrue( a is CoreAction , "CoreActionLoader must extends the CoreAction class." ) ;
+            var a:ActionLoader = new ActionLoader() ;
+            assertTrue( a is CoreActionLoader , "ActionLoader must extends the CoreActionLoader class." ) ;
         }
         
         public function testClone():void
         {
-            var loader:Loader           = new Loader() ;
-            var action:CoreActionLoader = new CoreActionLoader( loader ) ;
-            var clone:CoreActionLoader = action.clone() as CoreActionLoader ;
-            assertNotNull( clone , "01 - CoreActionLoader clone method failed." ) ;
-            assertFalse( clone == action  , "02 - CoreActionLoader clone method failed." ) ;
-            assertTrue( clone.loader == action.loader  , "03 - CoreActionLoader clone method failed." ) ;
+            var loader:Loader       = new Loader() ;
+            var action:ActionLoader = new ActionLoader( loader ) ;
+            var clone:ActionLoader = action.clone() as ActionLoader ;
+            assertNotNull( clone , "01 - ActionLoader clone method failed." ) ;
+            assertFalse( clone == action  , "02 - ActionLoader clone method failed." ) ;
+            assertTrue( clone.loader == action.loader  , "03 - ActionLoader clone method failed." ) ;
         }
         
     }
