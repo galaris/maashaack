@@ -114,7 +114,7 @@ package system.process
          * The flag to determinate if the Action object is looped.
          */
         public var looping:Boolean ;
-    
+        
         /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.

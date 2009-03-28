@@ -88,21 +88,17 @@ package system.process
         
         /**
          * Creates a new ActionLoader instance.
-         * @param loader The Loader object to load.
+         * @param loader The Loader object reference to initialize this process.
          * @param bGlobal the flag to use a global event flow or a local event flow.
          * @param sChannel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
          */
         public function ActionLoader( loader:Loader=null , bGlobal:Boolean = false, sChannel:String = null)
         {
-            super( bGlobal, sChannel ) ;
-            if ( loader != null )
-            {
-                this.loader = loader ;    
-            }
+            super( loader , bGlobal, sChannel ) ;
         }
         
         /**
-         * (read-only) Indicates the number of bytes that have been loaded thus far during the load operation.
+         * Indicates the number of bytes that have been loaded thus far during the load operation.
          */
         public override function get bytesLoaded():uint
         {
@@ -110,7 +106,7 @@ package system.process
         }
         
         /**
-         * (read-write) Indicates the total number of bytes in the downloaded data.
+         * Indicates the total number of bytes in the downloaded data.
          */
         public override function get bytesTotal():uint
         {
@@ -118,21 +114,21 @@ package system.process
         }
 
         /**
-         * (Read-only) Contains the root display object of the SWF file or image (JPG, PNG, or GIF) file that was loaded by using the load() or loadBytes() methods. 
+         * Contains the root display object of the SWF file or image (JPG, PNG, or GIF) file that was loaded by using the load() or loadBytes() methods. 
          */
         public function get content():DisplayObject
         {
-            return (_loader as Loader).content ;    
+            return (_loader != null) ? (_loader as Loader).content : null ;    
         } 
-  
+        
         /**
-         * (Read-only) Returns a LoaderInfo object corresponding to the object being loaded. 
+         * Returns a LoaderInfo object corresponding to the object being loaded. 
          * LoaderInfo objects are shared between the Loader object and the loaded content object. 
          * The LoaderInfo object supplies loading progress information and statistics about the loaded file. 
          */
         public function get contentLoaderInfo():LoaderInfo
         {
-            return (_loader as Loader).contentLoaderInfo ;    
+            return (_loader != null) ? (_loader as Loader).contentLoaderInfo : null ;    
         }
 
         /**
@@ -153,11 +149,20 @@ package system.process
         }
 
         /**
-         * Indicates the loader object of this process.
+         * @private
          */
-        public override function get loader():*
+        public override function set loader( loader:IEventDispatcher ):void
         {
-            return _loader as Loader ;
+            super.loader = loader as Loader ;
+        }
+        
+        /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new ActionLoader(loader as Loader) ;
         }
         
         /**
@@ -165,8 +170,14 @@ package system.process
          */
         public override function close():void
         {
-            (_loader as Loader).close() ;
-            notifyFinished() ;
+            if ( _loader != null && _loader is Loader )
+            {
+                (_loader as Loader).close() ;
+            }
+            if ( running )
+            {
+                notifyFinished() ;
+            }
         }
         
         /**
@@ -174,7 +185,7 @@ package system.process
          */
         public override function register( dispatcher:IEventDispatcher ):void
         {
-            if ( _loader != null )
+            if ( contentLoaderInfo != null )
             {
                 super.register( contentLoaderInfo ) ;
                 contentLoaderInfo.addEventListener( Event.INIT, _init, false, 0, true ) ;
@@ -186,7 +197,7 @@ package system.process
          */
         public override function unregister( dispatcher:IEventDispatcher ):void
         {
-            if ( _loader != null )
+            if ( contentLoaderInfo != null )
             {            
                 super.unregister(contentLoaderInfo) ;
                 contentLoaderInfo.removeEventListener( Event.INIT , _init ) ;
@@ -206,7 +217,10 @@ package system.process
          */
         protected override function _run():void
         {
-            (_loader as Loader).load( request , context ) ;
+        	if ( loader != null && (_loader is Loader) )
+        	{
+                (_loader as Loader).load( request , context ) ;
+        	}
         }
         
         /**

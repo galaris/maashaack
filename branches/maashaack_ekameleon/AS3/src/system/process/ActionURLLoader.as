@@ -38,6 +38,7 @@ package system.process
     import system.numeric.Range;
     
     import flash.events.Event;
+    import flash.events.IEventDispatcher;
     import flash.net.URLLoader;
     import flash.net.URLLoaderDataFormat;    
 
@@ -97,11 +98,7 @@ package system.process
          */
         public function ActionURLLoader( loader:URLLoader=null , bGlobal:Boolean = false, sChannel:String = null )
         {
-            super( bGlobal, sChannel );
-            if ( loader != null )
-            {
-                this.loader = loader ;    
-            }
+            super( loader , bGlobal, sChannel ) ;
         }
         
         /**
@@ -115,27 +112,27 @@ package system.process
         public static var SPACE:String = "   " ;
         
         /**
-         * (read-only) Indicates the number of bytes that have been loaded thus far during the load operation.
+         * Indicates the number of bytes that have been loaded thus far during the load operation.
          */
         public override function get bytesLoaded():uint
         {
-            return (_loader as URLLoader).bytesLoaded ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).bytesLoaded : 0 ;    
         }
         
         /**
-         * (read-write) Indicates the total number of bytes in the downloaded data.
+         * Indicates the total number of bytes in the downloaded data.
          */
         public override function get bytesTotal():uint
         {
-            return (_loader as URLLoader).bytesTotal ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).bytesTotal : 0 ;    
         }
-
-       /**
-         * (read-write) Indicates the data received from the load operation. 
+        
+        /**
+         * Indicates the data received from the load operation. 
          */
         public function get data():*
         {
-            return _loader.data ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).data : null ;    
         }
         
         /**
@@ -147,7 +144,7 @@ package system.process
         }
         
         /**
-         * (read-write) Controls whether the downloaded data is received as 
+         * Controls whether the downloaded data is received as 
          *   - text (URLLoaderDataFormat.TEXT),
          *   - raw binary data (URLLoaderDataFormat.BINARY)
          *   - URL-encoded variables (URLLoaderDataFormat.VARIABLES).
@@ -171,7 +168,15 @@ package system.process
         public var isCollapse:Boolean ;
         
         /**
-         * (read-only) Returns the max depth to collaspe the structure of an object in the console.
+         * @private
+         */
+        public override function set loader( loader:IEventDispatcher ):void
+        {
+            super.loader = loader as URLLoader ;
+        }
+        
+        /**
+         * Determinates the max depth to collaspe the structure of an object in the console.
          */
         public function get maxDepth():uint
         {
@@ -179,7 +184,7 @@ package system.process
         }
         
         /**
-         * (read-only) Sets the max depth to collaspe the structure of an object in the console.
+         * @private
          */
         public function set maxDepth( value:uint ):void
         {
@@ -187,7 +192,7 @@ package system.process
         }
 
         /**
-         * (read-write) Activate or disactivate parsing (Use this with XML, EDEN, JSON...). 
+         * Activate or disactivate parsing (Use this with XML, EDEN, JSON...). 
          */
         public function get parsing():Boolean
         {
@@ -208,12 +213,27 @@ package system.process
         public var verbose:Boolean ;
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new ActionURLLoader(loader as URLLoader) ;
+        }
+        
+        /**
          * Cancels a load() method operation that is currently in progress for the Loader instance.
          */
         public override function close():void
         {
-            (_loader as URLLoader).close() ;
-            notifyFinished() ;
+            if ( _loader != null && _loader is URLLoader )
+            {
+                (_loader as URLLoader).close() ;
+            }
+            if ( running )
+            {
+                notifyFinished() ;
+            }
         }
         
         /**
@@ -233,7 +253,7 @@ package system.process
         }
         
         /**
-         * Dispatch Event.COMPLETE event after all the received data is decoded and placed in the data property. 
+         * Dispatch an Event.COMPLETE event after all the received data is decoded and placed in the data property. 
          */
         protected override function complete( e : Event ) : void
         {
@@ -253,7 +273,12 @@ package system.process
          */
         protected override function _run():void
         {
-            (_loader as URLLoader).load( request ) ;
+            var l:URLLoader = (_loader as URLLoader) ;
+            if ( l != null )
+            { 
+                l.dataFormat = dataFormat ;
+                l.load( request ) ;
+            }
         }
         
         /**
@@ -264,7 +289,7 @@ package system.process
         /**
          * @private
          */
-          private var _isParsing:Boolean ;
+        private var _isParsing:Boolean ;
         
         /**
          * @private
