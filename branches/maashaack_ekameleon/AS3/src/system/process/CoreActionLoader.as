@@ -35,6 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
+    import flash.events.ErrorEvent;
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
     import flash.events.IEventDispatcher;
@@ -176,7 +177,6 @@ package system.process
          */
         public override function notifyFinished():void 
         {
-            setRunning(false) ;
             _timer.stop() ;
             super.notifyFinished() ;
         }
@@ -211,17 +211,19 @@ package system.process
          */
         public override function run( ...arguments:Array ):void 
         {
+        	notifyStarted() ;
             if ( loader == null )
             {
-                throw new Error( this + " failed the Loader reference of this process not must be 'null' or 'undefined'.") ;
+                dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the loader reference of this process not must be 'null'.") ) ;
+                notifyFinished() ;
             }
             else if ( request == null )
             {
-                throw new Error( this + " failed the URLRequest reference of this process not must be 'null' or 'undefined'.") ;
+            	dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the request reference of this process not must be 'null'.") ) ;
+                notifyFinished() ;
             }
             else
             {
-                notifyStarted() ;
                 _run() ;
             }
         }
