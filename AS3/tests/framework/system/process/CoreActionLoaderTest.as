@@ -37,7 +37,8 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.display.Loader;    
+    import flash.display.Loader;
+    import flash.net.URLRequest;    
 
     public class CoreActionLoaderTest extends TestCase 
     {
@@ -52,11 +53,62 @@ package system.process
             var a:CoreActionLoader = new CoreActionLoader() ;
             assertNotNull( a , "CoreActionLoader constructor method failed." ) ;
         }
-
+        
         public function testInherit():void
         {
             var a:CoreActionLoader = new CoreActionLoader() ;
             assertTrue( a is CoreAction , "CoreActionLoader must extends the CoreAction class." ) ;
+        }
+
+        public function testBytesLoaded():void
+        {
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertEquals( a.bytesLoaded, 0, "01 - CoreActionLoader bytesLoaded failed.");
+        }
+        
+        public function testBytesTotal():void
+        {
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertEquals( a.bytesTotal, 0, "01 - CoreActionLoader bytesTotal failed.");
+        }
+        
+        public function testDelay():void
+        {
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertEquals( a.delay, CoreActionLoader.DEFAULT_DELAY , "01 - CoreActionLoader delay failed.");
+            a.setDelay(2000) ;
+            assertEquals( a.delay, 2000 , "02 - CoreActionLoader delay failed.");
+        }
+        
+        public function testLoader():void
+        {
+            var loader:Loader           = new Loader() ;
+            var action:CoreActionLoader = new CoreActionLoader() ;
+            assertNull( action.loader , "01 - CoreActionLoader loader property failed." ) ;
+            action.loader = loader ;
+            assertTrue( action.loader == action.loader  , "02 - CoreActionLoader loader property failed." ) ;
+        }
+        
+        public function testRequest():void
+        {
+            var r:URLRequest = new URLRequest("http://code.google.com/p/maashaack") ;
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertNull( a.request , "01 - CoreActionLoader request failed.");
+            a.request = r ;
+            assertNotNull( a.request , "02-01 - CoreActionLoader request failed.");
+            assertTrue( a.request == r , "02-02 - CoreActionLoader request failed.");
+        }
+        public function testTimeoutPolicy():void
+        {
+            var action:CoreActionLoader = new CoreActionLoader() ;
+            
+            assertEquals( action.timeoutPolicy.valueOf() , TimeoutPolicy.LIMIT.valueOf() , "01 - CoreActionLoader timeoutPolicy property failed." ) ;
+            
+            action.timeoutPolicy = TimeoutPolicy.INFINITY ;
+            assertEquals( action.timeoutPolicy.valueOf() , TimeoutPolicy.INFINITY.valueOf() , "02 - CoreActionLoader timeoutPolicy property failed." ) ;
+            
+            action.timeoutPolicy = new TimeoutPolicy(10) ; // no valid policy object
+            assertEquals( action.timeoutPolicy.valueOf() , TimeoutPolicy.INFINITY.valueOf() , "03 - CoreActionLoader timeoutPolicy property failed." ) ;
         }
         
         public function testClone():void

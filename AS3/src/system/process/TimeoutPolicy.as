@@ -48,7 +48,7 @@ package system.process
          * Creates a new TimeoutPolicy instance.
          * @param the value of this policy object.
          */ 
-        public function TimeoutPolicy( value:uint )
+        public function TimeoutPolicy( value:int )
         {
             _value = value ;
         }
@@ -93,7 +93,7 @@ package system.process
         /**
          * @private
          */
-        private var _value:uint ;
+        private var _value:int ;
         
     }
 }
