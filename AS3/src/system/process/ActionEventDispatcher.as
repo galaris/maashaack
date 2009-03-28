@@ -41,6 +41,41 @@ package system.process
 
     /**
      * A process who dispatch events in the global event flow or locally.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples
+     * {
+     *     import system.events.ActionEvent;
+     *     import system.process.ActionEventDispatcher;
+     *     
+     *     import flash.display.Sprite;
+     *     import flash.events.Event;
+     *     
+     *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+     *     
+     *     public class ActionEventDispatcherExample extends Sprite
+     *     {
+     *         public function ActionEventDispatcherExample()
+     *         {
+     *             var process:ActionEventDispatcher = new ActionEventDispatcher() ;
+     *             
+     *             process.event = new Event("action") ; // register an Event in the process.
+     *             
+     *             process.addEventListener( "action" , debug ) ;
+     *             
+     *             process.addEventListener( ActionEvent.START  , debug ) ;
+     *             process.addEventListener( ActionEvent.FINISH , debug ) ;
+     *             
+     *             process.run() ;
+     *         }
+     *         
+     *         public function debug( e:Event ):void
+     *         {
+     *             trace(e) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class ActionEventDispatcher extends Task 
     {

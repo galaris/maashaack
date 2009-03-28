@@ -43,7 +43,94 @@ package system.process
 
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
-     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>  
+     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples
+     * {
+     *     import system.process.Batch;
+     *     
+     *     import flash.display.Sprite;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.geom.Point;
+     *     
+     *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+     *     
+     *     public class BatchExample extends Sprite
+     *     {
+     *         public function BatchExample()
+     *         {
+     *             var s1:Square = new Square( 50 ,  50 , 0xFF0000 ) ;
+     *             var s2:Square = new Square( 50 , 100 , 0x00FF00 ) ;
+     *             var s3:Square = new Square( 50 , 150 , 0x0000FF ) ;
+     *             
+     *             s1.finish = new Point( 600 ,  50 ) ;
+     *             s2.finish = new Point( 600 , 100 ) ;
+     *             s3.finish = new Point( 600 , 150 ) ;
+     *             
+     *             addChild(s1) ;
+     *             addChild(s2) ;
+     *             addChild(s3) ;
+     *             
+     *             command = new Batch() ;
+     *             
+     *             command.add( s1 ) ;
+     *             command.add( s2 ) ;
+     *             command.add( s3 ) ;
+     *             
+     *             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown) ;
+     *         }
+     *         
+     *         public var command:Batch ;
+     *         
+     *         public function keyDown( e:KeyboardEvent ):void
+     *         {
+     *             command.run() ;
+     *         }
+     *     }
+     * }
+     * 
+     * import system.process.Runnable;
+     * 
+     * import flash.display.Sprite;
+     * import flash.events.Event;
+     * import flash.filters.DropShadowFilter;
+     * import flash.geom.Point;
+     * 
+     * class Square extends Sprite implements Runnable
+     * {
+     *     public function Square( x:int = 0 , y:int = 0 , color:uint = 0xFFFFFF ):void
+     *     {
+     *         graphics.beginFill( color ) ;
+     *         graphics.drawRect(0, 0, 30, 30) ;
+     *         filters = [ new DropShadowFilter(1,60,0,0.7,4,4) ] ;
+     *         this.x = x ;
+     *         this.y = y ;
+     *     }
+     *     
+     *     public var finish:Point ;
+     *     
+     *     public function run(...arguments:Array):void
+     *     {
+     *         if ( finish != null )
+     *         {
+     *             addEventListener(Event.ENTER_FRAME , enterFrame ) ;
+     *         }
+     *     }
+     *     
+     *     protected function enterFrame( e:Event ):void
+     *     {
+     *         var dx:Number = Math.round( ( finish.x - x ) * 0.3 ) ;
+     *         var dy:Number = Math.round( ( finish.y - y ) * 0.3 ) ;
+     *         x += dx ;
+     *         y += dy ;
+     *         if ( dx == 0 && dy == 0 )
+     *         {
+     *             removeEventListener(Event.ENTER_FRAME , enterFrame ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class Batch extends TypedCollection implements Runnable, Stoppable
     {

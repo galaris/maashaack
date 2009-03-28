@@ -41,7 +41,7 @@ package system.process
 
     /**
      * This <code class="prettyprint">Action</code> object register <code class="prettyprint">Action</code> objects in a batch process.
-     * @example
+     * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.events.ActionEvent ;
      * import system.process.BatchProcess ;
