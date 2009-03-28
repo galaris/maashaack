@@ -40,7 +40,6 @@ package system.process
      * This Action launch the initialize method of the object but notify an event before (ActionEvent.START) and after(ActionEvent.FINISH) the process.
      * <p>You can override the initialize method of the object or extends the class.</p>
      * <p><b>Example :</b></p>
-     * You must use this class with a custom class who extends this class.
      * <pre class="prettyprint">
      * import system.events.ActionEvent ;
      * import system.process.Initializer ;

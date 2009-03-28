@@ -41,9 +41,9 @@ package examples
     
     import flash.display.Sprite;
     import flash.events.Event;    
-
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    
     /**
      * Basic example to use the system.process.ActionEventDispatcher process.
      */
@@ -63,7 +63,7 @@ package examples
             
             process.run() ;
         }
-
+        
         public function debug( e:Event ):void 
         {
             trace(e) ;
