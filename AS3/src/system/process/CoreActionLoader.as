@@ -100,7 +100,7 @@ package system.process
          */
         public function get loader():IEventDispatcher
         {
-            return _loader ;    
+            return _loader ;
         }
         
         /**
