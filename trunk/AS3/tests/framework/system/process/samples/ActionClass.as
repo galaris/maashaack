@@ -33,37 +33,60 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
-{
-    import buRRRn.ASTUce.framework.*;
+package system.process.samples 
+{    import system.events.EventDispatcher;
+    import system.process.Action;    
 
-    public class AllTests
-    {
-
-        public static function suite():ITest
+    public class ActionClass extends EventDispatcher implements Action
+    {    
+        public function ActionClass()
         {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
+        	//
         }
+        
+        /**
+         * Determinates the parent Action reference of the current Action.
+         */
+        public function get parent():Action
+        {
+            return _parent ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set parent( action:Action ):void
+        {
+            _parent = action ;
+        }
+        
+        public function get running():Boolean
+        {
+        	return true ;
+        }     
+    
+        public function clone():*
+        {
+            return new ActionClass() ;
+        }
+    
+        public function notifyFinished():void
+        {
+            throw new Error("finished") ;
+        }
+    
+        public function notifyStarted():void
+        {
+            throw new Error("started") ;
+        }
+
+        public function run(...arguments:Array):void
+        {
+            throw new Error("run") ;
+        }
+        
+        private var _parent:Action ;
+    
     }
-}
+    
+    }

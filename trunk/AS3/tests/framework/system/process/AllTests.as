@@ -45,11 +45,25 @@ package system.process
         {
             var suite:TestSuite = new TestSuite("system process tests");
             
+            suite.addTestSuite( ActionEventDispatcherTest ) ;
+            suite.addTestSuite( ActionLoaderTest ) ;
+            suite.addTestSuite( ActionProxyTest ) ;
+            suite.addTestSuite( ActionTest ) ;
+            suite.addTestSuite( ActionURLLoaderTest ) ;
+            suite.addTestSuite( BatchTest ) ;
+            suite.addTestSuite( BatchProcessTest ) ;
+            suite.addTestSuite( CoreActionTest ) ;
+            suite.addTestSuite( CoreActionLoaderTest ) ;
+            suite.addTestSuite( InitializerTest ) ;
             suite.addTestSuite( LockableTest  );
+            suite.addTestSuite( PauseTest ) ;
             suite.addTestSuite( PriorityTest  );
             suite.addTestSuite( ResetableTest );
             suite.addTestSuite( RunnableTest  );
+            suite.addTestSuite( SequencerTest ) ;
             suite.addTestSuite( StoppableTest );
+            suite.addTestSuite( TaskTest ) ;
+            suite.addTestSuite( TimeoutPolicyTest ) ;
             
             return suite;
         }

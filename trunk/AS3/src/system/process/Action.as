@@ -33,37 +33,56 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.process 
 {
-    import buRRRn.ASTUce.framework.*;
-
-    public class AllTests
+    import system.Cloneable;
+    import system.events.IEventDispatcher;
+    import system.process.Runnable;
+    
+    /**
+     * Dispatched when a process is finished.
+     * @eventType system.events.ActionEvent.FINISH
+     * @see #notifyFinished
+     */
+    [Event(name="finish", type="system.events.ActionEvent")]
+    
+    /**
+     * Dispatched when a process is started.
+     * @eventType system.events.ActionEvent.START
+     * @see #notifyStarted
+     */
+    [Event(name="start", type="system.events.ActionEvent")]
+    
+    /**
+     * This interface represents the methods implemented in the Action objects.
+     */
+    public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
 
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
-        }
+        /**
+         * Determinates the parent Action reference of the current Action.
+         */
+        function get parent():Action ;
+                
+        /**
+         * @private
+         */
+        function set parent( action:Action ):void ;
+        
+        /**
+         * Indicates <code class="prettyprint">true</code> if the action is in progress.
+         */
+        function get running():Boolean ;
+        
+        /**
+         * Notify an ActionEvent when the process is finished.
+         */
+        function notifyFinished():void ;
+        
+        /**
+         * Notify an ActionEvent when the process is started.
+         */
+        function notifyStarted():void ;
+        
     }
 }

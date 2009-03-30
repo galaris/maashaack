@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -31,39 +32,59 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
-*/
+ */
 
-package system.process 
+package examples
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
+    import system.events.ActionEvent;
+    import system.process.BatchProcess;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;    
 
-    public class AllTests
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
+    /**
+     * Basic example to use the system.process.BatchProcess process.
+     */
+    public class BatchProcessExample extends Sprite
     {
         
-        public static function suite():ITest
+        public function BatchProcessExample()
         {
+            var batch:BatchProcess = new BatchProcess() ;
             
-            var suite:TestSuite = new TestSuite( "system process package TESTS" ) ;
+            batch.addEventListener(ActionEvent.START, debug) ;
+            batch.addEventListener(ActionEvent.FINISH, debug) ;
+            batch.addEventListener(ActionEvent.PROGRESS, progress) ;
             
-            suite.addTestSuite( ActionEventDispatcherTest ) ;
-            suite.addTestSuite( ActionLoaderTest ) ;
-            suite.addTestSuite( ActionProxyTest ) ;
-            suite.addTestSuite( ActionTest ) ;
-            suite.addTestSuite( ActionURLLoaderTest ) ;
-            suite.addTestSuite( BatchTest ) ;
-            suite.addTestSuite( BatchProcessTest ) ;
-            suite.addTestSuite( CoreActionTest ) ;
-            suite.addTestSuite( CoreActionLoaderTest ) ;
-            suite.addTestSuite( InitializerTest ) ;
-            suite.addTestSuite( PauseTest ) ;
-            suite.addTestSuite( SequencerTest ) ;
-            suite.addTestSuite( TaskTest ) ;
-            suite.addTestSuite( TimeoutPolicyTest ) ;
+            batch.addAction( new Pause(  2 , true )) ;
+            batch.addAction( new Pause( 10 , true )) ;
+            batch.addAction( new Pause(  1 , true )) ;
+            batch.addAction( new Pause(  5 , true )) ;
+            batch.addAction( new Pause(  7 , true )) ;
+            batch.addAction( new Pause(  2 , true )) ;
             
-            return suite;
+            batch.run() ;
             
+            // start
+            // progress : [Pause duration:1s]
+            // progress : [Pause duration:2s]
+            // progress : [Pause duration:2s]
+            // progress : [Pause duration:5s]
+            // progress : [Pause duration:7s]
+            // progress : [Pause duration:10s]
+            // finish
         }
         
+        public function progress( e:ActionEvent ):void
+        {
+            trace(e.type + " : " + e.context) ;
+        }
+        
+        public function debug( e:ActionEvent ):void
+        {
+            trace(e.type) ;
+        }
     }
 }

@@ -31,39 +31,53 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
+
 */
-
-package system.events
+package examples
 {
-    import buRRRn.ASTUce.framework.*;
+    import system.eden;
+    import system.events.ActionEvent;
+    import system.process.ActionURLLoader;
+    
+    import flash.display.Sprite;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;    
 
-    public class AllTests
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+
+    /**
+     * Basic example to use the system.process.ActionLoader process.
+     */
+    public class ActionURLLoaderExample extends Sprite
     {
-
-        public static function suite():ITest
+        
+        public function ActionURLLoaderExample()
         {
+            var url:String = "datas/config.eden" ;
+            var loader:URLLoader = new URLLoader() ;
+            var process:ActionURLLoader = new ActionURLLoader(loader) ;
             
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
+            process.addEventListener(ActionEvent.START, start) ;
+            process.addEventListener(ActionEvent.FINISH, finish) ;
             
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
+            process.request = new URLRequest(url) ;
+            process.run() ;
+        }
 
-            return suite;
+        public function finish( e:ActionEvent ):void 
+        {
+            trace(e) ;
+            var target:ActionURLLoader = e.target as ActionURLLoader ;
+            var data:*                 = eden.deserialize(target.data) ;
+            for (var prop:String in data)
+            {
+                trace("  > " + prop + " : " + data[prop]) ;
+            }
+        }
+        
+        public function start( e:ActionEvent ):void 
+        {
+            trace(e) ;
         }
     }
 }
