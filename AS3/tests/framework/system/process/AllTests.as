@@ -46,7 +46,7 @@ package system.process
             
             var suite:TestSuite = new TestSuite( "system process package TESTS" ) ;
             
-            suite.addTestSuite( ActionEventDispatcherTest ) ;                        
+            suite.addTestSuite( ActionEventDispatcherTest ) ;
             suite.addTestSuite( ActionLoaderTest ) ;
             suite.addTestSuite( ActionProxyTest ) ;
             suite.addTestSuite( ActionTest ) ;
