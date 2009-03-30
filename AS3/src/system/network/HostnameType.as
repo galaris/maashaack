@@ -71,7 +71,7 @@ package system.network
         /**
          * The "IPv4" HostnameType value.
          */
-        public static const IPv4:HostnameType = new HostnameType( 0, "IPv4" );
+        public static const IPv4:HostnameType = new HostnameType( 4, "IPv4" );
         
     }
 }
