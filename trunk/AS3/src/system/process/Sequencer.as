@@ -103,7 +103,7 @@ package system.process
         /**
          * Indicates the current Action reference in progress.
          */
-        public function current():Action
+        public function get current():Action
         {
             return _cur ;
         }

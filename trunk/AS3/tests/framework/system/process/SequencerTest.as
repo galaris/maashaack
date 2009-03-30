@@ -173,7 +173,6 @@ package system.process
             assertEquals( MockTask.COUNT , size , "run method failed, the sequencer must launch " + s.size() + " Runnable objects." ) ;
             assertEquals( c.size()               ,    0 , "run method failed, the sequencer must be empty after the run process." ) ;
             
-            
             MockTask.reset() ;
             
         }
