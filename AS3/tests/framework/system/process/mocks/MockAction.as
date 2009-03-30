@@ -33,37 +33,65 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.process.mocks 
 {
-    import buRRRn.ASTUce.framework.*;
+    import system.process.CoreAction;											
 
-    public class AllTests
-    {
-
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
-        }
-    }
+	/**
+	 * This mock simulate a conctrete Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
+	 */
+	public class MockAction extends CoreAction 
+	{
+		
+		/**
+		 * Creates a new MockAction instance.
+		 */
+		public function MockAction()
+		{
+			super() ;
+		}
+		
+		/**
+		 * The counter of this class.
+		 */
+		public static var COUNT:uint = 0 ;
+		
+		/**
+		 * Reset the static counter.
+		 */
+		public static function reset():void
+		{
+			COUNT = 0 ;	
+		}
+		
+		/**
+		 * Notify all events to simulate the event flow of the object.
+		 */
+		public function notifyAll():void
+		{
+			notifyChanged() ;
+			notifyCleared() ;
+			notifyFinished() ;
+			notifyInfo("hello world") ;
+			notifyLooped() ;
+			notifyProgress() ;
+			notifyResumed() ;
+			notifyStarted() ;
+			notifyStopped() ;
+			notifyTimeOut() ;
+		}
+		
+		/**
+		 * Run the process.
+		 */
+		public override function run(...arguments:Array):void
+		{
+			setRunning(true) ;
+			notifyStarted() ;
+			COUNT ++ ;	
+			setRunning(false) ;
+			notifyFinished() ;
+		}
+		
+	}
 }

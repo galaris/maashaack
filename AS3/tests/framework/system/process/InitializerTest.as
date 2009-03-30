@@ -33,37 +33,56 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.process 
 {
-    import buRRRn.ASTUce.framework.*;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.Reflection;
+    
+    public class InitializerTest extends TestCase 
     {
-
-        public static function suite():ITest
+        
+        public function InitializerTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
-
-            return suite;
+            super(name);
         }
+        
+        public function testConstructor():void
+        {
+            var action:Initializer = new Initializer() ;
+            assertNotNull( action , "Initializer constructor failed.") ;
+        }
+        
+        public function testInherit():void
+        {
+            var action:Initializer = new Initializer() ;
+            assertTrue( action is Task , "Initializer must extends the Task class.") ;
+        }
+        
+        public function testIsDynamic():void
+        {
+            var action:Initializer = new Initializer() ;
+            assertTrue( Reflection.getClassInfo(action).isDynamic() , "Initializer is dynamic.") ;
+        }
+        
+        public function testInitialize():void
+        {
+            var action:Initializer = new Initializer() ;
+            action.initialize = function():void
+            {
+                throw new Error("init") ;
+            };            
+            try
+            {
+                action.initialize() ;
+                fail("01 - Initializer initialize failed.");
+            }
+            catch( e:Error )
+            {
+                assertEquals(e.message, "init" , "02 - Initializer initialize failed.") ;
+            }
+        }
+        
     }
 }
+

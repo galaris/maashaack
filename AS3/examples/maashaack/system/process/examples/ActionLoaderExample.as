@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -31,39 +32,55 @@ decision by deleting the provisions above and replace them with the notice
 and other provisions required by the LGPL or the GPL. If you do not delete
 the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
-*/
+ */
 
-package system.events
+package examples
 {
-    import buRRRn.ASTUce.framework.*;
+    import system.events.ActionEvent;
+    import system.process.ActionLoader;
 
-    public class AllTests
+    import flash.display.Loader;
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.net.URLRequest;    
+
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#FFFFFF")]
+
+    /**
+     * Basic example to use the system.process.ActionLoader process.
+     */
+    public class ActionLoaderExample extends Sprite
     {
 
-        public static function suite():ITest
+        public function ActionLoaderExample()
         {
+            var url:String = "library/picture.png" ;
+            var loader:Loader = new Loader() ;
             
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
+            loader.x = 50 ;
+            loader.y = 50 ;
             
-            suite.addTestSuite( ActionEventTest ) ;
-            suite.addTestSuite( ArrayEventTest ) ;
-            suite.addTestSuite( BasicEventTest ) ;
-            suite.addTestSuite( BooleanEventTest ) ;
-            suite.addTestSuite( CommandTest ) ;
-            suite.addTestSuite( CoreEventDispatcherTest ) ;
-            suite.addTestSuite( DateEventTest ) ;
-            suite.addTestSuite( DelegateTest ) ;
-            suite.addTestSuite( DynamicEventTest ) ;
-            suite.addTestSuite( EventDispatcherTest ) ;
-            suite.addTestSuite( EventListenerTest ) ;
-            suite.addTestSuite( EventListenerBatchTest ) ;
-            suite.addTestSuite( FrontControllerTest ) ;
-            suite.addTestSuite( IEventDispatcherTest ) ;
-            suite.addTestSuite( InternalDispatcherTest ) ;
-            suite.addTestSuite( NumberEventTest ) ;
-            suite.addTestSuite( StringEventTest ) ;
+            addChild(loader) ;
+            
+            var process:ActionLoader = new ActionLoader(loader) ;
+            
+            process.addEventListener( ActionEvent.START  , debug ) ;
+            process.addEventListener( ActionEvent.FINISH , debug ) ;
+            process.addEventListener( Event.INIT         , init  ) ;
+            
+            process.request = new URLRequest(url) ;
+            
+            process.run() ;
+        }
 
-            return suite;
+        public function debug( e:ActionEvent ):void 
+        {
+            trace(e) ;
+        }
+        
+        public function init(event:Event):void 
+        {
+            trace("init currentTarget:" + event.currentTarget + " target:" + event.target) ;
         }
     }
 }
