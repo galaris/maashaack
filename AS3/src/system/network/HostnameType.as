@@ -42,9 +42,9 @@ package system.network
      */
     public class HostnameType extends Enum
     {
-    	
-    	/**
-    	 * Creates a new HostnameType instance.
+        
+        /**
+         * Creates a new HostnameType instance.
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
          */

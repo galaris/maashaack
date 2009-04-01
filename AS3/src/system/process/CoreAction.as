@@ -42,57 +42,64 @@ package system.process
      * @eventType system.events.ActionEvent.CHANGE
      * @see #notifyChanged
      */
-    [Event(name="onChanged", type="system.events.ActionEvent")]
+    [Event(name="change", type="system.events.ActionEvent")]
 
     /**
      * Dispatched when a process is cleared.
      * @eventType system.events.ActionEvent.CLEAR
      * @see #notifyCleared
      */
-    [Event(name="onCleared", type="system.events.ActionEvent")]
+    [Event(name="clear", type="system.events.ActionEvent")]
         
     /**
      * Dispatched when an info process is running.
      * @eventType system.events.ActionEvent.INFO
      * @see #notifyInfo
      */
-    [Event(name="onInfo", type="system.events.ActionEvent")]
+    [Event(name="info", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is looped.
      * @eventType system.events.ActionEvent.LOOP
      * @see #notifyLooped
      */
-    [Event(name="onLooped", type="system.events.ActionEvent")]    
+    [Event(name="loop", type="system.events.ActionEvent")]    
     
     /**
      * Dispatched when a process is paused.
      * @eventType system.events.ActionEvent.PAUSE
      * @see #notifyPaused
      */
-    [Event(name="onPaused", type="system.events.ActionEvent")]     
+    [Event(name="pause", type="system.events.ActionEvent")]     
     
     /**
      * Dispatched when a process is in progress.
      * @eventType system.events.ActionEvent.PROGRESS
      * @see #notifyProgress
      */
-    [Event(name="onProgress", type="system.events.ActionEvent")]  
+    [Event(name="progress", type="system.events.ActionEvent")]  
     
     /**
      * Dispatched when a process is resumed.
      * @eventType system.events.ActionEvent.RESUME
      * @see #notifyResumed
      */
-    [Event(name="onResumed", type="system.events.ActionEvent")]  
+    [Event(name="resume", type="system.events.ActionEvent")]  
         
     /**
      * Dispatched when a process is stopped.
      * @eventType system.events.ActionEvent.STOP
      * @see #notifyStopped
      */
-    [Event(name="onStopped", type="system.events.ActionEvent")]      
+    [Event(name="stop", type="system.events.ActionEvent")]      
     
+    /**
+     * Dispatched when a process is out of time.
+     * @eventType system.events.ActionEvent.TIMEOUT
+     * @see #notifyTimeOut
+     */
+    [Event(name="timeout", type="system.events.ActionEvent")]   
+        
     /**
      * This class simplify a full implementation of the <code class="prettyprint">Action</code> interface.
      */
