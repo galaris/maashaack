@@ -54,7 +54,7 @@ package system.events
          * @param bubbles indicates if the event is a bubbling event.
          * @param cancelable indicates if the event is a cancelable event.
          * @param time this optional parameter is used in the eden deserialization to copy the timestamp value of this event.
-          */
+         */
         public function ActionEvent( type:String , target:Object = null, info:* = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:Number = 0 )
         {
             super(type, target, context, bubbles, cancelable, time) ;
@@ -63,67 +63,67 @@ package system.events
         
         /**
          * The name of the event when the process is changed.
-         * @eventType onChanged
+         * @eventType change
          */
         public static const CHANGE:String = "change" ;
 
         /**
          * The name of the event when the process is cleared.
-         * @eventType onCleared
+         * @eventType clear
          */
         public static const CLEAR:String = "clear" ;
         
         /**
          * The name of the event when the process is finished.
-         * @eventType onFinished
+         * @eventType finish
          */
         public static const FINISH:String = "finish" ;
 
         /**
          * The name of the event when the process info is changed.
-         * @eventType onChanged
+         * @eventType change
          */
         public static const INFO:String = "info" ;
 
         /**
          * The name of the event when the process is looped.
-         * @eventType onLooped
+         * @eventType loop
          */
         public static const LOOP:String = "loop" ;
         
         /**
          * The name of the event when the process is in pause.
-         * @eventType onPaused
+         * @eventType pause
          */
         public static const PAUSE:String = "pause" ;
         
         /**
          * The name of the event when the process is in progress.
-         * @eventType onProgress
+         * @eventType progress
          */
         public static const PROGRESS:String = "progress" ;
         
         /**
          * The name of the event when the process is resumed.
-         * @eventType onResumed
+         * @eventType resume
          */
         public static const RESUME:String = "resume" ;
         
         /**
          * The name of the event when the process is started.
-         * @eventType onStarted
-         */         
+         * @eventType start
+         */
         public static const START:String = "start" ;
         
         /**
          * The name of the event when the process is stopped.
-         * @eventType onStopped
+         * @eventType stop
          */        
         public static const STOP:String = "stop" ;    
         
         /**
          * The name of the event when the process is cleared.
-         * @eventType onTimeOut
+         * @eventType timeout
          */       
         public static const TIMEOUT:String = "timeout" ;
         

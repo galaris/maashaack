@@ -50,11 +50,11 @@ package system.network
      */
     public class URIScheme
     {
-    	
-    	/**
-    	 * The scheme expression.
-    	 */
-        public var scheme:String;
+        
+        /**
+         * The default port of the scheme.
+         */
+        public var defaultPort:int;
         
         /**
          * The delimiter value.
@@ -62,9 +62,9 @@ package system.network
         public var delimiter:String;
         
         /**
-         * The default port of the scheme.
+         * The scheme expression.
          */
-        public var defaultPort:int;
+        public var scheme:String;
         
         /**
          * Creates a new URIScheme instance.
