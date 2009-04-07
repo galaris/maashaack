@@ -65,6 +65,7 @@ package system
             
             //core2
             suite.addTestSuite( StringsTest );
+            suite.addTestSuite( ObjectsTest );
             suite.addTestSuite( CharTest );
             
             //others
