@@ -37,9 +37,9 @@ package
 {
     import buRRRn.ASTUce.*;
     
+    import libraries.zip.AllTests;
+    
     import system.console;
-    import system.events.ActionEventTest;
-    import system.process.AllTests;
     import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
@@ -84,7 +84,6 @@ package
             
             Runner.main
             ( 
-                ActionEventTest, 
                 AllTests.suite() 
             );
             
