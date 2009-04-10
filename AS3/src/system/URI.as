@@ -35,7 +35,7 @@
 
 package system
 {
-    import system.network.URIScheme;        
+    import system.network.URIScheme;
     /**
      * The "Uniform Resource Identifier" class.
      * <p><b>note:</b></p>
@@ -78,7 +78,12 @@ package system
         
         private var _hasQuery:Boolean ;
         private var _hasFragment:Boolean ;
-
+        
+        /**
+         * @private
+         */
+        private var _backslash:RegExp = /\\/g ;
+        
         /**
          * Allows to alter the tring representation of the URI
          * 
@@ -160,7 +165,7 @@ package system
             _fragment = "";
             _query    = "";
             _host     = "";
-            _path     = "/"+str.replace( _r , "/" );
+            _path     = "/"+str.replace( _backslash , "/" );
         }
         
         private function _parseWindowsUNC( str:String ):void
@@ -186,7 +191,7 @@ package system
                 _path = "";
             }
             
-            _path = _path.replace( _r, "/" );
+            _path = _path.replace( _backslash, "/" );
         }
         
         private function _parse( str:String ):void
@@ -737,9 +742,5 @@ package system
             return toString();
         }
         
-        /**
-         * @private
-         */
-        private var _r:RegExp = /\\/g ;
     }
 }
