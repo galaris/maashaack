@@ -156,26 +156,38 @@
         <delete dir="${release.dir}" />
         <delete dir="${release.tmp}" />
         <delete file="${x4a.src}/maashaack.abc" />
+        <delete file="${x4a.src}/core.abc" />
     </target>
     
     <target name="init">
         <mkdir dir="${release.dir}" />
-    	<mkdir dir="${release.tmp}" />
+        <mkdir dir="${release.tmp}" />
         <!--
            export the source code to a temporary location
            to be able to manipulate some files and/or directories
          -->
         <svn>
-            <export srcPath="${x4a.src}" destPath="${release.tmp.core}" />
+            <export srcPath="${x4a.src}" destPath="${release.tmp.framework}" />
+        	<export srcPath="${x4a.src}" destPath="${release.tmp.core}" />
         </svn>
         
         <!-- delete some files we don't want to be included in the documentation or the component -->
+        <delete>
+            <fileset dir="${release.tmp.framework}">
+              <include name="*.as"/>
+              <include name="*.mxml"/>
+            </fileset>
+        </delete>
+        
         <delete>
             <fileset dir="${release.tmp.core}">
               <include name="*.as"/>
               <include name="*.mxml"/>
             </fileset>
         </delete>
+        <delete  dir="${release.tmp.core}/libraries/" />
+        <delete  dir="${release.tmp.core}/openscreen/" />
+        <delete  dir="${release.tmp.core}/system/" />
         
         <!-- <delete file="${release.tmp.core}/system/foobar.as" /> -->
         
@@ -198,7 +210,7 @@
         <!-- run asdoc -->
         <exec executable="${asdoc.exe}">
             <arg line="-verbose-stacktraces" />
-            <arg line="-doc-sources ${release.tmp.core}" />
+            <arg line="-doc-sources ${release.tmp.framework}" />
             <arg line="-output ${asdoc.output}" />
             <arg line="-package system 'maashaack core library'" />
             <arg line="-templates-path ${asdoc.template}" />
@@ -228,6 +240,18 @@
         
         <move file="${x4a.src}/maashaack.abc" todir="${release.dir}/lib" />
         
+        <exec executable="java">
+            <arg line="-jar ${redshell.asc}" />
+            <arg line="-AS3 -strict -md -optimize" />
+            <arg line="-avmtarget 2" />
+            <arg line="-import ${redshell.builtin}" />
+            <arg line="-import ${redshell.toplevel}" />
+            <arg line="${x4a.src}/core.as" />
+            
+        </exec>
+        
+        <move file="${x4a.src}/core.abc" todir="${release.dir}/lib" />
+        
         <!--
         <exec executable="java">
             <arg line="-jar ${redshell.asc}" />
@@ -252,12 +276,12 @@
             this way we are assured that all classes without exception will be included
             in thebytecode and no need to edit by hand a "library" class.
         -->
-        <fileset id="sources" dir="${release.tmp.core}">
+        <fileset id="sources" dir="${release.tmp.framework}">
             <include name="**/*.as"/>
         </fileset>
         <pathconvert property="classes" pathsep=" " refid="sources">
             <chainedmapper>
-                <globmapper from="${basedir}${sep}build${sep}tmp${sep}core${sep}*" to="*"/>
+                <globmapper from="${basedir}${sep}build${sep}tmp${sep}framework${sep}*" to="*"/>
                 <mapper type="package" from="*.as" to="*"/>
             </chainedmapper>
         </pathconvert>
@@ -279,10 +303,47 @@
             <warnings>true</warnings>
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
-            <source-path path-element="${release.tmp.core}" />
+            <source-path path-element="${release.tmp.framework}" />
             <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
             <external-library-path dir="${flex.libs}" includes="flex.swc" />
             <metadata date="${TODAY}" title="${project.name}">
+                <creator name="Zwetan Kjukov" />
+                <creator name="Marc Alcaraz" />
+           <!-- <contributor name="Niko Bellic" /> -->
+            </metadata>
+        </compc>
+        
+        <fileset id="core_sources" dir="${release.tmp.core}">
+            <include name="**/*.as"/>
+        </fileset>
+        <pathconvert property="core_classes" pathsep=" " refid="core_sources">
+            <chainedmapper>
+                <globmapper from="${basedir}${sep}build${sep}tmp${sep}core${sep}*" to="*"/>
+                <mapper type="package" from="*.as" to="*"/>
+            </chainedmapper>
+        </pathconvert>
+        <echo message="core_classes is set to = ${core_classes}" level="verbose" />
+        
+        <!-- 
+            generate the Library SWC component
+            this SWC is compatible Flash and Flex
+         -->
+        <compc
+            output="${release.dir}/lib/${core.swc}"
+            include-classes="${core_classes}"
+            target-player="9.0.45"
+        >
+            <namespace uri="${core.namespace}" manifest="${core.manifest}" />
+            <include-namespaces uri="${core.namespace}" />
+            <strict>true</strict>
+            <optimize>true</optimize>
+            <warnings>true</warnings>
+            <verbose-stacktraces>false</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+            <source-path path-element="${release.tmp.core}" />
+            <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
+            <external-library-path dir="${flex.libs}" includes="flex.swc" />
+            <metadata date="${TODAY}" title="${project.name} (core)">
                 <creator name="Zwetan Kjukov" />
                 <creator name="Marc Alcaraz" />
            <!-- <contributor name="Niko Bellic" /> -->
@@ -328,7 +389,7 @@
             <strict>true</strict>
             <debug>true</debug>
             <default-size width="128" height="128" />
-            <source-path path-element="${release.tmp.core}" />
+            <source-path path-element="${release.tmp.framework}" />
             <source-path path-element="${x4a.lib}" />
             <source-path path-element="${x4a.tests}/framework" />
             <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
@@ -338,7 +399,7 @@
         <exec executable="${ASTUCE}" failonerror="true">
             <arg line="-s" />
             <arg line="-l:x4a-tests.swf" />
-            <arg line="system.AllTests" />
+            <arg line="core.AllTests system.AllTests" />
         </exec>
         
         <delete file="${astuce.path}/x4a-tests.swf"/>
@@ -356,7 +417,7 @@
             <strict>true</strict>
             <debug>true</debug>
             <default-size width="128" height="128" />
-            <source-path path-element="${release.tmp.core}" />
+            <source-path path-element="${release.tmp.framework}" />
             <source-path path-element="${x4a.lib.ASTUce}" />
             <source-path path-element="${x4a.tests}/framework" />
             <external-library-path dir="${flex.libs}/player" includes="playerglobal.swc" />
@@ -380,7 +441,7 @@
         <exec executable="${astuce.path}/ASTUce.exe" failonerror="true">
             <arg line="-s" />
             <arg line="-l:x4a-tests.swf" />
-            <arg line="system.AllTests" />
+            <arg line="core.AllTests system.AllTests" />
         </exec>
         
         <delete file="${astuce.path}/x4a-tests.swf"/>
@@ -409,7 +470,7 @@
     <!-- include the source code in the release -->
     <target name="include-source" if="includesource">
         <copy todir="${release.dir}/src">
-            <fileset dir="${release.tmp.core}"/>
+            <fileset dir="${release.tmp.framework}"/>
         </copy>
     </target>
     
