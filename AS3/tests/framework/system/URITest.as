@@ -373,17 +373,17 @@ package system
             //var u1:URI = new URI( s1 );
             //var u2:URI = new URI( s2 );
             var u3:URI = new URI( s3 );
-            trace( "u3: [" + u3 + "]" );
+            //trace( "u3: [" + u3 + "]" );
             
             var uri:URI = u3;
             
-            trace( "scheme: " + uri.scheme );
-            trace( "authority: " + uri.authority );
-            trace( "host: " + uri.host );
-            trace( "userinfo: " + uri.userinfo );
-            trace( "path: " + uri.path );
-            trace( "query: " + uri.query );
-            trace( "fragment: " + uri.fragment );
+//            trace( "scheme: " + uri.scheme );
+//            trace( "authority: " + uri.authority );
+//            trace( "host: " + uri.host );
+//            trace( "userinfo: " + uri.userinfo );
+//            trace( "path: " + uri.path );
+//            trace( "query: " + uri.query );
+//            trace( "fragment: " + uri.fragment );
             
             
         }
