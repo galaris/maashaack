@@ -33,6 +33,10 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
+//core
+include "core.as";
+
+
 //to avoid fwd ref
 include "system/Serializable.as";
 include "system/Serializer.as";
@@ -89,7 +93,8 @@ include "system/io/Readable.as";
 include "system/io/Writeable.as";
 
 //network
-include "system/network/URI.as";
+include "system/network/HostnameType.as";
+include "system/network/URIScheme.as";
 
 //process
 include "system/process/Lockable.as";
@@ -151,6 +156,7 @@ include "system/Strings.as";
 include "system/Cloneable.as";
 include "system/Comparable.as";
 include "system/Comparator.as";
+include "system/_Environment.as";
 include "system/Environment.as";
 include "system/Equatable.as";
 include "system/Reflection.as";
@@ -159,6 +165,8 @@ include "system/SystemConfigurator.as";
 
 include "system/Version.as";
 include "system/Char.as";
+include "system/URI.as";
+
   //statics
   include "system/metadata.as";
   //objects
