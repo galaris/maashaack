@@ -51,6 +51,9 @@ package system
     import system.serializers.AllTests;
     import system.network.AllTests;
     
+    import system.Environment;
+    import system.hosts.HostID;
+    
     /**
      * TestSuite that runs all the Maashaack tests
      */
@@ -65,7 +68,12 @@ package system
             
             //core2
             suite.addTestSuite( StringsTest );
-            suite.addTestSuite( ObjectsTest );
+            
+            if( Environment.host.id != HostID.RedTamarin )
+            {
+                suite.addTestSuite( ObjectsTest );
+            }
+            
             suite.addTestSuite( CharTest );
             
             //others
