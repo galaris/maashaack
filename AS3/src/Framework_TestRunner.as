@@ -38,7 +38,7 @@ package
     import buRRRn.ASTUce.*;
     import buRRRn.ASTUce.tests.AllTests;
     
-    import core.*;
+    import core.AllTests;
     import system.*;
     
     import flash.display.Sprite;
