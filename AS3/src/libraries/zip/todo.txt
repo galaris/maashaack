@@ -1,0 +1,8 @@
+
+http://hg.mozilla.org/tamarin-tracing/file/3f98dcd4a920/zlib/
+
+http://tools.ietf.org/html/rfc1950
+
+http://www.gzip.org/
+http://zlib.net/
+http://www.zlib.net/manual.html#Checksum%20functions

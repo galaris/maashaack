@@ -33,60 +33,29 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process.samples 
-{    import system.events.EventDispatcher;
-    import system.process.Action;    
+package libraries.zip  
+{
 
-    public class ActionClass extends EventDispatcher implements Action
-    {    
-        public function ActionClass()
-        {
-        	//
-        }
-        
-        /**
-         * Determinates the parent Action reference of the current Action.
-         */
-        public function get parent():Action
-        {
-            return _parent ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set parent( action:Action ):void
-        {
-            _parent = action ;
-        }
-        
-        public function get running():Boolean
-        {
-        	return true ;
-        }     
-    
-        public function clone():*
-        {
-            return new ActionClass() ;
-        }
-    
-        public function notifyFinished():void
-        {
-            throw new Error("finished") ;
-        }
-    
-        public function notifyStarted():void
-        {
-            throw new Error("started") ;
-        }
+    import buRRRn.ASTUce.framework.TestCase;        
 
-        public function run(...arguments:Array):void
+    public class CRC32Test extends TestCase 
+	{
+
+        public function CRC32Test(name:String = "")
         {
-            throw new Error("run") ;
+            super(name);
         }
         
-        private var _parent:Action ;
-    
+        public function testConstructorBasic():void
+        {
+            var crc:CRC32 = new CRC32() ;
+            assertNotNull(crc, "CRC constructor failed") ;
+        }
+        
+        public function testValueOf():void
+        {
+            var crc:CRC32 = new CRC32() ;
+            assertEquals(crc.valueOf() , 0 , "CRC value failed.") ;
+        }
     }
-    
-    }
+}

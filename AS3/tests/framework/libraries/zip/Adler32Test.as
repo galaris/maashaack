@@ -33,56 +33,53 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process 
+package libraries.zip  
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.Reflection;
-    
-    public class InitializerTest extends TestCase 
-    {
-        
-        public function InitializerTest(name:String = "")
+    import buRRRn.ASTUce.framework.TestCase;	
+
+    public class Adler32Test extends TestCase 
+	{
+
+        public function Adler32Test(name:String = "")
         {
             super(name);
         }
         
-        public function testConstructor():void
+        public function testBASE():void
         {
-            var action:Initializer = new Initializer() ;
-            assertNotNull( action , "Initializer constructor failed.") ;
+            assertEquals(Adler32.BASE, 65521, "Adler32.BASE value failed.") ;
         }
         
-        public function testInherit():void
+        public function testNMAX():void
         {
-            var action:Initializer = new Initializer() ;
-            assertTrue( action is Task , "Initializer must extends the Task class.") ;
+            assertEquals(Adler32.NMAX, 5552, "Adler32.NMAX value failed.") ;
         }
         
-        public function testIsDynamic():void
+        public function testConstructorBasic():void
         {
-            var action:Initializer = new Initializer() ;
-            assertTrue( Reflection.getClassInfo(action).isDynamic() , "Initializer is dynamic.") ;
+            var a:Adler32 = new Adler32() ;
+            assertNotNull(a, "Adler32 constructor failed") ;
         }
         
-        public function testInitialize():void
+        public function testReset():void
         {
-            var action:Initializer = new Initializer() ;
-            action.initialize = function():void
-            {
-                throw new Error("init") ;
-            };            
-            try
-            {
-                action.initialize() ;
-                fail("01 - Initializer initialize failed.");
-            }
-            catch( e:Error )
-            {
-                assertEquals(e.message, "init" , "02 - Initializer initialize failed.") ;
-            }
+            var a:Adler32 = new Adler32() ;
+            a.reset();
+            assertEquals( a.valueOf() , 1 , "Adler32 reset failed.") ;
         }
         
+        public function testToString():void
+        {
+            var a:Adler32 = new Adler32() ;
+            assertEquals(a.toString() , "1" , "Adler32 toString() failed.") ;
+        }
+        
+        public function testValueOf():void
+        {
+            var a:Adler32 = new Adler32() ;
+            assertEquals(a.valueOf() , 1 , "Adler32 default value failed.") ;
+        }
+
+
     }
 }
-

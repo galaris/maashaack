@@ -1,5 +1,0 @@
-{
-    project : "maashaack" ,
-    author  : "ekameleon" ,
-    error   : new Error("file_error")
-}
