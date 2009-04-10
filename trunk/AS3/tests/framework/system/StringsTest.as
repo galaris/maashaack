@@ -40,7 +40,8 @@ package system
     
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
-    import system.evaluators.MathEvaluator;    
+    import system.evaluators.MathEvaluator;
+    import system.hosts.HostID;    
 
     public class StringsTest extends TestCase
     {
@@ -221,13 +222,13 @@ package system
              */
             var str1:String = "hello {0}, the result is ${sin(0.5)*80/100}math$";
             //var str2:String = "bonjour ${\"le\".toUpperCase();}eden$ monde"; //BUG in eden \"le\".toUpperCase(); should give LE
-            var str3:String = "the host is ${system.Environment.host}eden$";
+            var str3:String = "the number is ${0xffff}eden$";
             
             Strings.evaluators = { math: new MathEvaluator(), eden: new EdenEvaluator(false) };
             
             assertEquals("hello world, the result is 0.3835404308833624", Strings.format(str1, "world"));
             //assertEquals( "bonjour LE monde", Strings.format( str2 )  );
-            assertEquals("the host is " + system.Environment.host, Strings.format(str3));
+            assertEquals("the number is " + (0xffff), Strings.format(str3));
         }
 
         public function testEndsWith():void
