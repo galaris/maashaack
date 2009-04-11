@@ -318,7 +318,7 @@ package system.data.lists
             {
                 if ( ! contains( it.next() ) )
                 {
-                    return false ;    
+                    return false ;
                 }     
             }
             return true ;
@@ -457,10 +457,18 @@ package system.data.lists
         public function indexOf( o:*, fromIndex:uint = 0 ):int
         {
             var index:int ;
-            var e:LinkedListEntry ;
+            var e:LinkedListEntry ; 
+            try
+            {
+                e = fromIndex > 0 ? _entry(fromIndex).next : _header.next ;
+            }
+            catch( er:Error )
+            {
+            	e = _header.next ;
+            }
             if ( o == null ) 
             {
-                for ( e = _header.next ; e != _header ; e = e.next) 
+                for ( ; e != _header ; e = e.next) 
                 {
                     if ( e.element == null )
                     {
@@ -471,7 +479,7 @@ package system.data.lists
             } 
             else 
             {
-                for ( e = _header.next ; e != _header ; e = e.next ) 
+                for ( ; e != _header ; e = e.next ) 
                 {
                     if (o is Equatable)
                     {
@@ -518,12 +526,19 @@ package system.data.lists
          */
         public function lastIndexOf( o:*  , fromIndex:int = 0x7FFFFFFF ):int 
         {
-            // TODO implement the fromIndex argument !!!
             var index:int = _size ;
             var e:LinkedListEntry ;
+            try
+            {
+                e = fromIndex > 0 ? _entry(fromIndex).previous : _header.previous ;
+            }
+            catch( er:Error )
+            {
+                e = _header.previous;
+            }
             if ( o == null ) 
             {
-                for ( e = _header.previous ; e != _header ; e = e.previous) 
+                for ( ; e != _header ; e = e.previous) 
                 {
                     index--;
                     if ( e.element == null )
@@ -534,7 +549,7 @@ package system.data.lists
             } 
             else 
             {
-                for ( e = _header.previous ; e != _header ; e = e.previous ) 
+                for ( ; e != _header ; e = e.previous ) 
                 {
                     index-- ;
                     if (o is Equatable)
