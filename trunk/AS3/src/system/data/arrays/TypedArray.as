@@ -27,7 +27,7 @@ package system.data.arrays
     import system.data.Typeable;
     import system.data.Validator;
     import system.data.arrays.ProxyArray;
-    import system.eden;    
+    import system.eden;
 
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
@@ -78,7 +78,8 @@ package system.data.arrays
         }
         
         /**
-         * Indicates the type of the Typeable object.
+         * Indicates the type of the Typeable object. 
+         * <p>If the type change the clear() method is invoked.</p>
          */
         public function get type():*
         {
@@ -90,7 +91,14 @@ package system.data.arrays
          */
         public function set type( type:* ):void
         {
-            _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            if ( _type != type )
+            {
+                if( _ar.length > 0 )
+                {
+                    _ar = [] ;
+                }
+                _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            }
         }
         
         /**

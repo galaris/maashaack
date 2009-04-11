@@ -74,7 +74,8 @@ package system.data.maps
         }        
         
         /**
-         * Indicates the type of the Typeable object.
+         * Indicates the type of the Typeable object. 
+         * <p>If the type change the clear() method is invoked.</p>
          */
         public function get type():*
         {
@@ -86,7 +87,14 @@ package system.data.maps
          */
         public function set type( type:* ):void
         {
-            _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            if ( _type != type )
+            {
+                if ( _map != null && _map.size() > 0 )
+                {
+                    _map.clear() ;
+                }
+                _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            }
         }       
         
         /**
