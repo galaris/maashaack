@@ -367,26 +367,29 @@ package system.data.lists
         public function testLastIndexOf():void
         {
             var l:LinkedList = new LinkedList(["item1","item2","item3","item2","item4" ]) ;
-            
-            assertEquals ( l.lastIndexOf("item2"), 3 , "01 - LinkedList lastIndexOf failed.") ;
-            assertEquals ( l.lastIndexOf("item5"), -1 , "02 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item1"),  0 , "01 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2"),  3 , "02 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item4"),  4 , "03 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item5"), -1 , "04 - LinkedList lastIndexOf failed.") ;
         }  
 
         public function testLastIndexOfWithFromIndex():void
         {
             var l:LinkedList = new LinkedList(["item1","item2","item3","item4","item3"]) ;
 
-            assertEquals ( l.lastIndexOf("item2", 0),   1 , "01-01 - LinkedList lastIndexOf failed.") ;            
-            assertEquals ( l.lastIndexOf("item2", 1),   1 , "01-01 - LinkedList lastIndexOf failed.") ;
-            assertEquals ( l.lastIndexOf("item2", 2),   1 , "01-02 - LinkedList lastIndexOf failed.") ;
-            trace("-------------------");
-//            assertEquals ( l.lastIndexOf("item3", 0), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
-//            assertEquals ( l.lastIndexOf("item3", 1), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
-//            assertEquals ( l.lastIndexOf("item3", 2),  2 , "02-03 - LinkedList lastIndexOf failed.") ;
-//            assertEquals ( l.lastIndexOf("item3", 3),  2 , "02-04 - LinkedList lastIndexOf failed.") ;
-//            assertEquals ( l.lastIndexOf("item3", 4),  4 , "02-05 - LinkedList lastIndexOf failed.") ;
-//            assertEquals ( l.lastIndexOf("item3", 5),  4 , "02-06 - LinkedList lastIndexOf failed.") ;
-            trace("-------------------");
+            assertEquals ( l.lastIndexOf("item2", 0), -1 , "01-01 - LinkedList lastIndexOf failed.") ;            
+            assertEquals ( l.lastIndexOf("item2", 1),  1 , "01-02 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2", 2),  1 , "01-03 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2", 3),  1 , "01-04 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2", 4),  1 , "01-05 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2", 5),  1 , "01-06 - LinkedList lastIndexOf failed.") ;
+            
+            assertEquals ( l.lastIndexOf("item3", 0), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item3", 1), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item3", 2),  2 , "02-03 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item3", 3),  2 , "02-04 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item3", 4),  4 , "02-05 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item3", 5),  4 , "02-06 - LinkedList lastIndexOf failed.") ;
         } 
 
         public function testListIterator():void
@@ -411,12 +414,9 @@ package system.data.lists
             l.add("item2") ;
             l.add("item3") ;
             
-            it = l.listIterator(2) ;         
+            it = l.listIterator(2) ;
             assertTrue( it.hasPrevious() , "04-01 - LinkedList listIterator failed.") ;
             assertEquals( it.previous() , "item2", "04-02 - LinkedList listIterator failed.") ;
-            
-            // TODO finalize all test of the LinkedListIterator class
-            
         }
         
         public function testPeek():void
@@ -711,6 +711,5 @@ package system.data.lists
             li = new LinkedList( ar ) ;
             assertEquals(li.toString() , "{item1,item2,item3,item4}", "02 - LinkedList toString failed") ;
         }      
-                
     }
 }

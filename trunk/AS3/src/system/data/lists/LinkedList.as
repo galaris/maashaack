@@ -47,7 +47,7 @@ package system.data.lists
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.LinkedListIterator;
     import system.errors.NoSuchElementError;
-    import system.serializers.eden.BuiltinSerializer;    
+    import system.serializers.eden.BuiltinSerializer;
 
     /**
      * Linked list implementation of the List and Queue interface. 
@@ -489,12 +489,9 @@ package system.data.lists
                             return index ;
                         }
                     }
-                    else
+                    else if (o == e.element)
                     {
-                        if (o == e.element)
-                        {
-                            return index ;    
-                        }
+                        return index ;    
                     }    
                     index++ ;
                 }
@@ -527,8 +524,8 @@ package system.data.lists
          */
         public function lastIndexOf( o:*  , fromIndex:int = 0x7FFFFFFF ):int 
         {
-            var index:int = _size ;
-            var e:LinkedListEntry = _header.previous;
+            var index:int         = Math.max( Math.min( fromIndex, _size ), 0 ) ;
+            var e:LinkedListEntry = index == _size ? _header.previous : _entry(index++) ;
             if ( o == null ) 
             {
                 for ( ; e != _header ; e = e.previous) 
@@ -552,12 +549,9 @@ package system.data.lists
                             return index;
                         }
                     }
-                    else
+                    else if (o == e.element)
                     {
-                        if (o == e.element)
-                        {
-                            return index ;
-                        }    
+                        return index ;
                     }
                 }
             }
