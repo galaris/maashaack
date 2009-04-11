@@ -36,13 +36,13 @@
 package system.data.maps 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.MultiMap;
     import system.data.collections.ArrayCollection;
-    import system.data.iterators.ArrayIterator;    
+    import system.data.iterators.ArrayIterator;
 
     public class MultiValueMapTest extends TestCase 
     {
@@ -66,21 +66,40 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	
-        	var init:Map = new HashMap() ;
-        	init.put( "key1" , "value1" ) ;
-        	
-        	assertNotNull(map , "1 - The MultiValueMap constructor failed.") ;
-        	
-        	var m:MultiValueMap = new MultiValueMap( init ) ;
-        	
-        	assertEquals
-        	( 
-        	   m.toString() , 
-        	   "{key1:{value1}}" ,
-        	   "2 - The MultiValueMap constructor failed." 
-        	);
-        	
+            
+            var init:Map = new HashMap() ;
+            init.put( "key1" , "value1" ) ;
+            
+            assertNotNull(map , "1 - The MultiValueMap constructor failed.") ;
+            
+            var m:MultiValueMap = new MultiValueMap( init ) ;
+            
+            assertEquals
+            ( 
+               m.toString() , 
+               "{key1:{value1}}" ,
+               "2 - The MultiValueMap constructor failed." 
+            );
+            
+        }
+
+        public function testConstructorWithFactory():void
+        {
+            
+            var init:Map = new HashMap() ;
+            init.put( "key1" , "value1" ) ;
+            
+            assertNotNull(map , "1 - The MultiValueMap constructor failed.") ;
+            
+            var m:MultiValueMap = new MultiValueMap( init , new ArrayMap() ) ;
+            
+            assertEquals
+            ( 
+               m.toSource() , 
+               'new system.data.maps.MultiValueMap(new system.data.maps.ArrayMap(["key1"],[new system.data.collections.ArrayCollection(["value1"])]))' ,
+               "2 - The MultiValueMap constructor failed." 
+            );
+            
         }
 
         public function testInterface():void
@@ -98,18 +117,18 @@ package system.data.maps
         
         public function testClone():void
         {
-        	
-        	var clone:MultiValueMap = map.clone() as MultiValueMap ;
-        	
-        	assertNotNull( clone , "01 - The MultiValueMap clone method failed.") ;
-        	assertNotSame( map, clone , "02 - The MultiValueMap clone method failed.") ;
-        	
-        	clone.put("key1", "value1") ;
-        	
-        	clone = clone.clone() ;
-        	
-        	assertEquals( clone.size() , 1 , "03 - The MultiValueMap clone method failed.") ;
-        	
+            
+            var clone:MultiValueMap = map.clone() as MultiValueMap ;
+            
+            assertNotNull( clone , "01 - The MultiValueMap clone method failed.") ;
+            assertNotSame( map, clone , "02 - The MultiValueMap clone method failed.") ;
+            
+            clone.put("key1", "value1") ;
+            
+            clone = clone.clone() ;
+            
+            assertEquals( clone.size() , 1 , "03 - The MultiValueMap clone method failed.") ;
+            
         }
 
         public function testContainsKey():void 
@@ -363,9 +382,9 @@ package system.data.maps
             
             assertTrue  ( map.removeByKey("key1" , "value1" ) , "1 - The MultiValueMap removeByKey method failed." ) ;
             assertFalse ( map.removeByKey("key1" , "value5" ) , "2 - The MultiValueMap removeByKey method failed." ) ;
-                    	
+                        
             assertEquals( map.totalSize() , 2 ,  "3 - The MultiValueMap removeByKey method failed.") ;
-                    	
+                        
             map.clear() ;
         }
 
@@ -425,8 +444,8 @@ package system.data.maps
         public function testValueIterator():void 
         {
 
-            // ArrayIterator of all collections of values        	
-        	
+            // ArrayIterator of all collections of values            
+            
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
             map.put("key2" , "value3") ;
@@ -442,9 +461,9 @@ package system.data.maps
         
         public function testValuesIterator():void 
         {
-        	
-        	// ArrayIterator of all values
-        	
+            
+            // ArrayIterator of all values
+            
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
             map.put("key2" , "value3") ;

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -105,8 +105,8 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	var map:SortedArrayMap = new SortedArrayMap( ["key1","key2"] , ["value1","value2"] ) ;
-        	
+            var map:SortedArrayMap = new SortedArrayMap( ["key1","key2"] , ["value1","value2"] ) ;
+            
             assertNotNull( map , "0 - The SortedArrayMap constructor failed." ) ;
             
             assertEquals( map.sortBy , SortedArrayMap.KEY,  "0 - The SortedArrayMap constructor failed, the sortBy property must be initialize with the 'key' flag." ) ;
