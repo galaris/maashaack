@@ -50,8 +50,8 @@ package system.data.lists
          */
         public function LinkedListEntry( element:* = null , next:LinkedListEntry = null , previous:LinkedListEntry = null )
         {
-            this.element = element ;
-            this.next = next ;
+            this.element  = element ;
+            this.next     = next ;
             this.previous = previous ;
         }
         
