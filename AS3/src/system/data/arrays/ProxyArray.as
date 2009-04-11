@@ -116,8 +116,8 @@ package system.data.arrays
                 }
             }
             return res ;
-        }        
-
+        }
+        
         /**
          * Removes all elements in the array.
          */ 
@@ -133,8 +133,8 @@ package system.data.arrays
         public function clone():*
         {
             return new ProxyArray(_ar.slice()) ;
-        }           
-                
+        }
+        
         /**
          * Overrides any request for a property's value. 
          * If the property can't be found, the method returns undefined. 

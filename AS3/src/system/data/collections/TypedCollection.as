@@ -94,7 +94,8 @@ package system.data.collections
         }
         
         /**
-         * Indicates the type of the Typeable object.
+         * Indicates the type of the Typeable object. 
+         * <p>If the type change the clear() method is invoked.</p>
          */
         public function get type():*
         {
@@ -106,7 +107,14 @@ package system.data.collections
          */
         public function set type( type:* ):void
         {
-            _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            if ( _type != type )
+            {
+                if ( _co != null && _co.size() > 0 )
+                {
+                    _co.clear() ;
+                }
+                _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
+            }
         }
         
         /**

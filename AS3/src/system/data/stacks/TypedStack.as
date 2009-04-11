@@ -83,9 +83,8 @@ package system.data.stacks
             {
                 throw new ArgumentError("The passed-in 'stack' argument not must be 'null' or 'undefined'.") ;
             }
-            _s = stack ;
             this.type = type ;
-            if ( _s.size() > 0 ) 
+            if ( stack.size() > 0 ) 
             {
                 var it:Iterator = stack.iterator() ;
                 while ( it.hasNext() ) 
@@ -93,11 +92,12 @@ package system.data.stacks
                     validate( it.next() ) ;
                 }
             }
+            _s = stack ;
         }
         
         /**
          * Indicates the type of the Typeable object. 
-         * <p>If the stack is full and if the type property is changed the clear() method is invoked.
+         * <p>If the type change the clear() method is invoked.</p>
          */
         public function get type():*
         {
@@ -109,6 +109,10 @@ package system.data.stacks
          */
         public function set type( type:* ):void
         {
+            if ( _s != null && _s.size() > 0 )
+            {
+                _s.clear() ;
+            }
             _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
         }      
         

@@ -139,11 +139,11 @@ package system.data.stacks
             
             t.type = String ;
             assertEquals( t.type   , String , "01-02 - The TypedStack type property failed." ) ;
-            assertEquals( t.size() , 2 , "01-03 - The TypedStack type property failed, not must clean the stack." ) ;
+            assertEquals( t.size() , 0 , "01-03 - The TypedStack type property failed, not must clean the stack." ) ;
             
             t.type = Number ;
             assertEquals( t.type , Number , "02-01 - The TypedStack type property failed." ) ;
-            assertEquals( t.size() , 2 , "02-02 - The TypedStack type property failed, must clean the stack." ) ;
+            assertEquals( t.size() , 0 , "02-02 - The TypedStack type property failed, must clean the stack." ) ;
             t.clear() ;
             
             var clazz:Function = function():void {} ;
