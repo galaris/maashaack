@@ -49,13 +49,13 @@ package system.data.maps
         
         public function testGetNumber():void
         {
-        	var map:Map = new ArrayMap() ;
-        	
-        	map.put("key1" , 5 ) ;
-        	map.put("key2" , "value" ) ;
-        	map.put("key3" , "123" ) ;
-        	map.put("key4" , "123a" ) ;
-        	        	
+            var map:Map = new ArrayMap() ;
+            
+            map.put("key1" , 5 ) ;
+            map.put("key2" , "value" ) ;
+            map.put("key3" , "123" ) ;
+            map.put("key4" , "123a" ) ;
+            
             assertEquals( MapUtils.getNumber(map, "key1") , 5   , "01 - MapUtils.getNumber failed" ) ;
             assertEquals( MapUtils.getNumber(map, "key2") , NaN , "02 - MapUtils.getNumber failed" ) ;
             assertEquals( MapUtils.getNumber(map, "key3") , 123 , "03 - MapUtils.getNumber failed" ) ;

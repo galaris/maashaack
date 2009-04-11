@@ -201,47 +201,47 @@ package system.data.maps
             var entry:MapEntry ;
             try
             {
-            	map.setKeyAt( 10 , "key3" ) ;
-            	fail("01-01 The setKeyAt method must throw a RangeError if the index is out of range") ;
+                map.setKeyAt( 10 , "key3" ) ;
+                fail("01-01 The setKeyAt method must throw a RangeError if the index is out of range") ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is RangeError , "01-02 The setKeyAt method must throw a RangeError if the index is out of range") ;
-            	assertEquals( e.message , "ArrayMap.setKeyAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
+                assertTrue( e is RangeError , "01-02 The setKeyAt method must throw a RangeError if the index is out of range") ;
+                assertEquals( e.message , "ArrayMap.setKeyAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
             }
             
             
             entry = map.setKeyAt( 0, "key2" ) ;
             assertNull(entry , "02 The ArrayMap.setKeyAt failed, must return null when the passed-in key already exist in the map.") ;
             
-          	entry = map.setKeyAt( 0, "key10" ) ;
-	        assertEquals( entry.key   , "key1"  , "03-01 - The ArrayMap setKeyAt method failed : " + entry ) ;
+            entry = map.setKeyAt( 0, "key10" ) ;
+            assertEquals( entry.key   , "key1"  , "03-01 - The ArrayMap setKeyAt method failed : " + entry ) ;
             assertEquals( entry.value , "value1" , "03-02 - The ArrayMap setKeyAt method failed : " + entry ) ;
             
             entry = map.setKeyAt( 0, "key1" ) ;
             
             assertEquals( entry.key   , "key10"   , "04-01 - The ArrayMap setKeyAt method failed : " + entry ) ;
             assertEquals( entry.value , "value1"  , "04-02 - The ArrayMap setKeyAt method failed : " + entry ) ;
-			
+            
         }        
 
         public function testSetValueAt():void
         {
             try
             {
-            	map.setValueAt( 10 , "the value" ) ;
-            	fail("01-01 The setValueAt method must throw a RangeError if the index is out of range") ;
+                map.setValueAt( 10 , "the value" ) ;
+                fail("01-01 The setValueAt method must throw a RangeError if the index is out of range") ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is RangeError , "01-02 The setValueAt method must throw a RangeError if the index is out of range") ;
-            	assertEquals( e.message , "ArrayMap.setValueAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
+                assertTrue( e is RangeError , "01-02 The setValueAt method must throw a RangeError if the index is out of range") ;
+                assertEquals( e.message , "ArrayMap.setValueAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
             }
             
             var entry:MapEntry ;            
 
-          	entry = map.setValueAt( 0, "value999" ) ;
-	        assertEquals( entry.key   , "key1"  , "03-01 - The ArrayMap setValueAt method failed : " + entry ) ;
+            entry = map.setValueAt( 0, "value999" ) ;
+            assertEquals( entry.key   , "key1"  , "03-01 - The ArrayMap setValueAt method failed : " + entry ) ;
             assertEquals( entry.value , "value1" , "03-02 - The ArrayMap setValueAt method failed : " + entry ) ;
             
             entry = map.setValueAt( 0, "value1" ) ;

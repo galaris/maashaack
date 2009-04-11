@@ -267,11 +267,11 @@ package system.data.maps
             
             try
             {
-            	tm.putAll(ma2) ;
+                tm.putAll(ma2) ;
             }
             catch( e:Error )
             {
-            	fail( "01 - The TypedMap putAll method failed." ) ;
+                fail( "01 - The TypedMap putAll method failed." ) ;
             }
             
             try
@@ -283,7 +283,7 @@ package system.data.maps
             {
                 assertTrue( e is TypeError , "02-02 - the putAll method must throw a TypeError.") ;   
                 assertEquals( e.message , "TypedMap.validate(1) is mismatch." , "03-02 - the putAll method must throw a TypeError.") ;
-            }  	
+            }
         }
         
         public function testRemove():void

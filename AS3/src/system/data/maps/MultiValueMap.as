@@ -43,7 +43,7 @@ package system.data.maps
     import system.data.MultiMap;
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
-    import system.eden;    
+    import system.eden;
 
     /**
      * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface.
@@ -62,26 +62,26 @@ package system.data.maps
      */
     public class MultiValueMap implements MultiMap 
     {
-
+        
         /**
          * Creates a new MultiValueMap instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.data.maps.MultiValueMap ;
          * var map:MultiValueMap = new MultiValueMap() ;
-         * trace( map ) ;
          * </pre>
-         * @param map Optional Map reference to initialize this MultiMap.
+         * @param map Optional Map reference to initialize and fill this MultiMap.
+         * @param factory Optional Map reference to create the internal Map of the MultiValueMap
          */
-        public function MultiValueMap( map:Map = null )
+        public function MultiValueMap( map:Map = null , factory:* = null )
         {
-            _map = new HashMap() ;
+            _map = ( factory != null && factory is Map ) ? factory as Map : new HashMap() ;
             if (map != null && map.size() > 0 ) 
             {
                 putAll( map.clone() ) ;
-            }
+        	}
         }
-
+        
         /**
          * Removes all elements in this map.
          * <p><b>Example :</b></p>
@@ -706,7 +706,7 @@ package system.data.maps
          * The internal Map of this MultiValueMap class.
          * @private
          */
-        protected var _map:HashMap ;
+        protected var _map:Map ;
 
     }
 }

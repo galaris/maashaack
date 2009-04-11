@@ -63,18 +63,18 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	assertNotNull( map , "" ) ;
-        	
+            assertNotNull( map , "" ) ;
+            
             assertEquals( map.get("key1") , "value1" , "1 - The HashMap constructor failed : map.get('key1')") ;
-            assertEquals( map.get("key2") , "value2" , "2 - The HashMap constructor failed : map.get('key2')") ;      	
-        	
-        	var m1:HashMap = new HashMap() ;
-        	
-        	assertEquals( m1.size() , 0 , "3 - The HashMap constructor failed : m.get('key1')") ;
-        	
-        	var m2:HashMap = new HashMap(null,["value1", "value2"]) ;
-        	assertEquals( m2.size() , 0 , "3 - The HashMap constructor failed : m.get('key1')") ;
-        	
+            assertEquals( map.get("key2") , "value2" , "2 - The HashMap constructor failed : map.get('key2')") ;          
+            
+            var m1:HashMap = new HashMap() ;
+            
+            assertEquals( m1.size() , 0 , "3 - The HashMap constructor failed : m.get('key1')") ;
+            
+            var m2:HashMap = new HashMap(null,["value1", "value2"]) ;
+            assertEquals( m2.size() , 0 , "3 - The HashMap constructor failed : m.get('key1')") ;
+            
         }         
         
         public function testClear():void
@@ -116,10 +116,10 @@ package system.data.maps
        
         public function testGetKeys():void
         {
-        	var keys:Array = map.getKeys() ;
-        	assertTrue( keys.indexOf("key1") >  -1 , "1 - The HashMap getKeys method failed.") ;
-        	assertTrue( keys.indexOf("key2") >  -1 , "2 - The HashMap getKeys method failed.") ;
-        	assertTrue( keys.indexOf("key3") == -1 , "3 - The HashMap getKeys method failed.") ;
+            var keys:Array = map.getKeys() ;
+            assertTrue( keys.indexOf("key1") >  -1 , "1 - The HashMap getKeys method failed.") ;
+            assertTrue( keys.indexOf("key2") >  -1 , "2 - The HashMap getKeys method failed.") ;
+            assertTrue( keys.indexOf("key3") == -1 , "3 - The HashMap getKeys method failed.") ;
         }         
 
         public function testGetValues():void
@@ -177,8 +177,8 @@ package system.data.maps
         
         public function testRemove():void
         {
-        	map.put("key3", "value3") ;
-        	assertEquals( map.remove("key3") ,"value3", "1 - The HashMap remove method failed.") ;
+            map.put("key3", "value3") ;
+            assertEquals( map.remove("key3") ,"value3", "1 - The HashMap remove method failed.") ;
             assertNull( map.remove("key4"), "3 - The HashMap remove method failed.") ;
         }        
        
