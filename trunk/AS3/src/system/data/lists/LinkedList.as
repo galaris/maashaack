@@ -456,15 +456,16 @@ package system.data.lists
          */
         public function indexOf( o:*, fromIndex:uint = 0 ):int
         {
-            var index:int ;
+            var index:int = fromIndex ;
             var e:LinkedListEntry ; 
             try
             {
-                e = fromIndex > 0 ? _entry(fromIndex).next : _header.next ;
+                e = fromIndex > 0 ? _entry(fromIndex) : _header.next ;
             }
             catch( er:Error )
             {
-            	e = _header.next ;
+                e     = _header.next ;
+                index = 0 ;
             }
             if ( o == null ) 
             {
@@ -527,15 +528,7 @@ package system.data.lists
         public function lastIndexOf( o:*  , fromIndex:int = 0x7FFFFFFF ):int 
         {
             var index:int = _size ;
-            var e:LinkedListEntry ;
-            try
-            {
-                e = fromIndex > 0 ? _entry(fromIndex).previous : _header.previous ;
-            }
-            catch( er:Error )
-            {
-                e = _header.previous;
-            }
+            var e:LinkedListEntry = _header.previous;
             if ( o == null ) 
             {
                 for ( ; e != _header ; e = e.previous) 

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -323,13 +323,23 @@ package system.data.lists
         public function testIndexOf():void
         {
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
-            
             assertEquals ( l.indexOf("item2"), 1 , "01 - LinkedList indexOf failed.") ;        	
             assertEquals ( l.indexOf("item4"), -1 , "02 - LinkedList indexOf failed.") ;
+        }
+        
+        public function testIndexOfWithFromIndex():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3","item4","item3"]) ;
             
-            // TODO finalize the method and test it with the fromIndex argument !!! 	
-        }         
-
+            assertEquals ( l.indexOf("item2", 1),  1 , "01-01 - LinkedList indexOf failed.") ;         
+            assertEquals ( l.indexOf("item2", 2), -1 , "01-02 - LinkedList indexOf failed.") ;
+            
+            assertEquals ( l.indexOf("item3", 1),  2 , "02-01 - LinkedList indexOf failed.") ;         
+            assertEquals ( l.indexOf("item3", 2),  2 , "02-02 - LinkedList indexOf failed.") ;  
+            assertEquals ( l.indexOf("item3", 3),  4 , "02-03 - LinkedList indexOf failed.") ;
+            assertEquals ( l.indexOf("item3", 5),  2 , "02-04 - LinkedList indexOf failed.") ; // range error, index = 0
+        } 
+        
         public function testIsEmpty():void
         {
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
@@ -358,12 +368,27 @@ package system.data.lists
         {
             var l:LinkedList = new LinkedList(["item1","item2","item3","item2","item4" ]) ;
             
-            assertEquals ( l.lastIndexOf("item2"), 3 , "01 - LinkedList lastIndexOf failed.") ;         
+            assertEquals ( l.lastIndexOf("item2"), 3 , "01 - LinkedList lastIndexOf failed.") ;
             assertEquals ( l.lastIndexOf("item5"), -1 , "02 - LinkedList lastIndexOf failed.") ;
-            
-            // TODO finalize the method and test it with the fromIndex argument !!!     
         }  
-        
+
+        public function testLastIndexOfWithFromIndex():void
+        {
+            var l:LinkedList = new LinkedList(["item1","item2","item3","item4","item3"]) ;
+
+            assertEquals ( l.lastIndexOf("item2", 0),   1 , "01-01 - LinkedList lastIndexOf failed.") ;            
+            assertEquals ( l.lastIndexOf("item2", 1),   1 , "01-01 - LinkedList lastIndexOf failed.") ;
+            assertEquals ( l.lastIndexOf("item2", 2),   1 , "01-02 - LinkedList lastIndexOf failed.") ;
+            trace("-------------------");
+//            assertEquals ( l.lastIndexOf("item3", 0), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
+//            assertEquals ( l.lastIndexOf("item3", 1), -1 , "02-01 - LinkedList lastIndexOf failed.") ;
+//            assertEquals ( l.lastIndexOf("item3", 2),  2 , "02-03 - LinkedList lastIndexOf failed.") ;
+//            assertEquals ( l.lastIndexOf("item3", 3),  2 , "02-04 - LinkedList lastIndexOf failed.") ;
+//            assertEquals ( l.lastIndexOf("item3", 4),  4 , "02-05 - LinkedList lastIndexOf failed.") ;
+//            assertEquals ( l.lastIndexOf("item3", 5),  4 , "02-06 - LinkedList lastIndexOf failed.") ;
+            trace("-------------------");
+        } 
+
         public function testListIterator():void
         {
              var it:ListIterator ;
