@@ -33,56 +33,13 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package libraries.zip  
-{
-    import buRRRn.ASTUce.framework.TestCase;	
+/*
+This program is based on zlib-1.1.3, so all credit should go authors
+Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
+and contributors of zlib.
+*/
 
-    public class Adler32Test extends TestCase 
-	{
-
-        public function Adler32Test(name:String = "")
-        {
-            super(name);
-        }
-        
-        public function testBASE():void
-        {
-            assertEquals(Adler32.BASE, 65521, "Adler32.BASE value failed.") ;
-        }
-        
-        public function testNMAX():void
-        {
-            assertEquals(Adler32.NMAX, 5552, "Adler32.NMAX value failed.") ;
-        }
-        
-        public function testConstructorBasic():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertNotNull(a, "Adler32 constructor failed") ;
-        }
-        
-        public function testReset():void
-        {
-            var a:Adler32 = new Adler32() ;
-            a.reset();
-            assertEquals( a.valueOf() , 1 , "Adler32 reset failed.") ;
-        }
-        
-        public function testToString():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertEquals(a.toString() , "1" , "Adler32 toString() failed.") ;
-        }
-        
-        public function testValueOf():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertEquals(a.valueOf() , 1 , "Adler32 default value failed.") ;
-        }
-        
-//        public function testUpdate():void
-//        {
-//            
-//        }
-    }
-}
+package libraries.zip 
+{
+    /**     * Buffer error (-5).     */    public const Z_BUF_ERROR:int = -5 ; 
+}

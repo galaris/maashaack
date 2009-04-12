@@ -33,56 +33,53 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package libraries.zip  
-{
-    import buRRRn.ASTUce.framework.TestCase;	
+/*
+This program is based on zlib-1.1.3, so all credit should go authors
+Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
+and contributors of zlib.
+*/
 
-    public class Adler32Test extends TestCase 
-	{
+package libraries.zip 
+{
+    /**     * The deflate Config class.     */    public class Config 
+    {
 
-        public function Adler32Test(name:String = "")
+        /**
+         * Creates a new Config instance.
+         */
+        public function Config( goodLength:int , maxLazy:int , niceLength:int , maxChain:int , func:int )
         {
-            super(name);
+            this.goodLength = goodLength ;
+            this.maxLazy    = maxLazy ;
+            this.niceLength = niceLength ;
+            this.maxChain   = maxChain ;
+            this.func       = func ;
         }
         
-        public function testBASE():void
-        {
-            assertEquals(Adler32.BASE, 65521, "Adler32.BASE value failed.") ;
-        }
+        /**
+         * The func value.
+         */
+        var func:int;
         
-        public function testNMAX():void
-        {
-            assertEquals(Adler32.NMAX, 5552, "Adler32.NMAX value failed.") ;
-        }
+        /**
+         * Reduce lazy search above this match length
+         */
+        var goodLength:int ; 
         
-        public function testConstructorBasic():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertNotNull(a, "Adler32 constructor failed") ;
-        }
+        /**
+         * The max chain value.
+         */
+        var maxChain:int ;
         
-        public function testReset():void
-        {
-            var a:Adler32 = new Adler32() ;
-            a.reset();
-            assertEquals( a.valueOf() , 1 , "Adler32 reset failed.") ;
-        }
+        /**
+         * Do not perform lazy search above this match length
+         */
+        var maxLazy:int ;
         
-        public function testToString():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertEquals(a.toString() , "1" , "Adler32 toString() failed.") ;
-        }
+        /**
+         * Quit search above this match length
+         */
+        var niceLength:int ; 
         
-        public function testValueOf():void
-        {
-            var a:Adler32 = new Adler32() ;
-            assertEquals(a.valueOf() , 1 , "Adler32 default value failed.") ;
-        }
-        
-//        public function testUpdate():void
-//        {
-//            
-//        }
-    }
-}
+    }
+}
