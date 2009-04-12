@@ -41,5 +41,5 @@ and contributors of zlib.
 
 package libraries.zip 
 {
-    /**     * Stream end (1).     */    public const Z_NEED_DICT:int = 1 ; 
+    /**     * Stream end (1).     */    public const Z_STREAM_END:int = 1 ; 
 }

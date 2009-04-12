@@ -42,4 +42,4 @@ and contributors of zlib.
 package libraries.zip 
 {
     /**     * Buffer error (-5).     */    public const Z_BUF_ERROR:int = -5 ; 
-}
+    }
