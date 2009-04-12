@@ -505,7 +505,7 @@ package system.data.lists
          */
         public function isEmpty():Boolean 
         {
-            return _size == 0 ;    
+            return _size == 0 ;
         }
         
        /**
@@ -1067,7 +1067,6 @@ package system.data.lists
          * @private
          */
         private var _size:uint = 0 ;
-        
         
     }
     
