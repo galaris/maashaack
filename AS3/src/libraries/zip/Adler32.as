@@ -33,6 +33,12 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
+/*
+This program is based on zlib-1.1.3, so all credit should go authors
+Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
+and contributors of zlib.
+*/
+
 package libraries.zip 
 {    import flash.utils.ByteArray;    
     /**
