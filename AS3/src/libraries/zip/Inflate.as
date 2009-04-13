@@ -40,7 +40,60 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{    [ExcludeClass]
-    
-    /**     * Best compression (9).     */    public const Z_BEST_COMPRESSION:int = 9 ; 
-    }
+{
+    /**     * This class is used for decompressing compressed data.     */    public class Inflate 
+    {
+        /**
+         * Creates a new Inflate instance.
+         */
+        public function Inflate()
+        {
+            
+        }
+        
+        /**
+         *  The current inflate blocks state.
+         */
+        public var blocks:InflateBlocks ;
+        
+        /**
+         * if BAD, inflateSync's marker bytes count.
+         */
+        public var marker:int;
+        
+        /**
+         * if FLAGS, method byte (Mode dependent information)..
+         */
+        public var method:int ; 
+      
+        /**
+         * The current inflate mode.
+         */
+        public var mode:int ;
+        
+        /**
+         * Stream check value.   
+         */
+        public var need:uint ;
+        
+        /**
+         * Flag for no wrapper (mode independent information).
+         */
+        public var nowrap:int ; 
+  
+        /**
+         * Computed check value.
+         */
+        public var was:Array = new Array(1) ;
+        
+        /**
+         * log2(window size)  (8..15, defaults to 15)
+         */
+        public var wbits:int ; 
+  
+        // constants
+        
+        /**
+         * The deflated value.
+         */
+        public static const Z_DEFLATED:int = 8 ;    }}

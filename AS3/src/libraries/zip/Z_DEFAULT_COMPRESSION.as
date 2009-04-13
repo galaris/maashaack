@@ -42,5 +42,5 @@ and contributors of zlib.
 package libraries.zip 
 {    [ExcludeClass]
     
-    /**     * Best compression (-1).     */    public const Z_DEFAULT_COMPRESSION:int = -1 ; 
+    /**     * Default compression (-1).     */    public const Z_DEFAULT_COMPRESSION:int = -1 ; 
     }
