@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * Stream error (-2).     */    public const Z_STREAM_ERROR:int = -2 ; 
 }

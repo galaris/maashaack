@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * Need a dictionnary (2).     */    public const Z_NEED_DICT:int = 2 ; 
 }

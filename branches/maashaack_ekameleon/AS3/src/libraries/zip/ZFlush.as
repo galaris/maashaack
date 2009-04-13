@@ -40,7 +40,40 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{    [ExcludeClass]
+{    import system.Enum;
+
+    /**     * The flush enumeration class.     */    public class ZFlush extends Enum 
+    {        
+        /**
+         * Creates a new ZFlush instance.
+         */
+        public function ZFlush( value:int = 0 , name:String = "" )
+        {            super(value, name);        }
+        
+        /**
+         * The "no" flush (0).
+         */
+        public static const Z_NO_FLUSH:ZFlush = new ZFlush(0, "no") ;
+        
+        /**
+         * The "partial" flush (1).
+         */
+        public static const Z_PARTIAL_FLUSH:ZFlush = new ZFlush(1, "partial") ;
+        
+        /**
+         * The "sync" flush (2).
+         */
+        public static const Z_SYNC_FLUSH:ZFlush = new ZFlush(2, "sync") ;
+        
+        /**
+         * The "full" flush (3).
+         */
+        public static const Z_FULL_FLUSH:ZFlush = new ZFlush(3, "full") ;
+        
+        /**
+         * The "finish" flush (4).
+         */
+        public static const Z_FINISH:ZFlush = new ZFlush(4, "finish") ;
+    }
     
-    /**     * Insufficient memory (-4).     */    public const Z_MEM_ERROR:int = -4 ; 
-}
+}

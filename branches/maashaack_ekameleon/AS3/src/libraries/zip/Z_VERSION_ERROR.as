@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * Incompatible version (-6).     */    public const Z_VERSION_ERROR:int = -6 ; 
 }

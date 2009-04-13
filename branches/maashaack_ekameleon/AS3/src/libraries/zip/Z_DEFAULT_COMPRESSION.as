@@ -42,5 +42,5 @@ and contributors of zlib.
 package libraries.zip 
 {    [ExcludeClass]
     
-    /**     * Insufficient memory (-4).     */    public const Z_MEM_ERROR:int = -4 ; 
-}
+    /**     * Best compression (-1).     */    public const Z_DEFAULT_COMPRESSION:int = -1 ; 
+    }
