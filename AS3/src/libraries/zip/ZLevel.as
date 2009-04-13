@@ -40,7 +40,34 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{    [ExcludeClass]
-    
-    /**     * Insufficient memory (-4).     */    public const Z_MEM_ERROR:int = -4 ; 
-}
+{    import system.Enum;
+
+    /**     * The compression levels enumeration class.     */    public class ZLevel extends Enum 
+    {        
+        /**
+         * Creates a new ZLevel instance.
+         */
+        public function ZLevel( value:int = 0 , name:String = "" )
+        {            super(value, name);        }
+        
+        /**
+         * The "best" compression level (9).
+         */
+        public static const Z_BEST_COMPRESSION:ZLevel = new ZLevel(9, "best") ;
+        
+        /**
+         * The "speed" compression level (1).
+         */
+        public static const Z_BEST_SPEED:ZLevel = new ZLevel(1, "speed") ;
+        
+        /**
+         * The "default" compression level (-1).
+         */
+        public static const Z_DEFAULT_COMPRESSION:ZLevel = new ZLevel(-1, "default") ;
+        
+        /**
+         * The "no" compression level (0).
+         */
+        public static const Z_NO_COMPRESSION:ZLevel = new ZLevel(0, "no") ;
+    }
+}

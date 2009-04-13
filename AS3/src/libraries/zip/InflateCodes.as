@@ -41,12 +41,12 @@ and contributors of zlib.
 
 package libraries.zip 
 {
-    /**     *      */    public class InfCodes 
+    /**     * The InflateCodes class.     */    public class InflateCodes 
     {
         /**
-         * Creates a new InfCodes instance. 
+         * Creates a new InflateCodes instance. 
          */
-        public function InfCodes()
+        public function InflateCodes()
         {
             
         }

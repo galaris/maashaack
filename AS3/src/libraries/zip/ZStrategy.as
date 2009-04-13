@@ -40,7 +40,31 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{    [ExcludeClass]
+{    import system.Enum;
+
+    /**     * The compression strategy enumeration class.     */    public class ZStrategy extends Enum 
+    {        
+        /**
+         * Creates a new ZStrategy instance.
+         */
+        public function ZStrategy( value:int = 0 , name:String = "" )
+        {            super(value, name);        }
+        
+        /**
+         * The "default" compression strategy (0).
+         */
+        public static const Z_DEFAULT_STRATEGY:ZStrategy = new ZStrategy(0, "default") ;
+        
+        /**
+         * The "filtered" compression strategy (1).
+         */
+        public static const Z_FILTERED:ZStrategy = new ZStrategy(1, "filtered") ;
+        
+        /**
+         * The "huffman-only" compression strategy (2).
+         */
+        public static const Z_HUFFMAN_ONLY:ZStrategy = new ZStrategy(2, "huffman-only") ;
+        
+    }
     
-    /**     * Insufficient memory (-4).     */    public const Z_MEM_ERROR:int = -4 ; 
-}
+}

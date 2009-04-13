@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * Buffer error (-5).     */    public const Z_BUF_ERROR:int = -5 ; 
     }

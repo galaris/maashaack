@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * Stream end (1).     */    public const Z_STREAM_END:int = 1 ; 
 }

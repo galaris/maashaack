@@ -40,7 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{
     /**
      * The InflateTree class.
      */
@@ -84,7 +84,7 @@ package libraries.zip
          * Bit offsets, then code stack
          */
         public var x:Array ; 
-
+        
         /**
          * Inflate the bits of the trees.
          * @param c 19 code lengths
@@ -605,7 +605,7 @@ package libraries.zip
             84 , 7 ,  67 , 0 , 8 , 122 , 0 , 8 , 58 ,   0 , 9 , 213 ,
             82 , 7 ,  19 , 0 , 8 , 106 , 0 , 8 , 42 ,   0 , 9 , 181 ,
              0 , 8 ,  10 , 0 , 8 , 138 , 0 , 8 , 74 ,   0 , 9 , 245 ,
-            80 , 7 ,   5 , 0 , 8 ,  86 , 0 , 8 , 22 , 192 , 8 ,   0 , 
+            80 , 7 ,   5 , 0 , 8 ,  86 , 0 , 8 , 22 , 192 , 8 ,   0 ,
             83 , 7 ,  51 , 0 , 8 , 118 , 0 , 8 , 54 ,   0 , 9 , 205 ,
             81 , 7 ,  15 , 0 , 8 , 102 , 0 , 8 , 38 ,   0 , 9 , 173 ,
              0 , 8 ,   6 , 0 , 8 , 134 , 0 , 8 , 70 ,   0 , 9 , 237 ,

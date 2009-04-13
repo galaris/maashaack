@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * The Z_OK value (0).     */    public const Z_OK:int = 0 ; 
 }

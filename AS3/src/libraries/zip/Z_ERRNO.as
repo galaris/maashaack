@@ -40,6 +40,7 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{
+{    [ExcludeClass]
+    
     /**     * File error (-1).     */    public const Z_ERRNO:int = -1 ; 
 }

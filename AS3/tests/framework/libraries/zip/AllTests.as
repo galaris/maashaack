@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package libraries.zip  
 {
     import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
+    import buRRRn.ASTUce.framework.TestSuite;
 
     public class AllTests
 	{
@@ -44,10 +44,11 @@ package libraries.zip
         public static function suite():ITest
         {
             
-            var suite:TestSuite = new TestSuite( "system events TESTS" );
+            var suite:TestSuite = new TestSuite( "libraries zip TESTS" );
             suite.addTestSuite( Adler32Test ) ;
+            suite.addTestSuite( ConstantsTest ) ;
             suite.addTestSuite( CRC32Test ) ;
-
+            
             return suite;
             
         }
