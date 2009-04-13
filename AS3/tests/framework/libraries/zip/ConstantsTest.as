@@ -45,6 +45,33 @@ package libraries.zip
         
         ///////////////// flush
         
+        public function testZ_NO_FLUSH():void
+        {
+            assertEquals(Z_NO_FLUSH, 0, "Z_NO_FLUSH value failed") ;
+        }
+        
+        public function testZ_PARTIAL_FLUSH():void
+        {
+            assertEquals(Z_PARTIAL_FLUSH, 1, "Z_PARTIAL_FLUSH value failed") ;
+        }
+        
+        public function testZ_SYNC_FLUSH():void
+        {
+            assertEquals(Z_SYNC_FLUSH, 2, "Z_SYNC_FLUSH value failed") ;
+        }
+        
+        public function testZ_FULL_FLUSH():void
+        {
+            assertEquals(Z_FULL_FLUSH, 3, "Z_FULL_FLUSH value failed") ;
+        }
+        
+        public function testZ_FINISH():void
+        {
+            assertEquals(Z_FINISH, 4, "Z_FINISH value failed") ;
+        }
+        
+        ///////////////// level
+        
         public function testZ_NO_COMPRESSION():void
         {
             assertEquals(Z_NO_COMPRESSION, 0, "Z_NO_COMPRESSION value failed") ;
@@ -64,8 +91,6 @@ package libraries.zip
         {
             assertEquals(Z_DEFAULT_COMPRESSION, -1, "Z_DEFAULT_COMPRESSION value failed") ;
         }
-        
-        ///////////////// level
         
         ///////////////// strategy
         
