@@ -87,6 +87,21 @@ package libraries.zip
         public var availOut:int ;
         
         /**
+         *  The best guess about the data type: ascii or binary.
+         */
+        public var dataType:int ;
+      
+        /**
+         * The Deflate state reference.
+         */
+        public var deflate:Deflate ;
+        
+        /**
+         * The Inflate state reference.
+         */
+        public var inflate:Inflate ;
+        
+        /**
          * The message value.
          */
         public var message:String;
@@ -131,11 +146,39 @@ package libraries.zip
             nextOut = null ;
             message = null ;
          }
-              
+
+        /**
+         * Read a new buffer from the current input stream, update the adler32 and total number of bytes read.
+         * <p>All deflate() input goes through this function so some applications may wish to modify 
+         * it to avoid allocating a large strm->next_in buffer and copying from it. (See also flush_pending()).</p>
+         */
+        public function readBuffer(buf:ByteArray, start:int, size:int):int 
+        {
+            var len:int = availIn ;
+            if( len > size) 
+            {
+                len = size ;
+            }
+            if( len == 0 ) 
+            {
+                return 0;
+            }
+            availIn -= len ;
+            if( deflate.noheader == 0 ) 
+            {
+            	_adler.update( adler, nextIn , nextInIndex , len ) ;
+                adler = _adler.valueOf() ;
+            }
+            byteArrayCopy( nextIn , nextInIndex , buf , start , len ) ;
+            nextInIndex += len ;
+            totalIn     += len ;
+            return len ;
+        }
+   
         /**
          * @private
          */
-        protected var _adler:Adler32 =new Adler32();
+        protected var _adler:Adler32 = new Adler32() ;
         
 //        /**
 //         * 32K LZ77 window

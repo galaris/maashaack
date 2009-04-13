@@ -40,7 +40,14 @@ and contributors of zlib.
 */
 
 package libraries.zip 
-{    [ExcludeClass]
-    
-    /**     * Best compression (9).     */    public const Z_BEST_COMPRESSION:int = 9 ; 
-    }
+{
+    /**     * This inflate blocks class.     */    public class InflateBlocks 
+    {
+        /**
+         * Creates a new InflateBlocks instance.
+         */
+        public function InflateBlocks()
+        {
+            
+        }
+            }}
