@@ -95,4 +95,6 @@ package libraries.zip
          */
         public static const Z_VERSION_ERROR:ZStatus = new ZStatus( -6 , "incompatible version" ) ;
         
-    }}
+    }
+    
+}

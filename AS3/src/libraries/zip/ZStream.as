@@ -72,6 +72,11 @@ package libraries.zip
         }
         
         /**
+         * The Adler value.
+         */
+        public var adler:uint ;
+        
+        /**
          * Number of bytes available at next_in.
          */
         public var availIn:int ;
@@ -117,18 +122,34 @@ package libraries.zip
         public var msg:String;
         
         /**
-         * 32K LZ77 window
-         * @private
+         * Free the memory of the ZStream reference.
          */
-        private static const MAX_WBITS:int = 15 ;
-
+        public function free():void
+        {
+            _adler  = null ;
+            nextIn  = null ;
+            nextOut = null ;
+            msg     = null ;
+         }
+              
         /**
          * @private
          */
-        private static const DEF_WBITS:int = MAX_WBITS ;
+        protected var _adler:Adler32 =new Adler32();
         
-        /**
-         * @private
-         */
-        private static const MAX_MEM_LEVEL:int = 9 ;
+//        /**
+//         * 32K LZ77 window
+//         * @private
+//         */
+//        private static const MAX_WBITS:int = 15 ;
+//
+//        /**
+//         * @private
+//         */
+//        private static const DEF_WBITS:int = MAX_WBITS ;
+//        
+//        /**
+//         * @private
+//         */
+//        private static const MAX_MEM_LEVEL:int = 9 ;
             }}

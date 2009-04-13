@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package libraries.zip 
 {
     
-    /**     * This function can copy an Array in an other Array.     */    internal function arrayCopy( source:Array , sourceIndex:int, dest:Array, destIndex:int, len:int):void
+    /**     * This function can copy an Array in an other Array.     */    public function arrayCopy( source:Array , sourceIndex:int, dest:Array, destIndex:int, len:int):void
     {
         while( --len > 0 )
         {
