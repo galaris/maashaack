@@ -69,6 +69,20 @@ package libraries.zip
         
         ///////////////// strategy
         
+        public function testZ_FILTERED():void
+        {
+            assertEquals(Z_FILTERED, 1, "Z_FILTERED value failed") ;
+        }
+        
+        public function testZ_HUFFMAN_ONLY():void
+        {
+            assertEquals(Z_HUFFMAN_ONLY, 2, "Z_HUFFMAN_ONLY value failed") ;
+        }
+        
+        public function testZ_DEFAULT_STRATEGY():void
+        {
+            assertEquals(Z_DEFAULT_STRATEGY, 0, "Z_DEFAULT_STRATEGY value failed") ;
+        }
         ///////////////// status
         
         public function testZ_BUF_ERROR():void
