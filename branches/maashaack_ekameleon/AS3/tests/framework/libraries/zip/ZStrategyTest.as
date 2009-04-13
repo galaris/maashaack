@@ -35,27 +35,44 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package libraries.zip  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    import system.Enum;
+    public class ZStrategyTest extends TestCase 
 	{
-        
-        public static function suite():ITest
+
+        public function ZStrategyTest(name:String = "")
         {
-            
-            var suite:TestSuite = new TestSuite( "libraries zip TESTS" );
-            suite.addTestSuite( Adler32Test ) ;
-            suite.addTestSuite( ConstantsTest ) ;
-            suite.addTestSuite( CRC32Test ) ;
-            suite.addTestSuite( ZFlushTest ) ;
-            suite.addTestSuite( ZLevelTest ) ;
-            suite.addTestSuite( ZStatusTest ) ;
-            suite.addTestSuite( ZStrategyTest ) ;
-            
-            return suite;
-            
+            super(name);
         }
         
-	}
+        public function testConstructor():void
+        {
+            var enum:ZStrategy = new ZStrategy() ;
+            assertNotNull(enum, "ZStrategy constructor failed") ;
+        }
+        
+        public function testInherit():void
+        {
+            var enum:ZStrategy = new ZStrategy() ;
+            assertNotNull(enum is Enum, "ZStrategy extends Enum failed") ;
+        }
+                
+        public function testZ_DEFAULT_STRATEGY():void
+        {
+            assertEquals(ZStrategy.Z_DEFAULT_STRATEGY.valueOf(), 0, "Z_DEFAULT_STRATEGY valueOf() failed") ;
+            assertEquals(ZStrategy.Z_DEFAULT_STRATEGY.toString(), "default", "Z_DEFAULT_STRATEGY toString() failed") ;
+        }
+        
+        public function testZ_FILTERED():void
+        {
+            assertEquals(ZStrategy.Z_FILTERED.valueOf(), 1, "Z_FILTERED valueOf() failed") ;
+            assertEquals(ZStrategy.Z_FILTERED.toString(), "filtered", "Z_FILTERED toString() failed") ;
+        }
+        
+        public function testZ_HUFFMAN_ONLY():void
+        {
+            assertEquals(ZStrategy.Z_HUFFMAN_ONLY.valueOf(), 2, "Z_HUFFMAN_ONLY valueOf() failed") ;
+            assertEquals(ZStrategy.Z_HUFFMAN_ONLY.toString(), "huffman-only", "Z_HUFFMAN_ONLY toString() failed") ;
+        }
+    }
 }

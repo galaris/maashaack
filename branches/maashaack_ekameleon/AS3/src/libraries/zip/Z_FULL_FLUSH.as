@@ -33,29 +33,14 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package libraries.zip  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+/*
+This program is based on zlib-1.1.3, so all credit should go authors
+Jean-loup Gailly(jloup@gzip.org) and Mark Adler(madler@alumni.caltech.edu)
+and contributors of zlib.
+*/
 
-    public class AllTests
-	{
-        
-        public static function suite():ITest
-        {
-            
-            var suite:TestSuite = new TestSuite( "libraries zip TESTS" );
-            suite.addTestSuite( Adler32Test ) ;
-            suite.addTestSuite( ConstantsTest ) ;
-            suite.addTestSuite( CRC32Test ) ;
-            suite.addTestSuite( ZFlushTest ) ;
-            suite.addTestSuite( ZLevelTest ) ;
-            suite.addTestSuite( ZStatusTest ) ;
-            suite.addTestSuite( ZStrategyTest ) ;
-            
-            return suite;
-            
-        }
-        
-	}
-}
+package libraries.zip 
+{    [ExcludeClass]
+    
+    /**     * Full flush (3).     */    public const Z_FULL_FLUSH:int = 3 ; 
+    }

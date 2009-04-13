@@ -101,11 +101,11 @@ package libraries.zip
             result = _huftBuild(c, 0, 19, 19, null, null, tb, bb, hp, hn, v) ;
             if(result == Z_DATA_ERROR)
             {
-                z.msg = "oversubscribed dynamic bit lengths tree";
+                z.message = "oversubscribed dynamic bit lengths tree";
             }
             else if(result == Z_BUF_ERROR || bb[0] == 0)
             {
-                z.msg = "incomplete dynamic bit lengths tree" ;
+                z.message = "incomplete dynamic bit lengths tree" ;
                 result = Z_DATA_ERROR ;
             }
             return result ;
@@ -128,16 +128,16 @@ package libraries.zip
             var result:int;
             _initWorkArea(288); // build literal/length tree
             hn[0] = 0 ;
-            result = _huftBuild(c, 0, nl, 257, cpLens, cpLext, tl, bl, hp, hn, v);
+            result = _huftBuild(c, 0, nl, 257, CP_LENS, CP_LEXT, tl, bl, hp, hn, v);
             if (result != Z_OK || bl[0] == 0)
             {
                 if(result == Z_DATA_ERROR)
                 {
-                    z.msg = "oversubscribed literal/length tree";
+                    z.message = "oversubscribed literal/length tree";
                 }
                 else if (result != Z_MEM_ERROR)
                 {
-                    z.msg = "incomplete literal/length tree";
+                    z.message = "incomplete literal/length tree";
                     result = Z_DATA_ERROR;
                 }
             }
@@ -448,7 +448,7 @@ package libraries.zip
         /**
          * Extra bits for distance codes.
          */
-        public static const cpDext:Array = 
+        public static const CP_DEXT:Array = 
         [ 
              0 ,  0 ,  0 ,  0 , 1 , 1 ,  2 ,  2 ,  3 ,  3 , 4 , 4 , 5 , 5 , 6 , 6 ,
              7 ,  7 ,  8 ,  8 , 9 , 9 , 10 , 10 , 11 , 11 ,
@@ -458,7 +458,7 @@ package libraries.zip
         /**
          * Copy offsets for distance codes 0..29.
          */
-        public static const cpDist:Array = 
+        public static const CP_DIST:Array = 
         [ 
                1 ,     2 ,     3 ,     4 ,    5 ,    7 ,    9 ,   13 ,   17 ,   25 , 33 , 49 , 65 , 97 , 129 , 193 ,
              257 ,   385 ,   513 ,   769 , 1025,  1537 , 2049 , 3073 , 4097 , 6145,
@@ -469,7 +469,7 @@ package libraries.zip
          * Copy lengths for literal codes 257..285.
          * Tables for deflate from PKZIP's appnote.txt.
          */
-        public static const cpLens:Array = 
+        public static const CP_LENS:Array = 
         [ 
              3 ,  4 ,  5 ,  6 ,  7 ,  8 ,  9 ,  10 ,  11 ,  13 ,  15 ,  17 ,  19 , 23 , 27 , 31,
             35 , 43 , 51 , 59 , 67 , 83 , 99 , 115 , 131 , 163 , 195 , 227 , 258 ,  0 ,  0
@@ -480,7 +480,7 @@ package libraries.zip
          * Extra bits for literal codes 257..285.
          * see note #13 above about 258
          */
-        public static const cpLext:Array = 
+        public static const CP_LEXT:Array = 
         [ 
             0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 1 , 2 ,   2 ,   2 , 2 ,
             3 , 3 , 3 , 3 , 4 , 4 , 4 , 4 , 5 , 5 , 5 , 5 , 0 , 112 , 112  // 112==invalid
@@ -489,17 +489,17 @@ package libraries.zip
         /**
          * The default distance desired/actual bit depth.
          */
-        public static const fixedBD:int = 5 ;
+        public static const FIXED_BD:int = 5 ;
         
         /**
          * The default literal desired/actual bit depth.
          */
-        public static const fixedBL:int = 9 ;
+        public static const FIXED_BL:int = 9 ;
         
         /**
          * The default distance tree result. 
          */
-        public static const fixedTD:Array = 
+        public static const FIXED_TD:Array = 
         [
             80 , 5 ,  1 , 87 , 5 ,  257 , 83 , 5 ,  17 ,  91 , 5 ,  4097 ,
             81 , 5 ,  5 , 89 , 5 , 1025 , 85 , 5 ,  65 ,  93 , 5 , 16385 ,
@@ -514,7 +514,7 @@ package libraries.zip
         /**
          * The default literal/length tree result.
          */
-        public static const fixedTL:Array = 
+        public static const FIXED_TL:Array = 
         [
             96 , 7 , 256 , 0 , 8 ,  80 , 0 , 8 , 16 ,  84 , 8 , 115 ,
             82 , 7 ,  31 , 0 , 8 , 112 , 0 , 8 , 48 ,   0 , 9 , 192 ,
@@ -662,10 +662,10 @@ package libraries.zip
          */
         public static function fixed( bl:Array , bd:Array , tl:Array, td:Array , z:ZStream ):int
         {
-            bl[0] = fixedBL ;
-            bd[0] = fixedBD ;
-            tl[0] = fixedTL ;
-            td[0] = fixedTD ;
+            bl[0] = FIXED_BL ;
+            bd[0] = FIXED_BD ;
+            tl[0] = FIXED_TL ;
+            td[0] = FIXED_TD ;
             return Z_OK;
         }
     }

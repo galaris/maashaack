@@ -87,6 +87,11 @@ package libraries.zip
         public var availOut:int ;
         
         /**
+         * The message value.
+         */
+        public var message:String;
+        
+        /**
          * Next input byte.
          */
         public var nextIn:ByteArray;
@@ -117,11 +122,6 @@ package libraries.zip
         public var totalOut:int;
         
         /**
-         * The message value.
-         */
-        public var msg:String;
-        
-        /**
          * Free the memory of the ZStream reference.
          */
         public function free():void
@@ -129,7 +129,7 @@ package libraries.zip
             _adler  = null ;
             nextIn  = null ;
             nextOut = null ;
-            msg     = null ;
+            message = null ;
          }
               
         /**
