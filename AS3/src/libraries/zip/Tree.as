@@ -43,6 +43,15 @@ package libraries.zip
 {
     /**     * The Tree class.     */    public class Tree 
     {
+        /**
+         * Creates a new Tree instance.
+         */
+        public function Tree()
+        {
+            
+        }
+        
+        ////// constants
         
         public static const BL_ORDER:Array =
         [

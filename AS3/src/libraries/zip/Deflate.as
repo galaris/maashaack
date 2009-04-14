@@ -49,8 +49,305 @@ package libraries.zip
          */
         public function Deflate()
         {
-            
+            depth.length = 2 * L_CODES + 1 ;
+            dynLtree     = new Array( HEAP_SIZE * 2 ) ;
+            dynDtree     = new Array( ( 2 * D_CODES  + 1 ) * 2 ) ; // distance tree
+            blTree       = new Array( ( 2 * BL_CODES + 1 ) * 2 ) ; // Huffman tree for bit lengths
         }
+        
+        //////////////////// constants
+        
+        
+        protected static const STORED:int = 0 ;
+        protected static const FAST:int   = 1 ;
+        protected static const SLOW:int   = 2 ;
+
+        protected static const configs:Array = 
+        [
+            //          good | lazy |  nice |  chain |
+             
+            new Config(    0 ,    0 ,     0 ,      0 , STORED ) ,
+            new Config(    4 ,    4 ,     8 ,      4 , FAST   ) ,
+            new Config(    4 ,    5 ,    16 ,      8 , FAST   ) ,
+            new Config(    4 ,    6 ,    32 ,     32 , FAST   ) ,
+            
+            new Config(    4 ,    4 ,    16 ,     16 , SLOW   ) ,
+            new Config(    8 ,   16 ,    32 ,     32 , SLOW   ) ,
+            new Config(    8 ,   16 ,   128 ,    128 , SLOW   ) ,
+            new Config(    8 ,   32 ,   128 ,    256 , SLOW   ) ,
+            new Config(   32 ,  128 ,   258 ,   1024 , SLOW   ) ,
+            new Config(   32 ,  258 ,   258 ,   4096 , SLOW   )
+        ];
+        
+        /**
+         * Blocks flush performed.
+         */
+        protected static const BLOCK_DONE:int = 1 ; 
+        
+        /**
+         * The size of the buffer.
+         */
+        protected static const BUFFER_SIZE:int = 8 * 2 ;
+        
+        /**
+         * Finish started, need only more output at next deflate.
+         */
+        protected static const FINISH_STARTED:int = 2;
+    
+        /**
+         * Finish done, accept no more input or output
+         */
+        protected static const FINISH_DONE:int = 3 ;
+    
+        /**
+         * Preset dictionary flag in zlib header.
+         */
+        protected static const PRESET_DICT:int = 0x20 ;
+        
+        /**
+         * The init state value.
+         */
+        protected static const INIT_STATE:int   =  42 ;
+        
+        /**
+         * The busy state value.
+         */
+        protected static const BUSY_STATE:int   = 113 ;
+        
+        /**
+         * The finish state value.
+         */
+        protected static const FINISH_STATE:int = 666 ;
+        
+        /**
+         * The deflate compression method.
+         */
+        protected static const Z_DEFLATED:int = 8;
+        
+        
+        protected static const STORED_BLOCK:int = 0 ;
+        protected static const STATIC_TREES:int = 1 ;
+        protected static const DYN_TREES:int    = 2 ;
+        
+        // The three kinds of block type
+        
+        /**
+         * The binary value.
+         */
+        protected static const Z_BINARY:int  = 0 ;
+        
+        /**
+         * The ascii value.
+         */
+        protected static const Z_ASCII:int   = 1 ;
+        
+        /**
+         * The unknow value.
+         */
+        protected static const Z_UNKNOWN:int = 2 ;
+        
+
+
+        /**
+         * Block not completed, need more input or more output.
+         */
+        protected static const NEED_MORE:int = 0 ; 
+        
+        /**
+         * Repeat previous bit length 3-6 times (2 bits of repeat count).
+         */
+        protected static const REP_3_6:int=16; 
+    
+        /**
+         * Repeat a zero length 3-10 times  (3 bits of repeat count).
+         */
+        protected static const REPZ_3_10:int=17; 
+    
+        /**
+         * Repeat a zero length 11-138 times  (7 bits of repeat count).
+         */
+        protected static const REPZ_11_138:int=18; 
+        
+        protected static const MIN_MATCH:int=3;
+        protected static const MAX_MATCH:int=258;
+        protected static const MIN_LOOKAHEAD:int=(MAX_MATCH+MIN_MATCH+1);
+    
+        protected static const MAX_BITS:int     = 15 ;
+        protected static const D_CODES:int      = 30 ;
+        protected static const BL_CODES:int     = 19 ;
+        protected static const LENGTH_CODES:int = 29 ;
+        protected static const LITERALS:int     = 256 ;
+        protected static const L_CODES:int      = LITERALS + 1 + LENGTH_CODES ;
+        protected static const HEAP_SIZE:int    = 2 * L_CODES + 1 ;
+    
+        protected static const END_BLOCK:int = 256 ;
+        
+        ////////////////////
+        
+        /**
+         * Number of codes at each bit length for an optimal tree.
+         */
+        public var blCount:Array=new Array( MAX_BITS + 1 ) ;
+        
+        /**
+         * Desc for bit length tree.
+         */
+        public var blDesc:Tree = new Tree() ;
+        
+        /**
+         * Huffman tree for bit lengths.
+         */
+        public var blTree:Array ; 
+      
+        /**
+         * Window position at the beginning of the current output block. 
+         * Gets negative when the window is moved backwards.
+         */
+        public var blockStart:int;
+        
+        /**
+         * The data type : UNKNOWN, BINARY or ASCII.
+         */
+        public var dataType:int ;
+      
+        /**
+         * Depth of each subtree used as tie breaker for trees of equal frequency.
+         */
+        public var depth:ByteArray = new ByteArray() ;
+        
+        /**
+         * desc for distance tree.
+         */
+        public var dDesc:Tree = new Tree() ; 
+        
+        /**
+         * Literal and length tree.
+         */
+        public var dynLtree:Array ; 
+      
+        /**
+         * Distance tree.
+         */
+        public var dynDtree:Array ;
+        
+        /**
+         * Use a faster search when the previous match is longer than this.
+         */
+        public var goodMatch:int ;
+        
+        /**
+         * log2(hash_size)
+         */
+        public var hashBits:int ;
+        
+        /**
+         *  hashSize - 1
+         */ 
+        public var hashMask:int ;
+        
+        /**
+         * Number of bits by which insertedHash must be shifted at each input step. 
+         * It must be such that after MIN_MATCH steps, the oldest byte no longer takes part in the hash key, that is:
+         * hashShift * MIN_MATCH >= hashBits
+         */
+        public var hashShift:int;
+        
+        /**
+         * Number of elements in hash table.
+         */
+        public var hashSize:int ;
+        
+        /**
+         * Heads of the hash chains or NIL.
+         */
+        public var head:Array ;
+        
+        /**
+         * Heap used to build the Huffman trees.
+         * <p>The sons of heap[n] are heap[2*n] and heap[2*n+1]. heap[0] is not used.</p>
+         * <p>The same heap array is used to build all trees.</p>
+         */
+        public var heap:Array = new Array( 2 * L_CODES + 1 ) ;
+        
+        /**
+         * Number of elements in the heap.
+         */
+        public var heapLen:int ;
+        
+        /**
+         * Element of largest frequency.
+         */
+        public var heapMax:int ;
+      
+        /**
+         * Hash index of string to be inserted.
+         */
+        public var insertedHash:int ;
+        
+        /**
+         *  The value of flush param for previous deflate call.
+         */
+        public var lastFlush:int ;
+      
+        /**
+         * Desc for literal tree.
+         */
+        public var lDesc:Tree = new Tree() ; 
+        
+        /**
+         * Compression level (1..9)
+         */
+        public var level:int ;
+        
+        /**
+         * Number of valid bytes ahead in window.
+         */
+        public var lookahead:int ; 
+        /**
+         * set if previous match exists
+         */
+        public var matchAvailable:int ; 
+        
+        /**
+         * length of best match
+         */
+        public var matchLength:int ;
+        
+        /**
+         * Start of matching string.
+         */
+        public var matchStart:int ;
+        
+        /**
+         * To speed up deflation, hash chains are never searched beyond this length. 
+         * A higher limit improves compression ratio but degrades the speed.
+         */
+        public var maxChainLength:int ;
+    
+        /**
+         * Attempt to find a better match only when the current match is strictly smaller than this value. This mechanism is used only for compression levels >= 4.
+         */
+        public var maxLazyMatch:int;
+        
+        /**
+         * The type of method used : STORED (for zip only) or DEFLATED.
+         */
+        public var method:int ; 
+        
+        /**
+         * Stop searching when current match exceeds this.
+         */
+        public var niceMatch:int ;
+        
+        /**
+         * Suppress zlib header and adler32.
+         */ 
+        public var noheader:int ;
+        
+        /**
+         * Number of bytes in the pending buffer.
+         */
+        public var pending:int ;
         
         /**
          * Output still pending.
@@ -62,8 +359,27 @@ package libraries.zip
          */
         public var pendingBufferSize:int ;
         
-        public var pending_out:int;      // next pending byte to output to the stream
-        public var pending:int;          // nb of bytes in the pending buffer
+        /**
+         * Next pending byte to output to the stream.
+         */
+        public var pendingOut:int ;
+         
+        /**
+         * Link to older string with same hash index. To limit the size of this array to 64K, this link is maintained only for the last 32K strings. 
+         * An index in this array is thus a window index modulo 32K.
+         */
+        public var prev:Array;
+        
+        /**
+         * Length of the best match at previous step. 
+         * Matches not greater than this are discarded. This is used in the lazy match evaluation. 
+         */
+        public var prevLength:int ;
+        
+        /**
+         * Previous match.
+         */
+        public var prevMatch:int ;
         
         /**
          * As the name implies.
@@ -75,111 +391,47 @@ package libraries.zip
          */
         public var stream:ZStream ;
         
+        /**
+         * Start of string to insert.
+         */
+        public var strstart:int ; 
+        
+        /**
+         * favor or force Huffman coding
+         */ 
+        public var strategy:int ;
+        
+        /**
+         * log2(w_size)  (8..16)
+         */
+        public var wBits:int ;
+        
+        /**
+         * This mask value is wSize - 1.
+         */
+        public var wMask:int ;
          
-        public var noheader:int;         // suppress zlib header and adler32
+        /**
+         * LZ77 window size (32K by default)
+         */
+        public var wSize:int ;
         
-        public var dataType:int;       // UNKNOWN, BINARY or ASCII
-      
-        public var method:int;          // STORED (for zip only) or DEFLATED
-        
-        public var lastFlush:int;       // value of flush param for previous deflate call
-        
-        public var wBits:int;           // log2(w_size)  (8..16)
-        public var wMask:int;           // w_size - 1
-        public var wSize:int;           // LZ77 window size (32K by default)
-        
-      // Sliding window. Input bytes are read into the second half of the window,
-      // and move to the first half later to keep a dictionary of at least wSize
-      // bytes. With this organization, matches are limited to a distance of
-      // wSize-MAX_MATCH bytes, but this ensures that IO is always
-      // performed with a length multiple of the block size. Also, it limits
-      // the window size to 64K, which is quite useful on MSDOS.
-      // To do: use the user input buffer as sliding window.
+        /**
+         * Sliding window. Input bytes are read into the second half of the window,
+         * and move to the first half later to keep a dictionary of at least wSize bytes.
+         * <p>With this organization, matches are limited to a distance of wSize-MAX_MATCH bytes, 
+         * but this ensures that IO is always performed with a length multiple of the block size. 
+         * Also, it limits the window size to 64K, which is quite useful on MSDOS.</p>
+         */
         public var window:ByteArray;
     
-      public var window_size:int;
-      // Actual size of window: 2*wSize, except when the user input buffer
-      // is directly used as sliding window.
+        /**
+         * Actual size of window: 2*wSize, except when the user input buffer is directly used as sliding window.
+         */
+        public var windowSize:int;
+        
     
-      public var /*short[]*/ prev:Array;
-      // Link to older string with same hash index. To limit the size of this
-      // array to 64K, this link is maintained only for the last 32K strings.
-      // An index in this array is thus a window index modulo 32K.
-    
-      public var /*short[]*/ head:Array; // Heads of the hash chains or NIL.
-    
-      public var ins_h:int;          // hash index of string to be inserted
-      public var hash_size:int;      // number of elements in hash table
-      public var hash_bits:int;      // log2(hash_size)
-      public var hash_mask:int;      // hash_size-1
-    
-      // Number of bits by which ins_h must be shifted at each input
-      // step. It must be such that after MIN_MATCH steps, the oldest
-      // byte no longer takes part in the hash key, that is:
-      // hash_shift * MIN_MATCH >= hash_bits
-      public var hash_shift:int;
-    
-      // Window position at the beginning of the current output block. Gets
-      // negative when the window is moved backwards.
-    
-      public var block_start:int;
-    
-      public var match_length:int;           // length of best match
-      public var prev_match:int;             // previous match
-      public var match_available:int;        // set if previous match exists
-      public var strstart:int;               // start of string to insert
-      public var match_start:int;            // start of matching string
-      public var lookahead:int;              // number of valid bytes ahead in window
-    
-      // Length of the best match at previous step. Matches not greater than this
-      // are discarded. This is used in the lazy match evaluation.
-      public var prev_length:int;
-    
-      // To speed up deflation, hash chains are never searched beyond this
-      // length.  A higher limit improves compression ratio but degrades the speed.
-      public var max_chain_length:int;
-    
-      // Attempt to find a better match only when the current match is strictly
-      // smaller than this value. This mechanism is used only for compression
-      // levels >= 4.
-      public var max_lazy_match:int;
-    
-      // Insert new strings in the hash table only if the match length is not
-      // greater than this length. This saves time but degrades compression.
-      // max_insert_length is used only for compression levels <= 3.
-    
-      public var level:int;    // compression level (1..9)
-      public var strategy:int; // favor or force Huffman coding
-    
-      // Use a faster search when the previous match is longer than this
-      public var good_match:int;
-    
-      // Stop searching when current match exceeds this
-      public var nice_match:int;
-    
-      public var /*short[]*/ dyn_ltree:Array;       // literal and length tree
-      public var /*short[]*/ dyn_dtree:Array;       // distance tree
-      public var /*short[]*/ bl_tree:Array;         // Huffman tree for bit lengths
-    
-      public var l_desc:Tree=new Tree();  // desc for literal tree
-      public var d_desc:Tree=new Tree();  // desc for distance tree
-      public var bl_desc:Tree=new Tree(); // desc for bit length tree
-    
-      // number of codes at each bit length for an optimal tree
-      public var /*short[]*/ bl_count:Array=new Array(MAX_BITS+1);
-    
-      // heap used to build the Huffman trees
-      public var /*int[]*/ heap:Array=new Array(2*L_CODES+1);
-    
-      public var heap_len:int;               // number of elements in the heap
-      public var heap_max:int;               // element of largest frequency
-      // The sons of heap[n] are heap[2*n] and heap[2*n+1]. heap[0] is not used.
-      // The same heap array is used to build all trees.
-    
-      // Depth of each subtree used as tie breaker for trees of equal frequency
-      public var depth:ByteArray =new ByteArray() ;
-    
-      public var l_buf:int;               // index for literals or lengths */
+      public var lBuffer:int;               // index for literals or lengths */
     
       // Size of match buffer for literals/lengths.  There are 4 reasons for
       // limiting lit_bufsize to 64K:
@@ -198,85 +450,84 @@ package libraries.zip
       //     fast adaptation but have of course the overhead of transmitting
       //     trees more frequently.
       //   - I can't count above 4
-      public var lit_bufsize:int;
+      public var litBuffersize:int;
     
-      public var last_lit:int;      // running index in l_buf
+      public var lastLit:int;      // running index in l_buf
     
       // Buffer for distances. To simplify the code, d_buf and l_buf have
       // the same number of elements. To use different lengths, an extra flag
       // array would be necessary.
+      
+      /**
+       * index of pendigBuffer
+       */
+      public var dBuffer:int ; 
     
-      public var d_buf:int;         // index of pendig_buf
-    
-      public var opt_len:int;        // bit length of current block with optimal trees
-      public var static_len:int;     // bit length of current block with static trees
+      public var optLength:int;        // bit length of current block with optimal trees
+      public var staticLength:int;     // bit length of current block with static trees
       public var matches:int;        // number of string matches in current block
-      public var last_eob_len:int;   // bit length of EOB code for last block
+      public var lastEobLen:int;   // bit length of EOB code for last block
     
       // Output buffer. bits are inserted starting at the bottom (least
       // significant bits).
-      public var bi_buf:int; // short
+      public var biBuffer:int; // short
       
       /**
        * Number of valid bits in bi_buf.  All bits above the last valid bit are always zero.
        */
       public var biValid:int;
-      
-      // constants
-      
-      // block not completed, need more input or more output
-      private static const NEED_MORE:int = 0 ; 
-    
-      // block flush performed
-      private static const BLOCK_DONE:int = 1 ; 
-    
-      // finish started, need only more output at next deflate
-      private static const FINISH_STARTED:int=2;
-    
-      // finish done, accept no more input or output
-      private static const FINISH_DONE:int=3;
-    
-      // preset dictionary flag in zlib header
-      private static const PRESET_DICT:int=0x20;
-    
-      private static const INIT_STATE:int=42;
-      private static const BUSY_STATE:int=113;
-      private static const FINISH_STATE:int=666;
-    
-      // The deflate compression method
-      private static const Z_DEFLATED:int=8;
-    
-      private static const STORED_BLOCK:int=0;
-      private static const STATIC_TREES:int=1;
-      private static const DYN_TREES:int=2;
-    
-      // The three kinds of block type
-      private static const Z_BINARY:int  = 0 ;
-      private static const Z_ASCII:int   = 1 ;
-      private static const Z_UNKNOWN:int = 2 ;
-    
-      private static const BUFFER_SIZE:int=8*2;
-    
-      // repeat previous bit length 3-6 times (2 bits of repeat count)
-      private static const REP_3_6:int=16; 
-    
-      // repeat a zero length 3-10 times  (3 bits of repeat count)
-      private static const REPZ_3_10:int=17; 
-    
-      // repeat a zero length 11-138 times  (7 bits of repeat count)
-      private static const REPZ_11_138:int=18; 
-    
-      private static const MIN_MATCH:int=3;
-      private static const MAX_MATCH:int=258;
-      private static const MIN_LOOKAHEAD:int=(MAX_MATCH+MIN_MATCH+1);
-    
-      private static const MAX_BITS:int=15;
-      private static const D_CODES:int=30;
-      private static const BL_CODES:int=19;
-      private static const LENGTH_CODES:int=29;
-      private static const LITERALS:int=256;
-      private static const L_CODES:int=(LITERALS+1+LENGTH_CODES);
-      private static const HEAP_SIZE:int=(2*L_CODES+1);
-    
-      private static const END_BLOCK:int=256;
+
+        /**
+         * Initialize the trees.
+         */
+        public function init_block():void
+        {
+        	var i:int ;
+            for( i = 0; i < L_CODES ; i++ ) 
+            {
+                dynLtree[ i*2 ] = 0 ;
+            }
+            for( i = 0 ; i < D_CODES ; i++ ) 
+            {
+                dynDtree[ i*2 ] = 0;
+            }
+            for( i = 0 ; i < BL_CODES ; i++ )
+            {
+                blTree[ i*2 ] = 0 ;
+            }
+
+            dynLtree[ END_BLOCK * 2 ] = 1 ;
+            optLength = staticLength = 0 ;
+            lastLit = matches = 0 ;
+        }
+
+        /**
+         * Initialize.
+         */
+        public function lmInit():void 
+        {
+            windowSize       = 2 * wSize ;
+            head[hashSize-1] = 0 ;
+            
+            for( var i:int ; i < hashSize - 1 ; i++ )
+            {
+                head[ i ] = 0 ;
+            }
+            
+            // Set the default configuration parameters:
+            
+            maxLazyMatch   = configs[level].maxLazy    ;
+            goodMatch      = configs[level].goodLength ;
+            niceMatch      = configs[level].niceLength ;
+            maxChainLength = configs[level].maxChain   ;
+            
+            blockStart     = 0 ;
+            insertedHash   = 0 ;
+            lookahead      = 0 ;
+            matchAvailable = 0 ;
+            strstart       = 0 ;
+            
+            matchLength = prevLength = MIN_MATCH - 1 ;
+        }
+        
     }}
