@@ -146,8 +146,7 @@ package libraries.zip
          */
         protected static const Z_UNKNOWN:int = 2 ;
         
-
-
+        
         /**
          * Block not completed, need more input or more output.
          */
@@ -181,6 +180,13 @@ package libraries.zip
         protected static const HEAP_SIZE:int    = 2 * L_CODES + 1 ;
     
         protected static const END_BLOCK:int = 256 ;
+        
+        public static function smaller( tree:Array , n:int, m:int, depth:ByteArray):Boolean
+        {
+            var tn2:int = tree[ n*2 ] ;
+            var tm2:int = tree[ m*2 ] ;
+            return (tn2<tm2 || (tn2==tm2 && depth[n] <= depth[m]));
+        }
         
         ////////////////////
         
@@ -288,7 +294,12 @@ package libraries.zip
          *  The value of flush param for previous deflate call.
          */
         public var lastFlush:int ;
-      
+        
+        /**
+         * Index for literals or lengths.
+         */
+        public var lBuffer:int ;
+        
         /**
          * Desc for literal tree.
          */
@@ -430,57 +441,56 @@ package libraries.zip
          */
         public var windowSize:int;
         
-    
-      public var lBuffer:int;               // index for literals or lengths */
-    
-      // Size of match buffer for literals/lengths.  There are 4 reasons for
-      // limiting lit_bufsize to 64K:
-      //   - frequencies can be kept in 16 bit counters
-      //   - if compression is not successful for the first block, all input
-      //     data is still in the window so we can still emit a stored block even
-      //     when input comes from standard input.  (This can also be done for
-      //     all blocks if lit_bufsize is not greater than 32K.)
-      //   - if compression is not successful for a file smaller than 64K, we can
-      //     even emit a stored file instead of a stored block (saving 5 bytes).
-      //     This is applicable only for zip (not gzip or zlib).
-      //   - creating new Huffman trees less frequently may not provide fast
-      //     adaptation to changes in the input data statistics. (Take for
-      //     example a binary file with poorly compressible code followed by
-      //     a highly compressible string table.) Smaller buffer sizes give
-      //     fast adaptation but have of course the overhead of transmitting
-      //     trees more frequently.
-      //   - I can't count above 4
-      public var litBuffersize:int;
-    
-      public var lastLit:int;      // running index in l_buf
-    
-      // Buffer for distances. To simplify the code, d_buf and l_buf have
-      // the same number of elements. To use different lengths, an extra flag
-      // array would be necessary.
+        
+        
+          // Size of match buffer for literals/lengths.  There are 4 reasons for
+          // limiting lit_bufsize to 64K:
+          //   - frequencies can be kept in 16 bit counters
+          //   - if compression is not successful for the first block, all input
+          //     data is still in the window so we can still emit a stored block even
+          //     when input comes from standard input.  (This can also be done for
+          //     all blocks if lit_bufsize is not greater than 32K.)
+          //   - if compression is not successful for a file smaller than 64K, we can
+          //     even emit a stored file instead of a stored block (saving 5 bytes).
+          //     This is applicable only for zip (not gzip or zlib).
+          //   - creating new Huffman trees less frequently may not provide fast
+          //     adaptation to changes in the input data statistics. (Take for
+          //     example a binary file with poorly compressible code followed by
+          //     a highly compressible string table.) Smaller buffer sizes give
+          //     fast adaptation but have of course the overhead of transmitting
+          //     trees more frequently.
+          //   - I can't count above 4
+          public var litBuffersize:int;
+        
+          public var lastLit:int;      // running index in l_buf
+        
+          // Buffer for distances. To simplify the code, d_buf and l_buf have
+          // the same number of elements. To use different lengths, an extra flag
+          // array would be necessary.
+          
+          /**
+           * index of pendigBuffer
+           */
+          public var dBuffer:int ; 
+        
+          public var optLength:int;        // bit length of current block with optimal trees
+          public var staticLength:int;     // bit length of current block with static trees
+          public var matches:int;        // number of string matches in current block
+          public var lastEobLen:int;   // bit length of EOB code for last block
+        
+          // Output buffer. bits are inserted starting at the bottom (least
+          // significant bits).
+          public var biBuffer:int; // short
       
-      /**
-       * index of pendigBuffer
-       */
-      public var dBuffer:int ; 
-    
-      public var optLength:int;        // bit length of current block with optimal trees
-      public var staticLength:int;     // bit length of current block with static trees
-      public var matches:int;        // number of string matches in current block
-      public var lastEobLen:int;   // bit length of EOB code for last block
-    
-      // Output buffer. bits are inserted starting at the bottom (least
-      // significant bits).
-      public var biBuffer:int; // short
-      
-      /**
-       * Number of valid bits in bi_buf.  All bits above the last valid bit are always zero.
-       */
-      public var biValid:int;
+        /**
+         * Number of valid bits in bi_buf.  All bits above the last valid bit are always zero.
+         */
+        public var biValid:int;
 
         /**
          * Initialize the trees.
          */
-        public function init_block():void
+        public function initBlock():void
         {
         	var i:int ;
             for( i = 0; i < L_CODES ; i++ ) 
@@ -534,4 +544,34 @@ package libraries.zip
             matchLength = prevLength = MIN_MATCH - 1 ;
         }
         
-    }}
+        /**
+         * Restore the heap property by moving down the tree starting at node k, 
+         * exchanging a node with the smallest of its two sons if necessary, stopping 
+         * when the heap property is re-established (each father smaller than its two sons).
+         * @param tree the tree to restore
+         * @param k node to move down
+         */
+        public function pqDownHeap(tree:Array, k:int ):void
+        {
+            var v:int = heap[k];
+            var j:int = k << 1;  // left son of k
+            while (j <= heapLen) 
+            {
+                // Set j to the smallest of the two sons :
+                if (j < heapLen && smaller( tree, heap[j+1] , heap[j] , depth) )
+                {
+                    j++;
+                }
+                // Exit if v is smaller than both sons
+                if(smaller(tree, v, heap[j], depth)) 
+                {
+                    break;
+                }
+                // Exchange v with the smallest son
+                heap[k] = heap[j] ;  
+                k = j ;
+                // And continue down the tree, setting j to the left son of k
+                j <<= 1 ;
+            }
+            heap[k] = v;
+          }    }}
