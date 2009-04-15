@@ -487,18 +487,20 @@ package libraries.zip
             {
                 dynLtree[ i*2 ] = 0 ;
             }
+            dynLtree[ END_BLOCK * 2 ] = 1 ;
+
             for( i = 0 ; i < D_CODES ; i++ ) 
             {
                 dynDtree[ i*2 ] = 0;
             }
+
             for( i = 0 ; i < BL_CODES ; i++ )
             {
                 blTree[ i*2 ] = 0 ;
             }
 
-            dynLtree[ END_BLOCK * 2 ] = 1 ;
             optLength = staticLength = 0 ;
-            lastLit = matches = 0 ;
+            lastLit   = matches      = 0 ;
         }
 
         /**
@@ -506,26 +508,28 @@ package libraries.zip
          */
         public function lmInit():void 
         {
-            windowSize       = 2 * wSize ;
-            head[hashSize-1] = 0 ;
-            
+            head[ hashSize - 1 ] = 0 ;
             for( var i:int ; i < hashSize - 1 ; i++ )
             {
                 head[ i ] = 0 ;
             }
             
             // Set the default configuration parameters:
-            
-            maxLazyMatch   = configs[level].maxLazy    ;
-            goodMatch      = configs[level].goodLength ;
-            niceMatch      = configs[level].niceLength ;
-            maxChainLength = configs[level].maxChain   ;
+            var conf:Config = configs[level] as Config ;
+            if ( conf != null )
+            { 
+                goodMatch      = conf.goodLength ;
+                maxChainLength = conf.maxChain   ;
+                maxLazyMatch   = conf.maxLazy    ;
+                niceMatch      = conf.niceLength ;
+            }
             
             blockStart     = 0 ;
             insertedHash   = 0 ;
             lookahead      = 0 ;
             matchAvailable = 0 ;
             strstart       = 0 ;
+            windowSize     = 2 * wSize ;
             
             matchLength = prevLength = MIN_MATCH - 1 ;
         }
