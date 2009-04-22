@@ -50,4 +50,153 @@ package libraries.zip
         {
             
         }
+        
+        /**
+         * dtree bits decoder per branch.
+         */
+        public var dbits:int ;
+        
+        /**
+         * distance back to copy from.
+         */
+        public var dist:int ; 
+        
+        /**
+         * distance tree
+         */
+        public var dtree:Array ;
+        
+        /**
+         * Distance tree index.
+         */
+        public var dtreeIndex:int ;
+         
+        /**
+         * bits to get for extra
+         */
+        public var get:int ;
+        
+        /**
+         * ltree bits decoded per branch
+         */
+        public var lbits:int ; 
+        
+        /**
+         * The literal value.
+         */
+        public var lit:int ;
+        
+        /**
+         * literal/length/eob tree
+         */
+        public var ltreeIndex:int ;
+        
+        /**
+         * literal/length/eob tree.
+         */
+        public var ltree:Array ; 
+
+        /**
+         * The mode dependent information.
+         */
+        public var len:int ;
+        
+        /**
+         * current inflate codes mode.
+         */
+        public var mode:int;
+        
+        /**
+         * Bits needed.
+         */
+        public var need:int ; 
+                
+        /**
+         * Pointer into tree.
+         */
+        public var tree:Array ;
+         
+        /**
+         * The tree index value.
+         */
+        public var treeIndex:int ;
+        
+        /**
+         * Initialize the instance.
+         */
+        public function init (bl:int, bd:int, tl:Array, tlIndex:int, td:Array, tdIndex:int ):void
+        {
+            mode       = START     ;
+            lbits      = bl & 0xFF ;
+            dbits      = bd & 0xFF ;
+            ltree      = tl        ;
+            ltreeIndex = tlIndex   ;
+            dtree      = td        ;
+            dtreeIndex = tdIndex   ;
+            tree       = null      ;
+        }
+        
+        ///////////// constants
+        
+        /**
+         * The inflate mask tab.
+         */
+        public static const INFLATE_MASK:Array = 
+        [
+            0x00000000 , 0x00000001 , 0x00000003 , 0x00000007 , 0x0000000F ,
+            0x0000001F , 0x0000003F , 0x0000007F , 0x000000FF , 0x000001FF ,
+            0x000003FF , 0x000007FF , 0x00000FFF , 0x00001FFF , 0x00003FFF ,
+            0x00007FFF , 0x0000FFFF
+        ];
+        
+        /**
+         * [nothing] set up for LEN.
+         */
+        public static const START:int = 0 ; 
+        
+        /**
+         * [input] Gets length/literal/eob next.
+         */
+        public static const LEN:int = 1 ;
+        
+        /**
+         * [input] Getting length extra (have base).
+         */
+        public static const LENEXT:int = 2 ;
+        
+        /**
+         * [input] Get distance next.
+         */
+        public static const DIST:int = 3 ;
+        
+        /**
+         * [input] Getting distance extra.
+         */
+        public static const DISTEXT:int = 4 ;
+        
+        /**
+         * [output] Copying bytes in window, waiting for space.
+         */
+        public static const COPY:int = 5 ; 
+        
+        /**
+         * [output] Got literal, waiting for output space.
+         */
+        public static const LIT:int = 6 ;
+        
+        /**
+         * [output] Got eob, possibly still output waiting.
+         */
+        public static const WASH:int = 7 ;
+        
+        /**
+         * [nothing] Got eob and all data flushed.
+         */
+        public static const END:int = 8 ;
+        
+        /**
+         * [nothing] Got error.
+         */
+        public static const BADCODE:int = 9 ;
+        
     }    }
