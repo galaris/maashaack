@@ -35,11 +35,7 @@
 
 package system
 {
-    import system.reflection.ClassInfo;
-    import system.reflection.FilterType;
-    import system.reflection.TypeInfo;
-    import system.reflection._ClassInfo;
-    import system.reflection._TypeInfo;
+    import system.reflection.* ;
     import flash.system.ApplicationDomain;
     import flash.utils.describeType;
     import flash.utils.getQualifiedClassName;
