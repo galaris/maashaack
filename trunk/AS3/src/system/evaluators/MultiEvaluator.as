@@ -70,7 +70,7 @@ package system.evaluators
     {
         /**
          * Creates a new MultiEvaluator instance.
-         * @param ...evaluators The enumeration list of <code class="prettyprint">Evaluator</code> objets or Arrays of Evaluable objects. Only Array and Evaluable objects are compatible to fill the MultiEvaluator.
+         * @param ...evaluators The enumeration list of <code class="prettyprint">Evaluable</code> objets or Arrays of Evaluable objects. Only Array and Evaluable objects are compatible to fill the MultiEvaluator.
          */
         public function MultiEvaluator( ...evaluators:Array )
         {
@@ -85,7 +85,7 @@ package system.evaluators
 
         /**
          * Inserts <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator.  
-         * @param ...evaluators The enumeration list of Evaluable objets or Arrays of Evaluator. Only Array and Evaluator are compatible to fill the MultiEvaluator.
+         * @param ...evaluators The enumeration list of Evaluable objets or Arrays of Evaluator. Only Array and Evaluable are compatible to fill the MultiEvaluator.
          */
         public function add( ...evaluators:Array ):void
         {
@@ -151,8 +151,8 @@ package system.evaluators
 
         /**
          * Removes an <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator if is register.
-         * @param evaluator The <code class="prettyprint">Evaluator</code> to find and remove.
-         * @return <code class="prettyprint">true</code> if the Evaluator is removed.
+         * @param evaluator The <code class="prettyprint">Evaluable</code> to find and remove.
+         * @return <code class="prettyprint">true</code> if the Evaluable is removed.
          */
         public function remove( evaluator:Evaluable ):Boolean
         {
@@ -180,6 +180,5 @@ package system.evaluators
          * @private
          */
         private var _evaluators:Array ;
-            
     }
 }
