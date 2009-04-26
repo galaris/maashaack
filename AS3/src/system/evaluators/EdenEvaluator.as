@@ -38,7 +38,7 @@ package system.evaluators
     import system.eden;
 
     /**
-     * Evaluates eden expression.
+     * Evaluates an eden expression.
      * <pre class="prettyprint">
      * import system.evaluators.* ;
      * var e:EdenEvaluator = new EdenEvaluator(false) ;
