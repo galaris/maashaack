@@ -37,16 +37,16 @@ package system
 {
 
     /**
-	 * Supports cloning, which creates a new instance of a class with the same value as an existing instance.
-	 */
-	public interface Cloneable 
-	{
+     * Supports cloning, which creates a new instance of a class with the same value as an existing instance.
+     */
+    public interface Cloneable 
+    {
 
-		/**
-		 * Creates and returns a shallow copy of the object.
-		 * @return A new object that is a shallow copy of this instance.
-		 */	
-		function clone():* ;
-		
-	}
+        /**
+         * Creates and returns a shallow copy of the object.
+         * @return A new object that is a shallow copy of this instance.
+         */    
+        function clone():* ;
+        
+    }
 }
