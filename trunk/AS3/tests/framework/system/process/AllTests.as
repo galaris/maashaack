@@ -40,7 +40,7 @@ package system.process
 
     import system.Environment;
     import system.hosts.HostID;
-    import system.process.cache.AllTests;
+    import system.process.caches.AllTests;
 
     public class AllTests
     {
@@ -50,7 +50,7 @@ package system.process
             var suite:TestSuite = new TestSuite("system process tests");
 
             //process.cache
-            suite.addTest( system.process.cache.AllTests.suite() );
+            suite.addTest( system.process.caches.AllTests.suite() );
             
             if( Environment.host.id != HostID.RedTamarin )
             {

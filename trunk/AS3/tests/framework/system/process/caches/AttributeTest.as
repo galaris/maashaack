@@ -33,44 +33,42 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process.cache 
-{    import buRRRn.ASTUce.framework.ArrayAssert;
+package system.process.caches 
+{	import system.process.caches.Attribute;
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class MethodTest extends TestCase
+    public class AttributeTest extends TestCase
     {
         
-        public function MethodTest(name:String = "")
+        public function AttributeTest(name:String = "")
         {
             super(name);
         }
         
         public function testConstructor():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            assertNotNull ( m                                           , "01 - Method constructor failed." ) ;
-            assertEquals  ( m.name                             , "name" , "02 - Method constructor failed." ) ;
-            ArrayAssert.assertEquals  ( m.arguments , [1,2,3]           , "03 - Method constructor failed." ) ;
+            var a:Attribute = new Attribute("name", 9999) ;
+            assertNotNull ( a              , "01 - Attribute constructor failed." ) ;
+            assertEquals  ( a.name , "name", "02 - Attribute constructor failed." ) ;
+            assertEquals  ( a.value, 9999  , "03 - Attribute constructor failed." ) ;
         }
         
         public function testName():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            assertEquals  ( m.name , "name", "01 - Method name failed." ) ;
-            m.name = "newName" ;
-            assertEquals  ( m.name, "newName"  , "02 - Method name failed." ) ;
-            m.name = null ;
-            assertEquals  ( m.name, null , "03 - Method name failed." ) ;
+            var a:Attribute = new Attribute("name", 9999) ;
+            assertEquals  ( a.name , "name", "01 - Attribute name failed." ) ;
+            a.name = "newName" ;
+            assertEquals  ( a.name, "newName"  , "02 - Attribute name failed." ) ;
+            a.name = null ;
+            assertEquals  ( a.name, null , "03 - Attribute name failed." ) ;
         }
         
-        public function testArguments():void
+        public function testValue():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            ArrayAssert.assertEquals  ( m.arguments , [1,2,3] , "01 - Method arguments failed." ) ;
-            
-            m.arguments = [4,5,6] ;
-            ArrayAssert.assertEquals  ( m.arguments , [4,5,6] , "02 - Method arguments failed." ) ;
-            
-            m.arguments = null ;
-            assertNull( m.arguments  , "03 - Method arguments failed." ) ;
+            var a:Attribute = new Attribute("name", 9999) ;
+            assertEquals  ( a.value, 9999  , "01 - Attribute value failed." ) ;
+            a.value = "newValue" ;
+            assertEquals  ( a.value, "newValue"  , "02 - Attribute value failed." ) ;
+            a.value = null ;
+            assertNull( a.value  , "03 - Attribute value failed." ) ;
         }    }}
