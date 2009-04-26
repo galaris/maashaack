@@ -35,7 +35,7 @@
 
 package system
 {
-    import system.reflection.* ;
+    import system.reflection.*;
     import flash.system.ApplicationDomain;
     import flash.utils.describeType;
     import flash.utils.getQualifiedClassName;
@@ -413,7 +413,7 @@ package system
                     case  2 : 
                         return new c( a[0], a[1] ) ;
                     case  3 : 
-                        return new c( a[0], a[1], a[2] ) ;                
+                        return new c( a[0], a[1], a[2] ) ; 
                     case  4 : 
                         return new c( a[0], a[1], a[2], a[3] ) ;
                     case  5 : 
