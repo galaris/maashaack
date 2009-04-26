@@ -36,12 +36,26 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process 
 {    import buRRRn.ASTUce.framework.TestCase;
 
+    import system.Cloneable;
+
     public class CacheTest extends TestCase
     {
         
         public function CacheTest(name:String = "")
         {
             super(name);
+        }
+        
+        public var cache:Cache ;
+        
+        public function setUp():void
+        {
+            cache = new Cache() ;
+        }
+        
+        public function tearDown():void
+        {
+            cache = null ;
         }
         
         public function testConstructor():void
@@ -57,4 +71,53 @@ package system.process
             assertEquals ( cache.target, target , "02-02 - Cache constructor failed." ) ;
         }
         
-        // TODO FINALIZE THE UNIT TESTS.    }}
+        public function testInterface():void
+        {
+            var cache:Cache = new Cache() ;
+            assertTrue( cache is Cloneable , "The Cache instance must implement the Cloneable interface." ) ;
+            assertTrue( cache is Runnable  , "The Cache instance must implement the Runnable interface." ) ;
+        }
+        
+        public function testClear():void
+        {
+            cache.enqueueAttribute("prop1", 1) ;
+            cache.enqueueAttribute("prop2", 2) ;
+            cache.enqueueAttribute("prop3", 3) ;
+            var oldSize:int = cache.size() ;
+            cache.clear() ;
+            assertEquals( oldSize  , 3  , "01 - Cache clear method failed." ) ;
+            assertNotSame( cache.size() , oldSize  , "02 - Cache clear method failed." ) ;
+            assertEquals( cache.size()  , 0  , "03 - Cache clear method failed." ) ;
+        }
+        
+        public function testClone():void
+        {
+            cache.enqueueAttribute("prop1", 1) ;
+            cache.enqueueMethod("prop2", [1,2,3]) ;
+
+            var clone:Cache = cache.clone() as Cache ;
+            assertNotNull(clone, "01 - Cache clone failed.") ;
+            assertEquals( clone.size() , cache.size() , "02 - Cache clone failed.") ;
+            
+            cache.clear() ;
+            
+            assertEquals( clone.size() , 2 , "03 - Cache clone failed.") ;
+        }
+        
+        public function testIsEmpty():void
+        {
+            assertTrue( cache.isEmpty() , "01 - The Cache isEmpty method failed." ) ;
+            cache.enqueueAttribute("prop", 1) ;
+            assertFalse( cache.isEmpty() , "02 - The Cache isEmpty method failed." ) ;
+            cache.clear() ;
+            assertTrue( cache.isEmpty() , "03 - The Cache isEmpty method failed." ) ;
+        }
+        
+        public function testSize():void
+        {
+            cache.enqueueAttribute("prop1", 1) ;
+            cache.enqueueAttribute("prop2", 2) ;
+            cache.enqueueAttribute("prop3", 3) ;
+            assertEquals( cache.size() , 3  , "Cache size method failed." ) ;
+            cache.clear() ;
+        }        }}
