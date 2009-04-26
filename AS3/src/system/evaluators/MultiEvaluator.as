@@ -68,10 +68,9 @@ package system.evaluators
      */
     public class MultiEvaluator implements Evaluable
     {
-
         /**
          * Creates a new MultiEvaluator instance.
-         * @param ...evaluators The enumeration list of <code class="prettyprint">IEvaluator</code> objets or Arrays of IEvaluator. Only Array and IEvaluator are compatible to fill the MultiEvaluator.
+         * @param ...evaluators The enumeration list of <code class="prettyprint">Evaluator</code> objets or Arrays of Evaluable objects. Only Array and Evaluable objects are compatible to fill the MultiEvaluator.
          */
         public function MultiEvaluator( ...evaluators:Array )
         {
@@ -80,13 +79,13 @@ package system.evaluators
         }
         
         /**
-         * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">IEvaluator</code> objects (in the insert method).
+         * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">Evaluable</code> objects (in the insert method).
          */
         public var autoClear:Boolean ;        
 
         /**
-         * Inserts <code class="prettyprint">IEvaluator</code> objects in the MultiEvaluator.  
-         * @param ...evaluators The enumeration list of IEvaluator objets or Arrays of IEvaluator. Only Array and IEvaluator are compatible to fill the MultiEvaluator.
+         * Inserts <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator.  
+         * @param ...evaluators The enumeration list of Evaluable objets or Arrays of Evaluator. Only Array and Evaluator are compatible to fill the MultiEvaluator.
          */
         public function add( ...evaluators:Array ):void
         {
@@ -94,17 +93,17 @@ package system.evaluators
             {
                 clear( ) ;
             }
-            var l:uint = evaluators.length ; 
+            var l:int = evaluators.length ; 
             if ( l > 0 )
             {
-                var c:uint, i:uint, j:uint ;
+                var c:int, i:int, j:int ;
                 var e:* ;
                 for ( i = 0 ; i < l ; i++ )
                 {
                     e = evaluators[i] ;
                     if ( e is Evaluable )
                     {
-                        _evaluators.push( e ) ;        
+                        _evaluators.push( e ) ;
                     }
                     else if ( e is Array )
                     {
@@ -119,27 +118,27 @@ package system.evaluators
                     }
                     else
                     {
-                        // nothing    
+                        // nothing
                     }
                 }
             }
-        }         
-
+        }
+        
         /**
-         * Clear all the <code class="prettyprint">IEvaluator</code> objects.
+         * Clear all the <code class="prettyprint">Evaluable</code> objects.
          */
         public function clear():void
         {
             _evaluators = [] ;
         }
-
+        
         /**
          * Evaluates the specified object.
          */
-        public function eval(o:*):*
+        public function eval( o:* ):*
         {
             var i:uint ;
-            var len:uint = _evaluators.length ;
+            var len:int = _evaluators.length ;
             if ( len > 0 )
             {
                 for ( i = 0 ; i < len ; i++ )
@@ -151,9 +150,9 @@ package system.evaluators
         }
 
         /**
-         * Removes an <code class="prettyprint">IEvaluator</code> objects in the MultiEvaluator if is register.
-         * @param evaluator The <code class="prettyprint">IEvaluator</code> to find and remove.
-         * @return <code class="prettyprint">true</code> if the IEvaluator is removed.
+         * Removes an <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator if is register.
+         * @param evaluator The <code class="prettyprint">Evaluator</code> to find and remove.
+         * @return <code class="prettyprint">true</code> if the Evaluator is removed.
          */
         public function remove( evaluator:Evaluable ):Boolean
         {
@@ -170,7 +169,7 @@ package system.evaluators
         }
         
         /**
-         * Clear all the <code class="prettyprint">IEvaluator</code> objects.
+         * Clear all the <code class="prettyprint">Evaluable</code> objects.
          */
         public function size():Number
         {
@@ -180,7 +179,7 @@ package system.evaluators
         /**
          * @private
          */
-        private var _evaluators:Array ; // TODO use a Set 
+        private var _evaluators:Array ;
             
     }
 }
