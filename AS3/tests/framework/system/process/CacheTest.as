@@ -37,6 +37,7 @@ package system.process
 {    import buRRRn.ASTUce.framework.TestCase;
 
     import system.Cloneable;
+    import system.process.cache.Attribute;
 
     public class CacheTest extends TestCase
     {
@@ -102,6 +103,21 @@ package system.process
             cache.clear() ;
             
             assertEquals( clone.size() , 2 , "03 - Cache clone failed.") ;
+        }
+        
+        public function testElement():void
+        {
+            assertNull(cache.element(), "01 - Cache element() failed.") ;
+            
+            cache.enqueueAttribute("prop1", 1) ;
+            
+            var elmt:Attribute = cache.element() as Attribute ;
+            
+            assertNotNull(elmt, "02-01 - Cache element failed.") ;
+            assertEquals( elmt.name  , "prop1" , "02-02 - Cache element failed.") ;
+            assertEquals( elmt.value , 1       , "02-03 - Cache element failed.") ;
+            
+            cache.clear() ;
         }
         
         public function testIsEmpty():void
