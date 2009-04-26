@@ -37,7 +37,7 @@ package system.process
 {    import buRRRn.ASTUce.framework.TestCase;
 
     import system.Cloneable;
-    import system.process.cache.Attribute;
+    import system.process.caches.Attribute;
 
     public class CacheTest extends TestCase
     {
@@ -127,6 +127,50 @@ package system.process
             assertFalse( cache.isEmpty() , "02 - The Cache isEmpty method failed." ) ;
             cache.clear() ;
             assertTrue( cache.isEmpty() , "03 - The Cache isEmpty method failed." ) ;
+        }
+        
+        public function testRun():void
+        {
+            var object:Object = {} ;
+            
+            object.a = 1 ; 
+            object.b = 2 ;
+            object.c = 3 ;
+            
+            object.method = function( value:uint , ...rest:Array ):void
+            {
+                this.c = value ;
+                if ( rest != null )
+                {
+                    var l:int = rest.length ;
+                    while(--l > -1)
+                    {
+                        this.c += rest[l];
+                    }
+                }
+            };
+            
+            var cache:Cache = new Cache() ;
+            
+            cache.enqueueAttribute("a", 10) ;
+            cache.enqueueAttribute("b", 20) ;
+            cache.enqueueMethod("method", 30) ;
+            
+            cache.target = object ;
+            
+            cache.run() ; // flush the cache and initialize the target or invoked this methods.
+            
+            assertEquals( object.a , 10  , "01 - Cache run method failed." ) ;  
+            assertEquals( object.b , 20  , "02 - Cache run method failed." ) ;  
+            assertEquals( object.c , 30  , "03 - Cache run method failed." ) ;  
+            
+            cache.enqueueMethodWithArguments("method", [10,20], [ 30,40 ]) ;
+            
+            cache.run() ; // flush the cache and initialize the target or invoked this methods.
+            
+            assertEquals( object.c , 100  , "04 - Cache run method failed." ) ;  
+            
+            cache.clear() ;
         }
         
         public function testSize():void
