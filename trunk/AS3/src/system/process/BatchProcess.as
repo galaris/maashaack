@@ -233,7 +233,7 @@ package system.process
         public function stop( ...args:Array ):*
         {
             return _batch.stop() ;
-        }           
+        }
         
         /**
          * Returns the number of Action object in this batch process.
