@@ -43,7 +43,7 @@ package system.process
     import system.data.queues.TypedQueue;
     import system.eden;
     import system.events.ActionEvent;
-    import system.process.Stoppable;    
+    import system.process.Stoppable;
 
     /**
      * A Sequencer of Action process.
@@ -84,16 +84,16 @@ package system.process
         {
             super( global, channel) ;
             setQueue( queue ) ; 
-            if (ar != null)
+            if ( ar != null )
             {
-                var l:Number = ar.length ;
+                var l:int = ar.length ;
                 if (l>0) 
                 {
-                    for (var i:Number = 0 ; i < l ; i++) 
+                    for ( var i:int = 0 ; i < l ; i++ ) 
                     {
-                        if (ar[i] is Action)
+                        if ( ar[i] is Action )
                         {
-                            addAction(ar[i]) ;
+                            addAction( ar[i] as Action ) ;
                         } 
                     }
                 }
@@ -112,7 +112,7 @@ package system.process
          * Adds a process(Action) in the Sequencer.
          * @return <code class="prettyprint">true</code> if the method success.
          */
-        public function addAction(action:Action, isClone:Boolean=false):Boolean 
+        public function addAction( action:Action , isClone:Boolean = false ):Boolean 
         {
             if ( action == null )
             {
@@ -120,7 +120,7 @@ package system.process
             }
             var a:Action = isClone ? action.clone() : action ;
             var isEnqueue:Boolean = _queue.enqueue(a) ;
-            if (isEnqueue)
+            if ( isEnqueue )
             {
                 a.addEventListener( ActionEvent.FINISH, run , false, 0 , true ) ;
             }
@@ -136,12 +136,7 @@ package system.process
         {
             if (running) 
             {
-                _cur.removeEventListener( ActionEvent.FINISH, run) ;
-                if (callback != null)
-                {
-                    callback.call( this , _cur ) ;
-                }
-                setRunning(false) ;
+                this.stop(true, callback) ;
             }
             _cur = null ;
             _queue.clear() ;
@@ -175,13 +170,13 @@ package system.process
         {
             return _internalQueue ;
         } 
-                
+        
         /**
          * Launchs the Sequencer with the first element in the internal Queue of this Sequencer.
          */
         public override function run(...arguments:Array):void 
         {
-            if (_queue.size() > 0) 
+            if ( _queue.size() > 0 ) 
             {
                 if ( !running ) 
                 {
@@ -267,16 +262,19 @@ package system.process
             var callback:Function = args[1] as Function ;
             if ( running ) 
             {
-                _cur.addEventListener(ActionEvent.FINISH, run) ;
-                if ( _cur is Stoppable )
+                if ( _cur != null )
                 {
-                    (_cur as Stoppable).stop() ;
-                }
-                if (callback != null)
-                {
-                    callback.call( this, _cur ) ;
-                }
-                _cur = null ;
+                    _cur.removeEventListener(ActionEvent.FINISH, run) ;
+                    if ( _cur is Stoppable )
+                    {
+                        (_cur as Stoppable).stop() ;
+                    }
+                    if (callback != null)
+                    {
+                        callback.call( this, _cur ) ;
+                    }
+                    _cur = null ;
+            	}
                 setRunning(false) ;
                 if ( noEvent == true ) 
                 {

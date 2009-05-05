@@ -232,7 +232,7 @@ package system.process
         protected function notifyCleared():void 
         {
             dispatchEvent( new ActionEvent( _sTypeClear, this ) ) ;
-        }    
+        }
         
         /**
          * Notify an ActionEvent when the process info is changed.
