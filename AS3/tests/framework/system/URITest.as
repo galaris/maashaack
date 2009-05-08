@@ -351,7 +351,7 @@ package system
         {
 //            var s1:String = "http://www.ics.uci.edu/pub/ietf/uri/#Related";
 //            var s2:String = "http://www.ics.uci.edu/pub/ietf/uri/?a=1&b=2#Related";
-            var s3:String = "http://username:password@www.ics.uci.edu:8080/pub/ietf/uri/?a=1&b=2#Related";
+//            var s3:String = "http://username:password@www.ics.uci.edu:8080/pub/ietf/uri/?a=1&b=2#Related";
 //            var s4:String = "tel:+1-816-555-1212";
 //            var s5:String = "mailto:John.Doe@example.com";
 //            var s6:String = "news:comp.infosystems.www.servers.unix";
@@ -372,10 +372,10 @@ package system
             //URI.parse( s1 );
             //var u1:URI = new URI( s1 );
             //var u2:URI = new URI( s2 );
-            var u3:URI = new URI( s3 );
+            //var u3:URI = new URI( s3 );
             //trace( "u3: [" + u3 + "]" );
             
-            var uri:URI = u3;
+            //var uri:URI = u3;
             
 //            trace( "scheme: " + uri.scheme );
 //            trace( "authority: " + uri.authority );

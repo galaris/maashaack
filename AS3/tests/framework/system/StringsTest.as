@@ -37,11 +37,10 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
-    import system.hosts.HostID;    
 
     public class StringsTest extends TestCase
     {
