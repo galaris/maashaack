@@ -63,11 +63,17 @@ package system.data.iterators
      * 
      * var prev:Function = function():void
      * {
+     *     var prev:* ;
      *     if ( !it.hasPrevious())
      *     {
      *         it.lastPage() ;
+     *         // use it.current() to get the current page after a it.lastPage() invokation.
+     *         prev = it.current() ; 
      *     }
-     *     var prev:* = it.previous() ;
+     *     else
+     *     {
+     *         prev = it.previous() ;
+     *     }
      *     trace( "> " + prev + " : " + it.currentPage() ) ;
      * }
      * 
