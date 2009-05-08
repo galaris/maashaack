@@ -94,14 +94,14 @@ package examples
         public function prev():void
         {
             var prev:* ;
-            if ( !it.hasPrevious())
+            if ( it.hasPrevious())
             {
-                it.lastPage() ;
-                prev = it.current() ;
+                prev = it.previous() ;
             }
             else
             {
-                prev = it.previous() ;
+                it.lastPage() ;
+                prev = it.current() ;
             }
             trace( "> prev:" + prev + " currentPage:" + it.currentPage() + " current:" + eden.serialize(it.current()) ) ;
         }
