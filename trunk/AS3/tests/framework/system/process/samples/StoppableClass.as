@@ -45,9 +45,9 @@ package system.process.samples
             //    
         }    
         
-        public function stop(...args:Array):*
+        public function stop():void
         {
-            return args ;
+            throw new Error("stop");
         }
     }
 }

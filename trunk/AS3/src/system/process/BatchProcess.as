@@ -228,11 +228,10 @@ package system.process
         
         /**
          * Stops all process in the batch.
-         * @return <code class="prettyprint">true</code> if one or more process in the batch is stopped (must be IStoppable).
          */
-        public function stop( ...args:Array ):*
+        public function stop():void
         {
-            return _batch.stop() ;
+            _batch.stop() ;
         }
         
         /**

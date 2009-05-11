@@ -35,18 +35,14 @@
 
 package system.process
 {
-
     /**
      * This interface provides a stoppable process. 
      */
     public interface Stoppable
     {
-
         /**
          * Stop the process.
          */
-        function stop( ...args:Array ):* ;
-    
+        function stop():void ;
     }
-    
 }

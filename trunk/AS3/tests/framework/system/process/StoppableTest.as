@@ -35,14 +35,12 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.process.samples.StoppableClass;    
-
+    import system.process.samples.StoppableClass;
+    
     public class StoppableTest extends TestCase 
     {
-
         public function StoppableTest( name:String = "" )
         {
             super( name );
@@ -54,9 +52,15 @@ package system.process
             
             assertTrue( s is Stoppable ) ;
             
-            ArrayAssert.assertEquals( s.stop( 1,2,3 ) , [1,2,3] , "The Stoppable interface failed.") ;
+            try
+            {
+                s.stop() ;
+                fail("01 - The Stoppable interface failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message  , "stop" , "02 - The Stoppable interface failed.") ;
+            }
         }
-            
     }
 }
-
