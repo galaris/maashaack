@@ -36,7 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.maps
 {
-    import buRRRn.ASTUce.framework.*;                                            
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
 
     public class AllTests
     {
@@ -47,9 +48,10 @@ package system.data.maps
             
             suite.addTestSuite( ArrayMapTest          ) ;
             suite.addTestSuite( HashMapTest           ) ;
-            suite.addTestSuite( MapEntryTest          ) ;            
+            suite.addTestSuite( MapEntryTest          ) ;
             suite.addTestSuite( MapFormatterTest      ) ;
             suite.addTestSuite( MapUtilsTest          ) ;
+            suite.addTestSuite( MultiSetMapTest       ) ;
             suite.addTestSuite( MultiValueMapTest     ) ;
             suite.addTestSuite( MultiMapFormatterTest ) ;
             suite.addTestSuite( SortedArrayMapTest    ) ;

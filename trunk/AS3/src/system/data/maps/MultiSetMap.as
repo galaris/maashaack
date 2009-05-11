@@ -41,7 +41,8 @@ package system.data.maps
     import system.data.Set;
     import system.data.maps.MultiValueMap;
     import system.data.sets.HashSet;
-    
+    import system.hack;
+
     /**
      * The MultiSetMap is a MutliHashMap that contains no duplicate elements in a specified key.
      * <p><b>Example :</b></p>
@@ -100,6 +101,7 @@ package system.data.maps
      */
     public class MultiSetMap extends MultiValueMap
     {
+        use namespace hack ;
         
         /**
          * Creates a new MultiSetMap instance.
@@ -111,12 +113,13 @@ package system.data.maps
          * 
          * trace( s ) ;
          * </pre>
-         * @param map Optional Map reference to initialize this MultiMap.
+         * @param map Optional Map reference to initialize and fill this MultiMap.
+         * @param factory Optional Map reference to create the internal Map of the MultiSetMap.
          */
-         public function MultiSetMap( m:Map=null )
-        {
-            super( m ) ;
+         public function MultiSetMap( map:Map=null , factory:* = null )
+         {
             _internalSet = new HashSet() ;
+            super( map , factory ) ;
         }
         
         /**
@@ -190,7 +193,7 @@ package system.data.maps
          */
         public override function createCollection():Collection 
         {
-            return new HashSet() ;    
+            return new HashSet() ; 
         }
         
         /**
@@ -239,7 +242,7 @@ package system.data.maps
                 if (_internalSet.add(value)) 
                 {
                     s.add(value) ;
-                }    
+                }
             }
         }
         
@@ -298,7 +301,7 @@ package system.data.maps
         /**
          * @private
          */
-        private var _internalSet:HashSet ;
+        hack var _internalSet:HashSet ;
 
     }
 }
