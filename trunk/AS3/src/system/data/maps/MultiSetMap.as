@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.sets
+package system.data.maps
 {
     import system.data.Collection;
     import system.data.Iterator;
@@ -42,20 +42,16 @@ package system.data.sets
     import system.data.maps.MultiValueMap;
     import system.data.sets.HashSet;
     
-    import flash.errors.IllegalOperationError;    
-    
-    // TODO finalize this class or refactoring !!
-    
     /**
-     * The MultiHashSet is a MutliHashMap that contains no duplicate elements in a specified key.
+     * The MultiSetMap is a MutliHashMap that contains no duplicate elements in a specified key.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.Collection ;
      * import system.data.collections.ArrayCollection ;
      * 
-     * import system.data.sets.MultiHashSet ;
+     * import system.data.maps.MultiSetMap ;
      * 
-     * var s:MultiHashSet = new MultiHashSet() ;
+     * var s:MultiSetMap = new MultiSetMap() ;
      * 
      * trace("----- Test put()") ;
      * 
@@ -98,46 +94,33 @@ package system.data.sets
      * 
      * s.putCollection("key1", co) ;
      * 
-     * trace("s.toString : " + s) ;
+     * trace("s : " + s) ;
      * </pre>
-     * @author eKameleon
      * @see system.data.MultiMap
      */
-    public class MultiHashSet extends MultiValueMap implements Set
+    public class MultiSetMap extends MultiValueMap
     {
         
         /**
-         * Creates a new MultiHashSet instance.
+         * Creates a new MultiSetMap instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
-         * import system.data.sets.MultiHashSet ;
+         * import system.data.sets.MultiSetMap ;
          * 
-         * var s:MultiHashSet = new MultiHashSet() ;
+         * var s:MultiSetMap = new MultiSetMap() ;
          * 
          * trace( s ) ;
          * </pre>
          * @param map Optional Map reference to initialize this MultiMap.
          */
-         public function MultiHashSet( m:Map=null )
+         public function MultiSetMap( m:Map=null )
         {
             super( m ) ;
             _internalSet = new HashSet() ;
         }
         
         /**
-         * This method always throws an <code class="prettyprint">UnsupportedOperation</code> because this method is not supported by this Set.
-         * @param o an object to insert in the MultiHashSet.
-         * @return nothing (null)
-         * @throw IllegalOperationError the MultiHashSet instance does not support the insert() method.
-         */     
-        public function add( o:* ):Boolean
-        {
-            throw new IllegalOperationError("This MultiHashSet does not support the add() method.") ;
-            return null ;
-        }        
-        
-        /**
-          * This clears each collection in the map, and so may be slow.
+         * This clears each collection in the map, and so may be slow.
          */
         public override function clear():void
         {
@@ -151,13 +134,15 @@ package system.data.sets
          */
         public override function clone():*
         {
-            var m:MultiHashSet = new MultiHashSet() ;
+            var m:MultiSetMap = new MultiSetMap() ;
             var kItr:Iterator = keyIterator() ;
             var vItr:Iterator = valueIterator() ;
+            var key:* ;
+            var value:* ;
             while ( kItr.hasNext() ) 
             {
-                var key:*   = kItr.next() ;
-                var value:* = vItr.next() ;
+                key   = kItr.next() ;
+                value = vItr.next() ;
                 m.putCollection(key, value) ;
             }
             return m ;
@@ -166,7 +151,7 @@ package system.data.sets
         /**
          * Checks whether the map contains the value specified .
          * @param o the object to search in this instance.
-         * @return <code class="prettyprint">true</code> if the MultiHashSet container the passed-in object.
+         * @return <code class="prettyprint">true</code> if the MultiSetMap container the passed-in object.
          */
         public function contains(o:*):Boolean
         {
@@ -179,7 +164,7 @@ package system.data.sets
                 {
                     continue ;
                 }
-                else if ( cur.contains(value) ) 
+                else if ( cur.contains( value ) ) 
                 {
                     return true;
                 }
@@ -189,13 +174,13 @@ package system.data.sets
     
         /**
          * Checks whether the map contains the value specified with the specified key.
-         * @param key the specified key in the MultiHashSet to search the value.
+         * @param key the specified key in the MultiSetMap to search the value.
          * @param value the object to search in this instance.
-         * @return <code class="prettyprint">true</code> if the MultiHashSet container the passed-in object.
+         * @return <code class="prettyprint">true</code> if the MultiSetMap container the passed-in object.
           */
         public function containsByKey(key:*, value:*):Boolean
         {
-            var s:Set = getSet(key) ;
+            var s:Set = getSet( key ) ;
             return (s == null) ? false : s.contains( value ) ; 
         }
         
@@ -217,16 +202,6 @@ package system.data.sets
         {
             return get( key ) as Set ;
         }
-
-        /**
-         * This method always throws an <code class="prettyprint">UnsupportedOperation</code> because this method is not supported by this Set.
-         * @throw flash.errors.IllegalOperationError the MultiHashSet instance does not support the indexOf() method.
-         */        
-        public function indexOf(o:*, fromIndex:uint=0):int
-        {
-            throw new IllegalOperationError("This MultiHashSet does not support the indexOf() method.") ;
-            return 0 ;
-        }
         
         /**
          * Adds the value to the Set associated with the specified key.
@@ -242,7 +217,7 @@ package system.data.sets
             {
                 _map.put(key , createCollection()) ;
             }
-            _map.get(key).add(value) ; // TODO fix the null value 
+            _map.get( key ).add( value ) ; // TODO fix the null value 
             return _internalSet.add(value) ;
         }
 
@@ -267,7 +242,7 @@ package system.data.sets
                 }    
             }
         }
-
+        
         /**
          * Removes a specific value from map with a specific key.
          */
