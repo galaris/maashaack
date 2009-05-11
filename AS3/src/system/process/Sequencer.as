@@ -43,6 +43,7 @@ package system.process
     import system.data.queues.TypedQueue;
     import system.eden;
     import system.events.ActionEvent;
+    import system.hack;
     import system.process.Stoppable;
 
     /**
@@ -72,6 +73,7 @@ package system.process
      */
     public class Sequencer extends CoreAction implements Serializable, Stoppable
     {
+        use namespace hack ;
         
         /**
          * Creates a new Sequencer instance.
@@ -129,22 +131,28 @@ package system.process
         
         /**
          * Removes all process in the Sequencer.
-         * @param noEvent A boolean flag to disabled the events dispatched by this method if is <code class="prettyprint">true</code>.
-         * @param callback Function to map and check the current process in progress in the sequencer before reset it.
          */
-        public function clear( noEvent:Boolean = false , callback:Function = null ):void 
+        public function clear():void 
         {
-            if (running) 
+            if ( running ) 
             {
-                this.stop(true, callback) ;
+                if ( _cur != null )
+                {
+                    _cur.removeEventListener(ActionEvent.FINISH, run) ;
+                    if ( _cur is Stoppable )
+                    {
+                        (_cur as Stoppable).stop() ;
+                    }
+                    _cur = null ;
+                }
+                setRunning( false ) ;
             }
             _cur = null ;
             _queue.clear() ;
-            if (noEvent) 
+            if ( !isLocked() ) 
             {
-                return ;
+                notifyCleared() ;
             }
-            notifyCleared() ;
         }
         
         /**
@@ -253,13 +261,9 @@ package system.process
         
         /**
          * Stops the Sequencer. Stop only the last process if is running.
-         * @param noEvent A boolean flag to disabled the events dispatched by this method if is <code class="prettyprint">true</code>.
-         * @param callback Function to map and check the current process in progress in the sequencer before reset it.
          */
-        public function stop( ...args:Array ):*
+        public function stop():void
         {
-            var noEvent:Boolean   = new Boolean( args[0] as Boolean ) ;
-            var callback:Function = args[1] as Function ;
             if ( running ) 
             {
                 if ( _cur != null )
@@ -269,27 +273,14 @@ package system.process
                     {
                         (_cur as Stoppable).stop() ;
                     }
-                    if (callback != null)
-                    {
-                        callback.call( this, _cur ) ;
-                    }
                     _cur = null ;
             	}
                 setRunning(false) ;
-                if ( noEvent == true ) 
-                {
-                    //
-                }
-                else
+                if ( !isLocked() )
                 {
                     notifyStopped() ;
                     notifyFinished() ;
                 }
-                return true ;
-            }
-            else
-            {
-                return false ;
             }
         }
         
@@ -314,7 +305,7 @@ package system.process
         /**
          * @private
          */
-        private var _cur:Action ;
+        hack var _cur:Action ;
         
         /**
          * @private

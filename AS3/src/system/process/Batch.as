@@ -177,11 +177,9 @@ package system.process
         
         /**
          * Stops the tweened animation at its current position.
-         * @return <code class="prettyprint">true</code> if one or more process in the batch is stopped (must be IStoppable).
          */
-        public function stop( ...args:Array ):*
+        public function stop():void
         {
-            var b:Boolean ;
             var a:Array = toArray() ;
             var i:int   = -1 ;
             var l:int   = a.length ;
@@ -192,11 +190,9 @@ package system.process
                     if ( a[i] is Stoppable )
                     {
                         (a[i] as Stoppable).stop() ;
-                        b = true ;
                     }
                 } 
             }
-            return b ;
         }
         
     }
