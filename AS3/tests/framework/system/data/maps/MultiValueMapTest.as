@@ -43,6 +43,7 @@ package system.data.maps
     import system.data.MultiMap;
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
+    import system.data.lists.LinkedList;
 
     public class MultiValueMapTest extends TestCase 
     {
@@ -108,6 +109,22 @@ package system.data.maps
             assertTrue( map is Map      , "2 - The MultiValueMap must implement the Map interface." ) ;
         }
 
+        public function testinternalBuildClass():void
+        {
+            var map:MultiValueMap = new MultiValueMap() ;
+            
+            assertEquals( map.internalBuildClass , ArrayCollection , "01 - internalBuildClass failed" ) ;
+            
+            map.internalBuildClass = LinkedList ;
+            assertEquals( map.internalBuildClass , LinkedList , "02 - internalBuildClass failed" ) ;
+            
+            map.internalBuildClass = null ;
+            assertEquals( map.internalBuildClass , ArrayCollection , "03 - internalBuildClass failed" ) ;
+            
+            map.internalBuildClass = Array ;
+            assertEquals( map.internalBuildClass , ArrayCollection , "04 - internalBuildClass failed" ) ;
+        }
+
         public function testClear():void 
         {
             map.put("key1" , "value1") ;
@@ -160,7 +177,7 @@ package system.data.maps
             
             assertFalse ( map.containsValue( "value3" ) , "04 - The MultiValueMap containsValue method failed." ) ;
             
-            map.clear() ;            
+            map.clear() ;
             
         } 
         
@@ -168,16 +185,13 @@ package system.data.maps
         {
             map.put( "key1" , "hello"   ) ;
             map.put( "key2" , "bonjour" ) ;
-            
             assertTrue  ( map.containsValueByKey( "key1" , "hello"   ) , "01 - The MultiValueMap containsValueByKey method failed." ) ;
             assertFalse ( map.containsValueByKey( "key1" , "bonjour" ) , "02 - The MultiValueMap containsValueByKey method failed." ) ;
-
             assertFalse ( map.containsValueByKey( "key2" , "hello"   ) , "03 - The MultiValueMap containsValueByKey method failed." ) ;
             assertTrue  ( map.containsValueByKey( "key2" , "bonjour" ) , "04 - The MultiValueMap containsValueByKey method failed." ) ;
-                        
-            map.clear() ;     
+            map.clear() ;
         }
-            
+        
         public function testCreateCollection():void
         {
             var m:MultiValueMap = new MultiValueMap() ;
@@ -186,7 +200,6 @@ package system.data.maps
             
             assertNotNull( c , "01 - The MultiValueMap createCollection method failed." ) ;
             assertTrue( c is ArrayCollection , "02 - The MultiValueMap containsValueByKey method failed." ) ;
-            
         }
 
         public function testGet():void
@@ -414,7 +427,7 @@ package system.data.maps
         
         public function testToString():void 
         {
-            map.put("key1" , "value1") ;      
+            map.put("key1" , "value1") ;
             assertEquals( map.toString() , "{key1:{value1}}"  , "1 - The MultiValueMap toString method failed.") ;
             map.clear() ;    
             assertEquals( map.toString() , "{}" , "2 - The MultiValueMap toString method failed.") ;
@@ -461,7 +474,6 @@ package system.data.maps
         
         public function testValuesIterator():void 
         {
-            
             // ArrayIterator of all values
             
             map.put("key1" , "value1") ;

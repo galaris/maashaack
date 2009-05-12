@@ -44,6 +44,7 @@ package system.data.maps
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
     import system.eden;
+    import system.hack;
 
     /**
      * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface.
@@ -62,7 +63,8 @@ package system.data.maps
      */
     public class MultiValueMap implements MultiMap 
     {
-        
+        use namespace hack ;
+         
         /**
          * Creates a new MultiValueMap instance.
          * <p><b>Example :</b></p>
@@ -80,6 +82,27 @@ package system.data.maps
             {
                 putAll( map.clone() ) ;
         	}
+        }
+        
+        /**
+         * Determinates the internal build class used in the createCollection() method to create a new collection to register all values with a new key. 
+         * The class must implements the Collection interface and by default the ArrayCollection class is used. 
+         */
+        public function get internalBuildClass():Class
+        {
+            if ( _internalBuildClass == null )
+            {
+                _internalBuildClass = ArrayCollection ;
+            }
+            return _internalBuildClass ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set internalBuildClass( clazz:Class ):void
+        {
+            _internalBuildClass = Reflection.getClassInfo(clazz).hasInterface(Collection) ? clazz : ArrayCollection ;
         }
         
         /**
@@ -215,8 +238,8 @@ package system.data.maps
          */
         public function createCollection():Collection 
         {
-            return new ArrayCollection() ; 
-        }         
+            return new internalBuildClass() ; 
+        }
         
         /**
          * Gets the collection mapped to the specified key.
@@ -360,7 +383,7 @@ package system.data.maps
         public function iteratorByKey( key:* ):Iterator
         {
             var it:Iterable = _map.get(key) as Iterable ;
-            return it == null ? null : it.iterator() ; // TODO implement an EmptyIterator ??
+            return it == null ? null : it.iterator() ; 
         }     
      
         /**
@@ -707,6 +730,10 @@ package system.data.maps
          * @private
          */
         protected var _map:Map ;
-
+        
+        /**
+         * @private
+         */
+        hack var _internalBuildClass:Class ;
     }
 }
