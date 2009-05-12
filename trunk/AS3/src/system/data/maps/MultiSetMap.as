@@ -35,6 +35,7 @@
 
 package system.data.maps
 {
+    import system.Reflection;
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Map;
@@ -44,7 +45,7 @@ package system.data.maps
     import system.hack;
 
     /**
-     * The MultiSetMap is a MutliHashMap that contains no duplicate elements in a specified key.
+     * The MultiSetMap is a MutltiMap that contains no duplicate elements in a specified key.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.Collection ;
@@ -116,10 +117,31 @@ package system.data.maps
          * @param map Optional Map reference to initialize and fill this MultiMap.
          * @param factory Optional Map reference to create the internal Map of the MultiSetMap.
          */
-         public function MultiSetMap( map:Map=null , factory:* = null )
-         {
-            _internalSet = new HashSet() ;
+        public function MultiSetMap( map:Map=null , factory:* = null )
+        {
+            internalSet = new HashSet() ;
             super( map , factory ) ;
+        }
+        
+        /**
+         * Determinates the internal build class used in the createCollection() method to create a new collection to register all values with a new key. 
+         * The class must implements the Set interface and by default the HashSet class is used. 
+         */
+        public override function get internalBuildClass():Class
+        {
+            if ( _internalBuildClass == null )
+            {
+                _internalBuildClass = HashSet ;
+            }
+            return _internalBuildClass ;
+        }
+        
+        /**
+         * @private
+         */
+        public override function set internalBuildClass( clazz:Class ):void
+        {
+            _internalBuildClass = Reflection.getClassInfo(clazz).hasInterface(Set) ? clazz : HashSet ;
         }
         
         /**
@@ -128,7 +150,7 @@ package system.data.maps
         public override function clear():void
         {
             super.clear() ;
-            _internalSet.clear() ;
+            internalSet.clear() ;
         }
         
         /**
@@ -180,20 +202,11 @@ package system.data.maps
          * @param key the specified key in the MultiSetMap to search the value.
          * @param value the object to search in this instance.
          * @return <code class="prettyprint">true</code> if the MultiSetMap container the passed-in object.
-          */
+         */
         public function containsByKey(key:*, value:*):Boolean
         {
             var s:Set = getSet( key ) ;
             return (s == null) ? false : s.contains( value ) ; 
-        }
-        
-        /**
-         * Creates a new instance of the map value Collection(Set) container.
-         * This method can be overridden to use your own Set type.
-         */
-        public override function createCollection():Collection 
-        {
-            return new HashSet() ; 
         }
         
         /**
@@ -212,16 +225,16 @@ package system.data.maps
          */
         public override function put(key:*, value:*):*
         {
-            if(_internalSet.contains(value)) 
+            if(internalSet.contains(value)) 
             {
                 return false ;
             }
-            if (!containsKey(key)) 
+            if ( !containsKey(key) ) 
             {
                 _map.put(key , createCollection()) ;
             }
             _map.get( key ).add( value ) ; // TODO fix the null value 
-            return _internalSet.add(value) ;
+            return internalSet.add(value) ;
         }
 
         /**
@@ -239,7 +252,7 @@ package system.data.maps
             while(it.hasNext()) 
             {
                 value = it.next() ;
-                if (_internalSet.add(value)) 
+                if (internalSet.add(value)) 
                 {
                     s.add(value) ;
                 }
@@ -257,7 +270,7 @@ package system.data.maps
                 var it:Iterator = s.iterator() ;
                 while(it.hasNext()) 
                 {
-                    _internalSet.remove(it.next()) ;
+                    internalSet.remove(it.next()) ;
                 }
                 _map.remove(o) ;
                 return true ;
@@ -281,7 +294,7 @@ package system.data.maps
             }
             if (c.remove(value))
             {
-                return _internalSet.remove(value) ;
+                return internalSet.remove(value) ;
             }
             else 
             {
@@ -290,8 +303,8 @@ package system.data.maps
         }
 
         /**
-         * Returns an array containing the combination of values from all keys.
-          * @return an array containing the combination of values from all keys.
+         * Returns an Array containing the combination of values from all keys.
+         * @return an Array containing the combination of values from all keys.
          */
         public function toArray():Array
         {
@@ -301,7 +314,6 @@ package system.data.maps
         /**
          * @private
          */
-        hack var _internalSet:HashSet ;
-
+        hack var internalSet:HashSet ;
     }
 }
