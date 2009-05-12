@@ -53,6 +53,13 @@ package system.comparators
      * trace( c.compare( Number(Math.cos(25)) , 0.9912028118634736 ) ) ; // 0
      * trace( c.compare(1, 0) ) ; // 1
      * trace( c.compare(0, 1) ) ; // -1
+     * 
+     * c.fixed = true ;
+     * c.fractionDigits = 3 ;
+     * trace( c.compare(  1.2356 , 1.2358 ) ) ; // 0
+     * 
+     * c.fractionDigits = 4 ;
+     * trace( c.compare(  1.2356 , 1.2358 ) ) ; // -1
      * </pre>
      */
     public class NumberComparator implements Comparator
