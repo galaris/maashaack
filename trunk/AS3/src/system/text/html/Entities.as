@@ -1,37 +1,38 @@
-﻿/*
-  Version: MPL 1.1/GPL 2.0/LGPL 2.1
+﻿
+/*
+Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at
-  http://www.mozilla.org/MPL/
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the
-  License.
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the
+License.
   
-  The Original Code is [maashaack framework].
+The Original Code is [maashaack framework].
   
-  The Initial Developers of the Original Code are
-  Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2009
-  the Initial Developers. All Rights Reserved.
+The Initial Developers of the Original Code are
+Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
+Portions created by the Initial Developers are Copyright (C) 2006-2009
+the Initial Developers. All Rights Reserved.
   
-  Contributor(s):
+Contributor(s):
   
-  Alternatively, the contents of this file may be used under the terms of
-  either the GNU General Public License Version 2 or later (the "GPL"), or
-  the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
-  in which case the provisions of the GPL or the LGPL are applicable instead
-  of those above. If you wish to allow use of your version of this file only
-  under the terms of either the GPL or the LGPL, and not to allow others to
-  use your version of this file under the terms of the MPL, indicate your
-  decision by deleting the provisions above and replace them with the notice
-  and other provisions required by the LGPL or the GPL. If you do not delete
-  the provisions above, a recipient may use your version of this file under
-  the terms of any one of the MPL, the GPL or the LGPL.
-*/
+Alternatively, the contents of this file may be used under the terms of
+either the GNU General Public License Version 2 or later (the "GPL"), or
+the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+in which case the provisions of the GPL or the LGPL are applicable instead
+of those above. If you wish to allow use of your version of this file only
+under the terms of either the GPL or the LGPL, and not to allow others to
+use your version of this file under the terms of the MPL, indicate your
+decision by deleting the provisions above and replace them with the notice
+and other provisions required by the LGPL or the GPL. If you do not delete
+the provisions above, a recipient may use your version of this file under
+the terms of any one of the MPL, the GPL or the LGPL.
+ */
 
 package system.text.html
 {
@@ -67,19 +68,19 @@ package system.text.html
         /**
          * @private
          */
-        private static var _fastSearch:Dictionary = new Dictionary( ) ;
+        private static var _fastSearch:Dictionary = new Dictionary() ;
 
         /**
          * Indicates if the class support ISO-8859-15.
          */        
-        public static var support_ISO_8859_15:Boolean = false;
+        public static var support_ISO_8859_15:Boolean ;
 
         /**
          * Inserts a new Entity element in the entities definitions.
          */
         public static function add( entity:Entity ):void
         {
-            _e.push( entity );
+            _e.push(entity);
         } 
 
         /**
@@ -99,7 +100,7 @@ package system.text.html
                 _fastSearch[ char ] ;
             }
             var l:uint = _e.length ;
-            for( var i:uint = 0 ; i < l ; i++  )
+            for( var i:uint = 0 ;i < l; i++  )
             {
                 if( _e[i].char == char )
                 {
@@ -129,9 +130,9 @@ package system.text.html
             }
             
             var l:uint = _e.length ;
-            for( var i:uint = 0 ; i < l ; i++ )
+            for( var i:uint = 0 ;i < l; i++ )
             {
-                if( _e[i].toString( ) == name )
+                if( _e[i].toString() == name )
                 {
                     _fastSearch[ name ] = i ;
                     return true ;
@@ -154,15 +155,15 @@ package system.text.html
         {
             if( _fastSearch[ char ] )
             {
-                return _e[ _fastSearch[ char ] ].toString( );
+                return _e[ _fastSearch[ char ] ].toString();
             }
             
             var l:uint = _e.length ;            
-            for( var i:uint = 0 ; i < l ; i++ )
+            for( var i:uint = 0 ;i < l; i++ )
             {
                 if( _e[i].char == char )
                 {
-                    return _e[i].toString( );
+                    return _e[i].toString();
                 }
             }
             
@@ -183,14 +184,14 @@ package system.text.html
         {
             if( _fastSearch[ name ] )
             {
-                return _e[ _fastSearch[ name ] ].valueOf( );
+                return _e[ _fastSearch[ name ] ].valueOf();
             }
             var l:uint = _e.length ;   
-            for( var i:uint = 0; i < l ; i++ )
+            for( var i:uint = 0;i < l; i++ )
             {
-                if( _e[i].toString( ) == name )
+                if( _e[i].toString() == name )
                 {
-                    return _e[i].valueOf( );
+                    return _e[i].valueOf();
                 }
             }
             
@@ -199,150 +200,149 @@ package system.text.html
         
         //ASCII Entities
         
-        add( new Entity( "\"", "quot", 34 ) ) ; // quotation mark 
-        add( new Entity( "&", "amp", 38 ) ) ; // ampersand
-        add( new Entity( "\'", "apos", 39 ) ) ; // apostrophe
-        add( new Entity( "<", "lt", 60 ) ) ; // less-than sign 
-        add( new Entity( ">", "gt", 62 ) ) ; // greater-than sign  
+        add(new Entity("\"", "quot", 34)) ; // quotation mark 
+        add(new Entity("&", "amp", 38)) ; // ampersand
+        add(new Entity("\'", "apos", 39)) ; // apostrophe
+        add(new Entity("<", "lt", 60)) ; // less-than sign 
+        add(new Entity(">", "gt", 62)) ; // greater-than sign  
         
         //ISO 8859-1 Symbol Entities
         
-        add( new Entity( " ", "nbsp", 160 ) ) ; // non-breaking space 
-        add( new Entity( "¡", "iexcl", 161 ) ) ; // inverted exclamation mark 
-        add( new Entity( "¢", "cent", 162 ) ) ; // cent sign
-        add( new Entity( "£", "pound", 163 ) ) ; // pound sign
+        add(new Entity(" ", "nbsp", 160)) ; // non-breaking space 
+        add(new Entity("¡", "iexcl", 161)) ; // inverted exclamation mark 
+        add(new Entity("¢", "cent", 162)) ; // cent sign
+        add(new Entity("£", "pound", 163)) ; // pound sign
         
-        add( new Entity( "¥", "yen", 165 ) ) ; // yen sign
+        add(new Entity("¥", "yen", 165)) ; // yen sign
         
-        add( new Entity( "§", "sect", 167 ) ) ; // section sign
+        add(new Entity("§", "sect", 167)) ; // section sign
         
-        add( new Entity( "©", "copy", 169 ) ) ; // copyright sign 
-        add( new Entity( "ª", "ordf", 170 ) ) ; // feminine ordinal indicator
-        add( new Entity( "«", "laquo", 171 ) ) ; // angle quotation mark, left
-        add( new Entity( "¬", "not", 172 ) ) ; // negation sign 
-        add( new Entity( "­", "shy", 173 ) ) ; // soft hyphen
-        add( new Entity( "®", "reg", 174 ) ) ; // circled R registered sign
-        add( new Entity( "¯", "macr", 175 ) ) ; // spacing macron
-        add( new Entity( "°", "deg", 176 ) ) ; // degree sign
-        add( new Entity( "±", "plusmn", 177 ) ) ; // plus-or-minus sign
-        add( new Entity( "²", "sup2", 178 ) ) ; // superscript 2
-        add( new Entity( "³", "sup3", 179 ) ) ; // superscript 3 
+        add(new Entity("©", "copy", 169)) ; // copyright sign 
+        add(new Entity("ª", "ordf", 170)) ; // feminine ordinal indicator
+        add(new Entity("«", "laquo", 171)) ; // angle quotation mark, left
+        add(new Entity("¬", "not", 172)) ; // negation sign 
+        add(new Entity("­", "shy", 173)) ; // soft hyphen
+        add(new Entity("®", "reg", 174)) ; // circled R registered sign
+        add(new Entity("¯", "macr", 175)) ; // spacing macron
+        add(new Entity("°", "deg", 176)) ; // degree sign
+        add(new Entity("±", "plusmn", 177)) ; // plus-or-minus sign
+        add(new Entity("²", "sup2", 178)) ; // superscript 2
+        add(new Entity("³", "sup3", 179)) ; // superscript 3 
         
-        add( new Entity( "µ", "micro", 181 ) ) ; // micro sign
-        add( new Entity( "¶", "para", 182 ) ) ; // paragraph sign
-        add( new Entity( "·", "middot", 183 ) ) ; // middle dot
+        add(new Entity("µ", "micro", 181)) ; // micro sign
+        add(new Entity("¶", "para", 182)) ; // paragraph sign
+        add(new Entity("·", "middot", 183)) ; // middle dot
         
-        add( new Entity( "¹", "sup1", 185 ) ) ; // superscript 1
-        add( new Entity( "º", "ordm", 186 ) ) ; // masculine ordinal indicator
-        add( new Entity( "»", "raquo", 187 ) ) ; // angle quotation mark, right
+        add(new Entity("¹", "sup1", 185)) ; // superscript 1
+        add(new Entity("º", "ordm", 186)) ; // masculine ordinal indicator
+        add(new Entity("»", "raquo", 187)) ; // angle quotation mark, right
           
-        add( new Entity( "¿", "iquest", 191 ) ) ; // inverted question mark  
-        add( new Entity( "×", "times", 215 ) ) ; // multiplication sign
-        add( new Entity( "÷", "divide", 247 ) ) ; // division sign 
+        add(new Entity("¿", "iquest", 191)) ; // inverted question mark  
+        add(new Entity("×", "times", 215)) ; // multiplication sign
+        add(new Entity("÷", "divide", 247)) ; // division sign 
          
         //ISO 8859-1 Character Entities
         
-        add( new Entity( "À", "Agrave", 192 ) ) ; // capital a , grave accent
-        add( new Entity( "Á", "Aacute", 193 ) ) ; // capital a , acute accent
-        add( new Entity( "Â", "Acirc", 194 ) ) ; // capital a , circumflex accent
-        add( new Entity( "Ã", "Atilde", 195 ) ) ; // capital a , tilde
-        add( new Entity( "Ä", "Auml", 196 ) ) ; // capital a , umlaut mark
-        add( new Entity( "Å", "Aring", 197 ) ) ; // capital a , ring
-        add( new Entity( "Æ", "AElig", 198 ) ) ; // capital ae
-        add( new Entity( "Ç", "Ccedil", 199 ) ) ; // capital c , cedilla
-        add( new Entity( "È", "Egrave", 200 ) ) ; // capital e , grave accent
-        add( new Entity( "É", "Eacute", 201 ) ) ; // capital e , acute accent
-        add( new Entity( "Ê", "Ecirc", 202 ) ) ; // capital e , circumflex accent
-        add( new Entity( "Ë", "Euml", 203 ) ) ; // capital e , umlaut mark
-        add( new Entity( "Ì", "Igrave", 204 ) ) ; // capital i , grave accent
-        add( new Entity( "Í", "Iacute", 205 ) ) ; // capital i , acute accent
-        add( new Entity( "Î", "Icirc", 206 ) ) ; // capital i , circumflex accent
-        add( new Entity( "Ï", "Iuml", 207 ) ) ; // capital i , umlaut mark
-        add( new Entity( "Ð", "ETH", 208 ) ) ; // capital eth , Icelandic
-        add( new Entity( "Ñ", "Ntilde", 209 ) ) ; // capital n , tilde
-        add( new Entity( "Ò", "Ograve", 210 ) ) ; // capital o , grave accent
-        add( new Entity( "Ó", "Oacute", 211 ) ) ; // capital o , acute accent
-        add( new Entity( "Ô", "Ocirc", 212 ) ) ; // capital o , circumflex accent
-        add( new Entity( "Õ", "Otilde", 213 ) ) ; // capital o , tilde
-        add( new Entity( "Ö", "Ouml", 214 ) ) ; // capital o , umlaut mark
-        add( new Entity( "Ø", "Oslash", 216 ) ) ; // capital o , slash
-        add( new Entity( "Ù", "Ugrave", 217 ) ) ; // capital u , grave accent
-        add( new Entity( "Ú", "Uacute", 218 ) ) ; // capital u , acute accent
-        add( new Entity( "Û", "Ucirc", 219 ) ) ; // capital u , circumflex accent
-        add( new Entity( "Ü", "Uuml", 220 ) ) ; // capital u , umlaut mark
-        add( new Entity( "Ý", "Yacute", 221 ) ) ; // capital y , acute accent
-        add( new Entity( "Þ", "THORN", 222 ) ) ; // capital THORN, Icelandic
-        add( new Entity( "ß", "szlig", 223 ) ) ; // small sharp s, German
-        add( new Entity( "à", "agrave", 224 ) ) ; // small a , grave accent
-        add( new Entity( "á", "aacute", 225 ) ) ; // small a , acute accent
-        add( new Entity( "â", "acirc", 226 ) ) ; // small a , circumflex accent
-        add( new Entity( "ã", "atilde", 227 ) ) ; // small a , tilde
-        add( new Entity( "ä", "auml", 228 ) ) ; // small a , umlaut mark
-        add( new Entity( "å", "aring", 229 ) ) ; // small a , ring
-        add( new Entity( "æ", "aelig", 230 ) ) ; // small ae
-        add( new Entity( "ç", "ccedil", 231 ) ) ; // small c , cedilla
-        add( new Entity( "è", "egrave", 232 ) ) ; // small e , grave accent
-        add( new Entity( "é", "eacute", 233 ) ) ; // small e , acute accent
-        add( new Entity( "ê", "ecirc", 234 ) ) ; // small e , circumflex accent
-        add( new Entity( "ë", "euml", 235 ) ) ; // small e , umlaut mark
-        add( new Entity( "ì", "igrave", 236 ) ) ; // small i , grave accent
-        add( new Entity( "í", "iacute", 237 ) ) ; // small i , acute accent
-        add( new Entity( "î", "icirc", 238 ) ) ; // small i , circumflex accent
-        add( new Entity( "ï", "iuml", 239 ) ) ; // small i , umlaut mark
-        add( new Entity( "ð", "eth", 240 ) ) ; // small eth, Icelandic
-        add( new Entity( "ñ", "ntilde", 241 ) ) ; // small n, tilde
-        add( new Entity( "ò", "ograve", 242 ) ) ; // small o, grave accent
-        add( new Entity( "ó", "oacute", 243 ) ) ; // small o, acute accent
-        add( new Entity( "ô", "ocirc", 244 ) ) ; // small o, circumflex accent
-        add( new Entity( "õ", "otilde", 245 ) ) ; // small o, tilde
-        add( new Entity( "ö", "ouml", 246 ) ) ; // small o, umlaut mark
-        add( new Entity( "ø", "oslash", 248 ) ) ; // small o, slash
-        add( new Entity( "ù", "ugrave", 249 ) ) ; // small u, grave accent
-        add( new Entity( "ú", "uacute", 250 ) ) ; // small u, acute accent
-        add( new Entity( "û", "nbsp", 251 ) ) ; // small u, circumflex accent
-        add( new Entity( "ü", "uuml", 252 ) ) ; // small u, umlaut mark
-        add( new Entity( "ý", "yacute", 253 ) ) ; // small y, acute accent
-        add( new Entity( "þ", "thorn", 254 ) ) ; // small thorn, Icelandic
-        add( new Entity( "ÿ", "yuml", 255 ) ) ; // small y, umlaut mark
+        add(new Entity("À", "Agrave", 192)) ; // capital a , grave accent
+        add(new Entity("Á", "Aacute", 193)) ; // capital a , acute accent
+        add(new Entity("Â", "Acirc", 194)) ; // capital a , circumflex accent
+        add(new Entity("Ã", "Atilde", 195)) ; // capital a , tilde
+        add(new Entity("Ä", "Auml", 196)) ; // capital a , umlaut mark
+        add(new Entity("Å", "Aring", 197)) ; // capital a , ring
+        add(new Entity("Æ", "AElig", 198)) ; // capital ae
+        add(new Entity("Ç", "Ccedil", 199)) ; // capital c , cedilla
+        add(new Entity("È", "Egrave", 200)) ; // capital e , grave accent
+        add(new Entity("É", "Eacute", 201)) ; // capital e , acute accent
+        add(new Entity("Ê", "Ecirc", 202)) ; // capital e , circumflex accent
+        add(new Entity("Ë", "Euml", 203)) ; // capital e , umlaut mark
+        add(new Entity("Ì", "Igrave", 204)) ; // capital i , grave accent
+        add(new Entity("Í", "Iacute", 205)) ; // capital i , acute accent
+        add(new Entity("Î", "Icirc", 206)) ; // capital i , circumflex accent
+        add(new Entity("Ï", "Iuml", 207)) ; // capital i , umlaut mark
+        add(new Entity("Ð", "ETH", 208)) ; // capital eth , Icelandic
+        add(new Entity("Ñ", "Ntilde", 209)) ; // capital n , tilde
+        add(new Entity("Ò", "Ograve", 210)) ; // capital o , grave accent
+        add(new Entity("Ó", "Oacute", 211)) ; // capital o , acute accent
+        add(new Entity("Ô", "Ocirc", 212)) ; // capital o , circumflex accent
+        add(new Entity("Õ", "Otilde", 213)) ; // capital o , tilde
+        add(new Entity("Ö", "Ouml", 214)) ; // capital o , umlaut mark
+        add(new Entity("Ø", "Oslash", 216)) ; // capital o , slash
+        add(new Entity("Ù", "Ugrave", 217)) ; // capital u , grave accent
+        add(new Entity("Ú", "Uacute", 218)) ; // capital u , acute accent
+        add(new Entity("Û", "Ucirc", 219)) ; // capital u , circumflex accent
+        add(new Entity("Ü", "Uuml", 220)) ; // capital u , umlaut mark
+        add(new Entity("Ý", "Yacute", 221)) ; // capital y , acute accent
+        add(new Entity("Þ", "THORN", 222)) ; // capital THORN, Icelandic
+        add(new Entity("ß", "szlig", 223)) ; // small sharp s, German
+        add(new Entity("à", "agrave", 224)) ; // small a , grave accent
+        add(new Entity("á", "aacute", 225)) ; // small a , acute accent
+        add(new Entity("â", "acirc", 226)) ; // small a , circumflex accent
+        add(new Entity("ã", "atilde", 227)) ; // small a , tilde
+        add(new Entity("ä", "auml", 228)) ; // small a , umlaut mark
+        add(new Entity("å", "aring", 229)) ; // small a , ring
+        add(new Entity("æ", "aelig", 230)) ; // small ae
+        add(new Entity("ç", "ccedil", 231)) ; // small c , cedilla
+        add(new Entity("è", "egrave", 232)) ; // small e , grave accent
+        add(new Entity("é", "eacute", 233)) ; // small e , acute accent
+        add(new Entity("ê", "ecirc", 234)) ; // small e , circumflex accent
+        add(new Entity("ë", "euml", 235)) ; // small e , umlaut mark
+        add(new Entity("ì", "igrave", 236)) ; // small i , grave accent
+        add(new Entity("í", "iacute", 237)) ; // small i , acute accent
+        add(new Entity("î", "icirc", 238)) ; // small i , circumflex accent
+        add(new Entity("ï", "iuml", 239)) ; // small i , umlaut mark
+        add(new Entity("ð", "eth", 240)) ; // small eth, Icelandic
+        add(new Entity("ñ", "ntilde", 241)) ; // small n, tilde
+        add(new Entity("ò", "ograve", 242)) ; // small o, grave accent
+        add(new Entity("ó", "oacute", 243)) ; // small o, acute accent
+        add(new Entity("ô", "ocirc", 244)) ; // small o, circumflex accent
+        add(new Entity("õ", "otilde", 245)) ; // small o, tilde
+        add(new Entity("ö", "ouml", 246)) ; // small o, umlaut mark
+        add(new Entity("ø", "oslash", 248)) ; // small o, slash
+        add(new Entity("ù", "ugrave", 249)) ; // small u, grave accent
+        add(new Entity("ú", "uacute", 250)) ; // small u, acute accent
+        add(new Entity("û", "nbsp", 251)) ; // small u, circumflex accent
+        add(new Entity("ü", "uuml", 252)) ; // small u, umlaut mark
+        add(new Entity("ý", "yacute", 253)) ; // small y, acute accent
+        add(new Entity("þ", "thorn", 254)) ; // small thorn, Icelandic
+        add(new Entity("ÿ", "yuml", 255)) ; // small y, umlaut mark
         
-        /* ISO 8859-15 Symbol Entities
-           see http://fr.wikipedia.org/wiki/ISO_8859-15
-           
-           when the option support_ISO_8859_15 is true
-           the following table will be used
-           
-           Position 0xA4 0xA6 0xA8 0xB4 0xB8 0xBC 0xBD 0xBE
-           8859-1      ¤    ¦    ¨    ´    ¸    ¼    ½    ¾
-           8859-15     €    Š    š    Ž    ž    Œ    œ    Ÿ
-        */
-        if( Entities.support_ISO_8859_15 )
-            {
-            /* TODO:
-               either we can switch
-               but in theory we could use both 8859-1 and 8859-15
-               as we have only findByChar and findByName methods
-               
-               need to be unit tested to be 100% sure
-            */
-            }
-        else
-        {
-            add( new Entity( "¤", "curren", 164 ) ) ; 
-            // currency sign
-            add( new Entity( "¦", "brvbar", 166 ) ) ; 
-            // broken vertical bar
-            add( new Entity( "¨", "uml", 168 ) ) ; 
-            // spacing diaresis
-            add( new Entity( "´", "acute", 180 ) ) ; 
-            // spacing acute
-            add( new Entity( "¸", "cedil", 184 ) ) ; 
-            // spacing cedilla
-            add( new Entity( "¼", "frac14", 188 ) ) ; 
-            // fraction 1/4
-            add( new Entity( "½", "frac12", 189 ) ) ; 
-            // fraction 1/2 
-            add( new Entity( "¾", "frac34", 190 ) ) ; // fraction 3/4
-        }
+//       ISO 8859-15 Symbol Entities
+//           see http://fr.wikipedia.org/wiki/ISO_8859-15
+//           
+//           when the option support_ISO_8859_15 is true
+//           the following table will be used
+//           
+//           Position 0xA4 0xA6 0xA8 0xB4 0xB8 0xBC 0xBD 0xBE
+//           8859-1      ¤    ¦    ¨    ´    ¸    ¼    ½    ¾
+//           8859-15     €    Š    š    Ž    ž    Œ    œ    Ÿ
+//      
+//        if( Entities.support_ISO_8859_15 )
+//        {
+//            // TODO:
+//            //   either we can switch
+//            //   but in theory we could use both 8859-1 and 8859-15
+//            //   as we have only findByChar and findByName methods
+//            //   
+//            //   need to be unit tested to be 100% sure
+//        }
+//        else
+//        {
+//            add(new Entity("¤", "curren", 164)) ; 
+//            // currency sign
+//            add(new Entity("¦", "brvbar", 166)) ; 
+//            // broken vertical bar
+//            add(new Entity("¨", "uml", 168)) ; 
+//            // spacing diaresis
+//            add(new Entity("´", "acute", 180)) ; 
+//            // spacing acute
+//            add(new Entity("¸", "cedil", 184)) ; 
+//            // spacing cedilla
+//            add(new Entity("¼", "frac14", 188)) ; 
+//            // fraction 1/4
+//            add(new Entity("½", "frac12", 189)) ; 
+//            // fraction 1/2 
+//            add(new Entity("¾", "frac34", 190)) ; // fraction 3/4
+//        }
         
         /*  
 
@@ -359,55 +359,55 @@ package system.text.html
         
         // C0 Controls and Basic Latin 
         
-        add( new Entity( "\u0022", "quot", 34 ) ) ; // quotation mark = APL quote, U+0022 ISOnum
-        add( new Entity( "\u0026", "amp", 38 ) ) ; // ampersand, U+0026 ISOnum
-        add( new Entity( "\u0060", "lt", 60 ) ) ; // less-than sign, U+003C ISOnum
-        add( new Entity( "\u0062", "gt", 62 ) ) ; // greater-than sign, U+003E ISOnum
+        add(new Entity("\u0022", "quot", 34)) ; // quotation mark = APL quote, U+0022 ISOnum
+        add(new Entity("\u0026", "amp", 38)) ; // ampersand, U+0026 ISOnum
+        add(new Entity("\u0060", "lt", 60)) ; // less-than sign, U+003C ISOnum
+        add(new Entity("\u0062", "gt", 62)) ; // greater-than sign, U+003E ISOnum
         
         // Latin Extended-A
         
-        add( new Entity( "\u0152", "OElig", 338 ) ) ; // latin capital ligature OE, U+0152 ISOlat2       
-        add( new Entity( "\u0153", "oelig", 339 ) ) ; // latin small ligature oe, U+0153 ISOlat2
+        add(new Entity("\u0152", "OElig", 338)) ; // latin capital ligature OE, U+0152 ISOlat2       
+        add(new Entity("\u0153", "oelig", 339)) ; // latin small ligature oe, U+0153 ISOlat2
         
         // Ligature is a misnomer, this is a separate character in some languages
         
-        add( new Entity( "\u0160", "Scaron", 352 ) ) ; // latin capital letter S with caron,U+0160 ISOlat2
-        add( new Entity( "\u0161", "scaron", 353 ) ) ; // latin small letter s with caron, U+0161 ISOlat2
-        add( new Entity( "\u0178", "Yuml", 376 ) ) ; // latin capital letter Y with diaeresis, U+0178 ISOlat2 
+        add(new Entity("\u0160", "Scaron", 352)) ; // latin capital letter S with caron,U+0160 ISOlat2
+        add(new Entity("\u0161", "scaron", 353)) ; // latin small letter s with caron, U+0161 ISOlat2
+        add(new Entity("\u0178", "Yuml", 376)) ; // latin capital letter Y with diaeresis, U+0178 ISOlat2 
         
         // Spacing Modifier Letters
         
-        add( new Entity( "\u02C6", "circ", 710 ) ) ; // modifier letter circumflex accent, U+02C6 ISOpub
-        add( new Entity( "\u02DC", "tilde", 732 ) ) ; // small tilde, U+02DC ISOdia       
+        add(new Entity("\u02C6", "circ", 710)) ; // modifier letter circumflex accent, U+02C6 ISOpub
+        add(new Entity("\u02DC", "tilde", 732)) ; // small tilde, U+02DC ISOdia       
         
         // General Punctuation
         
-        add( new Entity( "\u2002", "ensp", 8194 ) ) ; // en space, U+2002 ISOpub
-        add( new Entity( "\u2003", "emsp", 8195 ) ) ; // em space, U+2003 ISOpub
-        add( new Entity( "\u2009", "thinsp", 8201 ) ) ; // thin space, U+2009 ISOpub
-        add( new Entity( "\u200C", "zwnj", 8204 ) ) ; // zero width non-joiner, U+200C NEW RFC 2070
-        add( new Entity( "\u200D", "zwj", 8205 ) ) ; // zero width joiner, U+200D NEW RFC 2070
-        add( new Entity( "\u200E", "lrm", 8206 ) ) ; // left-to-right mark, U+200E NEW RFC 2070
-        add( new Entity( "\u200F", "rlm", 8207 ) ) ; // right-to-left mark, U+200F NEW RFC 2070
-        add( new Entity( "\u2013", "ndash", 8211 ) ) ; // en dash, U+2013 ISOpub
-        add( new Entity( "\u2014", "mdash", 8212 ) ) ; // em dash, U+2014 ISOpub
-        add( new Entity( "\u2018", "lsquo", 8216 ) ) ; // left single quotation mark, U+2018 ISOnum 
-        add( new Entity( "\u2019", "rsquo", 8217 ) ) ; // right single quotation mark, U+2019 ISOnum
-        add( new Entity( "\u201A", "sbquo", 8218 ) ) ; // single low-9 quotation mark, U+201A NEW
-        add( new Entity( "\u201C", "ldquo", 8220 ) ) ; // left double quotation mark,U+201C ISOnum
-        add( new Entity( "\u201D", "rdquo", 8221 ) ) ; // right double quotation mark,U+201D ISOnum 
-        add( new Entity( "\u201E", "bdquo", 8222 ) ) ; // double low-9 quotation mark, U+201E NEW 
-        add( new Entity( "\u2020", "dagger", 8224 ) ) ; // dagger, U+2020 ISOpub 
-        add( new Entity( "\u2021", "Dagger", 8225 ) ) ; // double dagger, U+2021 ISOpub 
-        add( new Entity( "\u2030", "permil", 8240 ) ) ; // per mille sign, U+2030 ISOtech
-        add( new Entity( "\u2039", "lsaquo", 8249 ) ) ; // single left-pointing angle quotation mark, U+2039 ISO proposed
+        add(new Entity("\u2002", "ensp", 8194)) ; // en space, U+2002 ISOpub
+        add(new Entity("\u2003", "emsp", 8195)) ; // em space, U+2003 ISOpub
+        add(new Entity("\u2009", "thinsp", 8201)) ; // thin space, U+2009 ISOpub
+        add(new Entity("\u200C", "zwnj", 8204)) ; // zero width non-joiner, U+200C NEW RFC 2070
+        add(new Entity("\u200D", "zwj", 8205)) ; // zero width joiner, U+200D NEW RFC 2070
+        add(new Entity("\u200E", "lrm", 8206)) ; // left-to-right mark, U+200E NEW RFC 2070
+        add(new Entity("\u200F", "rlm", 8207)) ; // right-to-left mark, U+200F NEW RFC 2070
+        add(new Entity("\u2013", "ndash", 8211)) ; // en dash, U+2013 ISOpub
+        add(new Entity("\u2014", "mdash", 8212)) ; // em dash, U+2014 ISOpub
+        add(new Entity("\u2018", "lsquo", 8216)) ; // left single quotation mark, U+2018 ISOnum 
+        add(new Entity("\u2019", "rsquo", 8217)) ; // right single quotation mark, U+2019 ISOnum
+        add(new Entity("\u201A", "sbquo", 8218)) ; // single low-9 quotation mark, U+201A NEW
+        add(new Entity("\u201C", "ldquo", 8220)) ; // left double quotation mark,U+201C ISOnum
+        add(new Entity("\u201D", "rdquo", 8221)) ; // right double quotation mark,U+201D ISOnum 
+        add(new Entity("\u201E", "bdquo", 8222)) ; // double low-9 quotation mark, U+201E NEW 
+        add(new Entity("\u2020", "dagger", 8224)) ; // dagger, U+2020 ISOpub 
+        add(new Entity("\u2021", "Dagger", 8225)) ; // double dagger, U+2021 ISOpub 
+        add(new Entity("\u2030", "permil", 8240)) ; // per mille sign, U+2030 ISOtech
+        add(new Entity("\u2039", "lsaquo", 8249)) ; // single left-pointing angle quotation mark, U+2039 ISO proposed
                                  
         // lsaquo is proposed but not yet ISO standardized
         
-        add( new Entity( "\u8250", "rsaquo", 8250 ) ) ; // single right-pointing angle quotation mark, U+203A ISO proposed     
+        add(new Entity("\u8250", "rsaquo", 8250)) ; // single right-pointing angle quotation mark, U+203A ISO proposed     
         
         // rsaquo is proposed but not yet ISO standardized
         
-        add( new Entity( "€", "euro", 8364 ) ) ; // euro sign, U+20AC NEW           
+        add(new Entity("€", "euro", 8364)) ; // euro sign, U+20AC NEW           
     }
 }
