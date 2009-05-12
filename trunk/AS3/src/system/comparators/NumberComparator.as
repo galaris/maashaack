@@ -60,6 +60,9 @@ package system.comparators
      * 
      * c.fractionDigits = 4 ;
      * trace( c.compare(  1.2356 , 1.2358 ) ) ; // -1
+     * 
+     * c.fractionDigits = 0 ;
+     * trace( c.compare( Math.cos(25) , 1 ) ) ; // 0
      * </pre>
      */
     public class NumberComparator implements Comparator
