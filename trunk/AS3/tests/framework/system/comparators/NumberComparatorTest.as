@@ -45,11 +45,32 @@ package system.comparators
             super(name);
         }
         
-        
         public function testConstructor():void
         {
-        	var c:NumberComparator = new NumberComparator() ;
-            assertNotNull( c , "The NullComparator constructor failed." ) ;
+            var c1:NumberComparator = new NumberComparator() ;
+            assertNotNull( c1 , "01 - The NumberComparator constructor failed." ) ;
+            
+            var c2:NumberComparator = new NumberComparator(true, 10) ;
+            assertEquals( c2.fractionDigits , 10, "02-01 - The NumberComparator constructor failed." ) ;
+            assertTrue(c2.fixed, "02-02 - The NumberComparator constructor failed." ) ;
+        }
+        
+        public function testFractionDigits():void
+        {
+            var c:NumberComparator = new NumberComparator() ;
+            assertEquals(c.fractionDigits, 0, "01 - The NumberComparator fractionDigits failed." ) ;
+            
+            c.fractionDigits = 10 ; 
+            assertEquals(c.fractionDigits, 10, "02 - The NumberComparator fractionDigits failed." ) ;
+        }
+        
+        public function testFixed():void
+        {
+            var c:NumberComparator = new NumberComparator() ;
+            assertFalse(c.fixed, "01 - The NumberComparator fixed failed." ) ;
+            
+            c.fixed = true ; 
+            assertTrue(c.fixed, "01 - The NumberComparator fixed failed." ) ;
         }
         
         public function testCompare():void
@@ -65,14 +86,11 @@ package system.comparators
             
             assertEquals( c.compare( 1 , 0 ) ,   1 , "06 - The NumberComparator compare method failed." ) ;
             assertEquals( c.compare( 0 , 1 ) ,  -1 , "07 - The NumberComparator compare method failed." ) ;
-
         }
         
-        public function testCompareErrors():void
+        public function testCompareArgumentError():void
         {
-            
             var c:NumberComparator = new NumberComparator() ;
-            
             try
             {
                  c.compare( "hello" , 2 ) ;
@@ -106,8 +124,38 @@ package system.comparators
                 assertEquals( e.message,  "NumberComparator compare(hello,world) failed, the two arguments must be Number objects."  , "03-03 - The NumberComparator compare method failed." ) ;
             } 
             
-        }        
+        } 
         
-        
+        public function testCompareWithFixed():void
+        {
+            var c:NumberComparator = new NumberComparator() ;
+            
+            c.fixed = true ;
+            
+            c.fractionDigits = 3 ;
+            assertEquals( c.compare(  1.2356   ,  1.2358   ) ,  0 , "01 - The NumberComparator compare method failed." ) ;
+            
+            c.fractionDigits = 4 ;
+            assertEquals( c.compare(  1.2356   ,  1.2358   ) ,  -1 , "01 - The NumberComparator compare method failed." ) ;
+        }
+
+        public function testCompareRangeError():void
+        {
+            var c:NumberComparator = new NumberComparator() ;
+            
+            c.fixed = true ;
+            
+            c.fractionDigits = 25 ;
+            try
+            {
+                 c.compare( 2.1 , 2.2 ) ;
+                 fail( "01 - The NumberComparator compare method failed, must throw a RangeError." ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is RangeError , "02 - The NumberComparator compare method failed, must throw a RangeError." ) ;
+            } 
+        }
+
     }
 }

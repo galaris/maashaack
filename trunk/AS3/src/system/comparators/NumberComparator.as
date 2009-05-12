@@ -60,12 +60,25 @@ package system.comparators
         
         /**
          * Creates a new NumberComparator instance.
+         * @param fixed Indicates if the two numbers are round to the specified number of decimal places (see the fractionDigits property).
+         * @param fractionDigits An integer between 0 and 20, inclusive, that represents the desired number of decimal places.
          */
-        public function NumberComparator() 
+        public function NumberComparator( fixed:Boolean = false , fractionDigits:uint = 0 ) 
         {
-            //
+            this.fixed          = fixed ;
+            this.fractionDigits = fractionDigits ;
         }
-                
+        
+        /**
+         * An integer between 0 and 20, inclusive, that represents the desired number of decimal places.
+         */
+        public var fractionDigits:uint ;
+        
+        /**
+         * Indicates if the two numbers are round to the specified number of decimal places (see the fractionDigits property).
+         */
+        public var fixed:Boolean ;
+        
         /**
          * Returns an integer value to compare two Number objects.
          * @param o1 the first Number object to compare.
@@ -76,14 +89,17 @@ package system.comparators
          * <li> 0 if o1 and o2 are equal.</li>
          * </p>
          * @throws ArgumentError if compare(a, b) and 'a' and 'b' must be Number objects.
+         * @throws RangeError Throws an exception if the fractionDigits argument is outside the range 0 to 20 (only if fixed is true).
          */
         public function compare(o1:*, o2:*, options:* = null):int
         {
             if ( (o1 is Number) && (o2 is Number ) ) 
             {
-                // TODO fix float bug with Math methods and float number operations.
-                //o1 = (o1 as Number).toString() ; 
-                //o2 = (o2 as Number).toString() ;
+                if ( fixed )
+                {
+                    o1 = Number( (o1 as Number).toFixed( fractionDigits ) ) ;
+                    o2 = Number( (o2 as Number).toFixed( fractionDigits ) ) ;
+                }
                 if( o1 < o2 )
                 {
                     return -1 ;
@@ -100,7 +116,7 @@ package system.comparators
             else 
             {
                 throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Number objects." ) ;
-            }    
+            }
         }
         
     }
