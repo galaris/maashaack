@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events
 {
     import flash.events.Event;
-    import flash.events.EventDispatcher;    
+    import flash.events.EventDispatcher;
 
     /**
      * This abstract class provides all basic methods of the system.events.EventDispatcher.
@@ -60,40 +60,40 @@ package system.events
          */
         public function get target():IEventDispatcher 
         {
-        	return _target ;
-        }      
+            return _target ;
+        }
          
-         /**
-          * Dispatches an event into the event flow.
-          * @param event The Event object that is dispatched into the event flow (a String or an Event object).
-          * @param target the target of the event.
-          * @param context the context of the event.
-          */
-         public function fireEvent( event:* , target:*=null, context:*=null , bubbles:Boolean=false ):Boolean
-         {
-             if ( event is String )
-             {
+        /**
+         * Dispatches an event into the event flow.
+         * @param event The Event object that is dispatched into the event flow (a String or an Event object).
+         * @param target the target of the event.
+         * @param context the context of the event.
+         */
+        public function fireEvent( event:* , target:*=null, context:*=null , bubbles:Boolean=false ):Boolean
+        {
+            if ( event is String )
+            {
                 return super.dispatchEvent( new BasicEvent( event as String, target, context ) );                 
-             }
-             else if ( event is Event )
-             {
-                 if ( event is BasicEvent )
-                 {
-                     if ( target != null )
-                     {
-                         event.target = target ;
-                     }
-                     if ( context != null )
-                     {
-                         event.context = context ;    
-                     }
-                 }
-                 return super.dispatchEvent( event ) ;
-             }
-             else
-             {
-                 return false ;    
-             }
+            }
+            else if ( event is Event )
+            {
+                if ( event is BasicEvent )
+                {
+                    if ( target != null )
+                    {
+                        event.target = target ;
+                    }
+                    if ( context != null )
+                    {
+                        event.context = context ;    
+                    }
+               }
+               return super.dispatchEvent( event ) ;
+            }
+            else
+            {
+                return false ;
+            }
         }
         
         /**

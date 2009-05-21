@@ -42,7 +42,6 @@ package system.events
      */
     public interface IEventDispatcher extends flash.events.IEventDispatcher 
     {
-    	
        /**
         * Registers an <code class="prettyprint">EventListener</code> object with an <code class="prettyprint">system.events.EventDispatcher</code> object so that the listener receives notification of an event.
         */
@@ -51,7 +50,6 @@ package system.events
        /**
         * Removes an <code class="prettyprint">EventListener</code> from the <code class="prettyprint">system.events.EventDispatcher</code> object.
         */
-       function unregisterEventListener( type:String , listener:* , useCapture:Boolean = false ):void ;    	
-    	
+       function unregisterEventListener( type:String , listener:* , useCapture:Boolean = false ):void ;
     }
 }

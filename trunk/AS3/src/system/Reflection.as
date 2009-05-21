@@ -175,7 +175,7 @@ package system
                 a.pop( ) ;
                 return a.join( "." ) ;
             }
-			else 
+            else 
             {
                 return null ;
             }
@@ -209,21 +209,19 @@ package system
         {
             var filter:FilterType = FilterType.none; 
             //default
-            var value:int = 0;
+            var value:int ;
             var len:int = filters.length ;
-            for( var i:int = 0 ; i < len ; i++ )
+            for( var i:int ; i < len ; i++ )
             {
                 value |= int( filters[i] );
             }
-            
             if( value > 0 )
             {
                 filter = new FilterType( value );
             }
-            
             return new _ClassInfo( o, filter );
         }
-
+        
         /**
          * Returns an array of public methods defined in the class of an object.
          * @return an array of public methods defined in the class of an object.
@@ -246,7 +244,7 @@ package system
             }
             return members;
         }
-
+        
         /**
          * Returns the class name as string of an object.
          * @return the class name as string of an object.
@@ -255,7 +253,7 @@ package system
         {
             return ( path == true ) ? getQualifiedClassName( o ) : _formatName( getClassPath( o ) ) ;
         }
-
+        
         /**
          * Returns the package string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
@@ -264,8 +262,8 @@ package system
         public static function getClassPackage( o:* ):String 
         {
             return _formatPackage( getClassPath( o ) ) ;
-        }	
-
+        }
+        
         /**
          * Returns the full path string representation of the specified instance passed in arguments (package + name).
          * @param instance the reference of the object to apply reflexion.
@@ -275,7 +273,7 @@ package system
         {
             return _formatPath( getQualifiedClassName( o ) ) ;
         }
-
+        
         /**
          * Returns the instance of a public definition in the current Domain.
          * The definition can be a class, namespace, function or object.
@@ -284,8 +282,8 @@ package system
         public static function getDefinitionByName( name:String ):Object
         {
             return ApplicationDomain.currentDomain.getDefinition( name );
-        }        
-
+        }
+        
         /**
          * Returns the method reference of the specified object with the passed-in property name.
          * @return the method reference of the specified object with the passed-in property name.
@@ -300,7 +298,7 @@ package system
             
             return null;
         }
-
+        
         /**
          * Returns the super class name as string of an object.
          * @return the super class name as string of an object.
@@ -309,7 +307,7 @@ package system
         {
             return _formatName( getSuperClassPath( o ) ) ;
         }
-
+        
         /**
          * Returns the super class package string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
@@ -319,7 +317,7 @@ package system
         {
             return _formatPackage( getSuperClassPath( o ) ) ;
         }
-
+        
         /**
          * Returns the super class path string representation of the specified instance passed in arguments.
          * @param o the reference of the object to apply reflexion.
@@ -329,7 +327,7 @@ package system
         {
             return _formatPath( getQualifiedSuperclassName( o ) ) ;
         }
-
+        
         /**
          * Returns the TypeInfo object of the specified object.
          * @return the TypeInfo object of the specified object.
@@ -338,7 +336,7 @@ package system
         {
             return new _TypeInfo( o );
         }
-
+        
         /**
          * Returns a boolean telling if the class exists from a string name.
          * @return a boolean telling if the class exists from a string name.
@@ -356,7 +354,7 @@ package system
             
             return true;
         }
-
+        
         /**
          * Wrapping method which select which build method use according to the argument count (32 max).
          * <p><b>Example :</b></p>
@@ -482,7 +480,7 @@ package system
             {
                 return new c() ;
             }
-        }        
+        }
     }
 }
 

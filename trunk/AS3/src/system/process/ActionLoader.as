@@ -41,7 +41,7 @@ package system.process
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     import flash.system.LoaderContext;    
-
+    
     /**
      * This action process launch the load of a Loader object.
      * <p><b>Example :</b></p>
@@ -146,7 +146,7 @@ package system.process
         {
             _context = context ;
         }
-
+        
         /**
          * @private
          */
@@ -216,10 +216,10 @@ package system.process
          */
         protected override function _run():void
         {
-        	if ( loader != null && (_loader is Loader) )
-        	{
+            if ( loader != null && (_loader is Loader) )
+            {
                 (_loader as Loader).load( request , context ) ;
-        	}
+            }
         }
         
         /**

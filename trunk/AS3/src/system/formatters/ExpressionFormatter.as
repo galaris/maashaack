@@ -97,7 +97,7 @@ package system.formatters
          */
         public function get beginSeparator():String
         {
-        	return _beginSeparator ;
+            return _beginSeparator ;
         }
         
         /**
@@ -114,7 +114,7 @@ package system.formatters
          */
         public function get endSeparator():String
         {
-            return _endSeparator ;	
+            return _endSeparator ;    
         }        
         
         /**
@@ -133,7 +133,7 @@ package system.formatters
          */      
         public function format( value:* = null ):String
         {
-        	return _format( value.toString() ) ;
+            return _format( value.toString() ) ;
         }        
 
         /**
@@ -161,10 +161,10 @@ package system.formatters
          */        
         private function _format( str:String , depth:uint=0 ):String
         {
-        	if ( depth >= MAX_RECURSION )
-        	{
-        		return str ;
-        	} 
+            if ( depth >= MAX_RECURSION )
+            {
+                return str ;
+            } 
             var m:Array = str.match( _reg ) ;
             var l:int   = m.length ;
             if ( l > 0 )
@@ -182,14 +182,14 @@ package system.formatters
                 }
             }
             return str ;
-        }          
+        }
         
         /**
          * @private
          */
         private function _reset():void
         {
-            _reg = new RegExp( Strings.format( _pattern , beginSeparator , endSeparator ), "g" ) ;	
+            _reg = new RegExp( Strings.format( _pattern , beginSeparator , endSeparator ), "g" ) ;
         }
         
     }

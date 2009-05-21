@@ -36,8 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * The <code class="prettyprint">BooleanEvent</code> to dispatch an event who contains a specific Boolean context.
      * <p><b>Example :</b></p>
@@ -88,13 +88,13 @@ package system.events
          */
         public function set boolean( b:Boolean ):void
         {
-            _b = b ;    
+            _b = b ;
         }
         
         /**
          * @private
          */
-        private var _b:Boolean ;    
+        private var _b:Boolean ;
         
     }
 }

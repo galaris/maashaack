@@ -38,8 +38,8 @@ package system.events
 {
     import system.Reflection;
     
-    import flash.events.Event;    
-
+    import flash.events.Event; 
+    
     /**
      * <code class="prettyprint">system.events.BasicEvent</code> is the basical event structure to work with <code class="prettyprint">system.events.EventDispatcher</code>.
      * <p><b>Example</b></p>
@@ -50,7 +50,6 @@ package system.events
      */
     public class BasicEvent extends Event 
     {
-
         /**
          * Creates a new <code class="prettyprint">BasicEvent</code> instance.
          * <pre class="prettyprint">
@@ -80,7 +79,7 @@ package system.events
          */
         public function get context():*
         {
-            return _context ;    
+            return _context ;
         }
         
         /**
@@ -121,7 +120,7 @@ package system.events
          */
         public override function get type():String 
         {
-            return _type ;    
+            return _type ;
         }
         
         /**
@@ -184,8 +183,7 @@ package system.events
          */
         protected function setTimeStamp( time:uint = 0 ):void 
         {
-            _time = (time > 0) ? time : (new Date()).valueOf() ;    
+            _time = (time > 0) ? time : (new Date()).valueOf() ;
         }
-
     }
 }

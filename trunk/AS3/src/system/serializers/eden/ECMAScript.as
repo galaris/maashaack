@@ -1461,7 +1461,7 @@ package system.serializers.eden
             }
             else
             {
-            	
+                
                 if( _inConstructor > 0 )
                 {
                     _inConstructor-- ;
@@ -1556,7 +1556,6 @@ package system.serializers.eden
                 case "+Infinity":
                     return Infinity;
                 
-                
                 case "new" :
                     
                     _inConstructor ++;
@@ -1567,7 +1566,7 @@ package system.serializers.eden
                     var localRef:Boolean = false;
                     var globalRef:Boolean = false;
                     var result:*;
-                
+                    
                     if( _doesExistInGlobalScope( baseword ) )
                     {
                         globalRef = true;
@@ -1583,7 +1582,7 @@ package system.serializers.eden
                         localRef = true;    
                         _singleValue = false;
                     }
-                
+                    
                     /* coded in the train listening RUN-DMC "It's Tricky"
                     and refactored listening Ugly Kid joe "too bad" :D
                      */
@@ -1599,48 +1598,43 @@ package system.serializers.eden
                             _scanGlobalAssignement( baseword );
                         }
                     }
-                
+                    
                     if( ! localRef && ! globalRef )
                     {
                         log( baseword + " not found in MEMORY!" );
                         return config.undefineable;
                     }
-                
+                    
                     if( localRef )
                     {
                         if( ch == "(" )
                         {
                             result = _scanFunction( baseword, _localPool );
                         }
-                    else
+                        else
                         {
                             result = _localPool[ baseword ];
                         }
-                        
-                        
                         return (pre == "-") ? - result : result;
                     }
-                
+                    
                     if( globalRef )
                     {
                         if( ch == "(" )
                         {
                             result = _scanFunction( baseword, _globalPool );
                         }
-                    else
+                        else
                         {
                             result = _globalPool[ baseword ];
                         }
-                        
                         return (pre == "-") ? - result : result;
                     }
-                
                     return config.undefineable;
             }
-            
             log( strings.errorKeyword );
         }
-
+        
         /**
          * Scans the global assignement of the specified path.
          */
@@ -1654,8 +1648,8 @@ package system.serializers.eden
             var member:String = paths.pop( );
             
             var foundScope:Boolean = false;
-            var size:uint = paths.length ;
-            for( var i:uint = 0 ; i < size ; i++ )
+            var size:int = paths.length ;
+            for( var i:int ; i < size ; i++ )
             {
                 if( ! foundScope )
                 {
@@ -1786,8 +1780,8 @@ package system.serializers.eden
             
             scope = localscope[ prop ];
             
-            var size:uint = paths.length ;
-            for( var i:uint = 0 ; i < size ; i++ )
+            var size:int = paths.length ;
+            for( var i:int ; i < size ; i++ )
             {
                 subpath = paths[i];
                 

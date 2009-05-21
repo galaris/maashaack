@@ -43,7 +43,7 @@ package system.events
             super( target );
             this.channel = channel ;
         }
- 
+        
         /**
          * Determinates the default singleton channel.
          */
@@ -72,7 +72,7 @@ package system.events
          */
         public static function containsInstance( channel:String ):Boolean
         {
-        	return _instances.containsKey( channel ) ;
+            return _instances.containsKey( channel ) ;
         }
         
         /**
@@ -89,9 +89,9 @@ package system.events
          */
         public static function getChannels():Array
         {
-        	return ( _instances.size() > 0 ) ? _instances.getKeys() : null ; 
+            return ( _instances.size() > 0 ) ? _instances.getKeys() : null ; 
         }
-
+        
         /**
          * Creates and returns a singleton EventDispatcher reference specified by the passed-in name identifier.
          * @param name The name of the singleton reference to return or create (If this value is Null, the DEFAULT_SINGLETON_NAME static value is used).
@@ -105,13 +105,13 @@ package system.events
             }
             if ( !_instances.containsKey(channel) ) 
             {
-            	var dispatcher:EventDispatcher = new EventDispatcher() ;
-            	dispatcher.channel = channel ;
+                var dispatcher:EventDispatcher = new EventDispatcher() ;
+                dispatcher.channel = channel ;
                 _instances.put( channel , dispatcher ) ;
             }
             return _instances.get( channel ) as EventDispatcher ;
         }
-                
+        
         /**
          * Removes a global EventDispatcher singleton.
          * @return <code class="prettyprint">true</code> if a singleton is removed in the EventDispatcher factory.
@@ -120,7 +120,7 @@ package system.events
         {
             if( channel == null ) 
             {
-            	channel = DEFAULT_SINGLETON_CHANNEL ;
+                channel = DEFAULT_SINGLETON_CHANNEL ;
             }
             if ( _instances.containsKey( channel ) ) 
             {
@@ -132,7 +132,7 @@ package system.events
         /**
          * @private
          */ 
-        private var _channel:String = null ;        
+        private var _channel:String = null ;
         
         /**
          * @private

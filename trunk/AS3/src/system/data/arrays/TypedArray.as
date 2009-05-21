@@ -64,13 +64,13 @@ package system.data.arrays
                 var l:int = values.length ;
                 if (l > 0) 
                 {
-                	var cpt:int ;
+                    var cpt:int ;
                     for (var i:int = 0 ; i<l ; i++) 
                     {
                         var value:* = values[i] ;
                         if ( supports(value) ) 
                         {
-                        	_ar[cpt++] = value ;
+                            _ar[cpt++] = value ;
                         }
                     }
                 }
@@ -109,7 +109,7 @@ package system.data.arrays
             var c:TypedArray = new TypedArray(_type) ;
             if ( _ar.length > 0 )
             {
-            	var l:int = _ar.length ;
+                var l:int = _ar.length ;
                 for (var i:int ; i<l ; i++) 
                 {
                    c[i] = _ar[i] ;
@@ -192,11 +192,11 @@ package system.data.arrays
             s +=  _type != null ? Reflection.getClassPath(_type) : "null" ;
             if ( _ar.length > 0 )
             {
-            	var l:int = _ar.length ;
-            	for (var i:int ; i<l ; i++ )
-            	{
-            	   s += "," + eden.serialize( _ar[i] )  ;
-            	}
+                var l:int = _ar.length ;
+                for (var i:int ; i<l ; i++ )
+                {
+                   s += "," + eden.serialize( _ar[i] )  ;
+                }
             }
             s += ")" ;
             return s ;

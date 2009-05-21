@@ -151,7 +151,7 @@ package system.process
          */
         public function get dataFormat():String
         {
-            return _dataFormat ;    
+            return _dataFormat ;
         }
         
         /**
@@ -266,7 +266,7 @@ package system.process
                 enumerate( data ) ;
             }
             super.complete(e) ;
-        }    
+        }
         
         /**
          * This protected method contains the invokation of the load method of the current loader of this process.
@@ -324,9 +324,9 @@ package system.process
             }
             while( --depth > -1 )
             {
-                s += SPACE ;    
+                s += SPACE ;
             }
-            return s ;    
+            return s ;
         }
 
     }

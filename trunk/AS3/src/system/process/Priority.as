@@ -35,22 +35,19 @@
 
 package system.process 
 {
-
     /**
      * This interface should be implemented by any class whose instances contains a priority.
      */
     public interface Priority 
     {
-        	
         /**
          * Determinates the priority value of the object.
          */
         function get priority():int ;
-    
+        
         /**
          * @private
          */
-        function set priority( value:int ):void ; 
-    	
+        function set priority( value:int ):void ;
     }
 }

@@ -96,7 +96,7 @@ package system.data.arrays
          */  
         public function ProxyArray( datas:Array = null )
         {
-        	_ar = (datas == null) ? [] : [].concat(datas)  ;
+            _ar = (datas == null) ? [] : [].concat(datas)  ;
         }
         
         /**

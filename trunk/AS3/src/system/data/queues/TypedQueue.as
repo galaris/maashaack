@@ -111,7 +111,7 @@ package system.data.queues
          */
         public function clear():void
         {
-        	_queue.clear() ;
+            _queue.clear() ;
         }
         
         /**
@@ -153,7 +153,7 @@ package system.data.queues
          */
         public function enqueue(o:*):Boolean
         {
-        	validate( o ) ;
+            validate( o ) ;
             return _queue.enqueue(o) ;
         }
         

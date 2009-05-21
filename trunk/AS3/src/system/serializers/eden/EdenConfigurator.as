@@ -71,7 +71,7 @@ package system.serializers.eden
         {
             return _config.allowFunctionCall;
         }
-
+        
         /**
          * @private
          */
@@ -199,7 +199,7 @@ package system.serializers.eden
         }
 
         /**
-         * Value assigned to a variable	when this one is not found or not authorized.
+         * Value assigned to a variable    when this one is not found or not authorized.
          * Depending on your environment you can override it with a more suitable one for exemple on C# you could set it to null.
          */
         public function get undefineable():*
@@ -266,12 +266,12 @@ package system.serializers.eden
                     }
                 }
             }
-        	else
+            else
             {
                 throw new Error( this + " addAuthorized failed with a null 'authorized' Array to configurate the eden parser." ) ;
             }
-        }        
-
+        }
+        
         /**
          * Removes an authorized path in the white list of the parser.
          */

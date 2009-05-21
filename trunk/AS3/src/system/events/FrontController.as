@@ -40,7 +40,7 @@ package system.events
     import system.data.maps.ArrayMap;
     import system.data.maps.HashMap;
     
-    import flash.events.Event;    
+    import flash.events.Event ;
 
     /**
      * The front controller pattern defines a single EventDispatcher that is responsible for processing application requests.
@@ -63,10 +63,10 @@ package system.events
          */
         public function FrontController( channel:String = null, target:EventDispatcher = null )
         {
-            _map         = new ArrayMap() ;
-            _dispatcher  = target || EventDispatcher.getInstance( channel ) ; 
+            _map        = new ArrayMap() ;
+            _dispatcher = target || EventDispatcher.getInstance( channel ) ; 
         }
-                
+        
         /**
          * Add a new entry into the FrontController.
          * @param type The type used to register the specified listener.
@@ -86,7 +86,7 @@ package system.events
             }
             if ( contains( type ) )
             {
-            	remove( type ) ;
+                remove( type ) ;
             }
             _map.put.apply( this, arguments ) ;
             _dispatcher.registerEventListener( type, listener ) ;
@@ -134,17 +134,17 @@ package system.events
                 var listener:* ;
                 while( it.hasNext() )
                 {
-                	name     = it.next() ;
+                    name     = it.next() ;
                     listener = _map.get( name ) ;
                     if ( listener != null ) 
                     {
                         _dispatcher.unregisterEventListener( name , listener ) ;
-                    }                	
+                    }                    
                 }
                 _map.clear() ;
             }    
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the specified type is registered in the FrontController.
          * @param type The search type value.
@@ -172,20 +172,20 @@ package system.events
          */
         public function fireEvent( event:* ):void 
         {
-        	if ( event is Event )
+            if ( event is Event )
             {
-                _dispatcher.dispatchEvent( event ) ;        
+                _dispatcher.dispatchEvent( event ) ;
             }
             else if ( event is String )
             {
-                _dispatcher.dispatchEvent( new BasicEvent( event ) ) ;    
+                _dispatcher.dispatchEvent( new BasicEvent( event ) ) ;
             }
             else
             {
-            	throw ArgumentError( "FrontController.fireEvent method failed with the argument " + event + ", the type of this argument is invalid." ) ;
+                throw ArgumentError( "FrontController.fireEvent method failed with the argument " + event + ", the type of this argument is invalid." ) ;
             }
         }
-
+        
         /**
          * Flush all global FrontController singletons.
          */
@@ -201,17 +201,17 @@ package system.events
         public static function getChannels():Array
         {
             return ( _instances.size() > 0 ) ? _instances.getKeys() : null ; 
-        }        
-
+        }
+        
         /**
          * Returns the internal EventDispatcher singleton reference of this FrontController.
          * @return the internal EventDispatcher singleton reference of this FrontController.
          */
         public function getEventDispatcher():EventDispatcher
         {
-            return _dispatcher ;        
+            return _dispatcher ;
         }
-
+        
         /**
          * Returns a global <code class="prettyprint">FrontController</code> singleton.
          * @param channel The channel of the FrontController (default the EventDispatcher.DEFAULT_SINGLETON_NAME value).
@@ -229,7 +229,7 @@ package system.events
             }
             return FrontController._instances.get(channel) as FrontController ;
         }
-
+        
         /**
          * Returns the listener register in the frontcontroller with the specified event name.
          * @param type The type of the listener register.
@@ -239,7 +239,7 @@ package system.events
         {
             return _map.get( type ) ;
         }
-                
+        
         /**
          * Indicates if the specified <code class="prettyprint">EventListener</code> registered with the specified type in argument is an EventListenerBatch instance.
          * @param type The type to indicates if an EventListenerBatch is registered.
@@ -249,11 +249,11 @@ package system.events
         {
             if ( contains( type ) )
             {
-            	return getListener( type ) is EventListenerBatch ;
+                return getListener( type ) is EventListenerBatch ;
             }
             else
             {
-            	return false ;
+                return false ;
             }
         }
         
@@ -263,7 +263,7 @@ package system.events
          */
         public function remove( eventName:String ):void
         {
-        	var listener:* = _map.remove( eventName ) ;
+            var listener:* = _map.remove( eventName ) ;
             if ( listener != null ) 
             {
                 _dispatcher.unregisterEventListener( eventName , listener ) ;
@@ -280,7 +280,7 @@ package system.events
             if( channel == null ) 
             {
                 channel = EventDispatcher.DEFAULT_SINGLETON_CHANNEL ;
-            }        	
+            }
             if ( _instances.containsKey(channel) ) 
             {
                 return _instances.remove(channel) != null ;
@@ -290,7 +290,7 @@ package system.events
                 return false ;
             }
         }
-   
+        
         /**
          * Sets the EventDispatcher reference of this FrontController.
          * @param target The EventDispatcher reference of this FrontController.
@@ -298,8 +298,8 @@ package system.events
         public function setEventDispatcher( target:EventDispatcher ):void
         {
             _dispatcher = target ;
-        }      
-   
+        }
+        
         /**
          * Returns the number of elements in the controller.
          * @return the number of elements in the controller.
@@ -308,7 +308,7 @@ package system.events
         {
             return _map.size() ;
         }
- 
+        
         /**
          * @private
          */
@@ -323,7 +323,5 @@ package system.events
          * @private
          */
         private var _map:ArrayMap ;
-        
     }
-    
 }

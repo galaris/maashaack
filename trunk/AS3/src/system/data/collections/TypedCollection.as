@@ -123,7 +123,7 @@ package system.data.collections
         public function add( o:* ):Boolean
         {
             validate(o) ;
-            return _co.add( o ) ;        	
+            return _co.add( o ) ;            
         }
         
         /**
@@ -131,7 +131,7 @@ package system.data.collections
          */        
         public function clear():void
         {
-        	_co.clear() ;
+            _co.clear() ;
         }
         
         /**
@@ -140,7 +140,7 @@ package system.data.collections
          */        
         public function clone():*
         {
-        	return new TypedCollection( type , _co ) ;
+            return new TypedCollection( type , _co ) ;
         }        
         
         /**
@@ -149,7 +149,7 @@ package system.data.collections
          */        
         public function contains(o:*):Boolean
         {
-        	return _co.contains(o) ;
+            return _co.contains(o) ;
         }
         
         /**
@@ -167,7 +167,7 @@ package system.data.collections
          */        
         public function indexOf(o:*, fromIndex:uint = 0):int
         {
-        	return _co.indexOf( o , fromIndex ) ;
+            return _co.indexOf( o , fromIndex ) ;
         }
         
         /**
@@ -176,7 +176,7 @@ package system.data.collections
          */        
         public function isEmpty():Boolean
         {
-        	return _co.isEmpty() ;
+            return _co.isEmpty() ;
         }
         
         /**
@@ -185,7 +185,7 @@ package system.data.collections
          */        
         public function iterator():Iterator
         {
-        	return _co.iterator();
+            return _co.iterator();
         }        
 
         /**
@@ -193,7 +193,7 @@ package system.data.collections
          */        
         public function remove(o:*):*
         {
-        	return _co.remove(o);
+            return _co.remove(o);
         }        
                 
         /**
@@ -202,7 +202,7 @@ package system.data.collections
          */        
         public function size():uint
         {
-        	return _co.size() ;
+            return _co.size() ;
         }        
         
         /**
@@ -221,7 +221,7 @@ package system.data.collections
          */        
         public function toArray():Array
         {
-        	return _co.toArray() ;
+            return _co.toArray() ;
         }
         
         /**
@@ -230,14 +230,14 @@ package system.data.collections
          */        
         public function toSource(indent:int = 0):String
         {
-        	var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-        	s += Reflection.getClassPath( type ) ;
-        	if ( size() >  0 )
-        	{
-        		s += "," + eden.serialize(_co) ;
+            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
+            s += Reflection.getClassPath( type ) ;
+            if ( size() >  0 )
+            {
+                s += "," + eden.serialize(_co) ;
             }
-        	s += ")" ;
-        	return s ;
+            s += ")" ;
+            return s ;
         }        
         
         /**

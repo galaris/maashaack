@@ -63,7 +63,6 @@ package system.data.sets
      */
     public class TypedSet extends TypedCollection implements Set
     {
-    
         /**
          * Creates a new TypedSet instance.
          * @param type the type of this Typeable object (a Class or a Function).
@@ -79,11 +78,10 @@ package system.data.sets
         /**
          * Returns a shallow copy of this collection.
          * @return a shallow copy of this collection.
-         */        
+         */
         public override function clone():*
         {
-        	return new TypedSet( type , _co as Set ) ;
-        }        
-        
+            return new TypedSet( type , _co as Set ) ;
+        }
     }
 }

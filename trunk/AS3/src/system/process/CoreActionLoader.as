@@ -44,8 +44,8 @@ package system.process
     import flash.events.SecurityErrorEvent;
     import flash.events.TimerEvent;
     import flash.net.URLRequest;
-    import flash.utils.Timer;    
-
+    import flash.utils.Timer;
+    
     /**
      * This core command object run a "loader" object and notify ActionEvent during a load process.
      */
@@ -211,7 +211,7 @@ package system.process
          */
         public override function run( ...arguments:Array ):void 
         {
-        	notifyStarted() ;
+            notifyStarted() ;
             if ( loader == null )
             {
                 dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the loader reference of this process not must be 'null'.") ) ;
@@ -219,7 +219,7 @@ package system.process
             }
             else if ( request == null )
             {
-            	dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the request reference of this process not must be 'null'.") ) ;
+                dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the request reference of this process not must be 'null'.") ) ;
                 notifyFinished() ;
             }
             else
@@ -347,7 +347,5 @@ package system.process
             notifyTimeOut() ;
             close() ;
         }
-        
     }
 }
-

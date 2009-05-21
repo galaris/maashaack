@@ -204,7 +204,7 @@ package system.numeric
          */    
         public static function filterNaNValue( value:Number, defaultValue:Number = 0 ):Number
         {
-            return isNaN( value ) ? defaultValue : value ;	
+            return isNaN( value ) ? defaultValue : value ;
         }        
 
         /**

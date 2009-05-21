@@ -42,9 +42,9 @@ package openscreen
      */
     public class FileType extends Enum
     {
-    	
-    	/**
-    	 * Creates a new FileType instance.
+        
+        /**
+         * Creates a new FileType instance.
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
          */

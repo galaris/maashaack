@@ -36,8 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process 
 {
     import system.events.ActionEvent;
-    import system.events.CoreEventDispatcher;    
-
+    import system.events.CoreEventDispatcher;
+    
     /**
      * Dispatched when a process is finished.
      * @eventType system.events.ActionEvent.FINISH
@@ -106,8 +106,8 @@ package system.process
          */
         public function notifyFinished():void 
         {
-        	setRunning( false ) ;
-        	this["finishIt"]() ;
+            setRunning( false ) ;
+            this["finishIt"]() ;
             dispatchEvent( new ActionEvent( ActionEvent.FINISH , this ) ) ;
         }
         
@@ -116,8 +116,8 @@ package system.process
          */
         public function notifyStarted():void
         {
-        	setRunning( true ) ;
-        	this["startIt"]() ;
+            setRunning( true ) ;
+            this["startIt"]() ;
             dispatchEvent( new ActionEvent( ActionEvent.START , this ) ) ;
         }
         

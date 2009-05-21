@@ -1,47 +1,48 @@
-﻿/*
-  Version: MPL 1.1/GPL 2.0/LGPL 2.1
+﻿
+/*
+Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
-  The contents of this file are subject to the Mozilla Public License Version
-  1.1 (the "License"); you may not use this file except in compliance with
-  the License. You may obtain a copy of the License at
-  http://www.mozilla.org/MPL/
+The contents of this file are subject to the Mozilla Public License Version
+1.1 (the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
   
-  Software distributed under the License is distributed on an "AS IS" basis,
-  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-  for the specific language governing rights and limitations under the
-  License.
+Software distributed under the License is distributed on an "AS IS" basis,
+WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+for the specific language governing rights and limitations under the
+License.
   
-  The Original Code is [maashaack framework].
+The Original Code is [maashaack framework].
   
-  The Initial Developers of the Original Code are
-  Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2009
-  the Initial Developers. All Rights Reserved.
+The Initial Developers of the Original Code are
+Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
+Portions created by the Initial Developers are Copyright (C) 2006-2009
+the Initial Developers. All Rights Reserved.
   
-  Contributor(s):
+Contributor(s):
   
-  Alternatively, the contents of this file may be used under the terms of
-  either the GNU General Public License Version 2 or later (the "GPL"), or
-  the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
-  in which case the provisions of the GPL or the LGPL are applicable instead
-  of those above. If you wish to allow use of your version of this file only
-  under the terms of either the GPL or the LGPL, and not to allow others to
-  use your version of this file under the terms of the MPL, indicate your
-  decision by deleting the provisions above and replace them with the notice
-  and other provisions required by the LGPL or the GPL. If you do not delete
-  the provisions above, a recipient may use your version of this file under
-  the terms of any one of the MPL, the GPL or the LGPL.
-*/
+Alternatively, the contents of this file may be used under the terms of
+either the GNU General Public License Version 2 or later (the "GPL"), or
+the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+in which case the provisions of the GPL or the LGPL are applicable instead
+of those above. If you wish to allow use of your version of this file only
+under the terms of either the GPL or the LGPL, and not to allow others to
+use your version of this file under the terms of the MPL, indicate your
+decision by deleting the provisions above and replace them with the notice
+and other provisions required by the LGPL or the GPL. If you do not delete
+the provisions above, a recipient may use your version of this file under
+the terms of any one of the MPL, the GPL or the LGPL.
+ */
 
 package system
-    {
-    
+{
+
     /**
      * A static class for Array utilities.
      */
-	public class Arrays
-		{
-        
+    public class Arrays
+    {
+
         /**
          * Returns whether the Array contains a particular item.
          * <p><b>Example :</b></p>
@@ -58,35 +59,33 @@ package system
          * @return whether the Array contains a particular item.
          */
         public static function contains( ar:Array , value:Object):Boolean 
-            {
+        {
             return ar.indexOf(value) > -1 ;
-            }
-        
-		/**
-		 * Initializes a new Array with an arbitrary number of elements (index), 
-		 * with every element containing the passed parameter value or by default the null value.
-		 * <p><b>Example :</b></p>
-		 * <pre class="prettyprint">
-		 * var test:Array  = Arrays.initialize( 3 ); //define [null,null,null]
-		 * var test1:Array = Arrays.initialize( 3, 0 ); //define [0,0,0]
-		 * var test2:Array = Arrays.initialize( 3, true ); //define [true,true,true]
-		 * var test3:Array = Arrays.initialize( 3, "" ); //define ["","",""]
-		 * </pre>
-		 * @return a new Array with an arbitrary number of elements (index), 
-		 * with every element containing the passed parameter value or by default the null value.
-		 */
+        }
+
+        /**
+         * Initializes a new Array with an arbitrary number of elements (index), 
+         * with every element containing the passed parameter value or by default the null value.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * var test:Array  = Arrays.initialize( 3 ); //define [null,null,null]
+         * var test1:Array = Arrays.initialize( 3, 0 ); //define [0,0,0]
+         * var test2:Array = Arrays.initialize( 3, true ); //define [true,true,true]
+         * var test3:Array = Arrays.initialize( 3, "" ); //define ["","",""]
+         * </pre>
+         * @return a new Array with an arbitrary number of elements (index), 
+         * with every element containing the passed parameter value or by default the null value.
+         */
         public static function initialize( elements:uint = 0, value:* = null ):Array
-            {
+        {
             var arr:Array = [];
-            
-            for( var i:int = 0; i<elements; i++ )
-                {
-                arr.push( value );
-                }
-            
-            return arr;
+            for( var i:int ;i < elements; i++ )
+            {
+                arr.push(value);
             }
-        
+            return arr;
+        }
+
         /**
          * Apply a function simultaneously against two values of the array (from left-to-right) as to reduce it to a single value.
          * <p>The <code class="prettyprint">reduce</code> method executes the callback function once for each element present in the array, excluding holes in the array, receiving four arguments: the initial value (or value from the previous callback call), the value of the current element, the current index, and the array over which iteration is occurring.</p> 
@@ -179,56 +178,51 @@ package system
          * @param callback Function to execute on each value in the Array.
          * @param initialValue The object to use as the first argument to the first call of the callback. 
          */
-        public static function reduce( ar:Array , callback:Function, initialValue :* = undefined ):*
-            {
+        public static function reduce( ar:Array , callback:Function, initialValue:* = undefined ):*
+        {
             var size:int = ar.length ;
-            
             if ( callback == null )
-                {
-                throw new ArgumentError( "Arrays.reduce failed, the callback method not must be 'null' or 'undefined'." ) ;	
-                }
-            
+            {
+                throw new ArgumentError("Arrays.reduce failed, the callback method not must be 'null' or 'undefined'.") ;    
+            }
             if ( size == 0 )
-                {
-                throw new Error( "Arrays.reduce failed, the array contains no values." ) ;
-                }
-            
+            {
+                throw new Error("Arrays.reduce failed, the array contains no values.") ;
+            }
             var i:int ;
             var r:*   ;
-             
             if ( initialValue != undefined )
-                {
-            	r = initialValue ;
-                }
+            {
+                r = initialValue ;
+            }
             else
-                {
+            {
                 do
-                    {
+                {
                     if ( i in ar )
-                        {
+                    {
                         r = ar[i++] ;
                         break ;
-                        }
-                    
-                    if ( ++ i > size )
-                        {
-                        throw new Error( "Array.reduce failed, if array contains no values, no initial value to return." ) ;	
-                        }
-                    
                     }
-                while( true ) ;
-                }
-            
-            for ( ; i < size ; i++ )
-                {
-                if (i in ar)
+                    
+                    if ( ++i > size )
                     {
-                    r = callback.call(null, r, ar[i], i , ar );
+                        throw new Error("Array.reduce failed, if array contains no values, no initial value to return.") ;    
                     }
                 }
+                while( true ) ;
+            }
+            
+            for ( ;i < size; i++ )
+            {
+                if (i in ar)
+                {
+                    r = callback.call(null, r, ar[i], i, ar);
+                }
+            }
 
             return r;
-            }        
+        }
         
         /**
          * Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
@@ -318,56 +312,50 @@ package system
          * @param callback Function to execute on each value in the Array.
          * @param initialValue The object to use as the first argument to the first call of the callback. 
          */
-        public static function reduceRight( ar:Array , callback:Function, initialValue :* = undefined ):*
-            {
+        public static function reduceRight( ar:Array , callback:Function, initialValue:* = undefined ):*
+        {
             var size:int = ar.length ;
-            
             if ( callback == null )
-                {
-                throw new ArgumentError( "Arrays.reduceRight failed, the callback method not must be 'null' or 'undefined'." ) ; 
-                }
+            {
+                throw new ArgumentError("Arrays.reduceRight failed, the callback method not must be 'null' or 'undefined'.") ; 
+            }
             
             if ( size == 0 )
-                {
-                throw new Error( "Arrays.reduceRight failed, the array contains no values." ) ;
-                }
-            
+            {
+                throw new Error("Arrays.reduceRight failed, the array contains no values.") ;
+            }
             var i:int = size - 1;
             var r:*   ;
-             
             if ( initialValue != undefined )
-                {
+            {
                 r = initialValue ;
-                }
+            }
             else
-                {
+            {
                 do
-                    {
+                {
                     if ( i in ar )
-                        {
+                    {
                         r = ar[i--] ;
                         break ;
-                        }
-                    
-                    if ( -- i < 0 )
-                        {
-                        throw new Error( "Array.reduce failed, if array contains no values, no initial value to return." ) ;    
-                        }
-                    
                     }
-                while( true ) ;
-                }
-            
-            for ( ; i >= 0 ; i-- )
-                {
-                if (i in ar)
+                    if ( --i < 0 )
                     {
-                    r = callback.call(null, r, ar[i], i , ar );
+                        throw new Error("Array.reduce failed, if array contains no values, no initial value to return.") ;    
                     }
                 }
-
+                while( true ) ;
+            }
+            
+            for ( ;i >= 0; i-- )
+            {
+                if (i in ar)
+                {
+                    r = callback.call(null, r, ar[i], i, ar);
+                }
+            }
             return r;
-            }         
+        }
         
         /**
          * Returns a new Array who contains the specified Array elements repeated count times.
@@ -382,85 +370,83 @@ package system
          * </pre>
          * @return a new Array who contains the specified Array elements repeated count times.
          */
-        public static function repeat( ar:Array , count:uint=0 ):Array
-            {
+        public static function repeat( ar:Array , count:uint = 0 ):Array
+        {
             var result:Array = [] ;
             if ( count > 0 )
+            {
+                for( var i:int ; i < count ; i++)
                 {
-                for( var i:uint = 0 ; i<count ; i++)
-                    {
                     result = result.concat(ar) ;
-                    }
                 }
-            else
-                {
-                result = [].concat(ar) ;    
-                }
-            return  result ;
             }
-        
-		/** 
-		 * Splice one array into another.
-		 * Like the python 
-		 * <pre class="prettyprint">
-  		 * container[containerPosition:containerPosition + countReplaced] = inserted
-  		 * </pre>
-  		 * @example
-		 * <pre class="prettyprint">
-  		 * import system.Arrays ;
-  		 * 
-  		 * var inserted:Array  ;
-  		 * var container:Array ;
-  		 * 
-  		 * inserted  = [1, 2, 3, 4] ;
-  		 * container = [5, 6, 7, 8] ;
-  		 * 
-  		 * trace( "inserted  : " + inserted  ) ;
-  		 * trace( "container : " + container ) ;
-  		 * 
-  		 * trace("---") ;
-  		 * 
-  		 * inserted  = [1, 2, 3, 4] ;
-  		 * container = [5, 6, 7, 8] ;
-  		 * 
-  		 * Arrays.spliceInto( inserted, container ) ;
-  		 * trace( "Arrays.spliceInto( inserted, container, 0 , 0 ) : " + container ) ; // 1,2,3,4,5,6,7,8
-  		 * 
-  		 * trace("---") ;
-  		 * inserted  = [1, 2, 3, 4] ;
-  		 * container = [5, 6, 7, 8] ;
-  		 * 
-  		 * Arrays.spliceInto( inserted, container, 0 , 4 ) ;
-  		 * trace( "Arrays.spliceInto( inserted, container, 0 , 4 ) : " + container ) ; // 1,2,3,4
-  		 * 
-  		 * trace("---") ;
-  		 * 
-  		 * inserted  = [1, 2, 3, 4] ;
-  		 * container = [5, 6, 7, 8] ;
-  		 * 
-  		 * Arrays.spliceInto( inserted, container, 0 , 2 ) ;
-  		 * trace( "Arrays.spliceInto( inserted, container, 0 , 4 ) : " + container ) ; // 1,2,3,4,7,8
-  		 * </pre>
-  		 * @param inserted The Array of char inserted in the Array container.
-  		 * @param container The container modified in place.
-  		 * @param containerPosition The position in the container to inserted the Array of chars.
-  		 * @param countReplaced The count value to replaced values.
-  		 */
-		public static function spliceInto( inserted:Array, container:Array, containerPosition:Number=0 , countReplaced:Number=0 ):void
-			{
-  			inserted.unshift( containerPosition, isNaN( countReplaced ) ? 0 : countReplaced );
-  			
-  			try 
-  				{
-    			container.splice.apply( container, inserted ) ;
-  				} 
-  			finally 
-  				{
-    			inserted.splice(0, 2) ;
-  				}
-			}
-
+            else
+            {
+                result = [].concat(ar) ;
+            }
+            return  result ;
         }
-    
+        
+        /** 
+         * Splice one array into another.
+         * Like the python 
+         * <pre class="prettyprint">
+         * container[containerPosition:containerPosition + countReplaced] = inserted
+         * </pre>
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.Arrays ;
+         * 
+         * var inserted:Array  ;
+         * var container:Array ;
+         * 
+         * inserted  = [1, 2, 3, 4] ;
+         * container = [5, 6, 7, 8] ;
+         * 
+         * trace( "inserted  : " + inserted  ) ;
+         * trace( "container : " + container ) ;
+         * 
+         * trace("---") ;
+         * 
+         * inserted  = [1, 2, 3, 4] ;
+         * container = [5, 6, 7, 8] ;
+         * 
+         * Arrays.spliceInto( inserted, container ) ;
+         * trace( "Arrays.spliceInto( inserted, container, 0 , 0 ) : " + container ) ; // 1,2,3,4,5,6,7,8
+         * 
+         * trace("---") ;
+         * inserted  = [1, 2, 3, 4] ;
+         * container = [5, 6, 7, 8] ;
+         * 
+         * Arrays.spliceInto( inserted, container, 0 , 4 ) ;
+         * trace( "Arrays.spliceInto( inserted, container, 0 , 4 ) : " + container ) ; // 1,2,3,4
+         * 
+         * trace("---") ;
+         * 
+         * inserted  = [1, 2, 3, 4] ;
+         * container = [5, 6, 7, 8] ;
+         * 
+         * Arrays.spliceInto( inserted, container, 0 , 2 ) ;
+         * trace( "Arrays.spliceInto( inserted, container, 0 , 4 ) : " + container ) ; // 1,2,3,4,7,8
+         * </pre>
+         * @param inserted The Array of char inserted in the Array container.
+         * @param container The container modified in place.
+         * @param containerPosition The position in the container to inserted the Array of chars.
+         * @param countReplaced The count value to replaced values.
+         */
+        public static function spliceInto( inserted:Array, container:Array, containerPosition:Number = 0 , countReplaced:Number = 0 ):void
+        {
+            inserted.unshift(containerPosition, isNaN(countReplaced) ? 0 : countReplaced);
+              
+            try 
+            {
+                container.splice.apply(container, inserted) ;
+            } 
+              finally 
+            {
+                inserted.splice(0, 2) ;
+            }
+        }
     }
+}
 
