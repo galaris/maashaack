@@ -127,7 +127,7 @@ package system.numeric
                 else if( num < MIN )
                 {
                     throw new RangeError( "Min value for a RomanNumber is " + MIN );
-                }       	
+                }
                 n = num;
             }
             

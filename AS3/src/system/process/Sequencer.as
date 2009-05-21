@@ -45,7 +45,7 @@ package system.process
     import system.events.ActionEvent;
     import system.hack;
     import system.process.Stoppable;
-
+    
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>
@@ -163,7 +163,7 @@ package system.process
         {
             var s:Sequencer = new Sequencer() ;
             var it:Iterator = _queue.iterator() ;
-            while (it.hasNext()) 
+            while ( it.hasNext() ) 
             {
                 s.addAction(it.next().clone()) ;
             }
@@ -274,7 +274,7 @@ package system.process
                         (_cur as Stoppable).stop() ;
                     }
                     _cur = null ;
-            	}
+                }
                 setRunning(false) ;
                 if ( !isLocked() )
                 {
@@ -290,7 +290,7 @@ package system.process
          */
         public function toArray():Array 
         {
-            return _queue.toArray() ;    
+            return _queue.toArray() ;
         }
         
         /**
@@ -316,6 +316,5 @@ package system.process
          * @private
          */
         private var _queue:TypedQueue  ;
-        
     }
 }

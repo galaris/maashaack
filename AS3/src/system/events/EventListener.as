@@ -55,5 +55,4 @@ package system.events
         function handleEvent( e:Event ):void ;
         
     }
-    
 }

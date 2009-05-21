@@ -35,22 +35,19 @@
 
 package system 
 {
-    
     /**
      * An interface to be implemented by sorted sources with a <code class="prettyprint">Comparator</code> object.
      */
     public interface Sortable 
     {
-    	
         /**
          * Determinates the Comparator strategy used to sort the instance.
          */
         function get comparator():Comparator ;
-
+        
         /**
          * @private
          */
-        function set comparator( comp:Comparator ):void ;    	
-    	
+        function set comparator( comp:Comparator ):void ;
     }
 }

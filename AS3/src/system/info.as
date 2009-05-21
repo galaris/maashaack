@@ -39,13 +39,12 @@ package system
     import system.metadata;
     
     /**
-	 * The basic system info.
-	 * @param verbose The flag to indicates if the log information use verbose mode or not.
-	 * @param showConfig Indicates if the log information show config values.
+     * The basic system info.
+     * @param verbose The flag to indicates if the log information use verbose mode or not.
+     * @param showConfig Indicates if the log information show config values.
      */
     public var info:Function = function( verbose:Boolean = false, showConfig:Boolean = false ):String
     {
-        
         var separator:String = "----------------------------------------------------------------";
         var CRLF:String = "\n";
         var str:String = "";

@@ -36,8 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
-
+    import flash.events.Event ;
+    
     /**
      * The <code class="prettyprint">DateEvent</code> to dispatch an event who contains a specific Date context.
      * <p><b>Example :</b></p>
@@ -49,7 +49,6 @@ package system.events
      */
     public class DateEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">DateEvent</code> instance.
          * @param type the string type of the instance. 
@@ -80,7 +79,7 @@ package system.events
          */
         public function get date():Date
         {
-            return _date ;    
+            return _date ;
         }
         
         /**
@@ -88,13 +87,13 @@ package system.events
          */
         public function set date( d:Date ):void
         {
-            _date = d ;    
+            _date = d ;
         }
         
         /**
          * @private
          */
-        private var _date:Date ;    
+        private var _date:Date ;
         
     }
 }

@@ -81,7 +81,7 @@ package system.data.maps
             if (map != null && map.size() > 0 ) 
             {
                 putAll( map.clone() ) ;
-        	}
+            }
         }
         
         /**
@@ -154,7 +154,7 @@ package system.data.maps
                 var value:* = vItr.next() ;
                 m.putCollection( key , value ) ;
             }
-            return m ;            
+            return m ;
         }
        
         /**

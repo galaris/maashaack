@@ -35,23 +35,21 @@
 
 package system
 {
-
     /**
      * This class determinates a basic implementation to creates enumeration objects.
      */
     public class Enum implements Serializable
-    {    	
-
+    {
         /**
          * @private
          */
         private var _name:String ;
-
+        
         /**
          * @private
          */
         private var _value:int ;
-
+        
         /**
          * Creates a new Enum instance.
          * @param value The value of the enumeration.
@@ -60,9 +58,9 @@ package system
         public function Enum( value:int = 0 , name:String = "" )
         {
             _value = value ;
-            _name = name  ;
+            _name  = name  ;
         }
-
+        
         /**
          * Returns the source code String representation of the object.
          * @return the source code String representation of the object.
@@ -76,7 +74,7 @@ package system
             }
             return classname;
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -85,7 +83,7 @@ package system
         {
             return _name;
         }
-
+        
         /**
          * Returns the primitive value of the object.
          * @return the primitive value of the object.

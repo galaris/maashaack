@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
+    import flash.events.Event;
 
     /**
      * The <code class="prettyprint">StringEvent</code> to dispatch an event who contains a specific Number context.
@@ -49,7 +49,6 @@ package system.events
      */
     public class StringEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">StringEvent</code> instance.
          * @param type the string type of the instance. 
@@ -80,7 +79,7 @@ package system.events
          */
         public function get string():String
         {
-            return _s ;    
+            return _s ;
         }
         
         /**
@@ -88,13 +87,12 @@ package system.events
          */
         public function set string( str:String ):void
         {
-            _s = str ;    
+            _s = str ;
         }
         
         /**
          * @private
          */
-        private var _s:String ;    
-        
+        private var _s:String ;
     }
 }

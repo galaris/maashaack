@@ -121,7 +121,7 @@ package system.data.stacks
          */ 
         public function clear():void
         {
-        	_s.clear() ;
+            _s.clear() ;
         }        
         
         /**
@@ -174,8 +174,8 @@ package system.data.stacks
          */        
         public function push(o:*):void
         {
-        	validate( o ) ;
-        	_s.push(o) ;
+            validate( o ) ;
+            _s.push(o) ;
         }
         
         /**
@@ -220,7 +220,7 @@ package system.data.stacks
             s += ")" ;
             return s ;
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -230,7 +230,7 @@ package system.data.stacks
              return (_s as Object).toString() ;
         }
         
-
+        
         /**
          * Evaluates the specified value and throw a <code class="prettyprint">TypeError</code> object if the value is not valid.
          * @throws TypeError if the value is not valid.
@@ -252,6 +252,5 @@ package system.data.stacks
          * @private
          */
         private var _type:* ;
-        
     }
 }

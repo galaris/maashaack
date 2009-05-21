@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
+    import flash.events.Event;
 
     /**
      * The <code class="prettyprint">ArrayEvent</code> to dispatch an event who contains an Array object.
@@ -80,7 +80,7 @@ package system.events
          */
         public function get array():Array
         {
-            return _ar ;    
+            return _ar ;
         }
         
         /**
@@ -88,13 +88,12 @@ package system.events
          */
         public function set array( ar:Array ):void
         {
-            _ar = ar ;    
+            _ar = ar ;
         }
         
         /**
          * The internal array instance.
          */
-        private var _ar:Array ;    
-        
+        private var _ar:Array ;
     }
 }

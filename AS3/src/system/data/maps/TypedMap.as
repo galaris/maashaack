@@ -102,7 +102,7 @@ package system.data.maps
          */        
         public function clear():void
         {
-        	_map.clear() ;
+            _map.clear() ;
         }
         
         /**
@@ -205,7 +205,7 @@ package system.data.maps
             {
                 validate( it.next() ) ;
             }
-            _map.putAll( m ) ;        	
+            _map.putAll( m ) ;
         }
         
         /**
@@ -278,7 +278,7 @@ package system.data.maps
         /**
          * The internal type function.
          */
-        private var _type:* ;        
+        private var _type:* ;
         
     }
 }

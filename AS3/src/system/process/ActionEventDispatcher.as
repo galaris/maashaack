@@ -37,8 +37,8 @@ package system.process
 {
     import system.events.BasicEvent;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * A process who dispatch events in the global event flow or locally.
      * <p><b>Example :</b></p>
@@ -97,7 +97,7 @@ package system.process
          */
         public function get event():*
         {
-        	return _event ;
+            return _event ;
         }
         
         /**
@@ -145,8 +145,5 @@ package system.process
          * @private
          */
         private var _event:Event ;
-    
     }
-
 }
-

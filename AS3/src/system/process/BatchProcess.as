@@ -111,15 +111,15 @@ package system.process
          */
         public function addAction( action:Action , useWeakReference:Boolean=false ):Boolean
         {
-        	if ( action != null )
-        	{
+            if ( action != null )
+            {
                 action.addEventListener( ActionEvent.FINISH, _onFinished , false, 0 , useWeakReference ) ;
                 return _batch.add( action ) ;
-        	}
-        	else
-        	{
-        		return false ;
-        	}
+            }
+            else
+            {
+                return false ;
+            }
         }
         
         /**

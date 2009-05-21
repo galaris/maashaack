@@ -41,23 +41,20 @@ package system.process
      */
     public interface Lockable
     {
-
         /**
          * Returns <code class="prettyprint">true</code> if the object is locked.
          * @return <code class="prettyprint">true</code> if the object is locked.
          */
         function isLocked():Boolean ;
-    
+        
         /**
          * Locks the object.
          */
         function lock():void ;
-    
+        
         /**
          * Unlocks the object.
          */
         function unlock():void ; 
-        
     }
-    
 }

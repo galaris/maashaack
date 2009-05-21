@@ -37,7 +37,7 @@ package system.comparators
 {
     import system.Comparator;
     import system.Reflection;
-    import system.process.Priority;    
+    import system.process.Priority;
 
     /**
      * This comparator compare two Priority objects and use the priority property of this Priority objects.
@@ -68,8 +68,8 @@ package system.comparators
         {
             if ( (o1 is Priority) && (o2 is Priority ) ) 
             {
-            	var p1:int = (o1 as Priority).priority ;
-            	var p2:int = (o2 as Priority).priority ;
+                var p1:int = (o1 as Priority).priority ;
+                var p2:int = (o2 as Priority).priority ;
                 if( p1 < p2 )
                 {
                     return 1 ;

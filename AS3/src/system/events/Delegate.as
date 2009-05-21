@@ -38,8 +38,8 @@ package system.events
     import system.Cloneable;
     import system.process.Runnable;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * Delegate event listener, this listener create a proxy over a method and this scope.
      * <p><b>Note :</b>
@@ -79,7 +79,7 @@ package system.events
         {
             _a = _a.concat( args ) ;
             _p = Delegate.create.apply(this, [_s].concat([_m], _a) ) ;
-        }        
+        }
         
         /**
          * Indicates the proxy method reference.
@@ -88,7 +88,7 @@ package system.events
         {
             return _m ;
         }
-    
+        
         /**
          * Indicates the scope reference of the proxy target.
          */
@@ -107,20 +107,20 @@ package system.events
                 _a = [].concat( _a , args ) ;
                 _p = Delegate.create.apply(this, [_s].concat([_m], _a) ) ;
             }
-        }        
- 
-         /**
-          * Returns a shallow copy of the instance.
+        } 
+        
+        /**
+         * Returns a shallow copy of the instance.
          * @return a shallow copy of the instance.
          */
-         public function clone():*
-         {
+        public function clone():*
+        {
             var d:Delegate = new Delegate( _s, _m ) ;
             d.addArguments.apply( d,  _a ) ;
             return d ;
         }
- 
-         /**
+        
+        /**
          * Creates a method that delegates its arguments to a specified scope. This static method is a wrapper for MM compatibility.
          * @param scope this scope to be used by calling this method.
          * @param method the method to be called.
@@ -160,7 +160,7 @@ package system.events
             }
             _p() ;
         }
-                
+        
         /**
          * @private
          */
@@ -175,12 +175,10 @@ package system.events
          * @private
          */
         private var _a:Array ;
-
+        
         /**
          * @private
          */
         private var _p:Function ;
-
     }
-    
 }

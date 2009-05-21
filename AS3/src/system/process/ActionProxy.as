@@ -77,18 +77,17 @@ package system.process
      */
     public class ActionProxy extends Task
     {
-    
         /**
          * Creates a new ActionProxy instance.
          * @param scope The scope of the proxy method invoked in this process.
          * @param method The method invoked in this process.
          * @param args The Arguments injected in the method.
-         * @param bGlobal the flag to use a global event flow or a local event flow.
-         * @param sChannel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param global the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        function ActionProxy( scope:*, method:Function , args:Array=null , bGlobal:Boolean = false , sChannel:String = null )
+        public function ActionProxy( scope:*, method:Function , args:Array=null , global:Boolean = false , channel:String = null )
         {
-            super( bGlobal, sChannel );
+            super( global, channel );
             this.args   = args ;
             this.method = method ;
             this.scope  = scope ;
@@ -132,7 +131,5 @@ package system.process
             Delegate.create.apply(this, params)();
             notifyFinished() ;
         }
-    
     }
-
 }

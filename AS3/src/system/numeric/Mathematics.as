@@ -163,7 +163,7 @@ package system.numeric
         {
             if ( i2 == 0 )
             {
-            	return i1 ;
+                return i1 ;
             }
             else if ( i1 == i2 ) 
             {

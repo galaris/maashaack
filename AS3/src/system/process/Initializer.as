@@ -68,7 +68,6 @@ package system.process
      */
     public dynamic class Initializer extends Task
     {
-
         /**
          * Creates a new InitProcess instance.
          * @param global the flag to use a global event flow or a local event flow.

@@ -37,23 +37,22 @@ package system.events
 {
     import system.process.Lockable;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
- 	 * This basic class is used to create concrete <code class="prettyprint">IEventDispatcher</code> implementations. This class used composition with an internal <code class="prettyprint">EventDispatcher</code> object.
- 	 * <p>You can overrides the internal <code class="prettyprint">EventDispatcher</code> instance with the <code class="prettyprint">initEventDispatcher</code> or the <code class="prettyprint">setEventDispatcher</code> methods. Used a global singleton reference in this method to register all events in a <code class="prettyprint">FrontController</code> for example.</p>
- 	 */
-	public class CoreEventDispatcher implements IEventDispatcher, Lockable
+      * This basic class is used to create concrete <code class="prettyprint">IEventDispatcher</code> implementations. This class used composition with an internal <code class="prettyprint">EventDispatcher</code> object.
+      * <p>You can overrides the internal <code class="prettyprint">EventDispatcher</code> instance with the <code class="prettyprint">initEventDispatcher</code> or the <code class="prettyprint">setEventDispatcher</code> methods. Used a global singleton reference in this method to register all events in a <code class="prettyprint">FrontController</code> for example.</p>
+      */
+    public class CoreEventDispatcher implements IEventDispatcher, Lockable
     {
-
-		/**
-		 * Creates a new CoreEventDispatcher instance.
-		 * @param global the flag to use a global event flow or a local event flow.
-		 * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
-		 */
+        /**
+         * Creates a new CoreEventDispatcher instance.
+         * @param global the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         */
         public function CoreEventDispatcher( global:Boolean = false , channel:String = null ) 
         {
-    		setGlobal( global , channel ) ;	
+            setGlobal( global , channel ) ;
         }
         
         /**
@@ -61,50 +60,50 @@ package system.events
          */
         public function get channel():String
         {
-            return 	_isGlobal ? _dispatcher.channel : null ;
+            return     _isGlobal ? _dispatcher.channel : null ;
         }
-                
-		/**
-		 * Allows the registration of event listeners on the event target.
-		 * @param type A string representing the event type to listen for. If eventName value is "ALL" addEventListener use addGlobalListener
-		 * @param listener The object that receives a notification when an event of the specified type occurs. This must be an object implementing the <code class="prettyprint">EventListener</code> interface.
-	 	 * @param useCapture Determinates if the event flow use capture or not.
-		 * @param priority Determines the priority level of the event listener.
-		 * @param useWeakReference Indicates if the listener is a weak reference.
-		 */
+        
+        /**
+         * Allows the registration of event listeners on the event target.
+         * @param type A string representing the event type to listen for. If eventName value is "ALL" addEventListener use addGlobalListener
+         * @param listener The object that receives a notification when an event of the specified type occurs. This must be an object implementing the <code class="prettyprint">EventListener</code> interface.
+          * @param useCapture Determinates if the event flow use capture or not.
+         * @param priority Determines the priority level of the event listener.
+         * @param useWeakReference Indicates if the listener is a weak reference.
+         */
         public function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0.0, useWeakReference:Boolean=false):void
         {
             _dispatcher.registerEventListener( type, listener, useCapture, priority, useWeakReference ) ;
         }
-
-		/**
-		 * Dispatches an event into the event flow.
-		 * @param event The Event object that is dispatched into the event flow.
-		 * @return <code class="prettyprint">true</code> if the Event is dispatched.
-		 */
+        
+        /**
+         * Dispatches an event into the event flow.
+         * @param event The Event object that is dispatched into the event flow.
+         * @return <code class="prettyprint">true</code> if the Event is dispatched.
+         */
         public function dispatchEvent( event:Event ):Boolean
         {
             return _dispatcher.dispatchEvent( event ) ;
         }
- 
-	 	/**
-		 * Returns the internal <code class="prettyprint">system.events.EventDispatcher</code> reference.
-		 * @return the internal <code class="prettyprint">system.events.EventDispatcher</code> reference.
-		 */
-     	public function getEventDispatcher():EventDispatcher 
-     	{
-	    	return _dispatcher ;
-	    }
+        
+         /**
+         * Returns the internal <code class="prettyprint">system.events.EventDispatcher</code> reference.
+         * @return the internal <code class="prettyprint">system.events.EventDispatcher</code> reference.
+         */
+         public function getEventDispatcher():EventDispatcher 
+         {
+            return _dispatcher ;
+        }
          
- 		/**
-		 * Checks whether the EventDispatcher object has any listeners registered for a specific type of event.
-		 * This allows you to determine where altered handling of an event type has been introduced in the event flow heirarchy by an EventDispatcher object.
-		 */ 
+         /**
+         * Checks whether the EventDispatcher object has any listeners registered for a specific type of event.
+         * This allows you to determine where altered handling of an event type has been introduced in the event flow heirarchy by an EventDispatcher object.
+         */ 
         public function hasEventListener(type:String):Boolean
         {
             return _dispatcher.hasEventListener(type) ;
         }
-
+        
         /**
          * Indicates if the dispatcher use a global event flow.
          * @return true if the dispatcher use a global event flow.
@@ -114,39 +113,39 @@ package system.events
             return _isGlobal ;
         }
         
-   		/**
-	     * Returns <code class="prettyprint">true</code> if the object is locked.
-	     * @return <code class="prettyprint">true</code> if the object is locked.
-	     */
-    	public function isLocked():Boolean 
-    	{
-	        return ___isLock___ ;
-    	}
-
-	    /**
-	     * Locks the object.
-	     */
-    	public function lock():void 
-    	{
-	        ___isLock___ = true ;
-	    }
-
-		/**
-		 * Allows the registration of event listeners on the event target (Function or EventListener).
-		 * @param type A string representing the event type to listen for. If eventName value is "ALL" addEventListener use addGlobalListener
-		 * @param listener The object that receives a notification when an event of the specified type occurs. This must be an object implementing the <code class="prettyprint">EventListener</code> interface.
-	 	 * @param useCapture Determinates if the event flow use capture or not.
-		 * @param priority Determines the priority level of the event listener.
-		 * @param useWeakReference Indicates if the listener is a weak reference.
-		 */
+           /**
+         * Returns <code class="prettyprint">true</code> if the object is locked.
+         * @return <code class="prettyprint">true</code> if the object is locked.
+         */
+        public function isLocked():Boolean 
+        {
+            return ___isLock___ ;
+        }
+        
+        /**
+         * Locks the object.
+         */
+        public function lock():void 
+        {
+            ___isLock___ = true ;
+        }
+        
+        /**
+         * Allows the registration of event listeners on the event target (Function or EventListener).
+         * @param type A string representing the event type to listen for. If eventName value is "ALL" addEventListener use addGlobalListener
+         * @param listener The object that receives a notification when an event of the specified type occurs. This must be an object implementing the <code class="prettyprint">EventListener</code> interface.
+          * @param useCapture Determinates if the event flow use capture or not.
+         * @param priority Determines the priority level of the event listener.
+         * @param useWeakReference Indicates if the listener is a weak reference.
+         */
         public function registerEventListener(type:String, listener:*, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
         {
             _dispatcher.registerEventListener(type, listener, useCapture, priority, useWeakReference) ;
         }
-
-		/** 
-		 * Removes a listener from the EventDispatcher object.
-		 * If there is no matching listener registered with the <code class="prettyprint">EventDispatcher</code> object, then calling this method has no effect.
+        
+        /** 
+         * Removes a listener from the EventDispatcher object.
+         * If there is no matching listener registered with the <code class="prettyprint">EventDispatcher</code> object, then calling this method has no effect.
          * @param type The type of event.
          * @param listener The listener object to remove.
          * @param useCapture Specifies whether the listener was registered for the capture phase or the target and bubbling phases. If the listener was registered for both the capture phase and the target and bubbling phases, two calls to removeEventListener() are required to remove both, one call with useCapture() set to true , and another call with useCapture() set to false .
@@ -155,52 +154,52 @@ package system.events
         {
             _dispatcher.unregisterEventListener(type, listener, useCapture) ;
         } 
-
-		/**
-		 * Sets the internal <code class="prettyprint">EventDispatcher</code> reference.
-		 * @param dispatcher The EventDispatcher reference used in this instance.
-		 */
-		public function setEventDispatcher( dispatcher:EventDispatcher ):void 
-		{
-			_dispatcher = dispatcher || initEventDispatcher() ;
-		}
-
-		/**
-		 * Sets if the instance use a global <code class="prettyprint">system.events.EventDispatcher</code> to dispatch this events, if the <code class="prettyprint">flag</code> value is <code class="prettyprint">false</code> the instance use a local EventDispatcher.
-		 * @param flag the flag to use a global event flow or a local event flow.
-		 * @param channel the name of the global event flow if the <code class="prettyprint">flag</code> argument is <code class="prettyprint">true</code>.  
-		 */
-		public function setGlobal( flag:Boolean = false , channel:String=null ):void 
-		{
-			_isGlobal = (flag == true) ;
-			setEventDispatcher( _isGlobal ? EventDispatcher.getInstance( channel ) : null ) ;
-		}
         
-	    /**
-	     * Unlocks the display.
-	     */
-    	public function unlock():void 
-    	{
-	        ___isLock___ = false ;
-	    }
+        /**
+         * Sets the internal <code class="prettyprint">EventDispatcher</code> reference.
+         * @param dispatcher The EventDispatcher reference used in this instance.
+         */
+        public function setEventDispatcher( dispatcher:EventDispatcher ):void 
+        {
+            _dispatcher = dispatcher || initEventDispatcher() ;
+        }
 
-		/** 
-		 * Removes a listener (Function or EventListener object) from the EventDispatcher object.
-		 * If there is no matching listener registered with the <code class="prettyprint">EventDispatcher</code> object, then calling this method has no effect.
-		 * @param type The type of event.
-		 * @param listener The listener object to remove.
-		 * @param useCapture Specifies whether the listener was registered for the capture phase or the target and bubbling phases. If the listener was registered for both the capture phase and the target and bubbling phases, two calls to removeEventListener() are required to remove both, one call with useCapture() set to true , and another call with useCapture() set to false .
-		 */
+        /**
+         * Sets if the instance use a global <code class="prettyprint">system.events.EventDispatcher</code> to dispatch this events, if the <code class="prettyprint">flag</code> value is <code class="prettyprint">false</code> the instance use a local EventDispatcher.
+         * @param flag the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">flag</code> argument is <code class="prettyprint">true</code>.  
+         */
+        public function setGlobal( flag:Boolean = false , channel:String=null ):void 
+        {
+            _isGlobal = (flag == true) ;
+            setEventDispatcher( _isGlobal ? EventDispatcher.getInstance( channel ) : null ) ;
+        }
+        
+        /**
+         * Unlocks the display.
+         */
+        public function unlock():void 
+        {
+            ___isLock___ = false ;
+        }
+        
+        /** 
+         * Removes a listener (Function or EventListener object) from the EventDispatcher object.
+         * If there is no matching listener registered with the <code class="prettyprint">EventDispatcher</code> object, then calling this method has no effect.
+         * @param type The type of event.
+         * @param listener The listener object to remove.
+         * @param useCapture Specifies whether the listener was registered for the capture phase or the target and bubbling phases. If the listener was registered for both the capture phase and the target and bubbling phases, two calls to removeEventListener() are required to remove both, one call with useCapture() set to true , and another call with useCapture() set to false .
+         */
         public function unregisterEventListener( type:String , listener:* , useCapture:Boolean=false ):void
         {
             _dispatcher.unregisterEventListener(type, listener, useCapture) ;
         }
 
-		/**
-		 * Checks whether an event listener is registered with this EventDispatcher object or any of its ancestors for the specified event type.
-		 * This method returns <code class="prettyprint">true</code> if an event listener is triggered during any phase of the event flow when an event of the specified type is dispatched to this EventDispatcher object or any of its descendants.
-		 * @return A value of <code class="prettyprint">true</code> if a listener of the specified type will be triggered; <code class="prettyprint">false</code> otherwise.
-		 */
+        /**
+         * Checks whether an event listener is registered with this EventDispatcher object or any of its ancestors for the specified event type.
+         * This method returns <code class="prettyprint">true</code> if an event listener is triggered during any phase of the event flow when an event of the specified type is dispatched to this EventDispatcher object or any of its descendants.
+         * @return A value of <code class="prettyprint">true</code> if a listener of the specified type will be triggered; <code class="prettyprint">false</code> otherwise.
+         */
         public function willTrigger(type:String):Boolean
         {
             return _dispatcher.willTrigger(type) ;
@@ -216,20 +215,19 @@ package system.events
             return new EventDispatcher( this ) ;
         }
         
-		/**
-		 * The internal EventDispatcher reference.
-		 */
-    	private var _dispatcher:EventDispatcher ;  
-    
-    	/**
-	 	 * The internal flag to indicate if the event flow is global.
-		 */
-		private var _isGlobal:Boolean ;
-    	
-    	/**
-     	 * The internal flag to indicates if the display is locked or not.
-     	 */ 
-    	private var ___isLock___:Boolean = false ;
-    	
+        /**
+         * The internal EventDispatcher reference.
+         */
+        private var _dispatcher:EventDispatcher ;
+        
+        /**
+          * The internal flag to indicate if the event flow is global.
+         */
+        private var _isGlobal:Boolean ;
+        
+        /**
+          * The internal flag to indicates if the display is locked or not.
+          */ 
+        private var ___isLock___:Boolean ;
     }
 }

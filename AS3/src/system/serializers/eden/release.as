@@ -35,7 +35,6 @@
 
 package system.serializers.eden
 {
-    	
     /**
      * The "release" namespace
      */

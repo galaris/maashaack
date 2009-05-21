@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
+    import flash.events.Event;
 
     /**
      * The <code class="prettyprint">NumberEvent</code> to dispatch an event who contains a specific Number context.
@@ -49,7 +49,6 @@ package system.events
      */
     public class NumberEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">NumberEvent</code> instance.
          * @param type the string type of the instance. 
