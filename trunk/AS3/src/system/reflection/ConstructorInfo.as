@@ -41,21 +41,20 @@ package system.reflection
      */
     public interface ConstructorInfo
     {
-
         /**
          * Indicates the Array represent of all arguments in a constructor.
          */
         function get arguments():Array;
-
+        
         /**
          * Creates the constructor representation.
          */
         function construct( ...args:Array ):*;
-
+        
         /**
          * Invoke the constructor representation with an array of parameters.
          */
-        function invoke( params:Array ):*;        
+        function invoke( params:Array ):* ;
     }
 }
 

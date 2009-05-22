@@ -41,11 +41,10 @@ package system.reflection
      */
     public interface ClassInfo extends TypeInfo
     {
-
         /**
          * List all accessors in the class.
          */
-        function get accessors():Array;        
+        function get accessors():Array;
 
         /**
          * List all constants in the class.
@@ -56,7 +55,7 @@ package system.reflection
          * The filter type reference of this class info.
          */
         function get filter():FilterType;
-
+        
         /**
          * @private
          */
@@ -76,7 +75,7 @@ package system.reflection
         /**
          * Indicates the name of the class.
          */
-        function get name():String;        
+        function get name():String ;
 
         /**
          * List all properties in the class.
@@ -87,7 +86,7 @@ package system.reflection
         /**
          * Indicates the ClassInfo object of the super class.
          */
-        function get superClass():ClassInfo;        
+        function get superClass():ClassInfo ;
 
         /**
          * List all variables in the class.
@@ -100,14 +99,14 @@ package system.reflection
          * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
          */
         function hasInterface( ...interfaces ):Boolean ;
-
+        
         /**
          * Indicates if the specified class inherit fromm all class passed-in arguments.
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
          * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
          */
         function inheritFrom( ...classes ):Boolean ;
-
+        
         /**
          * Indicates if the specified object is dynamic.
          * <p><b>Example :</b></p>
@@ -117,7 +116,7 @@ package system.reflection
          * </pre>
          */
         function isDynamic():Boolean;
-
+        
         /**
          * Indicates if the specified object is final.
          * <p><b>Example :</b></p>
@@ -138,8 +137,8 @@ package system.reflection
          * trace( Reflection.getClassInfo( new Array() ).isInstance() ) ; // true
          * </pre>
          */
-        function isInstance():Boolean;   
-
+        function isInstance():Boolean;
+        
         /**
          * Indicates if the specified object is static.
          * <p><b>Example :</b></p>
@@ -148,8 +147,8 @@ package system.reflection
          * trace( Reflection.getClassInfo(Math).isStatic() ) ; // true
          * </pre>
          */
-        function isStatic():Boolean;        
-
+        function isStatic():Boolean;
+        
         /**
          * Returns the XML representation of the class.
          * @return the XML representation of the class.

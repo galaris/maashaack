@@ -47,7 +47,7 @@ package system.reflection
          */
         function get arguments():Array;
 
-        //function contruct( args... ):*;        
+        //function contruct( args... ):*;
         
         /**
          * Indicates if the method returns nothing.
