@@ -1,5 +1,4 @@
-﻿
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
 The contents of this file are subject to the Mozilla Public License Version
@@ -34,56 +33,50 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 
 */
- 
+
 package system.reflection 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.Enum;
-    
-    public class MemberTypeTest extends TestCase 
+
+    public class AccessorTypeTest extends TestCase 
     {
-        public function MemberTypeTest(name:String = "")
+        public function AccessorTypeTest(name:String = "")
         {
             super(name);
         }
         
         public function testConstructor():void
         {
-            var mt:MemberType = new MemberType(10,"hello") ;
-            assertNotNull( mt                  , "01 - MemberType constructor failed.") ;
-            assertEquals( String(mt) , "hello" , "02 - MemberType constructor failed.") ;
-            assertEquals( int(mt)    , 10      , "03 - MemberType constructor failed.") ;
+            var at:AccessorType = new AccessorType(10,"hello") ;
+            assertNotNull( at                  , "01 - AccessorType constructor failed.") ;
+            assertEquals( String(at) , "hello" , "02 - AccessorType constructor failed.") ;
+            assertEquals( int(at)    , 10      , "03 - AccessorType constructor failed.") ;
         }
         
         public function testInherit():void
         {
-            var mt:MemberType = new MemberType(10,"hello") ;
-            assertTrue( mt is Enum , "MemberType must extends the Enum class.") ;
+            var mt:AccessorType = new AccessorType(10,"hello") ;
+            assertTrue( mt is Enum , "AccessorType must extends the Enum class.") ;
         }
         
-        public function testVariable():void
+        public function testReadOnly():void
         {
-            assertEquals( String(MemberType.variable) , "variable" , "01 - MemberType.variable failed.") ;
-            assertEquals( int(MemberType.variable)    , 1          , "02 - MemberType.variable failed.") ;
+            assertEquals( String(AccessorType.readOnly) , "readonly" , "01 - AccessorType.readOnly failed.") ;
+            assertEquals( int(AccessorType.readOnly)    , 1          , "02 - AccessorType.readOnly failed.") ;
         }
         
-        public function testConstant():void
+        public function testWriteOnly():void
         {
-            assertEquals( String(MemberType.constant) , "constant" , "01 - MemberType.constant failed.") ;
-            assertEquals( int(MemberType.constant)    , 2          , "02 - MemberType.constant failed.") ;
+            assertEquals( String(AccessorType.writeOnly) , "writeonly" , "01 - AccessorType.writeOnly failed.") ;
+            assertEquals( int(AccessorType.writeOnly)    , 2           , "02 - AccessorType.writeOnly failed.") ;
         }
         
-        public function testAccessor():void
+        public function testReadWrite():void
         {
-            assertEquals( String(MemberType.accessor) , "accessor" , "01 - MemberType.accessor failed.") ;
-            assertEquals( int(MemberType.accessor)    , 3          , "02 - MemberType.accessor failed.") ;
-        }
-        
-        public function testmethod():void
-        {
-            assertEquals( String(MemberType.method) , "method" , "01 - MemberType.method failed.") ;
-            assertEquals( int(MemberType.method)    , 4        , "02 - MemberType.method failed.") ;
+            assertEquals( String(AccessorType.readWrite) , "readwrite" , "01 - AccessorType.readWrite failed.") ;
+            assertEquals( int(AccessorType.readWrite)    , 3           , "02 - AccessorType.readWrite failed.") ;
         }
     }
 }

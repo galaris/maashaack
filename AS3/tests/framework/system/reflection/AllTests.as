@@ -46,8 +46,9 @@ package system.reflection
         {
             var suite:TestSuite = new TestSuite("system.reflection");
             
-            suite.addTestSuite(FilterTypeTest);
+            suite.addTestSuite(AccessorTypeTest);
             suite.addTestSuite(ClassInfoTest);
+            suite.addTestSuite(FilterTypeTest);
             suite.addTestSuite(MemberTypeTest);
             suite.addTestSuite(TypeInfoTest);
             

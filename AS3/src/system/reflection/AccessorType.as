@@ -52,17 +52,17 @@ package system.reflection
         {
             super( value, name );
         }
-
+        
         /**
          * Determinates the "readOnly" accessor type value.
          */
         public static const readOnly:AccessorType = new AccessorType( 1, "readonly" );
-
+        
         /**
          * Determinates the "writeOnly" accessor type value.
          */
         public static const writeOnly:AccessorType = new AccessorType( 2, "writeonly" );
-
+        
         /**
          * Determinates the "readWrite" accessor type value.
          */
