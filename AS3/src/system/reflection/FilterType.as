@@ -65,14 +65,7 @@ package system.reflection
          */
         public function get usePrototypeInfo():Boolean
         {
-            var value:uint = valueOf( ) & 0x00000f;
-            
-            if( value < 2 )
-            {
-                return true;
-            }
-            
-            return false;
+            return ( valueOf() & 0x00000F ) < 2 ;
         }
 
         /**
@@ -80,29 +73,15 @@ package system.reflection
          */          
         public function get useTraitInfo():Boolean
         {
-            var value:uint = valueOf( ) & 0x00000f;
-            
-            if( value == 1 )
-            {
-                return false;
-            }
-            
-            return true;
+            return ( valueOf() & 0x00000F ) != 1 ;
         }
-
+        
         /**
          * Indicates if the declared class are showed.
          */        
         public function get showDeclared():Boolean
         {
-            var value:uint = (valueOf( ) & 0x0000f0) >>> 4;
-            
-            if( value > 1 )
-            {
-                return false; //should never happen
-            }
-            
-            return true;
+            return ( (valueOf( ) & 0x0000F0) >>> 4 ) <= 1 ;
         }
 
         /**
@@ -110,31 +89,17 @@ package system.reflection
          */
         public function get showInherited():Boolean
         {
-            var value:uint = (valueOf( ) & 0x0000f0) >>> 4;
-            
-            if( value == 0 )
-            {
-                return true;
-            }
-            
-            return false;
+            return ( (valueOf( ) & 0x0000f0) >>> 4 ) == 0;
         }
-
+        
         /**
          * Indicates if the static members are showed.
          */
         public function get showStatic():Boolean
         {
-            var value:uint = (valueOf( ) & 0x000f00) >>> 8;
-            
-            if( value == 0 )
-            {
-                return false;
-            }
-            
-            return true;
+            return ( (valueOf( ) & 0x000f00) >>> 8 ) != 0 ;
         }
-
+        
         /**
          * Default filter type value.
          * <li>use both prototype and trait</li>
@@ -142,17 +107,17 @@ package system.reflection
          * <li>ignore static</li>
          */
         public static const none:FilterType = new FilterType( 0x000, "none" );
-
+        
         /**
          * Trait members will not be searched. 
          */
         public static const prototypeOnly:FilterType = new FilterType( 0x001, "prototypeOnly" );
-
+        
         /**
          * Prototype members will not be searched. 
          */
         public static const traitOnly:FilterType = new FilterType( 0x002, "traitOnly" );
-
+        
         /**
          * Inherited members will not be searched.
          * <p><b>Note:</b></p>
@@ -163,7 +128,7 @@ package system.reflection
          * <p>For prototype this will apply both to properties and methods.</p>
          */
         public static const declaredOnly:FilterType = new FilterType( 0x010, "declaredOnly" );
-
+        
         /**
          * Static members will be searched too. 
          */

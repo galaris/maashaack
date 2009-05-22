@@ -35,14 +35,13 @@
 
 package system.reflection
 {
-    import system.Enum;    
-
+    import system.Enum;
+    
     /**
      * The member type enumeration class.
      */
     public class MemberType extends Enum
     {
-
         /**
          * Creates a new MemberType instance.
          * @param value The value of the enumeration.
@@ -52,22 +51,22 @@ package system.reflection
         {
             super( value, name );
         }
-
+        
         /**
          * The "variable" member type value.
          */
         public static const variable:MemberType = new MemberType( 1, "variable" );
-
+        
         /**
          * The "constant" member type value.
          */
         public static const constant:MemberType = new MemberType( 2, "constant" );
-
+        
         /**
          * The "accessor" member type value.
          */
         public static const accessor:MemberType = new MemberType( 3, "accessor" );
-
+        
         /**
          * The "method" member type value.
          */

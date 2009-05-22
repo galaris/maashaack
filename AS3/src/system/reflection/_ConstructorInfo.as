@@ -54,12 +54,12 @@ package system.reflection
 
         /**
          * Indicates the Array represent of all arguments in a constructor.
-         */        
+         */
         public function get arguments():Array
         {
             return null ;
-        }        
-
+        } 
+        
         /**
          * Creates the constructor representation.
          */        
@@ -67,15 +67,15 @@ package system.reflection
         {
             return null ;
         }
-
+        
         /**
          * Invoke the constructor representation with an array of parameters.
          */        
         public function invoke( args:Array ):*
         {
             return construct.apply( null, args ) ;
-        }        
-
+        }
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.

@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.reflection
 {
     import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;  
+    import buRRRn.ASTUce.framework.TestSuite;
 
     public class AllTests
     {
@@ -47,8 +47,9 @@ package system.reflection
             var suite:TestSuite = new TestSuite("system.reflection");
             
             suite.addTestSuite(FilterTypeTest);
-            suite.addTestSuite(TypeInfoTest);
             suite.addTestSuite(ClassInfoTest);
+            suite.addTestSuite(MemberTypeTest);
+            suite.addTestSuite(TypeInfoTest);
             
             return suite;
         }

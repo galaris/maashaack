@@ -41,12 +41,11 @@ package system.reflection
      */
     public interface MemberInfo
     {
-
         /**
          * Indicates the name of the member object.
          */
         function get name():String;
-
+        
         /**
          * Indicates the String representation of the type of the member object.
          */

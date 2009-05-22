@@ -71,12 +71,10 @@ package system.reflection
                 for( var m1:String in _class[name] )
                 {
                     node = _class[name][m1];
-                    
                     if( ! filter.showInherited && (node.@declaredBy != undefined) && ! _isDeclaredLocaly( String( node.@declaredBy ) ) )
                     {
                         continue;
                     }
-                    
                     members.push( String( node.@name ) );
                 }
             }
