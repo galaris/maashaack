@@ -36,10 +36,10 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;    
+    import system.process.mocks.MockTaskListener;
 
     // TODO test progress event !!
     
@@ -104,9 +104,25 @@ package system.process
             assertNotSame( clone  , seq  , "clone method failed, the shallow copy isn't the same with the BatchProcess object." ) ;
         }
         
+        public function testElement():void
+        {
+            var s:Sequencer = new Sequencer() ;
+            
+            assertNull( s.element() , "01 - Sequencer element() failed.") ;
+            
+            var t1:Task = new MockTask("testElement_1") ;
+            var t2:Task = new MockTask("testElement_2") ;
+            
+            s.addAction(t1) ;
+            s.addAction(t2) ;
+            assertEquals( s.element() , t1 , "02 - Sequencer element() failed.") ;
+            
+            s.run() ;
+            assertNull( s.element() , "03 - Sequencer element() failed.") ;
+        }
+        
         public function testEvents():void
         {
-            
             var s:Sequencer = new Sequencer() ;
             mockListener = new MockTaskListener(s) ;
             
