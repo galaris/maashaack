@@ -88,12 +88,12 @@ package system.process
         /**
          * Creates a new ActionLoader instance.
          * @param loader The Loader object reference to initialize this process.
-         * @param bGlobal the flag to use a global event flow or a local event flow.
-         * @param sChannel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param global the flag to use a global event flow or a local event flow.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function ActionLoader( loader:Loader=null , bGlobal:Boolean = false, sChannel:String = null)
+        public function ActionLoader( loader:Loader=null , global:Boolean = false, channel:String = null)
         {
-            super( loader , bGlobal, sChannel ) ;
+            super( loader , global, channel ) ;
         }
         
         /**
@@ -187,7 +187,7 @@ package system.process
             if ( contentLoaderInfo != null )
             {
                 super.register( contentLoaderInfo ) ;
-                contentLoaderInfo.addEventListener( Event.INIT, _init, false, 0, true ) ;
+                contentLoaderInfo.addEventListener( Event.INIT, dispatchEvent, false, 0, true ) ;
             }
         }
         
@@ -199,16 +199,8 @@ package system.process
             if ( contentLoaderInfo != null )
             {            
                 super.unregister(contentLoaderInfo) ;
-                contentLoaderInfo.removeEventListener( Event.INIT , _init ) ;
+                contentLoaderInfo.removeEventListener( Event.INIT , dispatchEvent ) ;
             }
-        }
-        
-        /**
-         * Invoked when the Event.INIT event is fired.
-         */
-        protected function _init( e:Event ):void
-        {
-            dispatchEvent( e ) ;
         }
         
         /**

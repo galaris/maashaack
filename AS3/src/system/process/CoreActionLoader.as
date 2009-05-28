@@ -76,7 +76,7 @@ package system.process
          */
         public function get bytesLoaded():uint
         {
-            return 0 ;    
+            return 0 ;
         }
         
         /**
@@ -198,10 +198,10 @@ package system.process
             if ( dispatcher != null )
             {
                 dispatcher.addEventListener( Event.COMPLETE                    , complete      , false, 0, true ) ;
-                dispatcher.addEventListener( HTTPStatusEvent.HTTP_STATUS       , httpStatus    , false, 0, true ) ;
+                dispatcher.addEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent , false, 0, true ) ;
                 dispatcher.addEventListener( IOErrorEvent.IO_ERROR             , ioError       , false, 0, true ) ;
-                dispatcher.addEventListener( Event.OPEN                        , open          , false, 0, true ) ;
-                dispatcher.addEventListener( ProgressEvent.PROGRESS            , progress      , false, 0, true ) ;
+                dispatcher.addEventListener( Event.OPEN                        , dispatchEvent , false, 0, true ) ;
+                dispatcher.addEventListener( ProgressEvent.PROGRESS            , dispatchEvent , false, 0, true ) ;
                 dispatcher.addEventListener( SecurityErrorEvent.SECURITY_ERROR , securityError , false, 0, true ) ;
             }
         }
@@ -250,10 +250,10 @@ package system.process
             if ( dispatcher != null )
             { 
                 dispatcher.removeEventListener( Event.COMPLETE                    , complete      ) ;
-                dispatcher.removeEventListener( HTTPStatusEvent.HTTP_STATUS       , httpStatus    ) ;
+                dispatcher.removeEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent ) ;
                 dispatcher.removeEventListener( IOErrorEvent.IO_ERROR             , ioError       ) ;
-                dispatcher.removeEventListener( Event.OPEN                        , open          ) ;
-                dispatcher.removeEventListener( ProgressEvent.PROGRESS            , progress      ) ;
+                dispatcher.removeEventListener( Event.OPEN                        , dispatchEvent ) ;
+                dispatcher.removeEventListener( ProgressEvent.PROGRESS            , dispatchEvent ) ;
                 dispatcher.removeEventListener( SecurityErrorEvent.SECURITY_ERROR , securityError ) ;
             }
         }
@@ -266,14 +266,14 @@ package system.process
             dispatchEvent(e) ;
             notifyFinished() ;
         }
-        
-        /**
-         * Dispatch HTTPStatusEvent if a call to load() attempts to access data over HTTP and the current Flash Player environment is able to detect and return the status code for the request.
-         */
-        protected function httpStatus( e:HTTPStatusEvent ):void
-        {
-            dispatchEvent(e) ;
-        }
+//        
+//        /**
+//         * Dispatch HTTPStatusEvent if a call to load() attempts to access data over HTTP and the current Flash Player environment is able to detect and return the status code for the request.
+//         */
+//        protected function httpStatus( e:HTTPStatusEvent ):void
+//        {
+//            dispatchEvent(e) ;
+//        }
         
         /**
          * Dispatch IOErrorEvent if a call to load() results in a fatal error that terminates the download.
@@ -306,7 +306,6 @@ package system.process
         protected function progress( e:ProgressEvent ):void
         {
             dispatchEvent(e) ;
-            notifyProgress() ;
         }
         
         /**
