@@ -142,8 +142,7 @@ package system.process
             assertEquals ( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
             
             mockListener.unregister() ;
-            mockListener = null ;    
-            
+            mockListener = null ;
         }
         
         public function testRun():void
@@ -157,7 +156,7 @@ package system.process
             s.addAction( new MockTask("testRun_2") ) ;
             s.addAction( new MockTask("testRun_3") ) ;
             
-            var size:uint = s.size() ;
+            var size:int = s.size() ;
             
             s.run() ;
             
@@ -170,7 +169,6 @@ package system.process
         
         public function testRunClone():void
         {
-            
             MockTask.reset() ;
             
             var s:Sequencer = new Sequencer() ;
@@ -190,7 +188,6 @@ package system.process
             assertEquals( c.size()               ,    0 , "run method failed, the sequencer must be empty after the run process." ) ;
             
             MockTask.reset() ;
-            
         }
         
         public function testSize():void
