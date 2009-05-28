@@ -45,7 +45,7 @@ package system.process
     import system.events.ActionEvent;
     import system.hack;
     import system.process.Stoppable;
-    
+
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>
@@ -108,6 +108,14 @@ package system.process
         public function get current():Action
         {
             return _cur ;
+        }
+        
+        /**
+         * Retrieves, but does not remove, the head of this sequencer.
+         */
+        public function element():* 
+        {
+            return _queue.element() ;
         }
         
         /**
