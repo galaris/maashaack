@@ -44,11 +44,10 @@ package system.process
 
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("system process tests");
-
+            
             //process.cache
             suite.addTest( system.process.caches.AllTests.suite() );
             
@@ -71,6 +70,7 @@ package system.process
                 suite.addTestSuite( ResetableTest );
                 suite.addTestSuite( RunnableTest  );
                 suite.addTestSuite( SequencerTest ) ;
+                suite.addTestSuite( StartableTest );
                 suite.addTestSuite( StoppableTest );
                 suite.addTestSuite( TaskTest ) ;
                 suite.addTestSuite( TimeoutPolicyTest ) ;

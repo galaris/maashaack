@@ -36,13 +36,13 @@
 package system.process
 {
     /**
-     * This interface should be implemented by any class whose instances are intended to be executed.
-     */    
-    public interface Runnable
+     * The Startable interface is used when the command need to be "running" to be active. 
+     */
+    public interface Startable
     {
         /**
-         * Run the process.
+         * Start the process or the command.
          */
-        function run( ...arguments:Array ):void ;
+        function start():void ;
     }
 }
