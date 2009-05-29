@@ -33,16 +33,34 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process
+package system.process 
 {
-    /**
-     * This interface should be implemented by any class whose instances are intended to be executed.
-     */    
-    public interface Runnable
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.process.samples.StartableClass;
+    
+    public class StartableTest extends TestCase 
     {
-        /**
-         * Run the process.
-         */
-        function run( ...arguments:Array ):void ;
+        public function StartableTest( name:String = "" )
+        {
+            super( name );
+        }
+        
+        public function testInterface():void
+        {
+            var s:StartableClass = new StartableClass();
+            
+            assertTrue( s is Startable ) ;
+            
+            try
+            {
+                s.start() ;
+                fail("01 - The Startable interface failed.") ;
+            }
+            catch( e:Error )
+            {
+                assertEquals( e.message  , "start" , "02 - The Startable interface failed.") ;
+            }
+        }
     }
 }
