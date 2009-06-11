@@ -39,7 +39,7 @@ package system.samples
 
     public class CloneableClass implements Cloneable 
     {
-    	
+        
         public function CloneableClass( index:uint=0 )
         {
             this.index = index ;    

@@ -60,7 +60,7 @@ package system.data.collections
             result = formatter.format(new CollectionClass(["value1", "value2"])) ;
             
             assertEquals(result, "{value1,value2}" , "3 - The CollectionFormatter format method failed with a Collection whith one entry inside.") ;
-			
+            
             
         }         
         

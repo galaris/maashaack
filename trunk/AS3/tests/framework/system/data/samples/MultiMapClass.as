@@ -45,7 +45,7 @@ package system.data.samples
         
         public function MultiMapClass()
         {
-        	        	
+                        
         }
         
         public function clear():void

@@ -49,17 +49,17 @@ package system.data.samples
         
         public function addAll( c:Collection ):Boolean
         {
-        	return true ; 
+            return true ; 
         }
 
         public function addAt( index:uint , o:*):void
         {
-        	throw new Error("addAt id:" + index + " o:" + o) ;
+            throw new Error("addAt id:" + index + " o:" + o) ;
         }
         
         public function clear():void
         {
-        	throw new Error("clear") ;
+            throw new Error("clear") ;
         }        
         
         public function clone():*
@@ -114,8 +114,8 @@ package system.data.samples
         
         public function removeRange(fromIndex:uint, toIndex:uint):*
         {
-        	throw new Error("removeRange fromIndex:" + fromIndex + " toIndex:" + toIndex) ;
-        	return null ;
+            throw new Error("removeRange fromIndex:" + fromIndex + " toIndex:" + toIndex) ;
+            return null ;
         }
         
         public function retainAll( c:Collection ):Boolean
@@ -140,7 +140,7 @@ package system.data.samples
                   
         public function toArray():Array
         {
-        	return [] ;
+            return [] ;
         }
                        
         public function toSource(indent:int = 0):String

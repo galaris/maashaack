@@ -45,52 +45,52 @@ package system.data.samples
 
         public function BagClass( ar:Array = null )
         {
-        	super(ar) ;
+            super(ar) ;
         }
                 
         public function addAll(c:Collection):Boolean
         {
-        	return false ;
+            return false ;
         }
         
         public function addCopies(o:*, nCopies:uint):Boolean
         {
-        	return false ;
+            return false ;
         }        
         
         public function containsAll(c:Collection):Boolean
         {
-        	return false ;
+            return false ;
         }
         
         public function getCount(o:*):uint
         {
-        	return 1 ;
+            return 1 ;
         }
         
         public function removeAll(c:Collection):Boolean
         {
-        	return false ;
+            return false ;
         }
         
         public function removeCopies(o:*, nCopies:uint):Boolean
         {
-        	return false ;
+            return false ;
         }
         
         public function retainAll(c:Collection):Boolean
         {
-        	return false ;
+            return false ;
         }
         
         public function uniqueSet():Set
         {
-        	return new ArraySet(toArray()) ;
+            return new ArraySet(toArray()) ;
         }
         
         public function equals(o:*):Boolean
         {
-        	return false ;
+            return false ;
         }
     }
    

@@ -39,11 +39,10 @@ package system.events
     
     import system.events.samples.EventListenerClass;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     public class EventListenerTest extends TestCase 
     {
-
         public function EventListenerTest(name:String = "")
         {
             super( name );
@@ -53,7 +52,7 @@ package system.events
         {
             var listener:EventListener = new EventListenerClass() as EventListener ;
             
-            assertNotNull( listener , "The EventListener interface failed." ) ;          	
+            assertNotNull( listener , "The EventListener interface failed." ) ;              
         }
         
         public function testHandleEvent():void

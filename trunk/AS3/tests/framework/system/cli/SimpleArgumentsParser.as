@@ -34,117 +34,114 @@
 */
 
 package system.cli
-    {
-    
+{
+
     public class SimpleArgumentsParser extends ArgumentsParser
-        {
-        
+    {
         private var _debugTrace:String = "";
         
         public var a:Boolean;
+        
         public var b:Boolean;
+        
         public var c:String;
+        
         public var filename:String;
         
         public function SimpleArgumentsParser()
-            {
-            super( [ "?", "a", "b", "c" ] );
+        {
+            super(["?", "a", "b", "c"]);
             a = false;
             b = false;
             c = "";
             filename = "";
-            }
+        }
         
         public function set debugTrace( msg:String ):void
-            {
+        {
             _debugTrace += msg + "\n";
-            }
+        }
         
         public function get debugTrace():String
-            {
+        {
             return _debugTrace;
-            }
+        }
         
         public function clearTrace():void
-            {
+        {
             _debugTrace = "";
-            }
+        }
         
         public override function onUsage( errorInfo:String = "" ):void
-            {
+        {
             // var data:String = "";
-            
             if( errorInfo != "" )
-                {
+            {
                 debugTrace = "CLI switch error: " + errorInfo;
-                }
+            }
             
             debugTrace = "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>";
             debugTrace = "    -? Show the help";
             debugTrace = "    -a AAA mode";
             debugTrace = "    -b BBB mode";
             debugTrace = "    -c CCC option, x or y or z";
-            
-            }
+        }
         
         public override function onNonSwitch( value:String ):SwitchStatus
-            {
+        {
             filename = value;
             return SwitchStatus.noError;
-            }
+        }
         
         public override function onSwitch( symbol:String, value:String ):SwitchStatus
-            {
+        {
             var status:SwitchStatus = SwitchStatus.noError;
             
             switch( symbol )
-                {
+            {
                 case "?":
-                status = SwitchStatus.showUsage;
-                break;
+                    status = SwitchStatus.showUsage;
+                    break;
                 
                 case "a":
-                a = true;
-                break;
+                    a = true;
+                    break;
                 
                 case "b":
-                b = true;
-                break;
+                    b = true;
+                    break;
                 
                 case "c":
-                value = value.split( ":" ).join( "" );
-                if( (value == "x") || (value == "y") || (value == "z") )
+                    value = value.split(":").join("");
+                    if( (value == "x") || (value == "y") || (value == "z") )
                     {
-                    c = value;
+                        c = value;
                     }
-                else
+                    else
                     {
-                    status = SwitchStatus.error;
-                    onUsage( value + " is not a correct value for -c" );
+                        status = SwitchStatus.error;
+                        onUsage(value + " is not a correct value for -c");
                     }
-                break;
+                    break;
                 
                 default:
-                status = SwitchStatus.error;
-                }
+                    status = SwitchStatus.error;
+            }
             
             return status;
-            }
+        }
         
         public override function onParsed():SwitchStatus
-            {
+        {
             var status:SwitchStatus = SwitchStatus.noError;
             
             if( (filename == null) || (filename == "") )
-                {
+            {
                 debugTrace = "you have to provide a <filename>.";
                 status = SwitchStatus.showUsage;
-                }
-            
-            return status;
             }
-        
+            return status;
         }
-    
     }
+}
 

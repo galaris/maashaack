@@ -68,7 +68,7 @@ package system.data.iterators
             }
             catch( e:Error )
             {
-            	assertTrue( e is ArgumentError , "01-02 - constructor failed if the passed-in Bag is a null object." ) ;
+                assertTrue( e is ArgumentError , "01-02 - constructor failed if the passed-in Bag is a null object." ) ;
                 assertEquals
                 ( 
                     e.message , 

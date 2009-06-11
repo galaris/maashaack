@@ -122,8 +122,8 @@ package system.data.arrays
             var count:uint ;
             for( var prop:String in ar )
             {
-            	prop ;
-            	count ++ ;
+                prop ;
+                count ++ ;
             }
             
             assertEquals( count , 3 , "05 - The ProxyArray proxy failed." ) ;
@@ -166,8 +166,8 @@ package system.data.arrays
             ar.push( "item1" ) ;
             ar.push( "item2" ) ;
             ar.push( "item3" ) ;            
-                                	
-            assertEquals( ar.toString() , '[item1,item2,item3]' , "02 - The ProxyArray proxy failed." ) ;        	
+                                    
+            assertEquals( ar.toString() , '[item1,item2,item3]' , "02 - The ProxyArray proxy failed." ) ;            
         }        
         
     }

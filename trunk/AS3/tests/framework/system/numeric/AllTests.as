@@ -39,24 +39,20 @@ package system.numeric
     import buRRRn.ASTUce.framework.TestSuite;    
 
     /**
-	 * This class launch all tests.
-	 */
-	public class AllTests
-	{
-		
+     * This class launch all tests.
+     */
+    public class AllTests
+    {
         /**
          * Creates the Test list.
-         */		
+         */
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite( "system.numeric" );
-
             suite.addTestSuite( MathematicsTest ) ;
             suite.addTestSuite( RangeTest ) ;
             suite.addTestSuite( RomanNumberTest ) ;
-
             return suite;
         }
-	}
+    }
 }
-

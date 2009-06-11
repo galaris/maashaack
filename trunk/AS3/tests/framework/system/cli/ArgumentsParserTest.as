@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -34,83 +34,80 @@
 */
 
 package system.cli
-    {
+{
     import buRRRn.ASTUce.framework.*;
-    
+
     public class ArgumentsParserTest extends TestCase
+    {
+        public function ArgumentsParserTest( name:String = "" )
         {
-        
-        public function ArgumentsParserTest( name:String="" )
-            {
-            super( name );
-            }
+            super(name);
+        }
         
         public function testNonSwitchOnly():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( ["hello.txt"] );
+            var result:Boolean = simple.parse(["hello.txt"]);
 
-            assertTrue( result );            
-            assertEquals( simple.a, false );
-            assertEquals( simple.b, false );
-            assertEquals( simple.c, "" );
-            assertEquals( simple.filename, "hello.txt" );
-            }
-        
+            assertTrue(result);            
+            assertEquals(simple.a, false);
+            assertEquals(simple.b, false);
+            assertEquals(simple.c, "");
+            assertEquals(simple.filename, "hello.txt");
+        }
+
         public function testSwitchOnly():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( ["-a", "-b", "-c:z"] );
+            var result:Boolean = simple.parse(["-a", "-b", "-c:z"]);
             
-            assertFalse( result ); //<filename> is required
-            assertTrue( simple.debugTrace.indexOf( "you have to provide a <filename>." ) > -1 );
-            assertTrue( simple.debugTrace.indexOf( "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>" ) > -1 );
-            assertEquals( simple.a, true );
-            assertEquals( simple.b, true );
-            assertEquals( simple.c, "z" );
-            assertEquals( simple.filename, "" );
-            }
-        
+            assertFalse(result); //<filename> is required
+            assertTrue(simple.debugTrace.indexOf("you have to provide a <filename>.") > -1);
+            assertTrue(simple.debugTrace.indexOf("Usage: myApp [-a] [-b] [-c:x|y|z] <filename>") > -1);
+            assertEquals(simple.a, true);
+            assertEquals(simple.b, true);
+            assertEquals(simple.c, "z");
+            assertEquals(simple.filename, "");
+        }
+
         public function testEmpty():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( [] );
+            var result:Boolean = simple.parse([]);
             
-            assertFalse( result );
-            assertTrue( simple.debugTrace.indexOf( "you have to provide a <filename>." ) > -1 );
-            assertTrue( simple.debugTrace.indexOf( "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>" ) > -1 );
-            }
-        
+            assertFalse(result);
+            assertTrue(simple.debugTrace.indexOf("you have to provide a <filename>.") > -1);
+            assertTrue(simple.debugTrace.indexOf("Usage: myApp [-a] [-b] [-c:x|y|z] <filename>") > -1);
+        }
+
         public function testShowUsage():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( ["-?"] );
+            var result:Boolean = simple.parse(["-?"]);
             
-            assertFalse( result );
-            assertFalse( simple.debugTrace.indexOf( "you have to provide a <filename>." ) > -1 );
-            assertTrue( simple.debugTrace.indexOf( "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>" ) > -1 );
-            }
-        
+            assertFalse(result);
+            assertFalse(simple.debugTrace.indexOf("you have to provide a <filename>.") > -1);
+            assertTrue(simple.debugTrace.indexOf("Usage: myApp [-a] [-b] [-c:x|y|z] <filename>") > -1);
+        }
+
         public function testInvalidSwitch():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( ["-x"] );
+            var result:Boolean = simple.parse(["-x"]);
             
-            assertFalse( result );
-            assertTrue( simple.debugTrace.indexOf( "CLI switch error: -x" ) > -1 );
-            assertTrue( simple.debugTrace.indexOf( "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>" ) > -1 );
-            }
+            assertFalse(result);
+            assertTrue(simple.debugTrace.indexOf("CLI switch error: -x") > -1);
+            assertTrue(simple.debugTrace.indexOf("Usage: myApp [-a] [-b] [-c:x|y|z] <filename>") > -1);
+        }
         
         public function testInvalidSwitchValue():void
-            {
+        {
             var simple:SimpleArgumentsParser = new SimpleArgumentsParser();
-            var result:Boolean = simple.parse( ["-c:a"] );
+            var result:Boolean = simple.parse(["-c:a"]);
             
-            assertFalse( result );
-            assertTrue( simple.debugTrace.indexOf( "CLI switch error: a is not a correct value for -c" ) > -1 );
-            assertTrue( simple.debugTrace.indexOf( "Usage: myApp [-a] [-b] [-c:x|y|z] <filename>" ) > -1 );
-            }
-        
+            assertFalse(result);
+            assertTrue(simple.debugTrace.indexOf("CLI switch error: a is not a correct value for -c") > -1);
+            assertTrue(simple.debugTrace.indexOf("Usage: myApp [-a] [-b] [-c:x|y|z] <filename>") > -1);
         }
-    
     }
+}

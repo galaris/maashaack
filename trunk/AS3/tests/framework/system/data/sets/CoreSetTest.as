@@ -72,7 +72,7 @@ package system.data.sets
         
         public function testConstructor():void
         {
-        	           
+                       
             var s:CoreSet ;
             
             try
@@ -82,11 +82,11 @@ package system.data.sets
             }
             catch( e:Error )
             {
-            	assertTrue( e is ArgumentError , "01-01 - CoreSet constructor failed." ) ;
-            	assertEquals( e.message , "CoreSet constructor failed, the internal Map not must be null." , "01-01 - CoreSet constructor failed." ) ;
+                assertTrue( e is ArgumentError , "01-01 - CoreSet constructor failed." ) ;
+                assertEquals( e.message , "CoreSet constructor failed, the internal Map not must be null." , "01-01 - CoreSet constructor failed." ) ;
             }
             
-        	s = new CoreSet( map.clone() ) ;
+            s = new CoreSet( map.clone() ) ;
             
             assertNotNull(s, "01-01 - CoreSet constructor failed.") ;
             ArrayAssert.assertEquals( s.toArray(), [], "01-02 - CoreSet constructor failed.") ;

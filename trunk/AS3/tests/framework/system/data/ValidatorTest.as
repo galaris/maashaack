@@ -50,7 +50,7 @@ package system.data
         public function testInterface():void
         {
             var o:Validator = new ValidatorClass() as Validator ;
-            assertNotNull( o , "Validator interface must be implemented in the ValidatorClass.") ;    	
+            assertNotNull( o , "Validator interface must be implemented in the ValidatorClass.") ;        
         }
         
         public function testSupports():void
@@ -66,11 +66,11 @@ package system.data
             
             try
             {
-            	o.validate( "hello" ) ;         
+                o.validate( "hello" ) ;         
             }
             catch( e:Error )
             {
-            	fail("01 - the validate method must validate a String value and not throw an error") ;
+                fail("01 - the validate method must validate a String value and not throw an error") ;
             }
             
             try

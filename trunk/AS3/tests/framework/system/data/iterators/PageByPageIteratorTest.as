@@ -78,13 +78,13 @@ package system.data.iterators
             }
             catch( e:Error )
             {
-            	assertTrue( e is IllegalOperationError , "02-02 - PageByPageIterator constructor failed." ) ;
-            	assertEquals
-            	( 
-            	   e.message , 
-            	   "PageByPageIterator constructor failed, data length not must be empty" ,
-            	   "02-03 - PageByPageIterator constructor failed." 
-            	  ) ;
+                assertTrue( e is IllegalOperationError , "02-02 - PageByPageIterator constructor failed." ) ;
+                assertEquals
+                ( 
+                   e.message , 
+                   "PageByPageIterator constructor failed, data length not must be empty" ,
+                   "02-03 - PageByPageIterator constructor failed." 
+                  ) ;
             }
             
             try
@@ -111,7 +111,7 @@ package system.data.iterators
             
             it = new PageByPageIterator([2,3,4], 2) ;
             assertEquals( it.getStepSize() , 2, "04-03 - constructor failed." ) ;
-              	
+                  
         }
         
         public function testInterface():void
@@ -198,7 +198,7 @@ package system.data.iterators
         
         public function testNext():void
         {
-        	var it:PageByPageIterator ;
+            var it:PageByPageIterator ;
 
             ArrayAssert.assertEquals( i.next() , [1,2], "01 : next() failed." ) ;
             ArrayAssert.assertEquals( i.next() , [3,4], "02 - next() failed." ) ;
@@ -214,7 +214,7 @@ package system.data.iterators
         
         public function testPageCount():void
         {
-        	assertEquals( i.pageCount() , 3, "pageCount() method failed.") ;
+            assertEquals( i.pageCount() , 3, "pageCount() method failed.") ;
         }
         
         public function testPrevious():void
@@ -236,12 +236,12 @@ package system.data.iterators
              {
                 it.remove() ;
                 fail("PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
-                	
+                    
              }
              catch(e:Error)
              {
-             	assertTrue(e is IllegalOperationError, "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
-             	assertEquals(e.message, "The PageByPageIterator remove method is unsupported.", "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
+                 assertTrue(e is IllegalOperationError, "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
+                 assertEquals(e.message, "The PageByPageIterator remove method is unsupported.", "PageByPageIterator.remove() method failed, must throw an IllegalOperationError object.") ;
              }
             
         }
@@ -258,7 +258,7 @@ package system.data.iterators
         
         public function testSeek():void
         {
-        	i.seek(1) ;
+            i.seek(1) ;
             ArrayAssert.assertEquals ( i.next() , [3,4], "seek() failed." ) ;
         }
         

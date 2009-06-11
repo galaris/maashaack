@@ -44,10 +44,9 @@ package system.data.maps
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
     import system.data.lists.LinkedList;
-
+    
     public class MultiValueMapTest extends TestCase 
     {
-
         public function MultiValueMapTest(name:String = "")
         {
             super( name );

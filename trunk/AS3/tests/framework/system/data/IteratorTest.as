@@ -89,8 +89,8 @@ package system.data
         {    
             try
             {
-            	i.reset() ;
-            	fail( "01 - test Iterator interface failed with the reset method." ) ;           	
+                i.reset() ;
+                fail( "01 - test Iterator interface failed with the reset method." ) ;               
             }
             catch( e:Error )
             {

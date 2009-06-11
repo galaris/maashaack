@@ -39,11 +39,11 @@ package system.process.samples
 
     public class RunnableClass implements Runnable 
     {
-    	
+        
         public function RunnableClass()
         {
             //    
-        }    	
+        }        
 
         public function run( ...arguments:Array ):void
         {

@@ -42,7 +42,7 @@ package system.data.samples
 
         public function ValidatorClass()
         {
-        	//
+            //
         }
 
         public function supports(value:*):Boolean
@@ -55,7 +55,7 @@ package system.data.samples
             if (!supports(value)) 
             {
                 throw new TypeError( "ValidatorSample.validate(" + value + ") is mismatch.") ;
-            }        	
+            }            
         }
     }
 }

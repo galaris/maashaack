@@ -55,8 +55,8 @@ package system.data.collections
         
         public function testConstructorBasic():void
         {
-        	var co:Collection = new ArrayCollection() ;
-        	var tc:TypedCollection = new TypedCollection( String , co ) ;
+            var co:Collection = new ArrayCollection() ;
+            var tc:TypedCollection = new TypedCollection( String , co ) ;
             assertNotNull(tc, "TypedCollection constructor failed.") ;
         }
         
@@ -64,7 +64,7 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection() ;
             var tc:TypedCollection ;
-                    	
+                        
             tc = new TypedCollection( String, co ) ;
             assertEquals( tc.type , String , "01 - TypedCollection constructor failed with a specific type argument in this constructor.") ;
 
@@ -78,8 +78,8 @@ package system.data.collections
         public function testConstructorCollectionArgument():void
         {
             var co:Collection = new ArrayCollection() ;
-            var tc:TypedCollection ;        	
-        	
+            var tc:TypedCollection ;            
+            
             // 01 - test "collection" argument is null
             try
             {
@@ -90,17 +90,17 @@ package system.data.collections
             {
                 assertTrue( e is ArgumentError , "01-02 - TypedCollection constructor failed." ) ;
                 assertEquals( e.message , "The passed-in 'collection' argument not must be 'null' or 'undefined'.", "01-03 - TypedCollection constructor failed." ) ;
-            }        	
-                    	
+            }            
+                        
             // 02 - basic test with a no empty Collection
             
             co.add("item1") ;
             co.add("item2") ;
             
             tc = new TypedCollection( String , co ) ;
-            assertNotNull(tc, "02-01 - TypedCollection constructor failed with a no empty collection of String values.") ;        	
+            assertNotNull(tc, "02-01 - TypedCollection constructor failed with a no empty collection of String values.") ;            
             assertEquals(tc.size(), co.size() , "02-02 - TypedCollection constructor failed with a no empty collection of String values.") ;
-        	
+            
             // 03 - test "collection" argument contains an invalid value
             co.add( 1 ) ;
             try
@@ -160,8 +160,8 @@ package system.data.collections
             
             try
             {
-            	tc.add(3) ;
-                fail("02-01 - The TypedCollection add method failed.") ;	
+                tc.add(3) ;
+                fail("02-01 - The TypedCollection add method failed.") ;    
             }
             catch( e:Error )
             {
@@ -191,7 +191,7 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.get(0) , "item1" , "The TypedCollection get method failed." ) ;   	 
+            assertEquals( tc.get(0) , "item1" , "The TypedCollection get method failed." ) ;        
         }
 
         public function testIndexOf():void

@@ -53,7 +53,7 @@ package system.samples
         
         public function set comparator(comp:Comparator):void
         {
-        	_comparator = comp ;
+            _comparator = comp ;
         }
         
         private var _comparator:Comparator ;

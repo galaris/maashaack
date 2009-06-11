@@ -44,14 +44,14 @@ package system.events.samples
         
         public function EventListenerClass()
         {
-        	//
+            //
         }
         
         public var event:Event ;
         
         public function handleEvent(e:Event):void
         {
-            event = e ;	
+            event = e ;    
         }
         
     }

@@ -39,7 +39,7 @@ package system.samples
 
     public class ComparableClass implements Comparable 
     {
-    	
+        
         public function ComparableClass( value:int = 0 )
         {
             this.value = value ;

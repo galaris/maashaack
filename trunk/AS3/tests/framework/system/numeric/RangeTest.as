@@ -62,21 +62,21 @@ package system.numeric
         
         public function testConstructor():void
         {
-        	
-        	assertNotNull( range , "Range object not must be null.") ;
-        	
-        	var r:Range ;
-        	
-        	try
-        	{
-        	   r = new Range(200, 100) ;
-        	   fail( "Range constructor failed, must throws a RangeError when the min argument is >= of the max argument.") ;
-        	}
-        	catch( e:RangeError )
-        	{
+            
+            assertNotNull( range , "Range object not must be null.") ;
+            
+            var r:Range ;
+            
+            try
+            {
+               r = new Range(200, 100) ;
+               fail( "Range constructor failed, must throws a RangeError when the min argument is >= of the max argument.") ;
+            }
+            catch( e:RangeError )
+            {
                 //
-        	}
-                    	
+            }
+                        
         }
         
         public function testInherit():void
@@ -137,7 +137,7 @@ package system.numeric
         
         public function testClone():void
         {
-        	var clone:Range = range.clone() as Range ;
+            var clone:Range = range.clone() as Range ;
             assertNotNull( clone , "range.clone() as Range not must be null.") ;
             assertNotSame(range, clone, "range and this clone not must be the same") ;
             assertEquals( range.min , clone.min, "compare range.min and clone.min failed.") ;
@@ -146,26 +146,26 @@ package system.numeric
         
         public function testCombine():void
         {
-        	var r1:Range = new Range(0,100) ;
-        	var r2:Range = new Range(200,300) ;
-        	
-        	var r3:Range ;
-        	
-        	r3 = Range.combine(r1, r2) ;
-        	
+            var r1:Range = new Range(0,100) ;
+            var r2:Range = new Range(200,300) ;
+            
+            var r3:Range ;
+            
+            r3 = Range.combine(r1, r2) ;
+            
             assertEquals( r3.min , 0, "Range.combine(" + r1 + "," + r2 + ").min failed.") ;
             assertEquals( r3.max , 300, "Range.combine(" + r1 + "," + r2 + ").max failed.") ;
         } 
         
         public function testContains():void
         {
-        	assertTrue( range.contains(150) , "range.contains(150) failed");
-        	assertFalse( range.contains(1000) , "range.contains(1000) failed");
+            assertTrue( range.contains(150) , "range.contains(150) failed");
+            assertFalse( range.contains(1000) , "range.contains(1000) failed");
         }
 
         public function testEquals():void
         {
-        	var r:Range = new Range(100,200) ;
+            var r:Range = new Range(100,200) ;
             assertTrue( range.equals(r) , "range.equals(r) failed with r:" + r + " and range:" + range );
         }
         
@@ -180,18 +180,18 @@ package system.numeric
             r = Range.expand(range, 2 , 2) ;
             assertEquals(r.min , -100 , "Range.expand(" + range + ",2,2) min value failed : " + Range.expand(range)) ;
             assertEquals(r.max ,  400 , "Range.expand(" + range + ",2,2) max value failed : " + Range.expand(range)) ;
-            	
+                
         }
         
         public function testFilterNaNValue():void
         {
             assertEquals(Range.filterNaNValue(NaN), 0, "Range.filterNaNValue(NaN) failed.") ;
-            assertEquals(Range.filterNaNValue(NaN, 2), 2, "Range.filterNaNValue(NaN, 2) failed.") ;	
+            assertEquals(Range.filterNaNValue(NaN, 2), 2, "Range.filterNaNValue(NaN, 2) failed.") ;    
         }
         
         public function testGetCentralValue():void
         {
-        	var middle:Number = range.getCentralValue() ;
+            var middle:Number = range.getCentralValue() ;
             assertEquals(middle, 150, "range.getCentralValue() failed:" + middle + " with range:" + range) ;
         }        
         
@@ -220,7 +220,7 @@ package system.numeric
         
         public function testOverLap():void
         {
-        	        	
+                        
             var r1:Range = new Range(0, 50) ;
             var r2:Range = new Range(0, 99) ;
             var r3:Range = new Range(0, 100) ;

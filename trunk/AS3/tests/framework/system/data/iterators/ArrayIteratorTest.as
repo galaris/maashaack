@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -41,7 +41,6 @@ package system.data.iterators
 
     public class ArrayIteratorTest extends TestCase 
     {
-
         public function ArrayIteratorTest( name:String = "" )
         {
             super( name );
@@ -59,23 +58,23 @@ package system.data.iterators
         public function tearDown():void
         {
             it = undefined ;
-        }         
+        }
         
         public function testConstructor():void
         {
-        	var i:Iterator ;
+            var i:Iterator ;
             try
             {
                 i = new ArrayIterator(null) ;
-                fail( this + " test constructor failed if the passed-in Array is a null object.") ;  	
+                fail( this + " test constructor failed if the passed-in Array is a null object.") ;      
             }
             catch( e:Error )
             {
-            	assertEquals( e.message , "[object ArrayIterator] constructor failed, the passed-in Array argument not must be 'null'." , this + " test constructor failed.");
+                assertEquals( e.message , "[object ArrayIterator] constructor failed, the passed-in Array argument not must be 'null'." , this + " test constructor failed.");
             }
             assertNotNull(it, this + " the ArrayIterator not must be null") ; 
-        }         
-
+        }
+        
         public function testHasNext():void
         {
             assertTrue(it.hasNext(), "01 hasNext method failed") ;
@@ -110,8 +109,8 @@ package system.data.iterators
         
         public function testRemove():void
         {
-        	it.next() ;
-        	var result:* = it.remove() ; 
+            it.next() ;
+            var result:* = it.remove() ; 
             assertEquals( result , "item1" , "01 remove() method failed" ) ;
             assertEquals( it.next()   , "item2" , "02 remove() method failed" ) ;
             it.reset() ;
@@ -135,6 +134,5 @@ package system.data.iterators
             assertEquals( it.next() , "item3" , "seek(1) method failed" ) ;
             it.reset() ;
         } 
-        
     }
 }

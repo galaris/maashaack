@@ -57,19 +57,19 @@ package system.data.collections
         
         public function testConstructor():void
         {
-        	var c:ArrayCollection = new ArrayCollection() ;
-        	
-        	assertNotNull(c, "01-01 - ArrayCollection constructor failed.") ;
+            var c:ArrayCollection = new ArrayCollection() ;
+            
+            assertNotNull(c, "01-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( c.toArray(), [], "01-02 - ArrayCollection constructor failed.") ;
             
             // initialize with an Array
-                    	
-        	var co1:ArrayCollection = new ArrayCollection([2,3,4]) ; 
-        	assertNotNull(co1, "02-01 - ArrayCollection constructor failed.") ;
+                        
+            var co1:ArrayCollection = new ArrayCollection([2,3,4]) ; 
+            assertNotNull(co1, "02-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( co1.toArray(), [2,3,4], "02-02 - ArrayCollection constructor failed.") ;
-        	
-        	// initialize with a Collection
-        	
+            
+            // initialize with a Collection
+            
             var co2:ArrayCollection = new ArrayCollection(co1) ; 
             assertNotNull(co2, "03-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( co2.toArray(), [2,3,4], "03-02 - ArrayCollection constructor failed.") ;
@@ -77,7 +77,7 @@ package system.data.collections
         
         public function testInterface():void
         {
-        	var c:ArrayCollection = new ArrayCollection() ;
+            var c:ArrayCollection = new ArrayCollection() ;
             assertTrue( c is Collection   , "01 - ArrayCollection implements the Collection interface.") ;
             assertTrue( c is Cloneable    , "02 - ArrayCollection implements the Cloneable interface.") ;
             assertTrue( c is Equatable    , "03 - ArrayCollection implements the Equatable interface.") ;
@@ -95,7 +95,7 @@ package system.data.collections
         
         public function testAddAll():void
         {
-        	
+            
             // initialize with an Array
                         
             var co1:ArrayCollection = new ArrayCollection([2,3,4]) ; 
@@ -107,19 +107,19 @@ package system.data.collections
             ArrayAssert.assertEquals( co.toArray(), [2,3,4], "01-02 - ArrayCollection addAll method failed.") ;   
              
             assertFalse( co.addAll(co2), "02-01 - ArrayCollection addAll method failed." ) ;
-        	
+            
         }        
         
         public function testClear():void
         {
-        	
+            
             var co:ArrayCollection = new ArrayCollection([2,3,4]) ;
             var old:int = co.size() ;
             co.clear() ; 
             assertTrue( old > co.size(), "01 - ArrayCollection clear failed.") ;
             ArrayAssert.assertEquals( co.toArray(), [], "02 - ArrayCollection clear failed.") ;
-            assertTrue( co.isEmpty(), "03 - ArrayCollection clear failed.") ; 	
-        	
+            assertTrue( co.isEmpty(), "03 - ArrayCollection clear failed.") ;     
+            
         }
         
         public function testClone():void
@@ -128,7 +128,7 @@ package system.data.collections
             var cl:ArrayCollection = co.clone() as ArrayCollection ;
             assertNotNull( cl, "01 - ArrayCollection clone failed.") ;
             assertFalse( cl == co, "02 - ArrayCollection clone failed.") ;  
-            ArrayAssert.assertEquals( cl.toArray(), co.toArray(), "03 - ArrayCollection clone failed.") ;   	
+            ArrayAssert.assertEquals( cl.toArray(), co.toArray(), "03 - ArrayCollection clone failed.") ;       
         }
         
         public function testContains():void
@@ -156,15 +156,15 @@ package system.data.collections
         
         public function testEquals():void
         {
-        	
+            
             var c1:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
             var c2:ArrayCollection = new ArrayCollection([1,2,3,4]) ;
             var c3:ArrayCollection = new ArrayCollection([2,3]) ;
-        	var c4:ArrayCollection = new ArrayCollection([5,6,7,8]) ;
-        	
-        	assertTrue  ( c1.equals(c1) , "01-01 - ArrayCollection equals failed." ) ;
-        	assertTrue  ( c1.equals(c2) , "01-02 - ArrayCollection equals failed." ) ;
-        	assertFalse ( c1.equals(c3) , "01-03 - ArrayCollection equals failed." ) ;
+            var c4:ArrayCollection = new ArrayCollection([5,6,7,8]) ;
+            
+            assertTrue  ( c1.equals(c1) , "01-01 - ArrayCollection equals failed." ) ;
+            assertTrue  ( c1.equals(c2) , "01-02 - ArrayCollection equals failed." ) ;
+            assertFalse ( c1.equals(c3) , "01-03 - ArrayCollection equals failed." ) ;
             assertFalse ( c1.equals(c4) , "01-04 - ArrayCollection equals failed." ) ; // same size
             
             assertTrue  ( c2.equals(c1) , "02-01 - ArrayCollection equals failed." ) ;
@@ -177,7 +177,7 @@ package system.data.collections
             
             var s:HashSet = new HashSet([1,2,3,4]) ;
             assertFalse( c1.equals(s) , "04 - ArrayCollection equals failed." ) ;
-        	
+            
         }
         
         public function testGet():void
@@ -200,7 +200,7 @@ package system.data.collections
             assertEquals( co.indexOf("item3") , 2  ,  "03 - ArrayCollection indexOf failed.") ;
             
             assertEquals( co.indexOf("item3", 1) , 2  ,  "04 - ArrayCollection indexOf failed.") ;
-                 	
+                     
         }
         
         public function testIsEmpty():void
@@ -220,9 +220,9 @@ package system.data.collections
         
         public function testIterator():void
         {
-        	var co:ArrayCollection = new ArrayCollection() ;
-        	var it:Iterator         = co.iterator() ;
-        	assertTrue  ( it is ArrayIterator , "01 - ArrayCollection iterator failed." ) ;
+            var co:ArrayCollection = new ArrayCollection() ;
+            var it:Iterator         = co.iterator() ;
+            assertTrue  ( it is ArrayIterator , "01 - ArrayCollection iterator failed." ) ;
         }        
         
         public function testRemove():void
@@ -234,7 +234,7 @@ package system.data.collections
             
             assertTrue  ( co.remove("item1") , "01 - ArrayCollection remove failed." ) ;
             assertFalse ( co.remove("item5") , "02 - ArrayCollection remove failed." ) ;
-                    	
+                        
         }
         
         public function testRemoveAll():void
@@ -269,7 +269,7 @@ package system.data.collections
             var co:ArrayCollection = new ArrayCollection() ;
             assertEquals( co.size() , 0 ,  "01 - ArrayCollection size failed.") ;                    
             co.add("test") ;
-            assertEquals( co.size() , 1 ,  "02 - ArrayCollection size failed.") ;        	
+            assertEquals( co.size() , 1 ,  "02 - ArrayCollection size failed.") ;            
         }
         
         public function testToArray():void
@@ -296,17 +296,17 @@ package system.data.collections
             
             assertNotNull( a , "02-02 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( a , [2,3,4], "02-02 - ArrayCollection constructor failed.") ;
-  	
+      
         }
                         
         public function testToSource():void
         {
-        	var co:ArrayCollection ;
-        	var ar:Array = ["item1", "item2"] ;
-        	
-        	co = new ArrayCollection() ;
+            var co:ArrayCollection ;
+            var ar:Array = ["item1", "item2"] ;
+            
+            co = new ArrayCollection() ;
             assertEquals(co.toSource() , "new system.data.collections.ArrayCollection()" , "01 - ArrayCollection toSource failed") ;
-        	
+            
             co = new ArrayCollection( ar ) ;
             assertEquals(co.toSource() , "new system.data.collections.ArrayCollection([\"item1\",\"item2\"])" , "02 - ArrayCollection toSource failed") ;
         }

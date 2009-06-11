@@ -56,8 +56,8 @@ package system.data.sets
         
         public function testConstructorBasic():void
         {
-        	var co:Set = new ArraySet() ;
-        	var tc:TypedSet = new TypedSet( String , co ) ;
+            var co:Set = new ArraySet() ;
+            var tc:TypedSet = new TypedSet( String , co ) ;
             assertNotNull(tc, "TypedSet constructor failed.") ;
         }
         
@@ -65,7 +65,7 @@ package system.data.sets
         {
             var se:Set = new ArraySet() ;
             var tc:TypedSet ;
-                    	
+                        
             tc = new TypedSet( String, se ) ;
             assertEquals( tc.type , String , "01 - TypedSet constructor failed with a specific type argument in this constructor.") ;
 
@@ -79,8 +79,8 @@ package system.data.sets
         public function testConstructorCollectionArgument():void
         {
             var se:Set = new ArraySet() ;
-            var tc:TypedSet ;        	
-        	
+            var tc:TypedSet ;            
+            
             // 01 - test "collection" argument is null
             try
             {
@@ -91,17 +91,17 @@ package system.data.sets
             {
                 assertTrue( e is ArgumentError , "01-02 - TypedSet constructor failed." ) ;
                 assertEquals( e.message , "The passed-in 'collection' argument not must be 'null' or 'undefined'.", "01-03 - TypedSet constructor failed." ) ;
-            }        	
-                    	
+            }            
+                        
             // 02 - basic test with a no empty Collection
             
             se.add("item1") ;
             se.add("item2") ;
             
             tc = new TypedSet( String , se ) ;
-            assertNotNull(tc, "02-01 - TypedSet constructor failed with a no empty collection of String values.") ;        	
+            assertNotNull(tc, "02-01 - TypedSet constructor failed with a no empty collection of String values.") ;            
             assertEquals(tc.size(), se.size() , "02-02 - TypedSet constructor failed with a no empty collection of String values.") ;
-        	
+            
             // 03 - test "collection" argument contains an invalid value
             se.add( 1 ) ;
             try
@@ -164,8 +164,8 @@ package system.data.sets
             
             try
             {
-            	tc.add(3) ;
-                fail("02-01 - The TypedSet add method failed.") ;	
+                tc.add(3) ;
+                fail("02-01 - The TypedSet add method failed.") ;    
             }
             catch( e:Error )
             {
@@ -195,7 +195,7 @@ package system.data.sets
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertEquals( tc.get(0) , "item1" , "The TypedSet get method failed." ) ;   	 
+            assertEquals( tc.get(0) , "item1" , "The TypedSet get method failed." ) ;        
         }
 
         public function testIndexOf():void

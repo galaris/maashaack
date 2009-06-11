@@ -39,11 +39,11 @@ package system.process.samples
 
     public class ResetableClass implements Resetable 
     {
-    	
+        
         public function ResetableClass()
         {
             //    
-        }    	
+        }        
 
         public function reset():void
         {

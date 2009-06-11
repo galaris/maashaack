@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -97,9 +97,9 @@ package system.data.queues
             
             ArrayAssert.assertEquals( q.toArray(), [1,2,3], "01 - PriorityQueue comparator property failed.") ;
             
-           	q.comparator = new StringComparator() ;
-           	
-           	ArrayAssert.assertEquals( q.toArray(), [3,2,1], "01 - PriorityQueue comparator property failed.") ;
+               q.comparator = new StringComparator() ;
+               
+               ArrayAssert.assertEquals( q.toArray(), [3,2,1], "01 - PriorityQueue comparator property failed.") ;
             
         }
         
@@ -146,7 +146,7 @@ package system.data.queues
             
             q.sort( Array.DESCENDING ) ;
             
-            ArrayAssert.assertEquals( q.toArray(), [4,3,2,11,10,1], "01 - PriorityQueue sort method failed.") ;	
+            ArrayAssert.assertEquals( q.toArray(), [4,3,2,11,10,1], "01 - PriorityQueue sort method failed.") ;    
             
             q.comparator = new NumberComparator() ;
             
