@@ -52,7 +52,7 @@ package system.data.samples
         
         public function set type(type:*):void
         {
-        	_type = type ;
+            _type = type ;
         }
         
         private var _type:* ;

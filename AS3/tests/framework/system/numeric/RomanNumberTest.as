@@ -35,7 +35,7 @@
 
 package system.numeric 
 {
-    import buRRRn.ASTUce.framework.TestCase;                    
+    import buRRRn.ASTUce.framework.TestCase;
 
     public class RomanNumberTest extends TestCase 
     {
@@ -47,7 +47,7 @@ package system.numeric
         
         public function testConstructor():void
         {
-        	var rn:RomanNumber ;
+            var rn:RomanNumber ;
             try
             {
                 rn = new RomanNumber();
@@ -85,16 +85,16 @@ package system.numeric
         
         public function testMaxRange():void
         {
-        	
+            
             try
             {
                 new RomanNumber( RomanNumber.MAX + 1 );
             }
             catch( e:Error )
             {
-            	assertEquals( e.message, "Max value for a RomanNumber is 3999" , "over maximum range throws a specific RangeError message.") ;
-            	assertTrue( e is RangeError , "over maximum range throws a RangeError object.") ;
-            	return ;
+                assertEquals( e.message, "Max value for a RomanNumber is 3999" , "over maximum range throws a specific RangeError message.") ;
+                assertTrue( e is RangeError , "over maximum range throws a RangeError object.") ;
+                return ;
             }
 
             fail( "over maximum range not catched" );
@@ -109,8 +109,8 @@ package system.numeric
             }
             catch( e:Error )
             {
-            	assertTrue( e is RangeError , "under minimum range throws a RangeError object." ) ;
-            	assertEquals( e.message, "Min value for a RomanNumber is 0" , "under minimum range throws a specific RangeError message.") ;
+                assertTrue( e is RangeError , "under minimum range throws a RangeError object." ) ;
+                assertEquals( e.message, "Min value for a RomanNumber is 0" , "under minimum range throws a specific RangeError message.") ;
                 return;
             }
             

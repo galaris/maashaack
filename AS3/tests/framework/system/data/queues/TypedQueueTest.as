@@ -260,7 +260,7 @@ package system.data.queues
             
             assertEquals( tq.poll() , "item1" , "01-01 - The TypedQueue poll method failed." ) ; 
             assertEquals( tq.size() , 1       , "01-02 - The TypedQueue poll method failed." ) ;
-        	        
+                    
             assertEquals( tq.poll() , "item2" , "02-01 - The TypedQueue poll method failed." ) ; 
             assertEquals( tq.size() , 0       , "02-02 - The TypedQueue poll method failed." ) ;
             

@@ -107,7 +107,7 @@ package system.data.maps
         
         public function testClear():void 
         {
-        	var map:MultiSetMap = new MultiSetMap() ;
+            var map:MultiSetMap = new MultiSetMap() ;
             map.put("key1" , "value1") ;
             map.clear() ;
             assertTrue( map.isEmpty() , "The MultiSetMap clear failed.") ;
@@ -206,7 +206,7 @@ package system.data.maps
         
         public function testToSource():void
         {
-        	var map:MultiSetMap = new MultiSetMap() ;
+            var map:MultiSetMap = new MultiSetMap() ;
             map.put("key1" , "value1") ;
             assertEquals
             (

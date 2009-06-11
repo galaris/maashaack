@@ -56,13 +56,13 @@ package system.data.iterators
         
         public function setUp():void
         {
-        	m  = new HashMap(["key1","key2"],["value1","value2"]) ; 
+            m  = new HashMap(["key1","key2"],["value1","value2"]) ; 
             it = new MapIterator(m) ;
         }
       
         public function tearDown():void
         {
-        	m  = undefined ;
+            m  = undefined ;
             it = undefined ;
         }             
 
@@ -104,8 +104,8 @@ package system.data.iterators
     
         public function testNext():void
         {
-        	var r:* ;
-        	r = it.next() ;
+            var r:* ;
+            r = it.next() ;
             assertTrue( r == "value1" || r == "value2" , "01 next() method failed" ) ;
             r = it.next() ;
             assertTrue( r == "value1" || r == "value2" , "01 next() method failed" ) ;
@@ -114,16 +114,16 @@ package system.data.iterators
         
         public function testRemove():void
         {
-			
-        	var map:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ; 
+            
+            var map:Map      = new ArrayMap(["key1","key2"],["value1","value2"]) ; 
             var itr:Iterator = new MapIterator( map ) ;
             
             itr.next() ;
             
             var r:* = itr.remove() ;
-			         	
-         	assertEquals( r , "value1" , "01-01 - remove() method." ) ;
-         	assertEquals( map.size()   , 1 , "01-02 - remove() method." ) ;
+                         
+             assertEquals( r , "value1" , "01-01 - remove() method." ) ;
+             assertEquals( map.size()   , 1 , "01-02 - remove() method." ) ;
             
             itr.next() ;
             r = itr.remove() ;

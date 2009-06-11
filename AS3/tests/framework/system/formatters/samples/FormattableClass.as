@@ -35,20 +35,19 @@
 
 package system.formatters.samples 
 {
-    import system.formatters.Formattable;            
-
+    import system.formatters.Formattable;
+    
     /**
      * The basic implementation of the Formattable interface.
      */
     public class FormattableClass implements Formattable 
     {
-    
         /**
          * Creates a new FormattableClass instance.
          */
         public function FormattableClass()
         {
-        	//
+            //
         }
         
         /**

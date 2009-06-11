@@ -47,7 +47,7 @@ package system.events.samples
          */
         public function IEventDispatcherClass()
         {
-        	        	
+                        
         }
 
         public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
@@ -67,12 +67,12 @@ package system.events.samples
         
         public function registerEventListener(type:String, listener:*, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
         {
-        	throw new Error( "IEventDispatcherClass.registerEventListener(" + arguments + ")" ) ;
+            throw new Error( "IEventDispatcherClass.registerEventListener(" + arguments + ")" ) ;
         }
         
         public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void
         {
-        	throw new Error( "IEventDispatcherClass.removeEventListener(" + arguments + ")" ) ;
+            throw new Error( "IEventDispatcherClass.removeEventListener(" + arguments + ")" ) ;
         }        
         
         public function unregisterEventListener(type:String, listener:*, useCapture:Boolean = false):void

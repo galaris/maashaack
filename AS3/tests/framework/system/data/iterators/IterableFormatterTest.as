@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -61,7 +61,7 @@ package system.data.iterators
             result = formatter.format(new ArrayCollection(["value1", "value2"])) ;
             
             assertEquals(result, "{value1,value2}" , "3 - The IterableFormatter format method failed.") ;
-			
+            
             
         }         
         

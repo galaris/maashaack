@@ -39,11 +39,11 @@ package system.data.samples
 
     public class ListIteratorClass implements ListIterator 
     {
-    	
+        
         public function add(o:*):void
         {
             throw new Error( "insert:" + o.toString() ) ;
-        }    	
+        }        
 
         public function hasNext():Boolean
         {
@@ -87,12 +87,12 @@ package system.data.samples
         
         public function reset():void
         {
-        	throw new Error( "reset" ) ;
+            throw new Error( "reset" ) ;
         }
         
         public function seek(position:*):void
         {
-        	throw new Error( "seek:" + position ) ;
+            throw new Error( "seek:" + position ) ;
         }
         
         public function set(o:*):void

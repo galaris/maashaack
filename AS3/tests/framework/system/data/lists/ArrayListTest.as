@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -54,10 +54,10 @@ package system.data.lists
         
         public function testConstructor():void
         {
-        	var list:ArrayList ;
-        	
-        	list = new ArrayList() ;
-        	assertNotNull( list , "The ArrayList constructor failed." ) ;
+            var list:ArrayList ;
+            
+            list = new ArrayList() ;
+            assertNotNull( list , "The ArrayList constructor failed." ) ;
             ArrayAssert.assertEquals( list.toArray(), [], "01-02 - ArrayList constructor failed.") ;
             
             // initialize with an Array
@@ -77,7 +77,7 @@ package system.data.lists
             list = new ArrayList( 3 ) ; 
             assertNotNull(list, "04-01 - ArrayList constructor failed.") ;
             ArrayAssert.assertEquals( list.toArray(), [undefined,undefined,undefined], "04-02 - ArrayList constructor failed.") ;            
-        	
+            
         }
         
         public function testInterface():void
@@ -125,13 +125,13 @@ package system.data.lists
             assertEquals( list.size() , 4 , "02 - ArrayList addAt method failed." ) ;
             try
             {
-            	list.addAt(100, "value");
+                list.addAt(100, "value");
                 fail(  "03-01 - ArrayList addAt method failed, must throw a RangeError." ) ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is RangeError , "03-02 - ArrayList addAt method failed, must throw a RangeError.") ;
-            	assertEquals( e.message , "ArrayList.addAt method failed, the specified index '100' is out of bounds.", "03-03 - ArrayList addAt method failed, must throw a RangeError.") ;
+                assertTrue( e is RangeError , "03-02 - ArrayList addAt method failed, must throw a RangeError.") ;
+                assertEquals( e.message , "ArrayList.addAt method failed, the specified index '100' is out of bounds.", "03-03 - ArrayList addAt method failed, must throw a RangeError.") ;
             }
         }         
         
@@ -280,7 +280,7 @@ package system.data.lists
         
         public function testSet():void
         {
-        	var count:int ; 
+            var count:int ; 
             var list:ArrayList = new ArrayList( [ "item1", "item2", "item3", "item4" ] ) ;
             
             count = list.modCount ;

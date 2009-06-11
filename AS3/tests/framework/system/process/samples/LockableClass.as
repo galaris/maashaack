@@ -54,12 +54,12 @@ package system.process.samples
         
         public function lock():void
         {
-        	flag = true ;
+            flag = true ;
         }
         
         public function unlock():void
         {
-        	flag = false ;
+            flag = false ;
         }
     }
 }

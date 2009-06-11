@@ -1,36 +1,36 @@
 ﻿/*
-Version: MPL 1.1/GPL 2.0/LGPL 2.1
+  Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
-The contents of this file are subject to the Mozilla Public License Version
-1.1 (the "License"); you may not use this file except in compliance with
-the License. You may obtain a copy of the License at
-http://www.mozilla.org/MPL/
+  The contents of this file are subject to the Mozilla Public License Version
+  1.1 (the "License"); you may not use this file except in compliance with
+  the License. You may obtain a copy of the License at
+  http://www.mozilla.org/MPL/
   
-Software distributed under the License is distributed on an "AS IS" basis,
-WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
-for the specific language governing rights and limitations under the
-License.
+  Software distributed under the License is distributed on an "AS IS" basis,
+  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  for the specific language governing rights and limitations under the
+  License.
   
-The Original Code is [maashaack framework].
+  The Original Code is [maashaack framework].
   
-The Initial Developers of the Original Code are
-Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-Portions created by the Initial Developers are Copyright (C) 2006-2009
-the Initial Developers. All Rights Reserved.
+  The Initial Developers of the Original Code are
+  Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
+  Portions created by the Initial Developers are Copyright (C) 2006-2009
+  the Initial Developers. All Rights Reserved.
   
-Contributor(s):
+  Contributor(s):
   
-Alternatively, the contents of this file may be used under the terms of
-either the GNU General Public License Version 2 or later (the "GPL"), or
-the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
-in which case the provisions of the GPL or the LGPL are applicable instead
-of those above. If you wish to allow use of your version of this file only
-under the terms of either the GPL or the LGPL, and not to allow others to
-use your version of this file under the terms of the MPL, indicate your
-decision by deleting the provisions above and replace them with the notice
-and other provisions required by the LGPL or the GPL. If you do not delete
-the provisions above, a recipient may use your version of this file under
-the terms of any one of the MPL, the GPL or the LGPL.
+  Alternatively, the contents of this file may be used under the terms of
+  either the GNU General Public License Version 2 or later (the "GPL"), or
+  the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  in which case the provisions of the GPL or the LGPL are applicable instead
+  of those above. If you wish to allow use of your version of this file only
+  under the terms of either the GPL or the LGPL, and not to allow others to
+  use your version of this file under the terms of the MPL, indicate your
+  decision by deleting the provisions above and replace them with the notice
+  and other provisions required by the LGPL or the GPL. If you do not delete
+  the provisions above, a recipient may use your version of this file under
+  the terms of any one of the MPL, the GPL or the LGPL.
 */
  
 package system.data.arrays 
@@ -52,7 +52,7 @@ package system.data.arrays
         public function testConstructorBasic():void
         {
             var ta:TypedArray = new TypedArray() ;
-            assertNotNull( ta , "TypedArray constructor failed." ) ;	
+            assertNotNull( ta , "TypedArray constructor failed." ) ;    
         }
 
         public function testConstructorType():void
@@ -84,7 +84,7 @@ package system.data.arrays
         
         public function testConstructorInvalidValues():void
         {
-        	var ta:TypedArray = new TypedArray(String, "value1", 1, "value2") ;
+            var ta:TypedArray = new TypedArray(String, "value1", 1, "value2") ;
             assertNotNull( ta , "01 - TypedArray constructor with invalid values failed." ) ;
             assertEquals( ta.length , 2 , "02 - TypedArray constructor with invalid values failed." ) ;
             ArrayAssert.assertEquals( ta.toArray() , ["value1", "value2"] , "03 - TypedArray constructor with invalid values failed." ) ;
@@ -148,8 +148,8 @@ package system.data.arrays
             
             try
             {
-            	r = ta.concat("value1", "value2") as TypedArray;
-            	assertNotNull(r, "01-01 - TypedArray concat failed.") ;
+                r = ta.concat("value1", "value2") as TypedArray;
+                assertNotNull(r, "01-01 - TypedArray concat failed.") ;
                 ArrayAssert.assertEquals( r.toArray() , ["value1", "value2"] , "01-02 - TypedArray concat failed." );
             }
             catch( e:Error )
@@ -203,7 +203,7 @@ package system.data.arrays
             {
                 assertTrue( e is TypeError , "02-02 - TypedArray push failed." ) ;
                 assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - TypedArray push failed." ) ;
-            }        	
+            }            
         }
         
         public function testSupports():void
@@ -215,7 +215,7 @@ package system.data.arrays
         
         public function testToArray():void
         {
-        	var ta:TypedArray = new TypedArray( String , "value1", "value2" ) ;
+            var ta:TypedArray = new TypedArray( String , "value1", "value2" ) ;
             ArrayAssert.assertEquals(ta.toArray() , ["value1", "value2"], "The TypedArray toArray method failed.") ;
         }
         
@@ -233,17 +233,17 @@ package system.data.arrays
         
         public function testUnshift():void
         {
-        	var ta:TypedArray = new TypedArray( String ) ;
-        	try
-        	{
+            var ta:TypedArray = new TypedArray( String ) ;
+            try
+            {
                 assertEquals(ta.unshift("value1", "value2"), 2 , "01-01 - TypedArray unshift failed." ) ;
                 assertEquals( ta.length , 2 , "01-02 - TypedArray unshift failed." );
-        	}
-        	catch( e:Error )
-        	{
-        	   fail( "01-03 - TypedArray unshift failed.") ;
-        	}
-        	 
+            }
+            catch( e:Error )
+            {
+               fail( "01-03 - TypedArray unshift failed.") ;
+            }
+             
             try
             {
                 ta.unshift(1) ;
@@ -251,9 +251,9 @@ package system.data.arrays
             }
             catch( e:Error )
             {
-            	assertTrue( e is TypeError , "02-02 - TypedArray unshift failed." ) ;
+                assertTrue( e is TypeError , "02-02 - TypedArray unshift failed." ) ;
                 assertEquals( e.message , "TypedArray.validate(1) is mismatch." , "02-03 - TypedArray unshift failed." ) ;
-            }        	 
+            }             
         }
         
         public function testValidate():void

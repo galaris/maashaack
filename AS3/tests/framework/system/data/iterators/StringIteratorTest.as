@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -130,7 +130,7 @@ package system.data.iterators
             }
             catch( e:Error )
             {
-            	assertTrue( e is IllegalOperationError , "remove() failed, must throws a IllegalOperationError error") ;
+                assertTrue( e is IllegalOperationError , "remove() failed, must throws a IllegalOperationError error") ;
             }
             it.reset() ;
         }           
@@ -146,7 +146,6 @@ package system.data.iterators
         
         public function testSeek():void
         {
-            
             it.seek(2) ;
             it.next() ;
             assertEquals( it.next() , "l" , "01 seek(1) method failed" ) ;
@@ -155,7 +154,6 @@ package system.data.iterators
             assertEquals( it.next() , "e" , "02 seek(1) method failed" ) ;
             
             it.reset() ;
-        }        
-        
+        }
     }
 }

@@ -35,7 +35,7 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;                                        
+    import buRRRn.ASTUce.framework.TestCase;
 
     public class MultiMapFormatterTest extends TestCase 
     {

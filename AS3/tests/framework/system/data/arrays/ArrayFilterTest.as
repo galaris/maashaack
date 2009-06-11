@@ -69,29 +69,29 @@ package system.data.arrays
         
         public function testConstructor():void
         {
-        	
-        	var af:ArrayFilter ;
-        	
-        	af = new ArrayFilter() ;
-        	
-        	assertNotNull( af , "01-01 - ArrayFilter constructor failed." ) ;
-        	assertTrue( af is EventDispatcher , "01-02 - ArrayFilter constructor failed." ) ;
-        	assertEquals( af.filter , 0 ,  "01-03 - ArrayFilter constructor failed." ) ;
-        	
-        	af = new ArrayFilter( ArrayFilter.CASEINSENSITIVE ) ;
+            
+            var af:ArrayFilter ;
+            
+            af = new ArrayFilter() ;
+            
+            assertNotNull( af , "01-01 - ArrayFilter constructor failed." ) ;
+            assertTrue( af is EventDispatcher , "01-02 - ArrayFilter constructor failed." ) ;
+            assertEquals( af.filter , 0 ,  "01-03 - ArrayFilter constructor failed." ) ;
+            
+            af = new ArrayFilter( ArrayFilter.CASEINSENSITIVE ) ;
             assertNotNull( af , "02-01 - ArrayFilter constructor failed." ) ;
-        	assertEquals( af.filter , ArrayFilter.CASEINSENSITIVE ,  "02-02 - ArrayFilter constructor failed." ) ;
-        	
-        	
+            assertEquals( af.filter , ArrayFilter.CASEINSENSITIVE ,  "02-02 - ArrayFilter constructor failed." ) ;
+            
+            
             af = new ArrayFilter( ArrayFilter.DESCENDING, new EventDispatcher()   ) ;
             assertNotNull( af , "03-01 - ArrayFilter constructor failed." ) ;
             assertEquals( af.filter , ArrayFilter.DESCENDING ,  "03-02 - ArrayFilter constructor failed." ) ;
-        	
+            
         }
         
         public function testCASEINSENSITIVE():void
         {
-            assertEquals( ArrayFilter.CASEINSENSITIVE , 1 , "The constant ArrayFilter.CASEINSENSITIVE failed." ) ;	
+            assertEquals( ArrayFilter.CASEINSENSITIVE , 1 , "The constant ArrayFilter.CASEINSENSITIVE failed." ) ;    
         }
 
         public function testDESCENDING():void

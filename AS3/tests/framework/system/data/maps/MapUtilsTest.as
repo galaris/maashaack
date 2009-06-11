@@ -37,7 +37,7 @@ package system.data.maps
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Map;            
+    import system.data.Map;
 
     public class MapUtilsTest extends TestCase 
     {

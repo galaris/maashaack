@@ -54,12 +54,12 @@ package system.process
             
             try
             {
-            	r.reset() ;
-            	fail( "01 - The Resetable interface must implement the reset method.") ;
+                r.reset() ;
+                fail( "01 - The Resetable interface must implement the reset method.") ;
             }
             catch( e:Error )
             {
-            	assertEquals(e.message, "reset", "02 - The Resetable interface must implement the reset method.");
+                assertEquals(e.message, "reset", "02 - The Resetable interface must implement the reset method.");
             }
 
         }            

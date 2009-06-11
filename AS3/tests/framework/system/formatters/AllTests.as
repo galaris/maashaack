@@ -39,14 +39,14 @@ package system.formatters
     import buRRRn.ASTUce.framework.TestSuite;    
 
     /**
-	 * This class launch all tests.
-	 */
-	public class AllTests
-	{
-		
+     * This class launch all tests.
+     */
+    public class AllTests
+    {
+        
         /**
          * Creates the Test list.
-         */		
+         */        
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite( "Formatters tests" );
@@ -57,6 +57,6 @@ package system.formatters
 
             return suite;
         }
-	}
+    }
 }
 

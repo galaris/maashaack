@@ -50,7 +50,6 @@ package system.data.lists
 
     public class LinkedListTest extends TestCase 
     {
-
         public function LinkedListTest(name:String = "")
         {
             super( name );
@@ -64,9 +63,8 @@ package system.data.lists
         
         public function testConstructorWithArguments():void
         {   
-        	
-        	var list:LinkedList ;
-        	
+            var list:LinkedList ;
+            
             // initialize with an Array
                         
             list = new LinkedList([2,3,4]) ; 
@@ -84,7 +82,6 @@ package system.data.lists
             list = new LinkedList( new ArrayMap( ["item1", "item2", "item3"], [2,3,4]) ) ; 
             assertNotNull(list, "04-01 - LinkedList constructor failed.") ;
             ArrayAssert.assertEquals( list.toArray(), [2,3,4], "04-02 - LinkedList constructor failed.") ;
-            
         }
         
         public function testInterface():void
@@ -212,8 +209,8 @@ package system.data.lists
         
         public function testElement():void
         {
-        	var l:LinkedList = new LinkedList([1,2]) ;
-        	assertEquals ( l.element(), 1, "LinkedList element method failed." ) ;
+            var l:LinkedList = new LinkedList([1,2]) ;
+            assertEquals ( l.element(), 1, "LinkedList element method failed." ) ;
         }
         
         public function testEquals():void
@@ -258,13 +255,13 @@ package system.data.lists
             assertEquals ( l.get(1), "item2" , "02 - LinkedList get failed.") ;
             try
             {
-            	l.get(2) ;
-            	fail("03-01 - LinkedList get failed.") ;
+                l.get(2) ;
+                fail("03-01 - LinkedList get failed.") ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is NoSuchElementError , "03-02 - LinkedList get failed.") ;
-            	assertEquals( e.message , "LinkedList.get() no value exist at 2" , "03-03 - LinkedList get failed.") ;
+                assertTrue( e is NoSuchElementError , "03-02 - LinkedList get failed.") ;
+                assertEquals( e.message , "LinkedList.get() no value exist at 2" , "03-03 - LinkedList get failed.") ;
             }
         }
         
@@ -323,7 +320,7 @@ package system.data.lists
         public function testIndexOf():void
         {
             var l:LinkedList = new LinkedList(["item1","item2"]) ;
-            assertEquals ( l.indexOf("item2"), 1 , "01 - LinkedList indexOf failed.") ;        	
+            assertEquals ( l.indexOf("item2"), 1 , "01 - LinkedList indexOf failed.") ;            
             assertEquals ( l.indexOf("item4"), -1 , "02 - LinkedList indexOf failed.") ;
         }
         
@@ -566,13 +563,13 @@ package system.data.lists
             
             try
             {
-            	list.removeRange(6,10) ;
-            	fail("04-01 - LinkedList removeRange method failed.") ;
+                list.removeRange(6,10) ;
+                fail("04-01 - LinkedList removeRange method failed.") ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is RangeError , "04-02 - LinkedList removeRange method failed." ) ;
-            	assertEquals( e.message , "LinkedList.removeRange(6,10) failed with a fromIndex value out of bounds, fromIndex > size()." , "04-03 - LinkedList removeRange method failed." ) ;
+                assertTrue( e is RangeError , "04-02 - LinkedList removeRange method failed." ) ;
+                assertEquals( e.message , "LinkedList.removeRange(6,10) failed with a fromIndex value out of bounds, fromIndex > size()." , "04-03 - LinkedList removeRange method failed." ) ;
             }
             
             //// list.removeRange(3,1)
@@ -603,7 +600,7 @@ package system.data.lists
             assertTrue( l1.retainAll( l3 ) , "03 - LinkedList retainAll failed.") ;
             assertEquals( l1.toString(), "{}" , "04 - LinkedList retainAll failed.") ;
             
-            assertFalse( l1.retainAll( l4 ) , "05 - LinkedList retainAll failed.") ;        	
+            assertFalse( l1.retainAll( l4 ) , "05 - LinkedList retainAll failed.") ;            
         }
         
         public function testSet():void
@@ -624,7 +621,7 @@ package system.data.lists
             }
             catch( e:Error )
             {
-            	assertTrue( e is NoSuchElementError  , "02-02 - LinkedList set method failed." ) ;
+                assertTrue( e is NoSuchElementError  , "02-02 - LinkedList set method failed." ) ;
                 assertEquals( e.message , "LinkedList.set() method failed at:10" , "02-03 - LinkedList set method failed." ) ;
             }
         }
@@ -704,7 +701,7 @@ package system.data.lists
         
         public function testToString():void
         {
-            var li:LinkedList ;        	
+            var li:LinkedList ;            
             var ar:Array = ["item1", "item2", "item3", "item4"] ;
             li = new LinkedList() ;
             assertEquals(li.toString() , "{}", "01 - LinkedList toString failed") ;

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -53,13 +53,13 @@ package system.data.iterators
         
         public function setUp():void
         {
-        	o  = { x:10 , y:20 } ; 
+            o  = { x:10 , y:20 } ; 
             it = new ObjectIterator(o) ;
         }
 
         public function tearDown():void
         {
-        	o  = undefined ;
+            o  = undefined ;
             it = undefined ;
         }         
         
@@ -101,8 +101,8 @@ package system.data.iterators
     
         public function testNext():void
         {
-        	var r:* ;
-        	r = it.next() ;
+            var r:* ;
+            r = it.next() ;
             assertTrue( r == 10 || r == 20 , "01 next() method failed" ) ;
             r = it.next() ;
             assertTrue( r == 10 || r == 20 , "01 next() method failed" ) ;
@@ -111,8 +111,8 @@ package system.data.iterators
         
         public function testRemove():void
         {
-        	var v:Object         = { x:100 , y : 200} ;
-        	var i:ObjectIterator = new ObjectIterator( v ) ;
+            var v:Object         = { x:100 , y : 200} ;
+            var i:ObjectIterator = new ObjectIterator( v ) ;
             i.next() ;
             var r:* = i.remove() ; 
             assertTrue( r == "x" || r == "y" , "remove() method failed" ) ;
@@ -130,7 +130,7 @@ package system.data.iterators
         public function testSeek():void
         {
             var v:Object         = { x:100 , y : 200} ;
-            var i:ObjectIterator = new ObjectIterator( v ) ;        	
+            var i:ObjectIterator = new ObjectIterator( v ) ;            
             i.seek(1) ;
             var r:* = i.next() ;
             assertTrue( r == 200 || r == 100 , "seek(1) method failed" ) ;

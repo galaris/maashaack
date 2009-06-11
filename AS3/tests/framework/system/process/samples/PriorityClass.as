@@ -49,12 +49,12 @@ package system.process.samples
         
         public function get priority():int
         {
-        	return value ;
+            return value ;
         }
         
         public function set priority( i:int ):void
         {
-        	value = i ;
+            value = i ;
         }
     }
 }

@@ -60,7 +60,7 @@ package system.data.bags
             result = formatter.format( new BagClass( ["value1", "value2"] ) ) ;
             
             assertEquals(result, "{1:value1,1:value2}" , "3 - The BagFormatter format method failed with a Bag whith one entry inside.") ;
-			
+            
             
         }         
         

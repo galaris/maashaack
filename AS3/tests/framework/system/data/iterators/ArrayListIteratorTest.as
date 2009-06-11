@@ -62,13 +62,13 @@ package system.data.iterators
             
             try
             {
-            	it = new ArrayListIterator( null ) ;
-            	fail( "03-01 - The ArrayListIterator constructor failed." ) ;
+                it = new ArrayListIterator( null ) ;
+                fail( "03-01 - The ArrayListIterator constructor failed." ) ;
             }
             catch( e:Error )
             {
-            	assertTrue( e is ArgumentError , "03-02 - The ArrayListIterator constructor failed." ) ;
-                assertEquals( e.message , "ListIterator constructor failed, the 'list' argument not must be 'null' or 'undefined'." , "03-03 - The ArrayListIterator constructor failed." ) ;	
+                assertTrue( e is ArgumentError , "03-02 - The ArrayListIterator constructor failed." ) ;
+                assertEquals( e.message , "ListIterator constructor failed, the 'list' argument not must be 'null' or 'undefined'." , "03-03 - The ArrayListIterator constructor failed." ) ;    
             }
                         
         }        

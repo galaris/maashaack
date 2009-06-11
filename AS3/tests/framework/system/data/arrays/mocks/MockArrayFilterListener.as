@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -42,7 +42,7 @@ package system.data.arrays.mocks
     /**
      * This Mock object listen all events dispatched from an ArrayFilter object.
      */
-	public class MockArrayFilterListener 
+    public class MockArrayFilterListener 
     {
     
         /**
@@ -50,11 +50,11 @@ package system.data.arrays.mocks
          * @param af The ArrayFilter of this mock to register.
          */
         public function MockArrayFilterListener( af:ArrayFilter=null )
-		{
-			if ( af != null )
-			{
-        		register(af) ;
-			}	
+        {
+            if ( af != null )
+            {
+                register(af) ;
+            }    
         }
         
         /**
@@ -95,12 +95,12 @@ package system.data.arrays.mocks
          */
         public function register( af:ArrayFilter ):void
         {
-        	if ( this.af != null )
-        	{
-        		unregister() ;
-        	}
-        	this.af = af ;
-        	this.af.addEventListener( Event.CHANGE , onChange , false , 0 , true ) ;
+            if ( this.af != null )
+            {
+                unregister() ;
+            }
+            this.af = af ;
+            this.af.addEventListener( Event.CHANGE , onChange , false , 0 , true ) ;
         }
                 
         /**
@@ -108,10 +108,10 @@ package system.data.arrays.mocks
          */
         public function unregister():void
         {
-        	if ( af != null )
-        	{
-	            af.removeEventListener( Event.CHANGE , onChange , false ) ;
-        	}
+            if ( af != null )
+            {
+                af.removeEventListener( Event.CHANGE , onChange , false ) ;
+            }
         }
         
     }

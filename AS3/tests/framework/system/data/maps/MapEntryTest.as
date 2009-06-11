@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,7 +37,7 @@ package system.data.maps
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Entry;    
+    import system.data.Entry;
 
     public class MapEntryTest extends TestCase 
     {
@@ -61,9 +61,9 @@ package system.data.maps
         
         public function testConstructor():void
         {
-        	
-        	var e:MapEntry ;
-        	
+            
+            var e:MapEntry ;
+            
             assertNotNull( entry , "1 - The constructor failed, the object not must be null.") ;
             
             e = new MapEntry() ;
@@ -99,7 +99,7 @@ package system.data.maps
 
         public function testClone():void
         {
-        	var c:MapEntry = entry.clone() ;
+            var c:MapEntry = entry.clone() ;
             assertNotSame( c , entry , "MapEntry.clone failed with the value method" ) ;
             assertEquals(entry.key   , c.key   , "The key of the entry equals with the clone.key.") ;
             assertEquals(entry.value , c.value , "The value of the entry equals with the clone.key.") ;

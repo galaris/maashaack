@@ -43,7 +43,7 @@ package system.data.samples
 
         public function CollectionClass( ar:Array = null )
         {
-        	_ar = ar ;
+            _ar = ar ;
         }
     
         public function add(o:*):Boolean
@@ -103,7 +103,7 @@ package system.data.samples
         
         public function toArray():Array
         {
-        	return _ar ;
+            return _ar ;
         }
         
         private var _ar:Array ;

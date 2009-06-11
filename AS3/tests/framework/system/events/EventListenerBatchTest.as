@@ -77,7 +77,7 @@ package system.events
         
         public function testConstructor():void
         {
-        	assertNotNull( batch , "EventListenerBatch constructor failed." ) ;
+            assertNotNull( batch , "EventListenerBatch constructor failed." ) ;
         }
         
         public function testInherit():void
@@ -92,10 +92,10 @@ package system.events
         
         public function testClone():void
         {
-        	var clone:EventListenerBatch = batch.clone() as EventListenerBatch ;
-        	
+            var clone:EventListenerBatch = batch.clone() as EventListenerBatch ;
+            
             assertNotNull( clone , "01 - EventListenerBatch clone method failed." ) ;
-        	assertEquals( clone.size() , batch.size(),  "02 - EventListenerBatch clone method failed." ) ;
+            assertEquals( clone.size() , batch.size(),  "02 - EventListenerBatch clone method failed." ) ;
         }
         
     }

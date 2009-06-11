@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -63,45 +63,45 @@ package system.data.iterators
         
         public function testConstructor():void
         {
-        	try
-        	{
-        		new ProtectedIterator(null) ;
-        		fail( "The ProtectedIterator constructor not support a null argument and must throws an ArgumentError.") ;
-        	}
-        	catch(e:Error)
-        	{
+            try
+            {
+                new ProtectedIterator(null) ;
+                fail( "The ProtectedIterator constructor not support a null argument and must throws an ArgumentError.") ;
+            }
+            catch(e:Error)
+            {
                 assertTrue( e is ArgumentError , "ProtectedIterator constructor must throws an ArgumentError") ;
                 assertEquals( e.message, "ProtectedIterator constructor don't support a null iterator in argument." , "The message in the ArgumentError isn't valid.") ;
-        	}
+            }
         }         
 
         public function testHasNext():void
         {
-        	assertTrue( it.hasNext() , "ProtectedIterator.hasNext() method failed." ) ;
+            assertTrue( it.hasNext() , "ProtectedIterator.hasNext() method failed." ) ;
         }
 
         public function testKey():void
         {
-        	assertEquals( it.key() , "key" , "ProtectedIterator.key() method failed." ) ;
+            assertEquals( it.key() , "key" , "ProtectedIterator.key() method failed." ) ;
         }    
     
         public function testNext():void
         {
-        	assertEquals( it.next() , "next" , "ProtectedIterator.next() method failed." ) ;
+            assertEquals( it.next() , "next" , "ProtectedIterator.next() method failed." ) ;
         }
         
         public function testRemove():void
         {
-        	try
-        	{
-        		it.remove() ;
-        		fail( "ProtectedIterator.remove method must throw an IllegalOperationError.") ;
-        	}
-        	catch( e:Error )
-        	{
-        		assertTrue( e is IllegalOperationError , "ProtectedIterator.remove method must throw an IllegalOperationError.") ;
+            try
+            {
+                it.remove() ;
+                fail( "ProtectedIterator.remove method must throw an IllegalOperationError.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is IllegalOperationError , "ProtectedIterator.remove method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the remove() method." , "The message in the IllegalOperationError isn't valid.") ;
-        	}
+            }
         }           
     
         public function testReset():void
@@ -115,7 +115,7 @@ package system.data.iterators
             {
                 assertTrue( e is IllegalOperationError , "ProtectedIterator.reset method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the reset() method." , "The message in the IllegalOperationError isn't valid.") ;
-            }        	
+            }            
         }           
         
         public function testSeek():void
@@ -129,7 +129,7 @@ package system.data.iterators
             {
                 assertTrue( e is IllegalOperationError , "ProtectedIterator.seek method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the seek() method." , "The message in the IllegalOperationError isn't valid.") ;
-            }           	
+            }               
         }        
         
     }

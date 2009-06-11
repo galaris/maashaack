@@ -1,4 +1,39 @@
-﻿package core
+﻿/*
+  Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ 
+  The contents of this file are subject to the Mozilla Public License Version
+  1.1 (the "License"); you may not use this file except in compliance with
+  the License. You may obtain a copy of the License at
+  http://www.mozilla.org/MPL/
+  
+  Software distributed under the License is distributed on an "AS IS" basis,
+  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  for the specific language governing rights and limitations under the
+  License.
+  
+  The Original Code is [maashaack framework].
+  
+  The Initial Developers of the Original Code are
+  Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
+  Portions created by the Initial Developers are Copyright (C) 2006-2009
+  the Initial Developers. All Rights Reserved.
+  
+  Contributor(s):
+  
+  Alternatively, the contents of this file may be used under the terms of
+  either the GNU General Public License Version 2 or later (the "GPL"), or
+  the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  in which case the provisions of the GPL or the LGPL are applicable instead
+  of those above. If you wish to allow use of your version of this file only
+  under the terms of either the GPL or the LGPL, and not to allow others to
+  use your version of this file under the terms of the MPL, indicate your
+  decision by deleting the provisions above and replace them with the notice
+  and other provisions required by the LGPL or the GPL. If you do not delete
+  the provisions above, a recipient may use your version of this file under
+  the terms of any one of the MPL, the GPL or the LGPL.
+*/
+
+package core
 {
     import buRRRn.ASTUce.framework.TestCase;
     
@@ -21,7 +56,6 @@
             assertEquals( u.path,      "/pub/ietf/uri/" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "Related" );
-            
         }
         
         public function testParse2():void
@@ -36,7 +70,6 @@
             assertEquals( u.path,      "/pub/ietf/uri/" );
             assertEquals( u.query,     "a=1&b=2" );
             assertEquals( u.fragment,  "Related" );
-            
         }
         
         public function testParse3():void
@@ -51,7 +84,6 @@
             assertEquals( u.path,      "/pub/ietf/uri/" );
             assertEquals( u.query,     "a=1&b=2" );
             assertEquals( u.fragment,  "Related" );
-            
         }
         
         public function testParse4():void
@@ -66,7 +98,6 @@
             assertEquals( u.path,      "+1-816-555-1212" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse5():void
@@ -81,7 +112,6 @@
             assertEquals( u.path,      "John.Doe@example.com" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse6():void
@@ -96,7 +126,6 @@
             assertEquals( u.path,      "comp.infosystems.www.servers.unix" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse7():void
@@ -111,7 +140,6 @@
             assertEquals( u.path,      "/" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse8():void
@@ -126,7 +154,6 @@
             assertEquals( u.path,      "/c=GB" );
             assertEquals( u.query,     "objectClass?one" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse9():void
@@ -141,7 +168,6 @@
             assertEquals( u.path,      "oasis:names:specification:docbook:dtd:xml:4.1.2" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse10():void
@@ -156,7 +182,6 @@
             assertEquals( u.path,      "/server/my/path/file.txt" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse11():void
@@ -171,7 +196,6 @@
             assertEquals( u.path,      "/some/path/and/file.txt" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse12():void
@@ -186,7 +210,6 @@
             assertEquals( u.path,      "/my/path/file.txt" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse13():void
@@ -201,7 +224,6 @@
             assertEquals( u.path,      "/C:/directory/file.txt" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse14():void
@@ -216,7 +238,6 @@
             assertEquals( u.path,      "/C:/Documents%20and%20Settings/bob/Desktop" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse15():void
@@ -231,7 +252,6 @@
             assertEquals( u.path,      "/Users/bob/Desktop" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse16():void
@@ -246,7 +266,6 @@
             assertEquals( u.path,      "/SharedFolder/Resource" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse17():void
@@ -261,7 +280,6 @@
             assertEquals( u.path,      "/directorypath/resource" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse18():void
@@ -276,7 +294,6 @@
             assertEquals( u.path,      "/directorypath/resource" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse19():void
@@ -291,7 +308,6 @@
             assertEquals( u.path,      "/server/my/path/file.txt" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
         
         public function testParse20():void
@@ -306,12 +322,6 @@
             assertEquals( u.path,      "/pub/ietf/uri/" );
             assertEquals( u.query,     "" );
             assertEquals( u.fragment,  "" );
-            
         }
-        
-        
-        
-        
-        
     }
 }

@@ -57,12 +57,12 @@ package system.process
             
             try
             {
-            	c.run() ;
-            	fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
+                c.run() ;
+                fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
             }
             catch( e:Error )
             {
-            	assertEquals( e.message , "run invoked 0" , "The Runnable interface failed.") ;
+                assertEquals( e.message , "run invoked 0" , "The Runnable interface failed.") ;
             }
 
             try

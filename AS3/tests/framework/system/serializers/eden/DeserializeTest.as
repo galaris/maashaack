@@ -383,7 +383,7 @@ package system.serializers.eden
             }
         
         public function testMissingEndSemiColon2():void
-        	{
+            {
             //error found in ES4a StringsTest
             var r1:Date = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13)" );
             var r2:* = ECMAScript.evaluate( "new Date(2007,4,22,13,13,13 " );
@@ -400,7 +400,7 @@ package system.serializers.eden
             
             assertUndefined( r4 );
             
-        	}
+            }
         
         /* Issue 14
            http://code.google.com/p/edenrr/issues/detail?id=14

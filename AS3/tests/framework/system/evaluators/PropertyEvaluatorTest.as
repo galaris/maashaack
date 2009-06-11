@@ -59,7 +59,7 @@ package system.evaluators
         
         public function setUp():void
             {
-            	
+                
             obj =
             {
                 message : "hello world" ,
@@ -70,7 +70,7 @@ package system.evaluators
                     label : "my label"
                 }
             };
-            	
+                
             e1 = new PropertyEvaluator() ;
             e2 = new PropertyEvaluator( obj ) ;
             }
@@ -131,7 +131,7 @@ package system.evaluators
                 }
                 catch( e:Error )
                 {
-                    assertEquals( "EvalError: [object PropertyEvaluator] eval failed with the expression : unknow" , e.toString() , "04.2 - The eval method failed with the expression : '" + expression + "'" ) ;                	
+                    assertEquals( "EvalError: [object PropertyEvaluator] eval failed with the expression : unknow" , e.toString() , "04.2 - The eval method failed with the expression : '" + expression + "'" ) ;                    
                 }
 
             }
