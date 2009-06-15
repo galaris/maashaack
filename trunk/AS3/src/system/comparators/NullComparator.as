@@ -42,7 +42,7 @@ package system.comparators
      * When comparing two non-null objects, the ComparableComparator is used if the nonNullComparator isnt' define.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import vegas.util.comparators.NullComparator;
+     * import system.comparators.NullComparator;
      * 
      * var comp1:NullComparator = new NullComparator(null, true) ;
      * var comp2:NullComparator = new NullComparator(null, false) ;
