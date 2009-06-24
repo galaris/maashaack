@@ -166,7 +166,7 @@ internal class _A //colision here
 
 So be sure to use very unique names for those special internal classes.
 
-Second, this feature could simply vanish in the future so don;t depend on it too heavyly.
+Second, this feature could simply vanish in the future so don't depend on it too heavyly.
 
 
 = references =
