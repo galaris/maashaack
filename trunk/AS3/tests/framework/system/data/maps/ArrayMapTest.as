@@ -40,10 +40,9 @@ package system.data.maps
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;    
-
+    
     public class ArrayMapTest extends TestCase 
     {
-
         public function ArrayMapTest(name:String = "")
         {
             super( name );
@@ -55,18 +54,18 @@ package system.data.maps
         {
             map = new ArrayMap(["key1", "key2"],["value1", "value2"]) ;
         }
-
+        
         public function tearDown():void
         {
             map = undefined ;
-        }          
+        }
         
         public function testConstructor():void
         {
             assertNotNull( map , "" ) ;
             
             assertEquals( map.get("key1") , "value1" , "1 - The ArrayMap constructor failed : map.get('key1')") ;
-            assertEquals( map.get("key2") , "value2" , "2 - The ArrayMap constructor failed : map.get('key2')") ;        
+            assertEquals( map.get("key2") , "value2" , "2 - The ArrayMap constructor failed : map.get('key2')") ;
             
             var m1:ArrayMap = new ArrayMap() ;
             
@@ -74,9 +73,8 @@ package system.data.maps
             
             var m2:ArrayMap = new ArrayMap(null,["value1", "value2"]) ;
             assertEquals( m2.size() , 0 , "4 - The ArrayMap constructor failed") ;
-            
-        }         
-                
+        }
+        
         public function testClear():void
         {
             var m:ArrayMap = new ArrayMap(["key1", "key2"],["value1", "value2"]) ;
@@ -112,7 +110,7 @@ package system.data.maps
             assertEquals( map.get("key1") , "value1"  , "1 - The ArrayMap get method failed.") ;
             assertEquals( map.get("key2") , "value2"  , "2 - The ArrayMap get method failed.") ;
             assertUndefined( map.get("key3") , "3 - The ArrayMap get method failed.") ;
-        } 
+        }
        
         public function testGetKeys():void
         {
@@ -120,8 +118,8 @@ package system.data.maps
             assertTrue( keys.indexOf("key1") >  -1 , "1 - The ArrayMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key2") >  -1 , "2 - The ArrayMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key3") == -1 , "3 - The ArrayMap getKeys method failed.") ;
-        }         
-
+        }
+        
         public function testGetValues():void
         {
             var values:Array = map.getValues() ;
@@ -142,7 +140,7 @@ package system.data.maps
             assertEquals( map.indexOfValue("value1") , 0,  "1 - The ArrayMap indexOfValue method failed." )  ;
             assertEquals( map.indexOfValue("value2") , 1,  "2 - The ArrayMap indexOfValue method failed." )  ;
             assertEquals( map.indexOfValue("value3") , -1,  "3 - The ArrayMap indexOfValue method failed." )  ;
-        }                  
+        }
         
         public function testIsEmpty():void
         {
@@ -150,7 +148,7 @@ package system.data.maps
             
             assertTrue( m.isEmpty() , "1 - The ArrayMap isEmpty method failed." )  ;
             assertFalse( map.isEmpty() , "2 - The ArrayMap isEmpty method failed." )  ;
-        }        
+        }
         
         public function testIterator():void
         {
@@ -173,7 +171,7 @@ package system.data.maps
             assertNull(map.put("key3","value3"), "1 - The ArrayMap put method failed, with a new key must return null.") ;
             assertEquals(map.put("key3","value4"), "value3", "2 - The ArrayMap put method failed, with a key who already exist in the map, must return a value.") ;
             map.remove("key3") ;
-        }        
+        }
         
         public function testPutAll():void
         {
@@ -194,7 +192,7 @@ package system.data.maps
             map.put("key3", "value3") ;
             assertEquals( map.remove("key3") , "value3", "1 - The ArrayMap remove method failed.") ;
             assertNull( map.remove("key4") , "3 - The ArrayMap remove method failed.") ;
-        }        
+        }
        
         public function testSetKeyAt():void
         {
@@ -210,7 +208,6 @@ package system.data.maps
                 assertEquals( e.message , "ArrayMap.setKeyAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
             }
             
-            
             entry = map.setKeyAt( 0, "key2" ) ;
             assertNull(entry , "02 The ArrayMap.setKeyAt failed, must return null when the passed-in key already exist in the map.") ;
             
@@ -223,8 +220,8 @@ package system.data.maps
             assertEquals( entry.key   , "key10"   , "04-01 - The ArrayMap setKeyAt method failed : " + entry ) ;
             assertEquals( entry.value , "value1"  , "04-02 - The ArrayMap setKeyAt method failed : " + entry ) ;
             
-        }        
-
+        }
+        
         public function testSetValueAt():void
         {
             try
@@ -238,8 +235,8 @@ package system.data.maps
                 assertEquals( e.message , "ArrayMap.setValueAt(10) failed with an index out of the range." , "01-03 The setKeyAt method must throw a RangeError if the index is out of range") ;
             }
             
-            var entry:MapEntry ;            
-
+            var entry:MapEntry ;
+            
             entry = map.setValueAt( 0, "value999" ) ;
             assertEquals( entry.key   , "key1"  , "03-01 - The ArrayMap setValueAt method failed : " + entry ) ;
             assertEquals( entry.value , "value1" , "03-02 - The ArrayMap setValueAt method failed : " + entry ) ;
@@ -247,13 +244,13 @@ package system.data.maps
             entry = map.setValueAt( 0, "value1" ) ;
             
             assertEquals( entry.key   , "key1"   , "04-01 - The ArrayMap setValueAt method failed : " + entry ) ;
-            assertEquals( entry.value , "value999"  , "04-02 - The ArrayMap setValueAt method failed : " + entry ) ;            
+            assertEquals( entry.value , "value999"  , "04-02 - The ArrayMap setValueAt method failed : " + entry ) ;
         }
        
         public function testSize():void
         {
             assertEquals(map.size() , 2, "The ArrayMap size method failed.") ;
-        }       
+        }
         
         public function testToSource():void
         {
@@ -269,7 +266,5 @@ package system.data.maps
         {
             assertEquals( map.toString() ,"{key1:value1,key2:value2}" , "The ArrayMap toString method failed." ) ;
         }
-                  
-        
     }
 }

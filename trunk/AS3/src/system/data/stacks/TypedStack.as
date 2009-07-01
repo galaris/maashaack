@@ -40,8 +40,8 @@ package system.data.stacks
     import system.data.Stack;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;    
-
+    import system.eden;
+    
     /**
      * TypedStack is a wrapper for Stack instances that ensures that only values of a specific type can be added to the wrapped stack.
      * <p><b>Example :</b></p>
@@ -69,7 +69,6 @@ package system.data.stacks
      */
     public class TypedStack implements Stack, Typeable, Validator 
     {
-
         /**
          * Creates a new TypedStack instance.
          * @param stack the type of this Typeable object (a Class or a Function).
@@ -103,7 +102,7 @@ package system.data.stacks
         {
             return _type ;
         }
-
+        
         /**
          * @private
          */
@@ -114,7 +113,7 @@ package system.data.stacks
                 _s.clear() ;
             }
             _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
-        }      
+        }
         
         /**
          * Removes all of the elements from this stack (optional operation).
@@ -122,7 +121,7 @@ package system.data.stacks
         public function clear():void
         {
             _s.clear() ;
-        }        
+        }
         
         /**
          * Creates and returns a shallow copy of the object.

@@ -36,7 +36,7 @@
 package system.data
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     import system.data.arrays.*;
     import system.data.bags.*;
     import system.data.collections.*;
@@ -45,7 +45,7 @@ package system.data
     import system.data.maps.*;
     import system.data.queues.*;
     import system.data.sets.*;
-    import system.data.stacks.*;    
+    import system.data.stacks.*;
 
     public class AllTests
     {
@@ -75,29 +75,30 @@ package system.data
             suite.addTestSuite(StackTest) ;
             suite.addTestSuite(TypeableTest) ;
             suite.addTestSuite(ValidatorTest) ;
-                                    
+            suite.addTestSuite(WeakReferenceTest) ;
+            
             // arrays
             suite.addTest(system.data.arrays.AllTests.suite());
             
             // bags
             suite.addTest(system.data.bags.AllTests.suite());
-                        
+            
             // collections
-            suite.addTest(system.data.collections.AllTests.suite());  
-                                 
+            suite.addTest(system.data.collections.AllTests.suite());
+            
             // iterators
             suite.addTest(system.data.iterators.AllTests.suite());
             
             // lists
-            suite.addTest(system.data.lists.AllTests.suite());                        
+            suite.addTest(system.data.lists.AllTests.suite());
             
             // maps
             suite.addTest(system.data.maps.AllTests.suite());
 
             // queues
-            suite.addTest(system.data.queues.AllTests.suite());            
+            suite.addTest(system.data.queues.AllTests.suite());
             
-            // sets           
+            // sets
             suite.addTest(system.data.sets.AllTests.suite());
             
             // stacks

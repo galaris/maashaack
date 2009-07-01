@@ -41,14 +41,13 @@ package system.data.sets
     import system.data.Map;
     import system.data.Set;
     import system.data.collections.ArrayCollection;
-    import system.data.iterators.ArrayIterator;    
-
+    import system.data.iterators.ArrayIterator;
+    
     /**
      * The basic implementation of the Set interface. 
      */
     public class CoreSet extends ArrayCollection implements Set
     {
-
         /**
          * Creates a new CoreSet instance.
          * <p>You can use an optional parameter in this constructor with different type : an Array or a Collection instance to fill the Set object.</p>
@@ -94,7 +93,7 @@ package system.data.sets
                 return false ;
             }
             return _map.put(o, PRESENT) == null ;
-        }        
+        }
         
         /**
          * Removes all of the elements from this Set (optional operation).
@@ -103,7 +102,7 @@ package system.data.sets
         {
             _map.clear() ;
         }
-
+        
         /**
          * Returns a shallow copy of this Set (optional operation).
          * @return a shallow copy of this Set (optional operation).
@@ -112,7 +111,7 @@ package system.data.sets
         {
             return new CoreSet( _map.clone() , toArray() ) ;
         }
-    
+        
         /**
          * Returns <code class="prettyprint">true</code> if this Set contains the specified element.
          * @return <code class="prettyprint">true</code> if this Set contains the specified element.
@@ -129,16 +128,16 @@ package system.data.sets
         public override function get( key:* ):*
         {
             return _map.getKeys()[key] ;
-        }        
+        }
         
         /**
          * Returns the index of an element in the collection.
          * @return the index of an element in the collection.
-         */        
+         */
         public override function indexOf( o:* , fromIndex:uint = 0 ):int
         {
             return _map.getKeys().indexOf(o, fromIndex) ;
-        }        
+        }
         
         /**
          * Returns true if this set contains no elements.
@@ -157,7 +156,7 @@ package system.data.sets
         {
             return _map.keyIterator() ;
         }
-
+        
         /**
          * Removes the specified element from this set if it is present.
          */
@@ -165,7 +164,7 @@ package system.data.sets
         {
             return _map.remove(o) == PRESENT ;
         }
-
+        
         /**
          * Returns the number of elements in this set (its cardinality).
          * @return the number of elements in this set (its cardinality).
@@ -174,7 +173,7 @@ package system.data.sets
         {
             return _map.size() ;
         }
-    
+        
         /**
          * Returns the array representation of all the elements of this Set.
          * @return the array representation of all the elements of this Set.
@@ -191,9 +190,7 @@ package system.data.sets
         
         /**
          * @private
-         */        
-        private static const PRESENT:Object = new Object() ;        
-        
-        
+         */
+        private static const PRESENT:Object = new Object() ;
     }
 }

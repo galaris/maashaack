@@ -36,8 +36,8 @@
 package system.data.stacks 
 {
     import system.data.Stack;
-    import system.data.collections.ArrayCollection;    
-
+    import system.data.collections.ArrayCollection;
+    
     /**
      * The based implementation of the Stack interface. 
      * The Stack interface represents a last-in-first-out (LIFO) stack of objects.
@@ -55,7 +55,6 @@ package system.data.stacks
      */
     public class ArrayStack extends ArrayCollection implements Stack
     {
-
         /**
          * Creates a new SimpleStack instance.
          * @param init An optional Array or Collection to fill the collection.
@@ -72,7 +71,7 @@ package system.data.stacks
         public override function clone():* 
         {
             return new ArrayStack( toArray() ) ;
-        }        
+        }
         
         /**
          * Looks at the object at the top of this stack without removing it from the stack.
@@ -107,6 +106,5 @@ package system.data.stacks
         {
             return indexOf(o) ;
         }
-          
     }
 }

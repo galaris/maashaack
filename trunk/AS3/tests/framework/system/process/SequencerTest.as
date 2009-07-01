@@ -51,9 +51,9 @@ package system.process
             super(name);
         }
         
-           public var seq:Sequencer ;        
+        public var seq:Sequencer ;
         
-        public var mockListener:MockTaskListener ;        
+        public var mockListener:MockTaskListener ;
         
         public function setUp():void
         {
@@ -71,7 +71,7 @@ package system.process
         {
             seq = undefined ; 
             MockTask.reset() ; 
-        }        
+        }
         
         public function testInherit():void
         {

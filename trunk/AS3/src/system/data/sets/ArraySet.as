@@ -36,14 +36,13 @@
 package system.data.sets 
 {
     import system.data.Set;
-    import system.data.maps.ArrayMap;    
-
+    import system.data.maps.ArrayMap;
+    
     /**
      * This class implement the Set interface and use an ArrayMap inside. 
      */
     public class ArraySet extends CoreSet implements Set
     {
-
         /**
          * Creates a new ArraySet instance.
          * <p>You can use an optional parameter in this constructor with different type : an Array or a Collection instance to fill the Set object.</p>
@@ -61,7 +60,6 @@ package system.data.sets
         public override function clone():*
         {
             return new ArraySet( toArray() ) ;
-        }        
-        
+        }
     }
 }
