@@ -37,7 +37,7 @@ package system.numeric
 {
     import system.Equatable;
     import system.Serializable;
-    import system.numeric.Mathematics;    
+    import system.numeric.Mathematics;
 
     /**
      * Represents an immutable range of values.
@@ -57,11 +57,9 @@ package system.numeric
      * trace ("r1 clamp 5        : " + r1.clamp(5)        ) ; // r1 clamp 5 : 10
      * trace ("r1 clamp 121      : " + r1.clamp(121)      ) ; // r1 clamp 121 : 120
      * </pre>
-     * @author eKameleon
      */
     public class Range implements Equatable, Serializable
     {
-
         /**
          * Creates a new Range instance.
          * <p><b>Usage :</b></p>
@@ -76,45 +74,45 @@ package system.numeric
             this.min = min ;
             this.max = max ;
         }
-
+        
         /**
          * Range reference between 0 and 360.
          */
         public static const DEGREE_RANGE:Range = new Range( 0, 360 ) ;
-
+        
         /**
          * Range reference between 0 and 100.
          */
         public static const PERCENT_RANGE:Range = new Range( 0, 100 ) ;
-
+        
         /**
          * Range reference between -255 and 255.
          */
         public static const COLOR_RANGE:Range = new Range( - 255, 255 ) ;
-
+        
         /**
          * Range reference between 0 and 1.
          */
         public static const UNITY_RANGE:Range = new Range( 0, 1 ) ;
-
+        
         /**
          * The max value of the range.
          */    
         public var max:Number ;
-
+        
         /**
          * The min value of the range.
          */
         public var min:Number ;
-
+        
         /**
          * Clamp a value in the current range.
-         */    
+         */
         public function clamp(value:Number):Number 
         {
             return Mathematics.clamp( value, min, max ) ;
         }
-
+        
         /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
@@ -123,35 +121,25 @@ package system.numeric
         {
             return new Range( min, max ) ;
         }
-
+        
         /**
          * Creates a new range by combining two existing ranges.
-         * <li>either range can be <code class="prettyprint">null</code>, in which case the other range is returned.</li>
-         * <li>if both ranges are <code class="prettyprint">null</code> the return value is <code class="prettyprint">null</code>.</li>
-         * @param range1 the first range, <code class="prettyprint">null</code> permitted.
-         * @param range2 the second range, <code class="prettyprint">null</code> permitted.
+         * @param range the range to combine, <code class="prettyprint">null</code> permitted.
          */
-        public static function combine( range1:Range, range2:Range ):Range
+        public function combine( range:Range ):Range
         {
-            if (range1 == null)
+            if (range == null)
             {
-                return range2 ;    
+                return clone() ;
             }
             else
             {
-                if (range2 == null)
-                {
-                    return range1 ;    
-                }
-                else
-                {
-                    var lower:Number = Math.min( range1.min, range2.min ) ;
-                    var upper:Number = Math.max( range1.max, range2.max ) ;
-                    return new Range( lower, upper ) ;    
-                }
+                var lower:Number = Math.min( min , range.min ) ;
+                var upper:Number = Math.max( max , range.max ) ;
+                return new Range( lower, upper ) ;
             }
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the Range instance contains the value passed in argument.
          * @return <code class="prettyprint">true</code> if the Range instance contains the value passed in argument.
@@ -160,7 +148,7 @@ package system.numeric
         {
             return ! isOutOfRange( value ) ;
         }
-
+        
         /**
          * Indicates whether some other object is "equal to" this one.
          */
@@ -175,38 +163,32 @@ package system.numeric
                 return false ;
             }
         }
-
+        
         /**
          * Creates a new range by adding margins to an existing range.
-         * @param range the range <code class="prettyprint">null</code> not permitted.
          * @param lowerMargin the lower margin (expressed as a percentage of the range length).
          * @param upperMargin the upper margin (expressed as a percentage of the range length).
          * @return The expanded range.
-         * @throws Error if the range argument is <code class="prettyprint">null</code>
          */
-        public static function expand(range:Range, lowerMargin:Number = 1, upperMargin:Number = 1):Range
+        public function expand( lowerMargin:Number = 1, upperMargin:Number = 1):Range
         {
-            if (range == null)
-            {
-                throw new Error( "Range.expand method failed, the range argument not must be 'null' or 'undefined'." );  
-            }
-            var size:Number = range.size( ) ;
-            var lower:Number = size * lowerMargin ;
-            var upper:Number = size * upperMargin ;
-            return new Range( range.min - lower, range.max + upper ) ;
+            var l:Number = size() ;
+            var lower:Number = l * lowerMargin ;
+            var upper:Number = l * upperMargin ;
+            return new Range( min - lower, max + upper ) ;
         }
-
+        
         /**
          * Filters the passed-in Number value, if the value is NaN the return value is the default value in second argument.
          * @param value The Number value to filter, if this value is NaN the value is changed.
          * @param defaultValue The default value to apply over the specified value if this value is NaN (default 0).
          * @return The filter Number value.
-         */    
+         */
         public static function filterNaNValue( value:Number, defaultValue:Number = 0 ):Number
         {
             return isNaN( value ) ? defaultValue : value ;
-        }        
-
+        }
+        
         /**
          * Returns the central value for the range.
          * @return The central value.
@@ -215,27 +197,25 @@ package system.numeric
         {
             return (min + max) / 2 ;
         }
-
+        
         /**
          * Returns a random floating-point number between two numbers.
-         * @param r The Range object to limit the result of the function.
          * @return a random floating-point number between two numbers.
          */
-        public static function getRandomFloat( r:Range ):Number
+        public function getRandomFloat():Number
         {
-            return Math.random( ) * ( r.max - r.min ) + r.min ;    
+            return Math.random( ) * ( max - min ) + min ;
         }
-
+        
         /**
          * Returns a random integer number between two numbers.
-         * @param r The Range object to limit the result of the function.
          * @return a random integer number between two numbers.
          */
-        public static function getRandomInteger( r:Range ):Number
+        public function getRandomInteger():int
         {
-            return Math.floor( getRandomFloat( r ) ) ;
+            return Math.floor( getRandomFloat() ) ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the value is out of the range.
          * @return <code class="prettyprint">true</code> if the value is out of the range.
@@ -260,9 +240,9 @@ package system.numeric
          */
         public function size():Number
         {
-            return max - min ;    
+            return max - min ;
         }
-
+        
         /**
          * Returns the Eden representation of the object.
          * @return the string representing the source code of the object.

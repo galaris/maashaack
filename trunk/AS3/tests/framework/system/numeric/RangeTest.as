@@ -38,11 +38,10 @@ package system.numeric
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.Equatable;
-    import system.Serializable;    
+    import system.Serializable;
     
     public class RangeTest extends TestCase 
     {
-
         public function RangeTest(name:String = "")
         {
             super( name );
@@ -54,19 +53,16 @@ package system.numeric
         {
             range = new Range(100,200) ;
         }
-
+        
         public function tearDown():void
         {
             range = undefined ;
-        }        
+        }
         
         public function testConstructor():void
         {
-            
             assertNotNull( range , "Range object not must be null.") ;
-            
             var r:Range ;
-            
             try
             {
                r = new Range(200, 100) ;
@@ -76,7 +72,6 @@ package system.numeric
             {
                 //
             }
-                        
         }
         
         public function testInherit():void
@@ -149,12 +144,10 @@ package system.numeric
             var r1:Range = new Range(0,100) ;
             var r2:Range = new Range(200,300) ;
             
-            var r3:Range ;
+            var r3:Range = r1.combine(r2) ;
             
-            r3 = Range.combine(r1, r2) ;
-            
-            assertEquals( r3.min , 0, "Range.combine(" + r1 + "," + r2 + ").min failed.") ;
-            assertEquals( r3.max , 300, "Range.combine(" + r1 + "," + r2 + ").max failed.") ;
+            assertEquals( r3.min ,   0 , "Range.combine(" + r1 + "," + r2 + ").min failed.") ;
+            assertEquals( r3.max , 300 , "Range.combine(" + r1 + "," + r2 + ").max failed.") ;
         } 
         
         public function testContains():void
@@ -162,7 +155,7 @@ package system.numeric
             assertTrue( range.contains(150) , "range.contains(150) failed");
             assertFalse( range.contains(1000) , "range.contains(1000) failed");
         }
-
+        
         public function testEquals():void
         {
             var r:Range = new Range(100,200) ;
@@ -173,14 +166,11 @@ package system.numeric
         {
             var r:Range ;
             
-            r = Range.expand(range) ;
-            assertEquals(r.min ,   0 , "Range.expand(" + range + ") min value failed : " + Range.expand(range)) ;
-            assertEquals(r.max , 300 , "Range.expand(" + range + ") max value failed : " + Range.expand(range)) ;
+            r = range.expand() ;
+            assertEquals(r , new Range(0,300) , "01 - Range expand failed.") ;
             
-            r = Range.expand(range, 2 , 2) ;
-            assertEquals(r.min , -100 , "Range.expand(" + range + ",2,2) min value failed : " + Range.expand(range)) ;
-            assertEquals(r.max ,  400 , "Range.expand(" + range + ",2,2) max value failed : " + Range.expand(range)) ;
-                
+            r = range.expand(2 , 2) ;
+            assertEquals(r , new Range(-100, 400) , "02 - Range expand failed.") ;
         }
         
         public function testFilterNaNValue():void
@@ -193,23 +183,20 @@ package system.numeric
         {
             var middle:Number = range.getCentralValue() ;
             assertEquals(middle, 150, "range.getCentralValue() failed:" + middle + " with range:" + range) ;
-        }        
+        }
         
         public function testRandomFloat():void
         {
-            var float:Number = Range.getRandomFloat(range) ;
-            
-            assertTrue( float is Number , "Range.getRandomFloat(" + range + ") failed, the value isn't a Number.") ;
-            assertTrue( range.contains(float) , "Range.getRandomFloat(" + range + ") failed, the value must be in the range.") ;
-                        
+            var float:Number = range.getRandomFloat() ;
+            assertTrue( float is Number , "Range getRandomFloat(" + range + ") failed, the value isn't a Number.") ;
+            assertTrue( range.contains(float) , "Range getRandomFloat(" + range + ") failed, the value must be in the range.") ;
         }
         
         public function testRandomInteger():void
         {
-            var i:Number = Range.getRandomInteger(range) ;
-            
-            assertTrue( i is Number , "Range.getRandomInteger(" + range + ") failed, the value isn't a Number.") ;
-            assertTrue( range.contains(i) , "Range.getRandomInteger(" + range + ") failed, the value must be in the range.") ;
+            var i:int = range.getRandomInteger() ;
+            assertTrue( i is int , "Range getRandomInteger(" + range + ") failed, the value isn't a Number.") ;
+            assertTrue( range.contains(i) , "Range getRandomInteger(" + range + ") failed, the value must be in the range.") ;
         } 
         
         public function testIsOutOfRange():void
@@ -220,7 +207,6 @@ package system.numeric
         
         public function testOverLap():void
         {
-                        
             var r1:Range = new Range(0, 50) ;
             var r2:Range = new Range(0, 99) ;
             var r3:Range = new Range(0, 100) ;
@@ -239,7 +225,6 @@ package system.numeric
             assertTrue( range.overlap(r5)  , range + ".overlap(" + r5 + ") failed." ) ;
             
             assertFalse( range.overlap(r6) , range + ".overlap(" + r6 + ") failed." ) ;
-            
         }
         
         public function testSize():void
