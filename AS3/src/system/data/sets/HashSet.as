@@ -36,14 +36,13 @@
 package system.data.sets 
 {
     import system.data.Set;
-    import system.data.maps.HashMap;    
-
+    import system.data.maps.HashMap;
+     
     /**
      * HashSet based implementation of the Set interface and use a HashMap inside. 
      */
     public class HashSet extends CoreSet implements Set
     {
-
         /**
          * Creates a new HashSet instance.
          * <p>You can use an optional parameter in this constructor with different type : an Array or a Collection instance to fill the Set object.</p>
@@ -61,7 +60,6 @@ package system.data.sets
         public override function clone():*
         {
             return new HashSet( toArray() ) ;
-        }        
-        
+        }
     }
 }

@@ -38,6 +38,9 @@ package system.data.maps
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
 
+    import system.Environment;
+    import system.hosts.HostID;
+
     public class AllTests
     {
 
@@ -50,8 +53,11 @@ package system.data.maps
             suite.addTestSuite( MapEntryTest          ) ;
             suite.addTestSuite( MapFormatterTest      ) ;
             suite.addTestSuite( MapUtilsTest          ) ;
-            suite.addTestSuite( MultiSetMapTest       ) ;
-            suite.addTestSuite( MultiValueMapTest     ) ;
+            if( Environment.host.id != HostID.RedTamarin )
+            {
+                suite.addTestSuite( MultiSetMapTest   ) ;
+                suite.addTestSuite( MultiValueMapTest ) ;
+            }
             suite.addTestSuite( MultiMapFormatterTest ) ;
             suite.addTestSuite( SortedArrayMapTest    ) ;
             suite.addTestSuite( TypedMapTest          ) ;

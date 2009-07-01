@@ -54,7 +54,6 @@ package
         
         public function Framework_data_TestRunner()
         {
-            
             // init
             
             stage.align     = StageAlign.TOP_LEFT;
@@ -71,10 +70,10 @@ package
             stage.addEventListener( Event.RESIZE , resize ) ;
             resize() ;
             
-            console = new TextFieldConsole( textfield ) ;            
+            console = new TextFieldConsole( textfield ) ;
             
             system.config.serializer.prettyPrinting = false;
-                                    
+            
             //tests
             
             buRRRn.ASTUce.config.maxColumn = 64 ;
@@ -91,7 +90,7 @@ package
         /**
          * The debug textfield of this application.
          */
-        public var textfield:TextField ;            
+        public var textfield:TextField ;
         
         /**
          * Invoked to resize the application content.
@@ -100,10 +99,6 @@ package
         {
             textfield.width  = stage.stageWidth ;
             textfield.height = stage.stageHeight ;
-        }        
-            
+        }
     }
-        
 }
-
-

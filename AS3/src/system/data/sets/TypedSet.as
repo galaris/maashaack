@@ -36,8 +36,8 @@
 package system.data.sets 
 {
     import system.data.Set;
-    import system.data.collections.TypedCollection;    
-
+    import system.data.collections.TypedCollection;
+    
     /**
      * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
      * <p><b>Example :</b></p>

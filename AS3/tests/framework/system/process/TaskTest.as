@@ -35,10 +35,9 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    import system.events.ActionEvent;    import system.events.CoreEventDispatcher;    import system.process.mocks.MockTaskListener;    
-    public class TaskTest extends TestCase 
+    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    import system.events.ActionEvent;    import system.events.CoreEventDispatcher;    import system.process.mocks.MockTaskListener;
+        public class TaskTest extends TestCase
     {
-        
         public function TaskTest(name:String = "")
         {
             super(name);
@@ -73,7 +72,7 @@ package system.process
         
         public function testInterface():void
         {
-            assertTrue( action is Action , "Task implements the Action interface" ) ;     
+            assertTrue( action is Action , "Task implements the Action interface" ) ;
         }
         
         public function testIsDynamic():void
@@ -88,7 +87,7 @@ package system.process
             var t2:Task = new Task() ;
             assertNull( t1.parent , "01 - Task parent failed." ) ;
             t2.parent = t1 ;
-            assertEquals( t2.parent , t1 , "02 - Task parent failed." ) ;            
+            assertEquals( t2.parent , t1 , "02 - Task parent failed." ) ;
         }
         
         public function testClone():void
@@ -115,7 +114,7 @@ package system.process
             action.notifyStarted() ;
             assertTrue( mockListener.startCalled , "Action notifyStarted failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.startType , ActionEvent.START  , "Action notifyStarted failed, bad type found." );
-        }    
+        }
         
         public function testRun():void
         {
@@ -127,7 +126,7 @@ package system.process
             var test:Boolean ;
             action.finishIt = function():void
             {
-                test = true ;    
+                test = true ;
             };
             action.notifyFinished() ;
             assertTrue(test , "The dynamic Action.finishIt method failed.") ;
@@ -140,7 +139,7 @@ package system.process
             var test:Boolean ;
             action.startIt = function():void
             {
-                test = true ;    
+                test = true ;
             };
             action.notifyStarted() ;
             assertTrue(test , "The dynamic Action.startIt method failed.") ;
