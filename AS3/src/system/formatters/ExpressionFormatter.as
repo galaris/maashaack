@@ -76,7 +76,6 @@ package system.formatters
      */
     public dynamic class ExpressionFormatter extends Dictionary implements Formattable
     {
-        
         /**
          * Creates a new Expression instance.
          * @param weakKeys Instructs the Dictionary object to use "weak" references on object keys. If the only reference to an object is in the specified Dictionary object, the key is eligible for garbage collection and is removed from the table when the object is collected. 
@@ -191,6 +190,5 @@ package system.formatters
         {
             _reg = new RegExp( Strings.format( _pattern , beginSeparator , endSeparator ), "g" ) ;
         }
-        
     }
 }

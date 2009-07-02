@@ -36,8 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.events 
 {
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * ﻿The <code class="prettyprint">DynamicEvent</code> to dispatch a dynamic event with dynamic properties.
      * <p><b>Example :</b></p>
@@ -53,7 +53,6 @@ package system.events
      */
     public dynamic class DynamicEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">DynamicEvent</code> instance.
          * @param type the string type of the instance. 
@@ -76,6 +75,5 @@ package system.events
         {
             return new DynamicEvent( type , target , context ) ;
         }
-    
     }
 }

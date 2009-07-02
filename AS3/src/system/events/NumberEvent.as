@@ -79,7 +79,7 @@ package system.events
          */
         public function get number():Number
         {
-            return _n ;    
+            return _n ;
         }
         
         /**
@@ -87,7 +87,7 @@ package system.events
          */
         public function set number( n:Number ):void
         {
-            _n = n ;    
+            _n = n ;
         }
         
         /**

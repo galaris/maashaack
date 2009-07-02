@@ -46,8 +46,6 @@ package system.data.arrays
     import flash.utils.Proxy;
     import flash.utils.flash_proxy;
     
-    trace( flash.utils.flash_proxy );
-    
     /**
      * The ProxyArray class extends the flash.utils.Proxy class and use a composition with an Array to extends the Array class.
      * <p><b>Example :</b></p>

@@ -40,9 +40,9 @@ package system.events
     import flash.events.Event;
     
     /**
-      * This basic class is used to create concrete <code class="prettyprint">IEventDispatcher</code> implementations. This class used composition with an internal <code class="prettyprint">EventDispatcher</code> object.
-      * <p>You can overrides the internal <code class="prettyprint">EventDispatcher</code> instance with the <code class="prettyprint">initEventDispatcher</code> or the <code class="prettyprint">setEventDispatcher</code> methods. Used a global singleton reference in this method to register all events in a <code class="prettyprint">FrontController</code> for example.</p>
-      */
+     * This basic class is used to create concrete <code class="prettyprint">IEventDispatcher</code> implementations. This class used composition with an internal <code class="prettyprint">EventDispatcher</code> object.
+     * <p>You can overrides the internal <code class="prettyprint">EventDispatcher</code> instance with the <code class="prettyprint">initEventDispatcher</code> or the <code class="prettyprint">setEventDispatcher</code> methods. Used a global singleton reference in this method to register all events in a <code class="prettyprint">FrontController</code> for example.</p>
+     */
     public class CoreEventDispatcher implements IEventDispatcher, Lockable
     {
         /**
@@ -60,7 +60,7 @@ package system.events
          */
         public function get channel():String
         {
-            return     _isGlobal ? _dispatcher.channel : null ;
+            return _isGlobal ? _dispatcher.channel : null ;
         }
         
         /**

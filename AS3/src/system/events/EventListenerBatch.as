@@ -47,7 +47,6 @@ package system.events
      */
     public class EventListenerBatch extends TypedCollection implements EventListener
     {
-
         /**
          * Creates a new EventListenerBatch instance.
          */
@@ -86,7 +85,6 @@ package system.events
                     (ar[i] as EventListener).handleEvent(e) ; 
                 }
             }
-        }        
-        
+        }
     }
 }

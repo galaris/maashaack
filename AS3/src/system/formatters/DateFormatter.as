@@ -38,7 +38,7 @@ package system.formatters
     import system.Reflection;
     import system.Serializable;
     import system.numeric.Range;    
-
+    
     /**
      * DateFormatter formats a given date with a specified pattern.
      * <p>Use the declared constants as placeholders for specific parts of the date-time.</p>
@@ -76,9 +76,8 @@ package system.formatters
      */
     public class DateFormatter implements Formattable, Serializable 
     {
-        
         use namespace dateparser;
-
+        
         /**
          * Creates a new DateFormatter instance.
          * <p>If you do not pass-in a pattern or if the passed-in one is null or undefined the constant DEFAULT_DATE_FORMAT is used ("dd.mm.yyyy HH:nn:ss").</p>

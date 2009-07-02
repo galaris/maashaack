@@ -94,6 +94,5 @@ package system.events
          * @private
          */
         private var _date:Date ;
-        
     }
 }
