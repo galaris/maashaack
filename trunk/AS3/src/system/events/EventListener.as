@@ -47,12 +47,10 @@ package system.events
      */
     public interface EventListener
     {
-        
         /**
          * This method is called whenever an event occurs of the type for which the <code class="prettyprint">EventListener</code> interface was registered.
          * @param e The Event contains contextual information about the event.
          */
         function handleEvent( e:Event ):void ;
-        
     }
 }

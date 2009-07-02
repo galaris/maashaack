@@ -49,7 +49,6 @@ package system.events
      */
     public class Delegate implements Cloneable, EventListener, Runnable
     {
-        
         /**
          * Creates a new Delegate instance.
          * @param scope the scope to be used by calling this method.
@@ -71,7 +70,7 @@ package system.events
         {
             return _a ;
         }
-                
+        
         /**
          * @private
          */

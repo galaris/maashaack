@@ -35,7 +35,6 @@
 
 package system.network
 {
-    
     /**
      * The URIScheme class.
      * <p><b>see:</b></p>

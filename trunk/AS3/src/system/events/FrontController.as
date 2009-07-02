@@ -41,7 +41,7 @@ package system.events
     import system.data.maps.HashMap;
     
     import flash.events.Event ;
-
+    
     /**
      * The front controller pattern defines a single EventDispatcher that is responsible for processing application requests.
      * <p>A front controller centralizes functions such as view selection, security, 
@@ -51,7 +51,6 @@ package system.events
      */
     public class FrontController
     {
-        
         /**
          * Creates a new FrontController instance.
          * @param channel the channel of this FrontController.
@@ -139,10 +138,10 @@ package system.events
                     if ( listener != null ) 
                     {
                         _dispatcher.unregisterEventListener( name , listener ) ;
-                    }                    
+                    }
                 }
                 _map.clear() ;
-            }    
+            }
         }
         
         /**

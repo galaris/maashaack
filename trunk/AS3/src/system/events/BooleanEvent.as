@@ -95,6 +95,5 @@ package system.events
          * @private
          */
         private var _b:Boolean ;
-        
     }
 }

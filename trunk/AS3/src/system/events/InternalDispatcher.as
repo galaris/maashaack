@@ -38,7 +38,7 @@ package system.events
 {
     import flash.events.Event;
     import flash.events.EventDispatcher;
-
+    
     /**
      * This abstract class provides all basic methods of the system.events.EventDispatcher.
      */
