@@ -1,19 +1,19 @@
 #summary maashaack framework
 #labels Framework,Projects-X,Featured
 
-= Introduction =
+== Introduction ==
 
 This is the application framework for !ActionScript 3
 which have the only purpose to provide portable
 cross-platform and standard packages, libraries, etc.
 
-= Portability =
+== Portability ==
 
  * Flash 9
  * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
  * [http://code.google.com/p/redtamarin/ redtamarin] (will be implemented in a different branch)
 
-= Details =
+== Details ==
 
 Inspired by such projects as Mono, Python, Ruby, etc.
 the goal here is to provide a set of libraries that
