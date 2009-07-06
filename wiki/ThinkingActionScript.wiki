@@ -1,7 +1,7 @@
-#labels Code
+#labels Introduction
 #thinking in !ActionScript 3.
 
-= We are Hybrid =
+== We are Hybrid ==
 
 AS3 is not Java nor C#, sure we can borrow principle and recipes from other languages but we have to keep thinking with the great features found in our language.
 
@@ -10,11 +10,15 @@ but with AS3 you can do both, you can do what I call *Hybrid programming* and th
 
 This page will list some point of view, approach, etc. on common code organization, code design, etc.
 
-= Code Design =
+== Code Design ==
 
 [Singleton]
 
-= Misc =
+soon to come
+ * Loader-Cache-Proxy pattern
+ * ApplicationDomain dirty secrets
+
+== Misc ==
 
 [StaticCodeBlock]
 [Metadata]
