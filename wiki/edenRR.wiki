@@ -1,0 +1,14 @@
+#summary the eden library.
+#labels Introduction
+
+== Introduction ==
+
+eden, ECMAScript Data Exchange Notation ...
+
+TODO
+
+
+== Details ==
+
+eden AS3 has been injected into the maashaack framework,
+and now you can find the most recent version in the *system.serializers.eden* package
