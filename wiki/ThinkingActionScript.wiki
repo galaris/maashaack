@@ -1,5 +1,5 @@
+#summary thinking in !ActionScript 3.
 #labels Introduction
-#thinking in !ActionScript 3.
 
 == We are Hybrid ==
 
