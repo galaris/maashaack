@@ -1,3 +1,6 @@
 #summary start here.
+#labels Featured
 
-welcome to maashaack
+welcome to maashaack.
+
+[http://code.google.com/p/maashaack/w/list list all the wiki pages]
