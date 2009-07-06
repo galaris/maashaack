@@ -1,4 +1,4 @@
-#labels Code,Projects-X,Framework
+#labels Deprecated
 = !EventListener priority =
 
  * [http://code.google.com/p/maashaack/ HomePage]
