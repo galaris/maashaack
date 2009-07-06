@@ -1,4 +1,4 @@
-#labels Code,Framework,Projects-X
+#labels Deprecated
 = Remove listeners =
 
  * [http://code.google.com/p/maashaack/ HomePage]
