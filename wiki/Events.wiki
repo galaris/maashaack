@@ -1,7 +1,7 @@
 #summary events, dispatchers, listeners.
 #labels Documentation,Documentation-events
 
-= Definitions = 
+Some basic definitions.
 
 == Event ==
 
