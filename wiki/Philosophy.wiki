@@ -1,7 +1,7 @@
-#labels Featured,Phase-Design
-#the dirty secrets behind writing portable ES4 code.
+#labels Introduction
+#sumaary the dirty secrets behind writing portable AS3 code.
 
-= Introduction =
+== Introduction ==
 
 Considering that [http://www.ecmascript.org/ ECMAScript 4 specification] is not final
 the simple answer would be "you can't", but being the impatient kind I say "f*ck it".
@@ -13,7 +13,7 @@ the will to not add incompatible features.
 Let's target AS3 code, and then refactor later, at least it would be a good
 use of that good yer old svn, but let's do it with a grain of brain.
 
-= Details =
+== Details ==
 
 let's establish some rules, you would not think we gonna code all that in the wild
 not thinking about forward compatiblity do you ?
@@ -40,7 +40,7 @@ not thinking about forward compatiblity do you ?
  things you can use now, and then synthetize the generic parts into the general framework,
  not the other way.
 
-= Current State =
+== Current State ==
 
  * we write AS3 based applications
  * the general part of these applications are isolated and refactored into [ES4a]
