@@ -7,3 +7,17 @@ welcome to maashaack.
 
 We need to put some efforts to update the documentation,
 some parts need to be rewritten.
+
+So for now don't trust all our docs ;).
+
+We've been pretty busy with job stuff, hence why the projects have not been updated that much the last 6 months or so.
+
+So the actual battle plan is the following:
+ * restructure all the documentation
+ * clean what have to be cleaned, wether it's the doc or code or build etc.
+ * make maashaack our different projects HQ and document that
+ something we call our code galaxy
+ * talk more about code
+ * write more code
+
+and try to seriously kick some butts (and ours first).
