@@ -4,3 +4,6 @@
 welcome to maashaack.
 
 [http://code.google.com/p/maashaack/w/list list all the wiki pages]
+
+We need to put some efforts to update the documentation,
+some parts need to be rewritten.
