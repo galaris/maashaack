@@ -1,5 +1,5 @@
+#summary the dirty secrets behind writing portable AS3 code.
 #labels Introduction
-#sumaary the dirty secrets behind writing portable AS3 code.
 
 == Introduction ==
 
