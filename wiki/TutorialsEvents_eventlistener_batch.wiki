@@ -1,4 +1,4 @@
-#labels Projects-X,Framework,Code
+#labels Deprecated
 = Batch your event listeners =
 
  * [http://code.google.com/p/maashaack/ HomePage]
