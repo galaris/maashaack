@@ -1,4 +1,4 @@
-#labels Projects-X,Code,Framework
+#labels Deprecated
 = Design pattern !FrontController based on the W3C event propagation =
 
  * [http://code.google.com/p/maashaack/ HomePage]
