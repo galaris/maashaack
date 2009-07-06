@@ -1,5 +1,5 @@
 #labels Documentation
-#the errors in AS3 and in Maashaack
+#the different type of errors
 
 ==The Error class in AS3==
 
