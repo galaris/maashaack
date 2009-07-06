@@ -1,5 +1,5 @@
+#summary the different type of errors
 #labels Documentation
-#the different type of errors
 
 ==The Error class in AS3==
 
