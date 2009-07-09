@@ -16,19 +16,30 @@ Yep the dirty secrets stuff, ok not that secret but nowhere clearly explained by
 
 Things to always keep in mind when dealing with appdom.
 
- 1. An !ApplicationDomain is always dependant on a !SecurityDomain
-  * you have to *explicitly trust* another SWF to be able to access its appdom
-  * the only way to connect two !SecurityDomain is to use *Direct Communication*
-    a. *Import loading* using the `Loader` class<br>
-    using `Loader.load()`
-    {{{
+  # An !ApplicationDomain is always dependant on a !SecurityDomain
+    * you have to *explicitly trust* another SWF to be able to access its appdom
+    * the only way to connect two !SecurityDomain is to use *Direct Communication*
+      a. *Import loading* using the `Loader` class<br>
+      using `Loader.load()`
+      {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
 var SD:SecurityDomain    = SecurityDomain.currentDomain
 var context:LoaderContext = new LoaderContext( false, AD, SD );
 loader.load( new URLRequest( "other.swf" ), context );
-    }}}
-
+      }}}
+      using `Loader.loadBytes()`
+      {{{
+var loader:Loader = new Loader();
+loader.loadBytes( new URLRequest( "other.swf" ) );
+      }}}
+      b. *Cross-Scripting* permissions via `Security.allowDomain()`
+      {{{
+The Security.allowDomain() method grant access for cross-scripting,
+scripting the display list, access to the Stage object and event detection.
+      }}}
+      You can use `childAllowsParent` or `parentAllowsChild` properties of the `LoaderInfo` class<br>
+      to know if two SWFs (a parent and a child) can cross-script.
 
 === Different !ApplicationDomains interaction ===
 
