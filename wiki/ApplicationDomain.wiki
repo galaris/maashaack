@@ -52,11 +52,30 @@ scripting the display list, access to the Stage object and event detection.
 
 === Different !ApplicationDomains interaction ===
 
-  # Isolated !ApplicationDomain
-
-  # Child !ApplicationDomain
-
-  # Imported !ApplicationDomain
+  # *Isolated !ApplicationDomain*<br>
+     _new !ApplicationDomain( null )_<br>
+    {{{
+var loader:Loader = new Loader();
+var AD:ApplicationDomain = new ApplicationDomain( null );
+var context:LoaderContext = new LoaderContext( false, AD );
+loader.load( new URLRequest( "other.swf" ), context );
+    }}}
+  # *Child !ApplicationDomain*<br>
+     _new !ApplicationDomain( !ApplicationDomain.currentDomain )_<br>
+    {{{
+var loader:Loader = new Loader();
+var AD:ApplicationDomain = new ApplicationDomain( ApplicationDomain.currentDomain );
+var context:LoaderContext = new LoaderContext( false, AD );
+loader.load( new URLRequest( "other.swf" ), context );
+    }}}
+  # *Imported !ApplicationDomain*<br>
+     _!ApplicationDomain.currentDomain_<br>
+    {{{
+var loader:Loader = new Loader();
+var AD:ApplicationDomain = ApplicationDomain.currentDomain;
+var context:LoaderContext = new LoaderContext( false, AD );
+loader.load( new URLRequest( "other.swf" ), context );
+    }}}
 
 
 
