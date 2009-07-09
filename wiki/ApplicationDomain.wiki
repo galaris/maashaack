@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-The purpose of the ApplicationDomain class is to store a table of ActionScript 3.0 definitions.<br>
+The purpose of the !ApplicationDomain class is to store a table of ActionScript 3.0 definitions.<br>
 All code in a SWF file is defined to exist in an application domain.<br>
 You use application domains to partition classes that are in the same security domain.<br>
 This allows multiple definitions of the same class to exist and also lets children reuse parent definitions.
@@ -12,30 +12,30 @@ This allows multiple definitions of the same class to exist and also lets childr
 
 Yep the dirty secrets stuff, ok not that secret but nowhere clearly explained by the Adobe doc.
 
-=== Rules about ApplicationDomain ===
+=== Rules about !ApplicationDomain ===
 
 Things to always keep in mind when dealing with appdom.
 
- 1. An ApplicationDomain is always dependant on a SecurityDomain
-    * you have to *explicitly trust* another SWF to be able to access its appdom
-    * the only way to connect two SecurityDomain is to use *Direct Communication*
-      a. *Import loading* using the `Loader` class
-      {{{
+ 1. An !ApplicationDomain is always dependant on a !SecurityDomain
+  * you have to *explicitly trust* another SWF to be able to access its appdom
+  * the only way to connect two !SecurityDomain is to use *Direct Communication*
+    a. *Import loading* using the `Loader` class
+    {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
 var SD:SecurityDomain    = SecurityDomain.currentDomain
 var context:LoaderContext = new LoaderContext( false, AD, SD );
 loader.load( new URLRequest( "other.swf" ), context );
-      }}}
+    }}}
 
 
-=== Different ApplicationDomains interaction ===
+=== Different !ApplicationDomains interaction ===
 
- 1. Isolated ApplicationDomain
+ 1. Isolated !ApplicationDomain
 
- 2. Child ApplicationDomain
+ 2. Child !ApplicationDomain
 
- 3. Imported ApplicationDomain
+ 3. Imported !ApplicationDomain
 
 
 
