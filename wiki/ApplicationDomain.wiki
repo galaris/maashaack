@@ -38,13 +38,13 @@ loader.loadBytes( new URLRequest( "other.swf" ) );
 The Security.allowDomain() method grant access for cross-scripting,
 scripting the display list, access to the Stage object and event detection.
       }}}
-      You can use `childAllowsParent` or `parentAllowsChild` properties of the `LoaderInfo` class<br>to know if two SWFs (a parent and a child) can cross-script.<br>
+      You can use `childAllowsParent` or `parentAllowsChild` properties of the `LoaderInfo` class<br>to know if two SWFs (a parent and a child) can cross-script.
   # *The root appdom is the system domain<br>which contains the builtins, Flash Player API classes, etc.*
     * the system domain have no parent [#1 |1|]
-    * all other appdomain *always have a parent*<br>
+    * all other appdomain *always have a parent*
   # *The definition of `ApplicationDomain.currentDomain` is the appdom<br>that contains the code that is calling `ApplicationDomain.currentDomain`*
     * the `ApplicationDomain.currentDomain` is *unique to a SWF* [#2 |2|]
-    * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*,<br>if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`<br>
+    * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*,<br>if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
   # *If a definition already exists in a parent appdom,<br>the definition in the child is ignored*
     * you can not override a definition in anyway, period.<br>A child swf can not redefine/update/etc. a parent definition
     * a child appdom will *always* use the `static` or `const` definitions from the parent appdom
@@ -52,24 +52,21 @@ scripting the display list, access to the Stage object and event detection.
 
 === Different !ApplicationDomains interaction ===
 
-  # *Isolated !ApplicationDomain*<br>
-     _new !ApplicationDomain( null )_<br>
+  # *Isolated !ApplicationDomain*<br>_new !ApplicationDomain( null )_
     {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = new ApplicationDomain( null );
 var context:LoaderContext = new LoaderContext( false, AD );
 loader.load( new URLRequest( "other.swf" ), context );
     }}}
-  # *Child !ApplicationDomain*<br>
-     _new !ApplicationDomain( !ApplicationDomain.currentDomain )_<br>
+  # *Child !ApplicationDomain*<br>_new !ApplicationDomain( !ApplicationDomain.currentDomain )_
     {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = new ApplicationDomain( ApplicationDomain.currentDomain );
 var context:LoaderContext = new LoaderContext( false, AD );
 loader.load( new URLRequest( "other.swf" ), context );
     }}}
-  # *Imported !ApplicationDomain*<br>
-     _!ApplicationDomain.currentDomain_<br>
+  # *Imported !ApplicationDomain*<br>_!ApplicationDomain.currentDomain_
     {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
