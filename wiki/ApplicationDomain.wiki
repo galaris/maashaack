@@ -41,16 +41,16 @@ scripting the display list, access to the Stage object and event detection.
       You can use `childAllowsParent` or `parentAllowsChild` properties of the `LoaderInfo` class<br>
       to know if two SWFs (a parent and a child) can cross-script.
   # *the root appdom is the system domain which contains the builtins, Flash Player API classes, etc.*
-    * the system domain have no parent [#1]
+    * the system domain have no parent [#1 [1]]
     * all other appdomain *always have a parent*
   # *the definition of `ApplicationDomain.currentDomain` is the appdom<br>
     that contains the code that is calling `ApplicationDomain.currentDomain`*
     * the `ApplicationDomain.currentDomain` is *unique to a SWF* [#2]
     * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*<br>
-       if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
+    if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
   # *if a definition already exists in a parent appdom, the definition in the child is ignored*
     * you can not override a definition in anyway, period.<br>
-       a child swf can not redefine/update/etc. a parent definition
+    a child swf can not redefine/update/etc. a parent definition
     * a child appdom will *always* use the `static` or `const` definitions from the parent appdom
     * the only way a child appdom can use its own definitions (but without overriding the parent definition)<br>
        is to be loaded in isolation
