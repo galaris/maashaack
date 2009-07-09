@@ -16,7 +16,7 @@ Yep the dirty secrets stuff, ok not that secret but nowhere clearly explained by
 
 Things to always keep in mind when dealing with appdom.
 
-  1. *An !ApplicationDomain is always dependant on a !SecurityDomain*
+  # *An !ApplicationDomain is always dependant on a !SecurityDomain*
     * you have to *explicitly trust* another SWF to be able to access its appdom
     * the only way to connect two !SecurityDomain is to use *Direct Communication*
       a. *Import loading* using the `Loader` class<br>
@@ -40,26 +40,26 @@ scripting the display list, access to the Stage object and event detection.
       }}}
       You can use `childAllowsParent` or `parentAllowsChild` properties of the `LoaderInfo` class<br>to know if two SWFs (a parent and a child) can cross-script.
 
-  2. *The root appdom is the system domain<br>which contains the builtins, Flash Player API classes, etc.*
+  # *The root appdom is the system domain<br>which contains the builtins, Flash Player API classes, etc.*
     * the system domain have no parent [#1 |1|]
     * all other appdomain *always have a parent*
 
-  3. *The definition of `ApplicationDomain.currentDomain` is the appdom<br>that contains the code that is calling `ApplicationDomain.currentDomain`*
+  # *The definition of `ApplicationDomain.currentDomain` is the appdom<br>that contains the code that is calling `ApplicationDomain.currentDomain`*
     * the `ApplicationDomain.currentDomain` is *unique to a SWF* [#2 |2|]
     * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*,<br>if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
 
-  4. *If a definition already exists in a parent appdom,<br>the definition in the child is ignored*
+  # *If a definition already exists in a parent appdom,<br>the definition in the child is ignored*
     * you can not override a definition in anyway, period.<br>A child swf can not redefine/update/etc. a parent definition
     * a child appdom will *always* use the `static` or `const` definitions from the parent appdom
     * the only way a child appdom can use its own definitions (but without overriding the parent definition)<br>is to be loaded in isolation
 
 === Different !ApplicationDomains interaction ===
 
- 1. Isolated !ApplicationDomain
+  # Isolated !ApplicationDomain
 
- 2. Child !ApplicationDomain
+  # Child !ApplicationDomain
 
- 3. Imported !ApplicationDomain
+  # Imported !ApplicationDomain
 
 
 
@@ -74,8 +74,6 @@ links
 
 == Annotations ==
 
-==== 1 ====
-the Flash Player plugin contains the bytecode for the builtins class, yes it is embedded in the plugin hence why this system appdom can not have any parent.
+==== 1 ==== the Flash Player plugin contains the bytecode for the builtins class, yes it is embedded in the plugin hence why this system appdom can not have any parent.
 
-==== 2 ====
-here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
+==== 2 ==== here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
