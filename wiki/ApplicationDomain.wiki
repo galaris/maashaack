@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-The purpose of the !ApplicationDomain class is to store a table of ActionScript 3.0 definitions.<br>
+The purpose of the !ApplicationDomain class is to store a table of !ActionScript 3.0 definitions.<br>
 All code in a SWF file is defined to exist in an application domain.<br>
 You use application domains to partition classes that are in the same security domain.<br>
 This allows multiple definitions of the same class to exist and also lets children reuse parent definitions.
@@ -42,11 +42,9 @@ scripting the display list, access to the Stage object and event detection.
   # *The root appdom is the system domain<br>which contains the builtins, Flash Player API classes, etc.*
     * the system domain have no parent [#1 |1|]
     * all other appdomain *always have a parent*
-       
   # *The definition of `ApplicationDomain.currentDomain` is the appdom<br>that contains the code that is calling `ApplicationDomain.currentDomain`*
     * the `ApplicationDomain.currentDomain` is *unique to a SWF* [#2 |2|]
     * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*,<br>if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
-      
   # *If a definition already exists in a parent appdom,<br>the definition in the child is ignored*
     * you can not override a definition in anyway, period.<br>A child swf can not redefine/update/etc. a parent definition
     * a child appdom will *always* use the `static` or `const` definitions from the parent appdom
@@ -61,6 +59,10 @@ var AD:ApplicationDomain = new ApplicationDomain( null );
 var context:LoaderContext = new LoaderContext( false, AD );
 loader.load( new URLRequest( "other.swf" ), context );
     }}}
+    * the parent appdom is the system domain
+    * definitions in this appdom are *guaranteed to not collide* with other definitions
+    * you *can not use those definitions in a strongly typed manner* in the parent appdom
+    * you *can use those definitions as Objects (builtins)* using `getDefinition()` in the parent appdom
   # *Child !ApplicationDomain*<br>_new !ApplicationDomain( !ApplicationDomain.currentDomain )_
     {{{
 var loader:Loader = new Loader();
@@ -68,6 +70,20 @@ var AD:ApplicationDomain = new ApplicationDomain( ApplicationDomain.currentDomai
 var context:LoaderContext = new LoaderContext( false, AD );
 loader.load( new URLRequest( "other.swf" ), context );
     }}}
+    * the parent appdom is the !ApplicationDomain.currentDomain
+    * definitions in this appdom are added to the parent appdomain if not already defined
+    * you *can use those definitions in a strongly typed manner* in the parent appdom
+    * this child appdom *can not access definitions from the parent appdom* by default
+      {{{
+If the loading SWF [parent] has classes that should not be immediately exposed to loaded SWF files [childs],
+then the developer should load the SWF as a child of the system's ApplicationDomain
+to ensure it [child] does not inherit the loading SWF [parent] file's classes.
+      }}}
+    * you *can load definitions as strong types* using `getDefinition()` from other appdom
+      {{{
+However, in this usage, the child SWF file may still be able to explicitly retrieve
+definitions from other ApplicationDomain if it knows their location.
+      }}}
   # *Imported !ApplicationDomain*<br>_!ApplicationDomain.currentDomain_
     {{{
 var loader:Loader = new Loader();
@@ -75,7 +91,9 @@ var AD:ApplicationDomain = ApplicationDomain.currentDomain;
 var context:LoaderContext = new LoaderContext( false, AD );
 loader.load( new URLRequest( "other.swf" ), context );
     }}}
-
+    * the parent appdom is the system domain
+    * definitions in this appdom *are imported into the !ApplicationDomain.currentDomain* (hence the name _import loading_)
+    * you have to *load this appdomain before any ABC calls/uses any of its definitions*[#3 |3|]
 
 
 === Special cases with AIR ===
@@ -94,3 +112,6 @@ the Flash Player plugin contains the bytecode for the builtins class, yes it is 
 
 ==== 2 ====
 here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
+
+==== 3 ====
+ABC = !ActionScript !ByteCode, contains the definition as binary form.
