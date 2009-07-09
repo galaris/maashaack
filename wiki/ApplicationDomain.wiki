@@ -94,16 +94,59 @@ loader.load( new URLRequest( "other.swf" ), context );
     * the parent appdom is the system domain
     * definitions in this appdom *are imported into the !ApplicationDomain.currentDomain* (hence the name _import loading_)
     * you have to *load this appdomain before any ABC calls/uses any of its definitions*[#3 |3|]
+    * two identical definitions will conflict, you can not declare twice the class `FooBar` for ex[#4 |4|]
 
 
-=== Special cases with AIR ===
+=== Special case with AIR ===
 
 AIR run on the desktop and because of that the appdom is even more touchy there.
 
+Remember the first rule that an appdomain is always dependent on a !SecurityDomain,
+so when come the time where a desktop AIR application want to load a remote SWF,
+you obtain a security clash between a local !SecurityDomain and a remote !SecurityDomain.
+
+This is by default in AIR and this is normal and wanted, you would not want to give I/O access or
+full control to a remotely downloaded SWF by default do you ?
+
+But if you have to or need to here how to do an import loading in AIR<br>
+(consider that as pseudo-code)
+{{{
+var urlloader:URLLoader = new URLLoader();
+       urlloader.dataFromat = URLLoaderDataFormat.BINARY;
+       urlloader.addEventListener( Event.COMPLETE, onComplete );
+       urlloader.load( new URLRequest( "other.swf" ) );
+
+var onComplete:Function = function( event:Event ):void
+{
+    var loader:Loader = new Loader();
+    var AD:ApplicationDomain = ApplicationDomain.currentDomain;
+    var SD:SecurityDomain    = SecurityDomain.currentDomain
+    var context:LoaderContext = new LoaderContext( false, AD, SD );
+           context.allowLoadBytesCodeExecution = true;
+
+    loader.loadBytes( urlloader.data, context );
+}
+}}}
+
+The cool thing is once you have the SWF loaded with `URLLoader`
+you can decide to apply different appdomain interactions with `Loader`,
+either isolated or child or imported.
+
+The bad thing is because the AIR API is defined at the system appdomain level,
+this remotely loaded SWF can use any AIR functionalities like reading from your hard drive,
+and you can not prevent that even if you put the appdom in isolation
+(it will isolate the loaded swf from calling your code that's all).
+
+So you should be very very very sure that this remote SWF you are loading is damn secure!!
 
 == References ==
 
-links
+  * [http://livedocs.adobe.com/flash/9.0/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00000327.html Adobe - Using the ApplicationDomain class]
+  * [http://blogs.adobe.com/rgonzalez/2006/06/applicationdomain.html Roger Gonzalez - ApplicationDomain]
+  * [http://www.adobe.com/devnet/flashplayer/articles/secure_swf_apps_07.html Creating more secure SWF web applications - Communicating Between SWFs and across Domains]
+  * [http://jvalentino.blogspot.com/2009/06/flex-memory-issue-4-modules-and.html Flex Memory Issue #4: Modules and Application Domains]
+  * [http://weblogs.macromedia.com/emalasky/archives/2008/04/remote_plugins.html Remote Plugins and Modules in AIR]
+  * [http://code.google.com/p/doctype/wiki/ArticleFlashSecuritySolutions doctype - HOWTO secure your Flash applications]
 
 == Annotations ==
 
@@ -115,3 +158,6 @@ here we're talking about the root SWF, meaning the first loaded SWF in the plugi
 
 ==== 3 ====
 ABC = !ActionScript !ByteCode, contains the definition as binary form.
+
+==== 4 ====
+this also explain why you can not override or redefine a builtin class, first because its definition is in the parent appdom, but even if you were able to load your own definition in the system appdom it will collide with the already existing definition.
