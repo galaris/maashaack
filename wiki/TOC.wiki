@@ -30,6 +30,7 @@
    * [Metadata Metadata]
    * [Singleton Singleton]
    * [StaticCodeBlock Static Code Block]
+   * [ApplicationDomain ApplicationDomain]
  * [Support Support]
    * [PreRequisites prerequisites]
    * [FAQ FAQ]
