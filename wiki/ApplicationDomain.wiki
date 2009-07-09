@@ -46,7 +46,7 @@ scripting the display list, access to the Stage object and event detection.
     * all other appdomain *always have a parent*
   # *the definition of `ApplicationDomain.currentDomain` is the appdom<br>
     that contains the code that is calling `ApplicationDomain.currentDomain`*
-    * the `ApplicationDomain.currentDomain` is *unique to a SWF* [2]
+    * the `ApplicationDomain.currentDomain` is *unique to a SWF* [#2]
     * the `ApplicationDomain.currentDomain` is *unique to all loaded SWF*<br>
        if `main.swf` load `child.swf` they both share the same `ApplicationDomain.currentDomain`
   # *if a definition already exists in a parent appdom,<br>
@@ -78,6 +78,8 @@ links
 
 == Annotations ==
 
-[1] the Flash Player plugin contains the bytecode for the builtins class, yes it is embedded in the plugin hence why this system appdom can not have any parent.
+==== 1 ====
+the Flash Player plugin contains the bytecode for the builtins class, yes it is embedded in the plugin hence why this system appdom can not have any parent.
 
-[2] here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
+==== 2 ====
+here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
