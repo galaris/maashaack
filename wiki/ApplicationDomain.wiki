@@ -120,12 +120,19 @@ var onComplete:Function = function( event:Event ):void
 {
     var loader:Loader = new Loader();
     var AD:ApplicationDomain = ApplicationDomain.currentDomain;
-    var SD:SecurityDomain    = SecurityDomain.currentDomain
-    var context:LoaderContext = new LoaderContext( false, AD, SD );
+    //with loadBytes(0 -- the checkPolicyFile and securityDomain properties of the LoaderContext object do not apply.
+    //var SD:SecurityDomain    = SecurityDomain.currentDomain;
+    var context:LoaderContext = new LoaderContext( false, AD );
            context.allowLoadBytesCodeExecution = true;
 
     loader.loadBytes( urlloader.data, context );
 }
+}}}
+
+{{{
+If the context parameter is not specified or refers to a null object, the content is loaded into the current security domain
+— a process referred to as "import loading" in Flash Player security documentation. Specifically, if the loading SWF file
+trusts the remote SWF by incorporating the remote SWF into its code, then the loading SWF can import it directly into its own security domain.
 }}}
 
 The cool thing is once you have the SWF loaded with `URLLoader`
