@@ -116,7 +116,7 @@ package system.process
          */
         public override function get bytesLoaded():uint
         {
-            return (_loader is URLLoader) ? (_loader as URLLoader).bytesLoaded : 0 ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).bytesLoaded : 0 ;
         }
         
         /**
@@ -124,7 +124,7 @@ package system.process
          */
         public override function get bytesTotal():uint
         {
-            return (_loader is URLLoader) ? (_loader as URLLoader).bytesTotal : 0 ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).bytesTotal : 0 ;
         }
         
         /**
@@ -132,7 +132,7 @@ package system.process
          */
         public function get data():*
         {
-            return (_loader is URLLoader) ? (_loader as URLLoader).data : null ;    
+            return (_loader is URLLoader) ? (_loader as URLLoader).data : null ;
         }
         
         /**
@@ -151,7 +151,7 @@ package system.process
          */
         public function get dataFormat():String
         {
-            return _dataFormat ;
+            return (_loader is URLLoader) ? (_loader as URLLoader).dataFormat : null ;
         }
         
         /**
@@ -159,7 +159,7 @@ package system.process
          */
         public function set dataFormat( value:String ):void
         {
-            _dataFormat = value ;    
+            _loader.dataFormat = value ;
         }
         
         /**
@@ -284,11 +284,6 @@ package system.process
         /**
          * @private
          */
-        private var _dataFormat:String = URLLoaderDataFormat.TEXT ;
-        
-        /**
-         * @private
-         */
         private var _isParsing:Boolean ;
         
         /**
@@ -328,7 +323,5 @@ package system.process
             }
             return s ;
         }
-
     }
-
 }
