@@ -40,8 +40,7 @@ package system.process
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     import flash.net.URLLoader;
-    import flash.net.URLLoaderDataFormat;    
-
+    
     /**
      * This action process launch the load of a URLLoader object.
      * <p><b>Example :</b></p>
@@ -87,9 +86,8 @@ package system.process
      * process.run() ;
       * </pre>
      */
-    public class ActionURLLoader extends CoreActionLoader 
+    public class ActionURLLoader extends CoreActionLoader
     {
-
         /**
          * Creates a new ActionURLLoader instance.
          * @param loader The URLLoader object to load.
