@@ -37,7 +37,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.*;
-    
+
+    import system.Environment;
     import system.cli.AllTests;
     import system.comparators.AllTests;
     import system.data.AllTests;
@@ -45,15 +46,13 @@ package system
     import system.evaluators.AllTests;
     import system.events.AllTests;
     import system.formatters.AllTests;
+    import system.hosts.HostID;
+    import system.network.AllTests;
     import system.numeric.AllTests;
     import system.process.AllTests;
     import system.reflection.AllTests;
     import system.serializers.AllTests;
-    import system.network.AllTests;
-    
-    import system.Environment;
-    import system.hosts.HostID;
-    
+
     /**
      * TestSuite that runs all the Maashaack tests
      */
@@ -71,6 +70,7 @@ package system
             
             if( Environment.host.id != HostID.RedTamarin )
             {
+                suite.addTestSuite( ByteArraysTest ); // TODO creates test compatible with Tamarin ?? Don't use BitmapData.
                 suite.addTestSuite( ObjectsTest );
             }
             
