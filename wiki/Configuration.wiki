@@ -94,6 +94,15 @@ package
        
             _config.addEventListener( Event.COMPLETE, onConfigLoaded );
             _config.addEventListener( IOErrorEvent.IO_ERROR, onConfigError );
+
+            if( stage )
+            {
+                onAddedToStage();
+            }
+            else
+            {
+                addEventListener( Event.ADDED_TO_STAGE, onAddedToStage );
+            }
         }
 
         private function _configure():void
