@@ -202,7 +202,6 @@ No big deal, a good bunch of language listed, each coming with their own solutio
 
 Here the [http://en.wikipedia.org/w/index.php?title=Singleton_pattern&diff=221451066&oldid=221307090 original wikipedia page edited at the time].
 
-Same page [http://en.wikipedia.org/w/index.php?title=Singleton_pattern&diff=231374118&oldid=229764214 completed removed later for cause of a spelling mistake], woupihou I wrote *instanciate* instead of *instantiate* and the whole thing is deleted.
+Same page [http://en.wikipedia.org/w/index.php?title=Singleton_pattern&diff=231374118&oldid=229764214 completely removed later for cause of a spelling mistake], woupihou I wrote *instanciate* instead of *instantiate* and the whole thing is deleted.
 
 I have better things to do than the classic wikipedia edit battle, a `const` at the package level is a very clean and standard way to define a singleton in AS3, if some morons want to continue to reinvent private class instance when they don't really exists in the language spec and have all their code butchered with `getInstance()`, please morons be my guest and continue.
-
