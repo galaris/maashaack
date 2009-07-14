@@ -37,11 +37,10 @@ package system.errors
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.errors.NoSuchElementError;        
-
+    import system.errors.NoSuchElementError;
+    
     public class NoSuchElementErrorTest extends TestCase 
     {
-
         public function NoSuchElementErrorTest(name:String = "")
         {
             super(name);
@@ -51,25 +50,24 @@ package system.errors
         {
             var e:NoSuchElementError = new NoSuchElementError() ;
             assertNotNull( e , "The NoSuchElementError constructor failed." ) ;
-        }      
-
+        }
+        
         public function testErrorID():void
         {
             var e:NoSuchElementError = new NoSuchElementError("message", 0) ;
-            assertEquals( e.errorID , 0 , "NoSuchElementError errorID property failed.") ;    
+            assertEquals( e.errorID , 0 , "NoSuchElementError errorID property failed.") ;
         } 
-                
+        
         public function testMessage():void
         {
             var e:NoSuchElementError = new NoSuchElementError("message", 0) ;
-            assertEquals( e.message , "message"  , "NoSuchElementError message property failed.") ;    
-        }           
+            assertEquals( e.message , "message"  , "NoSuchElementError message property failed.") ;
+        }
         
         public function testName():void
         {
             var e:NoSuchElementError = new NoSuchElementError() ;
-            assertEquals( e.name , "NoSuchElementError"  , "NoSuchElementError name property failed.") ;    
-        }        
-                
+            assertEquals( e.name , "NoSuchElementError"  , "NoSuchElementError name property failed.") ;
+        }
     }
 }
