@@ -1,11 +1,11 @@
+#summary configuring an application.
 #labels Framework
-#configuring an application.
 
-= Introduction =
+== Introduction ==
 
 A Configurator allow you to configure options of an application and/or packages.
 
-= Details =
+== Details ==
 
 By default, at the root of your application you can have a config variable
 that can allow you to configure (duh!) the application.
@@ -19,7 +19,7 @@ where someone forgot to copy this config file, or delete it, or if you simply
 don't need it.
 
 
-== Configurator ==
+=== Configurator ===
 
 The usage is pretty basic, let's see how to create a default config.
 
@@ -49,7 +49,7 @@ package
 }
 }}}
 
-then instanciate it
+then instantiate it
 {{{
 package
 {
