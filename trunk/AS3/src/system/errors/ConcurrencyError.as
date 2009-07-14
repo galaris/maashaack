@@ -41,7 +41,6 @@ package system.errors
      */
     public class ConcurrencyError extends Error 
     {
-
         /**
          * Creates a new ConcurrencyError instance. If message is specified, its value is assigned to the object's ConcurrencyError.message property.
          * @param message A string associated with the ConcurrencyError object ; this parameter is optional.

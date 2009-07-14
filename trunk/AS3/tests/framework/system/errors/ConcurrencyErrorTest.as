@@ -37,11 +37,8 @@ package system.errors
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.errors.ConcurrencyError;                    
-
     public class ConcurrencyErrorTest extends TestCase 
     {
-
         public function ConcurrencyErrorTest(name:String = "")
         {
             super(name);
@@ -52,25 +49,23 @@ package system.errors
             var e:ConcurrencyError = new ConcurrencyError() ;
             assertNotNull( e , "The ConcurrencyError constructor failed." ) ;
         }
-
+        
         public function testErrorID():void
         {
             var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
             assertEquals( e.errorID , 0 , "ConcurrencyError errorID property failed.") ;    
         } 
-                
+        
         public function testMessage():void
         {
             var e:ConcurrencyError = new ConcurrencyError("message", 0) ;
-            assertEquals( e.message , "message"  , "ConcurrencyError message property failed.") ;    
-        }           
+            assertEquals( e.message , "message"  , "ConcurrencyError message property failed.") ;
+        }
         
         public function testName():void
         {
             var e:ConcurrencyError = new ConcurrencyError() ;
-            assertEquals( e.name , "ConcurrencyError"  , "ConcurrencyError name property failed.") ;    
+            assertEquals( e.name , "ConcurrencyError"  , "ConcurrencyError name property failed.") ;
         }
-        
-                
     }
 }

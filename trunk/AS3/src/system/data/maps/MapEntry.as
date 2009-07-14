@@ -36,14 +36,14 @@
 package system.data.maps 
 {
     import system.Cloneable;
-    import system.data.Entry;    
+    import system.Reflection;
+    import system.data.Entry;
 
     /**
      * Represents a pair key/value entry in a Map.
      */
     public class MapEntry implements Cloneable, Entry
     {
-        
         /**
          * Creates a new MapEntry instance.
          * @param key The key representation of the entry.
@@ -85,7 +85,7 @@ package system.data.maps
         public function set value( value:* ):void
         {
             _value = value ;
-        }        
+        }
         
         /**
          * Creates and returns a shallow copy of the object.
@@ -102,7 +102,7 @@ package system.data.maps
          */
         public function toString():String
         {
-            return "[MapEntry key:" + key + " value:" + value + "]" ;    
+            return "[" + Reflection.getClassName(this) + " key:" + key + " value:" + value + "]" ;
         }
         
         /**
@@ -114,7 +114,5 @@ package system.data.maps
          * @private
          */
         private var _value:* ;
-        
-
     }
 }

@@ -35,18 +35,18 @@
 
 package system.errors
 {
-    import buRRRn.ASTUce.framework.*;                                    
-
+    import buRRRn.ASTUce.framework.*;
+    
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data errors tests");
             
             suite.addTestSuite(ConcurrencyErrorTest) ;
+            suite.addTestSuite(NonUniqueKeyErrorTest) ;
             suite.addTestSuite(NoSuchElementErrorTest) ;
-                            
+            
             return suite;
         }
     }

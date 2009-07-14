@@ -46,7 +46,8 @@ package system.data
     import system.data.queues.*;
     import system.data.sets.*;
     import system.data.stacks.*;
-
+    import system.data.trees.*;
+    
     public class AllTests
     {
 
@@ -103,6 +104,9 @@ package system.data
             
             // stacks
             suite.addTest(system.data.stacks.AllTests.suite());
+            
+            // trees
+            suite.addTest(system.data.trees.AllTests.suite());
             
             return suite;
         }
