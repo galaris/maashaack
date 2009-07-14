@@ -56,3 +56,11 @@ package
     public var config:ApplicationConfigurator = new ApplicationConfigurator( {debug:false} );
 }
 }}}
+
+Alternatively you can also make this config a [Singleton] by declaring it as a constant
+{{{
+package
+{
+    public const config:ApplicationConfigurator = new ApplicationConfigurator( {debug:false} );
+}
+}}}
