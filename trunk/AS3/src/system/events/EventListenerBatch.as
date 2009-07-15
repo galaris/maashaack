@@ -40,8 +40,8 @@ package system.events
     import system.data.collections.ArrayCollection;
     import system.data.collections.TypedCollection;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     /**
      * The EventListenerBatch objects handle several <code class="prettyprint">EventListener</code> as one <code class="prettyprint">EventListener</code>.
      */
@@ -82,7 +82,7 @@ package system.events
             {
                 while (++i < l) 
                 { 
-                    (ar[i] as EventListener).handleEvent(e) ; 
+                    (ar[i] as EventListener).handleEvent(e) ;
                 }
             }
         }

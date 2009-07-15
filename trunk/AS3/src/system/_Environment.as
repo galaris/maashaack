@@ -42,7 +42,6 @@ package system
     import system.hosts.OperatingSystem;
     import system.hosts.PlatformID;
     
-    
     /**
      * The internal Environment class.
      */
@@ -122,7 +121,6 @@ package system
         private function _getPlatformID():PlatformID
         {
             var platform:String = Capabilities.os;
-            
             if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
             {
                 return PlatformID.Windows;
@@ -143,11 +141,8 @@ package system
             {
                 return PlatformID.Web;
             }
-            
             return PlatformID.Unknown;
         }
-        
-        
         
         /**
          * Returns the Host reference of the client application.
@@ -209,6 +204,5 @@ package system
              */
             return "\n";
         }
-        
     }
 }

@@ -36,7 +36,7 @@
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     public class PauseTest extends TestCase 
     {
         
@@ -54,7 +54,7 @@ package system.process
         
         public function tearDown():void
         {
-            pause = undefined ;      
+            pause = undefined ;
         }
         
         public function testConstructor():void
@@ -65,6 +65,12 @@ package system.process
         public function testInherit():void
         {
             assertTrue( pause is CoreAction , "Pause must inherit the CoreAction class." ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( pause is Startable , "Pause must implements the Startable interface." ) ;
+            assertTrue( pause is Stoppable , "Pause must implements the Stoppable interface." ) ;
         }
         
         public function testDelay():void
@@ -87,7 +93,7 @@ package system.process
         
         public function testDuration():void
         {
-            pause = new Pause() ;            
+            pause = new Pause() ;
             assertEquals( pause.duration, 0  , "01 - Pause default duration failed." ) ;
             try
             {
@@ -96,7 +102,7 @@ package system.process
             }
             catch( e:Error )
             {
-                assertTrue( e is RangeError , "02-02 - Pause default duration failed." ) ;    
+                assertTrue( e is RangeError , "02-02 - Pause default duration failed." ) ;
             }
             
             try

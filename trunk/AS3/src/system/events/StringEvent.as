@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     import flash.events.Event;
-
+    
     /**
      * The <code class="prettyprint">StringEvent</code> to dispatch an event who contains a specific Number context.
      * <p><b>Example :</b></p>

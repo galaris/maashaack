@@ -35,8 +35,8 @@
 
 package system.evaluators 
 {
-    import system.formatters.DateFormatter;    
-
+    import system.formatters.DateFormatter;
+    
     /**
      * Evaluates Date object and transform it in string expressions.
      * <p>All characters from 'A' to 'Z' and from 'a' to 'z' are reserved, although not all of these characters are interpreted right now.</p> 
@@ -62,12 +62,11 @@ package system.evaluators
      */
     public class DateEvaluator implements Evaluable 
     {
-
         /**
          * @private
          */
-        private var _formatter:DateFormatter ;    
-
+        private var _formatter:DateFormatter ;
+        
         /**
          * Creates a new DateEvaluator instance.
          * @param pattern (optional) the pattern describing the date and time format.
@@ -80,7 +79,7 @@ package system.evaluators
                 _formatter.pattern = pattern ;
             }
         }
-
+        
         /**
          * Indicates the internal pattern of this formatter.
          */
@@ -88,15 +87,15 @@ package system.evaluators
         {
             return _formatter.pattern ;
         }
-
+        
         /**
          * @private
          */
         public function set pattern( expression:String ):void 
         {
             _formatter.pattern = expression ;
-        }       
-
+        }
+        
         /**
          * Evaluates the specified object.
          */

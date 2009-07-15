@@ -79,7 +79,6 @@ package system.process
      */
     public class ActionEventDispatcher extends Task 
     {
-        
         /**
          * Creates a new ActionEventDispatcher instance.
          * @param event The event to dispatch.

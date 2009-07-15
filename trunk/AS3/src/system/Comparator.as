@@ -35,13 +35,11 @@
 
 package system 
 {
-
     /**
      * A comparison function, which imposes a total ordering on some collection of objects.
      */
     public interface Comparator 
     {
-
         /**
          * Compares two arguments for order. Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
          * @param o1 The first object to compare.
@@ -50,6 +48,5 @@ package system
          * @return A negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
          */ 
         function compare( o1:* , o2:* , options:* = null ):int ;
-
     }
 }

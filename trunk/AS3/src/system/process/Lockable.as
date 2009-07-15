@@ -35,7 +35,6 @@
 
 package system.process
 {
-
     /**
      * This interface is implemented by all objects lockable.
      */
@@ -55,6 +54,6 @@ package system.process
         /**
          * Unlocks the object.
          */
-        function unlock():void ; 
+        function unlock():void ;
     }
 }

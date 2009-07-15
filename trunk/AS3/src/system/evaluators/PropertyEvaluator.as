@@ -35,8 +35,8 @@
 
 package system.evaluators 
 {
-    import system.evaluators.Evaluable;        
-
+    import system.evaluators.Evaluable;
+    
     /**
      * Evaluates a type string expression and return the property value who corresponding in the target object specified in this evaluator.
      * <p><b>Example :</b></p>
@@ -93,7 +93,6 @@ package system.evaluators
      */
     public class PropertyEvaluator implements Evaluable 
     {
-
         /**
          * Creates a new PropertyEvaluator instance.
          * @param target the target object use in the evaluator.
@@ -102,7 +101,7 @@ package system.evaluators
         {
             this.target = target ;
         }
-
+        
         /**
          * The target reference use in the evaluator.
          */
@@ -110,30 +109,30 @@ package system.evaluators
         {
             return _target ;
         }
-
+        
         /**
          * @private
          */
         public function set target( o:* ):void
         {
             _target = o ;
-        }        
-
+        }
+        
         /**
          * The separator of the expression evaluator.
          */
         public var separator:String = "." ;
-
+        
         /**
          * This attributs defines the value returns from the eval() method if the expression can't be evaluate.
          */
         public var undefineable:* = null ;
-
+        
         /**
          * Indicates if the eval() method throws errors or return null when an error is throwing.
          */
         public var throwError:Boolean ;
-
+        
         /**
          * Evaluates the specified object.
          */
@@ -151,7 +150,7 @@ package system.evaluators
                     {
                         if ( members[i] in value )
                         {
-                            value = value[ members[i] ] ;    
+                            value = value[ members[i] ] ;
                         }
                         else
                         {
@@ -167,7 +166,7 @@ package system.evaluators
             }
             return undefineable ;
         }
-
+        
         /**
          * @private
          */

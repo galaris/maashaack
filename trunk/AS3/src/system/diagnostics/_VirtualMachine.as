@@ -101,8 +101,8 @@ package system.diagnostics
          * Indicates the list of the filtered methods.
          */
         public var filteredMethods:Array = [ "flash.trace::Trace$/setLevel",
-                                             "system.diagnostics::_VirtualMachine/beginTrace",
-                                             "system.diagnostics::_VirtualMachine/endTrace" ];        
+                                             "system.diagnostics::_VirtualMachine/beginTrace" ,
+                                             "system.diagnostics::_VirtualMachine/endTrace" ] ;
         
         /**
          * Indicates the formatter pattern.

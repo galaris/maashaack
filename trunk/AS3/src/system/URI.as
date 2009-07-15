@@ -36,7 +36,7 @@
 package system
 {
     import system.network.URIScheme;
-    /**
+        /**
      * The "Uniform Resource Identifier" class.
      * <p><b>note:</b></p>
      * <p>based on <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a></p>
@@ -98,7 +98,7 @@ package system
          * "http://www.domain.com/path/file.html?"
          */
         public static var greedy:Boolean ;
-
+        
         /**
          * Allows to support deprecated behaviour or not
          * 
@@ -109,7 +109,6 @@ package system
          */
         public static var strict:Boolean = true;
         
-
         /**
          * Creates a new URI instance.
          * @param any An URI object or a String expression to initialize the instance.
@@ -158,8 +157,6 @@ package system
             {
                 throw new SyntaxError( "Relative file path is not allowed." );
             }
-            
-            
             this.scheme = URIScheme.FILE.scheme;
             _port     = -1;
             _fragment = "";
@@ -467,7 +464,7 @@ package system
          */
         public function get source():String
         {
-            return _source;
+            return _source ;
         }
         
         /**
@@ -479,15 +476,12 @@ package system
             {
                 return "";
             }
-            
             var str:String = "" ;
             str += _username;
-            
             if( !strict )
             {
                 str += ":" + _password;
             }
-            
             return str;
         }
         
@@ -561,7 +555,7 @@ package system
             
             return true;
         }
-                
+        
         /**
          * 
          * syntax:
@@ -732,15 +726,14 @@ package system
             
             return str;
         }
-
+        
         /**
          * Returns the primitive value of the object.
          * @return the primivite value of the object.
-         */        
+         */
         public function valueOf():String
         {
             return toString();
         }
-        
     }
 }

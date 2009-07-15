@@ -45,7 +45,7 @@ package system.process
     import system.events.ActionEvent;
     import system.hack;
     import system.process.Stoppable;
-
+    
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>

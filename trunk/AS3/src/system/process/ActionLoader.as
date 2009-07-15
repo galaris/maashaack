@@ -40,7 +40,7 @@ package system.process
     import flash.display.LoaderInfo;
     import flash.events.Event;
     import flash.events.IEventDispatcher;
-    import flash.system.LoaderContext;    
+    import flash.system.LoaderContext;
     
     /**
      * This action process launch the load of a Loader object.
@@ -84,7 +84,6 @@ package system.process
      */
     public class ActionLoader extends CoreActionLoader 
     {
-        
         /**
          * Creates a new ActionLoader instance.
          * @param loader The Loader object reference to initialize this process.
@@ -111,7 +110,7 @@ package system.process
         {
             return contentLoaderInfo != null ? contentLoaderInfo.bytesTotal : 0 ;
         }
-
+        
         /**
          * Contains the root display object of the SWF file or image (JPG, PNG, or GIF) file that was loaded by using the load() or loadBytes() methods. 
          */
@@ -127,12 +126,12 @@ package system.process
          */
         public function get contentLoaderInfo():LoaderInfo
         {
-            return (_loader != null) ? (_loader as Loader).contentLoaderInfo : null ;    
+            return (_loader != null) ? (_loader as Loader).contentLoaderInfo : null ;
         }
-
+        
         /**
          * The LoaderContext class provides options for loading SWF files and other media by using the Loader class. 
-         * The LoaderContext class is used as the context parameter in the load() and loadBytes() methods of the Loader class. 
+         * The LoaderContext class is used as the context parameter in the load() and loadBytes() methods of the Loader class.
          */
         public function get context():LoaderContext
         {
@@ -197,7 +196,7 @@ package system.process
         public override function unregister( dispatcher:IEventDispatcher ):void
         {
             if ( contentLoaderInfo != null )
-            {            
+            {
                 super.unregister(contentLoaderInfo) ;
                 contentLoaderInfo.removeEventListener( Event.INIT , dispatchEvent ) ;
             }

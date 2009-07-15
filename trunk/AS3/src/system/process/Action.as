@@ -58,12 +58,11 @@ package system.process
      */
     public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
-
         /**
          * Determinates the parent Action reference of the current Action.
          */
         function get parent():Action ;
-                
+        
         /**
          * @private
          */
@@ -83,6 +82,5 @@ package system.process
          * Notify an ActionEvent when the process is started.
          */
         function notifyStarted():void ;
-        
     }
 }

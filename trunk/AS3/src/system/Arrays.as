@@ -36,13 +36,11 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system
 {
-
     /**
      * A static class for Array utilities.
      */
     public class Arrays
     {
-
         /**
          * Returns whether the Array contains a particular item.
          * <p><b>Example :</b></p>
@@ -62,7 +60,7 @@ package system
         {
             return ar.indexOf(value) > -1 ;
         }
-
+        
         /**
          * Initializes a new Array with an arbitrary number of elements (index), 
          * with every element containing the passed parameter value or by default the null value.
@@ -79,13 +77,13 @@ package system
         public static function initialize( elements:uint = 0, value:* = null ):Array
         {
             var arr:Array = [];
-            for( var i:int ;i < elements; i++ )
+            for( var i:int ; i < elements ; i++ )
             {
                 arr.push(value);
             }
             return arr;
         }
-
+        
         /**
          * Apply a function simultaneously against two values of the array (from left-to-right) as to reduce it to a single value.
          * <p>The <code class="prettyprint">reduce</code> method executes the callback function once for each element present in the array, excluding holes in the array, receiving four arguments: the initial value (or value from the previous callback call), the value of the current element, the current index, and the array over which iteration is occurring.</p> 
@@ -212,7 +210,6 @@ package system
                 }
                 while( true ) ;
             }
-            
             for ( ;i < size; i++ )
             {
                 if (i in ar)
@@ -220,7 +217,6 @@ package system
                     r = callback.call(null, r, ar[i], i, ar);
                 }
             }
-
             return r;
         }
         
@@ -319,7 +315,6 @@ package system
             {
                 throw new ArgumentError("Arrays.reduceRight failed, the callback method not must be 'null' or 'undefined'.") ; 
             }
-            
             if ( size == 0 )
             {
                 throw new Error("Arrays.reduceRight failed, the array contains no values.") ;
@@ -437,16 +432,14 @@ package system
         public static function spliceInto( inserted:Array, container:Array, containerPosition:Number = 0 , countReplaced:Number = 0 ):void
         {
             inserted.unshift(containerPosition, isNaN(countReplaced) ? 0 : countReplaced);
-              
             try 
             {
                 container.splice.apply(container, inserted) ;
             } 
-              finally 
+            finally 
             {
                 inserted.splice(0, 2) ;
             }
         }
     }
 }
-

@@ -41,12 +41,9 @@ package system.process
      */
     public interface Resetable
     {
-
         /**
          * Reset this object.
          */
         function reset():void ;
-    
     }
-    
 }

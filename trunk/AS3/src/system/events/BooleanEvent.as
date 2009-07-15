@@ -49,7 +49,6 @@ package system.events
      */
     public class BooleanEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">BooleanEvent</code> instance.
          * @param type the string type of the instance. 
@@ -80,7 +79,7 @@ package system.events
          */
         public function get boolean():Boolean
         {
-            return _b ;    
+            return _b ;
         }
         
         /**

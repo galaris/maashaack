@@ -39,8 +39,8 @@ package system.process
     import system.data.collections.ArrayCollection;
     import system.data.collections.TypedCollection;
     import system.process.Runnable;
-    import system.process.Stoppable;    
-
+    import system.process.Stoppable;
+    
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
      * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>
@@ -134,7 +134,6 @@ package system.process
      */
     public class Batch extends TypedCollection implements Runnable, Stoppable
     {
-        
         /**
          * Creates a new Batch instance.
          */
@@ -194,6 +193,5 @@ package system.process
                 } 
             }
         }
-        
     }
 }
