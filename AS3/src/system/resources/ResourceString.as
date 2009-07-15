@@ -35,19 +35,16 @@
 
 package system.resources
 {
-    
     /**
      * The ResourceString class.
-     */    
+     */
     public class ResourceString implements Resource
     {
-        
         /**
          * Creates a new ResourceString instance.
          */
         public function ResourceString()
         {
         }
-
     }
 }

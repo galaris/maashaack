@@ -51,7 +51,6 @@ package system.process
      */
     public class CoreActionLoader extends CoreAction 
     {
-        
         /**
          * Creates a new CoreActionLoader instance.
          * @param loader The loader reference.
@@ -118,7 +117,7 @@ package system.process
          */
         public function get request():URLRequest
         {
-            return _request ;    
+            return _request ;
         }
         
         /**
@@ -135,7 +134,7 @@ package system.process
          */
         public function get timeoutPolicy():TimeoutPolicy 
         {
-            return _policy ;    
+            return _policy ;
         }
         
         /**

@@ -35,7 +35,6 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-
     /**
      * This Action launch the initialize method of the object but notify an event before (ActionEvent.START) and after(ActionEvent.FINISH) the process.
      * <p>You can override the initialize method of the object or extends the class.</p>
@@ -92,9 +91,8 @@ package system.process
         public override function run( ...arguments:Array ):void
         {
             notifyStarted() ;
-            this["initialize"]() ; 
+            this["initialize"]() ;
             notifyFinished() ;
         };
-        
     }
 }

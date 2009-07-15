@@ -36,13 +36,12 @@
 package system
 {
     import system.Configurator;
-
+    
     /**
      * The system configurator class.
      */
     public class SystemConfigurator extends Configurator
     {
-
         /**
          * Creates a new SystemConfigurator instance.
          * @param config This argument initialize the configurator with a generic object.
@@ -51,7 +50,7 @@ package system
         {
             super( config );
         }
-
+        
         /**
          * Indicates if the config use the verbose mode or not.
          */
@@ -59,7 +58,7 @@ package system
         {
             return _config.verbose;
         }
-
+        
         /**
          * @private
          */
@@ -67,7 +66,7 @@ package system
         {
             _config.verbose = value;
         }
-
+        
         /**
          * The current serializer used used by the system 
          */        
@@ -75,7 +74,7 @@ package system
         {
             return _config.serializer;
         }
-
+        
         /**
          * @private
          */

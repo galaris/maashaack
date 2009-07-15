@@ -38,10 +38,10 @@ package system.process
     import system.Reflection;
     import system.Serializable;
     import system.eden;
-    
+
     import flash.events.TimerEvent;
-    import flash.utils.Timer;    
-    
+    import flash.utils.Timer;
+
     /**
      * This <code class="prettyprint">Action</code> object create a pause in the process.
      * <p><b>Example :</b></p>
@@ -62,9 +62,8 @@ package system.process
      * p.run() ;
      * </pre>
      */
-    public dynamic class Pause extends CoreAction implements Serializable
+    public dynamic class Pause extends CoreAction implements Serializable, Startable, Stoppable
     {
-        
         /**
          * Creates a new Pause instance.
          * @param duration the duration of the pause.
@@ -75,8 +74,8 @@ package system.process
         public function Pause( duration:Number = 0 , useSeconds:Boolean = true , global:Boolean = false , channel:String = null )
         {
             super( global , channel ) ;
-            _setDuration( duration ) ;
-            _setUseSeconds( useSeconds ) ;
+            _duration = (isNaN(duration) && duration < 0 && !isFinite(duration) ) ? 0 : duration ;
+            _useSeconds = useSeconds ;
             _timer = new Timer( delay , 1 ) ;
             _timer.addEventListener( TimerEvent.TIMER_COMPLETE , _onFinished ) ;
             _timer.addEventListener( TimerEvent.TIMER , _onTimer ) ;
@@ -90,7 +89,7 @@ package system.process
         {
             return useSeconds ? ( Math.round( duration * 1000 ) ) : duration ; 
         }
-
+        
         /**
          * Indicates the duration of the process.
          */
@@ -98,7 +97,7 @@ package system.process
         {
             return ( isNaN(_duration) && !isFinite(_duration) ) ? 1 : _duration ;
         }
-    
+        
         /**
          * @private
          */
@@ -107,14 +106,14 @@ package system.process
             _duration = (isNaN(n) && n < 0 && !isFinite(n) ) ? 0 : n ;
             _timer.delay = delay ;
         }
-    
+        
         /**
          * Indicates if the pause use seconds or not.
          */
         public function get useSeconds():Boolean
         {
             return _useSeconds ;
-        }    
+        }
         
         /**
          * @private
@@ -123,8 +122,8 @@ package system.process
         {
             _useSeconds = b ;
             _timer.delay = delay ;
-        }    
-    
+        }
+        
         /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
@@ -154,7 +153,7 @@ package system.process
         {
             run() ;
         }
-
+        
         /**
          * Stop the pause process.
          */
@@ -190,17 +189,17 @@ package system.process
          * @private
          */
         private var _duration:Number = 0;
-
+        
         /**
          * @private
          */
         private var _timer:Timer ;
-
+        
         /**
          * @private
          */
-        private var _useSeconds:Boolean = false ;
-
+        private var _useSeconds:Boolean ;
+        
         /**
          * Invoked when the internal timer of this process is finished.
          */
@@ -215,22 +214,6 @@ package system.process
         private function _onTimer(e:TimerEvent):void
         {
             notifyProgress() ;
-        }
-
-        /**
-         * Sets the duration of the process and not refresh the Timer delay value.
-         */        
-        private function _setDuration( n:Number ):void 
-        {
-            _duration = (isNaN(n) && n < 0 && !isFinite(n) ) ? 0 : n ;
-        }
-        
-        /**
-         * Sets the useSeconds value of the process and not refresh the Timer delay value.
-         */        
-        private function _setUseSeconds( b:Boolean ):void 
-        {
-            _useSeconds = b ;
         }
     }
 }

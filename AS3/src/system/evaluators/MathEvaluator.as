@@ -35,8 +35,8 @@
 
 package system.evaluators
 {
-    import system.Strings;    
-
+    import system.Strings;
+    
     /**
      * Evaluates mathematical string expressions.
      * <p><b>The MathEvaluator implementation</b>, support all of the following :</p>

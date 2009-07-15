@@ -77,7 +77,7 @@ package system.terminals
         /**
          * @private
          */
-        function set stdout( value:String ):void ;        
+        function set stdout( value:String ):void ;
 
         /**
          * Clear all standard streams.

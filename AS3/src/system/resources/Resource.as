@@ -35,7 +35,6 @@
 
 package system.resources
 {
-
     /**
      * The Resource interface.
      */

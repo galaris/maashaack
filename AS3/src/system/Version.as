@@ -35,7 +35,6 @@
 
 package system
 {
-
     /**
      * A basic Version class which is composed by four fields: major, minor, build and revision.
      * <p>implementation note:</p>
@@ -73,7 +72,6 @@ package system
      */
     public class Version implements Equatable
     {
-        
         /**
          * @private
          */
@@ -151,9 +149,9 @@ package system
          * @param build The build value of the version.
          * @param revision The revision value of the version.
          */
-        public function Version( major:uint = 0,
-                                 minor:uint = 0,
-                                 build:uint = 0,
+        public function Version( major:uint    = 0 ,
+                                 minor:uint    = 0 ,
+                                 build:uint    = 0 ,
                                  revision:uint = 0 )
         {
             
@@ -341,14 +339,13 @@ package system
             {
                 fields = getFields( ); //get the default fields
             }
-            
             switch( fields )
             {
                 case 1 :
                 {
                     arr = [ major ];
                     break;
-                }                
+                }
                 case 2 :
                 {
                     arr = [ major, minor ];
@@ -367,7 +364,6 @@ package system
                     arr = [ major, minor, build, revision ];
                 }
             }
-            
             return arr.join( _separator );
         }
         

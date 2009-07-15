@@ -37,8 +37,8 @@ package system.process
 {
     import system.data.Iterator;
     import system.events.ActionEvent;
-    import system.process.Stoppable;    
-
+    import system.process.Stoppable;
+    
     /**
      * This <code class="prettyprint">Action</code> object register <code class="prettyprint">Action</code> objects in a batch process.
      * <p><b>Example :</b></p>
@@ -89,7 +89,6 @@ package system.process
      */
     public class BatchProcess extends Task implements Stoppable
     {
-        
         /**
          * Creates a new BatchProcess instance.
          * @param global the flag to use a global event flow or a local event flow.
@@ -270,6 +269,5 @@ package system.process
                 notifyFinished() ;
             }
         }
-    
     }
 }

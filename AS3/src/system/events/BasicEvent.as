@@ -95,9 +95,9 @@ package system.events
          */
         public override function get target():Object
         {
-            return _target || super.target ;    
+            return _target || super.target ;
         }
-    
+        
         /**
          * @private
          */

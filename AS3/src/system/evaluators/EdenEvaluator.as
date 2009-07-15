@@ -36,7 +36,7 @@
 package system.evaluators
 {
     import system.eden;
-
+    
     /**
      * Evaluates an eden expression.
      * <pre class="prettyprint">
@@ -48,12 +48,11 @@ package system.evaluators
      */
     public class EdenEvaluator implements Evaluable
     {
-
         /**
          * @private
          */
         private var _serialized:Boolean;
-
+        
         /**
          * Creates a new EdenEvaluator instance.
          * @param serialized This Boolean flag indicates if the object must be evaluates with a final serialized or not value.
@@ -62,7 +61,7 @@ package system.evaluators
         {
             _serialized = serialized;
         }
-
+        
         /**
          * Evaluates the specified object.
          */        
@@ -81,4 +80,3 @@ package system.evaluators
         }
     }
 }
-

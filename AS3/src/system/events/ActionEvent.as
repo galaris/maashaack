@@ -44,7 +44,6 @@ package system.events
      */
     public class ActionEvent extends BasicEvent
     {
-        
         /**
          * Creates a new ActionEvent instance.
          * @param type the string type of the instance. 
@@ -156,6 +155,5 @@ package system.events
          * @private
          */
         private var _info:* ;
-        
     }
 }

@@ -63,14 +63,14 @@ package system
         /**
          * Indicates if two passed-in ByteArray objects are equal.
          * <p>Two ByteArray objects are considered equal if and only if all bytes they contain are equal and in the same order.</p>
-         * @param a the first ByteArray to be compared.
-         * @param b the second ByteArray to be compared.
+         * @param first The first ByteArray to be compared.
+         * @param second The second ByteArray to be compared.
          * @return <code class=-"prettyprint">true</code> if the ByteArray object are equal, <code class=-"prettyprint">false</code> otherwise.  
          */
         public static function equals( first:ByteArray, second:ByteArray):Boolean
         {
-            var pos1:uint = first.position  ;
-            var pos2:uint = second.position ;
+            var pos1:uint   = first.position  ;
+            var pos2:uint   = second.position ;
             first.position  = 0 ;
             second.position = 0 ;
             if( first.bytesAvailable != second.bytesAvailable )

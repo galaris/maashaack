@@ -36,21 +36,21 @@
 package system.process
 {
     import system.events.ActionEvent;
-
+    
     /**
      * Dispatched when a process is changed.
      * @eventType system.events.ActionEvent.CHANGE
      * @see #notifyChanged
      */
     [Event(name="change", type="system.events.ActionEvent")]
-
+    
     /**
      * Dispatched when a process is cleared.
      * @eventType system.events.ActionEvent.CLEAR
      * @see #notifyCleared
      */
     [Event(name="clear", type="system.events.ActionEvent")]
-        
+    
     /**
      * Dispatched when an info process is running.
      * @eventType system.events.ActionEvent.INFO
@@ -70,42 +70,41 @@ package system.process
      * @eventType system.events.ActionEvent.PAUSE
      * @see #notifyPaused
      */
-    [Event(name="pause", type="system.events.ActionEvent")]     
+    [Event(name="pause", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is in progress.
      * @eventType system.events.ActionEvent.PROGRESS
      * @see #notifyProgress
      */
-    [Event(name="progress", type="system.events.ActionEvent")]  
+    [Event(name="progress", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is resumed.
      * @eventType system.events.ActionEvent.RESUME
      * @see #notifyResumed
      */
-    [Event(name="resume", type="system.events.ActionEvent")]  
+    [Event(name="resume", type="system.events.ActionEvent")] 
         
     /**
      * Dispatched when a process is stopped.
      * @eventType system.events.ActionEvent.STOP
      * @see #notifyStopped
      */
-    [Event(name="stop", type="system.events.ActionEvent")]      
+    [Event(name="stop", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is out of time.
      * @eventType system.events.ActionEvent.TIMEOUT
      * @see #notifyTimeOut
      */
-    [Event(name="timeout", type="system.events.ActionEvent")]   
-        
+    [Event(name="timeout", type="system.events.ActionEvent")]
+    
     /**
      * This class simplify a full implementation of the <code class="prettyprint">Action</code> interface.
      */
     public dynamic class CoreAction extends Task
     {
-        
         /**
          * Creates a new Action instance.
          * @param global the flag to use a global event flow or a local event flow.
@@ -386,7 +385,5 @@ package system.process
          * @private
          */
         private var _sTypeTimeout:String ;
-
     }
-
 }

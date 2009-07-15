@@ -43,7 +43,6 @@ package system.process
      */
     public class TimeoutPolicy implements Serializable
     {
-        
         /**
          * Creates a new TimeoutPolicy instance.
          * @param the value of this policy object.
@@ -94,6 +93,5 @@ package system.process
          * @private
          */
         private var _value:int ;
-        
     }
 }

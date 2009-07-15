@@ -160,12 +160,10 @@ package system.process
          * @private
          */
         private var _isRunning:Boolean ;
-
+        
         /**
          * @private
          */
         private var _parent:Action ;
-        
     }
-
 }

@@ -35,7 +35,6 @@
 
 package system.evaluators 
 {
-
     /**
      * This <code class="prettyprint">IEvaluator</code> use a <code class="prettyprint">Array</code> collection of evaluators to evaluate the specified value.
      * <pre class="prettyprint">
@@ -81,7 +80,7 @@ package system.evaluators
         /**
          * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">Evaluable</code> objects (in the insert method).
          */
-        public var autoClear:Boolean ;        
+        public var autoClear:Boolean ;
 
         /**
          * Inserts <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator.  
@@ -148,7 +147,7 @@ package system.evaluators
             }
             return o ;
         }
-
+        
         /**
          * Removes an <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator if is register.
          * @param evaluator The <code class="prettyprint">Evaluable</code> to find and remove.

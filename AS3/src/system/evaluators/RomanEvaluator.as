@@ -36,8 +36,8 @@
 package system.evaluators 
 {
     import system.evaluators.Evaluable;
-    import system.numeric.RomanNumber;    
-
+    import system.numeric.RomanNumber;
+    
     /**
      * Evaluates an int value and transform it in roman numeral expression.
      * <p><b>Example :</b></p>
@@ -91,7 +91,6 @@ package system.evaluators
      */
     public class RomanEvaluator implements Evaluable 
     {
-
         /**
          * Creates a new RomanEvaluator instance.
          */
@@ -114,7 +113,5 @@ package system.evaluators
                 return RomanNumber.parse( o ); 
             }
         }
-        
     }
-
 }

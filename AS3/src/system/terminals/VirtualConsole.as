@@ -37,35 +37,34 @@ package system.terminals
 {
     import system.Environment;
     import system.Strings;
-
+    
     /**
      * The VirtualConsole class emulate a console with stdout, stderr and stdin streams.
      */
     public class VirtualConsole implements InteractiveConsole
     {
-
         /**
          * @private
          */
         private var _stdout:String = "";
-
+        
         /**
          * @private
          */
         private var _stderr:String = "";
-
+        
         /**
          * @private
          */
         private var _stdin:String = "";
-
+        
         /**
          * Creates a new VirtualConsole instance.
-         */        
+         */
         public function VirtualConsole()
         {
         }
-
+        
         /**
          * @private
          * Formats the specific messages.
@@ -89,7 +88,7 @@ package system.terminals
             messages.unshift( msg );
             return Strings.format.apply( Strings, messages );
         }
-
+        
         /**
          * Standard error is another output stream typically used by programs to output error messages or diagnostics. 
          * It is a stream independent of standard output and can be redirected separately.
@@ -124,7 +123,7 @@ package system.terminals
         {
             _stdin += value;
         }
-
+        
         /**
          * Standard output is the stream where a program writes its output data. 
          * The program requests data transfer with the write operation.

@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     import flash.events.Event;
-
+    
     /**
      * The <code class="prettyprint">ArrayEvent</code> to dispatch an event who contains an Array object.
      * <p><b>Example :</b></p>
@@ -49,7 +49,6 @@ package system.events
      */
     public class ArrayEvent extends BasicEvent 
     {
-        
         /**
          * Creates a new <code class="prettyprint">ArrayEvent</code> instance.
          * @param type the string type of the instance. 

@@ -110,7 +110,7 @@ package system.events
                 if ( _map.get( type ) is EventListenerBatch && listener != null )
                 {
                     ( _map.get( type ) as EventListenerBatch ).add( listener ) ;
-                    return ;                
+                    return ;
                 }
             }
             var batch:EventListenerBatch = new EventListenerBatch() ;
