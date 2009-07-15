@@ -44,6 +44,7 @@ done:
  * unit tests run on the command line
    * we dynamically generate ASTUce.exe
    * we run ASTUce, core, system, etc. unit tests
+ * Process and Action engine
 
 todo:
  * Environment class (refactor)
@@ -51,7 +52,6 @@ todo:
  * finish and fully review all core objects: Strings, Arrays, Objects, etc.
  * define the common namespaces standard/optimized/experimental
  * URI class
- * Process and Action engine
  * reorganization of the documentation (wiki) -- started
  * explain the architecture
    * core : very low-level classes without dependencies
