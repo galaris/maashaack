@@ -39,8 +39,8 @@ package system.data.bags
     import system.data.Collection;
     import system.data.List;
     import system.data.collections.ArrayCollection;
-    import system.data.maps.ArrayMap;    
-
+    import system.data.maps.ArrayMap;
+    
     /**
      * Implements Bag, using a ArrayMap to provide the data storage. This is the standard implementation of a bag.
      * <p><b>Example : </b></p>
@@ -106,7 +106,7 @@ package system.data.bags
         {
             super( new ArrayMap() , co ) ;
         }
-    
+        
         /**
          * Returns the shallow copy of this bag.
          * @return the shallow copy of this bag.
@@ -129,8 +129,7 @@ package system.data.bags
                 source += li.toSource() ;
             } 
             source += ")" ;
-            return source ;            
+            return source ;
         }
-        
     }
 }

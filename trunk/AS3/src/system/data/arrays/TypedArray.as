@@ -28,7 +28,7 @@ package system.data.arrays
     import system.data.Validator;
     import system.data.arrays.ProxyArray;
     import system.eden;
-
+    
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
      * <p><b>Example :</b></p>
@@ -50,7 +50,6 @@ package system.data.arrays
      */
     public dynamic class TypedArray extends ProxyArray implements Typeable, Validator
     {
-        
         /**
          * Creates a new TypedArray instance.
          * @param type the type of this Typeable object (a Class or a Function).
@@ -85,7 +84,7 @@ package system.data.arrays
         {
             return _type ;
         }
-
+        
         /**
          * @private
          */
@@ -200,7 +199,7 @@ package system.data.arrays
             }
             s += ")" ;
             return s ;
-        }        
+        }
         
         /**
          * Adds one or more elements to the beginning of an array and returns the new length of the array. 
@@ -238,7 +237,7 @@ package system.data.arrays
             }
             return _ar.unshift.apply(_ar, args) as uint ;
         }
-  
+        
         /**
          * Evaluates the condition it checks and updates the IsValid property.
          * @throws TypeMismatchError if the value isn't valid.
@@ -250,12 +249,10 @@ package system.data.arrays
                 throw new TypeError( Reflection.getClassName(this) + ".validate("+ value + ") is mismatch.") ;
             }
         }
-                
+        
         /**
          * @private
          */
         private var _type:* ;
-        
     }
 }
-

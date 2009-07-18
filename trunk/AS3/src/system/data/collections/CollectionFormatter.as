@@ -36,14 +36,13 @@
 package system.data.collections 
 {
     import system.data.Collection;
-    import system.formatters.Formattable;    
-
+    import system.formatters.Formattable;
+    
     /**
      * Converts a Collection to a custom string representation.
      */
     public class CollectionFormatter implements Formattable 
     {
-
         /**
          * Creates a new CollectionFormatter instance.
          */
@@ -51,7 +50,7 @@ package system.data.collections
         {
             //  
         }
-
+        
         /**
          * Formats the specified value.
          * @param value The object to format.

@@ -72,7 +72,6 @@ package system.comparators
      */
     public class CharComparator implements Comparator 
     {
-
         /**
          * Creates a new CharComparator instance.
          */
@@ -80,7 +79,7 @@ package system.comparators
         {
             //
         }
-
+        
         /**
          * Returns 0 if the passed string is lower case else 1.
          * @return 0 if the passed string is lower case else 1.

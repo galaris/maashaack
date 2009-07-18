@@ -38,13 +38,12 @@ package system.comparators
     import system.Comparator;
     import system.Reflection;
     import system.process.Priority;
-
+    
     /**
      * This comparator compare two Priority objects and use the priority property of this Priority objects.
      */
     public class PriorityComparator implements Comparator
     {
-        
         /**
          * Creates a new PriorityComparator instance.
          */
@@ -52,7 +51,7 @@ package system.comparators
         {
             //
         }
-                
+        
         /**
          * Returns an integer value to compare two Number objects.
          * @param o1 the first Number object to compare.
@@ -86,8 +85,7 @@ package system.comparators
             else 
             {
                 throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Priority objects.") ;
-            }    
+            }
         }
-        
     }
 }

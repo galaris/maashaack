@@ -36,8 +36,8 @@
 package system.comparators
 {
     import system.Comparator;
-    import system.Reflection;                        
-
+    import system.Reflection;
+    
     /**
      * This comparator compare two Number objects.
      * <p><b>Example :</b></p>
@@ -67,7 +67,6 @@ package system.comparators
      */
     public class NumberComparator implements Comparator
     {
-        
         /**
          * Creates a new NumberComparator instance.
          * @param fixed Indicates if the two numbers are round to the specified number of decimal places (see the fractionDigits property).
@@ -128,6 +127,5 @@ package system.comparators
                 throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Number objects." ) ;
             }
         }
-        
     }
 }

@@ -35,7 +35,6 @@
 
 package system.data.iterators
 {
-
     /**
      * Converts an array to an iterator but this iterator return the value of a specific field if the array is an array of objects.
      * <p><b>Example :</b></p>
@@ -68,7 +67,6 @@ package system.data.iterators
      */
     public class ArrayFieldIterator extends ArrayIterator
     {
-    
         /**
          * Creates a new ArrayFieldIterator instance.
          */
@@ -77,7 +75,7 @@ package system.data.iterators
             super(a) ;
             this.fieldName = fieldName ;
         }
-
+        
         /**
          * The field used in the next method to return the next value in the array.
          */    
@@ -97,6 +95,5 @@ package system.data.iterators
             var o:* = _a[++_k] ;
             return ( fieldName != null ) ? ( fieldName in o ? o[fieldName] : null ) : o ;
         }
-        
     }
 }

@@ -40,14 +40,14 @@ package system.data.arrays
     
     import flash.events.Event;
     import flash.events.EventDispatcher;
-    import flash.events.IEventDispatcher;    
-
+    import flash.events.IEventDispatcher;
+    
     /**
      * Dispatched when the filter is changed.
      * @eventType flash.events.Event.CHANGE
      */
     [Event(name="onFinished", type="andromeda.events.ActionEvent")]
-
+    
     /**
      * This filter contains all constants and methods to sort the Arrays in the application.
      * <p><b>Example : </b></p>
@@ -103,7 +103,6 @@ package system.data.arrays
      */
     public class ArrayFilter extends EventDispatcher implements Serializable
     {
-
         /**
          * Creates a new ArrayFilter instance.
          * @param value the default filter value of this instance. If this argument is null the filter value is ArrayFilter.NONE(0). 
@@ -164,14 +163,14 @@ package system.data.arrays
          * <p>The value of this constant is 8.</p>
          */
         public static const RETURNINDEXEDARRAY:uint = Array.RETURNINDEXEDARRAY ;
-
+    
         /**
          * Specifies the unique sorting requirement for the Array class sorting methods. 
          * You can use this constant for the <code class="prettyprint">options</code> parameter in the <code class="prettyprint">sort()</code> or <code class="prettyprint">sortOn()</code> method. 
          * The unique sorting option terminates the sort if any two elements or fields being sorted have identical values. 
          * <p>The value of this constant is 4.</p>
          */
-        public static const UNIQUESORT:uint = Array.UNIQUESORT ;        
+        public static const UNIQUESORT:uint = Array.UNIQUESORT ;
         
         /**
          * Returns the current filter value of this object.
@@ -215,7 +214,7 @@ package system.data.arrays
         */
         public function isCaseInsensitive():Boolean
         {
-            return contains( filter , CASEINSENSITIVE ) ;    
+            return contains( filter , CASEINSENSITIVE ) ;
         }
             
         /**
@@ -224,7 +223,7 @@ package system.data.arrays
          */
         public function isDescending():Boolean
         {
-            return contains( _filter , DESCENDING ) ;    
+            return contains( _filter , DESCENDING ) ;
         }
             
         /**
@@ -242,7 +241,7 @@ package system.data.arrays
          */
         public function isNumeric():Boolean
         {
-            return contains( _filter , NUMERIC ) ;    
+            return contains( _filter , NUMERIC ) ;
         }
             
         /**
@@ -251,7 +250,7 @@ package system.data.arrays
          */
         public function isReturnIndexedArray():Boolean
         {
-            return contains( _filter , RETURNINDEXEDARRAY ) ;    
+            return contains( _filter , RETURNINDEXEDARRAY ) ;
         }
         
         /**
@@ -260,7 +259,7 @@ package system.data.arrays
          */
         public function isUniqueSort():Boolean
         {
-            return contains( _filter , UNIQUESORT ) ;    
+            return contains( _filter , UNIQUESORT ) ;
         }
         
         /**
@@ -284,7 +283,7 @@ package system.data.arrays
             if (_filter != old)
             {
                 notifyChange() ;
-            }    
+            }
         }
         
         /**
@@ -312,7 +311,7 @@ package system.data.arrays
                 notifyChange() ;
             }    
         }
-
+        
         /**
          * Sets the NUMERIC option value in the current filter.
          */
@@ -323,9 +322,9 @@ package system.data.arrays
             if (_filter != old)
             {
                 notifyChange() ;
-            }    
+            }
         }
-
+        
         /**
          * Sets the RETURNINDEXEDARRAY option value in the current filter.
          */
@@ -336,9 +335,9 @@ package system.data.arrays
             if (_filter != old)
             {
                 notifyChange() ;
-            }    
+            }
         }
-
+        
         /**
          * Sets the UNIQUESORT option value in the current filter.
          */
@@ -351,7 +350,7 @@ package system.data.arrays
                 notifyChange() ;
             }    
         }
-
+        
         /**
          * Returns a eden String representation of the object.
          * @return a string representation the source code of the object.
@@ -373,7 +372,6 @@ package system.data.arrays
         /**
          * The filter value of this object.
          */
-        private var _filter:uint ;        
-        
+        private var _filter:uint ;
     }
 }

@@ -40,8 +40,8 @@ package system.data.collections
     import system.data.Iterator;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;    
-
+    import system.eden;
+    
     /**
      * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
      * <p><b>Example :</b></p>
@@ -67,7 +67,6 @@ package system.data.collections
      */
     public class TypedCollection implements Collection, Typeable, Validator
     {
-    
         /**
          * Creates a new TypedCollection instance.
          * @param type the type of this Typeable object (a Class or a Function).
@@ -101,7 +100,7 @@ package system.data.collections
         {
             return _type ;
         }
-
+        
         /**
          * @private
          */
@@ -123,12 +122,12 @@ package system.data.collections
         public function add( o:* ):Boolean
         {
             validate(o) ;
-            return _co.add( o ) ;            
+            return _co.add( o ) ;
         }
         
         /**
          * Removes all elements in the collection.
-         */        
+         */
         public function clear():void
         {
             _co.clear() ;
@@ -194,12 +193,12 @@ package system.data.collections
         public function remove(o:*):*
         {
             return _co.remove(o);
-        }        
-                
+        }
+        
         /**
          * Returns the number of elements in this collection.
          * @return the number of elements in this collection.
-         */        
+         */
         public function size():uint
         {
             return _co.size() ;
@@ -238,7 +237,7 @@ package system.data.collections
             }
             s += ")" ;
             return s ;
-        }        
+        }
         
         /**
          * Returns the String representation of the object.
@@ -270,6 +269,5 @@ package system.data.collections
          * @private
          */
         private var _type:* ;
-       
     }
 }

@@ -37,14 +37,13 @@ package system.data.bags
 {
     import system.data.Bag;
     import system.data.Iterator;
-    import system.formatters.Formattable;    
-
+    import system.formatters.Formattable;
+    
     /**
      * Converts a Bag to a custom string representation.
      */
     public class BagFormatter implements Formattable 
     {
-
         /**
          * Creates a new BagFormatter instance.
          */
@@ -52,7 +51,7 @@ package system.data.bags
         {
             //  
         }
-
+        
         /**
          * Formats the specified value.
          * @param value The object to format.

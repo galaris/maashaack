@@ -36,8 +36,8 @@
 package system.comparators
 {
     import system.Comparator;
-    import system.Sortable;    
-
+    import system.Sortable;
+    
     /**
      * This comparator compare two Objects by field.
      * <p><b>Example :</b></p>
@@ -75,20 +75,19 @@ package system.comparators
      */
     public class GenericComparator implements Comparator, Sortable
     {
-        
         /**
          * Creates a new GenericComparator instance.
          * @param sortBy A String who represents a property name to compare the two objects.
          * @param comparator An Comparator use to compare the two objects with the specified property names. 
          * @throws ArgumentError If the 'sortBy' argument is 'null'.
-         * @throws ArgumentError If the 'comparator' argument is 'null'.         
+         * @throws ArgumentError If the 'comparator' argument is 'null'.
          */
         public function GenericComparator( sortBy:String , comparator:Comparator )
         {
             this.comparator = comparator ;
             this.sortBy     = sortBy     ;
         }
-
+        
         /**
          * Determinates the Comparator strategy used to sort the instance.
          * <p>The internal Comparator used by this Comparator to compare two objects with the specified field.</p>
@@ -136,7 +135,7 @@ package system.comparators
             {
                 throw new Error( "The GenericComparator 'sortBy' property not must be 'null'") ;
             }
-        }        
+        }
         
         /**
          * Returns an integer value to compare two objects.
@@ -169,7 +168,6 @@ package system.comparators
         /**
          * @private
          */
-        private var _sortBy:String ;        
-            
+        private var _sortBy:String ;
     }
 }

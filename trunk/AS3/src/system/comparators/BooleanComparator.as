@@ -35,8 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;    
-
+    import system.Comparator;
+    
     /**
      * An Comparator for <code class="prettyprint">Boolean</code> objects that can sort either <code class="prettyprint">true</code> or <code class="prettyprint">false</code> first.
      * <p><b>Example :</b></p>
@@ -53,7 +53,6 @@ package system.comparators
      */
     public class BooleanComparator implements Comparator
     {
-        
         /**
          * Creates a BooleanComparator that sorts trueFirst values before !trueFirst values.
          * Please use the static factories instead whenever possible.
@@ -63,7 +62,7 @@ package system.comparators
         {
             this.trueFirst = trueFirst ;
         }
-
+        
         /**
          * When <code class="prettyprint">true</code> sort <code class="prettyprint">true</code> boolean values before <code class="prettyprint">false</code>.
          */
@@ -125,7 +124,7 @@ package system.comparators
         {
             if (_falseFirstInstance == null)
             {
-                _falseFirstInstance = new BooleanComparator(false) ;    
+                _falseFirstInstance = new BooleanComparator(false) ;
             }
             return _falseFirstInstance ;
         }
@@ -146,21 +145,19 @@ package system.comparators
         {
             if (_trueFirstInstance == null)
             {
-                _trueFirstInstance = new BooleanComparator(true) ;    
+                _trueFirstInstance = new BooleanComparator(true) ;
             }
             return _trueFirstInstance ;
         }
-
+        
         /**
          * The internal singleton reference who define a BooleanComparator that sorts false values before true values.
          */
         private static var _falseFirstInstance:BooleanComparator ; 
-    
+        
         /**
          * The internal singleton reference who define a BooleanComparator that sorts true values before false values.
          */
         private static var _trueFirstInstance:BooleanComparator ; 
-    
     }
-
 }
