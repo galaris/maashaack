@@ -35,8 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;                            
-
+    import system.Comparator;
+    
     /**
      * This comparator compare Null objects.
      * When comparing two non-null objects, the ComparableComparator is used if the nonNullComparator isnt' define.
@@ -63,7 +63,6 @@ package system.comparators
      */
     public class NullComparator implements Comparator
     {
-        
         /**
          * Creates a new NullComparator instance.
          * @param nonNullComparator the comparator to use when comparing two non-null objects.
@@ -73,14 +72,14 @@ package system.comparators
         {
             this.nonNullComparator = nonNullComparator ;
             this.nullsAreHigh      = nullsAreHigh      ;
-            _comp = new ComparableComparator() ;            
+            _comp                  = new ComparableComparator() ;
         }
-
+        
         /**
          * Defines the comparator to use when comparing two non-null objects.
          */
         public var nonNullComparator:Comparator = null ;
-
+        
         /**
          * Defines that null should be compared as higher than a non-null object. 
          */
@@ -106,7 +105,7 @@ package system.comparators
             if (o1 == null && o2 == null)
             {
                 return 0 ;
-            }            
+            }
             else if (o1 == null && o2 != null)
             {
                 return nullsAreHigh ? 1 : -1 ;
@@ -117,7 +116,7 @@ package system.comparators
             }
             else if ( nonNullComparator != null )
             {
-                return nonNullComparator.compare(o1, o2, options) ;    
+                return nonNullComparator.compare(o1, o2, options) ;
             }
             else
             {
@@ -129,7 +128,5 @@ package system.comparators
          * @private
          */
         private var _comp:ComparableComparator ;
-
-        
     }
 }

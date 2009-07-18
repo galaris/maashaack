@@ -35,10 +35,8 @@
 
 package system.data.bags 
 {
-    
     /**
      * Converts a Bag to a custom string representation.
      */
     public const formatter:BagFormatter = new BagFormatter() ;
-
 }

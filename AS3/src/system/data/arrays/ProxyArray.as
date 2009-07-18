@@ -88,7 +88,6 @@ package system.data.arrays
      */
     public dynamic class ProxyArray extends Proxy implements Cloneable, Iterable, Serializable
     {
-        
         /**
          * Creates a new ProxyArray instance.
          */  
@@ -150,7 +149,7 @@ package system.data.arrays
         public function isEmpty():Boolean 
         {
             return _ar.length == 0 ;
-        }        
+        }
         
         /**
          * Returns the iterator of the object.
@@ -228,18 +227,16 @@ package system.data.arrays
         public function toString():String
         {
             return "[" + _ar.join(",") + "]" ;
-        }        
+        }
         
         /**
          * Internal Array reference used in the proxy pattern.
          */        
         protected var _ar:Array ;
-
+        
         /**
          * @private
          */
-        private var _index:int ;        
-                        
-        
+        private var _index:int ;
     }
 }

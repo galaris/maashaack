@@ -98,7 +98,6 @@ package system.data.collections
      */
     public class ArrayCollection implements Collection, Equatable
     {
-
         /**
          * Creates a new ArrayCollection instance.
          * @param init An optional Array or Collection or Iterable object to fill the collection.
@@ -122,13 +121,13 @@ package system.data.collections
             if( init as Array != null && init.length > 0 ) 
             {   
                 _a = init.slice() ;   
-            }            
+            }
             else 
             {
                 _a = [] ;
             }
         }
-
+        
         /**
          * Inserts an element in the collection.
          */
@@ -165,7 +164,7 @@ package system.data.collections
             {
                 return false ;
             }
-        }        
+        }
         
         /**
          * Removes all elements in the collection.
@@ -182,7 +181,7 @@ package system.data.collections
         public function clone():*
         {
             return new ArrayCollection(toArray()) ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
@@ -230,7 +229,7 @@ package system.data.collections
                 return false ;
             }       
             return this.containsAll(c) ;
-        }        
+        }
         
         /**
          * Returns the element from this collection at the passed key index.
@@ -316,7 +315,7 @@ package system.data.collections
                 }
             }
             return b ;
-        }        
+        }
         
         /**
          * Retains only the elements in this Collection that are contained in the specified Collection (optional operation).
@@ -334,7 +333,7 @@ package system.data.collections
                 }
             }
             return b ;
-        }        
+        }
         
         /**
          * Returns the number of elements in this collection.
@@ -383,7 +382,6 @@ package system.data.collections
         /**
          * @private
          */
-        protected var _a:Array ;        
-        
+        protected var _a:Array ;
     }
 }

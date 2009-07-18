@@ -47,18 +47,17 @@ package system.data.bags
     import system.data.maps.MapUtils;
     import system.data.sets.ArraySet;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
      * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
      */
     public class CoreMapBag implements Bag
     {
-        
         /**
-          * Creates a new CoreMapBag instance.
-          * @param map a Map reference used to register all elements in the Bag.
+         * Creates a new CoreMapBag instance.
+         * @param map a Map reference used to register all elements in the Bag.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
          */
         public function CoreMapBag( map:Map = null , co:Collection = null )
@@ -84,7 +83,7 @@ package system.data.bags
         public function set modCount( i:int ):void
         {
             _modCount = i ;
-        }       
+        }
         
         /**
          * Add 1 copy of the given object to the bag and keep a count. 
@@ -92,7 +91,7 @@ package system.data.bags
         public function add( o:* ):Boolean 
         {
             return addCopies( o , 1 ) ;
-        }        
+        }
         
         /**
          * Insert all elements represented in the given collection.
@@ -128,7 +127,7 @@ package system.data.bags
             {
                 return false;
             }
-        }        
+        }
         
         /**
          * Removes all of the elements from this bag.
@@ -139,7 +138,7 @@ package system.data.bags
             _map.clear() ;
             _size = 0 ;
         }
-     
+        
         /**
          * Returns the shallow copy of this bag.
          * @return the shallow copy of this bag.
@@ -151,7 +150,7 @@ package system.data.bags
             m.clear() ;
             return new CoreMapBag( m , (c != null && c.size()) > 0 ? c : null ) ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if this bag contains the object passed in argument.
          * @return <code class="prettyprint">true</code> if this bag contains the object passed in argument.
@@ -160,7 +159,7 @@ package system.data.bags
         {
             return _map.containsKey(o);
         }
-     
+        
         /**
          * Returns <code class="prettyprint">true</code> if thie bag contains all object in the passed collection in argument.
          * @return <code class="prettyprint">true</code> if thie bag contains all object in the passed collection in argument.
@@ -173,11 +172,11 @@ package system.data.bags
             }
             return containsAllInBag( new HashBag(c) ) ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if thie bag contains all object in the passed bag in argument.
          * @return <code class="prettyprint">true</code> if thie bag contains all object in the passed bag in argument.
-         */     
+         */
         public function containsAllInBag( b:Bag ):Boolean 
         {
             if ( b == null )
@@ -201,7 +200,7 @@ package system.data.bags
          * Compares this Bag to another. This Bag equals another Bag if it contains the same number of occurrences of the same elements.
          * @param o the Bag to compare to.
          * @return true if equal.
-         */        
+         */
         public function equals( o:* ):Boolean
         {
             if (o == this) 
@@ -238,7 +237,7 @@ package system.data.bags
         {
             throw new IllegalOperationError( Reflection.getClassName(this) + ", the get() method is unsupported.") ;
         }
-
+        
         /**
          * Returns the count of the specified object passed in argument.
          * @return the count of the specified object passed in argument.
@@ -247,7 +246,7 @@ package system.data.bags
         {
             return uint( MapUtils.getNumber( _map , o ) ) ;
         }
-                
+        
         /**
          * Unsupported by bag objects.
          * @throws IllegalOperationError the 'indexOf' method is unsupported with a bag object.
@@ -267,22 +266,22 @@ package system.data.bags
         }
         
         /**
-          * Returns the Iterator representation of the Bag.
+         * Returns the Iterator representation of the Bag.
          * @return the Iterator representation of the Bag.
-          */
+         */
         public function iterator():Iterator 
         {
             return new BagIterator(this, _extractList().iterator()) ;
         }
-
+        
         /**
          * Removes the object in argument in the bag.
-          */
+         */
         public function remove(o:*):* 
         {
             return removeCopies(o, getCount(o));
         }
-
+        
         /**
          * Removes objects from the bag according to their count in the specified collection.
          * @param c the collection to use.
@@ -331,7 +330,7 @@ package system.data.bags
             }
             return result;
         } 
-
+        
         /**
          * Removes any members of the bag that are not in the given collection, respecting cardinality.
          * <p><b>Example :</b></p>
@@ -362,7 +361,7 @@ package system.data.bags
         {
             return retainAllInBag( new HashBag(c) ) ;
         }
-
+        
         /**
          * Removes any members of the bag that are not in the given bag, respecting cardinality.
          * @param b the bag to retain.
@@ -401,7 +400,7 @@ package system.data.bags
             }
             return result;
         }
-    
+        
         /**
          * Returns the number of elements in this bag (its cardinality).
          * @return the number of elements in this bag (its cardinality).
@@ -410,16 +409,16 @@ package system.data.bags
         {
             return _size ;
         }
-    
+        
         /**
          * Returns the array representation of the bag.
          * @return the array representation of the bag.
-          */
+         */
         public function toArray():Array 
         {
             return _extractList().toArray();
         }
-
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -431,7 +430,7 @@ package system.data.bags
             source += ")" ;
             return source ; 
         }
-    
+        
         /**
          * Returns the string representation of this instance.
          * @return the string representation of this instance.
@@ -449,7 +448,7 @@ package system.data.bags
         {
             return new ArraySet( _map.getKeys() ) ;
         }
-
+        
         /**
          * @private
          */
@@ -458,7 +457,7 @@ package system.data.bags
             _size = _extractList().size() ;
             return _size ;
         }
-
+        
         /**
          * @private
          */
@@ -477,7 +476,7 @@ package system.data.bags
             }
             return result ;
         }
-
+        
         /**
          * @private
          */
@@ -485,36 +484,35 @@ package system.data.bags
         {
             return _map ;
         }
-
+        
         /**
          * @private
-         */    
+         */
         protected function setMap( m:Map ):void
         {
             if ( m != null && m.isEmpty() ) 
             {
-               _map = m ;    
+               _map = m ;
             }
             else
             {
                throw new ArgumentError( Reflection.getClassName(this) + ", set the internal Map failed. The Map must be non-null and empty.") ;
             }
         }
-
+        
         /**
          * @private
          */
-        private var _map:Map = null ;    
+        private var _map:Map ;
         
         /**
          * @private
          */        
-        private var _modCount:uint = 0 ;
+        private var _modCount:uint ;
         
         /**
          * @private
-         */        
-        private var _size:uint = 0 ;
-        
+         */
+        private var _size:uint ;
     }
 }

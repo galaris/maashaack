@@ -35,10 +35,8 @@
 
 package system.data.collections 
 {
-    
     /**
      * Converts a Collection to a custom string representation.
      */
     public const formatter:CollectionFormatter = new CollectionFormatter() ;
-
 }

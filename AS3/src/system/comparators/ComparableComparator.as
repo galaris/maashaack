@@ -36,14 +36,13 @@
 package system.comparators
 {
     import system.Comparable;
-    import system.Comparator;    
-
+    import system.Comparator;
+    
     /**
      * A Comparator that compares object if one of them is a Comparable object.
      */
     public class ComparableComparator implements Comparator
     {
-        
         /**
          * Creates a new ComparableComparator instance.
          * This constructor whose use should be avoided.
@@ -68,7 +67,7 @@ package system.comparators
         {
             if ( o1 is Comparable )
             {
-                return (o1 as Comparable).compareTo(o2) ;    
+                return (o1 as Comparable).compareTo(o2) ;
             }
             else if ( o2 is Comparable )
             {
@@ -76,9 +75,8 @@ package system.comparators
             }
             else
             {
-                throw new ArgumentError(this + " compare method failed, the o1 or the o2 arguments are not a Comparable objects : " + o1 + "," + o2 ) ;    
+                throw new ArgumentError(this + " compare method failed, the o1 or the o2 arguments are not a Comparable objects : " + o1 + "," + o2 ) ;
             }
         }
-        
     }
 }

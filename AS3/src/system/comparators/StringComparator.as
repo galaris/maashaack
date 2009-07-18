@@ -35,8 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;        
-
+    import system.Comparator;
+    
     /**
      * This comparator compare String objects.
      * <p><b>Example :</b></p>
@@ -63,7 +63,6 @@ package system.comparators
      */
     public class StringComparator implements Comparator
     {
-        
         /**
          * Creates a new StringComparator instance.
          * @param ignoreCase a boolean to define if the comparator ignore case or not.
@@ -72,7 +71,7 @@ package system.comparators
         {
             this.ignoreCase = ignoreCase ;
         }
-
+        
         /**
          * Allow to take into account the case for comparison.
          */
@@ -93,18 +92,15 @@ package system.comparators
         {
             o1 = o1.toString() ;
             o2 = o2.toString() ;
-            
             if ( options is Boolean )
             {
                 ignoreCase = options ;
             }
-
             if( ignoreCase )
             {
                 o1 = o1.toLowerCase() ;
                 o2 = o2.toLowerCase() ;
             }
-            
             if( o1 == o2 )
             {
                 return 0;
@@ -152,7 +148,6 @@ package system.comparators
             {
                 return - 1;
             }
-  
         }
         
         /**
@@ -164,7 +159,7 @@ package system.comparators
         {
             if ( _comparator == null )
             {
-                _comparator = new StringComparator(false) ;    
+                _comparator = new StringComparator(false) ;
             }
             return _comparator ;
         }
@@ -178,7 +173,7 @@ package system.comparators
         {
             if ( _ignoreCaseComparator == null )
             {
-                _ignoreCaseComparator = new StringComparator( true ) ;    
+                _ignoreCaseComparator = new StringComparator( true ) ;
             }
             return _ignoreCaseComparator ;
         }
@@ -187,12 +182,10 @@ package system.comparators
          * The internal Case StringComparator.
          */
         private static var _comparator:StringComparator ;
-
+        
         /**
          * The internal ignoreCase StringComparator.
          */
         private static var _ignoreCaseComparator:StringComparator ;
-        
     }
-
 }

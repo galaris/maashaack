@@ -35,8 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;                            
-
+    import system.Comparator;
+    
     /**
      * This comparator compare String objects with an alphabetic order.
      * <p><b>Example :</b></p>
@@ -62,7 +62,6 @@ package system.comparators
      */
     public class AlphaComparator implements Comparator
     {
-        
         /**
          * Creates a new AlphaComparator instance.
          * @param ignoreCase a boolean to define if the comparator ignore case or not.
@@ -73,7 +72,7 @@ package system.comparators
             _ccomp = new CharComparator() ;
             _ncomp = new NullComparator() ;
         }
-
+        
         /**
          * Allow to take into account the case for comparison.
          */
@@ -178,7 +177,5 @@ package system.comparators
          * @private
          */
         private var _ncomp:NullComparator ;
-        
     }
-
 }

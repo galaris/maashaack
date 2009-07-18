@@ -39,8 +39,8 @@ package system.data.bags
     import system.data.Collection;
     import system.data.List;
     import system.data.collections.ArrayCollection;
-    import system.data.maps.HashMap;    
-
+    import system.data.maps.HashMap;
+    
     /**
      * Implements Bag, using a HashMap to provide the data storage. This is the standard implementation of a bag.
      * <p><b>Example : </b></p>
@@ -97,7 +97,6 @@ package system.data.bags
      */
     public class HashBag extends CoreMapBag
     {
-        
         /**
          * Creates a new HashBag instance.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
@@ -106,7 +105,7 @@ package system.data.bags
         {
             super( new HashMap() , co ) ;
         }
-    
+        
         /**
          * Returns the shallow copy of this bag.
          * @return the shallow copy of this bag.
@@ -129,8 +128,7 @@ package system.data.bags
                 source += li.toSource() ;
             } 
             source += ")" ;
-            return source ;            
+            return source ;
         }
-        
     }
 }

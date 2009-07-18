@@ -35,8 +35,8 @@
 
 package system.comparators
 {
-    import system.Comparator;                
-
+    import system.Comparator;
+    
     /**
      * This comparator compare Date objects.
      * <p><b>Example :</b></p>
@@ -61,7 +61,6 @@ package system.comparators
      */
     public class DateComparator implements Comparator
     {
-        
         /**
          * Creates a new DateComparator instance.
          */
@@ -101,6 +100,5 @@ package system.comparators
          * @private
          */
         private static var _comp:NumberComparator ;
-        
     }
 }
