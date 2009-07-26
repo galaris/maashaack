@@ -96,7 +96,10 @@ package system
             suite.addTest( system.serializers.AllTests.suite() );
             
             //data
-            suite.addTest( system.data.AllTests.suite() );
+            if( Environment.host.id != HostID.RedTamarin )
+            {
+                suite.addTest( system.data.AllTests.suite() );
+            }
             
             //comparators
             suite.addTest( system.comparators.AllTests.suite() );
