@@ -35,11 +35,10 @@
 
 package system.samples 
 {
-    import system.Comparable;        
-
+    import system.Comparable ;
+    
     public class ComparableClass implements Comparable 
     {
-        
         public function ComparableClass( value:int = 0 )
         {
             this.value = value ;

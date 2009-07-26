@@ -33,9 +33,8 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.errors 
+package system.errors
 {
-
     /**
      * The error throws when methods that have detected concurrent modification of an object when such modification is not permissible.
      */
