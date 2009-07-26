@@ -40,15 +40,17 @@ package system
      */
     public class Enum implements Serializable
     {
-        /**
-         * @private
-         */
-        private var _name:String ;
+        use namespace hack ;
         
         /**
          * @private
          */
-        private var _value:int ;
+        hack var _name:String ;
+        
+        /**
+         * @private
+         */
+        hack var _value:int ;
         
         /**
          * Creates a new Enum instance.
@@ -70,7 +72,7 @@ package system
             var classname:String = Reflection.getClassName( this );
             if( _name != "" )
             {
-                return classname + "." + _name;
+                return classname + "." + _name ;
             }
             return classname;
         }
