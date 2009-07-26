@@ -61,6 +61,10 @@ package system
             assertEquals( pixels.position , clone.position , "02 - ByteArrays.clone failed.") ;
         }
         
+        /* note:
+           ByteArray clear() is FP10 only
+        */
+        /*
         public function testEquals():void
         {
             var bmd:BitmapData = new BitmapData(80, 40, true);
@@ -75,5 +79,6 @@ package system
             pixels.clear() ;
             assertTrue( ByteArrays.equals( clone, pixels ) , "03 - ByteArrays.equals failed.") ;
         }
+        */
     }
 }
