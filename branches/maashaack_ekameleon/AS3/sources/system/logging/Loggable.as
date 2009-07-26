@@ -33,33 +33,21 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging
 {
-    import system.Comparable ;
-    
-    public class ComparableClass implements Comparable 
+    /**
+     * Implementing this interface allows an object who use a <code class="prettyprint">Logger</code> object.
+     */
+    public interface Loggable 
     {
-        public function ComparableClass( value:int = 0 )
-        {
-            this.value = value ;
-        }
+        /**
+         * Determinates the internal <code class="prettyprint">Logger</code> reference of this <code class="prettyprint">Loggable</code> object.
+         */
+        function get logger():Logger ;
         
-        public var value:int ;
-        
-        public function compareTo( o:* ):int
-        {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
-        }
+        /**
+         * @private
+         */
+        function set logger( log:Logger ):void ;
     }
 }

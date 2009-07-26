@@ -36,27 +36,24 @@
 package
 {
     import buRRRn.ASTUce.*;
-    
-    import libraries.zip.AllTests;
-    
+
     import system.console;
+    import system.logging.AllTests;
     import system.ui.TextFieldConsole;
-    
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.text.TextField;
-    import flash.text.TextFormat;    
+    import flash.text.TextFormat;
 
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
-
+    
     public class Framework_X_TestRunner extends Sprite
     {
-        
         public function Framework_X_TestRunner()
         {
-            
             // init
             
             stage.align     = StageAlign.TOP_LEFT;
@@ -73,26 +70,25 @@ package
             stage.addEventListener( Event.RESIZE , resize ) ;
             resize() ;
             
-            console = new TextFieldConsole( textfield ) ;            
+            console = new TextFieldConsole( textfield ) ;
             
             system.config.serializer.prettyPrinting = false;
-			
+            
             //tests
             
-            buRRRn.ASTUce.config.maxColumn = 64 ;
-            buRRRn.ASTUce.config.showConstructorList = false;
+            buRRRn.ASTUce.config.maxColumn           = 64 ;
+            buRRRn.ASTUce.config.showConstructorList = false ;
             
             Runner.main
             ( 
                 AllTests.suite() 
             );
-            
         }
             
         /**
          * The debug textfield of this application.
          */
-        public var textfield:TextField ;            
+        public var textfield:TextField ;
         
         /**
          * Invoked to resize the application content.
@@ -101,10 +97,6 @@ package
         {
             textfield.width  = stage.stageWidth ;
             textfield.height = stage.stageHeight ;
-        }        
-            
+        }
     }
-        
 }
-
-

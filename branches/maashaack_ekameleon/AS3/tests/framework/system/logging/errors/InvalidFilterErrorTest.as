@@ -33,33 +33,41 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging.errors 
 {
-    import system.Comparable ;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class ComparableClass implements Comparable 
+    import system.errors.InvalidFilterError;
+    
+    public class InvalidFilterErrorTest extends TestCase 
     {
-        public function ComparableClass( value:int = 0 )
+        public function InvalidFilterErrorTest(name:String = "")
         {
-            this.value = value ;
+            super(name);
         }
         
-        public var value:int ;
-        
-        public function compareTo( o:* ):int
+        public function testConstructor():void
         {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
+            var e:InvalidFilterError = new InvalidFilterError() ;
+            assertNotNull( e , "The InvalidFilterError constructor failed." ) ;
+        }
+        
+        public function testErrorID():void
+        {
+            var e:InvalidFilterError = new InvalidFilterError("message", 0) ;
+            assertEquals( e.errorID , 0 , "InvalidFilterError errorID property failed.") ;
+        } 
+        
+        public function testMessage():void
+        {
+            var e:InvalidFilterError = new InvalidFilterError("message", 0) ;
+            assertEquals( e.message , "message"  , "InvalidFilterError message property failed.") ;
+        }
+        
+        public function testName():void
+        {
+            var e:InvalidFilterError = new InvalidFilterError() ;
+            assertEquals( e.name , "InvalidFilterError"  , "InvalidFilterError name property failed.") ;
         }
     }
 }

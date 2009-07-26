@@ -33,33 +33,41 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging.errors 
 {
-    import system.Comparable ;
-    
-    public class ComparableClass implements Comparable 
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import system.errors.InvalidCategoryError;
+
+    public class InvalidCategoryErrorTest extends TestCase 
     {
-        public function ComparableClass( value:int = 0 )
+        public function InvalidCategoryErrorTest(name:String = "")
         {
-            this.value = value ;
+            super(name);
         }
         
-        public var value:int ;
-        
-        public function compareTo( o:* ):int
+        public function testConstructor():void
         {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
+            var e:InvalidCategoryError = new InvalidCategoryError() ;
+            assertNotNull( e , "The InvalidCategoryErrorTest constructor failed." ) ;
+        }
+        
+        public function testErrorID():void
+        {
+            var e:InvalidCategoryError = new InvalidCategoryError("message", 0) ;
+            assertEquals( e.errorID , 0 , "InvalidCategoryError errorID property failed.") ;
+        } 
+        
+        public function testMessage():void
+        {
+            var e:InvalidCategoryError = new InvalidCategoryError("message", 0) ;
+            assertEquals( e.message , "message"  , "InvalidCategoryError message property failed.") ;
+        }
+        
+        public function testName():void
+        {
+            var e:InvalidCategoryError = new InvalidCategoryError() ;
+            assertEquals( e.name , "InvalidCategoryError"  , "InvalidCategoryError name property failed.") ;
         }
     }
 }

@@ -33,33 +33,46 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging
 {
-    import system.Comparable ;
-    
-    public class ComparableClass implements Comparable 
+
+    /**
+     * All logger target implementations within the logging framework must implement this interface.
+     */
+    public interface LoggerTarget
     {
-        public function ComparableClass( value:int = 0 )
-        {
-            this.value = value ;
-        }
+        /**
+         * Determinates the filters array of this target. 
+         * <p>In addition to the level setting, filters are used to provide a psuedo-hierarchical mapping for processing only those events for a given category.</p>
+         */
+        function get filters():Array ;
         
-        public var value:int ;
+        /**
+         * @private
+         */
+        function set filters( value:Array ):void ;
         
-        public function compareTo( o:* ):int
-        {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
-        }
+        /**
+         * Determinates the level of this target. 
+         * Provides access to the level this target is currently set at.
+         */ 
+        function get level():LoggerLevel ;
+        
+        /**
+         * @private
+         */ 
+        function set level( value:LoggerLevel ):void ;
+        
+        /**
+         * Sets up this target with the specified logger.
+         * Note : this method is called by the framework and should not be called by the developer.
+         */
+        function addLogger(logger:Logger):void ;
+        
+        /**
+         * Stops this target from receiving events from the specified logger.
+         * Note : this method is called by the framework and should not be called by the developer.
+         */
+        function removeLogger(logger:Logger):void ;
     }
 }

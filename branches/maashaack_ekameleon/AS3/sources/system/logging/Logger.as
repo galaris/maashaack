@@ -33,33 +33,49 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging
 {
-    import system.Comparable ;
+    import flash.events.IEventDispatcher;
     
-    public class ComparableClass implements Comparable 
+    /**
+     * All loggers within the logging framework must implement this interface.
+     */
+    public interface Logger extends IEventDispatcher
     {
-        public function ComparableClass( value:int = 0 )
-        {
-            this.value = value ;
-        }
+        /**
+         * The category value for the logger.
+         * @return String containing the category for this logger.
+         */
+        function get category():String ;
         
-        public var value:int ;
+        /**
+         * Logs the specified data using the LogEventLevel.DEBUG level.
+         */
+         function debug( context:* , ...rest:Array ):void ;
         
-        public function compareTo( o:* ):int
-        {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
-        }
+        /**
+         * Logs the specified data using the LogEventLevel.ERROR level.
+         */
+        function error( context:* , ...rest:Array ):void ;
+        
+        /**
+         * Logs the specified data using the LogEventLevel.FATAL level.
+         */
+        function fatal( context:* , ...rest:Array ):void ;
+        
+        /**
+         * Logs the specified data using the LogEvent.INFO level.
+         */
+        function info( context:* , ...rest:Array ):void ;
+        
+        /**
+         * Logs the specified data at the given level.
+         */
+        function log( level:LoggerLevel,  context:* , ...rest:Array ):void ;
+        
+        /**
+         * Logs the specified data using the LogEventLevel.WARN level.
+         */
+        function warn( context:* , ...rest:Array ):void ;
     }
 }

@@ -33,33 +33,18 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.samples 
+package system.logging.errors
 {
-    import system.Comparable ;
+    import buRRRn.ASTUce.framework.*;
     
-    public class ComparableClass implements Comparable 
+    public class AllTests
     {
-        public function ComparableClass( value:int = 0 )
+        public static function suite():ITest
         {
-            this.value = value ;
-        }
-        
-        public var value:int ;
-        
-        public function compareTo( o:* ):int
-        {
-            if ( value < o )
-            {
-                return -1 ;
-            }
-            else if ( value > o )
-            {
-                return 1 ;
-            }
-            else
-            {
-                return 0 ;
-            }
+            var suite:TestSuite = new TestSuite("Maashaack data errors tests");
+            suite.addTestSuite( InvalidCategoryErrorTest ) ;
+            suite.addTestSuite( InvalidFilterErrorTest ) ;
+            return suite;
         }
     }
 }
