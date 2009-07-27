@@ -48,9 +48,9 @@ package system.logging.samples
             //
         }
         
-        public function get category():String
+        public function get channel():String
         {
-            return "category" ;
+            return "channel" ;
         }
         
         public function debug(context:*, ...rest:Array):void

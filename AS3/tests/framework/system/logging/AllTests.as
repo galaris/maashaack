@@ -37,16 +37,17 @@ package system.logging
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
+
     import system.logging.errors.AllTests;
     import system.logging.events.AllTests;
-    
+
     public class AllTests
     {
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite( "system.logging package" );
             
+            suite.addTestSuite( InternalLoggerTest ) ;
             suite.addTestSuite( LoggableTest ) ;
             suite.addTestSuite( LoggerTest ) ;
             suite.addTestSuite( LoggerLevelTest ) ;
