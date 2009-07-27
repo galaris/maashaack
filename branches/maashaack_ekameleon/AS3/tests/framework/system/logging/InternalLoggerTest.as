@@ -33,48 +33,21 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging
+package system.logging 
 {
-    import flash.events.IEventDispatcher;
-    
-    /**
-     * All loggers within the logging framework must implement this interface.
-     */
-    public interface Logger extends IEventDispatcher
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class InternalLoggerTest extends TestCase 
     {
-        /**
-         * Indicates the channel value for the logger.
-         */
-        function get channel():String ;
+        public function InternalLoggerTest(name:String = "")
+        {
+            super(name);
+        }
         
-        /**
-         * Logs the specified data using the LogEventLevel.DEBUG level.
-         */
-         function debug( context:* , ...rest:Array ):void ;
-        
-        /**
-         * Logs the specified data using the LogEventLevel.ERROR level.
-         */
-        function error( context:* , ...rest:Array ):void ;
-        
-        /**
-         * Logs the specified data using the LogEventLevel.FATAL level.
-         */
-        function fatal( context:* , ...rest:Array ):void ;
-        
-        /**
-         * Logs the specified data using the LogEvent.INFO level.
-         */
-        function info( context:* , ...rest:Array ):void ;
-        
-        /**
-         * Logs the specified data at the given level.
-         */
-        function log( level:LoggerLevel,  context:* , ...rest:Array ):void ;
-        
-        /**
-         * Logs the specified data using the LogEventLevel.WARN level.
-         */
-        function warn( context:* , ...rest:Array ):void ;
+        public function testConstructor():void
+        {
+            var logger:InternalLogger = new InternalLogger("channel") ;
+            assertNotNull( logger , "InternalLogger constructor failed." ) ;
+        }
     }
 }

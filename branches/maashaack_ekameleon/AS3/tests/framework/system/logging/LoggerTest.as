@@ -52,10 +52,10 @@ package system.logging
             assertNotNull( logger , "Logger interface failed.") ;
         }
         
-        public function testCategory():void
+        public function testChannel():void
         {
             var logger:Logger = new LoggerClass() ;
-            assertEquals( logger.category, "category" , "Logger.category property failed." ) ;
+            assertEquals( logger.channel, "channel" , "Logger.category property failed." ) ;
         }
     }
 }
