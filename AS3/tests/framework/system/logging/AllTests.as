@@ -39,12 +39,13 @@ package system.logging
     import buRRRn.ASTUce.framework.TestSuite;
     
     import system.logging.errors.AllTests;
+    import system.logging.events.AllTests;
     
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite( "test the system.logging package" );
+            var suite:TestSuite = new TestSuite( "system.logging package" );
             
             suite.addTestSuite( LoggableTest ) ;
             suite.addTestSuite( LoggerTest ) ;
@@ -53,6 +54,9 @@ package system.logging
             
             // system.logging.errors
             suite.addTest( system.logging.errors.AllTests.suite() );
+            
+            // system.logging.events
+            suite.addTest( system.logging.events.AllTests.suite() );
             
             return suite;
         }
