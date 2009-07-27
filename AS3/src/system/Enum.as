@@ -40,17 +40,15 @@ package system
      */
     public class Enum implements Serializable
     {
-        use namespace hack ;
+        /**
+         * @private
+         */
+        protected var _name:String ;
         
         /**
          * @private
          */
-        hack var _name:String ;
-        
-        /**
-         * @private
-         */
-        hack var _value:int ;
+        protected var _value:int ;
         
         /**
          * Creates a new Enum instance.
