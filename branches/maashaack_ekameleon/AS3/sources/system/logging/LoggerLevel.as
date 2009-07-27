@@ -37,15 +37,13 @@ package system.logging
 {
     import system.Enum;
     import system.Equatable;
-    import system.hack;
+    import system.Reflection;
 
     /**
      * Static class containing constants for use in the level  property.
      */
     public class LoggerLevel extends Enum implements Equatable
     {
-        use namespace hack ;
-        
         /**
          * Creates a new LoggerLevel instance.
          * @param value The value of the enumeration.
@@ -130,7 +128,12 @@ package system.logging
          */
         public override function toSource( indent:int = 0 ):String  
         { 
-            return 'new system.logging.LoggerLevel("' + this._name + '",' + this._value + ')' ;
+            var classPath:String = Reflection.getClassPath( this );
+            if( _name != "" )
+            {
+                return classPath + "." + _name ;
+            }
+            return classPath ;
         }
     }
 }

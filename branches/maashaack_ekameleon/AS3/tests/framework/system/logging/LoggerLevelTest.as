@@ -36,7 +36,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.logging 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
+    import system.Enum;
+    
     public class LoggerLevelTest extends TestCase 
     {
         public function LoggerLevelTest( name:String = "" )
@@ -50,6 +52,12 @@ package system.logging
             assertNotNull( enum , "01 - LoggerLevel constructor failed.") ;
             assertEquals( enum.toString() , "test" , "02 - LoggerLevel constructor failed, the toString() method of the LoggerLevel class failed.") ;
             assertEquals( enum.valueOf() , 999999 , "03 - LoggerLevel constructor failed, the valueOf() method of the LoggerLevel class failed.") ;
+        }
+        
+        public function testInherit():void
+        {
+            var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
+            assertTrue( enum is Enum , "Must inherit the Enum class.") ;
         }
         
         public function testALL():void
@@ -80,6 +88,33 @@ package system.logging
         public function testWARN():void
         {
             assertEquals( LoggerLevel.WARN, new LoggerLevel( 6 , "WARN" ) , "LoggerLevel.WARN failed.") ;
+        }
+        
+        public function testEquals():void
+        {
+            var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
+            assertTrue( enum.equals( new LoggerLevel(999999 , "test") ) , "equals method failed." ) ;
+        }
+        
+        public function testIsValidLevel():void
+        {
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.ALL   ) , "01 - LoggerLevel.ALL is invalid"   ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.DEBUG ) , "02 - LoggerLevel.DEBUG is invalid" ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.ERROR ) , "03 - LoggerLevel.ERROR is invalid" ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.FATAL ) , "04 - LoggerLevel.FATAL is invalid" ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.INFO  ) , "05 - LoggerLevel.INFO is invalid"  ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.WARN  ) , "06 - LoggerLevel.WARN is invalid"  ) ;
+            assertFalse( LoggerLevel.isValidLevel( new LoggerLevel(55,"TEST") ) , "07 - Custom LoggerLevel is invalid"  ) ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( LoggerLevel.ALL.toSource()   , "system.logging.LoggerLevel.ALL"   , "01 - LoggerLevel.ALL toSource() failed."   ) ;
+            assertEquals( LoggerLevel.DEBUG.toSource() , "system.logging.LoggerLevel.DEBUG" , "02 - LoggerLevel.DEBUG toSource() failed." ) ;
+            assertEquals( LoggerLevel.ERROR.toSource() , "system.logging.LoggerLevel.ERROR" , "03 - LoggerLevel.ERROR toSource() failed." ) ;
+            assertEquals( LoggerLevel.FATAL.toSource() , "system.logging.LoggerLevel.FATAL" , "04 - LoggerLevel.FATAL toSource() failed." ) ;
+            assertEquals( LoggerLevel.INFO.toSource()  , "system.logging.LoggerLevel.INFO"  , "05 - LoggerLevel.INFO toSource() failed."  ) ;
+            assertEquals( LoggerLevel.WARN.toSource()  , "system.logging.LoggerLevel.WARN"  , "06 - LoggerLevel.WARN toSource() failed."  ) ;
         }
     }
 }

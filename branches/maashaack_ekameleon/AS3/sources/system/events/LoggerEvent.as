@@ -33,65 +33,74 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system
+package system.events
 {
+    import system.logging.LoggerLevel;
+    
+    import flash.events.Event;
+    
     /**
-     * This class determinates a basic implementation to creates enumeration objects.
+     * Represents the log information for a single logging event. 
+     * The loging system dispatches a single event each time a process requests information be logged. 
+     * This event can be captured by any object for storage or formatting.
      */
-    public class Enum implements Serializable
+    public class LoggerEvent extends Event
     {
         /**
-         * @private
+         * Creates a new LoggerEvent.
+         * @param message The context or message of the log.
+         * @param level The level of the log.
          */
-        protected var _name:String ;
-        
-        /**
-         * @private
-         */
-        protected var _value:int ;
-        
-        /**
-         * Creates a new Enum instance.
-         * @param value The value of the enumeration.
-         * @param name The name key of the enumeration.
-         */
-        public function Enum( value:int = 0 , name:String = "" )
+        public function LoggerEvent( message:* , level:LoggerLevel )
         {
-            _value = value ;
-            _name  = name  ;
+            super( LoggerEvent.LOG , false , false ) ;
+            this.message = message ;
+            this.level   = (level == null) ? LoggerLevel.ALL : level ;
         }
         
         /**
-         * Returns the source code String representation of the object.
-         * @return the source code String representation of the object.
+         * The default string level value in the getLevelString() method.
          */
-        public function toSource( indent:int = 0 ):String
+        public static var DEFAULT_LEVEL_STRING:String = "UNKNOWN" ;
+        
+        /**
+         * Event type constant, identifies a logging event.
+         */
+        public static const LOG:String = "log";
+        
+        /**
+         * Provides access to the level for this log event.
+         */
+        public var level:LoggerLevel ;
+        
+        /**
+         * Provides access to the message that was logged.
+         */
+        public var message:* ;
+        
+        /**
+         * Returns the shallow copy of the event.
+         * @return the shallow copy of the LogEvent event.
+         */
+        public override function clone():Event
         {
-            var classname:String = Reflection.getClassName( this );
-            if( _name != "" )
+            return new LoggerEvent( message , level );
+        }
+        
+        /**
+         * Returns a String value representing the level specified.
+         * @return a String value representing the level specified.
+         */
+        public static function getLevelString( value:LoggerLevel ):String
+        {
+            if ( LoggerLevel.isValidLevel(value) )
             {
-                return classname + "." + _name ;
+                return value.toString() ;
             }
-            return classname;
-        }
-        
-        /**
-         * Returns the String representation of the object.
-         * @return the String representation of the object.
-         */
-        public function toString():String
-        {
-            return _name;
-        }
-        
-        /**
-         * Returns the primitive value of the object.
-         * @return the primitive value of the object.
-         */
-        public function valueOf():int
-        {
-            return _value;
+            else
+            {
+                return DEFAULT_LEVEL_STRING ;
+            }
         }
     }
 }
-

@@ -33,65 +33,17 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system
+package system.logging.events
 {
-    /**
-     * This class determinates a basic implementation to creates enumeration objects.
-     */
-    public class Enum implements Serializable
+    import buRRRn.ASTUce.framework.*;
+    
+    public class AllTests
     {
-        /**
-         * @private
-         */
-        protected var _name:String ;
-        
-        /**
-         * @private
-         */
-        protected var _value:int ;
-        
-        /**
-         * Creates a new Enum instance.
-         * @param value The value of the enumeration.
-         * @param name The name key of the enumeration.
-         */
-        public function Enum( value:int = 0 , name:String = "" )
+        public static function suite():ITest
         {
-            _value = value ;
-            _name  = name  ;
-        }
-        
-        /**
-         * Returns the source code String representation of the object.
-         * @return the source code String representation of the object.
-         */
-        public function toSource( indent:int = 0 ):String
-        {
-            var classname:String = Reflection.getClassName( this );
-            if( _name != "" )
-            {
-                return classname + "." + _name ;
-            }
-            return classname;
-        }
-        
-        /**
-         * Returns the String representation of the object.
-         * @return the String representation of the object.
-         */
-        public function toString():String
-        {
-            return _name;
-        }
-        
-        /**
-         * Returns the primitive value of the object.
-         * @return the primitive value of the object.
-         */
-        public function valueOf():int
-        {
-            return _value;
+            var suite:TestSuite = new TestSuite("system.events logging package");
+            suite.addTestSuite( LoggerEventTest ) ;
+            return suite;
         }
     }
 }
-
