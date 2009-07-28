@@ -111,43 +111,43 @@ package system.process.mocks
         /**
          * Indicates if the ActionEvent.PROGRESS event is invoked.
          */
-        public var progressCalled:Boolean ;           
-
+        public var progressCalled:Boolean ;
+        
         /**
          * Indicates the type of the progress event notification.
-         */     
+         */
         public var progressType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.RESUME event is invoked.
          */
-        public var resumeCalled:Boolean ;           
-
+        public var resumeCalled:Boolean ;
+        
         /**
          * Indicates the type of the resume event notification.
-         */     
+         */
         public var resumeType:String ;
         
         /**
          * Indicates if the ActionEvent.STOP event is invoked.
          */
         public var stopCalled:Boolean ;
-
+        
         /**
          * Indicates the type of the stop event notification.
-         */     
+         */
         public var stopType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.TIMEOUT event is invoked.
          */
         public var timeoutCalled:Boolean ;
-
+        
         /**
          * Indicates the type of the timeout event notification.
-         */     
+         */
         public var timeoutType:String ;
-
+        
         /**
          * Invoked when the ActionEvent.CHANGED event is dispatched.
          */
@@ -156,7 +156,7 @@ package system.process.mocks
             changeCalled = true ;
             changeType   = e.type ;
         }
-
+        
         /**
          * Invoked when the ActionEvent.CLEAR event is dispatched.
          */
@@ -174,7 +174,7 @@ package system.process.mocks
             infoCalled = true ;
             infoType   = e.type ;
             infoObject = e.info ;
-        }       
+        }
         
         /**
          * Invoked when the ActionEvent.INFO event is dispatched.
@@ -183,7 +183,7 @@ package system.process.mocks
         {
             loopCalled = true ;
             loopType   = e.type ;
-        }              
+        }
        
         /**
          * Invoked when the ActionEvent.PAUSE event is dispatched.
@@ -192,7 +192,7 @@ package system.process.mocks
         {
             pauseCalled = true ;
             pauseType   = e.type ;
-        }          
+        }
        
         /**
          * Invoked when the ActionEvent.PROGRESS event is dispatched.
@@ -201,8 +201,8 @@ package system.process.mocks
         {
             progressCalled = true ;
             progressType   = e.type ;
-        }          
-
+        }
+        
         /**
          * Invoked when the ActionEvent.RESUME event is dispatched.
          */
@@ -211,7 +211,7 @@ package system.process.mocks
             resumeCalled = true ;
             resumeType   = e.type ;
         }
-               
+        
         /**
          * Invoked when the ActionEvent.STOP event is dispatched.
          */
@@ -228,16 +228,14 @@ package system.process.mocks
         {
             timeoutCalled = true ;
             timeoutType   = e.type ;
-        }        
-            
+        }
+        
         /**
          * Registers all events of the object.
          */
         public override function register( action:Action ):void
         {
-            
             super.register( action ) ;
-            
             action.addEventListener( ActionEvent.CHANGE    , onChange    , false , 0 , true ) ;
             action.addEventListener( ActionEvent.CLEAR     , onClear     , false , 0 , true ) ;
             action.addEventListener( ActionEvent.INFO      , onInfo      , false , 0 , true ) ;
@@ -247,9 +245,8 @@ package system.process.mocks
             action.addEventListener( ActionEvent.RESUME    , onResume    , false , 0 , true ) ;
             action.addEventListener( ActionEvent.STOP      , onStop      , false , 0 , true ) ;
             action.addEventListener( ActionEvent.TIMEOUT   , onTimeOut   , false , 0 , true ) ;
-            
         }
-                
+        
         /**
          * Unregisters all events of the action register in this mock.
          */
@@ -268,8 +265,6 @@ package system.process.mocks
                 action.removeEventListener( ActionEvent.TIMEOUT   , onTimeOut  , false ) ;
                 super.unregister() ;
             }
-        }    
-    
+        }
     }
-
 }

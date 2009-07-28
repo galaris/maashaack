@@ -35,16 +35,15 @@
 
 package system.process.mocks 
 {
-    import system.events.ActionEvent;
-    import system.process.Action;
-    import system.process.Task;    
-
+    import system.events.ActionEvent ;
+    import system.process.Action ;
+    import system.process.Task ;
+    
     /**
      * This Mock object listen all events dispatched from a Action object.
      */
     public class MockTaskListener 
     {
-    
         /**
          * Creates a new MockSimpleActionListener instance.
          * @param action The Action reference.
@@ -54,11 +53,11 @@ package system.process.mocks
             if ( action != null )
             {
                 register( action ) ;
-            }    
+            }
         }
         
         /**
-         * The IAction object to register and test.
+         * The Action object to register and test.
          */
         public var action:Action ;
          
@@ -92,7 +91,7 @@ package system.process.mocks
          */
         public function onFinish( e:ActionEvent ):void
         {
-            finishCalled = true ;
+            finishCalled = true   ;
             finishType   = e.type ;
         }
        
@@ -122,7 +121,7 @@ package system.process.mocks
             this.action.addEventListener( ActionEvent.FINISH , onFinish , false , 0 , true ) ;
             this.action.addEventListener( ActionEvent.START  , onStart , false , 0 , true ) ;
         }
-                
+        
         /**
          * Unregisters all events of the action register in this mock.
          */
@@ -134,7 +133,5 @@ package system.process.mocks
                 action.removeEventListener( ActionEvent.START  , onStart  , false ) ;
             }
         }
-        
     }
-
 }
