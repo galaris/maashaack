@@ -37,7 +37,7 @@ package system.logging.targets
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-
+    
     public class AllTests
     {
         public static function suite():ITest
@@ -45,6 +45,7 @@ package system.logging.targets
             var suite:TestSuite = new TestSuite( "system.logging.targets package" );
             
             suite.addTestSuite( CoreLoggerTargetTest ) ;
+            suite.addTestSuite( LineFormattedTargetTest ) ;
             
             return suite;
         }

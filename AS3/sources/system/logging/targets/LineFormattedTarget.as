@@ -104,11 +104,11 @@ package system.logging.targets
          */
         public override function logEvent( event:LoggerEvent ):void
         {
-            var message:* = event.message ;
+            var message:*      = event.message ;
             var level:String   = LoggerEvent.getLevelString( event.level ) ;
             var channel:String = event.currentTarget.channel ;
-            message = formatMessage( message, level, channel , new Date() ) ;
-            internalLog ( message , event.level ) ;
+            message            = formatMessage( message, level, channel , new Date() ) ;
+            internalLog( message , event.level ) ;
         }
         
         /**
@@ -173,7 +173,7 @@ package system.logging.targets
         /**
          * This method format the current Date passed in argument.
          */
-        protected function formatTime(d:Date):String 
+        protected function formatTime( d:Date ):String 
         {
             var time:String = "" ;
             time += getDigit(d.getHours()) ;
