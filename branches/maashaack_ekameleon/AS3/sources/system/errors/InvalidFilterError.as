@@ -30,7 +30,7 @@ package system.errors
     {
        	/**
          * Creates a new InvalidFilterError instance.
-         * @param message A string associated with the ConcurrencyError object ; this parameter is optional.
+         * @param message A string associated with the InvalidFilterError object ; this parameter is optional.
          * @param id A reference number to associate with the specific error message.
          */
         public function InvalidFilterError( message:String = "" , id:int = 0 )

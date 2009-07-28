@@ -33,37 +33,41 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging  
+package examples 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import system.logging.Log;
+    import system.logging.Logger;
+    import system.logging.LoggerLevel;
+    import system.logging.targets.TraceTarget;
     
-    import system.logging.errors.AllTests;
-    import system.logging.events.AllTests;
-    import system.logging.targets.AllTests;
+    import flash.display.Sprite;
     
-    public class AllTests
+    public class TraceTargetExample extends Sprite 
     {
-        public static function suite():ITest
+        public function TraceTargetExample()
         {
-            var suite:TestSuite = new TestSuite( "system.logging package" );
+            // setup writer
+            var target:TraceTarget = new TraceTarget() ;
             
-            suite.addTestSuite( LogLoggerTest ) ;
-            suite.addTestSuite( LoggableTest ) ;
-            suite.addTestSuite( LoggerTest ) ;
-            suite.addTestSuite( LoggerLevelTest ) ;
-            suite.addTestSuite( LoggerTargetTest ) ;
+            target.includeDate    = true ;
+            target.includeTime    = true ;
+            target.includeLevel   = true ;
+            target.includeChannel = true ;
+            target.includeLines   = true ;
             
-            // system.logging.errors
-            suite.addTest( system.logging.errors.AllTests.suite() );
+            target.filters        = [ "system.*" ] ;
+            target.level          = LoggerLevel.ALL ;
             
-            // system.logging.events
-            suite.addTest( system.logging.events.AllTests.suite() );
+            var logger:Logger = Log.getLogger( "system.test.MyTest" ) ;
             
-            // system.logging.targets
-            suite.addTest( system.logging.targets.AllTests.suite() );
+            logger.log( LoggerLevel.DEBUG , "here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+            logger.fatal("Here is some fatal error...") ;
             
-            return suite;
+            target.includeDate    = false ;
+            target.includeTime    = false ;
+            target.includeChannel = false ;
+            
+            logger.info("[{0}, {1}, {2}]", 2, 4, 6) ;
         }
-	}
+    }
 }

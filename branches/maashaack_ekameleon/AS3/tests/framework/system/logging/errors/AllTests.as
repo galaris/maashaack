@@ -42,7 +42,7 @@ package system.logging.errors
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data errors tests");
-            suite.addTestSuite( InvalidCategoryErrorTest ) ;
+            suite.addTestSuite( InvalidChannelErrorTest ) ;
             suite.addTestSuite( InvalidFilterErrorTest ) ;
             return suite;
         }

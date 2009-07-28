@@ -33,35 +33,16 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging  
+package system.logging.targets
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
-    import system.logging.errors.AllTests;
-    import system.logging.events.AllTests;
-    import system.logging.targets.AllTests;
     
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite( "system.logging package" );
-            
-            suite.addTestSuite( LogLoggerTest ) ;
-            suite.addTestSuite( LoggableTest ) ;
-            suite.addTestSuite( LoggerTest ) ;
-            suite.addTestSuite( LoggerLevelTest ) ;
-            suite.addTestSuite( LoggerTargetTest ) ;
-            
-            // system.logging.errors
-            suite.addTest( system.logging.errors.AllTests.suite() );
-            
-            // system.logging.events
-            suite.addTest( system.logging.events.AllTests.suite() );
-            
-            // system.logging.targets
-            suite.addTest( system.logging.targets.AllTests.suite() );
+            var suite:TestSuite = new TestSuite( "system.logging.targets package" );
             
             return suite;
         }

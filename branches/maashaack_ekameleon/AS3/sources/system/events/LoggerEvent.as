@@ -93,7 +93,7 @@ package system.events
          */
         public static function getLevelString( value:LoggerLevel ):String
         {
-            if ( LoggerLevel.isValidLevel(value) )
+            if ( LoggerLevel.isValidLevel( value ) )
             {
                 return value.toString() ;
             }

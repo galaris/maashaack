@@ -33,46 +33,55 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging
+package system.logging 
 {
-
     /**
-     * All logger target implementations within the logging framework must implement this interface.
+     * The enumeration of all string expressions in the logger factory engine.
      */
-    public interface LoggerTarget
+    public class LoggerStrings 
     {
+        // LoggerTarget
+        
         /**
-         * Determinates the filters array of this target. 
-         * <p>In addition to the level setting, filters are used to provide a psuedo-hierarchical mapping for processing only those events for a given category.</p>
+         * The static field used when throws an Error when a character is invalid.
          */
-        function get filters():Array ;
+        public static var CHARS_INVALID:String = "The following characters are not valid\: []~$^&\/(){}<>+\=_-`!@#%?,\:;'\\" ;
         
         /**
-         * @private
+         * The static field used when throws an Error when the character placement failed.
          */
-        function set filters( value:Array ):void ;
+        public static var CHAR_PLACEMENT:String = "'*' must be the right most character." ;
         
         /**
-         * Determinates the level of this target. 
-         * Provides access to the level this target is currently set at.
-         */ 
-        function get level():LoggerLevel ;
-        
-        /**
-         * @private
-         */ 
-        function set level( value:LoggerLevel ):void ;
-        
-        /**
-         * Sets up this target with the specified logger.
-         * Note : this method is called by the framework and should not be called by the developer.
+         * The static field used when throws an Error when filter failed.
          */
-        function addLogger( logger:Logger ):void ;
+        public static var ERROR_FILTER:String = "Error for filter \''{0}'" ;
+        
+        // Log
         
         /**
-         * Stops this target from receiving events from the specified logger.
-         * Note : this method is called by the framework and should not be called by the developer.
+         * The default channel of the <code class="prettyprint">Logger</code> instances returns with the <code class="prettyprint">getLogger</code> method.
          */
-        function removeLogger( logger:Logger ):void ;
+        public static var DEFAULT_CHANNEL:String = "" ;
+        
+        /**
+         * The string representation of all the illegal characters.
+         */
+        public static var ILLEGALCHARACTERS:String = "[]~$^&/\\(){}<>+=`!#%?,:;'\"@" ;
+        
+        /**
+         * The static field used when throws an Error when a character is invalid.
+         */
+        public static var INVALID_CHARS:String = "Categories can not contain any of the following characters : []~$^&/\\(){}<>+=`!#%?,:;'\"@" ;
+        
+        /**
+         * The static field used when throws an Error when the length of one character is invalid.
+         */
+        public static var INVALID_LENGTH:String = "Categories must be at least one character in length." ;
+        
+        /**
+         * The static field used when throws an Error when the specified target is invalid.
+         */
+        public static var INVALID_TARGET:String = "Log, Invalid target specified." ;
     }
 }

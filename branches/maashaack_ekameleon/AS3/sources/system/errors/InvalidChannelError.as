@@ -24,19 +24,19 @@
 package system.errors
 {
     /**
-     * The error throws when an invalid category is find.
+     * The error throws when an invalid channel is find.
      */
-    public class InvalidCategoryError extends Error
+    public class InvalidChannelError extends Error
     {
         /**
-         * Creates a new InvalidCategoryError instance.
-         * @param message A string associated with the ConcurrencyError object ; this parameter is optional.
+         * Creates a new InvalidChannelError instance.
+         * @param message A string associated with the InvalidChannelError object ; this parameter is optional.
          * @param id A reference number to associate with the specific error message.
          */
-        public function InvalidCategoryError( message:String="", id:int=0 )
+        public function InvalidChannelError( message:String="", id:int=0 )
         {
             super( message , id ) ;
-            name = "InvalidCategoryError" ;
+            name = "InvalidChannelError" ;
         }
     }
 }
