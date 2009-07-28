@@ -43,9 +43,9 @@ package system.logging.targets
     import system.Strings;
     import system.errors.InvalidFilterError;
     import system.events.LoggerEvent;
-
+    
     import flash.events.EventDispatcher;
-
+    
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
@@ -131,7 +131,7 @@ package system.logging.targets
          * Insert a channel in the fllters if this channel don't exist.
          * Returns a boolean if the channel is add in the list.
          */
-        public function addChannel( channel:String ):Boolean 
+        public function addFilter( channel:String ):Boolean 
         {
             if ( _filters == null ) 
             {
@@ -173,7 +173,7 @@ package system.logging.targets
          * Remove a channel in the fllters if this channel exist.
          * @return a boolean if the channel is remove.
          */
-        public function removeChannel( channel:String ):Boolean
+        public function removeFilter( channel:String ):Boolean
         {
             var pos:int = _filters.indexOf( channel ) ;
             if ( pos > -1) 
