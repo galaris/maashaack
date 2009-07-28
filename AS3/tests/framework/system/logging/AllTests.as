@@ -47,7 +47,7 @@ package system.logging
         {
             var suite:TestSuite = new TestSuite( "system.logging package" );
             
-            suite.addTestSuite( InternalLoggerTest ) ;
+            suite.addTestSuite( LogLoggerTest ) ;
             suite.addTestSuite( LoggableTest ) ;
             suite.addTestSuite( LoggerTest ) ;
             suite.addTestSuite( LoggerLevelTest ) ;
