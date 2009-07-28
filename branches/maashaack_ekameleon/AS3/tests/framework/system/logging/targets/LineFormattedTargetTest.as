@@ -35,21 +35,20 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class CoreLoggerTargetTest extends TestCase
+    public class LineFormattedTargetTest extends TestCase 
     {
-        public function CoreLoggerTargetTest( name:String = "" )
+        public function LineFormattedTargetTest(name:String = "")
         {
             super(name);
         }
         
-        public var target:CoreLoggerTarget ;
+        public var target:LineFormattedTarget ;
         
         public function setUp():void
         {
-            target = new CoreLoggerTarget() ;
+            target = new LineFormattedTarget() ;
         }
         
         public function tearDown():void
@@ -62,20 +61,45 @@ package system.logging.targets
             assertNotNull( target , "Constructor failed.") ;
         }
         
-        public function testFilters():void
+        public function testIncludeChannel():void
         {
-            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
-            
-            target.filters = ["test"] ;
-            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
-            
-            target.filters = ["test", "system.*"] ;
-            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
-            
-            target.filters = null ;
-            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
-            
-            // TODO tests errors
+            assertFalse(target.includeChannel , "01 - includeChannel property failed.") ;
+            target.includeChannel = true ;
+            assertTrue(target.includeChannel , "02 - includeChannel property failed.") ;
         }
+        
+        public function testIncludeDate():void
+        {
+            assertFalse(target.includeDate , "01 - includeDate property failed.") ;
+            target.includeDate = true ;
+            assertTrue(target.includeDate , "02 - includeDate property failed.") ;
+        }
+        
+        public function testIncludeLevel():void
+        {
+            assertFalse(target.includeLevel , "01 - includeLevel property failed.") ;
+            target.includeLevel = true ;
+            assertTrue(target.includeLevel , "02 - includeLevel property failed.") ;
+        }
+        
+        public function testIncludeLines():void
+        {
+            assertFalse( target.includeLines , "01 - includeLines property failed." ) ;
+            target.includeLines = true ;
+            assertTrue( target.includeLines , "02 - includeLines property failed." ) ;
+        }
+        
+        public function testIncludeTime():void
+        {
+            assertFalse( target.includeTime , "01 - includeTime property failed." ) ;
+            target.includeTime = true ;
+            assertTrue( target.includeTime , "02 - includeTime property failed." ) ;
+        }
+        
+        public function testSeparator():void
+        {
+            assertEquals( target.separator , " ", "separator property failed." ) ;
+        }
+        
     }
 }
