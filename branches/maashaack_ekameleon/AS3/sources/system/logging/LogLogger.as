@@ -36,19 +36,19 @@
 package system.logging
 {
     import system.events.LoggerEvent;
-
+    
     import flash.events.EventDispatcher;
-
+    
     /**
      * The logger that is used within the logging framework. This class dispatches events for each message logged using the log() method.
      */
-    internal class InternalLogger extends EventDispatcher implements Logger
+    internal class LogLogger extends EventDispatcher implements Logger
     {
         /**
          * Creates a new LogLogger instance.
          * @param channel The channel value of the logger.
          */
-        public function InternalLogger( channel:String )
+        public function LogLogger( channel:String )
         {
             _channel = channel;
         }

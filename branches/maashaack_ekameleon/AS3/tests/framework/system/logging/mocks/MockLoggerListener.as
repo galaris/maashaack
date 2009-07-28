@@ -33,93 +33,79 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.process.mocks 
+package system.logging.mocks 
 {
-    import system.events.ActionEvent ;
-    import system.process.Action ;
-    import system.process.Task ;
+    import system.events.LoggerEvent;
+    import system.logging.Logger;
+    import system.logging.LoggerLevel;
     
     /**
-     * This Mock object listen all events dispatched from a Action object.
+     * This Mock object listen all events dispatched from a Logger object.
      */
-    public class MockTaskListener 
+    public class MockLoggerListener 
     {
         /**
-         * Creates a new MockSimpleActionListener instance.
+         * Creates a new MockLoggerListener instance.
          * @param action The Action reference.
          */
-        public function MockTaskListener( action:Action = null )
+        public function MockLoggerListener( logger:Logger = null )
         {
-            if ( action != null )
+            if ( logger != null )
             {
-                register( action ) ;
+                register( logger ) ;
             }
         }
         
         /**
-         * The Action object to register and test.
+         * The Logger object to register and test.
          */
-        public var action:Action ;
+        public var logger:Logger ;
          
         /**
-         * Indicates if the ActionEvent.FINISH event is invoked.
+         * Indicates if the LoggerEvent.LOG event is invoked.
          */
-        public var finishCalled:Boolean ;
+        public var called:Boolean ;
         
         /**
-         * Indicates the type of the finish event notification.
-         */     
-        public var finishType:String ;
-        
-        /**
-         * Indicates if the Action owner object is running during the process.
+         * Indicates the level of the log.
          */
-        public var isRunning:Boolean ;
+        public var level:LoggerLevel ;
         
         /**
-         * Indicates if the ActionEvent.CALLED event is invoked.
+         * Indicates the message object dispatched.
          */
-        public var startCalled:Boolean ;
+        public var message:* ;
         
         /**
-         * Indicates the type of the start event notification.
-         */     
-        public var startType:String ;
-        
-        /**
-         * Invoked when the ActionEvent.FINISH event is dispatched.
+         * Indicates the type of the "log" event notification.
          */
-        public function onFinish( e:ActionEvent ):void
+        public var type:String ;
+        
+        /**
+         * Invoked when the LoggerEvent.LOG event is dispatched.
+         */
+        public function logHandler( e:LoggerEvent ):void
         {
-            finishCalled = true   ;
-            finishType   = e.type ;
-        }
-       
-        /**
-         * Invoked when the ActionEvent.FINISH event is dispatched.
-         */
-        public function onStart( e:ActionEvent ):void
-        {
-            startCalled = true ;
-            startType   = e.type ;
-            if ( action is Task )
-            {
-                isRunning = (action as Task).running ;
-            }
+            called  = true      ;
+            level   = e.level   ;
+            message = e.message ;
+            type    = e.type    ;
         }
         
         /**
          * Registers all events of the object.
          */
-        public function register( action:Action ):void
+        public function register( logger:Logger ):void
         {
-            if ( this.action != null )
+            if ( this.logger != null )
             {
                 unregister() ;
             }
-            this.action = action ;
-            this.action.addEventListener( ActionEvent.FINISH , onFinish , false , 0 , true ) ;
-            this.action.addEventListener( ActionEvent.START  , onStart , false , 0 , true ) ;
+            this.logger = logger ;
+            if ( this.logger != null )
+            {
+                this.logger.addEventListener( LoggerEvent.LOG , logHandler , false , 0 , true ) ;
+            }
         }
         
         /**
@@ -127,10 +113,9 @@ package system.process.mocks
          */
         public function unregister():void
         {
-            if ( action != null )
+            if ( this.logger != null )
             {
-                action.removeEventListener( ActionEvent.FINISH , onFinish , false ) ;
-                action.removeEventListener( ActionEvent.START  , onStart  , false ) ;
+                this.logger.removeEventListener( LoggerEvent.LOG , logHandler ) ;
             }
         }
     }
