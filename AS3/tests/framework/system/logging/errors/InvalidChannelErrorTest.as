@@ -36,38 +36,38 @@
 package system.logging.errors 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.errors.InvalidCategoryError;
-
-    public class InvalidCategoryErrorTest extends TestCase 
+    
+    import system.errors.InvalidChannelError;
+    
+    public class InvalidChannelErrorTest extends TestCase 
     {
-        public function InvalidCategoryErrorTest(name:String = "")
+        public function InvalidChannelErrorTest(name:String = "")
         {
             super(name);
         }
         
         public function testConstructor():void
         {
-            var e:InvalidCategoryError = new InvalidCategoryError() ;
-            assertNotNull( e , "The InvalidCategoryErrorTest constructor failed." ) ;
+            var e:InvalidChannelError = new InvalidChannelError() ;
+            assertNotNull( e , "The InvalidChannelError constructor failed." ) ;
         }
         
         public function testErrorID():void
         {
-            var e:InvalidCategoryError = new InvalidCategoryError("message", 0) ;
-            assertEquals( e.errorID , 0 , "InvalidCategoryError errorID property failed.") ;
+            var e:InvalidChannelError = new InvalidChannelError("message", 0) ;
+            assertEquals( e.errorID , 0 , "InvalidChannelError errorID property failed.") ;
         } 
         
         public function testMessage():void
         {
-            var e:InvalidCategoryError = new InvalidCategoryError("message", 0) ;
-            assertEquals( e.message , "message"  , "InvalidCategoryError message property failed.") ;
+            var e:InvalidChannelError = new InvalidChannelError("message", 0) ;
+            assertEquals( e.message , "message"  , "InvalidChannelError message property failed.") ;
         }
         
         public function testName():void
         {
-            var e:InvalidCategoryError = new InvalidCategoryError() ;
-            assertEquals( e.name , "InvalidCategoryError"  , "InvalidCategoryError name property failed.") ;
+            var e:InvalidChannelError = new InvalidChannelError() ;
+            assertEquals( e.name , "InvalidChannelError"  , "InvalidChannelError name property failed.") ;
         }
     }
 }
