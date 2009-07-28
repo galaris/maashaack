@@ -33,20 +33,47 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.targets
+package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class CoreLoggerTargetTest extends TestCase
     {
-        public static function suite():ITest
+        public function CoreLoggerTargetTest( name:String = "" )
         {
-            var suite:TestSuite = new TestSuite( "system.logging.targets package" );
-            
-            suite.addTestSuite( CoreLoggerTargetTest ) ;
-            
-            return suite;
+            super(name);
         }
-	}
+        
+        public var target:CoreLoggerTarget ;
+        
+        public function setUp():void
+        {
+            target = new CoreLoggerTarget() ;
+        }
+        
+        public function tearDown():void
+        {
+            target = undefined  ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testFilters():void
+        {
+            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
+            
+            target.filters = ["test"] ;
+            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
+            
+            target.filters = ["test", "system.*"] ;
+            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
+            
+            target.filters = null ;
+            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
+        }
+    }
 }
