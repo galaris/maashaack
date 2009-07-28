@@ -101,5 +101,13 @@ package system.logging.targets
             assertEquals( target.separator , " ", "separator property failed." ) ;
         }
         
+//        use namespace hack ;
+//        
+//        public function testFormatDate():void
+//        {
+//            var date:Date     = new Date(2009,8,30,18,30,30,30);
+//            var source:String = target.formatDate(date) ;
+//            assertEquals( source , "30/07/2009" , "internal formatDate method failed.") ;
+//        }
     }
 }

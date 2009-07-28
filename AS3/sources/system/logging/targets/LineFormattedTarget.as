@@ -33,10 +33,10 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-
 package system.logging.targets
 {
     import system.events.LoggerEvent;
+    import system.hack;
     import system.logging.LoggerLevel;
     
     /**
@@ -44,6 +44,8 @@ package system.logging.targets
      */
     public class LineFormattedTarget extends CoreLoggerTarget
     {
+        use namespace hack ;
+        
         /**
          * Creates a new LineFormattedTarget instance.
          */
@@ -114,7 +116,7 @@ package system.logging.targets
         /**
          * This method format the passed Date in arguments.
          */
-        protected function formatDate( d:Date ):String 
+        hack function formatDate( d:Date ):String 
         {
             var date:String = "" ;
             date += getDigit(d.getDate()) ;
@@ -126,7 +128,7 @@ package system.logging.targets
         /**
          * This method format the passed level in arguments.
          */
-        protected function formatLevel(level:String):String 
+        hack function formatLevel(level:String):String 
         {
             return '[' + level + ']' ;
         }
@@ -134,7 +136,7 @@ package system.logging.targets
         /**
          * This method format the current line value.
          */
-        protected function formatLines():String 
+        hack function formatLines():String 
         {
             return "[" + _lineNumber++ + "]" ; 
         }
@@ -142,7 +144,7 @@ package system.logging.targets
         /**
          * This method format the log message.
          */
-        protected function formatMessage( message:* , level:String , channel:String , date:Date ):String 
+        hack function formatMessage( message:* , level:String , channel:String , date:Date ):String 
         {
             var msg:String = "" ;
             var d:Date = date || new Date ;
@@ -173,7 +175,7 @@ package system.logging.targets
         /**
          * This method format the current Date passed in argument.
          */
-        protected function formatTime( d:Date ):String 
+        hack function formatTime( d:Date ):String 
         {
             var time:String = "" ;
             time += getDigit(d.getHours()) ;
@@ -190,7 +192,7 @@ package system.logging.targets
          * Returns the string representation of a number and use digit conversion.
          * @return the string representation of a number and use digit conversion.
          */
-        protected function getDigit(n:Number):String 
+        hack function getDigit(n:Number):String 
         {
             if ( isNaN(n) ) 
             {
