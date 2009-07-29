@@ -60,6 +60,11 @@ package system.logging
             assertTrue( enum is Enum , "Must inherit the Enum class.") ;
         }
         
+        public function testNONE():void
+        {
+            assertEquals( LoggerLevel.NONE, new LoggerLevel(int.MAX_VALUE, "NONE" ) , "LoggerLevel.NONE failed.") ;
+        }
+        
         public function testALL():void
         {
             assertEquals( LoggerLevel.ALL, new LoggerLevel( 0 , "ALL" ) , "LoggerLevel.ALL failed.") ;

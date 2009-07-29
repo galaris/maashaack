@@ -68,9 +68,11 @@ package system.logging
         function info( context:* , ...rest:Array ):void ;
         
         /**
-         * Logs the specified data at the given level.
+         * Logs the specified data using the LogEvent.ALL level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function log( level:LoggerLevel,  context:* , ...rest:Array ):void ;
+        function log( context:*, ...rest ):void ;
         
         /**
          * Logs the specified data using the LogEventLevel.WARN level.

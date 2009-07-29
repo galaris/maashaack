@@ -55,11 +55,6 @@ package system.logging
         }
         
         /**
-         * A special level that can be used to turn off logging (-1).
-         */
-        public static const NONE:LoggerLevel = new LoggerLevel( -1 , "NONE" ) ;
-        
-        /**
          * Intended to force a target to process all messages (0).
          */
         public static const ALL:LoggerLevel = new LoggerLevel( 0 , "ALL" ) ;
@@ -83,6 +78,11 @@ package system.logging
          * Designates informational messages that highlight the progress of the application at coarse-grained level (4).
          */
         public static const INFO:LoggerLevel = new LoggerLevel( 4 , "INFO" ) ;
+        
+        /**
+         * A special level that can be used to turn off logging (int.MAX_VALUE).
+         */
+        public static const NONE:LoggerLevel = new LoggerLevel( int.MAX_VALUE , "NONE" ) ;
         
         /**
          * Designates events that could be harmful to the application operation (6).

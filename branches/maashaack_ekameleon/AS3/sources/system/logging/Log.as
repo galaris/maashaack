@@ -39,7 +39,7 @@ package system.logging
     import system.data.Iterator;
     import system.data.maps.HashMap;
     import system.errors.InvalidChannelError;
-
+    
     /**
      * Provides pseudo-hierarchical logging capabilities with multiple format and output options.
      */
@@ -66,14 +66,14 @@ package system.logging
                         target.addLogger( log ) ;
                     }
                 }
-                _targets.push(target);
-                if ( _targetLevel == NONE )
+                _targets.push( target );
+                if ( _targetLevel == LoggerLevel.NONE )
                 {
-                    _targetLevel = int( target.level ) ;
+                    _targetLevel = target.level ;
                 }
-                else if (target.level.valueOf() < _targetLevel)
+                else if ( int( target.level ) < int( _targetLevel ) )
                 {
-                    _targetLevel = int( target.level ) ;
+                    _targetLevel = target.level ;
                 }
             }
             else
@@ -91,7 +91,7 @@ package system.logging
         {
             _loggers.clear() ;
             _targets     = [] ;
-            _targetLevel = NONE ;
+            _targetLevel = LoggerLevel.NONE ;
         }
         
         /**
@@ -142,7 +142,7 @@ package system.logging
          */
         public static function isDebug():Boolean
         {
-            return _targetLevel <= int( LoggerLevel.DEBUG ) ;
+            return int(_targetLevel) <= int( LoggerLevel.DEBUG ) ;
         }
         
         /**
@@ -151,7 +151,7 @@ package system.logging
          */
         public static function isError():Boolean
         {
-            return _targetLevel <= int( LoggerLevel.ERROR ) ;
+            return int(_targetLevel) <= int( LoggerLevel.ERROR ) ;
         }
         
         /**
@@ -160,7 +160,7 @@ package system.logging
          */
         public static function isFatal():Boolean
         {
-            return _targetLevel <= int( LoggerLevel.FATAL ) ;
+            return int(_targetLevel) <= int( LoggerLevel.FATAL ) ;
         }
         
         /**
@@ -169,7 +169,7 @@ package system.logging
          */    
         public static function isInfo():Boolean
         {
-            return _targetLevel <= int( LoggerLevel.INFO ) ;
+            return int(_targetLevel) <= int( LoggerLevel.INFO ) ;
         }
             
         /**
@@ -178,7 +178,7 @@ package system.logging
          */
         public static function isWarn():Boolean
         {
-            return _targetLevel <= int( LoggerLevel.WARN ) ;
+            return int(_targetLevel) <= int( LoggerLevel.WARN ) ;
         }
         
         /**
@@ -225,14 +225,9 @@ package system.logging
         private static var _loggers:HashMap = new HashMap() ;
         
         /**
-         * Sentinal value for the target log level to indicate no logging.
-         */
-        private static var NONE:int = int.MAX_VALUE;
-        
-        /**
          *  The most verbose supported log level among registered targets.
          */
-        private static var _targetLevel:int = NONE ;
+        private static var _targetLevel:LoggerLevel = LoggerLevel.NONE ;
         
         /**
          *  Array of targets that should be searched any time a new logger is created.
@@ -245,7 +240,7 @@ package system.logging
          * @param filters A list of Strings to check category against.
          * @return <code class="prettyprint">true</code> if the specified category matches any of the filter expressions found in the filters list, <code class="prettyprint">false</code> otherwise.
          */
-        private static function channelMatchInFilterList(category:String, filters:Array):Boolean
+        private static function channelMatchInFilterList( channel:String , filters:Array):Boolean
         {
             var filter:String;
             var index:int = -1;
@@ -253,13 +248,13 @@ package system.logging
             for( var i:int ; i<len ; i++ )
             {
                 filter = filters[i] ;
-                index = filter.indexOf("*") ;
+                index  = filter.indexOf("*") ;
                 if(index == 0)
                 {
                     return true ;
                 }
-                index = (index < 0) ? index = category.length : index -1 ;
-                if( category.substring(0, index) == filter.substring(0, index) )
+                index = (index < 0) ? index = channel.length : index -1 ;
+                if( channel.substring(0, index) == filter.substring(0, index) )
                 {
                     return true ;
                 }
@@ -289,13 +284,15 @@ package system.logging
          */
         private static function resetTargetLevel():void
         {
-            var min:int = NONE ;
+            var t:LoggerTarget ;
+            var min:LoggerLevel = LoggerLevel.NONE ;
             var len:int = _targets.length ;
             for ( var i:int ; i < len ; i++ )
             {
-                if ( min == NONE || int( _targets[i].level ) < min )
+                t = _targets[i] as LoggerTarget ;
+                if ( ( min == LoggerLevel.NONE ) || ( int( t.level ) < int(min) ) )
                 {
-                    min = _targets[i].level ;
+                    min = t.level ;
                 }
             }
             _targetLevel = min ;
