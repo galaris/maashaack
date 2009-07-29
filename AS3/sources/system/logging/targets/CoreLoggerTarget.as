@@ -43,9 +43,9 @@ package system.logging.targets
     import system.logging.LoggerLevel;
     import system.logging.LoggerStrings;
     import system.logging.LoggerTarget;
-
+    
     import flash.events.EventDispatcher;
-
+    
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
@@ -77,20 +77,11 @@ package system.logging.targets
             if (value != null && value.length > 0)
             {
                 var filter:String ;
-                var index:int ;
                 var len:int = value.length ;
                 for ( var i:int ; i<len ; i++ )
                 {
                     filter = value[i] ;
-                    if ( Log.hasIllegalCharacters(filter) )
-                    {
-                         throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
-                    }
-                    index = filter.indexOf("*") ;
-                    if ((index >= 0) && (index != (filter.length -1)))
-                    {
-                        throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
-                    }
+                    _checkFilter( filter ) ;
                 }
             }
             else
@@ -133,6 +124,7 @@ package system.logging.targets
          */
         public function addFilter( channel:String ):Boolean 
         {
+            _checkFilter( channel ) ;
             if ( _filters == null ) 
             {
                 filters = [] ;
@@ -171,7 +163,7 @@ package system.logging.targets
         
         /**
          * Remove a channel in the fllters if this channel exist.
-         * @return a boolean if the channel is remove.
+         * @return a boolean if the channel is removed.
          */
         public function removeFilter( channel:String ):Boolean
         {
@@ -200,12 +192,12 @@ package system.logging.targets
         }
         
         /**
-         * Storage for the filters property.
+         * @private
          */
         private var _filters:Array = ["*"] ;
         
         /**
-         * Storage for the filters property.
+         * @private
          */
         private var _level:LoggerLevel = LoggerLevel.ALL ;
         
@@ -214,6 +206,22 @@ package system.logging.targets
          * When this value is zero changes to the filters property shouldn't do anything.
          */
         private var _count:uint ;
+        
+        /**
+         * @private
+         */
+        private function _checkFilter( filter:String ):void
+        {
+            if ( Log.hasIllegalCharacters(filter) )
+            {
+                 throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
+            }
+            var index:int = filter.indexOf("*") ;
+            if ((index >= 0) && (index != (filter.length -1)))
+            {
+                throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
+            }
+        }
         
         /**
          * This method will call the <code class="prettyprint">logEvent</code> method if the level of the event is appropriate for the current level.
