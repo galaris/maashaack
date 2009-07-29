@@ -78,7 +78,7 @@ package examples
             
             var logger:Logger = Log.getLogger( "examples.TextFieldTarget" ) ;
             
-            logger.log( LoggerLevel.DEBUG , "here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+            logger.log( "here is some myDebug info : {0} and {1}", 2.25 , true ) ;
             logger.fatal("Here is some fatal error...") ;
             
             target.includeDate    = false ;

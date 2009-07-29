@@ -35,7 +35,6 @@
 
 package system.logging
 {
-
     /**
      * All logger target implementations within the logging framework must implement this interface.
      */

@@ -83,11 +83,11 @@ package system.logging
         
         public function testLog():void
         {
-            logger.log( LoggerLevel.DEBUG ,  "hello {0}" , "world" ) ;
+            logger.log( "hello {0}" , "world" ) ;
             assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
             assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
             assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.DEBUG , "LoggerEvent.Log event level isn't valid." );
+            assertEquals( listener.level   , LoggerLevel.ALL , "LoggerEvent.Log event level isn't valid." );
         }
         
         public function testDebug():void

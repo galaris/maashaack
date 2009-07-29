@@ -37,10 +37,9 @@ package system.logging.samples
 {
     import system.Strings;
     import system.logging.Logger;
-    import system.logging.LoggerLevel;
-    
+
     import flash.events.EventDispatcher;
-    
+
     public class LoggerClass extends EventDispatcher implements Logger 
     {
         public function LoggerClass()
@@ -73,7 +72,7 @@ package system.logging.samples
             throw new Error( Strings.format.apply( this, [context].concat(rest) ) ) ;
         }
         
-        public function log(level:LoggerLevel, context:*, ...rest:Array):void
+        public function log( context:*, ...rest:Array):void
         {
             throw new Error( Strings.format.apply( this, [context].concat(rest) ) ) ;
         }
