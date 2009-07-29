@@ -73,10 +73,10 @@ package examples
             target.includeChannel = true ;
             target.includeLines   = true ;
             
-            target.filters        = [ "system.*" ] ;
+            target.filters        = [ "examples.*" ] ;
             target.level          = LoggerLevel.ALL ;
             
-            var logger:Logger = Log.getLogger( "system.test.MyTest" ) ;
+            var logger:Logger = Log.getLogger( "examples.TextFieldTarget" ) ;
             
             logger.log( LoggerLevel.DEBUG , "here is some myDebug info : {0} and {1}", 2.25 , true ) ;
             logger.fatal("Here is some fatal error...") ;

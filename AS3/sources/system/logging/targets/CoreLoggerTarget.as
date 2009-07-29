@@ -35,21 +35,21 @@
 
 package system.logging.targets
 {
-	import system.logging.LoggerTarget;
-	import system.logging.LoggerStrings;
-	import system.logging.Logger;
-	import system.logging.LoggerLevel;
-	import system.logging.Log;
     import system.Strings;
     import system.errors.InvalidFilterError;
     import system.events.LoggerEvent;
-    
+    import system.logging.Log;
+    import system.logging.Logger;
+    import system.logging.LoggerLevel;
+    import system.logging.LoggerStrings;
+    import system.logging.LoggerTarget;
+
     import flash.events.EventDispatcher;
-    
+
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
-     * No implementation of the logEvent() method is provided.
+     * No implementation of the LoggerEvent method is provided.
      */
     public class CoreLoggerTarget extends EventDispatcher implements LoggerTarget
     {
@@ -105,7 +105,7 @@ package system.logging.targets
             }
             else
             {
-                _filters = value;
+                _filters = value ;
             }
         }
         
@@ -123,7 +123,7 @@ package system.logging.targets
         public function set level( value:LoggerLevel ):void
         {
             Log.removeTarget( this ) ;
-            _level = value ;
+            _level = value || LoggerLevel.ALL ;
             Log.addTarget( this ) ;
         } 
         
@@ -220,7 +220,11 @@ package system.logging.targets
          */
         private function _handleEvent( event:LoggerEvent ):void
         {
-            if ( int( event.level ) >= int( level ) )
+            if ( _level == LoggerLevel.NONE )
+            {
+                return ; // logging off
+            }
+            else if ( int( event.level ) >= int( _level ) )
             {
                 logEvent(event) ;
             }

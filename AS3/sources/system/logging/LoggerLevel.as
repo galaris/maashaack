@@ -55,6 +55,11 @@ package system.logging
         }
         
         /**
+         * A special level that can be used to turn off logging (-1).
+         */
+        public static const NONE:LoggerLevel = new LoggerLevel( -1 , "NONE" ) ;
+        
+        /**
          * Intended to force a target to process all messages (0).
          */
         public static const ALL:LoggerLevel = new LoggerLevel( 0 , "ALL" ) ;
@@ -110,7 +115,7 @@ package system.logging
          */
         public static function isValidLevel( level:LoggerLevel ):Boolean 
         {
-            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, WARN ] ;
+            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
             var l:int = levels.length ;
             while (--l > -1)
             {
