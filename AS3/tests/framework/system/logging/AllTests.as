@@ -52,6 +52,7 @@ package system.logging
             suite.addTestSuite( LoggableTest ) ;
             suite.addTestSuite( LoggerTest ) ;
             suite.addTestSuite( LoggerLevelTest ) ;
+            suite.addTestSuite( LoggerStringsTest ) ;
             suite.addTestSuite( LoggerTargetTest ) ;
             
             // system.logging.errors

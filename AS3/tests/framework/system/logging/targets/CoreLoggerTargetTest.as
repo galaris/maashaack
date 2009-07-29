@@ -38,6 +38,8 @@ package system.logging.targets
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.errors.InvalidFilterError;
+
     public class CoreLoggerTargetTest extends TestCase
     {
         public function CoreLoggerTargetTest( name:String = "" )
@@ -66,7 +68,7 @@ package system.logging.targets
         {
             ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
             
-            target.filters = ["test"] ;
+            target.filters = ["test" , "test" ] ;
             ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
             
             target.filters = ["test", "system.*"] ;
@@ -74,8 +76,20 @@ package system.logging.targets
             
             target.filters = null ;
             ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
-            
-            // TODO tests errors
+        }
+        
+        public function testFiltersWithNullFilter():void
+        {
+            try
+            {
+                target.filters = [null] ;
+                fail("01 - if the filter is null the target must throws an error") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidFilterError , "02 - if the filter is null the target must throws an error") ;
+                assertEquals( e.message , "filter not must be null or empty." , "03 - if the filter is null the target must throws an error") ;
+            }
         }
     }
 }

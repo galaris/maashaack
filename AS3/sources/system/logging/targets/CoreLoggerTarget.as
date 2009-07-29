@@ -36,6 +36,8 @@
 package system.logging.targets
 {
     import system.Strings;
+    import system.data.Set;
+    import system.data.sets.ArraySet;
     import system.errors.InvalidFilterError;
     import system.events.LoggerEvent;
     import system.logging.Log;
@@ -43,9 +45,9 @@ package system.logging.targets
     import system.logging.LoggerLevel;
     import system.logging.LoggerStrings;
     import system.logging.LoggerTarget;
-    
+
     import flash.events.EventDispatcher;
-    
+
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
@@ -66,7 +68,7 @@ package system.logging.targets
          */
         public function get filters():Array
         {
-            return _filters ;
+            return _filters.toArray() ;
         }
         
         /**
@@ -74,14 +76,12 @@ package system.logging.targets
          */
         public function set filters( value:Array ):void
         {
-            if (value != null && value.length > 0)
+            if ( value != null && value.length > 0 )
             {
-                var filter:String ;
                 var len:int = value.length ;
                 for ( var i:int ; i<len ; i++ )
                 {
-                    filter = value[i] ;
-                    _checkFilter( filter ) ;
+                    _checkFilter( value[i] as String ) ;
                 }
             }
             else
@@ -91,12 +91,11 @@ package system.logging.targets
             if ( _count > 0 )
             {
                 Log.removeTarget( this ) ;
-                _filters = value;
-                Log.addTarget( this ) ;
             }
-            else
+            _filters = new ArraySet( value ) ;
+            if ( _count > 0 )
             {
-                _filters = value ;
+                Log.addTarget( this ) ;
             }
         }
         
@@ -125,16 +124,7 @@ package system.logging.targets
         public function addFilter( channel:String ):Boolean 
         {
             _checkFilter( channel ) ;
-            if ( _filters == null ) 
-            {
-                filters = [] ;
-            }
-            if ( _filters.indexOf( channel ) == -1 ) 
-            {
-                return false ;
-            }
-            _filters.push( channel ) ;
-            return true ;
+            return _filters.add( channel ) ;
         }
         
         /**
@@ -167,16 +157,7 @@ package system.logging.targets
          */
         public function removeFilter( channel:String ):Boolean
         {
-            var pos:int = _filters.indexOf( channel ) ;
-            if ( pos > -1) 
-            {
-                _filters.splice(pos, 1) ;
-                return true ;
-            }
-            else 
-            {
-                return false ;
-            }
+            return _filters.remove(channel) ;
         }
         
         /**
@@ -194,7 +175,7 @@ package system.logging.targets
         /**
          * @private
          */
-        private var _filters:Array = ["*"] ;
+        private var _filters:Set = new ArraySet( ["*"] ) ;
         
         /**
          * @private
@@ -212,6 +193,10 @@ package system.logging.targets
          */
         private function _checkFilter( filter:String ):void
         {
+            if ( filter == null )
+            {
+                throw new InvalidFilterError( LoggerStrings.EMPTY_FILTER  ) ;
+            }
             if ( Log.hasIllegalCharacters(filter) )
             {
                  throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
