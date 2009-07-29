@@ -53,9 +53,14 @@ package system.logging
         public static var CHAR_PLACEMENT:String = "'*' must be the right most character." ;
         
         /**
+         * The static field used when throws an Error if the filter is empty or null.
+         */
+        public static var EMPTY_FILTER:String = "filter not must be null or empty." ;
+        
+        /**
          * The static field used when throws an Error when filter failed.
          */
-        public static var ERROR_FILTER:String = "Error for filter \''{0}'" ;
+        public static var ERROR_FILTER:String = "Error for filter '{0}'." ;
         
         // Log
         
@@ -72,12 +77,12 @@ package system.logging
         /**
          * The static field used when throws an Error when a character is invalid.
          */
-        public static var INVALID_CHARS:String = "Categories can not contain any of the following characters : []~$^&/\\(){}<>+=`!#%?,:;'\"@" ;
+        public static var INVALID_CHARS:String = "Channels can not contain any of the following characters : []~$^&/\\(){}<>+=`!#%?,:;'\"@" ;
         
         /**
          * The static field used when throws an Error when the length of one character is invalid.
          */
-        public static var INVALID_LENGTH:String = "Categories must be at least one character in length." ;
+        public static var INVALID_LENGTH:String = "Channels must be at least one character in length." ;
         
         /**
          * The static field used when throws an Error when the specified target is invalid.

@@ -187,7 +187,7 @@ package system.logging
          */
         public static function removeTarget( target:LoggerTarget ):void
         {
-            if(target)
+            if( target )
             {
                 var log:Logger ;
                 var filters:Array = target.filters;
