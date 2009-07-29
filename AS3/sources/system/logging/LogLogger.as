@@ -68,7 +68,7 @@ package system.logging
          */
         public function debug( context:* , ...rest ):void
         {
-            _log.apply( this, [ LoggerLevel.DEBUG , context].concat(rest) ) ;
+            _log( LoggerLevel.DEBUG , context , rest ) ;
         }
         
         /**
@@ -78,7 +78,7 @@ package system.logging
          */
         public function error( context:* , ...rest ):void
         {
-            _log.apply( this, [ LoggerLevel.ERROR, context ].concat(rest) ) ;
+            _log( LoggerLevel.ERROR , context , rest ) ;
         }
         
         /**
@@ -88,7 +88,7 @@ package system.logging
          */
         public function fatal(context:*, ...rest):void
         {
-            _log.apply( this, [ LoggerLevel.FATAL, context ].concat(rest) ) ;
+            _log( LoggerLevel.FATAL , context , rest ) ;
         }
         
         /**
@@ -98,7 +98,7 @@ package system.logging
          */
         public function info(context:*, ...rest):void
         {
-            _log.apply( this, [ LoggerLevel.INFO , context].concat(rest) ) ;
+            _log( LoggerLevel.INFO , context , rest ) ;
         }
         
         /**
@@ -108,7 +108,7 @@ package system.logging
          */
         public function log( context:*, ...rest ):void
         {
-           _log.apply( this, [ LoggerLevel.ALL , context].concat(rest) ) ;
+            _log( LoggerLevel.ALL , context , rest ) ;
         }
         
         /**
@@ -118,7 +118,7 @@ package system.logging
          */
         public function warn(context:*, ...rest):void
         {
-            _log.apply( this, [ LoggerLevel.WARN , context ].concat(rest) ) ;
+            _log( LoggerLevel.WARN , context , rest ) ;
         }
         
         /**
@@ -129,16 +129,16 @@ package system.logging
         /**
          * @private
          */
-        private function _log( level:LoggerLevel, context:*, ...rest ):void
+        private function _log( level:LoggerLevel, context:*, options:Array ):void
         {
             if( hasEventListener( LoggerEvent.LOG ) )
             {
                 if ( context is String )
                 {
-                    var len:int = rest.length ;
+                    var len:int = options.length ;
                     for( var i:int ; i<len ; i++ )
                     {
-                        context = (context as String).replace(new RegExp("\\{"+i+"\\}", "g"), rest[i]);
+                        context = (context as String).replace(new RegExp("\\{"+i+"\\}", "g"), options[i]);
                     }
                 }
                 dispatchEvent( new LoggerEvent( context, level ) ) ;
