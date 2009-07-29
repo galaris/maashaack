@@ -67,11 +67,7 @@ package system.logging
                     }
                 }
                 _targets.push( target );
-                if ( _targetLevel == LoggerLevel.NONE )
-                {
-                    _targetLevel = target.level ;
-                }
-                else if ( int( target.level ) < int( _targetLevel ) )
+                if ( ( _targetLevel == LoggerLevel.NONE ) || ( int( target.level ) < int( _targetLevel ) ) )
                 {
                     _targetLevel = target.level ;
                 }
@@ -107,7 +103,7 @@ package system.logging
         public static function getLogger( channel:String ):Logger
         {
             checkChannel( channel ) ;
-            var result:Logger = _loggers.get( channel ) ;
+            var result:Logger = _loggers.get( channel ) as Logger ;
             if( result == null )
             {
                 result = new LogLogger( channel ) ;
@@ -115,7 +111,7 @@ package system.logging
             }
             var target:LoggerTarget ;
             var len:int = _targets.length ;
-            for(var i:int ; i<len ; i++)
+            for( var i:int ; i<len ; i++ )
             {
                 target = _targets[i] as LoggerTarget ;
                 if( channelMatchInFilterList( channel , target.filters ) )
@@ -135,7 +131,16 @@ package system.logging
         {
             return Strings.indexOfAny( value , LoggerStrings.ILLEGALCHARACTERS.split("") ) != -1 ;
         }
-            
+        
+        /**
+         * Indicates whether a 'all' level log event will be processed by a log target.
+         * @return true if a debug level log event will be logged; otherwise false.
+         */
+        public static function isAll():Boolean
+        {
+            return _targetLevel == LoggerLevel.ALL ;
+        }
+        
         /**
          * Indicates whether a debug level log event will be processed by a log target.
          * @return true if a debug level log event will be logged; otherwise false.
@@ -171,7 +176,8 @@ package system.logging
         {
             return int(_targetLevel) <= int( LoggerLevel.INFO ) ;
         }
-            
+        
+        
         /**
          * Indicates whether a warn level log event will be processed by a log target.
          * @return true if a warn level log event will be logged; otherwise false.
