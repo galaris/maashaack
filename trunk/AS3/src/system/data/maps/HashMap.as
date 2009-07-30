@@ -42,8 +42,8 @@ package system.data.maps
     import system.data.iterators.MapIterator;
     import system.eden;
     
-    import flash.utils.Dictionary;    
-
+    import flash.utils.Dictionary;
+    
     /**
      * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
      * <p>This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.</p>
@@ -110,7 +110,6 @@ package system.data.maps
      */
     public dynamic class HashMap implements Map
     {
-        
         /**
          * Creates a new HashMap instance.
          */
@@ -161,7 +160,7 @@ package system.data.maps
         {
             return _keys[ key ] !== undefined ;
         }
-  
+        
         /**
          * Returns true if this map maps one or more keys to the specified value.
          * @return true if this map maps one or more keys to the specified value.
@@ -179,7 +178,7 @@ package system.data.maps
         {
             return _keys[ key ] ;
         }
-
+        
         /**
          * Returns an array representation of all keys in the map.
          * @return an array representation of all keys in the map.
@@ -225,7 +224,7 @@ package system.data.maps
         {
             return new MapIterator( this ) ;
         }
-
+        
         /**
          * Returns the keys iterator of this map.
          * @return the keys iterator of this map.
@@ -234,7 +233,7 @@ package system.data.maps
         {
             return new ArrayIterator(getKeys()) ;
         }
-
+        
         /**
          * Associates the specified value with the specified key in this map.
          */
@@ -252,7 +251,7 @@ package system.data.maps
             _keys[ key ] = value ;
             return r ;
         }
- 
+        
         /**
          * Copies all of the mappings from the specified map to this one.
          */
@@ -261,12 +260,12 @@ package system.data.maps
             var v:Array = m.getValues() ;
             var k:Array = m.getKeys() ;
             var l:int   = k.length ;
-            for ( var i:int = 0 ; i < l ; i = i - (-1) ) 
+            for ( var i:int ; i < l ; i = i - (-1) ) 
             {
                 put( k[i] , v[i] ) ;
             }
         }
- 
+        
         /**
          * Removes the mapping for this key from this map if present.
          * @param o The key whose mapping is to be removed from the map.
@@ -306,7 +305,7 @@ package system.data.maps
         {
             return _size ;
         }
-
+        
         /**
          * Returns the eden String representation of this map.
          * @return the eden String representation of this map.
@@ -315,7 +314,7 @@ package system.data.maps
         {
             return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
         }
- 
+        
         /**
          * Returns the String representation of this map.
          * @return the String representation of this map.
@@ -324,12 +323,12 @@ package system.data.maps
         {
             return formatter.format( this ) ;
         }
-                
+        
         /**
          * @private
          */
         private var _keys:* ;
-
+        
         /**
          * @private
          */
@@ -339,12 +338,5 @@ package system.data.maps
          * @private
          */
         private var _values:* ;
-        
     }
 }
-
-
-
-
-
-

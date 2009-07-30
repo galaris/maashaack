@@ -40,7 +40,7 @@ package system.logging
     import system.Reflection;
 
     /**
-     * Static class containing constants for use in the level  property.
+     * Static class containing constants for use in the level property.
      */
     public class LoggerLevel extends Enum implements Equatable
     {
@@ -49,7 +49,7 @@ package system.logging
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
          */
-        public function LoggerLevel( value:int , name:String ) 
+        public function LoggerLevel( value:int , name:String )
         {
             super( value , name ) ;
         }
@@ -116,15 +116,7 @@ package system.logging
         public static function isValidLevel( level:LoggerLevel ):Boolean 
         {
             var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
-            var l:int = levels.length ;
-            while (--l > -1)
-            {
-                if ( level.equals( levels[l] ) ) 
-                {
-                    return true ;
-                }
-            }  
-            return false ;
+            return levels.indexOf( level ) > -1 ;
         }
         
         /**

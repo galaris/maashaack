@@ -42,6 +42,7 @@ package system.logging
 
     /**
      * This factory provides pseudo-hierarchical logging capabilities with multiple format and output options.
+     * <p>This class in an internal class in the package system.logging you can use the Log singleton to deploy all the loggers in your application.</p>
      */
     public class LoggerFactory 
     {

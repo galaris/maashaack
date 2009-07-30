@@ -33,23 +33,32 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.targets
+package system.logging 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class LoggerFactoryTest extends TestCase 
     {
-        public static function suite():ITest
+        public function LoggerFactoryTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.logging.targets package" );
-            
-            suite.addTestSuite( CoreLoggerTargetTest ) ;
-            suite.addTestSuite( LineFormattedTargetTest ) ;
-            suite.addTestSuite( TextFieldTargetTest ) ;
-            suite.addTestSuite( TraceTargetTest ) ;
-            
-            return suite;
+            super(name);
         }
-	}
+        
+        public var factory:LoggerFactory ;
+        
+        public function setUp():void
+        {
+            factory = new LoggerFactory() ;
+        }
+        
+        public function tearDown():void
+        {
+            factory = null ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( factory , "The LoggerFactory reference not must be null.") ;
+        }
+    }
 }
