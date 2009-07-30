@@ -28,41 +28,48 @@ package system.logging.targets
     /**
       * Provides a logger target that uses the global trace() method to output log messages.
       * <p><b>Example :</b></p>
-      * <pre class="prettyprint">
-      * import system.logging.Log ;
-      * import system.logging.Logger ;
-      * import system.logging.LoggerLevel ;
-      * import system.logging.LoggerTarget ;
-      * import system.logging.targets.TraceTarget ;
-      * 
-      * // setup the logger target 
-      * 
-      * var target:TraceTarget = new TraceTarget() ;
-      * 
-      * target.filters        = [ "myLogger" ] ;
-      * target.includeDate    = true ;
-      * target.includeTime    = true ;
-      * target.includeLevel   = true ;
-      * target.includeChannel = true ;
-      * target.includeLines   = true ;
-      * target.level          = LoggerLevel.ALL ; // can use for example LoggerLevel.DEBUG (only the debug logs).
-      * 
-      * // start writing log messages
-      * 
-      * Log.addTarget( target ); 
-      * 
-      * // get a logger for the 'myDebug' category and send some data to it.
-      * 
-      * var logger:Logger = Log.getLogger( "myLogger" ) ;
-      * 
-      * logger.log( LoggerLevel.DEBUG, "here is some myDebug info : {0} and {1}", 2.25 , true ) ; 
-      * logger.fatal( "Here is some fatal error..." ) ; 
-      * 
-      * traceTarget.includeDate    = false ;
-      * traceTarget.includeTime    = false ;
-      * traceTarget.includeChannel = false ;
-      * 
-      * logger.info("[{0}, {1}, {2}]", 2, 4, 6) ; 
+      * package examples
+      * {
+      *     import system.logging.Log;
+      *     import system.logging.Logger;
+      *     import system.logging.LoggerLevel;
+      *     import system.logging.targets.TraceTarget;
+      *     
+      *     import flash.display.Sprite;
+      *     
+      *     public class TraceTargetExample extends Sprite
+      *     {
+      *         public function TraceTargetExample()
+      *         {
+      *             // setup writer
+      *             var target:TraceTarget = new TraceTarget() ;
+      *             
+      *             target.filters        = [ "examples.*" ] ;
+      *             target.level          = LoggerLevel.ALL ;
+      *             
+      *             target.includeDate    = true ;
+      *             target.includeTime    = true ;
+      *             target.includeLevel   = true ;
+      *             target.includeChannel = true ;
+      *             target.includeLines   = true ;
+      *             
+      *             var logger:Logger = Log.getLogger( "examples.TraceTarget" ) ;
+      *             
+      *             logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+      *             logger.debug ( "Here is some debug message." ) ;
+      *             logger.info  ( "Here is some info message." ) ;
+      *             logger.warn  ( "Here is some warn message." ) ;
+      *             logger.error ( "Here is some error message." ) ;
+      *             logger.fatal ( "Here is some fatal error..." ) ;
+      *             
+      *             target.includeDate    = false ;
+      *             target.includeTime    = false ;
+      *             target.includeChannel = false ;
+      *             
+      *             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
+      *         }
+      *     }
+      * }
       * </pre>
       */
     public class TraceTarget extends LineFormattedTarget
