@@ -24,9 +24,9 @@
 package system.logging.targets 
 {
     import system.logging.LoggerLevel;
-
+    
     import flash.text.TextField;
-
+    
     /**
      * Provides a logger target that uses a TextField to output log messages.
      * <p><b>Example :</b></p>

@@ -33,32 +33,52 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.targets
+package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import system.Environment;
-    import system.hosts.HostID;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class SocketTargetTest extends TestCase 
     {
-        public static function suite():ITest
+        public function SocketTargetTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.logging.targets package" );
-            
-            suite.addTestSuite( CoreLoggerTargetTest ) ;
-            suite.addTestSuite( LineFormattedTargetTest ) ;
-            
-            suite.addTestSuite( TextFieldTargetTest ) ;
-            suite.addTestSuite( TraceTargetTest ) ;
-            
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( SocketTargetTest ) ;
-            }
-            
-            return suite;
+            super(name);
         }
-	}
+        
+        public var target:SocketTarget ;
+        
+        public function setUp():void
+        {
+            target = new SocketTarget() ;
+        }
+        
+        public function tearDown():void
+        {
+            target = undefined  ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
+        }
+        
+        public function testHost():void
+        {
+            assertEquals( target.host , "localhost" , "The host property failed." ) ;
+        }
+        
+        public function testPort():void
+        {
+            assertEquals( target.port , 0 , "The port property failed." ) ;
+        }
+        
+        public function testConnected():void
+        {
+            assertFalse( target.connected , "The port property failed." ) ;
+        }
+    }
 }
