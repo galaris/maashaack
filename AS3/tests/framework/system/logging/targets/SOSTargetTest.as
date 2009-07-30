@@ -44,7 +44,7 @@ package system.logging.targets
             super(name);
         }
         
-        public var target:SocketTarget ;
+        public var target:SOSTarget ;
         
         public function setUp():void
         {
@@ -66,19 +66,26 @@ package system.logging.targets
             assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
         }
         
+        public function testConnected():void
+        {
+            assertFalse( target.connected , "The connected property failed." ) ;
+        }
+        
         public function testHost():void
         {
             assertEquals( target.host , "localhost" , "The host property failed." ) ;
         }
         
+        public function testLevelPolicy():void
+        {
+            assertTrue( target.levelPolicy , "01 - The levelPolicy property failed." ) ;
+            target.levelPolicy = false ;
+            assertFalse( target.levelPolicy , "02 - The levelPolicy property failed." ) ;
+        }
+        
         public function testPort():void
         {
             assertEquals( target.port , 4444 , "The port property failed." ) ;
-        }
-        
-        public function testConnected():void
-        {
-            assertFalse( target.connected , "The port property failed." ) ;
         }
         
         ///// Default LoggerLevel colors
@@ -133,6 +140,26 @@ package system.logging.targets
         public function testCLEAR():void
         {
             assertEquals( SOSTarget.CLEAR , "!SOS<clear/>" , "The SOSTarget.CLEAR static property failed." ) ;
+        }
+        
+        public function testIDENTIFY():void
+        {
+            assertEquals( SOSTarget.IDENTIFY , "!SOS<identify/>" , "The SOSTarget.IDENTIFY static property failed." ) ;
+        }
+        
+        public function testLEVEL_COLOR():void
+        {
+            assertEquals( SOSTarget.LEVEL_COLOR , "!SOS<setKey><name>{0}</name><color>{1}</color></setKey>" , "The SOSTarget.LEVEL_COLOR static property failed." ) ;
+        }
+        
+        public function testSHOW_MESSAGE():void
+        {
+            assertEquals( SOSTarget.SHOW_MESSAGE , "!SOS<showMessage key=\"{0}\">{1}</showMessage>" , "The SOSTarget.SHOW_MESSAGE static property failed." ) ;
+        }
+        
+        public function testSHOW_FOLD_MESSAGE():void
+        {
+            assertEquals( SOSTarget.SHOW_FOLD_MESSAGE , "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>" , "The SOSTarget.SHOW_FOLD_MESSAGE static property failed." ) ;
         }
     }
 }

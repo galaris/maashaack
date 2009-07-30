@@ -186,7 +186,6 @@ package system.logging
             return int(_targetLevel) <= int( LoggerLevel.INFO ) ;
         }
         
-        
         /**
          * Indicates whether a warn level log event will be processed by a log target.
          * @return true if a warn level log event will be logged; otherwise false.
@@ -202,7 +201,7 @@ package system.logging
          */
         public function removeTarget( target:LoggerTarget ):void
         {
-            if( target )
+            if( target != null )
             {
                 var log:Logger ;
                 var filters:Array = target.filters;
@@ -218,12 +217,12 @@ package system.logging
                     }
                 }
                 var len:int = _targets.length ;
-                for( var j:int ; j < len ; j++ )
+                for( var i:int ; i < len ; i++ )
                 {
-                    if( target == _targets[j] )
+                    if( target == _targets[i] )
                     {
-                        _targets.splice(j, 1) ;
-                        j-- ;
+                        _targets.splice(i, 1) ;
+                        i-- ;
                     }
                 }
                 _resetTargetLevel() ;

@@ -37,6 +37,8 @@ package system.logging
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.errors.InvalidChannelError;
+
     public class LoggerFactoryTest extends TestCase 
     {
         public function LoggerFactoryTest(name:String = "")
@@ -59,6 +61,82 @@ package system.logging
         public function testConstructor():void
         {
             assertNotNull( factory , "The LoggerFactory reference not must be null.") ;
+        }
+        
+        public function testGetLogger():void
+        {
+            var logger1:Logger = factory.getLogger("channel1") ;
+            var logger2:Logger = factory.getLogger("channel1") ;
+            var logger3:Logger = factory.getLogger("channel2") ;
+            assertEquals( logger1 , logger2 , "The getLogger() method failed." ) ;
+            assertNotSame( logger1 , logger3 , "The getLogger() method failed." ) ;
+        }
+        
+        public function testGetLoggerWithNullChannel():void
+        {
+            try
+            {
+                factory.getLogger( null ) ;
+                fail("01 - The getLogger() method must throw an InvalidChannelError error.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidChannelError , "02 - The getLogger() method must throw an InvalidChannelError error.") ;
+                assertEquals( e.message , "Channels must be at least one character in length." , "03 - The getLogger() method must throw an InvalidChannelError error." ) ;
+            }
+        }
+        
+        public function testGetLoggerWithEmptyChannel():void
+        {
+            try
+            {
+                factory.getLogger( "" ) ;
+                fail("01 - The getLogger() method must throw an InvalidChannelError error.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidChannelError , "02 - The getLogger() method must throw an InvalidChannelError error.") ;
+                assertEquals( e.message , "Channels must be at least one character in length." , "03 - The getLogger() method must throw an InvalidChannelError error." ) ;
+            }
+        }
+        
+        public function testGetLoggerWithIllegalCharacters():void
+        {
+            var chars:String = LoggerStrings.ILLEGALCHARACTERS ;
+            var a:Array      = chars.split("") ;
+            var l:int        = a.length ;
+            while( --l > -1 ) 
+            {
+                _isIllegalCharacters( a[l] ) ;
+            }
+        }
+        
+        public function testGetLoggerWithWildCard():void
+        {
+            try
+            {
+                factory.getLogger( "*" ) ;
+                fail("01 - The getLogger() method must throw an InvalidChannelError error.") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidChannelError , "02 - The getLogger() method must throw an InvalidChannelError error.") ;
+                assertEquals( e.message , "Channels can not contain any of the following characters : []~$^&/\\(){}<>+=`!#%?,:;'\"@" , "03 - The getLogger() method must throw an InvalidChannelError error." ) ;
+            }
+        }
+        
+        private function _isIllegalCharacters( char:String ):void
+        {
+            try
+            {
+                factory.getLogger( char ) ;
+                fail("The getLogger() method must throw an InvalidChannelError error with the character : " + char ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidChannelError , "02 - The getLogger() method must throw an InvalidChannelError error with the character : " + char ) ;
+                assertEquals( e.message , "Channels can not contain any of the following characters : []~$^&/\\(){}<>+=`!#%?,:;'\"@" , "03 - The getLogger() method must throw an InvalidChannelError error with the character : " + char ) ;
+            }
         }
     }
 }
