@@ -24,69 +24,80 @@
 package system.logging.targets 
 {
     import system.logging.LoggerLevel;
-
+    
     import flash.text.TextField;
-
+    
     /**
      * Provides a logger target that uses a TextField to output log messages.
      * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import flash.text.TextField ;
-     * 
-     * import system.logging.Log ;
-     * import system.logging.Logger ;
-     * import system.logging.LoggerLevel ;
-     * import system.logging.LoggerTarget ;
-     * import system.logging.targets.TextFieldTarget ;
-     * 
-     * import flash.text.TextField ;
-     * import flash.text.TextFormat ;
-     * 
-     * var field:TextField = new TextField() ;
-     * 
-     * field.x                 = 10 ;
-     * field.y                 = 10 ;
-     * field.width             = 650 ;
-     * field.height            = 400 ;
-     * field.defaultTextFormat = new TextFormat("Courier New", 11) ;
-     * field.background        = true ;
-     * field.backgroundColor   = 0xFFFFFF ;
-     * field.border            = true ;
-     * field.borderColor       = 0x999999 ;
-     * field.multiline         = true ;
-     * field.wordWrap          = true ;
-     * 
-     * addChild( field ) ;
-     * 
-     * // setup writer
-     * var target:TextFieldTarget = new TextFieldTarget(field) ;
-     * 
-     * target.includeDate    = true ;
-     * target.includeTime    = true ;
-     * target.includeLevel   = true ;
-     * target.includeChannel = true ;
-     * target.includeLines   = true ;
-     * 
-     * target.filters        = [ "system.*" ] ;
-     * target.level          = LogEventLevel.ALL ;
-     * 
-     * var logger:Logger = Log.getLogger( "system.test.MyTest" ) ;
-     * 
-     * logger.log( LoggerLevel.DEBUG , "here is some myDebug info : {0} and {1}", 2.25 , true ) ;
-     * logger.fatal("Here is some fatal error...") ;
-     * 
-     * target.includeDate    = false ;
-     * target.includeTime    = false ;
-     * target.includeChannel = false ;
-     * 
-     * logger.info("[{0}, {1}, {2}]", 2, 4, 6) ;
+     * package examples
+     * {
+     *     import system.logging.Log;
+     *     import system.logging.Logger;
+     *     import system.logging.LoggerLevel;
+     *     import system.logging.targets.TraceTarget;
+     *     
+     *     import flash.display.Sprite;
+     *     
+     *     public class TraceTargetExample extends Sprite
+     *     {
+     *         public function TraceTargetExample()
+     *         {
+     *             ///////////
+     *             
+     *             var field:TextField = new TextField() ;
+     *             
+     *             field.x                 = 10 ;
+     *             field.y                 = 10 ;
+     *             field.width             = 700 ;
+     *             field.height            = 400 ;
+     *             field.defaultTextFormat = new TextFormat("Courier New", 11) ;
+     *             field.background        = true ;
+     *             field.backgroundColor   = 0xFFFFFF ;
+     *             field.border            = true ;
+     *             field.borderColor       = 0x999999 ;
+     *             field.multiline         = true ;
+     *             field.wordWrap          = true ;
+     *             
+     *             addChild( field ) ;
+     *             
+     *             ///////////
+     *             
+     *             var target:TextFieldTarget = new TextFieldTarget(field) ;
+     *             
+     *             target.filters        = [ "examples.*" ] ;
+     *             target.level          = LoggerLevel.ALL ;
+     *             
+     *             target.includeDate    = true ;
+     *             target.includeTime    = true ;
+     *             target.includeLevel   = true ;
+     *             target.includeChannel = true ;
+     *             target.includeLines   = true ;
+     *             
+     *             var logger:Logger = Log.getLogger( "examples.TextFieldTarget" ) ;
+     *             
+     *             logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+     *             logger.debug ( "Here is some debug message." ) ;
+     *             logger.info  ( "Here is some info message." ) ;
+     *             logger.warn  ( "Here is some warn message." ) ;
+     *             logger.error ( "Here is some error message." ) ;
+     *             logger.fatal ( "Here is some fatal error..." ) ;
+     *             
+     *             target.includeDate    = false ;
+     *             target.includeTime    = false ;
+     *             target.includeChannel = false ;
+     *             
+     *             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
+     *         }
+     *     }
+     * }
      * </pre>
      */
     public class TextFieldTarget extends LineFormattedTarget 
     {
         /**
          * Creates a new TextFieldTarget instance.
-         * @param textfield the TextField target.
+         * @param textfield The TextField reference to output the log messages.
          */
         public function TextFieldTarget( textfield:TextField )
         {
@@ -111,7 +122,7 @@ package system.logging.targets
         public override function internalLog( message:* , level:LoggerLevel ):void
         {
             var txt:String     = textfield.text || "" ;
-            txt += message + "\r" ;
+            txt               += message + "\r" ;
             textfield.text     = txt ;
             if ( autoScroll )
             {

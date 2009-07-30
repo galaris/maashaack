@@ -55,23 +55,23 @@ package examples
             target.includeChannel = true ;
             target.includeLines   = true ;
             
-            target.filters        = [ "system.*" ] ;
+            target.filters        = [ "examples.*" ] ;
             target.level          = LoggerLevel.ALL ;
             
-            var logger:Logger = Log.getLogger( "system.test.MyTest" ) ;
+            var logger:Logger = Log.getLogger( "examples.TraceTarget" ) ;
             
-            logger.log( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
-            logger.debug("Here is some debug message.") ;
-            logger.info("Here is some info message.") ;
-            logger.warn("Here is some warn message.") ;
-            logger.error("Here is some error message.") ;
-            logger.fatal("Here is some fatal error...") ;
+            logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+            logger.debug ( "Here is some debug message." ) ;
+            logger.info  ( "Here is some info message." ) ;
+            logger.warn  ( "Here is some warn message." ) ;
+            logger.error ( "Here is some error message." ) ;
+            logger.fatal ( "Here is some fatal error..." ) ;
             
             target.includeDate    = false ;
             target.includeTime    = false ;
             target.includeChannel = false ;
             
-            logger.info("[{0}, {1}, {2}]", 2, 4, 6) ;
+            logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
         }
     }
 }
