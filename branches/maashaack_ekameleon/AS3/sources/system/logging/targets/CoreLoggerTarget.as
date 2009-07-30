@@ -42,6 +42,7 @@ package system.logging.targets
     import system.events.LoggerEvent;
     import system.logging.Log;
     import system.logging.Logger;
+    import system.logging.LoggerFactory;
     import system.logging.LoggerLevel;
     import system.logging.LoggerStrings;
     import system.logging.LoggerTarget;
@@ -61,6 +62,27 @@ package system.logging.targets
         public function CoreLoggerTarget()
         {
             //
+        }
+        
+        /**
+         * Determinates the LoggerFactory reference of the target, by default the target use the <code>system.logging.Log</code> singleton.
+         */
+        public function get factory():LoggerFactory
+        {
+            return _factory ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set factory( factory:LoggerFactory ):void
+        {
+            if ( _factory != null )
+            {
+                _factory.removeTarget( this ) ;
+            }
+            _factory = factory || Log ;
+            _factory.addTarget( this ) ;
         }
         
         /**
@@ -90,12 +112,12 @@ package system.logging.targets
             }
             if ( _count > 0 )
             {
-                Log.removeTarget( this ) ;
+                _factory.removeTarget( this ) ;
             }
             _filters = new ArraySet( value ) ;
             if ( _count > 0 )
             {
-                Log.addTarget( this ) ;
+                _factory.addTarget( this ) ;
             }
         }
         
@@ -112,9 +134,9 @@ package system.logging.targets
          */
         public function set level( value:LoggerLevel ):void
         {
-            Log.removeTarget( this ) ;
+            _factory.removeTarget( this ) ;
             _level = value || LoggerLevel.ALL ;
-            Log.addTarget( this ) ;
+            _factory.addTarget( this ) ;
         } 
         
         /**
@@ -173,6 +195,18 @@ package system.logging.targets
         }
         
         /**
+         * Count of the number of loggers this target is listening to. 
+         * When this value is zero changes to the filters property shouldn't do anything.
+         * @private
+         */
+        private var _count:uint ;
+        
+        /**
+         * @private
+         */
+        private var _factory:LoggerFactory = Log ;
+        
+        /**
          * @private
          */
         private var _filters:Set = new ArraySet( ["*"] ) ;
@@ -183,12 +217,6 @@ package system.logging.targets
         private var _level:LoggerLevel = LoggerLevel.ALL ;
         
         /**
-         * Count of the number of loggers this target is listening to. 
-         * When this value is zero changes to the filters property shouldn't do anything.
-         */
-        private var _count:uint ;
-        
-        /**
          * @private
          */
         private function _checkFilter( filter:String ):void
@@ -197,7 +225,7 @@ package system.logging.targets
             {
                 throw new InvalidFilterError( LoggerStrings.EMPTY_FILTER  ) ;
             }
-            if ( Log.hasIllegalCharacters(filter) )
+            if ( _factory.hasIllegalCharacters(filter) )
             {
                  throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
             }

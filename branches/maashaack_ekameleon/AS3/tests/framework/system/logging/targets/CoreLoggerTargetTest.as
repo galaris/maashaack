@@ -37,9 +37,11 @@ package system.logging.targets
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.errors.InvalidFilterError;
-    
+    import system.logging.Log;
+    import system.logging.LoggerFactory;
+
     public class CoreLoggerTargetTest extends TestCase
     {
         public function CoreLoggerTargetTest( name:String = "" )
@@ -62,6 +64,14 @@ package system.logging.targets
         public function testConstructor():void
         {
             assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testFactory():void
+        {
+            assertEquals( target.factory , Log , "01 - The factory property failed.") ;
+            var factory:LoggerFactory = new LoggerFactory() ;
+            target.factory = factory ;
+            assertEquals( target.factory , factory , "02 - The factory property failed.") ;
         }
         
         public function testFilters():void
