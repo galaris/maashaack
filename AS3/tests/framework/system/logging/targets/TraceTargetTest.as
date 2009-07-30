@@ -35,23 +35,20 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.errors.InvalidFilterError;
-    
-    public class CoreLoggerTargetTest extends TestCase
+    public class TraceTargetTest extends TestCase 
     {
-        public function CoreLoggerTargetTest( name:String = "" )
+        public function TraceTargetTest(name:String = "")
         {
             super(name);
         }
         
-        public var target:CoreLoggerTarget ;
+        public var target:TraceTarget ;
         
         public function setUp():void
         {
-            target = new CoreLoggerTarget() ;
+            target = new TraceTarget() ;
         }
         
         public function tearDown():void
@@ -64,42 +61,9 @@ package system.logging.targets
             assertNotNull( target , "Constructor failed.") ;
         }
         
-        public function testFilters():void
+        public function testInherit():void
         {
-            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
-            
-            target.filters = ["test" , "test" ] ;
-            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
-            
-            target.filters = ["test", "system.*"] ;
-            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
-            
-            target.filters = null ;
-            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
-        }
-        
-        public function testFiltersWithNullFilter():void
-        {
-            try
-            {
-                target.filters = [null] ;
-                fail("01-01 - if the filter is null the target must throws an error") ;
-            }
-            catch( e:Error )
-            {
-                assertTrue( e is InvalidFilterError , "01-02 - if the filter is null the target must throws an error") ;
-                assertEquals( e.message , "filter not must be null or empty." , "01-03 - if the filter is null the target must throws an error") ;
-            }
-            try
-            {
-                target.filters = ["hello" , null] ;
-                fail("02-01 - if the filter is null the target must throws an error") ;
-            }
-            catch( e:Error )
-            {
-                assertTrue( e is InvalidFilterError , "02-02 - if the filter is null the target must throws an error") ;
-                assertEquals( e.message , "filter not must be null or empty." , "02-03 - if the filter is null the target must throws an error") ;
-            }
+            assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
         }
     }
 }

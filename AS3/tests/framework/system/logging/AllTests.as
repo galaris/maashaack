@@ -48,12 +48,14 @@ package system.logging
         {
             var suite:TestSuite = new TestSuite( "system.logging package" );
             
-            suite.addTestSuite( LogLoggerTest ) ;
             suite.addTestSuite( LoggableTest ) ;
-            suite.addTestSuite( LoggerTest ) ;
+            suite.addTestSuite( LoggerFactoryTest ) ;
             suite.addTestSuite( LoggerLevelTest ) ;
             suite.addTestSuite( LoggerStringsTest ) ;
             suite.addTestSuite( LoggerTargetTest ) ;
+            suite.addTestSuite( LoggerTest ) ;
+            suite.addTestSuite( LogLoggerTest ) ;
+            suite.addTestSuite( LogTest ) ;
             
             // system.logging.errors
             suite.addTest( system.logging.errors.AllTests.suite() );

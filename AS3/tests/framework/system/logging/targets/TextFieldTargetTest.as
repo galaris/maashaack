@@ -35,23 +35,27 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.errors.InvalidFilterError;
+    import system.logging.LoggerLevel;
     
-    public class CoreLoggerTargetTest extends TestCase
+    import flash.text.TextField;
+    
+    public class TextFieldTargetTest extends TestCase 
     {
-        public function CoreLoggerTargetTest( name:String = "" )
+        public function TextFieldTargetTest(name:String = "")
         {
             super(name);
         }
         
-        public var target:CoreLoggerTarget ;
+        public var field:TextField ;
+        
+        public var target:TextFieldTarget ;
         
         public function setUp():void
         {
-            target = new CoreLoggerTarget() ;
+            field  = new TextField() ;
+            target = new TextFieldTarget( field ) ;
         }
         
         public function tearDown():void
@@ -62,43 +66,40 @@ package system.logging.targets
         public function testConstructor():void
         {
             assertNotNull( target , "Constructor failed.") ;
+            assertEquals(target.textfield , field , "The passed-in TextField in the constructor of the class failed.") ;
         }
         
-        public function testFilters():void
+        public function testInherit():void
         {
-            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
-            
-            target.filters = ["test" , "test" ] ;
-            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
-            
-            target.filters = ["test", "system.*"] ;
-            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
-            
-            target.filters = null ;
-            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
+            assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
         }
         
-        public function testFiltersWithNullFilter():void
+        public function testField():void
         {
+            var textField:TextField  = new TextField() ;
+            target.textfield = textField ;
+            assertEquals(target.textfield , textField , "The textField property failed.") ;
+        }
+        
+        public function testInternalLog():void
+        {
+            target.internalLog("test", LoggerLevel.DEBUG ) ;
+            assertEquals( field.text , "test\r" , "The internalLog method failed.") ;
+            field.text = "" ;
+        }
+        
+        public function testInternalLogWithEmptyField():void
+        {
+            target.textfield = null ;
             try
             {
-                target.filters = [null] ;
-                fail("01-01 - if the filter is null the target must throws an error") ;
+                target.internalLog("test", LoggerLevel.DEBUG ) ;
+                fail("01 - if the textfield property is null the target must throws an error.") ;
             }
             catch( e:Error )
             {
-                assertTrue( e is InvalidFilterError , "01-02 - if the filter is null the target must throws an error") ;
-                assertEquals( e.message , "filter not must be null or empty." , "01-03 - if the filter is null the target must throws an error") ;
-            }
-            try
-            {
-                target.filters = ["hello" , null] ;
-                fail("02-01 - if the filter is null the target must throws an error") ;
-            }
-            catch( e:Error )
-            {
-                assertTrue( e is InvalidFilterError , "02-02 - if the filter is null the target must throws an error") ;
-                assertEquals( e.message , "filter not must be null or empty." , "02-03 - if the filter is null the target must throws an error") ;
+                assertTrue( e is ReferenceError , "02 - if the textfield property is null the target must throws an error.") ;
+                assertEquals( e.message , "The internal textfield reference of the target not must be null." , "03 - if the textfield property is null the target must throws an error.") ;
             }
         }
     }

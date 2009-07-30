@@ -24,9 +24,9 @@
 package system.logging.targets 
 {
     import system.logging.LoggerLevel;
-    
+
     import flash.text.TextField;
-    
+
     /**
      * Provides a logger target that uses a TextField to output log messages.
      * <p><b>Example :</b></p>
@@ -118,15 +118,23 @@ package system.logging.targets
          * Descendants of this class should override this method to direct the specified message to the desired output.
          * @param message String containing preprocessed log message which may include time, date, category, etc. 
          * based on property settings, such as <code class="prettyprint">includeDate</code>, <code class="prettyprint">includeCategory</code>, etc.
+         * @throws ReferenceError If the internal textfield reference is null.
          */
         public override function internalLog( message:* , level:LoggerLevel ):void
         {
-            var txt:String     = textfield.text || "" ;
-            txt               += message + "\r" ;
-            textfield.text     = txt ;
-            if ( autoScroll )
+            if ( textfield != null )
             {
-                textfield.scrollV  = textfield.maxScrollV ;
+                var txt:String     = textfield.text || "" ;
+                txt               += message + "\r" ;
+                textfield.text     = txt ;
+                if ( autoScroll )
+                {
+                    textfield.scrollV  = textfield.maxScrollV ;
+                }
+            }
+            else
+            {
+                throw new ReferenceError( "The internal textfield reference of the target not must be null." ) ;
             }
         }
     }
