@@ -80,5 +80,59 @@ package system.logging.targets
         {
             assertFalse( target.connected , "The port property failed." ) ;
         }
+        
+        ///// Default LoggerLevel colors
+
+        public function testALL_COLOR():void
+        {
+            assertEquals( SOSTarget.ALL_COLOR , 0xE6E6E6 , "The SOSTarget.ALL_COLOR static property failed." ) ;
+        }
+        
+        public function testDEBUG_COLOR():void
+        {
+            assertEquals( SOSTarget.DEBUG_COLOR , 0xDEECFE , "The SOSTarget.DEBUG_COLOR static property failed." ) ;
+        }
+        
+        public function testDEFAULT_COLOR():void
+        {
+            assertEquals( SOSTarget.DEFAULT_COLOR , 0xFFFFFF , "The SOSTarget.DEFAULT_COLOR static property failed." ) ;
+        }
+        
+        public function testERROR_COLOR():void
+        {
+            assertEquals( SOSTarget.ERROR_COLOR , 0xEDCC81 , "The SOSTarget.ERROR_COLOR static property failed." ) ;
+        }
+        
+        public function testFATAL_COLOR():void
+        {
+            assertEquals( SOSTarget.FATAL_COLOR , 0xFDD1B5 , "The SOSTarget.FATAL_COLOR static property failed." ) ;
+        }
+        
+        public function testINFO_COLOR():void
+        {
+            assertEquals( SOSTarget.INFO_COLOR , 0xD2FAB8 , "The SOSTarget.INFO_COLOR static property failed." ) ;
+        }
+        
+        public function testWARN_COLOR():void
+        {
+            assertEquals( SOSTarget.WARN_COLOR , 0xFDFDB5 , "The SOSTarget.WARN_COLOR static property failed." ) ;
+        }
+        
+        ///// SOS socket command patterns
+        
+        public function testAPPLICATION_COLOR():void
+        {
+            assertEquals( SOSTarget.APPLICATION_COLOR , "!SOS<appColor>{0}</appColor>" , "The SOSTarget.APPLICATION_COLOR static property failed." ) ;
+        }
+        
+        public function testAPPLICATION_NAME():void
+        {
+            assertEquals( SOSTarget.APPLICATION_NAME , "!SOS<appName>{0}</appName>" , "The SOSTarget.APPLICATION_NAME static property failed." ) ;
+        }        
+        
+        public function testCLEAR():void
+        {
+            assertEquals( SOSTarget.CLEAR , "!SOS<clear/>" , "The SOSTarget.CLEAR static property failed." ) ;
+        }
     }
 }

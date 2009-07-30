@@ -114,6 +114,14 @@ package system.logging.targets
         }
         
         /**
+         * Resets the internal line number value (set to 1).
+         */
+        public function resetLineNumber():void 
+        {
+            _lineNumber = 1 ; 
+        }
+        
+        /**
          * This method format the passed Date in arguments.
          */
         hack function formatDate( d:Date ):String 
