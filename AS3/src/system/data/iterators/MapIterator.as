@@ -38,8 +38,8 @@ package system.data.iterators
     import system.data.Iterator;
     import system.data.Map;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * Converts a <code class="prettyprint">Map</code> to an iterator.
      */
@@ -69,7 +69,7 @@ package system.data.iterators
         {
             return _i.hasNext() ;
         }
-
+        
         /**
          * Returns the current key of the internal pointer of the iterator (optional operation).
          * @return the current key of the internal pointer of the iterator (optional operation).
@@ -79,7 +79,7 @@ package system.data.iterators
             return _k ;
         }
         
-           /**
+        /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
          */
@@ -88,7 +88,7 @@ package system.data.iterators
             _k = _i.next() ;
             return _m.get(_k) ;
         }
-
+        
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
@@ -97,15 +97,15 @@ package system.data.iterators
             _i.remove() ;
             return _m.remove(_k) ;
         }
-
+        
         /**
          * Reset the internal pointer of the iterator (optional operation).
          */
         public function reset():void
         {
             _i.reset() ;
-        }        
-
+        } 
+        
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
          */    
@@ -117,19 +117,16 @@ package system.data.iterators
         /**
          * @private
          */
-        private var _m:Map ; 
-
+        private var _m:Map ;
+        
         /**
          * @private
          */
-        private var _i:ArrayIterator ; 
-
+        private var _i:ArrayIterator ;
+        
         /**
          * @private
          */
         private var _k:* ;
     }
 }
-
-
-
