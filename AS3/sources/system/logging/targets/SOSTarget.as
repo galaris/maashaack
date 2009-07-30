@@ -76,20 +76,7 @@ package system.logging.targets
             }
         }
         
-        /**
-         * Provides the message pattern to send in the SOS console the application color. 
-         */
-        public static const APPLICATION_COLOR:String = "!SOS<appColor>{0}</appColor>" ;
-        
-        /**
-         * Provides the message pattern to send in the SOS console the application name. 
-         */
-        public static const APPLICATION_NAME:String = "!SOS<appName>{0}</appName>" ;
-        
-        /**
-         * Provides the message to send in the SOS console to clear the console. 
-         */
-        public static const CLEAR:String = "!SOS<clear/>\n" ;
+        ///// Default LoggerLevel colors
         
         /**
          * Provides the color in the SOS console to display all levels. 
@@ -117,34 +104,51 @@ package system.logging.targets
         public static var FATAL_COLOR:Number = 0xFDD1B5 ;
         
         /**
-         * Provides the message to send in the SOS console to identify the application. 
-         */
-        public static var IDENTIFY:String = "!SOS<identify/>" ;
-        
-        /**
          * Provides the 'info' color in the SOS console. 
          */
         public static var INFO_COLOR:Number = 0xD2FAB8 ;
         
         /**
+         * Provides the 'warn' color in the SOS console. 
+         */
+        public static var WARN_COLOR:Number = 0xFDFDB5 ;
+        
+        ///// SOS socket command patterns
+        
+        /**
+         * Provides the message pattern to send in the SOS console the application color. 
+         */
+        public static const APPLICATION_COLOR:String = "!SOS<appColor>{0}</appColor>" ;
+        
+        /**
+         * Provides the message pattern to send in the SOS console the application name. 
+         */
+        public static const APPLICATION_NAME:String = "!SOS<appName>{0}</appName>" ;
+        
+        /**
+         * Provides the message to send in the SOS console to clear the console. 
+         */
+        public static const CLEAR:String = "!SOS<clear/>" ;
+        
+        /**
+         * Provides the message to send in the SOS console to identify the application. 
+         */
+        public static const IDENTIFY:String = "!SOS<identify/>" ;
+        
+        /**
          * Provided the "setLabelColor" pattern.
          */
-        public static var LEVEL_COLOR:String = "!SOS<setKey><name>{0}</name><color>{1}</color></setKey>\n" ;
+        public static var LEVEL_COLOR:String = "!SOS<setKey><name>{0}</name><color>{1}</color></setKey>" ;
         
         /**
          * Provides the message pattern to send in the SOS console the "showMessage" expression. 
          */
-        public static const SHOW_MESSAGE:String = "!SOS<showMessage key=\"{0}\">{1}</showMessage>\n" ;
+        public static const SHOW_MESSAGE:String = "!SOS<showMessage key=\"{0}\">{1}</showMessage>" ;
         
         /**
          * Provides the message pattern to send in the SOS console the "showFoldMessage" expression. 
          */
-        public static const SHOW_FOLD_MESSAGE:String = "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>\n" ;
-        
-        /**
-         * Provides the 'warn' color in the SOS console. 
-         */
-        public static var WARN_COLOR:Number = 0xFDFDB5 ;
+        public static const SHOW_FOLD_MESSAGE:String = "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>" ;
         
         /**
          * Defines the level colors policy in the message sending to the SOS console.
@@ -153,7 +157,7 @@ package system.logging.targets
         
         /**
          * Clear the console.
-         */    
+         */
         public function clear():void 
         {
             send( CLEAR ) ;
@@ -227,7 +231,15 @@ package system.logging.targets
             {
                 return ;
             }
-            send(Strings.format( LEVEL_COLOR ,level.toString() , isNaN(color) ? SOSTarget[ level.toString() + "_COLOR" ] : color )) ;
+            send
+            ( 
+                Strings.format
+                ( 
+                    LEVEL_COLOR ,
+                    String(level) , 
+                    isNaN(color) ? SOSTarget[ String(level) + "_COLOR" ] : color 
+                )
+            ) ;
         }
     }
 }
