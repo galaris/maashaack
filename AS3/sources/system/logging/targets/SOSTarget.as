@@ -127,6 +127,11 @@ package system.logging.targets
         public static var INFO_COLOR:Number = 0xD2FAB8 ;
         
         /**
+         * Provided the "setLabelColor" pattern.
+         */
+        public static var LEVEL_COLOR:String = "!SOS<setKey><name>{0}</name><color>{1}</color></setKey>\n" ;
+        
+        /**
          * Provides the message pattern to send in the SOS console the "showMessage" expression. 
          */
         public static const SHOW_MESSAGE:String = "!SOS<showMessage key=\"{0}\">{1}</showMessage>\n" ;
@@ -135,7 +140,6 @@ package system.logging.targets
          * Provides the message pattern to send in the SOS console the "showFoldMessage" expression. 
          */
         public static const SHOW_FOLD_MESSAGE:String = "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>\n" ;
-        
         
         /**
          * Provides the 'warn' color in the SOS console. 
@@ -153,21 +157,6 @@ package system.logging.targets
         public function clear():void 
         {
             send( CLEAR ) ;
-        }
-        
-        /**
-         * Returns the string socket representation to send a fold message in the SOS Console.
-         * @return the string socket representation to send a fold message in the SOS Console.
-         */
-        public function getFoldMessage( title:String, message:String, level:LoggerLevel ):String
-        {
-            var msg:String = "";
-            var levelName:String = LoggerEvent.getLevelString( level ) ;
-            msg += '!SOS<showFoldMessage key="' + levelName + '">';
-            msg += '<title>' + title + '</title>';
-            msg += '<message><![CDATA[' + message + ']]></message>' ;
-            msg += '</showFoldMessage>' ;
-            return msg ;
         }
         
         /**
@@ -229,7 +218,7 @@ package system.logging.targets
         }
         
         /**
-         * Sets the color for a specific level.
+         * Sets the color for a specific level. If the color argument is NaN, the default color of the passed-in LoggerLevel is used.
          * @see LogEventLevel
          */
         public function setLevelColor( level:LoggerLevel, color:Number=NaN ):void 
@@ -238,11 +227,7 @@ package system.logging.targets
             {
                 return ;
             }
-            var msg:String = "!SOS<setKey>" ;
-            msg += "<name>" + level.toString() + "</name>" ;
-            msg += "<color>"+ ( isNaN(color) ? SOSTarget[ level.toString() + "_COLOR" ] : color ) + "</color>" ;
-            msg += "</setKey>\n" ;
-            send(msg) ;
+            send(Strings.format( LEVEL_COLOR ,level.toString() , isNaN(color) ? SOSTarget[ level.toString() + "_COLOR" ] : color )) ;
         }
     }
 }

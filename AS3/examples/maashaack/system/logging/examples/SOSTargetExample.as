@@ -96,6 +96,10 @@ package examples
             {
                 case Keyboard.SPACE :
                 {
+                    // customize and change the colors of all levels in the console with this application
+                    target.setLevelColor( LoggerLevel.ALL , 0xF1F1F3 ) ; 
+                    
+                    // clear the console
                     target.clear() ;
                     break ;
                 }
