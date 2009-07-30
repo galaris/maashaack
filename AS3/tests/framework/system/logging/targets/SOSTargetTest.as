@@ -33,44 +33,52 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package examples 
+package system.logging.targets 
 {
-    import system.logging.Log;
-    import system.logging.Logger;
-    import system.logging.LoggerLevel;
-    import system.logging.targets.TraceTarget;
-    
-    import flash.display.Sprite;
-    
-    public class TraceTargetExample extends Sprite 
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class SOSTargetTest extends TestCase 
     {
-        public function TraceTargetExample()
+        public function SOSTargetTest(name:String = "")
         {
-            var target:TraceTarget = new TraceTarget() ;
-            
-            target.includeDate    = true ;
-            target.includeTime    = true ;
-            target.includeLevel   = true ;
-            target.includeChannel = true ;
-            target.includeLines   = true ;
-            
-            target.filters        = [ "examples.*" ] ;
-            target.level          = LoggerLevel.ALL ;
-            
-            var logger:Logger = Log.getLogger( "examples.TraceTarget" ) ;
-            
-            logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
-            logger.debug ( "Here is some debug message." ) ;
-            logger.info  ( "Here is some info message." ) ;
-            logger.warn  ( "Here is some warn message." ) ;
-            logger.error ( "Here is some error message." ) ;
-            logger.fatal ( "Here is some fatal error..." ) ;
-            
-            target.includeDate    = false ;
-            target.includeTime    = false ;
-            target.includeChannel = false ;
-            
-            logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
+            super(name);
+        }
+        
+        public var target:SocketTarget ;
+        
+        public function setUp():void
+        {
+            target = new SOSTarget("localhost", 4444, false) ;
+        }
+        
+        public function tearDown():void
+        {
+            target = undefined  ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
+        }
+        
+        public function testHost():void
+        {
+            assertEquals( target.host , "localhost" , "The host property failed." ) ;
+        }
+        
+        public function testPort():void
+        {
+            assertEquals( target.port , 4444 , "The port property failed." ) ;
+        }
+        
+        public function testConnected():void
+        {
+            assertFalse( target.connected , "The port property failed." ) ;
         }
     }
 }

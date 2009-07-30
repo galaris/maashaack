@@ -56,6 +56,7 @@ package system.logging.targets
             if( Environment.host.id != HostID.RedTamarin )
             {
                 suite.addTestSuite( SocketTargetTest ) ;
+                suite.addTestSuite( SOSTargetTest    ) ;
             }
             
             return suite;

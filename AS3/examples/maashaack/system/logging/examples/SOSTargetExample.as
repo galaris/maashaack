@@ -38,15 +38,21 @@ package examples
     import system.logging.Log;
     import system.logging.Logger;
     import system.logging.LoggerLevel;
-    import system.logging.targets.TraceTarget;
+    import system.logging.targets.SOSTarget;
     
     import flash.display.Sprite;
+    import flash.events.KeyboardEvent;
+    import flash.ui.Keyboard;
     
-    public class TraceTargetExample extends Sprite 
+    /**
+     * Test the SOSTarget class with the SOS Max Console.
+     * <p>Thanks <b>PowerFlasher</b> and the free <a href='http://sos.powerflasher.de/'>SOS Max Console</a></p>
+     */
+    public class SOSTargetExample extends Sprite 
     {
-        public function TraceTargetExample()
+        public function SOSTargetExample()
         {
-            var target:TraceTarget = new TraceTarget() ;
+            target = new SOSTarget( "SOS console test", 0xFFFFE6 ) ;
             
             target.includeDate    = true ;
             target.includeTime    = true ;
@@ -57,7 +63,9 @@ package examples
             target.filters        = [ "examples.*" ] ;
             target.level          = LoggerLevel.ALL ;
             
-            var logger:Logger = Log.getLogger( "examples.TraceTarget" ) ;
+            target.sendFoldLevelMessage("Test a fold message", "Here the description of the fold message with a specific level" , LoggerLevel.INFO ) ;
+            
+            logger = Log.getLogger( "examples.SOSTarget" ) ;
             
             logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
             logger.debug ( "Here is some debug message." ) ;
@@ -71,6 +79,31 @@ package examples
             target.includeChannel = false ;
             
             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
+            
+            ////////
+            
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+        }
+        
+        public var logger:Logger ;
+        
+        public var target:SOSTarget ;
+        
+        public function keyDown( e:KeyboardEvent ):void
+        {
+            var code:int = e.keyCode ;
+            switch( code )
+            {
+                case Keyboard.SPACE :
+                {
+                    target.clear() ;
+                    break ;
+                }
+                default :
+                {
+                    logger.log( "log message" ) ;
+                }
+            }
         }
     }
 }
