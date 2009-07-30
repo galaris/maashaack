@@ -36,9 +36,9 @@
 package system.logging
 {
     import system.events.LoggerEvent;
-    
+
     import flash.events.EventDispatcher;
-    
+
     /**
      * The logger that is used within the logging framework. This class dispatches events for each message logged using the log() method.
      */
@@ -138,7 +138,7 @@ package system.logging
                     var len:int = options.length ;
                     for( var i:int ; i<len ; i++ )
                     {
-                        context = (context as String).replace(new RegExp("\\{"+i+"\\}", "g"), options[i]);
+                        context = (context as String).replace( new RegExp( "\\{" + i + "\\}" , "g" ) , options[i]);
                     }
                 }
                 dispatchEvent( new LoggerEvent( context, level ) ) ;
