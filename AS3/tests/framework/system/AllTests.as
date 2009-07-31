@@ -47,6 +47,7 @@ package system
     import system.events.AllTests;
     import system.formatters.AllTests;
     import system.hosts.HostID;
+    import system.logging.AllTests;
     import system.network.AllTests;
     import system.numeric.AllTests;
     import system.process.AllTests;
@@ -116,6 +117,9 @@ package system
             
             //formatters
             suite.addTest( system.formatters.AllTests.suite() );
+            
+            //logging
+            suite.addTest( system.logging.AllTests.suite() );
             
             //numeric
             suite.addTest( system.numeric.AllTests.suite() );
