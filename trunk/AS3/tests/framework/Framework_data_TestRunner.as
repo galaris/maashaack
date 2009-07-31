@@ -37,6 +37,8 @@ package
 {
     import buRRRn.ASTUce.*;
     
+    import graphics.AllTests;
+    
     import system.*;
     import system.ui.TextFieldConsole;
     
@@ -45,13 +47,12 @@ package
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.text.TextField;
-    import flash.text.TextFormat;    
-
-    [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
-
+    import flash.text.TextFormat;
+    
+    [SWF(width="760", height="800", frameRate="24", backgroundColor="#666666")]
+    
     public class Framework_data_TestRunner extends Sprite
     {
-        
         public function Framework_data_TestRunner()
         {
             // init
@@ -82,6 +83,7 @@ package
             Runner.main
             ( 
                 //core.AllTests.suite() , 
+                graphics.AllTests.suite() ,
                 system.AllTests.suite()
             );
             
