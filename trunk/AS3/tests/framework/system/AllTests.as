@@ -80,6 +80,7 @@ package system
             suite.addTestSuite( CloneableTest );
             suite.addTestSuite( ComparableTest );
             suite.addTestSuite( ComparatorTest );
+            suite.addTestSuite( EnumTest );
             suite.addTestSuite( SortableTest );
             suite.addTestSuite( VersionTest );
             suite.addTestSuite( ReflectionTest );
