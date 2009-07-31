@@ -83,8 +83,7 @@ package
             
             Runner.main
             ( 
-                system.logging.AllTests.suite() ,
-                graphics.colors.AllTests.suite()
+                //
             );
         }
             
