@@ -48,7 +48,7 @@ package system.logging.targets
         
         public function setUp():void
         {
-            target = new SOSTarget("localhost", 4444, false) ;
+            target = new SOSTarget( "application" , 0xFF0000 , true , "localhost" , 4444 , false ) ;
         }
         
         public function tearDown():void
