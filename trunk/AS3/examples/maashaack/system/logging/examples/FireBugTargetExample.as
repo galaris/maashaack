@@ -33,34 +33,44 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.targets
+package examples 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import system.logging.Log;
+    import system.logging.Logger;
+    import system.logging.LoggerLevel;
+    import system.logging.targets.FireBugTarget;
     
-    import system.Environment;
-    import system.hosts.HostID;
+    import flash.display.Sprite;
     
-    public class AllTests
+    public class FireBugTargetExample extends Sprite 
     {
-        public static function suite():ITest
+        public function FireBugTargetExample()
         {
-            var suite:TestSuite = new TestSuite( "system.logging.targets package" );
+            var target:FireBugTarget = new FireBugTarget() ;
             
-            suite.addTestSuite( CoreLoggerTargetTest ) ;
-            suite.addTestSuite( LineFormattedTargetTest ) ;
+            target.includeDate    = true ;
+            target.includeTime    = true ;
+            target.includeLevel   = true ;
+            target.includeChannel = true ;
+            target.includeLines   = true ;
             
-            suite.addTestSuite( TextFieldTargetTest ) ;
-            suite.addTestSuite( TraceTargetTest ) ;
+            target.filters        = [ "examples.*" ] ;
+            target.level          = LoggerLevel.ALL ;
             
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( FireBugTargetTest ) ;
-                suite.addTestSuite( SocketTargetTest  ) ;
-                suite.addTestSuite( SOSTargetTest     ) ;
-            }
+            var logger:Logger = Log.getLogger( "examples.TextFieldTarget" ) ;
             
-            return suite;
+            logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+            logger.debug ( "Here is some debug message." ) ;
+            logger.info  ( "Here is some info message." ) ;
+            logger.warn  ( "Here is some warn message." ) ;
+            logger.error ( "Here is some error message." ) ;
+            logger.fatal ( "Here is some fatal error..." ) ;
+            
+            target.includeDate    = false ;
+            target.includeTime    = false ;
+            target.includeChannel = false ;
+            
+            logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
         }
-	}
+    }
 }
