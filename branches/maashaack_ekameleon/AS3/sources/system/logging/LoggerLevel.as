@@ -72,7 +72,7 @@ package system.logging
         /**
          * Designates events that are very harmful and will eventually lead to application failure (1000).
          */
-        public static const FATAL:LoggerLevel = new LoggerLevel( 1000 , "FATAL" ) ;
+        public static const FATAL:LoggerLevel = new LoggerLevel( 16 , "FATAL" ) ;
         
         /**
          * Designates informational messages that highlight the progress of the application at coarse-grained level (4).
@@ -107,6 +107,24 @@ package system.logging
             {
                 return false ;
             }
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if the number level passed in argument is valid.
+         * @return <code class="prettyprint">true</code> if the number level passed in argument is valid.
+         */
+        public static function getLevel( value:int ):LoggerLevel 
+        {
+            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
+            var l:int = levels.length ;
+            while( --l > -1 )
+            {
+                if ( int(levels[l] as LoggerLevel) == value )
+                {
+                    return levels[l] ; 
+                }
+            }
+            return null ;
         }
         
         /**

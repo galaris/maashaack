@@ -82,7 +82,7 @@ package system.logging
         
         public function testFATAL():void
         {
-            assertEquals( LoggerLevel.FATAL, new LoggerLevel( 1000 , "FATAL" ) , "LoggerLevel.FATAL failed.") ;
+            assertEquals( LoggerLevel.FATAL, new LoggerLevel( 16 , "FATAL" ) , "LoggerLevel.FATAL failed.") ;
         }
         
         public function testINFO():void
@@ -99,6 +99,17 @@ package system.logging
         {
             var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
             assertTrue( enum.equals( new LoggerLevel(999999 , "test") ) , "equals method failed." ) ;
+        }
+        
+        public function testGetLevel():void
+        {
+            assertEquals( LoggerLevel.getLevel(  0 ) , LoggerLevel.ALL   , "01 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  2 ) , LoggerLevel.DEBUG , "02 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  4 ) , LoggerLevel.INFO  , "05 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  6 ) , LoggerLevel.WARN  , "06 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  8 ) , LoggerLevel.ERROR , "03 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel( 16 ) , LoggerLevel.FATAL , "04 - LoggerLevel.getLevel failed." ) ;
+            assertNull( LoggerLevel.getLevel( 10 ) , "07 - LoggerLevel.getLevel failed must returns null with an unknow value."  ) ;
         }
         
         public function testIsValidLevel():void
