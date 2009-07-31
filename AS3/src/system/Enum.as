@@ -67,7 +67,7 @@ package system
          */
         public function toSource( indent:int = 0 ):String
         {
-            var classname:String = Reflection.getClassName( this );
+            var classname:String = Reflection.getClassPath( this ); // NOTE : when eden use alias find a switch solution
             if( _name != "" )
             {
                 return classname + "." + _name ;
