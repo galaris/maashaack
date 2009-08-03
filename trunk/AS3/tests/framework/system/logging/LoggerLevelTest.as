@@ -62,7 +62,7 @@ package system.logging
         
         public function testNONE():void
         {
-            assertEquals( LoggerLevel.NONE, new LoggerLevel(int.MAX_VALUE, "NONE" ) , "LoggerLevel.NONE failed.") ;
+            assertEquals( LoggerLevel.NONE, new LoggerLevel(-1, "NONE" ) , "LoggerLevel.NONE failed.") ;
         }
         
         public function testALL():void
@@ -103,6 +103,7 @@ package system.logging
         
         public function testGetLevel():void
         {
+            assertEquals( LoggerLevel.getLevel( -1 ) , LoggerLevel.NONE  , "00 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  0 ) , LoggerLevel.ALL   , "01 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  2 ) , LoggerLevel.DEBUG , "02 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  4 ) , LoggerLevel.INFO  , "05 - LoggerLevel.getLevel failed." ) ;
@@ -114,6 +115,7 @@ package system.logging
         
         public function testIsValidLevel():void
         {
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.NONE  ) , "00 - LoggerLevel.NONE is invalid"   ) ;
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.ALL   ) , "01 - LoggerLevel.ALL is invalid"   ) ;
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.DEBUG ) , "02 - LoggerLevel.DEBUG is invalid" ) ;
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.ERROR ) , "03 - LoggerLevel.ERROR is invalid" ) ;
@@ -125,6 +127,7 @@ package system.logging
         
         public function testToSource():void
         {
+            assertEquals( LoggerLevel.NONE.toSource()  , "system.logging.LoggerLevel.NONE"  , "00 - LoggerLevel.NONE toSource() failed."   ) ;
             assertEquals( LoggerLevel.ALL.toSource()   , "system.logging.LoggerLevel.ALL"   , "01 - LoggerLevel.ALL toSource() failed."   ) ;
             assertEquals( LoggerLevel.DEBUG.toSource() , "system.logging.LoggerLevel.DEBUG" , "02 - LoggerLevel.DEBUG toSource() failed." ) ;
             assertEquals( LoggerLevel.ERROR.toSource() , "system.logging.LoggerLevel.ERROR" , "03 - LoggerLevel.ERROR toSource() failed." ) ;
