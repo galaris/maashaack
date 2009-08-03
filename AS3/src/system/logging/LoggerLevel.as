@@ -82,7 +82,7 @@ package system.logging
         /**
          * A special level that can be used to turn off logging (int.MAX_VALUE).
          */
-        public static const NONE:LoggerLevel = new LoggerLevel( int.MAX_VALUE , "NONE" ) ;
+        public static const NONE:LoggerLevel = new LoggerLevel( -1 , "NONE" ) ;
         
         /**
          * Designates events that could be harmful to the application operation (6).
@@ -135,20 +135,6 @@ package system.logging
         {
             var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
             return levels.indexOf( level ) > -1 ;
-        }
-        
-        /**
-         * Returns the source code String representation of the object.
-         * @return the source code String representation of the object.
-         */
-        public override function toSource( indent:int = 0 ):String  
-        { 
-            var classPath:String = Reflection.getClassPath( this );
-            if( _name != "" )
-            {
-                return classPath + "." + _name ;
-            }
-            return classPath ;
         }
     }
 }
