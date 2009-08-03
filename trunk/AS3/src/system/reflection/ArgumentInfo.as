@@ -35,17 +35,14 @@
 
 package system.reflection
 {
-
     /**
      * This interface defines the argument information tool objects.
      */
     public interface ArgumentInfo extends MemberInfo
     {
-
         /**
          * Indicates if the current argument is optional.
          */
-        function isOptional():Boolean;
+        function isOptional():Boolean ;
     }
 }
-

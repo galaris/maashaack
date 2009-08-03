@@ -37,7 +37,7 @@ package system.formatters
 {
     import system.Reflection;
     import system.Serializable;
-    import system.numeric.Range;    
+    import system.numeric.Range;
     
     /**
      * DateFormatter formats a given date with a specified pattern.
@@ -87,119 +87,119 @@ package system.formatters
         {
             _pattern = pattern ;
         }
-
+        
         /**
          * Placeholder for AM/PM designator who indicates if the hour is is before or after noon in date format.
          * The output is lower-case. Examples: t -> a or p  / tt -> am or pm.
          */
         public static const AM_PM:String = "t";
-
+        
         /**
          * Placeholder for AM/PM designator who indicates if the hour is is before or after noon in date format.
          * The output is capitalized. Examples: T -> T or P / TT -> AM or PM.
          */
         public static const CAPITAL_AM_PM:String = "T" ;
-
+        
         /**
          * The default AM/PM designator expression.
          */
-        public static var DEFAULT_AM_EXPRESSION:String = "am" ;            
-
+        public static var DEFAULT_AM_EXPRESSION:String = "am" ;
+        
         /**
          * The default date format pattern <code class="prettyprint">"dd.mm.yyyy HH:nn:ss"</code>.
          */
         public static const DEFAULT_DATE_FORMAT:String = "dd.mm.yyyy HH:nn:ss" ;
-
+        
         /**
          * Placeholder for day in month as number in date format.
          */
         public static const DAY_AS_NUMBER:String = "d" ;
-
+        
         /**
          * Placeholder for day in week as text in date format.
          */
         public static const DAY_AS_TEXT:String = "D" ;
-
+        
         /**
          * The default AM/PM designator expression.
          */
-        public static  var DEFAULT_PM_EXPRESSION:String = "pm" ;        
-
+        public static  var DEFAULT_PM_EXPRESSION:String = "pm" ;
+        
         /**
          * Placeholder for hour in am/pm (1 - 12) in date format.
          */
         public static const HOUR_IN_AM_PM:String = "h" ;
-
+        
         /**
          * Placeholder for hour in day (0 - 23) in date format.
          */
         public static const HOUR_IN_DAY:String = "H";
-
+        
         /**
          * Placeholder for minute in hour in date format.
          */
         public static const MINUTE:String = "n";
-
+        
         /**
          * Placeholder for millisecond in date format.
          */
         public static const MILLISECOND:String = "S";
-
+        
         /**
          * Placeholder for month in year as number in date format.
          */
         public static const MONTH_AS_NUMBER:String = "m";
-
+        
         /**
          * Placeholder for month in year as text in date format.
          */
         public static const MONTH_AS_TEXT:String = "M";
-
+        
         /**
          * Quotation beginning and ending token. 
          */
         public static const QUOTE:String = "'";
-
+        
         /**
          * The internal range use to defined the days as text in the DateFormatter.
          */
         public static const RANGE_DAY_AS_TEXT:Range = new Range( 0, 6 ) ;
-
+        
         /**
          * The internal range use to defined the hours in the DateFormatter.
          */
         public static const RANGE_HOUR:Range = new Range( 0, 23 ) ;
-
+        
         /**
          * The internal range use to defined the minutes in the DateFormatter.
          */
         public static const RANGE_MINUTE:Range = new Range( 0, 59 ) ;
-
+        
         /**
          * The internal range use to defined the milliseconds in the DateFormatter.
          */
         public static const RANGE_MILLISECOND:Range = new Range( 0, 999 ) ;
-
+        
         /**
          * The internal range use to defined the months in the DateFormatter.
          */
         public static const RANGE_MONTH:Range = new Range( 0, 11 ) ;
-
+        
         /**
          * The internal range use to defined the seconds in the DateFormatter.
          */
         public static const RANGE_SECOND:Range = new Range( 0, 59 ) ;
-
+        
         /**
          * Placeholder for second in minute in date format.
          */
         public static const SECOND:String = "s";
-
+        
         /**
          * Placeholder for year in date format.
          */
         public static const YEAR:String = "y";
-
+        
         /**
          * Indicates the internal pattern of this formatter.
          */
@@ -207,15 +207,15 @@ package system.formatters
         {
             return _pattern ;
         }
-
+        
         /**
          * @private
          */
         public function set pattern( expression:String ):void 
         {
             this._pattern = expression ;
-        }        
-
+        }
+        
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
@@ -224,7 +224,7 @@ package system.formatters
         {
             return new DateFormatter( pattern )  ;
         }
-
+        
         /**
          * Formats the specified value.
          * <pre class="prettyprint">
@@ -272,14 +272,14 @@ package system.formatters
             var date:Date = ( value != null && value is Date) ? (value as Date) : new Date( ) ;
             
             var next:int ;
-            var prev:int ;            
+            var prev:int ;
             
             var p:String = pattern ;
             var a:Array = p.split( "" ) ;
             var l:Number = a.length ;
             var i:Number = - 1 ;
             var r:String = "" ;
-
+            
             while (++ i < l) 
             {
                 ch = a[i] ;
@@ -375,7 +375,7 @@ package system.formatters
             } 
             return r ;
         }
-
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -383,14 +383,14 @@ package system.formatters
         public function toSource( indent:int = 0 ):String 
         {
             return "new " + Reflection.getClassPath( this ) + '("' + ( pattern || DEFAULT_DATE_FORMAT ) + '")' ;
-        }        
+        }
         
         /**
          * The private internal dateParser namespace.
          * @private
          */
         private namespace dateparser ;
-
+        
         /**
          * Formats the specified number day value in a string representation.
          * @return the specified numberday value in a string representation.
@@ -404,7 +404,7 @@ package system.formatters
             var string:String = day.toString( );
             return (getZeros( cpt - string.length ) + string);
         }
-
+        
         /**
          * Formats the specified day value in a string representation.
          * @return the specified day value in a string representation.
@@ -424,7 +424,7 @@ package system.formatters
             if (cpt < 4) return r.substr( 0, 2 );
             return r ;
         }
-
+        
         /**
          * Formats the designator AM/PM in string expression.
          * @return the specified am/pm expression representation.
@@ -443,8 +443,8 @@ package system.formatters
             s = s.slice( 0, cpt ) ;
             ;
             return capitalize ? s.toUpperCase( ) : s.toLowerCase( ) ;
-        }        
-
+        }
+        
         /**
          * Formats the specified hour value in a string representation with the am-pm notation.
          * @return the specified hour value in a string representation with the am-pm notation.
@@ -474,7 +474,7 @@ package system.formatters
             }
             return (getZeros( cpt - s.length ) + s);
         }
-
+        
         /**
          * Formats an hour number in string expression.
          */
@@ -491,7 +491,7 @@ package system.formatters
             var s:String = hour.toString( );
             return (getZeros( cpt - s.length ) + s) ;
         }
-
+        
         /**
          * Formats a millisecond value number in string expression.
          */
@@ -508,7 +508,7 @@ package system.formatters
             var s:String = millisecond.toString( );
             return (getZeros( cpt - s.length ) + s) ;
         }
-
+        
         /**
          * Formats a minute value number in string expression.
          */
@@ -522,7 +522,7 @@ package system.formatters
             var s:String = minute.toString( );
             return (getZeros( cpt - s.length ) + s);
         }
-
+        
         /**
          * Formats a month value number in string expression.
          */
@@ -539,7 +539,7 @@ package system.formatters
             var string:String = (month + 1).toString( );
             return (getZeros( cpt - string.length ) + string) ;
         }
-
+        
         /**
          * Formats a month text value in string expression.
          */
@@ -559,7 +559,7 @@ package system.formatters
             }
             return r;
         }
-
+        
         /**
          * Format the second value passed in argument.
          * @return the second string representation of this DateFormatter.
@@ -577,7 +577,7 @@ package system.formatters
             var s:String = second.toString( ) ;
             return (getZeros( cpt - s.length ) + s);
         }
-
+        
         /**
          * Format the year value passed in argument.
          * @return the year string representation of this DateFormatter.
@@ -598,7 +598,7 @@ package system.formatters
             }
             return (getZeros( cpt - 4 ) + year.toString( ));
         }
-
+        
         /**
          * Returns a string representation fill by 0 values or an empty string if the cpt value is NaN or <1.
          * @return a string representation fill by 0 values or an empty string if the cpt value is NaN or <1.
@@ -622,14 +622,14 @@ package system.formatters
             }
             return r ;
         }
-
+        
         /**
          * The internal pattern of this formatter.
          */
         dateparser var _pattern:String ; 
         
-        // pattern        
-                    
+        // pattern
+         
         /**
          * @private
          */

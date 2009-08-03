@@ -35,13 +35,11 @@
 
 package system
 {
-
     /**
      * This interface is implemented by classes that can compare an object with their objects.
-     */    
+     */
     public interface Equatable
     {
-
         /**
          * Compares the specified object with this object for equality.
          * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
@@ -49,4 +47,3 @@ package system
         function equals( o:* ):Boolean;
     }
 }
-

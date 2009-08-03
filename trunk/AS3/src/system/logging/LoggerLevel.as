@@ -37,7 +37,6 @@ package system.logging
 {
     import system.Enum;
     import system.Equatable;
-    import system.Reflection;
 
     /**
      * Static class containing constants for use in the level property.

@@ -36,13 +36,12 @@
 package system.reflection
 {
     import system.Enum;
-
+    
     /**
      * This enumeration contains all accessor types.
      */
     public class AccessorType extends Enum
     {
-
         /**
          * Creates a new AccessorType instance.
          * @param value The value of the enumeration.
@@ -56,17 +55,17 @@ package system.reflection
         /**
          * Determinates the "readOnly" accessor type value.
          */
-        public static const readOnly:AccessorType = new AccessorType( 1, "readonly" );
+        public static const readOnly:AccessorType = new AccessorType( 1, "readonly" ) ;
         
         /**
          * Determinates the "writeOnly" accessor type value.
          */
-        public static const writeOnly:AccessorType = new AccessorType( 2, "writeonly" );
+        public static const writeOnly:AccessorType = new AccessorType( 2, "writeonly" ) ;
         
         /**
          * Determinates the "readWrite" accessor type value.
          */
-        public static const readWrite:AccessorType = new AccessorType( 3, "readwrite" );
+        public static const readWrite:AccessorType = new AccessorType( 3, "readwrite" ) ;
     }
 }
 

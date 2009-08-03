@@ -35,13 +35,11 @@
 
 package system
 {
-
     /**
      * Allows an object to control its own serialization and deserialization.
      */
     public interface Serializable
     {
-
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -49,4 +47,3 @@ package system
         function toSource( indent:int = 0 ):String;
     }
 }
-
