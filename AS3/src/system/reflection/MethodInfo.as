@@ -35,34 +35,32 @@
 
 package system.reflection
 {
-
     /**
      * This interface defines the method information tool objects.
      */
     public interface MethodInfo
     {
-
         /**
          * Indicates the Array representation of all arguments passed-in the method.
          */
         function get arguments():Array;
-
+        
         //function contruct( args... ):*;
+        
+        /**
+         * Indicates the name of the method.
+         */
+        function get name():String;
+        
+        /**
+         * Indicates the String representation of the return type of the method.
+         */
+        function get returnType():String;
         
         /**
          * Indicates if the method returns nothing.
          */
         function isVoid():Boolean;
-
-        /**
-         * Indicates the name of the method.
-         */
-        function get name():String;
-
-        /**
-         * Indicates the String representation of the return type of the method.
-         */
-        function get returnType():String;
     }
 }
 

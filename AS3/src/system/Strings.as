@@ -37,14 +37,13 @@ package system
 {
     import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
-    import system.evaluators.MultiEvaluator;    
-
+    import system.evaluators.MultiEvaluator;
+    
     /**
      * A static class for String utilities.
      */
     public class Strings
     {
-
         /**
          * @private
          * @see system.Strings#compare
@@ -84,10 +83,9 @@ package system
                     str = paddingChar + str;
                 }
             }
-            
             return str;
         }
-
+        
         /**
          * Helper method used by trim, trimStart and trimEnd methods.
          * @private
@@ -117,7 +115,7 @@ package system
             
             return str;
         }
-
+        
         /**
          * Returns the center String representation of the specified String value.
          * <p><b>Example :</b></p>
@@ -143,8 +141,6 @@ package system
             return repeat( separator, m ) + str + repeat( separator, size - n - m ) ;
         }
         
-
-        
         /**
          * Compares the two specified String objects. Allows to take into account the string case for comparison. 
          * @param o1 first string to compare with the second string.
@@ -155,7 +151,7 @@ package system
         {
             return _sComparator.compare(o1,o2, !strict) ;
         }
-
+        
         /**
          * Determines whether the end of this instance matches the specified String.
          * <p><b>Example :</b></p>
@@ -180,7 +176,7 @@ package system
             
             return compare( str.substr( str.length - value.length ), value ) == 0;
         }
-
+        
         /**
          * Contain a list of evaluators to be used in Strings.format
          * 
@@ -193,7 +189,7 @@ package system
          * lower case alphabetical chars and digit chars
          */
         public static var evaluators:Object = {};
-
+        
         /* internal:
         Strings.format can take index from 0 to infinity
         {0}, {1}, ..., {99}, etc.
@@ -205,12 +201,12 @@ package system
         to avoid a conflict with that arbitrary number
          */
         private static var _hiddenIndex:uint = 100;
-
+        
         /* internal:
         supported format
         ${...}$ default to EdenEvaluator
         ${...}name1,name2,...$
-           
+        
         TODO:
         there are no test for }...$ sequence
         so yeah it's weak and yeah you could break it with something like
@@ -437,7 +433,7 @@ package system
             
             return formated;
         }
-
+        
         /** 
          * Format a string using indexed, named and/or evaluated parameters.
          * <p>Method call :</p>
@@ -529,7 +525,6 @@ package system
          */
         public static function format( format:String, ...args ):String
         {
-            
             var indexedValues:Array = [] ;
             var namedValues:Object  = {} ;
             
@@ -565,7 +560,7 @@ package system
             }
             
             indexedValues = indexedValues.concat( args );
-
+            
             if( indexedValues.length - 1 >= _hiddenIndex )
             {
                 /* TODO:
@@ -617,7 +612,7 @@ package system
             
             return formated;
         }
-
+        
         /**
          * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          * <p><b>Example :</b></p>
@@ -664,7 +659,7 @@ package system
             
             return - 1;
         }
-
+        
         /**
          * Inserts a specified instance of String at a specified index position in this instance.
          * note :

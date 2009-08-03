@@ -36,7 +36,7 @@
 package system.reflection
 {
     import system.Enum;
-
+    
     /**
      * The filter type enumeration class.
      * <p><b>Description :</p>
@@ -49,17 +49,16 @@ package system.reflection
      */
     public class FilterType extends Enum
     {
-
         /**
          * Creates a new FilterType instance.
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
          */
-        public function FilterType( value:int = 0, name:String = "")
+        public function FilterType( value:int = 0 , name:String = "" )
         {
-            super( value, name );
+            super( value , name ) ;
         }
-
+        
         /**
          * Indicates if use prototype information.
          */
@@ -67,10 +66,10 @@ package system.reflection
         {
             return ( valueOf() & 0x00000F ) < 2 ;
         }
-
+        
         /**
          * Indicates if use trait information.
-         */          
+         */
         public function get useTraitInfo():Boolean
         {
             return ( valueOf() & 0x00000F ) != 1 ;
@@ -83,13 +82,13 @@ package system.reflection
         {
             return ( (valueOf( ) & 0x0000F0) >>> 4 ) <= 1 ;
         }
-
+        
         /**
          * Indicates if the inherited class are showed.
          */
         public function get showInherited():Boolean
         {
-            return ( (valueOf( ) & 0x0000f0) >>> 4 ) == 0;
+            return ( (valueOf( ) & 0x0000f0) >>> 4 ) == 0 ;
         }
         
         /**
@@ -106,17 +105,17 @@ package system.reflection
          * <li>both declared and inherited</li>
          * <li>ignore static</li>
          */
-        public static const none:FilterType = new FilterType( 0x000, "none" );
+        public static const none:FilterType = new FilterType( 0x000 , "none" ) ;
         
         /**
          * Trait members will not be searched. 
          */
-        public static const prototypeOnly:FilterType = new FilterType( 0x001, "prototypeOnly" );
+        public static const prototypeOnly:FilterType = new FilterType( 0x001 , "prototypeOnly" ) ;
         
         /**
          * Prototype members will not be searched. 
          */
-        public static const traitOnly:FilterType = new FilterType( 0x002, "traitOnly" );
+        public static const traitOnly:FilterType = new FilterType( 0x002 , "traitOnly" ) ;
         
         /**
          * Inherited members will not be searched.
@@ -127,12 +126,11 @@ package system.reflection
          * (cf: OOP in ActionScript/Advanced Topics/The Trait Object).</p>
          * <p>For prototype this will apply both to properties and methods.</p>
          */
-        public static const declaredOnly:FilterType = new FilterType( 0x010, "declaredOnly" );
+        public static const declaredOnly:FilterType = new FilterType( 0x010 , "declaredOnly" ) ;
         
         /**
          * Static members will be searched too. 
          */
-        public static const includeStatic:FilterType = new FilterType( 0x100, "includeStatic" );
+        public static const includeStatic:FilterType = new FilterType( 0x100 , "includeStatic" ) ;
     }
 }
-

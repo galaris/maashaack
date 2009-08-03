@@ -73,4 +73,3 @@ package system.reflection
         public static const method:MemberType = new MemberType( 4, "method" );
     }
 }
-

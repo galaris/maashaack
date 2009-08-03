@@ -37,9 +37,9 @@ package system.reflection
 {
     import system.Reflection;
     
-    import flash.utils.describeType;
-    import flash.utils.getQualifiedClassName;    
-
+    import flash.utils.describeType ;
+    import flash.utils.getQualifiedClassName ;
+    
     [ExcludeClass]
     
     /**
@@ -47,7 +47,6 @@ package system.reflection
      */
     public class _ClassInfo extends _TypeInfo implements ClassInfo
     {
-        
         /**
          * @private
          */
@@ -57,7 +56,7 @@ package system.reflection
          * @private
          */
         private var _filter:FilterType;
-
+        
         /**
          * @private
          */
@@ -89,12 +88,11 @@ package system.reflection
                         continue;
                     }
                     
-                    members.push( String( node.@name ) );
+                    members.push( String( node.@name ) ) ;
                 }
             }
-            
-            return members;
-        }        
+            return members ;
+        }
 
         /**
          * @private
@@ -186,7 +184,7 @@ package system.reflection
             
             return name == origin;
         }
-
+        
         /**
          * @private
          */
@@ -194,7 +192,7 @@ package system.reflection
         {
             return value.replace( "::", "." );
         }
-
+        
         /**
          * Creates a new _ClassInfo instance.
          */
@@ -205,15 +203,15 @@ package system.reflection
             _class = describeType( o );
             _filter = applyFilter;
         }
-
+        
         /**
          * List all accessors in the class.
          */
         public function get accessors():Array
         {
             return _getTraitMemberHelper( MemberType.accessor );
-        }        
-
+        }
+        
         /**
          * List all constants in the class.
          */
@@ -221,7 +219,7 @@ package system.reflection
         {
             return _getTraitMemberHelper( MemberType.constant );
         }
-
+        
         /**
          * Indicates the filter type value used in this class.
          */
@@ -229,7 +227,7 @@ package system.reflection
         {
             return _filter;
         }
-
+        
         /**
          * @private
          */        
@@ -237,15 +235,15 @@ package system.reflection
         {
             _filter = value;
         }
-
+        
         /**
          * List all members in the class.
          */
         public function get members():Array
         {
             return null;
-        }        
-
+        }
+        
         /**
          * List all methods in the class.
          */
@@ -265,7 +263,7 @@ package system.reflection
                                 continue;
                             }
                             meths.push( m1 );
-                        } 
+                        }
                     }
                 }
                 else
@@ -279,7 +277,7 @@ package system.reflection
                                 continue;
                             }
                             meths.push( m2 );
-                        } 
+                        }
                     }
                 }
             }
@@ -289,7 +287,7 @@ package system.reflection
             }
             return meths;
         }
-
+        
         /**
          * Indicates the name of the class.
          */
@@ -302,7 +300,7 @@ package system.reflection
             }
             return path;
         }
-
+        
         /**
          * List all properties in the class. 
          * Properties are the combination of variables, constants and accessors.
@@ -341,17 +339,15 @@ package system.reflection
                     }
                 }
             }
-            
             if( filter.useTraitInfo )
             {
                 props = props.concat( variables );
                 props = props.concat( constants );
                 props = props.concat( accessors );
             }
-            
             return props;
         }
-
+        
         /**
          * Indicates the ClassInfo object of the super class.
          */
@@ -378,16 +374,16 @@ package system.reflection
             {
                 return null;
             }
-        }            
-
+        }
+        
         /**
          * List all variables in the class.
          */
         public function get variables():Array
         {
-            return _getTraitMemberHelper( MemberType.variable );
+            return _getTraitMemberHelper( MemberType.variable ) ;
         }
-
+        
         /**
          * Indicates if the specified class implements all interfaces passed-in arguments.
          * @param ...interfaces All the interfaces to search in the current ClassInfo.
@@ -399,7 +395,6 @@ package system.reflection
             {
                 return false;
             }
-            
             for( var i:int = 0; i < interfaces.length ; i++ )
             {
                 if( !_hasInterface( interfaces[i] ) )
@@ -407,8 +402,7 @@ package system.reflection
                     return false;
                 }
             }
-            
-            return true;
+            return true ;
         }
         
         /**
@@ -430,7 +424,6 @@ package system.reflection
                     return false;
                 }
             }
-            
             return true;
         }
         
@@ -446,7 +439,7 @@ package system.reflection
         {
             return _class.@isDynamic == "true";
         }
-
+        
         /**
          * Indicates if the specified object is final.
          * <p><b>Example :</b></p>
@@ -454,12 +447,12 @@ package system.reflection
          * import system.Reflection ;
          * trace( Reflection.getClassInfo(String).isFinal() ) ; // true
          * </pre>
-         */        
+         */
         public function isFinal():Boolean
         {
             return _class.@isFinal == "true";
         }
-
+        
         /**
          * Indicates if the specified object is instance.
          * <p><b>Example :</b></p>
@@ -469,12 +462,12 @@ package system.reflection
          * trace( Reflection.getClassInfo( Array ).isInstance() ) ; // false
          * trace( Reflection.getClassInfo( new Array() ).isInstance() ) ; // true
          * </pre>
-         */        
+         */
         public function isInstance():Boolean
         {
             return _class.@base != "Class";
-        }        
-
+        }
+        
         /**
          * Indicates if the specified object is static.
          * <p><b>Example :</b></p>
@@ -487,7 +480,7 @@ package system.reflection
         {
             return _class.@isStatic == "true";
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -495,16 +488,15 @@ package system.reflection
         public override function toString():String
         {
             return "[ClassInfo]" ;
-        }                
-
+        }
+        
         /**
          * Returns the XML representation of the class.
          * @return the XML representation of the class.
          */
         public function toXML():XML
         {
-            return _class;
+            return _class ;
         }
     }
 }
-

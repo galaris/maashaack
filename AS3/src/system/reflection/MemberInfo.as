@@ -35,7 +35,6 @@
 
 package system.reflection
 {
-
     /**
      * This interface is implemented in all the member information objects.
      */

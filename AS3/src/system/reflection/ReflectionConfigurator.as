@@ -39,7 +39,6 @@ package system.reflection
 
     public class ReflectionConfigurator extends Configurator
     {
-
         /**
          * Creates a new ReflectionConfigurator instance.
          * @param config The generic object who initialize the instance.
@@ -48,7 +47,7 @@ package system.reflection
         {
             super( config );
         }
-
+        
         /**
          * Allow to replace "::" by "." for string class representation
          * <p><b>example:</b></p>
@@ -59,7 +58,7 @@ package system.reflection
         {
             return _config.normalizePath;
         }
-
+        
         /**
          * @private
          */
