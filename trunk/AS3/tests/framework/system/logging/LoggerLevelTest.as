@@ -62,12 +62,12 @@ package system.logging
         
         public function testNONE():void
         {
-            assertEquals( LoggerLevel.NONE, new LoggerLevel(-1, "NONE" ) , "LoggerLevel.NONE failed.") ;
+            assertEquals( LoggerLevel.NONE, new LoggerLevel(0, "NONE" ) , "LoggerLevel.NONE failed.") ;
         }
         
         public function testALL():void
         {
-            assertEquals( LoggerLevel.ALL, new LoggerLevel( 0 , "ALL" ) , "LoggerLevel.ALL failed.") ;
+            assertEquals( LoggerLevel.ALL, new LoggerLevel( 1 , "ALL" ) , "LoggerLevel.ALL failed.") ;
         }
         
         public function testDEBUG():void
@@ -103,8 +103,8 @@ package system.logging
         
         public function testGetLevel():void
         {
-            assertEquals( LoggerLevel.getLevel( -1 ) , LoggerLevel.NONE  , "00 - LoggerLevel.getLevel failed." ) ;
-            assertEquals( LoggerLevel.getLevel(  0 ) , LoggerLevel.ALL   , "01 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  0 ) , LoggerLevel.NONE  , "00 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  1 ) , LoggerLevel.ALL   , "01 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  2 ) , LoggerLevel.DEBUG , "02 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  4 ) , LoggerLevel.INFO  , "05 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  6 ) , LoggerLevel.WARN  , "06 - LoggerLevel.getLevel failed." ) ;
