@@ -35,13 +35,15 @@
 
 package system.logging.targets 
 {
+    import system.Strings;
+    import system.hack;
     import system.logging.LoggerLevel;
     import system.logging.targets.LineFormattedTarget;
-    
+
     import flash.external.ExternalInterface;
     import flash.net.URLRequest;
     import flash.net.navigateToURL;
-    
+
     /**
      * Provides a logger target that uses the FireBug console extension in Firefox to output log messages. 
      * You can download the FireBug and test this target : <a href="https://addons.mozilla.org/fr/firefox/addon/1843">https://addons.mozilla.org/fr/firefox/addon/1843</a>.
@@ -93,6 +95,8 @@ package system.logging.targets
      */
     public class FireBugTarget extends LineFormattedTarget 
     {
+        use namespace hack ;
+        
         /**
          * Creates a new FireBugTarget instance.
          */
@@ -100,6 +104,19 @@ package system.logging.targets
         {
             super();
         }
+        
+        /**
+         * Indicates whether this player is in a container that offers an external interface.
+         */
+        public function get available():Boolean
+        {
+            return ExternalInterface.available ;
+        }
+        
+        /**
+         * If the target isn't available this flag indicates if the target try to use a javascript notification with the navigateToURL method.
+         */
+        public var verbose:Boolean ;
         
         /**
          * Descendants of this class should override this method to direct the specified message to the desired output.
@@ -147,10 +164,15 @@ package system.logging.targets
             {
                 ExternalInterface.call( methodName, [message] ) ;
             }
-            else
+            else if ( verbose )
             {
-                navigateToURL( new URLRequest("javascript:" + methodName + "('"+ message +"');") );  
+                navigateToURL( new URLRequest( Strings.format( url , methodName , message ) ) ) ;  
             }
         }
+        
+        /**
+         * The internal javascript pattern use to log with the navigateToURL method.
+         */
+        hack var url:String = "javascript:{0}('{1}');" ;
     }
 }

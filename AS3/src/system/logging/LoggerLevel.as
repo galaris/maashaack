@@ -37,7 +37,7 @@ package system.logging
 {
     import system.Enum;
     import system.Equatable;
-
+    
     /**
      * Static class containing constants for use in the level property.
      */
@@ -54,9 +54,9 @@ package system.logging
         }
         
         /**
-         * Intended to force a target to process all messages (0).
+         * Intended to force a target to process all messages (1).
          */
-        public static const ALL:LoggerLevel = new LoggerLevel( 0 , "ALL" ) ;
+        public static const ALL:LoggerLevel = new LoggerLevel( 1 , "ALL" ) ;
         
         /**
          * Designates informational level messages that are fine grained and most helpful when debugging an application (2).
@@ -69,7 +69,7 @@ package system.logging
         public static const ERROR:LoggerLevel = new LoggerLevel( 8 , "ERROR" ) ;
         
         /**
-         * Designates events that are very harmful and will eventually lead to application failure (1000).
+         * Designates events that are very harmful and will eventually lead to application failure (16).
          */
         public static const FATAL:LoggerLevel = new LoggerLevel( 16 , "FATAL" ) ;
         
@@ -79,9 +79,9 @@ package system.logging
         public static const INFO:LoggerLevel = new LoggerLevel( 4 , "INFO" ) ;
         
         /**
-         * A special level that can be used to turn off logging (int.MAX_VALUE).
+         * A special level that can be used to turn off logging (0).
          */
-        public static const NONE:LoggerLevel = new LoggerLevel( -1 , "NONE" ) ;
+        public static const NONE:LoggerLevel = new LoggerLevel( 0 , "NONE" ) ;
         
         /**
          * Designates events that could be harmful to the application operation (6).
