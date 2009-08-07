@@ -80,7 +80,7 @@ package libraries.zip
          * Flag for no wrapper (mode independent information).
          */
         public var nowrap:int ; 
-  
+        
         /**
          * Computed check value.
          */
@@ -90,10 +90,21 @@ package libraries.zip
          * log2(window size)  (8..15, defaults to 15)
          */
         public var wbits:int ; 
-  
+        
         // constants
         
         /**
          * The deflated value.
          */
-        public static const Z_DEFLATED:int = 8 ;    }}
+        public static const Z_DEFLATED:int = 8 ;
+        
+        /**
+         * Inflates the specified ZStream object with the passed-in flush value.
+         */
+        public function inflate( stream:ZStream , flush:int ):int
+        {
+//            var r:int ;
+//            var b:int ;
+            
+            return Z_OK ;        }
+    }}

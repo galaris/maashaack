@@ -57,11 +57,10 @@ package libraries.zip
         
         //////////////////// constants
         
-        
         protected static const STORED:int = 0 ;
         protected static const FAST:int   = 1 ;
         protected static const SLOW:int   = 2 ;
-
+        
         protected static const configs:Array = 
         [
             //          good | lazy |  nice |  chain |
@@ -78,6 +77,20 @@ package libraries.zip
             new Config(   32 ,  128 ,   258 ,   1024 , SLOW   ) ,
             new Config(   32 ,  258 ,   258 ,   4096 , SLOW   )
         ];
+        
+        protected static const errors:Array =
+        [
+            "need dictionary"      , // Z_NEED_DICT       2
+            "stream end"           , // Z_STREAM_END      1
+            ""                     , // Z_OK              0
+            "file error"           , // Z_ERRNO         (-1)
+            "stream error"         , // Z_STREAM_ERROR  (-2)
+            "data error"           , // Z_DATA_ERROR    (-3)
+            "insufficient memory"  , // Z_MEM_ERROR     (-4)
+            "buffer error"         , // Z_BUF_ERROR     (-5)
+            "incompatible version" , // Z_VERSION_ERROR (-6)
+        ];
+        
         
         /**
          * Blocks flush performed.
@@ -156,12 +169,12 @@ package libraries.zip
          * Repeat previous bit length 3-6 times (2 bits of repeat count).
          */
         protected static const REP_3_6:int=16; 
-    
+        
         /**
          * Repeat a zero length 3-10 times  (3 bits of repeat count).
          */
         protected static const REPZ_3_10:int=17; 
-    
+        
         /**
          * Repeat a zero length 11-138 times  (7 bits of repeat count).
          */
@@ -170,7 +183,7 @@ package libraries.zip
         protected static const MIN_MATCH:int=3;
         protected static const MAX_MATCH:int=258;
         protected static const MIN_LOOKAHEAD:int=(MAX_MATCH+MIN_MATCH+1);
-    
+        
         protected static const MAX_BITS:int     = 15 ;
         protected static const D_CODES:int      = 30 ;
         protected static const BL_CODES:int     = 19 ;
@@ -178,15 +191,8 @@ package libraries.zip
         protected static const LITERALS:int     = 256 ;
         protected static const L_CODES:int      = LITERALS + 1 + LENGTH_CODES ;
         protected static const HEAP_SIZE:int    = 2 * L_CODES + 1 ;
-    
-        protected static const END_BLOCK:int = 256 ;
         
-        public static function smaller( tree:Array , n:int, m:int, depth:ByteArray):Boolean
-        {
-            var tn2:int = tree[ n*2 ] ;
-            var tm2:int = tree[ m*2 ] ;
-            return (tn2<tm2 || (tn2==tm2 && depth[n] <= depth[m]));
-        }
+        protected static const END_BLOCK:int = 256 ;
         
         ////////////////////
         
@@ -284,14 +290,14 @@ package libraries.zip
          * Element of largest frequency.
          */
         public var heapMax:int ;
-      
+        
         /**
          * Hash index of string to be inserted.
          */
         public var insertedHash:int ;
         
         /**
-         *  The value of flush param for previous deflate call.
+         * The value of flush param for previous deflate call.
          */
         public var lastFlush:int ;
         
@@ -334,7 +340,7 @@ package libraries.zip
          * A higher limit improves compression ratio but degrades the speed.
          */
         public var maxChainLength:int ;
-    
+        
         /**
          * Attempt to find a better match only when the current match is strictly smaller than this value. This mechanism is used only for compression levels >= 4.
          */
@@ -435,7 +441,7 @@ package libraries.zip
          * Also, it limits the window size to 64K, which is quite useful on MSDOS.</p>
          */
         public var window:ByteArray;
-    
+        
         /**
          * Actual size of window: 2*wSize, except when the user input buffer is directly used as sliding window.
          */
@@ -462,57 +468,108 @@ package libraries.zip
           //   - I can't count above 4
           public var litBuffersize:int;
         
-          public var lastLit:int;      // running index in l_buf
+        public var lastLit:int;      // running index in l_buf
         
           // Buffer for distances. To simplify the code, d_buf and l_buf have
           // the same number of elements. To use different lengths, an extra flag
           // array would be necessary.
           
-          /**
-           * index of pendigBuffer
-           */
-          public var dBuffer:int ; 
-        
-          public var optLength:int;        // bit length of current block with optimal trees
-          public var staticLength:int;     // bit length of current block with static trees
-          public var matches:int;        // number of string matches in current block
-          public var lastEobLen:int;   // bit length of EOB code for last block
-        
-          // Output buffer. bits are inserted starting at the bottom (least
-          // significant bits).
-          public var biBuffer:int; // short
-      
         /**
-         * Number of valid bits in bi_buf.  All bits above the last valid bit are always zero.
+         * index of pendigBuffer
+         */
+        public var dBuffer:int ; 
+        
+        /**
+         * bit length of current block with optimal trees.
+         */
+        public var optLength:int ;
+        
+        /**
+         * bit length of current block with static trees
+         */
+        public var staticLength:int ;
+        
+        /**
+         * number of string matches in current block
+         */
+        public var matches:int ;
+        
+        /**
+         * bit length of EOB code for last block
+         */
+        public var lastEobLen:int ;
+        
+        /**
+         * Output buffer. bits are inserted starting at the bottom (least significant bits) - short.
+         */
+        public var biBuffer:int ; 
+        
+        /**
+         * Number of valid bits in biBuffer. All bits above the last valid bit are always zero.
          */
         public var biValid:int;
-
+        
+        
+        /**
+         * Constructs the Huffman tree for the bit lengths and return the index in blOrder of the last bit length code to send. 
+         */
+        public function buildBlTree():int
+        {
+            var max_blindex:int;  // index of last bit length code of non zero freq
+            
+            // Determines the bit length frequencies for literal and distance trees
+            
+            scanTree( dynLtree , lDesc.maxCode ) ;
+            scanTree( dynDtree , dDesc.maxCode ) ;
+            
+            // Build the bit length tree:
+            
+            blDesc.build( this ) ;
+            
+            // optLength now includes the length of the tree representations, except
+            // the lengths of the bit lengths codes and the 5+5+4 bits for the counts.
+            
+            // Determines the number of bit length codes to send. The pkzip format
+            // requires that at least 4 bit length codes be sent. (appnote.txt says
+            // 3 but the actual value used is 4.)
+            for ( max_blindex = BL_CODES-1 ; max_blindex >= 3; max_blindex--) 
+            {
+                if ( blTree[ Tree.BL_ORDER[ max_blindex ] * 2 + 1 ] != 0 ) 
+                {
+                    break;
+                }
+            }
+            
+            // Updates optLength to include the bit length tree and counts
+            
+            optLength += 3*(max_blindex+1) + 5+5+4;
+            
+            return max_blindex ;
+        }
+        
         /**
          * Initialize the trees.
          */
         public function initBlock():void
         {
-        	var i:int ;
+            var i:int ;
             for( i = 0; i < L_CODES ; i++ ) 
             {
                 dynLtree[ i*2 ] = 0 ;
             }
             dynLtree[ END_BLOCK * 2 ] = 1 ;
-
             for( i = 0 ; i < D_CODES ; i++ ) 
             {
                 dynDtree[ i*2 ] = 0;
             }
-
             for( i = 0 ; i < BL_CODES ; i++ )
             {
                 blTree[ i*2 ] = 0 ;
             }
-
             optLength = staticLength = 0 ;
             lastLit   = matches      = 0 ;
         }
-
+        
         /**
          * Initialize.
          */
@@ -551,7 +608,7 @@ package libraries.zip
          * @param tree the tree to restore
          * @param k node to move down
          */
-        public function pqDownHeap(tree:Array, k:int ):void
+        public function pqDownHeap( tree:Array , k:int ):void
         {
             var v:int = heap[k];
             var j:int = k << 1;  // left son of k
@@ -574,4 +631,154 @@ package libraries.zip
                 j <<= 1 ;
             }
             heap[k] = v;
-          }    }}
+        }
+        
+        public final function putByte( c:int ):void
+        {
+            pendingBuffer[ pending++ ] = c & 255 ;
+        }
+        
+        /**
+         * Outputs a byte on the stream. IN assertion: there is enough room in pendingBuffer.
+         */
+        public final function putBytes( p:ByteArray , start:int , length:int ):void
+        {
+            byteArrayCopy(p, start, pendingBuffer , pending, length ) ;
+            pending += length ;
+        }
+        
+        public final function putShort( w:int ):void
+        {
+            putByte( w ) ;
+            putByte( w >>> 8 ) ;
+        }
+        
+        public final function putShortMSB( b:int ):void
+        {
+            putByte( b >> 8 ) ;
+            putByte( b ) ;
+        }
+        
+        
+        /**
+         * Scan a literal or distance tree to determine the frequencies of the codes in the bit length tree.
+         * @param tree The tree to be scanned.
+         * @param max_code The largest code of non zero frequency in the tree.
+         */
+        public function scanTree( tree:Array , maxCode:int ):void
+        {
+            var n:int   ;                 // iterates over all tree elements
+            var cur:int ;                 // length of current code
+            var next:int  = tree[0*2+1] ; // length of next code
+            var prev:int  = -1 ;          // last emitted length
+            var count:int = 0 ;           // repeat count of the current code
+            var max:int   = 7 ;           // max repeat count
+            var min:int   = 4 ;           // min repeat count
+            if ( next == 0 )
+            { 
+                max = 138 ;
+                min = 3   ;
+            }
+            tree[ ( maxCode + 1 ) * 2 + 1 ] = 0xFFFF ; // guard
+            for( n = 0; n <= maxCode ; n++ ) 
+            {
+                cur  = next ; 
+                next = tree[ (n+1) * 2 + 1 ] ;
+                if( ++count < max && cur == next ) 
+                {
+                    continue ;
+                }
+                else if( count < min ) 
+                {
+                    blTree[ cur*2 ] += count ;
+                }
+                else if( cur != 0 ) 
+                {
+                    if( cur != prev ) 
+                    {
+                        blTree[ cur * 2 ]++;
+                    }
+                    blTree[ REP_3_6 * 2 ]++ ;
+                }
+                else if(count <= 10) 
+                {
+                    blTree[ REPZ_3_10 * 2 ]++ ;
+                }
+                else
+                {
+                    blTree[ REPZ_11_138 * 2 ]++ ;
+                }
+                count   = 0 ; 
+                prev = cur ;
+                if(next == 0) 
+                {
+                    max = 138 ; 
+                    min =   3 ;
+                }
+                else if( cur == next ) 
+                {
+                    max = 6 ; 
+                    min = 3 ;
+                }
+                else
+                {
+                    max = 7 ; 
+                    min = 4 ;
+                }
+            }
+        }
+        
+        public function sendBits( value:int , length:int ):void
+        {
+            var len:int = length;
+            if ( biValid > int(BUFFER_SIZE - len)) 
+            {
+                var val:int = value;
+                // biBuffer |= ( val << biValid ) ;
+                biBuffer |= (val << biValid ) & 0xFFFF ;
+                putShort( biBuffer );
+                biBuffer = 0xFFFF & ( val >>> ( BUFFER_SIZE - biValid ) ) ;
+                biValid += len - BUFFER_SIZE ;
+            } 
+            else 
+            {
+                // biBuffer |= (value) << biValid;
+                biBuffer |= ( value << biBuffer) & 0xFFFF ;
+                biValid  += len;
+            }
+        }
+        
+        public final function sendCode( c:int , tree:Array ):void
+        {
+            var c2:int = c * 2 ;
+            sendBits( tree[c2] & 0xFFFF , tree[ c2 + 1 ] & 0xFFFF ) ;
+        }
+        
+        public static function smaller( tree:Array , n:int , m:int , depth:ByteArray ):Boolean
+        {
+            var tn2:int = tree[ n*2 ] ;
+            var tm2:int = tree[ m*2 ] ;
+            return tn2<tm2 || ( tn2 == tm2 && depth[n] <= depth[m] ) ;
+        }
+        
+        /**
+         * Initialize the tree data structures for a new zlib stream.
+         */
+        public function trInit():void
+        {
+            lDesc.dynTree    = dynLtree ; 
+            lDesc.staticDesc = StaticTree.STATIC_L_DESC ;
+            
+            dDesc.dynTree    = dynDtree ;
+            dDesc.staticDesc = StaticTree.STATIC_D_DESC ;
+            
+            blDesc.dynTree    = blTree;
+            blDesc.staticDesc = StaticTree.STATIC_BL_DESC ;
+            
+            biBuffer   = 0 ;
+            biValid    = 0 ;
+            lastEobLen = 8 ; // enough lookahead for inflate
+            
+            initBlock() ; // Initialize the first block of the first file
+        }
+    }}

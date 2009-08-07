@@ -34,8 +34,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 */
 
 package libraries.zip 
-{    import flash.utils.ByteArray;                    
-
+{    import flash.utils.ByteArray ;
+    
     /**     * The implementation of the <a href="http://en.wikipedia.org/wiki/Cyclic_redundancy_check">CRC (Cyclic Redundancy Check)</a>. 
      * This algorithm is used in the GZIP file format specification version 4.3 defines in the RFC 1952.
      */    public final class CRC32 

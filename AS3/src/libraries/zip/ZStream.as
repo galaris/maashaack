@@ -77,12 +77,12 @@ package libraries.zip
         public var adler:uint ;
         
         /**
-         * Number of bytes available at next_in.
+         * Number of bytes available at nextIn.
          */
         public var availIn:int ;
         
         /**
-         * Remaining free space at next_out.
+         * Remaining free space at nextOut.
          */
         public var availOut:int ;
         
@@ -90,16 +90,16 @@ package libraries.zip
          *  The best guess about the data type: ascii or binary.
          */
         public var dataType:int ;
-      
+        
         /**
          * The Deflate state reference.
          */
-        public var deflate:Deflate ;
+        public var deflateState:Deflate ;
         
         /**
          * The Inflate state reference.
          */
-        public var inflate:Inflate ;
+        public var inflateState:Inflate ;
         
         /**
          * The message value.
@@ -146,13 +146,66 @@ package libraries.zip
             nextOut = null ;
             message = null ;
          }
-
+        
+        /**
+         * Flush as much pending output as possible. All deflate() output goes 
+         * through this function so some applications may wish to modify it 
+         * to avoid allocating a large strm->next_out buffer and copying into it. 
+         * See also readBuffer().
+         */
+        public function flushPending():void
+        {
+            var len:int = deflateState.pending ;
+            if( len > availOut ) 
+            {
+                len = availOut ;
+            }
+            if( len == 0 ) 
+            {
+                return ;
+            }
+            
+            if 
+            ( 
+                deflateState.pendingBuffer.length <= deflateState.pendingOut || 
+                nextOut.length                    <= nextOutIndex || 
+                deflateState.pendingBuffer.length < ( deflateState.pendingOut + len ) || 
+                nextOut.length                    < ( nextOutIndex + len ) 
+            )
+            {
+              // trace( deflateState.pendingBuffer.length + ", " + deflateState.pendingOut + ", " + nextOut.length + ", " + nextOut_index +  ", " + len ) ;
+              // trace( "availOut=" + availOut) ;
+            }
+            
+            byteArrayCopy(deflateState.pendingBuffer, deflateState.pendingOut ,nextOut , nextOutIndex , len ) ;
+            
+            nextOutIndex            += len ;
+            deflateState.pendingOut += len ;
+            totalOut                += len ;
+            availOut                -= len ;
+            deflateState.pending    -= len ;
+            
+            if( deflateState.pending == 0 )
+            {
+                deflateState.pendingOut = 0 ;
+            }
+        }
+        
+        public function inflate( flush:int ):int
+        {
+            if( inflateState == null )
+            {
+                return Z_STREAM_ERROR ;
+            }
+            return inflateState.inflate( this , flush ) ;
+        }
+        
         /**
          * Read a new buffer from the current input stream, update the adler32 and total number of bytes read.
          * <p>All deflate() input goes through this function so some applications may wish to modify 
          * it to avoid allocating a large strm->next_in buffer and copying from it. (See also flush_pending()).</p>
          */
-        public function readBuffer(buf:ByteArray, start:int, size:int):int 
+        public function readBuffer(buffer:ByteArray, start:int, size:int):int 
         {
             var len:int = availIn ;
             if( len > size) 
@@ -164,28 +217,28 @@ package libraries.zip
                 return 0;
             }
             availIn -= len ;
-            if( deflate.noheader == 0 ) 
+            if( deflateState.noheader == 0 ) 
             {
             	_adler.update( adler, nextIn , nextInIndex , len ) ;
                 adler = _adler.valueOf() ;
             }
-            byteArrayCopy( nextIn , nextInIndex , buf , start , len ) ;
+            byteArrayCopy( nextIn , nextInIndex , buffer , start , len ) ;
             nextInIndex += len ;
             totalIn     += len ;
             return len ;
         }
-   
+        
         /**
          * @private
          */
         protected var _adler:Adler32 = new Adler32() ;
         
-//        /**
-//         * 32K LZ77 window
-//         * @private
-//         */
-//        private static const MAX_WBITS:int = 15 ;
-//
+        /**
+         * 32K LZ77 window
+         * @private
+         */
+        private static const MAX_WBITS:int = 15 ;
+        
 //        /**
 //         * @private
 //         */
