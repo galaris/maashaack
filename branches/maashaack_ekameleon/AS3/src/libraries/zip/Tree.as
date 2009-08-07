@@ -104,14 +104,14 @@ package libraries.zip
             
             var maxCode:int = -1 ;
             var node:int ;
-
+            
             // Construct the initial heap, with least frequent element in
             // heap[1]. The sons of heap[n] are heap[2*n] and heap[2*n+1].
             // heap[0] is not used.
             s.heapLen = 0 ;
             s.heapMax = HEAP_SIZE ;
-
-            for(n=0; n<elems; n++) 
+            
+            for( n=0 ; n < elems ; n++ ) 
             {
                 if(tree[n*2] != 0) 
                 {
@@ -148,7 +148,7 @@ package libraries.zip
             
             for( n = s.heapLen / 2 ; n >= 1 ; n-- )
             {
-              s.pqDownHeap(tree, n);
+                s.pqDownHeap( tree , n ) ;
             }
             
             // Construct the Huffman tree by repeatedly combining the least two frequent nodes.
@@ -162,14 +162,14 @@ package libraries.zip
                 s.heap[1] = s.heap[ s.heapLen-- ] ;
                 
                 s.pqDownHeap(tree, 1) ;
-                 
+                
                 m = s.heap[1] ; // m = node of next least frequency
-                 
+                
                 s.heap[--s.heapMax] = n ; // keep the nodes sorted by frequency
                 s.heap[--s.heapMax] = m ;
                 
                 // Creates a new node father of n and m
-                 
+                
                 tree[node*2] = 0xffff & (tree[n*2] + tree[m*2]);
                 
                 s.depth[node] = 255 & (Math.max(s.depth[n],s.depth[m])+1);
@@ -190,12 +190,11 @@ package libraries.zip
             
             // The field len is now set, we can generate the bit codes
             generatesCodes(tree, maxCode, s.blCount) ;
-            
         }
         
         /**
          * Mapping from a distance to a distance code. dist is the distance - 1 and 
-         *  must not have side effects. _dist_code[256] and _dist_code[257] are never used.
+         * must not have side effects. DIST_CODE[256] and DIST_CODE[257] are never used.
          */
         public static function dCode( dist:int ):int
         {
@@ -231,7 +230,6 @@ package libraries.zip
                 tree[n*2] = 0xffff & (biReverse(next[len]++, len)); // reverse the bits
             }
         }
-
         
         /**
          * Computes the optimal bit lengths for a tree and update the total bit length for the current block.
@@ -277,9 +275,9 @@ package libraries.zip
                 tree[n*2+1] = 0xffff & bits ;
                 
                 // We overwrite tree[n*2+1] which is no longer needed
-
+                
                 if (n > maxCode) continue ;  // not a leaf node
-
+                
                 s.blCount[bits]++ ;
                 xbits = 0 ;
                 
@@ -339,7 +337,7 @@ package libraries.zip
                 }
             }
         }
-
+        
         ////// constants
         
         /**
@@ -360,7 +358,7 @@ package libraries.zip
             32 ,   48 ,     64 ,    96 ,   128 ,   192 ,   256 ,   384 ,   512 ,    768 ,
           1024 , 1536 ,   2048 ,  3072 ,  4096 ,  6144 ,  8192 , 12288 , 16384 ,  24576
         ];
-  
+        
         public static const BL_ORDER:Array =
         [
             16,17,18,0,8,7,9,6,10,5,11,4,12,3,13,2,14,1,15
@@ -472,7 +470,7 @@ package libraries.zip
          * Repeat a zero length 3-10 times (3 bits of repeat count).
          */
         public static const REPZ_3_10:int = 17 ; 
-
+        
         /**
          * Repeat a zero length 11-138 times (7 bits of repeat count).
          */
@@ -481,7 +479,7 @@ package libraries.zip
         protected static const BL_CODES:int = 19 ;
         
         protected static const D_CODES:int = 30 ;
-
+        
         protected static const HEAP_SIZE:int = 2 * L_CODES + 1 ;
         
         protected static const LITERALS:int = 256 ;

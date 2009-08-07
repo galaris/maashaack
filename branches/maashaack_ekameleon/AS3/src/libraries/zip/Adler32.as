@@ -88,7 +88,7 @@ package libraries.zip
          * @param index The index to begin the buffering.
          * @param len The length value to limit the buffering.
          */
-        public function update( adler:uint, buffer:ByteArray , index:int , len:int ):void 
+        public function update( adler:uint, buffer:ByteArray , index:int , length:int ):void 
         {
             if ( buffer == null )
             {
@@ -96,11 +96,11 @@ package libraries.zip
             }
             var s1:uint = adler & 0xFFFF ;
             var s2:uint = (adler >> 16) & 0xFFFF ;
-            var k:int;
-            while(len > 0) 
+            var k:int ;
+            while( length > 0 ) 
             {
-                k = len < NMAX ? len : NMAX ;
-                len -= k ;
+                k = length < NMAX ? length : NMAX ;
+                length -= k ;
                 while( k >= 16 )
                 {
                     s1 += buffer[index++] & 0xFF ; 
