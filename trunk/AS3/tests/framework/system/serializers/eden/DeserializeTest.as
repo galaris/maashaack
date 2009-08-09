@@ -61,6 +61,23 @@ package system.serializers.eden
             assertEquals( "hello world", ECMAScript.evaluate( "\'hello world\'" ) );
             }
         
+        public function testSingleChar():void
+        {
+            assertEquals( 0, ECMAScript.evaluate( "0" ) );
+            assertEquals( 1, ECMAScript.evaluate( "1" ) );
+            assertEquals( 2, ECMAScript.evaluate( "2" ) );
+            assertEquals( 3, ECMAScript.evaluate( "3" ) );
+            assertEquals( 4, ECMAScript.evaluate( "4" ) );
+            assertEquals( 5, ECMAScript.evaluate( "5" ) );
+            assertEquals( 6, ECMAScript.evaluate( "6" ) );
+            assertEquals( 7, ECMAScript.evaluate( "7" ) );
+            assertEquals( 8, ECMAScript.evaluate( "8" ) );
+            assertEquals( 9, ECMAScript.evaluate( "9" ) );
+            
+            assertEquals( undefined, ECMAScript.evaluate( " " ) );
+            assertEquals( undefined, ECMAScript.evaluate( "/" ) );
+        }
+        
         public function testPreComment():void
             {
             assertEquals( "abc", ECMAScript.evaluate( "//test\r\n\"abc\"" ) );
