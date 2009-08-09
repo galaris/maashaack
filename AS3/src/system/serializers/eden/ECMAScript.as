@@ -88,6 +88,7 @@ package system.serializers.eden
            Always commit changes with the release namespace
         */
         use namespace release;
+        //use namespace debug;
 
         /**
          * @private
@@ -99,7 +100,9 @@ package system.serializers.eden
         private var _singleValue:Boolean = true;
 
         private var _inAssignement:Boolean = false;
-
+        
+        private var _1char:Boolean = false;
+        
         private var _inConstructor:int ;
 
         // private var _inFunction:Boolean    = false;
@@ -267,6 +270,11 @@ package system.serializers.eden
             //clean comments before starting a new eval
             var value:* = _ORC;
             var tmp:*;
+            
+            if( source.length == 1 )
+            {
+                _1char = true;
+            }
             
             while( hasMoreChar( ) )
             {
@@ -742,7 +750,7 @@ package system.serializers.eden
                         next( );
                         comments += ch;
                     }
-                
+                    
                     _scanSeparators( );
                     break;
                 
@@ -763,7 +771,7 @@ package system.serializers.eden
                             break;
                         }
                     }
-                
+                    
                     next( );
                     break;
                 
@@ -771,6 +779,7 @@ package system.serializers.eden
                 default:
                     log( strings.errorComment );
             }
+            
         }
 
         /**
@@ -1832,7 +1841,7 @@ package system.serializers.eden
             _scanSeparators( );
             debug( "after scan - ch:" + ch );
             
-            if( pos == source.length )
+            if( (pos == source.length) && !_1char )
             {
                 debug( "prevent unecessary scan" );
                 
