@@ -79,6 +79,11 @@ TAMARIN::exclude
 Allows to provide an alternative for Tamarin/redtamarin only
 
 
+=== API::FP10 ===
+
+Flash Player 10 only
+
+
 == Proposals ==
 
 These conditionals are not used yet
@@ -87,5 +92,4 @@ These conditionals are not used yet
  * *CONFIG::debugger* debug build
  * *EDEN::release* release version of eden
  * *EDEN::debugger* debug version of eden
- * *FLASH::ten* or *API::FP10* Flash Player 10 only
  
