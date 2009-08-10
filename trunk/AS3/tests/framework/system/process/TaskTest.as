@@ -95,6 +95,7 @@ package system.process
             var clone:Task = action.clone() as Task ;
             assertNotNull( clone , "01 - Task clone() failed." ) ;
             assertFalse( clone == action  , "02 - Task clone() failed." ) ;
+            assertEquals( clone.isGlobal() , action.isGlobal() , "03 - Task clone() failed.") ;
         }
         
         public function testRunning():void

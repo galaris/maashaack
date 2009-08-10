@@ -48,7 +48,7 @@ package system.events
         /**
          * Creates a new CoreEventDispatcher instance.
          * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
         public function CoreEventDispatcher( global:Boolean = false , channel:String = null ) 
         {
@@ -163,7 +163,7 @@ package system.events
         {
             _dispatcher = dispatcher || initEventDispatcher() ;
         }
-
+        
         /**
          * Sets if the instance use a global <code class="prettyprint">system.events.EventDispatcher</code> to dispatch this events, if the <code class="prettyprint">flag</code> value is <code class="prettyprint">false</code> the instance use a local EventDispatcher.
          * @param flag the flag to use a global event flow or a local event flow.
@@ -206,6 +206,24 @@ package system.events
         }
         
         /**
+         * The internal EventDispatcher reference.
+         * @private
+         */
+        protected var _dispatcher:EventDispatcher ;
+        
+        /**
+         * The internal flag to indicate if the event flow is global.
+         * @private
+         */
+        protected var _isGlobal:Boolean ;
+        
+        /**
+         * The internal flag to indicates if the display is locked or not.
+         * @private
+         */ 
+        protected var ___isLock___:Boolean ;
+        
+        /**
          * Creates and returns the internal <code class="prettyprint">EventDispatcher</code> reference (this method is invoked in the constructor).
          * <p>You can overrides this method if you wan use a global <code class="prettyprint">EventDispatcher</code> singleton.</p>
          * @return the internal <code class="prettyprint">EventDispatcher</code> reference.
@@ -214,20 +232,5 @@ package system.events
         {
             return new EventDispatcher( this ) ;
         }
-        
-        /**
-         * The internal EventDispatcher reference.
-         */
-        private var _dispatcher:EventDispatcher ;
-        
-        /**
-          * The internal flag to indicate if the event flow is global.
-         */
-        private var _isGlobal:Boolean ;
-        
-        /**
-          * The internal flag to indicates if the display is locked or not.
-          */ 
-        private var ___isLock___:Boolean ;
     }
 }

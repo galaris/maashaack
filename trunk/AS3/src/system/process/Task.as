@@ -98,7 +98,7 @@ package system.process
          */
         public function clone():*
         {
-            return new Task( isGlobal(), channel ) ;
+            return new Task( _isGlobal , channel ) ;
         }
         
         /**
@@ -108,7 +108,10 @@ package system.process
         {
             setRunning( false ) ;
             this["finishIt"]() ;
-            dispatchEvent( new ActionEvent( ActionEvent.FINISH , this ) ) ;
+            if ( hasEventListener( _sTypeFinish ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
+            }
         }
         
         /**
@@ -118,7 +121,10 @@ package system.process
         {
             setRunning( true ) ;
             this["startIt"]() ;
-            dispatchEvent( new ActionEvent( ActionEvent.START , this ) ) ;
+            if ( hasEventListener( _sTypeStart ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeStart , this ) ) ;
+            }
         }
         
         /**
@@ -165,5 +171,15 @@ package system.process
          * @private
          */
         private var _parent:Action ;
+        
+        /**
+         * @private
+         */
+        protected var _sTypeFinish:String = ActionEvent.FINISH ;
+        
+        /**
+         * @private
+         */
+        protected var _sTypeStart:String = ActionEvent.START ;
     }
 }

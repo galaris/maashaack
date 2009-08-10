@@ -63,7 +63,7 @@ package system.process
      * @eventType system.events.ActionEvent.LOOP
      * @see #notifyLooped
      */
-    [Event(name="loop", type="system.events.ActionEvent")]    
+    [Event(name="loop", type="system.events.ActionEvent")]
     
     /**
      * Dispatched when a process is paused.
@@ -106,14 +106,13 @@ package system.process
     public dynamic class CoreAction extends Task
     {
         /**
-         * Creates a new Action instance.
+         * Creates a new CoreAction instance.
          * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
+         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
         public function CoreAction( global:Boolean = false , channel:String = null )
         {
             super( global, channel ) ;
-            initEventType() ;
         }
         
         /**
@@ -127,94 +126,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new CoreAction() ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyChanged method.
-         * @return the event name use in the notifyChanged method.
-         */
-        public function getEventTypeCHANGE():String
-        {
-            return _sTypeChange ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyCleared method.
-         * @return the event name use in the notifyCleared method.
-         */
-        public function getEventTypeCLEAR():String
-        {
-            return _sTypeClear ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyInfo method.
-         * @return the event name use in the notifyInfo method.
-         */
-        public function getEventTypeINFO():String
-        {
-            return _sTypeInfo ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyLooped method.
-         * @return the event name use in the notifyLooped method.
-         */
-        public function getEventTypeLOOP():String
-        {
-            return _sTypeLoop ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyProgress method.
-         * @return the event name use in the notifyProgress method.
-         */
-        public function getEventTypePROGRESS():String
-        {
-            return _sTypeProgress ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyResumed method.
-         * @return the event name use in the notifyResumed method.
-         */
-        public function getEventTypeRESUME():String
-        {
-            return _sTypeResume ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyStopped method.
-         * @return the event name use in the notifyStopped method.
-         */
-        public function getEventTypeSTOP():String
-        {
-            return _sTypeStop ;
-        }
-        
-        /**
-         * Returns the event name use in the notifyTimeOut method.
-         * @return the event name use in the notifyTimeOut method.
-         */
-        public function getEventTypeTIMEOUT():String
-        {
-            return _sTypeTimeout ;
-        }
-        
-        /**
-         * Initialize the internal event's types of this process.
-         */
-        public function initEventType():void
-        {
-            _sTypeChange   = ActionEvent.CHANGE   ;
-            _sTypeClear    = ActionEvent.CLEAR    ;
-            _sTypeInfo     = ActionEvent.INFO     ;
-            _sTypeLoop     = ActionEvent.LOOP     ;
-            _sTypeProgress = ActionEvent.PROGRESS ;
-            _sTypeResume   = ActionEvent.RESUME   ;
-            _sTypeStop     = ActionEvent.STOP     ;
-            _sTypeTimeout  = ActionEvent.TIMEOUT  ;
+            return new CoreAction( _isGlobal , channel ) ;
         }
         
         /**
@@ -222,7 +134,10 @@ package system.process
          */
         protected function notifyChanged():void 
         {
-            dispatchEvent( new ActionEvent( _sTypeChange, this ) ) ;
+            if ( hasEventListener(_sTypeChange) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeChange , this ) ) ;
+            }
         }
         
         /**
@@ -230,7 +145,10 @@ package system.process
          */
         protected function notifyCleared():void 
         {
-            dispatchEvent( new ActionEvent( _sTypeClear, this ) ) ;
+            if ( hasEventListener(_sTypeClear) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeClear , this ) ) ;
+            }
         }
         
         /**
@@ -238,7 +156,10 @@ package system.process
          */
         protected function notifyInfo( info:* ):void
         {
-            dispatchEvent( new ActionEvent( _sTypeInfo, this , info ) ) ;
+            if ( hasEventListener(_sTypeInfo) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeInfo, this , info ) ) ;
+            }
         }
         
         /**
@@ -246,7 +167,10 @@ package system.process
          */
         protected function notifyLooped():void 
         {
-            dispatchEvent( new ActionEvent( _sTypeLoop, this ) ) ;
+            if ( hasEventListener(_sTypeLoop) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeLoop, this ) ) ;
+            }
         }
         
         /**
@@ -254,7 +178,10 @@ package system.process
          */
         protected function notifyProgress():void
         {
-            dispatchEvent( new ActionEvent( _sTypeProgress, this ) ) ;
+            if ( hasEventListener( _sTypeProgress ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeProgress, this ) ) ;
+            }
         }
         
         /**
@@ -262,7 +189,10 @@ package system.process
          */
         protected function notifyResumed():void
         {
-            dispatchEvent( new ActionEvent( _sTypeResume, this ) ) ;
+            if ( hasEventListener( _sTypeResume ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeResume , this ) ) ;
+            }
         }
         
         /**
@@ -271,7 +201,10 @@ package system.process
         protected function notifyStopped():void
         {
             setRunning(false) ;
-            dispatchEvent( new ActionEvent( _sTypeStop, this ) ) ;
+            if ( hasEventListener( _sTypeStop ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeStop , this ) ) ;
+            }
         }
         
         /**
@@ -279,111 +212,50 @@ package system.process
          */
         protected function notifyTimeOut():void
         {
-            dispatchEvent( new ActionEvent( _sTypeTimeout, this ) ) ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyChanged method.
-         */
-        public function setEventTypeCHANGE( type:String ):void
-        {
-            _sTypeChange = type || ActionEvent.CHANGE ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyCleared method.
-         */
-        public function setEventTypeCLEAR( type:String ):void
-        {
-            _sTypeClear = type || ActionEvent.CLEAR ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyInfo method.
-         */
-        public function setEventTypeINFO( type:String ):void
-        {
-            _sTypeInfo = type || ActionEvent.INFO ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyLooped method.
-         */
-        public function setEventTypeLOOP( type:String ):void
-        {
-            _sTypeLoop = type || ActionEvent.LOOP ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyProgress method.
-         */
-        public function setEventTypePROGRESS( type:String ):void
-        {
-            _sTypeProgress = type || ActionEvent.PROGRESS ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyResumed method.
-         */
-        public function setEventTypeRESUME( type:String ):void
-        {
-            _sTypeResume = type || ActionEvent.RESUME ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyStopped method.
-         */
-        public function setEventTypeSTOP( type:String ):void
-        {
-            _sTypeStop = type || ActionEvent.STOP ;
-        }
-        
-        /**
-         * Sets the event name use in the notifyTimeOut method.
-         */
-        public function setEventTypeTIMEOUT( type:String ):void
-        {
-            _sTypeTimeout = type || ActionEvent.TIMEOUT ;
+            if ( hasEventListener( _sTypeTimeout ) )
+            {
+                dispatchEvent( new ActionEvent( _sTypeTimeout , this ) ) ;
+            }
         }
         
         /**
          * @private
          */
-        private var _sTypeChange:String ;
+        protected var _sTypeChange:String = ActionEvent.CHANGE ;
         
         /**
          * @private
          */
-        private var _sTypeClear:String ;
+        protected var _sTypeClear:String = ActionEvent.CLEAR ;
         
         /**
          * @private
          */
-        private var _sTypeInfo:String ;
+        protected var _sTypeInfo:String  = ActionEvent.INFO ;
         
         /**
          * @private
          */
-        private var _sTypeLoop:String ;
+        protected var _sTypeLoop:String = ActionEvent.LOOP ;
         
         /**
          * @private
          */
-        private var _sTypeProgress:String ;
+        protected var _sTypeProgress:String = ActionEvent.PROGRESS ;
         
         /**
          * @private
          */
-        private var _sTypeResume:String ;
+        protected var _sTypeResume:String = ActionEvent.RESUME ;
         
         /**
          * @private
          */
-        private var _sTypeStop:String ;
+        protected var _sTypeStop:String = ActionEvent.STOP ;
         
         /**
          * @private
          */
-        private var _sTypeTimeout:String ;
+        protected var _sTypeTimeout:String = ActionEvent.TIMEOUT ;
     }
 }
