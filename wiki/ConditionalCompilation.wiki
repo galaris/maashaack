@@ -15,6 +15,18 @@ All conditional compilation options deal mainly with hosts and API differences
 
 DO NOT USE THEM for dynamic configuration, eg. it will not replace the namespaces *standard*, *optimized* and *experimental*.
 
+from the doc
+{{{
+You can use inline constants in ActionScript.
+
+Boolean values can be used to conditionalize top-level definitions of
+functions, classes, and variables,
+in much the same way you would use an #IFDEF preprocessor command in C or C++.
+
+You cannot use constant Boolean values to conditionalize metadata or import statements. 
+}}}
+
+
 for Flex Builder
 {{{
  1. Project properties
