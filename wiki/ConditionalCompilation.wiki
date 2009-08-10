@@ -1,0 +1,17 @@
+#summary Conditional compilation options explained.
+
+== Introduction ==
+
+Even if we try to make our AS3 code as portable possible
+we have to deal with different little nuggets
+
+ * diff of Flash Player API (FP9 vs FP10 etc.)
+ * diff between Flash Player API and AIR API
+ * diff between Flash Player API and Tamarin/redtamarin
+
+
+== Options ==
+
+=== TAMARIN::exclude ===
+
+=== TAMARIN::alternate ===
