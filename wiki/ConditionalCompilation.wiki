@@ -9,6 +9,50 @@ we have to deal with different little nuggets
  * diff between Flash Player API and AIR API
  * diff between Flash Player API and Tamarin/redtamarin
 
+== Usage ==
+
+All conditional compilation options deal mainly with hosts and API differences
+
+DO NOT USE THEM for dynamic configuration, eg. it will not replace the namespaces *standard*, *optimized* and *experimental*.
+
+for Flex Builder
+{{{
+ 1. Project properties
+ 2. ActionScript Compiler
+ 3. in Additional compiler arguments
+
+ -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false
+
+}}}
+
+for mxmlc, compc
+{{{
+        <compc
+            output="foobar.swc"
+            include-classes="foobar.as"
+            target-player="9.0.45"
+        >
+            <define name="TAMARIN::exclude" value="true" />
+            <define name="TAMARIN::alternate" value="false" />
+            <strict>true</strict>
+            <optimize>true</optimize>
+
+}}}
+
+for ASDoc
+{{{
+        <exec executable="${asdoc.exe}">
+        	<arg line="-define+=TAMARIN::exclude,true" />
+        	<arg line="-define+=TAMARIN::alternate,false" />
+}}}
+
+for ASC
+{{{
+        <exec executable="java">
+            <arg line="-jar ${redshell.asc}" />
+            <arg line="-AS3 -strict -md -optimize" />
+        	<arg line="-config TAMARIN::exclude=false -config TAMARIN::alternate=true" />
+}}}
 
 == Options ==
 
@@ -19,6 +63,9 @@ Excludes block of code when compiling for Tamarin/redtamarin
 some examples:
 
 {{{
+/* reason:
+   no TextField support in Tamarin
+*/
 TAMARIN::exclude
 {
     suite.addTestSuite( TextFieldTargetTest );
@@ -30,3 +77,14 @@ TAMARIN::exclude
 === TAMARIN::alternate ===
 
 Allows to provide an alternative for Tamarin/redtamarin only
+
+
+== Proposals ==
+
+These conditionals are not used yet
+
+ * *CONFIG::release* release build
+ * *CONFIG::debugger* debug build
+ * *EDEN::release* release version of eden
+ * *EDEN::debugger* debug version of eden
+ * *FLASH::ten* Flash Player 10 only
