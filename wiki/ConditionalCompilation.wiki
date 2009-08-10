@@ -89,7 +89,7 @@ Flash Player 10 only
 These conditionals are not used yet
 
  * *CONFIG::release* release build
- * *CONFIG::debugger* debug build
+ * *CONFIG::debugging* debug build
  * *EDEN::release* release version of eden
- * *EDEN::debugger* debug version of eden
+ * *EDEN::debugging* debug version of eden
  
