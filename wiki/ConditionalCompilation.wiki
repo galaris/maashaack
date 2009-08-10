@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-Even if we try to make our AS3 code as portable possible
+Even if we try to make our AS3 code as portable as possible
 we have to deal with different little nuggets
 
  * diff of Flash Player API (FP9 vs FP10 etc.)
@@ -14,4 +14,19 @@ we have to deal with different little nuggets
 
 === TAMARIN::exclude ===
 
+Excludes block of code when compiling for Tamarin/redtamarin
+
+some examples:
+
+{{{
+TAMARIN::exclude
+{
+    suite.addTestSuite( TextFieldTargetTest );
+}
+}}}
+
+
+
 === TAMARIN::alternate ===
+
+Allows to provide an alternative for Tamarin/redtamarin only
