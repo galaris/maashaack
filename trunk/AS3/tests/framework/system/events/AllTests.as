@@ -62,6 +62,7 @@ package system.events
                 suite.addTestSuite( EventDispatcherTest ) ;
                 suite.addTestSuite( EventListenerTest ) ;
                 suite.addTestSuite( EventListenerBatchTest ) ;
+                suite.addTestSuite( FastDispatcherTest ) ;
                 suite.addTestSuite( FrontControllerTest ) ;
                 suite.addTestSuite( IEventDispatcherTest ) ;
                 suite.addTestSuite( InternalDispatcherTest ) ;

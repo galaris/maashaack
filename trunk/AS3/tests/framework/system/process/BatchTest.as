@@ -39,11 +39,10 @@ package system.process
     
     import system.data.collections.TypedCollection;
     import system.process.Runnable;
-    import system.process.mocks.MockCommand;    
-
+    import system.process.mocks.MockCommand;
+    
     public class BatchTest extends TestCase 
     {
-
         public function BatchTest(name:String = "")
         {
             super(name);
