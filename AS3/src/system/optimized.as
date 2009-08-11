@@ -34,7 +34,6 @@
 */
 
 package system 
-{    
-    /**     * The 'optimized' namespace, less functionalities to improve speed must be fast once implemented should be supported.
+{    /**     * The 'optimized' namespace, less functionalities to improve speed must be fast once implemented should be supported.
      */    public namespace optimized = "http://code.google.com/p/maashaack/2009/optimized" ;
-    }
+}

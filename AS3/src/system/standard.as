@@ -34,7 +34,6 @@
 */
 
 package system 
-{    
-    /**     * The standard namespace, use with all functionalities can be slow always supported.
+{    /**     * The standard namespace, use with all functionalities can be slow always supported.
      */    public namespace standard = "http://code.google.com/p/maashaack/2009/standard" ;
-    }
+}

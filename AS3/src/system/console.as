@@ -41,6 +41,5 @@ package system
     /**
      * The system default console implementation.
      */
-    public var console:system.terminals.Console = new TraceConsole( );
+    public var console:system.terminals.Console = new TraceConsole();
 }
-

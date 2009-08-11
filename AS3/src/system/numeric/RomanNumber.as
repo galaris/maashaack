@@ -46,22 +46,15 @@ package system.numeric
      */
     public class RomanNumber
     {
-        
         /**
          * @private
          */
         private var _num:uint;
         
         //lookup table
-
-        /**
-         * @private
-         */        
+        
         private static var ROMAN:Array = [ "M", "D", "C", "L", "X", "V", "I" ];
         
-        /**
-         * @private
-         */        
         private static var NUMERIC:Array = [ 1000, 500, 100,  50, 10, 5, 1 ];
         
         //range values
@@ -70,7 +63,7 @@ package system.numeric
          * The minimum parsing value.
          */
         public static const MIN:uint = 0;
-
+        
         /**
          * The maximum parsing value.
          */
@@ -229,8 +222,8 @@ package system.numeric
             }
             
             return n;
-        }        
-                
+        }
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -248,6 +241,5 @@ package system.numeric
         {
             return _num ;
         }
-        
     }
 }

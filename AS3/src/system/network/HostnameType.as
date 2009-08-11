@@ -42,7 +42,6 @@ package system.network
      */
     public class HostnameType extends Enum
     {
-        
         /**
          * Creates a new HostnameType instance.
          * @param value The value of the enumeration.
@@ -57,21 +56,20 @@ package system.network
          * The "unknow" HostnameType value.
          */
         public static const unknown:HostnameType = new HostnameType( 0, "unknown" );
-
+        
         /**
          * The "basic" HostnameType value.
-         */        
+         */
         public static const basic:HostnameType = new HostnameType( 1, "basic" );
-
+        
         /**
          * The "DNS" HostnameType value.
-         */           
+         */
         public static const DNS:HostnameType = new HostnameType( 2, "DNS" );
         
         /**
          * The "IPv4" HostnameType value.
          */
         public static const IPv4:HostnameType = new HostnameType( 4, "IPv4" );
-        
     }
 }

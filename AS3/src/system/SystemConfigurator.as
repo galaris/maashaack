@@ -69,7 +69,7 @@ package system
         
         /**
          * The current serializer used used by the system 
-         */        
+         */
         public function get serializer():Serializer
         {
             return _config.serializer;
