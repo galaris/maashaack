@@ -35,18 +35,15 @@
 
 package system.data
 {
-
     /**
      * Implementing this interface allows an object to be iterable.
-     */    
+     */
     public interface Iterable
     {
-
         /**
          * Returns the iterator reference of the object.
          * @return the iterator reference of the object.
          */
         function iterator():Iterator ;
-    
     }
 }

@@ -43,7 +43,7 @@ package system
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         function clone():* ;
     }
 }
