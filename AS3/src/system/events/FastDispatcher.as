@@ -51,8 +51,9 @@ package system.events
     {
         /**
          * Creates a new FastDispatcher instance.
+         * @param listeners An optional Array of listeners to register when the dispatcher is initialized.
          */
-        public function FastDispatcher( listeners:Array )
+        public function FastDispatcher( listeners:Array = null )
         {
             this.listeners = new ArraySet( listeners ) ;
         }
@@ -68,11 +69,18 @@ package system.events
         }
         
         /**
-         * Removes all listeners in the set of the dispatcher.
+         * Broadcast the specified message.
+         * @return The reference of the BasicEvent dispatched by the dispatcher.
          */
-        public function clear():void
+        public function broadcastMessage( message:String , ...rest:Array ):Event
         {
-            listeners.clear() ;
+            if ( message == null && listeners.size() == 0 )
+            {
+                return null ;
+            }
+            var e:BasicEvent = new BasicEvent( message , this , rest ) ;
+            _propagate( e ) ;
+            return e ;
         }
         
         /**
@@ -85,41 +93,16 @@ package system.events
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         */
-        public function contains( listener:* ):Boolean
-        {
-            return listeners.contains( listener ) ;
-        }
-        
-        /**
          * Sends an Event Object to each object in the list of listeners.
          * When the Event is received by the listening object, Flash Player attempts to invoke a function of the same name on the Event.type property.
          */
-        public function dispatch( e:* ):Event 
+        public function dispatch( e:Event ):void 
         {
             if ( e == null && listeners.size() == 0 )
             {
-                return null ;
+                return ;
             }
-            if ( e is Event )
-            {
-                //
-            }
-            else if ( e is String )
-            {
-                e = new BasicEvent( e as String , this ) ;
-            }
-            else
-            {
-                e = null ;
-            }
-            if ( e != null )
-            {
-                _propagate( e ) ;
-            }
-            return e ;
+            _propagate( e ) ;
         }
         
         /**
@@ -128,7 +111,16 @@ package system.events
          */
         public function getListeners():Array
         {
-        	return listeners.toArray() ;
+            return listeners.toArray() ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         */
+        public function hasListener( listener:* ):Boolean
+        {
+            return listeners.contains( listener ) ;
         }
         
         /**
@@ -147,6 +139,14 @@ package system.events
         public function iterator():Iterator
         {
             return listeners.iterator() ;
+        }
+        
+        /**
+         * Removes all listeners in the set of the dispatcher.
+         */
+        public function removeAllListeners():void
+        {
+            listeners.clear() ;
         }
         
         /**
@@ -177,13 +177,17 @@ package system.events
          */
         private function _propagate( e:Event ):void
         {
-            var listener:* ;
-            var ar:Array = listeners.toArray() ;
-            var l:int    = ar.length ;
+            var o:* ;
+            var a:Array  = listeners.toArray() ;
+            var l:int    = a.length ;
+            var t:String = e.type ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                listener = ar[i] ;
-                listener[e.type].apply( listener , e ) ;
+                o = a[i] ;
+                if ( t in o && o[t] is Function )
+                {
+                    o[t].call( o , e ) ;
+                }
             }
         }
     }

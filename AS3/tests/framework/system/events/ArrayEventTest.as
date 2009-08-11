@@ -36,11 +36,10 @@
 package system.events 
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;        
-
+    import buRRRn.ASTUce.framework.TestCase;
+    
     public class ArrayEventTest extends TestCase 
     {
-
         public function ArrayEventTest(name:String = "")
         {
             super( name );
@@ -67,7 +66,7 @@ package system.events
             assertNull( e.array , "01 - ArrayEvent array property failed.") ;  
             e.array = [1,2,3] ;
             ArrayAssert.assertEquals( e.array , [1,2,3], "02 - ArrayEvent array property failed.") ;  
-        }        
+        }
         
         public function testClone():void
         {
@@ -75,7 +74,6 @@ package system.events
             var c:ArrayEvent = e.clone() as ArrayEvent ;
             assertNotNull( c , "01 - ArrayEvent clone() failed.") ;
             ArrayAssert.assertEquals( e.array , c.array, "02 - ArrayEvent clone() failed.") ;  
-        }              
-        
+        }
     }
 }

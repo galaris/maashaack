@@ -37,11 +37,11 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-
+    
     import system.Environment;
     import system.hosts.HostID;
     import system.process.caches.AllTests;
-
+    
     public class AllTests
     {
         public static function suite():ITest
