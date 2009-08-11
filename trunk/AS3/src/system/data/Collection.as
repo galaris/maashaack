@@ -49,25 +49,25 @@ package system.data
         /**
          * Ensures that this collection contains the specified element (optional operation).
          */
-        function add( o:* ):Boolean ;        
+        function add( o:* ):Boolean ;
         
         /**
          * Removes all of the elements from this collection (optional operation).
          */
         function clear():void ;
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
          * @return <code class="prettyprint">true</code> if this collection contains the specified element.
          */
         function contains( o:* ):Boolean ;
-    
+        
         /**
          * Returns the element from this collection at the passed index.
          * @return the element from this collection at the passed index.
          */
         function get( key:* ) :* ;
-
+        
         /**
          * Returns the position of the passed object in the collection.
          * @param o the object to search in the collection.
@@ -81,12 +81,12 @@ package system.data
          * @return <code class="prettyprint">true</code> if this collection is empty else <code class="prettyprint">false</code>.
          */
         function isEmpty():Boolean ;
-
+        
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
          */
         function remove( o:* ):* ;
-    
+        
         /**
          * Retrieves the number of elements in this collection.
          * @return the number of elements in this collection.
@@ -98,6 +98,5 @@ package system.data
          * @return an array containing all of the elements in this collection.
          */
         function toArray():Array ;
-        
     }
 }
