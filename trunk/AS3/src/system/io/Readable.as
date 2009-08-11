@@ -35,19 +35,16 @@
 
 package system.io
 {
-
     public interface Readable
     {
-
         /**
          * Returns the last char.
          */
         function read():String;
-
+        
         /**
          * Returns the last line.
          */
         function readLine():String;
     }
 }
-

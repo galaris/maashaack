@@ -34,7 +34,6 @@
 */
 
 package system 
-{    
-    /**     * The 'experimental' namespace, when we are not sure if the implementation worth it or not as the name says "an experiment" no support.
+{    /**     * The 'experimental' namespace, when we are not sure if the implementation worth it or not as the name says "an experiment" no support.
      */    public namespace experimental = "http://code.google.com/p/maashaack/2009/experimental" ;
-    }
+}

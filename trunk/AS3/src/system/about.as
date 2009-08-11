@@ -45,4 +45,3 @@ package system
         console.writeLine( info( verbose, showConfig ) );
     };
 }
-

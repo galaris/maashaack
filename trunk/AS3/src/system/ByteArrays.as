@@ -49,15 +49,33 @@ package system
          * @param byteArray the ByteArray to be cloned.
          * @return A shallow copy of the specified ByteArray object.
          */
-        public static function clone(byteArray:ByteArray):ByteArray
+        public static function clone( byteArray:ByteArray ):ByteArray
         {
             var old:uint        = byteArray.position;
             var clone:ByteArray = new ByteArray();
             byteArray.position  = 0;
-            byteArray.readBytes(clone);
+            byteArray.readBytes( clone );
             byteArray.position  = old ;
             clone.position      = old ;
             return clone ;
+        }
+        
+        /**
+         * This function can copy a ByteArray in a other ByteArray.
+         * @param from The ByteArray to copy with the specified offset. 
+         * @param fromOffset A zero-based index indicating the position into the array to begin the copy.
+         * @param to The destination ByteArray to copy all bytes in the from ByteArray.
+         * @param toOffset A zero-based index indicating the position into the array to begin the insert of the from ByteArray.
+         * @param length An unsigned integer indicating how far into the buffer to write.
+         */
+        public static function copy( from:ByteArray , fromOffset:int, to:ByteArray, toOffset:int, length:int ):void
+        {
+            if (length <= 0)
+            {
+                return ;
+            }
+            to.position = toOffset ;
+            to.writeBytes(from, fromOffset, length) ;
         }
         
         /**

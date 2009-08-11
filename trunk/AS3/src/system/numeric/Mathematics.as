@@ -36,13 +36,12 @@
 package system.numeric
 {
     import flash.errors.IllegalOperationError;
-
+    
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
      */ 
     public class Mathematics
     {
-
         /**
          * Rounds and returns the ceiling of the specified number or expression. 
          * The ceiling of a number is the closest integer that is greater than or equal to the number.
@@ -73,8 +72,8 @@ package system.numeric
                 r *= 10 ;
             }
             return Math.ceil( n * r ) / r  ;
-        }     
-
+        }
+        
         /**
          * Bounds a numeric value between 2 numbers.
          * <p><b>Example :</b></p>
@@ -114,7 +113,7 @@ package system.numeric
             }
             return Math.max( Math.min( value, max ), min ) ;
         }
-
+        
         /**
          * Rounds and returns a number by a count of floating points.
          * <p><b>Example :</b></p>
@@ -197,7 +196,7 @@ package system.numeric
         {
             return minimum + (maximum - minimum) * value ;
         } 
-
+        
         /**
          * Takes a value in a given range (minimum1, maximum1) and finds the corresponding value in the next range(minimum2, maximum2).
          * <pre class="prettyprint">
@@ -216,7 +215,7 @@ package system.numeric
         {
             return interpolate( normalize( value, minimum1, maximum1 ), minimum2, maximum2 );
         }
-
+        
         /**
          * Takes a value within a given range and converts it to a number between 0 and 1.
          * Actually it can be outside that range if the original value is outside its range.
@@ -232,7 +231,7 @@ package system.numeric
         {
             return (value - minimum) / (maximum - minimum) ;
         }
-
+        
         /**
          * Returns a percentage or null.
          * <p><b>Example :</b></p>
@@ -250,7 +249,7 @@ package system.numeric
             var p:Number = (value / maximum) * 100 ;
             return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
         }
-
+        
         /**
          * Rounds and returns a number by a count of floating points.
          * <p><b>Example :</b></p>
@@ -281,7 +280,7 @@ package system.numeric
             }
             return Math.round( n * r ) / r  ;
         }
-
+        
         /**
          * Returns 1 if the value is positive or -1.
          * <p><b>Example :</b></p>
@@ -311,4 +310,3 @@ package system.numeric
         }
     }
 }
-

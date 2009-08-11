@@ -38,7 +38,7 @@ package system.numeric
     import system.Equatable;
     import system.Serializable;
     import system.numeric.Mathematics;
-
+    
     /**
      * Represents an immutable range of values.
      * <pre class="prettyprint">
@@ -224,7 +224,7 @@ package system.numeric
         {
             return (value > max ) || (value < min) ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the range in argument overlap the current range.
          * @return <code class="prettyprint">true</code> if the range in argument overlap the current range.
@@ -233,7 +233,7 @@ package system.numeric
         {
             return max >= r.min && r.max >= min ;
         }
-
+        
         /**
          * Returns the length of the range.
          * @return the length of the range.
@@ -251,7 +251,7 @@ package system.numeric
         {
             return "new system.numeric.Range(" + min + "," + max + ")";
         }
-
+        
         /**
          * Returns the string representation of this instance.
          * @return the string representation of this instance.

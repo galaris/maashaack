@@ -35,19 +35,16 @@
 
 package system.io
 {
-
     public interface Writeable
     {
-
         /**
          * Appends the message format.
          */
         function write( ...messages ):void;
-
+        
         /**
          * Appends the message format and add newline character.
          */
         function writeLine( ...messages ):void;
     }
 }
-

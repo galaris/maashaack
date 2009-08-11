@@ -38,8 +38,8 @@ package system.formatters
     import system.Strings;
     import system.formatters.Formattable;
     
-    import flash.utils.Dictionary;        
-
+    import flash.utils.Dictionary;
+    
     /**
      * This dictionary register formattable expression and format a String with all expression in the dictionnary. 
      * <pre class="prettyprint">
@@ -85,7 +85,7 @@ package system.formatters
             super( weakKeys );
             _reset() ;
         }
-                
+        
         /**
          * The max recursion value.
          */
@@ -105,16 +105,16 @@ package system.formatters
         public function set beginSeparator( str:String ):void
         {
             _beginSeparator = str || "{" ;
-            _reset() ;            
-        }        
-
+            _reset() ;
+        }
+        
         /**
          * The end separator of the expression to format (default "}").
          */
         public function get endSeparator():String
         {
-            return _endSeparator ;    
-        }        
+            return _endSeparator ;
+        }
         
         /**
          * @private
@@ -123,32 +123,32 @@ package system.formatters
         {
             _endSeparator = str || "}" ;
             _reset() ;
-        }        
+        }
         
         /**
          * Formats the specified value.
          * @param value The object to format.
          * @return the string representation of the formatted value. 
-         */      
+         */
         public function format( value:* = null ):String
         {
             return _format( value.toString() ) ;
-        }        
-
-        /**
-         * @private
-         */
-        private var _beginSeparator:String = "{" ;
-
-        /**
-         * @private
-         */
-        private var _endSeparator:String = "}" ;   
+        }
         
         /**
          * @private
          */
-        private var _pattern:String = "{0}((\\w+\)|(\\w+)((.\\w)+|(.\\w+))){1}" ;        
+        private var _beginSeparator:String = "{" ;
+        
+        /**
+         * @private
+         */
+        private var _endSeparator:String = "}" ;
+        
+        /**
+         * @private
+         */
+        private var _pattern:String = "{0}((\\w+\)|(\\w+)((.\\w)+|(.\\w+))){1}" ;
         
         /**
          * @private
@@ -157,7 +157,7 @@ package system.formatters
         
         /**
          * @private
-         */        
+         */
         private function _format( str:String , depth:uint=0 ):String
         {
             if ( depth >= MAX_RECURSION )

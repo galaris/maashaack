@@ -49,7 +49,6 @@ package system.network
      */
     public class URIScheme
     {
-        
         /**
          * The default port of the scheme.
          */
@@ -201,6 +200,5 @@ package system.network
          * </pre>
          */
         public static const AIRSTORAGE:URIScheme = new URIScheme( "app-storage", ":", -1 );
-        
     }
 }

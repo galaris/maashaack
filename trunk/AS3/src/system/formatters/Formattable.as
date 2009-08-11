@@ -48,4 +48,3 @@ package system.formatters
         function format( value:* = null ):String;
     }
 }
-
