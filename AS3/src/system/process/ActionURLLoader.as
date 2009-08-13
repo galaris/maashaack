@@ -188,7 +188,7 @@ package system.process
         {
             _maxDepth = MAX_DEPTH_RANGE.clamp(value) ;
         }
-
+        
         /**
          * Activate or disactivate parsing (Use this with XML, EDEN, JSON...). 
          */
@@ -297,7 +297,7 @@ package system.process
             for ( var prop:String in o ) 
             {
                 var value:* = o[prop] ;
-                trace( _getSpace( depth-1 ) + " + " + prop + " : " + value ) ; // TODO use log
+                logger.info( _getSpace( depth-1 ) + " + " + prop + " : " + value ) ;
                 if ( value is Object && (isCollapse == true) && (depth <= maxDepth) )
                 {
                     _enumerate( value , depth + 1 ) ;

@@ -154,7 +154,6 @@ package system
      */
     public class Reflection
     {
-
         /**
          * @private
          */
@@ -163,7 +162,7 @@ package system
             var a:Array = path.split( "." ) ;
             return (a.length > 1) ? a.pop( ) : path ;
         }
-
+        
         /**
          * @private
          */
@@ -180,7 +179,7 @@ package system
                 return null ;
             }
         }
-
+        
         /**
          * @private
          */
@@ -188,7 +187,7 @@ package system
         {
             return (path.split( "::" )).join( "." ) ;
         }
-
+        
         /**
          * Returns the class reference from a string class name.
          * The string name notation can be either "flash.system::Capabilities" or "flash.system.Capabilities" 
@@ -351,7 +350,6 @@ package system
             {
                 return false;
             }
-            
             return true;
         }
         
@@ -483,4 +481,3 @@ package system
         }
     }
 }
-

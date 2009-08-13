@@ -49,7 +49,7 @@ package system.process
     /**
      * This core command object run a "loader" object and notify ActionEvent during a load process.
      */
-    public class CoreActionLoader extends CoreAction 
+    public class CoreActionLoader extends CoreAction
     {
         /**
          * Creates a new CoreActionLoader instance.

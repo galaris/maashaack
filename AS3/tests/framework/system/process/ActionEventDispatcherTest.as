@@ -42,19 +42,18 @@ package system.process
     import system.events.FrontController;
     import system.process.mocks.MockTaskListener;
     
-    import flash.events.Event;    
+    import flash.events.Event;
     
     public class ActionEventDispatcherTest extends TestCase 
     {
-        
         public function ActionEventDispatcherTest(name:String = "")
         {
             super(name);
         }
         
-        public var action:ActionEventDispatcher ;        
+        public var action:ActionEventDispatcher ;
         
-        public var mockListener:MockTaskListener ;            
+        public var mockListener:MockTaskListener ;
         
         public function setUp():void
         {
@@ -69,14 +68,14 @@ package system.process
             mockListener.unregister() ;
             mockListener = undefined  ;
             action       = undefined  ;
-        }        
+        }
         
         // constructor and inherit
         
         public function testConstructorEmpty():void
         {
             var p:ActionEventDispatcher ;
-            p = new ActionEventDispatcher() ;         
+            p = new ActionEventDispatcher() ;
             assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with 0 argument.") ;
             assertNull ( p.event   , "02 - ActionEventDispatcher constructor failed with 0 argument.") ;
         }
@@ -84,7 +83,7 @@ package system.process
         public function testConstructorBasic():void
         {
             var p:ActionEventDispatcher ;
-            p = new ActionEventDispatcher("test") ;            
+            p = new ActionEventDispatcher("test") ;
             assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one String argument.") ;
             assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one String argument.") ;
         }
@@ -92,15 +91,15 @@ package system.process
         public function testConstructorEvent():void
         {
             var e:Event                 = new Event("test") ;
-            var p:ActionEventDispatcher = new ActionEventDispatcher( e ) ;         
+            var p:ActionEventDispatcher = new ActionEventDispatcher( e ) ;
             assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one Event argument.") ;
             assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one Event argument.") ;
-            assertEquals ( p.event , e , "03 - ActionEventDispatcher constructor failed with one Event argument.") ;            
+            assertEquals ( p.event , e , "03 - ActionEventDispatcher constructor failed with one Event argument.") ;
         }
         
         public function testInherit():void
         {
-            var p:ActionEventDispatcher = new ActionEventDispatcher() ;         
+            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
             assertTrue    ( p is Task , "01 - ActionEventDispatcher must extends the Task class.") ;
         }
         
@@ -137,7 +136,7 @@ package system.process
             p.event = null ;
             assertNull( p.event , "01 - The event attribute failed, must be null with a null value.") ;
             p.event = 2 ;
-            assertNull( p.event , "02 - The event attribute failed, must be null with a Number value.") ;            
+            assertNull( p.event , "02 - The event attribute failed, must be null with a Number value.") ;
         }
         
         // methods
@@ -154,7 +153,7 @@ package system.process
             action.run() ;
             
             assertTrue   ( mockListener.isRunning     , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-            assertFalse  ( action.running             , "The running property of the BatchProcess must be false after the process." ) ;        
+            assertFalse  ( action.running             , "The running property of the BatchProcess must be false after the process." ) ;
             
             assertTrue   ( mockListener.startCalled   , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals ( mockListener.startType     , ActionEvent.START   , "run method failed, bad type found when the process is started." );
@@ -174,7 +173,5 @@ package system.process
         {
             _testHandleEventCalled = true ;
         }
-    
     }
-
 }
