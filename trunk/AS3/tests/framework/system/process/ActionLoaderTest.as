@@ -38,11 +38,10 @@ package system.process
     import buRRRn.ASTUce.framework.TestCase;
     
     import flash.display.Loader;
-    import flash.system.LoaderContext;    
-
+    import flash.system.LoaderContext;
+    
     public class ActionLoaderTest extends TestCase 
     {
-        
         public function ActionLoaderTest(name:String = "")
         {
             super(name);
@@ -72,7 +71,7 @@ package system.process
             var a:ActionLoader = new ActionLoader() ;
             assertTrue( a is CoreActionLoader , "ActionLoader must extends the CoreActionLoader class." ) ;
         }
-                
+        
         public function testContext():void
         {
             var a:ActionLoader = new ActionLoader() ;
@@ -82,7 +81,7 @@ package system.process
             assertNotNull( a.context , "02-01 - ActionLoader context property failed." ) ;
             assertTrue( a.context == context , "02-02 - ActionLoader context property failed." ) ;
         }
-                
+        
         public function testClone():void
         {
             var loader:Loader       = new Loader() ;
@@ -92,7 +91,5 @@ package system.process
             assertFalse( clone == action  , "02 - ActionLoader clone method failed." ) ;
             assertTrue( clone.loader == action.loader  , "03 - ActionLoader clone method failed." ) ;
         }
-        
     }
 }
-

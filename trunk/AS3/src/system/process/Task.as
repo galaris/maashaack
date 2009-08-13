@@ -35,8 +35,12 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
+    import system.Reflection;
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
+    import system.logging.Log;
+    import system.logging.Loggable;
+    import system.logging.Logger;
     
     /**
      * Dispatched when a process is finished.
@@ -55,9 +59,8 @@ package system.process
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
-    public dynamic class Task extends CoreEventDispatcher implements Action
+    public dynamic class Task extends CoreEventDispatcher implements Action, Loggable
     {
-    
         /**
          * Creates a new Task instance.
          * @param global the flag to use a global event flow or a local event flow.
@@ -66,6 +69,23 @@ package system.process
         public function Task( global:Boolean = false , channel:String = null ) 
         {
             super( global , channel ) ;
+            _logger = Log.getLogger( Reflection.getClassPath(this) ) ;
+        }
+        
+        /**
+         * Determinates the internal <code class="prettyprint">Logger</code> reference of this <code class="prettyprint">Loggable</code> object.
+         */
+        public function get logger():Logger
+        {
+            return _logger ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set logger( log:Logger ):void
+        {
+            _logger = log || Log.getLogger( Reflection.getClassPath(this) ) ;
         }
         
         /**
@@ -166,6 +186,11 @@ package system.process
          * @private
          */
         private var _isRunning:Boolean ;
+        
+        /**
+         * @private
+         */
+        private var _logger:Logger ;
         
         /**
          * @private

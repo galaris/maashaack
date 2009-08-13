@@ -35,8 +35,15 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    import system.events.ActionEvent;    import system.events.CoreEventDispatcher;    import system.process.mocks.MockTaskListener;
-        public class TaskTest extends TestCase
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import system.Reflection;
+    import system.events.ActionEvent;
+    import system.events.CoreEventDispatcher;
+    import system.logging.Logger;
+    import system.process.mocks.MockTaskListener;
+
+    public class TaskTest extends TestCase
     {
         public function TaskTest(name:String = "")
         {
@@ -79,6 +86,13 @@ package system.process
         {
             var action:Task = new Task() ;
             assertTrue( Reflection.getClassInfo(action).isDynamic() , "Task is dynamic.") ;
+        }
+        
+        public function testLogger():void
+        {
+            var logger:Logger = action.logger ;
+            assertNotNull( logger , "01 - The logger property of the Task class failed." ) ;
+            assertEquals( logger.channel , Reflection.getClassPath( action ) , "02 - The logger property of the Task class failed." ) ;
         }
         
         public function testParent():void

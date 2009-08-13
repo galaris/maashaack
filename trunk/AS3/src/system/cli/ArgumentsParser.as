@@ -35,7 +35,6 @@
 
 package system.cli
 {
-
     /**
      * Parse command line arguments.
      * <p><b>Example :</b></p>
@@ -49,22 +48,21 @@ package system.cli
      */
     public class ArgumentsParser
     {
-
         /**
          * @private
          */
         private var _switchSymbols:Array;
-
+        
         /**
          * @private
          */
         private var _caseSensitive:Boolean;
-
+        
         /**
          * @private
          */
         private var _switchChars:Array = [ "/", "-" ];
-
+        
         /**
          * Creates a new ArgumentParser instance.
          * @param switchSymbols The Array representation of all switch symbols.
@@ -83,7 +81,7 @@ package system.cli
                 _switchChars = switchChars ;
             }
         }
-
+        
         /**
          * Used to display the usage string when an error occurs.
          * Need to be overrided.
@@ -91,7 +89,7 @@ package system.cli
         public function onUsage( errorInfo:String = "" ):void
         {
         }
-
+        
         /**
          * Used to display the usage string when a switch occurs.
          * Need to be overrided.
@@ -100,7 +98,7 @@ package system.cli
         {
             return SwitchStatus.error;
         }
-
+        
         /**
          * Used to display the usage string when a non switch occurs.
          * Need to be overrided.
@@ -109,7 +107,7 @@ package system.cli
         {
             return SwitchStatus.error;
         }
-
+        
         /**
          * Used to display the usage string when a parse occurs.
          * Need to be overrided.
@@ -118,7 +116,7 @@ package system.cli
         {
             return SwitchStatus.error;
         }
-
+        
         /**
          * Invoked to parse the specified Array of arguments.
          */
@@ -209,4 +207,3 @@ package system.cli
         }
     }
 }
-

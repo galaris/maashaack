@@ -36,13 +36,12 @@
 package system.cli
 {
     import system.Enum;
-
+    
     /**
-     * Enumerate the different switch states.
+     * Enumerates the different switch states.
      */
     public class SwitchStatus extends Enum
     {
-
         /**
          * Creates a new SwitchStatus instance.
          * @param value The value of the enumeration.
@@ -52,21 +51,20 @@ package system.cli
         {
             super( value, name );
         }
-
+        
         /**
          * The "noError" SwitchStatus object.
          */
         public static const noError:SwitchStatus = new SwitchStatus( 0, "noError" );
-
+        
         /**
          * The "error" SwitchStatus object.
          */
         public static const error:SwitchStatus = new SwitchStatus( 1, "error" );
-
+        
         /**
          * The "showUsage" SwitchStatus object.
          */
         public static const showUsage:SwitchStatus = new SwitchStatus( 2, "showUsage" );
     }
 }
-

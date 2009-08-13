@@ -37,11 +37,10 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.net.URLLoader;    
-
+    import flash.net.URLLoader;
+    
     public class ActionURLLoaderTest extends TestCase 
     {
-        
         public function ActionURLLoaderTest(name:String = "")
         {
             super(name);
@@ -71,7 +70,6 @@ package system.process
             var a:ActionURLLoader = new ActionURLLoader() ;
             assertTrue( a is CoreActionLoader , "ActionURLLoader must extends the CoreActionLoader class." ) ;
         }
-
         
         public function testClone():void
         {
@@ -82,7 +80,5 @@ package system.process
             assertFalse( clone == action  , "02 - ActionURLLoader clone method failed." ) ;
             assertTrue( clone.loader == action.loader  , "03 - ActionURLLoader clone method failed." ) ;
         }
-        
     }
 }
-

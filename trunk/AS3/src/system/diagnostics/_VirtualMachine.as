@@ -49,7 +49,6 @@ package system.diagnostics
      */
     public class _VirtualMachine
     {
-        
         /**
          * @private
          */
