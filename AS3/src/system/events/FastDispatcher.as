@@ -42,6 +42,37 @@ package system.events
     
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples 
+     * {
+     *     import system.events.BasicEvent;
+     *     import system.events.FastDispatcher;
+     *     
+     *     import flash.display.Sprite;
+     *     import flash.events.Event;
+     *     
+     *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+     *     
+     *     public class FastDispatcherExample extends Sprite
+     *     {
+     *         public function FastDispatcherExample()
+     *         {
+     *             var dispatcher:FastDispatcher = new FastDispatcher() ;
+     *             
+     *             dispatcher.addListener( this ) ;
+     *             
+     *             dispatcher.broadcastMessage( "onCallback" ) ;
+     *             dispatcher.dispatch( new BasicEvent( "onCallback" ) ) ;
+     *         }
+     *         
+     *         public function onCallback( e:Event ):void
+     *         {
+     *             trace( e ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class FastDispatcher extends CoreBroadcaster implements Cloneable
     {

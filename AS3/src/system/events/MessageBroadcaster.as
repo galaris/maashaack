@@ -40,6 +40,31 @@ package system.events
     
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples 
+     * {
+     *     import system.events.MessageBroadcaster;
+     *     import flash.display.Sprite;
+     *     
+     *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+     *     
+     *     public class MessageBroadcasterExample extends Sprite
+     *     {
+     *         public function MessageBroadcasterExample()
+     *         {
+     *             var broadcaster:MessageBroadcaster = new MessageBroadcaster() ;
+     *             broadcaster.addListener( this ) ;
+     *             broadcaster.broadcastMessage( "message" , "hello" , "world" ) ;
+     *         }
+     *         
+     *         public function message( ...arguments:Array ):void
+     *         {
+     *             trace( "message : " + arguments ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class MessageBroadcaster extends CoreBroadcaster implements Cloneable
     {
