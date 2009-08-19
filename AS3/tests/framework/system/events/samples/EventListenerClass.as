@@ -37,11 +37,10 @@ package system.events.samples
 {
     import system.events.EventListener;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     public class EventListenerClass implements EventListener 
     {
-        
         public function EventListenerClass()
         {
             //
@@ -51,8 +50,7 @@ package system.events.samples
         
         public function handleEvent(e:Event):void
         {
-            event = e ;    
+            event = e ;
         }
-        
     }
 }

@@ -79,8 +79,9 @@ package system.events
         
         public function testInterfaces():void
         {
-            assertTrue( dispatcher is Cloneable , "The FastDispatcher class must implements the Cloneable interface.") ;
-            assertTrue( dispatcher is Iterable , "The FastDispatcher class must implements the Iterable interface.") ;
+            assertTrue( dispatcher is Broadcaster , "The FastDispatcher class must implements the Broadcaster interface.") ;
+            assertTrue( dispatcher is Cloneable   , "The FastDispatcher class must implements the Cloneable interface.") ;
+            assertTrue( dispatcher is Iterable    , "The FastDispatcher class must implements the Iterable interface.") ;
         }
         
         public function testAddListener():void

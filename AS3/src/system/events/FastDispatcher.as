@@ -37,17 +37,13 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     import system.Cloneable;
-    import system.data.Iterable;
-    import system.data.Iterator;
-    import system.data.Set;
-    import system.data.sets.ArraySet;
     
     import flash.events.Event;
     
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      */
-    public class FastDispatcher implements Cloneable, Iterable
+    public class FastDispatcher extends CoreBroadcaster implements Cloneable
     {
         /**
          * Creates a new FastDispatcher instance.
@@ -55,24 +51,14 @@ package system.events
          */
         public function FastDispatcher( listeners:Array = null )
         {
-            this.listeners = new ArraySet( listeners ) ;
-        }
-        
-        /**
-         * Registers an object to receive event notification messages.
-         * This method is called on the broadcasting object and the listener object is sent as an argument.
-         * @return <code>true</code> If the listener is register in the dispatcher and don't already exist.
-         */
-        public function addListener( listener:* ):Boolean
-        {
-            return listeners.add( listener ) ;
+            super( listeners ) ;
         }
         
         /**
          * Broadcast the specified message.
-         * @return The reference of the BasicEvent dispatched by the dispatcher.
+         * @return The reference of the Event dispatched by the dispatcher.
          */
-        public function broadcastMessage( message:String , ...rest:Array ):Event
+        public override function broadcastMessage( message:String , ...rest:Array ):*
         {
             if ( message == null && listeners.size() == 0 )
             {
@@ -104,73 +90,6 @@ package system.events
             }
             _propagate( e ) ;
         }
-        
-        /**
-         * Returns the Array representation of all listeners.
-         * @return the Array representation of all listeners.
-         */
-        public function getListeners():Array
-        {
-            return listeners.toArray() ;
-        }
-        
-        /**
-         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         */
-        public function hasListener( listener:* ):Boolean
-        {
-            return listeners.contains( listener ) ;
-        }
-        
-        /**
-         * Returns <code>true</code> if the set of listeners is empty.
-         * @return <code>true</code> if the set of listeners is empty.
-         */
-        public function isEmpty():Boolean
-        {
-            return listeners.isEmpty() ;
-        }
-        
-        /**
-         * Returns the iterator reference of the object.
-         * @return the iterator reference of the object.
-         */
-        public function iterator():Iterator
-        {
-            return listeners.iterator() ;
-        }
-        
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            listeners.clear() ;
-        }
-        
-        /**
-         * Removes the specified listener.
-         * @return <code>true</code> if the specified listener exist and can be unregister.
-         */
-        public function removeListener( listener:* ):Boolean
-        {
-            return listeners.remove( listener ) ;
-        }
-        
-        /**
-         * Indicates the number of listeners registered in the dispatcher.
-         * @return The number of listeners registered in the dispatcher.
-         */
-        public function size():uint
-        {
-            return listeners.size() ;
-        }
-        
-        /**
-         * The Array representation of all listeners.
-         */
-        protected var listeners:Set ;
         
         /**
          * @private
