@@ -42,19 +42,18 @@ package system.events
     
     public class AllTests
     {
-        
         public static function suite():ITest
         {
-            
             var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            
             if( Environment.host.id != HostID.RedTamarin )
             {
                 suite.addTestSuite( ActionEventTest ) ;
                 suite.addTestSuite( ArrayEventTest ) ;
                 suite.addTestSuite( BasicEventTest ) ;
                 suite.addTestSuite( BooleanEventTest ) ;
+                suite.addTestSuite( BroadcasterTest ) ;
                 suite.addTestSuite( CommandTest ) ;
+                suite.addTestSuite( CoreBroadcasterTest ) ;
                 suite.addTestSuite( CoreEventDispatcherTest ) ;
                 suite.addTestSuite( DateEventTest ) ;
                 suite.addTestSuite( DelegateTest ) ;
