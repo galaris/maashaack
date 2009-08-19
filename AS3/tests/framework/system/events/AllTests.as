@@ -65,6 +65,7 @@ package system.events
                 suite.addTestSuite( FrontControllerTest ) ;
                 suite.addTestSuite( IEventDispatcherTest ) ;
                 suite.addTestSuite( InternalDispatcherTest ) ;
+                suite.addTestSuite( MessageBroadcasterTest ) ;
                 suite.addTestSuite( NumberEventTest ) ;
                 suite.addTestSuite( StringEventTest ) ;
             }
