@@ -44,17 +44,17 @@ package system.events.samples
             //
         }
         
-        public function addListener(listener:*):Boolean
+        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
         {
-            return listener != null ;
+            return listener != null && useWeakReference ;
         }
         
-        public function broadcastMessage(message:String, ...rest:Array):*
+        public function broadcastMessage( message:String, ...rest:Array ):*
         {
             return message ;
         }
         
-        public function removeListener(listener:*):Boolean
+        public function removeListener( listener:* ):Boolean
         {
             return listener != null;
         }
