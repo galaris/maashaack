@@ -37,9 +37,10 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     import system.Cloneable;
-    
+    import system.data.WeakReference;
+
     import flash.events.Event;
-    
+
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      * <p><b>Example :</b></p>
@@ -78,7 +79,7 @@ package system.events
     {
         /**
          * Creates a new FastDispatcher instance.
-         * @param listeners An optional Array of listeners to register when the dispatcher is initialized.
+         * @param listeners The Array collection of listeners to register in the dispatcher.
          */
         public function FastDispatcher( listeners:Array = null )
         {
@@ -96,7 +97,7 @@ package system.events
                 return null ;
             }
             var e:BasicEvent = new BasicEvent( message , this , rest ) ;
-            _propagate( e ) ;
+            dispatch( e ) ;
             return e ;
         }
         
@@ -119,24 +120,33 @@ package system.events
             {
                 return ;
             }
-            _propagate( e ) ;
-        }
-        
-        /**
-         * @private
-         */
-        private function _propagate( e:Event ):void
-        {
-            var o:* ;
-            var a:Array  = listeners.toArray() ;
-            var l:int    = a.length ;
+            var removed:Array = [] ;
+            var listener:* ;
             var t:String = e.type ;
+            var a:Array = listeners.toArray() ;
+            var l:int   = a.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                o = a[i] ;
-                if ( t in o && o[t] is Function )
+                listener = a[i] ;
+                if ( listener is WeakReference )
                 {
-                    o[t].call( o , e ) ;
+                    listener = (listener as WeakReference).value ;
+                    if( listener == null )
+                    {
+                        removed.push( listener ) ;
+                    }
+                }
+                if ( listener != null && t in listener && listener[t] is Function )
+                {
+                    listener[t].call( listener , e ) ;
+                }
+                if ( removed.length > 0 ) // clean all null weak references
+                {
+                    l = removed.length ;
+                    while( --l > -1 )
+                    {
+                        listeners.remove(removed[l]) ;
+                    }
                 }
             }
         }

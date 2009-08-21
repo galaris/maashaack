@@ -39,6 +39,8 @@ package system.events
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.Set;
+    import system.data.WeakReference;
+    import system.data.iterators.ArrayIterator;
     import system.data.sets.ArraySet;
     
     /**
@@ -47,21 +49,52 @@ package system.events
     public class CoreBroadcaster implements Broadcaster, Iterable
     {
         /**
-         * Creates a new CoreDispatcher instance.
-         * @param listeners An optional Array of listeners.
+         * Creates a new CoreBroadcaster instance.
+         * @param listeners The Array collection of listeners to register in the dispatcher.
          */
-        public function CoreBroadcaster( listeners:Array = null )
+        public function CoreBroadcaster( listeners:Array = null ) 
         {
-            this.listeners = new ArraySet( listeners ) ;
+            this.listeners = new ArraySet() ;
+            if ( listeners != null )
+            {
+                var l:int = listeners.length ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    addListener( listeners[i] );
+                }
+            }
         }
         
         /**
-         * Registers an object to receive notification messages.
-         * This method is called on the broadcasting object and the listener object is sent as an argument.
-         * @return <code>true</code> If the listener is register in the dispatcher and don't already exist.
+         * Registers an object to receive messages.
+         * @param listener The listener to register.
+         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
+         * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        public function addListener( listener:* ):Boolean
+        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
         {
+            if ( listener == null )
+            {
+                return false ;
+            }
+            if ( useWeakReference )
+            {
+                if ( listeners.size() > 0 )
+                {
+                    var l:int   = listeners.size() ;
+                    var a:Array = listeners.toArray() ;
+                    var o:WeakReference ;
+                    while( --l > -1 )
+                    {
+                        o = a[l] as WeakReference;
+                        if ( o != null && o.value == listener )
+                        {
+                            return false ;
+                        }
+                    }
+                }
+                listener = new WeakReference( listener ) ;
+            }
             return listeners.add( listener ) ;
         }
         
@@ -79,7 +112,30 @@ package system.events
          */
         public function getListeners():Array
         {
-            return listeners.toArray() ;
+            if ( listeners.size() > 0 )
+            {
+                var l:int   = listeners.size() ;
+                var r:Array = [] ;
+                var a:Array = listeners.toArray() ;
+                var o:* ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    o = a[i] ;
+                    if ( o is WeakReference )
+                    {
+                        r.push( (o as WeakReference).value ) ;
+                    }
+                    else
+                    {
+                        r.push( o ) ;
+                    }
+                }
+                return r ;
+            }
+            else
+            {
+                return [] ;
+            }
         }
         
         /**
@@ -88,7 +144,7 @@ package system.events
          */
         public function hasListener( listener:* ):Boolean
         {
-            return listeners.contains( listener ) ;
+            return getListeners().indexOf( listener ) > -1 ;
         }
         
         /**
@@ -106,7 +162,7 @@ package system.events
          */
         public function iterator():Iterator
         {
-            return listeners.iterator() ;
+            return new ArrayIterator(getListeners()) ;
         }
         
         /**
@@ -123,7 +179,27 @@ package system.events
          */
         public function removeListener( listener:* ):Boolean
         {
-            return listeners.remove( listener ) ;
+            if ( listener == null )
+            {
+                return false ;
+            }
+            var b:Boolean ;
+            if ( listeners.size() > 0 )
+            {
+                var l:int   = listeners.size() ;
+                var a:Array = listeners.toArray() ;
+                var o:* ;
+                while( --l > -1 )
+                {
+                    o = a[l] ;
+                    if ( o == listener || ( o is WeakReference && ( (o as WeakReference).value == listener ) ) )
+                    {
+                        listeners.remove(o) ;
+                        b = true ;
+                    }
+                }
+            }
+            return b ;
         }
         
         /**

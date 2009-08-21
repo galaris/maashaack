@@ -43,9 +43,11 @@ package system.events
     {
         /**
          * Registers an object to receive messages.
+         * @param listener The listener to register.
+         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        function addListener( listener:* ):Boolean ;
+        function addListener( listener:* , useWeakReference:Boolean = false ):Boolean ;
         
         /**
          * Broadcast the specified message.

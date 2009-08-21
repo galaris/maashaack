@@ -37,7 +37,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     import system.Cloneable;
-    
+    import system.data.WeakReference;
+
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
      * <p><b>Example :</b></p>
@@ -70,7 +71,7 @@ package system.events
     {
         /**
          * Creates a new MessageBroadcaster instance.
-         * @param listeners An optional Array of listeners.
+         * @param listeners The Array collection of listeners to register in the dispatcher.
          */
         public function MessageBroadcaster( listeners:Array = null )
         {
@@ -87,18 +88,37 @@ package system.events
             {
                 return false ;
             }
-            var o:* ;
+            var removed:Array = [] ;
+            var listener:* ;
+            var b:Boolean ;
             var a:Array = listeners.toArray() ;
             var l:int   = a.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                o = a[i] ;
-                if ( message in o && o[message] is Function )
+                listener = a[i] ;
+                if ( listener is WeakReference )
                 {
-                    o[message].apply( o , rest ) ;
+                    listener = (listener as WeakReference).value ;
+                    if( listener == null )
+                    {
+                        removed.push( listener ) ;
+                    }
+                }
+                if ( listener != null && message in listener && listener[message] is Function )
+                {
+                    listener[message].apply( listener , rest ) ;
+                    b = true ;
+                }
+                if ( removed.length > 0 ) // clean all null weak references
+                {
+                    l = removed.length ;
+                    while( --l > -1 )
+                    {
+                        listeners.remove(removed[l]) ;
+                    }
                 }
             }
-            return true ;
+            return b ;
         }
         
         /**

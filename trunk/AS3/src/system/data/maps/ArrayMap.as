@@ -40,8 +40,8 @@ package system.data.maps
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;
-    import system.eden;    
-
+    import system.eden;
+    
     /**
      * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
      * <p>This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.</p>
@@ -110,14 +110,14 @@ package system.data.maps
                 _keys   = [] ;
                 _values = [] ;
             }
-            else 
+            else
             {
                 var b:Boolean =  ( k.length > 0 && k.length == v.length ) ;
                 _keys   = b ? [].concat(k) : [] ;
                 _values = b ? [].concat(v) : [] ;
             }
         }
-                
+        
         /**
          * Removes all mappings from this map.
          */  
@@ -146,7 +146,7 @@ package system.data.maps
         {
             return indexOfKey(key) > -1 ;
         }
-  
+        
         /**
          * Returns true if this map maps one or more keys to the specified value.
          * @return true if this map maps one or more keys to the specified value.
@@ -164,7 +164,7 @@ package system.data.maps
         {
             return _values[ indexOfKey(key) ] ;
         }
-
+        
         /**
          * Returns an array representation of all keys in the map.
          * @return an array representation of all keys in the map.
@@ -191,7 +191,7 @@ package system.data.maps
         {
             return _keys.indexOf( key ) ;
         }
-
+        
         /**
          * Returns the index position in the ArrayMap of the specified value.
          * @return the index position in the ArrayMap of the specified value.
@@ -209,7 +209,7 @@ package system.data.maps
         {
             return size() < 1 ;
         }
-
+        
         /**
          * Returns the values iterator of this map.
          * @return the values iterator of this map.
@@ -218,7 +218,7 @@ package system.data.maps
         {
             return new MapIterator( this ) ;
         }
-
+        
         /**
          * Returns the keys iterator of this map.
          * @return the keys iterator of this map.
@@ -227,7 +227,7 @@ package system.data.maps
         {
             return new ArrayIterator( _keys ) ;
         }
-
+        
         /**
          * Associates the specified value with the specified key in this map.
          */
@@ -248,7 +248,7 @@ package system.data.maps
                 return r ;
             }
         }
- 
+        
         /**
          * Copies all of the mappings from the specified map to this one.
          */
@@ -262,7 +262,7 @@ package system.data.maps
                 put(aK[i], aV[i]) ;
             }
         }
- 
+        
         /**
          * Removes the mapping for this key from this map if present.
          * @param o The key whose mapping is to be removed from the map.
@@ -278,11 +278,11 @@ package system.data.maps
                 k = _keys[i]   ;
                 v = _values[i] ;
                 _values.splice(i, 1) ;
-                _keys.splice(i, 1) ;                
+                _keys.splice(i, 1) ;
             }
             return v ;
         }
-
+        
         /**
          * Sets the value of the "key" in the ArrayMap with the specified index.
          * @param index The position of the entry in the ArrayMap.
@@ -332,7 +332,7 @@ package system.data.maps
             _values[index] = value ;
             return new MapEntry(k,v) ;
         }
-
+        
         /**
          * Returns the number of key-value mappings in this map.
          * @return the number of key-value mappings in this map.
@@ -341,16 +341,16 @@ package system.data.maps
         {
             return _keys.length ;
         }
-
+        
         /**
          * Returns the eden String representation of this map.
          * @return the eden String representation of this map.
-         */        
+         */
         public function toSource( indent:int = 0 ):String 
         {
             return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
         }
- 
+        
         /**
          * Returns the String representation of this map.
          * @return the String representation of this map.
@@ -359,22 +359,15 @@ package system.data.maps
         {
             return formatter.format( this ) ;
         }
-                
+        
         /**
          * @private
          */
         protected var _keys:Array ;
-                
+        
         /**
          * @private
          */
         protected var _values:Array ;
-        
     }
 }
-
-
-
-
-
-
