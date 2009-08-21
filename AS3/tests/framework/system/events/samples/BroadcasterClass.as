@@ -37,7 +37,7 @@ package system.events.samples
 {
     import system.events.Broadcaster;
     
-    public class BroadcasterClass implements Broadcaster 
+    public class BroadcasterClass implements Broadcaster
     {
         public function BroadcasterClass()
         {
@@ -52,6 +52,11 @@ package system.events.samples
         public function broadcastMessage( message:String, ...rest:Array ):*
         {
             return message ;
+        }
+        
+        public function hasListener(listener:*):Boolean
+        {
+            return listener != null ;
         }
         
         public function removeListener( listener:* ):Boolean

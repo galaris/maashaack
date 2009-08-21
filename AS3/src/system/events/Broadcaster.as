@@ -55,6 +55,12 @@ package system.events
         function broadcastMessage( message:String , ...rest:Array ):* ;
         
         /**
+         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         */
+        function hasListener( listener:* ):Boolean ;
+        
+        /**
          * Removes the specified listener.
          * @return <code>true</code> if the specified listener exist and can be removed.
          */
