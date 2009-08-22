@@ -35,10 +35,8 @@
 
 package system.events
 {
-    import system.events.BasicEvent;
-    
     import flash.events.Event;
-    
+
     /**
      * The ActionEvent is notify by all the objects who implements the Action interface.
      */
@@ -65,7 +63,7 @@ package system.events
          * @eventType change
          */
         public static const CHANGE:String = "change" ;
-
+        
         /**
          * The name of the event when the process is cleared.
          * @eventType clear
@@ -77,13 +75,13 @@ package system.events
          * @eventType finish
          */
         public static const FINISH:String = "finish" ;
-
+        
         /**
          * The name of the event when the process info is changed.
          * @eventType change
          */
         public static const INFO:String = "info" ;
-
+        
         /**
          * The name of the event when the process is looped.
          * @eventType loop
