@@ -42,14 +42,14 @@ package system.events
     import system.data.Iterator;
     import system.events.mocks.MockListener;
     
-    public class CoreBroadcasterTest extends TestCase 
+    public class InternalBroadcasterTest extends TestCase 
     {
-        public function CoreBroadcasterTest(name:String = "")
+        public function InternalBroadcasterTest(name:String = "")
         {
             super(name);
         }
         
-        public var broadcaster:CoreBroadcaster ;
+        public var broadcaster:InternalBroadcaster ;
         
         public var listener1:MockListener ;
         
@@ -57,7 +57,7 @@ package system.events
         
         public function setUp():void
         {
-            broadcaster = new CoreBroadcaster() ;
+            broadcaster = new InternalBroadcaster() ;
             listener1  = new MockListener() ;
             listener2  = new MockListener() ;
         }
@@ -76,8 +76,8 @@ package system.events
         
         public function testInterfaces():void
         {
-            assertTrue( broadcaster is Broadcaster , "The CoreBroadcaster class must implements the Broadcaster interface.") ;
-            assertTrue( broadcaster is Iterable    , "The CoreBroadcaster class must implements the Iterable interface.") ;
+            assertTrue( broadcaster is Broadcaster , "The InternalBroadcaster class must implements the Broadcaster interface.") ;
+            assertTrue( broadcaster is Iterable    , "The InternalBroadcaster class must implements the Iterable interface.") ;
         }
         
         public function testAddListener():void

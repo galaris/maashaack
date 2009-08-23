@@ -75,7 +75,7 @@ package system.events
      * }
      * </pre>
      */
-    public class FastDispatcher extends CoreBroadcaster implements Cloneable
+    public class FastDispatcher extends InternalBroadcaster implements Cloneable
     {
         /**
          * Creates a new FastDispatcher instance.

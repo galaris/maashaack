@@ -38,7 +38,7 @@ package system.events
 {
     import system.Cloneable;
     import system.data.WeakReference;
-
+    
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
      * <p><b>Example :</b></p>
@@ -67,7 +67,7 @@ package system.events
      * }
      * </pre>
      */
-    public class MessageBroadcaster extends CoreBroadcaster implements Cloneable
+    public class MessageBroadcaster extends InternalBroadcaster implements Cloneable
     {
         /**
          * Creates a new MessageBroadcaster instance.
