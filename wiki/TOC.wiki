@@ -28,6 +28,7 @@
      * [EventsFactory EventDispatcher factory]
      * [EventsListeners using EventListeners]
      * [EventsFrontController the Design Pattern FrontController]
+     * [EventsDelegate Delegate event listener]
    * [Metadata Metadata]
    * [Singleton Singleton]
    * [StaticCodeBlock Static Code Block]
