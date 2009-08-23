@@ -49,7 +49,7 @@ package system.events
     public class InternalBroadcaster implements Broadcaster, Iterable
     {
         /**
-         * Creates a new CoreBroadcaster instance.
+         * Creates a new InternalBroadcaster instance.
          * @param listeners The Array collection of listeners to register in the dispatcher.
          */
         public function InternalBroadcaster( listeners:Array = null ) 

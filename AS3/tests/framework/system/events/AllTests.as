@@ -54,6 +54,7 @@ package system.events
                 suite.addTestSuite( BroadcasterTest ) ;
                 suite.addTestSuite( CommandTest ) ;
                 suite.addTestSuite( InternalBroadcasterTest ) ;
+                suite.addTestSuite( CoreBroadcasterTest ) ;
                 suite.addTestSuite( CoreEventDispatcherTest ) ;
                 suite.addTestSuite( DateEventTest ) ;
                 suite.addTestSuite( DelegateTest ) ;

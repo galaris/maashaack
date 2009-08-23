@@ -39,11 +39,10 @@ package system.events
     
     import system.events.mocks.MockEventListener;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     public class CoreEventDispatcherTest extends TestCase 
     {
-
         public function CoreEventDispatcherTest(name:String = "")
         {
             super( name );
@@ -56,7 +55,7 @@ package system.events
             assertFalse( dispatcher.isGlobal() , "02 - CoreEventDispatcher constructor failed.") ;
             assertNull( dispatcher.channel     , "03 - CoreEventDispatcher constructor failed.") ;
         }
-    
+        
         public function testConstructorWithArguments():void
         {
             var dispatcher:CoreEventDispatcher = new CoreEventDispatcher(true, "channel") ;
@@ -66,7 +65,7 @@ package system.events
             assertEquals( dispatcher.channel, "channel" , "03 - CoreEventDispatcher constructor failed.") ;
             
             EventDispatcher.flush() ;
-        }    
+        }
         
         public function testChannelProperty():void
         {
@@ -77,12 +76,12 @@ package system.events
             
             dispatcher = new CoreEventDispatcher(true) ;
             assertEquals( dispatcher.channel, EventDispatcher.DEFAULT_SINGLETON_CHANNEL, "02-03 - CoreEventDispatcher constructor failed.") ;
-
+            
             EventDispatcher.flush() ;
             
             dispatcher = new CoreEventDispatcher() ;
             assertNull(dispatcher.channel, "CoreEventDispatcher channel property failed.") ;
-        }         
+        }
         
         public function testAddEventListener():void
         {
@@ -95,7 +94,7 @@ package system.events
             dispatcher.dispatchEvent( event ) ;
             
             assertNotNull( listener.event , "01 - CoreEventDispatcher addEventListener failed." ) ;
-            assertEquals( listener.count , 1  , "02 - CoreEventDispatcher addEventListener failed." ) ;            
+            assertEquals( listener.count , 1  , "02 - CoreEventDispatcher addEventListener failed." ) ;
         }
         
         public function testDispatchEvent():void
@@ -110,8 +109,7 @@ package system.events
             assertTrue(dispatcher.dispatchEvent( event ), "01 - CoreEventDispatcher dispatchEvent failed." ) ;
             
             assertNotNull( listener.event , "02 - CoreEventDispatcher dispatchEvent failed." ) ;
-            assertEquals( listener.count , 1  , "03 - CoreEventDispatcher dispatchEvent failed." ) ;            
-
+            assertEquals( listener.count , 1  , "03 - CoreEventDispatcher dispatchEvent failed." ) ;
         }
         
         public function testGetEventDispatcher():void
@@ -131,7 +129,7 @@ package system.events
             
             EventDispatcher.flush() ;
         }
-                
+        
         public function testHasEventListener():void
         {
             var listener:MockEventListener = new MockEventListener() ;
@@ -183,11 +181,11 @@ package system.events
             
             dispatcher.registerEventListener("fire", fListener ) ; // function
             dispatcher.registerEventListener("fire", listener ) ; // EventListener
-        
+            
             var event:Event = new Event("fire") ;
             dispatcher.dispatchEvent( event ) ;
             assertNotNull( listener.event , "01-01 - CoreEventDispatcher registerEventListener failed." ) ;
-            assertEquals( listener.count , 1  , "01-02 - CoreEventDispatcher registerEventListener failed." ) ;            
+            assertEquals( listener.count , 1  , "01-02 - CoreEventDispatcher registerEventListener failed." ) ;
             
             dispatcher.dispatchEvent( event ) ;
             
@@ -195,7 +193,6 @@ package system.events
             assertEquals( listener.count , 2  , "02-02 - CoreEventDispatcher registerEventListener failed." ) ; 
             
             assertTrue( test , "03 - CoreEventDispatcher registerEventListener failed." ) ;
-  
         }
         
         public function testRemoveEventListener():void
@@ -206,16 +203,15 @@ package system.events
             var dispatcher:CoreEventDispatcher = new CoreEventDispatcher() ;
             
             dispatcher.registerEventListener("fire", listener.handleEvent ) ;
-        
+            
             dispatcher.removeEventListener("fire", listener.handleEvent ) ;
-        
+            
             var event:Event = new Event("fire") ;
             
             dispatcher.dispatchEvent( event ) ;
             
             assertNull( listener.event , "01 - CoreEventDispatcher registerEventListener() failed." ) ;
-            assertEquals( listener.count , 0  , "02 - CoreEventDispatcher registerEventListener() failed." ) ;            
-            
+            assertEquals( listener.count , 0  , "02 - CoreEventDispatcher registerEventListener() failed." ) ;
         }
         
         public function testSetEventDispatcher():void
@@ -240,7 +236,7 @@ package system.events
             dispatcher.setGlobal(true) ;
             assertTrue( dispatcher.isGlobal(), "01-01 - CoreEventDispatcher setGlobal() failed.") ;
             assertEquals( dispatcher.channel, EventDispatcher.DEFAULT_SINGLETON_CHANNEL, "01-02 - CoreEventDispatcher setGlobal() failed.") ;
-
+            
             dispatcher.setGlobal(false) ;
             assertFalse( dispatcher.isGlobal(), "02-01 - CoreEventDispatcher setGlobal() failed.") ;
             assertNull( dispatcher.channel, "02-02 - CoreEventDispatcher setGlobal() failed.") ;
@@ -273,19 +269,18 @@ package system.events
             
             dispatcher.registerEventListener("fire", fListener ) ; // function
             dispatcher.registerEventListener("fire", listener ) ; // EventListener
-        
+            
             dispatcher.unregisterEventListener("fire", fListener ) ; // function
-            dispatcher.unregisterEventListener("fire", listener ) ; // EventListener        
-        
+            dispatcher.unregisterEventListener("fire", listener ) ; // EventListener
+            
             var event:Event = new Event("fire") ;
             
             dispatcher.dispatchEvent( event ) ;
             
             assertNull( listener.event , "01-01 - CoreEventDispatcher registerEventListener failed." ) ;
-            assertEquals( listener.count , 0  , "01-02 - CoreEventDispatcher registerEventListener failed." ) ;            
+            assertEquals( listener.count , 0  , "01-02 - CoreEventDispatcher registerEventListener failed." ) ;
             
             assertFalse( test , "02 - CoreEventDispatcher registerEventListener failed." ) ;
-  
         }
         
         public function testWillTrigger():void

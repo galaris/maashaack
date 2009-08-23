@@ -52,13 +52,13 @@ package system.events
             assertNotNull( e , "01 - ArrayEvent constructor failed.") ;
             
             ArrayAssert.assertEquals( e.array , [2,3,4], "02 - ArrayEvent constructor failed.") ;  
-        }        
+        }
         
         public function testInherit():void
         {
             var e:ArrayEvent = new ArrayEvent( "type" , [2,3,4]) ;
             assertTrue( e is BasicEvent, "01 - ArrayEvent must extends the BasicEvent class.") ;
-        }          
+        }
         
         public function testArrayProperty():void
         {
