@@ -113,7 +113,7 @@ package system.events
             return _isGlobal ;
         }
         
-           /**
+        /**
          * Returns <code class="prettyprint">true</code> if the object is locked.
          * @return <code class="prettyprint">true</code> if the object is locked.
          */

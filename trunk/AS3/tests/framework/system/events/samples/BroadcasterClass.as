@@ -36,7 +36,7 @@
 package system.events.samples 
 {
     import system.events.Broadcaster;
-    
+
     public class BroadcasterClass implements Broadcaster
     {
         public function BroadcasterClass()
@@ -57,6 +57,19 @@ package system.events.samples
         public function hasListener(listener:*):Boolean
         {
             return listener != null ;
+        }
+        
+        public function isEmpty():Boolean
+        {
+            return true ;
+        }
+        
+        /**
+         * Removes all listeners in the set of the dispatcher.
+         */
+        public function removeAllListeners():void
+        {
+            throw new Error("removeAllListeners") ;
         }
         
         public function removeListener( listener:* ):Boolean

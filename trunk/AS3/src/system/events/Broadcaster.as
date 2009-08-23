@@ -61,6 +61,17 @@ package system.events
         function hasListener( listener:* ):Boolean ;
         
         /**
+         * Returns <code>true</code> if the set of listeners is empty.
+         * @return <code>true</code> if the set of listeners is empty.
+         */
+        function isEmpty():Boolean ;
+        
+        /**
+         * Removes all listeners in the set of the dispatcher.
+         */
+        function removeAllListeners():void ;
+        
+        /**
          * Removes the specified listener.
          * @return <code>true</code> if the specified listener exist and can be removed.
          */
