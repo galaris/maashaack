@@ -23,8 +23,8 @@
 package system.events
 {
     import system.data.maps.ArrayMap;
-    import system.events.EventDispatcher;    
-
+    import system.events.EventDispatcher;
+    
     /**
      * Stores the listeners object an notifies them with the DOM Events level 2/3 of the W3C.
      * The EventDispatcher class implements the system.events.IEventDispatcher interface. 
@@ -32,7 +32,6 @@ package system.events
      */
     public class EventDispatcher extends InternalDispatcher
     {
-        
         /**
          * Creates a new EventDispatcher instance.
          * @param target The target object for events dispatched to the EventDispatcher object. This parameter is used when the EventDispatcher instance is aggregated by a class that implements IEventDispatcher; it is necessary so that the containing object can be the target for events. Do not use this parameter in simple cases in which a class extends EventDispatcher.
@@ -63,7 +62,7 @@ package system.events
         public function set channel( value:String ):void 
         {
             _channel = value ;
-        }        
+        }
         
         /**
          * Indicates if the specified singleton reference is register.
@@ -128,7 +127,7 @@ package system.events
             }
             return false ;
         }
-                
+        
         /**
          * @private
          */ 
@@ -138,7 +137,5 @@ package system.events
          * @private
          */    
         private static var _instances:ArrayMap = new ArrayMap() ;
-        
     }
-    
 }

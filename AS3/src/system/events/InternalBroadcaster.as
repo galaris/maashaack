@@ -46,13 +46,13 @@ package system.events
     /**
      * This class provides a basic implementation of the Broadcaster interface.
      */
-    public class CoreBroadcaster implements Broadcaster, Iterable
+    public class InternalBroadcaster implements Broadcaster, Iterable
     {
         /**
          * Creates a new CoreBroadcaster instance.
          * @param listeners The Array collection of listeners to register in the dispatcher.
          */
-        public function CoreBroadcaster( listeners:Array = null ) 
+        public function InternalBroadcaster( listeners:Array = null ) 
         {
             this.listeners = new ArraySet() ;
             if ( listeners != null )

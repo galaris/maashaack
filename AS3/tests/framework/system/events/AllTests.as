@@ -53,7 +53,7 @@ package system.events
                 suite.addTestSuite( BooleanEventTest ) ;
                 suite.addTestSuite( BroadcasterTest ) ;
                 suite.addTestSuite( CommandTest ) ;
-                suite.addTestSuite( CoreBroadcasterTest ) ;
+                suite.addTestSuite( InternalBroadcasterTest ) ;
                 suite.addTestSuite( CoreEventDispatcherTest ) ;
                 suite.addTestSuite( DateEventTest ) ;
                 suite.addTestSuite( DelegateTest ) ;
