@@ -63,7 +63,6 @@ package examples.events
         private var _name:String ;
 	
     }
-
 }
 }}}
 
@@ -92,7 +91,7 @@ var dispatcher:EventDispatcher = new EventDispatcher() ;
 dispatcher.registerEventListener( "onLogin", listener ) ;
 }}}
 
-*Note :* you can use the addEventListener method of the class to register the handleEvent listener function 
+*Note :* you can use the addEventListener method of the class to register the "handleEvent" method. 
 
 {{{
 var dispatcher:EventDispatcher = new EventDispatcher() ;
@@ -113,7 +112,8 @@ import examples.events.DebugHandler ;
 var listener:EventListener = new DebugHandler();
 
 var dispatcher:EventDispatcher = new EventDispatcher() ;
-dispatcher.addEventListener( "onLogin", listener ) ;
+
+dispatcher.registerEventListener( "onLogin", listener ) ;
 
 dispatcher.dispatchEvent( new BasicEvent("onLogin") ) ;
 
