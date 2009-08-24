@@ -83,34 +83,34 @@ package system.numeric
         
         public function testDEGREE_RANGE():void
         {
-            assertNotNull( Range.DEGREE_RANGE  , "Range.DEGREE_RANGE not must be null.") ;
-            assertTrue( Range.DEGREE_RANGE is Range  , "Range.DEGREE_RANGE must be a Range object.") ;
-            assertEquals( Range.DEGREE_RANGE.min , 0, "Range.DEGREE_RANGE min value failed.") ;
-            assertEquals( Range.DEGREE_RANGE.max , 360, "Range.DEGREE_RANGE max value failed.") ;
+            assertNotNull( Range.DEGREE  , "Range.DEGREE not must be null.") ;
+            assertTrue( Range.DEGREE is Range  , "Range.DEGREE must be a Range object.") ;
+            assertEquals( Range.DEGREE.min , 0, "Range.DEGREE min value failed.") ;
+            assertEquals( Range.DEGREE.max , 360, "Range.DEGREE max value failed.") ;
         }
         
-        public function testPERCENT_RANGE():void
+        public function testPERCENT():void
         {
-            assertNotNull( Range.PERCENT_RANGE  , "Range.PERCENT_RANGE not must be null.") ;
-            assertTrue( Range.PERCENT_RANGE is Range  , "Range.PERCENT_RANGE must be a Range object.") ;
-            assertEquals( Range.PERCENT_RANGE.min , 0, "Range.PERCENT_RANGE min value failed.") ;
-            assertEquals( Range.PERCENT_RANGE.max , 100, "Range.PERCENT_RANGE max value failed.") ;
+            assertNotNull( Range.PERCENT  , "Range.PERCENT not must be null.") ;
+            assertTrue( Range.PERCENT is Range  , "Range.PERCENT must be a Range object.") ;
+            assertEquals( Range.PERCENT.min , 0, "Range.PERCENT min value failed.") ;
+            assertEquals( Range.PERCENT.max , 100, "Range.PERCENT max value failed.") ;
         }
         
-        public function testCOLOR_RANGE():void
+        public function testCOLOR():void
         {
-            assertNotNull( Range.COLOR_RANGE  , "Range.COLOR_RANGE not must be null.") ;
-            assertTrue( Range.COLOR_RANGE is Range  , "Range.COLOR_RANGE must be a Range object.") ;
-            assertEquals( Range.COLOR_RANGE.min , -255, "Range.COLOR_RANGE min value failed.") ;
-            assertEquals( Range.COLOR_RANGE.max , 255, "Range.COLOR_RANGE max value failed.") ;
+            assertNotNull( Range.COLOR  , "Range.COLOR not must be null.") ;
+            assertTrue( Range.COLOR is Range  , "Range.COLOR must be a Range object.") ;
+            assertEquals( Range.COLOR.min , -255, "Range.COLOR min value failed.") ;
+            assertEquals( Range.COLOR.max , 255, "Range.COLOR max value failed.") ;
         }
         
-        public function testUNITY_RANGE():void
+        public function testUNITY():void
         {
-            assertNotNull( Range.UNITY_RANGE  , "Range.UNITY_RANGE not must be null.") ;
-            assertTrue( Range.UNITY_RANGE is Range  , "Range.UNITY_RANGE must be a Range object.") ;
-            assertEquals( Range.UNITY_RANGE.min , 0, "Range.UNITY_RANGE min value failed.") ;
-            assertEquals( Range.UNITY_RANGE.max , 1, "Range.UNITY_RANGE max value failed.") ;
+            assertNotNull( Range.UNITY  , "Range.UNITY not must be null.") ;
+            assertTrue( Range.UNITY is Range  , "Range.UNITY must be a Range object.") ;
+            assertEquals( Range.UNITY.min , 0, "Range.UNITY min value failed.") ;
+            assertEquals( Range.UNITY.max , 1, "Range.UNITY_RANGE max value failed.") ;
         }
         
         public function testMax():void

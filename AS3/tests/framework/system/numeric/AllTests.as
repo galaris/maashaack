@@ -33,11 +33,11 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.numeric  
+package system.numeric
 {
     import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
-
+    import buRRRn.ASTUce.framework.TestSuite;
+    
     /**
      * This class launch all tests.
      */
@@ -50,6 +50,7 @@ package system.numeric
         {
             var suite:TestSuite = new TestSuite( "system.numeric" );
             suite.addTestSuite( MathematicsTest ) ;
+            suite.addTestSuite( PRNGTest ) ;
             suite.addTestSuite( RangeTest ) ;
             suite.addTestSuite( RomanNumberTest ) ;
             return suite;
