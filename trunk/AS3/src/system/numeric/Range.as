@@ -78,22 +78,22 @@ package system.numeric
         /**
          * Range reference between 0 and 360.
          */
-        public static const DEGREE_RANGE:Range = new Range( 0, 360 ) ;
+        public static const DEGREE:Range = new Range( 0, 360 ) ;
         
         /**
          * Range reference between 0 and 100.
          */
-        public static const PERCENT_RANGE:Range = new Range( 0, 100 ) ;
+        public static const PERCENT:Range = new Range( 0, 100 ) ;
         
         /**
          * Range reference between -255 and 255.
          */
-        public static const COLOR_RANGE:Range = new Range( - 255, 255 ) ;
+        public static const COLOR:Range = new Range( - 255, 255 ) ;
         
         /**
          * Range reference between 0 and 1.
          */
-        public static const UNITY_RANGE:Range = new Range( 0, 1 ) ;
+        public static const UNITY:Range = new Range( 0, 1 ) ;
         
         /**
          * The max value of the range.
