@@ -81,7 +81,7 @@ package system.numeric
             assertTrue( range is Serializable , "Range object must implement the ISerializable interface.") ;
         }        
         
-        public function testDEGREE_RANGE():void
+        public function testDEGREE():void
         {
             assertNotNull( Range.DEGREE  , "Range.DEGREE not must be null.") ;
             assertTrue( Range.DEGREE is Range  , "Range.DEGREE must be a Range object.") ;
@@ -110,7 +110,7 @@ package system.numeric
             assertNotNull( Range.UNITY  , "Range.UNITY not must be null.") ;
             assertTrue( Range.UNITY is Range  , "Range.UNITY must be a Range object.") ;
             assertEquals( Range.UNITY.min , 0, "Range.UNITY min value failed.") ;
-            assertEquals( Range.UNITY.max , 1, "Range.UNITY_RANGE max value failed.") ;
+            assertEquals( Range.UNITY.max , 1, "Range.UNITY max value failed.") ;
         }
         
         public function testMax():void
@@ -239,7 +239,7 @@ package system.numeric
         
         public function testToString():void
         {
-            assertEquals( range.toString() , "[Range<100,200>]" , range + ".toString() failed." ) ;
+            assertEquals( range.toString() , "[Range min:100 max:200]" , range + ".toString() failed." ) ;
         }
         
     }

@@ -258,7 +258,7 @@ package system.numeric
          */
         public function toString():String 
         {
-            return "[Range<" + min + "," + max + ">]";
+            return "[Range min:" + min + " max:" + max + "]";
         }
     }
 }
