@@ -32,6 +32,7 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
+
 package system.numeric 
 {
     /**
@@ -80,12 +81,23 @@ package system.numeric
         }
         
         /**
-         * Provides the next pseudorandom number as an unsigned integer (31 bits) betweeen a given range.
+         * Provides the next pseudorandom number as an unsigned integer (31 bits) betweeen a minimum value and maximum value.
          */
-        public function randomIntByRange( min:Number = 0 , max:Number = 1 ):int
+        public function randomIntByMinMax( min:Number = 0 , max:Number = 1 ):int
         {
             min -= .4999;
             max += .4999;
+            _value = (_value * 16807) % 2147483647 ;
+            return Math.round(min + ( ( max - min ) * _value / 2147483647 ) );
+        }
+        
+        /**
+         * Provides the next pseudorandom number as an unsigned integer (31 bits) betweeen a given range.
+         */
+        public function randomIntByRange( r:Range ):int
+        {
+            var min:Number = r.min - .4999;
+            var max:Number = r.max + .4999;
             _value = (_value * 16807) % 2147483647 ;
             return Math.round(min + ( ( max - min ) * _value / 2147483647 ) );
         }
@@ -102,7 +114,7 @@ package system.numeric
         /**
          * Provides the next pseudo random number as a float between a minimum value and maximum value.
          */
-        public function randomNumberMinMax( min:Number = 0 , max:Number = 1 ):Number
+        public function randomNumberByMinMax( min:Number = 0 , max:Number = 1 ):Number
         {
              _value = (_value * 16807) % 2147483647 ;
             return min + ((max - min) * _value / 2147483647 ) ;
