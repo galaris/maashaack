@@ -36,7 +36,7 @@
 package system.events
 {
     import flash.events.Event;
-
+    
     /**
      * The ActionEvent is notify by all the objects who implements the Action interface.
      */
@@ -44,7 +44,7 @@ package system.events
     {
         /**
          * Creates a new ActionEvent instance.
-         * @param type the string type of the instance. 
+         * @param type the string type of the instance.
          * @param target the target of the event.
          * @param info The information object of this action event.
          * @param context the optional context object of the event.

@@ -35,7 +35,7 @@
 
 package system.comparators 
 {
-    import buRRRn.ASTUce.framework.TestCase;    
+    import buRRRn.ASTUce.framework.TestCase;
 
     public class BooleanComparatorTest extends TestCase
     {
@@ -50,7 +50,7 @@ package system.comparators
         {
             comparator = new BooleanComparator() ;
         }
-
+        
         public function tearDown():void
         {
             comparator = null ;
@@ -86,16 +86,16 @@ package system.comparators
             assertEquals( comparator.compare(false, false) ,  0  ,  "04 - The BooleanComparator compare method failed." ) ;
         }
         
-        public function testGetFalseFirstComparator():void
+        public function testFalseFirstComparator():void
         {
-            var c:BooleanComparator = BooleanComparator.getFalseFirstComparator() ;
+            var c:BooleanComparator = BooleanComparator.falseFirst ;
             assertNotNull( c , "The BooleanComparator.getTrueFirstComparator singleton not must be null.") ;
             assertFalse( c.trueFirst , "The BooleanComparator.getTrueFirstComparator.trueFirst value must be false.") ;
         }
         
-        public function testGetTrueFirstComparator():void
+        public function testTrueFirstComparator():void
         {
-            var c:BooleanComparator = BooleanComparator.getTrueFirstComparator() ;
+            var c:BooleanComparator = BooleanComparator.trueFirst ;
             assertNotNull( c , "The BooleanComparator.getTrueFirstComparator singleton not must be null.") ;
             assertTrue( c.trueFirst , "The BooleanComparator.getTrueFirstComparator.trueFirst value must be true.") ;
         }

@@ -41,7 +41,7 @@ package system.events
     
     /**
      * Represents the log information for a single logging event. 
-     * The loging system dispatches a single event each time a process requests information be logged. 
+     * The loging system dispatches a single event each time a process requests information be logged.
      * This event can be captured by any object for storage or formatting.
      */
     public class LoggerEvent extends Event

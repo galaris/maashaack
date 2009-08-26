@@ -37,7 +37,7 @@ package system.events
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.events.mocks.MockCallback;
     import system.process.Lockable;
 
