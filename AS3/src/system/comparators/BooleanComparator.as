@@ -64,6 +64,41 @@ package system.comparators
         }
         
         /**
+         * This <code class="prettyprint">BooleanComparator</code> singleton that sorts false values before true values.
+         * Clients are encouraged to use the value returned from this constant instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple BooleanComparators may be used in the same application.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.comparators.BooleanComparator ;
+         * import system.Comparator ;
+         * 
+         * var c:Comparator = BooleanComparator.falseFirst ;
+         * 
+         * trace( c.compare( true  , true  ) ) ; //  0
+         * trace( c.compare( true  , false ) ) ; // -1
+         * trace( c.compare( false , true  ) ) ; //  1
+         * trace( c.compare( false , false ) ) ; //  0
+         * </pre>
+         */
+        public static const falseFirst:BooleanComparator = new BooleanComparator( false ) ;
+        
+        /**
+         * This <code class="prettyprint">BooleanComparator</code> singleton that sorts true values before false values.
+         * Clients are encouraged to use the value returned from this constant instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple BooleanComparators may be used in the same application.
+         * <pre class="prettyprint">
+         * import system.comparators.BooleanComparator ;
+         * import system.Comparator ;
+         * 
+         * var c:Comparator = BooleanComparator.trueFirst ;
+         * 
+         * trace( c.compare( true  , true  ) ) ; //  0
+         * trace( c.compare( true  , false ) ) ; //  1
+         * trace( c.compare( false , true  ) ) ; // -1
+         * trace( c.compare( false , false ) ) ; //  0
+         * </pre> 
+         */
+        public static const trueFirst:BooleanComparator = new BooleanComparator(true) ;
+        
+        /**
          * When <code class="prettyprint">true</code> sort <code class="prettyprint">true</code> boolean values before <code class="prettyprint">false</code>.
          */
         public var trueFirst:Boolean ; 
@@ -80,7 +115,7 @@ package system.comparators
          * @throws ArgumentError if the first argument is null and not a Boolean object.
          * @throws ArgumentError when either argument is not Boolean
          */
-        public function compare(o1:*, o2:*, options:* = null ):int
+        public function compare( o1:* , o2:* , options:* = null ):int
         {
             if (o1 == null)
             {
@@ -106,58 +141,5 @@ package system.comparators
                 throw new ArgumentError(this + " compare method failed, The two arguments must be Booleans.") ;
             }
         }
-        
-        /**
-         * Returns a <code class="prettyprint">BooleanComparator</code> singleton that sorts false values before true values.
-         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple BooleanComparators may be used in the same application.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * var c:Comparator = BooleanComparator.getFalseFirstComparator() ;
-         * trace(c.compare(true, true)) ; // 0
-         * trace(c.compare(true, false)) ; // -1
-         * trace(c.compare(false, true)) ; // 1
-         * trace(c.compare(false, false)) ; // 0
-         * </pre>
-         * @return a <code class="prettyprint">BooleanComparator</code> instance that sorts false values before true values.
-         */
-        public static function getFalseFirstComparator():BooleanComparator
-        {
-            if (_falseFirstInstance == null)
-            {
-                _falseFirstInstance = new BooleanComparator(false) ;
-            }
-            return _falseFirstInstance ;
-        }
-        
-        /**
-         * Returns a <code class="prettyprint">BooleanComparator</code> singleton that sorts true values before false values.
-         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple BooleanComparators may be used in the same application.
-         * <pre class="prettyprint">
-         * var c:Comparator = BooleanComparator.getTrueFirstComparator() ;
-         * trace(c.compare(true, true)) ; // 0
-         * trace(c.compare(true, false)) ; // 1
-         * trace(c.compare(false, true)) ; // -1
-         * trace(c.compare(false, false)) ; // 0
-         * </pre>
-         * @return a <code class="prettyprint">BooleanComparator</code> instance that sorts true values before false values.
-         */
-        public static function getTrueFirstComparator():BooleanComparator
-        {
-            if (_trueFirstInstance == null)
-            {
-                _trueFirstInstance = new BooleanComparator(true) ;
-            }
-            return _trueFirstInstance ;
-        }
-        
-        /**
-         * The internal singleton reference who define a BooleanComparator that sorts false values before true values.
-         */
-        private static var _falseFirstInstance:BooleanComparator ; 
-        
-        /**
-         * The internal singleton reference who define a BooleanComparator that sorts true values before false values.
-         */
-        private static var _trueFirstInstance:BooleanComparator ; 
     }
 }
