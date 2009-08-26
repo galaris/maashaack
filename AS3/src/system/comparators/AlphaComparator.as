@@ -92,7 +92,7 @@ package system.comparators
         public function set nullsAreHigh( b:Boolean ):void
         {
             _ncomp.nullsAreHigh = b ;
-        }        
+        }
         
         /**
          * Returns an integer value to compare two String objects with an alphabetic order.

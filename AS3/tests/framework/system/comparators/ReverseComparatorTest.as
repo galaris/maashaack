@@ -50,8 +50,8 @@ package system.comparators
         public function testConstructor():void
         {
             var c:ReverseComparator ;
-            var s:StringComparator  = StringComparator.getStringComparator() ;
-                
+            var s:StringComparator  = StringComparator.comparator ;
+            
             c = new ReverseComparator( s ) ;
             
             assertNotNull ( c               , "01-01 - The ReverseComparator constructor failed." ) ;
@@ -75,15 +75,15 @@ package system.comparators
         
         public function testInterface():void
         {
-            var c:ReverseComparator = new ReverseComparator( StringComparator.getStringComparator() ) ;
+            var c:ReverseComparator = new ReverseComparator( StringComparator.comparator ) ;
             assertTrue( c is Sortable , "The ReverseComparator must implement the system.Sortable interface." ) ;
         }
         
         public function testComparator():void
         {
             var c:ReverseComparator ;
-            var s:StringComparator  = StringComparator.getStringComparator() ;
-                
+            var s:StringComparator  = StringComparator.comparator ;
+            
             c = new ReverseComparator( s ) ; 
             
             assertEquals( c.comparator , s, "01 - The ReverseComparator comparator property failed." ) ;
@@ -106,9 +106,8 @@ package system.comparators
         
         public function testCompare():void
         {
-            
             var c:ReverseComparator ;
-            var s:StringComparator  = StringComparator.getStringComparator() ;
+            var s:StringComparator  = StringComparator.comparator ;
             
             var s1:Object = "1"   ;
             var s2:Object = "1"   ;

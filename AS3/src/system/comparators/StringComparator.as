@@ -67,10 +67,22 @@ package system.comparators
          * Creates a new StringComparator instance.
          * @param ignoreCase a boolean to define if the comparator ignore case or not.
          */
-        public function StringComparator( ignoreCase:Boolean=false )
+        public function StringComparator( ignoreCase:Boolean = false )
         {
             this.ignoreCase = ignoreCase ;
         }
+        
+        /**
+         * The static <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase default property.
+         * Clients are encouraged to use the value returned from this constant instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
+         */
+        public static const comparator:StringComparator = new StringComparator( false ) ;
+        
+        /**
+         * The static <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
+         * Clients are encouraged to use the value returned from this contant instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
+         */
+        public static const ignoreCaseComparator:StringComparator = new StringComparator( true ) ;
         
         /**
          * Allow to take into account the case for comparison.
@@ -149,43 +161,5 @@ package system.comparators
                 return - 1;
             }
         }
-        
-        /**
-         * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
-         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
-         * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">false</code> ignoreCase property.
-         */
-        public static function getStringComparator():StringComparator
-        {
-            if ( _comparator == null )
-            {
-                _comparator = new StringComparator(false) ;
-            }
-            return _comparator ;
-        }
-        
-        /**
-         * Returns the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
-         * Clients are encouraged to use the value returned from this method instead of constructing a new instance to reduce allocation and garbage collection overhead when multiple StringComparators may be used in the same application.
-         * @return the <code class="prettyprint">StringComparator</code> singleton with the a <code class="prettyprint">true</code> ignoreCase property.
-         */
-        public static function getIgnoreCaseStringComparator():StringComparator
-        {
-            if ( _ignoreCaseComparator == null )
-            {
-                _ignoreCaseComparator = new StringComparator( true ) ;
-            }
-            return _ignoreCaseComparator ;
-        }
-        
-        /**
-         * The internal Case StringComparator.
-         */
-        private static var _comparator:StringComparator ;
-        
-        /**
-         * The internal ignoreCase StringComparator.
-         */
-        private static var _ignoreCaseComparator:StringComparator ;
     }
 }
