@@ -37,11 +37,10 @@ package system.comparators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Comparator;    
-
+    import system.Comparator;
+    
     public class GenericComparatorTest extends TestCase 
     {
-
         public function GenericComparatorTest(name:String = "")
         {
             super(name);
@@ -49,9 +48,8 @@ package system.comparators
                 
         public function testConstructor():void
         {
-                        
             var c:GenericComparator ;
-            var s:StringComparator  = StringComparator.getStringComparator() ;
+            var s:StringComparator  = StringComparator.comparator ;
                 
             c = new GenericComparator( "label", s ) ;
             
@@ -87,14 +85,12 @@ package system.comparators
                    "03-02 - The GenericComparator constructor failed."
                 ) ;
             }
-                    
         }
         
         public function testCompare():void
         {
-            
             var c:GenericComparator ;
-            var s:StringComparator  = StringComparator.getStringComparator() ;
+            var s:StringComparator  = StringComparator.comparator ;
             
             var o1:Object = { label:"1"   } ;
             var o2:Object = { label:"1"   } ;
@@ -113,8 +109,6 @@ package system.comparators
             
             assertEquals( c.compare( o3 , o1 ) ,  1 , "07 - The ComparableComparator compare method failed." ) ;
             assertEquals( c.compare( o4 , o2 ) ,  1 , "08 - The ComparableComparator compare method failed." ) ;
-            
         }
-        
     }
 }
