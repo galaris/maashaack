@@ -26,6 +26,7 @@ and try to seriously kick some butts (and ours first).
 
   * smaller releases, instead of v0.1 then 0.2 which last about 6 months, expect 0.2.1, 0.2.2, etc. which we gonan try to fit in 1 month or less
   * avoid to depend on svn::external on the trunk, basically only us the commiters need that as we jungle with different projets at the same time, so each build (like 0.2.1) will have SWC and ABC frozen
+  * maybe use [http://code.google.com/p/gclient/ gclient] to organize the different projects from the SVN
   * upgrade from Flex SDK 3.x to Flex SDK 4.x, different reasons for that but mainly the improved command-line tools like mxmlc, asdoc, etc.
   * ~~ditch Flash Player 9 for Flash Player 10 only, FP10 is at more than 80% spread and we want the most optimized code possible and only FP10 can use the `Vector` class~~
   * we will support both Flash Player 9 and Flash Player 10 via conditional compilation and generating 2 different SWC, but now we will not support anymore compiling from Flash CS3 (as this IDE does not support CC)
