@@ -56,7 +56,7 @@ package system.logging
         
         public function testEMPTY_FILTER():void
         {
-            assertEquals( LoggerStrings.EMPTY_FILTER , "filter not must be null or empty." ) ;
+            assertEquals( LoggerStrings.EMPTY_FILTER , "filter must not be null or empty." ) ;
         }
         
         public function testDEFAULT_CHANNEL():void
