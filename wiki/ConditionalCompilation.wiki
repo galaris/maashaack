@@ -97,8 +97,15 @@ Based on [http://hg.mozilla.org/tamarin-redux/raw-file/d138e8c6e0cf/doc/apiversi
 
 || constant || description ||
 || *API::FP_9_0* || Flash Player 9.0 ||
+|| *API::FP_10_0* || Flash Player 10.0 ||
+|| *API::FP_10_1* || Flash Player 10.1 ||
 || *API::AR_1_0* || AIR 1.0 ||
+|| *API::AR_1_5* || AIR 1.5 ||
+|| *API::AR_1_5_1* || AIR 1.5.1 ||
+|| *API::AR_2_0* || AIR 2.0 ||
 
+Technically we will never use *API::FP_9_0* as this our default minimum version of the API,
+but as we want also to support command-line AS3 (via Tamarin) we need specialized API for that (as Tamarin itself does not support all the features in the FP_9_0 API).
 
 == Proposals ==
 
