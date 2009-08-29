@@ -56,12 +56,20 @@ package system.logging.targets
      */
     public class CoreLoggerTarget extends EventDispatcher implements LoggerTarget
     {
+        
         /**
          * Creates a new CoreLoggerTarget instance.
          */
         public function CoreLoggerTarget()
         {
-            //
+            /* note:
+               I had problem with the unit tests no passing
+               when the Log is assigned directly to the property
+               when we assign the default in the ctor all the unit tests pass
+            */
+            _factory = Log;
+            _filters = new ArraySet( ["*"] );
+            _level   = LoggerLevel.ALL;
         }
         
         /**
@@ -81,7 +89,8 @@ package system.logging.targets
             {
                 _factory.removeTarget( this ) ;
             }
-            _factory = factory || Log ;
+            //_factory = factory || Log ;
+            _factory = factory;
             _factory.addTarget( this ) ;
         }
         
@@ -110,10 +119,12 @@ package system.logging.targets
             {
                 value = ["*"] ;
             }
+            
             if ( _count > 0 )
             {
                 _factory.removeTarget( this ) ;
             }
+            
             _filters = new ArraySet( value ) ;
             if ( _count > 0 )
             {
@@ -179,7 +190,7 @@ package system.logging.targets
          */
         public function removeFilter( channel:String ):Boolean
         {
-            return _filters.remove(channel) ;
+            return _filters.remove( channel ) ;
         }
         
         /**
@@ -204,17 +215,20 @@ package system.logging.targets
         /**
          * @private
          */
-        private var _factory:LoggerFactory = Log ;
+        //private var _factory:LoggerFactory = Log; //see ctor note
+        private var _factory:LoggerFactory;
         
         /**
          * @private
          */
-        private var _filters:Set = new ArraySet( ["*"] ) ;
+        //private var _filters:Set = new ArraySet( ["*"] ) ; //see ctor note
+        private var _filters:Set;
         
         /**
          * @private
          */
-        private var _level:LoggerLevel = LoggerLevel.ALL ;
+        //private var _level:LoggerLevel = LoggerLevel.ALL ; //see ctor note
+        private var _level:LoggerLevel;
         
         /**
          * @private
@@ -225,10 +239,12 @@ package system.logging.targets
             {
                 throw new InvalidFilterError( LoggerStrings.EMPTY_FILTER  ) ;
             }
+            
             if ( _factory.hasIllegalCharacters(filter) )
             {
                  throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
             }
+            
             var index:int = filter.indexOf("*") ;
             if ((index >= 0) && (index != (filter.length -1)))
             {
