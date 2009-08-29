@@ -28,4 +28,4 @@ and try to seriously kick some butts (and ours first).
   * avoid to depend on svn::external on the trunk, basically only us the commiters need that as we jungle with different projets at the same time, so each build (like 0.2.1) will have SWC and ABC frozen
   * upgrade from Flex SDK 3.x to Flex SDK 4.x, different reasons for that but mainly the improved command-line tools like mxmlc, asdoc, etc.
   * ditch Flash Player 9 for Flash Player 10 only, FP10 is at more than 80% spread and we want the most optimized code possible and only FP10 can use the `Vector` class
-  * *maybe* conditional compilation in some part of the code instead of namespaces
+  * ~~maybe~~ conditional compilation in some part of the code instead of namespaces (see ConditionalCompilation)
