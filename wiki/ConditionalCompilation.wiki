@@ -88,8 +88,9 @@ TAMARIN::exclude
 
 === TAMARIN::alternate ===
 
-Allows to provide an alternative for Tamarin/redtamarin only
+Allows to provide an alternative for Tamarin/redtamarin only.
 
+*TAMARIN::alternate* will be replaced by *API::RT_0_2_5* etc.
 
 === API versioning ===
 
@@ -104,8 +105,19 @@ Based on [http://hg.mozilla.org/tamarin-redux/raw-file/d138e8c6e0cf/doc/apiversi
 || *API::AR_1_5_1* || AIR 1.5.1 ||
 || *API::AR_2_0* || AIR 2.0 ||
 
-Technically we will never use *API::FP_9_0* as this our default minimum version of the API,
-but as we want also to support command-line AS3 (via Tamarin) we need specialized API for that (as Tamarin itself does not support all the features in the FP_9_0 API).
+Technically we will almost never use *API::FP_9_0* as this our default minimum version of the API (unless we have to isolate some code for tamarin),
+but as we want also to support command-line AS3 (via redtamarin) we need specialized API for that<br />
+(as Tamarin itself does not support all the features in the FP_9_0 API).
+
+|| constant || description ||
+|| *API::RT_0_1* || redtamarin 0.1 ||
+|| *API::RT_0_2* || Flash Player 0.2 ||
+|| *API::RT_0_2_5* || Flash Player 0.2.5 ||
+
+We will mainly support [http://code.google.com/p/redtamarin/ redtamarin] API but not [http://www.mozilla.org/projects/tamarin/ Tamarin] itself.
+
+Contrary to the *FP* and *RT* API where each version is a subset of itself and zero or more other versions, the *RT* API works differently and can be totally incompatible and for those cases we will uses *TAMARIN::exclude*.
+
 
 == Proposals ==
 
