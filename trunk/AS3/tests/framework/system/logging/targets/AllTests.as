@@ -38,9 +38,6 @@ package system.logging.targets
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
     
-    import system.Environment;
-    import system.hosts.HostID;
-    
     public class AllTests
     {
         public static function suite():ITest
@@ -50,15 +47,15 @@ package system.logging.targets
             suite.addTestSuite( CoreLoggerTargetTest ) ;
             suite.addTestSuite( LineFormattedTargetTest ) ;
             
-            suite.addTestSuite( TextFieldTargetTest ) ;
-            suite.addTestSuite( TraceTargetTest ) ;
-            
-            if( Environment.host.id != HostID.RedTamarin )
+            TAMARIN::exclude
             {
+                suite.addTestSuite( TextFieldTargetTest ) ;
                 suite.addTestSuite( FireBugTargetTest ) ;
                 suite.addTestSuite( SocketTargetTest  ) ;
                 suite.addTestSuite( SOSTargetTest     ) ;
             }
+            
+            suite.addTestSuite( TraceTargetTest ) ;
             
             return suite;
         }
