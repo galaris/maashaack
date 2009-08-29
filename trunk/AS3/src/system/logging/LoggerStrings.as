@@ -55,7 +55,7 @@ package system.logging
         /**
          * The static field used when throws an Error if the filter is empty or null.
          */
-        public static var EMPTY_FILTER:String = "filter not must be null or empty." ;
+        public static var EMPTY_FILTER:String = "filter must not be null or empty." ;
         
         /**
          * The static field used when throws an Error when filter failed.
