@@ -111,8 +111,8 @@ but as we want also to support command-line AS3 (via redtamarin) we need special
 
 || constant || description ||
 || *API::RT_0_1* || redtamarin 0.1 ||
-|| *API::RT_0_2* || Flash Player 0.2 ||
-|| *API::RT_0_2_5* || Flash Player 0.2.5 ||
+|| *API::RT_0_2* || redtamarin 0.2 ||
+|| *API::RT_0_2_5* || redtamarin 0.2.5 ||
 
 We will mainly support [http://code.google.com/p/redtamarin/ redtamarin] API but not [http://www.mozilla.org/projects/tamarin/ Tamarin] itself.
 
