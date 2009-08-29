@@ -91,9 +91,13 @@ TAMARIN::exclude
 Allows to provide an alternative for Tamarin/redtamarin only
 
 
-=== API::FP10 ===
+=== API versioning ===
 
-Flash Player 10 only
+Based on [http://hg.mozilla.org/tamarin-redux/raw-file/d138e8c6e0cf/doc/apiversioning.html API Versioning in AVM] from the Tamarin project, we will use the same naming convention.
+
+|| constant || description ||
+|| *API::FP_9_0* || Flash Player 9.0 ||
+|| *API::AR_1_0* || AIR 1.0 ||
 
 
 == Proposals ==
