@@ -54,8 +54,13 @@ package system.logging
             suite.addTestSuite( LoggerStringsTest ) ;
             suite.addTestSuite( LoggerTargetTest ) ;
             suite.addTestSuite( LoggerTest ) ;
-            suite.addTestSuite( LogLoggerTest ) ;
             suite.addTestSuite( LogTest ) ;
+            
+            TAMARIN::exclude
+            {
+                suite.addTestSuite( LogLoggerTest ) ;
+            }
+            
             
             // system.logging.errors
             suite.addTest( system.logging.errors.AllTests.suite() );
