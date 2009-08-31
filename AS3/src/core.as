@@ -34,6 +34,6 @@ the terms of any one of the MPL, the GPL or the LGPL.
 */
 
 //core
-include "core/version.as";
+include "core/bit.as";
 include "core/uri.as";
-
+include "core/version.as";
