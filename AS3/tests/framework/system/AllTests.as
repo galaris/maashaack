@@ -68,14 +68,10 @@ package system
             
             //core2
             suite.addTestSuite( StringsTest );
-            
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( ByteArraysTest ); // TODO creates test compatible with Tamarin ?? Don't use BitmapData.
-                suite.addTestSuite( ObjectsTest );
-            }
-            
+            suite.addTestSuite( ObjectsTest );
+            suite.addTestSuite( ArraysTest );
             suite.addTestSuite( CharTest );
+            suite.addTestSuite( ByteArraysTest );
             
             //others
             suite.addTestSuite( CloneableTest );
@@ -89,6 +85,15 @@ package system
             suite.addTestSuite( SerializationTest) ;
             suite.addTestSuite( URITest );
             
+            /* special cases */
+            
+            TAMARIN::exclude
+            {
+                //data
+                suite.addTest( system.data.AllTests.suite() );
+            }
+            
+            
             /* packages */
             
             //reflection
@@ -96,12 +101,6 @@ package system
             
             //serializers
             suite.addTest( system.serializers.AllTests.suite() );
-            
-            //data
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTest( system.data.AllTests.suite() );
-            }
             
             //comparators
             suite.addTest( system.comparators.AllTests.suite() );
