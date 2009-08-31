@@ -61,6 +61,28 @@ package system
             return ar.indexOf(value) > -1 ;
         }
         
+        public static function copy( ar:Array, shallow:Boolean = false ):Array
+        {
+            if( shallow )
+            {
+                //make a shallow copy
+                var i:uint;
+                var copy:Array = [];
+                
+                for( i=0; i<ar.length; i++ )
+                {
+                    copy[ i ] = ar[ i ];
+                }
+                
+                return copy;
+            }
+            else
+            {
+                //make a primitive copy
+                return Objects.copy( ar ) as Array;
+            }
+        }
+        
         /**
          * Initializes a new Array with an arbitrary number of elements (index), 
          * with every element containing the passed parameter value or by default the null value.
@@ -422,7 +444,7 @@ package system
          * container = [5, 6, 7, 8] ;
          * 
          * Arrays.spliceInto( inserted, container, 0 , 2 ) ;
-         * trace( "Arrays.spliceInto( inserted, container, 0 , 4 ) : " + container ) ; // 1,2,3,4,7,8
+         * trace( "Arrays.spliceInto( inserted, container, 0 , 2 ) : " + container ) ; // 1,2,3,4,7,8
          * </pre>
          * @param inserted The Array of char inserted in the Array container.
          * @param container The container modified in place.
