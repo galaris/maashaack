@@ -50,6 +50,24 @@ package system
         
         public function testClone():void
         {
+            var ba0:ByteArray = new ByteArray();
+            var ba1:ByteArray;
+            
+            ba0.writeByte( 1 );
+            ba0.writeByte( 2 );
+            ba0.writeByte( 3 );
+            ba0.writeByte( 4 );
+            ba0.writeByte( 5 );
+            
+            ba1 = ByteArrays.clone( ba0 ) as ByteArray;
+            
+            assertNotNull( ba1 , "01 - ByteArrays.clone failed.");
+            assertEquals( ba0.position , ba1.position , "02 - ByteArrays.clone failed.");
+        }
+        
+        TAMARIN::exclude
+        public function testClone2():void
+        {
             var bmd:BitmapData = new BitmapData(80, 40, true);
             var seed:int = int(Math.random() * int.MAX_VALUE);
             bmd.noise(seed);
@@ -61,10 +79,7 @@ package system
             assertEquals( pixels.position , clone.position , "02 - ByteArrays.clone failed.") ;
         }
         
-        /* note:
-           ByteArray clear() is FP10 only
-        */
-        /*
+        API::FP_10_0
         public function testEquals():void
         {
             var bmd:BitmapData = new BitmapData(80, 40, true);
@@ -79,6 +94,6 @@ package system
             pixels.clear() ;
             assertTrue( ByteArrays.equals( clone, pixels ) , "03 - ByteArrays.equals failed.") ;
         }
-        */
+        
     }
 }
