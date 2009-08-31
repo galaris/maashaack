@@ -46,6 +46,8 @@ package core
             
             suite.addTestSuite( versionTest );
             suite.addTestSuite( uriTest );
+            suite.addTestSuite( bitTest );
+            //suite.addTestSuite( bitTimedTest );
             
             return suite;
         }
