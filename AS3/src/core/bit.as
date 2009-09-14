@@ -1,4 +1,4 @@
-package core
+﻿package core
 {
     /* note:
        the bit class is to mainpulate Numbers as bits
@@ -7,32 +7,32 @@ package core
        we then operates all bit manipulation on unsigned 32bits numbers
     */
     /**
-    * The bit class allow you to manipulate the bits of an unsigned integer.
-    * 
-    * <p>
-    * Practical infos to convert to bits, hex and decimal
-    * 
-    * <table class="innertable">
-    * <tr><th><b>Hex</b></th><th><b>Dec</b></th><th><b>Binary</b></th></tr>
-    * <tr><td>0</td><td>&nbsp;0</td><td>0000</td></tr>
-    * <tr><td>1</td><td>&nbsp;1</td><td>0001</td></tr>
-    * <tr><td>2</td><td>&nbsp;2</td><td>0010</td></tr>
-    * <tr><td>3</td><td>&nbsp;3</td><td>0011</td></tr>
-    * <tr><td>4</td><td>&nbsp;4</td><td>0100</td></tr>
-    * <tr><td>5</td><td>&nbsp;5</td><td>0101</td></tr>
-    * <tr><td>6</td><td>&nbsp;6</td><td>0110</td></tr>
-    * <tr><td>7</td><td>&nbsp;7</td><td>0111</td></tr>
-    * <tr><td>8</td><td>&nbsp;8</td><td>1000</td></tr>
-    * <tr><td>9</td><td>&nbsp;9</td><td>1001</td></tr>
-    * <tr><td>A</td><td>10</td><td>1010</td></tr>
-    * <tr><td>B</td><td>11</td><td>1011</td></tr>
-    * <tr><td>C</td><td>12</td><td>1100</td></tr>
-    * <tr><td>D</td><td>13</td><td>1101</td></tr>
-    * <tr><td>E</td><td>14</td><td>1110</td></tr>
-    * <tr><td>F</td><td>15</td><td>1111</td></tr>
-    * </table>
-    * </p>
-    */
+     * The bit class allow you to manipulate the bits of an unsigned integer.
+     * 
+     * <p>
+     * Practical infos to convert to bits, hex and decimal
+     * 
+     * <table class="innertable">
+     * <tr><th><b>Hex</b></th><th><b>Dec</b></th><th><b>Binary</b></th></tr>
+     * <tr><td>0</td><td>&nbsp;0</td><td>0000</td></tr>
+     * <tr><td>1</td><td>&nbsp;1</td><td>0001</td></tr>
+     * <tr><td>2</td><td>&nbsp;2</td><td>0010</td></tr>
+     * <tr><td>3</td><td>&nbsp;3</td><td>0011</td></tr>
+     * <tr><td>4</td><td>&nbsp;4</td><td>0100</td></tr>
+     * <tr><td>5</td><td>&nbsp;5</td><td>0101</td></tr>
+     * <tr><td>6</td><td>&nbsp;6</td><td>0110</td></tr>
+     * <tr><td>7</td><td>&nbsp;7</td><td>0111</td></tr>
+     * <tr><td>8</td><td>&nbsp;8</td><td>1000</td></tr>
+     * <tr><td>9</td><td>&nbsp;9</td><td>1001</td></tr>
+     * <tr><td>A</td><td>10</td><td>1010</td></tr>
+     * <tr><td>B</td><td>11</td><td>1011</td></tr>
+     * <tr><td>C</td><td>12</td><td>1100</td></tr>
+     * <tr><td>D</td><td>13</td><td>1101</td></tr>
+     * <tr><td>E</td><td>14</td><td>1110</td></tr>
+     * <tr><td>F</td><td>15</td><td>1111</td></tr>
+     * </table>
+     * </p>
+     */
     public class bit
     {
         private var _value:uint;
@@ -46,8 +46,8 @@ package core
         }
         
         /**
-        * Parses a string into bits.
-        */
+         * Parses a string into bits.
+         */
         public static function parse( value:String, radix:uint = 2 ):bit
         {
             var n:uint = parseInt( value, radix );
@@ -55,8 +55,8 @@ package core
         }
         
         /**
-        * Returns the length of the bit(s).
-        */
+         * Returns the length of the bit(s).
+         */
         public function get length():uint
         {
             /* note:
@@ -79,15 +79,15 @@ package core
                http://hg.mozilla.org/tamarin-central/file/dab354bc047c/core/MathUtils.cpp#l806
                ----
                 double uVal = MathUtils::floor(value);
-    
+                
                 while (uVal != 0)
                 {
                     double j = uVal;
                     uVal = MathUtils::floor(uVal / radix);
                     j -= (uVal * radix);
-    
+                    
                     *src-- = (wchar)((j < 10) ? ((int)j + '0') : ((int)j + ('a' - 10)));
-    
+                    
                     AvmAssert(src > tmp);
                 }
                ----
@@ -125,16 +125,16 @@ package core
         }
         
         /**
-        * Returns the hexadecimal length of the bit(s).
-        * 
-        * <p>
-        * bit length in hexadecimal are multiple of 4,
-        * for ex:
-        * the number 1 gives 0001 bits
-        * and will have a length of 1 (1 bit)
-        * and a hexlength of 4 (4 bits)
-        * </p>
-        */
+         * Returns the hexadecimal length of the bit(s).
+         * 
+         * <p>
+         * bit length in hexadecimal are multiple of 4,
+         * for ex:
+         * the number 1 gives 0001 bits
+         * and will have a length of 1 (1 bit)
+         * and a hexlength of 4 (4 bits)
+         * </p>
+         */
         public function get hexlength():uint
         {
             var len:uint = length;
@@ -148,8 +148,8 @@ package core
         }
         
         /**
-        * Gets the bit at the index position.
-        */
+         * Gets the bit at the index position.
+         */
         public function get( index:uint ):uint
         {
             return (_value & (1 << index)) >>> index;
@@ -164,32 +164,32 @@ package core
         }
         
         /**
-        * Clears the bit at the index position.
-        */
+         * Clears the bit at the index position.
+         */
         public function unset( index:uint ):void
         {
             _value &= ~(1 << index);
         }
         
         /**
-        * Toggles the bit at the index position.
-        */
+         * Toggles the bit at the index position.
+         */
         public function toggle( index:uint ):void
         {
             _value ^= 1 << index;
         }
         
         /**
-        * Clears all the bits.
-        */
+         * Clears all the bits.
+         */
         public function clear():void
         {
             _value = 0;
         }
         
         /**
-        * Removes the last bit and returns it.
-        */
+         * Removes the last bit and returns it.
+         */
         public function pop():uint
         {
             var v:uint = get(0);
@@ -198,8 +198,8 @@ package core
         }
         
         /**
-        * Adds one or more bits to the current bit.
-        */
+         * Adds one or more bits to the current bit.
+         */
         public function push( ...bits ):void
         {
             /* note:
@@ -242,8 +242,8 @@ package core
         }
         
         /**
-        * Removes the first bit and returns it.
-        */
+         * Removes the first bit and returns it.
+         */
         public function shift():uint
         {
             var v:uint = get( length-1 );
@@ -253,8 +253,8 @@ package core
         }
         
         /**
-        * Reverse the order of bits.
-        */
+         * Reverse the order of bits.
+         */
         public function reverse( mask:uint = 0 ):void
         {
             var len:uint;
@@ -279,25 +279,25 @@ package core
         }
         
         /**
-        * Rotates the bit on the left by an amount of bits (default 1)
-        * over a mask (default 0).
-        * 
-        * <p>
-        * When the mask is 0, we take the minimum length of the bit
-        * 
-        * for ex:
-        * var b:bit = new bit( 8 ); //1000
-        * b.rotateLeft();           //0001
-        * 
-        * But you can force the mask to be any value from 0 to 32
-        * 
-        * for ex:
-        * var b:bit = new bit( 8 ); //    1000
-        * b.rotateLeft( 1, 8);      //00010000
-        * 
-        * here we rotated 1 bit to the left over a 8bits mask
-        * </p>
-        */
+         * Rotates the bit on the left by an amount of bits (default 1)
+         * over a mask (default 0).
+         * 
+         * <p>
+         * When the mask is 0, we take the minimum length of the bit
+         * 
+         * for ex:
+         * var b:bit = new bit( 8 ); //1000
+         * b.rotateLeft();           //0001
+         * 
+         * But you can force the mask to be any value from 0 to 32
+         * 
+         * for ex:
+         * var b:bit = new bit( 8 ); //    1000
+         * b.rotateLeft( 1, 8);      //00010000
+         * 
+         * here we rotated 1 bit to the left over a 8bits mask
+         * </p>
+         */
         public function rotateLeft( bits:uint = 1, mask:uint = 0 ):void
         {
             var len:uint;
@@ -321,9 +321,9 @@ package core
         }
         
         /**
-        * Rotates the bit on the right by an amount of bits (default 1)
-        * over a mask (default 0).
-        */
+         * Rotates the bit on the right by an amount of bits (default 1)
+         * over a mask (default 0).
+         */
         public function rotateRight( bits:uint = 1, mask:uint = 0 ):void
         {
             var len:uint;
@@ -343,11 +343,19 @@ package core
             _value = (_value >>> bits ) | right;
         }
         
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
         public function valueOf():uint
         {
             return _value;
         }
         
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
         public function toString( radix:Number = 2, padding:Boolean = true ):String
         {
             var s:String = _value.toString( radix );
@@ -359,7 +367,7 @@ package core
                 {
                     s = "0" + s;
                 }
-                s = "0x"+s
+                s = "0x"+s ;
                 break;
                 
                 case 10:
