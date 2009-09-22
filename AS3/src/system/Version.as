@@ -36,6 +36,7 @@
 package system
 {
     /**
+     * <![CDATA[
      * A basic Version class which is composed by four fields: major, minor, build and revision.
      * <p>implementation note:</p>
      * <p>internaly we stock the value of a version (the total of each fields) 
@@ -72,6 +73,7 @@ package system
      * 
      * This logic and these limitations can change later.
      * </p>
+     * ]]>
      */
     public class Version implements Equatable
     {
