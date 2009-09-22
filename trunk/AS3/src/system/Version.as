@@ -50,12 +50,12 @@ package system
      * 
      * But this cause some little limitations on how much data each fields of a version object can stock
      * <pre class="prettyprint">
-     * > 0x  F F FF FFFF
-     * >     | |  |   |
-     * >     | |  |   \revision (max 65535)
-     * >     | |  \build (max 255)
-     * >     | \minor (max 15)
-     * >     \major (max 15)
+     *   0x  F F FF FFFF
+     *       | |  |   |
+     *       | |  |   \revision (max 65535)
+     *       | |  \build (max 255)
+     *       | \minor (max 15)
+     *       \major (max 15)
      * </pre>
      * Here the choice has been to favorise a lot the revision field,
      * favorise a little the build  field, and well give the rest to 
