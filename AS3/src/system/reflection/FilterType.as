@@ -121,7 +121,7 @@ package system.reflection
         
         /**
          * Inherited members will not be searched.
-         * <p><b>Note:</b></p>
+         * <p>Note:</p>
          * <p>For Trait this will apply only to methods and accessors not to variables and constants reason : 
          * variables and constants does not have a declaredBy attribute (from describeType), but that's normal 
          * because "inherited properties are copied down from superclasses into the traits object of subclasses" 
