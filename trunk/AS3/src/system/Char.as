@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -308,7 +308,7 @@ package system
         public static const semiColon:Char = new Char( ";" );
         
         /**
-         * The lessThan "<" unicode character.
+         * The lessThan "&lt;" unicode character.
          */
         public static const lessThan:Char = new Char( "<" );
         
@@ -318,7 +318,7 @@ package system
         public static const equals:Char = new Char( "=" );
         
         /**
-         * The greaterThen ">" unicode character.
+         * The greaterThen "&gt;" unicode character.
          */
         public static const greaterThen:Char = new Char( ">" );
         
