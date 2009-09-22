@@ -327,10 +327,12 @@ package system
          * trace( v.toString( 4 ) ); // "1.5.0.0"
          * </pre>
          * <p>format :</p>
+         * <ul>
          * <li>major.minor.build.revision</li>
          * <li>major.minor.build</li>
          * <li>major.minor</li>
          * <li>major</li>
+         * </ul>
          */
         public function toString( fields:int = 0 ):String
         {
