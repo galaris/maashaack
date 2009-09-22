@@ -40,6 +40,7 @@ package system
      * <p>implementation note:</p>
      * <p>internaly we stock the value of a version (the total of each fields) 
      * as a uint which max value is 4294967295 (0xFFFFFFFF) this is done to be able to use operators 
+     * </p>
      * <pre class="prettyprint">
      * var v1:Version = new Version( 1, 0 );
      * var v2:Version = new Version( 2, 0 );
@@ -58,9 +59,10 @@ package system
      *       \major (max 15)
      * </pre>
      * Here the choice has been to favorise a lot the revision field,
-     * favorise a little the build  field, and well give the rest to 
+     * favorize a little the build  field, and well give the rest to 
      * the major and minor fields.
      * 
+     * <p>
      * The logic behind that is:
      * - revision should be able to cover the full cycle of a project during all its life
      * - build should be able to cover all the different builds between two minor update
@@ -294,7 +296,7 @@ package system
          * var v2:Version = new Version( 1,0,0,0 );
          * trace( int(v1) == int(v2) ); //true
          * </pre>
-         * A cast to Number/int force the valueOf, not ideal but sufficient, and the same for any other operators.
+         * A cast to Number or int force the valueOf, not ideal but sufficient, and the same for any other operators.
          * But as we keep IEquatable for now, then we have no reason to not use it.
          */
         public function equals( o:* ):Boolean
@@ -319,6 +321,7 @@ package system
          * var v:Version = new Version( 1, 5 );
          * trace( v ); // "1.5"
          * </pre>
+         *
          * note :
          * the fields parameter allow you to force or limit the output format
          * <pre class="prettyprint">
