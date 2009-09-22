@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -69,6 +69,7 @@ package system
      * So the max version you can have is v15.15.255.65535
      * 
      * This logic and these limitations can change later.
+     * </p>
      */
     public class Version implements Equatable
     {
