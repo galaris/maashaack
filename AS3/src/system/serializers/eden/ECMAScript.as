@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -396,15 +396,15 @@ package system.serializers.eden
         }
 
         /**
-         * Inidcates if the specified character is a line terminator.
+         * Indicates if the specified character is a line terminator.
          * <p>Note: line terminators</p>
          * <pre class="prettyprint">
          * "\n" - u000A - LF
          * "\R" - u000D - CR
          * ???  - u2028 - LS
          * ???  - u2029 - PS
+         * </pre>
          * see: ECMA-262 spec 7.3 (PDF p24/188)
-         * </p>
          */
         public function isLineTerminator( c:String ):Boolean
         {
