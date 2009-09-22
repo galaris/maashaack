@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,7 +39,7 @@ package system.reflection
     
     /**
      * The filter type enumeration class.
-     * <p><b>Description :</p>
+     * <p>Description :</p>
      * <pre class="prettyprint">
      * 0x000000
      *      |||_  0: both, 1: only prototype, 2: only trait
@@ -101,9 +101,11 @@ package system.reflection
         
         /**
          * Default filter type value.
+         * <ul>
          * <li>use both prototype and trait</li>
          * <li>both declared and inherited</li>
          * <li>ignore static</li>
+         * </ul>
          */
         public static const none:FilterType = new FilterType( 0x000 , "none" ) ;
         
