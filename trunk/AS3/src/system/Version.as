@@ -36,7 +36,6 @@
 package system
 {
     /**
-     * <![CDATA[
      * A basic Version class which is composed by four fields: major, minor, build and revision.
      * <p>implementation note:</p>
      * <p>internaly we stock the value of a version (the total of each fields) 
@@ -45,7 +44,7 @@ package system
      * <pre class="prettyprint">
      * var v1:Version = new Version( 1, 0 );
      * var v2:Version = new Version( 2, 0 );
-     * trace( v1 < v2 ); //true
+     * trace( v1 &lt; v2 ); //true
      * </pre>
      * by default operators in ECMAScript will use the valueOf of the class and this is neat because 
      * we can use operators without the need to really implement them.
@@ -73,7 +72,6 @@ package system
      * 
      * This logic and these limitations can change later.
      * </p>
-     * ]]>
      */
     public class Version implements Equatable
     {
