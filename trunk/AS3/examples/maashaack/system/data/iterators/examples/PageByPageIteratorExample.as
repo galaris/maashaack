@@ -37,19 +37,18 @@ package examples
 {
     import system.data.iterators.PageByPageIterator;
     import system.eden;
-
+    
     import flash.display.Sprite;
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
-
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    
     /**
      * Basic example to use the PageByPageIterator class.
      */
     public class PageByPageIteratorExample extends Sprite 
     {
-
         public function PageByPageIteratorExample()
         {
             var ar:Array = [1, 2, 3, 4, 5, 6, 7, 8] ;
