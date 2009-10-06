@@ -35,15 +35,14 @@
 
 package system.data.iterators
 {
-    import buRRRn.ASTUce.framework.*;                                                
+    import buRRRn.ASTUce.framework.*;
 
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data iterators tests");
-
+            
             suite.addTestSuite(ArrayFieldIteratorTest) ;
             suite.addTestSuite(ArrayIteratorTest) ;
             suite.addTestSuite(ArrayListIteratorTest) ;
@@ -54,8 +53,13 @@ package system.data.iterators
             suite.addTestSuite(ObjectIteratorTest) ;
             suite.addTestSuite(PageByPageIteratorTest) ;
             suite.addTestSuite(ProtectedIteratorTest) ;
-            suite.addTestSuite(StringIteratorTest) ;            
-                      
+            suite.addTestSuite(StringIteratorTest) ;
+            
+            API::FP_10_0
+            {
+                suite.addTestSuite(VectorIteratorTest) ;
+            }
+            
             return suite;
         }
     }

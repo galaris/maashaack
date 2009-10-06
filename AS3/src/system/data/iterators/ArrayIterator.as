@@ -36,8 +36,8 @@
 package system.data.iterators
 {
     import system.data.Iterator;
-    import system.numeric.Mathematics;    
-
+    import system.numeric.Mathematics;
+    
     /**
      * Converts an <code class="prettyprint">Array</code> to an iterator.
      * <p><b>Example :</b></p>
@@ -74,7 +74,6 @@ package system.data.iterators
      */
     public class ArrayIterator implements Iterator
     {
-        
         /**
          * Creates a new ArrayIterator instance.
          * @param a the array to enumerate with the iterator.
@@ -86,14 +85,14 @@ package system.data.iterators
             {
                throw new ArgumentError( this + " constructor failed, the passed-in Array argument not must be 'null'.") ; 
             }
-            _a = a  ;    
+            _a = a  ;
             _k = -1 ;
         }
         
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
-         */    
+         */
         public function hasNext():Boolean
         {
             return (_k < _a.length - 1);
@@ -114,7 +113,7 @@ package system.data.iterators
          */
         public function next():*
         {
-           return _a[++_k] ;
+            return _a[++_k] ;
         }
         
         /**
@@ -131,8 +130,8 @@ package system.data.iterators
         public function reset():void
         {
             _k = -1 ;
-        }        
-
+        }
+        
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
          */        
@@ -142,14 +141,13 @@ package system.data.iterators
         }
         
         /**
-         * current array
+         * The current Array reference.
          */
         protected var _a:Array ; 
-
+        
         /**
-         *  current key
+         * The current iterator key.
          */
         protected var _k:Number ;
-
     }
 }

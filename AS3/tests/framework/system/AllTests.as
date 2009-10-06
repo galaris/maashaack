@@ -57,7 +57,6 @@ package system
      */
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("x4a system tests");
