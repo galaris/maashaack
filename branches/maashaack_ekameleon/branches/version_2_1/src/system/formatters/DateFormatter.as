@@ -37,6 +37,7 @@ package system.formatters
 {
     import system.Reflection;
     import system.Serializable;
+    import system.hack;
     import system.numeric.Range;
     
     /**
@@ -76,7 +77,7 @@ package system.formatters
      */
     public class DateFormatter implements Formattable, Serializable 
     {
-        use namespace dateparser;
+        use namespace hack;
         
         /**
          * Creates a new DateFormatter instance.
@@ -377,6 +378,54 @@ package system.formatters
         }
         
         /**
+         * Retrieves a list of localized strings containing the month names for the current calendar system.
+         */
+        public function getMonthNames():Array
+        {
+            return Months.getMonthNames() ;
+        }
+        
+        /**
+         * Retrieves a list of localized strings containing the names of weekdays for the current calendar system.
+         */
+        public function getWeekdayNames():Array
+        {
+            return Weekdays.getWeekdayNames() ;
+        }
+        
+        /**
+         * Sets a list of localized strings containing the month names for the current calendar system.
+         * If you passed-in a null value in the argument of the method, the week days use the default english names.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.formatters.DateFormatter ;
+         * var formatter:DateFormatter = new DateFormatter() ;
+         * // localize with FR month names
+         * formatter.setMonthNames( ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"] ) ;
+         * </pre>
+         */
+        public function setMonthNames( names:Array ):void
+        {
+            Months.setMonthNames( names ) ;
+        }
+        
+        /**
+         * Sets a list of localized strings containing the month names for the current calendar system. 
+         * If you passed-in a null value in the argument of the method, the week days use the default english names.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.formatters.DateFormatter ;
+         * var formatter:DateFormatter = new DateFormatter() ;
+         * // localize with FR month names
+         * formatter.setWeekdayNames( ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]) ;
+         * </pre>
+         */
+        public function setWeekdayNames( names:Array ):void
+        {
+            Weekdays.setWeekdayNames( names ) ;
+        }
+        
+        /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */
@@ -386,16 +435,10 @@ package system.formatters
         }
         
         /**
-         * The private internal dateParser namespace.
-         * @private
-         */
-        private namespace dateparser ;
-        
-        /**
          * Formats the specified number day value in a string representation.
          * @return the specified numberday value in a string representation.
          */
-        dateparser function formatDayAsNumber(day:Number, cpt:Number = NaN):String 
+        hack function formatDayAsNumber(day:Number, cpt:Number = NaN):String 
         {
             if (isNaN( cpt )) 
             {
@@ -409,7 +452,7 @@ package system.formatters
          * Formats the specified day value in a string representation.
          * @return the specified day value in a string representation.
          */
-        dateparser function formatDayAsText(day:Number, cpt:Number = NaN):String 
+        hack function formatDayAsText(day:Number, cpt:Number = NaN):String 
         {
             if (RANGE_DAY_AS_TEXT.isOutOfRange( day )) 
             {
@@ -419,9 +462,12 @@ package system.formatters
             {
                 cpt = 0 ;
             }
-            var days:Array = Day.getDays( ) ;
+            var days:Array = Weekdays.getWeekdayNames( ) ;
             var r:String = days[day] ;
-            if (cpt < 4) return r.substr( 0, 2 );
+            if (cpt < 4) 
+            {
+                return r.substr( 0, 2 );
+            }
             return r ;
         }
         
@@ -429,7 +475,7 @@ package system.formatters
          * Formats the designator AM/PM in string expression.
          * @return the specified am/pm expression representation.
          */
-        dateparser function formatDesignator(hour:Number, cpt:Number, capitalize:Boolean ):String 
+        hack function formatDesignator(hour:Number, cpt:Number, capitalize:Boolean ):String 
         {
             if (RANGE_HOUR.isOutOfRange( hour ))
             {
@@ -441,7 +487,6 @@ package system.formatters
             }
             var s:String = ( hour > 12 ) ? DEFAULT_PM_EXPRESSION : DEFAULT_AM_EXPRESSION ;
             s = s.slice( 0, cpt ) ;
-            ;
             return capitalize ? s.toUpperCase( ) : s.toLowerCase( ) ;
         }
         
@@ -449,7 +494,7 @@ package system.formatters
          * Formats the specified hour value in a string representation with the am-pm notation.
          * @return the specified hour value in a string representation with the am-pm notation.
          */
-        dateparser function formatHourInAmPm(hour:Number, cpt:Number = NaN):String 
+        hack function formatHourInAmPm(hour:Number, cpt:Number = NaN):String 
         {
             if (RANGE_HOUR.isOutOfRange( hour )) 
             {
@@ -478,7 +523,7 @@ package system.formatters
         /**
          * Formats an hour number in string expression.
          */
-        dateparser function formatHourInDay(hour:Number, cpt:Number = NaN):String 
+        hack function formatHourInDay(hour:Number, cpt:Number = NaN):String 
         {
             if (RANGE_HOUR.isOutOfRange( hour ))
             {
@@ -495,7 +540,7 @@ package system.formatters
         /**
          * Formats a millisecond value number in string expression.
          */
-        dateparser function formatMillisecond(millisecond:Number, cpt:Number = NaN):String 
+        hack function formatMillisecond(millisecond:Number, cpt:Number = NaN):String 
         {
             if (RANGE_MILLISECOND.isOutOfRange( millisecond )) 
             {
@@ -512,7 +557,7 @@ package system.formatters
         /**
          * Formats a minute value number in string expression.
          */
-        dateparser function formatMinute(minute:Number, cpt:Number = NaN):String 
+        hack function formatMinute(minute:Number, cpt:Number = NaN):String 
         {
             if (RANGE_MINUTE.isOutOfRange( minute )) 
             {
@@ -526,7 +571,7 @@ package system.formatters
         /**
          * Formats a month value number in string expression.
          */
-        dateparser function formatMonthAsNumber(month:Number, cpt:Number = NaN):String 
+        hack function formatMonthAsNumber(month:Number, cpt:Number = NaN):String 
         {
             if (RANGE_MONTH.isOutOfRange( month )) 
             {
@@ -543,7 +588,7 @@ package system.formatters
         /**
          * Formats a month text value in string expression.
          */
-        dateparser function formatMonthAsText(month:Number, cpt:Number = NaN):String 
+        hack function formatMonthAsText(month:Number, cpt:Number = NaN):String 
         {
             if (RANGE_MONTH.isOutOfRange( month )) 
             {
@@ -551,7 +596,7 @@ package system.formatters
             }
             if (isNaN( cpt )) cpt = 0 ;
             var r:String;
-            var months:Array = Month.getMonths( ) ;
+            var months:Array = Months.getMonthNames( ) ;
             r = months[month] ;
             if (cpt < 4) 
             { 
@@ -564,7 +609,7 @@ package system.formatters
          * Format the second value passed in argument.
          * @return the second string representation of this DateFormatter.
          */
-        dateparser function formatSecond(second:Number, cpt:Number = NaN):String 
+        hack function formatSecond(second:Number, cpt:Number = NaN):String 
         {
             if (RANGE_SECOND.isOutOfRange( second )) 
             {
@@ -582,7 +627,7 @@ package system.formatters
          * Format the year value passed in argument.
          * @return the year string representation of this DateFormatter.
          */
-        dateparser function formatYear( year:Number = NaN , cpt:Number = NaN ):String 
+        hack function formatYear( year:Number = NaN , cpt:Number = NaN ):String 
         {
             if ( isNaN( year ) ) 
             {
@@ -603,7 +648,7 @@ package system.formatters
          * Returns a string representation fill by 0 values or an empty string if the cpt value is NaN or <1.
          * @return a string representation fill by 0 values or an empty string if the cpt value is NaN or <1.
          */
-        dateparser function getZeros(cpt:Number):String 
+        hack function getZeros(cpt:Number):String 
         {
             if (cpt < 1 || isNaN( cpt )) 
             {
@@ -626,14 +671,14 @@ package system.formatters
         /**
          * The internal pattern of this formatter.
          */
-        dateparser var _pattern:String ; 
+        hack var _pattern:String ; 
         
         // pattern
          
         /**
          * @private
          */
-        dateparser function count(char:String, a:Array):Number 
+        hack function count(char:String, a:Array):Number 
         {
             if (! a) return 0 ;
             var r:Number = 0 ;
@@ -651,134 +696,174 @@ package system.formatters
 /**
  * This static enumeration class register all string constants to defined a month.
  */
-class Month
+class Months
 {
-
     /**
      * Fully written out string for january.
      */
-    public static var JANUARY:String = "January" ;
-
+    public static const JANUARY:String = "January" ;
+    
     /**
      * Fully written out string for february.
      */
-    public static var FEBRUARY:String = "February" ;
-
+    public static const FEBRUARY:String = "February" ;
+    
     /**
      * Fully written out string for march.
      */
-    public static var MARCH:String = "March" ;
+    public static const MARCH:String = "March" ;
 
     /**
      * Fully written out string for april.
      */
-    public static var APRIL:String = "April" ;
-
+    public static const APRIL:String = "April" ;
+    
     /**
      * Fully written out string for may.
      */
-    public static var MAY:String = "May" ;
-
+    public static const MAY:String = "May" ;
+    
     /**
      * Fully written out string for june.
      */
-    public static var JUNE:String = "June" ;
-
+    public static const JUNE:String = "June" ;
+    
     /**
      * Fully written out string for july.
      */
-    public static var JULY:String = "July" ;
-
+    public static const JULY:String = "July" ;
+    
     /**
      * Fully written out string for august.
      */
-    public static var AUGUST:String = "August" ;
-
+    public static const AUGUST:String = "August" ;
+    
     /**
      * Fully written out string for september.
      */
-    public static var SEPTEMBER:String = "September" ;
-
+    public static const SEPTEMBER:String = "September" ;
+    
     /**
      * Fully written out string for october.
      */
-    public static var OCTOBER:String = "October" ;
-
+    public static const OCTOBER:String = "October" ;
+    
     /**
      * Fully written out string for november.
      */
-    public static var NOVEMBER:String = "November" ;
-
+    public static const NOVEMBER:String = "November" ;
+    
     /**
      * Fully written out string for december.
      */
-    public static var DECEMBER:String = "December" ;
-
+    public static const DECEMBER:String = "December" ;
+    
     /**
-     * Returns the array representation of all months constants.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * trace( "days   : " + Month.getMonths() ) ;
-     * </pre>
-     * @return the array representation of all months constants.
+     * Retrieves a list of localized strings containing the month names for the current calendar system.
+     * @return a list of localized strings containing the month names for the current calendar system.
      */
-    public static function getMonths():Array 
+    public static function getMonthNames():Array 
     {
-        return [ JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER ] ;
-    }        
+        return _names ;
+    }
+    
+    /**
+     * Sets a list of localized strings containing the month names for the current calendar system.
+     */
+    public static function setMonthNames( names:Array ):void
+    {
+        _names = [ JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER ] ;
+        if ( names != null && names.length > 0 )
+        {
+            _names[ 0] = names[ 0] is String ? names[ 0] : JANUARY ;
+            _names[ 1] = names[ 1] is String ? names[ 1] : FEBRUARY ;
+            _names[ 2] = names[ 2] is String ? names[ 2] : MARCH ;
+            _names[ 3] = names[ 3] is String ? names[ 3] : APRIL ;
+            _names[ 4] = names[ 4] is String ? names[ 4] : MAY ;
+            _names[ 5] = names[ 5] is String ? names[ 5] : JUNE ;
+            _names[ 6] = names[ 6] is String ? names[ 6] : JULY ;
+            _names[ 7] = names[ 7] is String ? names[ 7] : AUGUST ;
+            _names[ 8] = names[ 8] is String ? names[ 8] : SEPTEMBER ;
+            _names[ 9] = names[ 9] is String ? names[ 9] : OCTOBER ;
+            _names[10] = names[10] is String ? names[10] : NOVEMBER ;
+            _names[11] = names[11] is String ? names[11] : DECEMBER ;
+        }
+    }
+    
+    /**
+     * @private
+     */
+    private static var _names:Array = [ JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER ] ;
 }
 
 /**
  * This static enumeration class register all string constants to defined a day.
  */
-class Day
+class Weekdays
 {
-
     /**
      * Fully written out string for monday.
      */
-    public static var MONDAY:String = "Monday" ;
-
+    public static const MONDAY:String = "Monday" ;
+    
     /**
      * Fully written out string for tuesday.
      */
-    public static var TUESDAY:String = "Tuesday" ;
-
+    public static const TUESDAY:String = "Tuesday" ;
+    
     /**
      * Fully written out string for wednesday.
      */
-    public static var WEDNESDAY:String = "Wednesday" ;
-
+    public static const WEDNESDAY:String = "Wednesday" ;
+    
     /**
      * Fully written out string for thursday.
      */
-    public static var THURSDAY:String = "Thursday" ;
-
+    public static const THURSDAY:String = "Thursday" ;
+    
     /**
      * Fully written out string for friday.
      */
-    public static var FRIDAY:String = "Friday" ;
-
+    public static const FRIDAY:String = "Friday" ;
+    
     /**
      * Fully written out string for saturday.
      */
-    public static var SATURDAY:String = "Saturday" ;
-
+    public static const SATURDAY:String = "Saturday" ;
+    
     /**
      * Fully written out string for sunday.
      */
-    public static var SUNDAY:String = "Sunday" ;        
-
+    public static const SUNDAY:String = "Sunday" ;
+    
     /**
-     * Returns the array representation of all days constants.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * trace( "days   : " + Day.getDays() ) ;
-     * </pre>
-     * @return the array representation of all days constants.
+     * Retrieves a list of localized strings containing the names of weekdays for the current calendar system.
      */
-    public static function getDays():Array 
+    public static function getWeekdayNames():Array 
     {
-        return [ SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY ] ;
+        return _names ;
     }
-}     
+    
+    /**
+     * Sets a list of localized strings containing the week days names for the current calendar system.
+     */
+    public static function setWeekdayNames( names:Array ):void
+    {
+        _names = [ SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY ] ;
+        if ( names != null && names.length > 0 )
+        {
+            _names[ 0] = names[ 0] is String ? names[ 0] : SUNDAY ;
+            _names[ 1] = names[ 1] is String ? names[ 1] : MONDAY ;
+            _names[ 2] = names[ 2] is String ? names[ 2] : TUESDAY ;
+            _names[ 3] = names[ 3] is String ? names[ 3] : WEDNESDAY ;
+            _names[ 4] = names[ 4] is String ? names[ 4] : THURSDAY ;
+            _names[ 5] = names[ 5] is String ? names[ 5] : FRIDAY ;
+            _names[ 6] = names[ 6] is String ? names[ 6] : SATURDAY ;
+        }
+    }
+    
+    /**
+     * @private
+     */
+    private static var _names:Array = [ SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY ] ;
+}
