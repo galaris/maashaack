@@ -24,8 +24,8 @@ package examples
 {
     import system.formatters.DateFormatter;
     
-    import flash.display.Sprite;    
-
+    import flash.display.Sprite;
+    
     /**
      * This class provides an example of the DateFormatter class.
      */
@@ -69,7 +69,6 @@ package examples
             
             formatter.pattern = "hh 'h' nn 'mn' ss 's' t" ;
             trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s p
-                        
         }
     }
 }
