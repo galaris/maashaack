@@ -52,14 +52,18 @@ package system.formatters
      * var f:DateFormatter = new DateFormatter() ;
      * 
      * f.pattern = "yyyy DDDD d MMMM - hh 'h' nn 'mn' ss 's'" ;
+     * 
      * var result:String = f.format() ;
+     * 
      * trace("pattern : " + f.pattern) ;
      * trace("result  : " + result) ;
      * 
      * trace("----") ;
      * 
      * f.pattern = "DDDD d MMMM yyyy" ;
+     * 
      * var result:String = f.format(new Date(2005, 10, 22)) ;
+     * 
      * trace("pattern : " + f.pattern) ;
      * trace("result  : " + result) ;
      * 
@@ -93,7 +97,7 @@ package system.formatters
          * Placeholder for AM/PM designator who indicates if the hour is is before or after noon in date format.
          * The output is lower-case. Examples: t -> a or p  / tt -> am or pm.
          */
-        public static const AM_PM:String = "t";
+        public static const AM_PM:String = "t" ;
         
         /**
          * Placeholder for AM/PM designator who indicates if the hour is is before or after noon in date format.
@@ -134,72 +138,72 @@ package system.formatters
         /**
          * Placeholder for hour in day (0 - 23) in date format.
          */
-        public static const HOUR_IN_DAY:String = "H";
+        public static const HOUR_IN_DAY:String = "H" ;
         
         /**
          * Placeholder for minute in hour in date format.
          */
-        public static const MINUTE:String = "n";
+        public static const MINUTE:String = "n" ;
         
         /**
          * Placeholder for millisecond in date format.
          */
-        public static const MILLISECOND:String = "S";
+        public static const MILLISECOND:String = "S" ;
         
         /**
          * Placeholder for month in year as number in date format.
          */
-        public static const MONTH_AS_NUMBER:String = "m";
+        public static const MONTH_AS_NUMBER:String = "m" ;
         
         /**
          * Placeholder for month in year as text in date format.
          */
-        public static const MONTH_AS_TEXT:String = "M";
+        public static const MONTH_AS_TEXT:String = "M" ;
         
         /**
          * Quotation beginning and ending token. 
          */
-        public static const QUOTE:String = "'";
+        public static const QUOTE:String = "'" ;
         
         /**
          * The internal range use to defined the days as text in the DateFormatter.
          */
-        public static const RANGE_DAY_AS_TEXT:Range = new Range( 0, 6 ) ;
+        public static const RANGE_DAY_AS_TEXT:Range = new Range( 0 , 6 ) ;
         
         /**
          * The internal range use to defined the hours in the DateFormatter.
          */
-        public static const RANGE_HOUR:Range = new Range( 0, 23 ) ;
+        public static const RANGE_HOUR:Range = new Range( 0 , 23 ) ;
         
         /**
          * The internal range use to defined the minutes in the DateFormatter.
          */
-        public static const RANGE_MINUTE:Range = new Range( 0, 59 ) ;
+        public static const RANGE_MINUTE:Range = new Range( 0 , 59 ) ;
         
         /**
          * The internal range use to defined the milliseconds in the DateFormatter.
          */
-        public static const RANGE_MILLISECOND:Range = new Range( 0, 999 ) ;
+        public static const RANGE_MILLISECOND:Range = new Range( 0 , 999 ) ;
         
         /**
          * The internal range use to defined the months in the DateFormatter.
          */
-        public static const RANGE_MONTH:Range = new Range( 0, 11 ) ;
+        public static const RANGE_MONTH:Range = new Range( 0 , 11 ) ;
         
         /**
          * The internal range use to defined the seconds in the DateFormatter.
          */
-        public static const RANGE_SECOND:Range = new Range( 0, 59 ) ;
+        public static const RANGE_SECOND:Range = new Range( 0 , 59 ) ;
         
         /**
          * Placeholder for second in minute in date format.
          */
-        public static const SECOND:String = "s";
+        public static const SECOND:String = "s" ;
         
         /**
          * Placeholder for year in date format.
          */
-        public static const YEAR:String = "y";
+        public static const YEAR:String = "y" ;
         
         /**
          * Indicates the internal pattern of this formatter.
@@ -223,7 +227,7 @@ package system.formatters
          */ 
         public function clone():*
         {
-            return new DateFormatter( pattern )  ;
+            return new DateFormatter( pattern ) ;
         }
         
         /**
@@ -261,24 +265,25 @@ package system.formatters
          */
         public function format( value:* = null ):String
         {
-            
             if (pattern == null) 
             {
                 return "" ;
             }
             
-            var cpt:Number ;
-            var ch:String ; 
+            var cpt:int ;
+            var ch:String ;
+             
             // current character
-            var date:Date = ( value != null && value is Date) ? (value as Date) : new Date( ) ;
+            
+            var date:Date = ( value != null && value is Date) ? (value as Date) : new Date() ;
             
             var next:int ;
             var prev:int ;
             
             var p:String = pattern ;
-            var a:Array = p.split( "" ) ;
-            var l:Number = a.length ;
-            var i:Number = - 1 ;
+            var a:Array  = p.split( "" ) ;
+            var l:int    = a.length ;
+            var i:int    = - 1 ;
             var r:String = "" ;
             
             while (++ i < l) 
@@ -303,31 +308,31 @@ package system.formatters
                     r += p.substring( prev + 1, next ) ;
                     i = next ;
                 } 
-                else if (ch == YEAR) 
+                else if ( ch == YEAR ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatYear( date.getFullYear( ), cpt );
                     i += cpt - 1 ;
                 }
-                else if (ch == MONTH_AS_NUMBER) 
+                else if ( ch == MONTH_AS_NUMBER ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatMonthAsNumber( date.getMonth( ), cpt );
                     i += cpt - 1 ;
                 }
-                else if (ch == MONTH_AS_TEXT) 
+                else if ( ch == MONTH_AS_TEXT ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatMonthAsText( date.getMonth( ), cpt ) ;
                     i += cpt - 1 ;
                 } 
-                else if (ch == DAY_AS_NUMBER) 
+                else if ( ch == DAY_AS_NUMBER ) 
                 {
                     cpt = count( ch, a.slice( i ) ) ;
                     r += formatDayAsNumber( date.getDate( ), cpt ) ;
                     i += cpt - 1 ;
                 }
-                else if (ch == DAY_AS_TEXT) 
+                else if ( ch == DAY_AS_TEXT ) 
                 {
                     cpt = count( ch, a.slice( i ) ) ;
                     r += formatDayAsText( date.getDay( ), cpt ) ;
@@ -339,25 +344,25 @@ package system.formatters
                     r += formatHourInAmPm( date.getHours( ), cpt ) ;
                     i += cpt - 1 ;
                 } 
-                else if (ch == HOUR_IN_DAY) 
+                else if ( ch == HOUR_IN_DAY ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatHourInDay( date.getHours( ), cpt ) ;
                     i += cpt - 1 ;
                 } 
-                else if (ch == MINUTE) 
+                else if ( ch == MINUTE ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatMinute( date.getMinutes( ), cpt ) ;
                     i += cpt - 1 ;
                 }
-                else if (ch == SECOND) 
+                else if ( ch == SECOND ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatSecond( date.getSeconds( ), cpt ) ;
                     i += cpt - 1 ;
                 }
-                else if (ch == MILLISECOND) 
+                else if ( ch == MILLISECOND ) 
                 {
                     cpt = count( ch, a.slice( i ) );
                     r += formatMillisecond( date.getMilliseconds( ), cpt );
@@ -463,10 +468,10 @@ package system.formatters
                 cpt = 0 ;
             }
             var days:Array = Weekdays.getWeekdayNames( ) ;
-            var r:String = days[day] ;
+            var r:String   = days[day] ;
             if (cpt < 4) 
             {
-                return r.substr( 0, 2 );
+                return r.substr( 0 , 2 );
             }
             return r ;
         }
@@ -477,7 +482,7 @@ package system.formatters
          */
         hack function formatDesignator(hour:Number, cpt:Number, capitalize:Boolean ):String 
         {
-            if (RANGE_HOUR.isOutOfRange( hour ))
+            if ( RANGE_HOUR.isOutOfRange( hour ) )
             {
                 throw new Error( this + " formatDesignator method failed, the hour value is out of range." ) ;
             }
@@ -486,8 +491,8 @@ package system.formatters
                 cpt = 0 ;
             }
             var s:String = ( hour > 12 ) ? DEFAULT_PM_EXPRESSION : DEFAULT_AM_EXPRESSION ;
-            s = s.slice( 0, cpt ) ;
-            return capitalize ? s.toUpperCase( ) : s.toLowerCase( ) ;
+            s = s.slice( 0 , cpt ) ;
+            return capitalize ? s.toUpperCase() : s.toLowerCase() ;
         }
         
         /**
@@ -496,7 +501,7 @@ package system.formatters
          */
         hack function formatHourInAmPm(hour:Number, cpt:Number = NaN):String 
         {
-            if (RANGE_HOUR.isOutOfRange( hour )) 
+            if ( RANGE_HOUR.isOutOfRange( hour ) ) 
             {
                 throw new Error( this + " formatHourInAmPm method failed, the hour value is out of range." ) ;
             }
@@ -525,7 +530,7 @@ package system.formatters
          */
         hack function formatHourInDay(hour:Number, cpt:Number = NaN):String 
         {
-            if (RANGE_HOUR.isOutOfRange( hour ))
+            if ( RANGE_HOUR.isOutOfRange( hour ) )
             {
                 throw new Error( this + " formatHourInDay method failed, the hour value is out of range." ) ;
             }
@@ -542,7 +547,7 @@ package system.formatters
          */
         hack function formatMillisecond(millisecond:Number, cpt:Number = NaN):String 
         {
-            if (RANGE_MILLISECOND.isOutOfRange( millisecond )) 
+            if (RANGE_MILLISECOND.isOutOfRange( millisecond ) ) 
             {
                 throw new Error( this + " formatMillisecond method failed, the millisecond value is out of range." );
             }
@@ -550,7 +555,7 @@ package system.formatters
             {
                 cpt = 0 ;
             }
-            var s:String = millisecond.toString( );
+            var s:String = millisecond.toString();
             return (getZeros( cpt - s.length ) + s) ;
         }
         
@@ -563,7 +568,10 @@ package system.formatters
             {
                 throw new Error( this + " formatMinute method failed, the minute value is out of range." ) ;
             }
-            if (isNaN( cpt )) cpt = 0 ;
+            if ( isNaN( cpt ) ) 
+            {
+                cpt = 0 ;
+            }
             var s:String = minute.toString( );
             return (getZeros( cpt - s.length ) + s);
         }
@@ -571,7 +579,7 @@ package system.formatters
         /**
          * Formats a month value number in string expression.
          */
-        hack function formatMonthAsNumber(month:Number, cpt:Number = NaN):String 
+        hack function formatMonthAsNumber( month:Number, cpt:Number = NaN ):String 
         {
             if (RANGE_MONTH.isOutOfRange( month )) 
             {
@@ -596,7 +604,7 @@ package system.formatters
             }
             if (isNaN( cpt )) cpt = 0 ;
             var r:String;
-            var months:Array = Months.getMonthNames( ) ;
+            var months:Array = Months.getMonthNames() ;
             r = months[month] ;
             if (cpt < 4) 
             { 
@@ -619,7 +627,7 @@ package system.formatters
             {
                 cpt = 0 ;
             }
-            var s:String = second.toString( ) ;
+            var s:String = second.toString() ;
             return (getZeros( cpt - s.length ) + s);
         }
         
@@ -639,7 +647,7 @@ package system.formatters
             }
             if (cpt < 4) 
             {
-                return year.toString( ).substr( 2 ) ;
+                return year.toString().substr( 2 ) ;
             }
             return (getZeros( cpt - 4 ) + year.toString( ));
         }
@@ -680,10 +688,13 @@ package system.formatters
          */
         hack function count(char:String, a:Array):Number 
         {
-            if (! a) return 0 ;
-            var r:Number = 0 ;
-            var i:Number = - 1 ;
-            var l:Number = a.length ;
+            if (! a) 
+            {
+                return 0 ;
+            }
+            var r:int = 0 ;
+            var i:int = - 1 ;
+            var l:int = a.length ;
             while (++ i < l && a[r] == char) 
             {
                 r++ ;
@@ -712,7 +723,7 @@ class Months
      * Fully written out string for march.
      */
     public static const MARCH:String = "March" ;
-
+    
     /**
      * Fully written out string for april.
      */
