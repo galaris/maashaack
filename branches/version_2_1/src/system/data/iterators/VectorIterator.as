@@ -71,7 +71,7 @@ package system.data.iterators
      * it.seek(2) ;
      * while (it.hasNext())
      * {
-     *     trace (it.next()) ;
+     *     trace (it.next()) ; // item3
      * }
      * 
      * trace ("---") ;
@@ -142,6 +142,9 @@ package system.data.iterators
             _k = 0 ;
         }
         
+        /**
+         * Changes the position of the internal pointer of the iterator (optional operation).
+         */
         public function seek( position:* ):void
         {
             _k = Mathematics.clamp( position , 0 , _v.length - 1) ;
