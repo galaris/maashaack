@@ -230,6 +230,20 @@ package graphics.colors
            assertEquals(rgb.a , 0 , "04-04 - fromNumber() failed.") ;
         } 
         
+        public function testFromNumberStatic():void 
+        {
+           var rgb:RGBA = new RGBA() ;
+           
+           rgb = RGBA.fromNumber( 0xFFEA6F51 ) ;
+           assertEquals(  rgb , new RGBA( 234 , 111 , 81 , 1 ) , "01 - RGBA.fromNumber failed.") ;
+            
+           rgb = RGBA.fromNumber( 0xFFFFFFFF ) ;
+           assertEquals(  rgb , new RGBA( 255 , 255 , 255 , 1 ) , "02 - RGBA.fromNumber failed.") ;
+           
+           rgb = RGBA.fromNumber( 0 ) ;
+           assertEquals(  rgb , new RGBA( 0 , 0 , 0 , 0 ) , "03 - RGBA.fromNumber failed.") ;
+        } 
+        
         public function testInterpolate():void 
         {
            var rgb:RGBA ;
@@ -262,6 +276,13 @@ package graphics.colors
             assertEquals(rgb.toHexString()    , "0x99AAAAAA" , "01 - toHexString() failed.") ;
             assertEquals(rgb.toHexString("#") , "#99AAAAAA"  , "02 - toHexString() failed.") ;
             assertEquals(rgb.toHexString("")  , "99AAAAAA"   , "03 - toHexString() failed.") ;
+        }
+        
+        public function testToNumberStatic():void 
+        {
+           assertEquals( RGBA.toNumber(170,170,170,0.6), 0x99AAAAAA , "01 - Colors.RGBA2Number failed.") ;
+           assertEquals( RGBA.toNumber(255,255,255,1)  , 0xFFFFFFFF , "02 - Colors.RGBA2Number failed.") ;
+           assertEquals( RGBA.toNumber(0,0,0,0)        , 0x00000000 , "03 - Colors.RGBA2Number failed.") ;
         }
         
         public function testToObject():void

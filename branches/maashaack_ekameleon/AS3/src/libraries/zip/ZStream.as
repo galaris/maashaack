@@ -237,7 +237,7 @@ package libraries.zip
          * 32K LZ77 window
          * @private
          */
-        private static const MAX_WBITS:int = 15 ;
+//        private static const MAX_WBITS:int = 15 ;
         
 //        /**
 //         * @private

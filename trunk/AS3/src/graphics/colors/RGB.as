@@ -196,6 +196,24 @@ package graphics.colors
         }
         
         /**
+         * Returns the RGB representation of the color number passed in argument. 
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.colors.RGB ;
+         * 
+         * var rgb:RGB = RGB.fromNumber( 0xEA6F51 ) ; 
+         * trace(rgb) ; // [RGB r:234 g:111 b:81 hex:0xEA6F51]
+         * </pre>
+         * @return the RGB representation of the color number passed in argument.
+         */
+        public static function fromNumber( value:Number ):RGB 
+        {
+            var rgb:RGB = new RGB() ;
+            rgb.fromNumber( value ) ;
+            return rgb ;
+        }
+        
+        /**
          * Interpolate the color and returns a new RGB object.
          * @param to The RGB reference used to interpolate the current RGB object.
          * @param level The level of the interpolation as a decimal, ﻿where <code>0</code> is the start and <code>1</code> is the end.
@@ -246,6 +264,25 @@ package graphics.colors
         public function toHexString( prefix:String = "0x" ):String
         {
             return prefix + toHex( _red ) + toHex( _green ) + toHex( _blue );
+        }
+        
+        /**
+         * Converts the basic red, green, blue passed-in arguments in a HTML number color (base 10).
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.colors.RGB ;
+         * 
+         * var rgb:Number = RGB.toNumber(234,111,81) ; 
+         * trace( rgb ) ; // 0xEA6F51
+         * </pre>
+         * @param r The red component (between 0 and 0xFF)
+         * @param g The green component (between 0 and 0xFF)
+         * @param b The blue component (between 0 and 0xFF)
+         * @return The base 10 representation of the specified red, green, blue components.
+         */
+        public static function toNumber( r:Number, g:Number, b:Number ):Number  
+        {    
+            return ( r << 16 ) | ( g << 8 ) | b ;
         }
         
         /**

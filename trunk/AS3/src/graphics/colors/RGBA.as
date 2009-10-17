@@ -206,6 +206,24 @@ package graphics.colors
         }
         
         /**
+         * Returns the RGBA representation of the color number passed in argument. 
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.colors.RGBA ;
+         * 
+         * var rgba:RGBA = RGBA.fromNumber( 0xFFEA6F51 ) ; 
+         * trace(rgba) ; // [RGB r:234 g:111 b:81 a:1 hex:0xFFEA6F51]
+         * </pre>
+         * @return the object representation of the color number passed in argument.
+         */
+        public static function fromNumber( value:Number ):RGBA
+        {
+            var c:RGBA = new RGBA() ;
+            c.fromNumber(value) ;
+            return c ;
+        }
+        
+        /**
          * Interpolate the color and returns a new RGB object.
          * @param color The RGB reference used to interpolate the current RGB object.
          * @param level The level of the interpolation as a decimal, ﻿where <code>0</code> is the start and <code>1</code> is the end.
@@ -242,6 +260,31 @@ package graphics.colors
         public override function toHexString( prefix:String = "0x" ):String
         {
             return prefix + toHex( _alpha * maximum ) + toHex( _red ) + toHex( _green ) + toHex( _blue );
+        }
+        
+        /**
+         * Converts the red, green, blue, alpha values in a decimal number color value (base 10).
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.colors.RGBA ;
+         * 
+         * var rgba:Number = RGBA.toNumber(170,170,170,0.6) ;
+         * trace( rgba ) ; // 0x99AAAAAA
+         * </pre>
+         * @param r The red component (between 0 and 0xFF)
+         * @param g The green component (between 0 and 0xFF)
+         * @param b The blue component (between 0 and 0xFF)
+         * @param a The alpha component (between 0 and 1)
+         * @return the decimal number representation of the specified red, green, blue, alpha parameters.
+         */
+        public static function toNumber( r:uint=0, g:uint=0, b:uint=0 , a:Number=1 ):uint  
+        {   
+            var max:Number = 0xFF ;
+            r = Math.min( r, max ) as uint ;
+            g = Math.min( g, max ) as uint ;
+            b = Math.min( b, max ) as uint ;
+            a = Mathematics.clamp( isNaN(a) ? 0 : a , 0, 1 ) * 0xFF ;
+            return ( a << 24 ) | ( r<<16 ) | ( g << 8 ) | b ;
         }
         
         /**

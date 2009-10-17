@@ -144,7 +144,6 @@ package graphics.colors
             assertFalse( rgb1.equals(rgb3) , "03-02  - equals() failed.") ;
             assertFalse( rgb1.equals(rgb4) , "03-02  - equals() failed.") ;
             assertFalse( rgb1.equals(rgb5) , "03-03  - equals() failed.") ;
-
         }
         
         public function testDifference():void
@@ -181,7 +180,21 @@ package graphics.colors
            rgb.fromNumber( 0 ) ;
            assertEquals(rgb.r , 0 , "03-01 - fromNumber() failed.") ;
            assertEquals(rgb.g , 0 , "03-02 - fromNumber() failed.") ;
-           assertEquals(rgb.b , 0 , "03-03 - fromNumber() failed.") ;           
+           assertEquals(rgb.b , 0 , "03-03 - fromNumber() failed.") ;
+        } 
+        
+        public function testFromNumberStatic():void 
+        {
+           var rgb:RGB = new RGB() ;
+           
+           rgb = RGB.fromNumber( 0xEA6F51 ) ;
+           assertEquals( rgb , new RGB( 234 , 111 , 81 ) , "01 - RGB.fromNumber failed.") ;
+            
+           rgb = RGB.fromNumber( 0xFFFFFF ) ;
+           assertEquals( rgb , new RGB( 255 , 255 , 255 ) , "02 - RGB.fromNumber failed.") ;
+           
+           rgb = RGB.fromNumber( 0 ) ;
+           assertEquals( rgb , new RGB( 0 , 0 , 0 )       , "03 - RGB.fromNumber failed.") ;
         } 
         
         public function testInterpolate():void 
@@ -233,6 +246,13 @@ package graphics.colors
             assertEquals(rgb.toHexString()    , "0xEA6F51" , "01 - toHexString() failed.") ;
             assertEquals(rgb.toHexString("#") , "#EA6F51"  , "02 - toHexString() failed.") ;
             assertEquals(rgb.toHexString("")  , "EA6F51"   , "03 - toHexString() failed.") ;
+        }
+        
+        public function testToNumberStatic():void 
+        {
+           assertEquals( RGB.toNumber(234,111,81)  , 0xEA6F51 , "01 - Colors.RGB2Number failed.") ;
+           assertEquals( RGB.toNumber(255,255,255) , 0xFFFFFF , "02 - Colors.RGB2Number failed.") ;
+           assertEquals( RGB.toNumber(0,0,0)       , 0x000000 , "03 - Colors.RGB2Number failed.") ;
         }
         
         public function testToObject():void
