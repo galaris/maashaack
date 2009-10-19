@@ -154,12 +154,12 @@ package system.logging.targets
         
         public function testSHOW_MESSAGE():void
         {
-            assertEquals( SOSTarget.SHOW_MESSAGE , "!SOS<showMessage key=\"{0}\">{1}</showMessage>" , "The SOSTarget.SHOW_MESSAGE static property failed." ) ;
+            assertEquals( SOSTarget.SHOW_MESSAGE , "!SOS<showMessage key=\"{0}\"><![CDATA[{1}]]></showMessage>" , "The SOSTarget.SHOW_MESSAGE static property failed." ) ;
         }
         
         public function testSHOW_FOLD_MESSAGE():void
         {
-            assertEquals( SOSTarget.SHOW_FOLD_MESSAGE , "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>" , "The SOSTarget.SHOW_FOLD_MESSAGE static property failed." ) ;
+            assertEquals( SOSTarget.SHOW_FOLD_MESSAGE , "!SOS<showFoldMessage key=\"{0}\"><title><![CDATA[{1}]]></title><message><![CDATA[{2}]]></message></showFoldMessage>" , "The SOSTarget.SHOW_FOLD_MESSAGE static property failed." ) ;
         }
     }
 }
