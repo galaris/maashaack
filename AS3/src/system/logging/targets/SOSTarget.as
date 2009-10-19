@@ -143,12 +143,12 @@ package system.logging.targets
         /**
          * Provides the message pattern to send in the SOS console the "showMessage" expression. 
          */
-        public static const SHOW_MESSAGE:String = "!SOS<showMessage key=\"{0}\">{1}</showMessage>" ;
+        public static const SHOW_MESSAGE:String = "!SOS<showMessage key=\"{0}\"><![CDATA[{1}]]></showMessage>" ;
         
         /**
          * Provides the message pattern to send in the SOS console the "showFoldMessage" expression. 
          */
-        public static const SHOW_FOLD_MESSAGE:String = "!SOS<showFoldMessage key=\"{0}\"><title>{1}</title><message><![CDATA[{2}]]></message></showFoldMessage>" ;
+        public static const SHOW_FOLD_MESSAGE:String = "!SOS<showFoldMessage key=\"{0}\"><title><![CDATA[{1}]]></title><message><![CDATA[{2}]]></message></showFoldMessage>" ;
         
         /**
          * Defines the level colors policy in the message sending to the SOS console.
