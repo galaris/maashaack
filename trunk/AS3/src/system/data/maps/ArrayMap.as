@@ -41,6 +41,7 @@ package system.data.maps
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;
     import system.eden;
+    import system.hack;
     
     /**
      * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
@@ -95,6 +96,7 @@ package system.data.maps
      */
     public dynamic class ArrayMap implements Map
     {
+        use namespace hack ;
         
         /**
          * Creates a new ArrayMap instance.
@@ -166,12 +168,30 @@ package system.data.maps
         }
         
         /**
+         * Returns the key registered at the specified index in the array map.
+         * @return the key registered at the specified index in the array map.
+         */
+        public function getKeyAt( index:uint ):*
+        {
+            return _keys[index] ;
+        }
+        
+        /**
          * Returns an array representation of all keys in the map.
          * @return an array representation of all keys in the map.
          */
         public function getKeys():Array
         {
             return _keys.slice() ;
+        }
+        
+        /**
+         * Returns the value registered at the specified index in the array map.
+         * @return the value registered at the specified index in the array map.
+         */
+        public function getValueAt( index:uint ):*
+        {
+            return _values[index] ;
         }
         
         /**
@@ -363,11 +383,11 @@ package system.data.maps
         /**
          * @private
          */
-        protected var _keys:Array ;
+        hack var _keys:Array ;
         
         /**
          * @private
          */
-        protected var _values:Array ;
+        hack var _values:Array ;
     }
 }

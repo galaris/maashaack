@@ -39,7 +39,7 @@ package system.data.maps
     
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.data.iterators.MapIterator;    
+    import system.data.iterators.MapIterator;
     
     public class ArrayMapTest extends TestCase 
     {
@@ -111,6 +111,12 @@ package system.data.maps
             assertEquals( map.get("key2") , "value2"  , "2 - The ArrayMap get method failed.") ;
             assertUndefined( map.get("key3") , "3 - The ArrayMap get method failed.") ;
         }
+        
+        public function testGetKeyAt():void
+        {
+            assertEquals( map.getKeyAt(0) , "key1"  , "1 - The ArrayMap getKeyAt(0) method failed.") ;
+            assertEquals( map.getKeyAt(1) , "key2"  , "2 - The ArrayMap getKeyAt(1) method failed.") ;
+        }
        
         public function testGetKeys():void
         {
@@ -118,6 +124,12 @@ package system.data.maps
             assertTrue( keys.indexOf("key1") >  -1 , "1 - The ArrayMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key2") >  -1 , "2 - The ArrayMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key3") == -1 , "3 - The ArrayMap getKeys method failed.") ;
+        }
+        
+        public function testGetValueAt():void
+        {
+            assertEquals( map.getValueAt(0) , "value1"  , "1 - The ArrayMap getValueAt(0) method failed.") ;
+            assertEquals( map.getValueAt(1) , "value2"  , "2 - The ArrayMap getValueAt(1) method failed.") ;
         }
         
         public function testGetValues():void
