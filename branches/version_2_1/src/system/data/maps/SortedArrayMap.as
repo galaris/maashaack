@@ -37,8 +37,8 @@ package system.data.maps
 {
     import system.Comparator;
     import system.Sortable;
-    import system.data.maps.ArrayMap;    
-
+    import system.hack;
+    
     /**
      * This <code class="prettyprint">ArrayMap</code> can be sorted with a <code class="prettyprint">Comparator</code> object.
      * <p><b>Example :</b></p>
@@ -91,7 +91,8 @@ package system.data.maps
      */
     public class SortedArrayMap extends ArrayMap implements Sortable
     {
-
+        use namespace hack ;
+        
         /**
          * Creates a new SortedArrayMap instance.
          * @param keys An optional Array of all keys to fill in this Map.
@@ -109,7 +110,7 @@ package system.data.maps
          * <p>The value of this constant is 1.</p>
          */
         public static const CASEINSENSITIVE:uint = 1;
-    
+        
         /**
          * Specifies descending sorting for the Array class sorting methods. 
          * You can use this constant for the <code class="prettyprint">options</code> parameter in the <code class="prettyprint">sort()</code>
@@ -117,7 +118,7 @@ package system.data.maps
          * <p>The value of this constant is 2.</p>
          */
         public static const DESCENDING:uint = 2;
-
+        
         /**
          * Defines the constant value of the sortPolicy property if the ArrayMap is sorted by "key".
          */
@@ -128,7 +129,7 @@ package system.data.maps
          * <p>The value of this constant is 0.</p>
          */
         public static const NONE:uint = 0;
-
+        
         /**
          * Specifies numeric (instead of character-string) sorting for the Array class sorting methods. 
          * Including this constant in the <code class="prettyprint">options</code>
@@ -157,7 +158,7 @@ package system.data.maps
          * <p>The value of this constant is 8.</p>
         */
         public static const RETURNINDEXEDARRAY:uint = 8;
-
+        
         /**
          * Specifies the unique sorting requirement for the Array class sorting methods. 
          * You can use this constant for the <code class="prettyprint">options</code> parameter in the <code class="prettyprint">sort()</code> or <code class="prettyprint">sortOn()</code> method. 
@@ -165,11 +166,11 @@ package system.data.maps
          * <p>The value of this constant is 4.</p>
          */
         public static const UNIQUESORT:uint = 4;
-
+        
         /**
          * Defines the constant value of the sortPolicy property if the ArrayMap is sorted by "value".
          */
-        public static const VALUE:String = "value" ;        
+        public static const VALUE:String = "value" ;
         
         /**
          * Determinates the Comparator object used in the map to sort the entries.
@@ -178,15 +179,15 @@ package system.data.maps
         {
             return _comparator ;
         }
-    
+        
         /**
          * @private
          */
         public function set comparator( comp:Comparator ):void 
         {
             _comparator = comp ;
-        }    
-    
+        }
+        
         /**
          * Indicates the options to sort the elements in the Map.
          */
@@ -194,7 +195,7 @@ package system.data.maps
         {
             return _options ;
         }
-
+        
         /**
          * @private
          */
@@ -202,7 +203,7 @@ package system.data.maps
         {
             _options = o ;
         }
-    
+        
         /**
          * Indicates if the map entries are sorted by value or key.
          */
@@ -210,14 +211,14 @@ package system.data.maps
         {
             return _sortBy ;
         }
-
+        
         /**
          * @private
          */
         public function set sortBy( str:String ):void 
         {
             _sortBy = ( str == SortedArrayMap.VALUE ) ? SortedArrayMap.VALUE : SortedArrayMap.KEY ;
-        }    
+        }
         
         /**
          * Sorts the elements in Map by key or value with the current Comparator reference.
@@ -264,16 +265,15 @@ package system.data.maps
          */
         public function sort():void  
         {
-        
             var compare:Function = _comparator.compare as Function ;
             
             var max:Number = size() ;
             
             if (compare == null && !(max > 0) )
             {
-                return ;    
+                return ;
             }
-
+            
             var result:Array ;
             var clone:Array ;
             
@@ -373,17 +373,17 @@ package system.data.maps
         {
         
             var max:uint = size() ;
-        
+            
             if (fieldName == null && !(max > 0) )
             {
-                return ;    
-            }   
-        
+                return ;
+            }
+            
             if ( !isNaN(opts) )
             {
-                _options = opts ;   
+                _options = opts ;
             }
-        
+            
             var result:Array ;
             var clone:Array ;
             
@@ -407,23 +407,21 @@ package system.data.maps
                     _keys[max] = clone[ result[max] ] ;
                 }
             }
-        }        
+        }
         
         /**
          * @private
          */
         protected var _comparator:Comparator ;
-
+        
         /**
          * @private
          */
         protected var _options:uint ;
-    
+        
         /**
          * @private
          */
-        private var _sortBy:String ;    
-    
+        private var _sortBy:String ;
     }
-    
 }
