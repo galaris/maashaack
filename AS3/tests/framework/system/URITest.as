@@ -432,5 +432,12 @@ package system
             assertTrue( URI.isDomainAddress( "a_1.google.com" ) );
         }
         
+        public function testQuery():void
+        {
+            var s:String = "http://www.ics.uci.edu/?a=1:b=2";
+            var u:URI = new URI( s );
+            assertEquals( u.query , "a=1:b=2" ) ; // FIXME add test to write the query with the good syntax ??
+        }
+        
     }
 }
