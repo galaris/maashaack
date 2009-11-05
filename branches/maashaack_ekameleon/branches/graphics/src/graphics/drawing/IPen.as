@@ -32,12 +32,11 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
 package graphics.drawing 
 {
-	import graphics.ILineStyle;
-	import graphics.Drawable;
-	import graphics.IFillStyle;
+    import graphics.ILineStyle;
+    import graphics.Drawable;
+    import graphics.IFillStyle;
     import flash.display.Graphics;
     
     /**
