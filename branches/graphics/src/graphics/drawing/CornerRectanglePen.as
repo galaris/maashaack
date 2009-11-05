@@ -57,7 +57,7 @@ package graphics.drawing
         }
         
         /**
-         * (read-write) Determinates the Corner value of this pen.
+         * Determinates the Corner value of this pen.
          */
         public function get corner():Corner 
         {

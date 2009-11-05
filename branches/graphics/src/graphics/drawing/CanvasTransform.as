@@ -46,11 +46,8 @@ package graphics.drawing
          * Creates a free form effect over a <code class="prettyprint">Canvas</code> object}.
          * @return the method to be used to creates a free form effect over a <code class="prettyprint">Canvas</code> object}.
          */
-        public static function createFreeform 
-        (
-            area:* , x0:Number, y0:Number, x1:Number, y1:Number, x2:Number, y2:Number, x3:Number, y3:Number ):Function  
+        public static function createFreeform( area:* , x0:Number, y0:Number, x1:Number, y1:Number, x2:Number, y2:Number, x3:Number, y3:Number ):Function
         {
-            
             var $r:Rectangle = new Rectangle( area.x , area.y , area.width, area.height) ;
             var $x:Number = $r.x ;
             var $y:Number = $r.y ;
@@ -153,7 +150,7 @@ package graphics.drawing
                 return { x:newX ,  y:newY } ;
             } ;
         }
-    
+        
         /**
          * Creates a Whirl effect over a <code class="prettyprint">Canvas</code> object}.
          * @return the method to be used to creates a Whirl effect over a <code class="prettyprint">Canvas</code> object}.
@@ -180,7 +177,5 @@ package graphics.drawing
                 return o ;
             } ;
         }
-            
     }
 }
-

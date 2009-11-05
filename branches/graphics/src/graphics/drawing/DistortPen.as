@@ -110,7 +110,6 @@ package graphics.drawing
      */
     public class DistortPen extends Pen
     {
-
         /**
          * Creates a new DistorPen instance.
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
@@ -151,12 +150,12 @@ package graphics.drawing
          * <p><b>Note :</b> This point must be an object with the x and y attributes (Point, Vector2, generic object, DisplayObject, etc.</p>
          */
         public var bl:* ;
-
+        
         /**
          * The bottom right point of the distortion.
          * <p><b>Note :</b> This point must be an object with the x and y attributes (Point, Vector2, generic object, DisplayObject, etc.</p>
          */
-        public var br:* ;        
+        public var br:* ;
         
         /**
          * Indicates the height value of the pen.
@@ -164,7 +163,7 @@ package graphics.drawing
         public function get height():Number 
         {
             return _h ;
-        }        
+        }
         
         /**
          * @private
@@ -181,8 +180,8 @@ package graphics.drawing
         public function get hPrecision():uint 
         {
             return _hseg ;
-        }        
-
+        }
+        
         /**
          * @private
          */
@@ -190,24 +189,24 @@ package graphics.drawing
         {
             _hseg = value ;
             init() ;
-        }          
+        }
         
         /**
          * Indicates whether or not use pixel smoothing render.
          */
         public var smoothing:Boolean = true ;
-
+        
         /**
          * The top left point of the distortion.
          * <p><b>Note :</b> This point must be an object with the x and y attributes (Point, Vector2, generic object, DisplayObject, etc.</p>
          */
-        public var tl:* ; 
+        public var tl:* ;
         
         /**
          * The top right point of the distortion.
          * <p><b>Note :</b> This point must be an object with the x and y attributes (Point, Vector2, generic object, DisplayObject, etc.</p>
          */
-        public var tr:* ; 
+        public var tr:* ;
         
         /**
          * Indicates the vertical precision precision of the pen.
@@ -215,7 +214,7 @@ package graphics.drawing
         public function get vPrecision():uint 
         {
             return _vseg;
-        }         
+        }
         
         /**
          * @private
@@ -224,7 +223,7 @@ package graphics.drawing
         {
             _vseg = value ;
             init() ;
-        }  
+        }
         
         /**
          * Determinates the width of this distort pen.
@@ -233,7 +232,7 @@ package graphics.drawing
         {
             return _w;
         }
-
+        
         /**
          * @private
          */
@@ -242,7 +241,7 @@ package graphics.drawing
             _w = value ;
             init() ;
         }
-                
+        
         /**
          * Draws the shape and distorts the BitmapData according to the provided Point instances and draws it into the provided Graphics.
          * @param tl The position object specifying the coordinates of the top-left corner of the distortion.
@@ -259,7 +258,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
@@ -267,7 +266,6 @@ package graphics.drawing
         {
             if ( bl != null && br != null && tl != null && tr != null )
             {
-                                            
                 var dx30:Number = bl.x - tl.x ;
                 var dy30:Number = bl.y - tl.y ;
                 var dx21:Number = br.x - tr.x ;
@@ -320,8 +318,8 @@ package graphics.drawing
             {
                 bitmapData = args[4] as BitmapData ;
             }
-        }        
-
+        }
+        
         /**
          * Sets the precision of this distort pen instance and re-initializes the triangular grid.
          * @param hPrecision The horizontal precision.
@@ -333,7 +331,7 @@ package graphics.drawing
             _vseg = vPrecision ;
             init() ;
         }
-
+        
         /**
          * Sets the size of this pen and re-initializes the triangular grid.
          * @param width New width value.
@@ -350,67 +348,67 @@ package graphics.drawing
          * @private
          */
         protected var _h:Number ;
-
+        
         /**
          * @private
          */
         protected var _hseg:uint ;
-
+        
         /**
          * @private
          */
         protected var _hsLen:Number ;
-
+        
         /**
          * @private
          */
         protected var _p:Array;
-
+        
         /**
          * @private
          */
         protected var _sMat:Matrix ;
-
+        
         /**
          * @private
          */
         protected var _tMat:Matrix ;
-
+        
         /**
          * @private
          */
-        protected var _tri:Array;        
-
+        protected var _tri:Array;
+        
         /**
          * @private
          */
-        protected var _vseg:uint;        
-
+        protected var _vseg:uint;
+        
         /**
          * @private
          */
-        protected var _vsLen:Number;        
-
+        protected var _vsLen:Number;
+        
         /**
          * @private
          */
-        protected var _w:Number;        
-
+        protected var _w:Number;
+        
         /**
          * @private
          */
         protected var _xMin:Number ;
-
+        
         /**
          * @private
          */
         protected var _xMax:Number ;
-
+        
         /**
          * @private
          */
         protected var _yMin:Number ;
-
+        
         /**
          * @private
          */
@@ -421,7 +419,6 @@ package graphics.drawing
          */
         protected function init():void 
         {
-            
             var ix:Number;
             var iy:Number;
             var x:Number, y:Number;
@@ -468,12 +465,11 @@ package graphics.drawing
             var l:int = _tri.length;
             while( -- l > - 1 )
             {
-                
                 a = _tri[ l ];
                 p0 = a[0];
                 p1 = a[1];
                 p2 = a[2];
-
+                
                 var x0:Number = p0.sx;
                 var y0:Number = p0.sy;
                 var x1:Number = p1.sx;
@@ -486,7 +482,7 @@ package graphics.drawing
                 var v1:Number = p1.y;
                 var u2:Number = p2.x;
                 var v2:Number = p2.y;
-
+                
                 _tMat.tx = u0;
                 _tMat.ty = v0;
                 _tMat.a = ( u1 - u0 ) / _w ;
@@ -501,7 +497,7 @@ package graphics.drawing
                 _sMat.ty = y0;
                 _tMat.invert();
                 _tMat.concat( _sMat );
-
+                
                 graphics.beginBitmapFill( _bitmapData, _tMat , false , smoothing );
                 graphics.moveTo( x0, y0 );
                 graphics.lineTo( x1, y1 );
@@ -514,6 +510,5 @@ package graphics.drawing
          * @private
          */
         private var _bitmapData:BitmapData ;
-        
     }
 }

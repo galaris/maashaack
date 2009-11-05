@@ -46,7 +46,8 @@ package graphics.drawing
      *     import graphics.Align;
      *     import graphics.FillStyle;
      *     import graphics.LineStyle;
-     *     import graphics.drawing.Corner;
+     *     import graphics.Corner;
+     *     
      *     import graphics.drawing.RoundedComplexRectanglePen;
      *     
      *     import flash.display.CapsStyle;

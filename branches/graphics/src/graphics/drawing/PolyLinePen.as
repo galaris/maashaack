@@ -46,7 +46,7 @@ package graphics.drawing
      * import flash.geom.Point ;
      * 
      * import graphics.geom.Vector2 ;
-     * import graphics.drawing.FillStyle ;
+     * import graphics.FillStyle ;
      * import graphics.drawing.PolyLinePen ;
      * 
      * stage.align     = "tl" ;

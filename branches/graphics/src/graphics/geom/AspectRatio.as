@@ -38,7 +38,7 @@ package graphics.geom
     import system.Reflection;
     import system.numeric.Mathematics;
     import system.process.Lockable;
-
+    
     /**
      * The <code class="prettyprint">AspectRatio</code> class encapsulates the width and height of an object and indicates this aspect ratio.
      * <p>The aspect ratio of an image is the ratio of its width to its height. For example, a standard NTSC television set uses an aspect ratio of 4:3, and an HDTV set uses an aspect ratio of 16:9. A computer monitor with a resolution of 640 by 480 pixels also has an aspect ratio of 4:3. A square has an aspect ratio of 1:1.</p>
@@ -195,7 +195,7 @@ package graphics.geom
         
         /**
          * Locks the object.
-         */        
+         */
         public function lock():void
         {
             _lock = true ;

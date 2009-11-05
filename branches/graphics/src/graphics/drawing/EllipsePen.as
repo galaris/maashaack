@@ -45,7 +45,7 @@ package graphics.drawing
         /**
          * Creates a new ElipsePen instance.
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
-         * @param x (optional) A number indicating the horizontal position relative to the registration point of the parent display object (in pixels). .
+         * @param x (optional) A number indicating the horizontal position relative to the registration point of the parent display object (in pixels).
          * @param y (optional) A number indicating the vertical position relative to the registration point of the parent display.
          * @param width (optional) The width value of the elipse (in pixels). 
          * @param height (optional) The height of the ellipse (in pixels). 

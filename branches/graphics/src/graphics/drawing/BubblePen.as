@@ -37,11 +37,11 @@ package graphics.drawing
 {
     import graphics.Align;
     import graphics.geom.Vector2;
-
+    
     import system.hack;
-
+    
     import flash.geom.Rectangle;
-
+    
     /**
      * Draws a bubble shape with a custom alignment, offset, corner radius, arrow and size.
      * <p><b>Example :</b></p>
@@ -49,9 +49,10 @@ package graphics.drawing
      * package examples
      * {
      *     import graphics.Align;
-     *     import graphics.drawing.BubblePen;
      *     import graphics.FillStyle;
      *     import graphics.LineStyle;
+     *     
+     *     import graphics.drawing.BubblePen;
      *     
      *     import flash.display.Shape;
      *     import flash.display.Sprite;

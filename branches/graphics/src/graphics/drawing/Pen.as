@@ -38,7 +38,7 @@ package graphics.drawing
     import graphics.Align;
     import graphics.IFillStyle;
     import graphics.ILineStyle;
-    import graphics.IPen;
+    
     
     import system.Reflection;
     

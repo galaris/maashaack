@@ -33,8 +33,11 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics 
+package graphics.drawing 
 {
+	import graphics.ILineStyle;
+	import graphics.Drawable;
+	import graphics.IFillStyle;
     import flash.display.Graphics;
     
     /**
