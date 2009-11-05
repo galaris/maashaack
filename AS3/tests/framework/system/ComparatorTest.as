@@ -37,11 +37,10 @@ package system
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.samples.ComparatorClass;    
-
+    import system.samples.ComparatorClass;
+    
     public class ComparatorTest extends TestCase 
     {
-        
         public function ComparatorTest(name:String = "")
         {
             super( name );
@@ -62,7 +61,6 @@ package system
             assertEquals( c.compare(10,10,ComparatorClass.INVERSE) ,  0 , "05 - compare(10,10,true) method failed." ) ;
             assertEquals( c.compare(20,10,ComparatorClass.INVERSE) , -1 , "06 - compare(20,10,true) method failed." ) ;            
             
-        }        
-        
+        }
     }
 }
