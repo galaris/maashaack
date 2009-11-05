@@ -33,38 +33,18 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+package graphics.display
 {
     import buRRRn.ASTUce.framework.*;
     
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
-    
-    /**
-     * TestSuite that runs all the Maashaack graphics tests
-     */
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("graphics package tests");
+            var suite:TestSuite = new TestSuite("graphics.display package tests");
             
-            suite.addTest( graphics.colors.AllTests.suite() );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite() );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest         ) ;
-            suite.addTestSuite( CornerTest        ) ;
-            suite.addTestSuite( DirectionTest     ) ;
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
+            suite.addTestSuite( DisplayObjectContainersTest ) ;
+            // FIXME suite.addTestSuite( DisplayObjectsTest ) ;
             
             return suite;
         }
