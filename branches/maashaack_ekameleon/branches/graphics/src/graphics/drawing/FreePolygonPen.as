@@ -67,7 +67,7 @@ package graphics.drawing
         {
             throw new IllegalOperationError( this + " align property can't be use to align this free shape.") ;
         }
-
+        
         /**
          * The list of all flash.geom.Point or graphics.geom.Vector2 objects to draw the specified polygon.
          */
@@ -112,7 +112,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
@@ -133,7 +133,7 @@ package graphics.drawing
                 graphics.lineTo( _points[0].x, _points[0].y );
             }
         }
-    
+        
         /**
          * Sets the shape options to defined all values to draw the shape.
          * @param x (optional) The x position of the pen.
@@ -160,6 +160,4 @@ package graphics.drawing
         private var _points:Array = null ;
         
     }
-
-    
 }

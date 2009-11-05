@@ -41,7 +41,7 @@ package graphics
     import system.Serializable;
     
     /**
-     * Determinates the corner parameters in a CornerRectanglePen (Bevel, RoundedComplex, etc.)
+     * Determinates the corner definition.This object is use to set for example the CornerRectanglePen implementation (Bevel, RoundedComplex, etc.)
      */
     public class Corner implements Cloneable, Equatable, Serializable
     {

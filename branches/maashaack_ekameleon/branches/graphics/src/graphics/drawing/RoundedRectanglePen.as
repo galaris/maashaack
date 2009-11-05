@@ -45,10 +45,11 @@ package graphics.drawing
      * import flash.display.JointStyle ;
      * import flash.display.LineScaleMode ;
      * 
-     * import graphics.drawing.Align ;
+     * import graphics.Align ;
+     * import graphics.FillStyle ;
+     * import graphics.LineStyle ;
+     * 
      * import graphics.drawing.RoundedRectanglePen ;
-     * import graphics.drawing.FillStyle ;
-     * import graphics.drawing.LineStyle ;
      * 
      * stage.scaleMode = StageScaleMode.NO_SCALE ;
      * stage.align = "" ;

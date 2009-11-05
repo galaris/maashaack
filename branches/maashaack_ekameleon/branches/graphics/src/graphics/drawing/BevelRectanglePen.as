@@ -120,7 +120,7 @@ package graphics.drawing
                 if (_corner.br) 
                 {
                     graphics.lineTo( nW , nH - vb ) ;
-                    graphics.lineTo( nW - hb , nH) ;        
+                    graphics.lineTo( nW - hb , nH) ;
                 }
                 else 
                 {
@@ -178,11 +178,10 @@ package graphics.drawing
          * @private
          */
         private var _hBevel:Number ;
-
+        
         /**
          * @private
          */
         private var _vBevel:Number ;
     }
 }
-

@@ -44,10 +44,11 @@ package graphics.drawing
      * This pen draw a rectangle shape with a Graphics object.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import graphics.drawing.Align ;
+     * import graphics.Align ;
+     * import graphics.FillStyle ;
+     * import graphics.LineStyle ;
+     * 
      * import graphics.drawing.RectanglePen ;
-     * import graphics.drawing.FillStyle ;
-     * import graphics.drawing.LineStyle ;
      * 
      * stage.scaleMode = StageScaleMode.NO_SCALE ;
      * stage.align = "" ;
@@ -101,7 +102,7 @@ package graphics.drawing
          * Defines the width of the shape rectangle. 
          */
         public var width:Number ;
-
+        
         /**
          * Defines the x position of the shape rectangle. 
          */
@@ -128,7 +129,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-            
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */

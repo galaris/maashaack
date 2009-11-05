@@ -42,9 +42,10 @@ package graphics.drawing
      * This pen drawing a star shaped polygons. This pen draw stars in either direction for creating knockouts.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import graphics.drawing.Align ;
+     * import graphics.Align ;
+     * import graphics.FillStyle ;
+     * 
      * import graphics.drawing.StarPen ;
-     * import graphics.drawing.FillStyle ;
      * 
      * stage.scaleMode = StageScaleMode.NO_SCALE ;
      * stage.align = "" ;
@@ -139,7 +140,7 @@ package graphics.drawing
             super( graphic ) ;
             setPen( x, y, points, innerRadius, outerRadius, angle, align ) ;
         }
-
+        
         /**
          * Starting angle in degrees (default to 0).
          */
@@ -147,17 +148,17 @@ package graphics.drawing
         
         /**
          * The radius of the indent of the points
-          */
+         */
         public var innerRadius:Number ;
-
+        
         /**
          * The radius of the tips of the points
           */
         public var outerRadius:Number ;
-
+        
         /**
          * The number of points of the star. This value is always > 2.
-          */
+         */
         public function get points():uint
         {
             return _points ;
@@ -165,7 +166,7 @@ package graphics.drawing
         
         /**
          * The number of sides (Math.abs(sides) must be > 2)
-          */
+         */
         public function set points( i:uint ):void
         {
             _points = i > 2 ? i : 2 ;
@@ -198,7 +199,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
@@ -254,7 +255,7 @@ package graphics.drawing
                 var start:Number ;
                 var dx:Number ;
                 var dy:Number;
-
+                
                 var step:Number     = _PI2 / _points ;
                 var halfStep:Number = step / 2 ;
                 

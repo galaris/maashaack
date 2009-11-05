@@ -56,8 +56,13 @@ package graphics
             suite.addTest( graphics.geom.AllTests.suite() );
             suite.addTest( graphics.numeric.AllTests.suite() );
             
-            suite.addTestSuite( AlignTest   ) ;
-            suite.addTestSuite( CornerTest   ) ;
+            //// test class in this package
+            
+            suite.addTestSuite( AlignTest         ) ;
+            suite.addTestSuite( CornerTest        ) ;
+            suite.addTestSuite( DirectionTest     ) ;
+            suite.addTestSuite( DirectionableTest ) ;
+            suite.addTestSuite( DrawableTest      ) ;
             
             return suite;
         }

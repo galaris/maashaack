@@ -44,8 +44,8 @@ package graphics.drawing
      * <pre class="prettyprint">
      * package examples 
      * {
-     *     import graphics.drawing.Align;
-     *     import graphics.drawing.FillStyle;
+     *     import graphics.Align;
+     *     import graphics.FillStyle;
      *     import graphics.drawing.PolygonPen;
      *      
      *     import flash.display.Shape;

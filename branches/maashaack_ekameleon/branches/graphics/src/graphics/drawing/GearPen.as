@@ -31,9 +31,10 @@ package graphics.drawing
      * <pre class="prettyprint">
      * import flash.display.StageScaleMode ;
      * 
-     * import graphics.drawing.Align ;
+     * import graphics.Align ;
+     * import graphics.FillStyle ;
+     * 
      * import graphics.drawing.GearPen ;
-     * import graphics.drawing.FillStyle ;
      * 
      * stage.scaleMode = StageScaleMode.NO_SCALE ;
      * stage.align = "" ;

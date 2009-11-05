@@ -42,6 +42,7 @@ package graphics.drawing
      * import flash.display.StageScaleMode ;
      * 
      * import graphics.LineStyle ;
+     * 
      * import graphics.drawing.DashLinePen ;
      * 
      * import graphics.geom.Vector2 ;
