@@ -35,6 +35,7 @@
 
 package graphics.drawing 
 {
+	import graphics.ArcType;
     import graphics.Align;
     import graphics.LineStyle;
     import graphics.numeric.Trigo;

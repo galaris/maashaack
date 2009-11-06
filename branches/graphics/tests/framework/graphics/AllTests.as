@@ -61,6 +61,7 @@ package graphics
             //// test class in this package
             
             suite.addTestSuite( AlignTest         ) ;
+            suite.addTestSuite( ArcTypeTest       ) ;
             suite.addTestSuite( CornerTest        ) ;
             suite.addTestSuite( DirectionTest     ) ;
             suite.addTestSuite( DirectionableTest ) ;
