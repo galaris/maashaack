@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.drawing 
+package graphics 
 {
     /**
      * This static class register all types used to draw an Arc with the ArcPen tool.

@@ -43,7 +43,7 @@ package graphics.drawing
         {
             var suite:TestSuite = new TestSuite("graphics.drawing package tests");
             
-            suite.addTestSuite( ArcTypeTest ) ;
+            suite.addTestSuite( IPenTest ) ;
             
             return suite;
         }
