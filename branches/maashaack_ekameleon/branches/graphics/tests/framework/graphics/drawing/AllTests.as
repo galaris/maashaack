@@ -44,6 +44,7 @@ package graphics.drawing
             var suite:TestSuite = new TestSuite("graphics.drawing package tests");
             
             suite.addTestSuite( IPenTest ) ;
+            suite.addTestSuite( PenTest ) ;
             
             return suite;
         }

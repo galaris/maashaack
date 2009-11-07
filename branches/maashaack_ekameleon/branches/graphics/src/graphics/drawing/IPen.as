@@ -34,11 +34,10 @@
 */
 package graphics.drawing 
 {
-    import graphics.ILineStyle;
     import graphics.Drawable;
     import graphics.IFillStyle;
-    import flash.display.Graphics;
-    
+    import graphics.ILineStyle;
+
     /**
      * This interface defined the IPen implementation to creates shaped in Shape, Sprite and MovieClip objects.
      */
@@ -67,12 +66,12 @@ package graphics.drawing
         /**
          * Specifies the Graphics object belonging to this Shape object, where vector drawing commands can occur.
          */
-        function get graphics():Graphics ;
+        function get graphics():* ;
         
         /**
          * @private
          */
-        function set graphics( graphic:Graphics ):void ;
+        function set graphics( graphics:* ):void ;
         
         /**
          * Determinates the line style object of the pen.

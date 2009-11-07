@@ -73,12 +73,12 @@ package graphics.drawing.samples
             _fill = style ;
         }
         
-        public function get graphics():Graphics
+        public function get graphics():*
         {
             return _graphics ;
         }
         
-        public function set graphics(graphic:Graphics):void
+        public function set graphics( graphics:* ):void
         {
             _graphics = graphics ;
         }

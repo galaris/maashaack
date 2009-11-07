@@ -39,9 +39,6 @@ package graphics.drawing
     import graphics.IFillStyle;
     import graphics.ILineStyle;
     
-    
-    import system.Reflection;
-    
     import flash.display.Graphics;
     import flash.display.Shape;
     import flash.display.Sprite;
@@ -55,22 +52,11 @@ package graphics.drawing
     {
         /**
          * Creates a new Pen instance.
-         * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
+         * @param graphics The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
          */
-        public function Pen( graphic:* )
+        public function Pen( graphics:* = null )
         {
-            if ( graphic is Graphics )
-            {
-                this.graphics = graphic ;
-            }
-            else if ( graphic is Shape )
-            {
-                this.graphics = ( graphic as Shape ).graphics ;
-            }
-            else if ( graphic is Sprite )
-            {
-                this.graphics = ( graphic as Sprite ).graphics ;
-            }
+            this.graphics = graphics ;
         }
         
         /**
@@ -90,9 +76,10 @@ package graphics.drawing
         }
         
         /**
-         * Specifies the Graphics object belonging to this Shape object, where vector drawing commands can occur.
+         * Specifies the Graphics object belonging to this Shape object, where vector drawing commands can occur. 
+         * This attribute is always a Graphics reference but must be defines with a Shape, Sprite, MovieClip or Graphics object.
          */
-        public function get graphics():Graphics
+        public function get graphics():*
         {
             return _graphics ;
         }
@@ -100,13 +87,28 @@ package graphics.drawing
         /**
          * @private
          */
-        public function set graphics(graphic:Graphics):void
+        public function set graphics( graphics:* ):void
         {
             if ( _graphics != null )
             {
                 _graphics.clear() ;
             }
-            _graphics = graphic ;
+            if ( graphics is Graphics )
+            {
+                _graphics = graphics ;
+            }
+            else if ( graphics is Shape )
+            {
+                _graphics = ( graphics as Shape ).graphics ;
+            }
+            else if ( graphics is Sprite )
+            {
+                _graphics = ( graphics as Sprite ).graphics ;
+            }
+            else
+            {
+                _graphics = null ;
+            }
         }
         
         /**
@@ -170,7 +172,7 @@ package graphics.drawing
             if ( _graphics != null )
             {
                 methodName = methodName.toString() ;
-                if ( _graphics.hasOwnProperty( methodName ) )
+                if ( methodName in _graphics )
                 {
                     res = _graphics[methodName].apply(_graphics, rest);
                 }
@@ -288,15 +290,6 @@ package graphics.drawing
         public function drawShape():void
         {
             /// override this method
-        }
-        
-        /**
-         * Returns the string representation of this object.
-         * @return the string representation of this object.
-         */
-        public function toString():String 
-        {
-            return "[" + Reflection.getClassName(this) + "]" ;
         }
         
         /**
