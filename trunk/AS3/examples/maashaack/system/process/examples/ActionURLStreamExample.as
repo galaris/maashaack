@@ -35,27 +35,61 @@ the terms of any one of the MPL, the GPL or the LGPL.
 */
 package examples
 {
-    import system.eden;
+    import system.console;
     import system.events.ActionEvent;
-    import system.process.ActionURLLoader;
+    import system.process.ActionURLStream;
+    import system.ui.TextFieldConsole;
     
     import flash.display.Sprite;
-    import flash.net.URLLoader;
+    import flash.display.StageAlign;
+    import flash.display.StageScaleMode;
+    import flash.events.Event;
     import flash.net.URLRequest;
+    import flash.net.URLStream;
+    import flash.text.TextField;
+    import flash.text.TextFormat;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Basic example to use the system.process.ActionURLLoader process.
+    /*
+     * -default-size 740 480 -default-frame-rate 31 -default-background-color 0x666666 
+     * -define+=API::RT_0_2_5,false -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false -define+=API::FP_10_0,true 
+     * -target-player=10.0.0
      */
-    public class ActionURLLoaderExample extends Sprite
+    
+    /**
+     * Basic example to use the system.process.ActionURLStream process.
+     */
+    public class ActionURLStreamExample extends Sprite
     {
         
-        public function ActionURLLoaderExample()
+        public function ActionURLStreamExample()
         {
+            // init
+            
+            stage.align     = StageAlign.TOP_LEFT;
+            stage.scaleMode = StageScaleMode.NO_SCALE;
+            
+            textfield                   = new TextField() ;
+            textfield.defaultTextFormat = new TextFormat( "Courier New" , 14 , 0xFFFFFF ) ; 
+            textfield.multiline         = true ;
+            textfield.selectable        = true ;
+            textfield.wordWrap          = true ;
+                
+            addChild( textfield ) ;
+                
+            stage.addEventListener( Event.RESIZE , resize ) ;
+            resize() ;
+            
+            console = new TextFieldConsole( textfield ) ;
+            
+            // test
+            
             var url:String = "datas/config.eden" ;
-            var loader:URLLoader = new URLLoader() ;
-            var process:ActionURLLoader = new ActionURLLoader(loader) ;
+            
+            var loader:URLStream = new URLStream() ;
+            
+            var process:ActionURLStream = new ActionURLStream(loader) ;
             
             process.addEventListener(ActionEvent.START, start) ;
             process.addEventListener(ActionEvent.FINISH, finish) ;
@@ -66,18 +100,26 @@ package examples
         
         public function finish( e:ActionEvent ):void 
         {
-            trace(e) ;
-            var target:ActionURLLoader = e.target as ActionURLLoader ;
-            var data:*                 = eden.deserialize(target.data) ;
-            for (var prop:String in data)
-            {
-                trace("  > " + prop + " : " + data[prop]) ;
-            }
+            console.writeLine(e) ;
         }
         
         public function start( e:ActionEvent ):void 
         {
-            trace(e) ;
+            console.writeLine(e) ;
+        }
+        
+        /**
+         * The debug textfield of this application.
+         */
+        protected var textfield:TextField ;
+        
+        /**
+         * Invoked to resize the application content.
+         */
+        protected function resize( e:Event = null ):void
+        {
+            textfield.width  = stage.stageWidth ;
+            textfield.height = stage.stageHeight ;
         }
     }
 }
