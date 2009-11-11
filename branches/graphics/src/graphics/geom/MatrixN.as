@@ -41,7 +41,7 @@ package graphics.geom
     /**
      * Defines a <code class="prettyprint">Matrix</code> with n rows and n columns.
      */
-    public class Matrix implements Geometry
+    public class MatrixN implements Geometry
     {
         /**
          * Creates a new <code class="prettyprint">Matrix</code> instance.
@@ -49,7 +49,7 @@ package graphics.geom
          * @param c the number of columns in the matrix.
          * @param ar the optional Matrix instance to fill the current Matrix.
          */
-        public function Matrix( r:uint, c:uint , ar:Array=null )
+        public function MatrixN( r:uint, c:uint , ar:Array=null )
         {
             super();
             this.m = new Array(r);
@@ -64,7 +64,7 @@ package graphics.geom
         /**
          * Defined the number of columns in the Matrix.
          */
-        public var c:Number ;
+        public var c:uint ;
             
         /**
          * The matrix array
@@ -74,7 +74,7 @@ package graphics.geom
         /**
          * Defined the number of rows in the Matrix.
          */
-        public var r:Number ;
+        public var r:uint ;
         
         /**
          * Returns a shallow copy of this instance.
@@ -82,7 +82,7 @@ package graphics.geom
          */
         public function clone():*
         {
-            var matrix:Matrix = new Matrix(r, c) ;
+            var matrix:MatrixN = new MatrixN(r, c) ;
             // fill the matrix !!
             return matrix ;
         }
@@ -93,7 +93,7 @@ package graphics.geom
          */
         public function equals( o:* ):Boolean 
         {
-            if ( o is Matrix )
+            if ( o is MatrixN )
             {
                 // test if all elements are equals in the 2 matrix
                 return (o.r == r) && (o.c == c) ;
@@ -101,7 +101,36 @@ package graphics.geom
             else
             {
                 return false ;
-            }     
+            }
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if the MatrixN is the identity.
+         * @return <code class="prettyprint">true</code> if the MatrixN is the identity.
+         */
+        public function isIdentity():Boolean
+        {
+            for( var i:int ; i<r ; i++ )
+            {
+                for( var j:int ; j < c ; j++ )
+                {
+                    if( i == j ) 
+                    {
+                        if( m[i][j] !=1 )
+                        {
+                            return false ;
+                        }
+                    }
+                    else 
+                    {
+                        if( m[i][j] != 0 ) 
+                        {
+                            return false ;
+                        }
+                    }
+                }
+            }
+            return true ;
         }
         
         /**

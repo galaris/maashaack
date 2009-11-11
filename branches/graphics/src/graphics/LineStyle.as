@@ -35,8 +35,10 @@
 
 package graphics 
 {
+    import system.eden;
+
     import flash.display.Graphics;
-    
+
     /**
      * Defines the line style of the vector shapes. See the flash.display.graphics.lineStyle method.
      */
@@ -44,7 +46,7 @@ package graphics
     {
         /**
          * Creates a new LineStyle instance.
-         * @param thickness An integer that indicates the thickness of the line in points; valid values are 0 to 255. If a number is not specified, or if the parameter is undefined, a line is not drawn. If a value of less than 0 is passed, the default is 0. The value 0 indicates hairline thickness; the maximum thickness is 255. If a value greater than 255 is passed, the default is 255.
+         * @param thickness An integer that indicates the thickness of the line in points; valid values are 0 to 255. If a number is not specified, or if the parameter is NaN, a line is not drawn. If a value of less than 0 is passed, the default is 0. The value 0 indicates hairline thickness; the maximum thickness is 255. If a value greater than 255 is passed, the default is 255.
          * @param color (default = 0) A hexadecimal color value of the line; for example, red is 0xFF0000, blue is 0x0000FF, and so on. If a value is not indicated, the default is 0x000000 (black). Optional. 
          * @param alpha (default = 1.0) A number that indicates the alpha value of the color of the line; valid values are 0 to 1. If a value is not indicated, the default is 1 (solid). If the value is less than 0, the default is 0. If the value is greater than 1, the default is 1. 
          * @param pixelHinting (default = false) A Boolean value that specifies whether to hint strokes to full pixels. This affects both the position of anchors of a curve and the line stroke size itself. With pixelHinting set to true, Flash Player hints line widths to full pixel widths. With pixelHinting set to false, disjoints can appear for curves and straight lines. 
@@ -56,7 +58,7 @@ package graphics
          * @param joints (default = null) — A value from the JointStyle class that specifies the type of joint appearance used at angles. Valid values are: JointStyle.BEVEL, JointStyle.MITER, and JointStyle.ROUND. If a value is not indicated, Flash uses round joints. 
          * @param miterLimit (default = 3) — A number that indicates the limit at which a miter is cut off. Valid values range from 1 to 255 (and values outside of that range are rounded to 1 or 255). This value is only used if the jointStyle is set to "miter". The miterLimit value represents the length that a miter can extend beyond the point at which the lines meet to form a joint. The value expresses a factor of the line thickness. For example, with a miterLimit factor of 2.5 and a thickness of 10 pixels, the miter is cut off at 25 pixels. 
          */
-        public function LineStyle( thickness:Number , color:uint = 0, alpha:Number = 1.0, pixelHinting:Boolean = false, scaleMode:String = "normal", caps:String = null, joints:String = null, miterLimit:Number = 3 )
+        public function LineStyle( thickness:Number = NaN , color:uint = 0, alpha:Number = 1.0, pixelHinting:Boolean = false, scaleMode:String = "normal", caps:String = null, joints:String = null, miterLimit:Number = 3 )
         {
             this.thickness    = thickness;
             this.color        = color;
@@ -71,7 +73,7 @@ package graphics
         /**
          * The empty LineStyle singleton.
          */
-        public static var EMPTY:LineStyle = new LineStyle( NaN ) ;
+        public static const EMPTY:LineStyle = new LineStyle() ;
         
         /**
          * A number that indicates the alpha value of the color of the line; valid values are 0 to 1. 
@@ -157,7 +159,7 @@ package graphics
             var s:LineStyle = o as LineStyle ;
             if ( s )
             {
-                return thickness    == s.thickness
+                return isNaN(thickness) ? isNaN(s.thickness) : ( thickness == s.thickness ) 
                     && color        == s.color
                     && alpha        == s.alpha
                     && pixelHinting == s.pixelHinting
@@ -170,6 +172,25 @@ package graphics
             {
                 return false ;
             }
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource(indent:int = 0):String
+        {
+            var source:String = "new graphics.LineStyle("
+                              + eden.serialize( thickness )    + "," 
+                              + eden.serialize( color )        + "," 
+                              + eden.serialize( alpha )        + "," 
+                              + eden.serialize( pixelHinting ) + "," 
+                              + eden.serialize( scaleMode )    + "," 
+                              + eden.serialize( caps )         + ","
+                              + eden.serialize( joints )       + ","
+                              + eden.serialize( miterLimit )   
+                              + ")" ;
+            return source ;
         }
     }
 }
