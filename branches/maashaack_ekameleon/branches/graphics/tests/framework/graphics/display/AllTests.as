@@ -46,6 +46,9 @@ package graphics.display
             suite.addTestSuite( DisplayObjectContainersTest ) ;
             // FIXME suite.addTestSuite( DisplayObjectsTest ) ;
             
+            suite.addTestSuite( PatternTest ) ;
+            suite.addTestSuite( PerlinNoiseTest ) ;
+            
             return suite;
         }
     }
