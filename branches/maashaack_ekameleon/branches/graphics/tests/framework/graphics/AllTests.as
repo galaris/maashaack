@@ -36,13 +36,13 @@
 package graphics
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     import graphics.colors.AllTests;
     import graphics.display.AllTests;
     import graphics.drawing.AllTests;
     import graphics.geom.AllTests;
     import graphics.numeric.AllTests;
-    
+
     /**
      * TestSuite that runs all the Maashaack graphics tests
      */
@@ -58,14 +58,19 @@ package graphics
             suite.addTest( graphics.geom.AllTests.suite() );
             suite.addTest( graphics.numeric.AllTests.suite() );
             
+            //// test interfaces in this package
+            
+            suite.addTestSuite( DirectionableTest ) ;
+            suite.addTestSuite( DrawableTest      ) ;
+            suite.addTestSuite( IFillStyleTest    ) ;
+            suite.addTestSuite( ILineStyleTest    ) ;
+            
             //// test class in this package
             
             suite.addTestSuite( AlignTest         ) ;
             suite.addTestSuite( ArcTypeTest       ) ;
             suite.addTestSuite( CornerTest        ) ;
             suite.addTestSuite( DirectionTest     ) ;
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
             suite.addTestSuite( LineStyleTest     ) ;
             
             return suite;

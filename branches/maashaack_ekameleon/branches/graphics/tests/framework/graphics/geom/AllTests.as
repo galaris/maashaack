@@ -47,7 +47,7 @@ package graphics.geom
             suite.addTestSuite( AspectRatioTest ) ;
             suite.addTestSuite( DimensionTest ) ;
             suite.addTestSuite( EdgeMetricsTest ) ;
-            suite.addTestSuite( MatrixTest ) ;
+            suite.addTestSuite( MatrixsTest ) ;
             suite.addTestSuite( Matrix2Test ) ;
             suite.addTestSuite( Matrix4Test ) ;
             suite.addTestSuite( PlaneTest ) ;

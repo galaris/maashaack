@@ -39,10 +39,9 @@ package graphics.geom
     
     import flash.geom.Matrix;
     
-    public class MatrixTest extends TestCase 
+    public class MatrixsTest extends TestCase 
     {
-        
-        public function MatrixTest(name:String = "")
+        public function MatrixsTest(name:String = "")
         {
             super( name );
         }
@@ -62,6 +61,11 @@ package graphics.geom
         public function testToSource():void
         {
             assertEquals( Matrixs.toSource( matrix ), "new flash.geom.Matrix(1,0,0,1,0,0)" ) ;
+        }
+        
+        public function testToSourceWithNullArgument():void
+        {
+            assertEquals( Matrixs.toSource( null ), "null" ) ;
         }
     }
  

@@ -41,14 +41,24 @@ package graphics.samples
     
     public class IFillStyleClass implements IFillStyle 
     {
+        public function apply(graphics:Graphics):void
+        {
+            throw new Error( "apply : " + graphics ) ;
+        }
+        
         public function clone():*
         {
             return new IFillStyleClass() ;
         }
         
-        public function apply(graphic:Graphics):void
+        public function equals(o:*):Boolean
         {
-            throw new Error( "apply : " + graphic ) ;
+            return o is IFillStyleClass ;
+        }
+        
+        public function toSource(indent:int = 0):String
+        {
+            return "new graphics.example.IFillStyleClass()" ;
         }
     }
 }

@@ -134,7 +134,7 @@ package graphics
         public var thickness:Number;
         
         /**
-         * Initialize and launch the lineStyle method of the specified Graphics reference.
+         * Initialize the line settings of the specified Graphics reference.
          */
         public function apply( graphic:Graphics ):void
         {
