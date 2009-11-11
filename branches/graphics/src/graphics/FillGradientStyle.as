@@ -35,9 +35,13 @@
 
 package graphics 
 {
+    import graphics.geom.Matrixs;
+
+    import system.eden;
+
     import flash.display.Graphics;
     import flash.geom.Matrix;
-    
+
     /**
      * Defines the fill style of the vector shapes. See the flash.display.graphics.beginGradientFill method.
      */
@@ -118,6 +122,14 @@ package graphics
         public var type:String ;
         
         /**
+         * Initialize and launch the beginGradientFill method of the specified Graphics reference.
+         */
+        public function apply( graphics:Graphics ):void
+        {
+            graphics.beginGradientFill( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio );
+        }
+        
+        /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
          */    
@@ -126,12 +138,48 @@ package graphics
             return new FillGradientStyle( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio ) ;
         }
         
+        
         /**
-         * Initialize and launch the beginGradientFill method of the specified Graphics reference.
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
          */
-        public function apply( graphic:Graphics ):void
+        public function equals( o:* ):Boolean
         {
-            graphic.beginGradientFill( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio );
+            var s:FillGradientStyle = o as FillGradientStyle ;
+            if ( s )
+            {
+                return type                == s.type
+                    && colors              == s.colors 
+                    && alphas              == s.alphas
+                    && ratios              == s.ratios
+                    && matrix              == s.matrix
+                    && spreadMethod        == s.spreadMethod
+                    && interpolationMethod == s.interpolationMethod
+                    && focalPointRatio     == s.focalPointRatio ;
+            }
+            else
+            {
+                return false ;
+            }
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource(indent:int = 0):String
+        {
+            var source:String = "new graphics.FillGradientStyle("
+                              + eden.serialize( type ) + ","
+                              + eden.serialize( colors ) + ","
+                              + eden.serialize( alphas ) + ","
+                              + eden.serialize( ratios ) + ","
+                              + Matrixs.toSource( matrix ) + ","
+                              + eden.serialize( spreadMethod ) + ","
+                              + eden.serialize( interpolationMethod ) + ","
+                              + eden.serialize( focalPointRatio )
+                              + ")" ;
+            return source ;
         }
     }
 }

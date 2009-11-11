@@ -35,10 +35,14 @@
 
 package graphics 
 {
+    import graphics.geom.Matrixs;
+
+    import system.eden;
+
     import flash.display.BitmapData;
     import flash.display.Graphics;
     import flash.geom.Matrix;
-    
+
     /**
      * Defines the fill style of the vector shapes. See the flash.display.graphics.beginBitmapFill method.
      */
@@ -81,6 +85,14 @@ package graphics
         public var smooth:Boolean ;
         
         /**
+         * Initialize and launch the beginBitmapFill method of the specified Graphics reference.
+         */
+        public function apply( graphics:Graphics ):void
+        {
+            graphics.beginBitmapFill( bitmap , matrix , repeat , smooth );
+        }
+        
+        /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
          */
@@ -90,11 +102,38 @@ package graphics
         }
         
         /**
-         * Initialize and launch the beginBitmapFill method of the specified Graphics reference.
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
          */
-        public function apply( graphic:Graphics ):void
+        public function equals( o:* ):Boolean
         {
-            graphic.beginBitmapFill( bitmap , matrix , repeat , smooth );
+            var s:FillBitmapStyle = o as FillBitmapStyle ;
+            if ( s )
+            {
+                return bitmap == s.bitmap
+                    && matrix == s.matrix
+                    && repeat == s.repeat
+                    && smooth == s.smooth ;
+            }
+            else
+            {
+                return false ;
+            }
+        }
+        
+        /**
+         * Returns the source code string representation of the object. 
+         * This method is not complete we can't serialize a BitmapData object, in the constructor of the source representation this value is always "null".
+         * @return the source code string representation of the object.
+         */
+        public function toSource(indent:int = 0):String
+        {
+            var source:String = "new graphics.FillBitmapStyle(null,"
+                              + Matrixs.toSource( matrix ) + ","
+                              + eden.serialize( repeat ) + ","
+                              + eden.serialize( smooth ) 
+                              + ")" ;
+            return source ;
         }
     }
 

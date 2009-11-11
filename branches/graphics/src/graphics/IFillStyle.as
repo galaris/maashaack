@@ -35,18 +35,18 @@
 
 package graphics 
 {
-    import system.Cloneable;
+    import graphics.geom.Geometry;
     
     import flash.display.Graphics;
     
     /**
      * This interface provides basic implementation to create fill setting helper in the IPen objects.
      */
-    public interface IFillStyle extends Cloneable
+    public interface IFillStyle extends Geometry
     {
         /**
          * Initialize the fill settings of the specified Graphics reference.
          */
-        function apply( graphic:Graphics ):void ;
+        function apply( graphics:Graphics ):void ;
     }
 }

@@ -35,45 +35,45 @@
 
 package graphics 
 {
+    import graphics.geom.Matrixs;
+    
     import flash.display.Graphics;
+    import flash.display.Shader;
+    import flash.geom.Matrix;
     
     /**
-     * Defines the fill style of the vector shapes. See the flash.display.graphics.beginFill method.
+     * Defines the fill style of the vector shapes. See the Graphics.beginShaderStyle method.
+     * @since Flash Player 10, AIR 1.5
      */
-    public class FillStyle implements IFillStyle
+    public class FillShaderStyle implements IFillStyle
     {
         /**
-         * Creates a new FillStyle instance.
-         * @param color The color value of the fill style.
-         * @param alpha The alpha value of the fill style.
+         * Creates a new FillShaderStyle instance.
+         * @param shader The shader to use for the fill.
+         * @param matrix An optional transformation matrix as defined by the flash.geom.Matrix class. The matrix can be used to scale or otherwise manipulate the bitmap before applying it to the fill style.
          */
-        public function FillStyle( color:uint, alpha:Number = 1.0 )
+        public function FillShaderStyle( shader:Shader = null , matrix:Matrix = null )
         {
-            this.alpha = alpha ;
-            this.color = color ;
+            this.shader = shader ;
+            this.matrix = matrix ;
         }
         
         /**
-         * The empty FillStyle singleton.
+         * An optional transformation matrix as defined by the flash.geom.Matrix class. The matrix can be used to scale or otherwise manipulate the bitmap before applying it to the line style.
          */
-        public static var EMPTY:FillStyle = new FillStyle( 0 ) ;
+        public var matrix:Matrix ;
         
         /**
-         * The alpha value of the fill style.
+         * The shader to use for the line stroke.
          */
-        public var alpha:Number;
-        
-        /**
-         * The color value of the fill style.
-         */
-        public var color:uint;
+        public var shader:Shader;
         
         /**
          * Initialize and launch the beginFill method of the specified Graphics reference.
          */
         public function apply( graphics:Graphics ):void
         {
-            graphics.beginFill( color, alpha );
+            graphics.beginShaderFill( shader , matrix );
         }
         
         /**
@@ -82,7 +82,7 @@ package graphics
          */
         public function clone():* 
         {
-            return new FillStyle( color , alpha ) ;
+            return new FillShaderStyle( shader , matrix ) ;
         }
         
         /**
@@ -91,11 +91,10 @@ package graphics
          */
         public function equals( o:* ):Boolean
         {
-            var s:FillStyle = o as FillStyle ;
+            var s:FillShaderStyle = o as FillShaderStyle ;
             if ( s )
             {
-                return color == s.color
-                    && alpha == s.alpha ;
+                return (shader == s.shader) && (matrix == s.matrix) ;
             }
             else
             {
@@ -109,9 +108,8 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new graphics.FillStyle("
-                              + color.toString() + "," 
-                              + alpha.toString() 
+            var source:String = "new graphics.FillShaderStyle(null"
+                              + Matrixs.toSource( matrix ) 
                               + ")" ;
             return source ;
         }

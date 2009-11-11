@@ -35,10 +35,8 @@
 
 package graphics.geom 
 {
-    import system.eden;
-    
     import flash.geom.Matrix;
-    
+            
     /**
      * Static tool class to manipulate and transform <code class="prettyprint">flash.geom.Matrix</code> instances.
      */
@@ -50,13 +48,17 @@ package graphics.geom
          */
         public static function toSource( matrix:Matrix ):String
         {
+            if ( matrix == null )
+            {
+                return "null" ;
+            }
             var source:String = "new flash.geom.Matrix("
-                              + eden.serialize( matrix.a )  + "," 
-                              + eden.serialize( matrix.b )  + "," 
-                              + eden.serialize( matrix.c )  + "," 
-                              + eden.serialize( matrix.d )  + "," 
-                              + eden.serialize( matrix.tx ) + ","
-                              + eden.serialize( matrix.ty ) 
+                              + String( matrix.a )  + "," 
+                              + String( matrix.b )  + "," 
+                              + String( matrix.c )  + "," 
+                              + String( matrix.d )  + "," 
+                              + String( matrix.tx ) + ","
+                              + String( matrix.ty ) 
                               + ")" ;
             return source ;
         }
