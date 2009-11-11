@@ -58,27 +58,29 @@ package graphics.geom
         
         public function testConstructor():void
         {
-            assertNotNull( d, "DIM_00_01 - constructor is null") ;
-            assertTrue( d is Dimension, "DIM_00_02 - constructor is an instance of Dimension.") ;
-            
-            var d1:Dimension = new Dimension() ;
-            assertEquals( d1.width  , 0 , "DIM_00_03_01 - constructor failed with 0 argument : " + d1) ;
-            assertEquals( d1.height , 0 , "DIM_00_03_02 - constructor failed with 0 argument : " + d1) ;
-            
-            var d2:Dimension = new Dimension( d ) ;
-            assertEquals( d2.width  , 100, "DIM_00_03_03 - constructor failed with a Dimension argument : " + d2) ;
-            assertEquals( d2.height , 200, "DIM_00_03_04 - constructor failed with a Dimension argument : " + d2) ;
-            
-            var d3:Dimension = new Dimension( 50 , 60 ) ;
-            assertEquals( d3.width  , 50, "DIM_00_03_05 - constructor failed with a width value in the first argument : " + d3) ;
-            assertEquals( d3.height , 60, "DIM_00_03_06 - constructor failed with a height value in the second argument : " + d3) ;
-            
+            var dim:Dimension = new Dimension() ;
+            assertEquals( dim.width  , 0 , "01 - failed" ) ;
+            assertEquals( dim.height , 0 , "02 - failed") ;
+        }
+        
+        public function testConstructorWithDimensionArgument():void
+        {
+            var dim:Dimension = new Dimension( d ) ;
+            assertEquals( dim.width  , 100, "01 - failed with a Dimension argument.") ;
+            assertEquals( dim.height , 200, "02 - failed with a Dimension argument.") ;
+        }
+        
+        public function testConstructorWithWidthHeightArguments():void
+        {
+            var dim:Dimension = new Dimension( 50 , 60 ) ;
+            assertEquals( dim.width  , 50, "failed with a width value in the first argument.") ;
+            assertEquals( dim.height , 60, "failed with a height value in the second argument.") ;
         }
         
         public function testInterface():void
         {
-            assertTrue( d is Geometry  , "DIM_02 - implements Geometry failed.") ;
-        }   
+            assertTrue( d is Geometry  , "implements Geometry failed.") ;
+        }
         
         public function testToSource():void
         {

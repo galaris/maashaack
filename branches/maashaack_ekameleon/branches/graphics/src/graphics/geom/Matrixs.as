@@ -35,42 +35,30 @@
 
 package graphics.geom 
 {
+    import system.eden;
+    
+    import flash.geom.Matrix;
+    
     /**
-     * Static tool class to manipulate and transform <code class="prettyprint">Matrix</code> references.
+     * Static tool class to manipulate and transform <code class="prettyprint">flash.geom.Matrix</code> instances.
      */
-    public class Matrixs 
+    public final class Matrixs 
     {
-        
         /**
-         * Returns <code class="prettyprint">true</code> if the Matrix is the identity.
-         * @return <code class="prettyprint">true</code> if the Matrix is the identity.
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
          */
-        public static function isIdentity( m:Matrix ):Boolean
+        public static function toSource( matrix:Matrix ):String
         {
-            var r:Number = m.r ;
-            var c:Number = m.c ;
-            for( var i:Number = 0 ; i<r ; i++ )
-            {
-                for( var j:Number = 0; j < c ; j++ )
-                {
-                    if( i == j ) 
-                    {
-                        if( m[i][j] !=1 )
-                        {
-                            return false ;
-                        }
-                    }
-                    else 
-                    {
-                        if( m[i][j] != 0 ) 
-                        {
-                            return false ;
-                        }
-                    }
-                }
-            }
-            return true ;
+            var source:String = "new flash.geom.Matrix("
+                              + eden.serialize( matrix.a )  + "," 
+                              + eden.serialize( matrix.b )  + "," 
+                              + eden.serialize( matrix.c )  + "," 
+                              + eden.serialize( matrix.d )  + "," 
+                              + eden.serialize( matrix.tx ) + ","
+                              + eden.serialize( matrix.ty ) 
+                              + ")" ;
+            return source ;
         }
-        
     }
 }

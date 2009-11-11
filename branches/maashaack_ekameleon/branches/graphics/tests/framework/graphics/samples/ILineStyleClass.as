@@ -36,14 +36,14 @@
 package graphics.samples 
 {
     import graphics.ILineStyle;
-
+    
     import flash.display.Graphics;
-
+    
     public class ILineStyleClass implements ILineStyle 
     {
         public function ILineStyleClass()
         {
-            
+            //
         }
         
         public function apply(graphic:Graphics):void
@@ -59,6 +59,11 @@ package graphics.samples
         public function equals(o:*):Boolean
         {
             return o is ILineStyleClass ;
+        }
+        
+        public function toSource(indent:int = 0):String
+        {
+            return "new graphics.example.ILineStyleClass()" ;
         }
     }
 }

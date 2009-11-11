@@ -33,20 +33,36 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics 
+package graphics.geom 
 {
-    import graphics.geom.Geometry;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import flash.display.Graphics;
+    import flash.geom.Matrix;
     
-    /**
-     * This interface provides basic implementation to create line setting helper in the IPen objects.
-     */
-    public interface ILineStyle extends Geometry
+    public class MatrixTest extends TestCase 
     {
-        /**
-         * Initialize the line settings of the specified Graphics reference.
-         */
-        function apply( graphic:Graphics ):void ;
+        
+        public function MatrixTest(name:String = "")
+        {
+            super( name );
+        }
+        
+        public var matrix:Matrix;
+        
+        public function setUp():void
+        {
+            matrix = new Matrix() ;
+        }
+        
+        public function tearDown():void
+        {
+            matrix = null ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( Matrixs.toSource( matrix ), "new flash.geom.Matrix(1,0,0,1,0,0)" ) ;
+        }
     }
+ 
 }

@@ -34,9 +34,12 @@
 */
 package graphics 
 {
-	import flash.display.JointStyle;
-	import flash.display.CapsStyle;
     import buRRRn.ASTUce.framework.TestCase;
+
+    import graphics.geom.Geometry;
+
+    import flash.display.CapsStyle;
+    import flash.display.JointStyle;
 
     public class LineStyleTest extends TestCase 
     {
@@ -49,7 +52,7 @@ package graphics
         
         public function setUp():void
         {
-            style = new LineStyle(0,0xFFFFFF,0.5,true,"normal",CapsStyle.ROUND ,JointStyle.BEVEL,2) ;
+            style = new LineStyle(0,0xFFFFFF,0.5,true,"normal", CapsStyle.ROUND ,JointStyle.BEVEL,2) ;
         }
         
         public function tearDown():void
@@ -65,18 +68,12 @@ package graphics
         public function testInterface():void
         {
             assertTrue( style is ILineStyle ) ;
+            assertTrue( style is Geometry   ) ;
         }
         
         public function testEMTPY():void
         {
-            assertEquals( LineStyle.EMPTY.thickness    ,      NaN , "01 - EMPTY.thickness failed." ) ;
-            assertEquals( LineStyle.EMPTY.color        ,        0 , "02 - EMPTY.color failed." ) ;
-            assertEquals( LineStyle.EMPTY.alpha        ,        1 , "03 - EMPTY.alpha failed." ) ;
-            assertEquals( LineStyle.EMPTY.pixelHinting ,    false , "04 - EMPTY.pixelHinting failed." ) ;
-            assertEquals( LineStyle.EMPTY.scaleMode    , "normal" , "05 - EMPTY.scaleMode failed." ) ;
-            assertEquals( LineStyle.EMPTY.caps         ,     null , "06 - EMPTY.caps failed." ) ;
-            assertEquals( LineStyle.EMPTY.joints       ,     null , "07 - EMPTY.joints failed." ) ;
-            assertEquals( LineStyle.EMPTY.miterLimit   ,        3 , "08 - EMPTY.miterLimit failed." ) ;
+           assertEquals( LineStyle.EMPTY , new LineStyle() ) ;
         }
         
         public function testClone():void
@@ -89,6 +86,53 @@ package graphics
         public function testEquals():void
         {
             assertEquals( style , new LineStyle(0,0xFFFFFF,0.5,true,"normal",CapsStyle.ROUND ,JointStyle.BEVEL,2) ) ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( style.toSource() , 'new graphics.LineStyle(0,16777215,0.5,true,"normal","round","bevel",2)' ) ;
+        }
+        
+        public function testAlpha():void
+        {
+            assertEquals( style.alpha , 0.5 , "alpha failed." ) ;
+        }
+        
+        public function testCaps():void
+        {
+            assertEquals( style.caps , CapsStyle.ROUND , "caps failed." ) ;
+        }
+        
+        public function testColor():void
+        {
+            assertEquals( style.color , 0xFFFFFF , "color failed." ) ;
+        }
+        
+        public function testJoins():void
+        {
+            assertEquals( style.joints , JointStyle.BEVEL , "joints failed." ) ;
+        }
+        
+        public function testMiterLimit():void
+        {
+            assertEquals( style.miterLimit , 2 , "miterLimit failed." ) ;
+        }
+        
+        public function testPixelHinting():void
+        {
+            assertEquals( style.pixelHinting , true , "pixelHinting failed." ) ;
+        }
+        
+        public function testScaleMode():void
+        {
+            assertEquals( style.scaleMode , "normal" , "scaleMode failed." ) ;
+        }
+        
+        public function testThickness():void
+        {
+            assertEquals( style.thickness , 0 , "thickness failed." ) ;
+            style.thickness = 10 ;
+            assertEquals( style.thickness , 10 , "thickness failed." ) ;
         }
     }
 }

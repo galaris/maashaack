@@ -35,9 +35,13 @@
 
 package graphics 
 {
+    import graphics.geom.Matrixs;
+
+    import system.eden;
+
     import flash.display.Graphics;
     import flash.geom.Matrix;
-    
+
     /**
      * Defines the line style of the vector shapes with the flash.display.graphics.lineGradientStyle method.
      */
@@ -143,7 +147,7 @@ package graphics
             if ( s )
             {
                 return type                == s.type
-                    && type                == s.type
+                    && colors              == s.colors
                     && alphas              == s.alphas
                     && ratios              == s.ratios
                     && matrix              == s.matrix
@@ -155,6 +159,25 @@ package graphics
             {
                 return false ;
             }
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource(indent:int = 0):String
+        {
+            var source:String = "new graphics.LineGradientStyle("
+                              + eden.serialize( type )   + "," 
+                              + eden.serialize( colors ) + "," 
+                              + eden.serialize( alphas ) + "," 
+                              + eden.serialize( ratios ) + "," 
+                              + Matrixs.toSource( matrix ) + ","
+                              + eden.serialize( spreadMethod ) + ","
+                              + eden.serialize( interpolationMethod ) + ","
+                              + eden.serialize( focalPointRatio )
+                              + ")" ;
+            return source ;
         }
     }
 }
