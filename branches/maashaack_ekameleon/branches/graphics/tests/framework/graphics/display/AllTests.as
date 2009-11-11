@@ -36,7 +36,7 @@
 package graphics.display
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     public class AllTests
     {
         public static function suite():ITest
@@ -48,6 +48,7 @@ package graphics.display
             
             suite.addTestSuite( PatternTest ) ;
             suite.addTestSuite( PerlinNoiseTest ) ;
+            suite.addTestSuite( ReflectionBitmapDataTest ) ;
             
             return suite;
         }
