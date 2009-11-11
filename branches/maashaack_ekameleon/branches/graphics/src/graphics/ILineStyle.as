@@ -36,13 +36,14 @@
 package graphics 
 {
     import system.Cloneable;
+    import system.Equatable;
     
     import flash.display.Graphics;
     
     /**
      * This interface provides basic implementation to create line setting helper in the IPen objects.
      */
-    public interface ILineStyle extends Cloneable 
+    public interface ILineStyle extends Cloneable, Equatable
     {
         /**
          * Initialize the line settings of the specified Graphics reference.

@@ -66,6 +66,7 @@ package graphics
             suite.addTestSuite( DirectionTest     ) ;
             suite.addTestSuite( DirectionableTest ) ;
             suite.addTestSuite( DrawableTest      ) ;
+            suite.addTestSuite( LineStyleTest     ) ;
             
             return suite;
         }

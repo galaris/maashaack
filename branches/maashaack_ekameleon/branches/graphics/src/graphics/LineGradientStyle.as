@@ -132,5 +132,29 @@ package graphics
         {
             return new LineGradientStyle( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio ) ;
         }
+        
+        /**
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
+         */
+        public function equals( o:* ):Boolean
+        {
+            var s:LineGradientStyle = o as LineGradientStyle ;
+            if ( s )
+            {
+                return type                == s.type
+                    && type                == s.type
+                    && alphas              == s.alphas
+                    && ratios              == s.ratios
+                    && matrix              == s.matrix
+                    && spreadMethod        == s.spreadMethod
+                    && interpolationMethod == s.interpolationMethod
+                    && focalPointRatio     == s.focalPointRatio ;
+            }
+            else
+            {
+                return false ;
+            }
+        }
     }
 }
