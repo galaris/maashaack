@@ -71,7 +71,7 @@ package graphics
         /**
          * The empty LineStyle singleton.
          */
-        public static var EMPTY:LineStyle = new LineStyle( undefined ) ;
+        public static var EMPTY:LineStyle = new LineStyle( NaN ) ;
         
         /**
          * A number that indicates the alpha value of the color of the line; valid values are 0 to 1. 
@@ -146,6 +146,30 @@ package graphics
         public function clone():* 
         {
             return new LineStyle( thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit ) ;
+        }
+        
+        /**
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
+         */
+        public function equals( o:* ):Boolean
+        {
+            var s:LineStyle = o as LineStyle ;
+            if ( s )
+            {
+                return thickness    == s.thickness
+                    && color        == s.color
+                    && alpha        == s.alpha
+                    && pixelHinting == s.pixelHinting
+                    && scaleMode    == s.scaleMode
+                    && caps         == s.caps
+                    && joints       == s.joints
+                    && miterLimit   == s.miterLimit ;
+            }
+            else
+            {
+                return false ;
+            }
         }
     }
 }

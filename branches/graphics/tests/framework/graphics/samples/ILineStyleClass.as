@@ -36,19 +36,29 @@
 package graphics.samples 
 {
     import graphics.ILineStyle;
-    
+
     import flash.display.Graphics;
-    
+
     public class ILineStyleClass implements ILineStyle 
     {
-        public function clone():*
+        public function ILineStyleClass()
         {
-            return new ILineStyleClass() ;
+            
         }
         
         public function apply(graphic:Graphics):void
         {
             throw new Error( "apply : " + graphic ) ;
+        }
+        
+        public function clone():*
+        {
+            return new ILineStyleClass() ;
+        }
+        
+        public function equals(o:*):Boolean
+        {
+            return o is ILineStyleClass ;
         }
     }
 }
