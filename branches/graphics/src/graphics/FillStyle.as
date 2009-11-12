@@ -71,9 +71,9 @@ package graphics
         /**
          * Initialize and launch the beginFill method of the specified Graphics reference.
          */
-        public function apply( graphics:Graphics ):void
+        public function apply( graphic:Graphics ):void
         {
-            graphics.beginFill( color, alpha );
+            graphic.beginFill( color, alpha );
         }
         
         /**
