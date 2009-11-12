@@ -124,9 +124,9 @@ package graphics
         /**
          * Initialize and launch the beginGradientFill method of the specified Graphics reference.
          */
-        public function apply( graphics:Graphics ):void
+        public function apply( graphic:Graphics ):void
         {
-            graphics.beginGradientFill( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio );
+            graphic.beginGradientFill( type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio );
         }
         
         /**

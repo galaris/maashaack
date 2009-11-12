@@ -87,9 +87,9 @@ package graphics
         /**
          * Initialize and launch the beginBitmapFill method of the specified Graphics reference.
          */
-        public function apply( graphics:Graphics ):void
+        public function apply( graphic:Graphics ):void
         {
-            graphics.beginBitmapFill( bitmap , matrix , repeat , smooth );
+            graphic.beginBitmapFill( bitmap , matrix , repeat , smooth );
         }
         
         /**

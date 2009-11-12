@@ -47,6 +47,6 @@ package graphics
         /**
          * Initialize the fill settings of the specified Graphics reference.
          */
-        function apply( graphics:Graphics ):void ;
+        function apply( graphic:Graphics ):void ;
     }
 }

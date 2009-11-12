@@ -73,7 +73,7 @@ package graphics
          */
         public function apply( graphic:Graphics ):void
         {
-            graphic.lineShaderStyle( shader , shader ) ;
+            graphic.lineShaderStyle( shader , matrix ) ;
         }
         
         /**
@@ -108,7 +108,7 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new graphics.LineShaderStyle(null"
+            var source:String = "new graphics.LineShaderStyle(null,"
                               + Matrixs.toSource( matrix ) 
                               + ")" ;
             return source ;
