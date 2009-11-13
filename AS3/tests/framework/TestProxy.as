@@ -43,32 +43,33 @@ package
      */
     public dynamic class TestProxy extends Proxy 
     {
-        public function TestProxy()
+        public function TestProxy( target:* )
         {
+            this.target = target ;
         }
         
-        public var o:Object ;
+        public var target:Object ;
         
         flash_proxy override function deleteProperty( name:* ):Boolean
         {
-            if ( name in o )
+            if ( name in target )
             {
-                return delete o[name] ;
+                return delete target[name] ;
             }
             return false ;
         }
         
         flash_proxy override function callProperty( name:* , ...rest:Array ):*
         {
-            if ( name in o )
+            if ( name in target )
             {
-                if ( o[name] is Function )
+                if ( target[name] is Function )
                 {
-                    return o[name].apply(o, rest) ;
+                    return target[name].apply(target, rest) ;
                 }
                 else
                 {
-                    return o[name] ;
+                    return target[name] ;
                 }
             }
         }
