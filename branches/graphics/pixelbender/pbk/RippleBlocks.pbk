@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,56 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion : 1.0;>
+
+kernel RippleBlocks
+<   
+    namespace   : "graphics.filters" ;
+    vendor      : "ALCARAZ Marc (eKameleon)";
+    version     : 1 ;
+    description : "Box-shaped Ripple Effect";
+>
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    /**
+     * Specify the amplitude of the effect.
+     */
+    parameter float2 amplitude
+    <
+        minValue:     float2(   0 ,   0 ) ;
+        maxValue:     float2( 100 , 100 ) ;
+        defaultValue: float2(   0 ,   0 ) ;
+    >;
     
     /**
-     * TestSuite that runs all the Maashaack graphics tests
+     * Specify the phase value of the effect.
      */
-    public class AllTests
+    parameter float2 phase
+    <
+        minValue:     float2(  0.0   , 0.0   ) ;
+        maxValue:     float2(  6.283 , 6.283 ) ;
+        defaultValue: float2(  0.0   , 0.0   ) ;
+    >;
+    
+    /**
+     * Specify the wave length of the effect.
+     */
+    parameter float2 wave
+    <
+        minValue:     float2(   1 ,   1 ) ;
+        maxValue:     float2( 100 , 100 ) ;
+        defaultValue: float2(   1 ,   1 ) ;
+    >;
+    
+    input  image4 source ;
+    output pixel4 result ;
+    
+    void evaluatePixel()
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
-        }
+        float2 pixel = outCoord();
+        
+        pixel.x += amplitude.x * sin( ( pixel.x / wave.x ) + phase.x ) ;
+        pixel.y += amplitude.y * cos( ( pixel.y / wave.y ) + phase.y ) ;
+        
+        result = sample( source , float2( pixel.x , pixel.y ) ) ;
     }
 }

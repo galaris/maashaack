@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,26 +33,29 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.display
+<languageVersion: 1.0;>
+ 
+/**
+ * Invert the RGB color space.
+ */
+kernel RGBInvert
+<   namespace   : "graphics.filters";
+    vendor      : "ALCARAZ Marc (ekameleon)";
+    version     :  1;
+    description : "Invert the Red, Green and Blue channels of an image"; 
+>
 {
-    import buRRRn.ASTUce.framework.*;
-
-    public class AllTests
+    input image4 source;
+    output float4 result;
+    
+    /**
+     * The function of the kernel that actually does the processing of the image. 
+     * This function is called once for each pixel of the output image.
+     */
+    void evaluatePixel()
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("graphics.display package tests");
-            
-            suite.addTestSuite( ByteArraysTest ) ;
-            suite.addTestSuite( DisplayObjectContainersTest ) ;
-            // FIXME suite.addTestSuite( DisplayObjectsTest ) ;
-            
-            suite.addTestSuite( PatternTest ) ;
-            suite.addTestSuite( PerlinNoiseTest ) ;
-            suite.addTestSuite( ReflectionBitmapDataTest ) ;
-            suite.addTestSuite( ShaderLoaderTest ) ;
-            
-            return suite;
-        }
+        float4 pixel = sampleNearest( source , outCoord() );
+        result.rgb   = float3( 1.0 , 1.0 , 1.0 ) - pixel.rgb ;
+        result.a     = pixel.a ;
     }
 }

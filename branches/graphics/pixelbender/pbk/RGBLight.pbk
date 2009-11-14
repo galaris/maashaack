@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,39 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion: 1.0;>
+
+kernel RGBLight
+<   
+    namespace   : "graphics.filters" ;
+    vendor      : "ALCARAZ Marc (eKameleon)" ;
+    version     : 1 ;
+    description : "This filter affect the lightness and contrast of all pixels in a bitmap." ;
+>
 {
-    import buRRRn.ASTUce.framework.*;
+    parameter float contrast
+    <
+        defaultValue :  0.0 ;
+        minValue     : -1.0 ;
+        maxValue     :  1.0 ;
+    >;
     
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    parameter float lightness
+    <
+        defaultValue :  0.0 ;
+        minValue     : -1.0 ;
+        maxValue     :  1.0 ;
+    >;
     
-    /**
-     * TestSuite that runs all the Maashaack graphics tests
-     */
-    public class AllTests
+    input  image4 source ;
+    output pixel4 result ;
+    
+    void evaluatePixel()
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
-        }
+        pixel4 pixel = sampleNearest( source , outCoord() ) ;
+        pixel3 c     = -pixel3( 1 ) * contrast  + pixel.rgb * ( 1.0 + contrast  ) ;
+        pixel3 l     =  pixel3( 1 ) * lightness + c         * ( 1.0 + lightness ) ;
+        result.rgb   = (c + l) * 1.0 ;
+        result.a     = pixel.a ;
     }
 }

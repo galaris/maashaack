@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,70 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion: 1.0;>
+
+kernel Hole
+<   
+    namespace   : "graphics.filters";
+    vendor      : "ALCARAZ Marc (eKameleon)";
+    version     : 1 ;
+    description : "Bitmap reflection filter." ; >
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    /**
+     * Specify the alpha of the reflection effect.
+     */
+    parameter float alpha
+    <
+        minValue     : 0.0 ;
+        maxValue     : 1.0 ;
+        defaultValue : 0.0 ;
+    >;
     
     /**
-     * TestSuite that runs all the Maashaack graphics tests
+     * Specify the height of the picture value of the effect.
      */
-    public class AllTests
+    parameter float height
+    <
+        minValue     :    0.0 ;
+        maxValue     : 2048.0 ;
+        defaultValue :    0.0 ;
+    >;
+    
+    /**
+     * Specify the size of the reflection effect.
+     */
+    parameter float size
+    <
+        minValue     :    0.0 ;
+        maxValue     : 2048.0 ;
+        defaultValue :    0.0 ;
+    >;
+    
+    input  image4 source ;
+    output float4 result ;
+
+    void evaluatePixel()
     {
-        public static function suite():ITest
+        float2 pixel = outCoord() ;
+        if ( pixel.y < height ) 
         {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
+            result = sampleNearest( source , pixel ) ;
+        } 
+        else 
+        {
+            float a = 1.0 - ( pixel.y - height ) / size ;
+         
+            pixel.y = height - ( pixel.y - height );
+         
+            result = sampleNearest( source , pixel );
+         
+            a *= alpha ;
+         
+            result.a *= a ;
+            result.r *= a ;
+            result.b *= a ;
+            result.g *= a ;
         }
     }
+
 }

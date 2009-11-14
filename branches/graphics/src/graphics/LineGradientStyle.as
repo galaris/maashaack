@@ -36,12 +36,12 @@
 package graphics 
 {
     import graphics.geom.Matrixs;
-
+    
     import system.eden;
-
+    
     import flash.display.Graphics;
     import flash.geom.Matrix;
-
+    
     /**
      * Defines the line style of the vector shapes with the flash.display.graphics.lineGradientStyle method.
      */

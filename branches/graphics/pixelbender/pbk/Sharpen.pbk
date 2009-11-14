@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,59 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion: 1.0;>
+
+kernel Sharpen
+<   
+    namespace   : "graphics.filters";
+    vendor      : "ALCARAZ Marc (eKameleon)";
+    version     : 1 ;
+    description : "Applies a sharpen effect to an image." 
+;>
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    /**
+     * Specify the amount of the effect.
+     */
+    parameter float amount
+    <
+        minValue     :   0.0 ;
+        maxValue     : 100.0 ;
+        defaultValue :   0.0 ;
+    >;
     
     /**
-     * TestSuite that runs all the Maashaack graphics tests
+     * Specify the radius of the effect.
      */
-    public class AllTests
+    parameter float radius
+    <
+        minValue     : 0.0 ;
+        maxValue     : 1.0 ;
+        defaultValue : 0.0 ;
+    >;
+    
+    input  image4 source ;
+    output float4 result ;
+   
+    void evaluatePixel()
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
-        }
+        float2 pos     = outCoord();
+        float4 pixel   = sampleLinear( source , pos ) ;
+        
+        result.rgb     = pixel.rgb ;
+        
+        float2 h = float2( radius , 0.0    ) ;
+        float2 v = float2( 0.0    , radius ) ;
+        
+        float4 left    = sampleLinear( source , pos - h ) * amount ;
+        float4 right   = sampleLinear( source , pos + h ) * amount ;
+        float4 top     = sampleLinear( source , pos - v ) * amount ;
+        float4 bottom  = sampleLinear( source , pos + v ) * amount ;
+        
+        result.rgb +=    top.rgb ;
+        result.rgb -= bottom.rgb ;
+        result.rgb +=   left.rgb ;
+        result.rgb -=  right.rgb ;
+        
+        result.a = pixel.a;
     }
 }

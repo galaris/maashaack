@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,53 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion : 1.0;>
+
+kernel WaveReflection
+<   
+    namespace   : "graphics.filters";
+    vendor      : "ALCARAZ Marc (eKameleon)";
+    version     : 1 ;
+    description : "Projects an image into a rippled surface of water";
+>
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    /**
+     * Specify the height amplitude of the waves.
+     */
+    parameter float amplitude
+    <
+        minValue     : 0.0 ;
+        maxValue     : 1.0 ;
+        defaultValue : 0.0 ;
+    >;
     
     /**
-     * TestSuite that runs all the Maashaack graphics tests
+     * Specify the frequency of the waves.
      */
-    public class AllTests
+    parameter float frequency
+    <
+        minValue     : 0.0 ;
+        maxValue     : 1.0 ;
+        defaultValue : 0.0 ;
+    >;
+    
+    /**
+     * Specify the value to create the wave effect and animate it.
+     */    
+    parameter float progress
+    <
+        minValue     : 0.0 ;
+        maxValue     : 1.0 ;
+        defaultValue : 0.0 ;
+    >;
+
+    input  image4 source ;
+    output pixel4 result ;
+
+    void evaluatePixel()
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
-        }
+        float2 pixel = outCoord();
+        pixel.y      += sin( ( pixel.y - ( 1.0 - progress ) ) * ( 100.55 - frequency ) ) * ( amplitude * 0.1 ) * ( 1.0 - pixel.y ) ;    
+        result        = sampleNearest( source , pixel ) ;
     }
 }
