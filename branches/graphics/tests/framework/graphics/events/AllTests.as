@@ -33,50 +33,17 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+package graphics.events
 {
     import buRRRn.ASTUce.framework.*;
-
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.events.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
-
-    /**
-     * TestSuite that runs all the Maashaack graphics tests
-     */
+    
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("graphics package tests");
+            var suite:TestSuite = new TestSuite("graphics.events package tests");
             
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.events.AllTests.suite()  );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
+            suite.addTestSuite( FrameLabelEventTest ) ;
             
             return suite;
         }
