@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,50 +33,74 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics
+<languageVersion: 1.0;>
+
+kernel RoundPixel
+<   
+    namespace   : "graphics.filters" ;
+    vendor      : "ALCARAZ Marc (eKameleon)" ;
+    version     : 1 ;
+    description : "Rounds the pixels." ;
+>
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    import graphics.colors.AllTests;
-    import graphics.display.AllTests;
-    import graphics.drawing.AllTests;
-    import graphics.filters.AllTests;
-    import graphics.geom.AllTests;
-    import graphics.numeric.AllTests;
+    /**
+     * Specify the edge value of the effect.
+     */
+    parameter float edge
+    <
+        minValue     : float(0.0) ;
+        maxValue     : float(300.0) ;
+        defaultValue : float(1.0) ;
+        description  : "The edge value of the alpha components in all pixels." ;
+    >;
     
     /**
-     * TestSuite that runs all the Maashaack graphics tests
+     * Specify the space value of the effect.
      */
-    public class AllTests
+    parameter float space
+    <
+        minValue     : float(1)   ;
+        maxValue     : float(300) ;
+        defaultValue : float(1) ;
+        description  : "The space between the centers of the circles." ;
+    >;
+    
+    /**
+     * Specify the size value of the effect.
+     */
+    parameter float size
+    <
+        minValue     : float(0.0) ;
+        maxValue     : float(2.0) ;
+        defaultValue : float(1.0) ;
+        description  : "The size ratio of the circle pixels." ;
+    >;
+    
+    input  image4 source ;
+    output pixel4 result ;
+    
+    void evaluatePixel()
     {
-        public static function suite():ITest
+        float2 pix = outCoord() ;
+        float2 pos = float2
+        ( 
+            floor( pix.x / space ) * space , 
+            floor( pix.y / space ) * space 
+        ) ;
+        
+        result = sampleNearest( source , pos ) ;
+        
+        float d = distance( pix - ( space / 2.0 ) , pos ) ;
+        float s = size * result.a ;
+        float r = 2.0 * d / s ;
+        
+        if ( r > space )
         {
-            var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.numeric.AllTests.suite() );
-            
-            //// test interfaces in this package
-            
-            suite.addTestSuite( DirectionableTest ) ;
-            suite.addTestSuite( DrawableTest      ) ;
-            suite.addTestSuite( IFillStyleTest    ) ;
-            suite.addTestSuite( ILineStyleTest    ) ;
-            
-            //// test class in this package
-            
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
-            
-            return suite;
+            result.a = 0.0 ;
+        }
+        else if ( r > ( space - edge ) )
+        {
+            result.a = ( space - r ) * result.a / edge ;
         }
     }
 }
