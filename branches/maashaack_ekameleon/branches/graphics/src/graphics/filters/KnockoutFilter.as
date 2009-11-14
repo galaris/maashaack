@@ -71,6 +71,7 @@ package graphics.filters
          */
         public function set color( value:Number ):void
         {
+            _rgb.fromNumber( value ) ;
             shader.data.color.value[0] = _rgb.r / 0xFF ;
             shader.data.color.value[1] = _rgb.g / 0xFF ;
             shader.data.color.value[2] = _rgb.b / 0xFF ;
