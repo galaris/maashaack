@@ -108,7 +108,7 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new graphics.FillShaderStyle(null"
+            var source:String = "new graphics.FillShaderStyle(null,"
                               + Matrixs.toSource( matrix ) 
                               + ")" ;
             return source ;
