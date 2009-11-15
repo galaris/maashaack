@@ -47,7 +47,7 @@ package graphics
          * @param color The color value of the fill style.
          * @param alpha The alpha value of the fill style.
          */
-        public function FillStyle( color:uint, alpha:Number = 1.0 )
+        public function FillStyle( color:uint = 0 , alpha:Number = 1.0 )
         {
             this.alpha = alpha ;
             this.color = color ;
@@ -56,7 +56,7 @@ package graphics
         /**
          * The empty FillStyle singleton.
          */
-        public static var EMPTY:FillStyle = new FillStyle( 0 ) ;
+        public static var EMPTY:FillStyle = new FillStyle() ;
         
         /**
          * The alpha value of the fill style.

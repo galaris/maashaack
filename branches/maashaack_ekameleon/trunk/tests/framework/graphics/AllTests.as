@@ -75,7 +75,13 @@ package graphics
             suite.addTestSuite( ArcTypeTest         ) ;
             suite.addTestSuite( CornerTest          ) ;
             suite.addTestSuite( DirectionTest       ) ;
+            
+            // FIXME suite.addTestSuite( FillBitmapStyleTest ) ;
+            // FIXME suite.addTestSuite( FillGradientStyleTest ) ;
             suite.addTestSuite( FillShaderStyleTest ) ;
+            suite.addTestSuite( FillStyleTest ) ;
+            
+            // FIXME suite.addTestSuite( LineGradientStyleTest ) ;
             suite.addTestSuite( LineShaderStyleTest ) ;
             suite.addTestSuite( LineStyleTest       ) ;
             
