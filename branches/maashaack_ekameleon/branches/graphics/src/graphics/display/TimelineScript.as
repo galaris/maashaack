@@ -89,18 +89,18 @@ package graphics.display
          * Creates a new TimelineScript instance.
          * @param target The MovieClip reference of this iterator.
          * @param autoStop This boolean flag indicates if the specified MovieClip target reference is stopped.
+         * @throws ArgumentError if the <code class="prettyprint">target</code> argument of this constructor is null.
          */
         public function TimelineScript( target:MovieClip , autoStop:Boolean=false )
         {
-            super();
             if (target == null)
             {
-                throw new ArgumentError( this + " can't be instanciate with an empty MovieClip reference in argument of the constructor.") ;    
+                throw new ArgumentError( this + " constructor failed, the target argument not must be null.") ;
             }
-            this._target = target ;
-            if (autoStop)
+            _target = target ;
+            if ( autoStop )
             {
-                this._target.stop() ;
+                _target.stop() ;
             }
         }
         
@@ -114,7 +114,7 @@ package graphics.display
         
         /**
          * Registers a script function in the frame specified by the label or index value passed-in the first argument of the method.
-         * @param index A String label name or a uint frame index value.
+         * @param index A String label name or an uint frame index value.
          * @param script The Function instruction to register.
          * @return true if the register is success.
          */
@@ -136,15 +136,14 @@ package graphics.display
             }
             catch(e:Error)
             {
-                logger.error( this + " put failed : " + e.toString() ) ;
-                return false ;    
+                logger.error( this + " put failed : " + e.message ) ;
             }
             return false ;
         }
         
         /**
          * Unregisters a script function in the frame specified by the label or index value passed-in argument of the method.
-         * @param index A String label name or a uint frame index value.
+         * @param index A String label name or an uint frame index value.
          */
         public function remove( index:* ):void
         {
@@ -162,12 +161,14 @@ package graphics.display
         
         /**
          * Indicates if the specified passed-in label value is in the MovieClip target.
+         * @throws ArgumentError if the passed-in label value is null or empty.
+         * @throws ArgumentError if the passed-in label value don't exist in the MovieClip.
          */
         protected function resolve( label:String=null ):int 
         {
             if ( label == null || label.length == 0 )
             {
-                throw new ArgumentError( this + " resolve label failed with a 'null' or 'undefined' label argument.") ;
+                throw new ArgumentError( this + " resolve failed, the label argument not must be 'null' or empty.") ;
             }
             var frame:uint ;
             var currentLabels:Array = _target.currentLabels ;

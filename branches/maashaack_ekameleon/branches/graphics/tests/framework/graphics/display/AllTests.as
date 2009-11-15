@@ -52,6 +52,10 @@ package graphics.display
             suite.addTestSuite( ReflectionBitmapDataTest ) ;
             suite.addTestSuite( ShaderLoaderTest ) ;
             
+            suite.addTestSuite( TimelineInspectorTest ) ;
+            suite.addTestSuite( TimelineIteratorTest ) ;
+            suite.addTestSuite( TimelineScriptTest ) ;
+            
             return suite;
         }
     }
