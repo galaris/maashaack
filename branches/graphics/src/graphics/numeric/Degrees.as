@@ -35,7 +35,6 @@
 
 package graphics.numeric 
 {
-
     /**
      * Implements the static behaviours of the Degrees manipulations.
      */

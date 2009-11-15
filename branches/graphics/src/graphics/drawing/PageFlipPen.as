@@ -414,14 +414,14 @@ package graphics.drawing
             {
                 gama = Math.PI - gama ;
             }
-
+            
             mat.a = Math.cos( gama );
             mat.b = Math.sin( gama );
             mat.c = - Math.sin( gama );
             mat.d = Math.cos( gama );
-
+            
             _ordMatrix( mat, spt, opw, oph, isHorizontal, cPoints, pPoints, gama, beta );
-
+            
             // here we fix some mathematical bugs or instabilities
             if (vhyp == 0)
             {
@@ -536,8 +536,8 @@ package graphics.drawing
             {
                 _sensibility = args[5] as int ;
             } 
-        }   
-
+        }
+        
         /**
          * Sets the size of this pen and re-initializes the triangular grid.
          * @param width New width.
@@ -549,60 +549,59 @@ package graphics.drawing
             _h = isNaN( height ) ? 0 : height ;
             initialize( ) ;
         } 
-
+        
         /**
          * Initialize the pen.
          */
         protected function initialize():void 
         {
             _compute = PageFlipPen.compute( _drag, _corner, _w, _h, (_direction == Direction.HORIZONTAL), _sensibility ) ;
-        }           
-
+        }
+        
         /**
          * @private
          */
         private var _compute:Object ;
-
+        
         /**
          * @private
          */
         private var _corner:Point ;
-
+        
         /**
          * @private
          */
         private var _direction:String ;
-
+        
         /**
          * @private
          */
         private var _drag:Point ;
-
+        
         /**
          * @private
          */
         protected var _h:Number ;
-
+        
         /**
          * @private
          */
         private var _page1:BitmapData ;
-
+        
         /**
          * @private
          */
         private var _page2:BitmapData ;
-
+        
         /**
          * @private
          */
         private var _sensibility:int ;
-
+        
         /**
          * @private
          */
         protected var _w:Number ;
-        
         
         /**
          * @private
@@ -615,10 +614,10 @@ package graphics.drawing
             }
             if (po.x == 0)
             {
-                drag.x = w - drag.x ;   
+                drag.x = w - drag.x ;
             }
         }
-
+        
         /**
          * @private
          */

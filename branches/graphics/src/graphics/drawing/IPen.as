@@ -37,7 +37,7 @@ package graphics.drawing
     import graphics.Drawable;
     import graphics.IFillStyle;
     import graphics.ILineStyle;
-
+    
     /**
      * This interface defined the IPen implementation to creates shaped in Shape, Sprite and MovieClip objects.
      */

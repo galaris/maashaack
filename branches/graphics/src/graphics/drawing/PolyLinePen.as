@@ -45,9 +45,9 @@ package graphics.drawing
      * <pre class="prettyprint">
      * import flash.geom.Point ;
      * 
-     * import graphics.geom.Vector2 ;
      * import graphics.FillStyle ;
      * import graphics.drawing.PolyLinePen ;
+     * import graphics.geom.Vector2 ;
      * 
      * stage.align     = "tl" ;
      * stage.scaleMode = "noScale" ;
