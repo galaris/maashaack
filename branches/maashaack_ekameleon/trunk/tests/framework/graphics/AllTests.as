@@ -77,13 +77,13 @@ package graphics
             suite.addTestSuite( DirectionTest       ) ;
             
             // FIXME suite.addTestSuite( FillBitmapStyleTest ) ;
-            // FIXME suite.addTestSuite( FillGradientStyleTest ) ;
-            suite.addTestSuite( FillShaderStyleTest ) ;
-            suite.addTestSuite( FillStyleTest ) ;
-            
-            // FIXME suite.addTestSuite( LineGradientStyleTest ) ;
-            suite.addTestSuite( LineShaderStyleTest ) ;
-            suite.addTestSuite( LineStyleTest       ) ;
+            suite.addTestSuite( FillGradientStyleTest ) ;
+            suite.addTestSuite( FillShaderStyleTest   ) ;
+            suite.addTestSuite( FillStyleTest         ) ;
+            suite.addTestSuite( GradientStyleTest ) ;
+            suite.addTestSuite( LineGradientStyleTest ) ;
+            suite.addTestSuite( LineShaderStyleTest   ) ;
+            suite.addTestSuite( LineStyleTest         ) ;
             
             return suite;
         }
