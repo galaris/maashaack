@@ -35,17 +35,13 @@
 
 package graphics 
 {
-    import graphics.geom.Matrixs;
-    
-    import system.eden;
-    
     import flash.display.Graphics;
     import flash.geom.Matrix;
     
     /**
      * Defines the line style of the vector shapes with the flash.display.graphics.lineGradientStyle method.
      */
-    public class LineGradientStyle implements ILineStyle
+    public class LineGradientStyle extends GradientStyle implements ILineStyle
     {
         /**
          * Creates a new LineGradientStyle instance.
@@ -60,65 +56,8 @@ package graphics
          */
         public function LineGradientStyle( type:String, colors:Array, alphas:Array, ratios:Array, matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0 )
         {
-            this.alphas              = alphas ;
-            this.colors              = colors ;
-            this.focalPointRatio     = focalPointRatio ;
-            this.interpolationMethod = interpolationMethod ;
-            this.matrix              = matrix ;
-            this.ratios              = ratios ;
-            this.spreadMethod        = spreadMethod ;
-            this.type                = type   ;
+            super( type , colors , alphas , ratios , matrix , spreadMethod, interpolationMethod, focalPointRatio ) ;
         }
-        
-        /**
-         * An array of alpha values for the corresponding colors in the colors array; valid values are 0 to 1. 
-         * If the value is less than 0, the default is 0. 
-         * If the value is greater than 1, the default is 1.
-         */
-        public var alphas:Array;
-        
-        /**
-         * An array of RGB hexadecimal color values to be used in the gradient ; 
-         * for example, red is 0xFF0000, blue is 0x0000FF, and so on. You can specify up to 15 colors. 
-         * For each color, be sure you specify a corresponding value in the alphas and ratios parameters.
-         */
-        public var colors:Array;
-        
-        /**
-         * A number that controls the location of the focal point of the gradient. 
-         * 0 means that the focal point is in the center. 
-         * 1 means that the focal point is at one border of the gradient circle. 
-         * -1 means that the focal point is at the other border of the gradient circle. 
-         * A value less than -1 or greater than 1 is rounded to -1 or 1.
-         */
-        public var focalPointRatio:Number ;
-        
-        /**
-         * A value from the InterpolationMethod class that specifies which value to use : InterpolationMethod.linearRGB or InterpolationMethod.RGB
-         */
-        public var interpolationMethod:String ;
-        
-        /**
-         * A transformation matrix as defined by the flash.geom.Matrix class. The flash.geom.Matrix class includes a createGradientBox() method, which lets you conveniently set up the matrix for use with the beginGradientFill() method.
-         */
-        public var matrix:Matrix ;
-        
-        /**
-         * An array of color distribution ratios; valid values are 0 to 255. 
-         * This value defines the percentage of the width where the color is sampled at 100%. 
-         * The value 0 represents the left-hand position in the gradient box, and 255 represents the right-hand position in the gradient box.
-         */
-        public var ratios:Array ;
-        
-        /**
-         * A value from the SpreadMethod class that specifies which spread method to use, either: SpreadMethod.PAD, SpreadMethod.REFLECT, or SpreadMethod.REPEAT.
-         */
-        public var spreadMethod:String ;
-        
-        /**
-         * A value from the GradientType class that specifies which gradient type to use : GradientType.LINEAR or GradientType.RADIAL.
-         */
-        public var type:String ;
         
         /**
          * Initialize and launch the lineGradientStyle method of the specified Graphics reference.
@@ -159,25 +98,6 @@ package graphics
             {
                 return false ;
             }
-        }
-        
-        /**
-         * Returns the source code string representation of the object.
-         * @return the source code string representation of the object.
-         */
-        public function toSource(indent:int = 0):String
-        {
-            var source:String = "new graphics.LineGradientStyle("
-                              + eden.serialize( type )   + "," 
-                              + eden.serialize( colors ) + "," 
-                              + eden.serialize( alphas ) + "," 
-                              + eden.serialize( ratios ) + "," 
-                              + Matrixs.toSource( matrix ) + ","
-                              + eden.serialize( spreadMethod ) + ","
-                              + eden.serialize( interpolationMethod ) + ","
-                              + eden.serialize( focalPointRatio )
-                              + ")" ;
-            return source ;
         }
     }
 }
