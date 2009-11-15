@@ -75,6 +75,7 @@ package graphics
             suite.addTestSuite( ArcTypeTest         ) ;
             suite.addTestSuite( CornerTest          ) ;
             suite.addTestSuite( DirectionTest       ) ;
+            suite.addTestSuite( FillShaderStyleTest ) ;
             suite.addTestSuite( LineShaderStyleTest ) ;
             suite.addTestSuite( LineStyleTest       ) ;
             
