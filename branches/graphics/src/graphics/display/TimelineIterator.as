@@ -95,25 +95,25 @@ package graphics.display
          * Creates a new TimelineIterator instance.
          * @param target The MovieClip reference of this iterator.
          * @param framePosition the default framePosition of the specified MovieClip target (default frame 1).
-         * @param stepSize (optional) the step between two frames returns by the iterator (default 1).
-         * @throws ArgumentError if the <code class="prettyprint">target</code> argument of this constructor is empty.
+         * @param stepSize (optional) the step between two frames returns by the iterator (default and minimum value is 1).
+         * @throws ArgumentError if the <code class="prettyprint">target</code> argument of this constructor is null.
          */
-        public function TimelineIterator( target:MovieClip , framePosition:Number=NaN, stepSize:uint=1 )
+        public function TimelineIterator( target:MovieClip , framePosition:Number = NaN, stepSize:uint = 1 )
         {
             if (target == null)
             {
-                throw new ArgumentError( this + " can't be instanciate with an empty MovieClip reference in the first argument of the constructor.") ;    
+                throw new ArgumentError( this + " constructor failed, the target argument not must be null.") ;
             }
-            this._target = target ;
-            this._step = ( DEFAULT_STEP > 1 ) ? stepSize : DEFAULT_STEP ; 
-            if ( !isNaN(framePosition) )
+            _target = target ;
+            _step   = Math.max( DEFAULT_STEP , stepSize ) ; 
+            if ( !isNaN( framePosition ) )
             {
-                this.seek( framePosition ) ;
+                seek( framePosition ) ;
             }
         }
         
         /**
-         * The default step value in all the PageByPageIterators.
+         * The minimum and default step value in all the TimelineIterator.
          */
         public static const DEFAULT_STEP:Number = 1 ;
         
@@ -134,6 +134,15 @@ package graphics.display
         }
         
         /**
+         * Returns the step size of this TimelineIterator.
+         * @return the step size of this TimelineIterator.
+         */
+        public function get stepSize():uint
+        {
+            return _step ;
+        }
+        
+        /**
          * Returns the target reference of this iterator.
          */
         public function get target():MovieClip
@@ -150,19 +159,10 @@ package graphics.display
         }
         
         /**
-         * Returns the step size of this PageByPageIterator.
-         * @return the step size of this PageByPageIterator.
-          */
-        public function getStepSize():Number
-        {
-            return _step ;
-        }
-        
-        /**
          * Checks to see if there is a previous element that can be iterated to.
          * @return <code class="prettyprint">true</code> if the iterator has more elements.
          */
-        public function hasPrevious() : Boolean 
+        public function hasPrevious():Boolean 
         {
             return _target.currentFrame > 1 ;
         }
@@ -171,7 +171,7 @@ package graphics.display
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iterator has more elements.
          */
-        public function hasNext() : Boolean 
+        public function hasNext():Boolean 
         {
             return _target.currentFrame < _target.totalFrames ;
         }
