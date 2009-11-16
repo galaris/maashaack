@@ -49,7 +49,7 @@ package graphics.filters
          * @param shader The Shader reference with the Hole pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function HoleFilter(shader:Shader, init:Object = null)
+        public function HoleFilter( shader:Shader = null , init:Object = null)
         {
             super( shader , init ) ;
         }

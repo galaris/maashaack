@@ -39,7 +39,7 @@ package graphics.filters
     import flash.display.Shader;
     import flash.display.ShaderData;
     import flash.filters.ShaderFilter;
-
+    
     /**
      * The ShaderCustomFilter class applies a filter by executing a custom shader on the object being filtered. 
      * The Shader must be defines with the custom pixelbender implementation.
@@ -51,7 +51,7 @@ package graphics.filters
          * @param shader The Shader reference with a custom pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function ShaderCustomFilter( shader:Shader , init:Object = null )
+        public function ShaderCustomFilter( shader:Shader = null , init:Object = null )
         {
             super( shader ) ;
             if ( init != null )

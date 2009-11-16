@@ -49,7 +49,7 @@ package graphics.filters
          * @param shader The Shader reference of the filter.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function RippleBlocksFilter(shader:Shader, init:Object = null)
+        public function RippleBlocksFilter( shader:Shader = null , init:Object = null )
         {
             super( shader , init ) ;
         }
