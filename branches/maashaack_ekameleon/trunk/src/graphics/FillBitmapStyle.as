@@ -56,7 +56,7 @@ package graphics
          * @param repeat If true, the bitmap image repeats in a tiled pattern. If false, the bitmap image does not repeat, and the edges of the bitmap are used for any fill area that extends beyond the bitmap.
          * @param smooth If false, upscaled bitmap images are rendered by using a nearest-neighbor algorithm and look pixelated. If true, upscaled bitmap images are rendered by using a bilinear algorithm. Rendering by using the nearest neighbor algorithm is usually faster. 
          */
-        public function FillBitmapStyle( bitmap:BitmapData , matrix:Matrix = null, repeat:Boolean = true, smooth:Boolean = false )
+        public function FillBitmapStyle( bitmap:BitmapData = null , matrix:Matrix = null, repeat:Boolean = true, smooth:Boolean = false )
         {
             this.bitmap  = bitmap ;
             this.matrix  = matrix ;
