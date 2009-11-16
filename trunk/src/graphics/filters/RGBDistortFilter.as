@@ -50,7 +50,7 @@ package graphics.filters
          * @param shader The Shader reference with the RGBDistort pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function RGBDistortFilter( shader:Shader , init:Object = null )
+        public function RGBDistortFilter( shader:Shader = null , init:Object = null )
         {
             super( shader , init ) ;
         }

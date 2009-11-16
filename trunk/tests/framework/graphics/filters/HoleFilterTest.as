@@ -32,73 +32,34 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
 package graphics.filters 
 {
-    import flash.display.Shader;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * The ReflectionFilter class applies a reflection over a display or a bitmap. 
-     * The Shader must be defines with the Reflection pixelbender implementation.
-     */
-    public class ReflectionFilter extends ShaderCustomFilter 
+    public class HoleFilterTest extends TestCase 
     {
-        /**
-         * Creates a new ReflectionFilter instance.
-         * @param shader The Shader reference.
-         * @param init The optional dynamic object to initialize the filter.
-         */
-        public function ReflectionFilter( shader:Shader = null , init:Object = null )
+        public function HoleFilterTest(name:String = "")
         {
-            super( shader , init ) ;
+            super(name);
         }
         
-        /**
-         * The alpha of the reflection.
-         */
-        public function get alpha():Number
+        public var filter:HoleFilter ;
+        
+        public function setUp():void
         {
-            return shader.data.alpha.value[0] ;
+            filter = new HoleFilter() ;
         }
         
-        /**
-         * @private
-         */
-        public function set alpha( value:Number ):void
+        public function tearDown():void
         {
-            shader.data.alpha.value[0] = value ;
+            filter = null ;
         }
         
-        /**
-         * The height of the reflection.
-         */
-        public function get height():Number
+        public function testConstructor():void
         {
-            return shader.data.height.value[0] ;
+            assertNotNull( filter ) ;
         }
         
-        /**
-         * @private
-         */
-        public function set height( value:Number ):void
-        {
-            shader.data.height.value[0] = value ;
-        }
-        
-        /**
-         * The size of the reflection.
-         */
-        public function get size():Number
-        {
-            return shader.data.size.value[0] ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set size( value:Number ):void
-        {
-            shader.data.size.value[0] = value ;
-        }
+        // FIXME finalize the unit tests.
     }
 }

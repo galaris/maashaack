@@ -48,7 +48,7 @@ package graphics.filters
          * @param shader The Shader reference with the Sharpen pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function SharpenFilter(shader:Shader, init:Object = null)
+        public function SharpenFilter( shader:Shader = null , init:Object = null )
         {
             super( shader , init ) ;
         }

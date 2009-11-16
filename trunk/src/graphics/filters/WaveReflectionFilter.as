@@ -50,7 +50,7 @@ package graphics.filters
          * @param shader The Shader reference.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function WaveReflectionFilter(shader:Shader, init:Object = null)
+        public function WaveReflectionFilter( shader:Shader = null , init:Object = null )
         {
             super( shader , init ) ;
         }
