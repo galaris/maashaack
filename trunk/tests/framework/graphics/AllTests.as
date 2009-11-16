@@ -36,7 +36,7 @@
 package graphics
 {
     import buRRRn.ASTUce.framework.*;
-
+    
     import graphics.colors.AllTests;
     import graphics.display.AllTests;
     import graphics.drawing.AllTests;
@@ -44,7 +44,7 @@ package graphics
     import graphics.filters.AllTests;
     import graphics.geom.AllTests;
     import graphics.numeric.AllTests;
-
+    
     /**
      * TestSuite that runs all the Maashaack graphics tests
      */
@@ -75,8 +75,7 @@ package graphics
             suite.addTestSuite( ArcTypeTest         ) ;
             suite.addTestSuite( CornerTest          ) ;
             suite.addTestSuite( DirectionTest       ) ;
-            
-            // FIXME suite.addTestSuite( FillBitmapStyleTest ) ;
+            suite.addTestSuite( FillBitmapStyleTest ) ;
             suite.addTestSuite( FillGradientStyleTest ) ;
             suite.addTestSuite( FillShaderStyleTest   ) ;
             suite.addTestSuite( FillStyleTest         ) ;
