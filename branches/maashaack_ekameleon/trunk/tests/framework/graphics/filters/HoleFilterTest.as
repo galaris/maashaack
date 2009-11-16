@@ -36,6 +36,9 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import flash.display.Shader;
+    import flash.geom.Point;
+    
     public class HoleFilterTest extends TestCase 
     {
         public function HoleFilterTest(name:String = "")
@@ -43,11 +46,19 @@ package graphics.filters
             super(name);
         }
         
+        [Embed("Hole.pbj", mimeType="application/octet-stream")]
+        private var ByteArrayClass:Class ;
+        
+        public var center:Point ;
         public var filter:HoleFilter ;
+        public var radius:Number = 20 ;
+        public var shader:Shader ;
         
         public function setUp():void
         {
-            filter = new HoleFilter() ;
+            center = new Point( 20, 20) ;
+            shader = new Shader( new ByteArrayClass() ) ;
+            filter = new HoleFilter( shader , { center : center , radius : radius } ) ;
         }
         
         public function tearDown():void
@@ -58,8 +69,28 @@ package graphics.filters
         public function testConstructor():void
         {
             assertNotNull( filter ) ;
+            // assertEquals( filter.center , center ) ; // FIXME
+            assertEquals( filter.radius , radius ) ;
         }
         
-        // FIXME finalize the unit tests.
+        public function testDescription():void
+        {
+            assertEquals( filter.description , "Creates an hole to mask the picture" ) ;
+        }
+        
+        public function testName():void
+        {
+            assertEquals( filter.name , "Hole" ) ; 
+        }
+        
+        public function testNamespace():void
+        {
+            assertEquals( filter.namespace , "graphics.filters" ) ;
+        }
+        
+        public function testVersion():void
+        {
+            assertEquals( filter.version , 1 ) ; 
+        }
     }
 }
