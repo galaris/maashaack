@@ -46,7 +46,7 @@ package graphics.filters
             super(name);
         }
         
-        [Embed("Hole.pbj", mimeType="application/octet-stream")]
+        [Embed("../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
         private var ByteArrayClass:Class ;
         
         public var center:Point ;
