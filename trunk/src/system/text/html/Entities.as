@@ -59,22 +59,21 @@ package system.text.html
      */
     public class Entities
     {
-
         /**
          * @private
          */
         private static var _e:Array = [];
-
+        
         /**
          * @private
          */
         private static var _fastSearch:Dictionary = new Dictionary() ;
-
+        
         /**
          * Indicates if the class support ISO-8859-15.
-         */        
+         */
         public static var support_ISO_8859_15:Boolean ;
-
+        
         /**
          * Inserts a new Entity element in the entities definitions.
          */
@@ -82,7 +81,7 @@ package system.text.html
         {
             _e.push(entity);
         } 
-
+        
         /**
          * Finds the entity by character.
          * <p><b>Example :</b></p>
@@ -99,8 +98,8 @@ package system.text.html
             {
                 _fastSearch[ char ] ;
             }
-            var l:uint = _e.length ;
-            for( var i:uint = 0 ;i < l; i++  )
+            var l:int = _e.length ;
+            for( var i:int ; i < l ; i++  )
             {
                 if( _e[i].char == char )
                 {
@@ -108,10 +107,9 @@ package system.text.html
                     return true;
                 }
             }
-            
             return false;
         }
-
+        
         /**
          * Finds the entity by name.
          * <p><b>Example :</b></p>
@@ -128,9 +126,8 @@ package system.text.html
             {
                 _fastSearch[ name ] ;
             }
-            
-            var l:uint = _e.length ;
-            for( var i:uint = 0 ;i < l; i++ )
+            var l:int = _e.length ;
+            for( var i:int ; i < l ; i++ )
             {
                 if( _e[i].toString() == name )
                 {
@@ -138,10 +135,9 @@ package system.text.html
                     return true ;
                 }
             }
-            
             return false;
         }
-
+        
         /**
          * Transforms the characters in HTML entity format.
          * <p><b>Example :</b></p>
@@ -157,19 +153,17 @@ package system.text.html
             {
                 return _e[ _fastSearch[ char ] ].toString();
             }
-            
-            var l:uint = _e.length ;            
-            for( var i:uint = 0 ;i < l; i++ )
+            var l:int = _e.length ;
+            for( var i:int ; i < l ; i++ )
             {
                 if( _e[i].char == char )
                 {
                     return _e[i].toString();
                 }
             }
-            
-            return "";
+            return "" ;
         }
-
+        
         /**
          * Returns the character determinates by the name in argument.
          * <p><b>Example :</b></p>
@@ -179,22 +173,21 @@ package system.text.html
          * trace( fromName ) ;  // €
          * </pre>
          * @return the character determinates by the name in argument.
-         */        
+         */
         public static function fromName( name:String ):String
         {
             if( _fastSearch[ name ] )
             {
                 return _e[ _fastSearch[ name ] ].valueOf();
             }
-            var l:uint = _e.length ;   
-            for( var i:uint = 0;i < l; i++ )
+            var l:int = _e.length ;   
+            for( var i:int = 0;i < l; i++ )
             {
                 if( _e[i].toString() == name )
                 {
                     return _e[i].valueOf();
                 }
             }
-            
             return "";
         }
         

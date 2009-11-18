@@ -42,12 +42,11 @@ package system.text.html
      */
     public class HTML
     {
-
         /**
          * @private
-         */        
+         */
         private var _data:String;
-
+        
         /**
          * Creates a new HTML instance.
          * @param text The HTML text value of the object.
@@ -61,7 +60,7 @@ package system.text.html
             }
             _data = text;
         }
-
+        
         /**
          * Appends the specified text in the HTML string.
          * @param text The text to append.
@@ -74,8 +73,8 @@ package system.text.html
                 text = HTML.encode( text );
             }
             _data += text;
-        }        
-
+        }
+        
         /**
          * Encodes the specified text passed in argument.
          * <p><b>Example :</b></p>
@@ -117,7 +116,7 @@ package system.text.html
             
             return html;
         }
-
+        
         /**
          * Decodes the specified string.
          * <p><b>Example :</b></p>
@@ -159,7 +158,7 @@ package system.text.html
             
             return text;
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -176,4 +175,3 @@ package system.text.html
         */
     }
 }
-

@@ -33,19 +33,18 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
  
-package system.ui 
+package system.diagnostics 
 {
     import flash.text.TextField;
-
-    import system.diagnostics.TraceConsole;    
-
+    
+    
+    
     /**
      * The TextFieldConsole use a TextField display that redirect messages in the debug application.
      * <p><b>Note:</b> You can not read from the output and so the TextFieldConsole is not interactive.</p>
      */
     public class TextFieldConsole extends TraceConsole 
     {
-
         /**
          * Creates a new TextFieldConsole instance.
          * @param textfield The TextField reference to redirect the messages.
@@ -55,17 +54,17 @@ package system.ui
             this.textfield = textfield ;
             this.verbose   = verbose ;
         }
-
+        
         /**
          * The TextField reference of this console.
          */
         public var textfield:TextField ;
-
+        
         /**
          * Indicates the verbose mode.
          */
         public var verbose:Boolean ;
-
+        
         /**
          * Appends the message format and add newline character.
          */
