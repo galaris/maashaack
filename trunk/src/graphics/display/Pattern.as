@@ -49,9 +49,9 @@ package graphics.display
          * <pre class="prettyprint">
          * package examples
          * {
-         *     import pegas.draw.FillBitmapStyle;
-         *     import pegas.draw.Pattern;
-         *     import pegas.draw.RectanglePen;
+         *     import graphics.FillBitmapStyle;
+         *     import graphics.display.Pattern;
+         *     import graphics.drawing.RectanglePen;
          *     
          *     import flash.display.Shape;
          *     import flash.display.Sprite;
