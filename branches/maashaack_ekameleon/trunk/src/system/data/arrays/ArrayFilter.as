@@ -46,7 +46,7 @@ package system.data.arrays
      * Dispatched when the filter is changed.
      * @eventType flash.events.Event.CHANGE
      */
-    [Event(name="onFinished", type="andromeda.events.ActionEvent")]
+    [Event(name="change", type="flash.events.Event")]
     
     /**
      * This filter contains all constants and methods to sort the Arrays in the application.
@@ -270,7 +270,7 @@ package system.data.arrays
             if ( useEvent == true )
             {
                 dispatchEvent( new Event(Event.CHANGE) ) ;
-            }    
+            }
         }
         
         /**
