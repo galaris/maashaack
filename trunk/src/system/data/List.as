@@ -35,24 +35,22 @@
 
 package system.data
 {
-
     /**
      * An ordered collection (also known as a sequence). The user of this interface has precise control over where in the list each element is inserted. The user can access elements by their integer index (position in the list), and search for elements in the list.
      */
     public interface List extends Collection
     {
-
         /**
          * Appends all of the elements in the specified collection to the end of this Collection, in the order that they are returned by the specified collection's iterator (optional operation).
          * @return <code class="prettyprint">true</code> if this list changed as a result of the call.
          */
         function addAll( c:Collection ):Boolean ; 
-
+        
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
          */
         function addAt( index:uint , o:* ):void ;
-            
+        
         /**
          * Returns <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
          * @return <code class="prettyprint">true</code> if this list contains all of the elements of the specified collection.
@@ -71,7 +69,7 @@ package system.data
          * @param len The number of elements to remove (default 1).  
          */
         function removeAt( id:uint , len:int = 1 ):* ;
-
+        
         /**
          * Removes from this List all of the elements whose index is between fromIndex, inclusive and toIndex, exclusive. 
          * <p>Shifts any succeeding elements to the left (reduces their index).</p> 
@@ -80,12 +78,12 @@ package system.data
          * @param toIndex The to index (exclusive) to remove elements in the list.
          */
         function removeRange( fromIndex:uint , toIndex:uint ):* ;
-    
+        
         /**
          * Retains only the elements in this list that are contained in the specified collection (optional operation).
          */
         function retainAll( c:Collection ):Boolean ;
-
+        
         /**
          * Replaces the element at the specified position in this list with the specified element (optional operation).
          * @param id index of element to replace.
@@ -93,13 +91,11 @@ package system.data
          * @return the element previously at the specified position.
          */
         function set( index:uint , o:* ):* ;
-    
+        
         /**
          * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          */
         function subList( fromIndex:uint , toIndex:uint ):List ;
-    
     }
-
 }

@@ -35,22 +35,19 @@
 
 package system.data
 {
-
     /**
      * This interface defines a common structure for identifiable classes (has an "id" property).
      */
     public interface Identifiable
     {
-        
         /**
          * Indicates the id value of this object.
          */
         function get id():* ;
-    
+        
         /**
          * @private
          */
         function set id( id:* ):void ;
-         
     }
 }

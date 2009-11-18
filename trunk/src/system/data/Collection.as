@@ -36,8 +36,8 @@
 package system.data
 {
     import system.Cloneable;
-    import system.Serializable;    
-
+    import system.Serializable;
+    
     /**
      * The root interface in the collection hierarchy. 
      * <p>A collection represents a group of objects, known as its elements.</p> 
@@ -45,7 +45,6 @@ package system.data
      */
     public interface Collection extends Cloneable, Iterable, Serializable
     {
-        
         /**
          * Ensures that this collection contains the specified element (optional operation).
          */

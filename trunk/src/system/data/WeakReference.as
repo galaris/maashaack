@@ -36,7 +36,7 @@
 package system.data 
 {
     import flash.utils.Dictionary;
-
+    
     /**
      * A weak reference is a reference that does not protect the referent object from collection by a garbage collector. 
      * An object referenced only by weak references is considered unreachable (or "weakly reachable") and so may be collected at any time.

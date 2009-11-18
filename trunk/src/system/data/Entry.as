@@ -35,13 +35,11 @@
 
 package system.data
 {
-
     /**
      * A map entry (key-value pair).
      */
     public interface Entry
     {
-        
         /**
          * Indicates the key corresponding to this entry.
          */

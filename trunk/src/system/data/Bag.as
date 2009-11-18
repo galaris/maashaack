@@ -37,19 +37,18 @@ package system.data
 {
     import system.Equatable;
     import system.data.Collection;
-    import system.data.Set;    
-
+    import system.data.Set;
+    
     /**
      * Defines a collection that counts the number of times an object appears in the collection.
      */
     public interface Bag extends Collection, Equatable
     {
-
         /**
          * Adds n copies of the given object to the bag and keep a count. 
          */
         function addCopies(o:*, nCopies:uint):Boolean ;
-                
+         
         /**
          * Insert all elements represented in the given collection.
          */
@@ -66,14 +65,14 @@ package system.data
          * @return the number of occurrences (cardinality) of the given object currently in the bag.
          */
         function getCount( o:* ):uint ;
-
+        
         /**
          * Removes objects from the bag according to their count in the specified collection.
          * @param c the collection to use.
          * @return true if the bag changed.
          */
         function removeAll(c:Collection):Boolean ;
-
+        
         /**
          * Removes a specified number of copies of an object from the bag.
          * @param o the object to remove
@@ -81,18 +80,16 @@ package system.data
          * @return true if the bag changed
          */
         function removeCopies(o:*, nCopies:uint):Boolean ; 
-
+        
         /**
          * Removes any members of the bag that are not in the given collection, respecting cardinality.
          */
         function retainAll(c:Collection):Boolean ;
-
+        
         /**
          * Returns the Set of unique members that represent all members in the bag.
          * @return the Set of unique members that represent all members in the bag.
          */
         function uniqueSet():Set ;
- 
     }
-
 }

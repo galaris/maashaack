@@ -35,7 +35,6 @@
 
 package system.data
 {
-
     /**
      * A collection that contains no duplicate elements.
      */
@@ -43,5 +42,4 @@ package system.data
     {
         
     }
-    
 }

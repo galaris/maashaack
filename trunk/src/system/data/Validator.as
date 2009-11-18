@@ -35,13 +35,11 @@
 
 package system.data
 {
-
     /**
      * Defines the methods that objects that participate in a validation operation.
      */
     public interface Validator
     {
-        
         /**
          * Returns <code class="prettyprint">true</code> if the specific value is valid.
          * @return <code class="prettyprint">true</code> if the specific value is valid.
@@ -53,6 +51,5 @@ package system.data
          * @throws TypeError if the value is not valid.
          */
         function validate( value:* ):void ;
-        
     }
 }

@@ -35,7 +35,6 @@
 
 package system.data
 {
-
     /**
      * A collection designed for holding elements prior to processing. Besides basic Collection operations, queues provide additional insertion, extraction, and inspection operations.
      * <p>Queues typically, but do not necessarily, order elements in a FIFO (first-in-first-out) manner.</p>
@@ -43,12 +42,11 @@ package system.data
      */
     public interface Queue extends Collection
     {
-        
         /**
          * Retrieves and removes the head of this queue.
          */
         function dequeue():Boolean ;
-
+        
         /**
          * Retrieves, but does not remove, the head of this queue.
          */
@@ -63,13 +61,10 @@ package system.data
          * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
          */
         function peek():* ;
-    
+       
         /**
          * Retrieves and removes the head of this queue.
          */
         function poll():* ;
-                
     }
-
 }
-
