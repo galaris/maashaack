@@ -38,7 +38,7 @@ package examples
     import system.console;
     import system.events.ActionEvent;
     import system.process.ActionURLStream;
-    import system.ui.TextFieldConsole;
+    import system.diagnostics.TextFieldConsole;
     
     import flash.display.Sprite;
     import flash.display.StageAlign;
