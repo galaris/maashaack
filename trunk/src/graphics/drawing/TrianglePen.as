@@ -338,19 +338,19 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
         public override function drawShape():void
         {
             
-            graphics.moveTo( _a.x , _a.y ) ;
-            graphics.lineTo( _b.x , _b.y ) ;
-            graphics.lineTo( _c.x , _c.y ) ;
-            graphics.lineTo( _a.x , _a.y ) ;
+            _graphics.moveTo( _a.x , _a.y ) ;
+            _graphics.lineTo( _b.x , _b.y ) ;
+            _graphics.lineTo( _c.x , _c.y ) ;
+            _graphics.lineTo( _a.x , _a.y ) ;
         }
-
+        
         /**
          * Sets the shape options to defined all values to draw the shape.
          * @param ab (optional) The ab distance in pixels of the triangle pen.

@@ -105,7 +105,7 @@ package graphics.drawing
         {
             _refreshAlign() ;
             ellipseWidth  = isNaN( ellipseWidth )  ? 0 : ellipseWidth  ;
-            graphics.drawRoundRect( _x , _y , width , height , ellipseWidth , ellipseHeight ) ;
+            _graphics.drawRoundRect( _x , _y , width , height , ellipseWidth , ellipseHeight ) ;
         }
         
         /**

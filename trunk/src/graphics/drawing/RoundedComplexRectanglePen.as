@@ -188,7 +188,7 @@ package graphics.drawing
         public function set bottomLeftRadius( value:Number ):void
         {
             _bottomLeftRadius = isNaN(value) ? 0 : value ;
-        }        
+        }
         
         /**
          * The radius of the bottom-left corner, in pixels.
@@ -197,7 +197,7 @@ package graphics.drawing
         {
             return _bottomRightRadius ;
         }
-
+        
         /**
          * @private
          */
@@ -215,7 +215,7 @@ package graphics.drawing
         {
             return _cornerRadius ;
         }
-
+        
         /**
          * @private
          */

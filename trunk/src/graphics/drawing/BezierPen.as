@@ -105,10 +105,10 @@ package graphics.drawing
             var size:int = points.length ;
             if ( size > 0 ) 
             {
-                graphics.moveTo( points[0].x, points[0].y );
+                _graphics.moveTo( points[0].x, points[0].y );
                 for ( var i:int ; i < size ; i++ )
                 {
-                    graphics.lineTo( points[i].x, points[i].y );
+                    _graphics.lineTo( points[i].x, points[i].y );
                 }
             } 
         }
@@ -169,7 +169,7 @@ package graphics.drawing
             } 
             else 
             {
-                graphics.curveTo( s.x, s.y, d.x, d.y ) ;
+                _graphics.curveTo( s.x, s.y, d.x, d.y ) ;
             }
         }
     }

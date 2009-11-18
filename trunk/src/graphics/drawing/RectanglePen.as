@@ -136,7 +136,7 @@ package graphics.drawing
         public override function drawShape():void
         {
             _refreshAlign() ;
-            graphics.drawRect( _x , _y , width , height ) ;
+            _graphics.drawRect( _x , _y , width , height ) ;
         }
         
         /**

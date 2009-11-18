@@ -139,7 +139,7 @@ package graphics.drawing
                 $x += $r ;
                 $y += $r ;
             }
-            graphics.drawCircle( $x, $y, radius ) ;
+            _graphics.drawCircle( $x, $y, radius ) ;
         }
         
         /**

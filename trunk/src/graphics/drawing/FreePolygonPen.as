@@ -125,12 +125,12 @@ package graphics.drawing
             var size:int = _points.length ;
             if ( size > 1 ) 
             {
-                graphics.moveTo( _points[0].x, _points[0].y );
+                _graphics.moveTo( _points[0].x, _points[0].y );
                 for( var i:int = 1 ; i< size ; i++ )
                 {
                     graphics.lineTo( _points[i].x, _points[i].y );
                 }
-                graphics.lineTo( _points[0].x, _points[0].y );
+                _graphics.lineTo( _points[0].x, _points[0].y );
             }
         }
         

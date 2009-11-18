@@ -178,7 +178,7 @@ package graphics.drawing
             {
                 var cp:Object = (transform as Function)( arguments[0], arguments[1] );
                 var ap:Object = (transform as Function)( arguments[2], arguments[3] ) ;
-                graphics.curveTo( cp.x , cp.y , ap.x , ap.y );
+                _graphics.curveTo( cp.x , cp.y , ap.x , ap.y );
             }
         }
         
@@ -210,7 +210,7 @@ package graphics.drawing
             else
             {
                 var p:Object = (transform as Function)( arguments[0], arguments[1] );
-                graphics.moveTo(p.x,p.y);
+                _graphics.moveTo(p.x,p.y);
             }
         }
 
@@ -222,7 +222,7 @@ package graphics.drawing
             var d:Array = _data ;
             var e:Array ;
             var value:Array ;
-            var l:Number = d.length ;
+            var l:int = d.length ;
             while (--l > -1) 
             {
                 e = d[l];
@@ -233,7 +233,7 @@ package graphics.drawing
                 }
             }
         }
-    
+        
         /**
          * Draws the shape.
          * @param data The array representation of all items of the canvas to draw the shape.
@@ -246,7 +246,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
@@ -260,12 +260,12 @@ package graphics.drawing
          */
         public function linesToCurves():void 
         {
-            var i:Number = 0 ;
+            var i:int = 0 ;
             var key:String ;
             var value:Array ;
             var e:Array ;
             var d:Array = _data ;
-            var len:Number = d.length;
+            var len:int = d.length;
             var ax:Number = 0 ;
             var ay:Number = 0 ;
             while ( i<len ) 
@@ -292,7 +292,7 @@ package graphics.drawing
                 i++ ;
             }
         }
-    
+        
         /**
          * This static method launch the process to draw in a specified movieclip target the canvas defined with the (@code draw} argument.
          * @param graphics the Graphics reference.
@@ -318,7 +318,7 @@ package graphics.drawing
                 }
             }
         }
-
+        
         /**
          * Returns the number of elements in the model.
          * @return the number of elements in the model.
@@ -327,7 +327,7 @@ package graphics.drawing
         {
             return _data.length ;
         }
-
+        
         /**
          * @private
          */
@@ -337,6 +337,5 @@ package graphics.drawing
          * @private
          */
         private var _transform:Function ;
-        
     }
 }
