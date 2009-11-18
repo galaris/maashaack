@@ -35,13 +35,11 @@
 
 package system.data
 {
-
     /**
      * This interface defines a Map with multiple values to keys.
      */
     public interface MultiMap extends Map
     {
-        
         /**
          * Returns the total count of elements in all the collection in the MultiMap.
          * @return the total count of elements in all the collection in the MultiMap.
@@ -58,13 +56,12 @@ package system.data
          * Returns a collection of all values associated with all the keys in this map.
          * @return a collection of all values associated with all the keys in this map.
          */
-        function values():Collection ;        
+        function values():Collection ;
         
         /**
          * Returns an Iterator representation of all values in the MultiMap.
          * @return an Iterator representation of all values in the MultiMap.
          */
-        function valuesIterator():Iterator ;          
-        
+        function valuesIterator():Iterator ;
     }
 }

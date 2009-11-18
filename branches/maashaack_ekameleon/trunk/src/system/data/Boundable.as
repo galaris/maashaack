@@ -35,7 +35,6 @@
 
 package system.data 
 {
-
     /**
      * Defines an object that is bounded in size. 
      * <p>The size of the object can vary, but it can never exceed a preset maximum number of elements.</p> 
@@ -43,18 +42,16 @@ package system.data
      */
     public interface Boundable 
     {
-        
         /**
          * Returns <code class="prettyprint">true</code> if the object is full.
          * @return <code class="prettyprint">true</code> if the object is full.
          */
         function isFull():Boolean ;
-    
+        
         /**
          * Returns the max number of occurrences in the given collection.
          * @return the max number of occurrences in the given collection.
          */
-        function maxSize():uint ;         
-        
+        function maxSize():uint ;
     }
 }

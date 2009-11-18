@@ -35,19 +35,15 @@
 
 package system.data
 {
-
     /**
      * Implementing this interface allows a List to be iterable.
      */    
     public interface ListIterable
     {
-    
         /**
          * Returns a list iterator of the elements in this list (in proper sequence).
          * @return a list iterator of the elements in this list (in proper sequence).
          */
         function listIterator( position:uint=0 ):ListIterator ;
-            
     }
-
 }

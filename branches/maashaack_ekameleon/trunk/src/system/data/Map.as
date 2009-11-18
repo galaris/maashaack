@@ -36,76 +36,75 @@
 package system.data
 {
     import system.Cloneable;
-    import system.Serializable;    
-
+    import system.Serializable;
+    
     /**
      * An object that maps keys to values. A map cannot contain duplicate keys. Each key can map to at most one value.
      */
     public interface Map extends Cloneable, Iterable, Serializable
     {
-     
         /**
          * Removes all mappings from this map (optional operation).
          */
-         function clear():void ;
-
+        function clear():void ;
+        
         /**
          * Returns <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
          * @return <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
          */
         function containsKey( key:* ):Boolean ;
-    
+        
         /**
          * Returns <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
          * @return <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
          */
         function containsValue( value:* ):Boolean ;
-
+        
         /**
          * Returns the value to which this map maps the specified key.
          * @return the value to which this map maps the specified key.
          */
         function get( key:* ):* ;
-    
+        
         /**
          * Returns an Array of all the keys in the map.
          * @return an Array of all the keys in the map.
          */
         function getKeys():Array ;
-
+        
         /**
          * Returns an Array of all the values in the map.
          * @return an Array of all the values in the map.
          */
         function getValues():Array ;
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if this map contains no key-value mappings.
          * @return <code class="prettyprint">true</code> if this map contains no key-value mappings.
          */
         function isEmpty():Boolean ;
-    
+        
         /**
          * Returns the keys iterator of this map.
          * @return the keys iterator of this map.
          */
         function keyIterator():Iterator ;
-
+        
         /**
          * Associates the specified value with the specified key in this map (optional operation).
          */
-        function put( key:* , value:* ):*  ;
+        function put( key:* , value:* ):* ;
         
         /**
          * Copies all of the mappings from the specified map to this one.
          */
-        function putAll( m:Map ):void ;        
+        function putAll( m:Map ):void ;
         
         /**
          * Removes the mapping for this key from this map if it is present (optional operation).
          */
         function remove(o:*):*  ;
-    
+        
         /**
          * Returns the number of key-value mappings in this map.
          * @return the number of key-value mappings in this map.

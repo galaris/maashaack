@@ -35,22 +35,19 @@
 
 package system.data
 {
-
     /**
      * Interface implemented by classes that defined a specific type.
      */
     public interface Typeable
     {
-    
         /**
          * Indicates the type of the Typeable object.
          */
         function get type():* ;
-    
+        
         /**
          * @private
          */
         function set type( type:* ):void ;
-    
     }
 }
