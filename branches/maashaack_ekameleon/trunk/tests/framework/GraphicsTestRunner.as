@@ -41,7 +41,7 @@ package
     
     import system.config;
     import system.console;
-    import system.ui.TextFieldConsole;
+    import system.diagnostics.TextFieldConsole;
     
     import flash.display.Sprite;
     import flash.display.StageAlign;

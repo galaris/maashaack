@@ -35,28 +35,26 @@
 
 package system.text.html
 {
-
     /**
      * The Entity class.
      */
     public class Entity
     {
-
         /**
          * The String char value of the entity.
          */
         public var char:String;
-
+        
         /**
          * The String name value of the entity.
          */
         public var name:String;
-
+        
         /**
          * The Number value of the entity.
          */
         public var number:int;
-
+        
         /**
          * Creates a new Entity instance.
          * @param char The entity character value.
@@ -69,7 +67,7 @@ package system.text.html
             this.name = name   ;
             this.number = number ;
         }
-
+        
         /**
          * Returns the 'entity number' string representation of the entity.
          * @return the 'entity number' string representation of the entity.
@@ -78,7 +76,7 @@ package system.text.html
         {
             return "&#" + number + ";" ;
         }
-
+        
         /**
          * Returns the 'entity string' representation of the entity.
          * @return the 'entity string' representation of the entity.
@@ -87,7 +85,7 @@ package system.text.html
         {
             return "&" + name + ";" ;
         }
-
+        
         /**
          * Returns the character value of the entity.
          * @return the character value of the entity.

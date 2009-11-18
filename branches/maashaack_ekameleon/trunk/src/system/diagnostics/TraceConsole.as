@@ -36,22 +36,21 @@
 package system.diagnostics
 {
     import flash.errors.IllegalOperationError;
-
+    
     import system.Strings;
-    import system.terminals.Console;    
-
+    import system.terminals.Console;
+    
     /**
      * The TraceConsole reuse the trace function that redirect messages to the output console in either Flash or Flex.
      * <p><b>Note:</b> You can not read from the output and so the TraceConsole is not interactive.</p>
      */
     public class TraceConsole implements Console
     {
-
         /**
          * @private
          */
         protected var _buffer:String = "" ;
-
+        
         /**
          * Formats the specific messages.
          * @param messages The Array representation of all message to format.
@@ -81,11 +80,11 @@ package system.diagnostics
         public function TraceConsole()
         {
         }
-
+        
         /**
          * Not supported, the console isn't interactive.
          * @throws flash.errors.IllegalOperationError The read() method is illegal in this console
-         */        
+         */
         public function read():String
         {
             throw new IllegalOperationError( this + " read() method is illegal in this console." ) ;
@@ -94,7 +93,7 @@ package system.diagnostics
         /**
          * Not supported, the console isn't interactive.
          * @throws flash.errors.IllegalOperationError The read() method is illegal in this console
-         */      
+         */
         public function readLine():String
         {
             throw new IllegalOperationError( this + " readLine() method is illegal in this console." ) ;
