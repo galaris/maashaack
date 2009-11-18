@@ -498,11 +498,11 @@ package graphics.drawing
                 _tMat.invert();
                 _tMat.concat( _sMat );
                 
-                graphics.beginBitmapFill( _bitmapData, _tMat , false , smoothing );
-                graphics.moveTo( x0, y0 );
-                graphics.lineTo( x1, y1 );
-                graphics.lineTo( x2, y2 );
-                graphics.endFill( );
+                _graphics.beginBitmapFill( _bitmapData, _tMat , false , smoothing );
+                _graphics.moveTo( x0, y0 );
+                _graphics.lineTo( x1, y1 );
+                _graphics.lineTo( x2, y2 );
+                _graphics.endFill( );
             }
         }
         

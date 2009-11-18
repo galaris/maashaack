@@ -466,18 +466,18 @@ package graphics.drawing
             
             ////////// fixed part
             
-            graphics.beginBitmapFill( page1, new Matrix( ), false, smoothing );
+            _graphics.beginBitmapFill( page1, new Matrix( ), false, smoothing );
             
             l = ppts.length;
             
-            graphics.moveTo( ppts[l - 1].x, ppts[l - 1].y );
+            _graphics.moveTo( ppts[l - 1].x, ppts[l - 1].y );
             
             while (-- l >= 0 )
             {
-                graphics.lineTo( ppts[l].x, ppts[l].y );
+                _graphics.lineTo( ppts[l].x, ppts[l].y );
             }
             
-            graphics.endFill( ) ;
+            _graphics.endFill( ) ;
             
             ////////// flipped part
             
@@ -486,18 +486,18 @@ package graphics.drawing
                 return ;
             }
             
-            graphics.beginBitmapFill( page2, _compute.matrix, false, smoothing );
+            _graphics.beginBitmapFill( page2, _compute.matrix, false, smoothing );
             
             l = cpts.length ;
             
-            graphics.moveTo( cpts[l - 1].x, cpts[l - 1].y );
+            _graphics.moveTo( cpts[l - 1].x, cpts[l - 1].y );
             
             while ( -- l >= 0 )
             {
-                graphics.lineTo( cpts[l].x, cpts[l].y );
+                _graphics.lineTo( cpts[l].x, cpts[l].y );
             }
             
-            graphics.endFill( );
+            _graphics.endFill( );
         }
         
         /**

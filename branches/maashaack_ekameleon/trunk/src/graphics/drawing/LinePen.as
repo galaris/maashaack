@@ -81,7 +81,7 @@ package graphics.drawing
             super( graphic );
             setPen( end , start ) ;
         }
-
+        
         /**
          * @private
          */
@@ -89,17 +89,17 @@ package graphics.drawing
         {
             throw new Error( this + " align property can't be use to align this free shape.") ;
         }
-
+        
         /**
          * The end vector object of this line pen.
          */
         public var end:Vector2 = new Vector2() ;
-
+        
         /**
          * The start vector object of this line pen.
          */
         public var start:Vector2 = new Vector2() ; 
-
+        
         /**
          * Draws the shape.
          * @param end (optional) The end vector value (flash.geom.Point or graphics.geom.Vector2)
@@ -113,28 +113,28 @@ package graphics.drawing
             }
             super.draw() ;
         }
-            
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
         public override function drawShape():void
         {
-        	if ( start.equals(end) == false )
-        	{
-                graphics.moveTo( start.x, start.y ) ;
-                graphics.lineTo( end.x, end.y ) ;
-        	}
+            if ( start.equals(end) == false )
+            {
+                _graphics.moveTo( start.x, start.y ) ;
+                _graphics.lineTo( end.x, end.y ) ;
+            }
         }
-
+        
         /**
          * Returns the Line reference of this pen.
          * @return the Line reference of this pen.
          */
         public function getLine():Line 
         {
-            return Lines.getLine( start , end ) ;    
+            return Lines.getLine( start , end ) ;
         }
-
+        
         /**
          * Sets the arc options to defined all values to draw the arc shape in the movieclip reference of this pen.
          * @param end (optional) The end vector value (flash.geom.Point or graphics.geom.Vector2)
@@ -152,8 +152,6 @@ package graphics.drawing
                 start.x = args[1].x ;
                 start.y = args[1].y ;
             }
-        }    
-        
+        }
     }
 }
-

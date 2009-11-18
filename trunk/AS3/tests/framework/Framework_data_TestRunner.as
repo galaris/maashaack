@@ -40,7 +40,7 @@ package
     import graphics.AllTests;
     
     import system.*;
-    import system.ui.TextFieldConsole;
+    import system.diagnostics.TextFieldConsole;
     
     import flash.display.Sprite;
     import flash.display.StageAlign;

@@ -143,7 +143,7 @@ package graphics.drawing
             {
                 $x -= $w ;
             }
-            graphics.drawEllipse( $x , $y , $w , $h ) ;
+            _graphics.drawEllipse( $x , $y , $w , $h ) ;
         }
         
         /**

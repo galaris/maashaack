@@ -263,16 +263,16 @@ package graphics.drawing
                 
                 start = angle * Trigo.DEG2RAD ;
                 
-                graphics.moveTo( $x + ( Math.cos(start) * outerRadius ) , $y - ( Math.sin(start) * outerRadius ) ) ;
+                _graphics.moveTo( $x + ( Math.cos(start) * outerRadius ) , $y - ( Math.sin(start) * outerRadius ) ) ;
                 
                 for (n=1 ; n<=_points; n++) 
                 {
                     dx = $x + Math.cos( start + (step*n) - halfStep ) * innerRadius ;
                     dy = $y - Math.sin( start + (step*n) - halfStep ) * innerRadius ;
-                    graphics.lineTo(dx, dy) ;
+                    _graphics.lineTo(dx, dy) ;
                     dx = $x + Math.cos( start + (step*n) ) * outerRadius ;
                     dy = $y - Math.sin( start + (step*n) ) * outerRadius ;
-                    graphics.lineTo(dx, dy);
+                    _graphics.lineTo(dx, dy);
                 }
             }
         }

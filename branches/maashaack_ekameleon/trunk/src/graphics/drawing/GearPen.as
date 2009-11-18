@@ -278,7 +278,7 @@ package graphics.drawing
                 
                 start = angle * Trigo.DEG2RAD ;
                 
-                graphics.moveTo( $x +( Math.cos(start) * outerRadius ) , $y - (Math.sin(start) * outerRadius ) ) ;
+                _graphics.moveTo( $x +( Math.cos(start) * outerRadius ) , $y - (Math.sin(start) * outerRadius ) ) ;
                 
                 // draw lines
                 for ( n = 1 ; n <= _sides ; n++ ) 
@@ -286,22 +286,22 @@ package graphics.drawing
                     dx = $x + Math.cos( start + ( step * n ) - ( qtrStep * 3 ) ) * innerRadius ;
                     dy = $y - Math.sin( start + ( step * n ) - ( qtrStep * 3 ) ) * innerRadius ;
                     
-                    graphics.lineTo(dx, dy);
+                    _graphics.lineTo(dx, dy);
                     
                     dx = $x + Math.cos( start + ( step * n ) - ( qtrStep*2 ) ) * innerRadius ;
                     dy = $y - Math.sin( start + ( step * n ) - ( qtrStep*2 ) ) * innerRadius ;
                     
-                    graphics.lineTo(dx, dy);
+                    _graphics.lineTo(dx, dy);
                     
                     dx = $x + Math.cos(start + ( step * n ) - qtrStep ) * outerRadius;
                     dy = $y - Math.sin(start + ( step * n ) - qtrStep ) * outerRadius;
                     
-                    graphics.lineTo(dx, dy);
+                    _graphics.lineTo(dx, dy);
                     
                     dx = $x + Math.cos( start + ( step * n ) ) * outerRadius ;
                     dy = $y - Math.sin( start + ( step * n ) ) * outerRadius ;
                     
-                    graphics.lineTo(dx, dy);
+                    _graphics.lineTo(dx, dy);
                 }
                 
                 if ( _holeSides > 2 ) 
@@ -311,12 +311,12 @@ package graphics.drawing
                         holeRadius = innerRadius / 3 ;
                     }
                     step = _PI2 / _holeSides ;
-                    graphics.moveTo($x + ( Math.cos(start) * holeRadius ) , $y - ( Math.sin( start ) * holeRadius ) ) ;
+                    _graphics.moveTo($x + ( Math.cos(start) * holeRadius ) , $y - ( Math.sin( start ) * holeRadius ) ) ;
                     for ( n = 1 ; n <= _holeSides ; n++ ) 
                     {
                         dx = $x + Math.cos(start+(step*n)) * holeRadius;
                         dy = $y - Math.sin(start+(step*n)) * holeRadius;
-                        graphics.lineTo(dx, dy);
+                        _graphics.lineTo(dx, dy);
                     }
                 }
             }

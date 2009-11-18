@@ -163,7 +163,7 @@ package graphics.drawing
                 __y += dy ;
             }
             
-            graphics.moveTo(__x, __y) ; 
+            _graphics.moveTo(__x, __y) ; 
             delta = Math.sqrt((end.x - __x)*(end.x - __x)+ (end.y - __y)* (end.y - __y)) ;
             
             if(delta>_length) 
@@ -175,7 +175,7 @@ package graphics.drawing
                 _lineRadiansTo ( delta ) ;
             }
             
-            graphics.moveTo(end.x, end.y);
+            _graphics.moveTo(end.x, end.y);
             
         }
         
@@ -227,7 +227,7 @@ package graphics.drawing
          */
         private function _lineRadiansTo( n:Number ):void
         {
-            graphics.lineTo ( __x + Math.cos(_radians) * n ,  __y + Math.sin(_radians) * n ) ;
+            _graphics.lineTo ( __x + Math.cos(_radians) * n ,  __y + Math.sin(_radians) * n ) ;
         }
     }
 }

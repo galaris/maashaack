@@ -128,7 +128,7 @@ package graphics.drawing
                 data = args[0] as Array ;
             }
             super.draw() ;
-        }        
+        }
         
         /**
          * This method contains the basic drawing shape algorithm.

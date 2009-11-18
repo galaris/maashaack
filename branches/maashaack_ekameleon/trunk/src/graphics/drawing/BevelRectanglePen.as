@@ -107,42 +107,42 @@ package graphics.drawing
                 var nY:Number   = _y ;
                 var nW:Number   = nX + width ;
                 var nH:Number   = nY + height ;
-                graphics.moveTo ( nX + hb , nY) ;
+                _graphics.moveTo ( nX + hb , nY) ;
                 if (_corner.tr) 
                 {
-                    graphics.lineTo( nW - hb , nY) ;
-                    graphics.lineTo( nW , nY + vb ) ;
+                    _graphics.lineTo( nW - hb , nY) ;
+                    _graphics.lineTo( nW , nY + vb ) ;
                 }
                 else 
                 {
-                    graphics.lineTo( nW , nY ) ;
+                    _graphics.lineTo( nW , nY ) ;
                 }
                 if (_corner.br) 
                 {
-                    graphics.lineTo( nW , nH - vb ) ;
-                    graphics.lineTo( nW - hb , nH) ;
+                    _graphics.lineTo( nW , nH - vb ) ;
+                    _graphics.lineTo( nW - hb , nH) ;
                 }
                 else 
                 {
-                    graphics.lineTo( nW , nH ) ;
+                    _graphics.lineTo( nW , nH ) ;
                 }
                 if (_corner.bl) 
                 {
-                    graphics.lineTo( nX  + hb, nH ) ;
-                    graphics.lineTo( nX  ,  nH - vb ) ;
+                    _graphics.lineTo( nX  + hb, nH ) ;
+                    _graphics.lineTo( nX  ,  nH - vb ) ;
                 }
                 else 
                 {
-                    graphics.lineTo( nX , nH ) ;
+                    _graphics.lineTo( nX , nH ) ;
                 }
                 if (_corner.tl) 
                 {
-                    graphics.lineTo( nX , nY + vb) ;
-                    graphics.lineTo( nX + hb, nY);
+                    _graphics.lineTo( nX , nY + vb) ;
+                    _graphics.lineTo( nX + hb, nY);
                 }
                 else 
                 {
-                    graphics.lineTo( nX , nY ) ;
+                    _graphics.lineTo( nX , nY ) ;
                 }
             } 
             else 

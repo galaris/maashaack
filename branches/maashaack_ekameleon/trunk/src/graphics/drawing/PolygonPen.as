@@ -148,10 +148,10 @@ package graphics.drawing
          * The radius value of the pen.
          */
         public var radius:Number ;
-
+        
         /**
          * The number of sides (Math.abs(sides) must be > 2)
-          */
+         */
         public function get sides():uint
         {
             return _sides ;
@@ -192,7 +192,7 @@ package graphics.drawing
             }
             super.draw() ;
         }
-
+        
         /**
          * This method contains the basic drawing shape algorithm.
          */
@@ -246,19 +246,19 @@ package graphics.drawing
                 var step:Number  = _PI2 / sides ; // calculate span of sides
                 var start:Number = angle * Trigo.DEG2RAD ; // calculate starting angle in radians
                 
-                graphics.moveTo( $x + ( Math.cos( start ) * radius ), $y - ( Math.sin( start ) * radius ) ) ;
+                _graphics.moveTo( $x + ( Math.cos( start ) * radius ), $y - ( Math.sin( start ) * radius ) ) ;
                 
                 for ( var i:int = 1 ; i <= _sides ; i++ ) 
                 {
-                    graphics.lineTo
+                    _graphics.lineTo
                     (
-                        $x + Math.cos( start + ( step*i ) )* radius , 
-                        $y - Math.sin( start + ( step*i ) )* radius
+                        $x + Math.cos( start + ( step*i ) ) * radius , 
+                        $y - Math.sin( start + ( step*i ) ) * radius
                     );
                 }
             }
         }
-
+        
         /**
          * Sets the shape options to defined all values to draw the shape.
          * @param x (optional) The x location of the center of the circle relative to the registration point of the parent display object (in pixels).
@@ -305,6 +305,5 @@ package graphics.drawing
          * @private
          */
         private var _sides:uint = 3 ;
-
     }
 }

@@ -228,9 +228,9 @@ package graphics.drawing
             {
                 if (_angle < 360 && _angle > -360 && type == ArcType.PIE) 
                 {
-                    graphics.lineTo (ax, ay) ;
+                    _graphics.lineTo (ax, ay) ;
                 }
-                graphics.moveTo (ax, ay) ;
+                _graphics.moveTo (ax, ay) ;
                 for (var i:int = 0 ; i<segs ; i++) 
                 {
                     a += theta ;
@@ -242,23 +242,23 @@ package graphics.drawing
                     cx = $x + Math.cos( angleMid ) * ( radius / Math.cos ( theta / 2 ) ) ;
                     cy = $y + Math.sin( angleMid ) * ( nR / Math.cos( theta / 2 ) ) ;
                     
-                    graphics.curveTo(cx, cy, bx, by) ;
+                    _graphics.curveTo(cx, cy, bx, by) ;
                 }
                 if ( type == ArcType.CHORD )
                 {
-                    graphics.lineTo(ax, ay) ; // CHORD or other value
+                    _graphics.lineTo(ax, ay) ; // CHORD or other value
                 }
                 else if ( type == ArcType.PIE )
                 {
                     if ( _angle < 360 && _angle > -360 ) 
                     {
-                        graphics.lineTo( $x, $y );
+                        _graphics.lineTo( $x, $y );
                     }
                 }
                 else
                 {
                     LineStyle.EMPTY.apply( graphics ) ;
-                    graphics.lineTo(ax, ay) ; // CHORD or other value
+                    _graphics.lineTo(ax, ay) ; // CHORD or other value
                 }
             }
         }
