@@ -35,11 +35,11 @@
 
 package graphics.drawing 
 {
-	import graphics.ArcType;
     import graphics.Align;
+    import graphics.ArcType;
     import graphics.LineStyle;
     import graphics.numeric.Trigo;
-    
+
     /**
      * This pen draw a pie or chord arc shape with a Graphics object.
      */
@@ -208,7 +208,7 @@ package graphics.drawing
                 }
             }
             
-            graphics.moveTo( $x, $y ) ;
+            _graphics.moveTo( $x, $y ) ;
             
             var ax:Number ; var ay:Number ; 
             var bx:Number ; var by:Number ; 

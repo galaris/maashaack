@@ -36,7 +36,7 @@
 package graphics.drawing 
 {
     import flash.display.Graphics;
-    
+
     /**
      * The Canvas pen is used to draw a complex shape with differents points in a data model.
      * <p><b>Example :</b></p>
@@ -303,7 +303,7 @@ package graphics.drawing
         {
             if ( graphics == null )
             {
-                throw new NullPointerError( "Canvas process failed with a 'null' or 'undefined' graphics reference in argument.") ;    
+                throw new ArgumentError( "Canvas process failed with a 'null' or 'undefined' graphics reference in argument.") ;    
             }
             var d:Array = pen.data ;
             var len:Number = pen.size() ;

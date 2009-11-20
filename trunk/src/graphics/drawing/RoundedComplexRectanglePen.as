@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,8 +35,15 @@
 
 package graphics.drawing 
 {
+    import Array;
+    import Number;
+    import graphics.drawing.CornerRectanglePen;
+
+    import isNaN;
     import system.hack;
-    
+
+    import uint;
+
     /**
      * Draws a complex rounded rectangle. You can set the corner radius of the rectangle with the top left, top right, bottom left and bottom right corner.
      * <p><b>Example :</b></p>

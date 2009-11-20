@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,7 +36,7 @@
 package graphics.drawing 
 {
     import graphics.geom.Rectangle;
-    
+
     /**
      * This tool class transform a <code class="prettyprint">Canvas</code> object with static methods.
      */

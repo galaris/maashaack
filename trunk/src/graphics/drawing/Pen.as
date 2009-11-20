@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -38,13 +38,13 @@ package graphics.drawing
     import graphics.Align;
     import graphics.IFillStyle;
     import graphics.ILineStyle;
-    
+
     import flash.display.Graphics;
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.utils.Proxy;
     import flash.utils.flash_proxy;
-    
+
     /**
      * The Pen class use composition to control a Graphics reference and draw custom vector graphic shapes.
      */
