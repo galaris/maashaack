@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,12 +35,17 @@
 
 package graphics.drawing 
 {
+    import Array;
+    import Math;
+    import Number;
+    import graphics.drawing.Pen;
     import graphics.numeric.Trigo;
-    
+
+    import isNaN;
     import system.hack;
-    
+
     import flash.geom.Point;
-    
+
     /**
      * Draw a triangle with the A, B and C points in the 2D space. ab and ac are the lengths to defines the base of the shape.
      * <p><b>Example :</b></p>

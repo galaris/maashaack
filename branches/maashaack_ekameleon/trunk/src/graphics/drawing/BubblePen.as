@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,13 +35,18 @@
 
 package graphics.drawing 
 {
+    import Math;
+    import Number;
     import graphics.Align;
+    import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.geom.Vector2;
-    
+
+    import isNaN;
     import system.hack;
-    
+
+    import uint;
     import flash.geom.Rectangle;
-    
+
     /**
      * Draws a bubble shape with a custom alignment, offset, corner radius, arrow and size.
      * <p><b>Example :</b></p>

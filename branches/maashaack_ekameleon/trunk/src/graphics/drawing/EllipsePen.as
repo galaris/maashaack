@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,8 +35,14 @@
 
 package graphics.drawing 
 {
+    import Array;
+    import Number;
     import graphics.Align;
-    
+    import graphics.drawing.Pen;
+
+    import isNaN;
+    import uint;
+
     /**
      * This pen is the tool to draw an elipse vector shape.
      */

@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,7 +37,9 @@ package graphics.drawing
     import graphics.Drawable;
     import graphics.IFillStyle;
     import graphics.ILineStyle;
-    
+
+    import uint;
+
     /**
      * This interface defined the IPen implementation to creates shaped in Shape, Sprite and MovieClip objects.
      */

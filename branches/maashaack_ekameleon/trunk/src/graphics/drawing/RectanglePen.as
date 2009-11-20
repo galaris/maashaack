@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -34,12 +34,17 @@
 */
 package graphics.drawing 
 {
+    import Array;
+    import Number;
     import graphics.Align;
-    
+    import graphics.drawing.Pen;
+
+    import isNaN;
     import system.hack;
-    
+
+    import uint;
     import flash.geom.Rectangle;
-    
+
     /**
      * This pen draw a rectangle shape with a Graphics object.
      * <p><b>Example :</b></p>

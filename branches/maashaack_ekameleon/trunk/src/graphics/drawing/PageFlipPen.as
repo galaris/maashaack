@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,11 +37,11 @@ package graphics.drawing
 {
     import graphics.Direction;
     import graphics.Directionable;
-    
+
     import flash.display.BitmapData;
     import flash.geom.Matrix;
     import flash.geom.Point;
-    
+
     /**
      * This pen computes, generates, and draws a pageflip in a specifig Graphics object with two BitmapData reference (pages).
      * <p>Map of the page flip algorithm.</p>
