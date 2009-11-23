@@ -73,6 +73,13 @@ package examples
             
             // initialize and run the tween
             
+            var from:Object =
+            {
+                x        : 100 ,
+                y        : 100 ,
+                rotation : 45
+            };
+            
             var to:Object =
             {
                 x        : 700 ,
@@ -80,7 +87,8 @@ package examples
                 rotation : 180
             };
             
-            tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ; // auto run
+            // tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ; // test without the optional from argument.
+            tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true , from ) ; // test with the optional from argument
         }
         
         public var tween:TweenTo ;
