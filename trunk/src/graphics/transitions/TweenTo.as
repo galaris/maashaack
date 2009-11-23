@@ -88,7 +88,7 @@ package graphics.transitions
      *                 rotation : 180
      *             };
      *             
-     *             tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ; // auto run
+     *             tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ;
      *         }
      *         
      *         public var tween:TweenTo ;
@@ -127,16 +127,36 @@ package graphics.transitions
          * @param duration A number indicating the length of time or number of frames for the tween motion.
          * @param useSeconds Indicates if the duration is in seconds.
          * @param auto Run the tween automatically.
+         * @param from The optional generic object to defines the initial values of the numeric attributes to change. 
          */
-        public function TweenTo( obj:* = null , to:Object = null , easing:* = null , duration:Number = 0 , useSeconds:Boolean = false , auto:Boolean = false )
+        public function TweenTo( obj:* = null , to:Object = null , easing:* = null , duration:Number = 0 , useSeconds:Boolean = false , auto:Boolean = false , from:* = null )
         {
             super( easing , duration, useSeconds, false ) ;
-            this.target = obj ;
-            this.to     = to  ;
+            this.target = obj  ;
+            this.from   = from ;
+            this.to     = to   ;
             if ( auto ) 
             {
                 run() ;
             }
+        }
+        
+        /**
+         * Determinates the generic object with all numeric attributes to start the transition. 
+         * If this object is null, the default numeric attributes of the target are used.
+         */
+        public function get from():Object
+        {
+            return _from ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set from( obj:* ):void
+        {
+            _from    = obj ;
+            _changed = true ;
         }
         
         /**
@@ -202,19 +222,19 @@ package graphics.transitions
                 {
                     throw new Error( this + " update failed, the 'to' property not must be null.") ;
                 }
-                _from = {} ;
-                for ( _prop in _to )
-                {
-                    _from[_prop] = _target[_prop] ;
-                }
-                
+                _begin = _from || _target ;
             }
             for ( _prop in _to )
             {
-                _target[_prop] = _easing( _time, _from[_prop] , _to[_prop] - _from[_prop] , _duration ) ;
+                _target[_prop] = _easing( _time, _begin[_prop] , _to[_prop] - _begin[_prop] , _duration ) ;
             }
             notifyChanged() ;
         }
+        
+        /**
+         * @private
+         */
+        protected var _begin:* ;
         
         /**
          * @private
@@ -224,7 +244,7 @@ package graphics.transitions
         /**
          * @private
          */
-        protected var _from:Object ;
+        protected var _from:* ;
         
         /**
          * @private
