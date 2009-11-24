@@ -47,7 +47,7 @@ package examples
     [SWF(width="200", height="200", frameRate="24", backgroundColor="#333333")]
     
     /**
-     * Example with the pegas.display.ReflectionBitmapData class.
+     * Example with the graphics.display.ReflectionBitmapData class.
      */
     public dynamic class ReflectionBitmapDataExample extends Sprite 
     {
