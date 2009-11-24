@@ -48,7 +48,7 @@ package examples
     [SWF(width="300", height="300", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Example with the pegas.display.PerlinNoise class.
+     * Example with the graphics.display.PerlinNoise class.
      */
     public class PerlinNoiseExample extends Sprite 
     {
