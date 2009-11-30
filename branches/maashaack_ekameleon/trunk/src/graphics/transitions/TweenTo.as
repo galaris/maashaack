@@ -222,7 +222,18 @@ package graphics.transitions
                 {
                     throw new Error( this + " update failed, the 'to' property not must be null.") ;
                 }
-                _begin = _from || _target ;
+                if ( _from )
+                {
+                    _begin = _from ;
+                }
+                else
+                {
+                    _begin = {} ;
+                    for ( _prop in _to )
+                    {
+                        _begin[_prop] = _target[_prop] ;
+                    }
+                }
             }
             for ( _prop in _to )
             {
