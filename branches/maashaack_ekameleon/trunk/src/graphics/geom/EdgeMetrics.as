@@ -67,9 +67,17 @@ package graphics.geom
         public static const EMPTY:EdgeMetrics = new EdgeMetrics( 0 , 0 , 0 , 0 ) ;
         
         /**
-         *  The height, in pixels, of the bottom edge region.
+         * The height, in pixels, of the bottom edge region.
          */
         public var bottom:Number ;
+        
+        /**
+         * The horizontal, in pixels, of the sum of left and right region.
+         */
+        public function get horizontal():int
+        {
+            return left + right;
+        }
         
         /**
          *  The width, in pixels, of the left edge region.
@@ -85,6 +93,14 @@ package graphics.geom
          *  The height, in pixels, of the top edge region.
          */
         public var top:Number ;
+        
+        /**
+         * The vertical, in pixels, of the sum of top and vertical region.
+         */
+        public function get vertical():int
+        {
+            return top + bottom ;
+        }
         
         /**
          * Returns a shallow copy of this instance.
@@ -120,7 +136,7 @@ package graphics.geom
         public static function filterNaNValue( value:Number, defaultValue:Number=0 ):Number
         {
             return isNaN( value ) ? defaultValue : value ;
-        }      
+        }
         
         /**
          * Returns the Object representation of this object.

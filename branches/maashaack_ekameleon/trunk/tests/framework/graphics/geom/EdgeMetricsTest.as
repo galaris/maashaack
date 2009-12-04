@@ -45,7 +45,7 @@ package graphics.geom
         }
         
         public var e:EdgeMetrics ;
-    
+        
         public function setUp():void
         {
             e = new EdgeMetrics() ;
@@ -73,15 +73,15 @@ package graphics.geom
             assertEquals( em.left   , 10, "04-01 - EdgeMetrics.EMPTY failed") ;
             assertEquals( em.top    , 20, "04-02 - EdgeMetrics.EMPTY failed") ;
             assertEquals( em.right  , 30, "04-03 - EdgeMetrics.EMPTY failed") ;
-            assertEquals( em.bottom , 40, "04-04 - EdgeMetrics.EMPTY failed") ;            
+            assertEquals( em.bottom , 40, "04-04 - EdgeMetrics.EMPTY failed") ;
             
         }
         
         public function testInterface():void
         {
             assertTrue( e is Geometry , "EdgeMetrics must implement the Geometry interface.") ;
-        }   
-
+        }
+        
         public function testEMPTY():void
         {
             var em:EdgeMetrics = EdgeMetrics.EMPTY ;
@@ -89,6 +89,22 @@ package graphics.geom
             assertEquals( em.left, 0, "02 - EdgeMetrics.EMPTY failed") ;
             assertEquals( em.right, 0, "03 - EdgeMetrics.EMPTY failed") ;
             assertEquals( em.bottom, 0, "04 - EdgeMetrics.EMPTY failed") ;
+        }
+        
+        public function testHorizontal():void
+        {
+            assertEquals( e.horizontal , 0 ) ;
+            e.left  = 10 ;
+            e.right = 20 ;
+            assertEquals( e.horizontal , 30 ) ;
+        }
+        
+        public function testVertical():void
+        {
+            assertEquals( e.vertical , 0 ) ;
+            e.top    = 10 ;
+            e.bottom = 20 ;
+            assertEquals( e.vertical , 30 ) ;
         }
         
         public function testClone():void
@@ -110,12 +126,10 @@ package graphics.geom
             assertFalse ( e2.equals(e1) , "02-01 - EdgeMetrics.equals method failed.") ;
             assertTrue  ( e2.equals(e2) , "02-02 - EdgeMetrics.equals method failed.") ;
             assertTrue  ( e2.equals(e3) , "01-03 - EdgeMetrics.equals method failed.") ;
-
+            
             assertFalse ( e3.equals(e1) , "03-01 - EdgeMetrics.equals method failed.") ;
             assertTrue  ( e3.equals(e2) , "03-02 - EdgeMetrics.equals method failed.") ;
             assertTrue  ( e3.equals(e3) , "03-03 - EdgeMetrics.equals method failed.") ;
-            
-            
         }
         
         public function testToObject():void
@@ -134,21 +148,16 @@ package graphics.geom
             assertEquals( o.top    , em.top    , "02 - toObject failed." ) ;
             assertEquals( o.right  , em.right  , "03 - toObject failed." ) ;
             assertEquals( o.bottom , em.bottom , "04 - toObject failed." ) ;
-            
         }
         
         public function testToSource():void
         {
             assertEquals( e.toSource() , "new graphics.geom.EdgeMetrics(0,0,0,0)", "01 - toSource failed." ) ;
         }
-    
+        
         public function testToString():void
         {
             assertEquals( e.toString() , "[EdgeMetrics left:0 top:0 right:0 bottom:0]", "01 - toString failed." ) ;
-        }        
-                
-          
+        }
     }
-
 }
-        
