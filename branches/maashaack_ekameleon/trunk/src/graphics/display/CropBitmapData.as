@@ -38,9 +38,11 @@ package graphics.display
 {
     import flash.display.BitmapData;
     import flash.display.IBitmapDrawable;
+    import flash.geom.ColorTransform;
+    import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    
+
     /**
      * Creates a new BitmapData with a crop of an original IBitmapDrawable object.
      * <p><b>Example :</b></p>
@@ -92,8 +94,12 @@ package graphics.display
          * @param smoothing A Boolean value that determines whether a BitmapData object is smoothed when scaled or rotated, due to a scaling or rotation in the matrix  parameter. The smoothing parameter only applies if the source  parameter is a BitmapData object. 
          * @param transparent  Specifies whether the bitmap image supports per-pixel transparency. The default value is true (transparent). To create a fully transparent bitmap, set the value of the transparent parameter to true and the value of the fillColor parameter to 0x00000000 (or to 0). Setting the transparent property to false can result in minor improvements in rendering performance.
          * @param fillColor A 32-bit ARGB color value that you use to fill the bitmap image area. The default value is 0 (black transparent).
+         * @param matrix A Matrix object used to scale, rotate, or translate the coordinates of the bitmap. If you do not want to apply a matrix transformation to the image, set this parameter to an identity matrix, created with the default new Matrix() constructor, or pass a null value.
+         * @param colorTransform A ColorTransform object that you use to adjust the color values of the bitmap. If no object is supplied, the bitmap image's colors are not transformed. If you must pass this parameter but you do not want to transform the image, set this parameter to a ColorTransform object created with the default new ColorTransform() constructor.
+         * @param blendMode A string value, from the flash.display.BlendMode class, specifying the blend mode to be applied to the resulting bitmap.
+         * @param clipRect A Rectangle object that defines the area of the source object to draw. If you do not supply this value, no clipping occurs and the entire source object is drawn.
          */
-        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 )
+        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 , matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null )
         {
             var w:Number = ("width" in bitmap)  ? ( bitmap["width"] as Number )  : 0 ;
             var h:Number = ("height" in bitmap) ? ( bitmap["height"] as Number ) : 0 ;
@@ -102,7 +108,7 @@ package graphics.display
                 area = new Rectangle(0,0,w,h) ;
             }
             var b:BitmapData = new BitmapData( w , h , transparent , fillColor ) ;
-            b.draw( bitmap , null , null , null , null , smoothing ) ;
+            b.draw( bitmap , matrix , colorTransform , blendMode , clipRect , smoothing ) ;
             super( area.width , area.height , transparent , fillColor ) ;
             copyPixels( b , area , _origine );
             b.dispose() ;
