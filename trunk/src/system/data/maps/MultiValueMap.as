@@ -238,7 +238,7 @@ package system.data.maps
          */
         public function createCollection():Collection 
         {
-            return new internalBuildClass() ; 
+            return new internalBuildClass() as Collection ; 
         }
         
         /**

@@ -856,11 +856,11 @@ package system
             }
             else
             {
-                result = str ;    
+                result = str ;
             }
             return  result ;
         }
-
+        
         /**
          * Determines whether a specified string is a prefix of the current instance. 
          * <p><b>Example : </b></p>
@@ -904,10 +904,10 @@ package system
         {
             var arr:Array = [];
             var i:int;
-            
-            for( i=0; i<str.length; i++ )
+            var l:int = str.length ;
+            for( i=0 ; i<l ; i++ )
             {
-                arr.push( new Char( str[modifier](), i ) );
+                arr.push( new Char( String( str[modifier]() ) , i ) );
             }
             
             return arr;

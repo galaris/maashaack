@@ -386,87 +386,103 @@ package system.evaluators
             switch( name )
             {
                 case "abs":
+                {
                     return String( Math.abs( args[0] ) );
                     break;
-                
+                }
                 case "acos":
+                {
                     return String( Math.acos( args[0] ) );
                     break;
-                
+                }
                 case "asin":
+                {
                     return String( Math.asin( args[0] ) );
                     break;
-                
+                }
                 case "atan":
+                {
                     return String( Math.atan( args[0] ) );
                     break;
-                
+                }
                 case "atan2": 
+                {
                     //2
                     return String( Math.atan2( args[0], args[1] ) );
                     break;
-                
+                }
                 case "ceil":
+                {
                     return String( Math.ceil( args[0] ) );
                     break;
-                
+                }
                 case "cos":
+                {
                     return String( Math.cos( args[0] ) );
                     break;
-                
+                }
                 case "exp":
+                {
                     return String( Math.exp( args[0] ) );
                     break;
-                
+                }
                 case "floor":
+                {
                     return String( Math.floor( args[0] ) );
                     break;
-                
+                }
                 case "log":
+                {
                     return String( Math.log( args[0] ) );
                     break;
-                
-                case "max": 
-                    //2
-                    return String( Math.max( args[0], args[1] ) );
+                }
+                case "max":
+                {
+                    return String( Math.max( args[0], args[1] ) ); //2
                     break;
-                
+                }
                 case "min": 
-                    //2
-                    return String( Math.min( args[0], args[1] ) );
+                {
+                    return String( Math.min( args[0], args[1] ) ); //2
                     break;
-                
+                }
                 case "pow": 
-                    //2
-                    return String( Math.pow( args[0], args[1] ) );
+                {
+                    return String( Math.pow( args[0], args[1] ) ); //2
                     break;
-                
+                }
                 case "random": 
-                    //0
-                    return String( Math.random( ) );
+                {
+                    return String( Math.random( ) ); //0
                     break;
-                
+                }
                 case "round":
+                {
                     return String( Math.round( args[0] ) );
                     break;
-                
+                }
                 case "sin":
+                {
                     return String( Math.sin( args[0] ) );
                     break;
-                
+                }
                 case "sqrt":
+                {
                     return String( Math.sqrt( args[0] ) );
                     break;
-                
+                }
                 case "tan":
+                {
                     return String( Math.tan( args[0] ) );
                     break;
-                
+                }
                 default:
-                    if( _context[ name ] )
+                {
+                    if( name in _context && _context[ name ] is Function )
                     {
-                        return _context[ name ]( args[0] );
+                        return String( _context[ name ]( args[0] ) ) ;
                     }
+                }
             }
             
             return "";
