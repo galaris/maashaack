@@ -52,6 +52,9 @@ package
     
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
     
+    // Compilation arguments :
+    // -default-size 760 800 -default-frame-rate 24 -default-background-color 0x666666 --target-player=10.0.0
+    
     public class GraphicsTestRunner extends Sprite
     {
         public function GraphicsTestRunner()
