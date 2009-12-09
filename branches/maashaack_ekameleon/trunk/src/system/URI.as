@@ -101,7 +101,6 @@ package system
         
         /**
          * Allows to support deprecated behaviour or not
-         * 
          * ex:
          * with userinfo
          * if strict, we do not display the password
@@ -364,7 +363,7 @@ package system
             
             return str;
         }
-
+        
         /**
          * Indicates the fragment expression of the URI.
          */
@@ -372,7 +371,7 @@ package system
         {
             return _fragment;
         }
-
+        
         /**
          * Determinaes the host of the URI.
          */
@@ -380,7 +379,7 @@ package system
         {
             return _host;
         }
-
+        
         /**
          * @private
          */
@@ -427,7 +426,7 @@ package system
                 throw new RangeError( "\""+value+"\" port is out of range" );
             }
         }
-
+        
         /**
          * Indicates the query String representation of the URI.
          */
