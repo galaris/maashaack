@@ -47,10 +47,11 @@ package system.diagnostics
          * Creates a new TextFieldConsole instance.
          * @param textfield The TextField reference to redirect the messages.
          */
-        public function TextFieldConsole( textfield:TextField , verbose:Boolean = true )
+        public function TextFieldConsole( textfield:TextField , autoScroll:Boolean = true , verbose:Boolean = true )
         {
-            this.textfield = textfield ;
-            this.verbose   = verbose ;
+            this.textfield  = textfield ;
+            this.autoScroll = true ;
+            this.verbose    = verbose ;
         }
         
         /**
