@@ -35,8 +35,12 @@
 
 package system
 {
+    import system.data.Iterator;
+    import system.data.Map;
+    import system.data.maps.ArrayMap;
     import system.network.URIScheme;
-        /**
+
+    /**
      * The "Uniform Resource Identifier" class.
      * <p><b>note:</b></p>
      * <p>based on <a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986</a></p>
@@ -54,39 +58,29 @@ package system
      */
     public class URI
     {
-        
-//        private var _relative:Boolean     ;
-//        private var _opaque:Boolean       ;
-        private var _unixFilePath:Boolean ;
-        private var _UNC:Boolean          ;
-        
-//        private var _generalDelimiters:String = ":/?#[]@";
-//        private var _subDelimiters:String     = "!$&'()*+,;=";
-//        private var _reserved:String          = _generalDelimiters+_subDelimiters;
-//        private var _unreserved:String        = "-._~";
-        
-        private var _source:String = "";
-        
-        private var _scheme:String   = "" ;
-        private var _host:String     = "" ;
-        private var _username:String = "" ;
-        private var _password:String = "" ;
-        private var _port:int        = -1 ;
-        private var _path:String     = "" ;
-        private var _query:String    = "" ;
-        private var _fragment:String = "" ;
-        
-        private var _hasQuery:Boolean ;
-        private var _hasFragment:Boolean ;
-        
         /**
-         * @private
+         * Creates a new URI instance.
+         * @param any An URI object or a String expression to initialize the instance.
+         * @param relativeURI The relative URI reference.
          */
-        private var _backslash:RegExp = /\\/g ;
+        public function URI( any:* , relativeURI:String = "" )
+        {
+            if( any is String )
+            {
+                _source = any;
+            }
+            else if( any is URI )
+            {
+                _source = (any as URI).source ;
+            }
+            if( _source )
+            {
+                _parse( _source ) ;
+            }
+        }
         
         /**
          * Allows to alter the tring representation of the URI
-         * 
          * ex:
          * for a raw URI "http://www.domain.com/path/file.html?"
          * after parsing
@@ -108,238 +102,6 @@ package system
          */
         public static var strict:Boolean = true;
         
-        /**
-         * Creates a new URI instance.
-         * @param any An URI object or a String expression to initialize the instance.
-         * @param relativeURI The relative URI reference.
-         */
-        public function URI( any:* , relativeURI:String = "" )
-        {
-            if( any is String )
-            {
-                _source = any;
-                _parse( any );
-            }
-            else if( any is URI )
-            {
-                
-            }
-        }
-        
-        private function _parseUnixAbsoluteFilePath( str:String ):void
-        {
-            _unixFilePath = true;
-            
-            this.scheme = URIScheme.FILE.scheme;
-            _port     = -1;
-            _fragment = "";
-            _query    = "";
-            _host     = "";
-            _path     = "";
-            
-            if( Strings.startsWith( str, "//" ) )
-            {
-                str = Strings.trimStart( str, ["/"] );
-                _path = "/"+str;
-            }
-            
-            if( !_path )
-            {
-                _path = str;
-            }
-            
-        }
-        
-        private function _parseWindowsAbsoluteFilePath( str:String ):void
-        {
-            if( str.length > 2 && str.charAt(2) != "\\" && str.charAt(2) != "/" )
-            {
-                throw new SyntaxError( "Relative file path is not allowed." );
-            }
-            this.scheme = URIScheme.FILE.scheme;
-            _port     = -1;
-            _fragment = "";
-            _query    = "";
-            _host     = "";
-            _path     = "/"+str.replace( _backslash , "/" );
-        }
-        
-        private function _parseWindowsUNC( str:String ):void
-        {
-            _UNC = true;
-            
-            this.scheme = URIScheme.FILE.scheme;
-            _port     = -1;
-            _fragment = "";
-            _query    = "";
-            
-            str = Strings.trimStart( str, ["\\"] );
-            var pos:int = str.indexOf( "\\" );
-            
-            if( pos > 0 )
-            {
-                _path = str.substring( pos );
-                _host = str.substring( 0, pos );
-            }
-            else
-            {
-                _host = str;
-                _path = "";
-            }
-            
-            _path = _path.replace( _backslash, "/" );
-        }
-        
-        private function _parse( str:String ):void
-        {
-            
-            var pos:int = str.indexOf( ":" );
-            
-            if( pos < 0 )
-            {
-                if( str.charAt( 0 ) == "/" )
-                {
-                    _parseUnixAbsoluteFilePath( str );
-                }
-                else if( Strings.startsWith( str, "\\\\" ) )
-                {
-                    _parseWindowsUNC( str );
-                }
-                else
-                {
-                    throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
-                }
-                
-                return;
-            }
-            else if( pos == 1 )
-            {
-                if( !Char.isLetter( str, 0 ) )
-                {
-                    throw new SyntaxError( "URI scheme must start with alphabet character." );
-                }
-                
-                _parseWindowsAbsoluteFilePath( str );
-                
-                return;
-            }
-            
-            /* from RFC
-                 ^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?
-            */
-            var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" , null );
-            var results:Object = pattern.exec( str );
-            
-//            trace( "$1: " + results[1] ); //raw scheme
-//            trace( "$2: " + results[2] ); //scheme
-//            trace( "$3: " + results[3] ); //raw authority
-//            trace( "$4: " + results[4] ); //authority
-//            trace( "$5: " + results[5] ); //path
-//            trace( "$6: " + results[6] ); //raw query
-//            trace( "$7: " + results[7] ); //query
-//            trace( "$8: " + results[8] ); //raw fragment
-//            trace( "$9: " + results[9] ); //fragment
-            
-            //scheme
-            if( results[1] && results[2] && Strings.endsWith( results[1], ":" ) )
-            {
-                this.scheme = results[2];
-            }
-//            else
-//            {
-//                throw new SyntaxError( "URI scheme must end with \":\"" );
-//            }
-            
-            
-            //authority
-            if( results[3] && Strings.startsWith( results[3], "//" ) )
-            {
-                var authority:String = results[4];
-                var host:String = "";
-                
-                //userinfo
-                if( authority.indexOf( "@" ) > -1 )
-                {
-                    var userinfos:String = authority.split( "@" )[0];
-                    host = authority.split( "@" )[1];
-                    
-                    if( userinfos.indexOf( ":" ) != -1 )
-                    {
-                        _username = userinfos.split( ":" )[0];
-                        
-                        if( !strict )
-                        {
-                            _password = userinfos.split( ":" )[1];
-                        }
-                    }
-                    else
-                    {
-                        _username = userinfos;
-                    }
-                    
-                }
-                else
-                {
-                    host = authority;
-                }
-                
-                //port
-                if( host.indexOf( ":" ) > -1 )
-                {
-                    var port:String = host.split( ":" )[1];
-                    var i:int;
-                    var validPort:Boolean = true;
-                    
-                    for( i=0; i<port.length; i++ )
-                    {
-                        if( !Char.isDigit( port, i ) )
-                        {
-                            validPort = false;
-                        }
-                    }
-                    
-                    if( validPort )
-                    {
-                        host = host.split( ":" )[0];
-                        if( port && (port.length > 0) )
-                        {
-                            this.port = parseInt( port );
-                        }
-                    }
-                    
-                }
-                
-                this.host = host;
-            }
-//            else
-//            {
-//                throw new SyntaxError( "URI authority must start with \"//\"" );
-//            }
-            
-            //path
-            if( results[5] )
-            {
-                this.path = results[5];
-            }
-            
-            //query
-            if( results[6] && Strings.startsWith( results[6], "?" ) )
-            {
-                _query = results[7];
-                _hasQuery = true;
-            }
-            
-            //fragment
-            if( results[8] && Strings.startsWith( results[8], "#" ) )
-            {
-                _fragment = results[9];
-                _hasFragment = true;
-            }
-            
-        }
-
-
-
         /**
          * Indicates the authority of the URI.
          * syntax:
@@ -403,7 +165,7 @@ package system
         {
             _path = value;
         }
-
+        
         /**
          * Determinates the port of the URI.
          */
@@ -428,19 +190,32 @@ package system
         }
         
         /**
-         * Indicates the query String representation of the URI.
+         * Determinates the encoded URI query, not including the ?.
+         * You can set a query with a string who not including the ? character, ex : "a=1&b=2".
          */
         public function get query():String
         {
-            return _query;
+            if ( _queryChange )
+            {
+                _resolveQuery() ;
+            }
+            return _query ;
         }
-      
+        
+        /**
+         * @private
+         */
+        public function set query( source:String ):void
+        {
+            _parseQuery( source ) ;
+        }
+        
         /**
          * Determinates the scheme of the URI.
          */
         public function get scheme():String
         {
-            return _scheme;
+            return _scheme ;
         }
         
         /**
@@ -482,6 +257,40 @@ package system
                 str += ":" + _password;
             }
             return str;
+        }
+        
+        /**
+         * Returns the first value for a given cgi parameter or undefined if the given parameter name does not appear in the query string.
+         * @param name The parameter to get values for.
+         * @return the first value for a given cgi parameter or undefined if the given parameter name does not appear in the query string.
+         */
+        public function getParameter( name:String ):*
+        {
+            return _queries.get( name ) ;
+        }
+        
+        /**
+         * Indicates the Map used in the URI to set the parameters of the query.
+         */
+        public function getQueryMap():Map
+        {
+            return _queries as Map ;
+        }
+        
+        /**
+         * Indicates whether the fragment string has been set.
+         */
+        public function hasFragment():Boolean
+        {
+            return _hasFragment;
+        }
+        
+        /**
+         *  Indicates whether the query string has been set.
+         */
+        public function hasQuery():Boolean
+        {
+            return _hasQuery ;
         }
         
         /**
@@ -688,6 +497,39 @@ package system
         }
         
         /**
+         * Removes all the parameters in the query.
+         */
+        public function removeAllParameters():void
+        {
+            if ( _queries.size() > 0 )
+            {
+                _queryChange = true ,
+                _queries.clear() ;
+            }
+        }
+        
+        /**
+         * Removes the named query parameter.
+         * @param name The parameter to remove.
+         */
+        public function removeParameter( name:String ):void
+        {
+            _queryChange = true ,
+            _queries.remove( name ) ;
+        }
+        
+        /**
+         * Sets the values of the named query parameters, clearing previous values for that key. Not new values will currently be moved to the end of the query string.
+         * @param name The parameter to set.
+         * @param value The new value.
+         */
+        public function setParameterValue( name:String , value:* ):void
+        {
+            _queryChange = true ;
+            _queries.put( name , value ) ;
+        }
+        
+        /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
@@ -733,6 +575,319 @@ package system
         public function valueOf():String
         {
             return toString();
+        }
+        
+        /////////////////////////////////////////////////
+        
+//        private var _generalDelimiters:String = ":/?#[]@";
+//        private var _opaque:Boolean       ;
+//        private var _relative:Boolean     ;
+//        private var _reserved:String          = _generalDelimiters+_subDelimiters;
+//        private var _subDelimiters:String     = "!$&'()*+,;=";
+//        private var _unreserved:String        = "-._~";
+        
+        private var _backslash:RegExp = /\\/g ;
+        private var _fragment:String = "" ;
+        private var _hasFragment:Boolean ;
+        private var _hasQuery:Boolean ;
+        private var _host:String     = "" ;
+        private var _username:String = "" ;
+        private var _password:String = "" ;
+        private var _path:String     = "" ;
+        private var _port:int        = -1 ;
+        
+        /**
+         * The Map of all parameters to set the query. We use an ArrayMap to keep the order of the parameters.
+         * @private
+         */
+        private var _queries:ArrayMap = new ArrayMap() ;
+        
+        /**
+         * The full query string without the ? character.
+         */
+        private var _query:String = "" ;
+        
+        /**
+         * Indicates if the query must change.
+         */
+        private var _queryChange:Boolean ;
+        
+        private var _scheme:String   = "" ;
+        private var _source:String = "";
+        private var _UNC:Boolean          ;
+        private var _unixFilePath:Boolean ;
+        
+        /**
+         * @private
+         */
+        private function _parseUnixAbsoluteFilePath( str:String ):void
+        {
+            _unixFilePath = true;
+            
+            this.scheme = URIScheme.FILE.scheme;
+            _port     = -1;
+            _fragment = "";
+            _query    = "";
+            _host     = "";
+            _path     = "";
+            
+            if( Strings.startsWith( str, "//" ) )
+            {
+                str = Strings.trimStart( str, ["/"] );
+                _path = "/"+str;
+            }
+            
+            if( !_path )
+            {
+                _path = str;
+            }
+            
+        }
+        
+        /**
+         * @private
+         */
+        private function _parseWindowsAbsoluteFilePath( str:String ):void
+        {
+            if( str.length > 2 && str.charAt(2) != "\\" && str.charAt(2) != "/" )
+            {
+                throw new SyntaxError( "Relative file path is not allowed." );
+            }
+            this.scheme = URIScheme.FILE.scheme;
+            _port     = -1 ;
+            _fragment = "" ;
+            _query    = "" ;
+            _host     = "" ;
+            _path     = "/"+str.replace( _backslash , "/" );
+        }
+        
+        /**
+         * @private
+         */
+        private function _parseWindowsUNC( str:String ):void
+        {
+            _UNC = true;
+            
+            this.scheme = URIScheme.FILE.scheme;
+            _port     = -1 ;
+            _fragment = "" ;
+            _query    = "" ;
+            
+            str = Strings.trimStart( str, ["\\"] );
+            var pos:int = str.indexOf( "\\" );
+            
+            if( pos > 0 )
+            {
+                _path = str.substring( pos );
+                _host = str.substring( 0, pos );
+            }
+            else
+            {
+                _host = str;
+                _path = "";
+            }
+            
+            _path = _path.replace( _backslash, "/" );
+        }
+        
+        /**
+         * @private
+         */
+        private function _parse( str:String ):void
+        {
+            var pos:int = str.indexOf( ":" );
+            if( pos < 0 )
+            {
+                if( str.charAt( 0 ) == "/" )
+                {
+                    _parseUnixAbsoluteFilePath( str );
+                }
+                else if( Strings.startsWith( str, "\\\\" ) )
+                {
+                    _parseWindowsUNC( str );
+                }
+                else
+                {
+                    throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
+                }
+                
+                return;
+            }
+            else if( pos == 1 )
+            {
+                if( !Char.isLetter( str, 0 ) )
+                {
+                    throw new SyntaxError( "URI scheme must start with alphabet character." );
+                }
+                _parseWindowsAbsoluteFilePath( str );
+                return ;
+            }
+            
+            /* from RFC
+                 ^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?
+            */
+            var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" , null );
+            var results:Object = pattern.exec( str ) ;
+            
+//            trace( "$1: " + results[1] ); //raw scheme
+//            trace( "$2: " + results[2] ); //scheme
+//            trace( "$3: " + results[3] ); //raw authority
+//            trace( "$4: " + results[4] ); //authority
+//            trace( "$5: " + results[5] ); //path
+//            trace( "$6: " + results[6] ); //raw query
+//            trace( "$7: " + results[7] ); //query
+//            trace( "$8: " + results[8] ); //raw fragment
+//            trace( "$9: " + results[9] ); //fragment
+            
+            /////// scheme
+            
+            if( results[1] && results[2] && Strings.endsWith( results[1], ":" ) )
+            {
+                this.scheme = results[2];
+            }
+//            else
+//            {
+//                throw new SyntaxError( "URI scheme must end with \":\"" );
+//            }
+            
+            
+            /////// authority
+            if( results[3] && Strings.startsWith( results[3], "//" ) )
+            {
+                var authority:String = results[4];
+                var host:String = "";
+                
+                //userinfo
+                if( authority.indexOf( "@" ) > -1 )
+                {
+                    var userinfos:String = authority.split( "@" )[0];
+                    host = authority.split( "@" )[1];
+                    
+                    if( userinfos.indexOf( ":" ) != -1 )
+                    {
+                        _username = userinfos.split( ":" )[0];
+                        
+                        if( !strict )
+                        {
+                            _password = userinfos.split( ":" )[1];
+                        }
+                    }
+                    else
+                    {
+                        _username = userinfos;
+                    }
+                    
+                }
+                else
+                {
+                    host = authority;
+                }
+                
+                /////// port
+                if( host.indexOf( ":" ) > -1 )
+                {
+                    var port:String = host.split( ":" )[1];
+                    var i:int;
+                    var validPort:Boolean = true;
+                    
+                    for( i=0; i<port.length; i++ )
+                    {
+                        if( !Char.isDigit( port, i ) )
+                        {
+                            validPort = false;
+                        }
+                    }
+                    
+                    if( validPort )
+                    {
+                        host = host.split( ":" )[0];
+                        if( port && (port.length > 0) )
+                        {
+                            this.port = parseInt( port );
+                        }
+                    }
+                    
+                }
+                
+                this.host = host;
+            }
+//            else
+//            {
+//                throw new SyntaxError( "URI authority must start with \"//\"" );
+//            }
+            
+            // path
+            if( results[5] )
+            {
+                this.path = results[5];
+            }
+            
+            // query
+            if( results[6] && Strings.startsWith( results[6], "?" ) )
+            {
+                _parseQuery( results[7] as String ) ;
+            }
+            
+            // fragment
+            
+            if( results[8] && Strings.startsWith( results[8], "#" ) )
+            {
+                _fragment = results[9];
+                _hasFragment = true;
+            }
+            
+        }
+        
+        /**
+         * @private
+         */
+        private function _parseQuery( query:String ):void
+        {
+            _queries.clear() ;
+            _queryChange = true  ;
+            _hasQuery    = false ;
+            if( query && query.length > 0 )
+            {
+                var p:Array ;
+                var q:Array = query.split( "&" ) ;
+                for each( var param:String in q )
+                {
+                    p = param.split( "=" ) ;
+                    if ( p.length == 2 )
+                    {
+                        _queries.put( p[0] as String , p[1] as String ) ;
+                    }
+                }
+                _hasQuery = _queries.size() > 0 ;
+            }
+            _resolveQuery() ;
+        }
+        
+        /**
+         * @private
+         */
+        private function _resolveQuery():void
+        {
+            _queryChange = false ;
+            _query       = "" ;
+            var l:int    = _queries.size() ;
+            _hasQuery = l > 0 ;
+            if ( _hasQuery )
+            {
+                var v:* ;
+                var k:String ;
+                var it:Iterator = _queries.iterator() ;
+                while( it.hasNext() )
+                {
+                    v = it.next() ;
+                    k = it.key() ;
+                    _query += k + "=" + v ;
+                    if ( it.hasNext() )
+                    {
+                        _query += "&" ;
+                    }
+                }
+            }
         }
     }
 }

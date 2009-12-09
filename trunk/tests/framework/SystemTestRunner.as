@@ -37,8 +37,6 @@ package
 {
     import buRRRn.ASTUce.*;
     
-    import graphics.AllTests;
-    
     import system.*;
     import system.diagnostics.TextFieldConsole;
     
@@ -86,8 +84,8 @@ package
             
             Runner.main
             ( 
-                //core.AllTests.suite() , 
-                graphics.AllTests.suite() ,
+                // core.AllTests.suite() , 
+                // graphics.AllTests.suite() ,
                 system.AllTests.suite()
             );
             
