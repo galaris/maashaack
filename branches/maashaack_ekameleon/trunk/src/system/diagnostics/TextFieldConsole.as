@@ -37,8 +37,6 @@ package system.diagnostics
 {
     import flash.text.TextField;
     
-    
-    
     /**
      * The TextFieldConsole use a TextField display that redirect messages in the debug application.
      * <p><b>Note:</b> You can not read from the output and so the TextFieldConsole is not interactive.</p>
@@ -54,6 +52,11 @@ package system.diagnostics
             this.textfield = textfield ;
             this.verbose   = verbose ;
         }
+        
+        /**
+         * Indicates if the field must scroll when the writeLine method is invoked.
+         */
+        public var autoScroll:Boolean ;
         
         /**
          * The TextField reference of this console.
@@ -83,6 +86,11 @@ package system.diagnostics
             txt += msg + "\r" ;
             
             textfield.text = txt ;
+            
+            if ( autoScroll )
+            {
+                textfield.scrollV = textfield.maxScrollV ;
+            }
             
             _buffer = "" ;
         }
