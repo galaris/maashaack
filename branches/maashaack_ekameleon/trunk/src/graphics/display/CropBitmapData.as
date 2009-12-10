@@ -42,7 +42,7 @@ package graphics.display
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-    
+
     /**
      * Creates a new BitmapData with a crop of an original IBitmapDrawable object.
      * <p><b>Example :</b></p>
@@ -109,21 +109,26 @@ package graphics.display
                 w *= matrix.a ;
                 h *= matrix.d ;
             }
-            if ( area == null )
-            {
-                area = new Rectangle(0,0,w,h) ;
-            }
+            _area.x      = area ? area.x      : 0 ;
+            _area.y      = area ? area.y      : 0 ;
+            _area.width  = area ? area.width  : w ;
+            _area.height = area ? area.height : h ;
             var b:BitmapData = new BitmapData( w , h , transparent , fillColor ) ;
             b.draw( bitmap , matrix , colorTransform , blendMode , clipRect , smoothing ) ;
             if( strict )
             {
-                area.width  = Math.min( area.width  , w ) ;
-                area.height = Math.min( area.height , h ) ;
+                _area.width  = Math.min( _area.width  , w ) ;
+                _area.height = Math.min( _area.height , h ) ;
             }
-            super( area.width , area.height , transparent , fillColor ) ;
-            copyPixels( b , area , _origine );
+            super( _area.width , _area.height , transparent , fillColor ) ;
+            copyPixels( b , _area , _origine );
             b.dispose() ;
         }
+        
+        /**
+         * @private
+         */
+        private static const _area:Rectangle = new Rectangle() ;
         
         /**
          * @private
