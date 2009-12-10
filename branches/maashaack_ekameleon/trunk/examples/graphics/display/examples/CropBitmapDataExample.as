@@ -65,10 +65,11 @@ package examples
             
             var bitmap:Bitmap      = new Bitmap( crop ) ;
             
+            trace( "picture : " + picture.width + " :: " + picture.height ) ;
+            trace( "crop    : " + crop.width    + " :: " + crop.height    ) ;
+            
             bitmap.x = 35 ;
             bitmap.y = 35 ;
-            
-            trace( bitmap.width + " / " + bitmap.height ) ;
             
             addChild( bitmap ) ;
         }
