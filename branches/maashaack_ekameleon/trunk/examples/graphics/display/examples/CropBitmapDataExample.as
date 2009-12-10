@@ -41,6 +41,7 @@ package examples
     import flash.display.BitmapData;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
+    import flash.geom.Matrix;
     import flash.geom.Rectangle;
     
     [SWF(width="200", height="200", frameRate="24", backgroundColor="#333333")]
@@ -59,9 +60,13 @@ package examples
             
             /////////
             
+            var matrix:Matrix ;
+            
+            // matrix = new Matrix(0.5,0,0,0.5,15,15.5) ;
+            
             var picture:BitmapData = new Picture(0,0) as BitmapData ; // Picture a symbol in the library
             
-            var crop:BitmapData    = new CropBitmapData( picture , new Rectangle( 18 , 31, 120, 120 ) , true , true , 0x55A2A2A2 ) ; 
+            var crop:BitmapData    = new CropBitmapData( picture , new Rectangle( 18 , 31, 120 , 120 ) , true , true , 0x55A2A2A2 , matrix ) ; 
             
             var bitmap:Bitmap      = new Bitmap( crop ) ;
             

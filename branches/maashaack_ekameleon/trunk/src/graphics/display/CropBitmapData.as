@@ -42,7 +42,7 @@ package graphics.display
     import flash.geom.Matrix;
     import flash.geom.Point;
     import flash.geom.Rectangle;
-
+    
     /**
      * Creates a new BitmapData with a crop of an original IBitmapDrawable object.
      * <p><b>Example :</b></p>
@@ -100,10 +100,15 @@ package graphics.display
          * @param clipRect A Rectangle object that defines the area of the source object to draw. If you do not supply this value, no clipping occurs and the entire source object is drawn.
          * @param strict Indicates if the crop use the minimal size of the bitmap to crop or only the passed-in area Rectangle.
          */
-        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 , matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null , strict:Boolean = true )
+        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle = null , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 , matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null , strict:Boolean = true )
         {
-            var w:Number = ("width" in bitmap)  ? ( bitmap["width"] as Number )  : 0 ;
+            var w:Number = ("width"  in bitmap) ? ( bitmap["width"]  as Number ) : 0 ;
             var h:Number = ("height" in bitmap) ? ( bitmap["height"] as Number ) : 0 ;
+            if ( matrix )
+            {
+                w *= matrix.a ;
+                h *= matrix.d ;
+            }
             if ( area == null )
             {
                 area = new Rectangle(0,0,w,h) ;
@@ -112,8 +117,8 @@ package graphics.display
             b.draw( bitmap , matrix , colorTransform , blendMode , clipRect , smoothing ) ;
             if( strict )
             {
-                area.width  = Math.min( area.width  , b.width  ) ;
-                area.height = Math.min( area.height , b.height ) ;
+                area.width  = Math.min( area.width  , w ) ;
+                area.height = Math.min( area.height , h ) ;
             }
             super( area.width , area.height , transparent , fillColor ) ;
             copyPixels( b , area , _origine );
