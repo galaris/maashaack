@@ -98,8 +98,9 @@ package graphics.display
          * @param colorTransform A ColorTransform object that you use to adjust the color values of the bitmap. If no object is supplied, the bitmap image's colors are not transformed. If you must pass this parameter but you do not want to transform the image, set this parameter to a ColorTransform object created with the default new ColorTransform() constructor.
          * @param blendMode A string value, from the flash.display.BlendMode class, specifying the blend mode to be applied to the resulting bitmap.
          * @param clipRect A Rectangle object that defines the area of the source object to draw. If you do not supply this value, no clipping occurs and the entire source object is drawn.
+         * @param strict Indicates if the crop use the minimal size of the bitmap to crop or only the passed-in area Rectangle.
          */
-        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 , matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null )
+        public function CropBitmapData( bitmap:IBitmapDrawable , area:Rectangle , smoothing:Boolean = true , transparent:Boolean = true, fillColor:uint = 0 , matrix:Matrix = null, colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null , strict:Boolean = true )
         {
             var w:Number = ("width" in bitmap)  ? ( bitmap["width"] as Number )  : 0 ;
             var h:Number = ("height" in bitmap) ? ( bitmap["height"] as Number ) : 0 ;
@@ -109,6 +110,11 @@ package graphics.display
             }
             var b:BitmapData = new BitmapData( w , h , transparent , fillColor ) ;
             b.draw( bitmap , matrix , colorTransform , blendMode , clipRect , smoothing ) ;
+            if( strict )
+            {
+                area.width  = Math.min( area.width  , b.width  ) ;
+                area.height = Math.min( area.height , b.height ) ;
+            }
             super( area.width , area.height , transparent , fillColor ) ;
             copyPixels( b , area , _origine );
             b.dispose() ;
