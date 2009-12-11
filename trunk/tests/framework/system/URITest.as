@@ -510,6 +510,18 @@ package system
             assertFalse( u.hasFragment() ) ;
         }
         
+        public function testHasParameter():void
+        {
+            var s:String ;
+            var u:URI ;
+            
+            s =  "http://www.ics.uci.edu/?a=1&b=2";
+            u = new URI( s );
+            
+            assertTrue( u.hasParameter("a") ) ;
+            assertFalse( u.hasParameter("c") ) ;
+        }
+        
         public function testHasQuery():void
         {
             var s:String ;
@@ -572,6 +584,20 @@ package system
             assertEquals( u.query , "a=0&b=2" ) ;
             u.setParameterValue("c", "3" ) ;
             assertEquals( u.query , "a=0&b=2&c=3" ) ;
+            u.setParameterValue("c", undefined ) ;
+            assertEquals( u.query , "a=0&b=2" ) ;
+        }
+        
+        public function testSetParameterValueWithUndefinedValue():void
+        {
+            var s:String ;
+            var u:URI ;
+            s =  "http://www.ics.uci.edu/?a=1&b=2";
+            u = new URI( s );
+            u.setParameterValue("b", undefined ) ;
+            assertEquals( u.query , "a=1" ) ;
+            u.setParameterValue("a", undefined ) ;
+            assertEquals( u.query , "" ) ;
         }
     }
 }
