@@ -286,6 +286,14 @@ package system
         }
         
         /**
+         * Indicates whether the specified parameter name exist in the query.
+         */
+        public function hasParameter( name:String ):Boolean
+        {
+            return _queries.containsKey( name ) ;
+        }
+        
+        /**
          *  Indicates whether the query string has been set.
          */
         public function hasQuery():Boolean
@@ -526,7 +534,14 @@ package system
         public function setParameterValue( name:String , value:* ):void
         {
             _queryChange = true ;
-            _queries.put( name , value ) ;
+            if ( value === undefined && _queries.containsKey(name) )
+            {
+                _queries.remove( name ) ;
+            }
+            else
+            { 
+                _queries.put( name , value ) ;
+            }
         }
         
         /**
