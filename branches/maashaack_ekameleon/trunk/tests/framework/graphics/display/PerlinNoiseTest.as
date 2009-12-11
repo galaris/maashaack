@@ -44,11 +44,11 @@ package graphics.display
             super( name );
         }
         
-        public var perlin:PerlinNoise ;
+        public var perlin:PerlinNoiseBitmapData ;
         
         public function setUp():void
         {
-            perlin = new PerlinNoise(320,200,true,0xFFFFFF) ;
+            perlin = new PerlinNoiseBitmapData(320,200,true,0xFFFFFF) ;
         }
         
         public function tearDown():void

@@ -35,64 +35,77 @@
 
 package examples 
 {
-    import graphics.display.PerlinNoise;
+    import graphics.FillGradientStyle;
+    import graphics.display.RadialPerlinBitmapData;
+    import graphics.drawing.CirclePen;
 
     import flash.display.Bitmap;
+    import flash.display.GradientType;
+    import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
-    import flash.filters.DropShadowFilter;
     import flash.filters.GlowFilter;
+    import flash.geom.Matrix;
 
-    [SWF(width="300", height="300", frameRate="24", backgroundColor="#666666")]
+    [SWF(width="300", height="300", frameRate="24", backgroundColor="#000000")]
     
     /**
-     * Example with the graphics.display.PerlinNoise class.
+     * Example with the graphics.display.RadialPerlinNoise class.
      */
-    public class PerlinNoiseExample extends Sprite 
+    public class RadialPerlinBitmapDataExample extends Sprite 
     {
-        public function PerlinNoiseExample()
+        public function RadialPerlinBitmapDataExample()
         {
+            //////////
+            
             stage.align     = StageAlign.TOP_LEFT ;
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
-            perlin  = new PerlinNoise( 200 , 200 , true , 0xFFA2FFFF ) ;
+            addEventListener( Event.ENTER_FRAME , refresh ) ;
             
-            //perlin.density   = 100 ;
-            //perlin.channels  = BitmapDataChannel.RED | BitmapDataChannel.GREEN | BitmapDataChannel.BLUE ;
-            //perlin.greyScale = false ;
-            //perlin.octaves   = 10 ;
-            //perlin.seed      = 1000 ;
-            //perlin.stitch    = true ;
-            perlin.fractal   = false ;
+            ////////// background
             
-            var bitmap:Bitmap = new Bitmap( perlin ) ;
+            var background:Shape = new Shape();
+            var colors:Array     = [0x006599,0x0099CC];
+            var alphas:Array     = [1,0];
+            var ratios:Array     = [0,255];
+            var matrix:Matrix    = new Matrix() ;
             
-            bitmap.filters = 
-            [
-                new GlowFilter( 0xD3E7D3 , 0.4 , 10 , 10 , 2 , 3 , true ) ,
-                new DropShadowFilter( 4 , 45 , 0 , 0.4 , 10 , 10 , 1 , 1 ) 
-            ] ;
+            matrix.createGradientBox( 200, 200, 0, 0, 0 );
             
-            bitmap.x = 50 ;
-            bitmap.y = 50 ;
+            var pen:CirclePen = new CirclePen( background ) ;
+            pen.fill = new FillGradientStyle( GradientType.RADIAL, colors, alphas, ratios, matrix ) ;
+            pen.draw( 30, 30, 120 );
+            
+            addChild( background ) ;
+            
+            ////////// perlin
+            
+            perlin = new RadialPerlinBitmapData( 120, 3, Math.random() * 1000, true, 15, false, true );
+            perlin.render( _distance , _rotation );
+            
+            var bitmap:Bitmap = new Bitmap( perlin );
+            
+            bitmap.x = 30 ;
+            bitmap.y = 30 ;
+            
+            bitmap.filters = [ new GlowFilter(0xFFFFFF, 1, 6, 6, 2, 1, false) ] ;
             
             addChild( bitmap ) ;
-            
-            addEventListener( Event.ENTER_FRAME , refresh ) ;
         }
         
-        public var perlin:PerlinNoise ;
+        public var perlin:RadialPerlinBitmapData ;
+        
+        private var _distance:Number = 0;
+        private var _rotation:Number = 0;
         
         public function refresh( e:Event = null ):void
         {
-            perlin.move( 24 , -24 ) ;
-            perlin.density ++ ;
-            if ( perlin.density > 50 )
-            {
-            	perlin.density = 1 ;
-            }
+            _distance += 2;
+            _rotation += 4;
+            perlin.render( _distance, _rotation ) ;
         }
     }
 }
