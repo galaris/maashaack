@@ -38,11 +38,10 @@ package system.process
     import buRRRn.ASTUce.framework.TestCase;
     
     import flash.display.Loader;
-    import flash.net.URLRequest;    
-
+    import flash.net.URLRequest;
+    
     public class CoreActionLoaderTest extends TestCase 
     {
-        
         public function CoreActionLoaderTest(name:String = "")
         {
             super(name);
@@ -59,7 +58,34 @@ package system.process
             var a:CoreActionLoader = new CoreActionLoader() ;
             assertTrue( a is CoreAction , "CoreActionLoader must extends the CoreAction class." ) ;
         }
-
+        
+        public function testDEFAULT_CACHE_PARAMETER():void
+        {
+            assertEquals( CoreActionLoader.DEFAULT_CACHE_PARAMETER, "random" ) ;
+        }
+        
+        public function testDEFAULT_DELAY():void
+        {
+            assertEquals( CoreActionLoader.DEFAULT_DELAY, 8000 ) ;
+        }
+        
+        public function testCache():void
+        {
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertFalse( a.cache ) ;
+            a.cache = true ;            assertTrue( a.cache ) ;
+            a.cache = false ;
+            assertFalse( a.cache ) ;
+        }
+        
+        public function testCacheParameterName():void
+        {
+            var a:CoreActionLoader = new CoreActionLoader() ;
+            assertNull( a.cacheParameterName ) ;
+            a.cacheParameterName = "randomize" ;
+            assertEquals(a.cacheParameterName , "randomize") ;
+        }
+        
         public function testBytesLoaded():void
         {
             var a:CoreActionLoader = new CoreActionLoader() ;
@@ -120,7 +146,6 @@ package system.process
             assertFalse( clone == action  , "02 - CoreActionLoader clone method failed." ) ;
             assertTrue( clone.loader == action.loader  , "03 - CoreActionLoader clone method failed." ) ;
         }
-        
     }
 }
 

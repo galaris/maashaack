@@ -39,11 +39,10 @@ package system.process
     
     import system.events.ActionEvent;
     import system.process.mocks.MockAction;
-    import system.process.mocks.MockActionListener;    
-
+    import system.process.mocks.MockActionListener;
+    
     public class CoreActionTest extends TestCase 
     {
-        
         public function CoreActionTest(name:String = "")
         {
             super(name);
@@ -51,7 +50,7 @@ package system.process
         
         public var action:MockAction ;
         
-        public var mockListener:MockActionListener ;            
+        public var mockListener:MockActionListener ;
         
         public function setUp():void
         {
@@ -70,20 +69,20 @@ package system.process
             mockListener = undefined ;
             action       = undefined ;
         }
-
+        
         public function testConstructor():void
         {
             var a:CoreAction = new MockAction() as CoreAction ;
             assertNotNull( a , "CoreAction constructor method failed." ) ;
         }
-
+        
         public function testInherit():void
         {
             var a:CoreAction = new MockAction() as CoreAction ;
             assertTrue( a is CoreAction , "01 - must extends the CoreAction class." ) ;
             assertTrue( a is Action , "02 - must extends the Action class." ) ;
         }
-
+        
         public function testLooping():void
         {
             var a:CoreAction = new MockAction() as CoreAction ;
@@ -145,19 +144,19 @@ package system.process
         public function testNotifyStarted():void
         {       
             assertTrue   ( mockListener.startCalled , "notify event method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.startType   , ActionEvent.START   , "notify event method failed, bad type found when the process is started." );                    
+            assertEquals ( mockListener.startType   , ActionEvent.START   , "notify event method failed, bad type found when the process is started." );
         }
         
         public function testNotifyStopped():void
-        {       
+        {
             assertTrue   ( mockListener.stopCalled , "notify event method failed, the ActionEvent.STOP event isn't notify" ) ;
-            assertEquals ( mockListener.stopType   , ActionEvent.STOP   , "notify event method failed, bad type found when the process is stopped." );                    
+            assertEquals ( mockListener.stopType   , ActionEvent.STOP   , "notify event method failed, bad type found when the process is stopped." );
         }
         
         public function testNotifyTimeOut():void
-        {       
+        {
             assertTrue   ( mockListener.timeoutCalled , "notify event method failed, the ActionEvent.TIMEOUT event isn't notify" ) ;
-            assertEquals ( mockListener.timeoutType   , ActionEvent.TIMEOUT   , "notify event method failed, bad type found when the process is out of time." );                    
+            assertEquals ( mockListener.timeoutType   , ActionEvent.TIMEOUT   , "notify event method failed, bad type found when the process is out of time." );
         }
         
         public function testRun():void
@@ -165,7 +164,5 @@ package system.process
             action.run() ;
             assertEquals( MockAction.COUNT , 1 , "Action run failed." ) ;
         }
-        
     }
 }
-

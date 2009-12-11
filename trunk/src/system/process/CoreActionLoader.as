@@ -35,6 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
+    import system.URI;
+    
     import flash.events.ErrorEvent;
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
@@ -66,6 +68,12 @@ package system.process
         }
         
         /**
+         * The name of the default cache uri query parameter ("random"). 
+         * In the loader request you can set an other parameter name with the property <code>cacheParameterName</code>.
+         */
+        public static const DEFAULT_CACHE_PARAMETER:String = "random" ;
+        
+        /**
          * The default value of the delay before the ActionEvent.TIMEOUT event.
          */
         public static const DEFAULT_DELAY:uint = 8000 ; // 8 secondes
@@ -85,6 +93,16 @@ package system.process
         {
             return 0 ;
         }
+        
+        /**
+         * The cache flag of this resource (default is true).
+         */
+        public var cache:Boolean ;
+        
+        /**
+         * The name of the uri query parameter when the cache attribute is true. By default the DEFAULT_CACHE_PARAMETER const is used.
+         */
+        public var cacheParameterName:String ;
         
         /**
          * Indicates the timeout interval duration.
@@ -198,10 +216,10 @@ package system.process
             {
                 dispatcher.addEventListener( Event.COMPLETE                    , complete      , false, 0, true ) ;
                 dispatcher.addEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent , false, 0, true ) ;
-                dispatcher.addEventListener( IOErrorEvent.IO_ERROR             , ioError       , false, 0, true ) ;
+                dispatcher.addEventListener( IOErrorEvent.IO_ERROR             , error         , false, 0, true ) ;
                 dispatcher.addEventListener( Event.OPEN                        , dispatchEvent , false, 0, true ) ;
                 dispatcher.addEventListener( ProgressEvent.PROGRESS            , dispatchEvent , false, 0, true ) ;
-                dispatcher.addEventListener( SecurityErrorEvent.SECURITY_ERROR , securityError , false, 0, true ) ;
+                dispatcher.addEventListener( SecurityErrorEvent.SECURITY_ERROR , error         , false, 0, true ) ;
             }
         }
         
@@ -223,6 +241,7 @@ package system.process
             }
             else
             {
+                // FIXME resolveRequest() ; // Problem with the URI class for the moment with the relative uris
                 _run() ;
             }
         }
@@ -250,10 +269,10 @@ package system.process
             { 
                 dispatcher.removeEventListener( Event.COMPLETE                    , complete      ) ;
                 dispatcher.removeEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent ) ;
-                dispatcher.removeEventListener( IOErrorEvent.IO_ERROR             , ioError       ) ;
+                dispatcher.removeEventListener( IOErrorEvent.IO_ERROR             , error         ) ;
                 dispatcher.removeEventListener( Event.OPEN                        , dispatchEvent ) ;
                 dispatcher.removeEventListener( ProgressEvent.PROGRESS            , dispatchEvent ) ;
-                dispatcher.removeEventListener( SecurityErrorEvent.SECURITY_ERROR , securityError ) ;
+                dispatcher.removeEventListener( SecurityErrorEvent.SECURITY_ERROR , error         ) ;
             }
         }
         
@@ -274,10 +293,11 @@ package system.process
 //            dispatchEvent(e) ;
 //        }
         
+        
         /**
-         * Dispatch IOErrorEvent if a call to load() results in a fatal error that terminates the download.
+         * Dispatch an ErrorEvent if a call to load() attempts a server problem (IOErrorEvent or SecurityErrorEvent). 
          */
-        protected function ioError( e:IOErrorEvent ):void
+        protected function error( e:ErrorEvent ):void
         {
             dispatchEvent(e) ;
             notifyFinished() ;
@@ -307,14 +327,26 @@ package system.process
             dispatchEvent(e) ;
         }
         
+        ///////////
+        
         /**
-         * Dispatch SecurityErrorEvent if a call to load() attempts to load data from a server outside the security sandbox. 
+         * Resolves the request of the loader with the cache query parameter if the cache attribute is true.
          */
-        protected function securityError( e:SecurityErrorEvent ):void
+        protected function resolveRequest():void
         {
-            dispatchEvent(e) ;
-            notifyFinished() ;
+            if ( _request && _request.url )
+            {
+                var uri:URI = new URI( _request.url ) ; // FIXME bug here with the relative uris !!!!
+                uri.setParameterValue
+                ( 
+                    cacheParameterName || DEFAULT_CACHE_PARAMETER , 
+                    cache ? ( Math.random() * (new Date()).valueOf() ) : undefined 
+                ) ;
+                _request.url = uri.toString() ;
+            }
         }
+        
+        ///////////
         
         /**
          * @private

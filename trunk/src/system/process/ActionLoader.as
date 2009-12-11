@@ -116,7 +116,7 @@ package system.process
          */
         public function get content():DisplayObject
         {
-            return (_loader != null) ? (_loader as Loader).content : null ;    
+            return (_loader != null) ? (_loader as Loader).content : null ;
         } 
         
         /**
