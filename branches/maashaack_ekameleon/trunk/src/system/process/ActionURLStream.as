@@ -52,7 +52,6 @@ package system.process
             super( stream , global , channel ) ;
         }
         
-        
         /**
          * Returns the number of bytes of data available for reading in the input buffer.
          */

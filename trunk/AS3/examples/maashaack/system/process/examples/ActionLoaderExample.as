@@ -38,20 +38,19 @@ package examples
 {
     import system.events.ActionEvent;
     import system.process.ActionLoader;
-
+    
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.events.Event;
-    import flash.net.URLRequest;    
-
+    import flash.net.URLRequest;
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#FFFFFF")]
-
+    
     /**
      * Basic example to use the system.process.ActionLoader process.
      */
     public class ActionLoaderExample extends Sprite
     {
-
         public function ActionLoaderExample()
         {
             var url:String = "library/picture.png" ;
