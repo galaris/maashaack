@@ -37,7 +37,7 @@ package graphics.display
 {
     import flash.display.BitmapData;
     import flash.geom.Point;
-    
+
     /**
      * This BitmapData is an helper to creates perlin noise effects.
      * <p>The Perlin noise generation algorithm interpolates and combines individual random noise functions (called octaves) 
@@ -45,17 +45,17 @@ package graphics.display
      * Like musical octaves, each octave function is twice the frequency of the one before it. 
      * Perlin noise has been described as a "fractal sum of noise" because it combines multiple sets of noise data with different levels of detail.</p>
      */
-    public class PerlinNoise extends BitmapData 
+    public class PerlinNoiseBitmapData extends BitmapData 
     {
         /**
-         * Creates a new PerlinNoise instance.
+         * Creates a new PerlinNoiseBitmapData instance.
          * @param width The width of the bitmap image in pixels.
          * @param height The height of the bitmap image in pixels.
          * @param transparent Specifies whether the bitmap image supports per-pixel transparency. The default value is true (transparent). To create a fully transparent bitmap, set the value of the transparent parameter to true and the value of the fillColor parameter to 0x00000000 (or to 0). Setting the transparent property to false can result in minor improvements in rendering performance.
          * @param fillColor A 32-bit ARGB color value that you use to fill the bitmap image area. The default value is 0xFFFFFFFF (solid white).
          * @throws ArgumentError width and/or height exceed the maximum dimensions.
          */
-        public function PerlinNoise( width:int , height:int , transparent:Boolean = true , fillColor:uint = 0xFFFFFFFF ) 
+        public function PerlinNoiseBitmapData( width:int , height:int , transparent:Boolean = true , fillColor:uint = 0xFFFFFFFF ) 
         {
             super( width , height , transparent , fillColor );
             baseX   = width  ;
@@ -171,7 +171,7 @@ package graphics.display
         /**
          * @private
          */
-        private function _moveOctave(oc:int, x:Number, y:Number):void 
+        private function _moveOctave( oc:int , x:Number, y:Number ):void 
         {
             var p:Point = (_offsets[oc] as Point) ;
             if ( p != null ) 
