@@ -599,5 +599,22 @@ package system
             u.setParameterValue("a", undefined ) ;
             assertEquals( u.query , "" ) ;
         }
+        
+        /* not implemented yet
+        public function testRelativeURI():void
+        {
+            var s:String ;
+            var u:URI ;
+            s =  "test/index.html?a=1&b=2#test";
+            u = new URI( s );
+            assertEquals( u.scheme,    "" , "scheme failed.");
+            assertEquals( u.authority, "" , "authority failed.");
+            assertEquals( u.host,      "" , "host failed.");
+            assertEquals( u.userinfo,  "" , "userinfo failed.");
+            assertEquals( u.path,      "/test/index.html" , "path failed.");
+            assertEquals( "a=1&b=2" , u.query , "query failed.");
+            assertEquals( u.fragment,  "test", "fragment failed.");
+        }
+        */
     }
 }
