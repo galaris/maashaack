@@ -39,7 +39,7 @@ package graphics.drawing
     import graphics.ArcType;
     import graphics.LineStyle;
     import graphics.numeric.Trigo;
-
+    
     /**
      * This pen draw a pie or chord arc shape with a Graphics object.
      */

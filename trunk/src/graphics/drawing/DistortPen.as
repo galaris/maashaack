@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,7 +37,7 @@ package graphics.drawing
 {
     import flash.display.BitmapData;
     import flash.geom.Matrix;
-
+    
     /**
      * This pen tesselates an area into severals triangles to allow free transform distortion on BitmapData Objects.
      * <p><b>Example :</b></p>

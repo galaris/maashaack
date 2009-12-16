@@ -35,14 +35,8 @@
 
 package graphics.drawing 
 {
-    import Array;
-    import Number;
     import graphics.Align;
-    import graphics.drawing.Pen;
-
-    import isNaN;
-    import uint;
-
+    
     /**
      * This pen is the tool to draw a circle vector shape.
      */

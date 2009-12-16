@@ -35,13 +35,11 @@
 
 package graphics.geom 
 {
-    import graphics.geom.Geometry;
-    
     import system.numeric.Mathematics;
     
     /**
      * Matrix with 4 rows and 4 columns.
-     * @example
+     * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import graphics.geom.Matrix2 ;
      * var m:Matrix2 = new Matrix2() ;

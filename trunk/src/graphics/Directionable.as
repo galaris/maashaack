@@ -35,7 +35,6 @@
 
 package graphics
 {
-
     /**
      * This interface defines a graphic object or component with a direction.
      */
@@ -51,6 +50,5 @@ package graphics
          * @private
          */
         function set direction( value:String ):void ;
-        
     }
 }

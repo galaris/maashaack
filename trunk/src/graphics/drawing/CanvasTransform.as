@@ -36,7 +36,7 @@
 package graphics.drawing 
 {
     import graphics.geom.Rectangle;
-
+    
     /**
      * This tool class transform a <code class="prettyprint">Canvas</code> object with static methods.
      */

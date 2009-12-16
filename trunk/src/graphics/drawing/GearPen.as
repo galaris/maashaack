@@ -24,7 +24,7 @@ package graphics.drawing
 {
     import graphics.Align;
     import graphics.numeric.Trigo;
-
+    
     /**
      * This pen drawing gears.
      * <p><b>Example :</b></p>

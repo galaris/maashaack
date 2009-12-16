@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,17 +35,9 @@
 
 package graphics.drawing 
 {
-    import Array;
-    import Math;
-    import Number;
     import graphics.Align;
-    import graphics.drawing.Pen;
     import graphics.numeric.Trigo;
-
-    import int;
-    import isNaN;
-    import uint;
-
+    
     /**
      * This pen drawing a star shaped polygons. This pen draw stars in either direction for creating knockouts.
      * <p><b>Example :</b></p>

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,17 +35,9 @@
 
 package graphics.drawing 
 {
-    import Array;
-    import Math;
-    import Number;
     import graphics.Align;
-    import graphics.drawing.Pen;
     import graphics.numeric.Trigo;
-
-    import int;
-    import isNaN;
-    import uint;
-
+    
     /**
      * This pen is the tool to draw a regular polygon vector shape.
      * <p><b>Example :</b></p>
@@ -129,22 +121,20 @@ package graphics.drawing
      */
     public dynamic class PolygonPen extends Pen
     {
-        
         /**
          * Creates a new PolygonPen. The Pen class use composition to control a Graphics reference and draw custom vector graphic shapes.
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
          * @param x (optional)The x location of the center of the circle relative to the registration point of the parent display object (in pixels).
          * @param y (optional)The y location of the center of the circle relative to the registration point of the parent display object (in pixels).
+         * @param sides (optional) The number of sides (Math.abs(sides) must be > 2)
          * @param radius (optional) The radius of the circle (in pixels). 
+         * @param angle (optional) The starting angle in degrees. (defaults to 0) 
          * @param align (optional) The Align value to align the shape.
          */
-        public function PolygonPen( graphic:* , ...arguments:Array )
+        public function PolygonPen( graphic:* , x:Number = 0 , y:Number = 0 , sides:uint = 6 , radius:Number = 20 , angle:Number = 0 , align:uint = 1 )
         {
             super( graphic ) ;
-            if ( arguments.length > 1 ) 
-            {
-                setPen.apply( this, arguments ) ;
-            }
+            setPen(x,y,sides,radius,angle,align) ;
         }
         
         /**

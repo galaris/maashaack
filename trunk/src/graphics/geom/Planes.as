@@ -35,10 +35,6 @@
 
 package graphics.geom 
 {
-    
-    import graphics.geom.Plane;
-    import graphics.geom.Vector2;
-    
     /**
      * Static tool class to manipulate and transform <code class="prettyprint">Plane</code> references.
      */
