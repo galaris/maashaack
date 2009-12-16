@@ -35,7 +35,6 @@
 
 package graphics.geom 
 {
-    
     /**
      * Static tool class to manipulate and transform <code class="prettyprint">Matrix4</code> references.
      */

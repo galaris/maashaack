@@ -35,8 +35,6 @@
 
 package graphics.geom 
 {
-    import graphics.geom.Geometry;
-    
     import system.Reflection;
     
     /**

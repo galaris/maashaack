@@ -38,13 +38,13 @@ package examples
     import graphics.Align;
     import graphics.FillStyle;
     import graphics.drawing.PolygonPen;
-
+    
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
-
+    
     public class PolygonPenExample extends Sprite 
     {
         public function PolygonPenExample()
@@ -60,6 +60,8 @@ package examples
             pen.fill = new FillStyle( 0xEBD936 ) ;
             
             pen.draw() ;
+            
+            trace(shape.width + " :: " + shape.height ) ;
             
             addChild( shape ) ;
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;

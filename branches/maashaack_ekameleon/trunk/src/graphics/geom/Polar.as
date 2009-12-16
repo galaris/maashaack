@@ -127,7 +127,7 @@ package graphics.geom
          */
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + " radius:" + radius + " angle:" + angle + "]" ;
+            return "[Polar radius:" + radius + " angle:" + angle + "]" ;
         }
     }
 }

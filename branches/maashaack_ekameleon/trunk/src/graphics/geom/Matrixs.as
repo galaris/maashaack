@@ -36,7 +36,7 @@
 package graphics.geom 
 {
     import flash.geom.Matrix;
-            
+    
     /**
      * Static tool class to manipulate and transform <code class="prettyprint">flash.geom.Matrix</code> instances.
      */
