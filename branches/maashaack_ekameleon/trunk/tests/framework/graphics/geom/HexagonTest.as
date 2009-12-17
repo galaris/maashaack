@@ -44,6 +44,8 @@ package graphics.geom
             super(name);
         }
         
+        /////// initialize
+        
         public var hexa:Hexagon ;
         
         public function setUp():void
@@ -55,6 +57,8 @@ package graphics.geom
         {
             hexa = null ;
         }
+        
+        /////// static constants
         
         public function testExteriorAngle():void
         {
@@ -86,10 +90,14 @@ package graphics.geom
             assertEquals( Hexagon.sumInteriorAngle , 720) ;
         }
         
+        /////// inherit and interfaces
+        
         public function testInterface():void
         {
             assertTrue( hexa is Geometry , "must implements the interface Geometry.") ;
         }
+        
+        /////// basic methods
         
         public function testClone():void
         {
@@ -108,6 +116,17 @@ package graphics.geom
         {
             var source:String = hexa.toSource() ;
             assertEquals( "new graphics.geom.Hexagon()" , source ) ;
+        }
+        
+        /////// attributes
+        
+        public function testSide():void
+        {
+            assertEquals( hexa.side , 0 ) ;
+            hexa.side = 2 ;
+            assertEquals( hexa.side , 2 ) ;
+            assertEquals( hexa.radius , 2 ) ;
+            //assertEquals( hexa.apothem , 2 ) ;
         }
     }
 }
