@@ -35,17 +35,26 @@
 
 package graphics.geom 
 {
+    import system.hack;
+
     /**
      * A hexagon is a six-sided regular polygon.
      */
     public class Hexagon implements Geometry 
     {
+        // http://jwilson.coe.uga.edu/EMAT6680/Parsons/MVP6690/Unit/Hexagon/hexagon.html
+        // http://www.mathopenref.com/polygonapothem.html
+        // http://www.mathopenref.com/hexagon.html
+        // http://mathworld.wolfram.com/Hexagon.html
+        
+        use namespace hack ;
+        
         /**
          * Creates a new Hexagon instance.
          */
         public function Hexagon()
         {
-            
+            reset();
         }
         
         //////////////////////////////////////////////////
@@ -85,6 +94,85 @@ package graphics.geom
         //////////////////////////////////////////////////
         
         /**
+         * The apothem distance of the hexagon (height / 2 ). 
+         * The distance of the line segment from the center of a regular polygon perpendicular to a side (i.e. when a regular polygon is broken into triangles, the apothem is the height of one of the triangles whose base is a side of the regular polygon).
+         */
+        public function get apothem():Number
+        {
+            return _apothem ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set apothem( value:Number ):void
+        {
+            _apothem = value > 0 ? value : 0 ;
+            _height  = _apothem * 2 ;
+            // TODO update
+        }
+        
+        /**
+         * The perimeter size of the hexagon.
+         */
+        public function get perimeter():Number
+        {
+            return _perimeter ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set perimeter( value:Number ):void
+        {
+            _perimeter = value > 0 ? value : 0 ;
+            _side      = _perimeter / 6 ;
+            // TODO update
+        }
+        
+        /**
+         * Distance from the center to a vertex.
+         */
+        public function get radius():Number
+        {
+            return _radius ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set radius( value:Number ):void
+        {
+            _radius  = radius > 0 ? value : 0 ;
+            _apothem = _radius * Math.cos( Math.PI / numSides ) ;
+            _height  = _apothem * 2 ;
+            _width   = _radius  * 2 ;
+            _side    = radius ;
+            // TODO update
+        }
+        
+        /**
+         * The size of the sides of the regular hexagon.
+         */
+        public function get side():Number
+        {
+            return _side ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set side( value:Number ):void
+        {
+            _side      = value > 0 ? value : 0 ;
+            _apothem   = _side / 2 * Math.tan( Math.PI / numSides ) ;
+            _height    = _apothem * 2 ;
+            _perimeter = _side * 6 ;
+            _radius    = _side ;
+            // TODO update
+        }
+        
+        /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
          */
@@ -109,6 +197,20 @@ package graphics.geom
             }
             return false ; 
         }
+        
+        /**
+         * Resets all components of the regular hexagon.
+         */
+        public function reset():void
+        {
+            _apothem   = 0 ;
+            _height    = 0 ;
+            _perimeter = 0 ;
+            _radius    = 0 ;
+            _side      = 0 ;
+            _width     = 0 ;
+        }
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -117,5 +219,35 @@ package graphics.geom
         {
             return "new graphics.geom.Hexagon()" ;
         }
+        
+        /**
+         * @private
+         */
+        hack var _apothem:Number ;
+        
+        /**
+         * @private
+         */
+        hack var _height:Number ;
+        
+        /**
+         * @private
+         */
+        hack var _perimeter:Number ;
+        
+        /**
+         * @private
+         */
+        hack var _radius:Number ;
+        
+        /**
+         * @private
+         */
+        hack var _side:Number ;
+        
+        /**
+         * @private
+         */
+        hack var _width:Number ;
     }
 }
