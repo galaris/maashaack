@@ -46,23 +46,23 @@ package graphics.geom
             super(name);
         }
         
-        public function testApothemeByRadius():void
+        public function testApothemByRadius():void
         {
-            assertEquals( RegularPolygon.apothemeByRadius(0,2) , 0 ) ;            assertEquals( RegularPolygon.apothemeByRadius(2,0) , 0 ) ;
+            assertEquals( RegularPolygon.apothemByRadius(0,2) , 0 ) ;            assertEquals( RegularPolygon.apothemByRadius(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.apothemeByRadius(100,6) , 3 ) , 
+                Mathematics.round( RegularPolygon.apothemByRadius(100,6) , 3 ) , 
                 86.603
             ) ;
         }
         
-        public function testApothemeBySide():void
+        public function testApothemBySide():void
         {
-            assertEquals( RegularPolygon.apothemeBySide(0,2) , 0 ) ;
-            assertEquals( RegularPolygon.apothemeBySide(2,0) , 0 ) ;
+            assertEquals( RegularPolygon.apothemBySide(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.apothemBySide(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.apothemeBySide(100,6) , 3 ) , 
+                Mathematics.round( RegularPolygon.apothemBySide(100,6) , 3 ) , 
                 86.603
             ) ;
         }
@@ -88,13 +88,13 @@ package graphics.geom
             assertEquals( RegularPolygon.perimeter( 10 , 6 ) , 60 ) ;
         }
         
-        public function testRadiusByApotheme():void
+        public function testRadiusByApothem():void
         {
-            assertEquals( RegularPolygon.radiusByApotheme(0,2) , 0 ) ;
-            assertEquals( RegularPolygon.radiusByApotheme(2,0) , 0 ) ;
+            assertEquals( RegularPolygon.radiusByApothem(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.radiusByApothem(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.radiusByApotheme(86.603,6) , 1 ) , 
+                Mathematics.round( RegularPolygon.radiusByApothem(86.603,6) , 1 ) , 
                 100
             ) ;
         }

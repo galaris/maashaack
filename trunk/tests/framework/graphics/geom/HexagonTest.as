@@ -37,6 +37,8 @@ package graphics.geom
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.numeric.Mathematics;
+
     public class HexagonTest extends TestCase
     {
         public function HexagonTest(name:String = "")
@@ -50,7 +52,7 @@ package graphics.geom
         
         public function setUp():void
         {
-            hexa = new Hexagon() ;
+            hexa = new Hexagon(25) ;
         }
         
         public function tearDown():void
@@ -118,30 +120,82 @@ package graphics.geom
         {
             var clone:Hexagon = hexa.clone() as Hexagon ;
             assertNotNull( clone ) ;
+            assertEquals( hexa.apothem , clone.apothem ) ;
+            assertEquals( hexa.radius  , clone.radius ) ;
         }
         
         public function testEquals():void
         {
             assertTrue( hexa.equals( hexa )  ) ;
             var clone:Hexagon = hexa.clone() as Hexagon ;
-            assertFalse( hexa.equals( clone )  ) ;
+            assertTrue( hexa.equals( clone )  ) ;
+            var other:Hexagon = new Hexagon( 10 ) ;
+            assertFalse( hexa.equals( other )  ) ;
+        }
+        
+        public function testReset():void
+        {
+            hexa.reset() ;
+            assertEquals( hexa.side      , 0 ) ;
+            assertEquals( hexa.radius    , 0 ) ;
+            assertEquals( hexa.apothem   , 0 ) ;
+            assertEquals( hexa.perimeter , 0 ) ;
+            assertEquals( hexa.height    , 0 ) ;
+            assertEquals( hexa.width     , 0 ) ;
         }
         
         public function testToSource():void
         {
-            var source:String = hexa.toSource() ;
-            assertEquals( "new graphics.geom.Hexagon()" , source ) ;
+            assertEquals( "new graphics.geom.Hexagon(25)" , hexa.toSource() ) ;
+            hexa.radius = 0 ;
+            assertEquals( "new graphics.geom.Hexagon(0)" , hexa.toSource() ) ;
         }
         
         /////// attributes
         
+        public function testApothem():void
+        {
+            assertEquals( Mathematics.round(hexa.apothem,2) , 21.65 ) ;
+            hexa.apothem = 20 ;
+            assertEquals( hexa.apothem , 20 ) ;
+        }
+        
+        public function testHeight():void
+        {
+            assertEquals( Mathematics.round(hexa.height,2) , 43.3 ) ;
+            hexa.height = 20 ;
+            assertEquals( hexa.height , 20 ) ;
+            assertEquals( hexa.apothem , 10 ) ;
+        }
+        
+        public function testPerimeter():void
+        {
+            assertEquals( hexa.perimeter , 25 * 6 ) ;
+            hexa.perimeter = 60 ;
+            assertEquals( hexa.side , 10 ) ;
+        }
+        
+        public function testRadius():void
+        {
+            assertEquals( hexa.radius , 25 ) ;
+            hexa.radius = 2 ;
+            assertEquals( hexa.radius , 2 ) ;
+        }
+        
         public function testSide():void
         {
-            assertEquals( hexa.side , 0 ) ;
+            assertEquals( hexa.side , 25 ) ;
             hexa.side = 2 ;
             assertEquals( hexa.side , 2 ) ;
-            //assertEquals( hexa.radius , 2 ) ;
-            //assertEquals( hexa.apothem , 2 ) ;
+            assertEquals( hexa.side , hexa.radius ) ;
+        }
+        
+        public function testWidth():void
+        {
+            assertEquals( hexa.width , 50 ) ;
+            hexa.width = 20 ;
+            assertEquals( hexa.width , 20 ) ;
+            assertEquals( hexa.radius , 10 ) ;
         }
     }
 }
