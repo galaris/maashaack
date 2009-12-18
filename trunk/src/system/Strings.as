@@ -898,7 +898,7 @@ package system
          * @return The new trimed string.
          */
         public static const trim:Function = core.strings.trim ;
-
+        
         /**
          * Removes all occurrences of a set of characters specified in an array from the end of this instance.
          * <p><b>Example :</b></p>
