@@ -50,7 +50,14 @@ package graphics.geom
          */
         public function Hexagon( radius:Number = 0 )
         {
-            this.radius = radius ;
+            if ( radius == 0 )
+            {
+                reset() ;
+            }
+            else
+            { 
+                this.radius = radius ;
+            }
         }
         
         //////////////////////////////////////////////////
