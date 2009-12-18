@@ -64,7 +64,7 @@ package examples
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             stage.align     = "" ;
-
+            
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             stage.addEventListener( MouseEvent.MOUSE_DOWN  , mouseDown ) ;
             stage.addEventListener( MouseEvent.MOUSE_UP    , mouseUp   ) ;
