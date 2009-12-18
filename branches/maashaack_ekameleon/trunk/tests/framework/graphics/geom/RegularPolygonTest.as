@@ -67,6 +67,70 @@ package graphics.geom
             ) ;
         }
         
+        public function testAreaByApothem():void
+        {
+            assertEquals( RegularPolygon.areaByApothem(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.areaByApothem(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByApothem(5.5,5) , 0 ) , 
+                110
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByApothem(6,6) , 0 ) , 
+                125 
+            ) ;
+        }
+        
+        public function testAreaByApothemAndPerimeter():void
+        {
+            assertEquals( RegularPolygon.areaByApothem(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.areaByApothem(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByApothemAndPerimeter(6,7*6) , 2 ) , 
+                126
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByApothemAndPerimeter(6,8.8*5) , 0 ) , 
+                132
+            ) ;
+        }
+        
+        public function testAreaByRadius():void
+        {
+            assertEquals( RegularPolygon.areaByRadius(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.areaByRadius(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByRadius(7,5) , 2 ) , 
+                116.5 
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaByRadius(7,6) , 2 ) , 
+                127.31 
+            ) ;
+        }
+        
+        public function testAreaBySide():void
+        {
+            assertEquals( RegularPolygon.areaBySide(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.areaBySide(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaBySide(8,5) , 0 ) , 
+                110
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.areaBySide(7,6) , 0 ) , 
+                127 
+            ) ;
+        }
+        
         public function testCentralAngleInDegrees():void
         {
             assertEquals( RegularPolygon.centralAngle(0,true) , Infinity ) ;

@@ -49,7 +49,7 @@ package graphics.geom
          * n  is the number of sides, 
          * PI approximately Math.PI, 
          * tan is the tangent function calculated in radians
-         * @param side The length of any side.
+         * @param radius The length of the radius of the polygon.
          * @param sides The number of sides.
          * @return The apothem size of the regular polygon.
          */
@@ -84,7 +84,61 @@ package graphics.geom
             return side / ( 2 * Math.tan( Math.PI / sides ) ) ;
         }
         
-        // TODO http://www.mathopenref.com/polygonregulararea.html
+        /**
+         * Calculates the area of the hexagon with the specified apothem length.
+         * @param apothem The size of the line segment from the center of a regular polygon to the midpoint of a side.
+         * @param sides The number of sides.
+         * @return The area of the specified regular polygon.
+         */
+        public static function areaByApothem( apothem:Number , sides:uint ):Number
+        {
+            if ( sides == 0 || apothem == 0 )
+            {
+                return 0 ;
+            }
+            return (apothem * apothem) * sides * Math.tan( Math.PI / sides ) ;
+        }
+        
+        /**
+         * Calculates the area of the hexagon with the specified apothem and perimeter length.
+         * @param apothem The size of the line segment from the center of a regular polygon to the midpoint of a side.
+         * @param perimeter The perimeter length.
+         * @return The area of the specified regular polygon.
+         */
+        public static function areaByApothemAndPerimeter( apothem:Number , perimeter:Number ):Number
+        {
+            return apothem * perimeter / 2 ;
+        }
+        
+        /**
+         * Calculates the area of the hexagon with the specified radius length.
+         * @param radius The length of the radius of the polygon.
+         * @param sides The number of sides.
+         * @return The area of the specified regular polygon.
+         */
+        public static function areaByRadius( radius:Number , sides:uint ):Number
+        {
+            if ( sides == 0 || radius == 0 )
+            {
+                return 0 ;
+            }
+            return ( ( radius * radius ) * sides * Math.sin( 2 * Math.PI / sides ) ) / 2 ;
+        }
+        
+        /**
+         * Calculates the area of the hexagon with the specified side size.
+         * @param side The length of any side.
+         * @param sides The number of sides.
+         * @return The area of the specified regular polygon.
+         */
+        public static function areaBySide( side:Number , sides:uint ):Number
+        {
+            if ( sides == 0 || side == 0 )
+            {
+                return 0 ;
+            }
+            return ( ( side * side ) * sides) / ( 4 * Math.tan( Math.PI / sides ) ) ;
+        }
         
         /**
          * Calculates the central angle of the specified regular polygon. 
