@@ -36,17 +36,13 @@
 package graphics.geom 
 {
     import system.hack;
+    import system.numeric.Mathematics;
 
     /**
      * A regular hexagon is a six-sided regular polygon.
      */
     public class Hexagon implements Geometry 
     {
-        // http://jwilson.coe.uga.edu/EMAT6680/Parsons/MVP6690/Unit/Hexagon/hexagon.html
-        // http://www.mathopenref.com/polygonapothem.html
-        // http://www.mathopenref.com/hexagon.html
-        // http://mathworld.wolfram.com/Hexagon.html
-        
         use namespace hack ;
         
         /**
@@ -261,6 +257,21 @@ package graphics.geom
         public function toSource(indent:int = 0):String
         {
             return "new graphics.geom.Hexagon(" + String( _radius ) + ")" ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @param floatCount the number of floats of the radius and apothem numeric values in 
+         * the string representation (default 2).
+         * @return the String representation of the object.
+         */
+        public function toString( floatCount:uint = 2 ):String
+        {
+            return "[Hexagon radius:" + 
+                    Mathematics.round(_radius,floatCount) + 
+                    " apothem:" + 
+                    Mathematics.round(_apothem,floatCount) + 
+                    "]" ;
         }
         
         /**

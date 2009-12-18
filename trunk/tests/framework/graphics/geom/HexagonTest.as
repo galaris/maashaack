@@ -151,6 +151,11 @@ package graphics.geom
             assertEquals( "new graphics.geom.Hexagon(0)" , hexa.toSource() ) ;
         }
         
+        public function testToString():void
+        {
+            assertEquals( "[Hexagon radius:25 apothem:21.65]" , hexa.toString() ) ;
+        }
+        
         /////// attributes
         
         public function testApothem():void
