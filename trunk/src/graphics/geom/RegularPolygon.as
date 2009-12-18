@@ -36,11 +36,12 @@
 package graphics.geom 
 {
     /**
-     * Manipulates and transforms the regular polygons.
+     * Tool class to manipulates and transforms the regular polygons.
      */
     public final class RegularPolygon 
     {
         /**
+         * Determinates the size of the line segment from the center of a regular polygon to the midpoint of a side. 
          * By definition, all sides of a regular polygon are equal in length. 
          * If you know the length of one of the sides, the apothem length is given by the formula: s/(2*tan(PI/n))
          * where 
@@ -50,6 +51,7 @@ package graphics.geom
          * tan is the tangent function calculated in radians
          * @param side The length of any side.
          * @param sides The number of sides.
+         * @return The apotheme size of the regular polygon.
          */
         public static function apothemeByRadius( radius:Number , sides:uint ):Number
         {
@@ -61,6 +63,7 @@ package graphics.geom
         }
         
         /**
+         * Determinates the size of the line segment from the center of a regular polygon to the midpoint of a side. 
          * By definition, all sides of a regular polygon are equal in length. 
          * If you know the length of one of the sides, the apothem length is given by the formula: s/(2*tan(PI/n))
          * where 
@@ -70,6 +73,7 @@ package graphics.geom
          * tan is the tangent function calculated in radians
          * @param side The length of any side.
          * @param sides The number of sides.
+         * @return The apotheme size of the regular polygon.
          */
         public static function apothemeBySide( side:Number , sides:uint ):Number
         {
@@ -96,6 +100,45 @@ package graphics.geom
             return angle ;
         }
         
-
+        /**
+         * For regular polygons, where all the sides are the same length, the perimeter is n times the length of any side, where n is the number of sides.
+         * @param side The length of any side.
+         * @param sides The number of sides.
+         * @return The perimeter of the specified regular polygon.
+         */
+        public static function perimeter( side:Number , sides:uint ):Number
+        {
+            return side * sides ;
+        }
+        
+        /**
+         * Determinates the radius of the regular polygon with the specified apothem. 
+         * @param apotheme The size of the line segment from the center of a regular polygon to the midpoint of a side.
+         * @param sides The number of sides.
+         * @return The radius of the regular polygon.
+         */
+        public static function radiusByApotheme( apotheme:Number , sides:uint ):Number
+        {
+            if ( apotheme == 0 || sides == 0 )
+            {
+                return 0 ;
+            }
+            return apotheme / Math.cos( Math.PI / sides ) ;
+        }
+        
+        /**
+         * Determinates the radius of the regular polygon with the specified side length. 
+         * @param side The length of any side.
+         * @param sides The number of sides.
+         * @return The radius of the regular polygon.
+         */
+        public static function radiusBySide( side:Number , sides:uint ):Number
+        {
+            if ( sides == 0 || side == 0 )
+            {
+                return 0 ;
+            }
+            return side / ( 2 * Math.sin( Math.PI / sides ) ) ;
+        }
     }
 }
