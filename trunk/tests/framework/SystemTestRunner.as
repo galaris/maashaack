@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2009
+  Portions created by the Initial Developers are Copyright (C) 2006-2010
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -67,9 +67,9 @@ package
             textfield.multiline         = true ;
             textfield.selectable        = true ;
             textfield.wordWrap          = true ;
-                
+            
             addChild( textfield ) ;
-                
+            
             stage.addEventListener( Event.RESIZE , resize ) ;
             resize() ;
             

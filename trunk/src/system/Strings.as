@@ -35,6 +35,10 @@
 
 package system
 {
+    import core.strings.trim;
+    import core.strings.trimEnd;
+    import core.strings.trimStart;
+    
     import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;
@@ -83,36 +87,6 @@ package system
                     str = paddingChar + str;
                 }
             }
-            return str;
-        }
-        
-        /**
-         * Helper method used by trim, trimStart and trimEnd methods.
-         * @private
-         */
-        private static function _trimHelper( str:String, trimChars:Array, trimStart:Boolean = false, trimEnd:Boolean = false ):String
-        {
-            var iLeft:int;
-            var iRight:int;
-            
-            if( trimStart )
-            {
-                for( iLeft = 0; (iLeft < str.length) && (trimChars.indexOf( str.charAt( iLeft ) ) > - 1) ; iLeft++ )
-                {
-                }
-                
-                str = str.substr( iLeft );
-            }
-            
-            if( trimEnd )
-            {
-                for( iRight = str.length - 1; (iRight >= 0) && (trimChars.indexOf( str.charAt( iRight ) ) > - 1) ; iRight-- )
-                {            
-                }
-                
-                str = str.substring( 0, iRight + 1 );
-            }
-            
             return str;
         }
         
@@ -803,7 +777,7 @@ package system
             
             return _padHelper( str, totalWidth, paddingChar, isRightPadded );
         }
-
+        
         /**
          * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
          * <p><b>Example :</b></p>
@@ -832,7 +806,7 @@ package system
             
             return _padHelper( str, totalWidth, paddingChar, isRightPadded );
         }
-
+        
         /**
          * Returns a new String value who contains the specified String characters repeated count times.
          * <p><b>Example :</b></p>
@@ -919,19 +893,11 @@ package system
          * <pre class="prettyprint">
          * trace( Strings.trim("\r\t   hello world   \t ") ); // hello world
          * </pre>
-         * @param str The string to trim.
+         * @param source The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
          * @return The new trimed string.
          */
-        public static function trim( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
-            {
-                trimChars = whiteSpaceChars;
-            }
-            
-            return _trimHelper( str, trimChars, true, true );
-        }
+        public static const trim:Function = core.strings.trim ;
 
         /**
          * Removes all occurrences of a set of characters specified in an array from the end of this instance.
@@ -939,82 +905,23 @@ package system
          * <pre class="prettyprint">
          * trace( Strings.trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // ---hello world
          * </pre>
-         * @param str The string to trim.
+         * @param source The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
          * @return The new trimed string.
          */
-        public static function trimEnd( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
-            {
-                trimChars = whiteSpaceChars;
-            }
-            
-            return _trimHelper( str, trimChars, false, true );
-        }
-
+        public static const trimEnd:Function = core.strings.trimEnd ;
+        
         /**
          * Removes all occurrences of a set of characters specified in an array from the beginning of this instance.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * trace( Strings.trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // hello world---
          * </pre>
-         * @param str The string to trim.
+         * @param source The string to trim.
          * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
          * @return The new trimed string.
          */
-        public static function trimStart( str:String, trimChars:Array = null ):String
-        {
-            if( trimChars == null )
-            {
-                trimChars = whiteSpaceChars;
-            }
-            
-            return _trimHelper( str, trimChars, true, false );
-        }
-
-        // TODO We maybe could also define 0xFFEF and/or 0x2060, but not completely sure of all the implication, 
-        // 0xFFEF in byte order mark etc.
-        
-        /**
-         * Contains a read-only list of white space chars.
-         * <p><b>Note :</b></p>
-         * <ul>
-         * <li>http://developer.mozilla.org/es4/proposals/string.html</li>
-         * <li>http://www.fileformat.info/info/unicode/category/Zs/list.htm</li>
-         * <li>http://www.fileformat.info/info/unicode/category/Zl/list.htm</li>
-         * <li>http://www.fileformat.info/info/unicode/category/Zp/list.htm</li>
-         * <li>http://www.fileformat.info/info/unicode/char/200b/index.htm</li>
-         * <li>http://www.fileformat.info/info/unicode/char/feff/index.htm</li>
-         * <li>http://www.fileformat.info/info/unicode/char/2060/index.htm</li>
-         * </ul>
-         */
-        public static const whiteSpaceChars:Array = [ "\u0009" /*Horizontal tab*/,
-                                                      "\u000A" /*Line feed or New line*/,
-                                                      "\u000B" /*Vertical tab*/,
-                                                      "\u000C" /*Formfeed*/,
-                                                      "\u000D" /*Carriage return*/,
-                                                      "\u0020" /*Space*/,
-                                                      "\u00A0" /*Non-breaking space*/,
-                                                      "\u1680" /*Ogham space mark*/,
-                                                      "\u180E" /*Mongolian vowel separator*/,
-                                                      "\u2000" /*En quad*/,
-                                                      "\u2001" /*Em quad*/,
-                                                      "\u2002" /*En space*/,
-                                                      "\u2003" /*Em space*/,
-                                                      "\u2004" /*Three-per-em space*/,
-                                                      "\u2005" /*Four-per-em space*/,
-                                                      "\u2006" /*Six-per-em space*/,
-                                                      "\u2007" /*Figure space*/,
-                                                      "\u2008" /*Punctuation space*/,
-                                                      "\u2009" /*Thin space*/,
-                                                      "\u200A" /*Hair space*/,
-                                                      "\u200B" /*Zero width space*/,
-                                                      "\u2028" /*Line separator*/,
-                                                      "\u2029" /*Paragraph separator*/,
-                                                      "\u202F" /*Narrow no-break space*/,
-                                                      "\u205F" /*Medium mathematical space*/,
-                                                      "\u3000" /*Ideographic space*/ ];
+        public static const trimStart:Function = core.strings.trimStart ;
     }
 }
 

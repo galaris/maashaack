@@ -16,7 +16,7 @@ The Original Code is [maashaack framework].
   
 The Initial Developers of the Original Code are
 Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-Portions created by the Initial Developers are Copyright (C) 2006-2009
+Portions created by the Initial Developers are Copyright (C) 2006-2010
 the Initial Developers. All Rights Reserved.
   
 Contributor(s):
@@ -37,6 +37,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.*;
+
+    import core.strings.whiteSpaceChars;
 
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
@@ -277,8 +279,8 @@ package system
             assertEquals("hello", Strings.trimEnd("hello   "));
             assertEquals("hello", Strings.trimEnd("hello  \n  \t   \r "));
             assertEquals("---hello world", Strings.trimEnd("---hello world---", ["-"]));
-            assertEquals("---hello world", Strings.trimEnd("---hello world---", Strings.whiteSpaceChars.concat("-")));
-            assertEquals("---hello world", Strings.trimEnd("---hello world--  -----  \r\n---\t-- ---", Strings.whiteSpaceChars.concat("-")));
+            assertEquals("---hello world", Strings.trimEnd("---hello world---", whiteSpaceChars.concat("-")));
+            assertEquals("---hello world", Strings.trimEnd("---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
         }
 
         public function testTrimStart():void
@@ -286,8 +288,8 @@ package system
             assertEquals("hello", Strings.trimStart("   hello"));
             assertEquals("hello", Strings.trimStart("  \n  \t   \r hello"));
             assertEquals("hello world---", Strings.trimStart("---hello world---", ["-"]));
-            assertEquals("hello world---", Strings.trimStart("---hello world---", Strings.whiteSpaceChars.concat("-")));
-            assertEquals("hello world---", Strings.trimStart("--  -----  \r\n---\t-- ---hello world---", Strings.whiteSpaceChars.concat("-")));
+            assertEquals("hello world---", Strings.trimStart("---hello world---", whiteSpaceChars.concat("-")));
+            assertEquals("hello world---", Strings.trimStart("--  -----  \r\n---\t-- ---hello world---", whiteSpaceChars.concat("-")));
         }
 
         public function testTrim():void
@@ -295,8 +297,8 @@ package system
             assertEquals("hello", Strings.trim("   hello   "));
             assertEquals("hello", Strings.trim("  \n  \t   \r hello  \n  \t   \r "));
             assertEquals("hello world", Strings.trim("---hello world---", ["-"]));
-            assertEquals("hello world", Strings.trim("---hello world---", Strings.whiteSpaceChars.concat("-")));
-            assertEquals("hello world", Strings.trim("--  -----  \r\n---\t-- ---hello world--  -----  \r\n---\t-- ---", Strings.whiteSpaceChars.concat("-")));
+            assertEquals("hello world", Strings.trim("---hello world---", whiteSpaceChars.concat("-")));
+            assertEquals("hello world", Strings.trim("--  -----  \r\n---\t-- ---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
         }
 
         public function testIndexOfAny():void

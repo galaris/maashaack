@@ -35,7 +35,7 @@
 
 package system
 {
-    import system.Strings;    
+    import core.strings.whiteSpaceChars;
 
     /**
      * The Char class.
@@ -728,7 +728,7 @@ package system
                we should refactore Strings
                to separate white spaces, separatores, etc.
             */
-            var ws:Array = Strings.whiteSpaceChars;
+            var ws:Array = whiteSpaceChars;
             var l:int    = ws.length;
             
             for( var i:int =0 ; i < l ; i++ )
