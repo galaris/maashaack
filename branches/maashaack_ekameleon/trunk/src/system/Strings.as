@@ -35,14 +35,16 @@
 
 package system
 {
+    import core.strings.padLeft;
+    import core.strings.padRight;
     import core.strings.trim;
     import core.strings.trimEnd;
     import core.strings.trimStart;
-    
+
     import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;
-    
+
     /**
      * A static class for String utilities.
      */
@@ -53,42 +55,6 @@ package system
          * @see system.Strings#compare
          */
         private static var _sComparator:StringComparator = new StringComparator() ;
-        
-        /**
-         * Helper method for the padLeft and padRight method.
-         * @private
-         */
-        private static function _padHelper( str:String, totalWidth:int, paddingChar:String = " ", isRightPadded:Boolean = true ):String
-        {
-            if( (totalWidth < str.length) || (totalWidth < 0) )
-            {
-                return str;
-            }
-            
-            /* note:
-            we want to limit the string to ONLY ONE char
-               
-            for now we do that but perharps it would better
-            to throw an Error
-             */
-            if( paddingChar.length > 1 )
-            {
-                paddingChar = paddingChar.charAt( 0 );
-            }
-            
-            while( str.length != totalWidth )
-            {
-                if( isRightPadded == true )
-                {
-                    str += paddingChar;
-                }
-                else
-                {
-                    str = paddingChar + str;
-                }
-            }
-            return str;
-        }
         
         /**
          * Returns the center String representation of the specified String value.
@@ -748,8 +714,8 @@ package system
             }
             
             return - 1 ;
-        }    
-
+        }
+        
         /**
          * Right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          * <pre class="prettyprint">
@@ -765,18 +731,7 @@ package system
          * </pre>
          * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
          */
-        public static function padLeft( str:String, totalWidth:int, paddingChar:String = " " ):String
-        {
-            var isRightPadded:Boolean = false;
-            
-            if( totalWidth < 0 )
-            {
-                totalWidth = - totalWidth;
-                isRightPadded = true;
-            }
-            
-            return _padHelper( str, totalWidth, paddingChar, isRightPadded );
-        }
+        public static const padLeft:Function = core.strings.padLeft ;
         
         /**
          * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
@@ -794,18 +749,7 @@ package system
          * </pre>
          * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
          */
-        public static function padRight( str:String, totalWidth:int, paddingChar:String = " " ):String
-        {
-            var isRightPadded:Boolean = true;
-            
-            if( totalWidth < 0 )
-            {
-                totalWidth = - totalWidth;
-                isRightPadded = false;
-            }
-            
-            return _padHelper( str, totalWidth, paddingChar, isRightPadded );
-        }
+        public static const padRight:Function = core.strings.padRight ;
         
         /**
          * Returns a new String value who contains the specified String characters repeated count times.
