@@ -33,22 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class padRightTest extends TestCase 
     {
-        public static function suite():ITest
+        public function padRightTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            suite.addTestSuite( padLeftTest );
-            suite.addTestSuite( padRightTest );
-            suite.addTestSuite( trimTest );
-            suite.addTestSuite( trimEndTest );
-            suite.addTestSuite( trimStartTest );
-            return suite;
+            super(name);
+        }
+        
+        public function testPadRight():void
+        {
+            assertEquals("hello   ", padRight("hello", 8));
+            assertEquals("hello...", padRight("hello", 8, "."));
+            assertEquals("___hello", padRight("hello", -8, "_"));
+            assertEquals("hello***", padRight("hello", 8, "*.!"));
         }
     }
 }
