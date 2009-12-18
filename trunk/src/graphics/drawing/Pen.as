@@ -125,7 +125,7 @@ package graphics.drawing
         public function set fill( style:IFillStyle ):void
         {
             _fillStyle = style || null ;
-            if ( _fillStyle != null )
+            if ( _fillStyle && _graphics )
             {
                 _fillStyle.apply( _graphics ) ;
             }
@@ -145,7 +145,7 @@ package graphics.drawing
         public function set line( style:ILineStyle ):void
         {
             _lineStyle = style || null ;
-            if ( _lineStyle != null )
+            if ( _lineStyle && _graphics )
             {
                 _lineStyle.apply( _graphics ) ;
             }
@@ -169,7 +169,7 @@ package graphics.drawing
         flash_proxy override function callProperty( methodName:*  , ...rest:Array ):* 
         {
             var res:* = null ;
-            if ( _graphics != null )
+            if ( _graphics )
             {
                 methodName = methodName.toString() ;
                 if ( methodName in _graphics )
