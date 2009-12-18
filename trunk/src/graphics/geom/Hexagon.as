@@ -38,7 +38,7 @@ package graphics.geom
     import system.hack;
 
     /**
-     * A hexagon is a six-sided regular polygon.
+     * A regular hexagon is a six-sided regular polygon.
      */
     public class Hexagon implements Geometry 
     {
@@ -60,10 +60,25 @@ package graphics.geom
         //////////////////////////////////////////////////
         
         /**
+         * Indicates the central angle value (in degrees) of the hexagon (60°). 
+         */
+        public static const centralAngle:uint = RegularPolygon.centralAngle( 6 , true ) ;
+        
+        /**
+         * Indicates the central angle value (in radians) of the hexagon (60 * Math.PI / 180). 
+         */
+        public static const centralAngleRadians:Number = RegularPolygon.centralAngle( 6 ) ;
+        
+        /**
          * Indicates the exterior angle value (in degrees) of the hexagon (60°). 
          * To find the exterior angle of a regular hexagon, we use the fact that the exterior angle forms a linear pair with the interior angle, so in general it is given by the formula 180 - interior angle. 
          */
         public static const exteriorAngle:uint = 60 ;
+        
+        /**
+         * Indicates the exterior angle value (in radians) of the hexagon (60 * Math.PI / 180). 
+         */
+        public static const exteriorAngleRadians:Number = 60 * Math.PI / 180 ;
         
         /**
          * Indicates the interior angle value (in degrees) of the hexagon (120°). 
@@ -109,6 +124,7 @@ package graphics.geom
         {
             _apothem = value > 0 ? value : 0 ;
             _height  = _apothem * 2 ;
+            _radius  = _apothem / ( Math.cos( Math.PI / numSides ) ) ;
             // TODO update
         }
         
@@ -168,7 +184,7 @@ package graphics.geom
             _apothem   = _side / 2 * Math.tan( Math.PI / numSides ) ;
             _height    = _apothem * 2 ;
             _perimeter = _side * 6 ;
-            _radius    = _side ;
+            _radius    = _side / 2 * Math.sin( Math.PI / numSides ) ;
             // TODO update
         }
         

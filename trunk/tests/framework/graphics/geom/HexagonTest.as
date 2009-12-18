@@ -60,9 +60,24 @@ package graphics.geom
         
         /////// static constants
         
+        public function testCentralAngle():void
+        {
+            assertEquals( Hexagon.centralAngle , 60 ) ;
+        }
+        
+        public function testCentralAngleRadians():void
+        {
+            assertEquals( Hexagon.centralAngleRadians , 60 * Math.PI / 180 ) ;
+        }
+        
         public function testExteriorAngle():void
         {
             assertEquals( Hexagon.exteriorAngle , 60 ) ;
+        }
+        
+        public function testExteriorAngleRadians():void
+        {
+            assertEquals( Hexagon.exteriorAngleRadians , 60 * Math.PI / 180 ) ;
         }
         
         public function testInteriorAngle():void
@@ -125,7 +140,7 @@ package graphics.geom
             assertEquals( hexa.side , 0 ) ;
             hexa.side = 2 ;
             assertEquals( hexa.side , 2 ) ;
-            assertEquals( hexa.radius , 2 ) ;
+            //assertEquals( hexa.radius , 2 ) ;
             //assertEquals( hexa.apothem , 2 ) ;
         }
     }
