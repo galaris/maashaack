@@ -37,37 +37,48 @@ package examples
 {
     import graphics.Align;
     import graphics.FillStyle;
-    import graphics.drawing.PolygonPen;
+    import graphics.drawing.HexagonPen;
     
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
+    import flash.events.Event;
     import flash.events.KeyboardEvent;
+    import flash.events.MouseEvent;
     import flash.ui.Keyboard;
     
-    public class PolygonPenExample extends Sprite 
+    public class HexagonPenExample extends Sprite 
     {
-        public function PolygonPenExample()
+        public function HexagonPenExample()
         {
-            stage.scaleMode = StageScaleMode.NO_SCALE ;
-            stage.align     = "" ;
+            ///////////
             
-            var shape:Shape = new Shape() ;
+            shape   = new Shape() ;
             shape.x = 740 / 2 ;
             shape.y = 420 / 2 ;
             
-            pen      = new PolygonPen( shape , 0, 0, 6 , 100, 0 , Align.CENTER ) ;
-            pen.fill = new FillStyle( 0xEBD936 ) ;
-            
+            pen      = new HexagonPen( shape , 0, 0, 40, 45, Align.TOP_RIGHT ) ;
+            pen.fill = new FillStyle( 0xFF0000 , 0.6 ) ;
             pen.draw() ;
             
-            trace(shape.width + " :: " + shape.height ) ;
-            
             addChild( shape ) ;
-            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+            
+            ///////////
+            
+            stage.scaleMode = StageScaleMode.NO_SCALE ;
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown   ) ;
+            stage.addEventListener( MouseEvent.MOUSE_DOWN  , mouseDown ) ;
+            stage.addEventListener( MouseEvent.MOUSE_UP    , mouseUp   ) ;
         }
         
-        public var pen:PolygonPen ;
+        public var pen:HexagonPen ;
+        public var shape:Shape ;
+        
+        public function enterFrame( e:Event ):void
+        {
+            pen.angle += 15 ;
+            pen.draw() ;
+        }
         
         public function keyDown( e:KeyboardEvent ):void
         {
@@ -76,36 +87,42 @@ package examples
             {
                 case Keyboard.LEFT :
                 {
-                    pen.draw( 0, 0, 10 , 100, 0 , Align.LEFT ) ;
+                    pen.draw( 0, 0, 40, 0, Align.LEFT ) ;
                     break ;
                 }
                 case Keyboard.RIGHT :
                 {
-                    pen.draw( 0, 0, 10 , 100, 20 , Align.RIGHT ) ;
+                    pen.draw( 0, 0, 40, 0, Align.RIGHT ) ;
                     break ;
                 }
                 case Keyboard.UP :
                 {
-                    pen.draw( 0, 0, 3 , 100, 40 , Align.TOP ) ;
+                    pen.draw( 0, 0, 40, 0, Align.TOP ) ;
                     break ;
                 }
                 case Keyboard.DOWN :
                 {
-                    pen.draw( 0, 0, 4 , 100, 60 , Align.BOTTOM ) ;
+                    pen.useApotheme = true ;
+                    pen.draw( 0, 0, 40, 0, Align.BOTTOM ) ;
+                    pen.useApotheme = false ;
                     break ;
                 }
                 case Keyboard.SPACE :
                 {
-                    pen.x      = 10 ;
-                    pen.y      = 40 ;
-                    pen.sides  = 8  ;
-                    pen.radius = 50 ;
-                    pen.angle  = 40 ;
-                    pen.align  = Align.TOP_RIGHT ;
-                    pen.draw() ;
+                    pen.draw( 0, 0, 40, 0, Align.CENTER ) ;
                     break ;
                 }
             }
+        }
+        
+        public function mouseDown( e:MouseEvent ):void
+        {
+            stage.addEventListener( Event.ENTER_FRAME , enterFrame ) ;
+        }
+        
+        public function mouseUp( e:MouseEvent ):void
+        {
+            stage.removeEventListener( Event.ENTER_FRAME , enterFrame ) ;
         }
     }
 }
