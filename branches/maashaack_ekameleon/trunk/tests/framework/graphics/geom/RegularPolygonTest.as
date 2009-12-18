@@ -82,5 +82,42 @@ package graphics.geom
             assertEquals( RegularPolygon.centralAngle(5,false) ,  72 * Math.PI / 180 ) ;
             assertEquals( RegularPolygon.centralAngle(6,false) ,  60 * Math.PI / 180 ) ;
         }
+        
+        public function testPerimeter():void
+        {
+            assertEquals( RegularPolygon.perimeter( 10 , 6 ) , 60 ) ;
+        }
+        
+        public function testRadiusByApotheme():void
+        {
+            assertEquals( RegularPolygon.radiusByApotheme(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.radiusByApotheme(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.radiusByApotheme(86.603,6) , 1 ) , 
+                100
+            ) ;
+        }
+        
+        public function testRadiusBySide():void
+        {
+            assertEquals( RegularPolygon.radiusBySide(0,2) , 0 ) ;
+            assertEquals( RegularPolygon.radiusBySide(2,0) , 0 ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.radiusBySide(8.7,3) , 1 ) , 
+                5
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.radiusBySide(5.9,5) , 1 ) , 
+                5
+            ) ;
+            assertEquals
+            ( 
+                Mathematics.round( RegularPolygon.radiusBySide(5,6) , 1 ) , 
+                5
+            ) ;
+        }
     }
 }
