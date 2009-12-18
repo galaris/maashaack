@@ -52,9 +52,9 @@ package graphics.geom
         /**
          * Creates a new Hexagon instance.
          */
-        public function Hexagon()
+        public function Hexagon( radius:Number = 0 )
         {
-            reset();
+            this.radius = radius ;
         }
         
         //////////////////////////////////////////////////
@@ -122,10 +122,28 @@ package graphics.geom
          */
         public function set apothem( value:Number ):void
         {
-            _apothem = value > 0 ? value : 0 ;
-            _height  = _apothem * 2 ;
-            _radius  = _apothem / ( Math.cos( Math.PI / numSides ) ) ;
-            // TODO update
+            _apothem   = value > 0 ? value : 0 ;
+            _radius    = RegularPolygon.radiusByApothem( _apothem , numSides ) ;
+            _height    = _apothem * 2 ;
+            _width     = _radius  * 2 ;
+            _side      = _radius ;
+            _perimeter = RegularPolygon.perimeter( _radius , numSides ) ;
+        }
+        
+        /**
+         * Determinates the height of the hexagon (2 * apothem)
+         */
+        public function get height():Number
+        {
+            return _height ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set height( value:Number ):void
+        {
+            apothem = (value > 0 ? value : 0) / 2 ;
         }
         
         /**
@@ -141,9 +159,7 @@ package graphics.geom
          */
         public function set perimeter( value:Number ):void
         {
-            _perimeter = value > 0 ? value : 0 ;
-            _side      = _perimeter / 6 ;
-            // TODO update
+            radius = ( ( value > 0 ) ? value : 0 ) / numSides ;
         }
         
         /**
@@ -159,12 +175,12 @@ package graphics.geom
          */
         public function set radius( value:Number ):void
         {
-            _radius  = radius > 0 ? value : 0 ;
-            _apothem = _radius * Math.cos( Math.PI / numSides ) ;
-            _height  = _apothem * 2 ;
-            _width   = _radius  * 2 ;
-            _side    = radius ;
-            // TODO update
+            _radius    = value > 0 ? value : 0 ;
+            _apothem   = RegularPolygon.apothemByRadius(_radius, numSides) ;
+            _height    = _apothem * 2 ;
+            _width     = _radius  * 2 ;
+            _side      = _radius ;
+            _perimeter = RegularPolygon.perimeter( _radius , numSides ) ;
         }
         
         /**
@@ -180,12 +196,23 @@ package graphics.geom
          */
         public function set side( value:Number ):void
         {
-            _side      = value > 0 ? value : 0 ;
-            _apothem   = _side / 2 * Math.tan( Math.PI / numSides ) ;
-            _height    = _apothem * 2 ;
-            _perimeter = _side * 6 ;
-            _radius    = _side / 2 * Math.sin( Math.PI / numSides ) ;
-            // TODO update
+            radius = value ;
+        }
+        
+        /**
+         * Determinates the width of the hexagon (2 * radius)
+         */
+        public function get width():Number
+        {
+            return _width ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set width( value:Number ):void
+        {
+            radius = (value > 0 ? value : 0) / 2 ;
         }
         
         /**
@@ -194,7 +221,7 @@ package graphics.geom
          */
         public function clone():*
         {
-            return new Hexagon() ;
+            return new Hexagon( _radius ) ;
         }
         
         /**
@@ -209,7 +236,7 @@ package graphics.geom
             }
             else if ( o is Hexagon )
             {
-                // FIXME  
+                return ( o as Hexagon)._radius == _radius ;
             }
             return false ; 
         }
@@ -233,7 +260,7 @@ package graphics.geom
          */
         public function toSource(indent:int = 0):String
         {
-            return "new graphics.geom.Hexagon()" ;
+            return "new graphics.geom.Hexagon(" + String( _radius ) + ")" ;
         }
         
         /**

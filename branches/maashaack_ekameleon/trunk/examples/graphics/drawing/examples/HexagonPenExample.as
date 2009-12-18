@@ -102,9 +102,9 @@ package examples
                 }
                 case Keyboard.DOWN :
                 {
-                    pen.useApotheme = true ;
+                    pen.useApothem = true ;
                     pen.draw( 0, 0, 40, 0, Align.BOTTOM ) ;
-                    pen.useApotheme = false ;
+                    pen.useApothem = false ;
                     break ;
                 }
                 case Keyboard.SPACE :

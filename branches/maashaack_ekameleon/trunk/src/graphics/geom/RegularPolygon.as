@@ -51,9 +51,9 @@ package graphics.geom
          * tan is the tangent function calculated in radians
          * @param side The length of any side.
          * @param sides The number of sides.
-         * @return The apotheme size of the regular polygon.
+         * @return The apothem size of the regular polygon.
          */
-        public static function apothemeByRadius( radius:Number , sides:uint ):Number
+        public static function apothemByRadius( radius:Number , sides:uint ):Number
         {
             if ( radius == 0 || sides == 0 )
             {
@@ -73,9 +73,9 @@ package graphics.geom
          * tan is the tangent function calculated in radians
          * @param side The length of any side.
          * @param sides The number of sides.
-         * @return The apotheme size of the regular polygon.
+         * @return The apothem size of the regular polygon.
          */
-        public static function apothemeBySide( side:Number , sides:uint ):Number
+        public static function apothemBySide( side:Number , sides:uint ):Number
         {
             if ( sides == 0 || side == 0 )
             {
@@ -83,6 +83,8 @@ package graphics.geom
             }
             return side / ( 2 * Math.tan( Math.PI / sides ) ) ;
         }
+        
+        // TODO http://www.mathopenref.com/polygonregulararea.html
         
         /**
          * Calculates the central angle of the specified regular polygon. 
@@ -113,17 +115,17 @@ package graphics.geom
         
         /**
          * Determinates the radius of the regular polygon with the specified apothem. 
-         * @param apotheme The size of the line segment from the center of a regular polygon to the midpoint of a side.
+         * @param apothem The size of the line segment from the center of a regular polygon to the midpoint of a side.
          * @param sides The number of sides.
          * @return The radius of the regular polygon.
          */
-        public static function radiusByApotheme( apotheme:Number , sides:uint ):Number
+        public static function radiusByApothem( apothem:Number , sides:uint ):Number
         {
-            if ( apotheme == 0 || sides == 0 )
+            if ( apothem == 0 || sides == 0 )
             {
                 return 0 ;
             }
-            return apotheme / Math.cos( Math.PI / sides ) ;
+            return apothem / Math.cos( Math.PI / sides ) ;
         }
         
         /**
