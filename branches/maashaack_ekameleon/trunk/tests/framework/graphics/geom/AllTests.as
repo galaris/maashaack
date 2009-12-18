@@ -55,6 +55,7 @@ package graphics.geom
             suite.addTestSuite( QuaternionTest ) ;
             suite.addTestSuite( QuaternionsTest ) ;
             suite.addTestSuite( RayTest ) ;
+            suite.addTestSuite( RegularPolygonTest ) ;
             suite.addTestSuite( RingTest ) ;
             suite.addTestSuite( UVTest ) ;
             suite.addTestSuite( Vector2Test ) ;
