@@ -16,7 +16,7 @@ The Original Code is [maashaack framework].
   
 The Initial Developers of the Original Code are
 Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-Portions created by the Initial Developers are Copyright (C) 2006-2009
+Portions created by the Initial Developers are Copyright (C) 2006-2010
 the Initial Developers. All Rights Reserved.
   
 Contributor(s):
@@ -37,7 +37,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import core.strings.whiteSpaceChars;
+
     public class CharTest extends TestCase
     {
         public function CharTest( name:String = "" )
@@ -184,26 +186,22 @@ package system
         
         public function testIsWhiteSpace():void
         {
-            var str:String = Strings.whiteSpaceChars.join("");
-            
+            var str:String = whiteSpaceChars.join("");
             for( var i:int = 0; i < str.length; i++ )
             {
                 assertTrue( new Char( str, i ).isWhiteSpace() );
                 assertTrue( Char.isWhiteSpace( str, i ) );
             }
-            
         }
         
         public function testIsUnicode():void
         {
             var str:String = "αβγδεζηθικλμνξοπ";
-            
             for( var i:int = 0; i < str.length; i++ )
             {
                 assertTrue( new Char( str, i ).isUnicode() );
                 assertTrue( Char.isUnicode( str, i ) );
             }
-            
         }
         
         public function testToNumber():void

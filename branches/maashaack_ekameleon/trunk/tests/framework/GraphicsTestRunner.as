@@ -71,7 +71,7 @@ package
             textfield.wordWrap          = true ;
             
             addChild( textfield ) ;
-                
+            
             stage.addEventListener( Event.RESIZE , resize ) ;
             resize() ;
             
