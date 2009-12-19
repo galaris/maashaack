@@ -36,6 +36,7 @@
 package system
 {
     import core.strings.indexOfAny;
+    import core.strings.insert;
     import core.strings.padLeft;
     import core.strings.padRight;
     import core.strings.repeat;
@@ -594,29 +595,8 @@ package system
          * </pre>
          * @return the string modified by the method.
          */
-        public static function insert( str:String, startIndex:int, value:String ):String
-        {
-            var strA:String = "";
-            var strB:String = "";
-            
-            if( startIndex == 0 )
-            {
-                return value + str;
-            }
-            else if( startIndex == str.length )
-            {
-                return str + value;
-            }
-            
-            /* TODO:
-            review the logic when startIndex == -1
-             */
-            strA = str.substr( 0, startIndex );
-            strB = str.substr( startIndex );
-            
-            return strA + value + strB;
-        }
-
+        public static const insert:Function = core.strings.insert ;
+        
         /**
          * Reports the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
          * <p><b>Example :</b></p>
