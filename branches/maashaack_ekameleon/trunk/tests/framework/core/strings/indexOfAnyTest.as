@@ -33,24 +33,32 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class indexOfAnyTest extends TestCase 
     {
-        public static function suite():ITest
+        public function indexOfAnyTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( indexOfAnyTest ) ;            suite.addTestSuite( padLeftTest    ) ;
-            suite.addTestSuite( padRightTest   ) ;            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( trimTest       ) ;
-            suite.addTestSuite( trimEndTest    ) ;
-            suite.addTestSuite( trimStartTest  ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testIndexOfAny():void
+        {
+            assertEquals( 1 , indexOfAny("hello world", [2, "hello", 5]));
+            assertEquals( 2 , indexOfAny("Five = 5", [2, "hello", 5]));
+            assertEquals(-1 , indexOfAny("actionscript is good", [2, "hello", 5]));
+            assertEquals( 1 , indexOfAny("hello world", ["2", "hello", "5"]));
+            assertEquals( 2 , indexOfAny("Five = 5", ["2", "hello", "5"]));
+            assertEquals( 1 , indexOfAny("hello world", [2, "hello", 5], 1));
+            assertEquals( 0 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 0));
+            assertEquals( 1 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 1));
+            assertEquals( 2 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 2));
+            assertEquals( 3 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 3));
+            assertEquals(-1 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 2));
+            assertEquals( 3 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 3));
+            assertEquals( 3 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 3, 3));
         }
     }
 }

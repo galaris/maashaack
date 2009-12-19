@@ -35,22 +35,31 @@
 
 package core.strings
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Returns a new String value who contains the specified String characters repeated count times.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.strings.repeat ;
+     * 
+     * trace( repeat( "hello" , 0 ) ) ; // hello
+     * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
+     * </pre>
+     * @return a new String who contains the specified String characters repeated count times.
+     */
+    public function repeat( source:String = "" , count:uint = 0 ):String
     {
-        public static function suite():ITest
+        var result:String = "" ;
+        if ( count > 0 )
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( indexOfAnyTest ) ;            suite.addTestSuite( padLeftTest    ) ;
-            suite.addTestSuite( padRightTest   ) ;            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( trimTest       ) ;
-            suite.addTestSuite( trimEndTest    ) ;
-            suite.addTestSuite( trimStartTest  ) ;
-            
-            return suite;
+            for( var i:int ; i < count ; i++ )
+            {
+                result = result.concat( source ) ;
+            }
         }
+        else
+        {
+            result = source ;
+        }
+        return result ;
     }
 }
