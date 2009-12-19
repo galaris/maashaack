@@ -56,7 +56,7 @@ package core.strings
         
         while( source.length != totalWidth )
         {
-            if( isRightPadded == true )
+            if( isRightPadded )
             {
                 source += paddingChar;
             }
