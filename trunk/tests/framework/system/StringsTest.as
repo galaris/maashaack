@@ -308,7 +308,6 @@ package system
             assertEquals(-1, Strings.indexOfAny("actionscript is good", [2, "hello", 5]));
             assertEquals(1, Strings.indexOfAny("hello world", ["2", "hello", "5"]));
             assertEquals(2, Strings.indexOfAny("Five = 5", ["2", "hello", "5"]));
-            assertEquals(1, Strings.indexOfAny("hello world", [2, "hello", 5], -5));
             assertEquals(1, Strings.indexOfAny("hello world", [2, "hello", 5], 1));
             assertEquals(0, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 0));
             assertEquals(1, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 1));

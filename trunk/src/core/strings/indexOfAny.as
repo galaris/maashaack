@@ -35,22 +35,48 @@
 
 package core.strings
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.strings.indexOfAny ;
+     * 
+     * var result:int ;
+     * 
+     * result = indexOfAny("hello world", [2, "hello", 5]) ;
+     * trace( result ) ; // 0
+     * 
+     * result = indexOfAny("Five = 5", [2, "hello", 5]) ;
+     * trace( result ) ; // 2
+     * 
+     * result = indexOfAny("actionscript is good", [2, "hello", 5]) ; 
+     * trace( result ) ; // -1
+     * </pre>
+     * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
+     */
+	public function indexOfAny( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
     {
-        public static function suite():ITest
+        var i:int;
+        var endIndex:int;
+        if( !source || ( source == "" ) )
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( indexOfAnyTest ) ;            suite.addTestSuite( padLeftTest    ) ;
-            suite.addTestSuite( padRightTest   ) ;            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( trimTest       ) ;
-            suite.addTestSuite( trimEndTest    ) ;
-            suite.addTestSuite( trimStartTest  ) ;
-            
-            return suite;
+            return - 1 ;
         }
+        if( (count < 0) || (count > anyOf.length - startIndex) )
+        {
+            endIndex = anyOf.length - 1;
+        }
+        else
+        {
+            endIndex = startIndex + count - 1;
+        }
+        for( i = startIndex ; i <= endIndex ; i++ )
+        {
+            if( source.indexOf( anyOf[i] ) > - 1 )
+            {
+                return i ;
+            }
+        }
+        return - 1 ;
     }
 }

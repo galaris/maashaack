@@ -35,8 +35,10 @@
 
 package system
 {
+    import core.strings.indexOfAny;
     import core.strings.padLeft;
     import core.strings.padRight;
+    import core.strings.repeat;
     import core.strings.trim;
     import core.strings.trimEnd;
     import core.strings.trimStart;
@@ -565,40 +567,7 @@ package system
          * </pre>
          * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
          */
-        public static function indexOfAny( str:String, anyOf:Array, startIndex:int = 0, count:int = - 1 ):int
-        {
-            var i:int;
-            var endIndex:int;
-            
-            if( (str == null) || (str == "") )
-            {
-                return - 1;
-            }
-            
-            if( startIndex < 0 )
-            {
-                startIndex = 0;
-            }
-            
-            if( (count < 0) || (count > anyOf.length - startIndex) )
-            {
-                endIndex = anyOf.length - 1;
-            }
-            else
-            {
-                endIndex = startIndex + count - 1;
-            }
-            
-            for( i = startIndex; i <= endIndex ; i++ )
-            {
-                if( str.indexOf( anyOf[i] ) > - 1 )
-                {
-                    return i;
-                }
-            }
-            
-            return - 1;
-        }
+        public static const indexOfAny:Function = core.strings.indexOfAny ;
         
         /**
          * Inserts a specified instance of String at a specified index position in this instance.
@@ -762,22 +731,7 @@ package system
          * </pre>
          * @return a new String value who contains the specified String characters repeated count times.
          */
-        public static function repeat( str:String = "" , count:uint = 0 ):String
-        {
-            var result:String = "" ;
-            if ( count > 0 )
-            {
-                for( var i:uint = 0 ; i < count ; i++)
-                {
-                    result = result.concat( str ) ;
-                }
-            }
-            else
-            {
-                result = str ;
-            }
-            return  result ;
-        }
+        public static const repeat:Function = core.strings.repeat ;
         
         /**
          * Determines whether a specified string is a prefix of the current instance. 
