@@ -61,16 +61,16 @@ package core.strings
      * </pre>
      * @return the string modified by the method.
      */
-	public function insert( str:String, startIndex:int, value:String ):String
+	public function insert( str:String, index:int, value:String ):String
     {
         var strA:String = "";
         var strB:String = "";
         
-        if( startIndex == 0 )
+        if( index == 0 )
         {
             return value + str;
         }
-        else if( startIndex == str.length )
+        else if( index == str.length )
         {
             return str + value;
         }
@@ -78,8 +78,8 @@ package core.strings
         /* TODO:
         review the logic when startIndex == -1
          */
-        strA = str.substr( 0, startIndex );
-        strB = str.substr( startIndex );
+        strA = str.substr( 0, index );
+        strB = str.substr( index );
         
         return strA + value + strB;
     }
