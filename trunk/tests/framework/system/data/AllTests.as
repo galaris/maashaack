@@ -61,6 +61,7 @@ package system.data
             suite.addTestSuite(BagTest) ;
             suite.addTestSuite(BoundableTest) ;
             suite.addTestSuite(CollectionTest) ;
+            suite.addTestSuite(DataTest) ;
             suite.addTestSuite(EntryTest) ;
             suite.addTestSuite(IdentifiableTest) ;
             suite.addTestSuite(IterableTest) ;
@@ -95,7 +96,7 @@ package system.data
             
             // maps
             suite.addTest(system.data.maps.AllTests.suite());
-
+            
             // queues
             suite.addTest(system.data.queues.AllTests.suite());
             
