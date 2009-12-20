@@ -35,6 +35,7 @@
 
 package system
 {
+    import core.strings.center;
     import core.strings.indexOfAny;
     import core.strings.insert;
     import core.strings.padLeft;
@@ -43,7 +44,7 @@ package system
     import core.strings.trim;
     import core.strings.trimEnd;
     import core.strings.trimStart;
-
+    
     import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;
@@ -73,16 +74,7 @@ package system
          * @param separator The optional separator character use before and after the String to center. (default " ")
          * @return the center String representation of the specified String value.
          */
-        public static function center( str:String, size:uint = 0 , separator:String = " " ):String 
-        {
-            var n:uint = str.length ;
-            if (size <= n)
-            {
-                return str ;
-            }
-            var m:int = Math.floor( ( size - n ) / 2 ) ;
-            return repeat( separator, m ) + str + repeat( separator, size - n - m ) ;
-        }
+        public static const center:Function = core.strings.center ;
         
         /**
          * Compares the two specified String objects. Allows to take into account the string case for comparison. 
@@ -133,249 +125,7 @@ package system
          */
         public static var evaluators:Object = {};
         
-        /* internal:
-        Strings.format can take index from 0 to infinity
-        {0}, {1}, ..., {99}, etc.
-           
-        but _evaluate need to sync its indexes with the _format _indexes
-        so we pick an arbitrary number: 100
-           
-        officially indexed token can go from {0} to {99}
-        to avoid a conflict with that arbitrary number
-         */
-        private static var _hiddenIndex:uint = 100;
-        
-        /* internal:
-        supported format
-        ${...}$ default to EdenEvaluator
-        ${...}name1,name2,...$
-        
-        TODO:
-        there are no test for }...$ sequence
-        so yeah it's weak and yeah you could break it with something like
-        ${{a:1,b:"}",c:"$"}}$
-         */
-        private static function _evaluate( value:String ):Object
-        {
-            var obj:Object = {};
-            obj.format = "";
-            obj.indexes = [];
-            
-            var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
-            var evaluators:MultiEvaluator = new MultiEvaluator();
-            
-            var evalSequence:String = "";
-            var evalString:String = "";
-            // var evalValue:String    = "" ; // FIXME not use this variable for the moment
-            var inBetween:String = "";
-            var pos1:int;
-            var pos2:int;
-            var lpos:int;
-            
-            var isValidChar:Function = function( c:String ):Boolean
-            {
-                if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
-                {
-                    return true;
-                }
-                return false;
-            };
-            
-            var isValid:Function = function( str:String ):Boolean
-            {
-                if( str == "" )
-                {
-                    return true;
-                }
-                var test:Array = str.split( "" );
-                var l:int      = test.length ;
-                for( var i:int = 0; i < l ; i++ )
-                {
-                    if( ! isValidChar( test[i] ) )
-                    {
-                        return false;
-                    } 
-                }
-                return true;
-            };
-            
-            while( value.indexOf( "${" ) > - 1 )
-            {
-                
-                pos1 = value.indexOf( "${" );
-                pos2 = value.indexOf( "$", pos1 + 2 );
-                
-                if( pos2 == - 1 )
-                {
-                    throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                }
-                
-                evalSequence = value.slice( pos1 + 2, pos2 );
-                lpos         = evalSequence.lastIndexOf( "}" );
-                inBetween    = evalSequence.substring( lpos + 1 );
-                
-                while( ! isValid( inBetween ) )
-                {
-                    pos2 = value.indexOf( "$", pos1 + 2 + pos2 );
-                    if( pos2 == - 1 )
-                    {
-                        throw new Error( "malformed evaluator, could not find [$] after [}]." );
-                    }
-                    evalSequence = value.slice( pos1 + 2, pos2 );
-                    lpos = evalSequence.lastIndexOf( "}" );
-                    inBetween = evalSequence.substring( lpos + 1 );
-                }
-                
-                if( lpos != evalSequence.length - 1 )
-                {
-                    var tmp:String = evalSequence.substring( lpos + 1 );
-                    var evaluatorsAlias:Array;
-                    
-                    if( tmp.indexOf( "," ) > - 1 )
-                    {
-                        evaluatorsAlias = tmp.split( "," );
-                    }
-                    else
-                    {
-                        evaluatorsAlias = [ tmp ];
-                    }
-                    
-                    var l:int = evaluatorsAlias.length ;
-                    for( var i:uint = 0; i < l ; i++ )
-                    {
-                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
-                        {
-                            evaluators.add( Strings.evaluators[ evaluatorsAlias[i] ] );
-                        }
-                        else
-                        {
-                            /* TODO:
-                            throw an error here ?
-                             */
-                            trace( "## Warning: \"" + evaluatorsAlias[i] + "\" is not a valid evaluator ##" );
-                        }
-                    }
-                }
-                
-                if( evaluators.size() == 0 )
-                {
-                    evaluators.add( defaultEvaluator ) ;
-                }
-                
-                evalString = evalSequence.substring( 0, lpos );
-                
-                obj.indexes.push( evaluators.eval( evalString ) );
-                value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
-            }
-            
-            obj.format = value;
-            return obj;
-        }
 
-        /* internal:
-        supported format
-        {0} {1}
-        {0,5} {0,-5}
-        {0,5:_} {0,-5:_}
-        {toto} {titi}
-        {toto,5} {toto,-5}
-        {titi,5:_} {titi,-5:_}
-           
-        TODO:
-        to {0,5} {0,-5} add something like {0,~5} to support padding to center
-         */
-        private static function _format( stringvalue:String, indexed:Array, named:Object, paddingChar:String = " " ):String
-        {
-            
-            var parseExpression:Function = function( expression:String ):String
-            {
-                var value:String = "";
-                var spaceAlign:int = 0;
-                var isAligned:Boolean = false;
-                var padding:String = paddingChar; 
-                
-                if( indexOfAny( expression, [ ",", ":" ] ) > - 1 )
-                {
-                    var vPos:int = expression.indexOf( "," );
-                    if( vPos == - 1 )
-                    {
-                        throw new Error( "malformed format, could not find [,] before [:]." );
-                    }
-                    
-                    var fPos:int = expression.indexOf( ":" );
-                    
-                    if( fPos == - 1 )
-                    {
-                        spaceAlign = int( expression.substr( vPos + 1 ) );
-                    }
-                    else
-                    {
-                        spaceAlign = int( expression.substring( vPos + 1, fPos ) );
-                        padding = expression.substr( fPos + 1 );
-                    }
-                    
-                    isAligned = true;
-                    expression = expression.substring( 0, vPos );
-                }
-                
-                var c:String = expression.split( "" )[0];
-                if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
-                {
-                    value = String( named[ expression ] );
-                }
-                else if( ("0" <= c) && (c <= "9") )
-                {
-                    value = String( indexed[ int( expression ) ] );
-                }
-                
-                if( isAligned )
-                {
-                    if( (spaceAlign > 0) && (value.length < spaceAlign) )
-                    {
-                        value = padLeft( value, spaceAlign, padding );
-                    }
-                    else if ( spaceAlign < - value.length )
-                    {
-                        value = padRight( value, - spaceAlign, padding );
-                    }
-                }
-                
-                return value;
-            };
-            
-            var expression:String = "";
-            var formated:String = "";
-            var ch:String = "";
-            var pos:int = 0;
-            var len:int = stringvalue.length;
-            
-            var next:Function = function():String
-            {
-                ch = stringvalue.charAt( pos );
-                pos++;
-                return ch;
-            };
-            
-            while( pos < len )
-            {
-                next( );
-                if( ch == "{" )
-                {
-                    expression = next( );
-                    while( next( ) != "}" )
-                    {
-                        expression += ch;
-                    }
-                    formated += parseExpression( expression );
-                }
-                else
-                {
-                    formated += ch;
-                }
-            }
-            
-            return formated;
-        }
         
         /** 
          * Format a string using indexed, named and/or evaluated parameters.
@@ -800,6 +550,252 @@ package system
          * @return The new trimed string.
          */
         public static const trimStart:Function = core.strings.trimStart ;
+        
+        //////////////////////////////////////////////////////////////////////
+        
+        /* internal:
+        Strings.format can take index from 0 to infinity
+        {0}, {1}, ..., {99}, etc.
+           
+        but _evaluate need to sync its indexes with the _format _indexes
+        so we pick an arbitrary number: 100
+           
+        officially indexed token can go from {0} to {99}
+        to avoid a conflict with that arbitrary number
+         */
+        private static var _hiddenIndex:uint = 100;
+        
+        /* internal:
+        supported format
+        ${...}$ default to EdenEvaluator
+        ${...}name1,name2,...$
+        
+        TODO:
+        there are no test for }...$ sequence
+        so yeah it's weak and yeah you could break it with something like
+        ${{a:1,b:"}",c:"$"}}$
+         */
+        private static function _evaluate( value:String ):Object
+        {
+            var obj:Object = {};
+            obj.format = "";
+            obj.indexes = [];
+            
+            var defaultEvaluator:EdenEvaluator = new EdenEvaluator( );
+            var evaluators:MultiEvaluator = new MultiEvaluator();
+            
+            var evalSequence:String = "";
+            var evalString:String = "";
+            // var evalValue:String    = "" ; // FIXME not use this variable for the moment
+            var inBetween:String = "";
+            var pos1:int;
+            var pos2:int;
+            var lpos:int;
+            
+            var isValidChar:Function = function( c:String ):Boolean
+            {
+                if( (("a" <= c) && (c <= "z")) || (("0" <= c) && (c <= "9")) || (c == ",") )
+                {
+                    return true;
+                }
+                return false;
+            };
+            
+            var isValid:Function = function( str:String ):Boolean
+            {
+                if( str == "" )
+                {
+                    return true;
+                }
+                var test:Array = str.split( "" );
+                var l:int      = test.length ;
+                for( var i:int = 0; i < l ; i++ )
+                {
+                    if( ! isValidChar( test[i] ) )
+                    {
+                        return false;
+                    } 
+                }
+                return true;
+            };
+            
+            while( value.indexOf( "${" ) > - 1 )
+            {
+                
+                pos1 = value.indexOf( "${" );
+                pos2 = value.indexOf( "$", pos1 + 2 );
+                
+                if( pos2 == - 1 )
+                {
+                    throw new Error( "malformed evaluator, could not find [$] after [}]." );
+                }
+                
+                evalSequence = value.slice( pos1 + 2, pos2 );
+                lpos         = evalSequence.lastIndexOf( "}" );
+                inBetween    = evalSequence.substring( lpos + 1 );
+                
+                while( ! isValid( inBetween ) )
+                {
+                    pos2 = value.indexOf( "$", pos1 + 2 + pos2 );
+                    if( pos2 == - 1 )
+                    {
+                        throw new Error( "malformed evaluator, could not find [$] after [}]." );
+                    }
+                    evalSequence = value.slice( pos1 + 2, pos2 );
+                    lpos = evalSequence.lastIndexOf( "}" );
+                    inBetween = evalSequence.substring( lpos + 1 );
+                }
+                
+                if( lpos != evalSequence.length - 1 )
+                {
+                    var tmp:String = evalSequence.substring( lpos + 1 );
+                    var evaluatorsAlias:Array;
+                    
+                    if( tmp.indexOf( "," ) > - 1 )
+                    {
+                        evaluatorsAlias = tmp.split( "," );
+                    }
+                    else
+                    {
+                        evaluatorsAlias = [ tmp ];
+                    }
+                    
+                    var l:int = evaluatorsAlias.length ;
+                    for( var i:uint = 0; i < l ; i++ )
+                    {
+                        if( Strings.evaluators[ evaluatorsAlias[i] ] )
+                        {
+                            evaluators.add( Strings.evaluators[ evaluatorsAlias[i] ] );
+                        }
+                        else
+                        {
+                            /* TODO:
+                            throw an error here ?
+                             */
+                            trace( "## Warning: \"" + evaluatorsAlias[i] + "\" is not a valid evaluator ##" );
+                        }
+                    }
+                }
+                
+                if( evaluators.size() == 0 )
+                {
+                    evaluators.add( defaultEvaluator ) ;
+                }
+                
+                evalString = evalSequence.substring( 0, lpos );
+                
+                obj.indexes.push( evaluators.eval( evalString ) );
+                value = value.split( "${" + evalSequence + "$" ).join( "{" + (_hiddenIndex + (obj.indexes.length - 1)) + "}" );
+            }
+            
+            obj.format = value;
+            return obj;
+        }
+        
+        /* internal:
+        supported format
+        {0} {1}
+        {0,5} {0,-5}
+        {0,5:_} {0,-5:_}
+        {toto} {titi}
+        {toto,5} {toto,-5}
+        {titi,5:_} {titi,-5:_}
+           
+        TODO:
+        to {0,5} {0,-5} add something like {0,~5} to support padding to center
+         */
+        private static function _format( stringvalue:String, indexed:Array, named:Object, paddingChar:String = " " ):String
+        {
+            
+            var parseExpression:Function = function( expression:String ):String
+            {
+                var value:String = "";
+                var spaceAlign:int = 0;
+                var isAligned:Boolean = false;
+                var padding:String = paddingChar; 
+                
+                if( indexOfAny( expression, [ ",", ":" ] ) > - 1 )
+                {
+                    var vPos:int = expression.indexOf( "," );
+                    if( vPos == - 1 )
+                    {
+                        throw new Error( "malformed format, could not find [,] before [:]." );
+                    }
+                    
+                    var fPos:int = expression.indexOf( ":" );
+                    
+                    if( fPos == - 1 )
+                    {
+                        spaceAlign = int( expression.substr( vPos + 1 ) );
+                    }
+                    else
+                    {
+                        spaceAlign = int( expression.substring( vPos + 1, fPos ) );
+                        padding = expression.substr( fPos + 1 );
+                    }
+                    
+                    isAligned = true;
+                    expression = expression.substring( 0, vPos );
+                }
+                
+                var c:String = expression.split( "" )[0];
+                if( (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) )
+                {
+                    value = String( named[ expression ] );
+                }
+                else if( ("0" <= c) && (c <= "9") )
+                {
+                    value = String( indexed[ int( expression ) ] );
+                }
+                
+                if( isAligned )
+                {
+                    if( (spaceAlign > 0) && (value.length < spaceAlign) )
+                    {
+                        value = padLeft( value, spaceAlign, padding );
+                    }
+                    else if ( spaceAlign < - value.length )
+                    {
+                        value = padRight( value, - spaceAlign, padding );
+                    }
+                }
+                
+                return value;
+            };
+            
+            var expression:String = "";
+            var formated:String = "";
+            var ch:String = "";
+            var pos:int = 0;
+            var len:int = stringvalue.length;
+            
+            var next:Function = function():String
+            {
+                ch = stringvalue.charAt( pos );
+                pos++;
+                return ch;
+            };
+            
+            while( pos < len )
+            {
+                next( );
+                if( ch == "{" )
+                {
+                    expression = next( );
+                    while( next( ) != "}" )
+                    {
+                        expression += ch;
+                    }
+                    formated += parseExpression( expression );
+                }
+                else
+                {
+                    formated += ch;
+                }
+            }
+            
+            return formated;
+        }
     }
 }
 

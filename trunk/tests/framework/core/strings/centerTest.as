@@ -33,50 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    /**
-     * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.indexOfAny ;
-     * 
-     * var result:int ;
-     * 
-     * result = indexOfAny("hello world", [2, "hello", 5]) ;
-     * trace( result ) ; // 0
-     * 
-     * result = indexOfAny("Five = 5", [2, "hello", 5]) ;
-     * trace( result ) ; // 2
-     * 
-     * result = indexOfAny("actionscript is good", [2, "hello", 5]) ; 
-     * trace( result ) ; // -1
-     * </pre>
-     * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
-     */
-	public function indexOfAny( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class centerTest extends TestCase 
     {
-        if( anyOf && source && source != "" )
+        public function centerTest(name:String = "")
         {
-            var i:int;
-            var l:int = anyOf.length ;
-            var endIndex:int ;
-            if( ( count < 0 ) || ( count > l - startIndex ) )
-            {
-                endIndex = l - 1;
-            }
-            else
-            {
-                endIndex = startIndex + count - 1;
-            }
-            for( i = startIndex ; i <= endIndex ; i++ )
-            {
-                if( source.indexOf( anyOf[i] ) > - 1 )
-                {
-                    return i ;
-                }
-            }
+            super(name);
         }
-        return - 1 ;
+        
+        public function testCenter():void
+        {
+            assertEquals( ""                     , center( null          ,  0 )       , "test 1" ) ;
+            assertEquals( "hello world"          , center( "hello world" ,  0       ) , "test 2" ) ;
+            assertEquals( "    hello world     " , center( "hello world" , 20       ) , "test 3" ) ;
+            assertEquals( "____hello world_____" , center( "hello world" , 20 , "_" ) , "test 4" ) ;
+        }
     }
 }
