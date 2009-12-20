@@ -33,37 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.strings 
 {
-    import buRRRn.ASTUce.extensions.TimedTestCase;
-
-    public class bitTimedTest extends TimedTestCase
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class lastIndexOfAnyTest extends TestCase 
     {
-        public function bitTimedTest(name:String="", maxElapsedTime:int = 400 )
+        public function lastIndexOfAnyTest(name:String = "")
         {
-            super(name, maxElapsedTime);
+            super(name);
         }
         
-        public function testShift():void
+        public function testLastIndexOfAny():void
         {
-            var b:bit = new bit( uint.MAX_VALUE );
-            var max:uint = 1000;
-            
-            for( var i:uint = 0; i<max; i++ )
-            {
-                while( b.valueOf() != 0 )
-                {
-                    b.shift();
-                }
-                assertEquals( "0000", b.toString() );
-                
-                if( i != (max-1) )
-                {
-                    b = new bit( uint.MAX_VALUE );
-                }
-            }
-            //trace( "elapsed: " + elapsedTime );
+            assertEquals(0, lastIndexOfAny("hello world", ["2", "hello", "5"]));
+            assertEquals(19, lastIndexOfAny("Five 5 = 5 and not 2", ["2", "hello", "5"]));
         }
         
+        public function testLastIndexOfAnyNotFound():void
+        {
+            assertEquals( -1 , lastIndexOfAny(null, ["hello"]));
+            assertEquals( -1 , lastIndexOfAny("", ["hello"]));
+            assertEquals( -1 , lastIndexOfAny("hello world", null));
+        }
     }
 }
