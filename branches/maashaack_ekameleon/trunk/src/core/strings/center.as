@@ -36,47 +36,36 @@
 package core.strings
 {
     /**
-     * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
+     * Returns the center string representation of the specified string value.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import core.strings.indexOfAny ;
-     * 
-     * var result:int ;
-     * 
-     * result = indexOfAny("hello world", [2, "hello", 5]) ;
-     * trace( result ) ; // 0
-     * 
-     * result = indexOfAny("Five = 5", [2, "hello", 5]) ;
-     * trace( result ) ; // 2
-     * 
-     * result = indexOfAny("actionscript is good", [2, "hello", 5]) ; 
-     * trace( result ) ; // -1
+     * import core.strings.center ;
+     * trace( center("hello world", 0) )         ; // hello world
+     * trace( center("hello world", 20) )        ; //     hello world
+     * trace( center("hello world", 20, "_" ) )  ; // ____hello world_____
      * </pre>
-     * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
+     * @param source The string to center.
+     * @param size The number of character to center the String expression. (default 0)
+     * @param separator The optional separator character use before and after the String to center. (default " ")
+     * @return The center of the specified String value.
      */
-	public function indexOfAny( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
+	public function center( source:String, size:uint = 0 , separator:String = " " ):String 
     {
-        if( anyOf && source && source != "" )
+        if ( !source )
         {
-            var i:int;
-            var l:int = anyOf.length ;
-            var endIndex:int ;
-            if( ( count < 0 ) || ( count > l - startIndex ) )
-            {
-                endIndex = l - 1;
-            }
-            else
-            {
-                endIndex = startIndex + count - 1;
-            }
-            for( i = startIndex ; i <= endIndex ; i++ )
-            {
-                if( source.indexOf( anyOf[i] ) > - 1 )
-                {
-                    return i ;
-                }
-            }
+            return "" ;
         }
-        return - 1 ;
+        var len:int = source.length ;
+        if ( len <= size )
+        {
+            len               = size - len ;
+            var remain:String = ( len % 2 == 0 ) ? "" : separator;
+            var pad:String    = repeat( separator , int( len / 2 ) );
+            return pad + source + pad + remain;
+        }
+        else
+        {
+            return source ;
+        }
     }
 }

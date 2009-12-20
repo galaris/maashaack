@@ -48,17 +48,32 @@ package core.strings
         {
             assertEquals( 1 , indexOfAny("hello world", [2, "hello", 5]));
             assertEquals( 2 , indexOfAny("Five = 5", [2, "hello", 5]));
-            assertEquals(-1 , indexOfAny("actionscript is good", [2, "hello", 5]));
             assertEquals( 1 , indexOfAny("hello world", ["2", "hello", "5"]));
             assertEquals( 2 , indexOfAny("Five = 5", ["2", "hello", "5"]));
             assertEquals( 1 , indexOfAny("hello world", [2, "hello", 5], 1));
+        }
+        
+        public function testIndexOfAnyWithStartIndex():void
+        {
             assertEquals( 0 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 0));
             assertEquals( 1 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 1));
             assertEquals( 2 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 2));
             assertEquals( 3 , indexOfAny("hello the big world", ["hello", "the", "big", "world"], 3));
-            assertEquals(-1 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 2));
+        }
+        
+        public function testIndexOfAnyWithStartIndexAndCount():void
+        {
             assertEquals( 3 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 3));
             assertEquals( 3 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 3, 3));
+        }
+        
+        public function testIndexOfAnyNotFound():void
+        {
+            assertEquals( -1 , indexOfAny(null, ["hello"]));
+            assertEquals( -1 , indexOfAny("", ["hello"]));
+            assertEquals( -1 , indexOfAny("hello world", null));
+            assertEquals( -1 , indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 2));
+            assertEquals( -1 , indexOfAny("actionscript is good", [2, "hello", 5]));
         }
     }
 }
