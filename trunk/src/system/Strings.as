@@ -38,6 +38,7 @@ package system
     import core.strings.center;
     import core.strings.indexOfAny;
     import core.strings.insert;
+    import core.strings.lastIndexOfAny;
     import core.strings.padLeft;
     import core.strings.padRight;
     import core.strings.repeat;
@@ -48,18 +49,12 @@ package system
     import system.comparators.StringComparator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;
-
+    
     /**
      * A static class for String utilities.
      */
     public class Strings
     {
-        /**
-         * @private
-         * @see system.Strings#compare
-         */
-        private static var _sComparator:StringComparator = new StringComparator() ;
-        
         /**
          * Returns the center String representation of the specified String value.
          * <p><b>Example :</b></p>
@@ -84,7 +79,7 @@ package system
          */    
         public static function compare( o1:String, o2:String, strict:Boolean = false ):int
         {
-            return _sComparator.compare(o1,o2, !strict) ;
+            return _comparator.compare(o1,o2, !strict) ;
         }
         
         /**
@@ -124,8 +119,6 @@ package system
          * lower case alphabetical chars and digit chars
          */
         public static var evaluators:Object = {};
-        
-
         
         /** 
          * Format a string using indexed, named and/or evaluated parameters.
@@ -357,63 +350,14 @@ package system
          * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8) ); // 5
          * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8 , 3) ); // -1
          * </pre> 
-         * @param str The String to ckeck.
+         * @param source The String to ckeck.
          * @param anyOf The Array of Unicode characters to find in the String.
          * @param startIndex The init position of the search process.
          * @param count The number of elements to check.
          * @return the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
          * @throws ArgumentError if the anyOf argument is 'null' or 'undefined'.
          */
-        public static function lastIndexOfAny( str:String, anyOf:Array, startIndex:int = 0x7FFFFFFF, count:int = 0x7FFFFFFF ):int 
-        {
-            var i:int;
-            var index:int ;
-            
-            if ( anyOf == null )
-            {
-                throw new ArgumentError( "Strings.lastIndexOfAny failed with an empty 'anyOf' Array." ) ;
-            }
-            
-            if( str == null || str.length == 0 )
-            {
-                return - 1;
-            }
-            
-            if ( isNaN( count ) || count < 0 )
-            {
-                count = 0x7FFFFFFF ;    
-            }
-            
-            if ( isNaN( startIndex ) || startIndex > str.length )
-            {
-                startIndex = str.length ;
-            }
-            else if( startIndex < 0 )
-            {
-                return - 1 ;
-            }
-            
-            var endIndex:int = startIndex - count + 1 ;
-            
-            if ( endIndex < 0 )
-            {
-                endIndex = 0 ;    
-            }
-            
-            str = str.slice( endIndex, startIndex + 1 ) ;
-            
-            var len:uint = anyOf.length ;
-            for ( i = 0 ; i < len ; i++ )
-            {
-                index = str.lastIndexOf( anyOf[i], startIndex ) ;
-                if (index > - 1) 
-                {
-                    return index + endIndex;
-                }
-            }
-            
-            return - 1 ;
-        }
+        public static const lastIndexOfAny:Function = core.strings.lastIndexOfAny ;
         
         /**
          * Right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
@@ -552,6 +496,12 @@ package system
         public static const trimStart:Function = core.strings.trimStart ;
         
         //////////////////////////////////////////////////////////////////////
+        
+        /**
+         * @private
+         * @see system.Strings#compare
+         */
+        private static var _comparator:StringComparator = new StringComparator() ;
         
         /* internal:
         Strings.format can take index from 0 to infinity
