@@ -64,14 +64,13 @@ package system.evaluators
         
         /**
          * Evaluates the specified object.
-         */        
-        public function eval(o:*):*
+         */
+        public function eval( o:* ):*
         {
-            var result:* = eden.deserialize( o );
-            
+            var result:* = eden.deserialize( o ) ;
             if( _serialized )
             {
-                return eden.serialize( result );
+                return eden.serialize( result ) ;
             }
             else
             {

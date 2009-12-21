@@ -38,7 +38,6 @@ package system.formatters
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Serializable;
     import system.numeric.Range;
     
     public class DateFormatterTest extends TestCase 
@@ -74,7 +73,7 @@ package system.formatters
         public function testInterfaces():void
         {
             assertTrue(formatter is Formattable, "01 - The DateFormatter implements IFormatter failed.") ;
-            assertTrue(formatter is Serializable, "02 - The DateFormatter implements ISerializable failed.") ;
+            //assertTrue(formatter is Serializable, "02 - The DateFormatter implements Serializable failed.") ;
         }
         
         public function testAM_PM():void
@@ -286,9 +285,9 @@ package system.formatters
             ArrayAssert.assertEquals( f.getWeekdayNames() , ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"] ) ;
         }
         
-        public function testToSource():void
-        {
-            assertEquals(formatter.toSource(), 'new system.formatters.DateFormatter("dd.mm.yyyy HH:nn:ss")', "toSource() method failed.") ;
-        }
+//        public function testToSource():void
+//        {
+//            assertEquals(formatter.toSource(), 'new system.formatters.DateFormatter("dd.mm.yyyy HH:nn:ss")', "toSource() method failed.") ;
+//        }
     }
 }

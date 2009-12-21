@@ -33,30 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.formatters  
+package system.formatters
 {
     import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;    
-
-    /**
-     * This class launch all tests.
-     */
+    import buRRRn.ASTUce.framework.TestSuite;
+    
     public class AllTests
     {
-        
         /**
          * Creates the Test list.
-         */        
+         */
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite( "Formatters tests" );
-
+            
             suite.addTestSuite( DateFormatterTest ) ;
             suite.addTestSuite( ExpressionFormatterTest ) ;
-            suite.addTestSuite( FormattableTest ) ;
-
+            suite.addTestSuite( FormattableTest ) ;            suite.addTestSuite( StringFormatterTest ) ;
+            
             return suite;
         }
     }
 }
-
