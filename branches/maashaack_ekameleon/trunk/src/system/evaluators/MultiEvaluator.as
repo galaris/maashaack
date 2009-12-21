@@ -81,7 +81,7 @@ package system.evaluators
          * Indicates if the MultiEvaluator is cleared before insert new <code class="prettyprint">Evaluable</code> objects (in the insert method).
          */
         public var autoClear:Boolean ;
-
+        
         /**
          * Inserts <code class="prettyprint">Evaluable</code> objects in the MultiEvaluator.  
          * @param ...evaluators The enumeration list of Evaluable objets or Arrays of Evaluator. Only Array and Evaluable are compatible to fill the MultiEvaluator.

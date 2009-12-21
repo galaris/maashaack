@@ -35,8 +35,6 @@
 
 package system.formatters 
 {
-    import system.Reflection;
-    import system.Serializable;
     import system.hack;
     import system.numeric.Range;
     
@@ -79,7 +77,7 @@ package system.formatters
      * trace( formatter.format( new Date(2008,1,21,14,15,0,0) ) ) ; // 02 h 15 mn 00 s PM
      * </pre>
      */
-    public class DateFormatter implements Formattable, Serializable 
+    public class DateFormatter implements Formattable
     {
         use namespace hack;
         
@@ -429,15 +427,15 @@ package system.formatters
         {
             Weekdays.setWeekdayNames( names ) ;
         }
-        
-        /**
-         * Returns the source code string representation of the object.
-         * @return the source code string representation of the object.
-         */
-        public function toSource( indent:int = 0 ):String 
-        {
-            return "new " + Reflection.getClassPath( this ) + '("' + ( pattern || DEFAULT_DATE_FORMAT ) + '")' ;
-        }
+//        
+//        /**
+//         * Returns the source code string representation of the object.
+//         * @return the source code string representation of the object.
+//         */
+//        public function toSource( indent:int = 0 ):String 
+//        {
+//            return "new " + Reflection.getClassPath( this ) + '("' + ( pattern || DEFAULT_DATE_FORMAT ) + '")' ;
+//        }
         
         /**
          * Formats the specified number day value in a string representation.

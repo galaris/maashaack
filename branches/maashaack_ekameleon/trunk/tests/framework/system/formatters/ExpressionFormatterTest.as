@@ -39,8 +39,8 @@ package system.formatters
     
     import system.Reflection;
     
-    import flash.utils.Dictionary;    
-
+    import flash.utils.Dictionary ;
+    
     public class ExpressionFormatterTest extends TestCase 
     {
         
@@ -48,14 +48,14 @@ package system.formatters
         {
             super(name);
         }
-
+        
         public var formatter:ExpressionFormatter ;
-
+        
         public function setUp():void
         {
             formatter = new ExpressionFormatter() ;
         }
-
+        
         public function testConstructor():void
         {
             assertNotNull(formatter, "01 - The ExpressionFormatter constructor failed.") ;
@@ -65,17 +65,17 @@ package system.formatters
         public function testInherit():void
         {
             assertTrue(formatter is Dictionary, "The ExpressionFormatter must extends the Dictionary class.") ;
-        }  
-
+        }
+        
         public function testIsDynamic():void
         {
             assertTrue( Reflection.getClassInfo(formatter).isDynamic(), "The ExpressionFormatter must be dynamic.") ;
-        }  
+        }
         
         public function testInterfaces():void
         {
             assertTrue(formatter is Formattable, "The ExpressionFormatter implements IFormatter failed.") ;
-        }        
+        }
         
         public function testMaxRecursion():void
         {
@@ -109,7 +109,7 @@ package system.formatters
             f.endSeparator = "}" ;
             assertEquals(f.endSeparator , "}" , "03 - The ExpressionFormatter endSeparator failed.") ;
         }
-                        
+        
         public function testFormat():void
         {
             var formatter:ExpressionFormatter = new ExpressionFormatter() ;
@@ -122,7 +122,7 @@ package system.formatters
             var source:String = "the root : {root} - the class : {map}" ;
             assertEquals( formatter.format( source ) , "the root : c: - the class : c:/project/system/data/maps/HashMap.as" , "ExpressionFormatter format() failed.") ;
         }
-      
+        
         public function testFormatUppercase():void
         {
             var formatter:ExpressionFormatter = new ExpressionFormatter() ;
@@ -137,26 +137,23 @@ package system.formatters
         }
         
         public function testFormatWithOtherSeparators():void
-        {            
-            
+        {
             var formatter:ExpressionFormatter = new ExpressionFormatter() ;
-
-            formatter["root"]      = "c:" ;            
+            
+            formatter["root"]      = "c:" ;
             formatter["system"]    = "%root%/project/system" ;
-            formatter["data.maps"] = "%system%/data/map" ;
+            formatter["data.maps"] = "%system%/datas/maps" ;
             formatter["HashMap"]   = "%data.maps%/HashMap.as" ;
-
+            
             formatter.beginSeparator = "%" ;
             formatter.endSeparator   = "%" ;
-
+            
             var source:String = "the root : %root% - the class : %HashMap%" ;
-            var result:String = "the root : c: - the class : c:/project/system/data/map/HashMap.as" ;
+            var result:String = "the root : c: - the class : c:/project/system/datas/maps/HashMap.as" ;
             assertEquals( formatter.format( source ) , result , "ExpressionFormatter format() failed.") ;
             
             formatter.beginSeparator = null ;
             formatter.endSeparator   = null ;
-            
         }
-
     }
 }
