@@ -31,6 +31,7 @@
      * [EventsDelegate Delegate event listener]
    * [Metadata Metadata]
    * [Singleton Singleton]
+   * [Interface Interface]
    * [StaticCodeBlock Static Code Block]
    * [ApplicationDomain ApplicationDomain]
  * [Support Support]
