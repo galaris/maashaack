@@ -21,3 +21,60 @@ see [http://livedocs.adobe.com/specs/actionscript/3/as3_specification95.html Int
 
 
 == Details ==
+
+Most of the time you will want to see an interface as a type, and based on that you would want to ditch the *I* in front of the name.
+
+Yes, you don't need to put a capital *I* everywhere, and here some basic examples.
+
+=== Basics use ===
+
+Let's say that in your code you want a *Serializable* type<br>
+so when you see an object that implement the interface you could say
+{{{
+my object is Serializable
+}}}
+
+what is the contract of a Serializable object ?
+{{{
+package
+{
+
+    public interface Serializable
+    {
+    
+    }
+
+}
+}}}
+
+with just that for every class implementing the interface you could test
+{{{
+trace( myobject is Serializable )
+}}}
+
+yes, you don't really need to define functions in this interface as your main concern is to be able to classify a type
+
+Now if you want to enforce a contract, as
+{{{
+if you are of a type Serializable you have to respect a predefined behaviour
+}}}
+
+the definition of the contract will be the definition of the methods you add to an interface
+{{{
+package
+{
+
+    public interface Serializable
+    {
+        function toSource( indent:int = 0 ):String;
+    }
+
+}
+}}}
+
+eg.
+  * you have to define a toSource method
+  * this method have to return a string type
+  * this method have one optional argument of type integer
+
+that's the contract to respect to be considered of the *Serializable* type
