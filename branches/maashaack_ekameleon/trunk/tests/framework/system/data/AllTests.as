@@ -36,7 +36,7 @@
 package system.data
 {
     import buRRRn.ASTUce.framework.*;
-
+    
     import system.data.arrays.*;
     import system.data.bags.*;
     import system.data.collections.*;
@@ -50,13 +50,12 @@ package system.data
     
     public class AllTests
     {
-
         public static function suite():ITest
         {
             
             var suite:TestSuite = new TestSuite("system data tests");
             
-            // test system.data interfaces
+            // test system.data interfaces & class
             
             suite.addTestSuite(BagTest) ;
             suite.addTestSuite(BoundableTest) ;
@@ -72,6 +71,7 @@ package system.data
             suite.addTestSuite(MapTest) ;
             suite.addTestSuite(MultiMapTest) ;
             suite.addTestSuite(OrderedIteratorTest) ;
+            suite.addTestSuite(ProxyReferenceTest) ;
             suite.addTestSuite(QueueTest) ;
             suite.addTestSuite(SetTest) ;
             suite.addTestSuite(StackTest) ;

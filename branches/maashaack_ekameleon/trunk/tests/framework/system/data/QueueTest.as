@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.QueueClass;    
-
+    import system.data.samples.QueueClass;
+    
     public class QueueTest extends TestCase 
     {
-
         public function QueueTest( name:String = "" )
         {
             super( name );
@@ -50,12 +49,7 @@ package system.data
         public function testInterface():void
         {
             var q:QueueClass = new QueueClass();
-            assertTrue( q is Queue ) ;        
-        }         
-        
+            assertTrue( q is Queue ) ;
+        }
     }
 }
-
-
-
-

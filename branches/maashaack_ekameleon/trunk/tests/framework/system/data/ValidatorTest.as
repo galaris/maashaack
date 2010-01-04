@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.ValidatorClass;    
-
+    import system.data.samples.ValidatorClass;
+    
     public class ValidatorTest extends TestCase 
     {
-
         public function ValidatorTest(name:String = "")
         {
             super( name );
@@ -63,16 +62,14 @@ package system.data
         public function testValidate():void
         {
             var o:Validator = new ValidatorClass() ;
-            
             try
             {
-                o.validate( "hello" ) ;         
+                o.validate( "hello" ) ;
             }
             catch( e:Error )
             {
                 fail("01 - the validate method must validate a String value and not throw an error") ;
             }
-            
             try
             {
                 o.validate( 1 ) ;
@@ -83,8 +80,6 @@ package system.data
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
                 assertEquals( e.message , "ValidatorSample.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
-            
         }
-        
     }
 }
