@@ -9,6 +9,8 @@
    * [Metadata Metadata]
    * [Singleton Singleton]
    * [Interface Interface]
+   * [Namespace Namespace]
+   * [Package Package level definition]
    * [StaticCodeBlock Static Code Block]
    * [ApplicationDomain ApplicationDomain]
  * [Users Working with maashaack]
