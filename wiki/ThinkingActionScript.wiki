@@ -1,4 +1,4 @@
-#summary thinking in !ActionScript 3.
+#summary thinking in ActionScript 3.
 #labels Introduction
 
 == We are Hybrid ==
