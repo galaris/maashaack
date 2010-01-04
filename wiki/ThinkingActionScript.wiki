@@ -1,6 +1,8 @@
 #summary thinking in ActionScript 3.
 #labels Introduction
 
+The following are general AS3 recipes and/or ideas and/or general examples and/or knowledge etc.
+
 == We are Hybrid ==
 
 AS3 is not Java nor C#, sure we can borrow principle and recipes from other languages but we have to keep thinking with the great features found in our language.
@@ -20,5 +22,5 @@ soon to come
 
 == Misc ==
 
-[StaticCodeBlock]
-[Metadata]
+[StaticCodeBlock]<br>
+[Metadata]<br>
