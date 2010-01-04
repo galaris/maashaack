@@ -17,8 +17,7 @@ Interface methods are not public by default, but are added to the public namespa
 by the implementing method definition.
 }}}
 
-see {http://livedocs.adobe.com/specs/actionscript/3/as3_specification95.html Interfaces (in AS3 spec)]
+see [http://livedocs.adobe.com/specs/actionscript/3/as3_specification95.html Interfaces (AS3 spec)]
 
 
 == Details ==
-
