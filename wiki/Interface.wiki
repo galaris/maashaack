@@ -351,13 +351,58 @@ There are various ways to distribute an API
   * external SWF to load
   * etc.
 
-and even more way your users will want to use this API, so for the little story,<br>
+and *even more way your users will want to use this API*, so for the little story,<br>
 when we worked on the [http://code.google.com/p/gaforflash/ gaforflash] project we thought that the final users<br>
-would want to either use either the Flash or Flex component and not use the *code only* version at all<br>
+would want to either use the Flash or Flex component and not use the *code only* version at all<br>
 we made the code only version for us, as we prefer to deal with code directly,<br>
 and it happen that a lot of people prefer the code only version.
 
 For another little story on another project,<br>
 we discovered that people wanted to drop a SWC in their Flash IDE library and have code completion in Flash<br>
 and so to support that we had to create a small command line tool to parse the raw asdoc xml to generate Flash IDE xml documentation<br>
-and by extension, the SWC was not enougth, we had to package all that in an MXP.
+and by extension, the SWC was not enougth for Flash IDE, we had to package all that in an MXP,<br>
+but ultimately the user didn't need any visual to use the API, they wanted to use code and have code completion.
+
+
+=== Versioning interfaces ===
+
+TODO
+
+In some cases, you could version your interfaces by using inheritance.<br>
+But don't think it as versioning by numbers, better see it as versioning per layer.
+
+Let's say you have a public API that you want to separate in two categories: free and professional.
+
+The professional version being a more advanced paying version of the API.
+
+You could organize your interfaces with inheritance
+
+{{{
+package company
+{
+    public interface ChatServer
+    {
+    
+    }
+}
+}}}
+
+{{{
+package company
+{
+    public interface ChatServerBasic extends ChatServer
+    {
+        
+    }
+}
+}}}
+
+{{{
+package company
+{
+    public interface ChatServerPro extends ChatServerBasic
+    {
+        
+    }
+}
+}}}
