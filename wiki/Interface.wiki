@@ -78,3 +78,41 @@ eg.
   * this method have one optional argument of type integer
 
 that's the contract to respect to be considered of the *Serializable* type
+
+=== Some Thoughts ===
+
+When you're programming in a framework context you will want to use interfaces to define common behaviours,
+here with maashaack we use *Serializable*, *Serializer*, etc.
+
+Don't do that if you plan to have only one serializer, but do use interfaces if you want to define
+a general serializer behaviour and have different implementation of it (a eden serializer, a WDDX serializer, a JSON serializer, etc.)
+
+If you're programming in a public API context using interfaces is THE way to go,
+you should even consider your interfaces being the API.<br>
+Yes, even if you have only one implementation of the interface.<br>
+You want the users of the public API to programm their code based on the interfaces, not the implementation.
+
+But you should be aware of certain traps.
+
+As soon as you put a public API out there, you can not change it.<br>
+Well... you can not change the interfaces, but you can change the implementation.
+
+Ok I lied a bit, you can change the interfaces, but you can not break them.<br>
+And here come the biggest trap: how to version an API.
+
+First, there are no rules and many many many ways of doing it.<br>
+(I speak from my small experiences with Google Analytics and Miniclip, comments/critics welcome)
+
+Here what may happen to your public API
+  * on one side you gonna provide services to use publicly for your users
+  * on the other side you'll have to update the implementation to correct bugs, add features, etc.
+
+the best way imho to do that is to allow yourself to add but never remove anything.<br>
+So your API can evolve, but not break older version or put another way: be backward compatible.
+
+so here the basic rules for a public API (wether you have 100 or 10000 users)
+  * always define interfaces for everything that your user can use (the public side)
+  * never give access to the implementation (the private side)
+  * never remove anything from your interfaces
+  * be careful how you define your interfaces and how you add to it
+  * if you want to give access to a single object (as an entry point), define an interface for it<br>and by extension use getter/setter to define properties for this object
