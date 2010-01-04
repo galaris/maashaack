@@ -1,0 +1,24 @@
+#summary interfaces in AS3.
+#labels Code,AS3
+
+== Introduction ==
+
+{{{
+Interfaces provide a way for programs to express contracts between the producers and consumers of objects.
+These contracts are type safe, easy to understand, and efficient to implement.
+Programs should not have to pay a significant performance penalty for using interfaces.
+
+An interface is a type whose methods must be defined by every class that claims to implement it.
+Multiple interfaces can be inherited by another interface through the extends clause or by a class through the implements clause.
+Instances of a class that implements an interface belong to the type represented by the interface.
+Interface definitions must only contain function definitions, which may include get and set methods.
+
+Interface methods are not public by default, but are added to the public namespace
+by the implementing method definition.
+}}}
+
+see {http://livedocs.adobe.com/specs/actionscript/3/as3_specification95.html Interfaces (in AS3 spec)]
+
+
+== Details ==
+
