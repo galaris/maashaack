@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.SetClass;    
-
+    import system.data.samples.SetClass ;
+    
     public class SetTest extends TestCase 
     {
-
         public function SetTest( name:String = "" )
         {
             super( name );
@@ -50,8 +49,7 @@ package system.data
         public function testInterface():void
         {
             var s:SetClass = new SetClass();
-            assertTrue( s is Set ) ;      
-        }         
-        
+            assertTrue( s is Set ) ;
+        }
     }
 }

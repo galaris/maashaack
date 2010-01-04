@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.TypeableClass;    
-
+    import system.data.samples.TypeableClass ;
+    
     public class TypeableTest extends TestCase 
     {
-
         public function TypeableTest(name:String = "")
         {
             super( name );
@@ -56,13 +55,9 @@ package system.data
         public function testType():void
         {
             var o:Typeable = new TypeableClass() as Typeable ;
-            
             assertNull( o.type , "01 - Typeable type property failed.") ;
-            
             o.type = Map ;
-            
             assertEquals( o.type , Map, "02 - Typeable type property failed.") ;
-        }        
-        
+        }
     }
 }

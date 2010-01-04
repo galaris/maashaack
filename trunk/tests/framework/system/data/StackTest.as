@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.StackClass;    
-
+    import system.data.samples.StackClass;
+    
     public class StackTest extends TestCase 
     {
-
         public function StackTest( name:String = "" )
         {
             super( name );
@@ -51,11 +50,6 @@ package system.data
         {
             var s:StackClass = new StackClass();
             assertTrue( s is Stack ) ;
-        }         
+        }
     }
 }
-
-
-
-
-
