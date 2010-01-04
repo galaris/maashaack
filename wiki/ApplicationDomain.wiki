@@ -1,4 +1,5 @@
 #summary ApplicationDomain dirty secrets.
+#labels Code,AS3
 
 == Introduction ==
 
