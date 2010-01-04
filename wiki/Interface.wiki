@@ -243,7 +243,7 @@ package kiki
         //...
         public function get version():String
         {
-            return "1.0";
+            return "1.0"; //yeah as simple as that is enougth
         }
     }
 }
@@ -252,13 +252,14 @@ package kiki
 as a personal favorite I like to define an *API* class combined with an include file<br>
 (you can reuse the include in an Ant build and use the rev number under SVN)
 
-version.propertie
+*version.propertie*
 {{{
 version.major = 1
 version.minor = 0
 version.build  = 0
 }}}
 
+*API.as*
 {{{
 package kiki
 {
@@ -289,15 +290,16 @@ why ?
 
 for support, if you go into providing a public API you gonna have to support it<br>
 and so if one of your user end up wit ha problem, you want to be able to ask<br>
-please trace KikiDelivery.version and give me the number so you can check on your implementations<br>
+please trace !KikiDelivery.version and give me the number so you can check on your implementations<br>
 to see if it's a bug or something is badly documented, etc.
 
-
+Depending on how much different version of the API, how many users you supports, etc.<br>
+you will feel lucky if the user problems can be solved by just updating the API to the last version ;)
 
 
 *2.* if you really have to use an object as an entry point for your API
 
-Combine a Singleton and an Interface at the package level
+Combine a Singleton and an Interface at the package level<br>
 and use a Factory to initialize this main object
 
 small example
@@ -339,6 +341,14 @@ package kiki
 This will work pretty well if your API does not interact with display objects,
 also defining a constant at the package level will create your object pretty early in the stack.
 
+why ?
+
+In term of API, giving access to an entry point allow you to get away with a lot of things
+while keeping your code simple to use for your users.
+
+In the documentation, defining one line to import and use the properties is much much simpler to explain<br>
+than initialize a factory, how to use events, wait for them, pass references, etc.
+
 
 *3.* if your main entry point object need a stage reference don't use a singleton at all
 
@@ -352,6 +362,17 @@ Notice the type, myKiki is the interface Kiki, not the class !KikiDelivery.
 Sure it is less user friendly on the API side, but the way the display objects work if you really need
 that stage reference you're kind of stuck.
 
+why ?
+
+Let be clear, I'm not pro or against singletons, but if your main point is to give something simple to use to your users<br>
+you gonna have to deal with a lot of complex things in the background to do just that: make things simple to use.
+
+But in the process you may end up fighting with Flash, and having access to the stage reference is one of those fights<br>
+and it goes like that: on one side the only way to get this stage reference is to be an initialized display object on the display list<br>
+there is no other way, period.<br>
+and on the other side, you'll have to explain countless time to your user how to provide this stage reference,<br>
+which after few thousands time, tons of documentation, wiki pages etc. can be painfull
+
 
 *4.* know your users (or at least try)
 
@@ -364,7 +385,18 @@ There are various ways to distribute an API
   * external SWF to load
   * etc.
 
-and *even more way your users will want to use this API*, so for the little story,<br>
+and *even more way your users will want to use this API*
+
+why ?
+
+you can not plan in advance how the users will use your API<br>
+you can try, but it is almost granted that you'll have to update your code and evolve the API<br>
+one way or another
+
+this send back to *1.*, you'll have to deal with versioning, branching, etc.
+
+
+So for the little story,<br>
 when we worked on the [http://code.google.com/p/gaforflash/ gaforflash] project we thought that the final users<br>
 would want to either use the Flash or Flex component and not use the *code only* version at all<br>
 we made the code only version for us, as we prefer to deal with code directly,<br>
@@ -390,6 +422,7 @@ The professional version being a more advanced paying version of the API.
 
 You could organize your interfaces with inheritance
 
+first you define an empty interface for your base type
 {{{
 package company
 {
@@ -400,6 +433,7 @@ package company
 }
 }}}
 
+then your basic interface for the free version
 {{{
 package company
 {
@@ -410,6 +444,7 @@ package company
 }
 }}}
 
+and a pro interface for the more advanced version
 {{{
 package company
 {
@@ -419,3 +454,5 @@ package company
     }
 }
 }}}
+
+TODO
