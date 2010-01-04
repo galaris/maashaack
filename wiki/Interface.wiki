@@ -114,5 +114,116 @@ so here the basic rules for a public API (wether you have 100 or 10000 users)
   * always define interfaces for everything that your user can use (the public side)
   * never give access to the implementation (the private side)
   * never remove anything from your interfaces
+  * use builtin types in your interfaces and/or other interfaces (don't use custom types)
   * be careful how you define your interfaces and how you add to it
   * if you want to give access to a single object (as an entry point), define an interface for it<br>and by extension use getter/setter to define properties for this object
+
+for the versioning in itself I would favour versioning the implementations and keep the interfaces without versioning, but this can be done in a lot of different ways so this will highly depends on your needs (and your users needs).
+
+So for example sake,<br>
+let's say we have a brand name *Kiki's delivery* which is also a website with some services<br>
+and we want to provide access to those services via a public API.
+
+Our use case is that *Kiki's delivery* is a gift delivery services and our main goal is to allow
+any developers using our public API to deliver gifts by providing a gift number.
+
+Here the plan:
+  * we want *Kiki* to be an entry point
+  * we want to provide a *services* interface
+  * so at the end your user can do `Kiki.services.doSomething()`
+
+let's define our interfaces
+{{{
+package kiki
+{
+    public interface KikiAPI
+    {
+        function get version():String;
+        function get services():Services;
+    }
+}
+}}}
+{{{
+package kiki
+{
+    public interface Services
+    {
+        function deliver( id:Number ):void;
+    }
+}
+}}}
+
+how your user will use it like that ?
+{{{
+var kiki:KikiAPI = new KikiAPIImplementation();
+       kiki.services.deliver( 123 );
+}}}
+
+It's kind of bad as you have to give access to * KikiAPIImplementation* so the user can initialize your entry point.<br>
+Also *KikiAPI* is not a very good name imho.
+
+Here come the use of the [Singleton] to define your entry point and hide the implementation to your users.<br>
+Let's rename *KikiAPI* to just *Kiki*
+{{{
+package kiki
+{
+    public interface Kiki
+    {
+        function get version():String;
+        function get services():Services;
+    }
+}
+}}}
+then let's do an internal implementation of it
+{{{
+package kiki
+{
+    public class _Kiki implements Kiki
+    {
+        //...
+    }
+}
+}}}
+and finally provide an entry point for it
+{{{
+package kiki
+{
+    public const KikiDelivery:Kiki = new _Kiki();
+}
+}}}
+
+
+now for your users, the use of the public APi would be like that
+{{{
+import kiki.KikiDelivery;
+
+KikiDelivery.services.deliver( 123 );
+}}}
+
+Very basic to implement and to use, and never your user need to know about your internal implementation.<br>
+Tomorrow you can fix a dozen of bugs, you just keep the same interfaces and release a v1.1 update.
+
+But after tomorrow your users are demanding and they ask to be able to deliver a gift with a card so they can put a friendly message on it.
+
+Time to update your services interface
+{{{
+package kiki
+{
+    public interface Services
+    {
+        function deliver( id:Number, message:String = "" ):void;
+    }
+}
+}}}
+
+and your users can now use it
+{{{
+import kiki.KikiDelivery;
+
+KikiDelivery.services.deliver( 123, "from russia with love" );
+}}}
+
+Even if the example is over-simplified, I hope you can still see where numerous problems can occurs
+  * you could have a good half of your users not updating their app to the last API version
+  * you have to deal in parallel with user using API v1.0 and user using API v2.0
+  * if you don't give a default value for the message, you end up breaking old code that does not use the message property
