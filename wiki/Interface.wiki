@@ -491,3 +491,14 @@ package company.v2
 }}}
 
 TODO
+
+Another example is gaforflash see [http://code.google.com/p/gaforflash/source/browse/#svn/trunk/src/com/google/analytics/v4 API v4]
+
+in short, the *v4* package contains the configuration file, the API interface and 2 implementation of this interface
+
+if the API had to evolve in a *v5* version, we would duplicate the same structure in a v5 package
+
+the difference of versioned package is kind of hidden in the general interface [http://code.google.com/p/gaforflash/source/browse/trunk/src/com/google/analytics/AnalyticsTracker.as AnalyticsTracker]
+
+
+TODO
