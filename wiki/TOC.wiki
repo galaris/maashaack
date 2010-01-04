@@ -5,7 +5,7 @@
      * [Framework Application Framework]
      * [edenRR eden RR]
      * [ASTUce ASTUce]
- * [ThinkingActionScript Thinking in ActionScript]
+ * [ThinkingActionScript Thinking in ActionScript 3]
    * [Metadata Metadata]
    * [Singleton Singleton]
    * [Interface Interface]
