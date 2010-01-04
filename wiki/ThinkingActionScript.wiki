@@ -1,5 +1,5 @@
 #summary thinking in ActionScript 3.
-#labels Introduction
+#labels Introduction,Code,AS3
 
 The following are general AS3 recipes and/or ideas and/or general examples and/or knowledge etc.
 
