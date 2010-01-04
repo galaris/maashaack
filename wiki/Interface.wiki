@@ -408,6 +408,15 @@ and so to support that we had to create a small command line tool to parse the r
 and by extension, the SWC was not enougth for Flash IDE, we had to package all that in an MXP,<br>
 but ultimately the user didn't need any visual to use the API, they wanted to use code and have code completion.
 
+*conclusion*
+
+For the specific case of a public API, or an API consumed by users in general, the interfaces are your friend.
+
+If you really follow the *hide the implementations, show the interfaces* basic principle you should be able to avoid the basic versioning problem traps.
+
+But imho, using interfaces does not solve completely the versioning problems, you will have to be more creative to deal with that.
+
+
 
 === Versioning interfaces ===
 
@@ -451,6 +460,32 @@ package company
     public interface ChatServerPro extends ChatServerBasic
     {
         
+    }
+}
+}}}
+
+TODO
+
+Another way to version interfaces is to not version the interfaces but version the package,<br>
+as each package act as a context, you could switch from one context to another and keep the same<br>
+type signatures for your interfaces.
+
+{{{
+package company.v1
+{
+    public interface ChatServer
+    {
+    
+    }
+}
+}}}
+
+{{{
+package company.v2
+{
+    public interface ChatServer
+    {
+    
     }
 }
 }}}
