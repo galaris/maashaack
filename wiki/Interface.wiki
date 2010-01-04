@@ -195,7 +195,7 @@ package kiki
 }}}
 
 
-now for your users, the use of the public APi would be like that
+now for your users, the use of the public API would be like that
 {{{
 import kiki.KikiDelivery;
 
@@ -334,7 +334,30 @@ Directly provide the Factory to build the instance anywhere, something that will
 var myKiki:Kiki = new KikiDelivery( stage, any, other, options );
 }}}
 
-Notice the type, myKiki is the interface Kiki, not the class KikiDelivery.
+Notice the type, myKiki is the interface Kiki, not the class !KikiDelivery.
 
 Sure it is less user friendly on the API side, but the way the display objects work if you really need
 that stage reference you're kind of stuck.
+
+
+*4.* know your users (or at least try)
+
+There are various ways to distribute an API
+  * simple SWC (code only)
+  * source code templates
+  * Flash Component (visual SWC)
+  * Flex Component (visual SWC)
+  * MXP
+  * external SWF to load
+  * etc.
+
+and even more way your users will want to use this API, so for the little story,<br>
+when we worked on the [http://code.google.com/p/gaforflash/ gaforflash] project we thought that the final users<br>
+would want to either use either the Flash or Flex component and not use the *code only* version at all<br>
+we made the code only version for us, as we prefer to deal with code directly,<br>
+and it happen that a lot of people prefer the code only version.
+
+For another little story on another project,<br>
+we discovered that people wanted to drop a SWC in their Flash IDE library and have code completion in Flash<br>
+and so to support that we had to create a small command line tool to parse the raw asdoc xml to generate Flash IDE xml documentation<br>
+and by extension, the SWC was not enougth, we had to package all that in an MXP.
