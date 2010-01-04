@@ -50,11 +50,22 @@ package system.data
             assertNotNull( wr , "WeakReference constructor failed.") ;
         }
         
-        public function testValue():void
+        public function testValueGET():void
         {
             var wr:WeakReference = new WeakReference( { prop:"value" } ) ;
             assertNotNull( wr.value , "01 - WeakReference value property failed.") ;
             assertEquals( wr.value.prop , "value" , "02 - WeakReference value property failed.") ;
+        }
+        
+        public function testValueSET():void
+        {
+            var o1:Object = { prop:"value1" } ;
+            var o2:Object = { prop:"value2" } ;
+            var wr:WeakReference = new WeakReference( o1 ) ;
+            wr.value = o2 ;
+            assertNotNull( wr.value , "01 - WeakReference value property failed.") ;
+            assertEquals( wr.value , o2 , "02 - WeakReference value property failed.") ;
+            assertEquals( wr.value.prop , "value2" , "03 - WeakReference value property failed.") ;
         }
         
         public function testDispose():void
