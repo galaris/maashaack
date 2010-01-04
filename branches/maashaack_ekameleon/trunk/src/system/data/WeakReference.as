@@ -48,22 +48,37 @@ package system.data
          * Create a new <code>WeakReference</code> instance.
          * @param value The value of the weak reference.
          */
-        public function WeakReference( value: * )
+        public function WeakReference( value:* )
         {
-            _d          = new Dictionary( true ) ;
-            _d[ value ] = PRESENT ;
+            this.value = value ;
         }
         
         /**
          * The value of the weak reference.
          */
-        public function get value(): *
+        public function get value():*
         {
             for( var value:* in _d )
             {
                 return value;
             }
             return null ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set value( value:* ):void
+        {
+            if( value )
+            {
+                _d          = new Dictionary( true ) ;
+                _d[ value ] = PRESENT ;
+            }
+            else
+            {
+                _d = null ;
+            }
         }
         
         /**
