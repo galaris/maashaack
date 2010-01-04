@@ -1,5 +1,5 @@
+#summary metadata tags in AS3 and Flex.
 #labels Code,AS3,Flex
-#metadata tags in AS3 and Flex.
 
 = Introduction =
 
