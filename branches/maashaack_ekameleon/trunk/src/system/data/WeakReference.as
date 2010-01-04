@@ -48,7 +48,7 @@ package system.data
          * Create a new <code>WeakReference</code> instance.
          * @param value The value of the weak reference.
          */
-        public function WeakReference( value:* )
+        public function WeakReference( value:* = null )
         {
             this.value = value ;
         }

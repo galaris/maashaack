@@ -48,6 +48,13 @@ package system.data
         {
             var wr:WeakReference = new WeakReference( { prop:"value" } ) ;
             assertNotNull( wr , "WeakReference constructor failed.") ;
+        
+        }
+        public function testEmptyConstructor():void
+        {
+            var wr:WeakReference = new WeakReference() ;
+            assertNotNull( wr , "WeakReference constructor failed.") ;
+            assertNull( wr.value , "WeakReference constructor failed.") ;
         }
         
         public function testValueGET():void
