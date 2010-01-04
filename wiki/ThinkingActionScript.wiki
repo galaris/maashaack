@@ -24,3 +24,7 @@ soon to come
 
 [StaticCodeBlock]<br>
 [Metadata]<br>
+
+== Links ==
+
+[http://livedocs.adobe.com/specs/actionscript/3/as3_specification.html ActionScript 3.0 Language Specification]
