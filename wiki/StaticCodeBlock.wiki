@@ -1,5 +1,5 @@
+#summary static code blocks in AS3.
 #labels code,AS3,Flex
-#static code blocks in AS3.
 
 = Introduction =
 
