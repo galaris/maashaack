@@ -251,11 +251,14 @@ package kiki
 
 as a personal favorite I like to define an *API* class combined with an include file<br>
 (you can reuse the include in an Ant build and use the rev number under SVN)
+
+version.propertie
 {{{
 version.major = 1
 version.minor = 0
 version.build  = 0
 }}}
+
 {{{
 package kiki
 {
@@ -281,6 +284,16 @@ package kiki
     }
 }
 }}}
+
+why ?
+
+for support, if you go into providing a public API you gonna have to support it<br>
+and so if one of your user end up wit ha problem, you want to be able to ask<br>
+please trace KikiDelivery.version and give me the number so you can check on your implementations<br>
+to see if it's a bug or something is badly documented, etc.
+
+
+
 
 *2.* if you really have to use an object as an entry point for your API
 
