@@ -507,6 +507,15 @@ if the API had to evolve in a *v5* version, we would duplicate the same structur
 
 the difference of versioned package is kind of hidden in the general interface [http://code.google.com/p/gaforflash/source/browse/trunk/src/com/google/analytics/AnalyticsTracker.as AnalyticsTracker]
 
+what is the logic behind that ?
+
+In short, the AS3 version of the Google Analytics API is a port of the JS implementation<br>
+and as such, us the AS3 coders, we have no control over the API features, we just translate them<br>
+so here the idea was (and is still valid imho) to have an interface *AnalyticsTracker* binding to a factory *GATracker*<br>
+and depending on the configuration the factory generate an instance of either *Bridge* or *Tracker* who both implements the interface *GoogleAnalyticsAPI*,<br>
+so the versioned packages are here to bind our implementations and interfaces definition to particular version of the !JavaScript source code
+
+
 
 TODO
 
