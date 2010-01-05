@@ -522,7 +522,7 @@ when a game developer works localy in Flash IDE, he adds a gamemanager.swc and p
 there he is using a mock implementation of the API, the goal is to add the types/interfaces signature to the swf bytecode.<br>
 Later, when the game.swf is loaded online by a gamemanager.swf, because our game manager is loaded first<br>
 its implementation of the interfaces take priority in memory<br>
-and so when the game.swf is loaded, any interfaces signature use those definition (as an application domain can not define twice the same implementation).
+and so when the game.swf is loaded, any interfaces signature use those definition (as an application domain can not define twice the same implementation, see [ApplicationDomain] dirty secrets).
 
 {{{
 In Java when you add a new method to an interface, you break all your clients.
