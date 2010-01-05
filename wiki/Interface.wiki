@@ -24,6 +24,11 @@ see [http://livedocs.adobe.com/specs/actionscript/3/as3_specification95.html Int
 
 Most of the time you will want to see an interface as a type, and based on that you would want to ditch the *I* in front of the name.
 
+See *Architectural Atrocities, Part 5: Interfaces in AS3* [#2 |2|], for a long discussion about that touchy subject.
+
+My take on that is that I can accept a capital *I* in the name of an interface when we consider a template,
+but for a type I will bust your balls till you capitulate and remove the *I*.
+
 Yes, you don't need to put a capital *I* everywhere, and here some basic examples.
 
 === Basics use ===
@@ -543,3 +548,8 @@ You want to build to last.
 }}}
 
 this is so true on so many levels for AS3 too.
+
+
+==== 2 ====
+
+[http://blog.iconara.net/2006/07/29/architectural-atrocities-part-5-interfaces-in-as3/ ARCHITECTURAL ATROCITIES, PART 5: INTERFACES IN AS3]
