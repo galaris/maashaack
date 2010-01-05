@@ -92,6 +92,8 @@ you should even consider your interfaces being the API.<br>
 Yes, even if you have only one implementation of the interface.<br>
 You want the users of the public API to programm their code based on the interfaces, not the implementation.
 
+This is very well explained in *Program to an interface, not an implementation* [#1 |1|].
+
 But you should be aware of certain traps.
 
 As soon as you put a public API out there, you can not change it.<br>
@@ -502,3 +504,42 @@ the difference of versioned package is kind of hidden in the general interface [
 
 
 TODO
+
+
+== Annotation ==
+
+==== 1 ====
+
+[http://www.artima.com/lejava/articles/designprinciples.html Program to an interface, not an implementation]<br>
+explained by Erich Gamma (you can not beat that :))
+
+But here some comments as AS3 is not Java:
+
+being able to switch implementation between a mock and the real implementation can be very usefull, and not only for testing
+
+for example, at Miniclip, we use that to provide 2 implementations of our API based on the same interfaces<br>
+when a game developer works localy in Flash IDE, he adds a gamemanager.swc and produce a game.swf<br>
+there he is using a mock implementation of the API, the goal is to add the types/interfaces signature to the swf bytecode.<br>
+Later, when the game.swf is loaded online by a gamemanager.swf, because our game manager is loaded first<br>
+its implementation of the interfaces take priority in memory<br>
+and so when the game.swf is loaded, any interfaces signature use those definition (as an application domain can not define twice the same implementation).
+
+{{{
+In Java when you add a new method to an interface, you break all your clients.
+}}}
+
+It does not work the same in AS3, from what I experienced you can add arguments to existing methods and add new methods and it will not break your clients, most of the time it will work.<br>
+But in some cases I could not isolate, sometimes it could break, almost as if the bytecode was checking itself for differences, and if the differences are too big then the runtime will throw an error.
+
+Also, don't try to emulate abstract in AS3, it will just fail, you don't have abstract classes in AS3<br>
+it could change in a future AS4, but for now you have to do without it.
+
+{{{
+Another lesson learned is that you should focus not only on developing version one,
+but to also think about the following versions.
+This doesn't mean designing in future extensibility, but just keeping in mind that
+you have to maintain what you produce and try to keep the API stable for a long time.
+You want to build to last.
+}}}
+
+this is so true on so many levels for AS3 too.
