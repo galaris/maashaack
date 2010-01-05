@@ -552,4 +552,5 @@ this is so true on so many levels for AS3 too.
 
 ==== 2 ====
 
-[http://blog.iconara.net/2006/07/29/architectural-atrocities-part-5-interfaces-in-as3/ ARCHITECTURAL ATROCITIES, PART 5: INTERFACES IN AS3]
+[http://blog.iconara.net/2006/07/29/architectural-atrocities-part-5-interfaces-in-as3/ ARCHITECTURAL ATROCITIES, PART 5: INTERFACES IN AS3]<br>
+on [http://blog.iconara.net Theo Hultberg Iconara blog]
