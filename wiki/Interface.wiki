@@ -554,3 +554,18 @@ this is so true on so many levels for AS3 too.
 
 [http://blog.iconara.net/2006/07/29/architectural-atrocities-part-5-interfaces-in-as3/ ARCHITECTURAL ATROCITIES, PART 5: INTERFACES IN AS3]<br>
 on [http://blog.iconara.net Theo Hultberg Iconara blog]
+
+{{{
+If an interface is a type, and you want to program to interfaces,
+your ActionScript code will be littered with types that start with “I”.
+
+Types are types. It doesn’t matter if they are abstract or concrete, they are types,
+you shouldn’t distinguish between a type defined by an interface and one defined by an imlementation (a class).
+
+Prefixing with “I” takes interfaces aside and tells us that these are special cases, not abstract types.
+I read code like this as “This is an IFootballPlayer”, not “this is a football player”.
+This is wrong, a type represents a concept, not a type name and naming conventions
+should make it easier for the client programmer to think in this way, not harder.
+}}}
+
+nicely said and true.
