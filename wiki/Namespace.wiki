@@ -167,11 +167,191 @@ it's like having two implementations in parallel.
 The disadvantage is that your class carry the two implementations at the same time,<br>
 so if you want one or the other and stay light in size better use conditional compilation instead.
 
-But that's aslo my point, you do carry the two implementations, so you should be able to switch betweeen them.
+But that's also my point, you do carry the two implementations, so you should be able to switch betweeen them.
 
 
+=== selectable namespaces ===
+
+A namespace is a constant, you can not change it's value.<br>
+But you can declare a variable of the type Namespace and fill its value at runtime ;).
+
+Let's transform our example, so you can switch from one namespace to another.
+
+{{{
+package test
+{
+	public class ClassA
+	{
+                private var _ns:Namespace; //your variable
+                
+		public function ClassA( ns:Namespace = null )
+		{
+			if( !ns )
+			{
+				ns = debug;
+			}
+			
+			_ns = ns; //you assign a value
+		}
+		
+		public function test( msg:String ):void
+		{
+			_ns::test( msg ); //you reuse your var
+		}
+                
+		debug function test( msg:String ):void
+		{
+			trace( "debug: " + msg );
+		}
+		
+		release function test( msg:String ):void
+		{
+			trace( "release: " + msg );
+		}
+	}
+}
+}}}
+
+wait, wait, wait ...
+
+To really understand that you need more infos about namespaces.<br>
+Each namespace you define is considered unique by the system,<br>
+technically you can define the same variable name of a namespace in 2 different packages<br>
+but the system will see those namespaces as different.
+
+{{{
+package test
+{
+	public namespace debug;
+}
+}}}
+
+and
+
+{{{
+package com.whatever
+{
+	public namespace debug;
+}
+}}}
+
+same name but different identities!!
+
+In the class above, we're passing the namespace as a reference.
+
+In the comment above when I say "you reuse your var", you could see that as "you reuse the identity of the namespace".
+
+in code you can do that with a property of your class
+{{{
+     this["test"]( "hello world" );
+}}}
+
+if test is a public method, or a visible method, the slot will be resolved from the string "test"<br>
+with a namespace value it work the same, but you can not resolve it from a string,<br>
+you have to pass the reference of the namespace (it is a constant).
+
+so when we do that
+{{{
+		public function test( msg:String ):void
+		{
+			_ns::test( msg ); //you reuse your var
+		}
+}}}
+
+`_ns` got resolved to the namespace we pass in the constructor, but there we can only pass
+the reference.
+
+We define 3 methods _test_, one in the public namespace, one in the debug namespace and one in the release namespace.
+
+The method in the public namespace is just a redirector who use the namespace notation.
+
+Let's use it
+{{{
+import test.ClassA;
+import test.debug;
+
+var a:ClassA = new ClassA( debug ); //you pass your reference
+       a.test( "hello world" );
+       //will trace "debug: hello world"
+}}}
+
+So what happen really ?
+
+you save the namespace debug in the `_ns` variable<br>
+first the public method test is called<br>
+and redirect to `_ns::test`<br>
+`_ns::test` is resolved to `debug::test`
 
 
+Let's use it more
+{{{
+import test.ClassA;
+import test.debug;
+import test.release;
+
+var a:ClassA = new ClassA( debug );
+       a.test( "hello world" );
+       //will trace "debug: hello world"
+
+var b:ClassA = new ClassA( release );
+       b.test( "hello world" );
+       //will trace "release: hello world"
+}}}
+
+And you can do endless variations, for example, you could store the namespace in a public variable of the class
+and not even pass it to the constructor and so something like
+{{{
+import test.ClassA;
+import test.debug;
+import test.release;
+
+var a:ClassA = new ClassA();
+       a.context = debug;
+       a.test( "hello world" );
+       //will trace "debug: hello world"
+       a.context = release;
+       a.test( "hello world" );
+       //will trace "release: hello world"
+}}}
 
 
+== neat tricks with namespaces ==
 
+=== Override the trace function ===
+
+Oh yes you can. Let's see how :).
+
+{{{
+package test
+{
+	public class ClassA
+	{
+                public function ClassA()
+		{
+		}
+		
+		public function test( msg:String ):void
+		{
+			trace( msg );
+		}
+                
+		protected function trace( msg:String ):void
+		{
+			public::trace( "[ " + msg + " ]" );
+		}
+	}
+}
+}}}
+
+The function trace is defined in the public namespace at the anonymous package level,<br>
+it is publicly available everywhere in your code.
+
+But here in the context of your class, if you define a trace function either in the *protected* or *private*
+namespace, your function will take the priority over the public trace.
+
+At the end you still want to use the trace function, so you explicitly use the full path<br>
+including the public namespace.
+
+No hack here, you just use your language to the fullest.
+
+TODO (more to come)
