@@ -1,0 +1,177 @@
+#summary the power of namespaces in AS3.
+#labels Code,AS3
+
+== Introduction ==
+
+One of the most powerfull feature of the AS3 language and yet totally underused (to not say ignored).
+
+The [http://livedocs.adobe.com/specs/actionscript/3/as3_specification108.html definition given in the language specification is not very clear at first], so let's try to make it simpler.
+
+The idea of the namespaces got their origin from XML namespaces, but really we don't care about that.
+
+The basic principle of those namespaces is to allow you to define your own attribute statements.
+
+what ?
+
+You do know those basic little things like *public*, *private*, *protected* ?
+
+in short defining your own namespace allow you to define your own _protected_ attribute keyword,<br>
+if you use it, whatever you define under it will be visible, if you don't use it, it will be simply invisible.
+
+Yeah it's a bit magic like that.
+
+To put it another way, if you define a namespace *hello*<br>
+it can allow you to specify a variable, constant or method under this namespace<br>
+and make them accessible (or visible) only if you open the namespace.
+
+And you can create as many namespaces as you want.<br>
+And decide to use them all at the same time or not.
+
+
+== Details ==
+
+The problem with namespaces is there are not that obvious to use, but no worries here some examples and tips.
+
+The thing to remember mainly is if with *public*, *private*, *protected*<br>
+the language control the visibility of the defintions,<br>
+with your own namespaces, you are in control<br>
+but you gonna have to explicitly announce it to the language.
+
+
+=== basic usage ===
+
+Let's say you have a basic class with a method that you want to do different things wether you're in debug or release mode.
+
+{{{
+package test
+{
+	public class ClassA
+	{
+		public function ClassA()
+		{
+			
+		}
+		
+		public function debugTest( msg:String ):void
+		{
+			trace( "debug: " + msg );
+		}
+		
+		public function releaseTest( msg:String ):void
+		{
+			trace( "release: " + msg );
+		}
+	}
+}
+}}}
+
+not very sexy or usable like that, you just want to use _test_ in either one context or another
+
+first define your namespaces
+{{{
+package test
+{
+	public namespace debug;
+}
+}}}
+
+{{{
+package test
+{
+	public namespace release;
+}
+}}}
+
+and now use them in your class
+{{{
+package test
+{
+	public class ClassA
+	{
+		public function ClassA()
+		{
+			
+		}
+		
+		debug function test( msg:String ):void
+		{
+			trace( "debug: " + msg );
+		}
+		
+		release function test( msg:String ):void
+		{
+			trace( "release: " + msg );
+		}
+	}
+}
+}}}
+
+yes you just have 2 methods named the same, and yes you just replaced your *public* attributes<br>
+by 2 custom attributes *debug* and *release*.
+
+now let's use this
+{{{
+import test.ClassA;
+
+var a:ClassA = new ClassA();
+       a.test( "hello world" );
+}}}
+
+not gonna work, the compiler probably gonna tell you he can not find the test method.
+
+When you declare something *public*, this attribute is open by default by the language,<br>
+when you use your own attributes, you don't have this kind of automated behaviour.
+
+You have to explicitly tell that you want to use your namespace, and for that there is 2 way of doing it
+
+you directly provide the path of the namespace
+{{{
+import test.ClassA;
+import test.debug; //yes you have to import your namespace for it to be visible
+
+var a:ClassA = new ClassA();
+       a.debug::test( "hello world" ); //full path to the namespace containing your method
+       //will trace "debug: hello world"
+}}}
+
+or even better, you explicitly tell the language you want to use the namespace
+{{{
+import test.ClassA;
+import test.debug;
+
+use namespace debug; //hey I want to use the namespace debug
+
+var a:ClassA = new ClassA();
+       a.test( "hello world" ); // and now you can directly access the method
+       //will trace "debug: hello world"
+}}}
+
+and off course, you can switch between namespaces
+{{{
+import test.ClassA;
+import test.release;
+
+use namespace release; //hey I want to use the namespace release this time
+
+var a:ClassA = new ClassA();
+       a.test( "hello world" ); // and now you can directly access the method
+       //will trace "release: hello world"
+}}}
+
+Pretty neat if you ask me.
+
+why ?
+
+You can really isolate your debug and release logic keeping the same method names,<br>
+it's like having two implementations in parallel.
+The disadvantage is that your class carry the two implementations at the same time,<br>
+so if you want one or the other and stay light in size better use conditional compilation instead.
+
+But that's aslo my point, you do carry the two implementations, so you should be able to switch betweeen them.
+
+
+
+
+
+
+
