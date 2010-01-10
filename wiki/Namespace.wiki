@@ -355,3 +355,8 @@ including the public namespace.
 No hack here, you just use your language to the fullest.
 
 TODO (more to come)
+
+ * customize MovieClip trick
+ * hide parts of your public API
+ * unit tests helper
+ * advanced security class
