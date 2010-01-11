@@ -168,9 +168,9 @@ package graphics.drawing
         /**
          * @private
          */
-        public function set height( h:Number ):void 
+        public function set height( value:Number ):void 
         {
-            _h = h ;
+            _h = value ;
             init() ;
         }
         
@@ -270,9 +270,7 @@ package graphics.drawing
                 var dy30:Number = bl.y - tl.y ;
                 var dx21:Number = br.x - tr.x ;
                 var dy21:Number = br.y - tr.y ;
-                
                 var l:int = _p.length;
-                
                 while( -- l > - 1 )
                 {
                     var point:Object = _p[ l ];
@@ -283,7 +281,6 @@ package graphics.drawing
                     point.sx = bx + gx * ( ( tr.x + gy * ( dx21 ) ) - bx );
                     point.sy = by + gx * ( ( tr.y + gy * ( dy21 ) ) - by );
                 }
-                
                 _render();
             }
         }
