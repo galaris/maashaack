@@ -35,23 +35,20 @@
 
 package examples 
 {
-    import graphics.Align;
-    import graphics.ArcType;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.ArcPen;
-
+    import graphics.drawing.AntPen;
+    
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.KeyboardEvent;
+    import flash.geom.Point;
     import flash.ui.Keyboard;
-
-    public class ArcPenExample extends Sprite 
+    
+    public class AntPenExample extends Sprite 
     {
-        public function ArcPenExample()
+        public function AntPenExample()
         {
-            ///// 
+            /////
             
             canvas = new Shape() ;
             
@@ -60,14 +57,23 @@ package examples
             
             addChild( canvas ) ;
             
-            ///// 
+            /////
             
-            pen       = new ArcPen( canvas.graphics , 299 ) ;
+            var colors:Array ;
+            var patterns:Array ;
             
-            pen.fill  = new FillStyle( 0xF0DE42 ) ;
-            pen.line  = new LineStyle( 2, 0xFFFFFF ) ;
-            pen.type  = ArcType.CHORD ;
-            pen.draw() ;
+            colors   = [ 0xFFF7E233 , 0x00000000 , 0xFFF7E233 , 0x00000000 ] ;
+            patterns = [ 2          , 2          , 2          , 2          ] ;
+            
+            pen = new AntPen( canvas.graphics ) ;
+            
+            pen.setup( colors , patterns ) ;
+            
+            pen.closePath = true ;
+            
+            pen.draw( [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
+            
+            pen.start() ;
             
             ///// 
             
@@ -76,7 +82,7 @@ package examples
         }
         
         public var canvas:Shape ;
-        public var pen:ArcPen ;
+        public var pen:AntPen ;
         
         public function keyDown( e:KeyboardEvent ):void
         {
@@ -85,40 +91,28 @@ package examples
             {
                 case Keyboard.LEFT :
                 {
-                    pen.fill = new FillStyle( 0xFF0000 ) ;
-                    pen.draw(290, 100, 0, 0, null, null, ArcType.PIE, Align.LEFT) ;
+                    pen.setup() ;
+                    pen.draw(  [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
                     break ;
                 }
                 case Keyboard.RIGHT :
                 {
-                    pen.fill = new FillStyle( 0xFF0000 ) ;
-                    pen.draw(290, 100, 0, 0, null, 80, ArcType.CHORD, Align.RIGHT) ;
-                    break ;
-                }
-                case Keyboard.UP :
-                {
-                    pen.fill = new FillStyle( 0xFF0000 ) ;
-                    pen.draw(90, 150, 0, 0, null, 80, ArcType.PIE, Align.BOTTOM) ;
-                    break ;
-                }
-                case Keyboard.DOWN :
-                {
-                    pen.fill = new FillStyle( 0x550000 ) ;
-                    pen.draw(150, 150, 0, 0, null, 80, ArcType.PIE, Align.TOP) ;
+                    var colors:Array   = [ 0xFFF7E233 , 0x00000000 ] ;
+                    var patterns:Array = [ 5          , 5          ] ;
+                    pen.setup( colors , patterns ) ;
+                    pen.draw(  [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
                     break ;
                 }
                 case Keyboard.SPACE :
                 {
-                    pen.x          = -100 ;
-                    pen.y          = -100 ;
-                    pen.yRadius    = 80 ;
-                    pen.radius     = 100 ;
-                    pen.angle      = 320 ;
-                    pen.useEndFill = false ;
-                    pen.fill       = new FillStyle( 0xFF0000 ) ;
-                    pen.align      = Align.TOP_RIGHT ;
-                    pen.type       = ArcType.NONE ;
-                    pen.draw() ;
+                    if ( pen.running )
+                    {
+                        pen.stop() ;
+                    }
+                    else
+                    {
+                        pen.start() ;
+                    }
                     break ;
                 }
             }
