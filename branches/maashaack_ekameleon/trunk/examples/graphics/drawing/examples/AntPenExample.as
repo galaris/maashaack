@@ -69,8 +69,6 @@ package examples
             
             pen.setup( colors , patterns ) ;
             
-            pen.closePath = true ;
-            
             pen.draw( [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
             
             pen.start() ;
@@ -86,21 +84,34 @@ package examples
         
         public function keyDown( e:KeyboardEvent ):void
         {
+            var colors:Array ;
+            var patterns:Array ;
             var code:uint = e.keyCode ;
             switch( code )
             {
                 case Keyboard.LEFT :
                 {
-                    pen.setup() ;
-                    pen.draw(  [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
+                    colors   = [ 0xFFAAE233 , 0x00000000 , 0xFF8ECAF0 , 0x00000000 ] ;
+                    patterns = [ 2          , 5          , 2          , 5          ] ;
+                    pen.setup( colors , patterns ) ;
+                    pen.closePath = true ;
+                    pen.draw(  [ new Point(-50,-50) ,new Point(50,-50) ,new Point(50,50) , new Point(-50,50) ] ) ;
                     break ;
                 }
                 case Keyboard.RIGHT :
                 {
-                    var colors:Array   = [ 0xFFF7E233 , 0x00000000 ] ;
-                    var patterns:Array = [ 5          , 5          ] ;
+                    colors   = [ 0xFFF03C0F , 0x00000000 , 0xFFE489E4 , 0x00000000 ] ;
+                    patterns = [ 5          , 5          , 5          , 5          ] ;
+                    pen.closePath = true ;
                     pen.setup( colors , patterns ) ;
-                    pen.draw(  [ new Point(0,0) ,new Point(100,0) ,new Point(100,100) , new Point(0,100) ] ) ;
+                    pen.draw(  [ new Point(-50,-50) ,new Point(50,-50) ,new Point(50,50) , new Point(-50,50) ] ) ;
+                    break ;
+                }
+                case Keyboard.UP :
+                {
+                    pen.setup() ;
+                    pen.closePath = false ;
+                    pen.draw(  [ new Point(-50,-50) ,new Point(50,-50) ,new Point(50,50) , new Point(-50,50) ] ) ;
                     break ;
                 }
                 case Keyboard.SPACE :
