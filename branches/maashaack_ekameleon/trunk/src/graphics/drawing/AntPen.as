@@ -34,6 +34,10 @@
 */
 package graphics.drawing 
 {
+    import system.process.Runnable;
+    import system.process.Startable;
+    import system.process.Stoppable;
+    
     import flash.display.BitmapData;
     import flash.events.TimerEvent;
     import flash.geom.Matrix;
@@ -41,11 +45,11 @@ package graphics.drawing
     import flash.geom.Rectangle;
     import flash.utils.Timer;
     import flash.utils.getTimer;
-
+    
     /**
      * This pen display a marching ants path.
      */
-    public class AntPen extends Pen 
+    public class AntPen extends Pen implements Runnable, Startable, Stoppable
     {
         /**
          * Creates a new AntPen instance.
@@ -57,6 +61,9 @@ package graphics.drawing
             _timer = new Timer( speed ) ;
             _timer.addEventListener( TimerEvent.TIMER , _timerProgress ) ;
             setup( colors , pattern ) ;
+            this.speed     = speed ;
+            this.steps     = steps ;
+            this.closePath = closePath ;
         }
         
         /**
@@ -68,6 +75,14 @@ package graphics.drawing
          * The representation of all points of the path to drawing.
          */
         public var points:Array ;
+        
+        /**
+         * Indicates if the ant effect is in progress.
+         */
+        public function get running():Boolean
+        {
+            return _timer.running ;
+        }
         
         /**
          * Indicates the speed of the effect.
@@ -82,7 +97,7 @@ package graphics.drawing
          */
         public function set speed( value:Number ):void
         {
-            _timer.delay = value ;
+            _timer.delay = value > 10 ? value : 10 ;
         }
         
         /**
@@ -106,9 +121,9 @@ package graphics.drawing
          */
         public override function draw( ...args:Array ):void 
         {
-            if ( args.length > 0 ) 
+            if ( args.length == 1 && args[0] is Array ) 
             {
-                setup.apply( this , args ) ;
+                points = args[0] as Array ;
             }
             if ( useClear ) 
             {
@@ -134,27 +149,38 @@ package graphics.drawing
          */
         public function setup( colors:Array = null , pattern:Array = null ):void
         {
+            var b:Boolean = running ;
+            if ( b )
+            {
+                stop() ;
+            }
             if ( colors == null )
             {
-                _colors = [ 0xFF000000, 0xFFFFFFFF ] ;
+                colors = [ 0xFF000000, 0xFFFFFFFF ] ;
             }
             else 
             {
-                _colors = colors.slice();
+                colors = colors.slice();
             }
-            if ( pattern == null || pattern.length != _colors.length )
+            
+            if ( pattern == null || pattern.length != colors.length )
             {
-                _pattern = [ 2 , 2 ] ;
+                pattern = [ 2 , 2 ] ;
             }
             else 
             {
-                _pattern = pattern.slice() ;
+                pattern = pattern.slice() ;
             }
             
             ///////
             
             _patternLength = 0 ;
-            _patternBitmap.dispose() ;
+            
+            if ( _patternBitmap )
+            {
+                _patternBitmap.dispose() ;
+                _patternBitmap = null ;
+            }
             
             ///////
             
@@ -164,35 +190,65 @@ package graphics.drawing
             var x:Number ;
             
             l = pattern.length ;
+            
             for ( i = 0 ; i < l ; i++ )
             {
-                _patternLength += pattern[i];
+                _patternLength += pattern[i] ;
             }
             
             _patternBitmap = new BitmapData( _patternLength, 1 , true , 0 ) ;
             
             x = 0 ;
             l = pattern.length ;
+            
             for ( i = 0 ; i < l ; i++ )
             {
-                for ( j = 0 ; j <  pattern[i]; j++ )
+                for ( j = 0 ; j < pattern[i] ; j++ )
                 {
-                    _patternBitmap.setPixel32( x++ , 0, colors[i] );
+                    _patternBitmap.setPixel32( x++ , 0 , colors[i] );
                 }
             }
             
             _copyRect = new Rectangle( 0 , 0 , _patternLength - 1 , 1 ) ;
+            
+            if ( b )
+            {
+                start() ;
+            }
         }
         
         /**
-         * @private
+         * Run the process.
          */
-        protected var _colors:Array ;
+        public function run( ...arguments:Array ):void 
+        {
+            if ( !_timer.running )
+            {
+                _timer.start() ;
+            }
+        }
         
         /**
-         * @private
+         * Start the process or the command.
          */
-        protected var _pattern:Array ;
+        public function start():void
+        {
+            if ( !_timer.running )
+            {
+                _timer.start() ;
+            }
+        }
+        
+        /**
+         * Stop the process or the command.
+         */
+        public function stop():void
+        {
+            if ( _timer.running )
+            {
+                _timer.stop() ;
+            }
+        }
         
         /**
          * @private
@@ -280,13 +336,14 @@ package graphics.drawing
          */
         private function _timerProgress( e:TimerEvent ):void
         {
+            var s:Number = _steps ;
             do
             {
                 var p:uint = _patternBitmap.getPixel32( _patternBitmap.width - 1 , 0 ) ;
                 _patternBitmap.copyPixels( _patternBitmap , _copyRect , _copyPoint );
                 _patternBitmap.setPixel32( 0 , 0 , p ) ;
             } 
-            while ( --steps > 0 ) ;
+            while ( --s > 0 ) ;
             _lastUpdate = getTimer();
         }
     }
