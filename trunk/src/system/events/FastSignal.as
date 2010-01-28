@@ -58,13 +58,13 @@ package system.events
      *         {
      *             var signal:FastSignal = new FastSignal() ;
      *             
-     *             signal.connect( receive ) ;
+     *             signal.connect( write ) ;
      *             
-     *             dispatcher.emit( "hello world" ) ; // hello world
-     *             dispatcher.emit( "thanks you" ) ; // thanks you
+     *             signal.emit( "hello world" ) ; // hello world
+     *             signal.emit( "thank you" ) ; // thank you
      *         }
      *         
-     *         public function receive( message:String ):void
+     *         public function write( message:String ):void
      *         {
      *             trace( message ) ;
      *         }
@@ -99,7 +99,7 @@ package system.events
         {
             if ( values == null  && listeners.size() == 0 )
             {
-                return null ;
+                return ;
             }
             var removed:Array = [] ;
             var listener:* ;
