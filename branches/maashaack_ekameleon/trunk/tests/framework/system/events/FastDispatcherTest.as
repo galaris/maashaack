@@ -84,6 +84,17 @@ package system.events
             assertTrue( dispatcher is Iterable    , "The FastDispatcher class must implements the Iterable interface.") ;
         }
         
+        public function testLength():void
+        {
+            assertEquals( dispatcher.length , 0 , "01 - length failed.") ;
+            dispatcher.addListener( listener1 ) ;
+            assertEquals( dispatcher.length , 1 , "02 - length failed.") ;
+            dispatcher.addListener( listener2 ) ;
+            assertEquals( dispatcher.length , 2 , "03 - length failed.") ;
+            dispatcher.addListener( listener2 ) ;
+            assertEquals( dispatcher.length , 2 , "04 - length failed.") ;
+        }
+        
         public function testAddListener():void
         {
             assertTrue( dispatcher.addListener( listener1 ) , "01 - The addListener method failed.") ;
@@ -104,11 +115,11 @@ package system.events
         public function testClone():void
         {
             dispatcher.addListener( listener1 ) ;
-            dispatcher.addListener( listener2 ) ;
+            dispatcher.addListener( listener2 , true ) ;
             var clone:FastDispatcher = dispatcher.clone() as FastDispatcher ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.size() , dispatcher.size(), "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.getListeners(), dispatcher.getListeners() , "03 - clone method failed.") ;
+            assertEquals( clone.length , dispatcher.length, "02 - clone method failed.") ;
+            ArrayAssert.assertEquals(clone.toArray(), dispatcher.toArray() , "03 - clone method failed.") ;
         }
         
         public function testDispatch():void
@@ -117,13 +128,6 @@ package system.events
             var e:BasicEvent = new BasicEvent("onCallback") ;
             dispatcher.dispatch( e ) ;
             assertEquals( listener1.event , e , "01 - broadcastMessage failed.") ;
-        }
-        
-        public function testGetListeners():void
-        {
-            dispatcher.addListener( listener1 ) ;
-            dispatcher.addListener( listener2 ) ;
-            ArrayAssert.assertEquals([listener1,listener2], dispatcher.getListeners() , "getListeners method failed.") ;
         }
         
         public function testHasListener():void
@@ -167,20 +171,16 @@ package system.events
             dispatcher.addListener( listener2 ) ;
             
             assertTrue( dispatcher.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( dispatcher.size() , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( dispatcher.length , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( dispatcher.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }
         
-        public function testSize():void
+        public function testToArray():void
         {
-            assertEquals( dispatcher.size() , 0 , "01 - size() failed.") ;
             dispatcher.addListener( listener1 ) ;
-            assertEquals( dispatcher.size() , 1 , "02 - size() failed.") ;
             dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.size() , 2 , "03 - size() failed.") ;
-            dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.size() , 2 , "04 - size() failed.") ;
+            ArrayAssert.assertEquals([listener1,listener2], dispatcher.toArray() , "getListeners method failed.") ;
         }
     }
 }

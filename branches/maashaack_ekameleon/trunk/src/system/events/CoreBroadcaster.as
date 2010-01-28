@@ -63,6 +63,14 @@ package system.events
         }
         
         /**
+         * Indicates the number of listeners registered in the dispatcher.
+         */
+        public function get length():uint
+        {
+            return _broadcaster.length ;
+        }
+        
+        /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
          * @param useWeakReference Determines whether the reference to the listener is strong or weak.

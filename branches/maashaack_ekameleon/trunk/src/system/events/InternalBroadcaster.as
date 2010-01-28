@@ -66,6 +66,14 @@ package system.events
         }
         
         /**
+         * Indicates the number of listeners registered in the Broadcaster.
+         */
+        public function get length():uint
+        {
+            return listeners.size() ;
+        }
+        
+        /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
          * @param useWeakReference Determines whether the reference to the listener is strong or weak.
@@ -77,22 +85,31 @@ package system.events
             {
                 return false ;
             }
-            if ( useWeakReference )
+            if ( listeners.size() > 0 )
             {
-                if ( listeners.size() > 0 )
+                var a:Array = listeners.toArray() ;
+                var l:int   = a.length ;
+                var o:* ;
+                while( --l > -1 )
                 {
-                    var l:int   = listeners.size() ;
-                    var a:Array = listeners.toArray() ;
-                    var o:WeakReference ;
-                    while( --l > -1 )
+                    o = a[l] ;
+                    if ( o is WeakReference && (o as WeakReference).value == listener)
                     {
-                        o = a[l] as WeakReference;
-                        if ( o != null && o.value == listener )
+                        if ( !useWeakReference )
                         {
-                            return false ;
+                            a[l] = listener ; 
+                            return true ;
                         }
+                        return false ;
+                    }
+                    else if ( o == listener )
+                    {
+                        return false ;
                     }
                 }
+            }
+            if ( useWeakReference )
+            {
                 listener = new WeakReference( listener ) ;
             }
             return listeners.add( listener ) ;
@@ -107,44 +124,12 @@ package system.events
         }
         
         /**
-         * Returns the Array representation of all listeners.
-         * @return the Array representation of all listeners.
-         */
-        public function getListeners():Array
-        {
-            if ( listeners.size() > 0 )
-            {
-                var l:int   = listeners.size() ;
-                var r:Array = [] ;
-                var a:Array = listeners.toArray() ;
-                var o:* ;
-                for( var i:int ; i<l ; i++ )
-                {
-                    o = a[i] ;
-                    if ( o is WeakReference )
-                    {
-                        r.push( (o as WeakReference).value ) ;
-                    }
-                    else
-                    {
-                        r.push( o ) ;
-                    }
-                }
-                return r ;
-            }
-            else
-            {
-                return [] ;
-            }
-        }
-        
-        /**
          * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
          * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
          */
         public function hasListener( listener:* ):Boolean
         {
-            return getListeners().indexOf( listener ) > -1 ;
+            return toArray().indexOf( listener ) > -1 ;
         }
         
         /**
@@ -162,7 +147,7 @@ package system.events
          */
         public function iterator():Iterator
         {
-            return new ArrayIterator(getListeners()) ;
+            return new ArrayIterator( toArray() ) ;
         }
         
         /**
@@ -203,12 +188,35 @@ package system.events
         }
         
         /**
-         * Indicates the number of listeners registered in the dispatcher.
-         * @return The number of listeners registered in the dispatcher.
+         * Returns the Array representation of all listeners.
+         * @return the Array representation of all listeners.
          */
-        public function size():uint
+        public function toArray():Array
         {
-            return listeners.size() ;
+            if ( listeners.size() > 0 )
+            {
+                var l:int   = listeners.size() ;
+                var r:Array = [] ;
+                var a:Array = listeners.toArray() ;
+                var o:* ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    o = a[i] ;
+                    if ( o is WeakReference )
+                    {
+                        r.push( (o as WeakReference).value ) ;
+                    }
+                    else
+                    {
+                        r.push( o ) ;
+                    }
+                }
+                return r ;
+            }
+            else
+            {
+                return [] ;
+            }
         }
         
         /**

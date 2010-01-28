@@ -35,54 +35,20 @@
 
 package system.events.samples 
 {
-    import system.events.Broadcaster;
-
-    public class BroadcasterClass implements Broadcaster
+    import system.events.Receiver;
+    
+    public class ReceiverClass implements Receiver 
     {
-        public function BroadcasterClass()
+        public function ReceiverClass()
         {
-            //
+            
         }
         
-        /**
-         * Indicates the number of listeners connected with the Broadcaster object.
-         */
-        public function get length():uint
-        {
-            return 0 ;
-        }
+        public var values:Array ;
         
-        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
+        public function receive(...values:Array):void
         {
-            return listener != null && useWeakReference ;
-        }
-        
-        public function broadcastMessage( message:String, ...rest:Array ):*
-        {
-            return message ;
-        }
-        
-        public function hasListener(listener:*):Boolean
-        {
-            return listener != null ;
-        }
-        
-        public function isEmpty():Boolean
-        {
-            return true ;
-        }
-        
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            throw new Error("removeAllListeners") ;
-        }
-        
-        public function removeListener( listener:* ):Boolean
-        {
-            return listener != null;
+            throw values[0] ;
         }
     }
 }

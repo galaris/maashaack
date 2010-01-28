@@ -82,6 +82,17 @@ package system.events
             assertTrue( broadcaster is Iterable    , "The MessageBroadcaster class must implements the Iterable interface.") ;
         }
         
+        public function testLength():void
+        {
+            assertEquals( broadcaster.length , 0 , "01 - length failed.") ;
+            broadcaster.addListener( listener1 ) ;
+            assertEquals( broadcaster.length , 1 , "02 - length failed.") ;
+            broadcaster.addListener( listener2 ) ;
+            assertEquals( broadcaster.length , 2 , "03 - length failed.") ;
+            broadcaster.addListener( listener2 ) ;
+            assertEquals( broadcaster.length , 2 , "04 - length failed.") ;
+        }
+        
         public function testAddListener():void
         {
             assertTrue( broadcaster.addListener( listener1 ) , "01 - The addListener method failed.") ;
@@ -102,15 +113,8 @@ package system.events
             broadcaster.addListener( listener2 ) ;
             var clone:MessageBroadcaster = broadcaster.clone() as MessageBroadcaster ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.size() , broadcaster.size(), "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.getListeners(), broadcaster.getListeners() , "03 - clone method failed.") ;
-        }
-        
-        public function testGetListeners():void
-        {
-            broadcaster.addListener( listener1 ) ;
-            broadcaster.addListener( listener2 ) ;
-            ArrayAssert.assertEquals([listener1,listener2], broadcaster.getListeners() , "getListeners method failed.") ;
+            assertEquals( clone.length , broadcaster.length, "02 - clone method failed.") ;
+            ArrayAssert.assertEquals(clone.toArray(), broadcaster.toArray() , "03 - clone method failed.") ;
         }
         
         public function testHasListener():void
@@ -154,20 +158,16 @@ package system.events
             broadcaster.addListener( listener2 ) ;
             
             assertTrue( broadcaster.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( broadcaster.size() , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( broadcaster.length , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( broadcaster.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }
         
-        public function testSize():void
+        public function testToArray():void
         {
-            assertEquals( broadcaster.size() , 0 , "01 - size() failed.") ;
             broadcaster.addListener( listener1 ) ;
-            assertEquals( broadcaster.size() , 1 , "02 - size() failed.") ;
             broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.size() , 2 , "03 - size() failed.") ;
-            broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.size() , 2 , "04 - size() failed.") ;
+            ArrayAssert.assertEquals([listener1,listener2], broadcaster.toArray() , "getListeners method failed.") ;
         }
     }
 }
