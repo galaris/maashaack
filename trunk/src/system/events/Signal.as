@@ -55,15 +55,15 @@ package system.events
         function connect( listener:* , useWeakReference:Boolean = false  ):Boolean ;
         
         /**
-         * Disconnects all listeners in the set of the dispatcher.
-         */
-        function disconnectAll():void ;
-        
-        /**
          * Disconnects the specified listener.
          * @return <code>true</code> if the specified listener exist and can be removed.
          */
         function disconnect( listener:* ):Boolean ;
+        
+        /**
+         * Disconnects all listeners in the set of the dispatcher.
+         */
+        function disconnectAll():void ;
         
         /**
          * Emit the specified values to the listeners.
