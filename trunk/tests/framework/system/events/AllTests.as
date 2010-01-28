@@ -53,7 +53,6 @@ package system.events
                 suite.addTestSuite( BooleanEventTest ) ;
                 suite.addTestSuite( BroadcasterTest ) ;
                 suite.addTestSuite( CommandTest ) ;
-                suite.addTestSuite( InternalBroadcasterTest ) ;
                 suite.addTestSuite( CoreBroadcasterTest ) ;
                 suite.addTestSuite( CoreEventDispatcherTest ) ;
                 suite.addTestSuite( DateEventTest ) ;
@@ -65,9 +64,13 @@ package system.events
                 suite.addTestSuite( FastDispatcherTest ) ;
                 suite.addTestSuite( FrontControllerTest ) ;
                 suite.addTestSuite( IEventDispatcherTest ) ;
+                suite.addTestSuite( InternalBroadcasterTest ) ;
                 suite.addTestSuite( InternalDispatcherTest ) ;
+                suite.addTestSuite( InternalSignalTest ) ;
                 suite.addTestSuite( MessageBroadcasterTest ) ;
                 suite.addTestSuite( NumberEventTest ) ;
+                suite.addTestSuite( ReceiverTest ) ;
+                suite.addTestSuite( SignalTest ) ;
                 suite.addTestSuite( StringEventTest ) ;
             }
             return suite;

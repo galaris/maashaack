@@ -37,23 +37,22 @@ package system.events.samples
 {
     import system.events.IEventDispatcher;
     
-    import flash.events.Event;    
+    import flash.events.Event;
     
     public class IEventDispatcherClass implements IEventDispatcher 
     {
-        
         /**
          * Creates a new IEventDispatcherClass instance.
          */
         public function IEventDispatcherClass()
         {
-                        
+            
         }
-
+        
         public function addEventListener(type:String, listener:Function, useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false):void
         {
             throw new Error( "IEventDispatcherClass.addEventListener(" + arguments + ")" ) ;
-        }        
+        }
         
         public function dispatchEvent(event:Event):Boolean
         {
@@ -73,18 +72,16 @@ package system.events.samples
         public function removeEventListener(type:String, listener:Function, useCapture:Boolean = false):void
         {
             throw new Error( "IEventDispatcherClass.removeEventListener(" + arguments + ")" ) ;
-        }        
+        }
         
         public function unregisterEventListener(type:String, listener:*, useCapture:Boolean = false):void
         {
             throw new Error( "IEventDispatcherClass.unregisterEventListener(" + arguments + ")" ) ;
-        }        
+        }
         
         public function willTrigger(type:String):Boolean
         {
             return false ;
         }
-        
-
     }
 }

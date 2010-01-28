@@ -32,57 +32,50 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
 package system.events.samples 
 {
-    import system.events.Broadcaster;
-
-    public class BroadcasterClass implements Broadcaster
+    import system.events.Signal;
+    
+    public class SignalClass implements Signal 
     {
-        public function BroadcasterClass()
+        public function SignalClass()
         {
-            //
+            
         }
         
-        /**
-         * Indicates the number of listeners connected with the Broadcaster object.
-         */
         public function get length():uint
         {
-            return 0 ;
+            return 0;
         }
         
-        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
+        public function connect(listener:*, useWeakReference:Boolean = false):Boolean
         {
-            return listener != null && useWeakReference ;
+            return true;
         }
         
-        public function broadcastMessage( message:String, ...rest:Array ):*
+        public function disconnectAll():void
         {
-            return message ;
+            throw "disconnectAll" ;
         }
         
-        public function hasListener(listener:*):Boolean
+        public function disconnect(listener:*):Boolean
         {
-            return listener != null ;
+            return true ;
+        }
+        
+        public function emit(...values:Array):void
+        {
+            throw "emit" ;
+        }
+        
+        public function has(listener:*):Boolean
+        {
+            return true ;
         }
         
         public function isEmpty():Boolean
         {
             return true ;
-        }
-        
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            throw new Error("removeAllListeners") ;
-        }
-        
-        public function removeListener( listener:* ):Boolean
-        {
-            return listener != null;
         }
     }
 }

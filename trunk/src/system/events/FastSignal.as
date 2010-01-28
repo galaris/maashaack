@@ -40,57 +40,69 @@ package system.events
     import system.data.WeakReference;
     
     /**
-     * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
+     * This class provides a fast Signal implementation.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples 
      * {
-     *     import system.events.MessageBroadcaster;
+     *     import system.events.FastSignal ;
+     *     
      *     import flash.display.Sprite;
+     *     import flash.events.Event;
      *     
      *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
      *     
-     *     public class MessageBroadcasterExample extends Sprite
+     *     public class FastSignalExample extends Sprite
      *     {
-     *         public function MessageBroadcasterExample()
+     *         public function FastSignalExample()
      *         {
-     *             var broadcaster:MessageBroadcaster = new MessageBroadcaster() ;
-     *             broadcaster.addListener( this ) ;
-     *             broadcaster.broadcastMessage( "message" , "hello" , "world" ) ;
+     *             var signal:FastSignal = new FastSignal() ;
+     *             
+     *             signal.connect( receive ) ;
+     *             
+     *             dispatcher.emit( "hello world" ) ; // hello world
+     *             dispatcher.emit( "thanks you" ) ; // thanks you
      *         }
      *         
-     *         public function message( ...arguments:Array ):void
+     *         public function receive( message:String ):void
      *         {
-     *             trace( "message : " + arguments ) ;
+     *             trace( message ) ;
      *         }
      *     }
      * }
      * </pre>
      */
-    public class MessageBroadcaster extends InternalBroadcaster implements Cloneable
+    public class FastSignal extends InternalSignal implements Cloneable
     {
         /**
-         * Creates a new MessageBroadcaster instance.
+         * Creates a new FastSignal instance.
          * @param listeners The Array collection of listeners to register in the dispatcher.
          */
-        public function MessageBroadcaster( listeners:Array = null )
+        public function FastSignal( listeners:Array = null )
         {
             super( listeners ) ;
         }
         
         /**
-         * Broadcast the specified message.
-         * @return The reference of the Event dispatched by the dispatcher.
+         * Creates and returns a shallow copy of the object.
+         * @return A new object that is a shallow copy of this instance.
          */
-        public override function broadcastMessage( message:String , ...rest:Array ):*
+        public function clone():*
         {
-            if ( message == null && listeners.size() == 0 )
+            return new FastSignal( toArray() ) ;
+        }
+        
+        /**
+         * Emit the specified values to the listeners.
+         */
+        public override function emit( ...values:Array ):void
+        {
+            if ( values == null  && listeners.size() == 0 )
             {
-                return false ;
+                return null ;
             }
             var removed:Array = [] ;
             var listener:* ;
-            var b:Boolean ;
             var a:Array = listeners.toArray() ;
             var l:int   = a.length ;
             for ( var i:int ; i<l ; i++ ) 
@@ -104,12 +116,12 @@ package system.events
                         removed.push( listener ) ;
                     }
                 }
-                if ( listener != null && message in listener && listener[message] is Function )
+                if ( listener is Function )
                 {
-                    listener[message].apply( listener , rest ) ;
-                    b = true ;
+                    (listener as Function).apply( null , values ) ;
                 }
-                if ( removed.length > 0 ) // clean all null weak references
+                // garbage collector / remove null weak reference
+                if ( removed.length > 0 ) 
                 {
                     l = removed.length ;
                     while( --l > -1 )
@@ -118,16 +130,6 @@ package system.events
                     }
                 }
             }
-            return b ;
-        }
-        
-        /**
-         * Creates and returns a shallow copy of the object.
-         * @return A new object that is a shallow copy of this instance.
-         */
-        public function clone():*
-        {
-            return new MessageBroadcaster( toArray() ) ;
         }
     }
 }

@@ -37,9 +37,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.events 
 {
     /**
-     * This class provides a basic broadcaster interface based "Observer" event model (like ASBroadcaster in AS1).
+     * This class provides a basic Signal interface based "Observer" event model (like ASBroadcaster in AS1).
      */
-    public interface Broadcaster
+    public interface Signal
     {
         /**
          * Indicates the number of listeners connected with the Signal object.
@@ -47,39 +47,39 @@ package system.events
         function get length():uint ;
         
         /**
-         * Registers an object to receive messages.
-         * @param listener The listener to register.
+         * Connectes a listener to receive messages.
+         * @param listener The listener to register (a Function reference or a Receiver object).
          * @param useWeakReference Determines whether the reference to the listener is strong or weak.
-         * @return <code>true</code> If the listener is register in the broadcaster.
+         * @return <code>true</code> If the listener is connected with the signal emitter.
          */
-        function addListener( listener:* , useWeakReference:Boolean = false ):Boolean ;
+        function connect( listener:* , useWeakReference:Boolean = false  ):Boolean ;
         
         /**
-         * Broadcast the specified message.
+         * Disconnects all listeners in the set of the dispatcher.
          */
-        function broadcastMessage( message:String , ...rest:Array ):* ;
+        function disconnectAll():void ;
+        
+        /**
+         * Disconnects the specified listener.
+         * @return <code>true</code> if the specified listener exist and can be removed.
+         */
+        function disconnect( listener:* ):Boolean ;
+        
+        /**
+         * Emit the specified values to the listeners.
+         */
+        function emit( ...values:Array ):void ;
         
         /**
          * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
          * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
          */
-        function hasListener( listener:* ):Boolean ;
+        function has( listener:* ):Boolean ;
         
         /**
          * Returns <code>true</code> if the set of listeners is empty.
          * @return <code>true</code> if the set of listeners is empty.
          */
         function isEmpty():Boolean ;
-        
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        function removeAllListeners():void ;
-        
-        /**
-         * Removes the specified listener.
-         * @return <code>true</code> if the specified listener exist and can be removed.
-         */
-        function removeListener( listener:* ):Boolean ;
     }
 }
