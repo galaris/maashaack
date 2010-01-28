@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<componentPackage>
+        
+    <!-- system -->
+    
+    <component id="system:about"              class="system.about"              />
+    <component id="system:Arrays"             class="system.Arrays"             />
+    <component id="Char"                      class="system.Char"               />
+    <component id="system:Cloneable"          class="system.Cloneable"          />
+    <component id="system:Comparable"         class="system.Comparable"         />
+    <component id="system:Comparator"         class="system.Comparator"         />
+    <component id="system:config"             class="system.config"             />
+    <component id="system:Configurator"       class="system.Configurator"       />
+    <component id="system:console"            class="system.console"            />
+    <component id="system:eden"               class="system.eden"               />
+    <component id="system:Enum"               class="system.Enum"               />
+    <component id="system:Environment"        class="system.Environment"        />
+    <component id="system:Equatable"          class="system.Equatable"          />
+    <component id="system:experimental"       class="system.experimental"       />
+    <component id="system:hack"               class="system.hack"               />
+    <component id="system:info"               class="system.info"               />
+    <component id="system:Library"            class="system.Library"            />
+    <component id="system:metadata"           class="system.metadata"           />
+    <component id="system:Objects"            class="system.Objects"            />
+    <component id="system:optimized"          class="system.optimized"          />
+    <component id="system:Reflection"         class="system.Reflection"         />
+    <component id="system:Serializable"       class="system.Serializable"       />
+    <component id="system:Serializer"         class="system.Serializer"         />
+    <component id="system:Sortable"           class="system.Sortable"           />
+    <component id="system:standard"           class="system.standard"           />
+    <component id="system:Strings"            class="system.Strings"            />
+    <component id="system:SystemConfigurator" class="system.SystemConfigurator" />
+    <component id="system:URI"                class="system.URI"                />
+    <component id="system:Vectors"            class="system.Vectors"            />
+    <component id="system:Version"            class="system.Version"            />
+    
+    <!-- system.cli -->
+    
+    <component id="system.cli:ArgumentsParser" class="system.cli.ArgumentsParser" />
+    <component id="system.cli:SwitchStatus"    class="system.cli.SwitchStatus"    />
+    
+    <!-- system.comparators -->
+    
+    <component id="system.comparators:AlphaComparator"      class="system.comparators.AlphaComparator"      />
+    <component id="system.comparators:BooleanComparator"    class="system.comparators.BooleanComparator"    />
+    <component id="system.comparators:CharComparator"       class="system.comparators.CharComparator"       />
+    <component id="system.comparators:ComparableComparator" class="system.comparators.ComparableComparator" />
+    <component id="system.comparators:DateComparator"       class="system.comparators.DateComparator"       />
+    <component id="system.comparators:GenericComparator"    class="system.comparators.GenericComparator"    />
+    <component id="system.comparators:NullComparator"       class="system.comparators.NullComparator"       />
+    <component id="system.comparators:NumberComparator"     class="system.comparators.NumberComparator"     />
+    <component id="system.comparators:PriorityComparator"   class="system.comparators.PriorityComparator"    />
+    <component id="system.comparators:ReverseComparator"    class="system.comparators.ReverseComparator"    />
+    <component id="system.comparators:StringComparator"     class="system.comparators.StringComparator"     />
+    
+    <!-- system.data -->
+    
+    <component id="system.data:Bag"             class="system.data.Bag" />
+    <component id="system.data:Boundable"       class="system.data.Boundable" />
+    <component id="system.data:Collection"      class="system.data.Collection" />
+    <component id="system.data:Data"            class="system.data.Data" />
+    <component id="system.data:Entry"           class="system.data.Entry" />
+    <component id="system.data:Identifiable"    class="system.data.Identifiable" />
+    <component id="system.data:Iterable"        class="system.data.Iterable" />
+    <component id="system.data:Iterator"        class="system.data.Iterator" />
+    <component id="system.data:List"            class="system.data.List" />
+    <component id="system.data:ListIterable"    class="system.data.ListIterable" />
+    <component id="system.data:ListIterator"    class="system.data.ListIterator" />
+    <component id="system.data:Map"             class="system.data.Map" />
+    <component id="system.data:MultiMap"        class="system.data.MultiMap" />
+    <component id="system.data:OrderedIterator" class="system.data.OrderedIterator" />
+    <component id="system.data:ProxyReference"  class="system.data.ProxyReference" />
+    <component id="system.data:Queue"           class="system.data.Queue" />
+    <component id="system.data:Set"             class="system.data.Set" />
+    <component id="system.data:Stack"           class="system.data.Stack" />
+    <component id="system.data:Typeable"        class="system.data.Typeable" />
+    <component id="system.data:Validator"       class="system.data.Validator" />
+    <component id="system.data:ValueObject"     class="system.data.ValueObject" />
+    <component id="system.data:WeakReference"   class="system.data.WeakReference" />
+    
+    <!-- system.data.arrays -->
+    
+    <component id="system.data:arrays:ArrayFilter" class="system.data.arrays.ArrayFilter" />
+    <component id="system.data:arrays:ProxyArray"  class="system.data.arrays.ProxyArray"  />
+    <component id="system.data.arrays:TypedArray"  class="system.data.arrays.TypedArray"  />
+    
+    <!-- system.data.bags -->
+    
+    <component id="system.data.bags:ArrayBag"     class="system.data.bags.ArrayBag"     />
+    <component id="system.data.bags:BagFormatter" class="system.data.bags.BagFormatter" />
+    <component id="system.data.bags:CoreMapBag"   class="system.data.bags.CoreMapBag"   />
+    <component id="system.data.bags:formatter"    class="system.data.bags.formatter"    />
+    <component id="system.data.bags:HashBag"      class="system.data.bags.HashBag"      />
+    
+    <!-- system.data.collections -->    
+    
+    <component id="system.data.collections:ArrayCollection"     class="system.data.collections.ArrayCollection"     />
+    <component id="system.data.collections:CollectionFormatter" class="system.data.collections.CollectionFormatter" />
+    <component id="system.data.collections:formatter"           class="system.data.collections.formatter"           />
+    <component id="system.data.collections:TypedCollection"     class="system.data.collections.TypedCollection"     />
+       
+    <!-- system.data.iterators -->
+    
+    <component id="system.data.iterators:ArrayFieldIterator"  class="system.data.iterators.ArrayFieldIterator" />
+    <component id="system.data.iterators:ArrayIterator"       class="system.data.iterators.ArrayIterator"      />
+    <component id="system.data.iterators:ArrayListIterator"   class="system.data.iterators.ArrayListIterator"  />
+    <component id="system.data.iterators:BagIterator"         class="system.data.iterators.BagIterator"        />
+    <component id="system.data.iterators:IterableFormatter"   class="system.data.iterators.IterableFormatter"  />
+    <component id="system.data.iterators:LinkedListIterator"  class="system.data.iterators.LinkedListIterator" />
+    <component id="system.data.iterators:MapIterator"         class="system.data.iterators.MapIterator"        />
+    <component id="system.data.iterators:ObjectIterator"      class="system.data.iterators.ObjectIterator"     />
+    <component id="system.data.iterators:PageByPageIterator"  class="system.data.iterators.PageByPageIterator" />
+    <component id="system.data.iterators:ProtectedIterator"   class="system.data.iterators.ProtectedIterator"  />
+    <component id="system.data.iterators:StringIterator"      class="system.data.iterators.StringIterator"     />
+    <component id="system.data.iterators:VectorIterator"      class="system.data.iterators.VectorIterator"     />
+    
+    <!-- system.data.lists -->
+    
+    <component id="system.data.lists:ArrayList"       class="system.data.lists.ArrayList"       />
+    <component id="system.data.lists:LinkedList"      class="system.data.lists.LinkedList"      />
+    <component id="system.data.lists:LinkedListEntry" class="system.data.lists.LinkedListEntry" />
+    <component id="system.data.lists:SortedArrayList" class="system.data.lists.SortedArrayList" />
+    
+    <!-- system.data.maps -->
+    
+    <component id="system.data.maps:ArrayMap"          class="system.data.maps.ArrayMap"          />
+    <component id="system.data.maps:formatter"         class="system.data.maps.formatter"         />
+    <component id="system.data.maps:HashMap"           class="system.data.maps.HashMap"           />
+    <component id="system.data.maps:MapEntry"          class="system.data.maps.MapEntry"          />
+    <component id="system.data.maps:MapFormatter"      class="system.data.maps.MapFormatter"      />
+    <component id="system.data.maps:MapUtils"          class="system.data.maps.MapUtils"          />
+    <component id="system.data.maps:MultiMapFormatter" class="system.data.maps.MultiMapFormatter" />
+    <component id="system.data.maps:MultiSetMap"       class="system.data.maps.MultiSetMap"       />
+    <component id="system.data.maps:MultiValueMap"     class="system.data.maps.MultiValueMap"     />
+    <component id="system.data.maps:SortedArrayMap"    class="system.data.maps.SortedArrayMap"    />
+    <component id="system.data.maps:TypedMap"          class="system.data.maps.TypedMap"          />
+    
+    <!-- system.data.queues -->
+    
+    <component id="system.data.queues:CircularQueue"  class="system.data.queues.CircularQueue" />
+    <component id="system.data.queues:formatter"      class="system.data.queues.formatter"     />
+    <component id="system.data.queues:LinearQueue"    class="system.data.queues.LinearQueue"   />
+    <component id="system.data.queues:PriorityQueue"  class="system.data.queues.PriorityQueue" />
+    <component id="system.data.queues:TypedQueue"     class="system.data.queues.TypedQueue"    />
+        
+    <!-- system.data.sets -->
+    
+    <component id="system.data.sets:ArraySet" class="system.data.sets.ArraySet" />
+    <component id="system.data.sets:CoreSet"  class="system.data.sets.CoreSet"  />
+    <component id="system.data.sets:HashSet"  class="system.data.sets.HashSet"  />
+    <component id="system.data.sets:TypedSet" class="system.data.sets.TypedSet" /> 
+    
+    <!-- system.data.stacks -->
+    
+    <component id="system.data.stacks:ArrayStack" class="system.data.stacks.ArrayStack" />   
+    <component id="system.data.stacks:TypedStack" class="system.data.stacks.TypedStack"  />  
+    
+    <!-- system.data.trees -->
+    
+    <component id="system.data.trees:Trie"        class="system.data.trees.Trie" />
+    <component id="system.data.trees:TrieAverage" class="system.data.trees.TrieAverage" />
+    <component id="system.data.trees:TrieEntry"   class="system.data.trees.TrieEntry" />
+    
+    <!-- system.diagnostics -->
+    
+    <component id="system.diagnostics:TraceConsole"     class="system.diagnostics.TraceConsole"     />
+    <component id="system.diagnostics:TextFieldConsole" class="system.diagnostics.TextFieldConsole" />
+    <component id="system.diagnostics:VirtualMachine"   class="system.diagnostics.VirtualMachine"   />
+    
+    <!-- system.errors -->
+    
+    <component id="system.errors:ConcurrencyError"    class="system.errors.ConcurrencyError"   />
+    <component id="system.errors:InvalidChannelError" class="system.errors.InvalidChannelError" />
+    <component id="system.errors:InvalidFilterError"  class="system.errors.InvalidFilterError" />
+    <component id="system.errors:NonUniqueKeyError"  class="system.errors.NonUniqueKeyError" />
+    <component id="system.errors:NoSuchElementError"  class="system.errors.NoSuchElementError" />
+    
+    <!-- system.evaluators -->
+    
+    <component id="system.evaluators:DateEvaluator"     class="system.evaluators.DateEvaluator"     />
+    <component id="system.evaluators:EdenEvaluator"     class="system.evaluators.EdenEvaluator"     />
+    <component id="system.evaluators:Evaluable"         class="system.evaluators.Evaluable"         />
+    <component id="system.evaluators:MathEvaluator"     class="system.evaluators.MathEvaluator"     />
+    <component id="system.evaluators:MultiEvaluator"    class="system.evaluators.MultiEvaluator"    />
+    <component id="system.evaluators:PropertyEvaluator" class="system.evaluators.PropertyEvaluator" />
+    <component id="system.evaluators:RomanEvaluator"    class="system.evaluators.RomanEvaluator"    />
+    
+    <!-- system.events -->
+    
+    <component id="system.events:ActionEvent"         class="system.events.ActionEvent" />
+    <component id="system.events:ArrayEvent"          class="system.events.ArrayEvent" />
+    <component id="system.events:BasicEvent"          class="system.events.BasicEvent" />
+    <component id="system.events:BooleanEvent"        class="system.events.BooleanEvent" />
+    <component id="system.events:Broadcaster"         class="system.events.Broadcaster" />
+    <component id="system.events:Command"             class="system.events.Command" />
+    <component id="system.events:CoreBroadcaster"     class="system.events.CoreBroadcaster" />
+    <component id="system.events:CoreEventDispatcher" class="system.events.CoreEventDispatcher" />
+    <component id="system.events:DateEvent"           class="system.events.DateEvent" />
+    <component id="system.events:Delegate"            class="system.events.Delegate" />
+    <component id="system.events:DynamicEvent"        class="system.events.DynamicEvent" />
+    <component id="system.events:EventDispatcher"     class="system.events.EventDispatcher" />
+    <component id="system.events:EventListener"       class="system.events.EventListener" />
+    <component id="system.events:EventListenerBatch"  class="system.events.EventListenerBatch" />
+    <component id="system.events:FastDispatcher"      class="system.events.FastDispatcher" />
+    <component id="system.events:FastSignal"          class="system.events.FastSignal" />
+    <component id="system.events:FrontController"     class="system.events.FrontController" />
+    <component id="system.events:IEventDispatcher"    class="system.events.IEventDispatcher" />
+    <component id="system.events:InternalBroadcaster" class="system.events.InternalBroadcaster" />
+    <component id="system.events:InternalDispatcher"  class="system.events.InternalDispatcher" />
+    <component id="system.events:InternalSignal"      class="system.events.InternalSignal" />
+    <component id="system.events:LoggerEvent"         class="system.events.LoggerEvent" />
+    <component id="system.events:MessageBroadcaster"  class="system.events.MessageBroadcaster" />
+    <component id="system.events:NumberEvent"         class="system.events.NumberEvent" />
+    <component id="system.events:Receiver"            class="system.events.Receiver" />
+    <component id="system.events:Signal"              class="system.events.Signal" />
+    <component id="system.events:StringEvent"         class="system.events.StringEvent" />
+    
+    <!-- system.formatters -->
+    
+    <component id="system.formatters:DateFormatter"       class="system.formatters.DateFormatter" />
+    <component id="system.formatters:ExpressionFormatter" class="system.formatters.ExpressionFormatter" />
+    <component id="system.formatters:Formattable"         class="system.formatters.Formattable"   />
+    <component id="system.formatters:StringFormatter"     class="system.formatters.StringFormatter" />
+    
+    <!-- system.hosts -->    
+    
+    <component id="system.hosts:Host"            class="system.hosts.Host"            />
+    <component id="system.hosts:HostID"          class="system.hosts.HostID"          />
+    <component id="system.hosts:OperatingSystem" class="system.hosts.OperatingSystem" />
+    <component id="system.hosts:PlatformID"      class="system.hosts.PlatformID"      />
+        
+    <!-- system.io -->  
+    
+    <component id="system.io:Readable"  class="system.io.Readable"  />
+    <component id="system.io:Writeable" class="system.io.Writeable" />
+    
+    <!-- system.logging -->
+    
+    <component id="system.logging:Log"             class="system.logging.Log" />
+    <component id="system.logging:Loggable"        class="system.logging.Loggable" />
+    <component id="system.logging:Logger"          class="system.logging.Logger" />
+    <component id="system.logging:LoggerFactory"   class="system.logging.LoggerFactory" />
+    <component id="system.logging:LoggerLevel"     class="system.logging.LoggerLevel" />
+    <component id="system.logging:LoggerStrings"   class="system.logging.LoggerStrings" />
+    <component id="system.logging:LoggerTarget"    class="system.logging.LoggerTarget" />
+    <component id="system.logging:LogLogger"       class="system.logging.LogLogger" />
+    
+    <!-- system.logging.targets -->
+    
+    <component id="system.logging.targets:CoreLoggerTarget"    class="system.logging.targets.CoreLoggerTarget" />
+    <component id="system.logging.targets:FireBugTarget"       class="system.logging.targets.FireBugTarget" />
+    <component id="system.logging.targets:LineFormattedTarget" class="system.logging.targets.LineFormattedTarget" />
+    <component id="system.logging.targets:SocketTarget"        class="system.logging.targets.SocketTarget" />
+    <component id="system.logging.targets:SOSTarget"           class="system.logging.targets.SOSTarget" />
+    <component id="system.logging.targets:TextFieldTarget"     class="system.logging.targets.TextFieldTarget" />
+    <component id="system.logging.targets:TraceTarget"         class="system.logging.targets.TraceTarget" />
+    
+    <!-- system.network -->
+    
+    <component id="system.network:HostnameType" class="system.network.HostnameType"  />
+    <component id="system.network:URIScheme"    class="system.network.URIScheme"     />
+    
+    <!-- system.numeric -->
+    
+    <component id="system.numeric:Mathematics" class="system.numeric.Mathematics" />
+    <component id="system.numeric:PRNG"        class="system.numeric.PRNG"        />
+    <component id="system.numeric:Range"       class="system.numeric.Range"       />
+    <component id="system.numeric:RomanNumber" class="system.numeric.RomanNumber" />
+    
+    <!-- system.process.caches -->
+    
+    <component id="system.process.caches:Attribute" class="system.process.caches.Attribute" />
+    <component id="system.process.caches:Method"    class="system.process.caches.Method"    />
+    
+    <!-- system.process -->
+    
+    <component id="system.process:Action"                 class="system.process.Action"                 />
+    <component id="system.process:ActionEventDispatcher"  class="system.process.ActionEventDispatcher"  />
+    <component id="system.process:ActionLoader"           class="system.process.ActionLoader"           />
+    <component id="system.process:ActionProxy"            class="system.process.ActionProxy"            />
+    <component id="system.process:ActionURLLoader"        class="system.process.ActionURLLoader"        />
+    <component id="system.process:ActionURLStream"        class="system.process.ActionURLStream"        />
+    <component id="system.process:Batch"                  class="system.process.Batch"                  />
+    <component id="system.process:BatchProcess"           class="system.process.BatchProcess"           />
+    <component id="system.process:Cache"                  class="system.process.Cache"                  />
+    <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
+    <component id="system.process:CoreActionLoader"       class="system.process.CoreActionLoader"       />
+    <component id="system.process:Initializer"            class="system.process.Initializer"            />
+    <component id="system.process:Lockable"               class="system.process.Lockable"               />
+    <component id="system.process:Pause"                  class="system.process.Pause"                  />
+    <component id="system.process:Priority"               class="system.process.Priority"               />
+    <component id="system.process:Resetable"              class="system.process.Resetable"              />
+    <component id="system.process:Runnable"               class="system.process.Runnable"               />
+    <component id="system.process:Sequencer"              class="system.process.Sequencer"              />
+    <component id="system.process:Startable"              class="system.process.Startable"              />
+    <component id="system.process:Stoppable"              class="system.process.Stoppable"              />
+    <component id="system.process:Task"                   class="system.process.Task"                   />
+    <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
+    
+    <!-- system.reflection -->
+    
+    <component id="system.reflection:_ClassInfo"             class="system.reflection._ClassInfo"             />
+    <component id="system.reflection:_ConstructorInfo"       class="system.reflection._ConstructorInfo"       />
+    <component id="system.reflection:_TypeInfo"              class="system.reflection._TypeInfo"              />
+    <component id="system.reflection:AccessorInfo"           class="system.reflection.AccessorInfo"           />
+    <component id="system.reflection:AccessorType"           class="system.reflection.AccessorType"           />
+    <component id="system.reflection:ArgumentInfo"           class="system.reflection.ArgumentInfo"           />
+    <component id="system.reflection:ClassInfo"              class="system.reflection.ClassInfo"              />
+    <component id="system.reflection:config"                 class="system.reflection.config"                 />
+    <component id="system.reflection:ConstructorInfo"        class="system.reflection.ConstructorInfo"        />
+    <component id="system.reflection:FilterType"             class="system.reflection.FilterType"             />
+    <component id="system.reflection:InterfaceInfo"          class="system.reflection.InterfaceInfo"          />
+    <component id="system.reflection:MemberInfo"             class="system.reflection.MemberInfo"             />
+    <component id="system.reflection:MemberType"             class="system.reflection.MemberType"             />
+    <component id="system.reflection:MethodInfo"             class="system.reflection.MethodInfo"             />
+    <component id="system.reflection:ReflectionConfigurator" class="system.reflection.ReflectionConfigurator" />
+    <component id="system.reflection:TypeInfo"               class="system.reflection.TypeInfo"               />
+    
+    <!-- system.serializers.eden -->
+    
+    <component id="system.serializers.eden:BuiltinSerializer" class="system.serializers.eden.BuiltinSerializer" />
+    <component id="system.serializers.eden:config"            class="system.serializers.eden.config"            />
+    <component id="system.serializers.eden:debug"             class="system.serializers.eden.debug"             />
+    <component id="system.serializers.eden:ECMAScript"        class="system.serializers.eden.ECMAScript"        />
+    <component id="system.serializers.eden:EdenConfigurator"  class="system.serializers.eden.EdenConfigurator"  />
+    <component id="system.serializers.eden:EdenSerializer"    class="system.serializers.eden.EdenSerializer"    />
+    <component id="system.serializers.eden:info"              class="system.serializers.eden.info"              />
+    <component id="system.serializers.eden:release"           class="system.serializers.eden.release"           />
+    <component id="system.serializers.eden:strings"           class="system.serializers.eden.strings"           />
+    
+    <!-- system.terminals -->
+    
+    <component id="system.terminals:Console"            class="system.terminals.Console"            />
+    <component id="system.terminals:InteractiveConsole" class="system.terminals.InteractiveConsole" />
+    <component id="system.terminals:VirtualConsole"     class="system.terminals.VirtualConsole"     />
+    
+    <!-- system.text.html -->
+    
+    <component id="system.text.html:Entities" class="system.text.html.Entities" />
+    <component id="system.text.html:Entity"   class="system.text.html.Entity"   />
+    <component id="system.text.html:HTML"     class="system.text.html.HTML"     />
+    
+    <!-- system.text.parser -->
+    
+    <component id="system.text.parser:GenericParser" class="system.text.parser.GenericParser" />
+    
+</componentPackage>
