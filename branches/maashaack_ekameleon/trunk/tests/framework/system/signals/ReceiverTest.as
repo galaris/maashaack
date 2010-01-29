@@ -33,24 +33,23 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.signals 
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.events.samples.SignalClass;
+    import system.signals.samples.ReceiverClass;
     
-    public class SignalTest extends TestCase 
+    public class ReceiverTest extends TestCase 
     {
-        public function SignalTest(name:String = "")
+        public function ReceiverTest(name:String = "")
         {
             super( name );
         }
         
         public function testInterface():void
         {
-            var b:Signal = new SignalClass() as Signal ;
-            
-            assertNotNull( b , "The Signal interface failed." ) ;
+            var r:Receiver = new ReceiverClass() as Receiver ;
+            assertNotNull( r , "The ReceiverClass interface failed." ) ;
         }
     }
 }

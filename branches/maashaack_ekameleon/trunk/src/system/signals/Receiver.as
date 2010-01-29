@@ -34,7 +34,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 */
 
-package system.events
+package system.signals
 {
     /**
      * The <code class="prettyprint">Receiver</code> interface is the primary method for receiving values from Signal objects. 

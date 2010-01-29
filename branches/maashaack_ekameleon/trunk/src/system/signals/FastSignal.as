@@ -34,7 +34,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 */
 
-package system.events 
+package system.signals 
 {
     import system.Cloneable;
     import system.data.WeakReference;
@@ -45,7 +45,8 @@ package system.events
      * <pre class="prettyprint">
      * package examples 
      * {
-     *     import system.events.FastSignal ;
+     *     import system.signals.FastSignal ;
+     *     import system.signals.Signal ;
      *     
      *     import flash.display.Sprite;
      *     import flash.events.Event;
@@ -56,7 +57,7 @@ package system.events
      *     {
      *         public function FastSignalExample()
      *         {
-     *             var signal:FastSignal = new FastSignal() ;
+     *             var signal:Signal = new FastSignal() ;
      *             
      *             signal.connect( write ) ;
      *             

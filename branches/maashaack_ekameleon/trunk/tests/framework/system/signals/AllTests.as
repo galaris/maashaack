@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.signals
 {
     import buRRRn.ASTUce.framework.*;
     
@@ -47,28 +47,10 @@ package system.events
             var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
             if( Environment.host.id != HostID.RedTamarin )
             {
-                suite.addTestSuite( ActionEventTest ) ;
-                suite.addTestSuite( ArrayEventTest ) ;
-                suite.addTestSuite( BasicEventTest ) ;
-                suite.addTestSuite( BooleanEventTest ) ;
-                suite.addTestSuite( BroadcasterTest ) ;
-                suite.addTestSuite( CommandTest ) ;
-                suite.addTestSuite( CoreBroadcasterTest ) ;
-                suite.addTestSuite( CoreEventDispatcherTest ) ;
-                suite.addTestSuite( DateEventTest ) ;
-                suite.addTestSuite( DelegateTest ) ;
-                suite.addTestSuite( DynamicEventTest ) ;
-                suite.addTestSuite( EventDispatcherTest ) ;
-                suite.addTestSuite( EventListenerTest ) ;
-                suite.addTestSuite( EventListenerBatchTest ) ;
-                suite.addTestSuite( FastDispatcherTest ) ;
-                suite.addTestSuite( FrontControllerTest ) ;
-                suite.addTestSuite( IEventDispatcherTest ) ;
-                suite.addTestSuite( InternalBroadcasterTest ) ;
-                suite.addTestSuite( InternalDispatcherTest ) ;
-                suite.addTestSuite( MessageBroadcasterTest ) ;
-                suite.addTestSuite( NumberEventTest ) ;
-                suite.addTestSuite( StringEventTest ) ;
+                suite.addTestSuite( FastSignalTest ) ;
+                suite.addTestSuite( InternalSignalTest ) ;
+                suite.addTestSuite( ReceiverTest ) ;
+                suite.addTestSuite( SignalTest ) ;
             }
             return suite;
         }
