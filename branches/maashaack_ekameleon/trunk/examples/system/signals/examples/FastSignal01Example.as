@@ -45,9 +45,9 @@ package examples
     /**
      * Example of the FastSignal class.
      */
-    public class FastSignalExample extends Sprite 
+    public class FastSignal01Example extends Sprite 
     {
-        public function FastSignalExample()
+        public function FastSignal01Example()
         {
             var signal:Signal = new FastSignal() ;
             

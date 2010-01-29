@@ -49,10 +49,11 @@ package system.signals
         /**
          * Connects a Function or a Receiver object with the signal.
          * @param receiver The receiver to connect : a Function reference or a Receiver object.
-         * @param useWeakReference Determines whether the reference to the receiver is strong or weak.
+         * @param priority Determinates the priority level of the receiver.
+         * @param autoDisconnect Apply a disconnect after the first trigger
          * @return <code>true</code> If the receiver is connected with the signal emitter.
          */
-        function connect( receiver:* , useWeakReference:Boolean = false  ):Boolean ;
+        function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean ;
         
         /**
          * Returns <code>true</code> if one or more receivers are connected.

@@ -309,7 +309,7 @@ package system.data.maps
         /**
          * Returns the eden String representation of this map.
          * @return the eden String representation of this map.
-         */        
+         */
         public function toSource( indent:int = 0 ):String 
         {
             return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;

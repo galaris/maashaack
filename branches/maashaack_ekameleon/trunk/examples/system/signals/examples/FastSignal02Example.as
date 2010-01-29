@@ -32,45 +32,62 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package system.signals.samples 
+
+package examples 
 {
+    import system.signals.FastSignal;
     import system.signals.Signal;
     
-    public class SignalClass implements Signal 
+    import flash.display.Sprite;
+    
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+    
+    /**
+     * Example of the FastSignal class.
+     */
+    public class FastSignal02Example extends Sprite 
     {
-        public function SignalClass()
+        public function FastSignal02Example()
         {
+            var signal:Signal = new FastSignal() ;
             
+            signal.connect( write0 , 0 , true ) ;
+            signal.connect( write1 , 1 ) ;
+            signal.connect( write2 , 99 , true ) ;
+            
+            trace( signal.connected() ) ;
+            
+            signal.emit( "hello world" ) ;
+            signal.emit( "thank you" ) ;
+            
+            signal.disconnect( write1 ) ;
+            
+            trace( signal.connected() ) ;
+            
+            signal.connect( write0 ) ;
+            signal.connect( write1 ) ;
+            signal.connect( write2 ) ;
+            
+            signal.emit( "hello world" ) ;
+            
+            signal.disconnect() ; // disconnect all
+            
+            trace( signal.connected() ) ;
         }
         
-        public function get numReceivers():uint
+        public function write0( message:String ):void
         {
-            return 0;
+            trace( "write0 : "  + message ) ;
         }
         
-        public function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean
+        public function write1( message:String ):void
         {
-            return true;
+            trace( "write1 : "  + message ) ;
         }
         
-        public function connected():Boolean
+        public function write2( message:String ):void
         {
-            return true ;
-        }
-        
-        public function disconnect( receiver:* = null ):Boolean
-        {
-            return true ;
-        }
-        
-        public function emit(...values:Array):void
-        {
-            throw "emit" ;
-        }
-        
-        public function hasReceiver(receiver:*):Boolean
-        {
-            return true ;
+            trace( "write2 : " + message ) ;
         }
     }
 }

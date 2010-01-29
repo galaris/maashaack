@@ -36,13 +36,11 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.signals
 {
+    import system.comparators.PriorityComparator;
     import system.data.Iterable;
     import system.data.Iterator;
-    import system.data.Set;
-    import system.data.WeakReference;
     import system.data.iterators.ArrayIterator;
-    import system.data.sets.ArraySet;
-    
+
     /**
      * This core basic class provides all basic methods of the system.events.Signal interface.
      * You must overrides this class and defines the content emit() method.
@@ -53,15 +51,15 @@ package system.signals
          * Creates a new InternalSignal instance.
          * @param receivers The Array collection of receiver objects to connect with this signal.
          */
-        public function InternalSignal( listeners:Array = null )
+        public function InternalSignal( receivers:Array = null )
         {
-            this.receivers = new ArraySet() ;
-            if ( listeners != null )
+            this.receivers = [] ;
+            if ( receivers != null )
             {
-                var l:int = listeners.length ;
+                var l:int = receivers.length ;
                 for( var i:int ; i<l ; i++ )
                 {
-                    connect( listeners[i] );
+                    connect( receivers[i] );
                 }
             }
         }
@@ -71,16 +69,17 @@ package system.signals
          */
         public function get numReceivers():uint
         {
-            return receivers.size() ;
+            return receivers.length ;
         }
         
         /**
          * Connects a Function or a Receiver object with the signal.
          * @param receiver The receiver to connect : a Function reference or a Receiver object.
-         * @param useWeakReference Determines whether the reference to the receiver is strong or weak.
+         * @param priority Determinates the priority level of the receiver.
+         * @param autoDisconnect Apply a disconnect after the first trigger
          * @return <code>true</code> If the receiver is connected with the signal emitter.
          */
-        public function connect( receiver:* , useWeakReference:Boolean = false ):Boolean
+        public function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean
         {
             if ( receiver is Function || receiver is Receiver )
             {
@@ -92,11 +91,9 @@ package system.signals
                 {
                     return false ;
                 }
-                if ( useWeakReference )
-                {
-                    receiver = new WeakReference( receiver ) ;
-                }
-                return receivers.add( receiver ) ;
+                receivers.push( new SignalEntry( receiver , priority , autoDisconnect ) ) ;
+                receivers.sort( _comparator.compare ) ; 
+                return true ;
             }
             else
             {
@@ -110,7 +107,7 @@ package system.signals
          */
         public function connected():Boolean
         {
-            return receivers.isEmpty() ;
+            return receivers.length > 0 ;
         }
         
         /**
@@ -121,9 +118,9 @@ package system.signals
         {
             if ( receiver == null )
             {
-                if ( receivers.size() > 0 )
+                if ( receivers.length > 0 )
                 { 
-                    receivers.clear() ;
+                    receivers = [] ;
                     return true ;
                 }
                 else
@@ -131,34 +128,26 @@ package system.signals
                     return false ;
                 }
             }
-            else if ( receiver is Function || receiver is Receiver )
+            if ( receiver is Receiver )
             {
-                if ( receiver is Receiver )
+                receiver = ( receiver as Receiver ).receive ;
+            }
+            var b:Boolean ;
+            if ( receiver && receiver is Function && receivers.length > 0 )
+            {
+                var r:Function ;
+                var l:int = receivers.length ;
+                while( --l > -1 )
                 {
-                    receiver = ( receiver as Receiver ).receive ;
-                }
-                var b:Boolean ;
-                if ( receivers.size() > 0 )
-                {
-                    var l:int   = receivers.size() ;
-                    var a:Array = receivers.toArray() ;
-                    var o:* ;
-                    while( --l > -1 )
+                    r = (receivers[l] as SignalEntry).receiver ;
+                    if ( r == receiver )
                     {
-                        o = a[l] ;
-                        if ( o == receiver || ( o is WeakReference && ( (o as WeakReference).value == receiver ) ) )
-                        {
-                            receivers.remove(o) ;
-                            b = true ;
-                        }
+                        receivers.splice( l , 1 ) ;
+                        b = true ;
                     }
                 }
-                return b ;
             }
-            else
-            {
-                return false ;
-            }
+            return b ;
         }
         
         /**
@@ -175,25 +164,18 @@ package system.signals
          */
         public function hasReceiver( receiver:* ):Boolean
         {
-            if ( receiver is Function || receiver is Receiver )
+            if ( receiver is Receiver )
             {
-                if (receiver is Receiver)
+                receiver = ( receiver as Receiver ).receive ;
+            }
+            if ( receiver && receiver is Function )
+            {
+                if ( receivers.length > 0 )
                 {
-                    receiver = ( receiver as Receiver ).receive ;
-                }
-                if ( receivers.size() > 0 )
-                {
-                    var a:Array = receivers.toArray() ;
-                    var l:int   = a.length ;
-                    var o:* ;
+                    var l:int = receivers.length ;
                     while( --l > -1 )
                     {
-                        o = a[l] ;
-                        if ( o is WeakReference && (o as WeakReference).value == receiver )
-                        {
-                            return true ;
-                        }
-                        else if ( o == receiver )
+                        if ( ( receivers[l] as SignalEntry ).receiver == receiver )
                         {
                             return true ;
                         }
@@ -218,23 +200,13 @@ package system.signals
          */
         public function toArray():Array
         {
-            if ( receivers.size() > 0 )
+            if ( receivers.length > 0 )
             {
-                var l:int   = receivers.size() ;
                 var r:Array = [] ;
-                var a:Array = receivers.toArray() ;
-                var o:* ;
+                var l:int = receivers.length ;
                 for( var i:int ; i<l ; i++ )
                 {
-                    o = a[i] ;
-                    if ( o is WeakReference )
-                    {
-                        r.push( (o as WeakReference).value ) ;
-                    }
-                    else
-                    {
-                        r.push( o ) ;
-                    }
+                    r[i] = ( receivers[i] as SignalEntry ).receiver ;
                 }
                 return r ;
             }
@@ -247,6 +219,11 @@ package system.signals
         /**
          * The Array representation of all receivers.
          */
-        protected var receivers:Set ;
+        protected var receivers:Array ;
+        
+        /**
+         * @private
+         */
+        private static const _comparator:PriorityComparator = new PriorityComparator() ; 
     }
 }
