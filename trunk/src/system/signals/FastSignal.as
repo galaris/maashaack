@@ -37,7 +37,6 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.signals 
 {
     import system.Cloneable;
-    import system.data.WeakReference;
     
     /**
      * This class provides a fast Signal implementation.
@@ -98,36 +97,33 @@ package system.signals
          */
         public override function emit( ...values:Array ):void
         {
-            if ( values == null  && receivers.size() == 0 )
+            if ( receivers.length == 0 )
             {
                 return ;
             }
-            var removed:Array = [] ;
-            var receiver:* ;
-            var a:Array = receivers.toArray() ;
-            var l:int   = a.length ;
-            for ( var i:int ; i<l ; i++ ) 
+            var i:int ;
+            var l:int = receivers.length ;
+            var r:Array = [] ;
+            var a:Array = [].concat( receivers ) ;
+            var e:SignalEntry ;
+            for ( i = 0 ; i<l ; i++ ) 
             {
-                receiver = a[i] ;
-                if ( receiver is WeakReference )
+                e = a[i] as SignalEntry ;
+                e.receiver.apply( null , values ) ;
+                if ( e.auto )
                 {
-                    receiver = (receiver as WeakReference).value ;
-                    if( receiver == null )
-                    {
-                        removed.push( receiver ) ;
-                    }
+                    r.push( e ) ;
                 }
-                if ( receiver is Function )
+            }
+            if ( r.length > 0 )
+            {
+                l = r.length ;
+                while( --l > -1 )
                 {
-                    (receiver as Function).apply( null , values ) ;
-                }
-                // garbage collector / remove null weak reference
-                if ( removed.length > 0 ) 
-                {
-                    l = removed.length ;
-                    while( --l > -1 )
+                    i = receivers.indexOf( r[l] ) ;
+                    if ( i > -1 )
                     {
-                        receivers.remove( removed[l] ) ;
+                        receivers.splice( i , 1 ) ;
                     }
                 }
             }

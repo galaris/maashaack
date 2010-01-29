@@ -32,45 +32,58 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package system.signals.samples 
+
+package system.signals 
 {
-    import system.signals.Signal;
+    import system.process.Priority;
     
-    public class SignalClass implements Signal 
+    /**
+     * A SignalEntry object contains all informations about a receiver entry in a Signal collection.
+     */
+    internal class SignalEntry implements Priority
     {
-        public function SignalClass()
+        /**
+         * Creates a new SignalEntry instance.
+         * @param receiver The receiver reference.
+         * @param priority The priority value of the entry.
+         * @param auto This flag indicates if the receiver must be disconnected when handle the first time a signal. 
+         */
+        public function SignalEntry( receiver:Function = null , priority:uint = 0 , auto:Boolean = false )
         {
-            
+            this.auto     = auto ;
+            this.receiver = receiver ;
+            this.priority = priority ;
         }
         
-        public function get numReceivers():uint
+        /**
+         * Indicates if the receiver must be disconnected when handle the first time a signal.
+         */
+        public var auto:Boolean ;
+        
+        /**
+         * Determinates the priority value of the object.
+         */
+        public function get priority():int
         {
-            return 0;
+            return _priority ;
         }
         
-        public function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean
+        /**
+         * @private
+         */
+        public function set priority( value:int ):void
         {
-            return true;
+            _priority = value ; 
         }
         
-        public function connected():Boolean
-        {
-            return true ;
-        }
+        /**
+         * The receiver Function reference of this entry.
+         */
+        public var receiver:Function ;
         
-        public function disconnect( receiver:* = null ):Boolean
-        {
-            return true ;
-        }
-        
-        public function emit(...values:Array):void
-        {
-            throw "emit" ;
-        }
-        
-        public function hasReceiver(receiver:*):Boolean
-        {
-            return true ;
-        }
+        /**
+         * @private
+         */
+        private var _priority:int ;
     }
 }

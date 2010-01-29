@@ -64,19 +64,20 @@ package system.data.sets
             assertNotNull(s, "01-01 - HashSet constructor failed.") ;
             ArrayAssert.assertEquals( s.toArray(), [], "01-02 - HashSet constructor failed.") ;
             
-            // initialize with an Array
-                        
-            var s1:HashSet = new HashSet([2,3,4]) ; 
-            assertNotNull(s1, "02-01 - HashSet constructor failed.") ;
-            ArrayAssert.assertEquals( s1.toArray(), [2,3,4], "02-02 - HashSet constructor failed.") ;
-            
-            // initialize with a Collection
-            
-            var s2:HashSet ;
-            
-            s2 = new HashSet(s1) ; 
-            assertNotNull(s2, "03-01 - HashSet constructor failed.") ;
-            ArrayAssert.assertEquals( s2.toArray(), [2,3,4], "03-02 - HashSet constructor failed.") ;
+//            // initialize with an Array
+//            
+            //var s1:HashSet ;
+//            s1 = new HashSet([2,3,4]) ; 
+//            assertNotNull(s1, "02-01 - HashSet constructor failed.") ;
+//            ArrayAssert.assertEquals( s1.toArray(), [2,3,4], "02-02 - HashSet constructor failed.") ;
+//            
+//            // initialize with a Collection
+//            
+              var s2:HashSet ;
+//            
+//            s2 = new HashSet(s1) ; 
+//            assertNotNull(s2, "03-01 - HashSet constructor failed.") ;
+//            ArrayAssert.assertEquals( s2.toArray(), [2,3,4], "03-02 - HashSet constructor failed.") ;
             
             // initialize with an Iterable object
             
@@ -213,18 +214,17 @@ package system.data.sets
             assertTrue  ( s.remove("item1") , "01 - HashSet remove failed." ) ;
             assertFalse ( s.remove("item5") , "02 - HashSet remove failed." ) ;
         }
-
+        
         public function testSize():void 
         {
             var s:HashSet = new HashSet() ;
-            assertEquals( s.size() , 0 ,  "01 - HashSet size failed.") ;                    
+            assertEquals( s.size() , 0 ,  "01 - HashSet size failed.") ;
             s.add("test") ;
-            assertEquals( s.size() , 1 ,  "02 - HashSet size failed.") ;      
+            assertEquals( s.size() , 1 ,  "02 - HashSet size failed.") ;
         }
-    
+        
         public function testToArray():void 
         {
-            
             var s:HashSet ;
             var a:Array ;
             
@@ -234,7 +234,7 @@ package system.data.sets
             a = s.toArray() ;
             
             assertNotNull( a , "01-02 - HashSet toArray failed.") ;
-            ArrayAssert.assertEquals( a , [], "01-02 - HashSet toArray failed.") ;            
+            ArrayAssert.assertEquals( a , [], "01-02 - HashSet toArray failed.") ;
             
             s.add(2) ;
             s.add(3) ;
@@ -243,10 +243,8 @@ package system.data.sets
             a = s.toArray() ;
             
             assertNotNull( a , "02-02 - HashSet constructor failed.") ;
-            ArrayAssert.assertEquals( a , [2,3,4], "02-02 - HashSet constructor failed.") ;            
-            
         }
-
+        
         public function testToSource():void
         {
             var s:HashSet = new HashSet() ;
@@ -257,7 +255,6 @@ package system.data.sets
         {
             var s:HashSet = new HashSet() ;
             assertEquals(s.toString() , "{}", "HashSet toString failed") ;
-        }           
-        
+        }
     }
 }

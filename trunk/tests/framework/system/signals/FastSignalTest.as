@@ -104,7 +104,7 @@ package system.signals
         public function testClone():void
         {
             signal.connect( receiver1 ) ;
-            signal.connect( receiver2 , true ) ;
+            signal.connect( receiver2 ) ;
             var clone:FastSignal = signal.clone() as FastSignal ;
             assertNotNull( clone , "01 - clone method failed.") ;
             assertEquals( clone.numReceivers , signal.numReceivers, "02 - clone method failed.") ;
@@ -123,30 +123,16 @@ package system.signals
             assertFalse( signal.connect( receiver2 ) , "02 - The connect method failed.") ;
         }
         
-        public function testConnectWithWeakReference():void
-        {
-            assertTrue( signal.connect( receiver1 , true ) , "01 - The connect method failed.") ;
-            assertFalse( signal.connect( receiver1 , true ) , "02 - The connect method failed.") ;
-            assertFalse( signal.connect( receiver1 ) , "03 - The connect method failed.") ;
-        }
-        
         public function testConnected():void
         {
-            assertTrue( signal.connected() ) ;
-            signal.connect( receiver1 ) ;
             assertFalse( signal.connected() ) ;
+            signal.connect( receiver1 ) ;
+            assertTrue( signal.connected() ) ;
         }
         
         public function testDisconnect():void
         {
             signal.connect( receiver1 ) ;
-            assertTrue( signal.disconnect( receiver1 ) , "01 - The disconnect method failed.") ;
-            assertFalse( signal.disconnect( receiver1 ) , "02 - The disconnect method failed.") ;
-        }
-        
-        public function testDisconnectWK():void
-        {
-            signal.connect( receiver1 , true ) ;
             assertTrue( signal.disconnect( receiver1 ) , "01 - The disconnect method failed.") ;
             assertFalse( signal.disconnect( receiver1 ) , "02 - The disconnect method failed.") ;
         }
@@ -158,30 +144,9 @@ package system.signals
             assertFalse( signal.disconnect( receiver2 ) , "02 - The disconnect method failed.") ;
         }
         
-        public function testDisconnectReceiverWK():void
-        {
-            signal.connect( receiver2 , true ) ;
-            assertTrue( signal.disconnect( receiver2 ) , "01 - The disconnect method failed.") ;
-            assertFalse( signal.disconnect( receiver2 ) , "02 - The disconnect method failed.") ;
-        }
-        
         public function testEmit():void
         {
             signal.connect( receiver1 ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
-        public function testEmitWK():void
-        {
-            signal.connect( receiver1 , true ) ;
             try
             {
                 signal.emit("hello world") ;
@@ -207,34 +172,16 @@ package system.signals
             }
         }
         
-        public function testEmitReceiverWK():void
-        {
-            signal.connect( receiver2 , true ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
-        public function testHas():void
+        public function testHasReceiver():void
         {
             assertFalse( signal.hasReceiver( receiver1 ) , "01 - The hasReceiver method failed.") ;
             signal.connect( receiver1 ) ;
             assertTrue( signal.hasReceiver( receiver1 ) , "02 - The connect method failed.") ;
             signal.disconnect() ; // disconnect all
             assertFalse( signal.hasReceiver( receiver1 ) , "03 - The hasReceiver method failed.") ;
-            signal.connect( receiver1 , true ) ;
-            assertTrue( signal.hasReceiver( receiver1 ) , "04 - The connect method failed.") ;
-            signal.disconnect( receiver1 ) ; // disconnect all
-            assertFalse( signal.hasReceiver( receiver1 ) , "05 - The hasReceiver method failed.") ;
         }
         
-        public function testhasReceiver():void
+        public function testHasReceiverWithReceiver():void
         {
             assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
             signal.connect( receiver2 ) ;
