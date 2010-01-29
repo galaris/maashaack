@@ -37,11 +37,9 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data.Iterable;
-    import system.data.Iterator;
+
     import system.signals.samples.ReceiverClass;
-    
+
     public class InternalSignalTest extends TestCase 
     {
         public function InternalSignalTest(name:String = "")
@@ -80,18 +78,17 @@ package system.signals
         public function testInterfaces():void
         {
             assertTrue( signal is Signal , "The InternalSignal class must implements the Broadcaster interface.") ;
-            assertTrue( signal is Iterable , "The InternalSignal class must implements the Iterable interface.") ;
         }
         
         public function testNumReceivers():void
         {
-            assertEquals( signal.numReceivers , 0 , "01 - length failed.") ;
+            assertEquals( signal.numReceivers , 0 , "01 - numReceivers failed.") ;
             signal.connect( receiver1 ) ;
-            assertEquals( signal.numReceivers , 1 , "02 - length failed.") ;
+            assertEquals( signal.numReceivers , 1 , "02 - numReceivers failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "03 - length failed.") ;
+            assertEquals( signal.numReceivers , 2 , "03 - numReceivers failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "04 - length failed.") ;
+            assertEquals( signal.numReceivers , 2 , "04 - numReceivers failed.") ;
         }
         
         public function testConnect():void
@@ -150,19 +147,6 @@ package system.signals
             assertTrue( signal.hasReceiver( receiver2 ) , "01-02 - The connect method failed.") ;
             signal.disconnect() ;
             assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
-        }
-        
-        public function testIterator():void
-        {
-            signal.connect( receiver1 ) ;
-            signal.connect( receiver2 ) ;
-            var it:Iterator = signal.iterator() ;
-            assertNotNull( it , "01 - iterator failed.") ;
-            assertTrue( it.hasNext() , "02 - iterator failed.") ;
-            assertEquals( it.next() , receiver1 , "02-02 - iterator failed.") ;
-            assertTrue( it.hasNext() , "03 - iterator failed.") ;
-            assertEquals( it.next() , receiver2.receive , "03-02 - iterator failed.") ;
-            assertFalse( it.hasNext() , "04 - iterator failed.") ;
         }
         
         public function testToArray():void
