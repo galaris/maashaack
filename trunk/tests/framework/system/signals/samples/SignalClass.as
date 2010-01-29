@@ -32,23 +32,47 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.events.samples 
+package system.signals.samples 
 {
-    import system.events.Receiver;
+    import system.signals.Signal;
     
-    public class ReceiverClass implements Receiver 
+    public class SignalClass implements Signal 
     {
-        public function ReceiverClass()
+        public function SignalClass()
         {
             
         }
         
-        public var values:Array ;
-        
-        public function receive(...values:Array):void
+        public function get numReceivers():uint
         {
-            throw values[0] ;
+            return 0;
         }
+        
+        public function connect(receiver:*, useWeakReference:Boolean = false):Boolean
+        {
+            return true;
+        }
+        
+        public function connected():Boolean
+        {
+            return true ;
+        }
+        
+        public function disconnect( receiver:* = null ):Boolean
+        {
+            return true ;
+        }
+        
+        public function emit(...values:Array):void
+        {
+            throw "emit" ;
+        }
+        
+        public function hasReceiver(receiver:*):Boolean
+        {
+            return true ;
+        }
+        
+
     }
 }

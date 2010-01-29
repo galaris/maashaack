@@ -34,7 +34,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 */
 
-package system.events 
+package system.signals 
 {
     /**
      * This class provides a basic Signal interface based "Observer" event model (like ASBroadcaster in AS1).
@@ -55,15 +55,16 @@ package system.events
         function connect( receiver:* , useWeakReference:Boolean = false  ):Boolean ;
         
         /**
-         * Disconnect the specified object.
-         * @return <code>true</code> if the specified receiver exist and can be unregister.
+         * Returns <code>true</code> if one or more receivers are connected.
+         * @return <code>true</code> if one or more receivers are connected.
          */
-        function disconnect( receiver:* ):Boolean ;
+        function connected():Boolean ;
         
         /**
-         * Removes all receivers in the set of the signal.
+         * Disconnect the specified object or all objects if the parameter is null.
+         * @return <code>true</code> if the specified receiver exist and can be unregister.
          */
-        function disconnectAll():void ;
+        function disconnect( receiver:* = null ):Boolean ;
         
         /**
          * Emit the specified values to the receivers.
@@ -75,11 +76,5 @@ package system.events
          * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
          */
         function hasReceiver( receiver:* ):Boolean ;
-        
-        /**
-         * Returns <code>true</code> if the set of receivers is empty.
-         * @return <code>true</code> if the set of receivers is empty.
-         */
-        function isEmpty():Boolean ;
     }
 }

@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     import system.cli.AllTests;
     import system.comparators.AllTests;
     import system.data.AllTests;
@@ -51,6 +51,7 @@ package system
     import system.process.AllTests;
     import system.reflection.AllTests;
     import system.serializers.AllTests;
+    import system.signals.AllTests;
     
     /**
      * TestSuite that runs all the Maashaack tests
@@ -128,6 +129,9 @@ package system
             
             //network
             suite.addTest( system.network.AllTests.suite() );
+            
+            //signals
+            suite.addTest( system.signals.AllTests.suite() );
             
             return suite;
         }

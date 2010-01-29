@@ -35,8 +35,8 @@
 
 package examples 
 {
-    import system.events.FastSignal;
-    import system.events.Signal;
+    import system.signals.FastSignal;
+    import system.signals.Signal;
     
     import flash.display.Sprite;
     

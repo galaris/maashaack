@@ -33,24 +33,23 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.signals 
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.Cloneable;
     import system.data.Iterable;
     import system.data.Iterator;
-    import system.events.samples.ReceiverClass;
+    import system.signals.samples.ReceiverClass;
     
-    public class FastSignalTest extends TestCase 
+    public class InternalSignalTest extends TestCase 
     {
-        public function FastSignalTest(name:String = "")
+        public function InternalSignalTest(name:String = "")
         {
             super(name);
         }
         
-        public var signal:FastSignal ;
+        public var signal:InternalSignal ;
         
         public var receiver1:Function ;
         
@@ -58,7 +57,7 @@ package system.events
         
         public function setUp():void
         {
-            signal = new FastSignal() ;
+            signal = new InternalSignal() ;
             receiver1  = function( message:String ):void 
             { 
                 throw message ;
@@ -78,16 +77,10 @@ package system.events
             assertNotNull( signal , "The constructor failed.") ;
         }
         
-        public function testInherit():void
-        {
-            assertTrue( signal is InternalSignal , "The instance must extends the InternalSignal class.") ;
-        }
-        
         public function testInterfaces():void
         {
-            assertTrue( signal is Cloneable , "The FastSignal class must implements the Cloneable interface.") ;
-            assertTrue( signal is Signal , "The FastSignal class must implements the Broadcaster interface.") ;
-            assertTrue( signal is Iterable , "The FastSignal class must implements the Iterable interface.") ;
+            assertTrue( signal is Signal , "The InternalSignal class must implements the Broadcaster interface.") ;
+            assertTrue( signal is Iterable , "The InternalSignal class must implements the Iterable interface.") ;
         }
         
         public function testNumReceivers():void
@@ -99,16 +92,6 @@ package system.events
             assertEquals( signal.numReceivers , 2 , "03 - length failed.") ;
             signal.connect( receiver2 ) ;
             assertEquals( signal.numReceivers , 2 , "04 - length failed.") ;
-        }
-        
-        public function testClone():void
-        {
-            signal.connect( receiver1 ) ;
-            signal.connect( receiver2 , true ) ;
-            var clone:FastSignal = signal.clone() as FastSignal ;
-            assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.numReceivers , signal.numReceivers, "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.toArray(), signal.toArray() , "03 - clone method failed.") ;
         }
         
         public function testConnect():void
@@ -128,6 +111,13 @@ package system.events
             assertTrue( signal.connect( receiver1 , true ) , "01 - The connect method failed.") ;
             assertFalse( signal.connect( receiver1 , true ) , "02 - The connect method failed.") ;
             assertFalse( signal.connect( receiver1 ) , "03 - The connect method failed.") ;
+        }
+        
+        public function testConnected():void
+        {
+            assertTrue( signal.connected() ) ;
+            signal.connect( receiver1 ) ;
+            assertFalse( signal.connected() ) ;
         }
         
         public function testDisconnect():void
@@ -158,68 +148,12 @@ package system.events
             assertFalse( signal.disconnect( receiver2 ) , "02 - The disconnect method failed.") ;
         }
         
-        public function testEmit():void
-        {
-            signal.connect( receiver1 ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
-        public function testEmitWK():void
-        {
-            signal.connect( receiver1 , true ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
-        public function testEmitReceiver():void
-        {
-            signal.connect( receiver2 ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
-        public function testEmitReceiverWK():void
-        {
-            signal.connect( receiver2 , true ) ;
-            try
-            {
-                signal.emit("hello world") ;
-                fail( "The signal must emit a message" ) ;
-            }
-            catch( message:String )
-            {
-                assertEquals( "hello world" , message ) ;
-            }
-        }
-        
         public function testHas():void
         {
             assertFalse( signal.hasReceiver( receiver1 ) , "01 - The hasReceiver method failed.") ;
             signal.connect( receiver1 ) ;
             assertTrue( signal.hasReceiver( receiver1 ) , "02 - The connect method failed.") ;
-            signal.disconnectAll() ;
+            signal.disconnect() ;
             assertFalse( signal.hasReceiver( receiver1 ) , "03 - The hasReceiver method failed.") ;
             signal.connect( receiver1 , true ) ;
             assertTrue( signal.hasReceiver( receiver1 ) , "04 - The connect method failed.") ;
@@ -232,15 +166,8 @@ package system.events
             assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
             signal.connect( receiver2 ) ;
             assertTrue( signal.hasReceiver( receiver2 ) , "01-02 - The connect method failed.") ;
-            signal.disconnectAll() ;
+            signal.disconnect() ;
             assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
-        }
-        
-        public function testIsEmpty():void
-        {
-            assertTrue( signal.isEmpty() ) ;
-            signal.connect( receiver1 ) ;
-            assertFalse( signal.isEmpty() ) ;
         }
         
         public function testIterator():void

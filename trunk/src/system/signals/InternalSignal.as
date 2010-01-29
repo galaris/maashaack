@@ -34,7 +34,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 */
 
-package system.events
+package system.signals
 {
     import system.data.Iterable;
     import system.data.Iterator;
@@ -51,7 +51,7 @@ package system.events
     {
         /**
          * Creates a new InternalSignal instance.
-         * @param receivers The Array collection of listeners to register in the Signal object.
+         * @param receivers The Array collection of receiver objects to connect with this signal.
          */
         public function InternalSignal( listeners:Array = null )
         {
@@ -105,12 +105,33 @@ package system.events
         }
         
         /**
-         * Disconnect the specified object.
-         * @return <code>true</code> if the specified receiver exist and can be unregister.
+         * Returns <code>true</code> if one or more receivers are connected.
+         * @return <code>true</code> if one or more receivers are connected.
          */
-        public function disconnect( receiver:* ):Boolean
+        public function connected():Boolean
         {
-            if ( receiver is Function || receiver is Receiver )
+            return receivers.isEmpty() ;
+        }
+        
+        /**
+         * Disconnect the specified object or all objects if the parameter is null.
+         * @return <code>true</code> if the disconnection is a success.
+         */
+        public function disconnect( receiver:* = null  ):Boolean
+        {
+            if ( receiver == null )
+            {
+                if ( receivers.size() > 0 )
+                { 
+                    receivers.clear() ;
+                    return true ;
+                }
+                else
+                {
+                    return false ;
+                }
+            }
+            else if ( receiver is Function || receiver is Receiver )
             {
                 if ( receiver is Receiver )
                 {
@@ -138,14 +159,6 @@ package system.events
             {
                 return false ;
             }
-        }
-        
-        /**
-         * Removes all receivers in the set of the signal.
-         */
-        public function disconnectAll():void
-        {
-            receivers.clear() ;
         }
         
         /**
@@ -188,15 +201,6 @@ package system.events
                 }
             }
             return false ;
-        }
-        
-        /**
-         * Returns <code>true</code> if the set of receivers is empty.
-         * @return <code>true</code> if the set of receivers is empty.
-         */
-        public function isEmpty():Boolean
-        {
-            return receivers.isEmpty() ;
         }
         
         /**
