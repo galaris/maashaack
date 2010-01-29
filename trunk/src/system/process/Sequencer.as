@@ -190,7 +190,7 @@ package system.process
         /**
          * Launchs the Sequencer with the first element in the internal Queue of this Sequencer.
          */
-        public override function run(...arguments:Array):void 
+        public override function run( ...arguments:Array ):void 
         {
             if ( _queue.size() > 0 ) 
             {
