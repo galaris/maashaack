@@ -51,11 +51,11 @@ package system.events
     {
         /**
          * Creates a new InternalSignal instance.
-         * @param listeners The Array collection of listeners to register in the Signal object.
+         * @param receivers The Array collection of listeners to register in the Signal object.
          */
         public function InternalSignal( listeners:Array = null )
         {
-            this.listeners = new ArraySet() ;
+            this.receivers = new ArraySet() ;
             if ( listeners != null )
             {
                 var l:int = listeners.length ;
@@ -67,36 +67,36 @@ package system.events
         }
         
         /**
-         * Indicates the number of listeners connected with the Signal object.
+         * Indicates the number of objects connected with the Signal.
          */
-        public function get length():uint
+        public function get numReceivers():uint
         {
-            return listeners.size() ;
+            return receivers.size() ;
         }
         
         /**
-         * Connectes a listener to receive messages.
-         * @param listener The listener to register (a Function reference or a Receiver object).
-         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
-         * @return <code>true</code> If the listener is connected with the signal emitter.
+         * Connects a Function or a Receiver object with the signal.
+         * @param receiver The receiver to connect : a Function reference or a Receiver object.
+         * @param useWeakReference Determines whether the reference to the receiver is strong or weak.
+         * @return <code>true</code> If the receiver is connected with the signal emitter.
          */
-        public function connect( listener:* , useWeakReference:Boolean = false ):Boolean
+        public function connect( receiver:* , useWeakReference:Boolean = false ):Boolean
         {
-            if ( listener is Function || listener is Receiver )
+            if ( receiver is Function || receiver is Receiver )
             {
-                if (listener is Receiver)
+                if (receiver is Receiver)
                 {
-                    listener = ( listener as Receiver ).receive ;
+                    receiver = ( receiver as Receiver ).receive ;
                 }
-                if ( has( listener ) )
+                if ( hasReceiver( receiver ) )
                 {
                     return false ;
                 }
                 if ( useWeakReference )
                 {
-                    listener = new WeakReference( listener ) ;
+                    receiver = new WeakReference( receiver ) ;
                 }
-                return listeners.add( listener ) ;
+                return receivers.add( receiver ) ;
             }
             else
             {
@@ -105,29 +105,29 @@ package system.events
         }
         
         /**
-         * Removes the specified listener.
-         * @return <code>true</code> if the specified listener exist and can be unregister.
+         * Disconnect the specified object.
+         * @return <code>true</code> if the specified receiver exist and can be unregister.
          */
-        public function disconnect( listener:* ):Boolean
+        public function disconnect( receiver:* ):Boolean
         {
-            if ( listener is Function || listener is Receiver )
+            if ( receiver is Function || receiver is Receiver )
             {
-                if ( listener is Receiver )
+                if ( receiver is Receiver )
                 {
-                    listener = ( listener as Receiver ).receive ;
+                    receiver = ( receiver as Receiver ).receive ;
                 }
                 var b:Boolean ;
-                if ( listeners.size() > 0 )
+                if ( receivers.size() > 0 )
                 {
-                    var l:int   = listeners.size() ;
-                    var a:Array = listeners.toArray() ;
+                    var l:int   = receivers.size() ;
+                    var a:Array = receivers.toArray() ;
                     var o:* ;
                     while( --l > -1 )
                     {
                         o = a[l] ;
-                        if ( o == listener || ( o is WeakReference && ( (o as WeakReference).value == listener ) ) )
+                        if ( o == receiver || ( o is WeakReference && ( (o as WeakReference).value == receiver ) ) )
                         {
-                            listeners.remove(o) ;
+                            receivers.remove(o) ;
                             b = true ;
                         }
                     }
@@ -141,15 +141,15 @@ package system.events
         }
         
         /**
-         * Removes all listeners in the set of the dispatcher.
+         * Removes all receivers in the set of the signal.
          */
         public function disconnectAll():void
         {
-            listeners.clear() ;
+            receivers.clear() ;
         }
         
         /**
-         * Emit the specified values to the listeners.
+         * Emit the specified values to the receivers.
          */
         public function emit( ...values:Array ):void
         {
@@ -157,30 +157,30 @@ package system.events
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         * Returns <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
          */
-        public function has( listener:* ):Boolean
+        public function hasReceiver( receiver:* ):Boolean
         {
-            if ( listener is Function || listener is Receiver )
+            if ( receiver is Function || receiver is Receiver )
             {
-                if (listener is Receiver)
+                if (receiver is Receiver)
                 {
-                    listener = ( listener as Receiver ).receive ;
+                    receiver = ( receiver as Receiver ).receive ;
                 }
-                if ( listeners.size() > 0 )
+                if ( receivers.size() > 0 )
                 {
-                    var a:Array = listeners.toArray() ;
+                    var a:Array = receivers.toArray() ;
                     var l:int   = a.length ;
                     var o:* ;
                     while( --l > -1 )
                     {
                         o = a[l] ;
-                        if ( o is WeakReference && (o as WeakReference).value == listener )
+                        if ( o is WeakReference && (o as WeakReference).value == receiver )
                         {
                             return true ;
                         }
-                        else if ( o == listener )
+                        else if ( o == receiver )
                         {
                             return true ;
                         }
@@ -191,17 +191,17 @@ package system.events
         }
         
         /**
-         * Returns <code>true</code> if the set of listeners is empty.
-         * @return <code>true</code> if the set of listeners is empty.
+         * Returns <code>true</code> if the set of receivers is empty.
+         * @return <code>true</code> if the set of receivers is empty.
          */
         public function isEmpty():Boolean
         {
-            return listeners.isEmpty() ;
+            return receivers.isEmpty() ;
         }
         
         /**
-         * Returns the iterator reference of all listeners.
-         * @return the iterator reference of all listeners.
+         * Returns the iterator reference of all receivers.
+         * @return the iterator reference of all receivers.
          */
         public function iterator():Iterator
         {
@@ -209,16 +209,16 @@ package system.events
         }
         
         /**
-         * Returns the Array representation of all listeners.
-         * @return the Array representation of all listeners.
+         * Returns the Array representation of all receivers connected with the signal.
+         * @return the Array representation of all receivers connected with the signal.
          */
         public function toArray():Array
         {
-            if ( listeners.size() > 0 )
+            if ( receivers.size() > 0 )
             {
-                var l:int   = listeners.size() ;
+                var l:int   = receivers.size() ;
                 var r:Array = [] ;
-                var a:Array = listeners.toArray() ;
+                var a:Array = receivers.toArray() ;
                 var o:* ;
                 for( var i:int ; i<l ; i++ )
                 {
@@ -241,8 +241,8 @@ package system.events
         }
         
         /**
-         * The Array representation of all listeners.
+         * The Array representation of all receivers.
          */
-        protected var listeners:Set ;
+        protected var receivers:Set ;
     }
 }

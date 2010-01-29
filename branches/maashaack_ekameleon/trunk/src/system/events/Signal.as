@@ -42,43 +42,43 @@ package system.events
     public interface Signal
     {
         /**
-         * Indicates the number of listeners connected with the Signal object.
+         * Indicates the number of objects connected with the Signal.
          */
-        function get length():uint ;
+        function get numReceivers():uint ;
         
         /**
-         * Connectes a listener to receive messages.
-         * @param listener The listener to register (a Function reference or a Receiver object).
-         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
-         * @return <code>true</code> If the listener is connected with the signal emitter.
+         * Connects a Function or a Receiver object with the signal.
+         * @param receiver The receiver to connect : a Function reference or a Receiver object.
+         * @param useWeakReference Determines whether the reference to the receiver is strong or weak.
+         * @return <code>true</code> If the receiver is connected with the signal emitter.
          */
-        function connect( listener:* , useWeakReference:Boolean = false  ):Boolean ;
+        function connect( receiver:* , useWeakReference:Boolean = false  ):Boolean ;
         
         /**
-         * Disconnects the specified listener.
-         * @return <code>true</code> if the specified listener exist and can be removed.
+         * Disconnect the specified object.
+         * @return <code>true</code> if the specified receiver exist and can be unregister.
          */
-        function disconnect( listener:* ):Boolean ;
+        function disconnect( receiver:* ):Boolean ;
         
         /**
-         * Disconnects all listeners in the set of the dispatcher.
+         * Removes all receivers in the set of the signal.
          */
         function disconnectAll():void ;
         
         /**
-         * Emit the specified values to the listeners.
+         * Emit the specified values to the receivers.
          */
         function emit( ...values:Array ):void ;
         
         /**
-         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         * Returns <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
          */
-        function has( listener:* ):Boolean ;
+        function hasReceiver( receiver:* ):Boolean ;
         
         /**
-         * Returns <code>true</code> if the set of listeners is empty.
-         * @return <code>true</code> if the set of listeners is empty.
+         * Returns <code>true</code> if the set of receivers is empty.
+         * @return <code>true</code> if the set of receivers is empty.
          */
         function isEmpty():Boolean ;
     }

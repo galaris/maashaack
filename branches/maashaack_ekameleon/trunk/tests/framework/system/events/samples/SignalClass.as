@@ -43,12 +43,12 @@ package system.events.samples
             
         }
         
-        public function get length():uint
+        public function get numReceivers():uint
         {
             return 0;
         }
         
-        public function connect(listener:*, useWeakReference:Boolean = false):Boolean
+        public function connect(receiver:*, useWeakReference:Boolean = false):Boolean
         {
             return true;
         }
@@ -58,7 +58,7 @@ package system.events.samples
             throw "disconnectAll" ;
         }
         
-        public function disconnect(listener:*):Boolean
+        public function disconnect(receiver:*):Boolean
         {
             return true ;
         }
@@ -68,7 +68,7 @@ package system.events.samples
             throw "emit" ;
         }
         
-        public function has(listener:*):Boolean
+        public function hasReceiver(receiver:*):Boolean
         {
             return true ;
         }

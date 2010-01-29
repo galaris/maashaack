@@ -76,11 +76,11 @@ package system.events
     {
         /**
          * Creates a new FastSignal instance.
-         * @param listeners The Array collection of listeners to register in the dispatcher.
+         * @param receivers The Array collection of receiver objects to connect with this signal.
          */
-        public function FastSignal( listeners:Array = null )
+        public function FastSignal( receivers:Array = null )
         {
-            super( listeners ) ;
+            super( receivers ) ;
         }
         
         /**
@@ -97,28 +97,28 @@ package system.events
          */
         public override function emit( ...values:Array ):void
         {
-            if ( values == null  && listeners.size() == 0 )
+            if ( values == null  && receivers.size() == 0 )
             {
                 return ;
             }
             var removed:Array = [] ;
-            var listener:* ;
-            var a:Array = listeners.toArray() ;
+            var receiver:* ;
+            var a:Array = receivers.toArray() ;
             var l:int   = a.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                listener = a[i] ;
-                if ( listener is WeakReference )
+                receiver = a[i] ;
+                if ( receiver is WeakReference )
                 {
-                    listener = (listener as WeakReference).value ;
-                    if( listener == null )
+                    receiver = (receiver as WeakReference).value ;
+                    if( receiver == null )
                     {
-                        removed.push( listener ) ;
+                        removed.push( receiver ) ;
                     }
                 }
-                if ( listener is Function )
+                if ( receiver is Function )
                 {
-                    (listener as Function).apply( null , values ) ;
+                    (receiver as Function).apply( null , values ) ;
                 }
                 // garbage collector / remove null weak reference
                 if ( removed.length > 0 ) 
@@ -126,7 +126,7 @@ package system.events
                     l = removed.length ;
                     while( --l > -1 )
                     {
-                        listeners.remove(removed[l]) ;
+                        receivers.remove( removed[l] ) ;
                     }
                 }
             }
