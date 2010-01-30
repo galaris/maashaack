@@ -51,19 +51,6 @@ package examples
         {
             var signal:Signal = new FastSignal() ;
             
-            signal.connect( write0 , 0 , true ) ;
-            signal.connect( write1 , 1 ) ;
-            signal.connect( write2 , 99 , true ) ;
-            
-            trace( signal.connected() ) ;
-            
-            signal.emit( "hello world" ) ;
-            signal.emit( "thank you" ) ;
-            
-            signal.disconnect( write1 ) ;
-            
-            trace( signal.connected() ) ;
-            
             signal.connect( write0 ) ;
             signal.connect( write1 ) ;
             signal.connect( write2 ) ;
@@ -72,7 +59,20 @@ package examples
             
             signal.disconnect() ; // disconnect all
             
-            trace( signal.connected() ) ;
+            trace( "connected : " + signal.connected() ) ;
+            
+            signal.connect( write0 , 0 , true ) ;
+            signal.connect( write1 , 1 ) ;
+            signal.connect( write2 , 99 , true ) ;
+            
+            trace( "connected : " + signal.connected() ) ;
+            
+            signal.emit( "hello world" ) ;
+            signal.emit( "thank you" ) ;
+            
+            signal.disconnect( write1 ) ;
+            
+            trace( "connected : " + signal.connected() ) ;
         }
         
         public function write0( message:String ):void
