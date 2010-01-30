@@ -36,9 +36,9 @@
 package system.events 
 {
     import system.Cloneable;
-    
+
     import flash.events.Event;
-    
+
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      * <p><b>Example :</b></p>
@@ -113,22 +113,41 @@ package system.events
          * Sends an Event Object to each object in the list of listeners.
          * When the Event is received by the listening object, Flash Player attempts to invoke a function of the same name on the Event.type property.
          */
-        public function dispatch( e:Event ):void 
+        public function dispatch( event:Event ):void 
         {
-            if ( e == null || listeners.length == 0 )
+            if ( event == null || listeners.length == 0 )
             {
                 return ;
             }
-            var listener:* ;
-            var t:String = e.type ;
+            var o:* ;
+            var e:BroadcasterEntry ;
+            var t:String = event.type ;
+            var r:Array = [] ;
             var a:Array = [].concat( listeners ) ;
             var l:int   = a.length ;
             for ( var i:int ; i < l ; i++ ) 
             {
-                listener = a[i] ;
-                if ( listener != null && t in listener && listener[t] is Function )
+                e = a[i] as BroadcasterEntry ;
+                o = e.listener ;
+                if ( o != null && t in o && o[t] is Function )
                 {
-                    listener[t].call( listener , e ) ;
+                    o[t].call( o , event ) ;
+                    if ( e.autoRemove )
+                    {
+                        r.push( e ) ;
+                    }
+                }
+            }
+            if ( r.length > 0 )
+            {
+                l = r.length ;
+                while( --l > -1 )
+                {
+                    i = listeners.indexOf( r[l] ) ;
+                    if ( i > -1 )
+                    {
+                        listeners.splice( i , 1 ) ;
+                    }
                 }
             }
         }

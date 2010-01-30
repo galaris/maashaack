@@ -35,6 +35,8 @@
 
 package system.events 
 {
+    import system.comparators.PriorityComparator;
+
     /**
      * This class provides a basic implementation of the Broadcaster interface.
      */
@@ -68,17 +70,20 @@ package system.events
         /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
+         * @param priority Determinates the priority level of the listener.
+         * @param autoRemove Apply a removeListener after the first trigger
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        public function addListener( listener:* ):Boolean
+        public function addListener( listener:* , priority:uint = 0 , autoRemove:Boolean = false ):Boolean
         {
-            if ( listener == null || listeners.indexOf( listener ) > -1 )
+            if ( listener == null || hasListener( listener ) )
             {
                 return false ;
             }
             else
             {
-                listeners.push( listener ) ;
+                listeners.push( new BroadcasterEntry( listener , priority , autoRemove ) ) ;
+                listeners.sort( _comparator.compare ) ; 
                 return true ;
             }
         }
@@ -99,7 +104,21 @@ package system.events
          */
         public function hasListener( listener:* ):Boolean
         {
-            return listeners.indexOf( listener ) > -1 ;
+            if ( listener )
+            {
+                if ( listeners.length > 0 )
+                {
+                    var l:int = listeners.length ;
+                    while( --l > -1 )
+                    {
+                        if ( ( listeners[l] as BroadcasterEntry ).listener == listener )
+                        {
+                            return true ;
+                        }
+                    }
+                }
+            }
+            return false ;
         }
         
         /**
@@ -132,7 +151,7 @@ package system.events
                 var l:int = listeners.length ;
                 while( --l > -1 )
                 {
-                    o = listeners[l] ;
+                    o = (listeners[l] as BroadcasterEntry).listener ;
                     if ( o == listener )
                     {
                         listeners.splice( l , 1 ) ;
@@ -149,12 +168,26 @@ package system.events
          */
         public function toArray():Array
         {
-            return [].concat( listeners ) ;
+            var r:Array = [] ;
+            if ( listeners.length > 0 )
+            {
+                var l:int = listeners.length ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    r[i] = ( listeners[i] as BroadcasterEntry ).listener ;
+                }
+            }
+            return r ;
         }
         
         /**
          * The Array representation of all listeners.
          */
         protected var listeners:Array ;
+        
+        /**
+         * @private
+         */
+        private static const _comparator:PriorityComparator = new PriorityComparator() ; 
     }
 }
