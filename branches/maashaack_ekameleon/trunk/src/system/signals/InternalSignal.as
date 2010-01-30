@@ -87,7 +87,7 @@ package system.signals
                 {
                     return false ;
                 }
-                receivers.push( new SignalEntry( receiver , priority , autoDisconnect ) ) ;
+                receivers[ receivers.length ] = new SignalEntry( receiver , priority , autoDisconnect ) ;
                 receivers.sort( _comparator.compare ) ; 
                 return true ;
             }

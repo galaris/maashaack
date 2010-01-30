@@ -105,13 +105,12 @@ package system.signals
             var r:Array = [] ;
             var a:Array = [].concat( receivers ) ;
             var e:SignalEntry ;
-            for ( i = 0 ; i<l ; i++ ) 
+            for ( i = 0 ; i < l ; i++ ) 
             {
                 e = a[i] as SignalEntry ;
-                e.receiver.apply( null , values ) ;
                 if ( e.auto )
                 {
-                    r.push( e ) ;
+                    r[ r.length ] = e  ;
                 }
             }
             if ( r.length > 0 )
@@ -125,6 +124,11 @@ package system.signals
                         receivers.splice( i , 1 ) ;
                     }
                 }
+            }
+            l = a.length ;
+            for ( i = 0 ; i<l ; i++ ) 
+            {
+                (a[i] as SignalEntry).receiver.apply( null , values ) ;
             }
         }
     }
