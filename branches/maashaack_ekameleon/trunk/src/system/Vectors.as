@@ -37,30 +37,24 @@ package system
 {
     import flash.system.ApplicationDomain;
     import flash.utils.getQualifiedClassName;
-    
+
     /**
      * A static class for Vectors utilities.
      */
     public class Vectors 
     {
         /**
-         * @private
-         */
-        private static const VECTOR_CLASS_NAME:String = getQualifiedClassName( Vector );
-        
-        /**
          * Creates a new dynamic Vector object with the specified arguments.
          * @return a new dynamic Vector object with the specified arguments.
          */
-        public static function create( clazz:Class, length:uint = 0 , fixed:Boolean = false , applicationDomain:ApplicationDomain = null ):Vector.<*>
+        public static function create( clazz:Class, length:uint = 0 , fixed:Boolean = false , applicationDomain:ApplicationDomain = null ):*
         {
             var def:Class = getVectorDefinition( clazz , applicationDomain ) as Class ;
             if ( def == null )
             {
                 return null ;
             }
-            var v:* = new def( length , fixed ) ;
-            return v ;
+            return new def( length , fixed ) ;
         }
         
         /**
@@ -102,5 +96,10 @@ package system
             }
             return ar ;
         }
+        
+        /**
+         * @private
+         */
+        private static const VECTOR_CLASS_NAME:String = "__AS3__.vec::Vector" ;
     }
 }
