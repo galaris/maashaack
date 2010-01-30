@@ -54,18 +54,22 @@ package system.events
         
         public var listener2:MockCallback ;
         
+        public var listener3:MockCallback ;
+        
         public function setUp():void
         {
             broadcaster = new MessageBroadcaster() ;
-            listener1  = new MockCallback() ;
-            listener2  = new MockCallback() ;
+            listener1  = new MockCallback("listener1") ;
+            listener2  = new MockCallback("listener2") ;
+            listener3  = new MockCallback("listener3") ;
         }
         
         public function tearDown():void
         {
             broadcaster = null ;
-            listener1  = null ;
-            listener2  = null ;
+            listener1   = null ;
+            listener2   = null ;
+            listener3   = null ;
         }
         
         public function testConstructor():void
@@ -95,6 +99,19 @@ package system.events
             assertTrue( broadcaster.addListener( listener1 ) , "01 - The addListener method failed.") ;
             assertFalse( broadcaster.addListener( listener1 ) , "02 - The addListener method failed.") ;
             assertTrue( broadcaster.addListener( listener2 ) , "03 - The addListener method failed.") ;
+        }
+        
+        public function testAddListenerWithPriority():void
+        {
+            broadcaster.addListener( listener1 , 500 ) ;
+            broadcaster.addListener( listener2 , 999 ) ;
+            broadcaster.addListener( listener3 , 0 ) ;
+            assertEquals( [listener2, listener1, listener3].toString() , broadcaster.toArray().toString() ) ;
+            broadcaster.removeListener() ;
+            broadcaster.addListener( listener1 , 400 ) ;
+            broadcaster.addListener( listener2 , 200 ) ;
+            broadcaster.addListener( listener3 , 999 ) ;
+            assertEquals( [listener3, listener1, listener2].toString() , broadcaster.toArray().toString() ) ;
         }
         
         public function testBroadcastMessage():void

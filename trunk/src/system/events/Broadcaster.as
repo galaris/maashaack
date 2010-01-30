@@ -48,9 +48,11 @@ package system.events
         /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
+         * @param priority Determinates the priority level of the listener.
+         * @param autoRemove Apply a removeListener after the first trigger
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        function addListener( listener:* ):Boolean ;
+        function addListener( listener:* , priority:uint = 0 , autoRemove:Boolean = false ):Boolean ;
         
         /**
          * Broadcast the specified message.

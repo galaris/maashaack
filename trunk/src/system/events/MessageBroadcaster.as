@@ -36,7 +36,7 @@
 package system.events 
 {
     import system.Cloneable;
-    
+
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
      * <p><b>Example :</b></p>
@@ -86,17 +86,36 @@ package system.events
             {
                 return false ;
             }
-            var listener:* ;
+            var o:* ;
             var b:Boolean ;
+            var e:BroadcasterEntry ;
+            var r:Array = [] ;
             var a:Array = [].concat( listeners ) ;
             var l:int = a.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                listener = a[i] ;
-                if ( listener != null && message in listener && listener[message] is Function )
+                e = a[i] as BroadcasterEntry ;
+                o = e.listener ;
+                if ( o != null && message in o && o[message] is Function )
                 {
-                    listener[message].apply( listener , rest ) ;
+                    o[message].apply( o , rest ) ;
                     b = true ;
+                    if ( e.autoRemove )
+                    {
+                        r.push( e ) ;
+                    }
+                }
+            }
+            if ( r.length > 0 )
+            {
+                l = r.length ;
+                while( --l > -1 )
+                {
+                    i = listeners.indexOf( r[l] ) ;
+                    if ( i > -1 )
+                    {
+                        listeners.splice( i , 1 ) ;
+                    }
                 }
             }
             return b ;

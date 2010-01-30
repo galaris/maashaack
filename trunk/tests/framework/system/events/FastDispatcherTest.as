@@ -56,18 +56,21 @@ package system.events
         
         public var listener2:MockListener ;
         
+        public var listener3:MockListener ;
+        
         public function setUp():void
         {
             dispatcher = new FastDispatcher() ;
-            listener1  = new MockListener() ;
-            listener2  = new MockListener() ;
+            listener1  = new MockListener("listener1") ;
+            listener2  = new MockListener("listener2") ;
+            listener3  = new MockListener("listener3") ;
         }
         
         public function tearDown():void
         {
             dispatcher = null ;
             listener1  = null ;
-            listener2  = null ;
+            listener2  = null ;            listener3  = null ;
         }
         
         public function testConstructor():void
@@ -97,6 +100,19 @@ package system.events
             assertTrue( dispatcher.addListener( listener1 ) , "01 - The addListener method failed.") ;
             assertFalse( dispatcher.addListener( listener1 ) , "02 - The addListener method failed.") ;
             assertTrue( dispatcher.addListener( listener2 ) , "03 - The addListener method failed.") ;
+        }
+        
+        public function testAddListenerWithPriority():void
+        {
+            dispatcher.addListener( listener1 , 500 ) ;
+            dispatcher.addListener( listener2 , 999 ) ;
+            dispatcher.addListener( listener3 , 0 ) ;
+            ArrayAssert.assertEquals( [listener2, listener1, listener3] , dispatcher.toArray() ) ;
+            dispatcher.removeListener() ;
+            dispatcher.addListener( listener1 , 400 ) ;
+            dispatcher.addListener( listener2 , 200 ) ;
+            dispatcher.addListener( listener3 , 999 ) ;
+            ArrayAssert.assertEquals( [listener3, listener1, listener2] , dispatcher.toArray() ) ;
         }
         
         public function testBroadcastMessage():void
