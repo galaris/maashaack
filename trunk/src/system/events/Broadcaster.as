@@ -41,17 +41,16 @@ package system.events
     public interface Broadcaster
     {
         /**
-         * Indicates the number of listeners connected with the Signal object.
+         * Indicates the number of listeners registered in the Broadcaster object.
          */
-        function get length():uint ;
+        function get numListeners():uint ;
         
         /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
-         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        function addListener( listener:* , useWeakReference:Boolean = false ):Boolean ;
+        function addListener( listener:* ):Boolean ;
         
         /**
          * Broadcast the specified message.
@@ -59,8 +58,8 @@ package system.events
         function broadcastMessage( message:String , ...rest:Array ):* ;
         
         /**
-         * Returns <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
-         * @return <code class="prettyprint">true</code> if this dispatcher contains the specified listener.
+         * Returns <code class="prettyprint">true</code> if this broadcaster contains the specified listener.
+         * @return <code class="prettyprint">true</code> if this broadcaster contains the specified listener.
          */
         function hasListener( listener:* ):Boolean ;
         
@@ -71,14 +70,9 @@ package system.events
         function isEmpty():Boolean ;
         
         /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        function removeAllListeners():void ;
-        
-        /**
-         * Removes the specified listener.
+         * Removes the specified listener or all listeners if the parameter is null.
          * @return <code>true</code> if the specified listener exist and can be removed.
          */
-        function removeListener( listener:* ):Boolean ;
+        function removeListener( listener:* = null ):Boolean ;
     }
 }

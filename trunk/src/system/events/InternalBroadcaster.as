@@ -35,25 +35,18 @@
 
 package system.events 
 {
-    import system.data.Iterable;
-    import system.data.Iterator;
-    import system.data.Set;
-    import system.data.WeakReference;
-    import system.data.iterators.ArrayIterator;
-    import system.data.sets.ArraySet;
-    
     /**
      * This class provides a basic implementation of the Broadcaster interface.
      */
-    public class InternalBroadcaster implements Broadcaster, Iterable
+    public class InternalBroadcaster implements Broadcaster
     {
         /**
          * Creates a new InternalBroadcaster instance.
-         * @param listeners The Array collection of listeners to register in the dispatcher.
+         * @param listeners The Array collection of listeners to initialize in the broadcaster.
          */
         public function InternalBroadcaster( listeners:Array = null ) 
         {
-            this.listeners = new ArraySet() ;
+            this.listeners = [] ;
             if ( listeners != null )
             {
                 var l:int = listeners.length ;
@@ -67,55 +60,33 @@ package system.events
         /**
          * Indicates the number of listeners registered in the Broadcaster.
          */
-        public function get length():uint
+        public function get numListeners():uint
         {
-            return listeners.size() ;
+            return listeners.length ;
         }
         
         /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
-         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
+        public function addListener( listener:* ):Boolean
         {
-            if ( listener == null )
+            if ( listener == null || listeners.indexOf( listener ) > -1 )
             {
                 return false ;
             }
-            if ( listeners.size() > 0 )
+            else
             {
-                var a:Array = listeners.toArray() ;
-                var l:int   = a.length ;
-                var o:* ;
-                while( --l > -1 )
-                {
-                    o = a[l] ;
-                    if ( o is WeakReference && (o as WeakReference).value == listener)
-                    {
-                        if ( !useWeakReference )
-                        {
-                            a[l] = listener ; 
-                            return true ;
-                        }
-                        return false ;
-                    }
-                    else if ( o == listener )
-                    {
-                        return false ;
-                    }
-                }
+                listeners.push( listener ) ;
+                return true ;
             }
-            if ( useWeakReference )
-            {
-                listener = new WeakReference( listener ) ;
-            }
-            return listeners.add( listener ) ;
         }
         
         /**
          * Broadcast the specified message.
+         * @param message The message to broadcast.
+         * @param ...rest Optional parameters passed in with the broadcast message.
          */
         public function broadcastMessage( message:String , ...rest:Array ):*
         {
@@ -128,7 +99,7 @@ package system.events
          */
         public function hasListener( listener:* ):Boolean
         {
-            return toArray().indexOf( listener ) > -1 ;
+            return listeners.indexOf( listener ) > -1 ;
         }
         
         /**
@@ -137,48 +108,34 @@ package system.events
          */
         public function isEmpty():Boolean
         {
-            return listeners.isEmpty() ;
+            return listeners.length == 0 ;
         }
         
         /**
-         * Returns the iterator reference of all listeners.
-         * @return the iterator reference of all listeners.
+         * Removes the specified listener or all listeners if the parameter is null.
+         * @return <code>true</code> if the specified listener exist and can be removed.
          */
-        public function iterator():Iterator
-        {
-            return new ArrayIterator( toArray() ) ;
-        }
-        
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            listeners.clear() ;
-        }
-        
-        /**
-         * Removes the specified listener.
-         * @return <code>true</code> if the specified listener exist and can be unregister.
-         */
-        public function removeListener( listener:* ):Boolean
+        public function removeListener( listener:* = null ):Boolean
         {
             if ( listener == null )
             {
-                return false ;
+                if ( listeners.length > 0 )
+                {
+                    listeners = [] ;
+                    return true ; 
+                }
             }
             var b:Boolean ;
-            if ( listeners.size() > 0 )
+            if ( listener && listeners.length > 0 )
             {
-                var l:int   = listeners.size() ;
-                var a:Array = listeners.toArray() ;
                 var o:* ;
+                var l:int = listeners.length ;
                 while( --l > -1 )
                 {
-                    o = a[l] ;
-                    if ( o == listener || ( o is WeakReference && ( (o as WeakReference).value == listener ) ) )
+                    o = listeners[l] ;
+                    if ( o == listener )
                     {
-                        listeners.remove(o) ;
+                        listeners.splice( l , 1 ) ;
                         b = true ;
                     }
                 }
@@ -192,35 +149,12 @@ package system.events
          */
         public function toArray():Array
         {
-            if ( listeners.size() > 0 )
-            {
-                var l:int   = listeners.size() ;
-                var r:Array = [] ;
-                var a:Array = listeners.toArray() ;
-                var o:* ;
-                for( var i:int ; i<l ; i++ )
-                {
-                    o = a[i] ;
-                    if ( o is WeakReference )
-                    {
-                        r.push( (o as WeakReference).value ) ;
-                    }
-                    else
-                    {
-                        r.push( o ) ;
-                    }
-                }
-                return r ;
-            }
-            else
-            {
-                return [] ;
-            }
+            return [].concat( listeners ) ;
         }
         
         /**
          * The Array representation of all listeners.
          */
-        protected var listeners:Set ;
+        protected var listeners:Array ;
     }
 }

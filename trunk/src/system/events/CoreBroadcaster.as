@@ -38,7 +38,7 @@ package system.events
     import system.Cloneable;
     import system.events.Broadcaster;
     import system.process.Lockable;
-
+    
     /**
      * This basic class is used to create concrete <code class="prettyprint">Broadcaster</code> implementations. 
      * This class used composition with an internal <code class="prettyprint">Broadcaster</code> object, by default a MessageBroadcaster reference.
@@ -63,22 +63,21 @@ package system.events
         }
         
         /**
-         * Indicates the number of listeners registered in the dispatcher.
+         * Indicates the number of listeners registered in the broadcaster.
          */
-        public function get length():uint
+        public function get numListeners():uint
         {
-            return _broadcaster.length ;
+            return _broadcaster.numListeners ;
         }
         
         /**
          * Registers an object to receive messages.
          * @param listener The listener to register.
-         * @param useWeakReference Determines whether the reference to the listener is strong or weak.
          * @return <code>true</code> If the listener is register in the broadcaster.
          */
-        public function addListener(listener:*, useWeakReference:Boolean = false):Boolean
+        public function addListener( listener:* ):Boolean
         {
-            return _broadcaster.addListener( listener , useWeakReference ) ;
+            return _broadcaster.addListener( listener ) ;
         }
         
         /**
@@ -134,18 +133,10 @@ package system.events
         }
         
         /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            _broadcaster.removeAllListeners() ;
-        }
-        
-        /**
-         * Removes the specified listener.
+         * Removes the specified listener or all listeners if the parameter is null.
          * @return <code>true</code> if the specified listener exist and can be removed.
          */
-        public function removeListener(listener:*):Boolean
+        public function removeListener( listener:* = null ):Boolean
         {
             return _broadcaster.removeListener( listener ) ;
         }

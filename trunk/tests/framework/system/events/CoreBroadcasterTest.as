@@ -106,7 +106,7 @@ package system.events
             assertTrue( broadcaster.isEmpty() ) ;
             broadcaster.addListener( listener ) ;
             assertFalse( broadcaster.isEmpty() ) ;
-            broadcaster.removeAllListeners() ;
+            broadcaster.removeListener() ;
             assertTrue( broadcaster.isEmpty() ) ;
         }
         
@@ -126,10 +126,10 @@ package system.events
             assertFalse( broadcaster.isLocked() ) ;
         }
         
-        public function testRemoveAllListeners():void
+        public function testRemoveListenerWithNullArgument():void
         {
             broadcaster.addListener( listener ) ;
-            broadcaster.removeAllListeners() ;
+            broadcaster.removeListener() ;
             assertTrue( broadcaster.isEmpty() ) ;
         }
         
