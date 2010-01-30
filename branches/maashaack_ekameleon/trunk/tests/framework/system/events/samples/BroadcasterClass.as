@@ -44,17 +44,14 @@ package system.events.samples
             //
         }
         
-        /**
-         * Indicates the number of listeners connected with the Broadcaster object.
-         */
-        public function get length():uint
+        public function get numListeners():uint
         {
             return 0 ;
         }
         
-        public function addListener( listener:* , useWeakReference:Boolean = false ):Boolean
+        public function addListener( listener:* ):Boolean
         {
-            return listener != null && useWeakReference ;
+            return listener != null ;
         }
         
         public function broadcastMessage( message:String, ...rest:Array ):*
@@ -72,15 +69,7 @@ package system.events.samples
             return true ;
         }
         
-        /**
-         * Removes all listeners in the set of the dispatcher.
-         */
-        public function removeAllListeners():void
-        {
-            throw new Error("removeAllListeners") ;
-        }
-        
-        public function removeListener( listener:* ):Boolean
+        public function removeListener( listener:* = null ):Boolean
         {
             return listener != null;
         }

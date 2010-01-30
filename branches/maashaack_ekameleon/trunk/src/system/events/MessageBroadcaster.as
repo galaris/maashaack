@@ -36,7 +36,6 @@
 package system.events 
 {
     import system.Cloneable;
-    import system.data.WeakReference;
     
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
@@ -83,38 +82,21 @@ package system.events
          */
         public override function broadcastMessage( message:String , ...rest:Array ):*
         {
-            if ( message == null && listeners.size() == 0 )
+            if ( message == null || listeners.length == 0 )
             {
                 return false ;
             }
-            var removed:Array = [] ;
             var listener:* ;
             var b:Boolean ;
-            var a:Array = listeners.toArray() ;
-            var l:int   = a.length ;
+            var a:Array = [].concat( listeners ) ;
+            var l:int = a.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
                 listener = a[i] ;
-                if ( listener is WeakReference )
-                {
-                    listener = (listener as WeakReference).value ;
-                    if( listener == null )
-                    {
-                        removed.push( listener ) ;
-                    }
-                }
                 if ( listener != null && message in listener && listener[message] is Function )
                 {
                     listener[message].apply( listener , rest ) ;
                     b = true ;
-                }
-                if ( removed.length > 0 ) // clean all null weak references
-                {
-                    l = removed.length ;
-                    while( --l > -1 )
-                    {
-                        listeners.remove(removed[l]) ;
-                    }
                 }
             }
             return b ;

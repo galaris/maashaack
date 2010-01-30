@@ -37,14 +37,12 @@ package system.events
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.Cloneable;
-    import system.data.Iterable;
-    import system.data.Iterator;
     import system.events.mocks.MockListener;
-    
+
     import flash.events.Event;
-    
+
     public class FastDispatcherTest extends TestCase 
     {
         public function FastDispatcherTest(name:String = "")
@@ -81,18 +79,17 @@ package system.events
         {
             assertTrue( dispatcher is Broadcaster , "The FastDispatcher class must implements the Broadcaster interface.") ;
             assertTrue( dispatcher is Cloneable   , "The FastDispatcher class must implements the Cloneable interface.") ;
-            assertTrue( dispatcher is Iterable    , "The FastDispatcher class must implements the Iterable interface.") ;
         }
         
-        public function testLength():void
+        public function testNumListeners():void
         {
-            assertEquals( dispatcher.length , 0 , "01 - length failed.") ;
+            assertEquals( dispatcher.numListeners , 0 , "01 - numListeners failed.") ;
             dispatcher.addListener( listener1 ) ;
-            assertEquals( dispatcher.length , 1 , "02 - length failed.") ;
+            assertEquals( dispatcher.numListeners , 1 , "02 - numListeners failed.") ;
             dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.length , 2 , "03 - length failed.") ;
+            assertEquals( dispatcher.numListeners , 2 , "03 - numListeners failed.") ;
             dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.length , 2 , "04 - length failed.") ;
+            assertEquals( dispatcher.numListeners , 2 , "04 - numListeners failed.") ;
         }
         
         public function testAddListener():void
@@ -115,10 +112,10 @@ package system.events
         public function testClone():void
         {
             dispatcher.addListener( listener1 ) ;
-            dispatcher.addListener( listener2 , true ) ;
+            dispatcher.addListener( listener2 ) ;
             var clone:FastDispatcher = dispatcher.clone() as FastDispatcher ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.length , dispatcher.length, "02 - clone method failed.") ;
+            assertEquals( clone.numListeners , dispatcher.numListeners, "02 - clone method failed.") ;
             ArrayAssert.assertEquals(clone.toArray(), dispatcher.toArray() , "03 - clone method failed.") ;
         }
         
@@ -144,25 +141,12 @@ package system.events
             assertFalse( dispatcher.isEmpty() , "02 - isEmpty failed.") ;
         }
         
-        public function testIterator():void
+        public function testRemoveListenerWithNullArgument():void
         {
             dispatcher.addListener( listener1 ) ;
             dispatcher.addListener( listener2 ) ;
-            var it:Iterator = dispatcher.iterator() ;
-            assertNotNull( it , "01 - iterator failed.") ;
-            assertTrue( it.hasNext() , "02-01 - iterator failed.") ;
-            assertEquals( it.next() , listener1 , "02-02 - iterator failed.") ;
-            assertTrue( it.hasNext() , "03-01 - iterator failed.") ;
-            assertEquals( it.next() , listener2 , "03-02 - iterator failed.") ;
-            assertFalse( it.hasNext() , "04 - iterator failed.") ;
-        }
-        
-        public function testRemoveAllListeners():void
-        {
-            dispatcher.addListener( listener1 ) ;
-            dispatcher.addListener( listener2 ) ;
-            dispatcher.removeAllListeners() ;
-            assertTrue( dispatcher.isEmpty() , "removeAllListeners failed.") ;
+            dispatcher.removeListener() ;
+            assertTrue( dispatcher.isEmpty() ) ;
         }
         
         public function testRemoveListener():void
@@ -171,7 +155,7 @@ package system.events
             dispatcher.addListener( listener2 ) ;
             
             assertTrue( dispatcher.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( dispatcher.length , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( dispatcher.numListeners , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( dispatcher.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }
@@ -180,7 +164,7 @@ package system.events
         {
             dispatcher.addListener( listener1 ) ;
             dispatcher.addListener( listener2 ) ;
-            ArrayAssert.assertEquals([listener1,listener2], dispatcher.toArray() , "getListeners method failed.") ;
+            ArrayAssert.assertEquals([listener1,listener2], dispatcher.toArray() ) ;
         }
     }
 }

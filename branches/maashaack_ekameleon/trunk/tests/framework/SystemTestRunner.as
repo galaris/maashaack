@@ -36,17 +36,18 @@
 package
 {
     import buRRRn.ASTUce.*;
-    
+
     import system.*;
     import system.diagnostics.TextFieldConsole;
-    
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.events.Event;
+    import flash.system.Capabilities;
     import flash.text.TextField;
     import flash.text.TextFormat;
-    
+
     [SWF(width="760", height="800", frameRate="24", backgroundColor="#666666")]
     
     // Compilation arguments :
@@ -89,6 +90,7 @@ package
                 system.AllTests.suite()
             );
             
+            console.writeLine( "FlashPlayer version : " + Capabilities.version ) ;
         }
             
         /**

@@ -37,12 +37,10 @@ package system.events
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.Cloneable;
-    import system.data.Iterable;
-    import system.data.Iterator;
     import system.events.mocks.MockCallback;
-    
+
     public class MessageBroadcasterTest extends TestCase 
     {
         public function MessageBroadcasterTest(name:String = "")
@@ -79,18 +77,17 @@ package system.events
         {
             assertTrue( broadcaster is Broadcaster , "The MessageBroadcaster class must implements the Broadcaster interface.") ;
             assertTrue( broadcaster is Cloneable   , "The MessageBroadcaster class must implements the Cloneable interface.") ;
-            assertTrue( broadcaster is Iterable    , "The MessageBroadcaster class must implements the Iterable interface.") ;
         }
         
-        public function testLength():void
+        public function testNumListeners():void
         {
-            assertEquals( broadcaster.length , 0 , "01 - length failed.") ;
+            assertEquals( broadcaster.numListeners , 0 , "01 - length failed.") ;
             broadcaster.addListener( listener1 ) ;
-            assertEquals( broadcaster.length , 1 , "02 - length failed.") ;
+            assertEquals( broadcaster.numListeners , 1 , "02 - numListeners failed.") ;
             broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.length , 2 , "03 - length failed.") ;
+            assertEquals( broadcaster.numListeners , 2 , "03 - numListeners failed.") ;
             broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.length , 2 , "04 - length failed.") ;
+            assertEquals( broadcaster.numListeners , 2 , "04 - numListeners failed.") ;
         }
         
         public function testAddListener():void
@@ -113,7 +110,7 @@ package system.events
             broadcaster.addListener( listener2 ) ;
             var clone:MessageBroadcaster = broadcaster.clone() as MessageBroadcaster ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.length , broadcaster.length, "02 - clone method failed.") ;
+            assertEquals( clone.numListeners , broadcaster.numListeners, "02 - clone method failed.") ;
             ArrayAssert.assertEquals(clone.toArray(), broadcaster.toArray() , "03 - clone method failed.") ;
         }
         
@@ -131,24 +128,11 @@ package system.events
             assertFalse( broadcaster.isEmpty() , "02 - isEmpty failed.") ;
         }
         
-        public function testIterator():void
+        public function testRemoveListenerWithNullArgument():void
         {
             broadcaster.addListener( listener1 ) ;
             broadcaster.addListener( listener2 ) ;
-            var it:Iterator = broadcaster.iterator() ;
-            assertNotNull( it , "01 - iterator failed.") ;
-            assertTrue( it.hasNext() , "02-01 - iterator failed.") ;
-            assertEquals( it.next() , listener1 , "02-02 - iterator failed.") ;
-            assertTrue( it.hasNext() , "03-01 - iterator failed.") ;
-            assertEquals( it.next() , listener2 , "03-02 - iterator failed.") ;
-            assertFalse( it.hasNext() , "04 - iterator failed.") ;
-        }
-        
-        public function testRemoveAllListeners():void
-        {
-            broadcaster.addListener( listener1 ) ;
-            broadcaster.addListener( listener2 ) ;
-            broadcaster.removeAllListeners() ;
+            broadcaster.removeListener() ;
             assertTrue( broadcaster.isEmpty() , "removeAllListeners failed.") ;
         }
         
@@ -158,7 +142,7 @@ package system.events
             broadcaster.addListener( listener2 ) ;
             
             assertTrue( broadcaster.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( broadcaster.length , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( broadcaster.numListeners , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( broadcaster.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }

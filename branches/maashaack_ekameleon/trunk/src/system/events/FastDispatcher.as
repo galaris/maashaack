@@ -36,10 +36,9 @@
 package system.events 
 {
     import system.Cloneable;
-    import system.data.WeakReference;
-
+    
     import flash.events.Event;
-
+    
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      * <p><b>Example :</b></p>
@@ -87,11 +86,12 @@ package system.events
         
         /**
          * Broadcast the specified message.
-         * @return The reference of the Event dispatched by the dispatcher.
+         * @param message The message to broadcast.
+         * @param ...rest Optional parameters passed in with the broadcast message.
          */
         public override function broadcastMessage( message:String , ...rest:Array ):*
         {
-            if ( message == null && listeners.size() == 0 )
+            if ( message == null || listeners.length == 0 )
             {
                 return null ;
             }
@@ -106,7 +106,7 @@ package system.events
          */
         public function clone():*
         {
-            return new FastDispatcher( listeners.toArray() ) ;
+            return new FastDispatcher( toArray() ) ;
         }
         
         /**
@@ -115,37 +115,20 @@ package system.events
          */
         public function dispatch( e:Event ):void 
         {
-            if ( e == null && listeners.size() == 0 )
+            if ( e == null || listeners.length == 0 )
             {
                 return ;
             }
-            var removed:Array = [] ;
             var listener:* ;
             var t:String = e.type ;
-            var a:Array = listeners.toArray() ;
+            var a:Array = [].concat( listeners ) ;
             var l:int   = a.length ;
-            for ( var i:int ; i<l ; i++ ) 
+            for ( var i:int ; i < l ; i++ ) 
             {
                 listener = a[i] ;
-                if ( listener is WeakReference )
-                {
-                    listener = (listener as WeakReference).value ;
-                    if( listener == null )
-                    {
-                        removed.push( listener ) ;
-                    }
-                }
                 if ( listener != null && t in listener && listener[t] is Function )
                 {
                     listener[t].call( listener , e ) ;
-                }
-                if ( removed.length > 0 ) // clean all null weak references
-                {
-                    l = removed.length ;
-                    while( --l > -1 )
-                    {
-                        listeners.remove(removed[l]) ;
-                    }
                 }
             }
         }
