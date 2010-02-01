@@ -106,7 +106,7 @@ package system.signals
             var i:int ;
             var l:int = receivers.length ;
             var r:Array = [] ;
-            var a:Array = [].concat( receivers ) ;
+            var a:Array = receivers.slice() ;
             var e:SignalEntry ;
             for ( i = 0 ; i < l ; i++ ) 
             {
