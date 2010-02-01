@@ -50,7 +50,7 @@ package system.signals
                 suite.addTestSuite( FastSignalTest ) ;
                 suite.addTestSuite( InternalSignalTest ) ;
                 suite.addTestSuite( ReceiverTest ) ;
-                suite.addTestSuite( SignalTest ) ;
+                suite.addTestSuite( SignalerTest ) ;
             }
             return suite;
         }

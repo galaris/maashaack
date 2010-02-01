@@ -157,7 +157,7 @@ package system.signals
         public function testInterfaces():void
         {
             assertTrue( signal is Cloneable , "The FastSignal class must implements the Cloneable interface.") ;
-            assertTrue( signal is Signal , "The FastSignal class must implements the Broadcaster interface.") ;
+            assertTrue( signal is Signaler , "The FastSignal class must implements the Broadcaster interface.") ;
         }
         
         public function testNumReceivers():void

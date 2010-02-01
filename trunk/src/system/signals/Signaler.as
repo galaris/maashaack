@@ -32,45 +32,49 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package system.signals.samples 
+
+package system.signals 
 {
-    import system.signals.Signal;
-    
-    public class SignalClass implements Signal 
+    /**
+     * Provides an object who communicates by signals 
+     */
+    public interface Signaler
     {
-        public function SignalClass()
-        {
-            
-        }
+        /**
+         * Indicates the number of objects connected with the Signal.
+         */
+        function get numReceivers():uint ;
         
-        public function get numReceivers():uint
-        {
-            return 0;
-        }
+        /**
+         * Connects a Function or a Receiver object with the signal.
+         * @param receiver The receiver to connect : a Function reference or a Receiver object.
+         * @param priority Determinates the priority level of the receiver.
+         * @param autoDisconnect Apply a disconnect after the first trigger
+         * @return <code>true</code> If the receiver is connected with the signal emitter.
+         */
+        function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean ;
         
-        public function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean
-        {
-            return true;
-        }
+        /**
+         * Returns <code>true</code> if one or more receivers are connected.
+         * @return <code>true</code> if one or more receivers are connected.
+         */
+        function connected():Boolean ;
         
-        public function connected():Boolean
-        {
-            return true ;
-        }
+        /**
+         * Disconnect the specified object or all objects if the parameter is null.
+         * @return <code>true</code> if the specified receiver exist and can be unregister.
+         */
+        function disconnect( receiver:* = null ):Boolean ;
         
-        public function disconnect( receiver:* = null ):Boolean
-        {
-            return true ;
-        }
+        /**
+         * Emit the specified values to the receivers.
+         */
+        function emit( ...values:Array ):void ;
         
-        public function emit(...values:Array):void
-        {
-            throw "emit" ;
-        }
-        
-        public function hasReceiver(receiver:*):Boolean
-        {
-            return true ;
-        }
+        /**
+         * Returns <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         */
+        function hasReceiver( receiver:* ):Boolean ;
     }
 }
