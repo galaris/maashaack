@@ -327,10 +327,11 @@
     
     <!-- system.signals -->
     
-    <component id="system.signals:FastSignal"     class="system.signals.FastSignal" />
     <component id="system.signals:InternalSignal" class="system.signals.InternalSignal" />
     <component id="system.signals:Receiver"       class="system.signals.Receiver" />
     <component id="system.signals:Signal"         class="system.signals.Signal" />
+    <component id="system.signals:SignalEntry"    class="system.signals.SignalEntry" />
+    <component id="system.signals:Signaler"       class="system.signals.Signaler" />
     <component id="system.signals:SignalStrings"  class="system.signals.SignalStrings" />
     
     <!-- system.terminals -->

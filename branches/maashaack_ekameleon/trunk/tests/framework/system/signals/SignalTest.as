@@ -37,18 +37,18 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.Cloneable;
     import system.signals.samples.ReceiverClass;
-
-    public class FastSignalTest extends TestCase 
+    
+    public class SignalTest extends TestCase 
     {
-        public function FastSignalTest(name:String = "")
+        public function SignalTest(name:String = "")
         {
             super(name);
         }
         
-        public var signal:FastSignal ;
+        public var signal:Signal ;
         
         public var receiver1:Function ;
         
@@ -56,12 +56,12 @@ package system.signals
         
         public function setUp():void
         {
-            signal = new FastSignal() ;
-            receiver1  = function( message:String ):void 
+            signal = new Signal() ;
+            receiver1 = function( message:String ):void 
             { 
                 throw message ;
             };
-            receiver2  = new ReceiverClass() ;
+            receiver2 = new ReceiverClass() ;
         }
         
         public function tearDown():void
@@ -78,13 +78,13 @@ package system.signals
         
         public function testConstructorWithTypes():void
         {
-            signal = new FastSignal() ;
+            signal = new Signal() ;
             assertNull( signal.types , "01" ) ;
             
-            signal = new FastSignal([]) ;
+            signal = new Signal([]) ;
             ArrayAssert.assertEquals( [] , signal.types , "02" ) ;
             
-            signal = new FastSignal([String,uint,Number]) ;
+            signal = new Signal([String,uint,Number]) ;
             ArrayAssert.assertEquals( [String,uint,Number] , signal.types , "02" ) ;
         }
         
@@ -92,7 +92,7 @@ package system.signals
         {
             try
             {
-                signal = new FastSignal([String,"hello",Number]) ;
+                signal = new Signal([String,"hello",Number]) ;
                 fail( "The constructor must notify an error with a no valid Class reference in the types Array") ;
             }
             catch( e:Error )
@@ -112,7 +112,7 @@ package system.signals
                 called = true ;
             };
             
-            signal = new FastSignal() ;
+            signal = new Signal() ;
             signal.types = [] ; // no arguments must be use to call the method
             signal.connect( slot ) ;
             signal.emit() ;
@@ -128,7 +128,7 @@ package system.signals
                 called = true ;
             };
             
-            signal = new FastSignal() ;
+            signal = new Signal() ;
             
             signal.types = [] ; // no arguments must be use to call the method
             
@@ -156,8 +156,8 @@ package system.signals
         
         public function testInterfaces():void
         {
-            assertTrue( signal is Cloneable , "The FastSignal class must implements the Cloneable interface.") ;
-            assertTrue( signal is Signaler , "The FastSignal class must implements the Broadcaster interface.") ;
+            assertTrue( signal is Cloneable , "The Signal class must implements the Cloneable interface.") ;
+            assertTrue( signal is Signaler , "The Signal class must implements the Signaler interface.") ;
         }
         
         public function testNumReceivers():void
@@ -175,7 +175,7 @@ package system.signals
         {
             signal.connect( receiver1 ) ;
             signal.connect( receiver2 ) ;
-            var clone:FastSignal = signal.clone() as FastSignal ;
+            var clone:Signal = signal.clone() as Signal ;
             assertNotNull( clone , "01 - clone method failed.") ;
             assertEquals( clone.numReceivers , signal.numReceivers, "02 - clone method failed.") ;
             ArrayAssert.assertEquals(clone.toArray(), signal.toArray() , "03 - clone method failed.") ;

@@ -38,12 +38,11 @@ package system.signals
     import system.Cloneable;
     
     /**
-     * This class provides a fast Signal implementation.
+     * This class provides a fast Signaler implementation.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples 
      * {
-     *     import system.signals.FastSignal ;
      *     import system.signals.Signal ;
      *     
      *     import flash.display.Sprite;
@@ -51,11 +50,11 @@ package system.signals
      *     
      *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
      *     
-     *     public class FastSignalExample extends Sprite
+     *     public class SignalExample extends Sprite
      *     {
-     *         public function FastSignalExample()
+     *         public function SignalExample()
      *         {
-     *             var signal:Signal = new FastSignal() ;
+     *             var signal:Signal = new Signal() ;
      *             
      *             signal.connect( write ) ;
      *             
@@ -71,15 +70,15 @@ package system.signals
      * }
      * </pre>
      */
-    public class FastSignal extends InternalSignal implements Cloneable
+    public class Signal extends InternalSignal implements Cloneable
     {
         /**
-         * Creates a new FastSignal instance.
+         * Creates a new Signal instance.
          * @param types An optional Array who contains any number of class references that enable type checks in the "emit" method. 
          * If this argument is null the "emit" method not check the types of the parameters in the method.
          * @param receivers The Array collection of receiver objects to connect with this signal.
          */
-        public function FastSignal( types:Array = null , receivers:Array = null )
+        public function Signal( types:Array = null , receivers:Array = null )
         {
             super( types , receivers ) ;
         }
@@ -90,11 +89,12 @@ package system.signals
          */
         public function clone():*
         {
-            return new FastSignal( types , toArray() ) ;
+            return new Signal( types , toArray() ) ;
         }
         
         /**
-         * Emit the specified values to the listeners.
+         * Emit the specified values to the receivers.
+         * @param ...values All values to emit to the receivers.
          */
         public override function emit( ...values:Array ):void
         {
