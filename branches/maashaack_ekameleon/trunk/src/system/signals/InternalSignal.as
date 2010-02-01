@@ -42,7 +42,7 @@ package system.signals
      * This core basic class provides all basic methods of the system.events.Signal interface.
      * You must overrides this class and defines the content emit() method.
      */
-    public class InternalSignal implements Signal
+    public class InternalSignal implements Signaler
     {
         /**
          * Creates a new InternalSignal instance.

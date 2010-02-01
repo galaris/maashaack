@@ -37,18 +37,18 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.signals.samples.SignalClass;
+    import system.signals.samples.SignalerClass;
     
-    public class SignalTest extends TestCase 
+    public class SignalerTest extends TestCase 
     {
-        public function SignalTest(name:String = "")
+        public function SignalerTest(name:String = "")
         {
             super( name );
         }
         
         public function testInterface():void
         {
-            var b:Signal = new SignalClass() as Signal ;
+            var b:Signaler = new SignalerClass() as Signaler ;
             assertNotNull( b , "The Signal interface failed." ) ;
         }
     }

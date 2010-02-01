@@ -36,7 +36,7 @@
 package examples 
 {
     import system.signals.FastSignal;
-    import system.signals.Signal;
+    import system.signals.Signaler;
     
     import flash.display.Sprite;
     
@@ -49,7 +49,7 @@ package examples
     {
         public function FastSignal01Example()
         {
-            var signal:Signal = new FastSignal() ;
+            var signal:Signaler = new FastSignal() ;
             
             signal.connect( write ) ;
             

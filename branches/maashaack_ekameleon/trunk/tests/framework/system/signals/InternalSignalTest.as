@@ -72,7 +72,7 @@ package system.signals
         
         public function testInterfaces():void
         {
-            assertTrue( signal is Signal , "The InternalSignal class must implements the Broadcaster interface.") ;
+            assertTrue( signal is Signaler , "The InternalSignal class must implements the Broadcaster interface.") ;
         }
         
         public function testConstructor():void
