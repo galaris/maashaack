@@ -97,7 +97,7 @@ package system.signals
                         throw new ArgumentError( format( SignalStrings.INVALID_TYPES , l , ar[i] ) ) ;
                     }
                 }
-                _types = [].concat( ar ) ;
+                _types = ar.slice() ;
             }
         }
         
