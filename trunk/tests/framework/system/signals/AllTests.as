@@ -47,7 +47,7 @@ package system.signals
             var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
             if( Environment.host.id != HostID.RedTamarin )
             {
-                suite.addTestSuite( FastSignalTest ) ;
+                suite.addTestSuite( SignalTest ) ;
                 suite.addTestSuite( InternalSignalTest ) ;
                 suite.addTestSuite( ReceiverTest ) ;
                 suite.addTestSuite( SignalerTest ) ;

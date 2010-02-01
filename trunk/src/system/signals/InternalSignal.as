@@ -37,7 +37,7 @@ package system.signals
 {
     import system.Reflection;
     import system.comparators.PriorityComparator;
-
+    
     /**
      * This core basic class provides all basic methods of the system.events.Signal interface.
      * You must overrides this class and defines the content emit() method.
@@ -65,7 +65,7 @@ package system.signals
         }
         
         /**
-         * Indicates the number of objects connected with the Signal.
+         * Indicates the number of objects connected.
          */
         public function get numReceivers():uint
         {
@@ -132,7 +132,7 @@ package system.signals
         }
         
         /**
-         * Connects a Function or a Receiver object with the signal.
+         * Connects a Function or a Receiver object.
          * @param receiver The receiver to connect : a Function reference or a Receiver object.
          * @param priority Determinates the priority level of the receiver.
          * @param autoDisconnect Apply a disconnect after the first trigger
@@ -171,7 +171,7 @@ package system.signals
         
         /**
          * Disconnect the specified object or all objects if the parameter is null.
-         * @return <code>true</code> if the disconnection is a success.
+         * @return <code>true</code> if the specified receiver exist and can be unregister.
          */
         public function disconnect( receiver:* = null  ):Boolean
         {
@@ -211,6 +211,7 @@ package system.signals
         
         /**
          * Emit the specified values to the receivers.
+         * @param ...values All values to emit to the receivers.
          */
         public function emit( ...values:Array ):void
         {
@@ -218,8 +219,8 @@ package system.signals
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if this signal contains the specified receiver.
-         * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         * Returns <code class="prettyprint">true</code> if the specified receiver is connected.
+         * @return <code class="prettyprint">true</code> if the specified receiver is connected.
          */
         public function hasReceiver( receiver:* ):Boolean
         {

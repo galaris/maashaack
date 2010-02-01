@@ -36,17 +36,17 @@
 package system.signals 
 {
     /**
-     * Provides an object who communicates by signals 
+     * Provides an object who communicates by signals.
      */
     public interface Signaler
     {
         /**
-         * Indicates the number of objects connected with the Signal.
+         * Indicates the number of objects connected.
          */
         function get numReceivers():uint ;
         
         /**
-         * Connects a Function or a Receiver object with the signal.
+         * Connects a Function or a Receiver object.
          * @param receiver The receiver to connect : a Function reference or a Receiver object.
          * @param priority Determinates the priority level of the receiver.
          * @param autoDisconnect Apply a disconnect after the first trigger
@@ -68,12 +68,13 @@ package system.signals
         
         /**
          * Emit the specified values to the receivers.
+         * @param ...values All values to emit to the receivers.
          */
         function emit( ...values:Array ):void ;
         
         /**
-         * Returns <code class="prettyprint">true</code> if this signal contains the specified receiver.
-         * @return <code class="prettyprint">true</code> if this signal contains the specified receiver.
+         * Returns <code class="prettyprint">true</code> if the specified receiver is connected.
+         * @return <code class="prettyprint">true</code> if the specified receiver is connected.
          */
         function hasReceiver( receiver:* ):Boolean ;
     }

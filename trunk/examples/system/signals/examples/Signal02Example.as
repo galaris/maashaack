@@ -35,7 +35,7 @@
 
 package examples 
 {
-    import system.signals.FastSignal;
+    import system.signals.Signal;
     import system.signals.Signaler;
     
     import flash.display.Sprite;
@@ -43,23 +43,51 @@ package examples
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Example of the FastSignal class.
+     * Example of the Signal class.
      */
-    public class FastSignal01Example extends Sprite 
+    public class Signal02Example extends Sprite 
     {
-        public function FastSignal01Example()
+        public function Signal02Example()
         {
-            var signal:Signaler = new FastSignal() ;
+            var signal:Signaler = new Signal() ;
             
-            signal.connect( write ) ;
+            signal.connect( write0 ) ;
+            signal.connect( write1 ) ;
+            signal.connect( write2 ) ;
+            
+            signal.emit( "hello world" ) ;
+            
+            signal.disconnect() ; // disconnect all
+            
+            trace( "--- connected : " + signal.connected() ) ;
+            
+            signal.connect( write0 , 0 , true ) ;
+            signal.connect( write1 , 1 ) ;
+            signal.connect( write2 , 99 , true ) ;
+            
+            trace( "--- connected : " + signal.connected() ) ;
             
             signal.emit( "hello world" ) ;
             signal.emit( "thank you" ) ;
+            
+            signal.disconnect( write1 ) ;
+            
+            trace( "--- connected : " + signal.connected() ) ;
         }
         
-        public function write( message:String ):void
+        public function write0( message:String ):void
         {
-            trace( message ) ;
+            trace( "write0 : "  + message ) ;
+        }
+        
+        public function write1( message:String ):void
+        {
+            trace( "write1 : "  + message ) ;
+        }
+        
+        public function write2( message:String ):void
+        {
+            trace( "write2 : " + message ) ;
         }
     }
 }
