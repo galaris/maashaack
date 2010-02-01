@@ -331,6 +331,7 @@
     <component id="system.signals:InternalSignal" class="system.signals.InternalSignal" />
     <component id="system.signals:Receiver"       class="system.signals.Receiver" />
     <component id="system.signals:Signal"         class="system.signals.Signal" />
+    <component id="system.signals:SignalStrings"  class="system.signals.SignalStrings" />
     
     <!-- system.terminals -->
     

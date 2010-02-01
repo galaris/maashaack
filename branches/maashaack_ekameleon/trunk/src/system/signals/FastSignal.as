@@ -75,11 +75,13 @@ package system.signals
     {
         /**
          * Creates a new FastSignal instance.
+         * @param types An optional Array who contains any number of class references that enable type checks in the "emit" method. 
+         * If this argument is null the "emit" method not check the types of the parameters in the method.
          * @param receivers The Array collection of receiver objects to connect with this signal.
          */
-        public function FastSignal( receivers:Array = null )
+        public function FastSignal( types:Array = null , receivers:Array = null )
         {
-            super( receivers ) ;
+            super( types , receivers ) ;
         }
         
         /**
@@ -88,7 +90,7 @@ package system.signals
          */
         public function clone():*
         {
-            return new FastSignal( toArray() ) ;
+            return new FastSignal( types , toArray() ) ;
         }
         
         /**
@@ -96,6 +98,7 @@ package system.signals
          */
         public override function emit( ...values:Array ):void
         {
+            checkValues( values ) ;
             if ( receivers.length == 0 )
             {
                 return ;

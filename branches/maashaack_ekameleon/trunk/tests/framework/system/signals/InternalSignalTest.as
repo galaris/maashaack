@@ -37,9 +37,9 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.signals.samples.ReceiverClass;
-
+    
     public class InternalSignalTest extends TestCase 
     {
         public function InternalSignalTest(name:String = "")
@@ -70,14 +70,40 @@ package system.signals
             receiver2 = null ;
         }
         
+        public function testInterfaces():void
+        {
+            assertTrue( signal is Signal , "The InternalSignal class must implements the Broadcaster interface.") ;
+        }
+        
         public function testConstructor():void
         {
             assertNotNull( signal , "The constructor failed.") ;
         }
         
-        public function testInterfaces():void
+        public function testConstructorWithTypes():void
         {
-            assertTrue( signal is Signal , "The InternalSignal class must implements the Broadcaster interface.") ;
+            signal = new InternalSignal() ;
+            assertNull( signal.types , "01" ) ;
+            
+            signal = new InternalSignal([]) ;
+            ArrayAssert.assertEquals( [] , signal.types , "02" ) ;
+            
+            signal = new InternalSignal([String,uint,Number]) ;
+            ArrayAssert.assertEquals( [String,uint,Number] , signal.types , "02" ) ;
+        }
+        
+        public function testConstructorWithBadTypes():void
+        {
+            try
+            {
+                signal = new InternalSignal([String,"hello",Number]) ;
+                fail( "The constructor must notify an error with a no valid Class reference in the types Array") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError ) ;
+                assertEquals( "Invalid types representation, the Array of types failed at index 3 should be a Class but was:\"hello\"." , e.message ) ;
+            }
         }
         
         public function testNumReceivers():void
@@ -89,6 +115,32 @@ package system.signals
             assertEquals( signal.numReceivers , 2 , "03 - numReceivers failed.") ;
             signal.connect( receiver2 ) ;
             assertEquals( signal.numReceivers , 2 , "04 - numReceivers failed.") ;
+        }
+        
+        public function testTypes():void
+        {
+            signal.types = null ;
+            assertNull( signal.types , "01" ) ;
+            
+            signal.types = [] ;
+            ArrayAssert.assertEquals( [] , signal.types , "02" ) ;
+            
+            signal.types = [String,uint,Number] ;
+            ArrayAssert.assertEquals( [String,uint,Number] , signal.types , "03" ) ;
+        }
+        
+        public function testBadTypes():void
+        {
+            try
+            {
+                signal.types = [String,"hello",Number] ;
+                fail( "The constructor must notify an error with a no valid Class reference in the types Array") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError ) ;
+                assertEquals( "Invalid types representation, the Array of types failed at index 3 should be a Class but was:\"hello\"." , e.message ) ;
+            }
         }
         
         public function testConnect():void
