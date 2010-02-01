@@ -181,15 +181,15 @@ package system.data.collections
         /**
          * Returns an iterator over the elements in this collection.
          * @return an iterator over the elements in this collection.
-         */        
+         */
         public function iterator():Iterator
         {
             return _co.iterator();
-        }        
-
+        }
+        
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
-         */        
+         */
         public function remove(o:*):*
         {
             return _co.remove(o);
@@ -202,7 +202,7 @@ package system.data.collections
         public function size():uint
         {
             return _co.size() ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if the specific value is valid.
@@ -226,7 +226,7 @@ package system.data.collections
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
-         */        
+         */
         public function toSource(indent:int = 0):String
         {
             var s:String = "new " + Reflection.getClassPath(this) + "(" ;

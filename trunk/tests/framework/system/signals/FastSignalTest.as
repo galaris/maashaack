@@ -76,6 +76,79 @@ package system.signals
             assertNotNull( signal , "The constructor failed.") ;
         }
         
+        public function testConstructorWithTypes():void
+        {
+            signal = new FastSignal() ;
+            assertNull( signal.types , "01" ) ;
+            
+            signal = new FastSignal([]) ;
+            ArrayAssert.assertEquals( [] , signal.types , "02" ) ;
+            
+            signal = new FastSignal([String,uint,Number]) ;
+            ArrayAssert.assertEquals( [String,uint,Number] , signal.types , "02" ) ;
+        }
+        
+        public function testConstructorWithBadTypes():void
+        {
+            try
+            {
+                signal = new FastSignal([String,"hello",Number]) ;
+                fail( "The constructor must notify an error with a no valid Class reference in the types Array") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError ) ;
+                assertEquals( "Invalid types representation, the Array of types failed at index 3 should be a Class but was:\"hello\"." , e.message ) ;
+            }
+        }
+        
+        ///////////////////
+        
+        public function testTypesEmptyArrayValid():void
+        {
+            var called:Boolean ;
+            var slot:Function = function():void
+            {
+                called = true ;
+            };
+            
+            signal = new FastSignal() ;
+            signal.types = [] ; // no arguments must be use to call the method
+            signal.connect( slot ) ;
+            signal.emit() ;
+            
+            assertTrue( called ) ;
+        }
+        
+        public function testTypesEmptyArrayInvalid():void
+        {
+            var called:Boolean ;
+            var slot:Function = function():void
+            {
+                called = true ;
+            };
+            
+            signal = new FastSignal() ;
+            
+            signal.types = [] ; // no arguments must be use to call the method
+            
+            signal.connect( slot ) ;
+            
+            try
+            {
+                signal.emit( "arg1" ) ;
+                fail( "01 - With one argument the emit method must notify an error" ) ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is ArgumentError , "02 - Must handle an ArgumentError." ) ;
+                assertEquals( "The number of arguments in the emit method is not valid, must be invoked with 0 argument(s) and you call it with 1 argument(s)." , e.message , "03" ) ;
+            }
+        }
+        
+        ///////////////////
+        
+        
         public function testInherit():void
         {
             assertTrue( signal is InternalSignal , "The instance must extends the InternalSignal class.") ;

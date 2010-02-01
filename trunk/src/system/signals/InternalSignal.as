@@ -35,6 +35,7 @@
 
 package system.signals
 {
+    import system.Reflection;
     import system.comparators.PriorityComparator;
 
     /**
@@ -45,11 +46,14 @@ package system.signals
     {
         /**
          * Creates a new InternalSignal instance.
+         * @param types An optional Array who contains any number of class references that enable type checks in the "emit" method. 
+         * If this argument is null the "emit" method not check the types of the parameters in the method.
          * @param receivers The Array collection of receiver objects to connect with this signal.
          */
-        public function InternalSignal( receivers:Array = null )
+        public function InternalSignal( types:Array = null , receivers:Array = null )
         {
             this.receivers = [] ;
+            this.types = types  ;
             if ( receivers != null )
             {
                 var l:int = receivers.length ;
@@ -66,6 +70,65 @@ package system.signals
         public function get numReceivers():uint
         {
             return receivers.length ;
+        }
+        
+        /**
+         * Determinates the optional Array representation of all valid types of this signal. 
+         * If this property is null the signal don't use type validation. 
+         */
+        public function get types():*
+        {
+            return _types ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set types( ar:Array ):void
+        {
+            _types = null ;
+            if ( ar )
+            {
+                var l:int = ar.length ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    if ( !( ar[i] is Class ) )
+                    {
+                        throw new ArgumentError( format( SignalStrings.INVALID_TYPES , l , ar[i] ) ) ;
+                    }
+                }
+                _types = [].concat( ar ) ;
+            }
+        }
+        
+        /**
+         * Checks all values passed-in the emit method.
+         */
+        public function checkValues( values:Array ):void
+        {
+            if ( _types )
+            {
+                if ( values.length == _types.length )
+                {
+                    
+                    var l:int = values.length ;
+                    if ( l == 0 )
+                    {
+                        return ;
+                    }
+                    for( var i:int ; i<l ; i++ )
+                    {
+                        if ( !( values[i] is _types[i] ) )
+                        {
+                            throw new ArgumentError( format( SignalStrings.INVALID_PARAMETER_TYPE , i, _types[i] , Reflection.getClassPath( values[i] ) ) ) ;
+                        }
+                    }
+                }
+                else
+                {
+                     throw new ArgumentError( format( SignalStrings.INVALID_PARAMETERS_LENGTH, _types.length , values.length ) ) ;
+                }
+            }
         }
         
         /**
@@ -202,7 +265,7 @@ package system.signals
                 return [] ;
             }
         }
-        
+         
         /**
          * The Array representation of all receivers.
          */
@@ -211,6 +274,27 @@ package system.signals
         /**
          * @private
          */
-        private static const _comparator:PriorityComparator = new PriorityComparator() ; 
+        internal function format( message:String, ...options:Array ):String
+        {
+            if ( message != null && message.length > 0 )
+            {
+                var len:int = options.length ;
+                for( var i:int ; i<len ; i++ )
+                {
+                    message = message.replace( new RegExp( "\\{" + i + "\\}" , "g" ) , options[i]);
+                }
+            }
+            return message ;
+        }
+        
+        /**
+         * @private
+         */
+        private static const _comparator:PriorityComparator = new PriorityComparator() ;
+        
+        /**
+         * @private
+         */
+        private var _types:Array ;
     }
 }
