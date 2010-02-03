@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2010
+  Portions created by the Initial Developers are Copyright (C) 2006-2009
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -38,41 +38,50 @@ package examples
     import system.events.ActionEvent;
     import system.process.Task;
     
-    import flash.display.Sprite;    
+    import flash.display.Sprite;    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    
     /**
      * Basic example to use the system.process.Task.
      */
     public class TaskExample extends Sprite
     {
-        
         public function TaskExample()
         {
-            var task:Task = new Task() ;
+            task = new Task() ;
             
-            task.startIt = function():void
-            {
-                trace(this + " start task : " + this.running ) ;
-            };
+            // use native W3C event model notifications.
             
-            task.finishIt = function():void
-            {
-                trace(this + " finish task : " + this.running ) ;
-            };
-            
-            task.addEventListener( ActionEvent.START  , debug ) ;
             task.addEventListener( ActionEvent.FINISH , debug ) ;
+            task.addEventListener( ActionEvent.START  , debug ) ;
+            
+            // use signal model notifications.
+            
+            task.finishIt.connect( finish ) ;
+            task.startIt.connect( start )   ;
+            
+            // basic example
             
             task.notifyStarted() ;
             task.run() ; // empty in the Task class must be override.
             task.notifyFinished() ;
-            
         }
+        
+        public var task:Task ;
         
         public function debug( e:ActionEvent ):void 
         {
             trace ( e ) ;
         }
+        
+        public function start():void
+        {
+            trace(this + " start task : " + task.running ) ;
+        }
+        
+        public function finish():void
+        {
+            trace(this + " finish task : " + task.running ) ;
+        };
     }
 }

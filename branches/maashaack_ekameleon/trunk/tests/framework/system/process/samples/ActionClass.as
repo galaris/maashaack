@@ -35,13 +35,25 @@
 
 package system.process.samples 
 {    import system.events.EventDispatcher;
-    import system.process.Action;    
+    import system.process.Action;
+    import system.signals.Signal;
+    import system.signals.Signaler;
 
     public class ActionClass extends EventDispatcher implements Action
     {    
         public function ActionClass()
         {
             //
+        }
+        
+        public function get finishIt():Signaler
+        {
+            return _finishIt ;
+        }
+        
+        public function set finishIt( signal:Signaler ):void
+        {
+            _finishIt = signal ;
         }
         
         /**
@@ -64,29 +76,38 @@ package system.process.samples
         {
             return true ;
         }     
-    
+        
+        public function get startIt():Signaler
+        {
+            return _startIt ;
+        }
+        
+        public function set startIt( signal:Signaler ):void
+        {
+            _startIt = signal ;
+        }
+        
         public function clone():*
         {
             return new ActionClass() ;
         }
-    
+        
         public function notifyFinished():void
         {
             throw new Error("finished") ;
         }
-    
+        
         public function notifyStarted():void
         {
             throw new Error("started") ;
         }
-
+        
         public function run(...arguments:Array):void
         {
             throw new Error("run") ;
         }
         
+        private var _finishIt:Signaler = new Signal() ;
         private var _parent:Action ;
-    
-    }
-    
-    }
+        private var _startIt:Signaler = new Signal() ;
+    }}
