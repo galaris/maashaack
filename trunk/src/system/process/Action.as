@@ -37,7 +37,7 @@ package system.process
 {
     import system.Cloneable;
     import system.events.IEventDispatcher;
-    import system.process.Runnable;
+    import system.signals.Signaler;
     
     /**
      * Dispatched when a process is finished.
@@ -59,6 +59,12 @@ package system.process
     public interface Action extends Cloneable, IEventDispatcher, Runnable
     {
         /**
+         * This signal emit when the notifyFinished method is invoked. 
+         */
+        function get finishIt():Signaler ;
+        function set finishIt( signal:Signaler ):void ;
+        
+        /**
          * Determinates the parent Action reference of the current Action.
          */
         function get parent():Action ;
@@ -72,6 +78,12 @@ package system.process
          * Indicates <code class="prettyprint">true</code> if the action is in progress.
          */
         function get running():Boolean ;
+        
+        /**
+         * This signal emit when the notifyStarted method is invoked. 
+         */
+        function get startIt():Signaler ;
+        function set startIt( signal:Signaler ):void ;
         
         /**
          * Notify an ActionEvent when the process is finished.

@@ -41,6 +41,8 @@ package system.process
     import system.logging.Log;
     import system.logging.Loggable;
     import system.logging.Logger;
+    import system.signals.Signal;
+    import system.signals.Signaler;
     
     /**
      * Dispatched when a process is finished.
@@ -70,6 +72,22 @@ package system.process
         {
             super( global , channel ) ;
             _logger = Log.getLogger( Reflection.getClassPath(this) ) ;
+        }
+        
+        /**
+         * This signal emit when the notifyFinished method is invoked. 
+         */
+        public function get finishIt():Signaler
+        {
+            return _finishIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set finishIt( signal:Signaler ):void
+        {
+            _finishIt = signal || new Signal() ;
         }
         
         /**
@@ -113,6 +131,22 @@ package system.process
         }
         
         /**
+         * This signal emit when the notifyStarted method is invoked. 
+         */
+        public function get startIt():Signaler
+        {
+            return _startIt || new Signal() ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set startIt( signal:Signaler ):void
+        {
+            _startIt = signal ;
+        }
+        
+        /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
          */
@@ -127,7 +161,7 @@ package system.process
         public function notifyFinished():void 
         {
             setRunning( false ) ;
-            this["finishIt"]() ;
+            _finishIt.emit() ;
             if ( hasEventListener( _sTypeFinish ) )
             {
                 dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
@@ -140,7 +174,7 @@ package system.process
         public function notifyStarted():void
         {
             setRunning( true ) ;
-            this["startIt"]() ;
+            _startIt.emit() ;
             if ( hasEventListener( _sTypeStart ) )
             {
                 dispatchEvent( new ActionEvent( _sTypeStart , this ) ) ;
@@ -157,15 +191,6 @@ package system.process
         }
         
         /**
-         * Called in the notifyFinished method.
-         * <p>This method it's special and can be override. In the future can be used in the Sequencer Class to optimiser the process.</p>
-         */
-        prototype.finishIt = function():void
-        {
-            // overrides
-        };
-        
-        /**
          * Changes the running property value.
          */
         protected function setRunning( b:Boolean ):void
@@ -174,13 +199,9 @@ package system.process
         }
         
         /**
-         * Called in the notifyStarted method.
-         * <p>This method it's special and can be override. In the future can be used in the Sequencer Class to optimiser the process.</p>
+         * @private
          */
-        prototype.startIt = function():void
-        {
-            // overrides
-        };
+        private var _finishIt:Signaler = new Signal() ;
         
         /**
          * @private
@@ -196,6 +217,11 @@ package system.process
          * @private
          */
         private var _parent:Action ;
+        
+        /**
+         * @private
+         */
+        private var _startIt:Signaler = new Signal() ;
         
         /**
          * @private

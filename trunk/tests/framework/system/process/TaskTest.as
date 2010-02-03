@@ -42,7 +42,7 @@ package system.process
     import system.events.CoreEventDispatcher;
     import system.logging.Logger;
     import system.process.mocks.MockTaskListener;
-
+    
     public class TaskTest extends TestCase
     {
         public function TaskTest(name:String = "")
@@ -50,36 +50,36 @@ package system.process
             super(name);
         }
         
-        public var action:Task ;
+        public var task:Task ;
         
         public var mockListener:MockTaskListener ;
         
         public function setUp():void
         {
-            action       = new Task() ;
-            mockListener = new MockTaskListener(action) ;
+            task         = new Task() ;
+            mockListener = new MockTaskListener( task ) ;
         }
         
         public function tearDown():void
         {
             mockListener.unregister() ;
             mockListener = undefined  ;
-            action       = undefined  ;
+            task         = undefined  ;
         }
         
         public function testConstructor():void
         {
-            assertNotNull( action , "Task constructor failed, the instance not must be null." ) ;
+            assertNotNull( task , "Task constructor failed, the instance not must be null." ) ;
         }
         
         public function testInherit():void
         {
-            assertTrue( action is CoreEventDispatcher , "Action inherit CoreEventDispatcher failed.") ;
+            assertTrue( task is CoreEventDispatcher , "Action inherit CoreEventDispatcher failed.") ;
         }
         
         public function testInterface():void
         {
-            assertTrue( action is Action , "Task implements the Action interface" ) ;
+            assertTrue( task is Action , "Task implements the Action interface" ) ;
         }
         
         public function testIsDynamic():void
@@ -90,9 +90,9 @@ package system.process
         
         public function testLogger():void
         {
-            var logger:Logger = action.logger ;
+            var logger:Logger = task.logger ;
             assertNotNull( logger , "01 - The logger property of the Task class failed." ) ;
-            assertEquals( logger.channel , Reflection.getClassPath( action ) , "02 - The logger property of the Task class failed." ) ;
+            assertEquals( logger.channel , Reflection.getClassPath( task ) , "02 - The logger property of the Task class failed." ) ;
         }
         
         public function testParent():void
@@ -106,60 +106,73 @@ package system.process
         
         public function testClone():void
         {
-            var clone:Task = action.clone() as Task ;
+            var clone:Task = task.clone() as Task ;
             assertNotNull( clone , "01 - Task clone() failed." ) ;
-            assertFalse( clone == action  , "02 - Task clone() failed." ) ;
-            assertEquals( clone.isGlobal() , action.isGlobal() , "03 - Task clone() failed.") ;
+            assertFalse( clone == task  , "02 - Task clone() failed." ) ;
+            assertEquals( clone.isGlobal() , task.isGlobal() , "03 - Task clone() failed.") ;
         }
         
         public function testRunning():void
         {
-            assertFalse( action.running  , "Action running failed, default property value must be false." ) ;
+            assertFalse( task.running  , "Action running failed, default property value must be false." ) ;
         }
         
         public function testNotifyFinished():void
         {
-            action.notifyFinished() ;
+            task.notifyFinished() ;
             assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.FINISH event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "Action notifyStarted failed, bad type found." );
         }
         
         public function testNotifyStarted():void
         {
-            action.notifyStarted() ;
+            task.notifyStarted() ;
             assertTrue( mockListener.startCalled , "Action notifyStarted failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.startType , ActionEvent.START  , "Action notifyStarted failed, bad type found." );
         }
         
         public function testRun():void
         {
-            assertTrue( "run" in action , "Action run 01 method exist." ) ;
+            assertTrue( "run" in task , "Action run 01 method exist." ) ;
         }
         
         public function testFinishIt():void
         {
             var test:Boolean ;
-            action.finishIt = function():void
+            var action:Function = function():void
             {
                 test = true ;
             };
-            action.notifyFinished() ;
-            assertTrue(test , "The dynamic Action.finishIt method failed.") ;
-            action.finishIt = null ;
-            assertNull( action.finishIt , "The Action.finishIt member must be null.") ;
+            assertFalse( task.finishIt.connected() ) ;
+            task.finishIt.connect( action ) ;
+            assertTrue( task.finishIt.connected() ) ;
+            task.notifyFinished() ;
+            assertTrue( test ) ;
+        }
+        
+        public function tesFinishItRW():void
+        {
+            task.finishIt = null ; 
+            assertNotNull( task.finishIt ) ;
         }
         
         public function testStartIt():void
         {
             var test:Boolean ;
-            action.startIt = function():void
+            var action:Function = function():void
             {
                 test = true ;
             };
-            action.notifyStarted() ;
-            assertTrue(test , "The dynamic Action.startIt method failed.") ;
-            action.startIt = null ;
-            assertNull( action.startIt , "The Action.startIt member must be null.") ;
+            assertFalse( task.startIt.connected() ) ;            task.startIt.connect( action ) ;
+            assertTrue( task.startIt.connected() ) ;
+            task.notifyStarted() ;
+            assertTrue( test ) ;
+        }
+        
+        public function testStartItRW():void
+        {
+            task.startIt = null ; 
+            assertNotNull( task.startIt ) ;
         }
     }
 }
