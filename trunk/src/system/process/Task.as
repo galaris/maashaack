@@ -161,11 +161,11 @@ package system.process
         public function notifyFinished():void 
         {
             setRunning( false ) ;
-            _finishIt.emit() ;
             if ( hasEventListener( _sTypeFinish ) )
             {
                 dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
             }
+            _finishIt.emit() ;
         }
         
         /**
