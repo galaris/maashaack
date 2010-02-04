@@ -37,10 +37,10 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.Cloneable;
     import system.signals.samples.ReceiverClass;
-    
+
     public class SignalTest extends TestCase 
     {
         public function SignalTest(name:String = "")
@@ -76,6 +76,20 @@ package system.signals
             assertNotNull( signal , "The constructor failed.") ;
         }
         
+        
+        public function testInherit():void
+        {
+            assertTrue( signal is InternalSignal , "The instance must extends the InternalSignal class.") ;
+        }
+        
+        public function testInterfaces():void
+        {
+            assertTrue( signal is Cloneable , "The Signal class must implements the Cloneable interface.") ;
+            assertTrue( signal is Signaler , "The Signal class must implements the Signaler interface.") ;
+        }
+        
+        ////////////
+        
         public function testConstructorWithTypes():void
         {
             signal = new Signal() ;
@@ -99,6 +113,38 @@ package system.signals
             {
                 assertTrue( e is ArgumentError ) ;
                 assertEquals( "Invalid types representation, the Array of types failed at index 3 should be a Class but was:\"hello\"." , e.message ) ;
+            }
+        }
+        
+        ///////////////////
+        
+        public function testTypes():void
+        {
+            signal.types = [String] ;
+            signal.connect( receiver1 ) ;
+            try
+            {
+                signal.emit( "hello world" ) ;
+                fail( "The signal must emit a message." ) ;
+            }
+            catch( message:String )
+            {
+                assertEquals( "hello world" , message ) ;
+            }
+        }
+        
+        public function testConstructorOnClassTypes():void
+        {
+            signal = new Signal( [String] ) ;
+            signal.connect( receiver1 ) ;
+            try
+            {
+                signal.emit( "hello world" ) ;
+                fail( "The signal must emit a message." ) ;
+            }
+            catch( message:String )
+            {
+                assertEquals( "hello world" , message ) ;
             }
         }
         
@@ -148,17 +194,7 @@ package system.signals
         
         ///////////////////
         
-        
-        public function testInherit():void
-        {
-            assertTrue( signal is InternalSignal , "The instance must extends the InternalSignal class.") ;
-        }
-        
-        public function testInterfaces():void
-        {
-            assertTrue( signal is Cloneable , "The Signal class must implements the Cloneable interface.") ;
-            assertTrue( signal is Signaler , "The Signal class must implements the Signaler interface.") ;
-        }
+
         
         public function testNumReceivers():void
         {
