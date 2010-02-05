@@ -41,7 +41,9 @@ package examples
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
-    import flash.events.MouseEvent;
+    import flash.events.KeyboardEvent;
+    import flash.ui.Keyboard;
+    import flash.utils.clearTimeout;
     import flash.utils.setTimeout;
     
     /**
@@ -56,52 +58,68 @@ package examples
             stage.align      = StageAlign.TOP_LEFT ;
             stage.scaleMode  = StageScaleMode.NO_SCALE ;
             
-            // target
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             
-            mc               = getChildByName("mc") as MovieClip ;
-            mc.useHandCursor = true ;
-            mc.buttonMode    = true ;
+            // MovieClip target
             
-            mc.addEventListener( MouseEvent.CLICK , click ) ;
-            
-            trace("Click the movieclip to start the example.");
+            movieclip = getChildByName("mc") as MovieClip ;
             
             // timeline script
             
-            var ts:TimelineScript = new TimelineScript( mc , true ) ;
+            timeline = new TimelineScript( movieclip , true ) ;
             
-            ts.put( "begin"   , start ) ;
-            ts.put( "middle"  , pause ) ;
-            ts.put( "finish"  , finish ) ;
-            
+            timeline.put( "start"   , start ) ;
+            timeline.put( "middle"  , pause ) ;
+            timeline.put( "finish"  , finish ) ;
         }
         
-        public var mc:MovieClip ;
+        protected var id:uint ;
+        protected var movieclip:MovieClip ;
+        protected var timeline:TimelineScript ;
         
-        public function click( e:MouseEvent ):void
+        protected function pause():void
         {
-            mc.play() ;
-            trace("click") ;
-            e.target.removeEventListener( MouseEvent.CLICK , click ) ;
-            mc.buttonMode    = false ;
+            trace( "pause" ) ;
+            movieclip.stop() ;
+            if ( id )
+            {
+                clearTimeout( id ) ;
+            }
+            id = setTimeout( movieclip.play , 4000 ) ; // pause 4 s
         }
         
-        public function start():void
+        protected function finish():void
         {
-            trace("start") ;
+            trace( "finish" ) ;
+            movieclip.stop() ;
         }
         
-        public function pause():void
+        protected function keyDown( e:KeyboardEvent ):void
         {
-            trace("pause") ;
-            mc.stop() ;
-            setTimeout( mc.play , 4000 ) ; // pause 4 s
+            var code:uint = e.keyCode ;
+            switch( code )
+            {
+                case Keyboard.SPACE :
+                {
+                    movieclip.gotoAndPlay(1) ; // start 
+                    break ;
+                }
+                case Keyboard.UP :
+                {
+                    timeline.remove( "middle" ) ;
+                    break ;
+                }
+                case Keyboard.DOWN :
+                {
+                    timeline.clear() ;
+                    break ;
+                }
+            }
         }
         
-        public function finish():void
+        protected function start():void
         {
-            trace("finish") ;
-            mc.stop() ;
+            trace( "start" ) ;
         }
     }
 }

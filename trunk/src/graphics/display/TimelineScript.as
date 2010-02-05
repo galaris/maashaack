@@ -37,6 +37,9 @@ package graphics.display
 {
     import graphics.logging.logger;
     
+    import system.data.Iterator;
+    import system.data.maps.HashMap;
+    
     import flash.display.FrameLabel;
     import flash.display.MovieClip;
     
@@ -44,43 +47,93 @@ package graphics.display
      * The TimeLineScript class use composition to register script function over MovieClip timelines.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import graphics.display.TimelineScript ;
-     * 
-     * var ts:TimelineScript = new TimelineScript( mc , true ) ; // mc a MovieClip in the stage
-     * 
-     * var start:Function = function()
+     * package examples 
      * {
-     *     trace("start") ;
+     *     import graphics.display.TimelineScript;
+     *     
+     *     import flash.display.MovieClip;
+     *     import flash.display.Sprite;
+     *     import flash.display.StageAlign;
+     *     import flash.display.StageScaleMode;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.ui.Keyboard;
+     *     import flash.utils.clearTimeout;
+     *     import flash.utils.setTimeout;
+     *     
+     *     public dynamic class TimelineScriptExample extends Sprite 
+     *     {
+     *         public function TimelineScriptExample()
+     *         {
+     *             // stage
+     *             
+     *             stage.align      = StageAlign.TOP_LEFT ;
+     *             stage.scaleMode  = StageScaleMode.NO_SCALE ;
+     *             
+     *             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+     *             
+     *             // MovieClip target
+     *             
+     *             movieclip = getChildByName("mc") as MovieClip ;
+     *             
+     *             // timeline script
+     *             
+     *             timeline = new TimelineScript( movieclip , true ) ;
+     *             
+     *             timeline.put( "start"   , start ) ;
+     *             timeline.put( "middle"  , pause ) ;
+     *             timeline.put( "finish"  , finish ) ;
+     *         }
+     *         
+     *         protected var id:uint ;
+     *         protected var movieclip:MovieClip ;
+     *         protected var timeline:TimelineScript ;
+     *         
+     *         protected function pause():void
+     *         {
+     *             trace( "pause" ) ;
+     *             movieclip.stop() ;
+     *             if ( id )
+     *             {
+     *                 clearTimeout( id ) ;
+     *             }
+     *             id = setTimeout( movieclip.play , 4000 ) ; // pause 4 s
+     *         }
+     *         
+     *         protected function finish():void
+     *         {
+     *             trace( "finish" ) ;
+     *             movieclip.stop() ;
+     *         }
+     *         
+     *         protected function keyDown( e:KeyboardEvent ):void
+     *         {
+     *             var code:uint = e.keyCode ;
+     *             switch( code )
+     *             {
+     *                 case Keyboard.SPACE :
+     *                 {
+     *                     movieclip.gotoAndPlay(1) ; // start 
+     *                     break ;
+     *                 }
+     *                 case Keyboard.UP :
+     *                 {
+     *                     timeline.remove( "middle" ) ;
+     *                     break ;
+     *                 }
+     *                 case Keyboard.DOWN :
+     *                 {
+     *                     timeline.clear() ;
+     *                     break ;
+     *                 }
+     *             }
+     *         }
+     *         
+     *         protected function start():void
+     *         {
+     *             trace( "start" ) ;
+     *         }
+     *     }
      * }
-     * 
-     * var pause:Function = function()
-     * {
-     *     trace("pause") ;
-     *     mc.stop() ;
-     *     setTimeout( mc.play , 4000 ) ; // pause 4 s
-     * }
-     * 
-     * var finish:Function = function()
-     * {
-     *     trace("finish") ;
-     *     mc.stop() ;
-     * }
-     * 
-     * ts.put( "begin"   , start ) ;
-     * ts.put( "middle"  , pause ) ;
-     * ts.put( "finish"  , finish ) ;
-     * 
-     * var click:Function = function( e:MouseEvent ):void
-     * {
-     *     mc.play() ;
-     *     trace("click") ;
-     *     e.target.removeEventListener( MouseEvent.CLICK , click ) ;
-     *     mc.buttonMode = false ;
-     * }
-     * 
-     * mc.useHandCursor = true ;
-     * mc.buttonMode    = true ;
-     * mc.addEventListener( MouseEvent.CLICK , click ) ;
      * </pre>
      */
     public class TimelineScript
@@ -88,21 +141,19 @@ package graphics.display
         /**
          * Creates a new TimelineScript instance.
          * @param target The MovieClip reference of this iterator.
-         * @param autoStop This boolean flag indicates if the specified MovieClip target reference is stopped.
-         * @throws ArgumentError if the <code class="prettyprint">target</code> argument of this constructor is null.
+         * @param autoStop This boolean flag indicates if the specified MovieClip target reference is stopped (default true).
          */
-        public function TimelineScript( target:MovieClip , autoStop:Boolean=false )
+        public function TimelineScript( target:MovieClip = null , autoStop:Boolean = true )
         {
-            if (target == null)
-            {
-                throw new ArgumentError( this + " constructor failed, the target argument not must be null.") ;
-            }
-            _target = target ;
-            if ( autoStop )
-            {
-                _target.stop() ;
-            }
+            _map          = new HashMap() ;
+            this.autoStop = autoStop ;
+            this.target   = target   ;
         }
+        
+        /**
+         * This boolean flag indicates if the specified MovieClip target reference is stopped.
+         */
+        public var autoStop:Boolean ;
         
         /**
          * Indicates the target reference of this iterator.
@@ -110,6 +161,97 @@ package graphics.display
         public function get target():MovieClip
         {
             return _target ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set target( mc:MovieClip ):void
+        {
+            if( _target )
+            {
+                clear() ;
+            }
+            _target = mc ;
+            if( _target )
+            {
+                if ( autoStop )
+                {
+                    _target.stop() ;
+                }
+                initialize() ;
+            }
+        }
+        
+        /**
+         * Clear all scripts in the MovieClip target reference.
+         */
+        public function clear():void
+        {
+            if ( _cleared )
+            {
+                return ;
+            }
+            if ( _target )
+            {
+                for( var i:uint = 1 ; i<= target.totalFrames ; i++ )
+                {
+                    _target.addFrameScript( i - 1 , null ) ;
+                }
+            }
+            _map.clear() ;
+            _cleared = true ;
+        }
+        
+        /**
+         * Indicates if a script is registerd with the specific frame index (label name or frame value).
+         * @param index A String label name or an uint frame index value.
+         * @return <code>true</code> if the specific index is registered.
+         */
+        public function contains( index:* ):Boolean
+        {
+            try
+            {
+                var num:uint ;
+                if ( index is uint )
+                {
+                    num = index as uint ;
+                }
+                else if ( index is String )
+                {
+                    num = resolve( index as String ) ;
+                }
+                else
+                {
+                     throw new ArgumentError( "the index argument must be an int or String value.") ;
+                }
+                return _map.contains( num ) ;
+            }
+            catch( e:Error )
+            {
+                logger.warn( this + " contains failed, " + e.message ) ;
+            }
+            return false ;
+        }
+        
+        /**
+         * Initialize all registered scripts in the target.
+         */
+        public function initialize():void
+        {
+            clear() ;
+            if ( _cleared )
+            {
+                _cleared = false ;
+            }
+            if ( _target && _map.size() > 0 )
+            {
+                var it:Iterator = _map.iterator() ;
+                while( it.hasNext() )
+                {
+                    _target.addFrameScript( it.key as uint , it.next() as Function ) ;
+                }
+            }
         }
         
         /**
@@ -131,12 +273,21 @@ package graphics.display
                 {
                     num = resolve( index as String ) ;
                 }
-                _target.addFrameScript( num , script ) ;
+                else
+                {
+                     throw new ArgumentError( "the index argument must be an int or String value.") ;
+                }
+                _map.put( num , script ) ;
+                if ( _target )
+                {
+                     _target.addFrameScript( num , script ) ;
+                     _cleared = false ;
+                }
                 return true ;
             }
-            catch(e:Error)
+            catch( e:Error )
             {
-                logger.error( this + " put failed : " + e.message ) ;
+                logger.warn( this + " put failed, " + e.message ) ;
             }
             return false ;
         }
@@ -147,16 +298,34 @@ package graphics.display
          */
         public function remove( index:* ):void
         {
-            var num:int ;
-            if ( index is int )
+            try
             {
-                num = index as int ;
+                var num:int ;
+                if ( index is int )
+                {
+                    num = index as int ;
+                }
+                else if ( index is String )
+                {
+                    num = resolve( index as String ) ;
+                }
+                else
+                {
+                     throw new ArgumentError( "the index argument must be an int or String value.") ;
+                }
+                if ( _map.containsKey( num ) )
+                {
+                    _map.remove( num ) ;
+                    if ( _target )
+                    {
+                        _target.addFrameScript( num , null ) ;
+                    }
+                }
             }
-            else if ( index is String )
+            catch( e:Error )
             {
-                num = resolve( index as String ) ;
+                logger.warn( this + " remove failed, " + e.message ) ;
             }
-            _target.addFrameScript( num , null ) ;
         }
         
         /**
@@ -164,7 +333,7 @@ package graphics.display
          * @throws ArgumentError if the passed-in label value is null or empty.
          * @throws ArgumentError if the passed-in label value don't exist in the MovieClip.
          */
-        protected function resolve( label:String=null ):int 
+        protected function resolve( label:String = null ):int 
         {
             if ( label == null || label.length == 0 )
             {
@@ -182,9 +351,20 @@ package graphics.display
             } ;
             throw new ArgumentError( this + " resolve the label '" + label + "' failed, the specified label don't exist in the internal MovieClip reference." ) ;
         } 
+        
+        /**
+         * @private
+         */
+        private var _cleared:Boolean ;
+        
         /**
          * @private
          */
         private var _target:MovieClip ;
+        
+        /**
+         * @private
+         */
+        private var _map:HashMap ;
     }
 }
