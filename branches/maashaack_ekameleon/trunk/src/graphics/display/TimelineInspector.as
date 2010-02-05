@@ -36,15 +36,16 @@
 package graphics.display 
 {
     import graphics.events.FrameLabelEvent;
-    
+
     import system.data.maps.HashMap;
     import system.events.CoreEventDispatcher;
     import system.events.Delegate;
-    
+    import system.signals.Signal;
+
     import flash.display.FrameLabel;
     import flash.display.MovieClip;
     import flash.events.Event;
-    
+
     /**
      * Dispatched when the inspector is in progress.
      * @eventType graphics.events.FrameLabelEvent.FRAME_LABEL
@@ -138,9 +139,10 @@ package graphics.display
             {
                 throw new ArgumentError( this + " constructor failed, the target argument not must be null.") ;
             }
-            _map    = new HashMap() ;
-            _target = target ;
-            this.mode = mode ;
+            _frameLabel = new Signal( [FrameLabel] ) ;
+            _map        = new HashMap() ;
+            _target     = target ;
+            this.mode   = mode ;
             initialize() ;
             if ( autoStop )
             {
@@ -157,6 +159,14 @@ package graphics.display
          * The "timeline" mode of the inspector.
          */
         public static const TIMELINE:String = "timeline" ;
+        
+        /**
+         * The signal to indicates if a new frame is inspected with a specific label.
+         */
+        public function get frameLabel():Signal
+        {
+            return _frameLabel ;
+        }
         
         /**
          * Determinates the mode of the inspector. 
@@ -178,7 +188,7 @@ package graphics.display
             {
                 dispose() ;
             }
-            _mode = value || INJECTOR ;
+            _mode = value == TIMELINE ? TIMELINE : INJECTOR ;
             if ( b )
             {
                 initialize() ;
@@ -248,11 +258,15 @@ package graphics.display
                 _flag = false ;
             }
         }
-        
         /**
          * @private
          */
         private var _flag:Boolean ;
+        
+        /**
+         * @private
+         */
+        private var _frameLabel:Signal ;
         
         /**
          * @private
@@ -280,6 +294,7 @@ package graphics.display
         private function _dispatch( frame:FrameLabel ):void
         {
             dispatchEvent( new FrameLabelEvent( FrameLabelEvent.FRAME_LABEL , frame ) ) ;
+            _frameLabel.emit( frame ) ;
         }
         
         /**

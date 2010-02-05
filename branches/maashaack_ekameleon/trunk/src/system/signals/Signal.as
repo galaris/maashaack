@@ -98,11 +98,11 @@ package system.signals
          */
         public override function emit( ...values:Array ):void
         {
-            checkValues( values ) ;
             if ( receivers.length == 0 )
             {
                 return ;
             }
+            checkValues( values ) ;
             var i:int ;
             var l:int = receivers.length ;
             var r:Array = [] ;
