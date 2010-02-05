@@ -411,75 +411,76 @@ First we defines a little class *Messenger* who format a specific receiving mess
 Now the document class to compile the basic example.
 
 (({
-    package examples
+package examples
+{
+    import examples.signals.Messenger;
+    
+    import system.console;
+    import system.diagnostics.TextFieldConsole;
+    import system.signals.Signal;
+    
+    import flash.display.Sprite;
+    import flash.display.StageAlign;
+    import flash.display.StageScaleMode;
+    import flash.events.Event;
+    import flash.text.TextField;
+    import flash.text.TextFormat;
+    
+    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    
+    public class MessengerExample extends Sprite
     {
-        import examples.signals.Messenger;
-        
-        import system.console;
-        import system.diagnostics.TextFieldConsole;
-        import system.signals.Signal;
-        
-        import flash.display.Sprite;
-        import flash.display.StageAlign;
-        import flash.display.StageScaleMode;
-        import flash.events.Event;
-        import flash.text.TextField;
-        import flash.text.TextFormat;
-        
-        [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
-        
-        public class MessengerExample extends Sprite
+        public function MessengerExample()
         {
-            public function MessengerExample()
+            // stage
+            
+            stage.align     = StageAlign.TOP_LEFT;
+            stage.scaleMode = StageScaleMode.NO_SCALE;
+            
+            stage.addEventListener( Event.RESIZE , resize ) ;
+            
+            // console
+            
+            textfield                   = new TextField() ;
+            textfield.defaultTextFormat = new TextFormat( "Courier New" , 14 , 0xFFFFFF ) ;
+            textfield.multiline         = true ;
+            textfield.selectable        = true ;
+            textfield.wordWrap          = true ;
+            
+            addChild( textfield ) ;
+            
+            resize() ;
+            
+            console = new TextFieldConsole( textfield ) ;
+            
+            // receiver
+            
+            var messenger:Messenger = new Messenger( "{0} say: {1}" )  ;
+            
+            // signaler
+                 
+            signal = new Signal([String,String]) ;
+            
+            signal.connect( messenger ) ;
+            
+            signal.emit( "john" , "hello world" ) ;
+            signal.emit( "jack" , "Hi !" ) ;
+            signal.emit( "jack" , "signals are fast" ) ;
+        }
+        
+        public var signal:Signal ;
+        
+        public var textfield:TextField ;
+            
+        public function resize( e:Event = null ):void
+        {
+            if ( stage && textfield )
             {
-                // stage
-                
-                stage.align     = StageAlign.TOP_LEFT;
-                stage.scaleMode = StageScaleMode.NO_SCALE;
-                
-                stage.addEventListener( Event.RESIZE , resize ) ;
-                
-                // console
-                
-                textfield                   = new TextField() ;
-                textfield.defaultTextFormat = new TextFormat( "Courier New" , 14 , 0xFFFFFF ) ;
-                textfield.multiline         = true ;
-                textfield.selectable        = true ;
-                textfield.wordWrap          = true ;
-                
-                addChild( textfield ) ;
-                
-                resize() ;
-                
-                console = new TextFieldConsole( textfield ) ;
-                
-                // receiver
-                
-                var messenger:Messenger = new Messenger( "{0} say: {1}" )  ;
-                
-                // signaler
-                
-                signal = new Signal([String,String]) ;
-                
-                signal.connect( messenger ) ;
-                
-                signal.emit( "john" , "hello world" ) ;
-                signal.emit( "jack" , "Hi !" ) ;
-                signal.emit( "jack" , "signals are fast" ) ;
-            }
-            
-            public var signal:Signal ;
-            
-            public var textfield:TextField ;
-            
-            public function resize( e:Event = null ):void
-            {
-                if ( stage && textfield )
-                {
-                    textfield.width  = stage.stageWidth ;
-                    textfield.height = stage.stageHeight ;
-                }
+                textfield.width  = stage.stageWidth ;
+                textfield.height = stage.stageHeight ;
             }
         }
     }
+}
+
 }}}
