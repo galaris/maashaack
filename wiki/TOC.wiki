@@ -36,6 +36,7 @@
      * [EventsListeners using EventListeners]
      * [EventsFrontController the Design Pattern FrontController]
      * [EventsDelegate Delegate event listener]
+   * [Signals Signalers and Receivers]
  * [Support Support]
    * [PreRequisites prerequisites]
    * [FAQ FAQ]
