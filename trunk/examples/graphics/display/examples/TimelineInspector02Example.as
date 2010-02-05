@@ -36,7 +36,6 @@
 package examples 
 {
     import graphics.display.TimelineInspector;
-    import graphics.events.FrameLabelEvent;
     
     import flash.display.FrameLabel;
     import flash.display.MovieClip;
@@ -47,11 +46,11 @@ package examples
     import flash.utils.setTimeout;
     
     /**
-     * Example with the graphics.display.TimelineInspector class.
+     * Example with the graphics.display.TimelineInspector class and the signal notification.
      */
-    public dynamic class TimelineInspectorExample extends Sprite 
+    public dynamic class TimelineInspector02Example extends Sprite 
     {
-        public function TimelineInspectorExample()
+        public function TimelineInspector02Example()
         {
             // stage
             
@@ -72,9 +71,7 @@ package examples
             
             var inspector:TimelineInspector = new TimelineInspector( mc , true ) ;
             
-            // inspector.mode = TimelineInspector.TIMELINE ;
-            
-            inspector.addEventListener( FrameLabelEvent.FRAME_LABEL, frameLabel ) ; 
+            inspector.frameLabel.connect( frameLabel ) ;
         }
         
         public var mc:MovieClip ;
@@ -88,11 +85,10 @@ package examples
         }
         
         /**
-         * Invoked when a new frame label notify a FrameLabelEvent.
+         * Receives a FrameLabel object from the internal signal of the inspector.
          */
-        public function frameLabel( e:FrameLabelEvent ):void
+        public function frameLabel( frame:FrameLabel ):void
         {
-            var frame:FrameLabel = e.frameLabel ;
             trace( "frameLabel :: " + frame.frame + " : " + frame.name ) ;
             switch( frame.name )
             {
@@ -109,6 +105,5 @@ package examples
                 }
             }
         }
-        
     }
 }
