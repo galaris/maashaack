@@ -410,7 +410,7 @@ First we defines a little class *Messenger* who format a specific receiving mess
 
 Now the document class to compile the basic example.
 
-(({
+{{{
 package examples
 {
     import examples.signals.Messenger;
@@ -482,5 +482,4 @@ package examples
         }
     }
 }
-
 }}}
