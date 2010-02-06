@@ -184,6 +184,11 @@ package graphics.display
         }
         
         /**
+         * The verbose mode flag.
+         */
+        public var verbose:Boolean ;
+        
+        /**
          * Clear all scripts in the MovieClip target reference.
          */
         public function clear():void
@@ -229,7 +234,10 @@ package graphics.display
             }
             catch( e:Error )
             {
-                logger.warn( this + " contains failed, " + e.message ) ;
+                if ( verbose )
+                {
+                    logger.warn( this + " contains failed, " + e.message ) ;
+                }
             }
             return false ;
         }
@@ -287,7 +295,10 @@ package graphics.display
             }
             catch( e:Error )
             {
-                logger.warn( this + " put failed, " + e.message ) ;
+                if ( verbose )
+                { 
+                    logger.warn( this + " put failed, " + e.message ) ;
+                }
             }
             return false ;
         }
@@ -324,32 +335,50 @@ package graphics.display
             }
             catch( e:Error )
             {
-                logger.warn( this + " remove failed, " + e.message ) ;
+                if ( verbose )
+                {
+                    logger.warn( this + " remove failed, " + e.message ) ;
+                }
             }
         }
         
         /**
-         * Indicates if the specified passed-in label value is in the MovieClip target.
+         * Find the frame index of the specified passed-in label value in the MovieClip target.
          * @throws ArgumentError if the passed-in label value is null or empty.
          * @throws ArgumentError if the passed-in label value don't exist in the MovieClip.
          */
-        protected function resolve( label:String = null ):int 
+        public function resolve( label:String = null ):int 
         {
-            if ( label == null || label.length == 0 )
+            try
             {
-                throw new ArgumentError( this + " resolve failed, the label argument not must be 'null' or empty.") ;
-            }
-            var frame:uint ;
-            var currentLabels:Array = _target.currentLabels ;
-            for each( var element:FrameLabel in currentLabels )
-            {
-                if (element.name == label )
+                if ( _target == null )
                 {
-                    frame = element.frame - 1 ;
-                    return frame > 1 ? frame : 1 ;
+                    throw new ArgumentError( "the target reference not must be 'null'.") ;
                 }
-            } ;
-            throw new ArgumentError( this + " resolve the label '" + label + "' failed, the specified label don't exist in the internal MovieClip reference." ) ;
+                else if ( label == null || label.length == 0 )
+                {
+                    throw new ArgumentError( "the label argument not must be 'null' or empty.") ;
+                }
+                var frame:uint ;
+                var currentLabels:Array = _target.currentLabels ;
+                for each( var element:FrameLabel in currentLabels )
+                {
+                    if (element.name == label )
+                    {
+                        frame = element.frame - 1 ;
+                        return frame > 1 ? frame : 1 ;
+                    }
+                } ;
+                throw new ArgumentError( "the frame label '" + label + "' don't exist in the MovieClip target reference." ) ;
+            }
+            catch( e:Error )
+            {
+                if ( verbose )
+                {
+                    logger.warn( this + " resolve failed, " + e.message ) ;
+                }
+                return -1 ;
+            }
         } 
         
         /**
