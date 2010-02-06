@@ -35,22 +35,23 @@
 
 package examples 
 {
-    import graphics.display.TimelineScript;
-
+    import graphics.display.TimelineTransition;
+    
+    import system.events.ActionEvent;
+    
     import flash.display.MovieClip;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
-    import flash.utils.clearTimeout;
-    import flash.utils.setTimeout;
     
     /**
-     * Example with the graphics.display.TimelineScript class.
+     * Example with the graphics.display.TimelineTransition class.
+     * <p><b>Note :</b> "start", "middle" and "finish" are three frame labels in the MovieClip reference of the example.</p>
      */
-    public dynamic class TimelineScriptExample extends Sprite 
+    public dynamic class TimelineTransitionExample extends Sprite 
     {
-        public function TimelineScriptExample()
+        public function TimelineTransitionExample()
         {
             // stage
             
@@ -58,38 +59,28 @@ package examples
             
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             
-            // MovieClip target
+            // MovieClip target with the three frame labels : 
+            // "start", "middle" and "finish"
             
             movieclip = getChildByName("mc") as MovieClip ;
             
             // timeline script
             
-            timeline = new TimelineScript( movieclip , true ) ;
+            timeline = new TimelineTransition( movieclip ) ;
             
-            timeline.put( "start"   , start ) ;
-            timeline.put( "middle"  , pause ) ;
-            timeline.put( "finish"  , finish ) ;
+            timeline.defaultIndex = "middle" ;
+            // timeline.defaultIndex = 4 ;
+            
+            timeline.addEventListener( ActionEvent.FINISH , finish ) ;
+            timeline.addEventListener( ActionEvent.START  , start  ) ;
         }
         
-        protected var id:uint ;
         protected var movieclip:MovieClip ;
-        protected var timeline:TimelineScript ;
+        protected var timeline:TimelineTransition ;
         
-        protected function pause():void
-        {
-            trace( "pause" ) ;
-            movieclip.stop() ;
-            if ( id )
-            {
-                clearTimeout( id ) ;
-            }
-            id = setTimeout( movieclip.play , 4000 ) ; // pause 4 s
-        }
-        
-        protected function finish():void
+        protected function finish( e:ActionEvent ):void
         {
             trace( "finish" ) ;
-            movieclip.stop() ;
         }
         
         protected function keyDown( e:KeyboardEvent ):void
@@ -97,25 +88,31 @@ package examples
             var code:uint = e.keyCode ;
             switch( code )
             {
-                case Keyboard.SPACE :
-                {
-                    movieclip.gotoAndPlay(1) ; // start 
-                    break ;
-                }
                 case Keyboard.UP :
                 {
-                    timeline.remove( "middle" ) ;
+                    timeline.startIndex  = "middle" ;
+                    timeline.finishIndex = "finish" ;
+                    timeline.run() ;
                     break ;
                 }
                 case Keyboard.DOWN :
                 {
-                    timeline.clear() ;
+                    timeline.startIndex  = "start" ;
+                    timeline.finishIndex = "middle" ;
+                    timeline.run() ;
+                    break ;
+                }
+                case Keyboard.SPACE :
+                {
+                    timeline.startIndex  = "start" ;
+                    timeline.finishIndex = "finish" ;
+                    timeline.run() ;
                     break ;
                 }
             }
         }
         
-        protected function start():void
+        protected function start( e:ActionEvent ):void
         {
             trace( "start" ) ;
         }
