@@ -116,7 +116,7 @@ package system.events
          * The name of the event when the process is stopped.
          * @eventType stop
          */        
-        public static const STOP:String = "stop" ;    
+        public static const STOP:String = "stop" ;
         
         /**
          * The name of the event when the process is cleared.

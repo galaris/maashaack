@@ -51,12 +51,22 @@ package graphics.display
          * @param finishIndex The finish index.
          * @param defaultIndex This index defines the default frame to stop the timeline of the MovieClip target.
          */
-        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , defaultIndex:* = 1 )
+        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , loop:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 )
         {
             this.target       = target ;
+            this.loop         = loop ;
+            this.numLoop      = numLoop ;
             this.defaultIndex = defaultIndex ;
             this.finishIndex  = finishIndex ;
             this.startIndex   = startIndex ;
+        }
+        
+        /**
+         * Indicates the current countdown loop value.
+         */
+        public function get currentLoop():uint
+        {
+            return numLoop - _currentLoop + 1 ;
         }
         
         /**
@@ -116,6 +126,17 @@ package graphics.display
                 _finishIndex = null ; 
             }
         }
+        
+        /**
+         * Specifies whether playback of the clip should continue, or loop. 
+         * See the numLoop property to defines the number of times the movieclip should be looping. 
+         */
+        public var loop:Boolean ;
+        
+        /**
+         * Specifies the number of the times the presentation should loop during playback.
+         */
+        public var numLoop:uint ;
         
         /**
          * Indicates the start index.
@@ -208,20 +229,18 @@ package graphics.display
                      _script.put( _target.totalFrames , finish ) ;
                 }
                 
-                // fix start index
+                // run the playback
                 
-                if( _startIndex is String )
+                if ( loop )
                 {
-                    _startIndex = _script.resolve( _startIndex as String ) ;
+                    _currentLoop = numLoop ; 
                 }
-                if ( _startIndex != null && _startIndex > 1  && _startIndex <= _target.totalFrames )
+                else
                 {
-                    _target.gotoAndPlay( _startIndex ) ;
+                    _currentLoop = 0 ;
                 }
-                else 
-                {
-                     _target.gotoAndPlay( 1 ) ;
-                }
+                
+                playback() ;
             }
             else
             {
@@ -265,8 +284,42 @@ package graphics.display
             {
                 _target.stop() ;
             }
-            notifyFinished() ;
+            if ( loop && _currentLoop > 0 )
+            {
+                notifyLooped() ;
+                _currentLoop -- ;
+                playback() ;
+            }
+            else
+            { 
+                _currentLoop = 0 ;
+                notifyFinished() ;
+            } 
         }
+        
+        /**
+         * Starts the playback of the target with the specified start index.
+         */
+        protected function playback():void
+        {
+            if( _startIndex is String )
+            {
+                _startIndex = _script.resolve( _startIndex as String ) ;
+            }
+            if ( _startIndex != null && _startIndex > 1  && _startIndex <= _target.totalFrames )
+            {
+                _target.gotoAndPlay( _startIndex ) ;
+            }
+            else 
+            {
+                 _target.gotoAndPlay( 1 ) ;
+            } 
+        }
+        
+        /**
+         * @private
+         */
+        private var _currentLoop:uint ;
         
         /**
          * @private

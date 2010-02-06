@@ -38,76 +38,54 @@ package examples
     import graphics.display.TimelineTransition;
     
     import system.events.ActionEvent;
-    import system.process.Sequencer;
     
     import flash.display.MovieClip;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
-    import flash.events.KeyboardEvent;
-    import flash.ui.Keyboard;
     
     /**
-     * Example with the graphics.display.TimelineTransition class.
+     * Example with the graphics.display.TimelineTransition class and the loop feature.
      * <p><b>Note :</b> "start", "middle" and "finish" are three frame labels in the MovieClip reference of the example.</p>
      */
-    public dynamic class TimelineTransition02Example extends Sprite 
+    public dynamic class TimelineTransition03Example extends Sprite 
     {
-        public function TimelineTransition02Example()
+        public function TimelineTransition03Example()
         {
             // stage
             
             stage.scaleMode  = StageScaleMode.NO_SCALE ;
             
-            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
-            
             // MovieClip target with the three frame labels : 
             // "start", "middle" and "finish"
             
-            movieclip = getChildByName("mc") as MovieClip ;
+            var movieclip:MovieClip = getChildByName("mc") as MovieClip ;
             
-            // sequencer
+            // timeline transition
             
-            sequencer = new Sequencer() ;
+            transition = new TimelineTransition( movieclip , "start" , "middle" ) ;
             
-            sequencer.addEventListener( ActionEvent.FINISH , finish ) ;
-            sequencer.addEventListener( ActionEvent.START  , start  ) ;
+            transition.addEventListener( ActionEvent.FINISH , finish ) ;
+            transition.addEventListener( ActionEvent.LOOP   , loop ) ;
+            transition.addEventListener( ActionEvent.START  , start  ) ;
             
-            sequencer.addAction( new TimelineTransition( movieclip , "middle" , "finish" ) ) ;
-            sequencer.addAction( new TimelineTransition( movieclip , "start"  , "middle" ) ) ;
-            sequencer.addAction( new TimelineTransition( movieclip , "middle" , "finish" ) ) ;
-            sequencer.addAction( new TimelineTransition( movieclip , "middle" , "finish" ) ) ;
-            sequencer.addAction( new TimelineTransition( movieclip , "start"  , "middle" ) ) ;
+            // enabled the five loops of the playback.
             
-            sequencer.run() ;
+            transition.loop = true ;
+            transition.numLoop = 5 ;
+            
+            transition.run() ;
         }
         
-        protected var movieclip:MovieClip ;
-        
-        protected var sequencer:Sequencer ;
+        public var transition:TimelineTransition ;
         
         protected function finish( e:ActionEvent ):void
         {
             trace( "finish" ) ;
         }
         
-        protected function keyDown( e:KeyboardEvent ):void
+        protected function loop( e:ActionEvent ):void
         {
-            var code:uint = e.keyCode ;
-            switch( code )
-            {
-                case Keyboard.SPACE :
-                {
-                    if ( sequencer.running )
-                    { 
-                        sequencer.stop() ;
-                    }
-                    else
-                    {
-                        sequencer.start() ;
-                    }
-                    break ;
-                }
-            }
+            trace( "loop currentLoop:" + transition.currentLoop + " numLoop:" + transition.numLoop ) ;
         }
         
         protected function start( e:ActionEvent ):void

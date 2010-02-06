@@ -85,7 +85,7 @@ package graphics.display
          * @param second The second ByteArray to be compared.
          * @return <code class=-"prettyprint">true</code> if the ByteArray object are equal, <code class=-"prettyprint">false</code> otherwise.  
          */
-        public static function equals( first:ByteArray, second:ByteArray):Boolean
+        public static function equals( first:ByteArray , second:ByteArray ):Boolean
         {
             var pos1:uint   = first.position  ;
             var pos2:uint   = second.position ;
