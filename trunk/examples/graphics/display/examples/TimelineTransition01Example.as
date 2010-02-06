@@ -72,6 +72,7 @@ package examples
             // timeline.defaultIndex = 4 ;
             
             timeline.addEventListener( ActionEvent.FINISH , finish ) ;
+            timeline.addEventListener( ActionEvent.RESUME , resume ) ;
             timeline.addEventListener( ActionEvent.START  , start  ) ;
         }
         
@@ -109,7 +110,28 @@ package examples
                     timeline.run() ;
                     break ;
                 }
+                case Keyboard.LEFT :
+                {
+                    if ( timeline.running )
+                    { 
+                        timeline.stop() ;
+                    }
+                    else if ( timeline.stopped )
+                    {
+                        timeline.resume() ;
+                    }
+                    else
+                    {
+                        timeline.start() ;
+                    }
+                    break ;
+                }
             }
+        }
+        
+        protected function resume( e:ActionEvent ):void
+        {
+            trace( "resume" ) ;
         }
         
         protected function start( e:ActionEvent ):void
