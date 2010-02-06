@@ -49,9 +49,9 @@ package examples
      * Example with the graphics.display.TimelineTransition class.
      * <p><b>Note :</b> "start", "middle" and "finish" are three frame labels in the MovieClip reference of the example.</p>
      */
-    public dynamic class TimelineTransitionExample extends Sprite 
+    public dynamic class TimelineTransition01Example extends Sprite 
     {
-        public function TimelineTransitionExample()
+        public function TimelineTransition01Example()
         {
             // stage
             
