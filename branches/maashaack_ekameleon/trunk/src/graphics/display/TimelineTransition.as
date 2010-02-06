@@ -36,9 +36,9 @@
 package graphics.display 
 {
     import graphics.transitions.CoreTransition;
-    
+
     import flash.display.MovieClip;
-    
+
     /**
      * This transition check the frames in the timeline of a specific MovieClip reference and notify a finish and start events between two specific frames. 
      */
@@ -166,6 +166,14 @@ package graphics.display
         }
         
         /**
+         * Indicates if the process is stopped. You can resume a stopped transition.
+         */
+        public function get stopped():Boolean
+        {
+            return _stopped ; 
+        }
+        
+        /**
          * The MovieClip target reference.
          */
         public function get target():MovieClip
@@ -195,6 +203,19 @@ package graphics.display
         public var verbose:Boolean ;
         
         /**
+         * Restart the process if the process is stopped.
+         */
+        public function resume():void
+        {
+            if ( _stopped && _target )
+            {
+                notifyResumed() ;
+                _stopped = false ;
+                _target.play() ;
+            }
+        }
+        
+        /**
          * Run the process.
          */
         public override function run( ...arguments:Array ):void 
@@ -204,6 +225,7 @@ package graphics.display
                 return ; 
             }
             notifyStarted() ;
+            _stopped = false ;
             if ( _target )
             {
                 if ( _script )
@@ -271,6 +293,7 @@ package graphics.display
                 {
                     _target.stop() ;
                 }
+                _stopped = true ;
                 notifyStopped() ;
             }
         }
@@ -335,6 +358,11 @@ package graphics.display
          * @private
          */
         private var _script:TimelineScript ;
+        
+        /**
+         * @private
+         */
+        private var _stopped:Boolean ;
         
         /**
          * @private
