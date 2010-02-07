@@ -310,6 +310,15 @@ package graphics.display
         public var verbose:Boolean ;
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+             return new TimelineTransition( _target, _startIndex , _finishIndex, loop, numLoop, _defaultIndex ) ;
+        }
+        
+        /**
          * Restart the process if the process is stopped.
          */
         public function resume():void
