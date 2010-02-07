@@ -48,8 +48,9 @@
     <component id="graphics.display:ReflectionBitmapData"    class="graphics.display.ReflectionBitmapData" />
     <component id="graphics.display:ShaderLoader"            class="graphics.display.ShaderLoader" />
     <component id="graphics.display:TimelineInspector"       class="graphics.display.TimelineInspector" />
-    <component id="graphics.display:TimelineIterator"        class="graphics.display.TimelineIterator"  />
-    <component id="graphics.display:TimelineScript"          class="graphics.display.TimelineScript"  />
+    <component id="graphics.display:TimelineIterator"        class="graphics.display.TimelineIterator" />
+    <component id="graphics.display:TimelineScript"          class="graphics.display.TimelineScript" />
+    <component id="graphics.display:TimelineTransition"      class="graphics.display.TimelineTransition" />
     
     <!-- graphics.display.patterns -->
     

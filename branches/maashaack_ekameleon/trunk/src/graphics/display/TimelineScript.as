@@ -377,8 +377,8 @@ package graphics.display
                 {
                     logger.warn( this + " resolve failed, " + e.message ) ;
                 }
-                return -1 ;
             }
+            return -1 ;
         } 
         
         /**

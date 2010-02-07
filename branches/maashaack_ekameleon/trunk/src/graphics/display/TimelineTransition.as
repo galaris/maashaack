@@ -40,7 +40,112 @@ package graphics.display
     import flash.display.MovieClip;
 
     /**
-     * This transition check the frames in the timeline of a specific MovieClip reference and notify a finish and start events between two specific frames. 
+     * This transition check the frames in the timeline of a specific MovieClip reference and notify a finish and start events between two specific frames.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples 
+     * {
+     *     import graphics.display.TimelineTransition;
+     *     
+     *     import system.events.ActionEvent;
+     *     
+     *     import flash.display.MovieClip;
+     *     import flash.display.Sprite;
+     *     import flash.display.StageScaleMode;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.ui.Keyboard;
+     *     
+     *     public dynamic class TimelineTransition01Example extends Sprite 
+     *     {
+     *         public function TimelineTransition01Example()
+     *         {
+     *             // stage
+     *             
+     *             stage.scaleMode  = StageScaleMode.NO_SCALE ;
+     *             
+     *             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+     *             
+     *             // MovieClip target with the three frame labels : 
+     *             // "start", "middle" and "finish"
+     *             
+     *             movieclip = getChildByName("mc") as MovieClip ;
+     *             
+     *             // timeline script
+     *             
+     *             timeline = new TimelineTransition( movieclip ) ;
+     *             
+     *             timeline.defaultIndex = 4 ; // by default stop the MovieClip in the frame index 4.
+     *             
+     *             timeline.addEventListener( ActionEvent.FINISH , finish ) ;
+     *             timeline.addEventListener( ActionEvent.RESUME , resume ) ;
+     *             timeline.addEventListener( ActionEvent.START  , start  ) ;
+     *         }
+     *         
+     *         protected var movieclip:MovieClip ;
+     *         protected var timeline:TimelineTransition ;
+     *         
+     *         protected function finish( e:ActionEvent ):void
+     *         {
+     *             trace( "finish" ) ;
+     *         }
+     *         
+     *         protected function keyDown( e:KeyboardEvent ):void
+     *         {
+     *             var code:uint = e.keyCode ;
+     *             switch( code )
+     *             {
+     *                 case Keyboard.UP :
+     *                 {
+     *                     timeline.startIndex  = "middle" ;
+     *                     timeline.finishIndex = "finish" ;
+     *                     timeline.run() ;
+     *                     break ;
+     *                 }
+     *                 case Keyboard.DOWN :
+     *                 {
+     *                     timeline.startIndex  = "start" ;
+     *                     timeline.finishIndex = "middle" ;
+     *                     timeline.run() ;
+     *                     break ;
+     *                 }
+     *                 case Keyboard.SPACE :
+     *                 {
+     *                     timeline.startIndex  = "start" ;
+     *                     timeline.finishIndex = "finish" ;
+     *                     timeline.run() ;
+     *                     break ;
+     *                 }
+     *                 case Keyboard.LEFT :
+     *                 {
+     *                     if ( timeline.running )
+     *                     { 
+     *                         timeline.stop() ;
+     *                     }
+     *                     else if ( timeline.stopped )
+     *                     {
+     *                         timeline.resume() ;
+     *                     }
+     *                     else
+     *                     {
+     *                         timeline.start() ;
+     *                     }
+     *                     break ;
+     *                 }
+     *             }
+     *         }
+     *         
+     *         protected function resume( e:ActionEvent ):void
+     *         {
+     *             trace( "resume" ) ;
+     *         }
+     *         
+     *         protected function start( e:ActionEvent ):void
+     *         {
+     *             trace( "start" ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class TimelineTransition extends CoreTransition 
     {
@@ -49,6 +154,8 @@ package graphics.display
          * @param target The MovieClip target reference.
          * @param startIndex The start index.
          * @param finishIndex The finish index.
+         * @param loop Specifies whether playback of the clip should continue, or loop (default false). 
+         * @param numLoop Specifies the number of the times the presentation should loop during playback.
          * @param defaultIndex This index defines the default frame to stop the timeline of the MovieClip target.
          */
         public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , loop:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 )
