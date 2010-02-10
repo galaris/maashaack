@@ -40,17 +40,18 @@ package examples.patterns
     import graphics.display.Pattern;
     import graphics.display.patterns.StandardPatterns;
     import graphics.drawing.RectanglePen;
-    
+
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    
+
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.geom.Matrix;
 
-    [SWF(width="190", height="190", frameRate="24", backgroundColor="#EEEEEE")]
+    [SWF(width="190", height="190", frameRate="24", backgroundColor="#666666")]
     
     public class StandardPatternsExample extends Sprite
     {
@@ -76,15 +77,19 @@ package examples.patterns
             var pattern:Pattern = StandardPatterns.slantedLineA(0xFFFF0000) ;
             
             pen = new RectanglePen(shape) ;
-            pen.fill = new FillBitmapStyle(pattern, null, true) ;
+            pen.fill = new FillBitmapStyle(pattern, matrix, true) ;
             pen.draw(0, 0, 170, 170) ;
             
             ///////////
             
             iterator = new ArrayIterator( patterns ) ;
+            
+            stage.addEventListener( Event.ENTER_FRAME , enterFrame ) ;
         }
         
         public var iterator:Iterator ;
+        
+        public var matrix:Matrix = new Matrix() ;
         
         public var patterns:Array =
         [
@@ -94,7 +99,7 @@ package examples.patterns
             StandardPatterns.slantedLineA   ( new RGBA( 255, 0, 0, 1) ) ,
             StandardPatterns.slantedLineB   ( new RGBA( 0, 255, 0, 1) ) ,
             StandardPatterns.solidBar       ( 0xFF000000 ) ,
-            StandardPatterns.solidBold      ( 0xFF000000 ) ,
+            StandardPatterns.solidBold      ( 0xA2A2A2A2 ) ,
             StandardPatterns.solidHorizonal ( 0xFF000000 ) ,
             StandardPatterns.spot           ( 0xFF000000 ) ,
             StandardPatterns.x              ( 0xFF000000 )
@@ -110,6 +115,12 @@ package examples.patterns
             }
             (pen.fill as FillBitmapStyle).bitmap = iterator.next() as Pattern;
             pen.draw() ;
+        }
+        
+        public function enterFrame( e:Event ):void
+        {
+            matrix.tx += 2 ; 
+            pen.draw( 0, 0 , 150, 150 ) ;
         }
     }
 }
