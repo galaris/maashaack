@@ -80,7 +80,7 @@ package examples.patterns
             pen.fill = new FillBitmapStyle(pattern, matrix, true) ;
             pen.draw(0, 0, 170, 170) ;
             
-            ///////////
+            /////////// 
             
             iterator = new ArrayIterator( patterns ) ;
             
