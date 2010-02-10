@@ -36,7 +36,9 @@
 package system.process
 {
     import system.events.ActionEvent;
-    
+    import system.signals.Signal;
+    import system.signals.Signaler;
+
     /**
      * Dispatched when a process is changed.
      * @eventType system.events.ActionEvent.CHANGE
@@ -103,7 +105,7 @@ package system.process
     /**
      * This class simplify a full implementation of the <code class="prettyprint">Action</code> interface.
      */
-    public dynamic class CoreAction extends Task
+    public class CoreAction extends Task
     {
         /**
          * Creates a new CoreAction instance.
@@ -116,9 +118,42 @@ package system.process
         }
         
         /**
+         * This signal emit when the notifyChanged method is invoked. 
+         */
+        public function get changeIt():Signaler
+        {
+            return _changeIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set changeIt( signal:Signaler ):void
+        {
+            _changeIt = signal || new Signal() ;
+        }
+        
+        /**
          * The flag to determinate if the Action object is looped.
          */
         public var looping:Boolean ;
+        
+        
+        /**
+         * This signal emit when the notifyProgress method is invoked. 
+         */
+        public function get progressIt():Signaler
+        {
+            return _progressIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set progressIt( signal:Signaler ):void
+        {
+            _progressIt = signal || new Signal() ;
+        }
         
         /**
          * Returns a shallow copy of this object.
@@ -134,9 +169,10 @@ package system.process
          */
         protected function notifyChanged():void 
         {
-            if ( hasEventListener(_sTypeChange) )
+            _changeIt.emit( this ) ;
+            if ( hasEventListener( ActionEvent.CHANGE  ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeChange , this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.CHANGE , this ) ) ;
             }
         }
         
@@ -145,9 +181,9 @@ package system.process
          */
         protected function notifyCleared():void 
         {
-            if ( hasEventListener(_sTypeClear) )
+            if ( hasEventListener( ActionEvent.CLEAR ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeClear , this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.CLEAR , this ) ) ;
             }
         }
         
@@ -156,9 +192,9 @@ package system.process
          */
         protected function notifyInfo( info:* ):void
         {
-            if ( hasEventListener(_sTypeInfo) )
+            if ( hasEventListener( ActionEvent.INFO ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeInfo, this , info ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.INFO , this , info ) ) ;
             }
         }
         
@@ -167,9 +203,9 @@ package system.process
          */
         protected function notifyLooped():void 
         {
-            if ( hasEventListener(_sTypeLoop) )
+            if ( hasEventListener( ActionEvent.LOOP ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeLoop, this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.LOOP , this ) ) ;
             }
         }
         
@@ -178,9 +214,10 @@ package system.process
          */
         protected function notifyProgress():void
         {
-            if ( hasEventListener( _sTypeProgress ) )
+            _progressIt.emit( this ) ;
+            if ( hasEventListener( ActionEvent.PROGRESS ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeProgress, this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.PROGRESS , this ) ) ;
             }
         }
         
@@ -189,9 +226,9 @@ package system.process
          */
         protected function notifyResumed():void
         {
-            if ( hasEventListener( _sTypeResume ) )
+            if ( hasEventListener( ActionEvent.RESUME ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeResume , this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.RESUME , this ) ) ;
             }
         }
         
@@ -201,9 +238,9 @@ package system.process
         protected function notifyStopped():void
         {
             setRunning(false) ;
-            if ( hasEventListener( _sTypeStop ) )
+            if ( hasEventListener( ActionEvent.STOP ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeStop , this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.STOP , this ) ) ;
             }
         }
         
@@ -212,50 +249,20 @@ package system.process
          */
         protected function notifyTimeOut():void
         {
-            if ( hasEventListener( _sTypeTimeout ) )
+            if ( hasEventListener( ActionEvent.TIMEOUT ) )
             {
-                dispatchEvent( new ActionEvent( _sTypeTimeout , this ) ) ;
+                dispatchEvent( new ActionEvent( ActionEvent.TIMEOUT , this ) ) ;
             }
         }
         
         /**
          * @private
          */
-        protected var _sTypeChange:String = ActionEvent.CHANGE ;
+        private var _changeIt:Signaler = new Signal() ;
         
         /**
          * @private
          */
-        protected var _sTypeClear:String = ActionEvent.CLEAR ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeInfo:String  = ActionEvent.INFO ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeLoop:String = ActionEvent.LOOP ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeProgress:String = ActionEvent.PROGRESS ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeResume:String = ActionEvent.RESUME ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeStop:String = ActionEvent.STOP ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeTimeout:String = ActionEvent.TIMEOUT ;
+        private var _progressIt:Signaler = new Signal() ;
     }
 }

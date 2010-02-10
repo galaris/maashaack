@@ -64,19 +64,5 @@ package graphics.display
         {
             assertNotNull( script ) ;
         }
-        
-        public function testConstructorWithNullMovieClip():void
-        {
-            try
-            {
-                script = new TimelineScript( null ) ;
-                fail( "the constructor target argument throws an error when is null.") ;
-            }
-            catch( e:Error )
-            {
-                assertTrue( e is ArgumentError , "the constructor must throws an ArgumentError" ) ;
-                assertEquals( e.message , "[object TimelineScript] constructor failed, the target argument not must be null." , "the constructor failed, the error message is not valid." ) ;
-            }
-        }
     }
 }
