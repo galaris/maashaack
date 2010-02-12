@@ -35,12 +35,12 @@
 
 <languageVersion: 1.0;>
 
-kernel Hole
+kernel Reflection
 <   
     namespace   : "graphics.filters";
     vendor      : "ALCARAZ Marc (eKameleon)";
     version     : 1 ;
-    description : "Bitmap reflection filter." ; >
+    description : "Bitmap reflection filter" ; >
 {
     /**
      * Specify the alpha of the reflection effect.

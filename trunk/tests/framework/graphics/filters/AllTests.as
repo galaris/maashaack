@@ -46,6 +46,7 @@ package graphics.filters
             
             suite.addTestSuite( HoleFilterTest ) ;
             suite.addTestSuite( KnockoutFilterTest ) ;
+            suite.addTestSuite( ReflectionFilterTest ) ;
             
             return suite;
         }
