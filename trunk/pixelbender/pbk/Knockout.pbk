@@ -40,7 +40,7 @@ kernel Knockout
     namespace   : "graphics.filters";
     vendor      : "ALCARAZ Marc (eKameleon)";
     version     : 1 ;
-    description : "Creates an knockout effect to remove a specific color in a picture" ; >
+    description : "Creates a knockout effect to remove a specific color in a picture" ; >
 {
     
     input  image4 source ;
