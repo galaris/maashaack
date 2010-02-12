@@ -36,6 +36,7 @@
 package graphics.filters 
 {
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     
     /**
      * The ReflectionFilter class applies a reflection over a display or a bitmap. 
@@ -99,6 +100,22 @@ package graphics.filters
         public function set size( value:Number ):void
         {
             shader.data.size.value[0] = value ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:ReflectionFilter = new ReflectionFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.alpha.value[0]  = shader.data.alpha.value[0] ;
+                filter.shader.data.height.value[0] = shader.data.height.value[0] ;
+                filter.shader.data.size.value[0]   = shader.data.size.value[0] ;
+            }
+            return filter ;
         }
     }
 }
