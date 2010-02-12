@@ -36,9 +36,10 @@
 package graphics.filters 
 {
     import system.numeric.Mathematics;
-    
+
     import flash.display.Shader;
-    
+    import flash.filters.BitmapFilter;
+
     /**
      * The RGBDistortFilter class applies a filter by executing a shader on the object being filtered. 
      * The Shader must be defines with the RGBDistort pixelbender implementation.
@@ -197,6 +198,31 @@ package graphics.filters
         public function set redIntensity( value:Number ):void
         {
             shader.data.intensity.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+        }
+        
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:RGBDistortFilter = new RGBDistortFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.direction.value[0] = shader.data.direction.value[0] ;
+                filter.shader.data.direction.value[1] = shader.data.direction.value[1] ;
+                filter.shader.data.direction.value[2] = shader.data.direction.value[2] ;
+                
+                filter.shader.data.frequency.value[0] = shader.data.frequency.value[0] ;
+                filter.shader.data.frequency.value[1] = shader.data.frequency.value[1] ;
+                filter.shader.data.frequency.value[2] = shader.data.frequency.value[2] ;
+                
+                filter.shader.data.intensity.value[0] = shader.data.intensity.value[0] ;
+                filter.shader.data.intensity.value[1] = shader.data.intensity.value[1] ;
+                filter.shader.data.intensity.value[2] = shader.data.intensity.value[2] ;
+            }
+            return filter ;
         }
     }
 }
