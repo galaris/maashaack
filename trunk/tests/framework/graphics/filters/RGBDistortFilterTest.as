@@ -37,28 +37,34 @@ package graphics.filters
     import buRRRn.ASTUce.framework.TestCase;
     
     import flash.display.Shader;
-    import flash.geom.Point;
     
-    public class HoleFilterTest extends TestCase 
+    public class RGBDistortFilterTest extends TestCase 
     {
-        public function HoleFilterTest(name:String = "")
+        public function RGBDistortFilterTest(name:String = "")
         {
             super(name);
         }
         
-        [Embed("../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
-        private var Hole:Class ;
+        [Embed("../../../../pixelbender/pbj/RGBDistort.pbj", mimeType="application/octet-stream")]
+        private var RGBDistort:Class ;
         
-        public var center:Point ;
-        public var filter:HoleFilter ;
-        public var radius:Number = 20 ;
+        public var filter:RGBDistortFilter ;
         public var shader:Shader ;
         
         public function setUp():void
         {
-            center = new Point( 20, 30) ;
-            shader = new Shader( new Hole() ) ;
-            filter = new HoleFilter( shader , { center : center , radius : radius } ) ;
+            shader = new Shader( new RGBDistort() ) ;
+            filter = new RGBDistortFilter
+            ( 
+                shader ,
+                { 
+                    redDirection   : 1 ,                     greenDirection : 1 ,                     blueDirection  : 1 , 
+                    
+                    redFrequency   : 1 ,                    greenFrequency : 1 ,                    blueFrequency  : 1 ,
+                    
+                    redIntensity   : 1 ,                    greenIntensity : 1 ,                    blueIntensity  : 1
+                 } 
+             ) ;
         }
         
         public function tearDown():void
@@ -69,24 +75,24 @@ package graphics.filters
         public function testConstructor():void
         {
             assertNotNull( filter ) ;
-            assertEquals( filter.center.x , center.x ) ;
-            assertEquals( filter.center.y , center.y ) ;
-            assertEquals( filter.radius , radius ) ;
+            assertEquals( filter.blueDirection , 1 ) ;
+            assertEquals( filter.blueFrequency , 1 ) ;
+            assertEquals( filter.blueIntensity , 1 ) ;
         }
         
         public function testDescription():void
         {
-            assertEquals( filter.description , "Creates an hole to mask the picture" ) ;
+            assertEquals( "Distorts all RGB pixels." , filter.description ) ;
         }
         
         public function testName():void
         {
-            assertEquals( filter.name , "Hole" ) ; 
+            assertEquals( "RGBDistort" , filter.name ) ; 
         }
         
         public function testNamespace():void
         {
-            assertEquals( filter.namespace , "graphics.filters" ) ;
+            assertEquals( "graphics.filters" , filter.namespace ) ;
         }
         
         public function testVersion():void
@@ -96,11 +102,19 @@ package graphics.filters
         
         public function testClone():void
         {
-            var clone:HoleFilter = filter.clone() as HoleFilter ;
+            var clone:RGBDistortFilter = filter.clone() as RGBDistortFilter ;
             assertNotNull( clone ) ;
-            assertEquals( clone.radius   , filter.radius ) ;
-            assertEquals( clone.center.x , filter.center.x ) ;
-            assertEquals( clone.center.y , filter.center.y ) ; 
-        }
+            
+            assertEquals( clone.redDirection   , filter.redDirection ) ;
+            assertEquals( clone.greenDirection , filter.greenDirection ) ;
+            assertEquals( clone.blueDirection  , filter.blueDirection ) ;
+            
+            assertEquals( clone.greenFrequency , filter.greenFrequency ) ;
+            assertEquals( clone.blueFrequency  , filter.blueFrequency ) ;
+            assertEquals( clone.redFrequency   , filter.redFrequency ) ;
+            
+            assertEquals( clone.redIntensity   , filter.redIntensity ) ;
+            assertEquals( clone.greenIntensity , filter.greenIntensity ) ;
+            assertEquals( clone.blueIntensity  , filter.blueIntensity ) ;        }
     }
 }

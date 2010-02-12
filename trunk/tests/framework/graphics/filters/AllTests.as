@@ -46,7 +46,7 @@ package graphics.filters
             
             suite.addTestSuite( HoleFilterTest ) ;
             suite.addTestSuite( KnockoutFilterTest ) ;
-            suite.addTestSuite( ReflectionFilterTest ) ;
+            suite.addTestSuite( ReflectionFilterTest ) ;            suite.addTestSuite( RGBDistortFilterTest ) ;
             
             return suite;
         }
