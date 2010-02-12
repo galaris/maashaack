@@ -84,6 +84,11 @@ package examples
         {
             filter = new TwirlFilter( loader.shader ) ;
             
+            filter.bottomExtension = 100 ;
+            filter.leftExtension   = 100 ;
+            filter.rightExtension  = 100 ;
+            filter.topExtension    = 100 ;
+            
             filter.center = new Point( picture.width / 2 , picture.height / 2 ) ;
             filter.radius = 80 ;
             
@@ -99,7 +104,7 @@ package examples
                 filter.radius   = 10 ;
                 filter.center   = new Point( picture.mouseX , picture.mouseY ) ;
                 picture.filters = [ filter ] ;
-                addEventListener(Event.ENTER_FRAME , render ) ;
+                addEventListener( Event.ENTER_FRAME , render ) ;
             }
         }
         
