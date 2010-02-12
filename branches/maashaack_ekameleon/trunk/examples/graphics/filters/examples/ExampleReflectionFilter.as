@@ -64,7 +64,7 @@ package examples
             container.y = 60 ;
             
             container.graphics.beginFill( 0x000000 ) ;
-            container.graphics.drawRect( 0 , 0 , 320 , 295 ) ;
+            container.graphics.drawRect( 0 , 0 , 320 , 240 ) ;
             
             addChild( container ) ;
             
@@ -91,6 +91,8 @@ package examples
         protected function complete( e:Event ):void
         {
             filter = new ReflectionFilter( loader.shader ) ;
+            
+            filter.bottomExtension = container.height ;
             
             filter.alpha  = 0.5  ; // alpha of the reflection
             filter.size   = 55   ; // size of the reflection

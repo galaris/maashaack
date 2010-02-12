@@ -37,28 +37,26 @@ package graphics.filters
     import buRRRn.ASTUce.framework.TestCase;
     
     import flash.display.Shader;
-    import flash.geom.Point;
     
-    public class HoleFilterTest extends TestCase 
+    public class KnockoutFilterTest extends TestCase 
     {
-        public function HoleFilterTest(name:String = "")
+        public function KnockoutFilterTest(name:String = "")
         {
             super(name);
         }
         
-        [Embed("../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
-        private var ByteArrayClass:Class ;
+        [Embed("../../../../pixelbender/pbj/Knockout.pbj", mimeType="application/octet-stream")]
+        private var Knockout:Class ;
         
-        public var center:Point ;
-        public var filter:HoleFilter ;
-        public var radius:Number = 20 ;
+        public var color:uint = 0xFF0000 ;
+        public var filter:KnockoutFilter ;
         public var shader:Shader ;
+        public var threshold:Number = 1;
         
         public function setUp():void
         {
-            center = new Point( 20, 30) ;
-            shader = new Shader( new ByteArrayClass() ) ;
-            filter = new HoleFilter( shader , { center : center , radius : radius } ) ;
+            shader = new Shader( new Knockout() ) ;
+            filter = new KnockoutFilter( shader , { color : color , threshold : threshold } ) ;
         }
         
         public function tearDown():void
@@ -69,24 +67,23 @@ package graphics.filters
         public function testConstructor():void
         {
             assertNotNull( filter ) ;
-            assertEquals( filter.center.x , center.x ) ;
-            assertEquals( filter.center.y , center.y ) ;
-            assertEquals( filter.radius , radius ) ;
+            assertEquals( filter.color , color ) ;
+            assertEquals( filter.threshold , threshold ) ;
         }
         
         public function testDescription():void
         {
-            assertEquals( filter.description , "Creates an hole to mask the picture" ) ;
+            assertEquals( "Creates a knockout effect to remove a specific color in a picture" , filter.description ) ;
         }
         
         public function testName():void
         {
-            assertEquals( filter.name , "Hole" ) ; 
+            assertEquals( "Knockout" , filter.name ) ; 
         }
         
         public function testNamespace():void
         {
-            assertEquals( filter.namespace , "graphics.filters" ) ;
+            assertEquals( "graphics.filters" , filter.namespace ) ;
         }
         
         public function testVersion():void
@@ -96,11 +93,9 @@ package graphics.filters
         
         public function testClone():void
         {
-            var clone:HoleFilter = filter.clone() as HoleFilter ;
+            var clone:KnockoutFilter = filter.clone() as KnockoutFilter ;
             assertNotNull( clone ) ;
-            assertEquals( clone.radius   , filter.radius ) ;
-            assertEquals( clone.center.x , filter.center.x ) ;
-            assertEquals( clone.center.y , filter.center.y ) ; 
+            assertEquals( clone.color     , filter.color ) ;            assertEquals( clone.threshold , filter.threshold ) ;
         }
     }
 }

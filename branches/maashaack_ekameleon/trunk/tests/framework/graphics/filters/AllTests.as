@@ -45,6 +45,7 @@ package graphics.filters
             var suite:TestSuite = new TestSuite("graphics.filters package tests");
             
             suite.addTestSuite( HoleFilterTest ) ;
+            suite.addTestSuite( KnockoutFilterTest ) ;
             
             return suite;
         }

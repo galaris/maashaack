@@ -38,6 +38,7 @@ package graphics.filters
     import graphics.colors.RGB;
     
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     
     /**
      * The KnockoutFilter class applies a filter by executing a shader on the object being filtered. 
@@ -91,6 +92,23 @@ package graphics.filters
         public function set threshold( value:Number ):void
         {
             shader.data.threshold.value[0] = value ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:KnockoutFilter = new KnockoutFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.color.value[0] = shader.data.color.value[0] ;
+                filter.shader.data.color.value[1] = shader.data.color.value[1] ;
+                filter.shader.data.color.value[2] = shader.data.color.value[2] ;
+                filter.shader.data.threshold.value[0] = shader.data.threshold.value[0] ;
+            }
+            return filter ;
         }
         
         /**

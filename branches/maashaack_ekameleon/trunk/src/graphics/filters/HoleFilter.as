@@ -36,6 +36,7 @@
 package graphics.filters 
 {
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     import flash.geom.Point;
 
     /**
@@ -86,6 +87,22 @@ package graphics.filters
         public function set radius( value:Number ):void
         {
             shader.data.radius.value[0] = value ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:HoleFilter = new HoleFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.center.value[0] = shader.data.center.value[0] ;
+                filter.shader.data.center.value[1] = shader.data.center.value[1] ;
+                filter.shader.data.radius.value[0] = shader.data.radius.value[0] ;
+            }
+            return filter ;
         }
     }
 }
