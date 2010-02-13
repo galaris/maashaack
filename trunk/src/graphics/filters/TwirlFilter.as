@@ -36,8 +36,9 @@
 package graphics.filters 
 {
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     import flash.geom.Point;
-    
+
     /**
      * The HoleFilter class applies a hole mask over a display or a bitmap. 
      * The Shader must be defines with the Hole pixelbender implementation.
@@ -118,6 +119,15 @@ package graphics.filters
         public function set radius( value:Number ):void
         {
             shader.data.radius.value[0] = value ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            return new TwirlFilter( shader ) ;
         }
     }
 }

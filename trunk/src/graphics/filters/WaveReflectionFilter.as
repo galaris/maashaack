@@ -38,6 +38,7 @@ package graphics.filters
     import system.numeric.Mathematics;
     
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     
     /**
      * The ReflectionFilter class applies a wave reflection over a display or a bitmap. 
@@ -101,6 +102,15 @@ package graphics.filters
         public function set progress( value:Number ):void
         {
             shader.data.progress.value[0] = Mathematics.clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            return new WaveReflectionFilter( shader ) ;
         }
     }
 }

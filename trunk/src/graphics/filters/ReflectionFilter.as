@@ -108,14 +108,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:ReflectionFilter = new ReflectionFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.alpha.value[0]  = shader.data.alpha.value[0] ;
-                filter.shader.data.height.value[0] = shader.data.height.value[0] ;
-                filter.shader.data.size.value[0]   = shader.data.size.value[0] ;
-            }
-            return filter ;
+            return new ReflectionFilter( shader ) ;
         }
     }
 }

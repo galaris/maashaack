@@ -206,22 +206,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:RGBDistortFilter = new RGBDistortFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.direction.value[0] = shader.data.direction.value[0] ;
-                filter.shader.data.direction.value[1] = shader.data.direction.value[1] ;
-                filter.shader.data.direction.value[2] = shader.data.direction.value[2] ;
-                
-                filter.shader.data.frequency.value[0] = shader.data.frequency.value[0] ;
-                filter.shader.data.frequency.value[1] = shader.data.frequency.value[1] ;
-                filter.shader.data.frequency.value[2] = shader.data.frequency.value[2] ;
-                
-                filter.shader.data.intensity.value[0] = shader.data.intensity.value[0] ;
-                filter.shader.data.intensity.value[1] = shader.data.intensity.value[1] ;
-                filter.shader.data.intensity.value[2] = shader.data.intensity.value[2] ;
-            }
-            return filter ;
+            return new RGBDistortFilter( shader ) ;
         }
     }
 }
