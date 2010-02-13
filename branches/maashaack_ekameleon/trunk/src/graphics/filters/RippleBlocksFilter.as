@@ -36,6 +36,7 @@
 package graphics.filters 
 {
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     import flash.geom.Point;
     
     /**
@@ -93,7 +94,7 @@ package graphics.filters
          */
         public function get amplitudeY():Number
         {
-            return shader.data.amplitude.value[0] ;
+            return shader.data.amplitude.value[1] ;
         }
         
         /**
@@ -143,7 +144,7 @@ package graphics.filters
          */
         public function get phaseY():Number
         {
-            return shader.data.phase.value[0] ;
+            return shader.data.phase.value[1] ;
         }
         
         /**
@@ -193,7 +194,7 @@ package graphics.filters
          */
         public function get waveY():Number
         {
-            return shader.data.wave.value[0] ;
+            return shader.data.wave.value[1] ;
         }
         
         /**
@@ -202,6 +203,27 @@ package graphics.filters
         public function set waveY( value:Number ):void
         {
             shader.data.wave.value[1] = value ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:RippleBlocksFilter = new RippleBlocksFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.amplitude.value[0] = shader.data.amplitude.value[0] ;
+                filter.shader.data.amplitude.value[1] = shader.data.amplitude.value[1] ;
+                
+                filter.shader.data.phase.value[0] = shader.data.phase.value[0] ;
+                filter.shader.data.phase.value[1] = shader.data.phase.value[1] ;
+                
+                filter.shader.data.wave.value[0] = shader.data.wave.value[0] ;
+                filter.shader.data.wave.value[1] = shader.data.wave.value[1] ;
+            }
+            return filter ;
         }
     }
 }
