@@ -66,6 +66,7 @@ package graphics.filters
         public function tearDown():void
         {
             filter = null ;
+            shader = null ;
         }
         
         public function testConstructor():void
@@ -100,6 +101,7 @@ package graphics.filters
         {
             var clone:RoundPixelFilter = filter.clone() as RoundPixelFilter ;
             assertNotNull( clone ) ;
+            assertEquals( clone.shader , filter.shader ) ;
             assertEquals( clone.edge  , filter.edge  ) ;
             assertEquals( clone.space , filter.space ) ;
             assertEquals( clone.size  , filter.size  ) ;        }

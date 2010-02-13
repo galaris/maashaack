@@ -63,6 +63,7 @@ package graphics.filters
         public function tearDown():void
         {
             filter = null ;
+            shader = null ;
         }
         
         public function testConstructor():void
@@ -96,6 +97,7 @@ package graphics.filters
         {
             var clone:ReflectionFilter = filter.clone() as ReflectionFilter ;
             assertNotNull( clone ) ;
+            assertEquals( clone.shader , filter.shader ) ;
             assertEquals( clone.alpha , filter.alpha ) ;            assertEquals( clone.height , filter.height ) ;            assertEquals( clone.size , filter.size ) ;
         }
     }

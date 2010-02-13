@@ -37,57 +37,50 @@ package graphics.filters
     import buRRRn.ASTUce.framework.TestCase;
     
     import flash.display.Shader;
-    import flash.geom.Point;
     
-    public class HoleFilterTest extends TestCase 
+    public class ShaderCustomFilterTest extends TestCase 
     {
-        public function HoleFilterTest(name:String = "")
+        public function ShaderCustomFilterTest(name:String = "")
         {
             super(name);
         }
         
-        [Embed("../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
-        private var Hole:Class ;
+        [Embed("../../../../pixelbender/pbj/RoundPixel.pbj", mimeType="application/octet-stream")]
+        private var RoundPixel:Class ;
         
-        public var center:Point ;
-        public var filter:HoleFilter ;
-        public var radius:Number = 20 ;
+        public var filter:ShaderCustomFilter ;
         public var shader:Shader ;
         
         public function setUp():void
         {
-            center = new Point( 20, 30) ;
-            shader = new Shader( new Hole() ) ;
-            filter = new HoleFilter( shader , { center : center , radius : radius } ) ;
+            shader = new Shader( new RoundPixel() ) ;
+            filter = new ShaderCustomFilter( shader ) ;
         }
         
         public function tearDown():void
         {
-            filter = null ;
             shader = null ;
+            filter = null ;
         }
         
         public function testConstructor():void
         {
             assertNotNull( filter ) ;
-            assertEquals( filter.center.x , center.x ) ;
-            assertEquals( filter.center.y , center.y ) ;
-            assertEquals( filter.radius , radius ) ;
         }
         
         public function testDescription():void
         {
-            assertEquals( filter.description , "Creates an hole to mask the picture" ) ;
+            assertEquals( "Rounds the pixels." , filter.description ) ;
         }
         
         public function testName():void
         {
-            assertEquals( filter.name , "Hole" ) ; 
+            assertEquals( "RoundPixel" , filter.name ) ; 
         }
         
         public function testNamespace():void
         {
-            assertEquals( filter.namespace , "graphics.filters" ) ;
+            assertEquals( "graphics.filters" , filter.namespace ) ;
         }
         
         public function testVersion():void
@@ -97,12 +90,8 @@ package graphics.filters
         
         public function testClone():void
         {
-            var clone:HoleFilter = filter.clone() as HoleFilter ;
+            var clone:ShaderCustomFilter = filter.clone() as ShaderCustomFilter ;
             assertNotNull( clone ) ;
-            assertEquals( clone.shader , filter.shader ) ;
-            assertEquals( clone.radius   , filter.radius ) ;
-            assertEquals( clone.center.x , filter.center.x ) ;
-            assertEquals( clone.center.y , filter.center.y ) ; 
-        }
+            assertEquals( clone.shader , filter.shader ) ;        }
     }
 }
