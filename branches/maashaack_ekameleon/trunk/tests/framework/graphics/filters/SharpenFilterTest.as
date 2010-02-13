@@ -32,73 +32,70 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
 package graphics.filters 
 {
+    import buRRRn.ASTUce.framework.TestCase;
+    
     import flash.display.Shader;
-    import flash.filters.BitmapFilter;
-
-    /**
-     * The SharpenFilter class applies a sharpen effect over a picture. 
-     * The Shader must be defines with the Sharpen pixelbender implementation.
-     */
-    public class SharpenFilter extends ShaderCustomFilter 
+    
+    public class SharpenFilterTest extends TestCase 
     {
-        /**
-         * Creates a new SharpenFilter instance.
-         * @param shader The Shader reference with the Sharpen pixel bender filter inside.
-         * @param init The optional dynamic object to initialize the filter.
-         */
-        public function SharpenFilter( shader:Shader = null , init:Object = null )
+        public function SharpenFilterTest( name:String = "" )
         {
-            super( shader , init ) ;
+            super(name);
         }
         
-        /**
-         * The amount value of the sharpen filter (between 0 and 100).
-         */
-        public function get amount():Number
+        [Embed("../../../../pixelbender/pbj/Sharpen.pbj", mimeType="application/octet-stream")]
+        private var Sharpen:Class ;
+        
+        public var filter:SharpenFilter ;
+        public var shader:Shader ;
+        
+        public function setUp():void
         {
-            return shader.data.amount.value[0] ;
+            shader = new Shader( new Sharpen() ) ;
+            filter = new SharpenFilter( shader , { amount : 100 , radius : 1 } ) ;
         }
         
-        /**
-         * @private
-         */
-        public function set amount( value:Number ):void
+        public function tearDown():void
         {
-            shader.data.amount.value[0] = value ;
+            shader = null ;
+            filter = null ;
         }
         
-        /**
-         * The radius value of the sharpen filter (between 0 and 1).
-         */
-        public function get radius():Number
+        public function testConstructor():void
         {
-            return shader.data.radius.value[0] ;
+            assertNotNull( filter ) ;
+            assertEquals( filter.amount , 100 ) ; 
+            assertEquals( filter.radius , 1 ) ; 
         }
         
-        /**
-         * @private
-         */
-        public function set radius( value:Number ):void
+        public function testDescription():void
         {
-            shader.data.radius.value[0] = value ;
+            assertEquals( "Applies a sharpen effect to an image." , filter.description ) ;
         }
         
-        /**
-         * Returns a shallow copy of the object.
-         * @return a shallow copy of the object.
-         */
-        public override function clone():BitmapFilter
+        public function testName():void
         {
-            var filter:SharpenFilter = new SharpenFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.amount.value[0]  = shader.data.amount.value[0] ;
-                filter.shader.data.radius.value[0] = shader.data.radius.value[0] ;
-            }
-            return filter ;
+            assertEquals( "Sharpen" , filter.name ) ; 
         }
+        
+        public function testNamespace():void
+        {
+            assertEquals( "graphics.filters" , filter.namespace ) ;
+        }
+        
+        public function testVersion():void
+        {
+            assertEquals( filter.version , 1 ) ; 
+        }
+        
+        public function testClone():void
+        {
+            var clone:SharpenFilter = filter.clone() as SharpenFilter ;
+            assertNotNull( clone ) ;
+            assertEquals( clone.shader , filter.shader ) ;
+            assertEquals( clone.amount , filter.amount ) ; 
+            assertEquals( clone.radius , filter.radius ) ;         }
     }
 }
