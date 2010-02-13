@@ -200,7 +200,6 @@ package graphics.filters
             shader.data.intensity.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
-        
         /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
