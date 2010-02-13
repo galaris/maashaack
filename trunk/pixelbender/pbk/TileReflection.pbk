@@ -40,7 +40,7 @@ kernel TileReflection
     namespace   : "graphics.filters";
     vendor      : "ALCARAZ Marc (eKameleon)";
     version     : 1 ;
-    description : "Tile reflection filter with beautiful mirror effect" ; >
+    description : "Tile reflection filter with beautiful mirror effect - not FlashPlayer compatible for the moment :(" ; >
 {
     /**
      * Specify the angle value of the filter.
