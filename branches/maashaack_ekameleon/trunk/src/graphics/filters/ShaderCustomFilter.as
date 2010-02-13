@@ -35,9 +35,10 @@
 
 package graphics.filters 
 {
-    import flash.errors.IllegalOperationError;
     import flash.display.Shader;
     import flash.display.ShaderData;
+    import flash.errors.IllegalOperationError;
+    import flash.filters.BitmapFilter;
     import flash.filters.ShaderFilter;
     
     /**
@@ -110,6 +111,15 @@ package graphics.filters
         public function get version():String
         {
             return _version ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            return new ShaderCustomFilter( shader ) ;
         }
         
         /**

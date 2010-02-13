@@ -69,6 +69,7 @@ package graphics.filters
         public function tearDown():void
         {
             filter = null ;
+            shader = null ;
         }
         
         public function testConstructor():void
@@ -106,7 +107,7 @@ package graphics.filters
         {
             var clone:RippleBlocksFilter = filter.clone() as RippleBlocksFilter ;
             assertNotNull( clone ) ;
-            
+            assertEquals( clone.shader , filter.shader ) ;
             assertEquals( clone.amplitudeX , filter.amplitudeX ) ;
             assertEquals( clone.amplitudeY , filter.amplitudeY ) ;
             assertEquals( clone.phaseX     , filter.phaseX     ) ;

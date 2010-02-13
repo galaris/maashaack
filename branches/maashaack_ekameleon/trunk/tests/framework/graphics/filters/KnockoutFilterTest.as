@@ -62,6 +62,7 @@ package graphics.filters
         public function tearDown():void
         {
             filter = null ;
+            shader = null ;
         }
         
         public function testConstructor():void
@@ -95,6 +96,7 @@ package graphics.filters
         {
             var clone:KnockoutFilter = filter.clone() as KnockoutFilter ;
             assertNotNull( clone ) ;
+            assertEquals( clone.shader , filter.shader ) ;  
             assertEquals( clone.color     , filter.color ) ;            assertEquals( clone.threshold , filter.threshold ) ;
         }
     }

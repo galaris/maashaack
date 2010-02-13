@@ -70,6 +70,7 @@ package graphics.filters
         public function tearDown():void
         {
             filter = null ;
+            shader = null ;
         }
         
         public function testConstructor():void
@@ -104,6 +105,8 @@ package graphics.filters
         {
             var clone:RGBDistortFilter = filter.clone() as RGBDistortFilter ;
             assertNotNull( clone ) ;
+            
+            assertEquals( clone.shader , filter.shader ) ;
             
             assertEquals( clone.redDirection   , filter.redDirection ) ;
             assertEquals( clone.greenDirection , filter.greenDirection ) ;
