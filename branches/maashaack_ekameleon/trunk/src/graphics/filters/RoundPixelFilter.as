@@ -38,6 +38,7 @@ package graphics.filters
     import system.numeric.Mathematics;
     
     import flash.display.Shader;
+    import flash.filters.BitmapFilter;
     
     /**
      * The RoundPixelFilter class applies a filter by executing a shader on the object being filtered. 
@@ -101,6 +102,22 @@ package graphics.filters
         public function set size( value:Number ):void
         {
             shader.data.size.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 2) ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
+        {
+            var filter:RoundPixelFilter = new RoundPixelFilter( shader ) ;
+            if ( shader && shader.data )
+            {
+                filter.shader.data.edge.value[0]  = shader.data.edge.value[0] ;
+                filter.shader.data.space.value[0] = shader.data.space.value[0] ;
+                filter.shader.data.size.value[0]  = shader.data.size.value[0] ;
+            }
+            return filter ;
         }
     }
 }
