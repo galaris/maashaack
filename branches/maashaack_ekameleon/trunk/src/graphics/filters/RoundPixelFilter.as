@@ -110,14 +110,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:RoundPixelFilter = new RoundPixelFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.edge.value[0]  = shader.data.edge.value[0] ;
-                filter.shader.data.space.value[0] = shader.data.space.value[0] ;
-                filter.shader.data.size.value[0]  = shader.data.size.value[0] ;
-            }
-            return filter ;
+            return new RoundPixelFilter( shader ) ;
         }
     }
 }

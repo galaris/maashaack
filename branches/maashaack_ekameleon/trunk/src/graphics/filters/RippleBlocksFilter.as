@@ -211,19 +211,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:RippleBlocksFilter = new RippleBlocksFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.amplitude.value[0] = shader.data.amplitude.value[0] ;
-                filter.shader.data.amplitude.value[1] = shader.data.amplitude.value[1] ;
-                
-                filter.shader.data.phase.value[0] = shader.data.phase.value[0] ;
-                filter.shader.data.phase.value[1] = shader.data.phase.value[1] ;
-                
-                filter.shader.data.wave.value[0] = shader.data.wave.value[0] ;
-                filter.shader.data.wave.value[1] = shader.data.wave.value[1] ;
-            }
-            return filter ;
+            return new RippleBlocksFilter( shader ) ;
         }
     }
 }

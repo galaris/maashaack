@@ -92,13 +92,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:SharpenFilter = new SharpenFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.amount.value[0]  = shader.data.amount.value[0] ;
-                filter.shader.data.radius.value[0] = shader.data.radius.value[0] ;
-            }
-            return filter ;
+            return new SharpenFilter( shader ) ;
         }
     }
 }

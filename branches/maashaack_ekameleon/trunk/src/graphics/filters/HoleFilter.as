@@ -95,14 +95,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            var filter:HoleFilter = new HoleFilter( shader ) ;
-            if ( shader && shader.data )
-            {
-                filter.shader.data.center.value[0] = shader.data.center.value[0] ;
-                filter.shader.data.center.value[1] = shader.data.center.value[1] ;
-                filter.shader.data.radius.value[0] = shader.data.radius.value[0] ;
-            }
-            return filter ;
+            return new HoleFilter( shader ) ;
         }
     }
 }
