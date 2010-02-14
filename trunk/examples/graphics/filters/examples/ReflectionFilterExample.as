@@ -36,79 +36,69 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.RippleBlocksFilter;
-    
-    import system.numeric.Mathematics;
-    
-    import flash.display.Loader;
+    import graphics.filters.ReflectionFilter;
+
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
-    import flash.events.MouseEvent;
+    import flash.media.Camera;
+    import flash.media.Video;
     import flash.net.URLRequest;
-    
+
     /**
-     * Test the graphics.filters.RippleBlocksFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.ReflectionFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleRippleBlocksFilter extends Sprite 
+    public class ReflectionFilterExample extends Sprite 
     {
-        public function ExampleRippleBlocksFilter()
+        public function ReflectionFilterExample()
         {
             // stage
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
-            // picture
+            // container
             
-            picture = new Loader() ;
+            container = new Sprite() ;
             
-            picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
+            container.x = 75 ;
+            container.y = 60 ;
             
-            picture.x = 20 ;
-            picture.y = 20 ;
+            container.graphics.beginFill( 0x000000 ) ;
+            container.graphics.drawRect( 0 , 0 , 320 , 240 ) ;
             
-            picture.load( new URLRequest("library/picture.jpg") ) ;
+            addChild( container ) ;
             
-            addChild( picture ) ;
+            // video
+            
+            var video:Video = new Video() ;
+            video.attachCamera( Camera.getCamera() ) ;
+            
+            container.addChild( video ) ;
             
             // shader
             
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/RippleBlocks.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/Reflection.pbj" ) ) ;
         }
         
-        public var filter:RippleBlocksFilter ;
+        public var container:Sprite ;
+        
+        public var filter:ReflectionFilter ;
         
         public var loader:ShaderLoader ;
         
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
+        protected function complete( e:Event ):void
         {
-            var init:Object = 
-            {
-                amplitudeX : 44 ,
-                amplitudeY : 17 ,
-                phaseX     :  2 ,
-                phaseY     :  2 ,
-                waveX      : 40 ,
-                waveY      : 60 
-            };
+            filter = new ReflectionFilter( loader.shader ) ;
             
-            filter = new RippleBlocksFilter( loader.shader , init ) ;
+            filter.bottomExtension = container.height ;
             
-            picture.filters = [ filter ] ;
-        }
-        
-        public function update( e:Event ):void
-        {
-            if ( filter != null )
-            {
-                filter.phaseX =  Mathematics.map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
-                filter.waveY  =  Mathematics.map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
-                picture.filters = [ filter ] ;
-            }
+            filter.alpha  = 0.5  ; // alpha of the reflection
+            filter.size   = 55   ; // size of the reflection
+            filter.height = 240  ; // size of the display
+            
+            container.filters = [ filter ] ;
         }
     }
 }

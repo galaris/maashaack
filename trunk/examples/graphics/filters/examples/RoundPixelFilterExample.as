@@ -36,69 +36,81 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.ReflectionFilter;
-
+    import graphics.filters.RoundPixelFilter;
+    
+    import system.numeric.Mathematics;
+    
+    import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
-    import flash.media.Camera;
-    import flash.media.Video;
+    import flash.events.MouseEvent;
     import flash.net.URLRequest;
-
+    
     /**
-     * Test the graphics.filters.ReflectionFilter class, this example work only with a FP10 or sup.
+     * Test the graohics.filters.RoundPixelFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleReflectionFilter extends Sprite 
+    public class RoundPixelFilterExample extends Sprite 
     {
-        public function ExampleReflectionFilter()
+        public function RoundPixelFilterExample()
         {
             // stage
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
-            // container
+            // picture
             
-            container = new Sprite() ;
+            picture = new Loader() ;
             
-            container.x = 75 ;
-            container.y = 60 ;
+            picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
-            container.graphics.beginFill( 0x000000 ) ;
-            container.graphics.drawRect( 0 , 0 , 320 , 240 ) ;
+            picture.x = 20 ;
+            picture.y = 20 ;
             
-            addChild( container ) ;
+            picture.load( new URLRequest("library/picture.jpg") ) ;
             
-            // video
-            
-            var video:Video = new Video() ;
-            video.attachCamera( Camera.getCamera() ) ;
-            
-            container.addChild( video ) ;
+            addChild( picture ) ;
             
             // shader
             
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Reflection.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/RoundPixel.pbj" ) ) ;
         }
         
-        public var container:Sprite ;
-        
-        public var filter:ReflectionFilter ;
+        public var filter:RoundPixelFilter ;
         
         public var loader:ShaderLoader ;
         
-        protected function complete( e:Event ):void
+        public var picture:Loader ;
+        
+        public function complete( e:Event ):void
         {
-            filter = new ReflectionFilter( loader.shader ) ;
+            var init:Object = 
+            {
+                space          : 4.00 ,
+                size           : 0.70 ,
+                edge           : 0.00 
+            };
             
-            filter.bottomExtension = container.height ;
+            filter = new RoundPixelFilter( loader.shader , init ) ;
             
-            filter.alpha  = 0.5  ; // alpha of the reflection
-            filter.size   = 55   ; // size of the reflection
-            filter.height = 240  ; // size of the display
+            trace( "name        : " + filter.name        ) ;
+            trace( "namespace   : " + filter.namespace   ) ;
+            trace( "version     : " + filter.version     ) ;
+            trace( "description : " + filter.description ) ;
             
-            container.filters = [ filter ] ;
+            picture.filters = [ filter ] ;
+        }
+        
+        public function update( e:Event ):void
+        {
+            if ( filter != null )
+            {
+                filter.space =  Mathematics.map( picture.mouseX , 0 , picture.width  , 1 , 300 ) ;
+                filter.size  =  Mathematics.map( picture.mouseY , 0 , picture.height , 2 ,   0 ) ;
+                picture.filters = [ filter ] ;
+            }
         }
     }
 }

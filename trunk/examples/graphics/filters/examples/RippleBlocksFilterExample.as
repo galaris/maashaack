@@ -36,22 +36,23 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.KnockoutFilter;
+    import graphics.filters.RippleBlocksFilter;
+    
+    import system.numeric.Mathematics;
     
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
+    import flash.events.MouseEvent;
     import flash.net.URLRequest;
     
-    [SWF(width="300", height="300", frameRate="30", backgroundColor="0xA2A2A2")]
-    
     /**
-     * Test the graphics.filters.KnockoutFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.RippleBlocksFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleKnockoutFilter extends Sprite 
+    public class RippleBlocksFilterExample extends Sprite 
     {
-        public function ExampleKnockoutFilter()
+        public function RippleBlocksFilterExample()
         {
             // stage
             
@@ -60,6 +61,8 @@ package examples
             // picture
             
             picture = new Loader() ;
+            
+            picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
             picture.x = 20 ;
             picture.y = 20 ;
@@ -72,10 +75,10 @@ package examples
             
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Knockout.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/RippleBlocks.pbj" ) ) ;
         }
         
-        public var filter:KnockoutFilter ;
+        public var filter:RippleBlocksFilter ;
         
         public var loader:ShaderLoader ;
         
@@ -83,16 +86,29 @@ package examples
         
         public function complete( e:Event ):void
         {
-            filter = new KnockoutFilter( loader.shader ) ;
-            filter.color     = 0xFFFFFF ; 
-            filter.threshold = 0.05 ;
+            var init:Object = 
+            {
+                amplitudeX : 44 ,
+                amplitudeY : 17 ,
+                phaseX     :  2 ,
+                phaseY     :  2 ,
+                waveX      : 40 ,
+                waveY      : 60 
+            };
             
-            trace( "name        : " + filter.name      ) ;
-            trace( "namespace   : " + filter.namespace ) ;
-            trace( "version     : " + filter.version ) ;
-            trace( "description : " + filter.description ) ;
+            filter = new RippleBlocksFilter( loader.shader , init ) ;
             
             picture.filters = [ filter ] ;
+        }
+        
+        public function update( e:Event ):void
+        {
+            if ( filter != null )
+            {
+                filter.phaseX =  Mathematics.map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
+                filter.waveY  =  Mathematics.map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
+                picture.filters = [ filter ] ;
+            }
         }
     }
 }

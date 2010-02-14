@@ -36,23 +36,23 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.SharpenFilter;
-    
+    import graphics.filters.RGBDistortFilter;
+
     import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
-    
+
     /**
-     * Test the graphics.filters.SharpenFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.RGBDistortFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleSharpenFilter extends Sprite 
+    public class RGBDistortFilterExample extends Sprite 
     {
-        public function ExampleSharpenFilter()
+        public function RGBDistortFilterExample()
         {
             // stage
             
@@ -75,10 +75,10 @@ package examples
             
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Sharpen.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/RGBDistort.pbj" ) ) ;
         }
         
-        public var filter:SharpenFilter ;
+        public var filter:RGBDistortFilter ;
         
         public var loader:ShaderLoader ;
         
@@ -88,15 +88,24 @@ package examples
         {
             var init:Object = 
             {
-                amount : 15.0 ,
-                radius :  0.3 
+                redDirection   :  1.00 ,
+                greenDirection : -1.00 ,
+                blueDirection  :  0.00 ,
+                
+                redFrequency   :  0.25 ,
+                greenFrequency :  0.30 ,
+                blueFrequency  :  0.65 ,
+                
+                redIntensity   :  0.60 ,
+                greenIntensity :  0.60 ,
+                blueIntensity  :  0.40 
             };
             
-            filter = new SharpenFilter( loader.shader , init ) ;
+            filter = new RGBDistortFilter( loader.shader , init ) ;
             
-            trace( "name        : " + filter.name        ) ;
-            trace( "namespace   : " + filter.namespace   ) ;
-            trace( "version     : " + filter.version     ) ;
+            trace( "name        : " + filter.name      ) ;
+            trace( "namespace   : " + filter.namespace ) ;
+            trace( "version     : " + filter.version ) ;
             trace( "description : " + filter.description ) ;
             
             picture.filters = [ filter ] ;
@@ -106,8 +115,14 @@ package examples
         {
             if ( filter != null )
             {
-                filter.amount =  Mathematics.map( picture.mouseX , 0 , picture.width  , 0 , 100 ) ;
-                filter.radius =  Mathematics.map( picture.mouseY , 0 , picture.height , 0 , 1   ) ;
+                filter.redFrequency   = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
+                filter.greenFrequency = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
+                filter.blueFrequency  = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
+                
+                filter.redIntensity   = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
+                filter.greenIntensity = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
+                filter.blueIntensity  = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
+                
                 picture.filters = [ filter ] ;
             }
         }
