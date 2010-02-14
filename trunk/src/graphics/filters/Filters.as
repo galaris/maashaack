@@ -36,10 +36,10 @@
 package graphics.filters 
 {
     import system.process.Lockable;
-
+    
     import flash.display.DisplayObject;
     import flash.filters.BitmapFilter;
-
+    
     /**
      * This collector defines all filters to update a specific DisplayObject view with multiple BitmapFilter (or multiple with the apply method).
      */
@@ -69,20 +69,7 @@ package graphics.filters
         public function set display( display:DisplayObject ):void
         {
             _display = display ; 
-            if ( _display &&  _display.filters && _display.filters != null )
-            {
-                var a:Array = _display.filters ;
-                var l:int   = a.length ;
-                lock() ;
-                if ( l > 0 )
-                {
-                    for( var i:int ; i<l ; i++ )
-                    {
-                        addFilter( a[i] ) ;
-                    }
-                }
-                unlock() ;
-            }
+            synchronise() ;
         }
         
         /**
@@ -202,6 +189,29 @@ package graphics.filters
             else
             {
                 return false ; 
+            }
+        }
+        
+        /**
+         * Synchronise the Filters object with the display.
+         */
+        public function synchronise( display:DisplayObject = null ):void
+        {
+            var d:DisplayObject = display || _display ;
+            filters = [] ;
+            if ( d && d.filters )
+            {
+                var a:Array = d.filters ;
+                var l:int   = a.length ;
+                lock() ;
+                if ( l > 0 )
+                {
+                    for( var i:int ; i<l ; i++ )
+                    {
+                        addFilter( a[i] as BitmapFilter ) ;
+                    }
+                }
+                unlock() ;
             }
         }
         
