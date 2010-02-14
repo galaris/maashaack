@@ -42,6 +42,79 @@ package graphics.filters
     
     /**
      * This collector defines all filters to update a specific DisplayObject view with multiple BitmapFilter (or multiple with the apply method).
+     * <pre class="prettyprint"</pre>
+     * package examples 
+     * {
+     *     import graphics.filters.Filters;
+     *     
+     *     import flash.display.Shape;
+     *     import flash.display.Sprite;
+     *     import flash.display.StageScaleMode;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.filters.BlurFilter;
+     *     import flash.filters.DropShadowFilter;
+     *     import flash.ui.Keyboard;
+     *     
+     *     public class FiltersExample extends Sprite 
+     *     {
+     *         public function FiltersExample()
+     *         {
+     *             /////
+     *             
+     *             stage.scaleMode = StageScaleMode.NO_SCALE ;
+     *             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+     *             
+     *             /////
+     *             
+     *             var shape:Shape = new Shape() ;
+     *             
+     *             shape.graphics.beginFill( 0xFF0000 ) ;
+     *             shape.graphics.drawRect( 0 , 0 ,50 , 50 ) ;
+     *             
+     *             shape.x = 50 ;
+     *             shape.y = 50 ;
+     *             
+     *             addChild( shape ) ;
+     *             
+     *             /////
+     *             
+     *             effects = new Filters( shape ) ;
+     *             
+     *             effects.addFilter( blur ) ;
+     *             effects.addFilter( shadow ) ;
+     *         }
+     *         
+     *         public var blur:BlurFilter = new BlurFilter(10,5,3) ;
+     *         
+     *         public var effects:Filters ;
+     *         
+     *         public var shadow:DropShadowFilter = new DropShadowFilter(2,45,0,0.7,10,10,1,3) ;
+     *         
+     *         public function keyDown( e:KeyboardEvent ):void
+     *         {
+     *             var code:uint = e.keyCode ;
+     *             switch( code )
+     *             {
+     *                 case Keyboard.UP :
+     *                 {
+     *                     blur.blurX      = 10 ;
+     *                     shadow.distance = 2  ;
+     *                     shadow.angle    = 45 ;
+     *                     break ;
+     *                 }
+     *                 case Keyboard.DOWN :
+     *                 {
+     *                     blur.blurX      = 20 ;
+     *                     shadow.distance = 6  ;
+     *                     shadow.angle    = 90 ;
+     *                     break ;
+     *                 }
+     *             }
+     *             effects.update() ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class Filters implements Lockable
     {
