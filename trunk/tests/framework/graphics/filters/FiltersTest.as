@@ -151,6 +151,13 @@ package graphics.filters
             assertTrue( filters.isEmpty() ) ;
         }
         
+        public function testSynchronise():void
+        {
+            display.filters = [ filter1 , filter2 ] ;
+            filters.synchronise() ;
+            ArrayAssert.assertEquals( filters.toArray() , display.filters ) ;
+        }
+        
         public function testUpdate():void
         {
             filters.addFilter( filter1 ) ;
