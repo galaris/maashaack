@@ -95,16 +95,17 @@
     
     <!-- graphics.filters -->
     
-    <component id="graphics.filters:HoleFilter"           class="graphics.filters.HoleFilter"  />
-    <component id="graphics.filters:KnockoutFilter"       class="graphics.filters.KnockoutFilter"  />
-    <component id="graphics.filters:ReflectionFilter"     class="graphics.filters.ReflectionFilter"  />
-    <component id="graphics.filters:RGBDistortFilter"     class="graphics.filters.RGBDistortFilter"  />
-    <component id="graphics.filters:RippleBlocksFilter"   class="graphics.filters.RippleBlocksFilter"  />
-    <component id="graphics.filters:RoundPixelFilter"     class="graphics.filters.RoundPixelFilter"  />
-    <component id="graphics.filters:ShaderCustomFilter"   class="graphics.filters.ShaderCustomFilter"  />
-    <component id="graphics.filters:SharpenFilter"        class="graphics.filters.SharpenFilter"  />
-    <component id="graphics.filters:TwirlFilter"          class="graphics.filters.TwirlFilter"  />
-    <component id="graphics.filters:WaveReflectionFilter" class="graphics.filters.WaveReflectionFilter"  />
+    <component id="graphics.filters:Filters"              class="graphics.filters.Filters" />
+    <component id="graphics.filters:HoleFilter"           class="graphics.filters.HoleFilter" />
+    <component id="graphics.filters:KnockoutFilter"       class="graphics.filters.KnockoutFilter" />
+    <component id="graphics.filters:ReflectionFilter"     class="graphics.filters.ReflectionFilter" />
+    <component id="graphics.filters:RGBDistortFilter"     class="graphics.filters.RGBDistortFilter" />
+    <component id="graphics.filters:RippleBlocksFilter"   class="graphics.filters.RippleBlocksFilter" />
+    <component id="graphics.filters:RoundPixelFilter"     class="graphics.filters.RoundPixelFilter" />
+    <component id="graphics.filters:ShaderCustomFilter"   class="graphics.filters.ShaderCustomFilter" />
+    <component id="graphics.filters:SharpenFilter"        class="graphics.filters.SharpenFilter" />
+    <component id="graphics.filters:TwirlFilter"          class="graphics.filters.TwirlFilter" />
+    <component id="graphics.filters:WaveReflectionFilter" class="graphics.filters.WaveReflectionFilter" />
     
     <!-- graphics.geom -->
     
