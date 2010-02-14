@@ -36,23 +36,22 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.RoundPixelFilter;
-    
-    import system.numeric.Mathematics;
+    import graphics.filters.KnockoutFilter;
     
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
-    import flash.events.MouseEvent;
     import flash.net.URLRequest;
     
+    [SWF(width="300", height="300", frameRate="30", backgroundColor="0xA2A2A2")]
+    
     /**
-     * Test the graohics.filters.RoundPixelFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.KnockoutFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleRoundPixelFilter extends Sprite 
+    public class KnockoutFilterExample extends Sprite 
     {
-        public function ExampleRoundPixelFilter()
+        public function KnockoutFilterExample()
         {
             // stage
             
@@ -61,8 +60,6 @@ package examples
             // picture
             
             picture = new Loader() ;
-            
-            picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
             picture.x = 20 ;
             picture.y = 20 ;
@@ -75,10 +72,10 @@ package examples
             
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/RoundPixel.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/Knockout.pbj" ) ) ;
         }
         
-        public var filter:RoundPixelFilter ;
+        public var filter:KnockoutFilter ;
         
         public var loader:ShaderLoader ;
         
@@ -86,31 +83,16 @@ package examples
         
         public function complete( e:Event ):void
         {
-            var init:Object = 
-            {
-                space          : 4.00 ,
-                size           : 0.70 ,
-                edge           : 0.00 
-            };
+            filter = new KnockoutFilter( loader.shader ) ;
+            filter.color     = 0xFFFFFF ; 
+            filter.threshold = 0.05 ;
             
-            filter = new RoundPixelFilter( loader.shader , init ) ;
-            
-            trace( "name        : " + filter.name        ) ;
-            trace( "namespace   : " + filter.namespace   ) ;
-            trace( "version     : " + filter.version     ) ;
+            trace( "name        : " + filter.name      ) ;
+            trace( "namespace   : " + filter.namespace ) ;
+            trace( "version     : " + filter.version ) ;
             trace( "description : " + filter.description ) ;
             
             picture.filters = [ filter ] ;
-        }
-        
-        public function update( e:Event ):void
-        {
-            if ( filter != null )
-            {
-                filter.space =  Mathematics.map( picture.mouseX , 0 , picture.width  , 1 , 300 ) ;
-                filter.size  =  Mathematics.map( picture.mouseY , 0 , picture.height , 2 ,   0 ) ;
-                picture.filters = [ filter ] ;
-            }
         }
     }
 }

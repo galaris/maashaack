@@ -36,7 +36,7 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.HoleFilter;
+    import graphics.filters.TwirlFilter;
     
     import flash.display.Loader;
     import flash.display.Sprite;
@@ -45,13 +45,13 @@ package examples
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.net.URLRequest;
-
+    
     /**
-     * Test the graphics.filters.HoleFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.TwirlFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleHoleFilter extends Sprite 
+    public class TwirlFilterExample extends Sprite 
     {
-        public function ExampleHoleFilter()
+        public function TwirlFilterExample()
         {
             // stage
             
@@ -74,7 +74,7 @@ package examples
             addChild( picture ) ;
         }
         
-        public var filter:HoleFilter ;
+        public var filter:TwirlFilter ;
         
         public var loader:ShaderLoader ;
         
@@ -82,7 +82,12 @@ package examples
         
         protected function complete( e:Event ):void
         {
-            filter = new HoleFilter( loader.shader ) ;
+            filter = new TwirlFilter( loader.shader ) ;
+            
+            filter.bottomExtension = 100 ;
+            filter.leftExtension   = 100 ;
+            filter.rightExtension  = 100 ;
+            filter.topExtension    = 100 ;
             
             filter.center = new Point( picture.width / 2 , picture.height / 2 ) ;
             filter.radius = 80 ;
@@ -94,10 +99,12 @@ package examples
         {
             if ( filter != null )
             {
-                filter.radius = 10 ;
-                filter.center = new Point( picture.mouseX , picture.mouseY ) ;
+                filter.gaussian = !filter.gaussian ;
+                filter.angle    = 10 ;
+                filter.radius   = 10 ;
+                filter.center   = new Point( picture.mouseX , picture.mouseY ) ;
                 picture.filters = [ filter ] ;
-                addEventListener(Event.ENTER_FRAME , render ) ;
+                addEventListener( Event.ENTER_FRAME , render ) ;
             }
         }
         
@@ -120,6 +127,7 @@ package examples
         
         public function render( e:Event ):void
         {
+            filter.angle  += 10 ;
             filter.radius += 10 ;
             picture.filters = [ filter ] ;
         }
@@ -128,7 +136,7 @@ package examples
         {
             loader = new ShaderLoader() ;
             loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Hole.pbj" ) ) ;
+            loader.load( new URLRequest( "pbj/Twirl.pbj" ) ) ;
         }
     }
 }

@@ -36,21 +36,22 @@
 package examples 
 {
     import graphics.display.ShaderLoader;
-    import graphics.filters.WaveReflectionFilter;
+    import graphics.filters.HoleFilter;
     
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.geom.Point;
     import flash.net.URLRequest;
-    
+
     /**
-     * Test the graphics.filters.WaveReflectionFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.HoleFilter class, this example work only with a FP10 or sup.
      */
-    public class ExampleWaveReflectionFilter extends Sprite 
+    public class HoleFilterExample extends Sprite 
     {
-        public function ExampleWaveReflectionFilter()
+        public function HoleFilterExample()
         {
             // stage
             
@@ -59,9 +60,11 @@ package examples
             // picture
             
             picture = new Loader() ;
+            picture.contentLoaderInfo.addEventListener( Event.COMPLETE , run ) ;
             
-            picture.addEventListener( MouseEvent.MOUSE_OVER , mouseOver ) ;
-            picture.addEventListener( MouseEvent.MOUSE_OUT  , mouseOut   ) ;
+            picture.addEventListener( MouseEvent.MOUSE_DOWN , mouseDown ) ;
+            picture.addEventListener( MouseEvent.MOUSE_MOVE , mouseMove ) ;
+            picture.addEventListener( MouseEvent.MOUSE_UP   , mouseUp   ) ;
             
             picture.x = 20 ;
             picture.y = 20 ;
@@ -69,13 +72,9 @@ package examples
             picture.load( new URLRequest("library/picture.jpg") ) ;
             
             addChild( picture ) ;
-            
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/WaveReflection.pbj" ) ) ;
         }
         
-        public var filter:WaveReflectionFilter ;
+        public var filter:HoleFilter ;
         
         public var loader:ShaderLoader ;
         
@@ -83,16 +82,35 @@ package examples
         
         protected function complete( e:Event ):void
         {
-            filter = new WaveReflectionFilter( loader.shader ) ;
+            filter = new HoleFilter( loader.shader ) ;
             
-            filter.amplitude = 0.3 ;
-            filter.frequency = 0.1 ;
-            filter.progress  = 0 ;
+            filter.center = new Point( picture.width / 2 , picture.height / 2 ) ;
+            filter.radius = 80 ;
             
             picture.filters = [ filter ] ;
         }
         
-        protected function mouseOut( e:Event ):void
+        protected function mouseDown( e:Event ):void
+        {
+            if ( filter != null )
+            {
+                filter.radius = 10 ;
+                filter.center = new Point( picture.mouseX , picture.mouseY ) ;
+                picture.filters = [ filter ] ;
+                addEventListener(Event.ENTER_FRAME , render ) ;
+            }
+        }
+        
+        protected function mouseMove( e:Event ):void
+        {
+            if ( filter != null )
+            {
+                filter.center = new Point( picture.mouseX , picture.mouseY ) ;
+                picture.filters = [ filter ] ;
+            }
+        }
+        
+        protected function mouseUp( e:Event ):void
         {
             if ( filter != null )
             {
@@ -100,26 +118,17 @@ package examples
             }
         }
         
-        protected function mouseOver( e:Event ):void
-        {
-            if ( filter != null )
-            {
-                addEventListener(Event.ENTER_FRAME , render ) ;
-            }
-        }
-        
         public function render( e:Event ):void
         {
-            if ( filter != null )
-            {
-                filter.progress += 0.001 ;
-                if ( filter.progress > 0.98 )
-                {
-                    filter.progress = 0 ;
-                }
-                trace( filter.progress ) ;
-                picture.filters = [ filter ] ;
-            }
+            filter.radius += 10 ;
+            picture.filters = [ filter ] ;
+        }
+        
+        protected function run( e:Event ):void
+        {
+            loader = new ShaderLoader() ;
+            loader.addEventListener( Event.COMPLETE , complete ) ;
+            loader.load( new URLRequest( "pbj/Hole.pbj" ) ) ;
         }
     }
 }
