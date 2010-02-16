@@ -70,6 +70,10 @@ package graphics.display
             var dy:Number = bounds.y + ( offset != null ? offset.y : 0 ) ; 
             switch( align )
             {
+                case Align.NONE :
+                {
+                    break ;
+                }
                 case Align.BOTTOM :
                 case Align.BOTTOM | Align.LEFT | Align.RIGHT :
                 {

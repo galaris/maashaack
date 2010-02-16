@@ -42,9 +42,7 @@ package system.process
     import system.data.queues.LinearQueue;
     import system.data.queues.TypedQueue;
     import system.eden;
-    import system.events.ActionEvent;
     import system.hack;
-    import system.process.Stoppable;
     
     /**
      * A Sequencer of Action process.
@@ -132,13 +130,13 @@ package system.process
             var isEnqueue:Boolean = _queue.enqueue(a) ;
             if ( isEnqueue )
             {
-                a.addEventListener( ActionEvent.FINISH, run , false, 0 , true ) ;
+                a.finishIt.connect( run ) ;
             }
             return isEnqueue ;
         }
         
         /**
-         * Removes all process in the Sequencer.
+         * Removes all action register in the Sequencer.
          */
         public function clear():void 
         {
@@ -146,7 +144,7 @@ package system.process
             {
                 if ( _cur != null )
                 {
-                    _cur.removeEventListener(ActionEvent.FINISH, run) ;
+                    _cur.finishIt.disconnect( run ) ;
                     if ( _cur is Stoppable )
                     {
                         (_cur as Stoppable).stop() ;
@@ -173,7 +171,7 @@ package system.process
             var it:Iterator = _queue.iterator() ;
             while ( it.hasNext() ) 
             {
-                s.addAction(it.next().clone()) ;
+                s.addAction( it.next().clone() ) ;
             }
             return s ;
         }
@@ -221,7 +219,7 @@ package system.process
                     {
                         (_cur as Stoppable).stop() ;
                     }
-                    _cur.removeEventListener( ActionEvent.FINISH, run ) ;
+                    _cur.finishIt.disconnect( run ) ;
                     _cur = null ;
                 }
                 if ( running == true ) 
@@ -276,7 +274,7 @@ package system.process
             {
                 if ( _cur != null )
                 {
-                    _cur.removeEventListener(ActionEvent.FINISH, run) ;
+                    _cur.finishIt.disconnect( run ) ;
                     if ( _cur is Stoppable )
                     {
                         (_cur as Stoppable).stop() ;

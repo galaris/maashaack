@@ -57,14 +57,12 @@ package system.process
         
         public function setUp():void
         {
-            
             seq = new Sequencer() ;
             
             seq.addAction(new MockTask()) ;
             seq.addAction(new MockTask()) ;
             seq.addAction(new MockTask()) ;
             seq.addAction(new MockTask()) ;
-            
         }
         
         public function tearDown():void
@@ -88,7 +86,7 @@ package system.process
             var clone:Sequencer = seq.clone() as Sequencer ;
             clone.clear() ;
             assertEquals( clone.size() , 0 , "clear method failed.") ;
-        }        
+        }
         
         public function testAddAction():void
         {
