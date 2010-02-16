@@ -39,8 +39,8 @@ package system.process
     
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;    
-
+    import system.process.mocks.MockTaskListener;
+    
     public class BatchProcessTest extends TestCase 
     {
         
@@ -49,7 +49,7 @@ package system.process
             super(name);
         }
         
-        public var batch:BatchProcess ;        
+        public var batch:BatchProcess ;
         
         public var mockListener:MockTaskListener ;
         
@@ -70,8 +70,8 @@ package system.process
             mockListener.unregister() ;
             mockListener = undefined ;
             batch        = undefined ; 
-            MockTask.reset() ;       
-        }        
+            MockTask.reset() ;
+        }
         
         public function testConstructor():void
         {

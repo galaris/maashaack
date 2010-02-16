@@ -36,79 +36,56 @@
 package examples
 {
     import system.events.ActionEvent;
-    import system.process.ActionProxy;
+    import system.process.Action;
     import system.process.Pause;
     import system.process.Sequencer;
     
     import flash.display.Sprite;
-    import flash.events.Event;
-    import flash.events.KeyboardEvent;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Example to use the system.process.Sequencer.
+     * Basic example to use the system.process.Sequencer.
      */
-    public class SequencerExample extends Sprite
+    public class SequencerBasicExample extends Sprite
     {
-        
-        public function SequencerExample()
+        public function SequencerBasicExample()
         {
-            var o:Object = {} ;
-            o.toString = function():String 
-            {
-                return "myObject" ;
-            };
+            var sequencer:Sequencer = new Sequencer() ;
             
-            var execute:Function = function ():void 
-            {
-                trace ("\t" + this + " :: execute") ;
-            };
+            sequencer.addEventListener( ActionEvent.FINISH   , debug ) ;
+            sequencer.addEventListener( ActionEvent.PROGRESS , debug ) ;
+            sequencer.addEventListener( ActionEvent.START    , debug ) ;
             
-            var proxy:ActionProxy = new ActionProxy(o, execute) ;
+            sequencer.finishIt.connect( finish ) ;
+            sequencer.progressIt.connect( progress ) ;
+            sequencer.startIt.connect( start  ) ;
             
-            seq = new Sequencer() ;
+            sequencer.addAction( new Pause(1) ) ;
+            sequencer.addAction( new Pause(1) ) ;
+            sequencer.addAction( new Pause(1) ) ;
             
-            seq.addEventListener( ActionEvent.FINISH   , debug ) ;
-            seq.addEventListener( ActionEvent.PROGRESS , progress ) ;
-            seq.addEventListener( ActionEvent.START    , debug ) ;
-            
-            seq.addAction( new Pause(4, true) ) ;
-            seq.addAction( new ActionProxy(o, execute) ) ;
-            seq.addAction( new Pause(6, true) ) ;
-            seq.addAction( new ActionProxy(o, execute) ) ;
-            seq.addAction( new Pause(3, true) ) ;
-            seq.addAction( proxy ) ;
-            
-            trace ("# Press a key to run...") ;
-            
-            stage.addEventListener( KeyboardEvent.KEY_DOWN , onKeyDown ) ;
+            sequencer.run() ;
         }
         
-        public var seq:Sequencer ;
-        
-        public function debug( e:ActionEvent ):void 
+        public function debug( e:ActionEvent ):void
         {
-            trace ( e ) ;
+            trace( "debug " + e.type ) ;
         }
         
-        public function onKeyDown( e:KeyboardEvent):void 
+        public function finish( action:Action ):void
         {
-            if (!seq.running) 
-            {
-                seq.start() ;
-            }
-            else 
-            {
-                seq.stop() ;
-            }
+            trace( "finish" ) ;
         }
         
-        public function progress( e:Event ):void 
+        public function progress( action:Action ):void
         {
-            var type:String      = e.type as String ;
-            var target:Sequencer = e.target as Sequencer ;
-            trace ( target + " :: progress -> " + type + " >> " + ( target.size() || 0) + " :: " + target.current ) ;
+            trace( "progress : " + action ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
         }
     }
 }

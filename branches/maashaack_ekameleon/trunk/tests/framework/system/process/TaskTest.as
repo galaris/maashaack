@@ -139,7 +139,7 @@ package system.process
         public function testFinishIt():void
         {
             var test:Boolean ;
-            var action:Function = function():void
+            var action:Function = function( action:Action ):void
             {
                 test = true ;
             };
@@ -159,7 +159,7 @@ package system.process
         public function testStartIt():void
         {
             var test:Boolean ;
-            var action:Function = function():void
+            var action:Function = function( action:Action ):void
             {
                 test = true ;
             };

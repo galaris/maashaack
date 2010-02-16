@@ -138,7 +138,6 @@ package system.process
          */
         public var looping:Boolean ;
         
-        
         /**
          * This signal emit when the notifyProgress method is invoked. 
          */

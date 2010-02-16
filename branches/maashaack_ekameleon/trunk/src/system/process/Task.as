@@ -165,7 +165,7 @@ package system.process
             {
                 dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
             }
-            _finishIt.emit() ;
+            _finishIt.emit( this ) ;
         }
         
         /**
@@ -174,7 +174,7 @@ package system.process
         public function notifyStarted():void
         {
             setRunning( true ) ;
-            _startIt.emit() ;
+            _startIt.emit( this ) ;
             if ( hasEventListener( _sTypeStart ) )
             {
                 dispatchEvent( new ActionEvent( _sTypeStart , this ) ) ;

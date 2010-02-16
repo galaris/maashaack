@@ -37,7 +37,8 @@ package system.process
 {
     import system.data.Iterator;
     import system.events.ActionEvent;
-    import system.process.Stoppable;
+    import system.signals.Signal;
+    import system.signals.Signaler;
     
     /**
      * This <code class="prettyprint">Action</code> object register <code class="prettyprint">Action</code> objects in a batch process.
@@ -106,14 +107,34 @@ package system.process
         public var autoClear:Boolean ;
         
         /**
+         * This signal emit when the notifyProgress method is invoked. 
+         */
+        public function get progressIt():Signaler
+        {
+            return _progressIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set progressIt( signal:Signaler ):void
+        {
+            _progressIt = signal || new Signal() ;
+        }
+        
+        /**
          * Inserts a new Action object in the batch process collection.
          */
-        public function addAction( action:Action , useWeakReference:Boolean=false ):Boolean
+        public function addAction( action:Action ):Boolean
         {
-            if ( action != null )
+            if ( action )
             {
-                action.addEventListener( ActionEvent.FINISH, _onFinished , false, 0 , useWeakReference ) ;
-                return _batch.add( action ) ;
+                var b:Boolean = _batch.add( action ) ;
+                if( b )
+                {
+                    action.finishIt.connect( _finish ) ;
+                }
+                return b ;
             }
             else
             {
@@ -132,7 +153,7 @@ package system.process
                 while(it.hasNext())
                 {
                     var action:Action = it.next() ;
-                    action.removeEventListener( ActionEvent.FINISH, _onFinished ) ;
+                    action.finishIt.disconnect( _finish ) ;
                     clearProcess( action ) ;
                 }
             }
@@ -180,14 +201,18 @@ package system.process
         public function iterator():Iterator
         {
             return _batch.iterator() ;
-        }        
+        }
         
         /**
          * Notify an ActionEvent when the process is in progress.
          */
-        public function notifyProgress( action:Action ):void 
+        protected function notifyProgress( action:Action = null ):void
         {
-            dispatchEvent( new ActionEvent( ActionEvent.PROGRESS, this , null, action ) ) ;
+            _progressIt.emit( this ) ;
+            if ( hasEventListener( ActionEvent.PROGRESS ) )
+            {
+                dispatchEvent( new ActionEvent( ActionEvent.PROGRESS , this , null, action ) ) ;
+            }
         }
         
         /**
@@ -198,7 +223,7 @@ package system.process
         {
             if ( _batch.contains( action ) )
             {
-                action.removeEventListener( ActionEvent.FINISH, _onFinished ) ;
+                action.finishIt.disconnect( _finish ) ;
                 _batch.remove( action ) ;
                 return true ;
             }
@@ -253,13 +278,18 @@ package system.process
         private var _cpt:Number ;
         
         /**
+         * @private
+         */
+        private var _progressIt:Signaler = new Signal() ;
+        
+        /**
          * Invoked when a tween finish this movement.
          * If all tweens are finished the notifyFinished method is invoked.
          */
-        private function _onFinished( e:ActionEvent ):void
+        private function _finish( action:Action ):void
         {
             _cpt ++ ;
-            notifyProgress( e.target as Action ) ;
+            notifyProgress( action ) ;
             if (_cpt == _batch.size())
             {
                 if ( autoClear )
