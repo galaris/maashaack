@@ -90,7 +90,7 @@ package system.data.arrays
     {
         /**
          * Creates a new ProxyArray instance.
-         */  
+         */
         public function ProxyArray( datas:Array = null )
         {
             _ar = (datas == null) ? [] : [].concat(datas)  ;
@@ -180,7 +180,7 @@ package system.data.arrays
             _index = index ;
             return (index < _ar.length) ? index + 1 : 0 ;
         }
-                
+        
         /**
          * Allows enumeration of the proxied object's properties by index number to retrieve property values. 
          * However, you cannot enumerate the properties of the Proxy class themselves. 
@@ -209,7 +209,7 @@ package system.data.arrays
         public function toArray():Array 
         {
             return [].concat(_ar) ;
-        }        
+        }
         
         /**
          * Returns the source code string representation of the object.
@@ -219,7 +219,7 @@ package system.data.arrays
         {
             return "new " + Reflection.getClassPath(this) + "(" + (_ar.length > 0 ? BuiltinSerializer.emitArray( _ar ) : "" ) + ")" ;
         }
-
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -231,7 +231,7 @@ package system.data.arrays
         
         /**
          * Internal Array reference used in the proxy pattern.
-         */        
+         */
         protected var _ar:Array ;
         
         /**
