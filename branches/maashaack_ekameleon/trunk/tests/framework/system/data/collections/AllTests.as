@@ -35,19 +35,16 @@
 
 package system.data.collections
 {
-    import buRRRn.ASTUce.framework.*;                                                            
-
+    import buRRRn.ASTUce.framework.*;
+    
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data collections tests");
-
             suite.addTestSuite( CollectionFormatterTest ) ;
             suite.addTestSuite( ArrayCollectionTest ) ;
             suite.addTestSuite( TypedCollectionTest ) ;
-
             return suite;
         }
     }

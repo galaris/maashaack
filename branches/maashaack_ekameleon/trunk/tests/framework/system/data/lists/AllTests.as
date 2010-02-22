@@ -35,11 +35,10 @@
 
 package system.data.lists
 {
-    import buRRRn.ASTUce.framework.*;                                                
+    import buRRRn.ASTUce.framework.*;
 
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data lists tests");
@@ -47,7 +46,7 @@ package system.data.lists
             suite.addTestSuite( ArrayListTest ) ;
             suite.addTestSuite( LinkedListTest ) ;
             suite.addTestSuite( LinkedListEntryTest ) ;
-            suite.addTestSuite( SortedArrayListTest ) ;             
+            suite.addTestSuite( SortedArrayListTest ) ;
                 
             return suite;
         }

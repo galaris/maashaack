@@ -43,7 +43,6 @@ package system.data.maps
 
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data maps tests");
@@ -61,7 +60,7 @@ package system.data.maps
             suite.addTestSuite( MultiMapFormatterTest ) ;
             suite.addTestSuite( SortedArrayMapTest    ) ;
             suite.addTestSuite( TypedMapTest          ) ;
-                      
+            
             return suite;
         }
     }

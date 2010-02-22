@@ -35,11 +35,10 @@
 
 package system.data.sets
 {
-    import buRRRn.ASTUce.framework.*;                                                    
+    import buRRRn.ASTUce.framework.*;
 
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data sets tests");
