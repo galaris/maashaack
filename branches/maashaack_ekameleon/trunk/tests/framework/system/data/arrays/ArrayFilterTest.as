@@ -36,11 +36,8 @@
 package system.data.arrays 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data.arrays.mocks.MockArrayFilterListener;
-    
-    import flash.events.Event;
-    import flash.events.EventDispatcher;    
+
+    import system.data.arrays.mocks.MockArrayFilterReceiver;
 
     public class ArrayFilterTest extends TestCase 
     {
@@ -52,48 +49,36 @@ package system.data.arrays
         
         public var af:ArrayFilter ;
         
-        public var ml:MockArrayFilterListener ;
+        public var ml:MockArrayFilterReceiver ;
         
         public function setUp():void
         {
             af = new ArrayFilter() ;
-            ml = new MockArrayFilterListener(af) ;
+            ml = new MockArrayFilterReceiver(af) ;
         }
         
         public function tearDown():void
         {
             ml.unregister() ;
             ml = undefined ;
-            af = undefined ;            
+            af = undefined ;
         }
         
         public function testConstructor():void
         {
-            
-            var af:ArrayFilter ;
-            
-            af = new ArrayFilter() ;
-            
             assertNotNull( af , "01-01 - ArrayFilter constructor failed." ) ;
-            assertTrue( af is EventDispatcher , "01-02 - ArrayFilter constructor failed." ) ;
             assertEquals( af.filter , 0 ,  "01-03 - ArrayFilter constructor failed." ) ;
             
             af = new ArrayFilter( ArrayFilter.CASEINSENSITIVE ) ;
             assertNotNull( af , "02-01 - ArrayFilter constructor failed." ) ;
             assertEquals( af.filter , ArrayFilter.CASEINSENSITIVE ,  "02-02 - ArrayFilter constructor failed." ) ;
-            
-            
-            af = new ArrayFilter( ArrayFilter.DESCENDING, new EventDispatcher()   ) ;
-            assertNotNull( af , "03-01 - ArrayFilter constructor failed." ) ;
-            assertEquals( af.filter , ArrayFilter.DESCENDING ,  "03-02 - ArrayFilter constructor failed." ) ;
-            
         }
         
         public function testCASEINSENSITIVE():void
         {
-            assertEquals( ArrayFilter.CASEINSENSITIVE , 1 , "The constant ArrayFilter.CASEINSENSITIVE failed." ) ;    
+            assertEquals( ArrayFilter.CASEINSENSITIVE , 1 , "The constant ArrayFilter.CASEINSENSITIVE failed." ) ;
         }
-
+        
         public function testDESCENDING():void
         {
             assertEquals( ArrayFilter.DESCENDING , 2 , "The constant ArrayFilter.DESCENDING failed." ) ;  
@@ -103,20 +88,20 @@ package system.data.arrays
         {
             assertEquals( ArrayFilter.NONE , 0 , "The constant ArrayFilter.NONE failed." ) ;  
         }
-                
+        
         public function testNUMERIC():void
         {
-            assertEquals( ArrayFilter.NUMERIC , 16 , "The constant ArrayFilter.NUMERIC failed." ) ;  
-        }        
-
+            assertEquals( ArrayFilter.NUMERIC , 16 , "The constant ArrayFilter.NUMERIC failed." ) ;
+        }
+        
         public function testRETURNINDEXEDARRAY():void
         {
-            assertEquals( ArrayFilter.RETURNINDEXEDARRAY , 8 , "The constant ArrayFilter.RETURNINDEXEDARRAY failed." ) ;  
+            assertEquals( ArrayFilter.RETURNINDEXEDARRAY , 8 , "The constant ArrayFilter.RETURNINDEXEDARRAY failed." ) ;
         }
-     
+        
         public function testUNIQUESORT():void
         {
-            assertEquals( ArrayFilter.UNIQUESORT , 4 , "The constant ArrayFilter.UNIQUESORT failed." ) ;  
+            assertEquals( ArrayFilter.UNIQUESORT , 4 , "The constant ArrayFilter.UNIQUESORT failed." ) ;
         }
         
         public function testFilter():void
@@ -134,22 +119,8 @@ package system.data.arrays
             
         } 
         
-        public function testUseEvent():void
-        {
-            var af:ArrayFilter = new ArrayFilter() ;
-            
-            assertTrue( af.useEvent , "01 - The ArrayFilter useEvent property failed." ) ;  
-            
-            af.useEvent = false ;
-            assertFalse( af.useEvent , "02 - The ArrayFilter useEvent property failed." ) ;
-            
-            af.useEvent = true ;
-            assertTrue( af.useEvent , "03 - The ArrayFilter useEvent property failed." ) ;
-        } 
-        
         public function testContains():void
         {
-            
             // test with a specific filter value.
             
             assertFalse
@@ -174,7 +145,7 @@ package system.data.arrays
             ( 
                 ArrayFilter.contains(ArrayFilter.NUMERIC | Array.DESCENDING , 100 )  , 
                 "01-04 - The ArrayFilter.contains method failed." 
-            ) ;            
+            ) ;
             
             // test with a NONE(0) filter value.
             
@@ -208,7 +179,7 @@ package system.data.arrays
             
             af.filter = ArrayFilter.NONE ;
             assertFalse( af.isCaseInsensitive() , "05 - The ArrayFilter isCaseInsensitive method failed.") ;
-        }              
+        }
         
         public function testIsDescending():void
         {
@@ -232,15 +203,15 @@ package system.data.arrays
         {
             var af:ArrayFilter = new ArrayFilter() ;
             assertTrue( af.isNone() , "01 - The ArrayFilter isNone method failed.") ;
-
+            
             af.filter = ArrayFilter.DESCENDING ;
             af.filter = ArrayFilter.NONE ;
             assertTrue( af.isNone() , "02 - The ArrayFilter isDescending method failed.") ;
             
-            af.filter = ArrayFilter.DESCENDING ;            
+            af.filter = ArrayFilter.DESCENDING ;
             af.setNone() ;
-            assertTrue( af.isNone() , "03 - The ArrayFilter isNone method failed.") ;            
-        }          
+            assertTrue( af.isNone() , "03 - The ArrayFilter isNone method failed.") ;
+        }
         
         public function testIsNumeric():void
         {
@@ -299,8 +270,7 @@ package system.data.arrays
         public function testNotifyChange():void
         {
             af.notifyChange() ;
-            assertTrue( ml.changeCalled , "01 - ArrayFilter notifyChange failed, the Event.CHANGE event isn't notify" ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "02 - ArrayFilter notifyChange failed, bad type found." );
+            assertTrue( ml.changeCalled , "ArrayFilter notifyChange failed." ) ;
         }
         
         public function testSetCaseInsensitive():void
@@ -315,60 +285,54 @@ package system.data.arrays
             af.setCaseInsensitive(true) ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setCaseInsensitive failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setCaseInsensitive failed." );            
-            assertTrue( af.isCaseInsensitive() , "01-03 - The ArrayFilter setCaseInsensitive method failed.") ;
+            assertTrue( af.isCaseInsensitive() , "01-02 - The ArrayFilter setCaseInsensitive method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setCaseInsensitive(true) ;
            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setCaseInsensitive failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setCaseInsensitive failed." );            
-            assertTrue( af.isCaseInsensitive() , "02-03 - The ArrayFilter setCaseInsensitive method failed.") ;  
+            assertTrue( af.isCaseInsensitive() , "02-02 - The ArrayFilter setCaseInsensitive method failed.") ;
             
             // reset affectation
-                        
+            
             ml.reset() ;
             af.setCaseInsensitive(false) ;
            
             assertTrue( ml.changeCalled , "03-01 - ArrayFilter setCaseInsensitive failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "03-02 - ArrayFilter setCaseInsensitive failed." );            
-            assertFalse( af.isCaseInsensitive() , "03-03 - The ArrayFilter setCaseInsensitive method failed.") ;
-        }              
+            assertFalse( af.isCaseInsensitive() , "03-02 - The ArrayFilter setCaseInsensitive method failed.") ;
+        }
         
         public function testSetDescending():void
         {
             // init
-                 
+            
             af.filter = ArrayFilter.NUMERIC ;
             
             // first affectation
-                        
+            
             ml.reset() ;
             af.setDescending(true) ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setDescending failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setDescending failed." );            
-            assertTrue( af.isDescending() , "01-03 - The ArrayFilter setDescending method failed.") ;
+            assertTrue( af.isDescending() , "01-02 - The ArrayFilter setDescending method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setDescending(true) ;
            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setDescending failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setDescending failed." );            
-            assertTrue( af.isDescending() , "02-03 - The ArrayFilter setDescending method failed.") ;  
+            assertTrue( af.isDescending() , "02-02 - The ArrayFilter setDescending method failed.") ;  
             
             // reset affectation
-                        
+            
             ml.reset() ;
             af.setDescending(false) ;
            
             assertTrue( ml.changeCalled , "03-01 - ArrayFilter setDescending failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "03-02 - ArrayFilter setDescending failed." );            
-            assertFalse( af.isDescending() , "03-03 - The ArrayFilter setDescending method failed.") ;
+            assertFalse( af.isDescending() , "03-02 - The ArrayFilter setDescending method failed.") ;
         }
         
         public function testSetNone():void
@@ -378,126 +342,114 @@ package system.data.arrays
             af.filter = ArrayFilter.NUMERIC ;
             
             // first affectation
-                        
+            
             ml.reset() ;
             af.setNone() ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setNone failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setNone failed." );            
-            assertTrue( af.isNone() , "01-03 - The ArrayFilter setNone method failed.") ;
+            assertTrue( af.isNone() , "01-02 - The ArrayFilter setNone method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setNone() ;
            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setNone failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setNone failed." );            
-            assertTrue( af.isNone() , "02-03 - The ArrayFilter setNone method failed.") ;  
-       
-        }          
+            assertTrue( af.isNone() , "02-02 - The ArrayFilter setNone method failed.") ;  
+        }
         
         public function testSetNumeric():void
         {
             // init
-                 
+            
             af.filter = ArrayFilter.CASEINSENSITIVE ;
             
             // first affectation
-                        
+            
             ml.reset() ;
             af.setNumeric(true) ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setNumeric failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setNumeric failed." );            
-            assertTrue( af.isNumeric() , "01-03 - The ArrayFilter setNumeric method failed.") ;
+            assertTrue( af.isNumeric() , "01-02 - The ArrayFilter setNumeric method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setNumeric(true) ;
            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setNumeric failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setNumeric failed." );            
-            assertTrue( af.isNumeric() , "02-03 - The ArrayFilter setNumeric method failed.") ;  
+            assertTrue( af.isNumeric() , "02-02 - The ArrayFilter setNumeric method failed.") ;
             
             // reset affectation
-                        
+            
             ml.reset() ;
             af.setNumeric(false) ;
            
             assertTrue( ml.changeCalled , "03-01 - ArrayFilter setNumeric failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "03-02 - ArrayFilter setNumeric failed." );            
-            assertFalse( af.isNumeric() , "03-03 - The ArrayFilter setNumeric method failed.") ;
+            assertFalse( af.isNumeric() , "03-02 - The ArrayFilter setNumeric method failed.") ;
         }
         
         public function testSetReturnIndexedArray():void
         {
             // init
-                 
+            
             af.filter = ArrayFilter.CASEINSENSITIVE ;
             
             // first affectation
-                        
+            
             ml.reset() ;
             af.setReturnIndexedArray(true) ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setReturnIndexedArray failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setReturnIndexedArray failed." );            
-            assertTrue( af.isReturnIndexedArray() , "01-03 - The ArrayFilter setReturnIndexedArray method failed.") ;
+            assertTrue( af.isReturnIndexedArray() , "01-02 - The ArrayFilter setReturnIndexedArray method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setReturnIndexedArray(true) ;
-           
+            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setReturnIndexedArray failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setReturnIndexedArray failed." );            
-            assertTrue( af.isReturnIndexedArray() , "02-03 - The ArrayFilter setReturnIndexedArray method failed.") ;  
+            assertTrue( af.isReturnIndexedArray() , "02-02 - The ArrayFilter setReturnIndexedArray method failed.") ;  
             
             // reset affectation
-                        
+            
             ml.reset() ;
             af.setReturnIndexedArray(false) ;
-           
+            
             assertTrue( ml.changeCalled , "03-01 - ArrayFilter setReturnIndexedArray failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "03-02 - ArrayFilter setReturnIndexedArray failed." );            
-            assertFalse( af.isReturnIndexedArray() , "03-03 - The ArrayFilter setNumeric setReturnIndexedArray failed.") ;
+            assertFalse( af.isReturnIndexedArray() , "03-02 - The ArrayFilter setNumeric setReturnIndexedArray failed.") ;
         }
         
         public function testSetUniqueSort():void
         {
             // init
-                 
+            
             af.filter = ArrayFilter.CASEINSENSITIVE ;
             
             // first affectation
-                        
+            
             ml.reset() ;
             af.setUniqueSort(true) ;
            
             assertTrue( ml.changeCalled , "01-01 - ArrayFilter setUniqueSort failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "01-02 - ArrayFilter setUniqueSort failed." );            
-            assertTrue( af.isUniqueSort() , "01-03 - The ArrayFilter setUniqueSort method failed.") ;
+            assertTrue( af.isUniqueSort() , "01-02 - The ArrayFilter setUniqueSort method failed.") ;
             
             // affectation the same filter
-                        
+            
             ml.reset() ;
             af.setUniqueSort(true) ;
            
             assertFalse( ml.changeCalled , "02-01 - ArrayFilter setUniqueSort failed." ) ;
-            assertNull( ml.changeType , "02-02 - ArrayFilter setUniqueSort failed." );            
-            assertTrue( af.isUniqueSort() , "02-03 - The ArrayFilter setUniqueSort method failed.") ;  
+            assertTrue( af.isUniqueSort() , "02-02 - The ArrayFilter setUniqueSort method failed.") ;
             
             // reset affectation
-                        
+            
             ml.reset() ;
             af.setUniqueSort(false) ;
            
             assertTrue( ml.changeCalled , "03-01 - ArrayFilter setUniqueSort failed." ) ;
-            assertEquals( ml.changeType , Event.CHANGE  , "03-02 - ArrayFilter setUniqueSort failed." );            
-            assertFalse( af.isUniqueSort() , "03-03 - The ArrayFilter setUniqueSort method failed.") ;
-        }         
+            assertFalse( af.isUniqueSort() , "03-02 - The ArrayFilter setUniqueSort method failed.") ;
+        }
         
         public function testToSource():void
         {
@@ -525,7 +477,7 @@ package system.data.arrays
                 "03 - The ArrayFilter toSource failed." 
             ) ;
             
-        }          
+        }
         
         public function testToString():void
         {
@@ -551,8 +503,7 @@ package system.data.arrays
                 af.toString() , 
                 '[ArrayFilter 3]' ,
                 "03 - The ArrayFilter toString failed." 
-            ) ;        
-        }          
-        
+            ) ;
+        }
     }
 }
