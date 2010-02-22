@@ -35,20 +35,17 @@
 
 package system.data.bags
 {
-    import buRRRn.ASTUce.framework.*;                                                                        
-
+    import buRRRn.ASTUce.framework.*;
+    
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data bags tests");
-
             suite.addTestSuite( ArrayBagTest ) ;
             suite.addTestSuite( BagFormatterTest ) ;
             suite.addTestSuite( CoreMapBagTest ) ;
             suite.addTestSuite( HashBagTest ) ;
-            
             return suite;
         }
     }

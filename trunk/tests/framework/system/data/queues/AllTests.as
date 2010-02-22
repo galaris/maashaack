@@ -35,11 +35,10 @@
 
 package system.data.queues
 {
-    import buRRRn.ASTUce.framework.*;                                                    
-
+    import buRRRn.ASTUce.framework.*;
+    
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("Maashaack data queues tests");
