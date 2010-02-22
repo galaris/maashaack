@@ -37,30 +37,27 @@ package system.data.arrays.mocks
 {
     import system.data.arrays.ArrayFilter;
     
-    import flash.events.Event;    
-
     /**
-     * This Mock object listen all events dispatched from an ArrayFilter object.
+     * This Mock object receive all fast message emited from an ArrayFilter object.
      */
-    public class MockArrayFilterListener 
+    public class MockArrayFilterReceiver 
     {
-    
         /**
          * Creates a new MockArrayFilterListener instance.
          * @param af The ArrayFilter of this mock to register.
          */
-        public function MockArrayFilterListener( af:ArrayFilter=null )
+        public function MockArrayFilterReceiver( af:ArrayFilter=null )
         {
             if ( af != null )
             {
                 register(af) ;
-            }    
+            }
         }
         
         /**
          * The ArrayFilter object to register and test.
          */
-        public var af:ArrayFilter ;
+        public var filter:ArrayFilter ;
          
         /**
          * Indicates if the Event.CHANGE event is invoked.
@@ -75,10 +72,9 @@ package system.data.arrays.mocks
         /**
          * Invoked when the Event.CHANGE event is dispatched.
          */
-        public function onChange( e:Event ):void
+        public function change( filter:ArrayFilter ):void
         {
-            changeCalled = true ;
-            changeType   = e.type ;
+            changeCalled = ( this.filter == filter ) ;
         }
         
         /**
@@ -93,27 +89,22 @@ package system.data.arrays.mocks
         /**
          * Registers all events of the object.
          */
-        public function register( af:ArrayFilter ):void
+        public function register( filter:ArrayFilter ):void
         {
-            if ( this.af != null )
-            {
-                unregister() ;
-            }
-            this.af = af ;
-            this.af.addEventListener( Event.CHANGE , onChange , false , 0 , true ) ;
+            unregister() ;
+            this.filter = filter ;
+            this.filter.change.connect( change ) ;
         }
-                
+        
         /**
          * Unregisters all events of the action register in this mock.
          */
         public function unregister():void
         {
-            if ( af != null )
+            if ( filter )
             {
-                af.removeEventListener( Event.CHANGE , onChange , false ) ;
+                filter.change.disconnect( change ) ;
             }
         }
-        
     }
-
 }
