@@ -40,8 +40,8 @@ package system.data.lists
     import system.data.List;
     import system.data.ListIterator;
     import system.data.collections.ArrayCollection;
-    import system.data.iterators.ArrayListIterator;    
-
+    import system.data.iterators.ArrayListIterator;
+    
     /**
      * Resizable-array implementation of the List interface. Implements all optional list operations, and permits all elements, including null.
      * <p><b>Example :</b></p>
@@ -60,7 +60,6 @@ package system.data.lists
      */
     public class ArrayList extends ArrayCollection implements List
     {
-        
         /**
          * Creates a new ArrayList instance.
          * <p><b>Usage </b></p>
@@ -118,11 +117,11 @@ package system.data.lists
         {
             _modCount ++ ;
             return super.addAll( c ) ;
-        }         
+        }
         
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
-         */        
+         */
         public function addAt( index:uint, o:*):void
         {
             if ( index > size() ) 
@@ -130,17 +129,17 @@ package system.data.lists
                 throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + index + "' is out of bounds.") ;
             }
             _modCount++ ;
-            _a.splice( index , 0 , o ) ;            
+            _a.splice( index , 0 , o ) ;
         }
         
         /**
          * Removes all elements in the collection.
-         */        
+         */
         public override function clear():void
         {
             _modCount ++ ;
             super.clear() ;
-        }        
+        }
         
         /**
          * Returns a shallow copy of this collection (optional operation).
@@ -149,7 +148,7 @@ package system.data.lists
         public override function clone():* 
         {
             return new ArrayList( toArray() ) ;
-        }        
+        }
         
         /**
          * Increases the capacity of this ArrayList instance, if necessary, to ensure that it can hold at least the number of elements specified by the minimum capacity argument.
@@ -158,12 +157,12 @@ package system.data.lists
         {
             _modCount++ ;
             _a.length = capacity ;
-        }        
+        }
         
         /**
          * Returns the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
          * @return the index in this list of the last occurrence of the specified element, or -1 if this list does not contain this element.
-         */        
+         */
         public function lastIndexOf( o:* , fromIndex:int = 0x7FFFFFFF ):int
         {
             return _a.lastIndexOf( o , fromIndex ) ;
@@ -205,17 +204,17 @@ package system.data.lists
         public function listIterator( position:uint=0 ):ListIterator 
         {
             return new ArrayListIterator( this , position) ;
-        }        
-
+        }
+        
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
-         */     
+         */
         public override function remove( o:* ):*
         {
             _modCount++ ;
             return super.remove( o ) ;
         }
-
+        
         /**
          * Removes from this list all the elements that are contained between the specific <code class="prettyprint">id</code> position and the end of this list (optional operation).
          * @param id The index of the element or the first element to remove.
@@ -270,7 +269,7 @@ package system.data.lists
          * @param index index of element to replace.
          * @param o element to be stored at the specified position or if o is <code class="prettyprint">undefined</code> the stored value is remove (like with the removeAt() method).
          * @return the element previously at the specified position or undefined.
-         */        
+         */
         public function set( index:uint , o:*):*
         {
             if ( index > size() - 1 )
@@ -297,7 +296,7 @@ package system.data.lists
         /**
          * Returns a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
          * @return a view of the portion of this list between the specified fromIndex, inclusive, and toIndex, exclusive.
-         */        
+         */
         public function subList( fromIndex:uint , toIndex:uint ):List
         {
             if ( fromIndex > size()  )
@@ -314,12 +313,11 @@ package system.data.lists
                 ar.push( get(i) ) ;
             }
             return new ArrayList( ar ) ;
-        }        
-     
+        }
+        
         /**
          * @private
          */
-        protected var _modCount:int ;     
-        
+        protected var _modCount:int ;
     }
 }
