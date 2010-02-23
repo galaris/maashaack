@@ -35,6 +35,10 @@
 
 package examples 
 {
+    import system.comparators.AlphaComparator;
+    import system.comparators.NumberComparator;
+    import system.data.lists.SortedArrayList;
+    
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
@@ -43,6 +47,27 @@ package examples
     {
         public function SortedArrayListExample()
         {
+            trace( "-----" ) ;
+            
+            var list:SortedArrayList ;
+            
+            list = new SortedArrayList( [ 4 ,3 , 12, 24 ] ) ;
+            
+            trace( list ) ;
+            
+            list.comparator = new NumberComparator() ; 
+            
+            trace( list ) ;
+            
+            trace( "-----" ) ;
+            
+            list = new SortedArrayList( ["pink" , "red" , "blue" , "black" ] ) ;
+            
+            trace( list ) ;
+            
+            list.sort( new AlphaComparator() ) ;
+            
+            trace( list ) ;
         }
     }
 }
