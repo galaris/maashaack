@@ -75,7 +75,7 @@ package system.data.stacks
         
         /**
          * Looks at the object at the top of this stack without removing it from the stack.
-         */        
+         */
         public function peek():* 
         {
             return _a[_a.length - 1] ;
@@ -84,7 +84,7 @@ package system.data.stacks
         /**
          * Removes the object at the top of this stack and returns that object as the value of this function.
          * @return the removed object value.
-         */        
+         */
         public function pop():*
         {
             return isEmpty() ? null : _a.pop() ;
@@ -92,7 +92,7 @@ package system.data.stacks
         
         /**
          * Pushes an item into the top of this stack.
-         */        
+         */
         public function push( o:* ):void
         {
             _a.push( o ) ;
@@ -101,7 +101,7 @@ package system.data.stacks
         /**
          * Returns the index of an element in the Stack.
          * @return the index of an element in the Stack.
-         */        
+         */
         public function search(o:*):int
         {
             return indexOf(o) ;
