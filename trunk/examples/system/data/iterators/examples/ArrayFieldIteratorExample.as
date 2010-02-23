@@ -32,67 +32,44 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
+
 package examples 
 {
-    import system.data.arrays.ArrayFilter;
+    import system.data.iterators.ArrayFieldIterator;
     
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Example of the system.data.arrays.ArrayFilter class.
-     */
-    public class ArrayFilterExample extends Sprite 
+    public class ArrayFieldIteratorExample extends Sprite 
     {
-        public function ArrayFilterExample()
+        public function ArrayFieldIteratorExample()
         {
-            filter = new ArrayFilter() ;
+            var it:ArrayFieldIterator ;
             
-            filter.change.connect( change ) ;
+            var ar:Array = 
+            [
+                { label : "item1", date : new Date( 2005 , 10 , 12 ) } ,
+                { label : "item2", date : new Date( 2004 ,  2 , 22 ) } ,
+                { label : "item3", date : new Date( 2005 ,  4 ,  3 ) } 
+            ] ;
             
-            debug() ;
-            //
-            filter.setCaseInsensitive( true ) ;
-            filter.setDescending( true ) ;
-            filter.setNumeric( true ) ;
-            filter.setReturnIndexedArray( true ) ;
-            filter.setUniqueSort( true ) ;
-            debug() ;
-            //
-            filter.setCaseInsensitive( false ) ;
-            debug() ;
-            //
-            filter.setDescending( false ) ;
-            debug() ;
-            //
-            filter.setNumeric( false ) ;
-            debug() ;
-            //
-            filter.setReturnIndexedArray( false) ;
-            debug() ;
-            //
-            filter.setUniqueSort( false ) ;
-            debug() ;
-        }
-        
-        public var filter:ArrayFilter ;
-        
-        public function debug():void
-        {
-            trace("filter                : " + filter.filter ) ;
-            trace("is NONE               : " + filter.isNone() ) ;
-            trace("is CASEINSENSITIVE    : " + filter.isCaseInsensitive() ) ;
-            trace("is DESCENDING         : " + filter.isDescending() ) ;
-            trace("is NUMERIC            : " + filter.isNumeric() ) ;
-            trace("is RETURNINDEXEDARRAY : " + filter.isReturnIndexedArray() ) ;
-            trace("is UNIQUESORT         : " + filter.isUniqueSort() ) ;
-            trace("---") ;
-        }
-        
-        public function change( filter:ArrayFilter ):void
-        {
-            trace( "# change : " + filter ) ;
+            trace (" --- browse 'label' field") ;
+            it = new ArrayFieldIterator(ar, "label") ;
+            
+            while ( it.hasNext() ) 
+            {
+                trace (it.next() + " : " + it.key()) ;
+            }
+            
+            trace(" --- browse 'date' field") ;
+            
+            it = new ArrayFieldIterator(ar, "date") ;
+            
+            while ( it.hasNext() ) 
+            {
+                trace (it.next() + " : " + it.key()) ;
+            }
         }
     }
 }

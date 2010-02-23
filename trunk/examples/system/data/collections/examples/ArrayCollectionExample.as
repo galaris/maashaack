@@ -39,6 +39,8 @@ package examples
     
     import flash.display.Sprite;
     
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+    
     public class ArrayCollectionExample extends Sprite 
     {
         public function ArrayCollectionExample()
