@@ -97,7 +97,6 @@ package system.data.bags
      */
     public class ArrayBag extends CoreMapBag
     {
-        
         /**
          * Creates a new ArrayBag instance.
          * @param co a <code class="prettyprint">Collection</code> to constructs a bag containing all the members of the given collection.
