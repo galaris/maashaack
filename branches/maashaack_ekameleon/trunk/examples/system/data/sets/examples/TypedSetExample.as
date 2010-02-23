@@ -39,24 +39,15 @@ package examples
     import system.data.sets.ArraySet;
     import system.data.sets.TypedSet;
     
-    import flash.display.Sprite;    
-
-    /**
-     * Test the TypedSet class.
-     */
+    import flash.display.Sprite ;
+    
     public class TypedSetExample extends Sprite 
     {
-
-        /**
-         * Creates a new TypedSetExample.
-         */
         public function TypedSetExample()
         {
-
-
             var co:ArraySet = new ArraySet(["item1", "item2"]) ;
             var ts:TypedSet = new TypedSet(String, co) ;
-
+            
             ts.add("item3") ;
             
             trace(ts) ; // {item1,item2,item3}
@@ -68,7 +59,7 @@ package examples
             catch( e:Error )
             {
                 trace(e.message) ; // TypedSet.validate(10) is mismatch.
-            }        	
+            }
         }
     }
 }
