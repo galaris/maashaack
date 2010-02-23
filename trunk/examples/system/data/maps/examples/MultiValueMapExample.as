@@ -39,12 +39,11 @@ package examples
     import system.data.MultiMap;
     import system.data.maps.HashMap;
     import system.data.maps.MultiValueMap;
-
+    
     import flash.display.Sprite;
-
+    
     public class MultiValueMapExample extends Sprite 
     {
-
         public function MultiValueMapExample()
         {
             var map1:HashMap = new HashMap() ;

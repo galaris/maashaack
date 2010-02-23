@@ -38,12 +38,11 @@ package examples
     import system.data.Collection;
     import system.data.collections.ArrayCollection;
     import system.data.maps.MultiSetMap;
-
+    
     import flash.display.Sprite;
-
+    
     public class MultiSetMapExample extends Sprite 
     {
-
         public function MultiSetMapExample()
         {
             var s:MultiSetMap = new MultiSetMap() ;

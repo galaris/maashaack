@@ -93,10 +93,9 @@ package examples
             var str:String = "{" ;
             while( vit.hasNext() ) 
             {
-        
                 value = vit.next() ;
-                key   = kit.next() ;        
-        
+                key   = kit.next() ;
+                
                 str += key.id + ":" + value.name ;
                 
                 if (vit.hasNext())

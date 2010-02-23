@@ -38,9 +38,9 @@ package examples
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.HashMap;
-
+    
     import flash.display.Sprite;
-
+    
     public class HashMapExample extends Sprite 
     {
         public function HashMapExample()
@@ -48,7 +48,7 @@ package examples
             var map:Map = new HashMap() ;
             
             trace("put key1 -> value0 : " + map.put("key1", "value0") ) ; 
-            trace("put key1 -> value1 : " + map.put("key1", "value1") ) ;            
+            trace("put key1 -> value1 : " + map.put("key1", "value1") ) ;
             trace("put key2 -> value2 : " + map.put("key2", "value2") ) ;
             trace("put key3 -> value3 : " + map.put("key3", "value3") ) ;
                           
@@ -77,7 +77,7 @@ package examples
             
             trace("remove key1 : " + map.remove("key1") ) ;
             
-            trace("size : " + map.size()) ;      
+            trace("size : " + map.size()) ;
             
             trace("map : " + map) ;
             
