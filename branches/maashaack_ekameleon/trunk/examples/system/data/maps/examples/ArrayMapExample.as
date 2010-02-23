@@ -38,9 +38,9 @@ package examples
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.ArrayMap;
-
+    
     import flash.display.Sprite;
-
+    
     public class ArrayMapExample extends Sprite 
     {
         public function ArrayMapExample()
@@ -51,7 +51,7 @@ package examples
             trace("put key1 -> value1 : " + map.put("key1", "value1") ) ;
             trace("put key2 -> value2 : " + map.put("key2", "value2") ) ;
             trace("put key3 -> value3 : " + map.put("key3", "value3") ) ;
-                          
+            
             trace("map : " + map) ;
             
             trace("--- clone") ;
@@ -66,26 +66,26 @@ package examples
             trace("--- iterator") ;
             
             var it:Iterator = map.iterator() ;
-            while(it.hasNext()) 
+            while( it.hasNext() ) 
             {
                 var v:* = it.next() ;
                 var k:* = it.key() ;
                 trace( "   -> " + k + " : " + v ) ;
             }
             
-            trace("--- remove 'key1'") ;
+            trace( "--- remove 'key1'" ) ;
             
             trace("remove key1 : " + map.remove("key1") ) ; 
             
-            trace("size : " + map.size()) ;      
+            trace( "size : " + map.size() ) ;
             
-            trace("map : " + map) ;
+            trace( "map : " + map ) ;
             
             trace("--- clear and isEmpty") ;
             
             map.clear() ;  
-                          
-            trace("isEmpty : " + map.isEmpty()) ;  
+            
+            trace("isEmpty : " + map.isEmpty()) ;
         }
     }
 }
