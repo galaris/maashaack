@@ -38,8 +38,8 @@ package system.data.iterators
     import system.data.Iterator;
     import system.numeric.Mathematics;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * Converts a string to an iterator.
      * <p><b>Example :</b></p>
@@ -64,7 +64,6 @@ package system.data.iterators
      */
     public class StringIterator implements Iterator
     {
-        
         /**
          * Creates a new StringIterator instance.
          * @param s the String object to enumerate.
@@ -79,7 +78,7 @@ package system.data.iterators
             _k    = -1 ;
             _size = s.length ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
@@ -88,7 +87,7 @@ package system.data.iterators
         {
             return _k < _size - 1  ;
         }
-
+        
         /**
          * Returns the current key of the internal pointer of the iterator (optional operation).
          * @return the current key of the internal pointer of the iterator (optional operation).
@@ -97,7 +96,7 @@ package system.data.iterators
         {
             return _k ;
         }
-
+        
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
@@ -106,7 +105,7 @@ package system.data.iterators
         {
             return _s.charAt( ++_k );
         }
-
+        
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
@@ -115,7 +114,7 @@ package system.data.iterators
             throw new IllegalOperationError( "This " + this + " does not support the reset() method.") ;
             return null ;
         }
-
+        
         /**
          * Reset the internal pointer of the iterator (optional operation).
          */
@@ -123,7 +122,7 @@ package system.data.iterators
         {
             _k = -1 ;
         }
-
+        
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
          */
@@ -136,16 +135,15 @@ package system.data.iterators
          * @private
          */
         private var _k:Number ;
-
+        
         /**
          * @private
          */
         private var _s:String ;
-
+        
         /**
          * @private
          */
         private var _size:Number ;
-    
     }
 }
