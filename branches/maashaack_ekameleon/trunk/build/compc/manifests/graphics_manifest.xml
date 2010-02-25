@@ -82,6 +82,7 @@
     <component id="graphics.drawing:PolygonPen"                 class="graphics.drawing.PolygonPen" />
     <component id="graphics.drawing:PolyLinePen"                class="graphics.drawing.PolyLinePen" />
     <component id="graphics.drawing:RectanglePen"               class="graphics.drawing.RectanglePen" />
+    <component id="graphics.drawing:RoughEdgedRectanglePen"     class="graphics.drawing.RoughEdgedRectanglePen" />
     <component id="graphics.drawing:RoundedComplexRectanglePen" class="graphics.drawing.RoundedComplexRectanglePen" />
     <component id="graphics.drawing:RoundedRectanglePen"        class="graphics.drawing.RoundedRectanglePen" />
     <component id="graphics.drawing:ScalePen"                   class="graphics.drawing.ScalePen" />
