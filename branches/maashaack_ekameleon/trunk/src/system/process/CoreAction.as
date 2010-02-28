@@ -38,7 +38,7 @@ package system.process
     import system.events.ActionEvent;
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     /**
      * Dispatched when a process is changed.
      * @eventType system.events.ActionEvent.CHANGE
