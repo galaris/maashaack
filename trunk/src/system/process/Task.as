@@ -206,7 +206,7 @@ package system.process
         /**
          * @private
          */
-        private var _isRunning:Boolean ;
+        protected var _isRunning:Boolean ;
         
         /**
          * @private

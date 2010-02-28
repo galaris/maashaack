@@ -35,18 +35,17 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.events.ActionEvent;    import system.process.mocks.MockTaskListener;    
-    public class ActionProxyTest extends TestCase 
+    import buRRRn.ASTUce.framework.TestCase;        import system.events.ActionEvent;    import system.process.mocks.MockTaskListener;
+        public class ActionProxyTest extends TestCase 
     {
-
         public function ActionProxyTest(name:String = "")
         {
             super(name);
         }
         
-        public var action:ActionProxy ;        
+        public var action:ActionProxy ;
         
-        public var mockListener:MockTaskListener ;        
+        public var mockListener:MockTaskListener ;
         
         public var scope:Object ;
         

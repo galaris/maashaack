@@ -60,6 +60,7 @@ package system.process
                 suite.addTestSuite( ActionURLLoaderTest ) ;
                 suite.addTestSuite( BatchTest ) ;
                 suite.addTestSuite( BatchProcessTest ) ;
+                suite.addTestSuite( BufferTest ) ;
                 suite.addTestSuite( CacheTest ) ;
                 suite.addTestSuite( CoreActionTest ) ;
                 suite.addTestSuite( CoreActionLoaderTest ) ;
