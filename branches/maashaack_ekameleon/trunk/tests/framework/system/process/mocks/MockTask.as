@@ -56,7 +56,7 @@ package system.process.mocks
         /**
          * The counter of this class.
          */
-        public static var COUNT:uint = 0 ;        
+        public static var COUNT:uint = 0 ;
         
         /**
          * The id of the object.
@@ -82,7 +82,7 @@ package system.process.mocks
          */
         public static function reset():void
         {
-            COUNT = 0 ;    
+            COUNT = 0 ;
         }
         
         /**
@@ -96,7 +96,7 @@ package system.process.mocks
             {
                 trace( this + " run :: " + COUNT + (id != null ? " id:" + id : "" ) ) ;
             }
-            COUNT ++ ;    
+            COUNT ++ ;
             setRunning(false) ;
             notifyFinished() ;
         }
@@ -111,11 +111,10 @@ package system.process.mocks
             var str:String = "[" + Reflection.getClassName(this) ;
             if ( this.id != null )
             {
-                str += " " + this.id ;    
+                str += " " + this.id ;
             } 
             str += "]" ;
             return str ;
-        }            
-        
+        }
     }
 }
