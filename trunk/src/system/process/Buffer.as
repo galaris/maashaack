@@ -36,8 +36,7 @@ package system.process
 {
     import system.hack;
     
-    // TODO loop + numLoop
-    // TODO type : NORMAL / QUEUE
+    // TODO type : autoRemove in the addAction method
     
     /**
      * Experimental Buffer class to replace Sequencer in the next version of the system.process package.
@@ -50,11 +49,15 @@ package system.process
          * Creates a new Buffer instance.
          * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
          * @param fixed Whether the buffer length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
+         * @param loop Specifies whether playback of the clip should continue, or loop (default false). 
+         * @param numLoop Specifies the number of the times the presentation should loop during playback.
          * @param init A dynamic object who contains Action to initialize the buffer.
          */
-        public function Buffer( length:uint = 0, fixed:Boolean = false , init:* = null )
+        public function Buffer( length:uint = 0 , fixed:Boolean = false , loop:Boolean = false , numLoop:uint = 0 , init:* = null )
         {
-            _buffer = new Vector.<Action>( length , fixed ) ;
+            _buffer      = new Vector.<Action>( length , fixed ) ;
+            this.loop    = loop ;
+            this.numLoop = numLoop ;
             if ( init )
             {
                 for each( var action:Action in init )
@@ -65,6 +68,22 @@ package system.process
         }
         
         /**
+         * Indicates the current Action reference in progress.
+         */
+        public function get current():Action
+        {
+            return _current ;
+        }
+        
+        /**
+         * Indicates the current countdown loop value.
+         */
+        public function get currentLoop():uint
+        {
+            return _currentLoop ;
+        }
+        
+        /**
          * Returns the numbers of actions in this buffer.
          * @return the numbers of actions in this buffer.
          */
@@ -72,6 +91,17 @@ package system.process
         {
             return _buffer.length ;
         }
+        
+        /**
+         * Specifies whether playback of the buffer should continue, or loop. 
+         * See the numLoop property to defines the number of times the buffer sequencer should be looping. 
+         */
+        public var loop:Boolean ;
+        
+        /**
+         * Specifies the number of the times the sequencer should loop during playback.
+         */
+        public var numLoop:uint ;
         
         /**
          * Insert an action in the buffer.
@@ -94,7 +124,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new Buffer( _buffer.length , _buffer.fixed , _buffer ) ;
+            return new Buffer( _buffer.length , _buffer.fixed , loop , numLoop , _buffer ) ;
         }
         
         /**
@@ -110,14 +140,6 @@ package system.process
                     _buffer[len].finishIt.disconnect( next ) ;
                 }
             }
-        }
-        
-        /**
-         * Indicates if the buffer contains a next action during the process.
-         */
-        hack function hasNext():Boolean
-        {
-            return _position < _buffer.length ;
         }
         
         /**
@@ -159,16 +181,6 @@ package system.process
         }
         
         /**
-         * Sets the internal buffer.
-         * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
-         * @param fixed Whether the buffer length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
-         */
-        public function setup( length:uint = 0, fixed:Boolean = false ):void
-        {
-             _buffer = new Vector.<Action>( length , fixed ) ;
-        }
-        
-        /**
          * Resume the buffer.
          */
         public function resume():void 
@@ -193,10 +205,21 @@ package system.process
             if ( !running )
             {
                 notifyStarted() ;
-                _stopped  = false ;
-                _position = 0 ;
+                _stopped     = false ;
+                _position    = 0 ;
+                _currentLoop = 0 ;
                 next() ;
             }
+        }
+        
+        /**
+         * Sets the internal buffer.
+         * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
+         * @param fixed Whether the buffer length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
+         */
+        public function setup( length:uint = 0, fixed:Boolean = false ):void
+        {
+             _buffer = new Vector.<Action>( length , fixed ) ;
         }
         
         /**
@@ -268,6 +291,14 @@ package system.process
         hack var _stopped:Boolean ;
         
         /**
+         * Indicates if the buffer contains a next action during the process.
+         */
+        hack function hasNext():Boolean
+        {
+            return _position < _buffer.length ;
+        }
+        
+        /**
          * Run the next action in the buffer.
          */
         hack function next( ...args:Array ):void 
@@ -287,8 +318,31 @@ package system.process
                         next() ;
                     }
                 }
+                else if ( loop )
+                {
+                    _position = 0 ;
+                    if( numLoop == 0 )
+                    {
+                        notifyLooped() ;
+                        _currentLoop = 0  ;
+                        next() ;
+                    }
+                    else if ( _currentLoop < numLoop )
+                    {
+                        _currentLoop ++ ;
+                        notifyLooped() ;
+                        next() ;
+                    }
+                    else
+                    {
+                        _currentLoop = 0 ;
+                        notifyFinished() ; 
+                    }
+                }
                 else
                 {
+                    _currentLoop = 0 ;
+                    _position    = 0 ;
                     notifyFinished() ;
                 }
             }
@@ -312,5 +366,10 @@ package system.process
                 _current = null ;
             } 
         }
+        
+        /**
+         * @private
+         */
+        protected var _currentLoop:uint ;
     }
 }
