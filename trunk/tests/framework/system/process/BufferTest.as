@@ -76,6 +76,7 @@ package system.process
         
         public function testInterface():void
         {
+            assertTrue( buffer is Resumable , "Must implements the Resumable interface.");
             assertTrue( buffer is Startable , "Must implements the Startable interface.");
             assertTrue( buffer is Stoppable , "Must implements the Stoppable interface.");
         }
