@@ -44,27 +44,27 @@ package examples
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Basic example to use the system.process.Buffer with the priority option in the addAction method.
+     * Basic example to use the system.process.Chain class with the priority option in the addAction method.
      */
     public class ChainPriorityExample extends Sprite
     {
         public function ChainPriorityExample()
         {
-            buffer = new Chain() ;
+            chain = new Chain() ;
             
-            buffer.addEventListener( ActionEvent.FINISH   , debug    ) ;
-            buffer.addEventListener( ActionEvent.PROGRESS , progress ) ;
-            buffer.addEventListener( ActionEvent.START    , debug    ) ;
+            chain.addEventListener( ActionEvent.FINISH   , debug    ) ;
+            chain.addEventListener( ActionEvent.PROGRESS , progress ) ;
+            chain.addEventListener( ActionEvent.START    , debug    ) ;
             
-            buffer.addAction( new Pause(1) , 100 ) ;
-            buffer.addAction( new Pause(2) , 1   ) ;
-            buffer.addAction( new Pause(3) , 999 ) ; // max priority
-            buffer.addAction( new Pause(4) , 2   ) ; 
+            chain.addAction( new Pause(1) , 100 ) ;
+            chain.addAction( new Pause(2) , 1   ) ;
+            chain.addAction( new Pause(3) , 999 ) ; // max priority
+            chain.addAction( new Pause(4) , 2   ) ; 
             
-            buffer.run() ;
+            chain.run() ;
         }
         
-        public var buffer:Chain ;
+        public var chain:Chain ;
         
         public function debug( e:ActionEvent ):void
         {
@@ -73,7 +73,7 @@ package examples
         
         public function progress( e:ActionEvent ):void
         {
-            trace( "# " + e.type + " current:" + buffer.current ) ;
+            trace( "# " + e.type + " current:" + chain.current ) ;
         }
     }
 }

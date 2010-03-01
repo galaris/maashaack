@@ -44,32 +44,32 @@ package examples
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Basic example to use the system.process.Buffer with the loop and numLoop properties.
+     * Basic example to use the system.process.Chain class with the loop and numLoop properties.
      */
     public class ChainLoopExample extends Sprite
     {
         public function ChainLoopExample()
         {
-            buffer = new Chain() ;
+            chain = new Chain() ;
             
-            buffer.loop    = true ;
-            buffer.numLoop = 3 ;
+            chain.loop    = true ;
+            chain.numLoop = 3 ;
             
-            buffer.addEventListener( ActionEvent.FINISH   , debug ) ;
-            buffer.addEventListener( ActionEvent.LOOP     , loop  ) ;
-            buffer.addEventListener( ActionEvent.PROGRESS , debug ) ;
-            buffer.addEventListener( ActionEvent.START    , debug ) ;
+            chain.addEventListener( ActionEvent.FINISH   , debug ) ;
+            chain.addEventListener( ActionEvent.LOOP     , loop  ) ;
+            chain.addEventListener( ActionEvent.PROGRESS , debug ) ;
+            chain.addEventListener( ActionEvent.START    , debug ) ;
             
-            buffer.addAction( new Pause(1) ) ;
-            buffer.addAction( new Pause(1) ) ;
-            buffer.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
             
-            trace( "currentLoop:" + buffer.currentLoop + " numLoop:" + buffer.numLoop ) ;
+            trace( "currentLoop:" + chain.currentLoop + " numLoop:" + chain.numLoop ) ;
             
-            buffer.run() ;
+            chain.run() ;
         }
         
-        public var buffer:Chain ;
+        public var chain:Chain ;
         
         public function debug( e:ActionEvent ):void
         {
@@ -77,7 +77,7 @@ package examples
         }
         public function loop( e:ActionEvent ):void
         {
-            trace( "# " + e.type + " currentLoop:" + buffer.currentLoop + " numLoop:" + buffer.numLoop ) ;
+            trace( "# " + e.type + " currentLoop:" + chain.currentLoop + " numLoop:" + chain.numLoop ) ;
         }
     }
 }

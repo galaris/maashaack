@@ -45,27 +45,27 @@ package examples
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Basic example to use the system.process.Buffer.
+     * Basic example to use the system.process.Chain class.
      */
     public class ChainBasicExample extends Sprite
     {
         public function ChainBasicExample()
         {
-            var buffer:Chain = new Chain() ;
+            var chain:Chain = new Chain() ;
             
-            buffer.addEventListener( ActionEvent.FINISH   , debug ) ;
-            buffer.addEventListener( ActionEvent.PROGRESS , debug ) ;
-            buffer.addEventListener( ActionEvent.START    , debug ) ;
+            chain.addEventListener( ActionEvent.FINISH   , debug ) ;
+            chain.addEventListener( ActionEvent.PROGRESS , debug ) ;
+            chain.addEventListener( ActionEvent.START    , debug ) ;
             
-            buffer.finishIt.connect( finish ) ;
-            buffer.progressIt.connect( progress ) ;
-            buffer.startIt.connect( start  ) ;
+            chain.finishIt.connect( finish ) ;
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start  ) ;
             
-            buffer.addAction( new Pause(1) ) ;
-            buffer.addAction( new Pause(1) ) ;
-            buffer.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
             
-            buffer.run() ;
+            chain.run() ;
         }
         
         public function debug( e:ActionEvent ):void
