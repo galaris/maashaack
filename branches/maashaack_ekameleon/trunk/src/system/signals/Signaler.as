@@ -41,9 +41,9 @@ package system.signals
     public interface Signaler
     {
         /**
-         * Indicates the number of objects connected.
+         * Indicates the number of receivers connected.
          */
-        function get numReceivers():uint ;
+        function get length():uint ;
         
         /**
          * Connects a Function or a Receiver object.

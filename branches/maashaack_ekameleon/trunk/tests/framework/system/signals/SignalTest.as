@@ -194,17 +194,15 @@ package system.signals
         
         ///////////////////
         
-
-        
-        public function testNumReceivers():void
+        public function testLength():void
         {
-            assertEquals( signal.numReceivers , 0 , "01 - numReceivers failed.") ;
+            assertEquals( signal.length , 0 , "01 - length failed.") ;
             signal.connect( receiver1 ) ;
-            assertEquals( signal.numReceivers , 1 , "02 - numReceivers failed.") ;
+            assertEquals( signal.length , 1 , "02 - length failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "03 - numReceivers failed.") ;
+            assertEquals( signal.length , 2 , "03 - length failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "04 - numReceivers failed.") ;
+            assertEquals( signal.length , 2 , "04 - length failed.") ;
         }
         
         public function testClone():void
@@ -213,7 +211,7 @@ package system.signals
             signal.connect( receiver2 ) ;
             var clone:Signal = signal.clone() as Signal ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.numReceivers , signal.numReceivers, "02 - clone method failed.") ;
+            assertEquals( clone.length , signal.length, "02 - clone method failed.") ;
             ArrayAssert.assertEquals(clone.toArray(), signal.toArray() , "03 - clone method failed.") ;
         }
         

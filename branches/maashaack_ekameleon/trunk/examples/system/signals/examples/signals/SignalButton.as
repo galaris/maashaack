@@ -57,9 +57,9 @@ package examples.signals
             useHandCursor = true ;
         }
         
-        public function get numReceivers():uint
+        public function get length():uint
         {
-            return _signal.numReceivers ;
+            return _signal.length ;
         }
         
         public function connect( receiver:* , priority:uint = 0 , autoDisconnect:Boolean = false ):Boolean

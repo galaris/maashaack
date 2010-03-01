@@ -43,7 +43,7 @@ package system.signals.samples
             
         }
         
-        public function get numReceivers():uint
+        public function get length():uint
         {
             return 0;
         }
