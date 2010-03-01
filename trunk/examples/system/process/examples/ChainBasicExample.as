@@ -62,8 +62,8 @@ package examples
             chain.startIt.connect( start  ) ;
             
             chain.addAction( new Pause(1) ) ;
-            chain.addAction( new Pause(1) ) ;
-            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(2) ) ;
+            chain.addAction( new Pause(3) ) ;
             
             chain.run() ;
         }
