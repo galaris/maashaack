@@ -33,11 +33,11 @@ the provisions above, a recipient may use your version of this file under
 the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.broadcasters 
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.events.samples.BroadcasterClass;
+    import system.broadcasters.samples.BroadcasterClass;
     
     public class BroadcasterTest extends TestCase 
     {

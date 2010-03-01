@@ -33,10 +33,9 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.broadcasters 
 {
     import system.Cloneable;
-    import system.events.Broadcaster;
     import system.process.Lockable;
     
     /**
@@ -65,9 +64,9 @@ package system.events
         /**
          * Indicates the number of listeners registered in the broadcaster.
          */
-        public function get numListeners():uint
+        public function get length():uint
         {
-            return _broadcaster.numListeners ;
+            return _broadcaster.length ;
         }
         
         /**

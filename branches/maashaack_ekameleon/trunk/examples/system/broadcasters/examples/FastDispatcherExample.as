@@ -33,57 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package examples 
 {
-    import system.process.Priority;
+    import system.broadcasters.FastDispatcher;
+    import system.events.BasicEvent;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;
+    
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * A BroadcasterEntry object contains all informations about a listener register in a Broadcaster.
+     * Example of the FastDispatcher class.
      */
-    internal class BroadcasterEntry implements Priority
+    public class FastDispatcherExample extends Sprite 
     {
-        /**
-         * Creates a new BroadcasterEntry instance.
-         * @param listener The listener reference.
-         * @param priority The priority value of the entry.
-         * @param autoRemove This flag indicates if the receiver must be removed when handle the first time a message. 
-         */
-        public function BroadcasterEntry( listener:* = null , priority:uint = 0 , autoRemove:Boolean = false )
+        public function FastDispatcherExample()
         {
-            this.autoRemove = autoRemove ;
-            this.listener   = listener ;
-            this.priority   = priority ;
+            var dispatcher:FastDispatcher = new FastDispatcher() ;
+            
+            dispatcher.addListener( this ) ;
+            
+            dispatcher.broadcastMessage( "onCallback" ) ;
+            
+            dispatcher.dispatch( new BasicEvent( "onCallback" ) ) ;
         }
         
-        /**
-         * Indicates if the listener must be removed when handle the first time a message.
-         */
-        public var autoRemove:Boolean ;
-        
-        /**
-         * Determinates the priority value of the object.
-         */
-        public function get priority():int
+        public function onCallback( e:Event ):void
         {
-            return _priority ;
+            trace( e ) ;
         }
-        
-        /**
-         * @private
-         */
-        public function set priority( value:int ):void
-        {
-            _priority = value ; 
-        }
-        
-        /**
-         * The listener reference of this entry.
-         */
-        public var listener:* ;
-        
-        /**
-         * @private
-         */
-        private var _priority:int ;
     }
 }

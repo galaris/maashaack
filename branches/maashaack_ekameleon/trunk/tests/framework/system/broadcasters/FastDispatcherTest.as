@@ -33,12 +33,13 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.broadcasters 
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
     import system.Cloneable;
+    import system.events.BasicEvent;
     import system.events.mocks.MockListener;
 
     import flash.events.Event;
@@ -84,15 +85,15 @@ package system.events
             assertTrue( dispatcher is Cloneable   , "The FastDispatcher class must implements the Cloneable interface.") ;
         }
         
-        public function testNumListeners():void
+        public function testLength():void
         {
-            assertEquals( dispatcher.numListeners , 0 , "01 - numListeners failed.") ;
+            assertEquals( dispatcher.length , 0 , "01 - length failed.") ;
             dispatcher.addListener( listener1 ) ;
-            assertEquals( dispatcher.numListeners , 1 , "02 - numListeners failed.") ;
+            assertEquals( dispatcher.length , 1 , "02 - length failed.") ;
             dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.numListeners , 2 , "03 - numListeners failed.") ;
+            assertEquals( dispatcher.length , 2 , "03 - length failed.") ;
             dispatcher.addListener( listener2 ) ;
-            assertEquals( dispatcher.numListeners , 2 , "04 - numListeners failed.") ;
+            assertEquals( dispatcher.length , 2 , "04 - length failed.") ;
         }
         
         public function testAddListener():void
@@ -131,7 +132,7 @@ package system.events
             dispatcher.addListener( listener2 ) ;
             var clone:FastDispatcher = dispatcher.clone() as FastDispatcher ;
             assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.numListeners , dispatcher.numListeners, "02 - clone method failed.") ;
+            assertEquals( clone.length , dispatcher.length, "02 - clone method failed.") ;
             ArrayAssert.assertEquals(clone.toArray(), dispatcher.toArray() , "03 - clone method failed.") ;
         }
         
@@ -171,7 +172,7 @@ package system.events
             dispatcher.addListener( listener2 ) ;
             
             assertTrue( dispatcher.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( dispatcher.numListeners , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( dispatcher.length , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( dispatcher.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }

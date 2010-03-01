@@ -33,31 +33,45 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package examples 
+package system.broadcasters.samples 
 {
-    import system.events.MessageBroadcaster;
+    import system.broadcasters.Broadcaster;
     
-    import flash.display.Sprite;
-    
-    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-    
-    /**
-     * Example of the MessageBroadcaster class.
-     */
-    public class MessageBroadcasterExample extends Sprite 
+    public class BroadcasterClass implements Broadcaster
     {
-        public function MessageBroadcasterExample()
+        public function BroadcasterClass()
         {
-            var broadcaster:MessageBroadcaster = new MessageBroadcaster() ;
-            
-            broadcaster.addListener( this ) ;
-            
-            broadcaster.broadcastMessage( "message" , "hello" , "world" ) ;
+            //
         }
         
-        public function message( ...arguments:Array ):void
+        public function get length():uint
         {
-            trace( "message : " + arguments ) ;
+            return 0 ;
+        }
+        
+        public function addListener( listener:* , priority:uint = 0 , autoRemove:Boolean = false ):Boolean
+        {
+            return listener != null ;
+        }
+        
+        public function broadcastMessage( message:String, ...rest:Array ):*
+        {
+            return message ;
+        }
+        
+        public function hasListener(listener:*):Boolean
+        {
+            return listener != null ;
+        }
+        
+        public function isEmpty():Boolean
+        {
+            return true ;
+        }
+        
+        public function removeListener( listener:* = null ):Boolean
+        {
+            return listener != null;
         }
     }
 }

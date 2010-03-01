@@ -33,45 +33,57 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events.samples 
+package system.broadcasters 
 {
-    import system.events.Broadcaster;
-
-    public class BroadcasterClass implements Broadcaster
+    import system.process.Priority;
+    
+    /**
+     * A BroadcasterEntry object contains all informations about a listener register in a Broadcaster.
+     */
+    internal class BroadcasterEntry implements Priority
     {
-        public function BroadcasterClass()
+        /**
+         * Creates a new BroadcasterEntry instance.
+         * @param listener The listener reference.
+         * @param priority The priority value of the entry.
+         * @param autoRemove This flag indicates if the receiver must be removed when handle the first time a message. 
+         */
+        public function BroadcasterEntry( listener:* = null , priority:uint = 0 , autoRemove:Boolean = false )
         {
-            //
+            this.autoRemove = autoRemove ;
+            this.listener   = listener ;
+            this.priority   = priority ;
         }
         
-        public function get numListeners():uint
+        /**
+         * Indicates if the listener must be removed when handle the first time a message.
+         */
+        public var autoRemove:Boolean ;
+        
+        /**
+         * Determinates the priority value of the object.
+         */
+        public function get priority():int
         {
-            return 0 ;
+            return _priority ;
         }
         
-        public function addListener( listener:* , priority:uint = 0 , autoRemove:Boolean = false ):Boolean
+        /**
+         * @private
+         */
+        public function set priority( value:int ):void
         {
-            return listener != null ;
+            _priority = value ; 
         }
         
-        public function broadcastMessage( message:String, ...rest:Array ):*
-        {
-            return message ;
-        }
+        /**
+         * The listener reference of this entry.
+         */
+        public var listener:* ;
         
-        public function hasListener(listener:*):Boolean
-        {
-            return listener != null ;
-        }
-        
-        public function isEmpty():Boolean
-        {
-            return true ;
-        }
-        
-        public function removeListener( listener:* = null ):Boolean
-        {
-            return listener != null;
-        }
+        /**
+         * @private
+         */
+        private var _priority:int ;
     }
 }

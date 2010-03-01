@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events
+package system.broadcasters
 {
     import buRRRn.ASTUce.framework.*;
     
@@ -44,26 +44,14 @@ package system.events
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
+            var suite:TestSuite = new TestSuite("Maashaack broadcaster API unit tests.");
             if( Environment.host.id != HostID.RedTamarin )
             {
-                suite.addTestSuite( ActionEventTest ) ;
-                suite.addTestSuite( ArrayEventTest ) ;
-                suite.addTestSuite( BasicEventTest ) ;
-                suite.addTestSuite( BooleanEventTest ) ;
-                suite.addTestSuite( CommandTest ) ;
-                suite.addTestSuite( CoreEventDispatcherTest ) ;
-                suite.addTestSuite( DateEventTest ) ;
-                suite.addTestSuite( DelegateTest ) ;
-                suite.addTestSuite( DynamicEventTest ) ;
-                suite.addTestSuite( EventDispatcherTest ) ;
-                suite.addTestSuite( EventListenerTest ) ;
-                suite.addTestSuite( EventListenerBatchTest ) ;
-                suite.addTestSuite( FrontControllerTest ) ;
-                suite.addTestSuite( IEventDispatcherTest ) ;
-                suite.addTestSuite( InternalDispatcherTest ) ;
-                suite.addTestSuite( NumberEventTest ) ;
-                suite.addTestSuite( StringEventTest ) ;
+                suite.addTestSuite( BroadcasterTest ) ;
+                suite.addTestSuite( CoreBroadcasterTest ) ;
+                suite.addTestSuite( FastDispatcherTest ) ;
+                suite.addTestSuite( InternalBroadcasterTest ) ;
+                suite.addTestSuite( MessageBroadcasterTest ) ;
             }
             return suite;
         }
