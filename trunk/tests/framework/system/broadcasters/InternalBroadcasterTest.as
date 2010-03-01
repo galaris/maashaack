@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.broadcasters 
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
@@ -80,15 +80,15 @@ package system.events
             assertTrue( broadcaster is Broadcaster , "The InternalBroadcaster class must implements the Broadcaster interface.") ;
         }
         
-        public function testNumListeners():void
+        public function testLength():void
         {
-            assertEquals( broadcaster.numListeners , 0 , "01 - numListeners failed.") ;
+            assertEquals( broadcaster.length , 0 , "01 - length failed.") ;
             broadcaster.addListener( listener1 ) ;
-            assertEquals( broadcaster.numListeners , 1 , "02 - numListeners failed.") ;
+            assertEquals( broadcaster.length , 1 , "02 - length failed.") ;
             broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.numListeners , 2 , "03 - numListeners failed.") ;
+            assertEquals( broadcaster.length , 2 , "03 - length failed.") ;
             broadcaster.addListener( listener2 ) ;
-            assertEquals( broadcaster.numListeners , 2 , "04 - numListeners failed.") ;
+            assertEquals( broadcaster.length , 2 , "04 - length failed.") ;
         }
         
         public function testAddListener():void
@@ -144,7 +144,7 @@ package system.events
             broadcaster.addListener( listener2 ) ;
             
             assertTrue( broadcaster.removeListener( listener1 ) , "01-01 removeListener failed." ) ;
-            assertEquals( broadcaster.numListeners , 1 , "01-02 - removeListener() failed.") ;
+            assertEquals( broadcaster.length , 1 , "01-02 - removeListener() failed.") ;
             
             assertFalse( broadcaster.removeListener( listener1 ) , "02 removeListener failed." ) ;
         }

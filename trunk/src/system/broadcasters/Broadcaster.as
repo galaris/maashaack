@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.events 
+package system.broadcasters 
 {
     /**
      * This class provides a basic broadcaster interface based "Observer" event model (like ASBroadcaster in AS1).
@@ -43,7 +43,7 @@ package system.events
         /**
          * Indicates the number of listeners registered in the Broadcaster object.
          */
-        function get numListeners():uint ;
+        function get length():uint ;
         
         /**
          * Registers an object to receive messages.

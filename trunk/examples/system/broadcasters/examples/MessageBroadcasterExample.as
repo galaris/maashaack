@@ -35,33 +35,29 @@
 
 package examples 
 {
-    import system.events.BasicEvent;
-    import system.events.FastDispatcher;
+    import system.broadcasters.MessageBroadcaster;
     
     import flash.display.Sprite;
-    import flash.events.Event;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Example of the FastDispatcher class.
+     * Example of the MessageBroadcaster class.
      */
-    public class FastDispatcherExample extends Sprite 
+    public class MessageBroadcasterExample extends Sprite 
     {
-        public function FastDispatcherExample()
+        public function MessageBroadcasterExample()
         {
-            var dispatcher:FastDispatcher = new FastDispatcher() ;
+            var broadcaster:MessageBroadcaster = new MessageBroadcaster() ;
             
-            dispatcher.addListener( this ) ;
+            broadcaster.addListener( this ) ;
             
-            dispatcher.broadcastMessage( "onCallback" ) ;
-            
-            dispatcher.dispatch( new BasicEvent( "onCallback" ) ) ;
+            broadcaster.broadcastMessage( "message" , "hello" , "world" ) ;
         }
         
-        public function onCallback( e:Event ):void
+        public function message( ...arguments:Array ):void
         {
-            trace( e ) ;
+            trace( "message : " + arguments ) ;
         }
     }
 }
