@@ -36,14 +36,13 @@
 package system.process.mocks 
 {
     import system.Reflection;
-    import system.process.Task;    
-
+    import system.process.Task;
+    
     /**
      * This mock simulate an Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
      */
     public class MockTask extends Task 
     {
-        
         /**
          * Creates a new MockTask instance.
          */

@@ -53,6 +53,7 @@ package system.process
             
             if( Environment.host.id != HostID.RedTamarin )
             {
+                suite.addTestSuite( ActionEntryTest ) ;
                 suite.addTestSuite( ActionEventDispatcherTest ) ;
                 suite.addTestSuite( ActionLoaderTest ) ;
                 suite.addTestSuite( ActionProxyTest ) ;
