@@ -68,12 +68,13 @@ package system.process
                 suite.addTestSuite( InitializerTest ) ;
                 suite.addTestSuite( LockableTest  );
                 suite.addTestSuite( PauseTest ) ;
-                suite.addTestSuite( PriorityTest  );
-                suite.addTestSuite( ResetableTest );
-                suite.addTestSuite( RunnableTest  );
+                suite.addTestSuite( PriorityTest ) ;
+                suite.addTestSuite( ResetableTest ) ;
+                suite.addTestSuite( ResumableTest ) ;
+                suite.addTestSuite( RunnableTest  ) ;
                 suite.addTestSuite( SequencerTest ) ;
-                suite.addTestSuite( StartableTest );
-                suite.addTestSuite( StoppableTest );
+                suite.addTestSuite( StartableTest ) ;
+                suite.addTestSuite( StoppableTest ) ;
                 suite.addTestSuite( TaskTest ) ;
                 suite.addTestSuite( TimeoutPolicyTest ) ;
             }
