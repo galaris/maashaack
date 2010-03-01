@@ -36,7 +36,7 @@
 package examples
 {
     import system.events.ActionEvent;
-    import system.process.Buffer;
+    import system.process.Chain;
     import system.process.Pause;
 
     import flash.display.Sprite;
@@ -46,11 +46,11 @@ package examples
     /**
      * Basic example to use the system.process.Buffer with the loop and numLoop properties.
      */
-    public class BufferLoopExample extends Sprite
+    public class ChainLoopExample extends Sprite
     {
-        public function BufferLoopExample()
+        public function ChainLoopExample()
         {
-            buffer = new Buffer() ;
+            buffer = new Chain() ;
             
             buffer.loop    = true ;
             buffer.numLoop = 3 ;
@@ -69,7 +69,7 @@ package examples
             buffer.run() ;
         }
         
-        public var buffer:Buffer ;
+        public var buffer:Chain ;
         
         public function debug( e:ActionEvent ):void
         {

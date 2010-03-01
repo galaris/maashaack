@@ -35,6 +35,15 @@
     <component id="system:Vectors"            class="system.Vectors"            />
     <component id="system:Version"            class="system.Version"            />
     
+    <!-- system.broadcasters -->
+    
+    <component id="system.broadcasters:Broadcaster"         class="system.broadcasters.Broadcaster" />
+    <component id="system.broadcasters:BroadcasterEntry"    class="system.broadcasters.BroadcasterEntry" />
+    <component id="system.broadcasters:CoreBroadcaster"     class="system.broadcasters.CoreBroadcaster" />
+    <component id="system.broadcasters:FastDispatcher"      class="system.broadcasters.FastDispatcher" />
+    <component id="system.broadcasters:InternalBroadcaster" class="system.broadcasters.InternalBroadcaster" />
+    <component id="system.broadcasters:MessageBroadcaster"  class="system.broadcasters.MessageBroadcaster" />
+    
     <!-- system.cli -->
     
     <component id="system.cli:ArgumentsParser" class="system.cli.ArgumentsParser" />
@@ -192,9 +201,7 @@
     <component id="system.events:ArrayEvent"          class="system.events.ArrayEvent" />
     <component id="system.events:BasicEvent"          class="system.events.BasicEvent" />
     <component id="system.events:BooleanEvent"        class="system.events.BooleanEvent" />
-    <component id="system.events:Broadcaster"         class="system.events.Broadcaster" />
     <component id="system.events:Command"             class="system.events.Command" />
-    <component id="system.events:CoreBroadcaster"     class="system.events.CoreBroadcaster" />
     <component id="system.events:CoreEventDispatcher" class="system.events.CoreEventDispatcher" />
     <component id="system.events:DateEvent"           class="system.events.DateEvent" />
     <component id="system.events:Delegate"            class="system.events.Delegate" />
@@ -202,13 +209,10 @@
     <component id="system.events:EventDispatcher"     class="system.events.EventDispatcher" />
     <component id="system.events:EventListener"       class="system.events.EventListener" />
     <component id="system.events:EventListenerBatch"  class="system.events.EventListenerBatch" />
-    <component id="system.events:FastDispatcher"      class="system.events.FastDispatcher" />
     <component id="system.events:FrontController"     class="system.events.FrontController" />
     <component id="system.events:IEventDispatcher"    class="system.events.IEventDispatcher" />
-    <component id="system.events:InternalBroadcaster" class="system.events.InternalBroadcaster" />
     <component id="system.events:InternalDispatcher"  class="system.events.InternalDispatcher" />
     <component id="system.events:LoggerEvent"         class="system.events.LoggerEvent" />
-    <component id="system.events:MessageBroadcaster"  class="system.events.MessageBroadcaster" />
     <component id="system.events:NumberEvent"         class="system.events.NumberEvent" />
     <component id="system.events:StringEvent"         class="system.events.StringEvent" />
     
@@ -219,7 +223,7 @@
     <component id="system.formatters:Formattable"         class="system.formatters.Formattable"   />
     <component id="system.formatters:StringFormatter"     class="system.formatters.StringFormatter" />
     
-    <!-- system.hosts -->    
+    <!-- system.hosts -->
     
     <component id="system.hosts:Host"            class="system.hosts.Host"            />
     <component id="system.hosts:HostID"          class="system.hosts.HostID"          />
@@ -280,6 +284,7 @@
     <component id="system.process:Batch"                  class="system.process.Batch"                  />
     <component id="system.process:BatchProcess"           class="system.process.BatchProcess"           />
     <component id="system.process:Cache"                  class="system.process.Cache"                  />
+    <component id="system.process:Chain"                  class="system.process.Chain"                  />
     <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
     <component id="system.process:CoreActionLoader"       class="system.process.CoreActionLoader"       />
     <component id="system.process:Initializer"            class="system.process.Initializer"            />
