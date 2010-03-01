@@ -106,15 +106,15 @@ package system.signals
             }
         }
         
-        public function testNumReceivers():void
+        public function testLength():void
         {
-            assertEquals( signal.numReceivers , 0 , "01 - numReceivers failed.") ;
+            assertEquals( signal.length , 0 , "01 - length failed.") ;
             signal.connect( receiver1 ) ;
-            assertEquals( signal.numReceivers , 1 , "02 - numReceivers failed.") ;
+            assertEquals( signal.length , 1 , "02 - length failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "03 - numReceivers failed.") ;
+            assertEquals( signal.length , 2 , "03 - length failed.") ;
             signal.connect( receiver2 ) ;
-            assertEquals( signal.numReceivers , 2 , "04 - numReceivers failed.") ;
+            assertEquals( signal.length , 2 , "04 - length failed.") ;
         }
         
         public function testTypes():void
@@ -157,9 +157,11 @@ package system.signals
         
         public function testConnectWithPriority():void
         {
-            signal.connect( receiver1 , 999 ) ;
-            signal.connect( receiver2 , 500 ) ;
-            ArrayAssert.assertEquals([receiver2.receive, receiver1], signal.toArray() ) ;
+            var receiver1:ReceiverClass = new ReceiverClass() ;            var receiver2:ReceiverClass = new ReceiverClass() ;            var receiver3:ReceiverClass = new ReceiverClass() ;            var receiver4:ReceiverClass = new ReceiverClass() ;            signal.connect( receiver1 , 400 ) ;
+            signal.connect( receiver2 , 499 ) ;
+            signal.connect( receiver3 , 1 ) ;
+            signal.connect( receiver4 , 4 ) ;
+            ArrayAssert.assertEquals([receiver2.receive, receiver1.receive, receiver4.receive , receiver3.receive ], signal.toArray() ) ;
         }
         
         public function testConnected():void
