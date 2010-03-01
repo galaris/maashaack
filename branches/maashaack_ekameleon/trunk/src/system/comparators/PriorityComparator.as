@@ -36,9 +36,8 @@
 package system.comparators
 {
     import system.Comparator;
-    import system.Reflection;
     import system.process.Priority;
-    
+
     /**
      * This comparator compare two Priority objects and use the priority property of this Priority objects.
      */
@@ -84,7 +83,7 @@ package system.comparators
             }
             else 
             {
-                throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Priority objects.") ;
+                throw new ArgumentError( "PriorityComparator compare(" + o1 + "," + o2 + ") failed, the two arguments must be Priority objects.") ;
             }
         }
     }
