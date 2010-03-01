@@ -37,7 +37,7 @@ package examples
 {
     import system.events.ActionEvent;
     import system.process.Action;
-    import system.process.Buffer;
+    import system.process.Chain;
     import system.process.Pause;
     
     import flash.display.Sprite;
@@ -47,11 +47,11 @@ package examples
     /**
      * Basic example to use the system.process.Buffer.
      */
-    public class BufferBasicExample extends Sprite
+    public class ChainBasicExample extends Sprite
     {
-        public function BufferBasicExample()
+        public function ChainBasicExample()
         {
-            var buffer:Buffer = new Buffer() ;
+            var buffer:Chain = new Chain() ;
             
             buffer.addEventListener( ActionEvent.FINISH   , debug ) ;
             buffer.addEventListener( ActionEvent.PROGRESS , debug ) ;
@@ -80,7 +80,7 @@ package examples
         
         public function progress( action:Action ):void
         {
-            trace( "progress : " + (action as Buffer).current ) ;
+            trace( "progress : " + (action as Chain).current ) ;
         }
         
         public function start( action:Action ):void

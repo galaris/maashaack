@@ -36,7 +36,7 @@
 package examples
 {
     import system.events.ActionEvent;
-    import system.process.Buffer;
+    import system.process.Chain;
     import system.process.Pause;
     
     import flash.display.Sprite;
@@ -46,11 +46,11 @@ package examples
     /**
      * Basic example to use the system.process.Buffer with the priority option in the addAction method.
      */
-    public class BufferPriorityExample extends Sprite
+    public class ChainPriorityExample extends Sprite
     {
-        public function BufferPriorityExample()
+        public function ChainPriorityExample()
         {
-            buffer = new Buffer() ;
+            buffer = new Chain() ;
             
             buffer.addEventListener( ActionEvent.FINISH   , debug    ) ;
             buffer.addEventListener( ActionEvent.PROGRESS , progress ) ;
@@ -64,7 +64,7 @@ package examples
             buffer.run() ;
         }
         
-        public var buffer:Buffer ;
+        public var buffer:Chain ;
         
         public function debug( e:ActionEvent ):void
         {

@@ -41,67 +41,67 @@ package system.process
     import system.process.mocks.MockTask;
     import system.process.mocks.MockTaskListener;
 
-    public class BufferTest extends TestCase 
+    public class ChainTest extends TestCase 
     {
-        public function BufferTest(name:String = "")
+        public function ChainTest(name:String = "")
         {
             super(name);
         }
         
-        public var buffer:Buffer ;
+        public var chain:Chain ;
         
         public var mockListener:MockTaskListener ;
         
         public function setUp():void
         {
-            buffer = new Buffer() ;
+            chain = new Chain() ;
             
-            buffer.addAction(new MockTask()) ;
-            buffer.addAction(new MockTask()) ;
-            buffer.addAction(new MockTask()) ;
-            buffer.addAction(new MockTask()) ;
+            chain.addAction(new MockTask()) ;
+            chain.addAction(new MockTask()) ;
+            chain.addAction(new MockTask()) ;
+            chain.addAction(new MockTask()) ;
         }
         
         public function tearDown():void
         {
-            buffer = undefined ; 
+            chain = undefined ; 
             MockTask.reset() ; 
         }
         
         
         public function testInherit():void
         {
-            assertTrue( buffer is CoreAction , "inherit Action failed.");
+            assertTrue( chain is CoreAction , "inherit Action failed.");
         }
         
         public function testInterface():void
         {
-            assertTrue( buffer is Resumable , "Must implements the Resumable interface.");
-            assertTrue( buffer is Startable , "Must implements the Startable interface.");
-            assertTrue( buffer is Stoppable , "Must implements the Stoppable interface.");
+            assertTrue( chain is Resumable , "Must implements the Resumable interface.");
+            assertTrue( chain is Startable , "Must implements the Startable interface.");
+            assertTrue( chain is Stoppable , "Must implements the Stoppable interface.");
         }
         
         public function testAddAction():void
         {
-            var b:Buffer = new Buffer() ;
-            assertFalse( b.addAction( null ) ) ;
-            assertTrue( b.addAction( new MockTask() ) ) ;
+            var c:Chain = new Chain() ;
+            assertFalse( c.addAction( null ) ) ;
+            assertTrue( c.addAction( new MockTask() ) ) ;
         }
         
         public function testEvents():void
         {
-            var b:Buffer = new Buffer() ;
-            mockListener = new MockTaskListener(b) ;
+            var c:Chain = new Chain() ;
+            mockListener = new MockTaskListener( c ) ;
             
-            b.addAction( new MockTask("testEvents_1") ) ;
-            b.addAction( new MockTask("testEvents_2") ) ;
-            b.addAction( new MockTask("testEvents_3") ) ;
-            b.addAction( new MockTask("testEvents_4") ) ;
+            c.addAction( new MockTask("testEvents_1") ) ;
+            c.addAction( new MockTask("testEvents_2") ) ;
+            c.addAction( new MockTask("testEvents_3") ) ;
+            c.addAction( new MockTask("testEvents_4") ) ;
             
-            b.run() ;
+            c.run() ;
             
             assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-            assertFalse( b.running , "The running property of the Sequencer must be false after the process." ) ;
+            assertFalse( c.running , "The running property of the Sequencer must be false after the process." ) ;
             
             assertTrue   ( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals ( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
