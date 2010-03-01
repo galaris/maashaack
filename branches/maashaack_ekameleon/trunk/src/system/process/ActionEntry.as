@@ -36,7 +36,7 @@
 package system.process 
 {
     /**
-     * Contains all informations about an Action in a Sequencer.
+     * Contains all informations about an Action.
      */
     public class ActionEntry implements Priority
     {
