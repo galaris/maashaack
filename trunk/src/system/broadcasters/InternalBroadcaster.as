@@ -35,7 +35,6 @@
 
 package system.broadcasters 
 {
-    import system.comparators.PriorityComparator;
 
     /**
      * This class provides a basic implementation of the Broadcaster interface.
@@ -83,7 +82,7 @@ package system.broadcasters
             else
             {
                 listeners.push( new BroadcasterEntry( listener , priority , autoRemove ) ) ;
-                listeners.sort( _comparator.compare ) ; 
+                shellSort(listeners) ; 
                 return true ;
             }
         }
@@ -186,8 +185,31 @@ package system.broadcasters
         protected var listeners:Array ;
         
         /**
+         * Use a shell sort algorithm to sort the Vector of ActionEntry (http://en.wikipedia.org/wiki/Shell_sort). The sort method with a basic PriorityComparator.compare method failed ?
          * @private
          */
-        private static const _comparator:PriorityComparator = new PriorityComparator() ; 
+        protected function shellSort( data:Array ):void 
+        {
+            var temp:BroadcasterEntry ;
+            var i:int ;
+            var j:int ;
+            var n:int = data.length ;
+            var inc:int = int( n / 2 + 0.5 ) ;
+            while( inc ) 
+            {
+                for( i = inc ; i<n ; i++) 
+                {
+                    temp = data[i] ;
+                    j    = i ;
+                    while( j >= inc && data[int(j - inc)].priority < temp.priority ) 
+                    {
+                        data[j] = data[int(j - inc)] ;
+                        j = int(j - inc);
+                    }
+                    data[j] = temp ;
+                }
+                inc = int(inc / 2.2 + 0.5);
+            }
+        }
     }
 }
