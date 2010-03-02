@@ -106,12 +106,32 @@ package system.process
              assertEquals( 10, chain.numLoop) ;
         }
         
+        public function testLength():void
+        {
+            assertEquals( 4 , chain.length ) ;
+            chain.length = 10 ;
+            assertEquals( 10 , chain.length ) ;
+            chain.length = 2 ;
+            assertEquals( 2 , chain.length ) ; 
+            chain.length = 0 ;
+            assertEquals( 0 , chain.length ) ; 
+        }
+        
         public function testAddAction():void
         {
             chain = new Chain() ;
             assertFalse( chain.addAction( null ) ) ;
             assertTrue( chain.addAction( task1 ) ) ;
             assertTrue( chain.addAction( task1 ) ) ;
+        }
+        
+        public function testGetActionAt():void
+        {
+            assertEquals( task1 , chain.getActionAt( 0 ) ) ;
+            assertEquals( task2 , chain.getActionAt( 1 ) ) ;
+            assertEquals( task3 , chain.getActionAt( 2 ) ) ;
+            assertEquals( task4 , chain.getActionAt( 3 ) ) ;
+            assertNull( chain.getActionAt( 4 ) ) ;
         }
         
         public function testHasAction():void
