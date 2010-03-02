@@ -35,12 +35,13 @@
 
 package system.process 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
     import system.process.mocks.MockTaskListener;
-    
+
     public class ChainTest extends TestCase 
     {
         public function ChainTest(name:String = "")
@@ -113,6 +114,13 @@ package system.process
             assertTrue( chain.addAction( task1 ) ) ;
         }
         
+        public function testHasAction():void
+        {
+            assertTrue( chain.hasAction( task1 ) ) ;
+            chain.removeAction(task1) ;
+            assertFalse( chain.hasAction( task1 ) ) ;
+        }
+        
         public function testIsEmpty():void
         {
             assertFalse( chain.isEmpty() ) ;
@@ -133,6 +141,40 @@ package system.process
             assertTrue( chain.removeAction() ) ;
             assertEquals( 0 , chain.length ) ;
             assertFalse( chain.removeAction() ) ;
+        }
+        
+        public function testToArray():void
+        {
+            var ar:Array ;
+            
+            ar = chain.toArray() ;
+            ArrayAssert.assertEquals([task1,task2,task3,task4], ar ) ;
+            
+            chain.length = 10 ;
+            
+            ar = chain.toArray() ;
+            ArrayAssert.assertEquals([task1,task2,task3,task4], ar ) ;
+        }
+        
+        public function testToString():void
+        {
+            assertEquals( chain.toString() , "[Object Chain]" ) ;
+            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
+            chain.length = 6 ;
+            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
+            chain.length = 2 ;
+            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask]>]" ) ;
+        }
+        
+        public function testToVector():void
+        {
+            var v:Vector.<Action> = chain.toVector() ;
+            assertEquals( v.toString() , "[MockTask],[MockTask],[MockTask],[MockTask]" ) ;
+            assertEquals( v.length , chain.length ) ;
+            assertEquals( v[0] , chain.getActionAt(0) ) ;
+            assertEquals( v[1] , chain.getActionAt(1) ) ;
+            assertEquals( v[2] , chain.getActionAt(2) ) ;
+            assertEquals( v[3] , chain.getActionAt(3) ) ;
         }
         
         public function testEvents():void
