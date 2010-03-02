@@ -117,6 +117,47 @@ package system.process
             assertEquals( 0 , chain.length ) ; 
         }
         
+        public function testMode():void
+        {
+            assertEquals( Chain.NORMAL , chain.mode ) ; 
+            chain.mode = null ;
+            assertEquals( Chain.NORMAL , chain.mode ) ; 
+            chain.mode = "hello" ;
+            assertEquals( Chain.NORMAL , chain.mode ) ; 
+            chain.mode = "normal" ;
+            assertEquals( Chain.NORMAL , chain.mode ) ;
+            chain.mode = Chain.TRANSIENT ;
+            assertEquals( Chain.TRANSIENT , chain.mode ) ;
+            chain.mode = Chain.EVERLASTING ;
+            assertEquals( Chain.EVERLASTING , chain.mode ) ;
+        }
+        
+        
+        public function testNORMAL():void
+        {
+            assertEquals( Chain.NORMAL , "normal" ) ; 
+            chain.mode = null ;
+            assertEquals( Chain.NORMAL , chain.mode ) ; 
+            chain.mode = "hello" ;
+            assertEquals( Chain.NORMAL , chain.mode ) ; 
+            chain.mode = "normal" ;
+            assertEquals( Chain.NORMAL , chain.mode ) ;
+            chain.mode = Chain.TRANSIENT ;
+            assertEquals( Chain.TRANSIENT , chain.mode ) ;
+            chain.mode = Chain.EVERLASTING ;
+            assertEquals( Chain.EVERLASTING , chain.mode ) ;
+        }
+        
+        public function testTRANSIENT():void
+        {
+            assertEquals( Chain.TRANSIENT , "transient" ) ;
+        }
+        
+        public function testEVERLASTING():void
+        {
+            assertEquals( Chain.EVERLASTING , "everlasting" ) ;
+        }
+        
         public function testAddAction():void
         {
             chain = new Chain() ;
