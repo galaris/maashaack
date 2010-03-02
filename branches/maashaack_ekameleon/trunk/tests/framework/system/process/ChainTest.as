@@ -36,11 +36,11 @@
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.events.ActionEvent;
     import system.process.mocks.MockTask;
     import system.process.mocks.MockTaskListener;
-
+    
     public class ChainTest extends TestCase 
     {
         public function ChainTest(name:String = "")
@@ -52,22 +52,29 @@ package system.process
         
         public var mockListener:MockTaskListener ;
         
+        public var task1:MockTask ;
+        public var task2:MockTask ;
+        public var task3:MockTask ;
+        public var task4:MockTask ;
+        
         public function setUp():void
         {
             chain = new Chain() ;
             
-            chain.addAction(new MockTask()) ;
-            chain.addAction(new MockTask()) ;
-            chain.addAction(new MockTask()) ;
-            chain.addAction(new MockTask()) ;
+            task1 = new MockTask() ;            task2 = new MockTask() ;            task3 = new MockTask() ;            task4 = new MockTask() ;
+            
+            chain.addAction( task1 ) ;            chain.addAction( task2 ) ;            chain.addAction( task3 ) ;            chain.addAction( task4 ) ;
         }
         
         public function tearDown():void
         {
-            chain = undefined ; 
+            chain = null ; 
+            task1 = null ; 
+            task2 = null ; 
+            task3 = null ; 
+            task4 = null ; 
             MockTask.reset() ; 
         }
-        
         
         public function testInherit():void
         {
@@ -81,11 +88,51 @@ package system.process
             assertTrue( chain is Stoppable , "Must implements the Stoppable interface.");
         }
         
+        public function testConstructorEmptyArgument():void
+        {
+             chain = new Chain() ;
+             assertEquals( 0, chain.length) ;
+             assertFalse( chain.fixed ) ;
+             assertFalse( chain.loop ) ;
+             assertEquals( 0, chain.numLoop) ;
+        }
+          
+        public function testConstructorWithArguments():void
+        {
+             chain = new Chain(5,true,true,10) ;
+             assertEquals( 5, chain.length) ;
+             assertTrue( chain.fixed ) ;             assertTrue( chain.loop ) ;
+             assertEquals( 10, chain.numLoop) ;
+        }
+        
         public function testAddAction():void
         {
-            var c:Chain = new Chain() ;
-            assertFalse( c.addAction( null ) ) ;
-            assertTrue( c.addAction( new MockTask() ) ) ;
+            chain = new Chain() ;
+            assertFalse( chain.addAction( null ) ) ;
+            assertTrue( chain.addAction( task1 ) ) ;
+            assertTrue( chain.addAction( task1 ) ) ;
+        }
+        
+        public function testIsEmpty():void
+        {
+            assertFalse( chain.isEmpty() ) ;
+            chain.removeAction() ;
+            assertTrue( chain.isEmpty() ) ;
+        }
+        
+        public function testRemoveAction():void
+        {
+            assertTrue( chain.hasAction( task2 ) ) ;
+            assertTrue( chain.removeAction(task2) ) ;            assertFalse( chain.hasAction( task2 ) ) ;
+            assertFalse( chain.removeAction(task2) ) ;
+            assertEquals( 3 , chain.length ) ;
+        }
+        
+        public function testRemoveActionClear():void
+        {
+            assertTrue( chain.removeAction() ) ;
+            assertEquals( 0 , chain.length ) ;
+            assertFalse( chain.removeAction() ) ;
         }
         
         public function testEvents():void
