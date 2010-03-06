@@ -321,12 +321,12 @@ package graphics.display
         /**
          * Restart the process if the process is stopped.
          */
-        public function resume():void
+        public override function resume():void
         {
             if ( _stopped && _target )
             {
-                notifyResumed() ;
                 _stopped = false ;
+                notifyResumed() ;
                 _target.play() ;
             }
         }

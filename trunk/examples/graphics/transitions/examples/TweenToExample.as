@@ -101,6 +101,7 @@ package examples
                 case Keyboard.UP :
                 {
                     tween.duration = 1 ;
+                    tween.from = null ;
                     tween.run( { x : 50 , y : 50 , rotation : 0 } ) ;
                     break ;
                 }
