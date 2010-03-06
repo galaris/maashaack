@@ -102,6 +102,14 @@ package graphics.transitions
         public var prevTime:Number ;
         
         /**
+         * Indicates if the motion is stopped.
+         */
+        public function get stopped():Boolean
+        {
+            return _stopped ;
+        }
+        
+        /**
          * Indicates the target reference of the object contrains by the Motion effect.
          */
         public function get target():*
@@ -160,19 +168,19 @@ package graphics.transitions
         
         /**
          * Resumes a tweened animation from its stopped point in the animation.
-          */
-        public function resume():Boolean 
+         */
+        public override function resume():void 
         {
-            if ( _stopping == true && _time != duration) 
+            if ( _stopped == true && _time != duration) 
             {
+                _stopped = false ;
                 fixTime() ;
                 startInterval() ;
                 notifyResumed() ;
-                return true ;
             }
-            else 
+            else
             {
-                return false ;
+                run() ;
             }
         }
         
@@ -191,6 +199,7 @@ package graphics.transitions
          */
         public override function run( ...arguments:Array ):void 
         {
+            _stopped = false ; 
             notifyStarted() ;
             rewind() ;
             startInterval() ;
@@ -239,7 +248,6 @@ package graphics.transitions
          */
         public override function start():void 
         {
-            _stopping = false ; 
             run() ;
         }
         
@@ -266,7 +274,7 @@ package graphics.transitions
         public override function stop():void
         {
             stopInterval() ;
-            _stopping = true ;
+            _stopped = true ;
             notifyStopped() ;
         }
         
@@ -344,7 +352,7 @@ package graphics.transitions
         /**
          * @private
          */
-        private var _stopping:Boolean ;
+        private var _stopped:Boolean ;
         
         /**
          * @private

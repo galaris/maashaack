@@ -37,13 +37,14 @@ package graphics.transitions
 {
     import system.data.ValueObject;
     import system.process.Action;
+    import system.process.Resumable;
     import system.process.Startable;
     import system.process.Stoppable;
-
+    
     /**
      * Defines all process in the application who creates transition effects.
      */
-    public interface Transition extends Action, Startable, Stoppable, ValueObject 
+    public interface Transition extends Action, Resumable, Startable, Stoppable, ValueObject 
     {
         //
     }

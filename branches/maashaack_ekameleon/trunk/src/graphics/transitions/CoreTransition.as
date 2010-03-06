@@ -92,6 +92,14 @@ package graphics.transitions
         }
         
         /**
+         * Resume this transition.
+         */
+        public function resume():void 
+        {
+            
+        }
+        
+        /**
          * Starts the transition.
          */
         public function start():void
