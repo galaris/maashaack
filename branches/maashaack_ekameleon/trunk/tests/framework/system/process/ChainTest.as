@@ -132,6 +132,12 @@ package system.process
             assertEquals( Chain.EVERLASTING , chain.mode ) ;
         }
         
+        public function testPosition():void
+        {
+            assertEquals( 0 , chain.position ) ;
+            chain.run() ;
+            assertEquals( 0 , chain.position ) ;
+        }
         
         public function testNORMAL():void
         {
@@ -164,6 +170,11 @@ package system.process
             assertFalse( chain.addAction( null ) ) ;
             assertTrue( chain.addAction( task1 ) ) ;
             assertTrue( chain.addAction( task1 ) ) ;
+        }
+        
+        public function testElement():void
+        {
+            assertEquals( task1 , chain.element() ) ;
         }
         
         public function testGetActionAt():void

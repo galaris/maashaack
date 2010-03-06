@@ -35,15 +35,6 @@
 
 package system.process 
 {
-    import system.Reflection;
-    import system.Serializable;
-    import system.data.Iterator;
-    import system.data.Queue;
-    import system.data.queues.LinearQueue;
-    import system.data.queues.TypedQueue;
-    import system.eden;
-    import system.hack;
-    
     /**
      * A Sequencer of Action process.
      * <p><b>Example :</b></p>
@@ -69,96 +60,20 @@ package system.process
      * seq.run() ;
      * </pre>
      */
-    public class Sequencer extends CoreAction implements Serializable, Stoppable
+    public class Sequencer extends Chain
     {
-        use namespace hack ;
-        
         /**
          * Creates a new Sequencer instance.
-         * @param ar An Array of <code class="prettyprint">Action</code> objects.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
-         * @param queue This optional parameter defines the Queue reference use inside the sequencer, by default the sequencer use a LinearQueue reference.
+         * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
+         * @param fixed Whether the chain length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
+         * @param loop Specifies whether playback of the clip should continue, or loop (default false). 
+         * @param numLoop Specifies the number of the times the presentation should loop during playback.
+         * @param mode Specifies the mode of the chain. The mode can be "normal", "transient" (default) or "everlasting".
+         * @param actions A dynamic object who contains Action references to initialize the chain.
          */
-        public function Sequencer( ar:Array = null , global:Boolean = false , channel:String = null , queue:Queue=null )
+        public function Sequencer( length:uint = 0 , fixed:Boolean = false , loop:Boolean = false , numLoop:uint = 0 , mode:String = "transient" , actions:* = null )
         {
-            super( global, channel) ;
-            setQueue( queue ) ; 
-            if ( ar != null )
-            {
-                var l:int = ar.length ;
-                if (l>0) 
-                {
-                    for ( var i:int = 0 ; i < l ; i++ ) 
-                    {
-                        if ( ar[i] is Action )
-                        {
-                            addAction( ar[i] as Action ) ;
-                        } 
-                    }
-                }
-            }
-        }
-        
-        /**
-         * Indicates the current Action reference in progress.
-         */
-        public function get current():Action
-        {
-            return _cur ;
-        }
-        
-        /**
-         * Retrieves, but does not remove, the head of this sequencer.
-         */
-        public function element():* 
-        {
-            return _queue.element() ;
-        }
-        
-        /**
-         * Adds a process(Action) in the Sequencer.
-         * @return <code class="prettyprint">true</code> if the method success.
-         */
-        public function addAction( action:Action , isClone:Boolean = false ):Boolean 
-        {
-            if ( action == null )
-            {
-                return false ;
-            }
-            var a:Action = isClone ? action.clone() : action ;
-            var isEnqueue:Boolean = _queue.enqueue(a) ;
-            if ( isEnqueue )
-            {
-                a.finishIt.connect( run ) ;
-            }
-            return isEnqueue ;
-        }
-        
-        /**
-         * Removes all action register in the Sequencer.
-         */
-        public function clear():void 
-        {
-            if ( running ) 
-            {
-                if ( _cur != null )
-                {
-                    _cur.finishIt.disconnect( run ) ;
-                    if ( _cur is Stoppable )
-                    {
-                        (_cur as Stoppable).stop() ;
-                    }
-                    _cur = null ;
-                }
-                setRunning( false ) ;
-            }
-            _cur = null ;
-            _queue.clear() ;
-            if ( !isLocked() ) 
-            {
-                notifyCleared() ;
-            }
+            super( length, fixed, loop, numLoop, mode, actions ) ;
         }
         
         /**
@@ -167,160 +82,9 @@ package system.process
          */
         public override function clone():*
         {
-            var s:Sequencer = new Sequencer() ;
-            var it:Iterator = _queue.iterator() ;
-            while ( it.hasNext() ) 
-            {
-                s.addAction( it.next().clone() ) ;
-            }
-            return s ;
+            var clone:Sequencer = new Sequencer( 0 , false , loop , numLoop , _mode, _chain.length > 0 ? toVector() : null ) ;
+            clone.fixed = fixed ;
+            return clone ;
         }
-        
-        /**
-         * Returns the internal Queue reference used in the sequencer. 
-         * @return the internal Queue reference used in the sequencer.
-         */
-        public function getQueue():Queue
-        {
-            return _internalQueue ;
-        } 
-        
-        /**
-         * Launchs the Sequencer with the first element in the internal Queue of this Sequencer.
-         */
-        public override function run( ...arguments:Array ):void 
-        {
-            if ( _queue.size() > 0 ) 
-            {
-                if ( !running ) 
-                {
-                    notifyStarted() ;
-                }
-                else
-                {
-                    notifyProgress() ;
-                }
-                _cur = _queue.poll() as Action ;
-                if ( _cur != null )
-                {
-                    _cur.run() ;
-                }
-                else
-                {
-                    run() ;
-                }
-            }
-            else 
-            {
-                notifyProgress() ;
-                if ( _cur != null )
-                {
-                    if ( _cur is Stoppable )
-                    {
-                        (_cur as Stoppable).stop() ;
-                    }
-                    _cur.finishIt.disconnect( run ) ;
-                    _cur = null ;
-                }
-                if ( running == true ) 
-                {
-                    notifyFinished() ;
-                }
-            }
-        }
-        
-        /**
-         * Sets the internal Queue reference used in the sequencer.
-         * This queue is protected with a TypedQueue object but you can't use this protector.
-         * By default if the queue isn't defines, a LinearQueue is used in the sequencer. 
-         * @param q The Queue reference to use in this sequencer.
-         */
-        public function setQueue( q:Queue ):void
-        {
-            if ( running )
-            {
-                stop() ;
-            }
-            _internalQueue = q || new LinearQueue() ;
-            _queue         = new TypedQueue( Action, _internalQueue ) ;
-        } 
-        
-        /**
-         * Returns the numbers of process in this Sequencer.
-         * @return the numbers of process in this Sequencer.
-         */
-        public function size():uint
-        {
-            return _queue.size() ;
-        }
-        
-        /**
-         * Starts the Sequencer if is not in progress.
-         */
-        public function start():void 
-        {
-            if ( ! running ) 
-            {
-                run() ;
-            }
-        }
-        
-        /**
-         * Stops the Sequencer. Stop only the last process if is running.
-         */
-        public function stop():void
-        {
-            if ( running ) 
-            {
-                if ( _cur != null )
-                {
-                    _cur.finishIt.disconnect( run ) ;
-                    if ( _cur is Stoppable )
-                    {
-                        (_cur as Stoppable).stop() ;
-                    }
-                    _cur = null ;
-                }
-                setRunning(false) ;
-                if ( !isLocked() )
-                {
-                    notifyStopped() ;
-                    notifyFinished() ;
-                }
-            }
-        }
-        
-        /**
-         * Returns the array representation of all process in this Sequencer.
-         * @return the array representation of all process in this Sequencer.
-         */
-        public function toArray():Array 
-        {
-            return _queue.toArray() ;
-        }
-        
-        /**
-         * Returns the source of the specified object passed in argument.
-         * @return the source of the specified object passed in argument.
-         */
-        public function toSource( indent:int = 0 ):String  
-        {
-            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize(toArray()) + ")" ;
-        }
-        
-        /**
-         * @private
-         */
-        hack var _cur:Action ;
-        
-        /**
-         * @private
-         */
-        private var _internalQueue:Queue ;
-        
-        /**
-         * @private
-         */
-        private var _queue:TypedQueue  ;
     }
 }
