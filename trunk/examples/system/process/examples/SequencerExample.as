@@ -51,7 +51,6 @@ package examples
      */
     public class SequencerExample extends Sprite
     {
-        
         public function SequencerExample()
         {
             var o:Object = {} ;
@@ -67,48 +66,46 @@ package examples
             
             var proxy:ActionProxy = new ActionProxy(o, execute) ;
             
-            seq = new Sequencer() ;
+            sequencer = new Sequencer() ;
             
-            seq.addEventListener( ActionEvent.FINISH   , debug ) ;
-            seq.addEventListener( ActionEvent.PROGRESS , progress ) ;
-            seq.addEventListener( ActionEvent.START    , debug ) ;
+            sequencer.addEventListener( ActionEvent.FINISH   , debug ) ;
+            sequencer.addEventListener( ActionEvent.PROGRESS , progress ) ;
+            sequencer.addEventListener( ActionEvent.START    , debug ) ;
             
-            seq.addAction( new Pause(4, true) ) ;
-            seq.addAction( new ActionProxy(o, execute) ) ;
-            seq.addAction( new Pause(6, true) ) ;
-            seq.addAction( new ActionProxy(o, execute) ) ;
-            seq.addAction( new Pause(3, true) ) ;
-            seq.addAction( proxy ) ;
+            sequencer.addAction( new Pause(4, true) ) ;
+            sequencer.addAction( new ActionProxy(o, execute) ) ;
+            sequencer.addAction( new Pause(6, true) ) ;
+            sequencer.addAction( new ActionProxy(o, execute) ) ;
+            sequencer.addAction( new Pause(3, true) ) ;
+            sequencer.addAction( proxy ) ;
             
             trace ("# Press a key to run...") ;
             
             stage.addEventListener( KeyboardEvent.KEY_DOWN , onKeyDown ) ;
         }
         
-        public var seq:Sequencer ;
+        public var sequencer:Sequencer ;
         
         public function debug( e:ActionEvent ):void 
         {
-            trace ( e ) ;
+            trace ( e.type ) ;
         }
         
         public function onKeyDown( e:KeyboardEvent):void 
         {
-            if (!seq.running) 
+            if (!sequencer.running) 
             {
-                seq.start() ;
+                sequencer.start() ;
             }
             else 
             {
-                seq.stop() ;
+                sequencer.resume() ;
             }
         }
         
         public function progress( e:Event ):void 
         {
-            var type:String      = e.type as String ;
-            var target:Sequencer = e.target as Sequencer ;
-            trace ( target + " :: progress -> " + type + " >> " + ( target.size() || 0) + " :: " + target.current ) ;
+            trace ( e.type + " length:" + sequencer.length + " current:" + sequencer.current ) ;
         }
     }
 }

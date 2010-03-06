@@ -174,7 +174,7 @@ package system.process
         }
         
         /**
-         * Stops the tweened animation at its current position.
+         * Stops all command in 
          */
         public function stop():void
         {
