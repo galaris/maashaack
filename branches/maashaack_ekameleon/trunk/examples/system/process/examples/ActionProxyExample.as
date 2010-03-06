@@ -38,16 +38,15 @@ package examples
     import system.events.ActionEvent;
     import system.process.ActionProxy;
     
-    import flash.display.Sprite;    
-
+    import flash.display.Sprite;
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    
     /**
      * Basic example to use the system.process.ActionProxy.
      */
     public class ActionProxyExample extends Sprite
     {
-        
         public function ActionProxyExample()
         {
             var scope:Object = {} ;
@@ -68,7 +67,7 @@ package examples
             
             proxy.run() ;
         }
-                
+        
         public function debug( e:ActionEvent ):void 
         {
             trace ( e ) ;

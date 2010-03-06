@@ -1,4 +1,4 @@
-﻿ /*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,16 +39,15 @@ package examples
     
     import flash.display.Sprite;
     import flash.events.KeyboardEvent;
-    import flash.geom.Point;    
-
+    import flash.geom.Point;
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    
     /**
      * Basic example to use the system.process.Batch process.
      */
     public class BatchExample extends Sprite
     {
-
         public function BatchExample()
         {
             var s1:Square = new Square( 50 ,  50 , 0xFF0000 ) ;
