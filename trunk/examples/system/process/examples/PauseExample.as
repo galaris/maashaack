@@ -35,9 +35,9 @@
 
 package examples
 {
-    import system.events.ActionEvent;    import system.process.Pause;        import flash.display.Sprite;        
-    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
+    import system.events.ActionEvent;    import system.process.Pause;        import flash.display.Sprite;
+        [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+    
     /**
      * Basic example to use the system.process.Pause.
      */
