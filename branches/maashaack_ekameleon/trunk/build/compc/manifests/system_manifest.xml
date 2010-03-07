@@ -237,14 +237,14 @@
     
     <!-- system.logging -->
     
-    <component id="system.logging:Log"             class="system.logging.Log" />
-    <component id="system.logging:Loggable"        class="system.logging.Loggable" />
-    <component id="system.logging:Logger"          class="system.logging.Logger" />
-    <component id="system.logging:LoggerFactory"   class="system.logging.LoggerFactory" />
-    <component id="system.logging:LoggerLevel"     class="system.logging.LoggerLevel" />
-    <component id="system.logging:LoggerStrings"   class="system.logging.LoggerStrings" />
-    <component id="system.logging:LoggerTarget"    class="system.logging.LoggerTarget" />
-    <component id="system.logging:LogLogger"       class="system.logging.LogLogger" />
+    <component id="system.logging:Log"            class="system.logging.Log" />
+    <component id="system.logging:Loggable"       class="system.logging.Loggable" />
+    <component id="system.logging:Logger"         class="system.logging.Logger" />
+    <component id="system.logging:LoggerFactory"  class="system.logging.LoggerFactory" />
+    <component id="system.logging:LoggerLevel"    class="system.logging.LoggerLevel" />
+    <component id="system.logging:LoggerStrings"  class="system.logging.LoggerStrings" />
+    <component id="system.logging:LoggerTarget"   class="system.logging.LoggerTarget" />
+    <component id="system.logging:LogLogger"      class="system.logging.LogLogger" />
     
     <!-- system.logging.targets -->
     
@@ -283,6 +283,7 @@
     <component id="system.process:ActionURLStream"        class="system.process.ActionURLStream"        />
     <component id="system.process:Batch"                  class="system.process.Batch"                  />
     <component id="system.process:BatchProcess"           class="system.process.BatchProcess"           />
+    <component id="system.process:BatchTask"              class="system.process.BatchTask"              />
     <component id="system.process:Cache"                  class="system.process.Cache"                  />
     <component id="system.process:Chain"                  class="system.process.Chain"                  />
     <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
