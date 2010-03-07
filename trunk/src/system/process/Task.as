@@ -107,22 +107,6 @@ package system.process
         }
         
         /**
-         * Determinates the parent Action reference of the current Action.
-         */
-        public function get parent():Action
-        {
-            return _parent ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set parent( action:Action ):void
-        {
-            _parent = action ;
-        }
-        
-        /**
          * Indicates <code class="prettyprint">true</code> if the process is in progress.
          */
         public function get running():Boolean 
@@ -212,11 +196,6 @@ package system.process
          * @private
          */
         private var _logger:Logger ;
-        
-        /**
-         * @private
-         */
-        private var _parent:Action ;
         
         /**
          * @private

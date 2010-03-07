@@ -35,34 +35,33 @@
 
 package examples
 {
-    import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.BatchTask;
     import system.process.Pause;
-
+    
     import flash.display.Sprite;
-
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Basic example to use the system.process.BatchTask process.
-     */
     public class BatchTaskExample extends Sprite
     {
         public function BatchTaskExample()
         {
             batch = new BatchTask() ;
             
-            batch.addEventListener(ActionEvent.START, debug) ;
-            batch.addEventListener(ActionEvent.FINISH, debug) ;
+            // batch.mode = BatchTask.TRANSIENT ;
             
-            batch.addEventListener(ActionEvent.PROGRESS, progress) ;
+            batch.changeIt.connect( change ) ;
+            batch.finishIt.connect( finish ) ;
+            batch.progressIt.connect( progress ) ;
+            batch.startIt.connect( start ) ;
             
-            batch.addAction( new Pause(  2 , true )) ;
-            batch.addAction( new Pause( 10 , true )) ;
-            batch.addAction( new Pause(  1 , true )) ;
-            batch.addAction( new Pause(  5 , true )) ;
-            batch.addAction( new Pause(  7 , true )) ;
-            batch.addAction( new Pause(  2 , true )) ;
+            batch.addAction( new Pause(  2 , true ) , 0 , true ) ;
+            batch.addAction( new Pause( 10 , true ) ) ;
+            batch.addAction( new Pause(  1 , true ) , 0 , true ) ;
+            batch.addAction( new Pause(  5 , true ) ) ;
+            batch.addAction( new Pause(  7 , true ) , 0 , true ) ;
+            batch.addAction( new Pause(  2 , true ) ) ;
             
             batch.run() ;
             
@@ -78,14 +77,24 @@ package examples
         
         public var batch:BatchTask ;
         
-        public function progress( e:ActionEvent ):void
+        public function change( action:Action ):void
         {
-            trace(e.type + " : " + batch.current ) ;
+            trace( "change :  " + batch.current ) ;
         }
         
-        public function debug( e:ActionEvent ):void
+        public function finish( action:Action ):void
         {
-            trace(e.type) ;
+            trace( "finish length:" + batch.length ) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "progress :  " + batch.current ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
         }
     }
 }
