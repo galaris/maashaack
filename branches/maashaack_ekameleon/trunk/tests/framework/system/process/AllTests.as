@@ -60,6 +60,7 @@ package system.process
                 suite.addTestSuite( ActionTest ) ;
                 suite.addTestSuite( ActionURLLoaderTest ) ;
                 suite.addTestSuite( BatchTest ) ;
+                suite.addTestSuite( BatchTaskTest ) ;
                 suite.addTestSuite( BatchProcessTest ) ;
                 suite.addTestSuite( CacheTest ) ;
                 suite.addTestSuite( ChainTest ) ;
