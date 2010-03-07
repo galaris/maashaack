@@ -77,6 +77,21 @@ package system.process
             MockTask.reset() ; 
         }
         
+        public function testEVERLASTING():void
+        {
+            assertEquals( Chain.EVERLASTING , "everlasting" ) ;
+        }
+        
+        public function testNORMAL():void
+        {
+            assertEquals( Chain.NORMAL , "normal" ) ; 
+        }
+        
+        public function testTRANSIENT():void
+        {
+            assertEquals( Chain.TRANSIENT , "transient" ) ;
+        }
+        
         public function testInherit():void
         {
             assertTrue( chain is CoreAction , "inherit Action failed.");
@@ -139,31 +154,6 @@ package system.process
             assertEquals( 0 , chain.position ) ;
         }
         
-        public function testNORMAL():void
-        {
-            assertEquals( Chain.NORMAL , "normal" ) ; 
-            chain.mode = null ;
-            assertEquals( Chain.NORMAL , chain.mode ) ; 
-            chain.mode = "hello" ;
-            assertEquals( Chain.NORMAL , chain.mode ) ; 
-            chain.mode = "normal" ;
-            assertEquals( Chain.NORMAL , chain.mode ) ;
-            chain.mode = Chain.TRANSIENT ;
-            assertEquals( Chain.TRANSIENT , chain.mode ) ;
-            chain.mode = Chain.EVERLASTING ;
-            assertEquals( Chain.EVERLASTING , chain.mode ) ;
-        }
-        
-        public function testTRANSIENT():void
-        {
-            assertEquals( Chain.TRANSIENT , "transient" ) ;
-        }
-        
-        public function testEVERLASTING():void
-        {
-            assertEquals( Chain.EVERLASTING , "everlasting" ) ;
-        }
-        
         public function testAddAction():void
         {
             chain = new Chain() ;
@@ -191,6 +181,16 @@ package system.process
             assertTrue( chain.hasAction( task1 ) ) ;
             chain.removeAction(task1) ;
             assertFalse( chain.hasAction( task1 ) ) ;
+        }
+        
+        public function testHasNext():void
+        {
+            assertTrue( chain.hasNext() ) ;
+            chain.run() ;
+            assertTrue( chain.hasNext() ) ;
+            chain.mode = Chain.TRANSIENT ;
+            chain.run() ;
+            assertFalse( chain.hasNext() ) ;
         }
         
         public function testIsEmpty():void
