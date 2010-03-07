@@ -56,6 +56,21 @@ package system.process
         }
         
         /**
+         * Determinates the "everlasting" mode of the batch. In this mode the action register in the batch can't be auto-remove.
+         */
+        public static const EVERLASTING:String = "everlasting" ;
+        
+        /**
+         * Determinates the "normal" mode of the batch. In this mode the batch has a normal life cycle.
+         */
+        public static const NORMAL:String = "normal" ;
+        
+        /**
+         * Determinates the "transient" mode of the batch. In this mode all actions are strictly auto-remove in the batch when are invoked.
+         */
+        public static const TRANSIENT:String = "transient" ;
+        
+        /**
          * Indicates the current Action reference when the batch is in progress.
          */
         public function get current():Action
