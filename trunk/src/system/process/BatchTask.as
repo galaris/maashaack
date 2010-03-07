@@ -56,6 +56,14 @@ package system.process
         }
         
         /**
+         * Indicates the current Action reference when the batch is in progress.
+         */
+        public function get current():Action
+        {
+            return _current ;
+        }
+        
+        /**
          * @private
          */
         public override function set length( value:uint ):void
@@ -79,7 +87,7 @@ package system.process
             {
                 throw new Error( this + " addAction failed, the batch process is in progress." ) ;
             }
-            return addAction( action , priority , autoRemove ) ;
+            return super.addAction( action , priority , autoRemove ) ;
         }
         
         /**
@@ -162,6 +170,7 @@ package system.process
             {
                 notifyStarted() ;
                 _stopped = false ;
+                _current  = null ;
                 _currents.clear() ;
                 if ( _actions.length > 0 )
                 {
