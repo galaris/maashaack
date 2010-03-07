@@ -72,15 +72,6 @@ package system.process
      *             batch.addAction( new Pause(  2 , true ) ) ;
      *             
      *             batch.run() ;
-     *             
-     *             // start
-     *             // progress : [Pause duration:1s]
-     *             // progress : [Pause duration:2s]
-     *             // progress : [Pause duration:2s]
-     *             // progress : [Pause duration:5s]
-     *             // progress : [Pause duration:7s]
-     *             // progress : [Pause duration:10s]
-     *             // finish
      *         }
      *         
      *         public var batch:BatchTask ;
