@@ -56,22 +56,6 @@ package system.process.samples
             _finishIt = signal ;
         }
         
-        /**
-         * Determinates the parent Action reference of the current Action.
-         */
-        public function get parent():Action
-        {
-            return _parent ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set parent( action:Action ):void
-        {
-            _parent = action ;
-        }
-        
         public function get running():Boolean
         {
             return true ;
@@ -108,6 +92,5 @@ package system.process.samples
         }
         
         private var _finishIt:Signaler = new Signal() ;
-        private var _parent:Action ;
         private var _startIt:Signaler = new Signal() ;
     }}

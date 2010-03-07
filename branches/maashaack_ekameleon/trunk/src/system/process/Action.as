@@ -65,16 +65,6 @@ package system.process
         function set finishIt( signal:Signaler ):void ;
         
         /**
-         * Determinates the parent Action reference of the current Action.
-         */
-        function get parent():Action ;
-        
-        /**
-         * @private
-         */
-        function set parent( action:Action ):void ;
-        
-        /**
          * Indicates <code class="prettyprint">true</code> if the action is in progress.
          */
         function get running():Boolean ;

@@ -39,6 +39,74 @@ package system.process
 
     /**
      * Batchs actions and notify when all actions are finished.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * package examples
+     * {
+     *     import system.process.Action;
+     *     import system.process.BatchTask;
+     *     import system.process.Pause;
+     *     
+     *     import flash.display.Sprite;
+     *     
+     *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+     *     
+     *     public class BatchTaskExample extends Sprite
+     *     {
+     *         public function BatchTaskExample()
+     *         {
+     *             batch = new BatchTask() ;
+     *             
+     *             // batch.mode = BatchTask.TRANSIENT ;
+     *             
+     *             batch.changeIt.connect( change ) ;
+     *             batch.finishIt.connect( finish ) ;
+     *             batch.progressIt.connect( progress ) ;
+     *             batch.startIt.connect( start ) ;
+     *             
+     *             batch.addAction( new Pause(  2 , true ) , 0 , true ) ;
+     *             batch.addAction( new Pause( 10 , true ) ) ;
+     *             batch.addAction( new Pause(  1 , true ) , 0 , true ) ;
+     *             batch.addAction( new Pause(  5 , true ) ) ;
+     *             batch.addAction( new Pause(  7 , true ) , 0 , true ) ;
+     *             batch.addAction( new Pause(  2 , true ) ) ;
+     *             
+     *             batch.run() ;
+     *             
+     *             // start
+     *             // progress : [Pause duration:1s]
+     *             // progress : [Pause duration:2s]
+     *             // progress : [Pause duration:2s]
+     *             // progress : [Pause duration:5s]
+     *             // progress : [Pause duration:7s]
+     *             // progress : [Pause duration:10s]
+     *             // finish
+     *         }
+     *         
+     *         public var batch:BatchTask ;
+     *         
+     *         public function change( action:Action ):void
+     *         {
+     *             trace( "change :  " + batch.current ) ;
+     *         }
+     *         
+     *         public function finish( action:Action ):void
+     *         {
+     *             trace( "finish length:" + batch.length ) ;
+     *         }
+     *         
+     *         public function progress( action:Action ):void
+     *         {
+     *             trace( "progress :  " + batch.current ) ;
+     *         }
+     *         
+     *         public function start( action:Action ):void
+     *         {
+     *             trace( "start" ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
      */
     public class BatchTask extends TaskGroup 
     {
@@ -115,7 +183,6 @@ package system.process
             clone.fixed = _actions.fixed ;
             return clone ;
         }
-        
         
         /**
          * Remove a specific action register in the chain and if the passed-in argument is null all actions register in the chain are removed. 
@@ -260,10 +327,10 @@ package system.process
         {
             if ( action && _currents.containsKey(action) )
             {
-                var current:ActionEntry = _currents.get( action ) ;
+                var entry:ActionEntry = _currents.get( action ) ;
                 if ( _mode != EVERLASTING )
                 {
-                    if ( _mode == TRANSIENT || (current.auto && _mode == NORMAL) )
+                    if ( _mode == TRANSIENT || (entry.auto && _mode == NORMAL) )
                     {
                         if ( action )
                         {
@@ -283,12 +350,13 @@ package system.process
                     }
                 }
                 _currents.remove(action) ;
+            }
+            if ( _current )
+            {
                 notifyChanged() ;
             }
-            
             _current = action ;
             notifyProgress() ;
-            
             if ( _currents.isEmpty() ) 
             {
                 _current = null ;
