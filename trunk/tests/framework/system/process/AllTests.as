@@ -76,6 +76,7 @@ package system.process
                 suite.addTestSuite( StartableTest ) ;
                 suite.addTestSuite( StoppableTest ) ;
                 suite.addTestSuite( TaskTest ) ;
+                suite.addTestSuite( TaskGroupTest ) ;
                 suite.addTestSuite( TimeoutPolicyTest ) ;
             }
             
