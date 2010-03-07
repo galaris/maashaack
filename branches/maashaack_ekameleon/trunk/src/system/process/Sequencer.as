@@ -82,7 +82,7 @@ package system.process
          */
         public override function clone():*
         {
-            var clone:Sequencer = new Sequencer( 0 , false , loop , numLoop , _mode, _chain.length > 0 ? toVector() : null ) ;
+            var clone:Sequencer = new Sequencer( 0 , false , loop , numLoop , _mode, _actions.length > 0 ? toVector() : null ) ;
             clone.fixed = fixed ;
             return clone ;
         }

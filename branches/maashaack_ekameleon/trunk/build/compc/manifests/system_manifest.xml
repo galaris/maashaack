@@ -297,6 +297,7 @@
     <component id="system.process:Startable"              class="system.process.Startable"              />
     <component id="system.process:Stoppable"              class="system.process.Stoppable"              />
     <component id="system.process:Task"                   class="system.process.Task"                   />
+    <component id="system.process:TaskGroup"              class="system.process.TaskGroup"              />
     <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
     
     <!-- system.reflection -->

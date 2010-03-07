@@ -230,12 +230,12 @@ package system.process
         
         public function testToString():void
         {
-            assertEquals( chain.toString() , "[Object Chain]" ) ;
-            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
+            assertEquals( chain.toString() , "[Chain]" ) ;
+            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
             chain.length = 6 ;
-            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
+            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
             chain.length = 2 ;
-            assertEquals( chain.toString(true) , "[Chain <[MockTask],[MockTask]>]" ) ;
+            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask]>]" ) ;
         }
         
         public function testToVector():void
