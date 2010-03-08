@@ -60,19 +60,19 @@ package system.process.mocks
         
         /**
          * Indicates the type of the change event notification.
-         */        
+         */
         public var changeType:String ;
         
         /**
          * Indicates if the ActionEvent.CLEAR event is invoked.
          */
         public var clearCalled:Boolean ;
-
+        
         /**
          * Indicates the type of the clear event notification.
          */     
         public var clearType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.INFO event is invoked.
          */
@@ -85,29 +85,29 @@ package system.process.mocks
         
         /**
          * Indicates the type of the info event notification.
-         */     
+         */
         public var infoType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.LOOP event is invoked.
          */
         public var loopCalled:Boolean ;
-
+        
         /**
          * Indicates the type of the loop event notification.
          */     
         public var loopType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.PAUSE event is invoked.
          */
         public var pauseCalled:Boolean ;
-
+        
         /**
          * Indicates the type of the pause event notification.
-         */     
+         */
         public var pauseType:String ;
-
+        
         /**
          * Indicates if the ActionEvent.PROGRESS event is invoked.
          */

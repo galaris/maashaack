@@ -134,9 +134,57 @@ package system.process
         }
         
         /**
+         * This signal emit when the notifyCleared method is invoked. 
+         */
+        public function get clearIt():Signaler
+        {
+            return _clearIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set clearIt( signal:Signaler ):void
+        {
+            _clearIt = signal || new Signal() ;
+        }
+        
+        /**
+         * This signal emit when the notifyInfo method is invoked. 
+         */
+        public function get infoIt():Signaler
+        {
+            return _infoIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set infoIt( signal:Signaler ):void
+        {
+            _infoIt = signal || new Signal() ;
+        }
+        
+        /**
          * The flag to determinate if the Action object is looped.
          */
         public var looping:Boolean ;
+        
+        /**
+         * This signal emit when the notifyLooped method is invoked. 
+         */
+        public function get loopIt():Signaler
+        {
+            return _loopIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set loopIt( signal:Signaler ):void
+        {
+            _loopIt = signal || new Signal() ;
+        }
         
         /**
          * This signal emit when the notifyProgress method is invoked. 
@@ -155,6 +203,54 @@ package system.process
         }
         
         /**
+         * This signal emit when the notifyResumed method is invoked.
+         */
+        public function get resumeIt():Signaler
+        {
+            return _resumeIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set resumeIt( signal:Signaler ):void
+        {
+            _resumeIt = signal || new Signal() ;
+        }
+        
+        /**
+         * This signal emit when the notifyStopped method is invoked.
+         */
+        public function get stopIt():Signaler
+        {
+            return _stopIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set stopIt( signal:Signaler ):void
+        {
+            _stopIt = signal || new Signal() ;
+        }
+        
+        /**
+         * This signal emit when the notifyTimeOut method is invoked.
+         */
+        public function get timeoutIt():Signaler
+        {
+            return _timeoutIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set timeoutIt( signal:Signaler ):void
+        {
+            _timeoutIt = signal || new Signal() ;
+        }
+        
+        /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
          */
@@ -166,7 +262,7 @@ package system.process
         /**
          * Notify an ActionEvent when the process is changed.
          */
-        protected function notifyChanged():void 
+        public function notifyChanged():void 
         {
             _changeIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.CHANGE  ) )
@@ -178,8 +274,9 @@ package system.process
         /**
          * Notify an ActionEvent when the process is cleared.
          */
-        protected function notifyCleared():void 
+        public function notifyCleared():void 
         {
+            _clearIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.CLEAR ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.CLEAR , this ) ) ;
@@ -189,8 +286,9 @@ package system.process
         /**
          * Notify an ActionEvent when the process info is changed.
          */
-        protected function notifyInfo( info:* ):void
+        public function notifyInfo( info:* ):void
         {
+            _infoIt.emit( this , info ) ;
             if ( hasEventListener( ActionEvent.INFO ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.INFO , this , info ) ) ;
@@ -200,8 +298,9 @@ package system.process
         /**
          * Notify an ActionEvent when the process is looped.
          */
-        protected function notifyLooped():void 
+        public function notifyLooped():void 
         {
+            _loopIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.LOOP ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.LOOP , this ) ) ;
@@ -211,7 +310,7 @@ package system.process
         /**
          * Notify an ActionEvent when the process is in progress.
          */
-        protected function notifyProgress():void
+        public function notifyProgress():void
         {
             _progressIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.PROGRESS ) )
@@ -223,8 +322,9 @@ package system.process
         /**
          * Notify an ActionEvent when the process is resumed.
          */
-        protected function notifyResumed():void
+        public function notifyResumed():void
         {
+            _resumeIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.RESUME ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.RESUME , this ) ) ;
@@ -234,9 +334,10 @@ package system.process
         /**
          * Notify an ActionEvent when the process is stopped.
          */
-        protected function notifyStopped():void
+        public function notifyStopped():void
         {
-            setRunning(false) ;
+            setRunning( false ) ;
+            _stopIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.STOP ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.STOP , this ) ) ;
@@ -246,8 +347,9 @@ package system.process
         /**
          * Notify an ActionEvent when the process is out of time.
          */
-        protected function notifyTimeOut():void
+        public function notifyTimeOut():void
         {
+            _timeoutIt.emit( this ) ;
             if ( hasEventListener( ActionEvent.TIMEOUT ) )
             {
                 dispatchEvent( new ActionEvent( ActionEvent.TIMEOUT , this ) ) ;
@@ -257,11 +359,41 @@ package system.process
         /**
          * @private
          */
-        private var _changeIt:Signaler = new Signal() ;
+        protected var _changeIt:Signaler = new Signal() ;
         
         /**
          * @private
          */
-        private var _progressIt:Signaler = new Signal() ;
+        protected var _clearIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _infoIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _loopIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _progressIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _resumeIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _stopIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _timeoutIt:Signaler = new Signal() ;
     }
 }

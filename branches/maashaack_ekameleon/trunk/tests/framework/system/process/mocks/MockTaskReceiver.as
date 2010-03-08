@@ -35,20 +35,18 @@
 
 package system.process.mocks 
 {
-    import system.events.ActionEvent ;
-    import system.process.Action ;
-    import system.process.Task ;
-    
+    import system.process.Action;
+
     /**
-     * This Mock object listen all events dispatched from a Action object.
+     * This Mock receive all signal emited from a basic Action object.
      */
-    public class MockTaskListener 
+    public class MockTaskReceiver
     {
         /**
-         * Creates a new MockTaskListener instance.
+         * Creates a new MockTaskReceiver instance.
          * @param action The Action reference.
          */
-        public function MockTaskListener( action:Action = null )
+        public function MockTaskReceiver( action:Action = null )
         {
             if ( action != null )
             {
@@ -57,7 +55,7 @@ package system.process.mocks
         }
         
         /**
-         * The Action object to register and test.
+         * The Action reference to mock.
          */
         public var action:Action ;
          
@@ -65,11 +63,6 @@ package system.process.mocks
          * Indicates if the ActionEvent.FINISH event is invoked.
          */
         public var finishCalled:Boolean ;
-        
-        /**
-         * Indicates the type of the finish event notification.
-         */     
-        public var finishType:String ;
         
         /**
          * Indicates if the Action owner object is running during the process.
@@ -82,30 +75,21 @@ package system.process.mocks
         public var startCalled:Boolean ;
         
         /**
-         * Indicates the type of the start event notification.
-         */     
-        public var startType:String ;
-        
-        /**
          * Invoked when the ActionEvent.FINISH event is dispatched.
          */
-        public function onFinish( e:ActionEvent ):void
+        public function onFinish( action:Action ):void
         {
             finishCalled = true   ;
-            finishType   = e.type ;
+            isRunning   = action.running ;
         }
        
         /**
          * Invoked when the ActionEvent.FINISH event is dispatched.
          */
-        public function onStart( e:ActionEvent ):void
+        public function onStart( action:Action ):void
         {
             startCalled = true ;
-            startType   = e.type ;
-            if ( action is Task )
-            {
-                isRunning = (action as Task).running ;
-            }
+            isRunning   = action.running ;
         }
         
         /**
@@ -113,13 +97,9 @@ package system.process.mocks
          */
         public function register( action:Action ):void
         {
-            if ( this.action != null )
-            {
-                unregister() ;
-            }
             this.action = action ;
-            this.action.addEventListener( ActionEvent.FINISH , onFinish , false , 0 , true ) ;
-            this.action.addEventListener( ActionEvent.START  , onStart , false , 0 , true ) ;
+            this.action.finishIt.connect( onFinish ) ;
+            this.action.startIt.connect( onStart ) ;
         }
         
         /**
@@ -127,10 +107,11 @@ package system.process.mocks
          */
         public function unregister():void
         {
-            if ( action != null )
+            if ( action )
             {
-                action.removeEventListener( ActionEvent.FINISH , onFinish , false ) ;
-                action.removeEventListener( ActionEvent.START  , onStart  , false ) ;
+                action.finishIt.disconnect( onFinish ) ;
+                action.startIt.disconnect( onStart ) ;
+                action = null ;
             }
         }
     }

@@ -194,7 +194,7 @@ package system.events
         {
             _dispatcher.unregisterEventListener(type, listener, useCapture) ;
         }
-
+        
         /**
          * Checks whether an event listener is registered with this EventDispatcher object or any of its ancestors for the specified event type.
          * This method returns <code class="prettyprint">true</code> if an event listener is triggered during any phase of the event flow when an event of the specified type is dispatched to this EventDispatcher object or any of its descendants.
