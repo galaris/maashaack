@@ -154,14 +154,14 @@ package graphics.display
          * @param target The MovieClip target reference.
          * @param startIndex The start index.
          * @param finishIndex The finish index.
-         * @param loop Specifies whether playback of the clip should continue, or loop (default false). 
+         * @param looping Specifies whether playback of the clip should continue, or loop (default false). 
          * @param numLoop Specifies the number of the times the presentation should loop during playback.
          * @param defaultIndex This index defines the default frame to stop the timeline of the MovieClip target.
          */
-        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , loop:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 )
+        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , looping:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 )
         {
             this.target       = target ;
-            this.loop         = loop ;
+            this.looping      = looping ;
             this.numLoop      = numLoop ;
             this.defaultIndex = defaultIndex ;
             this.finishIndex  = finishIndex ;
@@ -233,12 +233,6 @@ package graphics.display
                 _finishIndex = null ; 
             }
         }
-        
-        /**
-         * Specifies whether playback of the clip should continue, or loop. 
-         * See the numLoop property to defines the number of times the movieclip should be looping. 
-         */
-        public var loop:Boolean ;
         
         /**
          * Specifies the number of the times the presentation should loop during playback.
@@ -315,7 +309,7 @@ package graphics.display
          */
         public override function clone():*
         {
-             return new TimelineTransition( _target, _startIndex , _finishIndex, loop, numLoop, _defaultIndex ) ;
+             return new TimelineTransition( _target, _startIndex , _finishIndex, looping, numLoop, _defaultIndex ) ;
         }
         
         /**
@@ -369,7 +363,7 @@ package graphics.display
                 
                 // run the playback
                 
-                if ( loop )
+                if ( looping )
                 {
                     _currentLoop = numLoop ; 
                 }
@@ -423,7 +417,7 @@ package graphics.display
             {
                 _target.stop() ;
             }
-            if ( loop && _currentLoop > 0 )
+            if ( looping && _currentLoop > 0 )
             {
                 notifyLooped() ;
                 _currentLoop -- ;

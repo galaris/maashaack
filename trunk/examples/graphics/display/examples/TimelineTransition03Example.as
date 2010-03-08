@@ -70,7 +70,7 @@ package examples
             
             // enabled the five loops of the playback.
             
-            transition.loop = true ;
+            transition.looping = true ;
             transition.numLoop = 5 ;
             
             transition.run() ;

@@ -38,9 +38,9 @@ package examples
     import system.events.ActionEvent;
     import system.process.Chain;
     import system.process.Pause;
-
+    
     import flash.display.Sprite;
-
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
@@ -52,7 +52,7 @@ package examples
         {
             chain = new Chain() ;
             
-            chain.loop    = true ;
+            chain.looping = true ;
             chain.numLoop = 3 ;
             
             chain.addEventListener( ActionEvent.FINISH   , debug ) ;
