@@ -43,9 +43,9 @@ package system.process
     
     public class CoreActionTest extends TestCase 
     {
-        public function CoreActionTest(name:String = "")
+        public function CoreActionTest( name:String = "")
         {
-            super(name);
+            super( name ) ;
         }
         
         public var action:MockAction ;

@@ -42,7 +42,8 @@ package system.process
     import system.events.CoreEventDispatcher;
     import system.logging.Logger;
     import system.process.mocks.MockTaskListener;
-    
+    import system.process.mocks.MockTaskReceiver;
+
     public class TaskTest extends TestCase
     {
         public function TaskTest(name:String = "")
@@ -51,20 +52,23 @@ package system.process
         }
         
         public var task:Task ;
-        
         public var mockListener:MockTaskListener ;
+        public var mockReceiver:MockTaskReceiver ;
         
         public function setUp():void
         {
             task         = new Task() ;
             mockListener = new MockTaskListener( task ) ;
+            mockReceiver = new MockTaskReceiver( task ) ;
         }
         
         public function tearDown():void
         {
             mockListener.unregister() ;
-            mockListener = undefined  ;
-            task         = undefined  ;
+            mockReceiver.unregister() ;
+            mockListener = null ;
+            mockReceiver = null ;
+            task         = null ;
         }
         
         public function testConstructor():void
@@ -95,15 +99,6 @@ package system.process
             assertEquals( logger.channel , Reflection.getClassPath( task ) , "02 - The logger property of the Task class failed." ) ;
         }
         
-        public function testParent():void
-        {
-            var t1:Task = new Task() ;
-            var t2:Task = new Task() ;
-            assertNull( t1.parent , "01 - Task parent failed." ) ;
-            t2.parent = t1 ;
-            assertEquals( t2.parent , t1 , "02 - Task parent failed." ) ;
-        }
-        
         public function testClone():void
         {
             var clone:Task = task.clone() as Task ;
@@ -122,6 +117,7 @@ package system.process
             task.notifyFinished() ;
             assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.FINISH event isn't notify" ) ;
             assertEquals( mockListener.finishType , ActionEvent.FINISH  , "Action notifyStarted failed, bad type found." );
+            assertTrue( mockReceiver.finishCalled , "Action notifyFinished failed, the finishIt signal must emit." ) ;
         }
         
         public function testNotifyStarted():void
@@ -129,50 +125,12 @@ package system.process
             task.notifyStarted() ;
             assertTrue( mockListener.startCalled , "Action notifyStarted failed, the ActionEvent.START event isn't notify" ) ;
             assertEquals( mockListener.startType , ActionEvent.START  , "Action notifyStarted failed, bad type found." );
+            assertTrue( mockReceiver.startCalled , "Action notifyStarted failed, the startIt signal must emit." ) ;
         }
         
         public function testRun():void
         {
             assertTrue( "run" in task , "Action run 01 method exist." ) ;
-        }
-        
-        public function testFinishIt():void
-        {
-            var test:Boolean ;
-            var action:Function = function( action:Action ):void
-            {
-                test = true ;
-            };
-            assertFalse( task.finishIt.connected() ) ;
-            task.finishIt.connect( action ) ;
-            assertTrue( task.finishIt.connected() ) ;
-            task.notifyFinished() ;
-            assertTrue( test ) ;
-        }
-        
-        public function tesFinishItRW():void
-        {
-            task.finishIt = null ; 
-            assertNotNull( task.finishIt ) ;
-        }
-        
-        public function testStartIt():void
-        {
-            var test:Boolean ;
-            var action:Function = function( action:Action ):void
-            {
-                test = true ;
-            };
-            assertFalse( task.startIt.connected() ) ;            task.startIt.connect( action ) ;
-            assertTrue( task.startIt.connected() ) ;
-            task.notifyStarted() ;
-            assertTrue( test ) ;
-        }
-        
-        public function testStartItRW():void
-        {
-            task.startIt = null ; 
-            assertNotNull( task.startIt ) ;
         }
     }
 }
