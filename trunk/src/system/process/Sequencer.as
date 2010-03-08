@@ -77,6 +77,21 @@ package system.process
         }
         
         /**
+         * Determinates the "everlasting" mode of the chain. In this mode the action register in the chain can't be auto-remove.
+         */
+        public static const EVERLASTING:String = "everlasting" ;
+        
+        /**
+         * Determinates the "normal" mode of the chain. In this mode the chain has a normal life cycle.
+         */
+        public static const NORMAL:String = "normal" ;
+        
+        /**
+         * Determinates the "transient" mode of the chain. In this mode all actions are strictly auto-remove in the chain when are invoked.
+         */
+        public static const TRANSIENT:String = "transient" ;
+        
+        /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
          */

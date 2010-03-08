@@ -111,14 +111,16 @@ package system.process
              assertFalse( chain.fixed ) ;
              assertFalse( chain.loop ) ;
              assertEquals( 0, chain.numLoop) ;
+             assertEquals( Chain.NORMAL, chain.mode) ;
         }
           
         public function testConstructorWithArguments():void
         {
-             chain = new Chain(5,true,true,10) ;
+             chain = new Chain(5,true,true,10, Chain.TRANSIENT) ;
              assertEquals( 5, chain.length) ;
              assertTrue( chain.fixed ) ;             assertTrue( chain.loop ) ;
              assertEquals( 10, chain.numLoop) ;
+             assertEquals( Chain.TRANSIENT, chain.mode) ;
         }
         
         public function testLength():void

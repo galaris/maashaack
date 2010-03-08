@@ -48,128 +48,66 @@ package system.process
             super(name);
         }
         
-        public var seq:Sequencer ;
+        public var sequencer:Sequencer ;
         
         public var mockListener:MockTaskListener ;
         
         public function setUp():void
         {
-            seq = new Sequencer() ;
+            sequencer = new Sequencer() ;
             
-            seq.addAction(new MockTask()) ;
-            seq.addAction(new MockTask()) ;
-            seq.addAction(new MockTask()) ;
-            seq.addAction(new MockTask()) ;
+            sequencer.addAction(new MockTask()) ;
+            sequencer.addAction(new MockTask()) ;
+            sequencer.addAction(new MockTask()) ;
+            sequencer.addAction(new MockTask()) ;
         }
         
         public function tearDown():void
         {
-            seq = null ; 
+            sequencer = null ; 
             MockTask.reset() ; 
         }
         
         public function testInherit():void
         {
-            assertTrue( seq is Chain , "inherit Action failed.");
+            assertTrue( sequencer is Chain , "inherit Action failed.");
+        }
+        
+        public function testConstructorEmptyArgument():void
+        {
+             sequencer = new Sequencer() ;
+             assertEquals( 0, sequencer.length) ;
+             assertFalse( sequencer.fixed ) ;
+             assertFalse( sequencer.loop ) ;
+             assertEquals( 0, sequencer.numLoop) ;
+             assertEquals( Sequencer.TRANSIENT, sequencer.mode) ;
+        }
+          
+        public function testConstructorWithArguments():void
+        {
+             sequencer = new Sequencer(5,true,true,10, Sequencer.NORMAL) ;
+             assertEquals( 5, sequencer.length) ;
+             assertTrue( sequencer.fixed ) ;
+             assertTrue( sequencer.loop ) ;
+             assertEquals( 10, sequencer.numLoop) ;
+             assertEquals( Sequencer.NORMAL, sequencer.mode) ;
         }
         
         public function testLength():void
         {
-            assertEquals( seq.length , 4 , "size method failed.") ;
+            assertEquals( 4 , sequencer.length ) ;
+            sequencer.length = 10 ;
+            assertEquals( 10 , sequencer.length ) ;
+            sequencer.length = 2 ;
+            assertEquals( 2 , sequencer.length ) ; 
+            sequencer.length = 0 ;
+            assertEquals( 0 , sequencer.length ) ; 
         }
-        
-//        public function testAddAction():void
-//        {
-//            var s:Sequencer = new Sequencer() ;
-//            assertFalse( s.addAction( null ) , "addAction failed, must return false when a null object is passed-in." ) ;
-//            assertTrue( s.addAction( new MockTask() ) , "addAction failed, must return true when a IAction object is passed-in." ) ;
-//        }
         
         public function testClone():void
         {
-            var clone:Sequencer = seq.clone() as Sequencer ;
+            var clone:Sequencer = sequencer.clone() as Sequencer ;
             assertNotNull( clone  , "clone method failed, with a null shallow copy object." ) ;
         }
-//        
-//        public function testElement():void
-//        {
-//            var s:Sequencer = new Sequencer() ;
-//            
-//            assertNull( s.element() , "01 - Sequencer element() failed.") ;
-//            
-//            var t1:Task = new MockTask("testElement_1") ;
-//            var t2:Task = new MockTask("testElement_2") ;
-//            
-//            s.addAction(t1) ;
-//            s.addAction(t2) ;
-//            assertEquals( s.element() , t1 , "02 - Sequencer element() failed.") ;
-//            
-//            s.run() ;
-//            assertNull( s.element() , "03 - Sequencer element() failed.") ;
-//        }
-//        
-//        public function testEvents():void
-//        {
-//            var s:Sequencer = new Sequencer() ;
-//            mockListener = new MockTaskListener(s) ;
-//            
-//            s.addAction( new MockTask("testEvents_1") ) ;
-//            s.addAction( new MockTask("testEvents_2") ) ;
-//            s.addAction( new MockTask("testEvents_3") ) ;
-//            s.addAction( new MockTask("testEvents_4") ) ;
-//            
-//            s.run() ;
-//            
-//            assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-//            assertFalse( s.running , "The running property of the Sequencer must be false after the process." ) ;
-//            
-//            assertTrue   ( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-//            assertEquals ( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
-//            assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-//            assertEquals ( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
-//            
-//            mockListener.unregister() ;
-//            mockListener = null ;
-//        }
-//        
-//        public function testRun():void
-//        {
-//            seq = new Sequencer() ;
-//            
-//            seq.addAction( new MockTask("testRun_1") ) ;
-//            seq.addAction( new MockTask("testRun_2") ) ;
-//            seq.addAction( new MockTask("testRun_3") ) ;
-//            
-//            var size:int = seq.length;
-//            
-//            seq.run() ;
-//            
-//            assertEquals( MockTask.COUNT , size , "run method failed, the sequencer must launch " + seq.length + " Runnable objects." ) ;
-//            assertEquals( seq.length              ,    0 , "run method failed, the sequencer must be empty after the run process." ) ;
-//            
-//            MockTask.reset() ;
-//        }
-//        
-//        public function testRunClone():void
-//        {
-//            var s:Sequencer = new Sequencer() ;
-//            
-//            s.addAction( new MockTask( "testRunClone_1" , true ) ) ;
-//            s.addAction( new MockTask( "testRunClone_2" , true ) ) ;
-//            s.addAction( new MockTask( "testRunClone_3" , true ) ) ;
-//            
-//            var c:Sequencer = s.clone() ; // don't forget overrides or implement the clone method in the IAction object ... 
-//            //the clone method use a "deep copy" (like copy method) and not a "shallow copy" (Important to use addEventListener !!).
-//            
-//            var size:uint = c.length ;
-//            
-//            c.run() ;
-//            
-//            assertEquals( MockTask.COUNT , size , "run method failed, the sequencer must launch " + s.length + " Runnable objects." ) ;
-//            assertEquals( c.length   ,    0 , "run method failed, the sequencer must be empty after the run process." ) ;
-//            
-//            MockTask.reset() ;
-//        }
-
     }
 }
