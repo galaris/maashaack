@@ -66,14 +66,14 @@ package system.process
          * Creates a new Sequencer instance.
          * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
          * @param fixed Whether the chain length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
-         * @param loop Specifies whether playback of the clip should continue, or loop (default false). 
+         * @param looping Specifies whether playback of the clip should continue, or loop (default false). 
          * @param numLoop Specifies the number of the times the presentation should loop during playback.
          * @param mode Specifies the mode of the chain. The mode can be "normal", "transient" (default) or "everlasting".
          * @param actions A dynamic object who contains Action references to initialize the chain.
          */
-        public function Sequencer( length:uint = 0 , fixed:Boolean = false , loop:Boolean = false , numLoop:uint = 0 , mode:String = "transient" , actions:* = null )
+        public function Sequencer( length:uint = 0 , fixed:Boolean = false , looping:Boolean = false , numLoop:uint = 0 , mode:String = "transient" , actions:* = null )
         {
-            super( length, fixed, loop, numLoop, mode, actions ) ;
+            super( length, fixed, looping, numLoop, mode, actions ) ;
         }
         
         /**
@@ -97,7 +97,7 @@ package system.process
          */
         public override function clone():*
         {
-            var clone:Sequencer = new Sequencer( 0 , false , loop , numLoop , _mode, _actions.length > 0 ? toVector() : null ) ;
+            var clone:Sequencer = new Sequencer( 0 , false , looping , numLoop , _mode, _actions.length > 0 ? toVector() : null ) ;
             clone.fixed = fixed ;
             return clone ;
         }

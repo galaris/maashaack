@@ -78,17 +78,17 @@ package system.process
              sequencer = new Sequencer() ;
              assertEquals( 0, sequencer.length) ;
              assertFalse( sequencer.fixed ) ;
-             assertFalse( sequencer.loop ) ;
+             assertFalse( sequencer.looping ) ;
              assertEquals( 0, sequencer.numLoop) ;
              assertEquals( Sequencer.TRANSIENT, sequencer.mode) ;
         }
-          
+        
         public function testConstructorWithArguments():void
         {
              sequencer = new Sequencer(5,true,true,10, Sequencer.NORMAL) ;
              assertEquals( 5, sequencer.length) ;
              assertTrue( sequencer.fixed ) ;
-             assertTrue( sequencer.loop ) ;
+             assertTrue( sequencer.looping ) ;
              assertEquals( 10, sequencer.numLoop) ;
              assertEquals( Sequencer.NORMAL, sequencer.mode) ;
         }

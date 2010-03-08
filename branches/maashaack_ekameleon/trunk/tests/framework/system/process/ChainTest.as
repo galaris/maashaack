@@ -109,7 +109,7 @@ package system.process
              chain = new Chain() ;
              assertEquals( 0, chain.length) ;
              assertFalse( chain.fixed ) ;
-             assertFalse( chain.loop ) ;
+             assertFalse( chain.looping ) ;
              assertEquals( 0, chain.numLoop) ;
              assertEquals( Chain.NORMAL, chain.mode) ;
         }
@@ -118,7 +118,7 @@ package system.process
         {
              chain = new Chain(5,true,true,10, Chain.TRANSIENT) ;
              assertEquals( 5, chain.length) ;
-             assertTrue( chain.fixed ) ;             assertTrue( chain.loop ) ;
+             assertTrue( chain.fixed ) ;             assertTrue( chain.looping ) ;
              assertEquals( 10, chain.numLoop) ;
              assertEquals( Chain.TRANSIENT, chain.mode) ;
         }
