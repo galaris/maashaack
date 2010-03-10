@@ -299,7 +299,7 @@ package graphics.filters
         /**
          * Updates the display filters.
          */
-        public function update():void
+        public function update( ...arguments:Array ):void
         {
             if ( _locked )
             {
