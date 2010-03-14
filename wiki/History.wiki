@@ -37,5 +37,4 @@ Instead of having one big project that contains-all end-all, we gonna split it<b
 in smaller independent projects, that you can start in a week-end, finnish in few weeks<br>
 and glue them all together in a framework.
 
-
-
+TODO
