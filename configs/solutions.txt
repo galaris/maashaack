@@ -1,0 +1,24 @@
+solutions = [
+
+  { "name"        : "maashaack",
+    "url"         : "https://maashaack.googlecode.com/svn/configs/maashaack",
+    "custom_deps" : {
+      # To use the trunk of a component instead of what's in DEPS:
+      #"component": "https://svnserver/component/trunk/",
+      # To exclude a component from your working copy:
+      #"data/really_large_component": None,
+    },
+    "safesync_url": ""
+  },
+
+  { "name"        : "maashaackSA",
+    "url"         : "https://maashaack.googlecode.com/svn/configs/maashaackSA",
+    "custom_deps" : {
+      # To use the trunk of a component instead of what's in DEPS:
+      #"component": "https://svnserver/component/trunk/",
+      # To exclude a component from your working copy:
+      #"data/really_large_component": None,
+    },
+    "safesync_url": ""
+  },
+            ]
