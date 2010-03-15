@@ -1,0 +1,22 @@
+#summary get the code.
+
+== Old ==
+
+{{{
+$svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
+}}}
+
+
+== New ==
+
+If you want to work with all the projects fused in a *src* folder
+{{{
+$gclient config https://maashaack.googlecode.com/svn/configs/maashaack
+$gclient sync
+}}}
+
+If you want to work on each projects independently (SA: Stand Alone)
+{{{
+$gclient config https://maashaack.googlecode.com/svn/configs/maashaackSA
+$gclient sync
+}}}
