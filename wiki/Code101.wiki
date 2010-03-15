@@ -20,3 +20,11 @@ If you want to work on each projects independently (SA: Stand Alone)
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaackSA
 $gclient sync
 }}}
+
+
+If you need to work on boths<br>
+copy `https://maashaack.googlecode.com/svn/configs/solutions.txt`
+{{{
+$mv solutions.txt .gclient
+$gclient sync
+}}}
