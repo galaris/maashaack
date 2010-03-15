@@ -1,0 +1,8 @@
+vars = {
+         "repo" : "https://maashaack.googlecode.com/svn",
+         "root" : "maashaackSA",
+       }
+
+deps = {
+         Var("root") + "/packages/core" : Var("repo") + "/packages/core/trunk",
+       }
