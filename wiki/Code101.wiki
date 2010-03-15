@@ -22,7 +22,7 @@ $gclient sync
 }}}
 
 
-If you need to work on boths<br>
+If you need to work on boths (developers/commiters)<br>
 copy `https://maashaack.googlecode.com/svn/configs/solutions.txt`
 {{{
 $mv solutions.txt .gclient
