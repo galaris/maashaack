@@ -4,5 +4,6 @@ vars = {
        }
 
 deps = {
+         Var("root") + "/src"      : Var("repo") + "/packages/maashaack/trunk/src",
          Var("root") + "/src/core" : Var("repo") + "/packages/core/trunk/src/core",
        }
