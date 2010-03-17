@@ -4,5 +4,6 @@ vars = {
        }
 
 deps = {
-         Var("root") + "/packages/core" : Var("repo") + "/packages/core/trunk",
+         Var("root") + "/packages/core"    : Var("repo") + "/packages/core/trunk",
+         Var("root") + "/libraries/astuce" : "https://astuce.googlecode.com/svn/as3/trunk",
        }
