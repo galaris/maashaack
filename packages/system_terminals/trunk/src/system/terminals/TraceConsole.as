@@ -85,7 +85,7 @@ package system.terminals
         
         public final function writeLine( ...messages ):void
         {
-            var msg:String = _format( messages );
+            var msg:String = _buffer + _format( messages );
             output( msg );
             _buffer = "";
         }
