@@ -195,6 +195,15 @@ package graphics.transitions
         }
         
         /**
+         * Notify an ActionEvent when the process is finished.
+         */
+        public override function notifyFinished():void 
+        {
+            _changed = true ;
+            super.notifyFinished() ;
+        }
+        
+        /**
          * Runs the process.
          */
         public override function run( ...arguments:Array ):void 
