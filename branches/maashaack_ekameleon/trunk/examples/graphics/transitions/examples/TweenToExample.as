@@ -41,13 +41,13 @@ package examples
     import graphics.drawing.RectanglePen;
     import graphics.transitions.TweenTo;
     import graphics.transitions.easings.Back;
-
+    
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
-
+    
     public class TweenToExample extends Sprite
     {        public function TweenToExample()
         {
@@ -75,20 +75,18 @@ package examples
             
             var from:Object =
             {
-                x        : 100 ,
-                y        : 200 ,
-                rotation : 45
+                x  : 100 ,
+                y  : 200 
             };
             
             var to:Object =
             {
-                x        : 700 ,
-                y        : 250 ,
-                rotation : 180
+                x  : 700 ,
+                y  : 250 
             };
             
             // tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ; // test without the optional from argument.
-            tween = new TweenTo( shape, to, Back.easeOut, 2, true , true , from ) ; // test with the optional from argument
+            tween = new TweenTo( shape, to, Back.easeOut, 1, true , true , from ) ; // test with the optional from argument
         }
         
         public var tween:TweenTo ;
