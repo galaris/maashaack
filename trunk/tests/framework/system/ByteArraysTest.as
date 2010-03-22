@@ -33,7 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.display 
+package system 
 {
     import buRRRn.ASTUce.framework.TestCase;
     
