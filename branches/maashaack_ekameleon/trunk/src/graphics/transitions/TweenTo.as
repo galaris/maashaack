@@ -212,6 +212,7 @@ package graphics.transitions
             {
                 to = arguments[0] as Object ;
             }
+            _changed = true ;
             super.run() ;
         }
         
