@@ -38,7 +38,6 @@
     
     <!-- graphics.display -->
     
-    <component id="graphics.display:ByteArrays"              class="graphics.display.ByteArrays" />
     <component id="graphics.display:CropBitmapData"          class="graphics.display.CropBitmapData" />
     <component id="graphics.display:DisplayObjectContainers" class="graphics.display.DisplayObjectContainers" />
     <component id="graphics.display:DisplayObjects"          class="graphics.display.DisplayObjects" />

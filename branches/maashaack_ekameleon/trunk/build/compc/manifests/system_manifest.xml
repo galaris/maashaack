@@ -6,6 +6,7 @@
     
     <component id="system:about"              class="system.about"              />
     <component id="system:Arrays"             class="system.Arrays"             />
+    <component id="system:ByteArrays"         class="system.ByteArrays"         />
     <component id="Char"                      class="system.Char"               />
     <component id="system:Cloneable"          class="system.Cloneable"          />
     <component id="system:Comparable"         class="system.Comparable"         />
