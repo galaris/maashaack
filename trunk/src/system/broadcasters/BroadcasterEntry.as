@@ -35,12 +35,10 @@
 
 package system.broadcasters 
 {
-    import system.process.Priority;
-    
     /**
      * A BroadcasterEntry object contains all informations about a listener register in a Broadcaster.
      */
-    internal class BroadcasterEntry implements Priority
+    internal class BroadcasterEntry
     {
         /**
          * Creates a new BroadcasterEntry instance.
@@ -63,27 +61,11 @@ package system.broadcasters
         /**
          * Determinates the priority value of the object.
          */
-        public function get priority():int
-        {
-            return _priority ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set priority( value:int ):void
-        {
-            _priority = value ; 
-        }
+        public var priority:int ;
         
         /**
          * The listener reference of this entry.
          */
         public var listener:* ;
-        
-        /**
-         * @private
-         */
-        private var _priority:int ;
     }
 }

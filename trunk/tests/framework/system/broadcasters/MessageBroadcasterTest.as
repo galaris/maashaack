@@ -37,10 +37,9 @@ package system.broadcasters
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.Cloneable;
+    
     import system.events.mocks.MockCallback;
-
+    
     public class MessageBroadcasterTest extends TestCase 
     {
         public function MessageBroadcasterTest(name:String = "")
@@ -80,7 +79,6 @@ package system.broadcasters
         public function testInterfaces():void
         {
             assertTrue( broadcaster is Broadcaster , "The MessageBroadcaster class must implements the Broadcaster interface.") ;
-            assertTrue( broadcaster is Cloneable   , "The MessageBroadcaster class must implements the Cloneable interface.") ;
         }
         
         public function testLength():void
@@ -119,16 +117,6 @@ package system.broadcasters
             broadcaster.addListener( listener1 ) ;
             broadcaster.broadcastMessage( "message" , "test1" , "test2" ) ;
             ArrayAssert.assertEquals(["test1" , "test2"], listener1.arguments , "broadcastMessage failed.") ;
-        }
-        
-        public function testClone():void
-        {
-            broadcaster.addListener( listener1 ) ;
-            broadcaster.addListener( listener2 ) ;
-            var clone:MessageBroadcaster = broadcaster.clone() as MessageBroadcaster ;
-            assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.length , broadcaster.length, "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.toArray(), broadcaster.toArray() , "03 - clone method failed.") ;
         }
         
         public function testHasListener():void

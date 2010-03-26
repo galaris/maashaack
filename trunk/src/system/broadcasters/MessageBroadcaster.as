@@ -35,8 +35,6 @@
 
 package system.broadcasters 
 {
-    import system.Cloneable;
-
     /**
      * This class provides a Broadcaster to dispatch basic message, this broadcaster use a basic "Observer" implementation (like ASBroadcaster in AS1).
      * <p><b>Example :</b></p>
@@ -65,7 +63,7 @@ package system.broadcasters
      * }
      * </pre>
      */
-    public class MessageBroadcaster extends InternalBroadcaster implements Cloneable
+    public class MessageBroadcaster extends InternalBroadcaster
     {
         /**
          * Creates a new MessageBroadcaster instance.
@@ -89,12 +87,12 @@ package system.broadcasters
             var o:* ;
             var b:Boolean ;
             var e:BroadcasterEntry ;
-            var r:Array = [] ;
-            var a:Array = [].concat( listeners ) ;
-            var l:int = a.length ;
+            var r:Vector.<BroadcasterEntry> = new Vector.<BroadcasterEntry>() ;
+            var v:Vector.<BroadcasterEntry> = listeners.slice() ;
+            var l:int = v.length ;
             for ( var i:int ; i<l ; i++ ) 
             {
-                e = a[i] as BroadcasterEntry ;
+                e = v[i] as BroadcasterEntry ;
                 o = e.listener ;
                 if ( o != null && message in o && o[message] is Function )
                 {
@@ -119,15 +117,6 @@ package system.broadcasters
                 }
             }
             return b ;
-        }
-        
-        /**
-         * Creates and returns a shallow copy of the object.
-         * @return A new object that is a shallow copy of this instance.
-         */
-        public function clone():*
-        {
-            return new MessageBroadcaster( toArray() ) ;
         }
     }
 }

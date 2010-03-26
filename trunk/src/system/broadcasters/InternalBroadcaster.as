@@ -35,7 +35,6 @@
 
 package system.broadcasters 
 {
-
     /**
      * This class provides a basic implementation of the Broadcaster interface.
      */
@@ -47,7 +46,7 @@ package system.broadcasters
          */
         public function InternalBroadcaster( listeners:Array = null ) 
         {
-            this.listeners = [] ;
+            this.listeners = new Vector.<BroadcasterEntry>() ;
             if ( listeners != null )
             {
                 var l:int = listeners.length ;
@@ -139,7 +138,7 @@ package system.broadcasters
             {
                 if ( listeners.length > 0 )
                 {
-                    listeners = [] ;
+                    listeners = new Vector.<BroadcasterEntry>() ;
                     return true ; 
                 }
             }
@@ -180,15 +179,15 @@ package system.broadcasters
         }
         
         /**
-         * The Array representation of all listeners.
+         * The Vector representation of all listeners.
          */
-        protected var listeners:Array ;
+        protected var listeners:Vector.<BroadcasterEntry> ;
         
         /**
          * Use a shell sort algorithm to sort the Vector of ActionEntry (http://en.wikipedia.org/wiki/Shell_sort). The sort method with a basic PriorityComparator.compare method failed ?
          * @private
          */
-        protected function shellSort( data:Array ):void 
+        protected function shellSort( data:Vector.<BroadcasterEntry> ):void 
         {
             var temp:BroadcasterEntry ;
             var i:int ;
