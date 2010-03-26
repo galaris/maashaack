@@ -39,27 +39,28 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.padLeft ;
+     * 
      * trace( padLeft("hello", 8) ) ; //  "   hello"
      * trace( padLeft("hello", 8, ".") ); //  "...hello" 
      * </pre>
      * @param source The source to transform.
-     * @param totalWidth The number of characters to padding.
-     * @param paddingChar The Unicode character to pad.
+     * @param amount The positive number of characters to padding.
+     * @param char The Unicode character to pad (default is space).
      * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
      */
-    public function padLeft( source:String, totalWidth:uint, paddingChar:String = " " ):String
+    public function padLeft( source:String, amount:uint, char:String = " " ):String
     {
-        if( paddingChar == null )
+        if( char == null )
         {
-            paddingChar = " " ;
+            char = " " ;
         }
-        else if( paddingChar.length > 1 )
+        else if( char.length > 1 )
         {
-            paddingChar = paddingChar.charAt( 0 );
+            char = char.charAt( 0 );
         }
-        while( source.length != totalWidth )
+        while( source.length != amount )
         {
-            source = paddingChar + source ;
+            source = char + source ;
         }
         return source ;
     }

@@ -14,6 +14,7 @@
     <component id="core.strings:indexOfAny"      class="core.strings.indexOfAny"      />
     <component id="core.strings:insert"          class="core.strings.insert"          />
     <component id="core.strings:lastIndexOfAny"  class="core.strings.lastIndexOfAny"  />
+    <component id="core.strings:pad"             class="core.strings.pad"             />
     <component id="core.strings:padLeft"         class="core.strings.padLeft"         />
     <component id="core.strings:padRight"        class="core.strings.padRight"        />
     <component id="core.strings:repeat"          class="core.strings.repeat"          />
