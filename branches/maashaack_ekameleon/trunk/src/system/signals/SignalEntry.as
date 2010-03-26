@@ -35,12 +35,10 @@
 
 package system.signals 
 {
-    import system.process.Priority;
-    
     /**
      * A SignalEntry object contains all informations about a receiver entry in a Signal collection.
      */
-    internal class SignalEntry implements Priority
+    internal class SignalEntry
     {
         /**
          * Creates a new SignalEntry instance.
@@ -63,27 +61,11 @@ package system.signals
         /**
          * Determinates the priority value of the object.
          */
-        public function get priority():int
-        {
-            return _priority ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set priority( value:int ):void
-        {
-            _priority = value ; 
-        }
+        public var priority:int ;
         
         /**
          * The receiver Function reference of this entry.
          */
         public var receiver:Function ;
-        
-        /**
-         * @private
-         */
-        private var _priority:int ;
     }
 }
