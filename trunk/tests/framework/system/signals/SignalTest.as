@@ -37,10 +37,9 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.Cloneable;
+    
     import system.signals.samples.ReceiverClass;
-
+    
     public class SignalTest extends TestCase 
     {
         public function SignalTest(name:String = "")
@@ -76,7 +75,6 @@ package system.signals
             assertNotNull( signal , "The constructor failed.") ;
         }
         
-        
         public function testInherit():void
         {
             assertTrue( signal is InternalSignal , "The instance must extends the InternalSignal class.") ;
@@ -84,7 +82,6 @@ package system.signals
         
         public function testInterfaces():void
         {
-            assertTrue( signal is Cloneable , "The Signal class must implements the Cloneable interface.") ;
             assertTrue( signal is Signaler , "The Signal class must implements the Signaler interface.") ;
         }
         
@@ -203,16 +200,6 @@ package system.signals
             assertEquals( signal.length , 2 , "03 - length failed.") ;
             signal.connect( receiver2 ) ;
             assertEquals( signal.length , 2 , "04 - length failed.") ;
-        }
-        
-        public function testClone():void
-        {
-            signal.connect( receiver1 ) ;
-            signal.connect( receiver2 ) ;
-            var clone:Signal = signal.clone() as Signal ;
-            assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.length , signal.length, "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.toArray(), signal.toArray() , "03 - clone method failed.") ;
         }
         
         public function testConnect():void

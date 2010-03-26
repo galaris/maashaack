@@ -35,8 +35,6 @@
 
 package system.signals 
 {
-    import system.Cloneable;
-    
     /**
      * This class provides a fast Signaler implementation.
      * <p><b>Example :</b></p>
@@ -70,7 +68,7 @@ package system.signals
      * }
      * </pre>
      */
-    public class Signal extends InternalSignal implements Cloneable
+    public class Signal extends InternalSignal
     {
         /**
          * Creates a new Signal instance.
@@ -81,15 +79,6 @@ package system.signals
         public function Signal( types:Array = null , receivers:Array = null )
         {
             super( types , receivers ) ;
-        }
-        
-        /**
-         * Creates and returns a shallow copy of the object.
-         * @return A new object that is a shallow copy of this instance.
-         */
-        public function clone():*
-        {
-            return new Signal( types , toArray() ) ;
         }
         
         /**
@@ -106,11 +95,11 @@ package system.signals
             var i:int ;
             var l:int = receivers.length ;
             var r:Array = [] ;
-            var a:Array = receivers.slice() ;
+            var v:Vector.<SignalEntry> = receivers.slice() ;
             var e:SignalEntry ;
             for ( i = 0 ; i < l ; i++ ) 
             {
-                e = a[i] as SignalEntry ;
+                e = v[i] as SignalEntry ;
                 if ( e.auto )
                 {
                     r[ r.length ] = e  ;
@@ -128,10 +117,10 @@ package system.signals
                     }
                 }
             }
-            l = a.length ;
+            l = v.length ;
             for ( i = 0 ; i<l ; i++ ) 
             {
-                (a[i] as SignalEntry).receiver.apply( null , values ) ;
+                (v[i] as SignalEntry).receiver.apply( null , values ) ;
             }
         }
     }

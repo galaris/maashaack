@@ -37,9 +37,9 @@ package system.signals
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.signals.samples.ReceiverClass;
-    
+
     public class InternalSignalTest extends TestCase 
     {
         public function InternalSignalTest(name:String = "")
@@ -208,6 +208,15 @@ package system.signals
             signal.connect( receiver1 ) ;
             signal.connect( receiver2 ) ;
             ArrayAssert.assertEquals([receiver1,receiver2.receive], signal.toArray() ) ;
+        }
+        
+        public function testToVector():void
+        {
+            signal.connect( receiver1 ) ;
+            signal.connect( receiver2 ) ;
+            var v:Vector.<Function> = signal.toVector() ;
+            assertEquals( v[0] , receiver1 ) ;
+            assertEquals( v[1] , receiver2.receive ) ;
         }
     }
 }
