@@ -57,7 +57,7 @@ package core.strings
     {
         var i:int;
         var index:int ;
-        if( !anyOf || !source || source.length == 0 )
+        if( !anyOf || source == null || source.length == 0 )
         {
             return - 1;
         }

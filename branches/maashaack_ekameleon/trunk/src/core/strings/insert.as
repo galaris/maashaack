@@ -59,27 +59,30 @@ package core.strings
      * result = insert("hello", 1, "a" );  // haello
      * trace(result) ;
      * </pre>
+     * @param source The String to transform.
+     * @param index The position to insert the new characters.
+     * @param value The expression to insert in the source.
      * @return the string modified by the method.
      */
-	public function insert( str:String, index:int, value:String ):String
+	public function insert( source:String, index:int, value:String ):String
     {
         var strA:String = "";
         var strB:String = "";
         
         if( index == 0 )
         {
-            return value + str;
+            return value + source ;
         }
-        else if( index == str.length )
+        else if( index == source.length )
         {
-            return str + value;
+            return source + value ;
         }
         
         /* TODO:
         review the logic when startIndex == -1
          */
-        strA = str.substr( 0, index );
-        strB = str.substr( index );
+        strA = source.substr( 0, index );
+        strB = source.substr( index );
         
         return strA + value + strB;
     }

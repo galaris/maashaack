@@ -56,7 +56,7 @@ package core.strings
      */
 	public function indexOfAny( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
     {
-        if( anyOf && source && source != "" )
+        if( anyOf && source != null && source != "" )
         {
             var i:int;
             var l:int = anyOf.length ;
