@@ -231,7 +231,7 @@ package system
             //assertEquals( "bonjour LE monde", Strings.format( str2 )  );
             assertEquals("the number is " + (0xffff), Strings.format(str3));
         }
-
+        
         public function testEndsWith():void
         {
             assertEquals(true, Strings.endsWith("hello world", "world"));
@@ -244,7 +244,7 @@ package system
             assertEquals(false, Strings.endsWith(null, ""));
             assertEquals(false, Strings.endsWith(null, "hello"));
         }
-
+        
         public function testStartsWith():void
         {
             assertEquals(true, Strings.startsWith("hello world", "hello"));
@@ -257,23 +257,21 @@ package system
             assertEquals(false, Strings.startsWith(null, ""));
             assertEquals(false, Strings.startsWith(null, "hello"));
         }
-
+        
         public function testPadLeft():void
         {
             assertEquals("   hello", Strings.padLeft("hello", 8));
             assertEquals("...hello", Strings.padLeft("hello", 8, "."));
-            assertEquals("hello___", Strings.padLeft("hello", -8, "_"));
             assertEquals("***hello", Strings.padLeft("hello", 8, "*.!"));
         }
-
+        
         public function testPadRight():void
         {
             assertEquals("hello   ", Strings.padRight("hello", 8));
             assertEquals("hello...", Strings.padRight("hello", 8, "."));
-            assertEquals("___hello", Strings.padRight("hello", -8, "_"));
             assertEquals("hello***", Strings.padRight("hello", 8, "*.!"));
         }
-
+        
         public function testTrimEnd():void
         {
             assertEquals("hello", Strings.trimEnd("hello   "));
@@ -282,7 +280,7 @@ package system
             assertEquals("---hello world", Strings.trimEnd("---hello world---", whiteSpaceChars.concat("-")));
             assertEquals("---hello world", Strings.trimEnd("---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
         }
-
+        
         public function testTrimStart():void
         {
             assertEquals("hello", Strings.trimStart("   hello"));
@@ -291,7 +289,7 @@ package system
             assertEquals("hello world---", Strings.trimStart("---hello world---", whiteSpaceChars.concat("-")));
             assertEquals("hello world---", Strings.trimStart("--  -----  \r\n---\t-- ---hello world---", whiteSpaceChars.concat("-")));
         }
-
+        
         public function testTrim():void
         {
             assertEquals("hello", Strings.trim("   hello   "));
@@ -300,7 +298,7 @@ package system
             assertEquals("hello world", Strings.trim("---hello world---", whiteSpaceChars.concat("-")));
             assertEquals("hello world", Strings.trim("--  -----  \r\n---\t-- ---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
         }
-
+        
         public function testIndexOfAny():void
         {
             assertEquals(1, Strings.indexOfAny("hello world", [2, "hello", 5]));
@@ -317,7 +315,7 @@ package system
             assertEquals(3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 3));
             assertEquals(3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 3, 3));
         }
-
+        
         public function testLastIndexOfAny():void
         {
             assertEquals(0, Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]));
