@@ -33,28 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class padTest extends TestCase 
     {
-        public static function suite():ITest
+        public function padTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( centerTest         ) ;
-            suite.addTestSuite( indexOfAnyTest     ) ;
-            suite.addTestSuite( insertTest         ) ;
-            suite.addTestSuite( lastIndexOfAnyTest ) ;
-            suite.addTestSuite( padTest        ) ;            suite.addTestSuite( padLeftTest        ) ;
-            suite.addTestSuite( padRightTest       ) ;            suite.addTestSuite( repeatTest         ) ;
-            suite.addTestSuite( trimTest           ) ;
-            suite.addTestSuite( trimEndTest        ) ;
-            suite.addTestSuite( trimStartTest      ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testPadPositive():void
+        {
+            assertEquals("        " , pad("", 8));
+            assertEquals("   hello" , pad("hello", 8));
+            assertEquals("...hello" , pad("hello", 8, "."));
+            assertEquals("***hello" , pad("hello", 8, "*.!"));
+        }
+        
+        public function testPadNegative():void
+        {   
+            assertEquals("        " , pad("", -8));
+            assertEquals("hello   " , pad("hello", -8));
+            assertEquals("hello..." , pad("hello", -8, "."));
+            assertEquals("hello***" , pad("hello", -8, "*.!"));
         }
     }
 }
