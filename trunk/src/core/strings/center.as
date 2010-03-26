@@ -49,9 +49,9 @@ package core.strings
      * @param separator The optional separator character use before and after the String to center. (default " ")
      * @return The center of the specified String value.
      */
-	public function center( source:String, size:uint = 0 , separator:String = " " ):String 
+    public function center( source:String, size:uint = 0 , separator:String = " " ):String 
     {
-        if ( !source )
+        if ( source == null )
         {
             return "" ;
         }
