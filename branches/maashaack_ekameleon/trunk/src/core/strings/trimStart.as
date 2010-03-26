@@ -39,18 +39,28 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.trimStart ;
+     * 
      * trace( trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // hello world---
      * </pre>
      * @param source The string to trim.
-     * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> static array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
      * @return The new trimed string.
      */
-    public function trimStart( source:String , trimChars:Array = null ):String
+    public function trimStart( source:String , chars:Array = null ):String
     {
-        if( trimChars == null )
+        if( chars == null )
         {
-            trimChars = whiteSpaceChars ;
+            chars = whiteSpaceChars ;
         }
-        return trimHelper( source, trimChars, true, false );
+        if ( source == null || source == "" )
+        {
+            return "" ;
+        }
+        var i:int;
+        var l:int = source.length ;
+        for( i = 0; (i < l) && (chars.indexOf( source.charAt( i ) ) > - 1) ; i++ )
+        {
+        }
+        return source.substring( i );
     }
 }

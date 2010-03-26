@@ -42,15 +42,24 @@ package core.strings
      * trace( trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // ---hello world
      * </pre>
      * @param source The string to trim.
-     * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
      * @return The new trimed string.
      */
-    public function trimEnd( source:String , trimChars:Array = null ):String
+    public function trimEnd( source:String , chars:Array = null ):String
     {
-        if( trimChars == null )
+        if( chars == null )
         {
-            trimChars = whiteSpaceChars ;
+            chars = whiteSpaceChars ;
         }
-        return trimHelper( source, trimChars, false, true );
+        if ( source == null || source == "" )
+        {
+            return "" ;
+        }
+        var i:int;
+        var l:int = source.length ;
+        for( i = source.length - 1; (i >= 0) && (chars.indexOf( source.charAt( i ) ) > - 1) ; i-- )
+        {
+        }
+        return source.substring( 0, i + 1 );
     }
 }

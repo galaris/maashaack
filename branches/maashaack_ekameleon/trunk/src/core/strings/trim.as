@@ -42,15 +42,40 @@ package core.strings
      * trace( trim("\r\t   hello world   \t ") ); // hello world
      * </pre>
      * @param source The string to trim.
-     * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
      * @return The new trimed string.
      */
-    public function trim( source:String , trimChars:Array = null ):String
+    public function trim( source:String , chars:Array = null ):String
     {
-        if( trimChars == null )
+        if( chars == null )
         {
-            trimChars = whiteSpaceChars ;
+            chars = whiteSpaceChars ;
         }
-        return trimHelper( source, trimChars, true, true );
+        if ( source == null || source == "" )
+        {
+            return "" ;
+        }
+        
+        var i:int , l:int ;
+        
+        ////// start
+        
+        l = source.length ;
+        for( i = 0; (i < l) && (chars.indexOf( source.charAt( i ) ) > - 1) ; i++ )
+        {
+        }
+        source = source.substring( i );
+        
+        ////// end
+        
+        l = source.length ;
+        for( i = source.length - 1; (i >= 0) && (chars.indexOf( source.charAt( i ) ) > - 1) ; i-- )
+        {
+        }
+        source = source.substring( 0, i + 1 ) ;
+        
+        ////// 
+        
+        return source ;
     }
 }
