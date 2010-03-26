@@ -94,13 +94,6 @@ package system.broadcasters
             ArrayAssert.assertEquals(["test1" , "test2"], listener.arguments , "broadcastMessage failed.") ;
         }
         
-        public function testClone():void
-        {
-            var clone:CoreBroadcaster = broadcaster.clone() as CoreBroadcaster ;
-            assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( broadcaster.broadcaster , clone.broadcaster , "02 - clone method failed.") ;
-        }
-        
         public function testIsEmpty():void
         {
             assertTrue( broadcaster.isEmpty() ) ;

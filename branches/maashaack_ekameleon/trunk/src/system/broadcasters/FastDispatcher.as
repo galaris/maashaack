@@ -35,11 +35,10 @@
 
 package system.broadcasters 
 {
-    import system.Cloneable;
     import system.events.BasicEvent;
-    
+
     import flash.events.Event;
-    
+
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      * <p><b>Example :</b></p>
@@ -74,7 +73,7 @@ package system.broadcasters
      * }
      * </pre>
      */
-    public class FastDispatcher extends InternalBroadcaster implements Cloneable
+    public class FastDispatcher extends InternalBroadcaster
     {
         /**
          * Creates a new FastDispatcher instance.
@@ -102,15 +101,6 @@ package system.broadcasters
         }
         
         /**
-         * Creates and returns a shallow copy of the object.
-         * @return A new object that is a shallow copy of this instance.
-         */
-        public function clone():*
-        {
-            return new FastDispatcher( toArray() ) ;
-        }
-        
-        /**
          * Sends an Event Object to each object in the list of listeners.
          * When the Event is received by the listening object, Flash Player attempts to invoke a function of the same name on the Event.type property.
          */
@@ -123,12 +113,12 @@ package system.broadcasters
             var o:* ;
             var e:BroadcasterEntry ;
             var t:String = event.type ;
-            var r:Array = [] ;
-            var a:Array = [].concat( listeners ) ;
-            var l:int   = a.length ;
+            var r:Vector.<BroadcasterEntry> = new Vector.<BroadcasterEntry>() ;
+            var v:Vector.<BroadcasterEntry> = listeners.slice() ;
+            var l:int = v.length ;
             for ( var i:int ; i < l ; i++ ) 
             {
-                e = a[i] as BroadcasterEntry ;
+                e = v[i] as BroadcasterEntry ;
                 o = e.listener ;
                 if ( o != null && t in o && o[t] is Function )
                 {

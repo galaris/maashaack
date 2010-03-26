@@ -35,14 +35,13 @@
 
 package system.broadcasters 
 {
-    import system.Cloneable;
     import system.process.Lockable;
-    
+
     /**
      * This basic class is used to create concrete <code class="prettyprint">Broadcaster</code> implementations. 
      * This class used composition with an internal <code class="prettyprint">Broadcaster</code> object, by default a MessageBroadcaster reference.
      */
-    public class CoreBroadcaster implements Broadcaster, Cloneable, Lockable
+    public class CoreBroadcaster implements Broadcaster, Lockable
     {
         /**
          * Creates a new CoreBroadcaster instance.
@@ -87,15 +86,6 @@ package system.broadcasters
         public function broadcastMessage(message:String, ...rest:Array):*
         {
             return _broadcaster.broadcastMessage.apply( _broadcaster , [message].concat(rest) ) ;
-        }
-        
-        /**
-         * Creates and returns a shallow copy of the object.
-         * @return A new object that is a shallow copy of this instance.
-         */
-        public function clone():*
-        {
-            return new CoreBroadcaster( _broadcaster ) ;
         }
         
         /**

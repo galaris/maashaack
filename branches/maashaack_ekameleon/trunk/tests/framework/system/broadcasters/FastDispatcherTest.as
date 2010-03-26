@@ -38,7 +38,6 @@ package system.broadcasters
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
-    import system.Cloneable;
     import system.events.BasicEvent;
     import system.events.mocks.MockListener;
 
@@ -82,7 +81,6 @@ package system.broadcasters
         public function testInterfaces():void
         {
             assertTrue( dispatcher is Broadcaster , "The FastDispatcher class must implements the Broadcaster interface.") ;
-            assertTrue( dispatcher is Cloneable   , "The FastDispatcher class must implements the Cloneable interface.") ;
         }
         
         public function testLength():void
@@ -124,16 +122,6 @@ package system.broadcasters
             assertTrue( listener1.event is BasicEvent , "02 - broadcastMessage failed.") ;
             assertEquals( listener1.event.type , "onCallback" , "03 - broadcastMessage failed.") ;
             ArrayAssert.assertEquals(["test1" , "test2"], (listener1.event as BasicEvent).context , "04 - broadcastMessage failed.") ;
-        }
-        
-        public function testClone():void
-        {
-            dispatcher.addListener( listener1 ) ;
-            dispatcher.addListener( listener2 ) ;
-            var clone:FastDispatcher = dispatcher.clone() as FastDispatcher ;
-            assertNotNull( clone , "01 - clone method failed.") ;
-            assertEquals( clone.length , dispatcher.length, "02 - clone method failed.") ;
-            ArrayAssert.assertEquals(clone.toArray(), dispatcher.toArray() , "03 - clone method failed.") ;
         }
         
         public function testDispatch():void
