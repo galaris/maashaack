@@ -47,14 +47,20 @@ package core.strings
      * @param paddingChar The Unicode character to pad.
      * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
      */
-    public function padLeft( source:String, totalWidth:int, paddingChar:String = " " ):String
+    public function padLeft( source:String, totalWidth:uint, paddingChar:String = " " ):String
     {
-        var isRightPadded:Boolean ;
-        if( totalWidth < 0 )
+        if( paddingChar == null )
         {
-            totalWidth    = -totalWidth ;
-            isRightPadded = true ;
+            paddingChar = " " ;
         }
-        return padHelper( source, totalWidth, paddingChar, isRightPadded );
+        else if( paddingChar.length > 1 )
+        {
+            paddingChar = paddingChar.charAt( 0 );
+        }
+        while( source.length != totalWidth )
+        {
+            source = paddingChar + source ;
+        }
+        return source ;
     }
 }

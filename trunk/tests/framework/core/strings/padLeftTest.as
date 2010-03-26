@@ -48,7 +48,6 @@ package core.strings
         {
             assertEquals("   hello", padLeft("hello", 8));
             assertEquals("...hello", padLeft("hello", 8, "."));
-            assertEquals("hello___", padLeft("hello", -8, "_"));
             assertEquals("***hello", padLeft("hello", 8, "*.!"));
         }
     }
