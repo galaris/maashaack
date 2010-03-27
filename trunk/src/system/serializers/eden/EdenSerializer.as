@@ -43,7 +43,6 @@ package system.serializers.eden
      */    
     public class EdenSerializer implements Serializer, Serializable
     {
-
         /**
          * @private
          */
@@ -75,15 +74,15 @@ package system.serializers.eden
                ex: custom config, custom authorized etc.
             */
         }
-
+        
         /**
          * Indicates the pretty indent value.
-         */        
+         */
         public function get prettyIndent():int
         {
             return _prettyIndent;
         }
-
+        
         /**
          * Indicates the indentor string representation.
          */        
@@ -91,7 +90,7 @@ package system.serializers.eden
         {
             return _indentor;
         }
-
+        
         /**
          * @private
          */
@@ -99,7 +98,7 @@ package system.serializers.eden
         {
             _indentor = value;
         }
-
+        
         /**
          * @private
          */
@@ -107,7 +106,7 @@ package system.serializers.eden
         {
             _prettyIndent = value;
         }
-
+        
         /**
          * Indicates the pretty printing flag value.
          */
@@ -115,7 +114,7 @@ package system.serializers.eden
         {
             return _prettyPrinting;
         }
-
+        
         /**
          * @private
          */
@@ -123,7 +122,7 @@ package system.serializers.eden
         {
             _prettyPrinting = value;
         }
-
+        
         /**
          * Inserts an authorized path in the white list of the parser.
          */
@@ -145,8 +144,8 @@ package system.serializers.eden
             {
                 throw new Error( this + " addAuthorized failed with a null 'authorized' Array to configurate the eden parser." ) ;
             }
-        }        
-
+        }
+        
         /**
          * Parse a string and interpret the source code to the correct ECMAScript construct.
          * <p><b>Example :</b></p>
@@ -161,7 +160,7 @@ package system.serializers.eden
         {
             return ECMAScript.evaluate( source );
         }
-
+        
         /**
          * Removes an authorized path in the white list of the parser.
          */
@@ -182,11 +181,11 @@ package system.serializers.eden
                     config.authorized.splice( found, 1 );
                 }
             }
-        }        
-
+        }
+        
         /**
          * Serialize the specified value object passed-in argument.
-         */          
+         */
         public function serialize( value:* ):String
         {
             if( value === undefined )
@@ -238,11 +237,10 @@ package system.serializers.eden
             if( value is Object )
             {
                 return BuiltinSerializer.emitObject( value );
-            }            
-            
+            }
             return "<unknown>";
         }
-
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -253,4 +251,3 @@ package system.serializers.eden
         }
     }
 }
-

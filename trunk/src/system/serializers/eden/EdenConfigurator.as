@@ -37,13 +37,12 @@ package system.serializers.eden
 {
     import system.Configurator;
     import system.eden;
-
+    
     /**
      * The configurator object of the eden parser.
      */
     public class EdenConfigurator extends Configurator
     {
-
         /**
          * Creates a new EdenConfigurator instance.
          * @param config This argument initialize the configurator with a generic object.
@@ -52,7 +51,7 @@ package system.serializers.eden
         {
             super( config );
         }
-
+        
         /**
          * Allows to execute function call. if set to false it blocks any functrion call and return undefined.
          * <p><b>Example:</b></p>
@@ -88,7 +87,7 @@ package system.serializers.eden
         {
             return _config.arrayIndexAsBracket; // TODO : may become obsolete for AS3/ES4 but let's keep it for now for configuration file backward compatibility
         }
-
+        
         /**
          * @private
          */
@@ -96,7 +95,7 @@ package system.serializers.eden
         {
             _config.arrayIndexAsBracket = value;
         }
-
+        
         /**
          * List of authorized keywords, objects path and constructors that the parser is allowed to interpret.
          * <p>Note: you can add full path</p>
@@ -111,7 +110,7 @@ package system.serializers.eden
         {
             return _config.authorized;
         }
-
+        
         /**
          * @private
          */
@@ -119,7 +118,7 @@ package system.serializers.eden
         {
             _config.authorized = value;
         }
-
+        
         /**
          * Determinates if the add scope process is automatic or not.
          */
@@ -127,7 +126,7 @@ package system.serializers.eden
         {
             return _config.autoAddScopePath;
         }
-
+        
         /**
          * @private
          */
@@ -135,7 +134,7 @@ package system.serializers.eden
         {
             _config.autoAddScopePath = value;
         }
-
+        
         /**
          * Parameter to remove (true) or add (false) all unecessary spaces, tabs, carriages returns, lines feeds etc. 
          * to optimize (more or less) packets of datas when they are transfered.
@@ -146,7 +145,7 @@ package system.serializers.eden
         {
             return _config.compress;
         }
-
+        
         /**
          * @private
          */
@@ -155,7 +154,7 @@ package system.serializers.eden
             _config.compress = value;
             eden.prettyPrinting = value;
         }
-
+        
         /**
          * Parameter allowing to copy objects by value if true or by reference if false.
          * <p><b>Example :</b></p>
@@ -172,7 +171,7 @@ package system.serializers.eden
         {
             return _config.copyObjectByValue;
         }
-
+        
         /**
          * @private
          */
@@ -180,7 +179,7 @@ package system.serializers.eden
         {
             _config.copyObjectByValue = value;
         }
-
+        
         /**
          * Allows to define the case-sensitivy of the parsers.
          * If true, variable names that differ only in case are considered different.
@@ -189,7 +188,7 @@ package system.serializers.eden
         {
             return _config.strictMode;
         }
-
+        
         /**
          * @private
          */
@@ -197,7 +196,7 @@ package system.serializers.eden
         {
             _config.strictMode = value;
         }
-
+        
         /**
          * Value assigned to a variable    when this one is not found or not authorized.
          * Depending on your environment you can override it with a more suitable one for exemple on C# you could set it to null.
@@ -206,7 +205,7 @@ package system.serializers.eden
         {
             return _config.undefineable;
         }
-
+        
         /**
          * @private
          */
@@ -214,7 +213,7 @@ package system.serializers.eden
         {
             _config.undefineable = value;
         }
-
+        
         /**
          * Parameter allowing to trace messages in the console if the environment permit it.
          */
@@ -222,7 +221,7 @@ package system.serializers.eden
         {
             return _config.verbose;
         }
-
+        
         /**
          * @private
          */
@@ -230,7 +229,7 @@ package system.serializers.eden
         {
             _config.verbose = value;
         }
-
+        
         /**
          * Parameter setting on (true) or off (false) the security.
          * If true, all object path, function or constructor will be scanned at interpretation time against the authorized list.
@@ -240,7 +239,7 @@ package system.serializers.eden
         {
             return _config.security;
         }
-
+        
         /**
          * @private
          */
@@ -248,7 +247,7 @@ package system.serializers.eden
         {
             _config.security = value;
         }
-
+        
         /**
          * Inserts an authorized path in the white list of the parser.
          */
