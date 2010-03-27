@@ -41,10 +41,9 @@ package system.serializers.eden
 
     /**
      * The BuiltinSerializer class.
-     */    
+     */
     public class BuiltinSerializer
     {
-
         /**
          * Returns the serialized string representation of the specified array argument.
          * @return the serialized string representation of the specified array argument.
@@ -52,10 +51,9 @@ package system.serializers.eden
         public static function emitArray( value:Array ):String
         {
             var source:Array = [];
-            var size:uint = value.length ;                
-            for( var i:int = 0 ; i < size ; i++ )
+            var size:uint = value.length ;
+            for( var i:int ; i < size ; i++ )
             {
-                
                 if( value[i] === undefined )
                 {
                     source.push( "undefined" );
@@ -67,21 +65,18 @@ package system.serializers.eden
                     source.push( "null" );
                     continue;
                 }
-                
                 eden.prettyIndent++;
                 source.push( eden.serialize( value[i] ) );
                 eden.prettyIndent--;
             }
-            
             if( ! eden.prettyPrinting )
             {
                 return( "[" + source.join( "," ) + "]" );
             }
-            
-            var decal:String = Environment.newLine + Arrays.initialize( eden.prettyIndent, eden.indentor ).join( "" );
+            var decal:String = Environment.newLine + Arrays.initialize( eden.prettyIndent, eden.indentor ).join( "" ) ;
             return decal + "[" + decal + source.join( "," + decal ) + decal + "]";
-        }        
-
+        }
+        
         /**
          * Returns the serialized string representation of the specified date argument.
          * @return the serialized string representation of the specified date argument.
@@ -90,13 +85,13 @@ package system.serializers.eden
         {
             var data:Array;
             
-            var y:Number = value.getFullYear( );
-            var m:Number = value.getMonth( );
-            var d:Number = value.getDate( );
-            var h:Number = value.getHours( );
-            var mn:Number = value.getMinutes( );
-            var s:Number = value.getSeconds( );
-            var ms:Number = value.getMilliseconds( );
+            var y:Number  = value.getFullYear() ;
+            var m:Number  = value.getMonth() ;
+            var d:Number  = value.getDate() ;
+            var h:Number  = value.getHours() ;
+            var mn:Number = value.getMinutes() ;
+            var s:Number  = value.getSeconds() ;
+            var ms:Number = value.getMilliseconds() ;
             
             data = [ y, m, d, h, mn, s, ms ];
             data.reverse( );
@@ -106,11 +101,11 @@ package system.serializers.eden
                 data.splice( 0, 1 );
             }
             
-            data.reverse( );
+            data.reverse() ;
             
             return "new Date(" + data.join( "," ) + ")";
         }
-
+        
         /**
          * Returns the serialized string representation of the specified object argument.
          * @return the serialized string representation of the specified string argument.
@@ -118,7 +113,6 @@ package system.serializers.eden
         public static function emitObject( value:Object ):String
         {
             var source:Array = [];
-            
             for( var member:String in value )
             {
                 if( value.hasOwnProperty( member ) )
@@ -149,11 +143,11 @@ package system.serializers.eden
             var decal:String = Environment.newLine + Arrays.initialize( eden.prettyIndent, eden.indentor ).join( "" );
             return decal + "{" + decal + source.join( "," + decal ) + decal + "}";
         }
-
+        
         /**
          * Returns the serialized string representation of the specified array argument.
          * @return the serialized string representation of the specified array argument.
-         */        
+         */
         public static function emitString( value:String ):String
         {
             var quote:String = "\"";
@@ -239,7 +233,6 @@ package system.serializers.eden
                 
                 pos++;
             }
-            
             return quote + str + quote;
         }
     }

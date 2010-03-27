@@ -122,56 +122,55 @@ package system.serializers.eden
          * Bad string (unterminated string)
          */
         public static var errorString:String = "bad string (unterminated string)";
-
+        
         /**
          * Bad number (malformed hexadecimal)
          */
         public static var malformedHexadecimal:String = "bad number (malformed hexadecimal)";
-
+        
         /**
          * External reference "{0}" does not exists
          */
         public static var extRefDoesNotExist:String = "external reference \"{0}\" does not exists";
-
+        
         /**
          * Syntax error
          */
         public static var errorKeyword:String = "syntax error";
-
+        
         /**
          * "{0}" is not an authorized constructor
          */
         public static var notAuthorizedConstructor:String = "\"{0}\" is not an authorized constructor";
-
+        
         /**
          * "{0}" is not an authorized external reference
          */
         public static var notAuthorizedExternalReference:String = "\"{0}\" is not an authorized external reference";
-
+        
         /**
          * "{0}" is not an authorized path
          */
         public static var notAuthorizedPath:String = "\"{0}\" is not an authorized path";
-
+        
         /**
          * "{0}" is not a valid function
          */
         public static var notValidFunction:String = "\"{0}\" is not a valid function";
-
+        
         /**
          * Bad function
          */
         public static var errorFunction:String = "bad function";
-
+        
         /**
          * function call "{0}( {1} )"is not allowed
          */
         public static var notFunctionCallAllowed:String = "function call \"{0}( {1} )\"is not allowed";
-
+        
         /**
          * "{0}" is not an authorized function
          */
         public static var notAuthorizedFunction:String = "\"{0}\" is not an authorized function";
     }
 }
-

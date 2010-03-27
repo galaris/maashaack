@@ -38,7 +38,7 @@ package system.serializers.eden
     import system.Reflection;
     import system.Strings;
     import system.console;
-    import system.text.parser.GenericParser;    
+    import system.text.parser.GenericParser;
 
     /* note:
     how to debug eden (part 1)
@@ -89,22 +89,22 @@ package system.serializers.eden
         */
         use namespace release;
         //use namespace debug;
-
+        
         /**
          * @private
          */
         private var _source:String;
-
+        
         private var _ORC:String = "\uFFFC";
-
+        
         private var _singleValue:Boolean = true;
-
+        
         private var _inAssignement:Boolean = false;
         
         private var _1char:Boolean = false;
         
         private var _inConstructor:int ;
-
+        
         // private var _inFunction:Boolean    = false;
         
         /* note:
@@ -118,29 +118,29 @@ package system.serializers.eden
            
          */
         private static var _globalPool:Array = [];
-
+        
         private var _localPool:Array = [];
-
+        
         /**
          * The comments string representation.
          */
         public static var comments:String = "";
-
+        
         /**
          * The current character to parse.
          */
-        public var  ch:String;
-
+        public var ch:String;
+        
         /**
          * The current parser position in the string expression to parse.
          */
         public var  pos:uint;
-
+        
         /**
          * The local scope reference.
          */
         public var localscope:*;
-
+        
         /**
          * Hook to catch the global trace function call
          */
@@ -148,7 +148,7 @@ package system.serializers.eden
         {
             console.writeLine( message );
         }
-
+        
         debug function traceGlobalPool():void
         {
             trace( "---------------------" );
@@ -159,7 +159,7 @@ package system.serializers.eden
             }
             trace( "---------------------" );
         }
-
+        
         debug function tracePool():void
         {
             trace( "---------------------" );
@@ -170,27 +170,27 @@ package system.serializers.eden
             }
             trace( "---------------------" );
         }
-
+        
         debug function debug( message:String ):void
         {
             trace( message );
         }
-
+        
         release function traceGlobalPool():void
         {
             //do nothing;
         }
-
+        
         release function tracePool():void
         {
             //do nothing
         }
-
+        
         release function debug( message:String ):void
         {
             //do nothing
         }
-
+        
         /**
          * Creates a new ECMAScript instance.
          * @param source The string expression to parse.
@@ -204,7 +204,7 @@ package system.serializers.eden
             
             //VirtualMachine.filteredMethods.push( "system.serializers.eden::ECMAScript/debug" );
         }
-
+        
         /**
          * Indicates the String source representation of the parser (read-only).
          */
@@ -212,7 +212,7 @@ package system.serializers.eden
         {
             return _source;
         }
-
+        
         /**
          * Returns the current char in the parse process.
          * @return the current char in the parse process.
@@ -220,8 +220,8 @@ package system.serializers.eden
         public function getChar():String
         {
             return source.charAt( pos );
-        }        
-
+        }
+        
         /**
          * Returns the char in the source to parse at the specified position.
          * @return the char in the source to parse at the specified position.
@@ -230,7 +230,7 @@ package system.serializers.eden
         {
             return source.charAt( pos );
         }
-
+        
         /**
          * Returns the next character in the source of this parser.
          * @return the next character in the source of this parser.
@@ -242,7 +242,7 @@ package system.serializers.eden
             //debug( "next() - ["+ch+"]" );
             return ch;
         }
-
+        
         /**
          * Indicates if the source parser has more char.
          */
@@ -250,16 +250,16 @@ package system.serializers.eden
         {
             return pos <= (source.length - 1);
         }
-
+        
         /**
          * Evaluate the specified string source value with the parser.
          */
         public static function evaluate( source:String ):*
         {
             var parser:ECMAScript = new ECMAScript( source );
-            return parser.eval( );
+            return parser.eval();
         }
-
+        
         /**
          * Eval the source and returns the serialized object.
          */
@@ -282,12 +282,12 @@ package system.serializers.eden
                 
                 if( ! GenericParser.isAlpha( ch ) )
                 {
-                    next( );
+                    next() ;
                 }
                 
-                tmp = _scanValue( );
+                tmp = _scanValue() ;
                 
-                _scanSeparators( );
+                _scanSeparators() ;
                 
                 if( tmp != _ORC )
                 {
@@ -313,7 +313,7 @@ package system.serializers.eden
             
             return value;
         }
-
+        
         /**
          * Dispatch a log message.
          * Add a config to either
@@ -329,7 +329,7 @@ package system.serializers.eden
                 trace( str );
             }
         }
-
+        
         /* group: testers */
         
         /**
@@ -339,7 +339,6 @@ package system.serializers.eden
         {
             debug( "isDigitNumber( \"" + num + "\" )" );
             var numarr:Array = num.split( "" );
-            
             for( var i:int = 0; i < numarr.length ; i++ )
             {
                 if( ! GenericParser.isDigit( numarr[i] ) )
@@ -347,10 +346,9 @@ package system.serializers.eden
                     return false;
                 }
             }
-            
             return true;
         }
-
+        
         /**
          * Indicates if the specified expression is a start identifier.
          * @see ECMA-262 spec 7.6 (PDF p26/188)
@@ -370,7 +368,7 @@ package system.serializers.eden
             
             return false;
         }
-
+        
         /**
          * Indicates if the identifier is a part.
          */
@@ -381,20 +379,17 @@ package system.serializers.eden
             {
                 return true;
             }
-            
             if( GenericParser.isDigit( c ) )
             {
                 return true;
             }
-            
             if( c.charCodeAt( 0 ) < 128 )
             {
                 return false;
             }
-            
             return false;
         }
-
+        
         /**
          * Inidcates if the specified character is a line terminator.
          * <p>Note: line terminators</p>
@@ -415,13 +410,16 @@ package system.serializers.eden
                 case "\u000D": 
                 case "\u2028": 
                 case "\u2029":
-                    return true;
-                
+                {
+                    return true ;
+                }
                 default:
-                    return false;
+                {
+                    return false ;
+                }
             }
         }
-
+        
         /**
          * Indicates if the specified indentifier is a reserved keyword.
          * Reserved Keywords see : <b>ECMA-262 spec 7.5.2 p13 (PDF p25/188)</b>
@@ -433,7 +431,6 @@ package system.serializers.eden
             {
                 identifier = identifier.toLowerCase( );
             }
-            
             switch( identifier )
             {
                 case "break":
@@ -461,14 +458,17 @@ package system.serializers.eden
                 case "void":
                 case "while": 
                 case "with":
+                {
                     log( Strings.format( strings.reservedKeyword, identifier ) );
                     return true;
-                
+                }
                 default:
+                {
                     return false;
+                }
             }
         }
-
+        
         /**
          * Indicates if the specified identifier string value is a future reserved keyword.  
          * <p><b>Note :</b> Future Reserved Keywords in ECMA-262 spec 7.5.3</p>
@@ -480,7 +480,6 @@ package system.serializers.eden
             {
                 identifier = identifier.toLowerCase( );
             }
-            
             switch( identifier )
             {
                 case "abstract":
@@ -514,14 +513,17 @@ package system.serializers.eden
                 case "throws": 
                 case "transient":
                 case "volatile":
+                {
                     log( Strings.format( strings.futurReservedKeyword, identifier ) );
-                    return true;
-                
+                    return true ;
+                }
                 default:
-                    return false;
+                { 
+                    return false ;
+                }
             }
         }
-
+        
         /**
          * Indicates if the specified path is valid.
          */
@@ -530,11 +532,10 @@ package system.serializers.eden
             debug( "isValidPath( \"" + path + "\" )" );
             var paths:Array = _pathAsArray( path );
             var subpath:String;
-            
-            for( var i:int = 0; i < paths.length ; i++ )
+            var len:int = paths.length ;
+            for( var i:int ; i < len ; i++ )
             {
                 subpath = paths[i];
-                
                 if( isReservedKeyword( subpath ) || isFutureReservedKeyword( subpath ) )
                 {
                     log( Strings.format( strings.notValidPath, path ) );
@@ -547,7 +548,7 @@ package system.serializers.eden
              */
             return true;
         }
-
+        
         /**
          * Indicates if the specified path does exist in the local scope.
          */
@@ -587,10 +588,9 @@ package system.serializers.eden
                 
                 scope = scope[ subpath ];
             }
-            
             return true;
         }
-
+        
         /**
          * Indicates if the specified path does exist in the global scope.
          */
@@ -660,9 +660,10 @@ package system.serializers.eden
             var paths:Array = _pathAsArray( path );
             var arrayIndex:Boolean;
             
-            var foundScope:Boolean = false;
+            var foundScope:Boolean ;
             
-            for( var i:int = 0; i < paths.length ; i++ )
+            var len:int = paths.length ;
+            for( var i:int = 0; i < len ; i++ )
             {
                 if( ! foundScope )
                 {
@@ -717,15 +718,13 @@ package system.serializers.eden
                     scope = scope[ subpath ];
                 }
             }
-            
             if( foundScope )
             {
                 return true;
             }
-            
             return false;
         }
-
+        
         /* group: scanners */
         
         /**
@@ -743,7 +742,8 @@ package system.serializers.eden
             
             switch( ch )
             {
-                case "/":
+                case "/" :
+                {
                     comments += "//";
                     while( ! isLineTerminator( ch ) && hasMoreChar( ) )
                     {
@@ -753,18 +753,19 @@ package system.serializers.eden
                     
                     _scanSeparators( );
                     break;
-                
-                case "*":
+                }
+                case "*" :
+                {
                     comments += "/*";
                     var ch_:String = next( );
                     comments += ch_;
-                
+                    
                     while( (ch_ != "*") && (ch != "/") )
                     {
                         ch_ = ch;
                         next( );
                         comments += ch;
-                    
+                        
                         if( ch == "" )
                         {
                             log( strings.unterminatedComment );
@@ -774,14 +775,16 @@ package system.serializers.eden
                     
                     next( );
                     break;
-                
-                case "":
-                default:
+                }
+                case "" :
+                default :
+                {
                     log( strings.errorComment );
+                }
             }
             
         }
-
+        
         /**
          * Scan the separators.
          */
@@ -789,7 +792,6 @@ package system.serializers.eden
         {
             debug( "scanSeparators()" );
             var scan:Boolean = true;
-            
             while( scan )
             {
                 switch( ch )
@@ -808,9 +810,10 @@ package system.serializers.eden
                     case "\u000C": 
                     case "\u0020": 
                     case "\u00A0":
-                        next( );
+                    {
+                        next() ;
                         break;
-                    
+                    }
                     /* note:
                     line terminators
                     "\n" - \u000A - LF
@@ -823,19 +826,23 @@ package system.serializers.eden
                     case "\u000D": 
                     case "\u2028": 
                     case "\u2029":
+                    {
                         next( );
                         break;
-                    
+                    }
                     case "/":
+                    {
                         _scanComments( );
                         break;
-                    
+                    }
                     default:
+                    {
                         scan = false;
+                    }
                 }
             }
         }
-
+        
         /**
          * Scan the whitespaces.  
          * <p><b>White Space :</b></p>
@@ -852,7 +859,6 @@ package system.serializers.eden
         {
             debug( "scanWhiteSpace()" );
             var scan:Boolean = true;
-            
             while( scan )
             {
                 switch( ch )
@@ -862,19 +868,23 @@ package system.serializers.eden
                     case "\u000C": 
                     case "\u0020": 
                     case "\u00A0":
+                    {
                         next( );
                         break;
-                    
+                    }
                     case "/":
+                    {
                         _scanComments( );
                         break;
-                    
+                    }
                     default:
+                    {
                         scan = false;
+                    }
                 }
             }
         }
-
+        
         /**
          * Scans the identifiers.
          */
@@ -882,26 +892,23 @@ package system.serializers.eden
         {
             debug( "scanIdentifier()" );
             var id:String = "";
-            
             if( isIdentifierStart( ch ) )
             {
                 id += ch;
                 next( );
-                
                 while( isIdentifierPart( ch ) )
                 {
                     id += ch;
-                    next( );
+                    next() ;
                 }
             }
             else
             {
                 log( strings.errorIdentifier );
             }
-            
             return id;
         }
-
+        
         /**
          * Scan the paths.
          */
@@ -910,12 +917,10 @@ package system.serializers.eden
             debug( "scanPath()" );
             var path:String = "";
             var subpath:String = "";
-            
             if( isIdentifierStart( ch ) )
             {
                 path += ch;
                 next( );
-                
                 while( isIdentifierPart( ch ) || (ch == ".") || (ch == "[") )
                 {
                     
@@ -943,8 +948,6 @@ package system.serializers.eden
                             continue;
                         }
                     }
-                    
-                    
                     path += ch;
                     next( );
                 }
@@ -953,29 +956,29 @@ package system.serializers.eden
             /*
             if( path.startsWith( "_global." ) )
             {
-            path = path.substr( "_global.".length );
+                path = path.substr( "_global.".length );
             }
              */
             
             /*
             if( !_inConstructor && ch == "(" )
             {
-            _inFunction = true;
-            return scanFunction( path );
+                _inFunction = true;
+                return scanFunction( path );
             }
              */
             
             /*
             if( ch == "(" )
             {
-            _inFunction = true;
-            return scanFunction( path );
+                _inFunction = true;
+                return scanFunction( path );
             }
              */
             debug( "scanPath returns [" + path + "]" );
             return path;
         }
-
+        
         /* group: evaluators */
         
         /**
@@ -983,20 +986,20 @@ package system.serializers.eden
          */
         private function _pathAsArray( path:String ):Array
         {
-            debug( "_pathAsArray( \"" + path + "\" )" );
+            debug( "_pathAsArray( \"" + path + "\" )" ) ;
             var paths:Array;
             if( path.indexOf( "." ) > - 1 )
             {
-                paths = path.split( "." );
+                paths = path.split( "." ) ;
             }
             else
             {
-                paths = [ path ];
+                paths = [ path ] ;
             }
             debug( "_pathAsArray returns [" + path + "]" );
             return paths;
         }
-
+        
         /**
          * @private
          */
@@ -1044,7 +1047,7 @@ package system.serializers.eden
                 }
             }
         }
-
+        
         /**
          * Scans the Strings.
          */
@@ -1060,9 +1063,10 @@ package system.serializers.eden
                     switch( ch )
                     {
                         case quote:
+                        {
                             next( );
                             return str;
-                        
+                        }
                         case "\\":
                             /* note:
                             Escape Sequence
@@ -1077,84 +1081,85 @@ package system.serializers.eden
                                     //backspace       - \u0008
                                     str += "\b";
                                     break;
-                            
+                                
                                 case "t": 
                                     //horizontal tab  - \u0009
                                     str += "\t";
                                     break;
-                            
+                                
                                 case "n": 
                                     //line feed       - \u000A
                                     str += "\n";
                                     break;
-                            
+                                
                             /* TODO: check \v bug */
                                 case "v": 
                                     //vertical tab    - \u000B
                                     str += "\v";
                                     break;
-                            
+                                
                                 case "f": 
                                     //form feed       - \u000C
                                     str += "\f";
                                     break;
-                            
+                                
                                 case "r": 
                                     //carriage return - \u000D
                                     str += "\r";
                                     break;
-                            
+                                
                                 case "\"": 
                                     //double quote   - \u0022
                                     str += "\"";
                                     break;
-                            
+                                
                                 case "\'": 
                                     //single quote   - \u0027
                                     str += "\'";
                                     break;
-                            
+                                
                                 case "\\": 
                                     //backslash      - \u005c
                                     str += "\\";
                                     break;
-                            
+                                
                                 case "u": 
                                     //unicode escape sequence \uFFFF
                                     var ucode:String = source.substring( pos, pos + 4 );
                                     str += String.fromCharCode( parseInt( ucode, 16 ) );
                                     pos += 4;
                                     break;
-                            
+                                
                                 case "x": 
                                     //hexadecimal escape sequence \xFF
                                     var xcode:String = source.substring( pos, pos + 2 );
                                     str += String.fromCharCode( parseInt( xcode, 16 ) );
                                     pos += 2;
                                     break;
-                            
+                                
                                 default:
                                     str += ch;
                             }
                             break;
                         
                         default:
+                        {
                             if( ! isLineTerminator( ch ) )
                             {
                                 str += ch;
                             }
-                        else
+                            else
                             {
                                 log( strings.errorLineTerminator );
                             }
+                        }
                     }
                 }
             }
-            
             log( strings.errorString );
             return "";
         }
-
+        
         /**
          * Scans Numbers.
          */
@@ -1177,16 +1182,16 @@ package system.serializers.eden
             
             if( ch == "0" )
             {
-                next( );
+                next() ;
                 
                 if( (ch == "x") || (ch == "X") )
                 {
-                    next( );
+                    next() ;
                     
                     while( GenericParser.isHexDigit( ch ) )
                     {
                         hex += ch;
-                        next( );
+                        next() ;
                     }
                     
                     if( hex == "" )
@@ -1222,7 +1227,7 @@ package system.serializers.eden
                     next( );
                 }
             }
-        
+            
             if( ch == "e" )
             {
                 num += "e";
@@ -1267,7 +1272,7 @@ package system.serializers.eden
                 return value;
             }
         }
-
+        
         /**
          * Scans an objet litteral.
          */
@@ -1280,7 +1285,7 @@ package system.serializers.eden
             
             if( ch == "{" )
             {
-                next( );
+                next() ;
                 _scanSeparators( );
                 
                 if( ch == "}" )
@@ -1321,15 +1326,14 @@ package system.serializers.eden
                         break;
                     }
                     
-                    next( );
-                    _scanSeparators( );
+                    next() ;
+                    _scanSeparators() ;
                 }
             }
-            
             log( strings.errorObject );
             return undefined;
         }
-
+        
         /**
          * Scan an array litteral
          */
@@ -1516,7 +1520,7 @@ package system.serializers.eden
             
             log( strings.errorFunction );
         }
-
+        
         /**
          * Scans the keywords.
          */
@@ -1806,9 +1810,7 @@ package system.serializers.eden
                 
                 scope = scope[ subpath ];
             }
-            
             _scanWhiteSpace( );
-            
             if( ch == "=" )
             {
                 _singleValue = false;
@@ -1831,7 +1833,7 @@ package system.serializers.eden
                 _inAssignement = false;
             }
         }
-
+        
         /**
          * Scans the values.
          */
@@ -1855,29 +1857,33 @@ package system.serializers.eden
             
             switch( ch )
             {
-                case "{":
-                    return _scanObject( );
-                
-                case "[":
-                    return _scanArray( );
-                
-                case "\"": 
-                case "\'":
+                case "{" :
+                {
+                    return _scanObject() ;
+                }
+                case "[" :
+                {
+                    return _scanArray() ;
+                }
+                case "\"" : 
+                case "\'" :
+                {
                     return _scanString( ch );
-                
-                case "-": 
-                case "+":
+                }
+                case "-" : 
+                case "+" :
+                {
                     if( GenericParser.isDigit( source.charAt( pos ) ) )
                     {
                         return _scanNumber( );
                     }
-                else
+                    else
                     {
                         var ch_:String = ch;
                         next( );
                         return _scanKeyword( ch_ );
                     }
-                
+                }
                 case "0": 
                 case "1": 
                 case "2": 
@@ -1888,12 +1894,14 @@ package system.serializers.eden
                 case "7": 
                 case "8": 
                 case "9":
-                    return _scanNumber( );
-                
+                {
+                    return _scanNumber() ;
+                }
                 default:
-                    return _scanKeyword( );
+                {
+                    return _scanKeyword() ;
+                }
             }
         }
     }
 }
-
