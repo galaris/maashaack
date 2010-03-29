@@ -41,7 +41,7 @@ package core.strings
      * <pre class="prettyprint">
      * import core.strings.center ;
      * trace( center("hello world", 0) )         ; // hello world
-     * trace( center("hello world", 20) )        ; //     hello world
+     * trace( center("hello world", 20) )        ; //     hello world     
      * trace( center("hello world", 20, "_" ) )  ; // ____hello world_____
      * </pre>
      * @param source The string to center.
