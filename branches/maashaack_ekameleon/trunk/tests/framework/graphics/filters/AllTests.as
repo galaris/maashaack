@@ -43,6 +43,7 @@ package graphics.filters
         {
             var suite:TestSuite = new TestSuite("graphics.filters package tests");
             
+            suite.addTestSuite( CircleSpectrumFilterTest ) ;
             suite.addTestSuite( FiltersTest ) ;            suite.addTestSuite( HoleFilterTest ) ;
             suite.addTestSuite( KnockoutFilterTest ) ;
             suite.addTestSuite( ReflectionFilterTest ) ;            suite.addTestSuite( RGBDistortFilterTest ) ;
