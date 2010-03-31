@@ -97,6 +97,7 @@
     
     <component id="graphics.filters:CircleSpectrumFilter" class="graphics.filters.CircleSpectrumFilter" />
     <component id="graphics.filters:Filters"              class="graphics.filters.Filters" />
+    <component id="graphics.filters:GrayScaleFilter"      class="graphics.filters.GrayScaleFilter" />
     <component id="graphics.filters:HoleFilter"           class="graphics.filters.HoleFilter" />
     <component id="graphics.filters:KnockoutFilter"       class="graphics.filters.KnockoutFilter" />
     <component id="graphics.filters:ReflectionFilter"     class="graphics.filters.ReflectionFilter" />
