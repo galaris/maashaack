@@ -8,5 +8,5 @@ deps = {
          Var("root") + "/packages/system"           : Var("repo") + "/packages/system/trunk",
          Var("root") + "/packages/system_terminals" : Var("repo") + "/packages/system_terminals/trunk",
          Var("root") + "/libraries/astuce"          : "https://astuce.googlecode.com/svn/as3/trunk",
-         Var("root") + "/libraries/as3-v8benchmark" : "ssh://git@github.com:zwetan/as3-v8benchmark.git",
+         Var("root") + "/libraries/as3-v8benchmark" : "ssh://git@github.com/zwetan/as3-v8benchmark.git",
        }
