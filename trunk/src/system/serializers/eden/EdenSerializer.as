@@ -46,7 +46,7 @@ package system.serializers.eden
         /**
          * @private
          */
-        private var _prettyIndent:int = 0;     
+        private var _prettyIndent:int = 0 ;
         
         //default
         
@@ -60,7 +60,7 @@ package system.serializers.eden
         /**
          * @private
          */
-        private var _indentor:String = "    ";
+        private var _indentor:String = "    " ;
         
         //default
         
@@ -128,21 +128,28 @@ package system.serializers.eden
          */
         public function addAuthorized( ...arguments:Array ):void
         {
-            var a:Array = config.authorized as Array ;
-            if ( a != null )
-            {
-                var l:int = arguments.length ;
-                for( var i:int = 0 ; i < l ; i++ )
+            var l:int = arguments.length ;
+            if ( l > 0 )
+            { 
+                if( !config.authorized )
                 {
-                    if( ! a.indexOf( arguments[i] ) > - 1 )
+                    config.authorized = [] ;
+                }
+                var a:Array = config.authorized ;
+                if ( a )
+                {
+                    for( var i:int = 0 ; i < l ; i++ )
                     {
-                        a.push( arguments[i] );
+                        if( ! a.indexOf( arguments[i] ) > - 1 )
+                        {
+                            a.push( arguments[i] );
+                        }
                     }
                 }
-            }
-            else
-            {
-                throw new Error( this + " addAuthorized failed with a null 'authorized' Array to configurate the eden parser." ) ;
+                else
+                {
+                    throw new Error( this + " addAuthorized failed with a null 'authorized' Array to configurate the eden parser." ) ;
+                }
             }
         }
         
@@ -166,12 +173,14 @@ package system.serializers.eden
          */
         public function removeAuthorized( ...arguments:Array ):void
         {
+            if( !config.authorized )
+            {
+                return ;
+            }
             var paths:* ;
             var i:int ;
             var found:* ;
-            
             paths = [].concat( arguments ) ;
-            
             var l:int = paths.length ;
             for( i = 0 ; i < l ; i++ )
             {
