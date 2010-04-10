@@ -66,8 +66,8 @@ package graphics.display
         {
             var dh:Number = bounds.height - target[propHeight] ;
             var dw:Number = bounds.width  - target[propWidth]  ;
-            var dx:Number = bounds.x + ( offset != null ? offset.x : 0 ) ;
-            var dy:Number = bounds.y + ( offset != null ? offset.y : 0 ) ; 
+            var dx:Number = bounds.x + ( offset ? offset.x : 0 ) ;
+            var dy:Number = bounds.y + ( offset ? offset.y : 0 ) ; 
             switch( align )
             {
                 case Align.NONE :
