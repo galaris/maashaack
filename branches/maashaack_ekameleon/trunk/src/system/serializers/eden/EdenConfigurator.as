@@ -108,7 +108,7 @@ package system.serializers.eden
          */
         public function get authorized():Array
         {
-            return _config.authorized;
+            return _config.authorized ;
         }
         
         /**
@@ -116,7 +116,7 @@ package system.serializers.eden
          */
         public function set authorized( value:Array ):void
         {
-            _config.authorized = value;
+            _config.authorized = value ;
         }
         
         /**
@@ -246,49 +246,6 @@ package system.serializers.eden
         public function set security( value:Boolean ):void
         {
             _config.security = value;
-        }
-        
-        /**
-         * Inserts an authorized path in the white list of the parser.
-         */
-        public function addAuthorized( ...arguments:Array ):void
-        {
-            var a:Array = _config.authorized as Array ;
-            if ( a != null )
-            {
-                var l:int = arguments.length ;
-                for( var i:int = 0 ; i < l ; i++ )
-                {
-                    if( ! a.indexOf( arguments[i] ) > - 1 )
-                    {
-                        a.push( arguments[i] );
-                    }
-                }
-            }
-            else
-            {
-                throw new Error( this + " addAuthorized failed with a null 'authorized' Array to configurate the eden parser." ) ;
-            }
-        }
-        
-        /**
-         * Removes an authorized path in the white list of the parser.
-         */
-        public function removeAuthorized( ...arguments:Array ):void
-        {
-            var paths:* ;
-            var i:int ;
-            var found:* ;
-            paths = [].concat( arguments ) ;
-            var l:int = paths.length ;
-            for( i = 0; i < l ; i++ )
-            {
-                found = _config.authorized.indexOf( paths[i] );
-                if( found > - 1 )
-                {
-                    _config.authorized.splice( found, 1 );
-                }
-            }
         }
     }
 }
