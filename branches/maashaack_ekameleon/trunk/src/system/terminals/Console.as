@@ -37,7 +37,7 @@ package system.terminals
 {
     import system.io.Readable;
     import system.io.Writeable;
-
+    
     /**
      * A Console can read and write.
      */
@@ -45,4 +45,3 @@ package system.terminals
     {
     }
 }
-

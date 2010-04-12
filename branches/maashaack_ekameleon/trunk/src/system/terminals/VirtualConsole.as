@@ -97,28 +97,28 @@ package system.terminals
         {
             return _stderr;
         }
-
+        
         /**
          * @private
-         */        
+         */
         public function set stderr( value:String ):void
         {
             _stderr += value;
         }
-
+        
         /**
          * Standard input is data (often text) going into a program. 
          * The program requests data transfers by use of the read operation.
          * Not all programs require input.
-         */       
+         */
         public function get stdin():String
         {
             return _stdin;
         }
-
+        
         /**
          * @private
-         */        
+         */
         public function set stdin( value:String ):void
         {
             _stdin += value;
@@ -133,15 +133,15 @@ package system.terminals
         {
             return _stdout;
         }
-
+        
         /**
          * @private
          */
         public function set stdout( value:String ):void
         {
             _stdout += value;
-        }        
-
+        }
+        
         /**
          * Clear all standard streams.
          */
@@ -151,7 +151,7 @@ package system.terminals
             _stderr = "" ;
             _stdin = "" ;
         }
-
+        
         /**
          * Returns the last char.
          * @return the last char.
@@ -160,21 +160,20 @@ package system.terminals
         {
             return stdin.charAt( _stdin.length );
         }
-
+        
         /**
          * Returns the last line.
          * @return the last line.
-         */      
+         */
         public function readLine():String
         {
             if( _stdin.indexOf( Environment.newLine ) > - 1 )
             {
                 return _stdin.substr( _stdin.lastIndexOf( Environment.newLine ) + Environment.newLine.length );
             }
-            
             return stdin;
         }
-
+        
         /**
          * Appends the message format.
          */
@@ -187,7 +186,7 @@ package system.terminals
             
             stdout = _formatMessage( messages );
         }
-
+        
         /**
          * Appends the message format and add newline character.
          */
@@ -197,4 +196,3 @@ package system.terminals
         }
     }
 }
-

@@ -46,7 +46,7 @@ package core.strings
      * <li>http://www.fileformat.info/info/unicode/char/200b/index.htm</li>
      * <li>http://www.fileformat.info/info/unicode/char/feff/index.htm</li>
      * <li>http://www.fileformat.info/info/unicode/char/2060/index.htm</li>
-     * </u
+     * </ul>
      */
     public var whiteSpaceChars:Array = 
     [ 

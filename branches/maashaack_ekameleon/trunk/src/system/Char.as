@@ -730,15 +730,13 @@ package system
             */
             var ws:Array = whiteSpaceChars;
             var l:int    = ws.length;
-            
-            for( var i:int =0 ; i < l ; i++ )
+            for( var i:int ; i < l ; i++ )
             {
                 if( _c == ws[i] )
                 {
                     return true;
                 }
             }
-            
             return false;
         }
         

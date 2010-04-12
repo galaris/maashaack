@@ -91,35 +91,18 @@ package system.serializers.eden
         //use namespace debug;
         
         /**
-         * @private
+         * Creates a new ECMAScript instance.
+         * @param source The string expression to parse.
          */
-        private var _source:String;
+        public function ECMAScript( source:String )
+        {
+            _source = source;
+            pos = 0;
+            ch = "";
+            localscope = {};
+        }
         
-        private var _ORC:String = "\uFFFC";
-        
-        private var _singleValue:Boolean = true;
-        
-        private var _inAssignement:Boolean = false;
-        
-        private var _1char:Boolean = false;
-        
-        private var _inConstructor:int ;
-        
-        // private var _inFunction:Boolean    = false;
-        
-        /* note:
-        a pool contains string indexes to object references
-        (yeah this could be surely optimized with a Dictionnary)
-        ex:
-        (code)
-        _globalPool[ "system.serializers.eden.config" ] = system.serializers.eden.config;
-        _localPool[ "x.y.z" ] = localScope.x.y.z;
-        (end)
-           
-         */
-        private static var _globalPool:Array = [];
-        
-        private var _localPool:Array = [];
+
         
         /**
          * The comments string representation.
@@ -191,19 +174,7 @@ package system.serializers.eden
             //do nothing
         }
         
-        /**
-         * Creates a new ECMAScript instance.
-         * @param source The string expression to parse.
-         */
-        public function ECMAScript( source:String )
-        {
-            _source = source;
-            pos = 0;
-            ch = "";
-            localscope = {};
-            
-            //VirtualMachine.filteredMethods.push( "system.serializers.eden::ECMAScript/debug" );
-        }
+
         
         /**
          * Indicates the String source representation of the parser (read-only).
@@ -433,31 +404,31 @@ package system.serializers.eden
             }
             switch( identifier )
             {
-                case "break":
-                case "case": 
-                case "catch": 
-                case "continue":
-                case "default": 
-                case "delete": 
-                case "do":
-                case "else":
-                case "finally": 
-                case "for": 
-                case "function":
-                case "if": 
-                case "in": 
-                case "instanceof":
-                case "new":
-                case "return":
-                case "switch":
-                case "this": 
-                case "throw": 
-                case "try": 
-                case "typeof":
-                case "var": 
-                case "void":
-                case "while": 
-                case "with":
+                case "break"      :
+                case "case"       :
+                case "catch"      :
+                case "continue"   :
+                case "default"    :
+                case "delete"     :
+                case "do"         :
+                case "else"       :
+                case "finally"    :
+                case "for"        :
+                case "function"   :
+                case "if"         :
+                case "in"         :
+                case "instanceof" :
+                case "new"        :
+                case "return"     :
+                case "switch"     :
+                case "this"       :
+                case "throw"      :
+                case "try"        :
+                case "typeof"     :
+                case "var"        :
+                case "void"       :
+                case "while"      :
+                case "with"       :
                 {
                     log( Strings.format( strings.reservedKeyword, identifier ) );
                     return true;
@@ -542,12 +513,60 @@ package system.serializers.eden
                     return false;
                 }
             }
-            
             /* TODO:
             - add authorized hook
              */
             return true;
         }
+        
+        /**
+         * @private
+         */
+        private var _1char:Boolean ;
+        
+        /**
+         * @private
+         */
+        private var _ORC:String = "\uFFFC";
+        
+        /**
+         * @private
+         */
+        private var _singleValue:Boolean = true;
+        
+        /**
+         * @private
+         */
+        private var _inAssignement:Boolean ;
+        
+        // private var _inFunction:Boolean ;
+        
+        /* note:
+        a pool contains string indexes to object references
+        (yeah this could be surely optimized with a Dictionnary)
+        ex:
+        (code)
+        _globalPool[ "system.serializers.eden.config" ] = system.serializers.eden.config;
+        _localPool[ "x.y.z" ] = localScope.x.y.z;
+        (end)
+           
+         */
+        private static var _globalPool:Array = [];
+        
+        /**
+         * @private
+         */
+        private var _inConstructor:int ;
+        
+        /**
+         * @private
+         */
+        private var _localPool:Array = [];
+        
+        /**
+         * @private
+         */
+        private var _source:String;
         
         /**
          * Indicates if the specified path does exist in the local scope.
@@ -564,28 +583,24 @@ package system.serializers.eden
             var paths:Array = _pathAsArray( path );
             var subpath:*;
             var arrayIndex:Boolean;
-            
-            for( var i:int = 0; i < paths.length ; i++ )
+            var len:int = paths.length ;
+            for( var i:int ; i < len ; i++ )
             {
                 arrayIndex = false;
-                subpath = paths[i];
-                
+                subpath    = paths[i];
                 if( isDigitNumber( subpath ) )
                 {
                     subpath = parseInt( subpath );
                     arrayIndex = true;
                 }
-                
                 if( scope[ subpath ] == undefined )
                 {
                     return false;
                 }
-                
                 if( arrayIndex )
                 {
                     _localPool[ paths.slice( 0, i ).join( "." ) + "." + subpath ] = scope[ subpath ];
                 }
-                
                 scope = scope[ subpath ];
             }
             return true;
