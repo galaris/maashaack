@@ -35,29 +35,19 @@
 
 package core.strings
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
-    {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( centerTest              ) ;
-            suite.addTestSuite( indexOfAnyTest          ) ;
-            suite.addTestSuite( insertTest              ) ;
-            suite.addTestSuite( lastIndexOfAnyTest      ) ;
-            suite.addTestSuite( lineTerminatorCharsTest ) ;
-            suite.addTestSuite( padTest                 ) ;            suite.addTestSuite( padLeftTest             ) ;
-            suite.addTestSuite( padRightTest            ) ;            suite.addTestSuite( repeatTest              ) ;
-            suite.addTestSuite( trimTest                ) ;
-            suite.addTestSuite( trimEndTest             ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( whiteSpaceCharsTest     ) ;
-            
-            return suite;
-        }
-    }
+    /**
+     * Like white space characters, line terminator characters are used to improve source text readability and to separate tokens (indivisible lexical units) from each other. 
+     * However, unlike white space characters, line terminators have some influence over the behaviour of the syntactic grammar. 
+     * In general, line terminators may occur between any two tokens, but there are a few places where they are forbidden by the syntactic grammar. 
+     * A line terminator cannot occur within any token, not even a string. 
+     * Line terminators also affect the process of automatic semicolon insertion.
+     * @see ECMAScript specification.
+     */
+    public var lineTerminatorChars:Array = 
+    [ 
+        "\u000A" /*LF : Line Feed*/ ,
+        "\u000D" /*CR : Carriage Return*/,
+        "\u2028" /*LS : Line Separator*/ ,
+        "\u2929" /*PS : Paragraphe Separator*/
+    ];
 }
