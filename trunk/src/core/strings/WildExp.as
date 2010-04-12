@@ -83,6 +83,20 @@ package core.strings
     {
         /**
          * Creates a new WildExp instance.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import core.strings.WildExp ;
+         * 
+         * var wild:WildExp ;
+         * 
+         * wild = new WildExp("foo.*" , WildExp.IGNORECASE ) ;
+         * 
+         * trace( wild.test("foo") ) ; // false
+         * trace( wild.test("foo.") ) ; // true
+         * trace( wild.test("foo.bar") ) ; // true
+         * trace( wild.test("bar.foo.bar") ) ; // false
+         * trace( wild.test("FOO.bar") ) ; // false
+         * </pre>
          * @param pattern The pattern of the evaluator.
          * @param flag The option flag value.
          */
