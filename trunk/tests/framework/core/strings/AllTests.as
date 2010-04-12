@@ -44,15 +44,17 @@ package core.strings
         {
             var suite:TestSuite = new TestSuite("core.strings package tests");
             
-            suite.addTestSuite( centerTest         ) ;
-            suite.addTestSuite( indexOfAnyTest     ) ;
-            suite.addTestSuite( insertTest         ) ;
-            suite.addTestSuite( lastIndexOfAnyTest ) ;
-            suite.addTestSuite( padTest        ) ;            suite.addTestSuite( padLeftTest        ) ;
-            suite.addTestSuite( padRightTest       ) ;            suite.addTestSuite( repeatTest         ) ;
-            suite.addTestSuite( trimTest           ) ;
-            suite.addTestSuite( trimEndTest        ) ;
-            suite.addTestSuite( trimStartTest      ) ;
+            suite.addTestSuite( centerTest          ) ;
+            suite.addTestSuite( indexOfAnyTest      ) ;
+            suite.addTestSuite( insertTest          ) ;
+            suite.addTestSuite( lastIndexOfAnyTest  ) ;
+            suite.addTestSuite( padTest             ) ;            suite.addTestSuite( padLeftTest         ) ;
+            suite.addTestSuite( padRightTest        ) ;            suite.addTestSuite( repeatTest          ) ;
+            suite.addTestSuite( trimTest            ) ;
+            suite.addTestSuite( trimEndTest         ) ;
+            suite.addTestSuite( trimStartTest       ) ;
+            suite.addTestSuite( trimStartTest       ) ;
+            suite.addTestSuite( whiteSpaceCharsTest ) ;
             
             return suite;
         }
