@@ -45,7 +45,7 @@ package core.strings
         
         public function testWhiteSpaceCharsLength():void
         {
-            assertEquals( 26 , whiteSpaceChars.length , "The length of the WhiteSpaceChars array is not good.") ;
+            assertEquals( 26 , whiteSpaceChars.length , "The length of the whiteSpaceChars array is not good.") ;
         }
         
         public function testWhiteSpaceCharsContent():void

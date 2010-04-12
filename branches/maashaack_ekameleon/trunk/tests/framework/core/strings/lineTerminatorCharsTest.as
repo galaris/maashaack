@@ -32,32 +32,28 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class lineTerminatorCharsTest extends TestCase 
     {
-        public static function suite():ITest
+        public function lineTerminatorCharsTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( centerTest              ) ;
-            suite.addTestSuite( indexOfAnyTest          ) ;
-            suite.addTestSuite( insertTest              ) ;
-            suite.addTestSuite( lastIndexOfAnyTest      ) ;
-            suite.addTestSuite( lineTerminatorCharsTest ) ;
-            suite.addTestSuite( padTest                 ) ;            suite.addTestSuite( padLeftTest             ) ;
-            suite.addTestSuite( padRightTest            ) ;            suite.addTestSuite( repeatTest              ) ;
-            suite.addTestSuite( trimTest                ) ;
-            suite.addTestSuite( trimEndTest             ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( whiteSpaceCharsTest     ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testLineTerminatorCharsLength():void
+        {
+            assertEquals( 4 , lineTerminatorChars.length , "The length of the lineTerminatorChars array is not good.") ;
+        }
+        
+        public function testLineTerminatorCharsContent():void
+        {
+            assertTrue( lineTerminatorChars.indexOf("\u000A") > -1 ) ;
+            assertTrue( lineTerminatorChars.indexOf("\u000D") > -1 ) ;
+            assertTrue( lineTerminatorChars.indexOf("\u2028") > -1 ) ;
+            assertTrue( lineTerminatorChars.indexOf("\u2929") > -1 ) ;
         }
     }
 }
