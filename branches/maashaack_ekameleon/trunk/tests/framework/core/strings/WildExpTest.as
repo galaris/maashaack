@@ -44,25 +44,30 @@ package core.strings
             super(name);
         }
         
+        /**
+         * 1. find all the words in a string
+         */
         public function testWildExp1():void
         {
             var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
             var result:Array = we.test( "any phrases with words inside" );
             ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , result ) ;
+            ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , we.wildcards ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
         }
         
-//        public function testWildExp2():void
-//        {
-//            var we:WildExp   = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
-//            var result:Array = we.test( 'toto = "123"; /\*hello world*\/' );
-//            assertEquals( "" , eden.serialize( result ) ) ;
-//        }
+        /**
+         * 2. find comments in a string
+         */
+        public function testWildExp2():void
+        {
+            var we:WildExp = new WildExp( "*/!**!*/*" , WildExp.IGNORECASE ) ;
+            var result:*   = we.test( "abc/*hello world*/def" );
+            assertTrue( result , "result: true" ) ;
+            ArrayAssert.assertEquals( ["abc","hello world","def"] , we.wildcards ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+        }
         
-//        public function testWildExp3():void
-//        {
-//            var we:WildExp = new WildExp( "function *(*)*{*}", WildExp.IGNORECASE | WildExp.MULTIWORD );
-//            var result:*   = we.test( "function toto(a,b,c)\r\n{\treturn \"hello world\";\r\n\t}" );
-//            assertEquals( "" , eden.serialize(result) ) ;
-//        }
+        // TODO finish unit tests
     }
 }
