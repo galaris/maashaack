@@ -1616,12 +1616,11 @@ package system.serializers.eden
                      */
                     if( ! _inAssignement && (source.indexOf( "=" ) > - 1) )
                     {
-                    
                         if( localRef )
                         {
                             _scanLocalAssignement( baseword );
                         }
-                    else if( globalRef )
+                        else if( globalRef )
                         {
                             _scanGlobalAssignement( baseword );
                         }
@@ -1674,7 +1673,6 @@ package system.serializers.eden
             var subpath:* = "";
             var paths:Array = _pathAsArray( path );
             var member:String = paths.pop( );
-            
             var foundScope:Boolean = false;
             var size:int = paths.length ;
             for( var i:int ; i < size ; i++ )
@@ -1861,12 +1859,10 @@ package system.serializers.eden
             if( (pos == source.length) && !_1char )
             {
                 debug( "prevent unecessary scan" );
-                
                 if( _inAssignement )
                 {
                     debug( "RHS is missing" );
                 }
-                
                 return;
             }
             

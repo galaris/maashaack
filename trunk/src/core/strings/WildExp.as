@@ -211,7 +211,7 @@ package core.strings
             {
                 return ;
             }
-            questionMarks[l-1] += chr ;
+            questionMarks[ l - 1 ] += chr ;
         }
         
         /**
@@ -233,11 +233,9 @@ package core.strings
         public function test( str:String ):*
         {
             var segment:Array ;
-            var result:Array ;
+            var result:* ;
             
             var i:int ;
-            var j:int ;
-            var k:int ;
             var l:int ;
             
             var ORC:String  = "\uFFFC";
@@ -247,6 +245,7 @@ package core.strings
             {
                 str = str.toLowerCase();
             }
+            
             if( _multiline ) 
             {
                 if( str.indexOf( CRLF ) > -1 ) 
@@ -265,11 +264,11 @@ package core.strings
             if( _multiword ) 
             {
                 l = whiteSpaceChars.length ;
-                for( j = 0 ; j < l ; j++ ) 
+                for( i = 0 ; i < l ; i++ ) 
                 {
-                    if( str.indexOf( whiteSpaceChars[j] ) > -1 ) 
+                    if( str.indexOf( whiteSpaceChars[i] ) > -1 ) 
                     {
-                        str = replace(str, whiteSpaceChars[j], ORC ) ;
+                        str = replace(str, whiteSpaceChars[i], ORC ) ;
                     }
                 }
             }
@@ -281,12 +280,11 @@ package core.strings
                 segment = str.split( ORC ) ;
                 result  = [] ;
                 l       = segment.length ;
-                for( k = 0 ; k < l ; k++ ) 
+                for( i = 0 ; i < l ; i++ ) 
                 {
-                    //trace( "> k:" + i + " segment:" + segment[k]) ;
-                    if( _testMatch( segment[k], source ) ) 
+                    if( _testMatch( segment[i], source ) ) 
                     {
-                        result.push( segment[k] ) ;
+                        result.push( segment[i] ) ;
                     }
                 }
                 return ( result.length > 0 ) ? result : false ;
@@ -334,6 +332,7 @@ package core.strings
             
             c    = str.charAt( 0 ) ;
             c1   = str.charAt( 1 ) ;
+            
             pat  = pattern.charAt( 0 ) ;
             pat1 = pattern.charAt( 1 ) ;
             
@@ -345,7 +344,7 @@ package core.strings
             {
                 return _testMatch( str, pattern.substr( 1 ), pat1 );
             }
-            if( pat == "?" && ignoreChar != "?" ) 
+            if( pat == "?" && ( ignoreChar != "?" ) ) 
             {
                 if( c != "" ) 
                 {
@@ -358,7 +357,7 @@ package core.strings
                         questionMarks.push( c ) ;
                     }
                     _questionMarksFound = true ;
-                    if ( (pat1 == "") && (_wildcardFound == true) ) 
+                    if ( (pat1 == "") && _wildcardFound ) 
                     {
                         pattern += "*" ;
                     }
@@ -369,7 +368,7 @@ package core.strings
                     return false ;
                 }
             }
-            if( pat == "*" && ignoreChar != "*" ) 
+            if( ( pat == "*" ) && ( ignoreChar != "*" ) ) 
             {
                 _wildcardFound = true ;
                 if( pat1 != "*" ) 
