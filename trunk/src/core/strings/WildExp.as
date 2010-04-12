@@ -54,8 +54,8 @@ package core.strings
      *  <p><b>1. find all the words in a string</b>
      *  <pre class="prettyprint"> 
      *  import core.strings.WildExp ;
-     *  var we:WildExp = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
-     *  result = we.test( "any phrases with words inside" );
+     *  var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
+     *  var result:Array = we.test( "any phrases with words inside" );
      *  //result = [ "any", "phrases", "with", "words", "inside" ];
      *  }
      *  </pre>
@@ -63,8 +63,8 @@ package core.strings
      *  <p><b>2. find comments in a string</b>
      *  <pre class="prettyprint"> 
      *  import core.strings.WildExp ;
-     *  var we:WildExp = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
-     *  result = we.test( "toto = \"123\"; /\*hello world*\/" );
+     *  var we:WildExp   = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
+     *  var result:Array = we.test( "toto = \"123\"; /\*hello world*\/" );
      *  //result = [ "toto = \"123\"; ", "hello world" ] ;
      *  }
      *  </pre>
@@ -99,50 +99,50 @@ package core.strings
             
             switch( options ) 
             {
-                case IGNORECASE : // 1
+                case IGNORECASE :
                 {
                     _caseSensitive = false ;
                     break ;
                 }
                 case MULTILINE :
                 {
-                    _multiline = true ; // 2
-                    break ;
-                }
-                case IGNORECASE | MULTILINE : // 3
-                {
-                    _caseSensitive = false ;
                     _multiline = true ;
                     break ;
                 }
-                case MULTIWORD : // 4
-                {
-                    _multiword = true ;
-                    break ;
-                }
-                case IGNORECASE | MULTIWORD : // 5
+                case IGNORECASE | MULTILINE :
                 {
                     _caseSensitive = false ;
+                    _multiline     = true ;
+                    break ;
+                }
+                case MULTIWORD :
+                {
                     _multiword = true ;
                     break ;
                 }
-                case MULTILINE | MULTIWORD : // 6
+                case IGNORECASE | MULTIWORD :
+                {
+                    _caseSensitive = false ;
+                    _multiword     = true  ;
+                    break ;
+                }
+                case MULTILINE | MULTIWORD :
                 {
                     _multiline = true ;
                     _multiword = true ;
                     break ;
                 }
-                case IGNORECASE | MULTILINE | MULTIWORD : // 7
+                case IGNORECASE | MULTILINE | MULTIWORD : 
                 {
                     _caseSensitive = false ;
-                    _multiline = true ;
-                    _multiword = true ;
+                    _multiline     = true ;
+                    _multiword     = true ;
                     break ;
                 }
                 case NONE : 
                 default :
                 {
-                    
+                    //
                 }
             }
             if( _caseSensitive ) 
@@ -210,7 +210,7 @@ package core.strings
             {
                 return ;
             }
-            wildcards[l-1] += chr ;
+            wildcards[ l - 1 ] += chr ;
         }
         
         /**
@@ -240,7 +240,7 @@ package core.strings
                     str = replace(str, CRLF, ORC ) ;
                 }
                 l = lineTerminatorChars.length ;
-                for( i=0 ; i<l ; i++ ) 
+                for( i = 0 ; i < l ; i++ ) 
                 {
                     if( str.indexOf( lineTerminatorChars[i] ) > -1 ) 
                     {
@@ -251,7 +251,7 @@ package core.strings
             if( _multiword ) 
             {
                 l = whiteSpaceChars.length ;
-                for( j=0 ; j<l ; j++ ) 
+                for( j = 0 ; j < l ; j++ ) 
                 {
                     if( str.indexOf( whiteSpaceChars[j] ) > -1 ) 
                     {
@@ -259,13 +259,17 @@ package core.strings
                     }
                 }
             }
+            
+            //trace(">>>>> " + str ) ;
+            
             if( str.indexOf( ORC ) > -1 ) 
             {
                 segment = str.split( ORC ) ;
-                result = [] ;
-                l = segment.length ;
-                for( k=0 ; k<l ; k++ ) 
+                result  = [] ;
+                l       = segment.length ;
+                for( k = 0 ; k < l ; k++ ) 
                 {
+                    //trace( "> k:" + i + " segment:" + segment[k]) ;
                     if( _testMatch( segment[k], source ) ) 
                     {
                         result.push( segment[k] ) ;
@@ -314,9 +318,9 @@ package core.strings
         {
             var c:String , c1:String , pat:String , pat1:String ;
             
-            c = str.charAt( 0 ) ;
-            c1 = str.charAt( 1 ) ;
-            pat = pattern.charAt( 0 ) ;
+            c    = str.charAt( 0 ) ;
+            c1   = str.charAt( 1 ) ;
+            pat  = pattern.charAt( 0 ) ;
             pat1 = pattern.charAt( 1 ) ;
             
             if( pat != "?" ) 
@@ -327,13 +331,18 @@ package core.strings
             {
                 return _testMatch( str, pattern.substr( 1 ), pat1 );
             }
-            
             if( pat == "?" && ignoreChar != "?" ) 
             {
                 if( c != "" ) 
                 {
-                    if( _questionMarksFound ) addToQuestionMarks( c );
-                    else questionMarks.push( c ) ;
+                    if( _questionMarksFound )
+                    {
+                        addToQuestionMarks( c );
+                    }
+                    else 
+                    {
+                        questionMarks.push( c ) ;
+                    }
                     _questionMarksFound = true ;
                     if ( (pat1 == "") && (_wildcardFound == true) ) 
                     {
@@ -346,11 +355,13 @@ package core.strings
                     return false ;
                 }
             }
-            
             if( pat == "*" && ignoreChar != "*" ) 
             {
                 _wildcardFound = true ;
-                if( pat1 != "*" ) wildcards.push( "" );
+                if( pat1 != "*" ) 
+                {
+                    wildcards.push( "" );
+                }
                 if( pat1 == "" ) 
                 {
                     addToWildcards( str ) ;
@@ -360,14 +371,23 @@ package core.strings
                 {
                     while( str != "" ) 
                     {
-                        if( pat1 == "*" ) break ;
+                        if( pat1 == "*" ) 
+                        {
+                            break ;
+                        }
                         if( pat1 == "?" ) 
                         {
                             pattern = pattern.substr(1) ;
                             break ;
                         }
-                        if( str == "" ) return false ;
-                        if( str.charAt(0) == pat1 ) break ;
+                        if( str == "" ) 
+                        {
+                            return false ;
+                        }
+                        if( str.charAt(0) == pat1 ) 
+                        {
+                            break ;
+                        }
                         if( pat1 == "!" ) 
                         {
                             ignoreChar = pattern.charAt( 2 ) ;
@@ -386,7 +406,7 @@ package core.strings
                 } 
                 else 
                 {
-                    var found:Number = str.lastIndexOf( pat1 ) ;
+                    var found:int = str.lastIndexOf( pat1 ) ;
                     if( found != -1 ) 
                     {
                         addToWildcards( str.substring( 0, found ) ) ;
