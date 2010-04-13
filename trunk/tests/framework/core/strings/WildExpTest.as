@@ -51,9 +51,9 @@ package core.strings
         {
             var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
             var result:Array = we.test( "any phrases with words inside" );
-            ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , result ) ;
-            ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , we.wildcards ) ;
-            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+            ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , result , "#1" ) ;
+            ArrayAssert.assertEquals( ["any","phrases","with","words","inside"] , we.wildcards, "#2" ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks, "#3" ) ;  
         }
         
         /**
@@ -75,9 +75,9 @@ package core.strings
         {
             var we:WildExp = new WildExp( "*/!**!*/*" , WildExp.IGNORECASE ) ;
             var result:*   = we.test( "abc/*hello world*/def" );
-            assertTrue( result , "result: true" ) ;
-            ArrayAssert.assertEquals( ["abc","hello world","def"] , we.wildcards ) ;
-            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+            assertTrue( result , "#1" ) ;
+            ArrayAssert.assertEquals( ["abc","hello world","def"] , we.wildcards , "#2" ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks , "#3" ) ;  
         }
         
         /**
@@ -87,9 +87,9 @@ package core.strings
         {
             var we:WildExp = new WildExp( "*//*" , WildExp.IGNORECASE ) ;
             var result:*   = we.test( "abcdef //hello world" );
-            assertTrue( result , "result: true" ) ;
-            ArrayAssert.assertEquals( ["abcdef ","hello world"] , we.wildcards ) ;
-            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+            assertTrue( result , "#1" ) ;
+            ArrayAssert.assertEquals( ["abcdef ","hello world"] , we.wildcards , "#2" ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks , "#3" ) ;  
         }
         
         /**
@@ -99,9 +99,9 @@ package core.strings
         {
             var we:WildExp = new WildExp( "function *(*)*{*}" , WildExp.IGNORECASE ) ;
             var result:*   = we.test( "function toto( a, b, c )\r\n\t{\t\r\n\treturn \"hello world\";\r\n\t}" );
-            assertTrue( result , "result: true" ) ;
-            ArrayAssert.assertEquals( [ "toto", " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards ) ;
-            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+            assertTrue( result , "#1"  ) ;
+            ArrayAssert.assertEquals( [ "toto", " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards , "#2" ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks , "#3" ) ;  
         }
         
         /**
@@ -111,9 +111,21 @@ package core.strings
         {
             var we:WildExp = new WildExp( "*.prototype.*=*function*(*)*{*}" , WildExp.IGNORECASE ) ;
             var result:*   = we.test( "blah.prototype.toto = function( a, b, c )\r\n\t{\t\r\n\treturn \"hello world\";\r\n\t}" );
-            assertTrue( result , "result: true" ) ;
-            ArrayAssert.assertEquals( [ "blah", "toto " , " " , "" , " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards ) ;
-            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+            assertTrue( result , "#1" ) ;
+            ArrayAssert.assertEquals( [ "blah", "toto " , " " , "" , " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards , "#2" ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks , "#3" ) ;  
+        }
+        
+        /**
+         * find the beginning 4 chars of all tags.
+         */
+        public function testWildExp7():void
+        {
+            var we:WildExp = new WildExp( "<????*>*" , WildExp.IGNORECASE | WildExp.MULTILINE ) ;
+            var result:*   = we.test( "<HTML>\r\n<HEAD>\r\n<meta http-equiv=Content-Type content=\"text/html;  charset=ISO-8859-1\">\r\n<TITLE>test</TITLE>\r\n</HEAD>\r\n<BODY bgcolor=\"#FFFFFF\">\r\nhello world\r\n</BODY>\r\n</HTML>" );
+            ArrayAssert.assertEquals( ["<HTML>","<HEAD>","<meta http-equiv=Content-Type content=\"text/html;  charset=ISO-8859-1\">","<TITLE>test</TITLE>","</HEAD>","<BODY bgcolor=\"#FFFFFF\">","</BODY>","</HTML>"] , result , "#1" ) ;
+            ArrayAssert.assertEquals( [ "", "" , "" , "" , " http-equiv=Content-Type content=\"text/html;  charset=ISO-8859-1\"" , "" , "E", "test</TITLE>" , "D" , "" , " bgcolor=\"#FFFFFF\"" , "" , "Y" , "" , "L" , "" ] , we.wildcards , "#2") ;
+            ArrayAssert.assertEquals( [ "HTML" , "HEAD" , "meta" , "TITL" , "/HEA" , "BODY" , "/BOD" , "/HTM" ] , we.questionMarks , "#3") ;  
         }
     }
 }
