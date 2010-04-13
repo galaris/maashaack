@@ -41,9 +41,9 @@ package core.strings
      * In general, line terminators may occur between any two tokens, but there are a few places where they are forbidden by the syntactic grammar. 
      * A line terminator cannot occur within any token, not even a string. 
      * Line terminators also affect the process of automatic semicolon insertion.
-     * @see ECMAScript specification.
+     * <p>ECMAScript specification.</p>
      */
-    public var lineTerminatorChars:Array = 
+    public const lineTerminatorChars:Array = 
     [ 
         "\u000A" /*LF : Line Feed*/ ,
         "\u000D" /*CR : Carriage Return*/,
