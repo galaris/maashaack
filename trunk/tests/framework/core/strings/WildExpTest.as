@@ -91,5 +91,29 @@ package core.strings
             ArrayAssert.assertEquals( ["abcdef ","hello world"] , we.wildcards ) ;
             ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
         }
+        
+        /**
+         * find the name, arguments and body of a function.
+         */
+        public function testWildExp5():void
+        {
+            var we:WildExp = new WildExp( "function *(*)*{*}" , WildExp.IGNORECASE ) ;
+            var result:*   = we.test( "function toto( a, b, c )\r\n\t{\t\r\n\treturn \"hello world\";\r\n\t}" );
+            assertTrue( result , "result: true" ) ;
+            ArrayAssert.assertEquals( [ "toto", " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+        }
+        
+        /**
+         * find the name, arguments and body of a method.
+         */
+        public function testWildExp6():void
+        {
+            var we:WildExp = new WildExp( "*.prototype.*=*function*(*)*{*}" , WildExp.IGNORECASE ) ;
+            var result:*   = we.test( "blah.prototype.toto = function( a, b, c )\r\n\t{\t\r\n\treturn \"hello world\";\r\n\t}" );
+            assertTrue( result , "result: true" ) ;
+            ArrayAssert.assertEquals( [ "blah", "toto " , " " , "" , " a, b, c " , "\r\n\t" , "\t\r\n\treturn \"hello world\";\r\n\t" ] , we.wildcards ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+        }
     }
 }
