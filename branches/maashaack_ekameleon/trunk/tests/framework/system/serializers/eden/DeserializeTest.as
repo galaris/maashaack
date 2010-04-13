@@ -39,9 +39,11 @@ package system.serializers.eden
 
     import system.Version;
     import system.eden;
+    import system.logging.LoggerLevel;
+    import system.logging.targets.TraceTarget;
     import system.serializers.eden.samples.BasicClass;
     import system.serializers.eden.samples.CtorNoDefaultValue;
-    
+
     public class DeserializeTest extends TestCase
     {
         public function DeserializeTest( name:String = "" )
@@ -445,6 +447,29 @@ package system.serializers.eden
             
             assertEquals( "hello", r1.config.message );
             assertEquals( "test", r1.list[0].name );
+        }
+        
+        public function testSecurity():void
+        {
+            eden.addAuthorized("system.logging.*") ;
+            
+            var mem:Boolean = config.security ;
+            
+            config.security = true ;
+            
+            ArrayAssert.assertEquals( [2,3,4] , eden.deserialize("new Array(2,3,4)") ) ;
+            
+            var o:* ;
+            
+            o = eden.deserialize("new system.logging.targets.TraceTarget()") as TraceTarget;
+            assertTrue( o != null ) ;
+            
+            o = eden.deserialize("system.logging.LoggerLevel.DEBUG") as LoggerLevel;
+            assertTrue( LoggerLevel.DEBUG.equals(o) ) ;
+            
+            eden.removeAuthorized("system.logging.*") ;
+            
+            config.security = mem ;
         }
     }
 }
