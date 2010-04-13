@@ -35,6 +35,8 @@
 
 package system.serializers.eden
 {
+    import core.strings.lineTerminatorChars;
+
     import system.Reflection;
     import system.Strings;
     import system.console;
@@ -78,11 +80,10 @@ package system.serializers.eden
      */
     //import system.diagnostics.VirtualMachine;
     
-    
     /**
      * The ECMAScript parser class.
      */
-    public class ECMAScript
+    public class ECMAScript extends GenericParser
     {
         /* note:
            Always commit changes with the release namespace
@@ -96,13 +97,9 @@ package system.serializers.eden
          */
         public function ECMAScript( source:String )
         {
-            _source = source;
-            pos = 0;
-            ch = "";
+            super( source ) ;
             localscope = {};
         }
-        
-
         
         /**
          * The comments string representation.
@@ -110,117 +107,9 @@ package system.serializers.eden
         public static var comments:String = "";
         
         /**
-         * The current character to parse.
-         */
-        public var ch:String;
-        
-        /**
-         * The current parser position in the string expression to parse.
-         */
-        public var  pos:uint;
-        
-        /**
          * The local scope reference.
          */
-        public var localscope:*;
-        
-        /**
-         * Hook to catch the global trace function call
-         */
-        protected function trace( message:String ):void
-        {
-            console.writeLine( message );
-        }
-        
-        debug function traceGlobalPool():void
-        {
-            trace( "---------------------" );
-            trace( "global pool:" );
-            for( var member:String in _globalPool )
-            {
-                trace( member + " = " + _globalPool[member] );
-            }
-            trace( "---------------------" );
-        }
-        
-        debug function tracePool():void
-        {
-            trace( "---------------------" );
-            trace( "local pool:" );
-            for( var member:String in _localPool )
-            {
-                trace( member );
-            }
-            trace( "---------------------" );
-        }
-        
-        debug function debug( message:String ):void
-        {
-            trace( message );
-        }
-        
-        release function traceGlobalPool():void
-        {
-            //do nothing;
-        }
-        
-        release function tracePool():void
-        {
-            //do nothing
-        }
-        
-        release function debug( message:String ):void
-        {
-            //do nothing
-        }
-        
-
-        
-        /**
-         * Indicates the String source representation of the parser (read-only).
-         */
-        public function get source():String
-        {
-            return _source;
-        }
-        
-        /**
-         * Returns the current char in the parse process.
-         * @return the current char in the parse process.
-         */
-        public function getChar():String
-        {
-            return source.charAt( pos );
-        }
-        
-        /**
-         * Returns the char in the source to parse at the specified position.
-         * @return the char in the source to parse at the specified position.
-         */
-        public function getCharAt( pos:uint ):String
-        {
-            return source.charAt( pos );
-        }
-        
-        /**
-         * Returns the next character in the source of this parser.
-         * @return the next character in the source of this parser.
-         */
-        public function next():String
-        {
-            ch = getChar( );
-            pos++;
-            //debug( "next() - ["+ch+"]" );
-            return ch;
-        }
-        
-        /**
-         * Indicates if the source parser has more char.
-         */
-        public function hasMoreChar():Boolean
-        {
-            return pos <= (source.length - 1);
-        }
+        public var localscope:* ;
         
         /**
          * Evaluate the specified string source value with the parser.
@@ -251,7 +140,7 @@ package system.serializers.eden
             {
                 _scanSeparators( );
                 
-                if( ! GenericParser.isAlpha( ch ) )
+                if( !isAlpha( ch ) )
                 {
                     next() ;
                 }
@@ -312,7 +201,7 @@ package system.serializers.eden
             var numarr:Array = num.split( "" );
             for( var i:int = 0; i < numarr.length ; i++ )
             {
-                if( ! GenericParser.isDigit( numarr[i] ) )
+                if( !isDigit( numarr[i] ) )
                 {
                     return false;
                 }
@@ -327,7 +216,7 @@ package system.serializers.eden
         public function isIdentifierStart( c:String ):Boolean
         {
             debug( "isIdentifierStart( \"" + c + "\" )" );
-            if( GenericParser.isAlpha( c ) || (c == "_") || (c == "$" ) )
+            if( isAlpha( c ) || (c == "_") || (c == "$" ) )
             {
                 return true;
             }
@@ -350,7 +239,7 @@ package system.serializers.eden
             {
                 return true;
             }
-            if( GenericParser.isDigit( c ) )
+            if( isDigit( c ) )
             {
                 return true;
             }
@@ -365,30 +254,16 @@ package system.serializers.eden
          * Inidcates if the specified character is a line terminator.
          * <p>Note: line terminators</p>
          * <pre class="prettyprint">
-         * "\n" - u000A - LF
-         * "\R" - u000D - CR
-         * ???  - u2028 - LS
-         * ???  - u2029 - PS
-         * see: ECMA-262 spec 7.3 (PDF p24/188)
+         * "\n" - u000A - LF : Line Feed
+         * "\R" - u000D - CR : Carriage Return
+         * ???  - u2028 - LS : Line Separator
+         * ???  - u2029 - PS : Paragraphe Separator
+         * @see ECMA-262 spec 7.3 (PDF p24/188)
          * </p>
          */
         public function isLineTerminator( c:String ):Boolean
         {
-            debug( "isLineTerminator( \"" + c + "\" )" );
-            switch( c )
-            {
-                case "\u000A": 
-                case "\u000D": 
-                case "\u2028": 
-                case "\u2029":
-                {
-                    return true ;
-                }
-                default:
-                {
-                    return false ;
-                }
-            }
+            return lineTerminatorChars.indexOf( c ) > -1 ;
         }
         
         /**
@@ -500,7 +375,7 @@ package system.serializers.eden
          */
         public function isValidPath( path:String ):Boolean
         {
-            debug( "isValidPath( \"" + path + "\" )" );
+            // debug( "isValidPath( \"" + path + "\" )" );
             var paths:Array = _pathAsArray( path );
             var subpath:String;
             var len:int = paths.length ;
@@ -517,6 +392,55 @@ package system.serializers.eden
             - add authorized hook
              */
             return true;
+        }
+        /**
+         * Hook to catch the global trace function call
+         */
+        protected function trace( message:String ):void
+        {
+            console.writeLine( message );
+        }
+        
+        debug function traceGlobalPool():void
+        {
+            trace( "---------------------" );
+            trace( "global pool:" );
+            for( var member:String in _globalPool )
+            {
+                trace( member + " = " + _globalPool[member] );
+            }
+            trace( "---------------------" );
+        }
+        
+        debug function tracePool():void
+        {
+            trace( "---------------------" );
+            trace( "local pool:" );
+            for( var member:String in _localPool )
+            {
+                trace( member );
+            }
+            trace( "---------------------" );
+        }
+        
+        debug function debug( message:String ):void
+        {
+            trace( message );
+        }
+        
+        release function traceGlobalPool():void
+        {
+            //do nothing;
+        }
+        
+        release function tracePool():void
+        {
+            //do nothing
+        }
+        
+        release function debug( message:String ):void
+        {
+            //do nothing
         }
         
         /**
@@ -562,11 +486,6 @@ package system.serializers.eden
          * @private
          */
         private var _localPool:Array = [];
-        
-        /**
-         * @private
-         */
-        private var _source:String;
         
         /**
          * Indicates if the specified path does exist in the local scope.
@@ -753,14 +672,13 @@ package system.serializers.eden
         private function _scanComments():void
         {
             debug( "scanComments()" );
-            next( );
-            
+            next() ;
             switch( ch )
             {
                 case "/" :
                 {
                     comments += "//";
-                    while( ! isLineTerminator( ch ) && hasMoreChar( ) )
+                    while( !isLineTerminator( ch ) && hasMoreChar( ) )
                     {
                         next( );
                         comments += ch;
@@ -787,7 +705,6 @@ package system.serializers.eden
                             break;
                         }
                     }
-                    
                     next( );
                     break;
                 }
@@ -944,7 +861,7 @@ package system.serializers.eden
                         next( );
                         _scanWhiteSpace( );
                         
-                        if( GenericParser.isDigit( ch ) )
+                        if( isDigit( ch ) )
                         {
                             subpath = String( _scanNumber( ) );
                             _scanWhiteSpace( );
@@ -1070,7 +987,6 @@ package system.serializers.eden
         {
             debug( "scanString( " + quote + " )" );
             var str:String = "";
-            
             if( ch == quote )
             {
                 while( (next( ) != "") )
@@ -1090,7 +1006,7 @@ package system.serializers.eden
                             or followed by u hexdigit hexdigit hexdigit hexdigit
                             see: ECMA-262 specs 7.8.4 (PDF p30 to p32/188)
                              */
-                            switch( next( ) )
+                            switch( next() )
                             {
                                 case "b": 
                                     //backspace       - \u0008
@@ -1203,7 +1119,7 @@ package system.serializers.eden
                 {
                     next() ;
                     
-                    while( GenericParser.isHexDigit( ch ) )
+                    while( isHexDigit( ch ) )
                     {
                         hex += ch;
                         next() ;
@@ -1225,7 +1141,7 @@ package system.serializers.eden
                 }
             }
             
-            while( GenericParser.isDigit( ch ) )
+            while( isDigit( ch ) )
             {
                 num += ch;
                 next( );
@@ -1236,7 +1152,7 @@ package system.serializers.eden
                 num += ".";
                 next( );
                 
-                while( GenericParser.isDigit( ch ) )
+                while( isDigit( ch ) )
                 {
                     num += ch;
                     next( );
@@ -1254,7 +1170,7 @@ package system.serializers.eden
                     next( );
                 }
                 
-                while( GenericParser.isDigit( ch ) )
+                while( isDigit( ch ) )
                 {
                     num += ch;
                     next( );
@@ -1391,7 +1307,7 @@ package system.serializers.eden
             log( strings.errorArray );
             return undefined;
         }
-
+        
         /**
          * Scans the Functions.
          */
@@ -1405,7 +1321,7 @@ package system.serializers.eden
             var fcnObjScope:*;
             
             var isClass:Boolean = pool[ fcnPath ] is Class;
-                        
+            
             if( fcnPath.indexOf( "." ) > - 1 )
             {
                 fcnName = fcnPath.split( "." ).pop();
@@ -1556,41 +1472,47 @@ package system.serializers.eden
             switch( word )
             {
                 case "undefined":
+                {
                     return config.undefineable;
-                
-                // Null literal
-                case "null":
+                }
+                case "null": // Null literal
+                {
                     return null;
-                
-                // Boolean literals
-                case "true":
-                    return true;
-                
+                }
+                case "true": // Boolean literal
+                {
+                    return true ;
+                }
                 case "false":
-                    return false;
-                
+                {
+                    return false ;
+                }
                 // Number literals
                 /* note:
-                here we use shortcuts for ocmmon const to speedup the parsing
+                here we use shortcuts for common const to speedup the parsing
                 but if they were not here they would be parsed just fine ;)
                  */
                 case "NaN":
+                {
                     return NaN;
-                
+                }
                 case "-Infinity":
+                {
                     return - Infinity;
-                
-                case "Infinity":
-                case "+Infinity":
+                }
+                case "Infinity"  :
+                case "+Infinity" :
+                {
                     return Infinity;
-                
+                }
                 case "new" :
-                    
+                {
                     _inConstructor ++;
                     _scanWhiteSpace( );
                     baseword = _scanPath( );
-                
+                }
                 default:
+                {
                     var localRef:Boolean = false;
                     var globalRef:Boolean = false;
                     var result:*;
@@ -1658,6 +1580,7 @@ package system.serializers.eden
                         return (pre == "-") ? - result : result;
                     }
                     return config.undefineable;
+                }
             }
             log( strings.errorKeyword );
         }

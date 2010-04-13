@@ -41,9 +41,15 @@ package system.text.parser
     public class GenericParser
     {
         /**
-         * @private
+         * Creates a new GenericParser instance.
+         * @param source The string expression to parse.
          */
-        private var _source:String ;
+        public function GenericParser( source:String )
+        {
+            _source = source ;
+            pos = 0 ;
+            ch = "" ;
+        }
         
         /**
          * The current character to parse.
@@ -64,17 +70,6 @@ package system.text.parser
         }
         
         /**
-         * Creates a new GenericParser instance.
-         * @param source The string expression to parse.
-         */
-        public function GenericParser( source:String )
-        {
-            _source = source ;
-            pos = 0 ;
-            ch = "" ;
-        }
-        
-        /**
          * Returns the current char in the parse process.
          * @return the current char in the parse process.
          */
@@ -90,17 +85,6 @@ package system.text.parser
         public function getCharAt( pos:uint ):String
         {
             return source.charAt( pos );
-        }
-        
-        /**
-         * Returns the next character in the source of this parser.
-         * @return the next character in the source of this parser.
-         */
-        public function next():String
-        {
-            ch = getChar( ) ;
-            pos++;
-            return ch;
         }
         
         /**
@@ -150,6 +134,22 @@ package system.text.parser
         {
             return c.charCodeAt( 0 ) > 255 ;
         }
+        
+        /**
+         * Returns the next character in the source of this parser.
+         * @return the next character in the source of this parser.
+         */
+        public function next():String
+        {
+            ch = getChar( ) ;
+            pos++;
+            return ch;
+        }
+        
+        /**
+         * @private
+         */
+        protected var _source:String ;
     }
 }
 

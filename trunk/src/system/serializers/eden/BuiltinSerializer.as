@@ -51,7 +51,7 @@ package system.serializers.eden
         public static function emitArray( value:Array ):String
         {
             var source:Array = [];
-            var size:uint = value.length ;
+            var size:int     = value.length ;
             for( var i:int ; i < size ; i++ )
             {
                 if( value[i] === undefined )
@@ -59,7 +59,6 @@ package system.serializers.eden
                     source.push( "undefined" );
                     continue;
                 }
-                
                 if( value[i] === null )
                 {
                     source.push( "null" );
