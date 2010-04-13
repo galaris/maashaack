@@ -344,6 +344,15 @@ package system.serializers.eden
             assertEquals( r1.e, "1-2-3-ff" );
         }
         
+        public function testFunctionWithSeparators():void
+        {
+            var result:* ;
+            result = ECMAScript.evaluate( "value = parseInt(\r\t0xFF )" );
+            assertEquals( result.value , 0xFF );
+            result = ECMAScript.evaluate( "parseInt\r(\r\t0xFF\r)" );
+            assertEquals( result , 0xFF );
+        }
+        
         public function testFunctionChainedCall():void
         {
             /* note:
@@ -356,11 +365,17 @@ package system.serializers.eden
         
         public function testConstructorInstanciation():void
         {
-            var r1:* = ECMAScript.evaluate( "a = new system.Version(1,2,3,4);" );
+            var r:* = ECMAScript.evaluate( "a = new system.Version(1,2,3,4);" );
             
-            assertEquals( r1.a.toString(), "1.2.3.4" );
-            assertTrue( r1.a is Version );
-            assertTrue( r1.a.equals( new Version(1,2,3,4) ) );
+            assertEquals( r.a.toString(), "1.2.3.4" );
+            assertTrue( r.a is Version );
+            assertTrue( r.a.equals( new Version(1,2,3,4) ) );
+        }
+        
+        public function testConstructorWithSeparators():void
+        {
+            var r:* = ECMAScript.evaluate( "{\r\tarray : new Array\r\t(\r\t\t2,3,4\r\t)\r}" );
+            assertEquals( eden.serialize(r) , "{array:[2,3,4]}" ) ;
         }
         
         /* Issue 13
