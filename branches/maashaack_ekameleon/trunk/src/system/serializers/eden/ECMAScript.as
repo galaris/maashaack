@@ -392,8 +392,8 @@ package system.serializers.eden
          * "\R" - u000D - CR : Carriage Return
          * ???  - u2028 - LS : Line Separator
          * ???  - u2029 - PS : Paragraphe Separator
-         * @see ECMA-262 spec 7.3 (PDF p24/188)
          * </p>
+         * @see ECMA-262 spec 7.3 (PDF p24/188)
          */
         public function isLineTerminator( c:String ):Boolean
         {

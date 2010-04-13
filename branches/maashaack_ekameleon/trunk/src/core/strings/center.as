@@ -37,17 +37,17 @@ package core.strings
 {
     /**
      * Returns the center string representation of the specified string value.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.center ;
-     * trace( center("hello world", 0) )         ; // hello world
-     * trace( center("hello world", 20) )        ; //     hello world     
-     * trace( center("hello world", 20, "_" ) )  ; // ____hello world_____
-     * </pre>
      * @param source The string to center.
      * @param size The number of character to center the String expression. (default 0)
      * @param separator The optional separator character use before and after the String to center. (default " ")
      * @return The center of the specified String value.
+     * @example
+     * <code class="prettyprint">
+     * import core.strings.center ;
+     * trace( center("hello world", 0) )         ; // hello world
+     * trace( center("hello world", 20) )        ; //     hello world     
+     * trace( center("hello world", 20, "_" ) )  ; // ____hello world_____
+     * </code>
      */
     public function center( source:String, size:uint = 0 , separator:String = " " ):String 
     {

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ASDOC - Full Documentation Maashaack AS3" default="main">
+
+    <!-- Initialize the build -->
+    
+    <property file="./build.properties"/>
+    
+    <!-- Build process -->
+    
+    <target name="main" depends="clean,doc" description="Clean documentation and create all Maashaack reference."/>
+    
+    <target name="clean" description="Cleans all ASDocs">
+        <delete dir="${output}" />
+        <mkdir  dir="${output}" />
+    </target>
+    
+    <target name="doc" depends="clean">
+        <exec executable="${asdoc}" failonerror="true" >
+            <arg line='-doc-sources ${sources}'/>
+            <arg line='-main-title ${main.title}' />
+            <arg line='-window-title ${win.title}' />
+            <arg line='-output ${output}' />
+            <arg line='-templates-path ${template}'/>
+            <arg line='-target-player=10.0.0' />
+        </exec>
+    </target>
+
+</project>
