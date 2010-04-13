@@ -35,7 +35,9 @@
 
 package system.serializers.eden
 {
+    import core.strings.endsWith;
     import core.strings.lineTerminatorChars;
+    import core.strings.startsWith;
 
     import system.Reflection;
     import system.Strings;
@@ -190,7 +192,68 @@ package system.serializers.eden
             }
         }
         
-        /* group: testers */
+        /**
+         * Indicates if the specified path is authorized in the config.authorized Array.
+         */
+        public function isAuthorized( path:String ):Boolean
+        {
+            var authorized:Array    = config.authorized ;
+            if ( authorized == null || authorized.length == 0 )
+            {
+                return false ;
+            }
+            
+            var pathMode:Boolean ;
+            var strictMode:Boolean  = config.strictMode ;
+            var firstLetter:String  = path.charAt( 0 ) ;
+            
+            if( path.indexOf( "." ) > -1 )
+            {
+                pathMode = true;
+            }
+            
+            if( !strictMode )
+            {
+                firstLetter = firstLetter.toLowerCase();
+            }
+            
+            var filterFirstLetter:Function = function( value:*, index:int, arrObj:Array ):*
+            {
+                if( !strictMode )
+                {
+                    value = value.toLowerCase();
+                };
+                return startsWith( value, firstLetter ) ;
+            } ;
+            
+            var whiteList:Array = authorized.filter( filterFirstLetter ) ;
+            if( whiteList && whiteList.length == 0 )
+            {
+                return false ;
+            }
+            
+            var cur:String ;
+            var len:int = whiteList.length ;
+            for( var i:int ; i<len ; i++ )
+            {
+                cur = whiteList[i] ;
+                if( pathMode )
+                {
+                    if ( endsWith( cur, "*" ) )
+                    {
+                        if ( startsWith( path, replace( cur, "*", "" ) ) )
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else if( path == replace( cur, ".*", "" ) )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         
         /**
          * Indicates if the specified expression is a digit number value.
@@ -321,10 +384,10 @@ package system.serializers.eden
          */
         public function isFutureReservedKeyword( identifier:String ):Boolean
         {
-            debug( "isFutureReservedKeyword( \"" + identifier + "\" )" );
+            //debug( "isFutureReservedKeyword( \"" + identifier + "\" )" );
             if( ! config.strictMode )
             {
-                identifier = identifier.toLowerCase( );
+                identifier = identifier.toLowerCase() ;
             }
             switch( identifier )
             {
@@ -378,7 +441,9 @@ package system.serializers.eden
             // debug( "isValidPath( \"" + path + "\" )" );
             var paths:Array = _pathAsArray( path );
             var subpath:String;
+            
             var len:int = paths.length ;
+            
             for( var i:int ; i < len ; i++ )
             {
                 subpath = paths[i];
@@ -388,9 +453,13 @@ package system.serializers.eden
                     return false;
                 }
             }
-            /* TODO:
-            - add authorized hook
-             */
+            
+            if( config.security && !isAuthorized(path) )
+            {
+                log(Strings.format(path, strings.notAuthorizedPath)) ;
+                return config.undefineable;
+            }
+             
             return true;
         }
         /**
@@ -441,6 +510,15 @@ package system.serializers.eden
         release function debug( message:String ):void
         {
             //do nothing
+        }
+        
+        /**
+         * Replaces the 'search' string with the 'replace' String.
+         * @private
+         */
+        protected function replace( str:String , search:String , replace:String ):String 
+        {
+            return str.split(search).join(replace) ;
         }
         
         /**
@@ -1313,6 +1391,11 @@ package system.serializers.eden
          */
         private function _scanFunction( fcnPath:String, pool:*, ref:* = null ):*
         {
+            if( config.security && !isAuthorized( fcnPath ) )
+            {
+                log( Strings.format( strings.notAuthorizedFunction , fcnPath ) ) ;
+                return config.undefineable;
+            }
             debug( "scanFunction( " + fcnPath + " )" );
             
             var args:Array = [];
@@ -1340,7 +1423,7 @@ package system.serializers.eden
             
             next( );
             
-            _scanSeparators( );
+            _scanSeparators( ); // FIXME ???
             
             var foundEndParenthesis:Boolean = false;
             

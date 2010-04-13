@@ -16,7 +16,6 @@
      */
     public function endsWith( source:String , value:String ):Boolean
     {
-        var r:Array = source.match( value + "$" ) ;
-        return r ? ( r[0] == value ) : false ;
+        return source.lastIndexOf(value) == ( source.length - value.length ) ;
     }
 }

@@ -46,8 +46,10 @@ package core.strings
         
         public function testEndsWith():void
         {
-            assertTrue( endsWith( "hello.txt" , "txt" ) ) ;
-            assertFalse( endsWith( "txt.hello" , "txt" ) ) ;
+            assertTrue( endsWith( "hello.txt"  , "txt" ) , "#1" ) ;
+            assertTrue( endsWith( "hello.txt"  , ".txt" ) , "#2" ) ;
+            assertTrue( endsWith( "hello.*"    , ".*"   ) , "#3" ) ;
+            assertFalse( endsWith( "txt.hello" , "txt" ) , "#4" ) ;
         }
     }
 }

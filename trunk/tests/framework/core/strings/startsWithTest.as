@@ -46,8 +46,10 @@ package core.strings
         
         public function testStartsWith():void
         {
-            assertTrue( startsWith( "hello.txt" , "hello" ) ) ;
-            assertFalse( startsWith( "txt.hello" , "hello" ) ) ;
+            assertTrue( startsWith( "hello.txt"  , "hello" ) , "#1" ) ;
+            assertTrue( startsWith( "*.txt"      , "*"     ) , "#2" ) ;
+            assertTrue( startsWith( "*.txt"      , "*."    ) , "#3" ) ;
+            assertFalse( startsWith( "txt.hello" , "hello" ) , "#4" ) ;
         }
     }
 }

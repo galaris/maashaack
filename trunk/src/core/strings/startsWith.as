@@ -16,7 +16,6 @@
      */
     public function startsWith( source:String , value:String ):Boolean
     {
-        var r:Array = source.match( "^" + value ) ; 
-        return r ? ( r[0] == value ) : false ;
+        return source.indexOf( value ) == 0 ;
     }
 }

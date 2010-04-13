@@ -35,31 +35,35 @@
 
 package system.serializers.eden
 {
-
     import system.serializers.eden.EdenConfigurator;
     
     /**
      * The EdenConfigurator reference used to configure the eden parser.
      */
-    public var config:EdenConfigurator = new EdenConfigurator( {
-                                                                   compress: true,
-                                                                   copyObjectByValue: false,
-                                                                   strictMode: true,
-                                                                   undefineable: undefined,
-                                                                   verbose: false,
-                                                                   security: true,
-                                                                   authorized: [ "Array.*",
-                                                                                 "Boolean",
-                                                                                 "Date",
-                                                                                 "Error",
-                                                                                 "Math.*",
-                                                                                 "Number.*",
-                                                                                 "Object",
-                                                                                 "String",
-                                                                                 "Infinity" ],
-                                                                   allowFunctionCall: true,
-                                                                   autoAddScopePath: false,
-                                                                   arrayIndexAsBracket: false
-                                                                   } );
+    public var config:EdenConfigurator = new EdenConfigurator
+    ( 
+        {
+            compress: true,
+            copyObjectByValue: false,
+            strictMode: true,
+            undefineable: undefined,
+            verbose: false,
+            security: false,
+            allowFunctionCall: true,
+            arrayIndexAsBracket: false ,
+            autoAddScopePath: false,
+            authorized : 
+            [
+                "Array.*",
+                "Boolean",
+                "Date",
+                "Error",
+                "Math.*",
+                "Number.*",
+                "Object",
+                "String",
+                "Infinity" 
+            ]
+        } 
+    );
 }
-

@@ -85,7 +85,7 @@ package system.serializers.eden
         
         /**
          * Indicates the indentor string representation.
-         */        
+         */ 
         public function get indentor():String
         {
             return _indentor;
