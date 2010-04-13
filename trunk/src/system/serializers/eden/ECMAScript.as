@@ -109,6 +109,77 @@ package system.serializers.eden
         public static var comments:String = "";
         
         /**
+         * The following are reserved as future keywords by the ECMAScript specification.
+         */
+        public static const FUTUR_KEYWORDS:Array = 
+        [
+            "abstract" ,
+            "boolean", 
+            "byte",
+            "char", 
+            "class", 
+            "const",
+            "debugger", 
+            "double",
+            "enum", 
+            "export", 
+            "extends",
+            "final", 
+            "float",
+            "goto",
+            "implements", 
+            "import", 
+            "int", 
+            "interface",
+            "long",
+            "native",
+            "package", 
+            "private", 
+            "protected", 
+            "public",
+            "short", 
+            "static", 
+            "super", 
+            "synchronized",
+            "throws", 
+            "transient",
+            "volatile"
+        ] ;
+        
+        /**
+         * The following are reserved words and may not be used as variables, functions, methods, or object identifiers. 
+         * The following are reserved as existing keywords by the ECMAScript specification:
+         */
+        public static const RESERVED_KEYWORDS:Array = 
+        [
+            "break"      , 
+            "case"       , 
+            "catch"      , 
+            "continue"   , 
+            "default"    , 
+            "delete"     , 
+            "do"         , 
+            "else"       , 
+            "finally"    , 
+            "for"        , 
+            "function"   , 
+            "if"         ,
+            "in"         , 
+            "instanceof" , 
+            "new"        , 
+            "return"     , 
+            "switch"     , 
+            "this"       , 
+            "throw"      , 
+            "try"        , 
+            "typeof"     , 
+            "var"        , 
+            "void"       , 
+            "while"      ,
+            "with"       
+        ] ;
+        
+        /**
          * The local scope reference.
          */
         public var localscope:* ;
@@ -336,45 +407,18 @@ package system.serializers.eden
         public function isReservedKeyword( identifier:String ):Boolean
         {
             debug( "isReservedKeyword( \"" + identifier + "\" )" );
-            if( ! config.strictMode )
+            if( !config.strictMode )
             {
-                identifier = identifier.toLowerCase( );
+                identifier = identifier.toLowerCase() ;
             }
-            switch( identifier )
+            if( RESERVED_KEYWORDS.indexOf( identifier ) > -1 )
             {
-                case "break"      :
-                case "case"       :
-                case "catch"      :
-                case "continue"   :
-                case "default"    :
-                case "delete"     :
-                case "do"         :
-                case "else"       :
-                case "finally"    :
-                case "for"        :
-                case "function"   :
-                case "if"         :
-                case "in"         :
-                case "instanceof" :
-                case "new"        :
-                case "return"     :
-                case "switch"     :
-                case "this"       :
-                case "throw"      :
-                case "try"        :
-                case "typeof"     :
-                case "var"        :
-                case "void"       :
-                case "while"      :
-                case "with"       :
-                {
-                    log( Strings.format( strings.reservedKeyword, identifier ) );
-                    return true;
-                }
-                default:
-                {
-                    return false;
-                }
+                log( Strings.format( strings.reservedKeyword, identifier ) ) ;
+                return true ;
+            }
+            else
+            {
+                return false ;
             }
         }
         
@@ -389,47 +433,14 @@ package system.serializers.eden
             {
                 identifier = identifier.toLowerCase() ;
             }
-            switch( identifier )
+            if( FUTUR_KEYWORDS.indexOf( identifier ) > -1 )
             {
-                case "abstract":
-                case "boolean": 
-                case "byte":
-                case "char": 
-                case "class": 
-                case "const":
-                case "debugger": 
-                case "double":
-                case "enum": 
-                case "export": 
-                case "extends":
-                case "final": 
-                case "float":
-                case "goto":
-                case "implements": 
-                case "import": 
-                case "int": 
-                case "interface":
-                case "long":
-                case "native":
-                case "package": 
-                case "private": 
-                case "protected": 
-                case "public":
-                case "short": 
-                case "static": 
-                case "super": 
-                case "synchronized":
-                case "throws": 
-                case "transient":
-                case "volatile":
-                {
-                    log( Strings.format( strings.futurReservedKeyword, identifier ) );
-                    return true ;
-                }
-                default:
-                { 
-                    return false ;
-                }
+                log( Strings.format( strings.futurReservedKeyword, identifier ) ) ;
+                return true ;
+            }
+            else
+            {
+                return false ;
             }
         }
         
@@ -438,7 +449,7 @@ package system.serializers.eden
          */
         public function isValidPath( path:String ):Boolean
         {
-            // debug( "isValidPath( \"" + path + "\" )" );
+            debug( "isValidPath( \"" + path + "\" )" );
             var paths:Array = _pathAsArray( path );
             var subpath:String;
             
@@ -453,13 +464,11 @@ package system.serializers.eden
                     return false;
                 }
             }
-            
             if( config.security && !isAuthorized(path) )
             {
                 log(Strings.format(path, strings.notAuthorizedPath)) ;
                 return config.undefineable;
             }
-             
             return true;
         }
         /**
@@ -621,13 +630,15 @@ package system.serializers.eden
                 switch( path )
                 {
                     case "decodeURI":
-                    _globalPool[ path ] = decodeURI;
-                    return true;
-                    
+                    {
+                        _globalPool[ path ] = decodeURI;
+                        return true;
+                    }
                     case "decodeURIComponent":
-                    _globalPool[ path ] = decodeURIComponent;
-                    return true;
-                    
+                    {
+                        _globalPool[ path ] = decodeURIComponent;
+                        return true;
+                    }
                     case "encodeURI":
                     _globalPool[ path ] = encodeURI;
                     return true;
@@ -775,12 +786,11 @@ package system.serializers.eden
                     {
                         ch_ = ch;
                         next( );
-                        comments += ch;
-                        
+                        comments += ch ;
                         if( ch == "" )
                         {
                             log( strings.unterminatedComment );
-                            break;
+                            break ;
                         }
                     }
                     next( );
@@ -842,12 +852,12 @@ package system.serializers.eden
                     }
                     case "/":
                     {
-                        _scanComments( );
+                        _scanComments() ;
                         break;
                     }
                     default:
                     {
-                        scan = false;
+                        scan = false ;
                     }
                 }
             }
@@ -933,12 +943,10 @@ package system.serializers.eden
                 next( );
                 while( isIdentifierPart( ch ) || (ch == ".") || (ch == "[") )
                 {
-                    
                     if( ch == "[" )
                     {
                         next( );
                         _scanWhiteSpace( );
-                        
                         if( isDigit( ch ) )
                         {
                             subpath = String( _scanNumber( ) );
@@ -954,7 +962,7 @@ package system.serializers.eden
                         
                         if( ch == "]" )
                         {
-                            next( );
+                            next() ;
                             continue;
                         }
                     }
@@ -1077,6 +1085,7 @@ package system.serializers.eden
                             return str;
                         }
                         case "\\":
+                        {
                             /* note:
                             Escape Sequence
                             \ followed by one of ' " \ b f n r t v
@@ -1087,70 +1096,73 @@ package system.serializers.eden
                             switch( next() )
                             {
                                 case "b": 
-                                    //backspace       - \u0008
-                                    str += "\b";
+                                {
+                                    str += "\b" ; //backspace \u0008
                                     break;
-                                
+                                }
                                 case "t": 
-                                    //horizontal tab  - \u0009
-                                    str += "\t";
+                                {
+                                    str += "\t" ; //horizontal tab \u0009
                                     break;
-                                
+                                }
                                 case "n": 
-                                    //line feed       - \u000A
-                                    str += "\n";
+                                {
+                                    str += "\n" ; //line feed \u000A
                                     break;
-                                
-                            /* TODO: check \v bug */
+                                }
                                 case "v": 
-                                    //vertical tab    - \u000B
-                                    str += "\v";
+                                {
+                                    str += "\v" ; // vertical tab \u000B /* TODO: check \v bug */
                                     break;
-                                
+                                }
                                 case "f": 
-                                    //form feed       - \u000C
-                                    str += "\f";
+                                {
+                                    str += "\f" ; //form feed \u000C
                                     break;
-                                
+                                }
                                 case "r": 
-                                    //carriage return - \u000D
-                                    str += "\r";
+                                {
+                                    str += "\r" ; //carriage return \u000D
                                     break;
-                                
+                                }
                                 case "\"": 
-                                    //double quote   - \u0022
-                                    str += "\"";
+                                {
+                                    str += "\"" ; //double quote \u0022
                                     break;
-                                
+                                }
                                 case "\'": 
-                                    //single quote   - \u0027
-                                    str += "\'";
+                                {
+                                    str += "\'"; //single quote \u0027
                                     break;
-                                
+                                }
                                 case "\\": 
-                                    //backslash      - \u005c
-                                    str += "\\";
+                                {
+                                    str += "\\" ; //backslash \u005c
                                     break;
-                                
-                                case "u": 
+                                }
+                                case "u" :
+                                { 
                                     //unicode escape sequence \uFFFF
-                                    var ucode:String = source.substring( pos, pos + 4 );
-                                    str += String.fromCharCode( parseInt( ucode, 16 ) );
-                                    pos += 4;
+                                    var ucode:String = source.substring( pos, pos + 4 ) ;
+                                    str += String.fromCharCode( parseInt( ucode, 16 ) ) ;
+                                    pos += 4 ;
                                     break;
-                                
-                                case "x": 
+                                }
+                                case "x" :
+                                { 
                                     //hexadecimal escape sequence \xFF
-                                    var xcode:String = source.substring( pos, pos + 2 );
-                                    str += String.fromCharCode( parseInt( xcode, 16 ) );
+                                    var xcode:String = source.substring( pos, pos + 2 ) ;
+                                    str += String.fromCharCode( parseInt( xcode, 16 ) ) ;
                                     pos += 2;
                                     break;
-                                
-                                default:
-                                    str += ch;
+                                }
+                                default :
+                                {
+                                    str += ch ;
+                                }
                             }
                             break;
-                        
+                        }
                         default:
                         {
                             if( ! isLineTerminator( ch ) )
@@ -1186,13 +1198,12 @@ package system.serializers.eden
             if( ch == "-" )
             {
                 sign = "-";
-                next( );
+                next() ;
             }
             
             if( ch == "0" )
             {
                 next() ;
-                
                 if( (ch == "x") || (ch == "X") )
                 {
                     next() ;
@@ -1222,7 +1233,7 @@ package system.serializers.eden
             while( isDigit( ch ) )
             {
                 num += ch;
-                next( );
+                next() ;
             }
             
             if( ch == "." )
@@ -1233,7 +1244,7 @@ package system.serializers.eden
                 while( isDigit( ch ) )
                 {
                     num += ch;
-                    next( );
+                    next() ;
                 }
             }
             
@@ -1251,7 +1262,7 @@ package system.serializers.eden
                 while( isDigit( ch ) )
                 {
                     num += ch;
-                    next( );
+                    next() ;
                 }
             }
             
@@ -1271,14 +1282,14 @@ package system.serializers.eden
              */
             value = Number( sign + num );
             
-            if( ! isFinite( value ) )
+            if( !isFinite( value ) )
             {
                 log( strings.errorNumber );
-                return NaN;
+                return NaN ;
             }
             else
             {
-                return value;
+                return value ;
             }
         }
         
@@ -1288,43 +1299,36 @@ package system.serializers.eden
         private function _scanObject():Object
         {
             debug( "scanObject()" );
-            var obj:Object = {};
-            var member:String;
+            var obj:Object = {} ;
+            var member:String ;
             var value:*;
-            
             if( ch == "{" )
             {
                 next() ;
                 _scanSeparators( );
-                
                 if( ch == "}" )
                 {
                     next( );
                     return obj;
                 }
-                
                 while( ch != "" )
                 {
                     member = _scanIdentifier( );
-                    _scanWhiteSpace( );
-                    
+                    _scanWhiteSpace();
                     if( ch != ":" )
                     {
                         break;
                     }
                     
                     next( );
-                    _inAssignement = true;
-                    value = _scanValue( );
-                    _inAssignement = false;
-                    
-                    if( ! isReservedKeyword( member ) && ! isFutureReservedKeyword( member ) )
+                    _inAssignement = true ;
+                    value = _scanValue() ;
+                    _inAssignement = false ;
+                    if( !isReservedKeyword( member ) && !isFutureReservedKeyword( member ) )
                     {
                         obj[member] = value;
                     }
-                    
                     _scanSeparators( );
-                    
                     if( ch == "}" )
                     {
                         next( );
@@ -1334,7 +1338,6 @@ package system.serializers.eden
                     {
                         break;
                     }
-                    
                     next() ;
                     _scanSeparators() ;
                 }
@@ -1354,7 +1357,7 @@ package system.serializers.eden
             if( ch == "[" )
             {
                 next( );
-                _scanSeparators( );
+                _scanSeparators();
                 
                 if( ch == "]" )
                 {
@@ -1364,21 +1367,20 @@ package system.serializers.eden
                 
                 while( ch != "" )
                 {
-                    arr.push( _scanValue( ) );
+                    arr.push( _scanValue() );
                     _scanSeparators( );
                     
                     if( ch == "]" )
                     {
-                        next( );
+                        next() ;
                         return arr;
                     }
                     else if( ch != "," )
                     {
-                        break;
+                        break ;
                     }
-                    
                     next( );
-                    _scanSeparators( );
+                    _scanSeparators() ;
                 }
             }
             
@@ -1741,7 +1743,7 @@ package system.serializers.eden
                 _inAssignement = false;
             }
         }
-
+        
         /**
          * Scans the root local assignement of the specified name value..
          */
@@ -1778,10 +1780,10 @@ package system.serializers.eden
                 _inAssignement = false;
             }
         }
-
+        
         /**
          * Scans the local assigment of the specified path.
-         */        
+         */
         private function _scanLocalAssignement( path:String ):void
         {
             debug( "scanLocalAssignement( " + path + " )" );
@@ -1791,7 +1793,6 @@ package system.serializers.eden
                 _scanRootLocalAssignement( path );
                 return;
             }
-            
             
             var paths:Array = _pathAsArray( path );
             var prop:* = paths.shift( );
