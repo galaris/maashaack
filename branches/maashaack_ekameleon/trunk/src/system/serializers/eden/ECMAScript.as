@@ -967,7 +967,7 @@ package system.serializers.eden
                         }
                     }
                     path += ch;
-                    next( );
+                    next() ;
                 }
             }
             
@@ -1519,7 +1519,7 @@ package system.serializers.eden
                 if( ch == "." )
                 {
                     next( );
-                    return _scanFunction( _scanPath( ), pool, result );
+                    return _scanFunction( _scanPath(), pool, result );
                 }
                 else
                 {
@@ -1593,8 +1593,8 @@ package system.serializers.eden
                 case "new" :
                 {
                     _inConstructor ++;
-                    _scanWhiteSpace( );
-                    baseword = _scanPath( );
+                    _scanWhiteSpace();
+                    baseword = _scanPath() ;
                 }
                 default:
                 {
@@ -1614,8 +1614,8 @@ package system.serializers.eden
                     else if( isValidPath( baseword ) && ! _inAssignement && ! _inConstructor )
                     {
                         _createPath( baseword );
-                        localRef = true;    
-                        _singleValue = false;
+                        localRef     = true  ;
+                        _singleValue = false ;
                     }
                     
                     /* coded in the train listening RUN-DMC "It's Tricky"
@@ -1632,6 +1632,8 @@ package system.serializers.eden
                             _scanGlobalAssignement( baseword );
                         }
                     }
+                    
+                    _scanSeparators(); // test the separators between the constructor and the (
                     
                     if( ! localRef && ! globalRef )
                     {
