@@ -45,7 +45,7 @@ package core.strings
         }
         
         /**
-         * 1. find all the words in a string
+         * find all the words in a string.
          */
         public function testWildExp1():void
         {
@@ -57,9 +57,21 @@ package core.strings
         }
         
         /**
-         * 2. find comments in a string
+         * find all the words of exactly 4 letters in a string.
          */
         public function testWildExp2():void
+        {
+            var we:WildExp   = new WildExp( "????" , WildExp.IGNORECASE | WildExp.MULTIWORD );
+            var result:Array = we.test(  "hell or eden the choice is not so hard :)))" );
+            ArrayAssert.assertEquals( ["hell","eden","hard",":)))"] , result , "#1" ) ;
+            ArrayAssert.assertEquals( [] , we.wildcards     , "#2" ) ;
+            ArrayAssert.assertEquals( ["hell","oreden","thechoi","isnotsohard",":)))"] , we.questionMarks , "#3" ) ;  
+        }
+        
+        /**
+         * find comments in a string.
+         */
+        public function testWildExp3():void
         {
             var we:WildExp = new WildExp( "*/!**!*/*" , WildExp.IGNORECASE ) ;
             var result:*   = we.test( "abc/*hello world*/def" );
@@ -68,6 +80,16 @@ package core.strings
             ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
         }
         
-        // TODO finish unit tests
+        /**
+         * find single comments in a string.
+         */
+        public function testWildExp4():void
+        {
+            var we:WildExp = new WildExp( "*//*" , WildExp.IGNORECASE ) ;
+            var result:*   = we.test( "abcdef //hello world" );
+            assertTrue( result , "result: true" ) ;
+            ArrayAssert.assertEquals( ["abcdef ","hello world"] , we.wildcards ) ;
+            ArrayAssert.assertEquals( [] , we.questionMarks ) ;  
+        }
     }
 }
