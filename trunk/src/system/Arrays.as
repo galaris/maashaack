@@ -35,6 +35,9 @@
 
 package system
 {
+    import core.arrays.repeat;
+    import core.arrays.spliceInto;
+    
     /**
      * A static class for Array utilities.
      */
@@ -60,6 +63,9 @@ package system
             return ar.indexOf(value) > -1 ;
         }
         
+        /**
+         * Creates a deep or shallow copy of the specified Array.
+         */
         public static function copy( ar:Array, shallow:Boolean = false ):Array
         {
             if( shallow )
@@ -386,22 +392,7 @@ package system
          * </pre>
          * @return a new Array who contains the specified Array elements repeated count times.
          */
-        public static function repeat( ar:Array , count:uint = 0 ):Array
-        {
-            var result:Array = [] ;
-            if ( count > 0 )
-            {
-                for( var i:int ; i < count ; i++)
-                {
-                    result = result.concat(ar) ;
-                }
-            }
-            else
-            {
-                result = [].concat(ar) ;
-            }
-            return  result ;
-        }
+        public static const repeat:Function = core.arrays.repeat ;
         
         /** 
          * Splice one array into another.
@@ -447,20 +438,9 @@ package system
          * </pre>
          * @param inserted The Array of char inserted in the Array container.
          * @param container The container modified in place.
-         * @param containerPosition The position in the container to inserted the Array of chars.
-         * @param countReplaced The count value to replaced values.
+         * @param position The position in the container to inserted the Array of chars.
+         * @param count The count value to replaced values.
          */
-        public static function spliceInto( inserted:Array, container:Array, containerPosition:Number = 0 , countReplaced:Number = 0 ):void
-        {
-            inserted.unshift(containerPosition, isNaN(countReplaced) ? 0 : countReplaced);
-            try 
-            {
-                container.splice.apply(container, inserted) ;
-            } 
-            finally 
-            {
-                inserted.splice(0, 2) ;
-            }
-        }
+        public static const spliceInto:Function = core.arrays.spliceInto ;
     }
 }
