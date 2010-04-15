@@ -48,7 +48,6 @@ package core.arrays
         public function testRepeat():void
         {
             var ar:Array =  [2, 3, 4] ;
-            
             ArrayAssert.assertEquals( [2, 3, 4] , repeat(ar, 0) ) ;
             ArrayAssert.assertEquals( [2,3,4,2,3,4,2,3,4] , repeat(ar, 3) ) ; 
         }

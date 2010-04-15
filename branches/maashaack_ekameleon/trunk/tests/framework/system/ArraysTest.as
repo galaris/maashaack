@@ -85,6 +85,55 @@ package system
             ArrayAssert.assertEquals( a, copy2 );
         }
         
+        public function testRepeat():void
+        {
+            var ar:Array =  [2, 3, 4] ;
+            ArrayAssert.assertEquals( [2, 3, 4] , Arrays.repeat(ar, 0) ) ;
+            ArrayAssert.assertEquals( [2,3,4,2,3,4,2,3,4] , Arrays.repeat(ar, 3) ) ; 
+        }
         
+        public function testSpliceInto():void
+        {
+            var inserted:Array  ;
+            var container:Array ;
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            Arrays.spliceInto( inserted, container ) ;
+            ArrayAssert.assertEquals( [1,2,3,4,5,6,7,8] , container ) ; 
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            Arrays.spliceInto( inserted, container, 0 , 4 ) ;
+            ArrayAssert.assertEquals( [1,2,3,4] , container ) ; 
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            Arrays.spliceInto( inserted, container, 0 , 2 ) ;
+            ArrayAssert.assertEquals( [1,2,3,4,7,8] , container ) ; 
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            Arrays.spliceInto( inserted, container, 1 ) ;
+            ArrayAssert.assertEquals( [5,1,2,3,4,6,7,8] , container ) ;
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            Arrays.spliceInto( inserted, container, 1 , 2 ) ;
+            ArrayAssert.assertEquals( [5,1,2,3,4,8] , container ) ; 
+        }
     }
 }
