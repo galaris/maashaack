@@ -33,21 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.arrays
+package core.arrays 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class repeatTest extends TestCase 
     {
-        public static function suite():ITest
+        public function repeatTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
+            super(name);
+        }
+        
+        public function testRepeat():void
+        {
+            var ar:Array =  [2, 3, 4] ;
             
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
-            
-            return suite;
+            ArrayAssert.assertEquals( [2, 3, 4] , repeat(ar, 0) ) ;
+            ArrayAssert.assertEquals( [2,3,4,2,3,4,2,3,4] , repeat(ar, 3) ) ; 
         }
     }
 }
