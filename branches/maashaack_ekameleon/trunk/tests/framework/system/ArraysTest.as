@@ -45,6 +45,13 @@ package system
             super(name);
         }
         
+        public function testContains():void
+        {
+            var ar:Array =  [2, 3, 4] ;
+            assertTrue( Arrays.contains( ar , 3 ) as Boolean ) ;
+            assertFalse( Arrays.contains( ar , 5 ) as Boolean ) ;
+        }
+        
 //        TAMARIN::exclude
         public function testCopyPrimitive():void
         {

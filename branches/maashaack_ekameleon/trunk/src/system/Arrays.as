@@ -35,6 +35,7 @@
 
 package system
 {
+    import core.arrays.contains;
     import core.arrays.repeat;
     import core.arrays.spliceInto;
     
@@ -44,7 +45,7 @@ package system
     public class Arrays
     {
         /**
-         * Returns whether the Array contains a particular item.
+         * Determines whether the specified object exists as an element in an Array object.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.Arrays ;
@@ -55,13 +56,10 @@ package system
          * trace( Arrays.contains(ar, 5) ) ; // false
          * </pre>
          * @param ar The search Array.
-         * @param value The value to search.
-         * @return whether the Array contains a particular item.
+         * @param value The object to find in the array.
+         * @return <code>true</code> if the specified object exists as an element in the array ; otherwise, <code>false</code>.
          */
-        public static function contains( ar:Array , value:Object):Boolean 
-        {
-            return ar.indexOf(value) > -1 ;
-        }
+        public static const contains:Function = core.arrays.contains ;
         
         /**
          * Creates a deep or shallow copy of the specified Array.
