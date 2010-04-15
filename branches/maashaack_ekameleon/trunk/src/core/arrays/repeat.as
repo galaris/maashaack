@@ -35,19 +35,34 @@
 
 package core.arrays
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Returns a new Array who contains the specified Array elements repeated count times.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.arrays.repeat ;
+     * 
+     * var ar:Array = [2, 3, 4] ;
+     * 
+     * trace( repeat( ar , 0 ) ) ; // 2,3,4
+     * trace( repeat( ar , 3 ) ) ; // 2,3,4,2,3,4,2,3,4
+     * </pre>
+     * @return a new Array who contains the specified Array elements repeated count times.
+     */
+    public function repeat( ar:Array , count:uint = 0 ):Array
     {
-        public static function suite():ITest
+        var result:Array ;
+        if ( count > 0 )
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
-            
-            return suite;
+            result = [] ;
+            for( var i:int ; i < count ; i++ )
+            {
+                result = result.concat(ar) ;
+            }
         }
+        else
+        {
+            result = [].concat(ar) ;
+        }
+        return result ;
     }
 }
