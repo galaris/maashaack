@@ -35,20 +35,23 @@
 
 package core.arrays
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Determines whether the specified object exists as an element in an Array object.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.arrays.contains ;
+     * 
+     * var ar:Array = [2, 3, 4] ;
+     * 
+     * trace( contains( ar , 3 ) ) ; // true
+     * trace( contains( ar , 5 ) ) ; // false
+     * </pre>
+     * @param ar The search Array.
+     * @param value The object to find in the array.
+     * @return <code>true</code> if the specified object exists as an element in the array ; otherwise, <code>false</code>.
+     */
+    public function contains( ar:Array , value:Object):Boolean 
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( containsTest   ) ;
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
-            
-            return suite;
-        }
+        return ar.indexOf(value) > -1 ;
     }
 }
