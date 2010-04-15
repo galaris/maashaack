@@ -33,28 +33,60 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.arrays 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    public class spliceIntoTest extends TestCase 
     {
-        public static function suite():ITest
+        public function spliceIntoTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testSpliceInto():void
+        {
+            var inserted:Array  ;
+            var container:Array ;
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            spliceInto( inserted, container ) ;
+            ArrayAssert.assertEquals( [1,2,3,4,5,6,7,8] , container ) ; 
             
-            return suite;
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            spliceInto( inserted, container, 0 , 4 ) ;
+            ArrayAssert.assertEquals( [1,2,3,4] , container ) ; 
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            spliceInto( inserted, container, 0 , 2 ) ;
+            ArrayAssert.assertEquals( [1,2,3,4,7,8] , container ) ; 
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            spliceInto( inserted, container, 1 ) ;
+            ArrayAssert.assertEquals( [5,1,2,3,4,6,7,8] , container ) ;
+            
+            //////
+            
+            inserted  = [1, 2, 3, 4] ;
+            container = [5, 6, 7, 8] ;
+            
+            spliceInto( inserted, container, 1 , 2 ) ;
+            ArrayAssert.assertEquals( [5,1,2,3,4,8] , container ) ; 
         }
     }
 }
