@@ -45,7 +45,7 @@ package examples
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.net.URLRequest;
-
+    
     /**
      * Test the graphics.filters.HoleFilter class, this example work only with a FP10 or sup.
      */
