@@ -36,9 +36,10 @@
 package system
 {
     import core.arrays.contains;
+    import core.arrays.initialize;
     import core.arrays.repeat;
     import core.arrays.spliceInto;
-    
+
     /**
      * A static class for Array utilities.
      */
@@ -91,6 +92,8 @@ package system
          * with every element containing the passed parameter value or by default the null value.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
+         * import system.Arrays ;
+         * 
          * var test:Array  = Arrays.initialize( 3 ); //define [null,null,null]
          * var test1:Array = Arrays.initialize( 3, 0 ); //define [0,0,0]
          * var test2:Array = Arrays.initialize( 3, true ); //define [true,true,true]
@@ -99,15 +102,7 @@ package system
          * @return a new Array with an arbitrary number of elements (index), 
          * with every element containing the passed parameter value or by default the null value.
          */
-        public static function initialize( elements:uint = 0, value:* = null ):Array
-        {
-            var arr:Array = [];
-            for( var i:int ; i < elements ; i++ )
-            {
-                arr.push(value);
-            }
-            return arr;
-        }
+        public static const initialize:Function = core.arrays.initialize ;
         
         /**
          * Apply a function simultaneously against two values of the array (from left-to-right) as to reduce it to a single value.

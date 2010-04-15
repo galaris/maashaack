@@ -92,6 +92,15 @@ package system
             ArrayAssert.assertEquals( a, copy2 );
         }
         
+        public function testInitialize():void
+        {
+            ArrayAssert.assertEquals( [] , Arrays.initialize() ) ;
+            ArrayAssert.assertEquals( [null  , null , null ] , Arrays.initialize(3) ) ;
+            ArrayAssert.assertEquals( [ 0    , 0    , 0    ] , Arrays.initialize(3,0) ) ;
+            ArrayAssert.assertEquals( [ true , true , true ] , Arrays.initialize(3,true) ) ;
+            ArrayAssert.assertEquals( [ "" , "" , "" , ""  ] , Arrays.initialize(4,"") ) ;
+        }
+        
         public function testRepeat():void
         {
             var ar:Array =  [2, 3, 4] ;

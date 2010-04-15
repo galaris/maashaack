@@ -35,21 +35,28 @@
 
 package core.arrays
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Initializes a new Array with an arbitrary number of elements (index), 
+     * with every element containing the passed parameter value or by default the null value.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.arrays.initialize ;
+     * 
+     * var testO:Array = initialize( 3 ) ; // [null,null,null]
+     * var test1:Array = initialize( 3 , 0 ) ; // [0,0,0]
+     * var test2:Array = initialize( 3 , true ) ; // [true,true,true]
+     * var test3:Array = initialize( 4 , "" ) ; // ["","","",""]
+     * </pre>
+     * @return a new Array with an arbitrary number of elements (index), 
+     * with every element containing the passed parameter value or by default the null value.
+     */
+    public function initialize( elements:uint = 0, value:* = null ):Array
     {
-        public static function suite():ITest
+        var ar:Array = [];
+        for( var i:int ; i < elements ; i++ )
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( containsTest   ) ;
-            suite.addTestSuite( initializeTest ) ;
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
-            
-            return suite;
+            ar[ar.length] = value ;
         }
+        return ar;
     }
 }
