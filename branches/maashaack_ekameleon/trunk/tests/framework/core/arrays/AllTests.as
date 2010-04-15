@@ -33,26 +33,18 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.arrays
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.strings.AllTests;
     
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            var suite:TestSuite = new TestSuite("core.arrays package tests");
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            suite.addTestSuite( spliceIntoTest ) ;
             
             return suite;
         }
