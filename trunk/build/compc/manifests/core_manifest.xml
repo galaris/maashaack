@@ -8,6 +8,13 @@
     <component id="core:uri"     class="core.uri"     />
     <component id="core:version" class="core.version" />
     
+    <!-- core.arrays -->    
+    
+    <component id="core.arrays:contains"   class="core.arrays.contains"   />
+    <component id="core.arrays:initialize" class="core.arrays.initialize" />
+    <component id="core.arrays:repeat"     class="core.arrays.repeat"     />
+    <component id="core.arrays:spliceInto" class="core.arrays.spliceInto" />
+    
     <!-- core.strings -->
     
     <component id="core.strings:center"               class="core.strings.center"              />
