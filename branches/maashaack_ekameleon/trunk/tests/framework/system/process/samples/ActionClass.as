@@ -36,6 +36,7 @@
 package system.process.samples 
 {    import system.events.EventDispatcher;
     import system.process.Action;
+    import system.process.TaskPhase;
     import system.signals.Signal;
     import system.signals.Signaler;
 
@@ -54,6 +55,11 @@ package system.process.samples
         public function set finishIt( signal:Signaler ):void
         {
             _finishIt = signal ;
+        }
+        
+        public function get phase():String
+        {
+            return _phase ;
         }
         
         public function get running():Boolean
@@ -92,5 +98,6 @@ package system.process.samples
         }
         
         private var _finishIt:Signaler = new Signal() ;
+        private var _phase:String      = TaskPhase.INACTIVE ;
         private var _startIt:Signaler = new Signal() ;
     }}

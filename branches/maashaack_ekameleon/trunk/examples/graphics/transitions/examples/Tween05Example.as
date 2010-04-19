@@ -151,8 +151,8 @@ package examples
         
         protected function progress( e:ActionEvent ):void 
         {
-            var target:Object = e.target as Sequencer ;
-            trace ( "# progress : " + (getTimer() - timer) + " ms, size : " + target.size()  ) ;
+            var target:Sequencer = e.target as Sequencer ;
+            trace ( "# progress : " + (getTimer() - timer) + " ms, size : " + target.length  ) ;
         }
         
     }

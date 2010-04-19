@@ -260,74 +260,94 @@ package system.process
         }
         
         /**
-         * Notify an ActionEvent when the process is changed.
+         * Notify when the process is changed.
          */
         public function notifyChanged():void 
         {
-            _changeIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.CHANGE  ) )
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.CHANGE , this ) ) ;
+                _changeIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.CHANGE  ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.CHANGE , this ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process is cleared.
+         * Notify when the process is cleared.
          */
         public function notifyCleared():void 
         {
-            _clearIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.CLEAR ) )
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.CLEAR , this ) ) ;
+                _clearIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.CLEAR ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.CLEAR , this ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process info is changed.
+         * Notify a specific information when the process is changed.
          */
         public function notifyInfo( info:* ):void
         {
-            _infoIt.emit( this , info ) ;
-            if ( hasEventListener( ActionEvent.INFO ) )
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.INFO , this , info ) ) ;
+                _infoIt.emit( this , info ) ;
+                if ( hasEventListener( ActionEvent.INFO ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.INFO , this , info ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process is looped.
+         * Notify when the process is looped.
          */
         public function notifyLooped():void 
         {
-            _loopIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.LOOP ) )
+            _phase = TaskPhase.RUNNING ;
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.LOOP , this ) ) ;
+                _loopIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.LOOP ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.LOOP , this ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process is in progress.
+         * Notify when the process is in progress.
          */
         public function notifyProgress():void
         {
-            _progressIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.PROGRESS ) )
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.PROGRESS , this ) ) ;
+                _progressIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.PROGRESS ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.PROGRESS , this ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process is resumed.
+         * Notify when the process is resumed.
          */
         public function notifyResumed():void
         {
-            _resumeIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.RESUME ) )
+            _phase  = TaskPhase.RUNNING ;
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.RESUME , this ) ) ;
+                _resumeIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.RESUME ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.RESUME , this ) ) ;
+                }
             }
         }
         
@@ -337,22 +357,30 @@ package system.process
         public function notifyStopped():void
         {
             setRunning( false ) ;
-            _stopIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.STOP ) )
+            _phase  = TaskPhase.STOPPED ;
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.STOP , this ) ) ;
+                _stopIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.STOP ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.STOP , this ) ) ;
+                }
             }
         }
         
         /**
-         * Notify an ActionEvent when the process is out of time.
+         * Notify when the process is out of time.
          */
         public function notifyTimeOut():void
         {
-            _timeoutIt.emit( this ) ;
-            if ( hasEventListener( ActionEvent.TIMEOUT ) )
+            _phase  = TaskPhase.TIMEOUT ;
+            if ( !isLocked() )
             {
-                dispatchEvent( new ActionEvent( ActionEvent.TIMEOUT , this ) ) ;
+                _timeoutIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.TIMEOUT ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.TIMEOUT , this ) ) ;
+                }
             }
         }
         
