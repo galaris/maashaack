@@ -289,6 +289,7 @@
     <component id="system.process:Chain"                  class="system.process.Chain"                  />
     <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
     <component id="system.process:CoreActionLoader"       class="system.process.CoreActionLoader"       />
+    <component id="system.process:DelayedTask"            class="system.process.DelayedTask"            />
     <component id="system.process:Initializer"            class="system.process.Initializer"            />
     <component id="system.process:Lockable"               class="system.process.Lockable"               />
     <component id="system.process:Pause"                  class="system.process.Pause"                  />
@@ -300,6 +301,7 @@
     <component id="system.process:Stoppable"              class="system.process.Stoppable"              />
     <component id="system.process:Task"                   class="system.process.Task"                   />
     <component id="system.process:TaskGroup"              class="system.process.TaskGroup"              />
+    <component id="system.process:TaskPhase"              class="system.process.TaskPhase"              />
     <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
     
     <!-- system.reflection -->
