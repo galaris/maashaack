@@ -85,6 +85,15 @@ package system.process
         public var task:Action ;
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new DelayedTask( task , delay ) ;
+        }
+        
+        /**
          * Resume the chain.
          */
         public function resume():void 
