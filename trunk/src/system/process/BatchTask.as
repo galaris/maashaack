@@ -198,10 +198,7 @@ package system.process
             {
                 setRunning(true) ;
                 _stopped = false ;
-                if ( !isLocked() )
-                {
-                    notifyResumed() ;
-                }
+                notifyResumed() ;
                 if ( _actions.length > 0 )
                 {
                     var a:Action ;
@@ -294,10 +291,7 @@ package system.process
                 }
                 setRunning(false) ;
                 _stopped = true ;
-                if ( !isLocked() )
-                {
-                    notifyStopped() ;
-                }
+                notifyStopped() ;
             }
         }
         

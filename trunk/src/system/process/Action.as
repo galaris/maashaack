@@ -65,6 +65,12 @@ package system.process
         function set finishIt( signal:Signaler ):void ;
         
         /**
+         * The current phase of the action.
+         * @see system.process.TaskPhase
+         */
+        function get phase():String ;
+        
+        /**
          * Indicates <code class="prettyprint">true</code> if the action is in progress.
          */
         function get running():Boolean ;

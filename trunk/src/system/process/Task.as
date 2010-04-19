@@ -71,11 +71,12 @@ package system.process
         public function Task( global:Boolean = false , channel:String = null ) 
         {
             super( global , channel ) ;
+            _phase  = TaskPhase.INACTIVE ;
             _logger = Log.getLogger( Reflection.getClassPath(this) ) ;
         }
         
         /**
-         * This signal emit when the notifyFinished method is invoked. 
+         * This signal emit when the notifyFinished method is invoked.
          */
         public function get finishIt():Signaler
         {
@@ -104,6 +105,15 @@ package system.process
         public function set logger( log:Logger ):void
         {
             _logger = log || Log.getLogger( Reflection.getClassPath(this) ) ;
+        }
+        
+        /**
+         * The current phase of the action.
+         * @see system.process.TaskPhase
+         */
+        public function get phase():String
+        {
+            return _phase ;
         }
         
         /**
@@ -145,11 +155,13 @@ package system.process
         public function notifyFinished():void 
         {
             setRunning( false ) ;
+            _phase = TaskPhase.FINISHED ;
             if ( hasEventListener( _sTypeFinish ) )
             {
                 dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
             }
             _finishIt.emit( this ) ;
+            _phase = TaskPhase.INACTIVE ;
         }
         
         /**
@@ -158,6 +170,7 @@ package system.process
         public function notifyStarted():void
         {
             setRunning( true ) ;
+            _phase  = TaskPhase.RUNNING ;
             _startIt.emit( this ) ;
             if ( hasEventListener( _sTypeStart ) )
             {
@@ -196,6 +209,11 @@ package system.process
          * @private
          */
         private var _logger:Logger ;
+        
+        /**
+         * @private
+         */
+        protected var _phase:String ;
         
         /**
          * @private
