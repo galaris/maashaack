@@ -66,6 +66,7 @@ package system.process
                 suite.addTestSuite( ChainTest ) ;
                 suite.addTestSuite( CoreActionTest ) ;
                 suite.addTestSuite( CoreActionLoaderTest ) ;
+                suite.addTestSuite( DelayedTaskTest ) ;
                 suite.addTestSuite( InitializerTest ) ;
                 suite.addTestSuite( LockableTest  );
                 suite.addTestSuite( PauseTest ) ;
