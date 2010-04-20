@@ -44,7 +44,7 @@ package graphics.display
             var suite:TestSuite = new TestSuite("graphics.display package tests");
             
             suite.addTestSuite( DisplayObjectContainersTest ) ;
-            // FIXME suite.addTestSuite( DisplayObjectsTest ) ;
+            suite.addTestSuite( DisplayObjectsTest ) ;
             
             suite.addTestSuite( PatternTest ) ;
             suite.addTestSuite( PerlinNoiseTest ) ;
