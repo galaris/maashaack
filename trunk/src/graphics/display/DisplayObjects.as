@@ -46,6 +46,45 @@ package graphics.display
     
     /**
      * The DisplayObject tool class.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import graphics.Align ;
+     * import graphics.display.DisplayObjects ;
+     * 
+     * import flash.display.Shape ;
+     * import flash.geom.Rectangle ;
+     * 
+     * stage.scaleMode = "noScale" ;
+     * stage.align     = "tl" ;
+     * 
+     * var background:Shape = new Shape() ;
+     * 
+     * background.graphics.beginFill( 0x333333 ) ;
+     * background.graphics.drawRect(0,0,100,100) ;
+     * 
+     * background.x = 100 ;
+     * background.y = 100 ;
+     * 
+     * addChild( background ) ;
+     * 
+     * var shape:Shape = new Shape() ;
+     * 
+     * shape.graphics.beginFill( 0x666666 ) ;
+     * shape.graphics.drawRect(0,0,100,100) ;
+     * 
+     * shape.x = 100 ;
+     * shape.y = 100 ;
+     * 
+     * addChild( shape ) ;
+     *
+     * var area:Rectangle = new Rectangle(100,100,100,100) ;
+     *  
+     * DisplayObjects.resize(shape, 50, 50) ;
+     * DisplayObjects.align(shape, area, Align.CENTER) ;
+     * 
+     * trace( DisplayObjects.originalHeight(shape) ) ; // 100
+     * trace( DisplayObjects.originalWidth(shape) ) ; // 100
+     * </pre>
      */
     public class DisplayObjects
     {
@@ -59,11 +98,19 @@ package graphics.display
          * <p>center : Align.CENTER, Align.CENTER_LEFT, Align.CENTER_RIGHT</p>
          * <p>top    : Align.TOP   , Align.TOP_LEFT   , Align.TOP_RIGHT</p>
          * @param offset The offset point to translate the target after the alignment process.
-         * @param propWidth : The name of the width property of the target reference (default "width").
-         * @param propHeight : The name of the height property of the target reference (default "height").
+         * @param propWidth The name of the width property of the target reference (default "width").
+         * @param propHeight The name of the height property of the target reference (default "height").
          */
         public static function align( target:DisplayObject, bounds:Rectangle, align:Number = 10 , offset:Point = null , propWidth:String = "width" , propHeight:String = "height" ):void
         {
+            if ( !target )
+            {
+                throw new ArgumentError( "DisplayObjects.align failed, the target DisplayObject argument not must be null.") ;
+            }
+            if ( !target )
+            {
+                throw new ArgumentError( "DisplayObjects.align failed, the bounds Rectangle argument not must be null.") ;
+            }
             var dh:Number = bounds.height - target[propHeight] ;
             var dw:Number = bounds.width  - target[propWidth]  ;
             var dx:Number = bounds.x + ( offset ? offset.x : 0 ) ;
@@ -185,6 +232,10 @@ package graphics.display
          */
         public static function resize( target:DisplayObject, width:Number, height:Number, aspectRatio:* = null ):void
         {
+            if ( !target )
+            {
+                throw new ArgumentError( "DisplayObjects.resize failed, the target DisplayObject argument not must be null.") ;
+            }
             if ( aspectRatio == null )
             {
                 target.width  = width ;
