@@ -151,9 +151,29 @@ package graphics.display
          * @param from The original coordinate display system.
          * @param to The new coordinate display system.
          */
-        public static function localToLocal(point:Point, from:DisplayObject, to:DisplayObject ):Point
+        public static function localToLocal( point:Point , from:DisplayObject, to:DisplayObject ):Point
         {
             return to.globalToLocal( from.localToGlobal(point) ) ;
+        }
+        
+        /**
+         * Returns the original height in pixels of the specified DisplayObject.
+         * @param target The passed-in display to check.
+         * @return the original height in pixels of the specified DisplayObject.
+         */
+        public static function originalHeight( target:DisplayObject ):Number 
+        {
+            return target.height / target.scaleY ;
+        }
+        
+        /**
+         * Returns the original width in pixels of the specified DisplayObject.
+         * @param target The passed-in display to check.
+         * @return the original width in pixels of the specified DisplayObject.
+         */
+        public static function originalWidth( target:DisplayObject ):Number 
+        {
+            return target.width / target.scaleX ;
         }
         
         /**

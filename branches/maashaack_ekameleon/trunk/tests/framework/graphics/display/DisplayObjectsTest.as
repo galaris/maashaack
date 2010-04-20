@@ -35,12 +35,58 @@
 package graphics.display 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import flash.display.Shape;
+
     public class DisplayObjectsTest extends TestCase 
     {
         public function DisplayObjectsTest(name:String = "")
         {
             super(name);
+        }
+        
+        public var shape:Shape ;
+        
+        public function setUp():void
+        {
+            shape = new Shape() ;
+        }
+        
+        public function tearDown():void
+        {
+            shape = null ;
+        }
+        
+        public function testOriginalHeight():void
+        {
+            assertEquals( 0 , DisplayObjects.originalHeight( shape ) ) ; 
+            
+            shape.graphics.beginFill(0xFF0000) ;
+            shape.graphics.drawRect(0,0,100,50) ;
+            
+            assertEquals( 50 , DisplayObjects.originalHeight( shape ) ) ;
+            
+            shape.scaleX = 2 ;
+            shape.scaleY = 2 ;
+            
+            assertEquals( 100 , shape.height ) ;
+            assertEquals(  50 , DisplayObjects.originalHeight( shape ) ) ;
+        }
+        
+        public function testOriginalWidth():void
+        {
+            assertEquals( 0 , DisplayObjects.originalWidth( shape ) ) ; 
+            
+            shape.graphics.beginFill(0xFF0000) ;
+            shape.graphics.drawRect(0,0,100,50) ;
+            
+            assertEquals( 100 , DisplayObjects.originalWidth( shape ) ) ;
+            
+            shape.scaleX = 2 ;
+            shape.scaleY = 2 ;
+            
+            assertEquals( 200 , shape.width ) ;
+            assertEquals( 100 , DisplayObjects.originalWidth( shape ) ) ;
         }
     }
 }
