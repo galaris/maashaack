@@ -1,0 +1,113 @@
+#summary how the maashaack projects are organized.
+
+== Introduction ==
+
+The main goal of maashaack is to not force something into you the developer<br>
+but to allow you to pick what you want for your needs.
+
+Based on this principle, most of our libraries for the framework are interchangeable,<br>
+don't like our version of signals and prefer to use as3-signals, you can<br>
+even us have different libraries: a full blown system.data and a lighter system.data based on core.data<br>
+
+TODO
+
+=== if you are a User ===
+
+You will have mainly to deal with SWC libraries.
+
+With the default maashaack.swc you will have everything in one file,
+but you will be able to select between
+ * maashaack-speedy.swc : less features, more speed of execution
+ * maashaack-10.swc : optimized for Flash Player 10
+ * maashaack-10-1.swc : optimized for Flash Player 10.1
+ * etc.
+
+Or you will be able to assemble different SWC depending on your needs<br>
+to compose your own custom "maashaack" library.
+
+Let's say you need general classes like Version and some utils to dump objects<br>
+in a terminal-like interface, then you will assemble
+ * system.swc
+ * system.terminals.swc
+ * system.serializer.eden-light.swc
+ * libraries.console1.swc
+
+Now now, but later we may even provide a custom tool<br>
+that will allow you to select what you need in a GUI<br>
+and have it compile a custom SWC for you.
+
+=== if you are a Committer ===
+
+You will have to use gclient to be able to work on the source code.
+
+If you want to work on all the different projects fused as if it was one big project<br>
+you will select the "maashaack" solution, and all the different libraries will get<br>
+automatically organized in a `/src` folder.
+
+something looking like that
+{{{
+maashaack
+           |_ build
+           |_ build.xml
+           |_ DEPS
+           |_ src
+           |     |_ core
+           |     |     |_ strings
+           |     |
+           |     |_ system
+           |            |_ terminals
+           | ...
+           |_ tests
+                  |_ ...
+}}}
+
+If you want to work on the different projects as independent projects<br>
+you will select the "maashaackSA" solution (SA = StandAlone)<br>
+and all the projects will get automatically organized in groups: packages, libraries, tools, etc.<br>
+and then project name, and then their own respective `/src` directory.
+
+something looking like that
+{{{
+maashaackSA
+           |_ build
+           |_ build.xml
+           |_ DEPS
+           |_ libraries
+           |     |_ astuce
+           |     |        |_ build
+           |     |        |_ build.xml
+           |     |        |_ src
+           |     |        |     |_ ...
+           |     |        |
+           |     |        |_ tests
+           |     |              |_ ...
+           |     |
+           |     |_ v8benchmark
+           |
+           |_ packages
+           |      |_ core
+           |     |        |_ build
+           |     |        |_ build.xml
+           |     |        |_ src
+           |     |        |     |_ ...
+           |     |        |
+           |     |        |_ tests
+           |     |              |_ ...
+           |     |_ system
+           |     |        |_ build
+           |     |        |_ build.xml
+           |     |        |_ src
+           |     |        |     |_ ...
+           |     |        |
+           |     |        |_ tests
+           |     |              |_ ...
+           |     |_ system_terminals
+           |     |        |_ build
+           |     |        |_ build.xml
+           |     |        |_ src
+           |     |        |     |_ ...
+           |     |        |
+           |     |        |_ tests
+           |     |              |_ ...
+           | ...
+}}}
