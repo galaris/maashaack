@@ -39,6 +39,10 @@ then you will assemble
  * system.cli.abc
  * etc.
 
+If you really want to access the source code,<br>
+you can always browse it on google code<br>
+and in a near futur we will also provide a nighty zip of the sources<br>
+(on a 3rd party server or maybe google code if they implement the feature first ;)).
 
 Now now, but later we may even provide a custom tool<br>
 that will allow you to select what you need in a GUI<br>
@@ -128,6 +132,8 @@ this solution can generate all the independent libraries: core.swc, system.swc, 
 
 == Details ==
 
+TODO
+
 === Definitions ===
 
 A *Solution* is a root configuration to be used with *gclient*<br>
@@ -141,10 +147,48 @@ those sources are considered of general use and part of a global application fra
 
 A *Library* is an AS3 library that fit in the package *library*<br>
 those source are considered as 3rd party or specific utilities,<br>
-for example: the zlib library can be found in the *library.zlib* package.
+for example:<br>
+the zlib library can be found in the *library.zlib* package<br>
+and will generate *library.zlib.swc*.
 
 A *Tool* is an AS3 based application that live in its own package (and sometime its own repository)<br>
 it can be a Tamarin or an AIR project (or anything else),<br>
-for example: the makeSWC command line tool can be found in the `/svn/tools/makeswc` directory.
+for example:<br>
+the makeSWC command line tool can be found in the `/svn/tools/makeswc` directory<br>
+the package could be something like *tamarin.makeswc*<br>
+and could generate *makeswc.exe* (windows) , *makeswc* (OS X) and *makeswc.bin* (Linux).
 
+
+TODO
+
+
+=== Directories and Project setup ===
+
+TODO
+
+=== Add your Project to maashaack ===
+
+One of our main goal is to try to define a standard unified library for AS3,<br>
+if you think alike and want to be friend with maashaack, here one way to do it<br>
+ * contact us (yes we can help)
+ * apply the directories and project setup to your own project
+ * follow the packages organization, if you have a RAR library for ex, define it in *library.rarlib* instead of *com.joe.util.RAR*
+ * and just contact us again so we sync with your project
+
+with that, next time the maashaack sources are compiled,<br>
+even if you project reside in an external repository,<br>
+your particular library *library.rarlib* will be compiled<br>
+and distributed as *library.rarlib.swc* among the other libraries.
+
+Our idea is that it is simpler for the AS3 developers in general<br>
+to look for libraries in a `library.*` and keep the whole thing clean and organized.
+
+Also as a community we think it would help to reach a certain maturity,<br>
+like Perl or Python for example, but we're not there yet.
+
+TODO
  
+
+=== Custom Solution ===
+
+TODO
