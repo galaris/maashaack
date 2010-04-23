@@ -11,6 +11,7 @@ even us have different libraries: a full blown system.data and a lighter system.
 
 TODO
 
+
 === if you are a User ===
 
 You will have mainly to deal with SWC libraries.
@@ -25,20 +26,28 @@ but you will be able to select between
 Or you will be able to assemble different SWC depending on your needs<br>
 to compose your own custom "maashaack" library.
 
-Let's say you need general classes like Version and some utils to dump objects<br>
+Let's say for a SWF project you need general classes like Version and some utils to dump objects<br>
 in a terminal-like interface, then you will assemble
  * system.swc
  * system.terminals.swc
  * system.serializer.eden-light.swc
  * libraries.console1.swc
 
+Let's say for a Tamarin project you need command line utilities and classes without events<br>
+then you will assemble
+ * system.abc
+ * system.cli.abc
+ * etc.
+
+
 Now now, but later we may even provide a custom tool<br>
 that will allow you to select what you need in a GUI<br>
-and have it compile a custom SWC for you.
+and have it compile a custom SWC/SWF/ABC for you.
+
 
 === if you are a Committer ===
 
-You will have to use gclient to be able to work on the source code.
+You will have to use *gclient* to be able to work on the source code.
 
 If you want to work on all the different projects fused as if it was one big project<br>
 you will select the "maashaack" solution, and all the different libraries will get<br>
@@ -60,6 +69,8 @@ maashaack
            |_ tests
                   |_ ...
 }}}
+
+this solution can generate all the different maashaack SWCs: maashaack-speedy.swc , maashaack-10.swc, etc.
 
 If you want to work on the different projects as independent projects<br>
 you will select the "maashaackSA" solution (SA = StandAlone)<br>
@@ -111,3 +122,29 @@ maashaackSA
            |     |              |_ ...
            | ...
 }}}
+
+this solution can generate all the independent libraries: core.swc, system.swc, system.terminals.swc, etc.
+
+
+== Details ==
+
+=== Definitions ===
+
+A *Solution* is a root configuration to be used with *gclient*<br>
+you can find the different solutions available in `/svn/configs`.
+
+A *Project* is an independent *Package*, *Library* or *Tool*<br>
+you can find them respectively in `/svn/packages`, `/svn/libraries` and `/svn/tools`.
+
+A *Package* is an AS3 package that fit in one of the root packages as *core*, *system*, etc.<br>
+those sources are considered of general use and part of a global application framework.
+
+A *Library* is an AS3 library that fit in the package *library*<br>
+those source are considered as 3rd party or specific utilities,<br>
+for example: the zlib library can be found in the *library.zlib* package.
+
+A *Tool* is an AS3 based application that live in its own package (and sometime its own repository)<br>
+it can be a Tamarin or an AIR project (or anything else),<br>
+for example: the makeSWC command line tool can be found in the `/svn/tools/makeswc` directory.
+
+ 
