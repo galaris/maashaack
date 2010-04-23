@@ -35,7 +35,7 @@
 
 package graphics.drawing 
 {
-    import graphics.geom.Rectangle;
+    import flash.geom.Rectangle;
     
     /**
      * This tool class transform a <code class="prettyprint">Canvas</code> object with static methods.
@@ -72,7 +72,6 @@ package graphics.drawing
          */
         public static function createPinch( area:* , xAmount:Number, yAmount:Number):Function 
         {
-            
             var r:Rectangle = new Rectangle( area.x , area.y , area.width, area.height) ;
             
             var w:Number = r.width ;
@@ -86,15 +85,14 @@ package graphics.drawing
             
             return function( x:Number ,y:Number ):Object 
             {
-                
                 var newX:Number ;
                 var newY:Number ;
                 
-                if( ! r.containsCoordinate(x, y) ) 
+                if( ! r.contains(x, y) ) 
                 {
                     return { x:x,y:y } ;
                 }
-                                
+                
                 if(!isNaN(xAmount)) 
                 {
                     var y2:Number = (y - area.y )/h2-1;
@@ -115,7 +113,6 @@ package graphics.drawing
                 {
                     newY = y;
                 }
-                
                 return { x : newX ,  y : newY } ;
             } ;
         }
@@ -141,7 +138,7 @@ package graphics.drawing
             
             return function(x:Number,y:Number):Object 
             {
-                if( ! r.containsCoordinate(x, y) ) 
+                if( ! r.contains(x, y) ) 
                 {
                     return { x:x ,y:y } ;
                 }
@@ -158,7 +155,7 @@ package graphics.drawing
         public static function createWhirl( centerX:Number, centerY:Number, radius:Number, amount:Number):Function 
         {
             var radius2:Number = radius * radius ;
-            var rotate:Number  = amount*Math.PI/180 ;
+            var rotate:Number  = amount * Math.PI/180 ;
             return function ( x:Number ,y:Number ):Object 
             {
                 var x2:Number = x - centerX ;
