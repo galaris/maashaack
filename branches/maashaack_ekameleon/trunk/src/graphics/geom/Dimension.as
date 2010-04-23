@@ -36,7 +36,9 @@
 package graphics.geom
 {
     import system.Reflection;
-    
+
+    import flash.geom.Rectangle;
+
     /**
      * The <code class="prettyprint">Dimension</code> class encapsulates the width and height of an object.
      */

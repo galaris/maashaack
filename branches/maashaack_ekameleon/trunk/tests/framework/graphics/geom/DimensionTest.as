@@ -36,7 +36,9 @@
 package graphics.geom 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import flash.geom.Rectangle;
+
     public class DimensionTest extends TestCase 
     {
         public function DimensionTest( name:String = "" )
