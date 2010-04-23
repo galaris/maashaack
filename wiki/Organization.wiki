@@ -77,9 +77,9 @@ maashaack
 this solution can generate all the different maashaack SWCs: maashaack-speedy.swc , maashaack-10.swc, etc.
 
 If you want to work on the different projects as independent projects<br>
-you will select the "maashaackSA" solution (SA = StandAlone)<br>
+you will select the "maashaackSA" solution (SA = !StandAlone)<br>
 and all the projects will get automatically organized in groups: packages, libraries, tools, etc.<br>
-and then project name, and then their own respective `/src` directory.
+and then the respective project name, and then their own `/src` directory.
 
 something looking like that
 {{{
