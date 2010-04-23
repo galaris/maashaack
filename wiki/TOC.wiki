@@ -19,6 +19,7 @@
    * [Configuration HOWTO Configure]
    * [Serialization HOWTO use serialization]
  * [Coders Programming maashaack]
+   * [Organization Organization]
    * [Code101 Get the code]
    * [Tools Get the tools]
    * [Contributors HOWTO contribute]
