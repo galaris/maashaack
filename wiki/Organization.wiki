@@ -44,7 +44,7 @@ you can always browse it on google code<br>
 and in a near futur we will also provide a nighty zip of the sources<br>
 (on a 3rd party server or maybe google code if they implement the feature first ;)).
 
-Now now, but later we may even provide a custom tool<br>
+Not now, but later we may even provide a custom tool<br>
 that will allow you to select what you need in a GUI<br>
 and have it compile a custom SWC/SWF/ABC for you.
 
