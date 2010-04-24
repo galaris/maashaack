@@ -131,7 +131,7 @@
     <component id="graphics.geom:Quaternion"     class="graphics.geom.Quaternion" />
     <component id="graphics.geom:Quaternions"    class="graphics.geom.Quaternions" />
     <component id="graphics.geom:Ray"            class="graphics.geom.Ray" />
-    <component id="graphics.geom:Rectangle"      class="graphics.geom.Rectangle" />
+    <component id="graphics.geom:Rectangles"     class="graphics.geom.Rectangles" />
     <component id="graphics.geom:RegularPolygon" class="graphics.geom.RegularPolygon" />
     <component id="graphics.geom:Ring"           class="graphics.geom.Ring" />
     <component id="graphics.geom:UV"             class="graphics.geom.UV" />
