@@ -95,10 +95,10 @@ package system
         public function testInitialize():void
         {
             ArrayAssert.assertEquals( [] , Arrays.initialize() ) ;
-            ArrayAssert.assertEquals( [null  , null , null ] , Arrays.initialize(3) ) ;
+            ArrayAssert.assertEquals( [ null , null , null ] , Arrays.initialize(3) ) ;
             ArrayAssert.assertEquals( [ 0    , 0    , 0    ] , Arrays.initialize(3,0) ) ;
             ArrayAssert.assertEquals( [ true , true , true ] , Arrays.initialize(3,true) ) ;
-            ArrayAssert.assertEquals( [ "" , "" , "" , ""  ] , Arrays.initialize(4,"") ) ;
+            ArrayAssert.assertEquals( [ ""   , ""   , ""  , ""  ] , Arrays.initialize(4,"") ) ;
         }
         
         public function testRepeat():void
@@ -106,6 +106,50 @@ package system
             var ar:Array =  [2, 3, 4] ;
             ArrayAssert.assertEquals( [2, 3, 4] , Arrays.repeat(ar, 0) ) ;
             ArrayAssert.assertEquals( [2,3,4,2,3,4,2,3,4] , Arrays.repeat(ar, 3) ) ; 
+        }
+        
+        public function testReduce1():void
+        {
+            var ar:Array =  [0,1,2,3,4] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
+                return previousValue + currentValue ;
+            } ;
+            assertEquals( 10 , Arrays.reduce( ar , callback )      , "#1" ) ;
+            assertEquals( 20 , Arrays.reduce( ar , callback , 10 ) , "#2" ) ;
+        }
+        
+        public function testReduce2():void
+        {
+            var ar:Array =  [[0,1], [2,3], [4,5]] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                return previousValue.concat( currentValue ) ;
+            } ;
+            ArrayAssert.assertEquals( [0, 1, 2, 3, 4, 5] , Arrays.reduce( ar , callback , [] ) ) ;
+        }
+        
+        public function testReduceRight1():void
+        {
+            var ar:Array =  [0,1,2,3,4] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
+                return previousValue + currentValue ;
+            } ;
+            assertEquals( 10 , Arrays.reduceRight( ar , callback )      , "#1" ) ;
+            assertEquals( 20 , Arrays.reduceRight( ar , callback , 10 ) , "#2" ) ;
+        }
+        
+        public function testReduceRight2():void
+        {
+            var ar:Array =  [[0,1], [2,3], [4,5]] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                return previousValue.concat( currentValue ) ;
+            } ;
+            ArrayAssert.assertEquals( [4,5,2,3,0,1] , Arrays.reduceRight( ar , callback , [] ) ) ;
         }
         
         public function testSpliceInto():void
