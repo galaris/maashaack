@@ -35,24 +35,28 @@
 
 package core.arrays
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Splices an array (removes an element) and returns either the entire array or the removed element.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.arrays.pierce ;
+     * 
+     * var ar:Array = [0,1,2,3,4,5] ; 
+     * trace( ar ) ; // 0,1,2,3,4,5
+     * trace( "pierce( ar, 1 ) : " + pierce( ar, 1 ) ) ; // pierce(ar,1) : 1
+     * trace( "pierce( ar, 1 ) : " + pierce( ar, 1 ) ) ; // pierce(ar,1) : 2
+     * trace( ar ) ; // 0,3,4,5
+     * trace( pierce( ar, 1 , true ) ) ; // 0,4,5
+     * </pre>
+     * @param ar the array.
+     * @param index the index of the array element to remove from the array (default 0).
+     * @param flag a boolean <code>true</code> to return a new spliced array of false to return the removed element.
+     * @return The newly spliced array or the removed element in function of the flag parameter.
+     */
+    public function pierce( ar:Array, index:uint = 0 , flag:Boolean = false ):*
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( containsTest    ) ;
-            suite.addTestSuite( initializeTest  ) ;
-            suite.addTestSuite( pierceTest      ) ;
-            suite.addTestSuite( reduceTest      ) ;
-            suite.addTestSuite( reduceRightTest ) ;
-            suite.addTestSuite( repeatTest      ) ;
-            suite.addTestSuite( spliceIntoTest  ) ;
-            
-            return suite;
-        }
+        var item:* = ar[index] ;
+        ar.splice( index , 1 ) ;
+        return (flag) ? ar : item ;
     }
 }
