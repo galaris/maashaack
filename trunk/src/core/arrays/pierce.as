@@ -41,11 +41,15 @@ package core.arrays
      * <pre class="prettyprint">
      * import core.arrays.pierce ;
      * 
-     * var ar:Array = [0,1,2,3,4,5] ; 
+     * var ar:Array = [0,1,2,3,4,5] ;
+     *  
      * trace( ar ) ; // 0,1,2,3,4,5
+     * 
      * trace( "pierce( ar, 1 ) : " + pierce( ar, 1 ) ) ; // pierce(ar,1) : 1
      * trace( "pierce( ar, 1 ) : " + pierce( ar, 1 ) ) ; // pierce(ar,1) : 2
+     * 
      * trace( ar ) ; // 0,3,4,5
+     * 
      * trace( pierce( ar, 1 , true ) ) ; // 0,4,5
      * </pre>
      * @param ar the array.

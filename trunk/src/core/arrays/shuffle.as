@@ -35,25 +35,34 @@
 
 package core.arrays
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    /**
+     * Shuffles an array.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.arrays.shuffle ;
+     * 
+     * var ar:Array = [0,1,2,3,4,5,6,7,8,9] ;
+     * 
+     * trace( ar ) ;
+     * shuffle( ar ) ;
+     * trace( ar ) ;
+     * </pre>
+     * @return the shuffled array.
+     */
+    public function shuffle( ar:Array ):Array 
     {
-        public static function suite():ITest
+        var tmp:Array = [] ;
+        var len:int   = ar.length;
+        var index:int = len - 1 ;
+        for ( var i:int ; i < len ; i++ ) 
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( containsTest    ) ;
-            suite.addTestSuite( initializeTest  ) ;
-            suite.addTestSuite( pierceTest      ) ;
-            suite.addTestSuite( reduceTest      ) ;
-            suite.addTestSuite( reduceRightTest ) ;
-            suite.addTestSuite( repeatTest      ) ;
-            suite.addTestSuite( shuffleTest     ) ;
-            suite.addTestSuite( spliceIntoTest  ) ;
-            
-            return suite;
+            tmp[tmp.length] = pierce( ar , Math.round( Math.random() * index ) , false ) ;
+            index-- ;
         }
+        while(--len > -1) 
+        {
+            ar[len] = tmp[len] ;
+        }
+        return ar ;
     }
 }
