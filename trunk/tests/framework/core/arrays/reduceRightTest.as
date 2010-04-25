@@ -45,7 +45,7 @@ package core.arrays
             super( name ) ;
         }
         
-        public function testReduce1():void
+        public function testReduceRight1():void
         {
             var ar:Array =  [0,1,2,3,4] ;
             var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
@@ -57,7 +57,7 @@ package core.arrays
             assertEquals( 20 , reduceRight( ar , callback , 10 ) , "#2" ) ;
         }
         
-        public function testReduce2():void
+        public function testReduceRight2():void
         {
             var ar:Array =  [[0,1], [2,3], [4,5]] ;
             var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
