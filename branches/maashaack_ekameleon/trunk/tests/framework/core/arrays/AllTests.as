@@ -44,11 +44,12 @@ package core.arrays
         {
             var suite:TestSuite = new TestSuite("core.arrays package tests");
             
-            suite.addTestSuite( containsTest   ) ;
-            suite.addTestSuite( initializeTest ) ;
-            suite.addTestSuite( reduceTest     ) ;
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
+            suite.addTestSuite( containsTest    ) ;
+            suite.addTestSuite( initializeTest  ) ;
+            suite.addTestSuite( reduceTest      ) ;
+            suite.addTestSuite( reduceRightTest ) ;
+            suite.addTestSuite( repeatTest      ) ;
+            suite.addTestSuite( spliceIntoTest  ) ;
             
             return suite;
         }

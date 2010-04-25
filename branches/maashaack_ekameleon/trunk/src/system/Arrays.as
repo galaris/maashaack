@@ -38,9 +38,10 @@ package system
     import core.arrays.contains;
     import core.arrays.initialize;
     import core.arrays.reduce;
+    import core.arrays.reduceRight;
     import core.arrays.repeat;
     import core.arrays.spliceInto;
-
+    
     /**
      * A static class for Array utilities.
      */
@@ -74,7 +75,7 @@ package system
                 var i:uint;
                 var copy:Array = [];
                 
-                for( i=0; i<ar.length; i++ )
+                for( i=0 ; i<ar.length ; i++ )
                 {
                     copy[ i ] = ar[ i ];
                 }
@@ -287,49 +288,7 @@ package system
          * @param callback Function to execute on each value in the Array.
          * @param initialValue The object to use as the first argument to the first call of the callback. 
          */
-        public static function reduceRight( ar:Array , callback:Function, initialValue:* = undefined ):*
-        {
-            var size:int = ar.length ;
-            if ( callback == null )
-            {
-                throw new ArgumentError("Arrays.reduceRight failed, the callback method not must be 'null' or 'undefined'.") ; 
-            }
-            if ( size == 0 )
-            {
-                throw new Error("Arrays.reduceRight failed, the array contains no values.") ;
-            }
-            var i:int = size - 1;
-            var r:*   ;
-            if ( initialValue != undefined )
-            {
-                r = initialValue ;
-            }
-            else
-            {
-                do
-                {
-                    if ( i in ar )
-                    {
-                        r = ar[i--] ;
-                        break ;
-                    }
-                    if ( --i < 0 )
-                    {
-                        throw new Error("Array.reduce failed, if array contains no values, no initial value to return.") ;    
-                    }
-                }
-                while( true ) ;
-            }
-            
-            for ( ;i >= 0; i-- )
-            {
-                if (i in ar)
-                {
-                    r = callback.call(null, r, ar[i], i, ar);
-                }
-            }
-            return r;
-        }
+        public static const reduceRight:Function = core.arrays.reduceRight ;
         
         /**
          * Returns a new Array who contains the specified Array elements repeated count times.
