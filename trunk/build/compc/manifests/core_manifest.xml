@@ -12,6 +12,7 @@
     
     <component id="core.arrays:contains"    class="core.arrays.contains"    />
     <component id="core.arrays:initialize"  class="core.arrays.initialize"  />
+    <component id="core.arrays:pierce"      class="core.arrays.pierce"      />
     <component id="core.arrays:repeat"      class="core.arrays.repeat"      />
     <component id="core.arrays:reduce"      class="core.arrays.reduce"      />
     <component id="core.arrays:reduceRight" class="core.arrays.reduceRight" />
