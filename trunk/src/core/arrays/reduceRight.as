@@ -123,7 +123,7 @@ package core.arrays
      * @param callback Function to execute on each value in the Array.
      * @param initialValue The object to use as the first argument to the first call of the callback.
      */
-    public function reduceRight( ar:Array , callback:Function , initialValue:* = undefined ):*
+    public function reduceRight( ar:Array , callback:Function , initialValue:* = null ):*
     {
         var size:int = ar.length ;
         if ( callback == null )
