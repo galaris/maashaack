@@ -33,24 +33,38 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.arrays
+package core.arrays 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class reduceTest extends TestCase 
     {
-        public static function suite():ITest
+        public function reduceTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
-            
-            suite.addTestSuite( containsTest   ) ;
-            suite.addTestSuite( initializeTest ) ;
-            suite.addTestSuite( reduceTest     ) ;
-            suite.addTestSuite( repeatTest     ) ;
-            suite.addTestSuite( spliceIntoTest ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testReduce1():void
+        {
+            var ar:Array =  [0,1,2,3,4] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
+                return previousValue + currentValue ;
+            } ;
+            assertEquals( 10 , reduce( ar , callback )      , "#1" ) ;
+            assertEquals( 20 , reduce( ar , callback , 10 ) , "#2" ) ;
+        }
+        
+        public function testReduce2():void
+        {
+            var ar:Array =  [[0,1], [2,3], [4,5]] ;
+            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
+            {
+                return previousValue.concat( currentValue ) ;
+            } ;
+            ArrayAssert.assertEquals( [0, 1, 2, 3, 4, 5] , reduce( ar , callback , [] ) ) ;
         }
     }
 }

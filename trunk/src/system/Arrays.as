@@ -37,6 +37,7 @@ package system
 {
     import core.arrays.contains;
     import core.arrays.initialize;
+    import core.arrays.reduce;
     import core.arrays.repeat;
     import core.arrays.spliceInto;
 
@@ -196,49 +197,7 @@ package system
          * @param callback Function to execute on each value in the Array.
          * @param initialValue The object to use as the first argument to the first call of the callback. 
          */
-        public static function reduce( ar:Array , callback:Function, initialValue:* = undefined ):*
-        {
-            var size:int = ar.length ;
-            if ( callback == null )
-            {
-                throw new ArgumentError("Arrays.reduce failed, the callback method not must be 'null' or 'undefined'.") ;    
-            }
-            if ( size == 0 )
-            {
-                throw new Error("Arrays.reduce failed, the array contains no values.") ;
-            }
-            var i:int ;
-            var r:*   ;
-            if ( initialValue != undefined )
-            {
-                r = initialValue ;
-            }
-            else
-            {
-                do
-                {
-                    if ( i in ar )
-                    {
-                        r = ar[i++] ;
-                        break ;
-                    }
-                    
-                    if ( ++i > size )
-                    {
-                        throw new Error("Array.reduce failed, if array contains no values, no initial value to return.") ;    
-                    }
-                }
-                while( true ) ;
-            }
-            for ( ;i < size; i++ )
-            {
-                if (i in ar)
-                {
-                    r = callback.call(null, r, ar[i], i, ar);
-                }
-            }
-            return r;
-        }
+        public static const reduce:Function = core.arrays.reduce ;
         
         /**
          * Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.
