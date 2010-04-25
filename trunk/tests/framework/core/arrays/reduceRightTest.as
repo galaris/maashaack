@@ -37,12 +37,12 @@ package core.arrays
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
-    public class reduceTest extends TestCase 
+
+    public class reduceRightTest extends TestCase 
     {
-        public function reduceTest(name:String = "")
+        public function reduceRightTest(name:String = "")
         {
-            super( name );
+            super( name ) ;
         }
         
         public function testReduce1():void
@@ -53,8 +53,8 @@ package core.arrays
                 // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
                 return previousValue + currentValue ;
             } ;
-            assertEquals( 10 , reduce( ar , callback )      , "#1" ) ;
-            assertEquals( 20 , reduce( ar , callback , 10 ) , "#2" ) ;
+            assertEquals( 10 , reduceRight( ar , callback )      , "#1" ) ;
+            assertEquals( 20 , reduceRight( ar , callback , 10 ) , "#2" ) ;
         }
         
         public function testReduce2():void
@@ -64,7 +64,7 @@ package core.arrays
             {
                 return previousValue.concat( currentValue ) ;
             } ;
-            ArrayAssert.assertEquals( [0, 1, 2, 3, 4, 5] , reduce( ar , callback , [] ) ) ;
+            ArrayAssert.assertEquals( [4,5,2,3,0,1] , reduceRight( ar , callback , [] ) ) ;
         }
     }
 }
