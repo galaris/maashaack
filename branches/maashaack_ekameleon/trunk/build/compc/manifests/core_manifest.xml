@@ -10,10 +10,12 @@
     
     <!-- core.arrays -->    
     
-    <component id="core.arrays:contains"   class="core.arrays.contains"   />
-    <component id="core.arrays:initialize" class="core.arrays.initialize" />
-    <component id="core.arrays:repeat"     class="core.arrays.repeat"     />
-    <component id="core.arrays:spliceInto" class="core.arrays.spliceInto" />
+    <component id="core.arrays:contains"    class="core.arrays.contains"    />
+    <component id="core.arrays:initialize"  class="core.arrays.initialize"  />
+    <component id="core.arrays:repeat"      class="core.arrays.repeat"      />
+    <component id="core.arrays:reduce"      class="core.arrays.reduce"      />
+    <component id="core.arrays:reduceRight" class="core.arrays.reduceRight" />
+    <component id="core.arrays:spliceInto"  class="core.arrays.spliceInto"  />
     
     <!-- core.strings -->
     
