@@ -44,6 +44,7 @@ package examples
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.filters.DropShadowFilter;
     import flash.geom.Point;
 
     public dynamic class PageFlipPenExample extends Sprite 
@@ -58,6 +59,8 @@ package examples
             
             shape = new Shape() ;
             
+            shape.filters = [ new DropShadowFilter( 20 , 160 , 0x000000 , 0.5 , 10 , 10 , 1 , 3  ) ] ;
+            
             shape.x = offsetX ;
             shape.y = offsetY ;
             
@@ -69,7 +72,7 @@ package examples
             pen = new PageFlipPen( shape, page1, page2 ) ;
             
             pen.draw( new Point( 240 , 240 ) , PageFlipPen.BOTTOM_RIGHT , 240, 240, Direction.HORIZONTAL, 1 ) ;
-
+            
             p1 = new Pointer() as MovieClip ; // MovieClip linked in the library of the SWF.
             p1.x = offsetX ;
             p1.y = offsetY ;

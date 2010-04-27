@@ -43,6 +43,7 @@ package examples
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.filters.DropShadowFilter;
 
     public dynamic class DistortPenExample extends Sprite 
     {
@@ -50,8 +51,10 @@ package examples
         {
             stage.align     = "tl" ;
             stage.scaleMode = "noScale" ;
-
-        	var shape:Shape = new Shape() ;
+            
+            var shape:Shape = new Shape() ;
+            
+            shape.filters = [ new DropShadowFilter( 20 , 160 , 0x000000 , 0.5 , 10 , 10 , 1 , 3  ) ] ;
             
             shape.x = 0 ;
             shape.y = 0 ;

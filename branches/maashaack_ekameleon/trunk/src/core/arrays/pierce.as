@@ -61,6 +61,6 @@ package core.arrays
     {
         var item:* = ar[index] ;
         ar.splice( index , 1 ) ;
-        return (flag) ? ar : item ;
+        return flag ? ar : item ;
     }
 }
