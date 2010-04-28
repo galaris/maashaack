@@ -186,12 +186,12 @@ package graphics.transitions
         }
         
         /**
-         * Returns a shallow copy of this Tween object.
-         * @return a shallow copy of this Tween object.
+         * Returns a shallow copy of this TweenTo object.
+         * @return a shallow copy of this TweenTo object.
          */
         public override function clone():* 
         {
-            return new TweenTo( _target , _to , easing, duration, useSeconds) ;
+            return new TweenTo( _target , _to , easing, _duration, useSeconds , false, _from ) ;
         }
         
         /**
