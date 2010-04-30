@@ -35,6 +35,9 @@
 
 package system.io
 {
+    /**
+     * Represents a Readable object.
+     */
     public interface Readable
     {
         /**
