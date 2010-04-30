@@ -35,6 +35,9 @@
 
 package system.io
 {
+    /**
+     * Represents a Writeable object.
+     */
     public interface Writeable
     {
         /**
