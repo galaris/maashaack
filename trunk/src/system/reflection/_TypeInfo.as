@@ -35,17 +35,13 @@
 
 package system.reflection
 {
-
     [ExcludeClass]
-
+    
     /**
      * The concrete class of the TypeInfo interface.
      */
     public class _TypeInfo implements TypeInfo
     {
-
-        protected var type:*;
-
         /**
          * Creates a new _TypeInfo instance.
          */
@@ -53,15 +49,20 @@ package system.reflection
         {
             type = o;
         }
-
+        
+        /**
+         * The type object to check.
+         */
+        public var type:* ;
+        
         /**
          * Indicates if the specified Class can be convert to an other with the "as" keyword.
          */
         public function canConvertTo( o:Class ):Boolean
         {
-            return (type as o) != null;
+            return (type as o) != null ;
         }
-
+        
         /**
          * Indicates if the specified Class be used with the "is" keyword.
          */
@@ -69,7 +70,7 @@ package system.reflection
         {
             return type is o;
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -77,7 +78,7 @@ package system.reflection
         public function toString():String
         {
             return "[TypeInfo]" ;
-        }          
+        }
     }
 }
 
