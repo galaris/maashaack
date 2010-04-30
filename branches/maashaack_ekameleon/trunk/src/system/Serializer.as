@@ -39,49 +39,48 @@ package system
     /**
      * Defines what a Serializer have to implements to be integrated in the framework.
      * <p><b>Note :</b> Every serializers (eden, json, wddx, etc.) should implement it.</p>
-     */       
+     */
     public interface Serializer
     {
-
         /**
          * The prettyIndent value of the serializer.
          */
         function get prettyIndent():int;
-
+        
         /**
          * @private
          */
         function set prettyIndent( value:int ):void;
-
+        
         /**
          * The prettyPrinting value of the serializer.
-         */        
+         */
         function get prettyPrinting():Boolean;
-
+        
         /**
          * @private
          */
         function set prettyPrinting( value:Boolean ):void;
-
+        
         /**
          * The identor String value of the serializer.
-         */      
+         */
         function get indentor():String;
-
+        
         /**
          * @private
          */
         function set indentor( value:String ):void;
-
-        /**
-         * Serialize the specified object.
-         */
-        function serialize( value:* ):String;
-
+        
         /**
          * Deserialiaze the specified String source representation.
          */
         function deserialize( source:String ):*;
+        
+        /**
+         * Serialize the specified object.
+         */
+        function serialize( value:* ):String;
     }
 }
 

@@ -59,7 +59,7 @@ package system.text.parser
         /**
          * The current parser position in the string expression to parse.
          */
-        public var  pos:uint ;
+        public var pos:uint ;
         
         /**
          * Indicates the String source representation of the parser (read-only).
