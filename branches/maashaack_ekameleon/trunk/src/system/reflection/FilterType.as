@@ -60,46 +60,6 @@ package system.reflection
         }
         
         /**
-         * Indicates if use prototype information.
-         */
-        public function get usePrototypeInfo():Boolean
-        {
-            return ( valueOf() & 0x00000F ) < 2 ;
-        }
-        
-        /**
-         * Indicates if use trait information.
-         */
-        public function get useTraitInfo():Boolean
-        {
-            return ( valueOf() & 0x00000F ) != 1 ;
-        }
-        
-        /**
-         * Indicates if the declared class are showed.
-         */        
-        public function get showDeclared():Boolean
-        {
-            return ( (valueOf( ) & 0x0000F0) >>> 4 ) <= 1 ;
-        }
-        
-        /**
-         * Indicates if the inherited class are showed.
-         */
-        public function get showInherited():Boolean
-        {
-            return ( (valueOf( ) & 0x0000f0) >>> 4 ) == 0 ;
-        }
-        
-        /**
-         * Indicates if the static members are showed.
-         */
-        public function get showStatic():Boolean
-        {
-            return ( (valueOf( ) & 0x000f00) >>> 8 ) != 0 ;
-        }
-        
-        /**
          * Default filter type value.
          * <li>use both prototype and trait</li>
          * <li>both declared and inherited</li>
@@ -129,8 +89,48 @@ package system.reflection
         public static const declaredOnly:FilterType = new FilterType( 0x010 , "declaredOnly" ) ;
         
         /**
-         * Static members will be searched too. 
+         * Static members will be searched too.
          */
         public static const includeStatic:FilterType = new FilterType( 0x100 , "includeStatic" ) ;
+        
+        /**
+         * Indicates if the declared class are showed.
+         */
+        public function get showDeclared():Boolean
+        {
+            return ( (valueOf() & 0x0000F0) >>> 4 ) <= 1 ;
+        }
+        
+        /**
+         * Indicates if the inherited class are showed.
+         */
+        public function get showInherited():Boolean
+        {
+            return ( (valueOf() & 0x0000f0) >>> 4 ) == 0 ;
+        }
+        
+        /**
+         * Indicates if the static members are showed.
+         */
+        public function get showStatic():Boolean
+        {
+            return ( (valueOf() & 0x000f00) >>> 8 ) != 0 ;
+        }
+        
+        /**
+         * Indicates if use prototype information.
+         */
+        public function get usePrototypeInfo():Boolean
+        {
+            return ( valueOf() & 0x00000F ) < 2 ;
+        }
+        
+        /**
+         * Indicates if use trait information.
+         */
+        public function get useTraitInfo():Boolean
+        {
+            return ( valueOf() & 0x00000F ) != 1 ;
+        }
     }
 }
