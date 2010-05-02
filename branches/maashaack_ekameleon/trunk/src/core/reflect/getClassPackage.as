@@ -42,7 +42,7 @@ package core.reflect
     * 
     * @param o an object reference
     */
-    public var getClassPackage:Function = function( o:* ):String
+    public const getClassPackage:Function = function( o:* ):String
     {
         var fullpath:String = getQualifiedClassName( o );
             fullpath = fullpath.split( "::" ).join( "." );
