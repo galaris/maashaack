@@ -90,8 +90,7 @@ Here some basic rules:
 You really have to see what's in *core* as building blocks to build bigger classes.
 
 Why we impose all those rules ?
- * even if you include *core.swc* in your libraries<br>
-the final bytecode injected in your final swf will be minimal
+ * even if you include *core.swc* in your libraries<br>the final bytecode injected in your final swf will be minimal
  * core will not create strong dependencies of any sort in your code
  * at the very worst, you can extract the code of a function and inline it directly in your code
 
