@@ -78,7 +78,7 @@ package core.arrays
      * @param position The position in the container to inserted the Array of chars.
      * @param count The count value to replaced values.
      */
-    public function spliceInto( inserted:Array, container:Array, position:Number = 0 , count:Number = 0 ):void
+    public const spliceInto:Function = function( inserted:Array, container:Array, position:Number = 0 , count:Number = 0 ):void
     {
         inserted.unshift( position , isNaN(count) ? 0 : count ) ;
         try 
@@ -89,5 +89,5 @@ package core.arrays
         {
             inserted.splice(0, 2) ;
         }
-    }
+    };
 }

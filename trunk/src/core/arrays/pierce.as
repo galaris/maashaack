@@ -57,10 +57,10 @@ package core.arrays
      * @param flag a boolean <code>true</code> to return a new spliced array of false to return the removed element.
      * @return The newly spliced array or the removed element in function of the flag parameter.
      */
-    public function pierce( ar:Array, index:uint = 0 , flag:Boolean = false ):*
+    public const pierce:Function = function( ar:Array, index:uint = 0 , flag:Boolean = false ):*
     {
         var item:* = ar[index] ;
         ar.splice( index , 1 ) ;
         return flag ? ar : item ;
-    }
+    };
 }

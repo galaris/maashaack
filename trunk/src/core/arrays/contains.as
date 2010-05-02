@@ -50,8 +50,8 @@ package core.arrays
      * @param value The object to find in the array.
      * @return <code>true</code> if the specified object exists as an element in the array ; otherwise, <code>false</code>.
      */
-    public function contains( ar:Array , value:Object):Boolean 
+    public const contains:Function = function( ar:Array , value:Object):Boolean 
     {
         return ar.indexOf(value) > -1 ;
-    }
+    };
 }
