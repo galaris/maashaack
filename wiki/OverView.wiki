@@ -1,0 +1,51 @@
+#summary framework overview.
+
+== Introduction ==
+
+The maashaack project provide different stuff.
+
+The *maashaack application framework*<br>
+is a set of different modular projects assembled together<br>
+to produce a coherent set of AS3 classes, packages and libraries<br>
+which represent our ideal of "programming in the large".
+
+The *maashaack projects*<br>
+are independent modules which focus on one particular set of problem,<br>
+they fit the need of "programming in the small".
+
+The *maashaack tools*<br>
+are executable tools in relation with the AS3 language and/or the Flash Platform<br>
+their goal is to cover small area not covered by much bigger tools (like the Flex SDK).
+
+The *maashaack documentation*<br>
+focus mainly on the use of the different frameworks, classes, libraries, etc.<br>
+but also try to assemble the best ressources related to AS3 and Flash development in general.
+
+TODO
+
+== Packages ==
+
+We do not believe the classic `com/org/net + company name + product name`<br>
+apply to a general framework naming system.
+
+=== core ===
+
+The core package is specialized in function utilities that are highly reusable without creating any dependencies.
+
+TODO
+
+=== system ===
+
+TODO
+
+=== graphics ===
+
+TODO
+
+== Libraries ==
+
+TODO
+
+== Tools ==
+
+TODO
