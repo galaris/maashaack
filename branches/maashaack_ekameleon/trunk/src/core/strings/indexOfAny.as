@@ -54,7 +54,7 @@ package core.strings
      * </pre>
      * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
      */
-	public function indexOfAny( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
+    public const indexOfAny:Function = function( source:String, anyOf:Array, startIndex:uint = 0, count:int = - 1 ):int
     {
         if( anyOf && source != null && source != "" )
         {
@@ -78,5 +78,5 @@ package core.strings
             }
         }
         return - 1 ;
-    }
+    };
 }

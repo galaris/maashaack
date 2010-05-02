@@ -53,7 +53,7 @@ package core.strings
      * @return the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
      * @throws ArgumentError if the anyOf argument is 'null' or 'undefined'.
      */
-	public function lastIndexOfAny( source:String, anyOf:Array, startIndex:int = 0x7FFFFFFF, count:uint = 0x7FFFFFFF ):int 
+    public const lastIndexOfAny:Function = function( source:String, anyOf:Array, startIndex:int = 0x7FFFFFFF, count:uint = 0x7FFFFFFF ):int 
     {
         var i:int;
         var index:int ;
@@ -86,5 +86,5 @@ package core.strings
         }
         
         return - 1 ;
-    }
+    };
 }

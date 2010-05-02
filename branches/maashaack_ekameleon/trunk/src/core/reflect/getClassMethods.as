@@ -33,33 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.reflect
 {
+    import flash.utils.describeType;
+    import flash.utils.getQualifiedClassName;
+    
     /**
-     * Returns a new String value who contains the specified String characters repeated count times.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.repeat ;
-     * 
-     * trace( repeat( "hello" , 0 ) ) ; // hello
-     * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
-     * </pre>
-     * @return a new String who contains the specified String characters repeated count times.
-     */
-    public const repeat:Function = function( source:String = "" , count:uint = 0 ):String
+    * Returns an array of public methods defined in the class of an object.
+    * 
+    * @param o an object reference
+    * @param inherited (optional) boolean option to include inherited methods
+    */
+    public var getClassMethods:Function = function( o:*, inherited:Boolean = false ):Array
     {
-        var result:String = "" ;
-        if ( count > 0 )
+        var type:XML = describeType( o );
+        var fullname:String = getQualifiedClassName( o );
+        var members:Array = [];
+        
+        for each( var member:XML in type.method )
         {
-            for( var i:int ; i < count ; i++ )
+            if( inherited )
             {
-                result = result.concat( source ) ;
+                members.push( String( member.@name ) );
+            }
+            else if( String( member.@declaredBy ) == fullname )
+            {
+                members.push( String( member.@name ) );
             }
         }
-        else
-        {
-            result = source ;
-        }
-        return result ;
+        
+        return members;
     };
 }

@@ -33,33 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.reflect
 {
+    import flash.system.ApplicationDomain;
+    
     /**
-     * Returns a new String value who contains the specified String characters repeated count times.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.repeat ;
-     * 
-     * trace( repeat( "hello" , 0 ) ) ; // hello
-     * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
-     * </pre>
-     * @return a new String who contains the specified String characters repeated count times.
-     */
-    public const repeat:Function = function( source:String = "" , count:uint = 0 ):String
+    * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
+    * 
+    * <p>
+    * The definition can be a class, namespace, function or object.
+    * </p>
+    * 
+    * @param name a string of the full qualified path of a definition
+    * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference,
+    * default is <code>ApplicationDomain.currentDomain</code>
+    */
+    public var getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
     {
-        var result:String = "" ;
-        if ( count > 0 )
+        if( !domain )
         {
-            for( var i:int ; i < count ; i++ )
-            {
-                result = result.concat( source ) ;
-            }
+            domain = ApplicationDomain.currentDomain;
         }
-        else
-        {
-            result = source ;
-        }
-        return result ;
+        
+        return domain.getDefinition( name );
     };
 }

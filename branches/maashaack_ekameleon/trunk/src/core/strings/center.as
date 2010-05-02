@@ -49,7 +49,7 @@ package core.strings
      * trace( center("hello world", 20, "_" ) )  ; // ____hello world_____
      * </code>
      */
-    public function center( source:String, size:uint = 0 , separator:String = " " ):String 
+    public const center:Function = function( source:String, size:uint = 0 , separator:String = " " ):String 
     {
         if ( source == null )
         {
@@ -67,5 +67,5 @@ package core.strings
         {
             return source ;
         }
-    }
+    };
 }

@@ -64,7 +64,7 @@ package core.strings
      * @param value The expression to insert in the source.
      * @return the string modified by the method.
      */
-	public function insert( source:String, index:int, value:String ):String
+    public const insert:Function = function( source:String, index:int, value:String ):String
     {
         var strA:String = "";
         var strB:String = "";
@@ -85,5 +85,5 @@ package core.strings
         strB = source.substr( index );
         
         return strA + value + strB;
-    }
+    };
 }
