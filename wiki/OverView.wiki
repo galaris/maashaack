@@ -32,7 +32,7 @@ apply to a general framework naming system.
 
 The core package is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
 
-here a an example
+here an example
 {{{
 package core
 {
