@@ -33,30 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.reflect 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
+    import flash.system.ApplicationDomain;
+    import flash.utils.Dictionary;
 
-    public class AllTests
+    public class getClassByNameTest extends TestCase 
     {
-        public static function suite():ITest
+        public function getClassByNameTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testGetClassByName():void
+        {
+            assertEquals( Array , getClassByName("Array") , "#1" ) ;
+            assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary") , "#2" ) ;
+            assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
         }
     }
 }

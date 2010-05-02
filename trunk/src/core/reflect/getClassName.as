@@ -43,7 +43,7 @@ package core.reflect
     * @param o an object reference
     * @param path (optional) boolean option to returns the full path, default is false
     */
-    public var getClassName:Function = function( o:*, path:Boolean = false ):String
+    public const getClassName:Function = function( o:*, path:Boolean = false ):String
     {
         var fullpath:String = getQualifiedClassName( o );
         

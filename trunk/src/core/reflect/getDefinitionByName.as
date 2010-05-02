@@ -48,7 +48,7 @@ package core.reflect
     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference,
     * default is <code>ApplicationDomain.currentDomain</code>
     */
-    public var getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
+    public const getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
     {
         if( !domain )
         {
