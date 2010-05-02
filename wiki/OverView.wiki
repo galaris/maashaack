@@ -28,9 +28,39 @@ TODO
 We do not believe the classic `com/org/net + company name + product name`<br>
 apply to a general framework naming system.
 
+The following describe the different *root* packages and their scope.
+
+here an example of what we try to achieve in a day to day code usage
+{{{
+package
+{
+    import flash.display.Sprite;
+    
+    import system.Strings;
+    import system.Version;
+    import system.URI;
+    import system.externals.HTMLDOM;
+    import system.terminals.SocketConsole;
+    
+    import graphics.colors.RGB;
+    import graphics.filters.ReflectionFilter;
+    
+    import libraries.zlib;
+    import libraries.PNG;
+    
+    
+    public class Main extends Sprite
+    {
+        //...
+    }
+    
+}
+}}}
+
+
 === core ===
 
-The core package is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
+The core root package is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
 
 here an example
 {{{
@@ -101,7 +131,7 @@ TODO
 
 === system ===
 
-The system package is the root of the application framework structure,<br>
+The system root package is the starting point of the application framework structure,<br>
 dependencies are allowed but strictly controlled.
 
 Definitions in *system* are allowed to reuse the builtin types (Object, Array, etc.),<br>
@@ -111,6 +141,7 @@ Here some basic rules:
  * nothing declared in the unnamed package (eg. `package { ... }`)
  * classes starts with an uppercase letter and use !CamelCase
  * namespaces starts with a lowercase letter
+ * conditional compilation are always in uppercase letters (see ConditionalCompilation)
  * interfaces follow classes naming convention and are considered types<br>no interfaces starting with *I* (define `Serializable`, not `ISerializable`)
  * `System.*` root package define commons types, classes, interfaces, namespaces etc.<br>that can be shared and reused in sub-packages
  * each sub-package should be independent of another sub-package but can have dependencies on the root package<br> in `System.terminals.*` you can reuse `System.Serializable` but not `System.diagnostics.Debuggable`
@@ -131,6 +162,12 @@ but we can accept to say "if you want to use `system.process` you have to includ
 
 At the end of the day, if we can not generate independent swc for each packages,<br>
 and we have to resort on using only *maashaack.swc*, we fail.
+
+Why we impose all those rules ?
+ * we need to control the amount of bytecode ending in the final swf<br>see the Flex framework, you include one component and you end up with ~250KB of code<br>we want to avoid that
+ * we want to be able to have common reusable areas and interchangeable areas<br>wether you want to use an optimized set of classes for flash player 10 (using `Vector` instead of `Array`)<br>or switch between different implementations of "signals and slots"
+ * we want to be able to manage sub-packages as modules<br>creating, adding, removing, etc. a module should not influence other modules (or break things)
+ * we want to be able to kick start a project or new sub-package over a week-end<br>when you face too much dependencies spread in every corners you can not do that
 
 
 *use case:* assemble different functions in a string utility class
@@ -172,12 +209,54 @@ TODO
 
 === graphics ===
 
+The graphics root package is to be considered as an addon to *system*,<br>
+mostly related to the highly graphic nature of the Flash Platform.
+
+Definitions in *graphics* are allowed to reuse the builtin types (Object, Array, etc.),<br>
+the Flash API classes and packages, and other system libraries.
+
 TODO
 
 == Libraries ==
 
+The libraries root package is an effort to organize and standardize<br>
+external and independent code libraries that can be added to *system* on a needed basis<br>
+without necessary being part of the application framework.
+
+For example `libraries.zlib.*` would be a sub-package implementing in AS3<br>
+the C/C++ zlib library that can be found here [http://www.zlib.net www.zlib.net].
+
+Another example would be `libraries.PNG` which could take some base code from<br>
+other open source projects and/or from the [http://www.w3.org/TR/PNG/ PNG specification]<br>
+and/or port a library from another language and/or implements the library with [http://labs.adobe.com/technologies/alchemy/ Alchemy].
+
+
+
 TODO
 
 == Tools ==
+
+The tools are not considered as part of a package structure,<br>
+they are mainly the organization of small applications<br>
+that focus on AS3 and Flash development.
+
+For example `abcdump.exe` could be a little command-line tool<br>
+based on `abcdump.as` found in the Tamarin project.
+
+Another example would be to take `flvtool2` written in Ruby and port it to AS3.
+
+Here the goal is to create needed tool and/or improve existing tools,<br>
+but also manage and maintain their build process and distribution.
+
+*use case:* abcdump<br>
+For a basic user, being able to build `abcdump.exe` for Windows<br>
+could be a big task: install and learn to use Visual Studio, learn to use mercurial,<br>
+learn how to compile Tamarin, learn how to compile an abc file,<br>
+learn how to compile a running exectubale with avmshell and and abc file, etc.
+
+For us, the task would be to create a small project to isolate the necessary source code,<br>
+organize the build so a Windows, OS X and Linux command line executable could be generated<br>
+document its usage and distribute it.
+
 
 TODO
