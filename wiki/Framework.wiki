@@ -9,9 +9,11 @@ cross-platform and standard packages, libraries, etc.
 
 == Portability ==
 
- * Flash 9
- * [http://labs.adobe.com/technologies/apollo/ AIR] ~~Apollo~~
- * [http://code.google.com/p/redtamarin/ redtamarin] (will be implemented in a different branch)
+ * Flash Player 9
+ * Flash Player 10
+ * Flash Player 10.1
+ * [http://labs.adobe.com/technologies/apollo/ AIR 2.0] ~~Apollo~~
+ * [http://code.google.com/p/redtamarin/ redtamarin]
 
 == Details ==
 
