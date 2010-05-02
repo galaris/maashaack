@@ -49,7 +49,7 @@ package core.arrays
      * </pre>
      * @return the shuffled array.
      */
-    public function shuffle( ar:Array ):Array 
+    public const shuffle:Function = function( ar:Array ):Array 
     {
         var tmp:Array = [] ;
         var len:int   = ar.length;
@@ -64,5 +64,5 @@ package core.arrays
             ar[len] = tmp[len] ;
         }
         return ar ;
-    }
+    };
 }

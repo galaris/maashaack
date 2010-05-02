@@ -50,7 +50,7 @@ package core.arrays
      * @return a new Array with an arbitrary number of elements (index), 
      * with every element containing the passed parameter value or by default the null value.
      */
-    public function initialize( elements:uint = 0, value:* = null ):Array
+    public const initialize:Function = function( elements:uint = 0, value:* = null ):Array
     {
         var ar:Array = [];
         for( var i:int ; i < elements ; i++ )
@@ -58,5 +58,5 @@ package core.arrays
             ar[ar.length] = value ;
         }
         return ar;
-    }
+    };
 }

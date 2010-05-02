@@ -48,7 +48,7 @@ package core.arrays
      * </pre>
      * @return a new Array who contains the specified Array elements repeated count times.
      */
-    public function repeat( ar:Array , count:uint = 0 ):Array
+    public const repeat:Function = function( ar:Array , count:uint = 0 ):Array
     {
         var result:Array ;
         if ( count > 0 )
@@ -64,5 +64,5 @@ package core.arrays
             result = [].concat(ar) ;
         }
         return result ;
-    }
+    };
 }
