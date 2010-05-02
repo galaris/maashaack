@@ -79,13 +79,15 @@ Those functions are allowed to reuse the builtin types (Object, Array, etc.),<br
 the Flash API classes and packages, but nothing else.
 
 Here some basic rules:
+ * nothing declared in the unnamed package (eg. `package { ... }`)
  * all functions or classes start with a lowercase letter (use `bit`, not `Bit`)
  * try to reuse similar name for similar functionality (`core.strings.compare` and `core.arrays.compare`)
  * you can not reuse another function or class from any other maashaack package, even from core itself
  * you can not reuse a third party library at all
- * no use of interfaces, enums, namespaces, etc.
+ * no use of interfaces, enums, events, namespaces, etc.
  * everything have to be "inlined code"
  * the code have to be written for speed and less use of memory
+ * it have to work everywhere (redtamarin included)
 
 You really have to see what's in *core* as building blocks to build bigger classes.
 
@@ -95,11 +97,58 @@ Why we impose all those rules ?
  * at the very worst, you can extract the code of a function and inline it directly in your code
 
 
-
-
 TODO
 
 === system ===
+
+The system package is the root of the application framework structure,<br>
+dependencies are allowed but strictly controlled.
+
+
+Here some basic rules:
+ * nothing declared in the unnamed package (eg. `package { ... }`)
+ * classes starts with an uppercase letter and use !CamelCase
+ * namespaces starts with a lowercase letter
+ * interfaces follow classes naming convention and are considered types<br>no interfaces starting with *I* (define `Serializable`, not `ISerializable`)
+ * `System.*` root package define commons types, classes, interfaces, namespaces etc.<br>that can be shared and reused in sub-packages
+ * each sub-package should be independent of another sub-package but can have dependencies on the root package<br> in `System.terminals.*` you can reuse `System.Serializable` but not `System.diagnostics.Debuggable`
+ * there can be some exceptions with highly used packages like `System.data.*`<br>`System.process.*` can reuse classes and interfaces from `System.data.*`<br>but the root package `System.*` will avoid to reuse `System.data.*`
+ * ...
+
+*use case:* assemble different functions in a string utility class
+{{{
+package com.foobar.utils
+{
+    import core.strings.fastformat; void(fastformat);
+    import core.strings.format; void(format);
+    import core.strings.pad; void(pad);
+    
+    public class Strings
+    {
+        
+        CONFIG::LIGHT
+        public static var format:Function = core.strings.fastformat;
+        
+        CONFIG::STANDARD
+        public static var format:Function = core.strings.format;
+        
+        public static function padLeft( str:String, amount:uint, char:String = " " ):String
+        {
+            return pad( str, -int(amount), char );
+        }
+        
+        public static function padRight( str:String, amount:uint, char:String = " " ):String
+        {
+            return pad( str, int(amount), char );
+        }
+        
+    }
+}
+}}}
+here we reuse the building blocks of *core* to build *system.Strings*<br>
+you can see, for example, ConditionalCompilation settings that allow to switch the<br>
+same function *format* between 2 implementations
+
 
 TODO
 
