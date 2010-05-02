@@ -35,11 +35,22 @@
 
 package
 {
-    import core.strings.pad;
-    import core.strings.format;
+    import core.strings.pad; void(pad);
+    import core.strings.format; void(format);
+    import core.strings.compare; void(compare);
+    import core.strings.startsWith; void(startsWith);
+    import core.strings.endsWith; void(endsWith);
+    
+    import core.reflect.getClassByName; void(getClassByName);
+    import core.reflect.getClassName; void(getClassName);
+    import core.reflect.getClassPath; void(getClassPath);
+    import core.reflect.getClassPackage; void(getClassPackage);
+    import core.reflect.getDefinitionByName; void(getDefinitionByName);
+    import core.reflect.getClassMethods; void(getClassMethods);
     
     import flash.display.Sprite;
-    import flash.sampler.getSize; void(format);
+    import flash.utils.describeType;
+    
     
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="core", scriptRecursionLimit="1000", scriptTimeLimit="60")]
     public class core extends Sprite
@@ -50,6 +61,15 @@ package
             
             //basic usage
             
+            trace( "---- core.bit ----" );
+            
+            trace( "---- core.uri ----" );
+            
+            trace( "---- core.version ----" );
+            
+            trace( "---- core.strings ----" );
+            
+            //pad
             var word:String = "hello";
             trace( "[" + pad( word, 8 ) + "]" );
             trace( "[" + pad( word, -8 ) + "]" );
@@ -60,7 +80,7 @@ package
                 trace( pad( seinfeld[i], 10, "." ) );
             }
             
-            
+            //format
             var str0:String = "hello {0}, {1} {2}";
             var str1:String = "if it was {0} then it would not be {1}";
             var str2:String = "hello {name}, do you want to play a game of {game} ?";
@@ -87,9 +107,59 @@ package
                 trace( format( "{0} scored {1,5}", names[j], scores[j] ) );
             }
             
-            trace( getSize( core.strings.pad ) );
-            trace( getSize( core.strings.format ) );
+            //compare
+            var s0:String = "HELLO";
+            var s1:String = "hello";
+            var s2:String = "welcome";
+            var s3:String = "world";
             
+            trace( compare( s1, s2 ) ); //-1
+            trace( compare( s2, s1 ) ); //1
+            trace( compare( s1, s3 ) ); //1
+            trace( compare( s1, s1 ) ); //0
+            trace( compare( s1, s0 ) ); //0
+            trace( compare( s1, s0, true ) ); //-1
+            trace( compare( s0, s1, true ) ); //1
+            
+            //startsWith
+            trace( startsWith( "hello world", "h" ) ); //true
+            trace( startsWith( "hello world", "hello" ) ); //true
+            trace( startsWith( "hello world", "a" ) ); //false
+            
+            //endsWith
+            trace( endsWith( "hello world", "world" ) ); //true
+            trace( endsWith( "hello world", "hello" ) ); //false
+            
+            
+            trace( "---- core.reflect ----" );
+            
+            var one_str:String = "flash.display.Sprite";
+            var one_cls:Class  = getClassByName( one_str );
+            var one_obj:* = new one_cls();
+            
+            //getClassByName
+            trace( one_obj is Sprite );
+            
+            //getClassName
+            trace( getClassName( one_obj ) == "Sprite"  );
+            trace( getClassName( one_obj, true ) == "flash.display::Sprite"  );
+            
+            //getClassPath
+            trace( getClassPath( one_obj ) == "flash.display::Sprite" );
+            trace( getClassPath( one_obj, true ) == "flash.display.Sprite" );
+            trace( getClassPath( {} ) == "Object" );
+            trace( getClassPath( {}, true ) == "Object" );
+            
+            //getClassPackage
+            trace( getClassPackage( one_obj ) == "flash.display" );
+            trace( getClassPackage( {} ) == "" );
+            
+            //getDefinitionByName
+            
+            //getClassMethods
+            trace( getClassMethods( one_obj ) );
+            trace( getClassMethods( one_obj, true ) );
+            trace( describeType( one_obj ) );
         }
     }
 }
