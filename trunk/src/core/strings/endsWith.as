@@ -14,8 +14,8 @@
      * @param value the value to find in first in the source.
      * @return true if the value is find in first.
      */
-    public function endsWith( source:String , value:String ):Boolean
+    public const endsWith:Function = function( source:String , value:String ):Boolean
     {
         return source.lastIndexOf(value) == ( source.length - value.length ) ;
-    }
+    };
 }

@@ -48,7 +48,7 @@ package core.strings
      * @param char The Unicode character to pad (default is space).
      * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
      */
-    public function padRight( source:String, amount:uint, char:String = " " ):String
+    public const padRight:Function = function( source:String, amount:uint, char:String = " " ):String
     {
         if( char == null )
         {
@@ -63,5 +63,5 @@ package core.strings
             source += char;
         }
         return source ;
-    }
+    };
 }

@@ -33,33 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.reflect
 {
+    import flash.utils.getQualifiedClassName;
+    
     /**
-     * Returns a new String value who contains the specified String characters repeated count times.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.repeat ;
-     * 
-     * trace( repeat( "hello" , 0 ) ) ; // hello
-     * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
-     * </pre>
-     * @return a new String who contains the specified String characters repeated count times.
-     */
-    public const repeat:Function = function( source:String = "" , count:uint = 0 ):String
+    * Returns the package string representation of the specified instance.
+    * 
+    * @param o an object reference
+    */
+    public var getClassPackage:Function = function( o:* ):String
     {
-        var result:String = "" ;
-        if ( count > 0 )
+        var fullpath:String = getQualifiedClassName( o );
+            fullpath = fullpath.split( "::" ).join( "." );
+        
+        var parts:Array = fullpath.split( "." );
+        
+        if( parts.length > 1 )
         {
-            for( var i:int ; i < count ; i++ )
-            {
-                result = result.concat( source ) ;
-            }
+            parts.pop();
+            return parts.join( "." );
         }
-        else
-        {
-            result = source ;
-        }
-        return result ;
+        
+        return "";
     };
 }

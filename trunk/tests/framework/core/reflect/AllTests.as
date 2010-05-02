@@ -33,33 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.reflect
 {
-    /**
-     * Returns a new String value who contains the specified String characters repeated count times.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.repeat ;
-     * 
-     * trace( repeat( "hello" , 0 ) ) ; // hello
-     * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
-     * </pre>
-     * @return a new String who contains the specified String characters repeated count times.
-     */
-    public const repeat:Function = function( source:String = "" , count:uint = 0 ):String
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
+
+    public class AllTests
     {
-        var result:String = "" ;
-        if ( count > 0 )
+        public static function suite():ITest
         {
-            for( var i:int ; i < count ; i++ )
-            {
-                result = result.concat( source ) ;
-            }
+            var suite:TestSuite = new TestSuite("core.reflect package tests");
+            
+            //suite.addTestSuite( ) ;
+            
+            return suite;
         }
-        else
-        {
-            result = source ;
-        }
-        return result ;
-    };
+    }
 }

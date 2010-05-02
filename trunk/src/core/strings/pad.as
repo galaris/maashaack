@@ -54,7 +54,7 @@
      * @param amount the amount of padding (number sign is the padding direction)
      * @param char the character to pad with (default is space)
      */
-    public function pad( source:String, amount:int, char:String = " " ):String
+    public const pad:Function = function( source:String, amount:int, char:String = " " ):String
     {
         var left:Boolean  = amount >= 0 ;
         var width:int     = amount > 0 ? amount : -amount ;
@@ -82,5 +82,5 @@
             }
         }
         return source;
-    }
+    };
 }
