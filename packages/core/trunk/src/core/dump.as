@@ -43,6 +43,37 @@ package core
     * and supports the <code>toSource()</code> method.
     * </p>
     * 
+    * @example basic usage
+    * <listing version="3.0">
+    * <code class="prettyprint">
+    * var test0:Object = { a:1, b:2, c:null, d:undefined, e:[1,2,3], f:"hello world", g:new Date() };
+    * 
+    * trace( dump( test0 ) );
+    * 
+    * //output
+    * //{a:1,b:2,c:null,d:undefined,e:[1,2,3],f:"hello world",g:new Date(2010,4,3,20,35,7,860)}
+    * 
+    * trace( dump( test0, true ) );
+    * 
+    * //output
+    * // {
+    * //     a:1,
+    * //     b:2,
+    * //     c:null,
+    * //     d:undefined,
+    * //     e:
+    * //     [
+    * //         1,
+    * //         2,
+    * //         3
+    * //     ],
+    * //     f:"hello world",
+    * //     g:new Date(2010,4,3,20,35,7,860)
+    * // }
+    * 
+    * </code>
+    * </listing>
+    * 
     * @param o an object reference
     * @param prettyprint (optional) boolean option to output a pretty printed string
     * @param indent (optional) initial indentation
