@@ -32,24 +32,15 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package core.reflect
+package core.reflect.samples 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    public class InvokeClass 
     {
-        public static function suite():ITest
+        public function InvokeClass( ...arguments:Array )
         {
-            var suite:TestSuite = new TestSuite("core.reflect package tests");
-            
-            suite.addTestSuite( getClassByNameTest ) ;
-            suite.addTestSuite( getClassMethodsTest ) ;
-            
-            suite.addTestSuite( invokeTest ) ;
-            
-            return suite;
+            length = arguments.length ;
         }
+        
+        public var length:uint ;
     }
 }
