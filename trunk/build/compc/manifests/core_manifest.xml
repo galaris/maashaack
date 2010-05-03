@@ -19,12 +19,25 @@
     <component id="core.arrays:shuffle"     class="core.arrays.shuffle"     />
     <component id="core.arrays:spliceInto"  class="core.arrays.spliceInto"  />
     
+    <!-- core.reflect -->    
+    
+    <component id="core.reflect:getClassByName"      class="core.reflect.getClassByName"      />
+    <component id="core.reflect:getClassMethods"     class="core.reflect.getClassMethods"     />
+    <component id="core.reflect:getClassName"        class="core.reflect.getClassName"        />
+    <component id="core.reflect:getClassPackage"     class="core.reflect.getClassPackage"     />
+    <component id="core.reflect:getClassPath"        class="core.reflect.getClassPath"        />
+    <component id="core.reflect:getDefinitionByName" class="core.reflect.getDefinitionByName" />
+    <component id="core.reflect:hasDefinitionByName" class="core.reflect.hasDefinitionByName" />
+    <component id="core.reflect:invoke"              class="core.reflect.invoke"              />
+    
     <!-- core.strings -->
     
     <component id="core.strings:center"               class="core.strings.center"              />
+    <component id="core.strings:compare"              class="core.strings.compare"             />
     <component id="core.strings:endsWith"             class="core.strings.endsWith"            />
     <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"          />
     <component id="core.strings:insert"               class="core.strings.insert"              />
+    <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"      />
     <component id="core.strings:lineTerminatorChars"  class="core.strings.lineTerminatorChars" />
     <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"     />
     <component id="core.strings:pad"                  class="core.strings.pad"                 />
@@ -36,5 +49,6 @@
     <component id="core.strings:trimEnd"              class="core.strings.trimEnd"             />
     <component id="core.strings:trimStart"            class="core.strings.trimStart"           />
     <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"     />
+    <component id="core.strings:WildExp"              class="core.strings.WildExp"             />
     
 </componentPackage>
