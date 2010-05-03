@@ -38,23 +38,20 @@ package core.reflect
     import flash.utils.getQualifiedClassName;
     
     /**
-    * Returns the package string representation of the specified instance.
-    * 
-    * @param o an object reference
-    */
+     * Returns the package string representation of the specified instance.
+     * @param o an object reference
+     * @return the package string representation of the specified instance.
+     */
     public const getClassPackage:Function = function( o:* ):String
     {
-        var fullpath:String = getQualifiedClassName( o );
-            fullpath = fullpath.split( "::" ).join( "." );
-        
-        var parts:Array = fullpath.split( "." );
-        
+        var fullpath:String = getQualifiedClassName( o ) ;
+            fullpath        = fullpath.split( "::" ).join( "." ) ;
+        var parts:Array = fullpath.split( "." ) ;
         if( parts.length > 1 )
         {
-            parts.pop();
-            return parts.join( "." );
+            parts.pop() ;
+            return parts.join( "." ) ;
         }
-        
-        return "";
+        return "" ;
     };
 }
