@@ -49,6 +49,7 @@ package core.reflect
             suite.addTestSuite( getClassPackageTest ) ;
             suite.addTestSuite( getClassPathTest ) ;
             suite.addTestSuite( getDefinitionByNameTest ) ;
+            suite.addTestSuite( hasDefinitionByNameTest ) ;
             
             suite.addTestSuite( invokeTest ) ;
             
