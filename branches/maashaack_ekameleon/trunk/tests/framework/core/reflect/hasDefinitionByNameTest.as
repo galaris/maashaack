@@ -37,25 +37,22 @@ package core.reflect
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.eden;
-    
     import flash.system.ApplicationDomain;
-    import flash.utils.Dictionary;
     
-    public class getDefinitionByNameTest extends TestCase 
+    public class hasDefinitionByNameTest extends TestCase 
     {
-        public function getDefinitionByNameTest(name:String = "")
+        public function hasDefinitionByNameTest(name:String = "")
         {
             super(name);
         }
         
-        public function testGetDefinitionByName():void
+        public function testHasDefinitionByName():void
         {
-            assertEquals( Array , getDefinitionByName("Array") , "#1" ) ;
-            assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary") , "#2" ) ;
-            assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
-            
-            assertEquals( system.eden , getDefinitionByName("system.eden") ) ;
+            assertTrue( hasDefinitionByName("Array") , "#1" ) ;
+            assertTrue( hasDefinitionByName("flash.utils.Dictionary") , "#2" ) ;
+            assertTrue( hasDefinitionByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
+            assertTrue( hasDefinitionByName("system.eden") ) ;
+            assertFalse( hasDefinitionByName("foo.bar.Test")) ;
         }
     }
 }
