@@ -44,11 +44,11 @@ package core.reflect
         {
             var suite:TestSuite = new TestSuite("core.reflect package tests");
             
-            suite.addTestSuite( getClassByNameTest ) ;
-            suite.addTestSuite( getClassMethodsTest ) ;
+            suite.addTestSuite( getClassByNameTest ) ;            suite.addTestSuite( getClassMethodsTest ) ;
             suite.addTestSuite( getClassNameTest ) ;
             suite.addTestSuite( getClassPackageTest ) ;
             suite.addTestSuite( getClassPathTest ) ;
+            suite.addTestSuite( getDefinitionByNameTest ) ;
             
             suite.addTestSuite( invokeTest ) ;
             

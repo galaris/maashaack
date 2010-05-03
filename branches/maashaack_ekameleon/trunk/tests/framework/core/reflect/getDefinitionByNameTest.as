@@ -37,23 +37,25 @@ package core.reflect
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.eden;
+    
     import flash.system.ApplicationDomain;
     import flash.utils.Dictionary;
     
-    public class getClassByNameTest extends TestCase 
+    public class getDefinitionByNameTest extends TestCase 
     {
-        public function getClassByNameTest(name:String = "")
+        public function getDefinitionByNameTest(name:String = "")
         {
             super(name);
         }
         
         public function testGetClassByName():void
         {
-            assertEquals( Array , getClassByName("Array") , "#1" ) ;
-            assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary") , "#2" ) ;
-            assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
+            assertEquals( Array , getDefinitionByName("Array") , "#1" ) ;
+            assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary") , "#2" ) ;
+            assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
             
-            assertNull( getClassByName("system.eden") ) ;
+            assertEquals( system.eden , getDefinitionByName("system.eden") ) ;
         }
     }
 }
