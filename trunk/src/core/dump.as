@@ -81,42 +81,6 @@ package core
     public const dump:Function = function( o:*, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
         var idr:String = indentor;
-        var _dumpArray:Function = function( value:Array ):String
-        {
-            var source:Array = [];
-            var size:uint = value.length ;
-            for( var i:int = 0 ; i < size ; i++ )
-            {
-                
-                if( value[i] === undefined )
-                {
-                    source.push( "undefined" );
-                    continue;
-                }
-                
-                if( value[i] === null )
-                {
-                    source.push( "null" );
-                    continue;
-                }
-                
-                if( prettyprint ) { indent++; }
-                source.push( dump( value[i], prettyprint, indent, idr ) );
-                if( prettyprint ) { indent--; }
-            }
-            
-            if( !prettyprint ) { return( "[" + source.join( "," ) + "]" ); }
-            
-            var spaces:Array = [];
-            for( var j:int; j<indent; j++ )
-            {
-                spaces.push( idr );
-            }
-            
-            var decal:String = "\n" + spaces.join( "" );
-            return decal + "[" + decal + idr + source.join( "," + decal + idr ) + decal + "]";
-        };
-        
         var _dumpObject:Function = function( value:Object ):String
         {
             var source:Array = [];
@@ -187,7 +151,7 @@ package core
         }
         else if( o is Array ) 
         { 
-            return _dumpArray( o ); 
+            return dumpArray( o , prettyprint, indent, indentor ); 
         }
         else if( o is Object ) 
         { 

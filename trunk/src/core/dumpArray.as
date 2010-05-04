@@ -35,32 +35,52 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    /**
+     * Dumps a string representation of any Array reference.
+     * @param value an Array to dump.
+     * @return The dump string representation of any Array reference.
+     */
+    public const dumpArray:Function = function( value:Array , prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
-        public static function suite():ITest
+        var source:Array = [];
+        var i:int ;
+        var l:int = value.length ;
+        for( i = 0 ; i < l ; i++ )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            if( value[i] === undefined )
+            {
+                source.push( "undefined" );
+                continue;
+            }
+            if( value[i] === null )
+            {
+                source.push( "null" );
+                continue;
+            }
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpStringTest );
-            
-            return suite;
+            if( prettyprint ) 
+            { 
+                indent++ ; 
+            }
+            source.push( dump( value[i], prettyprint, indent, indentor ) ) ;
+            if( prettyprint ) 
+            { 
+                indent-- ; 
+            }
         }
-    }
+        if( prettyprint ) 
+        { 
+            var spaces:Array = [] ;
+            for( i=0 ; i < indent ; i++ )
+            {
+                spaces.push( indentor );
+            }
+            var decal:String = "\n" + spaces.join( "" ) ;
+            return decal + "[" + decal + indentor + source.join( "," + decal + indentor ) + decal + "]";
+        }
+        else
+        {
+            return( "[" + source.join( "," ) + "]" ); 
+        }
+    };
 }
