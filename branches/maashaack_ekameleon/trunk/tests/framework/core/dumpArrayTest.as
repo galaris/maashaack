@@ -35,32 +35,27 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class dumpArrayTest extends TestCase
     {
-        public static function suite():ITest
+        public function dumpArrayTest(name:String="")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpStringTest );
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testBasic():void
+        {
+            assertEquals( "[]" , dumpArray( [] ) ) ;
+            assertEquals( "[1,2,3]" , dumpArray( [1,2,3] ) ) ;
+            assertEquals( "[\"hello\",\"world\"]" , dumpArray( ["hello","world"] ) ) ;
+            assertEquals( "[\"hello\",1,true]" , dumpArray( ["hello",1,true] ) ) ;
+        }
+        
+        public function testPrettyprint():void
+        {
+            assertEquals( "[]" , dumpArray( [] , true ) ) ;
+            // FIXME assertEquals( "\n[\n    1,\n    2,\n    3\n]" , dumpArray( [1,2,3] , true ) ) ;
         }
     }
 }
