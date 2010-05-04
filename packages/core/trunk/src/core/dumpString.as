@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,96 +36,82 @@
 package core
 {
     /**
-    * Dumps a string representation of a String object.
-    * 
-    * @param value a string object
-    */
+     * Dumps a string representation of any String value.
+     * @param str a String to transform.
+     * @return The dump string representation of any String value.
+     */
     public const dumpString:Function = function( value:String ):String
     {
-        var quote:String = "\"";
-        var str:String = "";
-        var ch:String = "";
-        var pos:int = 0;
-        var code:int;
-        
-        var _toUnicodeNotation:Function = function( num:int ):String
+        var code:int ;
+        var quote:String = "\"" ;
+        var str:String   = ""  ;
+        var ch:String    = ""  ;
+        var pos:int      = 0   ;
+        var len:int = value.length ;
+        while( pos < len )
         {
-            var hex:String = num.toString( 16 );
-            while( hex.length < 4 )
-            {
-                hex = "0" + hex;
-            }
-            return hex;
-        };
-        
-        while( pos < value.length )
-        {
-            ch = value.charAt( pos );
+            ch  = value.charAt( pos );
             code = value.charCodeAt( pos );
-            
             if( code > 0xFF )
             {
                 str += "\\u" + _toUnicodeNotation( code );
                 pos++;
                 continue;
             }
-            
             switch( ch )
             {
-                case "\u0008": 
-                    //backspace
-                    str += "\\b";
+                case "\u0008" : // backspace
+                {
+                    str += "\\b" ;
                     break;
-                
-                case "\u0009": 
-                    //horizontal tab
-                    str += "\\t";
+                }
+                case "\u0009" : // horizontal tab
+                {
+                    str += "\\t" ;
                     break;
-                
-                case "\u000A": 
-                    //line feed
-                    str += "\\n";
+                }
+                case "\u000A" : // line feed
+                {
+                    str += "\\n" ;
                     break;
-                
-                case "\u000B": 
-                    //vertical tab
-                    str += "\\v";
-                    /* TODO: check the VT bug */
-                    //str += "\\u000B";
+                }
+                case "\u000B" : // vertical tab /* TODO: check the VT bug */
+                { 
+                    str += "\\v" ; //str += "\\u000B" ;
                     break;
-                
-                case "\u000C": 
-                    //form feed
-                    str += "\\f";
+                }
+                case "\u000C" : // form feed
+                { 
+                    str += "\\f" ;
                     break;
-                
-                case "\u000D": 
-                    //carriage return
-                    str += "\\r";
+                }
+                case "\u000D" : // carriage return
+                {
+                    str += "\\r" ;
                     break;
-                
-                case "\u0022": 
-                    //double quote
-                    str += "\\\"";
+                }
+                case "\u0022" : // double quote
+                {
+                    str += "\\\"" ;
                     break;
-                
-                case "\u0027": 
-                    //single quote
+                }
+                case "\u0027" : // single quote
+                {
                     str += "\\\'";
                     break;
-                
-                case "\u005c": 
-                    //backslash
+                }
+                case "\u005c" : // backslash
+                {
                     str += "\\\\";
                     break;
-                
-                default:
+                }
+                default :
+                {
                     str += ch;
+                }
             }
-            
             pos++;
         }
-        
         return quote + str + quote;
-    }
+    };
 }

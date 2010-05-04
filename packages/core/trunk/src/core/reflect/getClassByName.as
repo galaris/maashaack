@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,18 +39,16 @@ package core.reflect
     
     /**
     * Returns the class reference from a string class name.
-    * 
     * <p>
     * The string name notation can be either "flash.system::Capabilities"
     * or "flash.system.Capabilities", but you have to provide the full
     * qualified path of the class, "Capabilities" alone will not work.
     * </p>
-    * 
     * @param name a string of the full qualified path of a class
     * @param domain (optional) the <code>ApplicationDomain</code> where to find the class reference,
     * default is <code>ApplicationDomain.currentDomain</code>
     */
-    public var getClassByName:Function = function( name:String, domain:ApplicationDomain = null ):Class
+    public const getClassByName:Function = function( name:String, domain:ApplicationDomain = null ):Class
     {
         if( !domain )
         {
@@ -58,5 +56,5 @@ package core.reflect
         }
         
         return domain.getDefinition( name ) as Class;
-    }
+    };
 }

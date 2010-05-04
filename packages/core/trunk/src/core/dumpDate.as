@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,39 +36,34 @@
 package core
 {
     /**
-    * Dumps a string representation of a Date object.
-    * 
-    * @param value a Date object
-    * @param timestamp (optional) boolean option to serialize the date as a timestamp
-    */
-    public const dumpDate:Function = function( value:Date, timestamp:Boolean = false ):String
+     * Dumps a string representation of any Date reference.
+     * @param data an Date reference to transform.
+     * @return The dump string representation of any Data reference.
+     */
+    public const dumpDate:Function = function( date:Date , timestamp:Boolean = false ):String
     {
-        if( timestamp )
+        var data:Array;
+        if ( timestamp )
         {
-            return "new Date(" + String( value.valueOf() ) + ")";
+            return "new Date(" + String( date.valueOf() ) + ")";
         }
         else
         {
-            var data:Array;
-            var y:Number = value.getFullYear( );
-            var m:Number = value.getMonth( );
-            var d:Number = value.getDate( );
-            var h:Number = value.getHours( );
-            var mn:Number = value.getMinutes( );
-            var s:Number = value.getSeconds( );
-            var ms:Number = value.getMilliseconds( );
-            
+            var y:Number  = date.getFullYear();
+            var m:Number  = date.getMonth();
+            var d:Number  = date.getDate();
+            var h:Number  = date.getHours();
+            var mn:Number = date.getMinutes();
+            var s:Number  = date.getSeconds();
+            var ms:Number = date.getMilliseconds();
             data = [ y, m, d, h, mn, s, ms ];
-            data.reverse( );
-            
+            data.reverse();
             while( data[0] == 0 )
             {
                 data.splice( 0, 1 );
             }
-            
-            data.reverse( );
-            
+            data.reverse() ;
             return "new Date(" + data.join( "," ) + ")";
         }
-    }
+    };
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -46,7 +46,6 @@ package core
     public const dumpObject:Function = function( value:Object, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
         var source:Array = [];
-        
         for( var member:String in value )
         {
             if( value.hasOwnProperty( member ) )
@@ -63,23 +62,32 @@ package core
                     continue;
                 }
                 
-                if( prettyprint ) { indent++; }
+                if( prettyprint ) 
+                { 
+                    indent++ ; 
+                }
                 source.push( member + ":" + dump( value[member], prettyprint, indent, indentor ) );
-                if( prettyprint ) { indent--; }
+                if( prettyprint ) 
+                { 
+                    indent-- ; 
+                }
             }
         }
-        
         source = source.sort();
-        
-        if( !prettyprint ) { return( "{" + source.join( "," ) + "}" ); }
-        
-        var spaces:Array = [];
-        for( var j:int; j<indent; j++ )
-        {
-            spaces.push( indentor );
+        if( prettyprint ) 
+        { 
+            var spaces:Array = [];
+            for( var i:int ; i < indent ; i++ )
+            {
+                spaces.push( indentor );
+            }
+            
+            var decal:String = "\n" + spaces.join( "" );
+            return decal + "{" + decal + indentor + source.join( "," + decal + indentor ) + decal + "}";
         }
-        
-        var decal:String = "\n" + spaces.join( "" );
-        return decal + "{" + decal + indentor + source.join( "," + decal + indentor ) + decal + "}";
-    }
+        else
+        {
+            return( "{" + source.join( "," ) + "}" ) ;
+        }
+    };
 }

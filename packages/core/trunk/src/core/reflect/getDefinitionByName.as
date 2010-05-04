@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -48,7 +48,7 @@ package core.reflect
     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference,
     * default is <code>ApplicationDomain.currentDomain</code>
     */
-    public var getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
+    public const getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
     {
         if( !domain )
         {
@@ -56,5 +56,5 @@ package core.reflect
         }
         
         return domain.getDefinition( name );
-    }
+    };
 }

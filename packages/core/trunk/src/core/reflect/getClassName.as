@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -38,12 +38,12 @@ package core.reflect
     import flash.utils.getQualifiedClassName;
     
     /**
-    * Returns the string class name of an object.
-    * 
-    * @param o an object reference
-    * @param path (optional) boolean option to returns the full path, default is false
-    */
-    public var getClassName:Function = function( o:*, path:Boolean = false ):String
+     * Returns the string class name of an object.
+     * @param o an object reference
+     * @param path (optional) boolean option to returns the full path, default is false
+     * @return the string class name of an object.
+     */
+    public const getClassName:Function = function( o:*, path:Boolean = false ):String
     {
         var fullpath:String = getQualifiedClassName( o );
         
@@ -63,5 +63,5 @@ package core.reflect
             
             return fullpath;
         }
-    }
+    };
 }

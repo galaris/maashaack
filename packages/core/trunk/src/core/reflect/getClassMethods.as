@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -44,12 +44,11 @@ package core.reflect
     * @param o an object reference
     * @param inherited (optional) boolean option to include inherited methods
     */
-    public var getClassMethods:Function = function( o:*, inherited:Boolean = false ):Array
+    public const getClassMethods:Function = function( o:*, inherited:Boolean = false ):Array
     {
         var type:XML = describeType( o );
         var fullname:String = getQualifiedClassName( o );
         var members:Array = [];
-        
         for each( var member:XML in type.method )
         {
             if( inherited )
@@ -63,5 +62,5 @@ package core.reflect
         }
         
         return members;
-    }
+    };
 }

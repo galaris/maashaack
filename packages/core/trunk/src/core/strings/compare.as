@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -37,7 +37,6 @@ package core.strings
 {
     /**
     * Compares two strings.
-    * 
     * <p>
     * The default comparaison algorithm use an ascending alphabetic order
     * with minuscule weighting less than majuscule.
@@ -72,7 +71,7 @@ package core.strings
     * </ul>
     * </p>
     */
-    public var compare:Function = function( str1:String, str2:String, strict:Boolean = false ):int
+    public const compare:Function = function( str1:String, str2:String, strict:Boolean = false ):int
     {
         if( !strict )
         {
@@ -107,5 +106,5 @@ package core.strings
         {
             return -1;
         }
-    }
+    };
 }

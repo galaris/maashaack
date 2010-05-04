@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -40,9 +40,9 @@ package core.reflect
     * 
     * @param c the class to invoke
     * @param args (optional) the arguments to pass to the constructor (max 32)
-    * @return an instance of the class, or null if class can not construct
+    * @return an instance of the class, or null if class can not construct.
     */
-    public var invoke:Function = function( c:Class, args:Array = null ):*
+    public const invoke:Function = function( c:Class, args:Array = null ):*
     {
         if( !args )
         {
@@ -175,5 +175,5 @@ package core.reflect
             return null;
         }
         
-    }
+    };
 }

@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,34 +36,34 @@
 package core.strings
 {
     /**
-    * Quick and fast format of a string using indexed parameters only.
-    * 
-    * <p>Usage :</p>
-    * <ul>
-    * <li><code>fastformat( pattern:String, ...args:Array ):String</code></li>
-    * <li><code>fastformat( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
-    * </ul>
-    * 
-    * @example basic usage
-    * <listing version="3.0">
-    * <code class="prettyprint">
-    * import core.strings.fastformat;
-    * 
-    * trace( fastformat( "hello {0}", "world" ) );
-    * //output: "hello world"
-    * 
-    * trace( fastformat( "hello {0} {1} {2}", [ "the", "big", "world" ] ) );
-    * //output: "hello the big world"
-    * </code>
-    * </listing>
-    * 
-    * <p>
-    * TODO more documentation
-    * </p>
-    * 
-    * @see: core.strings.format
-    */
-    public var fastformat:Function = function( pattern:String, ...args ):String
+     * Quick and fast format of a string using indexed parameters only.
+     * 
+     * <p>Usage :</p>
+     * <ul>
+     * <li><code>fastformat( pattern:String, ...args:Array ):String</code></li>
+     * <li><code>fastformat( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
+     * </ul>
+     * 
+     * @example basic usage
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import core.strings.fastformat;
+     * 
+     * trace( fastformat( "hello {0}", "world" ) );
+     * //output: "hello world"
+     * 
+     * trace( fastformat( "hello {0} {1} {2}", [ "the", "big", "world" ] ) );
+     * //output: "hello the big world"
+     * </code>
+     * </listing>
+     * 
+     * <p>
+     * TODO more documentation
+     * </p>
+     * 
+     * @see: core.strings.format
+     */
+    public const fastformat:Function = function( pattern:String , ...args ):String
     {
         if( (pattern == null) || (pattern == "") )
         {
@@ -71,11 +71,11 @@ package core.strings
         }
         
         var formatted:String = pattern;
-        var len:uint = args.length;
+        var len:int = args.length;
         
         if( (len == 1) && (args[0] is Array) )
         {
-            args = args[0]
+            args = args[0] ;
             len  = args.length;
         }
         
@@ -86,5 +86,5 @@ package core.strings
         }
         
         return formatted;
-    }
+    };
 }

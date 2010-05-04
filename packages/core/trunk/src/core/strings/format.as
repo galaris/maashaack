@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -36,24 +36,24 @@
 package core.strings
 {
     /**
-    * Format a string using indexed or named parameters.
-    * 
-    * <p>Usage :</p>
-    * <ul>
-    * <li><code>format( pattern:String, ...args:Array ):String</code></li>
-    * <li><code>format( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
-    * <li><code>format( pattern:String, [arg0:*,arg1:*,arg2:*, ...], ...args:Array ):String</code></li>
-    * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...} ):String</code></li>
-    * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...}, ...args:Array ):String</code></li>
-    * </ul>
-    * 
-    * <p>
-    * TODO more documentation
-    * </p>
-    * 
-    * @see: core.strings.fastformat
-    */
-    public var format:Function = function( pattern:String, ...args ):String
+     * Format a string using indexed or named parameters.
+     * 
+     * <p>Usage :</p>
+     * <ul>
+     * <li><code>format( pattern:String, ...args:Array ):String</code></li>
+     * <li><code>format( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
+     * <li><code>format( pattern:String, [arg0:*,arg1:*,arg2:*, ...], ...args:Array ):String</code></li>
+     * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...} ):String</code></li>
+     * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...}, ...args:Array ):String</code></li>
+     * </ul>
+     * 
+     * <p>
+     * TODO more documentation
+     * </p>
+     * 
+     * @see: core.strings.fastformat
+     */
+    public const format:Function = function( pattern:String, ...args ):String
     {
         if( (pattern == null) || (pattern == "") )
         {
@@ -100,7 +100,7 @@ package core.strings
             }
             
             return str;
-        }
+        };
         
         /* note:
            yes, here we duplicate the pad() function and yes this is on purpose
@@ -129,7 +129,7 @@ package core.strings
             }
             
             return str;
-        }
+        };
         
         while( result != null )
         {
@@ -158,5 +158,5 @@ package core.strings
         }
         
         return formatted;
-    }
+    };
 }

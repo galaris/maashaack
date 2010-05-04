@@ -37,6 +37,10 @@ package core
 {
     import buRRRn.ASTUce.framework.*;
     
+    import core.arrays.AllTests;
+    import core.reflect.AllTests;
+    import core.strings.AllTests;
+    
     public class AllTests
     {
         
@@ -44,10 +48,19 @@ package core
         {
             var suite:TestSuite = new TestSuite("x4a core tests");
             
+            suite.addTest( core.arrays.AllTests.suite() );
+            suite.addTest( core.reflect.AllTests.suite() );
+            suite.addTest( core.strings.AllTests.suite() );
+            
             suite.addTestSuite( versionTest );
             suite.addTestSuite( uriTest );
             suite.addTestSuite( bitTest );
             //suite.addTestSuite( bitTimedTest );
+            
+            suite.addTestSuite( dumpArrayTest );
+            suite.addTestSuite( dumpDateTest );
+            suite.addTestSuite( dumpObjectTest );
+            suite.addTestSuite( dumpStringTest );
             
             return suite;
         }

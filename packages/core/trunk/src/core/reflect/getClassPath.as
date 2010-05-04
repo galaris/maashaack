@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -43,7 +43,7 @@ package core.reflect
     * @param o an object reference
     * @param normalize (optional) boolean option to format the string with dots, default is false
     */
-    public var getClassPath:Function = function( o:*, normalize:Boolean = false ):String
+    public const getClassPath:Function = function( o:*, normalize:Boolean = false ):String
     {
         var fullpath:String = getQualifiedClassName( o );
         
@@ -53,5 +53,5 @@ package core.reflect
         }
         
         return fullpath;
-    }
+    };
 }
