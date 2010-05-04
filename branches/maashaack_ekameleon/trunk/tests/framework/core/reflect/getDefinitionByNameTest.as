@@ -37,7 +37,7 @@ package core.reflect
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.eden;
+    import core.dump;
     
     import flash.system.ApplicationDomain;
     import flash.utils.Dictionary;
@@ -55,7 +55,7 @@ package core.reflect
             assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary") , "#2" ) ;
             assertEquals( flash.utils.Dictionary , getDefinitionByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
             
-            assertEquals( system.eden , getDefinitionByName("system.eden") ) ;
+            assertEquals( core.dump , getDefinitionByName("core.dump") ) ;
         }
     }
 }

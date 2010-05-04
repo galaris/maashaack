@@ -53,7 +53,7 @@ package core.reflect
             assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary") , "#2" ) ;
             assertEquals( flash.utils.Dictionary , getClassByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
             
-            assertNull( getClassByName("system.eden") ) ;
+            assertNull( getClassByName("core.dump") ) ;
         }
     }
 }

@@ -51,8 +51,8 @@ package core.reflect
             assertEquals( "" , getClassPackage(Array)   , "#1,1" ) ;
             assertEquals( "" , getClassPackage([])      , "#1,2" ) ;
             
-            assertEquals( "flash.utils" , getClassPackage(Dictionary)                         , "#2,1" ) ;
-            assertEquals( "flash.utils" , getClassPackage(new Dictionary())                   , "#2,2" ) ;
+            assertEquals( "flash.utils" , getClassPackage(Dictionary)       , "#2,1" ) ;
+            assertEquals( "flash.utils" , getClassPackage(new Dictionary()) , "#2,2" ) ;
         }
     }
 }
