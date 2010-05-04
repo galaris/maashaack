@@ -36,70 +36,50 @@
 package core
 {
     /**
-    * Dumps a string representation of any object reference.
+    * Dumps a string representation of an Object object.
     * 
-    * <p>
-    * Works like the <code>eden.serialize()</code> function
-    * and supports the <code>toSource()</code> method.
-    * </p>
-    * 
-    * @example basic usage
-    * <listing version="3.0">
-    * <code class="prettyprint">
-    * var test0:Object = { a:1, b:2, c:null, d:undefined, e:[1,2,3], f:"hello world", g:new Date() };
-    * 
-    * trace( dump( test0 ) );
-    * 
-    * //output
-    * //{a:1,b:2,c:null,d:undefined,e:[1,2,3],f:"hello world",g:new Date(2010,4,3,20,35,7,860)}
-    * 
-    * trace( dump( test0, true ) );
-    * 
-    * //output
-    * // {
-    * //     a:1,
-    * //     b:2,
-    * //     c:null,
-    * //     d:undefined,
-    * //     e:
-    * //     [
-    * //         1,
-    * //         2,
-    * //         3
-    * //     ],
-    * //     f:"hello world",
-    * //     g:new Date(2010,4,3,20,35,7,860)
-    * // }
-    * 
-    * </code>
-    * </listing>
-    * 
-    * @param o an object reference
+    * @param value an object
     * @param prettyprint (optional) boolean option to output a pretty printed string
     * @param indent (optional) initial indentation
     * @param indentor (optional) initial string used for the indent
     */
-    public const dump:Function = function( o:*, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
+    public const dumpObject:Function = function( value:Object, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
-        if( o === undefined ) { return "undefined"; }
+        var source:Array = [];
         
-        if( o === null ) { return "null"; }
+        for( var member:String in value )
+        {
+            if( value.hasOwnProperty( member ) )
+            {
+                if( value[member] === undefined )
+                {
+                    source.push( member + ":" + "undefined" );
+                    continue;
+                }
+                
+                if( value[member] === null )
+                {
+                    source.push( member + ":" + "null" );
+                    continue;
+                }
+                
+                if( prettyprint ) { indent++; }
+                source.push( member + ":" + dump( value[member], prettyprint, indent, indentor ) );
+                if( prettyprint ) { indent--; }
+            }
+        }
         
-        if( o.hasOwnProperty( "toSource" ) ) { return o.toSource( indent ); }
+        source = source.sort();
         
-        if( o is String ) { return dumpString( o ); }
+        if( !prettyprint ) { return( "{" + source.join( "," ) + "}" ); }
         
-        if( o is Boolean ) { return o ? "true" : "false"; }
+        var spaces:Array = [];
+        for( var j:int; j<indent; j++ )
+        {
+            spaces.push( indentor );
+        }
         
-        if( o is Number ) { return o.toString(); }
-        
-        if( o is Date ) { return dumpDate( o ); }
-        
-        if( o is Array ) { return dumpArray( o, prettyprint, indent, indentor ); }
-        
-        if( o is Object ) { return dumpObject( o, prettyprint, indent, indentor ); }
-        
-        return "<unknown>";
+        var decal:String = "\n" + spaces.join( "" );
+        return decal + "{" + decal + indentor + source.join( "," + decal + indentor ) + decal + "}";
     }
-    
 }
