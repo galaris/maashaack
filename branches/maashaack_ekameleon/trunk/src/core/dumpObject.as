@@ -36,53 +36,58 @@
 package core
 {
     /**
-     * Dumps a string representation of any Array reference.
-     * @param value an Array to dump.
-     * @param prettyprint (optional) boolean option to output a pretty printed string
-     * @param indent (optional) initial indentation
-     * @param indentor (optional) initial string used for the indent
-     * @return The dump string representation of any Array reference.
-     */
-    public const dumpArray:Function = function( value:Array , prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
+    * Dumps a string representation of an Object object.
+    * 
+    * @param value an object
+    * @param prettyprint (optional) boolean option to output a pretty printed string
+    * @param indent (optional) initial indentation
+    * @param indentor (optional) initial string used for the indent
+    */
+    public const dumpObject:Function = function( value:Object, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
         var source:Array = [];
-        var i:int ;
-        var l:int = value.length ;
-        for( i = 0 ; i < l ; i++ )
+        for( var member:String in value )
         {
-            if( value[i] === undefined )
+            if( value.hasOwnProperty( member ) )
             {
-                source.push( "undefined" );
-                continue;
-            }
-            if( value[i] === null )
-            {
-                source.push( "null" );
-                continue;
-            }
-            if( prettyprint ) 
-            { 
-                indent++ ; 
-            }
-            source.push( dump( value[i], prettyprint, indent, indentor ) ) ;
-            if( prettyprint ) 
-            { 
-                indent-- ; 
+                if( value[member] === undefined )
+                {
+                    source.push( member + ":" + "undefined" );
+                    continue;
+                }
+                
+                if( value[member] === null )
+                {
+                    source.push( member + ":" + "null" );
+                    continue;
+                }
+                
+                if( prettyprint ) 
+                { 
+                    indent++ ; 
+                }
+                source.push( member + ":" + dump( value[member], prettyprint, indent, indentor ) );
+                if( prettyprint ) 
+                { 
+                    indent-- ; 
+                }
             }
         }
+        source = source.sort();
         if( prettyprint ) 
         { 
-            var spaces:Array = [] ;
-            for( i=0 ; i < indent ; i++ )
+            var spaces:Array = [];
+            for( var i:int ; i < indent ; i++ )
             {
                 spaces.push( indentor );
             }
-            var decal:String = "\n" + spaces.join( "" ) ;
-            return decal + "[" + decal + indentor + source.join( "," + decal + indentor ) + decal + "]";
+            
+            var decal:String = "\n" + spaces.join( "" );
+            return decal + "{" + decal + indentor + source.join( "," + decal + indentor ) + decal + "}";
         }
         else
         {
-            return( "[" + source.join( "," ) + "]" ); 
+            return( "{" + source.join( "," ) + "}" ) ;
         }
     };
 }

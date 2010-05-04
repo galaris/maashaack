@@ -37,26 +37,31 @@ package core
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    public class dumpArrayTest extends TestCase
+    public class dumpObjectTest extends TestCase
     {
-        public function dumpArrayTest(name:String="")
+        public function dumpObjectTest(name:String="")
         {
             super(name);
         }
         
         public function testBasic():void
         {
-            assertEquals( "[]" , dumpArray( [] ) ) ;
-            //assertEquals( "[1]" , dumpArray( [1] ) ) ;
-            assertEquals( "[1,2,3]" , dumpArray( [1,2,3] ) ) ;
-            assertEquals( "[\"hello\",\"world\"]" , dumpArray( ["hello","world"] ) ) ;
-            assertEquals( "[\"hello\",1,true]" , dumpArray( ["hello",1,true] ) ) ;
+            assertEquals( "{}" , dumpObject( {} ) ) ;
+            assertEquals( "{prop:1}" , dumpObject( { prop:1 } ) ) ;
+            assertEquals( "{prop1:1,prop2:2}" , dumpObject( { prop1:1 , prop2:2 } ) ) ;
+            assertEquals( "{prop1:\"hello\",prop2:\"world\"}" , dumpObject( { prop1:"hello", prop2:"world"} ) ) ;
         }
         
         public function testPrettyprint():void
         {
-            assertEquals( "\n[\n    \n]" , dumpArray( [] , true ) ) ;
-            assertEquals( "\n[\n    1\n]" , dumpArray( [1] , true ) ) ;
+            assertEquals( "\n{\n    \n}" , dumpObject( {} , true ) ) ;
+            assertEquals( "\n{\n    prop1:1\n}" , dumpObject( {prop1:1} , true ) ) ;
+            assertEquals( "\n{\n    prop1:1,\n    prop2:2\n}" , dumpObject( {prop1:1,prop2:2} , true ) ) ;
+        }
+        
+        public function testIndent():void
+        {
+            assertEquals( "\n    {\n        \n    }" , dumpObject( {} , true , 1 ) ) ;
         }
     }
 }

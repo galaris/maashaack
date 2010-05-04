@@ -58,6 +58,7 @@ package core
             
             suite.addTestSuite( dumpArrayTest );
             suite.addTestSuite( dumpDateTest );
+            suite.addTestSuite( dumpObjectTest );
             suite.addTestSuite( dumpStringTest );
             
             return suite;
