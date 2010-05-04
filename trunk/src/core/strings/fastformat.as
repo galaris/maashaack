@@ -33,26 +33,58 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.reflect 
+package core.strings
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import flash.system.ApplicationDomain;
-    
-    public class hasDefinitionByNameTest extends TestCase 
+    /**
+     * Quick and fast format of a string using indexed parameters only.
+     * 
+     * <p>Usage :</p>
+     * <ul>
+     * <li><code>fastformat( pattern:String, ...args:Array ):String</code></li>
+     * <li><code>fastformat( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
+     * </ul>
+     * 
+     * @example basic usage
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import core.strings.fastformat;
+     * 
+     * trace( fastformat( "hello {0}", "world" ) );
+     * //output: "hello world"
+     * 
+     * trace( fastformat( "hello {0} {1} {2}", [ "the", "big", "world" ] ) );
+     * //output: "hello the big world"
+     * </code>
+     * </listing>
+     * 
+     * <p>
+     * TODO more documentation
+     * </p>
+     * 
+     * @see: core.strings.format
+     */
+    public const fastformat:Function = function( pattern:String , ...args ):String
     {
-        public function hasDefinitionByNameTest(name:String = "")
+        if( (pattern == null) || (pattern == "") )
         {
-            super(name);
+            return "";
         }
         
-        public function testHasDefinitionByName():void
+        var formatted:String = pattern;
+        var len:int = args.length;
+        
+        if( (len == 1) && (args[0] is Array) )
         {
-            assertTrue( hasDefinitionByName("Array") , "#1" ) ;
-            assertTrue( hasDefinitionByName("flash.utils.Dictionary") , "#2" ) ;
-            assertTrue( hasDefinitionByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
-            assertTrue( hasDefinitionByName("core.dump") ) ;
-            assertFalse( hasDefinitionByName("foo.bar.Test")) ;
+            args = args[0] ;
+            len  = args.length;
         }
-    }
+        
+        var i:uint;
+        for( i=0; i < len; i++ )
+        {
+            formatted = formatted.replace( new RegExp( "\\{"+i+"\\}", "g" ), args[i] );
+        }
+        
+        return formatted;
+    };
 }

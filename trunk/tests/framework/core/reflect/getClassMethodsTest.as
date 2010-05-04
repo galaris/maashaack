@@ -38,7 +38,7 @@ package core.reflect
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
-    import system.eden;
+    import core.dump;
 
     import flash.display.MovieClip;
 
@@ -95,7 +95,7 @@ package core.reflect
             assertEquals(results.length, methods.length) ;
             for( i = 0 ; i<results.length ; i++ )
             {
-                assertTrue( results.indexOf(methods[i]) > -1 , "find the current result failed with the index:" + i + " and the result:" + results[i] + " results:" + eden.serialize(results) ) ;
+                assertTrue( results.indexOf(methods[i]) > -1 , "find the current result failed with the index:" + i + " and the result:" + results[i] + " results:" + dump(results) ) ;
             }
         }
         

@@ -16,6 +16,20 @@
      */
     public const startsWith:Function = function( source:String , value:String ):Boolean
     {
+        if( (source != null) && (value == "") )
+        {
+            return true;
+        }
+        
+        if( (source == null) || (value == null) || (source == "") || (source.length < value.length) )
+        {
+            return false;
+        }
+        
+        if( source.charAt( 0 ) != value.charAt( 0 ) )
+        {
+            return false;
+        }
         return source.indexOf( value ) == 0 ;
     };
 }
