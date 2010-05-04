@@ -80,47 +80,6 @@ package core
      */
     public const dump:Function = function( o:*, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
-        var idr:String = indentor;
-        var _dumpObject:Function = function( value:Object ):String
-        {
-            var source:Array = [];
-            
-            for( var member:String in value )
-            {
-                if( value.hasOwnProperty( member ) )
-                {
-                    if( value[member] === undefined )
-                    {
-                        source.push( member + ":" + "undefined" );
-                        continue;
-                    }
-                    
-                    if( value[member] === null )
-                    {
-                        source.push( member + ":" + "null" );
-                        continue;
-                    }
-                    
-                    if( prettyprint ) { indent++; }
-                    source.push( member + ":" + dump( value[member], prettyprint, indent, idr ) );
-                    if( prettyprint ) { indent--; }
-                }
-            }
-            
-            source = source.sort();
-            
-            if( !prettyprint ) { return( "{" + source.join( "," ) + "}" ); }
-            
-            var spaces:Array = [];
-            for( var j:int; j<indent; j++ )
-            {
-                spaces.push( idr );
-            }
-            
-            var decal:String = "\n" + spaces.join( "" );
-            return decal + "{" + decal + idr + source.join( "," + decal + idr ) + decal + "}";
-        };
-        
         if( o === undefined ) 
         {
             return "undefined"; 
@@ -155,7 +114,7 @@ package core
         }
         else if( o is Object ) 
         { 
-            return _dumpObject( o ); 
+            return dumpObject( o , prettyprint, indent, indentor ); 
         }
         else
         {
