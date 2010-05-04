@@ -80,7 +80,14 @@ package core.strings
             if( len > 1 ) { args.shift(); }
         }
         
-        var search:RegExp = new RegExp( "\\{([a-z0-9,:\\-]*)\\}", "g" );
+        /* note:
+           don't use the global flag here as we want the search
+           to be iterative and starting at index 0 of the string
+           
+           but do use the multiline flag if a token can be replaced
+           by a \n, \r, etc.
+        */
+        var search:RegExp = new RegExp( "{([a-z0-9,:\\-]*)}", "m" );
         var result:Object = search.exec( formatted );
         
         var part:String;
@@ -145,7 +152,10 @@ package core.strings
             {
                 if( words.hasOwnProperty( token ) )
                 {
-                    formatted = formatted.replace( part, align( words[token] ) );
+                    /* note:
+                       here you want the part to have a global flag to replace all token instances
+                    */
+                    formatted = formatted.replace( new RegExp(part,"g"), align( String(words[token]) ) );
                 }
             }
             else
@@ -157,6 +167,7 @@ package core.strings
             result = search.exec( formatted );
         }
         
+
         return formatted;
     };
 }
