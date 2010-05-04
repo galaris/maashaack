@@ -35,30 +35,35 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    /**
+     * Dumps a string representation of any Date reference.
+     * @param data an Date reference to transform.
+     * @return The dump string representation of any Data reference.
+     */
+    public const dumpDate:Function = function( date:Date , timestamp:Boolean = false ):String
     {
-        public static function suite():ITest
+        var data:Array;
+        if ( timestamp )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpDateTest );
-            
-            return suite;
+            return "new Date(" + String( date.valueOf() ) + ")";
         }
-    }
+        else
+        {
+            var y:Number  = date.getFullYear();
+            var m:Number  = date.getMonth();
+            var d:Number  = date.getDate();
+            var h:Number  = date.getHours();
+            var mn:Number = date.getMinutes();
+            var s:Number  = date.getSeconds();
+            var ms:Number = date.getMilliseconds();
+            data = [ y, m, d, h, mn, s, ms ];
+            data.reverse();
+            while( data[0] == 0 )
+            {
+                data.splice( 0, 1 );
+            }
+            data.reverse() ;
+            return "new Date(" + data.join( "," ) + ")";
+        }
+    };
 }

@@ -35,30 +35,23 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class dumpDateTest extends TestCase
     {
-        public static function suite():ITest
+        public function dumpDateTest(name:String="")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpDateTest );
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testBasic():void
+        {
+            assertEquals( "new Date(2010,4,5,8,23,50,10)" , dumpDate( new Date( 2010, 4, 5, 8, 23, 50, 10 ) ) ) ;
+        }
+        
+        public function testTimestamp():void
+        {
+            assertEquals( "new Date(1273040630010)" , dumpDate( new Date( 2010, 4, 5, 8, 23, 50, 10 ) , true ) ) ;
         }
     }
 }
