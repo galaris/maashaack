@@ -35,31 +35,17 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    /**
+     * Returns the unicode string notation of the specified numeric value.
+     * @return the unicode string notation of the specified numeric value.
+     */
+    internal const _toUnicodeNotation:Function = function( num:int ):String
     {
-        public static function suite():ITest
+        var hex:String = num.toString( 16 ) ;
+        while( hex.length < 4 )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpStringTest );
-            
-            return suite;
+            hex = "0" + hex ;
         }
-    }
+        return hex ;
+    };
 }

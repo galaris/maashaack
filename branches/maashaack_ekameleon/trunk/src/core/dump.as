@@ -81,100 +81,10 @@ package core
     public const dump:Function = function( o:*, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
         var idr:String = indentor;
-        
-        var _dumpString:Function = function( value:String ):String
-        {
-            var quote:String = "\"";
-            var str:String = "";
-            var ch:String = "";
-            var pos:int = 0;
-            var code:int;
-            
-            var _toUnicodeNotation:Function = function( num:int ):String
-            {
-                var hex:String = num.toString( 16 );
-                while( hex.length < 4 )
-                {
-                    hex = "0" + hex;
-                }
-                return hex;
-            };
-            
-            while( pos < value.length )
-            {
-                ch = value.charAt( pos );
-                code = value.charCodeAt( pos );
-                
-                if( code > 0xFF )
-                {
-                    str += "\\u" + _toUnicodeNotation( code );
-                    pos++;
-                    continue;
-                }
-                
-                switch( ch )
-                {
-                    case "\u0008": 
-                        //backspace
-                        str += "\\b";
-                        break;
-                    
-                    case "\u0009": 
-                        //horizontal tab
-                        str += "\\t";
-                        break;
-                    
-                    case "\u000A": 
-                        //line feed
-                        str += "\\n";
-                        break;
-                    
-                    case "\u000B": 
-                        //vertical tab
-                        str += "\\v";
-                        /* TODO: check the VT bug */
-                        //str += "\\u000B";
-                        break;
-                    
-                    case "\u000C": 
-                        //form feed
-                        str += "\\f";
-                        break;
-                    
-                    case "\u000D": 
-                        //carriage return
-                        str += "\\r";
-                        break;
-                    
-                    case "\u0022": 
-                        //double quote
-                        str += "\\\"";
-                        break;
-                    
-                    case "\u0027": 
-                        //single quote
-                        str += "\\\'";
-                        break;
-                    
-                    case "\u005c": 
-                        //backslash
-                        str += "\\\\";
-                        break;
-                    
-                    default:
-                        str += ch;
-                }
-                
-                pos++;
-            }
-            
-            return quote + str + quote;
-        };
-        
         var _dumpArray:Function = function( value:Array ):String
         {
             var source:Array = [];
-            var size:uint = value.length ;                
+            var size:uint = value.length ;
             for( var i:int = 0 ; i < size ; i++ )
             {
                 
@@ -261,7 +171,7 @@ package core
         }
         else if( o is String ) 
         { 
-            return _dumpString( o ); 
+            return dumpString( o ); 
         }
         else if ( o is Boolean ) 
         { 
