@@ -35,31 +35,31 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    import core.arrays.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class dumpStringTest extends TestCase
     {
-        public static function suite():ITest
+        public function dumpStringTest(name:String="")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpStringTest );
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testBasic():void
+        {
+            assertEquals( "\"hello world\"" , dumpString( "hello world" ) ) ;
+        }
+        
+        public function testSpecialChar():void
+        {
+            assertEquals( "\"hello\\bworld\""  , dumpString( "hello\bworld" ) ) ;
+            assertEquals( "\"hello\\tworld\""  , dumpString( "hello\tworld" ) ) ;
+            assertEquals( "\"hello\\nworld\""  , dumpString( "hello\nworld" ) ) ;
+            assertEquals( "\"hello\\vworld\""  , dumpString( "hello\vworld" ) ) ;
+            assertEquals( "\"hello\\fworld\""  , dumpString( "hello\fworld" ) ) ;
+            assertEquals( "\"hello\\rworld\""  , dumpString( "hello\rworld" ) ) ;
+            assertEquals( "\"hello\\\"world\"" , dumpString( "hello\"world" ) ) ;
+            assertEquals( "\"hello\\\'world\"" , dumpString( "hello'world" ) ) ;
+            assertEquals( "\"hello\\\\world\"" , dumpString( "hello\\world" ) ) ;
         }
     }
 }
