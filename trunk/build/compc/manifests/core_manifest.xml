@@ -4,7 +4,13 @@
     
     <!-- core -->
     
-    <component id="core:bit"     class="core.bit"     />
+    <component id="core:bit"        class="core.bit"     />
+    <component id="core:dump"       class="core.dump"     />
+    <component id="core:dumpArray"  class="core.dumpArray"     />
+    <component id="core:dumpDate"   class="core.dumpDate"     />
+    <component id="core:dumpObject" class="core.dumpObject"     />
+    <component id="core:dumpString" class="core.dumpString"     />
+    
     <component id="core:uri"     class="core.uri"     />
     <component id="core:version" class="core.version" />
     
@@ -13,13 +19,13 @@
     <component id="core.arrays:contains"    class="core.arrays.contains"    />
     <component id="core.arrays:initialize"  class="core.arrays.initialize"  />
     <component id="core.arrays:pierce"      class="core.arrays.pierce"      />
-    <component id="core.arrays:repeat"      class="core.arrays.repeat"      />
     <component id="core.arrays:reduce"      class="core.arrays.reduce"      />
     <component id="core.arrays:reduceRight" class="core.arrays.reduceRight" />
+    <component id="core.arrays:repeat"      class="core.arrays.repeat"      />
     <component id="core.arrays:shuffle"     class="core.arrays.shuffle"     />
     <component id="core.arrays:spliceInto"  class="core.arrays.spliceInto"  />
     
-    <!-- core.reflect -->    
+    <!-- core.reflect -->
     
     <component id="core.reflect:getClassByName"      class="core.reflect.getClassByName"      />
     <component id="core.reflect:getClassMethods"     class="core.reflect.getClassMethods"     />
@@ -35,11 +41,12 @@
     <component id="core.strings:center"               class="core.strings.center"              />
     <component id="core.strings:compare"              class="core.strings.compare"             />
     <component id="core.strings:endsWith"             class="core.strings.endsWith"            />
+    <component id="core.strings:fastformat"           class="core.strings.fastformat"          />
+    <component id="core.strings:format"               class="core.strings.format"              />
     <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"          />
     <component id="core.strings:insert"               class="core.strings.insert"              />
     <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"      />
     <component id="core.strings:lineTerminatorChars"  class="core.strings.lineTerminatorChars" />
-    <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"     />
     <component id="core.strings:pad"                  class="core.strings.pad"                 />
     <component id="core.strings:padLeft"              class="core.strings.padLeft"             />
     <component id="core.strings:padRight"             class="core.strings.padRight"            />
