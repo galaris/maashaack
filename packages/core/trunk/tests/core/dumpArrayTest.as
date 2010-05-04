@@ -47,7 +47,7 @@ package core
         public function testBasic():void
         {
             assertEquals( "[]" , dumpArray( [] ) ) ;
-            //assertEquals( "[1]" , dumpArray( [1] ) ) ;
+            assertEquals( "[1]" , dumpArray( [1] ) ) ;
             assertEquals( "[1,2,3]" , dumpArray( [1,2,3] ) ) ;
             assertEquals( "[\"hello\",\"world\"]" , dumpArray( ["hello","world"] ) ) ;
             assertEquals( "[\"hello\",1,true]" , dumpArray( ["hello",1,true] ) ) ;

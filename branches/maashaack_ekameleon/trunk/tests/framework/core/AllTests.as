@@ -60,6 +60,7 @@ package core
             suite.addTestSuite( dumpDateTest );
             suite.addTestSuite( dumpObjectTest );
             suite.addTestSuite( dumpStringTest );
+            suite.addTestSuite( dumpTest );
             
             return suite;
         }

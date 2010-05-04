@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2009
+  Portions created by the Initial Developers are Copyright (C) 2006-2010
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -35,15 +35,15 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.*;
-    
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
+
     import core.arrays.AllTests;
     import core.reflect.AllTests;
     import core.strings.AllTests;
-    
+
     public class AllTests
     {
-        
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("x4a core tests");
@@ -55,12 +55,12 @@ package core
             suite.addTestSuite( versionTest );
             suite.addTestSuite( uriTest );
             suite.addTestSuite( bitTest );
-            //suite.addTestSuite( bitTimedTest );
             
             suite.addTestSuite( dumpArrayTest );
             suite.addTestSuite( dumpDateTest );
             suite.addTestSuite( dumpObjectTest );
             suite.addTestSuite( dumpStringTest );
+            suite.addTestSuite( dumpTest );
             
             return suite;
         }
