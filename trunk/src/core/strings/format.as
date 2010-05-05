@@ -62,7 +62,7 @@ package core.strings
         
         var formatted:String = pattern;
         var len:uint = args.length;
-        var words:Object;
+        var words:Object = {};
         
         if( (len == 1) && (args[0] is Array) )
         {
@@ -95,6 +95,7 @@ package core.strings
         var c:String;
         var padc:String = " ";
         var padding:int = 0;
+        var dirty:Boolean = false;
         
         var pad:Function = function( str:String ):String
         {
@@ -138,15 +139,49 @@ package core.strings
             return str;
         };
         
+        /* note:
+           the buffer will store special string parts of the form
+           buffer[0] = "{a:1,b:2,c:3}"
+           the fromatted string will replace it by the form
+           \uFFFC0 , \uFFFC+N , N being an integer from 0 to N
+        */
+        var buffer:Array = [];
+        
+        var isValid:Function = function( token:String ):Boolean
+        {
+            if( token == "" ) { return false; }
+            
+            if( token.indexOf( ":" ) > -1 ) { return false; }
+            
+            return true;
+        };
+        
         while( result != null )
         {
             part  = result[0];
             token = pad( result[1] );
+//            trace( "result: [" + result + "]" );
+//            trace( "part: [" + part + "]" );
+//            trace( "token: [" + token + "]" );
+//            trace( "isValid: " + isValid( token ) );
+            
             c = token.charAt(0);
             
             if( ("0" <= c) && (c <= "9") )
             {
-                formatted = formatted.replace( part, align( args[token] ) );
+                formatted = formatted.replace( part, align( String(args[token]) ) );
+            }
+            else if( !isValid( token ) )
+            {
+                /* note:
+                   this is to deal with eden/json strings inside a format string
+                   if you do a format( "expected: <{a:1,b:2,c:3}> but was: <{a:1,b:2,c:4}>", "test" )
+                   this will collide of the legit parsing of
+                   format( "hello {x,-8} and nhello {y,-8}" )
+                */
+                buffer.push( part );
+                formatted = formatted.replace( new RegExp(part,"g"), "\uFFFC"+(buffer.length-1) );
+                dirty = true;
             }
             else if( ("a" <= c) && (c <= "z") )
             {
@@ -160,14 +195,23 @@ package core.strings
             }
             else
             {
-                //don't use format() within itself
+                //note: don't use format() within itself
                 throw new Error( "malformed token \""+part+"\", can not start with \""+c+"\"" );
             }
             
             result = search.exec( formatted );
         }
         
-
+        if( dirty )
+        {
+            var i:uint;
+            var bl:Number = buffer.length; 
+            for( i=0; i<bl; i++ )
+            {
+                formatted = formatted.replace( new RegExp("\uFFFC"+i,"g"), buffer[i] );
+            }
+        }
+        
         return formatted;
     };
 }
