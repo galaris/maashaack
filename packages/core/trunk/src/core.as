@@ -35,6 +35,8 @@
 
 package
 {
+    import core.dump; void(dump);
+    
     import core.strings.pad; void(pad);
     import core.strings.format; void(format);
     import core.strings.compare; void(compare);
@@ -50,6 +52,7 @@ package
     
     import flash.display.Sprite;
     import flash.utils.describeType;
+    import core.version;
     
     
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="core", scriptRecursionLimit="1000", scriptTimeLimit="60")]
@@ -60,6 +63,11 @@ package
             trace( "core" );
             
             //basic usage
+            
+            trace( "---- core.dump ----" );
+            var test0:Object = { a:1, b:2, c:null, d:undefined, e:[1,2,3], f:"hello world", g:new Date() };
+            trace( dump( test0 ) );
+            trace( dump( test0, true ) );
             
             trace( "---- core.bit ----" );
             
@@ -106,6 +114,39 @@ package
             {
                 trace( format( "{0} scored {1,5}", names[j], scores[j] ) );
             }
+            
+            var str_test:String = "";
+                str_test += "{sep}{crlf}";
+                str_test += "{name}: {fullname} v{version}{crlf}";
+                str_test += "{copyright}{crlf}";
+                str_test += "{origin}{crlf}";
+                str_test += "{sep}";
+                str_test += "{crlf}config:";
+                str_test += "{config}{crlf}";
+                str_test += "{sep}";
+            
+            var version_test:core.version = new core.version( 1,2,3,4);
+            
+            trace( format( str_test,
+                           {
+                           sep: "----------------------------------------------------------------",
+                           crlf: "\n",
+                           name: "ASTUce",
+                           fullname: "ActionScript Test Unit compact edition AS3",
+                           version: version_test,
+                           copyright: "Copyright © 2006-2010 Zwetan Kjukov, All right reserved.",
+                           origin: "Made in the EU.",
+                           config: dump( test0, true )
+                           }
+                        ) );
+            
+            var str_test2:String = "hello {} {0}";
+            trace( format( str_test2, "world" ) );
+            
+            var str_test3:String = "expected: <{a:1,b:2,c:3}> but was: <{a:1,b:2,c:4}>";
+            var str_test4:String = "{a} expected: <{a:1,b:2,c:3}> but {b} was: <{a:1,b:2,c:4}>, and not {c}";
+            trace( format( str_test3, "world" ) );
+            trace( format( str_test4, {a:"A",b:"B",c:"C"} ) );
             
             //compare
             var s0:String = "HELLO";
@@ -159,7 +200,7 @@ package
             //getClassMethods
             trace( getClassMethods( one_obj ) );
             trace( getClassMethods( one_obj, true ) );
-            trace( describeType( one_obj ) );
+            //trace( describeType( one_obj ) );
         }
     }
 }
