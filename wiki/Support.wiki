@@ -3,7 +3,7 @@
 
 <wiki:gadget url="http://google-code-feed-gadget.googlecode.com/svn/trunk/gadget.xml" up_feeds="http://ecmascript.blogspot.com/atom.xml" width="640"  height="420" border="0" up_showaddbutton="0" />
 <br>
-<wiki:gadget url="http://google-code-project-hosting-gadgets.googlecode.com/svn/trunk/examples/issueupdates_example.xml" up_projectName="maashaack" />
+<wiki:gadget url="http://google-code-project-hosting-gadgets.googlecode.com/svn/trunk/examples/issueupdates_example.xml" width="640"  height="420" border="0" up_projectName="maashaack" />
 <br>
 <br>
 <br>
