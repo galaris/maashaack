@@ -1,2 +1,7 @@
 #summary some basic support.
 #labels Support
+
+<wiki:gadget url="http://google-code-feed-gadget.googlecode.com/svn/trunk/gadget.xml"
+ up_feeds="http://google-code-featured.blogspot.com/atom.xml"
+ width="780"  height="340" border="0"
+ up_showaddbutton="0"/>
