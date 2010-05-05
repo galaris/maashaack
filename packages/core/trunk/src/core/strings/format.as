@@ -35,8 +35,6 @@
 
 package core.strings
 {
-    import mx.flash.UIMovieClip;
-    
     /**
      * Format a string using indexed or named parameters.
      * 
@@ -156,7 +154,7 @@ package core.strings
             if( token.indexOf( ":" ) > -1 ) { return false; }
             
             return true;
-        }
+        };
         
         while( result != null )
         {
@@ -213,7 +211,7 @@ package core.strings
                 formatted = formatted.replace( new RegExp("\uFFFC"+i,"g"), buffer[i] );
             }
         }
-
+        
         return formatted;
     };
 }
