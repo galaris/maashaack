@@ -33,56 +33,34 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    /**
-     * Quick and fast format of a string using indexed parameters only.
-     * 
-     * <p>Usage :</p>
-     * <ul>
-     * <li><code>fastformat( pattern:String, ...args:Array ):String</code></li>
-     * <li><code>fastformat( pattern:String, [arg0:*,arg1:*,arg2:*, ...] ):String</code></li>
-     * </ul>
-     * 
-     * @example basic usage
-     * <listing version="3.0">
-     * <code class="prettyprint">
-     * import core.strings.fastformat;
-     * 
-     * trace( fastformat( "hello {0}", "world" ) );
-     * //output: "hello world"
-     * 
-     * trace( fastformat( "hello {0} {1} {2}", [ "the", "big", "world" ] ) );
-     * //output: "hello the big world"
-     * </code>
-     * </listing>
-     * 
-     * <p>
-     * TODO more documentation
-     * </p>
-     * 
-     * @see: core.strings.format
-     */
-    public const fastformat:Function = function( pattern:String , ...args:Array ):String
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class fastformatTest extends TestCase 
     {
-        if( (pattern == null) || (pattern == "") )
+        public function fastformatTest(name:String = "")
         {
-            return "";
+            super(name);
         }
         
-        var len:int = args.length;
-        
-        if( (len == 1) && (args[0] is Array) )
+        public function testEmpty():void
         {
-            args = args[0] ;
-            len  = args.length;
+            assertEquals( "" , fastformat( ""   ) , "#1" ) ;
+            assertEquals( "" , fastformat( null ) , "#2" ) ;
         }
         
-        for( var i:int=0; i < len; i++ )
+        public function testDefault():void
         {
-            pattern = pattern.replace( new RegExp( "\\{"+i+"\\}", "g" ), args[i] );
+            assertEquals( "hello" , fastformat( "hello" ) , "#1" ) ;
+            assertEquals( "world" , fastformat( "world" , 1 , true ) , "#2" ) ;
         }
         
-        return pattern;
-    };
+        public function testBasic():void
+        {
+            assertEquals( "apples,oranges,grapes"  , fastformat( "{0},{1},{2}" , "apples" , "oranges", "grapes" ) , "#1" ) ;
+            assertEquals( "apples,oranges,grapes"  , fastformat( "{0},{1},{2}" , ["apples" , "oranges", "grapes"] ) , "#1" ) ;
+            assertEquals( "oranges,apples,oranges" , fastformat( "{1},{0},{1}" , "apples" , "oranges", "grapes" ) , "#1" ) ;
+        }
+    }
 }
