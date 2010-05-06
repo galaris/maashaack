@@ -46,6 +46,7 @@ package core.strings
             
             suite.addTestSuite( centerTest              ) ;
             suite.addTestSuite( endsWithTest            ) ;
+            suite.addTestSuite( fastformatTest          ) ;
             suite.addTestSuite( indexOfAnyTest          ) ;
             suite.addTestSuite( insertTest              ) ;
             suite.addTestSuite( lastIndexOfAnyTest      ) ;

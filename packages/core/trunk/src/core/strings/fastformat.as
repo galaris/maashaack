@@ -63,14 +63,13 @@ package core.strings
      * 
      * @see: core.strings.format
      */
-    public const fastformat:Function = function( pattern:String , ...args ):String
+    public const fastformat:Function = function( pattern:String , ...args:Array ):String
     {
         if( (pattern == null) || (pattern == "") )
         {
             return "";
         }
         
-        var formatted:String = pattern;
         var len:int = args.length;
         
         if( (len == 1) && (args[0] is Array) )
@@ -79,12 +78,11 @@ package core.strings
             len  = args.length;
         }
         
-        var i:uint;
-        for( i=0; i < len; i++ )
+        for( var i:int=0; i < len; i++ )
         {
-            formatted = formatted.replace( new RegExp( "\\{"+i+"\\}", "g" ), args[i] );
+            pattern = pattern.replace( new RegExp( "\\{"+i+"\\}", "g" ), args[i] );
         }
         
-        return formatted;
+        return pattern;
     };
 }
