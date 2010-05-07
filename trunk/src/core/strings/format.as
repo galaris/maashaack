@@ -53,7 +53,7 @@ package core.strings
      * 
      * @see: core.strings.fastformat
      */
-    public const format:Function = function( pattern:String, ...args ):String
+    public const format:Function = function( pattern:String, ...args:Array ):String
     {
         if( (pattern == null) || (pattern == "") )
         {
