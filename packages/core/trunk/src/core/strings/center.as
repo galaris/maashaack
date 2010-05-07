@@ -55,12 +55,24 @@ package core.strings
         {
             return "" ;
         }
-        var len:int = source.length ;
+        var len:int = source.length;
         if ( len <= size )
         {
             len               = size - len ;
             var remain:String = ( len % 2 == 0 ) ? "" : separator;
-            var pad:String    = repeat( separator , int( len / 2 ) );
+            var pad:String    = "";
+            var count:int     = int( len / 2 );
+            if ( count > 0 )
+            {
+                for( var i:int ; i < count ; i++ )
+                {
+                    pad = pad.concat( separator );
+                }
+            }
+            else
+            {
+                pad = separator;
+            }
             return pad + source + pad + remain;
         }
         else
