@@ -1,7 +1,7 @@
 #summary metadata tags in AS3 and Flex.
 #labels Code,AS3,Flex
 
-= Introduction =
+== Introduction ==
 
 from the Flex documentation
  Metadata statements are associated with a class declaration, an individual data field,
@@ -9,11 +9,12 @@ from the Flex documentation
  property or method, add the metadata tag on the line before the property
  or method declaration.
 
-see a list of [http://livedocs.adobe.com/flex/3/html/metadata_3.html officially supported metadata tags]
+== Details ==
 
+see a list of [http://livedocs.adobe.com/flex/3/html/metadata_3.html officially supported metadata tags]
 amongst the more interesting are
 
-`[Exclude]`
+===`[Exclude]`===
 Omits the class element from the Flex Builder tag inspector.
 {{{
 [Exclude(name="label", kind="property")]
