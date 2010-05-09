@@ -5,6 +5,8 @@
 
 A Configurator allow you to configure options of an application and/or packages.
 
+|| *important:* this way of doing gonna change in a futur iteration ||
+
 == Details ==
 
 By default, at the root of your application you can have a config variable
