@@ -44,7 +44,7 @@ public class MyClass extends Sprite
 align vertically the `*` in the comments
 {{{
 /**
- * This my comment.
+ * This is my comment.
  * 
  * <p>Another line of comment.</p>
  */
@@ -58,4 +58,21 @@ if you're comment take one line, use one line
 {{{
 /** Configuration of the project */
 public static var config:Object = {};
+}}}
+
+use `@private` on the setter when you have a getter/setter
+{{{
+/**
+ * Makes the stuff verbose.
+ */
+public function get verbose():Boolean
+{
+    return _verbose;
+}
+
+/** @private */
+public function set verbose( value:Boolean ):void
+{
+    _verbose = value;
+}
 }}}
