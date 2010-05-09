@@ -16,20 +16,33 @@ amongst the more interesting are
 
 ===`[Exclude]`===
 Omits the class element from the Flex Builder tag inspector.
+
 {{{
 [Exclude(name="label", kind="property")]
 }}}
+
 What the doc does not say is this is to omits inherited members
 implemented in the superclass.
 
-`[ExcludeClass]`
+===`[ExcludeClass]`===
 Omits the class from the Flex Builder tag inspector.
 (equivalent to the `@private` tag in ASDoc)
 
+{{{
+package test
+{
+    [ExcludeClass]
+    public class Something
+    {
+    
+    }
+}
+}}}
 
-and some undocumented
 
-`[SWF]`
+===`[SWF]`===
+undocumented
+
 {{{
 [SWF width="#" height="#" widthPercent="#" heightPercent="#" \
      scriptRecursionLimit="#" scriptTimeLimit="#" frameRate="#" \
@@ -37,18 +50,25 @@ and some undocumented
 }}}
 Allows to define SWF parameters in an AS3 project.
 
-`[RequiresLicense]`
+===`[RequiresLicense]`===
+undocumented
+
 Internal to Adobe, used with the Chart component.
 
-`[CollapseWhiteSpace]`
+===`[CollapseWhiteSpace]`===
+undocumented
+
 Used for certain properties that accept large strings,
 where in MXML you might have newlines or whatnot for source
 code formatting that you don't want to be passed through to the string.
 
-`[Frame]`
+===`[Frame]`===
+undocumented
+
 {{{
 [Frame(factoryClass="mx.core.FlexApplicationBootstrap")]
 }}}
+
 from [http://blogs.adobe.com/rgonzalez/2006/06/modular_applications_part_2.html Modular Application (part2)]
  This metadata is a hint to the compiler that the class containing the metadata would
  like to be bootstrapped by the cited factory.
@@ -70,7 +90,10 @@ from [http://blogs.adobe.com/rgonzalez/2006/06/modular_applications_part_2.html 
  this way. Note that the metadata is actually just an inline alias for the "frames"
  compiler configuration option, which lets you explicitly specify the frame classes.
 
-`[Mixin]`
+
+===`[Mixin]`===
+undocumented
+
 usage
 {{{
 [Mixin]
