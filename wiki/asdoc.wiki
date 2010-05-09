@@ -39,4 +39,20 @@ public class MyButton extends UIComponent {
 
 == Using asdoc in maashaack ==
 
-TODO
+aligne the `*` in the comment
+{{{
+/**
+ * This my comment.
+ */
+public function test():void
+{
+
+}
+}}}
+
+if you're comment take one line, use one line for the asdoc
+{{{
+/** Configuration of the project */
+public static var config:Object = {};
+}}}
+
