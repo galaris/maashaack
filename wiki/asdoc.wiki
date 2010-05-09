@@ -1,0 +1,14 @@
+#summary the asdoc tool.
+
+== Introduction ==
+
+description stufff
+
+
+== Informations ==
+
+TODO
+
+== Using asdoc in maashaack ==
+
+TODO
