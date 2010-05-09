@@ -13,11 +13,20 @@ so we took an hybrid approach.
 
 Basically, all main code documentation is in asdoc comments, but extended documentation is linked here on the wiki.
 
-In short, if we have to write more than few lines of documentation, we use a `@see` tag in asdoc and point a wiki page.
+In short, if we have to write more than few lines of documentation, we use a `@see` tag in asdoc and point to a wiki page.
 
 == Informations ==
 
-TODO
+basic asdoc comment
+{{{
+/** 
+* The MyButton control is a commonly used rectangular button. 
+* MyButton controls look like they can be pressed. 
+* They can have a text label, an icon, or both on their face. 
+*/
+public class MyButton extends UIComponent {
+}
+}}}
 
 *special characters:*
 || *char* || *asdoc* || comment ||
