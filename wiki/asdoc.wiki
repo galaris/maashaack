@@ -19,10 +19,13 @@ In short, if we have to write more than few lines of documentation, we use a `@s
 
 TODO
 
-special characters
-|| *char* || *asdoc* ||
-|| `<`    || `&lt;` ||
-|| `>`    || `&gt;` ||
+*special characters:*
+|| *char* || *asdoc* || comment ||
+|| `<` || `&lt;` || ||
+|| `>` || `&gt;` || ||
+|| `&` || `&#38;` || do not use `&amp;` ||
+|| `*` || `&#42;` || ||
+
 
 
 == Using asdoc in maashaack ==
