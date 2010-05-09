@@ -46,7 +46,7 @@ align vertically the `*` in the comments
 /**
  * This my comment.
  * 
- * <p>Another lign of comment.</p>
+ * <p>Another line of comment.</p>
  */
 public function test():void
 {
