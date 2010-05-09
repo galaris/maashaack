@@ -20,11 +20,13 @@ In short, if we have to write more than few lines of documentation, we use a `@s
 basic asdoc comment
 {{{
 /** 
-* The MyButton control is a commonly used rectangular button. 
-* MyButton controls look like they can be pressed. 
-* They can have a text label, an icon, or both on their face. 
+* The MyClass class do that. 
+* Here a second lign. 
+* Blah blah blah. 
 */
-public class MyButton extends UIComponent {
+public class MyClass extends Sprite
+{
+
 }
 }}}
 
@@ -39,10 +41,12 @@ public class MyButton extends UIComponent {
 
 == Using asdoc in maashaack ==
 
-aligne the `*` in the comment
+align vertically the `*` in the comments
 {{{
 /**
  * This my comment.
+ * 
+ * <p>Another lign of comment.</p>
  */
 public function test():void
 {
@@ -50,9 +54,8 @@ public function test():void
 }
 }}}
 
-if you're comment take one line, use one line for the asdoc
+if you're comment take one line, use one line
 {{{
 /** Configuration of the project */
 public static var config:Object = {};
 }}}
-
