@@ -2,12 +2,28 @@
 
 == Introduction ==
 
-description stufff
+All maashaack projects are documented with asdoc from the Flex 4 SDK.
 
+We debated a lot on wether using [http://www.naturaldocs.org/ NaturalDocs] because of the wiki-style comments
+or asdoc, but because asdoc reuse the same workflow of the mxmlc and compc compilers we decided to stay with
+the Flex SDK toolchain.
+
+But asdoc is far from perfect and it can be a `b*tch` to configure it to output exactly what you want,
+so we took an hybrid approach.
+
+Basically, all main code documentation is in asdoc comments, but extended documentation is linked here on the wiki.
+
+In short, if we have to write more than few lines of documentation, we use a `@see` tag in asdoc and point a wiki page.
 
 == Informations ==
 
 TODO
+
+special characters
+|| *char* || *asdoc* ||
+|| `<`    || `&lt;` ||
+|| `>`    || `&gt;` ||
+
 
 == Using asdoc in maashaack ==
 
