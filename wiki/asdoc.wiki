@@ -21,7 +21,7 @@ basic asdoc comment
 {{{
 /** 
 * The MyClass class do that. 
-* Here a second lign. 
+* Here a second line. 
 * Blah blah blah. 
 */
 public class MyClass extends Sprite
@@ -64,6 +64,8 @@ use `@private` on the setter when you have a getter/setter
 {{{
 /**
  * Makes the stuff verbose.
+ * 
+ * <p>Blah blah blah.</p>
  */
 public function get verbose():Boolean
 {
@@ -75,4 +77,17 @@ public function set verbose( value:Boolean ):void
 {
     _verbose = value;
 }
+}}}
+
+
+{{{
+   /**
+    * Environment [...] .
+    *
+    * @langversion 3.0
+    * @playerversion Flash 9
+    * @playerversion AIR 1.1
+    * @productversion Maashaack 1.2
+    * @since 1.0.0
+    */
 }}}
