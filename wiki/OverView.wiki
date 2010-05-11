@@ -62,18 +62,7 @@ package
 
 The core root package is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
 
-here an example
-{{{
-package core
-{
-    public var test:Function = function( message:String ):void
-    {
-        trace( message );
-    }
-}
-}}}
-
-ideally we would want to write it like that
+ideally you would want to write it like that
 {{{
 package core
 {
@@ -87,6 +76,33 @@ package core
 but there is a subtle bug in Flash CS3 that would prevent users to use<br>
 a function declared at the package level from a SWC, so instead of a declaring<br>
 a function, we declare a variable of the type `Function`.
+
+{{{
+package core
+{
+    public var test:Function = function( message:String ):void
+    {
+        trace( message );
+    }
+}
+}}}
+
+but wait, we want speeeeeed so we make that a constant
+{{{
+package core
+{
+    public const test:Function = function( message:String ):void
+    {
+        trace( message );
+    }
+}
+}}}
+
+We'll try to come up with speed comparison, but here what we assume
+ * a package-level function is slightly faster than a static function call
+ * a function marked as final is faster (avoid the compiler to do runtimes lookup)
+ * a package-level constant should be as fast or even faster than a package-level function
+
 
 Also in most of the code editors (even Flex Builder), when you make a reference to<br>
 a variable declared at the package level, the `import` can be cleaned up<br>
