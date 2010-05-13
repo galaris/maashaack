@@ -38,10 +38,10 @@ package graphics.layouts
     import graphics.Align;
     import graphics.numeric.Degrees;
     import graphics.numeric.Trigo;
-
+    
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
-
+    
     /**
      * This layout display all the childs elements in a specific DisplayObjectContainer with a circle trigonometric algorithm.
      */
@@ -72,7 +72,6 @@ package graphics.layouts
         public function set childAngle( value:Number ):void 
         {
             _childAngle = isNaN(value) ? 0 : value ;
-            run() ;
         }
         
         /**
@@ -89,7 +88,6 @@ package graphics.layouts
         public function set childCount(n:Number):void 
         {
             _childCount = n > 1 ? n : 1 ;
-            run() ;
         }
         
         /**
@@ -107,7 +105,6 @@ package graphics.layouts
         public function set childOrientation( b:Boolean ):void 
         {
             _childOrientation = b ;
-            run() ;
         }
         
         /**
@@ -124,7 +121,6 @@ package graphics.layouts
         public function set radius( n:Number ):void 
         {
             _radius = isNaN(n) ? 0 : n ;
-            run() ;
         }
         
         /**
@@ -141,7 +137,6 @@ package graphics.layouts
         public function set startAngle(n:Number):void 
         {
             _startAngle = Trigo.degreesToRadians( isNaN(n) ? 0 : n%360 ) ;
-            run() ;
         }
         
         /**
@@ -199,23 +194,6 @@ package graphics.layouts
                 _bounds.x = -radius ;
                 _bounds.y = -radius ;
             }
-            if ( _container && _container.numChildren > 0 )
-            {
-                var i:int ;
-                var d:DisplayObject ;
-                var l:int    = _container.numChildren ;
-                var x:Number = _bounds.x + radius ;
-                var y:Number = _bounds.y + radius ;
-                for ( i = 0  ; i < l ; i++ ) 
-                {
-                    d = _container.getChildAt(i) ;
-                    if( d )
-                    {
-                        d.x += x ;
-                        d.y += y ;
-                    }
-                }
-            }
         }
         
         /**
@@ -235,6 +213,30 @@ package graphics.layouts
                     if ( _childOrientation )
                     {
                         child.rotation = Degrees.atan2D( child.y , child.x ) + _childAngle ;
+                    }
+                }
+            }
+        }
+        
+        /**
+         * This method is invoked when the rendering is finished to finalize the it after the measure invokation.
+         */
+        public override function update():void
+        {
+            if ( _container && _container.numChildren > 0 )
+            {
+                var i:int ;
+                var d:DisplayObject ;
+                var l:int    = _container.numChildren ;
+                var x:Number = _bounds.x + radius ;
+                var y:Number = _bounds.y + radius ;
+                for ( i = 0  ; i < l ; i++ ) 
+                {
+                    d = _container.getChildAt(i) ;
+                    if( d )
+                    {
+                        d.x += x ;
+                        d.y += y ;
                     }
                 }
             }
