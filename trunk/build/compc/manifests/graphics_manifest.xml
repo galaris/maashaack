@@ -141,6 +141,13 @@
     <component id="graphics.geom:Vectors4"       class="graphics.geom.Vectors4" />
     <component id="graphics.geom:Vertex"         class="graphics.geom.Vertex" />
     
+    <!-- graphics.layouts -->
+    
+    <component id="graphics.layouts:BoxLayout"    class="graphics.layouts.BoxLayout"    />
+    <component id="graphics.layouts:CircleLayout" class="graphics.layouts.CircleLayout" />
+    <component id="graphics.layouts:CoreLayout"   class="graphics.layouts.CoreLayout"   />
+    <component id="graphics.layouts:Layout"       class="graphics.layouts.Layout"       />
+    
     <!-- graphics.logging -->
     
     <component id="graphics.logging:logger" class="graphics.logging.logger"  />
