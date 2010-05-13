@@ -43,6 +43,7 @@ package graphics
     import graphics.events.AllTests;
     import graphics.filters.AllTests;
     import graphics.geom.AllTests;
+    import graphics.layouts.AllTests;
     import graphics.numeric.AllTests;
     
     /**
@@ -60,6 +61,7 @@ package graphics
             suite.addTest( graphics.events.AllTests.suite()  );
             suite.addTest( graphics.filters.AllTests.suite() );
             suite.addTest( graphics.geom.AllTests.suite()    );
+            suite.addTest( graphics.layouts.AllTests.suite() );
             suite.addTest( graphics.numeric.AllTests.suite() );
             
             //// test interfaces in this package
