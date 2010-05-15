@@ -1160,7 +1160,7 @@
 			</xsl:if>
 
 			<xsl:variable name="remainder" select="substring-after(substring-after($inText,'&lt;listing'),'&gt;')"/>
-			<xsl:text disable-output-escaping="yes">&lt;div class='listing'&gt;&lt;pre&gt;</xsl:text>
+			<xsl:text disable-output-escaping="yes">&lt;div class='listing'&gt;&lt;pre class='prettyprint'&gt;</xsl:text>
 				<!-- <xsl:text disable-output-escaping="yes">&lt;code&gt;</xsl:text> -->
 					<xsl:value-of select="substring-before($remainder,'&lt;/listing&gt;')"/>
 				<!-- <xsl:text disable-output-escaping="yes">&lt;/code&gt;</xsl:text> -->
