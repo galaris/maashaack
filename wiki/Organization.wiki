@@ -142,16 +142,23 @@ you can find the different solutions available in `/svn/configs`.
 A *Project* is an independent *Package*, *Library* or *Tool*<br>
 you can find them respectively in `/svn/packages`, `/svn/libraries` and `/svn/tools`.
 
-A *Package* is an AS3 package that fit in one of the root packages as *core*, *system*, etc.<br>
+A *Package* project is an AS3 package that fit in one of the root packages as *core*, *system*, etc.<br>
 those sources are considered of general use and part of a global application framework.
 
-A *Library* is an AS3 library that fit in the package *library*<br>
+A *Library* project is an AS3 library that fit in the package *library*<br>
 those source are considered as 3rd party or specific utilities,<br>
 for example:<br>
 the zlib library can be found in the *library.zlib* package<br>
 and will generate *library.zlib.swc*.
 
-A *Tool* is an AS3 based application that live in its own package (and sometime its own repository)<br>
+A *Platform* project is a particular kind of AS3 library that mock, integrate with or extend the Flash or AIR API<br>
+or sources that are native (defined in AS3 but implemented in C/C++)<br>
+those sources are considered very low level<br>
+for example:<br>
+*stdlib* is the implementation of the C standard library for AS3<br>
+*glue* is the mock of the native classes of Flash Player 9.
+
+A *Tool* project is an AS3 based application that live in its own package (and sometime its own repository)<br>
 it can be a Tamarin or an AIR project (or anything else),<br>
 for example:<br>
 the makeSWC command line tool can be found in the `/svn/tools/makeswc` directory<br>
