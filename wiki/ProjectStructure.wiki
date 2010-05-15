@@ -14,9 +14,9 @@ $NAME = the project name
 
 $ROOT
   |_ $NAME
-    |_ branches
-    |_ tags
-    |_ trunk
+      |_ branches
+      |_ tags
+      |_ trunk
 }}}
 
 {{{
