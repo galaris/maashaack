@@ -12,7 +12,7 @@ The goal is to have the same structure for each projects to automate builds glob
 $ROOT = one of the roots (packages,libraries,tools,platform,etc.)
 $NAME = the project name
 
-  |_ name -> obligatory
+  |_ name   -> obligatory
   |_ (name) -> optional
 
 }}}
@@ -37,7 +37,7 @@ project structure
       |   |_ $NAME
       |   |_ ...
       |     
-      |_ gfx
+      |_ (gfx)
       |   |_ fla
       |   |_ img
       |   |_ psd
@@ -45,11 +45,11 @@ project structure
       |   |_ ico
       |   |_ etc.
       |
-      |_ lib
-      |_ lib-swc
+      |_ (lib)
+      |_ (lib-swc)
       |_ src
       |_ tests
-      |_ html-template
+      |_ (html-template)
       |_ templates    -> templates base files to be used by the build
       |_ examples      -> examples files (*.fla, *.as, *.mxml, etc.)
 
@@ -70,6 +70,7 @@ project structure
  * *lib-swc* compiled libraries (`*.swc`)
  * *src* source code of the current project
  * *tests* general tests and unit tests
+ * *html-template* Flex Builder templates (for local compilation)
 
 key files for a project
 {{{
@@ -79,7 +80,7 @@ key files for a project
       |_ bin-debug
       |_ build
       |   |_ build.properties
-      |   |_ manifest.xml
+      |   |_ (manifest.xml)
       |   |_ ...
       |
       |_ docs
