@@ -11,8 +11,13 @@ The goal is to have the same structure for each projects to automate builds glob
 {{{
 $ROOT = one of the roots (packages,libraries,tools,platform,etc.)
 $NAME = the project name
+
+  |_ name -> obligatory
+  |_ (name) -> optional
+
 }}}
 
+in the main repository
 {{{
 $ROOT
   |_ $NAME
@@ -21,6 +26,7 @@ $ROOT
       |_ trunk
 }}}
 
+project structure
 {{{
 ...
   |_ trunk
@@ -43,6 +49,7 @@ $ROOT
       |_ lib-swc
       |_ src
       |_ tests
+      |_ html-template
       |_ templates    -> templates base files to be used by the build
       |_ examples      -> examples files (*.fla, *.as, *.mxml, etc.)
 
@@ -63,3 +70,35 @@ $ROOT
  * *lib-swc* compiled libraries (`*.swc`)
  * *src* source code of the current project
  * *tests* general tests and unit tests
+
+key files for a project
+{{{
+...
+  |_ trunk
+      |_ bin
+      |_ bin-debug
+      |_ build
+      |   |_ build.properties
+      |   |_ manifest.xml
+      |   |_ ...
+      |
+      |_ docs
+      |_ gfx
+      |_ lib-swc
+      |_ src
+      |   |_ ...
+      |      |_ (version.properties)
+      |
+      |   |_ $NAME.as
+      |   |_ $NAME.png
+      |   |_ Library.as
+      |
+      |_ tests
+      |   |_ ...
+      |      |_ AllTests.as
+      |_ build.xml
+      |_ meta.xml
+      |_ changelog.txt
+      |_ license.txt
+      |_ (DEPS)
+}}}
