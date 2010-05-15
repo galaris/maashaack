@@ -28,6 +28,7 @@
    * [Contributors HOWTO contribute]
    * [Build HOWTO Build]
    * [ConditionalCompilation Conditional Compilation]
+   * [ProjectStructure projects structure]
    * [Dist HOWTO Dist]
    * [Roadmap Roadmap]
  * [Documentation Documentation]
