@@ -22,6 +22,7 @@
    * [Organization Organization]
       * [frameworkPackages about packages]
       * [frameworkLibraries about libraries]
+      * [frameworkPlatform about platform libraries]
       * [frameworkTools about tools]
    * [Code101 Get the code]
    * [Tools101 Get the tools]
