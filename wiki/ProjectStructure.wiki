@@ -50,8 +50,8 @@ project structure
       |_ src
       |_ tests
       |_ (html-template)
-      |_ templates    -> templates base files to be used by the build
-      |_ examples      -> examples files (*.fla, *.as, *.mxml, etc.)
+      |_ (templates)
+      |_ (examples)
 
 }}}
 
@@ -71,6 +71,8 @@ project structure
  * *src* source code of the current project
  * *tests* general tests and unit tests
  * *html-template* Flex Builder templates (for local compilation)
+ * *templates* templates base files to be used by the ant build
+ * *examples* examples files (`*.as`, `*.mxml`, `*.fla`, etc.)
 
 key files for a project
 {{{
