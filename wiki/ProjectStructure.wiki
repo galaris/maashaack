@@ -105,7 +105,7 @@ key files for a project
       |_ (DEPS)
 }}}
 
- * *build.xml* local ant build
+ * *build.xml* local [ant ant] build
  * *build.properties* local ant properties
  * *meta.xml* general ant build
  * *changelog.txt* changelog of your project<br>optional but highly encouraged
