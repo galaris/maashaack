@@ -87,18 +87,32 @@ key files for a project
       |_ lib-swc
       |_ src
       |   |_ ...
-      |      |_ (version.properties)
-      |
+      |   |  |_ (version.properties)
+      |   |
       |   |_ $NAME.as
       |   |_ $NAME.png
-      |   |_ Library.as
+      |   |_ (Library.as)
       |
       |_ tests
       |   |_ ...
       |      |_ AllTests.as
+      |
       |_ build.xml
       |_ meta.xml
-      |_ changelog.txt
+      |_ (changelog.txt)
       |_ license.txt
       |_ (DEPS)
 }}}
+
+ * *build.xml* local ant build
+ * *build.properties* local ant properties
+ * *meta.xml* general ant build
+ * *changelog.txt* changelog of your project<br>optional but highly encouraged
+ * *license.txt* license of the project
+ * *DEPS* gclient dependency file
+ * *AllTests.as* unit tests suite of the project<br>even if you have no unit tests define it
+ * *version.properties* version file of your project<br>optional for packages<br>obligatory for libraries and tools
+ * *$NAME.as* main file of your project<br>the file you use to build locally a package or library<br>the main file of a tool
+ * *$NAME.png* your project icon<br>in general all packages use the same maashaack icon<br>libraries and tools can use custom icon
+ * *Library.as* class definition to link the icon for a SWC (package or library)
+ * *manifest.xml* manifest file for a SWC (package or library)
