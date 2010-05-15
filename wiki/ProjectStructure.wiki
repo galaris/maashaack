@@ -13,10 +13,10 @@ $ROOT = one of the roots (packages,libraries,tools,platform,etc.)
 $NAME = the project name
 
 $ROOT
-    |_ $NAME
-              |_ branches
-              |_ tags
-              |_ trunk
+  |_ $NAME
+    |_ branches
+    |_ tags
+    |_ trunk
 }}}
 
 {{{
