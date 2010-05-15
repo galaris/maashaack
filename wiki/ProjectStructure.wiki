@@ -11,7 +11,9 @@ The goal is to have the same structure for each projects to automate builds glob
 {{{
 $ROOT = one of the roots (packages,libraries,tools,platform,etc.)
 $NAME = the project name
+}}}
 
+{{{
 $ROOT
   |_ $NAME
       |_ branches
