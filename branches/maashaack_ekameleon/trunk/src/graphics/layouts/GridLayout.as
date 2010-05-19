@@ -38,6 +38,7 @@ package graphics.layouts
     import graphics.Align;
     import graphics.Direction;
     import graphics.DirectionOrder;
+    import graphics.Orientation;
     import graphics.geom.EdgeMetrics;
 
     import flash.display.DisplayObject;
@@ -92,6 +93,23 @@ package graphics.layouts
         public function set lines( value:uint ):void 
         {
             _lines = value ;
+        }
+        
+        /**
+         * The orientation of the layout.
+         * @see graphics.Orientation
+         */
+        public function get orientation():uint
+        {
+            return _orientation ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set orientation( value:uint ):void
+        {
+            _orientation = value ;
         }
         
         /**
@@ -243,8 +261,14 @@ package graphics.layouts
                         d[propX] = left + c * ( d[propWidth]  + _horizontalGap ) ;
                         d[propY] = top  + l * ( d[propHeight] + _verticalGap   ) ;
                         
-                        //d[propX] *= -1 ;
-                        //d[propY] *= -1 ;
+                        if ( isRightToLeft() )
+                        {
+                            d[propX] *= -1 ;
+                        }
+                        if ( isBottomToTop() )
+                        {
+                            d[propY] *= -1 ;
+                        }
                     }
                 }
                 else
@@ -270,8 +294,14 @@ package graphics.layouts
                     d = _container.getChildAt(i) ;
                     if( d )
                     {
-                        //d.x += _bounds.width - d[propWidth] ;
-                        //d.y += _bounds.height - d[propHeight] ;
+                        if ( isRightToLeft() )
+                        {
+                            d[propX] += _bounds.width - d[propWidth] ;
+                        }
+                        if ( isBottomToTop() )
+                        {
+                            d[propY] += _bounds.height - d[propHeight] ;
+                        }
                     }
                 }
             }
@@ -286,5 +316,26 @@ package graphics.layouts
          * @private
          */
         protected var _lines:int ;
+        
+        /**
+         * @private
+         */
+        protected var _orientation:uint ;
+        
+        /**
+         * Indicates if the layout orientation is bottom-to-top.
+         */
+        protected function isBottomToTop():Boolean
+        {
+            return _orientation == Orientation.BOTTOM_TO_TOP || _orientation == Orientation.LEFT_TO_RIGHT_BOTTOM_TO_TOP || _orientation == Orientation.RIGHT_TO_LEFT_BOTTOM_TO_TOP ;
+        }
+        
+        /**
+         * Indicates if the layout orientation is right-to-left.
+         */
+        protected function isRightToLeft():Boolean
+        {
+            return _orientation == Orientation.RIGHT_TO_LEFT || _orientation == Orientation.RIGHT_TO_LEFT_BOTTOM_TO_TOP || _orientation == Orientation.RIGHT_TO_LEFT_TOP_TO_BOTTOM ;
+        }
     }
 }
