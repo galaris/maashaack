@@ -35,8 +35,12 @@
 
 package graphics.layouts 
 {
+    import graphics.Align;
     import graphics.Direction;
+    import graphics.DirectionOrder;
+    import graphics.geom.EdgeMetrics;
 
+    import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
 
     /**
@@ -99,7 +103,103 @@ package graphics.layouts
         public override function measure():void
         {
             _bounds.setEmpty() ;
-            // TODO
+            if ( _container && _container.numChildren > 0 )
+            {
+                var d:DisplayObject ;
+                var i:int ;
+                
+                var isHorizontal:Boolean = direction == Direction.HORIZONTAL ;
+                
+                var children:Vector.<DisplayObject> = new Vector.<DisplayObject>( l ) ;
+                
+                var length:int = _container.numChildren ;
+                
+                for ( i = 0 ; i < length ; i++ ) 
+                {
+                    children[i] = _container.getChildAt(i) ;
+                }
+                
+                if ( _order == DirectionOrder.REVERSE )
+                {
+                    children.reverse() ;
+                }
+                
+                var w:Number = 0 ;
+                var h:Number = 0 ;
+                var c:Number = isHorizontal ? _columns : 0 ;
+                var l:Number = isHorizontal ? 0        : _lines ; 
+                
+                for ( i = 0 ; i<length ; i++ ) 
+                {
+                    d = children[i] ;
+                    w = Math.max( d[propWidth]  , w ) ;
+                    h = Math.max( d[propHeight] , h ) ;
+                    if ( isHorizontal )
+                    {
+                        if ( i%_columns == 0 )
+                        {
+                            l++;
+                        } 
+                    }
+                    else
+                    {
+                        if ( i%_lines == 0 )
+                        {
+                            c++ ;
+                        } 
+                    }
+                }
+                
+                _bounds.width  += c * ( w  + _horizontalGap ) ;
+                _bounds.height += l * ( h  + _verticalGap   ) ;
+                
+                _bounds.width  -= _horizontalGap ;
+                _bounds.height -= _verticalGap ;
+                
+                _bounds.width  += EdgeMetrics.filterNaNValue( _padding.horizontal ) ; 
+                _bounds.height += EdgeMetrics.filterNaNValue( _padding.vertical   ) ;
+                
+                if (_align == Align.CENTER) 
+                {
+                    _bounds.x -= _bounds.width  / 2 ;
+                    _bounds.y -= _bounds.height / 2 ;
+                }
+                else if ( _align == Align.BOTTOM ) 
+                {
+                    _bounds.x -= _bounds.width  / 2 ;
+                    _bounds.y -= _bounds.height ;
+                }
+                else if ( _align == Align.BOTTOM_LEFT ) 
+                {
+                    _bounds.y -= _bounds.height ;
+                }
+                else if (_align == Align.BOTTOM_RIGHT) 
+                {
+                    _bounds.x -= _bounds.width  ;
+                    _bounds.y -= _bounds.height ;
+                }
+                else if (_align == Align.LEFT) 
+                {
+                    _bounds.y -= _bounds.height / 2 ;
+                }
+                else if (_align ==  Align.RIGHT) 
+                {
+                    _bounds.x -= _bounds.width  ;
+                    _bounds.y -= _bounds.height / 2 ;
+                }
+                else if (_align == Align.TOP) 
+                {
+                    _bounds.x -= _bounds.width / 2 ;
+                }
+                else if (_align == Align.TOP_RIGHT) 
+                {
+                    _bounds.x -= _bounds.width ;
+                }
+                else // TOP_LEFT
+                {
+                    // nothing
+                }
+            }
         }
         
         /**
@@ -107,34 +207,47 @@ package graphics.layouts
          */
         public override function render():void
         {
-            if ( ( _lines > 1 && direction == Direction.VERTICAL) || ( _columns > 1 && direction == Direction.HORIZONTAL ) )
+            if ( _container && _container.numChildren > 0 )
             {
-                if ( _container && _container.numChildren > 0 )
+                if ( ( _lines > 1 && direction == Direction.VERTICAL) || ( _columns > 1 && direction == Direction.HORIZONTAL ) )
                 {
-                    // TODO
+                    var left:Number = EdgeMetrics.filterNaNValue(_padding.left) ;
+                    var top:Number  = EdgeMetrics.filterNaNValue(_padding.top) ;
+                    
+                    var d:DisplayObject ;
+                    var c:Number ;
+                    var i:int ;
+                    var l:Number ;
+                    
+                    var len:int = _container.numChildren ;
+                    
+                    var isHorizontal:Boolean = direction == Direction.HORIZONTAL ;
+                    
+                    var children:Vector.<DisplayObject> = new Vector.<DisplayObject>( l ) ;
+                    
+                    for ( i = 0 ; i < len ; i++ ) 
+                    {
+                        children[i] = _container.getChildAt(i) ;
+                    }
+                    
+                    if ( _order == DirectionOrder.REVERSE )
+                    {
+                        children.reverse() ;
+                    }
+                    
+                    for ( i = 0 ; i<len ; i++ ) 
+                    {
+                        d = children[i] ;
+                        c = isHorizontal ? ( i%_columns ) : Math.floor( i/_lines ) ;
+                        l = isHorizontal ? Math.floor( i/_columns ) : ( i%_lines ) ;
+                        d[propX] = left + c * ( d[propWidth]  + _horizontalGap ) ;
+                        d[propY] = top  + l * ( d[propHeight] + _verticalGap   ) ;
+                    }
                 }
-            }
-            else
-            {
-                super.render() ;
-            }
-        }
-        
-        /**
-         * This method is invoked when the rendering is finished to finalize the it after the measure invokation.
-         */
-        public override function update():void
-        {
-            if ( ( _lines > 1 && direction == Direction.VERTICAL) || ( _columns > 1 && direction == Direction.HORIZONTAL ) )
-            {
-                if ( _container && _container.numChildren > 0 )
+                else
                 {
-                    // TODO
+                    super.render() ;
                 }
-            }
-            else
-            {
-                super.update() ;
             }
         }
         
