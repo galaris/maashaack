@@ -67,5 +67,109 @@ package graphics
             assertEquals( "ESE"                            , CardinalDirection.ESE.toString() ) ;
             assertEquals( "graphics.CardinalDirection.ESE" , CardinalDirection.ESE.toSource() ) ;
         }
+        
+        public function testN():void
+        {
+            assertEquals( 0                              , CardinalDirection.N.azimut()   ) ;
+            assertEquals( 0                              , CardinalDirection.N.valueOf()  ) ;
+            assertEquals( "N"                            , CardinalDirection.N.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.N" , CardinalDirection.N.toSource() ) ;
+        }
+        
+        public function testNE():void
+        {
+            assertEquals( 45                              , CardinalDirection.NE.azimut()   ) ;
+            assertEquals( Math.PI / 4                     , CardinalDirection.NE.valueOf()  ) ;
+            assertEquals( "NE"                            , CardinalDirection.NE.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.NE" , CardinalDirection.NE.toSource() ) ;
+        }
+        
+        public function testNNE():void
+        {
+            assertEquals( 22.5                             , CardinalDirection.NNE.azimut()   ) ;
+            assertEquals( Math.PI / 8                      , CardinalDirection.NNE.valueOf()  ) ;
+            assertEquals( "NNE"                            , CardinalDirection.NNE.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.NNE" , CardinalDirection.NNE.toSource() ) ;
+        }
+        
+        public function testNW():void
+        {
+            assertEquals( 315                             , CardinalDirection.NW.azimut()   ) ;
+            assertEquals( 7 * Math.PI / 4                 , CardinalDirection.NW.valueOf()  ) ;
+            assertEquals( "NW"                            , CardinalDirection.NW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.NW" , CardinalDirection.NW.toSource() ) ;
+        }
+        
+        public function testNNW():void
+        {
+            assertEquals( 337.5                            , CardinalDirection.NNW.azimut()   ) ;
+            assertEquals( 15 * Math.PI / 8                 , CardinalDirection.NNW.valueOf()  ) ;
+            assertEquals( "NNW"                            , CardinalDirection.NNW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.NNW" , CardinalDirection.NNW.toSource() ) ;
+        }
+        
+        public function testS():void
+        {
+            assertEquals( 180                            , CardinalDirection.S.azimut()   ) ;
+            assertEquals( Math.PI                        , CardinalDirection.S.valueOf()  ) ;
+            assertEquals( "S"                            , CardinalDirection.S.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.S" , CardinalDirection.S.toSource() ) ;
+        }
+        
+        public function testSE():void
+        {
+            assertEquals( 135                             , CardinalDirection.SE.azimut()   ) ;
+            assertEquals( 3 * Math.PI / 4                 , CardinalDirection.SE.valueOf()  ) ;
+            assertEquals( "SE"                            , CardinalDirection.SE.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.SE" , CardinalDirection.SE.toSource() ) ;
+        }
+        
+        public function testSSE():void
+        {
+            assertEquals( 157.5                            , CardinalDirection.SSE.azimut()   ) ;
+            assertEquals( 7 * Math.PI / 8                  , CardinalDirection.SSE.valueOf()  ) ;
+            assertEquals( "SSE"                            , CardinalDirection.SSE.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.SSE" , CardinalDirection.SSE.toSource() ) ;
+        }
+        
+        public function testSSW():void
+        {
+            assertEquals( 202.5                            , CardinalDirection.SSW.azimut()   ) ;
+            assertEquals( 9 * Math.PI / 8                  , CardinalDirection.SSW.valueOf()  ) ;
+            assertEquals( "SSW"                            , CardinalDirection.SSW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.SSW" , CardinalDirection.SSW.toSource() ) ;
+        }
+        
+        public function testSW():void
+        {
+            assertEquals( 225                             , CardinalDirection.SW.azimut()   ) ;
+            assertEquals( 5 * Math.PI / 4                 , CardinalDirection.SW.valueOf()  ) ;
+            assertEquals( "SW"                            , CardinalDirection.SW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.SW" , CardinalDirection.SW.toSource() ) ;
+        }
+        
+        public function testW():void
+        {
+            assertEquals( 270                            , CardinalDirection.W.azimut()   ) ;
+            assertEquals( 3 * Math.PI / 2                , CardinalDirection.W.valueOf()  ) ;
+            assertEquals( "W"                            , CardinalDirection.W.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.W" , CardinalDirection.W.toSource() ) ;
+        }
+        
+        public function testWNW():void
+        {
+            assertEquals( 292.5                            , CardinalDirection.WNW.azimut()   ) ;
+            assertEquals( 13 * Math.PI / 8                 , CardinalDirection.WNW.valueOf()  ) ;
+            assertEquals( "WNW"                            , CardinalDirection.WNW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.WNW" , CardinalDirection.WNW.toSource() ) ;
+        }
+        
+        public function testWSW():void
+        {
+            assertEquals( 247.5                            , CardinalDirection.WSW.azimut()   ) ;
+            assertEquals( 11 * Math.PI / 8                 , CardinalDirection.WSW.valueOf()  ) ;
+            assertEquals( "WSW"                            , CardinalDirection.WSW.toString() ) ;
+            assertEquals( "graphics.CardinalDirection.WSW" , CardinalDirection.WSW.toSource() ) ;
+        }
     }
 }
