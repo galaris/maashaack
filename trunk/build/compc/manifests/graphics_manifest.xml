@@ -9,8 +9,8 @@
     <component id="graphics:CardinalDirection" class="graphics.CardinalDirection" />
     <component id="graphics:Corner"            class="graphics.Corner" />
     <component id="graphics:Direction"         class="graphics.Direction" />
-    <component id="graphics:DirectionOrder"    class="graphics.DirectionOrder" />
     <component id="graphics:Directionable"     class="graphics.Directionable" />
+    <component id="graphics:DirectionOrder"    class="graphics.DirectionOrder" />
     <component id="graphics:Drawable"          class="graphics.Drawable" />
     <component id="graphics:FillBitmapStyle"   class="graphics.FillBitmapStyle" />
     <component id="graphics:FillGradientStyle" class="graphics.FillGradientStyle" />
@@ -22,6 +22,7 @@
     <component id="graphics:LineGradientStyle" class="graphics.LineGradientStyle" />
     <component id="graphics:LineShaderStyle"   class="graphics.LineShaderStyle" />
     <component id="graphics:LineStyle"         class="graphics.LineStyle" />
+    <component id="graphics:Orientation"       class="graphics.Orientation" />
     
     <!-- graphics.colors -->
     
