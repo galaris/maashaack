@@ -9,6 +9,7 @@
     <component id="graphics:CardinalDirection" class="graphics.CardinalDirection" />
     <component id="graphics:Corner"            class="graphics.Corner" />
     <component id="graphics:Direction"         class="graphics.Direction" />
+    <component id="graphics:DirectionOrder"    class="graphics.DirectionOrder" />
     <component id="graphics:Directionable"     class="graphics.Directionable" />
     <component id="graphics:Drawable"          class="graphics.Drawable" />
     <component id="graphics:FillBitmapStyle"   class="graphics.FillBitmapStyle" />

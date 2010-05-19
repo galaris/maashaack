@@ -78,6 +78,7 @@ package graphics
             suite.addTestSuite( CardinalDirectionTest ) ;
             suite.addTestSuite( CornerTest            ) ;
             suite.addTestSuite( DirectionTest         ) ;
+            suite.addTestSuite( DirectionOrderTest    ) ;
             suite.addTestSuite( FillBitmapStyleTest   ) ;
             suite.addTestSuite( FillGradientStyleTest ) ;
             suite.addTestSuite( FillShaderStyleTest   ) ;
