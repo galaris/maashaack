@@ -73,15 +73,16 @@ package graphics
             
             //// test class in this package
             
-            suite.addTestSuite( AlignTest           ) ;
-            suite.addTestSuite( ArcTypeTest         ) ;
-            suite.addTestSuite( CornerTest          ) ;
-            suite.addTestSuite( DirectionTest       ) ;
-            suite.addTestSuite( FillBitmapStyleTest ) ;
+            suite.addTestSuite( AlignTest             ) ;
+            suite.addTestSuite( ArcTypeTest           ) ;
+            suite.addTestSuite( CardinalDirectionTest ) ;
+            suite.addTestSuite( CornerTest            ) ;
+            suite.addTestSuite( DirectionTest         ) ;
+            suite.addTestSuite( FillBitmapStyleTest   ) ;
             suite.addTestSuite( FillGradientStyleTest ) ;
             suite.addTestSuite( FillShaderStyleTest   ) ;
             suite.addTestSuite( FillStyleTest         ) ;
-            suite.addTestSuite( GradientStyleTest ) ;
+            suite.addTestSuite( GradientStyleTest     ) ;
             suite.addTestSuite( LineGradientStyleTest ) ;
             suite.addTestSuite( LineShaderStyleTest   ) ;
             suite.addTestSuite( LineStyleTest         ) ;
