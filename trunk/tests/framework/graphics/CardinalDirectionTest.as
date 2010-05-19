@@ -35,8 +35,9 @@
 
 package graphics 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     public class CardinalDirectionTest extends TestCase 
     {
         public function CardinalDirectionTest(name:String = "")
@@ -170,6 +171,117 @@ package graphics
             assertEquals( 11 * Math.PI / 8                 , CardinalDirection.WSW.valueOf()  ) ;
             assertEquals( "WSW"                            , CardinalDirection.WSW.toString() ) ;
             assertEquals( "graphics.CardinalDirection.WSW" , CardinalDirection.WSW.toSource() ) ;
+        }
+        
+        public function testALL():void
+        {
+            assertEquals( 16 , CardinalDirection.ALL.length ) ;
+            var ALL:Array = 
+            [
+                CardinalDirection.N,
+                CardinalDirection.E,
+                CardinalDirection.S,
+                CardinalDirection.W,
+                CardinalDirection.NE,
+                CardinalDirection.SE,
+                CardinalDirection.NW,
+                CardinalDirection.SW,
+                CardinalDirection.NNE,
+                CardinalDirection.NNW,
+                CardinalDirection.SSE,
+                CardinalDirection.SSW,
+                CardinalDirection.ENE,
+                CardinalDirection.ESE,
+                CardinalDirection.WNW,
+                CardinalDirection.WSW
+            ];
+            ArrayAssert.assertEquals( ALL , CardinalDirection.ALL ) ;
+        }
+        
+        public function testDIAGONALS():void
+        {
+            assertEquals( 4 , CardinalDirection.DIAGONALS.length ) ;
+            var DIAGONALS:Array = 
+            [
+                CardinalDirection.NE,
+                CardinalDirection.SE,
+                CardinalDirection.NW,
+                CardinalDirection.SW
+            ];
+            ArrayAssert.assertEquals( DIAGONALS , CardinalDirection.DIAGONALS ) ;
+        }
+        
+        public function testORTHOGONALS():void
+        {
+            assertEquals( 4 , CardinalDirection.ORTHOGONALS.length ) ;
+            var DIAGONALS:Array = 
+            [
+                CardinalDirection.N ,
+                CardinalDirection.E ,
+                CardinalDirection.S ,
+                CardinalDirection.W
+            ];
+            ArrayAssert.assertEquals( DIAGONALS , CardinalDirection.ORTHOGONALS ) ;
+        }
+        
+        public function testisDiagonal():void
+        {
+            assertTrue( CardinalDirection.isDiagonal(CardinalDirection.NE) ) ;
+            assertTrue( CardinalDirection.isDiagonal(CardinalDirection.SE) ) ;
+            assertTrue( CardinalDirection.isDiagonal(CardinalDirection.NW) ) ;
+            assertTrue( CardinalDirection.isDiagonal(CardinalDirection.SW) ) ;
+            
+            assertFalse( CardinalDirection.isDiagonal(CardinalDirection.N) ) ;
+            assertFalse( CardinalDirection.isDiagonal(CardinalDirection.S) ) ;
+            assertFalse( CardinalDirection.isDiagonal(CardinalDirection.W) ) ;
+            assertFalse( CardinalDirection.isDiagonal(CardinalDirection.E) ) ;
+            
+            var OTHERS:Array = 
+            [
+                CardinalDirection.NNE,
+                CardinalDirection.NNW,
+                CardinalDirection.SSE,
+                CardinalDirection.SSW,
+                CardinalDirection.ENE,
+                CardinalDirection.ESE,
+                CardinalDirection.WNW,
+                CardinalDirection.WSW
+            ];
+            
+            for( var i:int ; i < OTHERS.lenght ; i++)
+            {
+                assertFalse( CardinalDirection.isDiagonal( OTHERS[i] ) ) ;
+            }
+        }
+        
+        public function testisOrthogonal():void
+        {
+            assertTrue( CardinalDirection.isOrthogonal(CardinalDirection.N) ) ;
+            assertTrue( CardinalDirection.isOrthogonal(CardinalDirection.S) ) ;
+            assertTrue( CardinalDirection.isOrthogonal(CardinalDirection.W) ) ;
+            assertTrue( CardinalDirection.isOrthogonal(CardinalDirection.E) ) ;
+            
+            assertFalse( CardinalDirection.isOrthogonal(CardinalDirection.NE) ) ;
+            assertFalse( CardinalDirection.isOrthogonal(CardinalDirection.SE) ) ;
+            assertFalse( CardinalDirection.isOrthogonal(CardinalDirection.NW) ) ;
+            assertFalse( CardinalDirection.isOrthogonal(CardinalDirection.SW) ) ;
+            
+            var OTHERS:Array = 
+            [
+                CardinalDirection.NNE,
+                CardinalDirection.NNW,
+                CardinalDirection.SSE,
+                CardinalDirection.SSW,
+                CardinalDirection.ENE,
+                CardinalDirection.ESE,
+                CardinalDirection.WNW,
+                CardinalDirection.WSW
+            ];
+            
+            for( var i:int ; i < OTHERS.lenght ; i++)
+            {
+                assertFalse( CardinalDirection.isOrthogonal( OTHERS[i] ) ) ;
+            }
         }
     }
 }
