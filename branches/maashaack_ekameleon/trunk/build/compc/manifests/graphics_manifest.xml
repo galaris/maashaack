@@ -6,6 +6,7 @@
     
     <component id="graphics:Align"             class="graphics.Align" />
     <component id="graphics:ArcType"           class="graphics.ArcType" />
+    <component id="graphics:CardinalDirection" class="graphics.CardinalDirection" />
     <component id="graphics:Corner"            class="graphics.Corner" />
     <component id="graphics:Direction"         class="graphics.Direction" />
     <component id="graphics:Directionable"     class="graphics.Directionable" />
