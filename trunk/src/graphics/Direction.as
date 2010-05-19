@@ -36,14 +36,24 @@
 package graphics 
 {
     /**
-     * This static enumeration of constant values for setting the DisplayObject or component direction.
+     * The most common relative directions are horizontal, vertical, left, right, forward, backward, up, and down.
      */
     public final class Direction 
     {
         /**
-         * Specifies the "bottom" value to change the orientation of a Display or a component.
+         * Specifies the "backward" value to change the orientation of a Display or a component.
          */
-        public static const BOTTOM:String = "bottom" ;
+        public static const BACKWARD:String = "backward" ;
+        
+        /**
+         * Specifies the "down" value to change the orientation of a Display or a component.
+         */
+        public static const DOWN:String = "down" ;
+        
+        /**
+         * Specifies the "forward" value to change the orientation of a Display or a component.
+         */
+        public static const FORWARD:String = "forward" ;
         
         /**
           * Specifies the "horizontal" value to change the orientation of a Display or a component.
@@ -61,9 +71,9 @@ package graphics
         public static const RIGHT:String = "right" ;
         
         /**
-         * Specifies the "top" value to change the orientation of a Display or a component.
+         * Specifies the "up" value to change the orientation of a Display or a component.
          */
-        public static const TOP:String = "top" ;
+        public static const UP:String = "up" ;
         
         /**
          * Specifies the "vertical" value to change the orientation of a Display or a component.

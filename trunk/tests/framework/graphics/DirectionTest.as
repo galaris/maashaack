@@ -44,9 +44,19 @@ package graphics
             super(name);
         }
         
-        public function testBOTTOM():void
+        public function testBACKWARD():void
         {
-            assertEquals( Direction.BOTTOM , "bottom" , "Direction.BOTTOM constant failed.") ;
+            assertEquals( Direction.BACKWARD , "backward" , "Direction.BACKWARD constant failed.") ;
+        }
+        
+        public function testDOWN():void
+        {
+            assertEquals( Direction.DOWN , "down" , "Direction.DOWN constant failed.") ;
+        }
+        
+        public function testFORWARD():void
+        {
+            assertEquals( Direction.FORWARD , "forward" , "Direction.testFORWARD constant failed.") ;
         }
         
         public function testHORIZONTAL():void
@@ -64,9 +74,9 @@ package graphics
             assertEquals( Direction.RIGHT , "right" , "Direction.RIGHT constant failed.") ;
         }
         
-        public function testTOP():void
+        public function testUP():void
         {
-            assertEquals( Direction.TOP , "top" , "Direction.TOP constant failed.") ;
+            assertEquals( Direction.UP , "up" , "Direction.UP constant failed.") ;
         }
         
         public function testVERTICAL():void
