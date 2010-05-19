@@ -242,11 +242,37 @@ package graphics.layouts
                         l = isHorizontal ? Math.floor( i/_columns ) : ( i%_lines ) ;
                         d[propX] = left + c * ( d[propWidth]  + _horizontalGap ) ;
                         d[propY] = top  + l * ( d[propHeight] + _verticalGap   ) ;
+                        
+                        //d[propX] *= -1 ;
+                        //d[propY] *= -1 ;
                     }
                 }
                 else
                 {
                     super.render() ;
+                }
+            }
+        }
+        
+        /**
+         * This method is invoked when the rendering is finished to finalize the it after the measure invokation.
+         */
+        public override function update():void
+        {
+            super.update() ;
+            if ( _container && _container.numChildren > 0 )
+            {
+                var d:DisplayObject ;
+                var i:int ;
+                var l:int = _container.numChildren ;
+                for ( i = 0  ; i < l ; i++ ) 
+                {
+                    d = _container.getChildAt(i) ;
+                    if( d )
+                    {
+                        //d.x += _bounds.width - d[propWidth] ;
+                        //d.y += _bounds.height - d[propHeight] ;
+                    }
                 }
             }
         }

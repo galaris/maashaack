@@ -87,6 +87,7 @@ package graphics
             suite.addTestSuite( LineGradientStyleTest ) ;
             suite.addTestSuite( LineShaderStyleTest   ) ;
             suite.addTestSuite( LineStyleTest         ) ;
+            suite.addTestSuite( OrientationTest       ) ;
             
             return suite;
         }
