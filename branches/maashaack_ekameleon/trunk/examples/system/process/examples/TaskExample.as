@@ -36,9 +36,11 @@
 package examples
 {
     import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.Task;
-    
-    import flash.display.Sprite;    
+
+    import flash.display.Sprite;
+
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
@@ -74,14 +76,14 @@ package examples
             trace ( e ) ;
         }
         
-        public function start():void
+        public function start( action:Action ):void
         {
-            trace(this + " start task : " + task.running ) ;
+            trace(this + " start task : " + action.running ) ;
         }
         
-        public function finish():void
+        public function finish( action:Action ):void
         {
-            trace(this + " finish task : " + task.running ) ;
+            trace(this + " finish task : " + action.running ) ;
         };
     }
 }
