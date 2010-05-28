@@ -213,7 +213,6 @@
     <component id="system.events:FrontController"     class="system.events.FrontController" />
     <component id="system.events:IEventDispatcher"    class="system.events.IEventDispatcher" />
     <component id="system.events:InternalDispatcher"  class="system.events.InternalDispatcher" />
-    <component id="system.events:LoggerEvent"         class="system.events.LoggerEvent" />
     <component id="system.events:NumberEvent"         class="system.events.NumberEvent" />
     <component id="system.events:StringEvent"         class="system.events.StringEvent" />
     
@@ -241,6 +240,7 @@
     <component id="system.logging:Log"            class="system.logging.Log" />
     <component id="system.logging:Loggable"       class="system.logging.Loggable" />
     <component id="system.logging:Logger"         class="system.logging.Logger" />
+    <component id="system.logging:LoggerEntry"    class="system.logging.LoggerEntry" />
     <component id="system.logging:LoggerFactory"  class="system.logging.LoggerFactory" />
     <component id="system.logging:LoggerLevel"    class="system.logging.LoggerLevel" />
     <component id="system.logging:LoggerStrings"  class="system.logging.LoggerStrings" />
