@@ -35,10 +35,10 @@
 
 package system.logging.mocks 
 {
-    import system.events.LoggerEvent;
     import system.logging.Logger;
+    import system.logging.LoggerEntry;
     import system.logging.LoggerLevel;
-    
+
     /**
      * This Mock object listen all events dispatched from a Logger object.
      */
@@ -50,11 +50,16 @@ package system.logging.mocks
          */
         public function MockLoggerListener( logger:Logger = null )
         {
-            if ( logger != null )
+            if ( logger )
             {
                 register( logger ) ;
             }
         }
+        
+        /**
+         * The channel of the logger.
+         */
+        public var channel:String ;
         
         /**
          * The Logger object to register and test.
@@ -77,19 +82,14 @@ package system.logging.mocks
         public var message:* ;
         
         /**
-         * Indicates the type of the "log" event notification.
-         */
-        public var type:String ;
-        
-        /**
          * Invoked when the LoggerEvent.LOG event is dispatched.
          */
-        public function logHandler( e:LoggerEvent ):void
+        public function logEntry( e:LoggerEntry ):void
         {
             called  = true      ;
+            channel = e.channel ;
             level   = e.level   ;
             message = e.message ;
-            type    = e.type    ;
         }
         
         /**
@@ -97,14 +97,14 @@ package system.logging.mocks
          */
         public function register( logger:Logger ):void
         {
-            if ( this.logger != null )
+            if ( this.logger )
             {
-                unregister() ;
+                this.logger.disconnect( logEntry ) ;
             }
             this.logger = logger ;
-            if ( this.logger != null )
+            if ( this.logger )
             {
-                this.logger.addEventListener( LoggerEvent.LOG , logHandler , false , 0 , true ) ;
+                this.logger.connect( logEntry ) ;
             }
         }
         
@@ -113,9 +113,9 @@ package system.logging.mocks
          */
         public function unregister():void
         {
-            if ( this.logger != null )
+            if ( logger )
             {
-                this.logger.removeEventListener( LoggerEvent.LOG , logHandler ) ;
+                logger.disconnect( logEntry ) ;
             }
         }
     }

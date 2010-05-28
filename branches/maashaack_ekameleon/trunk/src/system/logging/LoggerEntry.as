@@ -33,17 +33,41 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.events
+package system.logging
 {
-    import buRRRn.ASTUce.framework.*;
-    
-    public class AllTests
+    /**
+     * Represents the log information for a single logging notification. 
+     * The loging system dispatches a single message each time a process requests information be logged.
+     * This entry can be captured by any object for storage or formatting.
+     */
+    public class LoggerEntry
     {
-        public static function suite():ITest
+        /**
+         * Creates a new LoggerEntry.
+         * @param message The context or message of the log.
+         * @param level The level of the log.
+         * @param logger The Logger reference of this entry.
+         */
+        public function LoggerEntry( message:* = null , level:LoggerLevel = null , channel:String = null )
         {
-            var suite:TestSuite = new TestSuite("system.events logging package");
-            suite.addTestSuite( LoggerEventTest ) ;
-            return suite;
+            this.channel = channel ;
+            this.message = message ;
+            this.level   = (level == null) ? LoggerLevel.ALL : level ;
         }
+        
+        /**
+         * Provides access to the channel for this log entry.
+         */
+        public var channel:String ;
+        
+        /**
+         * Provides access to the level for this log entry.
+         */
+        public var level:LoggerLevel ;
+        
+        /**
+         * Provides access to the message that was entry.
+         */
+        public var message:* ;
     }
 }

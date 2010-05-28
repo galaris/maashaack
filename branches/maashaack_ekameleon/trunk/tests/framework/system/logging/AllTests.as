@@ -39,7 +39,6 @@ package system.logging
     import buRRRn.ASTUce.framework.TestSuite;
     
     import system.logging.errors.AllTests;
-    import system.logging.events.AllTests;
     import system.logging.targets.AllTests;
     
     public class AllTests
@@ -49,6 +48,7 @@ package system.logging
             var suite:TestSuite = new TestSuite( "system.logging package" );
             
             suite.addTestSuite( LoggableTest ) ;
+            suite.addTestSuite( LoggerEntryTest ) ;
             suite.addTestSuite( LoggerFactoryTest ) ;
             suite.addTestSuite( LoggerLevelTest ) ;
             suite.addTestSuite( LoggerStringsTest ) ;
@@ -56,19 +56,9 @@ package system.logging
             suite.addTestSuite( LoggerTest ) ;
             suite.addTestSuite( LogTest ) ;
             
-//            TAMARIN::exclude
-//            {
-                suite.addTestSuite( LogLoggerTest ) ;
-//            }
+            suite.addTestSuite( LogLoggerTest ) ;
             
-            
-            // system.logging.errors
             suite.addTest( system.logging.errors.AllTests.suite() );
-            
-            // system.logging.events
-            suite.addTest( system.logging.events.AllTests.suite() );
-            
-            // system.logging.targets
             suite.addTest( system.logging.targets.AllTests.suite() );
             
             return suite;

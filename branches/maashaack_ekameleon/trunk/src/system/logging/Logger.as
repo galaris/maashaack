@@ -35,12 +35,12 @@
 
 package system.logging
 {
-    import flash.events.IEventDispatcher;
+    import system.signals.Signaler;
     
     /**
      * All loggers within the logging framework must implement this interface.
      */
-    public interface Logger extends IEventDispatcher
+    public interface Logger extends Signaler
     {
         /**
          * Indicates the channel value for the logger.

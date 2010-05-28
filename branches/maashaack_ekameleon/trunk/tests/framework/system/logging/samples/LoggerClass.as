@@ -37,10 +37,9 @@ package system.logging.samples
 {
     import system.Strings;
     import system.logging.Logger;
-
-    import flash.events.EventDispatcher;
-
-    public class LoggerClass extends EventDispatcher implements Logger 
+    import system.signals.Signal;
+    
+    public class LoggerClass extends Signal implements Logger 
     {
         public function LoggerClass()
         {
