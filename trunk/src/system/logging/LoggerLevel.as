@@ -64,6 +64,11 @@ package system.logging
         public static const DEBUG:LoggerLevel = new LoggerLevel( 2 , "DEBUG" ) ;
         
         /**
+         * The default string level value in the getLevelString() method.
+         */
+        public static var DEFAULT_LEVEL_STRING:String = "UNKNOWN" ;
+        
+        /**
          * Designates error events that might still allow the application to continue running (8).
          */    
         public static const ERROR:LoggerLevel = new LoggerLevel( 8 , "ERROR" ) ;
@@ -124,6 +129,22 @@ package system.logging
                 }
             }
             return null ;
+        }
+        
+        /**
+         * Returns a String value representing the level specified.
+         * @return a String value representing the level specified.
+         */
+        public static function getLevelString( value:LoggerLevel ):String
+        {
+            if ( LoggerLevel.isValidLevel( value ) )
+            {
+                return value.toString() ;
+            }
+            else
+            {
+                return DEFAULT_LEVEL_STRING ;
+            }
         }
         
         /**

@@ -107,7 +107,7 @@ package system.logging.targets
         public override function logEvent( event:LoggerEvent ):void
         {
             var message:*      = event.message ;
-            var level:String   = LoggerEvent.getLevelString( event.level ) ;
+            var level:String   = LoggerLevel.getLevelString( event.level ) ;
             var channel:String = event.currentTarget.channel ;
             message            = formatMessage( message, level, channel , new Date() ) ;
             internalLog( message , event.level ) ;

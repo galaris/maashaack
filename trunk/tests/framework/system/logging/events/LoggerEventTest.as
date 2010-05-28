@@ -63,11 +63,6 @@ package system.logging.events
             assertTrue( event is Event   , "Must inherit Event.") ;
         }
         
-        public function testDEFAULT_LEVEL_STRING():void
-        {
-            assertEquals( LoggerEvent.DEFAULT_LEVEL_STRING  , "UNKNOWN" , "DEFAULT_LEVEL_STRING static property failed.") ;
-        }
-        
         public function testLOG():void
         {
             assertEquals( LoggerEvent.LOG  , "log" , "LOG static constant failed.") ;
@@ -92,17 +87,6 @@ package system.logging.events
             assertNotNull( clone , "01 - clone method failed." ) ;
             assertEquals(event.message , clone.message , "02 - clone method failed." ) ;
             assertEquals(event.level   , clone.level   , "03 - clone method failed." ) ;
-        }
-        
-        public function testGetLevelString():void
-        {
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.ALL   ) , "ALL"   , "01 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.DEBUG ) , "DEBUG" , "02 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.ERROR ) , "ERROR" , "03 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.FATAL ) , "FATAL" , "04 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.INFO  ) , "INFO"  , "05 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( LoggerLevel.WARN  ) , "WARN"  , "06 - LoggerEvent.getLevelString() failed." ) ;
-            assertEquals( LoggerEvent.getLevelString( new LoggerLevel(55,"TEST") )  , "UNKNOWN" , "07 - LoggerEvent.getLevelString() failed." ) ;
         }
     }
 }

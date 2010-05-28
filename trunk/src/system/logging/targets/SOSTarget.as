@@ -36,9 +36,7 @@
 package system.logging.targets 
 {
     import system.Strings;
-    import system.events.LoggerEvent;
     import system.logging.LoggerLevel;
-    import system.logging.targets.SocketTarget;
     
     /**
      * Provides a logger target that uses the SOS Max console to output log messages. 
@@ -188,7 +186,7 @@ package system.logging.targets
         {
             if( levelPolicy ) 
             {
-                message = Strings.format( SHOW_FOLD_MESSAGE , LoggerEvent.getLevelString( level ) , title, message ) ;
+                message = Strings.format( SHOW_FOLD_MESSAGE , LoggerLevel.getLevelString( level ) , title, message ) ;
             }
             send( message ) ;
         }
