@@ -54,6 +54,11 @@ package system.logging
             assertEquals( enum.valueOf() , 999999 , "03 - LoggerLevel constructor failed, the valueOf() method of the LoggerLevel class failed.") ;
         }
         
+        public function testDEFAULT_LEVEL_STRING():void
+        {
+            assertEquals( LoggerLevel.DEFAULT_LEVEL_STRING  , "UNKNOWN" , "DEFAULT_LEVEL_STRING static property failed.") ;
+        }
+        
         public function testInherit():void
         {
             var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
@@ -111,6 +116,17 @@ package system.logging
             assertEquals( LoggerLevel.getLevel(  8 ) , LoggerLevel.ERROR , "03 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel( 16 ) , LoggerLevel.FATAL , "04 - LoggerLevel.getLevel failed." ) ;
             assertNull( LoggerLevel.getLevel( 10 ) , "07 - LoggerLevel.getLevel failed must returns null with an unknow value."  ) ;
+        }
+        
+        public function testGetLevelString():void
+        {
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.ALL   ) , "ALL"   , "01 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.DEBUG ) , "DEBUG" , "02 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.ERROR ) , "ERROR" , "03 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.FATAL ) , "FATAL" , "04 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.INFO  ) , "INFO"  , "05 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.WARN  ) , "WARN"  , "06 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( new LoggerLevel(55,"TEST") )  , "UNKNOWN" , "07 - LoggerEvent.getLevelString() failed." ) ;
         }
         
         public function testIsValidLevel():void

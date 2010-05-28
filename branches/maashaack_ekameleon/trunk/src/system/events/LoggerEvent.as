@@ -59,11 +59,6 @@ package system.events
         }
         
         /**
-         * The default string level value in the getLevelString() method.
-         */
-        public static var DEFAULT_LEVEL_STRING:String = "UNKNOWN" ;
-        
-        /**
          * Event type constant, identifies a logging event.
          */
         public static const LOG:String = "log";
@@ -85,22 +80,6 @@ package system.events
         public override function clone():Event
         {
             return new LoggerEvent( message , level );
-        }
-        
-        /**
-         * Returns a String value representing the level specified.
-         * @return a String value representing the level specified.
-         */
-        public static function getLevelString( value:LoggerLevel ):String
-        {
-            if ( LoggerLevel.isValidLevel( value ) )
-            {
-                return value.toString() ;
-            }
-            else
-            {
-                return DEFAULT_LEVEL_STRING ;
-            }
         }
     }
 }
