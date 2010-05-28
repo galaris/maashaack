@@ -36,12 +36,10 @@
 package system.logging 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.events.LoggerEvent;
+    
     import system.logging.mocks.MockLoggerListener;
-
-    import flash.events.EventDispatcher;
-
+    import system.signals.Signal;
+    
     public class LogLoggerTest extends TestCase 
     {
         public function LogLoggerTest(name:String = "")
@@ -73,7 +71,7 @@ package system.logging
         
         public function testInherit():void
         {
-            assertTrue( logger is EventDispatcher , "LogLogger must inherit the EventDispatcher class.") ;
+            assertTrue( logger is Signal , "LogLogger must inherit the Signal class.") ;
         }
         
         public function testChannel():void
@@ -84,55 +82,55 @@ package system.logging
         public function testLog():void
         {
             logger.log( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.ALL , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world"     , "03" );
+            assertEquals( listener.level   , LoggerLevel.ALL , "04" );
         }
         
         public function testDebug():void
         {
             logger.debug( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.DEBUG , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world"     , "03" );
+            assertEquals( listener.level   , LoggerLevel.DEBUG , "04" );
         }
         
         public function testError():void
         {
             logger.error( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.ERROR , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.ERROR , "04" );
         }
         
         public function testFatal():void
         {
             logger.fatal( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.FATAL , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.FATAL , "04" );
         }
         
         public function testInfo():void
         {
             logger.info( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.INFO  , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.INFO  , "04" );
         }
         
         public function testWarn():void
         {
             logger.warn( "hello {0}" , "world" ) ;
-            assertTrue( listener.called    , "LoggerEvent.Log event must be notify." ) ;
-            assertEquals( listener.type    , LoggerEvent.LOG   , "LoggerEvent.Log event type isn't valid." );
-            assertEquals( listener.message , "hello world"     , "LoggerEvent.Log event message isn't valid." );
-            assertEquals( listener.level   , LoggerLevel.WARN  , "LoggerEvent.Log event level isn't valid." );
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.WARN  , "04" );
         }
     }
 }

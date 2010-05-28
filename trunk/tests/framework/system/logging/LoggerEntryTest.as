@@ -33,60 +33,36 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.logging.events 
+package system.logging 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.events.LoggerEvent;
-    import system.logging.LoggerLevel;
-
-    import flash.events.Event;
-
-    public class LoggerEventTest extends TestCase 
+    
+    public class LoggerEntryTest extends TestCase 
     {
-        public function LoggerEventTest(name:String = "")
+        public function LoggerEntryTest(name:String = "")
         {
             super(name);
         }
         
         public function testConstructor():void
         {
-            var event:LoggerEvent = new LoggerEvent("test", LoggerLevel.DEBUG ) ;
-            assertNotNull( event , "01 - constructor failed.") ;
-            assertEquals(event.message , "test" , "02 - constructor failed.") ;
-            assertEquals(event.level   , LoggerLevel.DEBUG , "02 - constructor failed.") ;
-        }
-        
-        public function testInherit():void
-        {
-            var event:LoggerEvent = new LoggerEvent("test", LoggerLevel.DEBUG ) ;
-            assertTrue( event is Event   , "Must inherit Event.") ;
-        }
-        
-        public function testLOG():void
-        {
-            assertEquals( LoggerEvent.LOG  , "log" , "LOG static constant failed.") ;
+            var entry:LoggerEntry = new LoggerEntry("test", LoggerLevel.DEBUG, "channel" ) ;
+            assertNotNull( entry , "01 - constructor failed.") ;
+            assertEquals(entry.channel , "channel" , "02 - constructor failed.") ;
+            assertEquals(entry.message , "test" , "03 - constructor failed.") ;
+            assertEquals(entry.level   , LoggerLevel.DEBUG , "04 - constructor failed.") ;
         }
         
         public function testLevel():void
         {
-            var event:LoggerEvent = new LoggerEvent("test", LoggerLevel.DEBUG ) ;
-            assertEquals(event.level , LoggerLevel.DEBUG , "level property failed.") ;
+            var entry:LoggerEntry = new LoggerEntry("test", LoggerLevel.DEBUG ) ;
+            assertEquals(entry.level , LoggerLevel.DEBUG , "level property failed.") ;
         }
         
         public function testMessage():void
         {
-            var event:LoggerEvent = new LoggerEvent("test", LoggerLevel.DEBUG ) ;
-            assertEquals(event.message , "test" , "message property failed.") ;
-        }
-        
-        public function testClone():void
-        {
-            var event:LoggerEvent = new LoggerEvent("test", LoggerLevel.DEBUG ) ;
-            var clone:LoggerEvent = event.clone() as LoggerEvent ;
-            assertNotNull( clone , "01 - clone method failed." ) ;
-            assertEquals(event.message , clone.message , "02 - clone method failed." ) ;
-            assertEquals(event.level   , clone.level   , "03 - clone method failed." ) ;
+            var entry:LoggerEntry = new LoggerEntry("test", LoggerLevel.DEBUG ) ;
+            assertEquals(entry.message , "test" , "message property failed.") ;
         }
     }
 }

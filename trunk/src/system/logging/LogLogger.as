@@ -35,14 +35,12 @@
 
 package system.logging
 {
-    import system.events.LoggerEvent;
-
-    import flash.events.EventDispatcher;
+    import system.signals.Signal;
 
     /**
      * The logger that is used within the logging framework. This class dispatches events for each message logged using the log() method.
      */
-    internal class LogLogger extends EventDispatcher implements Logger
+    internal class LogLogger extends Signal implements Logger
     {
         /**
          * Creates a new LogLogger instance.
@@ -50,7 +48,7 @@ package system.logging
          */
         public function LogLogger( channel:String )
         {
-            _channel = channel;
+            _entry = new LoggerEntry( null , null , channel ) ;
         }
         
         /**
@@ -58,7 +56,7 @@ package system.logging
          */
         public function get channel():String
         {
-            return _channel ;
+            return _entry.channel ;
         }
         
         /**
@@ -124,14 +122,14 @@ package system.logging
         /**
          * @private
          */
-        private var _channel:String ;
+        private var _entry:LoggerEntry ;
         
         /**
          * @private
          */
         private function _log( level:LoggerLevel, context:*, options:Array ):void
         {
-            if( hasEventListener( LoggerEvent.LOG ) )
+            if( connected() )
             {
                 if ( context is String )
                 {
@@ -141,7 +139,9 @@ package system.logging
                         context = (context as String).replace( new RegExp( "\\{" + i + "\\}" , "g" ) , options[i]);
                     }
                 }
-                dispatchEvent( new LoggerEvent( context, level ) ) ;
+                _entry.message = context ;
+                _entry.level   = level ;
+                emit( _entry ) ;
             }
         }
     }

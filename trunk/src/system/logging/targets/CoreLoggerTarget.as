@@ -39,24 +39,22 @@ package system.logging.targets
     import system.data.Set;
     import system.data.sets.ArraySet;
     import system.errors.InvalidFilterError;
-    import system.events.LoggerEvent;
     import system.logging.Log;
     import system.logging.Logger;
+    import system.logging.LoggerEntry;
     import system.logging.LoggerFactory;
     import system.logging.LoggerLevel;
     import system.logging.LoggerStrings;
     import system.logging.LoggerTarget;
-    
+
     import flash.events.EventDispatcher;
-    
+
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
-     * No implementation of the LoggerEvent method is provided.
      */
     public class CoreLoggerTarget extends EventDispatcher implements LoggerTarget
     {
-        
         /**
          * Creates a new CoreLoggerTarget instance.
          */
@@ -169,17 +167,17 @@ package system.logging.targets
             if ( logger != null )
             {
                 _count++ ;
-                logger.addEventListener( LoggerEvent.LOG , _handleEvent ) ;
+                logger.connect( _receive ) ;
             }
         }
         
         /**
-         *  This method handles a <code class="prettyprint">LoggerEvent</code> from an associated logger.
+         *  This method receive a <code class="prettyprint">LoggerEntry</code> from an associated logger.
          *  A target uses this method to translate the event into the appropriate format for transmission, storage, or display.
          *  This method will be called only if the event's level is in range of the target's level.
          *  <b><i>Descendants need to override this method to make it useful.</i></b>
          */
-        public function logEvent( event:LoggerEvent ):void
+        public function logEntry( entry:LoggerEntry ):void
         {
             // override please.
         }
@@ -201,7 +199,7 @@ package system.logging.targets
             if ( logger != null )
             {
                 _count-- ;
-                logger.removeEventListener( LoggerEvent.LOG , _handleEvent ) ;
+                logger.disconnect( _receive ) ;
             }
         }
         
@@ -215,19 +213,16 @@ package system.logging.targets
         /**
          * @private
          */
-        //private var _factory:LoggerFactory = Log; //see ctor note
         private var _factory:LoggerFactory;
         
         /**
          * @private
          */
-        //private var _filters:Set = new ArraySet( ["*"] ) ; //see ctor note
         private var _filters:Set;
         
         /**
          * @private
          */
-        //private var _level:LoggerLevel = LoggerLevel.ALL ; //see ctor note
         private var _level:LoggerLevel;
         
         /**
@@ -255,15 +250,15 @@ package system.logging.targets
         /**
          * This method will call the <code class="prettyprint">logEvent</code> method if the level of the event is appropriate for the current level.
          */
-        private function _handleEvent( event:LoggerEvent ):void
+        private function _receive( entry:LoggerEntry ):void
         {
             if ( _level == LoggerLevel.NONE )
             {
                 return ; // logging off
             }
-            else if ( int( event.level ) >= int( _level ) )
+            else if ( int( entry.level ) >= int( _level ) )
             {
-                logEvent(event) ;
+                logEntry( entry ) ;
             }
         }
     }
