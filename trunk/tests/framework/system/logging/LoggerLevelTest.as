@@ -100,6 +100,11 @@ package system.logging
             assertEquals( LoggerLevel.WARN, new LoggerLevel( 6 , "WARN" ) , "LoggerLevel.WARN failed.") ;
         }
         
+        public function testWTF():void
+        {
+            assertEquals( LoggerLevel.WTF, new LoggerLevel( 32 , "WTF" ) , "LoggerLevel.WTF failed.") ;
+        }
+        
         public function testEquals():void
         {
             var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
@@ -113,8 +118,9 @@ package system.logging
             assertEquals( LoggerLevel.getLevel(  2 ) , LoggerLevel.DEBUG , "02 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  4 ) , LoggerLevel.INFO  , "05 - LoggerLevel.getLevel failed." ) ;
             assertEquals( LoggerLevel.getLevel(  6 ) , LoggerLevel.WARN  , "06 - LoggerLevel.getLevel failed." ) ;
-            assertEquals( LoggerLevel.getLevel(  8 ) , LoggerLevel.ERROR , "03 - LoggerLevel.getLevel failed." ) ;
-            assertEquals( LoggerLevel.getLevel( 16 ) , LoggerLevel.FATAL , "04 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel(  8 ) , LoggerLevel.ERROR , "07 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel( 16 ) , LoggerLevel.FATAL , "08 - LoggerLevel.getLevel failed." ) ;
+            assertEquals( LoggerLevel.getLevel( 32 ) , LoggerLevel.WTF   , "09 - LoggerLevel.getLevel failed." ) ;
             assertNull( LoggerLevel.getLevel( 10 ) , "07 - LoggerLevel.getLevel failed must returns null with an unknow value."  ) ;
         }
         
@@ -126,6 +132,7 @@ package system.logging
             assertEquals( LoggerLevel.getLevelString( LoggerLevel.FATAL ) , "FATAL" , "04 - LoggerEvent.getLevelString() failed." ) ;
             assertEquals( LoggerLevel.getLevelString( LoggerLevel.INFO  ) , "INFO"  , "05 - LoggerEvent.getLevelString() failed." ) ;
             assertEquals( LoggerLevel.getLevelString( LoggerLevel.WARN  ) , "WARN"  , "06 - LoggerEvent.getLevelString() failed." ) ;
+            assertEquals( LoggerLevel.getLevelString( LoggerLevel.WTF   ) , "WTF"   , "07 - LoggerEvent.getLevelString() failed." ) ;
             assertEquals( LoggerLevel.getLevelString( new LoggerLevel(55,"TEST") )  , "UNKNOWN" , "07 - LoggerEvent.getLevelString() failed." ) ;
         }
         
@@ -138,6 +145,7 @@ package system.logging
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.FATAL ) , "04 - LoggerLevel.FATAL is invalid" ) ;
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.INFO  ) , "05 - LoggerLevel.INFO is invalid"  ) ;
             assertTrue( LoggerLevel.isValidLevel( LoggerLevel.WARN  ) , "06 - LoggerLevel.WARN is invalid"  ) ;
+            assertTrue( LoggerLevel.isValidLevel( LoggerLevel.WTF   ) , "07 - LoggerLevel.WTF is invalid"  ) ;
             assertFalse( LoggerLevel.isValidLevel( new LoggerLevel(55,"TEST") ) , "07 - Custom LoggerLevel is invalid"  ) ;
         }
         
@@ -150,6 +158,7 @@ package system.logging
             assertEquals( LoggerLevel.FATAL.toSource() , "system.logging.LoggerLevel.FATAL" , "04 - LoggerLevel.FATAL toSource() failed." ) ;
             assertEquals( LoggerLevel.INFO.toSource()  , "system.logging.LoggerLevel.INFO"  , "05 - LoggerLevel.INFO toSource() failed."  ) ;
             assertEquals( LoggerLevel.WARN.toSource()  , "system.logging.LoggerLevel.WARN"  , "06 - LoggerLevel.WARN toSource() failed."  ) ;
+            assertEquals( LoggerLevel.WTF.toSource()   , "system.logging.LoggerLevel.WTF"   , "07 - LoggerLevel.WTF toSource() failed."  ) ;
         }
     }
 }

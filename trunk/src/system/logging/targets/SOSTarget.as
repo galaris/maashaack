@@ -67,6 +67,7 @@ package system.logging.targets
             setLevelColor( LoggerLevel.FATAL ) ;
             setLevelColor( LoggerLevel.INFO  ) ;
             setLevelColor( LoggerLevel.WARN  ) ;
+            setLevelColor( LoggerLevel.WTF   ) ;
             
             if ( idenfify )
             {
@@ -110,6 +111,11 @@ package system.logging.targets
          * Provides the 'warn' color in the SOS console. 
          */
         public static var WARN_COLOR:Number = 0xFDFDB5 ;
+        
+        /**
+         * Provides the 'wtf' color in the SOS console. 
+         */
+        public static var WTF_COLOR:Number = 0xE2355B ;
         
         ///// SOS socket command patterns
         

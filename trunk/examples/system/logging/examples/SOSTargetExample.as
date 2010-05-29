@@ -80,6 +80,8 @@ package examples
             
             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
             
+            logger.wtf( "what terrible failure !") ;
+            
             ////////
             
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;

@@ -90,8 +90,13 @@ package system.logging
         
         /**
          * Designates events that could be harmful to the application operation (6).
-         */    
+         */
         public static const WARN:LoggerLevel = new LoggerLevel( 6 , "WARN" ) ;
+        
+        /**
+         * What a Terrible Failure: designates an exception that should never happen. (32).
+         */
+        public static const WTF:LoggerLevel = new LoggerLevel( 32 , "WTF" ) ;
         
         /**
          * Compares the specified object with this object for equality.
@@ -119,7 +124,7 @@ package system.logging
          */
         public static function getLevel( value:int ):LoggerLevel 
         {
-            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
+            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN , WTF ] ;
             var l:int = levels.length ;
             while( --l > -1 )
             {
@@ -153,7 +158,7 @@ package system.logging
          */
         public static function isValidLevel( level:LoggerLevel ):Boolean 
         {
-            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN ] ;
+            var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN , WTF ] ;
             return levels.indexOf( level ) > -1 ;
         }
     }

@@ -120,6 +120,16 @@ package system.logging
         }
         
         /**
+         * What a Terrible Failure: Report an exception that should never happen.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
+         */
+        public function wtf( context:* , ...rest:Array ):void
+        {
+            _log( LoggerLevel.WTF , context , rest ) ;
+        }
+        
+        /**
          * @private
          */
         private var _entry:LoggerEntry ;

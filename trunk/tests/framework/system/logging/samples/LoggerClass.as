@@ -80,5 +80,10 @@ package system.logging.samples
         {
             throw new Error( Strings.format.apply( this, [context].concat(rest) ) ) ;
         }
+        
+        public function wtf( context:* , ...rest:Array ):void
+        {
+            throw new Error( Strings.format.apply( this, [context].concat(rest) ) ) ;
+        }
     }
 }

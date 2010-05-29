@@ -132,5 +132,15 @@ package system.logging
             assertEquals( listener.message , "hello world" , "03" );
             assertEquals( listener.level   , LoggerLevel.WARN  , "04" );
         }
+        
+        
+        public function testWtf():void
+        {
+            logger.wtf( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.WTF  , "04" );
+        }
     }
 }
