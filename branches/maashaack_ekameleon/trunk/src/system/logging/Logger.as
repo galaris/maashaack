@@ -78,5 +78,10 @@ package system.logging
          * Logs the specified data using the LogEventLevel.WARN level.
          */
         function warn( context:* , ...rest:Array ):void ;
+        
+        /**
+         * What a Terrible Failure: Report an exception that should never happen.
+         */
+        function wtf( context:* , ...rest:Array ):void ;
     }
 }

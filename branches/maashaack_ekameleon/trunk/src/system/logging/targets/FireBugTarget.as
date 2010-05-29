@@ -134,11 +134,8 @@ package system.logging.targets
                     break ; 
                 }
                 case LoggerLevel.ERROR :
-                {
-                    methodName = "console.error" ;
-                    break ; 
-                }
                 case LoggerLevel.FATAL :
+                case LoggerLevel.WTF   :
                 {
                     methodName = "console.error" ;
                     break ; 

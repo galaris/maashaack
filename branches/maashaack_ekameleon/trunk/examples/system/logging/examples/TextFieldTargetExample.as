@@ -87,6 +87,7 @@ package examples
             logger.warn  ( "Here is some warn message." ) ;
             logger.error ( "Here is some error message." ) ;
             logger.fatal ( "Here is some fatal error..." ) ;
+            logger.wtf   ( "Here is some 'What Terrible Feature'" ) ;
             
             target.includeDate    = false ;
             target.includeTime    = false ;
