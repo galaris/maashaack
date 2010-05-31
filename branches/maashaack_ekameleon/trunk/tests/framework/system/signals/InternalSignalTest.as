@@ -189,18 +189,18 @@ package system.signals
         {
             assertFalse( signal.hasReceiver( receiver1 ) , "01 - The hasReceiver method failed.") ;
             signal.connect( receiver1 ) ;
-            assertTrue( signal.hasReceiver( receiver1 ) , "02 - The connect method failed.") ;
+            assertTrue( signal.hasReceiver( receiver1 ) , "02 - The hasReceiver method failed.") ;
             signal.disconnect() ;
             assertFalse( signal.hasReceiver( receiver1 ) , "03 - The hasReceiver method failed.") ;
         }
         
         public function testHasReceiverWithReceiver():void
         {
-            assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
+            assertFalse( signal.hasReceiver( receiver2 ) , "01 - The hasReceiver method failed.") ;
             signal.connect( receiver2 ) ;
-            assertTrue( signal.hasReceiver( receiver2 ) , "01-02 - The connect method failed.") ;
+            assertTrue( signal.hasReceiver( receiver2 ) , "02 - The hasReceiver method failed.") ;
             signal.disconnect() ;
-            assertFalse( signal.hasReceiver( receiver2 ) , "01-01 - The hasReceiver method failed.") ;
+            assertFalse( signal.hasReceiver( receiver2 ) , "03 - The hasReceiver method failed.") ;
         }
         
         public function testToArray():void
