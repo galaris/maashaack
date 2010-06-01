@@ -35,7 +35,8 @@
 
 package system.logging 
 {
-    import system.Strings;
+    import core.strings.indexOfAny;
+
     import system.data.Iterator;
     import system.data.maps.HashMap;
     import system.errors.InvalidChannelError;
@@ -138,7 +139,7 @@ package system.logging
          */
         public function hasIllegalCharacters( value:String ):Boolean
         {
-            return Strings.indexOfAny( value , LoggerStrings.ILLEGALCHARACTERS.split("") ) != -1 ;
+            return indexOfAny( value , LoggerStrings.ILLEGALCHARACTERS.split("") ) != -1 ;
         }
         
         /**
