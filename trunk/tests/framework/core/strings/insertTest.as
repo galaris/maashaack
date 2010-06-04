@@ -44,7 +44,7 @@ package core.strings
             super(name);
         }
         
-        public function testIndexOfAny():void
+        public function testInsert():void
         {
             assertEquals( "ahello" , insert("hello", 0, "a" )  , "01 failed" );            // FIXME assertEquals( "helloa" , insert("hello", -1, "a" ) , "02 failed" );
             assertEquals( "helloa" , insert("hello", 10, "a" ) , "03 failed" );
