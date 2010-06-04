@@ -33,37 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class compareTest extends TestCase 
     {
-        public static function suite():ITest
+        public function compareTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
+            super(name);
+        }
+        
+        public function testCompare():void
+        {
+            var s0:String = "HELLO";
+            var s1:String = "hello";
+            var s2:String = "welcome";
+            var s3:String = "world";
             
-            suite.addTestSuite( centerTest              ) ;
-            suite.addTestSuite( compareTest             ) ;
-            suite.addTestSuite( endsWithTest            ) ;
-            suite.addTestSuite( fastformatTest          ) ;
-            suite.addTestSuite( formatTest              ) ;
-            suite.addTestSuite( indexOfAnyTest          ) ;
-            suite.addTestSuite( insertTest              ) ;
-            suite.addTestSuite( lastIndexOfAnyTest      ) ;
-            suite.addTestSuite( lineTerminatorCharsTest ) ;
-            suite.addTestSuite( padTest                 ) ;            suite.addTestSuite( padLeftTest             ) ;
-            suite.addTestSuite( padRightTest            ) ;            suite.addTestSuite( repeatTest              ) ;
-            suite.addTestSuite( startsWithTest          ) ;
-            suite.addTestSuite( trimTest                ) ;
-            suite.addTestSuite( trimEndTest             ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( whiteSpaceCharsTest     ) ;
-            suite.addTestSuite( WildExpTest             ) ;
-            
-            return suite;
+            assertEquals( -1 , compare( s1, s2 ) , "#1" );
+            assertEquals(  1 , compare( s2, s1 ) , "#2" );
+            assertEquals(  1 , compare( s1, s3 ) , "#3" );
+            assertEquals(  0 , compare( s1, s1 ) , "#4" );
+            assertEquals(  0 , compare( s1, s0 ) , "#5" );
+            assertEquals( -1 , compare( s1, s0, true ) , "#6" );
+            assertEquals(  1 , compare( s0, s1, true ) , "#7" );
         }
     }
 }
