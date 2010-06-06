@@ -131,11 +131,11 @@ package system.data.iterators
         public function reset():void
         {
             _k = -1 ;
-        }        
-
+        }
+        
         /**
-         * Change the position of the internal pointer of the iterator (optional operation).
-         */        
+         * Changes the position of the internal pointer of the iterator (optional operation).
+         */
         public function seek(position:*):void
         {
             _k = Mathematics.clamp((position-1), -1, _a.length) ;
@@ -145,7 +145,7 @@ package system.data.iterators
          * current array
          */
         protected var _a:Array ; 
-
+        
         /**
          *  current key
          */

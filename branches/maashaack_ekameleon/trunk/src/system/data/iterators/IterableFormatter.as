@@ -37,14 +37,13 @@ package system.data.iterators
 {
     import system.data.Iterable;
     import system.data.Iterator;
-    import system.formatters.Formattable;    
-
+    import system.formatters.Formattable;
+    
     /**
      * Converts an Iterable object to a custom string representation.
      */
     public class IterableFormatter implements Formattable 
     {
-
         /**
          * Creates a new IterableFormatter instance.
          */
@@ -52,7 +51,7 @@ package system.data.iterators
         {
             //  
         }
-
+        
         /**
          * Formats the specified value.
          * @param value The object to format.
