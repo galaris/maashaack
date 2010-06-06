@@ -36,13 +36,12 @@
 package core
 {
     /**
-    * Dumps a string representation of an Object object.
-    * 
-    * @param value an object
-    * @param prettyprint (optional) boolean option to output a pretty printed string
-    * @param indent (optional) initial indentation
-    * @param indentor (optional) initial string used for the indent
-    */
+     * Dumps a string representation of an object.
+     * @param value an object
+     * @param prettyprint (optional) boolean option to output a pretty printed string
+     * @param indent (optional) initial indentation
+     * @param indentor (optional) initial string used for the indent
+     */
     public const dumpObject:Function = function( value:Object, prettyprint:Boolean = false, indent:int = 0, indentor:String = "    " ):String
     {
         var source:Array = [];

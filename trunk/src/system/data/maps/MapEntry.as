@@ -38,7 +38,7 @@ package system.data.maps
     import system.Cloneable;
     import system.Reflection;
     import system.data.Entry;
-
+    
     /**
      * Represents a pair key/value entry in a Map.
      */
@@ -55,9 +55,9 @@ package system.data.maps
             _value = value ;
         }
         
-         /**
+        /**
          * Indicates the key corresponding to this entry.
-         */        
+         */
         public function get key():*
         {
             return _key ;
@@ -65,15 +65,15 @@ package system.data.maps
         
         /**
          * @private
-         */        
+         */
         public function set key( key:* ):void
         {
             _key = key ;
-        }        
+        }
         
         /**
          * Indicates the value corresponding to this entry.
-         */        
+         */
         public function get value():*
         {
             return _value ;
@@ -81,7 +81,7 @@ package system.data.maps
         
         /**
          * @private
-         */        
+         */
         public function set value( value:* ):void
         {
             _value = value ;
@@ -90,11 +90,11 @@ package system.data.maps
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         public function clone():*
         {
             return new MapEntry(key,value);
-        }        
+        }
         
         /**
          * Returns the String representation of the object.

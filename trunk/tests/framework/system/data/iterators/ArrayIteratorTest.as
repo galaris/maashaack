@@ -37,8 +37,8 @@ package system.data.iterators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.Iterator;    
-
+    import system.data.Iterator;
+    
     public class ArrayIteratorTest extends TestCase 
     {
         public function ArrayIteratorTest( name:String = "" )
@@ -54,7 +54,7 @@ package system.data.iterators
         {
             it = new ArrayIterator(ar) ;
         }
-
+        
         public function tearDown():void
         {
             it = undefined ;
@@ -66,7 +66,7 @@ package system.data.iterators
             try
             {
                 i = new ArrayIterator(null) ;
-                fail( this + " test constructor failed if the passed-in Array is a null object.") ;      
+                fail( this + " test constructor failed if the passed-in Array is a null object.") ;
             }
             catch( e:Error )
             {
@@ -86,7 +86,7 @@ package system.data.iterators
             assertFalse(it.hasNext(), "04 hasNext method failed") ;
             it.reset() ;
         }
-    
+        
         public function testKey():void
         {
             assertEquals(it.key(), -1, "01 key() method failed") ;
@@ -96,15 +96,13 @@ package system.data.iterators
             assertEquals(it.key(), 1, "03 key() method failed") ;
             it.next() ; // item3
             assertEquals(it.key(), 2, "04 key() method failed") ;
-            it.reset() ;
-        }    
-    
+        }
+        
         public function testNext():void
         {
             assertEquals( it.next() , "item1" , "01 next() method failed" ) ;
             assertEquals( it.next() , "item2" , "02 next() method failed" ) ;
             assertEquals( it.next() , "item3" , "03 next() method failed" ) ;
-            it.reset() ;
         }
         
         public function testRemove():void
@@ -115,24 +113,21 @@ package system.data.iterators
             assertEquals( it.next()   , "item2" , "02 remove() method failed" ) ;
             it.reset() ;
             assertEquals( it.next() , "item2" , "03 remove() method failed" ) ;
-            it.reset() ;
-        }           
-    
+        }
+        
         public function testReset():void
         {
             it.next() ;
             it.next() ;
             it.reset() ;
             assertEquals( it.next() , "item1" , "reset() method failed" ) ;
-            it.reset() ;
-        }           
+        }
         
         public function testSeek():void
         {
             it.seek(1) ;
             it.next() ;
             assertEquals( it.next() , "item3" , "seek(1) method failed" ) ;
-            it.reset() ;
-        } 
+        }
     }
 }
