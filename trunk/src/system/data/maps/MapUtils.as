@@ -35,14 +35,13 @@
 
 package system.data.maps
 {
-    import system.data.Map;    
-
+    import system.data.Map;
+    
     /**
      * The MapUtils utility class is an all-static class with methods for working with map.
      */
     public class MapUtils
     {
-        
         /**
          * Returns the value of the specified key in the map with a Number representation.
          * @param map the map used by this method.
@@ -68,6 +67,5 @@ package system.data.maps
             }
             return NaN ;
         }
-        
     }
 }

@@ -38,8 +38,8 @@ package system.data.iterators
     import system.data.OrderedIterator;
     import system.numeric.Mathematics;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * An iterator page by page over an array who return an new array of elements.
      * If the step size value is <code class="prettyprint">1</code> the next and previous methods returns the single value element in the data array.
@@ -89,7 +89,6 @@ package system.data.iterators
      */
     public class PageByPageIterator implements OrderedIterator
     {
-        
         /**
          * Creates a new PageByPageIterator.
          * @param data the array to enumerate.
@@ -98,7 +97,6 @@ package system.data.iterators
          */
         public function PageByPageIterator( data:Array , stepSize:uint = 1 )
         {
-            super();
             if ( data == null || data.length == 0 )
             {
                 throw new IllegalOperationError( "PageByPageIterator constructor failed, data length not must be empty" ) ; 
@@ -118,7 +116,7 @@ package system.data.iterators
          * The default step value in all the PageByPageIterators.
          */
         public static var DEFAULT_STEP:Number = 1 ;
- 
+        
         /**
          * Returns the current value.
          * @return the current value.
@@ -127,7 +125,7 @@ package system.data.iterators
         {
             return _current ;
         }
- 
+        
         /**
          * Returns the current page value.
          * @return the number of the current page.
@@ -143,17 +141,17 @@ package system.data.iterators
         public function firstPage():void
         {
             seek( 1 ) ;
-        }        
-
+        }
+        
         /**
          * Returns the step size of this PageByPageIterator.
          * @return the step size of this PageByPageIterator.
          */
         public function getStepSize():Number
         {
-            return _step ;    
-        }    
-
+            return _step ;
+        }
+        
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iterator has more elements.
@@ -162,7 +160,7 @@ package system.data.iterators
         {
             return _key < _pageCount ;
         }
-
+        
         /**
          * Checks to see if there is a previous element that can be iterated to.
          * @return <code class="prettyprint">true</code> if the iterator has more elements.
@@ -180,7 +178,7 @@ package system.data.iterators
         {
             return _currentPage ;
         }
-    
+        
         /**
          * Seek the iterator in the last page of this object.
          */
@@ -207,16 +205,16 @@ package system.data.iterators
             }
             return _current ;
         }
-
+        
         /**
          * Returns the numbers of page of this iterator.
          * @return the numbers of page of this iterator.
          */
         public function pageCount():Number
         {
-            return _pageCount ;    
+            return _pageCount ;
         }
-
+        
         /**
          * Returns the previous Array page of elements or the previous element in the Array if the getStepSize() value is 1.
          * @return the previous element from the collection.
@@ -232,11 +230,11 @@ package system.data.iterators
             }
             else
             {
-                _current = _data[index] ;    
+                _current = _data[index] ;
             }
             return _current ;
         }
-
+        
         /**
          * Unsupported operation in a PageByPageIterator.
          * @throws IllegalOperationError the method remove() in this iterator is unsupported. 
@@ -255,7 +253,7 @@ package system.data.iterators
             _currentPage = 0 ;
             _current     = undefined ;
         }
-
+        
         /**
          * Seek the key pointer of the iterator.
          */
@@ -270,7 +268,7 @@ package system.data.iterators
             }
             else
             {
-                _current = _data[index] ;    
+                _current = _data[index] ;
             }
         }
         
@@ -283,17 +281,17 @@ package system.data.iterators
          * @private
          */
         private var _currentPage:Number ;
-
+        
         /**
          * @private
          */
         private var _data:Array ;
-
+        
         /**
          * @private
          */
         private var _key:int ;
-    
+        
         /**
          * @private
          */
@@ -304,6 +302,5 @@ package system.data.iterators
          * @private
          */
         private var _step:Number ;
-        
     }
 }
