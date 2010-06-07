@@ -41,10 +41,9 @@ package system.data.iterators
     import system.data.Map;
     import system.data.maps.ArrayMap;
     import system.data.maps.HashMap;    
-
+    
     public class MapIteratorTest extends TestCase 
     {
-
         public function MapIteratorTest( name:String = "" )
         {
             super( name );
@@ -59,20 +58,20 @@ package system.data.iterators
             m  = new HashMap(["key1","key2"],["value1","value2"]) ; 
             it = new MapIterator(m) ;
         }
-      
+        
         public function tearDown():void
         {
             m  = undefined ;
             it = undefined ;
-        }             
-
+        }
+        
         public function testConstructor():void
         {
             var i:Iterator ;
             try
             {
                 i = new MapIterator(null) ;
-                fail( "01 - test constructor failed if the passed-in Map is a null object.") ;     
+                fail( "01 - test constructor failed if the passed-in Map is a null object.") ;
             }
             catch( e:Error )
             {
@@ -80,7 +79,7 @@ package system.data.iterators
             }
             assertNotNull(it, "03 - the MapIterator not must be null") ; 
         } 
-      
+        
         public function testHasNext():void
         {
             assertTrue( it.hasNext(), "01 hasNext method failed" ) ;
@@ -90,7 +89,7 @@ package system.data.iterators
             assertFalse( it.hasNext(), "03 hasNext method failed" ) ;
             it.reset() ;
         }
-
+        
         public function testKey():void
         {
             it.next() ; 
@@ -100,8 +99,8 @@ package system.data.iterators
             assertTrue(it.key() == "key1" || "key2" , "02 - key() method failed") ;
             
             it.reset() ;
-        }    
-    
+        }
+        
         public function testNext():void
         {
             var r:* ;
@@ -130,9 +129,8 @@ package system.data.iterators
             
             assertEquals( r , "value2" , "02-01 - remove() method." ) ;
             assertEquals( map.size()   , 0 , "02-02 - remove() method." ) ;
-
-        }           
-    
+        }
+        
         public function testReset():void
         {
             it.next() ;
@@ -142,20 +140,19 @@ package system.data.iterators
             assertTrue( it.hasNext() , "01 - reset() method failed, the iterator.hasNext() method must return true." ) ;
             assertTrue( r == "value1" || r == "value2" , "02 - reset() method failed" ) ;
             it.reset() ;
-        }           
+        }
         
         public function testSeek():void
         {
             try
             {
                 it.seek(0) ;
-                fail( "01 - seek() method failed must throw an Error.") ;     
+                fail( "01 - seek() method failed must throw an Error.") ;
             }
             catch( e:Error )
             {
                 assertEquals( e.message , "This Iterator does not support the seek() method." , "02 - seek() failed.");
             }
         } 
-        
     }
 }

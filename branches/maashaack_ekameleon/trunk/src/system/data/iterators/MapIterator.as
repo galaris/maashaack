@@ -45,10 +45,9 @@ package system.data.iterators
      */
     public class MapIterator implements Iterator
     {
-        
        /**
         * Creates a new MapIterator instance.
-        * @param m the Map reference of this iterator. 
+        * @param m the Map reference of this iterator.
         */
         public function MapIterator( m:Map )
         {
@@ -57,14 +56,14 @@ package system.data.iterators
                throw new ArgumentError( this + " constructor failed, the passed-in Map argument not must be 'null'.") ;   
             }
             _m = m ;
-            _i = new ArrayIterator(m.getKeys()) ;
+            _i = new ArrayIterator( m.getKeys() ) ;
             _k = null ;
         }
         
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
-         */    
+         */
         public function hasNext():Boolean
         {
             return _i.hasNext() ;
@@ -108,7 +107,7 @@ package system.data.iterators
         
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
-         */    
+         */
         public function seek(position:*):void
         {
             throw new IllegalOperationError( "This Iterator does not support the seek() method.") ;

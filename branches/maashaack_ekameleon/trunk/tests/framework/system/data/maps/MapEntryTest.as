@@ -38,10 +38,9 @@ package system.data.maps
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.data.Entry;
-
+    
     public class MapEntryTest extends TestCase 
     {
-
         public function MapEntryTest(name:String = "")
         {
             super( name );
@@ -53,15 +52,14 @@ package system.data.maps
         {
             entry = new MapEntry( "key", "value" );
         }
-
+        
         public function tearDown():void
         {
             entry = undefined ;
-        }           
+        }
         
         public function testConstructor():void
         {
-            
             var e:MapEntry ;
             
             assertNotNull( entry , "1 - The constructor failed, the object not must be null.") ;
@@ -85,18 +83,18 @@ package system.data.maps
         public function testInterface():void
         {
             assertTrue( entry is Entry , "The interface failed, the object must implement the Entry interface.") ;
-        }         
+        }
         
         public function testKey():void
         {
             assertEquals( entry.key , "key" , "MapEntry.key failed with the key method" ) ;
-        }     
-
+        }
+        
         public function testValue():void
         {
             assertEquals( entry.value , "value" , "MapEntry.value failed with the value method" ) ;
-        }     
-
+        }
+        
         public function testClone():void
         {
             var c:MapEntry = entry.clone() ;
@@ -108,10 +106,6 @@ package system.data.maps
         public function testToString():void
         {
             assertEquals(entry.toString(), "[MapEntry key:key value:value]"  , "The toString() method failed.") ;
-        }         
-        
+        }
     }
 }
-
-
-

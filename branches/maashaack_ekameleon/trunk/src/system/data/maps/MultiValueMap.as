@@ -45,7 +45,7 @@ package system.data.maps
     import system.data.iterators.ArrayIterator;
     import system.eden;
     import system.hack;
-
+    
     /**
      * A Map with multiple values to keys. It's the basic implementation of the <code class="prettyprint">MultiMap</code> interface.
      * <p><b>Example :</b></p>
@@ -176,7 +176,7 @@ package system.data.maps
         {
             return _map.containsKey( key ) ;
         }
-
+        
         /**
          * Checks whether the map contains the value specified.
          * <p><b>Example :</b></p>
@@ -208,7 +208,7 @@ package system.data.maps
             }
             return false ;
         } 
-
+        
         /**
          * Checks whether the map contains the value specified or at the specified key contains the value.
          * <p><b>Example :</b></p>
@@ -230,7 +230,7 @@ package system.data.maps
         public function containsValueByKey( key:*, value:* ):Boolean 
         {
             return ( get( key ) as Collection ).contains( value ) == true ;
-        }        
+        }
         
         /**
          * Creates a new instance of the map value Collection container.
@@ -282,7 +282,7 @@ package system.data.maps
         public function getCollection( key:* ):Collection
         {
             return _map.get(key) as Collection ;
-        }        
+        }
         
         /**
          * Returns an Array containing the combination of all keys in the Map.
@@ -384,8 +384,8 @@ package system.data.maps
         {
             var it:Iterable = _map.get(key) as Iterable ;
             return it == null ? null : it.iterator() ; 
-        }     
-     
+        }
+        
         /**
          * Gets an iterator for the map to iterate keys.
          */
@@ -509,7 +509,7 @@ package system.data.maps
                 while(it.hasNext()) 
                 {
                     co.add( it.next() ) ;
-                }            
+                }
             }
         }
         
@@ -567,7 +567,7 @@ package system.data.maps
                 var r:*          = c.remove(value) ;
                 return (r != null) ? r : null ;
             }
-        }        
+        }
         
         /**
          * Returns the size of the collection mapped to the specified key.
@@ -590,8 +590,8 @@ package system.data.maps
         public function size():uint
         {
             return _map.size() ;
-        }     
-
+        }
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
@@ -600,7 +600,7 @@ package system.data.maps
         {
              return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( _map ) + ")" ;
         } 
-
+        
         /**
          * Returns the string representation of this instance.
          * @return the string representation of this instance
@@ -609,7 +609,7 @@ package system.data.maps
         {
             return MultiMapFormatter.instance.format(this) ;
         }
-
+        
         /**
          * Returns the total size of the map by counting all the values.
          * <p><b>Example :</b></p>
@@ -640,7 +640,7 @@ package system.data.maps
             }
             return result ;
         }
-            
+        
         /**
          * Returns the iterator representation of all Collections register in the MultiValueMap, all collections represents a key.
          * <p><b>Example :</b></p>
@@ -720,10 +720,10 @@ package system.data.maps
          * </pre>
          * @return an Iterator representation of all values in the MultiValueMap.
          */
-        public function valuesIterator():Iterator  
+        public function valuesIterator():Iterator
         {
             return new ArrayIterator( getValues() ) ;
-        }         
+        }
         
         /**
          * The internal Map of this MultiValueMap class.
