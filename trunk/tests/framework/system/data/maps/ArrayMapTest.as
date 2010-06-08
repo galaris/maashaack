@@ -196,7 +196,6 @@ package system.data.maps
             assertTrue( m1.containsKey("key3")     , "2 - The ArrayMap putAll method failed.") ;
             assertTrue( m1.containsValue("value4") , "3 - The ArrayMap putAll method failed.") ;
             assertTrue( m1.containsValue("value3") , "4 - The ArrayMap putAll method failed.") ;
-            
         }
         
         public function testRemove():void

@@ -36,12 +36,11 @@
 package system.data.arrays 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.data.arrays.mocks.MockArrayFilterReceiver;
-
+    
     public class ArrayFilterTest extends TestCase 
     {
-
         public function ArrayFilterTest(name:String = "")
         {
             super( name );
@@ -106,7 +105,6 @@ package system.data.arrays
         
         public function testFilter():void
         {
-            
             var af:ArrayFilter ;
             
             af = new ArrayFilter() ;
@@ -116,7 +114,6 @@ package system.data.arrays
             
             af.filter = ArrayFilter.DESCENDING | ArrayFilter.NUMERIC  ;
             assertEquals( af.filter , ArrayFilter.DESCENDING | ArrayFilter.NUMERIC , "02 - The ArrayFilter filter property failed." ) ;
-            
         } 
         
         public function testContains():void

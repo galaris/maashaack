@@ -219,7 +219,7 @@ package system.data.maps
         public function indexOfValue( value:* ):int
         {
             return _values.indexOf(value) ;
-        }        
+        }
         
         /**
          * Returns true if this map contains no key-value mappings.
@@ -250,6 +250,8 @@ package system.data.maps
         
         /**
          * Associates the specified value with the specified key in this map.
+         * @param key the key to register the value.
+         * @param value the value to be mapped in the map.
          */
         public function put( key:* , value:* ):*
         {
@@ -295,7 +297,7 @@ package system.data.maps
             var i:int = indexOfKey( o ) ;
             if ( i > -1 ) 
             {
-                k = _keys[i]   ;
+                k = _keys[i]   ; // FIXME not used ??
                 v = _values[i] ;
                 _values.splice(i, 1) ;
                 _keys.splice(i, 1) ;
