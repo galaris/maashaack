@@ -46,14 +46,12 @@ package system.logging.targets
     import system.logging.LoggerLevel;
     import system.logging.LoggerStrings;
     import system.logging.LoggerTarget;
-
-    import flash.events.EventDispatcher;
-
+    
     /**
      * This class provides the basic functionality required by the logging framework for a target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
      */
-    public class CoreLoggerTarget extends EventDispatcher implements LoggerTarget
+    public class CoreLoggerTarget implements LoggerTarget
     {
         /**
          * Creates a new CoreLoggerTarget instance.
