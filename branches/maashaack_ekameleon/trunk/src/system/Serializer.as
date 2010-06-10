@@ -73,7 +73,7 @@ package system
         function set indentor( value:String ):void;
         
         /**
-         * Deserialiaze the specified String source representation.
+         * Deserialize the specified String source representation.
          */
         function deserialize( source:String ):*;
         

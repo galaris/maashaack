@@ -47,7 +47,7 @@ package system.errors
          * @param key The key non unique.
          * @param id A reference number to associate with the specific error message.
          */
-        public function NonUniqueKeyError( key:String = null , id:int = 0)
+        public function NonUniqueKeyError( key:String = null , id:int = 0 )
         {
             super( Strings.format( string , key ) , id );
             this.name = "NonUniqueKeyError" ;

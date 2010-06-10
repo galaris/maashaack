@@ -41,7 +41,6 @@ package system.errors
      */
     public class NoSuchElementError extends Error 
     {
-     
         /**
          * Creates a new NoSuchElementError instance. If message is specified, its value is assigned to the object's NoSuchElementError.message property.
          * @param message A string associated with the NoSuchElementError object ; this parameter is optional.
