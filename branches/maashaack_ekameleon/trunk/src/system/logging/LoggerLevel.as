@@ -70,7 +70,7 @@ package system.logging
         
         /**
          * Designates error events that might still allow the application to continue running (8).
-         */    
+         */
         public static const ERROR:LoggerLevel = new LoggerLevel( 8 , "ERROR" ) ;
         
         /**
