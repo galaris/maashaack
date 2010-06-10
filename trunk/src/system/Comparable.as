@@ -44,6 +44,6 @@ package system
         /**
          * Compares this object with the specified object for order.
          */
-        function compareTo( o:* ):int ;    
+        function compareTo( o:* ):int ;
     }
 }
