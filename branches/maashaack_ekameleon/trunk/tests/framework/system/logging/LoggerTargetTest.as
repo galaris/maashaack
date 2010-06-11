@@ -39,6 +39,7 @@ package system.logging
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.errors.InvalidFilterError;
+    import system.signals.Receiver;
     
     public class LoggerTargetTest extends TestCase 
     {
@@ -62,6 +63,11 @@ package system.logging
         public function testConstructor():void
         {
             assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( target is Receiver ) ;
         }
         
         public function testFactory():void
