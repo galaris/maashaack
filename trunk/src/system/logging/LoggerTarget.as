@@ -35,7 +35,8 @@
 
 package system.logging
 {
-    import system.Strings;
+    import core.strings.format;
+
     import system.data.Set;
     import system.data.sets.ArraySet;
     import system.errors.InvalidFilterError;
@@ -227,13 +228,13 @@ package system.logging
             
             if ( _factory.hasIllegalCharacters(filter) )
             {
-                 throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
+                 throw new InvalidFilterError( format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
             }
             
             var index:int = filter.indexOf("*") ;
             if ((index >= 0) && (index != (filter.length -1)))
             {
-                throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
+                throw new InvalidFilterError( format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
             }
         }
         
