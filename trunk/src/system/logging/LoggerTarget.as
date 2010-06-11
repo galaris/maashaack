@@ -35,43 +35,221 @@
 
 package system.logging
 {
+    import system.Strings;
+    import system.data.Set;
+    import system.data.sets.ArraySet;
+    import system.errors.InvalidFilterError;
+
     /**
-     * All logger target implementations within the logging framework must implement this interface.
+     * This class provides the basic functionality required by the logging framework for a logger target implementation. 
+     * It handles the validation of filter expressions and provides a default level property. 
      */
-    public interface LoggerTarget
+    public class LoggerTarget
     {
         /**
-         * Determinates the filters array of this target. 
-         * <p>In addition to the level setting, filters are used to provide a psuedo-hierarchical mapping for processing only those events for a given category.</p>
+         * Creates a new LoggerTarget instance.
          */
-        function get filters():Array ;
+        public function LoggerTarget()
+        {
+            /* note:
+               I had problem with the unit tests no passing
+               when the Log is assigned directly to the property
+               when we assign the default in the ctor all the unit tests pass
+            */
+            _factory = Log;
+            _filters = new ArraySet( ["*"] );
+            _level   = LoggerLevel.ALL;
+        }
+        
+        /**
+         * Determinates the LoggerFactory reference of the target, by default the target use the <code>system.logging.Log</code> singleton.
+         */
+        public function get factory():LoggerFactory
+        {
+            return _factory ;
+        }
         
         /**
          * @private
          */
-        function set filters( value:Array ):void ;
+        public function set factory( factory:LoggerFactory ):void
+        {
+            if ( _factory )
+            {
+                _factory.removeTarget( this ) ;
+            }
+            _factory = factory || Log ;
+            _factory.addTarget( this ) ;
+        }
         
         /**
-         * Determinates the level of this target. 
-         * Provides access to the level this target is currently set at.
-         */ 
-        function get level():LoggerLevel ;
+         * Indicates the filters array representation of this target.
+         */
+        public function get filters():Array
+        {
+            return _filters.toArray() ;
+        }
         
         /**
          * @private
-         */ 
-        function set level( value:LoggerLevel ):void ;
+         */
+        public function set filters( value:Array ):void
+        {
+            if ( value != null && value.length > 0 )
+            {
+                var len:int = value.length ;
+                for ( var i:int ; i<len ; i++ )
+                {
+                    _checkFilter( value[i] as String ) ;
+                }
+            }
+            else
+            {
+                value = ["*"] ;
+            }
+            
+            if ( _count > 0 )
+            {
+                _factory.removeTarget( this ) ;
+            }
+            
+            _filters = new ArraySet( value ) ;
+            if ( _count > 0 )
+            {
+                _factory.addTarget( this ) ;
+            }
+        }
+        
+        /**
+         * Indicates the level of this target.
+         */
+        public function get level():LoggerLevel
+        {
+            return _level ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set level( value:LoggerLevel ):void
+        {
+            _factory.removeTarget( this ) ;
+            _level = value || LoggerLevel.ALL ;
+            _factory.addTarget( this ) ;
+        } 
+        
+        /**
+         * Insert a channel in the fllters if this channel don't exist.
+         * Returns a boolean if the channel is add in the list.
+         */
+        public function addFilter( channel:String ):Boolean 
+        {
+            _checkFilter( channel ) ;
+            return _filters.add( channel ) ;
+        }
         
         /**
          * Sets up this target with the specified logger.
          * Note : this method is called by the framework and should not be called by the developer.
          */
-        function addLogger( logger:Logger ):void ;
+        public function addLogger( logger:Logger ):void 
+        {
+            if ( logger != null )
+            {
+                _count++ ;
+                logger.connect( _receive ) ;
+            }
+        }
+        
+        /**
+         *  This method receive a <code class="prettyprint">LoggerEntry</code> from an associated logger.
+         *  A target uses this method to translate the event into the appropriate format for transmission, storage, or display.
+         *  This method will be called only if the event's level is in range of the target's level.
+         *  <b><i>Descendants need to override this method to make it useful.</i></b>
+         */
+        public function logEntry( entry:LoggerEntry ):void
+        {
+            // override please.
+        }
+        
+        /**
+         * Remove a channel in the fllters if this channel exist.
+         * @return a boolean if the channel is removed.
+         */
+        public function removeFilter( channel:String ):Boolean
+        {
+            return _filters.remove( channel ) ;
+        }
         
         /**
          * Stops this target from receiving events from the specified logger.
-         * Note : this method is called by the framework and should not be called by the developer.
          */
-        function removeLogger( logger:Logger ):void ;
+        public function removeLogger( logger:Logger ):void 
+        {
+            if ( logger != null )
+            {
+                _count-- ;
+                logger.disconnect( _receive ) ;
+            }
+        }
+        
+        /**
+         * Count of the number of loggers this target is listening to. 
+         * When this value is zero changes to the filters property shouldn't do anything.
+         * @private
+         */
+        private var _count:uint ;
+        
+        /**
+         * @private
+         */
+        private var _factory:LoggerFactory;
+        
+        /**
+         * @private
+         */
+        private var _filters:Set;
+        
+        /**
+         * @private
+         */
+        private var _level:LoggerLevel;
+        
+        /**
+         * @private
+         */
+        private function _checkFilter( filter:String ):void
+        {
+            if ( filter == null )
+            {
+                throw new InvalidFilterError( LoggerStrings.EMPTY_FILTER  ) ;
+            }
+            
+            if ( _factory.hasIllegalCharacters(filter) )
+            {
+                 throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
+            }
+            
+            var index:int = filter.indexOf("*") ;
+            if ((index >= 0) && (index != (filter.length -1)))
+            {
+                throw new InvalidFilterError( Strings.format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
+            }
+        }
+        
+        /**
+         * This method will call the <code class="prettyprint">logEvent</code> method if the level of the event is appropriate for the current level.
+         */
+        private function _receive( entry:LoggerEntry ):void
+        {
+            if ( _level == LoggerLevel.NONE )
+            {
+                return ; // logging off
+            }
+            else if ( int( entry.level ) >= int( _level ) )
+            {
+                logEntry( entry ) ;
+            }
+        }
     }
 }

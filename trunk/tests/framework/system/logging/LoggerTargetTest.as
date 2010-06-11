@@ -35,10 +35,11 @@
 
 package system.logging 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.logging.samples.LoggerTargetClass;
-
+    
+    import system.errors.InvalidFilterError;
+    
     public class LoggerTargetTest extends TestCase 
     {
         public function LoggerTargetTest( name:String = "" )
@@ -46,10 +47,78 @@ package system.logging
             super(name);
         }
         
-        public function testInterface():void
+        public var target:LoggerTarget ;
+        
+        public function setUp():void
         {
-            var target:LoggerTarget = new LoggerTargetClass() ;
-            assertNotNull( target , "LoggerTarget interface failed.") ;
+            target = new LoggerTarget() ;
+        }
+        
+        public function tearDown():void
+        {
+            target = undefined  ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( target , "Constructor failed.") ;
+        }
+        
+        public function testFactory():void
+        {
+            assertEquals( target.factory , Log , "01 - The factory property failed.") ;
+            var factory:LoggerFactory = new LoggerFactory() ;
+            target.factory = factory ;
+            assertEquals( target.factory , factory , "02 - The factory property failed.") ;
+        }
+        
+        public function testFilters():void
+        {
+            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
+            
+            target.filters = ["test" , "test" ] ;
+            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
+            
+            target.filters = ["test", "system.*"] ;
+            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
+            
+            target.filters = null ;
+            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
+        }
+        
+        public function testFiltersWithNullFilter():void
+        {
+            try
+            {
+                target.filters = [null] ;
+                fail("01-01 - if the filter is null the target must throws an error") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidFilterError , "01-02 - if the filter is null the target must throws an error") ;
+                assertEquals( e.message , "filter must not be null or empty." , "01-03 - if the filter is null the target must throws an error") ;
+                return;
+            }
+            
+            fail(); //we want to fail the test if no errors are catched
+        }
+        
+        public function testFiltersWithAtLeastOneNullFilter():void
+        {
+            try
+            {
+                target.filters = ["hello" , null] ;
+                fail("02-01 - if the filter is null the target must throws an error") ;
+            }
+            catch( e:Error )
+            {
+                assertTrue( e is InvalidFilterError , "02-02 - if the filter is null the target must throws an error") ;
+                assertEquals( e.message , "filter must not be null or empty." , "02-03 - if the filter is null the target must throws an error") ;
+                return;
+            }
+            
+            fail(); //we want to fail the test if no errors are catched
+            
         }
     }
 }

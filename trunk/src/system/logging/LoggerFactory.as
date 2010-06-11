@@ -61,7 +61,7 @@ package system.logging
          */
         public function addTarget( target:LoggerTarget ):void
         {
-            if( target != null )
+            if( target )
             {
                 var filters:Array = target.filters ;
                 var it:Iterator   = _loggers.iterator() ;
