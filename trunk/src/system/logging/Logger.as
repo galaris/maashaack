@@ -38,7 +38,7 @@ package system.logging
     import system.signals.Signal;
     
     /**
-     * All loggers within the logging framework must implement this interface.
+     * API for sending log output.
      */
     public class Logger extends Signal
     {
