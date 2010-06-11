@@ -116,7 +116,7 @@ package system.logging
             var result:Logger = _loggers.get( channel ) as Logger ;
             if( result == null )
             {
-                result = new LogLogger( channel ) ;
+                result = new Logger( channel ) ;
                 _loggers.put( channel , result ) ;
             }
             var target:LoggerTarget ;

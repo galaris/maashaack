@@ -36,10 +36,9 @@
 package system.logging 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.logging.samples.LoggableClass;
-    import system.logging.samples.LoggerClass;
-    
+
     public class LoggableTest extends TestCase 
     {
         public function LoggableTest( name:String = "" )
@@ -47,16 +46,16 @@ package system.logging
             super(name);
         }
         
-        public function testInterface():void
+        public function testConstructor():void
         {
-            var o:Loggable = new LoggableClass( new LoggerClass() ) ;
+            var o:Loggable = new LoggableClass( new Logger( "channel" ) ) ;
             assertNotNull( o , "Loggable implementation failed.") ;
         }
         
         public function testLogger():void
         {
-            var l:LoggerClass = new LoggerClass() ;
-            var o:Loggable    = new LoggableClass() ;
+            var l:Logger   = new Logger( "channel" ) ;
+            var o:Loggable = new LoggableClass() ;
             
             assertNull( o.logger , "Loggable.logger failed.") ;
             

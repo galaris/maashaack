@@ -35,53 +35,124 @@
 
 package system.logging
 {
-    import system.signals.Signaler;
+    import system.signals.Signal;
     
     /**
      * All loggers within the logging framework must implement this interface.
      */
-    public interface Logger extends Signaler
+    public class Logger extends Signal
     {
+        /**
+         * Creates a new Logger instance.
+         * @param channel The channel value of the logger.
+         */
+        public function Logger( channel:String )
+        {
+            _entry = new LoggerEntry( null , null , channel ) ;
+        }
+        
         /**
          * Indicates the channel value for the logger.
          */
-        function get channel():String ;
+        public function get channel():String
+        {
+            return _entry.channel ;
+        }
         
         /**
          * Logs the specified data using the LogEventLevel.DEBUG level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-         function debug( context:* , ...rest:Array ):void ;
+        public function debug( context:* , ...rest ):void
+        {
+            _log( LoggerLevel.DEBUG , context , rest ) ;
+        }
         
         /**
          * Logs the specified data using the LogEventLevel.ERROR level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function error( context:* , ...rest:Array ):void ;
+        public function error( context:* , ...rest ):void
+        {
+            _log( LoggerLevel.ERROR , context , rest ) ;
+        }
         
         /**
          * Logs the specified data using the LogEventLevel.FATAL level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.     
          */
-        function fatal( context:* , ...rest:Array ):void ;
+        public function fatal(context:*, ...rest):void
+        {
+            _log( LoggerLevel.FATAL , context , rest ) ;
+        }
         
         /**
          * Logs the specified data using the LogEvent.INFO level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function info( context:* , ...rest:Array ):void ;
+        public function info(context:*, ...rest):void
+        {
+            _log( LoggerLevel.INFO , context , rest ) ;
+        }
         
         /**
          * Logs the specified data using the LogEvent.ALL level.
          * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
          * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function log( context:*, ...rest ):void ;
+        public function log( context:*, ...rest ):void
+        {
+            _log( LoggerLevel.ALL , context , rest ) ;
+        }
         
         /**
          * Logs the specified data using the LogEventLevel.WARN level.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function warn( context:* , ...rest:Array ):void ;
+        public function warn(context:*, ...rest):void
+        {
+            _log( LoggerLevel.WARN , context , rest ) ;
+        }
         
         /**
          * What a Terrible Failure: Report an exception that should never happen.
+         * @param context The information to log. This string can contain special marker characters of the form {x}, where x is a zero based index that will be replaced with the additional parameters found at that index if specified.
+         * @param ... Additional parameters that can be subsituted in the str parameter at each "{x}" location, where x is an integer (zero based) index value into the Array of values specified.
          */
-        function wtf( context:* , ...rest:Array ):void ;
+        public function wtf( context:* , ...rest:Array ):void
+        {
+            _log( LoggerLevel.WTF , context , rest ) ;
+        }
+        
+        /**
+         * @private
+         */
+        private var _entry:LoggerEntry ;
+        
+        /**
+         * @private
+         */
+        private function _log( level:LoggerLevel, context:*, options:Array ):void
+        {
+            if( connected() )
+            {
+                if ( context is String )
+                {
+                    var len:int = options.length ;
+                    for( var i:int ; i<len ; i++ )
+                    {
+                        context = (context as String).replace( new RegExp( "\\{" + i + "\\}" , "g" ) , options[i]);
+                    }
+                }
+                _entry.message = context ;
+                _entry.level   = level ;
+                emit( _entry ) ;
+            }
+        }
     }
 }

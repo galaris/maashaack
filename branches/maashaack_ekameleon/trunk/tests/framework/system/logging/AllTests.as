@@ -56,8 +56,6 @@ package system.logging
             suite.addTestSuite( LoggerTest ) ;
             suite.addTestSuite( LogTest ) ;
             
-            suite.addTestSuite( LogLoggerTest ) ;
-            
             suite.addTest( system.logging.errors.AllTests.suite() );
             suite.addTest( system.logging.targets.AllTests.suite() );
             
