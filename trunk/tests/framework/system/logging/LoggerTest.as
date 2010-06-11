@@ -37,7 +37,8 @@ package system.logging
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    import system.logging.samples.LoggerClass;
+    import system.logging.mocks.MockLoggerListener;
+    import system.signals.Signal;
 
     public class LoggerTest extends TestCase 
     {
@@ -46,16 +47,100 @@ package system.logging
             super(name);
         }
         
+        public var logger:Logger ;
+        
+        public var listener:MockLoggerListener ;
+        
+        public function setUp():void
+        {
+            logger   = new Logger( "channel" ) ;
+            listener = new MockLoggerListener( logger ) ;
+        }
+        
+        public function tearDown():void
+        {
+            listener.unregister() ;
+            listener = undefined  ;
+            logger   = undefined  ;
+        }
+        
         public function testConstructor():void
         {
-            var logger:Logger = new LoggerClass() ;
-            assertNotNull( logger , "Logger interface failed.") ;
+            assertNotNull( logger , "LogLogger constructor failed." ) ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( logger is Signal , "LogLogger must inherit the Signal class.") ;
         }
         
         public function testChannel():void
         {
-            var logger:Logger = new LoggerClass() ;
-            assertEquals( logger.channel, "channel" , "Logger.category property failed." ) ;
+            assertEquals( logger.channel , "channel" , "channel property failed." ) ;
+        }
+        
+        public function testLog():void
+        {
+            logger.log( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world"     , "03" );
+            assertEquals( listener.level   , LoggerLevel.ALL , "04" );
+        }
+        
+        public function testDebug():void
+        {
+            logger.debug( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world"     , "03" );
+            assertEquals( listener.level   , LoggerLevel.DEBUG , "04" );
+        }
+        
+        public function testError():void
+        {
+            logger.error( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.ERROR , "04" );
+        }
+        
+        public function testFatal():void
+        {
+            logger.fatal( "hello {0}" , "world" ) ;
+            assertTrue( listener.called , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.FATAL , "04" );
+        }
+        
+        public function testInfo():void
+        {
+            logger.info( "hello {0}" , "world" ) ;
+            assertTrue( listener.called , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.INFO  , "04" );
+        }
+        
+        public function testWarn():void
+        {
+            logger.warn( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.WARN  , "04" );
+        }
+        
+        
+        public function testWtf():void
+        {
+            logger.wtf( "hello {0}" , "world" ) ;
+            assertTrue( listener.called    , "01" ) ;
+            assertEquals( listener.channel , "channel" , "02" ) ;
+            assertEquals( listener.message , "hello world" , "03" );
+            assertEquals( listener.level   , LoggerLevel.WTF  , "04" );
         }
     }
 }
