@@ -44,7 +44,6 @@ package system.logging.targets
         {
             var suite:TestSuite = new TestSuite( "system.logging.targets package" );
             
-            suite.addTestSuite( CoreLoggerTargetTest ) ;
             suite.addTestSuite( LineFormattedTargetTest ) ;
             
 //            TAMARIN::exclude

@@ -245,11 +245,9 @@
     <component id="system.logging:LoggerLevel"    class="system.logging.LoggerLevel" />
     <component id="system.logging:LoggerStrings"  class="system.logging.LoggerStrings" />
     <component id="system.logging:LoggerTarget"   class="system.logging.LoggerTarget" />
-    <component id="system.logging:LogLogger"      class="system.logging.LogLogger" />
     
     <!-- system.logging.targets -->
     
-    <component id="system.logging.targets:CoreLoggerTarget"    class="system.logging.targets.CoreLoggerTarget" />
     <component id="system.logging.targets:FireBugTarget"       class="system.logging.targets.FireBugTarget" />
     <component id="system.logging.targets:LineFormattedTarget" class="system.logging.targets.LineFormattedTarget" />
     <component id="system.logging.targets:SocketTarget"        class="system.logging.targets.SocketTarget" />
