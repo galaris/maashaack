@@ -40,7 +40,7 @@ package system.logging
     import system.data.Iterator;
     import system.data.maps.HashMap;
     import system.errors.InvalidChannelError;
-
+    
     /**
      * This factory provides pseudo-hierarchical logging capabilities with multiple format and output options.
      * <p>This class in an internal class in the package system.logging you can use the Log singleton to deploy all the loggers in your application.</p>
@@ -57,7 +57,8 @@ package system.logging
         
         /**
          * Allows the specified target to begin receiving notification of log events.
-         * @param The specific target that should capture log events.
+         * @param target The specific target that should capture log events.
+         * @throws ArgumentError If the target is invalid.
          */
         public function addTarget( target:LoggerTarget ):void
         {
@@ -101,12 +102,12 @@ package system.logging
         }
         
         /**
-         * Returns the logger associated with the specified category.
-         * If the category given doesn't exist a new instance of a logger will be returned and associated with that category.
-         * Categories must be at least one character in length and may not contain any blanks or any of the following characters:
+         * Returns the logger associated with the specified channel.
+         * If the category given doesn't exist a new instance of a logger will be returned and associated with that channel.
+         * Channels must be at least one character in length and may not contain any blanks or any of the following characters:
          * []~$^&amp;\/(){}&lt;&gt;+=`!#%?,:;'"&#64;
-         * This method will throw an <code class="prettyprint">InvalidCategoryError</code> if the category specified is malformed.
-         * @param category The category of the logger that should be returned.
+         * This method will throw an <code class="prettyprint">InvalidChannelError</code> if the category specified is malformed.
+         * @param channel The channel of the logger that should be returned.
          * @return An instance of a logger object for the specified name.
          * If the name doesn't exist, a new instance with the specified name is returned.
          */
@@ -144,7 +145,7 @@ package system.logging
         
         /**
          * Indicates whether a 'all' level log event will be processed by a log target.
-         * @return true if a debug level log event will be logged; otherwise false.
+         * @return true if a 'all' level log event will be logged; otherwise false.
          */
         public function isAll():Boolean
         {
@@ -197,19 +198,28 @@ package system.logging
         }
         
         /**
+         * Indicates whether a wtf level log event will be processed by a log target.
+         * @return true if a wtf level log event will be logged; otherwise false.
+         */
+        public function isWtf():Boolean
+        {
+            return int(_targetLevel) <= int( LoggerLevel.WTF ) ;
+        }
+        
+        /**
          * Stops the specified target from receiving notification of log events.
-         * @param The specific target that should capture log events.
+         * @param target The specific target that should capture log events.
+         * @throws ArgumentError If the target is invalid.
          */
         public function removeTarget( target:LoggerTarget ):void
         {
-            if( target != null )
+            if( target )
             {
                 var log:Logger ;
                 var filters:Array = target.filters;
                 var it:Iterator   = _loggers.iterator() ;
                 while (it.hasNext())
                 {
-                   
                     log = it.next() as Logger ;
                     var c:String = it.key() ;
                     if( _channelMatchInFilterList( c, filters ) )

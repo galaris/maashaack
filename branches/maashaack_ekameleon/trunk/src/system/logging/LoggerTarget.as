@@ -36,16 +36,17 @@
 package system.logging
 {
     import core.strings.format;
-
+    
     import system.data.Set;
     import system.data.sets.ArraySet;
     import system.errors.InvalidFilterError;
-
+    import system.signals.Receiver;
+    
     /**
      * This class provides the basic functionality required by the logging framework for a logger target implementation. 
      * It handles the validation of filter expressions and provides a default level property. 
      */
-    public class LoggerTarget
+    public class LoggerTarget implements Receiver
     {
         /**
          * Creates a new LoggerTarget instance.
@@ -158,7 +159,7 @@ package system.logging
             if ( logger != null )
             {
                 _count++ ;
-                logger.connect( _receive ) ;
+                logger.connect( this ) ;
             }
         }
         
@@ -171,6 +172,26 @@ package system.logging
         public function logEntry( entry:LoggerEntry ):void
         {
             // override please.
+        }
+        
+        /**
+         * This method is called when the receiver is connected with a Signal object.
+         * @param ...values All the values emitting by the signals connected with this object.
+         */
+        public function receive( ...values:Array ):void
+        {
+            var entry:LoggerEntry = values[0] as LoggerEntry ;
+            if ( entry )
+            {
+                if ( _level == LoggerLevel.NONE )
+                {
+                    return ; // logging off
+                }
+                else if ( int( entry.level ) >= int( _level ) )
+                {
+                    logEntry( entry ) ;
+                }
+            }
         }
         
         /**
@@ -190,7 +211,7 @@ package system.logging
             if ( logger != null )
             {
                 _count-- ;
-                logger.disconnect( _receive ) ;
+                logger.disconnect( this ) ;
             }
         }
         
@@ -235,21 +256,6 @@ package system.logging
             if ((index >= 0) && (index != (filter.length -1)))
             {
                 throw new InvalidFilterError( format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
-            }
-        }
-        
-        /**
-         * This method will call the <code class="prettyprint">logEvent</code> method if the level of the event is appropriate for the current level.
-         */
-        private function _receive( entry:LoggerEntry ):void
-        {
-            if ( _level == LoggerLevel.NONE )
-            {
-                return ; // logging off
-            }
-            else if ( int( entry.level ) >= int( _level ) )
-            {
-                logEntry( entry ) ;
             }
         }
     }
