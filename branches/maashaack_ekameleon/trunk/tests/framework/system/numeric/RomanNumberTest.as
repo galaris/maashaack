@@ -36,10 +36,9 @@
 package system.numeric 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     public class RomanNumberTest extends TestCase 
     {
-
         public function RomanNumberTest(name:String = "")
         {
             super( name );
@@ -62,13 +61,13 @@ package system.numeric
         {
             var rn:RomanNumber = new RomanNumber( "MMVIII" );
             assertEquals( 2008, rn.valueOf() );
-        }          
-
+        }
+        
         public function testDefault():void
         {
             var rn:RomanNumber = new RomanNumber();
             assertEquals( "", rn.toString() ); 
-        }        
+        }
         
         public function testBasicOperators():void
         {
@@ -85,7 +84,6 @@ package system.numeric
         
         public function testMaxRange():void
         {
-            
             try
             {
                 new RomanNumber( RomanNumber.MAX + 1 );
@@ -94,12 +92,8 @@ package system.numeric
             {
                 assertEquals( e.message, "Max value for a RomanNumber is 3999" , "over maximum range throws a specific RangeError message.") ;
                 assertTrue( e is RangeError , "over maximum range throws a RangeError object.") ;
-                return ;
             }
-
-            fail( "over maximum range not catched" );
-
-        }         
+        }
         
         public function testMinRange():void
         {
@@ -111,12 +105,9 @@ package system.numeric
             {
                 assertTrue( e is RangeError , "under minimum range throws a RangeError object." ) ;
                 assertEquals( e.message, "Min value for a RomanNumber is 0" , "under minimum range throws a specific RangeError message.") ;
-                return;
             }
-            
-            fail( "under minimum range not catched" );
         }
-
+        
         // parse
          
         public function testParseBasic():void
@@ -229,7 +220,7 @@ package system.numeric
             assertEquals(  0, RomanNumber.parseRomanString( "DCA" ) );  
             assertEquals(  0, RomanNumber.parseRomanString( "MCMXCIA" ) );
             assertEquals(  0, RomanNumber.parseRomanString( "MCMXCAI" ) );
-        }          
+        }
          
         public function testToString():void
         {
@@ -242,7 +233,5 @@ package system.numeric
             var rn:RomanNumber = new RomanNumber( 2008 );
             assertEquals( 2008, rn );
         }
-        
     }
-    
 }

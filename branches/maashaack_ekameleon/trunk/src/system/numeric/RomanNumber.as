@@ -35,7 +35,6 @@
 
 package system.numeric
 {
-    
     /**
      * Roman numerals are a numeral system originating in ancient Rome, adapted from Etruscan numerals.
      * <p>Roman numerals are commonly used in numbered lists (in outline format), clock faces, pages preceding the main body of a book, chord triads in music analysis, the numbering of movie publication dates, successive political leaders or children with identical names, and the numbering of some annual sport events.</p>
