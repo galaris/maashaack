@@ -39,52 +39,52 @@ package system.logging.targets
     import system.logging.LoggerLevel;
     
     /**
-      * Provides a logger target that uses the global trace() method to output log messages.
-      * <p><b>Example :</b></p>
-      * package examples
-      * {
-      *     import system.logging.Log;
-      *     import system.logging.Logger;
-      *     import system.logging.LoggerLevel;
-      *     import system.logging.targets.TraceTarget;
-      *     
-      *     import flash.display.Sprite;
-      *     
-      *     public class TraceTargetExample extends Sprite
-      *     {
-      *         public function TraceTargetExample()
-      *         {
-      *             // setup writer
-      *             var target:TraceTarget = new TraceTarget() ;
-      *             
-      *             target.filters        = [ "examples.*" ] ;
-      *             target.level          = LoggerLevel.ALL ;
-      *             
-      *             target.includeDate    = true ;
-      *             target.includeTime    = true ;
-      *             target.includeLevel   = true ;
-      *             target.includeChannel = true ;
-      *             target.includeLines   = true ;
-      *             
-      *             var logger:Logger = Log.getLogger( "examples.TraceTarget" ) ;
-      *             
-      *             logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
-      *             logger.debug ( "Here is some debug message." ) ;
-      *             logger.info  ( "Here is some info message." ) ;
-      *             logger.warn  ( "Here is some warn message." ) ;
-      *             logger.error ( "Here is some error message." ) ;
-      *             logger.fatal ( "Here is some fatal error..." ) ;
-      *             
-      *             target.includeDate    = false ;
-      *             target.includeTime    = false ;
-      *             target.includeChannel = false ;
-      *             
-      *             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
-      *         }
-      *     }
-      * }
-      * </pre>
-      */
+     * Provides a logger target that uses the global trace() method to output log messages.
+     * <p><b>Example :</b></p>
+     * package examples
+     * {
+     *     import system.logging.Log;
+     *     import system.logging.Logger;
+     *     import system.logging.LoggerLevel;
+     *     import system.logging.targets.TraceTarget;
+     *     
+     *     import flash.display.Sprite;
+     *     
+     *     public class TraceTargetExample extends Sprite
+     *     {
+     *         public function TraceTargetExample()
+     *         {
+     *             // setup writer
+     *             var target:TraceTarget = new TraceTarget() ;
+     *             
+     *             target.filters        = [ "examples.*" ] ;
+     *             target.level          = LoggerLevel.ALL ;
+     *             
+     *             target.includeDate    = true ;
+     *             target.includeTime    = true ;
+     *             target.includeLevel   = true ;
+     *             target.includeChannel = true ;
+     *             target.includeLines   = true ;
+     *             
+     *             var logger:Logger = Log.getLogger( "example" ) ;
+     *             
+     *             logger.log   ( "Here is some myDebug info : {0} and {1}", 2.25 , true ) ;
+     *             logger.debug ( "Here is some debug message." ) ;
+     *             logger.info  ( "Here is some info message." ) ;
+     *             logger.warn  ( "Here is some warn message." ) ;
+     *             logger.error ( "Here is some error message." ) ;
+     *             logger.fatal ( "Here is some fatal error..." ) ;
+     *             
+     *             target.includeDate    = false ;
+     *             target.includeTime    = false ;
+     *             target.includeChannel = false ;
+     *             
+     *             logger.info( "test : [{0}, {1}, {2}]", 2, 4, 6 ) ;
+     *         }
+     *     }
+     * }
+     * </pre>
+     */
     public class TraceTarget extends LineFormattedTarget
     {
         /**

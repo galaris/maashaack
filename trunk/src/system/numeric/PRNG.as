@@ -130,21 +130,21 @@ package system.numeric
         }
         
         /**
-         * Returns the primitive value of the object.
-         * @return the primitive value of the object.
-         */
-        public function valueOf():int
-        {
-            return _value ;
-        }
-        
-        /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
         public function toString():String
         {
             return String(_value) ;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value ;
         }
         
         /**

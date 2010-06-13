@@ -241,6 +241,5 @@ package system.numeric
         {
             assertEquals( range.toString() , "[Range min:100 max:200]" , range + ".toString() failed." ) ;
         }
-        
     }
 }

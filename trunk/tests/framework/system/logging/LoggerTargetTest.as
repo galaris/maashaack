@@ -96,17 +96,14 @@ package system.logging
         {
             try
             {
-                target.filters = [null] ;
+                target.filters = [ null ] ;
                 fail("01-01 - if the filter is null the target must throws an error") ;
             }
             catch( e:Error )
             {
-                assertTrue( e is InvalidFilterError , "01-02 - if the filter is null the target must throws an error") ;
+                assertTrue( e is InvalidFilterError , "02 - if the filter is null the target must throws an error") ;
                 assertEquals( e.message , "filter must not be null or empty." , "01-03 - if the filter is null the target must throws an error") ;
-                return;
             }
-            
-            fail(); //we want to fail the test if no errors are catched
         }
         
         public function testFiltersWithAtLeastOneNullFilter():void
@@ -120,11 +117,7 @@ package system.logging
             {
                 assertTrue( e is InvalidFilterError , "02-02 - if the filter is null the target must throws an error") ;
                 assertEquals( e.message , "filter must not be null or empty." , "02-03 - if the filter is null the target must throws an error") ;
-                return;
             }
-            
-            fail(); //we want to fail the test if no errors are catched
-            
         }
     }
 }
