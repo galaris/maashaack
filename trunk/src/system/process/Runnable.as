@@ -37,7 +37,7 @@ package system.process
 {
     /**
      * This interface should be implemented by any class whose instances are intended to be executed.
-     */    
+     */
     public interface Runnable
     {
         /**
