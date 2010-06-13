@@ -76,6 +76,11 @@ package system.numeric
         }
         
         /**
+         * Range reference between -255 and 255.
+         */
+        public static const COLOR:Range = new Range( - 255, 255 ) ;
+        
+        /**
          * Range reference between 0 and 360.
          */
         public static const DEGREE:Range = new Range( 0, 360 ) ;
@@ -84,11 +89,6 @@ package system.numeric
          * Range reference between 0 and 100.
          */
         public static const PERCENT:Range = new Range( 0, 100 ) ;
-        
-        /**
-         * Range reference between -255 and 255.
-         */
-        public static const COLOR:Range = new Range( - 255, 255 ) ;
         
         /**
          * Range reference between 0 and 1.
@@ -204,7 +204,7 @@ package system.numeric
          */
         public function getRandomFloat():Number
         {
-            return Math.random( ) * ( max - min ) + min ;
+            return Math.random() * ( max - min ) + min ;
         }
         
         /**
@@ -244,8 +244,8 @@ package system.numeric
         }
         
         /**
-         * Returns the Eden representation of the object.
-         * @return the string representing the source code of the object.
+         * Returns the source represensation of the object.
+         * @return the source represensation of the object.
          */
         public function toSource( indent:int = 0 ):String  
         {

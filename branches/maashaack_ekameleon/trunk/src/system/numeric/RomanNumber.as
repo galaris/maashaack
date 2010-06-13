@@ -183,7 +183,7 @@ package system.numeric
             roman = roman.toUpperCase();
             
             var n:uint = 0;
-                        
+            
             var pos:int     = 0;
             var ch:String   = "";
             var next:String = "";
