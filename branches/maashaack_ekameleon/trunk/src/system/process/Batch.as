@@ -263,14 +263,13 @@ package system.process
          */
         public function run( ...arguments:Array ):void
         {
-            var a:Array = toArray() ;
             var i:int   = -1 ;
-            var l:int   = a.length ;
+            var l:int = _v.length ;
             if (l>0) 
             {
-                while (++i < l) 
+                while ( ++i < l ) 
                 { 
-                    a[i].run() ; 
+                    (_v[i] as Runnable).run() ; 
                 }
             }
         }
