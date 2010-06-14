@@ -41,11 +41,10 @@ package system.data.collections
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Typeable;
-    import system.data.Validator;    
-
+    import system.data.Validator;
+    
     public class TypedCollectionTest extends TestCase 
     {
-
         public function TypedCollectionTest(name:String = "")
         {
             super( name );
@@ -64,13 +63,13 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection() ;
             var tc:TypedCollection ;
-                        
+            
             tc = new TypedCollection( String, co ) ;
             assertEquals( tc.type , String , "01 - TypedCollection constructor failed with a specific type argument in this constructor.") ;
-
+            
             tc = new TypedCollection( null , co ) ;
             assertNull( tc.type , "02 - TypedCollection constructor failed with a specific type argument in this constructor.") ;
-
+            
             tc = new TypedCollection( [] , co ) ; // 
             assertNull( tc.type , "03 - TypedCollection constructor failed with a specific type argument in this constructor, other type, must use a Class or a Function value.") ;
         }
@@ -78,7 +77,7 @@ package system.data.collections
         public function testConstructorCollectionArgument():void
         {
             var co:Collection = new ArrayCollection() ;
-            var tc:TypedCollection ;            
+            var tc:TypedCollection ;
             
             // 01 - test "collection" argument is null
             try
@@ -90,8 +89,8 @@ package system.data.collections
             {
                 assertTrue( e is ArgumentError , "01-02 - TypedCollection constructor failed." ) ;
                 assertEquals( e.message , "The passed-in 'collection' argument not must be 'null' or 'undefined'.", "01-03 - TypedCollection constructor failed." ) ;
-            }            
-                        
+            }
+            
             // 02 - basic test with a no empty Collection
             
             co.add("item1") ;
@@ -126,7 +125,7 @@ package system.data.collections
         }
         
         // test methods and attributes
-
+            
         public function testType():void
         {
             var co:Collection = new ArrayCollection() ;
@@ -142,11 +141,10 @@ package system.data.collections
             assertEquals( tc.type , clazz , "03 - The TypedCollection type property failed." ) ;
             
             tc.type = null ;
-            assertNull( tc.type , "04 - The TypedCollection type property failed." ) ;            
-
-            tc.type = 2 ;
-            assertNull( tc.type , "05 - The TypedCollection type property failed." ) ;    
+            assertNull( tc.type , "04 - The TypedCollection type property failed." ) ;
             
+            tc.type = 2 ;
+            assertNull( tc.type , "05 - The TypedCollection type property failed." ) ;
         }
         
         public function testAdd():void
@@ -161,7 +159,7 @@ package system.data.collections
             try
             {
                 tc.add(3) ;
-                fail("02-01 - The TypedCollection add method failed.") ;    
+                fail("02-01 - The TypedCollection add method failed.") ;
             }
             catch( e:Error )
             {
@@ -176,7 +174,7 @@ package system.data.collections
             var tc:TypedCollection = new TypedCollection( String , co ) ;
             tc.clear() ;
             assertEquals( tc.size() , 0 , "The TypedCollection clear method failed." ) ;
-        }        
+        }
         
         public function testClone():void
         {
@@ -191,14 +189,14 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.get(0) , "item1" , "The TypedCollection get method failed." ) ;        
+            assertEquals( tc.get(0) , "item1" , "The TypedCollection get method failed." ) ;
         }
-
+        
         public function testIndexOf():void
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.indexOf("item2") , 1 , "01 - The TypedCollection indexOf method failed." ) ;     
+            assertEquals( tc.indexOf("item2") , 1 , "01 - The TypedCollection indexOf method failed." ) ;
             assertEquals( tc.indexOf("item4") , -1 , "02 - The TypedCollection indexOf method failed." ) ;
         } 
         
@@ -206,7 +204,7 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertFalse(tc.isEmpty() , "01 - The TypedCollection isEmpty method failed." ) ;     
+            assertFalse(tc.isEmpty() , "01 - The TypedCollection isEmpty method failed." ) ;
             tc.clear() ;
             assertTrue(tc.isEmpty() , "02 - The TypedCollection isEmpty method failed." ) ;
         } 
@@ -216,15 +214,15 @@ package system.data.collections
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
             var it:Iterator = tc.iterator() ;
-            assertNotNull( it, "The TypedCollection iterator method failed." ) ;     
-        }          
+            assertNotNull( it, "The TypedCollection iterator method failed." ) ;
+        }
         
         public function testRemove():void
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
             
-            assertTrue( tc.remove("item1"), "The TypedCollection remove method failed." ) ;     
+            assertTrue( tc.remove("item1"), "The TypedCollection remove method failed." ) ;
             assertFalse( tc.remove("item4"), "The TypedCollection remove method failed." ) ;
         } 
         
@@ -232,7 +230,7 @@ package system.data.collections
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.size() , co.size() , "The TypedCollection size method failed." ) ;     
+            assertEquals( tc.size() , co.size() , "The TypedCollection size method failed." ) ;
         } 
         
         public function testSupports():void
@@ -256,14 +254,14 @@ package system.data.collections
             var tc:TypedCollection = new TypedCollection( String , co ) ;
             assertEquals( tc.toSource() , 'new system.data.collections.TypedCollection(String,new system.data.collections.ArrayCollection(["item1","item2"]))' , "The TypedCollection toSource method failed." ) ;     
         }
-
+        
         public function testToString():void
         {
             var co:ArrayCollection = new ArrayCollection(["item1", "item2"]) ;
             var tc:TypedCollection = new TypedCollection( String , co ) ;
-            assertEquals( tc.toString() , co.toString() , "The TypedCollection toString method failed." ) ;     
+            assertEquals( tc.toString() , co.toString() , "The TypedCollection toString method failed." ) ;
         }
-                
+        
         public function testValidate():void
         {
             var co:Collection = new ArrayCollection(["item1", "item2"]) ;
@@ -271,7 +269,7 @@ package system.data.collections
             
             try
             {
-                tc.validate( "hello" ) ;         
+                tc.validate( "hello" ) ;
             }
             catch( e:Error )
             {
@@ -288,9 +286,6 @@ package system.data.collections
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
                 assertEquals( e.message , "TypedCollection.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
-            
-        }        
-           
-
+        }
     }
 }

@@ -35,11 +35,10 @@
 
 package system.process.mocks 
 {
-    import system.process.Runnable;            
+    import system.process.Runnable;
     
     public class MockCommand implements Runnable
     {
-
         public function MockCommand()
         {
             super();
@@ -49,12 +48,21 @@ package system.process.mocks
         
         public static function reset():void
         {
-            COUNT = 0 ;    
+            COUNT = 0 ;
         }
         
         public function run(...arguments:Array):void
         {
-            COUNT ++ ;    
+            COUNT ++ ;
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource(indent:int = 0):String
+        {
+            return "new system.process.mocks.MockCommand()" ;
         }
     }
 }

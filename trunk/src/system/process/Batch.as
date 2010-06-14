@@ -34,12 +34,14 @@
 */
 package system.process 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
+    import system.data.Collection;
     import system.data.Iterator;
-    import system.data.collections.ArrayCollection;
-    import system.data.collections.TypedCollection;
-    import system.process.Runnable;
-    import system.process.Stoppable;
-    
+    import system.data.collections.formatter;
+    import system.data.iterators.VectorIterator;
+
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
      * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>
@@ -131,29 +133,129 @@ package system.process
      * }
      * </pre>
      */
-    public class Batch extends TypedCollection implements Runnable, Stoppable
+    public class Batch implements Collection, Runnable, Stoppable
     {
         /**
          * Creates a new Batch instance.
+         * @param init The optional Array of Runnable objects to fill the batch.
          */
-        public function Batch()
+        public function Batch( init:Array = null )
         {
-            super( Runnable, new ArrayCollection() ) ;
+            _v = new Vector.<Runnable>() ;
+            if ( init && init.length > 0 )
+            {
+                var l:int = init.length ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    if ( init[i] is Runnable )
+                    {
+                        add( init[i] ) ;
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Inserts an element in the collection.
+         */
+        public function add( o:* ):Boolean
+        {
+            if ( o == null ) 
+            {
+                return false ;
+            }
+            try
+            {
+                _v.push(o) ;
+                return true ;
+            }
+            catch( e:Error )
+            {
+                //
+            }
+            return false ;
+        }
+        
+        /**
+         * Removes all elements in the collection.
+         */
+        public function clear():void
+        {
+            _v.length = 0 ;
         }
         
         /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
          */
-        public override function clone():*
+        public function clone():*
         {
             var b:Batch = new Batch() ;
-            var it:Iterator = iterator() ;
-            while (it.hasNext()) 
+            var l:int = _v.length ;
+            for( var i:int ; i < l ; i++ )
             {
-                b.add(it.next()) ;
+                b.add( _v[i] ) ;
             }
             return b ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
+         * @return <code class="prettyprint">true</code> if this collection contains the specified element.
+         */
+        public function contains( o:* ):Boolean
+        {
+            return _v.indexOf( o ) >- 1 ;
+        }
+        
+        /**
+         * Returns the element from this collection at the passed key index.
+         * @return the element from this collection at the passed key index.
+         */
+        public function get( key:* ):*
+        {
+            return _v[key] ;
+        }
+        
+        /**
+         * Returns the index of an element in the collection.
+         * @return the index of an element in the collection.
+         */
+        public function indexOf( o:* , fromIndex:uint = 0 ):int
+        {
+            return _v.indexOf( o , fromIndex ) ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains no elements.
+         * @return <code class="prettyprint">true</code> if this collection contains no elements.
+         */
+        public function isEmpty():Boolean
+        {
+            return _v.length == 0 ;
+        }
+        
+        /**
+         * Returns the iterator reference of the object.
+         * @return the iterator reference of the object.
+         */  
+        public function iterator():Iterator
+        {
+            return new VectorIterator( _v ) ;
+        }
+        
+        /**
+         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         */
+        public function remove( o:* ):*
+        {
+            var index:int = this._v.indexOf( o ) ;
+            if ( index > -1 )
+            {
+                this._v.splice( index , 1 ) ;
+                return true ;
+            }
+            return false ;
         }
         
         /**
@@ -174,23 +276,91 @@ package system.process
         }
         
         /**
-         * Stops all command in 
+         * Returns the number of elements in this collection.
+         * @return the number of elements in this collection.
+         */
+        public function size():uint
+        {
+            return _v.length ;
+        }
+        
+        /**
+         * Stops all commands in the batch. 
          */
         public function stop():void
         {
-            var a:Array = toArray() ;
-            var i:int   = -1 ;
-            var l:int   = a.length ;
-            if (l>0) 
+            var i:int = -1 ;
+            var l:int = _v.length ;
+            if ( l > 0 ) 
             {
                 while (++i < l) 
                 { 
-                    if ( a[i] is Stoppable )
+                    if ( _v[i] is Stoppable )
                     {
-                        (a[i] as Stoppable).stop() ;
+                        (_v[i] as Stoppable).stop() ;
                     }
-                } 
+                }
             }
         }
+        
+        /**
+         * Returns an array containing all of the elements in this collection.
+         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
+         * @return an array containing all of the elements in this collection.
+         */
+        public function toArray():Array
+        {
+            var ar:Array = [] ;
+            var len:int = _v.length ;
+            if ( len == 0 )
+            {
+                return ar ;
+            }
+            for( var i:int ; i<len ; i++)
+            {
+                ar[i] = _v[i] ;
+            }
+            return ar ;
+        }
+        
+        /**
+         * Returns the vector containing all of the Runnable objects in this batch.
+         * @return the vector containing all of the Runnable objects in this batch.
+         */
+        public function toVector():Vector.<Runnable>
+        {
+            return _v ;
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            var ar:Array = toArray() ;
+            var source:String = "new " + getClassPath( this , true ) ;
+            source += "(" ;
+            if ( ar.length > 0 )
+            {
+                source += dump( ar ) ;
+            } 
+            source += ")" ;
+            return source ;
+        }
+        
+        /**
+         * Returns the string representation of this instance.
+         * @return the string representation of this instance.
+         */
+        public function toString():String
+        {
+            return formatter.format( this ) ;
+        }
+        
+        /**
+         * @private
+         */
+        private var _v:Vector.<Runnable> ;
     }
 }

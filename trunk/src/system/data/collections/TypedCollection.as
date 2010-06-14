@@ -118,7 +118,7 @@ package system.data.collections
         
         /**
          * Inserts an element in the collection.
-         */        
+         */
         public function add( o:* ):Boolean
         {
             validate(o) ;
@@ -136,16 +136,16 @@ package system.data.collections
         /**
          * Returns a shallow copy of this collection.
          * @return a shallow copy of this collection.
-         */        
+         */
         public function clone():*
         {
             return new TypedCollection( type , _co ) ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
          * @return <code class="prettyprint">true</code> if this collection contains the specified element.
-         */        
+         */
         public function contains(o:*):Boolean
         {
             return _co.contains(o) ;
@@ -163,7 +163,7 @@ package system.data.collections
         /**
          * Returns the index of an element in the collection.
          * @return the index of an element in the collection.
-         */        
+         */
         public function indexOf(o:*, fromIndex:uint = 0):int
         {
             return _co.indexOf( o , fromIndex ) ;
@@ -172,7 +172,7 @@ package system.data.collections
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains no elements.
          * @return <code class="prettyprint">true</code> if this collection contains no elements.
-         */        
+         */
         public function isEmpty():Boolean
         {
             return _co.isEmpty() ;
@@ -217,7 +217,7 @@ package system.data.collections
          * Returns an array containing all of the elements in this collection.
          * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
          * @return an array containing all of the elements in this collection.
-         */        
+         */
         public function toArray():Array
         {
             return _co.toArray() ;

@@ -37,11 +37,10 @@ package system.data.collections
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.CollectionClass;    
-
+    import system.data.samples.CollectionClass;
+    
     public class CollectionFormatterTest extends TestCase 
     {
-
         public function CollectionFormatterTest( name:String = "" )
         {
             super( name );
@@ -60,9 +59,6 @@ package system.data.collections
             result = formatter.format(new CollectionClass(["value1", "value2"])) ;
             
             assertEquals(result, "{value1,value2}" , "3 - The CollectionFormatter format method failed with a Collection whith one entry inside.") ;
-            
-            
-        }         
-        
+        }
     }
 }

@@ -65,7 +65,7 @@ package system.process
         /**
          * Returns the eden string representation of this object.
          * @return the eden string representation of this object.
-         */        
+         */
         public function toSource( indent:int = 0 ):String 
         {
             return "new " + Reflection.getClassPath(this) + "(" + _value + ")" ;
