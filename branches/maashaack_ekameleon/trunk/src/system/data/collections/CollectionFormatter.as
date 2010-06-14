@@ -58,7 +58,7 @@ package system.data.collections
          */
         public function format( value:* = null ):String
         {
-            if ( value != null && value is Collection )
+            if ( value && value is Collection )
             {
                 var r:String = "{";
                 var c:Collection = value as Collection ;

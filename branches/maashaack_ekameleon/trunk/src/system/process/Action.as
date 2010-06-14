@@ -82,12 +82,12 @@ package system.process
         function set startIt( signal:Signaler ):void ;
         
         /**
-         * Notify an ActionEvent when the process is finished.
+         * Notify when the process is finished.
          */
         function notifyFinished():void ;
         
         /**
-         * Notify an ActionEvent when the process is started.
+         * Notify when the process is started.
          */
         function notifyStarted():void ;
     }

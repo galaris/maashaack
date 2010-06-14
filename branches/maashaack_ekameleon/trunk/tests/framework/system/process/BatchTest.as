@@ -35,10 +35,12 @@
 
 package system.process 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.collections.TypedCollection;
-    import system.process.Runnable;
+    import system.data.Collection;
+    import system.data.Iterator;
+    import system.data.iterators.VectorIterator;
     import system.process.mocks.MockCommand;
     
     public class BatchTest extends TestCase 
@@ -50,13 +52,24 @@ package system.process
         
         public var batch:Batch ;
         
+        public var command1:MockCommand ;
+        public var command2:MockCommand ;
+        public var command3:MockCommand ;
+        public var command4:MockCommand ;
+        
         public function setUp():void
         {
+            command1 = new MockCommand() ;
+            command2 = new MockCommand() ;
+            command3 = new MockCommand() ;
+            command4 = new MockCommand() ;
+            
             batch = new Batch() ;
-            batch.add( new MockCommand() ) ;
-            batch.add( new MockCommand() ) ;
-            batch.add( new MockCommand() ) ;
-            batch.add( new MockCommand() ) ;
+            
+            batch.add( command1 ) ;
+            batch.add( command2 ) ;
+            batch.add( command3 ) ;
+            batch.add( command4 ) ;
         }
         
         public function tearDown():void
@@ -68,13 +81,20 @@ package system.process
         public function testConstructor():void
         {
             assertNotNull( batch , "Batch constructor failed, the instance not must be null." ) ;
-            assertTrue( batch is TypedCollection , "batch must be a TypedCollection object." ) ;
         }
         
         public function testInterface():void
         {
+            assertTrue( batch is Collection , "batch implements the Collection interface." ) ;
             assertTrue( batch is Runnable  , "batch implements the Runnable interface."  ) ;
-            assertTrue( batch is Stoppable , "batch implements the Stoppable interface." ) ;            
+            assertTrue( batch is Stoppable , "batch implements the Stoppable interface." ) ;
+        }
+        
+        public function testAdd():void
+        {
+            assertTrue( batch.add( new MockCommand() ) ) ;
+            assertFalse( batch.add( 2 ) ) ;
+            assertFalse( batch.add( "hello world" ) ) ;
         }
         
         public function testClear():void
@@ -89,6 +109,52 @@ package system.process
             var clone:Batch = batch.clone() ;
             assertNotNull( clone , "clone method failed, with a null shallow copy object." ) ;
             assertNotSame( clone , batch , "clone method failed, the shallow copy isn't the same with the action object." ) ;
+            assertEquals( clone.size() , batch.size() ) ;
+        }
+        
+        public function testContains():void
+        {
+            var command:Runnable = new MockCommand() ;
+            batch.add( command ) ;
+            assertTrue( batch.contains(command) ) ;
+        }
+        
+        public function testGet():void
+        {
+            var command:Runnable = new MockCommand() ;
+            batch.clear() ;
+            batch.add( command ) ;
+            assertEquals( batch.get( 0 ) , command ) ;
+        }
+        
+        public function testIndexOf():void
+        {
+            var command:Runnable = new MockCommand() ;
+            batch.clear() ;
+            batch.add( command ) ;
+            assertEquals( batch.indexOf( command ) , 0 ) ;
+        }
+        
+        public function testIsEmpty():void
+        {
+            assertFalse( batch.isEmpty() ) ;
+            batch.clear() ;
+            assertTrue( batch.isEmpty() ) ;
+        }
+        
+        public function testIterator():void
+        {
+           var it:Iterator = batch.iterator() ;
+           assertTrue( it is VectorIterator ) ;
+        }
+        
+        public function testRemove():void
+        {
+            var command:Runnable = new MockCommand() ;
+            batch.clear() ;
+            batch.add( command ) ;
+            assertTrue( batch.remove( command ) ) ;
+            assertFalse( batch.remove( command ) ) ;
         }
         
         public function testRun():void
@@ -105,5 +171,20 @@ package system.process
             assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
         }
         
+        public function testToArray():void
+        {
+            var ar:Array = batch.toArray() ;
+            ArrayAssert.assertEquals( ar , [command1,command2,command3,command4] ) ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( "new system.process.Batch([new system.process.mocks.MockCommand(),new system.process.mocks.MockCommand(),new system.process.mocks.MockCommand(),new system.process.mocks.MockCommand()])" , batch.toSource() ) ;
+        }
+        
+        public function testToString():void
+        {
+            assertEquals( "{[object MockCommand],[object MockCommand],[object MockCommand],[object MockCommand]}" , batch.toString() ) ;
+        }
     }
 }

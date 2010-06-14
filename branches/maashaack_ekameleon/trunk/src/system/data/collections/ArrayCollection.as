@@ -35,13 +35,15 @@
 
 package system.data.collections 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.Equatable;
     import system.Reflection;
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.serializers.eden.BuiltinSerializer;    
 
     /**
      * This class provides a basic implementation of the <code class="prettyprint">Collection</code> interface, to minimize the effort required to implement this interface.
@@ -168,7 +170,7 @@ package system.data.collections
         
         /**
          * Removes all elements in the collection.
-         */        
+         */
         public function clear():void
         {
             _a.splice(0) ;
@@ -186,7 +188,7 @@ package system.data.collections
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
          * @return <code class="prettyprint">true</code> if this collection contains the specified element.
-         */        
+         */
         public function contains( o:* ):Boolean
         {
             return _a.indexOf( o ) >- 1  ;
@@ -234,7 +236,7 @@ package system.data.collections
         /**
          * Returns the element from this collection at the passed key index.
          * @return the element from this collection at the passed key index.
-         */        
+         */
         public function get( key:* ):*
         {
             return _a[key] ;
@@ -243,7 +245,7 @@ package system.data.collections
         /**
          * Returns the index of an element in the collection.
          * @return the index of an element in the collection.
-         */        
+         */
         public function indexOf( o:* , fromIndex:uint = 0 ):int
         {
             return _a.indexOf(o, fromIndex) ;
@@ -252,7 +254,7 @@ package system.data.collections
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains no elements.
          * @return <code class="prettyprint">true</code> if this collection contains no elements.
-         */        
+         */
         public function isEmpty():Boolean
         {
             return _a.length == 0 ;
@@ -265,11 +267,11 @@ package system.data.collections
         public function iterator():Iterator
         {
             return new ArrayIterator( toArray() ) ;
-        }        
-     
+        }
+        
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
-         */     
+         */
         public function remove( o:* ):*
         {
             var it:Iterator = iterator() ;
@@ -338,7 +340,7 @@ package system.data.collections
         /**
          * Returns the number of elements in this collection.
          * @return the number of elements in this collection.
-         */        
+         */
         public function size():uint
         {
             return _a.length ;
@@ -360,11 +362,12 @@ package system.data.collections
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var source:String = "new " + getClassPath(this, true) ;
+            source += "(" ;
             var ar:Array = toArray() ;
             if ( ar.length > 0 )
             {
-                source += BuiltinSerializer.emitArray( ar ) ;
+                source += dump( ar ) ;
             } 
             source += ")" ;
             return source ;
