@@ -78,6 +78,15 @@ package system.process
         }
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new Initializer( _isGlobal , channel ) ;
+        }
+        
+        /**
          * The initialize method.
          */
         prototype.initialize = function():void

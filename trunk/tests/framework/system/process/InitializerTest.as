@@ -41,7 +41,6 @@ package system.process
     
     public class InitializerTest extends TestCase 
     {
-        
         public function InitializerTest(name:String = "")
         {
             super(name);
@@ -71,7 +70,7 @@ package system.process
             action.initialize = function():void
             {
                 throw new Error("init") ;
-            };            
+            };
             try
             {
                 action.initialize() ;

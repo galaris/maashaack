@@ -37,7 +37,7 @@ package system.process
 {
     import flash.events.TimerEvent;
     import flash.utils.Timer;
-
+    
     /**
      * Provides a delayed task, the task is executed after a specific delay in milliseconds. 
      */
@@ -72,7 +72,7 @@ package system.process
         }
         
         /**
-         * Indicates if the chain is stopped.
+         * Indicates if the task is stopped.
          */
         public function get stopped():Boolean
         {
