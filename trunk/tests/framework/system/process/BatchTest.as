@@ -37,12 +37,12 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
+
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.iterators.VectorIterator;
     import system.process.mocks.MockCommand;
-    
+
     public class BatchTest extends TestCase 
     {
         public function BatchTest(name:String = "")
@@ -74,8 +74,11 @@ package system.process
         
         public function tearDown():void
         {
-            batch.clear() ;
-            batch = undefined ;
+            batch    = undefined ;
+            command1 = undefined ;
+            command2 = undefined ;
+            command3 = undefined ;
+            command4 = undefined ;
         }
         
         public function testConstructor():void
@@ -99,14 +102,13 @@ package system.process
         
         public function testClear():void
         {
-            var clone:Batch = batch.clone() ;
-            clone.clear() ;
-            assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
+            batch.clear() ;
+            assertEquals( batch.size() , 0 ) ;
         }
         
         public function testClone():void
         {
-            var clone:Batch = batch.clone() ;
+            var clone:Batch = batch.clone() as Batch ;
             assertNotNull( clone , "clone method failed, with a null shallow copy object." ) ;
             assertNotSame( clone , batch , "clone method failed, the shallow copy isn't the same with the action object." ) ;
             assertEquals( clone.size() , batch.size() ) ;
@@ -114,9 +116,14 @@ package system.process
         
         public function testContains():void
         {
-            var command:Runnable = new MockCommand() ;
-            batch.add( command ) ;
-            assertTrue( batch.contains(command) ) ;
+            assertTrue( batch.contains( command1 ) ) ;
+            assertTrue( batch.contains( command2 ) ) ;
+            assertTrue( batch.contains( command3 ) ) ;
+            assertTrue( batch.contains( command4 ) ) ;
+            
+            assertFalse( batch.contains( null ) ) ;
+            assertFalse( batch.contains( "hello" ) ) ;
+            assertFalse( batch.contains( new MockCommand() ) ) ;
         }
         
         public function testGet():void
@@ -161,14 +168,14 @@ package system.process
         {
             MockCommand.reset() ;
             batch.run() ;
-            assertEquals( MockCommand.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size + " Runnable objects." ) ;
+            assertEquals( MockCommand.COUNT , batch.size() , "run method failed, the batch must launch " + batch.size() + " Runnable objects." ) ;
         }
         
         public function testSize():void
         {
-            var clone:Batch = batch.clone() ;
-            clone.clear() ;
-            assertEquals( clone.size() , 0 , "clear method failed, the batch must be empty" ) ;
+            assertEquals( batch.size() , 4 ) ;
+            batch.clear() ;
+            assertEquals( batch.size() , 0 ) ;
         }
         
         public function testToArray():void
