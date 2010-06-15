@@ -281,7 +281,6 @@
     <component id="system.process:ActionURLLoader"        class="system.process.ActionURLLoader"        />
     <component id="system.process:ActionURLStream"        class="system.process.ActionURLStream"        />
     <component id="system.process:Batch"                  class="system.process.Batch"                  />
-    <component id="system.process:BatchProcess"           class="system.process.BatchProcess"           />
     <component id="system.process:BatchTask"              class="system.process.BatchTask"              />
     <component id="system.process:Cache"                  class="system.process.Cache"                  />
     <component id="system.process:Chain"                  class="system.process.Chain"                  />
