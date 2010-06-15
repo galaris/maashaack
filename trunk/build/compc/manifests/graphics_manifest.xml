@@ -128,6 +128,7 @@
     <component id="graphics.geom:MatrixN"        class="graphics.geom.MatrixN" />
     <component id="graphics.geom:Matrixs"        class="graphics.geom.Matrixs" />
     <component id="graphics.geom:Matrixs4"       class="graphics.geom.Matrixs4" />
+    <component id="graphics.geom:Metaball"       class="graphics.geom.Metaball" />
     <component id="graphics.geom:Plane"          class="graphics.geom.Plane" />
     <component id="graphics.geom:Planes"         class="graphics.geom.Planes" />
     <component id="graphics.geom:Polar"          class="graphics.geom.Polar" />
