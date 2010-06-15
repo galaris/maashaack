@@ -44,7 +44,7 @@ package system.process
 
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
-     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Action</code> objects.</p>
+     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Runnable</code> objects.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples
