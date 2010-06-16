@@ -89,14 +89,12 @@ package system.process.mocks
          */
         public override function run(...arguments:Array):void
         {
-            setRunning(true) ;
             notifyStarted() ;
             if ( verbose )
             {
                 trace( this + " run :: " + COUNT + (id != null ? " id:" + id : "" ) ) ;
             }
             COUNT ++ ;
-            setRunning(false) ;
             notifyFinished() ;
         }
         
