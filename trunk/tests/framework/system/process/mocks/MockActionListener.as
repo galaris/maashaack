@@ -43,7 +43,6 @@ package system.process.mocks
      */
     public class MockActionListener extends MockTaskListener
     {
-        
         /**
          * Creates a new MockActionListener instance.
          * @param action The IAction of this mock to register.
@@ -70,7 +69,7 @@ package system.process.mocks
         
         /**
          * Indicates the type of the clear event notification.
-         */     
+         */
         public var clearType:String ;
         
         /**
