@@ -35,14 +35,13 @@
 
 package system.process.mocks 
 {
-    import system.process.CoreAction;                                            
+    import system.process.CoreAction;
 
     /**
      * This mock simulate a conctrete Action object who increments a static counter "COUNT" when the run method of all instance of this class are called.
      */
     public class MockAction extends CoreAction 
     {
-        
         /**
          * Creates a new MockAction instance.
          */
@@ -61,7 +60,7 @@ package system.process.mocks
          */
         public static function reset():void
         {
-            COUNT = 0 ;    
+            COUNT = 0 ;
         }
         
         /**
@@ -74,6 +73,7 @@ package system.process.mocks
             notifyFinished() ;
             notifyInfo("hello world") ;
             notifyLooped() ;
+            notifyPaused() ;
             notifyProgress() ;
             notifyResumed() ;
             notifyStarted() ;
@@ -86,12 +86,9 @@ package system.process.mocks
          */
         public override function run(...arguments:Array):void
         {
-            setRunning(true) ;
             notifyStarted() ;
             COUNT ++ ;    
-            setRunning(false) ;
             notifyFinished() ;
         }
-        
     }
 }

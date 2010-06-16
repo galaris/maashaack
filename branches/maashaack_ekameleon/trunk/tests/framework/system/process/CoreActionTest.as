@@ -129,6 +129,12 @@ package system.process
             assertEquals ( mockListener.loopType   , ActionEvent.LOOP  , "notify event method failed, bad type found when the process is looped." );
         }
         
+        public function testNotifyPause():void
+        {
+            assertTrue   ( mockListener.pauseCalled , "notify event method failed, the ActionEvent.PAUSE event isn't notify" ) ;
+            assertEquals ( mockListener.pauseType   , ActionEvent.PAUSE  , "notify event method failed, bad type found when the process is in pause." );
+        }
+        
         public function testNotifyProgress():void
         {
             assertTrue   ( mockListener.progressCalled , "notify event method failed, the ActionEvent.PROGRESS event isn't notify" ) ;

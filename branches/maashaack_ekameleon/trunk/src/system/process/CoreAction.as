@@ -187,6 +187,22 @@ package system.process
         }
         
         /**
+         * This signal emit when the notifyPause method is invoked. 
+         */
+        public function get pauseIt():Signaler
+        {
+            return _pauseIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set pauseIt( signal:Signaler ):void
+        {
+            _pauseIt = signal || new Signal() ;
+        }
+        
+        /**
          * This signal emit when the notifyProgress method is invoked. 
          */
         public function get progressIt():Signaler
@@ -321,6 +337,23 @@ package system.process
         }
         
         /**
+         * Notify when the process is paused.
+         */
+        public function notifyPaused():void
+        {
+            setRunning( false ) ;
+            _phase  = TaskPhase.STOPPED ;
+            if ( !isLocked() )
+            {
+                _pauseIt.emit( this ) ;
+                if ( hasEventListener( ActionEvent.PAUSE ) )
+                {
+                    dispatchEvent( new ActionEvent( ActionEvent.PAUSE , this ) ) ;
+                }
+            }
+        }
+        
+        /**
          * Notify when the process is in progress.
          */
         public function notifyProgress():void
@@ -352,7 +385,7 @@ package system.process
         }
         
         /**
-         * Notify an ActionEvent when the process is stopped.
+         * Notify when the process is stopped.
          */
         public function notifyStopped():void
         {
@@ -403,6 +436,11 @@ package system.process
          * @private
          */
         protected var _loopIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _pauseIt:Signaler = new Signal() ;
         
         /**
          * @private
