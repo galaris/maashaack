@@ -36,8 +36,8 @@
 package system.data.queues 
 {
     import system.data.Queue;
-    import system.data.collections.ArrayCollection;    
-
+    import system.data.collections.ArrayCollection;
+    
     /**
      * LinearQueue is a collection and stores values in a 'first-in, first-out' manner.
      * <p><b>Example :</b></p>
@@ -88,11 +88,11 @@ package system.data.queues
         public override function clone():*
         {
             return new LinearQueue(toArray()) ;
-        }        
+        }
         
         /**
          * Retrieves and removes the head of this queue.
-         */        
+         */
         public function dequeue():Boolean
         {
             return poll() != null  ;
@@ -130,7 +130,7 @@ package system.data.queues
         
         /**
          * Retrieves and removes the head of this queue.
-         */        
+         */
         public function poll():*
         {
             if ( isEmpty() ) 

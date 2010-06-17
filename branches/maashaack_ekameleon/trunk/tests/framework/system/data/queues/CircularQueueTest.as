@@ -43,11 +43,10 @@ package system.data.queues
     import system.data.Queue;
     import system.data.iterators.ProtectedIterator;
     
-    import flash.errors.IllegalOperationError;        
-
+    import flash.errors.IllegalOperationError;
+    
     public class CircularQueueTest extends TestCase 
     {
-
         public function CircularQueueTest(name:String = "")
         {
             super( name );
@@ -64,7 +63,7 @@ package system.data.queues
             
             q = new CircularQueue(0) ;
             assertEquals( q.maxSize(), 0 , "03 - The CircularQueue constructor failed." ) ;
-
+            
             q = new CircularQueue(1) ;
             assertEquals( q.maxSize(), 1 , "04 - The CircularQueue constructor failed." ) ;
             
@@ -74,13 +73,12 @@ package system.data.queues
             
             q = new CircularQueue(4, [1,2,3,4]) ;
             assertEquals( q.maxSize(), 4 , "06-01 - The CircularQueue constructor failed." ) ;
-            assertEquals( q.size(), 4 , "06-02 - The CircularQueue constructor failed." ) ;            
+            assertEquals( q.size(), 4 , "06-02 - The CircularQueue constructor failed." ) ;
             
             q = new CircularQueue(4, [1,2,3,4,5,6,7]) ;
             assertEquals( q.maxSize(), 4 , "07-01 - The CircularQueue constructor failed." ) ;
-            assertEquals( q.size(), 4 , "07-02 - The CircularQueue constructor failed." ) ;            
-            
-        }        
+            assertEquals( q.size(), 4 , "07-02 - The CircularQueue constructor failed." ) ;
+        }
         
         public function testAdd():void
         {
@@ -102,8 +100,8 @@ package system.data.queues
             var q:CircularQueue = new CircularQueue() ;
             assertTrue( q is Boundable , "The CircularQueue must implements the Boundable interface.") ;
             assertTrue( q is Queue     , "The CircularQueue must implements the Queue interface.") ;
-        }          
-
+        }
+        
         public function testMAX_CAPACITY():void
         {
             assertEquals( CircularQueue.MAX_CAPACITY, uint.MAX_VALUE , "The CircularQueue.MAX_CAPACITY constant failed.") ;
@@ -114,16 +112,16 @@ package system.data.queues
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
             q.clear() ;
             assertTrue( q.isEmpty() , "01 - The CircularQueue clear failed." ) ;
-            assertEquals( q.size()  , 0 , "02 - The CircularQueue clear failed." ) ;   
+            assertEquals( q.size()  , 0 , "02 - The CircularQueue clear failed." ) ;
         }  
-
+        
         public function testClone():void
         {
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
             var c:CircularQueue ;
             c = q.clone() as CircularQueue ;
             assertNotNull( c , "01 - The CircularQueue clone failed." ) ;
-            assertEquals( q.size()    , c.size()    , "02 - The CircularQueue clone failed." ) ;   
+            assertEquals( q.size()    , c.size()    , "02 - The CircularQueue clone failed." ) ;
             assertEquals( q.maxSize() , c.maxSize() , "03 - The CircularQueue clone failed." ) ;
         }
         
@@ -133,7 +131,7 @@ package system.data.queues
             assertTrue( q.contains(1) , "01 - The CircularQueue contains failed." ) ;
             assertFalse( q.contains(8) , "02 - The CircularQueue contains failed." ) ;
         }
-
+        
         public function testDequeue():void
         {
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
@@ -153,7 +151,7 @@ package system.data.queues
             assertFalse( q.dequeue() , "05-01 - The CircularQueue dequeue failed." ) ;
             assertEquals( q.size()  , 0 , "05-02 - The CircularQueue dequeue failed." ) ;
         }
-
+        
         public function testElement():void
         {
             var q:CircularQueue ;
@@ -162,7 +160,7 @@ package system.data.queues
             assertEquals( q.element() , 1 , "The CircularQueue element method failed." ) ;
             
             q = new CircularQueue() ;
-            assertUndefined( q.element(), "The CircularQueue element method failed." ) ;            
+            assertUndefined( q.element(), "The CircularQueue element method failed." ) ;
         }
         
         public function testEnqueue():void
@@ -179,9 +177,8 @@ package system.data.queues
             
             assertFalse(q.enqueue(3)      , "03-01 - The CircularQueue enqueue method failed." ) ;
             assertEquals( q.size()    , 2 , "03-02 - The CircularQueue enqueue method failed." ) ;
-            assertEquals( q.element() , 1 , "03-03 - The CircularQueue enqueue method failed." ) ;            
-            
-        }        
+            assertEquals( q.element() , 1 , "03-03 - The CircularQueue enqueue method failed." ) ;
+        }
         
         public function testGet():void
         {
@@ -211,7 +208,7 @@ package system.data.queues
                 assertTrue( e is IllegalOperationError , "02 - The CircularQueue indexOf() method failed." ) ;
                 assertEquals( e.message , "The CircularQueue class does support the indexOf() method." , "03 - The CircularQueue indexOf() method failed." ) ;
             }
-        }        
+        }
         
         public function testIsEmpty():void
         {
@@ -229,8 +226,8 @@ package system.data.queues
             assertFalse( q.isFull() , "02 - The CircularQueue isFull method failed.") ;
             q.enqueue("item") ;
             assertFalse( q.isFull() , "03 - The CircularQueue isFull method failed.") ;
-        }        
-
+        }
+        
         public function testIterator():void
         {
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
@@ -238,7 +235,7 @@ package system.data.queues
             assertNotNull( it , "01 - The CircularQueue iterator method failed.") ;    
             assertTrue( it is ProtectedIterator , "02 - The CircularQueue iterator method failed.") ;
         }
-
+        
         public function testMaxSize():void
         {
             var q:CircularQueue ;
@@ -257,24 +254,24 @@ package system.data.queues
             
             q = new CircularQueue() ;
             assertNotUndefined( q.peek(), "The CircularQueue peek method failed." ) ;
-            assertNull( q.peek(), "The CircularQueue peek method failed." ) ;            
-        }        
+            assertNull( q.peek(), "The CircularQueue peek method failed." ) ;
+        }
         
         public function testPoll():void
         {
             var q:CircularQueue = new CircularQueue(4, [1,2,3,4]) ;
             
             assertEquals( q.poll() , 1 , "01-01 - The CircularQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 3 , "01-02 - The CircularQueue dequeue failed." ) ;
+            assertEquals( q.size() , 3 , "01-02 - The CircularQueue dequeue failed." ) ;
             
             assertEquals( q.poll() , 2 , "02-01 - The CircularQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 2 , "02-02 - The CircularQueue dequeue failed." ) ;
+            assertEquals( q.size() , 2 , "02-02 - The CircularQueue dequeue failed." ) ;
             
             assertEquals( q.poll() , 3 , "03-01 - The CircularQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 1 , "03-02 - The CircularQueue dequeue failed." ) ;
+            assertEquals( q.size() , 1 , "03-02 - The CircularQueue dequeue failed." ) ;
             
             assertEquals( q.poll() , 4 , "04-01 - The CircularQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 0 , "04-02 - The CircularQueue dequeue failed." ) ;
+            assertEquals( q.size() , 0 , "04-02 - The CircularQueue dequeue failed." ) ;
         }
         
         public function testRemove():void
@@ -290,8 +287,8 @@ package system.data.queues
                 assertTrue( e is IllegalOperationError , "02 - The CircularQueue remove() method failed." ) ;
                 assertEquals( e.message , "The CircularQueue class does support the remove() method." , "03 - The CircularQueue remove() method failed." ) ;
             }
-        }          
-
+        }
+        
         public function testSize():void
         {
             var q:CircularQueue ;
@@ -304,18 +301,17 @@ package system.data.queues
         public function testToArray():void
         {
             var q:CircularQueue ;
-                        
+            
             q = new CircularQueue(4, [1,2,3,4]) ;
             ArrayAssert.assertEquals( q.toArray() , [1,2,3,4], "01 - The CircularQueue toArray method failed.") ;
             
             q = new CircularQueue() ;
-            ArrayAssert.assertEquals( q.toArray() , [], "02 - The CircularQueue toArray method failed.") ;            
-                    
+            ArrayAssert.assertEquals( q.toArray() , [], "02 - The CircularQueue toArray method failed.") ;
         }
         
         public function testToSource():void
         {
-            var q:CircularQueue ;     
+            var q:CircularQueue ;
             
             q = new CircularQueue() ;
             assertEquals(q.toSource() , "new system.data.queues.CircularQueue(" + uint.MAX_VALUE + ")", "01 - CircularQueue toSource failed") ;
@@ -324,23 +320,18 @@ package system.data.queues
             assertEquals(q.toSource() , "new system.data.queues.CircularQueue(4,[1,2])" , "02 - CircularQueue toSource failed") ;
             
             q = new CircularQueue(4) ;
-            assertEquals(q.toSource() , "new system.data.queues.CircularQueue(4)" , "03 - CircularQueue toSource failed") ;            
-            
-        }   
-
+            assertEquals(q.toSource() , "new system.data.queues.CircularQueue(4)" , "03 - CircularQueue toSource failed") ;
+        }
+        
         public function testToString():void
         {
+            var q:CircularQueue ;
             
-            var q:CircularQueue ;            
-                
             q = new CircularQueue() ;
-            assertEquals( q.toString() , "{}", "01 - CircularQueue toString failed") ;            
+            assertEquals( q.toString() , "{}", "01 - CircularQueue toString failed") ;
             
             q = new CircularQueue(4, ["item1", "item2", "item3", "item4"] ) ;
             assertEquals(q.toString() , "{item1,item2,item3,item4}", "02 - CircularQueue toString failed") ;
-            
         } 
-
     }
-
 }

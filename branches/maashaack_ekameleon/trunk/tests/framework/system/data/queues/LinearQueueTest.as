@@ -41,11 +41,10 @@ package system.data.queues
     import system.data.Collection;
     import system.data.Queue;
     import system.data.collections.ArrayCollection;
-    import system.data.maps.ArrayMap;    
-
+    import system.data.maps.ArrayMap;
+    
     public class LinearQueueTest extends TestCase 
     {
-
         public function LinearQueueTest(name:String = "")
         {
             super( name );
@@ -59,7 +58,7 @@ package system.data.queues
             ArrayAssert.assertEquals( q.toArray(), [], "01-02 - LinearQueue constructor failed.") ;
             
             // initialize with an Array
-                        
+            
             q = new LinearQueue([2,3,4]) ; 
             assertNotNull(q, "02-01 - LinearQueue constructor failed.") ;
             ArrayAssert.assertEquals( q.toArray(), [2,3,4], "02-02 - LinearQueue constructor failed.") ;
@@ -81,13 +80,13 @@ package system.data.queues
         public function testInherit():void
         {
             var q:LinearQueue = new LinearQueue() ;
-            assertTrue( q is ArrayCollection , "LinearQueue must extends the ArrayCollection class.") ;          
-        }        
+            assertTrue( q is ArrayCollection , "LinearQueue must extends the ArrayCollection class.") ;
+        }
         
         public function testInterface():void
         {
             var q:LinearQueue = new LinearQueue() ;
-            assertTrue( q is Queue , "01 - LinearQueue must implements the Queue interface.") ;            
+            assertTrue( q is Queue , "01 - LinearQueue must implements the Queue interface.") ;
             assertTrue( q is Collection , "02 - LinearQueue must implements the Queue interface.") ;
         }
         
@@ -97,7 +96,7 @@ package system.data.queues
             var c:LinearQueue ;
             c = q.clone() as LinearQueue ;
             assertNotNull( c , "01 - The LinearQueue clone failed." ) ;
-            assertEquals( q.size()    , c.size()    , "02 - The LinearQueue clone failed." ) ;   
+            assertEquals( q.size() , c.size() , "02 - The LinearQueue clone failed." ) ;   
             ArrayAssert.assertEquals( q.toArray() , c.toArray() , "03 - The LinearQueue clone failed." ) ;
         }
         
@@ -129,7 +128,7 @@ package system.data.queues
             assertEquals( q.element() , 1 , "The LinearQueue element method failed." ) ;
             
             q = new LinearQueue() ;
-            assertUndefined( q.element(), "The LinearQueue element method failed." ) ;            
+            assertUndefined( q.element(), "The LinearQueue element method failed." ) ;
         }
         
         public function testEnqueue():void
@@ -146,9 +145,8 @@ package system.data.queues
             
             assertTrue( q.enqueue(3)     , "03-01 - The LinearQueue enqueue method failed." ) ;
             assertEquals( q.size()    , 3 , "03-02 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.element() , 1 , "03-03 - The LinearQueue enqueue method failed." ) ;            
-            
-        }   
+            assertEquals( q.element() , 1 , "03-03 - The LinearQueue enqueue method failed." ) ;
+        }
         
         public function testPeek():void
         {
@@ -159,8 +157,8 @@ package system.data.queues
             
             q = new LinearQueue() ;
             assertNotUndefined( q.peek(), "The LinearQueue peek method failed." ) ;
-            assertNull( q.peek(), "The LinearQueue peek method failed." ) ;            
-        }        
+            assertNull( q.peek(), "The LinearQueue peek method failed." ) ;
+        }
         
         public function testPoll():void
         {
@@ -182,40 +180,34 @@ package system.data.queues
         public function testToArray():void
         {
             var q:LinearQueue ;
-                        
+            
             q = new LinearQueue([1,2,3,4]) ;
             ArrayAssert.assertEquals( q.toArray() , [1,2,3,4], "01 - The LinearQueue toArray method failed.") ;
             
             q = new LinearQueue() ;
-            ArrayAssert.assertEquals( q.toArray() , [], "02 - The LinearQueue toArray method failed.") ;          
-                    
+            ArrayAssert.assertEquals( q.toArray() , [], "02 - The LinearQueue toArray method failed.") ;
         }
         
         public function testToSource():void
         {
-            var q:LinearQueue ;     
+            var q:LinearQueue ;
             
             q = new LinearQueue() ;
             assertEquals(q.toSource() , "new system.data.queues.LinearQueue()", "01 - LinearQueue toSource failed") ;
             
             q = new LinearQueue([1,2] ) ;
             assertEquals(q.toSource() , "new system.data.queues.LinearQueue([1,2])" , "02 - LinearQueue toSource failed") ;
-            
-        }   
-
+        }
+        
         public function testToString():void
         {
+            var q:LinearQueue ;
             
-            var q:LinearQueue ;           
-                
             q = new LinearQueue() ;
-            assertEquals( q.toString() , "{}", "01 - LinearQueue toString failed") ;            
+            assertEquals( q.toString() , "{}", "01 - LinearQueue toString failed") ;
             
             q = new LinearQueue(["item1", "item2", "item3", "item4"] ) ;
             assertEquals(q.toString() , "{item1,item2,item3,item4}", "02 - LinearQueue toString failed") ;
-            
-        }        
-
+        }
     }
-
 }

@@ -35,19 +35,20 @@
 
 package system.data.queues 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;    
 
     /**
      * TypedQueue is a wrapper for Queue instances that ensures that only values of a specific type can be added to the wrapped queue.
      */
     public class TypedQueue implements Queue, Typeable, Validator
     {
-
         /**
          * Creates a new TypedQueue instance.
          * @param type the type of this Typeable object (a Class or a Function).
@@ -72,7 +73,7 @@ package system.data.queues
             }
             _queue = queue ;
         }
-
+        
         /**
          * Indicates the type of the Typeable object. 
          * <p>If the type change the clear() method is invoked.</p>
@@ -81,7 +82,7 @@ package system.data.queues
         {
             return _type ;
         }
-
+        
         /**
          * @private
          */
@@ -96,14 +97,14 @@ package system.data.queues
                 _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
             }
         }
-
+        
         /**
          * Inserts an element in the collection.
          */ 
         public function add(o:*):Boolean
         {
             validate(o) ;
-            return _queue.add( o ) ;   
+            return _queue.add( o ) ;
         }
         
         /**
@@ -117,21 +118,21 @@ package system.data.queues
         /**
          * Returns a shallow copy of this collection.
          * @return a shallow copy of this collection.
-         */        
+         */
         public function clone():*
         {
             return new TypedQueue( type , _queue ) ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
          * @return <code class="prettyprint">true</code> if this collection contains the specified element.
-         */         
+         */
         public function contains(o:*):Boolean
         {
             return _queue.contains(o) ;
-        }        
-
+        }
+        
         /**
          * Retrieves and removes the head of this queue.
          */
@@ -164,7 +165,7 @@ package system.data.queues
         public function get(key:*):*
         {
             return _queue.get(key) ;
-        }        
+        }
         
         /**
          * Returns the index of an element in the collection.
@@ -178,12 +179,12 @@ package system.data.queues
         /**
          * Returns <code class="prettyprint">true</code> if this collection contains no elements.
          * @return <code class="prettyprint">true</code> if this collection contains no elements.
-         */           
+         */
         public function isEmpty():Boolean
         {
             return _queue.isEmpty() ;
-        }        
-
+        }
+        
         /**
          * Returns an iterator over the elements in this collection.
          * @return an iterator over the elements in this collection.
@@ -191,16 +192,16 @@ package system.data.queues
         public function iterator():Iterator
         {
             return _queue.iterator();
-        }        
+        }
         
         /**
          * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
-         */        
+         */
         public function peek():*
         {
             return _queue.peek() ;
         }
-
+        
         /**
          * Retrieves and removes the head of this queue.
          */
@@ -208,7 +209,7 @@ package system.data.queues
         {
             return _queue.poll() ;
         }
-
+        
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
          */  
@@ -251,11 +252,11 @@ package system.data.queues
          */
         public function toSource(indent:int = 0):String
         {
-            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var s:String = "new " + getClassPath(this, true) + "(" ;
             s += Reflection.getClassPath( type ) ;
             if ( size() >  0 )
             {
-                s += "," + eden.serialize(_queue) ;
+                s += "," + dump(_queue) ;
             }
             s += ")" ;
             return s ;
@@ -268,7 +269,7 @@ package system.data.queues
         public function toString(indent:int = 0):String
         {
             return (_queue as Object).toString() ;
-        }        
+        }
         
         /**
          * Evaluates the condition it checks and updates the IsValid property.
@@ -279,17 +280,16 @@ package system.data.queues
             {
                 throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
-        }        
+        }
         
         /**
          * @private
          */
-        private var _queue:Queue ;        
+        private var _queue:Queue ;
         
         /**
          * The internal type function.
          */
-        private var _type:* ;        
-        
+        private var _type:* ;
     }
 }

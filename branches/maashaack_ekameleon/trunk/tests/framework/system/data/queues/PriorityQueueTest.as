@@ -42,11 +42,10 @@ package system.data.queues
     import system.comparators.NumberComparator;
     import system.comparators.StringComparator;
     import system.data.collections.ArrayCollection;
-    import system.data.maps.ArrayMap;    
-
+    import system.data.maps.ArrayMap;
+    
     public class PriorityQueueTest extends TestCase 
     {
-
         public function PriorityQueueTest(name:String = "")
         {
             super( name );
@@ -54,14 +53,13 @@ package system.data.queues
         
         public function testConstructor():void
         {
-
             var q:PriorityQueue = new PriorityQueue() ;
             
             assertNotNull(q, "01-01 - PriorityQueue constructor failed.") ;
             ArrayAssert.assertEquals( q.toArray(), [], "01-02 - PriorityQueue constructor failed.") ;
             
             // initialize with an Array
-                        
+            
             q = new PriorityQueue([2,3,4]) ; 
             assertNotNull(q, "02-01 - PriorityQueue constructor failed.") ;
             ArrayAssert.assertEquals( q.toArray(), [2,3,4], "02-02 - PriorityQueue constructor failed.") ;
@@ -79,14 +77,13 @@ package system.data.queues
             ArrayAssert.assertEquals( q.toArray(), ["value1","value2","value3"], "04-02 - PriorityQueue constructor failed.") ;
             
             // initialize with a Comparator and an option value.
-          
+            
             var c:Comparator = new StringComparator() ;
             
             q = new PriorityQueue(null, c , Array.DESCENDING) ; 
             assertNotNull(q, "05-01 - PriorityQueue constructor failed.") ;
             assertEquals( q.comparator, c, "05-02 - PriorityQueue constructor failed.") ;
             assertEquals( q.options, Array.DESCENDING, "05-03 - PriorityQueue constructor failed.") ;
-            
         }
         
         public function testComparator():void
@@ -97,10 +94,9 @@ package system.data.queues
             
             ArrayAssert.assertEquals( q.toArray(), [1,2,3], "01 - PriorityQueue comparator property failed.") ;
             
-               q.comparator = new StringComparator() ;
-               
-               ArrayAssert.assertEquals( q.toArray(), [3,2,1], "01 - PriorityQueue comparator property failed.") ;
+            q.comparator = new StringComparator() ;
             
+            ArrayAssert.assertEquals( q.toArray(), [3,2,1], "01 - PriorityQueue comparator property failed.") ;
         }
         
         public function testOptions():void
@@ -115,8 +111,7 @@ package system.data.queues
             ArrayAssert.assertEquals( q.toArray(), [11,10,2,1], "02 - PriorityQueue options property failed.") ;
            
             q.options = Array.NUMERIC ;                   
-            ArrayAssert.assertEquals( q.toArray(), [1,2,10,11], "03 - PriorityQueue options property failed.") ;         
-                        
+            ArrayAssert.assertEquals( q.toArray(), [1,2,10,11], "03 - PriorityQueue options property failed.") ;
         }
         
         public function testClone():void
@@ -146,13 +141,11 @@ package system.data.queues
             
             q.sort( Array.DESCENDING ) ;
             
-            ArrayAssert.assertEquals( q.toArray(), [4,3,2,11,10,1], "01 - PriorityQueue sort method failed.") ;    
+            ArrayAssert.assertEquals( q.toArray(), [4,3,2,11,10,1], "01 - PriorityQueue sort method failed.") ;
             
             q.comparator = new NumberComparator() ;
             
             ArrayAssert.assertEquals( q.toArray(), [1,2,3,4,10,11], "02 - PriorityQueue sort method failed.") ;
-            
         }
     }
-
 }

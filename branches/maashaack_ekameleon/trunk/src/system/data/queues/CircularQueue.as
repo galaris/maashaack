@@ -35,15 +35,16 @@
 
 package system.data.queues 
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.data.Boundable;
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.ProtectedIterator;
-    import system.serializers.eden.BuiltinSerializer;
-    
-    import flash.errors.IllegalOperationError;    
+
+    import flash.errors.IllegalOperationError;
 
     /**
      * The CircularQueue class allows for storing objects in a circular queue of a predefined size.
@@ -360,10 +361,10 @@ package system.data.queues
         /**
          * Returns a eden representation of the object.
          * @return a string representation of the source code of the object.
-         */        
+         */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var source:String = "new " + getClassPath(this, true) + "(" ;
             
             source += maxSize() ;
             
@@ -372,7 +373,7 @@ package system.data.queues
             if ( ar.length > 0 )
             {
                 source += "," ;
-                source += BuiltinSerializer.emitArray( ar ) ;
+                source += dump( ar ) ;
             } 
             
             source += ")" ;
@@ -398,7 +399,7 @@ package system.data.queues
          * The array index for the next object to be removed from the queue.
          * @private
          */
-        private var _front:uint ;         
+        private var _front:uint ;
         
         /**
          * @private
@@ -409,7 +410,7 @@ package system.data.queues
          * The number of objects in the array : queue size + 1
          * @private
          */
-        private var _qSize:uint ;         
+        private var _qSize:uint ;
         
         /**
          * The array index for the next object to be stored in the queue.

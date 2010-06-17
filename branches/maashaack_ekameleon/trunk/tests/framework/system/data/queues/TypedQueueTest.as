@@ -41,11 +41,10 @@ package system.data.queues
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.Typeable;
-    import system.data.Validator;    
-
+    import system.data.Validator;
+    
     public class TypedQueueTest extends TestCase 
     {
-
         public function TypedQueueTest(name:String = "")
         {
             super(name);
@@ -67,10 +66,10 @@ package system.data.queues
             
             tq = new TypedQueue( String , q ) ;
             assertEquals( tq.type , String , "01 - TypedQueue constructor failed with a specific type argument in this constructor.") ;
-
+            
             tq = new TypedQueue( null , q ) ;
             assertNull( tq.type , "02 - TypedQueue constructor failed with a specific type argument in this constructor.") ;
-
+            
             tq = new TypedQueue( [] , q ) ;
             assertNull( tq.type , "03 - TypedQueue constructor failed with a specific type argument in this constructor, other type, must use a Class or a Function value.") ;
         }
@@ -78,7 +77,7 @@ package system.data.queues
         public function testConstructorQueueArgument():void
         {
             var q:Queue = new LinearQueue() ;
-            var tq:TypedQueue ;          
+            var tq:TypedQueue ;
             
             try
             {
@@ -89,15 +88,15 @@ package system.data.queues
             {
                 assertTrue( e is ArgumentError , "01-02 - TypedQueue constructor failed." ) ;
                 assertEquals( e.message , "The passed-in Queue argument not must be 'null' or 'undefined'.", "01-03 - TypedQueue constructor failed." ) ;
-            }           
-                        
+            }
+            
             // 02 - basic test with a no empty Queue
             
             q.add("item1") ;
             q.add("item2") ;
             
             tq = new TypedQueue( String , q ) ;
-            assertNotNull(tq, "02-01 - TypedQueue constructor failed with a no empty queue of String values.") ;          
+            assertNotNull(tq, "02-01 - TypedQueue constructor failed with a no empty queue of String values.") ;
             assertEquals(tq.size(), q.size() , "02-02 - TypedQueue constructor failed with a no empty queue of String values.") ;
             
             // 03 - test 'queue' argument contains an invalid value
@@ -128,7 +127,7 @@ package system.data.queues
         }
         
         // test methods and attributes
-
+        
         public function testType():void
         {
             var q:Queue = new LinearQueue() ;
@@ -144,10 +143,10 @@ package system.data.queues
             assertEquals( tq.type , clazz , "03 - The TypedQueue type property failed." ) ;
             
             tq.type = null ;
-            assertNull( tq.type , "04 - The TypedQueue type property failed." ) ;            
-
+            assertNull( tq.type , "04 - The TypedQueue type property failed." ) ;
+            
             tq.type = 2 ;
-            assertNull( tq.type , "05 - The TypedQueue type property failed." ) ;    
+            assertNull( tq.type , "05 - The TypedQueue type property failed." ) ;
         }
         
         public function testAdd():void
@@ -162,7 +161,7 @@ package system.data.queues
             try
             {
                 tq.add(3) ;
-                fail("02-01 - The TypedQueue add method failed.") ;    
+                fail("02-01 - The TypedQueue add method failed.") ;
             }
             catch( e:Error )
             {
@@ -177,7 +176,7 @@ package system.data.queues
             var tq:TypedQueue = new TypedQueue( String , q ) ;
             tq.clear() ;
             assertEquals( tq.size() , 0 , "The TypedQueue clear method failed." ) ;
-        }        
+        }
         
         public function testClone():void
         {
@@ -205,21 +204,21 @@ package system.data.queues
             var tq:TypedQueue = new TypedQueue( String , q ) ;
             assertTrue( tq.enqueue("item3") , "01 - The TypedQueue enqueue method failed." ) ;  
             assertEquals( tq.size() , 3 , "02 - The TypedQueue enqueue method failed." ) ;  
-        }        
+        }
         
         public function testGet():void
         {
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
-            assertEquals( tq.get(0) , "item1" , "The TypedQueue get method failed." ) ;    
+            assertEquals( tq.get(0) , "item1" , "The TypedQueue get method failed." ) ;
             assertNull( tq.get(10)  , "The TypedQueue get method failed." ) ;
         }
-
+        
         public function testIndexOf():void
         {
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
-            assertEquals( tq.indexOf("item2") , 1 , "01 - The TypedQueue indexOf method failed." ) ;     
+            assertEquals( tq.indexOf("item2") , 1 , "01 - The TypedQueue indexOf method failed." ) ;
             assertEquals( tq.indexOf("item4") , -1 , "02 - The TypedQueue indexOf method failed." ) ;
         } 
         
@@ -227,7 +226,7 @@ package system.data.queues
         {
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
-            assertFalse(tq.isEmpty() , "01 - The TypedQueue isEmpty method failed." ) ;     
+            assertFalse(tq.isEmpty() , "01 - The TypedQueue isEmpty method failed." ) ;
             tq.clear() ;
             assertTrue(tq.isEmpty() , "02 - The TypedQueue isEmpty method failed." ) ;
         } 
@@ -237,8 +236,8 @@ package system.data.queues
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
             var it:Iterator = tq.iterator() ;
-            assertNotNull( it, "The TypedQueue iterator method failed." ) ;     
-        }          
+            assertNotNull( it, "The TypedQueue iterator method failed." ) ;
+        }
         
         public function testPeek():void
         {
@@ -272,7 +271,7 @@ package system.data.queues
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
             
-            assertTrue( tq.remove("item1"), "The TypedQueue remove method failed." ) ;     
+            assertTrue( tq.remove("item1"), "The TypedQueue remove method failed." ) ;
             assertFalse( tq.remove("item4"), "The TypedQueue remove method failed." ) ;
         } 
         
@@ -280,7 +279,7 @@ package system.data.queues
         {
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
-            assertEquals( tq.size() , q.size() , "The TypedQueue size method failed." ) ;     
+            assertEquals( tq.size() , q.size() , "The TypedQueue size method failed." ) ;
         } 
         
         public function testSupports():void
@@ -304,14 +303,14 @@ package system.data.queues
             var tq:TypedQueue = new TypedQueue( String , q ) ;
             assertEquals( tq.toSource() , 'new system.data.queues.TypedQueue(String,new system.data.queues.LinearQueue(["item1","item2"]))' , "The TypedQueue toSource method failed." ) ;     
         }
-
+        
         public function testToString():void
         {
             var q:LinearQueue = new LinearQueue(["item1", "item2"]) ;
             var tq:TypedQueue = new TypedQueue( String , q ) ;
-            assertEquals( tq.toString() , q.toString() , "The TypedQueue toString method failed." ) ;     
+            assertEquals( tq.toString() , q.toString() , "The TypedQueue toString method failed." ) ;
         }
-                
+        
         public function testValidate():void
         {
             var q:Queue = new LinearQueue(["item1", "item2"]) ;
@@ -319,7 +318,7 @@ package system.data.queues
             
             try
             {
-                tq.validate( "hello" ) ;         
+                tq.validate( "hello" ) ;
             }
             catch( e:Error )
             {
@@ -336,7 +335,6 @@ package system.data.queues
                 assertTrue( e is TypeError , "02-02 - the validate method must throw a TypeError.") ;   
                 assertEquals( e.message , "TypedQueue.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
-        }  
-
+        }
     }
 }

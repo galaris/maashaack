@@ -38,7 +38,7 @@ package system.process
     import system.data.maps.HashMap;
 
     /**
-     * Batchs actions and notify when all actions are finished.
+     * Batchs tasks and notify when all actions are finished.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples
