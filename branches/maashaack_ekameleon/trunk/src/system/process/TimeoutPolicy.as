@@ -38,6 +38,8 @@ package system.process
     import system.Reflection;
     import system.Serializable;
     
+    // FIXME extends the Enum class ?
+    
     /**
      * Defines the policy of the timeout states in the application.
      */
@@ -74,7 +76,7 @@ package system.process
         /**
          * Returns the string representation of this object.
          * @return the string representation of this object.
-         */    
+         */
         public function toString():String
         {
             return String(_value) ;
