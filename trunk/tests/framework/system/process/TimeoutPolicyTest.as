@@ -36,10 +36,9 @@
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase ;
-
+    
     public class TimeoutPolicyTest extends TestCase 
     {
-        
         public function TimeoutPolicyTest( name:String = "" )
         {
             super(name);
@@ -75,7 +74,7 @@ package system.process
             
             source = TimeoutPolicy.INFINITY.toSource() ;
             assertEquals( source , "new system.process.TimeoutPolicy(0)"  , "01 - TimeoutPolicy toSource() failed." ) ;
-        
+            
             source = TimeoutPolicy.LIMIT.toSource() ;
             assertEquals( source , "new system.process.TimeoutPolicy(1)"  , "02 - TimeoutPolicy toSource() failed." ) ;
         }
@@ -86,8 +85,6 @@ package system.process
             
             source = TimeoutPolicy.INFINITY.toString() ;
             assertEquals( source , "0"  , "01 - TimeoutPolicy toString() failed." ) ;
-        
         }
-        
     }
 }
