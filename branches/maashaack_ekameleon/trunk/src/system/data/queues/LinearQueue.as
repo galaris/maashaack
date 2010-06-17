@@ -71,7 +71,6 @@ package system.data.queues
      */
     public class LinearQueue extends ArrayCollection implements Queue
     {
-
         /**
          * Creates a new LinearQueue instance.
          * @param init An optional Array or Collection or Iterable object to fill the collection.

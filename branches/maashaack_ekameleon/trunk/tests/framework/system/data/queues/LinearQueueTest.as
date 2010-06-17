@@ -104,22 +104,22 @@ package system.data.queues
         {
             var q:LinearQueue = new LinearQueue([1,2,3,4]) ;
             
-            assertTrue( q.dequeue() , "01-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()  , 3 , "01-02 - The LinearQueue dequeue failed." ) ;
+            assertTrue( q.dequeue() , "01-01" ) ;
+            assertEquals( q.size()  , 3 , "01-02" ) ;
             
-            assertTrue( q.dequeue() , "02-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()  , 2 , "02-02 - The LinearQueue dequeue failed." ) ;
+            assertTrue( q.dequeue() , "02-01" ) ;
+            assertEquals( q.size()  , 2 , "02-02" ) ;
             
-            assertTrue( q.dequeue() , "03-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()  , 1 , "03-02 - The LinearQueue dequeue failed." ) ;
+            assertTrue( q.dequeue() , "03-01" ) ;
+            assertEquals( q.size()  , 1 , "03-02" ) ;
             
-            assertTrue( q.dequeue() , "04-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()  , 0 , "04-02 - The LinearQueue dequeue failed." ) ;
+            assertTrue( q.dequeue() , "04-01" ) ;
+            assertEquals( q.size()  , 0 , "04-02" ) ;
             
-            assertFalse( q.dequeue() , "05-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()  , 0 , "05-02 - The LinearQueue dequeue failed." ) ;
+            assertFalse( q.dequeue() , "05-01" ) ;
+            assertEquals( q.size()  , 0 , "05-02" ) ;
         }
-
+        
         public function testElement():void
         {
             var q:LinearQueue ;
@@ -135,17 +135,17 @@ package system.data.queues
         {
             var q:LinearQueue = new LinearQueue() ;
             
-            assertTrue(q.enqueue(1)       , "01-01 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.size()    , 1 , "01-02 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.element() , 1 , "01-03 - The LinearQueue enqueue method failed." ) ;
+            assertTrue(q.enqueue(1)       , "01-01" ) ;
+            assertEquals( q.size()    , 1 , "01-02" ) ;
+            assertEquals( q.element() , 1 , "01-03" ) ;
             
-            assertTrue(q.enqueue(2)       , "02-01 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.size()    , 2 , "02-02 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.element() , 1 , "02-03 - The LinearQueue enqueue method failed." ) ;
+            assertTrue(q.enqueue(2)       , "02-01" ) ;
+            assertEquals( q.size()    , 2 , "02-02" ) ;
+            assertEquals( q.element() , 1 , "02-03" ) ;
             
-            assertTrue( q.enqueue(3)     , "03-01 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.size()    , 3 , "03-02 - The LinearQueue enqueue method failed." ) ;
-            assertEquals( q.element() , 1 , "03-03 - The LinearQueue enqueue method failed." ) ;
+            assertTrue( q.enqueue(3)     , "03-01" ) ;
+            assertEquals( q.size()    , 3 , "03-02" ) ;
+            assertEquals( q.element() , 1 , "03-03" ) ;
         }
         
         public function testPeek():void
@@ -153,28 +153,28 @@ package system.data.queues
             var q:LinearQueue ;
             
             q = new LinearQueue([1,2,3,4]) ;
-            assertEquals( q.peek() , 1 , "The LinearQueue peek method failed." ) ;
+            assertEquals( q.peek() , 1 , "01" ) ;
             
             q = new LinearQueue() ;
-            assertNotUndefined( q.peek(), "The LinearQueue peek method failed." ) ;
-            assertNull( q.peek(), "The LinearQueue peek method failed." ) ;
+            assertNotUndefined( q.peek(), "02" ) ;
+            assertNull( q.peek(), "03" ) ;
         }
         
         public function testPoll():void
         {
             var q:LinearQueue = new LinearQueue([1,2,3,4]) ;
             
-            assertEquals( q.poll() , 1 , "01-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 3 , "01-02 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.poll() , 1 , "01-01" ) ;
+            assertEquals( q.size()    , 3 , "01-02" ) ;
             
-            assertEquals( q.poll() , 2 , "02-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 2 , "02-02 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.poll() , 2 , "02-01" ) ;
+            assertEquals( q.size()    , 2 , "02-02" ) ;
             
-            assertEquals( q.poll() , 3 , "03-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 1 , "03-02 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.poll() , 3 , "03-01" ) ;
+            assertEquals( q.size()    , 1 , "03-02" ) ;
             
-            assertEquals( q.poll() , 4 , "04-01 - The LinearQueue dequeue failed." ) ;
-            assertEquals( q.size()    , 0 , "04-02 - The LinearQueue dequeue failed." ) ;
+            assertEquals( q.poll() , 4 , "04-01" ) ;
+            assertEquals( q.size()    , 0 , "04-02" ) ;
         }
         
         public function testToArray():void

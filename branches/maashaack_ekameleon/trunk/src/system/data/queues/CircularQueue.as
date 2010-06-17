@@ -37,15 +37,15 @@ package system.data.queues
 {
     import core.dump;
     import core.reflect.getClassPath;
-
+    
     import system.data.Boundable;
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.ProtectedIterator;
-
+    
     import flash.errors.IllegalOperationError;
-
+    
     /**
      * The CircularQueue class allows for storing objects in a circular queue of a predefined size.
      * <p><b>Example :</b></p>
@@ -108,7 +108,6 @@ package system.data.queues
      */
     public class CircularQueue implements Boundable, Queue 
     {
-
         /**
          * Creates a new CircularQueue instance.
          * @param qSize the max number of element in the queue
@@ -116,7 +115,6 @@ package system.data.queues
          */
         public function CircularQueue( qSize:uint=uint.MAX_VALUE , elements:Array=null )
         {
-            
             _qSize = (qSize > MAX_CAPACITY) ? MAX_CAPACITY : (qSize + 1) ;
             
             clear() ;
@@ -137,12 +135,12 @@ package system.data.queues
                 }
             }
         }
-
+        
         /**
          * The default numbers of elements in the queue.
          */
         public static var MAX_CAPACITY:uint = uint.MAX_VALUE ;
-
+        
         /**
          * Unsupported method in all CircularQueue objects.
          * @throws IllegalOperationError the add() method is unsupported in a CircularQueue instance.
@@ -161,24 +159,24 @@ package system.data.queues
             _queue = new Array(_qSize) ;
             _count = 0 ;
             _rear  = 0 ;
-            _front = 0 ;            
+            _front = 0 ;
         }
         
         /**
          * Returns a shallow copy of the queue.
          * @return a shallow copy of the queue.
-         */        
+         */
         public function clone():*
         {
             var s:int    = _qSize - 1 ;
             var a:Array  = toArray() ;
             return new CircularQueue(s , a) ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if the queue contains the object passed in argument.
          * @return <code class="prettyprint">true</code> if the queue contains the object passed in argument.
-         */        
+         */
         public function contains(o:*):Boolean
         {
             return _queue.indexOf(o) != -1 ;
@@ -196,7 +194,7 @@ package system.data.queues
         /**
          * Returns the value of the first element in the queue.
          * @return the value of the first element in the queue.
-         */        
+         */
         public function element():*
         {
             return _queue[_front] ;
@@ -204,7 +202,7 @@ package system.data.queues
         
         /**
          * Enqueue a new element in the queue if the que is not full, return a boolean.
-         */        
+         */
         public function enqueue(o:*):Boolean
         {
             var next:uint = _rear + 1 ;
@@ -227,7 +225,7 @@ package system.data.queues
         /**
          * Unsupported method in all CircularQueue objects.
          * @throws IllegalOperationError the get() method is unsupported in a CircularQueue instance.
-         */        
+         */
         public function get(key:*):*
         {
             throw new IllegalOperationError("The CircularQueue class does support the get() method.") ;
@@ -236,19 +234,17 @@ package system.data.queues
         /**
          * Unsupported method in all CircularQueue objects.
          * @throws IllegalOperationError the indexOf() method is unsupported in a CircularQueue instance.
-         */         
+         */
         public function indexOf(o:*, fromIndex:uint = 0):int
         {
             throw new IllegalOperationError("The CircularQueue class does support the indexOf() method.") ;
             return 0 ;
         }
         
-      
-        
         /**
          * Returns <code class="prettyprint">true</code> if the queue is empty.
          * @return <code class="prettyprint">true</code> if the queue is empty.
-         */        
+         */
         public function isEmpty():Boolean
         {
             return _count == 0 ;
@@ -257,7 +253,7 @@ package system.data.queues
         /**
          * Returns <code class="prettyprint">true</code> if the queue is full.
          * @return <code class="prettyprint">true</code> if the queue is full.
-         */        
+         */
         public function isFull():Boolean
         {
             return _count == maxSize() ;
@@ -267,16 +263,16 @@ package system.data.queues
          * Returns the iterator representation of the queue.
          * @return the iterator representation of the queue.
          * @see system.data.iterators.ProtectedIterator
-         */        
+         */
         public function iterator():Iterator
         {
             return (new ProtectedIterator( new ArrayIterator( toArray() ) ) ) ;
-        }        
+        }
         
         /**
          * Returns the max number of occurrences in the given queue.
          * @return the max number of occurrences in the given queue.
-         */        
+         */
         public function maxSize():uint
         {
             return _qSize - 1 ;
@@ -285,7 +281,7 @@ package system.data.queues
         /**
          * Returns the value of the first element in the queue or <code class="prettyprint">null</code> if the queue is empty.
          * @return the value of the first element in the queue or <code class="prettyprint">null</code> if the queue is empty.
-         */        
+         */
         public function peek():*
         {
             return isEmpty() ? null : _queue[_front] ;
@@ -294,7 +290,7 @@ package system.data.queues
         /**
          * Returns the value of the first element in the queue and remove this value in the queue.
          * @return the value of the first element in the queue and remove this value in the queue.
-         */        
+         */
         public function poll():*
         {
             if (_front == _qSize) 
@@ -318,17 +314,17 @@ package system.data.queues
         /**
          * Unsupported method in all CircularQueue objects.
          * @throws IllegalOperationError the remove() method is unsupported in a CircularQueue instance.
-         */          
+         */
         public function remove(o:*):*
         {
             throw new IllegalOperationError("The CircularQueue class does support the remove() method.") ;
-            return null ;           
-        }         
+            return null ;
+        }
         
         /**
          * Returns the number of elements in the CircularQueue.
          * @return the number of elements in the CircularQueue.
-         */        
+         */
         public function size():uint
         {
             return _count ;
@@ -356,7 +352,7 @@ package system.data.queues
                 }
                 return r ;
             }
-        }        
+        }
         
         /**
          * Returns a eden representation of the object.
@@ -383,7 +379,7 @@ package system.data.queues
         /**
          * Returns the string representation of this instance.
          * @return the string representation of this instance
-         */        
+         */
         public function toString():String
         {
             return formatter.format(this) ;
@@ -417,7 +413,5 @@ package system.data.queues
          * @private
          */
         private var _rear:uint ;
-        
-
     }
 }

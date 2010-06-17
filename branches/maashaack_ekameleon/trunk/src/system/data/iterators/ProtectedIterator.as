@@ -37,8 +37,8 @@ package system.data.iterators
 {
     import system.data.Iterator;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * Protect an iterator. This class protect the remove, reset and seek method.
      * <p><b>Example :</b></p>
@@ -55,7 +55,6 @@ package system.data.iterators
      */
     public class ProtectedIterator implements Iterator
     {
-        
         /**
          * Creates a new ProtectedIterator instance.
          * @param iterator the iterator to protected.
@@ -78,7 +77,7 @@ package system.data.iterators
         {
             return _i.hasNext() ;
         }
-
+        
         /**
          * Returns the current key of the internal pointer of the iterator (optional operation).
          * @return the current key of the internal pointer of the iterator (optional operation).
@@ -87,7 +86,7 @@ package system.data.iterators
         {
             return _i.key() ;
         }
-
+        
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
@@ -96,7 +95,7 @@ package system.data.iterators
         {
             return _i.next() ;
         }
-
+        
         /**
          * Unsupported method in all ProtectedIterator objects.
          * @throws IllegalOperationError the remove() method is unsupported in a ProtectedIterator instance.
@@ -105,7 +104,7 @@ package system.data.iterators
         {
             throw new IllegalOperationError("This Iterator does not support the remove() method.") ;
         }
- 
+        
         /**
          * Unsupported method in all ProtectedIterator.
          * @throws IllegalOperationError the reset() method is unsupported in a ProtectedIterator instance.
@@ -114,7 +113,7 @@ package system.data.iterators
         {
             throw new IllegalOperationError("This Iterator does not support the reset() method.") ;
         }
-
+        
         /**
          * Unsupported method in all ProtectedIterator.
          * @throws IllegalOperationError the seek() method is unsupported in a ProtectedIterator instance.
@@ -128,7 +127,5 @@ package system.data.iterators
          * @private
          */
         private var _i:Iterator ;
-        
     }
-
 }

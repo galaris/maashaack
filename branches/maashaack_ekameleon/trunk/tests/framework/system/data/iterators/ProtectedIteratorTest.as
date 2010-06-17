@@ -39,11 +39,10 @@ package system.data.iterators
     
     import system.data.samples.IteratorClass;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     public class ProtectedIteratorTest extends TestCase 
     {
-
         public function ProtectedIteratorTest( name:String = "" )
         {
             super( name );
@@ -55,11 +54,11 @@ package system.data.iterators
         {
             it = new ProtectedIterator( new IteratorClass() ) ;
         }
-
+        
         public function tearDown():void
         {
             it = undefined ;
-        }         
+        }
         
         public function testConstructor():void
         {
@@ -73,18 +72,18 @@ package system.data.iterators
                 assertTrue( e is ArgumentError , "ProtectedIterator constructor must throws an ArgumentError") ;
                 assertEquals( e.message, "ProtectedIterator constructor don't support a null iterator in argument." , "The message in the ArgumentError isn't valid.") ;
             }
-        }         
-
+        }
+        
         public function testHasNext():void
         {
             assertTrue( it.hasNext() , "ProtectedIterator.hasNext() method failed." ) ;
         }
-
+        
         public function testKey():void
         {
             assertEquals( it.key() , "key" , "ProtectedIterator.key() method failed." ) ;
-        }    
-    
+        }
+        
         public function testNext():void
         {
             assertEquals( it.next() , "next" , "ProtectedIterator.next() method failed." ) ;
@@ -102,8 +101,8 @@ package system.data.iterators
                 assertTrue( e is IllegalOperationError , "ProtectedIterator.remove method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the remove() method." , "The message in the IllegalOperationError isn't valid.") ;
             }
-        }           
-    
+        }
+        
         public function testReset():void
         {
             try
@@ -115,8 +114,8 @@ package system.data.iterators
             {
                 assertTrue( e is IllegalOperationError , "ProtectedIterator.reset method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the reset() method." , "The message in the IllegalOperationError isn't valid.") ;
-            }            
-        }           
+            }
+        }
         
         public function testSeek():void
         {
@@ -129,9 +128,8 @@ package system.data.iterators
             {
                 assertTrue( e is IllegalOperationError , "ProtectedIterator.seek method must throw an IllegalOperationError.") ;
                 assertEquals( e.message, "This Iterator does not support the seek() method." , "The message in the IllegalOperationError isn't valid.") ;
-            }               
-        }        
-        
+            }
+        }
     }
 }
 
