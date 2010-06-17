@@ -37,8 +37,8 @@ package system.data.queues
 {
     import system.Comparator;
     import system.Sortable;
-    import system.data.queues.LinearQueue;    
-
+    import system.data.queues.LinearQueue;
+    
     /**
      * This queue orders elements according to an order specified at construction time, which is specified either according to their natural order or according to a IComparator object.
      * <p><b>Example :</b></p>
@@ -74,7 +74,6 @@ package system.data.queues
      */
     public class PriorityQueue extends LinearQueue implements Sortable
     {
-
         /**
          * Creates a new PriorityQueue instance.
          * @param init An optional <code class="prettyprint">Array</code> or <code class="prettyprint">Collection</code> or <code class="prettyprint">Iterable</code> object to fill the collection.
@@ -96,7 +95,7 @@ package system.data.queues
         
         /**
          * Determinates the <code class="prettyprint">Comparator</code> strategy used to sort the instance.
-         */        
+         */
         public function get comparator():Comparator
         {
             return _comparator ;
@@ -108,7 +107,7 @@ package system.data.queues
         public function set comparator( comp:Comparator ):void
         {
             _comparator = comp ;
-            sort() ;            
+            sort() ;
         }
         
         /**
@@ -118,7 +117,7 @@ package system.data.queues
         {
             return _options ;
         }
-
+        
         /**
          * @private
          */
@@ -126,7 +125,7 @@ package system.data.queues
         {
             _options = o ;
             sort() ;
-        }        
+        }
         
         /**
          * Returns a shallow copy of this object.
@@ -135,7 +134,7 @@ package system.data.queues
         public override function clone():* 
         {
             return new PriorityQueue( toArray() , comparator , options );
-        }        
+        }
         
         /**
          * Inserts the specified element into this queue, if possible.
@@ -148,7 +147,7 @@ package system.data.queues
                 sort() ;
             }
             return isEnqueue ;
-        }        
+        }
         
         /**
          * Sorts the queue with the internal Comparator or with the Array.sort method if the method a.
@@ -163,17 +162,16 @@ package system.data.queues
             {
                 _a.sort( _comparator.compare, _options ) ;
             }
-        }        
+        }
         
         /**
          * @private
          */
         protected var _comparator:Comparator ;
-
+        
         /**
          * @private
          */
-        protected var _options:uint ;        
-        
+        protected var _options:uint ;
     }
 }

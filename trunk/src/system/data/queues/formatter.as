@@ -35,7 +35,7 @@
 
 package system.data.queues 
 {
-    import system.data.iterators.IterableFormatter;        
+    import system.data.iterators.IterableFormatter;
     
     /**
      * Converts a Queue to a custom string representation.
