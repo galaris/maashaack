@@ -185,7 +185,7 @@ package system.data.queues
         /**
          * Retreives the first element in the queue object, return a boolean.
          * @return <code class="prettyprint">true</code> if the first element in the queue is dequeue.
-         */        
+         */
         public function dequeue():Boolean
         {
             return poll() != null  ;
@@ -279,17 +279,15 @@ package system.data.queues
         }
         
         /**
-         * Returns the value of the first element in the queue or <code class="prettyprint">null</code> if the queue is empty.
-         * @return the value of the first element in the queue or <code class="prettyprint">null</code> if the queue is empty.
+         * Retrieves, but does not remove, the head of this queue, returning null if this queue is empty.
          */
         public function peek():*
         {
-            return isEmpty() ? null : _queue[_front] ;
+            return ( _count == 0 ) ? null : _queue[_front] ;
         }
         
         /**
-         * Returns the value of the first element in the queue and remove this value in the queue.
-         * @return the value of the first element in the queue and remove this value in the queue.
+         * Retrieves and removes the head of this queue.
          */
         public function poll():*
         {
@@ -360,7 +358,9 @@ package system.data.queues
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new " + getClassPath(this, true) + "(" ;
+            var source:String = "new " + getClassPath( this , true ) ;
+            
+            source += "(" ;
             
             source += maxSize() ;
             
@@ -373,6 +373,7 @@ package system.data.queues
             } 
             
             source += ")" ;
+            
             return source ;
         }
         
