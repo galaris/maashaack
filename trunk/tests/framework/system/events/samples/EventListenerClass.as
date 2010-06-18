@@ -35,11 +35,12 @@
 
 package system.events.samples 
 {
+    import system.Serializable;
     import system.events.EventListener;
-    
+
     import flash.events.Event;
-    
-    public class EventListenerClass implements EventListener 
+
+    public class EventListenerClass implements EventListener, Serializable
     {
         public function EventListenerClass()
         {
@@ -51,6 +52,11 @@ package system.events.samples
         public function handleEvent(e:Event):void
         {
             event = e ;
+        }
+        
+        public function toSource(indent:int = 0):String
+        {
+            return "new system.events.samples.EventListenerClass()" ;
         }
     }
 }

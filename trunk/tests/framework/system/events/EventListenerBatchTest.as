@@ -35,14 +35,16 @@
 
 package system.events 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.data.collections.TypedCollection;
-    import system.events.samples.EventListenerClass;    
+
+    import system.data.Collection;
+    import system.data.Iterator;
+    import system.data.iterators.VectorIterator;
+    import system.events.samples.EventListenerClass;
 
     public class EventListenerBatchTest extends TestCase 
     {
-
         public function EventListenerBatchTest(name:String = "")
         {
             super( name );
@@ -53,41 +55,54 @@ package system.events
         public var listener1:EventListenerClass ;
         public var listener2:EventListenerClass ;
         public var listener3:EventListenerClass ;
+        public var listener4:EventListenerClass ;
         
         public function setUp():void
         {
             listener1 = new EventListenerClass() ;
             listener2 = new EventListenerClass() ;
             listener3 = new EventListenerClass() ;
+            listener4 = new EventListenerClass() ;
             
             batch = new EventListenerBatch() ;
             
             batch.add( listener1 ) ;
             batch.add( listener2 ) ;
             batch.add( listener3 ) ;
+            batch.add( listener4 ) ;
         }
         
         public function tearDown():void
         {
+            batch     = undefined ;
             listener1 = undefined ;
             listener2 = undefined ;
             listener3 = undefined ;
-            batch     = undefined ;
-        }        
+            listener4 = undefined ;
+        }
         
         public function testConstructor():void
         {
             assertNotNull( batch , "EventListenerBatch constructor failed." ) ;
         }
         
-        public function testInherit():void
-        {
-            assertTrue( batch is TypedCollection , "EventListenerBatch must inherit the TypedCollection class." ) ;
-        }
-        
         public function testInterface():void
         {
+            assertTrue( batch is Collection , "EventListenerBatch must implement the Collection interface." ) ;
             assertTrue( batch is EventListener , "EventListenerBatch must implement the EventListener interface." ) ;
+        }
+        
+        public function testAdd():void
+        {
+            assertTrue( batch.add( new EventListenerBatch() ) ) ;
+            assertFalse( batch.add( 2 ) ) ;
+            assertFalse( batch.add( "hello world" ) ) ;
+        }
+        
+        public function testClear():void
+        {
+            batch.clear() ;
+            assertEquals( batch.size() , 0 ) ;
         }
         
         public function testClone():void
@@ -98,5 +113,74 @@ package system.events
             assertEquals( clone.size() , batch.size(),  "02 - EventListenerBatch clone method failed." ) ;
         }
         
+        public function testContains():void
+        {
+            assertTrue( batch.contains( listener1 ) ) ;
+            assertTrue( batch.contains( listener2 ) ) ;
+            assertTrue( batch.contains( listener3 ) ) ;
+            assertTrue( batch.contains( listener4 ) ) ;
+            
+            assertFalse( batch.contains( null ) ) ;
+            assertFalse( batch.contains( "hello" ) ) ;
+            assertFalse( batch.contains( new EventListenerClass() ) ) ;
+        }
+        
+        public function testGet():void
+        {
+            var listener:EventListener = new EventListenerClass() ;
+            batch.clear() ;
+            batch.add( listener ) ;
+            assertEquals( batch.get( 0 ) , listener ) ;
+        }
+        
+        public function testIndexOf():void
+        {
+            var listener:EventListener = new EventListenerClass() ;
+            batch.clear() ;
+            batch.add( listener ) ;
+            assertEquals( batch.indexOf( listener ) , 0 ) ;
+        }
+        
+        public function testIsEmpty():void
+        {
+            assertFalse( batch.isEmpty() ) ;
+            batch.clear() ;
+            assertTrue( batch.isEmpty() ) ;
+        }
+        
+        public function testIterator():void
+        {
+           var it:Iterator = batch.iterator() ;
+           assertTrue( it is VectorIterator ) ;
+           assertTrue( it.hasNext() ) ;
+           assertEquals( listener1 , it.next() ) ;
+           assertEquals( listener2 , it.next() ) ;
+           assertEquals( listener3 , it.next() ) ;
+           assertEquals( listener4 , it.next() ) ;
+           assertFalse( it.hasNext() ) ;
+        }
+        
+        public function testSize():void
+        {
+            assertEquals( batch.size() , 4 ) ;
+            batch.clear() ;
+            assertEquals( batch.size() , 0 ) ;
+        }
+        
+        public function testToArray():void
+        {
+            var ar:Array = batch.toArray() ;
+            ArrayAssert.assertEquals( ar , [listener1,listener2,listener3,listener4] ) ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( "new system.events.EventListenerBatch([new system.events.samples.EventListenerClass(),new system.events.samples.EventListenerClass(),new system.events.samples.EventListenerClass(),new system.events.samples.EventListenerClass()])" , batch.toSource() ) ;
+        }
+        
+        public function testToString():void
+        {
+            assertEquals( "{[object EventListenerClass],[object EventListenerClass],[object EventListenerClass],[object EventListenerClass]}" , batch.toString() ) ;
+        }
     }
 }

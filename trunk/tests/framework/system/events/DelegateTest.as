@@ -41,11 +41,10 @@ package system.events
     import system.Cloneable;
     import system.process.Runnable;
     
-    import flash.events.Event;    
-
+    import flash.events.Event;
+    
     public class DelegateTest extends TestCase 
     {
-
         public function DelegateTest(name:String = "")
         {
             super( name );
@@ -59,14 +58,14 @@ package system.events
             {
                 toString : function():String
                 {
-                    return "scope" ;    
+                    return "scope" ;
                 }
             };
         }
         
         public function tearDown():void
         {
-            scope = undefined ;           
+            scope = undefined ;
         }
         
         public function testConstructor():void
@@ -90,7 +89,7 @@ package system.events
             };
             var d:Delegate = new Delegate( scope , m ) ;
             assertTrue( d is Cloneable     , "Delegate must implement the Cloneable interface." ) ;
-            assertTrue( d is EventListener , "Delegate must implement the EventListener interface." ) ;            
+            assertTrue( d is EventListener , "Delegate must implement the EventListener interface." ) ; 
             assertTrue( d is Runnable      , "Delegate must implement the Runnable interface." ) ;
         } 
         
@@ -105,8 +104,8 @@ package system.events
             ArrayAssert.assertEquals( d.arguments , [] , "01 - Delegate arguments failed." ) ;
             d.arguments = a ;
             ArrayAssert.assertEquals( d.arguments , a , "02 - Delegate arguments failed." ) ;
-        }        
-                
+        }
+        
         public function testMethod():void
         {
             var m:Function = function():String
@@ -115,7 +114,7 @@ package system.events
             };
             var d:Delegate = new Delegate( scope , m  ) ;
             assertEquals( d.method , m , "Delegate method failed." ) ;
-        }    
+        }
         
         public function testScope():void
         {
@@ -160,7 +159,7 @@ package system.events
             };
             var f:Function = Delegate.create(scope , method , 2, 3, 4 ) ;
             var r:String = f() ;
-            assertEquals( r , "scope:scope args:2,3,4" , "Delegate.create failed") ;            
+            assertEquals( r , "scope:scope args:2,3,4" , "Delegate.create failed") ;
         }
         
         public function testHandleEvent():void
@@ -187,10 +186,7 @@ package system.events
             assertEquals( s , 'scope:scope args:2,3,4' , "01 - Delegate run failed") ;
             
             d.run(5,6,7) ;
-            assertEquals( s , 'scope:scope args:2,3,4,5,6,7' , "02 - Delegate run failed") ;  
-            
-              
-        }        
-                
+            assertEquals( s , 'scope:scope args:2,3,4,5,6,7' , "02 - Delegate run failed") ;
+        }
     }
 }

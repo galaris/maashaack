@@ -76,7 +76,7 @@ package system.events
         {
             if ( type == null )
             {
-                throw new ArgumentError( "The FrontController add() method failed, the 'type' argument not must be null.") ;    
+                throw new ArgumentError( "The FrontController add() method failed, the 'type' argument not must be null.") ;
             }
             if ( listener == null )
             {
