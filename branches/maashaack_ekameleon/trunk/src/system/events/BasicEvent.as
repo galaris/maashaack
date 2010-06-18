@@ -63,14 +63,12 @@ package system.events
           */
         public function BasicEvent( type:String  , target:Object = null , context:* = null , bubbles:Boolean = false , cancelable:Boolean = false, time:uint = 0 )
         {
-            
             super( type , bubbles, cancelable ) ;
             
             _context = _context != null ? _context : context ;
             _target  = _target  != null ? _target  : target ;    
             _time    = ( time > 0) ? time : ( (new Date()).valueOf() ) ;
             _type    = type ;
-             
         }
         
         /**
