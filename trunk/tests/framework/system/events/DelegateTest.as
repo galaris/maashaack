@@ -124,8 +124,8 @@ package system.events
             };
             var d:Delegate = new Delegate( scope , m  ) ;
             assertEquals( d.scope , scope , "Delegate scope failed." ) ;
-        }                 
-             
+        }
+        
         public function testAddArguments():void
         {
             var m:Function = function():String
