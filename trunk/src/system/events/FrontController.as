@@ -150,7 +150,7 @@ package system.events
          */
         public function contains( type:String ):Boolean 
         {
-            return _map.containsKey( type ) ;    
+            return _map.containsKey( type ) ;
         }
         
         /**
