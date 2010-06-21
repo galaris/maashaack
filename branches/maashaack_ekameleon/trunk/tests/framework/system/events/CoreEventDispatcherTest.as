@@ -197,7 +197,6 @@ package system.events
         
         public function testRemoveEventListener():void
         {
-        
             var listener:MockEventListener = new MockEventListener() ;
             
             var dispatcher:CoreEventDispatcher = new CoreEventDispatcher() ;
@@ -221,7 +220,7 @@ package system.events
             var d:EventDispatcher = new EventDispatcher() ;
             
             dispatcher.setEventDispatcher(d) ;
-                        
+            
             assertEquals( d , dispatcher.getEventDispatcher(), "01 - CoreEventDispatcher getEventDispatcher() failed.") ;
             
             dispatcher.setEventDispatcher(null) ;
@@ -256,7 +255,6 @@ package system.events
         
         public function testUnregisterEventListener():void
         {
-        
             var listener:MockEventListener = new MockEventListener() ;
             
             var dispatcher:CoreEventDispatcher = new CoreEventDispatcher() ;

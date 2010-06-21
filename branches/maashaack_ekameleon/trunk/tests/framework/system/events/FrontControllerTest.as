@@ -58,7 +58,7 @@ package system.events
         {
             EventDispatcher.flush() ;
             FrontController.flush() ;
-        }        
+        }
         
         public function testConstructor():void
         {
@@ -161,7 +161,7 @@ package system.events
             catch( e:Error )
             {
                 assertTrue( e is ArgumentError, "02 - The addBatch method must throw an error with a null type argument.") ;
-                  assertEquals( e.message, "FrontController addBatch method failed, the type argument not must be null." , "03 - The addBatch method must throw an error with a null type argument.") ;
+                assertEquals( e.message, "FrontController addBatch method failed, the type argument not must be null." , "03 - The addBatch method must throw an error with a null type argument.") ;
             }
         }
         
