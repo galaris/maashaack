@@ -39,7 +39,6 @@ package system.data.collections
     import core.reflect.getClassPath;
 
     import system.Equatable;
-    import system.Reflection;
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
@@ -221,7 +220,7 @@ package system.data.collections
             {
                 return true ;
             }
-            if ( Reflection.getClassPath(this) != Reflection.getClassPath(o) ) 
+            if ( getClassPath(this) != getClassPath(o) ) 
             {
                 return false ;
             }
@@ -229,7 +228,7 @@ package system.data.collections
             if (c == null || ( c.size() != size() ) )
             {
                 return false ;
-            }       
+            }
             return this.containsAll(c) ;
         }
         

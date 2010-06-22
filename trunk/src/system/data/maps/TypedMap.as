@@ -35,19 +35,20 @@
 
 package system.data.maps 
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     import system.data.Iterator;
     import system.data.Map;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;    
-
+    
     /**
      * TypedMap is a wrapper for Map instances that ensures that only values of a specific type can be added to the wrapped Map.
      */
     public class TypedMap implements Map, Typeable, Validator 
     {
-
         /**
          * Creates a new TypedMap instance.
          * @param type the type of this Typeable object (a Class or a Function).
@@ -71,7 +72,7 @@ package system.data.maps
                 }
             }
             _map = map ;
-        }        
+        }
         
         /**
          * Indicates the type of the Typeable object. 
@@ -81,7 +82,7 @@ package system.data.maps
         {
             return _type ;
         }
-
+        
         /**
          * @private
          */
@@ -95,11 +96,11 @@ package system.data.maps
                 }
                 _type = type is Class ? type as Class : ( ( type is Function ) ? type as Function : null ) ;
             }
-        }       
+        }
         
         /**
          * Removes all mappings from this map (optional operation).
-         */        
+         */
         public function clear():void
         {
             _map.clear() ;
@@ -112,12 +113,12 @@ package system.data.maps
         public function clone():*
         {
             return new TypedMap( type , _map ) ;
-        }        
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
          * @return <code class="prettyprint">true</code> if this map contains a mapping for the specified key.
-         */        
+         */
         public function containsKey(key:*):Boolean
         {
             return _map.containsKey(key) ;
@@ -126,7 +127,7 @@ package system.data.maps
         /**
          * Returns <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
          * @return <code class="prettyprint">true</code> if this map maps one or more keys to the specified value.
-         */        
+         */
         public function containsValue(value:*):Boolean
         {
             return _map.containsValue(value) ;
@@ -135,7 +136,7 @@ package system.data.maps
         /**
          * Returns the value to which this map maps the specified key.
          * @return the value to which this map maps the specified key.
-         */        
+         */
         public function get( key:* ):*
         {
             return _map.get(key) ;
@@ -144,7 +145,7 @@ package system.data.maps
         /**
          * Returns an Array of all the keys in the map.
          * @return an Array of all the keys in the map.
-         */        
+         */
         public function getKeys():Array
         {
             return _map.getKeys() ;
@@ -162,7 +163,7 @@ package system.data.maps
         /**
          * Returns <code class="prettyprint">true</code> if this map contains no key-value mappings.
          * @return <code class="prettyprint">true</code> if this map contains no key-value mappings.
-         */        
+         */
         public function isEmpty():Boolean
         {
             return _map.isEmpty() ;
@@ -171,16 +172,16 @@ package system.data.maps
         /**
          * Returns the iterator reference of the object.
          * @return the iterator reference of the object.
-         */        
+         */
         public function iterator():Iterator
         {
             return _map.iterator() ;
-        }        
+        }
         
         /**
          * Returns the keys iterator of this map.
          * @return the keys iterator of this map.
-         */        
+         */
         public function keyIterator():Iterator
         {
             return _map.keyIterator() ;
@@ -188,7 +189,7 @@ package system.data.maps
         
         /**
          * Associates the specified value with the specified key in this map (optional operation).
-         */        
+         */
         public function put(key:*, value:*):*
         {
             validate(value) ;
@@ -197,11 +198,11 @@ package system.data.maps
         
         /**
          * Copies all of the mappings from the specified map to this one.
-         */        
+         */
         public function putAll(m:Map):void
         {
             var it:Iterator = m.iterator() ;
-            while(it.hasNext()) 
+            while( it.hasNext() ) 
             {
                 validate( it.next() ) ;
             }
@@ -237,14 +238,14 @@ package system.data.maps
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
-         */        
+         */
         public function toSource(indent:int = 0):String
         {
-            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-            s += Reflection.getClassPath( type ) ;
+            var s:String = "new " + getClassPath(this, true) + "(" ;
+            s += getClassPath( type , true ) ;
             if ( size() >  0 )
             {
-                s += "," + eden.serialize(_map) ;
+                s += "," + dump(_map) ;
             }
             s += ")" ;
             return s ;
@@ -253,20 +254,20 @@ package system.data.maps
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
-         */        
+         */
         public function toString():String
         {
             return (_map as Object).toString() ;
         }
-                
+        
         /**
          * Evaluates the condition it checks and updates the IsValid property.
          */
-        public function validate(value:*):void
+        public function validate( value:* ):void
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         
@@ -279,6 +280,5 @@ package system.data.maps
          * The internal type function.
          */
         private var _type:* ;
-        
     }
 }

@@ -35,8 +35,10 @@
 
 package system.data.lists 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.Equatable;
-    import system.Reflection;
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
@@ -47,7 +49,6 @@ package system.data.lists
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.LinkedListIterator;
     import system.errors.NoSuchElementError;
-    import system.serializers.eden.BuiltinSerializer;
 
     /**
      * Linked list implementation of the List and Queue interface. 
@@ -57,7 +58,6 @@ package system.data.lists
      */
     public class LinkedList implements Equatable, List , Queue
     {
-        
         /**
          * Creates a new LinkedList instance.
          * <p><b>Usage :</b></p>
@@ -110,8 +110,8 @@ package system.data.lists
         public function set modCount( i:int ):void
         {
             _modCount = i ;
-        }        
-
+        }
+        
         /**
          * Appends the specified element to the end of this list.
          * @param o element to be appended to this list.
@@ -130,17 +130,17 @@ package system.data.lists
          * @param c the elements to be inserted into this list.
          * @return <code class="prettyprint">true</code> if this list changed as a result of the call.
          * @throws NullPointerException if the specified collection is null.
-         */        
-        public function addAll(c:Collection):Boolean
+         */
+        public function addAll( c:Collection ):Boolean
         {
-            return addAllAt( _size , c ) ;    
+            return addAllAt( _size , c ) ;
         }
         
         /**
          * Inserts the specified element at the specified position in this list (optional operation).
          * @param id index at which the specified element is to be inserted.
          * @param o element to be inserted.
-         */        
+         */
         public function addAt(index:uint, o:*):void
         {
             try
@@ -182,13 +182,13 @@ package system.data.lists
                 return false ;
             }
             
-            var l:Number = a.length ;
+            var l:int = a.length ;
             
-            if (l == 0)
+            if ( l == 0 )
             {
                 return false;
             }
-                    
+            
             _modCount ++ ;
             
             var successor:LinkedListEntry = (index == _size) ? _header : _entry(index) ;
@@ -208,7 +208,7 @@ package system.data.lists
             _size += l ;
             
             return true;
-        }        
+        }
         
         /**
          * Inserts the given element in the list before the given entry.
@@ -236,7 +236,7 @@ package system.data.lists
             _size ++ ;
             _modCount ++ ;
             return newEntry ;
-        }        
+        }
         
         /**
          * Inserts the given element at the beginning of this list.
@@ -244,21 +244,21 @@ package system.data.lists
          */
         public function addFirst( o:* ):void
         {
-            addBefore( o, _header.next ) ;    
+            addBefore( o, _header.next ) ;
         }
-
+        
         /**
          * Appends the given element to the end of this list.  
          * @param o the element to be inserted at the end of this list.
          */
         public function addLast( o:* ):void
         {
-            addBefore(o , _header) ;    
-        }        
+            addBefore(o , _header) ;
+        }
         
         /**
          * Removes all of the elements from this queue (optional operation).
-         */        
+         */
         public function clear():void
         {
             var e:LinkedListEntry = _header.next;
@@ -286,8 +286,8 @@ package system.data.lists
             {
                 list.add( e.element ) ;
             }
-            return list ;    
-        }     
+            return list ;
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if this list contains the specified element.
@@ -363,31 +363,34 @@ package system.data.lists
             else if ( o is LinkedList )
             {
                 var l:LinkedList = o as LinkedList ;
-
-                if ( l.size() != size() )
+                
+                if ( l.size() != _size )
                 {
-                    return false ;    
+                    return false ;
                 } 
+                
                 var i1:Iterator = iterator() ;
                 var i2:Iterator = l.iterator() ;
+                
                 while( i1.hasNext() )
                 {
-                    if (i1.next() != i2.next()) 
+                    if ( i1.next() != i2.next() ) 
                     {
                         return false ;
-                    }    
+                    }
                 }
+                
                 return true ;
             }
             return false ;
-        }        
+        }
         
         /**
          * Adds the specified element as the tail (last element) of this list.
          * @param o the element to add.
          * @return <code class="prettyprint">true</code> if the element in inserted in the list.
          */
-        public function enqueue(o:*):Boolean 
+        public function enqueue( o:* ):Boolean 
         {
             return add(o);
         }
@@ -420,7 +423,7 @@ package system.data.lists
         {
             if (_size == 0)
             {
-                throw new NoSuchElementError("LinkedList.getFirst() method failed, the list is empty.") ;    
+                throw new NoSuchElementError("LinkedList.getFirst() method failed, the list is empty.") ;
             }
             return _header.next.element ;
         }
@@ -431,8 +434,8 @@ package system.data.lists
          */
         public function getHeader():LinkedListEntry
         {
-            return _header ;    
-        }        
+            return _header ;
+        }
         
         /**
          * Returns the last element in the list.
@@ -443,11 +446,11 @@ package system.data.lists
         {
             if (_size == 0)
             {
-                throw new NoSuchElementError("LinkedList.getLast() method failed, the list is empty.") ;        
+                throw new NoSuchElementError("LinkedList.getLast() method failed, the list is empty.") ;
             }
             return _header.previous.element ;
-        }        
-          
+        }
+        
         /**
          * Returns the position of the passed object in the collection.
          * @param o the object to search in the collection.
@@ -491,7 +494,7 @@ package system.data.lists
                     }
                     else if (o == e.element)
                     {
-                        return index ;    
+                        return index ;
                     }    
                     index++ ;
                 }
@@ -515,7 +518,7 @@ package system.data.lists
         public function iterator():Iterator 
         {
             return listIterator(0) ;
-        }    
+        }
         
         /**
          * Returns the index in this list of the last occurrence of the specified element, or -1 if the list does not contain this element.
@@ -565,7 +568,7 @@ package system.data.lists
         public function listIterator( position:uint=0 ):ListIterator
         {
             return new LinkedListIterator( this , position ) ;
-        }        
+        }
         
         /**
          * Retrieves, but does not remove, the head (first element) of this list.
@@ -591,7 +594,7 @@ package system.data.lists
                 return null;
             }
             return removeFirst() ;
-        }        
+        }
         
         /**
          * Removes the first occurrence of the specified element in this list.  
@@ -674,7 +677,7 @@ package system.data.lists
             }
             else
             {
-                return false ;    
+                return false ;
             }
         }
         
@@ -713,7 +716,7 @@ package system.data.lists
                 }
                 return ar ;
             }
-        }        
+        }
         
         /**
          * Removes an Entry in the list.
@@ -732,7 +735,7 @@ package system.data.lists
             _size-- ;
             _modCount++ ;
             return result ;
-        }        
+        }
         
         /**
          * Removes and returns the first element from this list.
@@ -756,7 +759,7 @@ package system.data.lists
         public function removeFirst():*
         {
             return removeEntry( _header.next );
-        }        
+        }
         
         /**
          * Removes and returns the last element from this list.
@@ -780,7 +783,7 @@ package system.data.lists
         public function removeLast():*
         {
             return removeEntry( _header.previous );
-        }        
+        }
         
         /**
          * Removes from this list all the elements that are contained between the specific <code class="prettyprint">from</code> and the specific <code class="prettyprint">to</code> position in this list (optional operation).
@@ -807,7 +810,7 @@ package system.data.lists
             if ( fromIndex >= _size )
             {
                 throw new RangeError( "LinkedList.removeRange(" + fromIndex + "," + toIndex + ") failed with a fromIndex value out of bounds, fromIndex > size().") ;
-            }            
+            }
             if ( toIndex < fromIndex )
             {
                 throw new RangeError( "LinkedList.removeRange(" + fromIndex + "," + toIndex + ") failed if the toIndex > fromIndex value." ) ;
@@ -829,7 +832,7 @@ package system.data.lists
                 return ar ; 
             }
         }
-
+        
         /**
          * Retains only the elements in this list that are contained in the specified collection (optional operation).
          * <p><b>Example :</b></p>
@@ -884,11 +887,11 @@ package system.data.lists
          * @param id index of element to replace.
          * @param o element to be stored at the specified position.
          * @return the element previously at the specified position.
-         */        
+         */
         public function set( index:uint , o:* ):*
         {
             try 
-            {            
+            {
                 var i:ListIterator = listIterator( index ) ;
                 var old:* = i.next() ;
                 i.set(o) ;
@@ -899,7 +902,7 @@ package system.data.lists
             {
                 throw new NoSuchElementError("LinkedList.set() method failed at:" + index ) ;
             }
-        }        
+        }
         
         /**
          * Returns the number of elements in this list.
@@ -918,7 +921,7 @@ package system.data.lists
          */
         public function size():uint
         {
-            return _size ;    
+            return _size ;
         }
         
         /**
@@ -956,7 +959,7 @@ package system.data.lists
             }
             else if ( toIndex > size() )
             {
-                toIndex = size() ;    
+                toIndex = size() ;
             }
             var l:List = new LinkedList() ;
             var i:ListIterator = listIterator( fromIndex ) ;
@@ -965,7 +968,7 @@ package system.data.lists
                 l.add( i.next() ) ;
             }
             return l ;
-        }        
+        }
         
         /**
          * Returns an array containing all of the elements in this list in the correct order.
@@ -982,7 +985,7 @@ package system.data.lists
          * trace( list.toArray() ) ; // item1,item2,item3,item4
          * </pre>
          * @return an array containing all of the elements in this list in the correct order.
-         */        
+         */
         public function toArray():Array
         {
             var ar:Array = new Array( _size ) ;
@@ -993,7 +996,7 @@ package system.data.lists
                 ar[i++] = e.element ;
             }
             return ar ;
-        }        
+        }
         
         /**
          * Returns the source code string representation of the object.
@@ -1001,11 +1004,11 @@ package system.data.lists
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var source:String = "new " + getClassPath(this, true) + "(" ;
             var ar:Array = toArray() ;
             if ( ar.length > 0 )
             {
-                source += BuiltinSerializer.emitArray( ar ) ;
+                source += dump( ar ) ;
             } 
             source += ")" ;
             return source ;
@@ -1029,7 +1032,7 @@ package system.data.lists
         {
             if ( index >= _size)
             {
-                throw new RangeError("LinkedList._entry() method failed, index:" + index + ", size:" + _size + "." ) ;
+                throw new RangeError("LinkedList entry method failed, index:" + index + ", size:" + _size + "." ) ;
             }
             var e:LinkedListEntry = _header ;
             var i:int ;
@@ -1044,30 +1047,28 @@ package system.data.lists
             {
                 for ( i = _size ; i > index ; i-- )
                 {
-                    e = e.previous ;    
+                    e = e.previous ;
                 }
             }
             return e ;
-        }        
+        }
         
         /**
          * The internal header of this list.
          * @private
          */
         private var _header:LinkedListEntry ;
-    
+        
         /**
          * The mod count value used by the LinkedListIterator.
          * @private
          */
         private var _modCount:uint = 0 ;
-    
+        
         /**
          * The internal size of the list.
          * @private
          */
         private var _size:uint = 0 ;
-        
     }
-    
 }

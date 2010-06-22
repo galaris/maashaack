@@ -35,13 +35,15 @@
 
 package system.data.collections 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;
-    
+
     /**
      * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
      * <p><b>Example :</b></p>
@@ -229,11 +231,11 @@ package system.data.collections
          */
         public function toSource(indent:int = 0):String
         {
-            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-            s += Reflection.getClassPath( type ) ;
+            var s:String = "new " + getClassPath(this, true) + "(" ;
+            s += getClassPath( type , true ) ;
             if ( size() >  0 )
             {
-                s += "," + eden.serialize(_co) ;
+                s += "," + dump(_co) ;
             }
             s += ")" ;
             return s ;
