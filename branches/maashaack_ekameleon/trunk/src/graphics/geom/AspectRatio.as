@@ -35,10 +35,12 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     import system.numeric.Mathematics;
     import system.process.Lockable;
-    
+
     /**
      * The <code class="prettyprint">AspectRatio</code> class encapsulates the width and height of an object and indicates this aspect ratio.
      * <p>The aspect ratio of an image is the ratio of its width to its height. For example, a standard NTSC television set uses an aspect ratio of 4:3, and an HDTV set uses an aspect ratio of 16:9. A computer monitor with a resolution of 640 by 480 pixels also has an aspect ratio of 4:3. A square has an aspect ratio of 1:1.</p>
@@ -215,7 +217,7 @@ package graphics.geom
          */
         public override function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + width.toString() + "," + height.toString() + "," + (_lock ? "true" : "false") + ")" ;
+            return "new " + getClassPath(this, true) + "(" + width.toString() + "," + height.toString() + "," + (_lock ? "true" : "false") + ")" ;
         }
         
         /**
@@ -227,7 +229,7 @@ package graphics.geom
             var s:String = _aspW + ":" + _aspH ;  
             if ( verbose )
             {
-                return "[" + Reflection.getClassName(this) + " width:" + width + " height:" + height + " ratio:{" + s + "}]" ;
+                return "[" + getClassName(this) + " width:" + width + " height:" + height + " ratio:{" + s + "}]" ;
             }
             else
             {

@@ -35,8 +35,8 @@
  
 package graphics.geom 
 {
-    import system.Reflection;
-    
+    import core.reflect.getClassPath;
+
     /**
      * Defines a linear equation of the form : <code class="prettyprint"> ax + by = c</code> with fixed real coefficients a, b and c such that a and b are not both zero.
      * <p><b>Example :</b></p>
@@ -120,7 +120,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + a.toString() + "," + b.toString() + "," + c.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" + a.toString() + "," + b.toString() + "," + c.toString() + ")" ;
         }
         
         /**

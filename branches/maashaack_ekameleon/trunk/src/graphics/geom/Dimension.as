@@ -35,7 +35,8 @@
 
 package graphics.geom
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
 
     import flash.geom.Rectangle;
 
@@ -162,7 +163,7 @@ package graphics.geom
         {
             width  += s.width  ;
             height += s.height ;
-            return this ;    
+            return this ;
         }
         
         /**
@@ -189,7 +190,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + width.toString() + "," + height.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" + width.toString() + "," + height.toString() + ")" ;
         }
         
         /**
@@ -198,7 +199,7 @@ package graphics.geom
          */
         public function toString():String 
         {
-            return "[" + Reflection.getClassName(this) + " width:" + width + ",height:" + height + "]" ;
+            return "[" + getClassName(this) + " width:" + width + " height:" + height + "]" ;
         }
         
         /**

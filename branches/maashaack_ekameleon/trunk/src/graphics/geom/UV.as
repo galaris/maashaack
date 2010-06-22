@@ -35,8 +35,8 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    
+    import core.reflect.getClassPath;
+
     /**
      * Coordinates system for bitmaps and textures. It represents the position of a vertex in the Bitmap.
      */
@@ -108,7 +108,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" +  u.toString()  + "," + v.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" +  u.toString()  + "," + v.toString() + ")" ;
         }
         
         /**

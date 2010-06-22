@@ -35,8 +35,8 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    
+    import core.reflect.getClassPath;
+
     /**
      * The polar coordinate system is a two-dimensional coordinate system in which each point on a plane is determined by a distance from a fixed point and an angle from a fixed direction.
      */
@@ -76,7 +76,6 @@ package graphics.geom
         {
             return new Polar( radius , angle ) ;
         }
-        
         
         /**
          * Reset the polar object.
@@ -118,7 +117,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" +  radius.toString()  + "," + angle.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" +  radius.toString()  + "," + angle.toString() + ")" ;
         }
         
         /**
