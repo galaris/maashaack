@@ -11,7 +11,7 @@ As the goal is to write first applications and then reinject the general code in
 Off course if you feel you're into that [Philosophy], you're welcome to participate
 with your own project.
 
-  * [Framework Maashaack framework]
+  * [Framework Maashaack Application Framework]
   * [ASTUce ASTUce]
   * [edenRR eden RR]
   
