@@ -10,5 +10,11 @@ TODO
 
 == Details ==
 
-eden AS3 has been injected into the maashaack framework,
-and now you can find the most recent version in the *system.serializers.eden* package
+TODO
+~~eden AS3 has been injected into the maashaack framework~~,
+and now you can find the most recent version in the *system.serializers.eden* package.
+
+eden AS3 will return in its own repository
+ * with the new organization you will find it in `/libraries/eden`
+ * the class path will be `libraries.eden.*`
+ * and then `system.serializers.eden` would be like an addon to integrate the library with the framework
