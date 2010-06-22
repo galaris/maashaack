@@ -35,12 +35,13 @@
 
 package system.data.bags
 {
-    import system.Reflection;
+    import core.reflect.getClassPath;
+
     import system.data.Collection;
     import system.data.List;
     import system.data.collections.ArrayCollection;
     import system.data.maps.HashMap;
-    
+
     /**
      * Implements Bag, using a HashMap to provide the data storage. This is the standard implementation of a bag.
      * <p><b>Example : </b></p>
@@ -121,7 +122,7 @@ package system.data.bags
          */
         public override function toSource( indent:int = 0 ):String 
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var source:String = "new " + getClassPath( this , true ) + "(" ;
             var li:List = _extractList() ;
             if ( li.size() > 0 )
             {

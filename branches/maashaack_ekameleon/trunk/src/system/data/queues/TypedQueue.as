@@ -33,17 +33,17 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.queues 
+package system.data.queues
 {
     import core.dump;
+    import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
-    import system.Reflection;
+    
     import system.data.Iterator;
     import system.data.Queue;
     import system.data.Typeable;
     import system.data.Validator;
-
+    
     /**
      * TypedQueue is a wrapper for Queue instances that ensures that only values of a specific type can be added to the wrapped queue.
      */
@@ -212,7 +212,7 @@ package system.data.queues
         
         /**
          * Removes a single instance of the specified element from this collection, if it is present (optional operation).
-         */  
+         */
         public function remove(o:*):*
         {
             return _queue.remove(o);
@@ -221,7 +221,7 @@ package system.data.queues
         /**
          * Returns the number of elements in this collection.
          * @return the number of elements in this collection.
-         */    
+         */
         public function size():uint
         {
             return _queue.size() ;
@@ -240,7 +240,7 @@ package system.data.queues
          * Returns an array containing all of the elements in this collection.
          * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
          * @return an array containing all of the elements in this collection.
-         */  
+         */
         public function toArray():Array
         {
             return _queue.toArray() ;
@@ -253,7 +253,7 @@ package system.data.queues
         public function toSource(indent:int = 0):String
         {
             var s:String = "new " + getClassPath(this, true) + "(" ;
-            s += Reflection.getClassPath( type ) ;
+            s += getClassPath( type , true ) ;
             if ( size() >  0 )
             {
                 s += "," + dump(_queue) ;
@@ -278,7 +278,7 @@ package system.data.queues
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         

@@ -35,13 +35,15 @@
 
 package system.data.stacks 
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     import system.data.Iterator;
     import system.data.Stack;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.eden;
-    
+
     /**
      * TypedStack is a wrapper for Stack instances that ensures that only values of a specific type can be added to the wrapped stack.
      * <p><b>Example :</b></p>
@@ -135,7 +137,7 @@ package system.data.stacks
         /**
          * Returns <code class="prettyprint">true</code> if this stack contains no elements.
          * @return <code class="prettyprint">true</code> if this stack is empty else <code class="prettyprint">false</code>.
-         */        
+         */
         public function isEmpty():Boolean
         {
             return _s.isEmpty() ;
@@ -144,16 +146,16 @@ package system.data.stacks
         /**
          * Returns the iterator reference of the object.
          * @return the iterator reference of the object.
-         */        
+         */
         public function iterator():Iterator
         {
             return _s.iterator() ;
-        }        
-                
+        }
+        
         /**
          * Returns the lastly pushed value without removing it.
          * @throws the lastly pushed value.
-         */        
+         */
         public function peek():*
         {
             return _s.peek() ;
@@ -162,7 +164,7 @@ package system.data.stacks
         /**
          * Removes and returns the lastly pushed value.
          * @return the lastly pushed value
-         */        
+         */
         public function pop():*
         {
             return _s.pop() ;
@@ -170,7 +172,7 @@ package system.data.stacks
         
         /**
          * Pushes the passed-in value to this stack.
-         */        
+         */
         public function push(o:*):void
         {
             validate( o ) ;
@@ -189,7 +191,7 @@ package system.data.stacks
         /**
          * Returns the number of elements in this collection.
          * @return the number of elements in this collection.
-         */        
+         */
         public function size():uint
         {
             return _s.size() ;
@@ -207,14 +209,14 @@ package system.data.stacks
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
-         */        
+         */
         public function toSource(indent:int = 0):String
         {
-            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-            s += Reflection.getClassPath( type ) ;
+            var s:String = "new " + getClassPath(this , true) + "(" ;
+            s += getClassPath( type , true ) ;
             if ( size() >  0 )
             {
-                s += "," + eden.serialize(_s) ;
+                s += "," + dump(_s) ;
             }
             s += ")" ;
             return s ;
@@ -238,7 +240,7 @@ package system.data.stacks
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         

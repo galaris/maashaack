@@ -35,6 +35,9 @@
 
 package system.data.maps 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.data.Collection;
     import system.data.Iterable;
@@ -43,7 +46,6 @@ package system.data.maps
     import system.data.MultiMap;
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
-    import system.eden;
     import system.hack;
     
     /**
@@ -466,7 +468,7 @@ package system.data.maps
                     put( key , value ) ;
                 }
             }
-        }      
+        }
         
         /**
          * Adds a collection of values to the collection associated with the specified key.
@@ -598,7 +600,7 @@ package system.data.maps
          */
         public function toSource(indent:int = 0):String
         {
-             return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( _map ) + ")" ;
+             return "new " + getClassPath(this, true) + "(" + dump( _map ) + ")" ;
         } 
         
         /**
@@ -694,7 +696,7 @@ package system.data.maps
         public function values():Collection 
         {
             return new ArrayCollection( getValues() ) ;
-        }        
+        }
         
         /**
          * Returns an Iterator representation of all values in the MultiValueMap.
