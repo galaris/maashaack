@@ -35,10 +35,10 @@
 
 package graphics.geom 
 {
+    import core.reflect.getClassPath;
+
     import graphics.numeric.Trigo;
-    
-    import system.Reflection;
-    
+
     /**
      * Quaternions are hypercomplex numbers used to represent spatial rotations in three dimensions. 
      * This class encapsulates an Hamiltonian quaternion having the form <code class="prettyprint">xi + yj + zk + w</code>.
@@ -445,7 +445,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" +  x.toString()  + "," + y.toString()  + "," + z.toString() + "," + w.toString() + ")" ;
+            return "new " + getClassPath(this , true) + "(" +  x.toString()  + "," + y.toString()  + "," + z.toString() + "," + w.toString() + ")" ;
         }
         
         /**

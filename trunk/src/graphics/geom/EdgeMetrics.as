@@ -35,8 +35,9 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     /**
      * The EdgeMetrics class specifies the thickness, in pixels, of the four edge regions around a visual component.
      */
@@ -151,7 +152,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + left.toString() + "," + top.toString() + "," + right.toString() + "," + bottom.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" + left.toString() + "," + top.toString() + "," + right.toString() + "," + bottom.toString() + ")" ;
         }
         
         /**
@@ -160,7 +161,7 @@ package graphics.geom
          */     
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + " left:" + left + " top:" + top + " right:" + right + " bottom:" + bottom + "]" ;
+            return "[" + getClassName(this) + " left:" + left + " top:" + top + " right:" + right + " bottom:" + bottom + "]" ;
         }
     }
 }

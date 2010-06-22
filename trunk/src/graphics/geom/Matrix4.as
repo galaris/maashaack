@@ -35,10 +35,12 @@
 
 package graphics.geom 
 {
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.eden;
     import system.numeric.Mathematics;
-    
+
     /**
      * Matrix with 4 rows and 4 columns.
      * <p><b>Example :</b></p>
@@ -377,7 +379,7 @@ package graphics.geom
         {
             var p:Array  = [n11,n12,n13,n14,n21,n22,n23,n24,n31,n32,n33,n34,n41,n42,n43,n44] ;
             var l:int    = p.length ;
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
+            var source:String = "new " + getClassPath(this, true) + "(" ;
             for( var i:int ; i<l ; i++)
             {
                 p[i] = eden.serialize( p[i] ) ;

@@ -35,9 +35,10 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    import system.eden;
-    
+    import core.dump;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     /**
      * Defines a <code class="prettyprint">Matrix</code> with n rows and n columns.
      */
@@ -139,7 +140,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize(r) + "," + eden.serialize(c) + "," + eden.serialize(m) + ")" ;
+            return "new " + getClassPath(this, true) + "(" + dump(r) + "," + dump(c) + "," + dump(m) + ")" ;
         }
         
         /**
@@ -148,7 +149,7 @@ package graphics.geom
          */     
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + ":{" + r + "," + c + "}]" ;
+            return "[" + getClassName(this) + ":{" + r + "," + c + "}]" ;
         }
         
     }

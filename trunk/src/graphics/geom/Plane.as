@@ -35,8 +35,9 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+
     /**
      * Plane representation is a two-dimensional doubly ruled surface in a 3D space. 
      * Used maily to represent the frustrum planes of the camera.
@@ -118,7 +119,7 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + a.toString() + "," + b.toString() + "," + c.toString() + "," + d.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" + a + "," + b + "," + c + "," + d + ")" ;
         }
         
         /**
@@ -127,7 +128,7 @@ package graphics.geom
          */     
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + ":{" + a + "," + b + "," + c + "," + d + "}]" ;
+            return "[" + getClassName(this) + ":{" + a + "," + b + "," + c + "," + d + "}]" ;
         }
     }
 }

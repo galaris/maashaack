@@ -91,7 +91,7 @@ package graphics.geom
         
         public function testToString():void
         {
-            assertEquals( d.toString() , "[Dimension width:100,height:200]", "DIM_04 - toString failed : " + d.toString() ) ;
+            assertEquals( d.toString() , "[Dimension width:100 height:200]", "DIM_04 - toString failed : " + d.toString() ) ;
         }
         
         public function testWidth():void
