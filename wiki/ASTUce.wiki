@@ -8,4 +8,6 @@ TODO
 
 == Details ==
 
-we may also inject this project into maashaack, not sure yet.
+TODO
+
+~~we may also inject this project into maashaack, not sure yet.~~
