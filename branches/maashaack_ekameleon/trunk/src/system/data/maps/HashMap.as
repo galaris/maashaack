@@ -35,12 +35,13 @@
 
 package system.data.maps
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassPath;
+    
     import system.data.Iterator;
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;
-    import system.eden;
     
     import flash.utils.Dictionary;
     
@@ -130,7 +131,7 @@ package system.data.maps
                 }
             }
         }
-                
+        
         /**
          * Removes all mappings from this map.
          */  
@@ -312,7 +313,7 @@ package system.data.maps
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
+            return "new " + getClassPath(this, true) + "(" + dump( getKeys() ) + "," + dump( getValues() ) + ")" ;
         }
         
         /**

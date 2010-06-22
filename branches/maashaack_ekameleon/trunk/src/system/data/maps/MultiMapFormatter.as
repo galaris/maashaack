@@ -54,7 +54,7 @@ package system.data.maps
          * The singleton reference of the MultiMapFormatter class.
          */
         public static const instance:MultiMapFormatter = new MultiMapFormatter() ;
-            
+        
         /**
          * Formats the specified value.
          * @param value The object to format.

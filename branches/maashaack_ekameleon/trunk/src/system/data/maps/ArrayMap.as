@@ -35,17 +35,19 @@
 
 package system.data.maps
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassPath;
+    
     import system.data.Iterator;
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
     import system.data.iterators.MapIterator;
-    import system.eden;
     import system.hack;
     
     /**
-     * Hash table based implementation of the Map interface. This implementation provides all of the optional map operations, and permits null values and the null key.
-     * <p>This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time.</p>
+     * Hash table based implementation of the Map interface. 
+     * This implementation provides all of the optional map operations, and permits null values and the null key.
+     * <p>This class makes guarantees to the order of the map.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.data.Map ;
@@ -348,7 +350,7 @@ package system.data.maps
             var v:* = _values[index] ;  // TODO refactoring
             if (v === undefined)
             {
-                return null ;   
+                return null ;
             }
             var k:* = _keys[index] ;
             _values[index] = value ;
@@ -370,7 +372,7 @@ package system.data.maps
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize( getKeys() ) + "," + eden.serialize( getValues() ) + ")" ;
+            return "new " + getClassPath(this, true) + "(" + dump( _keys ) + "," + dump( _values ) + ")" ;
         }
         
         /**

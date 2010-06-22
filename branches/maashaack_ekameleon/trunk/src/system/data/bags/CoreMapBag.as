@@ -35,6 +35,8 @@
 
 package system.data.bags
 {
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.data.Bag;
     import system.data.Collection;
@@ -46,9 +48,9 @@ package system.data.bags
     import system.data.lists.ArrayList;
     import system.data.maps.MapUtils;
     import system.data.sets.ArraySet;
-    
+
     import flash.errors.IllegalOperationError;
-    
+
     /**
      * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
      * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
@@ -425,10 +427,7 @@ package system.data.bags
          */
         public function toSource( indent:int = 0 ):String  
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "(" ;
-            source += _map.toSource() ;
-            source += ")" ;
-            return source ; 
+            return "new " + getClassPath(this, true) + "(" + _map.toSource() + ")" ; 
         }
         
         /**

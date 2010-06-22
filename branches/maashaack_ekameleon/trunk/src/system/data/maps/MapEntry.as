@@ -35,8 +35,9 @@
 
 package system.data.maps 
 {
+    import core.reflect.getClassName;
+
     import system.Cloneable;
-    import system.Reflection;
     import system.data.Entry;
     
     /**
@@ -93,7 +94,7 @@ package system.data.maps
          */
         public function clone():*
         {
-            return new MapEntry(key,value);
+            return new MapEntry( key , value ) ;
         }
         
         /**
@@ -102,7 +103,7 @@ package system.data.maps
          */
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + " key:" + key + " value:" + value + "]" ;
+            return "[" + getClassName(this) + " key:" + key + " value:" + value + "]" ;
         }
         
         /**

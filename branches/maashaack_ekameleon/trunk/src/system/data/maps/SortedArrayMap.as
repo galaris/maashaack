@@ -267,7 +267,7 @@ package system.data.maps
         {
             var compare:Function = _comparator.compare as Function ;
             
-            var max:Number = size() ;
+            var max:uint = size() ;
             
             if (compare == null && !(max > 0) )
             {
