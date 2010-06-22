@@ -35,13 +35,14 @@
 
 package system.data.arrays 
 {
+    import core.dump;
+    import core.reflect.getClassPath;
+    
     import system.Cloneable;
-    import system.Reflection;
     import system.Serializable;
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.serializers.eden.BuiltinSerializer;
     
     import flash.utils.Proxy;
     import flash.utils.flash_proxy;
@@ -217,7 +218,7 @@ package system.data.arrays
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + (_ar.length > 0 ? BuiltinSerializer.emitArray( _ar ) : "" ) + ")" ;
+            return "new " + getClassPath(this, true) + "(" + (_ar.length > 0 ? dump( _ar ) : "" ) + ")" ;
         }
         
         /**

@@ -35,12 +35,13 @@
 
 package system.data.arrays
 {
+    import core.reflect.getClassPath;
+
     import system.Reflection;
     import system.data.Typeable;
     import system.data.Validator;
-    import system.data.arrays.ProxyArray;
     import system.eden;
-    
+
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
      * <p><b>Example :</b></p>
@@ -199,8 +200,8 @@ package system.data.arrays
          */
         public override function toSource( indent:int = 0 ):String 
         {
-            var s:String = "new " + Reflection.getClassPath(this) + "(" ;
-            s +=  _type != null ? Reflection.getClassPath(_type) : "null" ;
+            var s:String = "new " + getClassPath(this, true) + "(" ;
+            s +=  _type != null ? getClassPath(_type, true) : "null" ;
             if ( _ar.length > 0 )
             {
                 var l:int = _ar.length ;
