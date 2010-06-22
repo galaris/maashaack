@@ -2,7 +2,7 @@
  * [Introduction Introduction]
    * [Philosophy Philosophy]
    * [Projects Projects]
-     * [Framework Application Framework]
+     * [Framework Maashaack Application Framework]
      * [edenRR eden RR]
      * [ASTUce ASTUce]
    * [History History]
