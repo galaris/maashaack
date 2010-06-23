@@ -33,15 +33,15 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.filters.assets 
+package graphics.filters 
 {
     import flash.utils.ByteArray;
+
+    [Embed("../../../pixelbender/pbj/RippleBlocks.pbj", mimeType="application/octet-stream")]
     
-    [Embed("../../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
-    
-    public class Hole extends ByteArray 
+    public class RippleBlocks extends ByteArray 
     {
-        public function Hole()
+        public function RippleBlocks()
         {
             //
         }

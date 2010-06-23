@@ -35,11 +35,9 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import graphics.filters.assets.GrayScale;
-    
+
     import flash.display.Shader;
-    
+
     public class GrayScaleFilterTest extends TestCase 
     {
         public function GrayScaleFilterTest(name:String = "")
