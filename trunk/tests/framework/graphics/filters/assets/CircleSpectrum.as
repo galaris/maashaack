@@ -32,65 +32,18 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package graphics.filters 
+
+package graphics.filters.assets 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import flash.utils.ByteArray;
+
+    [Embed("../../../../../pixelbender/pbj/CircleSpectrum.pbj", mimeType="application/octet-stream")]
     
-    import graphics.filters.assets.RoundPixel;
-    
-    import flash.display.Shader;
-    
-    public class ShaderCustomFilterTest extends TestCase 
+    public class CircleSpectrum extends ByteArray 
     {
-        public function ShaderCustomFilterTest(name:String = "")
+        public function CircleSpectrum()
         {
-            super(name);
+            //
         }
-        
-        public var filter:ShaderCustomFilter ;
-        public var shader:Shader ;
-        
-        public function setUp():void
-        {
-            shader = new Shader( new RoundPixel() ) ;
-            filter = new ShaderCustomFilter( shader ) ;
-        }
-        
-        public function tearDown():void
-        {
-            shader = null ;
-            filter = null ;
-        }
-        
-        public function testConstructor():void
-        {
-            assertNotNull( filter ) ;
-        }
-        
-        public function testDescription():void
-        {
-            assertEquals( "Rounds the pixels." , filter.description ) ;
-        }
-        
-        public function testName():void
-        {
-            assertEquals( "RoundPixel" , filter.name ) ; 
-        }
-        
-        public function testNamespace():void
-        {
-            assertEquals( "graphics.filters" , filter.namespace ) ;
-        }
-        
-        public function testVersion():void
-        {
-            assertEquals( filter.version , 1 ) ; 
-        }
-        
-        public function testClone():void
-        {
-            var clone:ShaderCustomFilter = filter.clone() as ShaderCustomFilter ;
-            assertNotNull( clone ) ;
-            assertEquals( clone.shader , filter.shader ) ;        }
     }
 }

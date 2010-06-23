@@ -36,6 +36,8 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import graphics.filters.assets.WaveReflection;
+    
     import flash.display.Shader;
     
     public class WaveReflectionFilterTest extends TestCase 
@@ -44,9 +46,6 @@ package graphics.filters
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/WaveReflection.pbj", mimeType="application/octet-stream")]
-        private var WaveReflection:Class ;
         
         public var filter:WaveReflectionFilter ;
         public var shader:Shader ;

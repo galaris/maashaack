@@ -35,18 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.RippleBlocks;
+
     import flash.display.Shader;
-    
+
     public class RippleBlocksFilterTest extends TestCase 
     {
         public function RippleBlocksFilterTest(name:String = "")
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/RippleBlocks.pbj", mimeType="application/octet-stream")]
-        private var RippleBlocks:Class ;
         
         public var filter:RippleBlocksFilter ;
         public var shader:Shader ;

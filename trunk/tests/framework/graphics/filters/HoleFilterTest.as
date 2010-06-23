@@ -35,19 +35,18 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.Hole;
+
     import flash.display.Shader;
     import flash.geom.Point;
-    
+
     public class HoleFilterTest extends TestCase 
     {
         public function HoleFilterTest(name:String = "")
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
-        private var Hole:Class ;
         
         public var center:Point ;
         public var filter:HoleFilter ;

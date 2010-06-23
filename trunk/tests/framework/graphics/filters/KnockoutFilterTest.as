@@ -36,6 +36,8 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import graphics.filters.assets.Knockout;
+    
     import flash.display.Shader;
     
     public class KnockoutFilterTest extends TestCase 
@@ -44,9 +46,6 @@ package graphics.filters
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/Knockout.pbj", mimeType="application/octet-stream")]
-        private var Knockout:Class ;
         
         public var color:uint = 0xFF0000 ;
         public var filter:KnockoutFilter ;
