@@ -35,25 +35,26 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
-
+    import graphics.filters.AlphaMatte;
+    
     import flash.display.GradientType;
     import flash.display.Loader;
+    import flash.display.Shader;
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.geom.Matrix;
     import flash.net.URLRequest;
-    
+
     [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
      * Test the graphics.filters.AlphaMatteFilter class, this example work only with a FP10 or sup.
      */
-    public class AlphaMatteFilterExample extends Sprite 
+    public class AlphaMatteExample extends Sprite 
     {
-        public function AlphaMatteFilterExample()
+        public function AlphaMatteExample()
         {
             // stage
             
@@ -83,34 +84,23 @@ package examples
             pictureMask = new Shape() ;
             
             container.addChild( pictureMask ) ;
-            
-            // shader
-            
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , completeShader ) ;
-            
         }
         
         public var container:Sprite ;
-        public var loader:ShaderLoader ;
         public var picture:Loader ;
         public var pictureMask:Shape ;
         
         public function completePicture( e:Event ):void
         {
-            loader.load( new URLRequest( "pbj/AlphaMatte.pbj" ) ) ;
-        }
-        
-        public function completeShader( e:Event ):void
-        {
             var gradientMatrix:Matrix = new Matrix();
+            
             gradientMatrix.createGradientBox(picture.width, picture.height, 0, 0, 0);
             
             pictureMask.graphics.beginGradientFill(GradientType.RADIAL, [0xFFFFFF, 0x000000], [1, 1], [0, 255], gradientMatrix);
             pictureMask.graphics.drawRect(0, 0, picture.width, picture.height);
             pictureMask.graphics.endFill();
             
-            pictureMask.blendShader = loader.shader ;
+            pictureMask.blendShader = new Shader( new AlphaMatte() ) ;
         }
     }
 }
