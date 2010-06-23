@@ -48,6 +48,7 @@
     
     <component id="graphics.colors:RGB"           class="graphics.colors.RGB" />
     <component id="graphics.colors:RGB2CMY"       class="graphics.colors.RGB2CMY" />
+    <component id="graphics.colors:RGB2HSL"       class="graphics.colors.RGB2HSL" />
     
     <component id="graphics.colors:RGBA"          class="graphics.colors.RGBA" />
     
