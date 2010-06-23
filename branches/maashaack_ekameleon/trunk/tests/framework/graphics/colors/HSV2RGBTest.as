@@ -33,45 +33,34 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
+
+    public class HSV2RGBTest extends TestCase 
+    {        public function HSV2RGBTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var hsv:HSV ;
+            var rgb:RGB ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            hsv = new HSV( 0 , 1 , 1 ) ;
+            rgb = HSV2RGB( hsv ) ;
+            assertEquals(rgb.r , 255 , "01-01 toRGB method failed.") ;
+            assertEquals(rgb.g , 0   , "01-02 toRGB method failed.") ;
+            assertEquals(rgb.b , 0   , "01-03 toRGB method failed.") ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
-            suite.addTestSuite( HSV2RGBTest ) ;
-            suite.addTestSuite( HSV2RGBNumberTest ) ;
+            hsv = new HSV( 120 , 0.5 ,1 ) ;
+            rgb = HSV2RGB( hsv ) ;
+            assertEquals(rgb.r , 127 , "02-01 toRGB method failed.") ;
+            assertEquals(rgb.g , 255 , "02-02 toRGB method failed.") ;
+            assertEquals(rgb.b , 127 , "02-03 toRGB method failed.") ;
             
-            return suite;
+            hsv = new HSV( 240 , 1 , 0.5 ) ;
+            rgb = HSV2RGB( hsv ) ;
+            assertEquals(rgb.r , 0   , "03-01 toRGB method failed.") ;
+            assertEquals(rgb.g , 0   , "03-02 toRGB method failed.") ;
+            assertEquals(rgb.b , 127 , "03-03 toRGB method failed.") ;
         }
-    }
-}
+    }}
