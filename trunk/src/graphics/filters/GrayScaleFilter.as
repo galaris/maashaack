@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
-    
+
     /**
      * The GrayScaleFilter class applies a gray scale color transformation over a display or a bitmap. This filter use the algorithm from ITU-R Recommendation BT.709.
      * The Shader must be defines with the GrayScale pixelbender implementation.
@@ -52,7 +52,7 @@ package graphics.filters
          */
         public function GrayScaleFilter( shader:Shader = null , init:Object = null)
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new GrayScale() ) , init ) ;
         }
         
         /**

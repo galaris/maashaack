@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/GrayScale.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender GrayScale effect to initialize a Shader in the GrayScaleFilter class.
+     */
     public class GrayScale extends ByteArray 
     {
+        /**
+         * Creates a new GrayScale instance.
+         */
         public function GrayScale()
         {
             //

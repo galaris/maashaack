@@ -38,7 +38,7 @@ package graphics.filters
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
     import flash.geom.Point;
-
+    
     /**
      * The HoleFilter class applies a hole mask over a display or a bitmap. 
      * The Shader must be defines with the Hole pixelbender implementation.
@@ -52,7 +52,7 @@ package graphics.filters
          */
         public function HoleFilter( shader:Shader = null , init:Object = null)
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new Hole() ) , init ) ;
         }
         
         /**

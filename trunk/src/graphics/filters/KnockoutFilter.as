@@ -36,10 +36,10 @@
 package graphics.filters 
 {
     import graphics.colors.RGB;
-    
+
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
-    
+
     /**
      * The KnockoutFilter class applies a filter by executing a shader on the object being filtered. 
      * The Shader must be defines with the Knockout pixelbender implementation.
@@ -53,7 +53,7 @@ package graphics.filters
          */
         public function KnockoutFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader, init );
+            super( shader || new Shader( new Knockout() ) , init );
         }
         
         /**

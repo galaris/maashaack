@@ -36,11 +36,17 @@
 package graphics.filters 
 {
     import flash.utils.ByteArray;
-
+    
     [Embed("../../../pixelbender/pbj/Knockout.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender Knockout effect to initialize a Shader in the KnockoutFilter class.
+     */
     public class Knockout extends ByteArray 
     {
+        /**
+         * Creates a new Knockout instance.
+         */
         public function Knockout()
         {
             //

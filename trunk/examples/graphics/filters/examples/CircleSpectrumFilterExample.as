@@ -35,17 +35,15 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.CircleSpectrumFilter;
-
+    
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
-    import flash.net.URLRequest;
     import flash.ui.Keyboard;
-
+    
     [SWF(width="760", height="460", frameRate="30", backgroundColor="0x666666")]
     
     /**
@@ -59,7 +57,13 @@ package examples
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
-            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown   ) ;
+            stage.addEventListener( MouseEvent.MOUSE_DOWN  , mouseDown ) ;
+            stage.addEventListener( MouseEvent.MOUSE_UP    , mouseUp   ) ;
+            
+            // filter
+            
+            filter = new CircleSpectrumFilter() ;
             
             // view
             
@@ -71,27 +75,14 @@ package examples
             wheel.graphics.beginFill(0,0) ;
             wheel.graphics.drawRect(0,0,200, 200) ; // Note : import to draw something in the area !
             
-            wheel.addEventListener( MouseEvent.MOUSE_DOWN , mouseDown ) ;
-            wheel.addEventListener( MouseEvent.MOUSE_UP   , mouseUp   ) ;
+            wheel.filters = [ filter ] ;
             
             addChild( wheel ) ;
-            
-            // run
-            
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/CircleSpectrum.pbj" ) ) ;
         }
         
         public var filter:CircleSpectrumFilter ;
-        public var loader:ShaderLoader ;
-        public var wheel:Sprite ;
         
-        protected function complete( e:Event ):void
-        {
-            filter        = new CircleSpectrumFilter( loader.shader ) ;
-            wheel.filters = [ filter ] ;
-        }
+        public var wheel:Sprite ;
         
         protected function keyDown( e:KeyboardEvent ):void
         {
