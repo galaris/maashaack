@@ -50,6 +50,7 @@
     <component id="graphics.colors:RGB2CMY"       class="graphics.colors.RGB2CMY" />
     <component id="graphics.colors:RGB2HSL"       class="graphics.colors.RGB2HSL" />
     <component id="graphics.colors:RGB2HSV"       class="graphics.colors.RGB2HSV" />
+    <component id="graphics.colors:RGB2XYZ"       class="graphics.colors.RGB2XYZ" />
     
     <component id="graphics.colors:RGBA"          class="graphics.colors.RGBA" />
     
