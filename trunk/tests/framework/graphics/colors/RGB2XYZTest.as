@@ -33,49 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+    public class RGB2XYZTest extends TestCase 
+    {        public function RGB2XYZTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var rgb:RGB = new RGB( 10, 10, 10) ;
+            var xyz:XYZ = RGB2XYZ( rgb ) ; // 
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
-            
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
-            suite.addTestSuite( HSV2RGBTest       ) ;
-            suite.addTestSuite( HSV2RGBNumberTest ) ;
-            suite.addTestSuite( RGB2CMYTest       ) ;
-            suite.addTestSuite( RGB2HSLTest       ) ;
-            suite.addTestSuite( RGB2HSVTest       ) ;
-            suite.addTestSuite( RGB2XYZTest       ) ;
-            
-            return suite;
+            assertEquals( xyz.X , 0.28850239786317    , "01 - Colors.RGB2XYZ failed with the X property.") ;
+            assertEquals( xyz.Y , 0.3035269835488375  , "02 - Colors.RGB2XYZ failed with the Y property.") ;
+            assertEquals( xyz.Z , 0.33054088508468404 , "03 - Colors.RGB2XYZ failed with the Z property.") ;
         }
-    }
-}
+    }}
