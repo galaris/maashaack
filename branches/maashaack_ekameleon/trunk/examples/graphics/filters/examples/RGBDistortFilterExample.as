@@ -35,18 +35,17 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.RGBDistortFilter;
-
+    
     import system.numeric.Mathematics;
-
+    
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
-
+    
     /**
      * Test the graphics.filters.RGBDistortFilter class, this example work only with a FP10 or sup.
      */
@@ -71,21 +70,8 @@ package examples
             
             addChild( picture ) ;
             
-            // shader
+            // filter
             
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/RGBDistort.pbj" ) ) ;
-        }
-        
-        public var filter:RGBDistortFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
             var init:Object = 
             {
                 redDirection   :  1.00 ,
@@ -101,7 +87,7 @@ package examples
                 blueIntensity  :  0.40 
             };
             
-            filter = new RGBDistortFilter( loader.shader , init ) ;
+            filter = new RGBDistortFilter( null , init ) ;
             
             trace( "name        : " + filter.name      ) ;
             trace( "namespace   : " + filter.namespace ) ;
@@ -110,6 +96,10 @@ package examples
             
             picture.filters = [ filter ] ;
         }
+        
+        public var filter:RGBDistortFilter ;
+        
+        public var picture:Loader ;
         
         public function update( e:Event ):void
         {

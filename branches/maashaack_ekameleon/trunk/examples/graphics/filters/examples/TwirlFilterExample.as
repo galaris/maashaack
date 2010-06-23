@@ -35,7 +35,6 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.TwirlFilter;
     
     import flash.display.Loader;
@@ -60,7 +59,6 @@ package examples
             // picture
             
             picture = new Loader() ;
-            picture.contentLoaderInfo.addEventListener( Event.COMPLETE , run ) ;
             
             picture.addEventListener( MouseEvent.MOUSE_DOWN , mouseDown ) ;
             picture.addEventListener( MouseEvent.MOUSE_MOVE , mouseMove ) ;
@@ -72,17 +70,10 @@ package examples
             picture.load( new URLRequest("library/picture.jpg") ) ;
             
             addChild( picture ) ;
-        }
-        
-        public var filter:TwirlFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        protected function complete( e:Event ):void
-        {
-            filter = new TwirlFilter( loader.shader ) ;
+            
+            // filter
+            
+            filter = new TwirlFilter() ;
             
             filter.bottomExtension = 100 ;
             filter.leftExtension   = 100 ;
@@ -95,6 +86,10 @@ package examples
             picture.filters = [ filter ] ;
         }
         
+        public var filter:TwirlFilter ;
+        
+        public var picture:Loader ;
+        
         protected function mouseDown( e:Event ):void
         {
             if ( filter != null )
@@ -103,7 +98,9 @@ package examples
                 filter.angle    = 10 ;
                 filter.radius   = 10 ;
                 filter.center   = new Point( picture.mouseX , picture.mouseY ) ;
+                
                 picture.filters = [ filter ] ;
+                
                 addEventListener( Event.ENTER_FRAME , render ) ;
             }
         }
@@ -130,13 +127,6 @@ package examples
             filter.angle  += 10 ;
             filter.radius += 10 ;
             picture.filters = [ filter ] ;
-        }
-        
-        protected function run( e:Event ):void
-        {
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Twirl.pbj" ) ) ;
         }
     }
 }
