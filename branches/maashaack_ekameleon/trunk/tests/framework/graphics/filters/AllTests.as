@@ -46,6 +46,13 @@ package graphics.filters
             suite.addTestSuite( CircleSpectrumTest ) ;
             suite.addTestSuite( GrayScaleTest ) ;
             suite.addTestSuite( HoleTest ) ;
+            suite.addTestSuite( KnockoutTest ) ;
+            suite.addTestSuite( ReflectionTest ) ;
+            suite.addTestSuite( RGBDistortTest ) ;
+            suite.addTestSuite( RippleBlocksTest ) ;
+            suite.addTestSuite( RoundPixelTest ) ;
+            suite.addTestSuite( SharpenTest ) ;
+            suite.addTestSuite( TwirlTest ) ;            suite.addTestSuite( WaveReflectionTest ) ;
             
             suite.addTestSuite( CircleSpectrumFilterTest ) ;
             suite.addTestSuite( FiltersTest ) ;
