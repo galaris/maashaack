@@ -3,9 +3,56 @@
 
 == Introduction ==
 
-TODO
+avmglue is an open source implementation of the following runtimes API:
+ * Flash Player 9
+ * Flash Player 10
+ * Flash Player 10.1
+ * AIR 1.0
+ * AIR 1.5
+ * AIR 2.0
 
+We will refer to it as the Flash Platform API , shortened to *FPAPI*.
+
+Based on publicly accessible documentation:
+[http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/package-summary.html BETA ActionScript 3.0 Reference for the Adobe Flash Platform]<br>
+[http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/ ActionScript 3.0 Reference for the Adobe Flash Platform]<br>
+[http://help.adobe.com/en_US/AS3LCR/Flash_10.0/ Flash CS4 Professional ActionScript 3.0 Language Reference]<br>
+etc.
+
+The goal is to implement in AS3 and/or native C/C++ the FPAPI in order to generate `*.abc` files compatible with [http://www.mozilla.org/projects/tamarin/ Tamarin].
+
+This platform library is used by [http://code.google.com/p/redtamarin/ redtamarin].
 
 == Details ==
 
-TODO
+You have a great program in AS3 working with Flash Player or AIR
+but you want to reuse it or part of the source code in a command line tool
+
+something like
+{{{
+package
+{
+    import flash.display.Sprite;
+
+    public class Main extends Sprite
+    {
+        //...
+    }
+}
+}}}
+
+will simply not work in the context of Tamarin because there is no `Sprite` class definition.
+
+<br><br>
+
+You need to mock FPAPI classes for particular tests and/or unit tests,
+the problem is that those classes are only available trough `playerglobal.swc`, `airglobal.swc`, etc.
+and in fact are embedded directly in the runtime executable, you can not change them.
+
+By using *avmglue* and Tamarin, you can change those classes,<br>
+for ex: you can force the locale to be `FR_fr` on a `US_gb` system<br>
+or you can emulate the domain `www.domain.com` on your localhost<br>
+etc.
+
+
+
