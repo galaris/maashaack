@@ -1,7 +1,14 @@
 #summary list of different projects.
 #labels Code,Projects-X
 
-== Introduction ==
+The *maashaack application framework*<br>
+is a set of different modular projects assembled together<br>
+to produce a coherent set of AS3 classes, packages and libraries<br>
+which represent our ideal of "programming in the large".
+
+[Framework Maashaack Application Framework]
+
+<br><br>
 
 The *maashaack projects*<br>
 are independent modules which focus on one particular set of problem,<br>
@@ -11,15 +18,11 @@ One of the goal is to write first applications and then reinject the general cod
 
 It could become part of the packages, libraries, platform libraries or tools, see the [OverView documentation overview].
 
-
-== List of Projects ==
-
-Here is the list of differents projects worked upon.
-
 Off course if you feel you're into that [Philosophy], you're welcome to participate
 with your own project, see [Organization#Add_your_Project_to_maashaack add your Project to maashaack].
 
-  * [Framework Maashaack Application Framework]
+Here is the list of differents projects worked upon
+
   * [ASTUce ASTUce]
   * [edenRR eden RR]
   * [avmglue avmglue]
