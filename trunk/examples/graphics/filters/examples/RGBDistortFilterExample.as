@@ -103,7 +103,7 @@ package examples
         
         public function update( e:Event ):void
         {
-            if ( filter != null )
+            if ( filter )
             {
                 filter.redFrequency   = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
                 filter.greenFrequency = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;

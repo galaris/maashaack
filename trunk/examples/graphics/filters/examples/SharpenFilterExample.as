@@ -35,18 +35,17 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.SharpenFilter;
-    
+
     import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
-    
+
     /**
      * Test the graphics.filters.SharpenFilter class, this example work only with a FP10 or sup.
      */
@@ -71,28 +70,15 @@ package examples
             
             addChild( picture ) ;
             
-            // shader
+            // filter
             
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Sharpen.pbj" ) ) ;
-        }
-        
-        public var filter:SharpenFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
             var init:Object = 
             {
                 amount : 15.0 ,
                 radius :  0.3 
             };
             
-            filter = new SharpenFilter( loader.shader , init ) ;
+            filter = new SharpenFilter( null , init ) ;
             
             trace( "name        : " + filter.name        ) ;
             trace( "namespace   : " + filter.namespace   ) ;
@@ -101,6 +87,10 @@ package examples
             
             picture.filters = [ filter ] ;
         }
+        
+        public var filter:SharpenFilter ;
+        
+        public var picture:Loader ;
         
         public function update( e:Event ):void
         {

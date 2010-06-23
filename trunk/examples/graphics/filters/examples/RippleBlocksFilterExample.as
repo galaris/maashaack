@@ -35,11 +35,10 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.RippleBlocksFilter;
-    
+
     import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -71,21 +70,8 @@ package examples
             
             addChild( picture ) ;
             
-            // shader
+            // filter
             
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/RippleBlocks.pbj" ) ) ;
-        }
-        
-        public var filter:RippleBlocksFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
             var init:Object = 
             {
                 amplitudeX : 44 ,
@@ -96,10 +82,14 @@ package examples
                 waveY      : 60 
             };
             
-            filter = new RippleBlocksFilter( loader.shader , init ) ;
+            filter = new RippleBlocksFilter( null , init ) ;
             
             picture.filters = [ filter ] ;
         }
+        
+        public var filter:RippleBlocksFilter ;
+        
+        public var picture:Loader ;
         
         public function update( e:Event ):void
         {
@@ -107,6 +97,7 @@ package examples
             {
                 filter.phaseX =  Mathematics.map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
                 filter.waveY  =  Mathematics.map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
+                
                 picture.filters = [ filter ] ;
             }
         }
