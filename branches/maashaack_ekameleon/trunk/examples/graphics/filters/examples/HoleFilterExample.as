@@ -35,9 +35,8 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.HoleFilter;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -45,7 +44,7 @@ package examples
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.net.URLRequest;
-    
+
     /**
      * Test the graphics.filters.HoleFilter class, this example work only with a FP10 or sup.
      */
@@ -57,17 +56,25 @@ package examples
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
+            // filter
+            
+            filter = new HoleFilter() ;
+            
+            filter.center = new Point( 120 , 120 ) ;
+            filter.radius = 80 ;
+            
             // picture
             
             picture = new Loader() ;
-            picture.contentLoaderInfo.addEventListener( Event.COMPLETE , run ) ;
+            
+            picture.x = 20 ;
+            picture.y = 20 ;
+            
+            picture.filters = [ filter ] ;
             
             picture.addEventListener( MouseEvent.MOUSE_DOWN , mouseDown ) ;
             picture.addEventListener( MouseEvent.MOUSE_MOVE , mouseMove ) ;
             picture.addEventListener( MouseEvent.MOUSE_UP   , mouseUp   ) ;
-            
-            picture.x = 20 ;
-            picture.y = 20 ;
             
             picture.load( new URLRequest("library/picture.jpg") ) ;
             
@@ -76,19 +83,7 @@ package examples
         
         public var filter:HoleFilter ;
         
-        public var loader:ShaderLoader ;
-        
         public var picture:Loader ;
-        
-        protected function complete( e:Event ):void
-        {
-            filter = new HoleFilter( loader.shader ) ;
-            
-            filter.center = new Point( picture.width / 2 , picture.height / 2 ) ;
-            filter.radius = 80 ;
-            
-            picture.filters = [ filter ] ;
-        }
         
         protected function mouseDown( e:Event ):void
         {
@@ -122,13 +117,6 @@ package examples
         {
             filter.radius += 10 ;
             picture.filters = [ filter ] ;
-        }
-        
-        protected function run( e:Event ):void
-        {
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Hole.pbj" ) ) ;
         }
     }
 }

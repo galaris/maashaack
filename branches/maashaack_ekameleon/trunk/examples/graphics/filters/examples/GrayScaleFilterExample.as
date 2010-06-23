@@ -35,7 +35,6 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.GrayScaleFilter;
     
     import system.numeric.Mathematics;
@@ -58,6 +57,20 @@ package examples
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
+            // filter
+            
+            var init:Object = 
+            {
+                scale : 1  
+            };
+            
+            filter = new GrayScaleFilter( null , init ) ;
+            
+            trace( "name        : " + filter.name        ) ;
+            trace( "namespace   : " + filter.namespace   ) ;
+            trace( "version     : " + filter.version     ) ;
+            trace( "description : " + filter.description ) ;
+            
             // picture
             
             picture = new Loader() ;
@@ -67,39 +80,16 @@ package examples
             picture.x = 20 ;
             picture.y = 20 ;
             
+            picture.filters = [ filter ] ;
+            
             picture.load( new URLRequest("library/picture.jpg") ) ;
             
             addChild( picture ) ;
-            
-            // shader
-            
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/GrayScale.pbj" ) ) ;
         }
         
         public var filter:GrayScaleFilter ;
         
-        public var loader:ShaderLoader ;
-        
         public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
-            var init:Object = 
-            {
-                scale : 1  
-            };
-            
-            filter = new GrayScaleFilter( loader.shader , init ) ;
-            
-            trace( "name        : " + filter.name        ) ;
-            trace( "namespace   : " + filter.namespace   ) ;
-            trace( "version     : " + filter.version     ) ;
-            trace( "description : " + filter.description ) ;
-            
-            picture.filters = [ filter ] ;
-        }
         
         public function update( e:Event ):void
         {

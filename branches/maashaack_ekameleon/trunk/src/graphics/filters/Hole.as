@@ -39,8 +39,14 @@ package graphics.filters
     
     [Embed("../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender Hole effect to initialize a Shader in the HoleFilter class.
+     */
     public class Hole extends ByteArray 
     {
+        /**
+         * Creates a new Hole instance.
+         */
         public function Hole()
         {
             //

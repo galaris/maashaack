@@ -50,9 +50,9 @@ package graphics.filters
          * @param shader The Shader reference with the Hole pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function CircleSpectrumFilter(shader:Shader = null, init:Object = null)
+        public function CircleSpectrumFilter( shader:Shader = null , init:Object = null )
         {
-            super(shader, init);
+            super( shader || new Shader( new CircleSpectrum() ) , init);
         }
         
         /**
