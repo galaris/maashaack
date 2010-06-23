@@ -33,43 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
+
+    public class HSL2RGBTest extends TestCase 
+    {        public function HSL2RGBTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var hsl:HSL ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            hsl = new HSL( 0 , 1 , 0.5 ) ;
+            assertEquals( HSL2RGB( hsl ) , new RGB(0xFF,0x00,0x00) , "01 - Colors.HSL2RGB method failed.") ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
+            hsl = new HSL( 120 , 1, 0.5 ) ;
+            assertEquals( HSL2RGB( hsl ) , new RGB(0x00,0xFF,0x00) , "02 - Colors.HSL2RGB method failed.") ;
             
-            return suite;
+            hsl = new HSL( 240 , 1 , 0.5 ) ;
+            assertEquals( HSL2RGB( hsl ) , new RGB(0x00,0x00,0xFF) , "03 - Colors.HSL2RGB method failed.") ;
         }
-    }
-}
+    }}

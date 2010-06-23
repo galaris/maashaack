@@ -33,43 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
+
+    public class HSL2RGBNumberTest extends TestCase 
+    {        public function HSL2RGBNumberTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var hsl:HSL    ;
+            var rgb:Number ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            hsl = new HSL( 0 , 1 , 0.5 ) ;
+            rgb = HSL2RGBNumber( hsl ) ;
+            assertEquals( rgb , 0xFF0000 , "01" ) ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
+            hsl = new HSL( 120 , 1, 0.5 ) ;
+            rgb = HSL2RGBNumber( hsl ) ;
+            assertEquals( rgb , 0x00FF00 , "02" ) ;
             
-            return suite;
+            hsl = new HSL( 240 , 1 , 0.5 ) ;
+            rgb = HSL2RGBNumber( hsl ) ;
+            assertEquals( rgb , 0x0000FF , "03" ) ;
         }
-    }
-}
+    }}

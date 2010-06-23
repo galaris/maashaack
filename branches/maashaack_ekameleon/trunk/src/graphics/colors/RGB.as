@@ -114,7 +114,7 @@ package graphics.colors
         
         /**
          * The green component, between 0 and 255.
-         */        
+         */
         public function get g():uint
         {
             return _green ;
@@ -147,7 +147,7 @@ package graphics.colors
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         public function clone():* 
         {
             return new RGB( _red , _green , _blue ) ;
@@ -281,7 +281,7 @@ package graphics.colors
          * @return The base 10 representation of the specified red, green, blue components.
          */
         public static function toNumber( r:Number, g:Number, b:Number ):Number  
-        {    
+        {
             return ( r << 16 ) | ( g << 8 ) | b ;
         }
         

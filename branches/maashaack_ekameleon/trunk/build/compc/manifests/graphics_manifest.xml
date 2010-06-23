@@ -26,21 +26,24 @@
     
     <!-- graphics.colors -->
     
-    <component id="graphics.colors:CMY"        class="graphics.colors.CMY" />
-    <component id="graphics.colors:CMY2CMYK"   class="graphics.colors.CMY2CMYK" />
-    <component id="graphics.colors:CMY2RGB"    class="graphics.colors.CMY2RGB" />
-    <component id="graphics.colors:CMYK"       class="graphics.colors.CMYK" />
-    <component id="graphics.colors:CMYK2CMY"   class="graphics.colors.CMYK2CMY" />
-    <component id="graphics.colors:Colors"     class="graphics.colors.Colors" />
-    <component id="graphics.colors:ColorSpace" class="graphics.colors.ColorSpace" />
-    <component id="graphics.colors:HSL"        class="graphics.colors.HSL" />
-    <component id="graphics.colors:HSV"        class="graphics.colors.HSV" />
-    <component id="graphics.colors:RGB"        class="graphics.colors.RGB" />
-    <component id="graphics.colors:RGBA"       class="graphics.colors.RGBA" />
-    <component id="graphics.colors:Trismulus"  class="graphics.colors.Trismulus" />
-    <component id="graphics.colors:XYZ"        class="graphics.colors.XYZ" />
-    <component id="graphics.colors:YUV"        class="graphics.colors.YUV" />
-    <component id="graphics.colors:Yxy"        class="graphics.colors.Yxy" />
+    <component id="graphics.colors:CMY"           class="graphics.colors.CMY" />
+    <component id="graphics.colors:CMY2CMYK"      class="graphics.colors.CMY2CMYK" />
+    <component id="graphics.colors:CMY2RGB"       class="graphics.colors.CMY2RGB" />
+    <component id="graphics.colors:CMYK"          class="graphics.colors.CMYK" />
+    <component id="graphics.colors:CMYK2CMY"      class="graphics.colors.CMYK2CMY" />
+    <component id="graphics.colors:Colors"        class="graphics.colors.Colors" />
+    <component id="graphics.colors:ColorSpace"    class="graphics.colors.ColorSpace" />
+    <component id="graphics.colors:HSL"           class="graphics.colors.HSL" />
+    <component id="graphics.colors:HSL2RGB"       class="graphics.colors.HSL2RGB" />
+    <component id="graphics.colors:HSL2RGBNumber" class="graphics.colors.HSL2RGBNumber" />
+    <component id="graphics.colors:HSV"           class="graphics.colors.HSV" />
+    <component id="graphics.colors:HUE2RGB"       class="graphics.colors.HUE2RGB" />
+    <component id="graphics.colors:RGB"           class="graphics.colors.RGB" />
+    <component id="graphics.colors:RGBA"          class="graphics.colors.RGBA" />
+    <component id="graphics.colors:Trismulus"     class="graphics.colors.Trismulus" />
+    <component id="graphics.colors:XYZ"           class="graphics.colors.XYZ" />
+    <component id="graphics.colors:YUV"           class="graphics.colors.YUV" />
+    <component id="graphics.colors:Yxy"           class="graphics.colors.Yxy" />
     
     <!-- graphics.display -->
     
