@@ -45,6 +45,7 @@ package graphics.filters
             
             suite.addTestSuite( CircleSpectrumTest ) ;
             suite.addTestSuite( GrayScaleTest ) ;
+            suite.addTestSuite( HoleTest ) ;
             
             suite.addTestSuite( CircleSpectrumFilterTest ) ;
             suite.addTestSuite( FiltersTest ) ;
