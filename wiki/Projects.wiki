@@ -3,13 +3,21 @@
 
 == Introduction ==
 
-As the goal is to write first applications and then reinject the general code into a framework, here is the list of differents projects worked upon.
+The *maashaack projects*<br>
+are independent modules which focus on one particular set of problem,<br>
+they fit the need of "programming in the small".
+
+One of the goal is to write first applications and then reinject the general code into an organized structure.
+
+It could become part of the packages, libraries, platform libraries or tools, see the [OverView documentation overview].
 
 
 == List of Projects ==
 
+Here is the list of differents projects worked upon.
+
 Off course if you feel you're into that [Philosophy], you're welcome to participate
-with your own project.
+with your own project, see [Organization#Add_your_Project_to_maashaack add your Project to maashaack].
 
   * [Framework Maashaack Application Framework]
   * [ASTUce ASTUce]
