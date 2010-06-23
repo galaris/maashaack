@@ -74,6 +74,7 @@ package graphics.colors
             suite.addTestSuite( RGB2HSLTest       ) ;
             suite.addTestSuite( RGB2HSVTest       ) ;
             suite.addTestSuite( RGB2XYZTest       ) ;
+            suite.addTestSuite( RGB2YUVTest       ) ;
             
             return suite;
         }
