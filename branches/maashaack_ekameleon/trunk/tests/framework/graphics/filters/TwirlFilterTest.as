@@ -36,6 +36,8 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import graphics.filters.assets.Twirl;
+
     import flash.display.Shader;
     import flash.geom.Point;
 
@@ -45,9 +47,6 @@ package graphics.filters
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/Twirl.pbj", mimeType="application/octet-stream")]
-        private var Twirl:Class ;
         
         public var filter:TwirlFilter ;
         public var shader:Shader ;

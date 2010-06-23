@@ -36,6 +36,8 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import graphics.filters.assets.CircleSpectrum;
+    
     import flash.display.Shader;
     import flash.geom.Point;
     
@@ -46,9 +48,6 @@ package graphics.filters
             super(name);
         }
         
-        [Embed("../../../../pixelbender/pbj/CircleSpectrum.pbj", mimeType="application/octet-stream")]
-        private var Hole:Class ;
-        
         public var center:Point ;
         public var filter:CircleSpectrumFilter ;
         public var innerRadius:Number = 20 ;
@@ -58,7 +57,7 @@ package graphics.filters
         public function setUp():void
         {
             center = new Point( 20, 30) ;
-            shader = new Shader( new Hole() ) ;
+            shader = new Shader( new CircleSpectrum() ) ;
             filter = new CircleSpectrumFilter
             ( 
                 shader , 

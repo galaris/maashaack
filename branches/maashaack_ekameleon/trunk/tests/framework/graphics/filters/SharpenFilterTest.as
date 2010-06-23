@@ -35,18 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.Sharpen;
+
     import flash.display.Shader;
-    
+
     public class SharpenFilterTest extends TestCase 
     {
         public function SharpenFilterTest( name:String = "" )
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/Sharpen.pbj", mimeType="application/octet-stream")]
-        private var Sharpen:Class ;
         
         public var filter:SharpenFilter ;
         public var shader:Shader ;

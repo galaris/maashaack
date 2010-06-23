@@ -35,18 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.Reflection;
+
     import flash.display.Shader;
-    
+
     public class ReflectionFilterTest extends TestCase 
     {
         public function ReflectionFilterTest(name:String = "")
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/Reflection.pbj", mimeType="application/octet-stream")]
-        private var Reflection:Class ;
         
         public var alpha:uint = 1 ;
         public var filter:ReflectionFilter ;

@@ -35,18 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.RGBDistort;
+
     import flash.display.Shader;
-    
+
     public class RGBDistortFilterTest extends TestCase 
     {
         public function RGBDistortFilterTest(name:String = "")
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/RGBDistort.pbj", mimeType="application/octet-stream")]
-        private var RGBDistort:Class ;
         
         public var filter:RGBDistortFilter ;
         public var shader:Shader ;

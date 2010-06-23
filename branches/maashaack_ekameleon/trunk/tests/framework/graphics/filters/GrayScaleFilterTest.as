@@ -36,6 +36,8 @@ package graphics.filters
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import graphics.filters.assets.GrayScale;
+    
     import flash.display.Shader;
     
     public class GrayScaleFilterTest extends TestCase 
@@ -44,9 +46,6 @@ package graphics.filters
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/GrayScale.pbj", mimeType="application/octet-stream")]
-        private var GrayScale:Class ;
         
         public var filter:GrayScaleFilter ;
         public var scale:Number = 0.5 ;

@@ -35,18 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
+
+    import graphics.filters.assets.RoundPixel;
+
     import flash.display.Shader;
-    
+
     public class RoundPixelFilterTest extends TestCase 
     {
         public function RoundPixelFilterTest(name:String = "")
         {
             super(name);
         }
-        
-        [Embed("../../../../pixelbender/pbj/RoundPixel.pbj", mimeType="application/octet-stream")]
-        private var RoundPixel:Class ;
         
         public var filter:RoundPixelFilter ;
         public var shader:Shader ;
