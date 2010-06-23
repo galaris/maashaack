@@ -35,7 +35,6 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.RoundPixelFilter;
     
     import system.numeric.Mathematics;
@@ -71,21 +70,8 @@ package examples
             
             addChild( picture ) ;
             
-            // shader
+            // filter
             
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/RoundPixel.pbj" ) ) ;
-        }
-        
-        public var filter:RoundPixelFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
             var init:Object = 
             {
                 space          : 4.00 ,
@@ -93,7 +79,7 @@ package examples
                 edge           : 0.00 
             };
             
-            filter = new RoundPixelFilter( loader.shader , init ) ;
+            filter = new RoundPixelFilter( null , init ) ;
             
             trace( "name        : " + filter.name        ) ;
             trace( "namespace   : " + filter.namespace   ) ;
@@ -102,6 +88,10 @@ package examples
             
             picture.filters = [ filter ] ;
         }
+        
+        public var filter:RoundPixelFilter ;
+        
+        public var picture:Loader ;
         
         public function update( e:Event ):void
         {
