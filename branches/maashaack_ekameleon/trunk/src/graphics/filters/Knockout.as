@@ -33,15 +33,15 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.filters.assets 
+package graphics.filters 
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../../../pixelbender/pbj/RGBDistort.pbj", mimeType="application/octet-stream")]
+    [Embed("../../../pixelbender/pbj/Knockout.pbj", mimeType="application/octet-stream")]
     
-    public class RGBDistort extends ByteArray 
+    public class Knockout extends ByteArray 
     {
-        public function RGBDistort()
+        public function Knockout()
         {
             //
         }

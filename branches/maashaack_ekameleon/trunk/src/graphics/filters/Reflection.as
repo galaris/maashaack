@@ -33,15 +33,15 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.filters.assets 
+package graphics.filters 
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../../../pixelbender/pbj/WaveReflection.pbj", mimeType="application/octet-stream")]
+    [Embed("../../../pixelbender/pbj/Reflection.pbj", mimeType="application/octet-stream")]
     
-    public class WaveReflection extends ByteArray 
+    public class Reflection extends ByteArray 
     {
-        public function WaveReflection()
+        public function Reflection()
         {
             //
         }

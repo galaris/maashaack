@@ -33,15 +33,15 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.filters.assets 
+package graphics.filters 
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../../../pixelbender/pbj/GrayScale.pbj", mimeType="application/octet-stream")]
+    [Embed("../../../pixelbender/pbj/Twirl.pbj", mimeType="application/octet-stream")]
     
-    public class GrayScale extends ByteArray 
+    public class Twirl extends ByteArray 
     {
-        public function GrayScale()
+        public function Twirl()
         {
             //
         }

@@ -32,18 +32,20 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package graphics.filters.assets 
+package graphics.filters 
 {
-    import flash.utils.ByteArray;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    [Embed("../../../../../pixelbender/pbj/Sharpen.pbj", mimeType="application/octet-stream")]
-    
-    public class Sharpen extends ByteArray 
+    public class CircleSpectrumTest extends TestCase 
     {
-        public function Sharpen()
+        public function CircleSpectrumTest(name:String = "")
         {
-            //
+            super(name);
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( new CircleSpectrum() ) ;
         }
     }
 }

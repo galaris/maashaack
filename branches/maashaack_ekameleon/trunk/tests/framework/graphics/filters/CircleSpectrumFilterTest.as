@@ -35,12 +35,10 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import graphics.filters.assets.CircleSpectrum;
-    
+
     import flash.display.Shader;
     import flash.geom.Point;
-    
+
     public class CircleSpectrumFilterTest extends TestCase 
     {
         public function CircleSpectrumFilterTest(name:String = "")
