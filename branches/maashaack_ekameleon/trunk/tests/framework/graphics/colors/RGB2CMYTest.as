@@ -33,46 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
+
+    public class RGB2CMYTest extends TestCase 
+    {        public function RGB2CMYTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var cmy:CMY ;
+            var rgb:RGB ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            rgb = new RGB(255,255,255) ;
+            cmy = RGB2CMY( rgb ) ;
+            assertEquals( cmy , new CMY( 0 , 0 , 0 ) , "01 - Colors.RGB2CMY method failed." ) ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
-            suite.addTestSuite( HSV2RGBTest       ) ;
-            suite.addTestSuite( HSV2RGBNumberTest ) ;
-            suite.addTestSuite( RGB2CMYTest       ) ;
+            rgb = new RGB(0,0,0) ;
+            cmy = RGB2CMY( rgb ) ;
+            assertEquals( cmy , new CMY( 1 , 1 , 1 ) , "02 - Colors.RGB2CMY method failed." ) ;
             
-            return suite;
+            rgb = new RGB(255,0,0) ;
+            cmy = RGB2CMY( rgb ) ;
+            assertEquals( cmy , new CMY( 0 , 1 , 1 ) , "03 - Colors.RGB2CMY method failed." ) ;
         }
-    }
-}
+    }}
