@@ -35,15 +35,13 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.KnockoutFilter;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
-    import flash.events.Event;
     import flash.net.URLRequest;
-    
+
     [SWF(width="300", height="300", frameRate="30", backgroundColor="0xA2A2A2")]
     
     /**
@@ -59,7 +57,7 @@ package examples
             
             // picture
             
-            picture = new Loader() ;
+            var picture:Loader = new Loader() ;
             
             picture.x = 20 ;
             picture.y = 20 ;
@@ -68,22 +66,10 @@ package examples
             
             addChild( picture ) ;
             
-            // shader
+            // filter
             
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Knockout.pbj" ) ) ;
-        }
-        
-        public var filter:KnockoutFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        public var picture:Loader ;
-        
-        public function complete( e:Event ):void
-        {
-            filter = new KnockoutFilter( loader.shader ) ;
+            var filter:KnockoutFilter = new KnockoutFilter() ;
+            
             filter.color     = 0xFFFFFF ; 
             filter.threshold = 0.05 ;
             
