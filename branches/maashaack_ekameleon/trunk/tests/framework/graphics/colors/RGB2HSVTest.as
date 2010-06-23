@@ -33,48 +33,30 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+    public class RGB2HSVTest extends TestCase 
+    {        public function RGB2HSVTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var rgb:RGB ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            rgb = new RGB(255,255,255) ;
+            assertEquals( RGB2HSV(rgb) , new HSV(0,0,1) , "01 - RGB2HSV(rgb) failed.") ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
-            suite.addTestSuite( HSV2RGBTest       ) ;
-            suite.addTestSuite( HSV2RGBNumberTest ) ;
-            suite.addTestSuite( RGB2CMYTest       ) ;
-            suite.addTestSuite( RGB2HSLTest       ) ;
-            suite.addTestSuite( RGB2HSVTest       ) ;
+            rgb = new RGB(255,0,0) ;
+            assertEquals( RGB2HSV(rgb) , new HSV(0,1,1) , "02 - RGB2HSV(rgb) failed.") ;
             
-            return suite;
+            rgb = new RGB(0,255,0) ;
+            assertEquals( RGB2HSV(rgb) , new HSV(120,1,1) , "03 - RGB2HSV(rgb) failed.") ;
+            
+            rgb = new RGB(0,0,255) ;
+            assertEquals( RGB2HSV(rgb) , new HSV(240,1,1) , "04 - RGB2HSV(rgb) failed.") ;
+            
+            rgb = new RGB(0,0,0) ;
+            assertEquals( RGB2HSV(rgb) , new HSV(0,0,0) , "05 - RGB2HSV(rgb) failed.") ;
         }
-    }
-}
+    }}
