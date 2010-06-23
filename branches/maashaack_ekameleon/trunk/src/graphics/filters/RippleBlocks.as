@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/RippleBlocks.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender RippleBlocks effect to initialize a Shader in the RippleBlocksFilter class.
+     */
     public class RippleBlocks extends ByteArray 
     {
+        /**
+         * Creates a new RippleBlocks instance.
+         */
         public function RippleBlocks()
         {
             //

@@ -36,11 +36,17 @@
 package graphics.filters 
 {
     import flash.utils.ByteArray;
-
+    
     [Embed("../../../pixelbender/pbj/Reflection.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender Reflection effect to initialize a Shader in the ReflectionFilter class.
+     */
     public class Reflection extends ByteArray 
     {
+        /**
+         * Creates a new Reflection instance.
+         */
         public function Reflection()
         {
             //

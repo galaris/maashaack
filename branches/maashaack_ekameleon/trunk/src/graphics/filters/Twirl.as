@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/Twirl.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender Twirl effect to initialize a Shader in the TwirlFilter class.
+     */
     public class Twirl extends ByteArray 
     {
+        /**
+         * Creates a new Twirl instance.
+         */
         public function Twirl()
         {
             //

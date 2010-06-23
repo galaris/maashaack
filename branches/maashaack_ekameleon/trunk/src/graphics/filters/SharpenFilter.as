@@ -51,7 +51,7 @@ package graphics.filters
          */
         public function SharpenFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new Sharpen() ) , init ) ;
         }
         
         /**

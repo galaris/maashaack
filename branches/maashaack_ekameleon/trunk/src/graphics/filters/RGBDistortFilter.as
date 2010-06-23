@@ -53,7 +53,7 @@ package graphics.filters
          */
         public function RGBDistortFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new RGBDistort() ) , init ) ;
         }
         
         /**

@@ -52,7 +52,7 @@ package graphics.filters
          */
         public function RippleBlocksFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new RippleBlocks() ) , init ) ;
         }
         
         /**

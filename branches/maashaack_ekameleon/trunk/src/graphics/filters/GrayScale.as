@@ -36,7 +36,7 @@
 package graphics.filters 
 {
     import flash.utils.ByteArray;
-
+    
     [Embed("../../../pixelbender/pbj/GrayScale.pbj", mimeType="application/octet-stream")]
     
     /**
