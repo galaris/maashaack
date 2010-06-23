@@ -33,45 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+    public class HSV2RGBNumberTest extends TestCase 
+    {        public function HSV2RGBNumberTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var hsv:HSV    ;
+            var rgb:Number ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            hsv = new HSV( 0 , 1 , 1 ) ;
+            rgb = HSV2RGBNumber( hsv ) ;
+            assertEquals( rgb , 0xFF0000 , "01 - Colors.HSV2RGBNumber method failed.") ;
             
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
-            suite.addTestSuite( HSL2RGBTest       ) ;
-            suite.addTestSuite( HSL2RGBNumberTest ) ;
+            hsv = new HSV( 120 , 0.5 ,1 ) ;
+            rgb = HSV2RGBNumber( hsv ) ;
+            assertEquals( rgb , 0x7FFF7F , "02 - Colors.HSV2RGBNumber method failed.") ;
             
-            suite.addTestSuite( HSV2RGBNumberTest ) ;
-            
-            return suite;
+            hsv = new HSV( 240 , 1 , 0.5 ) ;
+            rgb = HSV2RGBNumber( hsv ) ;
+            assertEquals( rgb , 0x00007F , "03 - Colors.HSV2RGBNumber method failed.") ;
         }
-    }
-}
+    }}
