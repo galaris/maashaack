@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/RGBDistort.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender RGBDistort effect to initialize a Shader in the RGBDistortFilter class.
+     */
     public class RGBDistort extends ByteArray 
     {
+        /**
+         * Creates a new RGBDistort instance.
+         */
         public function RGBDistort()
         {
             //

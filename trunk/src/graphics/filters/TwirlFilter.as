@@ -52,7 +52,7 @@ package graphics.filters
          */
         public function TwirlFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader , init ) ;
+            super( shader || new Shader( new Twirl() ) , init ) ;
         }
         
         /**

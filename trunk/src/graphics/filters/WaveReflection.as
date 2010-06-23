@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/WaveReflection.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender WaveReflection effect to initialize a Shader in the WaveReflectionFilter class.
+     */
     public class WaveReflection extends ByteArray 
     {
+        /**
+         * Creates a new WaveReflection instance.
+         */
         public function WaveReflection()
         {
             //

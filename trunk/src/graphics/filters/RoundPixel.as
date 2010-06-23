@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/RoundPixel.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender RoundPixel effect to initialize a Shader in the RoundPixelFilter class.
+     */
     public class RoundPixel extends ByteArray 
     {
+        /**
+         * Creates a new RoundPixel instance.
+         */
         public function RoundPixel()
         {
             //

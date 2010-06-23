@@ -39,8 +39,14 @@ package graphics.filters
 
     [Embed("../../../pixelbender/pbj/Sharpen.pbj", mimeType="application/octet-stream")]
     
+    /**
+     * The byteCode of the pixelbender Sharpen effect to initialize a Shader in the SharpenFilter class.
+     */
     public class Sharpen extends ByteArray 
     {
+        /**
+         * Creates a new Sharpen instance.
+         */
         public function Sharpen()
         {
             //
