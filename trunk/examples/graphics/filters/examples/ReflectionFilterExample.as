@@ -35,16 +35,13 @@
 
 package examples 
 {
-    import graphics.display.ShaderLoader;
     import graphics.filters.ReflectionFilter;
-
+    
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
-    import flash.events.Event;
     import flash.media.Camera;
     import flash.media.Video;
-    import flash.net.URLRequest;
-
+    
     /**
      * Test the graphics.filters.ReflectionFilter class, this example work only with a FP10 or sup.
      */
@@ -58,7 +55,7 @@ package examples
             
             // container
             
-            container = new Sprite() ;
+            var container:Sprite = new Sprite() ;
             
             container.x = 75 ;
             container.y = 60 ;
@@ -68,29 +65,9 @@ package examples
             
             addChild( container ) ;
             
-            // video
+            // filter
             
-            var video:Video = new Video() ;
-            video.attachCamera( Camera.getCamera() ) ;
-            
-            container.addChild( video ) ;
-            
-            // shader
-            
-            loader = new ShaderLoader() ;
-            loader.addEventListener( Event.COMPLETE , complete ) ;
-            loader.load( new URLRequest( "pbj/Reflection.pbj" ) ) ;
-        }
-        
-        public var container:Sprite ;
-        
-        public var filter:ReflectionFilter ;
-        
-        public var loader:ShaderLoader ;
-        
-        protected function complete( e:Event ):void
-        {
-            filter = new ReflectionFilter( loader.shader ) ;
+            var filter:ReflectionFilter = new ReflectionFilter() ;
             
             filter.bottomExtension = container.height ;
             
@@ -99,6 +76,14 @@ package examples
             filter.height = 240  ; // size of the display
             
             container.filters = [ filter ] ;
+            
+            // video
+            
+            var video:Video = new Video() ;
+            
+            video.attachCamera( Camera.getCamera() ) ;
+            
+            container.addChild( video ) ;
         }
     }
 }
