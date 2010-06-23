@@ -33,41 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+    public class CMYK2CMYTest extends TestCase 
+    {        public function CMYK2CMYTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var cmy:CMY ;
+            var cmyk:CMYK ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMY2CMYKTest   ) ;
-            suite.addTestSuite( CMYK2CMYTest   ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            cmyk = new CMYK( 0 , 0 , 0 , 0 ) ;
+            cmy  = CMYK2CMY( cmyk );
+            assertEquals( cmy , new CMY(0,0,0) , "#01" ) ;
             
-            suite.addTestSuite( CMY2RGBTest    ) ;
-            
-            return suite;
+            cmyk = new CMYK( 0 , 0 , 0 , 1 ) ;
+            cmy  = CMYK2CMY( cmyk );
+            assertEquals( cmy , new CMY(1,1,1) , "#02" ) ;
         }
-    }
-}
+    }}
