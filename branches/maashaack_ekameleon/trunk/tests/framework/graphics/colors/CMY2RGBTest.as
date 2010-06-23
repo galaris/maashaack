@@ -33,39 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.colors  
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    /**
-     * This class launch all tests of the graphics.colors package.
-     */
-    public class AllTests
-    {
-        /**
-         * Creates the Test list.
-         */
-        public static function suite():ITest
+package graphics.colors 
+{    import buRRRn.ASTUce.framework.TestCase;
+
+    public class CMY2RGBTest extends TestCase 
+    {        public function CMY2RGBTest( name:String = "")
+        {            super(name);        }
+        
+        public function testMethod():void
         {
-            var suite:TestSuite = new TestSuite( "graphics colors tests" );
+            var cmy:CMY ;
+            var rgb:RGB ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( ColorsTest     ) ;
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( HSLTest        ) ;
-            suite.addTestSuite( HSVTest        ) ;
-            suite.addTestSuite( RGBATest       ) ;
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
-            suite.addTestSuite( XYZTest        ) ;
-            suite.addTestSuite( YUVTest        ) ;
-            suite.addTestSuite( YxyTest        ) ;
+            cmy = new CMY( 0 , 0 , 0 ) ;
+            rgb = CMY2RGB( cmy ) ;
+            assertEquals( rgb , new RGB(255,255,255) , "01 - Colors.CMY2RGB method failed." ) ;
             
-            suite.addTestSuite( CMY2RGBTest    ) ;
+            cmy = new CMY( 1 , 1 , 1 ) ;
+            rgb = CMY2RGB( cmy ) ;
+            assertEquals( rgb , new RGB(0,0,0) , "02 - Colors.CMY2RGB method failed." ) ;
             
-            return suite;
+            cmy = new CMY( 0 , 1 , 1 ) ;
+            rgb = CMY2RGB( cmy ) ;
+            assertEquals( rgb , new RGB(255,0,0) , "03 - Colors.CMY2RGB method failed." ) ;
         }
-    }
-}
+    }}
