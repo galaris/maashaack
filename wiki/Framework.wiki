@@ -3,15 +3,23 @@
 
 == Introduction ==
 
-This is the application framework for !ActionScript 3
-which have the only purpose to provide portable
-cross-platform and standard packages, libraries, etc.
+This is the application framework for !ActionScript 3<br>
+which have the only purpose to provide portable<br>
+cross-platform and standard packages.
+
+The *maashaack application framework*<br>
+is a set of different modular projects assembled together<br>
+to produce a coherent set of AS3 classes, packages and libraries<br>
+which represent our ideal of "programming in the large".
+
 
 == Portability ==
 
  * Flash Player 9
  * Flash Player 10
  * Flash Player 10.1
+ * AIR 1.0
+ * AIR 1.5
  * [http://www.adobe.com/products/air/ AIR 2.0] ~~Apollo~~
  * [http://code.google.com/p/redtamarin/ redtamarin]
 
