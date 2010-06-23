@@ -35,60 +35,17 @@
 package graphics.filters 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import flash.display.Shader;
-    
-    public class ShaderCustomFilterTest extends TestCase 
+
+    public class WaveReflectionTest extends TestCase 
     {
-        public function ShaderCustomFilterTest(name:String = "")
+        public function WaveReflectionTest(name:String = "")
         {
             super(name);
         }
         
-        public var filter:ShaderCustomFilter ;
-        public var shader:Shader ;
-        
-        public function setUp():void
-        {
-            shader = new Shader( new RoundPixel() ) ;
-            filter = new ShaderCustomFilter( shader ) ;
-        }
-        
-        public function tearDown():void
-        {
-            shader = null ;
-            filter = null ;
-        }
-        
         public function testConstructor():void
         {
-            assertNotNull( filter ) ;
+            assertNotNull( new WaveReflection() ) ;
         }
-        
-        public function testDescription():void
-        {
-            assertEquals( "Rounds the pixels." , filter.description ) ;
-        }
-        
-        public function testName():void
-        {
-            assertEquals( "RoundPixel" , filter.name ) ; 
-        }
-        
-        public function testNamespace():void
-        {
-            assertEquals( "graphics.filters" , filter.namespace ) ;
-        }
-        
-        public function testVersion():void
-        {
-            assertEquals( filter.version , 1 ) ; 
-        }
-        
-        public function testClone():void
-        {
-            var clone:ShaderCustomFilter = filter.clone() as ShaderCustomFilter ;
-            assertNotNull( clone ) ;
-            assertEquals( clone.shader , filter.shader ) ;        }
     }
 }
