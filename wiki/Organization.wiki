@@ -179,13 +179,13 @@ One of our main goal is to try to define a standard unified library for AS3,<br>
 if you think alike and want to be friend with maashaack, here one way to do it<br>
  * contact us (yes we can help)
  * apply the directories and project setup to your own project
- * follow the packages organization, if you have a RAR library for ex, define it in *library.rarlib* instead of *com.joe.util.RAR*
+ * follow the packages organization, if you have a RAR library for ex, define it in *libraries.rarlib* instead of *com.joe.util.RAR*
  * and just contact us again so we sync with your project
 
 with that, next time the maashaack sources are compiled,<br>
 even if you project reside in an external repository,<br>
-your particular library *library.rarlib* will be compiled<br>
-and distributed as *library.rarlib.swc* among the other libraries.
+your particular library *libraries.rarlib* will be compiled<br>
+and distributed as *libraries.rarlib.swc* (or `/libraries/rarlib.swc`) among the other libraries.
 
 Our idea is that it is simpler for the AS3 developers in general<br>
 to look for libraries in a `library.*` and keep the whole thing clean and organized.
