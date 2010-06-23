@@ -1,4 +1,4 @@
-#summary unit tests framework.
+#summary unit tests framework library.
 #labels Introduction
 
 == Introduction ==
