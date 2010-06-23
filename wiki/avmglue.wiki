@@ -21,7 +21,7 @@ etc.
 
 The goal is to implement in AS3 and/or native C/C++ the FPAPI in order to generate `*.abc` files compatible with [http://www.mozilla.org/projects/tamarin/ Tamarin].
 
-This platform library is used by [http://code.google.com/p/redtamarin/ redtamarin].
+This platform library is used by [http://code.google.com/p/redtamarin/ redtamarin] (starting with v0.3).
 
 == Details ==
 
@@ -41,7 +41,8 @@ package
 }
 }}}
 
-will simply not work in the context of Tamarin because there is no `Sprite` class definition.
+will simply not work in the context of Tamarin because there is no `Sprite` class definition.<br>
+*avmglue* will provide this `Sprite` class definition.
 
 <br><br>
 
@@ -54,5 +55,23 @@ for ex: you can force the locale to be `FR_fr` on a `US_gb` system<br>
 or you can emulate the domain `www.domain.com` on your localhost<br>
 etc.
 
+<br><br>
 
+You want to write your Tamarin AS3 code in Flex Builder or other nice IDE with syntax completion etc.,<br>
+`avmglue.swc` based on `avmglue.abc` should be able to ease the task and replace 1 to 1 `playerglobal.swc`.
 
+<br><br>
+
+So yeah, we're basicaly rewriting the whole FPAPI, with versioning (see [http://hg.mozilla.org/tamarin-central/file/fbecf6c8a86f/doc/apiversioning.txt Tamarin API versioning]), from scratch.
+
+It will off course not happen overnight, but here the plan
+ * follow the same file structure as found here in the [http://opensource.adobe.com/svn/opensource/flex/sdk/trunk/modules/asc/build/java/build.xml target playerglobalabc].
+ * first, have a dumb implementation with almost no code logic<br>eg. you can extends `Sprite` but calling `addChild()` does nothing, except maybe tracing the call
+ * second, have some part of the FPAPI with AS3 implementation, for ex: the `Timer` class
+ * third, have some part of the FPAPI with C/C++ native implementation, for ex: the `Capabilities` class
+
+what *avmglue* is not
+ * it's not an open source flash player
+ * it's not an open source flash player
+ * it's not an open source flash player
+ * it's not a full native implementation of the FPAPI
