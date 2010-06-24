@@ -6,9 +6,12 @@
 avmglue is an open source implementation of the following runtimes API:
  * Flash Player 9
  * Flash Player 10
+ * Flash Player 10.0.32
  * Flash Player 10.1
  * AIR 1.0
  * AIR 1.5
+ * AIR 1.5.1
+ * AIR 1.5.2
  * AIR 2.0
 
 We will refer to it as the Flash Platform API , shortened to *FPAPI*.
@@ -54,6 +57,11 @@ By using *avmglue* and Tamarin, you can change those classes,<br>
 for ex: you can force the locale to be `FR_fr` on a `US_gb` system<br>
 or you can emulate the domain `www.domain.com` on your localhost<br>
 etc.
+
+see:<br>
+[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/flash_utils.as flash_api namespace]<br>
+[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/HostConfig.as HostConfig]<br>
+[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/classes/FSCommand.as FSCommand]
 
 <br><br>
 
