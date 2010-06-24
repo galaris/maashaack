@@ -38,7 +38,7 @@ var raw:URLLoader = new URLLoader();
 var loader:Loader = new Loader();
 loader.loadBytes( data );
       }}}
-      here without `LoaderContext` you end up as a child appdomain<br>
+        here without `LoaderContext` you end up as a child appdomain<br>
 be carefull here, by default a `loadBytes()` places the bytes in the current `SecurityDomain` but not necessary in the current `ApplicationDomain`, so you still have to use a `LoaderContext` to do a real *import loading* if you want to share the class definitions in memory!!<br>
 so to do that
       {{{
