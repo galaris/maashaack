@@ -59,9 +59,9 @@ or you can emulate the domain `www.domain.com` on your localhost<br>
 etc.
 
 see:<br>
-[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/flash_utils.as flash_api namespace]<br>
-[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/HostConfig.as HostConfig]<br>
-[http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/classes/FSCommand.as FSCommand]
+ * [http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/flash_utils.as flash_api] namespace
+ * [http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/HostConfig.as HostConfig]
+ * [http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/src/classes/FSCommand.as FSCommand]
 
 <br><br>
 
