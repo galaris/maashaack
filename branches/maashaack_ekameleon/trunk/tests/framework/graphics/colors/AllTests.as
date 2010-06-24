@@ -83,6 +83,8 @@ package graphics.colors
             suite.addTestSuite( XYZ2RGBTest       ) ;
             suite.addTestSuite( XYZ2YxyTest       ) ;
             
+            suite.addTestSuite( Yxy2XYZTest       ) ;
+            
             return suite;
         }
     }
