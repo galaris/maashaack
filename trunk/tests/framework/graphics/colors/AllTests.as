@@ -65,16 +65,22 @@ package graphics.colors
             
             suite.addTestSuite( CMY2CMYKTest      ) ;
             suite.addTestSuite( CMY2RGBTest       ) ;
+            
             suite.addTestSuite( CMYK2CMYTest      ) ;
+            
             suite.addTestSuite( HSL2RGBTest       ) ;
             suite.addTestSuite( HSL2RGBNumberTest ) ;
+            
             suite.addTestSuite( HSV2RGBTest       ) ;
             suite.addTestSuite( HSV2RGBNumberTest ) ;
+            
             suite.addTestSuite( RGB2CMYTest       ) ;
             suite.addTestSuite( RGB2HSLTest       ) ;
             suite.addTestSuite( RGB2HSVTest       ) ;
             suite.addTestSuite( RGB2XYZTest       ) ;
             suite.addTestSuite( RGB2YUVTest       ) ;
+            
+            suite.addTestSuite( XYZ2RGBTest       ) ;
             
             return suite;
         }
