@@ -20,8 +20,8 @@ Things to always keep in mind when dealing with appdom.
   # *An !ApplicationDomain is always dependant on a !SecurityDomain*
     * you have to *explicitly trust* another SWF to be able to access its appdom
     * the only way to connect two !SecurityDomain is to use *Direct Communication*
-      a) *Import loading* using the `Loader` class<br>
-      using `Loader.load()`
+    a) *Import loading* using the `Loader` class<br>
+using `Loader.load()`
       {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
