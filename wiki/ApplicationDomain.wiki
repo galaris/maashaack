@@ -29,11 +29,15 @@ var SD:SecurityDomain    = SecurityDomain.currentDomain
 var context:LoaderContext = new LoaderContext( false, AD, SD );
 loader.load( new URLRequest( "other.swf" ), context );
       }}}
-      using `Loader.loadBytes()`
+      or using `Loader.loadBytes()`
       {{{
+var raw:URLLoader = new URLLoader();
+       raw.dataFormat = URLLoaderDataFormat.BINARY;
+       raw.load( new URLRequest( "other.swf" )  );
 var loader:Loader = new Loader();
-loader.loadBytes( new URLRequest( "other.swf" ) );
+loader.loadBytes( data );
       }}}
+      be carefull here, by default a `loadBytes()` places the bytes in the current `SecurityDomain` but not in the current `ApplicationDomain`, so you still have to use a `URLContext` to do a real *import loading* if you want to share the class definitions in memory!!
       b. *Cross-Scripting* permissions via `Security.allowDomain()`
       {{{
 The Security.allowDomain() method grant access for cross-scripting,
