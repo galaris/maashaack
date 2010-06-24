@@ -62,6 +62,7 @@
     <component id="graphics.colors:XYZ2Yxy"       class="graphics.colors.XYZ2Yxy" />
     
     <component id="graphics.colors:YUV"           class="graphics.colors.YUV" />
+    <component id="graphics.colors:YUV2RGB"       class="graphics.colors.YUV2RGB" />
     
     <component id="graphics.colors:Yxy"           class="graphics.colors.Yxy" />
     <component id="graphics.colors:Yxy2XYZ"       class="graphics.colors.Yxy2XYZ" />
