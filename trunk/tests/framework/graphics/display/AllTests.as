@@ -35,13 +35,16 @@
 
 package graphics.display
 {
-    import buRRRn.ASTUce.framework.*;
-
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
+    
     public class AllTests
     {
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("graphics.display package tests");
+            
+            suite.addTestSuite( BigBitmapTest ) ;
             
             suite.addTestSuite( DisplayObjectContainersTest ) ;
             suite.addTestSuite( DisplayObjectsTest ) ;
