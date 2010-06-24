@@ -94,7 +94,20 @@ package flash.system
         - use fscommand() function to send messages to Director
         - In VisualBasic, Visual C++, and other programs that can host ActiveX controls,
           fscommand() sends a VB event with two strings that can be handled in the environment's programming language.
+
+       - basically we need a global config or settings to store those informations
     */
+
+    /**
+     * Lets the SWF file communicate with either Flash Player or the program hosting Flash Player,
+     * such as a web browser.
+     * You can also use the <code>fscommand()</code> function to pass messages to Director or to Visual Basic,
+     * Visual C++, and other programs that can host ActiveX controls.
+     * 
+     * @langversion ActionScript 3.0
+     * @playerversion Flash Player 9
+     * @playerversion AIR 1.0
+     */
     public function fscommand( command:String, args:String = "" ):void
     {
         CFG::dbg{ trace( "fscommand( " + [command,args].join(", ") + " )" ); }

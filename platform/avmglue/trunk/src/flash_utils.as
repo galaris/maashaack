@@ -52,6 +52,9 @@ package flash.utils
     /**
      * The flash_api namespace allows you to access internal parts of the flash API,
      * for ex: mock implementation.
+     * 
+     * note:
+     * maybe we should move it to the avmplus.* package
      */
     public namespace flash_api = "http://code.google.com/p/redtamarin/2010/actionscript/flash/api";
     
