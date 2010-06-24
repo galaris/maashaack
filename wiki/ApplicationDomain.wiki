@@ -25,7 +25,7 @@ Things to always keep in mind when dealing with appdom.
       {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
-var SD:SecurityDomain    = SecurityDomain.currentDomain
+var SD:SecurityDomain    = SecurityDomain.currentDomain;
 var context:LoaderContext = new LoaderContext( false, AD, SD );
 loader.load( new URLRequest( "other.swf" ), context );
       }}}
@@ -37,7 +37,20 @@ var raw:URLLoader = new URLLoader();
 var loader:Loader = new Loader();
 loader.loadBytes( data );
       }}}
-      be carefull here, by default a `loadBytes()` places the bytes in the current `SecurityDomain` but not necessary in the current `ApplicationDomain`, so you still have to use a `URLContext` to do a real *import loading* if you want to share the class definitions in memory!!<br>
+      here without `LoaderContext` you end up as a child appdomain<br>
+      be carefull here, by default a `loadBytes()` places the bytes in the current `SecurityDomain` but not necessary in the current `ApplicationDomain`, so you still have to use a `LoaderContext` to do a real *import loading* if you want to share the class definitions in memory!!<br>
+     so to do that
+      {{{
+var raw:URLLoader = new URLLoader();
+       raw.dataFormat = URLLoaderDataFormat.BINARY;
+       raw.load( new URLRequest( "other.swf" )  );
+var AD:ApplicationDomain = ApplicationDomain.currentDomain;
+var context:LoaderContext = new LoaderContext( false, AD );
+var loader:Loader = new Loader();
+loader.loadBytes( data, context );
+      }}}
+      here all is placed in the current appdomain and so you can share class definitions<br>
+      yes the difference is subtle but *very* important<br>
       b. *Cross-Scripting* permissions via `Security.allowDomain()`
       {{{
 The Security.allowDomain() method grant access for cross-scripting,
