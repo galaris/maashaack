@@ -76,6 +76,27 @@ what *avmglue* is not
  * it's not an open source flash player
  * it's not a full native implementation of the FPAPI
 
+To really understand what *avmglue* is look at the [http://hg.mozilla.org/tamarin-central/raw-file/fbecf6c8a86f/shell/shell_toplevel.as Tamarin shell_toplevel.as class]
+{{{
+// The flash.system package is present so identical ATS test media can be used
+// in the command-line VM and the Player
+package flash.system
+{
+	import avmplus.*;
+	
+	public final class Capabilities
+	{
+		public static function get playerType():String { return "AVMPlus"; }
+		public static function get isDebugger():Boolean { return System.isDebugger(); }
+	}
+}
+}}}
+
+In short, *avmglue* do the same but at the *FPAPI* level,<br>
+`Capabilities.playerType` and `Capabilities.isDebugger` are nice to have but not enought<br>
+so *avmglue* fill the gap with all the rest.
+
+
 == Informations ==
 
 [http://code.google.com/p/maashaack/source/browse/platform/avmglue/trunk/ browse the code]
