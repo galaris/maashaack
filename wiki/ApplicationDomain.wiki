@@ -54,6 +54,7 @@ loader.loadBytes( data, context );
       }}}
       here all is placed in the current appdomain and so you can share class definitions
       yes the difference is subtle but *very* important
+
       b) *Cross-Scripting* permissions via `Security.allowDomain()`
       {{{
 The Security.allowDomain() method grant access for cross-scripting,
