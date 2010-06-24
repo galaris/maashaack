@@ -20,7 +20,7 @@ Things to always keep in mind when dealing with appdom.
   # *An !ApplicationDomain is always dependant on a !SecurityDomain*
     * you have to *explicitly trust* another SWF to be able to access its appdom
     * the only way to connect two !SecurityDomain is to use *Direct Communication*
-      a. *Import loading* using the `Loader` class<br>
+      a) *Import loading* using the `Loader` class<br>
       using `Loader.load()`
       {{{
 var loader:Loader = new Loader();
@@ -51,7 +51,7 @@ loader.loadBytes( data, context );
       }}}
       here all is placed in the current appdomain and so you can share class definitions<br>
 yes the difference is subtle but *very* important<br>
-      b. *Cross-Scripting* permissions via `Security.allowDomain()`
+      b) *Cross-Scripting* permissions via `Security.allowDomain()`
       {{{
 The Security.allowDomain() method grant access for cross-scripting,
 scripting the display list, access to the Stage object and event detection.
