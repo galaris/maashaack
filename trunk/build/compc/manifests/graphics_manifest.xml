@@ -64,6 +64,7 @@
     <component id="graphics.colors:YUV"           class="graphics.colors.YUV" />
     
     <component id="graphics.colors:Yxy"           class="graphics.colors.Yxy" />
+    <component id="graphics.colors:Yxy2XYZ"       class="graphics.colors.Yxy2XYZ" />
     
     <!-- graphics.display -->
     
