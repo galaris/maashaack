@@ -58,6 +58,8 @@
     <component id="graphics.colors:Trismulus"     class="graphics.colors.Trismulus" />
     
     <component id="graphics.colors:XYZ"           class="graphics.colors.XYZ" />
+    <component id="graphics.colors:XYZ2RGB"       class="graphics.colors.XYZ2RGB" />
+    <component id="graphics.colors:XYZ2Yxy"       class="graphics.colors.XYZ2Yxy" />
     
     <component id="graphics.colors:YUV"           class="graphics.colors.YUV" />
     
@@ -65,6 +67,7 @@
     
     <!-- graphics.display -->
     
+    <component id="graphics.display:BigBitmap"               class="graphics.display.BigBitmap" />
     <component id="graphics.display:CropBitmapData"          class="graphics.display.CropBitmapData" />
     <component id="graphics.display:DisplayObjectContainers" class="graphics.display.DisplayObjectContainers" />
     <component id="graphics.display:DisplayObjects"          class="graphics.display.DisplayObjects" />
