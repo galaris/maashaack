@@ -22,7 +22,7 @@ Things to always keep in mind when dealing with appdom.
     * the only way to connect two !SecurityDomain is to use *Direct Communication*
 
     a) *Import loading* using the `Loader` class<br>
-        using `Loader.load()`
+       using `Loader.load()`
       {{{
 var loader:Loader = new Loader();
 var AD:ApplicationDomain = ApplicationDomain.currentDomain;
@@ -30,7 +30,7 @@ var SD:SecurityDomain    = SecurityDomain.currentDomain;
 var context:LoaderContext = new LoaderContext( false, AD, SD );
 loader.load( new URLRequest( "other.swf" ), context );
       }}}
-        or using `Loader.loadBytes()`
+       or using `Loader.loadBytes()`
       {{{
 var raw:URLLoader = new URLLoader();
        raw.dataFormat = URLLoaderDataFormat.BINARY;
@@ -38,7 +38,7 @@ var raw:URLLoader = new URLLoader();
 var loader:Loader = new Loader();
 loader.loadBytes( data );
       }}}
-        here without `LoaderContext` you end up as a child appdomain<br>
+       here without `LoaderContext` you end up as a child appdomain<br>
 be carefull here, by default a `loadBytes()` places the bytes in the current `SecurityDomain` but not necessary in the current `ApplicationDomain`, so you still have to use a `LoaderContext` to do a real *import loading* if you want to share the class definitions in memory!!<br>
 so to do that
       {{{
@@ -50,7 +50,7 @@ var context:LoaderContext = new LoaderContext( false, AD );
 var loader:Loader = new Loader();
 loader.loadBytes( data, context );
       }}}
-        here all is placed in the current appdomain and so you can share class definitions<br>
+       here all is placed in the current appdomain and so you can share class definitions<br>
 yes the difference is subtle but *very* important<br>
       b) *Cross-Scripting* permissions via `Security.allowDomain()`
       {{{
