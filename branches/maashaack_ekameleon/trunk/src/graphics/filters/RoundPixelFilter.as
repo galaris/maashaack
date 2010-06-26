@@ -48,7 +48,7 @@ package graphics.filters
     {
         /**
          * Creates a new RoundPixelFilter instance.
-         * @param shader The Shader reference with the RGBDistort pixel bender filter inside.
+         * @param shader The Shader reference with the RoundPixel pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
         public function RoundPixelFilter( shader:Shader = null , init:Object = null )
