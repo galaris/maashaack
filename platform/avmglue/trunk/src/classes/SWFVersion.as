@@ -62,6 +62,6 @@ package flash.display
         public static const FLASH7:uint  =  7;
         public static const FLASH8:uint  =  8;
         public static const FLASH9:uint  =  9;
-        public static const FLASH10:uint = 10;
+        [API(CONFIG::FP_10_0)] public static const FLASH10:uint = 10;
     }
 }
