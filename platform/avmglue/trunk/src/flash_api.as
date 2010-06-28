@@ -38,19 +38,15 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package avmplus
 {
+    /* note:
+       this naemspace is not part of the Flash Platform API
+    */
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * The flash_api namespace allows you to access internal parts of the flash API,
+     * for ex: mock implementation.
      * 
-     * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
      */
-    public final class StageDisplayState
-    {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
-    }
+    public namespace flash_api = "http://code.google.com/p/redtamarin/2010/actionscript/flash/api";
 }

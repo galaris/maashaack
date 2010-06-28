@@ -41,16 +41,17 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * This class defines the constants that represent the possible values
+     * for the Shader class's <code>precisionHint</code> property.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public final class ShaderPrecision
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FULL:String = "full";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FAST:String = "fast";
     }
 }

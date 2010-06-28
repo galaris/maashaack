@@ -41,16 +41,30 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * This class defines the constants that represent the possible values
+     * for the ShaderParameter class's <code>type</code> property.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public final class ShaderParameterType
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FLOAT:String     = "float";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FLOAT2:String    = "float2";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FLOAT3:String    = "float3";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const FLOAT4:String    = "float4";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const INT:String       = "int";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const INT2:String      = "int2";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const INT3:String      = "int3";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const INT4:String      = "int4";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const BOOL:String      = "bool";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const BOOL2:String     = "bool2";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const BOOL3:String     = "bool3";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const BOOL4:String     = "bool4";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const MATRIX2X2:String = "matrix2x2";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const MATRIX3X3:String = "matrix3x3";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const MATRIX4X4:String = "matrix4x4";
     }
 }

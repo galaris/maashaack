@@ -41,16 +41,23 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * Defines the values to use for specifying path-drawing commands.
+     * 
+     * The values in this class are used by the <code>Graphics.drawPath()</code> method,
+     * or stored in the <code>commands vector</code> of a GraphicsPath object.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public final class GraphicsPathCommand
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const NO_OP:int        = 0;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const MOVE_TO:int      = 1;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const LINE_TO:int      = 2;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const CURVE_TO:int     = 3;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const WIDE_MOVE_TO:int = 4;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const WIDE_LINE_TO:int = 5;
     }
 }

@@ -43,34 +43,69 @@ package flash.display
     import avmplus.flash_api;
     
     /**
-     * This class is used to create lightweight shapes using the
-     * ActionScript drawing application program interface (API).
+     * A ShaderParameter instance represents a single input parameter of a shader kernel.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public class Shape extends DisplayObject
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public dynamic final class ShaderParameter
     {
-        private var _graphics:Graphics
+        private var _value:Array;
+        private var _type:String;
+        private var _index:int;
         
-        public function Shape()
+        public function ShaderParameter()
         {
-            CFG::dbg{ trace( "new Shape()" ); }
+            CFG::dbg{ trace( "new ShaderParameter()" ); }
             super();
         }
 
-        //public native function get graphics():Graphics;
-        public  function get graphics():Graphics
+        //public native function get value():Array;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function get value():Array
         {
-            CFG::dbg{ trace( "Shape.get graphics()" ); }
-            return _graphics;
+            CFG::dbg{ trace( "ShaderParameter.get value()" ); }
+            return _value;
         }
 
-        flash_api function set graphics( value:Graphics ):void
+        //public native function set value( val:Array ):void;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function set value( val:Array ):void
         {
-            CFG::dbg{ trace( "[flash_api] Shape.set graphics( " + value + " )" ); }
-            _graphics = value;
+            CFG::dbg{ trace( "ShaderParameter.set value( " + val + " )" ); }
+            _value = val;
+        }
+
+        //public native function get type():String;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function get type():String
+        {
+            CFG::dbg{ trace( "ShaderParameter.get type()" ); }
+            return _type;
+        }
+
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        flash_api function set type( val:String ):void
+        {
+            CFG::dbg{ trace( "[flash_api] ShaderParameter.set type( " + val + " )" ); }
+            _type = val;
+        }
+
+        //public native function get index():int;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function get index():int
+        {
+            CFG::dbg{ trace( "ShaderParameter.get index()" ); }
+            return _index;
+        }
+
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        flash_api function set index( val:int ):void
+        {
+            CFG::dbg{ trace( "[flash_api] ShaderParameter.set index( " + val + " )" ); }
+            _index = val;
         }
     }
 }

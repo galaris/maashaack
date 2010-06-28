@@ -40,17 +40,71 @@
 
 package flash.display
 {
+    import flash.utils.ByteArray;
+    
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * A Shader instance represents a Pixel Bender shader kernel in ActionScript.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public class Shader
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        private var _data:ShaderData;
+        private var _precisionHint:String;
+        
+        public function Shader( code:ByteArray = null )
+        {
+            CFG::dbg{ trace( "new Shader( " + code + " )" ); }
+            super();
+
+            if( code )
+            {
+                byteCode = code;
+            }
+        }
+
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function set byteCode( value:ByteArray ):void
+        {
+            CFG::dbg{ trace( "Shader.set byteCode( " + value + " )" ); }
+            data = new ShaderData( value );
+        }
+
+        //public native function get data():ShaderData;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function get data():ShaderData
+        {
+            CFG::dbg{ trace( "Shader.get data()" ); }
+            return _data;
+        }
+        
+        //public native function set data( value:ShaderData ):void;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function set data( value:ShaderData ):void
+        {
+            CFG::dbg{ trace( "Shader.set data( " + value + " )" ); }
+            _data = value;
+        }
+
+        //public native function get precisionHint():String;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function get precisionHint():String
+        {
+            CFG::dbg{ trace( "Shader.get precisionHint()" ); }
+            return _precisionHint;
+        }
+
+        //public native function set precisionHint( value:String ):void;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+        public function set precisionHint( value:String ):void
+        {
+            CFG::dbg{ trace( "Shader.set precisionHint( " + value + " )" ); }
+            _precisionHint = value;
+        }
+        
+        
     }
 }

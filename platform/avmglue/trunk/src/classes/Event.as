@@ -40,7 +40,7 @@
 
 package flash.events
 {
-    import flash.utils.flash_api;
+    import avmplus.flash_api;
     
     /**
      * The Event class is used as the base class for the creation of Event objects,
@@ -349,7 +349,7 @@ package flash.events
 
         flash_api function set type( value:String )
         {
-            CFG::dbg{ trace( "Event.set type( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set type( " + value + " )" ); }
             _type = value;
         }
 
@@ -362,7 +362,7 @@ package flash.events
         
         flash_api function set bubbles( value:Boolean )
         {
-            CFG::dbg{ trace( "Event.set bubbles( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set bubbles( " + value + " )" ); }
             _bubbles = value;
         }
 
@@ -375,7 +375,7 @@ package flash.events
         
         flash_api function set cancelable( value:Boolean )
         {
-            CFG::dbg{ trace( "Event.set cancelable( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set cancelable( " + value + " )" ); }
             _cancelable = value;
         }
 
@@ -388,7 +388,7 @@ package flash.events
 
         flash_api function set target( value:Object )
         {
-            CFG::dbg{ trace( "Event.set target( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set target( " + value + " )" ); }
             _target = value;
         }
 
@@ -401,7 +401,7 @@ package flash.events
         
         flash_api function set currentTarget( value:Object )
         {
-            CFG::dbg{ trace( "Event.set currentTarget( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set currentTarget( " + value + " )" ); }
             _currentTarget = value;
         }
 
@@ -414,7 +414,7 @@ package flash.events
         
         flash_api function set eventPhase( value:uint )
         {
-            CFG::dbg{ trace( "Event.set eventPhase( " + value + " )" ); }
+            CFG::dbg{ trace( "[flash_api] Event.set eventPhase( " + value + " )" ); }
             _eventPhase = value;
         }
 

@@ -40,17 +40,33 @@
 
 package flash.display
 {
+    import flash.utils.ByteArray;
+
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * A ShaderData object contains properties representing any parameters and inputs for a shader kernel,
+     * as well as properties containing any metadata specified for the shader.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public dynamic final class ShaderData
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        private var _byteCode:ByteArray;
+        
+        public function ShaderData( byteCode:ByteArray )
+        {
+            CFG::dbg{ trace( "new ShaderData( " + byteCode + " )" ); }
+            super();
+            
+            this._setByteCode( byteCode );
+        }
+
+        //private native function _setByteCode( value:ByteArray ):void;
+        private function _setByteCode( value:ByteArray ):void
+        {
+            _byteCode = value;
+        }
     }
 }

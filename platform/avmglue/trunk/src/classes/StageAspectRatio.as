@@ -41,16 +41,15 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * The StageAspectRatio class provides values for the <code>Stage.setAspectRatio()</code> method.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion AIR 2.0
      */
-    public final class StageDisplayState
+    [API(CONFIG::AIR_2_0)]
+    public final class StageAspectRatio
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::AIR_2_0)] public static const PORTRAIT:String  = "portrait";
+        [API(CONFIG::AIR_2_0)] public static const LANDSCAPE:String = "landscape";
     }
 }

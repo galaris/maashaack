@@ -41,16 +41,17 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * The GraphicsPathWinding class provides values for the <code>flash.display.GraphicsPath.winding</code> property
+     * and the <code>flash.display.Graphics.drawPath()</code> method to determine the direction to draw a path.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public final class GraphicsPathWinding
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const EVEN_ODD:String = "evenOdd";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public static const NON_ZERO:String = "nonZero";
     }
 }

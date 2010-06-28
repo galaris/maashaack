@@ -41,16 +41,18 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * The FocusDirection class enumerates values to be used for the <code>direction</code> parameter
+     * of the <code>assignFocus()</code> method of a Stage object
+     * and for the <code>direction</code> property of a FocusEvent object.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
      * @playerversion AIR 1.0
      */
-    public final class StageDisplayState
+    [API(CONFIG::AIR_1_0)]
+    public final class FocusDirection
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::AIR_1_0)] public static const NONE:String   = "none";
+        [API(CONFIG::AIR_1_0)] public static const TOP:String    = "top";
+        [API(CONFIG::AIR_1_0)] public static const BOTTOM:String = "bottom";
     }
 }

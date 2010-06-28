@@ -41,16 +41,18 @@
 package flash.display
 {
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * The StageOrientation class provides values for the <code>orientation</code> property of the Stage class.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion AIR 2.0
      */
-    public final class StageDisplayState
+    [API(CONFIG::AIR_2_0)]
+    public final class StageOrientation
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::AIR_2_0)] public static const DEFAULT:String       = "default";
+        [API(CONFIG::AIR_2_0)] public static const ROTATED_RIGHT:String = "rotatedRight";
+        [API(CONFIG::AIR_2_0)] public static const ROTATED_LEFT:String  = "rotatedLeft";
+        [API(CONFIG::AIR_2_0)] public static const UPSIDE_DOWN:String   = "upsideDown";
+        [API(CONFIG::AIR_2_0)] public static const UNKNOWN:String       = "unknown";
     }
 }

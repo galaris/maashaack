@@ -40,17 +40,37 @@
 
 package flash.display
 {
+    import flash.geom.Matrix;
+    
     /**
-     * The StageDisplayState class provides values for the <code>Stage.displayState</code> property.
+     * Defines a bitmap fill.
+     * The bitmap can be smoothed, repeated or tiled to fill the area; or manipulated using a transformation matrix.
+     * 
+     * Use a GraphicsBitmapFill object with the <code>Graphics.drawGraphicsData()</code> method.
+     * Drawing a GraphicsBitmapFill object is the equivalent of calling the <code>Graphics.beginBitmapFill()</code> method.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9.0.28.0
-     * @playerversion AIR 1.0
+     * @playerversion Flash Player 10
+     * @playerversion AIR 1.5
      */
-    public final class StageDisplayState
+    [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)]
+    public final class GraphicsBitmapFill implements IGraphicsFill, IGraphicsData
     {
-        public static const NORMAL:String                  = "normal";
-        public static const FULL_SCREEN:String             = "fullScreen";
-        public static const FULL_SCREEN_INTERACTIVE:String = "fullScreenInteractive";
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public var bitmapData:BitmapData;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public var matrix:Matrix;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public var repeat:Boolean;
+        [API(CONFIG::FP_10_0,CONFIG::AIR_1_5)] public var smooth:Boolean;
+
+        public function GraphicsBitmapFill( bitmapData:BitmapData = null, matrix:Matrix = null,
+                                            repeat:Boolean = true, smooth:Boolean = false )
+        {
+            CFG::dbg{ trace( "new GraphicsBitmapFill( " + [bitmapData,matrix,repeat,smooth].join(", ") + " )" ); }
+            super();
+            
+            this.bitmapData = bitmapData;
+            this.matrix     = matrix;
+            this.repeat     = repeat;
+            this.smooth     = smooth;
+        }
     }
 }
