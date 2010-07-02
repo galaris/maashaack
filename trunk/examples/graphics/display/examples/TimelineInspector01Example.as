@@ -108,7 +108,8 @@ package examples
                 }
                 case "middle" :
                 {
-                    mc.gotoAndStop(0) ;
+                    //mc.gotoAndStop(0) ;
+                    mc.stop() ;
                     id = setTimeout( mc.play , 5000) ; // pause 5 seconds
                     break ;
                 }
