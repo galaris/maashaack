@@ -286,6 +286,7 @@
     <component id="system.process:Chain"                  class="system.process.Chain"                  />
     <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
     <component id="system.process:CoreActionLoader"       class="system.process.CoreActionLoader"       />
+    <component id="system.process:CountDown"              class="system.process.CountDown"              />
     <component id="system.process:DelayedTask"            class="system.process.DelayedTask"            />
     <component id="system.process:Initializer"            class="system.process.Initializer"            />
     <component id="system.process:Lockable"               class="system.process.Lockable"               />
