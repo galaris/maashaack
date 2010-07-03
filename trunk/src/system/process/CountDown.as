@@ -1,20 +1,25 @@
 ﻿package system.process 
 {
+    import core.dump;
+
+    import system.Serializable;
+
     import flash.events.TimerEvent;
     import flash.utils.Timer;
 
     /**
      * Run a countdown process.
      */
-    public class CountDown extends CoreAction implements Resetable, Resumable, Startable, Stoppable
+    public class CountDown extends CoreAction implements Resetable, Resumable, Serializable, Startable, Stoppable
     {
         /**
          * Creates a new CountDown instance.
          * @param maxcount The number of seconds to countdown.
+         * @param delay The optional delay to countdown (default 1000 ms)
          */
-        public function CountDown( maxCount:uint = 0 )
+        public function CountDown( maxCount:uint = 0 , delay:Number = 1000 )
         {
-            _timer = new Timer( 1000 ) ;
+            _timer = new Timer( delay ) ;
             _timer.addEventListener( TimerEvent.TIMER          , _timerProgress ) ;
             _timer.addEventListener( TimerEvent.TIMER_COMPLETE , _timerComplete ) ;
             this.maxCount = maxCount ;
@@ -26,6 +31,22 @@
         public function get count():uint
         {
             return _count ;
+        }
+        
+        /**
+         * The optional delay to countdown (default 1000 ms)
+         */
+        public function get delay():Number
+        {
+            return _timer.delay ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set delay( value:Number ):void
+        {
+            _timer.delay = value ;
         }
         
         /**
@@ -68,6 +89,10 @@
         {
             _timer.reset() ;
             _count = _timer.repeatCount ;
+            if ( running )
+            {
+                _timer.start() ;
+            }
         }
         
         /**
@@ -94,6 +119,9 @@
             }
             
             _stopped = false ;
+            _count   = _timer.repeatCount ;
+            
+            _timer.reset() ;
             
             notifyStarted() ;
             
@@ -102,9 +130,6 @@
                 notifyFinished() ;
                 return ;
             }
-            
-            _count = _timer.repeatCount ;
-            _timer.reset() ;
             
             _timer.start() ;
         }
@@ -128,6 +153,24 @@
                 _timer.stop() ;
                 notifyStopped() ;
             }
+        }
+        
+        /**
+         * Returns the String source representation of the object.
+         * @return a string representation the source code of the object.
+         */
+        public function toSource( indent:int = 0 ):String  
+        {
+            return "new system.process.CountDown(" + dump(_timer.repeatCount) + "," + dump(_timer.delay) + ")" ;
+        }
+        
+        /**
+         * Returns the string representation of this instance.
+         * @return the string representation of this instance.
+         */
+        public function toString():String 
+        {
+            return "[CountDown maxCount:" + _timer.repeatCount + "]" ;
         }
         
         /**

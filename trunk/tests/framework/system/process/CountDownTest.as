@@ -75,9 +75,38 @@ package system.process
         
         public function testConstructorWithArguments():void
         {
-            assertEquals( 0 , task.maxCount ) ;
-            task = new CountDown( 5 ) ;
+            assertEquals( 1000 , task.delay    ) ;
+            assertEquals(    0 , task.maxCount ) ;
+            task = new CountDown( 5 , 2000 ) ;
+            assertEquals( 2000 , task.delay    ) ;
+            assertEquals(    5 , task.maxCount ) ;
+        }
+        
+        public function testMaxCount():void
+        {
+            task.maxCount = 5 ;
             assertEquals( 5 , task.maxCount ) ;
+        }
+        
+        public function testDelay():void
+        {
+            task.delay = 5000 ;
+            assertEquals( 5000 , task.delay ) ;
+        }
+        
+        public function testToSource():void
+        {
+            assertEquals( "new system.process.CountDown(0,1000)" , task.toSource() ) ;
+            task.delay    = 5000 ;
+            task.maxCount = 5 ;
+            assertEquals( "new system.process.CountDown(5,5000)" , task.toSource() ) ;
+        }
+        
+        public function testToString():void
+        {
+            assertEquals( "[CountDown maxCount:0]" , task.toString() ) ;
+            task.maxCount = 5 ;
+            assertEquals( "[CountDown maxCount:5]" , task.toString() ) ;
         }
     }
 }

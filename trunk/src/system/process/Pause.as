@@ -35,13 +35,14 @@
 
 package system.process 
 {
-    import system.Reflection;
+    import core.dump;
+    import core.reflect.getClassPath;
+    
     import system.Serializable;
-    import system.eden;
     
     import flash.events.TimerEvent;
     import flash.utils.Timer;
-    
+
     /**
      * This <code class="prettyprint">Action</code> object create a pause in the process.
      * <p><b>Example :</b></p>
@@ -173,7 +174,7 @@ package system.process
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + Reflection.getClassPath(this) + "(" + eden.serialize(delay) + "," + eden.serialize(useSeconds) + ")" ;
+            return "new " + getClassPath(this, true) + "(" + dump(delay) + "," + dump(useSeconds) + ")" ;
         }
         
         /**
