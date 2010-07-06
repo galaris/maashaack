@@ -136,7 +136,7 @@ package system.evaluators
                 e2.eval("unknow") ;
                 fail("04.1 - The eval method failed with the expression : '" + expression + "' the throwError mode is true and an exception must be throwing.") ;
             }
-                catch( e:Error )
+            catch( e:Error )
             {
                 assertEquals("EvalError: [object PropertyEvaluator] eval failed with the expression : unknow", e.toString(), "04.2 - The eval method failed with the expression : '" + expression + "'") ;                    
             }
