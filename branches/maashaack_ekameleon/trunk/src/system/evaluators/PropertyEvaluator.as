@@ -103,6 +103,11 @@ package system.evaluators
         }
         
         /**
+         * The separator of the expression evaluator.
+         */
+        public var separator:String = "." ;
+        
+        /**
          * The target reference use in the evaluator.
          */
         public function get target():*
@@ -119,19 +124,14 @@ package system.evaluators
         }
         
         /**
-         * The separator of the expression evaluator.
+         * Indicates if the eval() method throws errors or return null when an error is throwing.
          */
-        public var separator:String = "." ;
+        public var throwError:Boolean ;
         
         /**
          * This attributs defines the value returns from the eval() method if the expression can't be evaluate.
          */
         public var undefineable:* = null ;
-        
-        /**
-         * Indicates if the eval() method throws errors or return null when an error is throwing.
-         */
-        public var throwError:Boolean ;
         
         /**
          * Evaluates the specified object.
