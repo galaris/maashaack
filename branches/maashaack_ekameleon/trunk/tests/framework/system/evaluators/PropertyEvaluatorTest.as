@@ -70,6 +70,13 @@ package system.evaluators
             e2 = new PropertyEvaluator(obj) ;
         }
         
+        public function teadDown():void
+        {
+            obj = null ;
+            e1  = null ;
+            e2  = null ;
+        }
+        
         public function testInstances():void
         {
             assertNotNull(e1, "01 - The PropertyEvaluator instance not must be null.") ;
