@@ -42,9 +42,9 @@ package system.evaluators
      * Evaluates an int value and transform it in roman numeral expression.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.evaluators.RomanEvaluator ;
+     * RomanEvaluator =  system.evaluators.RomanEvaluator ;
      * 
-     * var evaluator:RomanEvaluator = new RomanEvaluator() ;
+     * var evaluator = new RomanEvaluator() ;
      * 
      * trace( evaluator.eval( 1 ) ) ; // I
      * trace( evaluator.eval( 2 ) ) ; // II
@@ -74,7 +74,7 @@ package system.evaluators
      * {
      *     evaluator.eval( 4000 ) ;
      * }
-     * catch( e:Error )
+     * catch( e )
      * {
      *     trace( e.message ) ;  // Max value for a RomanNumber is 3999
      * }
@@ -83,7 +83,7 @@ package system.evaluators
      * {
      *     evaluator.eval( -1 ) ;
      * }
-     * catch( e:Error )
+     * catch( e )
      * {
      *     trace( e.message ) ; // Min value for a RomanNumber is 0
      * }
@@ -111,6 +111,10 @@ package system.evaluators
             else if ( o is Number )
             {
                 return RomanNumber.parse( o ); 
+            }
+            else
+            {
+                return null ;
             }
         }
     }
