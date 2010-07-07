@@ -35,14 +35,13 @@
 
 package system.evaluators 
 {
-    import buRRRn.ASTUce.framework.TestCase;            
+    import buRRRn.ASTUce.framework.TestCase;
 
     /**
      * The RomanEvaluatorTest test case.
      */
     public class RomanEvaluatorTest extends TestCase 
     {
-
         /**
          * Creates a new RomanEvaluatorTest instance.
          */
@@ -50,12 +49,11 @@ package system.evaluators
         {
             super(name);
         }
-
+        
         public function testInstances():void
         {
             var e:RomanEvaluator = new RomanEvaluator() ;
-            assertNotNull(e, "01 - The RomanEvaluator instance not must be null.") ;            
-            
+            assertNotNull(e, "01 - The RomanEvaluator instance not must be null.") ;
         }
         
         public function testInterface():void
@@ -63,14 +61,19 @@ package system.evaluators
             var e:RomanEvaluator = new RomanEvaluator() ;
             assertTrue(e is Evaluable, "The RomanEvaluator must implement the Evaluable interface.") ;
         }
-
+        
+        public function testEvalInvalidValue():void
+        {
+            var e:RomanEvaluator = new RomanEvaluator() ;
+            assertNull( e.eval( {} ) ) ;
+        }
+        
         public function testEvalRange():void
         {
-
             var e:RomanEvaluator = new RomanEvaluator() ;
             
-            // evaluate a value out of range.
-              
+            // evaluates a value out of range.
+            
             try
             {    
                 e.eval(-1) ;
@@ -81,7 +84,7 @@ package system.evaluators
                 assertTrue( er is RangeError , "01-02 - The eval method failed." ) ;
                 assertEquals( er.message , "Min value for a RomanNumber is 0" , "01-03 - The eval method failed." ) ;
             }
-
+            
             try
             {    
                 e.eval( 4000 ) ;
@@ -93,11 +96,10 @@ package system.evaluators
                 assertEquals(er.message , "Max value for a RomanNumber is 3999" , "02-03 - The eval method failed." ) ;
             }
         }
-           
+        
         public function testEvalNumberToString():void
         {
-            
-            var e:RomanEvaluator = new RomanEvaluator() ;            
+            var e:RomanEvaluator = new RomanEvaluator() ;
             
             assertEquals( e.eval( 1 )    , "I"         , "01 - eval( 1 ) failed." ) ;
             assertEquals( e.eval( 2 )    , "II"        , "02 - eval( 2 ) failed." ) ;
@@ -113,13 +115,11 @@ package system.evaluators
             assertEquals( e.eval( 2459 ) , "MMCDLIX"   , "11 - eval( 2459 ) failed." ) ;
             assertEquals( e.eval( 3999 ) , "MMMCMXCIX" , "12 - eval( 3999 ) failed." ) ;
             assertEquals( e.eval( 1997 ) , "MCMXCVII"  , "13 - eval( 1997 ) failed." ) ;
-            
         }
         
         public function testEvalStringToNumber():void
         {
-            
-            var e:RomanEvaluator = new RomanEvaluator() ;           
+            var e:RomanEvaluator = new RomanEvaluator() ;
             
             assertEquals( e.eval(   "I" ) ,  1  , "01 - eval(  'I'  ) failed." ) ;
             assertEquals( e.eval(  "II" ) ,  2  , "02 - eval(  'II' ) failed." ) ;
@@ -135,9 +135,6 @@ package system.evaluators
             assertEquals( e.eval(   "MMCDLIX" ) , 2459 , "11 - eval(   'MMCDLIX' ) failed." ) ;
             assertEquals( e.eval( "MMMCMXCIX" ) , 3999 , "12 - eval( 'MMMCMXCIX' ) failed." ) ;
             assertEquals( e.eval(  "MCMXCVII" ) , 1997 , "13 - eval(  'MCMXCVII' ) failed." ) ;
-            
-        }        
-        
+        }
     }
 }
-
