@@ -41,18 +41,17 @@
 package flash.display
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * The NativeWindowSystemChrome class defines constants for the <code>systemChrome</code> property
+     * of the NativeWindowInitOptions object used to create a native window.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public final class NativeWindowSystemChrome
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        [API(CONFIG::AIR_1_0)] public static const NONE:String      = "none";
+        [API(CONFIG::AIR_1_0)] public static const STANDARD:String  = "standard";
+        [API(CONFIG::AIR_1_0)] public static const ALTERNATE:String = "alternate";
     }
 }

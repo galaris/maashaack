@@ -38,21 +38,51 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package flash.data
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * The SQLSchema class is the base class for schema information for database objects
+     * such as tables, views, and indices.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public class SQLSchema
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        private var _database:String;
+        private var _name:String;
+        private var _sql:String;
+
+        public function SQLSchema( database:String, name:String, sql:String )
+        {
+            CFG::dbg{ trace( "new SQLSchema( " + [database,name,sql].join(", ") + " )" ); }
+            super();
+
+            _database = database;
+            _name     = name;
+            _sql      = sql;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get database():String
+        {
+            CFG::dbg{ trace( "SQLSchema.get database()" ); }
+            return _database;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get name():String
+        {
+            CFG::dbg{ trace( "SQLSchema.get name()" ); }
+            return _name;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get sql():String
+        {
+            CFG::dbg{ trace( "SQLSchema.get sql()" ); }
+            return _sql;
+        }
     }
 }

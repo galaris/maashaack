@@ -38,21 +38,20 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package flash.data
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * This class contains the constants that represent the possible values for
+     * the <code>SQLConnection.columnNameStyle</code> property.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public class SQLColumnNameStyle
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        [API(CONFIG::AIR_1_0)] public static const DEFAULT:String = "default";
+        [API(CONFIG::AIR_1_0)] public static const LONG:String    = "long";
+        [API(CONFIG::AIR_1_0)] public static const SHORT:String   = "short";
     }
 }

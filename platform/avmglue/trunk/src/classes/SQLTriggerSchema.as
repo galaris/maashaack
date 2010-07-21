@@ -38,21 +38,32 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package flash.data
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * A SQLTriggerSchema instance provides information describing a specific trigger in a database.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public class SQLTriggerSchema extends SQLSchema
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        private var _table:String;
+        
+        public function SQLTriggerSchema( database:String, name:String, sql:String, table:String )
+        {
+            CFG::dbg{ trace( "new SQLTriggerSchema( " + [database,name,sql,table].join(", ") + " )" ); }
+            super( database, name, sql );
+
+            _table = table;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get table():String
+        {
+            CFG::dbg{ trace( "SQLTriggerSchema.get table()" ); }
+            return _table;
+        }
     }
 }

@@ -38,21 +38,62 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package flash.data
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * The SQLResult class provides access to data returned in response to the execution of
+     * a SQL statement (a SQLStatement instance).
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public class SQLResult
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        
+        private var _data:Array;
+        private var _rowsAffected:uint;
+        private var _complete:Boolean;
+        private var _rowID:Number;
+        
+        public function SQLResult( data:Array = null, rowsAffected:Number = 0,
+                                   complete:Boolean = true, rowID:Number = 0 )
+        {
+            CFG::dbg{ trace( "new SQLResult( " + [data,rowsAffected,complete,rowID].join(", ") + " )" ); }
+            super();
+
+            _data         = data;
+            _rowsAffected = rowsAffected;
+            _complete     = complete;
+            _rowID        = rowID;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get data():Array
+        {
+            CFG::dbg{ trace( "SQLResult.get data()" ); }
+            return _data;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get rowsAffected():Number
+        {
+            CFG::dbg{ trace( "SQLResult.get rowsAffected()" ); }
+            return _rowsAffected
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get complete():Boolean
+        {
+            CFG::dbg{ trace( "SQLResult.get complete()" ); }
+            return _complete;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get lastInsertRowID():Number
+        {
+            CFG::dbg{ trace( "SQLResult.get lastInsertRowID()" ); }
+            return _rowID;
+        }
     }
 }

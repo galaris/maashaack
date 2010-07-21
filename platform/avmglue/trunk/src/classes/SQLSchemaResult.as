@@ -38,21 +38,60 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-package flash.display
+package flash.data
 {
     /**
-     * The BitmapDataChannel class is an enumeration of constant values that indicate which channel
-     * to use: red, blue, green, or alpha transparency.
+     * A SQLSchemaResult instance contains the information resulting from a call to
+     * the <code>SQLConnection.loadSchema()</code> method.
      * 
      * @langversion ActionScript 3.0
-     * @playerversion Flash Player 9
      * @playerversion AIR 1.0
      */
-    public final class BitmapDataChannel
+    [API(CONFIG::AIR_1_0)]
+    public class SQLSchemaResult
     {
-        public static const RED:uint   = 1;
-        public static const GREEN:uint = 2;
-        public static const BLUE:uint  = 4;
-        public static const ALPHA:uint = 8;
+        private var _tables:Array;
+        private var _views:Array;
+        private var _indices:Array;
+        private var _triggers:Array;
+        
+        public function SQLSchemaResult( tables:Array, views:Array, indices:Array, triggers:Array )
+        {
+            CFG::dbg{ trace( "new SQLSchemaResult( " + [tables,views,indices,triggers].join(", ") + " )" ); }
+            super();
+
+            _tables   = tables   ? tables:   [];
+            _views    = views    ? views:    [];
+            _indices  = indices  ? indices:  [];
+            _triggers = triggers ? triggers: [];
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get tables():Array
+        {
+            CFG::dbg{ trace( "SQLSchemaResult.get tables()" ); }
+            return _tables;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get views():Array
+        {
+            CFG::dbg{ trace( "SQLSchemaResult.get views()" ); }
+            return _views;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get indices():Array
+        {
+            CFG::dbg{ trace( "SQLSchemaResult.get indices()" ); }
+            return _indices;
+        }
+
+        [API(CONFIG::AIR_1_0)]
+        public function get triggers():Array
+        {
+            CFG::dbg{ trace( "SQLSchemaResult.get triggers()" ); }
+            return _triggers;
+        }
     }
 }
