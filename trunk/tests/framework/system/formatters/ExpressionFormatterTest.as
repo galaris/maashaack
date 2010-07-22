@@ -56,6 +56,11 @@ package system.formatters
             formatter = new ExpressionFormatter() ;
         }
         
+        public function tearDown():void
+        {
+            formatter = null ;
+        }
+        
         public function testConstructor():void
         {
             assertNotNull(formatter, "01 - The ExpressionFormatter constructor failed.") ;
