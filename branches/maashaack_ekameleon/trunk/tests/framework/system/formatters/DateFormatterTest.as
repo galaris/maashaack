@@ -60,6 +60,13 @@ package system.formatters
             formatter = new DateFormatter() ;
         }
         
+        public function tearDown():void
+        {
+            date_am   = null ;
+            date_am   = null ;
+            formatter = null ;
+        }
+        
         public function testConstructor():void
         {
             assertNotNull(formatter, "01 - The DateFormatter instance not must be null.") ;
