@@ -41,7 +41,7 @@ package system.formatters
     import flash.utils.Dictionary;
     
     /**
-     * This dictionary register formattable expression and format a String with all expression in the dictionnary. 
+     * This dictionary register formattable expression and format a String with all expressions in the dictionnary. 
      * <pre class="prettyprint">
      * import system.formatters.ExpressionFormatter ;
      * 
