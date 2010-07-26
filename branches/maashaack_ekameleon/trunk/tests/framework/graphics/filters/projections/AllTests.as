@@ -33,38 +33,19 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.filters
+package graphics.filters.projections
 {
     import buRRRn.ASTUce.framework.*;
-    
-    import graphics.filters.projections.AllTests;
-    
+
     public class AllTests
     {
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("graphics.filters package tests");
             
-            suite.addTestSuite( AlphaMatteTest ) ;
-            suite.addTestSuite( CircleSpectrumTest ) ;
-            suite.addTestSuite( GrayScaleTest ) ;
-            suite.addTestSuite( HoleTest ) ;
-            suite.addTestSuite( KnockoutTest ) ;
-            suite.addTestSuite( ReflectionTest ) ;
-            suite.addTestSuite( RGBDistortTest ) ;
-            suite.addTestSuite( RippleBlocksTest ) ;
-            suite.addTestSuite( RoundPixelTest ) ;
-            suite.addTestSuite( SharpenTest ) ;
-            suite.addTestSuite( TwirlTest ) ;            suite.addTestSuite( WaveReflectionTest ) ;
+            suite.addTestSuite( GnomonicTest ) ;
             
-            suite.addTestSuite( CircleSpectrumFilterTest ) ;
-            suite.addTestSuite( FiltersTest ) ;
-            suite.addTestSuite( GrayScaleFilterTest ) ;            suite.addTestSuite( HoleFilterTest ) ;
-            suite.addTestSuite( KnockoutFilterTest ) ;
-            suite.addTestSuite( ReflectionFilterTest ) ;            suite.addTestSuite( RGBDistortFilterTest ) ;
-            suite.addTestSuite( RippleBlocksFilterTest ) ;            suite.addTestSuite( RoundPixelFilterTest ) ;            suite.addTestSuite( ShaderCustomFilterTest ) ;            suite.addTestSuite( SharpenFilterTest ) ;            suite.addTestSuite( TwirlFilterTest ) ;            suite.addTestSuite( WaveReflectionFilterTest ) ;
-            
-            suite.addTest( graphics.filters.projections.AllTests.suite()  );
+            suite.addTestSuite( GnomonicFilterTest ) ;
             
             return suite;
         }

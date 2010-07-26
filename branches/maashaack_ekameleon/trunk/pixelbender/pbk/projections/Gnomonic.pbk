@@ -37,7 +37,7 @@
 
 kernel Gnomonic
 <   
-    namespace   : "graphics.filters";
+    namespace   : "graphics.filters.projections";
     vendor      : "ALCARAZ Marc (eKameleon)";
     version     : 1 ;
     description : "The gnomonic azimuthal projection is a nonconformal map projection (standard perspective)." ; 
