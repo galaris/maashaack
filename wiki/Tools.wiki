@@ -73,9 +73,9 @@ Use the terminal or anything that give you access to a shell.
 [http://en.wikipedia.org/wiki/Environment_variable]
 
 you need to define
- ** JAVA_HOME*<br>must point to the J2SDK directory, which should contain bin and lib directories.
- **ANT_HOME*<br>must point to the Ant directory, which should contain bin and lib directories.
- **PATH*
+ * *JAVA_HOME*<br>must point to the J2SDK directory, which should contain bin and lib directories.
+ * *ANT_HOME*<br>must point to the Ant directory, which should contain bin and lib directories.
+ * *PATH*
   * Ant's bin directory, $ANT_HOME/bin
   * Java's bin directory, $JAVA_HOME/bin
   * etc.
