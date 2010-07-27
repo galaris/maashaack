@@ -49,6 +49,7 @@
    * maashaack
       * [swfinfos swfinfos]
       * [flashdoc flashdoc]
+      * [soldump soldump]    
    * general
       * [gclient gclient]
       * [asdoc asdoc]
