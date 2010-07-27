@@ -35,12 +35,12 @@
 
 <languageVersion: 1.0;>
 
-kernel Stereographic
+kernel Orthographic
 <   
     namespace   : "graphics.filters.projections";
     vendor      : "ALCARAZ Marc (eKameleon)";
     version     : 1 ;
-    description : "In geometry, the stereographic projection is a particular mapping (function) that projects a sphere onto a plane." ; 
+    description : "In geometry, the orthographic projection is a perspective (or azimuthal) projection, in which the sphere is projected onto a tangent plane or secant plane." ; 
 >
 {
     /**
@@ -115,10 +115,7 @@ kernel Stereographic
         if ( rho < 1.0 )
         {
             theta = asin( rho );
-        }
             
-        if ( rho < 1.0 )
-        {
             lat = theta;
             lon = a - pi / 4.0 ;
             
