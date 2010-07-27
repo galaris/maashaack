@@ -47,7 +47,8 @@
    * [Signals Signalers and Receivers]
  * [Tools Tools]
    * maashaack
-      * test
+      * [swfinfos swfinfos]
+      * [flashdoc flashdoc]
    * general
       * [gclient gclient]
       * [asdoc asdoc]
