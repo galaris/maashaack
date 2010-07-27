@@ -23,8 +23,10 @@ On the [http://www.chromium.org/developers/how-tos/depottools/gclient depot_tool
  * unzip in a folder
  * create an alias
 
-=== OS X ===
-{{{
-$ unzip gclient-0.3.4.zip
+note: under Windows, we support only [http://www.cygwin.com/ cygwin]
 
+{{{
+$ cd ~
+$ unzip gclient-0.3.4.zip
+$ ln -s gclient-0.3.4/gclient.py gclient
 }}}
