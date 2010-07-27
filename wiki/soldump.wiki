@@ -1,0 +1,12 @@
+#summary the soldump command-line tool.
+
+== Introduction ==
+
+*soldump* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
+
+It allows to dump the content of `*.sol` file or [http://en.wikipedia.org/wiki/Local_Shared_Object Local Shared Object].
+
+
+== Details ==
+
+TODO
