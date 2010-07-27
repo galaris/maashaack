@@ -44,6 +44,7 @@ package graphics.filters.projections
             var suite:TestSuite = new TestSuite("graphics.filters package tests");
             
             suite.addTestSuite( GnomonicTest ) ;
+            suite.addTestSuite( LambertTest ) ;
             suite.addTestSuite( OrthographicTest ) ;
             suite.addTestSuite( StereographicTest ) ;
             
