@@ -29,7 +29,7 @@ It is easier for us to maintain different small projects that get assembled in a
 *What are the advantages of `DEPS` files ?*<br>
  * It is really like a `svn:externals` but with the difference that it is a file instead of a svn property, so for us it is clearer to see the mapping of directories in those `DEPS` files.
  * it allow us from the same sources to assemble different structure of projects, see [http://code.google.com/p/maashaack/source/browse/#svn/configs/maashaack maashaack] and [http://code.google.com/p/maashaack/source/browse/#svn/configs/maashaackSA maashaackSA].
- * it allows to have a prent/child relationship between projects.
+ * it allows to have a parent/child relationship between projects.
 
 
 == installation ==
