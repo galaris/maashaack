@@ -1,6 +1,8 @@
 #summary our battle plan for world domination =).
 #labels Coders,Framework
 
+|| *important:* this roadmap is deprecated, bare with us while we restructure all the projects||
+
 == (maybe) ==
 
  * ui: basic layout library, mainly for debug/diagnostic tools
