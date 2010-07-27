@@ -109,17 +109,30 @@ kernel Stereographic
         float lon;
              
         rho_fov = tan( rho_FOV / 2.0 );
-        rho = ( r / focalLength ) * rho_fov;
-        theta = 2.0 * atan( rho );
         
-        lat = theta;
-        lon = a - pi / 4.0 ;
+        rho = ( r / focalLength ) * rho_fov;
+        
+        if ( rho < 1.0 )
+        {
+            theta = asin( rho );
+        }
             
-        lat = mod( lat + pi, pi ) - pi / 2.0 ;
-        lon = mod( lon + pi, pi * 2.0 ) - pi ;
+        if ( rho < 1.0 )
+        {
+            lat = theta;
+            lon = a - pi / 4.0 ;
             
-        xe = -lon/rads ;
-        ye =  lat/rads ;
+            lat = mod( lat + pi, pi ) - pi / 2.0 ;
+            lon = mod( lon + pi, pi * 2.0 ) - pi ;
+            
+            xe = -lon/rads ;
+            ye =  lat/rads ;
+        }
+        else
+        {
+            xe = -1.0;
+            ye = -1.0;
+        }
         
         result = sampleNearest( source , float2( w/2.0 - xe, h/2.0 - ye ) );
     }
