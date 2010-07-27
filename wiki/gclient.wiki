@@ -14,3 +14,17 @@ On the [http://www.chromium.org/developers/how-tos/depottools/gclient depot_tool
     to coordinate pieces of code from different SCM repositories during the development process.
     The sources are included inside depot_tools.  
 }}}
+
+== informations ==
+
+== installation ==
+
+ * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.3.4.zip gclient-0.3.4]
+ * unzip in a folder
+ * create an alias
+
+=== OS X ===
+{{{
+$ unzip gclient-0.3.4.zip
+
+}}}
