@@ -47,6 +47,7 @@ package graphics.filters.projections
             suite.addTestSuite( StereographicTest ) ;
             
             suite.addTestSuite( GnomonicFilterTest ) ;
+            suite.addTestSuite( StereographicFilterTest ) ;
             
             return suite;
         }

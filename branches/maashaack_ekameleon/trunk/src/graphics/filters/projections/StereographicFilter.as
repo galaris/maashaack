@@ -41,19 +41,19 @@ package graphics.filters.projections
     import flash.filters.BitmapFilter;
     
     /**
-     * Apply a gnomonic azimuthal projection.
-     * The Shader must be defines with the Gnomonic pixelbender implementation.
+     * Apply a stereographic projection.
+     * The Shader must be defines with the Stereographic pixelbender implementation.
      */
-    public class GnomonicFilter extends ShaderCustomFilter 
+    public class StereographicFilter extends ShaderCustomFilter 
     {
         /**
-         * Creates a new GnomonicFilter instance.
-         * @param shader The Shader reference with the Gnomonic pixel bender filter inside.
+         * Creates a new StereographicFilter instance.
+         * @param shader The Shader reference with the Stereographic pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
          */
-        public function GnomonicFilter( shader:Shader = null , init:Object = null )
+        public function StereographicFilter( shader:Shader = null , init:Object = null )
         {
-            super( shader || new Shader( new Gnomonic() ) , init);
+            super( shader || new Shader( new Stereographic() ) , init);
         }
         
         /**
@@ -126,7 +126,7 @@ package graphics.filters.projections
          */
         public override function clone():BitmapFilter
         {
-            return new GnomonicFilter( shader , { width:width , height:height , focalLength:focalLength , fieldOfView:fieldOfView }) ;
+            return new StereographicFilter( shader , { width:width , height:height , focalLength:focalLength , fieldOfView:fieldOfView }) ;
         }
     }
 }
