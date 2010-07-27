@@ -21,7 +21,13 @@ We use *gclient* on top of *svn* for all of our projects.
 
 See [Organization#if_you_are_a_Committer] for the greedy details.
 
+In short, we replace all the `svn:externals` by `DEPS` file and use gclient to sync and update, for the commits we simply navigate into each project directory and do a `svn commit` there.
 
+*Why are we doing that ?*<br>
+It is easier for us to maintain different small projects that get assembled in a big directory structure than to maintain a huge monolithic project.
+
+*What are the advantage of `DEPS` files ?*<br>
+It is really like a `svn:externals` but with the difference that it is a file instead of svn property, so for us it is clearer to see the mapping of directories in those `DEPS` files.
 
 
 
