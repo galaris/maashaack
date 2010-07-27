@@ -51,7 +51,7 @@ and have it compile a custom SWC/SWF/ABC for you.
 
 === if you are a Committer ===
 
-You will have to use *gclient* to be able to work on the source code.
+You will have to use *[gclient gclient]* to be able to work on the source code.
 
 If you want to work on all the different projects fused as if it was one big project<br>
 you will select the "maashaack" solution, and all the different libraries will get<br>
