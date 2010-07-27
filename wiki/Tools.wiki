@@ -1,3 +1,34 @@
 #summary we need bigger tools.
 
-everything about tools here.
+= Set up your development environment =
+
+All our projects are dependant on certain languages, tools, compilers, interpreters, etc.
+
+Here we describe how you need to set up your environment to be able to work on those different projects (and by work I mean: editing, patching, compiling, etc.), this is if you are a developer, if you are a end-user you don't need to do all that and you should find pre-compiled libraries and tools in the [http://code.google.com/p/maashaack/downloads/list download] section.
+
+== default tools ==
+
+we expect you to have on your system
+ * svn
+ * python
+ * java
+
+
+== extra tools ==
+
+ * [http://ant.apache.org/bindownload.cgi Apache Ant 1.7.1]
+ * [gclient gclient 0.3.4]
+
+
+== Command-line shell ==
+
+We build everything on the command-line
+
+if you are on Windows
+ * [http://www.cygwin.com/ cygwin]
+ * [http://sourceforge.net/projects/console/ console] (optional)
+
+for OS X and Linux, the default terminals are all that you need
+
+
+== Environment Variables ==
