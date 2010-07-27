@@ -9,6 +9,8 @@ $svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
 
 == New ==
 
+You will need the [gclient] tool.
+
 If you want to work with all the projects fused in a *src* folder
 {{{
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaack
