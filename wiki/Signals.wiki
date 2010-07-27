@@ -1,5 +1,5 @@
+#summary signals and receivers (slots)
 #labels Documentation-events,Documentation,Framework
-# signals and receivers (slots)
 
 = Signalers & Receivers =
 
