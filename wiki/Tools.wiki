@@ -52,20 +52,21 @@ $ gclient --version
 
 We build everything on the command-line, so you need to be comfortable there.
 
-=== Windows ===
+*Windows*
 
 Let be honest, the default command prompt sucks, so on Windows you'll need to use *Cygwin*, which provides a Unix-like command-line environment vastly richer than Command Prompt.
 
  * [http://www.cygwin.com/ Cygwin]
  * [http://sourceforge.net/projects/console/ Console] (optional, but allow you to have tabs)
 
-=== OS X ===
+*OS X*
 
 Just use the *Terminal.app*.
 
-=== Linux ===
+*Linux*
 
 Use the terminal or anything that give you access to a shell.
+
 
 == Environment Variables ==
 
@@ -96,7 +97,7 @@ export PATH=/Users/zwetan/scripts:$PATH
 }}}
 
 
-=== Windows ===
+*Windows*
 
 You will need to
 {{{
@@ -108,7 +109,8 @@ see [http://support.microsoft.com/kb/310519 How To Manage Environment Variables 
 
 and there you'll add the path for* JAVA_HOME*, *ANT_HOME*, *PATH*, etc.
 
-=== OS X and Linux ===
+
+*OS X and Linux*
 
 By default we use [http://en.wikipedia.org/wiki/Bash_(Unix_shell) Bash] and so we define everything in our `.profile`
 
