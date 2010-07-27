@@ -17,11 +17,19 @@ On the [http://www.chromium.org/developers/how-tos/depottools/gclient depot_tool
 
 == informations ==
 
+We use *gclient* on top of *svn* for all of our projects.
+
+See [Organization#if_you_are_a_Committer] for the greedy details.
+
+
+
+
+
 == installation ==
 
  * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.3.4.zip gclient-0.3.4]
  * unzip in a folder
- * create an alias
+ * create a symlink
 
 note: under Windows, we support only [http://www.cygwin.com/ cygwin]
 
