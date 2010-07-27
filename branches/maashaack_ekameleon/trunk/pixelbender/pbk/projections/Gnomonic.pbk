@@ -112,22 +112,14 @@ kernel Gnomonic
         rho     = ( r /  focalLength ) * rho_fov ;
         theta   = atan(rho) ;
         
-        if ( rho < 1.0 )
-        {
-            lat = theta;
-            lon = a - pi / 4.0 ;
-            
-            lat = mod( lat + pi, pi ) - pi / 2.0 ;
-            lon = mod( lon + pi, pi * 2.0 ) - pi ;
-            
-            xe = -lon/rads ;
-            ye =  lat/rads ;
-        }
-        else
-        {
-            xe = -1.0;
-            ye = -1.0;
-        }
+        lat = theta;
+        lon = a - pi / 4.0 ;
+        
+        lat = mod( lat + pi, pi ) - pi / 2.0 ;
+        lon = mod( lon + pi, pi * 2.0 ) - pi ;
+        
+        xe = -lon/rads ;
+        ye =  lat/rads ;
         
         result = sampleNearest( source , float2( w/2.0 - xe, h/2.0 - ye ) );
     }
