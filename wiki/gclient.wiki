@@ -1,0 +1,16 @@
+#summary the gclient tool.
+
+== Introduction ==
+
+gclient (or google client) is a set of wrapper scripts for checking out and updating source code from multiple SCM repository locations.
+
+The project started here [http://code.google.com/p/gclient/ http://code.google.com/p/gclient/]<br>
+but is now integrated in the Chromium [http://dev.chromium.org/developers/how-tos/depottools depot_tools].
+
+On the [http://www.chromium.org/developers/how-tos/depottools/gclient depot_tools/gclient] page you can find more informations.
+
+{{{
+    gclient was originally developed for internal use by the Google Chrome team,
+    to coordinate pieces of code from different SCM repositories during the development process.
+    The sources are included inside depot_tools.  
+}}}
