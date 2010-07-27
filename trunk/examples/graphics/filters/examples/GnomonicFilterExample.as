@@ -55,15 +55,12 @@ package examples
             
             // filter
             
-            var init:Object = 
-            {
-                fieldOfView : 98 ,
-                focalLength : 500 ,
-                width       : 500 ,
-                height      : 350
-            };
+            filter = new GnomonicFilter() ;
             
-            filter = new GnomonicFilter( null , init ) ;
+            filter.fieldOfView =  98 ;
+            filter.focalLength = 500 ;
+            filter.width       = 500 ;
+            filter.height      = 350 ;
             
             trace( "name        : " + filter.name        ) ;
             trace( "namespace   : " + filter.namespace   ) ;
