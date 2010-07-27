@@ -153,6 +153,17 @@
     <component id="graphics.filters:WaveReflection"       class="graphics.filters.WaveReflection" />
     <component id="graphics.filters:WaveReflectionFilter" class="graphics.filters.WaveReflectionFilter" />
     
+    <!-- graphics.filters.projections -->
+    
+    <component id="graphics.filters.projections:Gnomonic"            class="graphics.filters.projections.Gnomonic" />
+    <component id="graphics.filters.projections:GnomonicFilter"      class="graphics.filters.projections.GnomonicFilter" />
+    <component id="graphics.filters.projections:Lambert"             class="graphics.filters.projections.Lambert" />
+    <component id="graphics.filters.projections:LambertFilter"       class="graphics.filters.projections.LambertFilter" />
+    <component id="graphics.filters.projections:Orthographic"        class="graphics.filters.projections.Orthographic" />
+    <component id="graphics.filters.projections:OrthographicFilter"  class="graphics.filters.projections.OrthographicFilter" />
+    <component id="graphics.filters.projections:Stereographic"       class="graphics.filters.projections.Stereographic" />
+    <component id="graphics.filters.projections:StereographicFilter" class="graphics.filters.projections.StereographicFilter" />
+    
     <!-- graphics.geom -->
     
     <component id="graphics.geom:AspectRatio"    class="graphics.geom.AspectRatio" />
