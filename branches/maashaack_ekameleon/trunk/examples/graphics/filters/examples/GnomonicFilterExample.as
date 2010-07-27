@@ -57,10 +57,10 @@ package examples
             
             var init:Object = 
             {
-                fieldOfView : 100 ,
-                focalLength : 128 ,
+                fieldOfView : 98 ,
+                focalLength : 500 ,
                 width       : 500 ,
-                height      : 250
+                height      : 350
             };
             
             filter = new GnomonicFilter( null , init ) ;
