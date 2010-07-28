@@ -33,22 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class isDigitTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isDigitTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testDigit():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var digit:Array        = ("0123456789").split("");
+            var nondigit:Array     = ( alpha + specialChar ).split("") ;
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            suite.addTestSuite( isDigitTest ) ;
+            var i:int ;
             
-            return suite;
+            for( i = 0 ; i < digit.length ; i++ )
+            {
+                assertTrue( isDigit( digit[i] ) , digit[i] + " is not Digit");
+            }
+            
+            for( i = 0 ; i < nondigit.length ; i++ )
+            {
+                assertFalse( isDigit( nondigit[i] ), nondigit[i] + " is Digit");
+            }
         }
     }
 }
