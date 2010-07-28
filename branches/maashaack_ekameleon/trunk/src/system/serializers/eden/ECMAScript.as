@@ -537,6 +537,7 @@ package system.serializers.eden
         private var _1char:Boolean ;
         
         /**
+         * Object Replacement Character
          * @private
          */
         private var _ORC:String = "\uFFFC";
