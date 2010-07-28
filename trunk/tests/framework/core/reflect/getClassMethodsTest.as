@@ -39,8 +39,7 @@ package core.reflect
     import buRRRn.ASTUce.framework.TestCase;
 
     import core.dump;
-
-    import flash.display.MovieClip;
+    import core.reflect.samples.ClassB;
 
     public class getClassMethodsTest extends TestCase 
     {
@@ -56,22 +55,17 @@ package core.reflect
             var results:Array ;
             var methods:Array ;
             
-            var mc:MovieClip = new MovieClip() ;
+            var instance:ClassB = new ClassB() ;
             methods = 
             [
-                "addFrameScript",
-                "gotoAndPlay",
-                "prevScene",
-                "gotoAndStop",
-                "nextFrame",
-                "play",
-                "prevFrame",
-                "nextScene",
-                "stop"
+                "methodB1",
+                "methodB2"
             ] ;
             
-            results = getClassMethods( mc , false ) ;
+            results = getClassMethods( instance , false ) ;
+            
             assertEquals(results.length, methods.length) ;
+            
             for( i=0 ; i<results.length ; i++ )
             {
                 assertTrue( results.indexOf(methods[i]) > -1 , "find the current result failed with the index:" + i + " and the result:" + results[i] ) ;
@@ -79,20 +73,16 @@ package core.reflect
             
             methods = 
             [
-                "getBounds","startDrag","addChildAt","stopDrag",
-                "hitTestPoint","startTouchDrag","hitTestObject","stopTouchDrag",
-                "globalToLocal3D","getChildIndex","getChildByName","setChildIndex",
-                "getChildAt","stop","getObjectsUnderPoint","areInaccessibleObjectsUnderPoint",
-                "local3DToGlobal","gotoAndStop","swapChildrenAt","toString",
-                "swapChildren","contains","addEventListener","nextFrame",
-                "removeEventListener","willTrigger","dispatchEvent","gotoAndPlay",
-                "addFrameScript","hasEventListener","prevScene","prevFrame",
-                "nextScene","play","localToGlobal","addChild",
-                "globalToLocal","getRect","removeChild","removeChildAt"
+                "methodA1",
+                "methodA2",
+                "methodB1",
+                "methodB2"
             ] ;
             
-            results = getClassMethods( mc , true ) ;
+            results = getClassMethods( instance , true ) ;
+            
             assertEquals(results.length, methods.length) ;
+            
             for( i = 0 ; i<results.length ; i++ )
             {
                 assertTrue( results.indexOf(methods[i]) > -1 , "find the current result failed with the index:" + i + " and the result:" + results[i] + " results:" + dump(results) ) ;
