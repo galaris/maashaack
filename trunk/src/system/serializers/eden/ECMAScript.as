@@ -268,7 +268,8 @@ package system.serializers.eden
          */
         public function isAuthorized( path:String ):Boolean
         {
-            var authorized:Array    = config.authorized ;
+            var authorized:Array = config.authorized ;
+            
             if ( authorized == null || authorized.length == 0 )
             {
                 return false ;

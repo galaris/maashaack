@@ -78,7 +78,7 @@ package system.serializers.eden
         {
             _config.allowFunctionCall = value;
         }
-
+        
         /**
          * When set to false array index are evaluated without bracket eval( test.0 ) for Flash ActionScript
          * When set to true array index are evaluated with bracket eval( test[0] ) for JavaScript, JScript, JSDB etc.
