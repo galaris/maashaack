@@ -11,9 +11,9 @@ This is if you are a developer, if you are a end-user you don't need to do all t
 == default tools ==
 
 we expect you to have on your system
- * [http://subversion.tigris.org/ Subversion] (svn) 1.6+
- * [http://www.python.org/ Python] 2.6+
- * [http://java.sun.com/javase/downloads/index.jsp Java SE Development Kit] 1.6+
+ * [http://subversion.tigris.org/ Subversion] (svn) 1.5+
+ * [http://www.python.org/ Python] 2.5+
+ * [http://java.sun.com/javase/downloads/index.jsp Java SE Development Kit] 1.4+
 
 to test
 {{{
