@@ -33,38 +33,39 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isUnicodeTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isUnicodeTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testUnicode():void
+        {
+            var alpha:String         = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String       = alpha.toUpperCase();
+            var digit:String         = "0123456789";
+            var greekLetter:String   = "αβγδεζηθικλμνξοπ";
+            var unicodeSample:String = "▀▄█▌▐░▒▓■□▲►▼◄☺☻♀♂♠♣♥♦";
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            var unicode:Array    = ( unicodeSample + greekLetter).split("");
+            var nonunicode:Array = ( alpha + alphaUp + digit ).split("");
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            var i:int ;
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
+            for( i = 0;i < unicode.length;i++ )
+            {
+                assertTrue( isUnicode(unicode[i]), unicode[i] + " is not Unicode");
+            }
             
-            return suite;
+            for( i = 0; i < nonunicode.length ; i++ )
+            {
+                assertFalse( isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
+            }
         }
     }
 }

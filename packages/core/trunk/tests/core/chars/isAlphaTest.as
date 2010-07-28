@@ -33,38 +33,48 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isAlphaTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isAlphaTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testAlpha():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String     = alpha.toUpperCase();
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            var digit:String       = "0123456789";
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            var greekLetter:String = "αβγδεζηθικλμνξοπ";
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            return suite;
+            var i:int ;
+            var l:int ;
+            
+            var alphas:Array = ( alpha + alphaUp ).split("");
+            
+            var nonalpha:Array = ( digit + greekLetter + specialChar ).split("");
+            
+            l = alphas.length ;
+            
+            for( i = 0 ; i < l ; i++ )
+            {
+                assertTrue( isAlpha(alphas[i]), alphas[i] + " is not Alpha");
+            }
+            
+            l = nonalpha.length ;
+            
+            for( i = 0 ; i < l ; i++ )
+            {
+                assertFalse( isAlpha(nonalpha[i]), nonalpha[i] + " is Alpha") ;
+            }
         }
     }
 }

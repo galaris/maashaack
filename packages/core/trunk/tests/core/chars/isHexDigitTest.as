@@ -33,38 +33,40 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isHexDigitTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isHexDigitTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testHexDigit():void
+        {
+            var alpha:String    = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String  = alpha.toUpperCase();
+            var alphaHex:String = "abcdef";
+            var digit:String    = "0123456789";
+            var hex:String      = digit + alphaHex;
+            var hexUp:String    = digit + alphaHex.toUpperCase();
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            var hexdigit:Array    = ( hex + hexUp ).split("");
+            var nonhexdigit:Array = ( alpha.split( alphaHex ).join("") + alphaUp.split( alphaHex.toUpperCase()).join("")).split("");
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            var i:int ;
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
+            for( i = 0;i < hexdigit.length ; i++ )
+            {
+                assertTrue( isHexDigit(hexdigit[i]), hexdigit[i] + " is not HexDigit");
+            }
             
-            return suite;
+            for( i = 0 ; i < nonhexdigit.length ; i++ )
+            {
+                assertFalse( isHexDigit(nonhexdigit[i] ), nonhexdigit[i] + " is HexDigit");
+            }
         }
     }
 }

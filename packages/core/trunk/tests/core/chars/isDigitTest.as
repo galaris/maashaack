@@ -33,38 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    public class isDigitTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isDigitTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testDigit():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var digit:Array        = ("0123456789").split("");
+            var nondigit:Array     = ( alpha + specialChar ).split("") ;
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            var i:int ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            for( i = 0 ; i < digit.length ; i++ )
+            {
+                assertTrue( isDigit( digit[i] ) , digit[i] + " is not Digit");
+            }
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            for( i = 0 ; i < nondigit.length ; i++ )
+            {
+                assertFalse( isDigit( nondigit[i] ), nondigit[i] + " is Digit");
+            }
         }
     }
 }

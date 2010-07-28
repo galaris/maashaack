@@ -33,38 +33,37 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    
-    public class AllTests
+    public class isASCIITest extends TestCase 
     {
-        public static function suite():ITest
+        public function isASCIITest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testASCII():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String     = alpha.toUpperCase();
+            var digit:String       = "0123456789";
+            var greekLetter:String = "αβγδεζηθικλμνξοπ";
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
+            var ascii:Array = ( alpha + alphaUp + digit + specialChar ).split("");
+            var nonascii:Array = ( greekLetter).split("");
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            for( var i:int = 0;i < ascii.length;i++ )
+            {
+                assertTrue( isASCII(ascii[i]), ascii[i] + " is not ASCII");
+            }
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            for( var j:int = 0;j < nonascii.length;j++ )
+            {
+                assertFalse( isASCII(nonascii[j]), nonascii[j] + " is ASCII");
+            }
         }
     }
 }
