@@ -35,19 +35,11 @@
 
 package core.chars
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    /**
+     * Indicates if the specified character is an alpha (A-Z or a-z) character.
+     */
+    public const isAlpha:Function = function( c:String ):Boolean
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
-            
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            
-            return suite;
-        }
-    }
+        return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) ;
+    };
 }

@@ -33,21 +33,37 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class isASCIITest extends TestCase 
     {
-        public static function suite():ITest
+        public function isASCIITest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testASCII():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String     = alpha.toUpperCase();
+            var digit:String       = "0123456789";
+            var greekLetter:String = "αβγδεζηθικλμνξοπ";
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
+            var ascii:Array = ( alpha + alphaUp + digit + specialChar ).split("");
+            var nonascii:Array = ( greekLetter).split("");
             
-            return suite;
+            for( var i:int = 0;i < ascii.length;i++ )
+            {
+                assertTrue( isASCII(ascii[i]), ascii[i] + " is not ASCII");
+            }
+            
+            for( var j:int = 0;j < nonascii.length;j++ )
+            {
+                assertFalse( isASCII(nonascii[j]), nonascii[j] + " is ASCII");
+            }
         }
     }
 }
