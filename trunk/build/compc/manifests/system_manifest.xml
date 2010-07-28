@@ -323,7 +323,6 @@
     
     <!-- system.serializers.eden -->
     
-    <component id="system.serializers.eden:BuiltinSerializer" class="system.serializers.eden.BuiltinSerializer" />
     <component id="system.serializers.eden:config"            class="system.serializers.eden.config"            />
     <component id="system.serializers.eden:debug"             class="system.serializers.eden.debug"             />
     <component id="system.serializers.eden:ECMAScript"        class="system.serializers.eden.ECMAScript"        />
