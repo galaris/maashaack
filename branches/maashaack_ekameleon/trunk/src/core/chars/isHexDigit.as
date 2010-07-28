@@ -35,21 +35,11 @@
 
 package core.chars
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Indicates if the specified character is a hexadecimal digit.
+     */
+    public const isHexDigit:Function = function( c:String ):Boolean
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
-            
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            suite.addTestSuite( isDigitTest ) ;
-            suite.addTestSuite( isHexDigitTest ) ;
-            
-            return suite;
-        }
-    }
+         return ( ("0" <= c) && (c <= "9") ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f")) ;
+    };
 }
