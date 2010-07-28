@@ -33,24 +33,39 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isUnicodeTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isUnicodeTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testUnicode():void
+        {
+            var alpha:String         = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String       = alpha.toUpperCase();
+            var digit:String         = "0123456789";
+            var greekLetter:String   = "αβγδεζηθικλμνξοπ";
+            var unicodeSample:String = "▀▄█▌▐░▒▓■□▲►▼◄☺☻♀♂♠♣♥♦";
             
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            suite.addTestSuite( isDigitTest ) ;
-            suite.addTestSuite( isHexDigitTest ) ;
-            suite.addTestSuite( isUnicodeTest ) ;
+            var unicode:Array    = ( unicodeSample + greekLetter).split("");
+            var nonunicode:Array = ( alpha + alphaUp + digit ).split("");
             
-            return suite;
+            var i:int ;
+            
+            for( i = 0;i < unicode.length;i++ )
+            {
+                assertTrue( isUnicode(unicode[i]), unicode[i] + " is not Unicode");
+            }
+            
+            for( i = 0; i < nonunicode.length ; i++ )
+            {
+                assertFalse( isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
+            }
         }
     }
 }
