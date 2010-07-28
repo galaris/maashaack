@@ -35,9 +35,11 @@
 
 package system.serializers.eden
 {
+    import core.dump;
+
     import system.Serializable;
     import system.Serializer;
-    
+
     /**
      * The eden Serializer class
      */    
@@ -162,7 +164,7 @@ package system.serializers.eden
          * "{a:1,b:2}" --> {a:1,b:2}
          * </pre>
          * @return a string representing the data.
-         */         
+         */
         public function deserialize( source:String ):*
         {
             return ECMAScript.evaluate( source );
@@ -197,57 +199,14 @@ package system.serializers.eden
          */
         public function serialize( value:* ):String
         {
-            if( value === undefined )
-            {
-                return "undefined";
-            }
-            
-            if( value === null )
-            {
-                return "null";
-            }
-            
             if( value is Serializable )
             {
                 return value.toSource( prettyIndent );
             }
-            
-            if( value is String )
+            else
             {
-                return BuiltinSerializer.emitString( value );
+                return dump(value) ;
             }
-            
-            if( value is Boolean )
-            {
-                return value ? "true" : "false";
-            }
-            
-            if( value is Number )
-            {
-                return value.toString( );
-            }
-            
-            if( value is Date )
-            {
-                return BuiltinSerializer.emitDate( value );
-            }
-            
-            /* TODO:
-            - add RegExp serializer
-            cf: new RegExp( "abc", "i" );
-            - add XML serializer
-            cf: new XML( "<data><node>xyz</node></data>" );
-             */
-            if( value is Array )
-            {
-                return BuiltinSerializer.emitArray( value );
-            }
-            
-            if( value is Object )
-            {
-                return BuiltinSerializer.emitObject( value );
-            }
-            return "<unknown>";
         }
         
         /**
