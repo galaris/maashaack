@@ -33,25 +33,19 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-// ---o Constructor
+load("unittests/core/chars/isAlphaTest.js" ) ;
 
-core.reflect.hasDefinitionByNameTest = function( name ) 
+core.chars.AllTests = {} ;
+
+core.chars.AllTests.suite = function() 
 {
-    buRRRn.ASTUce.TestCase.call( this , name ) ;
-}
-
-// ----o Inherit
-
-core.reflect.hasDefinitionByNameTest.prototype             = new buRRRn.ASTUce.TestCase() ;
-core.reflect.hasDefinitionByNameTest.prototype.constructor = core.reflect.hasDefinitionByNameTest ;
-
-// ----o Public Methods
-
-core.reflect.hasDefinitionByNameTest.prototype.testCenter = function () 
-{
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.dump" )  ) ;
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.reflect.hasDefinitionByName" )  ) ;
+    var TestSuite = buRRRn.ASTUce.TestSuite;
     
-    this.assertFalse( core.reflect.hasDefinitionByName( "a" )  ) ;
-    this.assertFalse( core.reflect.hasDefinitionByName( "unknow" )  ) ;
+    var suite = new TestSuite( "core.chars unit tests" );
+    
+    //suite.simpleTrace = true;
+    
+    suite.addTest( new TestSuite( core.chars.isAlphaTest ) ) ;
+    
+    return suite ;
 }
