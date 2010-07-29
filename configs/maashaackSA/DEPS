@@ -12,5 +12,5 @@ deps = {
          Var("root") + "/platform/builtin"          : Var("repo") + "/platform/builtin/trunk",
          Var("root") + "/platform/shell"            : Var("repo") + "/platform/shell/trunk",
          Var("root") + "/platform/avmglue"          : Var("repo") + "/platform/avmglue/trunk",
-         Var("root") + "/platform/Clib"             : Var("repo") + "/platform/Clib/trunk",
+         Var("root") + "/platform/clib"             : Var("repo") + "/platform/clib/trunk",
        }
