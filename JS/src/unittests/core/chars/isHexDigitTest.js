@@ -33,25 +33,41 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js" ) ;
-load("unittests/core/chars/isASCIITest.js" ) ;
-load("unittests/core/chars/isDigitTest.js" ) ;
-load("unittests/core/chars/isHexDigitTest.js" ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isHexDigitTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isHexDigitTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isHexDigitTest.prototype.constructor = core.chars.isHexDigitTest ;
+
+// ----o Public Methods
+
+core.chars.isHexDigitTest.prototype.testAlpha = function () 
+{
+    var alpha /*String*/    = "abcdefghijklmnopqrstuvwxyz";
+    var alphaUp /*String*/  = alpha.toUpperCase();
+    var alphaHex /*String*/ = "abcdef";
+    var digit /*String*/    = "0123456789";
+    var hex /*String*/      = digit + alphaHex;
+    var hexUp /*String*/    = digit + alphaHex.toUpperCase();
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var hexdigit /*Array*/    = ( hex + hexUp ).split("");
+    var nonhexdigit /*Array*/ = ( alpha.split( alphaHex ).join("") + alphaUp.split( alphaHex.toUpperCase()).join("")).split("");
     
-    //suite.simpleTrace = true;
+    var i /*int*/ ;
     
-    suite.addTest( new TestSuite( core.chars.isAlphaTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isDigitTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isHexDigitTest ) ) ;
+    for( i = 0;i < hexdigit.length ; i++ )
+    {
+        this.assertTrue( core.chars.isHexDigit(hexdigit[i]), hexdigit[i] + " is not HexDigit");
+    }
     
-    return suite ;
+    for( i = 0 ; i < nonhexdigit.length ; i++ )
+    {
+        this.assertFalse( core.chars.isHexDigit(nonhexdigit[i] ), nonhexdigit[i] + " is HexDigit");
+    }
 }
