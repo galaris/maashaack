@@ -85,6 +85,7 @@ require( "core.arrays.spliceInto"  ) ;
 
 require( "core.chars.isAlpha" ) ;
 require( "core.chars.isASCII" ) ;
+require( "core.chars.isDigit" ) ;
 
 // core.reflect
 
