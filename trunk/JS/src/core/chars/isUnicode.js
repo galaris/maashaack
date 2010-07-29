@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,39 +33,10 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars 
+/**
+ * Indicates if the specified character is a unicode character.
+ */
+core.chars.isUnicode = function( c /*String*/ ) /*Boolean*/ 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-
-    public class isUnicodeTest extends TestCase 
-    {
-        public function isUnicodeTest(name:String = "")
-        {
-            super(name);
-        }
-        
-        public function testUnicode():void
-        {
-            var alpha:String         = "abcdefghijklmnopqrstuvwxyz";
-            var alphaUp:String       = alpha.toUpperCase();
-            var digit:String         = "0123456789";
-            var greekLetter:String   = "αβγδεζηθικλμνξοπ";
-            var unicodeSample:String = "▀▄█▌▐░▒▓■□▲►▼◄☺☻♀♂♠♣♥♦";
-            
-            var unicode:Array    = ( unicodeSample + greekLetter).split("");
-            var nonunicode:Array = ( alpha + alphaUp + digit ).split("");
-            
-            var i:int ;
-            
-            for( i = 0 ; i < unicode.length ; i++ )
-            {
-                assertTrue( isUnicode(unicode[i]), unicode[i] + " is not Unicode");
-            }
-            
-            for( i = 0 ; i < nonunicode.length ; i++ )
-            {
-                assertFalse( isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
-            }
-        }
-    }
-}
+    return c.charCodeAt( 0 ) > 255 ;
+};

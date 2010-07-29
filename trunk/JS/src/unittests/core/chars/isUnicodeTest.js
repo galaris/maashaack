@@ -33,27 +33,40 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js"    ) ;
-load("unittests/core/chars/isASCIITest.js"    ) ;
-load("unittests/core/chars/isDigitTest.js"    ) ;
-load("unittests/core/chars/isHexDigitTest.js" ) ;
-load("unittests/core/chars/isUnicodeTest.js"  ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isUnicodeTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isUnicodeTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isUnicodeTest.prototype.constructor = core.chars.isUnicodeTest ;
+
+// ----o Public Methods
+
+core.chars.isUnicodeTest.prototype.testHexDigit = function () 
+{
+    var alpha /*String*/         = "abcdefghijklmnopqrstuvwxyz";
+    var alphaUp /*String*/       = alpha.toUpperCase();
+    var digit /*String*/         = "0123456789";
+    var greekLetter /*String*/   = "αβγδεζηθικλμνξοπ";
+    var unicodeSample /*String*/ = "▀▄█▌▐░▒▓■□▲►▼◄☺☻♀♂♠♣♥♦";
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var unicode /*Array*/    = ( unicodeSample + greekLetter).split("");
+    var nonunicode /*Array*/ = ( alpha + alphaUp + digit ).split("");
     
-    //suite.simpleTrace = true;
+    var i /*int*/ ;
     
-    suite.addTest( new TestSuite( core.chars.isAlphaTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isDigitTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isHexDigitTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isUnicodeTest  ) ) ;
+    for( i = 0 ; i < unicode.length;i++ )
+    {
+        this.assertTrue( core.chars.isUnicode(unicode[i]), unicode[i] + " is not Unicode");
+    }
     
-    return suite ;
+    for( i = 0; i < nonunicode.length ; i++ )
+    {
+        this.assertFalse( core.chars.isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
+    }
 }
