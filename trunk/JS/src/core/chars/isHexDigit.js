@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,39 +33,10 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars 
+/**
+ * Indicates if the specified character is a hexadecimal digit.
+ */
+core.chars.isHexDigit = function( c /*String*/ ) /*Boolean*/ 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    public class isASCIITest extends TestCase 
-    {
-        public function isASCIITest(name:String = "")
-        {
-            super(name);
-        }
-        
-        public function testASCII():void
-        {
-            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
-            var alphaUp:String     = alpha.toUpperCase();
-            var digit:String       = "0123456789";
-            var greekLetter:String = "αβγδεζηθικλμνξοπ";
-            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
-            
-            var ascii:Array = ( alpha + alphaUp + digit + specialChar ).split("");
-            var nonascii:Array = ( greekLetter).split("");
-            
-            var i:int ;
-            
-            for( i = 0 ; i < ascii.length ; i++ )
-            {
-                assertTrue( isASCII(ascii[i]), ascii[i] + " is not ASCII");
-            }
-            
-            for( i = 0 ; i < nonascii.length ; i++ )
-            {
-                assertFalse( isASCII(nonascii[i]), nonascii[i] + " is ASCII");
-            }
-        }
-    }
-}
+    return ( ("0" <= c) && (c <= "9") ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f")) ;
+};

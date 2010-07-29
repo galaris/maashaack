@@ -58,7 +58,7 @@ package core.chars
             
             var i:int ;
             
-            for( i = 0;i < hexdigit.length ; i++ )
+            for( i = 0 ; i < hexdigit.length ; i++ )
             {
                 assertTrue( isHexDigit(hexdigit[i]), hexdigit[i] + " is not HexDigit");
             }
