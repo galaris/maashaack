@@ -33,23 +33,36 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js" ) ;
-load("unittests/core/chars/isASCIITest.js" ) ;
-load("unittests/core/chars/isDigitTest.js" ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isDigitTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isDigitTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isDigitTest.prototype.constructor = core.chars.isDigitTest ;
+
+// ----o Public Methods
+
+core.chars.isDigitTest.prototype.testAlpha = function () 
+{
+    var alpha       = "abcdefghijklmnopqrstuvwxyz";
+    var digit       = ("0123456789").split("");
+    var nondigit    = ( alpha + specialChar ).split("") ;
+    var specialChar = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var i /*int*/ ;
     
-    //suite.simpleTrace = true;
+    for( i = 0 ; i < digit.length ; i++ )
+    {
+        this.assertTrue( core.chars.isDigit( digit[i] ) , digit[i] + " is not Digit");
+    }
     
-    suite.addTest( new TestSuite( core.chars.isAlphaTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isDigitTest ) ) ;
-    
-    return suite ;
+    for( i = 0 ; i < nondigit.length ; i++ )
+    {
+        this.assertFalse( core.chars.isDigit( nondigit[i] ), nondigit[i] + " is Digit");
+    }
 }
