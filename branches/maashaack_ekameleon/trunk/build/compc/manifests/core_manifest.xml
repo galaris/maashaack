@@ -14,7 +14,7 @@
     <component id="core:uri"     class="core.uri"     />
     <component id="core:version" class="core.version" />
     
-    <!-- core.arrays -->    
+    <!-- core.arrays -->
     
     <component id="core.arrays:contains"    class="core.arrays.contains"    />
     <component id="core.arrays:initialize"  class="core.arrays.initialize"  />
@@ -24,6 +24,14 @@
     <component id="core.arrays:repeat"      class="core.arrays.repeat"      />
     <component id="core.arrays:shuffle"     class="core.arrays.shuffle"     />
     <component id="core.arrays:spliceInto"  class="core.arrays.spliceInto"  />
+    
+    <!-- core.chars -->
+    
+    <component id="core.chars:isAlpha"    class="core.chars.isAlpha"    />
+    <component id="core.chars:isASCII"    class="core.chars.isASCII"    />
+    <component id="core.chars:isDigit"    class="core.chars.isDigit"    />
+    <component id="core.chars:isHexDigit" class="core.chars.isHexDigit" />
+    <component id="core.chars:isUnicode"  class="core.chars.isUnicode"  />
     
     <!-- core.reflect -->
     
