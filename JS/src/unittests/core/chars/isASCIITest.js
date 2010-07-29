@@ -33,21 +33,43 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js" ) ;
-load("unittests/core/chars/isASCIITest.js" ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isASCIITest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isASCIITest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isASCIITest.prototype.constructor = core.chars.isASCIITest ;
+
+// ----o Public Methods
+
+core.chars.isASCIITest.prototype.testAlpha = function () 
+{
+    var alpha /*String*/       = "abcdefghijklmnopqrstuvwxyz";
+    var alphaUp /*String*/     = alpha.toUpperCase();
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var digit /*String*/       = "0123456789";
     
-    //suite.simpleTrace = true;
+    var greekLetter /*String*/ = "αβγδεζηθικλμνξοπ";
     
-    suite.addTest( new TestSuite( core.chars.isAlphaTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest ) ) ;
+    var specialChar /*String*/ = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
     
-    return suite ;
+    var i /*int*/ ;
+    
+    var ascii    = ( alpha + alphaUp + digit + specialChar ).split("");
+    var nonascii = ( greekLetter).split("");
+    
+    for( i = 0 ; i < ascii.length ; i++ )
+    {
+        this.assertTrue( core.chars.isASCII(ascii[i]), ascii[i] + " is not ASCII");
+    }
+    
+    for( i = 0 ; i < nonascii.length ; i++ )
+    {
+        this.assertFalse( core.chars.isASCII(nonascii[i]), nonascii[i] + " is ASCII");
+    }
 }
