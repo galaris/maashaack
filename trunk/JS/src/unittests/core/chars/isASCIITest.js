@@ -47,7 +47,7 @@ core.chars.isASCIITest.prototype.constructor = core.chars.isASCIITest ;
 
 // ----o Public Methods
 
-core.chars.isASCIITest.prototype.testAlpha = function () 
+core.chars.isASCIITest.prototype.testASCII = function () 
 {
     var alpha /*String*/       = "abcdefghijklmnopqrstuvwxyz";
     var alphaUp /*String*/     = alpha.toUpperCase();

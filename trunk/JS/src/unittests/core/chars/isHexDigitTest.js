@@ -47,7 +47,7 @@ core.chars.isHexDigitTest.prototype.constructor = core.chars.isHexDigitTest ;
 
 // ----o Public Methods
 
-core.chars.isHexDigitTest.prototype.testAlpha = function () 
+core.chars.isHexDigitTest.prototype.testHexDigit = function () 
 {
     var alpha /*String*/    = "abcdefghijklmnopqrstuvwxyz";
     var alphaUp /*String*/  = alpha.toUpperCase();
