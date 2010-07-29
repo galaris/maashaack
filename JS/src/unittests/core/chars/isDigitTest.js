@@ -47,7 +47,7 @@ core.chars.isDigitTest.prototype.constructor = core.chars.isDigitTest ;
 
 // ----o Public Methods
 
-core.chars.isDigitTest.prototype.testAlpha = function () 
+core.chars.isDigitTest.prototype.testDigit = function () 
 {
     var alpha       = "abcdefghijklmnopqrstuvwxyz";
     var digit       = ("0123456789").split("");
