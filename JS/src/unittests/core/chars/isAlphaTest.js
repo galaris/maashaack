@@ -35,23 +35,47 @@
 
 // ---o Constructor
 
-core.reflect.hasDefinitionByNameTest = function( name ) 
+core.chars.isAlphaTest = function( name ) 
 {
     buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
 
 // ----o Inherit
 
-core.reflect.hasDefinitionByNameTest.prototype             = new buRRRn.ASTUce.TestCase() ;
-core.reflect.hasDefinitionByNameTest.prototype.constructor = core.reflect.hasDefinitionByNameTest ;
+core.chars.isAlphaTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isAlphaTest.prototype.constructor = core.chars.isAlphaTest ;
 
 // ----o Public Methods
 
-core.reflect.hasDefinitionByNameTest.prototype.testCenter = function () 
+core.chars.isAlphaTest.prototype.testAlpha = function () 
 {
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.dump" )  ) ;
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.reflect.hasDefinitionByName" )  ) ;
+    var alpha /*String*/       = "abcdefghijklmnopqrstuvwxyz";
+    var alphaUp /*String*/     = alpha.toUpperCase();
     
-    this.assertFalse( core.reflect.hasDefinitionByName( "a" )  ) ;
-    this.assertFalse( core.reflect.hasDefinitionByName( "unknow" )  ) ;
+    var digit /*String*/       = "0123456789";
+    
+    var greekLetter /*String*/ = "αβγδεζηθικλμνξοπ";
+    
+    var specialChar /*String*/ = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
+    
+    var i /*int*/ ;
+    var l /*int*/ ;
+    
+    var alphas /*Array*/ = ( alpha + alphaUp ).split("");
+    
+    var nonalpha /*Array*/ = ( digit + greekLetter + specialChar ).split("");
+    
+    l = alphas.length ;
+    
+    for( i = 0 ; i < l ; i++ )
+    {
+        this.assertTrue( core.chars.isAlpha(alphas[i]), alphas[i] + " is not Alpha");
+    }
+    
+    l = nonalpha.length ;
+    
+    for( i = 0 ; i < l ; i++ )
+    {
+        this.assertFalse( core.chars.isAlpha(nonalpha[i]), nonalpha[i] + " is Alpha") ;
+    }
 }

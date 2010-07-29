@@ -57,6 +57,7 @@ if ( _global.core == undefined )
 // packages
 
 getPackage( "core.arrays"  ) ;
+getPackage( "core.chars"   ) ;
 getPackage( "core.reflect" ) ;
 getPackage( "core.strings" ) ;
 
@@ -79,6 +80,10 @@ require( "core.arrays.repeat"      ) ;
 require( "core.arrays.shuffle"     ) ;
 require( "core.arrays.sortOn"      ) ;
 require( "core.arrays.spliceInto"  ) ;
+
+// core.chars
+
+require( "core.chars.isAlpha" ) ;
 
 // core.reflect
 

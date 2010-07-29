@@ -33,25 +33,4 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-// ---o Constructor
-
-core.reflect.hasDefinitionByNameTest = function( name ) 
-{
-    buRRRn.ASTUce.TestCase.call( this , name ) ;
-}
-
-// ----o Inherit
-
-core.reflect.hasDefinitionByNameTest.prototype             = new buRRRn.ASTUce.TestCase() ;
-core.reflect.hasDefinitionByNameTest.prototype.constructor = core.reflect.hasDefinitionByNameTest ;
-
-// ----o Public Methods
-
-core.reflect.hasDefinitionByNameTest.prototype.testCenter = function () 
-{
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.dump" )  ) ;
-    this.assertTrue( core.reflect.hasDefinitionByName( "core.reflect.hasDefinitionByName" )  ) ;
-    
-    this.assertFalse( core.reflect.hasDefinitionByName( "a" )  ) ;
-    this.assertFalse( core.reflect.hasDefinitionByName( "unknow" )  ) ;
-}
+load("unittests/core/chars/AllTests.js") ;

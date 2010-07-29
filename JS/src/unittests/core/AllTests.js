@@ -36,6 +36,7 @@
 /////////////////
 
 load("unittests/core/arrays.js") ;
+load("unittests/core/chars.js") ;
 load("unittests/core/reflect.js") ;
 load("unittests/core/strings.js") ;
 
@@ -55,15 +56,16 @@ core.AllTests.suite = function()
     
     var suite = new TestSuite( "core unit tests" );
     
-    suite.addTest( core.arrays.AllTests.suite() );
-    suite.addTest( core.reflect.AllTests.suite() );
-    suite.addTest( core.strings.AllTests.suite() );
-    
     suite.addTest( new TestSuite( core.dumpTest       ) ) ;
     suite.addTest( new TestSuite( core.dumpArrayTest  ) ) ;
     suite.addTest( new TestSuite( core.dumpDateTest   ) ) ;
     suite.addTest( new TestSuite( core.dumpObjectTest ) ) ;
     suite.addTest( new TestSuite( core.dumpStringTest ) ) ;
+    
+    suite.addTest( core.arrays.AllTests.suite() );
+    suite.addTest( core.chars.AllTests.suite() );
+    suite.addTest( core.reflect.AllTests.suite() );
+    suite.addTest( core.strings.AllTests.suite() );
     
     return suite;
 }
