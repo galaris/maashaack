@@ -33,29 +33,53 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js"    ) ;
-load("unittests/core/chars/isASCIITest.js"    ) ;
-load("unittests/core/chars/isDigitTest.js"    ) ;
-load("unittests/core/chars/isHexDigitTest.js" ) ;
-load("unittests/core/chars/isLowerTest.js"    ) ;
-load("unittests/core/chars/isUnicodeTest.js"  ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isLowerTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isLowerTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isLowerTest.prototype.constructor = core.chars.isLowerTest ;
+
+// ----o Public Methods
+
+core.chars.isLowerTest.prototype.testLower = function () 
+{
+    var alphaLow /*String*/ = "abcdefghijklmnopqrstuvwxyz";
+    var alphaUp /*String*/  = alphaLow.toUpperCase();
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var digit /*String*/       = "0123456789";
     
-    //suite.simpleTrace = true;
+    var greekLetter /*String*/ = "αβγδεζηθικλμνξοπ";
     
-    suite.addTest( new TestSuite( core.chars.isAlphaTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isDigitTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isHexDigitTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isLowerTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isUnicodeTest  ) ) ;
+    var specialChar /*String*/ = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
     
-    return suite ;
+    var i /*int*/ ;
+    
+    var alphas /*Array*/ ;
+    
+    alphas = alphaLow.split("") ;
+    
+    for( i = 0 ; i < alphas.length ; i++ )
+    {
+        this.assertTrue( core.chars.isLower( alphas[i] ) , alphas[i] + " is not lowercase");
+    }
+    
+    alphas = alphaUp.split("") ;
+    
+    for( i = 0 ; i < alphas.length ; i++ )
+    {
+        this.assertFalse( core.chars.isLower( alphas[i] ) , alphas[i] + " is lowercase");
+    }
+    
+    var nonalpha /*Array*/ = ( digit + greekLetter + specialChar ).split("");
+    
+    for( i = 0 ; i < nonalpha.length ; i++ )
+    {
+        this.assertFalse( core.chars.isLower(nonalpha[i]), nonalpha[i] + " is lowercase") ;
+    }
 }
