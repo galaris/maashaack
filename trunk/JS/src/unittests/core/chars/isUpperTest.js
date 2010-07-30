@@ -47,7 +47,7 @@ core.chars.isUpperTest.prototype.constructor = core.chars.isUpperTest ;
 
 // ----o Public Methods
 
-core.chars.isUpperTest.prototype.testLower = function () 
+core.chars.isUpperTest.prototype.testUpper = function () 
 {
     var alphaLow /*String*/ = "abcdefghijklmnopqrstuvwxyz";
     var alphaUp /*String*/  = alphaLow.toUpperCase();
