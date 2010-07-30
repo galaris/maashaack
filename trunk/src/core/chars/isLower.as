@@ -35,23 +35,11 @@
 
 package core.chars
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    /**
+     * Indicates if the character is lowercase.
+     */
+    public const isLower:Function = function( c:String ):Boolean
     {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
-            
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            suite.addTestSuite( isDigitTest ) ;
-            suite.addTestSuite( isHexDigitTest ) ;
-            suite.addTestSuite( isLowerTest ) ;
-            suite.addTestSuite( isUnicodeTest ) ;
-            
-            return suite;
-        }
-    }
+        return ( "a" <= c ) && ( c <= "z" ) ;
+    };
 }
