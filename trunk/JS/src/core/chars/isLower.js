@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -33,52 +33,10 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars 
+/**
+ * Indicates if the character is lowercase.
+ */
+core.chars.isLower = function( c /*String*/ ) /*Boolean*/ 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-
-    public class isLowerTest extends TestCase 
-    {
-        public function isLowerTest(name:String = "")
-        {
-            super(name);
-        }
-        
-        public function testLower():void
-        {
-            var alphaLow:String = "abcdefghijklmnopqrstuvwxyz";
-            var alphaUp:String  = alphaLow.toUpperCase();
-            
-            var digit:String       = "0123456789";
-            
-            var greekLetter:String = "αβγδεζηθικλμνξοπ";
-            
-            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
-            
-            var i:int ;
-            
-            var alphas:Array ;
-            
-            alphas = alphaLow.split("") ;
-            
-            for( i = 0 ; i < alphas.length ; i++ )
-            {
-                assertTrue( isLower( alphas[i] ) , alphas[i] + " is not lowercase");
-            }
-            
-            alphas = alphaUp.split("") ;
-            
-            for( i = 0 ; i < alphas.length ; i++ )
-            {
-                assertFalse( isLower( alphas[i] ) , alphas[i] + " is lowercase");
-            }
-            
-            var nonalpha:Array = ( digit + greekLetter + specialChar ).split("");
-            
-            for( i = 0 ; i < nonalpha.length ; i++ )
-            {
-                assertFalse( isLower(nonalpha[i]), nonalpha[i] + " is lowercase") ;
-            }
-        }
-    }
-}
+    return ( "a" <= c ) && ( c <= "z" ) ;
+};

@@ -77,7 +77,7 @@ package core.chars
             
             for( i = 0 ; i < nonalpha.length ; i++ )
             {
-                assertFalse( isLower(nonalpha[i]), nonalpha[i] + " is Alpha") ;
+                assertFalse( isLower(nonalpha[i]), nonalpha[i] + " is lowercase") ;
             }
         }
     }

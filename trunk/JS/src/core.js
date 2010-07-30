@@ -87,6 +87,7 @@ require( "core.chars.isAlpha"    ) ;
 require( "core.chars.isASCII"    ) ;
 require( "core.chars.isDigit"    ) ;
 require( "core.chars.isHexDigit" ) ;
+require( "core.chars.isLower"    ) ;
 require( "core.chars.isUnicode"  ) ;
 
 // core.reflect
