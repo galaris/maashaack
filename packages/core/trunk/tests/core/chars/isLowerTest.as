@@ -33,25 +33,52 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isLowerTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isLowerTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testLower():void
+        {
+            var alphaLow:String = "abcdefghijklmnopqrstuvwxyz";
+            var alphaUp:String  = alphaLow.toUpperCase();
             
-            suite.addTestSuite( isAlphaTest ) ;
-            suite.addTestSuite( isASCIITest ) ;
-            suite.addTestSuite( isDigitTest ) ;
-            suite.addTestSuite( isHexDigitTest ) ;
-            suite.addTestSuite( isLowerTest ) ;
-            suite.addTestSuite( isUnicodeTest ) ;
+            var digit:String       = "0123456789";
             
-            return suite;
+            var greekLetter:String = "αβγδεζηθικλμνξοπ";
+            
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
+            
+            var i:int ;
+            
+            var alphas:Array ;
+            
+            alphas = alphaLow.split("") ;
+            
+            for( i = 0 ; i < alphas.length ; i++ )
+            {
+                assertTrue( isLower( alphas[i] ) , alphas[i] + " is not lowercase");
+            }
+            
+            alphas = alphaUp.split("") ;
+            
+            for( i = 0 ; i < alphas.length ; i++ )
+            {
+                assertFalse( isLower( alphas[i] ) , alphas[i] + " is lowercase");
+            }
+            
+            var nonalpha:Array = ( digit + greekLetter + specialChar ).split("");
+            
+            for( i = 0 ; i < nonalpha.length ; i++ )
+            {
+                assertFalse( isLower(nonalpha[i]), nonalpha[i] + " is Alpha") ;
+            }
         }
     }
 }
