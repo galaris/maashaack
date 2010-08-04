@@ -35,19 +35,19 @@
 
 package core.vectors
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import flash.system.ApplicationDomain;
+    
+    /**
+     * Creates a new dynamic Vector object with the specified arguments.
+     * @return a new dynamic Vector object with the specified arguments.
+     */
+    public const create:Function = function( clazz:Class, length:uint = 0 , fixed:Boolean = false , applicationDomain:ApplicationDomain = null ):*
     {
-        public static function suite():ITest
+        var def:Class = getVectorDefinition( clazz , applicationDomain ) as Class ;
+        if ( def == null )
         {
-            var suite:TestSuite = new TestSuite("core.vectors package tests");
-            
-            suite.addTestSuite( createTest ) ;
-            suite.addTestSuite( getVectorDefinitionTest ) ;
-            
-            return suite;
+            return null ;
         }
-    }
+        return new def( length , fixed ) ;
+    };
 }
