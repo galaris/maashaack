@@ -37,9 +37,7 @@ package core.vectors
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.Vectors;
-
+    
     public class toArrayTest extends TestCase 
     {
         public function toArrayTest(name:String = "")
@@ -53,7 +51,7 @@ package core.vectors
             
             v.push( 0 , 1 , 2 ) ;
             
-            ArrayAssert.assertEquals( Vectors.toArray(v) , [0,1,2] ) ;
+            ArrayAssert.assertEquals( toArray(v) , [0,1,2] ) ;
         }
     }
 }
