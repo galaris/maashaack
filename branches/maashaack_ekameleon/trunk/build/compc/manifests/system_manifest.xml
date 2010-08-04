@@ -33,7 +33,6 @@
     <component id="system:Strings"            class="system.Strings"            />
     <component id="system:SystemConfigurator" class="system.SystemConfigurator" />
     <component id="system:URI"                class="system.URI"                />
-    <component id="system:Vectors"            class="system.Vectors"            />
     <component id="system:Version"            class="system.Version"            />
     
     <!-- system.broadcasters -->
