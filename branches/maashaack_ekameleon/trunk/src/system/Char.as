@@ -661,7 +661,7 @@ package system
         }
         
         /**
-         * Indicates if the character is a letter or a letter.
+         * Indicates if the character is a uppercase or a lowercase letter.
          */
         public function isLetter():Boolean
         {
