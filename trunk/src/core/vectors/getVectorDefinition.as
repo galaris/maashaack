@@ -33,40 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.vectors
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import flash.system.ApplicationDomain;
+    import flash.utils.getQualifiedClassName;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    /**
+     * Returns the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
+     * @return the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
+     */
+    public const getVectorDefinition:Function = function( clazz:Class , applicationDomain:ApplicationDomain = null ):Class
     {
-        public static function suite():ITest
+        if ( clazz == null )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            return null ;
         }
-    }
+        if( applicationDomain == null )
+        {
+            applicationDomain = ApplicationDomain.currentDomain ;
+        }
+        return applicationDomain.getDefinition( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" ) as Class ;
+    };
 }
