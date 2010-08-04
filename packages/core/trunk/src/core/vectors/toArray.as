@@ -33,40 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.vectors
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    /**
+     * Converts an Vector to an Array.
+     * @return The Array reprensentation of the specified Vector.
+     */
+    public const toArray:Function = function( v:* ):Array
     {
-        public static function suite():ITest
+        if ( v == null )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            return null ;
         }
-    }
+        var ar:Array = [] ;
+        var len:int = v.length ;
+        if ( len == 0 )
+        {
+            return ar ;
+        }
+        for( var i:int ; i<len ; i++)
+        {
+            ar[i] = v[i] ;
+        }
+        return ar ;
+    };
 }

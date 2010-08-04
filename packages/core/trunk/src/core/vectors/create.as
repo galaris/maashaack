@@ -33,40 +33,21 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.vectors
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import flash.system.ApplicationDomain;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    /**
+     * Creates a new dynamic Vector object with the specified arguments.
+     * @return a new dynamic Vector object with the specified arguments.
+     */
+    public const create:Function = function( clazz:Class, length:uint = 0 , fixed:Boolean = false , applicationDomain:ApplicationDomain = null ):*
     {
-        public static function suite():ITest
+        var def:Class = getVectorDefinition( clazz , applicationDomain ) as Class ;
+        if ( def == null )
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
-            
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            return null ;
         }
-    }
+        return new def( length , fixed ) ;
+    };
 }

@@ -33,40 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.vectors 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
+    import flash.utils.getQualifiedClassName;
     
-    public class AllTests
+    public class createTest extends TestCase 
     {
-        public static function suite():ITest
+        public function createTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testCreate():void
+        {
+            var v:* = create( null ) ;
+            assertNull( v , "#01") ;
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
+            var v1:Vector.<String> = create( String ) as Vector.<String> ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            assertNotNull( v1 as Vector.<String> , "#02") ;
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
+            var def:String = getQualifiedClassName( v1 ) ; 
             
-            return suite;
+            assertEquals( def , "__AS3__.vec::Vector.<String>" , "03") ;
         }
     }
 }

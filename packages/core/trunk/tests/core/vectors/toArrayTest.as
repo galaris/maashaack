@@ -33,40 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.vectors 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.ArrayAssert;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    public class toArrayTest extends TestCase 
     {
-        public static function suite():ITest
+        public function toArrayTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testCreate():void
+        {
+            var v:Vector.<int> = new Vector.<int>() ;
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
+            v.push( 0 , 1 , 2 ) ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            return suite;
+            ArrayAssert.assertEquals( toArray(v) , [0,1,2] ) ;
         }
     }
 }
