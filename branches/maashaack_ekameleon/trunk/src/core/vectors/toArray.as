@@ -33,31 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.vectors 
+package core.vectors
 {
-    import buRRRn.ASTUce.framework.TestCase;
-    
-    import flash.utils.getQualifiedClassName;
-    
-    public class createTest extends TestCase 
+    /**
+     * Converts an Vector to an Array.
+     * @return The Array reprensentation of the specified Vector.
+     */
+    public const toArray:Function = function( v:* ):Array
     {
-        public function createTest(name:String = "")
+        if ( v == null )
         {
-            super(name);
+            return null ;
         }
-        
-        public function testCreate():void
+        var ar:Array = [] ;
+        var len:int = v.length ;
+        if ( len == 0 )
         {
-            var v:* = create( null ) ;
-            assertNull( v , "#01") ;
-            
-            var v1:Vector.<String> = create( String ) as Vector.<String> ;
-            
-            assertNotNull( v1 as Vector.<String> , "#02") ;
-            
-            var def:String = getQualifiedClassName( v1 ) ; 
-            
-            assertEquals( def , "__AS3__.vec::Vector.<String>" , "03") ;
+            return ar ;
         }
-    }
+        for( var i:int ; i<len ; i++)
+        {
+            ar[i] = v[i] ;
+        }
+        return ar ;
+    };
 }

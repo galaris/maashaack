@@ -46,6 +46,7 @@ package core.vectors
             
             suite.addTestSuite( createTest ) ;
             suite.addTestSuite( getVectorDefinitionTest ) ;
+            suite.addTestSuite( toArrayTest ) ;
             
             return suite;
         }
