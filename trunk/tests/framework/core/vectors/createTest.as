@@ -33,21 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.vectors
+package core.vectors 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import flash.utils.getQualifiedClassName;
+    
+    public class createTest extends TestCase 
     {
-        public static function suite():ITest
+        public function createTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.vectors package tests");
+            super(name);
+        }
+        
+        public function testCreate():void
+        {
+            var v:* = create( null ) ;
+            assertNull( v , "01 - Vectors.create() failed.") ;
             
-            suite.addTestSuite( createTest ) ;
-            suite.addTestSuite( getVectorDefinitionTest ) ;
+            var v1:Vector.<String> = create( String ) as Vector.<String> ;
             
-            return suite;
+            assertNotNull( v1 as Vector.<String> , "02-01 - Vectors.create() failed.") ;
+            
+            var def:String = getQualifiedClassName( v1 ) ; 
+            
+            assertEquals( def , "__AS3__.vec::Vector.<String>" , "02-02 - Vectors.create() failed.") ;
         }
     }
 }
