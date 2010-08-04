@@ -35,29 +35,25 @@
 
 package core.vectors 
 {
+    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import flash.utils.getQualifiedClassName;
-    
-    public class createTest extends TestCase 
+
+    import system.Vectors;
+
+    public class toArrayTest extends TestCase 
     {
-        public function createTest(name:String = "")
+        public function toArrayTest(name:String = "")
         {
             super(name);
         }
         
         public function testCreate():void
         {
-            var v:* = create( null ) ;
-            assertNull( v , "#01") ;
+            var v:Vector.<int> = new Vector.<int>() ;
             
-            var v1:Vector.<String> = create( String ) as Vector.<String> ;
+            v.push( 0 , 1 , 2 ) ;
             
-            assertNotNull( v1 as Vector.<String> , "#02") ;
-            
-            var def:String = getQualifiedClassName( v1 ) ; 
-            
-            assertEquals( def , "__AS3__.vec::Vector.<String>" , "03") ;
+            ArrayAssert.assertEquals( Vectors.toArray(v) , [0,1,2] ) ;
         }
     }
 }

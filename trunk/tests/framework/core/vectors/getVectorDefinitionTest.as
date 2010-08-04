@@ -51,10 +51,10 @@ package core.vectors
             var def:Class ;
             
             def = getVectorDefinition( null ) ;
-            assertNull( def , "01 - Vectors.getVectorDefinition() failed.") ;
+            assertNull( def , "#01") ;
             
             def = getVectorDefinition( String ) ; 
-            assertEquals( getQualifiedClassName(def) , "__AS3__.vec::Vector.<String>" , "02 - Vectors.getVectorDefinition() failed.") ;
+            assertEquals( getQualifiedClassName(def) , "__AS3__.vec::Vector.<String>" , "#02") ;
         }
     }
 }
