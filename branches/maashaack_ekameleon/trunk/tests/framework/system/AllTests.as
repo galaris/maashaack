@@ -70,7 +70,6 @@ package system
             suite.addTestSuite( ObjectsTest );
             suite.addTestSuite( ArraysTest );
             suite.addTestSuite( CharTest );
-            suite.addTestSuite( VectorsTest );
             
             //others
             
