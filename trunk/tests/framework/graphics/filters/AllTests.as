@@ -50,6 +50,7 @@ package graphics.filters
             suite.addTestSuite( GrayScaleTest ) ;
             suite.addTestSuite( HoleTest ) ;
             suite.addTestSuite( KnockoutTest ) ;
+            suite.addTestSuite( MagnifyTest ) ;
             suite.addTestSuite( ReflectionTest ) ;
             suite.addTestSuite( RGBDistortTest ) ;
             suite.addTestSuite( RippleBlocksTest ) ;
