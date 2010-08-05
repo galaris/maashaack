@@ -54,7 +54,7 @@ kernel Magnify
     >;
     
     /**
-     * The radius of the inner portion (fully magnified)
+     * The radius of the inner area.
      */
     parameter float innerRadius
     <
@@ -64,7 +64,7 @@ kernel Magnify
     >;
     
     /**
-     * The mount of magnification of the filter.
+     * The amount of magnification.
      */
     parameter float magnification
     <
@@ -74,7 +74,7 @@ kernel Magnify
     >;  
     
     /**
-     * The radius of the outer portion, specify the pixels between the innerRadius and outerRaius will be partly magnified
+     * The radius of the outer area, specify the pixels between the innerRadius and outerRaius will be partly magnified
      */
     parameter float outerRadius
     <
