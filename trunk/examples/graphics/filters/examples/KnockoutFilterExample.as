@@ -41,7 +41,7 @@ package examples
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.net.URLRequest;
-
+    
     [SWF(width="300", height="300", frameRate="30", backgroundColor="0xA2A2A2")]
     
     /**

@@ -45,6 +45,8 @@ package examples
     import flash.filters.DropShadowFilter;
     import flash.ui.Keyboard;
     
+    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    
     /**
      * Test the graphics.filters.Filters class.
      */
