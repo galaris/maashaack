@@ -45,7 +45,9 @@ package examples
     import flash.events.Event;
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
-
+    
+    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    
     /**
      * Test the graphics.filters.SharpenFilter class, this example work only with a FP10 or sup.
      */

@@ -42,6 +42,8 @@ package examples
     import flash.display.StageScaleMode;
     import flash.net.URLRequest;
     
+    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    
     /**
      * Test the graphics.filters.GnomonicFilter class, this example work only with a FP10 or sup.
      */

@@ -35,25 +35,24 @@
 
 package examples 
 {
-    import graphics.filters.RoundPixelFilter;
-    
-    import system.numeric.Mathematics;
-    
+    import graphics.filters.MagnifyFilter;
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
     import flash.events.MouseEvent;
+    import flash.geom.Point;
     import flash.net.URLRequest;
     
-    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    [SWF(width="300", height="300", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Test the graohics.filters.RoundPixelFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.MagnifyFilter class, this example work only with a FP10 or sup.
      */
-    public class RoundPixelFilterExample extends Sprite 
+    public class MagnifyFilterExample extends Sprite 
     {
-        public function RoundPixelFilterExample()
+        public function MagnifyFilterExample()
         {
             // stage
             
@@ -63,7 +62,7 @@ package examples
             
             picture = new Loader() ;
             
-            picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
+            picture.addEventListener( MouseEvent.MOUSE_MOVE , mouseMove ) ;
             
             picture.x = 20 ;
             picture.y = 20 ;
@@ -74,33 +73,27 @@ package examples
             
             // filter
             
-            var init:Object = 
-            {
-                space          : 4.00 ,
-                size           : 0.70 ,
-                edge           : 0.00 
-            };
+            filter = new MagnifyFilter() ;
             
-            filter = new RoundPixelFilter( null , init ) ;
+            filter.center = new Point( picture.width / 2 , picture.height / 2 ) ;
             
-            trace( "name        : " + filter.name        ) ;
-            trace( "namespace   : " + filter.namespace   ) ;
-            trace( "version     : " + filter.version     ) ;
-            trace( "description : " + filter.description ) ;
+            filter.innerRadius = 40 ;
+            filter.outerRadius = 60 ;
+            
+            filter.magnification = 2 ;
             
             picture.filters = [ filter ] ;
         }
         
-        public var filter:RoundPixelFilter ;
+        public var filter:MagnifyFilter ;
         
         public var picture:Loader ;
         
-        public function update( e:Event ):void
+        protected function mouseMove( e:Event ):void
         {
             if ( filter != null )
             {
-                filter.space =  Mathematics.map( picture.mouseX , 0 , picture.width  , 1 , 300 ) ;
-                filter.size  =  Mathematics.map( picture.mouseY , 0 , picture.height , 2 ,   0 ) ;
+                filter.center = new Point( picture.mouseX , picture.mouseY ) ;
                 picture.filters = [ filter ] ;
             }
         }
