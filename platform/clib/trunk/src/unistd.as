@@ -43,8 +43,34 @@ package C.unistd
     [native(cls="::avmshell::UnistdClass", methods="auto")]
     internal class __unistd
     {
+        public native static function get F_OK():int;
+        public native static function get X_OK():int;
+        public native static function get W_OK():int;
+        public native static function get R_OK():int;
 
-        public native static function getcwd():String;               //void abort(void);
+        public native static function access( path:String, mode:int ):int;  //int access(const char *path, int mode);
+        public native static function getcwd():String;                      //void abort(void);
+    }
+
+    /** Check for existence. */
+    public const F_OK:int = __unistd.F_OK;
+
+    /** Check for execute permission. */
+    public const X_OK:int = __unistd.X_OK;
+
+    /** Check for write permission. */
+    public const W_OK:int = __unistd.W_OK;
+
+    /** Check for read permission. */
+    public const R_OK:int = __unistd.R_OK;
+
+
+    /**
+     * Determine accessibility of a file.
+     */
+    public function access( path:String, mode:int ):int
+    {
+        return __unistd.access( path, mode );
     }
     
     /**
