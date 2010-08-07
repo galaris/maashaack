@@ -43,8 +43,16 @@ package C.string
     [native(cls="::avmshell::CStringClass", methods="auto")]
     internal class __string
     {
+        public native static function strerror( errnum:int ):String;   //char *strerror(int errcode);
+        public native static function strlen( str:String ):uint;       //size_t strlen(const char *s);
+    }
 
-        public native static function strlen( str:String ):uint;  //size_t strlen(const char *s);
+    /**
+     * Accepts an error number argument errnum and returns the corresponding message string.
+     */
+    public function strerror( errnum:int ):String
+    {
+        return __string.strerror( errnum );
     }
     
     /**
