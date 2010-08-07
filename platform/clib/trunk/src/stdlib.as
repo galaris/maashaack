@@ -49,6 +49,8 @@ package C.stdlib
         public native static function abort():void;                    //void abort(void);
         public native static function exit( status:int = 0 ):void;     //void exit(int status);
         public native static function getenv( name:String ):String;    //char *getenv(const char *name);
+        public native static function setenv( name:String, value:String, overwrite:int ):int; //int setenv(const char *name, const char *value, int overwrite);
+        public native static function unsetenv( name:String ):int;     //int unsetenv(const char *name);
         public native static function __system( command:String ):int;  //int system(const char *s);
     }
     
@@ -80,6 +82,19 @@ package C.stdlib
     public function getenv( name:String ):String
     {
         return __stdlib.getenv( name );
+    }
+
+    public function setenv( name:String, value:String, overwrite:Boolean = false )
+    {
+        var writeover:int = 0;
+        if( overwrite ) { writeover = 1; }
+        
+        return __stdlib.setenv( name, value, writeover );
+    }
+
+    public function unsetenv( name:String ):int
+    {
+        return __stdlib.unsetenv( name );
     }
 
     /**
