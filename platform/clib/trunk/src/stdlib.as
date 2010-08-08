@@ -43,14 +43,15 @@ package C.stdlib
     [native(cls="::avmshell::StdlibClass", methods="auto")]
     internal class __stdlib
     {
-        public native static function get EXIT_SUCCESS():int;          //#define EXIT_SUCCESS <rvalue integer expression>
-        public native static function get EXIT_FAILURE():int;          //#define EXIT_FAILURE <rvalue integer expression>
+        public native static function get EXIT_SUCCESS():int;
+        public native static function get EXIT_FAILURE():int;
 
         public native static function abort():void;                    //void abort(void);
         public native static function exit( status:int = 0 ):void;     //void exit(int status);
         public native static function getenv( name:String ):String;    //char *getenv(const char *name);
         public native static function setenv( name:String, value:String, overwrite:int ):int; //int setenv(const char *name, const char *value, int overwrite);
         public native static function unsetenv( name:String ):int;     //int unsetenv(const char *name);
+        public native static function realpath( path:String ):String;  //char *realpath(char const *path, char *resolvedPath);
         public native static function __system( command:String ):int;  //int system(const char *s);
     }
     
@@ -84,6 +85,9 @@ package C.stdlib
         return __stdlib.getenv( name );
     }
 
+    /**
+     * Add or change an environment variable.
+     */
     public function setenv( name:String, value:String, overwrite:Boolean = false )
     {
         var writeover:int = 0;
@@ -92,13 +96,24 @@ package C.stdlib
         return __stdlib.setenv( name, value, writeover );
     }
 
+    /**
+     * Remove an environment variable.
+     */
     public function unsetenv( name:String ):int
     {
         return __stdlib.unsetenv( name );
     }
 
     /**
-     * Pass a command to the shell.
+     * Resolve a pathname.
+     */
+    public function realpath( path:String ):String
+    {
+        return __stdlib.realpath( path );
+    }
+
+    /**
+     * Issue a command.
      */
     public function system( command:String ):int
     {
