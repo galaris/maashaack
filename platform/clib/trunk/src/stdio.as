@@ -63,6 +63,10 @@ package C.stdio
 
     /**
      * Remove a file.
+     * 
+     * note:
+     * under WIN32, you can get a "File Permission Denied" if you try to remove a directory path
+     * you should use rmdir() in C.unistd
      */
     public function remove( filename:String ):int
     {
