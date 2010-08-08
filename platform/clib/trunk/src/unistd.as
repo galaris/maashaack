@@ -50,6 +50,20 @@ package C.unistd
 
         public native static function access( path:String, mode:int ):int;  //int access(const char *path, int mode);
         public native static function getcwd():String;                      //void abort(void);
+
+        /* note:
+           mkdir() is normaly defined in <sys/stat.h> and can define file permission
+           eg. int mkdir(const char *path, mode_t mode);
+           1. to be in sync with _mkdir() WIN32 which can not define file permission
+              we don't allow it in the API, we use those default permissions:
+              S_IRWXU = Read, write, execute/search by owner.
+              S_IRWXG = Read, write, execute/search by group.
+              S_IRWXO = Read, write, execute/search by others.
+           2. because unistd define rmdir(), we moved the function here
+              instead of having C.sys.stat::mkdir() as it seems cleaner
+        */
+        public native static function mkdir( path:String ):int;            //int mkdir(const char *path);
+        public native static function rmdir( path:String ):int;            //int rmdir(const char *path);
     }
 
     /** Check for existence. */
@@ -80,6 +94,21 @@ package C.unistd
     {
         return __unistd.getcwd();
     }
-    
+
+    /**
+     * Make directory.
+     */
+    public function mkdir( path:String ):int
+    {
+        return __unistd.mkdir( path );
+    }
+
+    /**
+     * Remove directory.
+     */
+    public function rmdir( path:String ):int
+    {
+        return __unistd.rmdir( path );
+    }
     
 }
