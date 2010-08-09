@@ -50,13 +50,17 @@ package graphics.colors
      * </pre>
      * @return the RGB representation of the specified CMY object.
      */
-    public const CMY2RGB:Function = function( cmy:CMY ):RGB
+    public const CMY2RGB:Function = function( cmy:CMY , rgb:RGB = null ):RGB
     {
-        return new RGB
-        ( 
-            ( 1 - cmy.c ) * 0xFF ,
-            ( 1 - cmy.m ) * 0xFF ,
-            ( 1 - cmy.y ) * 0xFF 
-        ) ;
+        if ( rgb == null )
+        {
+            rgb = new RGB() ;
+        }
+        
+        rgb.r = ( 1 - cmy.c ) * 0xFF ;
+        rgb.g = ( 1 - cmy.m ) * 0xFF ;
+        rgb.b = ( 1 - cmy.y ) * 0xFF ;
+        
+        return rgb ;
     };
 }
