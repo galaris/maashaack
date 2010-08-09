@@ -48,7 +48,7 @@ package graphics.colors
             var hsl:HSL ;
             
             rgb = new RGB(255,0,0) ;
-            assertEquals( RGB2HSL(rgb) , new HSL(0,1,0.5) , "01 - Colors.RGB2HSL(rgb) failed.") ;
+            assertEquals( RGB2HSL(rgb) , new HSL(0,1,0.5) , "01 - RGB2HSL(rgb) failed.") ;
             
             rgb = new RGB(127.5,255,127.5) ;
             hsl = RGB2HSL(rgb) ;
@@ -63,5 +63,17 @@ package graphics.colors
             assertEquals( Math.round(hsl.h)           , 240    , "03-01 - RGB2HSL(rgb) failed.") ; 
             assertEquals( hsl.s                       ,   1    , "03-02 - RGB2HSL(rgb) failed.") ;
             assertEquals( Mathematics.round(hsl.l, 2) ,   0.25 , "03-03 - RGB2HSL(rgb) failed.") ;
+        }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var rgb:RGB ;
+            var hsl:HSL = new HSL();
+            
+            rgb = new RGB(255,0,0) ;
+            
+            RGB2HSL( rgb , hsl ) ;
+            
+            assertEquals( hsl  , new HSL(0,1,0.5) ) ;
         }
     }}

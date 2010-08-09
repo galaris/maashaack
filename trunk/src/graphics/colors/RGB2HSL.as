@@ -52,15 +52,20 @@ package graphics.colors
      * 
      * trace( hsl ) ; // [HSL h:0 s:1 l:0.5]
      * </pre>
+     * @param rgb The RGB color to transform.
+     * @param hsl The optional HSL object to initialize. If this argument is null a new HSL instance is created.
      * @return the HSL representation of the passed-in RGB parameter.
      */
-    public const RGB2HSL:Function = function( rgb:RGB ):HSL
+    public const RGB2HSL:Function = function( rgb:RGB , hsl:HSL = null ):HSL
     {
-        var hsl:HSL    = new HSL() ;
+        if ( hsl == null )
+        {
+            hsl = new HSL() ;
+        }
         
-        var r:Number   = rgb._red   / 0xFF ;
-        var g:Number   = rgb._green / 0xFF ;
-        var b:Number   = rgb._blue  / 0xFF ;
+        var r:Number = rgb._red   / 0xFF ;
+        var g:Number = rgb._green / 0xFF ;
+        var b:Number = rgb._blue  / 0xFF ;
         
         var max:Number = Math.max( r, g, b );
         var min:Number = Math.min( r, g, b );
@@ -102,6 +107,7 @@ package graphics.colors
             hsl.h /= 6  ;
             hsl.h *= 360 ;
         }
+        
         return hsl ;
     };
 }
