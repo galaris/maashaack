@@ -46,4 +46,16 @@ package graphics.colors
             var yuv:YUV = RGB2YUV( rgb ) ; 
             assertEquals( yuv , new YUV(76.24499999999999,84.97232,255.5) , "Colors.RGB2YUV failed.") ;
         }
+        
+        public function testMethodWithOptionalYUVReference():void
+        {
+            var yuv:YUV = new YUV() ;
+            
+            var rgb:RGB = new RGB(255,0,0)  ;
+            
+            var result:YUV = RGB2YUV( rgb , yuv ) ; 
+            
+            assertEquals( yuv , result , "#1" ) ;
+            assertEquals( yuv , new YUV(76.24499999999999,84.97232,255.5) , "#2" ) ;
+        }
     }}
