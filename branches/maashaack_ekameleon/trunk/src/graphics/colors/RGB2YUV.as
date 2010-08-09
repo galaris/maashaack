@@ -53,18 +53,25 @@ package graphics.colors
      * trace( rgb ) ; // [RGB r:255 g:0 b:0 hex:0xFF0000]
      * trace( yuv ) ; // [YUV y:76.24499999999999 u:84.97232 v:255.5]
      * </pre>
+     * @param rgb The RGB color to transform.
+     * @param yuv The optional YUV reference who contains the transform components.
      * @return the YUV representation of the passed-in RGB parameter.
      */
-    public const RGB2YUV:Function = function( rgb:RGB ):YUV
+    public const RGB2YUV:Function = function( rgb:RGB , yuv:YUV = null ):YUV
     {
         var r:Number = rgb.r ;
         var g:Number = rgb.g ;
         var b:Number = rgb.b ;
         
-        var y:Number = r *  .299000 + g *  .587000 + b *  .114000 ;
-        var u:Number = r * -.168736 + g * -.331264 + b *  .500000 + 128 ;
-        var v:Number = r *  .500000 + g * -.418688 + b * -.081312 + 128 ;
+        if ( yuv == null )
+        {
+            yuv = new YUV() ;
+        }
         
-        return new YUV( y , u , v ) ;
+        yuv.y = r *  .299000 + g *  .587000 + b *  .114000 ;
+        yuv.u = r * -.168736 + g * -.331264 + b *  .500000 + 128 ;
+        yuv.v = r *  .500000 + g * -.418688 + b * -.081312 + 128 ;
+        
+        return yuv ;
     };
 }
