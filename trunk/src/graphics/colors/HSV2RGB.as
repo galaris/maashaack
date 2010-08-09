@@ -53,11 +53,16 @@ package graphics.colors
      * 
      * trace( rgb ) ; // [RGB r:255 g:0 b:0 hex:0xFF0000]
      * </pre>
+     * @param hsv The HSV color to transform.
+     * @param rgb The optional RGB color to initialize with the HSV color. If this parameter is null a new RGB object is created.
      * @return the RGB representation of the passed-in HSV color.
      */
-    public const HSV2RGB:Function = function( hsv:HSV ):RGB
+    public const HSV2RGB:Function = function( hsv:HSV , rgb:RGB = null ):RGB
     {
-        var rgb:RGB = new RGB() ;
+        if ( rgb == null )
+        {
+            rgb = new RGB() ;
+        }
         rgb.fromNumber( HSV2RGBNumber( hsv ) ) ;
         return rgb ;
     };
