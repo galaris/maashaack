@@ -43,9 +43,12 @@ package graphics.colors
      * Transform the specified RGB in this XYZ representation.
      * @return the XYZ representation of the passed-in RGB parameter.
      */
-    public const RGB2XYZ:Function = function( rgb:RGB ):XYZ
+    public const RGB2XYZ:Function = function( rgb:RGB , xyz:XYZ = null ):XYZ
     {
-        var xyz:XYZ    = new XYZ() ;
+        if ( xyz == null )
+        {
+            xyz = new XYZ() ;
+        }
         
         var r:Number   = rgb._red   / 0xFF ;
         var g:Number   = rgb._green / 0xFF ;
