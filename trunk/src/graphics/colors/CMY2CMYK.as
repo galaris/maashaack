@@ -41,25 +41,35 @@ package graphics.colors
     
     /**
      * Converts the specified CMY object in this CMYK representation.
+     * @param cmy The CMY color to transform.
+     * @param cmyk The optional CMYK object to initialize. If this parameter is null a new CMYK object is created.
      * @return The CMYK representation of the specified CMY object.
      */
-    public const CMY2CMYK:Function = function( cmy:CMY ):CMYK
+    public const CMY2CMYK:Function = function( cmy:CMY , cmyk:CMYK = null ):CMYK
     {
-        var cmyk:CMYK = new CMYK() ;
+        if ( cmyk == null )
+        {
+            cmyk = new CMYK() ;
+        }
+        
         var k:Number = 1 ;
-        if ( cmy._c < k )   
+        
+        if ( cmy._c < k )
         {
             k = cmy._c ;
         }
+        
         if ( cmy._m < k )
         {
             k = cmy._m ;
         }
+        
         if ( cmy._y < k )
         {
             k = cmy._y ;
         }
-        if ( k == 1 ) //Black 
+        
+        if ( k == 1 ) // black 
         { 
            cmyk._c = 0 ;
            cmyk._m = 0 ;
@@ -71,7 +81,9 @@ package graphics.colors
            cmyk.m = ( cmy._m - k ) / ( 1 - k ) ;
            cmyk.y = ( cmy._y - k ) / ( 1 - k ) ;
         }
+        
         cmyk.k = k ;
+        
         return cmyk ;
     };
 }

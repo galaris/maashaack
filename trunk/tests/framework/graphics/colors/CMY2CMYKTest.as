@@ -47,10 +47,23 @@ package graphics.colors
             
             cmy  = new CMY(0,0,0);
             cmyk = CMY2CMYK(cmy);
-            assertEquals( cmyk , new CMYK(0,0,0,0) , "01 - Colors.CMY2CMYK failed." ) ;
+            assertEquals( cmyk , new CMYK(0,0,0,0) , "#01" ) ;
             
             cmy  = new CMY(1,1,1);
             cmyk = CMY2CMYK(cmy);
-            assertEquals( cmyk , new CMYK(0,0,0,1) , "02 - Colors.CMY2CMYK failed." ) ; 
+            assertEquals( cmyk , new CMYK(0,0,0,1) , "#02" ) ; 
+        }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var cmy:CMY ;
+            var cmyk:CMYK ;
+            
+            cmy  = new CMY(1,1,1);
+            cmyk = new CMYK() ;
+            
+            CMY2CMYK(cmy, cmyk );
+            
+            assertEquals( cmyk , new CMYK(0,0,0,1) ) ; 
         }
     }}
