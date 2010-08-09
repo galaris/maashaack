@@ -41,10 +41,17 @@ package graphics.colors
     
     /**
      * Transform the specified XYZ in this RGB representation (use Observer = 2°, Illuminant = D65).
+     * @param xyz The XYZ color to transform.
+     * @param rgb The optional RGB object to initialize. If this parameter is null a new RGB object is created.
      * @return the RGB representation of the passed-in XYZ parameter.
      */
-    public const XYZ2RGB:Function = function( xyz:XYZ ):RGB
+    public const XYZ2RGB:Function = function( xyz:XYZ , rgb:RGB = null ):RGB
     {
+        if ( rgb == null )
+        {
+            rgb = new RGB() ;
+        }
+        
         var x:Number = xyz._x / 100 ; // X from 0 to  95.047
         var y:Number = xyz._y / 100 ; // Y from 0 to 100.000
         var z:Number = xyz._z / 100 ; // Z from 0 to 108.883
@@ -86,6 +93,10 @@ package graphics.colors
         g *= 255 ;
         b *= 255 ;
         
-        return new RGB(r,g,b) ;
+        rgb.r = r ;
+        rgb.g = g ;
+        rgb.b = b ;
+        
+        return rgb ;
     };
 }

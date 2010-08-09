@@ -48,4 +48,16 @@ package graphics.colors
             assertEquals( rgb.g , 10 , "#02") ;
             assertEquals( rgb.b , 10 , "#03") ;
         }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var rgb:RGB = new RGB() ;
+            var xyz:XYZ = new XYZ(0.28850239786317,0.3035269835488375,0.33054088508468404) ;
+            
+            XYZ2RGB(xyz, rgb) ;
+            
+            assertEquals( rgb.r , 10 , "#01") ;
+            assertEquals( rgb.g , 10 , "#02") ;
+            assertEquals( rgb.b , 10 , "#03") ;
+        }
     }}
