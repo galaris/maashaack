@@ -35,20 +35,21 @@
 
 package graphics.colors
 {
-    import system.hack;
-    
-    use namespace hack ;
-    
     /**
      * Transform the specified XYZ in this Yxy representation (use Observer = 2°, Illuminant = D65).
+     * @param xyz The XYZ color to transform.
+     * @param yxy The optional Yxy reference to initialize. If this parameter is null a new Yxy object is created.
      * @return the Yxy representation of the passed-in XYZ parameter.
      */
-    public const XYZ2Yxy:Function = function( xyz:XYZ ):Yxy
+    public const XYZ2Yxy:Function = function( xyz:XYZ , yxy:Yxy = null ):Yxy
     {
-        var r:Yxy = new Yxy() ;
-        r.Y = xyz.Y ;
-        r.x = xyz.X / ( xyz.X + xyz.Y + xyz.Z ) ;
-        r.y = xyz.Y / ( xyz.X + xyz.Y + xyz.Z ) ;
-        return r ;
+        if ( yxy == null )
+        {
+            yxy = new Yxy() ;
+        }
+        yxy.Y = xyz.Y ;
+        yxy.x = xyz.X / ( xyz.X + xyz.Y + xyz.Z ) ;
+        yxy.y = xyz.Y / ( xyz.X + xyz.Y + xyz.Z ) ;
+        return yxy ;
     };
 }
