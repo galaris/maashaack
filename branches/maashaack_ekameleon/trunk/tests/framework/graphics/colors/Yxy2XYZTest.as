@@ -44,6 +44,16 @@ package graphics.colors
         {
             var yxy:Yxy = new Yxy(25,0.4,0.1)  ;
             var result:XYZ = Yxy2XYZ(yxy) ;
-            assertEquals( result , new XYZ(100,25,125) , "Colors.Yxy2XYZ failed.") ;
+            assertEquals( result , new XYZ(100,25,125) , "Yxy2XYZ failed.") ;
+        }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var xyz:XYZ = new XYZ() ;
+            var yxy:Yxy = new Yxy(25,0.4,0.1)  ;
+            
+            Yxy2XYZ(yxy , xyz ) ;
+            
+            assertEquals( xyz , new XYZ(100,25,125) ) ;
         }
     }}
