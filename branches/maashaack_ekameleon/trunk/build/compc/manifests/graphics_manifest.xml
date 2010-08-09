@@ -29,11 +29,9 @@
     <component id="graphics.colors:CMY"           class="graphics.colors.CMY" />
     <component id="graphics.colors:CMY2CMYK"      class="graphics.colors.CMY2CMYK" />
     <component id="graphics.colors:CMY2RGB"       class="graphics.colors.CMY2RGB" />
-    
     <component id="graphics.colors:CMYK"          class="graphics.colors.CMYK" />
     <component id="graphics.colors:CMYK2CMY"      class="graphics.colors.CMYK2CMY" />
     
-    <component id="graphics.colors:Colors"        class="graphics.colors.Colors" />
     <component id="graphics.colors:ColorSpace"    class="graphics.colors.ColorSpace" />
     
     <component id="graphics.colors:HSL"           class="graphics.colors.HSL" />

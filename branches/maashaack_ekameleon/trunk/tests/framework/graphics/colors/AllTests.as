@@ -50,43 +50,42 @@ package graphics.colors
         {
             var suite:TestSuite = new TestSuite( "graphics colors tests" );
             
-            suite.addTestSuite( ColorsTest     ) ;
             suite.addTestSuite( ColorSpaceTest ) ;
             suite.addTestSuite( TrismulusTest  ) ;
             
-            suite.addTestSuite( CMYTest        ) ;
-            suite.addTestSuite( CMY2CMYKTest      ) ;
-            suite.addTestSuite( CMY2RGBTest       ) ;
+            suite.addTestSuite( CMYTest      ) ;
+            suite.addTestSuite( CMY2CMYKTest ) ;
+            suite.addTestSuite( CMY2RGBTest  ) ;
             
-            suite.addTestSuite( CMYKTest       ) ;
-            suite.addTestSuite( CMYK2CMYTest      ) ;
+            suite.addTestSuite( CMYKTest     ) ;
+            suite.addTestSuite( CMYK2CMYTest ) ;
             
-            suite.addTestSuite( HSLTest        ) ;
+            suite.addTestSuite( HSLTest           ) ;
             suite.addTestSuite( HSL2RGBTest       ) ;
             suite.addTestSuite( HSL2RGBNumberTest ) ;
             
-            suite.addTestSuite( HSVTest        ) ;
+            suite.addTestSuite( HSVTest           ) ;
             suite.addTestSuite( HSV2RGBTest       ) ;
             suite.addTestSuite( HSV2RGBNumberTest ) ;
             
-            suite.addTestSuite( RGBTest        ) ;
-            suite.addTestSuite( RGB2CMYTest       ) ;
-            suite.addTestSuite( RGB2HSLTest       ) ;
-            suite.addTestSuite( RGB2HSVTest       ) ;
-            suite.addTestSuite( RGB2XYZTest       ) ;
-            suite.addTestSuite( RGB2YUVTest       ) ;
+            suite.addTestSuite( RGBTest     ) ;
+            suite.addTestSuite( RGB2CMYTest ) ;
+            suite.addTestSuite( RGB2HSLTest ) ;
+            suite.addTestSuite( RGB2HSVTest ) ;
+            suite.addTestSuite( RGB2XYZTest ) ;
+            suite.addTestSuite( RGB2YUVTest ) ;
             
-            suite.addTestSuite( RGBATest       ) ;
+            suite.addTestSuite( RGBATest ) ;
             
-            suite.addTestSuite( XYZTest           ) ;
-            suite.addTestSuite( XYZ2RGBTest       ) ;
-            suite.addTestSuite( XYZ2YxyTest       ) ;
+            suite.addTestSuite( XYZTest     ) ;
+            suite.addTestSuite( XYZ2RGBTest ) ;
+            suite.addTestSuite( XYZ2YxyTest ) ;
             
-            suite.addTestSuite( YUVTest           ) ;
-            suite.addTestSuite( YUV2RGBTest       ) ;
+            suite.addTestSuite( YUVTest     ) ;
+            suite.addTestSuite( YUV2RGBTest ) ;
             
-            suite.addTestSuite( YxyTest        ) ;
-            suite.addTestSuite( Yxy2XYZTest       ) ;
+            suite.addTestSuite( YxyTest     ) ;
+            suite.addTestSuite( Yxy2XYZTest ) ;
             
             return suite;
         }
