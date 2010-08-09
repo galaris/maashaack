@@ -43,9 +43,12 @@ package graphics.colors
      * Converts the specified CMYK object in this CMY representation.
      * @return The CMYK representation of the specified CMY object.
      */
-    public const CMYK2CMY:Function = function( cmyk:CMYK ):CMY
+    public const CMYK2CMY:Function = function( cmyk:CMYK , cmy:CMY = null ):CMY
     {
-        var cmy:CMY = new CMY() ;
+        if ( cmy == null )
+        {
+            cmy = new CMY() ;
+        }
         cmy.c = cmyk._c * ( 1 - cmyk._k ) + cmyk._k ;
         cmy.m = cmyk._m * ( 1 - cmyk._k ) + cmyk._k ;
         cmy.y = cmyk._y * ( 1 - cmyk._k ) + cmyk._k ;

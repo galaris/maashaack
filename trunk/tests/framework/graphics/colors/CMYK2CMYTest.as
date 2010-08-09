@@ -53,4 +53,17 @@ package graphics.colors
             cmy  = CMYK2CMY( cmyk );
             assertEquals( cmy , new CMY(1,1,1) , "#02" ) ;
         }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var cmy:CMY = new CMY() ;
+            
+            var cmyk:CMYK ;
+            
+            cmyk = new CMYK( 0 , 0 , 0 , 1 ) ;
+            
+            CMYK2CMY( cmyk , cmy );
+            
+            assertEquals( cmy , new CMY(1,1,1) ) ;
+        }
     }}
