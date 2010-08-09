@@ -63,4 +63,16 @@ package graphics.colors
             assertEquals(rgb.g , 0   , "03-02 toRGB method failed.") ;
             assertEquals(rgb.b , 127 , "03-03 toRGB method failed.") ;
         }
+        
+        public function testMethodWithCustomRGBReference():void
+        {
+            var hsv:HSV  = new HSV( 120 , 0.5 ,1 ) ;
+            var rgb:RGB  = new RGB() ;
+            
+            rgb = HSV2RGB( hsv , rgb ) ;
+            
+            assertEquals( rgb.r , 127 , "#01") ;
+            assertEquals( rgb.g , 255 , "#02") ;
+            assertEquals( rgb.b , 127 , "#03") ;
+        }
     }}
