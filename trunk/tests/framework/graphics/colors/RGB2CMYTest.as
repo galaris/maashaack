@@ -57,4 +57,14 @@ package graphics.colors
             cmy = RGB2CMY( rgb ) ;
             assertEquals( cmy , new CMY( 0 , 1 , 1 ) , "03 - Colors.RGB2CMY method failed." ) ;
         }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var cmy:CMY = new CMY() ;
+            var rgb:RGB = new RGB(255,255,255) ;
+            
+            RGB2CMY( rgb , cmy ) ;
+            
+            assertEquals( cmy , new CMY( 0 , 0 , 0 ) ) ;
+        }
     }}

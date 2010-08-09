@@ -44,19 +44,24 @@ package graphics.colors
      * import graphics.colors.RGB2CMY ;
      * 
      * var rgb:RGB = new RGB( 255 , 0 , 0 ) ;
+     * 
      * var cmy:CMY = RGB2CMY( rgb ) ;
      * 
      * trace( cmy ) ; // [CMY c:0 m:1 y:1]
      * </pre>
+     * @param rgb The RGB color to transform.
+     * @param cmy The optional CMY object to initialize. If this argument is null a new CMY instance is created.
      * @return the CMY representation of the specified RGB object.
      */
-    public const RGB2CMY:Function = function( rgb:RGB ):CMY
+    public const RGB2CMY:Function = function( rgb:RGB , cmy:CMY = null ):CMY
     {
-        return new CMY
-        ( 
-            1 - ( rgb.r / 0xFF ) ,
-            1 - ( rgb.g / 0xFF ) ,
-            1 - ( rgb.b / 0xFF ) 
-        ) ;
+        if ( cmy == null )
+        {
+            cmy = new CMY() ;
+        }
+        cmy.c = 1 - ( rgb.r / 0xFF ) ;
+        cmy.m = 1 - ( rgb.g / 0xFF ) ;
+        cmy.y = 1 - ( rgb.b / 0xFF ) ;
+        return cmy ;
     };
 }
