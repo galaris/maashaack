@@ -41,14 +41,19 @@ package graphics.colors
     
     /**
      * Transform the specified Yxy in this XYZ representation (use Observer = 2°, Illuminant = D65).
+     * @param color the Yxy color to transform.
+     * @param xyz The optional XYZ color to initialize. If this parameter is null a new XYZ object is created.
      * @return the XYZ representation of the passed-in Yxy parameter.
      */
-    public const Yxy2XYZ:Function = function( color:Yxy ):XYZ
+    public const Yxy2XYZ:Function = function( color:Yxy , xyz:XYZ = null ):XYZ
     {
-        var r:XYZ = new XYZ() ;
-        r.X = color.x * ( color.Y / color.y ) ;
-        r.Y = color.Y ;
-        r.Z = ( 1 - color.x - color.y ) * ( color.Y / color.y ) ;
-        return r ;
+        if ( xyz == null )
+        {
+            xyz = new XYZ() ;
+        }
+        xyz.X = color.x * ( color.Y / color.y ) ;
+        xyz.Y = color.Y ;
+        xyz.Z = ( 1 - color.x - color.y ) * ( color.Y / color.y ) ;
+        return xyz ;
     };
 }
