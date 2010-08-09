@@ -36,7 +36,6 @@
 package graphics.colors
 {
     import system.hack;
-    
     use namespace hack ;
     
     /**
@@ -53,16 +52,25 @@ package graphics.colors
      * trace( yuv ) ; // [YUV y:76.24499999999999 u:84.97232 v:255.5]
      * trace( rgb ) ; // [RGB r:255 g:0 b:0 hex:0xFF0000]
      * </pre>
+     * @param yuv The YUV color to transform.
+     * @param rgb The optional RGB color to initialize with the YUV color. If this parameter is null a new RGB object is created.
      * @return the RGB representation of the passed-in YUV parameter.
      */
-    public const YUV2RGB:Function = function( yuv:YUV ):RGB
+    public const YUV2RGB:Function = function( yuv:YUV , rgb:RGB = null ):RGB
     {
         var y:Number = yuv.y ;
         var u:Number = yuv.u ;
         var v:Number = yuv.v ;
-        var r:Number = y + 1.4075 * (v - 128) ;
-        var g:Number = y - 0.3455 * (u - 128) - (0.7169 * (v - 128)) ;
-        var b:Number = y + 1.7790 * (u - 128) ;
-        return new RGB( r , g , b ) ;
+        
+        if ( rgb == null )
+        {
+            rgb = new RGB() ;
+        }
+        
+        rgb.r = y + 1.4075 * (v - 128) ;
+        rgb.g = y - 0.3455 * (u - 128) - (0.7169 * (v - 128)) ;
+        rgb.b = y + 1.7790 * (u - 128) ;
+        
+        return rgb ;
     };
 }
