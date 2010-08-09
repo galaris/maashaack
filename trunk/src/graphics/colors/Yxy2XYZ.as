@@ -35,10 +35,6 @@
 
 package graphics.colors
 {
-    import system.hack;
-    
-    use namespace hack ;
-    
     /**
      * Transform the specified Yxy in this XYZ representation (use Observer = 2°, Illuminant = D65).
      * @param color the Yxy color to transform.

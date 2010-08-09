@@ -46,4 +46,15 @@ package graphics.colors
             var result:Yxy = XYZ2Yxy(xyz) ;
             assertEquals( result , new Yxy(25,0.4,0.1) ) ;
         }
+        
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var result:Yxy = new Yxy() ;
+            var xyz:XYZ    = new XYZ(100,25,125) ;
+            
+            XYZ2Yxy(xyz, result) ;
+            
+            assertEquals( result , new Yxy(25,0.4,0.1) ) ;
+        }
     }}
