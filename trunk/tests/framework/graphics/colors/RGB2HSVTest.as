@@ -59,4 +59,14 @@ package graphics.colors
             rgb = new RGB(0,0,0) ;
             assertEquals( RGB2HSV(rgb) , new HSV(0,0,0) , "05 - RGB2HSV(rgb) failed.") ;
         }
+        
+        public function testMethodWithOptionalArgument():void
+        {
+            var hsv:HSV = new HSV();
+            var rgb:RGB = new RGB(0,0,255) ;
+            
+            RGB2HSV( rgb , hsv ) ;
+            
+            assertEquals( hsv  , new HSV(240,1,1) ) ;
+        }
     }}
