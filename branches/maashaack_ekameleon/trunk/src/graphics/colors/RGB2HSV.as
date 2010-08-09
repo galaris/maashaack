@@ -52,18 +52,23 @@ package graphics.colors
      * 
      * trace( hsv ) ; // [HSV h:0 s:1 v:1]
      * </pre>
+     * @param rgb The RGB color to transform.
+     * @param hsv The optional HSV object to initialize. If this argument is null a new HSV instance is created.
      * @return the HSV representation of the passed-in RGB parameter.
      */
-    public const RGB2HSV:Function = function( rgb:RGB ):HSV
+    public const RGB2HSV:Function = function( rgb:RGB , hsv:HSV = null ):HSV
     {
-        var hsv:HSV    = new HSV() ;
+        if ( hsv == null )
+        {
+            hsv = new HSV() ;
+        }
         
         var r:Number   = rgb._red   / 0xFF ;
         var g:Number   = rgb._green / 0xFF ;
         var b:Number   = rgb._blue  / 0xFF ;
         
-        var max:Number = Math.max( r, Math.max(g, b) );
-        var min:Number = Math.min( r, Math.min(g, b) );
+        var max:Number = Math.max( r, g, b );
+        var min:Number = Math.min( r, g, b );
         
         switch( max )
         {
