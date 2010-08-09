@@ -47,15 +47,15 @@ package graphics.colors
             
             rgb = new RGB(255,255,255) ;
             cmy = RGB2CMY( rgb ) ;
-            assertEquals( cmy , new CMY( 0 , 0 , 0 ) , "01 - Colors.RGB2CMY method failed." ) ;
+            assertEquals( cmy , new CMY( 0 , 0 , 0 ) , "#01" ) ;
             
             rgb = new RGB(0,0,0) ;
             cmy = RGB2CMY( rgb ) ;
-            assertEquals( cmy , new CMY( 1 , 1 , 1 ) , "02 - Colors.RGB2CMY method failed." ) ;
+            assertEquals( cmy , new CMY( 1 , 1 , 1 ) , "#02" ) ;
             
             rgb = new RGB(255,0,0) ;
             cmy = RGB2CMY( rgb ) ;
-            assertEquals( cmy , new CMY( 0 , 1 , 1 ) , "03 - Colors.RGB2CMY method failed." ) ;
+            assertEquals( cmy , new CMY( 0 , 1 , 1 ) , "#03" ) ;
         }
         
         public function testMethodWithOptionalArgument():void
