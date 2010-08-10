@@ -18,7 +18,6 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s) :
-  Nicolas Surian (aka NairuS) <nicolas.surian@gmail.com> 
 */
 
 package examples 
@@ -27,9 +26,9 @@ package examples
     
     import flash.display.Sprite;
     
-    public class ExampleRGBA extends Sprite
+    public class RGBAExample extends Sprite
     {
-        public function ExampleRGBA()
+        public function RGBAExample()
         {
             trace("---- black") ;
             
