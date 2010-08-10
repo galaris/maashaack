@@ -48,7 +48,41 @@ package C.unistd
         public native static function get W_OK():int;
         public native static function get R_OK():int;
 
+        /* note:
+           all those are also normaly defined in <sys/stat.h>
+           moved here because of chmod()
+        */
+        public native static function get S_IFMT():int;
+        public native static function get S_IFIFO():int;
+        public native static function get S_IFCHR():int;
+        public native static function get S_IFDIR():int;
+        public native static function get S_IFBLK():int;
+        public native static function get S_IFREG():int;
+        public native static function get S_IFLNK():int;
+        public native static function get S_IFSOCK():int;
+
+        public native static function get S_IRWXU():int;
+        public native static function get S_IRUSR():int;
+        public native static function get S_IWUSR():int;
+        public native static function get S_IXUSR():int;
+        
+        public native static function get S_IRWXG():int;
+        public native static function get S_IRGRP():int;
+        public native static function get S_IWGRP():int;
+        public native static function get S_IXGRP():int;
+        
+        public native static function get S_IRWXO():int;
+        public native static function get S_IROTH():int;
+        public native static function get S_IWOTH():int;
+        public native static function get S_IXOTH():int;
+
+        public native static function get S_IREAD():int;
+        public native static function get S_IWRITE():int;
+        public native static function get S_IEXEC():int;
+
+
         public native static function access( path:String, mode:int ):int;  //int access(const char *path, int mode);
+        public native static function chmod( path:String, mode:int ):int;  //int chmod(const char *path, mode_t mode);
         public native static function getcwd():String;                      //void abort(void);
 
         /* note:
@@ -77,6 +111,64 @@ package C.unistd
 
     /** Check for read permission. */
     public const R_OK:int = __unistd.R_OK;
+
+    /** Type of file mask. */
+    public const S_IFMT:int   = __unistd.S_IFMT;
+    
+    /** Named pipe (fifo). */
+    public const S_IFIFO:int  = __unistd.S_IFIFO;
+    
+    /** Character special (device). */
+    public const S_IFCHR:int  = __unistd.S_IFCHR;
+    
+    /** Directory. */
+    public const S_IFDIR:int  = __unistd.S_IFDIR;
+    
+    /** Block special (device). */
+    public const S_IFBLK:int  = __unistd.S_IFBLK;
+    
+    /** Regular file. */
+    public const S_IFREG:int  = __unistd.S_IFREG;
+    
+    /** Symbolic link. */
+    public const S_IFLNK:int  = __unistd.S_IFLNK;
+    
+    /** Socket. */
+    public const S_IFSOCK:int = __unistd.S_IFSOCK;
+
+    /** RWX mask for owner. */
+    public const S_IRWXU:int = __unistd.S_IRWXU;
+    /** R for owner. */
+    public const S_IRUSR:int = __unistd.S_IRUSR;
+    /** W for owner. */
+    public const S_IWUSR:int = __unistd.S_IWUSR;
+    /** X for owner. */
+    public const S_IXUSR:int = __unistd.S_IXUSR;
+
+    /** RWX mask for group. */
+    public const S_IRWXG:int = __unistd.S_IRWXG;
+    /** R for group. */
+    public const S_IRGRP:int = __unistd.S_IRGRP;
+    /** W for group. */
+    public const S_IWGRP:int = __unistd.S_IWGRP;
+    /** X for group. */
+    public const S_IXGRP:int = __unistd.S_IXGRP;
+
+    /** RWX mask for other. */
+    public const S_IRWXO:int = __unistd.S_IRWXO;
+    /** R for other. */
+    public const S_IROTH:int = __unistd.S_IROTH;
+    /** W for other. */
+    public const S_IWOTH:int = __unistd.S_IWOTH;
+    /** X for other. */
+    public const S_IXOTH:int = __unistd.S_IXOTH;
+
+    /** R for all (backward compatability). */
+    public const S_IREAD:int  = __unistd.S_IREAD;
+    /** W for all (backward compatability). */
+    public const S_IWRITE:int = __unistd.S_IWRITE;
+    /** X for all (backward compatability). */
+    public const S_IEXEC:int  = __unistd.R_OK;
 
 
     /**
@@ -110,5 +202,12 @@ package C.unistd
     {
         return __unistd.rmdir( path );
     }
-    
+
+    /**
+     * Change mode of a file.
+     */
+    public function chmod( path:String, mode:int ):int
+    {
+        return __unistd.chmod( path, mode );
+    }
 }
