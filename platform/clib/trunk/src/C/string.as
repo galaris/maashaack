@@ -39,6 +39,7 @@
 
 package C.string
 {
+    import C.unistd.*;
     
     [native(cls="::avmshell::CStringClass", methods="auto")]
     internal class __string
@@ -61,6 +62,76 @@ package C.string
     public function strlen( str:String ):uint
     {
         return __string.strlen( str );
+    }
+
+    /**
+     * Returns a string describing file modes.
+     * 
+     * note:
+     * void strmode(mode_t mode char *bp);
+     * void strmode(int mode, char *bp); //OSX
+     * not part of the C standard lib, but part of GNU libc
+     * and pretty usefull function so we added it, and
+     * yeah it's all AS3 here, no native implementation :p
+     */
+    public function strmode( mode:int ):String
+    {
+        var n:Array = new Array(10);
+
+        /* Return a character indicating the type of file described by
+           file mode BITS:
+           '-' regular file
+           'b' block special file
+           'c' character special file
+           'd' directory
+           'l' symbolic link
+           'n' network special file (HP-UX)
+           'p' fifo (named pipe)
+           's' socket
+           '?' some other file type
+        */
+        var ftype:Function = function( bits:int ):String
+        {
+            switch (bits & S_IFMT)
+            {
+                case S_IFREG:
+                return "-";
+                
+                case S_IFDIR:
+                return "d";
+                
+                case S_IFCHR:
+                return "c";
+                
+                case S_IFBLK:
+                return "b";
+                
+                case S_IFLNK:
+                return "l";
+                
+                case S_IFIFO:
+                return "p";
+                
+                case S_IFSOCK:
+                return "s";
+
+                default:
+                return "?";
+            }
+        }
+
+        n[0] = ftype( mode );
+        n[1] = mode & S_IRUSR ? "r" : "-";
+        n[2] = mode & S_IWUSR ? "w" : "-";
+        n[3] = mode & S_IXUSR ? "x" : "-";
+        n[4] = mode & S_IRGRP ? "r" : "-";
+        n[5] = mode & S_IWGRP ? "w" : "-";
+        n[6] = mode & S_IXGRP ? "x" : "-";
+        n[7] = mode & S_IROTH ? "r" : "-";
+        n[8] = mode & S_IWOTH ? "w" : "-";
+        n[9] = mode & S_IXOTH ? "x" : "-";
+        
+        return n.join( "" );
     }
     
     
