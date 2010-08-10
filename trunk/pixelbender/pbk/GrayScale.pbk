@@ -65,7 +65,7 @@ kernel GrayScale
     {
         result = sampleNearest( source , outCoord() ) ;
         
-        float grey = 0.2125 * result.r + 0.7154 *result.g + 0.0721 * result.b ;
+        float grey = 0.299 * result.r + 0.587 *result.g + 0.114 * result.b ;
         
         result.r = grey + ( result.r - grey ) * ( 1.0 - scale ) ;
         result.g = grey + ( result.g - grey ) * ( 1.0 - scale ) ;

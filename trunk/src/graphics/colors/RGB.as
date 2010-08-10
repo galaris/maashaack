@@ -38,7 +38,7 @@ package graphics.colors
     import system.Reflection;
     import system.hack;
     import system.numeric.Mathematics;
-    
+
     /**
      * The RGB class encapsulates an rgb color.
      * <pre class="prettyprint">
@@ -126,6 +126,26 @@ package graphics.colors
         public function set g( value:uint ):void
         {
             _green = Math.min( value, maximum ) as uint ;
+        }
+        
+        /**
+         * Indicates the luminance of the color. The value is normed and lies in the range between 0 (black) and 255 (white).
+         */
+        public function get luminance():Number
+        {
+            return 0.299 * _red + 0.587 * _green + 0.114 * _blue ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set luminance( value:Number ):void
+        {
+            value = Mathematics.normalize(value, 0, 0xFF) ;
+            var l:Number = 0.299 * _red + 0.587 * _green + 0.114 * _blue ;
+            _red   = l + ( _red   - l ) * ( 1 - value ) ;
+            _green = l + ( _green - l ) * ( 1 - value ) ;
+            _blue  = l + ( _blue  - l ) * ( 1 - value ) ;
         }
         
         /**

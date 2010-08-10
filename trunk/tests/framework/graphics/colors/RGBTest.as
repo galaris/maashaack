@@ -35,10 +35,12 @@
 
 package graphics.colors 
 {    import buRRRn.ASTUce.framework.TestCase;
-        import system.Cloneable;
+    
+    import system.Cloneable;
     import system.Equatable;
     import system.Serializable;
-        public class RGBTest extends TestCase 
+    
+    public class RGBTest extends TestCase 
     {        public function RGBTest(name:String = "")
         {            super(name);        }
         
@@ -116,6 +118,29 @@ package graphics.colors
             
             rgb.r = 1000 ;
             assertEquals(rgb.r , 255 , "04 - r property failed.") ;
+        }
+        
+        public function testLuminance():void
+        {
+            var rgb:RGB ;
+            
+            rgb = new RGB(0,0,0) ;
+            assertEquals(0 , rgb.luminance , "#1") ;
+            
+            rgb = new RGB(255,0,0) ;
+            assertEquals( 76.24499999999999 , rgb.luminance , "#2") ;
+            
+            rgb = new RGB(255,0,0) ;
+            rgb.luminance = 0.5 ;
+            assertEquals( rgb , new RGB(254,0,0)  , "#2-01") ;
+            assertEquals( rgb.luminance  , 75.946  , "#2-02") ;
+            
+            rgb = new RGB(255,0,0) ;
+            rgb.luminance = 255 ;
+            assertEquals( rgb , new RGB(76,76,76)  , "#2-03") ;
+            
+            rgb = new RGB(255,255,255) ;
+            assertEquals(255 , rgb.luminance , "#3") ;
         }
         
         public function testClone():void
