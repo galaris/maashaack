@@ -59,6 +59,7 @@ package graphics.geom
             suite.addTestSuite( RegularPolygonTest ) ;
             suite.addTestSuite( RingTest ) ;
             suite.addTestSuite( UVTest ) ;
+            suite.addTestSuite( UVWTest ) ;
             suite.addTestSuite( Vector2Test ) ;
             suite.addTestSuite( Vector3Test ) ;
             suite.addTestSuite( Vector4Test ) ;

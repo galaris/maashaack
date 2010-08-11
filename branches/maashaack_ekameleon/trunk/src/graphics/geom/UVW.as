@@ -38,56 +38,46 @@ package graphics.geom
     import core.reflect.getClassPath;
 
     /**
-     * UV mapping is the 3D modeling process of making a 2D image representation of a 3D model. 
-     * Determinates a coordinates system for bitmaps and textures. 
-     * It represents the position of a vertex in the Bitmap.
+     * UVW mapping is a mathematical technique for coordinate mapping. 
+     * "UVW", like the standard Cartesian coordinate system, has three dimensions; the third dimension allows texture maps to wrap in complex ways onto irregular surfaces.
      */
-    public class UV implements Geometry
+    public class UVW extends UV
     {
         /**
-         * Creates a new UV instance.
+         * Creates a new UVW instance.
          * @param u The horizontal coordinate value. The default value is zero.
          * @param v The vertical coordinate value. The default value is zero.
+         * @param w The w coordinate value. The default value is zero.
          */
-        public function UV( u:Number = 0 , v:Number = 0  )
+        public function UVW( u:Number = 0 , v:Number = 0 , w:Number = 0  )
         {
-            this.u = isNaN(u) ? 0 : u ;
-            this.v = isNaN(v) ? 0 : v ;
+            super( u , v ) ;
+            this.w = isNaN(w) ? 0 : w ;
         }
         
         /**
-         * Defines the UVCoordinate object with the u and v properties set to zero.
+         * Defines the w coordinate value of the texture.
          */
-        public static var ZERO:UV = new UV(0,0) ;
-        
-        /**
-         * Defines the horizontal coordinate value of the texture.
-         */
-        public var u:Number ;
-            
-        /**
-         * Defines the vertical coordinate value of the texture.
-         */
-        public var v:Number ;
+        public var w:Number ;
         
         /**
          * Returns a shallow copy of this instance.
          * @return a shallow copy of this instance.
          */
-        public function clone():*
+        public override function clone():*
         {
-            return new UV(u,v) ;
+            return new UVW(u,v,w) ;
         }
         
         /**
          * Compares the specified object with this object for equality.
          * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
          */
-        public function equals( o:* ):Boolean 
+        public override function equals( o:* ):Boolean 
         {
-            if ( o is UV)
+            if ( o is UVW )
             {
-                return ( o.u == u ) && ( o.v == v ) ;
+                return ( o.u == u ) && ( o.v == v ) && ( o.w = w ) ;
             }
             else
             {
@@ -99,27 +89,27 @@ package graphics.geom
          * Returns the Object representation of this object.
          * @return the Object representation of this object.
          */
-        public function toObject():Object 
+        public override function toObject():Object 
         {
-            return { u:u , v:v } ;
+            return { u:u , v:v , w:w } ;
         }
         
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */
-        public function toSource( indent:int = 0 ):String 
+        public override function toSource( indent:int = 0 ):String 
         {
-            return "new " + getClassPath(this, true) + "(" +  u.toString()  + "," + v.toString() + ")" ;
+            return "new " + getClassPath(this, true) + "(" +  u.toString() + "," + v.toString() + "," + w.toString() + ")" ;
         }
         
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
-        public function toString():String
+        public override function toString():String
         {
-            return "[UV u:" + u + " v:" + v + "]" ;
+            return "[UVW u:" + u + " v:" + v + " w:" + w + "]" ;
         }
     }
 }
