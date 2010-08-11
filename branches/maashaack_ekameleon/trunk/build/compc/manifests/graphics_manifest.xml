@@ -189,6 +189,7 @@
     <component id="graphics.geom:RegularPolygon" class="graphics.geom.RegularPolygon" />
     <component id="graphics.geom:Ring"           class="graphics.geom.Ring" />
     <component id="graphics.geom:UV"             class="graphics.geom.UV" />
+    <component id="graphics.geom:UVW"            class="graphics.geom.UVW" />
     <component id="graphics.geom:Vector2"        class="graphics.geom.Vector2" />
     <component id="graphics.geom:Vector3"        class="graphics.geom.Vector3" />
     <component id="graphics.geom:Vector4"        class="graphics.geom.Vector4" />
