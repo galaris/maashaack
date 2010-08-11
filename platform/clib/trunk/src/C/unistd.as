@@ -205,6 +205,12 @@ package C.unistd
 
     /**
      * Change mode of a file.
+     * 
+     * note:
+     * under WIN32 chmod is limited, you will only be able to set read or write at the user level
+     * chmod( "myfile.txt", S_WRITE );
+     * will be the same as
+     * chmod( "myfile.txt", (S_IWUSR | S_IWGRP | S_IWOTH ) );
      */
     public function chmod( path:String, mode:int ):int
     {
