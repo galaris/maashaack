@@ -35,8 +35,10 @@
 
 package graphics.geom 
 {
-    import buRRRn.ASTUce.framework.TestCase ;
-    
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import system.Serializable;
+
     public class Vector2Test extends TestCase 
     {
         public function Vector2Test(name:String = "")
@@ -64,9 +66,9 @@ package graphics.geom
         
         public function testInterface():void
         {
-            assertTrue( v is Geometry , "implements Geometry failed.") ;
+            assertTrue( v is Serializable , "implements Serializable failed.") ;
         }   
-                
+        
         public function testDOWN():void
         {
             var v:Vector2 = Vector2.DOWN ;
@@ -159,10 +161,13 @@ package graphics.geom
         
         public function testClone():void
         {
-            var clone:Vector2 = v.clone() ;
+            var clone:Vector2 = v.clone() as Vector2 ;
+            
             clone.x = 100 ;
             clone.y = 200 ;
+            
             assertTrue( clone is Vector2 , "01 - clone method failed, must return a Vector2 reference." ) ;
+            
             assertFalse( v.x == clone.x, "02 - clone property failed, v.x:" + v.x + " must be different of clone.x:" + clone.x ) ;
             assertFalse( v.y == clone.y, "03 - clone property failed, v.y:" + v.y + " must be different of clone.y:" + clone.y ) ;
         }
@@ -270,7 +275,7 @@ package graphics.geom
         public function testNormalize():void
         {
             var vector:Vector2 = new Vector2(0,5) ;
-            vector.normalize() ;
+            vector.normalize(1) ;
             assertEquals( vector, new Vector2(0,1), "normalize method failed.") ;
         }
         

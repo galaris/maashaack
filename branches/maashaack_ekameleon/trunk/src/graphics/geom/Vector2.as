@@ -37,12 +37,14 @@ package graphics.geom
 {
     import graphics.numeric.Degrees;
     
+    import system.Serializable;
+    
     import flash.geom.Point;
     
     /**
      * Represents a vector in a 2D world with the coordinates x and y.
      */
-    public class Vector2 implements Geometry
+    public class Vector2 extends Point implements Serializable
     {
         /**
          * Creates a new <code class="prettyprint">Vector2</code> instance.
@@ -52,8 +54,7 @@ package graphics.geom
          */
         public function Vector2( x:Number = 0 , y:Number = 0 , degrees:Boolean = false )
         {
-            this.x       = isNaN(x) ? 0 : x ;
-            this.y       = isNaN(y) ? 0 : y ;
+            super(x , y) ;
             this.degrees = degrees ;
         }
         
@@ -108,15 +109,6 @@ package graphics.geom
         public var degrees:Boolean ;
         
         /**
-         * Returns the length of the line segment from (0,0) to the current Vector2 object.
-         * @return the length of the line segment from (0,0) to the current Vector2 object.
-         */
-        public function get length():Number 
-        {
-            return Math.sqrt( x * x + y * y ) ;
-        }
-        
-        /**
          * @private
          */
         public function set length( value:Number ):void 
@@ -133,16 +125,6 @@ package graphics.geom
                 y *= d ;
             }
         }
-        
-        /**
-         * Defines the x coordinate.
-         */
-        public var x:Number ;
-        
-        /**
-         * Defines the y coordinate.
-         */
-        public var y:Number ;
         
         /**
          * Transforms the coordinates of the vector to used absolute value for the x and y properties.
@@ -184,22 +166,12 @@ package graphics.geom
         }
         
         /**
-         * Computes the addition of two vectors.
-         * @param v the vector object to add.
-         */
-        public function add( v:Vector2 ):void
-        {
-             x += v.x ;
-             y += v.y ;
-        }
-        
-        /**
          * Computes the addition of two Vector2.
          * @param v1 a Vector2 to concat.
          * @param v2 a Vector2 to concat.
          * @return the addition result of two Vector2.
          */
-        public static function add( v1:Vector2 , v2:Vector2 ):Vector2
+        public static function add( v1:Point , v2:Point ):Vector2
         {
             return new Vector2( v1.x + v2.x , v1.y + v2.y ) ;
         }
@@ -238,7 +210,7 @@ package graphics.geom
          * Returns a shallow copy of this instance.
          * @return a shallow copy of this instance.
          */
-        public function clone():*
+        public override function clone():Point
         {
             return new Vector2(x, y, degrees) ;
         }
@@ -276,7 +248,7 @@ package graphics.geom
         public function direction():Vector2 
         {
             var v:Vector2 = clone() as Vector2 ;
-            v.normalize();
+            v.normalize(1);
             return v ;
         }
         
@@ -314,11 +286,11 @@ package graphics.geom
          * Compares the specified object with this object for equality.
          * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
          */
-        public function equals( o:* ):Boolean 
+        public override function equals( toCompare:Point ):Boolean 
         {
-            if ( o is Vector2)
+            if ( toCompare is Point )
             {
-                return (o.x == x) && (o.y == y) ;
+                return ( toCompare.x == x) && ( toCompare.y == y ) ;
             }
             else
             {
@@ -354,7 +326,7 @@ package graphics.geom
          * @param level the The level of interpolation between the two points. Indicates where the new point will be, along the line between {@code p1} and {@code p2}. If f=1, pt1 is returned; if f=0, pt2 is returned.
          * @return The new interpolated Vector2 object.
          */
-        public function interpolate( vector:Vector2 , level:Number ):Vector2 
+        public function interpolate( vector:Point , level:Number ):Vector2 
         {
             return new Vector2( vector.x + level * ( x - vector.x ) , vector.y + level * ( y - vector.y ) ) ;
         }
@@ -520,78 +492,6 @@ package graphics.geom
         }
         
         /**
-         * Scales the line segment between (0,0) and the current point to a set length.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import graphics.geom.Vector2 ;
-         * 
-         * var vector:Vector2 = new Vector2( 0 , 5 ) ;
-         * 
-         * vector.normalize() ;
-         * 
-         * trace(v) ;
-         * </pre>
-         * @param thickness The scaling value. For example, if the current point is (0,5), and you normalize it to 1, the point returned is at (0,1).
-         * @return <code class="prettyprint">true</code> of the normalize method is success else false for mistake.
-         */
-        public function normalize( thickness:Number = 1 ):Boolean 
-        {
-            if ( isNaN(thickness) )
-            {
-                thickness = 1 ; 
-            }
-            var l:Number = length ;
-            if ( l > 0 ) 
-            {
-                l = thickness / l ;
-                x *= l ;
-                y *= l ;
-                return true ;
-            }
-            else
-            {
-                return false ;
-            }
-        }
-        
-        /**
-         * Creates and returns a new normalized Vector2 representation.
-         * @param vector the Vector2 to normalize.
-         * @param thickness The scaling value. For example, if the current point is (0,5), and you normalize it to 1, the point returned is at (0,1).
-         * @throws Error if a zero-length vector or a illegal NaN value is calculate in this method.
-         * @return The normalized Vector2 object.
-         */
-        public static function normalize( vector:Vector2 , thickness:Number = 1 ):Vector2
-        {
-            var v:Vector2 = vector.clone() ;
-            v.normalize( thickness ) ;
-            return v ;
-        }
-        
-        /**
-         * Offsets the vector by the specified amount. 
-         * The value of dx is added to the original value of x to create the new x value. 
-         * The value of dy is added to the original value of y to create the new y value.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import graphics.geom.Vector2 ;
-         * 
-         * var vector = new Vector2(10,10) ;
-         * 
-         * vector.offset( 10 , 10 ) ;
-         * 
-         * trace( vector ) ; // [Vector2 x:20 y:20]
-         * </pre>
-         * @param dx The amount by which to offset the horizontal coordinate, x.
-         * @param dy The amount by which to offset the vertical coordinate, y.
-         */
-        public function offset( dx:Number , dy:Number ):void 
-        {
-            x += dx ;
-            y += dy ;
-        }
-        
-        /**
          * Converts a pair of polar coordinates to a Cartesian point coordinate.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
@@ -602,7 +502,7 @@ package graphics.geom
          * @param angle The angle, in radians, of the polar pair.
          * @return The new Cartesian vector.
           */
-        public static function polar(length:Number, angle:Number):Vector2 
+        public static function polar( length:Number , angle:Number ):Vector2 
         {
             return new Vector2( length * Math.cos(angle), length * Math.sin(angle) ) ;
         }
@@ -715,7 +615,7 @@ package graphics.geom
          */
         public static function rotate( vector:Vector2 , angle:Number ):Vector2 
         {
-            var v:Vector2 = vector.clone() ;
+            var v:Vector2 = vector.clone() as Vector2;
             v.rotate (angle) ;
             return v ;
         }
@@ -852,15 +752,6 @@ package graphics.geom
         }
         
         /**
-         * Returns a flash.geom.Point representation of this object.
-         * @return a flash.geom.Point representation of this object.
-         */
-        public function toPoint():Point
-        {
-            return new flash.geom.Point( x , y ) ;
-        }
-        
-        /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */
@@ -873,7 +764,7 @@ package graphics.geom
          * Returns the string representation of the object.
          * @return the string representation of the object.
          */
-        public function toString():String
+        public override function toString():String
         {
             return "[Vector2 x:" + x + " y:" + y + "]" ;
         }

@@ -243,7 +243,7 @@ package graphics.drawing
          */
         public function get maximum():Vector2 
         {
-            return _max.clone() ;
+            return _max.clone() as Vector2 ;
         }
         
         /**
@@ -251,7 +251,7 @@ package graphics.drawing
          */
         public function get minimum():Vector2 
         {
-            return _min.clone() ;
+            return _min.clone() as Vector2 ;
         }
         
         /**
