@@ -64,6 +64,20 @@ package avmplus
 
         /**
          * Returns the "filename" mode.
+         * 
+         * note:
+         * will not work exactly the same between POSIX and WIN32
+         * with POSIX you will want to get the file mode and then apply an additional mode,
+         * it's more granular as you can choose from USR, GRP and OTH
+         * for ex:
+         * var mode:int = FileSystem.getFileMode( "myfile.txt" ); // -r--r--r--
+         * chmod( "myfile.txt", (mode | S_IWUSR ) );              // -rw-r--r--
+         * 
+         * with WIN32, you have only read or write access, and write imply read
+         * (you can not have a file write-only) and so by default we map
+         * the USR access to GRP and OTH
+         * var mode:int = FileSystem.getFileMode( "myfile.txt" ); // -r--r--r--
+         * chmod( "myfile.txt", (mode | S_IWUSR ) );              // -rw-rw-rw-
          */
         public native static function getFileMode( filename:String ):int;
 
