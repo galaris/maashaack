@@ -36,6 +36,10 @@
     <component id="core.chars:isUnicode"  class="core.chars.isUnicode"  />
     <component id="core.chars:isUpper"    class="core.chars.isUpper"    />
     
+    <!-- core.maths -->
+    
+    <component id="core.maths:clamp" class="core.maths.clamp" />
+    
     <!-- core.reflect -->
     
     <component id="core.reflect:getClassByName"      class="core.reflect.getClassByName"      />
