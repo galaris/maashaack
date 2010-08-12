@@ -57,12 +57,12 @@ package core.chars
             
             var i:int ;
             
-            for( i = 0;i < unicode.length;i++ )
+            for( i = 0 ; i < unicode.length ; i++ )
             {
                 assertTrue( isUnicode(unicode[i]), unicode[i] + " is not Unicode");
             }
             
-            for( i = 0; i < nonunicode.length ; i++ )
+            for( i = 0 ; i < nonunicode.length ; i++ )
             {
                 assertFalse( isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
             }

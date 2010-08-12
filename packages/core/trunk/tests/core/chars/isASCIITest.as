@@ -55,14 +55,16 @@ package core.chars
             var ascii:Array = ( alpha + alphaUp + digit + specialChar ).split("");
             var nonascii:Array = ( greekLetter).split("");
             
-            for( var i:int = 0;i < ascii.length;i++ )
+            var i:int ;
+            
+            for( i = 0 ; i < ascii.length ; i++ )
             {
                 assertTrue( isASCII(ascii[i]), ascii[i] + " is not ASCII");
             }
             
-            for( var j:int = 0;j < nonascii.length;j++ )
+            for( i = 0 ; i < nonascii.length ; i++ )
             {
-                assertFalse( isASCII(nonascii[j]), nonascii[j] + " is ASCII");
+                assertFalse( isASCII(nonascii[i]), nonascii[i] + " is ASCII");
             }
         }
     }

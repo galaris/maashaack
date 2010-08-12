@@ -37,8 +37,6 @@ package core
 {
     public class version
     {
-        private var _value:Number = 0;
-        
         /**
          * Creates a new version instance.
          */
@@ -55,7 +53,7 @@ package core
          */
         public function get build():uint
         {
-            return (_value & 0x00ff0000) >>> 16;
+            return (_value & 0x00FF0000) >>> 16;
         }
         
         /**
@@ -63,7 +61,7 @@ package core
          */ 
         public function set build( value:uint ):void
         {
-            _value = (_value & 0xff00ffff) | (value << 16);
+            _value = (_value & 0xFF00FFFF) | (value << 16);
         }
 
         /**
@@ -79,7 +77,7 @@ package core
          */ 
         public function set major( value:uint ):void
         {
-            _value = (_value & 0x0fffffff) | (value << 28);
+            _value = (_value & 0x0FFFFFFF) | (value << 28);
         }
 
         /**
@@ -87,7 +85,7 @@ package core
          */
         public function get minor():uint
         {
-            return (_value & 0x0f000000) >>> 24;
+            return (_value & 0x0F000000) >>> 24;
         }
 
         /**
@@ -95,7 +93,7 @@ package core
          */ 
         public function set minor( value:uint ):void
         {
-            _value = (_value & 0xf0ffffff) | (value << 24);
+            _value = (_value & 0xF0FFFFFF) | (value << 24);
         }
         
         /**
@@ -103,7 +101,7 @@ package core
          */
         public function get revision():uint
         {
-            return _value & 0x0000ffff;
+            return _value & 0x0000FFFF;
         }
         
         /**
@@ -111,9 +109,9 @@ package core
          */ 
         public function set revision( value:uint ):void
         {
-            _value = (_value & 0xffff0000) | value;
+            _value = (_value & 0xFFFF0000) | value;
         }
-
+        
         /**
          * Returns a string representation of the object.
          * @return a string representation of the object.
@@ -121,7 +119,6 @@ package core
         public function toString( fields:int = 0, separator:String = "." ):String
         {
             var data:Array = [major,minor,build,revision];
-            
             if( (fields > 0) && (fields < 5) )
             {
                 data = data.slice( 0, fields );
@@ -130,7 +127,7 @@ package core
             {
                 var i:int;
                 var l:int = data.length;
-                for( i=l-1; i>0; i-- )
+                for( i=l-1 ; i>0 ; i-- )
                 {
                     if( data[i] == 0 )
                     {
@@ -145,7 +142,7 @@ package core
             
             return data.join( separator );
         }
-
+        
         /**
          * Returns the primitive value of the object.
          * @return the primitive value of the object.
@@ -155,5 +152,9 @@ package core
             return _value;
         }
         
+        /**
+         * @private
+         */
+        private var _value:Number = 0;
     }
 }

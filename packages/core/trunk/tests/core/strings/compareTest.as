@@ -33,37 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.strings 
 {
-    import buRRRn.ASTUce.extensions.TimedTestCase;
-
-    public class bitTimedTest extends TimedTestCase
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class compareTest extends TestCase 
     {
-        public function bitTimedTest(name:String="", maxElapsedTime:int = 400 )
+        public function compareTest(name:String = "")
         {
-            super(name, maxElapsedTime);
+            super(name);
         }
         
-        public function testShift():void
+        public function testCompare():void
         {
-            var b:bit = new bit( uint.MAX_VALUE );
-            var max:uint = 1000;
+            var s0:String = "HELLO";
+            var s1:String = "hello";
+            var s2:String = "welcome";
+            var s3:String = "world";
             
-            for( var i:uint = 0; i<max; i++ )
-            {
-                while( b.valueOf() != 0 )
-                {
-                    b.shift();
-                }
-                assertEquals( "0000", b.toString() );
-                
-                if( i != (max-1) )
-                {
-                    b = new bit( uint.MAX_VALUE );
-                }
-            }
-            //trace( "elapsed: " + elapsedTime );
+            assertEquals( -1 , compare( s1, s2 ) , "#1" );
+            assertEquals(  1 , compare( s2, s1 ) , "#2" );
+            assertEquals(  1 , compare( s1, s3 ) , "#3" );
+            assertEquals(  0 , compare( s1, s1 ) , "#4" );
+            assertEquals(  0 , compare( s1, s0 ) , "#5" );
+            assertEquals( -1 , compare( s1, s0, true ) , "#6" );
+            assertEquals(  1 , compare( s0, s1, true ) , "#7" );
         }
-        
     }
 }

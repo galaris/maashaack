@@ -95,7 +95,6 @@ package core.strings
             {
                 return 1;
             }
-            
             return -1;
         }
         else if( str1.length > str2.length )

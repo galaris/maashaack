@@ -36,7 +36,7 @@
 package core
 {
     /**
-     * the core uri class
+     * The core uri class.
      * 
      * note:
      * - no external dependencies
@@ -58,7 +58,7 @@ package core
         private var _path:String     = "" ;
         private var _query:String    = "" ;
         private var _fragment:String = "" ;
-                
+        
         private function _parseUnixAbsoluteFilePath( str:String ):void
         {
             this.scheme = "file";
@@ -239,7 +239,7 @@ package core
                 _fragment = r[9];
             }
         }
-                
+        
         /**
          * Creates a new uri instance.
          * @param raw The value expression of the uri.
@@ -271,7 +271,7 @@ package core
             
             return str;
         }
-
+        
         /**
          * Determinates the fragment value of the uri.
          */
@@ -295,7 +295,7 @@ package core
         {
             return _host;
         }
-
+        
         /**
          * @private
          */
@@ -335,7 +335,7 @@ package core
         {
             _port = value;
         }
-
+        
         /**
          * Determinates the scheme value of the uri.
          */
@@ -351,7 +351,7 @@ package core
         {
             _scheme = value;
         }
-
+        
         /**
          * Determinates the source value of the uri.
          */
@@ -359,7 +359,7 @@ package core
         {
             return _source;
         }
-
+        
         /**
          * Determinates the user info value of the uri.
          */
@@ -374,7 +374,7 @@ package core
             str += ":" + _password;
             return str;
         }
-
+        
         /**
          * Determinates the user info value of the uri.
          */   
@@ -390,7 +390,7 @@ package core
         {
             _query = value;
         }
-
+        
         /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
@@ -436,11 +436,10 @@ package core
         {
             return toString();
         }
-
+        
         /**
          * @private
          */
         private var _r:RegExp = /\\/g ;
-
     }
 }

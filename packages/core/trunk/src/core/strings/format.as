@@ -37,7 +37,6 @@ package core.strings
 {
     /**
      * Format a string using indexed or named parameters.
-     * 
      * <p>Usage :</p>
      * <ul>
      * <li><code>format( pattern:String, ...args:Array ):String</code></li>
@@ -46,23 +45,27 @@ package core.strings
      * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...} ):String</code></li>
      * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...}, ...args:Array ):String</code></li>
      * </ul>
+     * <p><b>Examples:</b></p>
+     * <pre>
+     * import core.strings.format ;
      * 
-     * <p>
-     * TODO more documentation
-     * </p>
-     * 
-     * @see: core.strings.fastformat
+     * trace( format( "{0},{1},{2}" , "apples" , "oranges", "grapes" ) ) ; // apples,oranges,grapes
+     * trace( format( "{0},{1},{2}" , ["apples" , "oranges", "grapes"] ) ) ; // apples,oranges,grapes
+     * trace( format( "{path}{0}{name}{1}" , { name : "format" , path:"core.strings" } , "." , "()" ) ) ; // core.strings.format()
+     * </pre>
+     * @see core.strings#fastformat
+     * @throws Error When a token is malformed.
      */
     public const format:Function = function( pattern:String, ...args:Array ):String
     {
-        if( (pattern == null) || (pattern == "") )
+        if( pattern == null || pattern == "" )
         {
             return "";
         }
         
         var formatted:String = pattern;
-        var len:uint = args.length;
-        var words:Object = {};
+        var len:uint         = args.length;
+        var words:Object     = {};
         
         if( (len == 1) && (args[0] is Array) )
         {
@@ -77,7 +80,10 @@ package core.strings
         else if( (args[0] is Object) && (String( args[0] ) == "[object Object]") )
         {
             words = args[0];
-            if( len > 1 ) { args.shift(); }
+            if( len > 1 ) 
+            { 
+                args.shift(); 
+            }
         }
         
         /* note:
@@ -93,51 +99,10 @@ package core.strings
         var part:String;
         var token:String;
         var c:String;
-        var padc:String = " ";
+        
+        var dirty:Boolean ;
+        
         var padding:int = 0;
-        var dirty:Boolean = false;
-        
-        var pad:Function = function( str:String ):String
-        {
-            var pos:int = str.indexOf( "," );
-            
-            if( pos > 0 )
-            {
-                padding = Number( str.substr( pos+1 ) );
-                str = str.substring( 0, pos );
-            }
-            
-            return str;
-        };
-        
-        /* note:
-           yes, here we duplicate the pad() function and yes this is on purpose
-           each single function of core.strings.* need to be fully independant
-        */
-        var align:Function = function( str:String ):String
-        {
-            var right:Boolean = (padding > 0) ? false: true;
-            var width:int     = (padding > 0) ? padding: -padding;
-            
-            if( (width < str.length) || (width == 0) )
-            {
-                return str;
-            }
-            
-            while( str.length != width )
-            {
-                if( right )
-                {
-                    str += padc;
-                }
-                else
-                {
-                    str = padc + str;
-                }
-            }
-            
-            return str;
-        };
         
         /* note:
            the buffer will store special string parts of the form
@@ -147,31 +112,31 @@ package core.strings
         */
         var buffer:Array = [];
         
-        var isValid:Function = function( token:String ):Boolean
-        {
-            if( token == "" ) { return false; }
-            
-            if( token.indexOf( ":" ) > -1 ) { return false; }
-            
-            return true;
-        };
-        
         while( result != null )
         {
-            part  = result[0];
-            token = pad( result[1] );
-//            trace( "result: [" + result + "]" );
-//            trace( "part: [" + part + "]" );
-//            trace( "token: [" + token + "]" );
-//            trace( "isValid: " + isValid( token ) );
+            part = result[0];
             
-            c = token.charAt(0);
+            /////// pad the token expression
+            
+            token = result[1] ;
+            
+            var pos:int = token.indexOf( "," );
+            
+            if( pos > 0 )
+            {
+                padding = Number( token.substr( pos + 1 ) );
+                token   = token.substring( 0, pos );
+            }
+            
+            ////////////
+            
+            c = token.charAt( 0 ) ;
             
             if( ("0" <= c) && (c <= "9") )
             {
-                formatted = formatted.replace( part, align( String(args[token]) ) );
+                formatted = formatted.replace( part, pad( String( args[token] ) , padding ) );
             }
-            else if( !isValid( token ) )
+            else if( ( token == "" ) || ( token.indexOf( ":" ) > -1 ) ) // if the token is not valid
             {
                 /* note:
                    this is to deal with eden/json strings inside a format string
@@ -179,24 +144,28 @@ package core.strings
                    this will collide of the legit parsing of
                    format( "hello {x,-8} and nhello {y,-8}" )
                 */
+                
                 buffer.push( part );
-                formatted = formatted.replace( new RegExp(part,"g"), "\uFFFC"+(buffer.length-1) );
-                dirty = true;
+                
+                formatted = formatted.replace( new RegExp(part,"g"), "\uFFFC"+ ( buffer.length - 1 ) ) ;
+                dirty     = true;
             }
-            else if( ("a" <= c) && (c <= "z") )
+            else if( ( "a" <= c ) && ( c <= "z" ) )
             {
-                if( words.hasOwnProperty( token ) )
+                if( token in words || words.hasOwnProperty( token ) )
                 {
                     /* note:
                        here you want the part to have a global flag to replace all token instances
                     */
-                    formatted = formatted.replace( new RegExp(part,"g"), align( String(words[token]) ) );
+                    formatted = formatted.replace( new RegExp(part,"g"), pad( String(words[token]) , padding ) );
                 }
             }
             else
             {
-                //note: don't use format() within itself
-                throw new Error( "malformed token \""+part+"\", can not start with \""+c+"\"" );
+                /* note: 
+                   don't use format() within itself
+                 */
+                throw new Error( "core.strings.format failed, malformed token \"" + part + "\", can not start with \"" + c + "\"" ) ;
             }
             
             result = search.exec( formatted );
@@ -204,11 +173,11 @@ package core.strings
         
         if( dirty )
         {
-            var i:uint;
-            var bl:Number = buffer.length; 
-            for( i=0; i<bl; i++ )
+            var i:int;
+            var bl:int = buffer.length ; 
+            for( i = 0 ; i < bl ; i++ )
             {
-                formatted = formatted.replace( new RegExp("\uFFFC"+i,"g"), buffer[i] );
+                formatted = formatted.replace( new RegExp( "\uFFFC" + i , "g" ) , buffer[i] );
             }
         }
         
