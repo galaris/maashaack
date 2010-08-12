@@ -35,6 +35,8 @@
 
 package system.numeric
 {
+    import core.maths.clamp;
+    
     import flash.errors.IllegalOperationError;
     
     /**
@@ -97,22 +99,7 @@ package system.numeric
          * @param max the max value of the range.
          * @return a bound numeric value between 2 numbers.
          */
-        public static function clamp(value:Number, min:Number, max:Number):Number 
-        {
-            if (isNaN( value )) 
-            {
-                return NaN ;
-            }
-            if (isNaN( min )) 
-            {
-                min = value ;
-            }
-            if (isNaN( max )) 
-            {
-                max = value ;
-            }
-            return Math.max( Math.min( value, max ), min ) ;
-        }
+        public static const clamp:Function = core.maths.clamp ;
         
         /**
          * Rounds and returns a number by a count of floating points.

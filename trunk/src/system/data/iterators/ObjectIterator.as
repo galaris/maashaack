@@ -35,8 +35,9 @@
 
 package system.data.iterators
 {
+    import core.maths.clamp;
+
     import system.data.Iterator;
-    import system.numeric.Mathematics;    
 
     /**
      * Converts an object to an iterator of all enumerable properties of the Object.
@@ -87,7 +88,6 @@ package system.data.iterators
      */
     public class ObjectIterator implements Iterator
     {
-        
         /**
          * Creates a new ObjectIterator instance.
          * @param o The object to iterate.
@@ -139,7 +139,7 @@ package system.data.iterators
         {
             return _a[_k] ;
         }
-
+        
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
@@ -148,7 +148,7 @@ package system.data.iterators
         {
             return _o[ _a[ ++_k ] ] ;
         }
-
+        
         /**
          * Removes from the object the last element returned by the iterator (optional operation).
          */
@@ -160,7 +160,7 @@ package system.data.iterators
             _len -- ;
             return p ;
         }
-
+        
         /**
          * Reset the internal pointer of the iterator (optional operation).
          */
@@ -168,13 +168,13 @@ package system.data.iterators
         {
             _k = -1 ;
         }
-
+        
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
          */
         public function seek( position:* ):void
         {
-            _k = Mathematics.clamp( ( position - 1 ) , -1, _len) ;
+            _k = clamp( ( position - 1 ) , -1, _len) ;
         }
         
         /**
@@ -191,11 +191,10 @@ package system.data.iterators
          * @private
          */
         private var _o:Object ;
-
+        
         /**
          * @private
          */
         private var _len:uint ;
-
     }
 }
