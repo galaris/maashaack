@@ -35,7 +35,8 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+
     import system.hack;
     import system.numeric.Mathematics;
 
@@ -241,7 +242,7 @@ package graphics.colors
          */
         public function interpolate( to:RGB , level:Number = 1 ):RGB
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new RGB
             (
@@ -259,7 +260,7 @@ package graphics.colors
          */
         public function interpolateToNumber( to:RGB , level:Number = 1 ):Number
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             var r:Number = _red   * q + to._red   * p ;
             var g:Number = _green * q + to._green * p ;
@@ -320,7 +321,7 @@ package graphics.colors
          */
         public function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _red.toString() + "," + _green.toString() + "," + _blue.toString() + ")" ; 
+            return "new graphics.colors.RGB(" + _red.toString() + "," + _green.toString() + "," + _blue.toString() + ")" ; 
         }
         
         /**

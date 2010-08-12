@@ -35,9 +35,9 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+    
     import system.hack;
-    import system.numeric.Mathematics;
     
     /**
      * CMYK (short for cyan, magenta, yellow, and key (black), and often referred to as process color or four color) is a subtractive color model, used in color printing, also used to describe the printing process itself. 
@@ -75,13 +75,13 @@ package graphics.colors
          */
         public function set k( value:Number ):void
         {
-            _k = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
+            _k = clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
         } 
         
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         public override function clone():* 
         {
             return new CMYK( _c , _m , _y, _k ) ;
@@ -129,7 +129,7 @@ package graphics.colors
             {
                 return null ;
             }
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new CMYK
             (
@@ -170,7 +170,7 @@ package graphics.colors
          */
         public override function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _c.toString() + "," + _m.toString() + "," + _y.toString() + "," + _k.toString() + ")" ; 
+            return "new graphics.colors.CMYK(" + _c.toString() + "," + _m.toString() + "," + _y.toString() + "," + _k.toString() + ")" ; 
         }
         
         /**
@@ -186,6 +186,5 @@ package graphics.colors
          * @private
          */
         hack var _k:Number ;
-        
     }
 }

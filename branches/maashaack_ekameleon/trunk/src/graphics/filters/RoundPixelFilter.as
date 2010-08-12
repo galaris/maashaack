@@ -35,11 +35,11 @@
 
 package graphics.filters 
 {
-    import system.numeric.Mathematics;
-    
+    import core.maths.clamp;
+
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
-    
+
     /**
      * The RoundPixelFilter class applies a filter by executing a shader on the object being filtered. 
      * The Shader must be defines with the RoundPixel pixelbender implementation.
@@ -69,7 +69,7 @@ package graphics.filters
          */
         public function set edge( value:Number ):void
         {
-            shader.data.edge.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 300);
+            shader.data.edge.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 300);
         }
         
         /**
@@ -85,7 +85,7 @@ package graphics.filters
          */
         public function set space( value:Number ):void
         {
-            shader.data.space.value[0] = Mathematics.clamp( isNaN( value ) ? 0 : value , 1 , 300) ;
+            shader.data.space.value[0] = clamp( isNaN( value ) ? 0 : value , 1 , 300) ;
         }
         
         /**
@@ -101,7 +101,7 @@ package graphics.filters
          */
         public function set size( value:Number ):void
         {
-            shader.data.size.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 2) ;
+            shader.data.size.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 2) ;
         }
         
         /**

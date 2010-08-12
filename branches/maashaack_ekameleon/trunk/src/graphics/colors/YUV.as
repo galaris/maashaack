@@ -35,10 +35,10 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+
     import system.hack;
-    import system.numeric.Mathematics;
-    
+
     /**
      * The YUV defines a color space in terms of one luma (Y') and two chrominance (UV) components. 
      * The YUV color model is used in the NTSC, PAL, and SECAM composite color video standards.
@@ -111,7 +111,7 @@ package graphics.colors
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         public function clone():* 
         {
             return new YUV( _y , _u , _v ) ;
@@ -145,7 +145,7 @@ package graphics.colors
          */
         public function interpolate( color:YUV , level:Number = 1 ):YUV
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new YUV
             (
@@ -180,7 +180,7 @@ package graphics.colors
          */
         public function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _y.toString() + "," + _u.toString() + "," + _v.toString() + ")" ; 
+            return "new graphics.colors.YUV(" + _y.toString() + "," + _u.toString() + "," + _v.toString() + ")" ; 
         }
         
         /**

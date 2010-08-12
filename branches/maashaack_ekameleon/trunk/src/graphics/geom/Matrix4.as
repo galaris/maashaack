@@ -35,11 +35,11 @@
 
 package graphics.geom 
 {
+    import core.maths.clamp;
     import core.reflect.getClassPath;
 
     import system.Reflection;
     import system.eden;
-    import system.numeric.Mathematics;
 
     /**
      * Matrix with 4 rows and 4 columns.
@@ -324,8 +324,8 @@ package graphics.geom
          */
         public function setEntry( x:Number , y:Number , value:* ):void
         {
-            x = Mathematics.clamp(x, 0, 3) ;
-            y = Mathematics.clamp(y, 0, 3) ;
+            x = clamp(x, 0, 3) ;
+            y = clamp(y, 0, 3) ;
             var m:Array = toArray() ;
             m[x][y] = value ;
         }

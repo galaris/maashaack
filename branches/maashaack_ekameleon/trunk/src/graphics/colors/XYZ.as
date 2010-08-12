@@ -35,9 +35,9 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+    
     import system.hack;
-    import system.numeric.Mathematics;
     
     /**
      * The XYZ color system, also called “norm color system”. 
@@ -148,7 +148,7 @@ package graphics.colors
          */
         public function interpolate( color:XYZ , level:Number = 1 ):XYZ
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new XYZ
             (
@@ -183,7 +183,7 @@ package graphics.colors
          */
         public function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _x.toString() + "," + _y.toString() + "," + _z.toString() + ")" ; 
+            return "new graphics.colors.XYZ(" + _x.toString() + "," + _y.toString() + "," + _z.toString() + ")" ; 
         }
         
         /**
@@ -202,13 +202,12 @@ package graphics.colors
         
         /**
          * @private
-         */        
+         */
         hack var _y:Number ;
         
         /**
          * @private
          */
         hack var _z:Number ;
-        
     }
 }

@@ -35,9 +35,11 @@
 
 package graphics.geom 
 {
+    import core.maths.clamp;
+
     import graphics.numeric.Trigo;
-        import system.numeric.Mathematics;
-        /**
+
+    /**
      * Manipulates and transforms <code class="prettyprint">Quaternion</code> references.
      */
     public class Quaternions 
@@ -181,7 +183,7 @@ package graphics.geom
          */ 
         public static function slerp( q1:Quaternion, q2:Quaternion, t:Number = 0 ):Quaternion
         {
-            t = Mathematics.clamp( ( isNaN(t) ? 0 : t ) , 0 , 1 ) ;
+            t = clamp( ( isNaN(t) ? 0 : t ) , 0 , 1 ) ;
             var a:Number = q1.dot( q2 ) ;
             if ( a < 0 )
             {
