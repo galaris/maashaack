@@ -35,6 +35,8 @@
 
 package core.maths
 {
+    import flash.errors.IllegalOperationError;
+    
     /**
      * Returns 1 if the value is positive or -1.
      * <p><b>Example :</b></p>
