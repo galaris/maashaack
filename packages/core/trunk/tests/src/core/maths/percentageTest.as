@@ -33,27 +33,38 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class percentageTest extends TestCase 
     {
-        public static function suite():ITest
+        public function percentageTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testPercentage():void
+        {
+            var result:Number ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
+            result = percentage( 10, 100 ) ;
+            assertEquals( result , 10 , "getPercent( 10, 100 ) failed" ) ;
             
-            return suite;
+            result = percentage( 50, 100 ) ;
+            assertEquals( result , 50 , "getPercent( 50, 100 ) failed" ) ;
+            
+            result = percentage( 68, 425 ) ;
+            assertEquals( result , 16 , "getPercent( 68, 425 ) failed" ) ;
+            
+            result = percentage( NaN, NaN ) ;
+            assertEquals( result , NaN , "getPercent( NaN, NaN ) failed" ) ;
+            
+            result = percentage( NaN, 100 ) ;
+            assertEquals( result , NaN , "getPercent( NaN, 100 ) failed" ) ;
+            
+            result = percentage( 25, NaN ) ;
+            assertEquals( result , NaN , "getPercent( 25, NaN ) failed" ) ;
         }
     }
 }

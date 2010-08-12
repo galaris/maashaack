@@ -33,27 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class interpolateTest extends TestCase 
     {
-        public static function suite():ITest
+        public function interpolateTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testInterpolate():void
+        {
+            assertEquals( 50 , interpolate( 0.5 , 0 , 100 ) ) ;
         }
     }
 }

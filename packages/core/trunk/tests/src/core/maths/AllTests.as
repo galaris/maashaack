@@ -37,7 +37,7 @@ package core.maths
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
+
     public class AllTests
     {
         public static function suite():ITest
@@ -46,6 +46,12 @@ package core.maths
             
             suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
             suite.addTestSuite( floorTest ) ;
+            suite.addTestSuite( gcdTest   ) ;
+            suite.addTestSuite( interpolateTest ) ;
+            suite.addTestSuite( mapTest ) ;
+            suite.addTestSuite( percentageTest ) ;
+            suite.addTestSuite( roundTest ) ;
+            suite.addTestSuite( signTest ) ;
             
             return suite;
         }

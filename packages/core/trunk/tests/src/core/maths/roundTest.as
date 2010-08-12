@@ -33,27 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class roundTest extends TestCase 
     {
-        public static function suite():ITest
+        public function roundTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testRound():void
+        {
+            var result:Number ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
+            result = round(4.572525153, 2) ;
+            assertEquals( result , 4.57 , "round(4.572525153, 2) failed" ) ;
             
-            return suite;
+            result = round(4.572525153, 0) ;
+            assertEquals( result , 5 , "round(4.572525153, 0) failed" ) ;
+            
+            result = round(4.572525153, -1) ;
+            assertEquals( result , 5 , "round(4.572525153, -1) failed" ) ;
+            
+            result = round(NaN, 0) ;
+            assertEquals( result , NaN , "round(NaN, 0) failed" ) ;
+            
+            result = round(4.572525153, NaN) ;
+            assertEquals( result , 5 , "round(4.572525153, NaN) failed" ) ;
         }
     }
 }

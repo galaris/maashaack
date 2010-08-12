@@ -33,27 +33,45 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    import flash.errors.IllegalOperationError;
+
+    public class signTest extends TestCase 
     {
-        public static function suite():ITest
+        public function signTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testSign():void
+        {
+            var result:* ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
+            result = sign( 10 ) ;
+            assertEquals( result , 1 , "sign(10) failed" ) ;
             
-            return suite;
+            result = sign( -10 ) ;
+            assertEquals( result , -1 , "sign(-10) failed" ) ;
+            
+            result = sign( 0 ) ;
+            assertEquals( result , 1 , "sign(0) failed" ) ;
+            
+            try
+            {
+                result = sign( NaN ) ;
+                fail( "sign(NaN) failed 01." ) ;  
+            }
+            catch( e1:IllegalOperationError )
+            {
+                //
+            }
+            catch( e2:Error )
+            {
+                fail( "sign(NaN) failed 02." ) ;
+            }
         }
     }
 }

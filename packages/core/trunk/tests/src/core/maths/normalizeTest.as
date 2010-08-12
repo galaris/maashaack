@@ -33,27 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class normalizeTest extends TestCase 
     {
-        public static function suite():ITest
+        public function normalizeTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testNormalize():void
+        {
+            var result:Number ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
+            result = normalize( 10, 0 , 100 ) ;
+            assertEquals( result , 0.1 , "normalize( 10, 0 , 100 ) failed" ) ;
             
-            return suite;
+            result = normalize( 50 , 0 , 500 ) ;
+            assertEquals( result , 0.1 , "normalize( 50, 0 , 500  ) failed" ) ;
+            
+            result = normalize( 100 , 0 , 500 ) ;
+            assertEquals( result , 0.2 , "normalize( 100 , 0 , 500  ) failed" ) ;
+            
+            result = normalize( 10, 25 , 100 ) ;
+            assertEquals( result , -0.2 , "normalize( 10, 25 , 100 ) failed" ) ;
+            
+            result = normalize( 10, 25 , 500 ) ;
+            assertEquals( result , -0.031578947368421054 , "normalize( 10, 25 , 500 ) failed" ) ;
         }
     }
 }
