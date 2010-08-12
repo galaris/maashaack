@@ -37,6 +37,7 @@ load("unittests/core/strings/centerTest.js"              ) ;
 load("unittests/core/strings/compareTest.js"             ) ;
 load("unittests/core/strings/endsWithTest.js"            ) ;
 load("unittests/core/strings/fastformatTest.js"          ) ;
+load("unittests/core/strings/formatTest.js"              ) ;
 load("unittests/core/strings/indexOfAnyTest.js"          ) ;
 load("unittests/core/strings/insertTest.js"              ) ;
 load("unittests/core/strings/lastIndexOfAnyTest.js"      ) ;
@@ -63,6 +64,7 @@ core.strings.AllTests.suite = function()
     suite.addTest( new TestSuite( core.strings.compareTest             ) ) ;
     suite.addTest( new TestSuite( core.strings.endsWithTest            ) ) ;
     suite.addTest( new TestSuite( core.strings.fastformatTest          ) ) ;
+    suite.addTest( new TestSuite( core.strings.formatTest              ) ) ;
     suite.addTest( new TestSuite( core.strings.indexOfAnyTest          ) ) ;
     suite.addTest( new TestSuite( core.strings.insertTest              ) ) ;
     suite.addTest( new TestSuite( core.strings.lastIndexOfAnyTest      ) ) ;
