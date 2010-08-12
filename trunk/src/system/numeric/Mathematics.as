@@ -38,9 +38,14 @@ package system.numeric
     import core.maths.ceil;
     import core.maths.clamp;
     import core.maths.floor;
-
-    import flash.errors.IllegalOperationError;
-
+    import core.maths.gcd;
+    import core.maths.interpolate;
+    import core.maths.map;
+    import core.maths.normalize;
+    import core.maths.percentage;
+    import core.maths.round;
+    import core.maths.sign;
+    
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
      */ 
@@ -121,28 +126,7 @@ package system.numeric
          * @param i2 The second integer value.
          * @return the greatest common divisor with the Euclidean algorithm.
          */
-        public static function gcd( i1:int , i2:int ):int
-        {
-            if ( i2 == 0 )
-            {
-                return i1 ;
-            }
-            else if ( i1 == i2 ) 
-            {
-                return i1 ;
-            }
-            else 
-            {
-                var t:int ;
-                while( i2 != 0 )
-                {
-                    t  = i2 ;
-                    i2 = i1 % i2 ;
-                    i1 = t ;
-                }
-                return i1 ;
-            }
-        }
+        public static const gcd:Function = core.maths.gcd ;
         
         /**
          * With a number value and a range this method returns the actual value for the interpolated value in that range.
@@ -155,10 +139,7 @@ package system.numeric
          * @param maximum The maximum value of the interpolation.
          * @return the actual value for the interpolated value in that range.
          */
-        public static function interpolate( value:Number, minimum:Number, maximum:Number ):Number
-        {
-            return minimum + (maximum - minimum) * value ;
-        } 
+        public static const interpolate:Function = core.maths.interpolate ;
         
         /**
          * Takes a value in a given range (minimum1, maximum1) and finds the corresponding value in the next range(minimum2, maximum2).
@@ -174,10 +155,7 @@ package system.numeric
          * @param maximum2 The maximum value of the second range of the value.
          * @return value in a given range (minimum1, maximum1) and finds the corresponding value in the next range(minimum2, maximum2).
          */
-        public static function map( value:Number, minimum1:Number, maximum1:Number, minimum2:Number, maximum2:Number):Number
-        {
-            return interpolate( normalize( value, minimum1, maximum1 ), minimum2, maximum2 );
-        }
+        public static const map:Function = core.maths.map ;
         
         /**
          * Takes a value within a given range and converts it to a number between 0 and 1.
@@ -190,10 +168,7 @@ package system.numeric
          * @param minimum The minimum value of the normalization.
          * @param maximum The maximum value of the normalization.
          */
-        public static function normalize(value:Number, minimum:Number, maximum:Number):Number
-        {
-            return (value - minimum) / (maximum - minimum) ;
-        }
+        public static const normalize:Function = core.maths.normalize ;
         
         /**
          * Returns a percentage or null.
@@ -207,11 +182,7 @@ package system.numeric
          * @param maximum the max value.
          * @return a percentage value or null.
          */
-        public static function percentage(value:Number = NaN, maximum:Number = NaN):Number 
-        {
-            var p:Number = (value / maximum) * 100 ;
-            return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
-        }
+        public static const percentage:Function = core.maths.percentage ;
         
         /**
          * Rounds and returns a number by a count of floating points.
@@ -229,20 +200,7 @@ package system.numeric
          * @param floatCount the count of number after the point.
          * @return the round of a number by a count of floating points.
          */
-        public static function round(n:Number, floatCount:Number):Number 
-        {
-            if (isNaN( n )) 
-            {
-                return NaN ;
-            }
-            var r:Number = 1 ;
-            var i:Number = - 1 ;
-            while (++ i < floatCount) 
-            {
-                r *= 10 ;
-            }
-            return Math.round( n * r ) / r  ;
-        }
+        public static const round:Function = core.maths.round ;
         
         /**
          * Returns 1 if the value is positive or -1.
@@ -263,13 +221,6 @@ package system.numeric
          * @return 1 if the value is positive or -1.
          * @throws IllegalOperationError if the passed-in value is NaN.
          */
-        public static function sign( n:Number ):Number 
-        {
-            if (isNaN( n )) 
-            {
-                throw new IllegalOperationError( "Mathematics.sign, the passed-in value not must be NaN." ) ;
-            }
-            return ( n < 0 ) ? - 1 : 1 ;
-        }
+        public static const sign:Function = core.maths.sign ;
     }
 }
