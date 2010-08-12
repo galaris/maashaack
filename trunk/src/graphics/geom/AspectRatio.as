@@ -35,10 +35,10 @@
 
 package graphics.geom 
 {
+    import core.maths.gcd;
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
 
-    import system.numeric.Mathematics;
     import system.process.Lockable;
 
     /**
@@ -262,7 +262,7 @@ package graphics.geom
          */
         private function _GCD():void
         {
-            _gcd  = Mathematics.gcd( int(_w) , int(_h) ) ;
+            _gcd  = core.maths.gcd( int(_w) , int(_h) ) ;
             _aspW = int(int(_w) / _gcd) ;
             _aspH = int(int(_h) / _gcd) ;
         }
