@@ -59,7 +59,7 @@ package graphics.geom
          */
         public static function getConjugate( q:Quaternion ):Quaternion
         {    
-            return (q.clone()).conjugate() ;
+            return q.clone().conjugate() ;
         }
         
         /**
@@ -68,7 +68,7 @@ package graphics.geom
          */
         public static function getMultiply( q1:Quaternion , q2:Quaternion ):Quaternion
         {
-            return (q1.clone()).mutiply(q2) ;
+            return q1.clone().mutiply( q2 ) ;
         }
         
         /**
@@ -102,7 +102,7 @@ package graphics.geom
          */
         public function getRotationMatrix( q:Quaternion ):Matrix4 
         {
-            return Matrixs4.setByQuaternion(q, Matrixs4.getIdentity()) ;
+            return Matrixs4.setByQuaternion( q ) ;
         }
         
         /**

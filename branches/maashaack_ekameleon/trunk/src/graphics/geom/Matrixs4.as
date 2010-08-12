@@ -145,7 +145,7 @@ package graphics.geom
         {
             if ( m == null )
             {
-               m = new Matrix4() ;
+                m = new Matrix4() ;
             }
             
             var xx:Number = q.x * q.x ;
