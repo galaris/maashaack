@@ -35,26 +35,12 @@
 
 package
 {
-    import core.dump; void(dump);
-    
-    import core.strings.pad; void(pad);
-    import core.strings.format; void(format);
-    import core.strings.compare; void(compare);
-    import core.strings.startsWith; void(startsWith);
-    import core.strings.endsWith; void(endsWith);
-    
-    import core.reflect.getClassByName; void(getClassByName);
-    import core.reflect.getClassName; void(getClassName);
-    import core.reflect.getClassPath; void(getClassPath);
-    import core.reflect.getClassPackage; void(getClassPackage);
-    import core.reflect.getDefinitionByName; void(getDefinitionByName);
-    import core.reflect.getClassMethods; void(getClassMethods);
-    
+    import core.*;
+    import core.reflect.*;
+    import core.strings.*;
+
     import flash.display.Sprite;
-    import flash.utils.describeType;
-    import core.version;
-    
-    
+
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="core", scriptRecursionLimit="1000", scriptTimeLimit="60")]
     public class core extends Sprite
     {
@@ -92,7 +78,7 @@ package
             var str0:String = "hello {0}, {1} {2}";
             var str1:String = "if it was {0} then it would not be {1}";
             var str2:String = "hello {name}, do you want to play a game of {game} ?";
-            var str3:String = "hello {-0}, {1} {2}"; //throw error because of malformed {-0}
+            // var str3:String = "hello {-0}, {1} {2}"; //throw error because of malformed {-0}
             var str4:String = "hello {0,-8}|\nhello {1,-8}|";
             var str5:String = "hello {0,8}|\nhello {1,8}|";
             var str6:String = "hello {x,-8}|\nhello {y,-8}|";
