@@ -36,9 +36,9 @@
 package graphics.colors 
 {
     import core.maths.clamp;
+    import core.maths.normalize;
 
     import system.hack;
-    import system.numeric.Mathematics;
 
     /**
      * The RGB class encapsulates an rgb color.
@@ -142,7 +142,7 @@ package graphics.colors
          */
         public function set luminance( value:Number ):void
         {
-            value = Mathematics.normalize(value, 0, 0xFF) ;
+            value = normalize(value, 0, 0xFF) ;
             var l:Number = 0.299 * _red + 0.587 * _green + 0.114 * _blue ;
             _red   = l + ( _red   - l ) * ( 1 - value ) ;
             _green = l + ( _green - l ) * ( 1 - value ) ;

@@ -35,8 +35,9 @@
 
 package graphics.geom 
 {
+    import core.maths.round;
+
     import system.hack;
-    import system.numeric.Mathematics;
 
     /**
      * A regular hexagon is a six-sided regular polygon.
@@ -274,11 +275,7 @@ package graphics.geom
          */
         public function toString( floatCount:uint = 2 ):String
         {
-            return "[Hexagon radius:" + 
-                    Mathematics.round(_radius,floatCount) + 
-                    " apothem:" + 
-                    Mathematics.round(_apothem,floatCount) + 
-                    "]" ;
+            return "[Hexagon radius:" + round(_radius,floatCount) + " apothem:" + round(_apothem,floatCount) + "]" ;
         }
         
         /**
