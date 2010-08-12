@@ -52,7 +52,7 @@ package core.maths
      * n = clamp(6, 5, 10) ;
      * trace ("n : " + n) ; // 5
      * 
-     * var n = Mathematics.clamp(NaN, 5, 10) ;
+     * var n = clamp(NaN, 5, 10) ;
      * trace ("n : " + n) ; // NaN
      * </pre>
      * @param value the value to clamp.
