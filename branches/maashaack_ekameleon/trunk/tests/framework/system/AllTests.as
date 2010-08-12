@@ -96,46 +96,19 @@ package system
             
             /* packages */
             
-            //reflection
             suite.addTest( system.reflection.AllTests.suite() );
-            
-            //serializers
             suite.addTest( system.serializers.AllTests.suite() );
-            
-            //broadcasters
             suite.addTest( system.broadcasters.AllTests.suite() );
-            
-            //comparators
             suite.addTest( system.comparators.AllTests.suite() );
-            
-            //errors
             suite.addTest( system.errors.AllTests.suite() );
-            
-            //evaluators
             suite.addTest( system.evaluators.AllTests.suite() );
-            
-            //events
             suite.addTest( system.events.AllTests.suite() );
-            
-            //formatters
             suite.addTest( system.formatters.AllTests.suite() );
-            
-            //logging
             suite.addTest( system.logging.AllTests.suite() );
-            
-            //numeric
             suite.addTest( system.numeric.AllTests.suite() );
-              
-            //CLI
             suite.addTest( system.cli.AllTests.suite());
-            
-            //process
             suite.addTest( system.process.AllTests.suite() );
-            
-            //network
             suite.addTest( system.network.AllTests.suite() );
-            
-            //signals
             suite.addTest( system.signals.AllTests.suite() );
             
             return suite;
