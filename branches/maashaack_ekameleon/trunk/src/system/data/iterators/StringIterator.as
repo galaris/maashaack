@@ -35,11 +35,12 @@
 
 package system.data.iterators
 {
+    import core.maths.clamp;
+
     import system.data.Iterator;
-    import system.numeric.Mathematics;
-    
+
     import flash.errors.IllegalOperationError;
-    
+
     /**
      * Converts a string to an iterator.
      * <p><b>Example :</b></p>
@@ -128,7 +129,7 @@ package system.data.iterators
          */
         public function seek(position:*):void
         {
-            _k = Mathematics.clamp ( ( position - 1 ) , -1 , _size - 1 ) ;
+            _k = clamp( ( position - 1 ) , -1 , _size - 1 ) ;
         }
         
         /**

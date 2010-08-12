@@ -35,10 +35,11 @@
 
 package system.numeric
 {
+    import core.maths.clamp;
+
     import system.Equatable;
     import system.Serializable;
-    import system.numeric.Mathematics;
-    
+
     /**
      * Represents an immutable range of values.
      * <pre class="prettyprint">
@@ -110,7 +111,7 @@ package system.numeric
          */
         public function clamp(value:Number):Number 
         {
-            return Mathematics.clamp( value, min, max ) ;
+            return core.maths.clamp( value, min, max ) ;
         }
         
         /**

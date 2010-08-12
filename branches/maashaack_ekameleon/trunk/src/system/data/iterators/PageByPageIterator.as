@@ -35,11 +35,12 @@
 
 package system.data.iterators
 {
+    import core.maths.clamp;
+
     import system.data.OrderedIterator;
-    import system.numeric.Mathematics;
-    
+
     import flash.errors.IllegalOperationError;
-    
+
     /**
      * An iterator page by page over an array who return an new array of elements.
      * If the step size value is <code class="prettyprint">1</code> the next and previous methods returns the single value element in the data array.
@@ -259,7 +260,7 @@ package system.data.iterators
          */
         public function seek(position:*):void
         {
-            _key = Mathematics.clamp( position++, 0, _pageCount+1 ) ;
+            _key = clamp( position++, 0, _pageCount+1 ) ;
             _currentPage = _key ;
             var index:Number = _step * (_key-1) ;
             if (_step > 1)

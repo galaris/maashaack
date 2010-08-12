@@ -35,9 +35,10 @@
 
 package system.data.iterators 
 {
+    import core.maths.clamp;
+
     import system.data.Iterator;
-    import system.numeric.Mathematics;
-    
+
     /**
      * Converts a <code class="prettyprint">Vector</code> to an iterator.
      * <p><b>Example :</b></p>
@@ -147,7 +148,7 @@ package system.data.iterators
          */
         public function seek( position:* ):void
         {
-            _k = Mathematics.clamp( position , 0 , _v.length - 1) ;
+            _k = clamp( position , 0 , _v.length - 1) ;
         }
         
         /**

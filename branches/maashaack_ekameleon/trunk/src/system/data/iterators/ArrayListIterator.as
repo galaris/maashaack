@@ -35,13 +35,14 @@
 
 package system.data.iterators 
 {
+    import core.maths.clamp;
+
     import system.data.ListIterator;
     import system.data.lists.ArrayList;
     import system.errors.ConcurrencyError;
     import system.errors.NoSuchElementError;
-    import system.numeric.Mathematics;
-    
-    import flash.errors.IllegalOperationError;    
+
+    import flash.errors.IllegalOperationError;
 
     [ExcludeClass]
 
@@ -250,7 +251,7 @@ package system.data.iterators
         */
         public function seek( position:* ):void 
         {
-            _key = Mathematics.clamp( position, 0, _list.size() ) ;
+            _key = clamp( position, 0, _list.size() ) ;
             _listast = _key - 1 ;
         }
             
@@ -273,13 +274,13 @@ package system.data.iterators
             {
                 throw e ;
             }
-        }        
+        }
         
         /**
          * @private
          */
-        private var _expectedModCount:Number ;  
-    
+        private var _expectedModCount:Number ;
+        
         /**
          * @private
          */
@@ -289,11 +290,10 @@ package system.data.iterators
          * @private
          */
         private var _list:ArrayList ;
-    
+        
         /**
          * @private
          */
-        private var _listast:int ;        
-        
+        private var _listast:int ;
     }
 }

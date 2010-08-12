@@ -35,8 +35,9 @@
 
 package system.data.iterators
 {
+    import core.maths.clamp;
+
     import system.data.Iterator;
-    import system.numeric.Mathematics;    
 
     /**
      * Converts an <code class="prettyprint">Array</code> to an iterator.
@@ -138,7 +139,7 @@ package system.data.iterators
          */
         public function seek(position:*):void
         {
-            _k = Mathematics.clamp((position-1), -1, _a.length) ;
+            _k = clamp((position-1), -1, _a.length) ;
         }
         
         /**
