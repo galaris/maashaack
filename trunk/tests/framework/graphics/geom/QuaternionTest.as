@@ -92,7 +92,7 @@ package graphics.geom
             assertEquals( q1.z , 40 , "03 - add failed with the z value." ) ;
             assertEquals( q1.w , 50 , "04 - add failed with the w value." ) ;
         }
-
+        
         public function testClone():void
         {
             var clone:Quaternion = q.clone() ;
@@ -145,10 +145,10 @@ package graphics.geom
             q.euler( 0, 0 , 0 , true ) ;
             assertEquals( q.toString(), "[Quaternion x:0 y:0 z:0 w:1]" , "01-01 - euler(0,0,0,true) failed.") ;
             assertEquals( q.getEulerAngles(true) , new Vector3(0,0,0) , "01-02 - euler(0,0,0,true) failed" ) ;
-
+            
             q.euler(90,0,0,true) ;
             assertEquals( q.toString(), "[Quaternion x:0 y:0.7071067811865475 z:0 w:0.7071067811865476]" , "02 - euler(90,0,0,true) failed.") ;
-
+            
             q.euler(0,90,0,true) ;
             assertEquals( q.toString(), "[Quaternion x:0 y:0 z:0.7071067811865475 w:0.7071067811865476]" , "03-01 - euler(0,90,0,true) failed.") ;
             q.euler( 0 , Math.PI / 2, 0 ) ;
@@ -156,7 +156,7 @@ package graphics.geom
             
             q.euler(0,0,90,true) ;
             assertEquals( q.toString(), "[Quaternion x:0.7071067811865475 y:0 z:0 w:0.7071067811865476]" , "04 - euler(0,0,90,true) failed.") ;
-
+            
             q.euler(90,90,90,true) ;
             assertEquals( q.toString(), "[Quaternion x:0.7071067811865475 y:0.7071067811865475 z:5.551115123125783e-17 w:1.6653345369377348e-16]" , "05 - euler(90,90,90,true) failed.") ;
             
@@ -241,11 +241,13 @@ package graphics.geom
         {
             var q1:Quaternion = new Quaternion(10, 20, 30, 40) ;
             var q2:Quaternion = new Quaternion(2, 2, 2, 2) ;
-            q1.multiply(q2) ;
-            assertEquals( q1.x ,   80 , "01 - multiply failed with the x value." ) ;
-            assertEquals( q1.y ,   20 , "02 - multiply failed with the y value." ) ;
-            assertEquals( q1.z ,  260 , "03 - multiply failed with the z value." ) ;
-            assertEquals( q1.w , -640 , "04 - multiply failed with the w value." ) ;
+            
+            q1.multiply( q2 ) ;
+            
+            assertEquals( q1.x ,   80 , "#01" ) ;
+            assertEquals( q1.y ,   20 , "#02" ) ;
+            assertEquals( q1.z ,  260 , "#03" ) ;
+            assertEquals( q1.w , -640 , "#04" ) ;
         }
         
         public function testNormalize():void

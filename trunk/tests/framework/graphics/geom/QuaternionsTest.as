@@ -104,6 +104,5 @@ package graphics.geom
             assertEquals(slerp.z , 30 , "05 - slerp z failed.") ;
             assertEquals(slerp.w , 40 , "05 - slerp w failed.") ;
         }
-                
     }
 }
