@@ -33,21 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class floorTest extends TestCase 
     {
-        public static function suite():ITest
+        public function floorTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testFloor():void
+        {
+            var result:* ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
+            result = floor(4.572525153, 2) ;
+            assertEquals( result , 4.57 , "Mathematics.floor(4.572525153, 2) failed" ) ;
             
-            return suite;
+            result = floor(4.572525153, 0) ;
+            assertEquals( result , 4 , "floor(4.572525153, 0) failed" ) ;
+            
+            result = floor(4.572525153, -1) ;
+            assertEquals( result , 4 , "floor(4.572525153, -1) failed" ) ;
+            
+            result = floor(NaN, 0) ;
+            assertEquals( result , NaN , "floor(NaN, 0) failed" ) ;
+            
+            result = floor(4.572525153, NaN) ;
+            assertEquals( result , 4 , "floor(4.572525153, NaN) failed" ) ;
         }
     }
 }
