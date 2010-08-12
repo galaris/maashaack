@@ -33,20 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class ceilTest extends TestCase 
     {
-        public static function suite():ITest
+        public function ceilTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testCeil():void
+        {
+            var result:* ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
+            result = ceil(4.572525153, 2) ;
+            assertEquals( result , 4.58 , "ceil(4.572525153, 2) failed" ) ;
             
-            return suite;
+            result = ceil(4.572525153, 0) ;
+            assertEquals( result , 5 , "ceil(4.572525153, 0) failed" ) ;
+            
+            result = ceil(4.572525153, -1) ;
+            assertEquals( result , 5 , "ceil(4.572525153, -1) failed" ) ;
+            
+            result = ceil(NaN, 0) ;
+            assertEquals( result , NaN , "ceil(NaN, 0) failed" ) ;
+            
+            result = ceil(4.572525153, NaN) ;
+            assertEquals( result , 5 , "ceil(4.572525153, NaN) failed" ) ;
         }
     }
 }
