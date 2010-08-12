@@ -33,27 +33,50 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class gcdTest extends TestCase 
     {
-        public static function suite():ITest
+        public function gcdTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testGcd():void
+        {
+            var result:* ;
             
-            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
-            suite.addTestSuite( floorTest ) ;
-            suite.addTestSuite( gcdTest   ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( mapTest ) ;
-            suite.addTestSuite( percentageTest ) ;
-            suite.addTestSuite( roundTest ) ;
-            suite.addTestSuite( signTest ) ;
+            result = gcd( 320 , 320 ) ;
+            assertEquals( result , 320 , "gcd( 320 , 320 ) failed" ) ;
             
-            return suite;
+            result = gcd( 320 , 240 ) ;
+            assertEquals( result , 80 , "gcd( 320 , 240 ) failed" ) ;
+            
+            result = gcd( 320 , 0 ) ;
+            assertEquals( result , 320 , "gcd( 320 , 0 ) failed" ) ;
+            
+            result = gcd( 320 , 1 ) ;
+            assertEquals( result , 1 , "gcd( 320 , 1 ) failed" ) ;
+            
+            result = gcd( 320 , 2 ) ;
+            assertEquals( result , 2 , "gcd( 320 , 2 ) failed" ) ;
+            
+            result = gcd( 320 , 320 ) ;
+            assertEquals( result , 320 , "gcd( 320 , 2 ) failed" ) ;
+            
+            result = gcd( 640 , 480 ) ;
+            assertEquals( result , 160 , "gcd( 640 , 480 ) failed" ) ;
+            
+            result = gcd( -640 , 480 ) ;
+            assertEquals( result , -160 , "gcd( -640 , 480 ) failed" ) ; 
+            
+            result = gcd( 640 , -480 ) ;
+            assertEquals( result , 160 , "gcd( 640 , -480 ) failed" ) ;
+            
+            result = gcd( -640 , -480 ) ;
+            assertEquals( result , -160 , "gcd( -640 , -480 ) failed" ) ;
         }
     }
 }

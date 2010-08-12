@@ -249,7 +249,7 @@ package system.numeric
             }
             catch( e2:Error )
             {
-                fail( "Mathematics.sign(NaN) failed 02." ) ;  
+                fail( "Mathematics.sign(NaN) failed 02." ) ;
             }
         }
     }
