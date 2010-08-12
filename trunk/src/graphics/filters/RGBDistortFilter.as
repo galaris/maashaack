@@ -35,7 +35,7 @@
 
 package graphics.filters 
 {
-    import system.numeric.Mathematics;
+    import core.maths.clamp;
 
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
@@ -69,7 +69,7 @@ package graphics.filters
          */
         public function set blueDirection( value:Number ):void
         {
-            shader.data.direction.value[2] = Mathematics.clamp( isNaN(value) ? 0 : value , -1 , 1 );
+            shader.data.direction.value[2] = clamp( isNaN(value) ? 0 : value , -1 , 1 );
         }
         
         /**
@@ -85,7 +85,7 @@ package graphics.filters
          */
         public function set blueFrequency( value:Number ):void
         {
-            shader.data.frequency.value[2] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.frequency.value[2] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**
@@ -101,7 +101,7 @@ package graphics.filters
          */
         public function set blueIntensity( value:Number ):void
         {
-            shader.data.intensity.value[2] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.intensity.value[2] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**
@@ -117,7 +117,7 @@ package graphics.filters
          */
         public function set greenDirection( value:Number ):void
         {
-            shader.data.direction.value[1] = Mathematics.clamp( isNaN(value) ? 0 : value , -1 , 1 );
+            shader.data.direction.value[1] = clamp( isNaN(value) ? 0 : value , -1 , 1 );
         }
         
         /**
@@ -133,7 +133,7 @@ package graphics.filters
          */
         public function set greenFrequency( value:Number ):void
         {
-            shader.data.frequency.value[1] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.frequency.value[1] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**
@@ -149,7 +149,7 @@ package graphics.filters
          */
         public function set greenIntensity( value:Number ):void
         {
-            shader.data.intensity.value[1] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.intensity.value[1] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**
@@ -165,7 +165,7 @@ package graphics.filters
          */
         public function set redDirection( value:Number ):void
         {
-            shader.data.direction.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , -1 , 1 );
+            shader.data.direction.value[0] = clamp( isNaN(value) ? 0 : value , -1 , 1 );
         }
         
         /**
@@ -181,7 +181,7 @@ package graphics.filters
          */
         public function set redFrequency( value:Number ):void
         {
-            shader.data.frequency.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.frequency.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**
@@ -197,7 +197,7 @@ package graphics.filters
          */
         public function set redIntensity( value:Number ):void
         {
-            shader.data.intensity.value[0] = Mathematics.clamp( isNaN(value) ? 0 : value , 0 , 1 );
+            shader.data.intensity.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 1 );
         }
         
         /**

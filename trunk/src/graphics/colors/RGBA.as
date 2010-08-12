@@ -35,10 +35,10 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+
     import system.hack;
-    import system.numeric.Mathematics;
-    
+
     /**
      * The RGBA class encapsulates an rgba color.
      * <pre class="prettyprint">
@@ -121,7 +121,7 @@ package graphics.colors
          */
         public function set a( value:Number ):void
         {
-            _alpha = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
+            _alpha = clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
         }
         
         /**
@@ -137,7 +137,7 @@ package graphics.colors
          */
         public function set offset( value:Number ):void
         {
-            _alpha = Mathematics.clamp( isNaN(value) ? 0 : value , 0, maximum ) / maximum ;
+            _alpha = clamp( isNaN(value) ? 0 : value , 0, maximum ) / maximum ;
         }
         
         /**
@@ -153,13 +153,13 @@ package graphics.colors
          */
         public function set percent( value:Number ):void
         {
-            a = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 100 ) / 100 ;
+            a = clamp( isNaN(value) ? 0 : value , 0, 100 ) / 100 ;
         }
         
         /**
          * Creates and returns a shallow copy of the object.
          * @return A new object that is a shallow copy of this instance.
-         */    
+         */
         public override function clone():* 
         {
             return new RGBA( _red , _green , _blue , _alpha ) ;
@@ -232,7 +232,7 @@ package graphics.colors
         public override function interpolate( color:RGB , level:Number = 1 ):RGB
         {
             var rbga:RGBA = color as RGBA ;
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0, 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0, 1) ;
             var q:Number = 1 - p ;
             return new RGBA
             (
@@ -283,7 +283,7 @@ package graphics.colors
             r = Math.min( r, max ) as uint ;
             g = Math.min( g, max ) as uint ;
             b = Math.min( b, max ) as uint ;
-            a = Mathematics.clamp( isNaN(a) ? 0 : a , 0, 1 ) * 0xFF ;
+            a = clamp( isNaN(a) ? 0 : a , 0, 1 ) * 0xFF ;
             return ( a << 24 ) | ( r<<16 ) | ( g << 8 ) | b ;
         }
         
@@ -302,7 +302,7 @@ package graphics.colors
          */
         public override function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _red.toString() + "," + _green.toString() + "," + _blue.toString() + "," + _alpha.toString() + ")" ; 
+            return "new graphics.colors.RGBA(" + _red.toString() + "," + _green.toString() + "," + _blue.toString() + "," + _alpha.toString() + ")" ; 
         }
         
         /**

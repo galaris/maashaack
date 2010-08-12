@@ -35,8 +35,8 @@
 
 package graphics.geom 
 {
-    import system.numeric.Mathematics;
-    
+    import core.maths.clamp;
+
     /**
      * Matrix with 4 rows and 4 columns.
      * <p><b>Example :</b></p>
@@ -326,8 +326,8 @@ package graphics.geom
          */
         public function setEntry( x:Number , y:Number , value:* ):void
         {
-            x = Mathematics.clamp(x, 0, 1) ;
-            y = Mathematics.clamp(y, 0, 1) ;
+            x = clamp(x, 0, 1) ;
+            y = clamp(y, 0, 1) ;
             if ( x == 0 )
             {
                 if ( y == 0 )

@@ -35,12 +35,13 @@
 
 package graphics.display 
 {
+    import core.maths.clamp;
+
     import system.data.OrderedIterator;
-    import system.numeric.Mathematics;
-    
+
     import flash.display.MovieClip;
     import flash.errors.IllegalOperationError;
-    
+
     /**
      * This iterator control the timeline in a MovieClip target.
      * <p><b>Example :</b>With <b>container</b> a MovieClip reference added in the stage of the application, 
@@ -241,7 +242,7 @@ package graphics.display
          */
         public function seek( position:* ):void 
         {
-            _target.gotoAndStop(Mathematics.clamp( position, 1, _target.totalFrames )) ;
+            _target.gotoAndStop( clamp( position, 1, _target.totalFrames )) ;
         }
         
         /**

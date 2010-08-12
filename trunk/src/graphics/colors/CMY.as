@@ -35,10 +35,10 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+
     import system.hack;
-    import system.numeric.Mathematics;
-    
+
     /**
      * CMY is the complement of RGB, it’s a subtractive systems with 3 components: Cyan, Magenta and Yellow.
      * <p>The conversion from RGB is a simple subtraction, since they complement each other. 
@@ -74,7 +74,7 @@ package graphics.colors
          */
         public function set c( value:Number ):void
         {
-            _c = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
+            _c = clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
         } 
         
         /**
@@ -90,9 +90,9 @@ package graphics.colors
          */
         public function set m( value:Number ):void
         {
-            _m = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
-        }        
-
+            _m = clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
+        }
+        
         /**
          * The yellow component (between 0 and 1)
          */
@@ -106,7 +106,7 @@ package graphics.colors
          */
         public function set y( value:Number ):void
         {
-            _y = Mathematics.clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
+            _y = clamp( isNaN(value) ? 0 : value , 0, 1 ) ;
         }
         
         /**
@@ -156,7 +156,7 @@ package graphics.colors
          */
         public function interpolate( color:CMY , level:Number = 1 ):CMY
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new CMY
             (
@@ -191,7 +191,7 @@ package graphics.colors
          */
         public function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _c.toString() + "," + _m.toString() + "," + _y.toString() + ")" ; 
+            return "new graphics.colors.CMY(" + _c.toString() + "," + _m.toString() + "," + _y.toString() + ")" ; 
         }
         
         /**

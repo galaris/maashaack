@@ -35,7 +35,7 @@
 
 package graphics.filters 
 {
-    import system.numeric.Mathematics;
+    import core.maths.clamp;
     
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
@@ -69,7 +69,7 @@ package graphics.filters
          */
         public function set amplitude( value:Number ):void
         {
-            shader.data.amplitude.value[0] = Mathematics.clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
+            shader.data.amplitude.value[0] = clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
         }
         
         /**
@@ -85,7 +85,7 @@ package graphics.filters
          */
         public function set frequency( value:Number ):void
         {
-            shader.data.frequency.value[0] = Mathematics.clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
+            shader.data.frequency.value[0] = clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
         }
         
         /**
@@ -101,7 +101,7 @@ package graphics.filters
          */
         public function set progress( value:Number ):void
         {
-            shader.data.progress.value[0] = Mathematics.clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
+            shader.data.progress.value[0] = clamp(isNaN(value) ? 0 : value , 0 , 1 ) ;
         }
         
         /**

@@ -35,10 +35,10 @@
 
 package graphics.colors 
 {
-    import system.Reflection;
+    import core.maths.clamp;
+
     import system.hack;
-    import system.numeric.Mathematics;
-    
+
     /**
      * The Trichromatic coordinates. Y represents the brightness and (x,y) hue and saturation.
      */
@@ -144,7 +144,7 @@ package graphics.colors
          */
         public function interpolate( color:Yxy , level:Number = 1 ):Yxy
         {
-            var p:Number = Mathematics.clamp( isNaN(level) ? 1 : level , 0 , 1) ;
+            var p:Number = clamp( isNaN(level) ? 1 : level , 0 , 1) ;
             var q:Number = 1 - p ;
             return new Yxy
             (
@@ -179,7 +179,7 @@ package graphics.colors
          */
         public function toSource( indent:int = 0 ):String
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _Y.toString() + "," + _x.toString() + "," + _y.toString() + ")" ; 
+            return "new graphics.colors.Yxy(" + _Y.toString() + "," + _x.toString() + "," + _y.toString() + ")" ; 
         }
         
         /**
