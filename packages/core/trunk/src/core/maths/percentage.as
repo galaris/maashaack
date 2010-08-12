@@ -48,7 +48,7 @@ package core.maths
      * @param maximum the max value.
      * @return a percentage value or NaN.
      */
-    public const percentage:Function = function( value:Number = NaN, maximum:Number = NaN):Number 
+    public const percentage:Function = function( value:Number , maximum:Number ):Number 
     {
         var p:Number = (value / maximum) * 100 ;
         return (isNaN( p ) || ! isFinite( p )) ? NaN : p ;
