@@ -33,42 +33,32 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.maths.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class clampTest extends TestCase 
     {
-        public static function suite():ITest
+        public function clampTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            super(name);
+        }
+        
+        public function testClamp():void
+        {
+            var result:* ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            result = clamp(4, 5, 10) ;
+            assertEquals( result , 5 , "Mathematics.clamp(4, 5, 10) failed" ) ;
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
+            result = clamp(12, 5, 10) ;
+            assertEquals( result , 10 , "Mathematics.clamp(12, 5, 10) failed" ) ;
             
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.maths.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
+            result = clamp(6, 5, 10) ;
+            assertEquals( result , 6 , "Mathematics.clamp(6, 5, 10) failed" ) ;
             
-            return suite;
+            result = clamp(NaN, 5, 10) ;
+            assertEquals( result , NaN , "Mathematics.clamp(NaN, 5, 10) failed" ) ;
         }
     }
 }
