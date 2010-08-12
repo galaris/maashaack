@@ -35,6 +35,7 @@
 
 package system.numeric
 {
+    import core.maths.ceil;
     import core.maths.clamp;
     
     import flash.errors.IllegalOperationError;
@@ -61,20 +62,7 @@ package system.numeric
          * @param floatCount the count of number after the point.
          * @return the ceil value of a number by a count of floating points.
          */
-        public static function ceil( n:Number, floatCount:Number ):Number 
-        {
-            if (isNaN( n )) 
-            {
-                return NaN ;
-            }   
-            var r:Number = 1 ;
-            var i:Number = - 1 ;
-            while (++ i < floatCount) 
-            {
-                r *= 10 ;
-            }
-            return Math.ceil( n * r ) / r  ;
-        }
+        public static const ceil:Function = core.maths.ceil ;
         
         /**
          * Bounds a numeric value between 2 numbers.

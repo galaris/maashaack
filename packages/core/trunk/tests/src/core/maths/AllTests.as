@@ -44,7 +44,7 @@ package core.maths
         {
             var suite:TestSuite = new TestSuite("core.maths package tests");
             
-            suite.addTestSuite( clampTest ) ;
+            suite.addTestSuite( ceilTest  ) ;            suite.addTestSuite( clampTest ) ;
             
             return suite;
         }
