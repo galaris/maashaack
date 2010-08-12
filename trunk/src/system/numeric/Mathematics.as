@@ -37,9 +37,10 @@ package system.numeric
 {
     import core.maths.ceil;
     import core.maths.clamp;
-    
+    import core.maths.floor;
+
     import flash.errors.IllegalOperationError;
-    
+
     /**
      * The <code class="prettyprint">Mathematics</code> utility class is an all-static class with methods for working with numbers.
      */ 
@@ -105,20 +106,7 @@ package system.numeric
          * @param floatCount the count of number after the point.
          * @return the floor value of a number by a count of floating points.
          */
-        public static function floor(n:Number, floatCount:Number):Number 
-        {
-            if (isNaN( n )) 
-            {
-                return NaN ;
-            }
-            var r:Number = 1 ;
-            var i:Number = - 1 ;
-            while (++ i < floatCount) 
-            {
-                r *= 10 ;
-            }
-            return Math.floor( n * r ) / r  ;
-        }
+        public static const floor:Function = core.maths.floor ;
         
         /**
          * Returns the greatest common divisor with the Euclidean algorithm.
