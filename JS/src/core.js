@@ -101,6 +101,7 @@ require( "core.strings.center"              ) ;
 require( "core.strings.compare"             ) ;
 require( "core.strings.endsWith"            ) ;
 require( "core.strings.fastformat"          ) ;
+require( "core.strings.format"              ) ;
 require( "core.strings.indexOfAny"          ) ;
 require( "core.strings.insert"              ) ;
 require( "core.strings.lastIndexOfAny"      ) ;
