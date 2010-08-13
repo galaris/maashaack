@@ -35,7 +35,6 @@
   
 */
 
-load("unittests/system/numeric/MathematicsTest.js") ;
 load("unittests/system/numeric/PRNGTest.js") ;
 load("unittests/system/numeric/RangeTest.js") ;
 load("unittests/system/numeric/RomanNumberTest.js") ;
@@ -52,7 +51,6 @@ system.numeric.AllTests.suite = function()
     
     //suite.simpleTrace = true;
     
-    suite.addTest( new TestSuite( system.numeric.MathematicsTest ) ) ;
     suite.addTest( new TestSuite( system.numeric.PRNGTest        ) ) ;
     suite.addTest( new TestSuite( system.numeric.RangeTest       ) ) ;
     suite.addTest( new TestSuite( system.numeric.RomanNumberTest ) ) ;

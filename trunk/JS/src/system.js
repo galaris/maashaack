@@ -170,7 +170,6 @@ if ( _global.system )
     
     // system.numeric
     
-    require( "system.numeric.Mathematics" ) ;
     require( "system.numeric.PRNG"        ) ;
     require( "system.numeric.Range"       ) ;
     require( "system.numeric.RomanNumber" ) ;
