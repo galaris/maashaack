@@ -18,9 +18,9 @@
         {
             // initialize 
             
-            area   = new Rectangle( 10 , 10 , 320 , 240 ) ;
+            area       = new Rectangle( 10 , 10 , 320 , 240 ) ;
             
-            canvas = new BitmapData( area.width , area.height , false, 0x000000) ;
+            canvas = new BitmapData( area.width , area.height , false , 0x000000) ;
             
             bitmap = new Bitmap( canvas ) ;
             
@@ -71,31 +71,34 @@
             spot.x = bitmap.mouseX ;
             spot.y = bitmap.mouseY ;
             
-            canvas.fillRect( new Rectangle( 0 , 0 , area.width , area.height ) , 0x000000 ) ;
-            //canvas.floodFill(0,0,0);
+            canvas.fillRect( canvas.rect , 0x000000 ) ;
             
-            var len:int    = metaballs.length ;
-            var sum:Number = 0;
+            var len:int = metaballs.length ;
             
-            // Iterate over every pixel on the screen
+            _cpt = 0;
             
-            for( var ty:int = 0 ; ty < area.height ; ty++ ) 
+            for( _tx = 0; _tx < area.width ; _tx++ ) 
             {
-                for(var tx:int = 0; tx < area.width ; tx++) 
+                for( _ty = 0 ; _ty < area.height ; _ty++ ) 
                 {
-                    sum = 0;
+                    _cpt = 0 ;
                     
-                    for(var i:int = 0; i < len ; i++) 
+                    for( _i = 0; _i < len ; _i++ ) 
                     {
-                        sum += ( metaballs[i] as Metaball ).calculate( tx ,ty ) ;
+                        _cpt += ( metaballs[_i] as Metaball ).calculate( _tx , _ty ) ;
                     }
                     
-                    if( sum >= minThreshold && sum <= maxThreshold) 
+                    if( _cpt >= minThreshold && _cpt <= maxThreshold) 
                     {
-                        canvas.setPixel( tx , ty, 0xFFFFFF ) ;
+                        canvas.setPixel( _tx , _ty, 0xFFFFFF ) ;
                     }
                 }
             }
         }
+        
+        private var _cpt:Number ;
+        private var _i:int ;
+        private var _tx:int ;
+        private var _ty:int ;
     }
 }
