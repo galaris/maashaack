@@ -24,7 +24,7 @@
             
             bitmap = new Bitmap( canvas ) ;
             
-            bitmap.filters = [ new BlurFilter(5,5) ] ;
+            bitmap.filters = [ new BlurFilter(5,5,1) ] ;
             
             bitmap.x = area.x ;
             bitmap.y = area.y ;
@@ -55,12 +55,14 @@
             new Metaball(  20 ,  20 , 10 ) ,
             new Metaball(  70 ,  80 , 30 ) ,
             new Metaball( 250 , 100 , 35 ) ,
-            new Metaball( 220 , 130 , 30 )  
+            new Metaball( 220 , 130 , 30 ) ,
+            new Metaball( 60  , 180 , 20 ) ,
+            new Metaball( 90  , 200 , 25 ) 
         ]);
         
-        public var maxThreshold:int = 35 ;
+        public var maxThreshold:int = 4 ;
         
-        public var minThreshold:int = 5 ;
+        public var minThreshold:int = 3 ;
         
         public var spot:Metaball ;
         
