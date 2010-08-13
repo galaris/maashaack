@@ -35,10 +35,8 @@
 
 package graphics.geom 
 {
-    import core.reflect.getClassPath;
-
     import graphics.numeric.Trigo;
-
+    
     /**
      * Quaternions are hypercomplex numbers used to represent spatial rotations in three dimensions. 
      * This class encapsulates an Hamiltonian quaternion having the form <code class="prettyprint">xi + yj + zk + w</code>.
@@ -221,23 +219,26 @@ package graphics.geom
             var c2:Number ; var s2:Number ;
             var c3:Number ; var s3:Number ;
             
+            var a:Number ;
+            
             ///////// roll (y)
             
             a  = roll * 0.5 ;
+            
             c1 = Math.cos(a) ;
             s1 = Math.sin(a) ;
             
             ///////// pitch (z)
             
-            var a:Number ;
-            
             a  = pitch * 0.5 ;
+            
             c2 = Math.cos(a) ;
             s2 = Math.sin(a) ;
             
             ///////// yaw (x)
             
             a  = yaw * 0.5 ;
+            
             c3 = Math.cos(a) ;
             s3 = Math.sin(a) ;
             
@@ -445,13 +446,13 @@ package graphics.geom
          */
         public function toSource( indent:int = 0 ):String  
         {
-            return "new " + getClassPath(this , true) + "(" +  x.toString()  + "," + y.toString()  + "," + z.toString() + "," + w.toString() + ")" ;
+            return "new graphics.geom.Quaternion(" +  x.toString()  + "," + y.toString()  + "," + z.toString() + "," + w.toString() + ")" ;
         }
         
         /**
          * Returns the string representation of the object.
          * @return the string representation of the object.
-         */     
+         */
         public function toString():String
         {
             return "[Quaternion x:" + x + " y:" + y + " z:" + z + " w:" + w + "]" ;
