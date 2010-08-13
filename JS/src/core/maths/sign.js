@@ -56,7 +56,7 @@ core.maths.sign = function( n /*Number*/ ) /*int*/
 {
     if (isNaN( n )) 
     {
-        throw new Error( "Mathematics.sign, the passed-in value not must be NaN." ) ;
+        throw new Error( "core.maths.sign failed, the passed-in value not must be NaN." ) ;
     }
     return ( n < 0 ) ? - 1 : 1 ;
 }

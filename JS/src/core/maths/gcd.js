@@ -34,32 +34,36 @@
 */
 
 /**
- * Rounds and returns a number by a count of floating points.
+ * Returns the greatest common divisor with the Euclidean algorithm.
  * <p><b>Example :</b></p>
  * <pre class="prettyprint">
- * var n ;
- * 
- * n = core.maths.floor(4.572525153, 2) ;
- * trace ("n : " + n) ; // n : 4.57
- * 
- * n = core.maths.floor(4.572525153, -1) ;
- * trace ("n : " + n) ; // n : 4
+ * var gcd:int = core.maths.gcd(320,240) ;
+ * trace("gcd(320,240) : " + gcd ) ; // gcd(320,240) : 80
  * </pre>
- * @param n the number to round.
- * @param floatCount the count of number after the point.
- * @return the floor value of a number by a count of floating points.
+ * @param i1 The first integer value.
+ * @param i2 The second integer value.
+ * @return the greatest common divisor with the Euclidean algorithm.
  */
-core.maths.floor = function(n /*Number*/, floatCount /*Number*/) /*Number*/ 
+core.maths.gcd = function( i1 /*int*/ , i2 /*int*/ ) /*int*/
 {
-    if (isNaN( n )) 
+    if ( i2 == 0 )
     {
-        return NaN ;
+        return i1 ;
     }
-    var r /*Number*/ = 1 ;
-    var i /*Number*/ = - 1 ;
-    while (++ i < floatCount) 
+    else if ( i1 == i2 ) 
     {
-        r *= 10 ;
+        return i1 ;
     }
-    return Math.floor( n * r ) / r  ;
+    else 
+    {
+        var t /*int*/ ;
+        while( i2 != 0 )
+        {
+            t  = i2 ;
+            i2 = i1 % i2 ;
+            i1 = t ;
+        }
+        return i1 ;
+    }
 }
+
