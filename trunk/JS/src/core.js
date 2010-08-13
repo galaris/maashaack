@@ -58,6 +58,7 @@ if ( _global.core == undefined )
 
 getPackage( "core.arrays"  ) ;
 getPackage( "core.chars"   ) ;
+getPackage( "core.maths"   ) ;
 getPackage( "core.reflect" ) ;
 getPackage( "core.strings" ) ;
 
@@ -90,6 +91,19 @@ require( "core.chars.isHexDigit" ) ;
 require( "core.chars.isLower"    ) ;
 require( "core.chars.isUnicode"  ) ;
 require( "core.chars.isUpper"    ) ;
+
+// core.maths
+
+require( "core.maths.ceil"        ) ;
+require( "core.maths.clamp"       ) ;
+require( "core.maths.floor"       ) ;
+require( "core.maths.gcd"         ) ;
+require( "core.maths.interpolate" ) ;
+require( "core.maths.map"         ) ;
+require( "core.maths.normalize"   ) ;
+require( "core.maths.percentage"  ) ;
+require( "core.maths.round"       ) ;
+require( "core.maths.sign"        ) ;
 
 // core.reflect
 
