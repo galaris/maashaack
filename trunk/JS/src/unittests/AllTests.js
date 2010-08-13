@@ -35,9 +35,6 @@
 
 /////////
 
-getPackage("core") ;
-getPackage("system") ;
-
 load("unittests/core/AllTests.js") ;
 load("unittests/system/AllTests.js") ;
 

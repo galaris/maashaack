@@ -35,10 +35,11 @@
 
 /////////////////
 
-load("unittests/core/arrays.js") ;
-load("unittests/core/chars.js") ;
-load("unittests/core/reflect.js") ;
-load("unittests/core/strings.js") ;
+load("unittests/core/arrays/AllTests.js") ;
+load("unittests/core/chars/AllTests.js") ;
+load("unittests/core/maths/AllTests.js") ;
+load("unittests/core/reflect/AllTests.js") ;
+load("unittests/core/strings/AllTests.js") ;
 
 load("unittests/core/dumpTest.js"       ) ;
 load("unittests/core/dumpArrayTest.js"  ) ;
@@ -64,6 +65,7 @@ core.AllTests.suite = function()
     
     suite.addTest( core.arrays.AllTests.suite() );
     suite.addTest( core.chars.AllTests.suite() );
+    suite.addTest( core.maths.AllTests.suite() );
     suite.addTest( core.reflect.AllTests.suite() );
     suite.addTest( core.strings.AllTests.suite() );
     
