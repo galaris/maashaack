@@ -87,11 +87,11 @@ package graphics.geom
         public var y:Number ;
         
         /**
-         * Calculates the 
+         * Calculates the result of the typical equation for a Metaball.
          */
         public function calculate( tx:Number , ty:Number ):Number
         {
-            return _radiusSquared / ( ( x - tx )*( x - tx) + ( y - ty ) * ( y - ty ) ) ;
+            return _radiusSquared / ( ( x - tx ) * ( x - tx) + ( y - ty ) * ( y - ty ) ) ;
         }
         
         /**
