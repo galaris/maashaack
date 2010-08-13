@@ -36,7 +36,7 @@
 package graphics
 {
     import buRRRn.ASTUce.framework.*;
-    
+
     import graphics.colors.AllTests;
     import graphics.display.AllTests;
     import graphics.drawing.AllTests;
@@ -45,6 +45,7 @@ package graphics
     import graphics.geom.AllTests;
     import graphics.layouts.AllTests;
     import graphics.numeric.AllTests;
+    import graphics.transitions.AllTests;
     
     /**
      * TestSuite that runs all the Maashaack graphics tests
@@ -54,15 +55,6 @@ package graphics
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("graphics package tests");
-            
-            suite.addTest( graphics.colors.AllTests.suite()  );
-            suite.addTest( graphics.display.AllTests.suite() );
-            suite.addTest( graphics.drawing.AllTests.suite() );
-            suite.addTest( graphics.events.AllTests.suite()  );
-            suite.addTest( graphics.filters.AllTests.suite() );
-            suite.addTest( graphics.geom.AllTests.suite()    );
-            suite.addTest( graphics.layouts.AllTests.suite() );
-            suite.addTest( graphics.numeric.AllTests.suite() );
             
             //// test interfaces in this package
             
@@ -88,6 +80,18 @@ package graphics
             suite.addTestSuite( LineShaderStyleTest   ) ;
             suite.addTestSuite( LineStyleTest         ) ;
             suite.addTestSuite( OrientationTest       ) ;
+            
+            //// test sub packages
+            
+            suite.addTest( graphics.colors.AllTests.suite()  );
+            suite.addTest( graphics.display.AllTests.suite() );
+            suite.addTest( graphics.drawing.AllTests.suite() );
+            suite.addTest( graphics.events.AllTests.suite()  );
+            suite.addTest( graphics.filters.AllTests.suite() );
+            suite.addTest( graphics.geom.AllTests.suite()    );
+            suite.addTest( graphics.layouts.AllTests.suite() );
+            suite.addTest( graphics.numeric.AllTests.suite() );
+            suite.addTest( graphics.transitions.AllTests.suite() );
             
             return suite;
         }
