@@ -35,9 +35,8 @@
 
 package examples 
 {
-    import examples.display.FrameMovie;
-
     import graphics.geom.Metaball;
+    import graphics.transitions.FrameLoop;
 
     import flash.display.Bitmap;
     import flash.display.BitmapData;
@@ -80,11 +79,11 @@ package examples
             
             // stage.addEventListener( Event.ENTER_FRAME , render ) ;
             
-            // frame movie
+            // frame loop
             
-            frame = new FrameMovie() ;
+            frame = new FrameLoop() ;
             
-            frame.signal.connect( render ) ;
+            frame.connect( render ) ;
             
             frame.play() ;
         }
@@ -95,7 +94,7 @@ package examples
         
         public var canvas:BitmapData ;
         
-        public var frame:FrameMovie ;
+        public var frame:FrameLoop ;
         
         public var metaballs:Vector.<Metaball> = Vector.<Metaball>
         ([
