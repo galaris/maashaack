@@ -68,7 +68,7 @@ proto.testFloor = function()
     this.assertEquals( result , NaN , "core.maths.floor(NaN, 0) failed" ) ;
     
     result = core.maths.floor(4.572525153, NaN) ;
-    this.assertEquals( result , 4 , "Mathematics.floor(4.572525153, NaN) failed" ) ;
+    this.assertEquals( result , 4 , "core.maths.floor(4.572525153, NaN) failed" ) ;
 }
 
 // ----o Encapsulate
