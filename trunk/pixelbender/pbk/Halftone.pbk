@@ -65,12 +65,19 @@ kernel Halftone
         maxValue     : 200 ;
         defaultValue :   5 ;
     >;
+    
+    /**
+     * Indicates if the filter apply a black or white or color effect.
+     */
+    parameter int useColor
+    <
+        minValue     : 0 ;
+        maxValue     : 1 ;
+        defaultValue : 0 ;
+    >;
        
     void evaluatePixel()
     {
-        // Approach: For each grid square, draw quater circles radiating from each corner.
-        // This allows circles to be bigger than the grid itself and so overlap each other.
-        
         float angleRadians = radians( angle ) ;
         
         float cosine       = cos( angleRadians ) ;
@@ -108,8 +115,20 @@ kernel Halftone
         float bottomLeftRadius =  dotRadiusMax * bottomLeftPixel.a * (1.0 - (bottomLeftPixel.r + bottomLeftPixel.g + bottomLeftPixel.b) / 3.0) - 1.0;
         
         invAlpha *= smoothStep(0.0, 1.0, distance(outCoord(), bottomLeftCoord) - bottomLeftRadius);
-
-        result.r = result.g = result.b = 0.0;
+        
+        pixel4 color = sampleNearest( source, outCoord());
+        
+        if ( useColor == 1 )
+        {
+            result.r = color.r ;
+            result.g = color.g ;
+            result.b = color.b ;
+        }
+        else
+        {
+            result.r = result.g = result.b = 0.0 ;
+        }
+            
         result.a = 1.0 - invAlpha;
     }
 }

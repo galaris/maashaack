@@ -37,7 +37,7 @@ package examples
 {
     import graphics.geom.Metaball;
     import graphics.transitions.FrameLoop;
-
+    
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.Sprite;
@@ -45,7 +45,7 @@ package examples
     import flash.events.Event;
     import flash.filters.BlurFilter;
     import flash.geom.Rectangle;
-
+    
     [SWF(width="340", height="260", frameRate="30", backgroundColor="#666666")]
     
     public class MetaballExample extends Sprite 

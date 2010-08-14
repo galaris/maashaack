@@ -51,7 +51,7 @@ package graphics.filters
         public function setUp():void
         {
             shader = new Shader( new Halftone() ) ;
-            filter = new HalftoneFilter( { angle : 50 , pitch : 3 } , shader ) ;
+            filter = new HalftoneFilter( { angle : 50 , pitch : 3 , useColor : true } , shader ) ;
         }
         
         public function tearDown():void
@@ -66,13 +66,15 @@ package graphics.filters
             assertEquals( filter.shader , shader , "#2" ) ;
             assertEquals( filter.angle , 50 , "#3" ) ; 
             assertEquals( filter.pitch , 3 , "#4" ) ; 
+            assertTrue( filter.useColor , "#5" ) ; 
         }
         
         public function testConstructorDefault():void
         {
             filter = new HalftoneFilter() ;
-            assertEquals( filter.angle , 0 ) ; 
-            assertEquals( filter.pitch , 5 ) ; 
+            assertEquals( filter.angle , 0 , "#1" ) ; 
+            assertEquals( filter.pitch , 5 , "#2" ) ;
+            assertFalse( filter.useColor , "#3" ) ; 
         }
         
         public function testDescription():void
