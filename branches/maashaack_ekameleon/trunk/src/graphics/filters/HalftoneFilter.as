@@ -35,9 +35,11 @@
 
 package graphics.filters 
 {
+    import core.maths.clamp;
+
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
-    
+
     /**
      * The HalftoneFilter class applies a halftone filter over a picture.
      * The Shader must be defines with the Halftone pixelbender implementation.
@@ -67,7 +69,7 @@ package graphics.filters
          */
         public function set angle( value:Number ):void
         {
-            shader.data.angle.value[0] = value ;
+            shader.data.angle.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 180 ) ;
         }
         
         /**
@@ -83,7 +85,7 @@ package graphics.filters
          */
         public function set pitch( value:Number ):void
         {
-            shader.data.pitch.value[0] = value ;
+            shader.data.pitch.value[0] = clamp( isNaN(value) ? 0 : value , 0 , 200 ) ;
         }
         
         /**
