@@ -131,6 +131,8 @@
     <component id="graphics.filters:Filters"              class="graphics.filters.Filters" />
     <component id="graphics.filters:GrayScale"            class="graphics.filters.GrayScale" />
     <component id="graphics.filters:GrayScaleFilter"      class="graphics.filters.GrayScaleFilter" />
+    <component id="graphics.filters:Halftone"             class="graphics.filters.Halftone" />
+    <component id="graphics.filters:HalftoneFilter"       class="graphics.filters.HalftoneFilter" />
     <component id="graphics.filters:Hole"                 class="graphics.filters.Hole" />
     <component id="graphics.filters:HoleFilter"           class="graphics.filters.HoleFilter" />
     <component id="graphics.filters:Knockout"             class="graphics.filters.Knockout" />
