@@ -37,29 +37,26 @@ package graphics.filters
     import buRRRn.ASTUce.framework.TestCase;
 
     import flash.display.Shader;
-    import flash.geom.Point;
 
-    public class TwirlFilterTest extends TestCase 
+    public class HalftoneFilterTest extends TestCase 
     {
-        public function TwirlFilterTest( name:String = "" )
+        public function HalftoneFilterTest( name:String = "" )
         {
             super(name);
         }
         
-        public var filter:TwirlFilter ;
+        public var filter:HalftoneFilter ;
         public var shader:Shader ;
         
         public function setUp():void
         {
-            shader = new Shader( new Twirl() ) ;
-            filter = new TwirlFilter
+            shader = new Shader( new Halftone() ) ;
+            filter = new HalftoneFilter
             ( 
                 shader , 
                 { 
-                    angle    : 100 , 
-                    center   : new Point(10,20) , 
-                    gaussian : true , 
-                    radius   : 1 
+                    angle : 50 , 
+                    pitch : 3 
                 } 
             ) ;
         }
@@ -73,21 +70,25 @@ package graphics.filters
         public function testConstructor():void
         {
             assertNotNull( filter ) ;
-            assertEquals( filter.angle , 100 ) ; 
-            assertEquals( filter.center.x , 10 ) ; 
-            assertEquals( filter.center.y , 20 ) ; 
-            assertTrue( filter.gaussian ) ; 
-            assertEquals( filter.radius , 1 ) ; 
+            assertEquals( filter.angle , 50 ) ; 
+            assertEquals( filter.pitch , 3 ) ; 
+        }
+        
+        public function testConstructorDefault():void
+        {
+            filter = new HalftoneFilter() ;
+            assertEquals( filter.angle , 0 ) ; 
+            assertEquals( filter.pitch , 5 ) ; 
         }
         
         public function testDescription():void
         {
-            assertEquals( "Twist a bitmap picture." , filter.description ) ;
+            assertEquals( "Halftone is the reprographic technique that simulates continuous tone imagery through the use of dots, varying either in size or in spacing." , filter.description ) ;
         }
         
         public function testName():void
         {
-            assertEquals( "Twirl" , filter.name ) ; 
+            assertEquals( "Halftone" , filter.name ) ; 
         }
         
         public function testNamespace():void
@@ -102,7 +103,7 @@ package graphics.filters
         
         public function testClone():void
         {
-            var clone:TwirlFilter = filter.clone() as TwirlFilter ;
+            var clone:HalftoneFilter = filter.clone() as HalftoneFilter ;
             assertNotNull( clone ) ;
             assertEquals( clone.shader , filter.shader ) ;
         }
