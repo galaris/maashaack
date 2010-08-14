@@ -56,9 +56,7 @@ package examples
             
             area = new Rectangle( 10 , 10 , 320 , 240 ) ;
             
-            canvas = new BitmapData( area.width , area.height , false , 0x000000) ;
-            
-            bitmap = new Bitmap( canvas ) ;
+            bitmap = new Bitmap() ;
             
             bitmap.filters = [ new BlurFilter(3,3,1) ] ;
             
@@ -122,7 +120,7 @@ package examples
                 canvas.dispose() ;
             }
             
-            canvas = new BitmapData( area.width , area.height , false , 0x000000) ;
+            canvas = new BitmapData( area.width , area.height , false , 0x333333 ) ;
             
             bitmap.bitmapData = canvas ;
             
@@ -145,11 +143,7 @@ package examples
                     
                     if( _cpt >= minThreshold && _cpt <= maxThreshold) 
                     {
-                        canvas.setPixel( _tx , _ty , 0xFFFFFF ) ;
-                    }
-                    else
-                    {
-                        canvas.setPixel( _tx , _ty , 0x000000 ) ;
+                        canvas.setPixel( _tx , _ty , 0x626262 ) ;
                     }
                 }
             }
