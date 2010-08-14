@@ -35,10 +35,10 @@
 
 package examples 
 {
-    import graphics.filters.RippleBlocksFilter;
-
-    import system.numeric.Mathematics;
-
+    import core.maths.normalize;
+    
+    import graphics.filters.HalftoneFilter;
+    
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -46,14 +46,14 @@ package examples
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
     
-    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    [SWF(width="260", height="260", frameRate="24", backgroundColor="#F2F2F2")]
     
     /**
-     * Test the graphics.filters.RippleBlocksFilter class, this example work only with a FP10 or sup.
+     * Test the graphics.filters.HalftoneFilter class, this example work only with a FP10 or sup.
      */
-    public class RippleBlocksFilterExample extends Sprite 
+    public class HalftoneFilterExample extends Sprite 
     {
-        public function RippleBlocksFilterExample()
+        public function HalftoneFilterExample()
         {
             // stage
             
@@ -65,8 +65,8 @@ package examples
             
             picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
-            picture.x = 20 ;
-            picture.y = 20 ;
+            picture.x = 10 ;
+            picture.y = 10 ;
             
             picture.load( new URLRequest("library/picture.jpg") ) ;
             
@@ -74,32 +74,28 @@ package examples
             
             // filter
             
-            var init:Object = 
-            {
-                amplitudeX : 44 ,
-                amplitudeY : 17 ,
-                phaseX     :  2 ,
-                phaseY     :  2 ,
-                waveX      : 40 ,
-                waveY      : 60 
-            };
+            filter = new HalftoneFilter() ;
             
-            filter = new RippleBlocksFilter( null , init ) ;
+            filter.pitch = 4 ;
+            
+            trace( "name        : " + filter.name      ) ;
+            trace( "namespace   : " + filter.namespace ) ;
+            trace( "version     : " + filter.version ) ;
+            trace( "description : " + filter.description ) ;
             
             picture.filters = [ filter ] ;
         }
         
-        public var filter:RippleBlocksFilter ;
+        public var filter:HalftoneFilter ;
         
         public var picture:Loader ;
         
         public function update( e:Event ):void
         {
-            if ( filter != null )
+            if ( filter )
             {
-                filter.phaseX =  Mathematics.map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
-                filter.waveY  =  Mathematics.map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
-                
+                filter.angle = normalize( picture.mouseX , 0 , picture.width  ) * 180 ;
+                filter.pitch = normalize( picture.mouseY , 0 , picture.height ) * 100 ;
                 picture.filters = [ filter ] ;
             }
         }
