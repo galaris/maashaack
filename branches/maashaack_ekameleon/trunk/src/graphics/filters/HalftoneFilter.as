@@ -32,79 +32,67 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
+
 package graphics.filters 
 {
-    import buRRRn.ASTUce.framework.TestCase;
-
     import flash.display.Shader;
-    import flash.geom.Point;
-
-    public class TwirlFilterTest extends TestCase 
+    import flash.filters.BitmapFilter;
+    
+    /**
+     * The HalftoneFilter class applies a halftone filter over a picture.
+     * The Shader must be defines with the Halftone pixelbender implementation.
+     */
+    public class HalftoneFilter extends ShaderCustomFilter 
     {
-        public function TwirlFilterTest( name:String = "" )
+        /**
+         * Creates a new HalftoneFilter instance.
+         * @param shader The Shader reference with the Hole pixel bender filter inside.
+         * @param init The optional dynamic object to initialize the filter.
+         */
+        public function HalftoneFilter( shader:Shader = null , init:Object = null)
         {
-            super(name);
+            super( shader || new Shader( new Halftone() ) , init ) ;
         }
         
-        public var filter:TwirlFilter ;
-        public var shader:Shader ;
-        
-        public function setUp():void
+        /**
+         * The angle value of the halftone filter between 0 and 180 degrees (default 0).
+         */
+        public function get angle():Number
         {
-            shader = new Shader( new Twirl() ) ;
-            filter = new TwirlFilter
-            ( 
-                shader , 
-                { 
-                    angle    : 100 , 
-                    center   : new Point(10,20) , 
-                    gaussian : true , 
-                    radius   : 1 
-                } 
-            ) ;
+            return shader.data.angle.value[0] ;
         }
         
-        public function tearDown():void
+        /**
+         * @private
+         */
+        public function set angle( value:Number ):void
         {
-            shader = null ;
-            filter = null ;
+            shader.data.angle.value[0] = value ;
         }
         
-        public function testConstructor():void
+        /**
+         * The pitch value of the halftone filter between 0 and 200 pixels (default 5).
+         */
+        public function get pitch():Number
         {
-            assertNotNull( filter ) ;
-            assertEquals( filter.angle , 100 ) ; 
-            assertEquals( filter.center.x , 10 ) ; 
-            assertEquals( filter.center.y , 20 ) ; 
-            assertTrue( filter.gaussian ) ; 
-            assertEquals( filter.radius , 1 ) ; 
+            return shader.data.pitch.value[0] ;
         }
         
-        public function testDescription():void
+        /**
+         * @private
+         */
+        public function set pitch( value:Number ):void
         {
-            assertEquals( "Twist a bitmap picture." , filter.description ) ;
+            shader.data.pitch.value[0] = value ;
         }
         
-        public function testName():void
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public override function clone():BitmapFilter
         {
-            assertEquals( "Twirl" , filter.name ) ; 
-        }
-        
-        public function testNamespace():void
-        {
-            assertEquals( "graphics.filters" , filter.namespace ) ;
-        }
-        
-        public function testVersion():void
-        {
-            assertEquals( filter.version , 1 ) ; 
-        }
-        
-        public function testClone():void
-        {
-            var clone:TwirlFilter = filter.clone() as TwirlFilter ;
-            assertNotNull( clone ) ;
-            assertEquals( clone.shader , filter.shader ) ;
+            return new HalftoneFilter( shader ) ;
         }
     }
 }
