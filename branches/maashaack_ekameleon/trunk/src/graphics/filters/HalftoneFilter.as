@@ -89,6 +89,22 @@ package graphics.filters
         }
         
         /**
+         * Indicates if the filter apply a black or white or color effect (default false).
+         */
+        public function get useColor():Boolean
+        {
+            return Boolean(shader.data.useColor.value[0]) ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set useColor( b:Boolean ):void
+        {
+            shader.data.useColor.value[0] = Number( b ) ;
+        }
+        
+        /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
          */

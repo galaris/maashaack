@@ -46,7 +46,7 @@ package examples
     import flash.events.MouseEvent;
     import flash.net.URLRequest;
     
-    [SWF(width="260", height="260", frameRate="24", backgroundColor="#F2F2F2")]
+    [SWF(width="260", height="260", frameRate="24", backgroundColor="#F6F6F6")]
     
     /**
      * Test the graphics.filters.HalftoneFilter class, this example work only with a FP10 or sup.
@@ -63,6 +63,7 @@ package examples
             
             picture = new Loader() ;
             
+            picture.addEventListener( MouseEvent.MOUSE_DOWN , switchColor ) ;
             picture.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
             picture.x = 10 ;
@@ -76,7 +77,9 @@ package examples
             
             filter = new HalftoneFilter() ;
             
-            filter.pitch = 4 ;
+            filter.angle    = 0 ;
+            filter.pitch    = 4 ;
+            filter.useColor = false ;
             
             trace( "name        : " + filter.name      ) ;
             trace( "namespace   : " + filter.namespace ) ;
@@ -89,6 +92,12 @@ package examples
         public var filter:HalftoneFilter ;
         
         public var picture:Loader ;
+        
+        public function switchColor( e:Event ):void
+        {
+            filter.useColor = !filter.useColor ;
+            picture.filters = [ filter ] ;
+        }
         
         public function update( e:Event ):void
         {
