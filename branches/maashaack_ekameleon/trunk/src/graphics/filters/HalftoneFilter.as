@@ -48,10 +48,10 @@ package graphics.filters
     {
         /**
          * Creates a new HalftoneFilter instance.
-         * @param shader The Shader reference with the Hole pixel bender filter inside.
          * @param init The optional dynamic object to initialize the filter.
+         * @param shader The Shader reference with the Hole pixel bender filter inside.
          */
-        public function HalftoneFilter( shader:Shader = null , init:Object = null)
+        public function HalftoneFilter( init:Object = null , shader:Shader = null )
         {
             super( shader || new Shader( new Halftone() ) , init ) ;
         }
@@ -94,7 +94,7 @@ package graphics.filters
          */
         public override function clone():BitmapFilter
         {
-            return new HalftoneFilter( shader ) ;
+            return new HalftoneFilter( null , shader ) ;
         }
     }
 }
