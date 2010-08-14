@@ -48,6 +48,7 @@ package graphics.filters
             suite.addTestSuite( AlphaMatteTest ) ;
             suite.addTestSuite( CircleSpectrumTest ) ;
             suite.addTestSuite( GrayScaleTest ) ;
+            suite.addTestSuite( HalftoneTest ) ;
             suite.addTestSuite( HoleTest ) ;
             suite.addTestSuite( KnockoutTest ) ;
             suite.addTestSuite( MagnifyTest ) ;
