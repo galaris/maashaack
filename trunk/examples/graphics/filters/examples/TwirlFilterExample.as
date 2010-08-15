@@ -45,7 +45,7 @@ package examples
     import flash.geom.Point;
     import flash.net.URLRequest;
     
-    [SWF(width="760", height="480", frameRate="24", backgroundColor="#666666")]
+    [SWF(width="280", height="280", frameRate="24", backgroundColor="#666666")]
     
     /**
      * Test the graphics.filters.TwirlFilter class, this example work only with a FP10 or sup.
