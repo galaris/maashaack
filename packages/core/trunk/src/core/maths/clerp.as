@@ -41,8 +41,8 @@ package core.maths
      * The standard Lerp function causes the object to rotate in the wrong direction and looks stupid, clerp() fixes that.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import core.maths.lerp ;
-     * trace( lerp( 0 , 100 , 0.5 ) ; // 50
+     * import core.maths.clerp ;
+     * trace( clerp( 0 , 180 , 0.5 ) ; // 90
      * </pre>
      * @param start the begining value.
      * @param end The ending value.
