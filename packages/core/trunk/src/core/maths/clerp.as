@@ -44,12 +44,12 @@ package core.maths
      * import core.maths.clerp ;
      * trace( clerp( 0 , 180 , 0.5 ) ; // 90
      * </pre>
+     * @param amount The amount to interpolate between the two values where 0.0 equal to the first point, 0.1 is very near the first point, 0.5 is half-way in between, etc. 
      * @param start the begining value.
      * @param end The ending value.
-     * @param amount The amount to interpolate between the two values where 0.0 equal to the first point, 0.1 is very near the first point, 0.5 is half-way in between, etc. 
      * @return The interpolated value between two numbers at a specific increment.
      */
-    public const clerp:Function = function( start:Number, end:Number, amount:Number ):Number 
+    public const clerp:Function = function( amount:Number , start:Number, end:Number ):Number 
     {
         var max:int     = 360 ;
         var half:int    = 180 ;
