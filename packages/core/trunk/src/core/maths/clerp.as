@@ -64,7 +64,7 @@ package core.maths
         }
         else
         {
-            return start + ( end - start ) * amout ;
+            return start + ( end - start ) * amount ;
         }
     };
 }
