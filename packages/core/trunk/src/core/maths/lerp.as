@@ -51,7 +51,7 @@ package core.maths
      * @param amount The amount to interpolate between the two values where 0.0 equal to the first point, 0.1 is very near the first point, 0.5 is half-way in between, etc. 
      * @return The interpolated value between two numbers at a specific increment.
      */
-    public const lerp:Function = function( start:Number, end:Number, amount:Number = 0 ):Number 
+    public const lerp:Function = function( start:Number, end:Number, amount:Number ):Number 
     {
         if ( start == end ) 
         {
