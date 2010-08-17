@@ -33,28 +33,27 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class lerpTest extends TestCase 
     {
-        public static function suite():ITest
+        public function lerpTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testLerp():void
+        {
+            assertEquals(   0 , lerp( 0 , 100 , 0.0 ) , "#1" ) ;            assertEquals(  50 , lerp( 0 , 100 , 0.5 ) , "#2" ) ;            assertEquals( 100 , lerp( 0 , 100 , 1.0 ) , "#3" ) ;
+        }
+        
+        public function testLerpWithSameValues():void
+        {
+            assertEquals( 100 , lerp( 100 , 100 , 0.0 ) , "#1" ) ;
+            assertEquals( 100 , lerp( 100 , 100 , 0.5 ) , "#2" ) ;
+            assertEquals( 100 , lerp( 100 , 100 , 1.0 ) , "#3" ) ;
         }
     }
 }
