@@ -33,30 +33,29 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class hermiteTest extends TestCase 
     {
-        public static function suite():ITest
+        public function hermiteTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testHermite():void
+        {
+            assertEquals(   0     , hermite( 0.00 , 0 , 100 ) , "#1" ) ;            assertEquals(  50     , hermite( 0.50 , 0 , 100 ) , "#2" ) ;            assertEquals( 100     , hermite( 1.00 , 0 , 100 ) , "#3" ) ;
+            assertEquals(  15.625 , hermite( 0.25 , 0 , 100 ) , "#4" ) ;
+            assertEquals(  84.375 , hermite( 0.75 , 0 , 100 ) , "#5" ) ;
+        }
+        
+        public function testHermiteWithSameValues():void
+        {
+            assertEquals( 100 , hermite( 0.0 , 100 , 100 ) , "#1" ) ;
+            assertEquals( 100 , hermite( 0.5 , 100 , 100 ) , "#2" ) ;
+            assertEquals( 100 , hermite( 1.0 , 100 , 100 ) , "#3" ) ;
         }
     }
 }

@@ -46,14 +46,14 @@ package core.maths
         
         public function testLerp():void
         {
-            assertEquals(   0 , lerp( 0 , 100 , 0.0 ) , "#1" ) ;            assertEquals(  50 , lerp( 0 , 100 , 0.5 ) , "#2" ) ;            assertEquals( 100 , lerp( 0 , 100 , 1.0 ) , "#3" ) ;
+            assertEquals(   0 , lerp( 0.0 , 0 , 100 ) , "#1" ) ;            assertEquals(  50 , lerp( 0.5 , 0 , 100 ) , "#2" ) ;            assertEquals( 100 , lerp( 1.0 , 0 , 100 ) , "#3" ) ;
         }
         
         public function testLerpWithSameValues():void
         {
-            assertEquals( 100 , lerp( 100 , 100 , 0.0 ) , "#1" ) ;
-            assertEquals( 100 , lerp( 100 , 100 , 0.5 ) , "#2" ) ;
-            assertEquals( 100 , lerp( 100 , 100 , 1.0 ) , "#3" ) ;
+            assertEquals( 100 , lerp( 0.0 , 100 , 100 ) , "#1" ) ;
+            assertEquals( 100 , lerp( 0.5 , 100 , 100 ) , "#2" ) ;
+            assertEquals( 100 , lerp( 1.0 , 100 , 100 ) , "#3" ) ;
         }
     }
 }

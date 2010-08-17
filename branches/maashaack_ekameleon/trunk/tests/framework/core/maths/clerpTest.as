@@ -46,21 +46,21 @@ package core.maths
         
         public function testClerp():void
         {
-            assertEquals(   0 , clerp( 0 , 180 , 0.0 ) , "#1" ) ;
-            assertEquals(  90 , clerp( 0 , 180 , 0.5 ) , "#2" ) ;
-            assertEquals( 180 , clerp( 0 , 180 , 1.0 ) , "#3" ) ;
+            assertEquals(   0 , clerp( 0.0 , 0 , 180 ) , "#1" ) ;
+            assertEquals(  90 , clerp( 0.5 , 0 , 180 ) , "#2" ) ;
+            assertEquals( 180 , clerp( 1.0 , 0 , 180 ) , "#3" ) ;
         }
         
         public function testClerpFixed():void
         {
-            assertEquals(    1 , clerp( 0 ,   1 , 1 ) , "#1" ) ;
-            assertEquals(    2 , clerp( 0 ,   2 , 1 ) , "#2" ) ;
-            assertEquals(  179 , clerp( 0 , 179 , 1 ) , "#3" ) ;
-            assertEquals(  180 , clerp( 0 , 180 , 1 ) , "#4" ) ;
-            assertEquals( -179 , clerp( 0 , 181 , 1 ) , "#5" ) ;
-            assertEquals( -178 , clerp( 0 , 182 , 1 ) , "#6" ) ;
-            assertEquals(   -1 , clerp( 0 , 359 , 1 ) , "#7" ) ;
-            assertEquals(    0 , clerp( 0 , 360 , 1 ) , "#8" ) ;
+            assertEquals(    1 , clerp( 1 , 0 ,   1 ) , "#1" ) ;
+            assertEquals(    2 , clerp( 1 , 0 ,   2 ) , "#2" ) ;
+            assertEquals(  179 , clerp( 1 , 0 , 179 ) , "#3" ) ;
+            assertEquals(  180 , clerp( 1 , 0 , 180 ) , "#4" ) ;
+            assertEquals( -179 , clerp( 1 , 0 , 181 ) , "#5" ) ;
+            assertEquals( -178 , clerp( 1 , 0 , 182 ) , "#6" ) ;
+            assertEquals(   -1 , clerp( 1 , 0 , 359 ) , "#7" ) ;
+            assertEquals(    0 , clerp( 1 , 0 , 360 ) , "#8" ) ;
         }
     }
 }
