@@ -40,9 +40,11 @@
     
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
     <component id="core.maths:clamp"       class="core.maths.clamp"       />
+    <component id="core.maths:clerp"       class="core.maths.clerp"       />
     <component id="core.maths:floor"       class="core.maths.floor"       />
     <component id="core.maths:gcd"         class="core.maths.gcd"         />
     <component id="core.maths:interpolate" class="core.maths.interpolate" />
+    <component id="core.maths:lerp"        class="core.maths.lerp"        />
     <component id="core.maths:map"         class="core.maths.map"         />
     <component id="core.maths:normalize"   class="core.maths.normalize"   />
     <component id="core.maths:percentage"  class="core.maths.percentage"  />
