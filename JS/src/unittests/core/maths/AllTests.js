@@ -39,6 +39,7 @@ load("unittests/core/maths/berpTest.js") ;
 load("unittests/core/maths/ceilTest.js") ;
 load("unittests/core/maths/clampTest.js") ;
 load("unittests/core/maths/clerpTest.js") ;
+load("unittests/core/maths/coserpTest.js") ;
 load("unittests/core/maths/floorTest.js") ;
 load("unittests/core/maths/gcdTest.js") ;
 load("unittests/core/maths/interpolateTest.js") ;
@@ -64,6 +65,7 @@ core.maths.AllTests.suite = function()
     suite.addTest( new TestSuite( core.maths.ceilTest ) ) ;
     suite.addTest( new TestSuite( core.maths.clampTest ) ) ;
     suite.addTest( new TestSuite( core.maths.clerpTest ) ) ;
+    suite.addTest( new TestSuite( core.maths.coserpTest ) ) ;
     suite.addTest( new TestSuite( core.maths.floorTest ) ) ;
     suite.addTest( new TestSuite( core.maths.gcdTest ) ) ;
     suite.addTest( new TestSuite( core.maths.interpolateTest ) ) ;
