@@ -38,6 +38,7 @@
     
     <!-- core.maths -->
     
+    <component id="core.maths:berp"        class="core.maths.berp"        />
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
     <component id="core.maths:clamp"       class="core.maths.clamp"       />
     <component id="core.maths:clerp"       class="core.maths.clerp"       />
