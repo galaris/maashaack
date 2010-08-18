@@ -42,6 +42,7 @@
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
     <component id="core.maths:clamp"       class="core.maths.clamp"       />
     <component id="core.maths:clerp"       class="core.maths.clerp"       />
+    <component id="core.maths:coserp"      class="core.maths.coserp"      />
     <component id="core.maths:floor"       class="core.maths.floor"       />
     <component id="core.maths:gcd"         class="core.maths.gcd"         />
     <component id="core.maths:hermite"     class="core.maths.hermite"     />
