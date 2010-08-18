@@ -52,6 +52,7 @@
     <component id="core.maths:percentage"  class="core.maths.percentage"  />
     <component id="core.maths:round"       class="core.maths.round"       />
     <component id="core.maths:sign"        class="core.maths.sign"        />
+    <component id="core.maths:sinerp"      class="core.maths.sinerp"      />
     
     <!-- core.reflect -->
     
