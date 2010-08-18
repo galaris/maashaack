@@ -33,32 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class sinerpTest extends TestCase 
     {
-        public static function suite():ITest
+        public function sinerpTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testSinerp():void
+        {
+            assertEquals(   0                 , sinerp( 0.00 , 0 , 100 ) , "#1" ) ;            assertEquals(  38.268343236508976 , sinerp( 0.25 , 0 , 100 ) , "#2" ) ;            assertEquals(  70.71067811865474  , sinerp( 0.50 , 0 , 100 ) , "#3" ) ;
+            assertEquals(  92.38795325112868  , sinerp( 0.75 , 0 , 100 ) , "#4" ) ;
+            assertEquals( 100                 , sinerp( 1.00 , 0 , 100 ) , "#5" ) ;
+        }
+        
+        public function testSinerpWithSameValues():void
+        {
+            assertEquals( 100 , sinerp( 0.00 , 100 , 100 ) , "#1" ) ;
+            assertEquals( 100 , sinerp( 0.25 , 100 , 100 ) , "#2" ) ;
+            assertEquals( 100 , sinerp( 0.50 , 100 , 100 ) , "#3" ) ;
+            assertEquals( 100 , sinerp( 0.75 , 100 , 100 ) , "#4" ) ;
+            assertEquals( 100 , sinerp( 1.00 , 100 , 100 ) , "#5" ) ;
         }
     }
 }
