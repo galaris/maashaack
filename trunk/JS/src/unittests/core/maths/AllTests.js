@@ -50,6 +50,7 @@ load("unittests/core/maths/normalizeTest.js") ;
 load("unittests/core/maths/percentageTest.js") ;
 load("unittests/core/maths/roundTest.js") ;
 load("unittests/core/maths/signTest.js") ;
+load("unittests/core/maths/sinerpTest.js") ;
 
 // ----o constructor
 
@@ -78,6 +79,7 @@ core.maths.AllTests.suite = function()
     suite.addTest( new TestSuite( core.maths.percentageTest ) ) ;
     suite.addTest( new TestSuite( core.maths.roundTest ) ) ;
     suite.addTest( new TestSuite( core.maths.signTest ) ) ;
+    suite.addTest( new TestSuite( core.maths.sinerpTest ) ) ;
     
     return suite ;
 }
