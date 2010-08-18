@@ -46,9 +46,9 @@ package core.maths
         
         public function testCoserp():void
         {
-            assertEquals( 100.0              , coserp( 0.00 , 0 , 100 ) , "#1" ) ;            assertEquals(  92.38795325112868 , coserp( 0.25 , 0 , 100 ) , "#2" ) ;            assertEquals(  70.71067811865476 , coserp( 0.50 , 0 , 100 ) , "#3" ) ;
-            assertEquals(  38.26834323650898 , coserp( 0.75 , 0 , 100 ) , "#4" ) ;
-            assertEquals(   6.123233995736766e-15 , coserp( 1.00 , 0 , 100 ) , "#5" ) ;
+            assertEquals( 0 , coserp( 0.00 , 0 , 100 ) , "#1" ) ;            assertEquals( 7.612046748871326 , coserp( 0.25 , 0 , 100 ) , "#2" ) ;            assertEquals( 29.28932188134524 , coserp( 0.50 , 0 , 100 ) , "#3" ) ;
+            assertEquals( 61.73165676349102 , coserp( 0.75 , 0 , 100 ) , "#4" ) ;
+            assertEquals( 99.99999999999999 , coserp( 1.00 , 0 , 100 ) , "#5" ) ;
         }
         
         public function testCoserpWithSameValues():void
