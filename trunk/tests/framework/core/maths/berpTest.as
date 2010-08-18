@@ -33,31 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class berpTest extends TestCase 
     {
-        public static function suite():ITest
+        public function berpTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testBerp():void
+        {
+            assertEquals(   0                , berp( 0.00 , 0 , 100 ) , "#1" ) ;            assertEquals(  66.333670901566   , berp( 0.25 , 0 , 100 ) , "#2" ) ;            assertEquals( 105.1015801865505  , berp( 0.50 , 0 , 100 ) , "#3" ) ;
+            assertEquals(  98.63451414512325 , berp( 0.75 , 0 , 100 ) , "#4" ) ;
+            assertEquals(  100               , berp( 1.00 , 0 , 100 ) , "#5" ) ;
+        }
+        
+        public function testBerpWithSameValues():void
+        {
+            assertEquals( 100 , berp( 0.00 , 100 , 100 ) , "#1" ) ;
+            assertEquals( 100 , berp( 0.25 , 100 , 100 ) , "#2" ) ;
+            assertEquals( 100 , berp( 0.50 , 100 , 100 ) , "#3" ) ;
+            assertEquals( 100 , berp( 0.75 , 100 , 100 ) , "#4" ) ;
+            assertEquals( 100 , berp( 1.00 , 100 , 100 ) , "#5" ) ;
         }
     }
 }
