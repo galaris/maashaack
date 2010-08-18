@@ -35,43 +35,41 @@
   
 */
 
-load("unittests/core/maths/berpTest.js") ;
-load("unittests/core/maths/ceilTest.js") ;
-load("unittests/core/maths/clampTest.js") ;
-load("unittests/core/maths/clerpTest.js") ;
-load("unittests/core/maths/floorTest.js") ;
-load("unittests/core/maths/gcdTest.js") ;
-load("unittests/core/maths/interpolateTest.js") ;
-load("unittests/core/maths/mapTest.js") ;
-load("unittests/core/maths/normalizeTest.js") ;
-load("unittests/core/maths/percentageTest.js") ;
-load("unittests/core/maths/roundTest.js") ;
-load("unittests/core/maths/signTest.js") ;
+// ---o Constructor
 
-// ----o constructor
-
-core.maths.AllTests = {} ;
-
-core.maths.AllTests.suite = function() 
+core.maths.clerpTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
-    
-    var suite = new TestSuite( "core.maths unit tests" );
-    
-    //suite.simpleTrace = true;
-    
-    suite.addTest( new TestSuite( core.maths.berpTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.ceilTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.clampTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.clerpTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.floorTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.gcdTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.interpolateTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.mapTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.normalizeTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.percentageTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.roundTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.signTest ) ) ;
-    
-    return suite ;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
+
+// ----o Inherit
+
+core.maths.clerpTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.maths.clerpTest.prototype.constructor = core.maths.clerpTest ;
+
+proto = core.maths.clerpTest.prototype ;
+
+// ----o Public Methods
+
+proto.testClerp = function()
+{
+    this.assertEquals(   0 , core.maths.clerp( 0.0 , 0 , 180 ) , "#1" ) ;
+    this.assertEquals(  90 , core.maths.clerp( 0.5 , 0 , 180 ) , "#2" ) ;
+    this.assertEquals( 180 , core.maths.clerp( 1.0 , 0 , 180 ) , "#3" ) ;
+}
+
+proto.testClerpFixed = function()
+{
+    this.assertEquals(    1 , core.maths.clerp( 1 , 0 ,   1 ) , "#1" ) ;
+    this.assertEquals(    2 , core.maths.clerp( 1 , 0 ,   2 ) , "#2" ) ;
+    this.assertEquals(  179 , core.maths.clerp( 1 , 0 , 179 ) , "#3" ) ;
+    this.assertEquals(  180 , core.maths.clerp( 1 , 0 , 180 ) , "#4" ) ;
+    this.assertEquals( -179 , core.maths.clerp( 1 , 0 , 181 ) , "#5" ) ;
+    this.assertEquals( -178 , core.maths.clerp( 1 , 0 , 182 ) , "#6" ) ;
+    this.assertEquals(   -1 , core.maths.clerp( 1 , 0 , 359 ) , "#7" ) ;
+    this.assertEquals(    0 , core.maths.clerp( 1 , 0 , 360 ) , "#8" ) ;
+}
+
+// ----o Encapsulate
+
+delete proto ;
