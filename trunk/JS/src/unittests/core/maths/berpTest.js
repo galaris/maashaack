@@ -35,41 +35,40 @@
   
 */
 
-load("unittests/core/maths/berpTest.js") ;
-load("unittests/core/maths/ceilTest.js") ;
-load("unittests/core/maths/clampTest.js") ;
-load("unittests/core/maths/floorTest.js") ;
-load("unittests/core/maths/gcdTest.js") ;
-load("unittests/core/maths/interpolateTest.js") ;
-load("unittests/core/maths/mapTest.js") ;
-load("unittests/core/maths/normalizeTest.js") ;
-load("unittests/core/maths/percentageTest.js") ;
-load("unittests/core/maths/roundTest.js") ;
-load("unittests/core/maths/signTest.js") ;
+// ---o Constructor
 
-// ----o constructor
-
-core.maths.AllTests = {} ;
-
-core.maths.AllTests.suite = function() 
+core.maths.berpTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
-    
-    var suite = new TestSuite( "core.maths unit tests" );
-    
-    //suite.simpleTrace = true;
-    
-    suite.addTest( new TestSuite( core.maths.berpTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.ceilTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.clampTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.floorTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.gcdTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.interpolateTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.mapTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.normalizeTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.percentageTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.roundTest ) ) ;
-    suite.addTest( new TestSuite( core.maths.signTest ) ) ;
-    
-    return suite ;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
+
+// ----o Inherit
+
+core.maths.berpTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.maths.berpTest.prototype.constructor = core.maths.berpTest ;
+
+proto = core.maths.berpTest.prototype ;
+
+// ----o Public Methods
+
+proto.testBerp = function()
+{
+    this.assertEquals(   0                , core.maths.berp( 0.00 , 0 , 100 ) , "#1" ) ;
+    this.assertEquals(  66.333670901566   , core.maths.berp( 0.25 , 0 , 100 ) , "#2" ) ;
+    this.assertEquals( 105.1015801865505  , core.maths.berp( 0.50 , 0 , 100 ) , "#3" ) ;
+    this.assertEquals(  98.63451414512325 , core.maths.berp( 0.75 , 0 , 100 ) , "#4" ) ;
+    this.assertEquals(  100               , core.maths.berp( 1.00 , 0 , 100 ) , "#5" ) ;
+}
+
+proto.testBerpWithSameValues = function()
+{
+    this.assertEquals( 100 , core.maths.berp( 0.00 , 100 , 100 ) , "#1" ) ;
+    this.assertEquals( 100 , core.maths.berp( 0.25 , 100 , 100 ) , "#2" ) ;
+    this.assertEquals( 100 , core.maths.berp( 0.50 , 100 , 100 ) , "#3" ) ;
+    this.assertEquals( 100 , core.maths.berp( 0.75 , 100 , 100 ) , "#4" ) ;
+    this.assertEquals( 100 , core.maths.berp( 1.00 , 100 , 100 ) , "#5" ) ;
+}
+
+// ----o Encapsulate
+
+delete proto ;
