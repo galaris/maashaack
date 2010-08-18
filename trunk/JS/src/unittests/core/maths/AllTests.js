@@ -44,6 +44,7 @@ load("unittests/core/maths/floorTest.js") ;
 load("unittests/core/maths/gcdTest.js") ;
 load("unittests/core/maths/hermiteTest.js") ;
 load("unittests/core/maths/interpolateTest.js") ;
+load("unittests/core/maths/lerpTest.js") ;
 load("unittests/core/maths/mapTest.js") ;
 load("unittests/core/maths/normalizeTest.js") ;
 load("unittests/core/maths/percentageTest.js") ;
@@ -71,6 +72,7 @@ core.maths.AllTests.suite = function()
     suite.addTest( new TestSuite( core.maths.gcdTest ) ) ;
     suite.addTest( new TestSuite( core.maths.hermiteTest ) ) ;
     suite.addTest( new TestSuite( core.maths.interpolateTest ) ) ;
+    suite.addTest( new TestSuite( core.maths.lerpTest ) ) ;
     suite.addTest( new TestSuite( core.maths.mapTest ) ) ;
     suite.addTest( new TestSuite( core.maths.normalizeTest ) ) ;
     suite.addTest( new TestSuite( core.maths.percentageTest ) ) ;
