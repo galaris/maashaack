@@ -53,6 +53,8 @@ package graphics.colors
      * 
      * trace( rgb ) ; // [RGB r:255 g:0 b:0 hex:0xFF0000]
      * </pre>
+     * @param hsl The HSL color to transform.
+     * @param rgb The optional RGB object to initialize. If this argument is null a new RGB instance is created.
      * @return the RGB representation of the passed-in HSL color.
      */
     public const HSL2RGB:Function = function( hsl:HSL , rgb:RGB = null ):RGB
