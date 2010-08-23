@@ -55,9 +55,12 @@ package graphics.colors
      * </pre>
      * @return the RGB representation of the passed-in HSL color.
      */
-    public const HSL2RGB:Function = function( hsl:HSL ):RGB
+    public const HSL2RGB:Function = function( hsl:HSL , rgb:RGB = null ):RGB
     {
-        var rgb:RGB = new RGB() ;
+        if ( rgb == null )
+        { 
+            rgb = new RGB() ;
+        } 
         rgb.fromNumber( HSL2RGBNumber( hsl ) ) ;
         return rgb ;
     };
