@@ -82,8 +82,9 @@ package C.unistd
 
 
         public native static function access( path:String, mode:int ):int;  //int access(const char *path, int mode);
-        public native static function chmod( path:String, mode:int ):int;  //int chmod(const char *path, mode_t mode);
-        public native static function getcwd():String;                      //void abort(void);
+        public native static function chmod( path:String, mode:int ):int;   //int chmod(const char *path, mode_t mode);
+        public native static function getcwd():String;                      //char *getcwd(char *buf, size_t size);
+        public native static function gethostname():String;                 //int gethostname(char *name, size_t namelen);
 
         /* note:
            mkdir() is normaly defined in <sys/stat.h> and can define file permission
@@ -185,6 +186,14 @@ package C.unistd
     public function getcwd():String
     {
         return __unistd.getcwd();
+    }
+
+    /**
+     * Get the name of the current host.
+     */
+    public function gethostname():String
+    {
+        return __unistd.gethostname();
     }
 
     /**
