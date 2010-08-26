@@ -40,6 +40,7 @@
 package avmplus
 {
     import flash.utils.ByteArray;
+    import C.unistd.*;
 
     /**
      * 
@@ -80,7 +81,31 @@ package avmplus
          * chmod( "myfile.txt", (mode | S_IWUSR ) );              // -rw-rw-rw-
          */
         public native static function getFileMode( filename:String ):int;
-
+        
+        /**
+         * Verify if we can access the "filename".
+         */
+        public static function canAccess( filename:String ):Boolean
+        {
+            return access( filename, F_OK ) == 0;
+        }
+        
+        /**
+         * Verify if we can write to the "filename".
+         */
+        public static function canWrite( filename:String ):Boolean
+        {
+            return access( filename, W_OK ) == 0;
+        }
+        
+        /**
+         * Verify if we can read the "filename".
+         */
+        public static function canRead( filename:String ):Boolean
+        {
+            return access( filename, R_OK ) == 0;
+        }
+        
         /**
          * Test if the "filename" is a regular file.
          */
