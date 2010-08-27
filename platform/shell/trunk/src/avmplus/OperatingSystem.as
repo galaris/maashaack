@@ -74,7 +74,13 @@ package avmplus
         private static var _codename:String;
         
         private native static function getVendorVersion():String;
-
+        
+        //other
+        private static var _username:String;
+        
+        private native static function getUserName():String;
+        
+        
         private static function getVendorAll():String
         {
             switch( name )
@@ -202,9 +208,30 @@ package avmplus
 
         private static function getVendorNameMicrosoft():String
         {
-            /* TODO:
-               return "Windows 98", "Windows 2000", "Windows 7", etc.
-            */
+            if( version.indexOf( "Windows 95" ) > -1 ) { return "Windows 95"; }
+            
+            if( version.indexOf( "Windows 98" ) > -1 ) { return "Windows 98"; }
+            
+            if( version.indexOf( "Windows ME" ) > -1 ) { return "Windows ME"; }
+            
+            if( version.indexOf( "Windows NT" ) > -1 ) { return "Windows NT"; }
+            
+            if( version.indexOf( "Windows XP" ) > -1 ) { return "Windows XP"; }
+            
+            if( version.indexOf( "Windows 2000" ) > -1 ) { return "Windows 2000"; }
+            
+            if( version.indexOf( "Windows Server 2003 R2" ) > -1 ) { return "Windows Server 2003 R2"; }
+            
+            if( version.indexOf( "Windows Server 2003" ) > -1 ) { return "Windows Server 2003"; }
+            
+            if( version.indexOf( "Windows Vista" ) > -1 ) { return "Windows Vista"; }
+            
+            if( version.indexOf( "Windows Server 2008 R2" ) > -1 ) { return "Windows Server 2008 R2"; }
+            
+            if( version.indexOf( "Windows Server 2008" ) > -1 ) { return "Windows Server 2008"; }
+            
+            if( version.indexOf( "Windows 7" ) > -1 ) { return "Windows 7"; }
+            
             return "Windows";
         }
 
@@ -249,7 +276,7 @@ package avmplus
         private static function getVendorDescriptionApple():String
         {
             /* TODO:
-               return something like "Mac OS X Leopard" or "Mac OS X Leopard (10.5.1)"
+               return something like "Apple Mac OS X Leopard" or "Apple Mac OS X Leopard (10.5.1)"
                and also check with the Darwin version
                for ex:
                Darwin 8.8.2 is "Mac OS X for Apple TV"
@@ -258,18 +285,31 @@ package avmplus
                http://en.wikipedia.org/wiki/Darwin_(operating_system)#Releases
                http://www.theapplemuseum.com/index.php?id=33
             */
+            
             return EMPTY;
         }
 
         private static function getVendorDescriptionMicrosoft():String
         {
             /* TODO:
-               return something like "Windows 7 Home Premium" or "Windows 7 Home Premium (NT 6.1)"
+               return something like "Microsoft Windows 7 Home Premium" or "Microsoft Windows 7 Home Premium (NT 6.1)"
 
                see:
                http://en.wikipedia.org/wiki/Windows_NT
                http://msdn.microsoft.com/en-us/library/ms724429(v=VS.85).aspx
             */
+            if( (vendor != "") && (version != "") )
+            {
+                var desc:String = vendor + " " + version;
+                    desc += " ("
+                if( codeName != UNKNOWN )
+                {
+                    desc += codeName + " ";
+                }
+                    desc += release+")";
+                return desc;
+            }
+            
             return EMPTY;
         }
         
@@ -333,12 +373,25 @@ package avmplus
                     return UNKNOWN;
                 }
             }
-
+            
             return UNKNOWN;
         }
-
+        
+        /* note:
+           http://en.wikipedia.org/wiki/List_of_Microsoft_codenames
+        */
         private static function getCodeNameMicrosoft():String
         {
+            if( version.indexOf( "Windows 95 OEM Service Release 2" ) > -1 ) { return "Detroit"; }
+            if( version.indexOf( "Windows 95" ) > -1 ) { return "Chicago"; }
+            if( version.indexOf( "Windows 98" ) > -1 ) { return "Memphis"; }
+            if( version.indexOf( "Windows XP" ) > -1 ) { return "Whistler"; }
+            if( version.indexOf( "Windows 2000" ) > -1 ) { return "Memphis NT"; }
+            if( version.indexOf( "Windows 2003" ) > -1 ) { return "Whistler Server"; }
+            if( version.indexOf( "Windows Vista" ) > -1 ) { return "Longhorn"; }
+            if( version.indexOf( "Windows 2008" ) > -1 ) { return "Longhorn Server"; }
+            if( version.indexOf( "Windows 7" ) > -1 ) { return "Vienna"; }
+            
             return UNKNOWN;
         }
 
@@ -353,6 +406,17 @@ package avmplus
 
             _name = getName();
             return _name;
+        }
+        
+        /**
+         * 
+         */
+        public static function get username():String
+        {
+            if( _username ) { return _username; }
+
+            _username = getUserName();
+            return _username;
         }
         
         /**
