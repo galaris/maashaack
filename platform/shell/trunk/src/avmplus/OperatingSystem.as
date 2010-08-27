@@ -428,7 +428,7 @@ package avmplus
                 var desc:String = vendor + " " + _linuxDistribDescription;
                 if( codeName != UNKNOWN )
                 {
-                    desc += "(" + codeName + ")";
+                    desc += " (" + codeName + ")";
                 }
                 return desc;
             }
