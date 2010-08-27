@@ -171,6 +171,11 @@ package avmplus
                 _linuxDistribRelease     = lines[1].split( "=" )[1];
                 _linuxDistribCodename    = lines[2].split( "=" )[1];
                 _linuxDistribDescription = lines[3].split( "=" )[1];
+
+                if( _linuxDistribDescription.indexOf( "\"" ) > -1 )
+                {
+                    _linuxDistribDescription = _linuxDistribDescription.split( "\"" ).join( "" );
+                }                
             }
             else
             {
@@ -301,7 +306,7 @@ package avmplus
             
             return "Windows";
         }
-
+        
         private static function getVendorVersionAll():String
         {
             switch( vendor )
@@ -338,9 +343,7 @@ package avmplus
                 return getVendorDescriptionMicrosoft();
 
                 case "Linux":
-                if( _linuxDistribDescription ) { return _linuxDistribDescription; }
-                _parseLinuxReleaseFile();
-                return _linuxDistribDescription;
+                return getVendorDescriptionLinux();
 
                 default:
                 return EMPTY;
@@ -407,6 +410,29 @@ package avmplus
                 return desc;
             }
             
+            return EMPTY;
+        }
+
+        private static function getVendorDescriptionLinux():String
+        {
+            if( !_linuxDistribDescription )
+            {
+                _parseLinuxReleaseFile();
+            }
+            
+            /* note:
+               return something like "Linux Ubuntu 8.04.4 LTS (hardy)"
+            */
+            if( _linuxDistribDescription && (_linuxDistribDescription != EMPTY) )
+            {
+                var desc:String = vendor + " " + _linuxDistribDescription;
+                if( codeName != UNKNOWN )
+                {
+                    desc += "(" + codeName + ")";
+                }
+                return desc;
+            }
+
             return EMPTY;
         }
         
