@@ -42,7 +42,7 @@ package avmplus
     import C.unistd.*;
     
     /**
-     * 
+     * Provides informations about the Operating System.
      */
     [native(cls="::avmshell::OperatingSystemClass", methods="auto")]
     public class OperatingSystem
@@ -183,6 +183,84 @@ package avmplus
             
         }
 
+        private static var _macProductBuildVersion:String;
+        private static var _macSystemVersionFile:String = "/System/Library/CoreServices/SystemVersion.plist";
+
+        /* note:
+           we do that to only get the build number
+
+           see
+           http://osxdaily.com/2007/04/23/get-system-information-from-the-command-line/
+           ----
+           $ sw_vers
+           ProductName: Mac OS X
+           ProductVersion: 10.4.9
+           BuildVersion: 8P2137
+           ----
+
+           http://blog.loudhush.ro/2007/07/swvers-does-not-use-gestalt.html
+           ----
+            $ nm /usr/bin/sw_vers
+            [..]
+                     U __CFCopyServerVersionDictionary
+                     U __CFCopySystemVersionDictionary
+            [..]
+
+            $ DYLD_IMAGE_SUFFIX=_debug gdb /usr/bin/sw_vers
+            [..]
+
+            Breakpoint 10, CFURLCreateWithFileSystemPath (allocator=0x0, 
+            filePath=0x2ee828, 
+            fsType=kCFURLPOSIXPathStyle, 
+            isDirectory=0 '\000') 
+            at URL.subproj/CFURL.c:3480
+
+            (gdb) bt
+            #0  CFURLCreateWithFileSystemPath (allocator=0x0, 
+                  filePath=0x2ee828, 
+                  fsType=kCFURLPOSIXPathStyle, 
+                  isDirectory=0 '\000') 
+                  at URL.subproj/CFURL.c:3480
+            #1  0x00262866 in _CFCopyVersionDictionary (path=0x2ee828) 
+                  at Base.subproj/CFUtilities.c:253
+            #2  0x0026282a in _CFCopySystemVersionDictionary () 
+                  at Base.subproj/CFUtilities.c:309
+            #3  0x000019ae in ?? ()
+            #4  0x00001896 in ?? ()
+            #5  0x000017bd in ?? ()
+
+            (gdb) call CFShow(0x2ee828)
+            /System/Library/CoreServices/SystemVersion.plist
+           ----
+        */
+        private static function _parseMacVersionFile():void
+        {
+            var filename:String = _macSystemVersionFile;
+            var file:String;
+
+            if( FileSystem.exists( filename ) )
+            {
+                file = FileSystem.read( filename );
+            }
+
+            if( file )
+            {
+                /* note:
+                   yeah that's some ugly parsing but good enought for the time being
+                */
+                var tmp:String = file.split( "<key>ProductBuildVersion</key>" )[1];
+                var pos1:int = tmp.indexOf( "<string>" );
+                var pos2:int = tmp.indexOf( "</string>" );
+                _macProductBuildVersion = tmp.substring( pos1+("<string>".length), pos2 );
+            }
+            else
+            {
+                //set defaults if filename not found
+                _macProductBuildVersion = EMPTY;
+            }
+            
+        }
+
         private static function getVendorNameAll():String
         {
             switch( vendor )
@@ -209,27 +287,16 @@ package avmplus
         private static function getVendorNameMicrosoft():String
         {
             if( version.indexOf( "Windows 95" ) > -1 ) { return "Windows 95"; }
-            
             if( version.indexOf( "Windows 98" ) > -1 ) { return "Windows 98"; }
-            
             if( version.indexOf( "Windows ME" ) > -1 ) { return "Windows ME"; }
-            
             if( version.indexOf( "Windows NT" ) > -1 ) { return "Windows NT"; }
-            
             if( version.indexOf( "Windows XP" ) > -1 ) { return "Windows XP"; }
-            
             if( version.indexOf( "Windows 2000" ) > -1 ) { return "Windows 2000"; }
-            
             if( version.indexOf( "Windows Server 2003 R2" ) > -1 ) { return "Windows Server 2003 R2"; }
-            
             if( version.indexOf( "Windows Server 2003" ) > -1 ) { return "Windows Server 2003"; }
-            
             if( version.indexOf( "Windows Vista" ) > -1 ) { return "Windows Vista"; }
-            
             if( version.indexOf( "Windows Server 2008 R2" ) > -1 ) { return "Windows Server 2008 R2"; }
-            
             if( version.indexOf( "Windows Server 2008" ) > -1 ) { return "Windows Server 2008"; }
-            
             if( version.indexOf( "Windows 7" ) > -1 ) { return "Windows 7"; }
             
             return "Windows";
@@ -241,6 +308,13 @@ package avmplus
             {
                 case "Apple": /* will get 10.1, 10.5.2, 10.6.1, etc. */
                 case "Microsoft": /* will get 3.1, 4, 5.0, 5.1, 6.0 etc. */
+                /* note:
+                   for Windows, the bugfix number is the major service pack number
+                   0 if no service pack,
+                   for ex:
+                   Windows XP Professional Service Pack 3
+                   would return "5.1.3"
+                */
                 return getVendorVersion();
 
                 case "Linux":
@@ -276,15 +350,38 @@ package avmplus
         private static function getVendorDescriptionApple():String
         {
             /* TODO:
-               return something like "Apple Mac OS X Leopard" or "Apple Mac OS X Leopard (10.5.1)"
-               and also check with the Darwin version
-               for ex:
-               Darwin 8.8.2 is "Mac OS X for Apple TV"
-
+               return something like "Apple Mac OS X 10.5.1 (Leopard build 9B18)"
+               
                see:
                http://en.wikipedia.org/wiki/Darwin_(operating_system)#Releases
                http://www.theapplemuseum.com/index.php?id=33
             */
+            
+            if( (vendor != "") && (vendorName != "") )
+            {
+                var desc:String = vendor + " " + vendorName + " " + vendorVersion;
+                    desc += " ("
+                if( codeName != UNKNOWN )
+                {
+                    desc += codeName + " ";
+                }
+
+                if( !_macProductBuildVersion )
+                {
+                    _parseMacVersionFile();
+                }
+
+                if(_macProductBuildVersion != EMPTY)
+                {
+                    desc += "build " + _macProductBuildVersion + ")";
+                }
+                else
+                {
+                    desc += ")";
+                }
+                
+                return desc;
+            }
             
             return EMPTY;
         }
@@ -292,7 +389,7 @@ package avmplus
         private static function getVendorDescriptionMicrosoft():String
         {
             /* TODO:
-               return something like "Microsoft Windows 7 Home Premium" or "Microsoft Windows 7 Home Premium (NT 6.1)"
+               return something like "Microsoft Windows 7 Home Premium (Vienna 6.1 build 2600)"
 
                see:
                http://en.wikipedia.org/wiki/Windows_NT
@@ -348,29 +445,14 @@ package avmplus
             {
                 switch( minor )
                 {
-                    case 0:
-                    return "Cheetah";
-                    
-                    case 1:
-                    return "Puma";
-                    
-                    case 2:
-                    return "Jaguar";
-
-                    case 3:
-                    return "Panther";
-
-                    case 4:
-                    return "Tiger";
-
-                    case 5:
-                    return "Leopard";
-
-                    case 6:
-                    return "Snow Leopard";
-
-                    default:
-                    return UNKNOWN;
+                    case 0: return "Cheetah";
+                    case 1: return "Puma";
+                    case 2: return "Jaguar";
+                    case 3: return "Panther";
+                    case 4: return "Tiger";
+                    case 5: return "Leopard";
+                    case 6: return "Snow Leopard";
+                    default: return UNKNOWN;
                 }
             }
             
@@ -398,7 +480,7 @@ package avmplus
 
         
         /**
-         * 
+         * The OS kernel name.
          */
         public static function get name():String
         {
@@ -409,7 +491,7 @@ package avmplus
         }
         
         /**
-         * 
+         * The current user name logged in the OS.
          */
         public static function get username():String
         {
@@ -420,7 +502,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Name of this node on the network.
          */
         public static function get nodename():String
         {
@@ -431,7 +513,7 @@ package avmplus
         }
         
         /**
-         * 
+         * The host name of the local computer.
          */
         public static function get hostname():String
         {
@@ -442,7 +524,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Current release level of the OS.
          */
         public static function get release():String
         {
@@ -453,7 +535,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Current version level of this release of the OS.
          */
         public static function get version():String
         {
@@ -464,7 +546,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Name of the hardware type the system is running on.
          */
         public static function get machine():String
         {
@@ -475,7 +557,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Name of the vendor (commercial) or distributor (non-commercial) of this OS.
          */
         public static function get vendor():String
         {
@@ -486,7 +568,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Name of the OS provided by the vendor/distributor.
          */
         public static function get vendorName():String
         {
@@ -497,7 +579,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Version of the OS provided by the vendor/distributor.
          */
         public static function get vendorVersion():String
         {
@@ -508,7 +590,8 @@ package avmplus
         }
 
         /**
-         * 
+         * Description of the OS provided by the vendor/distributor,
+         * or the empty string if not defined.
          */
         public static function get vendorDescription():String
         {
@@ -519,7 +602,7 @@ package avmplus
         }
         
         /**
-         * 
+         * Codename of this OS, or "Unknown" if not defined.
          */
         public static function get codeName():String
         {
