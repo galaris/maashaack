@@ -36,6 +36,7 @@
 */
 
 load("unittests/core/maths/berpTest.js") ;
+load("unittests/core/maths/bounceTest.js") ;
 load("unittests/core/maths/ceilTest.js") ;
 load("unittests/core/maths/clampTest.js") ;
 load("unittests/core/maths/clerpTest.js") ;
@@ -65,6 +66,7 @@ core.maths.AllTests.suite = function()
     //suite.simpleTrace = true;
     
     suite.addTest( new TestSuite( core.maths.berpTest ) ) ;
+    suite.addTest( new TestSuite( core.maths.bounceTest ) ) ;
     suite.addTest( new TestSuite( core.maths.ceilTest ) ) ;
     suite.addTest( new TestSuite( core.maths.clampTest ) ) ;
     suite.addTest( new TestSuite( core.maths.clerpTest ) ) ;
