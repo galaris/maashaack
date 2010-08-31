@@ -63,7 +63,7 @@ package system.process
         {
             super( global, channel );
             _timer             = new Timer(DEFAULT_DELAY, 1) ;
-            this.timeoutPolicy = TimeoutPolicy.LIMIT ;
+            this.timeoutPolicy = DEFAULT_TIMEOUT_POLICY ;
             this.loader        = loader ;
         }
         
@@ -74,9 +74,14 @@ package system.process
         public static var DEFAULT_CACHE_PARAMETER:String = "random" ;
         
         /**
-         * The default value of the delay before the ActionEvent.TIMEOUT event.
+         * The default value of the delay before the ActionEvent.TIMEOUT event (defines in the constructor of the class).
          */
         public static var DEFAULT_DELAY:uint = 8000 ; // 8 secondes
+        
+        /**
+         * The default TimeoutPolicy value used to set the timeoutPolicy member of all new objects of this class.
+         */
+        public static var DEFAULT_TIMEOUT_POLICY:TimeoutPolicy = TimeoutPolicy.LIMIT ;
         
         /**
          * Indicates the number of bytes that have been loaded thus far during the load operation.

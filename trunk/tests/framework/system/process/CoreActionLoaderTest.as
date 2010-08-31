@@ -69,6 +69,11 @@ package system.process
             assertEquals( CoreActionLoader.DEFAULT_DELAY, 8000 ) ;
         }
         
+        public function testDEFAULT_TIMEOUT_POLICY():void
+        {
+            assertEquals(CoreActionLoader.DEFAULT_TIMEOUT_POLICY, TimeoutPolicy.LIMIT ) ;
+        }
+        
         public function testCache():void
         {
             var a:CoreActionLoader = new CoreActionLoader() ;
