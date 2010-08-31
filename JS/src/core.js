@@ -95,6 +95,7 @@ require( "core.chars.isUpper"    ) ;
 // core.maths
 
 require( "core.maths.berp"        ) ;
+require( "core.maths.bounce"      ) ;
 require( "core.maths.ceil"        ) ;
 require( "core.maths.clamp"       ) ;
 require( "core.maths.clerp"       ) ;
