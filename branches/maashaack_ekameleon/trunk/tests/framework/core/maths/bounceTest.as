@@ -33,34 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class bounceTest extends TestCase 
     {
-        public static function suite():ITest
+        public function bounceTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( bounceTest      ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( coserpTest      ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testBounce():void
+        {
+            assertEquals( 0.0031853017931379904 , bounce( 0.00 ) , "#1" ) ;
+            assertEquals( 0.28356039297997127   , bounce( 0.25 ) , "#2" ) ;
+            assertEquals( 0.4999871587935894    , bounce( 0.50 ) , "#3" ) ;
+            assertEquals( 0.09341322988027062   , bounce( 0.75 ) , "#4" ) ;
+            assertEquals( 0                     , bounce( 1.00 ) , "#5" ) ;
         }
     }
 }
