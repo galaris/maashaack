@@ -71,12 +71,12 @@ package system.process
          * The name of the default cache uri query parameter ("random"). 
          * In the loader request you can set an other parameter name with the property <code>cacheParameterName</code>.
          */
-        public static const DEFAULT_CACHE_PARAMETER:String = "random" ;
+        public static var DEFAULT_CACHE_PARAMETER:String = "random" ;
         
         /**
          * The default value of the delay before the ActionEvent.TIMEOUT event.
          */
-        public static const DEFAULT_DELAY:uint = 8000 ; // 8 secondes
+        public static var DEFAULT_DELAY:uint = 8000 ; // 8 secondes
         
         /**
          * Indicates the number of bytes that have been loaded thus far during the load operation.
