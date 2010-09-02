@@ -85,19 +85,19 @@ kernel Magnify
     
     input  image4 source ;
     output pixel4 result ;
-
+    
     void evaluatePixel()
     {
         float2 target ;
         
         float2 coord   = outCoord();
         float2 vector  = coord - center;
-        float distance = length( vector ) ;        
+        float distance = length( vector ) ;
         
         if ( distance < outerRadius )
         {
             float2 maximum = center + ( vector / magnification ) ;
-        
+            
             if( distance < innerRadius )
             {
                 target = maximum ;
