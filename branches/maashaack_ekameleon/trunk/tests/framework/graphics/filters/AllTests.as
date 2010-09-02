@@ -55,6 +55,7 @@ package graphics.filters
             suite.addTestSuite( ReflectionTest ) ;
             suite.addTestSuite( RGBDistortTest ) ;
             suite.addTestSuite( RippleBlocksTest ) ;
+            suite.addTestSuite( RippleCrossingTest ) ;
             suite.addTestSuite( RoundPixelTest ) ;
             suite.addTestSuite( SharpenTest ) ;
             suite.addTestSuite( TwirlTest ) ;            suite.addTestSuite( WaveReflectionTest ) ;
