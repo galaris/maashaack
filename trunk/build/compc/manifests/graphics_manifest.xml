@@ -143,6 +143,8 @@
     <component id="graphics.filters:RGBDistortFilter"     class="graphics.filters.RGBDistortFilter" />
     <component id="graphics.filters:RippleBlocks"         class="graphics.filters.RippleBlocks" />
     <component id="graphics.filters:RippleBlocksFilter"   class="graphics.filters.RippleBlocksFilter" />
+    <component id="graphics.filters:RippleCrossing"       class="graphics.filters.RippleCrossing" />
+    <component id="graphics.filters:RippleCrossingFilter" class="graphics.filters.RippleCrossingFilter" />
     <component id="graphics.filters:RoundPixel"           class="graphics.filters.RoundPixel" />
     <component id="graphics.filters:RoundPixelFilter"     class="graphics.filters.RoundPixelFilter" />
     <component id="graphics.filters:ShaderCustomFilter"   class="graphics.filters.ShaderCustomFilter" />
