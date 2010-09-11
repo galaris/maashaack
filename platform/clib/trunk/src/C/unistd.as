@@ -100,6 +100,7 @@ package C.unistd
         */
         public native static function mkdir( path:String ):int;            //int mkdir(const char *path);
         public native static function rmdir( path:String ):int;            //int rmdir(const char *path);
+        public native static function sleep( milliseconds:uint ):void;   //unsigned sleep(unsigned seconds);
     }
 
     /** Check for existence. */
@@ -233,5 +234,16 @@ package C.unistd
     public function chmod( path:String, mode:int ):int
     {
         return __unistd.chmod( path, mode );
+    }
+
+    /**
+     * Suspend execution for an interval of time.
+     *
+     * note:
+     * sleep() in C usually use seconds, here we are using milliseconds
+     */
+    public function sleep( milliseconds:uint ):void
+    {
+        __unistd.sleep( milliseconds );
     }
 }
