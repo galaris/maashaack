@@ -82,6 +82,19 @@ package C.errno
         public native static function get ENOLCK():int;
         public native static function get ENOSYS():int;
         public native static function get ENOTEMPTY():int;
+
+        public native static function get ENETDOWN():int;
+        public native static function get ENETUNREACH():int;
+        public native static function get ENETRESET():int;
+        public native static function get ECONNABORTED():int;
+        public native static function get ECONNRESET():int;
+        public native static function get ENOBUFS():int;
+        public native static function get EISCONN():int;
+        public native static function get ENOTCONN():int;
+        public native static function get ESHUTDOWN():int;
+        public native static function get ETOOMANYREFS():int;
+        public native static function get ETIMEDOUT():int;
+        public native static function get ECONNREFUSED():int;
         
         
         public native static function get errno():int;
@@ -202,7 +215,45 @@ package C.errno
 
     /** Directory not empty. */
     public const ENOTEMPTY:int    = __errno.ENOTEMPTY;
+
+
+    /** Network is down. */
+    public const ENETDOWN:int     = __errno.ENETDOWN;
+
+    /** Network is unreachable. */
+    public const ENETUNREACH:int  = __errno.ENETUNREACH;
+
+    /** Network dropped connection on reset. */
+    public const ENETRESET:int    = __errno.ENETRESET;
+
+    /** Software caused connection abort. */
+    public const ECONNABORTED:int = __errno.ECONNABORTED;
+
+    /** Connection reset by peer. */
+    public const ECONNRESET:int   = __errno.ECONNRESET;
+
+    /** No buffer space available. */
+    public const ENOBUFS:int      = __errno.ENOBUFS;
+
+    /** Socket is already connected. */
+    public const EISCONN:int      = __errno.EISCONN;
+
+    /** Socket is not connected. */
+    public const ENOTCONN:int     = __errno.ENOTCONN;
+
+    /** Can't send after socket shutdown. */
+    public const ESHUTDOWN:int    = __errno.ESHUTDOWN;
+
+    /** Too many references: can't splice. */
+    public const ETOOMANYREFS:int = __errno.ETOOMANYREFS;
+
+    /** Operation timed out. */
+    public const ETIMEDOUT:int    = __errno.ETIMEDOUT;
+
+    /** Connection refused. */
+    public const ECONNREFUSED:int = __errno.ECONNREFUSED;
     
+
 
     public function get errno():int
     {
