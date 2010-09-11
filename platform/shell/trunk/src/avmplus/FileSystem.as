@@ -124,6 +124,36 @@ package avmplus
         public native static function listFiles( filename:String, directory:Boolean = false ):Array;
 
         /**
+         * Returns the available disk space in bytes on the volume containing "filename",
+         * or -1 on failure.
+         */
+        public native static function getFreeDiskSpace( filename:String ):Number;
+
+        /**
+         * Returns the total disk space in bytes on the volume containing "filename",
+         * or -1 on failure.
+         */
+        public native static function getTotalDiskSpace( filename:String ):Number;
+
+        /**
+         * Returns the used disk space in bytes on the volume containing "filename",
+         * or -1 on failure.
+         */
+        public static function getUsedDiskSpace( filename:String ):Number
+        {
+            var free:Number  = getFreeDiskSpace( filename );
+            var total:Number = getTotalDiskSpace( filename );
+
+            if( (free != -1) && (total != -1) )
+            {
+                return total-free;
+            }
+
+            return -1;
+        }
+        
+
+        /**
          * Reads the file "filename" into memory and returns it as a ByteArray.
          */
         public static function fileToByteArray( filename:String ):ByteArray
