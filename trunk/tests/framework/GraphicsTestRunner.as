@@ -51,7 +51,7 @@ package
     import flash.text.TextField;
     import flash.text.TextFormat;
 
-    [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
+    [SWF(width="760", height="800", frameRate="24", backgroundColor="#666666")]
     
     // Compilation arguments :
     // -default-size 760 800 -default-frame-rate 24 -default-background-color 0x666666 --target-player=10.0.0
