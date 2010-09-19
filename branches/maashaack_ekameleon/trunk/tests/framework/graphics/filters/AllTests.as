@@ -52,6 +52,7 @@ package graphics.filters
             suite.addTestSuite( HoleTest ) ;
             suite.addTestSuite( KnockoutTest ) ;
             suite.addTestSuite( MagnifyTest ) ;
+            suite.addTestSuite( MosaicTest ) ;
             suite.addTestSuite( ReflectionTest ) ;
             suite.addTestSuite( RGBDistortTest ) ;
             suite.addTestSuite( RippleBlocksTest ) ;
