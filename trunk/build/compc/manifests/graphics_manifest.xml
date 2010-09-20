@@ -137,6 +137,11 @@
     <component id="graphics.filters:HoleFilter"           class="graphics.filters.HoleFilter" />
     <component id="graphics.filters:Knockout"             class="graphics.filters.Knockout" />
     <component id="graphics.filters:KnockoutFilter"       class="graphics.filters.KnockoutFilter" />
+    <component id="graphics.filters:Magnify"              class="graphics.filters.Magnify" />
+    <component id="graphics.filters:MagnifyFilter"        class="graphics.filters.MagnifyFilter" />
+    <component id="graphics.filters:Mosaic"               class="graphics.filters.Mosaic" />
+    <component id="graphics.filters:MosaicFilter"         class="graphics.filters.MosaicFilter" />
+    <component id="graphics.filters:KnockoutFilter"       class="graphics.filters.KnockoutFilter" />
     <component id="graphics.filters:Reflection"           class="graphics.filters.Reflection" />
     <component id="graphics.filters:ReflectionFilter"     class="graphics.filters.ReflectionFilter" />
     <component id="graphics.filters:RGBDistort"           class="graphics.filters.RGBDistort" />
