@@ -63,7 +63,6 @@ package C.socket
 
         public native static function get MSG_CTRUNC():int;
         public native static function get MSG_DONTROUTE():int;
-        public native static function get MSG_EOR():int;
         public native static function get MSG_OOB():int;
         public native static function get MSG_PEEK():int;
         public native static function get MSG_TRUNC():int;
@@ -141,9 +140,6 @@ package C.socket
 
     /** Send without using routing tables. */
     public const MSG_DONTROUTE:int = __socket.MSG_DONTROUTE;
-
-    /** Terminates a record (if supported by the protocol). */
-    public const MSG_EOR:int       = __socket.MSG_EOR;
 
     /** Out-of-band data. */
     public const MSG_OOB:int       = __socket.MSG_OOB;
