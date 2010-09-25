@@ -85,8 +85,8 @@ package avmplus
         private native function _close():Boolean;
         private native function _send( data:String, flags:int = 0 ):int;
         private native function _sendBinary( data:ByteArray, flags:int = 0 ):int;
-        private native function _receive( size:int, flags:int = 0 ):int;
-        private native function _receiveBinary( size:int, flags:int = 0 ):int;
+        private native function _receive( flags:int = 0 ):int;
+        private native function _receiveBinary( flags:int = 0 ):int;
         private native function _bind( port:int ):Boolean;
         private native function _listen( backlog:int ):Boolean;
         private native function _accept():Socket;
@@ -193,6 +193,10 @@ package avmplus
                 //throw new Error( strerror( lastError ), lastError );
                 switch( lastError )
                 {
+                    case 0:
+                    //do nothing
+                    break;
+                    
                     case ENOTCONN:
                     //do nothing
                     break;
@@ -247,12 +251,12 @@ package avmplus
             }
         }
         
-        public function receive( buffer:uint = 512, flags:int = 0 ):String
+        public function receive( flags:int = 0 ):String
         {
             if( !connected ) { return; }
 
             var data:String = "";
-            var result:int  = _receive( buffer, flags );
+            var result:int  = _receive( flags );
             
             data += receivedBuffer;
 
@@ -264,13 +268,13 @@ package avmplus
 
             return data;
         }
-
-        public function receiveBinary( buffer:uint = 512, flags:int = 0 ):ByteArray
+        
+        public function receiveBinary( flags:int = 0 ):ByteArray
         {
             if( !connected ) { return; }
 
             var bytes:ByteArray;
-            var result:int  = _receiveBinary( buffer, flags );
+            var result:int  = _receiveBinary( flags );
             
             bytes = receivedBinary;
 
@@ -282,15 +286,14 @@ package avmplus
             
             return bytes;
         }
-
-
-        public function receiveFrom( host:String, port:int, buffer:uint = 512, flags:int = 0 ):String
+        
+        public function receiveFrom( host:String, port:int, flags:int = 0 ):String
         {
             connect( host, port );
 
             if( connected )
             {
-                return receive( buffer, flags );
+                return receive( flags );
             }
             else
             {
