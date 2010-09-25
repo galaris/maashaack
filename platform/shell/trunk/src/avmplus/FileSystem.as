@@ -43,13 +43,17 @@ package avmplus
     import C.unistd.*;
 
     /**
+     * The FileSystem API
+     * provides methods to access and manipulate computer files, directories and data.
      * 
+     * vocabulary:
+     * - filename : uniquely identify a file or directory stored on the file system
      */
     [native(cls="::avmshell::FileSystemClass", methods="auto")]
     public class FileSystem
     {
         /**
-         * Tests whether file "filename" exists.
+         * Tests whether a "filename" exists.
          */
         public native static function exists( filename:String ):Boolean;
 
@@ -119,7 +123,7 @@ package avmplus
         //public native static function isSymbolicLink( path:String ):Boolean;
 
         /**
-         * Returns an array of files from "filename".
+         * Returns an array of files or directories from "filename".
          */
         public native static function listFiles( filename:String, directory:Boolean = false ):Array;
 
@@ -164,10 +168,9 @@ package avmplus
         /**
          * Writes the binary "bytes" to the file "filename".
          */
-        public static function writeByteArray( filename:String, bytes:ByteArray ):Boolean
+        public static function writeByteArray( filename:String, bytes:ByteArray ):void
         {
             bytes.writeFile( filename );
-            return true;
         }
     }
 
