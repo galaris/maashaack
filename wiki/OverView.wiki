@@ -62,6 +62,10 @@ package
 
 The core root package is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
 
+You can consider a library as a set of functions organized into classes,<br>
+here with a "core" library in some cases we organize the functions<br>
+in the package definitions without assembling them into a class.
+
 ideally you would want to write it like that
 {{{
 package core
