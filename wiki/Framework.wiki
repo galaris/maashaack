@@ -12,6 +12,11 @@ is a set of different modular projects assembled together<br>
 to produce a coherent set of AS3 classes, packages and libraries<br>
 which represent our ideal of "programming in the large".
 
+Don't get confused by the word "framework", <br>
+we don't impose any architecture, abstract design,<br>
+default behaviour or force you to use subclassing<br>
+here you can read "application framework" as<br>
+"the minimal set of libraries to write an application".
 
 == Portability ==
 
