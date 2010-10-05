@@ -44,6 +44,7 @@ package system.ioc
             var suite:TestSuite = new TestSuite( "system.ioc package" );
             
             suite.addTestSuite( ParametersTest ) ;
+            suite.addTestSuite( TypePolicyTest ) ;
             
             return suite;
         }
