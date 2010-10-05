@@ -74,7 +74,10 @@ package system.evaluators
         public function MultiEvaluator( ...evaluators:Array )
         {
             _evaluators = [] ;
-            add.apply( this, evaluators ) ;
+            if ( evaluators.length > 0 )
+            { 
+                add.apply( this, evaluators ) ;
+            }
         }
         
         /**
@@ -168,7 +171,7 @@ package system.evaluators
         }
         
         /**
-         * Clear all the <code class="prettyprint">Evaluable</code> objects.
+         * The number of elements in this collection of Evaluable references.
          */
         public function size():Number
         {
