@@ -37,14 +37,13 @@ package system.evaluators
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.evaluators.samples.CustomEvaluator;    
-
+    import system.evaluators.samples.CustomEvaluator;
+    
     /**
      * The MultiEvaluatorTest test case.
      */
     public class MultiEvaluatorTest extends TestCase 
     {
-
         /**
          * Creates a new MultiEvaluatorTest instance.
          */
@@ -52,42 +51,40 @@ package system.evaluators
         {
             super(name);
         }
-
-        public var evaluator:MultiEvaluator ;   
-
+        
+        public var evaluator:MultiEvaluator ;
+        
         public function setUp():void
         {
             evaluator = new MultiEvaluator() ;
         }
-
+        
         public function testConstructor():void
         {
-            
             var e:MultiEvaluator = new MultiEvaluator(new CustomEvaluator()) ;
-
-            assertNotNull(evaluator, "01 - The MultiEvaluator instance not must be null.") ;            
+            
+            assertNotNull(evaluator, "01 - The MultiEvaluator instance not must be null.") ;
             assertNotNull(e, "02 - The MultiEvaluator instance not must be null.") ;
         }
-
+        
         public function testInterface():void
         {
-            assertTrue(evaluator is Evaluable, "The MultiEvaluator instance implements IEvaluator failed.") ;
-        }           
-
+            assertTrue(evaluator is Evaluable ) ;
+        }
+        
         public function testAutoClear():void
         {
-            
-            assertFalse(evaluator.autoClear, "The MultiEvaluator default autoclear property failed.") ;
+            assertFalse(evaluator.autoClear, "#1") ;
             
             evaluator.autoClear = true ;
             
-            assertTrue(evaluator.autoClear, "The MultiEvaluator autoclear property failed with true value.") ;
+            assertTrue(evaluator.autoClear, "#2") ;
             
             evaluator.autoClear = false ;
             
-            assertFalse(evaluator.autoClear, "The MultiEvaluator autoclear property failed with true value.") ;            
+            assertFalse(evaluator.autoClear, "#3") ;
         }
-
+        
         public function testAdd():void
         {
             var c1:CustomEvaluator = new CustomEvaluator() ;
@@ -100,33 +97,33 @@ package system.evaluators
             
             var e:MultiEvaluator = new MultiEvaluator() ;
             e.add(c1) ;
-            assertEquals(e.size() , 1 , "The MultiEvaluator add method failed.");
+            assertEquals(e.size() , 1 , "#1");
             e.add(c2,c3,c4) ;
-            assertEquals(e.size() , 4 , "The MultiEvaluator add method failed.");
+            assertEquals(e.size() , 4 , "#2");
             e.add([c5,c6],c7) ;
-            assertEquals(e.size() , 7 , "The MultiEvaluator add method failed.");
+            assertEquals(e.size() , 7 , "#3");
             e.add() ;
-            assertEquals(e.size() , 7 , "The MultiEvaluator add method failed.");
+            assertEquals(e.size() , 7 , "#4");
             e.add("hello world") ;
-            assertEquals(e.size() , 7 , "The MultiEvaluator add method failed.");
+            assertEquals(e.size() , 7 , "#5");
             e.clear() ;
-        }        
-
+        }
+        
         public function testClear():void
         {
             var c:CustomEvaluator = new CustomEvaluator() ;
             var e:MultiEvaluator = new MultiEvaluator(c) ;
             e.clear() ;
-            assertEquals(e.size() , 0 , "The MultiEvaluator clear method failed, the evaluator must be empty.");                      
+            assertEquals(e.size() , 0 , "The MultiEvaluator clear method failed, the evaluator must be empty.");
         }
-
+        
         public function testEval():void
         {
             var c:CustomEvaluator = new CustomEvaluator() ;
             var e:MultiEvaluator = new MultiEvaluator(c) ;
-            assertEquals(e.eval("hello world") , "hello world" , "The MultiEvaluator eval method failed.");             
+            assertEquals(e.eval("hello world") , "hello world" , "The MultiEvaluator eval method failed.");
         }
-
+        
         public function testRemove():void
         {
             var c:CustomEvaluator = new CustomEvaluator() ;
@@ -142,7 +139,7 @@ package system.evaluators
             var c2:CustomEvaluator = new CustomEvaluator() ;
             var e:MultiEvaluator = new MultiEvaluator(c1) ;
             e.add(c2) ;
-            assertEquals(e.size() , 2 , "The MultiEvaluator size method failed.");            
+            assertEquals(e.size() , 2 , "The MultiEvaluator size method failed.");
         } 
     }
 }
