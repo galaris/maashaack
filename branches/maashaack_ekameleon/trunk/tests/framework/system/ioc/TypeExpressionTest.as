@@ -67,5 +67,12 @@ package system.ioc
         {
             assertTrue( expression is ExpressionFormatter ) ;
         }
+        
+        public function testFormat():void
+        {
+            expression.put( "package"            , "foo.bar" ) ;
+            expression.put( "package.controller" , "{package}.controller" ) ;
+            assertEquals( "foo.bar.controller.MyController" , expression.format( "{package.controller}.MyController" ) ) ;
+        }
     }
 }
