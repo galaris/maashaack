@@ -45,7 +45,7 @@ package system.ioc
      * 
      * var exp:TypeExpression = new TypeExpression() ;
      * 
-     * exp.put( "package"            , "vegas.test.myPackage" ) ;
+     * exp.put( "package"            , "foo.bar.myPackage" ) ;
      * exp.put( "package.controller" , "{package}.controller" ) ;
      * 
      * var type:String = "{package.controller}.InitApplication" ;
@@ -67,16 +67,7 @@ package system.ioc
         }
         
         /**
-         * Inserts an alias in the collector. If the alias already exist the value in the collector is replaced.
-         * <p><b>Example</b></p>
-         * <pre class="prettyprint">
-         * import system.ioc.TypeExpression ;
-         * 
-         * var exp:TypeExpression = new TypeExpression() ;
-         * 
-         * exp.put( "data"    , "system.data" ) ;
-         * exp.put( "HashMap" , "{data}.maps.HashMap" ) ;
-         * </pre>
+         * Inserts a new expression in the collector. If the expression already exist, the value in the collector is replaced.
          * @param alias The alias name, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
          * @param value The value of the alias type, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
          * @return <code class="prettyprint">true</core> if the alias can be registered.
