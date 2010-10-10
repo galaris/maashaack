@@ -63,16 +63,13 @@ package avmplus
         
         public function Socket( family:int = -1, socktype:int = -1, protocol:int = -1 )
         {
-            if( (family > -1) &&
-                (socktype > -1) &&
-                (protocol > -1) )
+            if( (family > -1) && (socktype > -1) && (protocol > -1) )
             {
                 _customSocket( family, socktype, protocol );
             }
         }
         
         public native static function get lastError():int;
-
         
         private native function get lastDataSent():int;
         private native function get receivedBuffer():String;
