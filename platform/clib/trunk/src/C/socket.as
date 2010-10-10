@@ -85,6 +85,9 @@ package C.socket
 
         public native static function get INADDR_ANY():int;
         public native static function get INADDR_BROADCAST():int;
+
+        public native static function __gethostbyaddr( addr:String, numeric:Boolean ):Array;     //struct hostent *gethostbyaddr(const void *addr, socklen_t len, int type);
+        public native static function __gethostbyname( hostname:String, numeric:Boolean ):Array; //struct hostent *gethostbyname(const char *name);
     }
 
     /** Raw Protocol Interface. */
@@ -198,4 +201,24 @@ package C.socket
 
     /** IPv4 broadcast address. */
     public const INADDR_BROADCAST:int = __socket.INADDR_BROADCAST;
+
+
+    /**
+     * Network host database functions
+     * which returns a list of hostnames or IP addresses by providing an IP address.
+     */
+    public function gethostbyaddr( addr:String, numeric:Boolean = false ):Array
+    {
+        return __socket.__gethostbyaddr( addr, numeric );
+    }
+
+    /**
+     * Network host database functions
+     * which returns a list of hostnames or IP addresses by providing a hostname.
+     */
+    public function gethostbyname( hostname:String, numeric:Boolean = false ):Array
+    {
+        return __socket.__gethostbyname( hostname, numeric );
+    }
+    
 }
