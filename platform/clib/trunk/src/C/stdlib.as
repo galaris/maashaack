@@ -72,8 +72,9 @@ package C.stdlib
     /**
      * Terminate program execution.
      */
-    public function exit( status:int = 0 ):void
+    public function exit( status:int = -1 ):void
     {
+        if( status == -1 ) { status = EXIT_SUCCESS; }
         __stdlib.exit( status );
     }
 
@@ -88,7 +89,7 @@ package C.stdlib
     /**
      * Add or change an environment variable.
      */
-    public function setenv( name:String, value:String, overwrite:Boolean = false )
+    public function setenv( name:String, value:String, overwrite:Boolean = false ):int
     {
         var writeover:int = 0;
         if( overwrite ) { writeover = 1; }
