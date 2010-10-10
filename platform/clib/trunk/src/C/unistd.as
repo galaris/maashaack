@@ -100,7 +100,7 @@ package C.unistd
         */
         public native static function mkdir( path:String ):int;            //int mkdir(const char *path);
         public native static function rmdir( path:String ):int;            //int rmdir(const char *path);
-        public native static function sleep( milliseconds:uint ):void;   //unsigned sleep(unsigned seconds);
+        public native static function sleep( milliseconds:uint ):void;     //unsigned sleep(unsigned seconds);
     }
 
     /** Check for existence. */
