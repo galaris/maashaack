@@ -50,8 +50,9 @@ package graphics.colors
         {
             var suite:TestSuite = new TestSuite( "graphics colors tests" );
             
-            suite.addTestSuite( ColorSpaceTest ) ;
-            suite.addTestSuite( TrismulusTest  ) ;
+            suite.addTestSuite( ColorMatrixTest ) ;
+            suite.addTestSuite( ColorSpaceTest  ) ;
+            suite.addTestSuite( TrismulusTest   ) ;
             
             suite.addTestSuite( CMYTest      ) ;
             suite.addTestSuite( CMY2CMYKTest ) ;
