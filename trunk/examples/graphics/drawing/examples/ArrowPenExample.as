@@ -45,7 +45,7 @@ package examples
     import flash.display.LineScaleMode;
     import flash.display.Sprite;
     import flash.events.MouseEvent;
-
+    
     public class ArrowPenExample extends Sprite 
     {
         public function ArrowPenExample()
@@ -54,7 +54,7 @@ package examples
             start    = new Vector2( 740 / 2, 420 / 2) ;
             end      = new Vector2( start.x + 100, start.y + 100) ;
             pen      = new ArrowPen( shape , start , end ) ;
-        	pen.fill = new FillStyle( 0xFAFA74 ) ;
+            pen.fill = new FillStyle( 0xFAFA74 ) ;
             pen.line = new LineStyle( 2, 0xFAFA74 , 1 , true, LineScaleMode.NORMAL , CapsStyle.SQUARE, JointStyle.MITER ) ;
             
             pen.setPen( null, null, { headSize:20 , headWidth:8 } ) ;
@@ -62,7 +62,7 @@ package examples
             pen.draw() ;
             
             addChild( shape ) ;
-        	stage.addEventListener( MouseEvent.MOUSE_MOVE , refresh ) ;
+            stage.addEventListener( MouseEvent.MOUSE_MOVE , refresh ) ;
         }
         
         public var shape :Sprite ;
