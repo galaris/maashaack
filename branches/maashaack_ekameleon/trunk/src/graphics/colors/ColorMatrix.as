@@ -255,6 +255,25 @@ package graphics.colors
         }
         
         /**
+         * Set this colormatrix to scale by the specified values.
+         * @param r The scale value to change the red component of the color.
+         * @param g The scale value to change the green component of the color.
+         * @param b The scale value to change the blue component of the color.
+         * @param a The scale value to change the alpha component of the color.
+         */
+        public function scale( r:Number, g:Number, b:Number, a:Number):void 
+        {
+            for ( var i:int = 19 ; i > 0 ; --i ) 
+            {
+                matrix[i] = 0 ;
+            }
+            matrix[0]  = r ;
+            matrix[6]  = g ;
+            matrix[12] = b ;
+            matrix[18] = a ;
+        }
+        
+        /**
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
