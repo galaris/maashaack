@@ -69,6 +69,21 @@ package graphics.colors
         }
         
         /**
+         * Defines the red axis value in the rotate method (0). 
+         */
+        public static const R_AXIS:uint = 0 ;
+        
+        /**
+         * Defines the green axis value in the rotate method (1). 
+         */
+        public static const G_AXIS:uint = 1 ;
+        
+        /**
+         * Defines the blue axis value in the rotate method (2). 
+         */
+        public static const B_AXIS:uint = 2 ;
+        
+        /**
          * Determinates the brightness component of the color matrix.
          */
         public function get brightness():Number
@@ -174,7 +189,7 @@ package graphics.colors
             {
                 for (var x:int = 0 ; x < 5 ; x++ )
                 {
-                    result[i + x] =   mat[i] * matrix[ x      ] + 
+                    result[i + x] = mat[i]   * matrix[ x      ] + 
                                     mat[i+1] * matrix[ x +  5 ] + 
                                     mat[i+2] * matrix[ x + 10 ] + 
                                     mat[i+3] * matrix[ x + 15 ] +
@@ -219,8 +234,8 @@ package graphics.colors
                 }
                 case 1 :
                 {
-                    matrix[0] = matrix[17] = cos;
-                    matrix[2] = sin;
+                    matrix[0]  = matrix[17] = cos;
+                    matrix[2]  = sin;
                     matrix[15] = -sin;
                     break ;
                 }

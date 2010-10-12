@@ -36,12 +36,13 @@
 package examples
 {
 
+    import flash.events.KeyboardEvent;
     import core.maths.map;
-    
+
     import examples.display.Picture;
-    
+
     import graphics.colors.ColorMatrix;
-    
+
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
@@ -58,6 +59,7 @@ package examples
             
             stage.scaleMode = StageScaleMode.NO_SCALE ;
             
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             stage.addEventListener( MouseEvent.MOUSE_MOVE , update ) ;
             
             // picture
@@ -72,12 +74,27 @@ package examples
             color = new ColorMatrix() ;
         }
         
+        public var angle:uint ;
+        
         public var color:ColorMatrix ;
         
         public var filter:ColorMatrixFilter = new ColorMatrixFilter() ;
         
         public var picture:Picture = new Picture() ;
         
+        public function keyDown( e:Event = null ):void
+        {
+            color.rotate( ColorMatrix.R_AXIS , angle += 5 ) ; // R_AXIS or G_AXIS or B_AXIS
+            
+            if ( angle >= 360 )
+            {
+                angle = 0 ;
+            }
+            
+            filter.matrix = color.matrix ;
+            
+            picture.filters = [ filter ] ;
+        }
         
         public function update( e:Event = null ):void
         {
