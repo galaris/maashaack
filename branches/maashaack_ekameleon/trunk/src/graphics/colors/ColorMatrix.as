@@ -36,16 +36,30 @@
 package graphics.colors
 {
 
+    import core.dumpArray;
     import core.maths.clamp;
     import core.maths.floor;
     import core.maths.round;
-    
+
     import system.Cloneable;
+    import system.Serializable;
     
     /**
-     * The 5x4 matrix for transforming the color and alpha components of a display.
+     * The 5x4 matrix for transforming the color and alpha components of a display. 
+     * The matrix is stored in a single array, and its treated as follows:
+     * [ a, b, c, d, e,
+     *   f, g, h, i, j,
+     *   k, l, m, n, o,
+     *   p, q, r, s, t 
+     * ]
+     *
+     * When applied to a color [r, g, b, a], the resulting color is computed as (after clamping)
+     *  R' = a*R + b*G + c*B + d*A + e;
+     *  G' = f*R + g*G + h*B + i*A + j;
+     *  B' = k*R + l*G + m*B + n*A + o;
+     *  A' = p*R + q*G + r*B + s*A + t;
      */
-    public class ColorMatrix implements Cloneable
+    public class ColorMatrix implements Cloneable, Serializable
     {
         /**
          * Creates a new ColorMatrix instance.
@@ -271,6 +285,15 @@ package graphics.colors
             matrix[6]  = g ;
             matrix[12] = b ;
             matrix[18] = a ;
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource (indent:int = 0 ):String
+        {
+            return "new graphics.colors.ColorMatrix(" + dumpArray(matrix) + ")";
         }
         
         /**
