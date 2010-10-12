@@ -133,6 +133,7 @@ package graphics.colors
         
         /**
          * Determinates the saturation component of the color matrix.
+         * @see <a href="http://www.fourcc.org/fccyvrgb.php">YUV to RGB Conversion</a>
          */
         public function get saturation():Number
         {
