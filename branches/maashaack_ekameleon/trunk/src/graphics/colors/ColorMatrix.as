@@ -35,15 +35,22 @@
 
 package graphics.colors
 {
+
+    import core.maths.clamp;
+    import core.maths.floor;
+    import core.maths.round;
+    
     import system.Cloneable;
     
     /**
-     * 5x4 matrix for transforming the color and alpha components of a display.
+     * The 5x4 matrix for transforming the color and alpha components of a display.
      */
     public class ColorMatrix implements Cloneable
     {
         /**
          * Creates a new ColorMatrix instance.
+         * @param factory The Array or ColorMatrix optional argument to initialize the new ColorMatrix instance. 
+         * If this argument is null the matrix is the identity 5x4 matrix.
          */
         public function ColorMatrix( factory:* = null )
         {
@@ -59,6 +66,86 @@ package graphics.colors
             {
                 matrix = IDENTITY.concat() ;
             }
+        }
+        
+        /**
+         * Determinates the brightness component of the color matrix.
+         */
+        public function get brightness():Number
+        {
+            return clamp( floor( ( matrix[4] + matrix[9] + matrix[14] ) / 255 / 3 , 2 ) , -1 , 1 ) ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set brightness( value:Number ):void
+        {
+            value = clamp( value , -1 , 1 ) * 255 ;
+            matrix = concat
+            ([
+                1 , 0 , 0 , 0 , value ,
+                0 , 1 , 0 , 0 , value ,
+                0 , 0 , 1 , 0 , value ,
+                0 , 0 , 0 , 1 , 0
+            ]) ;
+        }
+        
+        /**
+         * Determinates the contrast component of the color matrix.
+         */
+        public function get contrast():Number
+        {
+            return clamp( round( ( ( matrix[0] + matrix[6] + matrix[12] ) / 3 ) - 1 , 2 ) , -1 , 1 ) ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set contrast( value:Number ):void
+        {
+            var c:Number = clamp( value , -1 , 1 ) ; // contrast
+            var s:Number = c + 1 ; // scale
+            var o:Number = 128 * ( 1 - s ) ; // offset
+            matrix = concat
+            ([
+                s , 0 , 0 , 0 , o ,
+                0 , s , 0 , 0 , o ,
+                0 , 0 , s , 0 , o ,
+                0 , 0 , 0 , 1 , 0
+            ]) ;
+        }
+        
+        /**
+         * Determinates the saturation component of the color matrix.
+         */
+        public function get saturation():Number
+        {
+            var s1:Number = 1 - matrix[1] / 0.587 ;
+            var s2:Number = 1 - matrix[2] / 0.114 ;
+            var s5:Number = 1 - matrix[5] / 0.299 ;
+            return round( (s1 + s2 + s5) / 3 , 2 ) ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set saturation( value:Number ):void
+        {
+            var s:Number = clamp( value , -3 , 3 ) ; // saturation
+            var i:Number = 1 - s ;
+            
+            var r:Number = i * 0.299 ;
+            var g:Number = i * 0.587 ;
+            var b:Number = i * 0.114 ;
+            
+            matrix = concat
+            ([
+                r + s , g     , b     , 0 , 0 ,
+                r     , g + s , b     , 0 , 0 ,
+                r     , g     , b + s , 0 , 0 ,
+                0     , 0     , 0     , 1 , 0
+            ]) ;
         }
         
         /**
@@ -79,15 +166,15 @@ package graphics.colors
          * Concatenates the elements of a matrix specified in the parameter with the elements in an array and creates a new matrix
          * @param Array The altered Matrix
          */ 
-        public function concat( mat:Array ):void
+        public function concat( mat:Array ):Array
         {
             var i:int      = 0;
-            var temp:Array = [] ;
+            var result:Array = [] ;
             for (var y:int = 0 ; y < 4 ; y++ )
             {
-                for (var x:int = 0; x < 5 ; x++ )
+                for (var x:int = 0 ; x < 5 ; x++ )
                 {
-                    temp[i + x] =   mat[i]   * matrix[ x      ] + 
+                    result[i + x] =   mat[i] * matrix[ x      ] + 
                                     mat[i+1] * matrix[ x +  5 ] + 
                                     mat[i+2] * matrix[ x + 10 ] + 
                                     mat[i+3] * matrix[ x + 15 ] +
@@ -95,8 +182,7 @@ package graphics.colors
                 }
                 i+=5 ;
             }
-            
-            matrix = temp;
+            return result;
         }
         
         /**
@@ -105,6 +191,51 @@ package graphics.colors
         public function reset():void
         {
             matrix = IDENTITY.concat() ;
+        }
+        
+        /**
+         * Sets the rotation on a color axis by the specified values. 
+         * @param axis The axis (red, green or blue axis) to rotate.
+         * @param degrees The angle in degree of the rotation.
+         * <li>axis=0 correspond to a rotation around the RED color</li> 
+         * <li>axis=1 correspond to a rotation around the GREEN color</li>
+         * <li>axis=2 correspond to a rotation around the BLUE color</li>
+         * @throws ArgumentError if the axis argument is not valid with the value 0, 1 or 2.
+         */
+        public function rotate( axis:int , degrees:Number ):void 
+        {
+            reset() ;
+            var rad:Number = degrees * RAD ;
+            var cos:Number = Math.cos( rad ) ;
+            var sin:Number = Math.sin( rad ) ;
+            switch (axis) 
+            {
+                case 0 :
+                {
+                    matrix[6]  = matrix[12] = cos ;
+                    matrix[7]  = sin ;
+                    matrix[11] = -sin;
+                    break ;
+                }
+                case 1 :
+                {
+                    matrix[0] = matrix[17] = cos;
+                    matrix[2] = sin;
+                    matrix[15] = -sin;
+                    break ;
+                }
+                case 2:
+                {
+                    matrix[0] = matrix[6] = cos;
+                    matrix[1] = sin;
+                    matrix[5] = -sin;
+                    break;
+                }
+                default:
+                {
+                    throw new ArgumentError( "ColorMatrix.rotate failed, the axis argument is not valid with the value " + axis );
+                }
+            }
         }
         
         /**
@@ -126,5 +257,10 @@ package graphics.colors
             0,0,1,0,0,
             0,0,0,1,0 
         ];
+        
+        /**
+         * Value to convert a degree value in radian (Math.PI / 180).
+         */
+        protected static const RAD:Number = Math.PI / 180 ;
     }
 }
