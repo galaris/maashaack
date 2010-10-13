@@ -35,12 +35,11 @@
 
 package graphics.colors
 {
-
     import core.dumpArray;
     import core.maths.clamp;
     import core.maths.floor;
     import core.maths.round;
-
+    
     import system.Cloneable;
     import system.Serializable;
     
@@ -98,6 +97,39 @@ package graphics.colors
         public static const B_AXIS:uint = 2 ;
         
         /**
+         * The greyscale matrix representation to initialize the ColorMatrix.
+         */
+        public static const GRAYSCALE:Array =
+        [ 
+            0.33 , 0.33 , 0.33 , 0 , 0 ,
+            0.33 , 0.33 , 0.33 , 0 , 0 ,
+            0.33 , 0.33 , 0.33 , 0 , 0 ,
+            0    , 0    , 0    , 1 , 0 
+        ];
+        
+        /**
+         * The identity matrix representation to initialize the ColorMatrix.
+         */
+        public static const IDENTITY:Array =
+        [ 
+            1 , 0 , 0 , 0 , 0 ,
+            0 , 1 , 0 , 0 , 0 ,
+            0 , 0 , 1 , 0 , 0 ,
+            0 , 0 , 0 , 1 , 0 
+        ];
+        
+        /**
+         * The invert matrix representation to initialize the ColorMatrix.
+         */
+        public static const INVERT:Array =
+        [ 
+            -1 ,  0 ,  0 , 0 , 255,
+             0 , -1 ,  0 , 0 , 255,
+             0 ,  0 , -1 , 0 , 255,
+             0 ,  0 ,  0 , 1 ,   0 
+        ];
+        
+        /**
          * Determinates the brightness component of the color matrix.
          */
         public function get brightness():Number
@@ -147,13 +179,17 @@ package graphics.colors
         
         /**
          * Determinates the saturation component of the color matrix.
+         * Info : The luminance vector where the red value is 0.3086, the green value is 0.6094, and the blue value is 0.0820. 
+         * Notice here that we do not use the standard NTSC weights of 0.299, 0.587, and 0.114. 
+         * The NTSC weights are only applicable to RGB colors in a gamma 2.2 color space. For linear RGB colors the values above are better.
+         * @see <a href="http://www.graficaobscura.com/matrix/index.html">Matrix Operations for Image Processing</a>
          * @see <a href="http://www.fourcc.org/fccyvrgb.php">YUV to RGB Conversion</a>
          */
         public function get saturation():Number
         {
-            var s1:Number = 1 - matrix[1] / 0.587 ;
-            var s2:Number = 1 - matrix[2] / 0.114 ;
-            var s5:Number = 1 - matrix[5] / 0.299 ;
+            var s1:Number = 1 - matrix[1] / 0.6094 ;
+            var s2:Number = 1 - matrix[2] / 0.0820 ;
+            var s5:Number = 1 - matrix[5] / 0.3086 ;
             return round( (s1 + s2 + s5) / 3 , 2 ) ;
         }
         
@@ -165,9 +201,9 @@ package graphics.colors
             var s:Number = clamp( value , -3 , 3 ) ; // saturation
             var i:Number = 1 - s ;
             
-            var r:Number = i * 0.299 ;
-            var g:Number = i * 0.587 ;
-            var b:Number = i * 0.114 ;
+            var r:Number = i * 0.3086 ;
+            var g:Number = i * 0.6094 ;
+            var b:Number = i * 0.0820 ;
             
             matrix = concat
             ([
@@ -216,11 +252,23 @@ package graphics.colors
         }
         
         /**
-         * Sets this colormatrix to identity: [ 1 0 0 0 0 - red vector 0 1 0 0 0 - green vector 0 0 1 0 0 - blue vector 0 0 0 1 0 ] - alpha vector
+         * Reset and sets this colormatrix to identity:
+         * <pre>
+         * [ 
+         *  1 , 0 , 0 , 0 , 0 ,
+         *  0 , 1 , 0 , 0 , 0 ,
+         *  0 , 0 , 1 , 0 , 0 ,
+         *  0 , 0 , 0 , 1 , 0 
+         * ];
+         * </pre>
          */
-        public function reset():void
+        public function reset( init:Array = null ):void
         {
-            matrix = IDENTITY.concat() ;
+            if ( init == null )
+            {
+                init = IDENTITY ; 
+            }
+            matrix = init.concat() ;
         }
         
         /**
@@ -304,17 +352,6 @@ package graphics.colors
         {
             return "[ColorMatrix "+ matrix.join(",") + "]";
         }
-        
-        /**
-         * The identity internal vector to initialize the ColorMatrix.
-         */
-        protected static const IDENTITY:Array =
-        [ 
-            1,0,0,0,0,
-            0,1,0,0,0,
-            0,0,1,0,0,
-            0,0,0,1,0 
-        ];
         
         /**
          * Value to convert a degree value in radian (Math.PI / 180).

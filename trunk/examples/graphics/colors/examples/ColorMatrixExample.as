@@ -38,11 +38,11 @@ package examples
 
     import flash.events.KeyboardEvent;
     import core.maths.map;
-
+    
     import examples.display.Picture;
-
+    
     import graphics.colors.ColorMatrix;
-
+    
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
     import flash.events.Event;
@@ -72,6 +72,13 @@ package examples
             // matrix
             
             color = new ColorMatrix() ;
+            
+            //// invert 
+            
+            color.reset( ColorMatrix.INVERT ) ;
+            
+            filter.matrix   = color.matrix ;
+            picture.filters = [ filter ] ;
         }
         
         public var angle:uint ;
@@ -105,7 +112,7 @@ package examples
             // color.contrast   = map( picture.mouseX , 0 , picture.width  , -1 , 1 ) ;
             color.saturation = map( picture.mouseX , 0 , picture.width  , -3 , 3 ) ;
             
-            trace( "brightness:" + color.brightness + " :: contrast:" + color.contrast ) ;
+            trace( "brightness:" + color.brightness + " :: saturation:" + color.saturation ) ;
             
             filter.matrix   = color.matrix ;
             picture.filters = [ filter ] ;
