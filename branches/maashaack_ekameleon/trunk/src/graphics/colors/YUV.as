@@ -36,9 +36,9 @@
 package graphics.colors 
 {
     import core.maths.clamp;
-
+    
     import system.hack;
-
+    
     /**
      * The YUV defines a color space in terms of one luma (Y') and two chrominance (UV) components. 
      * The YUV color model is used in the NTSC, PAL, and SECAM composite color video standards.
@@ -78,7 +78,7 @@ package graphics.colors
         
         /**
          * The u component.
-         */        
+         */
         public function get u():Number
         {
             return _u ;
