@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="clib" default="main" basedir=".">
+    
+    <target name="clean">
+        <delete dir="${basedir}/${release.dir}" />
+        <delete dir="${basedir}/${asdoc.output}" />
+    </target>
+    
+    <target name="before">
+        <mkdir dir="${basedir}/${release.dir}" />
+        <mkdir dir="${basedir}/${asdoc.output}" />
+    </target>
+    
+    <target name="main" depends="clean,before,build-documentation,after">
+        
+    </target>
+    
+    <target name="build-documentation">
+        <asdoc
+            output="${basedir}/${asdoc.output}"
+            main-title="${asdoc.main.title}"
+            footer="${asdoc.footer}"
+            window-title="${asdoc.window.title}"
+            left-frameset-width="300"
+            failonerror="true">
+            
+            <keep-xml>true</keep-xml>
+            <doc-sources path-element="${basedir}/${project.src}"/>
+            <compiler.verbose-stacktraces>true</compiler.verbose-stacktraces>
+            <packages.package name="C.errno" description="system error numbers" />
+            <packages.package name="C.socket" description="socket constants and function helpers" />
+            <packages.package name="C.stdio" description="input and output operations on streams and files" />
+            <packages.package name="C.stdlib" description="standard library definitions" />
+            <packages.package name="C.string" description="string operations" />
+            <packages.package name="C.unistd" description="POSIX operating system API" />
+        </asdoc>
+    </target>
+    
+    <target name="after">
+        
+    </target>
+    
+</project>
