@@ -13,15 +13,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is [Open Source Virtual Machine.].
+ * The Original Code is [clib - C more or less standard Libraries].
  *
  * The Initial Developer of the Original Code is
- * Adobe System Incorporated.
- * Portions created by the Initial Developer are Copyright (C) 2004-2006
+ * Zwetan Kjukov <zwetan@gmail.com>.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *   Zwetan Kjukov <zwetan@gmail.com>.
+ *   
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -40,7 +40,17 @@
 package C.stdio
 {
     
+    /**
+     * input and output operations on streams and files
+     * @internal
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     [native(cls="::avmshell::StdioClass", methods="auto")]
+    [Inspectable(environment="none")]
     internal class __stdio
     {
         public native static function get FILENAME_MAX():int;
@@ -54,19 +64,30 @@ package C.stdio
         public native static function rename( oldname:String, newname:String ):int;  //int rename ( const char * oldname, const char * newname );
     }
 
-    /** Maximum size in bytes of the longest filename string that the implementation guarantees can be opened. */
+    /** Maximum size in bytes of the longest filename string that the implementation guarantees can be opened.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const FILENAME_MAX:int = __stdio.FILENAME_MAX;
     
-    /** Maximum number of bytes in a pathname. */
+    /** Maximum number of bytes in a pathname.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const PATH_MAX:int     = __stdio.PATH_MAX;
 
 
     /**
      * Remove a file.
      * 
-     * note:
+     * <p><b>note:</b></p>
+     * <p>
      * under WIN32, you can get a "File Permission Denied" if you try to remove a directory path
-     * you should instead use rmdir() in C.unistd
+     * you should instead use <code>rmdir()</code> in <code>C.unistd</code>
+     * </p>
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function remove( filename:String ):int
     {
@@ -75,6 +96,9 @@ package C.stdio
     
     /**
      * Rename a file.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function rename( oldname:String, newname:String ):int
     {

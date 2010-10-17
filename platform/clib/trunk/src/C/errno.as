@@ -13,15 +13,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is [Open Source Virtual Machine.].
+ * The Original Code is [clib - C more or less standard Libraries].
  *
  * The Initial Developer of the Original Code is
- * Adobe System Incorporated.
- * Portions created by the Initial Developer are Copyright (C) 2004-2006
+ * Zwetan Kjukov <zwetan@gmail.com>.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *   Zwetan Kjukov <zwetan@gmail.com>.
+ *   
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -40,7 +40,17 @@
 package C.errno
 {
     
+    /**
+     * system error numbers
+     * @internal
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     [native(cls="::avmshell::CErrnoClass", methods="auto")]
+    [Inspectable(environment="none")]
     internal class __errno
     {
         public native static function get EDOM():int;
@@ -101,169 +111,373 @@ package C.errno
         public native static function set errno( value:int ):void;
     }
 
-    /** Numerical argument out of domain. */
+    /** Numerical argument out of domain.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EDOM:int   = __errno.EDOM;
 
-    /** Illegal byte sequence. */
+    /** Illegal byte sequence.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EILSEQ:int = __errno.EILSEQ;
 
-    /** Result too large. */
+    /** Result too large.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ERANGE:int = __errno.ERANGE;
 
 
-    /** Operation not permitted. */
+    /** Operation not permitted.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EPERM:int        = __errno.EPERM;
 
-    /** No such file or directory. */
+    /** No such file or directory.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOENT:int       = __errno.ENOENT;
 
-    /** No such process. */
+    /** No such process.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ESRCH:int        = __errno.ESRCH;
 
-    /** Interrupted system call. */
+    /** Interrupted system call.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EINTR:int        = __errno.EINTR;
 
-    /** Input/output error. */
+    /** Input/output error.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EIO:int          = __errno.EIO;
 
-    /** Device not configured. */
+    /** Device not configured.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENXIO:int        = __errno.ENXIO;
 
-    /** Argument list too long. */
+    /** Argument list too long.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const E2BIG:int        = __errno.E2BIG;
 
-    /** Exec format error. */
+    /** Exec format error.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOEXEC:int      = __errno.ENOEXEC;
 
-    /** Bad file descriptor. */
+    /** Bad file descriptor.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EBADF:int        = __errno.EBADF;
 
-    /** No child processes. */
+    /** No child processes.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ECHILD:int       = __errno.ECHILD;
 
-    /** Resource temporarily unavailable. */
+    /** Resource temporarily unavailable.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EAGAIN:int       = __errno.EAGAIN;
 
-    /** Cannot allocate memory. */
+    /** Cannot allocate memory.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOMEM:int       = __errno.ENOMEM;
 
-    /** Permission denied. */
+    /** Permission denied.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EACCES:int       = __errno.EACCES;
 
-    /** Bad address. */
+    /** Bad address.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EFAULT:int       = __errno.EFAULT;
 
-    /** Device / Resource busy. */
+    /** Device / Resource busy.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EBUSY:int        = __errno.EBUSY;
 
-    /** File exists. */
+    /** File exists.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EEXIST:int       = __errno.EEXIST;
 
-    /** Cross-device link. */
+    /** Cross-device link.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EXDEV:int        = __errno.EXDEV;
 
-    /** Operation not supported by device. */
+    /** Operation not supported by device.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENODEV:int       = __errno.ENODEV;
 
-    /** Not a directory. */
+    /** Not a directory.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOTDIR:int      = __errno.ENOTDIR;
 
-    /** Is a directory. */
+    /** Is a directory.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EISDIR:int       = __errno.EISDIR;
 
-    /** Invalid argument. */
+    /** Invalid argument.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EINVAL:int       = __errno.EINVAL;
 
-    /** Too many open files in system. */
+    /** Too many open files in system.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENFILE:int       = __errno.ENFILE;
 
-    /** Too many open files. */
+    /** Too many open files.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EMFILE:int       = __errno.EMFILE;
 
-    /** Inappropriate ioctl for device. */
+    /** Inappropriate ioctl for device.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOTTY:int       = __errno.ENOTTY;
 
-    /** File too large. */
+    /** File too large.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EFBIG:int        = __errno.EFBIG;
 
-    /** No space left on device. */
+    /** No space left on device.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOSPC:int       = __errno.ENOSPC;
 
-    /** Illegal seek. */
+    /** Illegal seek.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ESPIPE:int       = __errno.ESPIPE;
 
-    /** Read-only file system. */
+    /** Read-only file system.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EROFS:int        = __errno.EROFS;
 
-    /** Too many links. */
+    /** Too many links.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EMLINK:int       = __errno.EMLINK;
 
-    /** Broken pipe. */
+    /** Broken pipe.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EPIPE:int        = __errno.EPIPE;
 
-    /** Resource deadlock avoided. */
+    /** Resource deadlock avoided.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EDEADLK:int      = __errno.EDEADLK;
 
-    /** File name too long. */
+    /** File name too long.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENAMETOOLONG:int = __errno.ENAMETOOLONG;
 
-    /** No locks available. */
+    /** No locks available.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOLCK:int       = __errno.ENOLCK;
 
-    /** Function not implemented. */
+    /** Function not implemented.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOSYS:int       = __errno.ENOSYS;
 
-    /** Directory not empty. */
+    /** Directory not empty.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOTEMPTY:int    = __errno.ENOTEMPTY;
 
 
-    /** Network is down. */
+    /** Network is down.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENETDOWN:int     = __errno.ENETDOWN;
 
-    /** Network is unreachable. */
+    /** Network is unreachable.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENETUNREACH:int  = __errno.ENETUNREACH;
 
-    /** Network dropped connection on reset. */
+    /** Network dropped connection on reset.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENETRESET:int    = __errno.ENETRESET;
 
-    /** Software caused connection abort. */
+    /** Software caused connection abort.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ECONNABORTED:int = __errno.ECONNABORTED;
 
-    /** Connection reset by peer. */
+    /** Connection reset by peer.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ECONNRESET:int   = __errno.ECONNRESET;
 
-    /** No buffer space available. */
+    /** No buffer space available.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOBUFS:int      = __errno.ENOBUFS;
 
-    /** Socket is already connected. */
+    /** Socket is already connected.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EISCONN:int      = __errno.EISCONN;
 
-    /** Socket is not connected. */
+    /** Socket is not connected.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ENOTCONN:int     = __errno.ENOTCONN;
 
-    /** Can't send after socket shutdown. */
+    /** Can't send after socket shutdown.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ESHUTDOWN:int    = __errno.ESHUTDOWN;
 
-    /** Too many references: can't splice. */
+    /** Too many references: can't splice.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ETOOMANYREFS:int = __errno.ETOOMANYREFS;
 
-    /** Operation timed out. */
+    /** Operation timed out.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ETIMEDOUT:int    = __errno.ETIMEDOUT;
 
-    /** Connection refused. */
+    /** Connection refused.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const ECONNREFUSED:int = __errno.ECONNREFUSED;
     
-
-
+    /**
+     * @private
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public function get errno():int
     {
         return __errno.errno;
     }
 
+    /**
+     * @private
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public function set errno( value:int ):void
     {
         __errno.errno = value;
     }
     
+    /**
+     * Error return value.
+     * 
+     * <p>
+     * Designates an object that is assigned a value greater than zero on certain library errors.
+     * </p>
+     * 
+     * <p><b>note:</b></p>
+     * <p>
+     * Use <code>errno</code>, <code>errno_</code> is a placeholder for asdoc.
+     * </p>
+     * <p>
+     * In AS3 you use <code>errno</code> as a getter/setter.
+     * </p>
+     * <p>
+     * <code>public function get errno():int</code>
+     * </p>
+     * <p>
+     * <code>public function set errno( value:int ):void</code>
+     * </p>
+     * 
+     * @example basic usage
+     * <listing version="3.0">
+     *  import C.errno.&#42;;
+     *  import C.string.&#42;;
+     *  import avmplus.FileSystem;
+     *  
+     *  var filename:String = "dummy_file";
+     *  
+     *  if( !FileSystem.exists( filename ) )
+     *  {
+     *      trace( "errno = " + errno ); //errno = 2
+     *      trace( strerror( errno ) );  //No such file or directory
+     *  }
+     * </listing>
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    [Inspectable(environment="none")]
+    public function errno_():int
+    {
+        return 0;
+    }
     
 }

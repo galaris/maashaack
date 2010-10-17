@@ -13,15 +13,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is [Open Source Virtual Machine.].
+ * The Original Code is [clib - C more or less standard Libraries].
  *
  * The Initial Developer of the Original Code is
- * Adobe System Incorporated.
- * Portions created by the Initial Developer are Copyright (C) 2004-2006
+ * Zwetan Kjukov <zwetan@gmail.com>.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *   Zwetan Kjukov <zwetan@gmail.com>.
+ *   
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -41,7 +41,16 @@ package C.string
 {
     import C.unistd.*;
     
+    /**
+     * @internal
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     [native(cls="::avmshell::CStringClass", methods="auto")]
+    [Inspectable(environment="none")]
     internal class __string
     {
         public native static function strerror( errnum:int ):String;   //char *strerror(int errcode);
@@ -50,6 +59,9 @@ package C.string
 
     /**
      * Accepts an error number argument errnum and returns the corresponding message string.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function strerror( errnum:int ):String
     {
@@ -58,6 +70,9 @@ package C.string
     
     /**
      * Find length of string.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function strlen( str:String ):uint
     {
@@ -67,12 +82,16 @@ package C.string
     /**
      * Returns a string describing file modes.
      * 
-     * note:
-     * void strmode(mode_t mode char *bp);
-     * void strmode(int mode, char *bp); //OSX
+     * <p><b>note:</b></p>
+     * <p><code>void strmode(mode_t mode char *bp);</code></p>
+     * <p><code>void strmode(int mode, char *bp); //OSX</code></p>
+     * <p>
      * not part of the C standard lib, but part of GNU libc
-     * and pretty usefull function so we added it, and
-     * yeah it's all AS3 here, no native implementation :p
+     * and pretty usefull function so we added it.
+     * </p>
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function strmode( mode:int ):String
     {

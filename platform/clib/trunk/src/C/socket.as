@@ -13,15 +13,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is [Open Source Virtual Machine.].
+ * The Original Code is [clib - C more or less standard Libraries].
  *
  * The Initial Developer of the Original Code is
- * Adobe System Incorporated.
- * Portions created by the Initial Developer are Copyright (C) 2004-2006
+ * Zwetan Kjukov <zwetan@gmail.com>.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *   Zwetan Kjukov <zwetan@gmail.com>.
+ *   
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -40,7 +40,17 @@
 package C.socket
 {
     
+    /**
+     * socket constants and function helpers
+     * @internal
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     [native(cls="::avmshell::CSocketClass", methods="auto")]
+    [Inspectable(environment="none")]
     internal class __socket
     {
         public native static function get SOCK_RAW():int;
@@ -90,122 +100,230 @@ package C.socket
         public native static function __gethostbyname( hostname:String, numeric:Boolean ):Array; //struct hostent *gethostbyname(const char *name);
     }
 
-    /** Raw Protocol Interface. */
+    /** Raw Protocol Interface.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SOCK_RAW:int    = __socket.SOCK_RAW;
 
-    /** Byte-stream socket. */
+    /** Byte-stream socket.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SOCK_STREAM:int = __socket.SOCK_STREAM;
 
-    /** Datagram socket. */
+    /** Datagram socket.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SOCK_DGRAM:int  = __socket.SOCK_DGRAM;
 
 
-    /** Socket is accepting connections. */
+    /** Socket is accepting connections.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_ACCEPTCONN:int = __socket.SO_ACCEPTCONN;
 
-    /** Transmission of broadcast messages is supported. */
+    /** Transmission of broadcast messages is supported.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_BROADCAST:int  = __socket.SO_BROADCAST;
 
-    /** Bypass normal routing. */
+    /** Bypass normal routing.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_DONTROUTE:int  = __socket.SO_DONTROUTE;
 
-    /** Connections are kept alive with periodic messages. */
+    /** Connections are kept alive with periodic messages.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_KEEPALIVE:int  = __socket.SO_KEEPALIVE;
 
-    /** Out-of-band data is transmitted in line. */
+    /** Out-of-band data is transmitted in line.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_OOBINLINE:int  = __socket.SO_OOBINLINE;
 
-    /** Receive buffer size. */
+    /** Receive buffer size.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_RCVBUF:int     = __socket.SO_RCVBUF;
 
-    /** Receive timeout. */
+    /** Receive timeout.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_RCVTIMEO:int   = __socket.SO_RCVTIMEO;
 
-    /** Reuse of local addresses is supported. */
+    /** Reuse of local addresses is supported.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_REUSEADDR:int  = __socket.SO_REUSEADDR;
 
-    /** Send buffer size. */
+    /** Send buffer size.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_SNDBUF:int     = __socket.SO_SNDBUF;
 
-    /** Send timeout. */
+    /** Send timeout.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_SNDTIMEO:int   = __socket.SO_SNDTIMEO;
 
-    /** Socket type. */
+    /** Socket type.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SO_TYPE:int       = __socket.SO_TYPE;
     
 
-    /** The maximum backlog queue length. */
+    /** The maximum backlog queue length.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SOMAXCONN:int = __socket.SOMAXCONN;
 
 
-    /** Control data truncated. */
+    /** Control data truncated.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_CTRUNC:int    = __socket.MSG_CTRUNC;
 
-    /** Send without using routing tables. */
+    /** Send without using routing tables.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_DONTROUTE:int = __socket.MSG_DONTROUTE;
 
-    /** Out-of-band data. */
+    /** Out-of-band data.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_OOB:int       = __socket.MSG_OOB;
 
-    /** Leave received data in queue. */
+    /** Leave received data in queue.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_PEEK:int      = __socket.MSG_PEEK;
 
-    /** Normal data truncated. */
+    /** Normal data truncated.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_TRUNC:int     = __socket.MSG_TRUNC;
 
-    /** Attempt to fill the read buffer. */
+    /** Attempt to fill the read buffer.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const MSG_WAITALL:int   = __socket.MSG_WAITALL;
 
 
-    /** Internet domain sockets for use with IPv4 addresses. */
+    /** Internet domain sockets for use with IPv4 addresses.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const AF_INET:int   = __socket.AF_INET;
 
-    /** Internet domain sockets for use with IPv6 addresses. */
+    /** Internet domain sockets for use with IPv6 addresses.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const AF_INET6:int  = __socket.AF_INET6;
 
-    /** Unspecified. */
+    /** Unspecified.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const AF_UNSPEC:int = __socket.AF_UNSPEC;
 
 
-    /** Disables further receive operations. */
+    /** Disables further receive operations.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SHUT_RD:int   = __socket.SHUT_RD;
 
-    /** Disables further send and receive operations. */
+    /** Disables further send and receive operations.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SHUT_RDWR:int = __socket.SHUT_RDWR;
 
-    /** Disables further send operations. */
+    /** Disables further send operations.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const SHUT_WR:int   = __socket.SHUT_WR;
 
 
-    /** Internet protocol. */
+    /** Internet protocol.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_IP:int   = __socket.IPPROTO_IP;
 
-    /** Internet Protocol Version 6. */
+    /** Internet Protocol Version 6.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_IPV6:int = __socket.IPPROTO_IPV6;
 
-    /** Control message protocol. */
+    /** Control message protocol.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_ICMP:int = __socket.IPPROTO_ICMP;
 
-    /** Raw IP Packets Protocol. */
+    /** Raw IP Packets Protocol.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_RAW:int  = __socket.IPPROTO_RAW;
 
-    /** Transmission control protocol. */
+    /** Transmission control protocol.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_TCP:int  = __socket.IPPROTO_TCP;
 
-    /** User datagram protocol. */
+    /** User datagram protocol.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const IPPROTO_UDP:int  = __socket.IPPROTO_UDP;
 
 
-    /** IPv4 local host address. */
+    /** IPv4 local host address.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const INADDR_ANY:int       = __socket.INADDR_ANY;
 
-    /** IPv4 broadcast address. */
+    /** IPv4 broadcast address.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const INADDR_BROADCAST:int = __socket.INADDR_BROADCAST;
 
 
     /**
      * Network host database functions
      * which returns a list of hostnames or IP addresses by providing an IP address.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function gethostbyaddr( addr:String, numeric:Boolean = false ):Array
     {
@@ -215,6 +333,9 @@ package C.socket
     /**
      * Network host database functions
      * which returns a list of hostnames or IP addresses by providing a hostname.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function gethostbyname( hostname:String, numeric:Boolean = false ):Array
     {

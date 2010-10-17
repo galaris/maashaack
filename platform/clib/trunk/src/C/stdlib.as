@@ -13,15 +13,15 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
- * The Original Code is [Open Source Virtual Machine.].
+ * The Original Code is [clib - C more or less standard Libraries].
  *
  * The Initial Developer of the Original Code is
- * Adobe System Incorporated.
- * Portions created by the Initial Developer are Copyright (C) 2004-2006
+ * Zwetan Kjukov <zwetan@gmail.com>.
+ * Portions created by the Initial Developer are Copyright (C) 2010
  * the Initial Developer. All Rights Reserved.
  *
  * Contributor(s):
- *   Zwetan Kjukov <zwetan@gmail.com>.
+ *   
  *
  * Alternatively, the contents of this file may be used under the terms of
  * either the GNU General Public License Version 2 or later (the "GPL"), or
@@ -40,7 +40,17 @@
 package C.stdlib
 {
     
+    /**
+     * standard library definitions
+     * @internal
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     [native(cls="::avmshell::StdlibClass", methods="auto")]
+    [Inspectable(environment="none")]
     internal class __stdlib
     {
         public native static function get EXIT_SUCCESS():int;
@@ -55,14 +65,23 @@ package C.stdlib
         public native static function __system( command:String ):int;  //int system(const char *s);
     }
     
-    /** Success termination code. */
+    /** Success termination code.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EXIT_SUCCESS:int = __stdlib.EXIT_SUCCESS;
 
-    /** Failure termination code.*/
+    /** Failure termination code.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     public const EXIT_FAILURE:int = __stdlib.EXIT_FAILURE;
     
     /**
      * Cause abnormal program termination.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function abort():void
     {
@@ -71,6 +90,9 @@ package C.stdlib
     
     /**
      * Terminate program execution.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function exit( status:int = -1 ):void
     {
@@ -80,6 +102,9 @@ package C.stdlib
 
     /**
      * Retrieve an environment variable.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function getenv( name:String ):String
     {
@@ -88,6 +113,9 @@ package C.stdlib
 
     /**
      * Add or change an environment variable.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function setenv( name:String, value:String, overwrite:Boolean = false ):int
     {
@@ -99,6 +127,9 @@ package C.stdlib
 
     /**
      * Remove an environment variable.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function unsetenv( name:String ):int
     {
@@ -107,6 +138,9 @@ package C.stdlib
 
     /**
      * Resolve a pathname.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function realpath( path:String ):String
     {
@@ -115,6 +149,9 @@ package C.stdlib
 
     /**
      * Issue a command.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
      */
     public function system( command:String ):int
     {
