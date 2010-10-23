@@ -45,11 +45,12 @@ package system.ioc
             
             suite.addTestSuite( MagicReferenceTest ) ;
             suite.addTestSuite( ObjectOrderTest ) ;
+            suite.addTestSuite( ObjectScopeTest ) ;
             suite.addTestSuite( ParametersTest ) ;
             suite.addTestSuite( TypeExpressionTest ) ;
             suite.addTestSuite( TypePolicyTest ) ;
             
             return suite;
         }
-	}
+    }
 }
