@@ -32,6 +32,7 @@
     <component id="graphics.colors:CMYK"          class="graphics.colors.CMYK" />
     <component id="graphics.colors:CMYK2CMY"      class="graphics.colors.CMYK2CMY" />
     
+    <component id="graphics.colors:ColorMatrix"   class="graphics.colors.ColorMatrix" />
     <component id="graphics.colors:ColorSpace"    class="graphics.colors.ColorSpace" />
     
     <component id="graphics.colors:HSL"           class="graphics.colors.HSL" />
