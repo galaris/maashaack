@@ -92,7 +92,7 @@ package system.ioc
      * 
      * dispatcher1.dispatchEvent( new Event( "change" ) ) ; // [object Listener] handleEvent [Event type="change" bubbles=false cancelable=false eventPhase=2]
      * 
-     * // 2 - target the listener object if implements the vegas.events.EventListener interface.
+     * // 2 - target the listener object if implements the system.events.EventListener interface.
      * 
      * var dispatcher2:EventDispatcher = factory.getObject("dispatcher2") ;
      * 
@@ -131,7 +131,7 @@ package system.ioc
          * @param useCapture Determinates if the event flow use capture or not.
          * @param priority Determines the priority level of the event listener.
          * @param useWeakReference Indicates if the listener is a weak reference.
-         * @param order Indicates the order to register the listener "after" or "before" (see the vegas.ioc.ObjectOrder enumeration class).
+         * @param order Indicates the order to register the listener "after" or "before" (see the system.ioc.ObjectOrder enumeration class).
          */
         public function ObjectListener( dispatcher:String , type:String , method:String=null , useCapture:Boolean = false, priority:int = 0, useWeakReference:Boolean = false , order:String = "after" )
         {
