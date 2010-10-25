@@ -104,5 +104,10 @@ package system.ioc
             receiver.order = "unknow" ;
             assertEquals( "after" , receiver.order ) ;
         }
+        
+        public function testToString():void
+        {
+            assertEquals("[ObjectReceiver signal:\"mySignal\" slot:\"mySlot\" order:\"after\"]" , receiver.toString() ) ;
+        }
     }
 }
