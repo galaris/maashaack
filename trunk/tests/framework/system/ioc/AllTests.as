@@ -44,6 +44,7 @@ package system.ioc
             var suite:TestSuite = new TestSuite( "system.ioc package" );
             
             suite.addTestSuite( MagicReferenceTest ) ;
+            suite.addTestSuite( ObjectAttributeTest ) ;
             suite.addTestSuite( ObjectOrderTest ) ;
             suite.addTestSuite( ObjectScopeTest ) ;
             suite.addTestSuite( ParametersTest ) ;
