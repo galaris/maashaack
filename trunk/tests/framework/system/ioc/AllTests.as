@@ -46,6 +46,7 @@ package system.ioc
             suite.addTestSuite( MagicReferenceTest ) ;
             suite.addTestSuite( ObjectAttributeTest ) ;
             suite.addTestSuite( ObjectMethodTest ) ;
+            suite.addTestSuite( ObjectPropertyTest ) ;
             suite.addTestSuite( ObjectOrderTest ) ;
             suite.addTestSuite( ObjectScopeTest ) ;
             suite.addTestSuite( ParametersTest ) ;
