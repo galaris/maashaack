@@ -53,6 +53,7 @@ package system.ioc
             suite.addTestSuite( ObjectReceiverTest ) ;
             suite.addTestSuite( ObjectScopeTest ) ;
             suite.addTestSuite( ParametersTest ) ;
+            suite.addTestSuite( TypeAliasesTest ) ;
             suite.addTestSuite( TypeExpressionTest ) ;
             suite.addTestSuite( TypePolicyTest ) ;
             
