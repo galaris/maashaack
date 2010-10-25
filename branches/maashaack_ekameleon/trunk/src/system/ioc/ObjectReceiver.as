@@ -46,7 +46,7 @@ package system.ioc
          * @param slot The id of the receiver of function to connect in the IoC factory.
          * @param priority Determines the priority level of the receiver.
          * @param autoDisconnect Indicate if the receiver is auto disconnect in the signal when is used.
-         * @param order Indicates the order to connect the receiver "after" or "before" (see the vegas.ioc.ObjectOrder enumeration class).
+         * @param order Indicates the order to connect the receiver "after" or "before" (see the system.ioc.ObjectOrder enumeration class).
          */
         public function ObjectReceiver( signal:String , slot:String = null , priority:int = 0 , autoDisconnect:Boolean = false , order:String = "after" )
         {
