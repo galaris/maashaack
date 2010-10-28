@@ -43,59 +43,59 @@ package system.ioc
             super(name);
         }
         
-        public var args:ObjectArgument ;
+        public var arg:ObjectArgument ;
         
         public function setUp():void
         {
-            args = new ObjectArgument( "hello world" ) ;
+            arg = new ObjectArgument( "hello world" ) ;
         }
         
         public function tearDown():void
         {
-            args = null ;
+            arg = null ;
         }
         
         public function testConstructor():void
         {
-            assertNotNull( args ) ;
-            assertEquals("hello world", args.value) ;
-            assertEquals("value", args.policy) ;
-            assertNull( args.evaluators ) ;
+            assertNotNull( arg ) ;
+            assertEquals("hello world", arg.value) ;
+            assertEquals("value", arg.policy) ;
+            assertNull( arg.evaluators ) ;
         }
         
         public function testPolicy():void
         {
-            assertEquals("value", args.policy) ;
+            assertEquals("value", arg.policy) ;
             
-            args.policy = ObjectAttribute.REFERENCE ;
-            assertEquals("ref", args.policy) ;
+            arg.policy = ObjectAttribute.REFERENCE ;
+            assertEquals("ref", arg.policy) ;
             
-            args.policy = ObjectAttribute.CONFIG ;
-            assertEquals("config", args.policy) ;
+            arg.policy = ObjectAttribute.CONFIG ;
+            assertEquals("config", arg.policy) ;
             
-            args.policy = ObjectAttribute.LOCALE ;
-            assertEquals("locale", args.policy) ;
+            arg.policy = ObjectAttribute.LOCALE ;
+            assertEquals("locale", arg.policy) ;
             
-            args.policy = ObjectAttribute.VALUE ;
-            assertEquals( "value" , args.policy ) ;
+            arg.policy = ObjectAttribute.VALUE ;
+            assertEquals( "value" , arg.policy ) ;
             
-            args.policy = "unknow" ;
-            assertEquals( "value" , args.policy ) ;
+            arg.policy = "unknow" ;
+            assertEquals( "value" , arg.policy ) ;
         }
         
         public function testToString():void
         {
-            args.policy = ObjectAttribute.REFERENCE ;
-            assertEquals("[ObjectArgument policy:ref]", args.toString() ) ;
+            arg.policy = ObjectAttribute.REFERENCE ;
+            assertEquals("[ObjectArgument policy:ref]", arg.toString() ) ;
             
-            args.policy = ObjectAttribute.CONFIG ;
-            assertEquals("[ObjectArgument policy:config]", args.toString() ) ;
+            arg.policy = ObjectAttribute.CONFIG ;
+            assertEquals("[ObjectArgument policy:config]", arg.toString() ) ;
             
-            args.policy = ObjectAttribute.LOCALE ;
-            assertEquals("[ObjectArgument policy:locale]", args.toString()) ;
+            arg.policy = ObjectAttribute.LOCALE ;
+            assertEquals("[ObjectArgument policy:locale]", arg.toString()) ;
             
-            args.policy = ObjectAttribute.VALUE ;
-            assertEquals( "[ObjectArgument policy:value]" , args.toString() ) ;
+            arg.policy = ObjectAttribute.VALUE ;
+            assertEquals( "[ObjectArgument policy:value]" , arg.toString() ) ;
         }
     }
 }
