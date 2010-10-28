@@ -35,6 +35,8 @@
 
 package system.ioc.builders
 {
+    import core.dump ;
+    
     import system.ioc.ObjectAttribute ;
     import system.ioc.ObjectReceiver ;
     import system.ioc.ObjectOrder ;
@@ -80,7 +82,7 @@ package system.ioc.builders
                     ( 
                         signal , 
                         def[ ObjectReceiver.SLOT ] as String ,
-                        def[ ObjectReceiver.PRIORITY ] is int ? def[ ObjectListener.PRIORITY ] as int : 0 , 
+                        def[ ObjectReceiver.PRIORITY ] is int ? def[ ObjectReceiver.PRIORITY ] as int : 0 , 
                         def[ ObjectReceiver.AUTO_DISCONNECT ] == true ,
                         ( def[ ObjectReceiver.ORDER ] == ObjectOrder.BEFORE ) ? ObjectOrder.BEFORE : ObjectOrder.AFTER
                     ) 

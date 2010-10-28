@@ -43,7 +43,9 @@ package system.ioc.builders
         {
             var suite:TestSuite = new TestSuite( "system.ioc.builders package" );
             
-            suite.addTestSuite( createArgumentsTest ) ;
+            suite.addTestSuite( createArgumentsTest ) ;            suite.addTestSuite( createListenersTest ) ;
+            
+            suite.addTestSuite( loggerTest ) ;
             
             return suite;
         }
