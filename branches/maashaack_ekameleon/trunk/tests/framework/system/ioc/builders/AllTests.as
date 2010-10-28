@@ -31,35 +31,19 @@
   and other provisions required by the LGPL or the GPL. If you do not delete
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
-*/
-package system.ioc  
+ */
+package system.ioc.builders  
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
-    import system.ioc.builders.AllTests;
     
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite( "system.ioc package" );
+            var suite:TestSuite = new TestSuite( "system.ioc.builders package" );
             
-            suite.addTestSuite( MagicReferenceTest ) ;
-            suite.addTestSuite( ObjectArgumentTest ) ;
-            suite.addTestSuite( ObjectAttributeTest ) ;
-            suite.addTestSuite( ObjectListenerTest ) ;
-            suite.addTestSuite( ObjectMethodTest ) ;
-            suite.addTestSuite( ObjectOrderTest ) ;
-            suite.addTestSuite( ObjectPropertyTest ) ;
-            suite.addTestSuite( ObjectReceiverTest ) ;
-            suite.addTestSuite( ObjectScopeTest ) ;
-            suite.addTestSuite( ParametersTest ) ;
-            suite.addTestSuite( TypeAliasesTest ) ;
-            suite.addTestSuite( TypeExpressionTest ) ;
-            suite.addTestSuite( TypePolicyTest ) ;
-            
-            suite.addTest( system.ioc.builders.AllTests.suite() );
+            suite.addTestSuite( createArgumentsTest ) ;
             
             return suite;
         }

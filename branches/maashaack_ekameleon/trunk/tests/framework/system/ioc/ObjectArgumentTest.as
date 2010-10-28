@@ -82,5 +82,20 @@ package system.ioc
             args.policy = "unknow" ;
             assertEquals( "value" , args.policy ) ;
         }
+        
+        public function testToString():void
+        {
+            args.policy = ObjectAttribute.REFERENCE ;
+            assertEquals("[ObjectArgument policy:ref]", args.toString() ) ;
+            
+            args.policy = ObjectAttribute.CONFIG ;
+            assertEquals("[ObjectArgument policy:config]", args.toString() ) ;
+            
+            args.policy = ObjectAttribute.LOCALE ;
+            assertEquals("[ObjectArgument policy:locale]", args.toString()) ;
+            
+            args.policy = ObjectAttribute.VALUE ;
+            assertEquals( "[ObjectArgument policy:value]" , args.toString() ) ;
+        }
     }
 }

@@ -93,6 +93,15 @@ package system.ioc
         public var value:* ;
         
         /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return "[ObjectArgument policy:" + policy + "]" ;
+        }
+        
+        /**
          * @private
          */
         private var _policy:String ;
