@@ -57,7 +57,7 @@ package system.ioc
      *     type       : "flash.text.TextField" ,
      *     properties :
      *     [
-     *         { name:"defaultTextFormat" , value:new TextFormat("verdana", 11) } ,
+     *         { name:"defaultTextFormat" , value:new TextFormat("Verdana", 11) } ,
      *         { name:"selectable"        , value:false                         } ,
      *         { name:"text"              , value:"hello world"                 } ,
      *         { name:"textColor"         , value:0xF7F744                      } ,
