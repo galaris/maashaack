@@ -35,6 +35,8 @@
 
 package system.ioc.builders
 {
+    import core.dump ;
+    
     import system.ioc.ObjectAttribute ;
     import system.ioc.ObjectProperty ;
     
