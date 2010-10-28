@@ -37,12 +37,12 @@ package system.ioc.builders
 {
     import system.ioc.ObjectAttribute ;
     import system.ioc.IObjectFactoryStrategy ;
-    import system.ioc.strategy.ObjectFactoryMethod ;
-    import system.ioc.strategy.ObjectFactoryProperty ;
-    import system.ioc.strategy.ObjectStaticFactoryMethod ;
-    import system.ioc.strategy.ObjectStaticFactoryProperty ;
-    import system.ioc.strategy.ObjectFactoryValue ;
-    import system.ioc.strategy.ObjectFactoryReference ;
+    import system.ioc.strategies.ObjectFactoryReference;
+    import system.ioc.strategies.ObjectFactoryValue;
+    import system.ioc.strategies.ObjectStaticFactoryProperty;
+    import system.ioc.strategies.ObjectFactoryProperty;
+    import system.ioc.strategies.ObjectStaticFactoryMethod;
+    import system.ioc.strategies.ObjectFactoryMethod;
     
     /**
      * This helper create an IObjectFactoryStrategy object with a generic object in the IoC context.

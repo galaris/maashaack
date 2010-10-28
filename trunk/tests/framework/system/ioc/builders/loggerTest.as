@@ -35,11 +35,23 @@
 
 package system.ioc.builders
 {
-    import system.logging.Log;
-    import system.logging.Logger;
-    
-    /**
-     * The logger of the system.ioc.builders package.
-     */
-    public const logger:Logger = Log.getLogger( "system.ioc.builders.ObjectBuilder" ) ;
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class loggerTest extends TestCase
+    {
+        public function loggerTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public function testSingleton():void
+        {
+            assertNotNull( logger ) ;
+        }
+        
+        public function testChannel():void
+        {
+            assertEquals( "system.ioc.builders.ObjectBuilder" , logger.channel );
+        }
+    }
 }

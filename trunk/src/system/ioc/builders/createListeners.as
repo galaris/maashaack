@@ -35,6 +35,8 @@
 
 package system.ioc.builders
 {
+    import core.dump ;
+    
     import system.ioc.ObjectAttribute ;
     import system.ioc.ObjectListener ;
     import system.ioc.ObjectOrder ;
@@ -58,12 +60,12 @@ package system.ioc.builders
         }
         
         var def:Object ;
-        var listeners:Array = [] ;
         var dispatcher:String ;
         var type:String ;
         
-        var id:String = factory[ ObjectAttribute.OBJECT_ID ] as String ;
+        var listeners:Array = [] ;
         
+        var id:String = factory[ ObjectAttribute.OBJECT_ID ] as String ;
         var len:int   = a.length ;
         
         for ( var i:int ; i<len ; i++ )
