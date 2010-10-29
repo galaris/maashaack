@@ -36,61 +36,60 @@
 package system.ioc.builders
 {
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.ioc.ObjectListener;
     
-    public class createListenersTest extends TestCase
+    import system.ioc.ObjectOrder;
+    import system.ioc.ObjectReceiver;
+    
+    public class createReceiversTest extends TestCase
     {
-        public function createListenersTest(name:String = "")
+        public function createReceiversTest(name:String = "")
         {
             super(name);
         }
         
-        public var listeners:Array ;
+        public var receivers:Array ;
         
         public function setUp():void
         {
-            listeners = 
+            receivers = 
             [
-                { dispatcher:"dispatcher1" , type:"change" , method:"handleEvent" , useCapture:true, priority:3 , useWeakReference:true } ,
-                { unknow:"test" } ,
-                { dispatcher:"dispatcher2" , type:"update" } 
+                { signal:"signal1" , slot:"slot1" , priority:3 , autoDisconnect:true , order:ObjectOrder.BEFORE } ,
+                { unknow:"test"    , slot:"slot2" } , 
+                { signal:"signal2" }
             ];
-            listeners = createListeners( listeners ) ;
+            receivers = createReceivers( receivers ) ;
         }
         
         public function tearDown():void
         {
-            listeners = null ;
+            receivers = null ;
         }
         
-        public function testCreateListenersLength():void
+        public function testCreateReceiversLength():void
         {
-            assertEquals( 2 , listeners.length , "#0") ;
+            assertEquals( 2 , receivers.length , "#0") ;
         }
         
-        public function testCreateListeners():void
+        public function testCreateReceivers():void
         {
-            var listener:ObjectListener = listeners[0] as ObjectListener ;
-            assertNotNull(listener, "#1") ;
-            assertEquals( "dispatcher1", listener.dispatcher , "#2" ) ;
-            assertEquals( "change", listener.type , "#2" ) ;
-            assertEquals( "handleEvent", listener.method , "#3" ) ;
-            assertEquals( 3, listener.priority , "#4" ) ;
-            assertTrue( listener.useCapture , "#5" ) ;
-            assertTrue( listener.useWeakReference , "#6" ) ;
+            var receiver:ObjectReceiver = receivers[0] as ObjectReceiver ;
+            assertNotNull( receiver, "#1") ;
+            assertEquals( "signal1", receiver.signal , "#2" ) ;
+            assertEquals( "slot1"  , receiver.slot , "#3" ) ;
+            assertEquals( 3, receiver.priority , "#4" ) ;
+            assertTrue( receiver.autoDisconnect , "#5" ) ;
+            assertEquals( "before", receiver.order , "#6" ) ;
         }
         
-        public function testCreateListenersMinimalDef():void
+        public function testCreateReceiversMinimalDef():void
         {
-            var listener:ObjectListener = listeners[1] as ObjectListener ;
-            assertNotNull(listener, "#1") ;
-            assertEquals( "dispatcher2", listener.dispatcher , "#2" ) ;
-            assertEquals( "update", listener.type , "#2" ) ;
-            assertNull( listener.method , "#3" ) ;
-            assertEquals( 0, listener.priority , "#4" ) ;
-            assertFalse( listener.useCapture , "#5" ) ;
-            assertFalse( listener.useWeakReference , "#6" ) ;
+            var receiver:ObjectReceiver = receivers[1] as ObjectReceiver ;
+            assertNotNull( receiver, "#1") ;
+            assertEquals( "signal2", receiver.signal , "#2" ) ;
+            assertNull( receiver.slot , "#3" ) ;
+            assertEquals( 0, receiver.priority , "#4" ) ;
+            assertFalse( receiver.autoDisconnect , "#5" ) ;
+            assertEquals( "after", receiver.order , "#6" ) ;
         }
     }
 }
