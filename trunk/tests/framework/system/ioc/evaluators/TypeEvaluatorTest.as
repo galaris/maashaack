@@ -56,8 +56,8 @@ package system.ioc.evaluators
         {
             var config:ObjectConfig = new ObjectConfig() ;
             
-            config.typePolicy       = TypePolicy.ALL ; 
-            config.typeAliases      =
+            config.typePolicy = TypePolicy.ALL ; 
+            config.typeAliases =
             [
                 { alias:"ObjectConfig" , type:"system.ioc.ObjectConfig" }
             ] ;
