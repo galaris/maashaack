@@ -44,7 +44,8 @@ package system.ioc.evaluators
             var suite:TestSuite = new TestSuite( "system.ioc.evaluators package" );
             
             suite.addTestSuite( ConfigEvaluatorTest ) ;
-            suite.addTestSuite( LocaleEvaluatorTest ) ;            
+            suite.addTestSuite( LocaleEvaluatorTest ) ;
+            suite.addTestSuite( TypeEvaluatorTest   ) ;            
             return suite;
         }
     }

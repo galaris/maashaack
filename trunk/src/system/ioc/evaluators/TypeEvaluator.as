@@ -67,7 +67,7 @@ package system.ioc.evaluators
      * 
      * var evaluator:TypeEvaluator = new TypeEvaluator( conf ) ;
      * 
-     * trace( evaluator.eval( "CoreObject"  ) ) ; // [class MovieClip]
+     * trace( evaluator.eval( "MovieClip"   ) ) ; // [class MovieClip]
      * trace( evaluator.eval( "{HashMap}"   ) ) ; // [class HashMap]
      * trace( evaluator.eval( "test"        ) ) ; // null
      * trace( evaluator.eval( "{map}.Test"  ) ) ; // null
