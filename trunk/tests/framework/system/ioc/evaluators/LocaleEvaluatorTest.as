@@ -34,20 +34,19 @@
 */
 package system.ioc.evaluators
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
 
     import system.evaluators.PropertyEvaluator;
     import system.ioc.ObjectConfig;
-    
-    public class ConfigEvaluatorTest extends TestCase
+
+    public class LocaleEvaluatorTest extends TestCase
     {
-        public function ConfigEvaluatorTest(name:String = "")
+        public function LocaleEvaluatorTest(name:String = "")
         {
             super(name);
         }
         
-        public var evaluator:ConfigEvaluator ;
+        public var evaluator:LocaleEvaluator ;
         
         public var init:Object ;
         
@@ -56,19 +55,19 @@ package system.ioc.evaluators
             init =
             {
                 message : "hello world" ,
+                title   : "my title"    ,
                 menu    :
                 {
-                    title : "my title" ,
-                    count : 10 ,
-                    data  : [ "item1" , "item2", "item3" ]
+                    title : "my menu title" ,
+                    label : "my menu label"
                 }
             };
             
             var configurator:ObjectConfig = new ObjectConfig() ;
             
-            configurator.config = init ;
+            configurator.locale = init ;
             
-            evaluator = new ConfigEvaluator( configurator ) ;
+            evaluator = new LocaleEvaluator( configurator ) ;
         }
         
         public function tearDown():void
@@ -89,12 +88,12 @@ package system.ioc.evaluators
             
             assertEquals( "hello world" , evaluator.eval( "message" ) ) ;
             
+            assertEquals( "my title" , evaluator.eval( "title" ) ) ;
+            
             assertEquals( init.menu , evaluator.eval( "menu" ) ) ;
             
-            assertEquals( "my title" , evaluator.eval( "menu.title" ) ) ;
-            assertEquals( 10 , evaluator.eval( "menu.count" ) ) ; // 10
-            
-            ArrayAssert.assertEquals( init.menu.data , evaluator.eval( "menu.data"  ) ) ;
+            assertEquals( "my menu title" , evaluator.eval( "menu.title" ) ) ;
+            assertEquals( "my menu label" , evaluator.eval( "menu.label" ) ) ;
         }
     }
 }
