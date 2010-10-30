@@ -42,7 +42,7 @@ package examples
     import flash.display.Sprite;
     
     /**
-     * Illustrates the usage of the custom factory strategies in the IoC factory.
+     * Show the usage of the identify attribute in the object definitions.
      */
     public class ObjectFactory03Example extends Sprite 
     {

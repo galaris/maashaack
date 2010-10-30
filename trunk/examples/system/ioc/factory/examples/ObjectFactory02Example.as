@@ -44,7 +44,7 @@ package examples
     [SWF(width="240", height="220", frameRate="24", backgroundColor="#333333")]
     
     /**
-     * Illustrates the usage of the custom factory strategies in the IoC factory.
+     * Show the usage of the lock attribute in the object definitions.
      */
     public class ObjectFactory02Example extends Sprite 
     {
