@@ -49,8 +49,7 @@ package examples.display
          */
         public function Canvas()
         {
-            super() ;
-            update() ;
+            //
         }
         
         /**
