@@ -49,7 +49,7 @@ package system.ioc
             
             suite.addTestSuite( MagicReferenceTest ) ;
             suite.addTestSuite( ObjectArgumentTest ) ;
-            suite.addTestSuite( ObjectAttributeTest ) ;
+            suite.addTestSuite( ObjectAttributeTest ) ;            suite.addTestSuite( ObjectFactoryTest ) ;
             suite.addTestSuite( ObjectListenerTest ) ;
             suite.addTestSuite( ObjectMethodTest ) ;
             suite.addTestSuite( ObjectOrderTest ) ;
