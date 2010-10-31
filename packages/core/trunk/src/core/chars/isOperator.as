@@ -49,6 +49,8 @@ package core.chars
             case "-" :
             case "«" :
             case "»" :
+            case ">" :
+            case "<" :
             case "›" :
             case "&" :
             case "^" :
