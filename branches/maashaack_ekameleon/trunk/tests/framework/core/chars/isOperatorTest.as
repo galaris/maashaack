@@ -33,27 +33,28 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class isOperatorTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isOperatorTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testIsOperator():void
+        {
+            var operators:Array = ('*/%+-«»<>›&^|').split("");
             
-            suite.addTestSuite( isAlphaTest    ) ;
-            suite.addTestSuite( isASCIITest    ) ;
-            suite.addTestSuite( isDigitTest    ) ;
-            suite.addTestSuite( isHexDigitTest ) ;
-            suite.addTestSuite( isLowerTest    ) ;
-            suite.addTestSuite( isOperatorTest ) ;
-            suite.addTestSuite( isUnicodeTest  ) ;
-            suite.addTestSuite( isUpperTest    ) ;
+            var i:int ;
+            var l:int = operators.length;
             
-            return suite;
+            for( i = 0 ; i < l ; i++ )
+            {
+                assertTrue( isOperator(operators[i]), operators[i] + " is not an operator digit.");
+            }
         }
     }
 }

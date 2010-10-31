@@ -35,8 +35,8 @@
 
 package system.errors 
 {
-    import system.Strings;
-
+    import core.strings.fastformat;
+    
     /**
      * The error throws when a key is non unique.
      */
@@ -49,7 +49,7 @@ package system.errors
          */
         public function NonUniqueKeyError( key:String = null , id:int = 0 )
         {
-            super( Strings.format( string , key ) , id );
+            super( fastformat( string , key ) , id );
             this.name = "NonUniqueKeyError" ;
             this.key  = key ;
         }
