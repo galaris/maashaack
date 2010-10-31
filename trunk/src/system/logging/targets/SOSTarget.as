@@ -35,7 +35,8 @@
 
 package system.logging.targets 
 {
-    import system.Strings;
+    import core.strings.fastformat;
+
     import system.logging.LoggerLevel;
     
     /**
@@ -192,7 +193,7 @@ package system.logging.targets
         {
             if( levelPolicy ) 
             {
-                message = Strings.format( SHOW_FOLD_MESSAGE , LoggerLevel.getLevelString( level ) , title, message ) ;
+                message = fastformat( SHOW_FOLD_MESSAGE , LoggerLevel.getLevelString( level ) , title, message ) ;
             }
             send( message ) ;
         }
@@ -204,7 +205,7 @@ package system.logging.targets
         {
             if( levelPolicy ) 
             {
-                message = Strings.format( SHOW_MESSAGE , level.toString() , message.toString() ) ;
+                message = fastformat( SHOW_MESSAGE , level.toString() , message.toString() ) ;
             } 
             send( message ) ;
         }
@@ -214,7 +215,7 @@ package system.logging.targets
          */
         public function setApplicationName( name:String ):void 
         {
-            send( Strings.format( APPLICATION_NAME , name ) ) ;
+            send( fastformat( APPLICATION_NAME , name ) ) ;
         }
         
         /**
@@ -222,7 +223,7 @@ package system.logging.targets
          */
         public function setApplicationColor( color:Number ):void 
         {
-            send( Strings.format( APPLICATION_COLOR , color ) ) ;
+            send( fastformat( APPLICATION_COLOR , color ) ) ;
         }
         
         /**
@@ -237,7 +238,7 @@ package system.logging.targets
             }
             send
             ( 
-                Strings.format
+                fastformat
                 ( 
                     LEVEL_COLOR ,
                     String(level) , 

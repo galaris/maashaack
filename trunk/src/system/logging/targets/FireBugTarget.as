@@ -35,10 +35,10 @@
 
 package system.logging.targets 
 {
-    import system.Strings;
+    import core.strings.fastformat;
+
     import system.hack;
     import system.logging.LoggerLevel;
-    import system.logging.targets.LineFormattedTarget;
 
     import flash.external.ExternalInterface;
     import flash.net.URLRequest;
@@ -163,7 +163,7 @@ package system.logging.targets
             }
             else if ( verbose )
             {
-                navigateToURL( new URLRequest( Strings.format( url , methodName , message ) ) ) ;  
+                navigateToURL( new URLRequest( fastformat( url , methodName , message ) ) ) ;  
             }
         }
         
