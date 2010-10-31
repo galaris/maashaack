@@ -35,8 +35,9 @@
 
 package system.data.trees 
 {
+    import core.strings.startsWith;
+
     import system.Comparator;
-    import system.Strings;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.HashMap;
@@ -287,7 +288,7 @@ package system.data.trees
                 else
                 {
                     var cur:String = ( object as TrieEntry).key as String ;
-                    if ( Strings.startsWith( cur , key.toLocaleLowerCase() ) )
+                    if ( startsWith( cur , key.toLocaleLowerCase() ) )
                     {
                         return ( object as TrieEntry).value ;
                     }
@@ -392,7 +393,7 @@ package system.data.trees
                 else
                 {
                     var cur:String = (object as TrieEntry).key as String ;
-                    if ( Strings.startsWith( cur , key ) )
+                    if ( startsWith( cur , key ) )
                     {
                         return ( object as TrieEntry ).value ;
                     }
