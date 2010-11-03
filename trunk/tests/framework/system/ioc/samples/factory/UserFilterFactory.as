@@ -32,13 +32,11 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
+
 package system.ioc.samples.factory 
 {
-    import examples.core.User;
-
-    /**
-     * This factory creates User instances but use a filter with a black list array.
-     */
+    import system.ioc.samples.User;
+    
     public class UserFilterFactory 
     {
         /**
