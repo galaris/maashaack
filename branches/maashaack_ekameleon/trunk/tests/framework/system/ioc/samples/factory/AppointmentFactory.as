@@ -34,8 +34,8 @@
 */
 package system.ioc.samples.factory 
 {
-    import examples.core.Appointment;
-
+    import system.ioc.samples.Appointment;
+    
     /**
      * This factory creates Appointment instances.
      */

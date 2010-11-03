@@ -35,6 +35,11 @@
 package system.ioc
 {
     import buRRRn.ASTUce.framework.TestCase;
+
+    import system.ioc.samples.Civility;
+    import system.ioc.samples.User;
+    import system.ioc.samples.factory.UserFactory;
+    import system.ioc.samples.factory.UserFilterFactory;
     
     public class ObjectFactoryTest extends TestCase
     {
@@ -71,6 +76,132 @@ package system.ioc
             var objects:Array      = [ { id:"test" , type:"Object" } ] ;
             factory = new ObjectFactory( config , objects ) ;
             assertEquals( config  , factory.config , "#1" ) ;            assertEquals( objects , factory.objects , "#2" ) ;
+        }
+        
+        ///// strategy
+        
+        public function testStrategyFactory():void
+        {
+            var objects:Array =
+            [
+                {   
+                    id          : "user_filter_factory"  ,
+                    type        : "system.ioc.samples.factory.UserFilterFactory" ,
+                    arguments   : [ { value : [ "lunas" ] } ]
+                }
+                ,
+                {   
+                    id                  : "user1" , 
+                    type                : "system.ioc.samples.User" , 
+                    staticFactoryMethod : 
+                    {
+                        type      : "system.ioc.samples.factory.UserFactory" , 
+                        name      : "create" , 
+                        arguments : [ { value : "ekameleon" } ] 
+                    }
+                }
+                    ,
+                    {
+                        id             : "user2" , 
+                        type           : "system.ioc.samples.User" , 
+                        factoryMethod  : 
+                        { 
+                            factory : "user_filter_factory" , 
+                            name    : "build" , 
+                            arguments:[ { value:"zwetan" } ] 
+                        }
+                    }
+                    ,
+                    {   
+                        id             : "user3" , 
+                        type           : "system.ioc.samples.User" , 
+                        factoryMethod  : {  factory:"user_filter_factory" , name:"build", arguments:[ { value : "lunas" } ]  }
+                    }
+                    ,
+                    
+                    // property factory
+                    
+                    {   
+                        id                    : "man"    , 
+                        type                  : "String" , 
+                        staticFactoryProperty : { type:"system.ioc.samples.Civility" , name:"MAN" }
+                    }
+                    ,
+                    {   
+                        id              : "name"   , 
+                        type            : "String" , 
+                        factoryProperty : { factory:"user2" , name:"pseudo" }
+                    }
+                    ,
+                    
+                    // value factory
+                    
+                    {
+                        id           : "my_value" , 
+                        type         : "String"   , 
+                        factoryValue : "hello world"
+                    }
+                    ,
+                    
+                    // reference factory
+                    
+                    {   
+                        id               : "my_user"   , 
+                        type             : "system.ioc.samples.User" , 
+                        factoryReference : "user1"     ,
+                        singleton        : true        ,
+                        lazyInit         : true        ,
+                        properties       : 
+                        [ 
+                            { name:"url" , value : "http://code.google.com/p/maashaack/" }
+                        ]
+                    }
+            ] ;
+            
+            ///////////// linkage enforcer
+            
+            Civility  ; 
+            UserFactory ; 
+            UserFilterFactory ;
+            
+            ////////////
+            
+            factory.create( objects ) ;
+            
+            var user:User ;
+            
+            // ------------- static method factory
+            
+            user = factory.getObject("user1") as User ;
+            
+            assertNotNull( user , "#1-1") ;
+            assertEquals( "[User  ekameleon]" , user.toString() , "#1-2" ) ;
+//            
+//            return ; 
+//            
+//            // ------------- method factory
+//            
+//            user = factory.getObject( "user2" ) as User ;
+//            assertEquals("zwetan", user.pseudo  , "#2" ) ;
+//            
+//            user = factory.getObject( "user3" ) as User ;
+//            assertNull( user , "#3" ) ;
+//            
+//            // ------------- static property factory
+//            
+//            assertEquals( Civility.MAN, factory.getObject("man") , "#4" ) ;
+//            
+//            // ------------- property factory
+//            
+//            assertEquals( "zwetan" , factory.getObject("name") , "#5" ) ;
+//            
+//            // ------------- value factory
+//            
+//            assertEquals( "hello world" , factory.getObject("my_value") , "#6" ) ;
+//            
+//            // ------------- reference factory ;
+//            
+//            trace("my_user : " + factory.getObject("my_user") + " -> " + factory.getObject("my_user").url ) ; 
         }
     }
 }
