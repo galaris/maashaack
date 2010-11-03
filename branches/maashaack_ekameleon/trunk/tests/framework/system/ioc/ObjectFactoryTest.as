@@ -176,32 +176,31 @@ package system.ioc
             
             assertNotNull( user , "#1-1") ;
             assertEquals( "[User  ekameleon]" , user.toString() , "#1-2" ) ;
-//            
-//            return ; 
-//            
-//            // ------------- method factory
-//            
-//            user = factory.getObject( "user2" ) as User ;
-//            assertEquals("zwetan", user.pseudo  , "#2" ) ;
-//            
-//            user = factory.getObject( "user3" ) as User ;
-//            assertNull( user , "#3" ) ;
-//            
-//            // ------------- static property factory
-//            
-//            assertEquals( Civility.MAN, factory.getObject("man") , "#4" ) ;
-//            
-//            // ------------- property factory
-//            
-//            assertEquals( "zwetan" , factory.getObject("name") , "#5" ) ;
-//            
-//            // ------------- value factory
-//            
-//            assertEquals( "hello world" , factory.getObject("my_value") , "#6" ) ;
-//            
-//            // ------------- reference factory ;
-//            
-//            trace("my_user : " + factory.getObject("my_user") + " -> " + factory.getObject("my_user").url ) ; 
+            
+            // ------------- method factory
+            
+            user = factory.getObject( "user2" ) as User ;
+            assertEquals("zwetan", user.pseudo  , "#2" ) ;
+            
+            user = factory.getObject( "user3" ) as User ;
+            assertNull( user , "#3" ) ;
+            
+            // ------------- static property factory
+            
+            assertEquals( Civility.MAN, factory.getObject("man") , "#4" ) ;
+            
+            // ------------- property factory
+            
+            assertEquals( "zwetan" , factory.getObject("name") , "#5" ) ;
+            
+            // ------------- value factory
+            
+            assertEquals( "hello world" , factory.getObject("my_value") , "#6" ) ;
+            
+            // ------------- reference factory ;
+            
+            assertEquals( "ekameleon" , factory.getObject("my_user").pseudo , "#7" )  ; 
+            assertEquals( "http://code.google.com/p/maashaack/" , factory.getObject("my_user").url , "#8" ) ; 
         }
     }
 }
