@@ -37,6 +37,7 @@ package system.ioc
     import buRRRn.ASTUce.framework.TestCase;
 
     import system.ioc.samples.Civility;
+    import system.ioc.samples.Item;
     import system.ioc.samples.LockableObject;
     import system.ioc.samples.User;
     import system.ioc.samples.factory.UserFactory;
@@ -260,6 +261,129 @@ package system.ioc
             
             assertNotNull( object , "#3" ) ;
             assertEquals( 4, object.count , "#4" ) ;
+        }
+        
+        // identify attribute
+        
+        public function testIdentifyAttribute():void
+        {
+            var objects:Array ;
+            var item:Item ;
+            
+            ////////////
+            
+            factory.config.identify = false ;
+            
+            ////////////
+            
+            objects =
+            [
+                {   
+                    id        : "item"  ,
+                    type      : "system.ioc.samples.Item" ,
+                    singleton : true ,
+                    lazyInit  : true ,
+                    identify  : true 
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            item = factory.getObject("item") as Item ;
+            
+            assertNotNull( item , "#1-1" ) ;
+            assertEquals( "item" , item.id , "#1-2" ) ;
+            
+            ////////////
+            
+            factory.removeSingleton("item") ;
+            
+            objects =
+            [
+                {   
+                    id        : "item"  ,
+                    type      : "system.ioc.samples.Item" ,
+                    singleton : true ,
+                    lazyInit  : true ,
+                    identify  : false 
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            item = factory.getObject("item") as Item ;
+            
+            assertNotNull( item , "#2-1" ) ;
+            assertNull( item.id , "#2-2" ) ;
+            
+            ////////////
+            
+            factory.config.identify = true ;
+            
+            ////////////
+            
+            factory.removeSingleton("item") ;
+            
+            objects =
+            [
+                {   
+                    id        : "item"  ,
+                    type      : "system.ioc.samples.Item" ,
+                    singleton : true ,
+                    lazyInit  : true 
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            item = factory.getObject("item") as Item ;
+            
+            assertNotNull( item , "#3-1" ) ;
+            assertEquals( "item" , item.id , "#3-2" ) ;
+            
+            ////////////
+            
+            factory.removeSingleton("item") ;
+            
+            objects =
+            [
+                {   
+                    id        : "item"  ,
+                    type      : "system.ioc.samples.Item" ,
+                    singleton : true ,
+                    lazyInit  : true ,
+                    identify  : true 
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            item = factory.getObject("item") as Item ;
+            
+            assertNotNull( item , "#4-1" ) ;
+            assertEquals( "item" , item.id , "#4-2" ) ;
+            
+            ////////////
+            
+            factory.removeSingleton("item") ;
+            
+            objects =
+            [
+                {   
+                    id        : "item"  ,
+                    type      : "system.ioc.samples.Item" ,
+                    singleton : true ,
+                    lazyInit  : true ,
+                    identify  : false 
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            item = factory.getObject("item") as Item ;
+            
+            assertNotNull( item , "#5-1" ) ;
+            assertNull( item.id , "#5-2" ) ;
         }
     }
 }
