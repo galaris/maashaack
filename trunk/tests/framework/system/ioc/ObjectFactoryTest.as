@@ -37,6 +37,7 @@ package system.ioc
     import buRRRn.ASTUce.framework.TestCase;
 
     import system.ioc.samples.Civility;
+    import system.ioc.samples.LockableObject;
     import system.ioc.samples.User;
     import system.ioc.samples.factory.UserFactory;
     import system.ioc.samples.factory.UserFilterFactory;
@@ -201,6 +202,64 @@ package system.ioc
             
             assertEquals( "ekameleon" , factory.getObject("my_user").pseudo , "#7" )  ; 
             assertEquals( "http://code.google.com/p/maashaack/" , factory.getObject("my_user").url , "#8" ) ; 
+        }
+        
+        // lock attribute
+        
+        public function testLockAttribute():void
+        {
+            var objects:Array ;
+            var object:LockableObject ;
+            
+            objects =
+            [
+                {   
+                    id          : "object"  ,
+                    type        : "system.ioc.samples.LockableObject" ,
+                    lock        : true , // can be 'true', 'false' or 'null'
+                    init        : "update" , 
+                    properties  : 
+                    [ 
+                        { name : "color" , value : 0xFF00FF } , // run the update method
+                        { name : "w"     , value : 200      } , // run the update method
+                        { name : "h"     , value : 180      } , // run the update method
+                    ]
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            object = factory.getObject("object") as LockableObject ;
+            
+            assertNotNull( object , "#1" ) ;
+            assertEquals( 1 , object.count , "#2" ) ;
+            
+            ////////////
+            
+            factory.removeSingleton("object") ;
+            
+            objects =
+            [
+                {   
+                    id          : "object"  ,
+                    type        : "system.ioc.samples.LockableObject" ,
+                    lock        : false , // can be 'true', 'false' or 'null'
+                    init        : "update" , 
+                    properties  : 
+                    [ 
+                        { name : "color" , value : 0xFF00FF } , // run the update method
+                        { name : "w"     , value : 200      } , // run the update method
+                        { name : "h"     , value : 180      } , // run the update method
+                    ]
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            object = factory.getObject("object") as LockableObject ;
+            
+            assertNotNull( object , "#3" ) ;
+            assertEquals( 4, object.count , "#4" ) ;
         }
     }
 }
