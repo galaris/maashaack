@@ -40,6 +40,7 @@ package system.ioc
     import system.evaluators.EdenEvaluator;
     import system.ioc.samples.Appointment;
     import system.ioc.samples.Civility;
+    import system.ioc.samples.Filter;
     import system.ioc.samples.Item;
     import system.ioc.samples.LockableObject;
     import system.ioc.samples.User;
@@ -575,6 +576,42 @@ package system.ioc
             
             assertEquals( "30.08.2008 16:00:00" , app.scheduledStart , "#5-1" ) ;
             assertEquals( "30.08.2008 17:00:00" , app.scheduledEnd   , "#5-2" ) ;
+        }
+        
+        // reference evaluator feature
+        
+        public function testReferenceEvaluator():void
+        {
+            var objects:Array =
+            [
+                { 
+                    id         : "VIDEO" ,
+                    type       : "system.ioc.samples.Filter" ,
+                    properties : [ { name:"filter" , value:1 } ]
+                }
+                ,
+                { 
+                    id         : "MP3" ,
+                    type       : "system.ioc.samples.Filter" ,
+                    properties : [ { name:"filter" , value:2 } ]
+                }
+                ,
+                { 
+                    id         : "CUSTOM" ,
+                    type       : "system.ioc.samples.Filter" ,
+                    properties : 
+                    [ 
+                        { name:"toggleFilter" , arguments:[ { ref : "VIDEO.filter" } , { value : true } ] } ,
+                        { name:"toggleFilter" , arguments:[ { ref : "MP3.filter"   } , { value : true } ] } 
+                    ]
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            var filter:Filter = factory.getObject( "CUSTOM" ) ; 
+            
+            assertEquals( 3 , filter.filter ) ; 
         }
     }
 }
