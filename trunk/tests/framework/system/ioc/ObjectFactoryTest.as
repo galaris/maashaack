@@ -679,5 +679,29 @@ package system.ioc
             assertEquals( factory , test1.factory ) ;
             assertEquals( factory , test2.factory ) ;
         }
+        
+        // magic #config feature
+        
+        public function testMagicConfig():void
+        {
+            var objects:Array =
+            [
+                { 
+                id               : "config"  ,
+                type             : "Object"  ,
+                singleton        : true      ,
+                lazyInit         : true      ,
+                factoryReference : "#config"  
+                }
+            ] ;
+            
+            factory.config.config = { message : "hello world" } ;
+            
+            factory.create( objects ) ;
+            
+            var conf:Object = factory.getObject( "config" ) ;
+            
+            assertEquals( "hello world" , conf.message ) ;
+        }
     }
 }
