@@ -648,5 +648,36 @@ package system.ioc
             assertEquals( root , ref.root , "#1" ) ;
             assertEquals( root , factory.getObject("root") , "#2" ) ;
         }
+        
+        // magic #this feature
+        
+        public function testMagicThis():void
+        {
+            var objects:Array =
+            [
+                { 
+                    id         : "test1" ,
+                    type       : "system.ioc.samples.FactoryReference" ,
+                    arguments  : [ { ref : "#this" } ]
+                }
+                ,
+                { 
+                    id         : "test2" ,
+                    type       : "system.ioc.samples.FactoryReference" ,
+                    properties : 
+                    [ 
+                        { name:"factory" , ref : "#this" }
+                    ]
+                }
+            ] ;
+            
+            factory.create( objects ) ;
+            
+            var test1:FactoryReference = factory.getObject( "test1" ) as FactoryReference ;
+            var test2:FactoryReference = factory.getObject( "test2" ) as FactoryReference ;
+            
+            assertEquals( factory , test1.factory ) ;
+            assertEquals( factory , test2.factory ) ;
+        }
     }
 }
