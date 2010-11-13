@@ -687,11 +687,11 @@ package system.ioc
             var objects:Array =
             [
                 { 
-                id               : "config"  ,
-                type             : "Object"  ,
-                singleton        : true      ,
-                lazyInit         : true      ,
-                factoryReference : "#config"  
+                    id               : "config"  ,
+                    type             : "Object"  ,
+                    singleton        : true      ,
+                    lazyInit         : true      ,
+                    factoryReference : "#config"  
                 }
             ] ;
             
@@ -711,11 +711,11 @@ package system.ioc
             var objects:Array =
             [
                 { 
-                id               : "i18n"  ,
-                type             : "Object"  ,
-                singleton        : true      ,
-                lazyInit         : true      ,
-                factoryReference : "#locale"  
+                    id               : "i18n"  ,
+                    type             : "Object"  ,
+                    singleton        : true      ,
+                    lazyInit         : true      ,
+                    factoryReference : "#locale"  
                 }
             ] ;
             
@@ -726,6 +726,34 @@ package system.ioc
             var i18n:Object = factory.getObject( "i18n" ) ;
             
             assertEquals( "hello world" , i18n.message ) ;
+        }
+        
+        // magic #params feature
+        
+        public function testMagicParams():void
+        {
+            var objects:Array =
+            [
+                { 
+                    id               : "params"                ,
+                    type             : "system.ioc.Parameters" ,
+                    singleton        : true                    ,
+                    lazyInit         : true                    ,
+                    factoryReference : "#params" 
+                }
+            ] ;
+            
+            var parameters:Parameters = new Parameters() ;
+            
+            factory.config.parameters = parameters ;
+            
+            factory.create( objects ) ;
+            
+            // use the factory
+            
+            var params:Parameters = factory.getObject( "params" ) as Parameters ; 
+            
+            assertEquals( params , parameters ) ;
         }
     }
 }
