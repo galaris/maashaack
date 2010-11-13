@@ -40,6 +40,7 @@ package system.ioc
     import system.evaluators.EdenEvaluator;
     import system.ioc.samples.Appointment;
     import system.ioc.samples.Civility;
+    import system.ioc.samples.FactoryReference;
     import system.ioc.samples.Filter;
     import system.ioc.samples.Item;
     import system.ioc.samples.LockableObject;
@@ -612,6 +613,40 @@ package system.ioc
             var filter:Filter = factory.getObject( "CUSTOM" ) ; 
             
             assertEquals( 3 , filter.filter ) ; 
+        }
+        
+        // magic #root feature
+        
+        public function testMagicRoot():void
+        {
+            var root:Object = {} ;
+            
+            var objects:Array =
+            [
+                { 
+                    id         : "test" ,
+                    type       : "system.ioc.samples.FactoryReference" ,
+                    properties : 
+                    [ 
+                        { name:"root" , ref : "#root" } 
+                    ]
+                }
+                ,
+                { 
+                    id               : "root" ,
+                    type             : "Object" ,
+                    factoryReference : "#root"  
+                }
+            ] ;
+            
+            factory.config.root = root ;
+            
+            factory.create( objects ) ;
+            
+            var ref:FactoryReference = factory.getObject("test") ; 
+            
+            assertEquals( root , ref.root , "#1" ) ;
+            assertEquals( root , factory.getObject("root") , "#2" ) ;
         }
     }
 }

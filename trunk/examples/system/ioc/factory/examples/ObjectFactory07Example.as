@@ -54,9 +54,9 @@ package examples
             
             factory.create( objects ) ;
             
-            var test:FactoryReference = factory.getObject( "test" ) as FactoryReference ; 
+            var test:FactoryReference = factory.getObject( "test" ) as FactoryReference ;
                 
-            trace( test.root    ) ; // in the properties (use #root)    
+            trace( test.root ) ; // in the properties (use #root)
             
             trace( factory.getObject("root") as Sprite ) ; // use the strategy factoryReference and the #root expression
         }
