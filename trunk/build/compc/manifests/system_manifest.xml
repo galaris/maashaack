@@ -229,10 +229,60 @@
     <component id="system.hosts:OperatingSystem" class="system.hosts.OperatingSystem" />
     <component id="system.hosts:PlatformID"      class="system.hosts.PlatformID"      />
         
-    <!-- system.io -->  
+    <!-- system.io -->
     
     <component id="system.io:Readable"  class="system.io.Readable"  />
     <component id="system.io:Writeable" class="system.io.Writeable" />
+    
+    <!-- system.ioc -->
+    
+    <component id="system.ioc:IObjectDefinition"          class="system.ioc.IObjectDefinition"          />
+    <component id="system.ioc:IObjectDefinitionContainer" class="system.ioc.IObjectDefinitionContainer" />
+    <component id="system.ioc:IObjectFactory"             class="system.ioc.IObjectFactory"             />
+    <component id="system.ioc.IObjectFactoryStrategy"     class="system.ioc.IObjectFactoryStrategy"     />
+    <component id="system.ioc:MagicReference"             class="system.ioc.MagicReference"             />
+    <component id="system.ioc:ObjectArgument"             class="system.ioc.ObjectArgument"             />
+    <component id="system.ioc:ObjectAttribute"            class="system.ioc.ObjectAttribute"            />
+    <component id="system.ioc:ObjectConfig"               class="system.ioc.ObjectConfig"               />
+    <component id="system.ioc:ObjectDefinition"           class="system.ioc.ObjectDefinition"           />
+    <component id="system.ioc:ObjectDefinitionContainer"  class="system.ioc.ObjectDefinitionContainer"  />
+    <component id="system.ioc:ObjectFactory"              class="system.ioc.ObjectFactory"              />
+    <component id="system.ioc:ObjectListener"             class="system.ioc.ObjectListener"             />
+    <component id="system.ioc:ObjectMethod"               class="system.ioc.ObjectMethod"               />
+    <component id="system.ioc:ObjectOrder"                class="system.ioc.ObjectOrder"                />
+    <component id="system.ioc:ObjectProperty"             class="system.ioc.ObjectProperty"             />
+    <component id="system.ioc:ObjectReceiver"             class="system.ioc.ObjectReceiver"             />
+    <component id="system.ioc:ObjectScope"                class="system.ioc.ObjectScope"                />
+    <component id="system.ioc:Parameters"                 class="system.ioc.Parameters"                 />
+    <component id="system.ioc:TypeAliases"                class="system.ioc.TypeAliases"                />
+    <component id="system.ioc:TypeExpression"             class="system.ioc.TypeExpression"             />
+    <component id="system.ioc:TypePolicy"                 class="system.ioc.TypePolicy"                 />
+    
+    <!-- system.ioc.builders -->
+    
+    <component id="system.ioc.builders:createArguments"             class="system.ioc.builders.createArguments"             />
+    <component id="system.ioc.builders:createListeners"             class="system.ioc.builders.createListeners"             />
+    <component id="system.ioc.builders:createObjectDefinition"      class="system.ioc.builders.createObjectDefinition"      />
+    <component id="system.ioc.builders:createObjectFactoryStrategy" class="system.ioc.builders.createObjectFactoryStrategy" />
+    <component id="system.ioc.builders:createProperties"            class="system.ioc.builders.createProperties"            />
+    <component id="system.ioc.builders:createReceivers"             class="system.ioc.builders.createReceivers"             />
+    <component id="system.ioc.builders:logger"                      class="system.ioc.builders.logger"                      />
+    
+    <!-- system.ioc.evaluators -->
+    
+    <component id="system.ioc.evaluators:ConfigEvaluator"    class="system.ioc.evaluators.ConfigEvaluator"    />
+    <component id="system.ioc.evaluators:LocaleEvaluator"    class="system.ioc.evaluators.LocaleEvaluator"    />
+    <component id="system.ioc.evaluators:ReferenceEvaluator" class="system.ioc.evaluators.ReferenceEvaluator" />
+    <component id="system.ioc.evaluators:TypeEvaluator"      class="system.ioc.evaluators.TypeEvaluator"      />
+    
+    <!-- system.ioc.strategies -->
+    
+    <component id="system.ioc.strategies:ObjectFactoryMethod"         class="system.ioc.strategies.ObjectFactoryMethod"         />
+    <component id="system.ioc.strategies:ObjectFactoryProperty"       class="system.ioc.strategies.ObjectFactoryProperty"       />
+    <component id="system.ioc.strategies:ObjectFactoryReference"      class="system.ioc.strategies.ObjectFactoryReference"      />
+    <component id="system.ioc.strategies:ObjectFactoryValue"          class="system.ioc.strategies.ObjectFactoryValue"          />
+    <component id="system.ioc.strategies:ObjectStaticFactoryMethod"   class="system.ioc.strategies.ObjectStaticFactoryMethod"   />
+    <component id="system.ioc.strategies:ObjectStaticFactoryProperty" class="system.ioc.strategies.ObjectStaticFactoryProperty" />
     
     <!-- system.logging -->
     
