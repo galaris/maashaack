@@ -703,5 +703,29 @@ package system.ioc
             
             assertEquals( "hello world" , conf.message ) ;
         }
+        
+        // magic #locale feature
+        
+        public function testMagicLocale():void
+        {
+            var objects:Array =
+            [
+                { 
+                id               : "i18n"  ,
+                type             : "Object"  ,
+                singleton        : true      ,
+                lazyInit         : true      ,
+                factoryReference : "#locale"  
+                }
+            ] ;
+            
+            factory.config.locale = { message : "hello world" } ;
+            
+            factory.create( objects ) ;
+            
+            var i18n:Object = factory.getObject( "i18n" ) ;
+            
+            assertEquals( "hello world" , i18n.message ) ;
+        }
     }
 }
