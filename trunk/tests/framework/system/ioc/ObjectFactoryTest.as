@@ -36,10 +36,14 @@ package system.ioc
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.evaluators.DateEvaluator;
+    import system.evaluators.EdenEvaluator;
+    import system.ioc.samples.Appointment;
     import system.ioc.samples.Civility;
     import system.ioc.samples.Item;
     import system.ioc.samples.LockableObject;
     import system.ioc.samples.User;
+    import system.ioc.samples.factory.AppointmentFactory;
     import system.ioc.samples.factory.UserFactory;
     import system.ioc.samples.factory.UserFilterFactory;
     
@@ -384,6 +388,193 @@ package system.ioc
             
             assertNotNull( item , "#5-1" ) ;
             assertNull( item.id , "#5-2" ) ;
+        }
+        
+        // evaluators attribute
+        
+        public function testEvaluatorsAttribute():void
+        {
+            var objects:Array =
+            [
+                // evaluators
+                
+                {
+                    id        : "eden" ,
+                    type      : "system.evaluators.EdenEvaluator" ,
+                    singleton : true ,
+                    arguments : [ { value:false } ]
+                }
+                ,
+                {
+                    id        : "date" ,
+                    type      : "system.evaluators.DateEvaluator" ,
+                    singleton : true 
+                }
+                ,
+                
+                // test in the constructor
+                
+                {   
+                    id         : "my_date"  ,
+                    type       : "String" ,
+                    arguments  : 
+                    [ 
+                        { 
+                            value      : "new Date(2007,11,5,10,22,33)" , 
+                            evaluators : 
+                            [ 
+                                new system.evaluators.EdenEvaluator(false) , 
+                                new system.evaluators.DateEvaluator()
+                            ]
+                        }
+                    ]
+                }
+                , // test in the attributes ("properties")
+                {   
+                    id         : "appointment_01"   ,
+                    type       : "system.ioc.samples.Appointment" ,
+                    properties : 
+                    [ 
+                        { 
+                            name       : "scheduledStart" ,
+                            value      : "new Date(2008,5,30,10,30,00)" , 
+                            evaluators : [ "eden" , "date" ] 
+                        }
+                        ,
+                        { 
+                            name       : "scheduledEnd" ,
+                            value      : "new Date(2008,5,30,12,40,00)" , 
+                            evaluators : 
+                            [ 
+                                "eden" , 
+                                new system.evaluators.DateEvaluator()
+                            ]
+                        }
+                    ] 
+                }
+                , // test in methods ("properties")
+                {   
+                    id         : "appointment_02"   ,
+                    type       : "system.ioc.samples.Appointment" ,
+                    properties : 
+                    [ 
+                        { 
+                            name       : "setShedule" ,
+                            arguments  :
+                            [
+                                {
+                                    value      : "new Date(2008,5,30,14,00,00)" , 
+                                    evaluators : 
+                                    [ 
+                                        new system.evaluators.EdenEvaluator(false) , 
+                                        "date"
+                                    ]
+                                }
+                                ,
+                                { 
+                                    value      : "new Date(2008,5,30,16,30,00)" , 
+                                    evaluators : [ "eden" , "date" ] 
+                                }
+                            ]
+                        }
+                    ] 
+                }
+                
+                , // factory method
+                
+                {
+                    id   : "appointment_factory"   ,
+                    type : "system.ioc.samples.factory.AppointmentFactory"
+                }
+                ,
+                {   
+                    id            : "appointment_03"   ,
+                    type          : "system.ioc.samples.Appointment" ,
+                    factoryMethod : 
+                    { 
+                        factory    : "appointment_factory" ,
+                        name       : "build" ,
+                        arguments  :
+                        [
+                            {
+                                value      : "new Date(2008,6,30,14,00,00)" , 
+                                evaluators : [ "eden" , "date" ] 
+                            }
+                            ,
+                            { 
+                                value      : "new Date(2008,6,30,16,30,00)" , 
+                                evaluators : [ "eden" , "date" ] 
+                            }
+                        ]
+                    } 
+                }
+                
+                , // static factory method
+                
+                {   
+                    id                  : "appointment_04"   ,
+                    type                : "system.ioc.samples.Appointment" ,
+                    staticFactoryMethod : 
+                    { 
+                        type       : "system.ioc.samples.factory.AppointmentFactory" ,
+                        name       : "create" ,
+                        arguments  :
+                        [
+                            {
+                                value      : "new Date(2008,7,30,16,00,00);" , 
+                                evaluators : [ "eden" , "date" ] 
+                            }
+                            ,
+                            { 
+                                value      : "new Date(2008,7,30,17,00,00);" , 
+                                evaluators : [ "eden" , "date" ] 
+                            }
+                        ]
+                    } 
+                }
+            ] ;
+            
+            ////// linkage enforcer
+            
+            AppointmentFactory ;
+            
+            /////
+            
+            factory.create( objects ) ;
+            
+            //---- test evaluators in the constructor arguments
+            
+            assertEquals( "05.12.2007 10:22:33" , factory.getObject("my_date").toString() , "#1" ) ; 
+            
+            var app:Appointment ;
+            
+            //---- test evaluators in properties
+            
+            app = factory.getObject("appointment_01") as Appointment ;
+            
+            assertEquals( "30.06.2008 10:30:00" , app.scheduledStart , "#2-1" ) ;
+            assertEquals( "30.06.2008 12:40:00" , app.scheduledEnd   , "#2-2" ) ;
+            
+            //---- test evaluators in methods
+            
+            app = factory.getObject("appointment_02") as Appointment ;
+            
+            assertEquals( "30.06.2008 14:00:00" , app.scheduledStart , "#3-1" ) ;
+            assertEquals( "30.06.2008 16:30:00" , app.scheduledEnd   , "#3-2" ) ;
+            
+            //---- test evaluators in factory method strategy
+            
+            app = factory.getObject("appointment_03") as Appointment ;
+            
+            assertEquals( "30.07.2008 14:00:00" , app.scheduledStart , "#4-1" ) ;
+            assertEquals( "30.07.2008 16:30:00" , app.scheduledEnd   , "#4-2" ) ;
+            
+            //---- test evaluators in static factory method strategy
+            
+            app = factory.getObject("appointment_04") as Appointment ;
+            
+            assertEquals( "30.08.2008 16:00:00" , app.scheduledStart , "#5-1" ) ;
+            assertEquals( "30.08.2008 17:00:00" , app.scheduledEnd   , "#5-2" ) ;
         }
     }
 }
