@@ -755,5 +755,27 @@ package system.ioc
             
             assertEquals( params , parameters ) ;
         }
+        
+        // magic #stage feature
+        
+        public function testMagicStage():void
+        {
+            var stage:Object = {} ;
+            
+            var objects:Array =
+            [
+                { 
+                    id               : "stage" ,
+                    type             : "Object" ,
+                    factoryReference : "#stage"  
+                }
+            ] ;
+            
+            factory.config.stage = stage ;
+            
+            factory.create( objects ) ;
+            
+            assertEquals( stage , factory.getObject("stage") ) ;
+        }
     }
 }
