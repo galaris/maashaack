@@ -51,7 +51,7 @@ package system.ioc.builders
         
         public function testChannel():void
         {
-            assertEquals( "system.ioc.builders.ObjectBuilder" , logger.channel );
+            assertEquals( "system.ioc.builders.logger" , logger.channel );
         }
     }
 }
