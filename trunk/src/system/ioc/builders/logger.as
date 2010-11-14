@@ -41,5 +41,5 @@ package system.ioc.builders
     /**
      * The logger of the system.ioc.builders package.
      */
-    public const logger:Logger = Log.getLogger( "system.ioc.builders" ) ;
+    public const logger:Logger = Log.getLogger( "system.ioc.builders.logger" ) ;
 }
