@@ -38,57 +38,51 @@ package examples
     import system.ioc.ObjectFactory;
 
     import flash.display.Sprite;
-    import flash.text.TextFormat;
     
     /**
-     * Example of the #init property definition name.
+     * Example to invoke functions in the object definitions.
      */
-    public class ObjectFactory14Example extends Sprite 
+    public class ObjectFactory15Example extends Sprite 
     {
-        public function ObjectFactory14Example()
+        public function ObjectFactory15Example()
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
             factory.config.root = this ;
             
-            factory.config.config =
-            {
-                field : 
-                {
-                    autoSize          : "left" ,
-                    border            : false ,
-                    defaultTextFormat : new TextFormat( "Verdana", 16  , 0xFFFF00) , 
-                    selectable        : false ,
-                    x                 : 25 ,
-                    y                 : 25 
-                }
-            };
-            
             factory.create( objects ) ;
+        }
+        
+        public var info:Function ;
+        
+        public function debug( message:String = "default debug message" ):void
+        {
+            trace( "debug : " + message ) ;
+        }
+        
+        public function write( message:String = "default write message" ):void
+        {
+            trace( "write : " +  message ) ;
         }
         
         public var objects:Array =
         [
             {
-                id         : "field" ,
-                type       : "flash.text.TextField" ,
-                singleton  : true ,
-                lazyInit   : true ,
-                properties :
-                [
-                    { name : "#init" , config : "field"       } , 
-                    { name : "text"  , value  : "hello world" } 
-                ]
-            }
-            ,
-            {
                 id               : "application" ,
-                type             : "flash.display.Sprite" ,
+                type             : "examples.ObjectFactory15Example" ,
                 factoryReference : "#root" ,
                 singleton        : true ,
                 properties       :
                 [
-                    { name : "addChild"   , arguments  : [ { ref : "field" } ] } 
+                    { name : "write"    , arguments  : [ { value : "hello world 1" } ] } ,
+                     
+                    { name : "info" , ref : "application.write"  } ,
+                    { name : "info" } ,
+                    { name : "info" , arguments  : [ { value : "hello world 2" } ] } ,
+                    
+                    { name : "info" , value : debug  } ,
+                    { name : "info" } ,
+                    { name : "info" , arguments  : [ { value : "hello world 3" } ] }
                 ]
             }
         ] ;
