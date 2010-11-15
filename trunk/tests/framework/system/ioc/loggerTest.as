@@ -33,13 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.ioc.builders
+package system.ioc
 {
-    import system.logging.Log;
-    import system.logging.Logger;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    /**
-     * The logger of the system.ioc.builders package.
-     */
-    public const logger:Logger = Log.getLogger( "system.ioc.builders.logger" ) ;
+    public class loggerTest extends TestCase
+    {
+        public function loggerTest(name:String = "")
+        {
+            super(name);
+        }
+        
+        public function testSingleton():void
+        {
+            assertNotNull( logger ) ;
+        }
+        
+        public function testChannel():void
+        {
+            assertEquals( "system.ioc.logger" , logger.channel );
+        }
+    }
 }
