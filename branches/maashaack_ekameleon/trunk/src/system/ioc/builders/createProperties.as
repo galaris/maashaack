@@ -37,6 +37,7 @@ package system.ioc.builders
 {
     import core.dump ;
     
+    import system.ioc.logger;
     import system.ioc.ObjectAttribute ;
     import system.ioc.ObjectProperty ;
     

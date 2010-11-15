@@ -36,7 +36,7 @@ package system.ioc
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-
+    
     import system.ioc.builders.AllTests;
     import system.ioc.evaluators.AllTests;
     import system.ioc.strategies.AllTests;
@@ -47,6 +47,7 @@ package system.ioc
         {
             var suite:TestSuite = new TestSuite( "system.ioc package" );
             
+            suite.addTestSuite( loggerTest ) ;
             suite.addTestSuite( MagicReferenceTest ) ;
             suite.addTestSuite( ObjectArgumentTest ) ;
             suite.addTestSuite( ObjectAttributeTest ) ;            suite.addTestSuite( ObjectFactoryTest ) ;

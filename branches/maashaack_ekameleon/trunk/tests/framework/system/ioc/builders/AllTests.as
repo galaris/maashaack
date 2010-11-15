@@ -45,8 +45,6 @@ package system.ioc.builders
             
             suite.addTestSuite( createArgumentsTest ) ;            suite.addTestSuite( createListenersTest ) ;            suite.addTestSuite( createReceiversTest ) ;
             
-            suite.addTestSuite( loggerTest ) ;
-            
             return suite;
         }
     }
