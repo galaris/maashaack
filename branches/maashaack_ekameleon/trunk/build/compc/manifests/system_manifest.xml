@@ -236,6 +236,7 @@
     
     <!-- system.ioc -->
     
+    <component id="system.ioc:logger"                     class="system.ioc.logger"                     />
     <component id="system.ioc:IObjectDefinition"          class="system.ioc.IObjectDefinition"          />
     <component id="system.ioc:IObjectDefinitionContainer" class="system.ioc.IObjectDefinitionContainer" />
     <component id="system.ioc:IObjectFactory"             class="system.ioc.IObjectFactory"             />
@@ -266,7 +267,6 @@
     <component id="system.ioc.builders:createObjectFactoryStrategy" class="system.ioc.builders.createObjectFactoryStrategy" />
     <component id="system.ioc.builders:createProperties"            class="system.ioc.builders.createProperties"            />
     <component id="system.ioc.builders:createReceivers"             class="system.ioc.builders.createReceivers"             />
-    <component id="system.ioc.builders:logger"                      class="system.ioc.builders.logger"                      />
     
     <!-- system.ioc.evaluators -->
     
