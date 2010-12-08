@@ -54,6 +54,12 @@ package
     // -default-size 760 800 -default-frame-rate 24 -default-background-color 0x666666 --target-player=10.0.0
     // -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false -define+=API::FP_10_0,true -define+=API::RT_0_2_5,false
     
+    // -default-size 760 800
+    // -default-frame-rate 24
+    // -default-background-color 0x666666
+    // -target-player=10.0.0
+    // -static-link-runtime-shared-libraries=true
+    
     public class SystemTestRunner extends Sprite
     {
         public function SystemTestRunner()
