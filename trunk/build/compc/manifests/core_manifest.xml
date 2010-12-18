@@ -37,6 +37,25 @@
     <component id="core.chars:isUnicode"  class="core.chars.isUnicode"  />
     <component id="core.chars:isUpper"    class="core.chars.isUpper"    />
     
+    <!-- core.html -->
+    
+    <component id="core.html:anchor"    class="core.html.anchor"    />
+    <component id="core.html:big"       class="core.html.big"       />
+    <component id="core.html:blink"     class="core.html.blink"     />
+    <component id="core.html:bold"      class="core.html.bold"      />
+    <component id="core.html:fixed"     class="core.html.fixed"     />
+    <component id="core.html:fontColor" class="core.html.fontColor" />
+    <component id="core.html:fontSize"  class="core.html.fontSize"  />
+    <component id="core.html:italics"   class="core.html.italics"   />
+    <component id="core.html:link"      class="core.html.link"      />
+    <component id="core.html:paragraph" class="core.html.paragraph" />
+    <component id="core.html:small"     class="core.html.small"     />
+    <component id="core.html:span"      class="core.html.span"      />
+    <component id="core.html:strike"    class="core.html.strike"    />
+    <component id="core.html:sub"       class="core.html.sub"       />
+    <component id="core.html:sup"       class="core.html.sup"       />
+    <component id="core.html:underline" class="core.html.underline" />
+    
     <!-- core.maths -->
     
     <component id="core.maths:berp"        class="core.maths.berp"        />
