@@ -40,6 +40,7 @@ package core
     
     import core.arrays.AllTests;
     import core.chars.AllTests;
+    import core.html.AllTests;
     import core.maths.AllTests;
     import core.reflect.AllTests;
     import core.strings.AllTests;
@@ -49,7 +50,7 @@ package core
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("x4a core tests");
+            var suite:TestSuite = new TestSuite("core library tests");
             
             suite.addTestSuite( versionTest );
             suite.addTestSuite( uriTest );
@@ -63,6 +64,7 @@ package core
             
             suite.addTest( core.arrays.AllTests.suite() );
             suite.addTest( core.chars.AllTests.suite() );
+            suite.addTest( core.html.AllTests.suite() );
             suite.addTest( core.maths.AllTests.suite() );
             suite.addTest( core.reflect.AllTests.suite() );
             suite.addTest( core.strings.AllTests.suite() );
