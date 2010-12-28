@@ -41,13 +41,15 @@ package C.stdio
 {
     
     /**
-     * input and output operations on streams and files
+     * Input and Output operations on streams and files.
      * @internal
      * 
      * @langversion 3.0
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
      * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/C_stdio
      */
     [native(cls="::avmshell::StdioClass", methods="auto")]
     [Inspectable(environment="none")]

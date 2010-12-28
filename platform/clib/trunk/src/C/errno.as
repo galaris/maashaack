@@ -41,13 +41,15 @@ package C.errno
 {
     
     /**
-     * system error numbers
+     * System error numbers.
      * @internal
      * 
      * @langversion 3.0
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
      * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/C_errno
      */
     [native(cls="::avmshell::CErrnoClass", methods="auto")]
     [Inspectable(environment="none")]
@@ -412,6 +414,34 @@ package C.errno
      * @since 0.3.0
      */
     public const ECONNREFUSED:int = __errno.ECONNREFUSED;
+
+
+    /**
+     * Error return value.
+     * 
+     * <p>
+     * Designates an object that is assigned a value greater than zero on certain library errors.
+     * </p>
+     * 
+     * 
+     * @example basic usage
+     * <listing version="3.0">
+     *  import C.errno.&#42;;
+     *  import C.string.&#42;;
+     *  import avmplus.FileSystem;
+     *  
+     *  var filename:String = "dummy_file";
+     *  
+     *  if( !FileSystem.exists( filename ) )
+     *  {
+     *      trace( "errno = " + errno ); //errno = 2
+     *      trace( strerror( errno ) );  //No such file or directory
+     *  }
+     * </listing>
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
     
     /**
      * @private
@@ -433,51 +463,6 @@ package C.errno
     public function set errno( value:int ):void
     {
         __errno.errno = value;
-    }
-    
-    /**
-     * Error return value.
-     * 
-     * <p>
-     * Designates an object that is assigned a value greater than zero on certain library errors.
-     * </p>
-     * 
-     * <p><b>note:</b></p>
-     * <p>
-     * Use <code>errno</code>, <code>errno_</code> is a placeholder for asdoc.
-     * </p>
-     * <p>
-     * In AS3 you use <code>errno</code> as a getter/setter.
-     * </p>
-     * <p>
-     * <code>public function get errno():int</code>
-     * </p>
-     * <p>
-     * <code>public function set errno( value:int ):void</code>
-     * </p>
-     * 
-     * @example basic usage
-     * <listing version="3.0">
-     *  import C.errno.&#42;;
-     *  import C.string.&#42;;
-     *  import avmplus.FileSystem;
-     *  
-     *  var filename:String = "dummy_file";
-     *  
-     *  if( !FileSystem.exists( filename ) )
-     *  {
-     *      trace( "errno = " + errno ); //errno = 2
-     *      trace( strerror( errno ) );  //No such file or directory
-     *  }
-     * </listing>
-     * 
-     * @productversion redtamarin 0.3
-     * @since 0.3.0
-     */
-    [Inspectable(environment="none")]
-    public function errno_():int
-    {
-        return 0;
     }
     
 }

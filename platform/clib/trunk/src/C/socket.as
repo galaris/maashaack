@@ -41,13 +41,15 @@ package C.socket
 {
     
     /**
-     * socket constants and function helpers
+     * Socket constants and function helpers.
      * @internal
      * 
      * @langversion 3.0
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
      * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/C_socket
      */
     [native(cls="::avmshell::CSocketClass", methods="auto")]
     [Inspectable(environment="none")]
@@ -319,7 +321,7 @@ package C.socket
 
 
     /**
-     * Network host database functions
+     * Network host database function
      * which returns a list of hostnames or IP addresses by providing an IP address.
      * 
      * @productversion redtamarin 0.3
@@ -331,7 +333,7 @@ package C.socket
     }
 
     /**
-     * Network host database functions
+     * Network host database function
      * which returns a list of hostnames or IP addresses by providing a hostname.
      * 
      * @productversion redtamarin 0.3

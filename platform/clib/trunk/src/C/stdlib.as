@@ -41,13 +41,15 @@ package C.stdlib
 {
     
     /**
-     * standard library definitions
+     * Standard library definitions.
      * @internal
      * 
      * @langversion 3.0
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
      * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/C_stdlib
      */
     [native(cls="::avmshell::StdlibClass", methods="auto")]
     [Inspectable(environment="none")]

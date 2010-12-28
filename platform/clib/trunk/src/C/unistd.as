@@ -48,6 +48,8 @@ package C.unistd
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
      * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/C_unistd
      */
     [native(cls="::avmshell::UnistdClass", methods="auto")]
     [Inspectable(environment="none")]
