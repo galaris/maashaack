@@ -94,6 +94,7 @@ package C.unistd
 
 
         public native static function access( path:String, mode:int ):int;  //int access(const char *path, int mode);
+        public native static function chdir( path:String ):int;             //int chdir(const char *path);
         public native static function chmod( path:String, mode:int ):int;   //int chmod(const char *path, mode_t mode);
         public native static function getcwd():String;                      //char *getcwd(char *buf, size_t size);
         public native static function gethostname():String;                 //int gethostname(char *name, size_t namelen);
@@ -113,6 +114,7 @@ package C.unistd
         public native static function mkdir( path:String ):int;            //int mkdir(const char *path);
         public native static function rmdir( path:String ):int;            //int rmdir(const char *path);
         public native static function sleep( milliseconds:uint ):void;     //unsigned sleep(unsigned seconds);
+        public native static function unlink( path:String ):int;           //int unlink(const char *path);
     }
 
     /** Check for existence.
@@ -279,6 +281,38 @@ package C.unistd
     }
     
     /**
+     * Change working directory.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function chdir( path:String ):int
+    {
+        return __unistd.chdir( path );
+    }
+    
+    /**
+     * Change mode of a file.
+     * 
+     * <p><b>note:</b></p>
+     * <p>
+     * under WIN32 chmod is limited, you will only be able to set read or write at the user level
+     * </p>
+     * <code>chmod( "myfile.txt", S_WRITE );</code>
+     * <p>
+     * will be the same as
+     * </p>
+     * <code>chmod( "myfile.txt", (S_IWUSR | S_IWGRP | S_IWOTH ) );</code>
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function chmod( path:String, mode:int ):int
+    {
+        return __unistd.chmod( path, mode );
+    }
+    
+    /**
      * Get the pathname of the current working directory.
      * 
      * @productversion redtamarin 0.3
@@ -334,27 +368,6 @@ package C.unistd
     }
 
     /**
-     * Change mode of a file.
-     * 
-     * <p><b>note:</b></p>
-     * <p>
-     * under WIN32 chmod is limited, you will only be able to set read or write at the user level
-     * </p>
-     * <code>chmod( "myfile.txt", S_WRITE );</code>
-     * <p>
-     * will be the same as
-     * </p>
-     * <code>chmod( "myfile.txt", (S_IWUSR | S_IWGRP | S_IWOTH ) );</code>
-     * 
-     * @productversion redtamarin 0.3
-     * @since 0.3.0
-     */
-    public function chmod( path:String, mode:int ):int
-    {
-        return __unistd.chmod( path, mode );
-    }
-
-    /**
      * Suspend execution for an interval of time.
      *
      * <p><b>note:</b></p>
@@ -368,5 +381,16 @@ package C.unistd
     public function sleep( milliseconds:uint ):void
     {
         __unistd.sleep( milliseconds );
+    }
+
+    /**
+     * Remove a directory entry.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function unlink( path:String ):int
+    {
+        return __unistd.unlink( path );
     }
 }
