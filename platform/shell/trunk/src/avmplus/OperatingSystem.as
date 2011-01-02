@@ -42,7 +42,15 @@ package avmplus
     import C.unistd.*;
     
     /**
+     * The OperatingSystem class
      * Provides informations about the Operating System.
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/System
      */
     [native(cls="::avmshell::OperatingSystemClass", methods="auto")]
     public class OperatingSystem
@@ -78,8 +86,6 @@ package avmplus
         //other
         private static var _username:String;
         
-        private native static function getUserName():String;
-        
         
         private static function getVendorAll():String
         {
@@ -112,6 +118,11 @@ package avmplus
         DISTRIB_CODENAME=hardy
         DISTRIB_DESCRIPTION="Ubuntu 8.04.4 LTS"
         ----
+
+        more Ubuntu codenames
+        http://en.wikipedia.org/wiki/Ubuntu_(operating_system)#Releases
+
+        here we get "hardy", maybe we could add some code to change that to "Hardy Heron", etc.
         */
         private static var _linuxDistribID:String;
         private static var _linuxDistribRelease:String;
@@ -288,7 +299,7 @@ package avmplus
                 return name;
             }
         }
-
+        
         private static function getVendorNameMicrosoft():String
         {
             if( version.indexOf( "Windows 95" ) > -1 ) { return "Windows 95"; }
@@ -455,7 +466,7 @@ package avmplus
                 return UNKNOWN;
             }
         }
-
+        
         private static function getCodeNameApple():String
         {
             var version:Array = vendorVersion.split( "." );
@@ -507,6 +518,9 @@ package avmplus
         
         /**
          * The OS kernel name.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get name():String
         {
@@ -518,17 +532,23 @@ package avmplus
         
         /**
          * The current user name logged in the OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get username():String
         {
             if( _username ) { return _username; }
 
-            _username = getUserName();
+            _username = getlogin(); //C.unistd.getlogin()
             return _username;
         }
         
         /**
          * Name of this node on the network.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get nodename():String
         {
@@ -540,17 +560,23 @@ package avmplus
         
         /**
          * The host name of the local computer.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get hostname():String
         {
             if( _hostname ) { return _hostname; }
 
-            _hostname = gethostname();
+            _hostname = gethostname(); //C.unistd.gethostname()
             return _hostname;
         }
         
         /**
          * Current release level of the OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get release():String
         {
@@ -562,6 +588,9 @@ package avmplus
         
         /**
          * Current version level of this release of the OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get version():String
         {
@@ -573,6 +602,9 @@ package avmplus
         
         /**
          * Name of the hardware type the system is running on.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get machine():String
         {
@@ -584,6 +616,9 @@ package avmplus
         
         /**
          * Name of the vendor (commercial) or distributor (non-commercial) of this OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get vendor():String
         {
@@ -595,6 +630,9 @@ package avmplus
         
         /**
          * Name of the OS provided by the vendor/distributor.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get vendorName():String
         {
@@ -606,6 +644,9 @@ package avmplus
         
         /**
          * Version of the OS provided by the vendor/distributor.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get vendorVersion():String
         {
@@ -618,6 +659,9 @@ package avmplus
         /**
          * Description of the OS provided by the vendor/distributor,
          * or the empty string if not defined.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
         public static function get vendorDescription():String
         {
@@ -629,8 +673,11 @@ package avmplus
         
         /**
          * Codename of this OS, or "Unknown" if not defined.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
          */
-        public static function get codeName():String
+        public static function get codename():String
         {
             if( _codename ) { return _codename; }
 
