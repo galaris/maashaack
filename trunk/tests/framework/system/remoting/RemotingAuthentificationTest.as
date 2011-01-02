@@ -34,20 +34,52 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class RemotingAuthentificationTest extends TestCase 
     {
-        public static function suite():ITest
+        public function RemotingAuthentificationTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.remoting unit tests." );
-            
-            suite.addTestSuite( RemotingAuthentificationTest ) ;
-            suite.addTestSuite( RemotingConnectionsTest ) ;
-            suite.addTestSuite( RemotingGatewayUrlTest  ) ;
-            
-            return suite;
+            super( name );
+        }
+        
+        public var auth:RemotingAuthentification ;
+        
+        public function setUp():void
+        {
+            auth = new RemotingAuthentification( "user" , "pass" ) ;
+        }
+        
+        public function tearDown():void
+        {
+            auth = null ;
+        }
+        
+        public function testConstructorWithEmptyArguments():void
+        {
+            auth = new RemotingAuthentification() ;
+            assertNotNull( auth ) ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( auth ) ;
+        }
+        
+        public function testUserid():void
+        {
+            assertEquals( auth.userid , "user" ) ;
+        }
+        
+        public function testPassword():void
+        {
+            assertEquals( auth.password , "pass" ) ;
+        }
+        
+        public function testToObject():void
+        {
+            assertEquals( auth.toObject().password , "pass" , "#1" ) ;
+            assertEquals( auth.toObject().userid   , "user" , "#2" ) ;
         }
     }
 }
