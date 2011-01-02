@@ -46,7 +46,6 @@ package avmplus
      * The System class
      * Represents the currently running application and the avmshell runtime.
      * 
-     * 
      * @langversion 3.0
      * @playerversion Flash 9
      * @productversion redtamarin 0.3
