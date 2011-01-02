@@ -43,7 +43,8 @@ package system.remoting
         {
             var suite:TestSuite = new TestSuite( "system.remoting unit tests." );
             
-            suite.addTestSuite( RemotingGatewayUrlTest ) ;
+            suite.addTestSuite( RemotingConnectionsTest ) ;
+            suite.addTestSuite( RemotingGatewayUrlTest  ) ;
             
             return suite;
         }
