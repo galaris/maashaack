@@ -34,25 +34,30 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class RemotingServiceTest extends TestCase 
     {
-        public static function suite():ITest
+        public function RemotingServiceTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.remoting unit tests." );
-            
-            suite.addTestSuite( connectionsTest ) ;
-            suite.addTestSuite( loggerTest ) ;
-            
-            suite.addTestSuite( RemotingAuthentificationTest ) ;
-            suite.addTestSuite( RemotingConnectionsTest ) ;
-            suite.addTestSuite( RemotingConnectionTest ) ;
-            suite.addTestSuite( RemotingGatewayUrlTest  ) ;
-            suite.addTestSuite( RemotingServiceTest  ) ;
-            
-            return suite;
+            super( name );
+        }
+        
+        public var service:RemotingService ;
+        
+        public function setUp():void
+        {
+            service = new RemotingService() ;
+        }
+        
+        public function tearDown():void
+        {
+            service = null ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( service ) ;
         }
     }
 }
