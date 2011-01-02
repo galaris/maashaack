@@ -34,24 +34,47 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    import flash.net.NetConnection;
+    
+    public class RemotingConnectionTest extends TestCase 
     {
-        public static function suite():ITest
+        public function RemotingConnectionTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.remoting unit tests." );
-            
-            suite.addTestSuite( connectionsTest ) ;
-            suite.addTestSuite( loggerTest ) ;
-            
-            suite.addTestSuite( RemotingAuthentificationTest ) ;
-            suite.addTestSuite( RemotingConnectionsTest ) ;
-            suite.addTestSuite( RemotingConnectionTest ) ;
-            suite.addTestSuite( RemotingGatewayUrlTest  ) ;
-            
-            return suite;
+            super( name );
+        }
+        
+        public var connection:RemotingConnection ;
+        
+        public function setUp():void
+        {
+            connection = new RemotingConnection() ;
+        }
+        
+        public function tearDown():void
+        {
+            connection = null ;
+        }
+        
+        public function testAMF_SERVER_DEBUG():void
+        {
+            assertEquals( "amf_server_debug" , RemotingConnection.AMF_SERVER_DEBUG ) ;
+        }
+        
+        public function testCREDENTIALS():void
+        {
+            assertEquals( "Credentials" , RemotingConnection.CREDENTIALS ) ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( connection ) ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( connection is NetConnection ) ;
         }
     }
 }
