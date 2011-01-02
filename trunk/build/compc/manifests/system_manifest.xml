@@ -370,6 +370,19 @@
     <component id="system.reflection:ReflectionConfigurator" class="system.reflection.ReflectionConfigurator" />
     <component id="system.reflection:TypeInfo"               class="system.reflection.TypeInfo"               />
     
+    <!-- system.remoting -->
+    
+    <component id="system.remoting:connections"              class="system.remoting.connections"              />
+    <component id="system.remoting:IRemotingServiceListener" class="system.remoting.IRemotingServiceListener" />
+    <component id="system.remoting:logger"                   class="system.remoting.logger"                   />
+    <component id="system.remoting:RemotingAuthentification" class="system.remoting.RemotingAuthentification" />
+    <component id="system.remoting:RemotingConnection"       class="system.remoting.RemotingConnection"       />
+    <component id="system.remoting:RemotingConnections"      class="system.remoting.RemotingConnections"      />
+    <component id="system.remoting:RemotingGatewayUrl"       class="system.remoting.RemotingGatewayUrl"       />
+    <component id="system.remoting:RemotingService"          class="system.remoting.RemotingService"          />
+    <component id="system.remoting:RemotingServiceListener"  class="system.remoting.RemotingServiceListener"  />
+    <component id="system.remoting:RemotingServiceProxy"     class="system.remoting.RemotingServiceProxy"     />
+    
     <!-- system.serializers.eden -->
     
     <component id="system.serializers.eden:config"            class="system.serializers.eden.config"            />
