@@ -67,6 +67,19 @@ package system.remoting
             assertNotNull( collector ) ;
         }
         
+        public function testNumConnections():void
+        {
+            assertEquals( 0 , collector.numConnections ) ;
+            collector.addConnection("test1", connection1);
+            assertEquals( 1 , collector.numConnections ) ;
+            collector.addConnection("test1", connection1);
+            assertEquals( 1 , collector.numConnections ) ;
+            collector.addConnection("test2", connection2);
+            assertEquals( 2 , collector.numConnections ) ;
+            collector.removeConnection() ;
+            assertEquals( 0 , collector.numConnections ) ;
+        }
+        
         public function testAddConnection():void
         {
             assertTrue( collector.addConnection("test1", connection1) , "#1" ) ;
