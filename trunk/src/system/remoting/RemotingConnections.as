@@ -51,6 +51,14 @@ package system.remoting
         }
         
         /**
+         * Indicates the number of connections registered in the collection.
+         */
+        public function get numConnections():uint
+        {
+            return _map.size() ;
+        }
+        
+        /**
          * Adds a new RemotingConnection object with a single gateway url. 
          * If the single gateway url is already registered in the collector, the method returns false.
          * @return <code>true</code> if the connection can be registered with the single specific gateway's url.
