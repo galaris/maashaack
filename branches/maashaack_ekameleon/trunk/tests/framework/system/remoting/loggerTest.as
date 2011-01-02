@@ -34,22 +34,23 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class loggerTest extends TestCase 
     {
-        public static function suite():ITest
+        public function loggerTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.remoting unit tests." );
-            
-            suite.addTestSuite( loggerTest ) ;
-            
-            suite.addTestSuite( RemotingAuthentificationTest ) ;
-            suite.addTestSuite( RemotingConnectionsTest ) ;
-            suite.addTestSuite( RemotingGatewayUrlTest  ) ;
-            
-            return suite;
+            super( name );
+        }
+        
+        public function testSingleton():void
+        {
+            assertNotNull( logger ) ;
+        }
+        
+        public function testChannel():void
+        {
+            assertEquals( "system.remoting.logger" , logger.channel ) ;
         }
     }
 }
