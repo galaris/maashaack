@@ -35,8 +35,6 @@
 
 package system.remoting
 {
-    import system.remoting.RemotingConnections;
-    
     /**
      * The singleton collections of remoting connections registered with a specific gateway url in the application.
      */
