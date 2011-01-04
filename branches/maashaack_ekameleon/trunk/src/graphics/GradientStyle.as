@@ -35,10 +35,10 @@
 
 package graphics 
 {
-    import graphics.geom.Matrixs;
+    import core.dump;
+    import core.reflect.getClassPath;
 
-    import system.Reflection;
-    import system.eden;
+    import graphics.geom.Matrixs;
 
     import flash.geom.Matrix;
 
@@ -58,7 +58,7 @@ package graphics
          * @param interpolationMethod A value from the InterpolationMethod class that specifies which value to use: InterpolationMethod.linearRGB or InterpolationMethod.RGB.
          * @param focalPointRatio A number that controls the location of the focal point of the gradient. 0 means that the focal point is in the center. 1 means that the focal point is at one border of the gradient circle. -1 means that the focal point is at the other border of the gradient circle. A value less than -1 or greater than 1 is rounded to -1 or 1.
          */
-        public function GradientStyle( type:String, colors:Array, alphas:Array, ratios:Array, matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0 )
+        public function GradientStyle( type:String = null , colors:Array = null , alphas:Array = null , ratios:Array = null , matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0 )
         {
             this.alphas              = alphas ;
             this.colors              = colors ;
@@ -126,15 +126,15 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new " + Reflection.getClassPath(this) + "("
-                              + eden.serialize( type )   + "," 
-                              + eden.serialize( colors ) + "," 
-                              + eden.serialize( alphas ) + "," 
-                              + eden.serialize( ratios ) + "," 
+            var source:String = "new " + getClassPath(this,true) + "("
+                              + dump( type )   + "," 
+                              + dump( colors ) + "," 
+                              + dump( alphas ) + "," 
+                              + dump( ratios ) + "," 
                               + Matrixs.toSource( matrix ) + ","
-                              + eden.serialize( spreadMethod ) + ","
-                              + eden.serialize( interpolationMethod ) + ","
-                              + eden.serialize( focalPointRatio )
+                              + dump( spreadMethod ) + ","
+                              + dump( interpolationMethod ) + ","
+                              + dump( focalPointRatio )
                               + ")" ;
             return source ;
         }

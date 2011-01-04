@@ -55,7 +55,7 @@ package graphics
          * @param interpolationMethod A value from the InterpolationMethod class that specifies which value to use: InterpolationMethod.linearRGB or InterpolationMethod.RGB.
          * @param focalPointRatio A number that controls the location of the focal point of the gradient. 0 means that the focal point is in the center. 1 means that the focal point is at one border of the gradient circle. -1 means that the focal point is at the other border of the gradient circle. A value less than -1 or greater than 1 is rounded to -1 or 1.
          */
-        public function FillGradientStyle( type:String, colors:Array, alphas:Array, ratios:Array, matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0 )
+        public function FillGradientStyle( type:String = null , colors:Array = null , alphas:Array = null , ratios:Array = null , matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0 )
         {
             super( type , colors , alphas , ratios , matrix , spreadMethod, interpolationMethod, focalPointRatio ) ;
         }
