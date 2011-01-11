@@ -39,6 +39,7 @@
 
 package avmplus
 {
+    import C.stdlib.*;
     import C.unistd.*;
     import flash.utils.ByteArray;
 
@@ -56,6 +57,25 @@ package avmplus
     [native(cls="::avmshell::SystemClass", classgc="exact", methods="auto")]
     public class System
     {
+        
+        private static var _API:Array = [];
+                           _API[660] = "FP_9_0";
+                           _API[661] = "AIR_1_0";
+                           _API[662] = "FP_10_0";
+                           _API[663] = "AIR_1_5";
+                           _API[664] = "AIR_1_5_1";
+                           _API[665] = "FP_10_0_32";
+                           _API[666] = "AIR_1_5_2";
+                           _API[667] = "FP_10_1";
+                           _API[668] = "AIR_2_0";
+                           _API[669] = "AIR_2_5";
+                           _API[670] = "FP_10_2";
+                           _API[671] = "AIR_2_6";
+                           _API[672] = "SWF_12";
+                           _API[673] = "AIR_2_7";
+                           _API[674] = "FP_SYS";
+                           _API[675] = "AIR_SYS";
+        
         private native static function getArgv():Array;
         private native static function getStartupDirectory():String;
         
@@ -66,7 +86,37 @@ package avmplus
          * @since 0.3.0
          */
         public static const argv:Array = getArgv();
+        
+        /**
+         * The original directory when the application started.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static const startupDirectory:String = getStartupDirectory();
 
+
+
+        /**
+         * Return the value passed to -api at launch
+         * (or the default value, if -api was not specified).
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get apiVersion():int;
+
+        /**
+         * Returns the alias name of the api version.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get apiAlias():String
+        {
+            return _API[ apiVersion ];
+        }
+        
         /**
          * Returns the program filename.
          * 
@@ -76,13 +126,38 @@ package avmplus
         public native static function get programFilename():String;
 
         /**
-         * The original directory when the application started.
+         * Returns the value passed to -swfversion at launch
+         * (or the default value, if -swfversion was not specified).
          * 
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public static const startupDirectory:String = getStartupDirectory();
+        public native static function get swfVersion():int;
 
+        /**
+         * Amount of real memory we've aqcuired from the OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get totalMemory():Number;
+        
+        /**
+         * Part of totalMemory we aren't using.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get freeMemory():Number;
+        
+        /**
+         * Process wide size of resident private memory.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get privateMemory():Number;
+        
         /**
          * Allows to get or set the current working directory of the application.
          * 
@@ -102,55 +177,140 @@ package avmplus
             //TODO: deal with errors etc.
             chdir( value );
         }
-        
+
+
+
+
         /**
-         * Returns the value passed to -swfversion at launch
-         * (or the default value, if -swfversion was not specified).
+         * Executes the specified command line and returns the status code.
          * 
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function get swfVersion():int;
-        
+        public function exec( command:String ):int
+        {
+            return C.stdlib.system( command );
+        }
+
         /**
-         * Return the value passed to -api at launch
-         * (or the default value, if -api was not specified).
+         * Terminates the program execution.
          * 
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function get apiVersion():int;
+        public static function exit( status:int = -1 ):void
+        {
+            C.stdlib.exit( status );
+        }
 
-        // Amount of real memory we've aqcuired from the OS
-        public native static function get totalMemory():Number;
-
-        // Part of totalMemory we aren't using
-        public native static function get freeMemory():Number;
-
-        // process wide size of resident private memory
-        public native static function get privateMemory():Number;
-
+        /**
+         * Returns the current version of AVM+ in the form "1.0 d100".
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function getAvmplusVersion():String;
+
+        /**
+         * Returns the current version of the RedTamarin API.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function getRedtamarinVersion():String
+        {
+            return "0.3.0";
+        }
+
+        /**
+         * Returns the compiled in features of AVM+.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function getFeatures():String;
+
+        /**
+         * Returns the current runmode.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function getRunmode():String;
 
+        /**
+         * Returns the number of milliseconds that have elapsed
+         * since the AMV+ started.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function getTimer():uint;
-        
-        public native static function trace(a:Array):void;
-        public native static function write(s:String):void;
+
+        /**
+         * Waits and returns all the characters entered by the user.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function readLine():String;
-        
+
+        /**
+         * Writes arguments to the command line and returns to the line.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function trace( a:Array ):void;
+
+        /**
+         * Writes a string to the command line.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function write( s:String ):void;
+
+        /**
+         * Enters debugger.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function debugger():void;
+
+        /**
+         * Tests if the current program is compiled with debugger flags.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function isDebugger():Boolean;
-
-
-        // Initiate a garbage collection; future versions will not return before completed.
+        
+        /**
+         * Initiate a garbage collection
+         * (future versions will not return before completed).
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function forceFullCollection():void;
-
-        // Queue a garbage collection request.
+        
+        /**
+         * Queue a garbage collection request.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native static function queueCollection():void;
 
-        public native static function disposeXML(xml:XML):void;
+        /**
+         * Makes the specified XML object immediately available for garbage collection.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function disposeXML( xml:XML ):void;
 
     }
     
