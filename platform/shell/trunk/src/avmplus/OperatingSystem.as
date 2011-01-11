@@ -375,9 +375,9 @@ package avmplus
             {
                 var desc:String = vendor + " " + vendorName + " " + vendorVersion;
                     desc += " ("
-                if( codeName != UNKNOWN )
+                if( codename != UNKNOWN )
                 {
-                    desc += codeName + " ";
+                    desc += codename + " ";
                 }
 
                 if( !_macProductBuildVersion )
@@ -413,9 +413,9 @@ package avmplus
             {
                 var desc:String = vendor + " " + version;
                     desc += " ("
-                if( codeName != UNKNOWN )
+                if( codename != UNKNOWN )
                 {
-                    desc += codeName + " ";
+                    desc += codename + " ";
                 }
                     desc += release+")";
                 return desc;
@@ -437,9 +437,9 @@ package avmplus
             if( _linuxDistribDescription && (_linuxDistribDescription != EMPTY) )
             {
                 var desc:String = vendor + " " + _linuxDistribDescription;
-                if( codeName != UNKNOWN )
+                if( codename != UNKNOWN )
                 {
-                    desc += " (" + codeName + ")";
+                    desc += " (" + codename + ")";
                 }
                 return desc;
             }
