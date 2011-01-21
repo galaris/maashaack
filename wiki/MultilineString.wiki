@@ -1,0 +1,103 @@
+#summary Multiline Strings in AS3.
+
+== Before ==
+
+In general you would write your multiline like that
+{{{
+    var help:String = "";
+help += "Usage:\n";
+help += " createprojector [-exe avmshell] [-o filename] file\n";
+help += " file           a *.swf or *.abc file\n";
+help += " -exe avmshell  the avmshell executable to use\n";
+help += " -o filename    defines the name of the output file\n";
+}}}
+
+
+== After ==
+
+thanks to E4X we have XML literals in AS3
+
+so you can write your multiline like this
+{{{
+    var help:String = <x><![CDATA[
+Usage:
+ createprojector [-exe avmshell] [-o filename] file
+ file           a *.swf or *.abc file
+ -exe avmshell  the avmshell executable to use
+ -o filename    defines the name of the output file
+]]></x>.text()[0];
+}}}
+
+Or even better
+{{{
+    var help:String = <![CDATA[
+Usage:
+ createprojector [-exe avmshell] [-o filename] file
+ file           a *.swf or *.abc file
+ -exe avmshell  the avmshell executable to use
+ -o filename    defines the name of the output file
+]]>;
+}}}
+
+Yep, the CDATA node is enough to create an XML node,<br>
+but mainly because you type your variable as a `String`<br>
+the CDATA declaration is implicitly converted with `toString()`.
+
+Simple to check
+{{{
+    var help:String = <![CDATA[
+Usage:
+ createprojector [-exe avmshell] [-o filename] file
+ file           a *.swf or *.abc file
+ -exe avmshell  the avmshell executable to use
+ -o filename    defines the name of the output file
+]]>;
+
+trace( help is XML ); //false 
+trace( help is String ); //true
+}}}
+
+Note that you could keep typing your variable as `XML`
+{{{
+    var help:XML = <![CDATA[
+Usage:
+ createprojector [-exe avmshell] [-o filename] file
+ file           a *.swf or *.abc file
+ -exe avmshell  the avmshell executable to use
+ -o filename    defines the name of the output file
+]]>;
+
+trace( help is XML ); //true 
+trace( help is String ); //false
+trace( help ); // toString() is automatically called here
+}}}
+
+And why would you want to keep the `XML` type instead of the `String` type ?<br>
+<br>
+for JavaScript XML injection :)
+{{{
+import flash.external.ExternalInterface;
+
+//before
+/*
+var something:XML =
+        <script>
+                <![CDATA[
+                    function()
+                    {
+                        window.alert( "hello world" );
+                    }
+                ]]>
+        </script>;
+*/
+
+//after
+var something:XML = <![CDATA[
+function()
+{
+    window.alert( "hello world" );
+}
+]]>;
+
+ExternalInterface.call( something );
+}}}
