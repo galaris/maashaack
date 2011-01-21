@@ -14,6 +14,7 @@
    * [Namespace Namespace]
    * [Package Package level definition]
    * [StaticCodeBlock Static Code Block]
+   * [MultilineString Multiline String]
    * [ApplicationDomain ApplicationDomain]
  * [Users Working with maashaack]
    * [GettingStarted Getting Started]
