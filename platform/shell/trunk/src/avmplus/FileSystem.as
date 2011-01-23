@@ -31,7 +31,7 @@
  * under the terms of either the GPL or the LGPL, and not to allow others to
  * use your version of this file under the terms of the MPL, indicate your
  * decision by deleting the provisions above and replace them with the notice
- * and other provisions required by the GPL or the LGPL. If you do not delete
+ * and other provisions required by the GPL or the LGPL. If you do not deletef
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
  *
@@ -266,7 +266,29 @@ package avmplus
          * @since 0.3.0
          */
         public static const extensionSeparator:String = ".";
+        
+        private native static function _getLogicalDrives():int;
+        private static function getLogicalDrives():Array
+        {
+            var drives:Array = [];
+            var mask:int   = 1;
+            var bits:int = _getLogicalDrives();
+            trace( "mask = " + mask.toString(2) );
+            var base:Number = "A".charCodeAt(0);
+            var i:int;
+            for(i=0; i<26; i++)
+            {
+                if( bits & mask )
+                {
+                    trace( "found drive " + String.fromCharCode(base+i) );
+                    drives.push( String.fromCharCode(base+i) + ":" );
+                }
+                
+                mask <<= 1;
+            }
 
+            return drives;
+        }
         
         public static function get drives():Array
         {
@@ -274,7 +296,8 @@ package avmplus
             if( OperatingSystem.name == "Win32" )
             {
                 //call native getLogicalDrives();
-                return [];
+                //return [];
+                return getLogicalDrives();
             }
             
             //for POSIX
@@ -610,7 +633,10 @@ package avmplus
          * @since 0.3.0
          */
         public native static function isRegularFile( filename:String ):Boolean;
-
+        
+        //WIN32 only
+        private native static function _isAttributeHidden( filename:String ):Boolean;
+        
         /**
          * Tests if the <code>filename</code> is considered <code>hidden</code> by the system.
          * 
@@ -619,25 +645,26 @@ package avmplus
          */
         public static function isHidden( filename:String ):Boolean
         {
-            //don't assume we are testing a basename by default
-            var name:String = getBasenameFromPath( filename );
-            
             //for Windows
             if( OperatingSystem.name == "Win32" )
             {
-                //need to read hidden flag with GetAtrributes
-                return false;
+                return _isAttributeHidden( filename );
+            }
+            
+            //for OS X / BSD
+            if( OperatingSystem.name == "Darwin" )
+            {
+                return _isAttributeHidden( filename );
             }
             
             //for POSIX
+            //don't assume we are testing a basename by default
+            var name:String = getBasenameFromPath( filename );
+            
             if( name.charAt(0) == "." )
             {
                 return true;
             }
-
-            //for OS X need to check a flag ??
-
-            return false;
         }
 
         /**
