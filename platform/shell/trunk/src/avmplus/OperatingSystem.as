@@ -514,6 +514,53 @@ package avmplus
             return UNKNOWN;
         }
 
+        private native static function getSystemLocale():String;
+
+        private static function _parseSystemLocale( raw:String ):Object
+        {
+            /* note:
+               here the format
+               locale :: "lang[_country_region[.code_page]]"
+
+               we ignore region for now
+            */
+
+            var localeinfo:Object = {};
+                localeinfo.language = "";
+                localeinfo.country  = "";
+                localeinfo.codepage = "";
+
+            if( raw.indexOf( "." ) > -1 )
+            {
+                var tmp:Array = raw.split( "." );
+
+                if( tmp[1] && (tmp[1] != "") )
+                {
+                    localeinfo.codepage = tmp[1];
+                }
+                
+                raw = tmp[0];
+            }
+
+            if( raw.indexOf( "_" ) > -1 )
+            {
+                var tmp2:Array = raw.split( "_" );
+
+                if( tmp2[0] && (tmp2[0] != "") )
+                {
+                    localeinfo.language = tmp2[0];
+                }
+
+                if( tmp2[1] && (tmp2[1] != "") )
+                {
+                    localeinfo.country = tmp2[1];
+                }
+            }
+            
+            return localeinfo;
+        }
+
+
 
         
         /**
@@ -684,6 +731,68 @@ package avmplus
             _codename = getCodeNameAll();
             return _codename;
         }
+
+        /**
+         * The OS language.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get language():String
+        {
+            var info:Object = _parseSystemLocale( getSystemLocale() );
+            return info.language;
+        }
+
+        /**
+         * The OS country.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get country():String
+        {
+            var info:Object = _parseSystemLocale( getSystemLocale() );
+            return info.country;
+        }
+
+        /**
+         * The OS locale as <code>language[_country]</code>.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get locale():String
+        {   
+            var str:String = "";
+
+            if( language != "" )
+            {
+                str += language;
+            }
+
+            if( country != "" )
+            {
+                if( str != "" ) { str += "_"; }
+                str += country;
+            }
+
+            return str;
+        }
+
+        /**
+         * The OS code page.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get codepage():String
+        {
+            var info:Object = _parseSystemLocale( getSystemLocale() );
+            return info.codepage;
+        }
+
+
 
 
 /* notes:
