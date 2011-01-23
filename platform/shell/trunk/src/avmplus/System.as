@@ -116,6 +116,17 @@ package avmplus
         {
             return _API[ apiVersion ];
         }
+
+        /**
+         * Returns the current process id.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get pid():int
+        {
+            return getpid();
+        }
         
         /**
          * Returns the program filename.
@@ -124,6 +135,41 @@ package avmplus
          * @since 0.3.0
          */
         public native static function get programFilename():String;
+
+        private static var _shell:String;
+
+        private static function _findShell():String
+        {
+            var sh:String = "";
+
+            switch( OperatingSystem.vendor )
+            {
+                case "Microsoft":
+                sh = getenv( "COMSPEC" );
+                break;
+
+                case "Apple":
+                case "Linux":
+                default:
+                sh = getenv( "SHELL" );
+            }
+
+            return sh;
+        }
+
+        /**
+         * Returns system default shell.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get shell():String
+        {
+            if( _shell ) { return _shell; }
+
+            _shell = _findShell();
+            return _shell;
+        }
 
         /**
          * Returns the value passed to -swfversion at launch
@@ -203,6 +249,19 @@ package avmplus
             C.stdlib.exit( status );
         }
 
+        private native static function popenRead( command:String ):String;
+
+        /**
+         * Executes the specified command line and returns the output.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function popen( command:String ):String
+        {
+            return popenRead( command );
+        }
+
         /**
          * Returns the current version of AVM+ in the form "1.0 d100".
          * 
@@ -270,6 +329,60 @@ package avmplus
          * @since 0.3.0
          */
         public native static function write( s:String ):void;
+
+        /**
+         * Writes a string to the command line and returns to the line.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function writeLine( s:String ):void
+        {
+            System.write( s + "\n" );
+        }
+
+        /**
+         * Returns the length of the stdin buffer.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get stdinLength():Number;
+
+        /**
+         * Indicates if stdin buffer is empty or not.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function isStdinEmpty():Boolean
+        {
+            return System.stdinLength == 0;
+        }
+
+        /**
+         * Reads the length of <ocde>bytes</code> from stdin.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function stdinRead( length:uint ):ByteArray;
+
+        /**
+         * Reads the stdin till EOF is reached.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function stdinReadAll():ByteArray;
+
+        /**
+         * 
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function stdoutWrite( bytes:ByteArray ):void;
 
         /**
          * Enters debugger.
