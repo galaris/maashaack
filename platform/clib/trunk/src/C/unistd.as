@@ -99,6 +99,7 @@ package C.unistd
         public native static function getcwd():String;                      //char *getcwd(char *buf, size_t size);
         public native static function gethostname():String;                 //int gethostname(char *name, size_t namelen);
         public native static function getlogin():String;                    //char *getlogin(void);
+        public native static function getpid():int;                         //pid_t getpid(void);
 
         /* note:
            mkdir() is normaly defined in <sys/stat.h> and can define file permission
@@ -343,6 +344,17 @@ package C.unistd
     public function getlogin():String
     {
         return __unistd.getlogin();
+    }
+
+    /**
+     * Get the process ID.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function getpid():int
+    {
+        return __unistd.getpid();
     }
 
     /**
