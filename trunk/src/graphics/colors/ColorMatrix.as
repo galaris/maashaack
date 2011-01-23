@@ -234,11 +234,11 @@ package graphics.colors
          */ 
         public function concat( mat:Array ):Array
         {
-            var i:int      = 0;
+            var i:int ;
             var result:Array = [] ;
-            for (var y:int = 0 ; y < 4 ; y++ )
+            for (var y:int ; y < 4 ; y++ )
             {
-                for (var x:int = 0 ; x < 5 ; x++ )
+                for (var x:int ; x < 5 ; x++ )
                 {
                     result[i + x] = mat[i]   * matrix[ x      ] + 
                                     mat[i+1] * matrix[ x +  5 ] + 
@@ -246,7 +246,7 @@ package graphics.colors
                                     mat[i+3] * matrix[ x + 15 ] +
                                     ( x == 4 ? mat[i+4] : 0 ) ;
                 }
-                i+=5 ;
+                i += 5 ;
             }
             return result;
         }
