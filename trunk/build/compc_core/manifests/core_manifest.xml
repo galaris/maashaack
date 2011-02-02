@@ -72,6 +72,7 @@
     <component id="core.maths:map"         class="core.maths.map"         />
     <component id="core.maths:normalize"   class="core.maths.normalize"   />
     <component id="core.maths:percentage"  class="core.maths.percentage"  />
+    <component id="core.maths:replaceNaN"  class="core.maths.replaceNaN"  />
     <component id="core.maths:round"       class="core.maths.round"       />
     <component id="core.maths:sign"        class="core.maths.sign"        />
     <component id="core.maths:sinerp"      class="core.maths.sinerp"      />
