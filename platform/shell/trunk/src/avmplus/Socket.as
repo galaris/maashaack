@@ -44,83 +44,304 @@ package avmplus
     import C.errno.*;
     import flash.utils.ByteArray;
     
-    public namespace hack;
-    
     /**
-     * Provides basic sync socket.
+     * The Socket class
+     * Provides methods to create client and server sockets.
+     * 
+     * @langversion 3.0
+     * @playerversion Flash 9
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     * 
+     * @see http://code.google.com/p/redtamarin/wiki/Socket
      */
     [native(cls="::avmshell::SocketClass", instance="::avmshell::SocketObject", methods="auto")]
-    public class Socket
+    public dynamic class Socket
     {
-        private var _localAddress:String;
-        private var _localPort:int;
-        private var _remoteAddress:String;
-        private var _remotePort:int;
+        /* note:
+           in methods like receiveAll()
+           we will loop till the result is smaller than the buffer
+           if the buffer is 1 byte, we end up with an infinite loop
+        */
+        static private const _MIN_BUFFER:uint = 2;
 
-        private var _connected:Boolean = false;
-        private var _bound:Boolean     = false;
-        private var _listening:Boolean = false;
+        /**
+         * The last socket error.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get lastError():int;
+
+        /**
+         * The list of local IP addresses.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get localAddresses():Array
+        {
+            var addresses:Array = [];
+            var localhost:Array = gethostbyname( "localhost", true );
+            var hostname:Array  = gethostbyname( OperatingSystem.hostname, true );
+
+            if( localhost.length > 0 )
+            {
+                addresses = addresses.concat( localhost );
+            }
+            
+            if( hostname.length > 0 )
+            {
+                addresses = addresses.concat( hostname );
+            }
+            
+            return addresses;
+        }
+
+        /**
+         * The maximum backlog queue length supported by the OS for each socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public static function get maxConnectionQueue():uint
+        {
+            return SOMAXCONN;
+        }
+
+        /**
+         * The maximum concurrent connections supported by the OS.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native static function get maxConcurrentConnection():int;
+
+        internal namespace hack_sock;
+
+        private var _logs:Array;
         
+        private var _local:String; // ip:port
+        private var _peer:String;  // ip:port
+
+        private var _connected:Boolean;
+        private var _bound:Boolean;
+        private var _listening:Boolean;
+        private var _child:Boolean;
+
+        /**
+         * The Socket constructor.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function Socket( family:int = -1, socktype:int = -1, protocol:int = -1 )
         {
             if( (family > -1) && (socktype > -1) && (protocol > -1) )
             {
                 _customSocket( family, socktype, protocol );
             }
+
+            _ctor();
         }
-        
-        public native static function get lastError():int;
-        
-        private native function get lastDataSent():int;
-        private native function get receivedBuffer():String;
-        private native function get receivedBinary():ByteArray;
 
-        private native function isValid():Boolean;
+        private function _ctor():void
+        {
+            _logs = [];
+            _reset();
+            _setNoSigPipe();
+            
+            this.onConstruct();
+        }
 
+        private native function get _type():int;
+        
+        private native function _getBuffer():ByteArray;
+        private native function _setNoSigPipe():void;
+        private native function _isValid():Boolean;
+        private native function _isReadable():int;
+        private native function _isWritable():int;
+        //private native function _isExceptional():int; //not used, not working ?
         private native function _customSocket( family:int, socktype:int, protocol:int ):void;
         private native function _connect( host:String, port:String ):Boolean;
         private native function _close():Boolean;
-        private native function _send( data:String, flags:int = 0 ):int;
-        private native function _sendBinary( data:ByteArray, flags:int = 0 ):int;
-        private native function _receive( flags:int = 0 ):int;
-        private native function _receiveBinary( flags:int = 0 ):int;
-        private native function _bind( port:int ):Boolean;
+        private native function _send( data:ByteArray, flags:int = 0 ):int;
+        private native function _sendTo( host:String, port:String, data:ByteArray, flags:int = 0 ):int;
+        private native function _receive( buffer:int, flags:int = 0 ):int;
+        private native function _receiveFrom( buffer:int, flags:int = 0 ):int;
+        private native function _bind( host:String, port:int ):Boolean;
         private native function _listen( backlog:int ):Boolean;
         private native function _accept():Socket;
 
+        private function _reset():void
+        {
+            _local = "";
+            _peer  = "";
+            
+            _connected = false;
+            _bound     = false;
+            _listening = false;
+            _child     = false;
+        }
+
+        //was: throw new Error( strerror( lastError ), lastError );
+        private function _throwSocketError( e:int ):void
+        {
+            var cerr:Error = new Error( strerror(e), e );
+                cerr.name  = "SocketError";
+
+            this.record( cerr.toString() + " (errno="+e+")." );
+            throw cerr;
+        }
+
+        private function _throwReceiveBufferError():void
+        {
+            var re:RangeError = new RangeError( "Buffer is too small, need to be minimum " + _MIN_BUFFER + " bytes." );
+            this.record( re.toString() );
+            throw re;
+        }
+        
+        private function _throwMaxConnectionError():void
+        {
+            var re:RangeError = new RangeError( "The Operating System only allows " + SOMAXCONN + " maximum listen() backlog queue length for each socket." );
+            this.record( re.toString() );
+            throw re;
+        }
+
+        private function _onConnect():void
+        {
+            _connected = true;
+            
+            if( _child )
+            {
+                _peer  = getsockname( descriptor );
+                _local = getpeername( descriptor );            
+            }
+            else
+            {
+                _peer  = getpeername( descriptor );
+                _local = getsockname( descriptor );
+            }
+            
+            this.onConnect();
+        }
+        
+        //when the other end close the connection
+        private function _remoteClose():void
+        {
+            var addr:String;
+
+            //if we are a child the local/peer is inversed
+            if( _child )
+            {
+                addr = local;
+            }
+            else
+            {
+                addr = peer;
+            }
+            
+            this.onDisconnect( "Connection closed by remote peer [" + addr + "]." );
+            _localClose();
+        }
+
+        private function _localClose():void
+        {
+            this.onDestruct();
+            
+            if( !_close() )
+            {
+                switch( lastError )
+                {
+                    case 0:
+                    //do nothing
+                    break;
+                    
+                    case ENOTCONN:
+                    //do nothing
+                    break;
+                    
+                    default:
+                    this.record( "another problem occured = " + lastError + " : " + strerror( lastError ) );
+                }
+            }
+
+            _reset();
+        }
+
+
+        /**
+         * The socket descriptor.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public native function get descriptor():int;
+
 
         //status
+     
+        /**
+         * Indicates if the socket is valid.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get valid():Boolean { return _isValid(); }
 
-        public function get valid():Boolean
-        {
-            return isValid();
-        }
+        /**
+         * Indicates if the socket is ready for reading.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get readable():Boolean { return _isReadable() > 0; }
 
-        public function get connected():Boolean
-        {
-            return _connected;
-        }
+        /**
+         * Indicates if the socket is ready for writing.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get writable():Boolean { return _isWritable() > 0; }
 
-        hack function set connected( value:Boolean ):void
-        {
-            _connected = value;
-        }
+        //Indicates if the socket has an exceptional condition pending.
+        //public function get exceptional():Boolean { return _isExceptional() > 0; }
 
-        public function get bound():Boolean
-        {
-            return _bound;
-        }
+        /**
+         * Indicates if the socket is connected.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get connected():Boolean { return _connected; }
+        hack_sock function set connected( value:Boolean ):void { _connected = value; }
 
-        public function get listening():Boolean
-        {
-            return _listening;
-        }
+        /**
+         * Indicates if the socket is bound.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get bound():Boolean { return _bound; }
+
+        /**
+         * Indicates if the socket is listening.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get listening():Boolean { return _listening; }
         
 
         //options
 
-        private native function get _type():int;
-
+        /**
+         * Returns the type of the socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function get type():String
         {
             switch( _type )
@@ -133,212 +354,553 @@ package avmplus
 
                 case SOCK_DGRAM:
                 return "datagram";
+
+                case -1:
+                default:
+                return "invalid";
             }
         }
-        
+
+        /**
+         * Indicates if the socket address can be reused.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native function get reuseAddress():Boolean;
         public native function set reuseAddress( value:Boolean ):void;
 
+        /**
+         * Indicates if the socket can broadcast.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public native function get broadcast():Boolean;
         public native function set broadcast( value:Boolean ):void;
 
 
         //infos
 
-        public function get localPort():int
+        /**
+         * Returns the session logs for this socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get logs():Array { return _logs; }
+
+        /**
+         * Local socket address and port.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get local():String { return _local; }
+        hack_sock function set local( value:String ):void { _local = value; }
+
+        /**
+         * Peer socket address and port.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function get peer():String { return _peer; }
+        hack_sock function set peer( value:String ):void { _peer = value; }
+
+
+        /**
+         * Indicates if the socket is a TCP client.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function isClient():Boolean
         {
-            return _localPort;
+            return (type == "stream") && connected;
         }
 
-        public function get localAddress():String
+        /**
+         * Indicates if the socket is a TCP server.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function isServer():Boolean
         {
-            return _localAddress;
+            return (type == "stream") && bound && listening;
         }
         
 
-        public function get remotePort():int
-        {
-            return _remotePort;
-        }
+        //actions
 
-        public function get remoteAddress():String
-        {
-            return _remoteAddress;
-        }
-
-
-
-        
-        public function connect( host:String, port:int ):void
+        /**
+         * Connect a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function connect( host:String, port:uint ):void
         {
             if( !_connect( host, String(port) ) )
             {
-                throw new Error( strerror( lastError ), lastError );
+                _throwSocketError( lastError );
             }
-            else
-            {
-                _connected = true;
-            }
+            
+            _onConnect();
         }
-
+        
+        //when we create a child socket with accept()
+        hack_sock function connectByParent():void
+        {
+            _ctor();
+            _child = true;
+            _onConnect();
+        }
+        
+        /**
+         * Close a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function close():void
         {
-            if( !connected ) { return; }
-            
-            if( !_close() )
+            if( isClient() || isServer() )
             {
-                //throw new Error( strerror( lastError ), lastError );
-                switch( lastError )
-                {
-                    case 0:
-                    //do nothing
-                    break;
-                    
-                    case ENOTCONN:
-                    //do nothing
-                    break;
-
-                    default:
-                    trace( "a problem occured = " + lastError + " : " + strerror( lastError ) );
-                }
+                this.onDisconnect( "Terminated." );
             }
-
-            _connected = false;
-            _bound     = false;
-            _listening = false;
+            
+            _localClose();
         }
 
+        /**
+         * Send a string message on a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function send( data:String, flags:int = 0 ):void
         {
             if( !connected ) { return; }
-        
-            if( _send( data, flags ) == -1 )
-            {
-                //trace( "We only sent " + lastDataSent + " bytes because of the error!" );
-                throw new Error( strerror( lastError ), lastError );
-            }
 
-            //trace( "Sent whole data " + data.length + " bytes" );
+            var bytes:ByteArray = new ByteArray();
+                bytes.writeUTFBytes( data );
+                bytes.writeByte(0); //we want null terminated!
+                bytes.position = 0;
+            
+            if( _send( bytes, flags ) == -1 )
+            {
+                _throwSocketError( lastError );
+            }
+            
+            this.onSend( data.length );
         }
 
+        /**
+         * Send a binary message on a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function sendBinary( data:ByteArray, flags:int = 0 ):void
         {
             if( !connected ) { return; }
-        
-            if( _sendBinary( data, flags ) == -1 )
-            {
-                //trace( "We only sent " + lastDataSent + " bytes because of the error!" );
-                throw new Error( strerror( lastError ), lastError );
-            }
 
-            trace( "Sent whole data " + data.length + " bytes" );
+            data.writeByte(0); //we want null terminated!
+            data.position = 0;
+            
+            if( _send( data, flags ) == -1 )
+            {
+                _throwSocketError( lastError );
+            }
+            
+            this.onSend( data.length );
         }
 
+        /**
+         * Send a string message on a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function sendTo( host:String, port:int, data:String, flags:int = 0 ):void
         {
-            connect( host, port );
+            var bytes:ByteArray = new ByteArray();
+                bytes.writeUTFBytes( data );
+                bytes.writeByte(0); //we want null terminated!
+                bytes.position = 0;
             
-            if( connected )
+            if( _sendTo( host, String(port), bytes, flags ) == -1 )
             {
-                send( data, flags );
+                _throwSocketError( lastError );
             }
-            else
-            {
-                trace( "sendTo() could not reach " + host + ":" + port );
-            }
+            
+            _peer  = host + ":" + String(port);
+            _local = getsockname( descriptor );
+            
+            this.onSend( data.length );
         }
-        
-        public function receive( flags:int = 0 ):String
+
+        /**
+         * Send a binary message on a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function sendBinaryTo( host:String, port:int, data:ByteArray, flags:int = 0 ):void
+        {
+            data.writeByte(0); //we want null terminated!
+            data.position = 0;
+            
+            if( _sendTo( host, String(port), data, flags ) == -1 )
+            {
+                _throwSocketError( lastError );
+            }
+            
+            _peer  = host + ":" + String(port);
+            _local = getsockname( descriptor );
+            
+            this.onSend( data.length );
+        }
+
+        /**
+         * Receive part of a string message from a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receive( buffer:uint = 1024, flags:int = 0 ):String
         {
             if( !connected ) { return; }
+            
+            if( buffer < _MIN_BUFFER ) { _throwReceiveBufferError(); }
 
             var data:String = "";
-            var result:int  = _receive( flags );
+            var result:int  = _receive( buffer, flags );
             
-            data += receivedBuffer;
+            if( result == 0 ) { _remoteClose(); }
 
-            if( result == 0 )
-            {
-                trace( "Connection closed by remote peer." );
-                _connected = false;
-            }
+            if( result == -1 ) { _throwSocketError( lastError ); }
 
+            var _buffer:ByteArray = _getBuffer();
+                _buffer.position = 0;
+            data += _buffer.readUTFBytes( result );
+            
+            this.onReceive( data.length );
             return data;
         }
-        
-        public function receiveBinary( flags:int = 0 ):ByteArray
+
+        /**
+         * Receive all of a string message from a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receiveAll( buffer:uint = 1024, flags:int = 0 ):String
         {
             if( !connected ) { return; }
-
-            var bytes:ByteArray;
-            var result:int  = _receiveBinary( flags );
             
-            bytes = receivedBinary;
-
-            if( result == 0 )
-            {
-                trace( "Connection closed by remote peer." );
-                _connected = false;
-            }
+            if( buffer < _MIN_BUFFER ) { _throwReceiveBufferError(); }
             
-            return bytes;
-        }
-        
-        public function receiveFrom( host:String, port:int, flags:int = 0 ):String
-        {
-            connect( host, port );
+            var data:String = "";
+            var part:String = "";
+            var run:Boolean = true;
 
-            if( connected )
+            do
             {
-                return receive( flags );
+                part = receive( buffer, flags );
+
+                if( (part != "") && (part.length > 0) )
+                {
+                    data += part;
+                }
+                
+                if( part.length < buffer ) { run = false; }
             }
-            else
-            {
-                trace( "receiveFrom() could not reach " + host + ":" + port );
-                return "";
-            }
+            while( run )
+
+            this.onReceiveAll( data.length );
+            return data;
         }
 
-        public function bind( port:uint ):Boolean
+        /**
+         * Receive part of a binary message from a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receiveBinary( buffer:uint = 1024, flags:int = 0 ):ByteArray
         {
-            var result:Boolean = _bind( port );
+            if( !connected ) { return; }
+            
+            if( buffer < _MIN_BUFFER ) { _throwReceiveBufferError(); }
+            
+            var data:ByteArray;
+            var result:int  = _receive( buffer, flags );
+            
+            if( result == 0 ) { _remoteClose(); }
+
+            if( result == -1 ) { _throwSocketError( lastError ); }
+            
+            data = _getBuffer();
+            data.position = 0;
+            
+            this.onReceive( data.length );
+            return data;
+        }
+
+        /**
+         * Receive all of a binary message from a connected socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receiveBinaryAll( buffer:uint = 1024, flags:int = 0 ):ByteArray
+        {
+            if( !connected ) { return; }
+            
+            if( buffer < _MIN_BUFFER ) { _throwReceiveBufferError(); }
+            
+            var data:ByteArray = new ByteArray();
+            var part:ByteArray;
+            var run:Boolean = true;
+
+            do
+            {
+                part = receiveBinary( buffer, flags );
+                
+                if( (part != null) && (part.length > 0) )
+                {
+                    data.writeBytes( part ); //append the bytes
+                }
+                
+                if( part.length < buffer ) { run = false; }
+            }
+            while( run )
+
+            this.onReceiveAll( data.length );
+            return data;
+        }
+
+        /**
+         * Receive a string message from a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receiveFrom( buffer:uint = 512, flags:int = 0 ):String
+        {
+            var data:String = "";
+            var result:int  = _receiveFrom( buffer, flags );
+
+            if( result == 0 ) { _remoteClose(); }
+
+            if( result == -1 ) { _throwSocketError( lastError ); }
+            
+            var _buffer:ByteArray = _getBuffer();
+                _buffer.position = 0;
+            data += _buffer.readUTFBytes( result );
+            
+            _local = getsockname( descriptor );
+            
+            this.onReceive( data.length );
+            return data;
+        }
+
+        /**
+         * Receive a binary message from a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function receiveBinaryFrom( buffer:uint = 512, flags:int = 0 ):ByteArray
+        {
+            var data:ByteArray;
+            var result:int  = _receiveFrom( buffer, flags );
+
+            if( result == 0 ) { _remoteClose(); }
+
+            if( result == -1 ) { _throwSocketError( lastError ); }
+            
+            data = _getBuffer();
+            data.position = 0;
+            
+            _local = getsockname( descriptor );
+            
+            this.onReceive( data.length );
+            return data;
+        }
+
+        /**
+         * Bind a name to a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
+        public function bind( port:uint, host:String = "" ):Boolean
+        {
+            if( host == "" ) { host = "127.0.0.1"; }
+            
+            var result:Boolean = _bind( host, port );
 
             if( result )
             {
-                trace( "bind to port " + port );
                 _bound = true;
-                _port  = port;
+                _local = getsockname( descriptor );
+                this.onBind( port );
             }
 
             return result;
         }
 
+        /**
+         * Listen for socket connections and limit the queue of incoming connections.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function listen( backlog:uint = 0 ):Boolean
         {
+            if( backlog > SOMAXCONN )
+            {
+                _throwMaxConnectionError();
+            }
+            
             var result:Boolean = _listen( backlog );
 
             if( result )
             {
                 _listening = true;
+                this.onListen( backlog );
             }
 
             return result;
         }
 
+        /**
+         * Accept a new connection on a socket.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.0
+         */
         public function accept():Socket
         {
             var s:Socket = _accept();
 
-            if( s )
+            if( s && (s.descriptor > 0) )
             {
-                this.hack::connected = true;
-                s.hack::connected = true;
+                s.hack_sock::connectByParent();
             }
-
+            
+            this.onAccept( s.descriptor );
             return s;
         }
+        
 
+        //poor man events
+        public static function _init():void
+        {
+            prototype.log = function( message:String ):void
+            {
+                this._logs.push( message );
+            }
+            
+            prototype.output = function( message:String ):void
+            {
+                trace( message );
+            }
+            
+            prototype.recordLogOnly = function( message:String ):void
+            {
+                message = "Socket (" + this.descriptor + "): " + message;
+                this.log( message );
+            }
+
+            prototype.recordOutputOnly = function( message:String ):void
+            {
+                message = "Socket (" + this.descriptor + "): " + message;
+                this.output( message );
+            }
+
+            prototype.recordAll = function( message:String ):void
+            {
+                message = "Socket (" + this.descriptor + "): " + message;
+                this.log( message );
+                this.output( message );
+            }
+            
+            //default
+            prototype.record = prototype.recordAll;
+            
+            prototype.onConstruct = function():void
+            {
+                this.record( this.type + " socket created." );
+            }
+
+            prototype.onDestruct = function():void
+            {
+                this.record( this.type + " socket destroyed." );
+            }
+            
+            prototype.onConnect = function():void
+            {
+                this.record( "[" + this.local + "] connected to [" + this.peer + "]." );
+            }
+
+            prototype.onDisconnect = function( message:String = "" ):void
+            {
+                if( message != "" ) { this.record( message ); }
+                if( this.isClient() )
+                {
+                    this.record( "Disconnected from [" + this.peer + "]." );
+                }
+                else if( this.isServer() )
+                {
+                    this.record( "[" + this.local + "] stop listening, unbound and disconnected." );
+                }
+            }
+
+            prototype.onSend = function( data:Number ):void
+            {
+                this.record( "Sent " + data + " bytes." );
+            }
+
+            prototype.onReceive = function( data:Number ):void
+            {
+                this.record( "Received " + data + " bytes." );
+            }
+
+            prototype.onReceiveAll = function( data:Number ):void
+            {
+                this.record( "Received all " + data + " bytes." );
+            }
+
+            prototype.onBind = function( port:uint ):void
+            {
+                var info:String = String(port);
+
+                if( this.local != "" ) { info = this.local; }
+                
+                this.record( "Bound to [" + info + "]." );
+            }
+
+            prototype.onListen = function( backlog:uint ):void
+            {
+                this.record( "[" + this.local + "] listening (backlog=" + backlog + ")." );
+            }
+
+            prototype.onAccept = function( id:int ):void
+            {
+                this.record( "[" + this.local + "] accept connection from [" + id + "]." );
+            }
+
+            _dontEnumPrototype( prototype );
+        }
         
     }
+
+    // dont create proto functions until after class Function is initialized
+    Socket._init()
 
 }
