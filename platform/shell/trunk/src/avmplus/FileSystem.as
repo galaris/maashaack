@@ -652,9 +652,9 @@ package avmplus
             }
             
             //for OS X / BSD
-            if( OperatingSystem.name == "Darwin" )
+            if( (OperatingSystem.name == "Darwin") && _isAttributeHidden( filename ) )
             {
-                return _isAttributeHidden( filename );
+                return true;
             }
             
             //for POSIX
@@ -665,6 +665,8 @@ package avmplus
             {
                 return true;
             }
+
+            return false;
         }
 
         /**
