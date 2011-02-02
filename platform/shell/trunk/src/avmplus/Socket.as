@@ -615,8 +615,12 @@ package avmplus
                 {
                     data += part;
                 }
+                else
+                {
+                    run = false;
+                }
                 
-                if( part.length < buffer ) { run = false; }
+                //if( part.length < buffer ) { run = false; }
             }
             while( run )
 
@@ -674,8 +678,12 @@ package avmplus
                 {
                     data.writeBytes( part ); //append the bytes
                 }
+                else
+                {
+                    run = false; //we received zero
+                }
                 
-                if( part.length < buffer ) { run = false; }
+                //if( part.length < buffer ) { run = false; }
             }
             while( run )
 
