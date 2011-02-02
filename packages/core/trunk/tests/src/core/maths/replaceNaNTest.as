@@ -33,35 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
 
-    public class AllTests
+    public class replaceNaNTest extends TestCase 
     {
-        public static function suite():ITest
+        public function replaceNaNTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
+            super(name);
+        }
+        
+        public function testReplaceNaN():void
+        {
+            assertEquals(  10 , replaceNaN( 10 ) , "#1" ) ;
+            assertEquals(  10 , replaceNaN( 10 , 2 ) , "#2" ) ;
             
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( bounceTest      ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( coserpTest      ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( replaceNaNTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            assertEquals(  0 , replaceNaN( NaN ) , "#3" ) ;
+            assertEquals(  2 , replaceNaN( NaN , 2 ) , "#4" ) ;
         }
     }
 }
