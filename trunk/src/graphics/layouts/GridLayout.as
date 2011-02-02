@@ -35,11 +35,12 @@
 
 package graphics.layouts 
 {
+    import core.maths.replaceNaN;
+
     import graphics.Align;
     import graphics.Direction;
     import graphics.DirectionOrder;
     import graphics.Orientation;
-    import graphics.geom.EdgeMetrics;
 
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
@@ -174,8 +175,8 @@ package graphics.layouts
                 _bounds.width  -= _horizontalGap ;
                 _bounds.height -= _verticalGap ;
                 
-                _bounds.width  += EdgeMetrics.filterNaNValue( _padding.horizontal ) ; 
-                _bounds.height += EdgeMetrics.filterNaNValue( _padding.vertical   ) ;
+                _bounds.width  += replaceNaN( _padding.horizontal ) ; 
+                _bounds.height += replaceNaN( _padding.vertical   ) ;
                 
                 if (_align == Align.CENTER) 
                 {
@@ -229,8 +230,8 @@ package graphics.layouts
             {
                 if ( ( _lines > 1 && direction == Direction.VERTICAL) || ( _columns > 1 && direction == Direction.HORIZONTAL ) )
                 {
-                    var left:Number = EdgeMetrics.filterNaNValue(_padding.left) ;
-                    var top:Number  = EdgeMetrics.filterNaNValue(_padding.top) ;
+                    var left:Number = replaceNaN(_padding.left) ;
+                    var top:Number  = replaceNaN(_padding.top) ;
                     
                     var d:DisplayObject ;
                     var c:Number ;
