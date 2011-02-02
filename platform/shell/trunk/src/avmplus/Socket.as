@@ -607,10 +607,23 @@ package avmplus
             var part:String = "";
             var run:Boolean = true;
 
+            /* note:
+               a text stream act differently than a binary stream
+               
+               with a text stream
+               receive() think it will always receive data
+               so we need to check if the stream is readable
+               to stop receiving
+
+               wiht a binary stream
+               receive() can not trust the readable as the packet
+               can vary in size, but when all data is received, it does receive zero
+               so we know when to stop receiving
+            */
             do
             {
                 part = receive( buffer, flags );
-
+                
                 if( (part != "") && (part.length > 0) )
                 {
                     data += part;
@@ -621,6 +634,7 @@ package avmplus
                 }
                 
                 //if( part.length < buffer ) { run = false; }
+                if( !readable ) { run = false; }
             }
             while( run )
 
@@ -682,8 +696,6 @@ package avmplus
                 {
                     run = false; //we received zero
                 }
-                
-                //if( part.length < buffer ) { run = false; }
             }
             while( run )
 
