@@ -71,14 +71,13 @@ package C.socket
         public native static function get SO_SNDTIMEO():int;
         public native static function get SO_TYPE():int;
 
-        public native static function get SOMAXCONN():int;
-
         public native static function get MSG_CTRUNC():int;
         public native static function get MSG_DONTROUTE():int;
         public native static function get MSG_OOB():int;
         public native static function get MSG_PEEK():int;
         public native static function get MSG_TRUNC():int;
         public native static function get MSG_WAITALL():int;
+        public native static function get MSG_DONTWAIT():int;
 
         public native static function get AF_INET():int;
         public native static function get AF_INET6():int;
@@ -95,11 +94,13 @@ package C.socket
         public native static function get IPPROTO_TCP():int;
         public native static function get IPPROTO_UDP():int;
 
-        public native static function get INADDR_ANY():int;
-        public native static function get INADDR_BROADCAST():int;
+        public native static function get SOMAXCONN():int;
 
         public native static function __gethostbyaddr( addr:String, numeric:Boolean ):Array;     //struct hostent *gethostbyaddr(const void *addr, socklen_t len, int type);
         public native static function __gethostbyname( hostname:String, numeric:Boolean ):Array; //struct hostent *gethostbyname(const char *name);
+        public native static function __getpeername( descriptor:int ):String;                    //int getpeername(int socket, struct sockaddr *restrict address, socklen_t *restrict address_len);
+        public native static function __getsockname( descriptor:int ):String;                    //int getsockname(int socket, struct sockaddr *restrict address, socklen_t *restrict address_len);
+        
     }
 
     /** Raw Protocol Interface.
@@ -187,14 +188,7 @@ package C.socket
      */
     public const SO_TYPE:int       = __socket.SO_TYPE;
     
-
-    /** The maximum backlog queue length.
-     * @productversion redtamarin 0.3
-     * @since 0.3.0
-     */
-    public const SOMAXCONN:int = __socket.SOMAXCONN;
-
-
+    
     /** Control data truncated.
      * @productversion redtamarin 0.3
      * @since 0.3.0
@@ -231,6 +225,12 @@ package C.socket
      */
     public const MSG_WAITALL:int   = __socket.MSG_WAITALL;
 
+    /** Enables non-blocking operation; if the operation would block, EAGAIN is returned.
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public const MSG_DONTWAIT:int   = __socket.MSG_DONTWAIT;
+    
 
     /** Internet domain sockets for use with IPv4 addresses.
      * @productversion redtamarin 0.3
@@ -307,17 +307,11 @@ package C.socket
     public const IPPROTO_UDP:int  = __socket.IPPROTO_UDP;
 
 
-    /** IPv4 local host address.
+    /** The maximum backlog queue length.
      * @productversion redtamarin 0.3
      * @since 0.3.0
      */
-    public const INADDR_ANY:int       = __socket.INADDR_ANY;
-
-    /** IPv4 broadcast address.
-     * @productversion redtamarin 0.3
-     * @since 0.3.0
-     */
-    public const INADDR_BROADCAST:int = __socket.INADDR_BROADCAST;
+    public const SOMAXCONN:int = __socket.SOMAXCONN;
 
 
     /**
@@ -342,6 +336,28 @@ package C.socket
     public function gethostbyname( hostname:String, numeric:Boolean = false ):Array
     {
         return __socket.__gethostbyname( hostname, numeric );
+    }
+
+    /**
+     * Get the name of the peer socket.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function getpeername( descriptor:int ):String
+    {
+        return __socket.__getpeername( descriptor );
+    }
+
+    /**
+     * Get the socket name.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.0
+     */
+    public function getsockname( descriptor:int ):String
+    {
+        return __socket.__getsockname( descriptor );
     }
     
 }
