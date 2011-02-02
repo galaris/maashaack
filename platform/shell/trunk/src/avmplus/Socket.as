@@ -633,8 +633,15 @@ package avmplus
                     run = false;
                 }
                 
-                //if( part.length < buffer ) { run = false; }
-                if( !readable ) { run = false; }
+                /* note:
+                   accessing the readable prop here
+                   is not very efficient and could generate a
+                   "signal EXC_BAD_ACCESS, Could not access memory"
+
+                   so we rever to the "old" way of checking the length of the buffer
+                */
+                //if( !readable ) { run = false; }
+                if( part.length < buffer ) { run = false; }
             }
             while( run )
 
