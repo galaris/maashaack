@@ -49,6 +49,7 @@ load("unittests/core/maths/lerpTest.js") ;
 load("unittests/core/maths/mapTest.js") ;
 load("unittests/core/maths/normalizeTest.js") ;
 load("unittests/core/maths/percentageTest.js") ;
+load("unittests/core/maths/replaceNaNTest.js") ;
 load("unittests/core/maths/roundTest.js") ;
 load("unittests/core/maths/signTest.js") ;
 load("unittests/core/maths/sinerpTest.js") ;
@@ -79,6 +80,7 @@ core.maths.AllTests.suite = function()
     suite.addTest( new TestSuite( core.maths.mapTest ) ) ;
     suite.addTest( new TestSuite( core.maths.normalizeTest ) ) ;
     suite.addTest( new TestSuite( core.maths.percentageTest ) ) ;
+    suite.addTest( new TestSuite( core.maths.replaceNaNTest ) ) ;
     suite.addTest( new TestSuite( core.maths.roundTest ) ) ;
     suite.addTest( new TestSuite( core.maths.signTest ) ) ;
     suite.addTest( new TestSuite( core.maths.sinerpTest ) ) ;
