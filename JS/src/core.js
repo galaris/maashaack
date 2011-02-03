@@ -109,6 +109,7 @@ require( "core.maths.lerp"        ) ;
 require( "core.maths.map"         ) ;
 require( "core.maths.normalize"   ) ;
 require( "core.maths.percentage"  ) ;
+require( "core.maths.replaceNaN"  ) ;
 require( "core.maths.round"       ) ;
 require( "core.maths.sign"        ) ;
 require( "core.maths.sinerp"      ) ;
