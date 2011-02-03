@@ -33,33 +33,29 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/chars/isAlphaTest.js"    ) ;
-load("unittests/core/chars/isASCIITest.js"    ) ;
-load("unittests/core/chars/isDigitTest.js"    ) ;
-load("unittests/core/chars/isHexDigitTest.js" ) ;
-load("unittests/core/chars/isLowerTest.js"    ) ;
-load("unittests/core/chars/isOperatorTest.js" ) ;
-load("unittests/core/chars/isUnicodeTest.js"  ) ;
-load("unittests/core/chars/isUpperTest.js"    ) ;
+// ---o Constructor
 
-core.chars.AllTests = {} ;
-
-core.chars.AllTests.suite = function() 
+core.chars.isOperatorTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.chars.isOperatorTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.chars.isOperatorTest.prototype.constructor = core.chars.isOperatorTest ;
+
+// ----o Public Methods
+
+core.chars.isOperatorTest.prototype.testIsOperator = function () 
+{
+    var operators /*Array*/ = ('*/%+-«»<>›&^|').split("");
     
-    var suite = new TestSuite( "core.chars unit tests" );
+    var i /*int*/ ;
+    var l /*int*/ = operators.length ;
     
-    //suite.simpleTrace = true;
-    
-    suite.addTest( new TestSuite( core.chars.isAlphaTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isASCIITest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isDigitTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isHexDigitTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isLowerTest    ) ) ;
-    suite.addTest( new TestSuite( core.chars.isOperatorTest ) ) ;
-    suite.addTest( new TestSuite( core.chars.isUnicodeTest  ) ) ;
-    suite.addTest( new TestSuite( core.chars.isUpperTest    ) ) ;
-    
-    return suite ;
+    for( i = 0 ; i < l ; i++ )
+    {
+        this.assertTrue( core.chars.isOperator(operators[i]) , operators[i] + " is not an operator digit.");
+    }
 }
