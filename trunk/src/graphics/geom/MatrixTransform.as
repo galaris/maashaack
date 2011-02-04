@@ -36,15 +36,19 @@
 package graphics.geom
 {
     import flash.geom.Matrix;
+    import flash.geom.Point;
     
     /**
-     * Helper to transform a flash.geomatrix.Matrix.
+     * Helper to transform a flash.geomatrix.Matrix. 
+     * This class can change horizontal and vertical scale, horizontal and vertical skew, and rotation. 
+     * This class also has methods for rotating around a given transformation point rather than the typical (0, 0) point.
      */
     public class MatrixTransform
     {
         /**
          * Creates a new MatrixTransform instance.
          * @param matrix The Matrix reference to transform.
+         * @param degrees Indicates if all calcul use angles in degrees or radians (default use radians angles).
          */
         public function MatrixTransform( matrix:Matrix = null , degrees:Boolean = false )
         {
@@ -73,7 +77,7 @@ package graphics.geom
             var value:Number = Math.atan2( matrix.b , matrix.a ) ;
             if ( degrees )
             {
-                 value *= 180 / Math.PI ;
+                 value *= RAD2DEG ;
             }
             return value ;
         }
@@ -86,11 +90,11 @@ package graphics.geom
          * @param value The angle of rotation.
          * @see flash.geom.Matrix
          */
-        public function set rotation( value:Number):void
+        public function set rotation( value:Number ):void
         {
             if ( degrees )
             {
-                 value *= Math.PI / 180 ;
+                 value *= DEG2RAD ;
             }
             
             var sX:Number = Math.atan2( -matrix.c , matrix.d ) ; // skewX
@@ -185,7 +189,7 @@ package graphics.geom
             var value:Number = Math.atan2( -matrix.c , matrix.d ) ;
             if ( degrees )
             {
-                 value *= 180 / Math.PI ;
+                 value *= RAD2DEG ;
             }
             return value ;
         }
@@ -199,7 +203,7 @@ package graphics.geom
         {
             if( degrees )
             {
-                value *= Math.PI / 180 ;
+                value *= DEG2RAD ;
             }
             var scaleY:Number = Math.sqrt( matrix.c * matrix.c + matrix.d * matrix.d ) ;
             matrix.c = -scaleY * Math.sin( value ) ;
@@ -216,7 +220,7 @@ package graphics.geom
             var value:Number = Math.atan2( matrix.b , matrix.a ) ;
             if ( degrees )
             {
-                 value *= 180 / Math.PI ;
+                 value *= RAD2DEG ;
             }
             return value ;
         }
@@ -230,11 +234,60 @@ package graphics.geom
         {
             if( degrees )
             {
-                value *= Math.PI / 180 ;
+                value *= DEG2RAD ;
             }
             var scaleX:Number = Math.sqrt( matrix.a * matrix.a + matrix.b * matrix.b ) ;
             matrix.a = scaleX * Math.cos( value ) ;
             matrix.b = scaleX * Math.sin( value ) ;
         }
+        
+        /**
+         * Rotates a matrix about a point defined inside the matrix's transformation space.
+         * This can be used to rotate a DisplayObject around a transformation point inside itself. 
+         * @param point The anchor point reference.
+         * @param angle The angle of rotation.
+         */
+        public function rotateAroundInternalPoint( point:Point , angle:Number ):void
+        {
+            if( degrees )
+            {
+                angle *= DEG2RAD ;
+            }
+            point = matrix.transformPoint( point ) ;
+            matrix.tx -= point.x;
+            matrix.ty -= point.y;
+            matrix.rotate( angle ) ;
+            matrix.tx += point.x;
+            matrix.ty += point.y;
+        }
+        
+        /**
+         * Rotates a matrix about a point defined outside the matrix's transformation space. 
+         * This can be used to rotate a DisplayObject around a transformation point in its parent. 
+         * @param point The anchor point reference.
+         * @param angle The angle of rotation.
+         */
+        public function rotateAroundExternalPoint( point:Point , angle:Number ):void
+        {
+            if( degrees )
+            {
+                angle *= DEG2RAD ;
+            }
+            matrix.tx -= point.x ;
+            matrix.ty -= point.y ;
+            matrix.rotate( angle ) ;
+            matrix.tx += point.x ;
+            matrix.ty += point.y ;
+        }
+        
+        /**
+         * This constant change degrees to radians : <b>Math.PI/180</b>.
+         */
+        protected const DEG2RAD:Number = Math.PI / 180 ;
+        
+        /**
+         * This constant change radians to degrees : <b>180/Math.PI</b>.
+         */
+        protected const RAD2DEG:Number = 180 / Math.PI ;
     }
 }
