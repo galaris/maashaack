@@ -242,6 +242,19 @@ package graphics.geom
         }
         
         /**
+         * Moves a matrix as necessary to align an internal point with an external point.
+         * This can be used to match a point in a transformed DisplayObject with one in its parent.
+         * @param internalPoint A Point instance defining a position within the matrix's transformation space.
+         * @param externalPoint A Point instance defining a reference position outside the matrix's transformation space.
+         */ 
+        public function matchInternalPointWithExternal( internalPoint:Point , externalPoint:Point ):void
+        {
+            var transformed:Point = matrix.transformPoint( internalPoint ) ;
+            matrix.tx += externalPoint.x - transformed.x ;
+            matrix.ty += externalPoint.y - transformed.y ;
+        }
+        
+        /**
          * Rotates a matrix about a point defined inside the matrix's transformation space.
          * This can be used to rotate a DisplayObject around a transformation point inside itself. 
          * @param point The anchor point reference.
