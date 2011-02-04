@@ -40,7 +40,7 @@ package graphics.transitions
     
     import flash.display.MovieClip;
     
-    [Embed(source="FrameLoop.swf#FrameLoopAsset")]
+    [Embed(source="FrameLoop.swf", symbol="FrameLoopAsset")]
     
     /**
      * This MovieClip contains two frames and emit a signal when is playing.
