@@ -50,6 +50,7 @@ package graphics.geom
             suite.addTestSuite( MatrixsTest ) ;
             suite.addTestSuite( Matrix2Test ) ;
             suite.addTestSuite( Matrix4Test ) ;
+            suite.addTestSuite( MatrixTransformTest ) ;
             suite.addTestSuite( MetaballTest ) ;
             suite.addTestSuite( PlaneTest ) ;
             suite.addTestSuite( PolarTest ) ;
