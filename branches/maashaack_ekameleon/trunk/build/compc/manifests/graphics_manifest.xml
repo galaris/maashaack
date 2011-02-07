@@ -223,8 +223,21 @@
     <component id="graphics.numeric:Degrees"    class="graphics.numeric.Degrees" />
     <component id="graphics.numeric:Factor"     class="graphics.numeric.Factor" />
     <component id="graphics.numeric:Hyperbolic" class="graphics.numeric.Hyperbolic" />
-    <component id="graphics.numeric:Prime"      class="graphics.numeric.Prime"  />
-    <component id="graphics.numeric:Trigo"      class="graphics.numeric.Trigo"  />
+    <component id="graphics.numeric:Prime"      class="graphics.numeric.Prime" />
+    <component id="graphics.numeric:Trigo"      class="graphics.numeric.Trigo" />
+    
+    <!-- graphics.process.display -->
+    
+    <component id="graphics.process.display:AddChild"       class="graphics.process.display.AddChild"       />
+    <component id="graphics.process.display:AddChildAt"     class="graphics.process.display.AddChildAt"     />
+    <component id="graphics.process.display:FiltersDisplay" class="graphics.process.display.FiltersDisplay" />
+    <component id="graphics.process.display:HideDisplay"    class="graphics.process.display.HideDisplay"    />
+    <component id="graphics.process.display:MoveTo"         class="graphics.process.display.MoveTo"         />
+    <component id="graphics.process.display:RemoveChild"    class="graphics.process.display.RemoveChild"    />
+    <component id="graphics.process.display:RemoveChildAt"  class="graphics.process.display.RemoveChildAt"  />
+    <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
+    <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
+    <component id="graphics.process.display:SwapChildrenAt" class="graphics.process.display.SwapChildrenAt" />
     
     <!-- graphics.transitions -->
     
