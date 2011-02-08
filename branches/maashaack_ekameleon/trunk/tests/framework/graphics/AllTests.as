@@ -45,6 +45,7 @@ package graphics
     import graphics.geom.AllTests;
     import graphics.layouts.AllTests;
     import graphics.numeric.AllTests;
+    import graphics.process.AllTests;
     import graphics.transitions.AllTests;
     
     /**
@@ -91,6 +92,7 @@ package graphics
             suite.addTest( graphics.geom.AllTests.suite()    );
             suite.addTest( graphics.layouts.AllTests.suite() );
             suite.addTest( graphics.numeric.AllTests.suite() );
+            suite.addTest( graphics.process.AllTests.suite() );
             suite.addTest( graphics.transitions.AllTests.suite() );
             
             return suite;
