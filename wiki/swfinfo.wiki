@@ -1,5 +1,11 @@
-#summary One-sentence summary of this page.
+#summary Utility to get in depth informations from a SWF file.
 
-= Introduction =
+== Introduction ==
 
-test
+*swfinfo* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
+
+It allows to parse the informations of a `*.swf` file.
+
+== Details ==
+
+TODO
