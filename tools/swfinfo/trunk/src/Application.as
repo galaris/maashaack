@@ -2,10 +2,17 @@ package
 {
     import avmplus.System;
     
+    import core.version;
+    
     public class Application
     {
         private var _options:Options;
-
+        
+        private var _version:version = new version( 1, 0 );
+                    _version.revision = $Rev$;
+        
+        private var _timestamp:String = "$Date$";
+        
         private var _license:String = <![CDATA[
 swfinfo is open source software
 
