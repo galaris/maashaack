@@ -49,7 +49,6 @@
  * [Tools Tools]
    * maashaack
       * [swfinfo swfinfo]
-      * [swfinfos swfinfos]
       * [flashdoc flashdoc]
       * [soldump soldump]    
    * general
