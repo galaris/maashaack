@@ -48,6 +48,7 @@
    * [Signals Signalers and Receivers]
  * [Tools Tools]
    * maashaack
+      * [swfinfo swfinfo]
       * [swfinfos swfinfos]
       * [flashdoc flashdoc]
       * [soldump soldump]    
