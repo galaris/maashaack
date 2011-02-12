@@ -13,7 +13,9 @@ TODO
 == Documentation ==
 
 *Usage*
-`swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file`
+{{{
+swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file
+}}}
 
 *Options*
 {{{
