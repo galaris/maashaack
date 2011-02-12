@@ -86,3 +86,12 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
   -w:val         try to limit the width of the hex data by a certain <val>
                  default <val> is 80
 }}}
+
+*Examples*
+
+{{{ $ swfinfo test.swf }}}
+will output
+{{{
+swfinfo v1.0 (Mac OS X)
+[ SWC9 rect=(x=0, y=0, w=550, h=400), fps=24, frames=5, size=297.61 KB (zip=160.66 KB) ]
+}}}
