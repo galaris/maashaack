@@ -48,11 +48,9 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
                    returns the frame rate (ex: 24)
                  * frame, frames
                    returns the frame count (ex: 5)
-                 * rawsize [=B, K, M, G, T, P, E, Z, Y]
-                   returns the size from the raw file
                  * size [=B, K, M, G, T, P, E, Z, Y]
                    returns the uncompressed file size
-                 * zip, zipsize [=B, K, M, G, T, P, E, Z, Y]
+                 * unzip, unzipped, uncompressed [=B, K, M, G, T, P, E, Z, Y]
                    returns the compressed file size
                  * metadata [=pp]
                    returns the metadata tag content if found
@@ -89,9 +87,16 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
 
 *Examples*
 
-{{{ $ swfinfo test.swf }}}
-will output
+`$ swfinfo test.swf`
 {{{
-swfinfo v1.0 (Mac OS X)
-[ SWC9 rect=(x=0, y=0, w=550, h=400), fps=24, frames=5, size=297.61 KB (zip=160.66 KB) ]
+[ SWC9 rect=(x=0, y=0, w=550, h=400), fps=24, frames=5, size=160.66 KB (unzipped=297.61 KB) ]
 }}}
+
+without any options `swfinfo` will return a one liner of the file informations
+  * the signature<br>SWF or SWC (compressed)
+  * the version<br> 9, 10, etc.
+  * the rectangle coordinates
+  * the frame rate in seconds
+  * the number of frames
+  * the size
+  * the unzipped size<br>(if the file is compressed)
