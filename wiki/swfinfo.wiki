@@ -9,3 +9,78 @@ It allows to parse the informations of a `*.swf` file.
 == Details ==
 
 TODO
+
+== Documentation ==
+
+*Usage*
+`swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file`
+
+*Options*
+{{{
+  file           a local <file> or remote <file>
+                 in case of a  remote file, need to be a valid URL
+                 eg. starting with http/ftp/etc.
+
+  -h             this help
+  
+  -v             to see the program version
+  
+  -L             License and program informations
+
+  -s             save a remote file
+                 on the current local directory
+
+  -o:val[=opt]   single line output configured by <opt>
+                 when you use this mode the program will return
+                 only the info from <opt> and nothing else
+                 <val> can be:
+                 * type, filetype
+                   returns the signature+version (ex: SWF10)
+                 * sign, signature
+                   returns the signature (ex: SWC)
+                 * version
+                   returns the version (ex: 9)
+                 * rect, rectangle
+                   returns the rectangle (ex: x=0, y=0, w=550, h=400)
+                 * fps, rate
+                   returns the frame rate (ex: 24)
+                 * frame, frames
+                   returns the frame count (ex: 5)
+                 * rawsize [=B, K, M, G, T, P, E, Z, Y]
+                   returns the size from the raw file
+                 * size [=B, K, M, G, T, P, E, Z, Y]
+                   returns the uncompressed file size
+                 * zip, zipsize [=B, K, M, G, T, P, E, Z, Y]
+                   returns the compressed file size
+                 * metadata [=pp]
+                   returns the metadata tag content if found
+                 * date, time, timestamp [=string]
+                   returns the compilation date if found (ex: 1294419029461)
+                 * sdk, sdkversion
+                   returns the Flex SDK version if found (ex: 4.0.0.7219)
+
+  -p             parse SWF tags
+                 this option need to be present for
+                 -a -u -k -x -n -t options
+
+  -a             display only the SWF tags header
+
+  -n             not parsed valid SWF tags will output hex data
+                 output is limited by option -t
+
+  -x             parsed valid SWF tags will output hex data
+                 output is limited by option -t
+
+  -u             unknown SWF tags hex data will not be truncated
+
+  -k             known SWF tags hex data will not be truncated
+
+  -t:val         truncate SWF tags hex data from 0 to <val>
+                 default <val> is 200
+
+  -g:val         group hex data by the amount of <val>
+                 default <val> is 8
+
+  -w:val         try to limit the width of the hex data by a certain <val>
+                 default <val> is 80
+}}}
