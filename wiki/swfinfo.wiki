@@ -92,7 +92,7 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
 [ SWC9 rect=(x=0, y=0, w=550, h=400), fps=24, frames=5, size=160.66 KB (unzipped=297.61 KB) ]
 }}}
 
-without any options `swfinfo` will return a one liner of the file informations
+without any options `swfinfo` will return a one liner
   * the signature<br>SWF or SWC (compressed)
   * the version<br> 9, 10, etc.
   * the rectangle coordinates
@@ -100,3 +100,28 @@ without any options `swfinfo` will return a one liner of the file informations
   * the number of frames
   * the size
   * the unzipped size<br>(if the file is compressed)
+
+you can output even shorter informations with the option *-o*
+
+`$ swfinfo -o:size test.swf`
+{{{
+160.66 KB
+}}}
+
+
+`$ swfinfo -o:size=M test.swf`
+{{{
+0.16 MB
+}}}
+
+`$ swfinfo -o:unzip test.swf`
+{{{
+297.61 KB
+}}}
+
+`$ swfinfo -o:fps test.swf`
+{{{
+24
+}}}
+
+etc.
