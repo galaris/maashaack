@@ -34,13 +34,28 @@
 */
 
 /*
+    swfinfo
+    Utility to get in depth informations from a SWF file.
 
+    see:
+    http://code.google.com/p/maashaack/wiki/swfinfo
  */
 
+//FPAPI
 include "flash/geom/Point.as";
 include "flash/geom/Rectangle.as";
+
+//maashaack
+include "core/uri.as";
+include "core/version.as";
+include "core/strings/format.as";
+include "core/strings/pad.as";
+include "core/strings/trim.as";
+include "core/strings/whiteSpaceChars.as";
 include "system/cli/SwitchStatus.as";
 include "system/cli/ArgumentsParser.as";
+
+//swfinfo
 include "utils/hexformat.as";
 include "utils/bytesToHumandReadable.as";
 include "utils/ByteParser.as";
@@ -48,11 +63,9 @@ include "utils/SWFParser.as";
 include "Options.as";
 include "Application.as";
 
-import avmplus.FileSystem;
-import flash.utils.ByteArray;
-import utils.SWFParser;
+import avmplus.System;
 
-
+/*
 //options
 var parseTags:Boolean = true;
 var parseTagsContent:Boolean = true;
@@ -71,6 +84,15 @@ var test:SWFParser = new SWFParser( file,
                                     fullKnownTagInfo, fullUnknownTagInfo,
                                     truncateTags, hexgroup, hexwidth );
 
-trace( test.toString() ); 
+trace( test.toString() );
+*/
+
+//var args:Array = [ "-p", "-a", "test.swf" ];
+
+var app:Application = new Application();
+    //app.run( args );
+    app.run( System.argv );
+
+
 
 

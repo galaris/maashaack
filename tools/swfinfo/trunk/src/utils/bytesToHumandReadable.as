@@ -7,7 +7,7 @@ package utils
     {
         var unit:Number = SI ? 1000 : 1024;
         
-        if( (bytes < unit) && (force == "") ) { return bytes + " B"; }
+        if( (bytes < unit) && ((force == "") || (force == "B")) ) { return bytes + " B"; }
         
         var kilo:Number  = unit;
         var mega:Number  = kilo  * unit;
@@ -29,7 +29,11 @@ package utils
         else if( (bytes >= zetta) && (bytes < yotta) ) { u = "Z"; }
         else if( (bytes >= yotta) )                    { u = "Y"; }
         
-        if( force != "" ) { u = force; }
+        if( force != "" )
+        {
+            if( force == "B" ) { force = ""; }
+            u = force;
+        }
         
         var s:String;
         switch( u )

@@ -1,20 +1,36 @@
 package
 {
     import avmplus.System;
+    import avmplus.OperatingSystem;
     
     import core.version;
+    import core.uri;
+    import core.strings.format;
+    
+    import utils.SWFParser;
+    import utils.bytesToHumandReadable;
+    import flash.utils.ByteArray;
+    import avmplus.FileSystem;
     
     public class Application
     {
+        public static var version:core.version = new core.version();
+                 include "version.properties";
+                          version.revision = parseInt( "$Rev$".split( " " )[1] );
+        
         private var _options:Options;
         
-        private var _version:version = new version( 1, 0 );
-                    _version.revision = $Rev$;
+        private var _name:String = "swfinfo";
         
         private var _timestamp:String = "$Date$";
         
-        private var _license:String = <![CDATA[
-swfinfo is open source software
+        private var _versioninfo:String = <![CDATA[
+{name} for {system}, version {version} (r{revision})
+   compiled {date}, {time}
+]]>;
+        
+        private var _informations:String = <![CDATA[
+{name} is open source software
 
 This program is made with redtamarin
 http://code.google.com/p/redtamarin/
@@ -66,7 +82,8 @@ Utility to get in depth informations from a SWF file.
 
 Usage:
 
-  swfinfo [-h] [-v] [-L] [-s] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file
+  {name} [-h] [-v] [-L] [-s] [-o:val[=opt]]
+         [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file
 
 Options:
   file           a local <file> or remote <file>
@@ -82,28 +99,32 @@ Options:
   -s             save a remote file
                  on the current local directory
 
-  -o:val[|opt]   single line output configured by <opt>
+  -o:val[=opt]   single line output configured by <opt>
                  when you use this mode the program will return
                  only the info from <opt> and nothing else
                  <val> can be:
+                 * type, filetype
+                   returns the signature+version (ex: SWF10)
                  * sign, signature
+                   returns the signature (ex: SWC)
+                 * version
+                   returns the version (ex: 9)
                  * rect, rectangle
-                 * fps
+                   returns the rectangle (ex: x=0, y=0, w=550, h=400)
+                 * fps, rate
+                   returns the frame rate (ex: 24)
                  * frame, frames
-                 * size [|opt]
-                   format <opt> can be:
-                   B, K, M, G, T, P, E, Z, Y
-                   for bytes, kilo, giga, tera, peta, etc.
-                 * zip [|opt]
-                   format <opt> can be:
-                   B, K, M, G, T, P, E, Z, Y
-                   for bytes, kilo, giga, tera, peta, etc.
-                 * date [|opt]
-                   format <opt> can be:
-                   any of mm, MM, yy, YYYY, etc.
-                 * metadata
-                 * product
-                 * flexsdk
+                   returns the frame count (ex: 5)
+                 * size [=B, K, M, G, T, P, E, Z, Y]
+                   returns the uncompressed file size
+                 * unzip, unzipped, uncompressed [=B, K, M, G, T, P, E, Z, Y]
+                   returns the compressed file size
+                 * metadata [=pp]
+                   returns the metadata tag content if found
+                 * date, time, timestamp [=string]
+                   returns the compilation date if found (ex: 1294419029461)
+                 * sdk, sdkversion
+                   returns the Flex SDK version if found (ex: 4.0.0.7219)
 
   -p             parse SWF tags
                  this option need to be present for
@@ -142,28 +163,267 @@ We have different SWF tags:
 By default, a known parsed SWF tag does not output hex data.
 ]]>;
         
+        private var _bytes:ByteArray;
+        private var _swfparser:SWFParser;
+        
         public function Application()
         {
             _options = new Options( this );
         }
         
-        public function showUsages( exit:Boolean = true ):void
+        private function _getHeader():String
         {
-            trace( _usage );
+            return _name + " v" + version.toString( 2 ) + " (" + OperatingSystem.vendorName + ")";
+        }
+        
+        private function _getUsages():String
+        {
+            return format( _usage, { name: _name } );
+        }
+        
+        /*
+            {name} for {system}, version {version} (r{revision})
+               compiled {date}, {time}
+        */
+        private function _getVersion():String
+        {
+            //"$Date$"
+            var t:Array = _timestamp.split( " " );
+            
+            var data:Object = {};
+                data.name     = _name;
+                data.system   = OperatingSystem.vendorName;
+                data.version  = version.toString( 2 );
+                data.revision = version.revision;
+                data.date     = t[1];
+                data.time     = t[2];
+                
+            return format( _versioninfo, data );
+        }
+        
+        private function _getInformations():String
+        {
+            return format( _informations, { name: _name } );
+        }
+        
+        private function _getData( filename:String ):ByteArray
+        {
+            var url:uri = new uri( filename );
+            var urlstr:String = url.toString();
+            var bytes:ByteArray;
+            
+            //trace( "url = " + urlstr );
+            
+            //local
+            if( urlstr == "" )
+            {
+                if( !FileSystem.exists( filename ) )
+                {
+                    showHeader();
+                    trace( "Filename \"" + filename + "\" does not exists" );
+                    showUsages();
+                }
+                
+                if( FileSystem.isDirectory( filename ) )
+                {
+                    showHeader();
+                    trace( "Filename \"" + filename + "\" is a directory" );
+                    showUsages();
+                }
+                
+                bytes = FileSystem.readByteArray( filename );
+            }
+            else //remote
+            {
+                //TODO
+                showHeader();
+                trace( "remote URL are not supported yet" );
+                showUsages();
+            }
+            
+            return bytes;
+        }
+        
+        
+        public function showHeader():void
+        {
+            trace( _getHeader() );
+        }
+        
+        public function showUsages( message:String = "", exit:Boolean = true ):void
+        {
+            if( exit ) { showHeader(); }
+            if( message != "" ) { trace( "Error: " + message ); }
+            trace( _getUsages() );
             
             if( exit ) { System.exit( 1 ); }
         }
         
+        public function showVersion():void
+        {
+            trace( _getVersion() );
+        }
+        
+        public function showLicense():void
+        {
+            showHeader();
+            trace( _getInformations() );
+            trace( "License:" );
+            trace( _license );
+        }
+        
         public function run( args:Array ):void
         {
-            trace( "swfinfo v1.0" );
-            
             if( args.length == 0 ) { showUsages(); }
             
             var success:Boolean = _options.parse( args );
             
             if( !success || _options.showUsage ) { showUsages(); }
             
+            if( _options.showVersion )
+            {
+                showVersion();
+                System.exit( 0 );
+            }
+            
+            if( _options.showLicense )
+            {
+                showLicense();
+                System.exit( 0 );
+            }
+            
+            if( _options.filename != "" )
+            {
+                _bytes = _getData( _options.filename );
+            }
+            else
+            {
+                showUsages( "no filename provided" );
+            }
+            
+            /* note:
+               for some options we need to check them first
+               to know if we need to force the parse tags option to true
+            */
+            if( _options.outputOption )
+            {
+                switch( _options.outputValue )
+                {
+                    case "metadata":
+                    case "date":
+                    case "time":
+                    case "timestamp":
+                    case "sdk":
+                    case "sdkversion":
+                    _options.parseTags = true;
+                    break;
+                }
+            }
+            
+            _swfparser = new SWFParser( _bytes,
+                                        _options.parseTags,
+                                        _options.parseTagsContent,
+                                        _options.showUnparsedValidTags,
+                                        _options.showParsedValidTags,
+                                        _options.fullKnownTagInfo,
+                                        _options.fullUnknownTagInfo,
+                                        _options.truncateTags,
+                                        _options.hexgroup,
+                                        _options.hexwidth );
+            
+            if( _options.outputOption )
+            {
+                //trace( "value = " + _options.outputValue );
+                //trace( "format = " + _options.outputFormat );
+                
+                switch( _options.outputValue )
+                {
+                    case "type":
+                    case "filetype":
+                    trace( _swfparser.signature + _swfparser.version );
+                    break;
+                    
+                    case "sign":
+                    case "signature":
+                    trace( _swfparser.signature );
+                    break;
+                    
+                    case "version":
+                    trace( _swfparser.version );
+                    break;
+                    
+                    case "rect":
+                    case "rectangle":
+                    trace( _swfparser.frameSize );
+                    break;
+                    
+                    case "fps":
+                    case "rate":
+                    trace( _swfparser.frameRate );
+                    break;
+                    
+                    case "frame":
+                    case "frames":
+                    trace( _swfparser.frameCount );
+                    break;
+                    
+                    case "size":
+                    if( _swfparser.isCompressed() )
+                    {
+                        trace( bytesToHumandReadable( _swfparser.zipLength, 2, false, _options.outputFormat ) );
+                    }
+                    else
+                    {
+                        trace( bytesToHumandReadable( _swfparser.fileLength, 2, false, _options.outputFormat ) );
+                    }
+                    break;
+                    
+                    case "unzip":
+                    case "unzipped":
+                    case "uncompressed":
+                    trace( bytesToHumandReadable( _swfparser.fileLength, 2, false, _options.outputFormat ) );
+                    break;
+                    
+                    case "date":
+                    case "time":
+                    case "timestamp":
+                    if( _options.outputFormat == "string" )
+                    {
+                        trace( new Date( _swfparser.timestamp ) );
+                    }
+                    else
+                    {
+                        trace( _swfparser.timestamp );
+                    }
+                    break;
+                    
+                    case "metadata":
+                    if( _options.outputFormat == "pp" )
+                    {
+                        var data:XML = new XML( _swfparser.metadata );
+                            XML.prettyPrinting = true;
+                        trace( data.toString() );
+                    }
+                    else
+                    {
+                        trace( _swfparser.metadata );
+                    }
+                    break;
+                    
+                    case "sdk":
+                    case "sdkversion":
+                    trace( _swfparser.sdkversion );
+                    break;
+                    
+                    default:
+                    showUsages( "Unvalid output option \"" + _options.outputValue + "\"" );
+                }
+                
+                System.exit( 0 );
+            }
+            
+            trace( _swfparser.toString() );
+            System.exit( 0 );
         }
 
     }

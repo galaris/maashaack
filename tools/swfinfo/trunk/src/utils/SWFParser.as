@@ -16,6 +16,11 @@ package utils
         private var _frameCount:uint;
         private var _compressed:Boolean;
         
+        //extrainfos
+        private var _metadata:String;
+        private var _timestamp:Number;
+        private var _sdkversion:String;
+        
         //options
         private var _parseTags:Boolean;
         private var _parseTagsContent:Boolean;
@@ -50,6 +55,10 @@ package utils
             _hexgroup              = hexgroup;
             _hexwidth              = hexwidth;
             _tagLines              = [];
+            
+            _metadata   = "";
+            _timestamp  = 0;
+            _sdkversion = "";
             
             _defineTags();
             _parse();
@@ -276,6 +285,7 @@ package utils
                         case 77: //0x4D - Metadata
                         before = position;
                         var metadata:String = _decodeMetadataTag( tagLength );
+                        _metadata = metadata;
                         _tagLines.push( headersub + _formatMetadataTag( metadata, _showParsedValidTags?headermid:header )  );
                         after = position;
                         
@@ -291,6 +301,9 @@ package utils
                         case 41: //0x29  - ProductInfo
                         before = position;
                         var productinfo:Object = _decodeProductInfoTag();
+                        _timestamp = productinfo.seconds;
+                        _sdkversion = [productinfo.majorVersion, productinfo.minorVersion, productinfo.buildHigh, productinfo.buildLow].join(".");
+                        
                         _tagLines.push( headersub + _formatProductInfoTag( productinfo, _showParsedValidTags?headermid:header )  );
                         after = position;
                         
@@ -561,6 +574,8 @@ package utils
             }
         }
         
+        //swfinfos
+        
         public function get signature():String { return _signature; }
         
         public function get version():uint { return _version; }
@@ -575,9 +590,17 @@ package utils
         
         public function get frameCount():uint { return _frameCount; }
         
-        public function get data():ByteArray { return bytes; }
-        
         public function isCompressed():Boolean { return _compressed; }
+        
+        
+        //extrainfos
+        
+        public function get metadata():String { return _metadata; }
+        
+        public function get timestamp():Number { return _timestamp; }
+        
+        public function get sdkversion():String { return _sdkversion; }
+        
         
         public function toString():String
         {
@@ -587,11 +610,15 @@ package utils
                 str += " rect=" + frameSize;
                 str += ", fps=" + frameRate;
                 str += ", frames=" + frameCount;
-                str += ", size=" + bytesToHumandReadable( fileLength, 2, false, "" );
                 
                 if( isCompressed() )
                 {
-                    str += " (zip=" + bytesToHumandReadable( zipLength, 2, false, "" ) + ")";
+                    str += ", size=" + bytesToHumandReadable( zipLength, 2, false, "" );
+                    str += " (unzipped=" + bytesToHumandReadable( fileLength, 2, false, "" ) + ")"
+                }
+                else
+                {
+                    str += ", size=" + bytesToHumandReadable( fileLength, 2, false, "" );
                 }
                 
                 if( _parseTags )
