@@ -62,6 +62,10 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
                    returns the compilation date if found (ex: 1294419029461)
                  * sdk, sdkversion
                    returns the Flex SDK version if found (ex: 4.0.0.7219)
+                 * bgcolor [=hex, rgb]
+                   returns the background color of the SWF
+                 * labels
+                   returns the labell names of the SWF
 
   -p             parse SWF tags
                  this option need to be present for
