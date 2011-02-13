@@ -10,6 +10,7 @@ Here the list of tags the program know how to parse
   * Metadata
   * !SetBackgroundColor
   * !ProductInfo
+  * !FrameLabel
 
 Hopefully with time more tags will be parsed.
 
