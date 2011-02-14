@@ -11,6 +11,8 @@ Here the list of tags the program know how to parse
   * !SetBackgroundColor
   * !ProductInfo
   * !FrameLabel
+  * !ScriptLimits
+  * !FileAttributes
 
 Hopefully with time more tags will be parsed.
 
@@ -66,6 +68,18 @@ swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val
                    returns the background color of the SWF
                  * labels
                    returns the labell names of the SWF
+                 * recursion
+                   returns the max recursion limit
+                 * timeout
+                   returns the script timeout limit
+                 * direct, blit
+                   returns if the SWF use direct blit
+                 * gpu
+                   returns if the SWF use GPU
+                 * as3
+                   returns if the SWF use AS3
+                 * network
+                   returns if the SWF use network
 
   -p             parse SWF tags
                  this option need to be present for
