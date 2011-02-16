@@ -16,6 +16,14 @@ Here the list of tags the program know how to parse
 
 Hopefully with time more tags will be parsed.
 
+== Installation ==
+
+Download the file for your operating system.
+
+|| Linux || OS X || Windows ||
+|| [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip swfinfo NIX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip swfinfo OSX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip swfinfo WIN] ||
+
+
 == Documentation ==
 
 *Usage*
