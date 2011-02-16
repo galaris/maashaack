@@ -46,6 +46,7 @@ include "flash/geom/Point.as";
 include "flash/geom/Rectangle.as";
 
 //maashaack
+include "core/bit.as";
 include "core/uri.as";
 include "core/version.as";
 include "core/strings/format.as";
@@ -58,41 +59,15 @@ include "system/cli/ArgumentsParser.as";
 //swfinfo
 include "utils/hexformat.as";
 include "utils/bytesToHumandReadable.as";
+include "utils/HTTPLoader.as";
 include "utils/ByteParser.as";
 include "utils/SWFParser.as";
 include "Options.as";
 include "Application.as";
 
+//main entry point
 import avmplus.System;
 
-/*
-//options
-var parseTags:Boolean = true;
-var parseTagsContent:Boolean = true;
-var showUnparsedValidTags:Boolean = true;
-var showParsedValidTags:Boolean = false;
-var fullKnownTagInfo:Boolean = false;
-var fullUnknownTagInfo:Boolean = false;
-var truncateTags:uint = 200;
-var hexgroup:uint = 8;
-var hexwidth:uint = 80;
-
-var file:ByteArray = FileSystem.readByteArray( "test.swf" );
-var test:SWFParser = new SWFParser( file,
-                                    parseTags, parseTagsContent,
-                                    showUnparsedValidTags, showParsedValidTags,
-                                    fullKnownTagInfo, fullUnknownTagInfo,
-                                    truncateTags, hexgroup, hexwidth );
-
-trace( test.toString() );
-*/
-
-//var args:Array = [ "-p", "-a", "test.swf" ];
-
 var app:Application = new Application();
-    //app.run( args );
     app.run( System.argv );
-
-
-
 

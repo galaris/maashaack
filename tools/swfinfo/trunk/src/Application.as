@@ -1,3 +1,38 @@
+/*
+  Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ 
+  The contents of this file are subject to the Mozilla Public License Version
+  1.1 (the "License"); you may not use this file except in compliance with
+  the License. You may obtain a copy of the License at
+  http://www.mozilla.org/MPL/
+  
+  Software distributed under the License is distributed on an "AS IS" basis,
+  WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+  for the specific language governing rights and limitations under the
+  License.
+  
+  The Original Code is [swfinfo].
+  
+  The Initial Developers of the Original Code are
+  Zwetan Kjukov <zwetan@gmail.com>.
+  Portions created by the Initial Developers are Copyright (C) 2011
+  the Initial Developers. All Rights Reserved.
+  
+  Contributor(s):
+  
+  Alternatively, the contents of this file may be used under the terms of
+  either the GNU General Public License Version 2 or later (the "GPL"), or
+  the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+  in which case the provisions of the GPL or the LGPL are applicable instead
+  of those above. If you wish to allow use of your version of this file only
+  under the terms of either the GPL or the LGPL, and not to allow others to
+  use your version of this file under the terms of the MPL, indicate your
+  decision by deleting the provisions above and replace them with the notice
+  and other provisions required by the LGPL or the GPL. If you do not delete
+  the provisions above, a recipient may use your version of this file under
+  the terms of any one of the MPL, the GPL or the LGPL.
+*/
+
 package
 {
     import avmplus.System;
@@ -7,6 +42,7 @@ package
     import core.uri;
     import core.strings.format;
     
+    import utils.HTTPLoader;
     import utils.SWFParser;
     import utils.bytesToHumandReadable;
     import flash.utils.ByteArray;
@@ -125,6 +161,22 @@ Options:
                    returns the compilation date if found (ex: 1294419029461)
                  * sdk, sdkversion
                    returns the Flex SDK version if found (ex: 4.0.0.7219)
+                 * bgcolor [=hex, rgb]
+                   returns the background color of the SWF
+                 * labels
+                   returns the labell names of the SWF
+                 * recursion
+                   returns the max recursion limit
+                 * timeout
+                   returns the script timeout limit
+                 * direct, blit
+                   returns if the SWF use direct blit
+                 * gpu
+                   returns if the SWF use GPU
+                 * as3
+                   returns if the SWF use AS3
+                 * network
+                   returns if the SWF use network
 
   -p             parse SWF tags
                  this option need to be present for
@@ -165,6 +217,7 @@ By default, a known parsed SWF tag does not output hex data.
         
         private var _bytes:ByteArray;
         private var _swfparser:SWFParser;
+        private var _isRemote:Boolean = false;
         
         public function Application()
         {
@@ -211,7 +264,6 @@ By default, a known parsed SWF tag does not output hex data.
             var url:uri = new uri( filename );
             var urlstr:String = url.toString();
             var bytes:ByteArray;
-            
             //trace( "url = " + urlstr );
             
             //local
@@ -232,13 +284,29 @@ By default, a known parsed SWF tag does not output hex data.
                 }
                 
                 bytes = FileSystem.readByteArray( filename );
+                _isRemote = false;
             }
             else //remote
             {
                 //TODO
-                showHeader();
-                trace( "remote URL are not supported yet" );
-                showUsages();
+                //showHeader();
+                //trace( "remote URL are not supported yet" );
+                //showUsages();
+                
+                try
+                {
+                var loader:HTTPLoader = new HTTPLoader( urlstr );
+                    loader.load();
+                }
+                catch( e:Error )
+                {
+                    showHeader();
+                    trace( e.toString() );
+                    showUsages();
+                }
+                
+                bytes = loader.body;
+                _isRemote = true;
             }
             
             return bytes;
@@ -315,6 +383,15 @@ By default, a known parsed SWF tag does not output hex data.
                     case "timestamp":
                     case "sdk":
                     case "sdkversion":
+                    case "bgcolor":
+                    case "labels":
+                    case "recursion":
+                    case "timeout":
+                    case "direct":
+                    case "blit":
+                    case "gpu":
+                    case "as3":
+                    case "network":
                     _options.parseTags = true;
                     break;
                 }
@@ -415,11 +492,75 @@ By default, a known parsed SWF tag does not output hex data.
                     trace( _swfparser.sdkversion );
                     break;
                     
+                    case "bgcolor":
+                    if( _options.outputFormat == "hex" )
+                    {
+                        var hex:String = _swfparser.bgcolor.toString( 16 );
+                        while( hex.length < 6 )
+                        {
+                            hex = "0" + hex;
+                        }
+                        trace( "0x" + hex );
+                    }
+                    else if( _options.outputFormat == "rgb" )
+                    {
+                        var color:Number = _swfparser.bgcolor;
+                        var R:uint = ((color >> 16) & 0xFF);
+                        var G:uint = ((color >> 8) & 0xFF);
+                        var B:uint = (color & 0xFF);
+                        trace( "r="+R+", g="+G+", b="+B );
+                    }
+                    else
+                    {
+                        trace( _swfparser.bgcolor );
+                    }
+                    break;
+                    
+                    case "labels":
+                    trace( _swfparser.labels );
+                    break;
+                    
+                    case "recursion":
+                    trace( _swfparser.maxRecursion );
+                    break;
+                    
+                    case "timeout":
+                    trace( _swfparser.scriptTimeout );
+                    break;
+                    
+                    case "direct":
+                    case "blit":
+                    trace( _swfparser.useDirectBlit );
+                    break;
+                    
+                    case "gpu":
+                    trace( _swfparser.useGPU );
+                    break;
+                    
+                    case "as3":
+                    trace( _swfparser.actionscript3 );
+                    break;
+                    
+                    case "network":
+                    trace( _swfparser.useNetwork );
+                    break;
+                    
                     default:
                     showUsages( "Unvalid output option \"" + _options.outputValue + "\"" );
                 }
                 
                 System.exit( 0 );
+            }
+            
+            if( _isRemote && _options.saveRemoteFile )
+            {
+                var tmp:uri = new uri( _options.filename );
+                var file:String = FileSystem.getBasenameFromPath( tmp.path );
+                
+                if( !FileSystem.writeByteArray( file, _bytes ) )
+                {
+                    showUsages( "Could not save file \"" + file + "\" to disk." );
+                }
             }
             
             trace( _swfparser.toString() );
