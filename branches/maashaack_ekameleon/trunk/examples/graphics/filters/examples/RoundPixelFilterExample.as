@@ -35,10 +35,10 @@
 
 package examples 
 {
+    import core.maths.map;
+
     import graphics.filters.RoundPixelFilter;
-    
-    import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -99,8 +99,8 @@ package examples
         {
             if ( filter != null )
             {
-                filter.space =  Mathematics.map( picture.mouseX , 0 , picture.width  , 1 , 300 ) ;
-                filter.size  =  Mathematics.map( picture.mouseY , 0 , picture.height , 2 ,   0 ) ;
+                filter.space =  map( picture.mouseX , 0 , picture.width  , 1 , 300 ) ;
+                filter.size  =  map( picture.mouseY , 0 , picture.height , 2 ,   0 ) ;
                 picture.filters = [ filter ] ;
             }
         }

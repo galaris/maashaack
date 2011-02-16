@@ -35,10 +35,10 @@
 
 package examples 
 {
+    import core.maths.normalize;
+
     import graphics.filters.RGBDistortFilter;
-    
-    import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -107,13 +107,13 @@ package examples
         {
             if ( filter )
             {
-                filter.redFrequency   = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
-                filter.greenFrequency = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
-                filter.blueFrequency  = Mathematics.normalize( picture.mouseX , 0 , picture.width  ) ;
+                filter.redFrequency   = normalize( picture.mouseX , 0 , picture.width  ) ;
+                filter.greenFrequency = normalize( picture.mouseX , 0 , picture.width  ) ;
+                filter.blueFrequency  = normalize( picture.mouseX , 0 , picture.width  ) ;
                 
-                filter.redIntensity   = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
-                filter.greenIntensity = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
-                filter.blueIntensity  = Mathematics.normalize( picture.mouseY , 0 , picture.height ) ;
+                filter.redIntensity   = normalize( picture.mouseY , 0 , picture.height ) ;
+                filter.greenIntensity = normalize( picture.mouseY , 0 , picture.height ) ;
+                filter.blueIntensity  = normalize( picture.mouseY , 0 , picture.height ) ;
                 
                 picture.filters = [ filter ] ;
             }
