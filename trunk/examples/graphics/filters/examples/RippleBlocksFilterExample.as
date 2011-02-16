@@ -35,9 +35,9 @@
 
 package examples 
 {
-    import graphics.filters.RippleBlocksFilter;
+    import core.maths.map;
 
-    import system.numeric.Mathematics;
+    import graphics.filters.RippleBlocksFilter;
 
     import flash.display.Loader;
     import flash.display.Sprite;
@@ -97,8 +97,8 @@ package examples
         {
             if ( filter != null )
             {
-                filter.phaseX =  Mathematics.map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
-                filter.waveY  =  Mathematics.map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
+                filter.phaseX =  map( picture.mouseX , 0 , picture.width  , 100 , 0 ) ;
+                filter.waveY  =  map( picture.mouseY , 0 , picture.height , 100 , 0 ) ;
                 
                 picture.filters = [ filter ] ;
             }

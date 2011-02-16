@@ -35,10 +35,10 @@
 
 package examples 
 {
+    import core.maths.map;
+
     import graphics.filters.GrayScaleFilter;
-    
-    import system.numeric.Mathematics;
-    
+
     import flash.display.Loader;
     import flash.display.Sprite;
     import flash.display.StageScaleMode;
@@ -97,7 +97,7 @@ package examples
         {
             if ( filter != null )
             {
-                filter.scale =  Mathematics.map( picture.mouseY , 0 , picture.height , 0 , 1   ) ;
+                filter.scale = map( picture.mouseY , 0 , picture.height , 0 , 1   ) ;
                 picture.filters = [ filter ] ;
             }
         }

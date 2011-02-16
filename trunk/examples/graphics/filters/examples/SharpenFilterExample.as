@@ -35,9 +35,9 @@
 
 package examples 
 {
-    import graphics.filters.SharpenFilter;
+    import core.maths.map;
 
-    import system.numeric.Mathematics;
+    import graphics.filters.SharpenFilter;
 
     import flash.display.Loader;
     import flash.display.Sprite;
@@ -98,8 +98,8 @@ package examples
         {
             if ( filter != null )
             {
-                filter.amount =  Mathematics.map( picture.mouseX , 0 , picture.width  , 0 , 100 ) ;
-                filter.radius =  Mathematics.map( picture.mouseY , 0 , picture.height , 0 , 1   ) ;
+                filter.amount =  map( picture.mouseX , 0 , picture.width  , 0 , 100 ) ;
+                filter.radius =  map( picture.mouseY , 0 , picture.height , 0 , 1   ) ;
                 picture.filters = [ filter ] ;
             }
         }
