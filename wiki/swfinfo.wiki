@@ -21,7 +21,7 @@ Hopefully with time more tags will be parsed.
 Download the file for your operating system.
 
 || Linux || OS X || Windows ||
-|| [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip swfinfo NIX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip swfinfo OSX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip swfinfo WIN] ||
+|| [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip swfinfo NIX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip swfinfo OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip swfinfo OSX 10.5]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip swfinfo WIN] ||
 
 *notes:*<br>
   * OS X file is for OS X 10.6+ intel
