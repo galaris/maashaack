@@ -79,7 +79,14 @@ package graphics.process.display
         public override function run( ...arguments:Array ):void 
         {
             notifyStarted() ;
-            display.filters = filters ;
+            try
+            {
+                display.filters = filters ;
+            }
+            catch( e:Error )
+            {
+                logger.warn(this + " run failed with the display:" + display + " error:" + e.toString() ) ;
+            }
             notifyFinished() ;
         }
     }
