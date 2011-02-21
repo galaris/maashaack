@@ -45,6 +45,7 @@ package graphics.process.display
             var suite:TestSuite = new TestSuite("graphics.process.display package tests");
             
             suite.addTestSuite( AddChildTest ) ;
+            suite.addTestSuite( AddChildAtTest ) ;
             suite.addTestSuite( MoveToTest ) ;
             
             return suite;
