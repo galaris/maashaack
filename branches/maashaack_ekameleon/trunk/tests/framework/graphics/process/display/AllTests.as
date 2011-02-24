@@ -51,6 +51,7 @@ package graphics.process.display
             suite.addTestSuite( MoveToTest ) ;
             suite.addTestSuite( RemoveChildTest ) ;
             suite.addTestSuite( RemoveChildAtTest ) ;
+            suite.addTestSuite( SetChildIndexTest ) ;
             suite.addTestSuite( ShowDisplayTest ) ;
             
             return suite;
