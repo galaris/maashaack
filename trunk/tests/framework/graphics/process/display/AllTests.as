@@ -49,6 +49,7 @@ package graphics.process.display
             suite.addTestSuite( FiltersDisplayTest ) ;
             suite.addTestSuite( HideDisplayTest ) ;
             suite.addTestSuite( MoveToTest ) ;
+            suite.addTestSuite( RemoveChildTest ) ;
             suite.addTestSuite( ShowDisplayTest ) ;
             
             return suite;
