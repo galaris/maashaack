@@ -50,6 +50,7 @@ package graphics.process.display
             suite.addTestSuite( HideDisplayTest ) ;
             suite.addTestSuite( MoveToTest ) ;
             suite.addTestSuite( RemoveChildTest ) ;
+            suite.addTestSuite( RemoveChildAtTest ) ;
             suite.addTestSuite( ShowDisplayTest ) ;
             
             return suite;
