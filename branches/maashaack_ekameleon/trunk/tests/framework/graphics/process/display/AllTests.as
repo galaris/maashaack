@@ -53,6 +53,7 @@ package graphics.process.display
             suite.addTestSuite( RemoveChildAtTest ) ;
             suite.addTestSuite( SetChildIndexTest ) ;
             suite.addTestSuite( ShowDisplayTest ) ;
+            suite.addTestSuite( SwapChildrenAtTest ) ;
             
             return suite;
         }
