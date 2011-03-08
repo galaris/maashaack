@@ -64,6 +64,8 @@
     <component id="core.maths:clamp"       class="core.maths.clamp"       />
     <component id="core.maths:clerp"       class="core.maths.clerp"       />
     <component id="core.maths:coserp"      class="core.maths.coserp"      />
+    <component id="core.maths:DEG2RAD"     class="core.maths.DEG2RAD"     />
+    <component id="core.maths:EPSILON"     class="core.maths.EPSILON"     />
     <component id="core.maths:floor"       class="core.maths.floor"       />
     <component id="core.maths:gcd"         class="core.maths.gcd"         />
     <component id="core.maths:hermite"     class="core.maths.hermite"     />
@@ -72,6 +74,8 @@
     <component id="core.maths:map"         class="core.maths.map"         />
     <component id="core.maths:normalize"   class="core.maths.normalize"   />
     <component id="core.maths:percentage"  class="core.maths.percentage"  />
+    <component id="core.maths:PHI"         class="core.maths.PHI"         />
+    <component id="core.maths:RAD2DEG"     class="core.maths.RAD2DEG"     />
     <component id="core.maths:replaceNaN"  class="core.maths.replaceNaN"  />
     <component id="core.maths:round"       class="core.maths.round"       />
     <component id="core.maths:sign"        class="core.maths.sign"        />
