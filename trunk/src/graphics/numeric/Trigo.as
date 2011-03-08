@@ -35,6 +35,9 @@
 
 package graphics.numeric 
 {
+    import core.maths.DEG2RAD;
+    import core.maths.RAD2DEG;
+    
     import graphics.geom.Polar;
     import graphics.geom.Vector2;
     
@@ -43,57 +46,6 @@ package graphics.numeric
      */
     public final class Trigo 
     {
-        /**
-         * This constant change degrees to radians : <b>Math.PI/180</b>.
-         * <p><b>Example</b></p>
-         * <code class="prettyprint">
-         * trace (Trigo.DEG2RAD * 180) ;
-         * </code>
-         */
-        public static const DEG2RAD:Number = Math.PI / 180 ;
-        
-        /**
-         * Represents the smallest positive Single value greater than zero.
-         * <p><b>Example</b></p>
-         * <code class="prettyprint">
-         * trace ( Trigo.EPSILON ) ;
-         * </code>
-         */
-        public static const EPSILON:Number = 0.000000001;
-        
-        /**
-         * This constant is the Euler-Mascheroni constant (lambda or C) :
-         * <p>
-         * <code class="prettyprint">
-         * ( n )
-         * lim( sigma 1/k - ln(n) )
-         * n->oo    ( k=1 )
-         * </code>
-         * <p><b>Example</b></p>
-         * <code class="prettyprint">
-         * trace (Trigo.LAMBDA) ;
-         * </code>
-         */
-        public static const LAMBDA:Number = 0.57721566490143;
-        
-        /**
-         * This constant change radians to degrees : <b>180/Math.PI</b>.
-         * <p><b>Example</b></p>
-         * <code class="prettyprint">
-         * trace (Trigo.RAD2DEG * Math.PI) ;
-         * </code>
-         */
-        public static const RAD2DEG:Number = 180 / Math.PI ;
-        
-        /**
-         * This constant is the golden mean (phi) : <b>( 1 + Math.sqrt(5) ) / 2</b>.
-         * <p><b>Example</b></p>
-         * <code class="prettyprint">
-         * trace (Trigo.PHI) ;
-         * </code>
-         */
-        public static const PHI:Number = 1.61803398874989;
-        
         /**
          * Returns the angle in degrees between 2 points with this coordinates passed in argument.
          * @param x1 the x coordinate of the first point.

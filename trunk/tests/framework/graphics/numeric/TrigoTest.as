@@ -50,30 +50,5 @@ package graphics.numeric
         {
             assertTrue( Reflection.getClassInfo(Hyperbolic).isFinal() ) ;
         }
-        
-        public function testDEG2RAD():void
-        {
-            assertEquals( Trigo.DEG2RAD , Math.PI / 180 , "The Trigo.DEG2RAD constant failed." ) ;
-        }
-                
-        public function testEPSILON():void
-        {
-        	assertEquals( Trigo.EPSILON , 0.000000001 , "The Trigo.EPSILON constant failed." ) ;
-        }
-        
-        public function testRAD2DEG():void
-        {
-            assertEquals( Trigo.RAD2DEG , 180 / Math.PI , "The Trigo.RAD2DEG constant failed." ) ;
-        }
-        
-        public function testPHI():void
-        {
-            assertEquals( Trigo.PHI , 1.61803398874989 , "The Trigo.PHI constant failed." ) ;
-        }
-        
-        public function testLAMBDA():void
-        {
-            assertEquals( Trigo.LAMBDA , 0.57721566490143 , "The Trigo.LAMBDA constant failed." ) ;
-        }
     }
 }

@@ -35,6 +35,8 @@
 
 package graphics.drawing 
 {
+    import core.maths.DEG2RAD;
+
     import graphics.Align;
     import graphics.numeric.Trigo;
     
@@ -261,7 +263,7 @@ package graphics.drawing
                 
                 angle = Trigo.fixAngle( angle ) ;
                 
-                start = angle * Trigo.DEG2RAD ;
+                start = angle * DEG2RAD ;
                 
                 _graphics.moveTo( $x + ( Math.cos(start) * outerRadius ) , $y - ( Math.sin(start) * outerRadius ) ) ;
                 

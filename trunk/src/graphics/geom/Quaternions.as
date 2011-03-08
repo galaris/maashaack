@@ -35,10 +35,9 @@
 
 package graphics.geom 
 {
+    import core.maths.EPSILON;
     import core.maths.clamp;
-
-    import graphics.numeric.Trigo;
-
+    
     /**
      * Manipulates and transforms <code class="prettyprint">Quaternion</code> references.
      */
@@ -195,9 +194,9 @@ package graphics.geom
             }
             var ratio1:Number ;
             var ratio2:Number ;
-            if ( ( a + 1 ) > Trigo.EPSILON )
+            if ( ( a + 1 ) > EPSILON )
             {
-                if ( ( 1 - a ) >= Trigo.EPSILON )  // spherical interpolation
+                if ( ( 1 - a ) >= EPSILON )  // spherical interpolation
                 {
                     var theta:Number = Math.acos( a ) ;
                     var inv:Number   = 1 / Math.sin( theta ) ;

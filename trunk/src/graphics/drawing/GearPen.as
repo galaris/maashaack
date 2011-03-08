@@ -22,8 +22,9 @@
 */
 package graphics.drawing 
 {
+    import core.maths.DEG2RAD;
+
     import graphics.Align;
-    import graphics.numeric.Trigo;
     
     /**
      * This pen drawing gears.
@@ -276,7 +277,7 @@ package graphics.drawing
                 var step:Number    = _PI2 / _sides ;
                 var qtrStep:Number = step / 4 ;
                 
-                start = angle * Trigo.DEG2RAD ;
+                start = angle * DEG2RAD ;
                 
                 _graphics.moveTo( $x +( Math.cos(start) * outerRadius ) , $y - (Math.sin(start) * outerRadius ) ) ;
                 
