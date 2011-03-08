@@ -35,40 +35,8 @@
 
 package core.maths
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
-    {
-        public static function suite():ITest
-        {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            // const
-            
-            suite.addTestSuite( DEG2RADTest ) ;
-            suite.addTestSuite( EPSILONTest ) ;
-            
-            // functions
-            
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( bounceTest      ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( coserpTest      ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( replaceNaNTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
-        }
-    }
+   /**
+    * Represents the smallest positive Single value greater than zero.
+    */
+    public const EPSILON:Number = 0.000000001;
 }
