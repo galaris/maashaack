@@ -53,12 +53,11 @@ package graphics.numeric
             }
             else 
             {
-                n -= n%1 ; // no decimal number
-                var result:Number = n ;
+                var result:uint = n ;
                 while (--n > 1)
                 {
                     result *= n ;
-                    if ( result == Number.POSITIVE_INFINITY ) // optimization AS2 the Infinity value is return with a value >= 171
+                    if ( result == Number.POSITIVE_INFINITY ) 
                     {
                         return Infinity ;
                     }
@@ -82,7 +81,7 @@ package graphics.numeric
         {
             return Math.round((Math.pow((1+Math.sqrt(5))/2,n)-Math.pow((1-Math.sqrt(5))/2,n))/Math.sqrt(5));
         }
-
+        
         /**
          * Extends the domain of the factorial function by calculating the factorial of decimal numbers.
          */
@@ -99,7 +98,7 @@ package graphics.numeric
         {
             return 1/n ;
         }
-                
+        
         /**
          * Defines the logarithm with base 'a' of 'n'.
          * @param a :Number a real number for 'log base'.
