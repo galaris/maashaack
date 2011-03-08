@@ -65,6 +65,7 @@ package core.maths
             suite.addTestSuite( interpolateTest ) ;
             suite.addTestSuite( lerpTest        ) ;
             suite.addTestSuite( mapTest         ) ;
+            suite.addTestSuite( normalizeTest   ) ;
             suite.addTestSuite( percentageTest  ) ;
             suite.addTestSuite( replaceNaNTest  ) ;
             suite.addTestSuite( roundTest       ) ;
