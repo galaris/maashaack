@@ -33,43 +33,19 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class LAMBDATest extends TestCase 
     {
-        public static function suite():ITest
+        public function LAMBDATest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            // const
-            
-            suite.addTestSuite( DEG2RADTest ) ;
-            suite.addTestSuite( EPSILONTest ) ;
-            suite.addTestSuite( LAMBDATest  ) ;
-            
-            // functions
-            
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( bounceTest      ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( coserpTest      ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( replaceNaNTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
         }
+        
+        public function testLAMBDA():void
+        {
+            assertEquals( 0.57721566490143 , LAMBDA ) ;        }
     }
 }
