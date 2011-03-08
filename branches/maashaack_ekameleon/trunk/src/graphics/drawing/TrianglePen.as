@@ -35,10 +35,12 @@
 
 package graphics.drawing 
 {
+    import core.maths.DEG2RAD;
+
     import graphics.numeric.Trigo;
-    
+
     import system.hack;
-    
+
     import flash.geom.Point;
     
     /**
@@ -241,7 +243,7 @@ package graphics.drawing
         public function set angle(n:Number):void 
         {
             _angle = Trigo.fixAngle( n ) ;
-            _angleR = _angle * Trigo.DEG2RAD ;
+            _angleR = _angle * DEG2RAD ;
             _calculate() ;
         }
         
@@ -283,7 +285,7 @@ package graphics.drawing
         public function set rotation( n:Number ):void 
         {
             _rotation  = Trigo.fixAngle( n ) ;
-            _rotationR = _rotation * Trigo.DEG2RAD ;
+            _rotationR = _rotation * DEG2RAD ;
             _calculate() ;
         }
         
@@ -373,12 +375,12 @@ package graphics.drawing
             if ( arguments[2] != null && arguments[2] is Number )
             {
                 _angle = Trigo.fixAngle( arguments[2] ) ;
-                _angleR = _angle * Trigo.DEG2RAD ;
+                _angleR = _angle * DEG2RAD ;
             }
             if ( arguments[3] != null && arguments[3] is Number )
             {
                 _rotation  = Trigo.fixAngle( arguments[3] ) ;
-                _rotationR = _rotation * Trigo.DEG2RAD ;
+                _rotationR = _rotation * DEG2RAD ;
             }
             if ( arguments[4] != null && arguments[4] is Number )
             {

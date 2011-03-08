@@ -35,10 +35,11 @@
 
 package graphics.display 
 {
+    import core.maths.DEG2RAD;
+
     import graphics.Align;
     import graphics.geom.AspectRatio;
-    import graphics.numeric.Trigo;
-    
+
     import flash.display.DisplayObject;
     import flash.geom.Matrix;
     import flash.geom.Point;
@@ -285,7 +286,7 @@ package graphics.display
             }
             var p:Point  = m.transformPoint( anchor ) ;
             m.translate( -p.x , -p.y ) ;
-            m.rotate( angle * Trigo.DEG2RAD ) ;
+            m.rotate( angle * DEG2RAD ) ;
             m.translate( p.x , p.y ) ;
             target.x         = m.tx ;
             target.y         = m.ty ;

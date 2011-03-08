@@ -35,8 +35,9 @@
 
 package graphics.drawing 
 {
+    import core.maths.DEG2RAD;
+
     import graphics.Align;
-    import graphics.numeric.Trigo;
     
     /**
      * This pen is the tool to draw a regular polygon vector shape.
@@ -242,7 +243,7 @@ package graphics.drawing
                 }    
                     
                 var step:Number  = _PI2 / sides ; // calculate span of sides
-                var start:Number = angle * Trigo.DEG2RAD ; // calculate starting angle in radians
+                var start:Number = angle * DEG2RAD ; // calculate starting angle in radians
                 
                 _graphics.moveTo( $x + ( Math.cos( start ) * radius ), $y - ( Math.sin( start ) * radius ) ) ;
                 

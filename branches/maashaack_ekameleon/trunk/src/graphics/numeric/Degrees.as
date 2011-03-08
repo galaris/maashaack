@@ -35,6 +35,8 @@
 
 package graphics.numeric 
 {
+    import core.maths.DEG2RAD;
+    import core.maths.RAD2DEG;
     /**
      * Implements the static behaviours of the Degrees manipulations.
      */
@@ -47,7 +49,7 @@ package graphics.numeric
          */
         public static function acosD (ratio:Number) : Number 
         {
-            return Math.acos(ratio) * Trigo.RAD2DEG ;
+            return Math.acos(ratio) * RAD2DEG ;
         }
         
         /**
@@ -57,7 +59,7 @@ package graphics.numeric
          */
         public static function asinD (ratio:Number) : Number 
         {
-            return Math.asin(ratio) * Trigo.RAD2DEG ;
+            return Math.asin(ratio) * RAD2DEG ;
         }
         
         /**
@@ -67,7 +69,7 @@ package graphics.numeric
          */
         public static function atanD( angle:Number ):Number 
         {
-            return Math.atan( angle ) * Trigo.RAD2DEG ;
+            return Math.atan( angle ) * RAD2DEG ;
         }
         
         /**
@@ -78,7 +80,7 @@ package graphics.numeric
          */
         public static function atan2D( y:Number , x:Number ):Number 
         {
-            return Math.atan2(y, x) * Trigo.RAD2DEG ;
+            return Math.atan2(y, x) * RAD2DEG ;
         }
         
         /**
@@ -88,7 +90,7 @@ package graphics.numeric
          */
         public static function cosD(angle:Number):Number 
         {
-            return Math.cos( angle * Trigo.DEG2RAD ) ;
+            return Math.cos( angle * DEG2RAD ) ;
         }
         
         /**
@@ -98,7 +100,7 @@ package graphics.numeric
          */
         public static function sinD(angle:Number):Number 
         {
-            return Math.sin( angle * Trigo.DEG2RAD ) ;
+            return Math.sin( angle * DEG2RAD ) ;
         }
         
         /**
@@ -108,7 +110,7 @@ package graphics.numeric
          */
         public static function tanD(angle:Number):Number 
         {
-            return Math.tan( angle * Trigo.DEG2RAD ) ;
+            return Math.tan( angle * DEG2RAD ) ;
         }
     }
 }

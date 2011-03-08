@@ -35,7 +35,9 @@
 
 package graphics.geom 
 {
-    import graphics.numeric.Trigo;
+    import core.maths.DEG2RAD;
+    import core.maths.EPSILON;
+    import core.maths.RAD2DEG;
     
     /**
      * Quaternions are hypercomplex numbers used to represent spatial rotations in three dimensions. 
@@ -186,7 +188,7 @@ package graphics.geom
          * 
          * var q:Quaternion = new Quaternion();
          * 
-         * q.euler( 360 * Trigo.DEG2RAD , 180 * Trigo.DEG2RAD , 90 * Trigo.DEG2RAD ) ;
+         * q.euler( 360 * DEG2RAD , 180 * DEG2RAD , 90 * DEG2RAD ) ;
          * trace(q) ;
          * trace(q.getEulerAngles(true) ) ;
          * 
@@ -210,9 +212,9 @@ package graphics.geom
         {
             if( degrees )
             {
-               roll  *= Trigo.DEG2RAD ;
-               pitch *= Trigo.DEG2RAD ;
-               yaw   *= Trigo.DEG2RAD ;
+               roll  *= DEG2RAD ;
+               pitch *= DEG2RAD ;
+               yaw   *= DEG2RAD ;
             }
             
             var c1:Number ; var s1:Number ;
@@ -297,9 +299,9 @@ package graphics.geom
             }
             if ( degrees )
             {
-                roll  *= Trigo.RAD2DEG ;
-                pitch *= Trigo.RAD2DEG ;
-                yaw   *= Trigo.RAD2DEG ;
+                roll  *= RAD2DEG ;
+                pitch *= RAD2DEG ;
+                yaw   *= RAD2DEG ;
             }
             return new Vector3( roll , pitch , yaw ) ;
         }
@@ -378,7 +380,7 @@ package graphics.geom
         public function normalize():void
         {
             var len:Number = size() ;
-            if ( Math.abs(len) < Trigo.EPSILON )
+            if ( Math.abs(len) < EPSILON )
             {
                 identity() ;
             }
