@@ -36,13 +36,13 @@
 package
 {
     import buRRRn.ASTUce.*;
-
+    
     import core.AllTests;
-
+    
     import system.config;
     import system.console;
     import system.diagnostics.TextFieldConsole;
-
+    
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
@@ -50,11 +50,11 @@ package
     import flash.system.Capabilities;
     import flash.text.TextField;
     import flash.text.TextFormat;
-
+    
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
     
     // Compilation arguments :
-    // -default-size 760 800 -default-frame-rate 24 -default-background-color 0x666666 --target-player=10.0.0
+    // -target-player=10.0.0 -static-link-runtime-shared-libraries=true
     
     public class CoreTestRunner extends Sprite
     {
@@ -92,7 +92,7 @@ package
             
             console.writeLine( "FlashPlayer version : " + Capabilities.version ) ;
         }
-            
+        
         /**
          * The debug textfield of this application.
          */
