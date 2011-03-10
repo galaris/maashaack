@@ -37,15 +37,16 @@ package core.maths
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    public class DEG2RADTest extends TestCase 
+    public class cosDTest extends TestCase 
     {
-        public function DEG2RADTest(name:String = "")
+        public function cosDTest(name:String = "")
         {
             super(name);
         }
         
-        public function testDEG2RAD():void
+        public function testCosD():void
         {
-            assertEquals( Math.PI/180 , DEG2RAD ) ;        }
+            assertEquals( 1 , cosD(  0  ) , "#1" ) ;
+        }
     }
 }

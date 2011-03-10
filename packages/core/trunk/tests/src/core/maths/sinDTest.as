@@ -36,16 +36,17 @@
 package core.maths 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    public class DEG2RADTest extends TestCase 
+
+    public class sinDTest extends TestCase 
     {
-        public function DEG2RADTest(name:String = "")
+        public function sinDTest(name:String = "")
         {
             super(name);
         }
         
-        public function testDEG2RAD():void
+        public function testSinD():void
         {
-            assertEquals( Math.PI/180 , DEG2RAD ) ;        }
+            assertEquals( 0 , sinD(  0  ) , "#1" ) ;
+        }
     }
 }
