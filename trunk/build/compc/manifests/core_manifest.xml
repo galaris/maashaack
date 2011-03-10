@@ -67,6 +67,7 @@
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
     <component id="core.maths:clamp"       class="core.maths.clamp"       />
     <component id="core.maths:clerp"       class="core.maths.clerp"       />
+    <component id="core.maths:cosD"        class="core.maths.cosD"        />
     <component id="core.maths:coserp"      class="core.maths.coserp"      />
     <component id="core.maths:DEG2RAD"     class="core.maths.DEG2RAD"     />
     <component id="core.maths:EPSILON"     class="core.maths.EPSILON"     />
@@ -83,7 +84,9 @@
     <component id="core.maths:replaceNaN"  class="core.maths.replaceNaN"  />
     <component id="core.maths:round"       class="core.maths.round"       />
     <component id="core.maths:sign"        class="core.maths.sign"        />
+    <component id="core.maths:sinD"        class="core.maths.sinD"        />
     <component id="core.maths:sinerp"      class="core.maths.sinerp"      />
+    <component id="core.maths:tanD"        class="core.maths.tanD"        />
     
     <!-- core.reflect -->
     
