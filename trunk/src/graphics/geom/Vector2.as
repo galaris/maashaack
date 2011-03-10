@@ -35,10 +35,13 @@
 
 package graphics.geom 
 {
-    import graphics.numeric.Degrees;
-    
+    import core.maths.acosD;
+    import core.maths.atan2D;
+    import core.maths.cosD;
+    import core.maths.sinD;
+
     import system.Serializable;
-    
+
     import flash.geom.Point;
     
     /**
@@ -90,7 +93,7 @@ package graphics.geom
          */
         public function get angle():Number 
         {
-            return degrees ? Degrees.atan2D( y , x) : Math.atan2( y , x ) ;
+            return degrees ? atan2D( y , x) : Math.atan2( y , x ) ;
         }
         
         /**
@@ -99,8 +102,8 @@ package graphics.geom
         public function set angle( value:Number ):void 
         {
             var r:Number = length ;
-            x = r * ( degrees ? Degrees.cosD( value ) : Math.cos( value ) ) ;
-            y = r * ( degrees ? Degrees.sinD( value ) : Math.sin( value ) ) ;
+            x = r * ( degrees ? cosD( value ) : Math.cos( value ) ) ;
+            y = r * ( degrees ? sinD( value ) : Math.sin( value ) ) ;
         }
         
         /**
@@ -203,7 +206,7 @@ package graphics.geom
         {
             var d:Number = dot( vector ) ;
             var a:Number = d / ( length * vector.length ) ;
-            return degrees ? Degrees.acosD( a ) : Math.acos( a ) ;
+            return degrees ? acosD( a ) : Math.acos( a ) ;
         }
         
         /**
@@ -602,8 +605,8 @@ package graphics.geom
          */
         public function rotate( angle:Number ):void 
         {
-            var ca:Number = degrees ? Degrees.cosD (angle) : Math.sin( angle ) ;
-            var sa:Number = degrees ? Degrees.sinD (angle) : Math.sin( angle ) ;
+            var ca:Number = degrees ? cosD (angle) : Math.sin( angle ) ;
+            var sa:Number = degrees ? sinD (angle) : Math.sin( angle ) ;
             x = x * ca - y * sa ;
             y = x * ca + y * sa ;
         }

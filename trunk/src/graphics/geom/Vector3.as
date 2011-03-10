@@ -35,7 +35,8 @@
 
 package graphics.geom 
 {
-    import graphics.numeric.Degrees;
+    import core.maths.cosD;
+    import core.maths.sinD;
 
     /**
      * Represents a vector in a 3D world with the coordinates x, y and z.
@@ -369,7 +370,7 @@ package graphics.geom
          */
         public function rotateX( angle:Number ):void 
         {
-            rotateXTrig( Degrees.cosD( angle ), Degrees.sinD( angle ));
+            rotateXTrig( cosD( angle ), sinD( angle ));
         }
         
         /**
@@ -381,8 +382,8 @@ package graphics.geom
          * 
          * var v:Vector3 = new Vector3(1,4,7);
          * 
-         * var cosAngle:Number = Degrees.cosD(180);
-         * var sinAngle:Number = Degrees.sinD(180);
+         * var cosAngle:Number = cosD(180);
+         * var sinAngle:Number = sinD(180);
          * 
          * v.rotateXTrig( cosAngle , sinAngle ) ;
          * 
@@ -412,7 +413,7 @@ package graphics.geom
          */
         public function rotateY( angle:Number ):void 
         {
-            rotateYTrig( Degrees.cosD(angle), Degrees.sinD(angle) ) ;
+            rotateYTrig( cosD(angle), sinD(angle) ) ;
         }
         
         /**
@@ -455,7 +456,7 @@ package graphics.geom
          */
         public function rotateZ( angle:Number ):void 
         {
-            rotateZTrig( Degrees.cosD(angle), Degrees.sinD(angle) );
+            rotateZTrig( cosD(angle), sinD(angle) );
         }
         
         /**
@@ -467,8 +468,8 @@ package graphics.geom
          * 
          * var v:Vector3 = new Vector3(6,1,4) ;
          * 
-         * var cosAngle:Number = Degrees.cosD(45) ;
-         * var sinAngle:Number = Degrees.sinD(45) ;
+         * var cosAngle:Number = cosD(45) ;
+         * var sinAngle:Number = sinD(45) ;
          * 
          * v.rotateZTrig( cosAngle , sinAngle ) ;
          * trace(v);
@@ -499,7 +500,7 @@ package graphics.geom
          */
         public function rotateXY( a:Number, b:Number):void 
         {
-            rotateXYTrig( Degrees.cosD(a), Degrees.sinD(a), Degrees.cosD(b), Degrees.sinD(b) ) ;
+            rotateXYTrig( cosD(a), sinD(a), cosD(b), sinD(b) ) ;
         }
         
         /**
@@ -511,11 +512,11 @@ package graphics.geom
          * 
          * var v:Vector3 = new Vector3(6,1,4) ;
          * 
-         * var cosAngleA:Number = Degrees.cosD(45) ;
-         * var sinAngleA:Number = Degrees.sinD(45) ;
+         * var cosAngleA:Number = cosD(45) ;
+         * var sinAngleA:Number = sinD(45) ;
          * 
-         * var cosAngleB:Number = Degrees.cosD(90) ;
-         * var sinAngleB:Number = Degrees.sinD(90) ;
+         * var cosAngleB:Number = cosD(90) ;
+         * var sinAngleB:Number = sinD(90) ;
          * 
          * v.rotateXYTrig( cosAngleA, sinAngleA, cosAngleB, sinAngleB ) ;
          * 
@@ -554,7 +555,7 @@ package graphics.geom
          */
         public function rotateXYZ ( v:Vector3, a:Number, b:Number, c:Number):void 
         {
-            rotateXYZTrig( Degrees.cosD(a), Degrees.sinD(a), Degrees.cosD(b), Degrees.sinD(b), Degrees.cosD(c), Degrees.sinD(c));
+            rotateXYZTrig( cosD(a), sinD(a), cosD(b), sinD(b), cosD(c), sinD(c));
         }
             
         /**
@@ -566,14 +567,14 @@ package graphics.geom
          * 
          * var v:Vector3 = new Vector3(6,1,4) ;
          * 
-         * var cosAngleA:Number = Degrees.cosD(45) ;
-         * var sinAngleA:Number = Degrees.sinD(45) ;
+         * var cosAngleA:Number = cosD(45) ;
+         * var sinAngleA:Number = sinD(45) ;
          * 
-         * var cosAngleB:Number = Degrees.cosD(90) ;
-         * var sinAngleB:Number = Degrees.sinD(90) ;
+         * var cosAngleB:Number = cosD(90) ;
+         * var sinAngleB:Number = sinD(90) ;
          * 
-         * var cosAngleC:Number = Degrees.cosD(135) ;
-         * var sinAngleC:Number = Degrees.sinD(135) ;
+         * var cosAngleC:Number = cosD(135) ;
+         * var sinAngleC:Number = sinD(135) ;
          * 
          * v.rotateXYZTrig( cosAngleA, sinAngleA, cosAngleB, sinAngleB, cosAngleC, sinAngleC ) ;
          * 
