@@ -37,7 +37,10 @@ package graphics.numeric
 {
     import core.maths.DEG2RAD;
     import core.maths.RAD2DEG;
-    
+    import core.maths.atan2D;
+    import core.maths.cosD;
+    import core.maths.sinD;
+
     import graphics.geom.Polar;
     import graphics.geom.Vector2;
     
@@ -56,7 +59,7 @@ package graphics.numeric
          */
         public static function angleOfLine(x1:Number, y1:Number, x2:Number, y2:Number):Number 
         {
-            return Degrees.atan2D(y2 - y1, x2 - x1) ;
+            return atan2D(y2 - y1, x2 - x1) ;
         }
         
         /**
@@ -65,7 +68,7 @@ package graphics.numeric
          */
         public static function cartesianToPolar( p:* ):Object 
         {
-            return ( { r : Math.sqrt(p.x * p.x + p.y * p.y), t : Degrees.atan2D(p.y, p.x) } ) ;
+            return ( { r : Math.sqrt(p.x * p.x + p.y * p.y), t : atan2D(p.y, p.x) } ) ;
         }
         
         /**
@@ -178,7 +181,7 @@ package graphics.numeric
          */
         public static function polarToCartesian( polar:Polar , degrees:Boolean = true ):Vector2 
         {
-            return new Vector2(polar.radius * (degrees ? Degrees.cosD(polar.angle) : Math.cos(polar.angle)), polar.radius * (degrees ? Degrees.sinD(polar.angle) : Math.sin(polar.angle))) ;
+            return new Vector2(polar.radius * (degrees ? cosD(polar.angle) : Math.cos(polar.angle)), polar.radius * (degrees ? sinD(polar.angle) : Math.sin(polar.angle))) ;
         }
     }
 }

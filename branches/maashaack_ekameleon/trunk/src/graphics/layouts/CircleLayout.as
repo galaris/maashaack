@@ -35,10 +35,11 @@
 
 package graphics.layouts 
 {
+    import core.maths.atan2D;
+
     import graphics.Align;
-    import graphics.numeric.Degrees;
     import graphics.numeric.Trigo;
-    
+
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     
@@ -212,7 +213,7 @@ package graphics.layouts
                     child.y  = _radius * Math.sin( _startAngle - _pi1 + i * _pi2 / _childCount  )  ;
                     if ( _childOrientation )
                     {
-                        child.rotation = Degrees.atan2D( child.y , child.x ) + _childAngle ;
+                        child.rotation = atan2D( child.y , child.x ) + _childAngle ;
                     }
                 }
             }
