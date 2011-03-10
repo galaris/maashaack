@@ -54,6 +54,10 @@ package core.maths
             
             // functions
             
+            suite.addTestSuite( acosDTest       ) ;
+            suite.addTestSuite( asinDTest       ) ;
+            suite.addTestSuite( atanDTest       ) ;
+            suite.addTestSuite( atan2DTest      ) ;
             suite.addTestSuite( berpTest        ) ;
             suite.addTestSuite( bounceTest      ) ;
             suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
@@ -69,8 +73,8 @@ package core.maths
             suite.addTestSuite( percentageTest  ) ;
             suite.addTestSuite( replaceNaNTest  ) ;
             suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( signTest        ) ;
             suite.addTestSuite( sinerpTest      ) ;
+            suite.addTestSuite( signTest        ) ;
             
             return suite;
         }
