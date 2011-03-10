@@ -62,6 +62,7 @@ package core.maths
             suite.addTestSuite( bounceTest      ) ;
             suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
             suite.addTestSuite( clerpTest       ) ;
+            suite.addTestSuite( cosDTest        ) ;
             suite.addTestSuite( coserpTest      ) ;
             suite.addTestSuite( floorTest       ) ;
             suite.addTestSuite( gcdTest         ) ;
