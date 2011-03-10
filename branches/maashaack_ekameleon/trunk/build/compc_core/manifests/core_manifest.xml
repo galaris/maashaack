@@ -58,6 +58,10 @@
     
     <!-- core.maths -->
     
+    <component id="core.maths:acosD"       class="core.maths.acosD"       />
+    <component id="core.maths:asinD"       class="core.maths.asinD"       />
+    <component id="core.maths:atan2D"      class="core.maths.atan2D"      />
+    <component id="core.maths:atanD"       class="core.maths.atanD"       />
     <component id="core.maths:berp"        class="core.maths.berp"        />
     <component id="core.maths:bounce"      class="core.maths.bounce"      />
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
