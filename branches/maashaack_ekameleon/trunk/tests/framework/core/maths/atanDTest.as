@@ -37,17 +37,17 @@ package core.maths
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class asinDTest extends TestCase 
+    public class atanDTest extends TestCase 
     {
-        public function asinDTest(name:String = "")
+        public function atanDTest(name:String = "")
         {
             super(name);
         }
         
-        public function testAsinD():void
+        public function testAtanD():void
         {
-            assertEquals(   0 , asinD(  0 ) , "#1" ) ;
-            assertEquals( -90 , asinD( -1 ) , "#2" ) ;
-            assertEquals(  90 , asinD(  1 ) , "#3" ) ;        }
+            assertEquals(   0 , atanD(  0 ) , "#1" ) ;
+            assertEquals( -45 , atanD( -1 ) , "#2" ) ;
+            assertEquals(  45 , atanD(  1 ) , "#3" ) ;        }
     }
 }
