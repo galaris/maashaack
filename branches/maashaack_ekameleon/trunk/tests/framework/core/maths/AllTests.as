@@ -74,8 +74,10 @@ package core.maths
             suite.addTestSuite( percentageTest  ) ;
             suite.addTestSuite( replaceNaNTest  ) ;
             suite.addTestSuite( roundTest       ) ;
+            suite.addTestSuite( sinDTest        ) ;
             suite.addTestSuite( sinerpTest      ) ;
             suite.addTestSuite( signTest        ) ;
+            suite.addTestSuite( tanDTest        ) ;
             
             return suite;
         }
