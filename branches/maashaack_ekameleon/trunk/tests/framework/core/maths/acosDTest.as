@@ -33,47 +33,21 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class acosDTest extends TestCase 
     {
-        public static function suite():ITest
+        public function acosDTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.maths package tests");
-            
-            // const
-            
-            suite.addTestSuite( DEG2RADTest ) ;
-            suite.addTestSuite( EPSILONTest ) ;
-            suite.addTestSuite( LAMBDATest  ) ;
-            suite.addTestSuite( PHITest     ) ;
-            suite.addTestSuite( RAD2DEGTest ) ;
-            
-            // functions
-            
-            suite.addTestSuite( acosDTest       ) ;
-            suite.addTestSuite( berpTest        ) ;
-            suite.addTestSuite( bounceTest      ) ;
-            suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
-            suite.addTestSuite( clerpTest       ) ;
-            suite.addTestSuite( coserpTest      ) ;
-            suite.addTestSuite( floorTest       ) ;
-            suite.addTestSuite( gcdTest         ) ;
-            suite.addTestSuite( hermiteTest     ) ;
-            suite.addTestSuite( interpolateTest ) ;
-            suite.addTestSuite( lerpTest        ) ;
-            suite.addTestSuite( mapTest         ) ;
-            suite.addTestSuite( normalizeTest   ) ;
-            suite.addTestSuite( percentageTest  ) ;
-            suite.addTestSuite( replaceNaNTest  ) ;
-            suite.addTestSuite( roundTest       ) ;
-            suite.addTestSuite( sinerpTest      ) ;
-            suite.addTestSuite( signTest        ) ;
-            
-            return suite;
+            super(name);
         }
+        
+        public function testAcosD():void
+        {
+            assertEquals(  90 , acosD(  0 ) , "#1" ) ;
+            assertEquals( 180 , acosD( -1 ) , "#2" ) ;
+            assertEquals(   0 , acosD(  1 ) , "#3" ) ;        }
     }
 }
