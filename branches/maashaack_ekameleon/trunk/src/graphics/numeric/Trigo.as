@@ -130,24 +130,6 @@ package graphics.numeric
             return Math.sqrt(v1 * v1 + v2 * v2);
         }
         
-        
-        /**
-         * Linear interpolation from start to end by the given percent.
-         * <p><b>Basically :</b> <code class="prettyprint">((1 - percent) * start) + (percent * end)</code></p>
-         * @param percent The percent value to use.
-         * @param start the begining value.
-         * @param end The ending value.
-         * @return The interpolated value between start and end.
-         */
-        public static function lerp( percent:Number, start:Number, end:Number ):Number
-        {
-            if ( start == end ) 
-            {
-                return start ;
-            }
-            return ( (1 - percent) * start) + ( percent * end );
-        }
-        
         /**
          * Calculates the log10 of the specified value.
          */
