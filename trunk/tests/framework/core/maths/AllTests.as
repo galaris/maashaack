@@ -68,6 +68,7 @@ package core.maths
             suite.addTestSuite( gcdTest         ) ;
             suite.addTestSuite( hermiteTest     ) ;
             suite.addTestSuite( interpolateTest ) ;
+            //suite.addTestSuite( isEvenTest      ) ;
             suite.addTestSuite( lerpTest        ) ;
             suite.addTestSuite( mapTest         ) ;
             suite.addTestSuite( normalizeTest   ) ;
