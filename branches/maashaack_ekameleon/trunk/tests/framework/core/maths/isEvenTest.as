@@ -46,18 +46,18 @@ package core.maths
         
         public function testIsEvenTrue():void
         {
-            assertTrue( isEven( 0  , "#1" ) ) ;
-            assertTrue( isEven( 2  , "#2" ) ) ;
-            assertTrue( isEven( 4  , "#3" ) ) ;
-            assertTrue( isEven( -2 , "#4" ) ) ;
+            assertTrue( isEven(  0 ) , "#1" ) ;
+            assertTrue( isEven(  2 ) , "#2" ) ;
+            assertTrue( isEven(  4 ) , "#3" ) ;
+            assertTrue( isEven( -2 ) , "#4" ) ;
         }
         
         public function testIsEvenFalse():void
         {
-            assertTrue( isEven( 1  , "#1" ) ) ;
-            assertTrue( isEven( 3  , "#2" ) ) ;
-            assertTrue( isEven( 5  , "#3" ) ) ;
-            assertTrue( isEven( -1 , "#4" ) ) ;
+            assertFalse( isEven(  1 ) , "#1" ) ;
+            assertFalse( isEven(  3 ) , "#2" ) ;
+            assertFalse( isEven(  5 ) , "#3" ) ;
+            assertFalse( isEven( -1 ) , "#4" ) ;
         }
     }
 }
