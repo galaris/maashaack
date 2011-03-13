@@ -37,27 +37,27 @@ package core.maths
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class isEvenTest extends TestCase 
+    public class isOddTest extends TestCase 
     {
-        public function isEvenTest(name:String = "")
+        public function isOddTest(name:String = "")
         {
             super(name);
         }
         
-        public function testIsEvenTrue():void
+        public function testIsOddFalse():void
         {
-            assertTrue( isEven(  0 ) , "#1" ) ;
-            assertTrue( isEven(  2 ) , "#2" ) ;
-            assertTrue( isEven(  4 ) , "#3" ) ;
-            assertTrue( isEven( -2 ) , "#4" ) ;
+            assertFalse( isOdd(  0 ) , "#1" ) ;
+            assertFalse( isOdd(  2 ) , "#2" ) ;
+            assertFalse( isOdd(  4 ) , "#3" ) ;
+            assertFalse( isOdd( -2 ) , "#4" ) ;
         }
         
-        public function testIsEvenFalse():void
+        public function testIsOddTrue():void
         {
-            assertFalse( isEven(  1 ) , "#1" ) ;
-            assertFalse( isEven(  3 ) , "#2" ) ;
-            assertFalse( isEven(  5 ) , "#3" ) ;
-            assertFalse( isEven( -1 ) , "#4" ) ;
+            assertTrue( isOdd(  1 ) , "#1" ) ;
+            assertTrue( isOdd(  3 ) , "#2" ) ;
+            assertTrue( isOdd(  5 ) , "#3" ) ;
+            assertTrue( isOdd( -1 ) , "#4" ) ;
         }
     }
 }
