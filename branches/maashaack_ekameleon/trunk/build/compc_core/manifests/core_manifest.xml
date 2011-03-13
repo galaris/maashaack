@@ -75,6 +75,8 @@
     <component id="core.maths:gcd"         class="core.maths.gcd"         />
     <component id="core.maths:hermite"     class="core.maths.hermite"     />
     <component id="core.maths:interpolate" class="core.maths.interpolate" />
+    <component id="core.maths:isEven"      class="core.maths.isEven"      />
+    <component id="core.maths:isOdd"       class="core.maths.isOdd"       />
     <component id="core.maths:lerp"        class="core.maths.lerp"        />
     <component id="core.maths:map"         class="core.maths.map"         />
     <component id="core.maths:normalize"   class="core.maths.normalize"   />
