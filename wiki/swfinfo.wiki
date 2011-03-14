@@ -23,10 +23,11 @@ Download the file for your operating system.
 || Linux || OS X || Windows ||
 || [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip swfinfo NIX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip swfinfo OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip swfinfo OSX 10.5]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip swfinfo WIN] ||
 
-|| get the source code ||
-|| `svn checkout http://maashaack.googlecode.com/svn/tools/swfinfo/trunk/ swfinfo-read-only` ||
-|| browse the source code ||
-|| [http://code.google.com/p/maashaack/source/browse/#svn%2Ftools%2Fswfinfo%2Ftrunk /tools/swfinfo/trunk] ||
+*get the source code*<br>
+`svn checkout http://maashaack.googlecode.com/svn/tools/swfinfo/trunk/ swfinfo-read-only`
+
+*browse the source code*<br>
+[http://code.google.com/p/maashaack/source/browse/#svn%2Ftools%2Fswfinfo%2Ftrunk /tools/swfinfo/trunk]
 
 *notes:*<br>
   * OS X file is for OS X 10.6+ intel
