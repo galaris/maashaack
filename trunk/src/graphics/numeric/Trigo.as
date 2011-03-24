@@ -35,8 +35,6 @@
 
 package graphics.numeric 
 {
-    import core.maths.DEG2RAD;
-    import core.maths.RAD2DEG;
     import core.maths.atan2D;
     import core.maths.cosD;
     import core.maths.sinD;
@@ -50,60 +48,12 @@ package graphics.numeric
     public final class Trigo 
     {
         /**
-         * Returns the angle in degrees between 2 points with this coordinates passed in argument.
-         * @param x1 the x coordinate of the first point.
-         * @param y1 the y coordinate of the first point.
-         * @param x2 the x coordinate of the second point.
-         * @param y2 the y coordinate of the second point.
-         * @return the angle in degrees between 2 points with this coordinates passed in argument.
-         */
-        public static function angleOfLine(x1:Number, y1:Number, x2:Number, y2:Number):Number 
-        {
-            return atan2D(y2 - y1, x2 - x1) ;
-        }
-        
-        /**
          * Converts a vector in cartesian in a polar vector.
          * @return a vector in cartesian in a polar vector.
          */
         public static function cartesianToPolar( p:* ):Object 
         {
             return ( { r : Math.sqrt(p.x * p.x + p.y * p.y), t : atan2D(p.y, p.x) } ) ;
-        }
-        
-        /**
-         * Converts an angle in degrees in radians
-         * @return an angle in degrees in radians.
-         */
-        public static function degreesToRadians(angle:Number):Number 
-        {
-            return angle * DEG2RAD ;
-        }
-        
-        /**
-         * Returns the distance between 2 points with the coordinates of the 2 points.
-         * @param x1 the x coordinate of the first point.
-         * @param y1 the y coordinate of the first point.
-         * @param x2 the x coordinate of the second point.
-         * @param y2 the y coordinate of the second point.
-         * @return the length between 2 points.
-         */
-        public static function distance(x1:Number, y1:Number, x2:Number, y2:Number):Number 
-        {
-            var dx:Number = x2 - x1 ;
-            var dy:Number = y2 - y1 ;
-            return Math.sqrt(dx * dx + dy * dy) ;
-        }
-        
-        /**
-         * Returns the distance between 2 points with the coordinates of the 2 points.
-         * @param p1 the first point to determinate the distance.
-         * @param p2 the second point to determinate the distance.
-         * @return the length between 2 points.
-         */
-        public static function distanceByObject( p1:* , p2:* ):Number 
-        {
-            return distance(p1.x, p1.y, p2.x, p2.y) ;
         }
         
         /**
@@ -144,15 +94,6 @@ package graphics.numeric
         public static function logN( value:Number , base:int ):Number 
         {
             return Math.log(value) / Math.log(base) ;
-        }
-        
-        /**
-         * Converts an angle in radians in degrees.
-         * @return an angle in radians in degrees.
-         */
-        public static function radiansToDegrees(angle:Number):Number 
-        {
-            return angle * RAD2DEG ;
         }
         
         /**

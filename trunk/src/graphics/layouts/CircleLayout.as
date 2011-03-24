@@ -36,10 +36,11 @@
 package graphics.layouts 
 {
     import core.maths.atan2D;
-
+    import core.maths.degreesToRadians;
+    import core.maths.radiansToDegrees;
+    
     import graphics.Align;
-    import graphics.numeric.Trigo;
-
+    
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     
@@ -129,7 +130,7 @@ package graphics.layouts
          */
         public function get startAngle():Number 
         {
-            return Trigo.radiansToDegrees(_startAngle) ;
+            return radiansToDegrees(_startAngle) ;
         }
         
         /**
@@ -137,7 +138,7 @@ package graphics.layouts
          */
         public function set startAngle(n:Number):void 
         {
-            _startAngle = Trigo.degreesToRadians( isNaN(n) ? 0 : n%360 ) ;
+            _startAngle = degreesToRadians( isNaN(n) ? 0 : n%360 ) ;
         }
         
         /**
