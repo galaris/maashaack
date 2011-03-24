@@ -86,6 +86,7 @@ package core.maths
             suite.addTestSuite( sinHTest        ) ;
             suite.addTestSuite( signTest        ) ;
             suite.addTestSuite( tanDTest        ) ;
+            suite.addTestSuite( tanHTest        ) ;
             
             return suite;
         }
