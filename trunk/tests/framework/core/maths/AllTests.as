@@ -68,6 +68,7 @@ package core.maths
             suite.addTestSuite( clerpTest       ) ;
             suite.addTestSuite( cosDTest        ) ;
             suite.addTestSuite( coserpTest      ) ;
+            suite.addTestSuite( cosHTest        ) ;
             suite.addTestSuite( floorTest       ) ;
             suite.addTestSuite( gcdTest         ) ;
             suite.addTestSuite( hermiteTest     ) ;
