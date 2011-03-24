@@ -40,7 +40,7 @@ package graphics.numeric
     import core.maths.atan2D;
     import core.maths.cosD;
     import core.maths.sinD;
-
+    
     import graphics.geom.Polar;
     import graphics.geom.Vector2;
     
