@@ -60,7 +60,7 @@
     
     <component id="core.maths:acosD"       class="core.maths.acosD"       />
     <component id="core.maths:acosHm"      class="core.maths.acosHm"      />
-    <component id="core.maths:acosHp"      class="core.maths.acosHp       />
+    <component id="core.maths:acosHp"      class="core.maths.acosHp"      />
     <component id="core.maths:asinD"       class="core.maths.asinD"       />
     <component id="core.maths:asinH"       class="core.maths.asinH"       />
     <component id="core.maths:atan2D"      class="core.maths.atan2D"      />
