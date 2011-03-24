@@ -55,6 +55,7 @@ package core.maths
             // functions
             
             suite.addTestSuite( acosDTest       ) ;
+            suite.addTestSuite( acosHmTest      ) ;
             suite.addTestSuite( asinDTest       ) ;
             suite.addTestSuite( atanDTest       ) ;
             suite.addTestSuite( atan2DTest      ) ;
