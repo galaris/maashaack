@@ -59,9 +59,13 @@
     <!-- core.maths -->
     
     <component id="core.maths:acosD"       class="core.maths.acosD"       />
+    <component id="core.maths:acosHm"      class="core.maths.acosHm"      />
+    <component id="core.maths:acosHp"      class="core.maths.acosHp       />
     <component id="core.maths:asinD"       class="core.maths.asinD"       />
+    <component id="core.maths:asinH"       class="core.maths.asinH"       />
     <component id="core.maths:atan2D"      class="core.maths.atan2D"      />
     <component id="core.maths:atanD"       class="core.maths.atanD"       />
+    <component id="core.maths:atanH"       class="core.maths.atanH"       />
     <component id="core.maths:berp"        class="core.maths.berp"        />
     <component id="core.maths:bounce"      class="core.maths.bounce"      />
     <component id="core.maths:ceil"        class="core.maths.ceil"        />
@@ -69,6 +73,7 @@
     <component id="core.maths:clerp"       class="core.maths.clerp"       />
     <component id="core.maths:cosD"        class="core.maths.cosD"        />
     <component id="core.maths:coserp"      class="core.maths.coserp"      />
+    <component id="core.maths:cosH"        class="core.maths.cosH"        />
     <component id="core.maths:DEG2RAD"     class="core.maths.DEG2RAD"     />
     <component id="core.maths:EPSILON"     class="core.maths.EPSILON"     />
     <component id="core.maths:floor"       class="core.maths.floor"       />
@@ -88,7 +93,9 @@
     <component id="core.maths:sign"        class="core.maths.sign"        />
     <component id="core.maths:sinD"        class="core.maths.sinD"        />
     <component id="core.maths:sinerp"      class="core.maths.sinerp"      />
+    <component id="core.maths:sinH"        class="core.maths.sinH"        />
     <component id="core.maths:tanD"        class="core.maths.tanD"        />
+    <component id="core.maths:tanH"        class="core.maths.tanH"        />
     
     <!-- core.reflect -->
     
