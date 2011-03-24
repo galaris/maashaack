@@ -61,6 +61,7 @@ package core.maths
             suite.addTestSuite( asinHTest       ) ;
             suite.addTestSuite( atanDTest       ) ;
             suite.addTestSuite( atan2DTest      ) ;
+            suite.addTestSuite( atanHTest       ) ;
             suite.addTestSuite( berpTest        ) ;
             suite.addTestSuite( bounceTest      ) ;
             suite.addTestSuite( ceilTest        ) ;            suite.addTestSuite( clampTest       ) ;
