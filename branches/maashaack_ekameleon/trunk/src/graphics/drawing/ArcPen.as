@@ -35,6 +35,8 @@
 
 package graphics.drawing 
 {
+    import core.maths.degreesToRadians;
+
     import graphics.Align;
     import graphics.ArcType;
     import graphics.LineStyle;
@@ -97,7 +99,7 @@ package graphics.drawing
          */
         public function set startAngle( n:Number ):void 
         {
-            _startAngle = Trigo.degreesToRadians(n) ;
+            _startAngle = degreesToRadians(n) ;
         }
         
         /**
@@ -219,7 +221,7 @@ package graphics.drawing
             var a:Number        = - _startAngle  ;
             var segs:Number     = Math.ceil ( Math.abs( _angle ) / 45 ) ;
             var segAngle:Number = _angle / segs ;
-            var theta:Number    = - Trigo.degreesToRadians(segAngle) ;
+            var theta:Number    = - degreesToRadians(segAngle) ;
             
             ax = $x + Math.cos (_startAngle) * radius ;
             ay = $y + Math.sin (-_startAngle) * nR ;
