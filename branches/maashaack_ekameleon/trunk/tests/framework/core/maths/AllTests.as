@@ -83,6 +83,7 @@ package core.maths
             suite.addTestSuite( roundTest       ) ;
             suite.addTestSuite( sinDTest        ) ;
             suite.addTestSuite( sinerpTest      ) ;
+            suite.addTestSuite( sinHTest        ) ;
             suite.addTestSuite( signTest        ) ;
             suite.addTestSuite( tanDTest        ) ;
             
