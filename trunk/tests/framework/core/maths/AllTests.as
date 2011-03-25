@@ -72,6 +72,7 @@ package core.maths
             suite.addTestSuite( cosHTest             ) ;
             suite.addTestSuite( degreesToRadiansTest ) ;
             suite.addTestSuite( distanceTest         ) ;
+            suite.addTestSuite( distanceByObjectTest ) ;
             suite.addTestSuite( floorTest            ) ;
             suite.addTestSuite( gcdTest              ) ;
             suite.addTestSuite( hermiteTest          ) ;
