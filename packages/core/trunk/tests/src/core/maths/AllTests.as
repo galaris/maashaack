@@ -81,6 +81,7 @@ package core.maths
             suite.addTestSuite( mapTest              ) ;
             suite.addTestSuite( normalizeTest        ) ;
             suite.addTestSuite( percentageTest       ) ;
+            suite.addTestSuite( radiansToDegreesTest ) ;
             suite.addTestSuite( replaceNaNTest       ) ;
             suite.addTestSuite( roundTest            ) ;
             suite.addTestSuite( sinDTest             ) ;
