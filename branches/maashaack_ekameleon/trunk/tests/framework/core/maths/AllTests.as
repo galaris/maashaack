@@ -73,6 +73,7 @@ package core.maths
             suite.addTestSuite( degreesToRadiansTest ) ;
             suite.addTestSuite( distanceTest         ) ;
             suite.addTestSuite( distanceByObjectTest ) ;
+            suite.addTestSuite( fixAngleTest         ) ;
             suite.addTestSuite( floorTest            ) ;
             suite.addTestSuite( gcdTest              ) ;
             suite.addTestSuite( hermiteTest          ) ;

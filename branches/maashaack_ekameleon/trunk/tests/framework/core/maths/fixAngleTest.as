@@ -33,20 +33,22 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.maths
+package core.maths 
 {
-    /**
-     * Fixs an angle in degrees between 0 and 360 degrees.
-     * @param angle the passed angle value in degrees.
-     * @return an angle in degrees between 0 and 360 degrees. 
-     */
-    public const fixAngle:Function = function( angle:Number ):Number 
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class fixAngleTest extends TestCase 
     {
-        if ( isNaN(angle) ) 
+        public function fixAngleTest(name:String = "")
         {
-            angle = 0 ;
+            super(name);
         }
-        angle %= 360 ;
-        return ( angle < 0 ) ? ( angle + 360 ) : angle ;
-    };
+        
+        public function testFixAngle():void
+        {
+            assertEquals(   0 , fixAngle(0)   , "#1" ) ;
+            assertEquals(   0 , fixAngle(360) , "#2" ) ;
+            assertEquals( 350 , fixAngle(-10) , "#3" ) ;
+        }
+    }
 }

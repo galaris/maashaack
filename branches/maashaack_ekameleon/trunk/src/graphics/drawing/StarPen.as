@@ -36,9 +36,9 @@
 package graphics.drawing 
 {
     import core.maths.DEG2RAD;
+    import core.maths.fixAngle;
 
     import graphics.Align;
-    import graphics.numeric.Trigo;
     
     /**
      * This pen drawing a star shaped polygons. This pen draw stars in either direction for creating knockouts.
@@ -261,7 +261,7 @@ package graphics.drawing
                 var step:Number     = _PI2 / _points ;
                 var halfStep:Number = step / 2 ;
                 
-                angle = Trigo.fixAngle( angle ) ;
+                angle = fixAngle( angle ) ;
                 
                 start = angle * DEG2RAD ;
                 
