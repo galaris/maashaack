@@ -182,8 +182,8 @@ package graphics.colors
          * Info : The luminance vector where the red value is 0.3086, the green value is 0.6094, and the blue value is 0.0820. 
          * Notice here that we do not use the standard NTSC weights of 0.299, 0.587, and 0.114. 
          * The NTSC weights are only applicable to RGB colors in a gamma 2.2 color space. For linear RGB colors the values above are better.
-         * @see <a href="http://www.graficaobscura.com/matrix/index.html">Matrix Operations for Image Processing</a>
-         * @see <a href="http://www.fourcc.org/fccyvrgb.php">YUV to RGB Conversion</a>
+         * @see Matrix Operations for Image Processing : http://www.graficaobscura.com/matrix/index.html
+         * @see YUV to RGB Conversion : http://www.fourcc.org/fccyvrgb.php
          */
         public function get saturation():Number
         {
