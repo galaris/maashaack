@@ -57,21 +57,6 @@ package graphics.numeric
         }
         
         /**
-         * Fixs an angle in degrees between 0 and 360 degrees.
-         * @param angle the passed angle value in degrees.
-         * @return an angle in degrees between 0 and 360 degrees. 
-         */
-        public static function fixAngle(angle:Number):Number 
-        {
-            if ( isNaN(angle) ) 
-            {    
-                angle = 0 ;
-            }
-            angle %= 360 ;
-            return (angle < 0) ? angle + 360 : angle ;
-        }
-        
-        /**
          * Calculates the hypothenuse value of the two passed-in triangle sides value.
          * <p>A hypotenuse is the longest side of a right triangle (Right-angled triangle in British English), the side opposite the right angle. The length of the hypotenuse of a right triangle can be found using the Pythagorean theorem, which states that the square of the length of the hypotenuse equals the sum of the squares of the lengths of the other two sides.</p>
          */

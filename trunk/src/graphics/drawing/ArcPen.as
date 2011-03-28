@@ -36,11 +36,11 @@
 package graphics.drawing 
 {
     import core.maths.degreesToRadians;
+    import core.maths.fixAngle;
 
     import graphics.Align;
     import graphics.ArcType;
     import graphics.LineStyle;
-    import graphics.numeric.Trigo;
     
     /**
      * This pen draw a pie or chord arc shape with a Graphics object.
@@ -78,7 +78,7 @@ package graphics.drawing
          */
         public function set angle(n:Number):void 
         {
-            _angle = Trigo.fixAngle( n ) ;
+            _angle = fixAngle( n ) ;
         }
         
         /**
