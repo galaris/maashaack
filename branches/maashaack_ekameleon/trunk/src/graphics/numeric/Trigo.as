@@ -57,22 +57,6 @@ package graphics.numeric
         }
         
         /**
-         * Calculates the log10 of the specified value.
-         */
-        public static function log10( value:Number ):Number 
-        {
-            return Math.log( value ) / Math.LN10;
-        }
-        
-        /**
-         * Calculates the logN of the specified value.
-         */
-        public static function logN( value:Number , base:int ):Number 
-        {
-            return Math.log(value) / Math.log(base) ;
-        }
-        
-        /**
          * Converts a Polar object in a cartesian vector.
          * @param polar The polar object to transform.
          * @param degrees Indicates if the angle of the polar object is in degrees or radians.
