@@ -222,7 +222,6 @@
     
     <component id="graphics.numeric:Factor"     class="graphics.numeric.Factor" />
     <component id="graphics.numeric:Prime"      class="graphics.numeric.Prime" />
-    <component id="graphics.numeric:Trigo"      class="graphics.numeric.Trigo" />
     
     <!-- graphics.process.display -->
     

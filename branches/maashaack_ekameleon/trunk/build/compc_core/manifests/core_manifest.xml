@@ -69,6 +69,7 @@
     <component id="core.maths:atanH"            class="core.maths.atanH"            />
     <component id="core.maths:berp"             class="core.maths.berp"             />
     <component id="core.maths:bounce"           class="core.maths.bounce"           />
+    <component id="core.maths:cartesianToPolar" class="core.maths.cartesianToPolar" />
     <component id="core.maths:ceil"             class="core.maths.ceil"             />
     <component id="core.maths:clamp"            class="core.maths.clamp"            />
     <component id="core.maths:clerp"            class="core.maths.clerp"            />
@@ -94,6 +95,7 @@
     <component id="core.maths:map"              class="core.maths.map"              />
     <component id="core.maths:normalize"        class="core.maths.normalize"        />
     <component id="core.maths:percentage"       class="core.maths.percentage"       />
+    <component id="core.maths:polarToCartesian" class="core.maths.polarToCartesian" />
     <component id="core.maths:PHI"              class="core.maths.PHI"              />
     <component id="core.maths:RAD2DEG"          class="core.maths.RAD2DEG"          />
     <component id="core.maths:radiansToDegrees" class="core.maths.radiansToDegrees" />
