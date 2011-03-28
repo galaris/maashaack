@@ -111,5 +111,13 @@ package graphics.geom
             var p:Polar = new Polar(100, 45) ;
             assertTrue( p.equals( polar ) , "equals method failed.") ;
         }
+        
+        public function testFromObject():void
+        {
+            var p:Polar = new Polar() ;
+            p.fromObject( { angle : 10 , radius : 100 } ) ;
+            assertEquals(  10 , p.angle  , "#1" ) ;
+            assertEquals( 100 , p.radius , "#2" ) ;
+        }
     }
 }
