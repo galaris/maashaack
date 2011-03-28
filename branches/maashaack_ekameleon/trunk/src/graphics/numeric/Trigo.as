@@ -57,15 +57,6 @@ package graphics.numeric
         }
         
         /**
-         * Calculates the hypothenuse value of the two passed-in triangle sides value.
-         * <p>A hypotenuse is the longest side of a right triangle (Right-angled triangle in British English), the side opposite the right angle. The length of the hypotenuse of a right triangle can be found using the Pythagorean theorem, which states that the square of the length of the hypotenuse equals the sum of the squares of the lengths of the other two sides.</p>
-         */
-        public static function hypothenuse( v1:Number, v2:Number):Number 
-        {
-            return Math.sqrt(v1 * v1 + v2 * v2);
-        }
-        
-        /**
          * Calculates the log10 of the specified value.
          */
         public static function log10( value:Number ):Number 
