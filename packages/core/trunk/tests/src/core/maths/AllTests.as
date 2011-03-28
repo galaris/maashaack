@@ -77,6 +77,7 @@ package core.maths
             suite.addTestSuite( floorTest            ) ;
             suite.addTestSuite( gcdTest              ) ;
             suite.addTestSuite( hermiteTest          ) ;
+            suite.addTestSuite( hypothenuseTest      ) ;
             suite.addTestSuite( interpolateTest      ) ;
             suite.addTestSuite( isEvenTest           ) ;
             suite.addTestSuite( isOddTest            ) ;
