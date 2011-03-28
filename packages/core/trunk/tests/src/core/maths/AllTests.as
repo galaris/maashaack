@@ -83,7 +83,7 @@ package core.maths
             suite.addTestSuite( isOddTest            ) ;
             suite.addTestSuite( lerpTest             ) ;
             suite.addTestSuite( log10Test            ) ;
-            //suite.addTestSuite( logNTest             ) ;
+            suite.addTestSuite( logNTest             ) ;
             suite.addTestSuite( mapTest              ) ;
             suite.addTestSuite( normalizeTest        ) ;
             suite.addTestSuite( percentageTest       ) ;
