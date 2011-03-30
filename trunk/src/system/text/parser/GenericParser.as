@@ -96,46 +96,6 @@ package system.text.parser
         }
         
         /**
-         * Indicates if the specified character is an alpha (A-Z or a-z) character.
-         */
-        public static function isAlpha( c:String ):Boolean
-        {
-            return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z")) ;
-        }
-        
-        /**
-         * Indicates if the specified character is an ASCII character.
-         */
-        public static function isASCII( c:String ):Boolean
-        {
-            return c.charCodeAt( 0 ) <= 255 ;
-        }
-        
-        /**
-         * Indicates if the specified character is a digit.
-         */
-        public static function isDigit( c:String ):Boolean
-        {
-            return ("0" <= c) && (c <= "9") ;
-        }
-        
-        /**
-         * Indicates if the specified character is a hexadecimal digit.
-         */
-        public static function isHexDigit( c:String ):Boolean
-        {
-            return isDigit( c ) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f")) ;
-        }
-        
-        /**
-         * Indicates if the specified character is a unicode character.
-         */
-        public static function isUnicode( c:String ):Boolean
-        {
-            return c.charCodeAt( 0 ) > 255 ;
-        }
-        
-        /**
          * Returns the next character in the source of this parser.
          * @return the next character in the source of this parser.
          */

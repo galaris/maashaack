@@ -40,7 +40,13 @@ but we can keep it here for now
 package system.serializers.eden
 {
     import buRRRn.ASTUce.framework.*;
-    
+
+    import core.chars.isASCII;
+    import core.chars.isAlpha;
+    import core.chars.isDigit;
+    import core.chars.isHexDigit;
+    import core.chars.isUnicode;
+
     import system.text.parser.GenericParser;
     
     public class GenericParserTest extends TestCase
@@ -73,13 +79,13 @@ package system.serializers.eden
             l = alpha.length ;
             for( i = 0 ; i < l ; i++ )
             {
-                assertTrue(GenericParser.isAlpha(alpha[i]), alpha[i] + " is not Alpha");
+                assertTrue(isAlpha(alpha[i]), alpha[i] + " is not Alpha");
             }
             
             l = nonalpha.length ;
             for( i = 0 ; i < l ; i++ )
             {
-                assertFalse(GenericParser.isAlpha(nonalpha[i]), nonalpha[i] + " is Alpha");
+                assertFalse(isAlpha(nonalpha[i]), nonalpha[i] + " is Alpha");
             }
         }
         
@@ -90,12 +96,12 @@ package system.serializers.eden
             
             for( var i:int = 0;i < ascii.length;i++ )
             {
-                assertTrue(GenericParser.isASCII(ascii[i]), ascii[i] + " is not ASCII");
+                assertTrue(isASCII(ascii[i]), ascii[i] + " is not ASCII");
             }
             
             for( var j:int = 0;j < nonascii.length;j++ )
             {
-                assertFalse(GenericParser.isASCII(nonascii[j]), nonascii[j] + " is ASCII");
+                assertFalse(isASCII(nonascii[j]), nonascii[j] + " is ASCII");
             }
         } 
         
@@ -106,12 +112,12 @@ package system.serializers.eden
             
             for( var i:int = 0;i < digit.length;i++ )
             {
-                assertTrue(GenericParser.isDigit(digit[i]), digit[i] + " is not Digit");
+                assertTrue(isDigit(digit[i]), digit[i] + " is not Digit");
             }
             
             for( var j:int = 0;j < nondigit.length;j++ )
             {
-                assertFalse(GenericParser.isDigit(nondigit[j]), nondigit[j] + " is Digit");
+                assertFalse(isDigit(nondigit[j]), nondigit[j] + " is Digit");
             }
         }
         
@@ -122,12 +128,12 @@ package system.serializers.eden
             
             for( var i:int = 0;i < hexdigit.length;i++ )
             {
-                assertTrue(GenericParser.isHexDigit(hexdigit[i]), hexdigit[i] + " is not HexDigit");
+                assertTrue(isHexDigit(hexdigit[i]), hexdigit[i] + " is not HexDigit");
             }
             
             for( var j:int = 0;j < nonhexdigit.length;j++ )
             {
-                assertFalse(GenericParser.isHexDigit(nonhexdigit[j]), nonhexdigit[j] + " is HexDigit");
+                assertFalse(isHexDigit(nonhexdigit[j]), nonhexdigit[j] + " is HexDigit");
             }
         }
         
@@ -138,12 +144,12 @@ package system.serializers.eden
             
             for( var i:int = 0;i < unicode.length;i++ )
             {
-                assertTrue(GenericParser.isUnicode(unicode[i]), unicode[i] + " is not Unicode");
+                assertTrue(isUnicode(unicode[i]), unicode[i] + " is not Unicode");
             }
             
             for( var j:int = 0;j < nonunicode.length;j++ )
             {
-                assertFalse(GenericParser.isUnicode(nonunicode[j]), nonunicode[j] + " is Unicode");
+                assertFalse(isUnicode(nonunicode[j]), nonunicode[j] + " is Unicode");
             }
         }
         

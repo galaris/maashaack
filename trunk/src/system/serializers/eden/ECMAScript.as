@@ -35,15 +35,18 @@
 
 package system.serializers.eden
 {
+    import core.chars.isAlpha;
+    import core.chars.isDigit;
+    import core.chars.isHexDigit;
     import core.strings.endsWith;
     import core.strings.lineTerminatorChars;
     import core.strings.startsWith;
-
+    
     import system.Reflection;
     import system.Strings;
     import system.console;
     import system.text.parser.GenericParser;
-
+    
     /* note:
     how to debug eden (part 1)
        
@@ -1895,7 +1898,7 @@ package system.serializers.eden
                 case "-" : 
                 case "+" :
                 {
-                    if( GenericParser.isDigit( source.charAt( pos ) ) )
+                    if( isDigit( source.charAt( pos ) ) )
                     {
                         return _scanNumber( );
                     }
