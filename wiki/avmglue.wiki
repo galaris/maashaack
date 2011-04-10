@@ -16,7 +16,7 @@ avmglue is an open source implementation of the following runtimes API:
 
 We will refer to it as the Flash Platform API , shortened to *FPAPI*.
 
-Based on publicly accessible documentation:
+Based on publicly accessible documentation:<br>
 [http://help.adobe.com/en_US/FlashPlatform/beta/reference/actionscript/3/package-summary.html BETA ActionScript 3.0 Reference for the Adobe Flash Platform]<br>
 [http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/ ActionScript 3.0 Reference for the Adobe Flash Platform]<br>
 [http://help.adobe.com/en_US/AS3LCR/Flash_10.0/ Flash CS4 Professional ActionScript 3.0 Language Reference]<br>
