@@ -1,0 +1,10 @@
+#summary core package.
+
+== Introduction ==
+
+TODO
+
+
+== Details ==
+
+TODO
