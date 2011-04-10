@@ -46,6 +46,12 @@
      * [EventsFrontController the Design Pattern FrontController]
      * [EventsDelegate Delegate event listener]
    * [Signals Signalers and Receivers]
+ * [Packages Packages]
+   * maashaack
+      * [core core]
+      * [system system]
+         * [system_terminals system.terminals]
+      * [graphics graphics]
  * [Tools Tools]
    * maashaack
       * [swfinfo swfinfo]
