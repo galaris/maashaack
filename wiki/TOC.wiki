@@ -52,6 +52,10 @@
       * [system system]
          * [system_terminals system.terminals]
       * [graphics graphics]
+ * [Libraries Libraries]
+   * maashaack
+      * [ASTUce ASTUce]
+      * [edenRR edenRR]
  * [Tools Tools]
    * maashaack
       * [swfinfo swfinfo]
