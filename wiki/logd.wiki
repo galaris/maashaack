@@ -107,7 +107,7 @@ to be formated by your own custom output function
 obj
 {
     id: "17AC06D37",
-    priority: ,
+    priority: 4,
     letter: "I",
     pre: "( ",
     post: " )",
@@ -142,18 +142,20 @@ package test
 
     public class MyClass
     {
-        log.i( "constructor" );
-    }
+        public function MyClass()
+        {
+            log.i( "constructor" );
+        }
 
-    public function toString():String
-    {
-        log.i( "toString" );
-        return "MyClass";
+        public function toString():String
+        {
+            log.i( "toString" );
+            return "MyClass";
+        }
     }
-
 }
 
-//output (by default with trace(0 and flashlogs.txt
+//output (by default with trace() and flashlogs.txt
 17AC06D37|I||constructor|64
 17AC06D37|I||toString|65
 }}}
@@ -163,3 +165,103 @@ This format is the *raw* mode, when you mainly target a text file to store your 
 the `17AC06D37` is the id for the logging session and is here only to be able to<br>
 filter the logs from a big text file (like `flashlogs.txt`) and get the particular session.
 
+
+Adding a custom tag.
+{{{
+package test
+{
+    import core.log;
+    import core.Logger;
+
+    public class MyClass
+    {
+        private var _log:Logger;
+
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.i( "constructor" );
+        }
+
+        public function toString():String
+        {
+            _log.i( "toString" );
+            return "MyClass";
+        }
+    }
+}
+
+//output
+17AC06D37|I|MyClass|constructor|64
+17AC06D37|I|MyClass|toString|65
+}}}
+
+Change the mode and the separator.
+{{{
+package test
+{
+    import core.log;
+    import core.Logger;
+
+    public class MyClass
+    {
+        private var _log:Logger;
+
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.config( { mode: "clean", sep: " " } );
+            _log.i( "constructor" );
+        }
+
+        public function toString():String
+        {
+            _log.i( "toString" );
+            return "MyClass";
+        }
+    }
+}
+
+//output
+MyClass ( constructor ) 64
+MyClass ( toString ) 65
+}}}
+
+
+Change the format for a particular priority and change the logging level (and all of the above).
+{{{
+package test
+{
+    import core.Logger;
+    import core.log;
+    
+    public class MyClass
+    {
+        private var _log:Logger;
+        
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.level = log.VERBOSE;
+            _log.config( { mode: "clean", sep: " " } );
+            _log.format( log.DEBUG, "|---------> ", "" );
+            _log.i( "constructor" );
+        }
+        
+        public function test():void
+        {
+            _log.d( "test" );
+        }
+        
+        public function toString():String
+        {
+            _log.i( "toString" );
+            return "MyClass";
+        }
+    }
+}
+//output
+MyClass ( constructor ) 64
+MyClass |---------> test 65
+MyClass ( toString ) 65
+}}}
