@@ -92,7 +92,7 @@ package core
  * *MESSAGE* the log message
  * *TIME* timestamp in milliseconds
 
- * *clean* for console output<br>
+*clean* for console output<br>
 `TAG | PRE | MESSAGE | POST | TIME`
  * *TAG* a custom tag or the empty string by default
  * *PRE* pre priority format
@@ -100,7 +100,7 @@ package core
  * *POST* post priority format
  * *TIME* timestamp in milliseconds
 
- * *data* for advanced custom output<br>
+*data* for advanced custom output<br>
 there is not a formated output, but a data structure meant<br>
 to be formated by your own custom output function
 {{{
@@ -127,7 +127,7 @@ obj
  * *sep* (string): separator
  * *o*: custom object
 
- * *short* for text field<br>
+*short* for text field<br>
 `MESSAGE`
 and nothing else unless you customize the input/output.
 
