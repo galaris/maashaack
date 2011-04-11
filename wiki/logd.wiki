@@ -168,6 +168,58 @@ log.d( "hello world" ); // D{ hello world }
 }}}
 
 
+*tag()*
+{{{
+function tag( name:String, level:int = -1 ):Logger
+}}}
+Creates a tag and return a new logger object.
+
+*example*:
+{{{
+var mylog:Logger = log.tag( "socket" );
+mylog.d( "client connected" ); // D|socket|client connected
+}}}
+
+
+*input*
+{{{
+function get input():Function
+function set input( value:Function ):void
+}}}
+Define a log input function.
+
+The input is used to parse the log before sending it,<br>
+you could use it to support special formating, appending<br>
+additional informations, etc.
+
+the function HAVE TO respect this signature
+{{{
+function input( msg:String, o:* = null ):String
+{
+    //your code
+}
+}}}
+
+
+*output*
+{{{
+function get output():Function
+function set output( value:Function ):void
+}}}
+Define a log output function.
+
+The output is used to send the log to a destination,<br>
+by default we use `trace()` but you could<br>
+use Socket, LocalConnection, etc.
+
+the function HAVE TO respect this signature
+{{{
+function output( msg:String, o:* = null ):String
+{
+    //your code
+}
+}}}
+
 
 
 === basic usage ===
