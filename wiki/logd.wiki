@@ -76,6 +76,9 @@ package core
 }
 }}}
 
+----
+=== Documentation ===
+
 *logd* can use 4 different mode
 
 *raw* for text file<br>
@@ -130,6 +133,41 @@ obj
 *short* for text field<br>
 `MESSAGE`
 and nothing else unless you customize the input/output.
+
+<br>
+<br>
+
+*config()*
+{{{
+function config( cfg:Object ):void
+}}}
+Configure the logger with values/pairs.
+
+*example*:
+{{{
+cfg = { sep: " ", //char separator
+             mode: "raw", // "clean", "data", "short"
+             tag: true, //use tag
+             time: false  //use time
+          }
+log.config( cfg );
+}}}
+
+
+*format()*
+{{{
+function format( priority:int, pre:String = "", post:String = "" ):void
+}}}
+Changes the formatting of the passed priority.
+
+*example*:
+{{{
+log.config( { mode: "clean" } );
+log.format( log.DEBUG, "D{ ", " }" );
+log.d( "hello world" ); // D{ hello world }
+}}}
+
+
 
 
 === basic usage ===
