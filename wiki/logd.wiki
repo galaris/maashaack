@@ -152,7 +152,7 @@ cfg = { sep: " ", //char separator
           }
 log.config( cfg );
 }}}
-
+<br>
 
 *format()*
 {{{
@@ -166,7 +166,7 @@ log.config( { mode: "clean" } );
 log.format( log.DEBUG, "D{ ", " }" );
 log.d( "hello world" ); // D{ hello world }
 }}}
-
+<br>
 
 *tag()*
 {{{
@@ -179,7 +179,7 @@ Creates a tag and return a new logger object.
 var mylog:Logger = log.tag( "socket" );
 mylog.d( "client connected" ); // D|socket|client connected
 }}}
-
+<br>
 
 *input*
 {{{
@@ -199,7 +199,7 @@ function input( msg:String, o:* = null ):String
     //your code
 }
 }}}
-
+<br>
 
 *output*
 {{{
@@ -219,7 +219,7 @@ function output( msg:String, o:* = null ):String
     //your code
 }
 }}}
-
+<br>
 
 
 === basic usage ===
