@@ -2,7 +2,7 @@
 
 == Introduction ==
 
-logd is a logging library implemented in the spirit of the *core* package,<br>
+*logd* is a logging library implemented in the spirit of the *core* package,<br>
 small, fast and without any dependencies.
 
 Today in AS3 you must have about 100's of different logging libraries,<br>
@@ -24,12 +24,12 @@ and something we try to not use in the lower layers of packages,libraries etc.
 
 == Details ==
 
-logd focus on 3 points
+*logd* focus on 3 points
  * being as small and fast as possible
  * being customisable so you can hook it with any other logging library
  * being completely removable with ConditionalCompilation
 
-Also logd has been largely inspired by [http://developer.android.com/reference/android/util/Log.html android.util.Log].
+Also *logd* has been largely inspired by [http://developer.android.com/reference/android/util/Log.html android.util.Log].
 
 You could resume *logd* as a wrapper around `trace()` that connect its input/output to other loggers.
 
@@ -75,3 +75,91 @@ package core
     }
 }
 }}}
+
+*logd* can use 4 different mode
+
+*raw* for text file<br>
+`ID | PRIORITY LETTER | TAG | MESSAGE | TIME`
+ * *ID* is a random hex of 8 chars
+ * *PRIORITY LETTER*
+    * *V* for verbose
+    * *D* for debug
+    * *I* for info
+    * *W* for warn
+    * *E* for error
+    * *WTF* for a fatal error
+ * *TAG* a custom tag or the empty string by default
+ * *MESSAGE* the log message
+ * *TIME* timestamp in milliseconds
+
+ * *clean* for console output<br>
+`TAG | PRE | MESSAGE | POST | TIME`
+ * *TAG* a custom tag or the empty string by default
+ * *PRE* pre priority format
+ * *MESSAGE* the log message
+ * *POST* post priority format
+ * *TIME* timestamp in milliseconds
+
+ * *data* for advanced custom output<br>
+there is not a formated output, but a data structure meant<br>
+to be formated by your own custom output function
+{{{
+obj
+{
+    id: "17AC06D37",
+    priority: ,
+    letter: "I",
+    pre: "( ",
+    post: " )",
+    tag: "",
+    time: 63,
+    sep: "|",
+    o: null
+}
+}}}
+ * *id* (string): session id
+ * *priority* (int): priority number
+ * *letter* (string): priority letter
+ * *pre* (string): pre priority format
+ * *post* (string): post priority format
+ * *tag* (string): custom tag
+ * *time* (uint): timestamp
+ * *sep* (string): separator
+ * *o*: custom object
+
+ * *short* for text field<br>
+`MESSAGE`
+and nothing else unless you customize the input/output.
+
+
+=== basic usage ===
+
+import and log and that's it.
+{{{
+package test
+{
+    import core.log;
+
+    public class MyClass
+    {
+        log.i( "constructor" );
+    }
+
+    public function toString():String
+    {
+        log.i( "toString" );
+        return "MyClass";
+    }
+
+}
+
+//output (by default with trace(0 and flashlogs.txt
+17AC06D37|I||constructor|64
+17AC06D37|I||toString|65
+}}}
+
+This format is the *raw* mode, when you mainly target a text file to store your logs.
+
+the `17AC06D37` is the id for the logging session and is here only to be able to<br>
+filter the logs from a big text file (like `flashlogs.txt`) and get the particular session.
+
