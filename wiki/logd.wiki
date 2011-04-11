@@ -2,9 +2,76 @@
 
 == Introduction ==
 
-TODO
+logd is a logging library implemented in the spirit of the *core* package,<br>
+small, fast and without any dependencies.
+
+Today in AS3 you must have about 100's of different logging libraries,<br>
+people kind of followed what happened with Java<br>
+(Log4J, Jakarta Commons-Logging, SLF4J, java.util.logging, etc.).
+
+No seriously, search google code for "as3 logging" and [http://code.google.com/hosting/search?q=as3+logging see for yourself].
+
+One thing for sure is that to log information is something useful,<br>
+but because there are so many different logging implementations in AS3<br>
+you don't want to impose the use of one particular logging library (simply because you use it in your code).
+
+In the *maashaack framework* there is a fairly complete logging library *system.logging*<br>
+you can browse the code here [http://code.google.com/p/maashaack/source/browse/#svn%2Ftrunk%2FAS3%2Fsrc%2Fsystem%2Flogging /trunk/AS3/src/system/logging]
+
+But this *system.logging* is more something that someone would use in his/her application code,<br>
+and something we try to not use in the lower layers of packages,libraries etc.
 
 
 == Details ==
 
-TODO
+logd focus on 3 points
+ * being as small and fast as possible
+ * being customisable so you can hook it with any other logging library
+ * being completely removable with ConditionalCompilation
+
+Also logd has been largely inspired by [http://developer.android.com/reference/android/util/Log.html android.util.Log].
+
+You could resume *logd* as a wrapper around `trace()` that connect its input/output to other loggers.
+
+here the API
+{{{
+package core
+{
+    public interface Logger
+    {
+        function get SUPPRESS():int;
+        function get VERBOSE():int;
+        function get DEBUG():int;
+        function get INFO():int;
+        function get WARN():int;
+        function get ERROR():int;
+        function get ASSERT():int;
+        
+        function get id():String;
+
+        function get level():int;
+        function set level( value:int ):void;
+        
+        function get input():Function;
+        function set input( value:Function ):void;
+        
+        function get output():Function;
+        function set output( value:Function ):void;
+
+        function config( cfg:Object ):void;
+
+        function format( priority:int, pre:String = "", post:String = "" ):void;
+
+        function tag( name:String, level:int = -1 ):Logger;
+
+        function v( msg:String, o:* = null ):void;
+        function d( msg:String, o:* = null ):void;
+        function i( msg:String, o:* = null ):void;
+        function w( msg:String, o:* = null ):void;
+        function e( msg:String, o:* = null ):void;
+        function wtf( msg:String, o:* = null ):void;
+
+        function println( priority:int, tag:String, msg:String, o:* = null ):void;        
+    }
+}
+}}}
