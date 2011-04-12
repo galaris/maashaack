@@ -76,6 +76,21 @@ package core
 }
 }}}
 
+to remove any *logd* calls enclose them with `LOG::P` and see ConditionalCompilation
+
+{{{
+
+public function test()
+{
+    LOG::P { log.d( "debug some stuff" ); }
+    //code
+}
+
+}}}
+
+
+
+
 ----
 === Documentation ===
 
