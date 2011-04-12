@@ -1,0 +1,33 @@
+#summary Utility to get extract the ABC from a SWC file.
+
+== Introduction ==
+
+*swc2abc* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
+
+It allows to parse the informations of a `*.swf` file.
+
+== Installation ==
+
+Download the file for your operating system.
+
+|| Linux || OS X || Windows ||
+|| n/a||  n/a || n/a ||
+
+*get the source code*<br>
+`svn checkout http://maashaack.googlecode.com/svn/tools/swc2abc/trunk/ swc2abc-read-only`
+
+*browse the source code*<br>
+[http://code.google.com/p/maashaack/source/browse/#svn%2Ftools%2Fswc2abc%2Ftrunk /tools/swc2abc/trunk]
+
+*notes:*<br>
+  * OS X file is for OS X 10.6+ intel
+  * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
+  * Linux binary is compiled for Ubuntu
+
+
+== Documentation ==
+
+*Usage*
+{{{
+swc2abc [-h] [-v] [-L] file
+}}}
