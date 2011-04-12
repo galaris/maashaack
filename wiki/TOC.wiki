@@ -63,6 +63,7 @@
  * [Tools Tools]
    * maashaack
       * [swfinfo swfinfo]
+      * [swc2abc swc2abc]
       * [flashdoc flashdoc]
       * [soldump soldump]    
    * general
