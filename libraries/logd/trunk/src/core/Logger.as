@@ -79,11 +79,13 @@ package core
          * 
          * the function HAVE TO respect this signature
          * <code>
-         * function input( msg:String, o:* = null ):String
+         * function input( msg:String, o:* = null ):Object
          * {
-         * 
+         *     
          * }
          * </code>
+         * 
+         * The returned object must contains 2 properties <code>msg</code> and <code>o</code>.
          * 
          */
         function get input():Function;

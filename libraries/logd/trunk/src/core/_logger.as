@@ -199,7 +199,12 @@ package core
             
             if( priority < _level ) { return; }
             
-            if( _input != null ) { msg = _input( msg, o ); }
+            if( _input != null )
+            {
+                var result:Object = _input( msg, o );
+                msg = result.msg;
+                o   = result.o;
+            }
             
             var ns:Namespace;
             
