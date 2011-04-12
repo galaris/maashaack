@@ -209,11 +209,12 @@ additional informations, etc.
 
 the function HAVE TO respect this signature
 {{{
-function input( msg:String, o:* = null ):String
+function input( msg:String, o:* = null ):Object
 {
     //your code
 }
 }}}
+The returned object must contains 2 properties `msg` and `o`.
 <br>
 
 *output*
@@ -269,7 +270,7 @@ This format is the *raw* mode, when you mainly target a text file to store your 
 
 the `17AC06D37` is the id for the logging session and is here only to be able to<br>
 filter the logs from a big text file (like `flashlogs.txt`) and get the particular session.
-
+<br>
 
 Adding a custom tag.
 {{{
@@ -300,6 +301,7 @@ package test
 17AC06D37|I|MyClass|constructor|64
 17AC06D37|I|MyClass|toString|65
 }}}
+<br>
 
 Change the mode and the separator.
 {{{
@@ -331,7 +333,7 @@ package test
 MyClass ( constructor ) 64
 MyClass ( toString ) 65
 }}}
-
+<br>
 
 Change the format for a particular priority and change the logging level (and all of the above).
 {{{
@@ -370,3 +372,209 @@ MyClass ( constructor ) 64
 MyClass |---------> test 65
 MyClass ( toString ) 65
 }}}
+<br>
+
+Customize the input function.
+{{{
+package test
+{
+    import core.Logger;
+    import core.log;
+    
+    public class MyClass
+    {
+        private var _log:Logger;
+        
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.level = log.VERBOSE;
+            _log.config( { mode: "clean", sep: " " } );
+            _log.input = custom_input;
+            _log.i( "constructor: {0} {1}", [ "hello", "world" ] );
+        }
+        
+        private function custom_input( msg:String, o:* = null ):Object
+        {
+            if( o )
+            {
+                msg = fastformat( msg, o );
+                o   = null;
+            }
+            
+            return { msg: msg, o: o };
+        }
+        
+        public function fastformat( pattern:String , ...args:Array ):String
+        {
+            if( (pattern == null) || (pattern == "") )
+            {
+                return "";
+            }
+            
+            var len:int = args.length;
+            
+            if( (len == 1) && (args[0] is Array) )
+            {
+                args = args[0] ;
+                len  = args.length;
+            }
+            
+            for( var i:int=0; i < len; i++ )
+            {
+                pattern = pattern.replace( new RegExp( "\\{"+i+"\\}", "g" ), args[i] );
+            }
+            
+            return pattern;
+        }
+        
+        public function test():void
+        {
+            _log.d( "test {0}+{1}={2}", [2,5,7] );
+        }
+        
+        public function toString():String
+        {
+            _log.i( "toString{0}", "()" );
+            return "MyClass";
+        }
+    }
+}
+
+//output
+yClass ( constructor: hello world ) 64
+MyClass [ test 2+5=7 ] 65
+MyClass ( toString() ) 65
+}}}
+<br>
+
+Customize the output function.
+{{{
+package test
+{
+    import core.Logger;
+    import core.log;
+    
+    import flash.external.ExternalInterface;
+    
+    public class MyClass
+    {
+        private var _log:Logger;
+        
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.level = log.VERBOSE;
+            _log.config( { mode: "clean", sep: " " } );
+            _log.output = custom_output;
+            _log.i( "constructor" );
+        }
+        
+        private function custom_output( msg:String, o:* = null ):void
+        {
+            //basic firebug hook
+            if( ExternalInterface.available )
+            {
+                ExternalInterface.call( "console.log", msg );
+            }
+        }
+        
+        public function test():void
+        {
+            _log.d( "test" );
+        }
+        
+        public function toString():String
+        {
+            _log.i( "toString" );
+            return "MyClass";
+        }
+    }
+}
+
+//output is forwarded to another logger
+}}}
+here any log message will be redirected to the firebug command `console.log()`.
+<br>
+
+Advanced customization of the output function with mode *data*.
+{{{
+package test
+{
+    import core.Logger;
+    import core.log;
+    
+    import flash.external.ExternalInterface;
+    
+    public class MyClass
+    {
+        private var _log:Logger;
+        
+        public function MyClass()
+        {
+            _log = log.tag( "MyClass" );
+            _log.level = log.VERBOSE;
+            _log.config( { mode: "data", sep: " " } );
+            _log.output = custom_output;
+            _log.i( "constructor" );
+        }
+        
+        private function custom_output( msg:String, o:* = null ):void
+        {
+            var command:String;
+            
+            //advanced firebug hook
+            switch( o.priority )
+            {
+                case log.DEBUG:
+                command = "console.debug";
+                break;
+                
+                case log.INFO:
+                command = "console.info";
+                break;
+                
+                case log.WARN:
+                command = "console.warn";
+                break;
+                
+                case log.ERROR:
+                command = "console.error";
+                break;
+                
+                case log.ASSERT:
+                command = "console.assert";
+                break;
+                
+                case log.VERBOSE:
+                default:
+                command = "console.log";
+            }
+            
+            if( ExternalInterface.available )
+            {
+                ExternalInterface.call( command, msg );
+            }
+        }
+        
+        public function test():void
+        {
+            _log.d( "test" );
+        }
+        
+        public function toString():String
+        {
+            _log.i( "toString" );
+            return "MyClass";
+        }
+    }
+}
+
+//output is forwarded to another logger
+}}}
+
+here the log message will be redirected to the corresponding firebug command<br>
+the *data* mode allow us to switch on the `o.priority`<br>
+`log.d( "debug infos" )` will redirect to `console.debug()`<br>
+`log.i( "infos" )` will redirect to `console.info()`<br>
+etc.
