@@ -1,4 +1,4 @@
-#summary Utility to get extract the ABC from a SWC file.
+#summary Utility to extract the ABC from a SWC file.
 
 == Introduction ==
 
