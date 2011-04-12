@@ -271,6 +271,7 @@ This format is the *raw* mode, when you mainly target a text file to store your 
 the `17AC06D37` is the id for the logging session and is here only to be able to<br>
 filter the logs from a big text file (like `flashlogs.txt`) and get the particular session.
 <br>
+<br>
 
 Adding a custom tag.
 {{{
@@ -495,6 +496,7 @@ package test
 //output is forwarded to another logger
 }}}
 here any log message will be redirected to the firebug command `console.log()`.
+<br>
 <br>
 
 Advanced customization of the output function with mode *data*.
