@@ -4,7 +4,8 @@
 
 *swc2abc* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
 
-It allows to parse the informations of a `*.swf` file.
+it basically unzip a SWC, and extract the ABC from the `library.swf`<br>
+nothing fancy, just a little helper.
 
 == Installation ==
 
