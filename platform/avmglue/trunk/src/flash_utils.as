@@ -98,13 +98,13 @@ package flash.utils
     
     public function setInterval( closure:Function, delay:Number, ...arguments ):uint
     {
-        CFG::dbg{ trace( "setInterval( " + [closure,delay,arguments].join(", ") + " ); }
+        CFG::dbg{ trace( "setInterval( " + [closure,delay,arguments].join(", ") + " )"; }
         return new SetIntervalTimer(closure, delay, true, arguments).id;
     }
     
     public function setTimeout( closure:Function, delay:Number, ...arguments ):uint
     {
-        CFG::dbg{ trace( "setTimeout( " + [closure,delay,arguments].join(", ") + " ); }
+        CFG::dbg{ trace( "setTimeout( " + [closure,delay,arguments].join(", ") + " )"; }
         return new SetIntervalTimer(closure, delay, false, arguments).id;
     }
 
