@@ -13,7 +13,7 @@ package flash.errors
         
         public function DRMManagerError( message:String, id:int, subErrorID:int )
         {
-            CFG::dbg{ trace( "new DRMManagerError( " + [message,id,subErrorID].join(", ") + " )"; }
+            CFG::dbg{ trace( "new DRMManagerError( " + [message,id,subErrorID].join(", ") + " )" ); }
             super( message, id );
             this.name = "DRMManagerError";
             

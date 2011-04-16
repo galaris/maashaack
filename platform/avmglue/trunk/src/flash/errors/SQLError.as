@@ -17,7 +17,7 @@ package flash.errors
         public function SQLError( operation:String, details:String = "", message:String = "", id:int = 0,
                                   detailID:int = -1, detailArgs:Array = null )
         {
-            CFG::dbg{ trace( "new SQLError( " + [operation,details,message,id,detailID,detailArgs].join(", ") + " )"; }
+            CFG::dbg{ trace( "new SQLError( " + [operation,details,message,id,detailID,detailArgs].join(", ") + " )" ); }
             super( message, id );
             this.name = "SQLError";
             
