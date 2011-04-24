@@ -40,11 +40,23 @@
 
 package flash.utils
 {
-    import avmplus.*;
-    
-    public function getQualifiedSuperclassName( value:* ):String
+    /**
+     * The IExternalizable interface provides control over serialization of a class
+     * as it is encoded into a data stream.
+     * The <code>writeExternal()</code> and <code>readExternal()</code> methods of the
+     * IExternalizable interface are implemented by a class to allow customization of the contents
+     * and format of the data stream (but not the classname or type) for an object and its supertypes.
+     * Each individual class must serialize and reconstruct the state of its instances.
+     * These methods must be symmetrical with the supertype to save its state.
+     * These methods supercede the native Action Message Format (AMF) serialization behavior.
+     * 
+     * @langversion ActionScript 3.0
+     * @playerversion Flash Player 9
+     * @playerversion AIR 1.0
+     */
+    public interface IExternalizable
     {
-        CFG::dbg{ trace( "getQualifiedSuperclassName( " + value + " )" ); }
-        return avmplus.getQualifiedSuperclassName( value );
+        function readExternal( input:IDataInput ):void;
+        function writeExternal( output:IDataOutput ):void;
     }
 }
