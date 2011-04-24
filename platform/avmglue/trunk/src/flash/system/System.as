@@ -82,7 +82,7 @@ package flash.system
         //NOT IMPLEMENTED
         //private static var _IME:IME = null;
         
-        private var _useCodePage:Boolean;
+        private static var _useCodePage:Boolean;
         
         public function System()
         {

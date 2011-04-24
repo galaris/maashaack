@@ -51,8 +51,8 @@ package flash.system
         [API(CONFIG::AIR_1_0)]
         public static const APPLICATION:String        = "application";
         
-        private var _exactSettings:Boolean;
-        private var _disableAVM1Loading:Boolean;
+        private static var _exactSettings:Boolean;
+        private static var _disableAVM1Loading:Boolean;
         
         public function Security()
         {
@@ -98,7 +98,7 @@ package flash.system
         public static function set disableAVM1Loading( value:Boolean ):void { _disableAVM1Loading = value; }
         
         //public static native function get sandboxType():String;
-        public static native function get sandboxType():String
+        public static function get sandboxType():String
         {
             return avmplus.System.profile.sandbox;
         }
