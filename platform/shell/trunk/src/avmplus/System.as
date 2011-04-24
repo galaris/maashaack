@@ -42,6 +42,7 @@ package avmplus
     import C.stdlib.*;
     import C.unistd.*;
     import flash.utils.ByteArray;
+    import avmplus.profiles.Profile;
 
     /**
      * The System class
@@ -75,6 +76,8 @@ package avmplus
                            _API[673] = "AIR_2_7";
                            _API[674] = "FP_SYS";
                            _API[675] = "AIR_SYS";
+
+        private static var _profile:Profile;
         
         private native static function getArgv():Array;
         private native static function getStartupDirectory():String;
@@ -126,6 +129,28 @@ package avmplus
         public static function get pid():int
         {
             return getpid();
+        }
+
+        /**
+         * Returns the current profile.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.1
+         */
+        public static function get profile():Profile
+        {
+            return _profile;
+        }
+
+        /**
+         * Defines the current profile.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.1
+         */
+        public static function set profile( value:Profile ):void
+        {
+            _profile = value;
         }
         
         /**
@@ -233,7 +258,7 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public function exec( command:String ):int
+        public static function exec( command:String ):int
         {
             return C.stdlib.system( command );
         }
