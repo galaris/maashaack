@@ -347,7 +347,11 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function exists( filename:String ):Boolean;
+        //public native static function exists( filename:String ):Boolean;
+        public static function exists( filename:String ):Boolean
+        {
+            return access( filename, F_OK ) == 0;
+        }
 
         /**
          * Reads the file <code>filename</code> into memory and returns it as a String.
