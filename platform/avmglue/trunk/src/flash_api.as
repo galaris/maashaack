@@ -41,12 +41,12 @@
 package avmplus
 {
     /* note:
-       this naemspace is not part of the Flash Platform API
+       this namespace is not part of the Flash Platform API
     */
     /**
-     * The flash_api namespace allows you to access internal parts of the flash API,
+     * The avmapi namespace allows you to access internal parts of the flash platform API,
      * for ex: mock implementation.
      * 
      */
-    public namespace flash_api = "http://code.google.com/p/redtamarin/2010/actionscript/flash/api";
+    public namespace avmapi = "http://code.google.com/p/redtamarin/2010/actionscript/avm/api";
 }
