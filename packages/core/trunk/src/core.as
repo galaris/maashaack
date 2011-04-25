@@ -38,7 +38,7 @@ package
     import core.*;
     import core.reflect.*;
     import core.strings.*;
-
+    
     import flash.display.Sprite;
 
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="core", scriptRecursionLimit="1000", scriptTimeLimit="60")]
@@ -62,6 +62,15 @@ package
             trace( "---- core.version ----" );
             
             trace( "---- core.strings ----" );
+            
+            //userAgent
+            trace( userAgent() );
+            trace( userAgent( "MyApp/2.0" ) );
+            trace( userAgent( "MyApp/2.0", true ) );
+            trace( userAgent( "", true ) );
+            trace( userAgent( "", false, true ) );
+            trace( userAgent( "", false, false, true ) );
+            trace( userAgent( "", true, true, true ) );
             
             //pad
             var word:String = "hello";
@@ -187,6 +196,7 @@ package
             trace( getClassMethods( one_obj ) );
             trace( getClassMethods( one_obj, true ) );
             //trace( describeType( one_obj ) );
+            
         }
     }
 }
