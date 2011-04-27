@@ -33,38 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.strings
+package core.strings 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class userAgentTest extends TestCase 
     {
-        public static function suite():ITest
+        public function userAgentTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.strings package tests");
-            
-            suite.addTestSuite( centerTest              ) ;
-            suite.addTestSuite( compareTest             ) ;
-            suite.addTestSuite( endsWithTest            ) ;
-            suite.addTestSuite( fastformatTest          ) ;
-            suite.addTestSuite( formatTest              ) ;
-            suite.addTestSuite( indexOfAnyTest          ) ;
-            suite.addTestSuite( insertTest              ) ;
-            suite.addTestSuite( lastIndexOfAnyTest      ) ;
-            suite.addTestSuite( lineTerminatorCharsTest ) ;
-            suite.addTestSuite( padTest                 ) ;            suite.addTestSuite( padLeftTest             ) ;
-            suite.addTestSuite( padRightTest            ) ;            suite.addTestSuite( repeatTest              ) ;
-            suite.addTestSuite( startsWithTest          ) ;
-            suite.addTestSuite( trimTest                ) ;
-            suite.addTestSuite( trimEndTest             ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( userAgentTest           ) ;
-            suite.addTestSuite( whiteSpaceCharsTest     ) ;
-            suite.addTestSuite( WildExpTest             ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testUserAgent():void
+        {
+            assertTrue( userAgent().length > 0  );
         }
     }
 }
