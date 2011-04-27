@@ -128,7 +128,14 @@ Function.prototype.extend = function ( superConstructor )
 {
     if ( typeof(superConstructor) == "function" ) 
     {
-        this.prototype.__proto__ = superConstructor.prototype ;
+        if( this.prototype.__proto__ )
+        {
+            this.prototype.__proto__ = superConstructor.prototype ;
+        }
+        else
+        {
+            this.prototype = new superConstructor() ;
+        }
         this.prototype.__constructor__ = superConstructor ;
     }
     setPropFlags(this.prototype, ["__proto__", "__constructor__" ], false , null , null  ) ; 
