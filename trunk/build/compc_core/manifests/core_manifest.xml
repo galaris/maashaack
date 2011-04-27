@@ -138,6 +138,7 @@
     <component id="core.strings:trim"                 class="core.strings.trim"                />
     <component id="core.strings:trimEnd"              class="core.strings.trimEnd"             />
     <component id="core.strings:trimStart"            class="core.strings.trimStart"           />
+    <component id="core.strings:userAgent"            class="core.strings.userAgent"           />
     <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"     />
     <component id="core.strings:WildExp"              class="core.strings.WildExp"             />
     
