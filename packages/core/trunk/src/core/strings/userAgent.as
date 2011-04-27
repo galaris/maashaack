@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -118,7 +118,7 @@ package core.strings
         if( Capabilities.isDebugger ) { comments.push( "DEBUG" ); }
         
         //user-agent string
-        var UA:String = ""
+        var UA:String = "";
             UA += product;
             UA += " (" + comments.join( "; " ) + ")";
             
@@ -133,5 +133,5 @@ package core.strings
             }
         
         return UA;
-    }
+    };
 }
