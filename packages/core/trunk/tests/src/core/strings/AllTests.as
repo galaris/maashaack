@@ -44,6 +44,7 @@ package core.strings
         {
             var suite:TestSuite = new TestSuite("core.strings package tests");
             
+            suite.addTestSuite( camelCaseTest           ) ;
             suite.addTestSuite( centerTest              ) ;
             suite.addTestSuite( compareTest             ) ;
             suite.addTestSuite( endsWithTest            ) ;
