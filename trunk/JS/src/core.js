@@ -59,6 +59,7 @@ if ( _global.core == undefined )
 getPackage( "core.arrays"  ) ;
 getPackage( "core.chars"   ) ;
 getPackage( "core.maths"   ) ;
+getPackage( "core.objects" ) ;
 getPackage( "core.reflect" ) ;
 getPackage( "core.strings" ) ;
 
@@ -113,6 +114,10 @@ require( "core.maths.replaceNaN"  ) ;
 require( "core.maths.round"       ) ;
 require( "core.maths.sign"        ) ;
 require( "core.maths.sinerp"      ) ;
+
+// core.objects
+
+
 
 // core.reflect
 
