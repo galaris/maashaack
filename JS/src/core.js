@@ -118,6 +118,7 @@ require( "core.maths.sinerp"      ) ;
 // core.objects
 
 require( "core.objects.getMembers" ) ;
+require( "core.objects.merge"      ) ;
 
 // core.reflect
 

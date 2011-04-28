@@ -34,34 +34,34 @@
 */
 
 /**
- * Returns all the public members of an object, either by key or by value.
- * @param o The target object to enumerate.
- * @param byValue The optional flag indicates if the function return an Array of strings (keys) or of values (default false).
+ * Merging enumerable properties from a specific Object to a target Object.
+ * @param target The target object to merge.
+ * @param source The source object reference.
+ * @param overwrite The optional flag to indicates if the merge function can override the already existing properties in the target reference (default true).
  * <p><b>Example :</b></p>
  * <code class="prettyprint">
- * var o:Object = { a : 5 , b : 6 } ;
- * trace( core.dump( core.objects.getMembers( o ) ) ) ; // [a,b]
- * trace( core.dump( core.objects.getMembers( o , true ) ) ) ; // [5,6]
+ * var target:Object = { a : 5 , b : 6 } ;
+ * var from:Object   = { a : 1 , b : 2 , c: 3 } ;
+ * trace( core.dump( core.objects.merge( target , from ) ) ) ; // {a:1,b:2,c:3}
  * </code>
- * @return Array containing all the string key names or values (if the byValue argument is true). The method returns null if no members are finding.
+ * @return The merged target reference.
  */
-core.objects.getMembers = function( o /*Object*/ , byValue /*Boolean*/ ) /*Array*/  
+core.objects.merge = function( target /*Object*/ , source /*Object*/ , overwrite /*Boolean*/ ) /*Object*/ 
 {
-    byValue = Boolean( byValue == true ) ;
-    var members /*Array*/ = [];
-    if( byValue )
+    if ( overwrite == null )
     {
-        for each( var prop in o )
+        overwrite = true ;
+    }
+    if ( source == null )
+    {
+        source = {} ;
+    }
+    for( var prop /*String*/ in source )
+    {
+        if ( !( prop in target ) || overwrite )
         {
-            members.push( prop );
+            target[prop] = source[prop] ;
         }
     }
-    else
-    {
-        for( var member /*String*/ in o )
-        {
-            members.push( member );
-        }
-    }
-    return members.length > 0 ? members : null ;
+    return target ;
 }
