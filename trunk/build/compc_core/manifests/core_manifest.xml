@@ -122,6 +122,7 @@
     <!-- core.strings -->
     
     <component id="core.strings:camelCase"            class="core.strings.camelCase"           />
+    <component id="core.strings:capitalize"           class="core.strings.capitalize"          />
     <component id="core.strings:center"               class="core.strings.center"              />
     <component id="core.strings:compare"              class="core.strings.compare"             />
     <component id="core.strings:endsWith"             class="core.strings.endsWith"            />
