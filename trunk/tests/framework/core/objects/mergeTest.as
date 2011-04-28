@@ -46,12 +46,36 @@ package core.objects
         public function testMerge():void
         {
             var target:Object = { a : 5 , b : 6 } ;
-            var from:Object   = { a : 1 , b : 2 , c: 3 } ;
+            var source:Object = { a : 1 , b : 2 , c: 3 } ;
             
-            merge( target , from ) ;
+            merge( target , source ) ;
             
             assertEquals( 1 , target.a ) ;
             assertEquals( 2 , target.b ) ;
+            assertEquals( 3 , target.c ) ;
+        }
+        
+        public function testMergeOverride():void
+        {
+            var target:Object = { a : 5 , b : 6 } ;
+            var source:Object = { a : 1 , b : 2 , c: 3 } ;
+            
+            merge( target , source , true ) ;
+            
+            assertEquals( 1 , target.a ) ;
+            assertEquals( 2 , target.b ) ;
+            assertEquals( 3 , target.c ) ;
+        }
+        
+        public function testMergeNoOverride():void
+        {
+            var target:Object = { a : 5 , b : 6 } ;
+            var source:Object = { a : 1 , b : 2 , c : 3 } ;
+            
+            merge( target , source , false ) ;
+            
+            assertEquals( 5 , target.a ) ;
+            assertEquals( 6 , target.b ) ;
             assertEquals( 3 , target.c ) ;
         }
     }
