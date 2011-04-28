@@ -50,7 +50,8 @@ package core.strings
             suite.addTestSuite( endsWithTest            ) ;
             suite.addTestSuite( fastformatTest          ) ;
             suite.addTestSuite( formatTest              ) ;
-            suite.addTestSuite( indexOfAnyTest          ) ;
+            suite.addTestSuite( formatTest              ) ;
+            suite.addTestSuite( hyphenateTest           ) ;
             suite.addTestSuite( insertTest              ) ;
             suite.addTestSuite( lastIndexOfAnyTest      ) ;
             suite.addTestSuite( lineTerminatorCharsTest ) ;
