@@ -117,7 +117,7 @@ require( "core.maths.sinerp"      ) ;
 
 // core.objects
 
-
+require( "core.objects.getMembers" ) ;
 
 // core.reflect
 
