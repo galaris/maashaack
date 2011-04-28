@@ -44,7 +44,8 @@ package core.objects
         {
             var suite:TestSuite = new TestSuite("core.objects package tests");
             
-            suite.addTestSuite( mergeTest ) ;
+            suite.addTestSuite( getMembersTest ) ;
+            suite.addTestSuite( mergeTest      ) ;
             
             return suite;
         }
