@@ -121,11 +121,13 @@
     
     <!-- core.strings -->
     
+    <component id="core.strings:camelCase"            class="core.strings.camelCase"           />
     <component id="core.strings:center"               class="core.strings.center"              />
     <component id="core.strings:compare"              class="core.strings.compare"             />
     <component id="core.strings:endsWith"             class="core.strings.endsWith"            />
     <component id="core.strings:fastformat"           class="core.strings.fastformat"          />
     <component id="core.strings:format"               class="core.strings.format"              />
+    <component id="core.strings:hyphenate"            class="core.strings.hyphenate"           />
     <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"          />
     <component id="core.strings:insert"               class="core.strings.insert"              />
     <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"      />
