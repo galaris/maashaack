@@ -108,6 +108,10 @@
     <component id="core.maths:tanD"             class="core.maths.tanD"             />
     <component id="core.maths:tanH"             class="core.maths.tanH"             />
     
+    <!-- core.objects -->
+    
+    <component id="core.objects:merge" class="core.objects.merge" />
+    
     <!-- core.reflect -->
     
     <component id="core.reflect:getClassByName"      class="core.reflect.getClassByName"      />
