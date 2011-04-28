@@ -48,7 +48,7 @@ package core.objects
      * trace( dump( getMembers( o ) ) ) ; // [a,b]
      * trace( dump( getMembers( o , true ) ) ) ; // [5,6]
      * </code>
-     * @return Array containing all the string key names or values (if the byValue argument is true).
+     * @return Array containing all the string key names or values (if the byValue argument is true). The method returns null if no members are finding.
      */
     public const getMembers:Function = function( o:Object, byValue:Boolean = false ):Array 
     {
@@ -67,6 +67,6 @@ package core.objects
                 members.push( member );
             }
         }
-        return members;
+        return members.length > 0 ? members : null ;
     };
 }
