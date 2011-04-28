@@ -32,47 +32,27 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package core
+package core.objects 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.html.AllTests;
-    import core.maths.AllTests;
-    import core.objects.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
-    public class AllTests
+    public class mergeTest extends TestCase 
     {
-        public static function suite():ITest
+        public function mergeTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core library tests");
+            super(name);
+        }
+        
+        public function testMerge():void
+        {
+            var target:Object = { a : 5 , b : 6 } ;
+            var from:Object   = { a : 1 , b : 2 , c: 3 } ;
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
+            merge( target , from ) ;
             
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.html.AllTests.suite() );
-            suite.addTest( core.maths.AllTests.suite() );
-            suite.addTest( core.objects.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
-            
-            return suite;
+            assertEquals( 1 , target.a ) ;
+            assertEquals( 2 , target.b ) ;
+            assertEquals( 3 , target.c ) ;
         }
     }
 }
