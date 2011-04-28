@@ -47,6 +47,7 @@ package core.strings
             suite.addTestSuite( camelCaseTest           ) ;
             suite.addTestSuite( capitalizeTest          ) ;
             suite.addTestSuite( centerTest              ) ;
+            suite.addTestSuite( cleanTest               ) ;
             suite.addTestSuite( compareTest             ) ;
             suite.addTestSuite( endsWithTest            ) ;
             suite.addTestSuite( fastformatTest          ) ;
