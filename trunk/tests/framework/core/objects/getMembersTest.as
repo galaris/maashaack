@@ -32,22 +32,39 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package core.objects
+package core.objects 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class getMembersTest extends TestCase 
     {
-        public static function suite():ITest
+        public function getMembersTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.objects package tests");
+            super(name);
+        }
+        
+        public function testGetMembersByKey():void
+        {
+            var target:Object = { a : 5 , b : 6 } ;
             
-            suite.addTestSuite( getMembersTest ) ;
-            suite.addTestSuite( mergeTest      ) ;
+            var result:Array = getMembers( target ) ;
             
-            return suite;
+            assertEquals( 2  , result.length ) ;
+            assertEquals( -1 , result.indexOf("unknow") ) ;
+            assertTrue( result.indexOf("a") > -1 ) ;
+            assertTrue( result.indexOf("b") > -1 ) ;
+        }
+        
+        public function testGetMembersByValue():void
+        {
+            var target:Object = { a : 5 , b : 6 } ;
+            
+            var result:Array = getMembers( target , true ) ;
+            
+            assertEquals( 2  , result.length ) ;
+            assertEquals( -1 , result.indexOf("unknow") ) ;
+            assertTrue( result.indexOf(5) > -1 ) ;
+            assertTrue( result.indexOf(6) > -1 ) ;
         }
     }
 }
