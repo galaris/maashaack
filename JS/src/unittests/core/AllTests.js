@@ -38,6 +38,7 @@
 load("unittests/core/arrays/AllTests.js") ;
 load("unittests/core/chars/AllTests.js") ;
 load("unittests/core/maths/AllTests.js") ;
+load("unittests/core/objects/AllTests.js") ;
 load("unittests/core/reflect/AllTests.js") ;
 load("unittests/core/strings/AllTests.js") ;
 
@@ -66,6 +67,7 @@ core.AllTests.suite = function()
     suite.addTest( core.arrays.AllTests.suite() );
     suite.addTest( core.chars.AllTests.suite() );
     suite.addTest( core.maths.AllTests.suite() );
+    suite.addTest( core.objects.AllTests.suite() );
     suite.addTest( core.reflect.AllTests.suite() );
     suite.addTest( core.strings.AllTests.suite() );
     

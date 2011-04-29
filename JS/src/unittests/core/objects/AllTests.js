@@ -33,40 +33,20 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-try
+load("unittests/core/objects/getMembersTest.js" ) ;
+
+core.objects.AllTests = {} ;
+
+core.objects.AllTests.suite = function() 
 {
-    dummy = require ;
-}
-catch( e )
-{
-    require = function ( uri /*String*/ ) 
-    {
-        try
-        {
-            if ( eval(uri) != undefined ) 
-            {
-                return ;
-            }
-        }
-        catch(e)
-        {
-            trace("require(" + uri + ") failed : " + e.toString()) ;
-            return ;
-        }
-        
-        _global.PATH   = _global.PATH   || "" ;
-        _global.SUFFIX = _global.SUFFIX || "" ;
-        
-        uri = uri.split( "." ).join( "/" );
-        
-        try
-        {
-            return load( PATH + uri + SUFFIX ) ;
-        }
-        catch( e ) 
-        {
-            trace( "require(" + uri + ") with the real path + " + PATH + uri + SUFFIX + " failed : " + e.toString() ) ;
-            return false ;
-        }
-    }
+    var TestSuite = buRRRn.ASTUce.TestSuite;
+    
+    var suite = new TestSuite( "core.objects unit tests" );
+    
+    //suite.simpleTrace = true;
+    
+    suite.addTest( new TestSuite( core.objects.getMembersTest ) ) ;
+    //suite.addTest( new TestSuite( core.objects.mergeTest ) ) ;
+    
+    return suite ;
 }

@@ -33,40 +33,27 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-try
+// ---o Constructor
+
+core.objects.getMembersTest = function( name ) 
 {
-    dummy = require ;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
-catch( e )
+
+// ----o Inherit
+
+core.objects.getMembersTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.objects.getMembersTest.prototype.constructor = core.objects.getMembersTest ;
+
+// ----o Public Methods
+
+core.objects.getMembersTest.prototype.testGetMembersByKey = function () 
 {
-    require = function ( uri /*String*/ ) 
-    {
-        try
-        {
-            if ( eval(uri) != undefined ) 
-            {
-                return ;
-            }
-        }
-        catch(e)
-        {
-            trace("require(" + uri + ") failed : " + e.toString()) ;
-            return ;
-        }
-        
-        _global.PATH   = _global.PATH   || "" ;
-        _global.SUFFIX = _global.SUFFIX || "" ;
-        
-        uri = uri.split( "." ).join( "/" );
-        
-        try
-        {
-            return load( PATH + uri + SUFFIX ) ;
-        }
-        catch( e ) 
-        {
-            trace( "require(" + uri + ") with the real path + " + PATH + uri + SUFFIX + " failed : " + e.toString() ) ;
-            return false ;
-        }
-    }
+    var target = { a : 5 , b : 6 } ;
+    
+    var result = core.objects.getMembers( target ) ;
+    
+    this.assertEquals( -1 , result.indexOf("unknow") ) ;
+    this.assertTrue( result.indexOf("a") > -1 ) ;
+    this.assertTrue( result.indexOf("b") > -1 ) ;
 }

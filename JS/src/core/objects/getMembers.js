@@ -47,13 +47,13 @@
  */
 core.objects.getMembers = function( o /*Object*/ , byValue /*Boolean*/ ) /*Array*/  
 {
-    byValue = Boolean( byValue == true ) ;
+    byValue = Boolean( byValue === true ) ;
     var members /*Array*/ = [];
     if( byValue )
     {
-        for each( var prop in o )
+        for( var prop /*String*/ in o )
         {
-            members.push( prop );
+            members.push( o[prop] );
         }
     }
     else
@@ -64,4 +64,4 @@ core.objects.getMembers = function( o /*Object*/ , byValue /*Boolean*/ ) /*Array
         }
     }
     return members.length > 0 ? members : null ;
-}
+};
