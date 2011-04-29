@@ -57,3 +57,14 @@ core.objects.getMembersTest.prototype.testGetMembersByKey = function ()
     this.assertTrue( result.indexOf("a") > -1 ) ;
     this.assertTrue( result.indexOf("b") > -1 ) ;
 }
+
+core.objects.getMembersTest.prototype.testGetMembersByKey = function () 
+{
+    var target = { a : 5 , b : 6 } ;
+    
+    var result = core.objects.getMembers( target , true ) ;
+    
+    this.assertEquals( -1 , result.indexOf("unknow") ) ;
+    this.assertTrue( result.indexOf(5) > -1 ) ;
+    this.assertTrue( result.indexOf(6) > -1 ) ;
+}
