@@ -33,21 +33,53 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-load("unittests/core/objects/getMembersTest.js" ) ;
-load("unittests/core/objects/mergeTest.js" ) ;
+// ---o Constructor
 
-core.objects.AllTests = {} ;
-
-core.objects.AllTests.suite = function() 
+core.objects.mergeTest = function( name ) 
 {
-    var TestSuite = buRRRn.ASTUce.TestSuite;
+    buRRRn.ASTUce.TestCase.call( this , name ) ;
+}
+
+// ----o Inherit
+
+core.objects.mergeTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.objects.mergeTest.prototype.constructor = core.objects.mergeTest ;
+
+// ----o Public Methods
+
+core.objects.mergeTest.prototype.testMerge = function () 
+{
+    var target = { a : 5 , b : 6 } ;
+    var source = { a : 1 , b : 2 , c: 3 } ;
     
-    var suite = new TestSuite( "core.objects unit tests" );
+    core.objects.merge( target , source ) ;
     
-    //suite.simpleTrace = true;
+    this.assertEquals( 1 , target.a , "#1" ) ;
+    this.assertEquals( 2 , target.b , "#2" ) ;
+    this.assertEquals( 3 , target.c , "#3" ) ;
+}
+
+core.objects.mergeTest.prototype.testMergeOverride = function () 
+{
+    var target = { a : 5 , b : 6 } ;
+    var source = { a : 1 , b : 2 , c: 3 } ;
     
-    suite.addTest( new TestSuite( core.objects.getMembersTest ) ) ;
-    suite.addTest( new TestSuite( core.objects.mergeTest ) ) ;
+    core.objects.merge( target , source , true ) ;
     
-    return suite ;
+    this.assertEquals( 1 , target.a , "#1" ) ;
+    this.assertEquals( 2 , target.b , "#2" ) ;
+    this.assertEquals( 3 , target.c , "#3" ) ;
+}
+
+
+core.objects.mergeTest.prototype.testMergeNoOverride = function () 
+{
+    var target = { a : 5 , b : 6 } ;
+    var source = { a : 1 , b : 2 , c: 3 } ;
+    
+    core.objects.merge( target , source , false ) ;
+    
+    this.assertEquals( 5 , target.a , "#1" ) ;
+    this.assertEquals( 6 , target.b , "#2" ) ;
+    this.assertEquals( 3 , target.c , "#3" ) ;
 }
