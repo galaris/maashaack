@@ -12,7 +12,7 @@ There are 3 possibilities to configure mysql connection:
 the MysqlConfig class tries to open this one and configures the MySQL connection.
 
 
-EXAMPLE OF USAGE:
+USAGE:
 {{{
 <?php
     require_once ("../src/egallery/net/mysql/MysqlConfig.php") ;
@@ -22,7 +22,6 @@ EXAMPLE OF USAGE:
     
     /**
      * This AMFPhp remoting service is used to return the list of all pictures in a gallery.
-     * @author eKameleon
      */
     class Gallery
     {
@@ -32,9 +31,9 @@ EXAMPLE OF USAGE:
          */
         function Gallery() 
         {
-            $mysqlConfig       = new MysqlConfig() ;
-            $this->connect     = new MysqlConnector( $mysqlConfig->host , $mysqlConfig->user , $mysqlConfig->pass , $mysqlConfig->name ) ;
-...
+            $mysqlConfig   = new MysqlConfig() ;
+            $this->connect = new MysqlConnector( $mysqlConfig->host , $mysqlConfig->user , $mysqlConfig->pass , $mysqlConfig->name ) ;
+...     }
     }
 ?>
 }}}
