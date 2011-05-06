@@ -44,7 +44,7 @@ package examples.display
     
     public class Square extends Sprite implements Runnable
     {
-        public function Square( x:int = 0, y:int = 0, color:uint = 0xFFFFFF ):void
+        public function Square( x:int = 0, y:int = 0, color:uint = 0xFFFFFF )
         {
             this.x = x ;
             this.y = y ;
