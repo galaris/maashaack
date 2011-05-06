@@ -35,6 +35,8 @@
 
 package examples
 {
+    import examples.display.Square;
+    
     import system.process.Batch;
     
     import flash.display.Sprite;
@@ -68,6 +70,8 @@ package examples
             command.add( s2 ) ;
             command.add( s3 ) ;
             
+            // press a key to run the batch
+            
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown) ;
         }
         
@@ -76,48 +80,6 @@ package examples
         public function keyDown( e:KeyboardEvent ):void
         {
         	command.run() ;
-        }
-    }
-}
-
-import system.process.Runnable;
-
-import flash.display.Sprite;
-import flash.events.Event;
-import flash.filters.DropShadowFilter;
-import flash.geom.Point;
-
-class Square extends Sprite implements Runnable
-{
-
-    public function Square( x:int = 0 , y:int = 0 , color:uint = 0xFFFFFF ):void
-    {
-        graphics.beginFill( color ) ;
-        graphics.drawRect(0, 0, 30, 30)	;
-        filters = [ new DropShadowFilter(1,60,0,0.7,4,4) ] ;
-        this.x = x ;
-        this.y = y ;
-    }
-    
-    public var finish:Point ;
-    
-    public function run(...arguments:Array):void
-    {
-        if ( finish != null )
-        {
-            addEventListener(Event.ENTER_FRAME , enterFrame ) ;
-        }
-    }
-    
-    protected function enterFrame( e:Event ):void
-    {
-        var dx:Number = Math.round( ( finish.x - x ) * 0.3 ) ;
-        var dy:Number = Math.round( ( finish.y - y ) * 0.3 ) ;
-        x += dx ;
-        y += dy ;
-        if ( dx == 0 && dy == 0 )
-        {
-            removeEventListener(Event.ENTER_FRAME , enterFrame ) ;
         }
     }
 }
