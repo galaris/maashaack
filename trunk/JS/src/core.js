@@ -126,6 +126,7 @@ require( "core.reflect.hasDefinitionByName" ) ;
 
 // core.strings
 
+require( "core.strings.camelCase"           ) ;
 require( "core.strings.center"              ) ;
 require( "core.strings.compare"             ) ;
 require( "core.strings.endsWith"            ) ;
