@@ -42,14 +42,13 @@ package avmplus
 {
     import avmplus.System;
     import avmplus.OperatingSystem;
-    import avmplus.profiles.*;
     
     import flash.system.Capabilities;
     import flash.system.Security;
     
     
-    public const userAgent:Function = function( apptoken:String = "", noself:Boolean = false,
-                                                minimal:Boolean = false, compatible:Boolean = false ):String
+    public function userAgent( apptoken:String = "", noself:Boolean = false,
+                               minimal:Boolean = false, compatible:Boolean = false ):String
     {
         var sys:* = avmplus.System;
         var selfname:String;
@@ -60,10 +59,10 @@ package avmplus
         var lang:String;
         
         //product token
-        var product:String = compatible ? "Mozilla/5.0": "Tamarin/" + sys.vmVersion;
+        var product:String = compatible ? "Mozilla/5.0": "Tamarin/" + sys.getAvmplusVersion();
         
         //application token
-        if( sys.profile is RedTamarinProfile )
+        if( sys.profile.playerType == "RedTamarin" )
         {
             selfname = "RedTamarin";
             selfversion = sys.getRedtamarinVersion();
@@ -102,8 +101,11 @@ package avmplus
             selfversion = Capabilities.version.split( " " )[1].split( "," ).join( "." );
             
             platform = Capabilities.manufacturer.split( "Adobe " )[1];
+            
             type     = Capabilities.playerType;
+            
             os       = Capabilities.os;
+            
             lang     = isAIR ? Capabilities["languages"]: Capabilities.language;
         }
         
@@ -115,7 +117,7 @@ package avmplus
         if( Capabilities.isDebugger ) { comments.push( "DEBUG" ); }
         
         //user-agent string
-        var UA:String = ""
+        var UA:String = "";
             UA += product;
             UA += " (" + comments.join( "; " ) + ")";
             

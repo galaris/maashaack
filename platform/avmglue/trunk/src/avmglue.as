@@ -38,7 +38,59 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+/* note:
+   the include order count
+   if you get an Error #1181: Forward reference to base class Something.
+   you will have to reorder the includes to get it to compile with both COMPC and ASC.
+*/
+
 include "api-versions.as";
+
+/* the avmplus package provide misc. utilities
+*/
+
+include "avmplus/avmapi.as";
+include "avmplus/userAgent.as";
+
+
+/* The flash.errors package contains Error classes that are considered part of the Flash runtime API.
+   In contrast to the Error classes described, the flash.error package communicates errors events
+   that are specific to Flash runtimes (such as Flash Player and Adobe AIR).
+*/
+
+//include "flash/errors/IOError.as"; //already declared in builtin
+//include "flash/errors/EOFError.as"; //already declared in builtin
+//include "flash/errors/MemoryError.as"; //already declared in builtin
+
+include "flash/errors/IllegalOperationError.as";
+include "flash/errors/ScriptTimeoutError.as";
+include "flash/errors/StackOverflowError.as";
+include "flash/errors/InvalidSWFError.as";
+include "flash/errors/SQLErrorOperation.as";
+include "flash/errors/SQLError.as";
+include "flash/errors/DRMManagerError.as";
+
+
+
+/* The flash.system package contains classes for accessing system-level functionality,
+   such as security, garbage collection, etc.
+*/
+
+include "flash/system/fscommand.as";
+
+include "flash/system/ApplicationDomain.as";
+include "flash/system/Capabilities.as";
+include "flash/system/ImageDecodingPolicy.as";
+include "flash/system/IMEConversionMode.as";
+include "flash/system/LoaderContext.as";
+include "flash/system/JPEGLoaderContext.as";
+include "flash/system/Security.as";
+include "flash/system/SecurityDomain.as";
+include "flash/system/SecurityPanel.as";
+include "flash/system/System.as";
+include "flash/system/SystemUpdaterType.as";
+include "flash/system/TouchscreenType.as";
+
 
 
 /* The flash.utils package contains utility classes, such as data structures like ByteArray.
@@ -48,6 +100,8 @@ include "api-versions.as";
 
 include "flash/utils/flash_proxy.as";
 
+include "flash/utils/IExternalizable.as";
+
 include "flash/utils/describeType.as";
 include "flash/utils/getDefinitionByName.as";
 include "flash/utils/getQualifiedClassName.as";
@@ -56,3 +110,52 @@ include "flash/utils/getQualifiedSuperclassName.as";
 include "flash/utils/getTimer.as";
 
 include "flash/utils/CompressionAlgorithm.as";
+
+
+
+/* The flash.debugger package
+*/
+
+include "flash/debugger/enterDebugger.as";
+
+
+
+/* The flash.geom package contains geometry classes, such as points, rectangles
+   and transformation matrixes, to support the BitmapData class and the bitmap caching feature.
+*/
+
+include "flash/geom/Point.as";
+include "flash/geom/Rectangle.as";
+include "flash/geom/Orientation3D.as";
+
+
+
+/* The flash.filesystem package contains classes used in accessing the filesystem.
+   This package is only available to content running in Adobe AIR.
+*/
+
+
+/* The flash.html package contains classes used for including HTML content in an AIR application.
+   The HTMLControl class is a display object that can render HTML content.
+   The other classes support functionality related to HTMLControl object.
+   This package is only available to content running in Adobe AIR.
+*/
+
+
+
+/* The classes in the flash.globalization package provide language and region/country
+   specific functionality for string comparison and sorting, conversion of strings to upper and lower case,
+   formatting of dates, times, numbers and currencies, and parsing of numbers and currencies.
+*/
+
+
+
+/* The flash.media package contains classes for working with multimedia assets such as sound and video.
+   It also contains the video and audio classes available in Flash Communication Server.
+*/
+
+
+/* The flash.net package contains classes for sending and receiving from the network,
+   such as URL downloading and Flash Remoting.
+*/
+
