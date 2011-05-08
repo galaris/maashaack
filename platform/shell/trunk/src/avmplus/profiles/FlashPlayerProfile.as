@@ -51,6 +51,9 @@ package avmplus.profiles
 
         private function _ctor():void
         {
+            runtimeVersion = "10.0.32.18";
+            sandbox        = "localTrusted";
+            
             _playerType           = "StandAlone";
 
             var manufacturer:String = "Adobe ";
@@ -93,7 +96,26 @@ package avmplus.profiles
             }
             _os                   = os;
 
-            sandbox = "localTrusted";
+            var version:String;
+            switch( OperatingSystem.vendor )
+            {
+                case "Apple":
+                version += "MAC";
+                break;
+
+                case "Microsoft":
+                version += "WIN";
+                break;
+
+                case "Linux":
+                version += "LNX";
+                break;
+
+                default:
+                version += OperatingSystem.vendor.toUpperCase().substr( 0, 3);
+            }
+            version += " " + runtimeVersion.split( "." ).join( "," );
+            _version = version;
         }
     }
 }
