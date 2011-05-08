@@ -118,6 +118,9 @@ package avmplus.profiles
         public var supportsUpdater:Boolean = false;
         public var supportsXMLSignatureValidator:Boolean = false;
 
+        //Information
+        public var runtimeVersion:String = "0.0.0.0";
+
         //Security
         public var sandbox:String = "application";
 
