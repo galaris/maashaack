@@ -111,17 +111,11 @@ so *avmglue* fill the gap with all the rest.
 
 [http://maashaack.googlecode.com/svn/platform/avmglue/trunk/ svn]
 
+[http://code.google.com/p/maashaack/downloads/list avmglue v0.1 is available in downloads]
+
 build
 {{{
 $ svn co http://maashaack.googlecode.com/svn/platform/avmglue/trunk/ avmglue
 $ cd avmglue
 $ ant
-}}}
-
-{{{
-$ asc -abcfuture -out avmglue -import builtin.abc -import shell.abc flash_errors.as flash_utils.as ...
-}}}
-
-{{{
-$ java -jar asc.jar macromedia.asc.embedding.ScriptCompiler -abcfuture -out avmglue -import builtin.abc -import shell.abc flash_errors.as flash_utils.as ...
 }}}
