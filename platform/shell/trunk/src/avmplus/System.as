@@ -253,6 +253,14 @@ package avmplus
 
 
         /**
+         * Evaluates AS3 source code at runtime.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.1
+         */
+        public native static function eval( source:String ):void;
+
+        /**
          * Executes the specified command line and returns the status code.
          * 
          * @productversion redtamarin 0.3
