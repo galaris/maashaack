@@ -89,6 +89,8 @@ package avmplus.profiles
     
     */
 
+    import avmplus.OperatingSystem;
+
     public class AIRProfile extends FlashPlayerProfile
     {
         function AIRProfile()
@@ -99,7 +101,29 @@ package avmplus.profiles
 
         private function _ctor():void
         {
-            
+            runtimeVersion = "2.0.0.0";
+            sandbox        = "application";
+
+            var version:String;
+            switch( OperatingSystem.vendor )
+            {
+                case "Apple":
+                version += "MAC";
+                break;
+
+                case "Microsoft":
+                version += "WIN";
+                break;
+
+                case "Linux":
+                version += "LNX";
+                break;
+
+                default:
+                version += OperatingSystem.vendor.toUpperCase().substr( 0, 3);
+            }
+            version += " " + runtimeVersion.split( "." ).join( "," );
+            _version = version;
         }
     }
 }
