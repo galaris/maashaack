@@ -52,6 +52,9 @@ package avmplus.profiles
 
         private function _ctor():void
         {
+            //TODO: embed the SVN revision in source code
+            runtimeVersion        = System.getRedtamarinVersion() + ".0";
+            
             _playerType           = "RedTamarin";
             _isDebugger           = System.isDebugger();
             _localFileReadDisable = false;
@@ -65,6 +68,27 @@ package avmplus.profiles
             _manufacturer         = OperatingSystem.vendor;
             _os                   = OperatingSystem.vendorDescription;
             _cpuArchitecture      = OperatingSystem.machine;
+
+            var version:String;
+            switch( OperatingSystem.vendor )
+            {
+                case "Apple":
+                version += "MAC";
+                break;
+
+                case "Microsoft":
+                version += "WIN";
+                break;
+
+                case "Linux":
+                version += "LNX";
+                break;
+
+                default:
+                version += OperatingSystem.vendor.toUpperCase().substr( 0, 3);
+            }
+            version += " " + runtimeVersion.split( "." ).join( "," );
+            _version = version;
         }
 
         public override function get language():String
