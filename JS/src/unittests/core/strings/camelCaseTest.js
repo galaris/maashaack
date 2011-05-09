@@ -35,19 +35,19 @@
 
 // ---o Constructor
 
-core.strings.camelCastTest = function( name ) 
+core.strings.camelCaseTest = function( name ) 
 {
     buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
 
 // ----o Inherit
 
-core.strings.camelCastTest.prototype             = new buRRRn.ASTUce.TestCase() ;
-core.strings.camelCastTest.prototype.constructor = core.strings.camelCastTest ;
+core.strings.camelCaseTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.strings.camelCaseTest.prototype.constructor = core.strings.camelCaseTest ;
 
 // ----o Public Methods
 
-core.strings.camelCastTest.prototype.testCenter = function () 
+core.strings.camelCaseTest.prototype.testCamelCase = function () 
 {
     this.assertEquals( "helloWorld" , core.strings.camelCase( "hello-world" ) ) ;
 }
