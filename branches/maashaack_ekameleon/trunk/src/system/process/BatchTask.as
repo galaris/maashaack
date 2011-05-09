@@ -151,11 +151,13 @@ package system.process
         
         /**
          * Insert an action in thechainr.
-         * @param priority Determinates the priority level of the action in the chain.
+         * @param priority Determinates the priority level of the action in the chain. 
+         * The priority is designated by a signed 32-bit integer. The higher the number, the higher the priority. 
+         * All actions with priority n are processed before actions of priority n-1. If two or more actions share the same priority, they are processed in the order in which they were added. The default priority is 0.
          * @param autoRemove Apply a removeAction after the first finish notification.
          * @return <code class="prettyprint">true</code> if the insert is success.
          */
-        public override function addAction( action:Action , priority:uint = 0 , autoRemove:Boolean = false ):Boolean 
+        public override function addAction( action:Action , priority:int = 0 , autoRemove:Boolean = false ):Boolean 
         {
             if ( running )
             {
