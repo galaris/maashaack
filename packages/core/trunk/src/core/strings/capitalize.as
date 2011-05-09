@@ -41,7 +41,7 @@ package core.strings
      * @example
      * <code class="prettyprint">
      * import core.strings.capitalize ;
-     * trace( capitalize("hello world" ) ) ; // Hello World
+     * trace( capitalize( "hello world" ) ) ; // Hello World
      * </code>
      * @return The capitalized string.
      */

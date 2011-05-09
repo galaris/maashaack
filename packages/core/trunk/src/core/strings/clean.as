@@ -36,7 +36,7 @@
 package core.strings
 {
     /**
-     * Removes all extraneous whitespace from a string and trims it 
+     * Removes all extraneous whitespace from a string and trims it.
      * @param source The string to clean.
      * @return The cleaned string.
      * @example
