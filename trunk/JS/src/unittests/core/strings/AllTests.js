@@ -36,6 +36,7 @@
 load("unittests/core/strings/camelCaseTest.js"           ) ;
 load("unittests/core/strings/capitalizeTest.js"          ) ;
 load("unittests/core/strings/centerTest.js"              ) ;
+load("unittests/core/strings/cleanTest.js"               ) ;
 load("unittests/core/strings/compareTest.js"             ) ;
 load("unittests/core/strings/endsWithTest.js"            ) ;
 load("unittests/core/strings/fastformatTest.js"          ) ;
@@ -66,6 +67,7 @@ core.strings.AllTests.suite = function()
     suite.addTest( new TestSuite( core.strings.camelCaseTest           ) ) ;
     suite.addTest( new TestSuite( core.strings.capitalizeTest          ) ) ;
     suite.addTest( new TestSuite( core.strings.centerTest              ) ) ;
+    suite.addTest( new TestSuite( core.strings.cleanTest               ) ) ;
     suite.addTest( new TestSuite( core.strings.compareTest             ) ) ;
     suite.addTest( new TestSuite( core.strings.endsWithTest            ) ) ;
     suite.addTest( new TestSuite( core.strings.fastformatTest          ) ) ;
