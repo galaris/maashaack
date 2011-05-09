@@ -35,6 +35,8 @@
 
 package examples
 {
+    import examples.process.PriorityTask;
+    
     import system.events.ActionEvent;
     import system.process.Chain;
     import system.process.Pause;
@@ -56,10 +58,18 @@ package examples
             chain.addEventListener( ActionEvent.PROGRESS , progress ) ;
             chain.addEventListener( ActionEvent.START    , debug    ) ;
             
+            // use the priority argument
+            
             chain.addAction( new Pause(1) , 100 ) ;
             chain.addAction( new Pause(2) , 1   ) ;
-            chain.addAction( new Pause(3) , 999 ) ; // max priority
-            chain.addAction( new Pause(4) , 2   ) ; 
+            chain.addAction( new Pause(3) , 200 ) ;
+            chain.addAction( new Pause(4) , 50  ) ;
+            
+            // use Priority task objects
+            
+            chain.addAction( new PriorityTask( "task1" , 25  ) ) ;
+            chain.addAction( new PriorityTask( "task2" , 75  ) ) ;
+            chain.addAction( new PriorityTask( "task3" , 150 ) ) ;
             
             chain.run() ;
         }
