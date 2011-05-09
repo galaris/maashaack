@@ -35,19 +35,19 @@
 
 // ---o Constructor
 
-core.strings.hyphenateTest = function( name ) 
+core.strings.capitalizeTest = function( name ) 
 {
     buRRRn.ASTUce.TestCase.call( this , name ) ;
 }
 
 // ----o Inherit
 
-core.strings.hyphenateTest.prototype             = new buRRRn.ASTUce.TestCase() ;
-core.strings.hyphenateTest.prototype.constructor = core.strings.hyphenateTest ;
+core.strings.capitalizeTest.prototype             = new buRRRn.ASTUce.TestCase() ;
+core.strings.capitalizeTest.prototype.constructor = core.strings.capitalizeTest ;
 
 // ----o Public Methods
 
-core.strings.hyphenateTest.prototype.testHyphenate = function () 
+core.strings.capitalizeTest.prototype.testCapitalize = function () 
 {
-    this.assertEquals( "hello-world" , core.strings.hyphenate( "helloWorld" ) ) ;
+    this.assertEquals( "Hello World" , core.strings.capitalize( "hello world" ) ) ;
 }
