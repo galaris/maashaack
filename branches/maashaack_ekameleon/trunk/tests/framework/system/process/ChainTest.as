@@ -99,9 +99,9 @@ package system.process
         
         public function testInterface():void
         {
-            assertTrue( chain is Resumable , "Must implements the Resumable interface.");
-            assertTrue( chain is Startable , "Must implements the Startable interface.");
-            assertTrue( chain is Stoppable , "Must implements the Stoppable interface.");
+            assertTrue( chain is Resumable , "#1 - Must implements the Resumable interface.");
+            assertTrue( chain is Startable , "#2 - Must implements the Startable interface.");
+            assertTrue( chain is Stoppable , "#3 - Must implements the Stoppable interface.");
         }
         
         public function testConstructorEmptyArgument():void
@@ -263,13 +263,13 @@ package system.process
             
             c.run() ;
             
-            assertTrue( mockListener.isRunning , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-            assertFalse( c.running , "The running property of the Sequencer must be false after the process." ) ;
+            assertTrue( mockListener.isRunning , "#1" ) ;
+            assertFalse( c.running , "#2" ) ;
             
-            assertTrue   ( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
-            assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
+            assertTrue   ( mockListener.startCalled  , "#3" ) ;
+            assertEquals ( mockListener.startType  , ActionEvent.START   , "#4" );
+            assertTrue   ( mockListener.finishCalled  , "#5" ) ;
+            assertEquals ( mockListener.finishType , ActionEvent.FINISH  , "#6" );
             
             mockListener.unregister() ;
             mockListener = null ;
