@@ -127,11 +127,14 @@ require( "core.reflect.hasDefinitionByName" ) ;
 // core.strings
 
 require( "core.strings.camelCase"           ) ;
+require( "core.strings.capitalize"          ) ;
 require( "core.strings.center"              ) ;
 require( "core.strings.compare"             ) ;
+require( "core.strings.clean"               ) ;
 require( "core.strings.endsWith"            ) ;
 require( "core.strings.fastformat"          ) ;
 require( "core.strings.format"              ) ;
+require( "core.strings.hyphenate"           ) ;
 require( "core.strings.indexOfAny"          ) ;
 require( "core.strings.insert"              ) ;
 require( "core.strings.lastIndexOfAny"      ) ;
