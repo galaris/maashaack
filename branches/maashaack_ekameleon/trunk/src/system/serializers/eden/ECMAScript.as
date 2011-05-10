@@ -38,12 +38,14 @@ package system.serializers.eden
     import core.chars.isAlpha;
     import core.chars.isDigit;
     import core.chars.isHexDigit;
+    import core.reflect.getDefinitionByName;
+    import core.reflect.hasClassByName;
     import core.strings.endsWith;
+    import core.strings.format;
     import core.strings.lineTerminatorChars;
     import core.strings.startsWith;
-    
+
     import system.Reflection;
-    import system.Strings;
     import system.console;
     import system.text.parser.GenericParser;
     
@@ -417,7 +419,7 @@ package system.serializers.eden
             }
             if( RESERVED_KEYWORDS.indexOf( identifier ) > -1 )
             {
-                log( Strings.format( strings.reservedKeyword, identifier ) ) ;
+                log( format( strings.reservedKeyword, identifier ) ) ;
                 return true ;
             }
             else
@@ -439,7 +441,7 @@ package system.serializers.eden
             }
             if( FUTUR_KEYWORDS.indexOf( identifier ) > -1 )
             {
-                log( Strings.format( strings.futurReservedKeyword, identifier ) ) ;
+                log( format( strings.futurReservedKeyword, identifier ) ) ;
                 return true ;
             }
             else
@@ -464,13 +466,13 @@ package system.serializers.eden
                 subpath = paths[i];
                 if( isReservedKeyword( subpath ) || isFutureReservedKeyword( subpath ) )
                 {
-                    log( Strings.format( strings.notValidPath, path ) );
+                    log( format( strings.notValidPath, path ) );
                     return false;
                 }
             }
             if( config.security && !isAuthorized(path) )
             {
-                log(Strings.format(path, strings.notAuthorizedPath)) ;
+                log( format(path, strings.notAuthorizedPath) ) ;
                 return config.undefineable;
             }
             return true;
@@ -709,10 +711,10 @@ package system.serializers.eden
                         foundScope = true;
                         scope = _globalPool[ scopepath ];
                     }
-                    else if( Reflection.hasClassByName( scopepath ) )
+                    else if( hasClassByName( scopepath ) )
                     {
                         foundScope = true;
-                        scope = Reflection.getDefinitionByName( scopepath );
+                        scope = getDefinitionByName( scopepath );
                         debug( "GLOBAL POOL: " + scopepath );
                         _globalPool[ scopepath ] = scope;
                     }
@@ -1400,7 +1402,7 @@ package system.serializers.eden
         {
             if( config.security && !isAuthorized( fcnPath ) )
             {
-                log( Strings.format( strings.notAuthorizedFunction , fcnPath ) ) ;
+                log( format( strings.notAuthorizedFunction , fcnPath ) ) ;
                 return config.undefineable;
             }
             debug( "scanFunction( " + fcnPath + " )" );
@@ -1490,7 +1492,7 @@ package system.serializers.eden
              */
             if( ! isClass && (ref == null) && (fcnObj == undefined) )
             {
-                log( Strings.format( strings.doesNotExist, fcnPath ) );
+                log( format( strings.doesNotExist, fcnPath ) );
                 return config.undefineable;
             }
             else
@@ -1530,7 +1532,7 @@ package system.serializers.eden
                 {
                     if( ! config.allowFunctionCall )
                     {
-                        log( Strings.format( strings.notFunctionCallAllowed, fcnPath, args ) );
+                        log( format( strings.notFunctionCallAllowed, fcnPath, args ) );
                         return config.undefineable;
                     }
                     return result;
