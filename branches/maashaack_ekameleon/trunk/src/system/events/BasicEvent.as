@@ -35,9 +35,9 @@
 
 package system.events 
 {
-    import system.Reflection;
-    
-    import flash.events.Event; 
+    import core.reflect.getClassName;
+
+    import flash.events.Event;
     
     /**
      * <code class="prettyprint">system.events.BasicEvent</code> is the basical event structure to work with <code class="prettyprint">system.events.EventDispatcher</code>.
@@ -66,7 +66,7 @@ package system.events
             super( type , bubbles, cancelable ) ;
             
             _context = _context != null ? _context : context ;
-            _target  = _target  != null ? _target  : target ;    
+            _target  = _target  != null ? _target  : target ;
             _time    = ( time > 0) ? time : ( (new Date()).valueOf() ) ;
             _type    = type ;
         }
@@ -152,7 +152,7 @@ package system.events
          */
         public override function toString():String 
         {
-            return formatToString( Reflection.getClassName(this), "type", "target", "context", "bubbles", "cancelable", "eventPhase" ); 
+            return formatToString( getClassName(this), "type", "target", "context", "bubbles", "cancelable", "eventPhase" ); 
         }
         
         /**
