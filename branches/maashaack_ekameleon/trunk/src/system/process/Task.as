@@ -36,14 +36,15 @@
 package system.process 
 {
     import core.reflect.getClassPath;
-    
+
     import system.events.ActionEvent;
-    import system.events.CoreEventDispatcher;
     import system.logging.Log;
     import system.logging.Loggable;
     import system.logging.Logger;
     import system.signals.Signal;
     import system.signals.Signaler;
+
+    import flash.events.EventDispatcher;
     
     /**
      * Dispatched when a process is finished.
@@ -62,7 +63,7 @@ package system.process
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
-    public dynamic class Task extends CoreEventDispatcher implements Action, Loggable
+    public dynamic class Task extends EventDispatcher implements Action, Loggable
     {
         /**
          * Creates a new Task instance.
@@ -148,6 +149,23 @@ package system.process
         }
         
         /**
+         * Returns <code class="prettyprint">true</code> if the object is locked.
+         * @return <code class="prettyprint">true</code> if the object is locked.
+         */
+        public function isLocked():Boolean 
+        {
+            return ___isLock___ ;
+        }
+        
+        /**
+         * Locks the object.
+         */
+        public function lock():void 
+        {
+            ___isLock___ = true ;
+        }
+        
+        /**
          * Notify an ActionEvent when the process is finished.
          */
         public function notifyFinished():void 
@@ -186,6 +204,14 @@ package system.process
         }
         
         /**
+         * Unlocks the display.
+         */
+        public function unlock():void 
+        {
+            ___isLock___ = false ;
+        }
+        
+        /**
          * Changes the running property value.
          */
         protected function setRunning( b:Boolean ):void
@@ -197,6 +223,12 @@ package system.process
          * @private
          */
         private var _finishIt:Signaler = new Signal() ;
+        
+        /**
+         * The internal flag to indicates if the display is locked or not.
+         * @private
+         */ 
+        protected var ___isLock___:Boolean ;
         
         /**
          * @private
