@@ -33,28 +33,26 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.reflect
+package core.reflect 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import flash.system.ApplicationDomain;
+
+    public class hasClassByNameTest extends TestCase 
     {
-        public static function suite():ITest
+        public function hasClassByNameTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.reflect package tests");
+            super(name);
+        }
+        
+        public function testHasClassByName():void
+        {
+            assertTrue( hasClassByName("Array") , "#1" ) ;
+            assertTrue( hasClassByName("flash.utils.Dictionary") , "#2" ) ;
+            assertTrue( hasClassByName("flash.utils.Dictionary", ApplicationDomain.currentDomain) , "#3" ) ;
             
-            suite.addTestSuite( getClassByNameTest ) ;            suite.addTestSuite( getClassMethodsTest ) ;
-            suite.addTestSuite( getClassNameTest ) ;
-            suite.addTestSuite( getClassPackageTest ) ;
-            suite.addTestSuite( getClassPathTest ) ;
-            suite.addTestSuite( getDefinitionByNameTest ) ;
-            suite.addTestSuite( hasClassByNameTest ) ;
-            suite.addTestSuite( hasDefinitionByNameTest ) ;
-            
-            suite.addTestSuite( invokeTest ) ;
-            
-            return suite;
+            assertFalse( getClassByName("core.dump") ) ;
         }
     }
 }

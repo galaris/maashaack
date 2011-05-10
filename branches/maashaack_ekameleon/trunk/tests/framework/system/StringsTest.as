@@ -38,8 +38,6 @@ package system
 {
     import buRRRn.ASTUce.framework.*;
 
-    import core.strings.whiteSpaceChars;
-
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
@@ -258,69 +256,6 @@ package system
             assertEquals(false, Strings.startsWith(null, "hello"));
         }
         
-        public function testPadLeft():void
-        {
-            assertEquals("   hello", Strings.padLeft("hello", 8));
-            assertEquals("...hello", Strings.padLeft("hello", 8, "."));
-            assertEquals("***hello", Strings.padLeft("hello", 8, "*.!"));
-        }
-        
-        public function testPadRight():void
-        {
-            assertEquals("hello   ", Strings.padRight("hello", 8));
-            assertEquals("hello...", Strings.padRight("hello", 8, "."));
-            assertEquals("hello***", Strings.padRight("hello", 8, "*.!"));
-        }
-        
-        public function testTrimEnd():void
-        {
-            assertEquals("hello", Strings.trimEnd("hello   "));
-            assertEquals("hello", Strings.trimEnd("hello  \n  \t   \r "));
-            assertEquals("---hello world", Strings.trimEnd("---hello world---", ["-"]));
-            assertEquals("---hello world", Strings.trimEnd("---hello world---", whiteSpaceChars.concat("-")));
-            assertEquals("---hello world", Strings.trimEnd("---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
-        }
-        
-        public function testTrimStart():void
-        {
-            assertEquals("hello", Strings.trimStart("   hello"));
-            assertEquals("hello", Strings.trimStart("  \n  \t   \r hello"));
-            assertEquals("hello world---", Strings.trimStart("---hello world---", ["-"]));
-            assertEquals("hello world---", Strings.trimStart("---hello world---", whiteSpaceChars.concat("-")));
-            assertEquals("hello world---", Strings.trimStart("--  -----  \r\n---\t-- ---hello world---", whiteSpaceChars.concat("-")));
-        }
-        
-        public function testTrim():void
-        {
-            assertEquals("hello", Strings.trim("   hello   "));
-            assertEquals("hello", Strings.trim("  \n  \t   \r hello  \n  \t   \r "));
-            assertEquals("hello world", Strings.trim("---hello world---", ["-"]));
-            assertEquals("hello world", Strings.trim("---hello world---", whiteSpaceChars.concat("-")));
-            assertEquals("hello world", Strings.trim("--  -----  \r\n---\t-- ---hello world--  -----  \r\n---\t-- ---", whiteSpaceChars.concat("-")));
-        }
-        
-        public function testIndexOfAny():void
-        {
-            assertEquals(1, Strings.indexOfAny("hello world", [2, "hello", 5]));
-            assertEquals(2, Strings.indexOfAny("Five = 5", [2, "hello", 5]));
-            assertEquals(-1, Strings.indexOfAny("actionscript is good", [2, "hello", 5]));
-            assertEquals(1, Strings.indexOfAny("hello world", ["2", "hello", "5"]));
-            assertEquals(2, Strings.indexOfAny("Five = 5", ["2", "hello", "5"]));
-            assertEquals(1, Strings.indexOfAny("hello world", [2, "hello", 5], 1));
-            assertEquals(0, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 0));
-            assertEquals(1, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 1));
-            assertEquals(2, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 2));
-            assertEquals(3, Strings.indexOfAny("hello the big world", ["hello", "the", "big", "world"], 3));
-            assertEquals(-1, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 2));
-            assertEquals(3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 1, 3));
-            assertEquals(3, Strings.indexOfAny("hello the big world", ["hello", "some", "strange", "world"], 3, 3));
-        }
-        
-        public function testLastIndexOfAny():void
-        {
-            assertEquals(0, Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]));
-            assertEquals(19, Strings.lastIndexOfAny("Five 5 = 5 and not 2", ["2", "hello", "5"]));
-        }
         /*
         public function testInsert():void
             {
