@@ -35,7 +35,8 @@
 
 package system.data.sets 
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.Map;
@@ -58,7 +59,7 @@ package system.data.sets
         {
             if ( map == null )
             {
-                throw new ArgumentError( Reflection.getClassName(this) + " constructor failed, the internal Map not must be null.") ;
+                throw new ArgumentError( getClassName(this) + " constructor failed, the internal Map not must be null.") ;
             }
             _map = map ;
             if ( init == null )
