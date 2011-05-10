@@ -39,10 +39,11 @@ package system.process
 
     import system.Reflection;
     import system.events.ActionEvent;
-    import system.events.CoreEventDispatcher;
     import system.logging.Logger;
     import system.process.mocks.MockTaskListener;
     import system.process.mocks.MockTaskReceiver;
+
+    import flash.events.EventDispatcher;
 
     public class TaskTest extends TestCase
     {
@@ -78,7 +79,7 @@ package system.process
         
         public function testInherit():void
         {
-            assertTrue( task is CoreEventDispatcher , "Action inherit CoreEventDispatcher failed.") ;
+            assertTrue( task is EventDispatcher , "Action inherit flash.events.EventDispatcher failed.") ;
         }
         
         public function testInterface():void
@@ -104,7 +105,6 @@ package system.process
             var clone:Task = task.clone() as Task ;
             assertNotNull( clone , "01 - Task clone() failed." ) ;
             assertFalse( clone == task  , "02 - Task clone() failed." ) ;
-            assertEquals( clone.isGlobal() , task.isGlobal() , "03 - Task clone() failed.") ;
         }
         
         public function testRunning():void

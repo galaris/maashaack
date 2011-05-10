@@ -209,11 +209,13 @@ package system.process
         public function testToString():void
         {
             assertEquals( batch.toString() , "[BatchTask]" ) ;
-            assertEquals( batch.toString(true) , "[BatchTask<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
+            batch.verbose = true ;
+            assertEquals( batch.toString() , "[BatchTask<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
             batch.length = 6 ;
-            assertEquals( batch.toString(true) , "[BatchTask<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
+            assertEquals( batch.toString() , "[BatchTask<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
             batch.length = 2 ;
-            assertEquals( batch.toString(true) , "[BatchTask<[MockTask],[MockTask]>]" ) ;
+            assertEquals( batch.toString() , "[BatchTask<[MockTask],[MockTask]>]" ) ;
+            batch.verbose = false ;
         }
         
         public function testToVector():void

@@ -201,11 +201,13 @@ package system.process
         public function testToString():void
         {
             assertEquals( group.toString() , "[TaskGroup]" ) ;
-            assertEquals( group.toString(true) , "[TaskGroup<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
+            group.verbose = true ;
+            assertEquals( group.toString() , "[TaskGroup<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
             group.length = 6 ;
-            assertEquals( group.toString(true) , "[TaskGroup<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
+            assertEquals( group.toString() , "[TaskGroup<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
             group.length = 2 ;
-            assertEquals( group.toString(true) , "[TaskGroup<[MockTask],[MockTask]>]" ) ;
+            assertEquals( group.toString() , "[TaskGroup<[MockTask],[MockTask]>]" ) ;
+            group.verbose = false ;
         }
         
         public function testToVector():void
