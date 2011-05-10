@@ -82,12 +82,9 @@ package system.process
         /**
          * Creates a new ActionEventDispatcher instance.
          * @param event The event to dispatch.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function ActionEventDispatcher( event:* = null , global:Boolean = false, channel:String = null)
+        public function ActionEventDispatcher( event:* = null )
         {
-            super( global, channel ) ;
             this.event = event ;
         }
         
@@ -124,7 +121,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new ActionEventDispatcher( event , isGlobal() , channel ) ;
+            return new ActionEventDispatcher( event ) ;
         }
         
         /**
