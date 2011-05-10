@@ -69,12 +69,9 @@ package system.process
          * Creates a new Pause instance.
          * @param duration the duration of the pause.
          * @param useSeconds the flag to indicates if the duration is in second or not.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function Pause( duration:Number = 0 , useSeconds:Boolean = true , global:Boolean = false , channel:String = null )
+        public function Pause( duration:Number = 0 , useSeconds:Boolean = true )
         {
-            super( global , channel ) ;
             _duration = (isNaN(duration) && duration < 0 && !isFinite(duration) ) ? 0 : duration ;
             _useSeconds = useSeconds ;
             _timer = new Timer( delay , 1 ) ;
