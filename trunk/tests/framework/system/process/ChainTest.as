@@ -233,11 +233,13 @@ package system.process
         public function testToString():void
         {
             assertEquals( chain.toString() , "[Chain]" ) ;
-            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
+            chain.verbose = true ;
+            assertEquals( chain.toString() , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask]>]" ) ;
             chain.length = 6 ;
-            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
+            assertEquals( chain.toString() , "[Chain<[MockTask],[MockTask],[MockTask],[MockTask],null,null>]" ) ;
             chain.length = 2 ;
-            assertEquals( chain.toString(true) , "[Chain<[MockTask],[MockTask]>]" ) ;
+            assertEquals( chain.toString() , "[Chain<[MockTask],[MockTask]>]" ) ;
+            chain.verbose = false ;
         }
         
         public function testToVector():void

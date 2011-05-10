@@ -103,7 +103,7 @@ package system.process.mocks
           * Returns the <code class="prettyprint">String</code> representation of this object.
           * @return the <code class="prettyprint">String</code> representation of this object.
           */
-        public function toString():String
+        public override function toString():String
         {
             var str:String = "[" + Reflection.getClassName(this) ;
             if ( this.id != null )
