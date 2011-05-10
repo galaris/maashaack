@@ -46,12 +46,9 @@ package graphics.transitions
         /**
          * Creates a new CoreTransition instance.
          * @param the id value of this object.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
          */
-        public function CoreTransition( id:* = null , global:Boolean = false , channel:String = null )
+        public function CoreTransition( id:* = null )
         {
-            super( global , channel ) ;
             this.id = id ;
         }
         
@@ -69,6 +66,15 @@ package graphics.transitions
         public function set id( id:* ):void
         {
             _id = id ;
+        }
+        
+        /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new CoreTransition( id ) ;
         }
         
         /**
