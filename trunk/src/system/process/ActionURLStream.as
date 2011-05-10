@@ -46,10 +46,11 @@ package system.process
     {
         /**
          * Creates a new ActionURLStream instance.
+         * @param stream The URLStream reference to insert in a task engine.
          */
-        public function ActionURLStream( stream:URLStream = null, global:Boolean = false, channel:String = null)
+        public function ActionURLStream( stream:URLStream = null )
         {
-            super( stream , global , channel ) ;
+            super( stream ) ;
         }
         
         /**
@@ -120,7 +121,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new ActionURLStream(loader as URLStream) ;
+            return new ActionURLStream( loader as URLStream ) ;
         }
         
         /**
