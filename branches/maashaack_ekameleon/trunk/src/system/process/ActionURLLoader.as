@@ -91,12 +91,10 @@ package system.process
         /**
          * Creates a new ActionURLLoader instance.
          * @param loader The URLLoader object to load.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function ActionURLLoader( loader:URLLoader=null , global:Boolean = false, channel:String = null )
+        public function ActionURLLoader( loader:URLLoader=null )
         {
-            super( loader , global, channel ) ;
+            super( loader ) ;
         }
         
         /**
