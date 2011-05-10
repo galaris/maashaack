@@ -178,7 +178,7 @@ package system.process
          * Returns the string representation of this instance.
          * @return the string representation of this instance.
          */
-        public function toString():String 
+        public override function toString():String 
         {
             return "[Pause duration:" + duration + (useSeconds ? "s" : "ms") + "]" ;
         }
