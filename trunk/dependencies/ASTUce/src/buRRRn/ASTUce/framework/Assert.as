@@ -16,18 +16,19 @@
   the Initial Developer. All Rights Reserved.
   
   Contributor(s):
-  - Marc Alcaraz <vegas@ekameleon.net>.
+  Marc Alcaraz <ekameleon@gmail.com>.
  */
+ 
 package buRRRn.ASTUce.framework
 {
     import buRRRn.ASTUce.config;
     import buRRRn.ASTUce.strings;
-
+    
     import core.strings.format;
-
+    
     import system.Equatable;
     import system.eden;
-
+    
     /**
      * A set of assert methods. Messages are only displayed when an assert fails. It is a static only class.
      * <p><b>Notes :</b></p>
