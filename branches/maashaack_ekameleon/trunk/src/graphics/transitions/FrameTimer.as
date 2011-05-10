@@ -51,19 +51,25 @@ package graphics.transitions
          * The timer does not start automatically; you must call the start() method to start it.
          * @param delay The delay between timer events, in milliseconds.
          * @param repeatCount Specifies the number of repetitions. If zero, the timer repeats infinitely. If nonzero, the timer runs the specified number of times and then stops. 
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
          */
-        public function FrameTimer(delay:Number = 0, repeatCount:int = 0, global:Boolean = false, channel:String = null)
+        public function FrameTimer( delay:Number = 0 , repeatCount:int = 0 )
         {
-            super( global , channel ) ;
             this.delay       = delay ;
             this.repeatCount = repeatCount ;
         }
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new FrameTimer( delay , repeatCount ) ;
+        }
+        
+        /**
          * Invoked when the frame engine is in progress.
-         */        
+         */
         public override function enterFrame( e:Event = null ):void
         {
             _next     += getTimer() - _lastTime ;
@@ -117,8 +123,8 @@ package graphics.transitions
         public function get repeatCount():int
         {
             return _repeatCount ;
-        }        
-
+        }
+        
         /**
          * @private
          */
