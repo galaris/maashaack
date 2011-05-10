@@ -35,7 +35,8 @@
 
 package system.process 
 {
-    import system.Reflection;
+    import core.reflect.getClassPath;
+    
     import system.events.ActionEvent;
     import system.events.CoreEventDispatcher;
     import system.logging.Log;
@@ -72,7 +73,7 @@ package system.process
         {
             super( global , channel ) ;
             _phase  = TaskPhase.INACTIVE ;
-            _logger = Log.getLogger( Reflection.getClassPath(this) ) ;
+            _logger = Log.getLogger( getClassPath(this, true) ) ;
         }
         
         /**
@@ -104,7 +105,7 @@ package system.process
          */
         public function set logger( log:Logger ):void
         {
-            _logger = log || Log.getLogger( Reflection.getClassPath(this) ) ;
+            _logger = log || Log.getLogger( getClassPath(this, true) ) ;
         }
         
         /**
