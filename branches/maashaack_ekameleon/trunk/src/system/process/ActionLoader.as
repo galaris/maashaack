@@ -87,12 +87,10 @@ package system.process
         /**
          * Creates a new ActionLoader instance.
          * @param loader The Loader object reference to initialize this process.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function ActionLoader( loader:Loader=null , global:Boolean = false, channel:String = null)
+        public function ActionLoader( loader:Loader=null )
         {
-            super( loader , global, channel ) ;
+            super( loader ) ;
         }
         
         /**
