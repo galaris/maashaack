@@ -56,12 +56,9 @@ package system.process
         /**
          * Creates a new CoreActionLoader instance.
          * @param loader The loader reference.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function CoreActionLoader( loader:IEventDispatcher=null , global:Boolean = false, channel:String = null)
+        public function CoreActionLoader( loader:IEventDispatcher=null )
         {
-            super( global, channel );
             _timer             = new Timer(DEFAULT_DELAY, 1) ;
             this.timeoutPolicy = DEFAULT_TIMEOUT_POLICY ;
             this.loader        = loader ;
@@ -183,7 +180,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new CoreActionLoader(loader) ;
+            return new CoreActionLoader( loader ) ;
         }
         
         /**
