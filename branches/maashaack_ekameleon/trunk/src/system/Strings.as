@@ -35,17 +35,6 @@
 
 package system
 {
-    import core.strings.center;
-    import core.strings.indexOfAny;
-    import core.strings.insert;
-    import core.strings.lastIndexOfAny;
-    import core.strings.padLeft;
-    import core.strings.padRight;
-    import core.strings.repeat;
-    import core.strings.trim;
-    import core.strings.trimEnd;
-    import core.strings.trimStart;
-    
     import system.comparators.StringComparator;
     import system.formatters.StringFormatter;
     
@@ -54,22 +43,6 @@ package system
      */
     public class Strings
     {
-        /**
-         * Returns the center String representation of the specified String value.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import system.Strings ;
-         * trace( Strings.center("hello world", 0) )         ; // hello world
-         * trace( Strings.center("hello world", 20) )        ; //     hello world
-         * trace( Strings.center("hello world", 20, "_" ) )  ; // ____hello world_____
-         * </pre>
-         * @param str The String to center.
-         * @param size The number of character to center the String expression. (default 0)
-         * @param separator The optional separator character use before and after the String to center. (default " ")
-         * @return the center String representation of the specified String value.
-         */
-        public static const center:Function = core.strings.center ;
-        
         /**
          * Compares the two specified String objects. Allows to take into account the string case for comparison. 
          * @param o1 first string to compare with the second string.
@@ -219,114 +192,6 @@ package system
         }
         
         /**
-         * Reports the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import system.Strings;
-         * 
-         * Strings.indexOfAny("hello world", [2, "hello", 5]); // 1
-         * Strings.indexOfAny("Five = 5", [2, "hello", 5]); // 2
-         * Strings.indexOfAny("actionscript is good", [2, "hello", 5]); // -1
-         * </pre>
-         * @return the index of the first occurrence in this instance of any character in a specified array of Unicode characters.
-         */
-        public static const indexOfAny:Function = core.strings.indexOfAny ;
-        
-        /**
-         * Inserts a specified instance of String at a specified index position in this instance.
-         * note :
-         * if index is null, we directly append the value to the end of the string.
-         * if index is zero, we directly insert it to the begining of the string.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import system.Strings;
-         * 
-         * var result:String;
-         * 
-         * result = Strings.insert("hello", 0, "a" );  // ahello
-         * trace(result) ;
-         * 
-         * result = Strings.insert("hello", -1, "a" ); // hellao
-         * trace(result) ;
-         * 
-         * result = Strings.insert("hello", 10, "a" ); // helloa
-         * trace(result) ;
-         * 
-         * result = Strings.insert("hello", 1, "a" );  // haello
-         * trace(result) ;
-         * </pre>
-         * @return the string modified by the method.
-         */
-        public static const insert:Function = core.strings.insert ;
-        
-        /**
-         * Reports the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint"> 
-         * trace( Strings.lastIndexOfAny("hello world", ["2", "hello", "5"]) ); // 0
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["2", "hello", "5"]) ); // 19
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"]) ); // 9
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8) ); // 5
-         * trace( Strings.lastIndexOfAny("Five 5 = 5 and not 2" , ["5", "hello", "2"] , 8 , 3) ); // -1
-         * </pre> 
-         * @param source The String to ckeck.
-         * @param anyOf The Array of Unicode characters to find in the String.
-         * @param startIndex The init position of the search process.
-         * @param count The number of elements to check.
-         * @return the index position of the last occurrence in this instance of one or more characters specified in a Unicode array.
-         * @throws ArgumentError if the anyOf argument is 'null' or 'undefined'.
-         */
-        public static const lastIndexOfAny:Function = core.strings.lastIndexOfAny ;
-        
-        /**
-         * Right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
-         * <pre class="prettyprint">
-         * import system.Strings;
-         * 
-         * var result:String;
-         * 
-         * result = Strings.padLeft("hello", 8);
-         * trace(result); //  "   hello"
-         * 
-         * result = Strings.padLeft("hello", 8, ".") ;
-         * trace(result); //  "...hello" 
-         * </pre>
-         * @return The right-aligns the characters in this instance, padding on the left with a specified Unicode character for a specified total length.
-         */
-        public static const padLeft:Function = core.strings.padLeft ;
-        
-        /**
-         * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import system.Strings ;
-         * 
-         * var result:String ;
-         * 
-         * result = Strings.padRight("hello", 8) ;
-         * trace(result) ; //  "hello   "
-         * 
-         * result = Strings.padRight("hello", 8, ".") ;
-         * trace(result) ; //  "hello..." 
-         * </pre>
-         * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
-         */
-        public static const padRight:Function = core.strings.padRight ;
-        
-        /**
-         * Returns a new String value who contains the specified String characters repeated count times.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import system.Strings ;
-         * 
-         * trace( Strings.repeat("hello", 0) ) ; // hello
-         * trace( Strings.repeat("hello", 3) ) ; // hellohellohello
-         * </pre>
-         * @return a new String value who contains the specified String characters repeated count times.
-         */
-        public static const repeat:Function = core.strings.repeat ;
-        
-        /**
          * Determines whether a specified string is a prefix of the current instance. 
          * <p><b>Example : </b></p>
          * <pre class="prettyprint">
@@ -377,44 +242,6 @@ package system
             
             return arr;
         }
-        
-        /**
-         * Removes all occurrences of a set of specified characters (or strings) from the beginning and end of this instance.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * trace( Strings.trim("\r\t   hello world   \t ") ); // hello world
-         * </pre>
-         * @param source The string to trim.
-         * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new trimed string.
-         */
-        public static const trim:Function = core.strings.trim ;
-        
-        /**
-         * Removes all occurrences of a set of characters specified in an array from the end of this instance.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * trace( Strings.trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // ---hello world
-         * </pre>
-         * @param source The string to trim.
-         * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new trimed string.
-         */
-        public static const trimEnd:Function = core.strings.trimEnd ;
-        
-        /**
-         * Removes all occurrences of a set of characters specified in an array from the beginning of this instance.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * trace( Strings.trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // hello world---
-         * </pre>
-         * @param source The string to trim.
-         * @param trimChars The optional array of characters to trim. If this argument is null the <code class="prettyprint">Strings.whiteSpaceChars</code> static array is used.
-         * @return The new trimed string.
-         */
-        public static const trimStart:Function = core.strings.trimStart ;
-        
-        //////////////////////////////////////////////////////////////////////
         
         /**
          * @private
