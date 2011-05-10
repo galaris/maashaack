@@ -36,8 +36,9 @@
 package system.process 
 {
     import system.Cloneable;
-    import system.events.IEventDispatcher;
     import system.signals.Signaler;
+    
+    import flash.events.IEventDispatcher;
     
     /**
      * Dispatched when a process is finished.
