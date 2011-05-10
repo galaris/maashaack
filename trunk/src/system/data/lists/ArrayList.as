@@ -35,7 +35,8 @@
 
 package system.data.lists 
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+
     import system.data.Collection;
     import system.data.List;
     import system.data.ListIterator;
@@ -126,7 +127,7 @@ package system.data.lists
         {
             if ( index > size() ) 
             {
-                throw new RangeError( Reflection.getClassName(this) + ".addAt method failed, the specified index '" + index + "' is out of bounds.") ;
+                throw new RangeError( getClassName(this) + ".addAt method failed, the specified index '" + index + "' is out of bounds.") ;
             }
             _modCount++ ;
             _a.splice( index , 0 , o ) ;
@@ -274,7 +275,7 @@ package system.data.lists
         {
             if ( index > size() - 1 )
             {
-                throw new RangeError( "The " + Reflection.getClassName(this) + ".set() method failed, the index '" + index + "' argument is out of the size limit." ) ;
+                throw new RangeError( "The " + getClassName(this) + ".set() method failed, the index '" + index + "' argument is out of the size limit." ) ;
             }
             var old:* = _a[index] ;
             if ( old === undefined )
@@ -301,11 +302,11 @@ package system.data.lists
         {
             if ( fromIndex > size()  )
             {
-                throw new RangeError( "The " + Reflection.getClassName(this) + ".subList() method failed, the fromIndex '" + fromIndex + "' argument is out of the size limit." ) ;
+                throw new RangeError( "The " + getClassName(this) + ".subList() method failed, the fromIndex '" + fromIndex + "' argument is out of the size limit." ) ;
             }  
             else if ( toIndex > size() )
             {
-                throw new RangeError( "The " + Reflection.getClassName(this) + ".subList() method failed, the toIndex '" + toIndex + "' argument is out of the size limit." ) ;
+                throw new RangeError( "The " + getClassName(this) + ".subList() method failed, the toIndex '" + toIndex + "' argument is out of the size limit." ) ;
             }
             var ar:Array = [] ;
             for ( var i:int = fromIndex ; i < toIndex ; i++ ) 
