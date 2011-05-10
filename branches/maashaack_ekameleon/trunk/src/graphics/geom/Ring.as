@@ -35,8 +35,9 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
-    import system.eden;
+    import core.dump;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
     
     /**
      * Defines a flat ring or disk within three dimensional space that is specified via the ring's center point, an up vector, an inner radius, and an outer radius.
@@ -140,11 +141,7 @@ package graphics.geom
          */
         public function toSource(indent:int = 0):String
         {
-            var sCenter:String      = eden.serialize( center ) ;
-            var sUp:String          = eden.serialize( up ) ;
-            var sInnerRadius:String = eden.serialize( innerRadius ) ;
-            var sOuterRadius:String = eden.serialize( outerRadius ) ;
-            return "new " + Reflection.getClassPath(this) + "(" +  sCenter  + "," + sUp + "," + sInnerRadius + "," + sOuterRadius + ")" ;
+            return "new " + getClassPath(this,true) + "(" + dump(center) + "," + dump(up) + "," + dump(innerRadius) + "," + dump(outerRadius) + ")" ;
         }
         
         /**
@@ -153,7 +150,7 @@ package graphics.geom
          */
         public function toString():String
         {
-            return "[" + Reflection.getClassName(this) + "]" ;
+            return "[" + getClassName(this) + "]" ;
         }
     }
 }

@@ -59,7 +59,7 @@ package graphics.geom
         {
             return new Matrix4() ;
         }
-    
+        
         /**
          * Creates and returns a new Matrix4 with all this elements are 0.
          * <p><b>Example :</b></p>
@@ -78,7 +78,7 @@ package graphics.geom
         {
             return new Matrix4(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0) ;
         }
-
+        
         /**
          * Returns <code class="prettyprint">true</code> if the Matrix4 is the identity.
          * <p><b>Example :</b></p>

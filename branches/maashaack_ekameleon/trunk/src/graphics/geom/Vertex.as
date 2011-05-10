@@ -35,7 +35,8 @@
 
 package graphics.geom 
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
     
     /**
      * A Vertex is a point which can be represented in differents coordinates (local, world, screen).
@@ -172,7 +173,7 @@ package graphics.geom
         public override function toSource( indent:int = 0 ):String 
         {    
             var s:String ;
-            s  = "new " + Reflection.getClassPath(this) + "(" ;
+            s  = "new " + getClassPath(this, true) + "(" ;
             s += x.toString()  + "," + y.toString()  + "," + z.toString() + "," ;
             s += tx.toString() + "," + ty.toString() + "," + tz.toString() ;
             s += ")" ;
@@ -185,7 +186,7 @@ package graphics.geom
          */     
         public override function toString():String
         {
-            return "[" + Reflection.getClassName(this) + ":{x:" + x + ",y:" + y + ",z:" + z + ",tx:" + tx + ",ty:" + ty + ",tz:" + tz + "}]" ;
+            return "[" + getClassName(this) + ":{x:" + x + ",y:" + y + ",z:" + z + ",tx:" + tx + ",ty:" + ty + ",tz:" + tz + "}]" ;
         }
     }
 }

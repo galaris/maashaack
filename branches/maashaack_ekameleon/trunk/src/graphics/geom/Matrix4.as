@@ -35,11 +35,10 @@
 
 package graphics.geom 
 {
+    import core.dump;
     import core.maths.clamp;
+    import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
-    import system.Reflection;
-    import system.eden;
 
     /**
      * Matrix with 4 rows and 4 columns.
@@ -382,7 +381,7 @@ package graphics.geom
             var source:String = "new " + getClassPath(this, true) + "(" ;
             for( var i:int ; i<l ; i++)
             {
-                p[i] = eden.serialize( p[i] ) ;
+                p[i] = core.dump( p[i] ) ;
             }
             source += p.join(",") ;
             source += ")" ;
@@ -395,7 +394,7 @@ package graphics.geom
          */     
         public function toString():String
         {
-            var s:String = "[" + Reflection.getClassName(this) + ":" ;
+            var s:String = "[" + getClassName(this) + ":" ;
             s += "[" + n11 + "," + n12 + "," + n13 + "," + n14 + "]" ;
             s += "," ;
             s += "[" + n21 + "," + n22 + "," + n23 + "," + n24 + "]" ;

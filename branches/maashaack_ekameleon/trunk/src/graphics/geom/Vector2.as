@@ -39,9 +39,9 @@ package graphics.geom
     import core.maths.atan2D;
     import core.maths.cosD;
     import core.maths.sinD;
-
+    
     import system.Serializable;
-
+    
     import flash.geom.Point;
     
     /**
