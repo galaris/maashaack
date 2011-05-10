@@ -35,6 +35,8 @@
 
 package system
 {
+    import core.strings.trimStart;
+
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.ArrayMap;
@@ -648,7 +650,7 @@ package system
             
             if( Strings.startsWith( str, "//" ) )
             {
-                str = Strings.trimStart( str, ["/"] );
+                str = trimStart( str, ["/"] );
                 _path = "/"+str;
             }
             
@@ -688,7 +690,7 @@ package system
             _fragment = "" ;
             _query    = "" ;
             
-            str = Strings.trimStart( str, ["\\"] );
+            str = trimStart( str, ["\\"] );
             var pos:int = str.indexOf( "\\" );
             
             if( pos > 0 )
