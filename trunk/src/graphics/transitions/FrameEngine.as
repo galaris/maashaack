@@ -50,12 +50,19 @@ package graphics.transitions
     {
         /**
          * Creates a new FrameEngine instance.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">bGlobal</code> argument is <code class="prettyprint">true</code>.
          */
-        public function FrameEngine( global:Boolean = false , channel:String = null )
+        public function FrameEngine()
         {
-            super( global , channel ) ;
+            //
+        }
+        
+        /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new FrameEngine() ;
         }
         
         /**
