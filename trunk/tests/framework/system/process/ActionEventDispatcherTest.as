@@ -58,7 +58,8 @@ package system.process
         public function setUp():void
         {
             FrontController.getInstance("myChannel").add("test" , _testHandleEvent ) ;
-            action       = new ActionEventDispatcher("test", true , "myChannel" ) ;
+            action       = new ActionEventDispatcher("test" ) ;
+            action.setGlobal( true , "myChannel" ) ;
             mockListener = new MockTaskListener( action ) ;
         }
         
@@ -108,7 +109,7 @@ package system.process
         public function testEvent():void
         {
             assertTrue( action.event is Event, "01 - The event attribute failed, must inherit Event class.") ;
-            assertTrue( action.event is BasicEvent , "01 - The event attribute failed, must be a BasicEvent class.") ;
+            assertTrue( action.event is BasicEvent , "02 - The event attribute failed, must be a BasicEvent class.") ;
         
         }
         
@@ -162,7 +163,6 @@ package system.process
             assertEquals ( mockListener.finishType    , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
             
             assertTrue    ( _testHandleEventCalled , "The global event isn't dispatched in the global event flow with the FrontController") ;
-            
         }
         
         // private
