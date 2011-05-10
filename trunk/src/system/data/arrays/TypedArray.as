@@ -35,9 +35,9 @@
 
 package system.data.arrays
 {
+    import core.reflect.getClassName;
     import core.reflect.getClassPath;
 
-    import system.Reflection;
     import system.data.Typeable;
     import system.data.Validator;
     import system.eden;
@@ -259,7 +259,7 @@ package system.data.arrays
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassName(this) + ".validate("+ value + ") is mismatch.") ;
+                throw new TypeError( getClassName(this) + ".validate("+ value + ") is mismatch.") ;
             }
         }
         
