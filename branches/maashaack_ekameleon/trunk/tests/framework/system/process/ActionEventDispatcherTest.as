@@ -36,13 +36,9 @@
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase;
-    
-    import system.events.ActionEvent;
-    import system.events.BasicEvent;
-    import system.events.FrontController;
-    import system.process.mocks.MockTaskListener;
-    
+
     import flash.events.Event;
+    import flash.events.EventDispatcher;
     
     public class ActionEventDispatcherTest extends TestCase 
     {
@@ -53,91 +49,39 @@ package system.process
         
         public var action:ActionEventDispatcher ;
         
-        public var mockListener:MockTaskListener ;
-        
         public function setUp():void
         {
-            FrontController.getInstance("myChannel").add("test" , _testHandleEvent ) ;
-            action       = new ActionEventDispatcher("test" ) ;
-            action.setGlobal( true , "myChannel" ) ;
-            mockListener = new MockTaskListener( action ) ;
+            action = new ActionEventDispatcher() ;
         }
         
         public function tearDown():void
         {
-            FrontController.getInstance("myChannel").remove("test") ;
-            mockListener.unregister() ;
-            mockListener = undefined  ;
-            action       = undefined  ;
+            action = undefined  ;
         }
         
         // constructor and inherit
         
         public function testConstructorEmpty():void
         {
-            var p:ActionEventDispatcher ;
-            p = new ActionEventDispatcher() ;
-            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with 0 argument.") ;
-            assertNull ( p.event   , "02 - ActionEventDispatcher constructor failed with 0 argument.") ;
+            assertNotNull( action          , "#01") ;
+            assertNull ( action.dispatcher , "#02") ;
+            assertNull ( action.event      , "#03") ;
         }
         
-        public function testConstructorBasic():void
+        public function testConstructor():void
         {
-            var p:ActionEventDispatcher ;
-            p = new ActionEventDispatcher("test") ;
-            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one String argument.") ;
-            assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one String argument.") ;
-        }
-        
-        public function testConstructorEvent():void
-        {
-            var e:Event                 = new Event("test") ;
-            var p:ActionEventDispatcher = new ActionEventDispatcher( e ) ;
-            assertNotNull ( p , "01 - ActionEventDispatcher constructor failed with one Event argument.") ;
-            assertNotNull ( p.event , "02 - ActionEventDispatcher constructor failed with one Event argument.") ;
-            assertEquals ( p.event , e , "03 - ActionEventDispatcher constructor failed with one Event argument.") ;
+            var d:EventDispatcher = new EventDispatcher() ;
+            var e:Event           = new Event("test") ;
+            action                = new ActionEventDispatcher( d , e ) ;
+            assertNotNull ( action                , "#01" ) ;
+            assertEquals  ( d , action.dispatcher , "#02" ) ;
+            assertEquals  ( e , action.event      , "#03" ) ;
         }
         
         public function testInherit():void
         {
-            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
-            assertTrue    ( p is Task , "01 - ActionEventDispatcher must extends the Task class.") ;
-        }
-        
-        // attributes
-        
-        public function testEvent():void
-        {
-            assertTrue( action.event is Event, "01 - The event attribute failed, must inherit Event class.") ;
-            assertTrue( action.event is BasicEvent , "02 - The event attribute failed, must be a BasicEvent class.") ;
-        
-        }
-        
-        public function testEventWithString():void
-        {
-            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
-            p.event = "test" ;  
-            assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with a String value.") ;
-            assertTrue( p.event is BasicEvent , "02 - ActionEventDispatcher event attribute failed with a String value.") ; 
-            assertEquals( p.event.type , "test" , "03 - ActionEventDispatcher event attribute failed with a String value.") ;  
-        }
-        
-        public function testEventWithEvent():void
-        {
-            var e:Event                 = new Event("test") ;
-            var p:ActionEventDispatcher = new ActionEventDispatcher() ;
-            p.event                     = e ;
-            assertNotNull ( p.event , "01 - ActionEventDispatcher event attribute failed with an Event value.") ;
-            assertEquals( p.event , e , "02 - ActionEventDispatcher event attribute failed with an Event value.") ;  
-        }
-        
-        public function testEventWithNullValue():void
-        {
-            var p:ActionEventDispatcher = new ActionEventDispatcher("type") ;
-            p.event = null ;
-            assertNull( p.event , "01 - The event attribute failed, must be null with a null value.") ;
-            p.event = 2 ;
-            assertNull( p.event , "02 - The event attribute failed, must be null with a Number value.") ;
+            action = new ActionEventDispatcher() ;
+            assertTrue ( action is Task , "ActionEventDispatcher must extends the Task class.") ;
         }
         
         // methods
@@ -145,24 +89,19 @@ package system.process
         public function testClone():void
         {
             var clone:ActionEventDispatcher = action.clone() as  ActionEventDispatcher;
-            assertNotNull ( clone  , "01 - clone method failed, with a null shallow copy object." ) ;
-            assertNotSame ( clone  , ActionEventDispatcher  , "02 - clone method failed, the shallow copy isn't the same with the ActionEventDispatcher object." ) ;
+            assertNotNull ( clone  , "#01" ) ;
         }
         
         public function testRun():void
         {
+            action.dispatcher = new EventDispatcher() ;
+            action.event      = new Event("test") ;
+            
+            action.dispatcher.addEventListener( "test" , _testHandleEvent ) ;
+            
             action.run() ;
             
-            assertTrue   ( mockListener.isRunning     , "The MockSimpleActionListener.isRunning property failed, must be true." ) ;
-            assertFalse  ( action.running             , "The running property of the BatchProcess must be false after the process." ) ;
-            
-            assertTrue   ( mockListener.startCalled   , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.startType     , ActionEvent.START   , "run method failed, bad type found when the process is started." );
-            
-            assertTrue   ( mockListener.finishCalled  , "run method failed, the ActionEvent.FINISH event isn't notify" ) ;
-            assertEquals ( mockListener.finishType    , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
-            
-            assertTrue    ( _testHandleEventCalled , "The global event isn't dispatched in the global event flow with the FrontController") ;
+            assertTrue ( _testHandleEventCalled , "#01") ;
         }
         
         // private

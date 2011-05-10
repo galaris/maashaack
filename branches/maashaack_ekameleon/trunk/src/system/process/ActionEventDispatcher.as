@@ -35,9 +35,8 @@
 
 package system.process 
 {
-    import system.events.BasicEvent;
-    
     import flash.events.Event;
+    import flash.events.EventDispatcher;
     
     /**
      * A process who dispatch events in the global event flow or locally.
@@ -81,39 +80,31 @@ package system.process
     {
         /**
          * Creates a new ActionEventDispatcher instance.
+         * @param dispatcher The EventDispatcher reference.
          * @param event The event to dispatch.
+         * @param verbose Switch the verbose mode of the task.
          */
-        public function ActionEventDispatcher( event:* = null )
+        public function ActionEventDispatcher( dispatcher:EventDispatcher = null , event:* = null , verbose:Boolean = false )
         {
-            this.event = event ;
+            this.dispatcher = dispatcher ;
+            this.event      = event ;
+            this.verbose    = verbose ;
         }
+        
+        /**
+         * The EventDispatcher reference.
+         */
+        public var dispatcher:EventDispatcher ;
         
         /**
          * The event to dispatch in this process.
          */
-        public function get event():*
-        {
-            return _event ;
-        }
+        public var event:Event ;
         
         /**
-         * The event to dispatch in this process.
+         * Switch the verbose mode of the task.
          */
-        public function set event( e:* ):void
-        {
-            if ( e is String )
-            {
-                _event = new BasicEvent( e as String ) ;
-            }
-            else if ( e is Event )
-            {
-                _event = e as Event ;
-            }
-            else
-            {
-                _event = null ;
-            }
-        }
+        public var verbose:Boolean ;
         
         /**
          * Returns a shallow copy of this object.
@@ -121,7 +112,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new ActionEventDispatcher( event ) ;
+            return new ActionEventDispatcher( dispatcher , event ) ;
         }
         
         /**
@@ -130,16 +121,22 @@ package system.process
         public override function run( ...arguments:Array ):void 
         {
             notifyStarted() ;
-            if ( _event != null )
+            if ( dispatcher )
             {
-                dispatchEvent( _event ) ;
+                if ( event )
+                {
+                    dispatcher.dispatchEvent( event ) ;
+                }
+                else if ( verbose )
+                {
+                    logger.warn(this + " failed, the event reference not must be null.") ;
+                }
+            }
+            else if ( verbose )
+            {
+                logger.warn(this + " failed, the dispatcher reference not must be null.") ;
             }
             notifyFinished() ;
         }
-        
-        /**
-         * @private
-         */
-        private var _event:Event ;
     }
 }
