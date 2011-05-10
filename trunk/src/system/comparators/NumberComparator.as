@@ -35,8 +35,9 @@
 
 package system.comparators
 {
+    import core.reflect.getClassName;
+    
     import system.Comparator;
-    import system.Reflection;
     
     /**
      * This comparator compare two Number objects.
@@ -124,7 +125,7 @@ package system.comparators
             }
             else 
             {
-                throw new ArgumentError( Reflection.getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Number objects." ) ;
+                throw new ArgumentError( getClassName(this) + " compare(" + o1 + "," + o2 + ") failed, the two arguments must be Number objects." ) ;
             }
         }
     }
