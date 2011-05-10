@@ -35,12 +35,15 @@
 
 package system
 {
-    import flash.system.Capabilities;
-    
+    import core.strings.indexOfAny;
+    import core.strings.trimStart;
+
     import system.hosts.Host;
     import system.hosts.HostID;
     import system.hosts.OperatingSystem;
     import system.hosts.PlatformID;
+
+    import flash.system.Capabilities;
     
     /**
      * The internal Environment class.
@@ -109,7 +112,7 @@ package system
             MAC 7,0,25,0   // Flash Player 7 for Macintosh
             UNIX 5,0,55,0  // Flash Player 5 for UNIX
             */
-            var str:String = Strings.trimStart( Capabilities.version, "WINMACUNIX ".split( "" ) );
+            var str:String = trimStart( Capabilities.version, "WINMACUNIX ".split( "" ) );
                 str = str.split( "," ).join( "." );
             
             return Version.fromString( str );
@@ -121,23 +124,23 @@ package system
         private function _getPlatformID():PlatformID
         {
             var platform:String = Capabilities.os;
-            if( Strings.indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
+            if( indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
             {
                 return PlatformID.Windows;
             }
-            else if( Strings.indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
+            else if( indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
             {
                 return PlatformID.Macintosh;
             }
-            else if( Strings.indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
+            else if( indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
             {
                 return PlatformID.Unix;
             }
-            else if( Strings.indexOfAny( platform, ["arm"] ) > -1 )
+            else if( indexOfAny( platform, ["arm"] ) > -1 )
             {
                 return PlatformID.Arm;
             }
-            else if( Strings.indexOfAny( platform, ["web"] ) > -1 )
+            else if( indexOfAny( platform, ["web"] ) > -1 )
             {
                 return PlatformID.Web;
             }
