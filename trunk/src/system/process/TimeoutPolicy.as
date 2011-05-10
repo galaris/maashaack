@@ -35,7 +35,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.process 
 {
-    import system.Reflection;
+    import core.reflect.getClassPath;
+
     import system.Serializable;
     
     // FIXME extends the Enum class ?
@@ -70,7 +71,7 @@ package system.process
          */
         public function toSource( indent:int = 0 ):String 
         {
-            return "new " + Reflection.getClassPath(this) + "(" + _value + ")" ;
+            return "new " + getClassPath(this,true) + "(" + _value + ")" ;
         }
         
         /**
