@@ -69,12 +69,10 @@ package system.process
     {
         /**
          * Creates a new InitProcess instance.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function Initializer( global:Boolean = false , channel:String = null ) 
+        public function Initializer() 
         {
-            super( global, channel );
+            //
         }
         
         /**
@@ -83,7 +81,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new Initializer( _isGlobal , channel ) ;
+            return new Initializer() ;
         }
         
         /**
