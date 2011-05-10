@@ -36,14 +36,14 @@
 package system.data.collections 
 {
     import core.dump;
+    import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
-    import system.Reflection;
+    
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Typeable;
     import system.data.Validator;
-
+    
     /**
      * TypedCollection is a wrapper for Collection instances that ensures that only values of a specific type can be added to the wrapped collection.
      * <p><b>Example :</b></p>
@@ -258,7 +258,7 @@ package system.data.collections
         {
             if (!supports(value)) 
             {
-                throw new TypeError( Reflection.getClassName(this) + ".validate(" + value + ") is mismatch.") ;
+                throw new TypeError( getClassName(this) + ".validate(" + value + ") is mismatch.") ;
             }
         }
         
