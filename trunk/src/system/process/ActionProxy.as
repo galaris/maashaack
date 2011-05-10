@@ -82,12 +82,9 @@ package system.process
          * @param scope The scope of the proxy method invoked in this process.
          * @param method The method invoked in this process.
          * @param args The Arguments injected in the method.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function ActionProxy( scope:*, method:Function , args:Array=null , global:Boolean = false , channel:String = null )
+        public function ActionProxy( scope:*, method:Function , args:Array=null )
         {
-            super( global, channel );
             this.args   = args ;
             this.method = method ;
             this.scope  = scope ;
