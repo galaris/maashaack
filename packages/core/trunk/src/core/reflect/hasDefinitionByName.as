@@ -39,14 +39,9 @@ package core.reflect
     
     /**
     * Tests if a public definition exists in the <code>ApplicationDomain</code>.
-    * 
-    * <p>
-    * The definition can be a class, namespace, function or object.
-    * </p>
-    * 
+    * <p>The definition can be a class, namespace, function or object.</p>
     * @param name a string of the full qualified path of a definition
-    * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference,
-    * default is <code>ApplicationDomain.currentDomain</code>
+    * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>
     */
     public const hasDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Boolean
     {
@@ -54,7 +49,6 @@ package core.reflect
         {
             domain = ApplicationDomain.currentDomain;
         }
-        
         return domain.hasDefinition( name );
     };
 }

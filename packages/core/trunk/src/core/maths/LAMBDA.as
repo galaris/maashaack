@@ -38,11 +38,12 @@ package core.maths
    /**
     * This constant is the Euler-Mascheroni constant (lambda or C) :
     * <p>
-    * <code class="prettyprint">
+    * <pre>
     * ( n )
     * lim( sigma 1/k - ln(n) )
     * n->oo ( k=1 )
-    * </code>
+    * </pre>
+    * </p>
     */
     public const LAMBDA:Number = 0.57721566490143;
 }

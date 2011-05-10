@@ -39,9 +39,8 @@ package core.reflect
     
     /**
     * Returns the class reference from a string class name.
-    * <p>
-    * The string name notation can be either "flash.system::Capabilities"
-    * or "flash.system.Capabilities", but you have to provide the full
+    * <p>The string name notation can be either "flash.system::Capabilities" 
+    * or "flash.system.Capabilities", but you have to provide the full 
     * qualified path of the class, "Capabilities" alone will not work.
     * </p>
     * @param name a string of the full qualified path of a class

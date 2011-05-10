@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,10 +39,7 @@ package
     
     /**
      * The basic framework Library to be included in the SWC.
-     * <p>
-     * <b>Note:</b> This class is not a component, it's just a shim
-     * that allow to declare the SWC manifest and associate an icon file.
-     * </p>
+     * <p><b>Note:</b> This class is not a component, it's just a shim that allow to declare the SWC manifest and associate an icon file.</p>
      */
     [IconFile("core.png")]
     public class Library extends Sprite

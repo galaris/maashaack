@@ -43,12 +43,10 @@ package core.strings
      * you will not add 10 spacing chars to the original string,
      * but you will obtain <code>"     hello"</code>, exactly 10 chars after the padding.
      * </p>
-     * 
      * <p>
      * A positive <code>amount</code> value will pad the string on the left (right align),
      * and a negative <code>amount</code> value will pad the string on the right (left align),
      * </p>
-     * 
      * @example basic usage
      * <listing version="3.0">
      * <code class="prettyprint">

@@ -38,16 +38,11 @@ package core.reflect
     import flash.system.ApplicationDomain;
     
     /**
-    * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
-    * 
-    * <p>
-    * The definition can be a class, namespace, function or object.
-    * </p>
-    * 
-    * @param name a string of the full qualified path of a definition
-    * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference,
-    * default is <code>ApplicationDomain.currentDomain</code>
-    */
+     * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
+     * <p>The definition can be a class, namespace, function or object.</p>
+     * @param name a string of the full qualified path of a definition
+     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>
+     */
     public const getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
     {
         if( !domain )

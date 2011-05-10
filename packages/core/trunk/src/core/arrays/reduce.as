@@ -46,10 +46,9 @@ package core.arrays
      *     // ...
      * }
      * </pre>
-     * <p>The first time the function is called, the <code class="prettyprint">previousValue</code> and <code class="prettyprint">currentValue</code> can be one of two values. 
-     * If an <code class="prettyprint">initialValue</code> was provided in the call to reduce, then <code class="prettyprint">previousValue</code> will be equal to <code class="prettyprint">initialValue</code> and <code class="prettyprint">currentValue</code> will be equal to the first value in the array. 
-     * If no initialValue was provided, then <code class="prettyprint">previousValue</code> will be equal to the first value in the array and <code class="prettyprint">currentValue</code> will be equal to the second.</p>
-     * <p><b>Basic example : </b></p> 
+     * <p>The first time the function is called, the <code class="prettyprint">previousValue</code> and <code class="prettyprint">currentValue</code> can be one of two values.</p> 
+     * <p>If an <code class="prettyprint">initialValue</code> was provided in the call to reduce, then <code class="prettyprint">previousValue</code> will be equal to <code class="prettyprint">initialValue</code> and <code class="prettyprint">currentValue</code> will be equal to the first value in the array.</p> 
+     * <p>If no initialValue was provided, then <code class="prettyprint">previousValue</code> will be equal to the first value in the array and <code class="prettyprint">currentValue</code> will be equal to the second.</p>
      * <p><b>Example : </b></p>
      * <pre class="prettyprint">
      * import core.arrays.reduce ;

@@ -37,21 +37,22 @@ package core.strings
 {
     /**
      * A wild expression is constructed like a regular expression but is based on a globbing algorithm like the one you found for searching files on a hard-drive.
-     * <p><b>Syntax :</b>
-     *  <p>1. ? : match any unique char - exactly 1 char must be found</p>
-     *  <p>2. * : match any number of chars - at least 0 or more any chars can be found</p>
-     *  <p>3. ! : ignore next char</p>
-     * </p>
-     * <p><b>Rules :</b>
-     *  <p>1. "*" is equal to "**" to "***" to an infinity number of "*" chars</p>
-     *  <p>2. "*?" is concatened to "*" (more precisely "*?*")</p>
-     *  <p>3. "*" if for zero char to infinity chars</p>
-     *  <p>4. "!*" ignore the pattern and look for the char "*" in string</p>
-     *  <p>5. "!?" ignore the pattern and look for the char "?" in string</p>
-     *  </p>
-     *  <p><b>Tips and tricks :</b>
-     *  
-     *  <p><b>1. find all the words in a string</b>
+     * <p><b>Syntax :</b></p>
+     * <ul>
+     * <li>1. ? : match any unique char - exactly 1 char must be found</li>
+     * <li>2. * : match any number of chars - at least 0 or more any chars can be found</li>
+     * <li>3. ! : ignore next char</li>
+     * </ul>
+     * <p><b>Rules :</b></p>
+     * <ul>
+     * <li>1. "*" is equal to "**" to "***" to an infinity number of "*" chars</li>
+     * <li>2. "*?" is concatened to "*" (more precisely "*?*")</li>
+     * <li>3. "*" if for zero char to infinity chars</li>
+     * <li>4. "!*" ignore the pattern and look for the char "*" in string</li>
+     * <li>5. "!?" ignore the pattern and look for the char "?" in string</li>
+     * </ul>
+     *  <p><b>Tips and tricks :</b></p>
+     *  <p><b>1. find all the words in a string</b></p>
      *  <pre class="prettyprint"> 
      *  import core.strings.WildExp ;
      *  var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
@@ -59,8 +60,7 @@ package core.strings
      *  //result = [ "any", "phrases", "with", "words", "inside" ];
      *  }
      *  </pre>
-     *  </p>
-     *  <p><b>2. find comments in a string</b>
+     *  <p><b>2. find comments in a string</b></p>
      *  <pre class="prettyprint"> 
      *  import core.strings.WildExp ;
      *  var we:WildExp   = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
@@ -68,8 +68,7 @@ package core.strings
      *  //result = [ "toto = \"123\"; ", "hello world" ] ;
      *  }
      *  </pre>
-     *  </p>
-     *  <p><b>3. find the name, arguments and body of a function</b>
+     *  <p><b>3. find the name, arguments and body of a function</b></p>
      *  <pre class="prettyprint"> 
      *  import core.strings.WildExp ;
      *  var we:WildExp = new WildExp( "function *(*)*{*}", WildExp.IGNORECASE | WildExp.MULTIWORD );
@@ -77,7 +76,6 @@ package core.strings
      *  //result = [ "toto", " a, b, c ", "\r\n", "\treturn \"hello world\";\r\n\t" ];
      *  }
      *  </pre>
-     *  </p>
      */
     public class WildExp 
     {

@@ -37,14 +37,10 @@ package core
 {
     /**
      * Dumps a string representation of any object reference.
-     * <p>
-     * Works like the <code>eden.serialize()</code> function
-     * and supports the <code>toSource()</code> method.
-     * </p>
-     * 
+     * <p>Works like the <code>eden.serialize()</code> function and supports the <code>toSource()</code> method.</p>
      * @example basic usage
      * <listing version="3.0">
-     * <code class="prettyprint">
+     * <pre class="prettyprint">
      * var test0:Object = { a:1, b:2, c:null, d:undefined, e:[1,2,3], f:"hello world", g:new Date() };
      * 
      * trace( dump( test0 ) );
@@ -70,9 +66,8 @@ package core
      * //     g:new Date(2010,4,3,20,35,7,860)
      * // }
      * 
-     * </code>
+     * </pre>
      * </listing>
-     * 
      * @param o an object reference
      * @param prettyprint (optional) boolean option to output a pretty printed string
      * @param indent (optional) initial indentation
