@@ -35,9 +35,9 @@
 
 package system.data.bags
 {
+    import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
-    import system.Reflection;
+    
     import system.data.Bag;
     import system.data.Collection;
     import system.data.Iterator;
@@ -48,9 +48,9 @@ package system.data.bags
     import system.data.lists.ArrayList;
     import system.data.maps.MapUtils;
     import system.data.sets.ArraySet;
-
+    
     import flash.errors.IllegalOperationError;
-
+    
     /**
      * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
      * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
@@ -237,7 +237,7 @@ package system.data.bags
          */    
         public function get( key:* ):*
         {
-            throw new IllegalOperationError( Reflection.getClassName(this) + ", the get() method is unsupported.") ;
+            throw new IllegalOperationError( getClassName(this) + ", the get() method is unsupported.") ;
         }
         
         /**
@@ -255,7 +255,7 @@ package system.data.bags
          */    
         public function indexOf(o:*, fromIndex:uint=0):int
         {
-            throw new IllegalOperationError( Reflection.getClassName(this) + ", the indexOf() method is unsupported.") ;
+            throw new IllegalOperationError( getClassName(this) + ", the indexOf() method is unsupported.") ;
         }
         
         /**
@@ -495,7 +495,7 @@ package system.data.bags
             }
             else
             {
-               throw new ArgumentError( Reflection.getClassName(this) + ", set the internal Map failed. The Map must be non-null and empty.") ;
+               throw new ArgumentError( getClassName(this) + ", set the internal Map failed. The Map must be non-null and empty.") ;
             }
         }
         
@@ -506,7 +506,7 @@ package system.data.bags
         
         /**
          * @private
-         */        
+         */
         private var _modCount:uint ;
         
         /**
