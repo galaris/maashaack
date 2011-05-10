@@ -66,12 +66,9 @@ package system.process
     {
         /**
          * Creates a new Task instance.
-         * @param global the flag to use a global event flow or a local event flow.
-         * @param channel the name of the global event flow if the <code class="prettyprint">global</code> argument is <code class="prettyprint">true</code>.
          */
-        public function Task( global:Boolean = false , channel:String = null ) 
+        public function Task() 
         {
-            super( global , channel ) ;
             _phase  = TaskPhase.INACTIVE ;
             _logger = Log.getLogger( getClassPath(this, true) ) ;
         }
@@ -147,7 +144,7 @@ package system.process
          */
         public function clone():*
         {
-            return new Task( _isGlobal , channel ) ;
+            return new Task() ;
         }
         
         /**
