@@ -41,6 +41,7 @@ package core.strings
      * <p>note : </p>
      * if index is null, we directly append the value to the end of the string.
      * if index is zero, we directly insert it to the begining of the string.
+     * 
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.insert ;
@@ -59,9 +60,11 @@ package core.strings
      * result = insert("hello", 1, "a" );  // haello
      * trace(result) ;
      * </pre>
+     * 
      * @param source The String to transform.
      * @param index The position to insert the new characters.
      * @param value The expression to insert in the source.
+     * 
      * @return the string modified by the method.
      */
     public const insert:Function = function( source:String, index:int, value:String ):String
