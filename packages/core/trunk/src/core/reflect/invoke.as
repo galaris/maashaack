@@ -38,8 +38,9 @@ package core.reflect
     /**
     * Invokes dynamically a class constructor.
     * 
-    * @param c the class to invoke
-    * @param args (optional) the arguments to pass to the constructor (max 32)
+    * @param c the class to invoke.
+    * @param args (optional) the arguments to pass to the constructor (max 32).
+    * 
     * @return an instance of the class, or null if class can not construct.
     */
     public const invoke:Function = function( c:Class, args:Array = null ):*
