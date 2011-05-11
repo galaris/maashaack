@@ -38,11 +38,13 @@ package core.reflect
     import flash.utils.describeType;
     import flash.utils.getQualifiedClassName;
     
-    /**
+   /**
     * Returns an array of public methods defined in the class of an object.
     * 
-    * @param o an object reference
-    * @param inherited (optional) boolean option to include inherited methods
+    * @param o an object reference.
+    * @param inherited (optional) boolean option to include inherited methods.
+    * 
+    * @return An Array of all method names definies in the specific object.
     */
     public const getClassMethods:Function = function( o:*, inherited:Boolean = false ):Array
     {
