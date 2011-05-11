@@ -37,8 +37,6 @@ package core.objects
 {
     /**
      * Returns all the public members of an object, either by key or by value.
-     * @param o The target object to enumerate.
-     * @param byValue The optional flag indicates if the function return an Array of strings (keys) or of values (default false).
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.objects.getMembers ;
@@ -48,6 +46,8 @@ package core.objects
      * trace( dump( getMembers( o ) ) ) ; // [a,b]
      * trace( dump( getMembers( o , true ) ) ) ; // [5,6]
      * </pre>
+     * @param o The target object to enumerate.
+     * @param byValue The optional flag indicates if the function return an Array of strings (keys) or of values (default false).
      * @return Array containing all the string key names or values (if the byValue argument is true). The method returns null if no members are finding.
      */
     public const getMembers:Function = function( o:Object, byValue:Boolean = false ):Array 

@@ -37,9 +37,6 @@ package core.objects
 {
     /**
      * Merging enumerable properties from a specific Object to a target Object.
-     * @param target The target object to merge.
-     * @param source The source object reference.
-     * @param overwrite The optional flag to indicates if the merge function can override the already existing properties in the target reference (default true).
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.dump ;
@@ -50,6 +47,9 @@ package core.objects
      * 
      * trace( dump( merge( target , from ) ) ) ; // {a:1,b:2,c:3}
      * </pre>
+     * @param target The target object to merge.
+     * @param source The source object reference.
+     * @param overwrite The optional flag to indicates if the merge function can override the already existing properties in the target reference (default true).
      * @return The merged target reference.
      */
     public const merge:Function = function( target:Object , source:Object , overwrite:Boolean = true ):Object 
