@@ -38,11 +38,13 @@ package core.reflect
     import flash.utils.getQualifiedClassName;
     
     /**
-    * Returns the full path string representation of the specified instance.
-    * 
-    * @param o an object reference
-    * @param normalize (optional) boolean option to format the string with dots, default is false
-    */
+     * Returns the full path string representation of the specified instance.
+     * 
+     * @param o an object reference.
+     * @param normalize (optional) boolean option to format the string with dots, default is false.
+     * 
+     * @return The String class path representation. 
+     */
     public const getClassPath:Function = function( o:*, normalize:Boolean = false ):String
     {
         var fullpath:String = getQualifiedClassName( o );
