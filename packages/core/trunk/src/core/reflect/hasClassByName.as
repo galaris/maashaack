@@ -39,8 +39,10 @@ package core.reflect
     
     /**
      * Returns a boolean telling if the class exists from a string name.
-     * @param name a string of the full qualified path of a class
-     * @param domain (optional) the <code>ApplicationDomain</code> where to find the class reference,
+     * 
+     * @param name a string of the full qualified path of a class.
+     * @param domain (optional) the <code>ApplicationDomain</code> where to find the class reference,  default is <code>ApplicationDomain.currentDomain</code>.
+     * 
      * @return a boolean telling if the class exists from a string name.
      */
     public const hasClassByName:Function = function( name:String , domain:ApplicationDomain = null ):Boolean
