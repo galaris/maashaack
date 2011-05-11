@@ -37,12 +37,16 @@ package core.strings
 {
     /**
      * Converts a hyphenated string to a camelcased string.
-     * @param source The string to transform.
-     * @example
-     * <code class="prettyprint">
+     * 
+     * <p><b>Example :</b></p>
+     * 
+     * <pre class="prettyprint">
      * import core.strings.camelCase ;
      * trace( camelCase("hello-world" ) ) ; // helloWorld
-     * </code>
+     * </pre>
+     * 
+     * @param source The string to transform.
+     * 
      * @return The camelcased string.
      */
     public const camelCase:Function = function( source:String ):String 
