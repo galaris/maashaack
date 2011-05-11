@@ -39,8 +39,10 @@ package core.reflect
     
     /**
      * Returns the string class name of an object.
-     * @param o an object reference
-     * @param path (optional) boolean option to returns the full path, default is false
+     * 
+     * @param o an object reference.
+     * @param path (optional) boolean option to returns the full path, default is false.
+     * 
      * @return the string class name of an object.
      */
     public const getClassName:Function = function( o:*, path:Boolean = false ):String
