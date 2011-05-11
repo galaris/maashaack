@@ -70,7 +70,7 @@ package core.strings
      * 
      * var seinfeld:Array = [ "jerry", "george", "kramer", "helen" ];
      * var len:uint       = seinfeld.length ;
-     * for( var i:uint ; i<len ; i++ )
+     * for( var i:uint ; i&lt;len ; i++ )
      * {
      *     trace( pad( seinfeld[i] , 10 , "." ) ) ;
      * }
