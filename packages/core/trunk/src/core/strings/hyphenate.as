@@ -37,12 +37,17 @@ package core.strings
 {
     /**
      * Converts a camelcased string to a hyphenated string.
-     * @param source The string to transform.
+     * 
      * @example
+     * <listing version="3.0">
      * <code class="prettyprint">
      * import core.strings.hyphenate ;
      * trace( hyphenate( "helloWorld" ) ) ; //"hello-world"
      * </code>
+     * </listing>
+     * 
+     * @param source The string to transform.
+     * 
      * @return The hyphenated string.
      */
     public const hyphenate:Function = function( source:String ):String 
