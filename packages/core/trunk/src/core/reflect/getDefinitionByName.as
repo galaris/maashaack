@@ -40,8 +40,11 @@ package core.reflect
     /**
      * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
      * <p>The definition can be a class, namespace, function or object.</p>
-     * @param name a string of the full qualified path of a definition
-     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>
+     * 
+     * @param name a string of the full qualified path of a definition.
+     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>.
+     * 
+     * @return the definition defines by the specific name.
      */
     public const getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
     {
