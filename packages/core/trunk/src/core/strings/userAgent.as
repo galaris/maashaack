@@ -43,15 +43,18 @@ package core.strings
     /**
      * Returns a user-agent string.
      * 
-     * based on:
-     * http://www.mozilla.org/build/user-agent-strings.html
-     * http://www.mozilla.org/build/revised-user-agent-strings.html
-     * RFC 1945 - http://www.ietf.org/rfc/rfc1945.txt
-     * RFC 2068 - http://www.ietf.org/rfc/rfc2068.txt
-     * https://developer.mozilla.org/en/Gecko_user_agent_string_reference
-     * http://hacks.mozilla.org/2010/09/final-user-agent-string-for-firefox-4/
+     * <p>based on:</p>
+     * <ul>
+     * <li>http://www.mozilla.org/build/user-agent-strings.html</li>
+     * <li>http://www.mozilla.org/build/revised-user-agent-strings.html</li>
+     * <li>RFC 1945 - http://www.ietf.org/rfc/rfc1945.txt</li>
+     * <li>RFC 2068 - http://www.ietf.org/rfc/rfc2068.txt</li>
+     * <li>https://developer.mozilla.org/en/Gecko_user_agent_string_reference</li>
+     * <li>http://hacks.mozilla.org/2010/09/final-user-agent-string-for-firefox-4/</li>
+     * </ul>
      * 
-     * here some examples:
+     * <p>here some examples:</p>
+     * <pre>
      * - URLRequestDefaults (only if an AIR app and with compatible option set to true)
      *   "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/526.9+ (KHTML, like Gecko) AdobeAIR/1.5"
      *   "Mozilla/5.0 (Windows; U; en) AppleWebKit/526.9+ (KHTML, like Gecko) AdobeAIR/1.5"
@@ -63,19 +66,19 @@ package core.strings
      *   "Tamarin/1.0 cyclone (Macintosh; StandAlone; DEBUG) AdobeFlashPlayer/10.0.32.18"
      *   "Mozilla/5.0 (Macintosh; StandAlone; Mac OS 10.6.7; en; DEBUG) AdobeFlashPlayer/10.0.32.18"
      *   "Mozilla/5.0 (Macintosh; StandAlone; DEBUG) AdobeFlashPlayer/10.0.32.18"
+     * </pre>
+     * <p><b>note:</b></p>
+     * <p>By default we consider our "product" to be Tamarin, it will work for Flash Player, AIR and RedTamarin.</p>
+     * <p><b>ex:</b> "Tamarin/1.0 cyclone (Macintosh; ..."</p>
      * 
-     * note:
-     * By default we consider our "product" to be Tamarin, it will work for Flash Player, AIR and RedTamarin.
-     * ex: "Tamarin/1.0 cyclone (Macintosh; ..."
+     * <p>By default if you don't provide an apptoken, it will deduced automatically 
+     * (eg. "AdobeAIR/1.5" , "AdobeFlashPlayer/9.0.124.0", etc.)</p>
+     * <p><b>ex:</b> "... Mac OS 10.6.7; en) AdobeFlashPlayer/10.0.32.18"</p>
      * 
-     * By default if you don't provide an apptoken, it will deduced automatically
-     * (eg. "AdobeAIR/1.5" , "AdobeFlashPlayer/9.0.124.0", etc.)
-     * ex: "... Mac OS 10.6.7; en) AdobeFlashPlayer/10.0.32.18"
-     * 
-     * By default, self application description and application token accumulates
-     * ex: "... Mac OS 10.6.7; en) AdobeFlashPlayer/10.0.32.18 MyApp/2.0"
-     * if you use the `noself` option you can remove the self application description
-     * ex: "... Mac OS 10.6.7; en) MyApp/2.0"
+     * <p>By default, self application description and application token accumulates</p>
+     * <p><b>ex:</b> "... Mac OS 10.6.7; en) AdobeFlashPlayer/10.0.32.18 MyApp/2.0"</p>
+     * <p>if you use the `noself` option you can remove the self application description</p>
+     * <p><b>ex:</b> "... Mac OS 10.6.7; en) MyApp/2.0"</p>
      * 
      * @param apptoken (optional) a string to override the application token eg. "MyApp/2.0"
      * @param noself (optional) option to not include the self application description (requires apptoken to not be empty)

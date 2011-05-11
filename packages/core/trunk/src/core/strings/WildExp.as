@@ -51,36 +51,34 @@ package core.strings
      * <li>4. "!*" ignore the pattern and look for the char "*" in string</li>
      * <li>5. "!?" ignore the pattern and look for the char "?" in string</li>
      * </ul>
-     *  <p><b>Tips and tricks :</b></p>
-     *  <p><b>1. find all the words in a string</b></p>
-     *  <pre class="prettyprint"> 
-     *  import core.strings.WildExp ;
-     *  var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
-     *  var result:Array = we.test( "any phrases with words inside" );
-     *  //result = [ "any", "phrases", "with", "words", "inside" ];
-     *  }
-     *  </pre>
-     *  <p><b>2. find comments in a string</b></p>
-     *  <pre class="prettyprint"> 
-     *  import core.strings.WildExp ;
-     *  var we:WildExp   = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
-     *  var result:Array = we.test( "toto = \"123\"; /\*hello world*\/" );
-     *  //result = [ "toto = \"123\"; ", "hello world" ] ;
-     *  }
-     *  </pre>
-     *  <p><b>3. find the name, arguments and body of a function</b></p>
-     *  <pre class="prettyprint"> 
-     *  import core.strings.WildExp ;
-     *  var we:WildExp = new WildExp( "function *(*)*{*}", WildExp.IGNORECASE | WildExp.MULTIWORD );
-     *  result = we.test( "function toto( a, b, c )\r\n{\treturn \"hello world\";\r\n\t}" );
-     *  //result = [ "toto", " a, b, c ", "\r\n", "\treturn \"hello world\";\r\n\t" ];
-     *  }
-     *  </pre>
+     * <p><b>Tips and tricks :</b></p>
+     * <p><b>1. find all the words in a string</b></p>
+     * <pre class="prettyprint"> 
+     * import core.strings.WildExp ;
+     * var we:WildExp   = new WildExp( "*", WildExp.IGNORECASE | WildExp.MULTIWORD );
+     * var result:Array = we.test( "any phrases with words inside" );
+     * //result = [ "any", "phrases", "with", "words", "inside" ];
+     * </pre>
+     * <p><b>2. find comments in a string</b></p>
+     * <pre class="prettyprint"> 
+     * import core.strings.WildExp ;
+     * var we:WildExp   = new WildExp( "*\/!**!*!/\*", WildExp.IGNORECASE | WildExp.MULTIWORD );
+     * var result:Array = we.test( "toto = \"123\"; /\*hello world*\/" );
+     * //result = [ "toto = \"123\"; ", "hello world" ] ;
+     * </pre>
+     * <p><b>3. find the name, arguments and body of a function</b></p>
+     * <pre class="prettyprint"> 
+     * import core.strings.WildExp ;
+     * var we:WildExp = new WildExp( "function *(*)*{*}", WildExp.IGNORECASE | WildExp.MULTIWORD );
+     * result = we.test( "function toto( a, b, c )\r\n{\treturn \"hello world\";\r\n\t}" );
+     * //result = [ "toto", " a, b, c ", "\r\n", "\treturn \"hello world\";\r\n\t" ];
+     * </pre>
      */
     public class WildExp 
     {
         /**
          * Creates a new WildExp instance.
+         * 
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import core.strings.WildExp ;
@@ -95,6 +93,7 @@ package core.strings
          * trace( wild.test("bar.foo.bar") ) ; // false
          * trace( wild.test("FOO.bar") ) ; // false
          * </pre>
+         * 
          * @param pattern The pattern of the evaluator.
          * @param flag The option flag value.
          */

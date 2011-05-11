@@ -45,8 +45,10 @@ package core.strings
      * 
      * trace( startsWith( file , "hello" ) ) ; // true
      * </pre>
+     * 
      * @param source the string reference.
      * @param value the value to find in first in the source.
+     * 
      * @return true if the value is find in first.
      */
     public const startsWith:Function = function( source:String , value:String ):Boolean

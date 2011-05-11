@@ -36,11 +36,14 @@ package core.strings
 {
     /**
      * Removes all occurrences of a set of specified characters (or strings) from the beginning and end of this instance.
+     * 
      * <p><b>Example :</b></p>
+     * 
      * <pre class="prettyprint">
      * import core.strings.trim ;
      * trace( trim("\r\t   hello world   \t ") ); // hello world
      * </pre>
+     * 
      * @param source The string to trim.
      * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
      * @return The new trimed string.

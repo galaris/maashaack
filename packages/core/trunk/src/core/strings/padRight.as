@@ -37,15 +37,17 @@ package core.strings
     /**
      * Left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
      * <p><b>Example :</b></p>
-     * <p><b>Example :</b></p>
+     * 
      * <pre class="prettyprint">
      * import core.strings.padRight ;
      * trace( padRight("hello", 8) ) ; //  "hello   "
      * trace( padRight("hello", 8, ".") ); //  "hello..." 
      * </pre>
+     * 
      * @param source The source to transform.
      * @param amount The positive number of characters to pad.
      * @param char The Unicode character to pad (default is space).
+     * 
      * @return The left-aligns the characters in this string, padding on the right with a specified Unicode character, for a specified total length.
      */
     public const padRight:Function = function( source:String, amount:uint, char:String = " " ):String

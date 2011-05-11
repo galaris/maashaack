@@ -37,6 +37,7 @@ package core.strings
 {
     /**
      * Returns a new String value who contains the specified String characters repeated count times.
+     * 
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.repeat ;
@@ -44,6 +45,7 @@ package core.strings
      * trace( repeat( "hello" , 0 ) ) ; // hello
      * trace( repeat( "hello" , 3 ) ) ; // hellohellohello
      * </pre>
+     * 
      * @return a new String who contains the specified String characters repeated count times.
      */
     public const repeat:Function = function( source:String = "" , count:uint = 0 ):String
