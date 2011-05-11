@@ -2,19 +2,15 @@
 {
     /**
      * Determines wether the end of a string matches the specified value.
-     * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import core.strings.endsWith ;
-     * 
-     * var file:String = "hello.txt";
-     * 
-     * trace( endsWith( file , "txt" ) ) ; // true
-     * </pre>
      * @example basic usage
      * <listing version="3.0">
      * <code class="prettyprint">
+     * import core.strings.endsWith ;
+     * 
      * trace( endsWith( "hello world", "world" ) ); //true
      * trace( endsWith( "hello world", "hello" ) ); //false
+     * 
+     * trace( endsWith( "hello.txt" , "txt" ) ) ; // true
      * </code>
      * </listing>
      * @param source the string reference.
