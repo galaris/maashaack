@@ -45,15 +45,19 @@ package core.strings
      * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...} ):String</code></li>
      * <li><code>format( pattern:String, {name0:value0,name1:value1,name2:value2, ...}, ...args:Array ):String</code></li>
      * </ul>
-     * <p><b>Examples:</b></p>
-     * <pre>
+     * @example Basic example
+     * <listing version="3.0">
+     * <code class="prettyprint">
      * import core.strings.format ;
      * 
      * trace( format( "{0},{1},{2}" , "apples" , "oranges", "grapes" ) ) ; // apples,oranges,grapes
      * trace( format( "{0},{1},{2}" , ["apples" , "oranges", "grapes"] ) ) ; // apples,oranges,grapes
      * trace( format( "{path}{0}{name}{1}" , { name : "format" , path:"core.strings" } , "." , "()" ) ) ; // core.strings.format()
-     * </pre>
+     * </code>
+     * </listing>
+     * 
      * @see core.strings#fastformat
+     * 
      * @throws Error When a token is malformed.
      */
     public const format:Function = function( pattern:String, ...args:Array ):String
