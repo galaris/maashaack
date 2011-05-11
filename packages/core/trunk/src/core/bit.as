@@ -49,16 +49,16 @@ package core
      * 
      * <table class="innertable">
      * <tr><th><b>Hex</b></th><th><b>Dec</b></th><th><b>Binary</b></th></tr>
-     * <tr><td>0</td><td>&nbsp;0</td><td>0000</td></tr>
-     * <tr><td>1</td><td>&nbsp;1</td><td>0001</td></tr>
-     * <tr><td>2</td><td>&nbsp;2</td><td>0010</td></tr>
-     * <tr><td>3</td><td>&nbsp;3</td><td>0011</td></tr>
-     * <tr><td>4</td><td>&nbsp;4</td><td>0100</td></tr>
-     * <tr><td>5</td><td>&nbsp;5</td><td>0101</td></tr>
-     * <tr><td>6</td><td>&nbsp;6</td><td>0110</td></tr>
-     * <tr><td>7</td><td>&nbsp;7</td><td>0111</td></tr>
-     * <tr><td>8</td><td>&nbsp;8</td><td>1000</td></tr>
-     * <tr><td>9</td><td>&nbsp;9</td><td>1001</td></tr>
+     * <tr><td>0</td><td>&#xA0;0</td><td>0000</td></tr>
+     * <tr><td>1</td><td>&#xA0;1</td><td>0001</td></tr>
+     * <tr><td>2</td><td>&#xA0;2</td><td>0010</td></tr>
+     * <tr><td>3</td><td>&#xA0;3</td><td>0011</td></tr>
+     * <tr><td>4</td><td>&#xA0;4</td><td>0100</td></tr>
+     * <tr><td>5</td><td>&#xA0;5</td><td>0101</td></tr>
+     * <tr><td>6</td><td>&#xA0;6</td><td>0110</td></tr>
+     * <tr><td>7</td><td>&#xA0;7</td><td>0111</td></tr>
+     * <tr><td>8</td><td>&#xA0;8</td><td>1000</td></tr>
+     * <tr><td>9</td><td>&#xA0;9</td><td>1001</td></tr>
      * <tr><td>A</td><td>10</td><td>1010</td></tr>
      * <tr><td>B</td><td>11</td><td>1011</td></tr>
      * <tr><td>C</td><td>12</td><td>1100</td></tr>
