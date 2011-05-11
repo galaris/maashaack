@@ -36,39 +36,45 @@
 package core.strings
 {
     /**
-    * Compares two strings.
-    * <p>
-    * The default comparaison algorithm use an ascending alphabetic order
-    * with minuscule weighting less than majuscule.
-    * </p>
-    * <p>return :
-    * <ul>
-    * <li> 0 if the two strings are considered equals</li>
-    * <li>-1 if the first string is considered smaller (lower) than the second string</li>
-    * <li> 1 if the first string is considered bigger (higher) than the second string</li>
-    * </ul>
-    * </p>
-    * @example basic usage
-    * <listing version="3.0">
-    * <pre class="prettyprint">
-    * var s0:String = "HELLO";
-    * var s1:String = "hello";
-    * var s2:String = "welcome";
-    * var s3:String = "world";
-    * 
-    * trace( compare( s1, s2 ) ); //-1
-    * trace( compare( s2, s1 ) ); //1
-    * trace( compare( s1, s3 ) ); //1
-    * trace( compare( s1, s1 ) ); //0
-    * trace( compare( s1, s0 ) ); //0
-    * trace( compare( s1, s0, true ) ); //-1
-    * trace( compare( s0, s1, true ) ); //1
-    * </pre>
-    * </listing>
-    * @param str1 first string to compare with the second string
-    * @param str2 second string to compare with the first string
-    * @param strict (optional) take into account the string case, default to false
-    */
+     * Compares two strings.
+     * 
+     * <p>
+     * The default comparaison algorithm use an ascending alphabetic order
+     * with minuscule weighting less than majuscule.
+     * </p>
+     * 
+     * <p>return :
+     * <ul>
+     * <li> 0 if the two strings are considered equals</li>
+     * <li>-1 if the first string is considered smaller (lower) than the second string</li>
+     * <li> 1 if the first string is considered bigger (higher) than the second string</li>
+     * </ul>
+     * </p>
+     * 
+     * <p><b>basic usage</b></p>
+     * <listing version="3.0">
+     * <pre class="prettyprint">
+     * var s0:String = "HELLO";
+     * var s1:String = "hello";
+     * var s2:String = "welcome";
+     * var s3:String = "world";
+     * 
+     * trace( compare( s1, s2 ) ); //-1
+     * trace( compare( s2, s1 ) ); //1
+     * trace( compare( s1, s3 ) ); //1
+     * trace( compare( s1, s1 ) ); //0
+     * trace( compare( s1, s0 ) ); //0
+     * trace( compare( s1, s0, true ) ); //-1
+     * trace( compare( s0, s1, true ) ); //1
+     * </pre>
+     * </listing>
+     * 
+     * @param str1 first string to compare with the second string
+     * @param str2 second string to compare with the first string
+     * @param strict (optional) take into account the string case, default to false
+     * 
+     * @return An integer -1, 0 or 1.
+     */
     public const compare:Function = function( str1:String, str2:String, strict:Boolean = false ):int
     {
         if( !strict )
