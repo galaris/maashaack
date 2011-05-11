@@ -37,13 +37,17 @@ package core.strings
 {
     /**
      * Removes all extraneous whitespace from a string and trims it.
-     * @param source The string to clean.
-     * @return The cleaned string.
-     * @example
-     * <code class="prettyprint">
+     * 
+     * <p><b>Example :</b></p>
+     * 
+     * <pre class="prettyprint">
      * import core.strings.clean ;
      * trace( clean("   hello world \n\n" ) ) ; // hello world
-     * </code>
+     * </pre>
+     * 
+     * @param source The string to clean.
+     * 
+     * @return The cleaned string.
      */
     public const clean:Function = function( source:String ):String 
     {
