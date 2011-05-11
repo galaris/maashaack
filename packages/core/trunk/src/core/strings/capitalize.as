@@ -37,12 +37,16 @@ package core.strings
 {
     /**
      * Converts the first letter of each word in a string to uppercase.
-     * @param source The string to transform.
-     * @example
-     * <code class="prettyprint">
+     * 
+     * <p><b>Example :</b></p>
+     * 
+     * <pre class="prettyprint">
      * import core.strings.capitalize ;
      * trace( capitalize( "hello world" ) ) ; // Hello World
-     * </code>
+     * </pre>
+     * 
+     * @param source The string to transform.
+     * 
      * @return The capitalized string.
      */
     public const capitalize:Function = function( source:String ):String 
