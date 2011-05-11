@@ -57,7 +57,7 @@ package core.strings
      * </code>
      * </listing>
      * 
-     * @see core.strings.format
+     * @see core.strings#format
      */
     public const fastformat:Function = function( pattern:String , ...args:Array ):String
     {
