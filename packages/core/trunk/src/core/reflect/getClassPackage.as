@@ -39,7 +39,9 @@ package core.reflect
     
     /**
      * Returns the package string representation of the specified instance.
-     * @param o an object reference
+     * 
+     * @param o an object reference.
+     * 
      * @return the package string representation of the specified instance.
      */
     public const getClassPackage:Function = function( o:* ):String
