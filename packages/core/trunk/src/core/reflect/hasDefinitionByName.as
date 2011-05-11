@@ -38,11 +38,14 @@ package core.reflect
     import flash.system.ApplicationDomain;
     
     /**
-    * Tests if a public definition exists in the <code>ApplicationDomain</code>.
-    * <p>The definition can be a class, namespace, function or object.</p>
-    * @param name a string of the full qualified path of a definition
-    * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>
-    */
+     * Tests if a public definition exists in the <code>ApplicationDomain</code>.
+     * <p>The definition can be a class, namespace, function or object.</p>
+     * 
+     * @param name a string of the full qualified path of a definition.
+     * @param domain (optional) the <code>ApplicationDomain</code> where to find the reference, default is <code>ApplicationDomain.currentDomain</code>.
+     * 
+     * @return A boolean to indicates if the specific definition exist.
+     */
     public const hasDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Boolean
     {
         if( !domain )
