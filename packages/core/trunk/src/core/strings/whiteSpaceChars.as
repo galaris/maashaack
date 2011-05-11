@@ -39,13 +39,13 @@ package core.strings
      * Contains all white space chars.
      * <p><b>Note :</b></p>
      * <ul>
-     * <li>http://developer.mozilla.org/es4/proposals/string.html</li>
-     * <li>http://www.fileformat.info/info/unicode/category/Zs/list.htm</li>
-     * <li>http://www.fileformat.info/info/unicode/category/Zl/list.htm</li>
-     * <li>http://www.fileformat.info/info/unicode/category/Zp/list.htm</li>
-     * <li>http://www.fileformat.info/info/unicode/char/200b/index.htm</li>
-     * <li>http://www.fileformat.info/info/unicode/char/feff/index.htm</li>
-     * <li>http://www.fileformat.info/info/unicode/char/2060/index.htm</li>
+     * <li><a href="http://developer.mozilla.org/es4/proposals/string.html">http://developer.mozilla.org/es4/proposals/string.html</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/category/Zs/list.htm">http://www.fileformat.info/info/unicode/category/Zs/list.htm</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/category/Zl/list.htm">http://www.fileformat.info/info/unicode/category/Zl/list.htm</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/category/Zp/list.htm">http://www.fileformat.info/info/unicode/category/Zp/list.htm</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/char/200b/index.htm">http://www.fileformat.info/info/unicode/char/200b/index.htm</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/char/feff/index.htm">http://www.fileformat.info/info/unicode/char/feff/index.htm</a></li>
+     * <li><a href="http://www.fileformat.info/info/unicode/char/2060/index.htm">http://www.fileformat.info/info/unicode/char/2060/index.htm</a></li>
      * </ul>
      */
     public const whiteSpaceChars:Array = 
