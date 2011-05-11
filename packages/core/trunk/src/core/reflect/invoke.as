@@ -37,7 +37,15 @@ package core.reflect
 {
     /**
     * Invokes dynamically a class constructor.
+    * <p><b>Example :</b></p>
+    * <pre class="prettyprint">
+    * import core.dump ;
+    * import core.reflect.invoke ;
     * 
+    * var ar:Array = invoke( Array , [1,2,3]) as Array ;
+    * 
+    * trace( dump( ar ) ) ;
+    * </pre>
     * @param c the class to invoke.
     * @param args (optional) the arguments to pass to the constructor (max 32).
     * 
