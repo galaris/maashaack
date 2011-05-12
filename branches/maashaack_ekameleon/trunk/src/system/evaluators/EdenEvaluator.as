@@ -39,10 +39,14 @@ package system.evaluators
     
     /**
      * Evaluates an eden expression.
+     * <p><b>Example:</b></p>
      * <pre class="prettyprint">
-     * import system.evaluators.* ;
-     * var e:EdenEvaluator = new EdenEvaluator(false) ;
-     * var result:* = e.eval("new Date(2007,5,12,22,10,5)") ;
+     * import system.evaluators.EdenEvaluator ;
+     * 
+     * var evaluator:EdenEvaluator = new EdenEvaluator(false) ;
+     * 
+     * var result:Date = evaluator.eval("new Date(2007,5,12,22,10,5)") ;
+     * 
      * trace("evaluate new Date(2007,5,12,22,10,5) : " + result ) ; // evaluate new Date(2007,5,12,22,10,5) : Tue Jun 12 22:10:05 GMT+0200 2007
      * </pre>
      */
