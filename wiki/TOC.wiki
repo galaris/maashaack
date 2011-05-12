@@ -33,6 +33,7 @@
    * [ConditionalCompilation Conditional Compilation]
    * [ProjectStructure projects structure]
    * [Dist HOWTO Dist]
+   * [Doc HOWTO Document]
    * [Roadmap Roadmap]
  * [Documentation Documentation]
    * [OverView Overview]
