@@ -74,13 +74,13 @@ package system.serializers.eden
     if you uncomment those methods in doesExistInGlobalScope method
     you will see for ex:
     ------------------------------------------------------
-     * system.serializers.eden::ECMAScript/isDigitNumber("0")
-     * String/split("",4294967295)
-     * String$/_split()
-     * Array/get length()
-     * system.serializers.eden::GenericParser$/isDigit("0")
-     * Array/get length()
-     * global/parseInt()
+     - system.serializers.eden::ECMAScript/isDigitNumber("0")
+     - String/split("",4294967295)
+     - String$/_split()
+     - Array/get length()
+     - system.serializers.eden::GenericParser$/isDigit("0")
+     - Array/get length()
+     - global/parseInt()
     ------------------------------------------------------
        
     avoid to trace too much or you could crash the Flash Player
@@ -253,7 +253,7 @@ package system.serializers.eden
         }
         
         /**
-         * Dispatch a log message.
+         * Dispatch a log message. 
          * Add a config to either
          * <li> store logs (nonblock parsing)</li>
          * <li> display logs (nonblock parsing)</li>
@@ -398,7 +398,7 @@ package system.serializers.eden
          * "\R" - u000D - CR : Carriage Return
          * ???  - u2028 - LS : Line Separator
          * ???  - u2029 - PS : Paragraphe Separator
-         * </p>
+         * </pre>
          * @see ECMA-262 spec 7.3 (PDF p24/188)
          */
         public function isLineTerminator( c:String ):Boolean
