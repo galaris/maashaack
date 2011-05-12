@@ -274,13 +274,15 @@ package graphics.drawing
          * @param ish If true, horizontal mode is provided, if false, vertical.
          * @param sens The constraints sensibility.
          * @return A generic object who containing the attributes :
-         * </ul>
-         * <li><b>cPoints:Array</b> - Array of points which describes the flipped part of the sheet. Note that in case of the ptd point is aligned with its original position or if the height of the shape is very small (&gt;1) this array is set to null.</li>
-         * <li><b>pPoints:Array</b> - Array of points wich describes the fixed part of the sheet.</li>
-         * <li><b>matrix:Matrix</b> - Transformation matrix for the flipped part of the sheet.</li>
-         * <li><b>width:Number</b> - Sheet width.</li>
-         * <li><b>height:Number</b> - Sheet height.</li>
+         * <p>
          * <ul>
+         * <li><b>cPoints:Array</b> Array of points which describes the flipped part of the sheet. Note that in case of the ptd point is aligned with its original position or if the height of the shape is very small (&gt;1) this array is set to null.</li>
+         * <li><b>pPoints:Array</b> Array of points wich describes the fixed part of the sheet.</li>
+         * <li><b>matrix:Matrix</b> Transformation matrix for the flipped part of the sheet.</li>
+         * <li><b>width:Number</b> Sheet width.</li>
+         * <li><b>height:Number</b> Sheet height.</li>
+         * </ul>
+         * </p>
          */
         public static function compute( drag:Point, corner:Point, w:int, h:int, isHorizontal:Boolean, sens:int):Object
         {
