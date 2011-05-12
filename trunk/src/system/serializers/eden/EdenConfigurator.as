@@ -64,7 +64,7 @@ package system.serializers.eden
          * 
          * // allowFunctionCall = false
          * toto = undefined
-         * </code>
+         * </pre>
          */
         public function get allowFunctionCall():Boolean
         {
