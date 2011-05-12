@@ -83,7 +83,7 @@ package system
          * <p>Two ByteArray objects are considered equal if and only if all bytes they contain are equal and in the same order.</p>
          * @param first The first ByteArray to be compared.
          * @param second The second ByteArray to be compared.
-         * @return <code class=-"prettyprint">true</code> if the ByteArray object are equal, <code class=-"prettyprint">false</code> otherwise.  
+         * @return <code class="prettyprint">true</code> if the ByteArray object are equal, <code class="prettyprint">false</code> otherwise.  
          */
         public static function equals( first:ByteArray , second:ByteArray ):Boolean
         {
