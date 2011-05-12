@@ -35,6 +35,8 @@
 
 package system
 {
+    import core.reflect.getClassPath;
+    
     /**
      * This class determinates a basic implementation to creates enumeration objects.
      */
@@ -67,7 +69,7 @@ package system
          */
         public function toSource( indent:int = 0 ):String
         {
-            var classname:String = Reflection.getClassPath( this ); // NOTE : when eden use alias find a switch solution
+            var classname:String = getClassPath( this , true ); // NOTE : when eden use alias find a switch solution
             if( _name != "" )
             {
                 return classname + "." + _name ;
