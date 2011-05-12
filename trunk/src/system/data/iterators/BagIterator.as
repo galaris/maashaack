@@ -56,12 +56,12 @@ package system.data.iterators
         {
             if ( parent == null )
             {
-               throw new ArgumentError( this + " constructor failed, the passed-in Bag argument not must be 'null'.") ;   
+                throw new ArgumentError( this + " constructor failed, the passed-in Bag argument not must be 'null'.") ;
             }
             if ( support == null )
             {
-               throw new ArgumentError( this + " constructor failed, the passed-in Iterator argument not must be 'null'.") ;   
-            }              
+                throw new ArgumentError( this + " constructor failed, the passed-in Iterator argument not must be 'null'.") ;
+            }
             _parent           = parent;
             _support          = support ;
             _expectedModCount = _parent.modCount ;
