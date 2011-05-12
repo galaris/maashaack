@@ -84,7 +84,7 @@ package system.formatters
      * 
      * var names:Array = ["A","B","C","D"];
      * var scores:Array = [16,32,128,1024];
-     * for( var i:int=0; i<names.length; i++ )
+     * for( var i:int=0; i$lt;names.length; i++ )
      * {
      *     formatter.parameters = [ names[i], scores[i] ] ;
      *     trace( formatter.format( "{0} scored {1,5}" ) );
