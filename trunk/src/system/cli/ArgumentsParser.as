@@ -37,6 +37,7 @@ package system.cli
 {
     /**
      * Parse command line arguments.
+     * <p><b>Note :</b> we don't want to use events for Tamarin compatibility.</p>
      * <p><b>Example :</b></p>
      * <pre>
      * my.exe -h
@@ -44,7 +45,6 @@ package system.cli
      * my.exe -s -T:hello myfile.txt
      * my.exe myfile1.txt myfile2.txt
      * </pre>
-     * <p><b>Note :</b>we don't want to use events for Tamarin compatibility.</p>
      */
     public class ArgumentsParser
     {
@@ -68,7 +68,7 @@ package system.cli
          * @param switchSymbols The Array representation of all switch symbols.
          * @param caseSensitive Indicates if the case sensitive is enabled.
          * @param switchChars The Array of all switch characters.
-         */        
+         */
         public function ArgumentsParser( switchSymbols:Array,
                                          caseSensitive:Boolean = false,
                                          switchChars:Array = null )
