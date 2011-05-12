@@ -188,7 +188,7 @@ package graphics.geom
          * 
          * var q:Quaternion = new Quaternion();
          * 
-         * q.euler( 360 * DEG2RAD , 180 * DEG2RAD , 90 * DEG2RAD ) ;
+         * q.euler( 360 &#42; DEG2RAD , 180 &#42; DEG2RAD , 90 &#42; DEG2RAD ) ;
          * trace(q) ;
          * trace(q.getEulerAngles(true) ) ;
          * 
