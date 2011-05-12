@@ -110,16 +110,16 @@ package system.data.iterators
             {
                 throw new ConcurrencyError("LinkedListIterator check for comodification failed with a LinkedList." ) ;
             }
-        }        
-
+        }
+        
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
          * @return <code class="prettyprint">true</code> if the iteration has more elements.
-         */    
+         */
         public function hasNext():Boolean
         {
             return _nextIndex != _list.size() ;
-        }        
+        }
         
         /**
          * Checks to see if there is a previous element that can be iterated to.
@@ -138,26 +138,26 @@ package system.data.iterators
          * 
          * trace( it.hasPrevious() ) ;
          * </pre>
-         */        
+         */
         public function hasPrevious():Boolean
         {
             return this._nextIndex != 0 ;
-        }        
+        }
         
         /**
          * Illegal operation in this iterator, uses nextIndex() and previousIndex() method.
          * @throws IllegalOperationError if the user call this method, this method is unsupported.
-         */        
+         */
         public function key():*
         {
             throw new IllegalOperationError("LinkedListIterator.key() method is unsupported.") ;
             return null ;
-        }        
+        }
         
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
-         */        
+         */
         public function next():*
         {
             checkForComodification();
@@ -169,12 +169,12 @@ package system.data.iterators
             _next         = _next.next ;
             _nextIndex ++ ;
             return _lastReturned.element ;
-        }        
+        }
         
         /**
          * Returns the index of the element that would be returned by a subsequent call to next.
          * @return the index of the element that would be returned by a subsequent call to next.
-         */        
+         */
         public function nextIndex():uint
         {
             return _nextIndex ; 
@@ -183,7 +183,7 @@ package system.data.iterators
         /**
          * Returns the previous element in the collection.
          * @return the previous element in the collection.
-         */        
+         */
         public function previous():*
         {
             if (this._nextIndex == 0)
@@ -194,17 +194,17 @@ package system.data.iterators
             _nextIndex-- ;
             checkForComodification();
             return _lastReturned.element ;
-        }        
+        }
         
         /**
          * Returns the index of the element that would be returned by a subsequent call to previous.
          * @return the index of the element that would be returned by a subsequent call to previous.
-         */        
+         */
         public function previousIndex():int
         {
             return _nextIndex - 1 ;
         }
-                
+        
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
@@ -242,25 +242,24 @@ package system.data.iterators
         
         /**
          * Change the position of the internal pointer of the iterator (optional operation).
-         */        
+         */
         public function seek( position:* ):void
         {
-            
             _lastReturned     = this._list.getHeader() ;
             _expectedModCount = this._list.modCount ;
             
             var size:Number   = _list.size() ;
-        
+            
             if ( !( position is Number) )
             {
                 throw new ArgumentError(this + "LinkedListIterator.seek() method failed, the position parameter must be a Number value.") ;
             } 
-        
+            
             if ( position < 0 || position > size )
             {
                 throw new RangeError( "LinkedListIterator.seek() method failed, index:" + position + ", size:" + size + "." ) ;
             }
-                
+            
             if ( position < ( size >> 1 ) ) 
             {
                 _next = _list.getHeader().next ;
@@ -282,7 +281,7 @@ package system.data.iterators
         
         /**
          * Replaces the last element returned by next or previous with the specified element (optional operation).
-         */        
+         */
         public function set(o:*):void
         {
             if ( _lastReturned == _list.getHeader() )
@@ -291,20 +290,20 @@ package system.data.iterators
             }
             checkForComodification();
             _lastReturned.element = o ;
-        }        
+        }
         
         /**
          * The internal expected mod count value.
          * @private
          */
-        private var _expectedModCount:uint ;        
+        private var _expectedModCount:uint ;
         
         /**
          * The last list entry returned.
          * @private
          */
         private var _lastReturned:LinkedListEntry = null ;
-    
+        
         /**
          * The list reference of this iterator.
          * @private
@@ -321,7 +320,6 @@ package system.data.iterators
          * The next index in the iterator.
          * @private
          */
-        private var _nextIndex:Number ;        
-        
+        private var _nextIndex:Number ;
     }
 }
