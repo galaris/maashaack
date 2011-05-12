@@ -49,7 +49,7 @@ package system.comparators
      * {
      *     var result:Array = [] ;
      *     var size:uint = ar.length ;
-     *     for (var i:uint = 0 ; i<size ; i++)
+     *     for (var i:uint = 0 ; i&lt;size ; i++)
      *     {
      *         result[i] = ar[i].label ;
      *     }
