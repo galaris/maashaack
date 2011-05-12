@@ -44,7 +44,7 @@ package graphics.transitions
      * This controller centralize all easing method in the application.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import graphics.transitions.easings.* ;
+     * import graphics.transitions.easings.&#38; ;
      * import graphics.transitions.EasingController ;
      * import graphics.transitions.Tween ;
      * 
