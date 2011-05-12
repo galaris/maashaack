@@ -39,8 +39,8 @@ package system.data.iterators
     import system.data.bags.CoreMapBag;
     import system.errors.ConcurrencyError;
     
-    import flash.errors.IllegalOperationError;    
-
+    import flash.errors.IllegalOperationError;
+    
     /**
      * Converts an Bag to an iterator.
      */
@@ -81,7 +81,7 @@ package system.data.iterators
             {
                 throw new ConcurrencyError( message || DEFAULT_COMODIFICATION_MESSAGE ) ;
             }
-        }         
+        }
         
         /**
          * Returns <code class="prettyprint">true</code> if the iteration has more elements.
@@ -91,7 +91,7 @@ package system.data.iterators
         {
             return _support.hasNext() ;
         }
-
+        
         /**
          * Unsupported method in all BagIterator.
          * @throws IllegalOperationError <code class="prettyprint">key</code> method in unsupported.
@@ -100,7 +100,7 @@ package system.data.iterators
         {
             throw new IllegalOperationError( this + " 'key' method is unsupported.") ;
         }
-
+        
         /**
          * Returns the next element in the iteration.
          * @return the next element in the iteration.
@@ -112,7 +112,7 @@ package system.data.iterators
             _current = _support.next() ;
             return _current;
         }
-
+        
         /**
          * Removes from the underlying collection the last element returned by the iterator (optional operation).
          */
@@ -133,7 +133,7 @@ package system.data.iterators
         {
             throw new IllegalOperationError(this + " 'reset' method is unsupported.") ;
         }
-
+        
         /**
          * Unsupported method in all BagIterator.
          * @throws IllegalOperationError <code class="prettyprint">seek</code> method in unsupported.
@@ -142,7 +142,7 @@ package system.data.iterators
         {
             throw new IllegalOperationError(this + " 'seek' method is unsupported.") ;
         }
-                
+        
         /**
          * @private
          */
@@ -161,7 +161,6 @@ package system.data.iterators
         /**
          * @private
          */
-        private var _support:Iterator ;        
-
+        private var _support:Iterator ;
     }
 }
