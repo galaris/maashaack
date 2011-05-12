@@ -43,6 +43,7 @@ package system.logging.targets
     /**
      * Provides a logger target that uses a TextField to output log messages.
      * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
      * package examples
      * {
      *     import system.logging.Log;
@@ -78,7 +79,7 @@ package system.logging.targets
      *             
      *             var target:TextFieldTarget = new TextFieldTarget(field) ;
      *             
-     *             target.filters        = [ "examples.*" ] ;
+     *             target.filters        = [ "examples.&#42;" ] ;
      *             target.level          = LoggerLevel.ALL ;
      *             
      *             target.includeDate    = true ;
