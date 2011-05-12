@@ -46,8 +46,12 @@ package system.data.iterators
      * import system.data.Iterator ;
      * import system.data.iterators.ObjectIterator ;
      *  
+     * var next:&#42; ;
+     * var index:&#42; ;
+     * var key:&#42; ;
+     * 
      * var o:Object = {} ;
-     * for (var i:Number = 0 ; i<5; i++)
+     * for (var i:Number = 0 ; i&gt;5; i++)
      * {
      *      o["prop"+i] = "item"+i ;
      * }
@@ -57,10 +61,10 @@ package system.data.iterators
      * 
      * while (it.hasNext())
      * {
-     *     var next = it.next() ;
-     *     var index = ObjectIterator(it).index() ;
-     *     var key = it.key() ;
-     *     trace ("it >> " + index + " :: " + key + " : " + next) ;
+     *     next  = it.next() ;
+     *     index = ObjectIterator(it).index() ;
+     *     key   = it.key() ;
+     *     trace ( index + " :: " + key + " : " + next ) ;
      * }
      * 
      * trace ("-- it seek 1") ;
@@ -79,10 +83,10 @@ package system.data.iterators
      * 
      * while (it.hasNext())
      * {
-     *     var next:*  = it.next() ;
-     *     var index:* = ObjectIterator(it).index() ;
-     *     var key:*   = it.key() ;
-     *     trace ("it >> " + index + " :: " + key + " : " + next) ;
+     *     next  = it.next() ;
+     *     index = ObjectIterator(it).index() ;
+     *     key   = it.key() ;
+     *     trace ( index + " :: " + key + " : " + next) ;
      * }
      * </pre>
      */
@@ -96,7 +100,7 @@ package system.data.iterators
         {
             if ( o == null )
             {
-               throw new ArgumentError( this + " constructor failed, the passed-in Object argument not must be 'null'.") ;   
+               throw new ArgumentError( this + " constructor failed, the passed-in Object argument not must be 'null'.") ;
             }
             _o = o ;
             _a = new Array() ;
@@ -121,7 +125,7 @@ package system.data.iterators
         {
             return _k < ( _len - 1 ) ;
         }
-
+        
         /**
          * Returns the current index of the internal pointer of the iterator (optional operation).
          * @return the current index of the internal pointer of the iterator (optional operation).
@@ -130,7 +134,7 @@ package system.data.iterators
         {
             return _k ;
         }
-
+        
         /**
          * Returns the current key value of the internal pointer of the iterator (optional operation).
          * @return the current key value of the internal pointer of the iterator (optional operation).
