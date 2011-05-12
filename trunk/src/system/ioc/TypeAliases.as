@@ -120,7 +120,7 @@ package system.ioc
         
         /**
          * Indicates if the collector contains the passed-in alias expression.
-         * @return <code class="prettyprint">true</core> if the collector contains the passed-in alias expression.
+         * @return <code class="prettyprint">true</code> if the collector contains the passed-in alias expression.
          */
         public function containsAlias( alias:String ):Boolean
         {
@@ -133,7 +133,7 @@ package system.ioc
         
         /**
          * Indicates if the collector contains the passed-in type value expression.
-         * @return <code class="prettyprint">true</core> if the collector contains the passed-in type value expression.
+         * @return <code class="prettyprint">true</code> if the collector contains the passed-in type value expression.
          */
         public function containsValue( value:String ):Boolean
         {
@@ -260,7 +260,7 @@ package system.ioc
          * </pre>
          * @param alias The alias name, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
          * @param value The value of the alias type, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
-         * @return <code class="prettyprint">true</core> if the alias can be registered.
+         * @return <code class="prettyprint">true</code> if the alias can be registered.
          */
         public function put( alias:String, value:String ):Boolean
         {
