@@ -42,7 +42,7 @@ package system.network
      * <li><a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a></li>
      * <li><a href="http://esw.w3.org/topic/UriSchemes/">http://esw.w3.org/topic/UriSchemes/</a></li>
      * <ul>
-     * <p><b>generic syntax :/<b></p>
+     * <p><b>generic syntax :</b></p>
      * <pre>
      * &lt;scheme&gt;://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
      * </pre>
