@@ -48,8 +48,8 @@ package graphics.drawing
      * <pre>
      *  TOP_LEFT(0,0)                        TOP_RIGHT(1,0)
      *  ---------------------------------------------------
-     *  |  <-------------------PW---------------------->  |
-     *  | ^ Offset(0,0)  x-->                             |
+     *  |  $lt;-------------------PW----------------------&gt;  |
+     *  | ^ Offset(0,0)  x--&gt;                             |
      *  | |                                               |
      *  | | y                                             |
      *  | | |                                             |
@@ -139,7 +139,7 @@ package graphics.drawing
         
         /**
          * Indicates the direction value of this object. The values of this property are Direction.HORIZONTAL("horizontal") or Direction.VERTICAL("vertical").
-         * @see graphics.drawing.Direction
+         * @see graphics.drawing#Direction
          */
         public function get direction():String
         {
