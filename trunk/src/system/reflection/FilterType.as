@@ -39,7 +39,7 @@ package system.reflection
     
     /**
      * The filter type enumeration class.
-     * <p><b>Description :</p>
+     * <p><b>Description :</b></p>
      * <pre class="prettyprint">
      * 0x000000
      *      |||_  0: both, 1: only prototype, 2: only trait
