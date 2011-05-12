@@ -183,7 +183,7 @@ package graphics.geom
         
         /**
          * Defines a <code class="prettyprint">Matrix4</code> cell.
-         * <code class="prettyprint">
+         * <pre class="prettyprint">
          * 0 0 0 0
          * 0 0 0 1
          * 0 0 0 0
