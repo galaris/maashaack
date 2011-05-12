@@ -308,7 +308,7 @@ package system
         public static const semiColon:Char = new Char( ";" );
         
         /**
-         * The lessThan "<" unicode character.
+         * The lessThan "&lt;" unicode character.
          */
         public static const lessThan:Char = new Char( "<" );
         
@@ -318,7 +318,7 @@ package system
         public static const equals:Char = new Char( "=" );
         
         /**
-         * The greaterThen ">" unicode character.
+         * The greaterThen "&gt;" unicode character.
          */
         public static const greaterThen:Char = new Char( ">" );
         
@@ -464,7 +464,7 @@ package system
         
         /**
          * Determinates the value of the character.
-         */        
+         */
         public function get value():String
         {
             return _c;
@@ -477,7 +477,6 @@ package system
         {
             _c = str.charAt( 0 );
         }
-                
         
         /**
          * Returns the Char representation of the specified Number value.
@@ -553,7 +552,7 @@ package system
         
         /**
          * Indicates if the specified character is a symbol.
-         */        
+         */
         public static function isSymbol( c:String, index:uint = 0 ):Boolean
         {
             _ch.value = c.charAt( index );
@@ -586,7 +585,6 @@ package system
             _ch.value = c.charAt( index );
             return _ch.isWhiteSpace();
         }
-
         
         /**
          * Indicates if the character is an ASCII character.
@@ -605,9 +603,9 @@ package system
         }
         
         /**
-        * Indicates if the character is contained in a serie of chars (or charset)
-        * @param charset a list of characters
-        */
+         * Indicates if the character is contained in a serie of chars (or charset)
+         * @param charset a list of characters
+         */
         public function isContained( charset:String ):Boolean
         {
             if( (charset == null) || (charset.length == 0) )
