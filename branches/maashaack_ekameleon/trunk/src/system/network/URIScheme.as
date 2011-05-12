@@ -81,7 +81,7 @@ package system.network
          * HTTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * http://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/<path>[?<query>][#<fragment>]
+         * http://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -94,7 +94,7 @@ package system.network
          * HTTP connections secured using SSL/TLS
          * <p><b>Syntax:</b></p>
          * <pre>
-         * https://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#<fragment>]
+         * https://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
          * </pre>
          */
         public static const HTTPS:URIScheme = new URIScheme( "https", "://" , 443 );
@@ -103,7 +103,7 @@ package system.network
          * FTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * ftp://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/&lt;path&gt;
+         * ftp://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
