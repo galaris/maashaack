@@ -39,11 +39,11 @@ package system
      * A basic Version class which is composed by four fields: major, minor, build and revision.
      * <p>implementation note:</p>
      * <p>internaly we stock the value of a version (the total of each fields) 
-     * as a uint which max value is 4294967295 (0xFFFFFFFF) this is done to be able to use operators 
+     * as a uint which max value is 4294967295 (0xFFFFFFFF) this is done to be able to use operators.</p>
      * <pre class="prettyprint">
      * var v1:Version = new Version( 1, 0 );
      * var v2:Version = new Version( 2, 0 );
-     * trace( v1 < v2 ); //true
+     * trace( v1 &lt; v2 ); //true
      * </pre>
      * by default operators in ECMAScript will use the valueOf of the class and this is neat because 
      * we can use operators without the need to really implement them.
