@@ -35,9 +35,8 @@
 
 package system.formatters 
 {
-    import system.Strings;
-    import system.formatters.Formattable;
-    
+    import core.strings.format;
+
     import flash.utils.Dictionary;
     
     /**
@@ -190,7 +189,7 @@ package system.formatters
          */
         private function _reset():void
         {
-            _reg = new RegExp( Strings.format( _pattern , beginSeparator , endSeparator ), "g" ) ;
+            _reg = new RegExp( core.strings.format( _pattern , beginSeparator , endSeparator ), "g" ) ;
         }
     }
 }
