@@ -37,14 +37,14 @@ package system.network
 {
     /**
      * The URIScheme class.
-     * <p><b>see:</b></p>
-     * <p>
+     * <p><b>See:</b></p>
+     * <ul>
      * <li><a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a></li>
      * <li><a href="http://esw.w3.org/topic/UriSchemes/">http://esw.w3.org/topic/UriSchemes/</a></li>
-     * <p>
+     * <ul>
      * <p><b>generic syntax :/<b></p>
      * <pre>
-     * <scheme>://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
+     * &lt;scheme&gt;://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
      * </pre>
      */
     public class URIScheme
@@ -81,7 +81,7 @@ package system.network
          * HTTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * http://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * http://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/<path>[?<query>][#<fragment>]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -94,7 +94,7 @@ package system.network
          * HTTP connections secured using SSL/TLS
          * <p><b>Syntax:</b></p>
          * <pre>
-         * https://[<username>[:<password>]&64;]<host>[:<port>]/<path>[?<query][#<fragment>]
+         * https://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#<fragment>]
          * </pre>
          */
         public static const HTTPS:URIScheme = new URIScheme( "https", "://" , 443 );
@@ -103,7 +103,7 @@ package system.network
          * FTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * ftp://[<username>[:<password>]&64;]<host>[:<port>]/<path>
+         * ftp://[&lt;username&gt;[:&lt;password&gt;]&64;]<host>[:&lt;port&gt;]/&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -116,7 +116,7 @@ package system.network
          * Addressing files on local or network file systems
          * <p><b>Syntax:</b></p>
          * <pre>
-         * file://[<host>]/<path>
+         * file://[&lt;host&gt;]/&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -133,7 +133,7 @@ package system.network
          * Mail to
          * <p><b>Syntax:</b></p>
          * <pre>
-         * mailto:<address>[?<header1>=<value1>[&<header2>=<value2>]]
+         * mailto:&lt;address&gt;[?&lt;header1&gt;=&lt;value1&gt;[&#38;&lt;header2&gt;=&lt;value2&gt;]]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -147,8 +147,8 @@ package system.network
          * Newsgroups and postings
          * <p><b>Syntax:</b></p>
          * <pre>
-         * news:<newsgroupname>
-         * news:<message-id>
+         * news:&lt;newsgroupname&gt;
+         * news:&lt;message-id&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -161,7 +161,7 @@ package system.network
          * Usenet NNTP (Network News Transfer Protocol)
          * <p><b>Syntax:</b></p>
          * <pre>
-         * nntp://<host>:<port>/<newsgroup-name>/<article-number>
+         * nntp://&lt;host&gt;:&lt;port&gt;/&lt;newsgroup-name&gt;/&lt;article-number&gt;
          * </pre>
          */
         public static const NNTP:URIScheme = new URIScheme( "nntp", "://", 119 );
@@ -170,7 +170,7 @@ package system.network
          * Gopher protocol
          * <p><b>Syntax:</b></p>
          * <pre>
-         * gopher://<host>:<port>/<item type>/<path>
+         * gopher://&lt;host&gt;:&lt;port&gt;/&lt;item type&gt;/&lt;path&gt;
          * </pre>
          */
         public static const GOPHER:URIScheme = new URIScheme( "gopher", "://", 70 );
@@ -192,7 +192,7 @@ package system.network
          * AIR Storage protocol
          * <p><b>Syntax:</b></p>
          * <pre>
-         * app-storage:<path>
+         * app-storage:&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
