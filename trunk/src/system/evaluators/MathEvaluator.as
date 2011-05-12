@@ -49,7 +49,7 @@ package system.evaluators
      * </pre>
      * <p>operators : </p>
      * <pre class="prettyprint">
-     * % / &#8727; + - << >> >>> & ^ | ~
+     * % / &#8727; + - &lt;&lt; &gt;&gt &gt&gt&gt & ^ | ~
      * </pre>
      * <p>functions :</p>
      * <pre class="prettyprint">
@@ -79,7 +79,7 @@ package system.evaluators
      * <pre class="prettyprint">
      * (12) &#8727; / %
      * </pre>
-     * <p><b>multiplication, division, modulo division</p></b>
+     * <p><b>multiplication, division, modulo division</b></p>
      * <p>ex: 5 &#8727; 3 + 1 translate to (5 &#8727; 3) + 1</p>
      * <p>ex: 2 % 8 - 4 translate to (2 % 8) - 4</p>
      * <pre class="prettyprint">
@@ -87,7 +87,7 @@ package system.evaluators
      * </pre>
      * <p><b>addition, subtraction</b></p>
      * <pre class="prettyprint">
-     * (10) << >> <<<
+     * (10) &lt;&lt; &gt;&gt; &lt;&lt;&lt;
      * </pre>
      * <p><b>bit shifting</b></p>
      * <pre class="prettyprint">
@@ -106,7 +106,7 @@ package system.evaluators
      * <p>When instanciating the MathEvaluator you can pass a context containing either variables or functions</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * var me:MathEvaluator = new MathEvaluator( {x:100, test:function(a:Number):Number {return a*a;} );
+     * var me:MathEvaluator = new MathEvaluator( { x:100, test:function(a:Number):Number {return a*a;} );
      * trace( me.eval( "test(100) + 1" ) ); // return 10001
      * </pre>
      * <p>but there are some limitations</p>
@@ -1008,4 +1008,3 @@ package system.evaluators
         }
     }
 }
-
