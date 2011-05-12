@@ -36,20 +36,21 @@
 package system.numeric
 {
     import core.maths.clamp;
-
+    
     import system.Equatable;
     import system.Serializable;
-
+    
     /**
      * Represents an immutable range of values.
+     * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import system.numeric.Range ;
      * 
      * var r1:Range = new Range(10, 120) ;
      * var r2:Range = new Range(100, 150) ;
      * 
-     * trace ("r1 : " + r1) ; // r1 : [Range<10,120>]
-     * trace ("r2 : " + r2) ; // r2 : [Range<100,150>]
+     * trace ("r1 : " + r1) ; // r1 : [Range$lt;10,120$gt;]
+     * trace ("r2 : " + r2) ; // r2 : [Range$lt;100,150$gt;]
      * 
      * trace ("r2.toSource()     : " + r2.toSource()      ) ; // r2.toSource() : new system.numeric.Range(100,150)
      * trace ("r1 contains 50    : " + r1.contains(50)    ) ; // r1 contains 50 : true
