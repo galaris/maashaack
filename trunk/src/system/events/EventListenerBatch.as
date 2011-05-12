@@ -203,7 +203,7 @@ package system.events
         
         /**
          * Returns an array containing all of the elements in this collection.
-         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
+         * <p><b>Note:</b> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
          * @return an array containing all of the elements in this collection.
          */
         public function toArray():Array
