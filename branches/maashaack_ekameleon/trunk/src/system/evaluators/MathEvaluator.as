@@ -34,8 +34,13 @@
  */
 package system.evaluators
 {
+    import core.chars.isAlpha;
+    import core.chars.isDigit;
+    import core.chars.isHexDigit;
+    import core.chars.isOctalDigit;
+    import core.chars.isOperator;
     import core.strings.endsWith;
-
+    
     /**
      * Evaluates mathematical string expressions.
      * <p><b>The MathEvaluator implementation</b>, support all of the following :</p>
@@ -49,7 +54,7 @@ package system.evaluators
      * </pre>
      * <p>operators : </p>
      * <pre class="prettyprint">
-     * % / &#8727; + - &lt;&lt; &gt;&gt &gt&gt&gt & ^ | ~
+     * % / &#8727; + - &lt;&lt; &gt;&gt; &gt;&gt;&gt; &#38; ^ | ~
      * </pre>
      * <p>functions :</p>
      * <pre class="prettyprint">
@@ -91,7 +96,7 @@ package system.evaluators
      * </pre>
      * <p><b>bit shifting</b></p>
      * <pre class="prettyprint">
-     * (7)  &
+     * (7)  &#38;
      * </pre>
      * <p><b>bitwise AND</b></p>
      * <pre class="prettyprint">
@@ -122,7 +127,7 @@ package system.evaluators
      * </pre>
      * <li>your function can only have one argument<\li>
      * <li>your function name can not override default math functions as cos, sin, etc.<\li>
-     * <p>we do not support logical ( || && !) or assignement operators (= == += etc.)</p>
+     * <p>we do not support logical ( || &#38;&#38; !) or assignement operators (= == += etc.)</p>
      * <p><b>reasons:</b></p>
      * <p>logical operators deal with boolean, here we want to deal only with numbers and math expression we do not support variables nor variable assignation</p>
      * <p>Parenthesis are used to alter the order of evaluation determined by operator precedence.</p>
@@ -153,12 +158,12 @@ package system.evaluators
          */
         public function MathEvaluator(context:Object = null)
         {
-            if( context != null )
+            if ( context != null )
             {
                 _context = context;
             }
         }
-        
+
         /**
          * Evaluates the specified object.
          */
@@ -166,37 +171,31 @@ package system.evaluators
         {
             return parse(o);
         }
-        
         /**
          * @private
          */
         private namespace mathparser;
-        
         /**
          * @private
          */
         private var _context:Object = {};
-        
         /**
          * The max hexadecimal value.
          */
         mathparser const maxHexValue:Number = 0xFFFFFF;
-        
         /**
          * The expression value.
          */
         mathparser var expression:String;
-        
         /**
          * The current position.
          */
         mathparser var currentPos:uint;
-        
         /**
          * The Array representation of the tokens of this evaluator.
          */
         mathparser var tokens:Array;
-        
+
         /**
          * Adds the specified value to the last token.
          */
@@ -204,7 +203,7 @@ package system.evaluators
         {
             tokens[ tokens.length - 1 ] += value;
         }
-        
+
         /**
          * Adds the specified value to the next token.
          */
@@ -214,83 +213,26 @@ package system.evaluators
         }
         
         /**
-         * Indicates if the passed-in value is a alpha character.
-         */
-        mathparser function isAlpha(c:String):Boolean
-        {
-            return (("A" <= c) && (c <= "Z")) || (("a" <= c) && (c <= "z"));
-        }
-        
-        /**
-         * Indicates if the passed-in string value is a digit.
-         */
-        mathparser function isDigit(c:String):Boolean
-        {
-            return ("0" <= c) && (c <= "9");
-        }
-        
-        /**
-         * Indicates if the passed-in string value is a hexadecimal digit.
-         */
-        mathparser function isHexDigit(c:String):Boolean
-        {
-            return isDigit(c) || (("A" <= c) && (c <= "F")) || (("a" <= c) && (c <= "f"));
-        }
-        
-        /**
-         * Indicates if the passed-in string value is a octal digit.
-         */
-        mathparser function isOctalDigit(c:String):Boolean
-        {
-            return ("0" <= c) && (c <= "7");
-        }
-        
-        /**
-         * Indicates if the passed-in string value is a operator digit.
-         */
-        mathparser function isOperator(c:String):Boolean
-        {
-            switch( c )
-            {
-                case "*":
-                case "/":
-                case "%":
-                case "+":
-                case "-":
-                case "«":
-                case "»":
-                case "›":
-                case "&":
-                case "^":
-                case "|":
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        /**
          * Indicates if has more char.
          */
         mathparser function hasMoreChar():Boolean
         {
             return currentPos < expression.length;
         }
-
+        
         /**
          * Returns the char with the specified position.
          * @return the char with the specified position.
          */
         mathparser function getChar(pos:int = - 1):String
         {
-            if( pos < 0 )
+            if ( pos < 0 )
             {
                 pos = currentPos;
             }
-
             return expression.charAt(pos);
         }
-
+        
         /**
          * Returns the next char.
          * @return the next char.
@@ -321,13 +263,13 @@ package system.evaluators
             var isBitNot:Boolean = false;
             var isNeg:String = "";
             
-            if( num.charAt(0) == "~" )
+            if ( num.charAt(0) == "~" )
             {
                 num = num.substr(1);
                 isBitNot = true;
             }
             
-            if( num.charAt(0) == "-" )
+            if ( num.charAt(0) == "-" )
             {
                 num = num.substr(1);
                 isNeg = "-";
@@ -336,11 +278,11 @@ package system.evaluators
             ch0 = num.charAt(0);
             ch1 = num.charAt(1);
             
-            if( (ch0 == "0") && num.length > 1 )
+            if ( (ch0 == "0") && num.length > 1 )
             {
-                if( isOctalDigit(ch1) && (num.indexOf(".") == - 1) && (num.indexOf("e") == - 1) )
+                if ( isOctalDigit(ch1) && (num.indexOf(".") == - 1) && (num.indexOf("e") == - 1) )
                 {
-                    if( isBitNot )
+                    if ( isBitNot )
                     {
                         return ~ parseInt(isNeg + num);
                     }
@@ -351,7 +293,7 @@ package system.evaluators
                 }
             }
             
-            if( isBitNot )
+            if ( isBitNot )
             {
                 return ~ Number(isNeg + num);
             }
@@ -372,9 +314,9 @@ package system.evaluators
             var args:Array = [];
             var me:MathEvaluator = new MathEvaluator(_context);
             
-            for( var i:uint = 0; i < expressions.length ; i++ )
+            for ( var i:uint = 0; i < expressions.length ; i++ )
             {
-                if( expressions[i] != "" )
+                if ( expressions[i] != "" )
                 {
                     args.push(me.eval(expressions[i]));
                 }
@@ -382,116 +324,97 @@ package system.evaluators
             
             switch( name )
             {
-                case "abs":
-                    {
+                case "abs": 
+                {
                     return String(Math.abs(args[0]));
-                    break;
-                    }
-                case "acos":
-                    {
+                }
+                case "acos": 
+                {
                     return String(Math.acos(args[0]));
-                    break;
-                    }
-                case "asin":
-                    {
+                }
+                case "asin": 
+                {
                     return String(Math.asin(args[0]));
-                    break;
-                    }
-                case "atan":
-                    {
+                }
+                case "atan": 
+                {
                     return String(Math.atan(args[0]));
-                    break;
-                    }
-                case "atan2":
-                    {
+                }
+                case "atan2": 
+                {
                     // 2
                     return String(Math.atan2(args[0], args[1]));
-                    break;
-                    }
-                case "ceil":
-                    {
+                }
+                case "ceil": 
+                {
                     return String(Math.ceil(args[0]));
-                    break;
-                    }
-                case "cos":
-                    {
+                }
+                case "cos": 
+                {
                     return String(Math.cos(args[0]));
-                    break;
-                    }
-                case "exp":
-                    {
+                }
+                case "exp": 
+                {
                     return String(Math.exp(args[0]));
-                    break;
-                    }
-                case "floor":
-                    {
+                }
+                case "floor": 
+                {
                     return String(Math.floor(args[0]));
-                    break;
-                    }
-                case "log":
-                    {
+                }
+                case "log": 
+                {
                     return String(Math.log(args[0]));
-                    break;
-                    }
-                case "max":
-                    {
+                }
+                case "max": 
+                {
                     return String(Math.max(args[0], args[1])); // 2
-                    break;
-                    }
-                case "min":
-                    {
+                }
+                case "min": 
+                {
                     return String(Math.min(args[0], args[1])); // 2
-                    break;
-                    }
-                case "pow":
-                    {
+                }
+                case "pow": 
+                {
                     return String(Math.pow(args[0], args[1])); // 2
-                    break;
-                    }
-                case "random":
-                    {
+                }
+                case "random": 
+                {
                     return String(Math.random()); // 0
-                    break;
-                    }
-                case "round":
-                    {
+                }
+                case "round": 
+                {
                     return String(Math.round(args[0]));
-                    break;
-                    }
-                case "sin":
-                    {
+                }
+                case "sin": {
                     return String(Math.sin(args[0]));
                     break;
-                    }
-                case "sqrt":
-                    {
+                }
+                case "sqrt": 
+                {
                     return String(Math.sqrt(args[0]));
-                    break;
-                    }
-                case "tan":
-                    {
+                }
+                case "tan": 
+                {
                     return String(Math.tan(args[0]));
-                    break;
-                    }
-                default:
-                    {
-                    if( name in _context && _context[ name ] is Function )
+                }
+                default: 
+                {
+                    if ( name in _context && _context[ name ] is Function )
                     {
                         return String(_context[ name ](args[0])) ;
                     }
-                    }
+                }
             }
-
             return "";
         }
-
+        
         /**
          * Returns the variable value with the internal context of the evaluator.
          * @return the variable value with the internal context of the evaluator.
          */
         mathparser function getVariableValue(name:String):String
         {
-            if( _context[ name ] )
+            if ( _context[ name ] )
             {
                 return _context[ name ];
             }
@@ -544,7 +467,7 @@ package system.evaluators
             var num:uint = 0;
             var ch:String = "";
 
-            for( ; ; )
+            for ( ; ; )
             {
                 ch = getNextChar();
 
@@ -565,7 +488,7 @@ package system.evaluators
                         expressions[num] += ch;
                 }
 
-                if( startNode == endNode )
+                if ( startNode == endNode )
                 {
                     break;
                 }
@@ -637,7 +560,7 @@ package system.evaluators
 
             var stack:Array = [];
 
-            while( hasMoreChar() )
+            while ( hasMoreChar() )
             {
                 ch = getChar();
 
@@ -658,7 +581,7 @@ package system.evaluators
                         break;
                     case ")":
                         opr = stack.pop();
-                        while( opr != "(" )
+                        while ( opr != "(" )
                         {
                             addToNextToken(opr);
                             opr = stack.pop();
@@ -677,11 +600,11 @@ package system.evaluators
                     case "&":
                     case "^":
                     case "|":
-                        if( stack.length != 0 )
+                        if ( stack.length != 0 )
                         {
                             opr = stack.pop();
 
-                            while( getOperatorPriority(opr) >= getOperatorPriority(ch) )
+                            while ( getOperatorPriority(opr) >= getOperatorPriority(ch) )
                             {
                                 addToNextToken(opr);
                                 opr = stack.pop();
@@ -709,30 +632,30 @@ package system.evaluators
                     case "8":
                     case "9":
                     case "~":
-                        if( tokens.length == 0 )
+                        if ( tokens.length == 0 )
                         {
                             addToNextToken("");
                         }
                         /* note:
                         unary priorities
                          */
-                        if( ch == "~" )
+                        if ( ch == "~" )
                         {
                             bitNot = "~";
                             ch = getNextChar();
                         }
-                        if( ch == "+" )
+                        if ( ch == "+" )
                         {
                             ch = getNextChar();
                         }
-                        if( ch == "-" )
+                        if ( ch == "-" )
                         {
                             neg = "-";
                             ch = getNextChar();
                         }
-                        if( ch == "0" )
+                        if ( ch == "0" )
                         {
-                            while( ch == "0" )
+                            while ( ch == "0" )
                             {
                                 ch = getNextChar();
                             }
@@ -741,24 +664,24 @@ package system.evaluators
                             ch = getChar();
                         }
                         ch2 = getChar(currentPos + 1);
-                        if( (ch == "0") && (ch2 == "x") )
+                        if ( (ch == "0") && (ch2 == "x") )
                         {
                             hex = "";
                             currentPos += 2;
                             ch = getChar();
 
-                            while( isHexDigit(ch) )
+                            while ( isHexDigit(ch) )
                             {
                                 hex += ch;
                                 ch = getNextChar();
                             }
 
-                            if( hex.length > maxHexValue )
+                            if ( hex.length > maxHexValue )
                             {
                                 hex = hex.substr(0, maxHexValue);
                             }
 
-                            if( hex == "" )
+                            if ( hex == "" )
                             {
                                 hex = "0";
                             }
@@ -771,11 +694,11 @@ package system.evaluators
                             exp = false;
                             digit = "";
 
-                            while( isDigit(ch) || (ch == ".") || (ch == "e") )
+                            while ( isDigit(ch) || (ch == ".") || (ch == "e") )
                             {
-                                if( ch == "e" )
+                                if ( ch == "e" )
                                 {
-                                    if( exp )
+                                    if ( exp )
                                     {
                                         ch = getNextChar();
                                         continue;
@@ -785,7 +708,7 @@ package system.evaluators
                                     digit += ch;
                                     ch = getNextChar();
 
-                                    if( (ch == "+") || (ch == "-") )
+                                    if ( (ch == "+") || (ch == "-") )
                                     {
                                         digit += ch;
                                         ch = getNextChar();
@@ -794,9 +717,9 @@ package system.evaluators
                                     continue;
                                 }
 
-                                if( ch == "." )
+                                if ( ch == "." )
                                 {
-                                    if( dot )
+                                    if ( dot )
                                     {
                                         ch = getNextChar();
                                         continue;
@@ -849,10 +772,10 @@ package system.evaluators
                     case "y":
                     case "z":
                         var name:String = ch;
-                        while( isAlpha(ch) )
+                        while ( isAlpha(ch) )
                         {
                             ch = getNextChar();
-                            if( isAlpha(ch) || isDigit(ch) )
+                            if ( isAlpha(ch) || isDigit(ch) )
                             {
                                 name += ch;
                             }
@@ -861,12 +784,12 @@ package system.evaluators
                                 currentPos--;
                             }
                         }
-                        if( tokens.length == 0 )
+                        if ( tokens.length == 0 )
                         {
                             addToNextToken("");
                         }
                         var peek:String = getChar(currentPos + 1);
-                        if( endsWith(peek, "(") )
+                        if ( endsWith(peek, "(") )
                         {
                             addToLastToken(getFunctionValue(name, getParenthesisBlock()));
                         }
@@ -881,30 +804,30 @@ package system.evaluators
                         currentPos++;
                 }
             }
-            
-            while( stack.length != 0 )
+
+            while ( stack.length != 0 )
             {
                 opr = stack.pop();
-                
-                if( opr != "" )
+
+                if ( opr != "" )
                 {
                     addToNextToken(opr);
                 }
             }
-            
-            if( (getLastToken() == "") || (getLastToken() == null) )
+
+            if ( (getLastToken() == "") || (getLastToken() == null) )
             {
                 tokens.pop();
             }
-            
-            if( tokens.length % 2 == 0 )
+
+            if ( tokens.length % 2 == 0 )
             {
                 tokens.unshift("0");
             }
-            
+
             // trace( "RPN: ["+this.tokens+"]" );
         }
-        
+
         /**
          * Launchs the evaluation process.
          */
@@ -914,17 +837,17 @@ package system.evaluators
             var value:*;
             var valueA:*;
             var valueB:*;
-            
-            for( var i:uint = 0; i < tokens.length ; i++ )
+
+            for ( var i:uint = 0; i < tokens.length ; i++ )
             {
                 op = tokens[i];
                 value = null;
-                
-                if( isOperator(op) )
+
+                if ( isOperator(op) )
                 {
                     valueA = getValue(tokens[ i - 2 ]);
                     valueB = getValue(tokens[ i - 1 ]);
-                    
+
                     switch( op )
                     {
                         case "+":
@@ -968,15 +891,15 @@ package system.evaluators
                             trace("## ERROR : unsupported operator \"" + op + "\" ##");
                     }
                 }
-                
-                if( value != null )
+
+                if ( value != null )
                 {
                     tokens.splice(i - 2, 3, value);
                     return evaluate();
                 }
             }
-            
-            if( tokens.length > 1 )
+
+            if ( tokens.length > 1 )
             {
                 return evaluate();
             }
@@ -985,7 +908,7 @@ package system.evaluators
                 return getValue(tokens[0]);
             }
         }
-        
+
         /**
          * Parses the specified expression.
          */
@@ -996,7 +919,7 @@ package system.evaluators
             toPostfixNotation();
             return evaluate();
         }
-        
+
         /**
          * Resets the evaluator.
          */
