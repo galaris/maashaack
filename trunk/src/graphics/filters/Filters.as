@@ -41,8 +41,9 @@ package graphics.filters
     import flash.filters.BitmapFilter;
     
     /**
-     * This collector defines all filters to update a specific DisplayObject view with multiple BitmapFilter (or multiple with the apply method).
-     * <pre class="prettyprint"</pre>
+     * This collector defines all filters to update a specific <code>DisplayObject</code> view with multiple 
+     * BitmapFilter (or multiple with the apply method).
+     * <pre class="prettyprint">
      * package examples 
      * {
      *     import graphics.filters.Filters;
