@@ -46,7 +46,7 @@ package system.data.iterators
      * import system.iterators.VectorIterator ;
      * import system.Iterator ;
      * 
-     * var ve:Vector.<String> = new Vector.<String>() ;
+     * var ve:Vector.&lt;String&gt; = new Vector.&lt;String&gt;() ;
      * 
      * ve[0] = "item1" ;
      * ve[1] = "item2" ;
