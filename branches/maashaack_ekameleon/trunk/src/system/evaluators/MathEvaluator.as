@@ -44,6 +44,7 @@ package system.evaluators
     /**
      * Evaluates mathematical string expressions.
      * <p><b>The MathEvaluator implementation</b>, support all of the following :</p>
+     * 
      * <p><b>Decimal, hexadecimal, octal notation :</b></p>
      * <pre class="prettyprint">
      * 1 + 1
@@ -52,22 +53,25 @@ package system.evaluators
      * 010 + 5
      * etc.
      * </pre>
-     * <p>operators : </p>
+     * 
+     * <p><b>operators :</b></p>
      * <pre class="prettyprint">
      * % / &#8727; + - &lt;&lt; &gt;&gt; &gt;&gt;&gt; &#38; ^ | ~
      * </pre>
-     * <p>functions :</p>
+     * 
+     * <p><b>functions :</b></p>
      * <pre class="prettyprint">
      * abs acos asin atan atan2 ceil cos exp
      * floor log max min pow random round
      * sin sqrt tan 
      * </pre>
-     * Those functions replicate exactly what you can find in the Math object.
+     * <p>Those functions replicate exactly what you can find in the Math object.</p>
      * <p>operators priority : from higher to lower priority</p>
-     * <p><b>Example :</b> multiplication is performed before addition</p>
+     * <p><b>example :</b> multiplication is performed before addition</p>
      * <pre class="prettyprint">
      * (14) fcn(...) (...)
      * </pre>
+     * 
      * <p>function call and expression grouping</p>
      * <p><b>example :</b> <code class="prettyprint">sin(4) + 25</code></p>
      * <p>sin(4) will be evaluated first</p>
@@ -76,24 +80,28 @@ package system.evaluators
      * <pre class="prettyprint">
      * (13) ~ + - 
      * </pre>
-     * <p>unary operators</p>
+     * 
+     * <p><b>Unary operators</b></p>
      * <p>ex: <code class="prettyprint">+5 - +5</code> translate to <code class="prettyprint">(+5) - (+5)</code></p>
      * <p>ex: <code class="prettyprint">-5 + -5</code> translate to <code class="prettyprint">(-5) + (-5)</code></p>
-     * <p>ex: <code class="prettyprint">~3 - 7</code>  translate to <code class="prettyprint">(~3) - 7</code></p>
+     * <p>ex: <code class="prettyprint">~3 -  7</code> translate to <code class="prettyprint">(~3) - 7</code></p>
      * <p>any unary operators will be evaluated first</p>
      * <pre class="prettyprint">
      * (12) &#8727; / %
      * </pre>
+     * 
      * <p><b>multiplication, division, modulo division</b></p>
-     * <p>ex: 5 &#8727; 3 + 1 translate to (5 &#8727; 3) + 1</p>
-     * <p>ex: 2 % 8 - 4 translate to (2 % 8) - 4</p>
+     * <p>ex: <code class="prettyprint">5 &#8727; 3 + 1 translate to (5 &#8727; 3) + 1</code></p>
+     * <p>ex: <code class="prettyprint">2 % 8 - 4 translate to (2 % 8) - 4</code></p>
      * <pre class="prettyprint">
      * (11) + -
      * </pre>
+     * 
      * <p><b>addition, subtraction</b></p>
      * <pre class="prettyprint">
      * (10) &lt;&lt; &gt;&gt; &lt;&lt;&lt;
      * </pre>
+     * 
      * <p><b>bit shifting</b></p>
      * <pre class="prettyprint">
      * (7)  &#38;
@@ -106,47 +114,48 @@ package system.evaluators
      * <pre class="prettyprint">
      * (5)  |
      * </pre>
+     * 
      * <p><b> bitwise OR</b></p>
      * <p>context</p>
-     * <p>When instanciating the MathEvaluator you can pass a context containing either variables or functions</p>
+     * <p>When instanciating the <b>MathEvaluator</b> you can pass a context containing either variables or functions</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * var me:MathEvaluator = new MathEvaluator( { x:100, test:function(a:Number):Number {return a*a;} );
+     * var me:MathEvaluator = new MathEvaluator( { x:100, test:function(a:Number):Number {return a&#42;a;} );
      * trace( me.eval( "test(100) + 1" ) ); // return 10001
      * </pre>
      * <p>but there are some limitations</p>
+     * <ul>
+     * <li>your function can only have one argument</li>
+     * <li>your function name can not override default math functions as cos, sin, etc.</li>
      * <li>your variable or function name must me lowercase</li>
      * <li>your variable or function name must contains only letter from a to z and can end with only one digit</li>
+     * </ul>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * test()  // OK
      * test2() // OK
      * 2test() // BAD
      * te2st() // BAD
-     * etc.
      * </pre>
-     * <li>your function can only have one argument<\li>
-     * <li>your function name can not override default math functions as cos, sin, etc.<\li>
-     * <p>we do not support logical ( || &#38;&#38; !) or assignement operators (= == += etc.)</p>
+     * <p>we do not support logical ( || &#38;&#38; ! ) or assignement operators ( = == += etc. )</p>
      * <p><b>reasons:</b></p>
      * <p>logical operators deal with boolean, here we want to deal only with numbers and math expression we do not support variables nor variable assignation</p>
      * <p>Parenthesis are used to alter the order of evaluation determined by operator precedence.</p>
      * <p>Operators with the same priority are evaluated left to right.</p>
      * <p><b>How the parser work :</b></p>
      * <p><b>1)</b> we first filter some multiple char operators to single chars</p>
-     * <p><b>ex:</b> << translate to « and other filtering</p>
+     * <p>ex: <code>&gt;&gt;</code> translate to « and other filtering</p>
      * <p><b>2)</b> then we parse char by char (top to bottom parsing) to generate tokens in postfix order(reverse polish notation)</p>
-     * <p>the expression 5 + 4 become <code class="prettyprint">[5,4,+]</code> but while doing that we also do a lot of other things</p>
+     * <p>the expression <code>5 + 4</code> become <code class="prettyprint">[5,4,+]</code> but while doing that we also do a lot of other things</p>
      * <li>evaluate function call</li>
      * <li>remove space chars</li>
      * <li>re-order tokens by operators priority</li>
      * <li>evaluate  hexadecimal notation to decimal</li>
      * <li>etc.</li>
      * <p>3) finally we iterate trough our tokens and evaluate them by operators</p>
-     * <p><b>ex:</b> [5,4,+]</p>
+     * <p>ex: <code class="prettyprint">[5,4,+]</code></p>
      * <p>we find the op +, then addition the 2 values, etc.</p>
      * <p>till the end of the tokens list</p>
-     * </p>
      */
     public class MathEvaluator implements Evaluable
     {
@@ -542,7 +551,7 @@ package system.evaluators
                     return 0;
             }
         }
-
+        
         /**
          * The toPostfixNotation method.
          */
@@ -557,16 +566,16 @@ package system.evaluators
             var dot:Boolean;
             var exp:Boolean;
             var digit:String;
-
+            
             var stack:Array = [];
-
+            
             while ( hasMoreChar() )
             {
                 ch = getChar();
-
+                
                 bitNot = "";
                 neg = "";
-
+                
                 switch( ch )
                 {
                     case " ":
@@ -804,30 +813,30 @@ package system.evaluators
                         currentPos++;
                 }
             }
-
+            
             while ( stack.length != 0 )
             {
                 opr = stack.pop();
-
+                
                 if ( opr != "" )
                 {
                     addToNextToken(opr);
                 }
             }
-
+            
             if ( (getLastToken() == "") || (getLastToken() == null) )
             {
                 tokens.pop();
             }
-
+            
             if ( tokens.length % 2 == 0 )
             {
                 tokens.unshift("0");
             }
-
+            
             // trace( "RPN: ["+this.tokens+"]" );
         }
-
+        
         /**
          * Launchs the evaluation process.
          */
@@ -837,17 +846,17 @@ package system.evaluators
             var value:*;
             var valueA:*;
             var valueB:*;
-
+            
             for ( var i:uint = 0; i < tokens.length ; i++ )
             {
                 op = tokens[i];
                 value = null;
-
+                
                 if ( isOperator(op) )
                 {
                     valueA = getValue(tokens[ i - 2 ]);
                     valueB = getValue(tokens[ i - 1 ]);
-
+                    
                     switch( op )
                     {
                         case "+":
@@ -891,14 +900,14 @@ package system.evaluators
                             trace("## ERROR : unsupported operator \"" + op + "\" ##");
                     }
                 }
-
+                
                 if ( value != null )
                 {
                     tokens.splice(i - 2, 3, value);
                     return evaluate();
                 }
             }
-
+            
             if ( tokens.length > 1 )
             {
                 return evaluate();
@@ -908,7 +917,7 @@ package system.evaluators
                 return getValue(tokens[0]);
             }
         }
-
+        
         /**
          * Parses the specified expression.
          */
@@ -919,7 +928,7 @@ package system.evaluators
             toPostfixNotation();
             return evaluate();
         }
-
+        
         /**
          * Resets the evaluator.
          */
