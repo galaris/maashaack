@@ -40,7 +40,7 @@ package graphics.display
     
     /**
      * A circular perlin noise effect.
-     * <p>This class maps a linear perlin noise to a radial perlin noise and exposes the resulting bitmapdata for use.
+     * <p>This class maps a linear perlin noise to a radial perlin noise and exposes the resulting bitmapdata for use.</p>
      */
     public class RadialPerlinBitmapData extends BitmapData
     {
