@@ -20,7 +20,7 @@ Portions created by the Initial Developers are Copyright (C) 2006-2011
 the Initial Developers. All Rights Reserved.
   
 Contributor(s):
-  
+
 Alternatively, the contents of this file may be used under the terms of
 either the GNU General Public License Version 2 or later (the "GPL"), or
 the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
@@ -144,7 +144,7 @@ package system.text.html
          * <pre class="prettyprint">
          * import system.text.html.Entities ;
          * var toHTML:String = Entities.toHTML("€") ;
-         * trace( toHTML ) ;  // &#38;euro&#xA0;
+         * trace( toHTML ) ;  // &#38;euro
          * </pre>
          */
         public static function toHTML( char:String ):String
