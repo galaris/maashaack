@@ -179,7 +179,7 @@ package system.network
          * AIR Application protocol
          * <p><b>Syntax:</b></p>
          * <pre>
-         * app:<path>
+         * app:&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
