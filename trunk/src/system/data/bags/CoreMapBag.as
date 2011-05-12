@@ -52,8 +52,11 @@ package system.data.bags
     import flash.errors.IllegalOperationError;
     
     /**
-     * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize the effort required to implement this interface.
-     * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must additionally implement its remove method.</p>
+     * This class provides a skeletal implementation of the <code class="prettyprint">Bag</code> interface, to minimize 
+     * the effort required to implement this interface.
+     * <p>To implement a bag, the programmer needs only to extend this class and provide implementations for the cursor, 
+     * insert and size methods. For supporting the removal of elements, the cursor returned by the cursor method must 
+     * additionally implement its remove method.</p>
      */
     public class CoreMapBag implements Bag
     {
@@ -88,7 +91,7 @@ package system.data.bags
         }
         
         /**
-         * Add 1 copy of the given object to the bag and keep a count. 
+         * Add one copy of the given object to the bag and keep a count. 
          */ 
         public function add( o:* ):Boolean 
         {
@@ -97,7 +100,7 @@ package system.data.bags
         
         /**
          * Insert all elements represented in the given collection.
-         */         
+         */
         public function addAll( c:Collection ):Boolean 
         {
             var changed:Boolean = false;
@@ -234,7 +237,7 @@ package system.data.bags
         /**
          * Unsupported by bag objects.
          * @throws IllegalOperationError the 'get' method is unsupported with a bag object.
-         */    
+         */
         public function get( key:* ):*
         {
             throw new IllegalOperationError( getClassName(this) + ", the get() method is unsupported.") ;
@@ -357,7 +360,6 @@ package system.data.bags
          * </pre>
          * @param c the collection to retain.
          * @return <code class="prettyprint">true</code> if this call changed the collection.
-         * @see #retainAllInBag(b:Bag)
          */
         public function retainAll( c:Collection ):Boolean 
         {
@@ -368,7 +370,6 @@ package system.data.bags
          * Removes any members of the bag that are not in the given bag, respecting cardinality.
          * @param b the bag to retain.
          * @return <code class="prettyprint">true</code> if this call changed the collection.
-         * @see #retainAll(c:Collection)
          */
         public function retainAllInBag( b:Bag ):Boolean 
         {
