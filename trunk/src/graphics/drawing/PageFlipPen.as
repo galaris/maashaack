@@ -275,7 +275,7 @@ package graphics.drawing
          * @param sens The constraints sensibility.
          * @return A generic object who containing the attributes :
          * </ul>
-         * <li><b>cPoints:Array</b> - Array of points which describes the flipped part of the sheet. Note that in case of the ptd point is aligned with its original position or if the height of the shape is very small (<1) this array is set to null.</li>
+         * <li><b>cPoints:Array</b> - Array of points which describes the flipped part of the sheet. Note that in case of the ptd point is aligned with its original position or if the height of the shape is very small (&gt;1) this array is set to null.</li>
          * <li><b>pPoints:Array</b> - Array of points wich describes the fixed part of the sheet.</li>
          * <li><b>matrix:Matrix</b> - Transformation matrix for the flipped part of the sheet.</li>
          * <li><b>width:Number</b> - Sheet width.</li>
