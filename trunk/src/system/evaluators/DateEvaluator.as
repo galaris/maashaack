@@ -41,7 +41,8 @@ package system.evaluators
      * Evaluates Date object and transform it in string expressions.
      * <p>All characters from 'A' to 'Z' and from 'a' to 'z' are reserved, although not all of these characters are interpreted right now.</p> 
      * <p>If you want to include plain text in the pattern put it into quotes (') to avoid interpretation.</p>
-     * <p>If you want a quote in the formatted date-time, put two quotes directly after one another. For example: <code class="prettyprint"> "hh 'o''clock'"}.</p>
+     * <p>If you want a quote in the formatted date-time, put two quotes directly after one another.</p>
+     * <p>For example: <code class="prettyprint"> "hh 'o''clock'"</code>.</p>
      * <pre class="prettyprint">
      * import system.evaluators.DateEvaluator ;
      * 
