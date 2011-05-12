@@ -43,7 +43,8 @@ package system.process
     import system.data.iterators.VectorIterator;
 
     /**
-     * A batch is a collection of <code class="prettyprint">Action</code> objects. All <code class="prettyprint">Action</code> objects are processed as a single unit.
+     * A batch is a collection of <code class="prettyprint">Action</code> objects. 
+     * All <code class="prettyprint">Action</code> objects are processed as a single unit.
      * <p>This class use an internal typed Collection to register all <code class="prettyprint">Runnable</code> objects.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
@@ -121,11 +122,11 @@ package system.process
      *     
      *     protected function enterFrame( e:Event ):void
      *     {
-     *         var dx:Number = Math.round( ( finish.x - x ) * 0.3 ) ;
-     *         var dy:Number = Math.round( ( finish.y - y ) * 0.3 ) ;
+     *         var dx:Number = Math.round( ( finish.x - x ) &#42; 0.3 ) ;
+     *         var dy:Number = Math.round( ( finish.y - y ) &#42; 0.3 ) ;
      *         x += dx ;
      *         y += dy ;
-     *         if ( dx == 0 && dy == 0 )
+     *         if ( dx == 0 &#38;&#38; dy == 0 )
      *         {
      *             removeEventListener(Event.ENTER_FRAME , enterFrame ) ;
      *         }
@@ -304,7 +305,7 @@ package system.process
         
         /**
          * Returns an array containing all of the elements in this collection.
-         * <p><b>Note:</b></p> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
+         * <p><b>Note:</b> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
          * @return an array containing all of the elements in this collection.
          */
         public function toArray():Array
