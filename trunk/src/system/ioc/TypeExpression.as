@@ -40,7 +40,7 @@ package system.ioc
     /**
      * This object is an helper who contains type expressions and can format a type with all expression registered in the dictionnary.
      * <p><b>Example :</b></p>
-     * <pre class="prettyprint>
+     * <pre class="prettyprint">
      * import system.ioc.TypeExpression ;
      * 
      * var exp:TypeExpression = new TypeExpression() ;
@@ -52,14 +52,16 @@ package system.ioc
      * 
      * var result:String = exp.format(type) ;
      * 
-     * trace( "type:'" + type + "' --> result:'" + result + "'" ) ;
+     * trace( "type:" + type + ", result:" + result ) ;
      * </pre>
      */
     public dynamic class TypeExpression extends ExpressionFormatter 
     {
         /**
          * Creates a new TypeExpression instance.
-         * @param weakKeys Instructs the Dictionary object to use "weak" references on object keys. If the only reference to an object is in the specified Dictionary object, the key is eligible for garbage collection and is removed from the table when the object is collected.
+         * @param weakKeys Instructs the Dictionary object to use "weak" references on object keys. 
+         * If the only reference to an object is in the specified Dictionary object, the key is eligible 
+         * for garbage collection and is removed from the table when the object is collected.
          */
         public function TypeExpression( weakKeys:Boolean = false )
         {
@@ -70,7 +72,7 @@ package system.ioc
          * Inserts a new expression in the collector. If the expression already exist, the value in the collector is replaced.
          * @param alias The alias name, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
          * @param value The value of the alias type, this expression not must be null and not empty or the method return <code class="prettyprint">false</code>.
-         * @return <code class="prettyprint">true</core> if the alias can be registered.
+         * @return <code class="prettyprint">true</code> if the alias can be registered.
          */
         public function put( key:String , value:String ):Boolean
         {
