@@ -15,24 +15,20 @@
     <if>
         <equals arg1="${asdoc.use.classes}" arg2="true" />
         <then>
-            <property name="asdoc.options" value="-doc-classes ${asdoc.doc.classes}" />
+            <property name="asdoc.options" value="-doc-classes ${asdoc.doc.sources}" />
         </then>
         <else>
             <property name="asdoc.options" value="-doc-sources ${asdoc.doc.sources}" />
         </else>
     </if>
     
-    <condition property="asdoc.doc.option" value="${asdoc.doc.classes}" else="${asdoc.doc.sources}">
-        <equals arg1="${asdoc.use.classes}" arg2="true" />
-    </condition>
-    
     <!-- Build process -->
     
     <target name="main" depends="clean,doc" description="Clean documentation and create all VEGAS reference."/>
     
     <target name="clean" description="Cleans all ASDocs">
-        <delete dir="${output}" />
-        <mkdir  dir="${output}" />
+        <delete dir="${asdoc.output}" />
+        <mkdir  dir="${asdoc.output}" />
     </target>
     
     <target name="doc" depends="clean">
