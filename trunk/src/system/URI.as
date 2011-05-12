@@ -51,7 +51,7 @@ package system
      * ftp://ftp.is.co.za/rfc/rfc1808.txt
      * http://www.ietf.org/rfc/rfc2396.txt
      * ldap://[2001:db8::7]/c=GB?objectClass?one
-     * mailto:John.Doe@example.com
+     * mailto:John.Doe&#64;example.com
      * news:comp.infosystems.www.servers.unix
      * tel:+1-816-555-1212
      * telnet://192.0.2.16:80/
@@ -97,17 +97,16 @@ package system
         
         /**
          * Allows to support deprecated behaviour or not
-         * ex:
-         * with userinfo
-         * if strict, we do not display the password
-         * if not strict we display the password
+         * <p>ex: with userinfo</p>
+         * <li>if strict, we do not display the password</li>
+         * <li>if not strict we display the password</li>
          */
         public static var strict:Boolean = true;
         
         /**
          * Indicates the authority of the URI.
          * syntax:
-         * authority   = [ userinfo "@" ] host [ ":" port ]
+         * <pre>authority = [ userinfo "&#64;" ] host [ ":" port ]</pre>
          */
         public function get authority():String
         {
@@ -193,7 +192,7 @@ package system
         
         /**
          * Determinates the encoded URI query, not including the ?.
-         * You can set a query with a string who not including the ? character, ex : "a=1&b=2".
+         * You can set a query with a string who not including the ? character, ex : "a=1&#38;b=2".
          */
         public function get query():String
         {
@@ -336,18 +335,16 @@ package system
          * <p>RFC: <b>3.1. Scheme</b></p>
          * <p>[...]</p>
          * <pre>
-         *    Scheme names consist of a sequence of characters beginning with a
-         *    letter and followed by any combination of letters, digits, plus
-         *    ("+"), period ("."), or hyphen ("-").  Although schemes are case-
-         *    insensitive, the canonical form is lowercase and documents that
-         *    specify schemes must do so with lowercase letters.  An implementation
-         *    should accept uppercase letters as equivalent to lowercase in scheme
-         *    names (e.g., allow "HTTP" as well as "http") for the sake of
-         *    robustness but should only produce lowercase scheme names for
-         *    consistency.
+         * Scheme names consist of a sequence of characters beginning with a 
+         * letter and followed by any combination of letters, digits, plus
+         * ("+"), period ("."), or hyphen ("-").  Although schemes are case-
+         * insensitive, the canonical form is lowercase and documents that
+         * specify schemes must do so with lowercase letters. An implementation
+         * should accept uppercase letters as equivalent to lowercase in scheme
+         * names (e.g., allow "HTTP" as well as "http") for the sake of
+         * robustness but should only produce lowercase scheme names for consistency.
          * </pre>
          * <pre>scheme = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )</pre>
-         * </p>
          */
         public static function isValidScheme( str:String ):Boolean
         {
@@ -422,42 +419,42 @@ package system
             return true;
         }
         
-        /**
-        * 
-        * note:
-        * see: <http://www.ietf.org/rfc/rfc1034.txt>
-        * 3.5. Preferred name syntax
-        * [...]
-        * The following syntax will result in fewer problems with many
-        * applications that use domain names (e.g., mail, TELNET).
-        * 
-        * <domain> ::= <subdomain> | " "
-        * 
-        * <subdomain> ::= <label> | <subdomain> "." <label>
-        * 
-        * <label> ::= <letter> [ [ <ldh-str> ] <let-dig> ]
-        * 
-        * <ldh-str> ::= <let-dig-hyp> | <let-dig-hyp> <ldh-str>
-        * 
-        * <let-dig-hyp> ::= <let-dig> | "-"
-        * 
-        * <let-dig> ::= <letter> | <digit>
-        * 
-        * <letter> ::= any one of the 52 alphabetic characters A through Z in
-        * upper case and a through z in lower case
-        * 
-        * <digit> ::= any one of the ten digits 0 through 9
-        * 
-        * Note that while upper and lower case letters are allowed in domain
-        * names, no significance is attached to the case.  That is, two names with
-        * the same spelling but different case are to be treated as if identical.
-        * 
-        * The labels must follow the rules for ARPANET host names.  They must
-        * start with a letter, end with a letter or digit, and have as interior
-        * characters only letters, digits, and hyphen.  There are also some
-        * restrictions on the length.  Labels must be 63 characters or less.
-        * 
-        */
+         /**
+          * Indicates if the uri is a domain address
+          * <p><b>note:</b></p>
+          * <p>see: <a href="http://www.ietf.org/rfc/rfc1034.txt">http://www.ietf.org/rfc/rfc1034.txt</a></p>
+          * <p>3.5. Preferred name syntax</p>
+          * <pre>[...]</pre>
+          * <p>The following syntax will result in fewer problems with many 
+          * applications that use domain names (e.g., mail, TELNET).</p>
+          * <pre>
+          * &lt;domain> ::= &lt;subdomain&gt; | " "
+          * 
+          * &lt;subdomain&gt; ::= &lt;label&gt; | &lt;subdomain&gt; "." &lt;label&gt;
+          * 
+          * &lt;label&gt; ::= &lt;letter&gt; [ [ &lt;ldh-str&gt; ] &lt;let-dig&gt; ]
+          * 
+          * &lt;ldh-str&gt; ::= &lt;let-dig-hyp&gt; | &lt;let-dig-hyp&gt; &lt;ldh-str&gt;
+          * 
+          * &lt;let-dig-hyp&gt; ::= &lt;let-dig&gt; | "-"
+          * 
+          * &lt;let-dig&gt; ::= &lt;letter&gt; | &lt;digit&gt;
+          * 
+          * &lt;letter&gt; ::= any one of the 52 alphabetic characters A through Z in upper case and a through z in lower case
+          * 
+          * &lt;digit&gt; ::= any one of the ten digits 0 through 9
+          * 
+          * </pre>
+          * 
+          * <p>Note that while upper and lower case letters are allowed in domain 
+          * names, no significance is attached to the case.That is, two names with 
+          * the same spelling but different case are to be treated as if identical.</p>
+          * 
+          * <p>The labels must follow the rules for ARPANET host names.  They must 
+          * start with a letter, end with a letter or digit, and have as interior 
+          * characters only letters, digits, and hyphen.  There are also some 
+          * restrictions on the length.  Labels must be 63 characters or less.</p>
+          */
         public static function isDomainAddress( str:String ):Boolean
         {
             if( str.indexOf( "." ) == -1 )
