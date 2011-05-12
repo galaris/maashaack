@@ -41,10 +41,10 @@ package system.network
      * <ul>
      * <li><a href="http://en.wikipedia.org/wiki/URI_scheme">http://en.wikipedia.org/wiki/URI_scheme</a></li>
      * <li><a href="http://esw.w3.org/topic/UriSchemes/">http://esw.w3.org/topic/UriSchemes/</a></li>
-     * <ul>
+     * </ul>
      * <p><b>generic syntax :</b></p>
      * <pre>
-     * &lt;scheme&gt;://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
+     * &lt;scheme>://[&lt;username>[:&lt;password>]&#64;]&lt;host>[:&lt;port>]/&lt;path>[?&lt;query>][#&lt;fragment>]
      * </pre>
      */
     public class URIScheme
@@ -81,7 +81,7 @@ package system.network
          * HTTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * http://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
+         * http://[&lt;username&gt;[:&lt;password&gt;]&#64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -94,7 +94,7 @@ package system.network
          * HTTP connections secured using SSL/TLS
          * <p><b>Syntax:</b></p>
          * <pre>
-         * https://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
+         * https://[&lt;username&gt;[:&lt;password&gt;]&#64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;[?&lt;query&gt;][#&lt;fragment&gt;]
          * </pre>
          */
         public static const HTTPS:URIScheme = new URIScheme( "https", "://" , 443 );
@@ -103,7 +103,7 @@ package system.network
          * FTP resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * ftp://[&lt;username&gt;[:&lt;password&gt;]&64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;
+         * ftp://[&lt;username$gt;[:&lt;password&gt;]&#64;]&lt;host&gt;[:&lt;port&gt;]/&lt;path&gt;
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
@@ -113,7 +113,7 @@ package system.network
         public static const FTP:URIScheme = new URIScheme( "ftp", "://" , 21 );
         
         /**
-         * Addressing files on local or network file systems
+         * Addressing files on local or network file systems.
          * <p><b>Syntax:</b></p>
          * <pre>
          * file://[&lt;host&gt;]/&lt;path&gt;
@@ -130,21 +130,21 @@ package system.network
         public static const FILE:URIScheme = new URIScheme( "file", "://", -1 );
         
         /**
-         * Mail to
+         * Mail to resources
          * <p><b>Syntax:</b></p>
          * <pre>
-         * mailto:&lt;address&gt;[?&lt;header1&gt;=&lt;value1&gt;[&#38;&lt;header2&gt;=&lt;value2&gt;]]
+         * mailto:&lt;address&gt;[?&lt;header1&gt;=&lt;value1&gt;[&#38;&lt;header2$gt;=&lt;value2&gt;]]
          * </pre>
          * <p><b>Example:</b></p>
          * <pre>
-         * mailto:John.Doe&64;example.com
-         * mailto:jsmith&64;example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
+         * mailto:John.Doe&#64;example.com
+         * mailto:jsmith&#64;example.com?subject=A%20Test&#38;body=My%20idea%20is%3A%20%0A
          * </pre>
          */
         public static const MAILTO:URIScheme = new URIScheme( "mailto", ":", 25 );
         
         /**
-         * Newsgroups and postings
+         * Newsgroups and postings.
          * <p><b>Syntax:</b></p>
          * <pre>
          * news:&lt;newsgroupname&gt;
@@ -158,7 +158,7 @@ package system.network
         public static const NEWS:URIScheme = new URIScheme( "news", ":", -1 );
         
         /**
-         * Usenet NNTP (Network News Transfer Protocol)
+         * Usenet NNTP (Network News Transfer Protocol).
          * <p><b>Syntax:</b></p>
          * <pre>
          * nntp://&lt;host&gt;:&lt;port&gt;/&lt;newsgroup-name&gt;/&lt;article-number&gt;
@@ -176,7 +176,7 @@ package system.network
         public static const GOPHER:URIScheme = new URIScheme( "gopher", "://", 70 );
         
         /**
-         * AIR Application protocol
+         * AIR Application protocol.
          * <p><b>Syntax:</b></p>
          * <pre>
          * app:&lt;path&gt;
@@ -189,7 +189,7 @@ package system.network
         public static const AIRAPPLICATION:URIScheme = new URIScheme( "app", ":", -1 );
         
         /**
-         * AIR Storage protocol
+         * AIR Storage protocol.
          * <p><b>Syntax:</b></p>
          * <pre>
          * app-storage:&lt;path&gt;
