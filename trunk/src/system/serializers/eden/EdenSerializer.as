@@ -36,13 +36,13 @@
 package system.serializers.eden
 {
     import core.dump;
-
+    
     import system.Serializable;
     import system.Serializer;
-
+    
     /**
      * The eden Serializer class
-     */    
+     */
     public class EdenSerializer implements Serializer, Serializable
     {
         /**
