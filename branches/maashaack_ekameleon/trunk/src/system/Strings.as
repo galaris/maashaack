@@ -102,11 +102,9 @@ package system
          * <li>StringUtil.format(pattern:String, {name0:value0,name1:value1,name2:value2, ...} , ...args:Array ) :String</li>
          * <p>Replaces the pattern item in a specified String with the text equivalent of the value of a specified Object instance.</p>
          * <p>Formats item : {token[,alignment][:paddingChar]}</p>
-         * <p>If you want to escape the "{" and "}" chars use "{{" and "}}"
+         * <p>If you want to escape the "{" and "}" chars use "{{" and "}}"</p>
          * <li>"some {{formatitem}} to be escaped" -> "some {formatitem} to be escaped"</li>
-         * <li>"some {{format {0} item}} to be escaped", "my" -> "some {format my titem} to be escaped"</li>
-         * </p>
-         * </p>
+         * <li>"some {{format {0} item}} to be escaped", "my" -&gt; "some {format my titem} to be escaped"</li>
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.Strings ;
@@ -116,26 +114,27 @@ package system
          * // indexed from the arguments
          * 
          * result = Strings.format( "hello {1} {0} world", "big", "the" ); 
-         * trace("> " + result) ; //"hello the big world"
+         * trace( result ) ; //"hello the big world"
          *
          * result = Strings.format("Brad's dog has {0,6:#} fleas.", 41) ;
-         * trace("> " + result) ;
+         * trace( result ) ;
          *
          * result = Strings.format("Brad's dog has {0,-6} fleas.", 12) ;
-         * trace("> " + result) ;
+         * trace( result) ;
          *
          * result = Strings.format("{3} {2} {1} {0}", "a", "b", "c", "d") ;
-         * trace("> " + result) ;
+         * trace( result ) ;
          * 
          * // named from an object
          * 
          * result = Strings.format( "hello I'm {name}", {name:"HAL"} );
-         * trace("> " + result) ; //"hello I'm HAL"
+         * trace( result ) ; //"hello I'm HAL"
          * 
          * // indexed from an array
          * 
          * var names:Array = ["A","B","C","D"];
          * var scores:Array = [16,32,128,1024];
+         * 
          * for( var i:int=0; i&lt;names.length; i++ )
          * {
          *     trace( Strings.format( "{0} scored {1,5}", [names[i], scores[i]] ) );
@@ -161,7 +160,7 @@ package system
          * // passing reference and padding
          * var what = "answer" ;
          * result = Strings.format( "your {0} is within {answer,20:.}", {answer:"my answer"}, what ) ; 
-         * trace("> " + result ) // "your answer is within ...........my answer"
+         * trace( result ) // "your answer is within ...........my answer"
          * 
          * // using evaluated parameters
          * Strings.evaluators = { math: new MathEvaluator() };
