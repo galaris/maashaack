@@ -266,7 +266,7 @@ package graphics.geom
          * pitch = Attitude = rotation about z axis
          * yaw   = Bank     = rotation about x axis
          * </pre>
-         * <p><b> used in this class :<b> <a href="http://www.euclideanspace.com/maths/standards/index.htm">Standards</a></b></p>
+         * <p><b> used in this class :</b> <a href="http://www.euclideanspace.com/maths/standards/index.htm">Standards</a></b></p>
          * @return the Vector3 representation of the roll/pitch/yaw euler angles of the current quaternion.
          */
         public function getEulerAngles( degrees:Boolean = false ):Vector3 
