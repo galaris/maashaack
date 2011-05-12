@@ -28,14 +28,15 @@
     
     <!-- core.chars -->
     
-    <component id="core.chars:isAlpha"    class="core.chars.isAlpha"    />
-    <component id="core.chars:isASCII"    class="core.chars.isASCII"    />
-    <component id="core.chars:isDigit"    class="core.chars.isDigit"    />
-    <component id="core.chars:isHexDigit" class="core.chars.isHexDigit" />
-    <component id="core.chars:isLower"    class="core.chars.isLower"    />
-    <component id="core.chars:isOperator" class="core.chars.isOperator" />
-    <component id="core.chars:isUnicode"  class="core.chars.isUnicode"  />
-    <component id="core.chars:isUpper"    class="core.chars.isUpper"    />
+    <component id="core.chars:isAlpha"      class="core.chars.isAlpha"      />
+    <component id="core.chars:isASCII"      class="core.chars.isASCII"      />
+    <component id="core.chars:isDigit"      class="core.chars.isDigit"      />
+    <component id="core.chars:isHexDigit"   class="core.chars.isHexDigit"   />
+    <component id="core.chars:isLower"      class="core.chars.isLower"      />
+    <component id="core.chars:isOctalDigit" class="core.chars.isOctalDigit" />
+    <component id="core.chars:isOperator"   class="core.chars.isOperator"   />
+    <component id="core.chars:isUnicode"    class="core.chars.isUnicode"    />
+    <component id="core.chars:isUpper"      class="core.chars.isUpper"      />
     
     <!-- core.html -->
     
