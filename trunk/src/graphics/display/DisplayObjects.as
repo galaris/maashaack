@@ -229,7 +229,7 @@ package graphics.display
          * @param target The DisplayObject to resize.
          * @param width The desired width for the target.
          * @param height The desired height for the target.
-         * @param aspectRatio The optional desired aspect ratio (a Number or a AspectRatio object) or <code class=-"prettyprint">true</code> to use the current aspect ratio of the display.
+         * @param aspectRatio The optional desired aspect ratio (a Number or a AspectRatio object) or <code class="prettyprint">true</code> to use the current aspect ratio of the display.
          */
         public static function resize( target:DisplayObject, width:Number, height:Number, aspectRatio:* = null ):void
         {
