@@ -40,8 +40,8 @@ package graphics.transitions
     
     /**
      * The EasingController register easing methods. 
-     * This controller can be use with an external configuration or a dynamic easing engine.
-     * This controller centralize all easing method in the application.
+     * <p>This controller can be use with an external configuration or a dynamic easing engine. 
+     * This controller centralize all easing method in the application.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import graphics.transitions.easings.&#38; ;
@@ -64,11 +64,11 @@ package graphics.transitions
     {
         /**
          * Creates a new EasingController instance.
-         * <p><b>Usage :</b> 
+         * <p><b>Usage :</b></p>
          * <pre class="prettyprint">
          * var ec:EasingController = new EasingController() ;
          * </pre>
-         */    
+         */
         public function EasingController()
         {
             _map = new HashMap() ;
