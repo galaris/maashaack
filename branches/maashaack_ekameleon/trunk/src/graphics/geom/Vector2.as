@@ -326,7 +326,7 @@ package graphics.geom
          * </pre>
          * @param p1 The first point.
          * @param p2 The second Point.
-         * @param level the The level of interpolation between the two points. Indicates where the new point will be, along the line between {@code p1} and {@code p2}. If f=1, pt1 is returned; if f=0, pt2 is returned.
+         * @param level the The level of interpolation between the two points. Indicates where the new point will be, along the line between <code>p1</code> and <code>p2</code>. If f=1, pt1 is returned; if f=0, pt2 is returned.
          * @return The new interpolated Vector2 object.
          */
         public function interpolate( vector:Point , level:Number ):Vector2 
@@ -337,7 +337,7 @@ package graphics.geom
         /**
          * Invert the current Vector2 object.
          * <p><b>Example :</b></p>
-         * <code class="prettyprint">
+         * <pre class="prettyprint">
          * import graphics.geom.Vector2 ;
          * 
          * var vector:Vector2 = new Vector2(10,20) ;
@@ -345,7 +345,7 @@ package graphics.geom
          * vector.invert() ;
          * 
          * trace( vector ) ;
-         * </code>
+         * </pre>
          */
         public function invert():void
         {
@@ -367,7 +367,7 @@ package graphics.geom
          * trace( v1.isPerpendicularTo( v3 ) ) ; // true
          * </pre>
          * @param p the Point use to determinate if this Point object is perpendicular.
-         * @return <code class="prettyprint">true</pre> if the Point is perpendicular with the passed-in Point.
+         * @return <code class="prettyprint">true</code> if the Point is perpendicular with the passed-in Point.
          */
         public function isPerpendicularTo( vector:Vector2 ):Boolean 
         {    
@@ -397,7 +397,7 @@ package graphics.geom
         /**
          * Returns the middle Vector2 object between 2 Points.
          * <p><b>Example :</b></p>
-         * <code class="prettyprint">
+         * <pre class="prettyprint">
          * import graphics.geom.Vector2 ;
          * 
          * var v1:Vector2 = new Vector2(10,10) ;
@@ -406,7 +406,7 @@ package graphics.geom
          * var middle:Vector2 = v1.middle( v2 ) ;
          * 
          * trace(middle) ;
-         * </code>
+         * </pre>
          * @return the middle Point between 2 Points.
          */
         public function middle( vector:Vector2 ):Vector2 
@@ -612,7 +612,7 @@ package graphics.geom
         }
         
         /**
-         * Rotates the Vector2 with the specified <code class="prettyprint">angle</pre> in argument and creates a new Vector2.
+         * Rotates the Vector2 with the specified <code class="prettyprint">angle</code> in argument and creates a new Vector2.
          * @param angle the Angle to rotate this Vector2.
          * @return The rotate new Vector2.
          */
