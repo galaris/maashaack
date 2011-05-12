@@ -33,28 +33,35 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class isOctalDigitTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isOctalDigitTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testIsOctalDigit():void
+        {
+            var alpha:String       = "abcdefghijklmnopqrstuvwxyz";
+            var odigit:Array        = ("01234567").split("");
+            var nondigit:Array     = ( alpha + specialChar + "89" ).split("") ;
+            var specialChar:String = "&~#\"\'{([-|`_\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
             
-            suite.addTestSuite( isAlphaTest      ) ;
-            suite.addTestSuite( isASCIITest      ) ;
-            suite.addTestSuite( isDigitTest      ) ;
-            suite.addTestSuite( isHexDigitTest   ) ;
-            suite.addTestSuite( isLowerTest      ) ;
-            suite.addTestSuite( isOctalDigitTest ) ;
-            suite.addTestSuite( isOperatorTest   ) ;
-            suite.addTestSuite( isUnicodeTest    ) ;
-            suite.addTestSuite( isUpperTest      ) ;
+            var i:int ;
             
-            return suite;
+            for( i = 0 ; i < odigit.length ; i++ )
+            {
+                assertTrue( isOctalDigit( odigit[i] ) , odigit[i] + " is not Digit");
+            }
+            
+            for( i = 0 ; i < nondigit.length ; i++ )
+            {
+                assertFalse( isOctalDigit( nondigit[i] ), nondigit[i] + " is Digit");
+            }
         }
     }
 }
