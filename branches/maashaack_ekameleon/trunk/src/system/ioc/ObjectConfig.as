@@ -343,7 +343,7 @@ package system.ioc
         /**
          * Indicates the type policy of the object factory who use this configuration object. 
          * The default value of this attribute is <code class="prettyprint">TypePolicy.NONE</code>.
-         * <p>You can use the TypePolicy.NONE, TypePolicy.ALL, TypePolicy.ALIAS, TypePolicy.EXPRESSION values./p>
+         * <p>You can use the TypePolicy.NONE, TypePolicy.ALL, TypePolicy.ALIAS, TypePolicy.EXPRESSION values.</p>
          * @see system.ioc.TypePolicy
          */
         public function get typePolicy():String
