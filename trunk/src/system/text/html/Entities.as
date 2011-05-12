@@ -47,13 +47,13 @@ package system.text.html
      * var findByChar:Boolean = Entities.findByChar("€") ;
      * trace( findByChar ) ;  // true
      * 
-     * var findByName:Boolean = Entities.findByName("&euro;") ;
+     * var findByName:Boolean = Entities.findByName("&#38;euro&#xA0;") ;
      * trace( findByName ) ;  // true
      * 
      * var toHTML:String = Entities.toHTML("€") ;
-     * trace( toHTML ) ; // &euro;
+     * trace( toHTML ) ; // &#38;euro&#xA0;
      * 
-     * var fromName:String = Entities.fromName("&euro;") ;
+     * var fromName:String = Entities.fromName("&#38;euro&#xA0;") ;
      * trace( fromName ) ;  // €
      * </pre>
      */
@@ -115,7 +115,7 @@ package system.text.html
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.text.html.Entities ;
-         * var findByName:Boolean = Entities.findByName("&euro;") ;
+         * var findByName:Boolean = Entities.findByName("&#38;euro&#xA0;") ;
          * trace( findByName ) ; // true
          * </pre>
          * @return <code class="prettyprint">true</code> if the entity is register with the specified name.
@@ -144,7 +144,7 @@ package system.text.html
          * <pre class="prettyprint">
          * import system.text.html.Entities ;
          * var toHTML:String = Entities.toHTML("€") ;
-         * trace( toHTML ) ;  // &euro;
+         * trace( toHTML ) ;  // &#38;euro&#xA0;
          * </pre>
          */
         public static function toHTML( char:String ):String
@@ -169,7 +169,7 @@ package system.text.html
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import system.text.html.Entities ;
-         * var fromName:String = Entities.fromName("&euro;") ;
+         * var fromName:String = Entities.fromName("&#38;euro&#xA0;") ;
          * trace( fromName ) ;  // €
          * </pre>
          * @return the character determinates by the name in argument.
