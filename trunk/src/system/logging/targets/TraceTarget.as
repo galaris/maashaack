@@ -41,6 +41,7 @@ package system.logging.targets
     /**
      * Provides a logger target that uses the global trace() method to output log messages.
      * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
      * package examples
      * {
      *     import system.logging.Log;
@@ -57,7 +58,7 @@ package system.logging.targets
      *             // setup writer
      *             var target:TraceTarget = new TraceTarget() ;
      *             
-     *             target.filters        = [ "examples.*" ] ;
+     *             target.filters        = [ "examples.&#42;" ] ;
      *             target.level          = LoggerLevel.ALL ;
      *             
      *             target.includeDate    = true ;
