@@ -6,10 +6,11 @@
 small, fast and without any dependencies.
 
 || *package* || *API* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `core.*` || FP_10_2 || n/a || yes || yes ||
+|| `core.*` || FP_10_2 || n/a || yes || 0.3.1 ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Flibraries%2Flogd%2Ftrunk /libraries/logd/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/libraries/logd/trunk logd-read-only` ||
+
 
 = Introduction =
 
