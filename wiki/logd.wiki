@@ -160,38 +160,119 @@ and nothing else unless you customize the input/output.
 {{{
 function get SUPPRESS():int;
 }}}
+SUPPRESS value.
+<br>
+<br>
 
 === VERBOSE ===
 {{{
 function get VERBOSE():int;
 }}}
+VERBOSE value.
+<br>
+<br>
 
 === DEBUG ===
 {{{
 function get DEBUG():int;
 }}}
+DEBUG value.
+<br>
+<br>
 
 === INFO ===
 {{{
 function get INFO():int;
 }}}
+INFO value.
+<br>
+<br>
 
 === WARN ===
 {{{
 function get WARN():int;
 }}}
+WARN value.
+<br>
+<br>
 
 === ERROR ===
 {{{
 function get ERROR():int;
 }}}
+ERROR value.
+<br>
+<br>
 
 === ASSERT ===
 {{{
 function get ASSERT():int;
 }}}
+ASSERT value.
+<br>
+<br>
 
 == Properties ==
+
+=== id ===
+{{{
+function get id():String
+}}}
+Returns the unique ID for the logger.
+<br>
+<br>
+
+=== level ===
+{{{
+function get level():int
+function set level( value:int ):void
+}}}
+Sets/Returns the logging level for this logger.
+<br>
+<br>
+
+=== input ===
+{{{
+function get input():Function
+function set input( value:Function ):void
+}}}
+Define a log input function.
+
+The input is used to parse the log before sending it,<br>
+you could use it to support special formating, appending<br>
+additional informations, etc.
+
+the function HAVE TO respect this signature
+{{{
+function input( msg:String, o:* = null ):Object
+{
+    //your code
+}
+}}}
+The returned object must contains 2 properties `msg` and `o`.
+<br>
+<br>
+
+=== output ===
+{{{
+function get output():Function
+function set output( value:Function ):void
+}}}
+Define a log output function.
+
+The output is used to send the log to a destination,<br>
+by default we use `trace()` but you could<br>
+use Socket, LocalConnection, etc.
+
+the function HAVE TO respect this signature
+{{{
+function output( msg:String, o:* = null ):String
+{
+    //your code
+}
+}}}
+<br>
+<br>
 
 
 == Methods ==
@@ -243,46 +324,60 @@ mylog.d( "client connected" ); // D|socket|client connected
 <br>
 <br>
 
-=== input ===
+=== v ===
 {{{
-function get input():Function
-function set input( value:Function ):void
+function v( msg:String, o:* = null ):void
 }}}
-Define a log input function.
-
-The input is used to parse the log before sending it,<br>
-you could use it to support special formating, appending<br>
-additional informations, etc.
-
-the function HAVE TO respect this signature
-{{{
-function input( msg:String, o:* = null ):Object
-{
-    //your code
-}
-}}}
-The returned object must contains 2 properties `msg` and `o`.
+Send a VERBOSE log message.
 <br>
 <br>
 
-=== output ===
+=== d ===
 {{{
-function get output():Function
-function set output( value:Function ):void
+function d( msg:String, o:* = null ):void
 }}}
-Define a log output function.
+Send a DEBUG log message.
+<br>
+<br>
 
-The output is used to send the log to a destination,<br>
-by default we use `trace()` but you could<br>
-use Socket, LocalConnection, etc.
-
-the function HAVE TO respect this signature
+=== i ===
 {{{
-function output( msg:String, o:* = null ):String
-{
-    //your code
-}
+function i( msg:String, o:* = null ):void
 }}}
+Send an INFO log message.
+<br>
+<br>
+
+=== w ===
+{{{
+function w( msg:String, o:* = null ):void
+}}}
+Send a WARN log message.
+<br>
+<br>
+
+=== e ===
+{{{
+function e( msg:String, o:* = null ):void
+}}}
+Send an ERROR log message.
+<br>
+<br>
+
+=== wtf ===
+{{{
+function wtf( msg:String, o:* = null ):void
+}}}
+What a Terrible Failure (or What The Fuck).<br>
+Report a condition that should never happen (eg. send an ASSERT log message).
+<br>
+<br>
+
+=== println ===
+{{{
+function println( priority:int, tag:String, msg:String, o:* = null ):void
+}}}
+Low-level logging call.
 <br>
 <br>
 
