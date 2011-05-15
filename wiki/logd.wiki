@@ -154,6 +154,46 @@ and nothing else unless you customize the input/output.
 <br>
 <br>
 
+== Constants ==
+
+=== SUPPRESS ===
+{{{
+function get SUPPRESS():int;
+}}}
+
+=== VERBOSE ===
+{{{
+function get VERBOSE():int;
+}}}
+
+=== DEBUG ===
+{{{
+function get DEBUG():int;
+}}}
+
+=== INFO ===
+{{{
+function get INFO():int;
+}}}
+
+=== WARN ===
+{{{
+function get WARN():int;
+}}}
+
+=== ERROR ===
+{{{
+function get ERROR():int;
+}}}
+
+=== ASSERT ===
+{{{
+function get ASSERT():int;
+}}}
+
+== Properties ==
+
+
 == Methods ==
 
 === config ===
