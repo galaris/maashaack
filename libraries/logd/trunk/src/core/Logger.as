@@ -170,7 +170,7 @@ package core
         function w( msg:String, o:* = null ):void;
         
         /**
-         * Send a VERBOSE log message.
+         * Send an ERROR log message.
          */
         function e( msg:String, o:* = null ):void;
         
