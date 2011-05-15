@@ -1,9 +1,14 @@
 #summary logd library.
 
-= Introduction =
+= About =
 
 *logd* is a logging library implemented in the spirit of the *core* package,<br>
 small, fast and without any dependencies.
+
+|| *package* || *API* || *dependencies* ||
+|| core || FP_10_2 || n/a ||
+
+= Introduction =
 
 Today in AS3 you must have about 100's of different logging libraries,<br>
 people kind of followed what happened with Java<br>
