@@ -5,8 +5,9 @@
 *logd* is a logging library implemented in the spirit of the *core* package,<br>
 small, fast and without any dependencies.
 
-|| *package* || *API* || *dependencies* ||
-|| core || FP_10_2 || n/a ||
+|| *package* || *API* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `core.*` || FP_10_2 || n/a || yes || yes ||
+
 
 = Introduction =
 
