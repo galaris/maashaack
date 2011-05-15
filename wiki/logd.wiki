@@ -314,6 +314,10 @@ function tag( name:String, level:int = -1 ):Logger
 }}}
 Creates a tag and return a new logger object.
 
+*note:*<br>
+The default implementation does not provide a `tag` (eg. it's the empty string).<br>
+A tag can be anything from a simple name to the full path of your class, etc.<br>
+
 *example*:
 {{{
 var mylog:Logger = log.tag( "socket" );
