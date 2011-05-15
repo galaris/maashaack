@@ -248,9 +248,9 @@ function output( msg:String, o:* = null ):String
 
 ----
 
-= Usage =
+= Usages =
 
-import and log and that's it.
+== import and log and that's it ==
 {{{
 package test
 {
@@ -283,7 +283,7 @@ filter the logs from a big text file (like `flashlogs.txt`) and get the particul
 <br>
 <br>
 
-Adding a custom tag.
+== Adding a custom tag ==
 {{{
 package test
 {
@@ -314,7 +314,7 @@ package test
 }}}
 <br>
 
-Change the mode and the separator.
+== Change the mode and the separator ==
 {{{
 package test
 {
@@ -346,7 +346,7 @@ MyClass ( toString ) 65
 }}}
 <br>
 
-Change the format for a particular priority and change the logging level (and all of the above).
+== Change the format for a particular priority and change the logging level (and all of the above) ==
 {{{
 package test
 {
@@ -385,7 +385,7 @@ MyClass ( toString ) 65
 }}}
 <br>
 
-Customize the input function.
+== Customize the input function ==
 {{{
 package test
 {
@@ -459,7 +459,7 @@ MyClass ( toString() ) 65
 }}}
 <br>
 
-Customize the output function.
+== Customize the output function ==
 {{{
 package test
 {
@@ -509,7 +509,7 @@ here any log message will be redirected to the firebug command `console.log()`.
 <br>
 <br>
 
-Advanced customization of the output function with mode *data*.
+== Advanced customization of the output function with mode 'data' ==
 {{{
 package test
 {
