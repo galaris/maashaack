@@ -248,7 +248,7 @@ function output( msg:String, o:* = null ):String
 
 ----
 
-=== basic usage ===
+= Usage =
 
 import and log and that's it.
 {{{
