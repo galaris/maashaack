@@ -154,9 +154,9 @@ and nothing else unless you customize the input/output.
 <br>
 <br>
 
-= Methods =
+== Methods ==
 
-== config ==
+=== config ===
 {{{
 function config( cfg:Object ):void
 }}}
@@ -174,7 +174,7 @@ log.config( cfg );
 <br>
 <br>
 
-== format ==
+=== format ===
 {{{
 function format( priority:int, pre:String = "", post:String = "" ):void
 }}}
@@ -189,7 +189,7 @@ log.d( "hello world" ); // D{ hello world }
 <br>
 <br>
 
-== tag ==
+=== tag ===
 {{{
 function tag( name:String, level:int = -1 ):Logger
 }}}
@@ -203,7 +203,7 @@ mylog.d( "client connected" ); // D|socket|client connected
 <br>
 <br>
 
-== input ==
+=== input ===
 {{{
 function get input():Function
 function set input( value:Function ):void
@@ -225,7 +225,7 @@ The returned object must contains 2 properties `msg` and `o`.
 <br>
 <br>
 
-== output ==
+=== output ===
 {{{
 function get output():Function
 function set output( value:Function ):void
