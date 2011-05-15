@@ -1,5 +1,7 @@
 #summary logd library.
 
+<wiki:toc max_depth="1" />
+
 == Introduction ==
 
 *logd* is a logging library implemented in the spirit of the *core* package,<br>
