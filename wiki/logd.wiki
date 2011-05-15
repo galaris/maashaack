@@ -169,7 +169,8 @@ cfg = { sep: " ", //char separator
           }
 log.config( cfg );
 }}}
-
+<br>
+<br>
 
 == format ==
 {{{
@@ -183,7 +184,8 @@ log.config( { mode: "clean" } );
 log.format( log.DEBUG, "D{ ", " }" );
 log.d( "hello world" ); // D{ hello world }
 }}}
-
+<br>
+<br>
 
 == tag ==
 {{{
@@ -196,7 +198,8 @@ Creates a tag and return a new logger object.
 var mylog:Logger = log.tag( "socket" );
 mylog.d( "client connected" ); // D|socket|client connected
 }}}
-
+<br>
+<br>
 
 == input ==
 {{{
@@ -217,7 +220,8 @@ function input( msg:String, o:* = null ):Object
 }
 }}}
 The returned object must contains 2 properties `msg` and `o`.
-
+<br>
+<br>
 
 == output ==
 {{{
@@ -237,7 +241,8 @@ function output( msg:String, o:* = null ):String
     //your code
 }
 }}}
-
+<br>
+<br>
 
 ----
 
