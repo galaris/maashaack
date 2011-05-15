@@ -92,7 +92,7 @@ public function test()
 
 
 ----
-=== Documentation ===
+= Documentation =
 
 *logd* can use 4 different mode
 
@@ -152,7 +152,9 @@ and nothing else unless you customize the input/output.
 <br>
 <br>
 
-*config()*
+= Methods =
+
+== config ==
 {{{
 function config( cfg:Object ):void
 }}}
@@ -167,9 +169,9 @@ cfg = { sep: " ", //char separator
           }
 log.config( cfg );
 }}}
-<br>
 
-*format()*
+
+== format ==
 {{{
 function format( priority:int, pre:String = "", post:String = "" ):void
 }}}
@@ -181,9 +183,9 @@ log.config( { mode: "clean" } );
 log.format( log.DEBUG, "D{ ", " }" );
 log.d( "hello world" ); // D{ hello world }
 }}}
-<br>
 
-*tag()*
+
+== tag ==
 {{{
 function tag( name:String, level:int = -1 ):Logger
 }}}
@@ -194,9 +196,9 @@ Creates a tag and return a new logger object.
 var mylog:Logger = log.tag( "socket" );
 mylog.d( "client connected" ); // D|socket|client connected
 }}}
-<br>
 
-*input*
+
+== input ==
 {{{
 function get input():Function
 function set input( value:Function ):void
@@ -215,9 +217,9 @@ function input( msg:String, o:* = null ):Object
 }
 }}}
 The returned object must contains 2 properties `msg` and `o`.
-<br>
 
-*output*
+
+== output ==
 {{{
 function get output():Function
 function set output( value:Function ):void
@@ -235,8 +237,9 @@ function output( msg:String, o:* = null ):String
     //your code
 }
 }}}
-<br>
 
+
+----
 
 === basic usage ===
 
