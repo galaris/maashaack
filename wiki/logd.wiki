@@ -1,8 +1,8 @@
 #summary logd library.
 
-<wiki:toc max_depth="1" />
+<wiki:toc max_depth="3" />
 
-== Introduction ==
+= Introduction =
 
 *logd* is a logging library implemented in the spirit of the *core* package,<br>
 small, fast and without any dependencies.
@@ -24,7 +24,7 @@ But this *system.logging* is more something that someone would use in his/her ap
 and something we try to not use in the lower layers of packages,libraries etc.
 
 
-== Details ==
+= Details =
 
 *logd* focus on 3 points
  * being as small and fast as possible
