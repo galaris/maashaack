@@ -33,18 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package
-{
-    import flash.display.Sprite;
-    
-    [ExcludeClass]
-    [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="logd", scriptRecursionLimit="1000", scriptTimeLimit="60")]
-    public class logd extends Sprite
-    {
-        public function logd()
-        {
-            trace( "logd" );
-        }
-
-    }
-}
+include "core/assert.as";
+include "core/Logger.as";
+include "core/_logger.as";
+include "core/log.as";
