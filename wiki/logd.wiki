@@ -5,10 +5,6 @@
 *logd* is a logging library implemented in the spirit of the *core* package,<br>
 small, fast and without any dependencies.
 
-<p align="right">
-[http://maashaack.googlecode.com/svn/gfx/download.png]
-</p>
-
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
 || `core.*` || FP_10_2<br>avmglue 0.1 || `LOG::P` (optional) || n/a || yes || 0.3.1 ||
 
@@ -24,7 +20,9 @@ small, fast and without any dependencies.
 
 <br>
 
-
+<p align="right">
+[http://maashaack.googlecode.com/svn/gfx/download.png]
+</p>
 
 <br>
 <br>
