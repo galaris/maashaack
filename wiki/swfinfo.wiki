@@ -1,10 +1,36 @@
 #summary Utility to get in depth informations from a SWF file.
 
-== Introduction ==
+= About =
 
-*swfinfo* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
+*swfinfo* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin]
+which allows to parse the informations of a `*.swf` file.
 
-It allows to parse the informations of a `*.swf` file.
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Ftools%2Fswfinfo%2Ftrunk /tools/swfinfo/trunk] ||
+|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/tools/swfinfo/trunk/ swfinfo-read-only` ||
+
+<img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/>
+[http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip Linux]<br>
+[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip OSX 10.6]<br>
+[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip OSX 10.5]<br>
+[http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip Windows]
+<br>
+<br>
+<br>
+<br>
+<br>
+*notes:*<br>
+  * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
+  * Linux binary is compiled for Ubuntu
+
+<br>
+<br>
+
+= Introduction =
+As a programmer when you deal with *SWF* files,<br>
+there is always a time when you need tidbit of infos<br>
+or much much more infos.
+
+*swfinfo* will provide these kind of infos
 
 Here the list of tags the program know how to parse
   * Metadata
@@ -15,28 +41,25 @@ Here the list of tags the program know how to parse
   * !FileAttributes
 
 Hopefully with time more tags will be parsed.
-
-== Installation ==
-
-|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Ftools%2Fswfinfo%2Ftrunk /tools/swfinfo/trunk] ||
-|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/tools/swfinfo/trunk/ swfinfo-read-only` ||
-
-<img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/>
-[http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip Linux]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip OSX 10.5]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip Windows]
 <br>
 <br>
+
+= Installation =
+
+Unzip somewhere in your file system and be sure the program is accessible from the command line.
+
+HOWTO install command line tools Windows - TODO<br>
+HOWTO install command line tools OSX - TODO<br>
+HOWTO install command line tools Linux - TODO<br>
+
 <br>
 <br>
-<br>
-*notes:*<br>
-  * OS X file is for OS X 10.6+ intel
-  * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
-  * Linux binary is compiled for Ubuntu
 
 
-== Documentation ==
+----
+= Documentation =
 
-*Usage*
+== Usage ==
 {{{
 swfinfo [-h] [-v] [-L] [-s] [-o:val[=opt]] [-p] [-a] [-u] [-k] [-x] [-n] [-t:val] [-g:val] [-w:val] file
 }}}
@@ -814,3 +837,4 @@ at the opposite if you want more details in hexadecimal output use the options *
   tag 0x00: End | size: 0 B | ratio: 0.000%
  ]
 }}}
+----
