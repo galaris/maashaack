@@ -24,6 +24,9 @@ Hopefully with time more tags will be parsed.
 <img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/>
 [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip Linux]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip OSX 10.5]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip Windows]
 <br>
+<br>
+<br>
+<br>
 *notes:*<br>
   * OS X file is for OS X 10.6+ intel
   * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
