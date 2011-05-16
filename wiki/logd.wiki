@@ -19,6 +19,12 @@ small, fast and without any dependencies.
 
 
 <br>
+
+<div align="right">
+[http://maashaack.googlecode.com/svn/gfx/download.png]
+</div>
+
+<br>
 <br>
 
 = Introduction =
