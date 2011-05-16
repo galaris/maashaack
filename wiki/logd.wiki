@@ -13,11 +13,7 @@ small, fast and without any dependencies.
 
 <img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/>
 || *file content* ||
-|| {{{
-...
- |_ a
- |_ b
-}}} ||
+|| logd.abc<br>logd.swc ||
 
 <br>
 <br>
