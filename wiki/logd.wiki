@@ -14,6 +14,11 @@ small, fast and without any dependencies.
 ||[http://maashaack.googlecode.com/svn/gfx/download.png]|| download here ||
 
 <br>
+
+<table class="wikitable"><tr><td style="border: 0px solid #ccc; padding: 5px;"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" /></td><td style="border: 0px solid #ccc; padding: 5px;"> download here </td></tr> </table>
+
+
+<br>
 <br>
 
 = Introduction =
