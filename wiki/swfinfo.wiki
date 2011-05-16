@@ -20,8 +20,8 @@ Hopefully with time more tags will be parsed.
 
 Download the file for your operating system.
 
-|| Linux || OS X || Windows ||
-|| [http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip swfinfo NIX]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip swfinfo OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip swfinfo OSX 10.5]|| [http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip swfinfo WIN] ||
+<img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/>
+[http://maashaack.googlecode.com/files/swfinfo_1.0_NIX.zip Linux]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX.zip OSX 10.6]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_OSX105.zip OSX 10.5]<br>[http://maashaack.googlecode.com/files/swfinfo_1.0_WIN.zip Windows]
 
 *get the source code*<br>
 `svn checkout http://maashaack.googlecode.com/svn/tools/swfinfo/trunk/ swfinfo-read-only`
