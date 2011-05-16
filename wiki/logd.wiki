@@ -20,7 +20,7 @@ small, fast and without any dependencies.
 
 <br>
 
-<div align="right">
+<p align="right">
 [http://maashaack.googlecode.com/svn/gfx/download.png]
 </div>
 
