@@ -22,7 +22,7 @@ small, fast and without any dependencies.
 
 <p align="right">
 [http://maashaack.googlecode.com/svn/gfx/download.png]
-</div>
+</p>
 
 <br>
 <br>
