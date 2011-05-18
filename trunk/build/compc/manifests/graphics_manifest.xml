@@ -232,6 +232,7 @@
     <component id="graphics.process.display:MoveTo"         class="graphics.process.display.MoveTo"         />
     <component id="graphics.process.display:RemoveChild"    class="graphics.process.display.RemoveChild"    />
     <component id="graphics.process.display:RemoveChildAt"  class="graphics.process.display.RemoveChildAt"  />
+    <component id="graphics.process.display:RemoveChildren" class="graphics.process.display.RemoveChildren" />
     <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
     <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
     <component id="graphics.process.display:SwapChildrenAt" class="graphics.process.display.SwapChildrenAt" />
