@@ -79,10 +79,13 @@ package graphics.process.display
             notifyStarted() ;
             try
             {
-                var size:int = container.numChildren ;
-                while(--size > -1)
+                if ( container.numChildren > 0 )
                 {
-                    container.removeChildAt( size ) ; 
+                    var size:int = container.numChildren ;
+                    while(--size > -1)
+                    {
+                        container.removeChildAt( size ) ; 
+                    }
                 }
             }
             catch( e:Error )
