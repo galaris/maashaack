@@ -157,8 +157,9 @@ package graphics.display
          * @param looping Specifies whether playback of the clip should continue, or loop (default false). 
          * @param numLoop Specifies the number of the times the presentation should loop during playback.
          * @param defaultIndex This index defines the default frame to stop the timeline of the MovieClip target.
+         * @param frameScripts The optional Array of frame scripts.
          */
-        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , looping:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 )
+        public function TimelineTransition( target:MovieClip = null , startIndex:* = null , finishIndex:* = null , looping:Boolean = false , numLoop:uint = 0 , defaultIndex:* = 1 , frameScripts:Array = null )
         {
             this.target       = target ;
             this.looping      = looping ;
@@ -166,6 +167,7 @@ package graphics.display
             this.defaultIndex = defaultIndex ;
             this.finishIndex  = finishIndex ;
             this.startIndex   = startIndex ;
+            this.frameScripts = frameScripts ;
         }
         
         /**
@@ -233,6 +235,11 @@ package graphics.display
                 _finishIndex = null ; 
             }
         }
+        
+        /**
+         * An optional Array of framescripts to add in the MovieClip target during the transition.
+         */
+        public var frameScripts:Array ;
         
         /**
          * Specifies the number of the times the presentation should loop during playback.
@@ -359,6 +366,15 @@ package graphics.display
                 else 
                 {
                      _script.put( _target.totalFrames , finish ) ;
+                }
+                
+                if( frameScripts && frameScripts.length > 1 )
+                {
+                    var clone:Array = [].concat( frameScripts ) ;
+                    while( clone.length > 0 )
+                    {
+                        _script.put( clone.shift() , clone.shift() as Function ) ;
+                    }
                 }
                 
                 // run the playback
