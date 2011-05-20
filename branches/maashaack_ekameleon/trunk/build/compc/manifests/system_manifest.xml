@@ -65,6 +65,7 @@
     
     <!-- system.data -->
     
+    <component id="system.data:Aliases"         class="system.data.Aliases" />
     <component id="system.data:Bag"             class="system.data.Bag" />
     <component id="system.data:Boundable"       class="system.data.Boundable" />
     <component id="system.data:Collection"      class="system.data.Collection" />
@@ -385,14 +386,15 @@
     
     <!-- system.serializers.eden -->
     
-    <component id="system.serializers.eden:config"            class="system.serializers.eden.config"            />
-    <component id="system.serializers.eden:debug"             class="system.serializers.eden.debug"             />
-    <component id="system.serializers.eden:ECMAScript"        class="system.serializers.eden.ECMAScript"        />
-    <component id="system.serializers.eden:EdenConfigurator"  class="system.serializers.eden.EdenConfigurator"  />
-    <component id="system.serializers.eden:EdenSerializer"    class="system.serializers.eden.EdenSerializer"    />
-    <component id="system.serializers.eden:info"              class="system.serializers.eden.info"              />
-    <component id="system.serializers.eden:release"           class="system.serializers.eden.release"           />
-    <component id="system.serializers.eden:strings"           class="system.serializers.eden.strings"           />
+    <component id="system.serializers.eden:aliases"          class="system.serializers.eden.aliases"          />
+    <component id="system.serializers.eden:config"           class="system.serializers.eden.config"           />
+    <component id="system.serializers.eden:debug"            class="system.serializers.eden.debug"            />
+    <component id="system.serializers.eden:ECMAScript"       class="system.serializers.eden.ECMAScript"       />
+    <component id="system.serializers.eden:EdenConfigurator" class="system.serializers.eden.EdenConfigurator" />
+    <component id="system.serializers.eden:EdenSerializer"   class="system.serializers.eden.EdenSerializer"   />
+    <component id="system.serializers.eden:info"             class="system.serializers.eden.info"             />
+    <component id="system.serializers.eden:release"          class="system.serializers.eden.release"          />
+    <component id="system.serializers.eden:strings"          class="system.serializers.eden.strings"          />
     
     <!-- system.signals -->
     
