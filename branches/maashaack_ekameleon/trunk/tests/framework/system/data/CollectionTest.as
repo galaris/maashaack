@@ -37,11 +37,10 @@ package system.data
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.data.samples.CollectionClass;    
-
+    import system.data.samples.CollectionClass;
+    
     public class CollectionTest extends TestCase 
     {
-
         public function CollectionTest( name:String = "" )
         {
             super( name );
@@ -51,8 +50,7 @@ package system.data
         {
             var c:CollectionClass = new CollectionClass();
             assertTrue( c is Collection ) ;
-        }         
-        
+        }
     }
 }
 

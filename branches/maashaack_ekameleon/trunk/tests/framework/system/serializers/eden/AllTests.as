@@ -36,13 +36,14 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.serializers.eden
 {
-    import buRRRn.ASTUce.framework.*;
-
-    /* TestSuite that runs all the eden tests
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
+    
+    /**
+     * TestSuite that runs all the eden tests
      */
     public class AllTests
     {
-
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite("All eden tests");

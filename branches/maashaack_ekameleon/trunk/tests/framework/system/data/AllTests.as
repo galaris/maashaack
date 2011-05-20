@@ -35,18 +35,19 @@
 
 package system.data
 {
-    import buRRRn.ASTUce.framework.*;
+    import buRRRn.ASTUce.framework.ITest;
+    import buRRRn.ASTUce.framework.TestSuite;
     
-    import system.data.arrays.*;
-    import system.data.bags.*;
-    import system.data.collections.*;
-    import system.data.iterators.*;
-    import system.data.lists.*;
-    import system.data.maps.*;
-    import system.data.queues.*;
-    import system.data.sets.*;
-    import system.data.stacks.*;
-    import system.data.trees.*;
+    import system.data.arrays.AllTests;
+    import system.data.bags.AllTests;
+    import system.data.collections.AllTests;
+    import system.data.iterators.AllTests;
+    import system.data.lists.AllTests;
+    import system.data.maps.AllTests;
+    import system.data.queues.AllTests;
+    import system.data.sets.AllTests;
+    import system.data.stacks.AllTests;
+    import system.data.trees.AllTests;
     
     public class AllTests
     {
@@ -57,6 +58,7 @@ package system.data
             
             // test system.data interfaces & class
             
+            suite.addTestSuite(AliasesTest) ;
             suite.addTestSuite(BagTest) ;
             suite.addTestSuite(BoundableTest) ;
             suite.addTestSuite(CollectionTest) ;
