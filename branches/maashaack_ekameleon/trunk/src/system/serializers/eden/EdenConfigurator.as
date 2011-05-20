@@ -53,6 +53,22 @@ package system.serializers.eden
         }
         
         /**
+         * Allows to use aliases in the eden parser.
+         */
+        public function get allowAliases():Boolean
+        {
+            return _config.allowAliases;
+        }
+        
+        /**
+         * @private
+         */
+        public function set allowAliases( value:Boolean ):void
+        {
+            _config.allowAliases = value;
+        }
+        
+        /**
          * Allows to execute function call. if set to false it blocks any functrion call and return undefined.
          * <p><b>Example:</b></p>
          * <pre class="prettyprint">

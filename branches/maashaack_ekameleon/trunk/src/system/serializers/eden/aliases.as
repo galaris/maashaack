@@ -38,6 +38,18 @@ package system.serializers.eden
     
     /**
      * The eden aliases dictionary.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import system.eden ;
+     * 
+     * var source:String = "new Sprite()" ;
+     * 
+     * // eden.config.allowAliases = true ;
+     * 
+     * eden.addAlias( "Sprite" , "flash.display.Sprite" ) ;
+     * 
+     * trace( eden.deserialize( source ) ) ;
+     * </pre>
      */
     public const aliases:Aliases = new Aliases() ;
 }

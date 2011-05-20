@@ -49,6 +49,7 @@ package system.serializers.eden
             undefineable: undefined,
             verbose: false,
             security: false,
+            allowAliases: true,
             allowFunctionCall: true,
             arrayIndexAsBracket: false ,
             autoAddScopePath: false,

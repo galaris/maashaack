@@ -36,7 +36,7 @@
 package system.serializers.eden
 {
     import core.dump;
-    
+
     import system.Serializable;
     import system.Serializer;
     
@@ -75,6 +75,14 @@ package system.serializers.eden
                later we may want to configure the instanciation of the serializer
                ex: custom config, custom authorized etc.
             */
+        }
+        
+        /**
+         * The config reference of the eden serializer.
+         */
+        public function get config():EdenConfigurator
+        {
+            return system.serializers.eden.config ;
         }
         
         /**
@@ -126,6 +134,15 @@ package system.serializers.eden
         }
         
         /**
+         * Inserts a new alias in the dictionary.
+         * @return A boolean to indicates if the alias is registered or not.
+         */
+        public function addAlias( alias:String , value:String ):Boolean
+        {
+            return aliases.register( alias , value ) ;
+        }
+        
+        /**
          * Inserts an authorized path in the white list of the parser.
          */
         public function addAuthorized( ...arguments:Array ):void
@@ -168,6 +185,15 @@ package system.serializers.eden
         public function deserialize( source:String ):*
         {
             return ECMAScript.evaluate( source );
+        }
+        
+        /**
+         * Remove a specific alias in the dictionary.
+         * @return A boolean to indicates if the alias is unregistered or not.
+         */
+        public function removeAlias( alias:String ):Boolean
+        {
+            return aliases.unregister( alias ) ;
         }
         
         /**
