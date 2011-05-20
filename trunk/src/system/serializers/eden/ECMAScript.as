@@ -1609,6 +1609,11 @@ package system.serializers.eden
                     var globalRef:Boolean = false;
                     var result:*;
                     
+                    if ( config.allowAliases && aliases.containsAlias( baseword ) )
+                    {
+                        baseword = aliases.getValue(baseword) ;
+                    }
+                    
                     if( _doesExistInGlobalScope( baseword ) )
                     {
                         globalRef = true;
