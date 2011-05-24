@@ -36,6 +36,21 @@ package system.conditions
 {
     /**
      * Evaluates a basic condition.
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import system.conditions.Condition ;
+     * import system.conditions.Eval ;
+     * 
+     * var cond1:Condition = new Eval( true  ) ;
+     * var cond2:Condition = new Eval( false ) ;
+     * var cond3:Condition = new Eval( cond1 ) ;
+     * 
+     * trace( cond1.eval() ) ; // true
+     * trace( cond2.eval() ) ; // false
+     * trace( cond3.eval() ) ; // true
+     * </code>
+     * </listing>
      */
     public class Eval implements Condition
     {
