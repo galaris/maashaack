@@ -371,6 +371,14 @@
     <component id="system.reflection:ReflectionConfigurator" class="system.reflection.ReflectionConfigurator" />
     <component id="system.reflection:TypeInfo"               class="system.reflection.TypeInfo"               />
     
+    <!-- system.rules -->
+    
+    <component id="system.rules:And"       class="system.rules.And"       />
+    <component id="system.rules:Condition" class="system.rules.Condition" />
+    <component id="system.rules:Eval"      class="system.rules.Eval"      />
+    <component id="system.rules:Not"       class="system.rules.Not"       />
+    <component id="system.rules:Or"        class="system.rules.Or"        />
+    
     <!-- system.remoting -->
     
     <component id="system.remoting:connections"              class="system.remoting.connections"              />
