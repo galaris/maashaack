@@ -42,10 +42,11 @@ package system.conditions
      * <code class="prettyprint">
      * import system.conditions.And ;
      * import system.conditions.Condition ;
+     * import system.conditions.Eval ;
      * 
-     * var cond1:Condition = new Condition( true  ) ;
-     * var cond2:Condition = new Condition( false ) ;
-     * var cond3:Condition = new Condition( true  ) ;
+     * var cond1:Condition = new Eval( true  ) ;
+     * var cond2:Condition = new Eval( false ) ;
+     * var cond3:Condition = new Eval( true  ) ;
      * 
      * var a:And ;
      * 
@@ -72,7 +73,7 @@ package system.conditions
      * </code>
      * </listing>
      */
-    public class And extends Condition
+    public class And implements Condition
     {
         /**
          * Creates a new And instance.
@@ -105,7 +106,7 @@ package system.conditions
         /**
          * Evaluates the specified condition.
          */
-        public override function eval():Boolean
+        public function eval():Boolean
         {
             if( conditions.length > 0 )
             {
