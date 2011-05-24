@@ -47,8 +47,10 @@ package system.rules
             suite.addTestSuite( ConditionTest ) ;
             
             suite.addTestSuite( AndTest ) ;
+            suite.addTestSuite( EqualsTest ) ;
             suite.addTestSuite( EvalTest ) ;
             suite.addTestSuite( NotTest ) ;
+            suite.addTestSuite( NotEqualsTest ) ;
             suite.addTestSuite( OrTest ) ;
             
             return suite;
