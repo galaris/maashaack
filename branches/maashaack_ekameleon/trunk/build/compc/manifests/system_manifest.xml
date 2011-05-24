@@ -378,6 +378,7 @@
     <component id="system.rules:Equals"    class="system.rules.Equals"    />
     <component id="system.rules:Eval"      class="system.rules.Eval"      />
     <component id="system.rules:Not"       class="system.rules.Not"       />
+    <component id="system.rules:NotEquals" class="system.rules.NotEquals" />
     <component id="system.rules:Or"        class="system.rules.Or"        />
     
     <!-- system.remoting -->
