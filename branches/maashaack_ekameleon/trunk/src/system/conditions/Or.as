@@ -41,35 +41,36 @@ package system.conditions
      * <listing version="3.0">
      * <code class="prettyprint">
      * import system.conditions.Condition ;
+     * import system.conditions.Eval ;
      * import system.conditions.Or ;
      * 
-     * var cond1:Condition = new Condition( true ) ;
-     * var cond2:Condition = new Condition( false ) ;
-     * var cond3:Condition = new Condition( true ) ;
+     * var cond1:Condition = new Eval( true ) ;
+     * var cond2:Condition = new Eval( false ) ;
+     * var cond3:Condition = new Eval( true ) ;
      * 
      * var o:Or ;
      * 
      * o = new Or( cond1 , cond1 ) ;
-     * trace( o.eval() ) ;
+     * trace( o.eval() ) ; // true
      * 
      * o = new Or( cond1 , cond2 ) ;
-     * trace( o.eval() ) ;
+     * trace( o.eval() ) ; // true
      * 
      * o = new Or( cond2 , cond1 ) ;
-     * trace( o.eval() ) ;
+     * trace( o.eval() ) ; // true
      * 
      * o = new Or( cond2 , cond2 ) ;
-     * trace( o.eval() ) ;
+     * trace( o.eval() ) ; // false
      * 
      * o = new Or( cond1 , cond2 , cond3 ) ;
-     * trace( o.eval() ) ;
+     * trace( o.eval() ) ; // true
      * 
      * o = new Or( cond1 , cond3 , cond2 ) ;
-     * trace( o.eval() ) ; 
+     * trace( o.eval() ) ; // true 
      * </code>
      * </listing>
      */
-    public class Or extends Condition
+    public class Or implements Condition
     {
         /**
          * Creates a new Or instance.
@@ -102,7 +103,7 @@ package system.conditions
         /**
          * Evaluates the specified condition.
          */
-        public override function eval():Boolean
+        public function eval():Boolean
         {
             if( conditions.length > 0 )
             {
