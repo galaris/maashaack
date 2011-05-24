@@ -36,45 +36,13 @@ package system.conditions
 {
     
     /**
-     * A basic condition object to evaluate a specific problem.
-     * <p><b>Example :</b></p>
-     * <listing version="3.0">
-     * <code class="prettyprint">
-     * import system.conditions.And ;
-     * import system.conditions.Condition ;
-     * 
-     * var cond1:Condition = new Condition( true  ) ;
-     * var cond2:Condition = new Condition( false ) ;
-     * var cond3:Condition = new Condition( cond1 ) ;
-     * 
-     * trace( cond1.eval() ) ; // true
-     * trace( cond2.eval() ) ; // false
-     * trace( cond3.eval() ) ; // true
-     * </code>
-     * </listing>
+     * Defines the basic implementation to evaluate a condition.
      */
-    public class Condition
+    public interface Condition
     {
         /**
-         * Creates a new Condition instance.
-         * @param problem The Boolean value or the Condition object to evaluate.
+         * Evaluates a specific condition.
          */
-        public function Condition( problem:* = null )
-        {
-            this.problem = problem ;
-        }
-        
-        /**
-         * The problem to evaluate.
-         */
-        public var problem:* ;
-        
-        /**
-         * Evaluates the specified condition.
-         */
-        public function eval():Boolean
-        {
-            return ( problem is Condition ) ? (problem as Condition).eval() : Boolean( problem ) ;
-        }
+        function eval():Boolean ;
     }
 }
