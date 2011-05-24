@@ -32,25 +32,45 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class AndTest extends TestCase 
     {
-        public static function suite():ITest
+        public function AndTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var cond1:Condition = new Eval( true  ) ;
+            var cond2:Condition = new Eval( false ) ;
+            var cond3:Condition = new Eval( true  ) ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            var a:And ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( NotTest ) ;
+            a = new And( cond1 , cond1 ) ;
+            assertTrue( a.eval() ) ; // true
             
-            return suite;
+            a = new And( cond1 , cond1 , cond1 ) ;
+            assertTrue( a.eval() ) ; // true
+            
+            a = new And( cond1 , cond2 ) ;
+            assertFalse( a.eval() ) ; // false
+            
+            a = new And( cond2 , cond1 ) ;
+            assertFalse( a.eval() ) ; // false
+            
+            a = new And( cond2 , cond2 ) ;
+            assertFalse( a.eval() ) ; // false
+            
+            a = new And( cond1 , cond2 , cond3 ) ;
+            assertFalse( a.eval() ) ; // false
+            
+            a = new And( cond1 , cond3 , cond2 ) ;
+            assertFalse( a.eval() ) ; // false
         }
     }
 }
