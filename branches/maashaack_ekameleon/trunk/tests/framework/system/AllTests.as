@@ -53,6 +53,7 @@ package system
     import system.process.AllTests;
     import system.reflection.AllTests;
     import system.remoting.AllTests;
+    import system.rules.AllTests;
     import system.serializers.AllTests;
     import system.signals.AllTests;
     
@@ -99,6 +100,7 @@ package system
             /* packages */
             
             suite.addTest( system.reflection.AllTests.suite() );
+            suite.addTest( system.rules.AllTests.suite() );
             suite.addTest( system.serializers.AllTests.suite() );
             suite.addTest( system.broadcasters.AllTests.suite() );
             suite.addTest( system.comparators.AllTests.suite() );
