@@ -32,23 +32,40 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class EvalTest extends TestCase 
     {
-        public static function suite():ITest
+        public function EvalTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testEval():void
+        {
+            var cond1:Condition = new Eval( true  ) ;
+            var cond2:Condition = new Eval( false ) ;
+            var cond3:Condition = new Eval( cond1 ) ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            assertTrue( cond1.eval() , "#1" ) ;
+            assertFalse( cond2.eval() , "#1" ) ;
+            assertTrue( cond3.eval() , "#1" ) ;
+        }
+        
+        public function testCondition():void
+        {
+            var cond1:Eval = new Eval( true  ) ;
+            var cond2:Eval = new Eval( false ) ;
+            var cond3:Eval = new Eval( cond1 ) ;
             
-            suite.addTestSuite( EvalTest ) ;
+            assertTrue( cond1.condition , "#1" ) ;
+            assertFalse( cond2.condition , "#2" ) ;
+            assertTrue( cond3.condition , "#3" ) ;
             
-            return suite;
+            cond1.condition = "1" ;
+            assertTrue( cond1.condition , "#4" ) ;
         }
     }
 }
