@@ -58,7 +58,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class Not extends Eval
+    public class Not implements Condition
     {
         /**
          * Creates a new Not instance.
@@ -66,13 +66,18 @@ package system.rules
          */
         public function Not( condition:* = null )
         {
-            super( condition ) ;
+            this.condition = condition ;
         }
+        
+        /**
+         * The condition to evaluate.
+         */
+        public var condition:* ;
         
         /**
          * Evaluates the specified condition.
          */
-        public override function eval():Boolean
+        public function eval():Boolean
         {
             return !( ( condition is Condition ) ? (condition as Condition).eval() : Boolean( condition ) ) ;
         }

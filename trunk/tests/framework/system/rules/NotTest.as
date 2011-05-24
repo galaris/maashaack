@@ -32,24 +32,41 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class NotTest extends TestCase 
     {
-        public static function suite():ITest
+        public function NotTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var cond1:Condition = new Not( true  ) ;
+            var cond2:Condition = new Not( false ) ;
+            var cond3:Condition = new Not( cond1 ) ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            assertFalse( cond1.eval() , "#1" ) ;
+            assertTrue( cond2.eval() , "#2" ) ;
+            assertTrue( cond3.eval() , "#3" ) ;
+        }
+        
+        public function testCondition():void
+        {
+            var cond1:Not = new Not( true  ) ;
+            var cond2:Not = new Not( false ) ;
+            var cond3:Not = new Not( cond1 ) ;
             
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( NotTest ) ;
+            assertTrue( cond1.condition , "#1" ) ;
+            assertFalse( cond2.condition , "#2" ) ;
+            assertTrue( cond3.condition , "#3" ) ;
             
-            return suite;
+            cond1.condition = "1" ;
+            assertEquals( "1" , cond1.condition , "#4-1" ) ;
+            assertFalse( cond1.eval() , "#4-2" ) ;
         }
     }
 }
