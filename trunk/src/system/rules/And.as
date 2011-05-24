@@ -40,9 +40,9 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.conditions.And ;
-     * import system.conditions.Condition ;
-     * import system.conditions.Eval ;
+     * import system.rules.And ;
+     * import system.rules.Condition ;
+     * import system.rules.Eval ;
      * 
      * var cond1:Condition = new Eval( true  ) ;
      * var cond2:Condition = new Eval( false ) ;
