@@ -41,9 +41,10 @@ package system.conditions
      * <code class="prettyprint">
      * import system.conditions.Not ;
      * import system.conditions.Condition ;
+     * import system.conditions.Eval ;
      * 
-     * var cond1:Condition = new Condition( true  ) ;
-     * var cond2:Condition = new Condition( false ) ;
+     * var cond1:Condition = new Eval( true  ) ;
+     * var cond2:Condition = new Eval( false ) ;
      * 
      * var no1:Not = new Not( true ) ;
      * var no2:Not = new Not( false ) ;
@@ -57,15 +58,15 @@ package system.conditions
      * </code>
      * </listing>
      */
-    public class Not extends Condition
+    public class Not extends Eval
     {
         /**
          * Creates a new Not instance.
-         * @param problem The Boolean value or the Condition object to evaluate.
+         * @param condition The Boolean value or the Condition object to evaluate.
          */
-        public function Not( problem:* = null )
+        public function Not( condition:* = null )
         {
-            super( problem ) ;
+            super( condition ) ;
         }
         
         /**
@@ -73,7 +74,7 @@ package system.conditions
          */
         public override function eval():Boolean
         {
-            return !( ( problem is Condition ) ? (problem as Condition).eval() : Boolean( problem ) ) ;
+            return !( ( condition is Condition ) ? (condition as Condition).eval() : Boolean( condition ) ) ;
         }
     }
 }
