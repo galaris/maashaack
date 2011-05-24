@@ -32,26 +32,45 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class OrTest extends TestCase 
     {
-        public static function suite():ITest
+        public function OrTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var cond1:Condition = new Eval( true  ) ;
+            var cond2:Condition = new Eval( false ) ;
+            var cond3:Condition = new Eval( true  ) ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            var o:Or ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( OrTest ) ;
+            o = new Or( cond1 , cond1 ) ;
+            assertTrue( o.eval() , "#1" ) ;
             
-            return suite;
+            o = new Or( cond1 , cond1 , cond1 ) ;
+            assertTrue( o.eval() , "#2" ) ;
+            
+            o = new Or( cond1 , cond2 ) ;
+            assertTrue( o.eval() , "#3" ) ;
+            
+            o = new Or( cond2 , cond1 ) ;
+            assertTrue( o.eval() , "#4" ) ;
+            
+            o = new Or( cond2 , cond2 ) ;
+            assertFalse( o.eval() , "#5" ) ;
+            
+            o = new Or( cond1 , cond2 , cond3 ) ;
+            assertTrue( o.eval() , "#6" ) ;
+            
+            o = new Or( cond1 , cond3 , cond2 ) ;
+            assertTrue( o.eval() , "#7" ) ;
         }
     }
 }
