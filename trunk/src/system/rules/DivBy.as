@@ -59,7 +59,7 @@ package system.rules
          * @param value1 The first value to evaluate.
          * @param value2 The second value to evaluate.
          */
-        public function DivBy(value1:* = null , value2:* = null )
+        public function DivBy( value1:* = null , value2:* = null )
         {
             this.value1 = value1 ;
             this.value2 = value2 ;
