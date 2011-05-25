@@ -352,6 +352,11 @@
     <component id="system.process:TaskPhase"              class="system.process.TaskPhase"              />
     <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
     
+    <!-- system.process.logic -->
+    
+    <component id="system.process.logic:ElseIf" class="system.process.logic.ElseIf" />
+    <component id="system.process.logic:IfTask" class="system.process.logic.IfTask" />
+    
     <!-- system.reflection -->
     
     <component id="system.reflection:_ClassInfo"             class="system.reflection._ClassInfo"             />
