@@ -45,9 +45,9 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond1:Condition = new Eval( true  ) ;
-            var cond2:Condition = new Eval( false ) ;
-            var cond3:Condition = new Eval( true  ) ;
+            var cond1:Condition = new BooleanCondition( true  ) ;
+            var cond2:Condition = new BooleanCondition( false ) ;
+            var cond3:Condition = new BooleanCondition( true  ) ;
             
             var a:And ;
             

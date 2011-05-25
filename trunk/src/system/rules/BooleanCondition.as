@@ -35,16 +35,16 @@
 package system.rules
 {
     /**
-     * Evaluates a basic condition.
+     * Evaluates a basic boolean condition.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
      * import system.rules.Condition ;
-     * import system.rules.Eval ;
+     * import system.rules.BooleanCondition ;
      * 
-     * var cond1:Condition = new Eval( true  ) ;
-     * var cond2:Condition = new Eval( false ) ;
-     * var cond3:Condition = new Eval( cond1 ) ;
+     * var cond1:Condition = new BooleanCondition( true  ) ;
+     * var cond2:Condition = new BooleanCondition( false ) ;
+     * var cond3:Condition = new BooleanCondition( cond1 ) ;
      * 
      * trace( cond1.eval() ) ; // true
      * trace( cond2.eval() ) ; // false
@@ -52,13 +52,13 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class Eval implements Condition
+    public class BooleanCondition implements Condition
     {
         /**
-         * Creates a new Eval instance.
+         * Creates a new BooleanCondition instance.
          * @param condition The Boolean value or the Condition object to evaluate.
          */
-        public function Eval( condition:* = null )
+        public function BooleanCondition( condition:* = null )
         {
             this.condition = condition ;
         }

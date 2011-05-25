@@ -58,9 +58,9 @@ package system.rules
         {
             var ne:NotEquals ;
             
-            var cond1:Condition = new Eval( true  ) ;
-            var cond2:Condition = new Eval( false ) ;
-            var cond3:Condition = new Eval( true  ) ;
+            var cond1:Condition = new BooleanCondition( true  ) ;
+            var cond2:Condition = new BooleanCondition( false ) ;
+            var cond3:Condition = new BooleanCondition( true  ) ;
             
             ne = new NotEquals( cond1 , cond1 ) ;
             assertFalse( ne.eval() , "#1" ) ;

@@ -47,8 +47,8 @@ package system.rules
             suite.addTestSuite( ConditionTest ) ;
             
             suite.addTestSuite( AndTest ) ;
+            suite.addTestSuite( BooleanConditionTest ) ;
             suite.addTestSuite( DivByTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
             suite.addTestSuite( EvalTest ) ;
             suite.addTestSuite( EvenTest ) ;
             suite.addTestSuite( GreaterOrEqualsThanTest ) ;

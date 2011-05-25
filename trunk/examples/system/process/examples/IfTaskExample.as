@@ -40,7 +40,7 @@ package examples
     import system.process.Action;
     import system.process.Chain;
     import system.process.logic.IfTask;
-    import system.rules.Eval;
+    import system.rules.BooleanCondition;
     
     import flash.display.Sprite;
     
@@ -60,30 +60,24 @@ package examples
             
             ///////// example 1 : if basic
             
-            var task1:IfTask = new IfTask( new Eval(true) , new Message("then true") ) ;
-            
+            var task1:IfTask = new IfTask( new BooleanCondition(true) , new Message("then true") ) ;
             chain.addAction( task1 ) ;
             
             ///////// example 2 : if-else
             
-            var task2:IfTask = new IfTask( new Eval(false) , new Message("then true") , new Message("else false") ) ;
-            
+            var task2:IfTask = new IfTask( new BooleanCondition(false) , new Message("then true") , new Message("else false") ) ;
             chain.addAction( task2 ) ;
             
-            ////////
+            //////// example3 : use IfTask method with true condition
             
             var task3:IfTask = new IfTask() ;
-            
-            task3.addCondition( new Eval(true) ).addThen( new Message("then true") ).addElse( new Message("else false") ) ;
-            
+            task3.addCondition( new BooleanCondition(true) ).addThen( new Message("then true") ).addElse( new Message("else false") ) ;
             chain.addAction( task3 ) ;
             
-            ////////
+            //////// example4 : use IfTask method with false condition
             
             var task4:IfTask = new IfTask() ;
-            
-            task4.addCondition( new Eval(false) ).addThen( new Message("then true") ).addElse( new Message("else false") ) ;
-            
+            task4.addCondition( new BooleanCondition(false) ).addThen( new Message("then true") ).addElse( new Message("else false") ) ;
             chain.addAction( task4 ) ;
             
             ////////
