@@ -32,33 +32,32 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class EvenTest extends TestCase 
     {
-        public static function suite():ITest
+        public function EvenTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var cond:Condition ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            cond = new Even( 0 ) ;
+            assertTrue( cond.eval() , "#1" ) ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( EvenTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( LessOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( OrTest ) ;
+            cond = new Even( 1 ) ;
+            assertFalse( cond.eval() , "#2" ) ;
             
-            return suite;
+            cond = new Even( 2 ) ;
+            assertTrue( cond.eval() , "#3" ) ;
+            
+            cond = new Even( 3 ) ;
+            assertFalse( cond.eval() , "#4" ) ;
         }
     }
 }
