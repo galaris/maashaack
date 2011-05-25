@@ -49,11 +49,11 @@ package examples.process
         public override function run( ...arguments:Array ):void
         {
             notifyStarted() ;
-            // do something
+            trace( message ) ;
             notifyFinished() ;
         }
         
-        public function toString():String
+        public override function toString():String
         {
             return message ;
         }

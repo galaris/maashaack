@@ -61,6 +61,21 @@ package system.process.logic
         public var throwError:Boolean ;
         
         /**
+         * Defines the main condition of the task.
+         * @param condition The main Condition of the task.
+         * @return The current IfTask reference.
+         */
+        public function addCondition( condition:Condition ):IfTask
+        {
+            if ( _condition ) 
+            {
+                throw new Error( this + " addCondition failed, you must not nest more than one <condition> into <if>");
+            }
+            _condition = condition ;
+            return this ;
+        }
+        
+        /**
          * Defines the action when the condition block use the else condition.
          * @param action The action to defines with the else condition in the IfTask reference.
          * @return The current IfTask reference.
@@ -87,6 +102,16 @@ package system.process.logic
                 throw new Error( this + " addThen failed, you must not nest more than one <then> into <if>");
             }
             _thenTask = action ;
+            return this ;
+        }
+        
+        /**
+         * Removes the 'condition' of the task.
+         * @return The current IfTask reference.
+         */
+        public function removeCondition():IfTask
+        {
+            _condition = null ;
             return this ;
         }
         
@@ -124,7 +149,12 @@ package system.process.logic
             
             notifyStarted() ;
             
-            if ( _condition & _condition.eval() )
+            if ( throwError && !_condition )
+            {
+                throw new Error( this + " run failed, the 'condition' of the task not must be null.") ;
+            }
+            
+            if ( _condition && _condition.eval() )
             {
                 if( _thenTask )
                 {
@@ -149,11 +179,11 @@ package system.process.logic
                             _execute( ei.thenTask ) ;
                         }
                     }
-                    
-                    if( !_done && _elseTask )
-                    {
-                        _execute( _elseTask ) ;
-                    }
+                }
+                
+                if( !_done && _elseTask )
+                {
+                    _execute( _elseTask ) ;
                 }
             }
             
@@ -213,7 +243,6 @@ package system.process.logic
          */
         protected function _finishTask( a:Action ):void
         {
-            _done = false ;
             notifyFinished() ;
         }
     }
