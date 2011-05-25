@@ -68,19 +68,14 @@ package system.process.logic
          */
         public function eval():Boolean
         {
-            if ( _condition )
+            if ( condition )
             {
-                return _condition.eval() ;
+                return condition.eval() ;
             }
             else
             {
                 return false ;
             }
         }
-        
-        /**
-         * @private
-         */
-        protected var _condition:Condition ;
     }
 }
