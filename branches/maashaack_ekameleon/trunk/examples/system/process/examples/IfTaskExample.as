@@ -35,13 +35,13 @@
 
 package examples
 {
-	import examples.process.Message;
-	import system.process.Action;
-	import system.process.Chain;
-	import system.process.logic.ElseIf;
-	import system.process.logic.IfTask;
-	import system.rules.BooleanCondition;
-	import flash.display.Sprite;
+    import examples.process.Message;
+    import system.process.Action;
+    import system.process.Chain;
+    import system.process.logic.ElseIf;
+    import system.process.logic.IfTask;
+    import system.rules.BooleanCondition;
+    import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
