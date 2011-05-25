@@ -32,31 +32,29 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class LessThanTest extends TestCase 
     {
-        public static function suite():ITest
+        public function LessThanTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var cond:Condition ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            cond = new LessThan( 1 , 1 ) ;
+            assertFalse( cond.eval() , "#1" ) ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( OrTest ) ;
+            cond = new LessThan( 1 , 2 ) ;
+            assertTrue( cond.eval() , "#2" ) ;
             
-            return suite;
+            cond = new LessThan( 3 , 2 ) ;
+            assertFalse( cond.eval() , "#3" ) ;
         }
     }
 }
