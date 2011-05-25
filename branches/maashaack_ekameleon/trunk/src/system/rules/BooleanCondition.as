@@ -75,5 +75,14 @@ package system.rules
         {
             return ( condition is Condition ) ? (condition as Condition).eval() : Boolean( condition ) ;
         }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return "[BooleanCondition " + eval() + "]" ;
+        }
     }
 }

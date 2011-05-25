@@ -41,18 +41,31 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given condition holds true or not.
+     * <p>Usage :</p>
+     * <pre>
+     * // if( cond ) then{} else{} ...elseif{}
+     * var task:IfTask = new IfTask( condition:Condition , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
+     * </pre>
      */
     public class IfTask extends Task
     {
         /**
          * Creates a new IfTask instance.
+         * @param condition The condition of the 'if' conditional task.
+         * @param thenTask The Action reference to defines the 'then' block in the 'if' conditional task.
+         * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
+         * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
         public function IfTask( condition:Condition = null , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
         {
             _elseIfTasks = new Vector.<ElseIf>() ;
             _condition   = condition ;
-            _elseTask    = elseTask  ;
             _thenTask    = thenTask  ;
+            if ( elseIfTasks && elseIfTasks.length > 0 )
+            {
+                addElseIf.apply( this , elseIfTasks ) ;
+            }
+            _elseTask = elseTask  ;
         }
         
         /**
@@ -64,6 +77,7 @@ package system.process.logic
          * Defines the main condition of the task.
          * @param condition The main Condition of the task.
          * @return The current IfTask reference.
+         * @throws Error if a 'condition' is already register.
          */
         public function addCondition( condition:Condition ):IfTask
         {
@@ -71,7 +85,10 @@ package system.process.logic
             {
                 throw new Error( this + " addCondition failed, you must not nest more than one <condition> into <if>");
             }
-            _condition = condition ;
+            else
+            {
+                _condition = condition ;
+            }
             return this ;
         }
         
@@ -79,6 +96,7 @@ package system.process.logic
          * Defines the action when the condition block use the else condition.
          * @param action The action to defines with the else condition in the IfTask reference.
          * @return The current IfTask reference.
+         * @throws Error if an 'else' action is already register.
          */
         public function addElse( action:Action ):IfTask
         {
@@ -86,7 +104,44 @@ package system.process.logic
             {
                 throw new Error( this + " addElse failed, you must not nest more than one <else> into <if>");
             }
-            _elseTask = action ;
+            else
+            {
+                _elseTask = action ;
+            }
+            return this ;
+        }
+        
+        /**
+         * Defines an action when the condition block use the elseif condition.
+         * @param condition The condition of the 'elseif' element.
+         * @param task The task to invoke if the 'elseif' condition is succeed.
+         * @return The current IfTask reference.
+         * @throws Error The condition and action reference not must be null.
+         */
+        public function addElseIf( ...elseIfTask:Array  ):IfTask
+        {
+            if ( elseIfTask && elseIfTask.length > 0 )
+            {
+                var ei:ElseIf ;
+                var len:int = elseIfTask.length ;
+                for( var i:int ; i<len ; i++ )
+                {
+                    ei = null ;
+                    if( elseIfTask[i] is ElseIf )
+                    {
+                        ei = elseIfTask[i] as ElseIf ;
+                    }
+                    else if ( elseIfTask[i] is Condition && elseIfTask[i+1] is Task )
+                    {
+                        ei = new ElseIf( elseIfTask[i] , elseIfTask[i+1] ) ;
+                        i++ ;
+                    }
+                    if ( ei )
+                    {
+                        _elseIfTasks.push( ei ) ;
+                    }
+                }
+            }
             return this ;
         }
         
@@ -94,6 +149,7 @@ package system.process.logic
          * Defines the action when the condition block success and must run the 'then' action.
          * @param action Defines the 'then' action in the IfTask reference.
          * @return The current IfTask reference.
+         * @throws Error if the 'then' action is already register.
          */
         public function addThen( action:Action ):IfTask
         {
@@ -101,7 +157,10 @@ package system.process.logic
             {
                 throw new Error( this + " addThen failed, you must not nest more than one <then> into <if>");
             }
-            _thenTask = action ;
+            else
+            {
+                _thenTask = action ;
+            }
             return this ;
         }
         
@@ -132,6 +191,16 @@ package system.process.logic
         public function removeThen():IfTask
         {
             _thenTask = null ;
+            return this ;
+        }
+        
+        /**
+         * Removes the 'then' action.
+         * @return The current IfTask reference.
+         */
+        public function removeAllElseIf():IfTask
+        {
+            _elseIfTasks.length = 0 ;
             return this ;
         }
         
