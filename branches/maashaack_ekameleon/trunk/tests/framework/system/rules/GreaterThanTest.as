@@ -47,11 +47,14 @@ package system.rules
         {
             var g:Condition ;
             
-            g = new GreaterThan( 1 , 2 ) ;
+            g = new GreaterThan( 1 , 1 ) ;
             assertFalse( g.eval() , "#1" ) ;
             
+            g = new GreaterThan( 1 , 2 ) ;
+            assertFalse( g.eval() , "#2" ) ;
+            
             g = new GreaterThan( 3 , 2 ) ;
-            assertTrue( g.eval() , "#2" ) ;
+            assertTrue( g.eval() , "#3" ) ;
         }
     }
 }
