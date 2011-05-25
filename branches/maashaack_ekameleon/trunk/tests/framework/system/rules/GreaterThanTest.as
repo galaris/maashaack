@@ -32,29 +32,26 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class GreaterThanTest extends TestCase 
     {
-        public static function suite():ITest
+        public function GreaterThanTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            super( name );
+        }
+        
+        public function testConstructor():void
+        {
+            var g:Condition ;
             
-            suite.addTestSuite( ConditionTest ) ;
+            g = new GreaterThan( 1 , 2 ) ;
+            assertFalse( g.eval() , "#1" ) ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvalTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( OrTest ) ;
-            
-            return suite;
+            g = new GreaterThan( 3 , 2 ) ;
+            assertTrue( g.eval() , "#2" ) ;
         }
     }
 }
