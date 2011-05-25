@@ -44,6 +44,9 @@ package system.rules
      * 
      * var g:Condition ;
      * 
+     * g = new GreaterThan( 1 , 1 ) ;
+     * trace( g.eval() ) ; // false
+     * 
      * g = new GreaterThan( 1 , 2 ) ;
      * trace( g.eval() ) ; // false
      * 
