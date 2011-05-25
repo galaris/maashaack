@@ -373,13 +373,20 @@
     
     <!-- system.rules -->
     
-    <component id="system.rules:And"       class="system.rules.And"       />
-    <component id="system.rules:Condition" class="system.rules.Condition" />
-    <component id="system.rules:Equals"    class="system.rules.Equals"    />
-    <component id="system.rules:Eval"      class="system.rules.Eval"      />
-    <component id="system.rules:Not"       class="system.rules.Not"       />
-    <component id="system.rules:NotEquals" class="system.rules.NotEquals" />
-    <component id="system.rules:Or"        class="system.rules.Or"        />
+    <component id="system.rules:And"                 class="system.rules.And"                 />
+    <component id="system.rules:Condition"           class="system.rules.Condition"           />
+    <component id="system.rules:DivBy"               class="system.rules.DivBy"               />
+    <component id="system.rules:Equals"              class="system.rules.Equals"              />
+    <component id="system.rules:Eval"                class="system.rules.Eval"                />
+    <component id="system.rules:Even"                class="system.rules.Even"                />
+    <component id="system.rules:GreaterOrEqualsThan" class="system.rules.GreaterOrEqualsThan" />
+    <component id="system.rules:GreaterThan"         class="system.rules.GreaterThan"         />
+    <component id="system.rules:LessOrEqualsThan"    class="system.rules.LessOrEqualsThan"    />
+    <component id="system.rules:LessThan"            class="system.rules.LessThan"            />
+    <component id="system.rules:Not"                 class="system.rules.Not"                 />
+    <component id="system.rules:NotEquals"           class="system.rules.NotEquals"           />
+    <component id="system.rules:Odd"                 class="system.rules.Odd"                 />
+    <component id="system.rules:Or"                  class="system.rules.Or"                  />
     
     <!-- system.remoting -->
     

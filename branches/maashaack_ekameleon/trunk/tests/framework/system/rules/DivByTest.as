@@ -35,7 +35,7 @@
 package system.rules 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     public class DivByTest extends TestCase 
     {
         public function DivByTest(name:String = "")
