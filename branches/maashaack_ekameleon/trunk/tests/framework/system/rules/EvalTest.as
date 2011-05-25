@@ -45,9 +45,9 @@ package system.rules
         
         public function testEval():void
         {
-            var cond1:Condition = new Eval( true  ) ;
-            var cond2:Condition = new Eval( false ) ;
-            var cond3:Condition = new Eval( cond1 ) ;
+            var cond1:Condition = new BooleanCondition( true  ) ;
+            var cond2:Condition = new BooleanCondition( false ) ;
+            var cond3:Condition = new BooleanCondition( cond1 ) ;
             
             assertTrue( cond1.eval() , "#1" ) ;
             assertFalse( cond2.eval() , "#1" ) ;
@@ -56,9 +56,9 @@ package system.rules
         
         public function testCondition():void
         {
-            var cond1:Eval = new Eval( true  ) ;
-            var cond2:Eval = new Eval( false ) ;
-            var cond3:Eval = new Eval( cond1 ) ;
+            var cond1:BooleanCondition = new BooleanCondition( true  ) ;
+            var cond2:BooleanCondition = new BooleanCondition( false ) ;
+            var cond3:BooleanCondition = new BooleanCondition( cond1 ) ;
             
             assertTrue( cond1.condition , "#1" ) ;
             assertFalse( cond2.condition , "#2" ) ;
