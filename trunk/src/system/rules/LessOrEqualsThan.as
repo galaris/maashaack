@@ -42,16 +42,16 @@ package system.rules
      * import system.rules.Rule ;
      * import system.rules.LessOrEqualsThan ;
      * 
-     * var cond:Rule ;
+     * var rule:Rule ;
      * 
-     * cond = new LessOrEqualsThan( 1 , 1 ) ;
-     * trace( cond.eval() ) ; // true
+     * rule = new LessOrEqualsThan( 1 , 1 ) ;
+     * trace( rule.eval() ) ; // true
      * 
-     * cond = new LessOrEqualsThan( 1 , 2 ) ;
-     * trace( cond.eval() ) ; // true
+     * rule = new LessOrEqualsThan( 1 , 2 ) ;
+     * trace( rule.eval() ) ; // true
      * 
-     * cond = new LessOrEqualsThan( 3 , 2 ) ;
-     * trace( cond.eval() ) ; // false
+     * rule = new LessOrEqualsThan( 3 , 2 ) ;
+     * trace( rule.eval() ) ; // false
      * </code>
      * </listing>
      */

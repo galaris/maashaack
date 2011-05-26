@@ -42,16 +42,16 @@ package system.rules
      * import system.rules.Rule ;
      * import system.rules.GreaterThan ;
      * 
-     * var g:Rule ;
+     * var rule:Rule ;
      * 
-     * g = new GreaterThan( 1 , 1 ) ;
-     * trace( g.eval() ) ; // false
+     * rule = new GreaterThan( 1 , 1 ) ;
+     * trace( rule.eval() ) ; // false
      * 
-     * g = new GreaterThan( 1 , 2 ) ;
-     * trace( g.eval() ) ; // false
+     * rule = new GreaterThan( 1 , 2 ) ;
+     * trace( rule.eval() ) ; // false
      * 
-     * g = new GreaterThan( 3 , 2 ) ;
-     * trace( g.eval() ) ; // true
+     * rule = new GreaterThan( 3 , 2 ) ;
+     * trace( rule.eval() ) ; // true
      * </code>
      * </listing>
      */
