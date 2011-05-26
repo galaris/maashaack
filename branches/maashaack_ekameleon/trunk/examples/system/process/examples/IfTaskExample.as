@@ -40,7 +40,7 @@ package examples
     import system.process.Chain;
     import system.process.logic.ElseIf;
     import system.process.logic.IfTask;
-    import system.rules.BooleanCondition;
+    import system.rules.BooleanRule;
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
@@ -59,54 +59,62 @@ package examples
             
             ///////// example 1 : if basic
             
-            var task1:IfTask = new IfTask( new BooleanCondition(true) , new Message("then #1") ) ;
+            var task1:IfTask = new IfTask( new BooleanRule(true) , new Message("then #1") ) ;
             chain.addAction( task1 ) ;
             
             ///////// example 2 : if-else
             
-            var task2:IfTask = new IfTask( new BooleanCondition(false) , new Message("then #2") , new Message("else #2") ) ;
+            var task2:IfTask = new IfTask( new BooleanRule(false) , new Message("then #2") , new Message("else #2") ) ;
             chain.addAction( task2 ) ;
             
             //////// example3 : use IfTask method with true condition
             
-            var task3:IfTask = new IfTask() ;
-            task3.addCondition( new BooleanCondition(true) ).addThen( new Message("then #3") ).addElse( new Message("else #3") ) ;
+            var task3:IfTask = new IfTask()
+            .addCondition( new BooleanRule(true) )
+            .addThen( new Message("then #3") )
+            .addElse( new Message("else #3") ) ;
+            
             chain.addAction( task3 ) ;
             
             //////// example4 : use IfTask method with false condition
             
             var task4:IfTask = new IfTask() ;
-            task4.addCondition( new BooleanCondition(false) ).addThen( new Message("then #4") ).addElse( new Message("else #4") ) ;
+            
+            task4
+            .addCondition( new BooleanRule(false) )
+            .addThen( new Message("then #4") )
+            .addElse( new Message("else #4") ) ;
+            
             chain.addAction( task4 ) ;
             
             //////// example5 : use elseif
             
-            var task5:IfTask = new IfTask( new BooleanCondition(false) , new Message("then #5") , new Message("else #5")  ) ;
+            var task5:IfTask = new IfTask( new BooleanRule(false) , new Message("then #5") , new Message("else #5")  ) ;
             
-            task5.addElseIf( new BooleanCondition(true) , new Message("elseif #5-1") ) ;
-            task5.addElseIf( new BooleanCondition(false) , new Message("elseif #5-2") ) ;
+            task5.addElseIf( new BooleanRule(true) , new Message("elseif #5-1") ) ;
+            task5.addElseIf( new BooleanRule(false) , new Message("elseif #5-2") ) ;
             
             chain.addAction( task5 ) ;
             
             //////// example6 : use elseif
             
-            var task6:IfTask = new IfTask( new BooleanCondition(false) , new Message("then #6") , new Message("else #6")  ) ;
+            var task6:IfTask = new IfTask( new BooleanRule(false) , new Message("then #6") , new Message("else #6")  ) ;
             
-            task6.addElseIf( new BooleanCondition(false) , new Message("elseif #6-1") ) ;
-            task6.addElseIf( new BooleanCondition(true)  , new Message("elseif #6-2") ) ;
-            task6.addElseIf( new BooleanCondition(true) , new Message("elseif #6-3") ) ;
+            task6.addElseIf( new BooleanRule(false) , new Message("elseif #6-1") ) ;
+            task6.addElseIf( new BooleanRule(true)  , new Message("elseif #6-2") ) ;
+            task6.addElseIf( new BooleanRule(true) , new Message("elseif #6-3") ) ;
             
             chain.addAction( task6 ) ;
             
             //////// example7
             
-            var task7:IfTask = new IfTask( new BooleanCondition(false) , new Message("then #7") , new Message("else #7")  ) ;
+            var task7:IfTask = new IfTask( new BooleanRule(false) , new Message("then #7") , new Message("else #7")  ) ;
             
             task7.addElseIf
             (
-                new BooleanCondition(false) , new Message("elseif #7-1") ,
-                new ElseIf( new BooleanCondition( true ) , new Message( "elseif #7-2") ) , 
-                new BooleanCondition(true)  , new Message("elseif #7-3") 
+                new BooleanRule(false) , new Message("elseif #7-1") ,
+                new ElseIf( new BooleanRule( true ) , new Message( "elseif #7-2") ) , 
+                new BooleanRule(true)  , new Message("elseif #7-3") 
             ) ;
             
             chain.addAction( task7 ) ;
@@ -116,15 +124,15 @@ package examples
             var task8:IfTask = new IfTask
             (
                 // cond
-                new BooleanCondition(false) , 
+                new BooleanRule(false) , 
                 // then
                 new Message("then #8") , 
                 // else
                 new Message("else #8") ,
                 // elseif
-                new BooleanCondition(false) , new Message("elseif #8-1") ,
-                new ElseIf( new BooleanCondition( false ) , new Message( "elseif #8-2") ) , 
-                new BooleanCondition(true) , new Message("elseif #8-3") 
+                new BooleanRule(false) , new Message("elseif #8-1") ,
+                new ElseIf( new BooleanRule( false ) , new Message( "elseif #8-2") ) , 
+                new BooleanRule(true) , new Message("elseif #8-3") 
             ) ;
             
             // task8.removeAllElseIf() ;
