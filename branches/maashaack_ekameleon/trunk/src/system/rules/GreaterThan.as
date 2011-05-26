@@ -39,10 +39,10 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.Rule ;
      * import system.rules.GreaterThan ;
      * 
-     * var g:Condition ;
+     * var g:Rule ;
      * 
      * g = new GreaterThan( 1 , 1 ) ;
      * trace( g.eval() ) ; // false
@@ -55,7 +55,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class GreaterThan implements Condition
+    public class GreaterThan implements Rule
     {
         /**
          * Creates a new GreaterThan instance.
