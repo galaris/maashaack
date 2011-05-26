@@ -39,10 +39,10 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
      * import system.rules.Even ;
+     * import system.rules.Rule ;
      * 
-     * var cond:Condition ;
+     * var cond:Rule ;
      * 
      * cond = new Even( 0 ) ;
      * trace( cond.eval() ) ; // true
@@ -58,7 +58,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class Even implements Condition
+    public class Even implements Rule
     {
         /**
          * Creates a new Even instance.
