@@ -35,7 +35,7 @@
 package system.rules
 {
     /**
-     * Used to perform a logical conjunction on two conditions and more.
+     * Performs a logical comparison of the two values to determine if are not equal.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
