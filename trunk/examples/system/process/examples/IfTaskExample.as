@@ -70,7 +70,7 @@ package examples
             //////// example3 : use IfTask method with true condition
             
             var task3:IfTask = new IfTask()
-            .addCondition( new BooleanRule(true) )
+            .addRule( new BooleanRule(true) )
             .addThen( new Message("then #3") )
             .addElse( new Message("else #3") ) ;
             
@@ -81,7 +81,7 @@ package examples
             var task4:IfTask = new IfTask() ;
             
             task4
-            .addCondition( new BooleanRule(false) )
+            .addRule( new BooleanRule(false) )
             .addThen( new Message("then #4") )
             .addElse( new Message("else #4") ) ;
             
