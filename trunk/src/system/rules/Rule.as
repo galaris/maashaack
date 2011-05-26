@@ -34,11 +34,10 @@
 */
 package system.rules
 {
-    
     /**
-     * Defines the basic implementation to evaluate a condition.
+     * Defines the rule to evaluate a basic or complex condition.
      */
-    public interface Condition
+    public interface Rule
     {
         /**
          * Evaluates a specific condition.
