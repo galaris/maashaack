@@ -39,26 +39,26 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.Rule ;
      * import system.rules.Odd ;
      * 
-     * var cond:Condition ;
+     * var rule:Rule ;
      * 
-     * cond = new Odd( 0 ) ;
-     * trace( cond.eval() ) ; // false
+     * rule = new Odd( 0 ) ;
+     * trace( rule.eval() ) ; // false
      * 
-     * cond = new Odd( 1 ) ;
-     * trace( cond.eval() ) ; // true
+     * rule = new Odd( 1 ) ;
+     * trace( rule.eval() ) ; // true
      * 
-     * cond = new Odd( 2 ) ;
-     * trace( cond.eval() ) ; // false
+     * rule = new Odd( 2 ) ;
+     * trace( rule.eval() ) ; // false
      * 
-     * cond = new Odd( 3 ) ;
-     * trace( cond.eval() ) ; // true
+     * rule = new Odd( 3 ) ;
+     * trace( rule.eval() ) ; // true
      * </code>
      * </listing>
      */
-    public class Odd implements Condition
+    public class Odd implements Rule
     {
         /**
          * Creates a new Odd instance.
