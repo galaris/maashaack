@@ -35,42 +35,42 @@
 package system.process.logic
 {
     import system.process.Action;
-    import system.rules.Condition;
+    import system.rules.Rule;
     
     /**
-     * Defines a conditional task to defines a specific 'elseif' block in a IfTask reference.
+     * Defines a conditional rule to defines a specific 'elseif' block in a IfTask reference.
      */
-    public class ElseIf implements Condition
+    public class ElseIf implements Rule
     {
         /**
          * Creates a new ElseIf instance.
-         * @param condition The Condition of the block.
-         * @param thenTask The Action to execute if the condition is true.
+         * @param rule The Rule of the conditional block.
+         * @param then The Action to execute if the condition is true.
          */
-        public function ElseIf( condition:Condition = null, thenTask:Action = null )
+        public function ElseIf( rule:Rule = null, then:Action = null )
         {
-            this.condition = condition ;
-            this.thenTask  = thenTask  ;
+            this.rule = rule ;
+            this.then = then ;
         }
         
         /**
-         * The condition of the 'elseif' block.
+         * The conditional rule of the 'elseif' block.
          */
-        public var condition:Condition ;
+        public var rule:Rule ;
         
         /**
-         * The action of the 'elseif' block.
+         * The then action of the 'elseif' block.
          */
-        public var thenTask:Action ;
+        public var then:Action ;
         
         /**
          * Evaluates a specific condition.
          */
         public function eval():Boolean
         {
-            if ( condition )
+            if ( rule )
             {
-                return condition.eval() ;
+                return rule.eval() ;
             }
             else
             {
