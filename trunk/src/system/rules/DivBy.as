@@ -39,10 +39,10 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.Rule ;
      * import system.rules.DivBy ;
      * 
-     * var cond:Condition ;
+     * var cond:Rule ;
      * 
      * cond = new DivBy( 4 , 2 ) ;
      * trace( cond.eval() ) ; // true
@@ -52,7 +52,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class DivBy implements Condition
+    public class DivBy implements Rule
     {
         /**
          * Creates a new DivBy instance.
