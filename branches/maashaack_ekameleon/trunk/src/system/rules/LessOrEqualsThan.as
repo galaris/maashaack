@@ -39,10 +39,10 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.Rule ;
      * import system.rules.LessOrEqualsThan ;
      * 
-     * var cond:Condition ;
+     * var cond:Rule ;
      * 
      * cond = new LessOrEqualsThan( 1 , 1 ) ;
      * trace( cond.eval() ) ; // true
@@ -55,7 +55,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class LessOrEqualsThan implements Condition
+    public class LessOrEqualsThan implements Rule
     {
         /**
          * Creates a new LessOrEqualsThan instance.
