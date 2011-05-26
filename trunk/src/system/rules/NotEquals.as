@@ -39,8 +39,8 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
-     * import system.rules.Eval ;
+     * import system.rules.BooleanRule ;
+     * import system.rules.Rule ;
      * import system.rules.NotEquals ;
      * 
      * var ne:NotEquals ;
@@ -53,11 +53,11 @@ package system.rules
      * ne = new NotEquals( 1 , 2 ) ;
      * trace( ne.eval() ) ; // true
      * 
-     * ///// Compares Condition objects.
+     * ///// Compares Rule objects.
      * 
-     * var cond1:Condition = new Eval( true  ) ;
-     * var cond2:Condition = new Eval( false ) ;
-     * var cond3:Condition = new Eval( true  ) ;
+     * var cond1:Rule = new BooleanRule( true  ) ;
+     * var cond2:Rule = new BooleanRule( false ) ;
+     * var cond3:Rule = new BooleanRule( true  ) ;
      * 
      * ne = new NotEquals( cond1 , cond1 ) ;
      * trace( ne.eval() ) ; // false
