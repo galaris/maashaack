@@ -37,29 +37,29 @@ package system.process.logic
 {
     import system.process.Action;
     import system.process.Task;
-    import system.rules.Condition;
+    import system.rules.Rule;
     
     /**
      * Perform some tasks based on whether a given condition holds true or not.
      * <p>Usage :</p>
      * <pre>
      * // if( cond ) then{} else{} ...elseif{}
-     * var task:IfTask = new IfTask( condition:Condition , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
+     * var task:IfTask = new IfTask( rule:Rule , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
      * </pre>
      */
     public class IfTask extends Task
     {
         /**
          * Creates a new IfTask instance.
-         * @param condition The condition of the 'if' conditional task.
+         * @param rule The conditional rule of the 'if' conditional task.
          * @param thenTask The Action reference to defines the 'then' block in the 'if' conditional task.
          * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
          * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
-        public function IfTask( condition:Condition = null , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+        public function IfTask( rule:Rule = null , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
         {
             _elseIfTasks = new Vector.<ElseIf>() ;
-            _condition   = condition ;
+            _rule        = rule ;
             _thenTask    = thenTask  ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
             {
@@ -72,25 +72,6 @@ package system.process.logic
          * Indicates if the class throws errors or notify a finished event when the task failed.
          */
         public var throwError:Boolean ;
-        
-        /**
-         * Defines the main condition of the task.
-         * @param condition The main Condition of the task.
-         * @return The current IfTask reference.
-         * @throws Error if a 'condition' is already register.
-         */
-        public function addCondition( condition:Condition ):IfTask
-        {
-            if ( _condition ) 
-            {
-                throw new Error( this + " addCondition failed, you must not nest more than one <condition> into <if>");
-            }
-            else
-            {
-                _condition = condition ;
-            }
-            return this ;
-        }
         
         /**
          * Defines the action when the condition block use the else condition.
@@ -131,7 +112,7 @@ package system.process.logic
                     {
                         ei = elseIfTask[i] as ElseIf ;
                     }
-                    else if ( elseIfTask[i] is Condition && elseIfTask[i+1] is Task )
+                    else if ( elseIfTask[i] is Rule && elseIfTask[i+1] is Task )
                     {
                         ei = new ElseIf( elseIfTask[i] , elseIfTask[i+1] ) ;
                         i++ ;
@@ -141,6 +122,25 @@ package system.process.logic
                         _elseIfTasks.push( ei ) ;
                     }
                 }
+            }
+            return this ;
+        }
+        
+        /**
+         * Defines the main conditional rule of the task.
+         * @param rule The main Rule of the task.
+         * @return The current IfTask reference.
+         * @throws Error if a 'condition' is already register.
+         */
+        public function addRule( rule:Rule ):IfTask
+        {
+            if ( _rule ) 
+            {
+                throw new Error( this + " addCondition failed, you must not nest more than one <condition> into <if>");
+            }
+            else
+            {
+                _rule = rule ;
             }
             return this ;
         }
@@ -165,12 +165,12 @@ package system.process.logic
         }
         
         /**
-         * Removes the 'condition' of the task.
+         * Removes the 'then' action.
          * @return The current IfTask reference.
          */
-        public function removeCondition():IfTask
+        public function removeAllElseIf():IfTask
         {
-            _condition = null ;
+            _elseIfTasks.length = 0 ;
             return this ;
         }
         
@@ -185,12 +185,12 @@ package system.process.logic
         }
         
         /**
-         * Removes the 'then' action.
+         * Removes the 'conditional rule' of the task.
          * @return The current IfTask reference.
          */
-        public function removeThen():IfTask
+        public function removeRule():IfTask
         {
-            _thenTask = null ;
+            _rule = null ;
             return this ;
         }
         
@@ -198,9 +198,9 @@ package system.process.logic
          * Removes the 'then' action.
          * @return The current IfTask reference.
          */
-        public function removeAllElseIf():IfTask
+        public function removeThen():IfTask
         {
-            _elseIfTasks.length = 0 ;
+            _thenTask = null ;
             return this ;
         }
         
@@ -218,12 +218,12 @@ package system.process.logic
             
             notifyStarted() ;
             
-            if ( throwError && !_condition )
+            if ( throwError && !_rule )
             {
-                throw new Error( this + " run failed, the 'condition' of the task not must be null.") ;
+                throw new Error( this + " run failed, the 'conditional rule' of the task not must be null.") ;
             }
             
-            if ( _condition && _condition.eval() )
+            if ( _rule && _rule.eval() )
             {
                 if( _thenTask )
                 {
@@ -245,7 +245,7 @@ package system.process.logic
                         ei = _elseIfTasks[i] as ElseIf ;
                         if ( ei.eval() )
                         {
-                            _execute( ei.thenTask ) ;
+                            _execute( ei.then ) ;
                         }
                     }
                 }
@@ -272,7 +272,7 @@ package system.process.logic
         /**
          * @private
          */
-        protected var _condition:Condition ;
+        protected var _rule:Rule ;
         
         /**
          * @private
