@@ -42,12 +42,12 @@ package system.rules
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite("system process tests");
+            var suite:TestSuite = new TestSuite("system rules tests");
             
-            suite.addTestSuite( ConditionTest ) ;
+            suite.addTestSuite( RuleTest ) ;
             
             suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( BooleanConditionTest ) ;
+            suite.addTestSuite( BooleanRuleTest ) ;
             suite.addTestSuite( DivByTest ) ;
             suite.addTestSuite( EvalTest ) ;
             suite.addTestSuite( EvenTest ) ;

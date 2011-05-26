@@ -36,9 +36,9 @@ package system.rules
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class BooleanConditionTest extends TestCase 
+    public class BooleanRuleTest extends TestCase 
     {
-        public function BooleanConditionTest(name:String = "")
+        public function BooleanRuleTest(name:String = "")
         {
             super( name );
         }
@@ -58,9 +58,9 @@ package system.rules
         {
             var e:Equals ;
             
-            var cond1:Condition = new BooleanCondition( true  ) ;
-            var cond2:Condition = new BooleanCondition( false ) ;
-            var cond3:Condition = new BooleanCondition( true  ) ;
+            var cond1:Rule = new BooleanRule( true  ) ;
+            var cond2:Rule = new BooleanRule( false ) ;
+            var cond3:Rule = new BooleanRule( true  ) ;
             
             e = new Equals( cond1 , cond1 ) ;
             assertTrue( e.eval() , "#1" ) ;

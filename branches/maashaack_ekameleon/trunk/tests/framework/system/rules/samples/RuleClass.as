@@ -35,11 +35,11 @@
 
 package system.rules.samples
 {
-    import system.rules.Condition;
+    import system.rules.Rule;
     
-    public class ConditionClass implements Condition
+    public class RuleClass implements Rule
     {
-        public function ConditionClass()
+        public function RuleClass()
         {
             //
         }
