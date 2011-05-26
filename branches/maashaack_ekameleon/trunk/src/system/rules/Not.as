@@ -39,12 +39,12 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
+     * import system.rules.BooleanRule ;
      * import system.rules.Not ;
-     * import system.rules.Condition ;
-     * import system.rules.Eval ;
+     * import system.rules.Rule ;
      * 
-     * var cond1:Condition = new Eval( true  ) ;
-     * var cond2:Condition = new Eval( false ) ;
+     * var cond1:Rule = new BooleanRule( true  ) ;
+     * var cond2:Rule = new BooleanRule( false ) ;
      * 
      * var no1:Not = new Not( true ) ;
      * var no2:Not = new Not( false ) ;
@@ -58,28 +58,28 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class Not implements Condition
+    public class Not implements Rule
     {
         /**
          * Creates a new Not instance.
-         * @param condition The Boolean value or the Condition object to evaluate.
+         * @param rule The Boolean value or the Rule object to evaluate.
          */
-        public function Not( condition:* = null )
+        public function Not( rule:* = null )
         {
-            this.condition = condition ;
+            this.rule = rule ;
         }
         
         /**
-         * The condition to evaluate.
+         * The conditional rule to evaluate.
          */
-        public var condition:* ;
+        public var rule:* ;
         
         /**
          * Evaluates the specified condition.
          */
         public function eval():Boolean
         {
-            return !( ( condition is Condition ) ? (condition as Condition).eval() : Boolean( condition ) ) ;
+            return !( ( rule is Rule ) ? (rule as Rule).eval() : Boolean( rule ) ) ;
         }
     }
 }
