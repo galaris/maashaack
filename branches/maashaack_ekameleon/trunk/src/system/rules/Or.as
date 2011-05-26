@@ -34,84 +34,83 @@
 */
 package system.rules
 {
-    
     /**
      * Used to perform a logical disjunction on two conditions or more.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.BooleanCondition ;
-     * import system.rules.Condition ;
+     * import system.rules.BooleanRule ;
      * import system.rules.Or ;
+     * import system.rules.Rule ;
      * 
-     * var cond1:Condition = new BooleanCondition( true ) ;
-     * var cond2:Condition = new BooleanCondition( false ) ;
-     * var cond3:Condition = new BooleanCondition( true ) ;
+     * var rule1:Rule = new BooleanRule( true ) ;
+     * var rule2:Rule = new BooleanRule( false ) ;
+     * var rule3:Rule = new BooleanRule( true ) ;
      * 
      * var o:Or ;
      * 
-     * o = new Or( cond1 , cond1 ) ;
+     * o = new Or( rule1 , rule1 ) ;
      * trace( o.eval() ) ; // true
      * 
-     * o = new Or( cond1 , cond2 ) ;
+     * o = new Or( rule1 , rule2 ) ;
      * trace( o.eval() ) ; // true
      * 
-     * o = new Or( cond2 , cond1 ) ;
+     * o = new Or( rule2 , rule1 ) ;
      * trace( o.eval() ) ; // true
      * 
-     * o = new Or( cond2 , cond2 ) ;
+     * o = new Or( rule2 , rule2 ) ;
      * trace( o.eval() ) ; // false
      * 
-     * o = new Or( cond1 , cond2 , cond3 ) ;
+     * o = new Or( rule1 , rule2 , rule3 ) ;
      * trace( o.eval() ) ; // true
      * 
-     * o = new Or( cond1 , cond3 , cond2 ) ;
+     * o = new Or( rule1 , rule3 , rule2 ) ;
      * trace( o.eval() ) ; // true 
      * </code>
      * </listing>
      */
-    public class Or implements Condition
+    public class Or implements Rule
     {
         /**
          * Creates a new Or instance.
-         * @param condition1 The first condition to evaluate.
-         * @param condition2 The second condition to evaluate.
+         * @param rule1 The first conditional rule to evaluate.
+         * @param rule2 The second conditional rule to evaluate.
          */
-        public function Or( condition1:Condition , condition2:Condition , ...conditions:Array )
+        public function Or( rule1:Rule , rule2:Rule , ...rules:Array )
         {
-            this.conditions = new Vector.<Condition>() ;
-            this.conditions.push( condition1 ) ;
-            this.conditions.push( condition2 ) ;
-            if ( conditions && conditions.length > 0 )
+            this.rules = new Vector.<Rule>() ;
+            this.rules.push( rule1 ) ;
+            this.rules.push( rule2 ) ;
+            if ( rules && rules.length > 0 )
             {
-                var len:uint = conditions.length ;
+                var len:uint = rules.length ;
                 for( var i:int ; i<len ; i++ )
                 {
-                    if( conditions[i] is Condition )
+                    if( rules[i] is Rule )
                     {
-                        this.conditions.push(conditions[i]) ;
+                        this.rules.push(rules[i]) ;
                     }
                 }
             }
         }
         
         /**
-         * The collection of all conditions to evaluate.
+         * The collection of all rules to evaluate.
          */
-        public var conditions:Vector.<Condition> ;
+        public var rules:Vector.<Rule> ;
         
         /**
-         * Evaluates the specified condition.
+         * Evaluates the specified rule.
          */
         public function eval():Boolean
         {
-            if( conditions.length > 0 )
+            if( rules.length > 0 )
             {
-                var b:Boolean = conditions[0].eval() ;
-                var l:uint    = conditions.length ;
+                var b:Boolean = rules[0].eval() ;
+                var l:uint    = rules.length ;
                 for ( var i:uint = 1 ; i<l ; i++ )
                 {
-                    b ||= conditions[i].eval() ;
+                    b ||= rules[i].eval() ;
                 }
                 return b ;
             }
