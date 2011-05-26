@@ -39,10 +39,10 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.Rule ;
      * import system.rules.LessThan ;
      * 
-     * var lt:Condition ;
+     * var lt:Rule ;
      * 
      * lt = new LessThan( 1 , 1 ) ;
      * trace( lt.eval() ) ; // false
@@ -55,7 +55,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class LessThan implements Condition
+    public class LessThan implements Rule
     {
         /**
          * Creates a new LessThan instance.
