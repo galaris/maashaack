@@ -36,17 +36,17 @@ package system.rules
 {
     
     /**
-     * Used to perform a logical disjunction on two expressions and more.
+     * Used to perform a logical disjunction on two conditions or more.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
+     * import system.rules.BooleanCondition ;
      * import system.rules.Condition ;
-     * import system.rules.Eval ;
      * import system.rules.Or ;
      * 
-     * var cond1:Condition = new Eval( true ) ;
-     * var cond2:Condition = new Eval( false ) ;
-     * var cond3:Condition = new Eval( true ) ;
+     * var cond1:Condition = new BooleanCondition( true ) ;
+     * var cond2:Condition = new BooleanCondition( false ) ;
+     * var cond3:Condition = new BooleanCondition( true ) ;
      * 
      * var o:Or ;
      * 
