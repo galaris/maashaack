@@ -45,7 +45,7 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond:Condition ;
+            var cond:Rule ;
             
             cond = new Odd( 0 ) ;
             assertFalse( cond.eval() , "#1" ) ;

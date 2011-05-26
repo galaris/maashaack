@@ -45,7 +45,7 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond:Condition ;
+            var cond:Rule ;
             
             cond = new DivBy( 1 , 1 ) ;
             assertTrue( cond.eval() , "#1" ) ;

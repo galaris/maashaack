@@ -45,20 +45,20 @@ package system.rules
         
         public function testEval():void
         {
-            var cond1:Condition = new BooleanCondition( true  ) ;
-            var cond2:Condition = new BooleanCondition( false ) ;
-            var cond3:Condition = new BooleanCondition( cond1 ) ;
+            var cond1:Rule = new BooleanRule( true  ) ;
+            var cond2:Rule = new BooleanRule( false ) ;
+            var cond3:Rule = new BooleanRule( cond1 ) ;
             
             assertTrue( cond1.eval() , "#1" ) ;
             assertFalse( cond2.eval() , "#1" ) ;
             assertTrue( cond3.eval() , "#1" ) ;
         }
         
-        public function testCondition():void
+        public function testRule():void
         {
-            var cond1:BooleanCondition = new BooleanCondition( true  ) ;
-            var cond2:BooleanCondition = new BooleanCondition( false ) ;
-            var cond3:BooleanCondition = new BooleanCondition( cond1 ) ;
+            var cond1:BooleanRule = new BooleanRule( true  ) ;
+            var cond2:BooleanRule = new BooleanRule( false ) ;
+            var cond3:BooleanRule = new BooleanRule( cond1 ) ;
             
             assertTrue( cond1.condition , "#1" ) ;
             assertFalse( cond2.condition , "#2" ) ;

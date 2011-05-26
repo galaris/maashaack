@@ -45,9 +45,9 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond1:Condition = new BooleanCondition( true  ) ;
-            var cond2:Condition = new BooleanCondition( false ) ;
-            var cond3:Condition = new BooleanCondition( true  ) ;
+            var cond1:Rule = new BooleanRule( true  ) ;
+            var cond2:Rule = new BooleanRule( false ) ;
+            var cond3:Rule = new BooleanRule( true  ) ;
             
             var o:Or ;
             

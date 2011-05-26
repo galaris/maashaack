@@ -36,11 +36,11 @@ package system.rules
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.rules.samples.ConditionClass;
+    import system.rules.samples.RuleClass;
     
-    public class ConditionTest extends TestCase 
+    public class RuleTest extends TestCase 
     {
-        public function ConditionTest(name:String = "")
+        public function RuleTest(name:String = "")
         {
             super( name );
         }
@@ -48,9 +48,9 @@ package system.rules
         public function testInterface():void
         {
             
-            var c:ConditionClass = new ConditionClass();
+            var c:RuleClass = new RuleClass();
             
-            assertTrue( c is Condition ) ;
+            assertTrue( c is Rule ) ;
         }
     }
 }

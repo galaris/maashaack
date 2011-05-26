@@ -45,27 +45,27 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond1:Condition = new Not( true  ) ;
-            var cond2:Condition = new Not( false ) ;
-            var cond3:Condition = new Not( cond1 ) ;
+            var cond1:Rule = new Not( true  ) ;
+            var cond2:Rule = new Not( false ) ;
+            var cond3:Rule = new Not( cond1 ) ;
             
             assertFalse( cond1.eval() , "#1" ) ;
             assertTrue( cond2.eval() , "#2" ) ;
             assertTrue( cond3.eval() , "#3" ) ;
         }
         
-        public function testCondition():void
+        public function testRule():void
         {
             var cond1:Not = new Not( true  ) ;
             var cond2:Not = new Not( false ) ;
             var cond3:Not = new Not( cond1 ) ;
             
-            assertTrue( cond1.condition , "#1" ) ;
-            assertFalse( cond2.condition , "#2" ) ;
-            assertTrue( cond3.condition , "#3" ) ;
+            assertTrue( cond1.rule , "#1" ) ;
+            assertFalse( cond2.rule , "#2" ) ;
+            assertTrue( cond3.rule , "#3" ) ;
             
-            cond1.condition = "1" ;
-            assertEquals( "1" , cond1.condition , "#4-1" ) ;
+            cond1.rule = "1" ;
+            assertEquals( "1" , cond1.rule , "#4-1" ) ;
             assertFalse( cond1.eval() , "#4-2" ) ;
         }
     }

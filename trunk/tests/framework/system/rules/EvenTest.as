@@ -45,7 +45,7 @@ package system.rules
         
         public function testConstructor():void
         {
-            var cond:Condition ;
+            var cond:Rule ;
             
             cond = new Even( 0 ) ;
             assertTrue( cond.eval() , "#1" ) ;

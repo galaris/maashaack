@@ -45,7 +45,7 @@ package system.rules
         
         public function testConstructor():void
         {
-            var g:Condition ;
+            var g:Rule ;
             
             g = new GreaterThan( 1 , 1 ) ;
             assertFalse( g.eval() , "#1" ) ;
