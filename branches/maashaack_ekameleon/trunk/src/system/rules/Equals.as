@@ -40,9 +40,9 @@ package system.rules
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import system.rules.Condition ;
+     * import system.rules.BooleanRule ;
      * import system.rules.Equals ;
-     * import system.rules.Eval ;
+     * import system.rules.Rule ;
      * 
      * var e:Equals ;
      * 
@@ -54,11 +54,11 @@ package system.rules
      * e = new Equals( 1 , 2 ) ;
      * trace( e.eval() ) ; // false
      * 
-     * ///// Compares Condition objects.
+     * ///// Compares Rule objects.
      * 
-     * var cond1:Condition = new Eval( true  ) ;
-     * var cond2:Condition = new Eval( false ) ;
-     * var cond3:Condition = new Eval( true  ) ;
+     * var cond1:Rule = new BooleanRule( true  ) ;
+     * var cond2:Rule = new BooleanRule( false ) ;
+     * var cond3:Rule = new BooleanRule( true  ) ;
      * 
      * e = new Equals( cond1 , cond1 ) ;
      * trace( e.eval() ) ; // true
@@ -91,7 +91,7 @@ package system.rules
      * </code>
      * </listing>
      */
-    public class Equals implements Condition
+    public class Equals implements Rule
     {
         /**
          * Creates a new Equals instance.
@@ -123,9 +123,9 @@ package system.rules
             {
                 return true ;
             }
-            else if ( (value1 is Condition) && (value2 is Condition) )
+            else if ( (value1 is Rule) && (value2 is Rule) )
             {
-                return (value1 as Condition).eval() == (value2 as Condition).eval() ;
+                return (value1 as Rule).eval() == (value2 as Rule).eval() ;
             }
             else if ( value1 is Equatable )
             {
