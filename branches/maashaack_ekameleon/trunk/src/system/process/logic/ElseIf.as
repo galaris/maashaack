@@ -35,6 +35,7 @@
 package system.process.logic
 {
     import system.process.Action;
+    import system.rules.BooleanRule;
     import system.rules.Rule;
     
     /**
@@ -47,9 +48,9 @@ package system.process.logic
          * @param rule The Rule of the conditional block.
          * @param then The Action to execute if the condition is true.
          */
-        public function ElseIf( rule:Rule = null, then:Action = null )
+        public function ElseIf( rule:* = null, then:Action = null )
         {
-            this.rule = rule ;
+            this.rule = ( rule is Rule ) ? rule : new BooleanRule( rule ) ;
             this.then = then ;
         }
         
