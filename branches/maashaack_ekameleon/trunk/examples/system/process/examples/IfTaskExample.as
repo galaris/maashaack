@@ -36,14 +36,15 @@
 package examples
 {
     import examples.process.Message;
-    
+
     import system.process.Action;
     import system.process.Chain;
     import system.process.logic.ElseIf;
     import system.process.logic.IfTask;
-    
     import system.rules.BooleanRule;
-    
+    import system.rules.False;
+    import system.rules.True;
+
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
@@ -60,23 +61,31 @@ package examples
             chain.finishIt.connect( finish ) ;
             chain.startIt.connect( start )   ;
             
+            var flag:Boolean ; 
+            
             ///////// example 1 : if basic
             
-            var task1:IfTask = new IfTask( new BooleanRule(true) , new Message("then #1") ) ;
+            flag = true ;
+            
+            var task1:IfTask = new IfTask( flag , new Message("then #1") ) ;
             
             chain.addAction( task1 ) ;
             
             ///////// example 2 : if-else
             
-            var task2:IfTask = new IfTask( new BooleanRule(false) , new Message("then #2") , new Message("else #2") ) ;
+            flag = false ;
+            
+            var task2:IfTask = new IfTask( flag , new Message("then #2") , new Message("else #2") ) ;
             
             chain.addAction( task2 ) ;
             
             //////// example3 : use IfTask method with true condition
             
+            flag = true ;
+            
             var task3:IfTask = new IfTask() ;
             
-            task3.addRule( new BooleanRule(true)  )
+            task3.addRule( flag )
                  .addThen( new Message("then #3") )
                  .addElse( new Message("else #3") ) ;
             
@@ -86,7 +95,7 @@ package examples
             
             var task4:IfTask = new IfTask() ;
             
-            task4.addRule( new BooleanRule(false) )
+            task4.addRule( new False( flag ) )
                  .addThen( new Message("then #4") )
                  .addElse( new Message("else #4") ) ;
             
@@ -94,10 +103,12 @@ package examples
             
             //////// example5 : use elseif
             
-            var task5:IfTask = new IfTask( new BooleanRule(false) , new Message("then #5") , new Message("else #5")  ) ;
+            flag = true ;
             
-            task5.addElseIf( new BooleanRule(true)  , new Message("elseif #5-1") ) ;
-            task5.addElseIf( new BooleanRule(false) , new Message("elseif #5-2") ) ;
+            var task5:IfTask = new IfTask( new False(flag) , new Message("then #5") , new Message("else #5")  ) ;
+            
+            task5.addElseIf( new True(flag)  , new Message("elseif #5-1") ) ;
+            task5.addElseIf( new True(flag) , new Message("elseif #5-2") ) ;
             
             chain.addAction( task5 ) ;
             
