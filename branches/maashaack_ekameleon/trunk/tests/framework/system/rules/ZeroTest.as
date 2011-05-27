@@ -36,23 +36,21 @@ package system.rules
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class UndefinedTest extends TestCase 
+    public class ZeroTest extends TestCase 
     {
-        public function UndefinedTest(name:String = "")
+        public function ZeroTest(name:String = "")
         {
             super( name );
         }
         
-        public function testUndefined():void
+        public function testZero():void
         {
-            var value:* ;
             var cond:Rule ;
             
-            cond = new Undefined( value ) ;
+            cond = new Zero( 0 ) ;
             assertTrue( cond.eval()  , "#1" ) ;
             
-            value = {} ;
-            cond  = new Undefined( value ) ;
+            cond  = new Zero( 10 ) ;
             assertFalse( cond.eval() , "#2" ) ;
         }
     }
