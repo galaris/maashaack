@@ -32,37 +32,28 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class FalseTest extends TestCase 
     {
-        public static function suite():ITest
+        public function FalseTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system rules tests");
+            super( name );
+        }
+        
+        public function testFalse():void
+        {
+            var cond1:Rule = new False( true  ) ;
+            var cond2:Rule = new False( false ) ;
+            var cond3:Rule = new False( cond1 ) ;
+            var cond4:Rule = new False( cond2 ) ;
             
-            suite.addTestSuite( RuleTest ) ;
-            
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( BooleanRuleTest ) ;
-            suite.addTestSuite( DivByTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvenTest ) ;
-            suite.addTestSuite( FalseTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( LessOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( OddTest ) ;
-            suite.addTestSuite( OrTest ) ;
-            suite.addTestSuite( TrueTest ) ;
-            
-            return suite;
+            assertFalse( cond1.eval()  , "#1" ) ;
+            assertTrue( cond2.eval() , "#2" ) ;
+            assertTrue( cond3.eval()  , "#3" ) ;
+            assertFalse( cond4.eval() , "#4" ) ;
         }
     }
 }
