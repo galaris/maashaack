@@ -403,10 +403,13 @@
     <component id="system.rules:LessThan"            class="system.rules.LessThan"            />
     <component id="system.rules:Not"                 class="system.rules.Not"                 />
     <component id="system.rules:NotEquals"           class="system.rules.NotEquals"           />
+    <component id="system.rules:Null"                class="system.rules.Null"                />
     <component id="system.rules:Odd"                 class="system.rules.Odd"                 />
     <component id="system.rules:Or"                  class="system.rules.Or"                  />
     <component id="system.rules:Rule"                class="system.rules.Rule"                />
     <component id="system.rules:True"                class="system.rules.True"                />
+    <component id="system.rules:Undefined"           class="system.rules.Undefined"           />
+    <component id="system.rules:Zero"                class="system.rules.Zero"                />
     
     <!-- system.serializers.eden -->
     
