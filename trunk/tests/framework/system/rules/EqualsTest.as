@@ -36,9 +36,9 @@ package system.rules
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    public class BooleanRuleTest extends TestCase 
+    public class EqualsTest extends TestCase 
     {
-        public function BooleanRuleTest(name:String = "")
+        public function EqualsTest(name:String = "")
         {
             super( name );
         }
