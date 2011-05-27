@@ -35,8 +35,9 @@
 
 package system.process.logic
 {
+    import core.reflect.getClassPath;
     import core.reflect.getDefinitionByName;
-    import core.reflect.getClassName;
+    
     import system.process.Action;
     import system.process.Task;
     import system.rules.BooleanRule;
@@ -81,7 +82,7 @@ package system.process.logic
          */
         public override function clone():*
         {
-            var clazz:Class  = getDefinitionByName( getClassName(this) ) as Class;
+            var clazz:Class  = getDefinitionByName( getClassPath(this) ) as Class;
             var clone:IfTask = new clazz( _rule , _thenTask , _elseTask ) as IfTask ;
             if ( clone && _elseIfTasks.length > 0 )
             {
@@ -136,7 +137,7 @@ package system.process.logic
                     {
                         ei = elseIfTask[i] as ElseIf ;
                     }
-                    else if ( elseIfTask[i] is Rule && elseIfTask[i+1] is Task )
+                    else if ( (elseIfTask[i] is Rule || elseIfTask[i] is Boolean ) && elseIfTask[i+1] is Task )
                     {
                         ei = new ElseIf( elseIfTask[i] , elseIfTask[i+1] ) ;
                         i++ ;
