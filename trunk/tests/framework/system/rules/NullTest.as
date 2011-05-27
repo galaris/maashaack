@@ -32,40 +32,32 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class NullTest extends TestCase 
     {
-        public static function suite():ITest
+        public function NullTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system rules tests");
+            super( name );
+        }
+        
+        public function testNull():void
+        {
+            var cond:Rule ;
             
-            suite.addTestSuite( RuleTest ) ;
+            cond = new Null( undefined , true ) ;
+            assertFalse( cond.eval() ) ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( BooleanRuleTest ) ;
-            suite.addTestSuite( DivByTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvenTest ) ;
-            suite.addTestSuite( FalseTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( LessOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( NullTest ) ;
-            suite.addTestSuite( OddTest ) ;
-            suite.addTestSuite( OrTest ) ;
-            suite.addTestSuite( TrueTest ) ;
-            suite.addTestSuite( UndefinedTest ) ;
-            suite.addTestSuite( ZeroTest ) ;
+            cond = new Null( undefined ) ;
+            assertTrue( cond.eval() ) ;
             
-            return suite;
+            cond = new Null( null ) ;
+            assertTrue( cond.eval() ) ;
+            
+            cond = new Null( "hello" ) ;
+            assertFalse( cond.eval() ) ;
         }
     }
 }
