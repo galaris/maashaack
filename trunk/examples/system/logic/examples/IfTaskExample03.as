@@ -53,24 +53,24 @@ package examples
     {
         public function IfTaskExample03()
         {
-            var cond:Boolean = true ;
-            
-            //////// example5 : use elseif
+            ////////
             
             var task1:IfTask = new IfTask( false , new Message("then #1") , new Message("else #1")  ) ;
             
-            task1.addElseIf( new True(task1)  , new Message("elseif #5-1") ) ;
-            task1.addElseIf( new True(task1) , new Message("elseif #5-2") ) ;
+            task1.addElseIf( false , new Message("elseif #1-1") ) ;
+            task1.addElseIf( true  , new Message("elseif #1-2") ) ;
             
             task1.run() ;
             
-            //////// example6 : use elseif
+            trace( task1.clone() ) ;
+            
+            ////////
             
             var task2:IfTask = new IfTask( false , new Message("then #2") , new Message("else #2")  ) ;
             
-            task2.addElseIf( new False(cond) , new Message("elseif #2-1") )
-                 .addElseIf( new True(cond)  , new Message("elseif #2-2") )
-                 .addElseIf( new True(cond)  , new Message("elseif #2-3") ) ;
+            task2.addElseIf( false , new Message("elseif #2-1") )
+                 .addElseIf( false , new Message("elseif #2-2") )
+                 .addElseIf( true  , new Message("elseif #2-3") ) ;
             
             task2.run() ;
             
@@ -80,24 +80,29 @@ package examples
             
             task3.addElseIf
             (
-                new False(cond) , new Message("elseif #3-1") ,
-                new ElseIf( new True( cond ) , new Message( "elseif #3-2") ) , 
-                new True(cond)  , new Message("elseif #3-3") 
+                new ElseIf( false , new Message( "elseif #3-1") ) , 
+                new ElseIf( true  , new Message( "elseif #3-2") ) , 
+                new ElseIf( true  , new Message( "elseif #3-3") ) 
             ) ;
             
             task3.run() ;
             
             ////////
             
+            var cond:Boolean = true ;
+            
             var task4:IfTask = new IfTask
             (
                 // condition
                 false , 
+                
                 // then
                 new Message("then #4") , 
+                
                 // else
                 new Message("else #4") ,
-                // elseif
+                
+                // ...elseif
                 new False(cond) , new Message("elseif #4-1") ,
                 new ElseIf( new False(cond) , new Message( "elseif #4-2") ) , 
                 new True(cond) , new Message("elseif #4-3") 
