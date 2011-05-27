@@ -396,6 +396,7 @@
     <component id="system.rules:DivBy"               class="system.rules.DivBy"               />
     <component id="system.rules:Equals"              class="system.rules.Equals"              />
     <component id="system.rules:Even"                class="system.rules.Even"                />
+    <component id="system.rules:False"               class="system.rules.False"               />
     <component id="system.rules:GreaterOrEqualsThan" class="system.rules.GreaterOrEqualsThan" />
     <component id="system.rules:GreaterThan"         class="system.rules.GreaterThan"         />
     <component id="system.rules:LessOrEqualsThan"    class="system.rules.LessOrEqualsThan"    />
@@ -405,6 +406,7 @@
     <component id="system.rules:Odd"                 class="system.rules.Odd"                 />
     <component id="system.rules:Or"                  class="system.rules.Or"                  />
     <component id="system.rules:Rule"                class="system.rules.Rule"                />
+    <component id="system.rules:True"                class="system.rules.True"                />
     
     <!-- system.serializers.eden -->
     
