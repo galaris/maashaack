@@ -37,35 +37,40 @@ package system.process.logic
 {
     import system.process.Action;
     import system.process.Task;
+    import system.rules.BooleanRule;
     import system.rules.Rule;
     
     /**
      * Perform some tasks based on whether a given condition holds true or not.
+     * <p>{if}{then}{..elseif}{else} condition block</p>
      * <p>Usage :</p>
      * <pre>
-     * // if( cond ) then{} else{} ...elseif{}
-     * var task:IfTask = new IfTask( rule:Rule , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
+     * var task:IfTask = new IfTask( rule:Rule    , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
+     * var task:IfTask = new IfTask( rule:Boolean , thenTask:Action , elseTask:Action , ...elseIfTasks:Array )
      * </pre>
      */
     public class IfTask extends Task
     {
         /**
          * Creates a new IfTask instance.
-         * @param rule The conditional rule of the 'if' conditional task.
+         * @param rule The conditional rule of the task. Can be a Rule object or a Boolean value.
          * @param thenTask The Action reference to defines the 'then' block in the 'if' conditional task.
          * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
          * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
-        public function IfTask( rule:Rule = null , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+        public function IfTask( rule:* = null , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
         {
             _elseIfTasks = new Vector.<ElseIf>() ;
-            _rule        = rule ;
+            if ( rule )
+            {
+                _rule = ( rule is Rule ) ? rule : new BooleanRule( rule ) ;
+            }
             _thenTask    = thenTask  ;
+            _elseTask    = elseTask  ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
             {
                 addElseIf.apply( this , elseIfTasks ) ;
             }
-            _elseTask = elseTask  ;
         }
         
         /**
@@ -132,7 +137,7 @@ package system.process.logic
          * @return The current IfTask reference.
          * @throws Error if a 'condition' is already register.
          */
-        public function addRule( rule:Rule ):IfTask
+        public function addRule( rule:* ):IfTask
         {
             if ( _rule ) 
             {
@@ -140,7 +145,7 @@ package system.process.logic
             }
             else
             {
-                _rule = rule ;
+                _rule = ( rule is Rule ) ? rule : new BooleanRule(rule) ;
             }
             return this ;
         }
