@@ -32,41 +32,28 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class EmptyStringTest extends TestCase 
     {
-        public static function suite():ITest
+        public function EmptyStringTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system rules tests");
+            super( name );
+        }
+        
+        public function testEmptyString():void
+        {
+            var cond1:Rule = new EmptyString( null  ) ;
+            var cond2:Rule = new EmptyString( 1 ) ;
+            var cond3:Rule = new EmptyString( "hello" ) ;
+            var cond4:Rule = new EmptyString( "" ) ;
             
-            suite.addTestSuite( RuleTest ) ;
-            
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( BooleanRuleTest ) ;
-            suite.addTestSuite( DivByTest ) ;
-            suite.addTestSuite( EmptyStringTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvenTest ) ;
-            suite.addTestSuite( FalseTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( LessOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( NullTest ) ;
-            suite.addTestSuite( OddTest ) ;
-            suite.addTestSuite( OrTest ) ;
-            suite.addTestSuite( TrueTest ) ;
-            suite.addTestSuite( UndefinedTest ) ;
-            suite.addTestSuite( ZeroTest ) ;
-            
-            return suite;
+            assertFalse( cond1.eval() , "#1" ) ;
+            assertFalse( cond2.eval() , "#2" ) ;
+            assertFalse( cond3.eval() , "#3" ) ;
+            assertTrue(  cond4.eval() , "#4" ) ;
         }
     }
 }
