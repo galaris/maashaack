@@ -62,6 +62,7 @@ package system.rules
             suite.addTestSuite( OrTest ) ;
             suite.addTestSuite( TrueTest ) ;
             suite.addTestSuite( UndefinedTest ) ;
+            suite.addTestSuite( ZeroTest ) ;
             
             return suite;
         }
