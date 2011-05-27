@@ -32,38 +32,28 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.rules
+package system.rules 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    public class UndefinedTest extends TestCase 
     {
-        public static function suite():ITest
+        public function UndefinedTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("system rules tests");
+            super( name );
+        }
+        
+        public function testTrue():void
+        {
+            var value:* ;
+            var cond:Rule ;
             
-            suite.addTestSuite( RuleTest ) ;
+            cond = new Undefined( value ) ;
+            assertTrue( cond.eval()  , "#1" ) ;
             
-            suite.addTestSuite( AndTest ) ;
-            suite.addTestSuite( BooleanRuleTest ) ;
-            suite.addTestSuite( DivByTest ) ;
-            suite.addTestSuite( EqualsTest ) ;
-            suite.addTestSuite( EvenTest ) ;
-            suite.addTestSuite( FalseTest ) ;
-            suite.addTestSuite( GreaterOrEqualsThanTest ) ;
-            suite.addTestSuite( GreaterThanTest ) ;
-            suite.addTestSuite( LessOrEqualsThanTest ) ;
-            suite.addTestSuite( LessThanTest ) ;
-            suite.addTestSuite( NotTest ) ;
-            suite.addTestSuite( NotEqualsTest ) ;
-            suite.addTestSuite( OddTest ) ;
-            suite.addTestSuite( OrTest ) ;
-            suite.addTestSuite( TrueTest ) ;
-            suite.addTestSuite( UndefinedTest ) ;
-            
-            return suite;
+            value = {} ;
+            cond  = new Undefined( value ) ;
+            assertFalse( cond.eval() , "#2" ) ;
         }
     }
 }
