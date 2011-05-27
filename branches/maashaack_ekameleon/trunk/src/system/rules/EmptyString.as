@@ -35,7 +35,7 @@
 package system.rules
 {
     /**
-     * Evaluates if the String value is empty.
+     * Evaluates if the value is an empty String.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
@@ -58,7 +58,7 @@ package system.rules
          * Creates a new EmptyString instance.
          * @param value The String to evaluate.
          */
-        public function EmptyString( value:String )
+        public function EmptyString( value:* )
         {
             this.value = value ;
         }
@@ -66,7 +66,7 @@ package system.rules
         /**
          * The condition to evaluate.
          */
-        public var value:String ;
+        public var value:* ;
         
         /**
          * Evaluates the specified condition.
