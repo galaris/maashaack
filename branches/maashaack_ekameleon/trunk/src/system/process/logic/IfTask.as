@@ -35,6 +35,8 @@
 
 package system.process.logic
 {
+    import core.reflect.getDefinitionByName;
+    import core.reflect.getClassName;
     import system.process.Action;
     import system.process.Task;
     import system.rules.BooleanRule;
@@ -65,14 +67,31 @@ package system.process.logic
             {
                 _rule = ( rule is Rule ) ? rule : new BooleanRule( rule ) ;
             }
-            _thenTask    = thenTask  ;
-            _elseTask    = elseTask  ;
+            _thenTask = thenTask  ;
+            _elseTask = elseTask  ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
             {
                 addElseIf.apply( this , elseIfTasks ) ;
             }
         }
         
+        /**
+         * Returns the shallow copy of the object.
+         * @return the shallow copy of the object.
+         */
+        public override function clone():*
+        {
+            var clazz:Class  = getDefinitionByName( getClassName(this) ) as Class;
+            var clone:IfTask = new clazz( _rule , _thenTask , _elseTask ) as IfTask ;
+            if ( clone && _elseIfTasks.length > 0 )
+            {
+                for each( var ei:ElseIf in _elseIfTasks )
+                {
+                    clone.addElseIf( ei ) ;
+                }
+            }
+            return clone ;
+        }
         /**
          * Indicates if the class throws errors or notify a finished event when the task failed.
          */
