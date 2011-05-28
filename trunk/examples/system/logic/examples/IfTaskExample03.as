@@ -62,8 +62,6 @@ package examples
             
             task1.run() ;
             
-            trace( task1.clone() ) ;
-            
             ////////
             
             var task2:IfTask = new IfTask( false , new Message("then #2") , new Message("else #2")  ) ;
