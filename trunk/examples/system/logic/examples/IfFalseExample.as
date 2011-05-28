@@ -37,28 +37,28 @@ package examples
 {
     import examples.process.Message;
     
-    import system.process.logic.IfTrue;
+    import system.process.logic.IfFalse;
     
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
-     * Example: use the IfTrue class.
+     * Example: use the IfFalse class.
      */
-    public class IfTrueExample extends Sprite
+    public class IfFalseExample extends Sprite
     {
-        public function IfTrueExample()
+        public function IfFalseExample()
         {
             var value:uint = 10 ;
             
-            var task:IfTrue ;
+            var task:IfFalse ;
             
-            task = new IfTrue( (value == 10) , new Message("then #1") , new Message("else #1") ) ;
-            task.run() ; // then #1
+            task = new IfFalse( (value == 10) , new Message("then #1") , new Message("else #1") ) ;
+            task.run() ; // else #1
             
-            task = new IfTrue( (value < 10) , new Message("then #2") , new Message("else #2") ) ;
-            task.run() ; // else #2
+            task = new IfFalse( (value < 10) , new Message("then #2") , new Message("else #2") ) ;
+            task.run() ; // then #2
         }
     }
 }
