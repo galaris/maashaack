@@ -40,6 +40,24 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given condition holds equality of two values.
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import examples.process.Message;
+     * import system.process.logic.IfEquals;
+     * 
+     * var a:uint = 10 ;
+     * var b:uint = 20 ;
+     * 
+     * var task:IfEquals ;
+     * 
+     * task = new IfEquals( 10 , 10 , new Message("then"), new Message("else")) ;
+     * task.run() ; // then
+     * 
+     * task = new IfEquals( 10 , 20 , new Message("then"), new Message("else")) ;
+     * task.run() ; // else
+     * </code>
+     * </listing>
      * @see system.rules#Equals
      */
     public class IfEquals extends IfTask
