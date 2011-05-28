@@ -48,7 +48,7 @@ package system.process.logic
      * 
      * var task:IfUndefined ;
      * 
-     * var value:* ;
+     * var value:&#42; ;
      * 
      * task = new IfUndefined(value,new Message("then #1"),new Message("else #1")) ;
      * task.run() ; // then #1
@@ -62,7 +62,6 @@ package system.process.logic
      * task.run() ; // else #3
      * </code>
      * </listing>
-     * 
      * @see system.rules#Undefined
      */
     public class IfUndefined extends IfTask
