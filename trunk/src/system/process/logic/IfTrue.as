@@ -40,6 +40,23 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given condition holds true.
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import examples.process.Message;
+     * import system.process.logic.IfTrue;
+     * 
+     * var task:IfTrue ;
+     * 
+     * var value:uint = 10 ;  
+     * 
+     * task = new IfTrue( value == 10 ) ;
+     * task.addThen( new Message("then") ) ;
+     * task.addElse( new Message("else") ) ;
+     * 
+     * task.run() ; // then
+     * </code>
+     * </listing>
      * @see system.rules#True
      */
     public class IfTrue extends IfTask
