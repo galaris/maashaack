@@ -40,6 +40,23 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given condition holds false.
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import examples.process.Message;
+     * import system.process.logic.IfFalse;
+     * 
+     * var task:IfFalse ;
+     * 
+     * var value:uint = 10 ;  
+     * 
+     * task = new IfFalse( value == 10 ) ;
+     * task.addThen( new Message("then") ) ;
+     * task.addElse( new Message("else") ) ;
+     * 
+     * task.run() ; // else
+     * </code>
+     * </listing>
      * @see system.rules#False
      */
     public class IfFalse extends IfTask
