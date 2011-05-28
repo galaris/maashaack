@@ -37,10 +37,11 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
+
     import system.Environment;
     import system.hosts.HostID;
     import system.process.caches.AllTests;
+    import system.process.logic.AllTests;
     
     public class AllTests
     {
@@ -48,7 +49,6 @@ package system.process
         {
             var suite:TestSuite = new TestSuite("system process tests");
             
-            //process.cache
             suite.addTest( system.process.caches.AllTests.suite() );
             
             if( Environment.host.id != HostID.RedTamarin )
@@ -81,6 +81,8 @@ package system.process
                 suite.addTestSuite( TaskGroupTest ) ;
                 suite.addTestSuite( TaskPhaseTest ) ;
                 suite.addTestSuite( TimeoutPolicyTest ) ;
+                
+                suite.addTest( system.process.logic.AllTests.suite() );
             }
             
             return suite;
