@@ -43,19 +43,29 @@ package system.process.logic
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
-     * import examples.process.Message;
-     * import system.process.logic.IfEquals;
-     * 
-     * var a:uint = 10 ;
-     * var b:uint = 20 ;
-     * 
-     * var task:IfEquals ;
-     * 
-     * task = new IfEquals( 10 , 10 , new Message("then"), new Message("else")) ;
-     * task.run() ; // then
-     * 
-     * task = new IfEquals( 10 , 20 , new Message("then"), new Message("else")) ;
-     * task.run() ; // else
+     * package examples
+     * {
+     *     import examples.process.Message;
+     *     import flash.display.Sprite;
+     *     import system.process.logic.IfEquals;
+     *     
+     *     public class IfEqualsExample extends Sprite
+     *     {
+     *         public function IfEqualsExample()
+     *         {
+     *             var a:uint = 10 ;
+     *             var b:uint = 20 ;
+     *             
+     *             var task:IfEquals ;
+     *             
+     *             task = new IfEquals( a , a , new Message("then"), new Message("else")) ;
+     *             task.run() ; // then
+     *             
+     *             task = new IfEquals( a , b , new Message("then"), new Message("else")) ;
+     *             task.run() ; // else
+     *         }
+     *     }
+     * }
      * </code>
      * </listing>
      * @see system.rules#Equals
