@@ -63,6 +63,7 @@ package system.rules
         /**
          * Creates a new Null instance.
          * @param value The value to evaluate.
+         * @param strict Indicates if the evaluation is strict or not. Use the operator <code>==</code> if strict is <code>false</code> or <code>===</code>.
          */
         public function Null( value:* = null , strict:Boolean = false )
         {
