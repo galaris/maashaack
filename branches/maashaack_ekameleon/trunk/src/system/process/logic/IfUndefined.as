@@ -40,7 +40,30 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given value is undefined.
-     * @see system.rules#Null
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import examples.process.Message;
+     * import system.process.logic.IfUndefined;
+     * 
+     * var task:IfUndefined ;
+     * 
+     * var value:* ;
+     * 
+     * task = new IfUndefined(value,new Message("then #1"),new Message("else #1")) ;
+     * task.run() ; // then #1
+     * 
+     * value = null ;
+     * task  = new IfUndefined(value,new Message("then #2"),new Message("else #2")) ;
+     * task.run() ; // else #2
+     * 
+     * value = "hello" ;
+     * task = new IfUndefined(value,new Message("then #3"),new Message("else #3")) ;
+     * task.run() ; // else #3
+     * </code>
+     * </listing>
+     * 
+     * @see system.rules#Undefined
      */
     public class IfUndefined extends IfTask
     {
