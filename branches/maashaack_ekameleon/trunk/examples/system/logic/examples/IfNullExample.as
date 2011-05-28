@@ -52,16 +52,22 @@ package examples
         {
             var task:IfNull ;
             
-            task = new IfNull( undefined , true  , new Message("then #1") , new Message("else #1") ) ;
+            var value:* ;
+            
+            task = new IfNull( value , true  , new Message("then #1") , new Message("else #1") ) ;
             task.run() ;
             
-            task = new IfNull( undefined , false , new Message("then #2") , new Message("else #2") ) ;
+            task = new IfNull( value , false , new Message("then #2") , new Message("else #2") ) ;
             task.run() ;
             
-            task = new IfNull( null      , false , new Message("then #3") , new Message("else #3") ) ;
+            value = null ;
+            
+            task = new IfNull( value  , false , new Message("then #3") , new Message("else #3") ) ;
             task.run() ;
             
-            task = new IfNull( "hello"   , false , new Message("then #4") , new Message("else #4") ) ;
+            value = "hello" ;
+            
+            task = new IfNull( value , false , new Message("then #4") , new Message("else #4") ) ;
             task.run() ;
         }
     }
