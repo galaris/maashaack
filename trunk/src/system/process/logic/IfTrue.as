@@ -57,7 +57,7 @@ package system.process.logic
      * task.run() ; // then
      * </code>
      * </listing>
-     * @see system.rules#True
+     * @see system.rules.True
      */
     public class IfTrue extends IfTask
     {

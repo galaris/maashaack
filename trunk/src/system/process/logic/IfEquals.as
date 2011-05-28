@@ -68,7 +68,7 @@ package system.process.logic
      * }
      * </code>
      * </listing>
-     * @see system.rules#Equals
+     * @see system.rules.Equals
      */
     public class IfEquals extends IfTask
     {

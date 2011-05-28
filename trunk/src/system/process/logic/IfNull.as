@@ -63,7 +63,7 @@ package system.process.logic
      * task.run() ; // else #4
      * </code>
      * </listing>
-     * @see system.rules#Null
+     * @see system.rules.Null
      */
     public class IfNull extends IfTask
     {
