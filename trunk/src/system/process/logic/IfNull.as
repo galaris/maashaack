@@ -52,7 +52,7 @@ package system.process.logic
          * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
          * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
-        public function IfNull( value:* = null , strict:Boolean = false, thenTask:Action = null, elseTask:Action = null, ...elseIfTasks:Array)
+        public function IfNull( value:* , strict:Boolean = false, thenTask:Action = null, elseTask:Action = null, ...elseIfTasks:Array )
         {
             super( new Null( value , strict ) , thenTask , elseTask ) ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
