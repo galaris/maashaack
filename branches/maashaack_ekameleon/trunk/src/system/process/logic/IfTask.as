@@ -83,7 +83,10 @@ package system.process.logic
         public override function clone():*
         {
             var clazz:Class  = getDefinitionByName( getClassPath(this) ) as Class;
-            var clone:IfTask = new clazz( _rule , _thenTask , _elseTask ) as IfTask ;
+            var clone:IfTask = new clazz() as IfTask ;
+            clone.addRule(_rule) ;
+            clone.addThen(_thenTask) ;
+            clone.addElse(_elseTask) ;
             if ( clone && _elseIfTasks.length > 0 )
             {
                 for each( var ei:ElseIf in _elseIfTasks )
@@ -93,6 +96,7 @@ package system.process.logic
             }
             return clone ;
         }
+        
         /**
          * Indicates if the class throws errors or notify a finished event when the task failed.
          */
