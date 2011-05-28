@@ -62,7 +62,7 @@ package system.process.logic
      * task.run() ; // else #3
      * </code>
      * </listing>
-     * @see system.rules#Undefined
+     * @see system.rules.Undefined
      */
     public class IfUndefined extends IfTask
     {
