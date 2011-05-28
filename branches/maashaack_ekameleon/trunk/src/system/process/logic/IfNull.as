@@ -40,6 +40,29 @@ package system.process.logic
     
     /**
      * Perform some tasks based on whether a given value is null (strict or not).
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import examples.process.Message;
+     * import system.process.logic.IfNull;
+     * 
+     * var task:IfNull ;
+     * 
+     * var value:&#42; ;  
+     * 
+     * task = new IfNull( undefined , true , new Message("then #1") , new Message("else #1") ) ;
+     * task.run() ; // else #1
+     * 
+     * task = new IfNull( undefined , false , new Message("then #2") , new Message("else #2") ) ;
+     * task.run() ; // then #2
+     * 
+     * task = new IfNull( null , false , new Message("then #3") , new Message("else #3") ) ;
+     * task.run() ; // then #3
+     * 
+     * task = new IfNull( "hello" , false , new Message("then #4") , new Message("else #4") ) ;
+     * task.run() ; // else #4
+     * </code>
+     * </listing>
      * @see system.rules#Null
      */
     public class IfNull extends IfTask
