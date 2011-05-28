@@ -47,12 +47,11 @@ package system.process.logic
         /**
          * Creates a new IfUndefined instance.
          * @param value The value to evaluate.
-         * @param strict Indicates if the evaluation is strict or not. Use the operator <code>==</code> if strict is <code>false</code> or <code>===</code>.
          * @param thenTask The Action reference to defines the 'then' block in the 'if' conditional task.
          * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
          * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
-        public function IfUndefined(value:*, strict:Boolean = false, thenTask:Action = null, elseTask:Action = null, ...elseIfTasks:Array )
+        public function IfUndefined(value:*, thenTask:Action = null, elseTask:Action = null, ...elseIfTasks:Array )
         {
             super( new Undefined( value ) , thenTask , elseTask ) ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
