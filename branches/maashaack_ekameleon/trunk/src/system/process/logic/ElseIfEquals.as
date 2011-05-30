@@ -45,7 +45,7 @@ package system.process.logic
     public class ElseIfEquals extends ElseIf
     {
         /**
-         * Creates a new ElseIf instance.
+         * Creates a new ElseIfEquals instance.
          * @param value1 The first value to evaluate.
          * @param value1 The second value to evaluate.
          * @param then The Action to execute if the condition is true.
