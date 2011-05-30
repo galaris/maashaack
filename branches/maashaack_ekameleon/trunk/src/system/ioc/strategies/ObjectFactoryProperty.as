@@ -62,8 +62,8 @@ package system.ioc.strategies
         public var factory:String ;
         
         /**
-         * Returns the ObjectFactoryMethod representation of the specified generic object or null.
-         * @return the ObjectFactoryMethod representation of the specified generic object or null.
+         * Returns the ObjectFactoryProperty representation of the specified generic object or null.
+         * @return the ObjectFactoryProperty representation of the specified generic object or null.
          */
         public static function build( o:Object=null ):ObjectFactoryProperty
         {
