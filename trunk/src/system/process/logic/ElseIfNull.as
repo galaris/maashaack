@@ -35,23 +35,24 @@
 package system.process.logic
 {
     import system.process.Action;
-    import system.rules.False;
+    import system.rules.Null;
     
     /**
-     * Defines if a condition is false in an 'elseif' conditional block.
-     * @see system.rules.False
+     * Defines if a value is null in an 'elseif' conditional block.
+     * @see system.rules.Null
      * @see system.process.logic.ElseIf
      */
-    public class ElseIfFalse extends ElseIf
+    public class ElseIfNull extends ElseIf
     {
         /**
-         * Creates a new ElseIfFalse instance.
-         * @param condition The Boolean value or the Rule object to evaluate.
+         * Creates a new ElseIfNull instance.
+         * @param value The value to evaluate.
          * @param then The Action to execute if the condition is true.
+         * @param strict Indicates if the evaluation is strict or not. Use the operator <code>==</code> if strict is <code>false</code> or <code>===</code>.
          */
-        public function ElseIfFalse(condition:*, then:Action = null)
+        public function ElseIfNull( value:*, then:Action = null , strict:Boolean = false )
         {
-            super( new False( condition ) , then ) ;
+            super( new Null( value , strict ) , then ) ;
         }
     }
 }
