@@ -35,7 +35,7 @@
 
 package examples
 {
-    import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.Chain;
     import system.process.Pause;
     
@@ -55,10 +55,10 @@ package examples
             chain.looping = true ;
             chain.numLoop = 3 ;
             
-            chain.addEventListener( ActionEvent.FINISH   , debug ) ;
-            chain.addEventListener( ActionEvent.LOOP     , loop  ) ;
-            chain.addEventListener( ActionEvent.PROGRESS , debug ) ;
-            chain.addEventListener( ActionEvent.START    , debug ) ;
+            chain.finishIt.connect( finish ) ;
+            chain.loopIt.connect( loop ) ; 
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start ) ;
             
             chain.addAction( new Pause(1) ) ;
             chain.addAction( new Pause(1) ) ;
@@ -71,13 +71,24 @@ package examples
         
         public var chain:Chain ;
         
-        public function debug( e:ActionEvent ):void
+        public function finish( action:Action ):void
         {
-            trace( "# " + e.type ) ;
+            trace( "#finish" ) ;
         }
-        public function loop( e:ActionEvent ):void
+        
+        public function loop( action:Action ):void
         {
-            trace( "# " + e.type + " currentLoop:" + chain.currentLoop + " numLoop:" + chain.numLoop ) ;
+            trace( "#loop currentLoop:" + chain.currentLoop + " numLoop:" + chain.numLoop ) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "#progress" ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "#start" ) ;
         }
     }
 }
