@@ -36,8 +36,8 @@
 package examples
 {
     import examples.process.PriorityTask;
-    
-    import system.events.ActionEvent;
+
+    import system.process.Action;
     import system.process.Chain;
     import system.process.Pause;
     
@@ -47,6 +47,18 @@ package examples
     
     /**
      * Basic example to use the system.process.Chain class with the priority option in the addAction method.
+     * <p><b>Run the example :</b></p>
+     * <pre>
+     * #start
+     * #progress current:[Pause duration:3s]
+     * #progress current:[PriorityTask name:task3 priority:150]
+     * #progress current:[Pause duration:1s]
+     * #progress current:[PriorityTask name:task2 priority:75]
+     * #progress current:[Pause duration:4s]
+     * #progress current:[PriorityTask name:task1 priority:25]
+     * #progress current:[Pause duration:2s]
+     * #finish
+     * </pre>
      */
     public class ChainPriorityExample extends Sprite
     {
@@ -54,9 +66,9 @@ package examples
         {
             chain = new Chain() ;
             
-            chain.addEventListener( ActionEvent.FINISH   , debug    ) ;
-            chain.addEventListener( ActionEvent.PROGRESS , progress ) ;
-            chain.addEventListener( ActionEvent.START    , debug    ) ;
+            chain.finishIt.connect( finish ) ;
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start ) ;
             
             // use the priority argument
             
@@ -76,14 +88,19 @@ package examples
         
         public var chain:Chain ;
         
-        public function debug( e:ActionEvent ):void
+        public function finish( action:Action ):void
         {
-            trace( "# " + e.type ) ;
+            trace( "#finish" ) ;
         }
         
-        public function progress( e:ActionEvent ):void
+        public function progress( action:Action ):void
         {
-            trace( "# " + e.type + " current:" + chain.current ) ;
+            trace( "#progress current:" + chain.current ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "#start" ) ;
         }
     }
 }
