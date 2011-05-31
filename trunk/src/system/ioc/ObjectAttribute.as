@@ -111,6 +111,11 @@ package system.ioc
         public static const OBJECT_DESTROY_METHOD_NAME:String = "destroy" ;
         
         /**
+         * The name of the "factoryLogic" object definition attribute.
+         */
+        public static const OBJECT_FACTORY_LOGIC:String = "factoryLogic" ;
+        
+        /**
          * The name of the "factoryMethod" object definition attribute.
          */
         public static const OBJECT_FACTORY_METHOD:String = "factoryMethod" ;
