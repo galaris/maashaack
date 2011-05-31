@@ -139,7 +139,7 @@ package system.logging.targets
          */
         public function flush():void
         {
-            if( _cache.size() > 0 )
+            if( _cache.length > 0 )
             {
                 _cache.run() ;
             }
