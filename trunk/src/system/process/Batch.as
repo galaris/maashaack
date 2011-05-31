@@ -99,7 +99,7 @@ package system.process
      * }
      * </pre>
      */
-    public class BatchTask extends TaskGroup 
+    public class Batch extends TaskGroup 
     {
         /**
          * Creates a new BatchTask instance.
@@ -108,7 +108,7 @@ package system.process
          * @param mode Specifies the mode of the chain. The mode can be "normal" (default), "transient" or "everlasting".
          * @param actions A dynamic object who contains Action references to initialize the chain.
          */
-        public function BatchTask(length:uint = 0, fixed:Boolean = false, mode:String = "normal", actions:* = null)
+        public function Batch(length:uint = 0, fixed:Boolean = false, mode:String = "normal", actions:* = null)
         {
             _currents = new HashMap() ;
             super(length, fixed, mode, actions);
@@ -172,7 +172,7 @@ package system.process
          */
         public override function clone():*
         {
-            var clone:BatchTask = new BatchTask( 0 , false, _mode, _actions.length > 0 ? toVector() : null ) ;
+            var clone:Batch = new Batch( 0 , false, _mode, _actions.length > 0 ? toVector() : null ) ;
             clone.fixed = _actions.fixed ;
             return clone ;
         }
