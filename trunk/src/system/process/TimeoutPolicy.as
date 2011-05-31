@@ -36,10 +36,8 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.process 
 {
     import core.reflect.getClassPath;
-
-    import system.Serializable;
     
-    // FIXME extends the Enum class ?
+    import system.Serializable;
     
     /**
      * Defines the policy of the timeout states in the application.
