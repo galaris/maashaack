@@ -32,323 +32,335 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
 package system.process 
 {
-    import system.data.maps.HashMap;
+    import core.dump;
+    import core.reflect.getClassPath;
+
+    import system.data.Collection;
+    import system.data.Iterator;
+    import system.data.collections.formatter;
+    import system.data.iterators.VectorIterator;
 
     /**
-     * Batchs tasks and notify when all actions are finished.
+     * A batch is a collection of <code class="prettyprint">Action</code> objects. 
+     * All <code class="prettyprint">Action</code> objects are processed as a single unit.
+     * <p>This class use an internal typed Collection to register all <code class="prettyprint">Runnable</code> objects.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples
      * {
-     *     import system.process.Action;
-     *     import system.process.BatchTask;
-     *     import system.process.Pause;
+     *     import system.process.Batch;
      *     
      *     import flash.display.Sprite;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.geom.Point;
      *     
      *     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
      *     
-     *     public class BatchTaskExample extends Sprite
+     *     public class BatchExample extends Sprite
      *     {
-     *         public function BatchTaskExample()
+     *         public function BatchExample()
      *         {
-     *             batch = new BatchTask() ;
+     *             var s1:Square = new Square( 50 ,  50 , 0xFF0000 ) ;
+     *             var s2:Square = new Square( 50 , 100 , 0x00FF00 ) ;
+     *             var s3:Square = new Square( 50 , 150 , 0x0000FF ) ;
      *             
-     *             // batch.mode = BatchTask.TRANSIENT ;
+     *             s1.finish = new Point( 600 ,  50 ) ;
+     *             s2.finish = new Point( 600 , 100 ) ;
+     *             s3.finish = new Point( 600 , 150 ) ;
      *             
-     *             batch.changeIt.connect( change ) ;
-     *             batch.finishIt.connect( finish ) ;
-     *             batch.progressIt.connect( progress ) ;
-     *             batch.startIt.connect( start ) ;
+     *             addChild(s1) ;
+     *             addChild(s2) ;
+     *             addChild(s3) ;
      *             
-     *             batch.addAction( new Pause(  2 , true ) , 0 , true ) ;
-     *             batch.addAction( new Pause( 10 , true ) ) ;
-     *             batch.addAction( new Pause(  1 , true ) , 0 , true ) ;
-     *             batch.addAction( new Pause(  5 , true ) ) ;
-     *             batch.addAction( new Pause(  7 , true ) , 0 , true ) ;
-     *             batch.addAction( new Pause(  2 , true ) ) ;
+     *             command = new Batch() ;
      *             
-     *             batch.run() ;
+     *             command.add( s1 ) ;
+     *             command.add( s2 ) ;
+     *             command.add( s3 ) ;
+     *             
+     *             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown) ;
      *         }
      *         
-     *         public var batch:BatchTask ;
+     *         public var command:Batch ;
      *         
-     *         public function change( action:Action ):void
+     *         public function keyDown( e:KeyboardEvent ):void
      *         {
-     *             trace( "change :  " + batch.current ) ;
+     *             command.run() ;
      *         }
-     *         
-     *         public function finish( action:Action ):void
+     *     }
+     * }
+     * 
+     * import system.process.Runnable;
+     * 
+     * import flash.display.Sprite;
+     * import flash.events.Event;
+     * import flash.filters.DropShadowFilter;
+     * import flash.geom.Point;
+     * 
+     * class Square extends Sprite implements Runnable
+     * {
+     *     public function Square( x:int = 0 , y:int = 0 , color:uint = 0xFFFFFF ):void
+     *     {
+     *         graphics.beginFill( color ) ;
+     *         graphics.drawRect(0, 0, 30, 30) ;
+     *         filters = [ new DropShadowFilter(1,60,0,0.7,4,4) ] ;
+     *         this.x = x ;
+     *         this.y = y ;
+     *     }
+     *     
+     *     public var finish:Point ;
+     *     
+     *     public function run(...arguments:Array):void
+     *     {
+     *         if ( finish != null )
      *         {
-     *             trace( "finish length:" + batch.length ) ;
+     *             addEventListener(Event.ENTER_FRAME , enterFrame ) ;
      *         }
-     *         
-     *         public function progress( action:Action ):void
+     *     }
+     *     
+     *     protected function enterFrame( e:Event ):void
+     *     {
+     *         var dx:Number = Math.round( ( finish.x - x ) &#42; 0.3 ) ;
+     *         var dy:Number = Math.round( ( finish.y - y ) &#42; 0.3 ) ;
+     *         x += dx ;
+     *         y += dy ;
+     *         if ( dx == 0 &#38;&#38; dy == 0 )
      *         {
-     *             trace( "progress :  " + batch.current ) ;
-     *         }
-     *         
-     *         public function start( action:Action ):void
-     *         {
-     *             trace( "start" ) ;
+     *             removeEventListener(Event.ENTER_FRAME , enterFrame ) ;
      *         }
      *     }
      * }
      * </pre>
      */
-    public class Batch extends TaskGroup 
+    public class Batch implements Collection, Runnable, Stoppable
     {
         /**
-         * Creates a new BatchTask instance.
-         * @param length The initial length (number of elements) of the Vector. If this parameter is greater than zero, the specified number of Vector elements are created and populated with the default value appropriate to the base type (null for reference types).
-         * @param fixed Whether the chain length is fixed (true) or can be changed (false). This value can also be set using the fixed property.
-         * @param mode Specifies the mode of the chain. The mode can be "normal" (default), "transient" or "everlasting".
-         * @param actions A dynamic object who contains Action references to initialize the chain.
+         * Creates a new Batch instance.
+         * @param init The optional Array of Runnable objects to fill the batch.
          */
-        public function Batch(length:uint = 0, fixed:Boolean = false, mode:String = "normal", actions:* = null)
+        public function Batch( init:Array = null )
         {
-            _currents = new HashMap() ;
-            super(length, fixed, mode, actions);
+            _v = new Vector.<Runnable>() ;
+            if ( init && init.length > 0 )
+            {
+                var l:int = init.length ;
+                for( var i:int ; i<l ; i++ )
+                {
+                    if ( init[i] is Runnable )
+                    {
+                        add( init[i] ) ;
+                    }
+                }
+            }
         }
         
         /**
-         * Determinates the "everlasting" mode of the batch. In this mode the action register in the batch can't be auto-remove.
+         * Inserts an element in the collection.
          */
-        public static const EVERLASTING:String = "everlasting" ;
-        
-        /**
-         * Determinates the "normal" mode of the batch. In this mode the batch has a normal life cycle.
-         */
-        public static const NORMAL:String = "normal" ;
-        
-        /**
-         * Determinates the "transient" mode of the batch. In this mode all actions are strictly auto-remove in the batch when are invoked.
-         */
-        public static const TRANSIENT:String = "transient" ;
-        
-        /**
-         * Indicates the current Action reference when the batch is in progress.
-         */
-        public function get current():Action
+        public function add( o:* ):Boolean
         {
-            return _current ;
+            if ( o == null ) 
+            {
+                return false ;
+            }
+            try
+            {
+                _v.push(o) ;
+                return true ;
+            }
+            catch( e:Error )
+            {
+                //
+            }
+            return false ;
+        }
+        
+        /**
+         * Removes all elements in the collection.
+         */
+        public function clear():void
+        {
+            _v.length = 0 ;
+        }
+        
+        /**
+         * Returns a shallow copy of the object.
+         * @return a shallow copy of the object.
+         */
+        public function clone():*
+        {
+            var b:Batch = new Batch() ;
+            var l:int = _v.length ;
+            for( var i:int ; i < l ; i++ )
+            {
+                b.add( _v[i] ) ;
+            }
+            return b ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains the specified element.
+         * @return <code class="prettyprint">true</code> if this collection contains the specified element.
+         */
+        public function contains( o:* ):Boolean
+        {
+            return _v.indexOf( o ) >- 1 ;
+        }
+        
+        /**
+         * Returns the element from this collection at the passed key index.
+         * @return the element from this collection at the passed key index.
+         */
+        public function get( key:* ):*
+        {
+            return _v[key] ;
+        }
+        
+        /**
+         * Returns the index of an element in the collection.
+         * @return the index of an element in the collection.
+         */
+        public function indexOf( o:* , fromIndex:uint = 0 ):int
+        {
+            return _v.indexOf( o , fromIndex ) ;
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if this collection contains no elements.
+         * @return <code class="prettyprint">true</code> if this collection contains no elements.
+         */
+        public function isEmpty():Boolean
+        {
+            return _v.length == 0 ;
+        }
+        
+        /**
+         * Returns the iterator reference of the object.
+         * @return the iterator reference of the object.
+         */  
+        public function iterator():Iterator
+        {
+            return new VectorIterator( _v ) ;
+        }
+        
+        /**
+         * Removes a single instance of the specified element from this collection, if it is present (optional operation).
+         */
+        public function remove( o:* ):*
+        {
+            var index:int = this._v.indexOf( o ) ;
+            if ( index > -1 )
+            {
+                this._v.splice( index , 1 ) ;
+                return true ;
+            }
+            return false ;
+        }
+        
+        /**
+         * Runs the process.
+         */
+        public function run( ...arguments:Array ):void
+        {
+            var i:int   = -1 ;
+            var l:int = _v.length ;
+            if (l>0) 
+            {
+                while ( ++i < l ) 
+                { 
+                    (_v[i] as Runnable).run() ; 
+                }
+            }
+        }
+        
+        /**
+         * Returns the number of elements in this collection.
+         * @return the number of elements in this collection.
+         */
+        public function size():uint
+        {
+            return _v.length ;
+        }
+        
+        /**
+         * Stops all commands in the batch. 
+         */
+        public function stop():void
+        {
+            var i:int = -1 ;
+            var l:int = _v.length ;
+            if ( l > 0 ) 
+            {
+                while (++i < l) 
+                { 
+                    if ( _v[i] is Stoppable )
+                    {
+                        (_v[i] as Stoppable).stop() ;
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Returns an array containing all of the elements in this collection.
+         * <p><b>Note:</b> The returned Array is a reference of the internal Array used in the Collection to store the items. It's not a shallow copy of it.</p>
+         * @return an array containing all of the elements in this collection.
+         */
+        public function toArray():Array
+        {
+            var ar:Array = [] ;
+            var len:int = _v.length ;
+            if ( len == 0 )
+            {
+                return ar ;
+            }
+            for( var i:int ; i<len ; i++)
+            {
+                ar[i] = _v[i] ;
+            }
+            return ar ;
+        }
+        
+        /**
+         * Returns the vector containing all of the Runnable objects in this batch.
+         * @return the vector containing all of the Runnable objects in this batch.
+         */
+        public function toVector():Vector.<Runnable>
+        {
+            return _v ;
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            var ar:Array = toArray() ;
+            var source:String = "new " + getClassPath( this , true ) ;
+            source += "(" ;
+            if ( ar.length > 0 )
+            {
+                source += dump( ar ) ;
+            } 
+            source += ")" ;
+            return source ;
+        }
+        
+        /**
+         * Returns the string representation of this instance.
+         * @return the string representation of this instance.
+         */
+        public function toString():String
+        {
+            return formatter.format( this ) ;
         }
         
         /**
          * @private
          */
-        public override function set length( value:uint ):void
-        {
-            if ( running )
-            {
-                throw new Error( this + " length property can't be changed, the batch process is in progress." ) ;
-            }
-            super.length = value ;
-        }
-        
-        /**
-         * Insert an action in thechainr.
-         * @param priority Determinates the priority level of the action in the chain. 
-         * The priority is designated by a signed 32-bit integer. The higher the number, the higher the priority. 
-         * All actions with priority n are processed before actions of priority n-1. If two or more actions share the same priority, they are processed in the order in which they were added. The default priority is 0.
-         * @param autoRemove Apply a removeAction after the first finish notification.
-         * @return <code class="prettyprint">true</code> if the insert is success.
-         */
-        public override function addAction( action:Action , priority:int = 0 , autoRemove:Boolean = false ):Boolean 
-        {
-            if ( running )
-            {
-                throw new Error( this + " addAction failed, the batch process is in progress." ) ;
-            }
-            return super.addAction( action , priority , autoRemove ) ;
-        }
-        
-        /**
-         * Returns a shallow copy of this object.
-         * @return a shallow copy of this object.
-         */
-        public override function clone():*
-        {
-            var clone:Batch = new Batch( 0 , false, _mode, _actions.length > 0 ? toVector() : null ) ;
-            clone.fixed = _actions.fixed ;
-            return clone ;
-        }
-        
-        /**
-         * Remove a specific action register in the chain and if the passed-in argument is null all actions register in the chain are removed. 
-         * If the chain is running the stop() method is called.
-         * @return <code class="prettyprint">true</code> if the method success.
-         */
-        public override function removeAction( action:Action = null ):Boolean 
-        {
-            if ( running )
-            {
-                throw new Error( this + " removeAction failed, the batch process is in progress." ) ;
-            }
-            return super.removeAction( action ) ;
-        }
-        
-        /**
-         * Resume the chain.
-         */
-        public override function resume():void 
-        {
-            if ( _stopped )
-            {
-                setRunning(true) ;
-                _stopped = false ;
-                notifyResumed() ;
-                if ( _actions.length > 0 )
-                {
-                    var a:Action ;
-                    var e:ActionEntry ;
-                    var l:int = _actions.length ;
-                    while( --l > -1 )
-                    {
-                        e = _actions[l] as ActionEntry ;
-                        if ( e )
-                        {
-                            a = e.action ;
-                            if ( a )
-                            {
-                                if ( a is Resumable )
-                                {
-                                    (a as Resumable).resume() ;
-                                }
-                                else
-                                {
-                                    next(a) ; // finalize the action to clean the batch 
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                run() ; 
-            }
-        }
-        
-        /**
-         * Launchs the chain process.
-         */
-        public override function run( ...arguments:Array ):void 
-        {
-            if ( !running )
-            {
-                notifyStarted() ;
-                _stopped = false ;
-                _current  = null ;
-                _currents.clear() ;
-                if ( _actions.length > 0 )
-                {
-                    var i:int ;
-                    var e:ActionEntry ;
-                    var l:int = _actions.length ;
-                    for( i ; i<l ; i++ )
-                    {
-                        e = _actions[i] as ActionEntry ;
-                        if ( e && e.action )
-                        {
-                            _currents.put( e.action , e ) ;
-                            e.action.run() ;
-                        }
-                    }
-                }
-                else
-                {
-                    notifyFinished() ;
-                }
-            }
-        }
-        
-        /**
-         * Stops the batch and stop all <code>Stoppable</code> task in the batch.
-         */
-        public override function stop():void
-        {
-            if ( running ) 
-            {
-                if ( _actions.length > 0 )
-                {
-                    var a:Action ;
-                    var e:ActionEntry ;
-                    var l:int = _actions.length ;
-                    while( --l > -1 )
-                    {
-                        e = _actions[l] as ActionEntry ;
-                        if ( e )
-                        {
-                            a = e.action ;
-                            if ( a && a is Stoppable )
-                            {
-                                (a as Stoppable).stop() ;
-                            }
-                        }
-                    }
-                }
-                setRunning(false) ;
-                _stopped = true ;
-                notifyStopped() ;
-            }
-        }
-        
-        /**
-         * @private
-         */
-        protected var _current:Action ;
-        
-        /**
-         * @private
-         */
-        protected var _currents:HashMap ;
-        
-        /**
-         * Invoked when a task process in the batch is finished.
-         */
-        protected override function next( action:Action = null ):void 
-        {
-            if ( action && _currents.containsKey(action) )
-            {
-                var entry:ActionEntry = _currents.get( action ) ;
-                if ( _mode != EVERLASTING )
-                {
-                    if ( _mode == TRANSIENT || (entry.auto && _mode == NORMAL) )
-                    {
-                        if ( action )
-                        {
-                            var e:ActionEntry ;
-                            var l:int = _actions.length ;
-                            while( --l > -1 )
-                            {
-                                e = _actions[l] as ActionEntry ;
-                                if ( e && e.action == action )
-                                {
-                                    action.finishIt.disconnect( next ) ;
-                                    _actions.splice( l , 1 ) ;
-                                    break ;
-                                }
-                            }
-                        }
-                    }
-                }
-                _currents.remove(action) ;
-            }
-            if ( _current )
-            {
-                notifyChanged() ;
-            }
-            _current = action ;
-            notifyProgress() ;
-            if ( _currents.isEmpty() ) 
-            {
-                _current = null ;
-                notifyFinished() ;
-            }
-        }
+        private var _v:Vector.<Runnable> ;
     }
 }
