@@ -61,15 +61,17 @@ package system.process
         
         public function testConstructor():void
         {
-            var cache:Cache ;
-            
-            cache = new Cache() ;
             assertNotNull ( cache , "01 - Cache constructor failed." ) ;
             
             var target:Object = {} ;
             cache = new Cache( target ) ;
             assertNotNull ( cache , "02-01 - Cache constructor failed." ) ;
             assertEquals ( cache.target, target , "02-02 - Cache constructor failed." ) ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( cache is Task ) ;
         }
         
         public function testInterface():void
@@ -84,11 +86,11 @@ package system.process
             cache.enqueueAttribute("prop1", 1) ;
             cache.enqueueAttribute("prop2", 2) ;
             cache.enqueueAttribute("prop3", 3) ;
-            var oldSize:int = cache.size() ;
+            var oldSize:int = cache.length ;
             cache.clear() ;
             assertEquals( oldSize  , 3  , "01 - Cache clear method failed." ) ;
-            assertNotSame( cache.size() , oldSize  , "02 - Cache clear method failed." ) ;
-            assertEquals( cache.size()  , 0  , "03 - Cache clear method failed." ) ;
+            assertNotSame( cache.length , oldSize  , "02 - Cache clear method failed." ) ;
+            assertEquals( cache.length  , 0  , "03 - Cache clear method failed." ) ;
         }
         
         public function testClone():void
@@ -98,11 +100,11 @@ package system.process
 
             var clone:Cache = cache.clone() as Cache ;
             assertNotNull(clone, "01 - Cache clone failed.") ;
-            assertEquals( clone.size() , cache.size() , "02 - Cache clone failed.") ;
+            assertEquals( clone.length , cache.length , "02 - Cache clone failed.") ;
             
             cache.clear() ;
             
-            assertEquals( clone.size() , 2 , "03 - Cache clone failed.") ;
+            assertEquals( clone.length , 2 , "03 - Cache clone failed.") ;
         }
         
         public function testElement():void
@@ -173,11 +175,11 @@ package system.process
             cache.clear() ;
         }
         
-        public function testSize():void
+        public function testLength():void
         {
             cache.enqueueAttribute("prop1", 1) ;
             cache.enqueueAttribute("prop2", 2) ;
             cache.enqueueAttribute("prop3", 3) ;
-            assertEquals( cache.size() , 3  , "Cache size method failed." ) ;
+            assertEquals( cache.length , 3  , "Cache size method failed." ) ;
             cache.clear() ;
-        }        }}
+        }    }}
