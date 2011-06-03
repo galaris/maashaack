@@ -36,39 +36,52 @@
 package system.process.caches 
 {    import system.process.caches.Attribute;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     public class AttributeTest extends TestCase
     {
-        
         public function AttributeTest(name:String = "")
         {
             super(name);
         }
         
+        public var attribute:Attribute ;
+        
+        public function setUp():void
+        {
+            attribute = new Attribute("name", 9999) ;
+        }
+        
+        public function tearDown():void
+        {
+            attribute = null ;
+        }
+        
         public function testConstructor():void
         {
-            var a:Attribute = new Attribute("name", 9999) ;
-            assertNotNull ( a              , "01 - Attribute constructor failed." ) ;
-            assertEquals  ( a.name , "name", "02 - Attribute constructor failed." ) ;
-            assertEquals  ( a.value, 9999  , "03 - Attribute constructor failed." ) ;
+            assertNotNull ( attribute              , "#01" ) ;
+            assertEquals  ( attribute.name , "name", "#02" ) ;
+            assertEquals  ( attribute.value, 9999  , "#03" ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( attribute is Property ) ;
         }
         
         public function testName():void
         {
-            var a:Attribute = new Attribute("name", 9999) ;
-            assertEquals  ( a.name , "name", "01 - Attribute name failed." ) ;
-            a.name = "newName" ;
-            assertEquals  ( a.name, "newName"  , "02 - Attribute name failed." ) ;
-            a.name = null ;
-            assertEquals  ( a.name, null , "03 - Attribute name failed." ) ;
+            assertEquals  ( attribute.name , "name"   , "#01" ) ;
+            attribute.name = "newName" ;
+            assertEquals  ( attribute.name , "newName", "#02" ) ;
+            attribute.name = null ;
+            assertEquals  ( attribute.name, null      , "#03" ) ;
         }
         
         public function testValue():void
         {
-            var a:Attribute = new Attribute("name", 9999) ;
-            assertEquals  ( a.value, 9999  , "01 - Attribute value failed." ) ;
-            a.value = "newValue" ;
-            assertEquals  ( a.value, "newValue"  , "02 - Attribute value failed." ) ;
-            a.value = null ;
-            assertNull( a.value  , "03 - Attribute value failed." ) ;
+            assertEquals  ( attribute.value , 9999 , "#01" ) ;
+            attribute.value = "newValue" ;
+            assertEquals  ( attribute.value , "newValue" , "#02" ) ;
+            attribute.value = null ;
+            assertNull( attribute.value , "#3" ) ;
         }    }}
