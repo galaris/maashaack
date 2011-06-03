@@ -34,14 +34,13 @@
 */
 
 package system.process 
-{    import buRRRn.ASTUce.framework.TestCase;
+{
+    import buRRRn.ASTUce.framework.TestCase;
 
     import system.Cloneable;
-    import system.process.caches.Attribute;
 
     public class CacheTest extends TestCase
     {
-        
         public function CacheTest(name:String = "")
         {
             super(name);
@@ -97,29 +96,15 @@ package system.process
         {
             cache.enqueueAttribute("prop1", 1) ;
             cache.enqueueMethod("prop2", [1,2,3]) ;
-
+            
             var clone:Cache = cache.clone() as Cache ;
-            assertNotNull(clone, "01 - Cache clone failed.") ;
-            assertEquals( clone.length , cache.length , "02 - Cache clone failed.") ;
+            
+            assertNotNull(clone, "#01") ;
+            assertEquals( clone.length , cache.length , "#02") ;
             
             cache.clear() ;
             
-            assertEquals( clone.length , 2 , "03 - Cache clone failed.") ;
-        }
-        
-        public function testElement():void
-        {
-            assertNull(cache.element(), "01 - Cache element() failed.") ;
-            
-            cache.enqueueAttribute("prop1", 1) ;
-            
-            var elmt:Attribute = cache.element() as Attribute ;
-            
-            assertNotNull(elmt, "02-01 - Cache element failed.") ;
-            assertEquals( elmt.name  , "prop1" , "02-02 - Cache element failed.") ;
-            assertEquals( elmt.value , 1       , "02-03 - Cache element failed.") ;
-            
-            cache.clear() ;
+            assertEquals( clone.length , 2 , "#03") ;
         }
         
         public function testIsEmpty():void
