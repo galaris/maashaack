@@ -39,11 +39,10 @@ package system.data.maps
     
     import system.data.Iterator;
     import system.data.iterators.ArrayIterator;
-    import system.data.iterators.MapIterator;    
-
+    import system.data.iterators.MapIterator;
+    
     public class HashMapTest extends TestCase 
     {
-
         public function HashMapTest( name:String = "" )
         {
             super( name );
@@ -55,18 +54,18 @@ package system.data.maps
         {
             map = new HashMap(["key1", "key2"],["value1", "value2"]) ;
         }
-
+        
         public function tearDown():void
         {
             map = undefined ;
-        }          
+        }
         
         public function testConstructor():void
         {
             assertNotNull( map , "" ) ;
             
             assertEquals( map.get("key1") , "value1" , "1 - The HashMap constructor failed : map.get('key1')") ;
-            assertEquals( map.get("key2") , "value2" , "2 - The HashMap constructor failed : map.get('key2')") ;          
+            assertEquals( map.get("key2") , "value2" , "2 - The HashMap constructor failed : map.get('key2')") ;
             
             var m1:HashMap = new HashMap() ;
             
@@ -74,8 +73,7 @@ package system.data.maps
             
             var m2:HashMap = new HashMap(null,["value1", "value2"]) ;
             assertEquals( m2.size() , 0 , "3 - The HashMap constructor failed : m.get('key1')") ;
-            
-        }         
+        }
         
         public function testClear():void
         {
@@ -86,11 +84,11 @@ package system.data.maps
         
         public function testClone():void
         {
-            var m:HashMap = map.clone() ;
-            assertNotNull( m , "1 - The HashMap clone method failed.") ;
-            assertEquals( m.size()  , m.size()  , "1 - The HashMap clone method failed.") ;
-            assertEquals( m["key1"] , m["key1"] , "2 - The HashMap clone method failed.") ;
-            assertEquals( m["key2"] , m["key2"] , "3 - The HashMap clone method failed.") ;
+            var clone:HashMap = map.clone() as HashMap ;
+            assertNotNull( clone , "1 - The HashMap clone method failed.") ;
+            assertEquals( map.size()  , clone.size()  , "1 - The HashMap clone method failed.") ;
+            assertEquals( map.get("key1") , clone.get("key1") , "2 - The HashMap clone method failed.") ;
+            assertEquals( map.get("key2") , clone.get("key2") , "3 - The HashMap clone method failed.") ;
         }
         
         public function testContainsKey():void
@@ -120,8 +118,8 @@ package system.data.maps
             assertTrue( keys.indexOf("key1") >  -1 , "1 - The HashMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key2") >  -1 , "2 - The HashMap getKeys method failed.") ;
             assertTrue( keys.indexOf("key3") == -1 , "3 - The HashMap getKeys method failed.") ;
-        }         
-
+        }
+        
         public function testGetValues():void
         {
             var values:Array = map.getValues() ;
@@ -136,7 +134,7 @@ package system.data.maps
             
             assertTrue( m.isEmpty() , "1 - The HashMap isEmpty method failed." )  ;
             assertFalse( map.isEmpty() , "2 - The HashMap isEmpty method failed." )  ;
-        }        
+        }
         
         public function testIterator():void
         {
@@ -204,6 +202,5 @@ package system.data.maps
                 "The HashMap toString method failed."
             ) ;
         }
-                
     }
 }
