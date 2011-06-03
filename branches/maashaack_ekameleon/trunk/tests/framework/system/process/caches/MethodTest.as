@@ -34,44 +34,57 @@
 */
 
 package system.process.caches 
-{    import system.process.caches.Method;
+{
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     public class MethodTest extends TestCase
     {
-        
         public function MethodTest(name:String = "")
         {
             super(name);
         }
         
+        public var method:Method ;
+        
+        public function setUp():void
+        {
+            method = new Method("name", [1,2,3]) ;
+        }
+        
+        public function tearDown():void
+        {
+            method = null ;
+        }
+        
         public function testConstructor():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            assertNotNull ( m                                           , "01 - Method constructor failed." ) ;
-            assertEquals  ( m.name                             , "name" , "02 - Method constructor failed." ) ;
-            ArrayAssert.assertEquals  ( m.arguments , [1,2,3]           , "03 - Method constructor failed." ) ;
+            assertNotNull ( method                                           , "#01" ) ;
+            assertEquals  ( method.name                             , "name" , "#02" ) ;
+            ArrayAssert.assertEquals  ( method.arguments , [1,2,3]           , "#03" ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( method is Property ) ;
         }
         
         public function testName():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            assertEquals  ( m.name , "name", "01 - Method name failed." ) ;
-            m.name = "newName" ;
-            assertEquals  ( m.name, "newName"  , "02 - Method name failed." ) ;
-            m.name = null ;
-            assertEquals  ( m.name, null , "03 - Method name failed." ) ;
+            assertEquals  ( method.name , "name", "#01" ) ;
+            method.name = "newName" ;
+            assertEquals  ( method.name, "newName"  , "#02" ) ;
+            method.name = null ;
+            assertEquals  ( method.name, null , "#03" ) ;
         }
         
         public function testArguments():void
         {
-            var m:Method = new Method("name", [1,2,3]) ;
-            ArrayAssert.assertEquals  ( m.arguments , [1,2,3] , "01 - Method arguments failed." ) ;
+            ArrayAssert.assertEquals  ( method.arguments , [1,2,3] , "#01" ) ;
             
-            m.arguments = [4,5,6] ;
-            ArrayAssert.assertEquals  ( m.arguments , [4,5,6] , "02 - Method arguments failed." ) ;
+            method.arguments = [4,5,6] ;
+            ArrayAssert.assertEquals  ( method.arguments , [4,5,6] , "#02" ) ;
             
-            m.arguments = null ;
-            assertNull( m.arguments  , "03 - Method arguments failed." ) ;
+            method.arguments = null ;
+            assertNull( method.arguments , "#03" ) ;
         }    }}
