@@ -359,6 +359,7 @@
     <component id="system.process.logic:ElseIfFalse"  class="system.process.logic.ElseIfFalse"  />
     <component id="system.process.logic:ElseIfNull"   class="system.process.logic.ElseIfNull"   />
     <component id="system.process.logic:ElseIfTrue"   class="system.process.logic.ElseIfTrue"   />
+    <component id="system.process.logic:ElseIfZero"   class="system.process.logic.ElseIfZero"   />
     
     <component id="system.process.logic:IfEquals"     class="system.process.logic.IfEquals"     />
     <component id="system.process.logic:IfFalse"      class="system.process.logic.IfFalse"      />
@@ -366,6 +367,7 @@
     <component id="system.process.logic:IfTask"       class="system.process.logic.IfTask"       />
     <component id="system.process.logic:IfTrue"       class="system.process.logic.IfTrue"       />
     <component id="system.process.logic:IfUndefined"  class="system.process.logic.IfUndefined"  />
+    <component id="system.process.logic:IfZero"       class="system.process.logic.IfZero"       />
     
     <!-- system.reflection -->
     

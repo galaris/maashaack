@@ -34,12 +34,12 @@
 */
 package system.process.logic 
 {
-	import buRRRn.ASTUce.framework.TestCase;
-	import system.process.Task;
-	import system.process.mocks.MockTask;
-	import system.rules.BooleanRule;
-	import system.rules.Equals;
-	import system.rules.Rule;
+    import buRRRn.ASTUce.framework.TestCase;
+    import system.process.Task;
+    import system.process.mocks.MockTask;
+    import system.rules.BooleanRule;
+    import system.rules.Equals;
+    import system.rules.Rule;
 
     public class ElseIfTest extends TestCase
     {
