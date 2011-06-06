@@ -36,38 +36,38 @@
 package system.process.logic
 {
     import system.process.Action;
-    import system.rules.Zero;
+    import system.rules.EmptyString;
     
     /**
-     * Perform some tasks based on whether a given value is 0.
+     * Perform some tasks based on whether a given value is an empty string ("").
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
      * package examples
      * {
-     *     import system.process.logic.IfZero;
+     *     import system.process.logic.IfEmptyString;
      *     
      *     import flash.display.Sprite;
      *     
-     *     public class IfZeroExample extends Sprite
+     *     public class IfEmptyStringExample extends Sprite
      *     {
-     *         public function IfZeroExample()
+     *         public function IfEmptyStringExample()
      *         {
-     *             var task:IfZero ;
+     *             var task:IfEmptyString ;
      *             
-     *             var value:uint ;
+     *             var value:String ;
      *             
-     *             task = new IfZero( value , new Then(), new Else() ) ;
-     *             task.run() ; // then
-     *             
-     *             value = 10 ;
-     *             
-     *             task = new IfZero( value , new Then(), new Else() ) ;
+     *             task = new IfEmptyString( value , new Then(), new Else() ) ;
      *             task.run() ; // else
      *             
-     *             value = 0 ;
+     *             value = "" ;
      *             
-     *             task = new IfZero( value , new Then(), new Else() ) ;
+     *             task = new IfEmptyString( value , new Then(), new Else() ) ;
+     *             task.run() ; // then
+     *             
+     *             value = "hello" ;
+     *             
+     *             task = new IfEmptyString( value , new Then(), new Else() ) ;
      *             task.run() ; // then
      *         }
      *     }
@@ -100,20 +100,20 @@ package system.process.logic
      * }
      * </code>
      * </listing>
-     * @see system.rules.Zero
+     * @see system.rules.EmptyString
      */
-    public class IfZero extends IfTask
+    public class IfEmptyString extends IfTask
     {
         /**
-         * Creates a new IfZero instance.
+         * Creates a new IfEmptyString instance.
          * @param value The value to evaluate.
          * @param thenTask The Action reference to defines the 'then' block in the 'if' conditional task.
          * @param elseTask The Action reference to defines the 'else' block in the 'if' conditional task.
          * @param ...elseIfTasks The Array of ElseIf instance to initialize the 'elseif' blocks in the 'if' conditional task.
          */
-        public function IfZero( value:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+        public function IfEmptyString( value:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
         {
-            super( new Zero( value ) , thenTask , elseTask ) ;
+            super( new EmptyString( value ) , thenTask , elseTask ) ;
             if ( elseIfTasks && elseIfTasks.length > 0 )
             {
                 addElseIf.apply( this , elseIfTasks ) ;
