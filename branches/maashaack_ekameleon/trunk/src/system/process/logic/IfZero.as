@@ -39,7 +39,7 @@ package system.process.logic
     import system.rules.Zero;
     
     /**
-     * Perform some tasks based on whether a given condition holds true.
+     * Perform some tasks based on whether a given value is 0.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
