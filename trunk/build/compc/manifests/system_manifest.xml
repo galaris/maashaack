@@ -303,7 +303,25 @@
     <component id="system.logging.targets:SocketTarget"        class="system.logging.targets.SocketTarget" />
     <component id="system.logging.targets:SOSTarget"           class="system.logging.targets.SOSTarget" />
     <component id="system.logging.targets:TextFieldTarget"     class="system.logging.targets.TextFieldTarget" />
-    <component id="system.logging.targets:TraceTarget"         class="system.logging.targets.TraceTarget" />
+    
+    <!-- system.process.logic -->
+    
+    <component id="system.logic:ElseIf"            class="system.logic.ElseIf"            />
+    <component id="system.logic:ElseIfEmptyString" class="system.logic.ElseIfEmptyString" />
+    <component id="system.logic:ElseIfEquals"      class="system.logic.ElseIfEquals"      />
+    <component id="system.logic:ElseIfFalse"       class="system.logic.ElseIfFalse"       />
+    <component id="system.logic:ElseIfNull"        class="system.logic.ElseIfNull"        />
+    <component id="system.logic:ElseIfTrue"        class="system.logic.ElseIfTrue"        />
+    <component id="system.logic:ElseIfZero"        class="system.logic.ElseIfZero"        />
+    
+    <component id="system.logic:IfEmptyString" class="system.logic.IfEmptyString" />
+    <component id="system.logic:IfEquals"      class="system.logic.IfEquals"      />
+    <component id="system.logic:IfFalse"       class="system.logic.IfFalse"       />
+    <component id="system.logic:IfNull"        class="system.logic.IfNull"        />
+    <component id="system.logic:IfTask"        class="system.logic.IfTask"        />
+    <component id="system.logic:IfTrue"        class="system.logic.IfTrue"        />
+    <component id="system.logic:IfUndefined"   class="system.logic.IfUndefined"   />
+    <component id="system.logic:IfZero"        class="system.logic.IfZero"        />
     
     <!-- system.network -->
     
@@ -351,25 +369,6 @@
     <component id="system.process:TaskGroup"              class="system.process.TaskGroup"              />
     <component id="system.process:TaskPhase"              class="system.process.TaskPhase"              />
     <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
-    
-    <!-- system.process.logic -->
-    
-    <component id="system.process.logic:ElseIf"            class="system.process.logic.ElseIf"            />
-    <component id="system.process.logic:ElseIfEmptyString" class="system.process.logic.ElseIfEmptyString" />
-    <component id="system.process.logic:ElseIfEquals"      class="system.process.logic.ElseIfEquals"      />
-    <component id="system.process.logic:ElseIfFalse"       class="system.process.logic.ElseIfFalse"       />
-    <component id="system.process.logic:ElseIfNull"        class="system.process.logic.ElseIfNull"        />
-    <component id="system.process.logic:ElseIfTrue"        class="system.process.logic.ElseIfTrue"        />
-    <component id="system.process.logic:ElseIfZero"        class="system.process.logic.ElseIfZero"        />
-    
-    <component id="system.process.logic:IfEmptyString" class="system.process.logic.IfEmptyString" />
-    <component id="system.process.logic:IfEquals"      class="system.process.logic.IfEquals"      />
-    <component id="system.process.logic:IfFalse"       class="system.process.logic.IfFalse"       />
-    <component id="system.process.logic:IfNull"        class="system.process.logic.IfNull"        />
-    <component id="system.process.logic:IfTask"        class="system.process.logic.IfTask"        />
-    <component id="system.process.logic:IfTrue"        class="system.process.logic.IfTrue"        />
-    <component id="system.process.logic:IfUndefined"   class="system.process.logic.IfUndefined"   />
-    <component id="system.process.logic:IfZero"        class="system.process.logic.IfZero"        />
     
     <!-- system.reflection -->
     
