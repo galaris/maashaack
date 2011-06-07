@@ -34,8 +34,8 @@
 */
 package system.logic
 {
-	import system.process.Action;
-	import system.rules.EmptyString;
+    import system.process.Action;
+    import system.rules.EmptyString;
     
     /**
      * Defines if a value is an empty string in an 'elseif' conditional block.
