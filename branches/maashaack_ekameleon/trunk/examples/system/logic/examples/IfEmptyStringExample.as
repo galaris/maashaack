@@ -35,9 +35,8 @@
 
 package examples
 {
-    import system.process.logic.IfEmptyString;
-    
     import flash.display.Sprite;
+    import system.logic.IfEmptyString;
     
     public class IfEmptyStringExample extends Sprite
     {

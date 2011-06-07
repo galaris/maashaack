@@ -36,10 +36,8 @@
 package examples
 {
     import examples.process.Message;
-    
-    import system.process.logic.IfEquals;
-    
     import flash.display.Sprite;
+    import system.logic.IfEquals;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     

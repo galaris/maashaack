@@ -35,9 +35,8 @@
 
 package examples
 {
-    import system.process.logic.IfZero;
-    
     import flash.display.Sprite;
+    import system.logic.IfZero;
     
     public class IfZeroExample extends Sprite
     {

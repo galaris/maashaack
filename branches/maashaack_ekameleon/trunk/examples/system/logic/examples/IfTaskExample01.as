@@ -36,12 +36,10 @@
 package examples
 {
     import examples.process.Message;
-    
+    import flash.display.Sprite;
+    import system.logic.IfTask;
     import system.process.Action;
     import system.process.Chain;
-    import system.process.logic.IfTask;
-    
-    import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
