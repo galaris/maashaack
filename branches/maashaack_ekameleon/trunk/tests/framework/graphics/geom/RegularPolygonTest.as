@@ -37,7 +37,7 @@ package graphics.geom
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    import system.numeric.Mathematics;
+    import core.maths.round;
 
     public class RegularPolygonTest extends TestCase
     {
@@ -51,7 +51,7 @@ package graphics.geom
             assertEquals( RegularPolygon.apothemByRadius(0,2) , 0 ) ;            assertEquals( RegularPolygon.apothemByRadius(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.apothemByRadius(100,6) , 3 ) , 
+                round( RegularPolygon.apothemByRadius(100,6) , 3 ) , 
                 86.603
             ) ;
         }
@@ -62,7 +62,7 @@ package graphics.geom
             assertEquals( RegularPolygon.apothemBySide(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.apothemBySide(100,6) , 3 ) , 
+                round( RegularPolygon.apothemBySide(100,6) , 3 ) , 
                 86.603
             ) ;
         }
@@ -73,12 +73,12 @@ package graphics.geom
             assertEquals( RegularPolygon.areaByApothem(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByApothem(5.5,5) , 0 ) , 
+                round( RegularPolygon.areaByApothem(5.5,5) , 0 ) , 
                 110
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByApothem(6,6) , 0 ) , 
+                round( RegularPolygon.areaByApothem(6,6) , 0 ) , 
                 125 
             ) ;
         }
@@ -89,12 +89,12 @@ package graphics.geom
             assertEquals( RegularPolygon.areaByApothem(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByApothemAndPerimeter(6,7*6) , 2 ) , 
+                round( RegularPolygon.areaByApothemAndPerimeter(6,7*6) , 2 ) , 
                 126
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByApothemAndPerimeter(6,8.8*5) , 0 ) , 
+                round( RegularPolygon.areaByApothemAndPerimeter(6,8.8*5) , 0 ) , 
                 132
             ) ;
         }
@@ -105,12 +105,12 @@ package graphics.geom
             assertEquals( RegularPolygon.areaByRadius(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByRadius(7,5) , 2 ) , 
+                round( RegularPolygon.areaByRadius(7,5) , 2 ) , 
                 116.5 
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaByRadius(7,6) , 2 ) , 
+                round( RegularPolygon.areaByRadius(7,6) , 2 ) , 
                 127.31 
             ) ;
         }
@@ -121,12 +121,12 @@ package graphics.geom
             assertEquals( RegularPolygon.areaBySide(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaBySide(8,5) , 0 ) , 
+                round( RegularPolygon.areaBySide(8,5) , 0 ) , 
                 110
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.areaBySide(7,6) , 0 ) , 
+                round( RegularPolygon.areaBySide(7,6) , 0 ) , 
                 127 
             ) ;
         }
@@ -158,7 +158,7 @@ package graphics.geom
             assertEquals( RegularPolygon.radiusByApothem(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.radiusByApothem(86.603,6) , 1 ) , 
+                round( RegularPolygon.radiusByApothem(86.603,6) , 1 ) , 
                 100
             ) ;
         }
@@ -169,17 +169,17 @@ package graphics.geom
             assertEquals( RegularPolygon.radiusBySide(2,0) , 0 ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.radiusBySide(8.7,3) , 1 ) , 
+                round( RegularPolygon.radiusBySide(8.7,3) , 1 ) , 
                 5
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.radiusBySide(5.9,5) , 1 ) , 
+                round( RegularPolygon.radiusBySide(5.9,5) , 1 ) , 
                 5
             ) ;
             assertEquals
             ( 
-                Mathematics.round( RegularPolygon.radiusBySide(5,6) , 1 ) , 
+                round( RegularPolygon.radiusBySide(5,6) , 1 ) , 
                 5
             ) ;
         }
