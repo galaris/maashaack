@@ -34,9 +34,10 @@
 */
 
 package graphics.colors 
-{    import buRRRn.ASTUce.framework.TestCase;
+{
+    import buRRRn.ASTUce.framework.TestCase;
 
-    import system.numeric.Mathematics;
+    import core.maths.round;
 
     public class RGB2HSLTest extends TestCase 
     {        public function RGB2HSLTest( name:String = "")
@@ -55,14 +56,14 @@ package graphics.colors
             // approximation problems
             assertEquals( Math.round(hsl.h)           , 120    , "02-01 - RGB2HSL(rgb) failed.") ; 
             assertEquals( hsl.s                       ,   1    , "02-02 - RGB2HSL(rgb) failed.") ;
-            assertEquals( Mathematics.round(hsl.l, 2) ,   0.75 , "02-03 - RGB2HSL(rgb) failed.") ;
+            assertEquals( round(hsl.l, 2) ,   0.75 , "02-03 - RGB2HSL(rgb) failed.") ;
             
             rgb = new RGB( 0 , 0 , 127.5 ) ;
             hsl = RGB2HSL(rgb) ;
             // approximation problems
             assertEquals( Math.round(hsl.h)           , 240    , "03-01 - RGB2HSL(rgb) failed.") ; 
             assertEquals( hsl.s                       ,   1    , "03-02 - RGB2HSL(rgb) failed.") ;
-            assertEquals( Mathematics.round(hsl.l, 2) ,   0.25 , "03-03 - RGB2HSL(rgb) failed.") ;
+            assertEquals(round(hsl.l, 2) ,   0.25 , "03-03 - RGB2HSL(rgb) failed.") ;
         }
         
         public function testMethodWithOptionalArgument():void
@@ -74,6 +75,6 @@ package graphics.colors
             
             RGB2HSL( rgb , hsl ) ;
             
-            assertEquals( hsl  , new HSL(0,1,0.5) ) ;
+            assertEquals( hsl , new HSL(0,1,0.5) ) ;
         }
     }}
