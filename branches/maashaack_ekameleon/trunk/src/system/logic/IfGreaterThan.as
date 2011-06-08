@@ -39,7 +39,7 @@ package system.logic
     import system.rules.GreaterThan;
     
     /**
-     * Perform some tasks based on whether a given value is greater or equal than another value.
+     * Perform some tasks based on whether a given value is greater than another value.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
