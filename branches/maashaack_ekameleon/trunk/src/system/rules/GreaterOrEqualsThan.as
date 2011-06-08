@@ -60,7 +60,7 @@ package system.rules
         /**
          * Creates a new GreaterOrEqualsThan instance.
          * @param value1 The first value to evaluate.
-         * @param value1 The second value to evaluate.
+         * @param value2 The second value to evaluate.
          */
         public function GreaterOrEqualsThan( value1:* = null, value2:* = null )
         {
