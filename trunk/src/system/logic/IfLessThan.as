@@ -39,7 +39,7 @@ package system.logic
     import system.rules.LessThan;
     
     /**
-     * Perform some tasks based on whether a given value is less or equal than another value.
+     * Perform some tasks based on whether a given value is less than another value.
      * <p><b>Example :</b></p>
      * <listing version="3.0">
      * <code class="prettyprint">
