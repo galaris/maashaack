@@ -37,7 +37,7 @@ package graphics.geom
 {
     import buRRRn.ASTUce.framework.TestCase;
 
-    import system.numeric.Mathematics;
+    import core.maths.round;
 
     public class HexagonTest extends TestCase
     {
@@ -160,14 +160,14 @@ package graphics.geom
         
         public function testApothem():void
         {
-            assertEquals( Mathematics.round(hexa.apothem,2) , 21.65 ) ;
+            assertEquals( round(hexa.apothem,2) , 21.65 ) ;
             hexa.apothem = 20 ;
             assertEquals( hexa.apothem , 20 ) ;
         }
         
         public function testHeight():void
         {
-            assertEquals( Mathematics.round(hexa.height,2) , 43.3 ) ;
+            assertEquals( round(hexa.height,2) , 43.3 ) ;
             hexa.height = 20 ;
             assertEquals( hexa.height , 20 ) ;
             assertEquals( hexa.apothem , 10 ) ;
