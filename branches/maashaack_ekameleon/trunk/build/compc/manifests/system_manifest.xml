@@ -314,14 +314,18 @@
     <component id="system.logic:ElseIfTrue"        class="system.logic.ElseIfTrue"        />
     <component id="system.logic:ElseIfZero"        class="system.logic.ElseIfZero"        />
     
-    <component id="system.logic:IfEmptyString" class="system.logic.IfEmptyString" />
-    <component id="system.logic:IfEquals"      class="system.logic.IfEquals"      />
-    <component id="system.logic:IfFalse"       class="system.logic.IfFalse"       />
-    <component id="system.logic:IfNull"        class="system.logic.IfNull"        />
-    <component id="system.logic:IfTask"        class="system.logic.IfTask"        />
-    <component id="system.logic:IfTrue"        class="system.logic.IfTrue"        />
-    <component id="system.logic:IfUndefined"   class="system.logic.IfUndefined"   />
-    <component id="system.logic:IfZero"        class="system.logic.IfZero"        />
+    <component id="system.logic:IfEmptyString"         class="system.logic.IfEmptyString"         />
+    <component id="system.logic:IfEquals"              class="system.logic.IfEquals"              />
+    <component id="system.logic:IfFalse"               class="system.logic.IfFalse"               />
+    <component id="system.logic:IfGreaterOrEqualsThan" class="system.logic.IfGreaterOrEqualsThan" />
+    <component id="system.logic:IfGreaterThan"         class="system.logic.IfGreaterThan"         />
+    <component id="system.logic:IfLessOrEqualsThan"    class="system.logic.IfLessOrEqualsThan"    />
+    <component id="system.logic:IfLessThan"            class="system.logic.IfLessThan"            />
+    <component id="system.logic:IfNull"                class="system.logic.IfNull"                />
+    <component id="system.logic:IfTask"                class="system.logic.IfTask"                />
+    <component id="system.logic:IfTrue"                class="system.logic.IfTrue"                />
+    <component id="system.logic:IfUndefined"           class="system.logic.IfUndefined"           />
+    <component id="system.logic:IfZero"                class="system.logic.IfZero"                />
     
     <!-- system.network -->
     
