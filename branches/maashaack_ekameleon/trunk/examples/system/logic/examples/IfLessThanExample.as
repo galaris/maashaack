@@ -45,16 +45,19 @@ package examples
         {
             var task:IfLessThan ;
             
+            var th:Then = new Then() ;
+            var el:Else = new Else() ;
+            
             var value1:uint = 10 ;
             var value2:uint = 20 ;
             
-            task = new IfLessThan( value1 , value2 , new Then(), new Else() ) ;
+            task = new IfLessThan( value1 , value2 , th , el ) ;
             task.run() ; // then
             
-            task = new IfLessThan( value2 , value1, new Then() , new Else() ) ;
+            task = new IfLessThan( value2 , value1 , th , el ) ;
             task.run() ; // else
             
-            task = new IfLessThan( value1 , value1 , new Then(), new Else() ) ;
+            task = new IfLessThan( value1 , value1 , th , el ) ;
             task.run() ; // else
         }
     }
