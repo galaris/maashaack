@@ -49,7 +49,6 @@ package system.numeric
         public static function suite():ITest
         {
             var suite:TestSuite = new TestSuite( "system.numeric" );
-            suite.addTestSuite( MathematicsTest ) ;
             suite.addTestSuite( PRNGTest ) ;
             suite.addTestSuite( RangeTest ) ;
             suite.addTestSuite( RomanNumberTest ) ;
