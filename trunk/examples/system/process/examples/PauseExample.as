@@ -35,32 +35,35 @@
 
 package examples
 {
-    import system.events.ActionEvent;    import system.process.Pause;        import flash.display.Sprite;
+    import system.process.Action;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
         [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Basic example to use the system.process.Pause.
-     */
     public class PauseExample extends Sprite
     {
-        
         public function PauseExample()
         {
-            var p:Pause = new Pause( 5 ) ;
+            var pause:Pause = new Pause( 5 ) ;
             
-            trace ( "pause : " + p ) ;
-            trace ( "pause toSource : " + p.toSource() ) ;
-            trace ( "pause duration : " + p.duration ) ;
+            trace ( "pause    : " + pause ) ;
+            trace ( "duration : " + pause.duration ) ;
             
-            p.addEventListener( ActionEvent.START  , debug ) ;
-            p.addEventListener( ActionEvent.FINISH , debug ) ;
+            pause.startIt.connect( start ) ;
+            pause.finishIt.connect( finish ) ;
             
-            p.run() ;
+            pause.run() ;
         }
         
-        public function debug( e:ActionEvent ):void 
+        public function finish( e:Action ):void 
         {
-            trace ( e ) ;
+            trace( "finish" ) ;
+        }
+        
+        public function start( e:Action ):void 
+        {
+            trace( "start" ) ;
         }
     }
 }
