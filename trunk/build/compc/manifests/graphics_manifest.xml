@@ -240,7 +240,6 @@
     <!-- graphics.transitions -->
     
     <component id="graphics.transitions:CoreTransition"   class="graphics.transitions.CoreTransition" />   
-    <component id="graphics.transitions:EasingController" class="graphics.transitions.EasingController" />
     <component id="graphics.transitions:EasingPolicy"     class="graphics.transitions.EasingPolicy" />
     <component id="graphics.transitions:FrameEngine"      class="graphics.transitions.FrameEngine" />
     <component id="graphics.transitions:FrameLoop"        class="graphics.transitions.FrameLoop" />
