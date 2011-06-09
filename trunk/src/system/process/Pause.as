@@ -42,26 +42,33 @@ package system.process
     
     import flash.events.TimerEvent;
     import flash.utils.Timer;
-
+    
     /**
-     * This <code class="prettyprint">Action</code> object create a pause in the process.
+     * The pause command is used to pause the currently running process until a specific delay is not finished or until the user stop it.
      * <p><b>Example :</b></p>
-     * <pre class="prettyprint">
-     * import system.events.ActionEvent ;
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import system.events.Action ;
      * import system.process.Pause ;
      * 
-     * var handleEvent:Function = function( e:ActionEvent ) :void
+     * var finish:Function = function( action:Action ):void
      * {
-     *     trace( this + " " + args) ;
+     *     trace( "finish" ) ;
      * }
      * 
-     * var p:Pause = new Pause( 10 ) ; // 10 seconds
+     * var start:Function = function( action:Action ):void
+     * {
+     *     trace( "start" ) ;
+     * }
      * 
-     * p.addEventListener( ActionEvent.START  , handleEvent ) ;
-     * p.addEventListener( ActionEvent.FINISH , handleEvent ) ;
+     * var pause:Pause = new Pause( 10 ) ; // 10 seconds
      * 
-     * p.run() ;
-     * </pre>
+     * pause.startIt.connect( start ) ;
+     * pause.finishIt.connect( finish ) ;
+     * 
+     * pause.run() ;
+     * </code>
+     * </listing>
      */
     public dynamic class Pause extends CoreAction implements Serializable, Startable, Stoppable
     {
