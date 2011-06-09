@@ -35,8 +35,10 @@
 
 package graphics.transitions 
 {
+    import system.signals.Signal;
+    import system.signals.Signaler;
+
     import flash.events.Event;
-    import flash.events.TimerEvent;
     import flash.utils.getTimer;
     
     /**
@@ -54,8 +56,26 @@ package graphics.transitions
          */
         public function FrameTimer( delay:Number = 0 , repeatCount:int = 0 )
         {
+            _complete        = new Signal() ;
+            _timer           = new Signal() ;
             this.delay       = delay ;
             this.repeatCount = repeatCount ;
+        }
+        
+        /**
+         * The timer complete signal reference.
+         */
+        public function get complete():Signaler
+        {
+            return _complete ;
+        }
+        
+        /**
+         * The timer signal reference.
+         */
+        public function get timer():Signaler
+        {
+            return _timer ;
         }
         
         /**
@@ -65,26 +85,6 @@ package graphics.transitions
         public override function clone():*
         {
             return new FrameTimer( delay , repeatCount ) ;
-        }
-        
-        /**
-         * Invoked when the frame engine is in progress.
-         */
-        public override function enterFrame( e:Event = null ):void
-        {
-            _next     += getTimer() - _lastTime ;
-            _lastTime  = getTimer() ;
-            if ( _next >= _delay ) 
-            {
-                _count ++ ;
-                dispatchEvent( new TimerEvent( TimerEvent.TIMER ) ) ;
-                _next = 0 ;
-            }
-            if ( _repeatCount != 0 && _count >= _repeatCount ) 
-            {
-                dispatchEvent( new TimerEvent( TimerEvent.TIMER_COMPLETE ) ) ;
-                this.reset() ;
-            }
         }
         
         /**
@@ -146,6 +146,11 @@ package graphics.transitions
         }
         
         /**
+         * @private
+         */
+        protected var _complete:Signaler ;
+        
+        /**
          * The internal counter of the timer.
          */
         protected var _count:int ;
@@ -169,5 +174,31 @@ package graphics.transitions
          * The internal repeat counter of the timer.
          */
         protected var _repeatCount:int ;
+        
+        /**
+         * @private
+         */
+        protected var _timer:Signaler ;
+        
+        /**
+         * Invoked when the frame engine is in progress.
+         */
+        protected override function __enterFrame__( e:Event = null ):void
+        {
+            _enterFrame.emit() ;
+            _next     += getTimer() - _lastTime ;
+            _lastTime  = getTimer() ;
+            if ( _next >= _delay ) 
+            {
+                _count ++ ;
+                _timer.emit() ;
+                _next = 0 ;
+            }
+            if ( _repeatCount != 0 && _count >= _repeatCount ) 
+            {
+                _complete.emit() ;
+                this.reset() ;
+            }
+        }
     }
 }
