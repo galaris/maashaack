@@ -35,7 +35,6 @@
 
 package graphics.transitions 
 {
-    import flash.events.TimerEvent;
     import flash.utils.getTimer;
     
     /**
@@ -148,7 +147,7 @@ package graphics.transitions
         /**
          * Forwards the tweened animation to the next frame.
          */
-        public function nextFrame( e:TimerEvent ):void 
+        public function nextFrame():void 
         { 
             setTime( (useSeconds) ? ( ( getTimer() - _startTime ) / 1000 ) : ( _time + 1 ) ) ;
         }
@@ -312,13 +311,13 @@ package graphics.transitions
             if ( _timer != null ) 
             {
                 _timer.stop();
-                _timer.removeEventListener( TimerEvent.TIMER , nextFrame ) ;
+                _timer.timer.disconnect( nextFrame ) ;
                 _timer = null ;
             }
             _timer = timer ;
             if( _timer != null )
             {
-                _timer.addEventListener(TimerEvent.TIMER, nextFrame ) ;
+                _timer.timer.connect( nextFrame ) ;
             }
         }
         
