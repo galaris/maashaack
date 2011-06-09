@@ -38,7 +38,8 @@ package graphics.transitions
     import system.process.Resetable;
     import system.process.Startable;
     import system.process.Stoppable;
-    
+    import system.signals.Signaler;
+
     import flash.events.IEventDispatcher;
     
     /**
@@ -46,6 +47,11 @@ package graphics.transitions
      */
     public interface ITimer extends IEventDispatcher, Resetable, Startable, Stoppable
     {
+        /**
+         * The timer complete signal reference.
+         */
+        function get complete():Signaler ;
+        
         /**
          * The total number of times the timer has fired since it started at zero.
          */
@@ -62,5 +68,10 @@ package graphics.transitions
          */
         function get repeatCount():int ;
         function set repeatCount( count:int ):void ;
+        
+        /**
+         * The timer signal reference.
+         */
+        function get timer():Signaler ;
     }
 }
