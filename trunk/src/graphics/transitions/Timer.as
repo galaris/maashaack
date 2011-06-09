@@ -35,6 +35,10 @@
 
 package graphics.transitions 
 {
+    import system.signals.Signal;
+    import system.signals.Signaler;
+
+    import flash.events.TimerEvent;
     import flash.utils.Timer;
     
     /**
@@ -93,7 +97,53 @@ package graphics.transitions
          */
         public function Timer( delay:Number, repeatCount:int = 0 )
         {
+            _complete = new Signal() ;
+            _timer    = new Signal() ;
             super( delay, repeatCount ) ;
+            addEventListener( TimerEvent.TIMER, __timer__ , false , 9999 ) ;
+            addEventListener( TimerEvent.TIMER_COMPLETE, __timerComplete__ , false , 9999 ) ;
+        }
+        
+        /**
+         * The timer complete signal reference.
+         */
+        public function get complete():Signaler
+        {
+            return _complete ;
+        }
+        
+        /**
+         * The timer signal reference.
+         */
+        public function get timer():Signaler
+        {
+            return _timer ;
+        }
+        
+        /**
+         * @private
+         */
+        protected var _complete:Signaler ;
+        
+        /**
+         * @private
+         */
+        protected var _timer:Signaler ;
+        
+        /**
+         * @private
+         */
+        protected function __timer__( e:TimerEvent = null ):void
+        {
+            _timer.emit() ;
+        }
+        
+        /**
+         * @private
+         */
+        protected function __timerComplete__( e:TimerEvent = null ):void
+        {
+            _complete.emit() ;
         }
     }
 }
