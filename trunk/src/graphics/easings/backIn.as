@@ -43,7 +43,7 @@ package graphics.easings
      * @param s Specifies the amount of overshoot, where the higher the value, the greater the overshoot.
      * @return The value of the interpolated property at the specified time.
      */
-    public const backIn:Function = function(  t:Number, b:Number, c:Number, d:Number, s:Number=1.70158 ):Number
+    public const backIn:Function = function( t:Number, b:Number, c:Number, d:Number, s:Number=1.70158 ):Number
     {
         if ( !s || isNaN(s) ) 
         {
