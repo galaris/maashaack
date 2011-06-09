@@ -41,12 +41,12 @@ package examples
     import graphics.drawing.RectanglePen;
     import graphics.transitions.TweenLite;
     import graphics.transitions.easings.Bounce;
-
+    
     import system.events.ActionEvent;
-
+    
     import flash.display.Shape;
     import flash.display.Sprite;
-
+    
     public class TweenLite02Example extends Sprite
     {        public function TweenLite02Example()
         {
@@ -66,7 +66,7 @@ package examples
             
             // test the yoyo method.
             
-            tween = new TweenLite ( shape, "x", Bounce.easeOut, shape.x, 600, 2, true ) ;
+            tween = new TweenLite ( shape, "x", Bounce.easeOut, shape.x, 600, 36 ) ;
             
             tween.addEventListener( ActionEvent.FINISH , yoyo ) ;
             
