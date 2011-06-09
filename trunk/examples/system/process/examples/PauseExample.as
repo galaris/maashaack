@@ -56,12 +56,12 @@ package examples
             pause.run() ;
         }
         
-        public function finish( e:Action ):void 
+        public function finish( action:Action ):void 
         {
             trace( "finish" ) ;
         }
         
-        public function start( e:Action ):void 
+        public function start( action:Action ):void 
         {
             trace( "start" ) ;
         }
