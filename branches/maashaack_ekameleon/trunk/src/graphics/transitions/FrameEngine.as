@@ -38,7 +38,9 @@ package graphics.transitions
     import system.process.Startable;
     import system.process.Stoppable;
     import system.process.Task;
-    
+    import system.signals.Signal;
+    import system.signals.Signaler;
+
     import flash.display.Shape;
     import flash.events.Event;
     
@@ -53,7 +55,15 @@ package graphics.transitions
          */
         public function FrameEngine()
         {
-            //
+            _enterFrame = new Signal() ;
+        }
+        
+        /**
+         * The enterFrame signal reference of the frame engine.
+         */
+        public function get enterFrame():Signaler
+        {
+            return _enterFrame ;
         }
         
         /**
@@ -66,14 +76,6 @@ package graphics.transitions
         }
         
         /**
-         * @private
-         */
-        public function enterFrame( e:Event = null ):void
-        {
-            dispatchEvent( new Event( Event.ENTER_FRAME ) ) ;
-        }
-        
-        /**
          * Run the process.
          */
         public override function run( ...arguments:Array ):void 
@@ -81,7 +83,7 @@ package graphics.transitions
             if( !running )
             {
                 notifyStarted() ;
-                _engine.addEventListener( Event.ENTER_FRAME, enterFrame );
+                _engine.addEventListener( Event.ENTER_FRAME, __enterFrame__ );
             }
         }
         
@@ -100,9 +102,22 @@ package graphics.transitions
         {
             if( running )
             {
-                _engine.removeEventListener( Event.ENTER_FRAME, enterFrame );
+                _engine.removeEventListener( Event.ENTER_FRAME, __enterFrame__ );
                 notifyFinished() ;
             }
+        }
+        
+        /**
+         * @private
+         */
+        protected var _enterFrame:Signaler ;
+        
+        /**
+         * @private
+         */
+        protected function __enterFrame__( e:Event = null ):void
+        {
+            _enterFrame.emit() ;
         }
         
         /**
