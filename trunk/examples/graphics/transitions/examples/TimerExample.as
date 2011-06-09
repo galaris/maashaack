@@ -34,36 +34,41 @@
 */
 
 package examples 
-{    import graphics.transitions.Timer;
+{
+    import graphics.transitions.Timer;
     
     import flash.display.Sprite;
     import flash.events.KeyboardEvent;
-    import flash.events.TimerEvent;
     
     public class TimerExample extends Sprite
     {        public function TimerExample()
         {
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             
-            timer = new graphics.transitions.Timer( 3000, 2 );
+            time = new graphics.transitions.Timer( 3000, 2 );
             
-            timer.addEventListener( TimerEvent.TIMER , timerHandler);
-            timer.addEventListener( TimerEvent.TIMER_COMPLETE , timerHandler);
+            time.complete.connect( complete );
+            time.timer.connect( timer );
             
-            timer.start();
+            time.start();
         }
         
-        public var timer:Timer ;
+        public var time:Timer ;
         
-        public function timerHandler(event:TimerEvent):void 
+        public function complete():void 
         {
-            trace( timer.currentCount + " " + event.type  );
+            trace( "complete" );
+        }
+        
+        public function timer():void 
+        {
+            trace( "timer " + time.currentCount  );
         }
         
         public function keyDown( e:KeyboardEvent ):void
         {
-            timer.reset() ;
-            timer.start() ;
+            time.reset() ;
+            time.start() ;
         }
     }
 }

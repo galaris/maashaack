@@ -34,19 +34,19 @@
 */
 
 package examples 
-{    import graphics.transitions.FrameEngine;
-
+{
+    import graphics.transitions.FrameEngine;
+    
     import flash.display.Sprite;
-    import flash.events.Event;
     import flash.events.KeyboardEvent;
-
+    
     public class FrameEngineExample extends Sprite
     {        public function FrameEngineExample()
         {
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             
             engine = new FrameEngine() ;
-            engine.addEventListener( Event.ENTER_FRAME , enterFrame ) ;
+            engine.enterFrame.connect( enterFrame ) ;
             engine.start() ;
         }
         
@@ -54,9 +54,9 @@ package examples
         
         public var count:uint ;
         
-        public function enterFrame( e:Event ):void
+        public function enterFrame():void
         {
-            trace( count++ + " " + e.type ) ;
+            trace( "enterFrame : " + count++ ) ;
         }
         
         public function keyDown( e:KeyboardEvent ):void
