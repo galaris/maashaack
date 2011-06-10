@@ -119,6 +119,21 @@
     <component id="graphics.drawing:StarPen"                    class="graphics.drawing.StarPen" />
     <component id="graphics.drawing:TrianglePen"                class="graphics.drawing.TrianglePen" />
     
+    <!-- graphics.easings -->
+    
+    <component id="graphics.easings:backIn"        class="graphics.easings.backIn"        />
+    <component id="graphics.easings:backInOut"     class="graphics.easings.backInOut"     />
+    <component id="graphics.easings:backOut"       class="graphics.easings.backOut"       />
+    <component id="graphics.easings:bounceIn"      class="graphics.easings.bounceIn"      />
+    <component id="graphics.easings:bounceInOut"   class="graphics.easings.bounceInOut"   />
+    <component id="graphics.easings:bounceOut"     class="graphics.easings.bounceOut"     />
+    <component id="graphics.easings:circularIn"    class="graphics.easings.circularIn"    />
+    <component id="graphics.easings:circularInOut" class="graphics.easings.circularInOut" />
+    <component id="graphics.easings:circularOut"   class="graphics.easings.circularOut"   />
+    <component id="graphics.easings:cubicIn"       class="graphics.easings.cubicIn"       />
+    <component id="graphics.easings:cubicInOut"    class="graphics.easings.cubicInOut"    />
+    <component id="graphics.easings:cubicOut"      class="graphics.easings.cubicOut"      />
+    
     <!-- graphics.events -->
     
     <component id="graphics.events:FrameLabelEvent" class="graphics.events.FrameLabelEvent" />
