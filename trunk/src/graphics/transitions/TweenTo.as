@@ -46,8 +46,8 @@ package graphics.transitions
      *     import graphics.LineStyle;
      *     import graphics.drawing.Pen;
      *     import graphics.drawing.RectanglePen;
+     *     import graphics.easings.bounceOut;
      *     import graphics.transitions.TweenTo;
-     *     import graphics.transitions.easings.Bounce;
      *     
      *     import flash.display.Shape;
      *     import flash.display.Sprite;
@@ -55,9 +55,9 @@ package graphics.transitions
      *     import flash.events.KeyboardEvent;
      *     import flash.ui.Keyboard;
      *     
-     *     public class ExampleTweenTo extends Sprite
+     *     public class TweenToExample extends Sprite
      *     {
-     *         public function ExampleTweenTo()
+     *         public function TweenToExample()
      *         {
      *             /// stage
      *             
@@ -88,7 +88,7 @@ package graphics.transitions
      *                 rotation : 180
      *             };
      *             
-     *             tween = new TweenTo( shape, to, Bounce.easeOut, 1.5, true , true ) ;
+     *             tween = new TweenTo( shape, to, bounceOut, 1.5, true , true ) ;
      *         }
      *         
      *         public var tween:TweenTo ;
