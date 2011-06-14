@@ -36,7 +36,7 @@ package graphics.easings
 {
     /**
      * The <code class="prettyprint">cubicIn</code> function starts motion from zero velocity and then accelerates motion as it executes. 
-     * <p>A cubic equation is based on the power of three : <code>p(t) = t * t * t</code>.</p>
+     * <p>A cubic equation is based on the power of three : <code>p(t) = t &#42; t &#42; t</code>.</p>
      * @param t Specifies the current time, between 0 and duration inclusive.
      * @param b Specifies the initial value of the animation property.
      * @param c Specifies the total change in the animation property.
