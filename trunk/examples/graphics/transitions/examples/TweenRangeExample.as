@@ -34,8 +34,9 @@
 */
 
 package examples 
-{    import graphics.transitions.TweenRange;
-    import graphics.transitions.easings.Bounce;
+{
+    import graphics.easings.bounceOut;
+    import graphics.transitions.TweenRange;
 
     import system.events.ActionEvent;
     import system.numeric.Range;
@@ -47,7 +48,7 @@ package examples
         {
             range = new Range( 100 , 200 ) ;
             
-            tween = new TweenRange ( range , Bounce.easeOut, 24, false, false ) ;
+            tween = new TweenRange ( range , bounceOut, 24, false, false ) ;
             
             tween.addEventListener( ActionEvent.CHANGE , change ) ;
             

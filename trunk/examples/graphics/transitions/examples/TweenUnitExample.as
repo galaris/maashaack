@@ -34,26 +34,27 @@
 */
 
 package examples 
-{    import graphics.transitions.TweenUnit;
-    import graphics.transitions.easings.Bounce;
-
-    import system.events.ActionEvent;
-
+{
+    import graphics.easings.bounceOut;
+    import graphics.transitions.TweenUnit;
+    
+    import system.process.Action;
+    
     import flash.display.Sprite;
-
+    
     public class TweenUnitExample extends Sprite
     {        public function TweenUnitExample()
         {
-            tween = new TweenUnit ( Bounce.easeOut, 24, false, true ) ;
-            tween.addEventListener( ActionEvent.CHANGE , change ) ;
+            tween = new TweenUnit ( bounceOut.easeOut, 24, false, true ) ;
+            tween.changeIt.connect( change ) ;
             tween.run() ;
         }
         
         public var tween:TweenUnit ;
         
-        public function change( e:ActionEvent ):void
+        public function change( e:Action ):void
         {
-            trace( tween.position ) ;
+            trace( "change : " + tween.position ) ;
         }
     }
 }
