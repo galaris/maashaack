@@ -42,9 +42,9 @@ package graphics.transitions
      * package examples 
      * {
      *     import graphics.transitions.TweenArray;
-     *     import graphics.transitions.easing.Bounce;
+     *     import graphics.easings.bounceOut;
      *     
-     *     import system.events.ActionEvent;
+     *     import system.process.Action;
      *     
      *     import flash.display.Sprite;
      *     
@@ -55,15 +55,15 @@ package graphics.transitions
      *             var begin:Array  = [  0 ,  10 ,  20 ,  30 ] ;
      *             var finish:Array = [ 10 , 100 , 200 , 300 ] ;
      *             
-     *             tween = new TweenArray ( begin, finish, Bounce.easeOut, 24, false, true ) ;
+     *             tween = new TweenArray ( begin, finish, bounceOut, 24, false, true ) ;
      *             
-     *             tween.addEventListener( ActionEvent.CHANGE , change ) ;
+     *             tween.changeIt.connect( change ) ; 
      *             tween.run() ;
      *         }
      *         
      *         public var tween:TweenArray ;
      *         
-     *         public function change( e:ActionEvent ):void
+     *         public function change( action:Action ):void
      *         {
      *             trace( tween.change ) ;
      *         }
