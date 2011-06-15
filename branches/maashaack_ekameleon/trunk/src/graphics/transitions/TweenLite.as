@@ -42,20 +42,8 @@ package graphics.transitions
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import graphics.transitions.TweenLite ;
-     * import graphics.transitions.easing.Back ;
-     * import system.process.ActionEvent ;
-     * 
-     * var debug:Function = function( ev:ActionEvent ):void
-     * {
-     *     trace (":: debug -> " + ev.type + " : " + ev.target ) ;
-     * }
-     * 
-     * var tw:TweenLite = new TweenLite (mc, "x", Back.easeOut, mc.x, 400, 2, true, true) ;
-     * tw.looping = true ;
-     * tw.addEventListener( ActionEvent.START    , debug ) ;
-     * tw.addEventListener( ActionEvent.PROGRESS , debug ) ;
-     * tw.addEventListener( ActionEvent.FINISH   , debug ) ;
-     * tw.addEventListener( ActionEvent.LOOP     , debug ) ;
+     * import graphics.easings.backOut ;
+     * var tween:TweenLite = new TweenLite (mc, "x", backOut, mc.x, 400, 2, true, true) ;
      * </pre>
      */
     public class TweenLite extends Motion 
@@ -89,13 +77,13 @@ package graphics.transitions
          * <pre class="prettyprint">
          * import graphics.transitions.TweenEntry ;
          * import graphics.transitions.TweenLite ;
-         * import graphics.transitions.easing.Bounce ;
+         * import graphics.easings.bounceOut ;
          * 
          * var tw:TweenLite = new TweenLite( mc ) ;
          * tw.duration   = 1 ;
          * tw.useSeconds = true ;
          * 
-         * tw.tweenEntry = new TweenEntry( "x" , Bounce.easeOut, mc.x , 500 ) ;
+         * tw.tweenEntry = new TweenEntry( "x" , bounceOut, mc.x , 500 ) ;
          * tw.start() ;
          * </pre>
          */
@@ -132,18 +120,19 @@ package graphics.transitions
          * system system.events.ActionEvent ;
          * 
          * import graphics.transitions.TweenLite ;
-         * import graphics.transitions.easing.Bounce ;
+         * import graphics.easings.bounceOut ;
+         * import system.process.Action ;
          * 
-         * var continueTo:Function = function( e:ActionEvent ):void
+         * var continueTo:Function = function( action:Action ):void
          * {
-         *     tw.removeEventListener( ActionEvent.FINISH , continueTo ) ;
-         *     var target:TweenLite = e.target as TweenLite ;
-         *     trace(e + " continueTo(100,2)" ) ;
-         *     target.continueTo( 100 , 3 ) ;
+         *     trace("continueTo(100,2)" ) ;
+         *     tw.continueTo( 100 , 3 ) ;
          * }
          * 
-         * var tw:TweenLite = new TweenLite( mc, "x", Bounce.easeOut, mc.x, 550, 1, true ) ;
-         * tw.addEventListener( ActionEvent.FINISH , continueTo ) ;
+         * var tw:TweenLite = new TweenLite( mc, "x", bounceOut, mc.x, 550, 1, true ) ;
+         * 
+         * tw.finishIt.connect( continueTo , 0 , true ) ; 
+         * 
          * tw.run() ;
          * </pre>
          * @param finish A number indicating the ending value of the target object property that is to be tweened.
@@ -200,17 +189,17 @@ package graphics.transitions
          * import system.events.ActionEvent ;
          * 
          * import graphics.transitions.TweenLite ;
-         * import graphics.transitions.easing.Bounce ;
+         * import graphics.easings.bounceOut ;
+         * import system.process.Action ;
          * 
-         * var yoyo:Function = function( e:ActionEvent ):void
+         * var yoyo:Function = function( action:Action ):void
          * {
-         *     var target:TweenLite = e.target as TweenLite ;
-         *     trace(e + " yoyo()" ) ;
-         *     target.yoyo() ;
+         *     trace( "yoyo" ) ;
+         *     tw.yoyo() ;
          * }
          * 
-         * var tw:TweenLite = new TweenLite( mc, "x", Bounce.easeOut, mc.x, 550, 2, true ) ;
-         * tw.addEventListener( ActionEvent.FINISH , yoyo ) ;
+         * var tw:TweenLite = new TweenLite( mc, "x", bounceOut, mc.x, 550, 2, true ) ;
+         * tw.finishIt.connect( finish ) ; 
          * tw.run() ;
          * </pre>
          */
