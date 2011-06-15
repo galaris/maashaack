@@ -33,23 +33,21 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.vectors
+package core.vectors 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    public class isVectorTest extends TestCase 
     {
-        public static function suite():ITest
+        public function isVectorTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.vectors package tests");
-            
-            suite.addTestSuite( createTest ) ;
-            suite.addTestSuite( getVectorDefinitionTest ) ;
-            suite.addTestSuite( isVectorTest ) ;
-            suite.addTestSuite( toArrayTest ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testIsVector():void
+        {
+            assertTrue( isVector( new Vector.<String>() ) , "#1") ;
+            assertTrue( isVector( new Vector.<uint>() ) , "#2") ;
         }
     }
 }
