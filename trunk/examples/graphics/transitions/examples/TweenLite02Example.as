@@ -34,15 +34,11 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.bounceOut;
     import graphics.transitions.TweenLite;
-    import graphics.transitions.easings.Bounce;
     
-    import system.events.ActionEvent;
+    import system.process.Action;
     
     import flash.display.Shape;
     import flash.display.Sprite;
@@ -50,32 +46,27 @@ package examples
     public class TweenLite02Example extends Sprite
     {        public function TweenLite02Example()
         {
-            /// build and draw the shape
-            
             var shape:Shape = new Shape() ;
-            var pen:Pen     = new RectanglePen( shape ) ;
             
-            pen.fill = new FillStyle(0xFFFFFF) ;
-            pen.line = new LineStyle(1,0x999999) ;
-            pen.draw(0,0,32,32,Align.CENTER) ;
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
             
             shape.x = 50 ;
             shape.y = 50 ;
             
             addChild( shape ) ;
             
-            // test the yoyo method.
+            tween = new TweenLite ( shape, "x", bounceOut, shape.x, 600, 36 ) ;
             
-            tween = new TweenLite ( shape, "x", Bounce.easeOut, shape.x, 600, 36 ) ;
-            
-            tween.addEventListener( ActionEvent.FINISH , yoyo ) ;
+            tween.finishIt.connect( yoyo ) ; 
             
             tween.run() ;
         }
         
         public var tween:TweenLite ;
         
-        public function yoyo( e:ActionEvent ):void
+        public function yoyo( action:Action ):void
         {
             trace( "yoyo" ) ;
             tween.yoyo() ;

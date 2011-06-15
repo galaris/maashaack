@@ -34,62 +34,60 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.backOut;
+    import graphics.easings.bounceOut;
+    import graphics.easings.elasticOut;
+    import graphics.easings.expoOut;
     import graphics.transitions.TweenLite;
-    import graphics.transitions.easings.Back;
-    import graphics.transitions.easings.Bounce;
-    import graphics.transitions.easings.Elastic;
-    import graphics.transitions.easings.Expo;
-
-    import system.events.ActionEvent;
-    import system.process.Sequencer;
-
+    
+    import system.process.Action;
+    import system.process.Chain;
+    
     import flash.display.Shape;
     import flash.display.Sprite;
-
+    
     public class TweenLite06Example extends Sprite
     {        public function TweenLite06Example()
         {
-            /// build and draw the shape
-            
             var shape:Shape = new Shape() ;
-            var pen:Pen     = new RectanglePen( shape ) ;
             
-            pen.fill = new FillStyle(0xFFFFFF) ;
-            pen.line = new LineStyle(1,0x999999) ;
-            pen.draw(0,0,32,32,Align.CENTER) ;
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
             
             shape.x = 50 ;
             shape.y = 50 ;
             
             addChild( shape ) ;
             
-            // test the TweenLite class with a Sequencer property.
+            // test the TweenLite class in a chain.
             
-            var tween1:TweenLite = new TweenLite( shape , "x", Expo.easeOut    ,  34 , 600 , 1 , true ) ;
-            var tween2:TweenLite = new TweenLite( shape , "y", Back.easeOut    ,  30 , 350 , 1 , true ) ;
-            var tween3:TweenLite = new TweenLite( shape , "x", Bounce.easeOut  , 600 ,  34 , 1 , true ) ;
-            var tween4:TweenLite = new TweenLite( shape , "y", Elastic.easeOut , 200 ,  30 , 1 , true ) ;
+            var tween1:TweenLite = new TweenLite( shape , "x", expoOut    ,  34 , 600 , 1 , true ) ;
+            var tween2:TweenLite = new TweenLite( shape , "y", backOut    ,  30 , 350 , 1 , true ) ;
+            var tween3:TweenLite = new TweenLite( shape , "x", bounceOut  , 600 ,  34 , 1 , true ) ;
+            var tween4:TweenLite = new TweenLite( shape , "y", elasticOut , 200 ,  30 , 1 , true ) ;
             
-            var s:Sequencer = new Sequencer() ;
+            var chain:Chain = new Chain() ;
             
-            s.addAction(tween1) ;
-            s.addAction(tween2) ;
-            s.addAction(tween3) ;
-            s.addAction(tween4) ;
+            chain.addAction(tween1) ;
+            chain.addAction(tween2) ;
+            chain.addAction(tween3) ;
+            chain.addAction(tween4) ;
             
-            s.addEventListener( ActionEvent.FINISH , debug ) ;
-            s.addEventListener( ActionEvent.START  , debug ) ;
+            chain.finishIt.connect( finish ) ; 
+            chain.startIt.connect( start ) ; 
             
-            s.run() ;
+            chain.run() ;
         }
         
-        public function debug( e:ActionEvent ):void
+        public function finish( action:Action ):void
         {
-            trace( e.type ) ;
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
         }
     }}

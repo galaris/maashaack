@@ -34,29 +34,21 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.bounceOut;
     import graphics.transitions.TweenLite;
-    import graphics.transitions.easings.BounceEasing;
-
+    
     import flash.display.Shape;
     import flash.display.Sprite;
-
+    
     public class TweenLite00Example extends Sprite
     {        public function TweenLite00Example()
         {
-            /// build and draw the shape
-            
             var shape:Shape = new Shape() ;
-            var pen:Pen     = new RectanglePen( shape ) ;
             
-            pen.fill = new FillStyle( 0xFFFFFF ) ;
-            pen.line = new LineStyle( 1 , 0x999999 ) ;
-            
-            pen.draw( 0 , 0 , 32 , 32 , Align.CENTER ) ;
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
             
             shape.x = 50 ;
             shape.y = 50 ;
@@ -65,7 +57,7 @@ package examples
             
             // auto start with last Boolean argument in the constructor.
             
-            new TweenLite( shape , "x" ,  BounceEasing.easeOut , shape.x , 600 , 24 , false , true ) ;
+            new TweenLite( shape , "x" ,  bounceOut , shape.x , 600 , 24 , false , true ) ;
         }
     }
 }
