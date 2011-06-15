@@ -35,18 +35,15 @@
  
 package graphics.transitions 
 {
-    import graphics.events.TweenEntryEvent;
-    
     import system.data.Iterable;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.HashMap;
-    import system.events.CoreEventDispatcher;
     
     /**
      * The buffer of the Tween class.
      */
-    public class TweenBuffer extends CoreEventDispatcher implements Iterable 
+    public class TweenBuffer implements Iterable 
     {
         /**
          * Creates a new TweenBuffer instance.
@@ -87,7 +84,6 @@ package graphics.transitions
             if ( p != null ) 
             {
                 _map.put( p, entry ) ;
-                dispatchEvent( new TweenEntryEvent( TweenEntryEvent.ADD_ENTRY , this, entry ) ) ;
                 return true ;
             }
             else 
@@ -102,7 +98,6 @@ package graphics.transitions
         public function clear():void 
         {
             _map.clear( ) ;
-            dispatchEvent( new TweenEntryEvent( TweenEntryEvent.CLEAR_ENTRY  , this ) ) ;
         }
         
         /**
@@ -177,7 +172,6 @@ package graphics.transitions
                 var t:TweenEntry = _map.remove( p ) ;
                 if ( t != null )
                 {
-                    dispatchEvent( new TweenEntryEvent( TweenEntryEvent.REMOVE_ENTRY , this , t ) ) ;
                     return true ;
                 }
             } 
