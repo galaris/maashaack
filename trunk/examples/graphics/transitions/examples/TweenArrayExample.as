@@ -34,31 +34,32 @@
 */
 
 package examples 
-{    import graphics.transitions.TweenArray;
-    import graphics.transitions.easings.Bounce;
-
-    import system.events.ActionEvent;
-
+{
+    import graphics.easings.bounceOut;
+    import graphics.transitions.TweenArray;
+    
+    import system.process.Action;
+    
     import flash.display.Sprite;
-
+    
     public class TweenArrayExample extends Sprite
     {        public function TweenArrayExample()
         {
             var begin:Array  = [  0 ,  10 ,  20 ,  30 ] ;
             var finish:Array = [ 10 , 100 , 200 , 300 ] ;
             
-            tween = new TweenArray ( begin, finish, Bounce.easeOut, 24, false, false ) ;
+            tween = new TweenArray ( begin, finish, bounceOut, 24, false, false ) ;
             
-            tween.addEventListener( ActionEvent.CHANGE , change ) ;
+            tween.changeIt.connect( change ) ; 
             
             tween.run() ;
         }
         
         public var tween:TweenArray ;
         
-        public function change( e:ActionEvent ):void
+        public function change( action:Action ):void
         {
-            trace( tween.change ) ;
+            trace( "change : " + tween.change ) ;
         }
     }
 }
