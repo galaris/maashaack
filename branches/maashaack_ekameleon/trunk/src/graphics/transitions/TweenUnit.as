@@ -35,7 +35,7 @@
  
 package graphics.transitions 
 {
-    import graphics.transitions.easings.Easing;
+    import graphics.easings.linear;
 
     /**
      * The TweenUnit class interpolate in time a value between 0 and 1.
@@ -92,28 +92,17 @@ package graphics.transitions
         /**
          * Defines the easing method reference of this entry.
          */
-        public function get easing():*
+        public function get easing():Function
         {
-            return _easing as Object ;
+            return _easing ;
         }
         
         /**
          * @private
          */
-        public function set easing( f:* ):void 
+        public function set easing( f:Function ):void 
         {
-            if ( f is Easing )
-            {
-                _easing = f.ease ;
-            }
-            else if ( f is Function )
-            {
-                _easing = f ;
-            }
-            else
-            {
-                _easing = noEasing ;
-            }
+            _easing = f || linear ;
         }
         
         /**
@@ -161,14 +150,5 @@ package graphics.transitions
          * @private
          */
         protected var _easing:Function ;
-        
-        /**
-         * @private
-         */
-        private function noEasing(t:Number, b:Number, c:Number, d:Number):Number 
-        {
-            return c * t / d + b ;
-        }
     }
 }
-
