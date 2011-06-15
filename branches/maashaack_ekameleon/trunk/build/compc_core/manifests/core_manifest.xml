@@ -157,6 +157,7 @@
     
     <component id="core.vectors:create"              class="core.vectors.create"              />
     <component id="core.vectors:getVectorDefinition" class="core.vectors.getVectorDefinition" />
+    <component id="core.vectors:isVector"            class="core.vectors.isVector"            />
     <component id="core.vectors:toArray"             class="core.vectors.toArray"             />
     
 </componentPackage>
