@@ -121,18 +121,40 @@
     
     <!-- graphics.easings -->
     
-    <component id="graphics.easings:backIn"        class="graphics.easings.backIn"        />
-    <component id="graphics.easings:backInOut"     class="graphics.easings.backInOut"     />
-    <component id="graphics.easings:backOut"       class="graphics.easings.backOut"       />
-    <component id="graphics.easings:bounceIn"      class="graphics.easings.bounceIn"      />
-    <component id="graphics.easings:bounceInOut"   class="graphics.easings.bounceInOut"   />
-    <component id="graphics.easings:bounceOut"     class="graphics.easings.bounceOut"     />
-    <component id="graphics.easings:circularIn"    class="graphics.easings.circularIn"    />
-    <component id="graphics.easings:circularInOut" class="graphics.easings.circularInOut" />
-    <component id="graphics.easings:circularOut"   class="graphics.easings.circularOut"   />
-    <component id="graphics.easings:cubicIn"       class="graphics.easings.cubicIn"       />
-    <component id="graphics.easings:cubicInOut"    class="graphics.easings.cubicInOut"    />
-    <component id="graphics.easings:cubicOut"      class="graphics.easings.cubicOut"      />
+    <component id="graphics.easings:backIn"         class="graphics.easings.backIn"         />
+    <component id="graphics.easings:backInOut"      class="graphics.easings.backInOut"      />
+    <component id="graphics.easings:backOut"        class="graphics.easings.backOut"        />
+    <component id="graphics.easings:bounceIn"       class="graphics.easings.bounceIn"       />
+    <component id="graphics.easings:bounceInOut"    class="graphics.easings.bounceInOut"    />
+    <component id="graphics.easings:bounceOut"      class="graphics.easings.bounceOut"      />
+    <component id="graphics.easings:circularIn"     class="graphics.easings.circularIn"     />
+    <component id="graphics.easings:circularInOut"  class="graphics.easings.circularInOut"  />
+    <component id="graphics.easings:circularOut"    class="graphics.easings.circularOut"    />
+    <component id="graphics.easings:cubicIn"        class="graphics.easings.cubicIn"        />
+    <component id="graphics.easings:cubicInOut"     class="graphics.easings.cubicInOut"     />
+    <component id="graphics.easings:cubicOut"       class="graphics.easings.cubicOut"       />
+    <component id="graphics.easings:elasticIn"      class="graphics.easings.elasticIn"      />
+    <component id="graphics.easings:elasticInOut"   class="graphics.easings.elasticInOut"   />
+    <component id="graphics.easings:elasticOut"     class="graphics.easings.elasticOut"     />
+    <component id="graphics.easings:expoIn"         class="graphics.easings.expoIn"         />
+    <component id="graphics.easings:expoInOut"      class="graphics.easings.expoInOut"      />
+    <component id="graphics.easings:expoOut"        class="graphics.easings.expoOut"        />
+    <component id="graphics.easings:linear"         class="graphics.easings.linear"         />
+    <component id="graphics.easings:quadraticIn"    class="graphics.easings.quadraticIn"    />
+    <component id="graphics.easings:quadraticInOut" class="graphics.easings.quadraticInOut" />
+    <component id="graphics.easings:quadraticOut"   class="graphics.easings.quadraticOut"   />
+    <component id="graphics.easings:quarticIn"      class="graphics.easings.quarticIn"      />
+    <component id="graphics.easings:quarticInOut"   class="graphics.easings.quarticInOut"   />
+    <component id="graphics.easings:quarticOut"     class="graphics.easings.quarticOut"     />
+    <component id="graphics.easings:quinticIn"      class="graphics.easings.quinticIn"      />
+    <component id="graphics.easings:quinticInOut"   class="graphics.easings.quinticInOut"   />
+    <component id="graphics.easings:quinticOut"     class="graphics.easings.quinticOut"     />
+    <component id="graphics.easings:regularIn"      class="graphics.easings.regularIn"      />
+    <component id="graphics.easings:regularInOut"   class="graphics.easings.regularInOut"   />
+    <component id="graphics.easings:regularOut"     class="graphics.easings.regularOut"     />
+    <component id="graphics.easings:sineIn"         class="graphics.easings.sineIn"         />
+    <component id="graphics.easings:sineInOut"      class="graphics.easings.sineInOut"      />
+    <component id="graphics.easings:sineOut"        class="graphics.easings.sineOut"        />
     
     <!-- graphics.events -->
     
@@ -271,35 +293,5 @@
     <component id="graphics.transitions:TweenRange"       class="graphics.transitions.TweenRange" />
     <component id="graphics.transitions:TweenTo"          class="graphics.transitions.TweenTo" />
     <component id="graphics.transitions:TweenUnit"        class="graphics.transitions.TweenUnit" />
-    
-    <!-- graphics.transitions.easings -->
-    
-    <component id="graphics.transitions.easings:BackEasing"      class="graphics.transitions.easings.BackEasing" />
-    <component id="graphics.transitions.easings:Back"            class="graphics.transitions.easings.Back" />
-    <component id="graphics.transitions.easings:BounceEasing"    class="graphics.transitions.easings.BounceEasing" />
-    <component id="graphics.transitions.easings:Bounce"          class="graphics.transitions.easings.Bounce" />
-    <component id="graphics.transitions.easings:CircularEasing"  class="graphics.transitions.easings.CircularEasing" />
-    <component id="graphics.transitions.easings:Circular"        class="graphics.transitions.easings.Circular" />
-    <component id="graphics.transitions.easings:Cubic"           class="graphics.transitions.easings.Cubic" />
-    <component id="graphics.transitions.easings:CubicEasing"     class="graphics.transitions.easings.CubicEasing" />
-    <component id="graphics.transitions.easings:Easing"          class="graphics.transitions.easings.Easing" />
-    <component id="graphics.transitions.easings:EasingMode"      class="graphics.transitions.easings.EasingMode" />
-    <component id="graphics.transitions.easings:Elastic"         class="graphics.transitions.easings.Elastic" />
-    <component id="graphics.transitions.easings:ElasticEasing"   class="graphics.transitions.easings.ElasticEasing" />
-    <component id="graphics.transitions.easings:Expo"            class="graphics.transitions.easings.Expo" />
-    <component id="graphics.transitions.easings:ExpoEasing"      class="graphics.transitions.easings.ExpoEasing" />
-    <component id="graphics.transitions.easings:Linear"          class="graphics.transitions.easings.Linear" />
-    <component id="graphics.transitions.easings:LinearEasing"    class="graphics.transitions.easings.LinearEasing" />
-    <component id="graphics.transitions.easings:Quadratic"       class="graphics.transitions.easings.Quadratic" />
-    <component id="graphics.transitions.easings:QuadraticEasing" class="graphics.transitions.easings.QuadraticEasing" />
-    <component id="graphics.transitions.easings:Quartic"         class="graphics.transitions.easings.Quartic" />
-    <component id="graphics.transitions.easings:Quintic"         class="graphics.transitions.easings.Quintic" />
-    <component id="graphics.transitions.easings:QuinticEasing"   class="graphics.transitions.easings.QuinticEasing" />
-    <component id="graphics.transitions.easings:Regular"         class="graphics.transitions.easings.Regular" />
-    <component id="graphics.transitions.easings:RegularEasing"   class="graphics.transitions.easings.RegularEasing" />
-    <component id="graphics.transitions.easings:Sine"            class="graphics.transitions.easings.Sine" />
-    <component id="graphics.transitions.easings:SineEasing"      class="graphics.transitions.easings.SineEasing" />
-    <component id="graphics.transitions.easings:Strong"          class="graphics.transitions.easings.Strong" />
-    <component id="graphics.transitions.easings:StrongEasing"    class="graphics.transitions.easings.StrongEasing" />
     
 </componentPackage>
