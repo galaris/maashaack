@@ -44,9 +44,9 @@ package graphics.transitions
      * package examples 
      * {
      *     import graphics.transitions.TweenRange;
-     *     import graphics.transitions.easing.Bounce;
+     *     import graphics.easings.bounceOut;
      *     
-     *     import system.events.ActionEvent;
+     *     import system.process.Action;
      *     import system.numeric.Range;
      *     
      *     import flash.display.Sprite;
@@ -57,9 +57,9 @@ package graphics.transitions
      *         {
      *             range = new Range( 100 , 200 ) ;
      *             
-     *             tween = new TweenRange ( range , Bounce.easeOut, 24, false ) ;
+     *             tween = new TweenRange ( range , bounceOut, 24, false ) ;
      *             
-     *             tween.addEventListener( ActionEvent.CHANGE , change ) ;
+     *             tween.changeIt.connect( change ) ;
      *             
      *             tween.run() ;
      *         }
@@ -68,7 +68,7 @@ package graphics.transitions
      *         
      *         public var tween:TweenRange ;
      *         
-     *         public function change( e:ActionEvent ):void
+     *         public function change( action:Action ):void
      *         {
      *             trace( tween.position ) ;
      *         }
