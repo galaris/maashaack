@@ -34,45 +34,37 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.backOut;
+    import graphics.easings.bounceOut;
     import graphics.transitions.Tween;
     import graphics.transitions.TweenEntry;
-    import graphics.transitions.easings.Back;
-    import graphics.transitions.easings.Bounce;
-
+    
     import flash.display.Shape;
     import flash.display.Sprite;
-
+    
     public class Tween02Example extends Sprite
     {        public function Tween02Example()
         {
-            /// build and draw the shape
-            
             var shape:Shape = new Shape() ;
-            shape.x         = 50 ;
-            shape.y         = 50 ;
+            
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
+            
+            shape.x = 50 ;
+            shape.y = 50 ;
             
             addChild( shape ) ;
             
-            var pen:Pen = new RectanglePen( shape ) ;
-            
-            pen.fill    = new FillStyle(0xFFFFFF) ;
-            pen.line    = new LineStyle(1,0x999999) ;
-            
-            pen.draw(0,0,32,32,Align.CENTER) ;
-            
-            var tw:Tween = new Tween (shape, "rotation", Back.easeOut, 0, 360) ;
+            var tw:Tween = new Tween (shape, "rotation", backOut, 0, 360) ;
             
             tw.duration   = 2 ;
             tw.useSeconds = true ;
             
-            tw.addProperty("x", Bounce.easeOut, shape.x, 600) ;
+            tw.addProperty("x", bounceOut, shape.x, 600) ;
             
-            tw.add( new TweenEntry("y", Back.easeOut, shape.y, 250)) ;
+            tw.add( new TweenEntry("y", backOut, shape.y, 250)) ;
             
             tw.start() ;
         }
