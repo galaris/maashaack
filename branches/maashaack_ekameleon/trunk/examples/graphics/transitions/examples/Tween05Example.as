@@ -34,126 +34,103 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.backOut;
+    import graphics.easings.bounceOut;
+    import graphics.easings.expoOut;
+    import graphics.easings.regularOut;
     import graphics.transitions.Tween;
     import graphics.transitions.TweenEntry;
-    import graphics.transitions.easings.Back;
-    import graphics.transitions.easings.Bounce;
-    import graphics.transitions.easings.Expo;
-    import graphics.transitions.easings.Regular;
 
-    import system.events.ActionEvent;
-    import system.process.Sequencer;
+    import system.process.Action;
+    import system.process.Chain;
 
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.events.Event;
     import flash.events.KeyboardEvent;
-    import flash.utils.getTimer;
-
+    
     public class Tween05Example extends Sprite 
-    {        
-        public function Tween05Example()
+    {        public function Tween05Example()
         {
-            /// build and draw the shape
+            stage.scaleMode = "noScale" ;
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , run ) ;
             
             var shape:Shape = new Shape() ;
-            var pen:Pen     = new RectanglePen( shape ) ;
             
-            pen.fill = new FillStyle(0xFFFFFF) ;
-            pen.line = new LineStyle(1,0x999999) ;
-            pen.draw(0,0,32,32,Align.CENTER) ;
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
             
             shape.x = 50 ;
             shape.y = 50 ;
             
             addChild( shape ) ;
             
-            stage.addEventListener( KeyboardEvent.KEY_DOWN , run ) ;
-            
-            /// initialize sequencer
-            
             var tween1:Tween = new Tween( shape ) ;
             tween1.duration = 1 ;
             tween1.useSeconds = true ;
-            tween1.add( new TweenEntry("x", Expo.easeOut, shape.x, 600) ) ;
-            tween1.add( new TweenEntry("y", Back.easeOut, shape.y, 320) ) ;
-            tween1.add( new TweenEntry("rotation", Regular.easeOut, 0, 600) ) ;
+            tween1.add( new TweenEntry("x", expoOut, shape.x, 600) ) ;
+            tween1.add( new TweenEntry("y", backOut, shape.y, 320) ) ;
+            tween1.add( new TweenEntry("rotation", regularOut, 0, 600) ) ;
             
             var tween2:Tween = new Tween( shape ) ;
             tween2.duration = 1 ;
             tween2.useSeconds = true ;
-            tween2.add( new TweenEntry("x", Expo.easeOut, 600, 325) ) ;
-            tween2.add( new TweenEntry("y", Expo.easeOut, 320, 40) ) ;
-            tween2.add( new TweenEntry("rotation", Regular.easeOut, 0, -360 ) ) ;
+            tween2.add( new TweenEntry("x", expoOut, 600, 325) ) ;
+            tween2.add( new TweenEntry("y", expoOut, 320, 40) ) ;
+            tween2.add( new TweenEntry("rotation", regularOut, 0, -360 ) ) ;
             
             var tween3:Tween = new Tween( shape ) ;
             tween3.duration = 1 ;
             tween3.useSeconds = true ;
-            tween3.add( new TweenEntry("x", Expo.easeOut, 325, 30 ) ) ;
-            tween3.add( new TweenEntry("y", Back.easeOut, 40, 220) ) ;
+            tween3.add( new TweenEntry("x", expoOut, 325, 30 ) ) ;
+            tween3.add( new TweenEntry("y", backOut, 40, 220) ) ;
             
             var tween4:Tween = new Tween( shape ) ;
             tween4.duration = 2 ;
             tween4.useSeconds = true ;
-            tween4.add( new TweenEntry("x", Bounce.easeOut, 30, 620) ) ;
-            tween4.add( new TweenEntry("y", Back.easeOut, 220, 30) ) ;
+            tween4.add( new TweenEntry("x", bounceOut, 30, 620) ) ;
+            tween4.add( new TweenEntry("y", backOut, 220, 30) ) ;
             
-            sequencer = new Sequencer() ;
+            sequencer = new Chain() ;
             
             sequencer.addAction(tween1) ;
             sequencer.addAction(tween2) ;
             sequencer.addAction(tween3) ;
             sequencer.addAction(tween4) ;
             
+            sequencer.finishIt.connect( finish   ) ;
+            sequencer.progressIt.connect( progress ) ;
+            sequencer.startIt.connect( start ) ;
+            
             /// run the process
             
             run() ;        }
         
-        public var clone:Sequencer ;
-        
-        public var sequencer:Sequencer ;
-        
-        public var timer:Number ;
+        public var sequencer:Chain ;
         
         /**
          * Run the application.
          */
         public function run( e:Event = null ):void
         {
-            if ( clone != null )
-            {
-                clone.stop() ;
-                clone = null ;
-            }
-            clone = sequencer.clone() ;
-            clone.addEventListener( ActionEvent.FINISH   , finish   ) ;
-            clone.addEventListener( ActionEvent.PROGRESS , progress ) ;
-            clone.addEventListener( ActionEvent.START    , start    ) ;
-            clone.run() ;
+            sequencer.run() ;
         }
         
-        protected function finish( e:ActionEvent ):void 
+        protected function finish( action:Action ):void 
         {
-            timer = getTimer() - timer ;
-            trace ( "# finish : " + timer + " ms"  ) ;
+            trace ( "# finish"  ) ;
         }
         
-        protected function start( e:ActionEvent ):void 
+        protected function start( action:Action ):void 
         {
             trace ( "# start" ) ;
-            timer = getTimer() ;
         }
         
-        protected function progress( e:ActionEvent ):void 
+        protected function progress( action:Action ):void 
         {
-            var target:Sequencer = e.target as Sequencer ;
-            trace ( "# progress : " + (getTimer() - timer) + " ms, size : " + target.length  ) ;
+            trace ( "# progress"  ) ;
         }
-        
     }
-    }
+}
