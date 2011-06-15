@@ -35,8 +35,8 @@
 
 package graphics.transitions 
 {
-    import graphics.transitions.easings.Easing;
-    
+    import graphics.easings.linear;
+
     import system.Cloneable;
     import system.hack;
     
@@ -78,28 +78,17 @@ package graphics.transitions
         /**
          * Defines the easing method reference of this entry (use a Function or an Easing object).
          */
-        public function get easing():* 
+        public function get easing():Function
         {
-            return _easing as Object ;
+            return _easing ;
         }
             
         /**
          * @private
           */
-        public function set easing( f:* ):void 
+        public function set easing( f:Function ):void 
         {
-            if ( f is Easing )
-            {
-                _easing = f.ease ;
-            }
-            else if ( f is Function )
-            {
-                _easing = f ;
-            }
-            else
-            {
-                _easing = noEasing ;
-            }
+            _easing = f || linear ;
         }
         
         /**
@@ -146,14 +135,6 @@ package graphics.transitions
         public function getPosition( t:Number , d:Number ):Number 
         {
             return _easing( t, begin, _change , d ) ;
-        }
-            
-        /**
-         * The default static easing used by this tween entry if the easing property is empty.
-         */
-        public function noEasing( t:Number, b:Number, c:Number, d:Number ):Number 
-        {
-            return c*t/d + b ;
         }
         
         /**
