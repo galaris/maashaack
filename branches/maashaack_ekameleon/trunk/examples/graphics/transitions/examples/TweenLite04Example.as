@@ -34,30 +34,23 @@
 */
 
 package examples 
-{    import graphics.Align;
-    import graphics.FillStyle;
-    import graphics.LineStyle;
-    import graphics.drawing.Pen;
-    import graphics.drawing.RectanglePen;
+{
+    import graphics.easings.bounceOut;
     import graphics.transitions.TweenLite;
-    import graphics.transitions.easings.Bounce;
 
-    import system.events.ActionEvent;
+    import system.process.Action;
 
     import flash.display.Shape;
     import flash.display.Sprite;
-
+    
     public class TweenLite04Example extends Sprite
     {        public function TweenLite04Example()
         {
-            /// build and draw the shape
-            
             var shape:Shape = new Shape() ;
-            var pen:Pen     = new RectanglePen( shape ) ;
             
-            pen.fill = new FillStyle(0xFFFFFF) ;
-            pen.line = new LineStyle(1,0x999999) ;
-            pen.draw(0,0,32,32,Align.CENTER) ;
+            shape.graphics.beginFill(0xFFFFFF) ;
+            shape.graphics.lineStyle(1,0x999999) ;
+            shape.graphics.drawRect(-16,-16,32,32) ;
             
             shape.x = 50 ;
             shape.y = 50 ;
@@ -66,17 +59,17 @@ package examples
             
             // test the looping mode.
             
-            var tween:TweenLite = new TweenLite ( shape, "x", Bounce.easeOut, shape.x, 600, 24, false, true ) ;
+            var tween:TweenLite = new TweenLite ( shape, "x", bounceOut, shape.x, 600, 24, false, true ) ;
             
-            tween.addEventListener( ActionEvent.LOOP , loop ) ;
+            tween.loopIt.connect( loop ) ; 
             tween.looping = true ;
             
             tween.run() ;
         }
         
-        public function loop( e:ActionEvent ):void
+        public function loop( action:Action ):void
         {
-            trace( e.type ) ;
+            trace( "loop" ) ;
         }
     }
-    }
+}
