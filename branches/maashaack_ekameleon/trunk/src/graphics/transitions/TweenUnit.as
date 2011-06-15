@@ -44,9 +44,9 @@ package graphics.transitions
      * package examples 
      * {
      *     import graphics.transitions.TweenUnit;
-     *     import graphics.transitions.easing.Bounce;
+     *     import graphics.easings.bounceOut;
      *     
-     *     import system.events.ActionEvent;
+     *     import system.process.Action;
      *     
      *     import flash.display.Sprite;
      *     
@@ -54,14 +54,14 @@ package graphics.transitions
      *     {
      *         public function ExampleTweenUnit()
      *         {
-     *             tween = new TweenUnit ( Bounce.easeOut, 24, false, true ) ;
-     *             tween.addEventListener( ActionEvent.CHANGE , change ) ;
+     *             tween = new TweenUnit ( bounceOut, 24, false, true ) ;
+     *             tween.changeIt.connect( change ) ;
      *             tween.run() ;
      *         }
      *         
      *         public var tween:TweenUnit ;
      *         
-     *         public function change( e:ActionEvent ):void
+     *         public function change( action:Action ):void
      *         {
      *             trace( tween.position ) ;
      *         }
