@@ -35,12 +35,11 @@
 
 package examples
 {
-    import system.events.ActionEvent;
     import system.process.Action;
     import system.process.Task;
-
+    
     import flash.display.Sprite;
-
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
     /**
@@ -50,30 +49,14 @@ package examples
     {
         public function TaskExample()
         {
-            task = new Task() ;
-            
-            // use native W3C event model notifications.
-            
-            task.addEventListener( ActionEvent.FINISH , debug ) ;
-            task.addEventListener( ActionEvent.START  , debug ) ;
-            
-            // use signal model notifications.
+            var task:Task = new Task() ;
             
             task.finishIt.connect( finish ) ;
             task.startIt.connect( start )   ;
             
             // basic example
             
-            task.notifyStarted() ;
             task.run() ; // empty in the Task class must be override.
-            task.notifyFinished() ;
-        }
-        
-        public var task:Task ;
-        
-        public function debug( e:ActionEvent ):void 
-        {
-            trace ( e ) ;
         }
         
         public function start( action:Action ):void
