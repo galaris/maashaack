@@ -38,26 +38,10 @@ package system.process
     import system.Cloneable;
     import system.signals.Signaler;
     
-    import flash.events.IEventDispatcher;
-    
-    /**
-     * Dispatched when a process is finished.
-     * @eventType system.events.ActionEvent.FINISH
-     * @see #notifyFinished
-     */
-    [Event(name="finish", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is started.
-     * @eventType system.events.ActionEvent.START
-     * @see #notifyStarted
-     */
-    [Event(name="start", type="system.events.ActionEvent")]
-    
     /**
      * This interface represents the methods implemented in the Action objects.
      */
-    public interface Action extends Cloneable, IEventDispatcher, Runnable
+    public interface Action extends Cloneable, Runnable
     {
         /**
          * This signal emit when the notifyFinished method is invoked. 
