@@ -43,9 +43,6 @@ package examples
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Basic example to use the system.process.Chain class with the loop and numLoop properties.
-     */
     public class ChainLoopExample extends Sprite
     {
         public function ChainLoopExample()
