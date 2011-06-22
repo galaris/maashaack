@@ -72,7 +72,7 @@ package examples.process
          * Returns the String representation of the object.
          * @return the String representation of the object.
          */
-        public override function toString():String
+        public function toString():String
         {
             return "[PriorityTask name:" + name + " priority:" + priority + "]" ;
         }
