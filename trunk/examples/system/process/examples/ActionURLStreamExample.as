@@ -35,10 +35,10 @@
 package examples
 {
     import system.console;
-    import system.events.ActionEvent;
-    import system.process.ActionURLStream;
     import system.diagnostics.TextFieldConsole;
-    
+    import system.process.Action;
+    import system.process.ActionURLStream;
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
@@ -49,12 +49,6 @@ package examples
     import flash.text.TextFormat;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-    
-    /*
-     * -default-size 740 480 -default-frame-rate 31 -default-background-color 0x666666 
-     * -define+=API::RT_0_2_5,false -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false -define+=API::FP_10_0,true 
-     * -target-player=10.0.0
-     */
     
     /**
      * Basic example to use the system.process.ActionURLStream process.
@@ -90,21 +84,21 @@ package examples
             
             var process:ActionURLStream = new ActionURLStream(loader) ;
             
-            process.addEventListener(ActionEvent.START, start) ;
-            process.addEventListener(ActionEvent.FINISH, finish) ;
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
             
             process.request = new URLRequest(url) ;
             process.run() ;
         }
         
-        public function finish( e:ActionEvent ):void 
+        public function finish( action:Action ):void 
         {
-            console.writeLine(e) ;
+            console.writeLine( "finish" ) ;
         }
         
-        public function start( e:ActionEvent ):void 
+        public function start( action:Action ):void 
         {
-            console.writeLine(e) ;
+            console.writeLine( "start" ) ;
         }
         
         /**
