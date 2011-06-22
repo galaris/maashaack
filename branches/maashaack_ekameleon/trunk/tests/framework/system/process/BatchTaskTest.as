@@ -37,10 +37,9 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;
-
+    
     public class BatchTaskTest extends TestCase 
     {
         public function BatchTaskTest(name:String = "")
@@ -49,8 +48,6 @@ package system.process
         }
         
         public var batch:BatchTask ;
-        
-        public var mockListener:MockTaskListener ;
         
         public var task1:MockTask ;
         public var task2:MockTask ;
