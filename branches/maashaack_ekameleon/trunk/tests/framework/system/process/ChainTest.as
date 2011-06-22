@@ -37,11 +37,10 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ArrayAssert;
     import buRRRn.ASTUce.framework.TestCase;
-
-    import system.events.ActionEvent;
+    
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;
-
+    import system.process.mocks.MockTaskReceiver;
+    
     public class ChainTest extends TestCase 
     {
         public function ChainTest(name:String = "")
@@ -51,7 +50,7 @@ package system.process
         
         public var chain:Chain ;
         
-        public var mockListener:MockTaskListener ;
+        public var mockReceiver:MockTaskReceiver ;
         
         public var task1:MockTask ;
         public var task2:MockTask ;
@@ -256,7 +255,7 @@ package system.process
         public function testEvents():void
         {
             var c:Chain = new Chain() ;
-            mockListener = new MockTaskListener( c ) ;
+            mockReceiver = new MockTaskReceiver( c ) ;
             
             c.addAction( new MockTask("testEvents_1") ) ;
             c.addAction( new MockTask("testEvents_2") ) ;
@@ -265,16 +264,13 @@ package system.process
             
             c.run() ;
             
-            assertTrue( mockListener.isRunning , "#1" ) ;
-            assertFalse( c.running , "#2" ) ;
+            assertTrue( mockReceiver.isWasRunning , "#1" ) ;
             
-            assertTrue   ( mockListener.startCalled  , "#3" ) ;
-            assertEquals ( mockListener.startType  , ActionEvent.START   , "#4" );
-            assertTrue   ( mockListener.finishCalled  , "#5" ) ;
-            assertEquals ( mockListener.finishType , ActionEvent.FINISH  , "#6" );
+            assertTrue   ( mockReceiver.startCalled   , "#2" ) ;
+            assertTrue   ( mockReceiver.finishCalled  , "#3" ) ;
             
-            mockListener.unregister() ;
-            mockListener = null ;
+            mockReceiver.unregister() ;
+            mockReceiver = null ;
         }
     }
 }
