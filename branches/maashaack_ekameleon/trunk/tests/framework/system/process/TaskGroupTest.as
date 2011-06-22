@@ -39,7 +39,6 @@ package system.process
     import buRRRn.ASTUce.framework.TestCase;
     
     import system.process.mocks.MockTask;
-    import system.process.mocks.MockTaskListener;
     
     public class TaskGroupTest extends TestCase 
     {
@@ -49,8 +48,6 @@ package system.process
         }
         
         public var group:TaskGroup ;
-        
-        public var mockListener:MockTaskListener ;
         
         public var task1:MockTask ;
         public var task2:MockTask ;
