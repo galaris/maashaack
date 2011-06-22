@@ -36,15 +36,12 @@
 package system.process 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.Reflection;
-    import system.events.ActionEvent;
+    import system.logging.Loggable;
     import system.logging.Logger;
-    import system.process.mocks.MockTaskListener;
     import system.process.mocks.MockTaskReceiver;
-
-    import flash.events.EventDispatcher;
-
+    
     public class TaskTest extends TestCase
     {
         public function TaskTest(name:String = "")
@@ -53,44 +50,36 @@ package system.process
         }
         
         public var task:Task ;
-        public var mockListener:MockTaskListener ;
         public var mockReceiver:MockTaskReceiver ;
         
         public function setUp():void
         {
             task         = new Task() ;
-            mockListener = new MockTaskListener( task ) ;
             mockReceiver = new MockTaskReceiver( task ) ;
         }
         
         public function tearDown():void
         {
-            mockListener.unregister() ;
             mockReceiver.unregister() ;
-            mockListener = null ;
             mockReceiver = null ;
             task         = null ;
         }
         
         public function testConstructor():void
         {
-            assertNotNull( task , "Task constructor failed, the instance not must be null." ) ;
+            assertNotNull( task ) ;
         }
         
         public function testInherit():void
         {
-            assertTrue( task is EventDispatcher , "Action inherit flash.events.EventDispatcher failed.") ;
+            assertTrue( task is Object ) ;
         }
         
         public function testInterface():void
         {
-            assertTrue( task is Action , "Task implements the Action interface" ) ;
-        }
-        
-        public function testIsDynamic():void
-        {
-            var action:Task = new Task() ;
-            assertTrue( Reflection.getClassInfo(action).isDynamic() , "Task is dynamic.") ;
+            assertTrue( task is Action   ) ;
+            assertTrue( task is Lockable ) ;
+            assertTrue( task is Loggable ) ;
         }
         
         public function testLogger():void
@@ -115,16 +104,12 @@ package system.process
         public function testNotifyFinished():void
         {
             task.notifyFinished() ;
-            assertTrue( mockListener.finishCalled , "Action notifyFinished failed, the ActionEvent.FINISH event isn't notify" ) ;
-            assertEquals( mockListener.finishType , ActionEvent.FINISH  , "Action notifyStarted failed, bad type found." );
             assertTrue( mockReceiver.finishCalled , "Action notifyFinished failed, the finishIt signal must emit." ) ;
         }
         
         public function testNotifyStarted():void
         {
             task.notifyStarted() ;
-            assertTrue( mockListener.startCalled , "Action notifyStarted failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals( mockListener.startType , ActionEvent.START  , "Action notifyStarted failed, bad type found." );
             assertTrue( mockReceiver.startCalled , "Action notifyStarted failed, the startIt signal must emit." ) ;
         }
         
