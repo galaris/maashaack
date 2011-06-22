@@ -35,7 +35,8 @@
 
 package system.process.mocks 
 {
-    import system.Reflection;
+    import core.reflect.getClassName;
+
     import system.process.Task;
     
     /**
@@ -103,9 +104,9 @@ package system.process.mocks
           * Returns the <code class="prettyprint">String</code> representation of this object.
           * @return the <code class="prettyprint">String</code> representation of this object.
           */
-        public override function toString():String
+        public function toString():String
         {
-            var str:String = "[" + Reflection.getClassName(this) ;
+            var str:String = "[" + getClassName(this) ;
             if ( this.id != null )
             {
                 str += " " + this.id ;
