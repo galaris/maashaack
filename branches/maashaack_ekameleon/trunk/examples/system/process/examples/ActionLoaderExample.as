@@ -35,12 +35,12 @@
 
 package examples
 {
-    import system.events.ActionEvent;
+    import system.console;
+    import system.process.Action;
     import system.process.ActionLoader;
     
     import flash.display.Loader;
     import flash.display.Sprite;
-    import flash.events.Event;
     import flash.net.URLRequest;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#FFFFFF")]
@@ -62,23 +62,29 @@ package examples
             
             var process:ActionLoader = new ActionLoader(loader) ;
             
-            process.addEventListener( ActionEvent.START  , debug ) ;
-            process.addEventListener( ActionEvent.FINISH , debug ) ;
-            process.addEventListener( Event.INIT         , init  ) ;
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
+            
+            process.init.connect( init ) ; 
             
             process.request = new URLRequest(url) ;
             
             process.run() ;
         }
-
-        public function debug( e:ActionEvent ):void 
+        
+        public function finish( action:Action ):void 
         {
-            trace(e) ;
+            console.writeLine( "finish" ) ;
         }
         
-        public function init(event:Event):void 
+        public function init( action:Action ):void 
         {
-            trace("init currentTarget:" + event.currentTarget + " target:" + event.target) ;
+            trace( "init" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            console.writeLine( "start" ) ;
         }
     }
 }
