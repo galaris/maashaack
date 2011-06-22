@@ -67,7 +67,7 @@ package system.process.mocks
         /**
          * Indicates if the Action owner object is running during the process.
          */
-        public var isRunning:Boolean ;
+        public var isWasRunning:Boolean ;
         
         /**
          * Indicates if the ActionEvent.CALLED event is invoked.
@@ -80,7 +80,6 @@ package system.process.mocks
         public function onFinish( action:Action ):void
         {
             finishCalled = true   ;
-            isRunning   = action.running ;
         }
        
         /**
@@ -89,7 +88,7 @@ package system.process.mocks
         public function onStart( action:Action ):void
         {
             startCalled = true ;
-            isRunning   = action.running ;
+            isWasRunning = action.running ;
         }
         
         /**
