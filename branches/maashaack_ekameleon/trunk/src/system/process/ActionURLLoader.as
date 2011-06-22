@@ -57,18 +57,16 @@ package system.process
      * 
      * var loader:URLLoader = new URLLoader() ;
      * 
-     * var start:Function = function( e:Event ):void
+     * var start:Function = function( action:Action ):void
      * {
-     *    trace(e) ;
+     *    trace( "start" ) ;
      * }
      * 
      * var finish:Function = function( e:Event ):void
      * {
+     *     trace( "finish" ) ;
      *     
-     *     trace(e) ;
-     *     
-     *     var target:ActionURLLoader = e.target as ActionURLLoader ;
-     *     var data:*                 = eden.deserialize( target.data ) ;
+     *     var data:* = eden.deserialize( process.data ) ;
      *     
      *     for (var prop:String in data)
      *     {
@@ -78,8 +76,8 @@ package system.process
      * 
      * var process:ActionURLLoader = new ActionURLLoader( loader ) ;
      * 
-     * process.addEventListener( ActionEvent.START  , start ) ;
-     * process.addEventListener( ActionEvent.FINISH , finish ) ;
+     * process.startIt.connect( start ) ;
+     * process.finishIt.connect( finish ) ;
      * 
      * process.request = new URLRequest( url ) ;
      * 
