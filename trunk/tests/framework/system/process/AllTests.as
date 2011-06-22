@@ -37,7 +37,7 @@ package system.process
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-
+    
     import system.Environment;
     import system.hosts.HostID;
     import system.process.caches.AllTests;
@@ -74,7 +74,6 @@ package system.process
                 suite.addTestSuite( ResetableTest ) ;
                 suite.addTestSuite( ResumableTest ) ;
                 suite.addTestSuite( RunnableTest  ) ;
-                suite.addTestSuite( SequencerTest ) ;
                 suite.addTestSuite( StartableTest ) ;
                 suite.addTestSuite( StoppableTest ) ;
                 suite.addTestSuite( TaskTest ) ;
