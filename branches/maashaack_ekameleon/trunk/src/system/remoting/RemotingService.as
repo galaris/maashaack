@@ -443,7 +443,7 @@ package system.remoting
          * Returns the <code class="prettyprint">String</code> representation of this object.
          * @return the <code class="prettyprint">String</code> representation of this object.
          */
-        public override function toString():String 
+        public function toString():String 
         {
             var txt:String = "[" + getClassName(this) ;
             if ( serviceName && serviceName != "" )
