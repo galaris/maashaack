@@ -37,9 +37,8 @@ package system.process
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.events.ActionEvent;
     import system.process.mocks.MockAction;
-    import system.process.mocks.MockActionListener;
+    import system.process.mocks.MockActionReceiver;
     
     public class CoreActionTest extends TestCase 
     {
@@ -50,14 +49,14 @@ package system.process
         
         public var action:MockAction ;
         
-        public var mockListener:MockActionListener ;
+        public var mockReceiver:MockActionReceiver ;
         
         public function setUp():void
         {
             
             action = new MockAction() ;
             
-            mockListener = new MockActionListener(action) ;
+            mockReceiver = new MockActionReceiver(action) ;
             
             action.notifyAll() ;
         
@@ -65,8 +64,8 @@ package system.process
         
         public function tearDown():void
         {
-            mockListener.unregister() ;
-            mockListener = undefined ;
+            mockReceiver.unregister() ;
+            mockReceiver = undefined ;
             action       = undefined ;
         }
         
@@ -94,75 +93,64 @@ package system.process
         public function testClone():void
         {
             var clone:CoreAction = action.clone() as CoreAction ;
-            assertNotNull( clone , "01 - CoreAction clone method failed." ) ;
-            assertFalse( clone == action  , "02 - CoreAction clone method failed." ) ;
+            assertNotNull( clone , "#1" ) ;
+            assertFalse( clone == action  , "#2" ) ;
         }
         
         public function testNotifyChanged():void
         {
-            assertTrue   ( mockListener.changeCalled , "01 - notify event method failed, the ActionEvent.CHANGE event isn't notify" ) ;
-            assertEquals ( mockListener.changeType   , ActionEvent.CHANGE  , "02 - notify event method failed, bad type found when the process is changed." );
+            assertTrue   ( mockReceiver.changeCalled ) ;
         }
         
         public function testNotifyCleared():void
         {
-            assertTrue   ( mockListener.clearCalled , "notify event method failed, the ActionEvent.CLEAR event isn't notify" ) ;
-            assertEquals ( mockListener.clearType   , ActionEvent.CLEAR  , "notify event method failed, bad type found when the process is cleared." );
+            assertTrue   ( mockReceiver.clearCalled ) ;
         }
         
         public function testNotifyFinished():void
         {
-            assertTrue   ( mockListener.finishCalled , "notify event method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.finishType   , ActionEvent.FINISH  , "notify event method failed, bad type found when the process is finished." );
+            assertTrue( mockReceiver.finishCalled ) ;
         }
         
         public function testNotifyInfo():void
         {
-            assertTrue   ( mockListener.infoCalled , "notify event method failed, the ActionEvent.INFO event isn't notify" ) ;
-            assertEquals ( mockListener.infoType   , ActionEvent.INFO  , "notify event method failed, bad type found when the process info change." );
-            assertEquals ( mockListener.infoObject , "hello world"  , "notify event method failed, bad info object." );
+            assertTrue( mockReceiver.infoCalled , "#1" ) ;
+            assertEquals( "hello world" , mockReceiver.infoObject , "#2" );
         }
         
         public function testNotifyLooped():void
         {
-            assertTrue   ( mockListener.loopCalled , "notify event method failed, the ActionEvent.LOOP event isn't notify" ) ;
-            assertEquals ( mockListener.loopType   , ActionEvent.LOOP  , "notify event method failed, bad type found when the process is looped." );
+            assertTrue( mockReceiver.loopCalled ) ;
         }
         
         public function testNotifyPause():void
         {
-            assertTrue   ( mockListener.pauseCalled , "notify event method failed, the ActionEvent.PAUSE event isn't notify" ) ;
-            assertEquals ( mockListener.pauseType   , ActionEvent.PAUSE  , "notify event method failed, bad type found when the process is in pause." );
+            assertTrue( mockReceiver.pauseCalled ) ;
         }
         
         public function testNotifyProgress():void
         {
-            assertTrue   ( mockListener.progressCalled , "notify event method failed, the ActionEvent.PROGRESS event isn't notify" ) ;
-            assertEquals ( mockListener.progressType   , ActionEvent.PROGRESS  , "notify event method failed, bad type found when the process is in progress." );
+            assertTrue( mockReceiver.progressCalled ) ;
         }
         
         public function testNotifyResumed():void
         {
-            assertTrue   ( mockListener.resumeCalled , "notify event method failed, the ActionEvent.RESUME event isn't notify" ) ;
-            assertEquals ( mockListener.resumeType   , ActionEvent.RESUME  , "notify event method failed, bad type found when the process is resumed." );
+            assertTrue( mockReceiver.resumeCalled ) ;
         }
         
         public function testNotifyStarted():void
-        {       
-            assertTrue   ( mockListener.startCalled , "notify event method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals ( mockListener.startType   , ActionEvent.START   , "notify event method failed, bad type found when the process is started." );
+        {
+            assertTrue( mockReceiver.startCalled ) ;
         }
         
         public function testNotifyStopped():void
         {
-            assertTrue   ( mockListener.stopCalled , "notify event method failed, the ActionEvent.STOP event isn't notify" ) ;
-            assertEquals ( mockListener.stopType   , ActionEvent.STOP   , "notify event method failed, bad type found when the process is stopped." );
+            assertTrue( mockReceiver.stopCalled ) ;
         }
         
         public function testNotifyTimeOut():void
         {
-            assertTrue   ( mockListener.timeoutCalled , "notify event method failed, the ActionEvent.TIMEOUT event isn't notify" ) ;
-            assertEquals ( mockListener.timeoutType   , ActionEvent.TIMEOUT   , "notify event method failed, bad type found when the process is out of time." );
+            assertTrue( mockReceiver.timeoutCalled  ) ;
         }
         
         public function testRun():void
