@@ -37,7 +37,7 @@ package graphics.transitions
 {
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     import flash.events.Event;
     import flash.utils.getTimer;
     
