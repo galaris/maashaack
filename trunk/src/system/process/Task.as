@@ -36,34 +36,17 @@
 package system.process 
 {
     import core.reflect.getClassPath;
-
-    import system.events.ActionEvent;
+    
     import system.logging.Log;
     import system.logging.Loggable;
     import system.logging.Logger;
     import system.signals.Signal;
     import system.signals.Signaler;
-
-    import flash.events.EventDispatcher;
-    
-    /**
-     * Dispatched when a process is finished.
-     * @eventType system.events.ActionEvent.FINISH
-     * @see #notifyFinished
-     */
-    [Event(name="finish", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is started.
-     * @eventType system.events.ActionEvent.START
-     * @see #notifyStarted
-     */
-    [Event(name="start", type="system.events.ActionEvent")]
     
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
-    public dynamic class Task extends EventDispatcher implements Action, Loggable
+    public class Task implements Action, Lockable, Loggable
     {
         /**
          * Creates a new Task instance.
@@ -172,10 +155,6 @@ package system.process
         {
             setRunning( false ) ;
             _phase = TaskPhase.FINISHED ;
-            if ( hasEventListener( _sTypeFinish ) )
-            {
-                dispatchEvent( new ActionEvent( _sTypeFinish , this ) ) ;
-            }
             _finishIt.emit( this ) ;
             _phase = TaskPhase.INACTIVE ;
         }
@@ -188,10 +167,6 @@ package system.process
             setRunning( true ) ;
             _phase  = TaskPhase.RUNNING ;
             _startIt.emit( this ) ;
-            if ( hasEventListener( _sTypeStart ) )
-            {
-                dispatchEvent( new ActionEvent( _sTypeStart , this ) ) ;
-            }
         }
         
         /**
@@ -200,7 +175,9 @@ package system.process
          */
         public function run( ...arguments:Array ):void 
         {
-            // overrides this method.
+            notifyStarted() ;
+            // do nothing or override this method.
+            notifyFinished() ;
         }
         
         /**
@@ -249,15 +226,5 @@ package system.process
          * @private
          */
         private var _startIt:Signaler = new Signal() ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeFinish:String = ActionEvent.FINISH ;
-        
-        /**
-         * @private
-         */
-        protected var _sTypeStart:String = ActionEvent.START ;
     }
 }
