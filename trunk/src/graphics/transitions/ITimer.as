@@ -39,13 +39,11 @@ package graphics.transitions
     import system.process.Startable;
     import system.process.Stoppable;
     import system.signals.Signaler;
-
-    import flash.events.IEventDispatcher;
     
     /**
      * This interface defines the methods to implement timer object create tile interval process.
      */
-    public interface ITimer extends IEventDispatcher, Resetable, Startable, Stoppable
+    public interface ITimer extends Resetable, Startable, Stoppable
     {
         /**
          * The timer complete signal reference.
