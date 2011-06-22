@@ -251,7 +251,7 @@ package system.process
         /**
          * Dispatch an Event.COMPLETE event after all the received data is decoded and placed in the data property. 
          */
-        protected override function complete( e : Event ) : void
+        protected override function _complete( e:Event ) : void
         {
             if (_isParsing) 
             {
@@ -261,7 +261,7 @@ package system.process
             {
                 enumerate( data ) ;
             }
-            super.complete(e) ;
+            super._complete(e) ;
         }
         
         /**
