@@ -36,7 +36,9 @@
 package system.process 
 {
     import system.URI;
-    
+    import system.signals.Signal;
+    import system.signals.Signaler;
+
     import flash.events.ErrorEvent;
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;
@@ -107,11 +109,75 @@ package system.process
         public var cacheParameterName:String ;
         
         /**
+         * This signal emit when the notifyComplete method is invoked. 
+         */
+        public function get complete():Signaler
+        {
+            return _completeIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set complete( signal:Signaler ):void
+        {
+            _completeIt = signal || new Signal() ;
+        }
+        
+        /**
          * Indicates the timeout interval duration.
          */
         public function get delay():uint
         {
             return _timer.delay ;
+        }
+        
+        /**
+         * This signal emit when the notifyError method is invoked. 
+         */
+        public function get error():Signaler
+        {
+            return _errorIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set error( signal:Signaler ):void
+        {
+            _errorIt = signal || new Signal() ;
+        }
+        
+        /**
+         * This signal emit when the notifyHttpStatus method is invoked. 
+         */
+        public function get httpStatus():Signaler
+        {
+            return _httpStatusIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set httpStatus( signal:Signaler ):void
+        {
+            _httpStatusIt = signal || new Signal() ;
+        }
+        
+        /**
+         * This signal emit when the notifyInit method is invoked. 
+         */
+        public function get init():Signaler
+        {
+            return _initIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set init( signal:Signaler ):void
+        {
+            _initIt = signal || new Signal() ;
         }
         
         /**
@@ -131,6 +197,23 @@ package system.process
             _loader = loader ;
             register(_loader) ;
         }
+        
+        /**
+         * This signal emit when the notifyOpen method is invoked. 
+         */
+        public function get open():Signaler
+        {
+            return _openIt ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set open( signal:Signaler ):void
+        {
+            _openIt = signal || new Signal() ;
+        }
+        
         
         /**
          * Indicates the URLRequest object who captures all of the information in a single HTTP request.
@@ -192,12 +275,67 @@ package system.process
         }
         
         /**
+         * Notify when the process is complete.
+         */
+        public function notifyComplete():void 
+        {
+            if ( !isLocked() )
+            {
+                _completeIt.emit( this ) ;
+            }
+        }
+        
+        /**
+         * Notify when the process failed.
+         */
+        public function notifyError( error:Object = null ):void 
+        {
+            if ( !isLocked() )
+            {
+                _errorIt.emit( error , this ) ;
+            }
+        }
+        
+        /**
          * Notify an ActionEvent when the process is finished.
          */
         public override function notifyFinished():void 
         {
             _timer.stop() ;
             super.notifyFinished() ;
+        }
+        
+        /**
+         * Notify when the loading process httpstatus is changed..
+         */
+        public function notifyHttpStatus( status:Object = null ):void 
+        {
+            if ( !isLocked() )
+            {
+                _httpStatusIt.emit( status , this ) ;
+            }
+        }
+        
+        /**
+         * Notify when the process is initialize.
+         */
+        public function notifyInit():void 
+        {
+            if ( !isLocked() )
+            {
+                _initIt.emit( this ) ;
+            }
+        }
+        
+        /**
+         * Notify when the process is open.
+         */
+        public function notifyOpen():void 
+        {
+            if ( !isLocked() )
+            {
+                _openIt.emit( this ) ;
+            }
         }
         
         /**
@@ -216,12 +354,13 @@ package system.process
         {
             if ( dispatcher != null )
             {
-                dispatcher.addEventListener( Event.COMPLETE                    , complete      , false, 0, true ) ;
-                dispatcher.addEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent , false, 0, true ) ;
-                dispatcher.addEventListener( IOErrorEvent.IO_ERROR             , error         , false, 0, true ) ;
-                dispatcher.addEventListener( Event.OPEN                        , dispatchEvent , false, 0, true ) ;
-                dispatcher.addEventListener( ProgressEvent.PROGRESS            , dispatchEvent , false, 0, true ) ;
-                dispatcher.addEventListener( SecurityErrorEvent.SECURITY_ERROR , error         , false, 0, true ) ;
+                dispatcher.addEventListener( Event.COMPLETE                    , _complete   , false, 0, true ) ;
+                dispatcher.addEventListener( HTTPStatusEvent.HTTP_STATUS       , _httpStatus , false, 0, true ) ;
+                dispatcher.addEventListener( Event.INIT                        , _init       , false, 0, true ) ;
+                dispatcher.addEventListener( IOErrorEvent.IO_ERROR             , _error      , false, 0, true ) ;
+                dispatcher.addEventListener( Event.OPEN                        , _open       , false, 0, true ) ;
+                dispatcher.addEventListener( ProgressEvent.PROGRESS            , _progress   , false, 0, true ) ;
+                dispatcher.addEventListener( SecurityErrorEvent.SECURITY_ERROR , _error      , false, 0, true ) ;
             }
         }
         
@@ -233,12 +372,12 @@ package system.process
             notifyStarted() ;
             if ( loader == null )
             {
-                dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the loader reference of this process not must be 'null'.") ) ;
+                notifyError( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the loader reference of this process not must be 'null'.") ) ;
                 notifyFinished() ;
             }
             else if ( request == null )
             {
-                dispatchEvent( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the request reference of this process not must be 'null'.") ) ;
+                notifyError( new ErrorEvent( ErrorEvent.ERROR , false, false, this + " failed the request reference of this process not must be 'null'.") ) ;
                 notifyFinished() ;
             }
             else
@@ -269,40 +408,48 @@ package system.process
         {
             if ( dispatcher != null )
             { 
-                dispatcher.removeEventListener( Event.COMPLETE                    , complete      ) ;
-                dispatcher.removeEventListener( HTTPStatusEvent.HTTP_STATUS       , dispatchEvent ) ;
-                dispatcher.removeEventListener( IOErrorEvent.IO_ERROR             , error         ) ;
-                dispatcher.removeEventListener( Event.OPEN                        , dispatchEvent ) ;
-                dispatcher.removeEventListener( ProgressEvent.PROGRESS            , dispatchEvent ) ;
-                dispatcher.removeEventListener( SecurityErrorEvent.SECURITY_ERROR , error         ) ;
+                dispatcher.removeEventListener( Event.COMPLETE                    , _complete   ) ;
+                dispatcher.removeEventListener( Event.INIT                        , _init       ) ;
+                dispatcher.removeEventListener( HTTPStatusEvent.HTTP_STATUS       , _httpStatus ) ;
+                dispatcher.removeEventListener( IOErrorEvent.IO_ERROR             , _error      ) ;
+                dispatcher.removeEventListener( Event.OPEN                        , _open       ) ;
+                dispatcher.removeEventListener( ProgressEvent.PROGRESS            , _progress   ) ;
+                dispatcher.removeEventListener( SecurityErrorEvent.SECURITY_ERROR , _error      ) ;
             }
         }
         
         /**
          * Invoked when the loading is complete.
          */
-        protected function complete( e:Event ):void
+        protected function _complete( e:Event ):void
         {
-            dispatchEvent(e) ;
+            notifyComplete() ;
             notifyFinished() ;
         }
-//        
-//        /**
-//         * Dispatch HTTPStatusEvent if a call to load() attempts to access data over HTTP and the current Flash Player environment is able to detect and return the status code for the request.
-//         */
-//        protected function httpStatus( e:HTTPStatusEvent ):void
-//        {
-//            dispatchEvent(e) ;
-//        }
-        
         
         /**
          * Dispatch an ErrorEvent if a call to load() attempts a server problem (IOErrorEvent or SecurityErrorEvent). 
          */
-        protected function error( e:ErrorEvent ):void
+        protected function _error( e:ErrorEvent ):void
         {
-            dispatchEvent(e) ;
+            notifyError( e ) ;
             notifyFinished() ;
+        }
+        
+        /**
+         * Dispatch HTTPStatusEvent if a call to load() attempts to access data over HTTP and the current Flash Player environment is able to detect and return the status code for the request.
+         */
+        protected function _httpStatus( e:HTTPStatusEvent ):void
+        {
+            notifyHttpStatus( e ) ;
+        }
+        
+        /**
+         * Invoked when the loading is init.
+         */
+        protected function _init( e:Event ):void
+        {
+            notifyInit() ;
         }
         
         /**
@@ -316,17 +463,20 @@ package system.process
         /**
          * Dispatch Event.OPEN event when the download operation commences following a call to the load() method.
          */
-        protected function open(e:Event):void
+        protected function _open(e:Event):void
         {
-            dispatchEvent(e) ;
+            notifyOpen() ;
         }
         
         /**
          * Invoked when the loading is in complete.
          */
-        protected function progress( e:ProgressEvent ):void
+        protected function _progress( e:ProgressEvent ):void
         {
-            dispatchEvent(e) ;
+            if ( !isLocked() && e )
+            {
+                _progressIt.emit( e.bytesLoaded , e.bytesTotal, this ) ;
+            }
         }
         
         ///////////
@@ -353,6 +503,26 @@ package system.process
         /**
          * @private
          */
+        protected var _completeIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _errorIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _httpStatusIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected var _initIt:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
         protected var _loader:* ;
         
         /**
@@ -362,14 +532,19 @@ package system.process
         protected var _request:URLRequest ;
         
         /**
-         * @private 
+         * @private
          */
-        private var _timer:Timer ;
+        protected var _openIt:Signaler = new Signal() ;
         
         /**
          * @private
          */
         private var _policy:TimeoutPolicy ;
+        
+        /**
+         * @private 
+         */
+        private var _timer:Timer ;
         
         /**
          * @private
