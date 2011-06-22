@@ -38,7 +38,6 @@ package system.process
     import flash.display.DisplayObject;
     import flash.display.Loader;
     import flash.display.LoaderInfo;
-    import flash.events.Event;
     import flash.events.IEventDispatcher;
     import flash.system.LoaderContext;
     
@@ -46,7 +45,7 @@ package system.process
      * This action process launch the load of a Loader object.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.events.ActionEvent ;
+     * import system.process.Action ;
      * import system.process.ActionLoader ;
      * 
      * import flash.display.Loader ;
@@ -60,22 +59,26 @@ package system.process
      * 
      * addChild( loader ) ;
      * 
-     * var debug:Function = function( e:Event ):void
+     * var finish:Function = function( action:Action ):void
      * {
-     *     trace(e) ;
+     *     trace( "finish" ) ;
      * }
      * 
-     * function init(event:Event):void
+     * var start:Function = function( action:Action ):void
      * {
-     *     trace("init currentTarget:" + event.currentTarget + " target:" + event.target ) ;
+     *     trace( "start" ) ;
+     * }
+     * 
+     * function init( action:Action ):void
+     * {
+     *     trace( "init : " + action ) ;
      * }
      * 
      * var process:ActionLoader = new ActionLoader( loader ) ;
      * 
-     * process.addEventListener( ActionEvent.START  , debug ) ;
-     * process.addEventListener( ActionEvent.FINISH , debug ) ;
-     * 
-     * process.addEventListener(Event.INIT, init) ;
+     * process.finishIt.connect( finish ) ; 
+     * process.init.connect( init ) ;
+     * process.startIt.connect( start ) ; 
      * 
      * process.request = new URLRequest( url ) ;
      * 
@@ -184,7 +187,6 @@ package system.process
             if ( contentLoaderInfo != null )
             {
                 super.register( contentLoaderInfo ) ;
-                contentLoaderInfo.addEventListener( Event.INIT, dispatchEvent, false, 0, true ) ;
             }
         }
         
@@ -196,7 +198,6 @@ package system.process
             if ( contentLoaderInfo != null )
             {
                 super.unregister(contentLoaderInfo) ;
-                contentLoaderInfo.removeEventListener( Event.INIT , dispatchEvent ) ;
             }
         }
         
