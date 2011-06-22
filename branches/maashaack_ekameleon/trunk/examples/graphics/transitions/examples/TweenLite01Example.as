@@ -38,7 +38,6 @@ package examples
     import graphics.easings.bounceOut;
     import graphics.transitions.TweenLite;
     
-    import system.events.ActionEvent;
     import system.process.Action;
     
     import flash.display.Shape;
@@ -62,7 +61,7 @@ package examples
             
             tween = new TweenLite ( shape, "x", bounceOut, shape.x, 600, 2, true ) ;
             
-            tween.finishIt.connect( yoyo ) ; 
+            tween.finishIt.connect( yoyo , 0 , true ) ; 
             
             tween.run() ;
         }
@@ -72,7 +71,6 @@ package examples
         public function yoyo( action:Action ):void
         {
             trace( "continueTo(100,3)" ) ;
-            tween.removeEventListener( ActionEvent.FINISH , yoyo ) ;
             tween.continueTo( 100 , 3 ) ;
         }
     }
