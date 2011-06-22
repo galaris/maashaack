@@ -35,7 +35,9 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.events.ActionEvent;    import system.process.mocks.MockTaskListener;
+    import buRRRn.ASTUce.framework.TestCase;
+    
+    import system.process.mocks.MockTaskReceiver;
         public class ActionProxyTest extends TestCase 
     {
         public function ActionProxyTest(name:String = "")
@@ -45,7 +47,7 @@ package system.process
         
         public var action:ActionProxy ;
         
-        public var mockListener:MockTaskListener ;
+        public var mockReceiver:MockTaskReceiver ;
         
         public var scope:Object ;
         
@@ -55,7 +57,7 @@ package system.process
             scope.methodCalled = false ;
             scope.toString = function():String
             {
-               return "[scope]" ;    
+               return "[scope]" ;
             };
             
             var method:Function = function( ...args:Array ):void
@@ -64,20 +66,19 @@ package system.process
             };
             
             action = new ActionProxy(scope, method, ["hello world", "hello city", "hello actionscript"] ) ;
-            mockListener = new MockTaskListener(action) ;
-            
+            mockReceiver = new MockTaskReceiver(action) ;
         }
         
         public function tearDown():void
         {
-            mockListener.unregister() ;
-            mockListener = undefined  ;
+            mockReceiver.unregister() ;
+            mockReceiver = undefined  ;
             action       = undefined  ;
         }
-
+        
         public function testInherit():void
         {
-            assertTrue ( action is Task, "The ActionProxy class must extends the Task class." ) ;
+            assertTrue ( action is Task ) ;
         }
         
         public function testArgs():void
@@ -92,42 +93,38 @@ package system.process
         
         public function testMethod():void
         {
-            assertNotNull ( action.method , "method property not must be null." ) ;
+            assertNotNull ( action.method ) ;
         }
         
         public function testScope():void
         {
-            assertNotNull ( action.scope , "scope property not must be null." ) ;
-            assertEquals  ( action.scope , scope ,  "scope property must be valid." ) ;
+            assertNotNull ( action.scope , "#1" ) ;
+            assertEquals  ( action.scope , scope ,  "#2" ) ;
         }
         
         public function testClone():void
         {
             var clone:ActionProxy = action.clone() as ActionProxy ;
             
-            assertNotNull( clone                      , "clone method failed, with a null shallow copy object." ) ;
-            assertNotSame( clone       , action       , "clone method failed, the shallow copy isn't the same with the action object." ) ;
-            assertEquals ( clone.scope , action.scope , "clone method failed, the clone and action scope object must be the same." ) ;
-            assertEquals ( clone.args  , action.args  , "clone method failed, the clone and action args object must be the same." ) ;
+            assertNotNull( clone                      , "#1" ) ;
+            assertNotSame( clone       , action       , "#2" ) ;
+            assertEquals ( clone.scope , action.scope , "#3" ) ;
+            assertEquals ( clone.args  , action.args  , "#4" ) ;
         }
         
         public function testRun():void
         {
             action.run() ;
             assertTrue( scope.methodCalled , "run method failed, the method isn't called." ) ;
-            assertTrue( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
-            assertTrue( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
+            assertTrue( mockReceiver.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
+            assertTrue( mockReceiver.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
         }
         
         public function testEvents():void
         {
             action.run() ;
-            assertTrue( mockListener.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals( mockListener.startType  , ActionEvent.START   , "run method failed, bad type found when the process is started." );
-            assertTrue( mockListener.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
-            assertEquals( mockListener.finishType , ActionEvent.FINISH  , "run method failed, bad type found when the process is finished." );
+            assertTrue( mockReceiver.startCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
+            assertTrue( mockReceiver.finishCalled  , "run method failed, the ActionEvent.START event isn't notify" ) ;
         }
     }
 }
