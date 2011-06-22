@@ -35,72 +35,8 @@
 
 package system.process
 {
-    import system.events.ActionEvent;
     import system.signals.Signal;
     import system.signals.Signaler;
-    
-    /**
-     * Dispatched when a process is changed.
-     * @eventType system.events.ActionEvent.CHANGE
-     * @see #notifyChanged
-     */
-    [Event(name="change", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is cleared.
-     * @eventType system.events.ActionEvent.CLEAR
-     * @see #notifyCleared
-     */
-    [Event(name="clear", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when an info process is running.
-     * @eventType system.events.ActionEvent.INFO
-     * @see #notifyInfo
-     */
-    [Event(name="info", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is looped.
-     * @eventType system.events.ActionEvent.LOOP
-     * @see #notifyLooped
-     */
-    [Event(name="loop", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is paused.
-     * @eventType system.events.ActionEvent.PAUSE
-     * @see #notifyPaused
-     */
-    [Event(name="pause", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is in progress.
-     * @eventType system.events.ActionEvent.PROGRESS
-     * @see #notifyProgress
-     */
-    [Event(name="progress", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is resumed.
-     * @eventType system.events.ActionEvent.RESUME
-     * @see #notifyResumed
-     */
-    [Event(name="resume", type="system.events.ActionEvent")] 
-        
-    /**
-     * Dispatched when a process is stopped.
-     * @eventType system.events.ActionEvent.STOP
-     * @see #notifyStopped
-     */
-    [Event(name="stop", type="system.events.ActionEvent")]
-    
-    /**
-     * Dispatched when a process is out of time.
-     * @eventType system.events.ActionEvent.TIMEOUT
-     * @see #notifyTimeOut
-     */
-    [Event(name="timeout", type="system.events.ActionEvent")]
     
     /**
      * This class simplify a full implementation of the <code class="prettyprint">Action</code> interface.
@@ -281,10 +217,6 @@ package system.process
             if ( !isLocked() )
             {
                 _changeIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.CHANGE  ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.CHANGE , this ) ) ;
-                }
             }
         }
         
@@ -296,10 +228,6 @@ package system.process
             if ( !isLocked() )
             {
                 _clearIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.CLEAR ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.CLEAR , this ) ) ;
-                }
             }
         }
         
@@ -311,10 +239,6 @@ package system.process
             if ( !isLocked() )
             {
                 _infoIt.emit( this , info ) ;
-                if ( hasEventListener( ActionEvent.INFO ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.INFO , this , info ) ) ;
-                }
             }
         }
         
@@ -327,10 +251,6 @@ package system.process
             if ( !isLocked() )
             {
                 _loopIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.LOOP ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.LOOP , this ) ) ;
-                }
             }
         }
         
@@ -344,10 +264,6 @@ package system.process
             if ( !isLocked() )
             {
                 _pauseIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.PAUSE ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.PAUSE , this ) ) ;
-                }
             }
         }
         
@@ -359,10 +275,6 @@ package system.process
             if ( !isLocked() )
             {
                 _progressIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.PROGRESS ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.PROGRESS , this ) ) ;
-                }
             }
         }
         
@@ -375,10 +287,6 @@ package system.process
             if ( !isLocked() )
             {
                 _resumeIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.RESUME ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.RESUME , this ) ) ;
-                }
             }
         }
         
@@ -392,10 +300,6 @@ package system.process
             if ( !isLocked() )
             {
                 _stopIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.STOP ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.STOP , this ) ) ;
-                }
             }
         }
         
@@ -408,10 +312,6 @@ package system.process
             if ( !isLocked() )
             {
                 _timeoutIt.emit( this ) ;
-                if ( hasEventListener( ActionEvent.TIMEOUT ) )
-                {
-                    dispatchEvent( new ActionEvent( ActionEvent.TIMEOUT , this ) ) ;
-                }
             }
         }
         
