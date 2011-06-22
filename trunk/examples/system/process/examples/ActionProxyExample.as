@@ -35,7 +35,7 @@
 
 package examples
 {
-    import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.ActionProxy;
     
     import flash.display.Sprite;
@@ -62,15 +62,20 @@ package examples
             
             var proxy:ActionProxy = new ActionProxy(scope, execute) ;
             
-            proxy.addEventListener( ActionEvent.FINISH , debug ) ;
-            proxy.addEventListener( ActionEvent.START  , debug ) ;
+            proxy.finishIt.connect( finish ) ;
+            proxy.startIt.connect( start ) ;
             
             proxy.run() ;
         }
         
-        public function debug( e:ActionEvent ):void 
+        public function finish( action:Action ):void 
         {
-            trace ( e ) ;
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
         }
     }
 }
