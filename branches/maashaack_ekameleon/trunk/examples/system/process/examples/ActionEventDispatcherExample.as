@@ -35,11 +35,11 @@
 
 package examples
 {
-    import system.events.ActionEvent;
     import system.process.ActionEventDispatcher;
     
     import flash.display.Sprite;
-    import flash.events.Event;    
+    import flash.events.Event;
+    import flash.events.EventDispatcher;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
@@ -48,17 +48,14 @@ package examples
      */
     public class ActionEventDispatcherExample extends Sprite
     {
-
         public function ActionEventDispatcherExample()
         {
             var process:ActionEventDispatcher = new ActionEventDispatcher() ;
             
-            process.event = new Event("action") ; // register an Event in the process.
+            process.dispatcher = new EventDispatcher() ;
+            process.event      = new Event("action") ; // register an Event in the process.
             
-            process.addEventListener( "action" , debug ) ;
-            
-            process.addEventListener( ActionEvent.START  , debug ) ;
-            process.addEventListener( ActionEvent.FINISH , debug ) ;
+            process.dispatcher.addEventListener( "action" , debug ) ;
             
             process.run() ;
         }
@@ -67,6 +64,5 @@ package examples
         {
             trace(e) ;
         }
-        
     }
 }
