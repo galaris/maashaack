@@ -35,7 +35,7 @@
 package examples
 {
     import system.eden;
-    import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.ActionURLLoader;
     
     import flash.display.Sprite;
@@ -52,30 +52,33 @@ package examples
         public function ActionURLLoaderExample()
         {
             var url:String = "datas/config.eden" ;
-            var loader:URLLoader = new URLLoader() ;
-            var process:ActionURLLoader = new ActionURLLoader(loader) ;
             
-            process.addEventListener(ActionEvent.START, start) ;
-            process.addEventListener(ActionEvent.FINISH, finish) ;
+            var loader:URLLoader = new URLLoader() ;
+            
+            process = new ActionURLLoader(loader) ;
+            
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
             
             process.request = new URLRequest(url) ;
             process.run() ;
         }
         
-        public function finish( e:ActionEvent ):void 
+        public var process:ActionURLLoader ;
+        
+        public function finish( action:Action ):void 
         {
-            trace(e) ;
-            var target:ActionURLLoader = e.target as ActionURLLoader ;
-            var data:*                 = eden.deserialize(target.data) ;
+            trace( "finish" ) ;
+            var data:* = eden.deserialize( process.data ) ;
             for (var prop:String in data)
             {
                 trace("  > " + prop + " : " + data[prop]) ;
             }
         }
         
-        public function start( e:ActionEvent ):void 
+        public function start( action:Action ):void 
         {
-            trace(e) ;
+            trace( "start" ) ;
         }
     }
 }
