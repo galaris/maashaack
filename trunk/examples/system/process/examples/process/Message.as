@@ -53,7 +53,7 @@ package examples.process
             notifyFinished() ;
         }
         
-        public override function toString():String
+        public function toString():String
         {
             return message ;
         }
