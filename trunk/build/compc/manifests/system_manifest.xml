@@ -369,7 +369,6 @@
     <component id="system.process:Priority"               class="system.process.Priority"               />
     <component id="system.process:Resetable"              class="system.process.Resetable"              />
     <component id="system.process:Runnable"               class="system.process.Runnable"               />
-    <component id="system.process:Sequencer"              class="system.process.Sequencer"              />
     <component id="system.process:Startable"              class="system.process.Startable"              />
     <component id="system.process:Stoppable"              class="system.process.Stoppable"              />
     <component id="system.process:Task"                   class="system.process.Task"                   />
