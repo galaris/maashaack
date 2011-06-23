@@ -38,8 +38,8 @@ package examples
     import graphics.easings.bounceOut;
     import graphics.transitions.TweenRange;
 
-    import system.events.ActionEvent;
     import system.numeric.Range;
+    import system.process.Action;
 
     import flash.display.Sprite;
 
@@ -50,7 +50,7 @@ package examples
             
             tween = new TweenRange ( range , bounceOut, 24, false, false ) ;
             
-            tween.addEventListener( ActionEvent.CHANGE , change ) ;
+            tween.changeIt.connect( change ) ; 
             
             tween.run() ;
         }
@@ -59,7 +59,7 @@ package examples
         
         public var tween:TweenRange ;
         
-        public function change( e:ActionEvent ):void
+        public function change( action:Action ):void
         {
             trace( tween.position ) ;
         }
