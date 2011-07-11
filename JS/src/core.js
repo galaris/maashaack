@@ -97,12 +97,14 @@ require( "core.chars.isUpper"      ) ;
 
 // core.maths
 
+require( "core.maths.acosD"       ) ;
 require( "core.maths.berp"        ) ;
 require( "core.maths.bounce"      ) ;
 require( "core.maths.ceil"        ) ;
 require( "core.maths.clamp"       ) ;
 require( "core.maths.clerp"       ) ;
 require( "core.maths.coserp"      ) ;
+require( "core.maths.DEG2RAD"     ) ;
 require( "core.maths.floor"       ) ;
 require( "core.maths.gcd"         ) ;
 require( "core.maths.hermite"     ) ;
@@ -111,6 +113,7 @@ require( "core.maths.lerp"        ) ;
 require( "core.maths.map"         ) ;
 require( "core.maths.normalize"   ) ;
 require( "core.maths.percentage"  ) ;
+require( "core.maths.RAD2DEG"     ) ;
 require( "core.maths.replaceNaN"  ) ;
 require( "core.maths.round"       ) ;
 require( "core.maths.sign"        ) ;
