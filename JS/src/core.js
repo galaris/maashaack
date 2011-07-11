@@ -85,14 +85,15 @@ require( "core.arrays.spliceInto"  ) ;
 
 // core.chars
 
-require( "core.chars.isAlpha"    ) ;
-require( "core.chars.isASCII"    ) ;
-require( "core.chars.isDigit"    ) ;
-require( "core.chars.isHexDigit" ) ;
-require( "core.chars.isLower"    ) ;
-require( "core.chars.isOperator" ) ;
-require( "core.chars.isUnicode"  ) ;
-require( "core.chars.isUpper"    ) ;
+require( "core.chars.isAlpha"      ) ;
+require( "core.chars.isASCII"      ) ;
+require( "core.chars.isDigit"      ) ;
+require( "core.chars.isHexDigit"   ) ;
+require( "core.chars.isLower"      ) ;
+require( "core.chars.isOctalDigit" ) ;
+require( "core.chars.isOperator"   ) ;
+require( "core.chars.isUnicode"    ) ;
+require( "core.chars.isUpper"      ) ;
 
 // core.maths
 
