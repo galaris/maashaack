@@ -187,7 +187,7 @@ the Flash Player plugin contains the bytecode for the builtins class, yes it is 
 here we're talking about the root SWF, meaning the first loaded SWF in the plugin, the _owner_.
 
 ==== 3 ====
-ABC = !ActionScript !ByteCode, contains the definition as binary form.
+ABC = !ActionScript !ByteCode, contains the definition as binary form (see [http://code.google.com/p/redtamarin/wiki/ABC ABC] on redtamarin).
 
 ==== 4 ====
 this also explain why you can not override or redefine a builtin class, first because its definition is in the parent appdom, but even if you were able to load your own definition in the system appdom it will collide with the already existing definition.
