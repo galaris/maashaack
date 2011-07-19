@@ -1,0 +1,33 @@
+#summary One-sentence summary of this page.
+#labels Documentation,Framework
+
+= Command and Task Engine =
+
+== Introduction ==
+
+The *process engine* provides general abstraction to create and manage asynchronous operations in your applications. It is include in the package *system.process*. 
+
+In the life cycle of the applications it's important to create custom and specific tasks and to use tools who allow to grouping them for concurrent or sequential execution :
+ * loading external configuration files, 
+ * loading external swfs or modules, 
+ * loading pictures or sounds or animations, 
+ * invoking remote services, 
+ * invoking motion tween, 
+ * controlling the time-line of your MovieClip, 
+ * creating a pause, 
+ * and more...
+
+While each of these operations are quite easy to handle on their own, it can soon become quite complex if you have to combine lots of these operations. 
+
+== Interfaces ==
+
+The *system.process* package contains important interfaces to create your custom task : 
+*Runnable, Lockable, Priority, Action, Startable, Stoppable, Resumable* and *Resetable.*
+
+=== The Runnable interface ===
+
+The *process engine* is based on the *Design Pattern Command*. A design pattern in which an object is used to represent and encapsulate all the informations needed to execute a method or task at a later time.
+
+Using command objects makes it easier to construct general components that need to delegate, sequence or execute method calls at a time of their choosing without the need to know the owner of the method or the method parameters.
+
+// TODO continue the reference (in progress)
