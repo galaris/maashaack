@@ -179,14 +179,14 @@ package system.models.maps
          * Returns <code class="prettyprint">true</code> if the model contains the specified id key in argument.
          * @return <code class="prettyprint">true</code> if the model contains the specified id key in argument
          */
-        public function containsByID( id:* ):Boolean
+        public function containsByKey( key:* ):Boolean
         {
-            return _map.containsKey( id ) ;
+            return _map.containsKey( key ) ;
         }
         
         /**
          * Returns <code class="prettyprint">true</code> if the model contains the specified attribute value.
-         * @return <code class="prettyprint">true</code> if the model contains the specified id key in argument
+         * @return <code class="prettyprint">true</code> if the model contains the specified key in argument
          */
         public function containsByProperty( propName:String , value:* ):Boolean
         {
@@ -214,12 +214,12 @@ package system.models.maps
         }
         
         /**
-         * Returns the entry defined by the id passed-in argument.
-         * @return the entry defined by the id passed-in argument.
+         * Returns the entry defined by the key passed-in argument.
+         * @return the entry defined by the key passed-in argument.
          */
-        public function get( id:* ):Object
+        public function get( key:* ):Object
         {
-            return _map.get( id ) ;
+            return _map.get( key ) ;
         }
         
         /**
