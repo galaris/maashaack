@@ -126,4 +126,256 @@ package examples
 }
 }}}
 
+=== The Lockable interface ===
+
+The *system.process.Lockable* interface provide more extensive locking operations. This interface defines three important methods : *lock*(), *unlock*() and *isLocked*().
+
+{{{
+package system.process
+{
+    public interface Lockable
+    {
+        function isLocked():Boolean ;
+
+        function lock():void ;
+
+        function unlock():void ;
+    }
+}
+}}}
+
+This minimalist interface can be implemented by any class that requires in there life cycle many updates and many repetitive actions that could affect the performance by lowering all the application. We can use this interface too to lock event propagation for example.
+
+*Example :*
+
+Consider a class to defines a basic component that has multiple virtual properties (get/set). This component uses this properties to update this color, this size, etc.. When the user initialize all properties of the component after running modified each time a method to update the component.
+
+To illustrate this concept I will create a visual class *examples.display.RectangleSprite* which lets you create dynamic graphics rectangular symbols, this class implements the interface Lockable.
+
+{{{
+package examples.display
+{
+    import flash.display.Sprite;
+    
+    import system.process.Lockable;  
+    
+    /**
+     * This sprite draw a rectangle with a virtual width and height value.
+     */
+    public class RectangleSprite extends Sprite implements Lockable
+    {
+        /**
+         * Creates a new RectangleSprite instance.
+         */
+        public function RectangleSprite()
+        {
+            super() ;
+        }
+        
+        /**
+         * The color of the rectangle shape.
+         */
+        public function get color():uint
+        {
+            return _color ;
+        }      
+        
+        /**
+         * @private
+         */
+	  public function set color( value:uint ):void
+        {
+            _color = value ;
+            update() ;
+        }       
+        
+        /**
+         * Determinates the virtual height value of this sprite.
+         */
+	  public function get h():Number
+        {
+            return _h ;
+        }
+        
+	  /**
+         * @private
+         */
+	  public function set h( n:Number ):void
+        {
+            _h = isNaN(n) ? 0 : n ;
+            update() ;
+        }      
+        
+        /**
+         * Determinates the virtual height value of this sprite.
+         */
+	  public function get w():Number
+        {
+            return _w ;
+        }
+     
+	  /**
+         * @private
+         */
+	  public function set w( n:Number ):void
+        {
+            _w = isNaN(n) ? 0 : n ;
+            update() ;
+        }          
+     
+        /**
+         * Draw the display.  
+         */
+	  public function draw():void
+        {
+            graphics.clear() ;
+            graphics.beginFill( color , 1 ) ;
+            graphics.drawRect( 0, 0, w, h ) ;
+        }      
+     
+        /**
+         * Returns true if the object is locked.
+         * @return true if the object is locked.
+         */
+	  public function isLocked():Boolean
+        {
+            return ___isLock___ == true ;
+        }
+     
+        /**
+         * Locks the object.
+         */
+	  public function lock():void
+        {
+            ___isLock___ = true ;
+        }
+     
+        /**
+         * Unlocks the object.
+         */
+	  public function unlock():void
+        {
+            ___isLock___ = false ;
+        }
+     
+        /**
+         * Update the display.
+         */
+	  public function update():void
+        {
+            if ( isLocked() )
+            {
+                return ;
+            }
+            trace( this + " update" ) ;
+            draw() ;
+        }
+
+        /**
+         * @private
+         */
+        protected var _color:uint = 0xFF0000 ;      
+     
+	  /**
+         * @private
+         */
+	  protected var _h:Number = 0 ;
+     
+	  /**
+         * @private
+         */
+	  protected var _w:Number = 0 ;
+     
+        /**
+         * The internal flag to indicates if the display is locked or not.
+         * @private
+         */
+        private var ___isLock___:Boolean ;      
+    }
+}
+}}}
+
+The class examples.display.RectangleSprite defines the virtual properties color, h and w. This properties defines the color, the height and the width components to draw the dynamic shape. Each call to one of these properties will automatically start the *update*() method to refresh the view with the draw() method defined in the class.
+
+The *RectangleSprite* class implement the *Lockable* interface and use only a little *Boolean* flag to switch between the locked and unlocked mode with the *isLocked*() method in the *update*() method :
+
+{{{
+/**
+ * Update the display.
+ */
+public function update():void
+{
+   if ( isLocked() )
+   {
+       return ; // breakpoint
+   }
+   trace( this + " update" ) ;
+   draw() ;
+}
+}}}
+
+This break point with a return statement will be invoked if the method *isLocked*() returns true. This simple method can be deployed in any class.
+
+Let's now a little bit of ActionScript code to illustrate this example :
+
+{{{
+import examples.display.RectangleSprite ;
+
+var sprite:RectangleSprite = new RectangleSprite() ;
+
+sprite.color = 0xFF00FF
+sprite.w     = 200 ;
+sprite.h     = 180 ;
+
+sprite.x     = 25 ;
+sprite.y     = 25 ;
+
+addChild( sprite ) ;
+}}}
+
+Now we can run the compiled application, I get a rectangle on the stage and in the output panel we can read the following message :
+
+{{{
+[object RectangleSprite] update
+[object RectangleSprite] update
+[object RectangleSprite] update
+}}}
+
+The *update*() method is called three times when we defines the properties w, h and color.
+
+In a small piece of code like this notion of optimization is not very important, but on a larger scale if we try to instantiate multiple objects we observe countless unnecessary calls the *update*() method.
+
+Now, we can rewrite the example with the *Lockable* hack.
+
+{{{
+import examples.display.RectangleSprite ;
+
+var sprite:RectangleSprite = new RectangleSprite() ;
+
+sprite.lock() ;
+
+sprite.color = 0xFF00FF
+sprite.w     = 200 ;
+sprite.h     = 180 ;
+
+sprite.unlock() ;
+
+sprite.update() ;
+
+sprite.x     = 25 ;
+sprite.y     = 25 ;
+
+addChild( sprite ) ;
+}}}
+
+In the output of the flashplayer we can read the following message :
+
+{{{
+[object RectangleSprite] update
+}}}
+
+The *update*() method is called only once after the *unlock*() method to update the view of the display.
+
+*Note* : In *AS3* we can find the *lock*() and *unlock*() method in some native class like *flash.display.BitmapData* but this class don't implements the *Lockable* interface.
+
 // TODO continue the reference (in progress)
