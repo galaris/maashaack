@@ -30,4 +30,100 @@ The *process engine* is based on the *Design Pattern Command*. A design pattern 
 
 Using command objects makes it easier to construct general components that need to delegate, sequence or execute method calls at a time of their choosing without the need to know the owner of the method or the method parameters.
 
+The *system.process.Runnable* interface defines the basic implementation to create a command.
+
+{{{
+package system.process
+{
+    public interface Runnable
+    {
+        function run( ...arguments:Array ):void ;
+    }
+}
+}}}
+
+The *run* method is the launcher of the command and all class who implements the *Runnable* interface must contains this method.
+
+For example we can create a *Move* command to change the position of a specific display in your application.
+
+{{{
+package examples.process
+{
+    import flash.display.DisplayObject ;
+    import system.process.Runnable ;
+	
+    public class Move implements Runnable
+    {
+        public function Move( target:DisplayObject , x:Number , y:Number )
+        {
+            this.target = target ;
+            this.x      = x ;
+            this.y      = y ;
+        }
+     
+        public var target:DisplayObject ;
+
+	  public var x:Number ;
+        
+        public var y:Number ;
+	    
+	  public function run( ...arguments:Array ):void
+        {
+            if( arguments.length > 0 )
+            {
+                this.x = arguments[0] as Number ;
+                this.y = arguments[1] as Number ;
+            }
+	      if( target )
+            {
+                target.x = x ;
+                target.y = y ;
+            }
+        }
+
+    }
+}
+}}}
+
+We can executes this command at a time of our choosing :
+
+{{{
+package examples
+{
+    import examples.process.Move;
+
+    import system.process.Runnable;
+
+    import flash.display.Shape;
+    import flash.display.Sprite;
+    import flash.utils.setTimeout;
+  
+    public class RunnableExample extends Sprite
+    {
+	  public function RunnableExample()
+        {
+            ////// Creates the shape
+          
+            var shape:Shape = new Shape() ;
+          
+            shape.x = 25 ;
+            shape.y = 25 ;
+          
+            shape.graphics.beginFill( 0xFF0000 ) ;
+            shape.graphics.drawRect( 0 , 0 , 40 , 40 ) ;
+          
+            addChild( shape ) ;
+            
+            ////// Creates the command
+            
+            var command:Runnable = new Move( shape , 250 , 160 ) ;
+            
+            ////// Execute the command in two seconds
+                      
+            setTimeout( command.run , 2000 ) ;
+        }
+    }
+}
+}}}
+
 // TODO continue the reference (in progress)
