@@ -304,7 +304,7 @@
     <component id="system.logging.targets:SOSTarget"           class="system.logging.targets.SOSTarget" />
     <component id="system.logging.targets:TextFieldTarget"     class="system.logging.targets.TextFieldTarget" />
     
-    <!-- system.process.logic -->
+    <!-- system.logic -->
     
     <component id="system.logic:ElseIf"                    class="system.logic.ElseIf"                    />
     <component id="system.logic:ElseIfEmptyString"         class="system.logic.ElseIfEmptyString"         />
