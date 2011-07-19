@@ -32,17 +32,15 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package system.process 
+package system.models 
 {
     import buRRRn.ASTUce.framework.TestCase;
     
-    import system.process.Runnable;
-    import system.process.samples.RunnableClass;
+    import system.models.samples.ModelClass;
     
-    public class RunnableTest extends TestCase 
+    public class ModelTest extends TestCase 
     {
-        public function RunnableTest(name:String = "")
+        public function ModelTest(name:String = "")
         {
             super( name );
         }
@@ -50,29 +48,9 @@ package system.process
         public function testInterface():void
         {
             
-            var c:RunnableClass = new RunnableClass();
+            var model:ModelClass = new ModelClass();
             
-            assertTrue( c is Runnable ) ;
-            
-            try
-            {
-                c.run() ;
-                fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
-            }
-            catch( e:Error )
-            {
-                assertEquals( e.message , "run invoked 0" , "The Runnable interface failed.") ;
-            }
-            
-            try
-            {
-                c.run(2,3,4) ;
-                fail( "The Runnable interface failed, the RunnableClass must throw an error") ;
-            }
-            catch( e:Error )
-            {
-                assertEquals( e.message , "run invoked 3" , "The Runnable interface failed.") ;
-            }
+            assertTrue( model is Model ) ;
         }
     }
 }

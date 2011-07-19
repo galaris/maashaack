@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import buRRRn.ASTUce.framework.*;
-
+    
     import system.broadcasters.AllTests;
     import system.cli.AllTests;
     import system.comparators.AllTests;
@@ -48,6 +48,7 @@ package system
     import system.formatters.AllTests;
     import system.ioc.AllTests;
     import system.logging.AllTests;
+    import system.models.AllTests;
     import system.network.AllTests;
     import system.numeric.AllTests;
     import system.process.AllTests;
@@ -109,6 +110,7 @@ package system
             suite.addTest( system.events.AllTests.suite() );
             suite.addTest( system.formatters.AllTests.suite() );
             suite.addTest( system.logging.AllTests.suite() );
+            suite.addTest( system.models.AllTests.suite() );
             suite.addTest( system.numeric.AllTests.suite() );
             suite.addTest( system.cli.AllTests.suite());
             suite.addTest( system.process.AllTests.suite() );
