@@ -46,6 +46,91 @@ package system.models.maps
     
     /**
      * This model use an internal <code class="prettyprint">Map</code> to register objects with a specific key.
+     * <p><b>Example :</b></p>
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * package examples
+     * {
+     *     import core.dump;
+     *     
+     *     import system.models.maps.MapModel;
+     *     
+     *     import flash.display.Sprite;
+     *     
+     *     public class MapModelExample extends Sprite
+     *     {
+     *         public function MapModelExample()
+     *         {
+     *             model = new MapModel() ;
+     *             
+     *             trace( "# model primary key : " + model.primaryKey ) ;
+     *             
+     *             model.added.connect( added ) ;
+     *             model.beforeChanged.connect( beforeChanged ) ;
+     *             model.changed.connect( changed ) ;
+     *             model.cleared.connect( cleared ) ;
+     *             model.removed.connect( removed ) ;
+     *             model.updated.connect( updated ) ;
+     *             
+     *             model.add( o1 ) ;
+     *             model.add( o2 ) ;
+     *             model.add( o3 ) ;
+     *             
+     *             trace( "#  model.get('key1') == o1 : " + ( model.get("key1") == o1 ) ) ;
+     *             trace( "#  model.get('key1') == o4 : " + ( model.get("key1") == o4 ) ) ;
+     *             
+     *             model.update( o4 ) ;
+     *             
+     *             model.current = o1 ;
+     *             model.current = o2 ;
+     *             
+     *             model.remove( o1 ) ;
+     *             
+     *             model.clear() ;
+     *         }
+     *         
+     *         protected var model:MapModel ;
+     *         
+     *         protected var o1:Object = { id : "key1" } ;
+     *         protected var o2:Object = { id : "key2" } ;
+     *         protected var o3:Object = { id : "key3" } ;
+     *         protected var o4:Object = { id : "key1" } ;
+     *         
+     *         protected function added( value:* , model:MapModel ):void
+     *         {
+     *             trace( model + " added : " + dump(value) ) ;
+     *         }
+     *         
+     *         protected function beforeChanged( value:* , model:MapModel ):void
+     *         {
+     *             trace( model + " beforeChanged : " + dump(value) ) ;
+     *         }
+     *         
+     *         protected function changed( value:* , model:MapModel ):void
+     *         {
+     *             trace( model + " changed : " + dump(value) ) ;
+     *         }
+     *         
+     *         protected function cleared( model:MapModel ):void
+     *         {
+     *             trace( model + " cleared" ) ;
+     *         }
+     *         
+     *         protected function removed( value:* , model:MapModel ):void
+     *         {
+     *             trace( model + " removed : " + dump(value) ) ;
+     *         }
+     *         
+     *         protected function updated( value:* , model:MapModel ):void
+     *         {
+     *             trace( model + " updated : " + dump(value) ) ;
+     *             trace( "#  model.get('key1') == o1 : " + ( model.get("key1") == o1 ) ) ;
+     *             trace( "#  model.get('key1') == o4 : " + ( model.get("key1") == o4 ) ) ;
+     *         }
+     *     }
+     * }
+     * </code>
+     * </listing>
      */
     public class MapModel extends ChangeModel implements Iterable
     {
