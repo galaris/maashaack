@@ -35,14 +35,13 @@
 
 package system.process.samples 
 {
-    import system.process.Priority;                    
-
+    import system.process.Priority;
+    
     public class PriorityClass implements Priority 
     {
-
         public function PriorityClass( priority:int = 0 )
         {
-            this.priority = priority ;    
+            this.priority = priority ;
         }   
         
         public var value:int ;
