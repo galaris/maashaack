@@ -45,6 +45,7 @@ package system.models
             
             suite.addTestSuite( ModelTest ) ;
             
+            suite.addTestSuite( ChangeModelTest ) ;
             suite.addTestSuite( KernelModelTest ) ;
             
             //suite.addTest( system.models.maps.AllTests.suite() );
