@@ -261,15 +261,6 @@ package system.models.maps
         }
         
         /**
-         * Returns <code class="prettyprint">true</code> if the model contains the specified id key in argument.
-         * @return <code class="prettyprint">true</code> if the model contains the specified id key in argument
-         */
-        public function containsByKey( key:* ):Boolean
-        {
-            return _map.containsKey( key ) ;
-        }
-        
-        /**
          * Returns <code class="prettyprint">true</code> if the model contains the specified attribute value.
          * @return <code class="prettyprint">true</code> if the model contains the specified key in argument
          */
@@ -296,6 +287,15 @@ package system.models.maps
             {
                 return false ;
             }
+        }
+        
+        /**
+         * Returns <code class="prettyprint">true</code> if the model contains the specified id key in argument.
+         * @return <code class="prettyprint">true</code> if the model contains the specified id key in argument
+         */
+        public function containsKey( key:* ):Boolean
+        {
+            return _map.containsKey( key ) ;
         }
         
         /**
