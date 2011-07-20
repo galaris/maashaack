@@ -32,24 +32,42 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package system.models  
+package system.models 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import system.data.Validator;
+    import system.process.Lockable;
     
-    public class AllTests
+    public class KernelModelTest extends TestCase 
     {
-        public static function suite():ITest
+        public function KernelModelTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.models package" );
-            
-            suite.addTestSuite( ModelTest ) ;
-            
-            suite.addTestSuite( KernelModelTest ) ;
-            
-            //suite.addTest( system.models.maps.AllTests.suite() );
-            
-            return suite;
+            super( name );
         }
-	}
+        
+        public var model:KernelModel ;
+        
+        public function setUp():void
+        {
+            model = new KernelModel() ;
+        }
+        
+        public function tearDown():void
+        {
+            model = null ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( model ) ;
+        }
+        
+        public function testInterface():void
+        {
+            assertTrue( model is Model ) ;
+            assertTrue( model is Lockable ) ;
+            assertTrue( model is Validator ) ;
+        }
+    }
 }
