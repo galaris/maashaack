@@ -32,25 +32,18 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-package system.models  
+package system.models.maps
 {
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.TestSuite;
-    
-    import system.models.maps.AllTests;
     
     public class AllTests
     {
         public static function suite():ITest
         {
-            var suite:TestSuite = new TestSuite( "system.models package" );
+            var suite:TestSuite = new TestSuite( "system.models.maps package" );
             
-            suite.addTestSuite( ModelTest ) ;
-            
-            suite.addTestSuite( ChangeModelTest ) ;
-            suite.addTestSuite( KernelModelTest ) ;
-            
-            suite.addTest( system.models.maps.AllTests.suite() );
+            suite.addTestSuite( MapModelTest ) ;
             
             return suite;
         }
