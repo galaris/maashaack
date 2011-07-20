@@ -36,7 +36,9 @@ package system.models
 {
     import buRRRn.ASTUce.framework.TestCase;
     
+    import system.data.Validator;
     import system.models.samples.ModelClass;
+    import system.process.Lockable;
     
     public class ModelTest extends TestCase 
     {
@@ -47,10 +49,11 @@ package system.models
         
         public function testInterface():void
         {
-            
             var model:ModelClass = new ModelClass();
             
             assertTrue( model is Model ) ;
+            assertTrue( model is Lockable ) ;
+            assertTrue( model is Validator ) ;
         }
     }
 }
