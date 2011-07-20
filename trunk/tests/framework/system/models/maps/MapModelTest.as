@@ -36,6 +36,7 @@ package system.models.maps
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.data.Iterable;
     import system.data.Map;
     import system.data.maps.ArrayMap;
     import system.data.maps.HashMap;
@@ -165,6 +166,20 @@ package system.models.maps
             assertNull( model.get( "key3" ) , "#3" ) ;
         }
         
+        public function testGetByProperty():void
+        {
+            var o1:Object = { id : "key1" , value : "value1" } ;
+            var o2:Object = { id : "key2" , value : "value2" } ;
+            
+            model.add( o1 ) ;
+            model.add( o2 ) ;
+            
+            assertEquals( o1 , model.getByProperty( "value" , "value1" ) , "#1" ) ;
+            assertEquals( o2 , model.getByProperty( "value" , "value2" ) , "#2" ) ;
+            
+            assertNull( model.getByProperty( "value" , "value3" ) , "#3" ) ;
+        }
+        
         public function testGetSetMap():void
         {
             assertNotNull( model.getMap() as Map , "#1-1" ) ;
@@ -178,6 +193,17 @@ package system.models.maps
             
             model.setMap( null ) ;
             assertNotNull( model.getMap() as HashMap , "#3-1" ) ;
+        }
+        
+        public function testIterator():void
+        {
+            assertTrue( model is Iterable , "#1" ) ;
+            assertNotNull( model.iterator() , "#2" ) ; 
+        }
+        
+        public function testKeyIterator():void
+        {
+            assertNotNull( model.keyIterator() ) ; 
         }
         
         // TODO Mock to receive message from signals !
