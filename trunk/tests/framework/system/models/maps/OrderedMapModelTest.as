@@ -31,22 +31,54 @@
   and other provisions required by the LGPL or the GPL. If you do not delete
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
-*/
-package system.models.maps
+ */
+package system.models.maps 
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import system.data.maps.ArrayMap;
+
+    public class OrderedMapModelTest extends TestCase 
     {
-        public static function suite():ITest
+        public function OrderedMapModelTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.models.maps package" );
-            
-            suite.addTestSuite( MapModelTest ) ;
-            suite.addTestSuite( OrderedMapModelTest ) ;
-            
-            return suite;
+            super( name );
         }
-	}
+        
+        public var model:OrderedMapModel ;
+        
+        public function setUp():void
+        {
+            model = new OrderedMapModel() ;
+        }
+        
+        public function tearDown():void
+        {
+            model = null ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( model ) ;
+            assertTrue( model.getMap() is ArrayMap ) ;
+        }
+        
+        public function testConstructorWithKey():void
+        {
+            model = new OrderedMapModel( "key" ) ;
+            assertEquals( "key" , model.primaryKey ) ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( model is MapModel ) ;
+        }
+        
+        public function testLoop():void
+        {
+            assertTrue( model.loop , "#1" ) ;
+            model.loop = false ;
+            assertFalse( model.loop , "#2" ) ; 
+        }
+    }
 }
