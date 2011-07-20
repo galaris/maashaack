@@ -151,6 +151,20 @@ package system.models.maps
             assertFalse( model.containsByProperty( "unknow" , "value2" ) , "#3-2" ) ;
         }
         
+        public function testGet():void
+        {
+            var o1:Object = { id : "key1" , value : "value1" } ;
+            var o2:Object = { id : "key2" , value : "value2" } ;
+            
+            model.add( o1 ) ;
+            model.add( o2 ) ;
+            
+            assertEquals( o1 , model.get( "key1" ) , "#1" ) ;
+            assertEquals( o2 , model.get( "key2" ) , "#2" ) ;
+            
+            assertNull( model.get( "key3" ) , "#3" ) ;
+        }
+        
         public function testGetSetMap():void
         {
             assertNotNull( model.getMap() as Map , "#1-1" ) ;
