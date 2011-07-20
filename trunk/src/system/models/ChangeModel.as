@@ -39,7 +39,7 @@ package system.models
     import system.signals.Signaler;
     
     /**
-     * This class provides a simple representation of the ModelObject interface.
+     * This model can keep an object in memory and emit messages if this object is changing.
      */
     public class ChangeModel extends KernelModel 
     {
