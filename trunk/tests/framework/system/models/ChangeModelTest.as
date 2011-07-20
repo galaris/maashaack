@@ -102,6 +102,13 @@ package system.models
             assertTrue( model.security , "#3" ) ;
         }
         
+        public function testClear():void
+        {
+            model.current = "hello" ;
+            model.clear() ;
+            assertNull( model.current ) ;
+        }
+        
         // TODO Mock to receive message from signals !
     }
 }
