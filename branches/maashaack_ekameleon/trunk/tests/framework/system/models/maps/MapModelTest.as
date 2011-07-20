@@ -72,6 +72,22 @@ package system.models.maps
             assertNotNull( model ) ;
         }
         
+        public function testConstructorWithFactory():void
+        {
+            model = new MapModel( new ArrayMap() ) ;
+            assertNotNull( model.getMap() as ArrayMap , "#1" ) ;
+            
+            model = new MapModel( null ) ;
+            assertNotNull( model.getMap() as HashMap , "#2" ) ;
+        }
+        
+        public function testConstructorWithKey():void
+        {
+            model = new MapModel( null , "key" ) ;
+            assertNotNull( model.getMap() as HashMap , "#1" ) ;
+            assertEquals( "key" , model.primaryKey , "#2" ) ;
+        }
+        
         public function testInherit():void
         {
             assertTrue( model is ChangeModel ) ;
