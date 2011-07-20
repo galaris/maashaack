@@ -36,6 +36,9 @@ package system.models.maps
 {
     import buRRRn.ASTUce.framework.TestCase;
 
+    import system.data.Map;
+    import system.data.maps.ArrayMap;
+    import system.data.maps.HashMap;
     import system.models.ChangeModel;
     import system.signals.Signaler;
     
@@ -106,6 +109,61 @@ package system.models.maps
             model.clear() ;
             assertNull( model.current , "#1" ) ;
             assertEquals( 0 , model.length , "#2" ) ;
+        }
+        
+        public function testContains():void
+        {
+            var o1:Object = { id : "key1" , value : "value1" } ;
+            var o2:Object = { id : "key2" , value : "value2" } ;
+            var o3:Object = { id : "key3" , value : "value3" } ;
+            
+            model.add( o1 ) ;
+            model.add( o2 ) ;
+            
+            assertTrue( model.contains( o1 ) ) ;
+            assertTrue( model.contains( o2 ) ) ;
+            assertFalse( model.contains( o3 ) ) ;
+        }
+        
+        public function testContainsKey():void
+        {
+            model.add( { id : "key1" , value : "value1" } ) ;
+            model.add( { id : "key2" , value : "value2" } ) ;
+            assertTrue( model.containsKey( "key1" ) ) ;
+            assertTrue( model.containsKey( "key2" ) ) ;
+            assertFalse( model.containsKey( "key3" ) ) ;
+        }
+        
+        public function testContainsByProperty():void
+        {
+            model.add( { id : "key1" , value : "value1" } ) ;
+            model.add( { id : "key2" , value : "value2" } ) ;
+            
+            assertTrue( model.containsByProperty( "id" , "key1" ) , "#1-1" ) ;
+            assertTrue( model.containsByProperty( "id" , "key2" ) , "#1-2" ) ;
+            assertFalse( model.containsByProperty( "id" , "key3" ) , "#1-3" ) ;
+            
+            assertTrue( model.containsByProperty( "value" , "value1" ) , "#2-1" ) ;
+            assertTrue( model.containsByProperty( "value" , "value2" ) , "#2-2" ) ;
+            assertFalse( model.containsByProperty( "value" , "value3" ) , "#2-3" ) ;
+            
+            assertFalse( model.containsByProperty( "unknow" , "value1" ) , "#3-1" ) ;
+            assertFalse( model.containsByProperty( "unknow" , "value2" ) , "#3-2" ) ;
+        }
+        
+        public function testGetSetMap():void
+        {
+            assertNotNull( model.getMap() as Map , "#1-1" ) ;
+            assertNotNull( model.getMap() as HashMap , "#1-2" ) ;
+            
+            var map:ArrayMap = new ArrayMap() ;
+            
+            model.setMap( map ) ;
+            assertNotNull( model.getMap() as ArrayMap , "#2-1" ) ;
+            assertEquals( map , model.getMap() , "#2-1" ) ;
+            
+            model.setMap( null ) ;
+            assertNotNull( model.getMap() as HashMap , "#3-1" ) ;
         }
         
         // TODO Mock to receive message from signals !
