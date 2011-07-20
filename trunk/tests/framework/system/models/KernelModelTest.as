@@ -35,7 +35,7 @@
 package system.models 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
+    
     import system.data.Validator;
     import system.process.Lockable;
     
@@ -68,6 +68,37 @@ package system.models
             assertTrue( model is Model ) ;
             assertTrue( model is Lockable ) ;
             assertTrue( model is Validator ) ;
+        }
+        
+        public function testIsLocked():void
+        {
+            assertFalse( model.isLocked() ) ; 
+        }
+        
+        public function testLockUnlock():void
+        {
+            model.lock() ;
+            assertTrue( model.isLocked() ) ; 
+            model.unlock() ;
+            assertFalse( model.isLocked() ) ; 
+        }
+        
+        public function testSupports():void
+        {
+            assertTrue( model.supports(null) ) ; 
+            assertTrue( model.supports("hello") ) ; 
+        }
+        
+        public function testValidate():void
+        {
+            try
+            {
+                model.validate("hello") ;
+            }
+            catch( e:Error )
+            {
+                fail( "validate failed" )  ;
+            }
         }
     }
 }
