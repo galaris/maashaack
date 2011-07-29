@@ -337,6 +337,10 @@
     <component id="system.models:KernelModel" class="system.models.KernelModel" />
     <component id="system.models:Model"       class="system.models.Model"       />
     
+    <!-- system.models.arrays -->
+    
+    <component id="system.models.arrays:PageableArrayModel" class="system.models.arrays.PageableArrayModel" />
+    
     <!-- system.models.maps -->
     
     <component id="system.models.maps:MapModel"        class="system.models.maps.MapModel"        />
