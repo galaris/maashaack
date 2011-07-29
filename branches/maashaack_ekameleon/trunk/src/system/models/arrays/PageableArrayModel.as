@@ -45,7 +45,92 @@ package system.models.arrays
      * @example Example
      * <listing version="3.0">
      * <code class="prettyprint">
-     * ...
+     * package examples
+     * {
+     *     import core.dump;
+     *     
+     *     import system.models.arrays.PageableArrayModel;
+     *     
+     *     import flash.display.Sprite;
+     *     import flash.events.KeyboardEvent;
+     *     import flash.ui.Keyboard;
+     *     
+     *     public class PageableArrayModelExample extends Sprite
+     *     {
+     *         public function PageableArrayModelExample()
+     *         {
+     *             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+     *             
+     *             model = new PageableArrayModel( 2 ) ;
+     *             
+     *             // model.count =  3 ;
+     *             
+     *             model.initialized.connect( init ) ; 
+     *             model.updated.connect( update ) ; 
+     *             
+     *             var datas:Array  = [] ;
+     *             
+     *             for ( var i:uint = 0 ; i &lt; 20 ; i++ )
+     *             {
+     *                 datas.push( { id:i } ) ;
+     *             }
+     *             
+     *             model.init( datas , false , false ) ;
+     *             
+     *             model.currentPage = 2 ;
+     *         }
+     *         
+     *         protected var model:PageableArrayModel ;
+     *         
+     *         protected function init( model:PageableArrayModel ):void
+     *         {
+     *             trace( model + " init" ) ;
+     *         }
+     *         
+     *         protected function update( value:&#42; , model:PageableArrayModel ):void
+     *         {
+     *             trace( model + " update " + model.currentPage + "/" + model.pageCount + " value:" + dump(value) ) ;
+     *         }
+     *         
+     *         protected function keyDown( e:KeyboardEvent ):void
+     *         {
+     *             var code:uint = e.keyCode ;
+     *             switch( code )
+     *             {
+     *                 case Keyboard.LEFT :
+     *                 {
+     *                     if ( model.hasPrevious() )
+     *                     {
+     *                         model.previous() ;
+     *                     }
+     *                     else
+     *                     {
+     *                         model.lastPage() ;
+     *                     }
+     *                     break ;
+     *                 }
+     *                 case Keyboard.RIGHT :
+     *                 {
+     *                     if ( model.hasNext() )
+     *                     {
+     *                         model.next() ;
+     *                     }
+     *                     else
+     *                     {
+     *                         model.firstPage() ;
+     *                     }
+     *                     break ;
+     *                 }
+     *                 case Keyboard.SPACE :
+     *                 {
+     *                     model.lock() ;
+     *                     model.count = 4 ; // change the count value but not update the model.
+     *                     model.unlock() ;
+     *                }
+     *             }
+     *         }
+     *     }
+     * }
      * </code>
      * </listing>
      */
