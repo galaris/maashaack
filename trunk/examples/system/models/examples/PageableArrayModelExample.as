@@ -51,9 +51,9 @@ package examples
         {
             stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
             
-            model = new PageableArrayModel() ;
+            model = new PageableArrayModel( 2 ) ;
             
-            model.count =  2 ; // TODO in the constructor
+            // model.count =  3 ;
             
             model.initialized.connect( init ) ; 
             model.updated.connect( update ) ; 
