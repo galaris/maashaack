@@ -53,11 +53,13 @@ package system.models.arrays
     {
         /**
          * Creates a new PageableArrayModel instance.
+         * @param count Indicates the default number of elements by page in the model (default 1).
          * @param factory the optional internal Array reference to build the model, by default an empty Array is created.
          */
-        public function PageableArrayModel( factory:Array = null )
+        public function PageableArrayModel( count:uint = 1 , factory:Array = null )
         {
             _array       = factory || [] ;
+            _count       = count > 1 ? count : 1 ;
             _initialized = new Signal() ;
             _updated     = new Signal() ;
         }
