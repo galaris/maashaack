@@ -34,14 +34,13 @@
 */
 package system.models.arrays
 {
-    import system.data.Iterator;
     import system.data.OrderedIterator;
     import system.data.iterators.PageByPageIterator;
     import system.models.ChangeModel;
     import system.process.Runnable;
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     import flash.errors.IllegalOperationError;
     
     /**
@@ -330,15 +329,6 @@ package system.models.arrays
             {
                 run() ;
             }
-        }
-        
-        /**
-         * Returns a PageByPageIterator of this model.
-         * @return a PageByPageIterator of this model.
-         */
-        public function iterator():Iterator
-        {
-            return new PageByPageIterator( _elements , _count ) ;
         }
         
         /**

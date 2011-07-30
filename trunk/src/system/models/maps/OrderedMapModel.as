@@ -82,7 +82,7 @@ package system.models.maps
      *         
      *         public function added( entry:Object , model:Model ):void
      *         {
-     *             trace( "add entry:" + entry + " in " model ) ;
+     *             trace( "add entry:" + entry + " in " + model ) ;
      *         }
      *         
      *         public function changed( entry:Object , model:Model ):void
@@ -202,7 +202,7 @@ package system.models.maps
         /**
          * Sets the next value object in the model.
          */
-        public function next():void
+        public function next():*
         {
             if ( _it )
             {
@@ -224,13 +224,14 @@ package system.models.maps
                 reset() ;
                 next() ;
             }
+            return _current ;
         }
         
         /**
          * Sets the previous value object in the model. 
          * If no value object is selected in the model this method invoke the next() method to select the first value object.
          */
-        public function previous():void
+        public function previous():*
         {
             if ( _it )
             {
@@ -258,6 +259,7 @@ package system.models.maps
                 reset() ;
                 next() ;
             }
+            return _current ;
         }
         
         /**
@@ -288,25 +290,36 @@ package system.models.maps
         }
         
         /**
-         * Seek the model and select the specified value Object.
-         * @param vo The value object reference to seek the model.
+         * Seek the model and select the specified object.
+         * @param position The object reference to seek the model.
          * @throws ArgumentError if the passed-in ValueObject isn't register in the model.
          */
-        public function seek( entry:Object ):void
+        public function seek( position:* ):void
         {
-            if ( contains( entry ) )
+            if ( position == _current && security )
+            {
+                return ;
+            }
+            if ( _current != null )
+            {
+                notifyBeforeChange( _current ) ;
+                _current = null ;
+            }
+            validate( position ) ;
+            if ( contains( position ) )
             {
                 var map:ArrayMap = _map as ArrayMap ;
                 if ( map )
                 {
-                    var index:uint   = map.indexOfValue( entry ) ;
+                    var index:uint   = map.indexOfValue( position ) ;
                     if ( _it == null )
                     {
                         reset() ;
                     }
                     _it.seek(index) ;
-                    current = entry ;
+                    _current = position ;
                     _it.seek( index + 1 ) ;
+                    notifyChange( _current );
                 }
             }
             else
