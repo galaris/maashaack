@@ -35,10 +35,13 @@
 package system.models.arrays
 {
     import system.data.Iterator;
+    import system.data.OrderedIterator;
     import system.data.iterators.PageByPageIterator;
     import system.models.ChangeModel;
     import system.signals.Signal;
     import system.signals.Signaler;
+
+    import flash.errors.IllegalOperationError;
     
     /**
      * Defines an <code class="prettyprint">Array</code> model with a 'page by page' iterator.
@@ -134,7 +137,7 @@ package system.models.arrays
      * </code>
      * </listing>
      */
-    public class PageableArrayModel extends ChangeModel
+    public class PageableArrayModel extends ChangeModel implements OrderedIterator
     {
         /**
          * Creates a new PageableArrayModel instance.
@@ -169,19 +172,19 @@ package system.models.arrays
         /**
          * Indicates the current page selected in the model.
          */
-        public function get currentPage():Number
+        public function get currentPage():uint
         {
             return _pager ? _pager.currentPage() : 0 ;
         }
         
         /**
-         * Indicates the current page selected in the model.
+         * @private
          */
-        public function set currentPage( n:Number ):void
+        public function set currentPage( value:uint ):void
         {
             if ( _pager )
             {
-                _pager.seek(n) ;
+                _pager.seek( value ) ;
                 notifyUpdate( _pager.current() ) ;
             }
         }
@@ -270,9 +273,9 @@ package system.models.arrays
          */
         public function hasNext():Boolean
         {
-            return  _pager ? _pager.hasNext() : false ;
+            return _pager ? _pager.hasNext() : false ;
         }
-            
+        
         /**
          * Returns <code class="prettyprint">true</code> if the list has a previous page.
          * @return <code class="prettyprint">true</code> if the list has a previous page.
@@ -280,6 +283,15 @@ package system.models.arrays
         public function hasPrevious():Boolean
         {
             return _pager ? _pager.hasPrevious() : true ;
+        }
+        
+        /**
+         * Returns the current key of the internal pointer of the iterator (optional operation).
+         * @return the current key of the internal pointer of the iterator (optional operation).
+         */
+        public function key():* 
+        {
+            return _pager ? _pager.key() : null ;
         }
         
         /**
@@ -341,6 +353,21 @@ package system.models.arrays
         }
         
         /**
+         * Show the next page of the model.
+         */
+        public function next():*
+        {
+            if ( hasNext() )
+            {
+                return notifyUpdate( _pager.next() ) ;
+            }
+            else
+            {
+                return null ;
+            }
+        }
+        
+        /**
          * Emit a message when the model is initialized.
          */ 
         public function notifyInit():void
@@ -361,21 +388,6 @@ package system.models.arrays
                 _updated.emit( value , this ) ;
             }
             return value ;
-        }
-        
-        /**
-         * Show the next page of the model.
-         */
-        public function next():*
-        {
-            if ( hasNext() )
-            {
-                return notifyUpdate( _pager.next() ) ;
-            }
-            else
-            {
-                return null ;
-            }
         }
         
         /**
@@ -423,15 +435,21 @@ package system.models.arrays
          */
         public function refresh():void
         {
+            _pager = null ;
             if ( _array.length > 0)
             {
                 _pager = new PageByPageIterator ( _array , _count ) ;
+                run() ;
             }
-            else
-            {
-                _pager = null ;
-            }
-            run() ;
+        }
+        
+        /**
+         * Removes from the underlying model the last element returned by the iterator (optional operation).
+         * @throws IllegalOperationError The PageableArrayModel remove method is unsupported.
+         */
+        public function remove():* 
+        {
+            throw new IllegalOperationError("The PageableArrayModel remove method is unsupported.") ;
         }
         
         /**
@@ -462,6 +480,21 @@ package system.models.arrays
         }
         
         /**
+         * Seek the position of the pointer in the model but don't notify an update signal.
+         */
+        public function seek( position:* ):void 
+        {
+            if ( !isNaN( position ) )
+            {
+                _pager.seek( position ) ;
+            }
+            else
+            {
+                throw new ArgumentError( this + " seek failed, the position argument must be a Number.") ;
+            }
+        }
+        
+        /**
          * Returns a new Array representation of all elements in this model.
          * @return a new Array representation of all elements in this model.
          */
@@ -478,7 +511,7 @@ package system.models.arrays
         /**
          * @private
          */
-        protected var _count:Number = 1 ;
+        protected var _count:uint = 1 ;
         
         /**
          * @private
