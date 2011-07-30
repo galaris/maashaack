@@ -38,6 +38,7 @@ package system.models.arrays
     import system.data.OrderedIterator;
     import system.data.iterators.PageByPageIterator;
     import system.models.ChangeModel;
+    import system.process.Runnable;
     import system.signals.Signal;
     import system.signals.Signaler;
 
@@ -137,7 +138,7 @@ package system.models.arrays
      * </code>
      * </listing>
      */
-    public class PageableArrayModel extends ChangeModel implements OrderedIterator
+    public class PageableArrayModel extends ChangeModel implements OrderedIterator, Runnable
     {
         /**
          * Creates a new PageableArrayModel instance.
@@ -146,7 +147,7 @@ package system.models.arrays
          */
         public function PageableArrayModel( count:uint = 1 , factory:Array = null )
         {
-            _array       = factory || [] ;
+            _elements    = factory || [] ;
             _count       = count > 1 ? count : 1 ;
             _initialized = new Signal() ;
             _updated     = new Signal() ;
@@ -203,7 +204,7 @@ package system.models.arrays
          */
         public function get length():uint
         {
-            return _array.length ;
+            return _elements.length ;
         }
         
         /**
@@ -228,7 +229,7 @@ package system.models.arrays
          */    
         public override function clear():void
         {
-            _array = []  ;
+            _elements = []  ;
             super.clear() ;
         }
         
@@ -250,15 +251,15 @@ package system.models.arrays
          */
         public function getByKey( key:* , primaryKey:String = "id" ):Object
         {
-            if ( key == null || _array.length == 0 )
+            if ( key == null || _elements.length == 0 )
             {
                 return null ;
             }
-            var l:int = _array.length ;
+            var l:int = _elements.length ;
             var result:Object ;
             for( var i:int = 0 ; i<l ; i++ )
             {
-                 result = _array[i] ;
+                 result = _elements[i] ;
                  if ( primaryKey in result && result[primaryKey] == key )
                  {
                     return result ;
@@ -313,12 +314,12 @@ package system.models.arrays
                 vo = datas[i] ;
                 if ( supports( vo ) )
                 {
-                    _array.push( vo ) ;
+                    _elements.push( vo ) ;
                 }
             }
-            if ( _array.length > 0 )
+            if ( _elements.length > 0 )
             {
-                _pager = new PageByPageIterator ( _array , _count ) ;
+                _pager = new PageByPageIterator ( _elements , _count ) ;
             }
             else
             {
@@ -337,7 +338,7 @@ package system.models.arrays
          */
         public function iterator():Iterator
         {
-            return new PageByPageIterator( _array , _count ) ;
+            return new PageByPageIterator( _elements , _count ) ;
         }
         
         /**
@@ -395,8 +396,8 @@ package system.models.arrays
          */
         public function pageOf( value:Object ):uint
         {
-            var l:int = _array.length ;
-            var index:int = _array.indexOf( value ) ;
+            var l:int = _elements.length ;
+            var index:int = _elements.indexOf( value ) ;
             if ( l > 0 && index > -1 )
             {
                 var page:uint = 1 ;
@@ -431,14 +432,14 @@ package system.models.arrays
         }
         
         /**
-         * Refresh the model.
+         * Refresh the iterator of the model and run it.
          */
         public function refresh():void
         {
             _pager = null ;
-            if ( _array.length > 0)
+            if ( _elements.length > 0)
             {
-                _pager = new PageByPageIterator ( _array , _count ) ;
+                _pager = new PageByPageIterator ( _elements , _count ) ;
                 run() ;
             }
         }
@@ -465,15 +466,16 @@ package system.models.arrays
         
         /**
          * Run the model when is initialize. This method don't work if the model is locked.
-         * @see Lockable
+         * @see system.process.Lockable
+         * @see system.process.Runnable
          */
-        public function run(...arguments:Array):void
+        public function run( ...arguments:Array ):void
         {
             if ( isLocked() ) 
             {
                 return ;
             }
-            if ( _array.length > 0 )
+            if ( _elements.length > 0 )
             {
                 next() ;
             }
@@ -500,13 +502,13 @@ package system.models.arrays
          */
         public function toArray():Array
         {
-            return [].contact( _array ) ;
+            return [].contact( _elements ) ;
         }
         
         /**
          * @private
          */
-        protected var _array:Array ; 
+        protected var _elements:Array ; 
         
         /**
          * @private
