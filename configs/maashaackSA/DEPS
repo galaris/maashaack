@@ -11,6 +11,7 @@ deps = {
          Var("root") + "/libraries/v8benchmark"     : "ssh://git@github.com/zwetan/as3-v8benchmark.git",
          Var("root") + "/libraries/logd"            : Var("repo") + "/libraries/logd/trunk",
          Var("root") + "/libraries/httplib"         : Var("repo") + "/libraries/httplib/trunk",
+         Var("root") + "/libraries/mimelib"         : Var("repo") + "/libraries/mimelib/trunk",
          Var("root") + "/libraries/cgilib"          : Var("repo") + "/libraries/cgilib/trunk",
          Var("root") + "/platform/shell"            : Var("repo") + "/platform/shell/trunk",
          Var("root") + "/platform/avmglue"          : Var("repo") + "/platform/avmglue/trunk",
