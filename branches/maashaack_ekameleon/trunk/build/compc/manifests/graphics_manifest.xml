@@ -69,13 +69,32 @@
     <!-- graphics.display -->
     
     <component id="graphics.display:BigBitmap"               class="graphics.display.BigBitmap" />
+    
+    <component id="graphics.display:CENTIMETER_TO_INCH"      class="graphics.display.CENTIMETER_TO_INCH" />
+    <component id="graphics.display:CENTIMETER_TO_PIXEL"     class="graphics.display.CENTIMETER_TO_PIXEL" />
+    
     <component id="graphics.display:CropBitmapData"          class="graphics.display.CropBitmapData" />
     <component id="graphics.display:DisplayObjectContainers" class="graphics.display.DisplayObjectContainers" />
     <component id="graphics.display:DisplayObjects"          class="graphics.display.DisplayObjects" />
+    
+    <component id="graphics.display:INCH_TO_CENTIMETER"      class="graphics.display.INCH_TO_CENTIMETER" />
+    <component id="graphics.display:INCH_TO_PIXEL"           class="graphics.display.INCH_TO_PIXEL" />
+    
+    <component id="graphics.display:MobileDeviceType"        class="graphics.display.MobileDeviceType" />
+    
     <component id="graphics.display:Pattern"                 class="graphics.display.Pattern" />
     <component id="graphics.display:PerlinNoiseBitmapData"   class="graphics.display.PerlinNoiseBitmapData" />
+    
+    <component id="graphics.display:PIXEL_TO_CENTIMETER"     class="graphics.display.PIXEL_TO_CENTIMETER" />
+    <component id="graphics.display:PIXEL_TO_INCH"           class="graphics.display.PIXEL_TO_INCH" />
+    
     <component id="graphics.display:RadialPerlinBitmapData"  class="graphics.display.RadialPerlinBitmapData" />
     <component id="graphics.display:ReflectionBitmapData"    class="graphics.display.ReflectionBitmapData" />
+    
+    <component id="graphics.display:screenAspectRatio"       class="graphics.display.screenAspectRatio" />
+    <component id="graphics.display:screenOrientation"       class="graphics.display.screenOrientation" />
+    <component id="graphics.display:screenSize"              class="graphics.display.screenSize" />
+    
     <component id="graphics.display:ShaderLoader"            class="graphics.display.ShaderLoader" />
     <component id="graphics.display:TimelineInspector"       class="graphics.display.TimelineInspector" />
     <component id="graphics.display:TimelineIterator"        class="graphics.display.TimelineIterator" />
