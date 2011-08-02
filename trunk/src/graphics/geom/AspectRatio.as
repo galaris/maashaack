@@ -127,7 +127,7 @@ package graphics.geom
          */
         public override function set height( n:Number ):void
         {
-            _h   = int(n) ;
+            _h = int(n) ;
             if ( _lock )
             {
                 _w = int(_h * _aspW / _aspH ) ;
@@ -148,7 +148,7 @@ package graphics.geom
          */
         public override function set width( n:Number ):void
         {
-            _w   = int(n) ;
+            _w = int(n) ;
             if ( _lock )
             {
                 _h = int(_w * _aspH / _aspW ) ;
@@ -194,7 +194,7 @@ package graphics.geom
         /**
          * Returns <code class="prettyprint">true</code> if the object is locked.
          * @return <code class="prettyprint">true</code> if the object is locked.
-         */        
+         */
         public function isLocked():Boolean
         {
             return _lock ;
