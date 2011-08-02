@@ -37,7 +37,7 @@ package graphics.display
 {
     /**
      * Constants defining the default screen default orientation based on the screenAspectRatio of the application.
-     * @see ninjas.ninpo.display#screenAspectRatio
+     * @see graphics.display#screenAspectRatio
      * @see flash.display#StageAspectRatio
      */
     public const screenOrientation:String = screenAspectRatio.width > screenAspectRatio.height 

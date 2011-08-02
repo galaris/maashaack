@@ -35,6 +35,8 @@
 
 package graphics.display
 {
+    import flash.system.Capabilities;
+    
     /**
      * Constants defining the ratio to transform a pixel value to an inch value (<code>1/Capabilities.screenDPI</code>).
      */
