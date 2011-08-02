@@ -35,6 +35,8 @@
 
 package graphics.display
 {
+    import flash.system.Capabilities;
+    
     /**
      * Constants defining the ratio to transform a pixel value to a centimeter value (<code>2.54/Capabilities.screenDPI</code>).
      */
