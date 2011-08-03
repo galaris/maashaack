@@ -21,7 +21,7 @@
         <uri>http://code.google.com/p/core/2010</uri>
     </include-namespaces>
     
-    <target-player>10.0.0</target-player>
+    <target-player>10.2</target-player>
     
     <directory>false</directory>
     
