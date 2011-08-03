@@ -31,22 +31,43 @@
   and other provisions required by the LGPL or the GPL. If you do not delete
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
- */
-package core.functors
-{
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+*/
 
-    public class AllTests
+package core.functors 
+{
+    import buRRRn.ASTUce.framework.TestCase;
+
+    import core.dump;
+    
+    public class aopTest extends TestCase 
     {
-        public static function suite():ITest
+        public function aopTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.functors package tests");
+            super(name);
+        }
+        
+        public function testAop():void
+        {
+            var sequence:Array = [] ;
             
-            suite.addTestSuite( aopTest ) ;
-            suite.addTestSuite( bindTest ) ;
+            var begin:Function = function():void
+            {
+                sequence.push( "begin" ) ;
+            };
             
-            return suite;
+            var finish:Function = function():void
+            {
+                sequence.push( "finish" ) ;
+            };
+            
+            var action:Function = function():void
+            {
+                sequence.push( "action" ) ;
+            };
+            
+            aop( action , begin , finish )() ;
+            
+            assertEquals( '["begin","action","finish"]' , dump( sequence ) , "#1" ) ;
         }
     }
 }
