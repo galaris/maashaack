@@ -56,6 +56,7 @@
  * 
  * proxy = action.bind( scope , 4, 5, 6) ;
  * proxy( 1 , 2 , 3 ) ; //  scope :: [4,5,6,1,2,3]
+ * </pre>
  */
 if ( Function.prototype.bind == undefined )
 {
