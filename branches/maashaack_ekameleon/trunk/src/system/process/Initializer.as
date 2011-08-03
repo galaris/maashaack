@@ -40,12 +40,17 @@ package system.process
      * <p>You can override the initialize method of the object or extends the class.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import system.events.ActionEvent ;
+     * import system.process.Action ;
      * import system.process.Initializer ;
      * 
-     * var debug:Function = function( e:ActionEvent ):void
+     * var finish:Function = function( action:Action ):void
      * {
-     *     trace ( e.type ) ;
+     *     trace( "finish" ) ;
+     * }
+     * 
+     * var start:Function = function( action:Action ):void
+     * {
+     *     trace( "start" ) ;
      * }
      * 
      * var process:Initializer = new Initializer() ;
@@ -55,8 +60,8 @@ package system.process
      *     trace( "custom init process !" ) ;
      * }
      * 
-     * process.addEventListener( ActionEvent.START  , debug ) ;
-     * process.addEventListener( ActionEvent.FINISH , debug ) ;
+     * process.startIt.connect( start ) ;
+     * process.finishIt.connect( finish ) ;
      * 
      * process.run() ;
      * 
@@ -68,7 +73,7 @@ package system.process
     public dynamic class Initializer extends Task
     {
         /**
-         * Creates a new InitProcess instance.
+         * Creates a new Initializer instance.
          */
         public function Initializer() 
         {
