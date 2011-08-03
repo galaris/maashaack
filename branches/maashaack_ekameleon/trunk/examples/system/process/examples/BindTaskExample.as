@@ -36,18 +36,15 @@
 package examples
 {
     import system.process.Action;
-    import system.process.ActionProxy;
+    import system.process.BindTask;
     
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    /**
-     * Basic example to use the system.process.ActionProxy.
-     */
-    public class ActionProxyExample extends Sprite
+    public class BindTaskExample extends Sprite
     {
-        public function ActionProxyExample()
+        public function BindTaskExample()
         {
             var scope:Object = {} ;
             scope.toString = function():String 
@@ -60,7 +57,7 @@ package examples
                 trace ( this + " :: execute.") ;
             };
             
-            var proxy:ActionProxy = new ActionProxy(scope, execute) ;
+            var proxy:BindTask = new BindTask( execute , scope ) ;
             
             proxy.finishIt.connect( finish ) ;
             proxy.startIt.connect( start ) ;
