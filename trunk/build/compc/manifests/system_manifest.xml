@@ -367,11 +367,11 @@
     <component id="system.process:Action"                 class="system.process.Action"                 />
     <component id="system.process:ActionEventDispatcher"  class="system.process.ActionEventDispatcher"  />
     <component id="system.process:ActionLoader"           class="system.process.ActionLoader"           />
-    <component id="system.process:ActionProxy"            class="system.process.ActionProxy"            />
     <component id="system.process:ActionURLLoader"        class="system.process.ActionURLLoader"        />
     <component id="system.process:ActionURLStream"        class="system.process.ActionURLStream"        />
     <component id="system.process:Batch"                  class="system.process.Batch"                  />
     <component id="system.process:BatchTask"              class="system.process.BatchTask"              />
+    <component id="system.process:BindTask"               class="system.process.BindTask"               />
     <component id="system.process:Cache"                  class="system.process.Cache"                  />
     <component id="system.process:Chain"                  class="system.process.Chain"                  />
     <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
