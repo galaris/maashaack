@@ -38,6 +38,11 @@
     <component id="core.chars:isUnicode"    class="core.chars.isUnicode"    />
     <component id="core.chars:isUpper"      class="core.chars.isUpper"      />
     
+    <!-- core.functors -->
+    
+    <component id="core.functors:aop"  class="core.functors.aop"  />
+    <component id="core.functors:bind" class="core.functors.bind" />
+    
     <!-- core.html -->
     
     <component id="core.html:anchor"    class="core.html.anchor"    />
