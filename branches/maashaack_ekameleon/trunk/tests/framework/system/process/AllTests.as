@@ -56,11 +56,11 @@ package system.process
                 suite.addTestSuite( ActionEntryTest ) ;
                 suite.addTestSuite( ActionEventDispatcherTest ) ;
                 suite.addTestSuite( ActionLoaderTest ) ;
-                suite.addTestSuite( ActionProxyTest ) ;
                 suite.addTestSuite( ActionTest ) ;
                 suite.addTestSuite( ActionURLLoaderTest ) ;
                 suite.addTestSuite( BatchTest ) ;
                 suite.addTestSuite( BatchTaskTest ) ;
+                suite.addTestSuite( BindTaskTest ) ;
                 suite.addTestSuite( CacheTest ) ;
                 suite.addTestSuite( ChainTest ) ;
                 suite.addTestSuite( CoreActionTest ) ;
