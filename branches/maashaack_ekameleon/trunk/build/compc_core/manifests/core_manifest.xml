@@ -12,8 +12,8 @@
     <component id="core:dumpObject" class="core.dumpObject" />
     <component id="core:dumpString" class="core.dumpString" />
     
-    <component id="core:uri"     class="core.uri"     />
-    <component id="core:version" class="core.version" />
+    <component id="core:uri"     class="core.uri"           />
+    <component id="core:version" class="core.version"       />
     
     <!-- core.arrays -->
     
