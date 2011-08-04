@@ -361,35 +361,36 @@
     
     <component id="system.process.caches:Attribute" class="system.process.caches.Attribute" />
     <component id="system.process.caches:Method"    class="system.process.caches.Method"    />
+    <component id="system.process.caches:Property"  class="system.process.caches.Property"  />
     
     <!-- system.process -->
     
-    <component id="system.process:Action"                 class="system.process.Action"                 />
-    <component id="system.process:ActionEventDispatcher"  class="system.process.ActionEventDispatcher"  />
-    <component id="system.process:ActionLoader"           class="system.process.ActionLoader"           />
-    <component id="system.process:ActionURLLoader"        class="system.process.ActionURLLoader"        />
-    <component id="system.process:ActionURLStream"        class="system.process.ActionURLStream"        />
-    <component id="system.process:Batch"                  class="system.process.Batch"                  />
-    <component id="system.process:BatchTask"              class="system.process.BatchTask"              />
-    <component id="system.process:BindTask"               class="system.process.BindTask"               />
-    <component id="system.process:Cache"                  class="system.process.Cache"                  />
-    <component id="system.process:Chain"                  class="system.process.Chain"                  />
-    <component id="system.process:CoreAction"             class="system.process.CoreAction"             />
-    <component id="system.process:CoreActionLoader"       class="system.process.CoreActionLoader"       />
-    <component id="system.process:CountDown"              class="system.process.CountDown"              />
-    <component id="system.process:DelayedTask"            class="system.process.DelayedTask"            />
-    <component id="system.process:Initializer"            class="system.process.Initializer"            />
-    <component id="system.process:Lockable"               class="system.process.Lockable"               />
-    <component id="system.process:Pause"                  class="system.process.Pause"                  />
-    <component id="system.process:Priority"               class="system.process.Priority"               />
-    <component id="system.process:Resetable"              class="system.process.Resetable"              />
-    <component id="system.process:Runnable"               class="system.process.Runnable"               />
-    <component id="system.process:Startable"              class="system.process.Startable"              />
-    <component id="system.process:Stoppable"              class="system.process.Stoppable"              />
-    <component id="system.process:Task"                   class="system.process.Task"                   />
-    <component id="system.process:TaskGroup"              class="system.process.TaskGroup"              />
-    <component id="system.process:TaskPhase"              class="system.process.TaskPhase"              />
-    <component id="system.process:TimeoutPolicy"          class="system.process.TimeoutPolicy"          />
+    <component id="system.process:Action"              class="system.process.Action"               />
+    <component id="system.process:ActionLoader"        class="system.process.ActionLoader"         />
+    <component id="system.process:ActionURLLoader"     class="system.process.ActionURLLoader"      />
+    <component id="system.process:ActionURLStream"     class="system.process.ActionURLStream"      />
+    <component id="system.process:Batch"               class="system.process.Batch"                />
+    <component id="system.process:BatchTask"           class="system.process.BatchTask"            />
+    <component id="system.process:BindTask"            class="system.process.BindTask"             />
+    <component id="system.process:Cache"               class="system.process.Cache"                />
+    <component id="system.process:Chain"               class="system.process.Chain"                />
+    <component id="system.process:CoreAction"          class="system.process.CoreAction"           />
+    <component id="system.process:CoreActionLoader"    class="system.process.CoreActionLoader"     />
+    <component id="system.process:CountDown"           class="system.process.CountDown"            />
+    <component id="system.process:DelayedTask"         class="system.process.DelayedTask"          />
+    <component id="system.process:EventDispatcherTask" class="system.process.EventDispatcherTask"  />
+    <component id="system.process:Initializer"         class="system.process.Initializer"          />
+    <component id="system.process:Lockable"            class="system.process.Lockable"             />
+    <component id="system.process:Pause"               class="system.process.Pause"                />
+    <component id="system.process:Priority"            class="system.process.Priority"             />
+    <component id="system.process:Resetable"           class="system.process.Resetable"            />
+    <component id="system.process:Runnable"            class="system.process.Runnable"             />
+    <component id="system.process:Startable"           class="system.process.Startable"            />
+    <component id="system.process:Stoppable"           class="system.process.Stoppable"            />
+    <component id="system.process:Task"                class="system.process.Task"                 />
+    <component id="system.process:TaskGroup"           class="system.process.TaskGroup"            />
+    <component id="system.process:TaskPhase"           class="system.process.TaskPhase"            />
+    <component id="system.process:TimeoutPolicy"       class="system.process.TimeoutPolicy"        />
     
     <!-- system.reflection -->
     
