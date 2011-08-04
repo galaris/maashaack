@@ -35,9 +35,11 @@
 
 package examples
 {
+    import core.dump;
+
     import system.process.Action;
     import system.process.BindTask;
-    
+
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
@@ -52,12 +54,12 @@ package examples
                 return "scope" ;
             };
             
-            var execute:Function = function ():void 
+            var execute:Function = function ( ...arguments:Array ):void 
             {
-                trace ( this + " :: execute.") ;
+                trace ( this + " execute " + dump(arguments) ) ;
             };
             
-            var proxy:BindTask = new BindTask( execute , scope ) ;
+            var proxy:BindTask = new BindTask( execute , scope , "hello world" ) ;
             
             proxy.finishIt.connect( finish ) ;
             proxy.startIt.connect( start ) ;
