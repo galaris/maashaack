@@ -47,11 +47,11 @@ package system.process
             super(name);
         }
         
-        public var action:ActionEventDispatcher ;
+        public var action:EventDispatcherTask ;
         
         public function setUp():void
         {
-            action = new ActionEventDispatcher() ;
+            action = new EventDispatcherTask() ;
         }
         
         public function tearDown():void
@@ -72,7 +72,7 @@ package system.process
         {
             var d:EventDispatcher = new EventDispatcher() ;
             var e:Event           = new Event("test") ;
-            action                = new ActionEventDispatcher( d , e ) ;
+            action                = new EventDispatcherTask( d , e ) ;
             assertNotNull ( action                , "#01" ) ;
             assertEquals  ( d , action.dispatcher , "#02" ) ;
             assertEquals  ( e , action.event      , "#03" ) ;
@@ -80,7 +80,7 @@ package system.process
         
         public function testInherit():void
         {
-            action = new ActionEventDispatcher() ;
+            action = new EventDispatcherTask() ;
             assertTrue ( action is Task , "ActionEventDispatcher must extends the Task class.") ;
         }
         
@@ -88,7 +88,7 @@ package system.process
         
         public function testClone():void
         {
-            var clone:ActionEventDispatcher = action.clone() as  ActionEventDispatcher;
+            var clone:EventDispatcherTask = action.clone() as  EventDispatcherTask;
             assertNotNull ( clone  , "#01" ) ;
         }
         
