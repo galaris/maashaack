@@ -48,15 +48,18 @@ package examples
     {
         public function EventDispatcherTaskExample()
         {
+            ////////
+            
             var dispatcher:EventDispatcher = new EventDispatcher() ;
             var event:Event                = new Event("action") ;
             
+            ////////
+            
             dispatcher.addEventListener( "action" , debug ) ;
             
+            ////////
+            
             var process:EventDispatcherTask = new EventDispatcherTask( dispatcher , event ) ;
-            
-            
-            process.dispatcher.addEventListener( "action" , debug ) ;
             
             process.finishIt.connect( finish ) ;
             process.startIt.connect( start ) ;
