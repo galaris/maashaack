@@ -49,7 +49,7 @@ package examples
         public function EventDispatcherTaskExample()
         {
             var dispatcher:EventDispatcher = new EventDispatcher() ;
-            var event:Event                = new Event("action") ; // register an Event in the process.
+            var event:Event                = new Event("action") ;
             
             dispatcher.addEventListener( "action" , debug ) ;
             
