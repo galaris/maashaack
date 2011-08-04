@@ -39,7 +39,7 @@ package system.process
     import flash.events.EventDispatcher;
     
     /**
-     * A process who dispatch events in the global event flow or locally.
+     * A process who dispatch events with a specific EventDispatcher object.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * package examples
