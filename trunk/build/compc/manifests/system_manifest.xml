@@ -303,6 +303,7 @@
     <component id="system.logging.targets:SocketTarget"        class="system.logging.targets.SocketTarget" />
     <component id="system.logging.targets:SOSTarget"           class="system.logging.targets.SOSTarget" />
     <component id="system.logging.targets:TextFieldTarget"     class="system.logging.targets.TextFieldTarget" />
+    <component id="system.logging.targets:TraceTarget"         class="system.logging.targets.TraceTarget" />
     
     <!-- system.logic -->
     
