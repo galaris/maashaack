@@ -120,7 +120,7 @@ As a general rule we will always use upper case.
 
 For code targeting the Flash Player and AIR current version.
 
-If for some reasons we wanted to support a particular version<br>
+If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::FP_{major}_{minor}`.
 
 for ex: *API::FP_9_0*
@@ -130,7 +130,7 @@ for ex: *API::FP_9_0*
 
 For code targeting AIR but not supporting the Flash Player.
 
-If for some reasons we wanted to support a particular version<br>
+If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::AIR_{major}_{minor}`.
 
 for ex: *API::AIR_1_5*
@@ -138,9 +138,9 @@ for ex: *API::AIR_1_5*
 
 === API::REDTAMARIN ===
 
-For code targeting RedTamarin current version.
+For code targeting [http://code.google.com/p/redtamarin/ redtamarin] current version.
 
-If for some reasons we wanted to support a particular version<br>
+If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::RT_{major}_{minor}_{build}`.
 
 for ex: *API::RT_0_3_1*
@@ -148,7 +148,8 @@ for ex: *API::RT_0_3_1*
 
 === API::MOCK ===
 
-For code providing signatures but not real implementations.
+For code providing signatures but not real implementations.<br>
+see [avmglue].
 
 
 === LOG::P ===
