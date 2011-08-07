@@ -35,23 +35,41 @@
 
 package core.vectors
 {
-    import flash.system.ApplicationDomain;
     import flash.utils.getQualifiedClassName;
     
     /**
      * Returns the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
      * @return the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
      */
-    public const getVectorDefinition:Function = function( clazz:Class , applicationDomain:ApplicationDomain = null ):Class
+    API::FLASH
+    public const getVectorDefinition:Function = function( clazz:Class , domain:* = null ):Class
     {
         if ( clazz == null )
         {
-            return null ;
+            return null;
         }
-        if( applicationDomain == null )
+        
+        var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
+        if( domain == null )
         {
-            applicationDomain = ApplicationDomain.currentDomain ;
+            domain = CApplicationDomain.currentDomain;
         }
-        return applicationDomain.getDefinition( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" ) as Class ;
-    };
+        return domain.getDefinition( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" ) as Class;
+    }
+    
+    API::REDTAMARIN
+    public const getVectorDefinition:Function = function( clazz:Class , domain:* = null ):Class
+    {
+        if ( clazz == null )
+        {
+            return null;
+        }
+        
+        var CDomain:Class = getClassByName( "avmplus.Domain" );
+        if( domain == null )
+        {
+            domain = CDomain.currentDomain;
+        }
+        return domain.getClass( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" );
+    }
 }
