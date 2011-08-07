@@ -41,6 +41,7 @@ package
      * The basic framework Library to be included in the SWC.
      * <p><b>Note:</b> This class is not a component, it's just a shim that allow to declare the SWC manifest and associate an icon file.</p>
      */
+    [ExcludeClass]
     [IconFile("core.png")]
     public class Library extends Sprite
     {
