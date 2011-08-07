@@ -55,14 +55,14 @@ package core.maths
      * </pre>
      * @param n the number to defined this sign.
      * @return 1 if the value is positive or -1.
-     * @throws IllegalOperationError if the passed-in value is NaN.
+     * @throws RangeError if the passed-in value is NaN.
      */
     public const sign:Function = function( n:Number ):Number 
     {
         if( isNaN( n ) ) 
         {
-            throw new RangeError( "sign failed, the passed-in value not must be NaN." ) ;
+            throw new RangeError( "core.maths.sign failed, the passed-in value not must be NaN and must be a Number between Math.MAX_VALUE and Math.MIN_VALUE." ) ;
         }
         return ( n < 0 ) ? - 1 : 1 ;
-    }
+    };
 }
