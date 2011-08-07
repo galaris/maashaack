@@ -23,6 +23,24 @@
         
         <strict>true</strict>
         <optimize>true</optimize>
+        
+       <define append="true"> 
+           <name>CONFIG::release</name>
+           <value>true</value> 
+       </define> 
+       <define append="true"> 
+           <name>CONFIG::debugging</name> 
+           <value>false</value> 
+       </define>
+       <define append="true"> 
+           <name>API::FLASH</name> 
+           <value>true</value> 
+       </define>
+       <define append="true"> 
+           <name>API::REDTAMARIN</name> 
+           <value>false</value> 
+       </define>
+       
     </compiler>
     
     <include-namespaces>
