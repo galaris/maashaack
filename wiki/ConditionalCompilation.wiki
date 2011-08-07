@@ -158,7 +158,7 @@ For logging isolation/inclusion.<br>
 see [logd].
 
 
-== deprecated ==
+== Deprecated ==
 
 You may still find some of those in the source code, please fill a bug.
 
