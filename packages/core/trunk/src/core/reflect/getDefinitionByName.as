@@ -35,7 +35,6 @@
 
 package core.reflect
 {
-    import flash.system.ApplicationDomain;
     
     /**
      * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
@@ -46,13 +45,27 @@ package core.reflect
      * 
      * @return the definition defines by the specific name.
      */
-    public const getDefinitionByName:Function = function( name:String, domain:ApplicationDomain = null ):Object
+    API::FLASH
+    public const getDefinitionByName:Function = function( name:String, domain:* = null ):Object
     {
+        var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
         if( !domain )
         {
-            domain = ApplicationDomain.currentDomain;
+            domain = CApplicationDomain.currentDomain;
         }
         
         return domain.getDefinition( name );
-    };
+    }
+    
+    API::REDTAMARIN
+    public const getDefinitionByName:Function = function( name:String, domain:* = null ):Object
+    {
+        var CDomain:Class = getClassByName( "avmplus.Domain" );
+        if( !domain )
+        {
+            domain = CDomain.currentDomain;
+        }
+        
+        return domain.getDefinition( name );
+    }
 }
