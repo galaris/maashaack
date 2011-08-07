@@ -179,14 +179,14 @@ TAMARIN::exclude
 }}}
 
 
-=== TAMARIN::alternate ===
+=== ~~TAMARIN::alternate~~ ===
 
 Allows to provide an alternative for Tamarin/redtamarin only.
 
 *TAMARIN::alternate* will be replaced by *API::RT_0_2_5* etc.
 
 
-=== API versioning ===
+=== ~~API versioning~~ ===
 
 Based on [http://hg.mozilla.org/tamarin-redux/raw-file/d138e8c6e0cf/doc/apiversioning.html API Versioning in AVM] from the Tamarin project, we will use the same naming convention.
 
