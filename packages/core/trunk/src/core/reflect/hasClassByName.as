@@ -35,8 +35,7 @@
 
 package core.reflect
 {
-    import flash.system.ApplicationDomain;
-    
+   
     /**
      * Returns a boolean telling if the class exists from a string name.
      * 
@@ -45,7 +44,8 @@ package core.reflect
      * 
      * @return a boolean telling if the class exists from a string name.
      */
-    public const hasClassByName:Function = function( name:String , domain:ApplicationDomain = null ):Boolean
+    API::FLASH
+    public const hasClassByName:Function = function( name:String , domain:* = null ):Boolean
     {
         try
         {
@@ -56,5 +56,19 @@ package core.reflect
             return false;
         }
         return true;
-    };
+    }
+    
+    API::REDTAMARIN
+    public const hasClassByName:Function = function( name:String ):Boolean
+    {
+        try
+        {
+            var c:Class = getClassByName( name );
+        }
+        catch( e:Error )
+        {
+            return false;
+        }
+        return true;
+    }
 }
