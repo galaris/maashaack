@@ -35,19 +35,18 @@
 
 package core.vectors
 {
-    import flash.system.ApplicationDomain;
     
     /**
      * Creates a new dynamic Vector object with the specified arguments.
      * @return a new dynamic Vector object with the specified arguments.
      */
-    public const create:Function = function( clazz:Class, length:uint = 0 , fixed:Boolean = false , applicationDomain:ApplicationDomain = null ):*
+    public const create:Function = function( clazz:Class, length:uint = 0 , fixed:Boolean = false , domain:* = null ):*
     {
-        var def:Class = getVectorDefinition( clazz , applicationDomain ) as Class ;
+        var def:Class = getVectorDefinition( clazz , domain ) as Class ;
         if ( def == null )
         {
-            return null ;
+            return null;
         }
-        return new def( length , fixed ) ;
-    };
+        return new def( length , fixed );
+    }
 }
