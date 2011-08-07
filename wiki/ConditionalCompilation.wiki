@@ -33,7 +33,7 @@ for Flex Builder
  2. ActionScript Compiler
  3. in Additional compiler arguments
 
- -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false
+ -define+=API::FLASH,true -define+=API::REDTAMARIN,false
 
 }}}
 
@@ -44,8 +44,8 @@ for mxmlc, compc
             include-classes="foobar.as"
             target-player="9.0.45"
         >
-            <define name="TAMARIN::exclude" value="true" />
-            <define name="TAMARIN::alternate" value="false" />
+            <define name="API::FLASH" value="true" />
+            <define name="API::REDTAMARIN" value="false" />
             <strict>true</strict>
             <optimize>true</optimize>
 
@@ -54,8 +54,8 @@ for mxmlc, compc
 for ASDoc
 {{{
         <exec executable="${asdoc.exe}">
-        	<arg line="-define+=TAMARIN::exclude,true" />
-        	<arg line="-define+=TAMARIN::alternate,false" />
+        	<arg line="-define+=API::FLASH,true" />
+        	<arg line="-define+=API::REDTAMARIN,false" />
 }}}
 
 for ASC
@@ -63,10 +63,103 @@ for ASC
         <exec executable="java">
             <arg line="-jar ${redshell.asc}" />
             <arg line="-AS3 -strict -md -optimize" />
-        	<arg line="-config TAMARIN::exclude=false -config TAMARIN::alternate=true" />
+            <arg line="-config API::FLASH=false -config API::REDTAMARIN=true" />
 }}}
 
+you can also define them in an external config
+{{{
+my-config.xml
+----
+<?xml version="1.0"?>
+<flex-config>
+    <compiler>
+        <!--
+        When you update the defines you need to do a Project Clean... 
+        for the the compiler to take into account the changes
+        -->
+        <define append="true"> 
+            <name>API::FLASH</name> 
+            <value>true</value> 
+        </define> 
+        <define append="true"> 
+            <name>API::REDTAMARIN</name> 
+            <value>false</value> 
+        </define> 
+   </compiler>
+</flex-config>
+----
+}}}
+and then in Flex Builder
+{{{
+ 1. Project properties
+ 2. ActionScript Compiler
+ 3. in Additional compiler arguments
+
+-load-config my-config.xml
+
+}}}
+and then for mxmlc, compc
+{{{
+        <compc
+            output="foobar.swc"
+            include-classes="foobar.as"
+            target-player="9.0.45"
+            load-config="my-config.xml"
+        >
+            <strict>true</strict>
+            <optimize>true</optimize>
+
+}}}
+
+
 == Options ==
+
+As a general rule we will always use upper case.
+
+=== API::FLASH ===
+
+For code targeting the Flash Player and AIR current version.
+
+If for some reasons we wanted to support a particular version<br>
+we would use `API::FP_{major}_{minor}`.
+
+for ex: *API::FP_9_0*
+
+
+=== API::AIR ===
+
+For code targeting AIR but not supporting the Flash Player.
+
+If for some reasons we wanted to support a particular version<br>
+we would use `API::AIR_{major}_{minor}`.
+
+for ex: *API::AIR_1_5*
+
+
+=== API::REDTAMARIN ===
+
+For code targeting RedTamarin current version.
+
+If for some reasons we wanted to support a particular version<br>
+we would use `API::RT_{major}_{minor}_{build}`.
+
+for ex: *API::RT_0_3_1*
+
+
+=== API::MOCK ===
+
+For code providing signatures but not real implementations.
+
+
+=== LOG::P ===
+
+For logging isolation/inclusion.<br>
+see [logd].
+
+
+== deprecated ==
+
+You may still find some of those in the source code, please fill a bug.
 
 === TAMARIN::exclude ===
 
@@ -85,12 +178,12 @@ TAMARIN::exclude
 }}}
 
 
-
 === TAMARIN::alternate ===
 
 Allows to provide an alternative for Tamarin/redtamarin only.
 
 *TAMARIN::alternate* will be replaced by *API::RT_0_2_5* etc.
+
 
 === API versioning ===
 
