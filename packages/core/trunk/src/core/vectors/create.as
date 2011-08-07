@@ -48,5 +48,5 @@ package core.vectors
             return null;
         }
         return new def( length , fixed );
-    }
+    };
 }
