@@ -66,6 +66,6 @@ package core.reflect
             domain = CDomain.currentDomain;
         }
         
-        return domain.getDefinition( name );
+        return domain.getClass( name ) as Object;
     }
 }
