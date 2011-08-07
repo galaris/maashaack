@@ -35,7 +35,6 @@
 
 package core.reflect
 {
-   
     /**
      * Returns a boolean telling if the class exists from a string name.
      * 
@@ -55,6 +54,5 @@ package core.reflect
             return false;
         }
         return true;
-    }
-    
+    };
 }

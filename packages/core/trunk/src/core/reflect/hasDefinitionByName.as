@@ -72,7 +72,5 @@ package core.reflect
             if( definition ) { return true; }
             return false;
         }
-
-    }
-    
+    };
 }

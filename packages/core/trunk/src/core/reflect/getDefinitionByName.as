@@ -35,7 +35,6 @@
 
 package core.reflect
 {
-    
     /**
      * Returns the instance of a public definition in the <code>ApplicationDomain</code>.
      * <p>The definition can be a class, namespace, function or object.</p>
@@ -68,7 +67,5 @@ package core.reflect
             
             return domain.getClass( name ) as Object;
         }
-
-    }
-
+    };
 }
