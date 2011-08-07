@@ -35,6 +35,7 @@
 
 package core.vectors
 {
+    import core.reflect.*;
     import flash.utils.getQualifiedClassName;
     
     /**
