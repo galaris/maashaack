@@ -45,30 +45,34 @@ package core.reflect
      * 
      * @return A boolean to indicates if the specific definition exist.
      */
-    API::FLASH
+    
     public const hasDefinitionByName:Function = function( name:String, domain:* = null ):Boolean
     {
-        var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
-        if( !domain )
+        API::FLASH
         {
-            domain = CApplicationDomain.currentDomain;
+            var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
+            if( !domain )
+            {
+                domain = CApplicationDomain.currentDomain;
+            }
+            
+            return domain.hasDefinition( name );
         }
         
-        return domain.hasDefinition( name );
+        API::REDTAMARIN
+        {
+            var CDomain:Class = getClassByName( "avmplus.Domain" );
+            if( !domain )
+            {
+                domain = CDomain.currentDomain;
+            }
+            
+            var definition:Object = domain.getClass( name ) as Object;
+            
+            if( definition ) { return true; }
+            return false;
+        }
+
     }
     
-    API::REDTAMARIN
-    public const hasDefinitionByName:Function = function( name:String, domain:* = null ):Boolean
-    {
-        var CDomain:Class = getClassByName( "avmplus.Domain" );
-        if( !domain )
-        {
-            domain = CDomain.currentDomain;
-        }
-        
-        var definition:Object = domain.getClass( name ) as Object;
-        
-        if( definition ) { return true; }
-        return false;
-    }
 }

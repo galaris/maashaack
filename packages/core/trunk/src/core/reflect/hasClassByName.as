@@ -44,7 +44,6 @@ package core.reflect
      * 
      * @return a boolean telling if the class exists from a string name.
      */
-    API::FLASH
     public const hasClassByName:Function = function( name:String , domain:* = null ):Boolean
     {
         try
@@ -58,17 +57,4 @@ package core.reflect
         return true;
     }
     
-    API::REDTAMARIN
-    public const hasClassByName:Function = function( name:String ):Boolean
-    {
-        try
-        {
-            var c:Class = getClassByName( name );
-        }
-        catch( e:Error )
-        {
-            return false;
-        }
-        return true;
-    }
 }

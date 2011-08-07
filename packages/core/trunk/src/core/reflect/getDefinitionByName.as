@@ -45,27 +45,30 @@ package core.reflect
      * 
      * @return the definition defines by the specific name.
      */
-    API::FLASH
     public const getDefinitionByName:Function = function( name:String, domain:* = null ):Object
     {
-        var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
-        if( !domain )
+        API::FLASH
         {
-            domain = CApplicationDomain.currentDomain;
+            var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
+            if( !domain )
+            {
+                domain = CApplicationDomain.currentDomain;
+            }
+            
+            return domain.getDefinition( name );
         }
         
-        return domain.getDefinition( name );
-    }
-    
-    API::REDTAMARIN
-    public const getDefinitionByName:Function = function( name:String, domain:* = null ):Object
-    {
-        var CDomain:Class = getClassByName( "avmplus.Domain" );
-        if( !domain )
+        API::REDTAMARIN
         {
-            domain = CDomain.currentDomain;
+            var CDomain:Class = getClassByName( "avmplus.Domain" );
+            if( !domain )
+            {
+                domain = CDomain.currentDomain;
+            }
+            
+            return domain.getClass( name ) as Object;
         }
-        
-        return domain.getClass( name ) as Object;
+
     }
+
 }
