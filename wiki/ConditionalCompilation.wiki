@@ -162,7 +162,7 @@ see [logd].
 
 You may still find some of those in the source code, please fill a bug.
 
-=== TAMARIN::exclude ===
+=== ~~TAMARIN::exclude~~ ===
 
 Excludes block of code when compiling for Tamarin/redtamarin
 
