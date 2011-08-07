@@ -42,7 +42,6 @@ package core.vectors
      * Returns the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
      * @return the definition of the Vector defines with the specified class. A specific ApplicationDomain can be specified.
      */
-    API::FLASH
     public const getVectorDefinition:Function = function( clazz:Class , domain:* = null ):Class
     {
         if ( clazz == null )
@@ -50,27 +49,25 @@ package core.vectors
             return null;
         }
         
-        var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
-        if( domain == null )
+        API::FLASH
         {
-            domain = CApplicationDomain.currentDomain;
+            var CApplicationDomain:Class = getClassByName( "flash.system.ApplicationDomain" );
+            if( domain == null )
+            {
+                domain = CApplicationDomain.currentDomain;
+            }
+            return domain.getDefinition( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" ) as Class;
         }
-        return domain.getDefinition( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" ) as Class;
-    }
+        
+        API::REDTAMARIN
+        {
+            var CDomain:Class = getClassByName( "avmplus.Domain" );
+            if( domain == null )
+            {
+                domain = CDomain.currentDomain;
+            }
+            return domain.getClass( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" );
+        }
+    };
     
-    API::REDTAMARIN
-    public const getVectorDefinition:Function = function( clazz:Class , domain:* = null ):Class
-    {
-        if ( clazz == null )
-        {
-            return null;
-        }
-        
-        var CDomain:Class = getClassByName( "avmplus.Domain" );
-        if( domain == null )
-        {
-            domain = CDomain.currentDomain;
-        }
-        return domain.getClass( "__AS3__.vec::Vector.<" + getQualifiedClassName( clazz ) + ">" );
-    }
 }
