@@ -35,7 +35,6 @@
 
 package core.maths
 {
-    import flash.errors.IllegalOperationError;
     
     /**
      * Returns 1 if the value is positive or -1.
@@ -60,10 +59,10 @@ package core.maths
      */
     public const sign:Function = function( n:Number ):Number 
     {
-        if (isNaN( n )) 
+        if( isNaN( n ) ) 
         {
-            throw new IllegalOperationError( "sign failed, the passed-in value not must be NaN." ) ;
+            throw new RangeError( "sign failed, the passed-in value not must be NaN." ) ;
         }
         return ( n < 0 ) ? - 1 : 1 ;
-    };
+    }
 }
