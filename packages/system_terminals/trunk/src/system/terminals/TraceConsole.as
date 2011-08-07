@@ -110,7 +110,15 @@ package system.terminals
         
         public final function readLine():String
         {
-            return "";
+            API::FLASH
+            {
+                return "";
+            }
+            
+            API::REDTAMARIN
+            {
+                return readLine();
+            }
         }
         
         public final function write( ...messages ):void
