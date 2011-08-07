@@ -39,7 +39,7 @@ package system.terminals
     * The TraceConsole is the default console based on the <code>trace()</code> function.
     * 
     * <p>
-    * You can not <code>read()</code> or <code>readLine()</code>.
+    * You can not <code>read()</code> or <code>readLine()</code> with Flash/AIR.
     * </p>
     */
     public final class TraceConsole implements InteractiveConsole
