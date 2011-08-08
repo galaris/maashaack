@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="maashaack reference" width="800" height="600" scrolling="true" />
+  <ModulePrefs title="maashaack reference" width="100%" height="600" scrolling="true" />
   <Content type="url" href="http://ekameleon.net/maashaack/docs/" />
 </Module>
