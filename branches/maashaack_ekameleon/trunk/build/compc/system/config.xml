@@ -47,7 +47,7 @@
     
     <metadata>
         <title>The AS3 system.swc library</title>
-        <description>All classes of the system package in the Maashaack framework (core/system/graphics/libraries)</description>
+        <description>All classes of the system package in the Maashaack framework.</description>
         <publisher>http://code.google.com/p/maashaack</publisher>
         <creator>Marc ALCARAZ (aka eKameleon) ekameleon@gmail.com</creator>
         <language>EN</language>
