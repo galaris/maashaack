@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<flex-config>
+    <compiler>
+        <source-path>
+            <path-element>../../../src/</path-element>
+        </source-path>
+        
+        <namespaces>
+            <namespace>
+                <uri>http://code.google.com/p/core/2011</uri>
+                <manifest>../manifests/core_manifest.xml</manifest>
+            </namespace>
+            <namespace>
+                <uri>http://code.google.com/p/system/2011</uri>
+                <manifest>../manifests/system_manifest.xml</manifest>
+            </namespace>
+            <namespace>
+                <uri>http://code.google.com/p/graphics/2011</uri>
+                <manifest>../manifests/graphics_manifest.xml</manifest>
+            </namespace>
+        </namespaces>
+        
+        <strict>true</strict>
+        <optimize>true</optimize>
+        
+       <define append="true"> 
+           <name>CONFIG::release</name>
+           <value>true</value> 
+       </define> 
+       <define append="true"> 
+           <name>CONFIG::debugging</name> 
+           <value>false</value> 
+       </define>
+       <define append="true"> 
+           <name>API::FLASH</name> 
+           <value>true</value> 
+       </define>
+       <define append="true"> 
+           <name>API::REDTAMARIN</name> 
+           <value>false</value> 
+       </define>
+       
+    </compiler>
+    
+    <include-namespaces>
+        <uri>http://code.google.com/p/core/2011</uri>
+        <uri>http://code.google.com/p/system/2011</uri>
+        <uri>http://code.google.com/p/graphics/2011</uri>
+    </include-namespaces>
+    
+    <target-player>10.2</target-player>
+    
+    <directory>false</directory>
+    
+    <output>../../../libs/maashaack.swc</output>
+    
+    <metadata>
+        <title>The AS3 maashaack.swc library</title>
+        <description>All classes of the Maashaack framework (core/system/graphics/libraries)</description>
+        <publisher>http://code.google.com/p/maashaack</publisher>
+        <creator>Marc ALCARAZ (aka eKameleon) ekameleon@gmail.com</creator>
+        <language>EN</language>
+    </metadata>
+
+</flex-config>
