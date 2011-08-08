@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,66 +35,33 @@
 
 package examples
 {
-    import system.process.Action;
-    import system.process.BatchTask;
-    import system.process.Pause;
-
+    import examples.process.cache.Speaker;
+    import examples.process.cache.SpeakerCache;
+    import examples.process.cache.SpeakerUser;
+    
+    import system.process.Cache;
+    
     import flash.display.Sprite;
     
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
     
-    public class BatchTaskExample extends Sprite
+    public class CacheExample extends Sprite
     {
-        public function BatchTaskExample()
+        public function CacheExample()
         {
-            batch = new BatchTask() ;
+            var speaker:Speaker = new SpeakerUser() ;
+            var cache:Speaker   = new SpeakerCache( speaker ) ;
             
-            // batch.mode = BatchTask.TRANSIENT ;
+            speaker.name = "John" ;
+            speaker.sayHello( "Jack" ) ;
+            speaker.sayGoodBye( "Jack" ) ;
             
-            batch.changeIt.connect( change ) ;
-            batch.finishIt.connect( finish ) ;
-            batch.progressIt.connect( progress ) ;
-            batch.startIt.connect( start ) ;
+            // flush the cache and initialize the speaker user
             
-            batch.addAction( new Pause(  2 , true ) , 0 , true ) ;
-            batch.addAction( new Pause( 10 , true ) ) ;
-            batch.addAction( new Pause(  1 , true ) , 0 , true ) ;
-            batch.addAction( new Pause(  5 , true ) ) ;
-            batch.addAction( new Pause(  7 , true ) , 0 , true ) ;
-            batch.addAction( new Pause(  2 , true ) ) ;
-            
-            batch.run() ;
-            
-            // start
-            // progress : [Pause duration:1s]
-            // progress : [Pause duration:2s]
-            // progress : [Pause duration:2s]
-            // progress : [Pause duration:5s]
-            // progress : [Pause duration:7s]
-            // progress : [Pause duration:10s]
-            // finish
-        }
-        
-        public var batch:BatchTask ;
-        
-        public function change( action:Action ):void
-        {
-            trace( "change :  " + batch.current ) ;
-        }
-        
-        public function finish( action:Action ):void
-        {
-            trace( "finish length:" + batch.length ) ;
-        }
-        
-        public function progress( action:Action ):void
-        {
-            trace( "progress :  " + batch.current ) ;
-        }
-        
-        public function start( action:Action ):void
-        {
-            trace( "start" ) ;
+            if ( cache is Cache )
+            {
+                ( cache as Cache ).run() ;
+            }
         }
     }
 }
