@@ -869,7 +869,7 @@ package examples.process.cache
         
         public function sayGoodBye( who:String = "unknow" ):void
         {
-            enqueueMethod( "sayHello" , who) ;
+            enqueueMethod( "sayGoodBye" , who) ;
         }
         
         private var _name:String ;
@@ -897,9 +897,9 @@ package examples
             var speaker:Speaker = new SpeakerUser() ;
             var cache:Speaker   = new SpeakerCache( speaker ) ;
             
-            speaker.name = "John" ;
-            speaker.sayHello( "Jack" ) ;
-            speaker.sayGoodBye( "Jack" ) ;
+            cache.name = "John" ;
+            cache.sayHello( "Jack" ) ;
+            cache.sayGoodBye( "Jack" ) ;
             
             // flush the cache and initialize the speaker user
             
