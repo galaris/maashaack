@@ -377,4 +377,150 @@ The *update*() method is called only once after the *unlock*() method to update 
 
 *Note* : In *AS3* we can find the *lock*() and *unlock*() method in some native class like *flash.display.BitmapData* but this class don't implements the *Lockable* interface.
 
+=== The Priority interface ===
+
+The *system.process.Priority* interface is providing the priority of a specific task who implements this interface in the application.
+
+{{{
+package system.process 
+{
+    public interface Priority 
+    {
+        function get priority():int ;
+        function set priority( value:int ):void ;
+    }
+}
+}}}
+
+The *priority* property defines the value of the priority. The priority member can be used to sort tasks in chains, batch, priority queues, etc.
+
+=== The Action interface ===
+
+
+The *system.process.Action* interface provide a complete task implementation in the *system.process* package.
+
+{{{
+package system.process 
+{
+    import system.Cloneable;
+    import system.signals.Signaler;
+	
+    /**
+     * This interface represents the methods implemented in the Action objects.
+     */
+    public interface Action extends Cloneable, Runnable
+    {
+        /**
+	   * This signal emit when the notifyFinished method is invoked. 
+	   */
+	  function get finishIt():Signaler ;
+        function set finishIt( signal:Signaler ):void ;
+	    
+        /**
+	   * The current phase of the action.
+	   * @see system.process.TaskPhase
+	   */
+	  function get phase():String ;
+	    
+        /**
+	   * Indicates if the action is running.
+	   */
+	  function get running():Boolean ;
+	    
+        /**
+	   * This signal emit when the notifyStarted method is invoked. 
+	   */
+	  function get startIt():Signaler ;
+	  function set startIt( signal:Signaler ):void ;
+	    
+        /**
+	   * Notify when the process is finished.
+	   */
+	  function notifyFinished():void ;
+	    
+        /**
+	   * Notify when the process is started.
+	   */
+	  function notifyStarted():void ;
+    }
+}
+}}}
+
+The *Action* interface defines a command with a beginning and an ending. All tasks are based on this interface implementation.
+
+The *Action* interface provide objects who use signals propagation with the *system.signals* engine to notify the start and the finish of the process.
+
+All the task who implements the *Action* interface must contains two signals finishIt and startIt to connect slots (receivers).
+
+*Example with signals and receivers :*
+
+{{{
+import system.process.Action ;
+
+var finish:Function = function( action:Action ):void
+{
+    trace( "finish" ) ;
+}
+
+var start:Function = function( action:Action ):void
+{
+    trace( "start" ) ;
+}
+
+action.startIt.connect( start ) ;
+action.finishIt.connect( finish ) ;
+}}}
+
+The *notifyFinished()* and *notifyStarted()* methods are invoked in the tasks to notify the beginning and the ending of the task process. 
+
+The running property is a boolean who indicates if the process is in progress.
+
+The *phase* property is a specific value to indicates the current phase of the process, we can defines all phases of the process with the static enumeration system.process.TaskPhase :
+
+{{{
+package system.process 
+{
+    /**
+     * The enumeration of all phases in a task process.
+     */
+    public class TaskPhase 
+    {
+        /**
+	   * The phase of a delayed task.
+	   */
+        public static const DELAYED:String = "delayed" ;
+	    
+        /**
+	   * The phase of a finished task.
+	   */
+	  public static const FINISHED:String = "finished" ;
+	    
+        /**
+	   * The phase before the task has been started for the first time 
+	   * or (for restartable Tasks) also after it has completed its execution.
+	   */
+	  public static const INACTIVE:String = "inactive" ;
+	    
+        /**
+	   * The phase of a running Task.
+	   */
+	  public static const RUNNING:String = "running" ;
+	    
+        /**
+	   * The phase of a finished task.
+	   */
+	  public static const STOPPED:String = "stopped" ;
+	    
+        /**
+	   * The phase of an out of time task.
+	   */
+	  public static const TIMEOUT:String = "timeout" ;
+    }
+}
+}}}
+
+All Action objects are *Cloneable*, we can creates a shallow copy of a specific task with the *clone()* method.
+
+The basic implementation of the *Action* interface is the *system.process.Task* class, 100% of all Action in your application must inherit the Task class or you must be sure to implement the interface with the same code in your custom class.
+
 // TODO continue the reference (in progress)
