@@ -52,9 +52,9 @@ package examples
             var speaker:Speaker = new SpeakerUser() ;
             var cache:Speaker   = new SpeakerCache( speaker ) ;
             
-            speaker.name = "John" ;
-            speaker.sayHello( "Jack" ) ;
-            speaker.sayGoodBye( "Jack" ) ;
+            cache.name = "John" ;
+            cache.sayHello( "Jack" ) ;
+            cache.sayGoodBye( "Jack" ) ;
             
             // flush the cache and initialize the speaker user
             

@@ -62,7 +62,7 @@ package examples.process.cache
         
         public function sayGoodBye( who:String = "unknow" ):void
         {
-            enqueueMethod( "sayHello" , who) ;
+            enqueueMethod( "sayGoodBye" , who) ;
         }
         
         private var _name:String ;
