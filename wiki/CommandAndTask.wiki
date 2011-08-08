@@ -576,4 +576,112 @@ Now if the user want resume the *Chain* main process, the current task can be re
 
 This interfaces may seem simplistic but it can easily handle many tasks in a specific context of your applications.
 
+== Basic Runnable implementations ==
+
+=== The system.process.Batch class ===
+
+Batch processing is execution of a series of tasks in your application. A batch process can be used to automate much of the work.
+
+A batch process performs an asynchronous list of commands and run it a single stroke.
+
+Example, we create a little *Square* display class who implements the *Runnable* interface, the run method of this class invoke an "enterframe" event process to move the display to a specific position.
+
+{{{
+package examples.display
+{
+    import system.process.Runnable;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.filters.DropShadowFilter;
+    import flash.geom.Point;
+    
+    public class Square extends Sprite implements Runnable
+    {
+        public function Square( x:int=0, y:int=0, color:uint=0xFFFFFF )
+        {
+            this.x = x ;
+            this.y = y ;
+            graphics.beginFill( color ) ;
+            graphics.drawRect(0, 0, 30, 30) ;
+        }
+        
+        public var finish:Point ;
+        
+        public function run(...arguments:Array):void
+        {
+            if ( finish )
+            {
+                addEventListener(Event.ENTER_FRAME , enterFrame ) ;
+            }
+        }
+        
+        protected function enterFrame( e:Event ):void
+        {
+            var dx:Number = Math.round( ( finish.x - x ) * 0.3 ) ;
+            var dy:Number = Math.round( ( finish.y - y ) * 0.3 ) ;
+            x += dx ;
+            y += dy ;
+            if ( dx == 0 && dy == 0 )
+            {
+                removeEventListener(Event.ENTER_FRAME , enterFrame ) ;
+            }
+        }
+    }
+}
+}}}
+
+Now we can use this basic command/display objects in a batch :
+
+{{{
+package examples
+{
+    import examples.display.Square;
+    
+    import system.process.Batch;
+    
+    import flash.display.Sprite;
+    import flash.events.KeyboardEvent;
+    import flash.geom.Point;
+    
+    [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
+    
+    public class BatchExample extends Sprite
+    {
+        public function BatchExample()
+        {
+            var s1:Square = new Square( 50 ,  50 , 0xFF0000 ) ;
+            var s2:Square = new Square( 50 , 100 , 0x00FF00 ) ;
+            var s3:Square = new Square( 50 , 150 , 0x0000FF ) ;
+            
+            s1.finish = new Point( 600 ,  50 ) ;
+            s2.finish = new Point( 600 , 100 ) ;
+            s3.finish = new Point( 600 , 150 ) ;
+            
+            addChild(s1) ;
+            addChild(s2) ;
+            addChild(s3) ;
+            
+            command = new Batch() ;
+            command.add( s1 ) ;
+            command.add( s2 ) ;
+            command.add( s3 ) ;
+            
+            // press a key to run the batch
+            
+            stage.addEventListener( KeyboardEvent.KEY_DOWN, keyDown ) ;
+        }
+        
+        public var command:Batch ;
+        
+        public function keyDown( e:KeyboardEvent ):void
+        {
+            command.run() ;
+        }
+    }
+}
+}}}
+
+When the user push the keyboard's key, the three square displays move in the same times, the batch run all this registered commands at once.
+
 // TODO continue the reference (in progress)
