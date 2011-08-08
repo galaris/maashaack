@@ -51,8 +51,10 @@ package
     [SWF(width="760", height="800", frameRate="24", backgroundColor="#666666")]
     
     // Compilation arguments :
-    // -default-size 760 800 -default-frame-rate 24 -default-background-color 0x666666 --target-player=10.0.0
-    // -define+=TAMARIN::exclude,true -define+=TAMARIN::alternate,false -define+=API::FP_10_0,true -define+=API::RT_0_2_5,false
+    // -target-player=10.2
+    // -static-link-runtime-shared-libraries=true
+    // -define+=API::FLASH,true
+    // -define+=API::REDTAMARIN,false
     
     // -default-size 760 800
     // -default-frame-rate 24
