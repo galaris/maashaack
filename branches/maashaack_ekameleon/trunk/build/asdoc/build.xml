@@ -36,6 +36,9 @@
             
             <arg line='-source-path ${asdoc.source.path}'/>
             
+            <arg line='-define+=API::FLASH,true' />
+            <arg line='-define+=API::REDTAMARIN,false' />
+            
             <arg line='${asdoc.options}' />
             
             <arg line='-main-title ${asdoc.main.title}' />
