@@ -9,7 +9,7 @@
         <namespaces>
             <namespace>
                 <uri>http://code.google.com/p/core/2011</uri>
-                <manifest>../../compc_core/manifests/core_manifest.xml</manifest>
+                <manifest>../manifests/core_manifest.xml</manifest>
             </namespace>
         </namespaces>
         
