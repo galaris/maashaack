@@ -36,9 +36,7 @@
 package core.maths 
 {
     import buRRRn.ASTUce.framework.TestCase;
-
-    import flash.errors.IllegalOperationError;
-
+    
     public class signTest extends TestCase 
     {
         public function signTest(name:String = "")
@@ -64,7 +62,7 @@ package core.maths
                 result = sign( NaN ) ;
                 fail( "sign(NaN) failed 01." ) ;  
             }
-            catch( e1:IllegalOperationError )
+            catch( e1:RangeError )
             {
                 //
             }

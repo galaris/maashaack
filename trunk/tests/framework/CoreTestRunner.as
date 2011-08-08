@@ -54,7 +54,10 @@ package
     [SWF(width="760", height="600", frameRate="24", backgroundColor="#666666")]
     
     // Compilation arguments :
-    // -target-player=10.0.0 -static-link-runtime-shared-libraries=true
+    // -target-player=10.2
+    // -static-link-runtime-shared-libraries=true
+    // -define+=API::FLASH,true
+    // -define+=API::REDTAMARIN,false
     
     public class CoreTestRunner extends Sprite
     {
