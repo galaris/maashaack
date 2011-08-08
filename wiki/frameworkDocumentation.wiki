@@ -1,6 +1,4 @@
 #summary asdoc HTML documentation.
 #labels Documentation
 
-TODO
-
-embed the asdoc in a widget
+<wiki:gadget url="http://maashaack.googlecode.com/svn/gadgets/reference_maashaack.xml" width="480" height="1075" border="0" />
