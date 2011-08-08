@@ -522,4 +522,58 @@ All Action objects are *Cloneable*, we can creates a shallow copy of a specific 
 
 The basic implementation of the *Action* interface is the *system.process.Task* class, 100% of all *Action* in your application must inherit the *Task* class or you must be sure to implement the interface with the same code in your custom class.
 
+=== The Startable, Stoppable, Resetable and Resumable interfaces ===
+
+The *system.process.Startable* interface is used when tasks need to be "running" to be active. It provides a method through which task can be "started".
+{{{
+package system.process
+{
+    public interface Startable
+    {
+        function start():void ;
+    }
+}
+}}}
+
+The *system.process.Stoppable* interface is used when tasks need to be inactive. It provides a method through which task can be "stopped".
+{{{
+package system.process
+{
+    public interface Stoppable
+    {
+        function stop():void ;
+    }
+}
+}}}
+
+The *system.process.Resetable* interface is used when tasks need to be reset.
+{{{
+package system.process
+{
+    public interface Resetable
+    {
+        function reset():void ;
+    }
+}
+}}}
+
+The *system.process.Resumable* interface is used when tasks need to be resume.
+{{{
+package system.process
+{
+    public interface Resumable
+    {
+        function resume():void ;
+    }
+}
+}}}
+
+All this basic interfaces are important to create complex tasks in your application. 
+
+For example in a *Chain* who is running, the user may be forced to stop the execution of the main process and the current task in the chain who implement the *Stoppable* interface can be stopped too.
+
+Now if the user want resume the *Chain* main process, the current task can be resumed too if it's implement the *Resumable* interface. 
+
+This interfaces may seem simplistic but it can easily handle many tasks in a specific context of your applications.
+
 // TODO continue the reference (in progress)
