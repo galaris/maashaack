@@ -63,24 +63,23 @@ package examples.process
      
         public var target:DisplayObject ;
 
-	  public var x:Number ;
+        public var x:Number ;
         
         public var y:Number ;
 	    
-	  public function run( ...arguments:Array ):void
+        public function run( ...arguments:Array ):void
         {
             if( arguments.length > 0 )
             {
                 this.x = arguments[0] as Number ;
                 this.y = arguments[1] as Number ;
             }
-	      if( target )
+            if( target )
             {
                 target.x = x ;
                 target.y = y ;
             }
         }
-
     }
 }
 }}}
@@ -183,7 +182,7 @@ package examples.display
         /**
          * @private
          */
-	  public function set color( value:uint ):void
+        public function set color( value:uint ):void
         {
             _color = value ;
             update() ;
@@ -192,15 +191,15 @@ package examples.display
         /**
          * Determinates the virtual height value of this sprite.
          */
-	  public function get h():Number
+        public function get h():Number
         {
             return _h ;
         }
         
-	  /**
+	/**
          * @private
          */
-	  public function set h( n:Number ):void
+        public function set h( n:Number ):void
         {
             _h = isNaN(n) ? 0 : n ;
             update() ;
@@ -209,7 +208,7 @@ package examples.display
         /**
          * Determinates the virtual height value of this sprite.
          */
-	  public function get w():Number
+        public function get w():Number
         {
             return _w ;
         }
@@ -217,7 +216,7 @@ package examples.display
 	  /**
          * @private
          */
-	  public function set w( n:Number ):void
+        public function set w( n:Number ):void
         {
             _w = isNaN(n) ? 0 : n ;
             update() ;
@@ -226,7 +225,7 @@ package examples.display
         /**
          * Draw the display.  
          */
-	  public function draw():void
+        public function draw():void
         {
             graphics.clear() ;
             graphics.beginFill( color , 1 ) ;
@@ -237,7 +236,7 @@ package examples.display
          * Returns true if the object is locked.
          * @return true if the object is locked.
          */
-	  public function isLocked():Boolean
+        public function isLocked():Boolean
         {
             return ___isLock___ == true ;
         }
@@ -245,7 +244,7 @@ package examples.display
         /**
          * Locks the object.
          */
-	  public function lock():void
+        public function lock():void
         {
             ___isLock___ = true ;
         }
@@ -253,7 +252,7 @@ package examples.display
         /**
          * Unlocks the object.
          */
-	  public function unlock():void
+        public function unlock():void
         {
             ___isLock___ = false ;
         }
@@ -261,7 +260,7 @@ package examples.display
         /**
          * Update the display.
          */
-	  public function update():void
+        public function update():void
         {
             if ( isLocked() )
             {
@@ -276,12 +275,12 @@ package examples.display
          */
         protected var _color:uint = 0xFF0000 ;      
      
-	  /**
+        /**
          * @private
          */
 	  protected var _h:Number = 0 ;
      
-	  /**
+        /**
          * @private
          */
 	  protected var _w:Number = 0 ;
