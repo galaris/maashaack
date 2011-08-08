@@ -404,44 +404,44 @@ package system.process
 {
     import system.Cloneable;
     import system.signals.Signaler;
-	
+    
     /**
      * This interface represents the methods implemented in the Action objects.
      */
     public interface Action extends Cloneable, Runnable
     {
         /**
-	   * This signal emit when the notifyFinished method is invoked. 
-	   */
-	  function get finishIt():Signaler ;
+         * This signal emit when the notifyFinished method is invoked. 
+         */
+        function get finishIt():Signaler ;
         function set finishIt( signal:Signaler ):void ;
-	    
+        
         /**
-	   * The current phase of the action.
-	   * @see system.process.TaskPhase
-	   */
-	  function get phase():String ;
-	    
+         * The current phase of the action.
+         * @see system.process.TaskPhase
+         */
+        function get phase():String ;
+        
         /**
-	   * Indicates if the action is running.
-	   */
-	  function get running():Boolean ;
-	    
+         * Indicates <code class="prettyprint">true</code> if the action is in progress.
+         */
+        function get running():Boolean ;
+        
         /**
-	   * This signal emit when the notifyStarted method is invoked. 
-	   */
-	  function get startIt():Signaler ;
-	  function set startIt( signal:Signaler ):void ;
-	    
+         * This signal emit when the notifyStarted method is invoked. 
+         */
+        function get startIt():Signaler ;
+        function set startIt( signal:Signaler ):void ;
+        
         /**
-	   * Notify when the process is finished.
-	   */
-	  function notifyFinished():void ;
-	    
+         * Notify when the process is finished.
+         */
+        function notifyFinished():void ;
+        
         /**
-	   * Notify when the process is started.
-	   */
-	  function notifyStarted():void ;
+         * Notify when the process is started.
+         */
+        function notifyStarted():void ;
     }
 }
 }}}
@@ -486,35 +486,34 @@ package system.process
     public class TaskPhase 
     {
         /**
-	   * The phase of a delayed task.
-	   */
+         * The phase of a delayed task.
+         */
         public static const DELAYED:String = "delayed" ;
-	    
+        
         /**
-	   * The phase of a finished task.
-	   */
-	  public static const FINISHED:String = "finished" ;
-	    
+         * The phase of a finished task.
+         */
+        public static const FINISHED:String = "finished" ;
+        
         /**
-	   * The phase before the task has been started for the first time 
-	   * or (for restartable Tasks) also after it has completed its execution.
-	   */
-	  public static const INACTIVE:String = "inactive" ;
-	    
+         * The phase before the task has been started for the first time or (for restartable Tasks) also after it has completed its execution.
+         */
+        public static const INACTIVE:String = "inactive" ;
+        
         /**
-	   * The phase of a running Task.
-	   */
-	  public static const RUNNING:String = "running" ;
-	    
+         * The phase of a running Task.
+         */
+        public static const RUNNING:String = "running" ;
+        
         /**
-	   * The phase of a finished task.
-	   */
-	  public static const STOPPED:String = "stopped" ;
-	    
+         * The phase of a finished task.
+         */
+        public static const STOPPED:String = "stopped" ;
+        
         /**
-	   * The phase of an out of time task.
-	   */
-	  public static const TIMEOUT:String = "timeout" ;
+         * The phase of an out of time task.
+         */
+        public static const TIMEOUT:String = "timeout" ;
     }
 }
 }}}
