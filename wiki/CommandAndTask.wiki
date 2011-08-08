@@ -684,4 +684,285 @@ package examples
 
 When the user push the keyboard's key, the three square displays move in the same times, the batch run all this registered commands at once.
 
+== Basic Action implementations ==
+
+=== The system.process.Task class ===
+
+The *system.process.Task* class is an abstract implementation of the *system.process.Action* interface.
+
+You can extends this class to defines your custom Action objects. The Task class contains all important methods and properties used in the task engine.
+
+To creates your custom task you can override the empty *run()* method of the *Task* class and don't forget to invoke the *notifyStarted()* method in the begining of the process and the *notifyFinished()* method in the ending of the process. 
+
+The *notifyFinished* method is really important if the task is adding in a *TaskGroup* object, to notify the end of the current process and run the next process in a chain or a batch task object for example. Don't forget to invoke it in your custom tasks when your process is finished.
+
+*basic example*
+
+We create a basic Message class who extends the abstract system.process.Task class. We override this run() method and we must invoke the *notifyStarted()* and *notifyFinished()* methods to complete the custom task notifications.
+
+{{{
+package examples.process 
+{
+    import system.process.Task;
+    
+    public class Message extends Task 
+    {
+        public function Message( message:String )
+        {
+            this.message = message ;
+        }
+        
+        public var message:String ;
+        
+        public override function run( ...arguments:Array ):void
+        {
+            notifyStarted() ;
+            trace( message ) ;
+            notifyFinished() ;
+        }
+        
+        public function toString():String
+        {
+            return message ;
+        }
+    }
+}
+}}}
+
+In all the next examples with use a little custom task with the class *examples.process.Message*.
+
+=== The system.process.Cache class ===
+
+Enqueue a collection of members definitions (commands) to apply or invoke with the specified target object.
+
+The *Cache* class is a helper to implements for example the *Load/Cache/Proxy* pattern, this pattern defines a simple logic to load an external source code (in an external swf for example) and not wait the end of the loading process to use it and invoke this commands immediately.
+
+*usage*
+{{{new Cache( target:* = null )}}}
+
+*basic example*
+
+{{{
+import core.dump ;
+import system.process.Cache ;
+
+var object:Object = {} ;
+
+object.a = 1 ;
+object.b = 2 ;
+object.c = 3 ;
+object.d = 3 ;
+
+object.method1 = function( value:uint ):void
+{
+    this.c = value ;
+};
+
+object.method2 = function( value1:uint , value2:uint ):void
+{
+    this.d = value1 + value2 ;
+};
+
+object.setPropertyIsEnumerable( "method1" , false ) ;
+object.setPropertyIsEnumerable( "method2" , false ) ;
+
+trace( core.dump( object ) ) ; // {b:2,d:3,a:1,c:3}
+
+var cache:Cache = new Cache( object ) ;
+
+cache.enqueueAttribute( "a" , 10 ) ;
+cache.enqueueAttribute( "b" , 20 ) ;
+
+cache.enqueueMethod( "method1" , 30 ) ;
+cache.enqueueMethod( "method2" , 40 , 50 ) ;
+
+cache.run() ; // flush the caching queue
+
+trace( core.dump( object ) ) ; // {b:20,c:30,d:90,a:10}
+}}}
+
+*interface example*
+
+We defines a basic *Speaker* interface :
+
+{{{
+package examples.process.cache
+{
+    public interface Speaker
+    {
+        function get name():String ;
+        function set name( value:String ):void ;
+        
+        function sayHello( who:String = "unknow" ):void ;
+        
+        function sayGoodBye( who:String = "unknow" ):void ;
+    }
+}
+}}}
+
+Now we can create the basic *SpeakerUser* class, a concrete class who implements the *Speaker* interface :
+
+{{{
+package examples.process.cache
+{
+    public class SpeakerUser implements Speaker
+    {
+        public function SpeakerUser( name:String = "user" )
+        {
+            this.name = name ;
+        }
+        
+        public function get name():String 
+        {
+            return _name ;
+        }
+        
+        public function set name( value:String ):void
+        {
+            _name = value ;
+        }
+        
+        public function sayHello( who:String = "unknow" ):void
+        {
+            trace( _name + " say hello " + who ) ;
+        }
+        
+        public function sayGoodBye( who:String = "unknow" ):void
+        {
+            trace( _name + " say good bye " + who ) ;
+        }
+        
+        private var _name:String ;
+    }
+}
+}}}
+
+We can defines now the *SpeakerCache* class who extends the *system.process.Cache* class and implements the *Speaker* interface :
+
+{{{
+package examples.process.cache
+{
+    import system.process.Cache;
+    
+    public class SpeakerCache extends Cache implements Speaker
+    {
+        public function SpeakerCache( target:Speaker = null )
+        {
+            super( target ) ;
+        }
+        
+        public function get name():String 
+        {
+            return _name ;
+        }
+        
+        public function set name( value:String ):void
+        {
+            enqueueAttribute( "name" , value ) ;
+            _name = value ;
+        }
+        
+        public function sayHello( who:String = "unknow" ):void
+        {
+            enqueueMethod( "sayHello" , who ) ;
+        }
+        
+        public function sayGoodBye( who:String = "unknow" ):void
+        {
+            enqueueMethod( "sayHello" , who) ;
+        }
+        
+        private var _name:String ;
+    }
+}
+}}}
+
+Test now the cache proxy in a basic example :
+
+{{{
+package examples
+{
+    import examples.process.cache.Speaker;
+    import examples.process.cache.SpeakerCache;
+    import examples.process.cache.SpeakerUser;
+    
+    import system.process.Cache;
+    
+    import flash.display.Sprite;
+    
+    public class CacheExample extends Sprite
+    {
+        public function CacheExample()
+        {
+            var speaker:Speaker = new SpeakerUser() ;
+            var cache:Speaker   = new SpeakerCache( speaker ) ;
+            
+            speaker.name = "John" ;
+            speaker.sayHello( "Jack" ) ;
+            speaker.sayGoodBye( "Jack" ) ;
+            
+            // flush the cache and initialize the speaker user
+            
+            if ( cache is Cache )
+            {
+                ( cache as Cache ).run() ;
+            }
+        }
+    }
+}
+}}}
+
+=== The system.process.BindTask class ===
+
+A *BindTask* instance wraps a function in another, locking its execution scope to a specific object.
+
+*usage*
+{{{new BindTask( func:Function , scope:* = null , ...arguments:Array )}}}
+
+*basic example*
+
+{{{
+package examples
+{
+    import core.dump ;
+    import system.process.Action;
+    import system.process.BindTask;
+    
+    import flash.display.Sprite;
+    
+    public class BindTaskExample extends Sprite
+    {
+        public function BindTaskExample()
+        {
+            var scope:Object = {} ;
+            scope.toString = function():String 
+            {
+                return "scope" ;
+            };
+            
+            var execute:Function = function ( ...arguments:Array ):void 
+            {
+                trace( this + " execute " + dump(arguments) ) ;
+            };
+            
+            var proxy:BindTask = new BindTask( execute , scope , "hello world" ) ;
+            
+            proxy.finishIt.connect( finish ) ;
+            proxy.startIt.connect( start ) ;
+            
+            proxy.run() ;
+        }
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
 // TODO continue the reference (in progress)
