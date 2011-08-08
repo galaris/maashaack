@@ -475,7 +475,7 @@ The *notifyFinished()* and *notifyStarted()* methods are invoked in the tasks to
 
 The running property is a boolean who indicates if the process is in progress.
 
-The *phase* property is a specific value to indicates the current phase of the process, we can defines all phases of the process with the static enumeration system.process.TaskPhase :
+The *phase* property is a specific value to indicates the current phase of the process, we can defines all phases of the process with the static enumeration *system.process.TaskPhase* :
 
 {{{
 package system.process 
@@ -521,6 +521,6 @@ package system.process
 
 All Action objects are *Cloneable*, we can creates a shallow copy of a specific task with the *clone()* method.
 
-The basic implementation of the *Action* interface is the *system.process.Task* class, 100% of all Action in your application must inherit the Task class or you must be sure to implement the interface with the same code in your custom class.
+The basic implementation of the *Action* interface is the *system.process.Task* class, 100% of all *Action* in your application must inherit the *Task* class or you must be sure to implement the interface with the same code in your custom class.
 
 // TODO continue the reference (in progress)
