@@ -45,13 +45,6 @@ package system
             super(name);
         }
         
-        public function testContains():void
-        {
-            var ar:Array =  [2, 3, 4] ;
-            assertTrue( Arrays.contains( ar , 3 ) as Boolean ) ;
-            assertFalse( Arrays.contains( ar , 5 ) as Boolean ) ;
-        }
-        
 //        TAMARIN::exclude
         public function testCopyPrimitive():void
         {
@@ -90,110 +83,6 @@ package system
             assertUndefined( copy2[0] );
             assertNull( copy2[1] );
             ArrayAssert.assertEquals( a, copy2 );
-        }
-        
-        public function testInitialize():void
-        {
-            ArrayAssert.assertEquals( [] , Arrays.initialize() ) ;
-            ArrayAssert.assertEquals( [ null , null , null ] , Arrays.initialize(3) ) ;
-            ArrayAssert.assertEquals( [ 0    , 0    , 0    ] , Arrays.initialize(3,0) ) ;
-            ArrayAssert.assertEquals( [ true , true , true ] , Arrays.initialize(3,true) ) ;
-            ArrayAssert.assertEquals( [ ""   , ""   , ""  , ""  ] , Arrays.initialize(4,"") ) ;
-        }
-        
-        public function testRepeat():void
-        {
-            var ar:Array =  [2, 3, 4] ;
-            ArrayAssert.assertEquals( [2, 3, 4] , Arrays.repeat(ar, 0) ) ;
-            ArrayAssert.assertEquals( [2,3,4,2,3,4,2,3,4] , Arrays.repeat(ar, 3) ) ; 
-        }
-        
-        public function testReduce1():void
-        {
-            var ar:Array =  [0,1,2,3,4] ;
-            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
-            {
-                // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
-                return previousValue + currentValue ;
-            } ;
-            assertEquals( 10 , Arrays.reduce( ar , callback )      , "#1" ) ;
-            assertEquals( 20 , Arrays.reduce( ar , callback , 10 ) , "#2" ) ;
-        }
-        
-        public function testReduce2():void
-        {
-            var ar:Array =  [[0,1], [2,3], [4,5]] ;
-            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
-            {
-                return previousValue.concat( currentValue ) ;
-            } ;
-            ArrayAssert.assertEquals( [0, 1, 2, 3, 4, 5] , Arrays.reduce( ar , callback , [] ) ) ;
-        }
-        
-        public function testReduceRight1():void
-        {
-            var ar:Array =  [0,1,2,3,4] ;
-            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
-            {
-                // trace( "previousValue = " + previousValue + ", currentValue = " + currentValue + ", index = " + index ) ;
-                return previousValue + currentValue ;
-            } ;
-            assertEquals( 10 , Arrays.reduceRight( ar , callback )      , "#1" ) ;
-            assertEquals( 20 , Arrays.reduceRight( ar , callback , 10 ) , "#2" ) ;
-        }
-        
-        public function testReduceRight2():void
-        {
-            var ar:Array =  [[0,1], [2,3], [4,5]] ;
-            var callback:Function = function( previousValue:* , currentValue:* , index:int, array:Array ):*
-            {
-                return previousValue.concat( currentValue ) ;
-            } ;
-            ArrayAssert.assertEquals( [4,5,2,3,0,1] , Arrays.reduceRight( ar , callback , [] ) ) ;
-        }
-        
-        public function testSpliceInto():void
-        {
-            var inserted:Array  ;
-            var container:Array ;
-            
-            inserted  = [1, 2, 3, 4] ;
-            container = [5, 6, 7, 8] ;
-            
-            Arrays.spliceInto( inserted, container ) ;
-            ArrayAssert.assertEquals( [1,2,3,4,5,6,7,8] , container ) ; 
-            
-            //////
-            
-            inserted  = [1, 2, 3, 4] ;
-            container = [5, 6, 7, 8] ;
-            
-            Arrays.spliceInto( inserted, container, 0 , 4 ) ;
-            ArrayAssert.assertEquals( [1,2,3,4] , container ) ; 
-            
-            //////
-            
-            inserted  = [1, 2, 3, 4] ;
-            container = [5, 6, 7, 8] ;
-            
-            Arrays.spliceInto( inserted, container, 0 , 2 ) ;
-            ArrayAssert.assertEquals( [1,2,3,4,7,8] , container ) ; 
-            
-            //////
-            
-            inserted  = [1, 2, 3, 4] ;
-            container = [5, 6, 7, 8] ;
-            
-            Arrays.spliceInto( inserted, container, 1 ) ;
-            ArrayAssert.assertEquals( [5,1,2,3,4,6,7,8] , container ) ;
-            
-            //////
-            
-            inserted  = [1, 2, 3, 4] ;
-            container = [5, 6, 7, 8] ;
-            
-            Arrays.spliceInto( inserted, container, 1 , 2 ) ;
-            ArrayAssert.assertEquals( [5,1,2,3,4,8] , container ) ; 
         }
     }
 }
