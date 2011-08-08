@@ -1,4 +1,4 @@
 #summary asdoc HTML documentation.
 #labels Documentation
 
-<wiki:gadget url="http://maashaack.googlecode.com/svn/gadgets/reference_maashaack.xml" width="800" height="800" border="0" />
+<wiki:gadget url="http://maashaack.googlecode.com/svn/gadgets/reference_maashaack.xml" width="840" height="800" border="0" />
