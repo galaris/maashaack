@@ -21,7 +21,7 @@ The *system.rules* package defines a basic interface and classes to defines this
 
 Basic interface of all conditional rules in the system.rules package.
 
-You can use all conditional rules in the system.rules package or create your custom conditions.
+You can use all conditional rules in the *system.rules* package or create your custom conditions.
 
 *usage*
 
@@ -56,3 +56,640 @@ package example
 The *IsPositive* class is a custom conditional rule who implements the *Rule* interface to evaluate if a value is a number and positive.
 
 In the *system.rules* package you can find a set of simple rules with the classes : _True, False, Not, Equals, NotEquals, And, Or,_ etc.
+
+=== BooleanRule ===
+
+Evaluates a basic boolean condition.
+
+*usage*
+
+{{{
+new BooleanRule( b:Boolean )
+new BooleanRule( cond:Condition )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.BooleanRule ;
+
+var rule1:Rule = new BooleanRule( true  ) ;
+var rule2:Rule = new BooleanRule( false ) ;
+var rule3:Rule = new BooleanRule( rule1 ) ;
+
+trace( rule1.eval() ) ; // true
+trace( rule2.eval() ) ; // false
+trace( rule3.eval() ) ; // true
+}}}
+
+=== Equals===
+
+Defines if two values are equals.
+
+*usage*
+
+{{{
+new Equals( value1:* , value2:* )
+}}}
+
+*Note :* value1 can be an Equatable object, a Rule Object, an object with the equals method inside or the {{{==}}} operator is used.
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.Equals ;
+import system.rules.BooleanRule ;
+
+var e:Equals ;
+
+///// Compares objects.
+
+e = new Equals( 1 , 1 ) ;
+trace( e.eval() ) ; // true
+
+e = new Equals( 1 , 2 ) ;
+trace( e.eval() ) ; // false
+
+///// Compares Condition objects.
+
+var cond1:Rule = new BooleanRule( true  ) ;
+var cond2:Rule = new BooleanRule( false ) ;
+var cond3:Rule = new BooleanRule( true  ) ;
+
+e = new Equals( cond1 , cond1 ) ;
+trace( e.eval() ) ; // true
+
+e = new Equals( cond1 , cond2 ) ;
+trace( e.eval() ) ; // false
+
+e = new Equals( cond1 , cond3 ) ;
+trace( e.eval() ) ; // true
+
+///// Compares Equatable objects.
+
+var equals:Function = function( o:Object ):Boolean
+{
+    return this.id == o.id ;
+}
+
+var o1:Object = { id:1 , equals:equals } ;
+var o2:Object = { id:2 , equals:equals } ;
+var o3:Object = { id:1 , equals:equals } ;
+
+e = new Equals( o1 , o1 ) ;
+trace( e.eval() ) ; // true
+
+e = new Equals( o1 , o2 ) ;
+trace( e.eval() ) ; // false
+
+e = new Equals( o1 , o3 ) ;
+trace( e.eval() ) ; // true
+}}}
+
+=== True ===
+
+Evaluates if the value or the condition is true.
+
+*usage*
+
+{{{
+new True( condition:* )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.True ;
+
+var cond1:Rule = new True( true  ) ;
+var cond2:Rule = new True( false ) ;
+var cond3:Rule = new True( cond1 ) ;
+var cond4:Rule = new True( cond2 ) ;
+
+trace( cond1.eval() ) ; // true
+trace( cond2.eval() ) ; // false
+trace( cond3.eval() ) ; // true
+trace( cond4.eval() ) ; // false
+}}}
+
+=== False ===
+
+Evaluates if the value or the condition is false.
+
+*usage*
+
+{{{
+new False( condition:* )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.False ;
+
+var cond1:Rule = new False( true  ) ;
+var cond2:Rule = new False( false ) ;
+var cond3:Rule = new False( cond1 ) ;
+var cond4:Rule = new False( cond2 ) ;
+
+trace( cond1.eval() ) ; // false
+trace( cond2.eval() ) ; // true
+trace( cond3.eval() ) ; // true
+trace( cond4.eval() ) ; // false
+}}}
+
+=== Not ===
+
+Used to perform logical negation on a specific condition.
+
+*usage*
+
+{{{
+new Not( b:Boolean )
+new Not( cond:Condition )
+}}}
+
+*example*
+
+{{{
+import system.rules.BooleanRule ;
+import system.rules.Not ;
+import system.rules.Rule ;
+
+var cond1:Rule = new BooleanRule( true  ) ;
+var cond2:Rule = new BooleanRule( false ) ;
+
+var no1:Not = new Not( true ) ;
+var no2:Not = new Not( false ) ;
+var no3:Not = new Not( cond1 ) ;
+var no4:Not = new Not( cond2 ) ;
+
+trace( no1.eval() ) ; // false
+trace( no2.eval() ) ; // true
+trace( no3.eval() ) ; // false
+trace( no4.eval() ) ; // true
+}}}
+
+=== NotEquals ===
+
+Performs a logical comparison of the two values to determine if are not equal.
+
+*usage*
+
+{{{
+new NotEquals( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.BooleanRule ;
+import system.rules.NotEquals ;
+import system.rules.Rule ;
+
+var ne:NotEquals ;
+
+///// Compares objects.
+
+ne = new NotEquals( 1 , 1 ) ;
+trace( ne.eval() ) ; // false
+
+ne = new NotEquals( 1 , 2 ) ;
+trace( ne.eval() ) ; // true
+
+///// Compares Condition objects.
+
+var cond1:Rule = new BooleanRule( true  ) ;
+var cond2:Rule = new BooleanRule( false ) ;
+var cond3:Rule = new BooleanRule( true  ) ;
+
+ne = new NotEquals( cond1 , cond1 ) ;
+trace( ne.eval() ) ; // false
+
+ne = new NotEquals( cond1 , cond2 ) ;
+trace( ne.eval() ) ; // true
+
+ne = new NotEquals( cond1 , cond3 ) ;
+trace( ne.eval() ) ; // false
+
+///// Compares Equatable objects.
+
+var equals:Function = function( o:Object ):Boolean
+{
+    return this.id == o.id ;
+}
+
+var o1:Object = { id:1 , equals:equals } ;
+var o2:Object = { id:2 , equals:equals } ;
+var o3:Object = { id:1 , equals:equals } ;
+
+ne = new NotEquals( o1 , o1 ) ;
+trace( ne.eval() ) ; // false
+
+ne = new NotEquals( o1 , o2 ) ;
+trace( ne.eval() ) ; // true
+
+ne = new NotEquals( o1 , o3 ) ;
+trace( ne.eval() ) ; // false
+}}}
+
+=== And ===
+
+Used to perform a logical conjunction on two conditions and more.
+
+*usage*
+
+{{{
+new And( c1:Condition , c2:Condition , …conditions:Array = null )
+}}}
+
+*example*
+
+{{{
+import system.rules.BooleanRule ;
+import system.rules.And ;
+import system.rules.Rule ;
+
+var cond1:Rule = new BooleanRule( true  ) ;
+var cond2:Rule = new BooleanRule( false ) ;
+var cond3:Rule = new BooleanRule( true  ) ;
+
+var a:And ;
+
+a = new And( cond1 , cond1 ) ;
+trace( a.eval() ) ; // true
+
+a = new And( cond1 , cond1 , cond1 ) ;
+trace( a.eval() ) ; // true
+
+a = new And( cond1 , cond2 ) ;
+trace( a.eval() ) ; // false
+
+a = new And( cond2 , cond1 ) ;
+trace( a.eval() ) ; // false
+
+a = new And( cond2 , cond2 ) ;
+trace( a.eval() ) ; // false
+
+a = new And( cond1 , cond2 , cond3 ) ;
+trace( a.eval() ) ; // false
+
+a = new And( cond1 , cond3 , cond2 ) ;
+trace( a.eval() ) ; // false
+}}}
+
+=== Or ===
+
+Used to perform a logical disjunction on two conditions or more.
+
+*usage*
+
+{{{
+new Or( c1:Rule , c2:Rule , …conditions:Array = null )
+}}}
+
+*example*
+
+{{{
+import system.rules.BooleanRule ;
+import system.rules.Or ;
+import system.rules.Rule ;
+
+var cond1:Rule = new BooleanRule( true ) ;
+var cond2:Rule = new BooleanRule( false ) ;
+var cond3:Rule = new BooleanRule( true ) ;
+
+var o:Or ;
+
+o = new Or( cond1 , cond1 ) ;
+trace( o.eval() ) ; // true
+
+o = new Or( cond1 , cond2 ) ;
+trace( o.eval() ) ; // true
+
+o = new Or( cond2 , cond1 ) ;
+trace( o.eval() ) ; // true
+
+o = new Or( cond2 , cond2 ) ;
+trace( o.eval() ) ; // false
+
+o = new Or( cond1 , cond2 , cond3 ) ;
+trace( o.eval() ) ; // true
+
+o = new Or( cond1 , cond3 , cond2 ) ;
+trace( o.eval() ) ; // true
+}}}
+
+=== GreaterThan ===
+
+Used to indicates if a value is greater than another value.
+
+*usage*
+
+{{{
+new GreaterThan( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.GreaterThan ;
+
+var rule:Rule ;
+
+rule = new GreaterThan( 1 , 1 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new GreaterThan( 1 , 2 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new GreaterThan( 3 , 2 ) ;
+trace( rule.eval() ) ; // true
+}}}
+
+=== GreaterOrEqualsThan ===
+
+Used to indicates if a value is greater or equal than another value.
+
+*usage*
+
+{{{
+new GreaterOrEqualsThan( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.GreaterOrEqualsThan ;
+
+var rule:Rule ;
+
+rule = new GreaterOrEqualsThan( 1 , 1 ) ;
+trace( rule.eval() ) ; // true
+
+rule = new GreaterOrEqualsThan( 1 , 2 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new GreaterOrEqualsThan( 3 , 2 ) ;
+trace( rule.eval() ) ; // true
+}}}
+
+=== LessThan ===
+
+Used to indicates if a value is less than another value.
+
+*usage*
+
+{{{
+new LessThan( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.LessThan ;
+
+var rule:Rule ;
+
+rule = new LessThan( 1 , 1 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new LessThan( 1 , 2 ) ;
+trace( rule.eval() ) ; // true
+
+rule = new LessThan( 3 , 2 ) ;
+trace( rule.eval() ) ; // false
+}}}
+
+=== LessOrEqualsThan ===
+
+Used to indicates if a value is less or equal than another value.
+
+*usage*
+
+{{{
+new LessOrEqualsThan( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.LessThan ;
+
+var rule:Rule ;
+
+rule = new LessThan( 1 , 1 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new LessThan( 1 , 2 ) ;
+trace( rule.eval() ) ; // true
+
+rule = new LessThan( 3 , 2 ) ;
+trace( rule.eval() ) ; // false
+}}}
+
+=== Even ===
+
+Evaluates if the value is even.
+
+*usage*
+
+{{{
+new Even( value )
+}}}
+
+*example*
+
+{{{
+import system.rules.Even ;
+import system.rules.Rule ;
+
+var rule:Rule ;
+
+rule = new Even( 0 ) ;
+trace( rule.eval() ) ; // true
+
+rule = new Even( 1 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new Even( 2 ) ;
+trace( rule.eval() ) ; // true
+
+rule = rule Even( 3 ) ;
+trace( rule.eval() ) ; // false
+}}}
+
+=== Odd ===
+
+Evaluates if the value is odd.
+
+*usage*
+
+{{{
+new Odd( value1 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.Odd ;
+
+var rule:Rule ;
+
+rule = new Odd( 0 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new Odd( 1 ) ;
+trace( rule.eval() ) ; // true
+
+rule = new Odd( 2 ) ;
+trace( rule.eval() ) ; // false
+
+rule = new Odd( 3 ) ;
+trace( rule.eval() ) ; // true
+}}}
+
+=== DivBy ===
+
+Evaluates if the modulo of two values returns 0
+
+*usage*
+
+{{{
+new DivBy( value1 , value2 )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.DivBy ;
+
+var cond:Rule ;
+
+cond = new DivBy( 4 , 2 ) ;
+trace( cond.eval() ) ; // true
+
+cond = new DivBy( 5 , 2 ) ;
+trace( cond.eval() ) ; // false
+}}}
+
+=== Null ===
+
+Evaluates if the value is null.
+
+*usage*
+
+{{{
+new Null( value:* , strict:Boolean = false )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.Null ;
+
+var cond:Rule ;
+
+cond = new Null( undefined , true ) ;
+trace( cond.eval() ) ; // false
+
+cond = new Null( undefined ) ;
+trace( cond.eval() ) ; // true
+
+cond = new Null( null ) ;
+trace( cond.eval() ) ; // true
+
+cond = new Null( "hello" ) ;
+trace( cond.eval() ) ; // false
+}}}
+
+=== Undefined ===
+
+Evaluates if the value is undefined.
+
+*usage*
+
+{{{
+new Undefined( value:* )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.Undefined ;
+
+var value:* ;
+
+var cond1:Rule = new Undefined( value ) ;
+
+value = {} ;
+
+var cond2:Rule = new Undefined( value ) ;
+
+trace( cond1.eval() ) ; // true
+trace( cond2.eval() ) ; // false
+}}}
+
+=== EmptyString ===
+
+Evaluates if the value is an empty String.
+
+*usage*
+
+{{{
+new EmptyString( value:* )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.EmptyString ;
+
+var cond1:Rule = new EmptyString( null ) ;
+var cond1:Rule = new EmptyString( 1 ) ;
+var cond3:Rule = new EmptyString( "hello" ) ;
+var cond4:Rule = new EmptyString( "" ) ;
+
+trace( cond1.eval() ) ; // false
+trace( cond2.eval() ) ; // false
+trace( cond3.eval() ) ; // false
+trace( cond4.eval() ) ; // true
+}}}
+
+=== Zero ===
+
+Evaluates if the value is 0.
+
+*usage*
+
+{{{
+new Zero( value:* )
+}}}
+
+*example*
+
+{{{
+import system.rules.Rule ;
+import system.rules.Zero ;
+
+var cond:Rule ;
+
+cond = new Zero( 0 ) ;
+trace( cond.eval() ) ; // true
+
+cond = new Zero( 10 ) ;
+trace( cond.eval() ) ; // false
+}}}
