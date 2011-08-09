@@ -35,16 +35,13 @@
 
 package examples
 {
-    import system.events.ActionEvent;
+    import system.process.Action;
     import system.process.Initializer;
     
-    import flash.display.Sprite;    
-
+    import flash.display.Sprite;
+    
     [SWF(width="740", height="480", frameRate="24", backgroundColor="#666666")]
-
-    /**
-     * Basic example to use the system.process.Initializer.
-     */
+    
     public class InitializerExample extends Sprite
     {
         
@@ -54,18 +51,23 @@ package examples
             
             process.initialize = function():void
             {
-                trace(this + "  initialize." ) ;
+                trace( this + "  initialize." ) ;
             };
             
-            process.addEventListener( ActionEvent.START  , debug ) ;
-            process.addEventListener( ActionEvent.FINISH , debug ) ;
+            process.startIt.connect( start ) ;
+            process.finishIt.connect( finish ) ;
             
             process.run() ;
         }
         
-        public function debug( e:ActionEvent ):void 
+        public function finish( action:Action ):void 
         {
-            trace ( e ) ;
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
         }
     }
 }
