@@ -35,7 +35,8 @@
 
 package system.serializers.eden
 {
-    import system.Strings;
+    import core.strings.format;
+
     import system.Version;
     import system.eden;
     
@@ -73,9 +74,9 @@ package system.serializers.eden
             str += "{sep}";
         }
             
-        return Strings.format( str, {
-                               sep:separator , crlf:CRLF , name:name , fullname:fullname , version:version , config: eden.serialize( config )
-                               } );
+        return format( str, {
+                       sep:separator , crlf:CRLF , name:name , fullname:fullname , version:version , config: eden.serialize( config )
+                             } );
     };
 }
 
