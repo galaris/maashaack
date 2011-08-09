@@ -35,8 +35,9 @@
 
 package system.terminals
 {
+    import core.strings.format;
+
     import system.Environment;
-    import system.Strings;
     
     /**
      * The VirtualConsole class emulate a console with stdout, stderr and stdin streams.
@@ -86,7 +87,7 @@ package system.terminals
             }
             
             messages.unshift( msg );
-            return Strings.format.apply( Strings, messages );
+            return format.apply( null, messages );
         }
         
         /**
