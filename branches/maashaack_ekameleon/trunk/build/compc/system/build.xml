@@ -5,6 +5,7 @@
     <target name="main">
         <exec executable="${compc}" >
             <arg line="-load-config+=${config}" />
+            <arg line="-compiler.source-path+=${library.system.src}" />
             <arg line="-external-library-path+=../../../libs/core.swc" />
         </exec>
     </target>
