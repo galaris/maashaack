@@ -965,4 +965,118 @@ package examples
     }
 }
 }}}
+
+=== The system.process.Initializer class ===
+
+The *Initializer* class is dynamic and provides a basic task with a custom initialize method. This method can be dynamic or defines in a class who extends the *Initializer* class.
+
+*usage*
+
+{{{new Initializer()}}}
+
+*basic example*
+
+{{{
+import system.process.Action ;
+import system.process.Initializer ;
+
+var finish:Function = function( action:Action ):void
+{
+    trace( "finish" ) ;
+}
+
+var start:Function = function( action:Action ):void
+{
+    trace( "start" ) ;
+}
+
+var process:Initializer = new Initializer() ;
+
+process.initialize = function():void
+{
+    trace( "initialize your application" ) ;
+}
+
+process.startIt.connect( start ) ;
+process.finishIt.connect( finish ) ;
+
+process.run() ;
+}}}
+
+_*Result in the output panel :*_
+
+{{{
+start
+initialize your application
+finish
+}}}
+
+*example with inheritance*
+
+In the *system.process.Initializer* class the *initialize* method is defines in the *prototype* of the class. If you extends your class you can defines a public method without use the *override* keyword.
+
+{{{
+package examples.process
+{
+    import system.process.Initializer;
+    
+    public class Init extends Initializer
+    {
+        public function Init()
+        {
+            super();
+        }
+        
+        public function initialize():void
+        {
+            trace( "initialize your application now" ) ;
+        };
+    }
+}
+}}}
+
+Now we can use basically the custom initializer object : 
+
+{{{
+package examples
+{
+    import examples.process.Init;
+    
+    import system.process.Action;
+    
+    import flash.display.Sprite;
+    
+    public class InitializerWithInheritageExample extends Sprite
+    {
+        public function InitializerWithInheritageExample()
+        {
+            var process:Init = new Init() ;
+            
+            process.startIt.connect( start ) ;
+            process.finishIt.connect( finish ) ;
+            
+            process.run() ;
+        }
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+_*Result in the output panel :*_
+
+{{{
+start
+initialize your application now
+finish
+}}}
+
 // TODO continue the reference (in progress)
