@@ -35,8 +35,7 @@
 
 package system
 {
-    import system.config;
-    import system.metadata;
+    import core.strings.format;
     
     /**
      * The basic system info.
@@ -74,17 +73,17 @@ package system
             str += "{sep}";
         }
         
-        return Strings.format( str, {
-                                       sep: separator,
-                                       crlf: CRLF,
-                                       name: metadata.name ,
-                                       fullname: metadata.fullname,
-                                       version: metadata.version,
-                                       host: Environment.host ,
-                                       isdebug: Environment.host.isDebug( ) ? " (debug)" : "",
-                                       os: Environment.os,
-                                       config: system.config.toSource()
-                                    } );
+        return format( str, {
+                       sep: separator,
+                       crlf: CRLF,
+                       name: metadata.name ,
+                       fullname: metadata.fullname,
+                       version: metadata.version,
+                       host: Environment.host ,
+                       isdebug: Environment.host.isDebug( ) ? " (debug)" : "",
+                       os: Environment.os,
+                       config: system.config.toSource()
+                    } );
     };
 }
 
