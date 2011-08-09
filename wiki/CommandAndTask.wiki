@@ -1507,4 +1507,379 @@ progress : [Pause duration:10s]
 finish
 }}}
 
-// TODO continue the reference (in progress)
+=== The system.process.Chain class ===
+
+A chain extends the *TaskGroup* class and defines a sequence with a finite or infinite number of actions. All actions registered in the chain can be executed one by one with different strategies (loop, priority, auto remove, etc).
+
+*usage*
+
+{{{
+new Chain( length:uint = 0 , fixed:Boolean = false , looping:Boolean = false , numLoop:uint = 0 , mode:String = "normal" , actions:* = null )
+}}}
+
+*basic example*
+
+Use a *Chain* to run one by one a set of tasks (Pause object) and use *Signals* to dispatch the phases of the running sequence (start, progress, finish).
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.Chain;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
+    
+    public class ChainBasicExample extends Sprite
+    {
+        public function ChainBasicExample()
+        {
+            var chain:Chain = new Chain() ;
+            
+            chain.finishIt.connect( finish ) ;
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start  ) ;
+            
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(2) ) ;
+            chain.addAction( new Pause(3) ) ;
+            
+            chain.run() ;
+        }
+        
+        public function finish( action:Action ):void
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "progress : " + (action as Chain).current ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+==== priority example ====
+
+All *Action* registered in a *Chain* with the *addAction* method can support a priority to sort it in the group.
+
+{{{
+addAction( action:Action , priority:int = 0 , autoRemove:Boolean = false ):Boolean
+}}}
+
+You can determinate with the priority argument the level of the action in the collection. The priority is designated by a signed 32-bit integer. The higher the number, the higher the priority. All actions with priority n are processed before actions of priority n-1. If two or more actions share the same priority, they are processed in the order in which they were added. The default priority is 0.
+
+If the *Action* implements the *system.process.Priority* interface the priority argument in the *addAction* method is ignored and the priority attribute of the Priority action is used to sort the task in the group.
+
+{{{
+package examples
+{
+    import examples.process.PriorityTask;
+
+    import system.process.Action;
+    import system.process.Chain;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
+    
+    public class ChainPriorityExample extends Sprite
+    {
+        public function ChainPriorityExample()
+        {
+            chain = new Chain() ;
+            
+            chain.finishIt.connect( finish ) ;
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start ) ;
+            
+            // use the priority argument
+            
+            chain.addAction( new Pause(1) , 100 ) ;
+            chain.addAction( new Pause(2) , 1   ) ;
+            chain.addAction( new Pause(3) , 200 ) ;
+            chain.addAction( new Pause(4) , 50  ) ;
+            
+            // use Priority task objects (see Note)
+            
+            chain.addAction( new PriorityTask( "task1" , 25  ) ) ;
+            chain.addAction( new PriorityTask( "task2" , 75  ) ) ;
+            chain.addAction( new PriorityTask( "task3" , 150 ) ) ;
+            
+            chain.run() ;
+        }
+        
+        public var chain:Chain ;
+        
+        public function finish( action:Action ):void
+        {
+            trace( "#finish" ) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "#progress current:" + chain.current ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "#start" ) ;
+        }
+    }
+}
+}}}
+
+_*Result in the output panel :*_
+
+{{{
+#start
+#progress current:[Pause duration:3s]
+#progress current:[PriorityTask name:task3 priority:150]
+#progress current:[Pause duration:1s]
+#progress current:[PriorityTask name:task2 priority:75]
+#progress current:[Pause duration:4s]
+#progress current:[PriorityTask name:task1 priority:25]
+#progress current:[Pause duration:2s]
+#finish
+}}}
+
+*Note :* The basic *PriorityTask* class in the previous example implements the system.process.Priority interface and is used only to illustrate the priority behaviour of the addAction method with a passed-in Priority action object.
+
+{{{
+package examples.process
+{
+    import system.process.Task;
+    import system.process.Priority;
+    
+    public class PriorityTask extends Task implements Priority
+    {
+        public function PriorityTask( name:String , priority:int )
+        {
+            this.name = name ;
+            _priority = priority ;
+        }
+        
+        public var name:String ;
+        
+        public function get priority():int
+        {
+            return _priority;
+        }
+        
+        public function set priority(value:int):void
+        {
+            _priority = value ;
+        }
+        
+        public override function run( ...arguments:Array ):void 
+        {
+            notifyStarted() ;
+            // do something here
+            notifyFinished() ;
+        }
+        
+        public override function toString():String
+        {
+            return "[PriorityTask name:" + name + " priority:" + priority + "]" ;
+        }
+        
+        private var _priority:int ;
+    }
+}
+}}}
+
+==== looping example ====
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.Chain;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
+    
+    public class ChainLoopExample extends Sprite
+    {
+        public function ChainLoopExample()
+        {
+            chain = new Chain() ;
+            
+            chain.looping = true ;
+            chain.numLoop = 3 ;
+            
+            chain.finishIt.connect( finishg ) ;
+            chain.loopIt.connect( loop ) ; 
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start ) ;
+            
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            chain.addAction( new Pause(1) ) ;
+            
+            trace( "current:" + chain.currentLoop + " num:" + chain.numLoop ) ;
+            
+            chain.run() ;
+        }
+        
+        public var chain:Chain ;
+        
+        public function finish( action:Action ):void
+        {
+            trace( "#finish" ) ;
+        }
+        
+        public function loop( action:Action ):void
+        {
+            trace("#loop current:"+chain.currentLoop+" num:"+chain.numLoop) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "#progress" ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "#start" ) ;
+        }
+    }
+}
+}}}
+
+==== auto-remove example ====
+
+Use the *autoRemove* argument in the *addAction* method to remove the current task in the internal collection of the chain when it'is running the first time in the chain process.
+
+{{{
+package examples
+{
+    import examples.process.Message;
+    
+    import system.events.ActionEvent;
+    import system.process.Chain;
+    
+    import flash.display.Sprite;
+    
+    public class ChainAutoRemoveExample extends Sprite
+    {
+        public function ChainAutoRemoveExample()
+        {
+            chain = new Chain() ;
+            
+            chain.addEventListener( ActionEvent.FINISH   , debug    ) ;
+            chain.addEventListener( ActionEvent.PROGRESS , progress ) ;
+            chain.addEventListener( ActionEvent.START    , debug    ) ;
+            
+            chain.addAction( new Message("1") , 0 , false ) ;
+            chain.addAction( new Message("2") , 0 , true  ) ;
+            chain.addAction( new Message("3") , 0 , false ) ;
+            chain.addAction( new Message("4") , 0 , true  ) ;
+            
+            chain.looping = true ;
+            chain.numLoop = 2 ;
+            
+            chain.run() ;
+        }
+        
+        public var chain:Chain ;
+        
+        public function debug( e:ActionEvent ):void
+        {
+            trace( "# " + e.type ) ;
+        }
+        
+        public function progress( e:ActionEvent ):void
+        {
+            trace( "# " + e.type + " current:" + chain.current ) ;
+        }
+    }
+}
+}}}
+
+==== mode example ====
+
+Defines in the *TaskGroup* superclass of the *Chain* class, the mode attribute defines the "normal", "transient" or "everlasting" behavior of the chain.
+
+The mode can be 
+ * *normal* : the task-group has a normal life cycle.
+ * *everlasting* : the action register in the task-group can't be auto-remove.
+ * *transient* : all actions are strictly auto-remove in the task-group when are invoked.
+
+{{{
+package examples
+{
+    import examples.process.Message;
+    
+    import system.process.Action;
+    import system.process.Chain;
+    
+    import flash.display.Sprite;
+    
+    public class ChainModeExample extends Sprite
+    {
+        public function ChainModeExample()
+        {
+            chain = new Chain() ;
+            
+            chain.finishIt.connect( finish ) ;
+            chain.loopIt.connect( loop ) ; 
+            chain.progressIt.connect( progress ) ;
+            chain.startIt.connect( start ) ;
+            
+            chain.addAction( new Message("1") , 0 , false ) ;
+            chain.addAction( new Message("2") , 0 , true  ) ;
+            chain.addAction( new Message("3") , 0 , false ) ;
+            chain.addAction( new Message("4") , 0 , true  ) ;
+            
+            chain.looping = true ;
+            chain.numLoop = 1 ;
+            
+            trace("------ everlasting") ;
+            
+            chain.mode = Chain.EVERLASTING ;
+            
+            chain.run() ;
+            
+            trace("------ normal") ;
+            
+            chain.mode = Chain.NORMAL ;
+            
+            chain.run() ;
+            
+            trace("------ transient") ;
+            
+            chain.mode = Chain.TRANSIENT ;
+            
+            chain.run() ;
+        }
+        
+        public var chain:Chain ;
+        
+        protected function finish( action:Action ):void
+        {
+            trace( "#finish" ) ;
+        }
+        
+        protected function loop( action:Action ):void
+        {
+            trace( "#loop" ) ;
+        }
+        
+        protected function progress( action:Action ):void
+        {
+            trace( "#progress current:" + chain.current ) ;
+        }
+        
+        protected function start( action:Action ):void
+        {
+            trace( "#start" ) ;
+        }
+    }
+}
+}}}
