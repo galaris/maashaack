@@ -1070,4 +1070,67 @@ initialize your application now
 finish
 }}}
 
+=== The system.process.EventDispatcherTask class ===
+
+This task is a wrapper to encapsulate a specific *flash.events.EventDispatcher* object and dispatch an event with it when the process is executed.
+
+*usage*
+
+{{{
+new EventDispatcherTask( dispatcher:EventDispatcher = null , event:* = null , verbose:Boolean = false )
+}}}
+
+*Note :* The verbose argument is optional and allow the logging messages when the task without a valid EventDispatcher reference or a valid Event reference.
+
+*example*
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.EventDispatcherTask;
+    
+    import flash.display.Sprite;
+    import flash.events.Event;
+    import flash.events.EventDispatcher;
+    
+    public class EventDispatcherTaskExample extends Sprite
+    {
+        public function EventDispatcherTaskExample()
+        {
+            var dispatcher:EventDispatcher = new EventDispatcher() ;
+            var event:Event                = new Event("action") ;
+            
+            ///////
+            
+            dispatcher.addEventListener( "action" , debug ) ;
+            
+            ///////
+            
+            var process:EventDispatcherTask = new EventDispatcherTask(dispatcher,event);
+                        
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ;
+            
+            process.run() ;
+        }
+        
+        public function debug( e:Event ):void
+        {
+            trace( e.type ) ;
+        }
+        
+        public function finish( action:Action ):void
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
 // TODO continue the reference (in progress)
