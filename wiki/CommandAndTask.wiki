@@ -1424,4 +1424,87 @@ Indicates if the specified Action is register in the task group.
 
 Remove a specific action register in the collection and if the passed-in argument is null all actions register in the chain are removed (you can use too the length property with the 0 value).
 
+
+=== The system.process.BatchTask class ===
+
+Execute a batch of tasks and notify a finish message only when all tasks are finished.
+
+*usage*
+
+{{{
+new BatchTask( length:uint = 0 , fixed:Boolean = false , looping:Boolean = false , numLoop:uint = 0 , mode:String = "normal" , actions:* = null )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.BatchTask;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
+    
+    public class BatchTaskExample extends Sprite
+    {
+        public function BatchTaskExample()
+        {
+            batch = new BatchTask() ;
+            
+            // batch.mode = BatchTask.TRANSIENT ;
+            
+            batch.changeIt.connect( change ) ;
+            batch.finishIt.connect( finish ) ;
+            batch.progressIt.connect( progress ) ;
+            batch.startIt.connect( start ) ;
+            
+            batch.addAction( new Pause(  2 , true ) , 0 , true ) ;
+            batch.addAction( new Pause( 10 , true ) ) ;
+            batch.addAction( new Pause(  1 , true ) , 0 , true ) ;
+            batch.addAction( new Pause(  5 , true ) ) ;
+            batch.addAction( new Pause(  7 , true ) , 0 , true ) ;
+            batch.addAction( new Pause(  2 , true ) ) ;
+            
+            batch.run() ;
+        }
+        
+        public var batch:BatchTask ;
+        
+        public function change( action:Action ):void
+        {
+            trace( "change current:" + batch.current ) ;
+        }
+        
+        public function finish( action:Action ):void
+        {
+            trace( "finish length:" + batch.length ) ;
+        }
+        
+        public function progress( action:Action ):void
+        {
+            trace( "progress current:" + batch.current ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+_*Result in the output panel :*_
+
+{{{
+start
+progress : [Pause duration:1s]
+progress : [Pause duration:2s]
+progress : [Pause duration:2s]
+progress : [Pause duration:5s]
+progress : [Pause duration:7s]
+progress : [Pause duration:10s]
+finish
+}}}
+
 // TODO continue the reference (in progress)
