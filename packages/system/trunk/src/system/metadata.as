@@ -35,20 +35,23 @@
 
 package system
 {
-    import flash.display.Sprite;
     
     /**
-     * The basic framework Library to be included in the SWC.
-     * <p><b>Note :</b> This class is not a component, it just
-     * a shim that allow to declare the SWC manifest and associate an icon file.</p>
-     */
-    [IconFile("maashaack.png")]
-    public class Library extends Sprite
+    * stores static metadata about the project
+    */
+    public class metadata
     {
-        public function Library()
-        {
-            super();
-        }
+        
+        public static var name:String = "x4a";
+        
+        public static var fullname:String = "maashaack framework";
+        
+        public static var version:Version = new Version();
+        
+        include "version.properties"
+         
+        version.revision = parseInt( "$Rev: 603 $".split( " " )[1] );
         
     }
+    
 }

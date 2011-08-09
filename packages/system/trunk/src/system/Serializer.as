@@ -35,20 +35,52 @@
 
 package system
 {
-    import flash.display.Sprite;
-    
+
     /**
-     * The basic framework Library to be included in the SWC.
-     * <p><b>Note :</b> This class is not a component, it just
-     * a shim that allow to declare the SWC manifest and associate an icon file.</p>
+     * Defines what a Serializer have to implements to be integrated in the framework.
+     * <p><b>Note :</b> Every serializers (eden, json, wddx, etc.) should implement it.</p>
      */
-    [IconFile("maashaack.png")]
-    public class Library extends Sprite
+    public interface Serializer
     {
-        public function Library()
-        {
-            super();
-        }
+        /**
+         * The prettyIndent value of the serializer.
+         */
+        function get prettyIndent():int;
         
+        /**
+         * @private
+         */
+        function set prettyIndent( value:int ):void;
+        
+        /**
+         * The prettyPrinting value of the serializer.
+         */
+        function get prettyPrinting():Boolean;
+        
+        /**
+         * @private
+         */
+        function set prettyPrinting( value:Boolean ):void;
+        
+        /**
+         * The identor String value of the serializer.
+         */
+        function get indentor():String;
+        
+        /**
+         * @private
+         */
+        function set indentor( value:String ):void;
+        
+        /**
+         * Deserialize the specified String source representation.
+         */
+        function deserialize( source:String ):*;
+        
+        /**
+         * Serialize the specified object.
+         */
+        function serialize( value:* ):String;
     }
 }
+

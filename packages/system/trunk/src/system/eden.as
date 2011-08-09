@@ -35,20 +35,11 @@
 
 package system
 {
-    import flash.display.Sprite;
+    import system.serializers.eden.EdenSerializer;
     
     /**
-     * The basic framework Library to be included in the SWC.
-     * <p><b>Note :</b> This class is not a component, it just
-     * a shim that allow to declare the SWC manifest and associate an icon file.</p>
+     * The eden singleton serializer.
      */
-    [IconFile("maashaack.png")]
-    public class Library extends Sprite
-    {
-        public function Library()
-        {
-            super();
-        }
-        
-    }
+    public const eden:EdenSerializer = new EdenSerializer( );
 }
+
