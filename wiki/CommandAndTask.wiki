@@ -978,7 +978,9 @@ The *Initializer* class is dynamic and provides a basic task with a custom initi
 
 *usage*
 
-{{{new Initializer()}}}
+{{{
+new Initializer()
+}}}
 
 *basic example*
 
