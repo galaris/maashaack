@@ -1038,37 +1038,28 @@ package examples.process
 Now we can use basically the custom initializer object : 
 
 {{{
-package examples
+import examples.process.Init;
+
+import system.process.Action;
+   
+import flash.display.Sprite;
+
+function finish( action:Action ):void 
 {
-    import examples.process.Init;
-    
-    import system.process.Action;
-    
-    import flash.display.Sprite;
-    
-    public class InitializerWithInheritageExample extends Sprite
-    {
-        public function InitializerWithInheritageExample()
-        {
-            var process:Init = new Init() ;
-            
-            process.startIt.connect( start ) ;
-            process.finishIt.connect( finish ) ;
-            
-            process.run() ;
-        }
-        
-        public function finish( action:Action ):void 
-        {
-            trace( "finish" ) ;
-        }
-        
-        public function start( action:Action ):void 
-        {
-            trace( "start" ) ;
-        }
-    }
+    trace( "finish" ) ;
 }
+
+function start( action:Action ):void 
+{
+    trace( "start" ) ;
+}
+   
+var process:Init = new Init() ;
+            
+process.startIt.connect( start ) ;
+process.finishIt.connect( finish ) ;
+
+process.run() ;
 }}}
 
 _*Result in the output panel :*_
