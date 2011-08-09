@@ -39,7 +39,8 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.trimEnd ;
-     * trace( trimEnd("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // ---hello world
+     * import core.strings.whiteSpaceChars ;
+     * trace( trimEnd("---hello world---" , ["-"].concat( whiteSpaceChars) ) ); // ---hello world
      * </pre>
      * @param source The string to trim.
      * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.

@@ -39,8 +39,9 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.trimStart ;
+     * import core.strings.whiteSpaceChars ;
      * 
-     * trace( trimStart("---hello world---" , Strings.whiteSpaceChars.concat("-") ) ); // hello world---
+     * trace( trimStart("---hello world---" , ["-"].concat(whiteSpaceChars) ) ); // hello world---
      * </pre>
      * 
      * @param source The string to trim.
