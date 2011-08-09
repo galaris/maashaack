@@ -1362,4 +1362,66 @@ package examples
 }
 }}}
 
+== The groups of tasks ==
+
+=== The system.process.TaskGroup class ===
+
+A task-group is a collection with a finite or infinite number of actions. This class is considered abstract and will not allow these to be instantiated.
+
+You can extend this class with your custom classes but the main objective of this class is to defines the core of the *system.process.BatchTask* and the *system.process.Chain* classes.
+This class provides important properties to register Action objects and defines a complex process in your application.
+
+==== Properties ==== 
+
+*length*
+
+Indicates the numbers of actions register in the group. This property is writable and can change the size of the group. 
+
+To clear and remove all Action registered in the task-group you can change the value of the length property in 0.
+
+*mode*
+
+Determinates the mode of the group. The mode can be 
+ * *normal* : the task-group has a normal life cycle.
+ * *everlasting* : the action register in the task-group can't be auto-remove.
+ * *transient* : all actions are strictly auto-remove in the task-group when are invoked.
+
+Use the *addAction* method to auto remove the specific registered Action in the task-group in the normal mode. See the *autoRemove* argument in this method.
+
+*stopped (readonly)*
+
+Indicates if the process of the task-group is stopped.
+
+*verbose*
+
+Activate the verbose mode in the toString() method of the object.
+
+==== Methods ====
+
+*addAction( action:Action , priority:int = 0 , autoRemove:Boolean = false ):Boolean*
+
+Adds a new *Action* in the task group. 
+
+You can determinates with the priority argument the level of the action in the collection. The priority is designated by a signed 32-bit integer. The higher the number, the higher the priority. All actions with priority n are processed before actions of priority n-1. If two or more actions share the same priority, they are processed in the order in which they were added. The default priority is 0.
+
+If the *Action* implements the system.process.Priority interface the priority argument in the addAction method is ignored and the priority attribute of the *Priority* action is used to sort the task in the group.
+
+With the *autoRemove* argument the task group can invoke a removeAction after the first finish notification of the current *Action* object.
+
+*dispose():void*
+
+Dispose the group and disconnect all actions but don't remove them. This feature is optional.
+
+*getActionAt( index:uint ):Action*
+
+Returns the action register in the task group at the specified index value or null.
+
+*hasAction( action:Action ):Boolean*
+
+Indicates if the specified Action is register in the task group.
+
+*removeAction( action:Action = null ):Boolean*
+
+Remove a specific action register in the collection and if the passed-in argument is null all actions register in the chain are removed (you can use too the length property with the 0 value).
+
 // TODO continue the reference (in progress)
