@@ -1262,4 +1262,104 @@ package examples
 }
 }}}
 
+=== The system.process.DelayedTask class ===
+
+This class provides a delayed task who is executed after a specific delay in milliseconds.
+
+The *DelayedTask* class extends the *systemp.process.CoreAction* abstract class and implements too the tree interfaces *Resumable*, *Startable* and *Stoppable*.
+
+A *DelayedTask* use composition to encapsulate a specific task (Action) and run it with a specific time interval. You can passed-in the reference of the task in the constructor of the class or with the "task" property of the *DelayedTask* instance.
+
+*example*
+
+Use the *DelayedTask* with a *Message* instance to notify a message with a specific delay.
+
+{{{
+package examples
+{
+    import examples.process.Message;
+    
+    import system.process.Action;
+    import system.process.DelayedTask;
+    
+    import flash.display.Sprite;
+    
+    public class DelayedTaskExample extends Sprite
+    {
+        public function DelayedTaskExample()
+        {
+            var delayed:DelayedTask = new DelayedTask() ;
+            
+            delayed.finishIt.connect( finish ) ;
+            delayed.startIt.connect( start  ) ;
+            
+            delayed.task  = new Message("test") ;
+            delayed.delay = 4000 ;
+            
+            delayed.run() ; // The task message start in 4 second
+        }
+        
+        public function finish( action:Action ):void
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+=== The system.process.Pause class ===
+
+This command is used to pause the currently running process until a specific delay is not finished or until the user stop it.
+
+*usage*
+
+{{{
+new Pause( duration:Number = 0 , useSeconds:Boolean = true )
+}}}
+
+The *useSeconds* argument defines if the duration value is in seconds or in milliseconds. By this argument default is *true*. You can change this property when you want with the getter/setter property for this purpose.
+
+*example*
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.Pause;
+    
+    import flash.display.Sprite;
+    
+    public class PauseExample extends Sprite
+    {
+        public function PauseExample()
+        {
+            var pause:Pause = new Pause( 5 ) ;
+            
+            trace ( "pause    : " + pause ) ;
+            trace ( "duration : " + pause.duration ) ;
+            
+            pause.startIt.connect( start ) ;
+            pause.finishIt.connect( finish ) ;
+            
+            pause.run() ;
+        }
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
 // TODO continue the reference (in progress)
