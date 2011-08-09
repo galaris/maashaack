@@ -738,7 +738,10 @@ Enqueue a collection of members definitions (commands) to apply or invoke with t
 The *Cache* class is a helper to implements for example the *Load/Cache/Proxy* pattern, this pattern defines a simple logic to load an external source code (in an external swf for example) and not wait the end of the loading process to use it and invoke this commands immediately.
 
 *usage*
-{{{new Cache( target:* = null )}}}
+
+{{{
+new Cache( target:* = null )
+}}}
 
 *basic example*
 
@@ -917,7 +920,10 @@ package examples
 A *BindTask* instance wraps a function in another, locking its execution scope to a specific object.
 
 *usage*
-{{{new BindTask( func:Function , scope:* = null , ...arguments:Array )}}}
+
+{{{
+new BindTask( func:Function , scope:* = null , ...arguments:Array 
+)}}}
 
 *basic example*
 
