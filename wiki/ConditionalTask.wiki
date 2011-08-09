@@ -693,3 +693,752 @@ trace( cond.eval() ) ; // true
 cond = new Zero( 10 ) ;
 trace( cond.eval() ) ; // false
 }}}
+
+== Package system.logic == 
+
+=== system.logic.IfTask ===
+
+Performs some tasks based on whether a given condition holds true or not.
+
+The *system.logic.IfTask* class extends the *system.process.Task* class and implements the *system.process.Action* interface, it can be used in a *Chain* or *BatchTask* object.
+
+*usage*
+
+{{{
+new IfTask ( rule:Boolean , thenTask:Action , elseTask:Action , …elseIfTask:Array )
+new IfTask ( rule:Rule , thenTask:Action , elseTask:Action , …elseIfTask:Array )
+}}}
+
+*Methods*
+
+ * task.addRule( rule:* ):IfTask
+ * task.addThen( action:Action ):IfTask
+ * task.addElse( action:Action ):IfTask
+ * task.addElseIf( …elseIfTasks:Array ):IfTask
+ * task.removeRule():IfTask
+ * task.removeThen():IfTask
+ * task.removeElse():IfTask
+ * task.removeAllElseIf():IfTask
+
+*Note :* In the constructor of the *IfTask* class and this *'addElseIf'* method the optional *…elseIfTasks* Array arguments are a suite of *ElseIf* objects or a couple of *Rule* and *Task* objects.
+
+In all the next examples i defines and use the custom class *examples.process.Message* defines with the source code :
+
+{{{
+package examples.process
+{
+   import system.process.Task;
+   
+   public class Message extends Task
+   {
+       public function Message( message:String )
+       {
+           this.message = message ;
+       }
+       
+       public var message:String ;
+       
+       public override function run( ...arguments:Array ):void
+       {
+           notifyStarted() ;
+           trace( message ) ;
+           notifyFinished() ;
+       }
+   }
+}
+}}}
+
+*Example 1*
+
+{{{
+import examples.process.Message ;
+
+import system.process.Task ;
+import system.logic.IfTask ;
+
+import system.rules.BooleanRule ;
+
+var task:Task = new IfTask() ;
+
+task.addRule( ge) ) ;
+task.addThen( new Message("then")    ) ;
+task.addElse( new Message("else")    ) ;
+
+task.addElseIf
+(
+    new BooleanRule(false) , new Message("elseif #1") 
+)
+
+task.addElseIf
+(
+    new ElseIf(new BooleanRule(true),new Message("elseif #2")) , 
+    new ElseIf(new BooleanRule(true),new Message("elseif #3")) , 
+    
+    new BooleanRule(true) , new Message("elseif #4") ,
+    new BooleanRule(true) , new Message("elseif #5") 
+ ) ;
+
+task.run() ;
+}}}
+
+*Example 2 (inline invocation)*
+
+{{{
+import examples.process.Message ;
+
+import system.process.Task ;
+import system.logic.IfTask ;
+import system.rules.Equals ;
+
+var task:Task = new IfTask() ;
+
+task.addRule(new Equals(1,2))
+    .addThen(new Message("then"))
+    .addElse(new Message("else"))
+    .run() ;
+}}}
+
+=== system.logic.ElseIf ===
+
+Performs a specific elseif conditional task in the *IfTask* instances.
+
+*usage*
+
+{{{
+new ElseIf ( rule:Boolean , then:Action )
+new ElseIf ( rule:Rule    , then:Action )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message ;
+
+import system.process.Task ;
+import system.logic.ElseIf ;
+import system.logic.IfTask ;
+
+import system.rules.Equals ;
+
+var value:Number = 10 ;
+
+var ei1:ElseIf = new ElseIf((value>10),new Message("value > 10")) ;
+var ei2:ElseIf = new ElseIf(new Equals(value,10),new Message("value == 10")) ;
+
+var task:Task = new IfTask() ;
+
+task.addRule( value < 10 )
+    .addThen( new Message("value < 10") )
+    .addElseIf( ei1 , ei2 )
+    .run() ;
+}}}
+
+=== system.logic.ElseIf subclasses ===
+
+You can use a pre-set of *ElseIf* subclasses, all this classes extends the ElseIf class and defines a specific constructor who defines the specific rules to use it easily and automatically :
+
+_*ElseIfEmptyString, ElseIfEquals, ElseIfFalse, ElseIfGreaterOrEqualsThan, ElseIfGreaterThan, ElseifLessOrEqualsThan, ElseIfLessThan, ElseIfNull, ElseIfTrue, ElseIfZero*_
+
+*example*
+
+{{{
+import examples.process.Message ;
+
+import system.process.Task ;
+import system.logic.ElseIfZero ;
+import system.logic.IfTask ;
+
+var value:Number = 0 ;
+
+var task:Task = new IfTask() ;
+
+task.addRule( value < 10 )
+    .addThen( new Message("value < 10") )
+    .addElseIf( new ElseIfZero( value , new Message("value == 0") ) )
+    .run() ;
+}}}
+
+=== system.logic.IfTrue ===
+
+Perform some tasks based on whether a given condition holds true.
+
+The *system.logic.IfTrue* class extends the *IfTask* class. This conditional task use a system.rules.True rule to defines the process.
+
+*usage*
+
+{{{
+new IfTrue( condition:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message;
+import system.logic.IfTrue;
+
+var task:IfTrue ;
+
+var value:uint = 10 ;  
+
+task = new IfTrue(value == 10,new Message("then"),new Message("else")) ;
+
+task.run() ; // then
+}}}
+
+=== system.logic.IfFalse ===
+
+Perform some tasks based on whether a given condition holds false.
+
+The *system.logic.IfFalse* class extends the *IfTask* class. This conditional task use a system.rules.False rule to defines the process.
+
+*usage*
+
+{{{
+new IfFalse( condition:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message;
+import system.logic.IfFalse;
+
+var task:IfFalse ;
+
+var value:uint = 10 ;  
+
+task = new IfFalse(value == 10,new Message("then"),new Message("else")) ;
+
+task.run() ; // else
+}}}
+
+=== system.logic.IfEquals ===
+
+Perform some tasks based on whether a given condition holds equality of two values.
+
+The *system.logic.ifEquals* class extends the *IfTask* class. This conditional task use a *system.rules.Equals* rule to defines the process.
+
+*usage*
+
+{{{
+new IfEquals( value1:* , value2:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message;
+import system.logic.IfEquals;
+
+var a:uint = 10 ;
+var b:uint = 20 ;
+
+var task:IfEquals ;
+
+task = new IfEquals( 10 , 10 , new Message("then"), new Message("else")) ;
+task.run() ; // then
+
+task = new IfEquals( 10 , 20 , new Message("then"), new Message("else")) ;
+task.run() ; // else
+}}}
+
+=== system.logic.IfNull ===
+
+Perform some tasks based on whether a given value is null (strict or not).
+
+The *system.logic.IfNull* class extends the *IfTask* class. This conditional task use a *system.rules.Null* rule to defines the process.
+
+*usage*
+
+{{{
+new IfNull( value:* , strict:Boolean = false , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message;
+import system.logic.IfNull;
+
+var task:IfNull ;
+
+var value:* ;  
+
+task = new IfNull( undefined , true , new Message("then #1") , new Message("else #1") ) ;
+task.run() ; // else #1
+            
+task = new IfNull( undefined , false , new Message("then #2") , new Message("else #2") ) ;
+task.run() ; // then #2
+           
+task = new IfNull( null , false , new Message("then #3") , new Message("else #3") ) ;
+task.run() ; // then #3
+            
+task = new IfNull( "hello" , false , new Message("then #4") , new Message("else #4") ) ;
+task.run() ; // else #4
+}}}
+
+=== system.logic.IfUndefined ===
+
+Perform some tasks based on whether a given value is undefined.
+
+The *system.logic.IfUndefined* class extends the *IfTask* class. This conditional task use a *system.rules.Undefined* rule to defines the process.
+
+*usage*
+
+{{{
+new IfUndefined( value:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+import examples.process.Message;
+import system.logic.IfUndefined;
+
+var task:IfUndefined ;
+ 
+var value:* ;
+
+task = new IfUndefined(value,new Message("then #1"),new Message("else #1")) ;
+task.run() ; // then #1
+            
+value = null ;
+task  = new IfUndefined(value,new Message("then #2"),new Message("else #2")) ;
+task.run() ; // else #2
+            
+value = "hello" ;
+task = new IfUndefined(value,new Message("then #3"),new Message("else #3")) ;
+task.run() ; // else #3
+}}}
+
+=== system.logic.IfZero ===
+
+Perform some tasks based on whether a given value is 0.
+
+The *system.logic.IfZero* class extends the *IfTask* class. This conditional task use a *system.rules.Zero* rule to defines the process.
+
+*usage*
+
+{{{
+new IfZero( value:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfZero;
+    
+    import flash.display.Sprite;
+    
+    public class IfZeroExample extends Sprite
+    {
+        public function IfZeroExample()
+        {
+            var task:IfZero ;
+            
+            var value:uint ;
+            
+            task = new IfZero( value , new Then(), new Else() ) ;
+            task.run() ; // then
+            
+            value = 10 ;
+            
+            task = new IfZero( value , new Then(), new Else() ) ;
+            task.run() ; // else
+            
+            value = 0 ;
+            
+            task = new IfZero( value , new Then(), new Else() ) ;
+            task.run() ; // then
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
+
+=== system.logic.IfEmptyString ===
+
+Perform some tasks based on whether a given value is an empty string ("").
+
+The *system.logic.IfEmptyString* class extends the *IfTask* class. This conditional task use a *system.rules.EmptyString* rule to defines the process.
+
+*usage*
+
+{{{
+new IfEmptyString( value:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfEmptyString;
+    
+    import flash.display.Sprite;
+    
+    public class IfEmptyStringExample extends Sprite
+    {
+        public function IfEmptyStringExample()
+        {
+            var task:IfEmptyString ;
+            
+            var value:String ;
+            
+            task = new IfEmptyString( value , new Then(), new Else() ) ;
+            task.run() ; // else
+            
+            value = "" ;
+            
+            task = new IfEmptyString( value , new Then(), new Else() ) ;
+            task.run() ; // then
+            
+            value = "hello" ;
+            
+            task = new IfEmptyString( value , new Then(), new Else() ) ;
+            task.run() ; // else
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
+
+=== system.logic.IfGreaterThan ===
+
+Perform some tasks based on whether a given value is greater than another value.
+
+The *system.logic.IfGreaterThan* class extends the *IfTask* class. This conditional task use a *system.rules.GreaterThan* rule to defines the process.
+
+*usage*
+
+{{{
+new IfGreaterThan( value1:* , value2:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfGreaterThan;
+    
+    import flash.display.Sprite;
+    
+    public class IfGreaterThanExample extends Sprite
+    {
+        public function IfGreaterThanExample()
+        {
+            var task:IfGreaterThan ;
+            
+            var th:Then = new Then() ;
+            var el:Else = new Else() ;
+           
+            var value1:uint = 10 ;
+            var value2:uint = 20 ;
+            
+            task = new IfGreaterThan(value1,value2,th,el) ;
+            task.run() ; // else
+            
+            task = new IfGreaterThan(value2,value1,th,el) ;
+            task.run() ; // then
+            
+            task = new IfGreaterThan(value1,value1,th,el) ;
+            task.run() ; // else
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
+
+=== system.logic.IfGreaterOrEqualsThan ===
+
+Perform some tasks based on whether a given value is greater or equals than another value.
+
+The *system.logic.IfGreaterOrEqualsThan* class extends the *IfTask* class. This conditional task use a *system.rules.GreaterOrEqualsThan* rule to defines the process.
+
+*usage*
+
+{{{
+new IfGreaterOrEqualsThan( value1:* , value2:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfGreaterOrEqualsThan;
+    
+    import flash.display.Sprite;
+    
+    public class IfGreaterOrEqualsThanExample extends Sprite
+    {
+        public function IfGreaterOrEqualsThanExample()
+        {
+            var task:IfGreaterOrEqualsThan ;
+            
+            var th:Then = new Then() ;
+            var el:Else = new Else() ;
+
+            var value1:uint = 10 ;
+            var value2:uint = 20 ;
+            
+            task = new IfGreaterOrEqualsThan(value1,value2,th,el) ;
+            task.run() ; // else
+            
+            task = new IfGreaterOrEqualsThan(value2,value1,th,el) ;
+            task.run() ; // then
+            
+            task = new IfGreaterOrEqualsThan(value2,value1,th,el) ;
+            task.run() ; // then
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
+
+=== system.logic.IfLessThan ===
+
+Perform some tasks based on whether a given value is less than another value.
+
+The *system.logic.IfLessThan* class extends the *IfTask* class. This conditional task use a *system.rules.LessThan* rule to defines the process.
+
+*usage*
+
+{{{
+new IfLessThan( value1:* , value2:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfLessThan;
+    
+    import flash.display.Sprite;
+    
+    public class IfLessThanExample extends Sprite
+    {
+        public function IfLessThanExample()
+        {
+            var task:IfLessThan ;
+            
+            var th:Then = new Then() ;
+            var el:Else = new Else() ;
+           
+            var value1:uint = 10 ;
+            var value2:uint = 20 ;
+            
+            task = new IfLessThan(value1,value2,th,el) ;
+            task.run() ; // then
+            
+            task = new IfLessThan(value2,value1,th,el) ;
+            task.run() ; // else
+            
+            task = new IfLessThan(value1,value1,th,el) ;
+            task.run() ; // else
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
+
+=== system.logic.IfLessOrEqualsThan ===
+
+Perform some tasks based on whether a given value is less or equals than another value.
+
+The *system.logic.IfLessOrEqualsThan* class extends the *IfTask* class. This conditional task use a *system.rules.LessOrEqualsThan* rule to defines the process.
+
+*usage*
+
+{{{
+new IfLessOrEqualsThan( value1:* , value2:* , thenTask:Action = null , elseTask:Action = null , ...elseIfTasks:Array )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.logic.IfLessOrEqualsThan;
+    
+    import flash.display.Sprite;
+    
+    public class IfLessOrEqualsThanExample extends Sprite
+    {
+        public function IfLessOrEqualsThanExample()
+        {
+            var task:IfLessOrEqualsThan ;
+            
+            var th:Then = new Then() ;
+            var el:Else = new Else() ;
+
+            var value1:uint = 10 ;
+            var value2:uint = 20 ;
+            
+            task = new IfLessOrEqualsThan(value1,value2,th,el) ;
+            task.run() ; // then
+            
+            task = new IfLessOrEqualsThan(value2,value1,th,el) ;
+            task.run() ; // else
+            
+            task = new IfLessOrEqualsThan(value2,value1,th,el) ;
+            task.run() ; // then
+        }
+    }
+}
+
+import system.process.Task;
+
+class Then extends Task 
+{
+    public function Then() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "then" ) ;
+        notifyFinished() ;
+    }
+}
+
+class Else extends Task 
+{
+    public function Else() {}
+    
+    public override function run( ...arguments:Array ):void
+    {
+        notifyStarted() ;
+        trace( "else" ) ;
+        notifyFinished() ;
+    }
+}
+}}}
