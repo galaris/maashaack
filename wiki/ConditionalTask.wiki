@@ -1,0 +1,58 @@
+#summary the conditional task engine
+#labels Documentation
+
+= The conditional task engine =
+
+== Generality == 
+
+The conditional tasks are used to define which tasks will be executed based on the outcome of a given test defines with a specific conditional rule.
+
+The conditional tasks are very powerful because while making sure not to execute the complex instructions immediately, It allows to pre-set advanced strategies before launching the all important processes when we want during the application life cycle.
+
+The conditional rules defines the logic of the conditional blocks who serve to create a powerful conditional execution logic system. All rules are defines with a set of conditions : equality, comparison, null or undefined object, etc.
+
+== Package system.rules ==
+
+To create a *conditional task* you must use conditional rules to test and evaluate values or objects in your applications.
+
+The *system.rules* package defines a basic interface and classes to defines this conditional rules or create your custom rules.
+
+=== Rule ===  
+
+Basic interface of all conditional rules in the system.rules package.
+
+You can use all conditional rules in the system.rules package or create your custom conditions.
+
+*usage*
+
+{{{
+Rule.eval():Boolean
+}}}
+
+*example*
+
+{{{
+package example
+{
+    import system.rules.Rule ;
+    
+    public class IsPositive implements Rule
+    {
+        public function IsPositive( value:* )
+        {
+            this.value = value ;
+        }
+
+        public var value:* ;
+
+        public function eval():Boolean
+        {
+            return value > 0
+        }
+    }
+}
+}}}
+
+The *IsPositive* class is a custom conditional rule who implements the *Rule* interface to evaluate if a value is a number and positive.
+
+In the *system.rules* package you can find a set of simple rules with the classes : _True, False, Not, Equals, NotEquals, And, Or,_ etc.
