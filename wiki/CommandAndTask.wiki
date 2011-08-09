@@ -1883,3 +1883,159 @@ package examples
     }
 }
 }}}
+
+== The loader tasks ==
+
+=== The CoreActionLoader abstract class ===
+
+The main abstract class to create process who load external resources. 
+
+This core class not must be instantiated but help to create super-classes who encapsulate the *AS3* loader classes : *flash.display.Loader*, *flash.net.URLLoader* and *flash.net.URLStream*.
+
+=== The ActionLoader class ===
+
+This wrapper encapsulate a *flash.display.Loader* instance.
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.ActionLoader;
+    
+    import flash.display.Loader;
+    import flash.display.Sprite;
+    import flash.net.URLRequest;
+    
+    public class ActionLoaderExample extends Sprite
+    {
+        public function ActionLoaderExample()
+        {
+            var url:String    = "library/picture.png" ;
+            var loader:Loader = new Loader() ;
+            
+            loader.x = 50 ;
+            loader.y = 50 ;
+            
+            addChild(loader) ;
+            
+            var process:ActionLoader = new ActionLoader( loader ) ;
+            
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
+            
+            process.init.connect( init ) ; 
+            
+            process.request = new URLRequest( url ) ;
+            
+            process.run() ;
+        }
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function init( action:Action ):void 
+        {
+            trace( "init" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+=== The ActionURLLoader class ===
+
+This wrapper encapsulate a *flash.net.URLLoader* instance.
+
+{{{
+package examples
+{
+    import core.dump ;
+    
+    import system.process.Action;
+    import system.process.ActionURLLoader;
+    
+    import flash.display.Sprite;
+    import flash.net.URLLoader;
+    import flash.net.URLRequest;
+    
+    public class ActionURLLoaderExample extends Sprite
+    {
+        public function ActionURLLoaderExample()
+        {
+            var url:String = "datas/config.eden" ;
+            
+            var loader:URLLoader = new URLLoader() ;
+            
+            process = new ActionURLLoader( loader ) ;
+            
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
+            
+            process.request = new URLRequest( url ) ;
+            process.run() ;
+        }
+        
+        public var process:ActionURLLoader ;
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish : " + dump( process.data ) ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
+
+=== The ActionURLStream class ===
+
+This wrapper encapsulate a *flash.net.URLStream* instance.
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.ActionURLStream;
+
+    import flash.display.Sprite;
+    import flash.net.URLRequest;
+    import flash.net.URLStream;
+    
+    public class ActionURLStreamExample extends Sprite
+    {
+        public function ActionURLStreamExample()
+        {
+            var url:String = "datas/config.eden" ;
+            
+            var loader:URLStream = new URLStream() ;
+            
+            var process:ActionURLStream = new ActionURLStream(loader) ;
+            
+            process.finishIt.connect( finish ) ;
+            process.startIt.connect( start ) ; 
+            
+            process.request = new URLRequest( url ) ;
+            process.run() ;
+        }
+        
+        public function finish( action:Action ):void 
+        {
+            trace( "finish" ) ;
+        }
+        
+        public function start( action:Action ):void 
+        {
+            trace( "start" ) ;
+        }
+    }
+}
+}}}
