@@ -1141,4 +1141,125 @@ package examples
 }
 }}}
 
+=== The system.process.CoreAction class ===
+
+This abstract class extends the *system.process.Task* class and defines new signals to enhance the basic functionality of the *system.process.Action* interface and create new custom class more flexible.
+
+We can enumerate all the signals define in this class : _changeIt, clearIt, infoIt, loopIt, pauseIt, progressIt, resumeIt, stopIt, timeoutIt_.
+
+To use it we can use the specific notification methods : _notifyChanged(), notifyCleared(), notifyInfo(info:*), notifyLooped(), notifyPaused(), notifyProgress(), notifyResumed(), notifyStopped(), notifyTimeOut()_.
+
+This class is use to create complex task and process in your applications like the *CountDown*, *DelayedTask*, *Pause*, *TaskGroup* classes and many others throughout the packages and libraries of the framework.
+
+=== The system.process.CountDown class ===
+
+A countdown is a sequence of counting backward to indicate the seconds, days, or other time units remaining before an event occurs or a deadline expires. 
+ 
+The *CountDown* instances defines a delay in millisecond and a maximal counter value for run the count down process.
+
+The *CountDown* class extends the *CoreAction* class and implements the *Action* interface and the *Resetable*, *Resumable*, *Serializable*, *Startable* and *Stoppable* interfaces too.
+
+*usage*
+
+{{{
+new CountDown( maxCount:uint = 0 , delay:Number = 1000 )
+}}}
+
+*example*
+
+{{{
+package examples
+{
+    import system.process.Action;
+    import system.process.CountDown;
+
+    import flash.display.Sprite;
+    import flash.events.KeyboardEvent;
+    import flash.ui.Keyboard;
+
+    public class CountDownExample extends Sprite
+    {
+        public function CountDownExample()
+        {
+            stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
+            
+            counter = new CountDown( 5 ) ;
+            
+            counter.changeIt.connect( change ) ;
+            counter.finishIt.connect( finish ) ;
+            counter.pauseIt.connect( change ) ;
+            counter.resumeIt.connect( resume ) ;
+            counter.startIt.connect( start  ) ;
+            counter.stopIt.connect( stop  ) ;
+            
+            counter.run() ;
+        }
+        
+        public var counter:CountDown ;
+        
+        public function change( action:Action ):void
+        {
+            trace( "change count:" + counter.count ) ;
+        }
+        
+        public function finish( action:Action ):void
+        {
+            trace( "finish count:" + counter.count ) ;
+        }
+        
+        public function pause( action:Action ):void
+        {
+            trace( "pause count:" + counter.count ) ;
+        }
+        
+        public function resume( action:Action ):void
+        {
+            trace( "resume count:" + counter.count ) ;
+        }
+        
+        public function start( action:Action ):void
+        {
+            trace( "start count:" + counter.count ) ;
+        }
+        
+        public function stop( action:Action ):void
+        {
+            trace( "stop count:" + counter.count ) ;
+        }
+        
+        //////////
+        
+        private function keyDown( e:KeyboardEvent ):void 
+        {
+            var code:uint = e.keyCode ;
+            switch( code )
+            {
+                case Keyboard.UP :
+                {
+                    counter.stop() ;
+                    break ;
+                }
+                case Keyboard.DOWN :
+                {
+                    if( counter.stopped )
+                    {
+                        counter.resume() ;
+                    }
+                    else
+                    {
+                        counter.start() ;
+                    }
+                    break ;
+                }
+                case Keyboard.SPACE :
+                {
+                    counter.reset() ;
+                    break ;
+                }
+            }
+        }
+    }
+}
+}}}
+
 // TODO continue the reference (in progress)
