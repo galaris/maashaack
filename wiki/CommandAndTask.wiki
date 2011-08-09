@@ -922,8 +922,8 @@ A *BindTask* instance wraps a function in another, locking its execution scope t
 *usage*
 
 {{{
-new BindTask( func:Function , scope:* = null , ...arguments:Array 
-)}}}
+new BindTask( func:Function , scope:* = null , ...arguments:Array )
+}}}
 
 *basic example*
 
