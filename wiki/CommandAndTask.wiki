@@ -1147,7 +1147,7 @@ This abstract class extends the *system.process.Task* class and defines new sign
 
 We can enumerate all the signals define in this class : _changeIt, clearIt, infoIt, loopIt, pauseIt, progressIt, resumeIt, stopIt, timeoutIt_.
 
-To use it we can use the specific notification methods : _notifyChanged(), notifyCleared(), notifyInfo(info:*), notifyLooped(), notifyPaused(), notifyProgress(), notifyResumed(), notifyStopped(), notifyTimeOut()_.
+To use it we can use the specific notification methods : _notifyChanged(), notifyCleared(), notifyInfo(info), notifyLooped(), notifyPaused(), notifyProgress(), notifyResumed(), notifyStopped(), notifyTimeOut()_.
 
 This class is use to create complex task and process in your applications like the *CountDown*, *DelayedTask*, *Pause*, *TaskGroup* classes and many others throughout the packages and libraries of the framework.
 
