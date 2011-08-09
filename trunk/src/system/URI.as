@@ -35,13 +35,15 @@
 
 package system
 {
+    import core.strings.endsWith;
+    import core.strings.startsWith;
     import core.strings.trimStart;
-
+    
     import system.data.Iterator;
     import system.data.Map;
     import system.data.maps.ArrayMap;
     import system.network.URIScheme;
-
+    
     /**
      * The "Uniform Resource Identifier" class.
      * <p><b>note:</b></p>
@@ -645,7 +647,7 @@ package system
             _host     = "";
             _path     = "";
             
-            if( Strings.startsWith( str, "//" ) )
+            if( startsWith( str, "//" ) )
             {
                 str = trimStart( str, ["/"] );
                 _path = "/"+str;
@@ -755,7 +757,7 @@ package system
             
             /////// scheme
             
-            if( results[1] && results[2] && Strings.endsWith( results[1], ":" ) )
+            if( results[1] && results[2] && endsWith( results[1], ":" ) )
             {
                 this.scheme = results[2];
             }
@@ -766,7 +768,7 @@ package system
             
             
             /////// authority
-            if( results[3] && Strings.startsWith( results[3], "//" ) )
+            if( results[3] && startsWith( results[3], "//" ) )
             {
                 var authority:String = results[4];
                 var host:String = "";
@@ -837,14 +839,14 @@ package system
             }
             
             // query
-            if( results[6] && Strings.startsWith( results[6], "?" ) )
+            if( results[6] && startsWith( results[6], "?" ) )
             {
                 _parseQuery( results[7] as String ) ;
             }
             
             // fragment
             
-            if( results[8] && Strings.startsWith( results[8], "#" ) )
+            if( results[8] && startsWith( results[8], "#" ) )
             {
                 _fragment = results[9];
                 _hasFragment = true;
