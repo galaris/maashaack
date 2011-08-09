@@ -35,10 +35,11 @@
 
 package system.diagnostics
 {
-    import flash.errors.IllegalOperationError;
+    import core.strings.format;
     
-    import system.Strings;
     import system.terminals.Console;
+    
+    import flash.errors.IllegalOperationError;
     
     /**
      * The TraceConsole reuse the trace function that redirect messages to the output console in either Flash or Flex.
@@ -71,9 +72,9 @@ package system.diagnostics
             }
             
             messages.unshift( msg );
-            return Strings.format.apply( Strings, messages );
-        }        
-
+            return format.apply( null, messages );
+        }
+        
         /**
          * Creates a new TraceConsole instance.
          */
@@ -89,7 +90,7 @@ package system.diagnostics
         {
             throw new IllegalOperationError( this + " read() method is illegal in this console." ) ;
         }
-
+        
         /**
          * Not supported, the console isn't interactive.
          * @throws flash.errors.IllegalOperationError The read() method is illegal in this console
@@ -98,18 +99,18 @@ package system.diagnostics
         {
             throw new IllegalOperationError( this + " readLine() method is illegal in this console." ) ;
         }
-
+        
         /**
          * Appends the message format.
-         */        
+         */
         public function write( ...messages:Array ):void
         {
             _buffer += _formatMessage( messages );
         }
-
+        
         /**
          * Appends the message format and add newline character.
-         */        
+         */
         public function writeLine( ...messages:Array ):void
         {
             var msg:String = _formatMessage( messages );
