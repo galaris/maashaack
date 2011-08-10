@@ -235,11 +235,12 @@
     
     <!-- system.ioc -->
     
-    <component id="system.ioc:logger"                     class="system.ioc.logger"                     />
+    <component id="system.ioc:factory"                    class="system.ioc.factory"                    />
     <component id="system.ioc:IObjectDefinition"          class="system.ioc.IObjectDefinition"          />
     <component id="system.ioc:IObjectDefinitionContainer" class="system.ioc.IObjectDefinitionContainer" />
     <component id="system.ioc:IObjectFactory"             class="system.ioc.IObjectFactory"             />
     <component id="system.ioc.IObjectFactoryStrategy"     class="system.ioc.IObjectFactoryStrategy"     />
+    <component id="system.ioc:logger"                     class="system.ioc.logger"                     />
     <component id="system.ioc:MagicReference"             class="system.ioc.MagicReference"             />
     <component id="system.ioc:ObjectArgument"             class="system.ioc.ObjectArgument"             />
     <component id="system.ioc:ObjectAttribute"            class="system.ioc.ObjectAttribute"            />
