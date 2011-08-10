@@ -36,5 +36,5 @@ deps = {
          Var("root") + "/src/system/text"         : Var("repo") + "/packages/system_text/trunk/src/system/text",
          Var("root") + "/src/graphics"            : Var("repo") + "/packages/graphics/trunk/src/graphics",
          
-         Var("root") + "/src/pixelbender"         : Var("repo") + "/packages/graphics/trunk/pixelbender",
+         Var("root") + "/pixelbender"             : Var("repo") + "/packages/graphics/trunk/pixelbender",
        }
