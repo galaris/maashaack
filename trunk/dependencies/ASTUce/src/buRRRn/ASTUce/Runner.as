@@ -17,8 +17,7 @@
   
   Contributor(s):
   - Marc Alcaraz <vegas@ekameleon.net>.
-*/
-
+ */
 package buRRRn.ASTUce
 {
     import buRRRn.ASTUce.framework.*;
@@ -29,15 +28,14 @@ package buRRRn.ASTUce
 
     import system.Reflection;
     import system.Strings;
-    import system.console;
-    import system.io.Writeable;
+    import system.terminals.InteractiveConsole;
+    import system.terminals.console;
 
     /**
      * This is the default TestRunner for ASTUce
      */
     public class Runner extends BaseTestRunner
-        {
-        
+    {
         /**
          * @private
          */
@@ -47,28 +45,28 @@ package buRRRn.ASTUce
          * Display the header.
          */
         protected static function displayHeader():void
-            {
-            console.writeLine( buRRRn.ASTUce.info( true ) );
-            }
+        {
+            console.writeLine(buRRRn.ASTUce.info(true));
+        }
         
         /**
          * Display the test infos.
          */
-        protected static function displayInfos( suite:ITest, result:TestResult ):void
+        protected static function displayInfos(suite:ITest, result:TestResult):void
+        {
+            if ( config.showConstructorList )
             {
-            if( config.showConstructorList )
-                {
-                console.writeLine( suite );
-                }
+                console.writeLine(suite);
             }
+        }
         
         /**
          * Invoked when the runner failed.
          */
-        protected override function runFailed( message:String ):void
-            {
-            console.writeLine( message );
-            }
+        protected override function runFailed(message:String):void
+        {
+            console.writeLine(message);
+        }
         
         /**
          * Creates a new Runner instance.
@@ -78,91 +76,91 @@ package buRRRn.ASTUce
          * For building a custom class writer, you have to define a class witch
          * implements system.IO.Writeable.
          */
-        public function Runner( writer:Writeable = null )
-            {
-            _printer = new ResultPrinter( writer );
-            }
+        public function Runner(writer:InteractiveConsole = null)
+        {
+            _printer = new ResultPrinter(writer);
+        }
         
         /**
          * Indicates the printer of this runner.
          */
         public function get printer():*
-            {
+        {
             return _printer;
-            }
-        
+        }
+
         /**
          * @private
          */
-        public function set printer( printer:* ):void
-            {
+        public function set printer(printer:*):void
+        {
             _printer = printer;
-            }
-        
+        }
+
         /**
          * Returns the name of the test.
          * @return the name of the test.
          */
-        public function getTestName( any:* ):String
+        public function getTestName(any:*):String
+        {
+            if ( any == null )
             {
-            if( any == null )
-                {
                 return "null";
-                }
-            
-            if( any is String )
-                {
-                return any;
-                }
-            
-            if( any is ITest )
-                {
-                return any.name;
-                }
-            
-            if( any is Class )
-                {
-                return Reflection.getClassName( any, true );
-                }
-            
-            return "";
             }
-        
+
+            if ( any is String )
+            {
+                return any;
+            }
+
+            if ( any is ITest )
+            {
+                return any.name;
+            }
+
+            if ( any is Class )
+            {
+                return Reflection.getClassName(any, true);
+            }
+
+            return "";
+        }
+
         /**
          * Runs a multiple test and collects their results.
          */
-        public static function main( ...args ):void
-            {
+        public static function main(...args):void
+        {
             var result:TestResult;
             var runner:Runner = new Runner();
             var suiteName:String;
-            
+
             displayHeader();
-            
-            for( var i:int=0; i<args.length; i++ )
-                {
-                suiteName = runner.getTestName( args[i] );
-                //console.writeLine( Strings.format( buRRRn.ASTUce.runner.strings.runTitle, suiteName, i ) );
-                console.writeLine( buRRRn.ASTUce.runner.strings.runTitle, suiteName, i );
-                
+
+            for ( var i:int = 0; i < args.length; i++ )
+            {
+                suiteName = runner.getTestName(args[i]);
+                // console.writeLine( Strings.format( buRRRn.ASTUce.runner.strings.runTitle, suiteName, i ) );
+                console.writeLine(buRRRn.ASTUce.runner.strings.runTitle, suiteName, i);
+
                 try
-                    {
-                    result = run( args[i], runner );
-                    }
-                catch( e1:NullSuiteError )
-                    {
-                    runner.runFailed( buRRRn.ASTUce.runner.strings.nullTestsuite );
-                    }
-                catch( e2:Error )
-                    {
-                    runner.runFailed( Strings.format( buRRRn.ASTUce.runner.strings.canNotCreateAndRun, i ) );
-                    runner.runFailed( Strings.format( buRRRn.ASTUce.runner.strings.tab, e2.toString() ) );
-                    }
-                
-                console.writeLine( buRRRn.ASTUce.strings.separator );
+                {
+                    result = run(args[i], runner);
                 }
+                catch( e1:NullSuiteError )
+                {
+                    runner.runFailed(buRRRn.ASTUce.runner.strings.nullTestsuite);
+                }
+                catch( e2:Error )
+                {
+                    runner.runFailed(Strings.format(buRRRn.ASTUce.runner.strings.canNotCreateAndRun, i));
+                    runner.runFailed(Strings.format(buRRRn.ASTUce.runner.strings.tab, e2.toString()));
+                }
+
+                console.writeLine(buRRRn.ASTUce.strings.separator);
             }
-        
+        }
+
         /**
          * Runs a single test and collects its results.
          * <p>This method can be used to start a test run from your program.</p>
@@ -173,74 +171,71 @@ package buRRRn.ASTUce
          * then will try to extract a test suite automatically.
          * @param test Can be a ITest (TestCase,TestSuite,etc.), a Class or a String
          */
-        public static function run( test:*, runner:Runner = null ):TestResult
+        public static function run(test:*, runner:Runner = null):TestResult
+        {
+            if ( runner == null )
             {
-            if( runner == null )
-                {
                 runner = new Runner();
                 displayHeader();
-                }
-            
-            var suite:ITest;
-            
-            
-            if( test == null )
-                {
-                throw new NullSuiteError();
-                }
-            
-            if( test is String )
-                {
-                suite = runner.getTest( test );
-                }
-            
-            if( test is ITest )
-                {
-                suite = test;
-                }
-            
-            if( test is Class )
-                {
-                var staticSuite:* = Reflection.getMethodByName( test, "suite" );
-                
-                if( staticSuite != null )
-                    {
-                    suite = staticSuite();
-                    }
-                else
-                    {
-                    suite = new TestSuite( test );
-                    }
-                }
-            
-            return runner.doRun( suite );
             }
-        
+
+            var suite:ITest;
+
+            if ( test == null )
+            {
+                throw new NullSuiteError();
+            }
+
+            if ( test is String )
+            {
+                suite = runner.getTest(test);
+            }
+
+            if ( test is ITest )
+            {
+                suite = test;
+            }
+
+            if ( test is Class )
+            {
+                var staticSuite:* = Reflection.getMethodByName(test, "suite");
+
+                if ( staticSuite != null )
+                {
+                    suite = staticSuite();
+                }
+                else
+                {
+                    suite = new TestSuite(test);
+                }
+            }
+
+            return runner.doRun(suite);
+        }
+
         /**
          * Do the run process.
          */
-        public function doRun( suite:ITest ):TestResult
-            {
+        public function doRun(suite:ITest):TestResult
+        {
             var result:TestResult = new TestResult();
-            result.addListener( printer );
-            
+            result.addListener(printer);
+
             /* note:
-               we use the Date class to not be dependent
-               on flash getTimer()
-            */
+            we use the Date class to not be dependent
+            on flash getTimer()
+             */
             var startTime:Number = new Date().valueOf();
-            suite.run( result );
-            var endTime:Number   = new Date().valueOf();
-            
-            var runTime:Number   = endTime - startTime;
-            printer.print( result, runTime );
-            
-            displayInfos( suite, result );
-            
+            suite.run(result);
+            var endTime:Number = new Date().valueOf();
+
+            var runTime:Number = endTime - startTime;
+            printer.print(result, runTime);
+
+            displayInfos(suite, result);
+
             return result;
-            }
-        
         }
-    
     }
+}
 

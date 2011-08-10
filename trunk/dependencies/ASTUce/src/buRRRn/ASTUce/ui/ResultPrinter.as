@@ -20,26 +20,26 @@
 */
 
 package buRRRn.ASTUce.ui
-    {
-    import system.io.Writeable;
-    import system.Strings;
-    import system.console;
-    
+{
     import buRRRn.ASTUce.config;
-    import buRRRn.ASTUce.strings;
     import buRRRn.ASTUce.framework.AssertionFailedError;
     import buRRRn.ASTUce.framework.ITest;
     import buRRRn.ASTUce.framework.ITestListener;
     import buRRRn.ASTUce.framework.TestFailure;
     import buRRRn.ASTUce.framework.TestResult;
     import buRRRn.ASTUce.runner.BaseTestRunner;
+    import buRRRn.ASTUce.strings;
+    
+    import system.Strings;
+    import system.terminals.InteractiveConsole;
+    import system.terminals.console;
     
     /**
      * The UI result printer object.
      */
     public class ResultPrinter implements ITestListener
         {
-        private var _writer:Writeable = console; //default writer
+        private var _writer:InteractiveConsole = console; //default writer
         protected var column:int  = 0;
         
         /**
@@ -153,7 +153,7 @@ package buRRRn.ASTUce.ui
             writer.writeLine( strings.PrtTime, elapsedTimeAsString( runTime ) );
             }
         
-        public function ResultPrinter( writer:Writeable = null )
+        public function ResultPrinter( writer:InteractiveConsole = null )
             {
             if( writer != null )
                 {

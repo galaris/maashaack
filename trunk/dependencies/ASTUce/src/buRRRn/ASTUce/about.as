@@ -22,7 +22,7 @@
 */
 package buRRRn.ASTUce
 {
-    import system.console;
+    import system.terminals.console;
     
     /**
      * Display ASTUce about.
