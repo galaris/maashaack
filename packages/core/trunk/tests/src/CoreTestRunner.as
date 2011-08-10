@@ -36,13 +36,13 @@
 package
 {
     import buRRRn.ASTUce.*;
-    
+
     import core.AllTests;
-    
+
     import system.config;
-    import system.console;
     import system.diagnostics.TextFieldConsole;
-    
+    import system.terminals.console;
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
