@@ -13,7 +13,6 @@
     <component id="system:Comparator"         class="system.Comparator"         />
     <component id="system:config"             class="system.config"             />
     <component id="system:Configurator"       class="system.Configurator"       />
-    <component id="system:console"            class="system.console"            />
     <component id="system:eden"               class="system.eden"               />
     <component id="system:Enum"               class="system.Enum"               />
     <component id="system:Environment"        class="system.Environment"        />
@@ -174,7 +173,6 @@
     
     <!-- system.diagnostics -->
     
-    <component id="system.diagnostics:TraceConsole"     class="system.diagnostics.TraceConsole"     />
     <component id="system.diagnostics:TextFieldConsole" class="system.diagnostics.TextFieldConsole" />
     <component id="system.diagnostics:VirtualMachine"   class="system.diagnostics.VirtualMachine"   />
     
@@ -471,9 +469,10 @@
     
     <!-- system.terminals -->
     
-    <component id="system.terminals:Console"            class="system.terminals.Console"            />
+    <component id="system.terminals:console"            class="system.terminals.console"            />
     <component id="system.terminals:InteractiveConsole" class="system.terminals.InteractiveConsole" />
-    <component id="system.terminals:VirtualConsole"     class="system.terminals.VirtualConsole"     />
+    <component id="system.terminals:output"             class="system.terminals.output"             />
+    <component id="system.terminals:TraceConsole"       class="system.terminals.TraceConsole"       />
     
     <!-- system.text.html -->
     

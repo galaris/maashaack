@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Maashaack graphics.swc library AS3" default="main">
+    
     <property file="./build.properties"/>
+    
     <target name="main">
         <exec executable="${compc}" >
             <arg line="-load-config+=${config}" />
-            <arg line="-external-library-path+=../../../libs/core.swc" />
-            <arg line="-external-library-path+=../../../libs/system.swc" />
-            <arg line="-compiler.source-path+=${library.graphics.src}" />
+            <arg line="-external-library-path+=${external.library.core}" />
+            <arg line="-external-library-path+=${external.library.system}" />
+            <arg line="-compiler.source-path+=${sources}" />
         </exec>
     </target>
+    
 </project>
