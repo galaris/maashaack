@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Maashaack libraries builder" default="main">
+    
+    <target name="main" depends="core,system,graphics,maashaack" description="Creates all swc libraries of Maashaack"/>
+    
+    <target name="core">
+         <subant target="">
+             <fileset dir="./core" includes="build.xml"/>
+         </subant>
+    </target>
+    
+    <target name="system">
+         <subant target="">
+             <fileset dir="./system" includes="build.xml"/>
+         </subant>
+    </target>
+    
+    <target name="graphics">
+         <subant target="">
+             <fileset dir="graphics" includes="build.xml"/>
+         </subant>
+    </target>
+    
+    <target name="maashaack">
+         <subant target="">
+             <fileset dir="maashaack" includes="build.xml"/>
+         </subant>
+    </target>
+
+</project>
