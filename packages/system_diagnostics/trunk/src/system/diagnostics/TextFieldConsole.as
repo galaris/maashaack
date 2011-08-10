@@ -35,13 +35,15 @@
  
 package system.diagnostics 
 {
+    import system.terminals.InteractiveConsole;
+
     import flash.text.TextField;
     
     /**
      * The TextFieldConsole use a TextField display that redirect messages in the debug application.
      * <p><b>Note:</b> You can not read from the output and so the TextFieldConsole is not interactive.</p>
      */
-    public class TextFieldConsole extends TraceConsole 
+    public class TextFieldConsole implements InteractiveConsole 
     {
         /**
          * Creates a new TextFieldConsole instance.
@@ -52,6 +54,7 @@ package system.diagnostics
             this.textfield  = textfield ;
             this.autoScroll = true ;
             this.verbose    = verbose ;
+            _buffer = "";
         }
         
         /**
@@ -69,12 +72,36 @@ package system.diagnostics
          */
         public var verbose:Boolean ;
         
+        public final function read():String
+        {
+            return "";
+        }
+        
+        public final function readLine():String
+        {
+            API::FLASH
+            {
+                return "";
+            }
+            
+            API::REDTAMARIN
+            {
+                return readLine();
+            }
+        }
+        
+        public final function write( ...messages ):void
+        {
+            _buffer += _format( messages );
+        }
+        
+        
         /**
          * Appends the message format and add newline character.
          */
-        public override function writeLine( ...messages ):void
+        public function writeLine( ...messages ):void
         {
-            var msg:String = _formatMessage( messages ) ;
+            var msg:String = _format( messages ) ;
             
             msg = _buffer + msg  ;
             
@@ -94,6 +121,60 @@ package system.diagnostics
             }
             
             _buffer = "" ;
+        }
+        
+        private var _buffer:String;
+        
+        private final function _fastFormat( format:String, ...args:Array ):String
+        {
+            if( (format == null) || (format == "") )
+            {
+                return "";
+            }
+            
+            var len:uint = args.length;
+            var a:Array;
+            
+            if( (len == 1) && (args[0] is Array) )
+            {
+                a   = args[0] as Array;
+                len = a.length;
+            }
+            else
+            {
+                a = args;
+            }
+            
+            var i:uint;
+            for( i=0; i < len; i++ )
+            {
+                format = format.replace( new RegExp( "\\{"+i+"\\}", "g" ), a[i] );
+            }
+            
+            return format;
+        }
+        
+        private final function _format( messages:Array ):String
+        {
+            if( messages.length == 0 )
+            {
+                return "";
+            }
+            
+            var msg:String;
+            var format:String;
+            
+            if( messages[0] is String )
+            {
+                format = String( messages.shift() );
+                msg = _fastFormat( format, messages );
+            }
+            else
+            {
+                msg = messages.join( "" );
+            }
+            
+            return msg;
         }
     }
 }

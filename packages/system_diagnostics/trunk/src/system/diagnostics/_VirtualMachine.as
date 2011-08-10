@@ -36,9 +36,9 @@
 package system.diagnostics
 {
     import system.Strings;
-    import system.console;
-    import system.io.Writeable;
-    
+    import system.terminals.InteractiveConsole;
+    import system.terminals.console;
+
     import flash.system.Capabilities;
     import flash.system.System;
     import flash.trace.Trace;
@@ -57,7 +57,7 @@ package system.diagnostics
         /**
          * @private
          */
-        private var _writer:Writeable = console;
+        private var _writer:InteractiveConsole = console;
         
         /**
          * @private
