@@ -35,23 +35,21 @@
 
 package system
 {
-    
     /**
-    * stores static metadata about the project
-    */
+     * stores static metadata about the project
+     */
     public class metadata
     {
-        
         public static var name:String = "x4a";
         
         public static var fullname:String = "maashaack framework";
         
         public static var version:Version = new Version();
         
+        /*FDT_IGNORE*/
         include "version.properties"
+        /*FDT_IGNORE*/
          
         version.revision = parseInt( "$Rev: 603 $".split( " " )[1] );
-        
     }
-    
 }
