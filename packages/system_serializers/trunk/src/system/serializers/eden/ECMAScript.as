@@ -46,7 +46,7 @@ package system.serializers.eden
     import core.strings.startsWith;
 
     import system.Reflection;
-    import system.console;
+    import system.terminals.console;
     import system.text.parser.GenericParser;
     
     /* note:
