@@ -3,10 +3,7 @@ vars = {
          "root" : "maashaack",
        }
 
-deps = {
-         Var("root") + "/build"                   : Var("repo") + "/packages/maashaack/trunk/build",
-         Var("root") + "/libs"                    : Var("repo") + "/packages/maashaack/trunk/libs",
-         
+deps = {         
          Var("root") + "/src/core"                : Var("repo") + "/packages/core/trunk/src/core",
          Var("root") + "/src/system"              : Var("repo") + "/packages/system/trunk/src/system",
          Var("root") + "/src/system/broadcasters" : Var("repo") + "/packages/system_broadcasters/trunk/src/system/broadcasters",
