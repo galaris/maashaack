@@ -35,7 +35,7 @@
 
 package system
 {
-    import system.console;
+    import system.terminals.console;
     
     /**
      * Display framework about.
