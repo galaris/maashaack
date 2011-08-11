@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="ASDOC - Maashaack Reference ActionScript 3" default="main">
+<project name="Maashaack Reference ActionScript 3" default="main">
 
     <!-- Initialize the build -->
     
