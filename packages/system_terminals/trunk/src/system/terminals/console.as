@@ -37,7 +37,6 @@ package system.terminals
 {
     /**
     * This is the default console.
-    * 
     * @example override it with your own implementation
     * <listing version="3.0">
     * <code class="prettyprint">
