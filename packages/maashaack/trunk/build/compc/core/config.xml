@@ -35,7 +35,7 @@
         <uri>http://code.google.com/p/core/2011</uri>
     </include-namespaces>
     
-    <target-player>10.2</target-player>
+    <target-player>10.3</target-player>
     
     <directory>false</directory>
     
