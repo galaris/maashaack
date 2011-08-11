@@ -4,8 +4,8 @@ vars = {
        }
 
 deps = {        
-         Var("root") + "/src/build"               : Var("repo") + "/packages/maashaack/trunk/build",
-         Var("root") + "/src/libs"                : Var("repo") + "/packages/maashaack/trunk/libs",
+         Var("root") + "/build"               : Var("repo") + "/packages/maashaack/trunk/build",
+         Var("root") + "/libs"                : Var("repo") + "/packages/maashaack/trunk/libs",
                   
          Var("root") + "/src/core"                : Var("repo") + "/packages/core/trunk/src/core",
          Var("root") + "/src/system"              : Var("repo") + "/packages/system/trunk/src/system",
