@@ -37,6 +37,7 @@ package
 {
     import flash.display.Sprite;
     
+    [ExcludeClass]
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="maashaack", scriptRecursionLimit="1000", scriptTimeLimit="60")]
     public class maashaack extends Sprite
     {
