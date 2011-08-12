@@ -11,7 +11,7 @@ With the *Signaler* interface we can define objects who communicates by signals 
 
 Receivers can be defines with a simple function reference or a custom object who implements the interface system.signals.Receiver .
 
-Receivers subscribe to real objects, not to string-based channels. Event string constants are no longer needed like W3C DOM 2/3 event model.
+Receivers subscribe to real objects, not to string-based channels. Event string constants are no longer needed like *W3C DOM 2/3 event model*.
 
 == Interfaces ==
 
