@@ -1,0 +1,6 @@
+#####################################
+### Nightly Build User properties ###
+#####################################
+
+svn-user=your-svn-username
+svn-pass=your-svn-password
