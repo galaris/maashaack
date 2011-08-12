@@ -353,8 +353,8 @@ package system.data.queues
         }
         
         /**
-         * Returns a eden representation of the object.
-         * @return a string representation of the source code of the object.
+         * Returns the source representation of the object.
+         * @return the source representation of the object.
          */
         public function toSource(indent:int = 0):String
         {

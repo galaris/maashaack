@@ -194,8 +194,8 @@ package system.data.arrays {
         }
         
         /**
-         * Returns a eden String representation of the object.
-         * @return a string representation the source code of the object.
+         * Returns the source representation of the object.
+         * @return the source representation of the object.
          */
         public override function toSource( indent:int = 0 ):String 
         {

@@ -367,8 +367,8 @@ package system.data.maps
         }
         
         /**
-         * Returns the eden String representation of this map.
-         * @return the eden String representation of this map.
+         * Returns the source representation of this map.
+         * @return the source representation of this map.
          */
         public function toSource( indent:int = 0 ):String 
         {
