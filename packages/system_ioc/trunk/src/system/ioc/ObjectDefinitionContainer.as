@@ -119,6 +119,15 @@ package system.ioc
         }
         
         /**
+         * Returns a shallow copy of this object.
+         * @return a shallow copy of this object.
+         */
+        public override function clone():*
+        {
+            return new ObjectDefinitionContainer() ;
+        }
+		
+        /**
          * Returns <code class="prettyprint">true</code> if the object defines with the specified id is register in the container.
          * @param id The id of the ObjectDefinition to search. 
          * @return <code class="prettyprint">true</code> if the object defines with the specified id is register in the container.
