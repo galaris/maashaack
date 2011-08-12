@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Maashaack Nightly Build" default="main">
+
+    <property file="./build.properties" />
+    
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath> 
+            <fileset dir="../ant/lib/ant-contrib/" includes="**/*.jar"/>
+        </classpath>
+    </taskdef>
+    
+    <taskdef resource="org/tigris/subversion/svnant/svnantlib.xml">
+        <classpath>
+            <fileset dir="../ant/lib/svn-ant" includes="**/*.jar"/>
+        </classpath>
+    </taskdef>
+    
+    <if>
+        <available file="user.properties"/>
+        <then>
+            <property file="./user.properties" />
+        </then>
+        <else>
+            <fail message="Defines the svn-user and svn-pass properties in the user.properties file to continue."/>
+        </else>
+    </if>
+    
+    <target name="main" depends="clean,copy" description="Creates the nightly build."/>
+    
+    <target name="clean">
+        <delete dir="${output}" />
+        <mkdir  dir="${output}" />
+    </target>
+    
+    <target name="copy">
+        <copy todir="${output}">
+            <fileset dir="${sources}" />
+        </copy>
+        <delete includeemptydirs="true">
+            <fileset dir="${output}" includes="**/.svn" defaultexcludes="false"/>
+        </delete>
+    </target>
+	
+</project>
+
