@@ -15,7 +15,7 @@ Receivers subscribe to real objects, not to string-based channels. Event string 
 
 == Interfaces ==
 
-The system.signals package contains two interfaces : Signaler and Receiver.
+The system.signals package contains two interfaces : *Signaler* and *Receiver*.
 
 The Signaler interface is simple but contains all important methods to deploy your signals.
 
