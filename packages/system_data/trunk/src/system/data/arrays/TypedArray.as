@@ -33,14 +33,13 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.arrays
-{
-    import core.reflect.getClassName;
-    import core.reflect.getClassPath;
+package system.data.arrays {
+	import core.dump;
+	import core.reflect.getClassName;
+	import core.reflect.getClassPath;
 
-    import system.data.Typeable;
-    import system.data.Validator;
-    import system.eden;
+	import system.data.Typeable;
+	import system.data.Validator;
 
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
@@ -207,7 +206,7 @@ package system.data.arrays
                 var l:int = _ar.length ;
                 for (var i:int ; i<l ; i++ )
                 {
-                   s += "," + eden.serialize( _ar[i] )  ;
+                    s += "," + dump( _ar[i] )  ;
                 }
             }
             s += ")" ;
