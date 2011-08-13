@@ -51,13 +51,6 @@ package system.ioc
         function set config( o:ObjectConfig ):void ;
         
         /**
-         * Returns <code class="prettyprint">true</code> if the referencial contains the specified object.
-         * @param id The 'id' of the object to search.
-         * @return <code class="prettyprint">true</code> if the referencial contains the specified object.
-         */
-        function containsObject( id:String ):Boolean;
-        
-        /**
          * This method returns an object with the specified id in argument.
          * @param id The 'id' of the object to return.
          * @return the instance of the object with the id passed in argument.
