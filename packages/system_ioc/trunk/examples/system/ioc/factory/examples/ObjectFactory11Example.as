@@ -54,7 +54,7 @@ package examples
             //factory.config.root  = this ;
             factory.config.stage = stage ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
         }
         
         /////
