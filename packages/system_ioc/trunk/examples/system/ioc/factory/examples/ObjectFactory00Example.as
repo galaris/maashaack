@@ -50,7 +50,7 @@ package examples
             
             var factory:ObjectFactory = new ObjectFactory( config ) ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
         }
         
         public const objects:Array =
