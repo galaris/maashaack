@@ -174,7 +174,7 @@ package system.ioc
             
             ////////////
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var user:User ;
             
@@ -234,7 +234,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             object = factory.getObject("object") as LockableObject ;
             
@@ -261,7 +261,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             object = factory.getObject("object") as LockableObject ;
             
@@ -293,7 +293,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             item = factory.getObject("item") as Item ;
             
@@ -315,7 +315,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             item = factory.getObject("item") as Item ;
             
@@ -340,7 +340,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             item = factory.getObject("item") as Item ;
             
@@ -362,7 +362,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             item = factory.getObject("item") as Item ;
             
@@ -384,7 +384,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             item = factory.getObject("item") as Item ;
             
@@ -519,7 +519,7 @@ package system.ioc
                     staticFactoryMethod : 
                     { 
                         type       : "system.ioc.samples.factory.AppointmentFactory" ,
-                        name       : "create" ,
+                        name       : "run" ,
                         arguments  :
                         [
                             {
@@ -542,7 +542,7 @@ package system.ioc
             
             /////
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             //---- test evaluators in the constructor arguments
             
@@ -608,7 +608,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var filter:Filter = factory.getObject( "CUSTOM" ) ; 
             
@@ -641,7 +641,7 @@ package system.ioc
             
             factory.config.root = root ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var ref:FactoryReference = factory.getObject("test") ; 
             
@@ -671,7 +671,7 @@ package system.ioc
                 }
             ] ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var test1:FactoryReference = factory.getObject( "test1" ) as FactoryReference ;
             var test2:FactoryReference = factory.getObject( "test2" ) as FactoryReference ;
@@ -697,7 +697,7 @@ package system.ioc
             
             factory.config.config = { message : "hello world" } ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var conf:Object = factory.getObject( "config" ) ;
             
@@ -721,7 +721,7 @@ package system.ioc
             
             factory.config.locale = { message : "hello world" } ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var i18n:Object = factory.getObject( "i18n" ) ;
             
@@ -747,7 +747,7 @@ package system.ioc
             
             factory.config.parameters = parameters ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             // use the factory
             
@@ -773,7 +773,7 @@ package system.ioc
             
             factory.config.stage = stage ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             assertEquals( stage , factory.getObject("stage") ) ;
         }
