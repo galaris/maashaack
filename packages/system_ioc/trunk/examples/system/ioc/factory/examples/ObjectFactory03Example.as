@@ -52,7 +52,7 @@ package examples
             
             // factory.config.identify = true ; // optional to enforce enable identify flag in all object definitions.
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var item:Item = factory.getObject("item") ;
             
