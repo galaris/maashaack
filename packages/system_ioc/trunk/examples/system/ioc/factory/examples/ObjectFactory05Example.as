@@ -50,7 +50,7 @@ package examples
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var filter:Filter = factory.getObject( "CUSTOM" ) ; 
             
