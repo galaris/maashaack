@@ -50,7 +50,7 @@ package examples
             
             factory.config.config = { message : "hello world" } ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             // use the factory
             
