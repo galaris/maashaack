@@ -51,7 +51,7 @@ package examples
             
             factory.config.root = this ;
             
-            factory.create(context) ;
+            factory.run(context) ;
         }
         
         public var context:Array =
