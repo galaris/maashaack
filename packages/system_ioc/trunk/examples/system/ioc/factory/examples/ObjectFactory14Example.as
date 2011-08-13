@@ -64,7 +64,7 @@ package examples
                 }
             };
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
         }
         
         public var objects:Array =
