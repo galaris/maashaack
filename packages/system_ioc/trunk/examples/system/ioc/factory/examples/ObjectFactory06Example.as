@@ -50,7 +50,7 @@ package examples
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var test1:FactoryReference = factory.getObject( "test1" ) as FactoryReference ;
             var test2:FactoryReference = factory.getObject( "test2" ) as FactoryReference ;
