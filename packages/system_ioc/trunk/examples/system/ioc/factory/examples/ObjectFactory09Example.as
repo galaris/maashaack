@@ -50,7 +50,7 @@ package examples
             
             factory.config.locale = { message : "hello world" } ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             // use the factory
             
