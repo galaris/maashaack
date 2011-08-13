@@ -52,7 +52,7 @@ package examples
             
             factory.config.root = this ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var test:FactoryReference = factory.getObject( "test" ) as FactoryReference ;
                 
