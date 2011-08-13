@@ -51,7 +51,7 @@ package examples
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( context ) ; 
+            factory.run( context ) ; 
             
             // 1 - target the callback "receiver" method in the receiver object (all objects with methods can be a receiver)
             
