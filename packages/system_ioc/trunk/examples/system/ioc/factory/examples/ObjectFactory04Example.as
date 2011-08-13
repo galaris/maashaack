@@ -53,7 +53,7 @@ package examples
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             trace( "---- test evaluators in the constructor arguments" ) ;
                 
