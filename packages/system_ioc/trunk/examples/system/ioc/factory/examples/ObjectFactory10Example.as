@@ -51,7 +51,7 @@ package examples
             
             factory.config.parameters = new Parameters( this.loaderInfo.parameters ) ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             // use the factory
             
