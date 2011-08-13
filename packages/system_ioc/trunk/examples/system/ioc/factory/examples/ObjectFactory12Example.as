@@ -52,7 +52,7 @@ package examples
         {
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( context ) ; 
+            factory.run( context ) ; 
             
             // 1 - target the callback "handleEvent" method in the listener object (all objects with methods can be a listener)
             
