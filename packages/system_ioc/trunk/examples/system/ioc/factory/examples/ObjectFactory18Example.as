@@ -57,7 +57,7 @@ package examples
                 }
             };
             
-            factory.create( context ) ; 
+            factory.run( context ) ; 
             
             trace( "error1 : " + factory.getObject( "error1" ) ) ; // error1 : The login is invalid
             trace( "error2 : " + factory.getObject( "error2" ) ) ; // error2 : The password login is invalid
