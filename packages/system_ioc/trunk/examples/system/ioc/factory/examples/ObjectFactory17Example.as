@@ -57,7 +57,7 @@ package examples
                 }
             } ;
             
-            factory.create( context ) ; 
+            factory.run( context ) ; 
             
             trace( "code    : " + factory.getObject( "my_code"    ) ) ; // code    : 10
             trace( "message : " + factory.getObject( "my_message" ) ) ; // message : hello world
