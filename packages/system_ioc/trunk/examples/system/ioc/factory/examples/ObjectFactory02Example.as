@@ -56,7 +56,7 @@ package examples
             
             // factory.config.lock = true ; 
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
             
             var canvas:Canvas = factory.getObject("canvas") as Canvas ;
             
