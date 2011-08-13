@@ -50,7 +50,7 @@ package examples
             
             factory.config.root = this ;
             
-            factory.create( objects ) ;
+            factory.run( objects ) ;
         }
         
         public var info:Function ;
