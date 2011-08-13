@@ -60,7 +60,7 @@ package examples
             
             var factory:ObjectFactory = new ObjectFactory() ;
             
-            factory.create( context ) ; 
+            factory.run( context ) ; 
             
             trace("------- test a valid id in the factory") ;
             
