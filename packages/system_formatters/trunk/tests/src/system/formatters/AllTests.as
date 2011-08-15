@@ -35,15 +35,15 @@
 
 package system.formatters
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
     
     public class AllTests
     {
         /**
          * Creates the Test list.
          */
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite( "Formatters tests" );
             
