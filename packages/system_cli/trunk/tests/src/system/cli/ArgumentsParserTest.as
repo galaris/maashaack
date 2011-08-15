@@ -35,7 +35,7 @@
 
 package system.cli
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
 
     public class ArgumentsParserTest extends TestCase
     {
