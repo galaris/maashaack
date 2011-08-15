@@ -35,7 +35,7 @@
 
 package system.signals 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.signals.samples.SignalerClass;
     
