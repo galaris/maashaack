@@ -35,8 +35,8 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
     
     import core.arrays.AllTests;
     import core.chars.AllTests;
@@ -50,7 +50,7 @@ package core
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("core library tests");
             

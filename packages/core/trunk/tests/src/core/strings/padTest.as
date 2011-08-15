@@ -35,7 +35,7 @@
 
 package core.strings 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class padTest extends TestCase 
     {

@@ -35,7 +35,7 @@
 
 package core.vectors 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import flash.utils.getQualifiedClassName;
     

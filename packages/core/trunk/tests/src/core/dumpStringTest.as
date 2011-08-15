@@ -35,7 +35,7 @@
 
 package core
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class dumpStringTest extends TestCase
     {

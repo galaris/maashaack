@@ -35,7 +35,7 @@
 
 package core.maths 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class degreesToRadiansTest extends TestCase 
     {

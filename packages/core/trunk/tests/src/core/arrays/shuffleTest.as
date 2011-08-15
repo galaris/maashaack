@@ -35,7 +35,7 @@
 
 package core.arrays 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class shuffleTest extends TestCase 
     {

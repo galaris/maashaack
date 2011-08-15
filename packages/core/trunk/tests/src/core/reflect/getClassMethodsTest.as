@@ -35,8 +35,8 @@
 
 package core.reflect 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
 
     import core.dump;
     import core.reflect.samples.ClassB;

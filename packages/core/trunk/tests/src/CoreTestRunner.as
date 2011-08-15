@@ -35,7 +35,7 @@
 
 package
 {
-    import buRRRn.ASTUce.*;
+    import library.ASTUce.*;
 
     import core.AllTests;
 
@@ -85,8 +85,8 @@ package
             
             //tests
             
-            buRRRn.ASTUce.config.maxColumn           = 64 ;
-            buRRRn.ASTUce.config.showConstructorList = false ;
+            library.ASTUce.metadata.config.maxColumn           = 64 ;
+            library.ASTUce.metadata.config.showConstructorList = false ;
             
             Runner.main
             ( 

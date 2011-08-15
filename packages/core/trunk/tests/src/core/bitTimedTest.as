@@ -35,7 +35,7 @@
 
 package core
 {
-    import buRRRn.ASTUce.extensions.TimedTestCase;
+    import library.ASTUce.extensions.TimedTestCase;
 
     public class bitTimedTest extends TimedTestCase
     {

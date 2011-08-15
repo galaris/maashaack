@@ -34,7 +34,7 @@
 */
 package core.html 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class htmlTest extends TestCase 
     {

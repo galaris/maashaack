@@ -35,7 +35,7 @@
 
 package core.reflect 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import flash.system.ApplicationDomain;
     import flash.utils.Dictionary;

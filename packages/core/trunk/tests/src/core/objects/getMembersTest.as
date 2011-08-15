@@ -34,7 +34,7 @@
 */
 package core.objects 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class getMembersTest extends TestCase 
     {

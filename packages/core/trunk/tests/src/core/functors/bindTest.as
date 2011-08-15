@@ -35,7 +35,7 @@
 
 package core.functors 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import core.dump;
 
