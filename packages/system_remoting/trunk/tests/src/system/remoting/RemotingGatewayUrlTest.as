@@ -34,7 +34,7 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.ioc.Parameters;
 

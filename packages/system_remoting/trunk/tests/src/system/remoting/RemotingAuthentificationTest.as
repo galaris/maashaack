@@ -34,7 +34,7 @@
  */
 package system.remoting  
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class RemotingAuthentificationTest extends TestCase 
     {
