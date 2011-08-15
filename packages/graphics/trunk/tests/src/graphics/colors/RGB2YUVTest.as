@@ -34,7 +34,7 @@
 */
 
 package graphics.colors 
-{    import buRRRn.ASTUce.framework.TestCase;
+{    import library.ASTUce.framework.TestCase;
     
     public class RGB2YUVTest extends TestCase 
     {        public function RGB2YUVTest( name:String = "")

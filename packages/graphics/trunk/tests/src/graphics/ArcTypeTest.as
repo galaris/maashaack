@@ -36,7 +36,7 @@
 package graphics 
 {
 	
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class ArcTypeTest extends TestCase 
     {

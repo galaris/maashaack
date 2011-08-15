@@ -35,7 +35,7 @@
 
 package graphics.layouts 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import graphics.layouts.samples.LayoutClass;
 

@@ -34,7 +34,7 @@
 */
 
 package graphics.colors 
-{    import buRRRn.ASTUce.framework.TestCase;
+{    import library.ASTUce.framework.TestCase;
     
     public class HSV2RGBNumberTest extends TestCase 
     {        public function HSV2RGBNumberTest( name:String = "")

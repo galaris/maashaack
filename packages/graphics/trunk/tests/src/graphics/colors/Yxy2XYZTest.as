@@ -34,7 +34,7 @@
 */
 
 package graphics.colors 
-{    import buRRRn.ASTUce.framework.TestCase;
+{    import library.ASTUce.framework.TestCase;
 
     public class Yxy2XYZTest extends TestCase 
     {        public function Yxy2XYZTest( name:String = "")

@@ -35,14 +35,14 @@
 
 package graphics.process
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
     
     import graphics.process.display.AllTests;
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("graphics.process package tests");
             

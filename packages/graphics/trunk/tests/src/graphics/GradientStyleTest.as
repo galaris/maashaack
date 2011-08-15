@@ -34,8 +34,8 @@
 */
 package graphics 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
     
     import flash.display.GradientType;
     import flash.display.InterpolationMethod;

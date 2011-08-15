@@ -34,7 +34,7 @@
 */
 package graphics.filters.projections 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class LambertTest extends TestCase 
     {

@@ -35,7 +35,7 @@
 
 package graphics.display 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import flash.display.Shader;
     import flash.net.URLLoader;

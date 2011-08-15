@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
  
 package graphics 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import graphics.samples.ILineStyleClass;
 

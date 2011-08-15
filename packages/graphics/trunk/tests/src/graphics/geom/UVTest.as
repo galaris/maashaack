@@ -35,7 +35,7 @@
 
 package graphics.geom 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class UVTest extends TestCase 
     {

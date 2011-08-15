@@ -34,7 +34,7 @@
 */
 package graphics.filters 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import flash.display.Shader;
     

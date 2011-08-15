@@ -34,7 +34,7 @@
 */
 
 package graphics.colors 
-{    import buRRRn.ASTUce.framework.TestCase;
+{    import library.ASTUce.framework.TestCase;
     
     public class CMYK2CMYTest extends TestCase 
     {        public function CMYK2CMYTest( name:String = "")

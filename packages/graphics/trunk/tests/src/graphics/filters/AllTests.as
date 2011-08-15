@@ -35,13 +35,13 @@
 
 package graphics.filters
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
     
     import graphics.filters.projections.AllTests;
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("graphics.filters package tests");
             

@@ -35,7 +35,7 @@
 
 package graphics 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import graphics.samples.DrawableClass;
     

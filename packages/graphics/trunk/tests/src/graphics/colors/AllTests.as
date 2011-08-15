@@ -35,8 +35,8 @@
 
 package graphics.colors  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
     
     /**
      * This class launch all tests of the graphics.colors package.
@@ -46,7 +46,7 @@ package graphics.colors
         /**
          * Creates the Test list.
          */
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite( "graphics colors tests" );
             

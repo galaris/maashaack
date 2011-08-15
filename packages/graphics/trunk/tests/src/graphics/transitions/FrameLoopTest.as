@@ -35,7 +35,7 @@
 
 package graphics.transitions 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.signals.Signaler;
 
