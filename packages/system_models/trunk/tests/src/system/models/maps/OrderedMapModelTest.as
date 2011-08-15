@@ -34,7 +34,7 @@
  */
 package system.models.maps 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.data.maps.ArrayMap;
 

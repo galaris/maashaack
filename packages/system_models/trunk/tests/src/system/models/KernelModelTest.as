@@ -34,7 +34,7 @@
 */
 package system.models 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.data.Validator;
     import system.process.Lockable;
