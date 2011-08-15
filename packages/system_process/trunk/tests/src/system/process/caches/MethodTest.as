@@ -35,8 +35,8 @@
 
 package system.process.caches 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
     
     public class MethodTest extends TestCase
     {

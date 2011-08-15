@@ -35,8 +35,8 @@
 
 package system.process.caches
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
 
     import system.Environment;
     import system.hosts.HostID;
@@ -44,7 +44,7 @@ package system.process.caches
     public class AllTests
     {
 
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("system process cache tests");
             

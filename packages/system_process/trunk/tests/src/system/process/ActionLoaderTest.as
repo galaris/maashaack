@@ -35,7 +35,7 @@
 
 package system.process 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import flash.display.Loader;
     import flash.system.LoaderContext;

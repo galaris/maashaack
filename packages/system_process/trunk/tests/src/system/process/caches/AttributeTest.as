@@ -35,7 +35,7 @@
 
 package system.process.caches 
 {    import system.process.caches.Attribute;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     public class AttributeTest extends TestCase
     {
