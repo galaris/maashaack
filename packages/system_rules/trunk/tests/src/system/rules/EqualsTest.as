@@ -34,7 +34,7 @@
 */
 package system.rules 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class EqualsTest extends TestCase 
     {
