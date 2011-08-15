@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.serializers.eden
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
 
     import system.Version;
     import system.eden;

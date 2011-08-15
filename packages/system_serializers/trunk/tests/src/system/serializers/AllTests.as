@@ -36,15 +36,15 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.serializers
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;  
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;  
 
     import system.serializers.eden.AllTests;
 
     public class AllTests
     {
 
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("system.serializers");
             

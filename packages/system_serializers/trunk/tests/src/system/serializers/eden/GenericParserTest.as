@@ -39,7 +39,7 @@ but we can keep it here for now
  */
 package system.serializers.eden
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
 
     import core.chars.isASCII;
     import core.chars.isAlpha;
