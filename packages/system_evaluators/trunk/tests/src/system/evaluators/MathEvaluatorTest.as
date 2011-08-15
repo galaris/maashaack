@@ -34,7 +34,7 @@
  */
 package system.evaluators
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import core.maths.ceil;
     

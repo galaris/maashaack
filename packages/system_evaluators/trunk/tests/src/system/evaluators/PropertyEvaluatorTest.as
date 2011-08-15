@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.evaluators 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     /**
      * The PropertyEvaluatorTest test case.
