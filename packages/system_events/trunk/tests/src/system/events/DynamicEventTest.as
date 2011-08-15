@@ -35,7 +35,7 @@
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.Reflection;    
+    import library.ASTUce.framework.TestCase;        import system.Reflection;    
     public class DynamicEventTest extends TestCase 
     {
 

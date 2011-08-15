@@ -35,7 +35,7 @@
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;    import buRRRn.ASTUce.framework.TestCase;                    
+    import library.ASTUce.framework.ArrayAssert;    import library.ASTUce.framework.TestCase;                    
 
     public class EventDispatcherTest extends TestCase 
     {

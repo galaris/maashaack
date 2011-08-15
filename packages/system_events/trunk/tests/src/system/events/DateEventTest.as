@@ -35,8 +35,8 @@
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.DateAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.DateAssert;
+    import library.ASTUce.framework.TestCase;
     
     public class DateEventTest extends TestCase 
     {

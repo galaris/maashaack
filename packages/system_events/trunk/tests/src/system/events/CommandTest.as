@@ -35,7 +35,7 @@
 
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;        import system.events.mocks.MockEventListener;    
+    import library.ASTUce.framework.TestCase;        import system.events.mocks.MockEventListener;    
     public class CommandTest extends TestCase 
     {
 

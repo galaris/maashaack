@@ -34,7 +34,7 @@
 */
 package system.events 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import flash.events.Event;
     import flash.utils.getTimer;    
