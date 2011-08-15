@@ -41,8 +41,8 @@ deps = {
          
          Var("root") + "/tests/src/core"                : Var("repo") + "/packages/core/trunk/tests/src/core",
          
-         Var("root") + "/tests/src/system"              : Var("repo") + "/packages/system/trunk/src/system",
-         Var("root") + "/tests/src/system/samples"      : Var("repo") + "/packages/system/trunk/src/system/samples",
+         Var("root") + "/tests/src/system"              : Var("repo") + "/packages/system/trunk/tests/src/system",
+         Var("root") + "/tests/src/system/samples"      : Var("repo") + "/packages/system/trunk/tests/src/system/samples",
          Var("root") + "/tests/src/system/broadcasters" : Var("repo") + "/packages/system_broadcasters/trunk/tests/src/system/broadcasters",
          Var("root") + "/tests/src/system/cli"          : Var("repo") + "/packages/system_cli/trunk/tests/src/system/cli",
          Var("root") + "/tests/src/system/comparators"  : Var("repo") + "/packages/system_comparators/trunk/tests/src/system/comparators",
