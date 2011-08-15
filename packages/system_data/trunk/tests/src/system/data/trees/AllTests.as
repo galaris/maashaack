@@ -35,11 +35,11 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.data.trees
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack data trees tests");
             

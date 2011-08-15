@@ -35,7 +35,7 @@
 
 package system.data 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.data.Iterator;
     import system.data.samples.IteratorClass;    

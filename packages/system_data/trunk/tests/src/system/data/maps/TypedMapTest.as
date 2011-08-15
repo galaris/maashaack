@@ -35,8 +35,8 @@
 
 package system.data.maps 
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
     
     import system.data.Iterator;
     import system.data.Map;
