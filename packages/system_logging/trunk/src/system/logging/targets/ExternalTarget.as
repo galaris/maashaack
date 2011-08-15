@@ -55,15 +55,15 @@ package system.logging.targets
      *     import system.logging.Log;
      *     import system.logging.Logger;
      *     import system.logging.LoggerLevel;
-     *     import system.logging.targets.FireBugTarget;
+     *     import system.logging.targets.ExternalTarget;
      *     
      *     import flash.display.Sprite;
      *     
-     *     public class FireBugTargetExample extends Sprite
+     *     public class ExternalTargetExample extends Sprite
      *     {
-     *         public function FireBugTargetExample()
+     *         public function ExternalTargetExample()
      *         {
-     *             var target:FireBugTarget = new FireBugTarget() ;
+     *             var target:ExternalTarget = new ExternalTarget() ;
      *             
      *             target.includeDate    = true ;
      *             target.includeTime    = true ;
@@ -93,17 +93,57 @@ package system.logging.targets
      * }
      * </pre>
      */
-    public class FireBugTarget extends LineFormattedTarget 
+    public class ExternalTarget extends LineFormattedTarget 
     {
         use namespace hack ;
         
         /**
-         * Creates a new FireBugTarget instance.
+         * Creates a new ExternalTarget instance.
          */
-        public function FireBugTarget()
+        public function ExternalTarget()
         {
             super();
         }
+        
+        /**
+         * Designates the "all" external proxy message.
+         */
+        public static const ALL:String = "console.log" ;
+        
+        /**
+         * Designates the "debug" external proxy message.
+         */
+        public static const DEBUG:String = "console.debug" ;
+        
+        /**
+         * Designates the "error" external proxy message.
+         */
+        public static const ERROR:String = "console.error" ;
+        
+        /**
+         * Designates the "fatal" external proxy message.
+         */
+        public static const FATAL:String = "console.error" ;
+        
+        /**
+         * Designates the "info" external proxy message.
+         */
+        public static const INFO:String = "console.info" ;
+        
+        /**
+         * A special level that can be used to turn off logging (0).
+         */
+        public static const NONE:String = "console.log" ;
+        
+        /**
+         * Designates events that could be harmful to the application operation (6).
+         */
+        public static const WARN:String = "console.warn" ;
+        
+        /**
+         * What a Terrible Failure: designates an exception that should never happen. (32).
+         */
+        public static const WTF:String = "console.warn" ;
         
         /**
          * Indicates whether this player is in a container that offers an external interface.
@@ -112,6 +152,11 @@ package system.logging.targets
         {
             return ExternalInterface.available ;
         }
+        
+        /**
+         * The internal javascript pattern use to log with the navigateToURL method.
+         */
+        public var externalUrl:String = "javascript:{0}('{1}');" ;
         
         /**
          * If the target isn't available this flag indicates if the target try to use a javascript notification with the navigateToURL method.
@@ -126,34 +171,46 @@ package system.logging.targets
         public override function internalLog( message:* , level:LoggerLevel ):void
         {
             var methodName:String ;
-            switch (level)
+            switch ( level )
             {
                 case LoggerLevel.ALL :
                 {
-                    methodName = "console.log" ;
+                    methodName = ExternalTarget.ALL ;
                     break ; 
                 }
-                case LoggerLevel.ERROR :
-                case LoggerLevel.FATAL :
-                case LoggerLevel.WTF   :
+                case LoggerLevel.DEBUG :
                 {
-                    methodName = "console.error" ;
-                    break ; 
+                    methodName = ExternalTarget.DEBUG ;
+                    break ;
+                }
+                case LoggerLevel.ERROR :
+                {
+                    methodName = ExternalTarget.ERROR ;
+                    break ;
+                }
+                case LoggerLevel.FATAL :
+                {
+                    methodName = ExternalTarget.FATAL ;
+                    break ;
                 }
                 case LoggerLevel.INFO :
                 {
-                    methodName = "console.info" ;
+                    methodName = ExternalTarget.INFO ;
                     break ; 
                 }
                 case LoggerLevel.WARN :
                 {
-                    methodName = "console.warn" ;
+                    methodName = ExternalTarget.WARN ;
                     break ; 
                 }
-                case LoggerLevel.DEBUG :
+                case LoggerLevel.WTF :
+                {
+                    methodName = ExternalTarget.WTF ;
+                    break ; 
+                }
                 default :
                 {
-                    methodName = "console.debug" ;
+                    methodName = ExternalTarget.NONE ;
                     break ; 
                 }
             }
@@ -163,13 +220,8 @@ package system.logging.targets
             }
             else if ( verbose )
             {
-                navigateToURL( new URLRequest( fastformat( url , methodName , message ) ) ) ;  
+                navigateToURL( new URLRequest( fastformat( externalUrl , methodName , message ) ) ) ;  
             }
         }
-        
-        /**
-         * The internal javascript pattern use to log with the navigateToURL method.
-         */
-        hack var url:String = "javascript:{0}('{1}');" ;
     }
 }
