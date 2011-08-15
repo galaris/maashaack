@@ -38,15 +38,15 @@ package examples
     import system.logging.Log;
     import system.logging.Logger;
     import system.logging.LoggerLevel;
-    import system.logging.targets.FireBugTarget;
+    import system.logging.targets.ExternalTarget;
     
     import flash.display.Sprite;
     
-    public class FireBugTargetExample extends Sprite 
+    public class ExternalTargetExample extends Sprite 
     {
-        public function FireBugTargetExample()
+        public function ExternalTargetExample()
         {
-            var target:FireBugTarget = new FireBugTarget() ;
+            var target:ExternalTarget = new ExternalTarget() ;
             
             target.includeDate    = true ;
             target.includeTime    = true ;
