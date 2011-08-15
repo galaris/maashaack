@@ -35,7 +35,7 @@
 
 package system.logging.errors 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.errors.InvalidChannelError;
     

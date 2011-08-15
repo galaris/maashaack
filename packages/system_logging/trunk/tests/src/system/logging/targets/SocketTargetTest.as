@@ -35,7 +35,7 @@
 
 package system.logging.targets 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class SocketTargetTest extends TestCase 
     {

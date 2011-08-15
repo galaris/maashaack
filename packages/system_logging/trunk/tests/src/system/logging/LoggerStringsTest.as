@@ -35,7 +35,7 @@
 
 package system.logging 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class LoggerStringsTest extends TestCase 
     {
