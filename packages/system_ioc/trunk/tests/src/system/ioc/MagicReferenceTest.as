@@ -34,7 +34,7 @@
 */
 package system.ioc
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class MagicReferenceTest extends TestCase
     {

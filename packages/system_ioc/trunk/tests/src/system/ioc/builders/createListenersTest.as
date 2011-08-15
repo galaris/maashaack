@@ -35,7 +35,7 @@
 
 package system.ioc.builders
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.ioc.ObjectListener;
     

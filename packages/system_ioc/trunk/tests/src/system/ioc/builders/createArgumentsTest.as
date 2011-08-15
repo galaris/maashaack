@@ -35,8 +35,8 @@
 
 package system.ioc.builders
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
 
     import system.ioc.ObjectArgument;
     import system.ioc.ObjectAttribute;

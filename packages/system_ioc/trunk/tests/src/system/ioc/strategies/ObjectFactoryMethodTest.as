@@ -34,7 +34,7 @@
  */
 package system.ioc.strategies
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.ioc.IObjectFactoryStrategy;
     import system.ioc.ObjectMethod;

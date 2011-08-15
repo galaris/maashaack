@@ -34,8 +34,8 @@
 */
 package system.ioc.evaluators
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
 
     import system.evaluators.PropertyEvaluator;
     import system.ioc.ObjectConfig;

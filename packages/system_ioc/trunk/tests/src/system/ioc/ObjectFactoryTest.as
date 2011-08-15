@@ -34,7 +34,7 @@
 */
 package system.ioc
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;

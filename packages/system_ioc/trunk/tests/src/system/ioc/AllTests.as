@@ -34,8 +34,8 @@
 */
 package system.ioc  
 {
-    import buRRRn.ASTUce.framework.ITest;
-    import buRRRn.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
     
     import system.ioc.builders.AllTests;
     import system.ioc.evaluators.AllTests;
@@ -43,7 +43,7 @@ package system.ioc
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite( "system.ioc package" );
             
