@@ -35,7 +35,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system.broadcasters 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.broadcasters.samples.BroadcasterClass;
     

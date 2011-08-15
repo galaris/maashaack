@@ -35,14 +35,14 @@
 
 package system.broadcasters
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
     
     import system.Environment;
     import system.hosts.HostID;
     
     public class AllTests
     {
-        public static function suite():ITest
+        public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack broadcaster API unit tests.");
             if( Environment.host.id != HostID.RedTamarin )
