@@ -33,12 +33,13 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package
+package 
 {
-    import buRRRn.ASTUce.*;
+    import library.ASTUce.*;
 
     import system.*;
     import system.diagnostics.TextFieldConsole;
+    import system.terminals.console;
 
     import flash.display.Sprite;
     import flash.display.StageAlign;
@@ -88,8 +89,8 @@ package
             
             //tests
             
-            buRRRn.ASTUce.config.maxColumn = 64 ;
-            buRRRn.ASTUce.config.showConstructorList = false;
+            library.ASTUce.metadata.config.maxColumn = 64 ;
+            library.ASTUce.metadata.config.showConstructorList = false;
             
             Runner.main
             ( 

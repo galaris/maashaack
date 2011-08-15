@@ -35,7 +35,7 @@
 
 package system 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
     
     import system.Cloneable;
     import system.samples.CloneableClass;    

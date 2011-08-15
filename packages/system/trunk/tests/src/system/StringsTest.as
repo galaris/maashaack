@@ -36,7 +36,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system
 {
-    import buRRRn.ASTUce.framework.*;
+    import library.ASTUce.framework.*;
 
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
