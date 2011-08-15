@@ -39,9 +39,9 @@ deps = {
          
          Var("root") + "/pixelbender"             : Var("repo") + "/packages/graphics/trunk/pixelbender",
          
-         Var("root") + "/tests/bin-tests"               : Var("repo") + "/packages/core/trunk/tests/bin-tests",
-         Var("root") + "/tests/bin-tests"               : Var("repo") + "/packages/system/trunk/tests/bin-tests",
-         Var("root") + "/tests/bin-tests"               : Var("repo") + "/packages/graphics/trunk/tests/bin-tests",
+         Var("root") + "/tests/bin-tests/core"     : Var("repo") + "/packages/core/trunk/tests/bin-tests/core",
+         Var("root") + "/tests/bin-tests/system"   : Var("repo") + "/packages/system/trunk/tests/bin-tests/system",
+         Var("root") + "/tests/bin-tests/graphics" : Var("repo") + "/packages/graphics/trunk/tests/bin-tests/graphics",
          
          Var("root") + "/tests/src/core"                : Var("repo") + "/packages/core/trunk/tests/src/core",
          Var("root") + "/tests/src/system"              : Var("repo") + "/packages/system/trunk/tests/src/system",
