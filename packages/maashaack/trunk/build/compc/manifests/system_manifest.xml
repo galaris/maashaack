@@ -297,7 +297,7 @@
     
     <!-- system.logging.targets -->
     
-    <component id="system.logging.targets:FireBugTarget"       class="system.logging.targets.FireBugTarget" />
+    <component id="system.logging.targets:ExternalTarget"      class="system.logging.targets.ExternalTarget" />
     <component id="system.logging.targets:LineFormattedTarget" class="system.logging.targets.LineFormattedTarget" />
     <component id="system.logging.targets:SocketTarget"        class="system.logging.targets.SocketTarget" />
     <component id="system.logging.targets:SOSTarget"           class="system.logging.targets.SOSTarget" />
