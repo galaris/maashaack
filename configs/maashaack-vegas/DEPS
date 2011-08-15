@@ -43,6 +43,10 @@ deps = {
          Var("root") + "/tests/bin-tests/system"   : Var("repo") + "/packages/system/trunk/tests/bin-tests/system",
          Var("root") + "/tests/bin-tests/graphics" : Var("repo") + "/packages/graphics/trunk/tests/bin-tests/graphics",
          
+         Var("root") + "/tests/src/CoreTestRunner.as"     : Var("repo") + "/packages/core/trunk/tests/src/CoreTestRunner.as",
+         Var("root") + "/tests/src/SystemTestRunner.as"   : Var("repo") + "/packages/system/trunk/tests/src/SystemTestRunner.as",
+         Var("root") + "/tests/src/GraphicsTestRunner.as" : Var("repo") + "/packages/graphics/trunk/tests/src/GraphicsTestRunner.as",
+         
          Var("root") + "/tests/src/core"                : Var("repo") + "/packages/core/trunk/tests/src/core",
          Var("root") + "/tests/src/system"              : Var("repo") + "/packages/system/trunk/tests/src/system",
          Var("root") + "/tests/src/system/samples"      : Var("repo") + "/packages/system/trunk/tests/src/system/samples",
