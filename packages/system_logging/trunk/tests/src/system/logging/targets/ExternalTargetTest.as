@@ -37,18 +37,18 @@ package system.logging.targets
 {
     import library.ASTUce.framework.TestCase;
     
-    public class FireBugTargetTest extends TestCase 
+    public class ExternalTargetTest extends TestCase 
     {
-        public function FireBugTargetTest(name:String = "")
+        public function ExternalTargetTest(name:String = "")
         {
             super(name);
         }
         
-        public var target:FireBugTarget ;
+        public var target:ExternalTarget ;
         
         public function setUp():void
         {
-            target = new FireBugTarget() ;
+            target = new ExternalTarget() ;
         }
         
         public function tearDown():void
@@ -58,12 +58,12 @@ package system.logging.targets
         
         public function testConstructor():void
         {
-            assertNotNull( target , "Constructor failed.") ;
+            assertNotNull( target ) ;
         }
         
         public function testInherit():void
         {
-            assertTrue( target is LineFormattedTarget , "The class must inherit the LineFormattedTarget class.") ;
+            assertTrue( target is LineFormattedTarget ) ;
         }
     }
 }

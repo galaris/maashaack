@@ -49,7 +49,7 @@ package system.logging.targets
 //            TAMARIN::exclude
 //            {
                 suite.addTestSuite( TextFieldTargetTest ) ;
-                suite.addTestSuite( FireBugTargetTest ) ;
+                suite.addTestSuite( ExternalTargetTest ) ;
                 suite.addTestSuite( SocketTargetTest  ) ;
                 suite.addTestSuite( SOSTargetTest     ) ;
 //            }
