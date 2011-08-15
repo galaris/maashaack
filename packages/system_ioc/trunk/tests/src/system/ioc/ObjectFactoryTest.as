@@ -519,7 +519,7 @@ package system.ioc
                     staticFactoryMethod : 
                     { 
                         type       : "system.ioc.samples.factory.AppointmentFactory" ,
-                        name       : "run" ,
+                        name       : "create" ,
                         arguments  :
                         [
                             {
