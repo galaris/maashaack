@@ -35,7 +35,7 @@
 
 package system.reflection 
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     import system.Enum;
 

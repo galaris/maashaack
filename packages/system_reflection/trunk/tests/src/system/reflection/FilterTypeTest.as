@@ -35,7 +35,7 @@
 
 package system.reflection
 {
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.TestCase;
 
     public class FilterTypeTest extends TestCase
     {

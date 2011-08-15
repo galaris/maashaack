@@ -35,8 +35,8 @@
 
 package system.reflection
 {
-    import buRRRn.ASTUce.framework.ArrayAssert;
-    import buRRRn.ASTUce.framework.TestCase;
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
 
     import system.Reflection;
     import system.reflection.samples.Basic2BasicClass;
@@ -121,8 +121,8 @@ package system.reflection
             var c2:ClassInfo = c1.superClass;
             var c3:ClassInfo = c2.superClass;
             
-            assertEquals("buRRRn.ASTUce.framework.TestCase", c1.superClass.name);
-            assertEquals("buRRRn.ASTUce.framework.Assert", c2.superClass.name);
+            assertEquals("library.ASTUce.framework.TestCase", c1.superClass.name);
+            assertEquals("library.ASTUce.framework.Assert", c2.superClass.name);
             assertEquals("Object", c3.superClass.name);
         }
 
