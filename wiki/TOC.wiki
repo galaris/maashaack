@@ -49,6 +49,7 @@
    * [Signals Signalers and Receivers]
    * [CommandAndTask Command and task engine]
    * [ConditionalTask The Conditional Task Engine]
+   * [InversionOfControl Inversion of Control (IoC)]
  * [Packages Packages]
    * maashaack
       * [core core]
