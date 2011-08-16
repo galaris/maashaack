@@ -64,7 +64,6 @@
     
     <!-- system.data -->
     
-    <component id="system.data:Aliases"         class="system.data.Aliases" />
     <component id="system.data:Bag"             class="system.data.Bag" />
     <component id="system.data:Boundable"       class="system.data.Boundable" />
     <component id="system.data:Collection"      class="system.data.Collection" />
