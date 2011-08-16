@@ -58,7 +58,6 @@ package system.data
             
             // test system.data interfaces & class
             
-            suite.addTestSuite(AliasesTest) ;
             suite.addTestSuite(BagTest) ;
             suite.addTestSuite(BoundableTest) ;
             suite.addTestSuite(CollectionTest) ;
