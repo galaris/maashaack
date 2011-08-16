@@ -335,10 +335,7 @@ The *ObjectFactory* class is the main class of the dependency injection engine d
 
 This class has a rich heritage, with several levels of inheritance, which provides several important features :
 
-ObjectFactory 
-    |_ObjectDefinitionContainer 
-        |_CoreAction
-            |_Task
+ObjectFactory -> ObjectDefinitionContainer -> CoreAction -> Task
 
 This class implements the interfaces :
  * *system.Cloneable* : use the classical clone() method to generate a shallow copy of the factory.
