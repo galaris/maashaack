@@ -272,4 +272,21 @@ The *object definition* can provide further information on the strategy used by 
 
 If one were reduced to its simplest form the definition of an *IoC* container, we could say that it consists of a collection of *object definitions* to structure effectively and solid applied throughout its life cycle.
 
+=== 2 - The ObjectDefinitionContainer class ===
+
+The *system.ioc* package contains all important classes and interfaces to deploy the inversion of control pattern in your applications. The *system.ioc* package is dependent on the *core* and *system* packages.
+
+The kernel class in the *system.ioc* package defines the *lightweight container* implementation with the *IObjectDefinitionContainer* interface. This class is the super class of the *ObjectFactory* class.
+
+*members inspection*
+
+|| Members || Description ||
+|| numObjectDefinitions:Boolean || Indicates the numbers of object definitions registered in the container. ||
+|| addObjectDefinition(id:String, definition:IObjectDefinition ) || Registers a new object definition in the container. ||
+|| clearObjectDefinition() || Removes all the object definitions in the container. ||
+|| clone():* || Returns a shallow copy of the object. ||
+|| containsObjectDefinition(id:String) || Returns true if the object defines with the specified id is register in the container. ||
+|| getObjectDefinition(id:String) || Returns the object definition register in the container with the specified id. ||
+|| removeObjectDefinition(id:String)	|| |Unregisters a specific object definition in the container. ||
+
 // TODO
