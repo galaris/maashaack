@@ -38,6 +38,10 @@
     <component id="core.chars:isUnicode"    class="core.chars.isUnicode"    />
     <component id="core.chars:isUpper"      class="core.chars.isUpper"      />
     
+    <!-- core.data -->
+    
+    <component id="core.data:aliases" class="core.data.aliases" />
+    
     <!-- core.functors -->
     
     <component id="core.functors:aop"  class="core.functors.aop"  />
