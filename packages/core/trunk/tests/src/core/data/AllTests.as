@@ -33,19 +33,8 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core
+package core.data
 {
-    import core.arrays.AllTests;
-    import core.chars.AllTests;
-    import core.data.AllTests;
-    import core.functors.AllTests;
-    import core.html.AllTests;
-    import core.maths.AllTests;
-    import core.objects.AllTests;
-    import core.reflect.AllTests;
-    import core.strings.AllTests;
-    import core.vectors.AllTests;
-    
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
     
@@ -53,28 +42,9 @@ package core
     {
         public static function suite():Test
         {
-            var suite:TestSuite = new TestSuite("core library tests");
+            var suite:TestSuite = new TestSuite("core.data package tests");
             
-            suite.addTestSuite( versionTest );
-            suite.addTestSuite( uriTest );
-            suite.addTestSuite( bitTest );
-            
-            suite.addTestSuite( dumpArrayTest );
-            suite.addTestSuite( dumpDateTest );
-            suite.addTestSuite( dumpObjectTest );
-            suite.addTestSuite( dumpStringTest );
-            suite.addTestSuite( dumpTest );
-            
-            suite.addTest( core.arrays.AllTests.suite() );
-            suite.addTest( core.chars.AllTests.suite() );
-            suite.addTest( core.data.AllTests.suite() );
-            suite.addTest( core.functors.AllTests.suite() );
-            suite.addTest( core.html.AllTests.suite() );
-            suite.addTest( core.maths.AllTests.suite() );
-            suite.addTest( core.objects.AllTests.suite() );
-            suite.addTest( core.reflect.AllTests.suite() );
-            suite.addTest( core.strings.AllTests.suite() );
-            suite.addTest( core.vectors.AllTests.suite() );
+            suite.addTestSuite( aliases ) ;
             
             return suite;
         }
