@@ -428,3 +428,234 @@ The above example will display very fast a *TextField* on the stage of an animat
 This example illustrates the use of a "_programming layers_" which can isolate each object of an application and work quietly on each of them regardless of their dependencies with each other.
 
 The lightweight container and the framework are responsible for creating the objects and put them in touch with each other.
+
+*attributes inspection*
+
+|| *Members* || *Description* ||
+|| config:ObjectConfig || Defines the optional configuration of the object factory. ||
+|| objects:Array	|| Contains all generic objects to defines the object definitions in the factory with the run() or create() method.||
+|| singletons:HashMap || The Map of all singletons references registered in the IoC factory.||
+
+*methods inspection*
+
+|| *Members* || *Description* ||
+|| clone() || Returns the shallow copy of the object.||
+|| containsSingleton(id:String):Boolean || Indicates if a singleton reference is register in the factory with the specified id.||
+|| getObject( id:String ):* || Creates and returns an object with the specified id.||
+|| isDirty():Boolean || Indicates if the factory is dirty, must flush this buffer of not lazy-init singleton object definitions.||
+|| isLazyInit( id:String ):Boolean || Indicates if the specified object definition is lazy-init.||
+|| isSingleton( id:String ):Boolean || Indicates if the scope of the object definition is "singleton".||
+|| removeSingleton( id:String ):void || Remove and destroy a singleton in the container.||
+|| run( ...arguments:Array ):void || Run the initialization of the factory with new object definitions and create the not lazy-init singleton objects. You can lock the singleton building with the lock() method.||
+
+The *ObjectFactory* class implements the *system.process.Lockable* interface. You can lock the *run()* method and fix the singleton auto-build process :
+
+{{{
+factory.lock() ; 
+factory.run( objects ) ; 
+factory.unlock() ;
+
+trace( factory.isDirty() ) ; // true
+
+factory.run() ;
+
+trace( factory.isDirty() ) ; // false
+}}}
+
+The *isDirty()* method returns a boolean (true or false) to indicate if the factory contains singletons in its internal buffer and it must be flushed.
+
+This behaviour is useful in complex factory configurations who need different sources of *object definitions*. 
+
+When the *lock()* method is invoked we can fill the locked factory with the *run()* method. 
+
+When all object definitions are defines in the factory, to flush it we must invoke the *unlock()* method before the *run()* method.
+
+The factory is a task and implements the *system.process.Action* interface. 
+
+You can registered the two signals "*startIt*" and "*finishIt*" who indicate the begin and the end of the run process (only if the factory is unlocked). You can use a complex task with a sequence (*system.process.Chain*) or batch (*system.process.BatchTask*) to combine factory with other tasks and other processes in your application.
+
+*example*
+
+{{{
+import system.ioc.ObjectFactory ;
+import system.process.Action ;
+
+var start:Function = function( action:Action ):void
+{
+    trace("start") ;
+}
+
+var finish:Function = function( action:Action ):void
+{
+    trace("finish") ;
+    factory.getObject( "root" ) ;
+}
+
+var factory:ObjectFactory = new ObjectFactory() ;
+
+factory.startIt.connect( start ) ;
+factory.finishIt.connect( finish ) ;
+
+factory.objects = 
+[
+    {
+        id    	: "my_format" ,
+        type  	: "flash.text.TextFormat" ,
+    	  arguments : 
+        [ 
+            { value :"Arial"   } , 
+            { value :24        } , 
+            { value : 0xFEF292 } , 
+            { value : true     } 
+        ]
+    }
+    ,
+    {
+        id         : "my_field" ,
+        type   	 : "flash.text.TextField"  ,
+        properties :
+        [
+            { name : "autoSize"          , value  : "left"        } ,
+        	{ name : "defaultTextFormat" , ref    : "my_format"   } ,
+        	{ name : "text"              , value  : "HELLO WORLD" } ,
+        	{ name : "x"                 , value  : 10            } ,
+        	{ name : "y"                 , value  : 10            }
+    	]
+    }
+    ,
+    {
+        id           	 : "root" ,
+        type         	 : "flash.display.MovieClip"  ,
+        factoryReference : "#root" ,
+        properties       :
+        [
+            { name : "addChild" , arguments : [ { ref:"my_field" } ] }
+        ]
+    }
+] ;
+
+factory.config.root = this ;
+
+factory.run( objects ) ; 
+}}}
+
+=== 4 - The system.ioc.factory singleton ===
+
+In the *system.ioc* package you can find the factory constant, this singleton reference defines an unique, simple and fast instance of the *ObjectFactory* class to use in your applications.
+
+*example*
+
+{{{
+import system.ioc.factory ;
+import flash.text.TextField ;
+
+var objects:Array =
+[
+    {
+        id    	: "my_format" ,
+        type  	: "flash.text.TextFormat" ,
+    	  arguments : 
+        [ 
+            { value :"Arial"   } , 
+            { value :24        } , 
+            { value : 0xFEF292 } , 
+            { value : true     } 
+        ]
+    }
+    ,
+    {
+        id         : "my_field" ,
+        type   	 : "flash.text.TextField"  ,
+        properties :
+        [
+            { name : "autoSize"          , value  : "left"        } ,
+        	{ name : "defaultTextFormat" , ref    : "my_format"   } ,
+        	{ name : "text"              , value  : "HELLO WORLD" } ,
+        	{ name : "x"                 , value  : 10            } ,
+        	{ name : "y"                 , value  : 10            }
+    	]
+    }
+] ;
+
+factory.config.root = this ;
+
+factory.run( objects ) ; 
+
+var field:TextField = factory.getObject("my_field") as TextField ;
+
+addChild( field ) ;
+}}}
+
+=== 5 - Debug the IoC factory ===
+
+To debug the *IoC* factory you can use different modes based on the *system.logging* package the basic *logging engine* defines in the system package of *Maashaack*.
+
+*example*
+
+{{{
+import system.ioc.factory ;
+
+import system.logging.LoggerLevel;
+import system.logging.targets.TraceTarget;
+
+///////////////
+
+var target:TraceTarget = new TraceTarget() ;
+
+target.includeLines = true ;
+target.includeTime  = true ;
+
+target.filters      = ["*"] ;
+target.level        = LoggerLevel.ALL ;
+
+///////////////
+
+var context:Array =
+[
+    { 
+        id        : "test" ,
+        type      : "String" ,
+        arguments : 
+        [
+            { value : "hello world" } 
+        ]
+    }
+    ,
+    { 
+        id         : "object" ,
+        type       : "Object" ,
+        properties : 
+        [
+            { name : "label" , value : "hi world" }
+        ]
+    }       
+    ,
+    { 
+        id               : "test3" ,
+        type             : "String" ,
+        factoryReference : "object.labels" 
+    }
+] ;
+
+factory.run( context ) ; 
+
+// test a valid 'id' in the factory
+
+trace( factory.getObject("test") ) ;
+
+// use the logger object defines by default in the factory
+
+trace( factory.getObject("test1") ) ;
+
+//  use trace when a warning log message is invoked
+
+factory.config.useLogger = false ; 
+
+trace( factory.getObject("test2") ) ;
+
+// Disabled all evaluation errors with the throwError flag
+
+factory.config.throwError = true ; // enabled all errors
+
+trace( factory.getObject( "test3" ) ) ;
+}}}
