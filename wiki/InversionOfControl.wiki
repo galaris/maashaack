@@ -32,9 +32,9 @@ package
 }
 }}}
 
-In the previous example the class Writer use in its method write( message:String ) an object of type Pen. This method is hence dependent of an object of type Pen.
+In the previous example the class *Writer* use in its method *write( message:String )* an object of type *Pen*. This method is hence dependent of an object of type *Pen*.
 
-The code has a very simple effect but creating directly the object of type Pen in the method limit the possibilities of the class and its future evolutions. In case the Pen class change we also have to modify the writer class with is not very convenient.
+The code has a very simple effect but creating directly the object of type *Pen* in the method limit the possibilities of the class and its future evolutions. In case the *Pen* class change we also have to modify the writer class with is not very convenient.
 
 *Looking up dependencies*
 
@@ -174,7 +174,7 @@ The virtual property "pen" inject in the Write object any object of type *Pen* i
 
 *Interface injection*
 
-This approach is the same as setter injection or constructor injection but here the dependency is typed with an interface :
+This approach is the same as *setter injection* or *constructor injection* but here the dependency is typed with an interface :
 
 {{{
 package
@@ -218,4 +218,4 @@ package
 }
 }}}
 
-This solution is very flexible and lightweight because it does not develop immediately a class more or less complex to instantiate instances of class "Write". The dependency is defined simply about a behavior.
+This solution is very flexible and lightweight because it does not develop immediately a class more or less complex to instantiate instances of class *"Write"*. The dependency is defined simply about a behavior.
