@@ -280,7 +280,7 @@ The kernel class in the *system.ioc* package defines the *lightweight container*
 
 *members inspection*
 
-|| Members || Description ||
+|| *Members* || *Description* ||
 || numObjectDefinitions:Boolean || Indicates the numbers of object definitions registered in the container. ||
 || addObjectDefinition(id:String, definition:IObjectDefinition ) || Registers a new object definition in the container. ||
 || clearObjectDefinition() || Removes all the object definitions in the container. ||
@@ -289,4 +289,145 @@ The kernel class in the *system.ioc* package defines the *lightweight container*
 || getObjectDefinition(id:String) || Returns the object definition register in the container with the specified id. ||
 || removeObjectDefinition(id:String)	|| |Unregisters a specific object definition in the container. ||
 
-// TODO
+*example*
+
+{{{
+import flash.text.TextField ;
+import flash.text.TextFormat ;
+
+import system.ioc.ObjectDefinition ;
+import system.ioc.ObjectDefinitionContainer ;
+import system.ioc.ObjectFactory ;
+
+var container:ObjectDefinitionContainer = new ObjectFactory();
+ 
+var context:Object =
+{
+    id         : "my_field" ,
+    type       : "flash.text.TextField" ,
+    properties : 
+    [
+        { name : "defaultTextFormat" , value : new TextFormat("verdana", 11) } ,
+        { name : "selectable"        , value : false                         } ,
+        { name : "text"              , value : "hello world"                 } ,
+        { name : "textColor"         , value : 0xF7F744                      } ,
+        { name : "x"                 , value : 25                            } ,
+        { name : "y"                 , value : 25                            }         
+    ]
+}
+
+var definition:ObjectDefinition = ObjectDefinition.create( context ) ;
+
+container.addObjectDefinition( definition );
+
+trace( container.containsObjectDefinition( "my_field" ) ) ; // true
+trace( container.getObjectDefinition( "my_field" ) ) ; // [ObjectDefinition]
+trace( container.numObjectDefinitions ) ; // 1
+
+var field:TextField = (container as ObjectFactory).getObject("my_field") as TextField ;
+}}}
+
+In this example we initialize an object definition with a single generic object that will generate with the factory a specific instance of the TextField class. This simple technique can be injected at any time of the new definitions of objects by hand in the factory with the method *addObjectDefinition()*.
+
+=== 3 - The ObjectFactory class ===
+
+The *ObjectFactory* class is the main class of the dependency injection engine defines in the *system.ioc* package. This class defines in the same object a container and a factory used in the application to create all objects and dependencies between them.
+
+This class has a rich heritage, with several levels of inheritance, which provides several important features :
+
+ObjectFactory 
+    |_ObjectDefinitionContainer 
+        |_CoreAction
+            |_Task
+
+This class implements the interfaces :
+ * *system.Cloneable* : use the classical clone() method to generate a shallow copy of the factory.
+ * *system.process.Runnable* : Initialize the content of the factory with the basic run method (design pattern Command).
+ * *system.process.Action* : The factory can be initialize in a global process and can be include in a sequence or batch group of complex processes.
+ * *system.process.Lockable* : Lock the singleton lazy initialize process.
+ * *system.ioc.IObjectDefinitionContainer* : defines all the methods to create and manage the object definitions in the container.
+ * *system.ioc.IObjectFactory* : defines all the methods to create and manage the objects in the factory.
+
+*usage*
+
+{{{
+new ObjectFactory( config:ObjectConfig = null , objects:Array = null )
+}}}
+
+*example*
+
+I will illustrate the use of the factory based *IoC* with a simple collection of generic objects defined in an *Array* object.
+
+These generic objects allow the initialization and the injection of several *object definitions* in the factory and allow the automatic creation of objects with a "*singleton*" scope during the initialization of the lightweight container. 
+
+{{{
+import system.ioc.ObjectFactory ;
+
+var objects:Array =
+[
+    {
+        id    	: "my_format" ,
+        type  	: "flash.text.TextFormat" ,
+    	  arguments : 
+        [ 
+            { value :"Arial"   } , 
+            { value :24        } , 
+            { value : 0xFEF292 } , 
+            { value : true     } 
+        ]
+    }
+    ,
+    {
+        id         : "my_field" ,
+        type   	 : "flash.text.TextField"  ,
+        properties :
+        [
+            { name : "autoSize"          , value  : "left"        } ,
+        	{ name : "defaultTextFormat" , ref    : "my_format"   } ,
+        	{ name : "text"              , value  : "HELLO WORLD" } ,
+        	{ name : "x"                 , value  : 10            } ,
+        	{ name : "y"                 , value  : 10            }
+    	]
+    }
+    ,
+    {
+        id           	 : "root" ,
+        type         	 : "flash.display.MovieClip"  ,
+        factoryReference : "#root" ,
+        singleton    	 : true ,
+        properties       :
+        [
+            { name : "addChild" , arguments : [ { ref:"my_field" } ] }
+        ]
+    }
+] ;
+
+var factory:ObjectFactory = new ObjectFactory() ;
+
+factory.config.root = this ;
+
+factory.run( objects ) ; 
+}}}
+
+In the previous example the generic object "*objects*" is a basic *Array* who defines the setting of the *IoC* factory with tree *object definitions* :
+
+ * *my_format* : this definition defines a specific setting to create *flash.text.TextFormat* instances with the factory. This definition use a *constructor injection* to initialize the new object.
+ * *my_field* : this definition defines a specific setting to create *flash.text.TextField* instances. This definition use a *setter injection* to initialize the new object.
+ * *root* : this definition creates a singleton reference in the application who target the main timeline reference defines in the IoC factory configuration. This definition use *setter injection* to attach a reference defines with the object definition "*my_field*".
+
+
+The object definition "*root*" use a specific strategy defines in the *IoC* factory to target the main timeline reference of the application. The *IoC* factory must target the main timeline manually with the script :
+
+{{{
+factory.config.root = this ;
+}}}
+
+We initialize the *factory.config.root* property of the factory to allow the *#root* magic reference in the *object definitions* of the *IoC* container.
+
+The *IoC* factory has several types of strategies to create an object in the application with an object definition. We will discuss in the next chapter on object definitions.
+
+The above example will display very fast a *TextField* on the stage of an animation. 
+
+This example illustrates the use of a "_programming layers_" which can isolate each object of an application and work quietly on each of them regardless of their dependencies with each other.
+
+The lightweight container and the framework are responsible for creating the objects and put them in touch with each other.
