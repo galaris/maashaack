@@ -34,7 +34,7 @@
 */
 package system.serializers.eden
 {
-    import system.data.Aliases;
+    import core.data.aliases;
     
     /**
      * The eden aliases dictionary.
@@ -51,5 +51,5 @@ package system.serializers.eden
      * trace( eden.deserialize( source ) ) ;
      * </pre>
      */
-    public const aliases:Aliases = new Aliases() ;
+    public const aliases:core.data.aliases = new core.data.aliases() ;
 }
