@@ -1,4 +1,4 @@
-#summary the IoC design pattern -Hollywood principle
+#summary the IoC design pattern - Hollywood principle
 #labels Documentation,Framework
 
 = Inversion of Control =
