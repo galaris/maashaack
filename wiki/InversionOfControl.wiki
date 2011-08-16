@@ -231,3 +231,45 @@ The main principle is simple, it indicates an application framework that does no
 <img src="http://maashaack.googlecode.com/files/ioc_hollywood_principle.gif" align="middle" />
 
 This model highlights the concept of *Programming Layers*. This concept allows to separate each element of an application and work with each independently and then tie them together very simply by having the fewest dependencies as possible at the outset. So the framework to link each layer with each other in time by injecting any dependencies in the object that needs it.
+
+==== Container based on Inversion of Control ====
+
+An *Inversion of Control* container is an application infrastructure that feed numerous services need in order to have the application running.
+
+The main services of an *IoC* container classic are :
+
+*Lookup*
+
+The container store or create reference for every objects in the application. it can also be seen as a factory for the application.
+
+*Lifecycle management*
+
+The *lifecycle* of the objects is handled by the container. It can create new objects, automatically inject predefined values in properties of a new instance when it is created, call method when the object is initialised or destructed, etc.
+
+*Configuration*
+
+Objects can be configured through external data without having to rebuild the application; it is possible to use external data with the following formats *eden*, *JSON*, *XML*, ... to create or initialise the application.
+
+*Dependency Injection*
+
+Containers are not limited to handling and configuring objects with simple types, they can also handle link and dependency between objects.
+
+==== Object definitions in the IoC containers ====
+
+An *object definition* is an object that will create a new object in an application with the *IoC* factory. The *object definition* can be regarded as a manual or a guide predefined by the developers of the application using this container.
+
+This manual may contain :
+
+ * an identifier that can save its definition and then create objects,
+ * the type of the object that we want to create,
+ * the parameters that one wishes to spend in the constructor,
+ * the default values that you want to apply on the object (properties and methods),
+ * the method name that you want to invoke once the object is created to initialize it,
+ * inject dependencies with other objects defined also in the factory,
+ * etc.
+
+The *object definition* can provide further information on the strategy used by the factory to create the object or the nature of this object in the life cycle of the application like the scope of the object : singleton or prototype.
+
+If one were reduced to its simplest form the definition of an *IoC* container, we could say that it consists of a collection of *object definitions* to structure effectively and solid applied throughout its life cycle.
+
+// TODO
