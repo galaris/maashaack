@@ -44,7 +44,7 @@ package core.data
         {
             var suite:TestSuite = new TestSuite("core.data package tests");
             
-            suite.addTestSuite( aliases ) ;
+            suite.addTestSuite( aliasesTest ) ;
             
             return suite;
         }
