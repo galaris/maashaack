@@ -219,3 +219,15 @@ package
 }}}
 
 This solution is very flexible and lightweight because it does not develop immediately a class more or less complex to instantiate instances of class *"Write"*. The dependency is defined simply about a behavior.
+
+==== Inversion of Control ====
+
+The design pattern *Inversion of Control*, also called *IoC* (another name for *Dependency Injection*) define a set of programming technique where the flow of system control and its objects are reversed from the usual flow.
+
+This concept is based on the "[http://en.wikipedia.org/wiki/Hollywood_Principle Hollywood Principle]" : *Don't call us, we will call you*.
+
+The main principle is simple, it indicates an application framework that does not need to be called to run the application, the framework itself which is responsible for creating the interactions between objects (whenever it's possible).
+
+http://maashaack.googlecode.com/files/ioc_hollywood_principle.gif
+
+This model highlights the concept of *Programming Layers*. This concept allows to separate each element of an application and work with each independently and then tie them together very simply by having the fewest dependencies as possible at the outset. So the framework to link each layer with each other in time by injecting any dependencies in the object that needs it.
