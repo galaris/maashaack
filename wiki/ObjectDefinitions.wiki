@@ -97,3 +97,186 @@ The *generic object* used to initialize the object definition contains specific 
 *4 - The "evaluators" attribute*
 
 || *evaluators* || You can use this attribute to filter or transform the values defines in the the attributes "properties" and "arguments". ||
+
+We will define for the rest of the chapter a basic example that illustrate the techniques to define a collection (*Array*) of *generic objects* used to initialize and fill the factory. 
+
+This collection can then be stored in an external text file format like eden or directly in the source code of the *ActionScript* application.
+
+Take the time to create a small *examples.core.User* class to illustrate the dependencies that can have a class with other classes.
+
+{{{
+package examples.core
+{  
+    public class User
+    {
+        public function User
+        ( 
+            pseudo:String   = null , 
+            name:String     = null , 
+            address:Address = null 
+        )
+        {
+            this.pseudo  = pseudo ;
+            this.name    = name ;
+            this.address = address ;
+        }
+      
+        public var address:Address ;
+        
+        public var age:Number ;
+        
+        public var firstName:String ;
+        
+        public var job:Job ;
+        
+        public var mail:String ;
+        
+        public var name:String ;
+        
+        public var pseudo:String ;
+        
+        public var url:String ;
+        
+        public function destroy():void
+        {
+            trace( this + " destroy.") ;
+        }
+        
+        public function initialize():void
+        {
+            trace( this + " initialize.") ;
+        }
+        
+        public function setMail( str:String ):void
+        {
+            mail = str ;
+        }
+        
+        public override function toString():String
+        {
+            return "[User" + pseudo + "]" ;
+        }
+    }
+}
+}}}
+
+We observe in the *User* class notions of dependencies explained in the previous chapter in terms of its *constructor* function, its *attributes* and *methods*.
+
+The *User* class has many dependencies, for example with the *Address* and *Job* classes defined below :
+
+*examples.core.Address :*
+
+{{{
+package examples.core
+{
+    public class Address
+    {
+        public function Address
+        ( 
+            city:String   = null , 
+            street:String = null , 
+            zip:Number    = NaN 
+        )
+        {
+            this.city   = city ;
+            this.street = street ;
+            this.zip    = zip	;
+        }
+        
+        public var city:String ;
+        public var street:String ; 
+        public var zip:Number ;
+    }
+}
+}}}
+
+*examples.core.Job :*
+
+{{{
+package examples.core
+{   
+    public class Job
+    {
+        public function Job( name:String = null )
+        {
+            this.name = name ;
+        }
+        
+        public var name:String ;
+        
+        public override function toString():String
+        {
+            return "[Job " + name + "]" ;
+        }
+    }
+}
+}}}
+
+Now let's see an example of *IoC* configuration containing all the *object definitions* which will then used in the lightweight container and to create an instance of the *examples.core.User* class :
+
+{{{
+var objects:Array =
+[
+    {  
+        id        	: "address"  ,
+        type      	: "examples.core.Address" ,
+        properties	:
+        [
+            { name : "city"   , value : "Marseille" } ,
+            { name : "street" , value : "xx xxx xxxxxxxxxxx" } ,
+            { name : "zip"	, value : 13001 }
+        ]
+    }
+    ,
+    {  
+        id     	: "job_dev"   ,
+        type   	: "examples.core.Job"  ,
+        scope  	: "prototype" ,
+        properties : [ { name:"name" , value:"AS Developper" } ]
+    }   
+    ,
+    { 
+        id         : "user" ,
+        type       : "examples.core.User" ,
+        arguments	:
+        [
+            { value : "eKameleon" } ,
+            { value : "ALCARAZ"   } ,
+            { ref   : "address"   }
+        ] ,
+        lazyInit      : true , 
+        singleton     : true ,
+        destroy       : "destroy" ,
+        init          : "initialize" ,
+        properties    :
+        [
+            { name : "age"       , value : 32        } ,
+            { name : "firstName" , value : "Marc"    } ,
+            { name : "job"       , ref   : "job_dev" } ,
+            { name : "url"       , value : "http://www.ekameleon.net" } ,
+            { 
+                name : "setMail" , 
+                arguments : [ { value : "ekameleon [at] gmail.com" } ] 
+            }
+        ]
+    }
+] ;
+}}}
+
+The above example does not use all the attributes defined at the beginning of this chapter, but shows the most important features of an *object definition*.
+
+It remains only to initialize the factory and retrieve the object defined in the factory with a basic *ActionScript* code :
+
+{{{
+import system.ioc.factory ;
+
+import examples.core.User ;
+
+factory.run( objects ) ;
+
+var user:User = factory.getObject( "user" ) as User ;
+
+trace( user ) ;
+}}}
+
+We will use much of this example in the descriptions of the attributes that follow. 
