@@ -228,7 +228,7 @@ This concept is based on the "[http://en.wikipedia.org/wiki/Hollywood_Principle 
 
 The main principle is simple, it indicates an application framework that does not need to be called to run the application, the framework itself which is responsible for creating the interactions between objects (whenever it's possible).
 
-<img src="http://maashaack.googlecode.com/files/ioc_hollywood_principle.gif" align="middle" />
+http://maashaack.googlecode.com/svn/gfx/framework/ioc/ioc_hollywood_principle.gif
 
 This model highlights the concept of *Programming Layers*. This concept allows to separate each element of an application and work with each independently and then tie them together very simply by having the fewest dependencies as possible at the outset. So the framework to link each layer with each other in time by injecting any dependencies in the object that needs it.
 
