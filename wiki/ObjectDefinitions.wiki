@@ -244,11 +244,11 @@ var objects:Array =
             { value : "ALCARAZ"   } ,
             { ref   : "address"   }
         ] ,
-        lazyInit      : true , 
-        singleton     : true ,
-        destroy       : "destroy" ,
-        init          : "initialize" ,
-        properties    :
+        lazyInit   : true , 
+        singleton  : true ,
+        destroy     : "destroy" ,
+        init       : "initialize" ,
+        properties :
         [
             { name : "age"       , value : 32        } ,
             { name : "firstName" , value : "Marc"    } ,
