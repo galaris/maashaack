@@ -224,7 +224,7 @@ var objects:Array =
         [
             { name : "city"   , value : "Marseille" } ,
             { name : "street" , value : "xx xxx xxxxxxxxxxx" } ,
-            { name : "zip"	, value : 13001 }
+            { name : "zip"    , value : 13001 }
         ]
     }
     ,
