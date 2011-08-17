@@ -246,7 +246,7 @@ var objects:Array =
         ] ,
         lazyInit   : true , 
         singleton  : true ,
-        destroy     : "destroy" ,
+        destroy    : "destroy" ,
         init       : "initialize" ,
         properties :
         [
