@@ -276,6 +276,8 @@ If one were reduced to its simplest form the definition of an *IoC* container, w
 
 The *system.ioc* package contains all important classes and interfaces to deploy the inversion of control pattern in your applications. The *system.ioc* package is dependent on the *core* and *system* packages.
 
+[http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_ioc%2Ftrunk http://maashaack.googlecode.com/svn/gfx/framework/packages/system.ioc.png]
+
 The kernel class in the *system.ioc* package defines the *lightweight container* implementation with the *IObjectDefinitionContainer* interface. This class is the super class of the *ObjectFactory* class.
 
 *members inspection*
