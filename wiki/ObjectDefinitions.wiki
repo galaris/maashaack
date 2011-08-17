@@ -238,7 +238,7 @@ var objects:Array =
     { 
         id         : "user" ,
         type       : "examples.core.User" ,
-        arguments	:
+        arguments :
         [
             { value : "eKameleon" } ,
             { value : "ALCARAZ"   } ,
