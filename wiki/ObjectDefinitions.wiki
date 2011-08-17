@@ -12,8 +12,8 @@ The *IoC* container is initialized with object definitions that are "operating i
 The *object definitions* are represented by objects that implement the interface *system.ioc.IObjectDefinition*, this interface is implemented by the class *ObjectDefinition*.
 
 The *IObjectDefinition* interface has the following characteristics :
- * A unique identifier for each object definition (mandatory).
- * A description of the type of object that will be returned or created with the object definition (mandatory).
+ * A unique identifier for each object definition (required).
+ * A description of the type of object that will be returned or created with the object definition (required).
  * References to the "dependencies" of the object.
  * All the elements that will initialize the object at the time of its creation.
  * All the elements that will control the behavior of an object in the application : its scope, its methods invoked throughout its life cycle, etc.
