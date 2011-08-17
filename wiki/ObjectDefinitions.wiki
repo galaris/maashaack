@@ -1,0 +1,66 @@
+#summary the IoC design pattern - Object Definitions in the IoC factory
+#labels Documentation,Framework
+
+= Inversion of Control =
+
+== B - Object Definitions ==
+
+=== Introduction === 
+
+The *IoC* container is initialized with object definitions that are "operating instructions" for creating objects in an application. They also define dependency relationships that can have objects and classes with each other.
+
+The *object definitions* are represented by objects that implement the interface *system.ioc.IObjectDefinition*, this interface is implemented by the class *ObjectDefinition*.
+
+The *IObjectDefinition* interface has the following characteristics :
+ * A unique identifier for each object definition (mandatory).
+ * A description of the type of object that will be returned or created with the object definition (mandatory).
+ * References to the "dependencies" of the object.
+ * All the elements that will initialize the object at the time of its creation.
+ * All the elements that will control the behavior of an object in the application : its scope, its methods invoked throughout its life cycle, etc.
+
+The concepts listed above correspond to a set of elements in simple *generic objects* that create and initialize the *object definitions* from an *IoC* container.
+
+*usage*
+
+{{{
+ObjectDefinition.create(init: Object):ObjectDefinition
+}}}
+
+The *system.ioc.ObjectDefinition* class contains a static method "create" who generate a new instance very simply by switching to a *generic object* parameter initialization compatible with the attributes to be defined next in its chapter. 
+
+It will always be easier to use the static *create()* method to initialize by hand all *ObjectDefinition* instances in your applications.
+
+*example*
+
+{{{
+import flash.text.TextField ;
+import flash.text.TextFormat ;
+
+import system.ioc.ObjectDefinition ;
+
+var context:Object =
+{
+    id         : "my_field" ,
+    type       : "flash.text.TextField" ,
+    properties :
+    [
+        { name : "defaultTextFormat" , value : new TextFormat("verdana", 11) } ,
+        { name : "selectable"        , value : false                         } ,
+        { name : "text"              , value : "hello world"                 } ,
+        { name : "textColor"         , value : 0xF7F744                      } ,
+        { name : "x"                 , value : 100                           } ,
+        { name : "y"                 , value : 100                           }
+    ]
+}
+
+var definition:ObjectDefinition = ObjectDefinition.create( context ) ;
+
+trace( "definition.id              : " + definition.id ) ;
+trace( "definition.getType()       : " + definition.getType() ) ;
+trace( "definition.getScope()      : " + definition.getScope() ) ;
+trace( "definition.isSingleton()   : " + definition.isSingleton() ) ;
+trace( "definition.isLazyInit()    : " + definition.isLazyInit() ) ;
+trace( "definition.getProperties() : " + definition.getProperties() ) ;
+}}}
+
+The *generic object* used to initialize the object definition contains specific attributes. We will discuss later in this chapter about these attributes by dividing them into four distinct groups.
