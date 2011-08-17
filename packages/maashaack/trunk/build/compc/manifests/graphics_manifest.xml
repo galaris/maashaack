@@ -290,7 +290,7 @@
     <component id="graphics.process.display:RemoveChildAt"  class="graphics.process.display.RemoveChildAt"  />
     <component id="graphics.process.display:RemoveChildren" class="graphics.process.display.RemoveChildren" />
     <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
-    <component id="graphics.process.display:SetChildIndex"  class="graphics.process.display.SetChildIndex"  />
+    <component id="graphics.process.display:ShowDisplay"    class="graphics.process.display.ShowDisplay"    />
     <component id="graphics.process.display:SwapChildrenAt" class="graphics.process.display.SwapChildrenAt" />
     
     <!-- graphics.transitions -->
