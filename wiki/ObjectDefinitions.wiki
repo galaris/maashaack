@@ -629,4 +629,81 @@ hello world
 my title
 }}}
 
+==== 1.3.4 - The "locale" attribute ====
+
+This special attribute target values set in a *locale* object defines in the configuration of the factory.
+
+The process to use the *config* or the *locale* objects appear exactly the same but there is still a difference between the two objects.
+
+The *config* object contains all global values to set your application : external service uri, display settings like colors, size, font name, etc.
+
+The *local* object defines the content of the application who must be adapted to various languages and regions contains for example the label expressions, messages, sound references, video links and uris with an i18n setting.
+
+In the *IoC factory* the container target a basic *Object* reference but it's really simple to use it with a complex *i18n* engine.
+
+*usage*
+
+{{{
+    { locale : "message" } ,
+}}}
+
+*example*
+
+{{{
+import system.ioc.factory ;
+import system.ioc.ObjectConfig ;
+import flash.text.TextField;
+
+var objects:Array =
+[
+    {
+        id        : "message_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , locale : "message" }
+        ]
+    }
+    ,
+    {
+        id        : "menu_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , locale : "menu.title" }
+        ]
+    }
+] ;
+
+var setting:ObjectConfig = new ObjectConfig() ;
+
+setting.locale = 
+{
+   message : "hello world" ,
+   menu    :
+   {
+        color : 0xC2C2C2 ,
+        title : "my title"
+   }
+}
+
+factory.config = setting ;
+
+factory.run( objects ) ;
+
+trace( factory.getObject( "message_field" ).text ) ;
+trace( factory.getObject( "menu_field" ).text ) ;
+}}}
+
+In the output panel when we launch the previous code we can read :
+
+{{{
+hello world
+my title
+}}}
+
+==== 1.3.5 - The "evaluators" attribute ====
+
+This optional attribute can be defines in the "arguments" definitions. We can learn more about this attribute in the end of this chapter.
+
 // TODO
