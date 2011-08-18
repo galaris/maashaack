@@ -1,9 +1,9 @@
 #summary basic attributes to create a new object in a IoC factory
 #labels Documentation,Framework
 
-= 1 - Basic attributes to create an object definition =
+= Basic attributes to create an object definition =
 
-== 1.1 - The "id" attribute ==
+== 1 - The "id" attribute ==
 
 This identifier is the "*unique key*" required to defines a new *object definition* in the *IoC* container.
 
@@ -78,7 +78,7 @@ factory.run( objects ) ;
 var background:Sprite = factory.getObject( DisplayList.BACKGROUND ) as Sprite ;
 }}}
 
-== 1.2 - The "type" attribute ==
+== 2 - The "type" attribute ==
 
 This attribute is mandatory and usually indicates the full name of the *class* (or type) of the object that you want to create or target in the factory (in the case of a "*singleton*" reference).
 
@@ -94,7 +94,7 @@ Note that the expression (*String*) of this attribute can be subjected to filter
 
 The object must *implements* or *extends* the type (interface or class) defined in this *object definition*. The key word "*as*" is used in the factory just after the creation of a new object and ensures that the object created has the correct type. In case of problems and incompatibilities on typing defined in the object definition with the type of the object created by the factory, the container will return a *null* object.
 
-== 1.3 - The "arguments" attribute ==
+== 3 - The "arguments" attribute ==
 
 The attribute "*arguments*" is a list (*Array*) of generic objects who defines the parameters that you want to inject in the constructor function for a class or a method.
 
@@ -203,7 +203,7 @@ This very simple example can set the attribute "*properties*" with a method "*se
 
 We can replace the classical attributes "*value*" and "*ref*" with two specials attributes : "*config*" or "*locale*". This attributes are used to evaluate the argument and to retrieve a value localized or set in the config object of the application.
 
-=== 1.3.1 - The "value" attribute. ===
+=== 3.1 - The "value" attribute. ===
 
 This attribute in the arguments definitions is the most simple.
 
@@ -213,7 +213,7 @@ This attribute in the arguments definitions is the most simple.
 
 This attribute defines an argument with a simple value of any type.
 
-=== 1.3.2 - The "ref" attribute. ===
+=== 3.2 - The "ref" attribute. ===
 
 This attribute defines a String expression who target a unique identifier register in the container.
 
@@ -288,7 +288,7 @@ package
 }
 }}}
 
-=== 1.3.3 - The "config" attribute ===
+=== 3.3 - The "config" attribute ===
 
 This special attribute can be set in place of the attribute "*value*" or attribute "*ref*" to a target value set in the configuration object factory.
 
@@ -353,7 +353,7 @@ hello world
 my title
 }}}
 
-=== 1.3.4 - The "locale" attribute ===
+=== 3.4 - The "locale" attribute ===
 
 This special attribute target values set in a *locale* object defines in the configuration of the factory.
 
@@ -426,6 +426,6 @@ hello world
 my title
 }}}
 
-=== 1.3.5 - The "evaluators" attribute ===
+=== 3.5 - The "evaluators" attribute ===
 
 This optional attribute can be defines in the "arguments" definitions. We can learn more about this attribute in the end of this chapter.
