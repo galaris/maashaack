@@ -524,7 +524,7 @@ The "*ref*" attribute can be defined also with the "*magic expressions*", these 
 || *#config* || Targets a specic reference defines in the configuration object of the factory. ||
 || *#locale* || Targets a specic reference defines in the configuration object of the factory with a notion of localization. ||
 || *#this* || Targets the local IoC factory reference of the current object definition. ||
-|| *#root* ||	Targets the "root" reference, can be the main timeline of the current application. ||
+|| *#root* || Targets the "root" reference, can be the main timeline of the current application. ||
 || *#stage* || Targets the "stage" reference of the current application defines in the config of the factory. ||
 || *#params* || Targets the "parameters" reference of the application defines in the config of the factory. ||
 
