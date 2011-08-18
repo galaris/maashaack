@@ -61,7 +61,7 @@ trace( "definition.getProperties() : " + definition.getProperties() ) ;
 
 The *generic object* used to initialize the object definition contains specific attributes. We will discuss later in this chapter about these attributes by dividing them into four distinct groups.
 
-*1 - Basic attributes to create an object definition*
+*[object_definitions_basic_attributes  1 - Basic attributes to create an object definition]*
 
 || *id* (required) || The unique identifier of the object definition. This identifier is a key used to find the reference of the corresponding object in the IoC container. ||
 || *type* (required) || The full name of the type(class) of the object created and returned by the factory. ||
