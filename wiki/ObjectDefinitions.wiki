@@ -23,7 +23,7 @@ The concepts listed above correspond to a set of elements in simple *generic obj
 *usage*
 
 {{{
-ObjectDefinition.create(init: Object):ObjectDefinition
+ObjectDefinition.create( init:Object ):ObjectDefinition
 }}}
 
 The *system.ioc.ObjectDefinition* class contains a static method "create" who generate a new instance very simply by switching to a *generic object* parameter initialization compatible with the attributes to be defined next in its chapter. 
