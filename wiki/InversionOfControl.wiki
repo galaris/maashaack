@@ -252,7 +252,7 @@ Containers are not limited to handling and configuring objects with simple types
 
 == Object definitions in the IoC containers ==
 
-An *object definition* is an object that will create a new object in an application with the [ObjectFactory *IoC* factory]. The [ObjectDefinitions *object definition*] can be regarded as a manual or a guide predefined by the developers of the application using this container.
+An *object definition* is an object that will create a new object in an application with the *[ObjectFactory IoC factory]*. The *[ObjectDefinitions object definition]* can be regarded as a manual or a guide predefined by the developers of the application using this container.
 
 This manual may contain :
 
@@ -264,6 +264,6 @@ This manual may contain :
  * inject dependencies with other objects defined also in the factory,
  * etc.
 
-The *object definition* can provide further information on the strategy used by the factory to create the object or the nature of this object in the life cycle of the application like the scope of the object : singleton or prototype.
+The *[ObjectDefinitions object definition]* can provide further information on the strategy used by the factory to create the object or the nature of this object in the life cycle of the application like the scope of the object : singleton or prototype.
 
 If one were reduced to its simplest form the definition of an *IoC* container, we could say that it consists of a collection of *object definitions* to structure effectively and solid applied throughout its life cycle.
