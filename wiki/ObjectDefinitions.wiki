@@ -358,4 +358,16 @@ factory.run( objects ) ;
 var background:Sprite = factory.getObject( DisplayList.BACKGROUND ) as Sprite ;
 }}}
 
+==== 1.2 - The "type" attribute ====
+
+This attribute is mandatory and usually indicates the full name of the *class* (or type) of the object that you want to create or target in the factory (in the case of a "*singleton*" reference).
+
+{{{
+    type : "examples.core.User" ,
+}}}
+
+Make sure that the class exists in the main file of the application. If this class does not exist, it is possible to include this class (or graphics,sounds, etc..) Using the engine to load external resources of the factory IoC common. Otherwise it will force the existence of this class by calling at least once in the main application code.
+
+Note that the expression (*String*) of this attribute can be subjected to filtering and formatting using tools passed in the configuration of the factory. These assessments and filtering can greatly simplify the writing of your *object definitions*.
+
 // TODO
