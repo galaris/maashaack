@@ -1,7 +1,9 @@
 #summary the IoC factory/container description
 #labels Documentation,Framework
 
-== 2 - The ObjectDefinitionContainer class ==
+= A - The lightweight container and IoC factory =
+
+== 1 - The ObjectDefinitionContainer class ==
 
 The *system.ioc* package contains all important classes and interfaces to deploy the inversion of control pattern in your applications. The *system.ioc* package is dependent on the *core* and *system* packages.
 
