@@ -280,3 +280,82 @@ trace( user ) ;
 }}}
 
 We will use much of this example in the descriptions of the attributes that follow. 
+
+=== 1 - Basic attributes to create an object definition ===
+
+==== The "id" attribute ====
+
+This identifier is the "*unique key*" required to defines a new *object definition* in the *IoC* container.
+
+*example*
+
+{{{
+{ 
+    id : "user" ,
+    …
+}}}
+
+Now look at how to use the unique identifier of an object definition to create and get the corresponding object reference in the factory.
+
+{{{
+var user:User = factory.getObject( "user" ) as User ;
+}}}
+
+The "*id*" attribute is essential to create or to get an object with the *getObject()* method.
+
+*Hint* : I often use in my projects enumerations with a specific class who contains static constants who define a list of all important object definitions registered in the factory.
+
+For example we can create a list of the main views of an application by quickly creating a small class *DisplayList* : 
+
+{{{
+package example
+{
+    public class DisplayList
+    {
+        public static const BACKGROUND:String = "background" ;
+        
+        public static const BODY:String = "body" ;
+        
+        public static const MENU:String = "menu" ;
+    }
+}
+}}}
+
+Then we can create an *IoC* configuration context with the *object definitions* :
+
+{{{
+var objects:Array =
+[
+    {
+        id    	: "background"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+    ,
+    {
+        id    	: "body"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+    ,
+    {
+        id    	: "menu"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+] ;
+}}}
+
+To call at any time a singleton object defined above, simply type the following code :
+
+{{{
+import system.ioc.factory ;
+import example.DisplayList ;
+import flash.display.Sprite ;
+
+factory.run( objects ) ;
+
+var background:Sprite = factory.getObject( DisplayList.BACKGROUND ) as Sprite ;
+}}}
+
+// TODO
