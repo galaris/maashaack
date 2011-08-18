@@ -349,14 +349,14 @@ You can create a single service to connect it with a single AMF gateway with a s
 {{{
 import system.remoting.RemotingService ;
 
-var gatewayUrl:String = 
-"http://localhost:8888/remoting/amfphp/gateway.php" ;
+var gatewayUrl:String = "http://localhost:8888/remoting/amfphp/gateway.php" ;
 
 var service:RemotingService = new RemotingService( gatewayUrl ) ;
 }}}
 
 You can defines the name of the service and the name of the method to invoke server side :
 
+{{{
 service.serviceName = "HelloWorld"  ;
 service.methodName  = "hello" ;
 }}}
