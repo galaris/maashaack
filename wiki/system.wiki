@@ -1,0 +1,77 @@
+#summary One-sentence summary of this page.
+#labels Framework,Documentation
+
+= system =
+
+The *system* root package is the starting point of the application framework structure,<br>
+dependencies are allowed but strictly controlled.
+
+Definitions in *system* are allowed to reuse the builtin types (Object, Array, etc.),<br>
+the Flash API classes and packages, and other system libraries.
+
+Here some basic rules :
+ * nothing declared in the unnamed package (eg. `package { ... }`)
+ * classes starts with an uppercase letter and use !CamelCase
+ * namespaces starts with a lowercase letter
+ * conditional compilation are always in uppercase letters (see ConditionalCompilation)
+ * interfaces follow classes naming convention and are considered types<br>no interfaces starting with *I* (define `Serializable`, not `ISerializable`)
+ * `System.*` root package define commons types, classes, interfaces, namespaces etc.<br>that can be shared and reused in sub-packages
+ * each sub-package should be independent of another sub-package but can have dependencies on the root package<br> in `System.terminals.*` you can reuse `System.Serializable` but not `System.diagnostics.Debuggable`
+ * there can be some exceptions with highly used packages like `System.data.*`<br>`System.process.*` can reuse classes and interfaces from `System.data.*`<br>but the root package `System.*` will avoid to reuse `System.data.*`
+ * you can not reuse a third party library at all
+ * ...
+
+You need to see *system* as a dual structure<br>
+on one side you have the idea of generating the *maashaack.swc* library (contain everything)<br>
+and on the other side you want to generates independent slices of the framework<br>
+like: *system.swc*, *system.data.swc*, *system.terminals.swc*, etc.
+
+It is really hard and require a constant discipline to provide this level of controlled dependency<br>
+between packages but it is really for the greater good :).
+
+We don't want a single `import` of a class to add tons of other classes and interfaces,
+but we can accept to say "if you want to use `system.process` you have to include *system.swc* and *system.data.swc*".
+
+At the end of the day, if we can not generate independent swc for each packages,<br>
+and we have to resort on using only *maashaack.swc*, we fail.
+
+Why we impose all those rules ?
+ * we need to control the amount of bytecode ending in the final swf<br>see the Flex framework, you include one component and you end up with ~250KB of code<br>we want to avoid that
+ * we want to be able to have common reusable areas and interchangeable areas<br>wether you want to use an optimized set of classes for flash player 10 (using `Vector` instead of `Array`)<br>or switch between different implementations of "signals and slots"
+ * we want to be able to manage sub-packages as modules<br>creating, adding, removing, etc. a module should not influence other modules (or break things)
+ * we want to be able to kick start a project or new sub-package over a week-end<br>when you face too much dependencies spread in every corners you can not do that
+
+*use case:* assemble different functions in a string utility class
+{{{
+package com.foobar.utils
+{
+    import core.strings.fastformat; void(fastformat);
+    import core.strings.format; void(format);
+    import core.strings.pad; void(pad);
+    
+    public class Strings
+    {
+        
+        CONFIG::LIGHT
+        public static var format:Function = core.strings.fastformat;
+        
+        CONFIG::STANDARD
+        public static var format:Function = core.strings.format;
+        
+        public static function padLeft( str:String, amount:uint, char:String = " " ):String
+        {
+            return pad( str, -int(amount), char );
+        }
+        
+        public static function padRight( str:String, amount:uint, char:String = " " ):String
+        {
+            return pad( str, int(amount), char );
+        }
+        
+    }
+}
+}}}
+
+here we reuse the building blocks of *core* to build *system.Strings*<br>
+you can see, for example, ConditionalCompilation settings that allow to switch the<br>
+same function *format* between 2 implementations
