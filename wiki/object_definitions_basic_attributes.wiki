@@ -1,0 +1,431 @@
+#summary basic attributes to create a new object in a IoC factory
+#labels Documentation,Framework
+
+= 1 - Basic attributes to create an object definition =
+
+== 1.1 - The "id" attribute ==
+
+This identifier is the "*unique key*" required to defines a new *object definition* in the *IoC* container.
+
+*example*
+
+{{{
+{ 
+    id : "user" ,
+    …
+}}}
+
+Now look at how to use the unique identifier of an object definition to create and get the corresponding object reference in the factory.
+
+{{{
+var user:User = factory.getObject( "user" ) as User ;
+}}}
+
+The "*id*" attribute is essential to create or to get an object with the *getObject()* method.
+
+*Hint* : I often use in my projects enumerations with a specific class who contains static constants who define a list of all important object definitions registered in the factory.
+
+For example we can create a list of the main views of an application by quickly creating a small class *DisplayList* : 
+
+{{{
+package example
+{
+    public class DisplayList
+    {
+        public static const BACKGROUND:String = "background" ;
+        
+        public static const BODY:String = "body" ;
+        
+        public static const MENU:String = "menu" ;
+    }
+}
+}}}
+
+Then we can create an *IoC* configuration context with the *object definitions* :
+
+{{{
+var objects:Array =
+[
+    {
+        id    	: "background"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+    ,
+    {
+        id    	: "body"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+    ,
+    {
+        id    	: "menu"  ,
+        type  	: "flash.dislay.Sprite" ,
+        singleton : true 
+    }
+] ;
+}}}
+
+To call at any time a singleton object defined above, simply type the following code :
+
+{{{
+import system.ioc.factory ;
+import example.DisplayList ;
+import flash.display.Sprite ;
+
+factory.run( objects ) ;
+
+var background:Sprite = factory.getObject( DisplayList.BACKGROUND ) as Sprite ;
+}}}
+
+== 1.2 - The "type" attribute ==
+
+This attribute is mandatory and usually indicates the full name of the *class* (or type) of the object that you want to create or target in the factory (in the case of a "*singleton*" reference).
+
+{{{
+    type : "examples.core.User" ,
+}}}
+
+Make sure that the class exists in the main file of the application. If this class does not exist, it is possible to include this class (or graphics,sounds, etc..) Using the engine to load external resources of the factory IoC common. Otherwise it will force the existence of this class by calling at least once in the main application code.
+
+Note that the expression (*String*) of this attribute can be subjected to filtering and formatting using tools passed in the configuration of the factory. These assessments and filtering can greatly simplify the writing of your *object definitions*.
+
+*Note :*  With an *object definition* who defines a custom strategy who changes the classical strategy used by default in the lightweight container, the object generated with this custom strategy can be defines with a _different_ type from that defined in the definition but will keep a "casting" compatible with the class set with the attribute "*type*".
+
+The object must *implements* or *extends* the type (interface or class) defined in this *object definition*. The key word "*as*" is used in the factory just after the creation of a new object and ensures that the object created has the correct type. In case of problems and incompatibilities on typing defined in the object definition with the type of the object created by the factory, the container will return a *null* object.
+
+== 1.3 - The "arguments" attribute ==
+
+The attribute "*arguments*" is a list (*Array*) of generic objects who defines the parameters that you want to inject in the constructor function for a class or a method.
+
+This attribute can be used at the root of an object definition, then it corresponds to the parameter list of the constructor function of the class used to create the object, otherwise it match the argument list the you want to inject in a setter method (eg in the attribute "*properties*").
+
+This attribute is optional, any method or constructor function defined without this attribute can be invoked with no parameters.
+
+This attribute allow you to create and initialize *system.ioc.ObjectArgument* objects in the factory.
+
+This class includes mainly the following members :
+
+ * *value* : Refers to the value or reference of the argument. This attribute can either be the value of the argument, an expression (String) to be interpreted by the factory.
+ * *policy* : Defines the strategy used by the factory to create the argument, it determines if the argument is defined with a single value, a reference to another object definition, etc.
+ * *evaluators* : (optional) Set in a very special collection of objects of evaluation that will be used to filter or transform the value or the reference.
+
+To transform a simple list (*Array*) of generic objects into a list (*Array*) of *ObjectArgument* objects the framework use a single function : 
+
+*usage*
+
+{{{
+system.ioc.builders.createArguments( init:Object )
+}}}
+
+*example*
+
+{{{
+import system.ioc.builders.createArguments ;
+
+import system.ioc.ObjectArgument ;
+import system.ioc.ObjectAttribute ;
+
+var list:Array =
+[
+    { value  : "hello world"  } ,
+    { ref    : "my_id"        } ,
+    { config : "config.value" } ,
+    { locale : "locale.value" } ,
+    { value  : "hi world" , evaluators:["myEvaluator"] } 
+] ;
+
+var args:Array = createArguments( list ) ; 
+
+trace( "args: " + args ) ;
+
+var arg:ObjectArgument = args[4] as ObjectArgument ;
+
+trace( "value:" + arg.value + " evaluators:" + arg.evaluators ) ;
+}}}
+
+To respect the "*hollywood principle*" this function is encapsuled and used by the framework when you initialize your *object definitions* in the factory with the *run()* method.
+
+The *generic objects* must absolutely be defined with a mandatory attribute specific to be transformed into an *ObjectArgument* object otherwise it will not be included in the method *createArguments()* and will be replaced by a *null* value.
+
+We can see in the example above that all objects are defined with a specific attribute :
+ * value
+ * ref
+ * config
+ * local
+
+These attributes correspond to the possible values ​​of the attribute "*policy*" of the class *ObjectArgument*. The static enumeration defines with the *system.ioc.ObjectAttribute* class defines all the policies accepted in the  *ObjectArgument* class :
+
+ * ObjectAttribute.VALUE 	  : "value"
+ * ObjectAttribute.REFERENCE : "ref"
+ * ObjectAttribute.CONFIG	  : "config"
+ * ObjectAttribute.LOCALE	  : "locale"
+
+Each of the constants defines above provide the necessary information to generate a new argument with a specific "policy" in the container.
+
+Now, let the main example of this chapter by isolating the "*arguments*" attribute in the object definition "*user*".
+
+{{{
+{ 
+    id         : "user" ,
+    type       : "test.User" ,
+    arguments  :
+    [
+        { value : "eKameleon" } ,
+        { value : "ALCARAZ"   } ,
+        { ref   : "address"   }
+    ]
+}
+}}}
+
+The arguments are defined by generic objects which usually contain an attribute "*value*" or attribute "*ref*". Only one of these attributes can be used for a single generic object. These attributes are used to define the value of an argument by value or reference to target a specific object definition in the *IoC* container.
+
+The above example can be translate in *ActionScript* with the code :
+
+{{{
+var user:User = new User("eKameleon","ALCARAZ",factory.getObject("address")) ;
+}}}
+
+Used in the attribute "*properties*", the attribute "*arguments*" will be considered by the container only if the property defined in one of the generic objects in the collection will be of type "*Function*" (method defined in the factory).
+
+*example*
+
+{{{
+properties :
+[
+    { name:"setMail" , arguments:[ { value:"ekameleon[at]gmail.com" } ] }
+]
+}}}
+
+This very simple example can set the attribute "*properties*" with a method "*setMail*" that will be invoked during the initialization process of the new object in the factory.
+
+*Note* 
+
+We can replace the classical attributes "*value*" and "*ref*" with two specials attributes : "*config*" or "*locale*". This attributes are used to evaluate the argument and to retrieve a value localized or set in the config object of the application.
+
+=== 1.3.1 - The "value" attribute. ===
+
+This attribute in the arguments definitions is the most simple.
+
+{{{
+    { value : "eKameleon" } ,
+}}}
+
+This attribute defines an argument with a simple value of any type.
+
+=== 1.3.2 - The "ref" attribute. ===
+
+This attribute defines a String expression who target a unique identifier register in the container.
+
+{{{
+    { ref : "address" } ,
+}}}
+
+This attribute defines the dependency injection between the objects defined in the container.
+
+In our example the reference "*address*" will be use to create the dependency with the method *getObject("address")* of the factory and to initialize the object who needs it to exist.
+
+All the "*ref*" attributes in the *object definitions* are the same operation mode. I will try here to generalize the use of this attribute.
+
+This attribute is set to an expression (String) evaluated in the factory for a *system.ioc.evaluators.ReferenceEvaluator* instance. 
+
+The *ReferenceEvaluator* class target a specific *IoC* factory and analyzes a *String* expression to identify an *object definition* register in the factory and return immediately the reference of the corresponding object.
+
+If the expression is defined with a dot notation, it will be possible to target an object in the factory and get the value of one of its members, example :
+
+{{{
+    { ref : "address.city" }
+}}}
+
+In our example the argument target the reference defines with the expression *"address.city"* and returns the value *"Marseille"*.
+
+It's possible to use a dot notation to find a value set deeper into the attributes of the object, eg: *"foo.bar.xxxx.name"*.
+
+The "*ref*" attribute can be defined also with the "*magic expressions*", these special strings can target by reference certain important object predefined in the configuration of the *IoC* factory.
+
+|| *#config* || Targets a specic reference defines in the configuration object of the factory. ||
+|| *#locale* || Targets a specic reference defines in the configuration object of the factory with a notion of localization. ||
+|| *#this* || Targets the local IoC factory reference of the current object definition. ||
+|| *#root* || Targets the "root" reference, can be the main timeline of the current application. ||
+|| *#stage* || Targets the "stage" reference of the current application defines in the config of the factory. ||
+|| *#params* || Targets the "parameters" reference of the application defines in the config of the factory. ||
+
+To properly define the *#root*, *#stage*, *#params*, *#config* and *#locale* magic expressions you must set manually the corresponding attributes in the configuration of the *IoC* factory.
+
+We can by example write the following *ActionScript 3* code :
+
+{{{
+package
+{
+    import system.ioc.ObjectFactory ;
+    import system.ioc.Parameters;
+
+    import flash.display.Sprite ;
+
+    public class Main extends Sprite
+    {
+        public function Main()
+        {
+            factory = new ObjectFactory() ;
+
+            factory.config.root   = this ;
+            factory.config.stage  = stage ;
+            factory.config.params = new Parameters( loaderInfo.parameters ) ;
+
+            factory.config.config = 
+            {
+                color : 0xFF0000 
+            }
+            
+            factory.config.locale = 
+            {
+                label : "hello world"
+            }
+        }
+        
+        public var factory:ObjectFactory ;
+    }
+}
+}}}
+
+=== 1.3.3 - The "config" attribute ===
+
+This special attribute can be set in place of the attribute "*value*" or attribute "*ref*" to a target value set in the configuration object factory.
+
+*usage*
+
+{{{
+    { config : "author" } ,
+}}}
+
+*example*
+
+{{{
+import system.ioc.factory ;
+import system.ioc.ObjectConfig ;
+import flash.text.TextField;
+
+var objects:Array =
+[
+    {
+        id        : "message_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , config : "message" }
+        ]
+    }
+    ,
+    {
+        id        : "menu_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , config : "menu.title" }
+        ]
+    }
+] ;
+
+var setting:ObjectConfig = new ObjectConfig() ;
+
+setting.config = 
+{
+   message : "hello world" ,
+   menu    :
+   {
+        color : 0xC2C2C2 ,
+        title : "my title"
+   }
+}
+
+factory.config = setting ;
+
+factory.run( objects ) ;
+
+trace( factory.getObject( "message_field" ).text ) ;
+trace( factory.getObject( "menu_field" ).text ) ;
+}}}
+
+In the output panel when we launch the previous code we can read :
+
+{{{
+hello world
+my title
+}}}
+
+=== 1.3.4 - The "locale" attribute ===
+
+This special attribute target values set in a *locale* object defines in the configuration of the factory.
+
+The process to use the *config* or the *locale* objects appear exactly the same but there is still a difference between the two objects.
+
+The *config* object contains all global values to set your application : external service uri, display settings like colors, size, font name, etc.
+
+The *local* object defines the content of the application who must be adapted to various languages and regions contains for example the label expressions, messages, sound references, video links and uris with an i18n setting.
+
+In the *IoC factory* the container target a basic *Object* reference but it's really simple to use it with a complex *i18n* engine.
+
+*usage*
+
+{{{
+    { locale : "message" } ,
+}}}
+
+*example*
+
+{{{
+import system.ioc.factory ;
+import system.ioc.ObjectConfig ;
+import flash.text.TextField;
+
+var objects:Array =
+[
+    {
+        id        : "message_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , locale : "message" }
+        ]
+    }
+    ,
+    {
+        id        : "menu_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , locale : "menu.title" }
+        ]
+    }
+] ;
+
+var setting:ObjectConfig = new ObjectConfig() ;
+
+setting.locale = 
+{
+   message : "hello world" ,
+   menu    :
+   {
+        color : 0xC2C2C2 ,
+        title : "my title"
+   }
+}
+
+factory.config = setting ;
+
+factory.run( objects ) ;
+
+trace( factory.getObject( "message_field" ).text ) ;
+trace( factory.getObject( "menu_field" ).text ) ;
+}}}
+
+In the output panel when we launch the previous code we can read :
+
+{{{
+hello world
+my title
+}}}
+
+=== 1.3.5 - The "evaluators" attribute ===
+
+This optional attribute can be defines in the "arguments" definitions. We can learn more about this attribute in the end of this chapter.
