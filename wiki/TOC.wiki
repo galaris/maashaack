@@ -50,8 +50,8 @@
    * [CommandAndTask Command and task engine]
    * [ConditionalTask The Conditional Task Engine]
    * [InversionOfControl Inversion of Control (IoC)]
-     * [ObjectFactory IoC factory]
-     * [ObjectDefinitions Object Definitions]
+     * [ObjectFactory IoC factory - container]
+     * [ObjectDefinitions Object definitions]
  * [Packages Packages]
    * maashaack
       * [core core]
