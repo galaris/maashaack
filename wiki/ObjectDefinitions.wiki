@@ -519,4 +519,13 @@ In our example the argument target the reference defines with the expression *"a
 
 It's possible to use a dot notation to find a value set deeper into the attributes of the object, eg: *"foo.bar.xxxx.name"*.
 
+The "*ref*" attribute can be defined also with the "*magic expressions*", these special strings can target by reference certain important object predefined in the configuration of the *IoC* factory.
+
+|| #config || Targets a specic reference defines in the configuration object of the factory. ||
+|| #locale || Targets a specic reference defines in the configuration object of the factory with a notion of localization. ||
+|| #this || Targets the local IoC factory reference of the current object definition. ||
+|| #root ||	Targets the "root" reference, can be the main timeline of the current application. ||
+|| #stage || Targets the "stage" reference of the current application defines in the config of the factory. ||
+|| #params || Targets the "parameters" reference of the application defines in the config of the factory. ||
+
 // TODO
