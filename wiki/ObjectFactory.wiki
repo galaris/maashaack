@@ -1,7 +1,7 @@
 #summary the IoC factory/container description
 #labels Documentation,Framework
 
-= The lightweight container secrets =
+= The lightweight container =
 
 == 1 - The ObjectDefinitionContainer class ==
 
