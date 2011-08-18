@@ -526,4 +526,107 @@ The "*ref*" attribute can be defined also with the "*magic expressions*", these 
 || *#stage* || Targets the "stage" reference of the current application defines in the config of the factory. ||
 || *#params* || Targets the "parameters" reference of the application defines in the config of the factory. ||
 
+To properly define the *#root*, *#stage*, *#params*, *#config* and *#locale* magic expressions you must set manually the corresponding attributes in the configuration of the *IoC* factory.
+
+We can by example write the following *ActionScript 3* code :
+
+{{{
+package
+{
+    import system.ioc.ObjectFactory ;
+    import system.ioc.Parameters;
+
+    import flash.display.Sprite ;
+
+    public class Main extends Sprite
+    {
+        public function Main()
+        {
+            factory = new ObjectFactory() ;
+
+            factory.config.root   = this ;
+            factory.config.stage  = stage ;
+            factory.config.params = new Parameters( loaderInfo.parameters ) ;
+
+            factory.config.config = 
+            {
+                color : 0xFF0000 
+            }
+            
+            factory.config.locale = 
+            {
+                label : "hello world"
+            }
+        }
+        
+        public var factory:ObjectFactory ;
+    }
+}
+}}}
+
+==== 1.3.3 - The "config" attribute ====
+
+This special attribute can be set in place of the attribute "*value*" or attribute "*ref*" to a target value set in the configuration object factory.
+
+*usage*
+
+{{{
+    { config : "author" } ,
+}}}
+
+*example*
+
+{{{
+import system.ioc.factory ;
+import system.ioc.ObjectConfig ;
+import flash.text.TextField;
+
+var objects:Array =
+[
+    {
+        id        : "message_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , config : "message" }
+        ]
+    }
+    ,
+    {
+        id        : "menu_field" ,
+        type      : "flash.text.TextField" ,
+        properties :
+        [
+           { name : "text" , config : "menu.title" }
+        ]
+    }
+] ;
+
+var setting:ObjectConfig = new ObjectConfig() ;
+
+setting.config = 
+{
+   message : "hello world" ,
+   menu    :
+   {
+        color : 0xC2C2C2 ,
+        title : "my title"
+   }
+}
+
+factory.config = setting ;
+
+factory.run( objects ) ;
+
+trace( factory.getObject( "message_field" ).text ) ;
+trace( factory.getObject( "menu_field" ).text ) ;
+}}}
+
+In the output panel when we launch the previous code we can read :
+
+{{{
+hello world
+my title
+}}}
+
 // TODO
