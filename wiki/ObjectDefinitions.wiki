@@ -370,4 +370,8 @@ Make sure that the class exists in the main file of the application. If this cla
 
 Note that the expression (*String*) of this attribute can be subjected to filtering and formatting using tools passed in the configuration of the factory. These assessments and filtering can greatly simplify the writing of your *object definitions*.
 
+*Note :*  With an *object definition* who defines a custom strategy who changes the classical strategy used by default in the lightweight container, the object generated with this custom strategy can be defines with a _different_ type from that defined in the definition but will keep a "casting" compatible with the class set with the attribute "*type*".
+
+The object must *implements* or *extends* the type (interface or class) defined in this *object definition*. The key word "*as*" is used in the factory just after the creation of a new object and ensures that the object created has the correct type. In case of problems and incompatibilities on typing defined in the object definition with the type of the object created by the factory, the container will return a *null* object.
+
 // TODO
