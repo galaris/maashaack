@@ -52,6 +52,10 @@
    * [InversionOfControl Inversion of Control (IoC)]
      * [ObjectFactory IoC factory - container]
      * [ObjectDefinitions Object definitions]
+         * [object_definitions_basic_attributes Basic attributes]
+         * [object_definitions_lifecycle Lifecycle of the objects]
+         * [object_definitions_strategies Strategies to build objects]
+         * [object_definitions_evaluators The evaluators attribute]
  * [Packages Packages]
    * maashaack
       * [core core]
