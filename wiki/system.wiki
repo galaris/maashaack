@@ -1,4 +1,4 @@
-#summary One-sentence The system package
+#summary The system package
 #labels Framework,Documentation
 
 = system =
