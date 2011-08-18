@@ -1,7 +1,7 @@
 #summary the IoC design pattern - Object Definitions in the IoC factory
 #labels Documentation,Framework
 
-= B - Object Definitions =
+= Object Definitions =
 
 The *IoC* container is initialized with object definitions that are "operating instructions" for creating objects in an application. They also define dependency relationships that can have objects and classes with each other.
 
