@@ -456,7 +456,7 @@ The generic objects defined in the collection above require a "*name*" attribute
 
 Then we can set the value of an attribute using the attribute "*value*", "*ref*" , "*config*", "*locale*" and in the case of a method we can use the optional attribute "*arguments*" to determinate if required parameters.
 
-=== 1.4.1 - Use the "value" attribute ===
+=== 4.1 - Use the "value" attribute ===
 
 {{{
     { name : "age" , value : 32 } ,
@@ -464,7 +464,7 @@ Then we can set the value of an attribute using the attribute "*value*", "*ref*"
 
 This example sets the attribute with a simple value of any type.
 
-=== 1.4.2 - Use the "ref" attribute ===
+=== 4.2 - Use the "ref" attribute ===
 
 The attribute "*ref*" is set to a string (String), which mainly targets a specific *object definition* in the *IoC* container.
 
@@ -496,9 +496,9 @@ As in the definitions of the attribute "*arguments*", it is possible to go furth
 
 This simple example display the name of the "job" defined in the definition "*job_dev*" in a simple dynamic text field. The attribute "*ref*" is set to an expression with a dot notation, the first element in this expression corresponds to the identifier of an object definition in the factory and once this reference identified and recovered in the factory property "text" of the text field takes the value of the *name* property of the *examples.core.Job* object.
 
-=== 1.4.3 - The "config" and "locale" attribute ===
+=== 4.3 - The "config" and "locale" attribute ===
 
-See the description of these two attributes in the sections *1.3.3* and *1.3.4* previously seen.
+See the description of these two attributes in the sections *3.3* and *3.4* previously seen.
 
 *usage*
 
@@ -512,7 +512,7 @@ or
 { name : "name"  , locale : "author" } ,
 }}}
 
-=== 1.4.4 - The "evaluators" attribute ===
+=== 4.4 - The "evaluators" attribute ===
 
 We will see more precisely in the special chapter dedicated to how to use this attribute.
 
