@@ -526,3 +526,110 @@ We will see more precisely in the special chapter dedicated to how to use this a
     evaluators : [ ...evaluators ]
 } ,
 }}}
+
+== 5 - The "scope", "singleton" and "lazyInit" attributes == 
+
+When we create an *object definition* we set up a kind of *recipe* for creating an object in the application.
+
+The idea of ​​*recipe* is important, it indicates that an *object definition* to create a large number of instances in the application using strategies of varying complexity of creation and initialization. It is therefore possible to create multiple objects with a single *object definition*.
+
+These items have specific life cycles and sometimes will have a single or multiple representation in the application.
+
+The notion of scope is important in an *IoC* container as it indicates the factory how to create the application objects and especially how to reference them later.
+
+=== 5.1 - The "scope" attribute ===
+
+The *scope* attribute is optional in the object definitions and takes  a string value.
+
+{{{
+    scope : "prototype" ,
+}}}
+
+The *scope* attribute can be set with the string values *"prototype"* or *"singleton"*.
+
+The scope with the value *"prototype"* indicates that the *IoC* factory can create with the same *object definition* any number of instances.
+
+{{{
+import system.ioc.factory ;
+
+import examples.core.User ;
+
+var user1:User = factory.getObject("user") as User 
+var user2:User = factory.getObject("user") as User ;
+
+trace( user1 == user2 ) ; // false
+}}}
+
+The scope with the value *"singleton"* indicates that the *object definition* can create a single instance and then stores it in the container. Thereafter each call that object definition will return a simple reference to the singleton register in the cache of the container.
+
+By default, all object definitions have the scope with the value *"prototype"* but it is possible to change this value with the values defined above.
+
+You can find in the *system.ioc.ObjectScope* class the static enumeration of all scopes defines in the *IoC* factory :
+
+ * ObjectScope.PROTOTYPE = "prototype"
+ * ObjectScope.SINGLETON = "singleton"
+
+*Note :* The *scope* attribute always overwrites the value of the *singleton* attribute in the same object definition if it is used.
+
+=== 5.2 - The singleton attribute ===
+
+This attribute is a boolean option and allows to quickly change the default state of the *scope* attribute by assigning the value *"singleton"*.
+
+This attribute is sufficient to quickly transform the nature of the current *object definition*.
+
+{{{
+    singleton : true ,
+}}}
+
+If the *object definition* is defines with the scope *"singleton"* then the object instance create via the factory is stored in the cache of the container and will be used later to each call in the factory corresponding to it.
+
+If for a specific identifier in the *IoC* factory, the object definition is initialized as *"singleton"* after each call to this identifier (*id*) in the *getObject()* method of the factory will return a singleton reference only. The first time the *getObject()* method is invoked, the unique reference is created, initialized and stored in memory in the factory.
+
+*example*
+
+{{{
+import system.ioc.factory;
+
+import examples.core.User ;
+
+var objects:Array =
+[
+    {
+        id         : "user" ,
+        type       : "examples.core.User" ,
+        singleton   : true
+        arguments  :
+        [
+            { value : "eKameleon" } ,
+            { value : "ALCARAZ"   } ,
+            { ref   : "address"   }
+        ]
+    }
+];
+
+var user1:User = factory.getObject("user") as User ;
+var user2:User = factory.getObject("user") as User ;
+
+trace( user1 == user2 ) ; // true
+}}}
+
+=== 5.3 - The "lazyInit" attribute ===
+
+This attribute is a boolean option in the *object definitions*, it is set to false by default.
+
+{{{
+    lazyInit : true , // only if this object is a singleton
+}}}
+
+This attribute only applies on the object definitions with a scope "singleton". If you use this attribute to a non-singleton object ("prototype"), this attribute will be simply ignored.
+
+If this attribute is *false* or not defined, the *singleton* object will be automatically instantiated during the initialization of the factory.
+
+If this attribute is *true* then the singleton object is not instantiated automatically and the singleton object is created only if the *getObject()* method is invoked a first time in the application after the container initialization.
+
+In the life cycle of the application it may be convenient to create the singleton objects at startup. This singletons can initiate certain processes automatically without having to use a particular code in the application. This feature will also place certain objects in memory that will be available much fate thereafter.
+
+The *lazyInit* attribute can be very important if a singleton object defined in the factory should absolutely not be instantiated at application startup. We can note in this regard the following reasons :
+
+ * Do not overload the memory with a singleton not important in the life cycle of the application at startup.
+ * The dependencies of the singleton not exist or can't be instantiated in the IoC factory yet.
