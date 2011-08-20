@@ -457,6 +457,83 @@ The generic objects defined in the collection above require a "*name*" attribute
 
 Then we can set the value of an attribute using the attribute "*value*", "*ref*" , "*config*", "*locale*" and in the case of a method we can use the optional attribute "*arguments*" to determinate if required parameters.
 
+*Note :* the #init magic expression
+
+It's possible to use the name attribute with the magic value *#init* to initialize the object with a *for..in* loop.
+
+*example*
+
+{{{
+import system.ioc.factory;
+import system.ioc.ObjectConfig;
+
+import flash.display.Sprite;
+import flash.text.TextFormat;
+
+var config:Object = 
+{
+    field : 
+    {
+        defaultTextFormat : new TextFormat("Arial",12,0xFFFF00) ,
+        selectable        : false ,
+        height            : 250 ,
+        width             : 250 ,
+        x                 :  25 ,
+        y                 :  25 
+    }
+};
+
+var locale:Object = 
+{
+    field : 
+    {
+        text : "hello world" 
+    }
+};
+    
+var setting:ObjectConfig = factory.config ;
+   
+setting.root   = this ;
+setting.config = config ;
+setting.locale = locale ;
+
+var objects:Array =
+[
+    {
+        id         : "field" ,
+        type       : "flash.text.TextField" ,
+        singleton  : true ,
+        lazyInit   : true ,
+        properties :
+        [
+            { name : "#init" , config : "field" } ,
+            { name : "#init" , locale : "field" } 
+        ]
+    }
+    ,
+    {
+        id               : "application" ,
+        type             : "flash.display.Sprite" ,
+        factoryReference : "#root" ,
+        singleton        : true ,
+        properties       :
+        [
+            { name : "addChild"   , arguments  : [ { ref : "field" } ] } 
+        ]
+    }
+] ;
+
+factory.run( objects ) ;
+}}}
+
+In the previous example the *#init* property target the *"field"* member in the *config* and *locale* objects defines in the configuration of the factory.
+
+The factory use a basic *for..in* loop to copy all members defines in the enumerable objects in the new object generated with the current *object definition*.
+
+We can target an enumerable object with the *value*, *ref*, *config*, and *locale* attributes.
+
+This technique facilitates the initialization of the objects and allows to copy multiple values with one line. The *object definitions* are simplified and more readable with this notation.
+
 === 4.1 - Use the "value" attribute ===
 
 {{{
