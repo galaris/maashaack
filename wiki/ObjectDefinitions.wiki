@@ -74,7 +74,7 @@ The *generic object* used to initialize the object definition contains specific 
 *2 - Lifecycle of the objects defined and created with an object definition*
 
 || *identify* || Can identify some Identifiable objects by assigning them automatically the id value of the object definition. ||
-|| *lock* || The full name of the type(class) of the object created and returned by the factory. ||
+|| *lock* || Active the lock process during the initialization of an object created by the factory. The object implements the system.process.Lockable interface. ||
 || *init* || Indicates the name of the method to call to finish to initialize the object. ||
 || *destroy* || Indicates the name of the method to call to destroy a singleton object register in the IoC container. ||
 || *dependsOn* || A list (Array) of objects identifiers registered in the factory who must exist before the current object is generated and initialized. ||
