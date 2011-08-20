@@ -615,13 +615,13 @@ trace( user1 == user2 ) ; // true
 
 === 5.3 - The "lazyInit" attribute ===
 
-This attribute is a boolean option in the *object definitions*, it is set to false by default.
+This attribute is a boolean option in the *object definitions*, it is set to *false* by default.
 
 {{{
     lazyInit : true , // only if this object is a singleton
 }}}
 
-This attribute only applies on the object definitions with a scope "singleton". If you use this attribute to a non-singleton object ("prototype"), this attribute will be simply ignored.
+This attribute only applies on the object definitions with a scope *"singleton"*. If you use this attribute to a non-singleton object (*"prototype"*), this attribute will be simply ignored.
 
 If this attribute is *false* or not defined, the *singleton* object will be automatically instantiated during the initialization of the factory.
 
