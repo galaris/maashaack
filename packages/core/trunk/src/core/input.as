@@ -66,13 +66,10 @@ package core
      * </code>
      * </listing>
      */
-    API::FLASH
-    {
-        public var input:Function = function() { return "" };
-    }
+    public var input:Function = function():String { return "" };
     
     API::REDTAMARIN
     {
-        public var input:Function = readLine;
+        input = readLine;
     }
 }
