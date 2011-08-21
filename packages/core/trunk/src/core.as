@@ -34,6 +34,8 @@
 */
 
 //core.*
+include "core/input.as";
+include "core/output.as";
 include "core/_toUnicodeNotation.as";
 include "core/bit.as";
 include "core/dump.as";
