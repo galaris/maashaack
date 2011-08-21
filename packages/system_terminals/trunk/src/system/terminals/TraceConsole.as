@@ -35,6 +35,9 @@
 
 package system.terminals
 {
+    import core.input;
+    import core.output;
+    
     /**
     * The TraceConsole is the default console based on the <code>trace()</code> function.
     * 
@@ -105,20 +108,12 @@ package system.terminals
         
         public final function read():String
         {
-            return "";
+            return input();
         }
         
         public final function readLine():String
         {
-            API::FLASH
-            {
-                return "";
-            }
-            
-            API::REDTAMARIN
-            {
-                return readLine();
-            }
+            return input();
         }
         
         public final function write( ...messages ):void

@@ -35,6 +35,5 @@
 
 include "system/terminals/console.as";
 include "system/terminals/InteractiveConsole.as";
-include "system/terminals/output.as";
 include "system/terminals/TraceConsole.as";
 
