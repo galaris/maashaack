@@ -43,6 +43,8 @@ include "core/dumpArray.as";
 include "core/dumpDate.as";
 include "core/dumpObject.as";
 include "core/dumpString.as";
+include "core/filedump.as";
+include "core/filedumpObject.as";
 include "core/uri.as";
 include "core/version.as";
 
