@@ -85,8 +85,6 @@ package
             
             console = new TextFieldConsole( textfield ) ;
             
-            system.config.serializer.prettyPrinting = false;
-            
             //tests
             
             library.ASTUce.metadata.config.maxColumn = 64 ;
