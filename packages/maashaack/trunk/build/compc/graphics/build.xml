@@ -8,6 +8,7 @@
         <exec executable="${compc}" >
             <arg line="-load-config+=${config}" />
             <arg line="-external-library-path+=${external.library.core}" />
+            <arg line="-external-library-path+=${external.library.eden}" />
             <arg line="-external-library-path+=${external.library.system}" />
             <arg line="-compiler.source-path+=${sources}" />
         </exec>
