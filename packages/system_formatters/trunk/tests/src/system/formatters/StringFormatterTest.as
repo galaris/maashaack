@@ -37,7 +37,6 @@ package system.formatters
 {
     import library.ASTUce.framework.TestCase;
 
-    import system.eden;
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
@@ -162,29 +161,20 @@ package system.formatters
         public function testFormatEdenEvaluators():void
         {
             var formatter:StringFormatter = new StringFormatter() ;
-            var original:Boolean          = eden.prettyPrinting;
-            
             var str1:String               = "my result is ${{a:1,b:2}}$";
             var str2:String               = "my result is ${{a:1,b:2}}eden$";
             var str3:String               = "my result is ${{a:1,b:2}}eden2$";
-            
-            eden.prettyPrinting = false ;
             
             formatter.evaluators = { eden: new EdenEvaluator(), eden2: new EdenEvaluator(false) };
             
             assertTrue(formatter.format(str1) == "my result is {a:1,b:2}" || formatter.format(str1) == "my result is {b:2,a:1}"); 
             assertTrue( formatter.format(str2) == "my result is {a:1,b:2}" || formatter.format(str2) == "my result is {b:2,a:1}" ); // FP10 hack
             assertEquals("my result is [object Object]", formatter.format(str3));
-            
-            eden.prettyPrinting = original ;
         }
         
         public function testFormatEvaluatorsParsing():void
         {
             var formatter:StringFormatter = new StringFormatter() ;
-            var original:Boolean          = eden.prettyPrinting;
-            
-            eden.prettyPrinting = false;
             
             var str1:String = '${{prop:"{}"}}$';
             
@@ -201,7 +191,6 @@ package system.formatters
             Error: malformed evaluator, could not find [$] after [}].
              */
             //assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", formatter.format( str2 ) ); //throw an error
-            eden.prettyPrinting = original ;
         }
         
         public function testFormatDateEvaluators():void
