@@ -156,10 +156,6 @@ package system
 
         public function testFormatEdenEvaluators():void
         {
-            var original:Boolean = system.eden.prettyPrinting;
-            
-            system.eden.prettyPrinting = false;
-            
             var str1:String = "my result is ${{a:1,b:2}}$";
             var str2:String = "my result is ${{a:1,b:2}}eden$";
             var str3:String = "my result is ${{a:1,b:2}}eden2$";
@@ -169,17 +165,10 @@ package system
             assertTrue(Strings.format(str1) == "my result is {a:1,b:2}" || Strings.format(str1) == "my result is {b:2,a:1}"); // TODO FP10 hack 
             assertTrue( Strings.format(str2) == "my result is {a:1,b:2}" || Strings.format(str2) == "my result is {b:2,a:1}" ); // TODO FP10 hack
             assertEquals("my result is [object Object]", Strings.format(str3));
-            
-            system.eden.prettyPrinting = original;
-
         }
 
         public function testFormatEvaluatorsParsing():void
         {
-            var original:Boolean = system.eden.prettyPrinting;
-            
-            system.eden.prettyPrinting = false;
-            
             var str1:String = '${{prop:"{}"}}$';
             
             assertEquals('{prop:"{}"}', Strings.format(str1));
@@ -195,8 +184,6 @@ package system
             Error: malformed evaluator, could not find [$] after [}].
              */
             //assertEquals( "{b:\"}\",d:\"}\",a:1,c:\"$\",e:\"$\"}", Strings.format( str2 ) ); //throw an error
-            system.eden.prettyPrinting = original ;
-            
         }
 
         public function testFormatDateEvaluators():void
