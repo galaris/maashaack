@@ -70,7 +70,7 @@ package system
         /**
          * The current serializer used used by the system 
          */
-        public function get serializer():Serializer
+        public function get serializer():*
         {
             return _config.serializer;
         }
@@ -78,7 +78,7 @@ package system
         /**
          * @private
          */
-        public function set serializer( value:Serializer ):void
+        public function set serializer( value:* ):void
         {
             _config.serializer = value;
         }
