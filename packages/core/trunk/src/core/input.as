@@ -1,4 +1,4 @@
-/*
+﻿/*
 Version: MPL 1.1/GPL 2.0/LGPL 2.1
 
 The contents of this file are subject to the Mozilla Public License Version
@@ -66,10 +66,12 @@ package core
      * </code>
      * </listing>
      */
-    public var input:Function = function():String { return "" };
+    public var input:Function = function():String { return "" ; };
     
+    /*FDT_IGNORE*/
     API::REDTAMARIN
     {
         input = readLine;
     }
+    /*FDT_IGNORE*/
 }
