@@ -35,7 +35,7 @@
 
 package system
 {
-    import system.serializers.eden.EdenSerializer;
+    import library.eden.EdenSerializer;
     
     /**
      * The eden singleton serializer.
