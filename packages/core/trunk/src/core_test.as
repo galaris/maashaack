@@ -55,6 +55,7 @@ package
             var test0:Object = { a:1, b:2, c:null, d:undefined, e:[1,2,3], f:"hello world", g:new Date() };
             trace( dump( test0 ) );
             trace( dump( test0, true ) );
+            trace( filedump( test0 ) );
             
             trace( "---- core.bit ----" );
             
