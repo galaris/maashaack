@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<flex-config>
+    <compiler>
+        <namespaces>
+            <namespace>
+                <uri>http://code.google.com/p/eden/2011</uri>
+                <manifest>../manifests/eden_manifest.xml</manifest>
+            </namespace>
+        </namespaces>
+        
+        <strict>true</strict>
+        <optimize>true</optimize>
+        
+       <define append="true"> 
+           <name>CONFIG::release</name>
+           <value>true</value> 
+       </define> 
+       <define append="true"> 
+           <name>CONFIG::debugging</name> 
+           <value>false</value> 
+       </define>
+       <define append="true"> 
+           <name>API::FLASH</name> 
+           <value>true</value> 
+       </define>
+       <define append="true"> 
+           <name>API::REDTAMARIN</name> 
+           <value>false</value> 
+       </define>
+       <define append="true"> 
+           <name>LOG::P</name> 
+           <value>false</value> 
+       </define>
+    </compiler>
+    
+    <include-namespaces>
+        <uri>http://code.google.com/p/eden/2011</uri>
+    </include-namespaces>
+    
+    <target-player>10.3</target-player>
+    
+    <directory>false</directory>
+    
+    <output>../../../libs/eden.swc</output>
+    
+    <metadata>
+        <title>The AS3 eden.swc library</title>
+        <description>All classes of the libraries.eden package in Maashaack</description>
+        <publisher>http://code.google.com/p/maashaack</publisher>
+        <creator>Zwetan Kjukov (zwetan@gmail.com) - Marc ALCARAZ (ekameleon@gmail.com)</creator>
+        <language>EN</language>
+    </metadata>
+
+</flex-config>
