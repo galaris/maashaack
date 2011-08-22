@@ -471,7 +471,6 @@
     
     <component id="system.terminals:console"            class="system.terminals.console"            />
     <component id="system.terminals:InteractiveConsole" class="system.terminals.InteractiveConsole" />
-    <component id="system.terminals:output"             class="system.terminals.output"             />
     <component id="system.terminals:TraceConsole"       class="system.terminals.TraceConsole"       />
     
     <!-- system.text.html -->
