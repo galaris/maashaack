@@ -2,11 +2,17 @@
 
 <project name="Maashaack libraries builder" default="main">
     
-    <target name="main" depends="core,system,graphics,maashaack" description="Creates all swc libraries of Maashaack"/>
+    <target name="main" depends="core,eden,system,graphics,maashaack" description="Creates all swc libraries of Maashaack"/>
     
     <target name="core">
          <subant target="">
              <fileset dir="./core" includes="build.xml"/>
+         </subant>
+    </target>
+    
+    <target name="eden">
+         <subant target="">
+             <fileset dir="./eden" includes="build.xml"/>
          </subant>
     </target>
     
