@@ -4,16 +4,21 @@
     
     <!-- core -->
     
-    <component id="core:bit"        class="core.bit"        />
+    <component id="core:bit"            class="core.bit"        />
     
-    <component id="core:dump"       class="core.dump"       />
-    <component id="core:dumpArray"  class="core.dumpArray"  />
-    <component id="core:dumpDate"   class="core.dumpDate"   />
-    <component id="core:dumpObject" class="core.dumpObject" />
-    <component id="core:dumpString" class="core.dumpString" />
+    <component id="core:dump"           class="core.dump"       />
+    <component id="core:dumpArray"      class="core.dumpArray"  />
+    <component id="core:dumpDate"       class="core.dumpDate"   />
+    <component id="core:dumpObject"     class="core.dumpObject" />
+    <component id="core:dumpString"     class="core.dumpString" />
     
-    <component id="core:uri"     class="core.uri"           />
-    <component id="core:version" class="core.version"       />
+    <component id="core:filedump"       class="core.filedump"       />
+    <component id="core:filedumpObject" class="core.filedumpObject" />
+    
+    <component id="core:input"       class="core.input"   />
+    <component id="core:output"      class="core.output"  />
+    <component id="core:uri"         class="core.uri"     />
+    <component id="core:version"     class="core.version" />
     
     <!-- core.arrays -->
     
