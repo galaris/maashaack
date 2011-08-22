@@ -33,7 +33,6 @@ deps = {
          Var("root") + "/src/system/reflection"   : Var("repo") + "/packages/system_reflection/trunk/src/system/reflection",
          Var("root") + "/src/system/remoting"     : Var("repo") + "/packages/system_remoting/trunk/src/system/remoting",
          Var("root") + "/src/system/rules"        : Var("repo") + "/packages/system_rules/trunk/src/system/rules",
-         Var("root") + "/src/system/serializers"  : Var("repo") + "/packages/system_serializers/trunk/src/system/serializers",
          Var("root") + "/src/system/signals"      : Var("repo") + "/packages/system_signals/trunk/src/system/signals",
          Var("root") + "/src/system/terminals"    : Var("repo") + "/packages/system_terminals/trunk/src/system/terminals",
          Var("root") + "/src/system/text"         : Var("repo") + "/packages/system_text/trunk/src/system/text",
@@ -67,7 +66,6 @@ deps = {
          Var("root") + "/tests/src/system/reflection"   : Var("repo") + "/packages/system_reflection/trunk/tests/src/system/reflection",
          Var("root") + "/tests/src/system/remoting"     : Var("repo") + "/packages/system_remoting/trunk/tests/src/system/remoting",
          Var("root") + "/tests/src/system/rules"        : Var("repo") + "/packages/system_rules/trunk/tests/src/system/rules",
-         Var("root") + "/tests/src/system/serializers"  : Var("repo") + "/packages/system_serializers/trunk/tests/src/system/serializers",
          Var("root") + "/tests/src/system/signals"      : Var("repo") + "/packages/system_signals/trunk/tests/src/system/signals",
          Var("root") + "/tests/src/graphics"            : Var("repo") + "/packages/graphics/trunk/tests/src/graphics",
        }
