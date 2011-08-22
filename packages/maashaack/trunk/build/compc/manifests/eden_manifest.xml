@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<componentPackage>
+    
+    <component id="library.eden:ECMAScript"       class="library.eden.ECMAScript" />
+    <component id="library.eden:EdenConfigurator" class="library.eden.EdenConfigurator" />
+    <component id="library.eden:EdenSerializer"   class="library.eden.EdenSerializer" />
+    <component id="library.eden:EdenStrings"      class="library.eden.EdenStrings" />
+    <component id="library.eden:metadata"         class="library.eden.metadata" />
+    
+</componentPackage>
