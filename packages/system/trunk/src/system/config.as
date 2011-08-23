@@ -35,12 +35,10 @@
 
 package system
 {
-    import system.eden;
-    
     /**
      * The System configurator.
      */
     public var config:SystemConfigurator = new SystemConfigurator( {
-                                                                   verbose: false , serializer: system.eden
+                                                                   verbose: false
                                                                    } );
 }
