@@ -35,13 +35,11 @@
 
 package graphics.display 
 {
-    import graphics.logging.logger;
-    
-    import system.data.Iterator;
-    import system.data.maps.HashMap;
-    
     import flash.display.FrameLabel;
     import flash.display.MovieClip;
+    import graphics.logger;
+    import system.data.Iterator;
+    import system.data.maps.HashMap;
     
     /**
      * The TimeLineScript class use composition to register script function over MovieClip timelines.
