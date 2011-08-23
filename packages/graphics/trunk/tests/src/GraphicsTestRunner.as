@@ -35,14 +35,13 @@
 
 package
 {
-    import library.ASTUce.*;
-    
     import graphics.AllTests;
-    
-    import system.config;
+
+    import library.ASTUce.*;
+
     import system.diagnostics.TextFieldConsole;
     import system.terminals.console;
-    
+
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
