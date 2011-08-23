@@ -35,11 +35,10 @@
 
 package
 {
-    import library.ASTUce.*;
-
     import core.AllTests;
 
-    import system.config;
+    import library.ASTUce.*;
+
     import system.diagnostics.TextFieldConsole;
     import system.terminals.console;
 
@@ -80,8 +79,6 @@ package
             resize() ;
             
             console = new TextFieldConsole( textfield ) ;
-            
-            system.config.serializer.prettyPrinting = false;
             
             //tests
             
