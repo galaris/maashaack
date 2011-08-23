@@ -22,6 +22,7 @@
     <component id="graphics:LineGradientStyle" class="graphics.LineGradientStyle" />
     <component id="graphics:LineShaderStyle"   class="graphics.LineShaderStyle" />
     <component id="graphics:LineStyle"         class="graphics.LineStyle" />
+    <component id="graphics:logger"            class="graphics.logger" />
     <component id="graphics:Orientation"       class="graphics.Orientation" />
     
     <!-- graphics.colors -->
@@ -269,10 +270,6 @@
     <component id="graphics.layouts:CoreLayout"   class="graphics.layouts.CoreLayout"   />
     <component id="graphics.layouts:GridLayout"   class="graphics.layouts.GridLayout"   />
     <component id="graphics.layouts:Layout"       class="graphics.layouts.Layout"       />
-    
-    <!-- graphics.logging -->
-    
-    <component id="graphics.logging:logger" class="graphics.logging.logger"  />
     
     <!-- graphics.numeric -->
     
