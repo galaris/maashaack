@@ -66,21 +66,5 @@ package system
         {
             _config.verbose = value;
         }
-        
-        /**
-         * The current serializer used used by the system 
-         */
-        public function get serializer():*
-        {
-            return _config.serializer;
-        }
-        
-        /**
-         * @private
-         */
-        public function set serializer( value:* ):void
-        {
-            _config.serializer = value;
-        }
     }
 }
