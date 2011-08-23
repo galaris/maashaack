@@ -35,29 +35,28 @@
 
 package system
 {
-
+    import core.dump;
     /**
      * The Configurator class defines the basic class used to creates custom configurations.
      */    
     public class Configurator implements Serializable
     {
-
         /**
          * The internal config object of the configurator.
          * @private
          */
         protected var _config:Object;
-
+        
         /**
          * Creates a new Configurator object.
          * @param config This argument initialize the configurator with a generic object.
-         */        
+         */
         public function Configurator( config:Object )
         {
             _config = {};
             load( config );
         }
-
+        
         /**
          * Copy all properties in the specified passed-in object in the internal config object of the Configurator.
          */
@@ -68,22 +67,14 @@ package system
                 _config[member] = config[member] ;
             }
         }
-
+        
         /**
          * Returns the source code string representation of the object.
          * @return the source code string representation of the object.
          */
         public function toSource( indent:int = 0 ):String
         {
-            config.serializer.prettyIndent = indent;
-            return config.serializer.serialize( _config );
-            /*
-            var original:int = eden.prettyIndent;
-            eden.prettyIndent = indent;
-            var str:String = eden.serialize( _config );
-            eden.prettyIndent = original;
-            return str;
-            */
+            return dump( _config );
         }
 
         /**
