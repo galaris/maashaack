@@ -25,6 +25,25 @@ TODO
 
 = Details =
 
+Everything is dependant on the interface `InteractiveConsole`
+
+{{{
+package system.terminals
+{
+    public interface InteractiveConsole
+    {
+        function read():String;
+
+        function readLine():String;
+
+        function write( ...messages ):void;
+        
+        function writeLine( ...messages ):void;
+    }
+}
+}}}
+
+
 TODO
 
 ----
