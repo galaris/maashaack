@@ -6,9 +6,20 @@
         <attribute name="force" default="false"/>
         
         <sequential>
-            <svn username="${credentials.svn.username}" password="${credentials.svn.password}" javahl="false" svnkit="false">
-                <add file="@{path}" force="@{force}"/>
-            </svn>
+            <if>
+                <equals arg1="@{force}" arg2="true"/>
+            <then>
+                <exec executable="svn" taskname="svn" failonerror="true">
+                    <arg line="add @{path} --force"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="svn" taskname="svn" failonerror="true">
+                    <arg line="add @{path}"/>
+                </exec>
+            </else>
+            </if>
+            
         </sequential>
     </macrodef>
     
