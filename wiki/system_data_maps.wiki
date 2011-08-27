@@ -1,0 +1,56 @@
+#summary The system.data.maps package
+#labels Documentation,Framework
+
+= The system.data.Map interface =
+
+== Generality ==
+
+The *Map* interface is inspired on the [http://download.oracle.com/javase/1.4.2/docs/api/java/util/Map.html Java Collection Framework].
+
+This interface defines an object that maps keys to values. A map cannot contain duplicate keys ; each key can map to at most one value.
+
+The *system.data.Map* interface defines a group of basic methods :
+
+*The test methods*
+
+|| isEmpty	|| return true if the collection no contains entries. ||
+|| containsKey || return true if the map contains a mapping for the specified key. ||
+|| containsValue || return true if the map maps one or more keys to the specified value. ||
+
+
+*The insert and change methods*
+
+|| put(key:*,value:*) || Associates the specified value with the specified key in the map. ||
+|| putAll( m:Map ) || Copies all of the mappings from the specified map to the map. ||
+
+*The remove methods*
+
+|| clear() || Removes all mappings from this map. ||
+|| remove(key) || Removes the mapping for this key from this map if it is present. ||
+
+*The copy methods*
+
+|| clone() || Returns a shallow copy of the Map. ||
+
+*The getter and enumeration methods*
+
+|| get(key) || Returns the value to which this map maps the specified key. ||
+|| getKeys():Array || Returns an Array representation of all keys of the Map. ||
+|| getValues():Array || Returns an Array representation of all values of the Map. ||
+|| iterator():Iterator || Returns the iterator of this collection (This Iterator is an MapIterator? reference). ||
+|| keyIterator():Iterator || Returns the Iterator of all keys of the Map. ||
+
+*The information methods*
+
+|| size():Number || Returns the number of key-value mappings in the Map. ||
+|| toString():String || Returns the custom string representation of the Map. ||
+|| toSource():String || Returns the source of the Map object (to serialize it for example). ||
+
+The *Map* implementations are define in the *system.data.maps* package with the classes :
+
+ * system.data.map.HashMap
+ * system.data.map.ArrayMap
+ * system.data.map.SortedArrayMap
+ * system.data.map.TypedMap
+ * system.data.map.MultiValueMap
+ * system.data.set.MultiSetMap
