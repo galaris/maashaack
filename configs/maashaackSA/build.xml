@@ -146,7 +146,7 @@
         <if>
             <equals arg1="${build.publish}" arg2="true"/>
         <then>
-            <svn-commit path="${basedir}/build/version.properties" message="MetaBuild - update version properties"/>
+            <svn-commit path="${basedir}/build/version.properties" message="MetaBuild ${MetaBuild.version.tag} - update version properties"/>
         </then>
         </if>
     </target>
@@ -218,7 +218,7 @@
                         <available file="${project.fullpath}/lib-swc" type="dir"/>
                     </and>
                 <then>
-                    <svn-commit path="${basedir}/${project.fullpath}/lib-swc" message="MetaBuild - ${project.name} update SWC dependencies"/>
+                    <svn-commit path="${basedir}/${project.fullpath}/lib-swc" message="MetaBuild ${MetaBuild.version.tag} - ${project.name} update SWC dependencies"/>
                     <echo message="${project.name} update SWC dependencies in /lib-swc"/>
                 </then>
                 </if>
@@ -231,7 +231,7 @@
                         <available file="${project.fullpath}/lib-abc" type="dir"/>
                     </and>
                 <then>
-                    <svn-commit path="${basedir}/${project.fullpath}/lib-abc" message="MetaBuild - ${project.name} update ABC dependencies"/>
+                    <svn-commit path="${basedir}/${project.fullpath}/lib-abc" message="MetaBuild ${MetaBuild.version.tag} - ${project.name} update ABC dependencies"/>
                     <echo message="${project.name} update ABC dependencies in /lib-abc"/>
                 </then>
                 </if>
@@ -248,8 +248,8 @@
         <then>
             <svn-add path="${basedir}/libs/swc/" force="true"/>
             <svn-add path="${basedir}/libs/abc/" force="true"/>
-            <svn-commit path="${basedir}/libs" message="MetaBuild - update current libs"/>
-            <libs-create-tag tag="${MetaBuild.version.tag}" message="MetaBuild - tag maashaack libs [${MetaBuild.version.tag}]"/>
+            <svn-commit path="${basedir}/libs" message="MetaBuild ${MetaBuild.version.tag} - update current libs"/>
+            <libs-create-tag tag="${MetaBuild.version.tag}" message="MetaBuild ${MetaBuild.version.tag} - tag maashaack libs [${MetaBuild.version.tag}]"/>
         </then>
         </if>
         
