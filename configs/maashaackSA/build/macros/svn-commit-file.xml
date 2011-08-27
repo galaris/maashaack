@@ -1,0 +1,15 @@
+
+<project>
+    
+    <macrodef name="svn-commit-file">
+        <attribute name="path"/>
+        <attribute name="message"/>
+        
+        <sequential>
+            <exec executable="svn" taskname="svn" failonerror="true">
+                <arg line="commit @{path} -m '@{message}'"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    
+</project>

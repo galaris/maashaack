@@ -1,0 +1,14 @@
+
+<project>
+    
+    <macrodef name="svn-update">
+        <attribute name="path"/>
+        
+        <sequential>
+            <exec executable="svn" taskname="svn" failonerror="true">
+                <arg line="update @{path}"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    
+</project>

@@ -1,0 +1,18 @@
+
+<project>
+    
+    <macrodef name="svn-add-fileset">
+        <attribute name="path"/>
+        <attribute name="set"/>
+        <attribute name="force" default="false"/>
+        
+        <sequential>
+            <svn username="${credentials.svn.username}" password="${credentials.svn.password}" javahl="false" svnkit="false">
+                <add force="@{force}">
+                    <fileset dir="@{path}" includes="@{set}"/>
+                </add>
+            </svn>
+        </sequential>
+    </macrodef>
+    
+</project>
