@@ -62,7 +62,7 @@
       * [system system]
          * [system_data system.data]
             * [system_data_maps system.data.maps]
-         * [InversionOfControl Inversion of Control (IoC)]
+         * [InversionOfControl system.ioc]
             * [ObjectFactory IoC factory - container]
             * [ObjectDefinitions Object definitions]
             * [object_definitions_basic_attributes Basic attributes]
