@@ -83,7 +83,7 @@
             * [CommandAndTask Command and Task Engine]
          * [system_remoting system.remoting]
          * [Signals system.signals]
-         * [system_terminals system.terminals] &diams;
+         * [system_terminals system.terminals] &#9830;
       * [graphics graphics]
  * [Libraries Libraries]
    * maashaack
