@@ -1,0 +1,29 @@
+<project>
+    
+    <target name="compile-core">
+        
+        <propertycopy name="path" from="project.fullpath" override="true"/>
+        
+        <!-- build -->
+        <ant antfile="${path}/meta.xml" target="main" inheritAll="false">
+            <property name="FLEX_HOME" value="${FLEX_HOME}" />
+            <property name="TODAY" value="${TODAY}" />
+            <property name="local.flashplayerversion" value="${local.flashplayerversion}" />
+            <property file="${path}/build/build.properties"/>
+        </ant>
+
+        <!-- deploy to libs -->
+        <copy file="${path}/bin-release/core.swc" todir="libs/swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="libs/abc" overwrite="true" />
+        
+        <!-- sync with other projects -->
+        <copy file="${path}/bin-release/core.swc" todir="libraries/astuce/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="libraries/astuce/lib-abc" overwrite="true" />
+        <copy file="${path}/bin-release/core.swc" todir="libraries/eden/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="libraries/eden/lib-abc" overwrite="true" />
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_terminals/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system_terminals/lib-abc" overwrite="true" />
+        
+    </target>
+    
+</project>
