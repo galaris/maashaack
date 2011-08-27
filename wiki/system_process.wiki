@@ -1,0 +1,35 @@
+#summary system.process package.
+
+= About =
+
+*system.process* is etc.
+
+<wiki:comment>
+//use wiki comment to hide
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
+</wiki:comment>
+
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `system.process.*` || FP_10_2|| n/a || n/a || yes || no ||
+
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_process%2Ftrunk /packages/system_process/trunk] ||
+|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_process/trunk system_process-read-only` ||
+
+<br>
+<br>
+
+= Introduction =
+
+
+
+= Details =
+
+
+
+----
+= Documentation =
+
+
+----
+
+= Usages =
