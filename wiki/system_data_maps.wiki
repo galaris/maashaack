@@ -303,3 +303,156 @@ catch( e:Error )
     trace( e.toString() ) ; // TypeError: TypedMap.validate(2) is mismatch.
 }
 }}}
+
+=== The system.data.maps.MultiValueMap class ===
+
+The *MultiValueMap* class is inspired by the implementation if the [http://commons.apache.org/collections/api-3.2/org/apache/commons/collections/map/MultiValueMap.html Jakarta Collections Framework]. This class implements the *MultiMap* interface.
+
+A *MultiMap* is a Map with slightly different semantics. Putting a value into the map will add the value to a *Collection* at that key. Getting a value will return a *Collection*, holding all the values put to that key.
+
+*usage*
+
+{{{
+new MultiValueMap( map:Map = null , factory:* = null )
+}}}
+
+*example*
+
+{{{
+import system.data.Iterator;
+import system.data.MultiMap;
+import system.data.maps.HashMap;
+import system.data.maps.MultiValueMap;
+
+var map1:HashMap = new HashMap() ;
+
+map1.put("key1", "valueD1") ;
+map1.put("key2", "valueD2") ;
+
+trace("> map1 : " + map1) ;
+trace("> map1 containsKey 'key1' : " + map1.containsKey("key1")) ;
+
+trace("\r--- use a map argument in constructor") ;
+
+var map:MultiValueMap = new MultiValueMap(map1) ;
+
+map.put("key1", "valueA1") ;
+map.put("key1", "valueA2") ;
+map.put("key1", "valueA3") ;
+map.put("key2", "valueA2") ;
+map.put("key2", "valueB1") ;
+map.put("key2", "valueB2") ;
+map.put("key3", "valueC1") ;
+map.put("key3", "valueC2") ;
+
+trace("init map    : " + map) ;
+trace("map toSource : " + map.toSource()) ;
+
+trace("key1 >> " + map.get("key1")) ;
+trace("key2 >> " + map.get("key2")) ;
+trace("key3 >> " + map.get("key3")) ;
+
+var r:* = map.removeByKey("key1", "valueA2") ;
+trace( "map.removeByKey('key1', 'valueA2') : " + r ) ;
+
+// trace ("\r--- remove a value in key1 >> " + map.get("key1")) ;
+
+var it:Iterator ;
+
+trace("\r--- use iterator") ;
+
+it = map.iterator() ;
+while(it.hasNext()) 
+{
+	trace("\t * " + it.next()) ;
+}
+
+trace("\r--- use a key iterator : key1") ;
+it = map.iteratorByKey("key1") ;
+while(it.hasNext()) 
+{
+	trace("\t * " + it.next()) ;
+}
+
+trace("\r--- putCollection key2 in key1") ;
+
+map.putCollection("key1", map.get("key2")) ;
+
+trace("key1 >> " + map.get("key1")) ;
+
+trace("\r--- different size") ;
+
+trace("map size : " + map.size()) ;
+
+trace("map totalSize : " + map.totalSize()) ;
+
+trace("\r--- clone MultiMap") ;
+
+var clone:MultiMap = map.clone() as MultiMap ;
+
+clone.remove("key1") ;
+
+trace("clone : " + clone) ;
+trace("clone size : " + clone.totalSize()) ;
+trace("map size : " + map.totalSize()) ;
+
+trace("\r--- valueIterator") ;
+it = map.valueIterator() ;
+while( it.hasNext() ) 
+{
+	trace("\t> " + it.next()) ;
+}
+}}}
+
+=== The system.data.maps.MultiSetMap class ===
+
+The *MultiSetMap* class is a original implementation. This class extends the *MultiValueMap* class but use a Set to register all values of a specified key in the *Map* and not a basic *Collection*.
+
+A *Set* is a collection that contains no duplicate elements. We can't insert in a *MultiSetMap* two same values with a specified key. But we can use two same values with two different keys.
+
+*usage*
+
+{{{
+new MultiSetMap( map:Map=null , factory:* = null )
+}}}
+
+*example*
+
+{{{
+import system.data.Collection;
+import system.data.collections.ArrayCollection;
+import system.data.maps.MultiSetMap;
+	
+var map:MultiSetMap = new MultiSetMap() ;
+
+trace("put key1:valueA1 : " + map.put("key1", "valueA1")) ;
+trace("put key1:valueA2 : " + map.put("key1", "valueA2")) ;
+trace("put key1:valueA2 : " + map.put("key1", "valueA2")) ;
+trace("put key1:valueA3 : " + map.put("key1", "valueA3")) ;
+trace("put key2:valueA2 : " + map.put("key2", "valueA2")) ;
+trace("put key2:valueB1 : " + map.put("key2", "valueB1")) ;
+trace("put key2:valueB2 : " + map.put("key2", "valueB2")) ;
+
+trace("size : " + map.size()) ;
+trace("totalSize : " + map.totalSize()) ;
+
+var ar:Array = map.toArray() ;
+trace("map.toArray : " + ar) ;
+
+trace("contains valueA1 : " + map.contains("valueA1") ) ;
+trace("contains valueA1 in key1 : " + map.containsByKey("key1", "valueA1") ) ;
+trace("contains valueA1 in key2 : " + map.containsByKey("key2", "valueA1") ) ;
+
+trace("remove key1:valueA2 : " + map.removeByKey("key1", "valueA2")) ;
+trace("put    key1:valueA2 : " + map.put("key1", "valueA2")) ;
+trace("put    key1:valueA2 : " + map.put("key1", "valueA2")) ;
+
+trace("remove key2 : " + map.remove("key2")) ;
+trace("size : " + map.size()) ;
+
+var co:Collection = new ArrayCollection(["valueA1", "valueA4", "valueA1"]) ;
+
+map.putCollection("key1", co) ;
+
+trace( "map : " + map ) ;
+}}}
