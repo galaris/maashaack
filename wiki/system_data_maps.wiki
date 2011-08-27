@@ -129,3 +129,177 @@ map.setValueAt(2, "myValue") ;
 
 trace(map) ; // {key1:value1,myKey:value2,key3:myValue}
 }}}
+
+===The system.data.map.SortedArrayMap class ===
+
+This class extends the *ArrayMap* class and contains all methods of the *ArrayMap* but this class can sort the entries key/value of the map with the sorting methods of the *Array* class.
+
+The *SortedArrayMap* instances can sort this keys or this values :
+
+ * We can choose with the property *sortBy* if the sort target the keys or the values. We can use the constants *SortedArrayMap.KEY* or *SortedArrayMap.VALUE* constants to defines the sorting target.
+ * The *sort()* method of the *SortedArrayMap* use a *system.Comparator* object to sort the map. See the package *system.comparators* or use the *Comparator* interface to implements your custom comparator objects.
+ * We can use an *options* property to defines the sorting filter of the internal Arrays of the Map. This options use the *Array.DESCENDING*, *Array.NUMERIC* etc.. constants to defines the option to use during the sort process. You can use the constants defines in the *SortedArrayMap* class to creates your custom sort filter.
+ * The method *sortOn()* of the *SortedArrayMap* to sort the keys or the values with the *Array.sortOn()* methods.
+
+*example 1 : use the 'sort' method.*
+
+{{{
+import system.data.maps.SortedArrayMap ;
+
+import system.comparators.AlphaComparator ;
+import system.comparators.NumberComparator ;
+ 
+var map:SortedArrayMap = new SortedArrayMap( [0] , ["item0"] ) ;
+ 
+map.put( 1 , "item8" ) ;
+map.put( 3 , "item7" ) ;
+map.put( 2 , "item6" ) ;
+map.put( 5 , "item5" ) ;
+map.put( 4 , "item4" ) ;
+map.put( 7 , "item3" ) ;
+map.put( 6 , "item2" ) ;
+map.put( 8 , "item1" ) ;
+ 
+trace("----- original Map") ;
+ 
+trace( map ) ;
+ 
+trace("----- sort by key with sort() method") ;
+ 
+map.comparator = new NumberComparator() ;
+ 
+map.options = SortedArrayMap.NUMERIC | SortedArrayMap.DESCENDING ;
+map.sort() ;
+
+trace( map ) ;
+ 
+map.options = SortedArrayMap.NUMERIC ;
+map.sort() ;
+
+trace( map ) ;
+
+trace("----- sort by value with sort() method") ;
+ 
+map.comparator = new AlphaComparator() ;
+ 
+map.sortBy = SortedArrayMap.VALUE;
+ 
+map.options = SortedArrayMap.DESCENDING;
+map.sort() ;
+trace( map ) ;
+ 
+map.options = SortedArrayMap.NONE;
+map.sort() ;
+trace( map ) ;
+}}}
+
+*example 2 : use the 'sortOn' method*
+
+{{{
+import system.data.Iterator ;
+import system.data.Map ;
+import system.data.maps.SortedArrayMap ;
+ 
+var map:SortedArrayMap = new SortedArrayMap() ;
+ 
+map.put( { id:5 } , { name:'name4' } ) ;
+map.put( { id:1 } , { name:'name1' } ) ;
+map.put( { id:3 } , { name:'name5' } ) ;
+map.put( { id:2 } , { name:'name2' } ) ;
+map.put( { id:4 } , { name:'name3' } ) ;
+ 
+var debug:Function = function( map:Map ):void
+{
+ 
+    var vit:Iterator = map.iterator() ;
+    var kit:Iterator = map.keyIterator() ;
+       
+    var str:String = "{" ;
+       
+    while( vit.hasNext() )
+    {
+        var value = vit.next() ;
+        var key   = kit.next() ;
+        str += key.id + ":" + value.name ;
+        if (vit.hasNext())
+        {
+            str += "," ;
+        }
+    }
+    str += "}" ;
+    trace(str) ;
+}
+ 
+trace("----- original Map") ;
+ 
+debug( map ) ; // {5:name4,1:name1,3:name5,2:name2,4:name3}
+ 
+trace("----- sort by key with sort() method") ;
+ 
+map.sortBy = SortedArrayMap.KEY ; // default
+ 
+map.options = SortedArrayMap.NUMERIC | SortedArrayMap.DESCENDING ;
+map.sortOn("id") ;
+debug( map ) ; // {5:name4,4:name3,3:name5,2:name2,1:name1}
+ 
+map.options = SortedArrayMap.NUMERIC  ;
+map.sortOn("id") ;
+debug( map ) ; // {1:name1,2:name2,3:name5,4:name3,5:name4}
+ 
+trace("----- sort by value with sort() method") ;
+
+map.sortBy = SortedArrayMap.VALUE ;
+
+map.options = SortedArrayMap.DESCENDING ;
+map.sortOn("name") ;
+debug( map ) ; // {3:name5,5:name4,4:name3,2:name2,1:name1}
+ 
+map.options = SortedArrayMap.NONE ;
+map.sortOn("name") ;
+debug( map ) ; // {1:name1,2:name2,4:name3,5:name4,3:name5}
+}}}
+
+=== The system.data.maps.TypedMap class ===
+
+This class is a wrappers who encapsulate a *Map* object and test the type of the values of its *Map* during the *put()* or the *putAll()* call. 
+
+This class implements the *Map*, *Typeable* and *Validator* interfaces defines in the *system.data* package.
+
+*example*
+
+{{{
+import system.data.Iterator ;
+import system.data.Map ;
+
+import system.data.maps.HashMap ;
+import system.data.maps.TypedMap ;
+
+var map1:HashMap = new HashMap() ;
+var map2:HashMap = new HashMap() ;
+
+map1.put("key1", "value1") ;
+map1.put("key2", "value2") ;
+map1.put("key3", "value3") ;
+
+map2.put("key4", "value1") ;
+map2.put("key5", "value5") ;
+map2.put("key6", "value6") ;
+
+var tm:TypedMap = new TypedMap( String , map1 ) ;
+
+tm.put( "key1" , "value0" ) ;
+tm.putAll(map2) ;
+
+trace( "typedMap : " + ™ ) ;
+
+trace( "typedMap toSource : " + tm.toSource() ) ;
+
+try
+{
+    tm.put("key7", 2) ;
+}
+catch( e:Error )
+{
+    trace( e.toString() ) ; // TypeError: TypedMap.validate(2) is mismatch.
+}
+}}}
