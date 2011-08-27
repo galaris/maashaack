@@ -19,6 +19,8 @@ credentials.svn.password = test
 build.publish = true
 build.documentation = true
 build.showoptions = true
+build.updatedependencies = true
+build.updatelibs = true
 build.separator = --------------------------------------------------------------------------------
 
 
