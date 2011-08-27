@@ -1,0 +1,18 @@
+#summary One-sentence summary of this page.
+#labels Documentation,Framework
+
+= Introduction =
+
+The collections framework is a unified architecture for representing and manipulating collections, allowing them to be manipulated independently of the details of their representation. It reduces programming effort while increasing performance.
+
+[http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_data%2Ftrunk http://maashaack.googlecode.com/svn/gfx/framework/packages/system.data.png]
+
+The *system.data collection* framework is inspired on the [http://download.oracle.com/javase/1.4.2/docs/guide/collections/ JAVA Collections Framework] and the [http://commons.apache.org/collections/ Jakarta Collections Framework].
+
+This framework is inspired on interfaces to defines the different types of collections :
+ * Map
+ * Bag
+ * Collections
+ * Iterator
+ * Set
+ * Queue & Stack
