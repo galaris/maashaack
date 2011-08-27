@@ -2,13 +2,13 @@
 
 = About =
 
-*system.terminals* is 
+*system.terminals* define the input/output for a console.
 
 <a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/system.terminals.swc"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
 
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `system.terminals.*` || FP_10_2 ||  || core || yes || 0.3.1 ||
+|| `system.terminals.*` || FP_10_2 || n/a  || [core] || yes || 0.3.1 ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_terminals%2Ftags /packages/system_terminals/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_terminals/trunk system_terminals-read-only` ||
@@ -18,7 +18,14 @@
 
 = Introduction =
 
+When you need a little more than a `trace()` ...
+
+TODO
+
+
 = Details =
+
+TODO
 
 ----
 = Documentation =
