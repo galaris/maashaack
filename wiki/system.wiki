@@ -5,7 +5,7 @@
 
 *system* is the root package for the maashaack application framework.
 
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
+<!-- <a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a> -->
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
 || `system.*` || FP_10_2 || n/a || n/a || yes || no ||
