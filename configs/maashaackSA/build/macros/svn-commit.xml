@@ -1,7 +1,7 @@
 
 <project>
     
-    <macrodef name="svn-commit-file">
+    <macrodef name="svn-commit">
         <attribute name="path"/>
         <attribute name="message"/>
         

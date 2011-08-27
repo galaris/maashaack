@@ -1,7 +1,7 @@
 
 <project>
     
-    <macrodef name="svn-add-file">
+    <macrodef name="svn-add">
         <attribute name="path"/>
         <attribute name="force" default="false"/>
         
