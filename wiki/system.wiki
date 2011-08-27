@@ -1,6 +1,23 @@
 #summary The system package
 #labels Framework,Documentation
 
+= About =
+
+*system* is the root package for the maashaack application framework.
+
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
+
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `system.*` || FP_10_2 || n/a || n/a || yes || no ||
+
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem%2Ftrunk /packages/system/trunk] ||
+|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system/trunk system-read-only` ||
+
+<br>
+<br>
+
+= Introduction =
+
 = system =
 
 The *system* root package is the starting point of the application framework structure,<br>
