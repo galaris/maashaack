@@ -10,7 +10,7 @@
 </wiki:comment>
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `system.events.*` || FP_10_2|| n/a || n/a || yes || no ||
+|| `system.events.*` || FP_10_2|| n/a || [core], [system], [system_data system.data], [system_process system.process] || yes || no ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_events%2Ftrunk /packages/system_events/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_events/trunk system_events-read-only` ||
