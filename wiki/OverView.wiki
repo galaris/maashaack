@@ -25,37 +25,7 @@ TODO
 
 == Packages ==
 
-We do not believe the classic `com/org/net + company name + product name`<br>
-apply to a general framework naming system.
-
-The following describe the different *root* packages and their scope.
-
-here an example of what we try to achieve in a day to day code usage
-{{{
-package
-{
-    import flash.display.Sprite;
-    
-    import system.Strings;
-    import system.Version;
-    import system.URI;
-    import system.externals.HTMLDOM;
-    import system.terminals.SocketConsole;
-    
-    import graphics.colors.RGB;
-    import graphics.filters.ReflectionFilter;
-    
-    import library.zlib;
-    import library.PNG;
-    
-    
-    public class Main extends Sprite
-    {
-        //...
-    }
-    
-}
-}}}
+see [Packages].
 
 
 === core ===
