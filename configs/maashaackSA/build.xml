@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="maashaack-metabuild" default="main" basedir=".">
+
+    <!--
+    Documentation
+    A metabuild is simply an Ant build that drives other ant builds
+
+    some features
+    - can build numerous projects at the same time
+    - can build projects in a predefined order
+    - can copy dependencies from one project to another project
+    - can identify the global build under one unique tag
+    
+     -->
+
+    <!-- All Tasks -->
+    <import file="build/tasks/define-pre-tasks.xml" />
+    <import file="build/tasks/define-post-tasks.xml" />
+    <import file="build/tasks/verify-dependencies.xml" />
+    
+    <!-- All Macros -->
+    <import file="build/macros/svn-update.xml" />
+
+    <import file="build/macros/svn-commit-file.xml" />
+    <import file="build/macros/svn-commit-directory.xml" />
+
+
+    <target name="clean">
+        
+    </target>
+
+    <target name="define-constants">
+        
+        <available file="build/user.properties" type="file" property="found.userprops" />
+        
+        <if>
+            <equals arg1="${found.userprops}" arg2="true"/>
+        <then>
+            <property file="build/user.properties"/>
+        </then>
+        <else>
+            <property file="build/common.properties"/>
+        </else>
+        </if>
+
+        <if>
+            <equals arg1="${build.documentation}" arg2="false"/>
+        <then>
+            <property name="build.nodocumentation" value="true"/>
+        </then>
+        <else>
+            <property name="build.nodocumentation" value="false"/>
+        </else>
+        </if>
+
+        <!-- FLEX_HOME -->
+        <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
+            <os family="mac"/>
+        </condition>        
+        <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
+            <os family="windows" />
+        </condition>
+        <echo message="FLEX_HOME defined" />
+
+        <!-- SHELL -->
+        <condition property="SHELL" value="${SHELL_MAC}">
+            <os family="mac"/>
+        </condition>
+        <condition property="SHELL" value="${SHELL_WIN}">
+            <os family="windows" />
+        </condition>
+        <echo message="SHELL defined" />
+        
+    </target>
+    
+    <target name="before" depends="task-define-pre-tasks,define-constants,task-define-post-tasks">
+
+        <!-- timestamp of the metabuild -->
+        <tstamp>
+            <format property="TODAY" pattern="dd MMMM yyyy" />
+        </tstamp>
+        
+        <available file="${FLEX_HOME}" type="dir" property="local.found.flex" />
+        
+    </target>
+
+    <target name="check" depends="task-verify-dependencies" />
+
+
+    <target name="tag">
+        
+        <if>
+            <equals arg1="${build.publish}" arg2="true"/>
+        <then>
+            <svn-update path="build" />
+        </then>
+        </if>
+        
+        <property file="build/version.properties" prefix="previous." />
+        
+        <if>
+            <equals arg1="${previous.version.build}" arg2="999" />
+        <then>
+            <propertyfile file="build/version.properties">
+                <entry key="version.build" type="int" value="0"/>
+            </propertyfile>
+            <script language="javascript">
+            numeric = Number( project.getProperty("previous.version.serie") );
+            letter  = String( project.getProperty("previous.version.cycle") );
+            if( letter == "Z" )
+            {
+                letter = "A";
+                numeric++;
+            }
+            else
+            {
+                letter = String.fromCharCode( letter.charCodeAt(0)+1 );
+            }
+            project.setNewProperty("current.serie", numeric);
+            project.setNewProperty("current.cycle", letter);
+            </script>
+            <propertyfile file="build/version.properties">
+                <entry key="version.serie" type="int" value="${current.serie}"/>
+                <entry key="version.cycle" type="string" value="${current.cycle}"/>
+            </propertyfile>
+        </then>
+        <else>
+            <propertyfile file="build/version.properties">
+                <entry key="version.build" type="int" operation="+" default="0" pattern="000"/>
+            </propertyfile>
+        </else>
+        </if>
+
+        <!-- remove comments -->
+        <replaceregexp file="build/version.properties" match="#.*" replace="" />
+        <!-- remove blank lines -->
+        <replaceregexp file="build/version.properties" match="(\r?\n)\s*\r?\n" flags="g" replace="\1" />
+        
+        <property file="build/version.properties" prefix="MetaBuild." />
+        <property name="MetaBuild.version.tag" value="${MetaBuild.version.serie}${MetaBuild.version.cycle}${MetaBuild.version.build}" />
+        <property name="MetaBuild.message" value="MetaBuild tag ${MetaBuild.version.tag}"/>
+        
+        
+        <if>
+            <equals arg1="${build.publish}" arg2="true"/>
+        <then>
+            <svn-commit-file path="build/version.properties" message="MetaBuild update version properties"/>
+        </then>
+        </if>
+    </target>
+
+    <!-- Main Entry Point -->
+    <target name="main" depends="clean,before,check,tag,compile,after" />
+    
+    <target name="after">
+        <!-- metabuild flag :) -->
+        <echo>
+           _____           __         __________      .__.__       .___
+          /     \   ____ _/  |______  \______   \__ __|__|  |    __| _/
+         /  \ /  \_/ __ \\   __\__  \  |    |  _/  |  \  |  |   / __ | 
+        /    Y    \  ___/ |  |  / __ \_|    |   \  |  /  |  |__/ /_/ | 
+        \____|__  /\___  >|__| (____  /|______  /____/|__|____/\____ | 
+                \/     \/           \/        \/                    \/ 
+        </echo>
+    </target>
+
+    <target name="compile">
+        <echo message="MetaBuild tag [${MetaBuild.version.tag}]"/>
+        <if>
+            <equals arg1="${build.showoptions}" arg2="true"/>
+        <then>
+            <echo message="options:"/>
+            <echo message="  publish       = ${build.publish}"/>
+            <echo message="  documentation = ${build.documentation}"/>
+            <echo message="  Flex SDK      = ${FLEX_HOME}"/>
+            <echo message="  Flash Player  = ${local.flashplayerversion}" />
+            <echo message=""/>
+        </then>
+        </if>
+        <echo message="${build.separator}"/>
+
+        <property file="build/compile.properties" prefix="module" />
+        <propertyselector property="compile.list"
+                          delimiter=","
+                          match="module\.([^\.]*)\.name"
+                          select="\0"
+                          casesensitive="true" />
+
+        <sortlist property="compile.sorted"
+                  value="${compile.list}"
+                  delimiter=","
+                  orderPropertyFile="build/compile.properties"
+                  orderPropertyFilePrefix="module" />
+        
+        <for list="${compile.sorted}" param="project.id">
+            <sequential>
+                <propertycopy name="project.name" from="@{project.id}" override="true" />
+                <propertycopy name="project.path" from="module.${project.name}.path" override="true" />
+                <var name="project.fullpath" value="${project.path}/${project.name}"/>
+                
+                <echo message="Compile module [${project.name}] in [${project.path}]" />
+                <ant antfile="build/modules/${project.name}.xml" target="compile-${project.name}" inheritAll="true" />
+                <echo message="${build.separator}"/>
+            </sequential>
+        </for>
+        
+    </target>
+    
+</project>
+
