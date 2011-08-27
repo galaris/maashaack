@@ -64,7 +64,7 @@
          * [system_data system.data]
             * [system_data_maps system.data.maps]
          * [system_events system.events]
-            * [Events events]
+            * [Events basic definitions]
             * [EventsIntroduction introduction]
             * [EventsBasicExamples basic examples]
             * [EventsFactory EventDispatcher factory]
