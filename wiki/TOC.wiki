@@ -80,7 +80,7 @@
          * [CommandAndTask system.process]
          * [system_remoting system.remoting]
          * [Signals system.signals]
-         * [system_terminals system_terminals]
+         * [system_terminals system.terminals]
       * [graphics graphics]
  * [Libraries Libraries]
    * maashaack
