@@ -57,7 +57,7 @@ The *Map* implementations are define in the *system.data.maps* package with the 
 
 == The implementations of the Map interface ==
 
-=== The system.data.map.{{{HashMap}}} class ===
+=== The system.data.maps.{{{HashMap}}} class ===
 
 This class is an easy representation of the *Map* interface.
 
@@ -130,7 +130,7 @@ map.setValueAt(2, "myValue") ;
 trace(map) ; // {key1:value1,myKey:value2,key3:myValue}
 }}}
 
-===The system.data.map.{{{SortedArrayMap}}} class ===
+===The system.data.maps.{{{SortedArrayMap}}} class ===
 
 This class extends the *ArrayMap* class and contains all methods of the *ArrayMap* but this class can sort the entries key/value of the map with the sorting methods of the *Array* class.
 
