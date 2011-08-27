@@ -99,7 +99,7 @@ map.clear() ;
 trace( "isEmpty : " + map.isEmpty() ) ;
 }}}
 
-=== The system.data.map.ArrayMap class ===
+=== The {{{system.data.map.ArrayMap}}} class ===
 
 This class uses two Arrays to map the key/value entries.
 
