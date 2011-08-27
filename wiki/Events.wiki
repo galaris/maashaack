@@ -1,4 +1,4 @@
-#summary events, dispatchers, listeners.
+#summary The system.events package : events, dispatchers, listeners.
 #labels Documentation,Documentation-events
 
 Some basic definitions.
