@@ -21,9 +21,10 @@
     
     <!-- All Macros -->
     <import file="build/macros/svn-update.xml" />
+    <import file="build/macros/svn-add.xml" />
+    <import file="build/macros/svn-commit.xml" />
 
-    <import file="build/macros/svn-commit-file.xml" />
-    <import file="build/macros/svn-commit-directory.xml" />
+    <import file="build/macros/libs-create-tag.xml" />
 
 
     <target name="clean">
@@ -93,7 +94,7 @@
         <if>
             <equals arg1="${build.publish}" arg2="true"/>
         <then>
-            <svn-update path="build" />
+            <svn-update path="${basedir}/build" />
         </then>
         </if>
         
@@ -145,7 +146,7 @@
         <if>
             <equals arg1="${build.publish}" arg2="true"/>
         <then>
-            <svn-commit-file path="build/version.properties" message="MetaBuild update version properties"/>
+            <svn-commit path="${basedir}/build/version.properties" message="MetaBuild - update version properties"/>
         </then>
         </if>
     </target>
@@ -171,15 +172,18 @@
             <equals arg1="${build.showoptions}" arg2="true"/>
         <then>
             <echo message="options:"/>
-            <echo message="  publish       = ${build.publish}"/>
-            <echo message="  documentation = ${build.documentation}"/>
-            <echo message="  Flex SDK      = ${FLEX_HOME}"/>
-            <echo message="  Flash Player  = ${local.flashplayerversion}" />
+            <echo message="  publish             = ${build.publish}"/>
+            <echo message="  documentation       = ${build.documentation}"/>
+            <echo message="  update dependencies = ${build.updatedependencies}"/>
+            <echo message="  update libs         = ${build.updatelibs}"/>
+            <echo message="  Flex SDK            = ${FLEX_HOME}"/>
+            <echo message="  Flash Player        = ${local.flashplayerversion}" />
             <echo message=""/>
         </then>
         </if>
         <echo message="${build.separator}"/>
 
+        <!-- load all the modules -->
         <property file="build/compile.properties" prefix="module" />
         <propertyselector property="compile.list"
                           delimiter=","
@@ -187,23 +191,67 @@
                           select="\0"
                           casesensitive="true" />
 
+        <!-- sorts module by order they appear in the file -->
         <sortlist property="compile.sorted"
                   value="${compile.list}"
                   delimiter=","
                   orderPropertyFile="build/compile.properties"
                   orderPropertyFilePrefix="module" />
-        
+
+        <!-- loop into all the modules -->
         <for list="${compile.sorted}" param="project.id">
             <sequential>
                 <propertycopy name="project.name" from="@{project.id}" override="true" />
                 <propertycopy name="project.path" from="module.${project.name}.path" override="true" />
                 <var name="project.fullpath" value="${project.path}/${project.name}"/>
-                
+
                 <echo message="Compile module [${project.name}] in [${project.path}]" />
+                
+                <!-- call module build -->
                 <ant antfile="build/modules/${project.name}.xml" target="compile-${project.name}" inheritAll="true" />
+
+                <!-- update the lib-swc folder -->
+                <if>
+                    <and>
+                        <equals arg1="${build.publish}" arg2="true"/>
+                        <equals arg1="${build.updatedependencies}" arg2="true"/>
+                        <available file="${project.fullpath}/lib-swc" type="dir"/>
+                    </and>
+                <then>
+                    <svn-commit path="${basedir}/${project.fullpath}/lib-swc" message="MetaBuild - ${project.name} update SWC dependencies"/>
+                    <echo message="${project.name} update SWC dependencies in /lib-swc"/>
+                </then>
+                </if>
+
+                <!-- update the lib-abc folder -->
+                <if>
+                    <and>
+                        <equals arg1="${build.publish}" arg2="true"/>
+                        <equals arg1="${build.updatedependencies}" arg2="true"/>
+                        <available file="${project.fullpath}/lib-abc" type="dir"/>
+                    </and>
+                <then>
+                    <svn-commit path="${basedir}/${project.fullpath}/lib-abc" message="MetaBuild - ${project.name} update ABC dependencies"/>
+                    <echo message="${project.name} update ABC dependencies in /lib-abc"/>
+                </then>
+                </if>
+                
                 <echo message="${build.separator}"/>
             </sequential>
         </for>
+
+        <if>
+            <and>
+                <equals arg1="${build.publish}" arg2="true"/>
+                <equals arg1="${build.updatelibs}" arg2="true"/>
+            </and>
+        <then>
+            <svn-add path="${basedir}/libs/swc/" force="true"/>
+            <svn-add path="${basedir}/libs/abc/" force="true"/>
+            <svn-commit path="${basedir}/libs" message="MetaBuild - update current libs"/>
+            <libs-create-tag tag="${MetaBuild.version.tag}" message="MetaBuild - tag maashaack libs [${MetaBuild.version.tag}]"/>
+        </then>
+        </if>
         
     </target>
     
