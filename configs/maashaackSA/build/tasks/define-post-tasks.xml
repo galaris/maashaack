@@ -1,0 +1,11 @@
+<project>
+    
+    <target name="task-define-post-tasks">
+        
+        <!-- Define flex tasks -->
+        <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+        <echo message="FlexTasks defined" />
+        
+    </target>
+    
+</project>

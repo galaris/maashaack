@@ -1,0 +1,34 @@
+<project>
+    
+    <target name="task-verify-dependencies">
+        
+        <fail message="FTP task not found">
+            <condition>
+                <not>
+                    <typefound name="ftp" />
+                </not>
+            </condition>
+        </fail>
+        <echo message="FTP task defined" />
+        
+        <fail message="MAIL task not found">
+            <condition>
+                <not>
+                    <typefound name="mail" />
+                </not>
+            </condition>
+        </fail>
+        <echo message="MAIL task defined" />
+        
+        <!-- verify the Flex SDK -->
+        <fail message="Flex SDK not found at '${FLEX_HOME}'" unless="local.found.flex" />
+        <echo message="Flex SDK found"/>
+        
+        <!-- verify SVN credentials -->
+        <fail message="Your SVN login is missing" unless="credentials.svn.username" />
+        <fail message="Your SVN password is missing" unless="credentials.svn.password" />
+        <echo message="Found SVN credentials" />
+        
+    </target>
+    
+</project>

@@ -1,0 +1,15 @@
+<project>
+    
+    <target name="task-define-pre-tasks">
+        
+        <!-- Define ant-contrib tasks -->
+        <taskdef resource="net/sf/antcontrib/antlib.xml">
+            <classpath >
+                <fileset dir="build/ant/" includes="ant-contrib-1.0b3.jar"/>
+            </classpath>
+        </taskdef>
+        <echo message="ant-contrib tasks defined" />
+        
+    </target>
+    
+</project>
