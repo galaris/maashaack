@@ -54,3 +54,78 @@ The *Map* implementations are define in the *system.data.maps* package with the 
  * system.data.map.TypedMap
  * system.data.map.MultiValueMap
  * system.data.set.MultiSetMap
+
+== The implementations of the Map interface ==
+
+=== The system.data.map.HashMap class ===
+
+This class is an easy representation of the *Map* interface.
+
+In *AS3* the *HashMap* class does not guarantee as to the order of the map. The *AS3* implementation use the [http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/utils/Dictionary.html flash.utils.Dictionnary] class to map the key/value entries.
+
+*example*
+
+{{{
+import system.data.Iterator;
+import system.data.Map ;
+import system.data.maps.HashMap;
+ 
+var map:Map = new HashMap() ;
+ 
+trace("put key1 -> value0 : " + map.put("key1", "value0") ) ;
+trace("put key1 -> value1 : " + map.put("key1", "value1") ) ;            
+trace("put key2 -> value2 : " + map.put("key2", "value2") ) ;
+       
+trace("map : " + map) ;
+trace("map toSource : " + map.toSource()) ;
+ 
+trace("> iterator") ;
+
+var it:Iterator = map.iterator() ;
+
+while( it.hasNext() )
+{
+      var v = it.next() ;
+      var k = it.key() ;
+      trace( "   " + k + " : " + v ) ;
+}
+             
+trace( "remove key1 : " + map.remove("key1")) ;
+
+trace( "size : " + map.size() ) ;      
+             
+map.clear() ;  
+  
+trace( "isEmpty : " + map.isEmpty() ) ;
+}}}
+
+=== The system.data.map.ArrayMap class ===
+
+This class uses two Arrays to map the key/value entries.
+
+This class contains all method of the *Map* interface and two news methods :
+
+|| setKeyAt( index:Number , key ) || This method change the value of a key in the map at the index position, this method don't change the value of the key. ||
+|| setValueAt( index:Number, value ) || This method change the value of a key at the index position specified in argument. ||
+
+*example*
+
+{{{
+import system.data.maps.ArrayMap ;
+
+var map:ArrayMap = new ArrayMap() ;
+
+map.put("key1", "value1");
+map.put("key2", "value2");
+map.put("key3", "value3");
+
+trace(map) ; // {key1:value1,key2:value2,key3:value3}
+
+map.setKeyAt(1, "myKey") ;
+
+trace(map) ; // {key1:value1,myKey:value2,key3:value3}
+
+map.setValueAt(2, "myValue") ;
+
+trace(map) ; // {key1:value1,myKey:value2,key3:myValue}
+}}}
