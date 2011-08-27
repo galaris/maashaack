@@ -3,6 +3,8 @@
 
 = Introduction =
 
+An *abstract data type* (*ADT*) is a model for a certain class of data structures that have similar behavior; or for certain data types of one or more programming languages that have similar semantics.
+
 The collections framework is a unified architecture for representing and manipulating collections, allowing them to be manipulated independently of the details of their representation. It reduces programming effort while increasing performance.
 
 [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_data%2Ftrunk http://maashaack.googlecode.com/svn/gfx/framework/packages/system.data.png]
