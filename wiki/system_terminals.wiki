@@ -1,0 +1,30 @@
+#summary system.terminals package.
+
+= About =
+
+*logd* is a logging library implemented in the spirit of the *core* package,<br>
+small, fast and without any dependencies.
+
+<wiki:comment>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
+</wiki:comment>
+
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `core.*` || FP_10_2<br>avmglue 0.1 || `LOG::P` (optional) || n/a || yes || 0.3.1 ||
+
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Flibraries%2Flogd%2Ftrunk /libraries/logd/trunk] ||
+|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/libraries/logd/trunk logd-read-only` ||
+
+<br>
+<br>
+
+= Introduction =
+
+= Details =
+
+----
+= Documentation =
+
+----
+
+= Usages =
