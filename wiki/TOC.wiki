@@ -61,6 +61,7 @@
       * [core core]
       * [system system]
          * [system_data system.data]
+            * [system_data_maps system.data.maps]
          * [system_remoting system.remoting]
          * [system_terminals system.terminals]
       * [graphics graphics]
