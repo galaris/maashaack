@@ -1,0 +1,24 @@
+#
+# see documentation in build/common.properties
+#
+
+FLEX_HOME_MAC = /OpenSource/Flex/sdks/4.5.1
+FLEX_HOME_WIN = c:/OpenSource/Flex/sdks/4.5.1
+
+SHELL_MAC = /bin/sh
+SHELL_WIN = cmd
+
+SEPARATOR_MAC = /
+SEPARATOR_WIN = \\
+
+local.flashplayerversion = 10.2
+
+credentials.svn.username = test
+credentials.svn.password = test
+
+build.publish = true
+build.documentation = true
+build.showoptions = true
+build.separator = --------------------------------------------------------------------------------
+
+
