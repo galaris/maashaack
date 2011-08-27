@@ -4,6 +4,7 @@ vars = {
        }
 
 deps = {
+         Var("root") + "/libs"                      : Var("repo") + "/libs/trunk",
          Var("root") + "/packages/core"             : Var("repo") + "/packages/core/trunk",
          Var("root") + "/packages/system"           : Var("repo") + "/packages/system/trunk",
          Var("root") + "/packages/system_terminals" : Var("repo") + "/packages/system_terminals/trunk",
