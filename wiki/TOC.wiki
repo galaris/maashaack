@@ -58,6 +58,7 @@
          * [object_definitions_evaluators The evaluators attribute]
  * [Packages Packages]
    * maashaack
+      * [packages_template template]
       * [core core]
       * [system system]
          * [system_data system.data]
