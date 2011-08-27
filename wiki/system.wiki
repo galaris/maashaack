@@ -20,8 +20,6 @@
 
 = Introduction =
 
-= system =
-
 The *system* root package is the starting point of the application framework structure,<br>
 dependencies are allowed but strictly controlled.
 
@@ -60,13 +58,19 @@ Why we impose all those rules ?
  * we want to be able to manage sub-packages as modules<br>creating, adding, removing, etc. a module should not influence other modules (or break things)
  * we want to be able to kick start a project or new sub-package over a week-end<br>when you face too much dependencies spread in every corners you can not do that
 
-*use case:* assemble different functions in a string utility class
+----
+= Documentation =
+
+----
+= Usages =
+
+== Assemble different functions in a string utility class ==
 {{{
-package com.foobar.utils
+package system
 {
-    import core.strings.fastformat; void(fastformat);
-    import core.strings.format; void(format);
-    import core.strings.pad; void(pad);
+    import core.strings.fastformat;
+    import core.strings.format;
+    import core.strings.pad;
     
     public class Strings
     {
@@ -93,4 +97,6 @@ package com.foobar.utils
 
 here we reuse the building blocks of *core* to build *system.Strings*<br>
 you can see, for example, ConditionalCompilation settings that allow to switch the<br>
-same function *format* between 2 implementations
+same function *format* between 2 implementations.
+
+With that we would end up with a *system-light.swc* and *system-standard.swc*.
