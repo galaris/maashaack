@@ -141,6 +141,14 @@ package avmplus
         /*Debian*/       "/etc/debian_version"
         ]
 
+        private function _setDefaultLinuxRelease():void
+        {
+            _linuxDistribID          = name;
+            _linuxDistribRelease     = release;
+            _linuxDistribCodename    = UNKNOWN;
+            _linuxDistribDescription = "";
+        }
+
         /* note:
            maybe add a little more parsing to get a _linuxDistribVersion
            that contains major.minor.bugfix
@@ -177,24 +185,29 @@ package avmplus
                    tested and working on Ubuntu
                    but come back here later and improve the parsing
                 */
-                var lines:Array          = file.split( "\n" );
-                _linuxDistribID          = lines[0].split( "=" )[1];
-                _linuxDistribRelease     = lines[1].split( "=" )[1];
-                _linuxDistribCodename    = lines[2].split( "=" )[1];
-                _linuxDistribDescription = lines[3].split( "=" )[1];
-
-                if( _linuxDistribDescription.indexOf( "\"" ) > -1 )
+                try
                 {
-                    _linuxDistribDescription = _linuxDistribDescription.split( "\"" ).join( "" );
-                }                
+                    var lines:Array          = file.split( "\n" );
+                    _linuxDistribID          = lines[0].split( "=" )[1];
+                    _linuxDistribRelease     = lines[1].split( "=" )[1];
+                    _linuxDistribCodename    = lines[2].split( "=" )[1];
+                    _linuxDistribDescription = lines[3].split( "=" )[1];
+
+                    if( _linuxDistribDescription.indexOf( "\"" ) > -1 )
+                    {
+                        _linuxDistribDescription = _linuxDistribDescription.split( "\"" ).join( "" );
+                    }
+                }
+                catch( e:Error )
+                {
+                    _setDefaultLinuxRelease();
+                }
+
             }
             else
             {
                 //set defaults if filename not found
-                _linuxDistribID          = name;
-                _linuxDistribRelease     = release;
-                _linuxDistribCodename    = UNKNOWN;
-                _linuxDistribDescription = "";
+                _setDefaultLinuxRelease();
             }
             
         }
