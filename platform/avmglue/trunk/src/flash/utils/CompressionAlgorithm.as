@@ -48,10 +48,9 @@ package flash.utils
      * @langversion ActionScript 3.0
      * @playerversion AIR 1.0
      */
-    [API(CONFIG::AIR_1_0)]
     public final class CompressionAlgorithm
     {
-        [API(CONFIG::AIR_1_0)] public static const DEFLATE:String = "deflate";
-        [API(CONFIG::AIR_1_0)] public static const ZLIB:String = "zlib";
+        public static const DEFLATE:String = "deflate";
+        public static const ZLIB:String = "zlib";
     }
 }

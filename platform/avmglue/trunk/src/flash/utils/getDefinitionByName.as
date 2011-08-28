@@ -44,7 +44,6 @@ package flash.utils
     
     public function getDefinitionByName( name:String ):Object
     {
-        CFG::dbg{ trace( "getDefinitionByName( " + name + " )" ); }
         return Domain.currentDomain.getClass( name ) as Object;
     }
 }

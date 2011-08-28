@@ -44,7 +44,6 @@ package flash.utils
     
     public function describeType( value:* ):XML
     {
-        CFG::dbg{ trace( "describeType( " + value + " )" ); }
         return avmplus.describeType( value, FLASH10_FLAGS );
     }
 }

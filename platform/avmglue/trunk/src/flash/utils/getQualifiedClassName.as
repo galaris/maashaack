@@ -44,7 +44,6 @@ package flash.utils
     
     public function getQualifiedClassName( value:* ):String
     {
-        CFG::dbg{ trace( "getQualifiedClassName( " + value + " )" ); }
         return avmplus.getQualifiedClassName( value );
     }
 }
