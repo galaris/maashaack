@@ -109,8 +109,8 @@ package C.errno
         public native static function get ECONNREFUSED():int;
         
         
-        public native static function get errno():int;
-        public native static function set errno( value:int ):void;
+        public native static function GetErrno():int;
+        public native static function SetErrno( value:int ):void;
     }
 
     /** Numerical argument out of domain.
@@ -451,7 +451,12 @@ package C.errno
      */
     public function get errno():int
     {
-        return __errno.errno;
+        return __errno.GetErrno();
+    }
+
+    public function getErrno():int
+    {
+        return __errno.GetErrno();
     }
 
     /**
@@ -462,7 +467,12 @@ package C.errno
      */
     public function set errno( value:int ):void
     {
-        __errno.errno = value;
+        __errno.SetErrno( value );
+    }
+
+    public function setErrno( value:int ):void
+    {
+        __errno.SetErrno( value );
     }
     
 }
