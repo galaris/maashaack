@@ -139,7 +139,16 @@ package avmplus
          */
         public static function get profile():Profile
         {
-            return _profile;
+            if( _profile ) { return _profile; }
+
+            //lazy init
+            var defaultProfile:Class = getClassByName( "avmplus.profiles.RedTamarinProfile" );
+
+            if( defaultProfile )
+            {
+                _profile = new defaultProfile();
+                return _profile;
+            }
         }
 
         /**
@@ -311,7 +320,7 @@ package avmplus
          */
         public static function getRedtamarinVersion():String
         {
-            return "0.3.1";
+            return "0.3.2";
         }
 
         /**
