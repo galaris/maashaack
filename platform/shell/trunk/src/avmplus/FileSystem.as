@@ -64,9 +64,11 @@ package avmplus
     public class FileSystem
     {
         private static var _win32_separators:Array  = [ "\\", "/" ];
+        private static var _win32_pathsep:String    = ";";
         private static var _win32_lineEnding:String = "\r\n";
         
         private static var _posix_separators:Array  = [ "/" ];
+        private static var _posix_pathsep:String    = ":";
         private static var _posix_lineEnding:String = "\n";
 
         private static var _commonDoubleExtensions:Array = [ "gz", "z", "bz2" ];
@@ -339,6 +341,24 @@ package avmplus
             
             //for POSIX
             return _posix_separators;
+        }
+
+        /**
+         * The path separator used by the operating system.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public static function get pathSeparator():String
+        {
+            //for Windows
+            if( OperatingSystem.name == "Win32" )
+            {
+                return _win32_pathsep;
+            }
+            
+            //for POSIX
+            return _posix_pathsep;
         }
         
         /**
