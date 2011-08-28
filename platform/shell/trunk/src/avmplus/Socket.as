@@ -159,9 +159,9 @@ package avmplus
         private native function _getBuffer():ByteArray;
         private native function _setNoSigPipe():void;
         private native function _isValid():Boolean;
-        private native function _isReadable():int;
-        private native function _isWritable():int;
-        //private native function _isExceptional():int; //not used, not working ?
+        private native function _isReadable( timeout:int = 0 ):int;
+        private native function _isWritable( timeout:int = 0 ):int;
+        //private native function _isExceptional( timeout:int = 0 ):int; //not used, not working ?
         private native function _customSocket( family:int, socktype:int, protocol:int ):void;
         private native function _connect( host:String, port:String ):Boolean;
         private native function _close():Boolean;
@@ -295,7 +295,15 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public function get readable():Boolean { return _isReadable() > 0; }
+        public function get readable():Boolean { return _isReadable( readableTimeout ) > 0; }
+
+        /**
+         * Defines the timeout (in seconds) for the readable test.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public var readableTimeout:uint = 0;
 
         /**
          * Indicates if the socket is ready for writing.
@@ -303,10 +311,20 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public function get writable():Boolean { return _isWritable() > 0; }
+        public function get writable():Boolean { return _isWritable( writableTimeout ) > 0; }
+
+        /**
+         * Defines the timeout (in seconds) for the writable test.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public var writableTimeout:uint = 0;
 
         //Indicates if the socket has an exceptional condition pending.
         //public function get exceptional():Boolean { return _isExceptional() > 0; }
+
+        //public var exceptionalTimeout:uint = 0;
 
         /**
          * Indicates if the socket is connected.
@@ -362,6 +380,15 @@ package avmplus
         }
 
         /**
+         * Indicates if the socket is blocking or non-blocking.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public native function get blocking():Boolean;
+        public native function set blocking( value:Boolean ):void;
+
+        /**
          * Indicates if the socket address can be reused.
          * 
          * @productversion redtamarin 0.3
@@ -379,6 +406,23 @@ package avmplus
         public native function get broadcast():Boolean;
         public native function set broadcast( value:Boolean ):void;
 
+        /**
+         * Defines the timeout (in seconds) for the receive functions.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public native function get receiveTimeout():int;
+        public native function set receiveTimeout( value:int ):void;
+
+        /**
+         * Defines the timeout (in seconds) for the send functions.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public native function get sendTimeout():int;
+        public native function set sendTimeout( value:int ):void;
 
         //infos
 
