@@ -95,6 +95,15 @@ package C.errno
         public native static function get ENOSYS():int;
         public native static function get ENOTEMPTY():int;
 
+        public native static function get EWOULDBLOCK():int;
+        public native static function get EINPROGRESS():int;
+        public native static function get EALREADY():int;
+        public native static function get EDESTADDRREQ():int;
+        public native static function get EMSGSIZE():int;
+        public native static function get EPROTOTYPE():int;
+        public native static function get ENOPROTOOPT():int;
+        public native static function get EADDRINUSE():int;
+        public native static function get EADDRNOTAVAIL():int;
         public native static function get ENETDOWN():int;
         public native static function get ENETUNREACH():int;
         public native static function get ENETRESET():int;
@@ -107,6 +116,9 @@ package C.errno
         public native static function get ETOOMANYREFS():int;
         public native static function get ETIMEDOUT():int;
         public native static function get ECONNREFUSED():int;
+        public native static function get ELOOP():int;
+        public native static function get EHOSTDOWN():int;
+        public native static function get EHOSTUNREACH():int;
         
         
         public native static function GetErrno():int;
@@ -343,6 +355,61 @@ package C.errno
     public const ENOTEMPTY:int    = __errno.ENOTEMPTY;
 
 
+
+    /** Operation would block.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EWOULDBLOCK:int = __errno.EWOULDBLOCK;
+
+    /** Operation now in progress.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EINPROGRESS:int = __errno.EINPROGRESS;
+
+    /** Operation already in progress.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EALREADY:int = __errno.EALREADY;
+
+    /** Destination address required.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EDESTADDRREQ:int = __errno.EDESTADDRREQ;
+
+    /** Message too long.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EMSGSIZE:int = __errno.EMSGSIZE;
+
+    /** Protocol wrong type for socket.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EPROTOTYPE:int = __errno.EPROTOTYPE;
+
+    /** Bad protocol option.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const ENOPROTOOPT:int = __errno.ENOPROTOOPT;
+
+    /** Address already in use.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EADDRINUSE:int = __errno.EADDRINUSE;
+
+    /** Can't assign requested address.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EADDRNOTAVAIL:int = __errno.EADDRNOTAVAIL;
+
     /** Network is down.
      * @productversion redtamarin 0.3
      * @since 0.3.0
@@ -415,6 +482,25 @@ package C.errno
      */
     public const ECONNREFUSED:int = __errno.ECONNREFUSED;
 
+    /** Too many levels of symbolic links.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const ELOOP:int = __errno.ELOOP;
+
+    /** Host is down.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EHOSTDOWN:int = __errno.EHOSTDOWN;
+
+    /** No Route to Host.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const EHOSTUNREACH:int = __errno.EHOSTUNREACH;
+
+
 
     /**
      * Error return value.
@@ -454,6 +540,12 @@ package C.errno
         return __errno.GetErrno();
     }
 
+    /**
+     * Function to get the Error value.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
     public function getErrno():int
     {
         return __errno.GetErrno();
@@ -470,6 +562,12 @@ package C.errno
         __errno.SetErrno( value );
     }
 
+    /**
+     * Function to set the Error value.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
     public function setErrno( value:int ):void
     {
         __errno.SetErrno( value );
