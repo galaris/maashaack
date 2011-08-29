@@ -183,17 +183,101 @@ package avmplus
             _listening = false;
             _child     = false;
         }
-
+        
+        private function _winstrerror( e:int ):String
+        {
+            /* note:
+               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
+               
+               --
+               EAGAIN
+               Many Unix programs, especially those with System V roots,
+               check for the EAGAIN value in the global errno variable when a non-blocking call fails.
+               This is the same thing as BSD’s EWOULDBLOCK and Winsock’s WSAEWOULDBLOCK errors.
+               You’ll have to check your system’s header files, but all Unixes I’ve checked on this matter
+               #define EAGAIN and EWOULDBLOCK to the same value, so you may want to get into the habit of
+               using EWOULDBLOCK instead of EAGAIN under Unix, to make transitions to and from Winsock easier.
+               --
+               
+               Here we decided to do the opposite,
+               under WIN32 when we catch EWOULDBLOCK, we throw an EAGAIN instead
+            */
+            if( e == EWOULDBLOCK ) { e = EAGAIN;}
+            
+            switch( e )
+            {
+                case ENETDOWN: return "Network is down";
+                case ENETUNREACH: return "Network is unreachable";
+                case EWOULDBLOCK: return "Operation would block";
+                case EINPROGRESS: return "Operation now in progress";
+                case EALREADY: return "Operation already in progress";
+                
+                case ENETRESET: return "Network dropped connection on reset";
+                case ECONNABORTED: return "Software caused connection abort";
+                case ECONNRESET: return "Connection reset by peer";
+                case ENOBUFS: return "No buffer space available";
+                case EISCONN: return "Socket is already connected";
+                case ENOTCONN: return "Socket is not connected";
+                case ESHUTDOWN: return "Can't send after socket shutdown";
+                case ETOOMANYREFS: return " Too many references: can't splice";
+                case ETIMEDOUT: return "Operation timed out";
+                case ECONNREFUSED: return "Connection refused";
+                
+                default:
+                return strerror(e);;
+            }
+        }
+        
         //was: throw new Error( strerror( lastError ), lastError );
         private function _throwSocketError( e:int ):void
         {
-            var cerr:Error = new Error( strerror(e), e );
+            /* note:
+               In some special cases the socket could try to throw an error
+               (while in a loop for recv()/send() etc.)
+               when in fact there is no errors
+               eg. Socket.lastError == 0 meaning "No error"
+               
+               if that happen we do nothing.
+            */
+            if( e == 0 ) { return; }
+            
+            var message:String;
+            
+            /* note:
+               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
+               
+               --
+               errno vs. WSAGetLastError()
+               WSAGetLastError() is essentially the same thing as Unix’s errno global variable.
+               The error constants and their values are different; there’s a table in the Winsock spec
+               where it lists all the error constants, one column of which shows the equivalent BSD error
+               constant for a given Winsock error constant.
+               Usually the difference is just the addition of "WSA" to the beginning of the constant name
+               for the Winsock versions. (E.g. WSAEINTR is the Winsock version of BSD’s EINTR error constant.)
+               
+               Another thing to keep in mind is that, although the perror() call exists in most Windows compilers' run-time libraries,
+               it doesn’t work for Winsock calls. (This is a consequence of Winsock not returning its error codes in the errno variable.)
+               --
+               
+               here because we use strerror() to return the error string, we make a special branching
+               when we are under Windows as strerror() is also dependant on errno.
+            */
+            if( OperatingSystem.name == "Win32" )
+            {
+                message = _winstrerror(e);
+            }
+            else
+            {
+                message = strerror(e);
+            }
+            
+            var cerr:Error = new Error( message, e );
                 cerr.name  = "SocketError";
 
             this.record( cerr.toString() + " (errno="+e+")." );
             throw cerr;
         }
-
+        
         private function _throwReceiveBufferError():void
         {
             var re:RangeError = new RangeError( "Buffer is too small, need to be minimum " + _MIN_BUFFER + " bytes." );
@@ -206,6 +290,40 @@ package avmplus
             var re:RangeError = new RangeError( "The Operating System only allows " + SOMAXCONN + " maximum listen() backlog queue length for each socket." );
             this.record( re.toString() );
             throw re;
+        }
+
+        private function _recvError():void
+        {
+            var e:int = lastError;
+
+            /* note:
+               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
+               
+               --
+               Detecting a Dropped Connection
+               Under BSD Unixes, if the remote peer closes its connection and your
+               program is blocking on recv(), you will get a 0 back from recv().
+               
+               Winsock behaves the same way, except that it can also return -1,
+               with WSAGetLastError() returning WSAECONNRESET, WSAECONNABORTED or WSAESHUTDOWN,
+               to signal the detectable flavors of abnormal disconnections.
+               --
+            */
+            if( OperatingSystem.name == "Win32" )
+            {
+                if( (e == ECONNRESET) || (e == ECONNABORTED) || (e == ESHUTDOWN) )
+                {
+                    _remoteClose();
+                }
+                else
+                {
+                    _throwSocketError( e );
+                }
+            }
+            else
+            {
+                _throwSocketError( e );
+            }
         }
 
         private function _onConnect():void
@@ -625,7 +743,7 @@ package avmplus
             
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _throwSocketError( lastError ); }
+            if( result == -1 ) { _recvError(); }
 
             var _buffer:ByteArray = _getBuffer();
                 _buffer.position = 0;
@@ -710,7 +828,7 @@ package avmplus
             
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _throwSocketError( lastError ); }
+            if( result == -1 ) { _recvError(); }
             
             data = _getBuffer();
             data.position = 0;
@@ -767,7 +885,7 @@ package avmplus
 
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _throwSocketError( lastError ); }
+            if( result == -1 ) { _recvError(); }
             
             var _buffer:ByteArray = _getBuffer();
                 _buffer.position = 0;
@@ -792,7 +910,7 @@ package avmplus
 
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _throwSocketError( lastError ); }
+            if( result == -1 ) { _recvError(); }
             
             data = _getBuffer();
             data.position = 0;
