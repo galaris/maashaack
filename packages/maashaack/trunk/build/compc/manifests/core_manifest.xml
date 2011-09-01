@@ -125,6 +125,7 @@
     
     <!-- core.objects -->
     
+    <component id="core.objects:fuse"       class="core.objects.fuse"       />
     <component id="core.objects:getMembers" class="core.objects.getMembers" />
     <component id="core.objects:merge"      class="core.objects.merge"      />
     
