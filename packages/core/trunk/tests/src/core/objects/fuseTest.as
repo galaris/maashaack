@@ -32,23 +32,27 @@
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
 */
-
-package core.objects
+package core.objects 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
+    import core.dump;
     
-    public class AllTests
+    import library.ASTUce.framework.TestCase;
+    
+    public class fuseTest extends TestCase 
     {
-        public static function suite():Test
+        public function fuseTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.objects package tests");
+            super(name);
+        }
+        
+        public function testFuse():void
+        {
+            var ar1:Array = [1,2,3,4] ;
+            var ar2:Array = [5,6,7,8] ;
             
-            suite.addTestSuite( fuseTest ) ;
-            suite.addTestSuite( getMembersTest ) ;
-            suite.addTestSuite( mergeTest      ) ;
+            fuse( ar1 , 2 , ar2 , 2 , 2 ) ;
             
-            return suite;
+            assertEquals( "[5,6,3,4]" , dump(ar2) ) ;
         }
     }
 }
