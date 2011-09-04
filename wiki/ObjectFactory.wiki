@@ -141,8 +141,8 @@ factory.run( objects ) ;
 
 In the previous example the generic object "*objects*" is a basic *Array* who defines the setting of the *IoC* factory with tree *object definitions* :
 
- * *my_format* : this definition defines a specific setting to create *flash.text.TextFormat* instances with the factory. This definition use a *constructor injection* to initialize the new object.
- * *my_field* : this definition defines a specific setting to create *flash.text.TextField* instances. This definition use a *setter injection* to initialize the new object.
+ * *my_format* : this definition defines a specific setting to create *flash.text.!TextFormat* instances with the factory. This definition use a *constructor injection* to initialize the new object.
+ * *my_field* : this definition defines a specific setting to create *flash.text.!TextField* instances. This definition use a *setter injection* to initialize the new object.
  * *root* : this definition creates a singleton reference in the application who target the main timeline reference defines in the IoC factory configuration. This definition use *setter injection* to attach a reference defines with the object definition "*my_field*".
 
 
@@ -156,7 +156,7 @@ We initialize the *factory.config.root* property of the factory to allow the *#r
 
 The *IoC* factory has several types of strategies to create an object in the application with an object definition. We will discuss in the next chapter on object definitions.
 
-The above example will display very fast a *TextField* on the stage of an animation. 
+The above example will display very fast a *!TextField* on the stage of an animation. 
 
 This example illustrates the use of a "_programming layers_" which can isolate each object of an application and work quietly on each of them regardless of their dependencies with each other.
 
@@ -165,9 +165,9 @@ The lightweight container and the framework are responsible for creating the obj
 *attributes inspection*
 
 || *Members* || *Description* ||
-|| config:ObjectConfig || Defines the optional configuration of the object factory. ||
+|| config:!ObjectConfig || Defines the optional configuration of the object factory. ||
 || objects:Array	|| Contains all generic objects to defines the object definitions in the factory with the run() or create() method.||
-|| singletons:HashMap || The Map of all singletons references registered in the IoC factory.||
+|| singletons:!HashMap || The Map of all singletons references registered in the IoC factory.||
 
 *methods inspection*
 
@@ -205,7 +205,7 @@ When all object definitions are defines in the factory, to flush it we must invo
 
 The factory is a task and implements the *system.process.Action* interface. 
 
-You can registered the two signals "*startIt*" and "*finishIt*" who indicate the begin and the end of the run process (only if the factory is unlocked). You can use a complex task with a sequence (*system.process.Chain*) or batch (*system.process.BatchTask*) to combine factory with other tasks and other processes in your application.
+You can registered the two signals "*startIt*" and "*finishIt*" who indicate the begin and the end of the run process (only if the factory is unlocked). You can use a complex task with a sequence (*system.process.Chain*) or batch (*system.process.!BatchTask*) to combine factory with other tasks and other processes in your application.
 
 *example*
 
