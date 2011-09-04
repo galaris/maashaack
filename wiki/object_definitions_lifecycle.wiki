@@ -1,7 +1,7 @@
 #summary lifecycle attributes
 #labels Documentation,Framework
 
-= LifeCycle of the objects =
+= !LifeCycle of the objects =
 
 || *identify* || Can identify some Identifiable objects by assigning them automatically the id value of the object definition. ||
 || *lock* || Active the lock process during the initialization of an object created by the factory. The object implements the system.process.Lockable interface. ||
