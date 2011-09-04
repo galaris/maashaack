@@ -60,15 +60,15 @@ trace( container.numObjectDefinitions ) ; // 1
 var field:TextField = (container as ObjectFactory).getObject("my_field") as TextField ;
 }}}
 
-In this example we initialize an object definition with a single generic object that will generate with the factory a specific instance of the TextField class. This simple technique can be injected at any time of the new definitions of objects by hand in the factory with the method *addObjectDefinition()*.
+In this example we initialize an object definition with a single generic object that will generate with the factory a specific instance of the !TextField class. This simple technique can be injected at any time of the new definitions of objects by hand in the factory with the method *addObjectDefinition()*.
 
-== 2 - The ObjectFactory class ==
+== 2 - The !ObjectFactory class ==
 
-The *ObjectFactory* class is the main class of the dependency injection engine defines in the *system.ioc* package. This class defines in the same object a container and a factory used in the application to create all objects and dependencies between them.
+The *!ObjectFactory* class is the main class of the dependency injection engine defines in the *system.ioc* package. This class defines in the same object a container and a factory used in the application to create all objects and dependencies between them.
 
 This class has a rich heritage, with several levels of inheritance, which provides several important features :
 
- * ObjectFactory - ObjectDefinitionContainer - CoreAction - Task
+ * !ObjectFactory - !ObjectDefinitionContainer - !CoreAction - !Task
 
 This class implements the interfaces :
  * *system.Cloneable* : use the classical clone() method to generate a shallow copy of the factory.
