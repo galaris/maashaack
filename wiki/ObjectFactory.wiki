@@ -68,7 +68,7 @@ The *!ObjectFactory* class is the main class of the dependency injection engine 
 
 This class has a rich heritage, with several levels of inheritance, which provides several important features :
 
- * !ObjectFactory - !ObjectDefinitionContainer - !CoreAction - !Task
+ * !ObjectFactory - !ObjectDefinitionContainer - !CoreAction - Task
 
 This class implements the interfaces :
  * *system.Cloneable* : use the classical clone() method to generate a shallow copy of the factory.
@@ -274,7 +274,7 @@ factory.run( objects ) ;
 
 === 4 - The system.ioc.factory singleton ===
 
-In the *system.ioc* package you can find the factory constant, this singleton reference defines an unique, simple and fast instance of the *ObjectFactory* class to use in your applications.
+In the *system.ioc* package you can find the factory constant, this singleton reference defines an unique, simple and fast instance of the *!ObjectFactory* class to use in your applications.
 
 *example*
 
