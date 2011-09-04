@@ -1,0 +1,44 @@
+#summary lifecycle attributes
+#labels Documentation,Framework
+
+= LifeCycle of the objects =
+
+|| *identify* || Can identify some Identifiable objects by assigning them automatically the id value of the object definition. ||
+|| *lock* || Active the lock process during the initialization of an object created by the factory. The object implements the system.process.Lockable interface. ||
+|| *init* || Indicates the name of the method to call to finish to initialize the object. ||
+|| *destroy* || Indicates the name of the method to call to destroy a singleton object register in the IoC container. ||
+|| *dependsOn* || A list (Array) of objects identifiers registered in the factory who must exist before the current object is generated and initialized. ||
+|| *generates* || A list (Array) of objects identifiers registered in the factory who must exist after the current object is generated and initialized. ||
+|| *listeners* || A list (Array) of event listeners to register with the current dispatcher object (the object must implement the flash.events.IEventDispatcher interface) ||
+|| *receivers* || A list (Array) of signals to connect with the object (if the object implements the system.signals.Receiver interface) or one or more of this methods (slots).||
+
+== 1 - The "init" attribute ==
+
+An *object definition* provides support for a generic initialization method to be specified. Use the '*init*' attribute, for example, the following definition:
+
+{{{
+import examples.core.User ;
+import system.ioc.factory ;
+
+var objects:Array = 
+[{
+    id   : "user" ,
+    type : "examples.core.User" ,
+    init : "initialize"
+}] ;
+
+factory.run( objects ) ;
+
+var user:User = factory.getObject( "user" ) ;
+}}}
+
+...with pure code it is exactly the same as...
+
+{{{
+import examples.core.User ;
+
+var user:User = new User() ;
+user.initialize() ;
+}}}
+
+In the example, the object definition targets the *initialize* method defines in the *examples.core.User* class and this method will be invoked at the end of the initialization of the new object when generated via the *IoC* container. You can use a custom name to defines and target the 'init' method, this method is defined without arguments and returns nothing (*void*).
