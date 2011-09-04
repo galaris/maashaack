@@ -5,7 +5,7 @@
 
 The *IoC* container is initialized with object definitions that are "operating instructions" for creating objects in an application. They also define dependency relationships that can have objects and classes with each other.
 
-The *object definitions* are represented by objects that implement the interface *system.ioc.IObjectDefinition*, this interface is implemented by the class *ObjectDefinition*.
+The *object definitions* are represented by objects that implement the interface *system.ioc.IObjectDefinition*, this interface is implemented by the class *!ObjectDefinition*.
 
 The *IObjectDefinition* interface has the following characteristics :
  * A unique identifier for each object definition (required).
