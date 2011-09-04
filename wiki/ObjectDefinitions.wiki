@@ -22,7 +22,7 @@ The concepts listed above correspond to a set of elements in simple *generic obj
 ObjectDefinition.create( init:Object ):ObjectDefinition
 }}}
 
-The *system.ioc.ObjectDefinition* class contains a static method "create" who generate a new instance very simply by switching to a *generic object* parameter initialization compatible with the attributes to be defined next in its chapter. 
+The *system.ioc.!ObjectDefinition* class contains a static method "create" who generate a new instance very simply by switching to a *generic object* parameter initialization compatible with the attributes to be defined next in its chapter. 
 
 It will always be easier to use the static *create()* method to initialize by hand all *ObjectDefinition* instances in your applications.
 
