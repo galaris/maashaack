@@ -62,6 +62,7 @@ deps = {
          Var("root") + "/tests/src/system/formatters"   : Var("repo") + "/packages/system_formatters/trunk/tests/src/system/formatters",
          Var("root") + "/tests/src/system/ioc"          : Var("repo") + "/packages/system_ioc/trunk/tests/src/system/ioc",
          Var("root") + "/tests/src/system/logging"      : Var("repo") + "/packages/system_logging/trunk/tests/src/system/logging",
+         Var("root") + "/tests/src/system/logic"        : Var("repo") + "/packages/system_logging/trunk/tests/src/system/logic",
          Var("root") + "/tests/src/system/models"       : Var("repo") + "/packages/system_models/trunk/tests/src/system/models",
          Var("root") + "/tests/src/system/network"      : Var("repo") + "/packages/system_network/trunk/tests/src/system/network",
          Var("root") + "/tests/src/system/numeric"      : Var("repo") + "/packages/system_numeric/trunk/tests/src/system/numeric",
