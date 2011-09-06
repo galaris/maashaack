@@ -38,10 +38,7 @@ package system.process
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
     
-    import system.Environment;
-    import system.hosts.HostID;
     import system.process.caches.AllTests;
-    import system.process.logic.AllTests;
     
     public class AllTests
     {
@@ -51,38 +48,33 @@ package system.process
             
             suite.addTest( system.process.caches.AllTests.suite() );
             
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( ActionEntryTest ) ;
-                suite.addTestSuite( ActionEventDispatcherTest ) ;
-                suite.addTestSuite( ActionLoaderTest ) ;
-                suite.addTestSuite( ActionTest ) ;
-                suite.addTestSuite( ActionURLLoaderTest ) ;
-                suite.addTestSuite( BatchTest ) ;
-                suite.addTestSuite( BatchTaskTest ) ;
-                suite.addTestSuite( BindTaskTest ) ;
-                suite.addTestSuite( CacheTest ) ;
-                suite.addTestSuite( ChainTest ) ;
-                suite.addTestSuite( CoreActionTest ) ;
-                suite.addTestSuite( CoreActionLoaderTest ) ;
-                suite.addTestSuite( CountDownTest ) ;
-                suite.addTestSuite( DelayedTaskTest ) ;
-                suite.addTestSuite( InitializerTest ) ;
-                suite.addTestSuite( LockableTest  );
-                suite.addTestSuite( PauseTest ) ;
-                suite.addTestSuite( PriorityTest ) ;
-                suite.addTestSuite( ResetableTest ) ;
-                suite.addTestSuite( ResumableTest ) ;
-                suite.addTestSuite( RunnableTest  ) ;
-                suite.addTestSuite( StartableTest ) ;
-                suite.addTestSuite( StoppableTest ) ;
-                suite.addTestSuite( TaskTest ) ;
-                suite.addTestSuite( TaskGroupTest ) ;
-                suite.addTestSuite( TaskPhaseTest ) ;
-                suite.addTestSuite( TimeoutPolicyTest ) ;
-                
-                suite.addTest( system.process.logic.AllTests.suite() );
-            }
+            suite.addTestSuite( ActionEntryTest ) ;
+            suite.addTestSuite( ActionEventDispatcherTest ) ;
+            suite.addTestSuite( ActionLoaderTest ) ;
+            suite.addTestSuite( ActionTest ) ;
+            suite.addTestSuite( ActionURLLoaderTest ) ;
+            suite.addTestSuite( BatchTest ) ;
+            suite.addTestSuite( BatchTaskTest ) ;
+            suite.addTestSuite( BindTaskTest ) ;
+            suite.addTestSuite( CacheTest ) ;
+            suite.addTestSuite( ChainTest ) ;
+            suite.addTestSuite( CoreActionTest ) ;
+            suite.addTestSuite( CoreActionLoaderTest ) ;
+            suite.addTestSuite( CountDownTest ) ;
+            suite.addTestSuite( DelayedTaskTest ) ;
+            suite.addTestSuite( InitializerTest ) ;
+            suite.addTestSuite( LockableTest  );
+            suite.addTestSuite( PauseTest ) ;
+            suite.addTestSuite( PriorityTest ) ;
+            suite.addTestSuite( ResetableTest ) ;
+            suite.addTestSuite( ResumableTest ) ;
+            suite.addTestSuite( RunnableTest  ) ;
+            suite.addTestSuite( StartableTest ) ;
+            suite.addTestSuite( StoppableTest ) ;
+            suite.addTestSuite( TaskTest ) ;
+            suite.addTestSuite( TaskGroupTest ) ;
+            suite.addTestSuite( TaskPhaseTest ) ;
+            suite.addTestSuite( TimeoutPolicyTest ) ;
             
             return suite;
         }
