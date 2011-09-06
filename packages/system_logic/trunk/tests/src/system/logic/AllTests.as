@@ -51,9 +51,9 @@ package system.logic
             suite.addTestSuite( ElseIfGreaterThanTest ) ;
             suite.addTestSuite( ElseIfLessOrEqualsThanTest ) ;
             suite.addTestSuite( ElseIfLessThanTest ) ;
-            //suite.addTestSuite( ElseIfNullTest ) ;
-            //suite.addTestSuite( ElseIfTrueTest ) ;
-            //suite.addTestSuite( ElseIfZeroTest ) ;
+            suite.addTestSuite( ElseIfNullTest ) ;
+            suite.addTestSuite( ElseIfTrueTest ) ;
+            suite.addTestSuite( ElseIfZeroTest ) ;
             
             return suite;
         }
