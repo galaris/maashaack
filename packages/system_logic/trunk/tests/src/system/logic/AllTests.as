@@ -45,6 +45,7 @@ package system.logic
             
             suite.addTestSuite( ElseIfTest ) ;
             suite.addTestSuite( ElseIfEmptyStringTest ) ;
+            suite.addTestSuite( ElseIfEqualsTest ) ;
             
             return suite;
         }
