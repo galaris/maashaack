@@ -48,6 +48,7 @@ package system
     import system.formatters.AllTests;
     import system.ioc.AllTests;
     import system.logging.AllTests;
+    import system.logic.AllTests;
     import system.models.AllTests;
     import system.network.AllTests;
     import system.numeric.AllTests;
@@ -88,17 +89,9 @@ package system
             suite.addTestSuite( SerializationTest) ;
             suite.addTestSuite( URITest );
             
-            /* special cases */
-            
-//            TAMARIN::exclude
-//            {
-                //data
-                suite.addTest( system.data.AllTests.suite() );
-//            }
-            
-            
             /* packages */
             
+            suite.addTest( system.data.AllTests.suite() );
             suite.addTest( system.reflection.AllTests.suite() );
             suite.addTest( system.rules.AllTests.suite() );
             suite.addTest( system.broadcasters.AllTests.suite() );
@@ -108,6 +101,7 @@ package system
             suite.addTest( system.events.AllTests.suite() );
             suite.addTest( system.formatters.AllTests.suite() );
             suite.addTest( system.logging.AllTests.suite() );
+            suite.addTest( system.logic.AllTests.suite() );
             suite.addTest( system.models.AllTests.suite() );
             suite.addTest( system.numeric.AllTests.suite() );
             suite.addTest( system.cli.AllTests.suite());
