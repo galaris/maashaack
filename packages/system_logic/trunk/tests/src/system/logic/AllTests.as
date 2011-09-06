@@ -44,6 +44,7 @@ package system.logic
             var suite:TestSuite = new TestSuite("system logic tests");
             
             suite.addTestSuite( ElseIfTest ) ;
+            suite.addTestSuite( ElseIfEmptyStringTest ) ;
             
             return suite;
         }
