@@ -47,10 +47,10 @@ package system.logic
             suite.addTestSuite( ElseIfEmptyStringTest ) ;
             suite.addTestSuite( ElseIfEqualsTest ) ;
             suite.addTestSuite( ElseIfFalseTest ) ;
-            //suite.addTestSuite( ElseIfGreaterOrEqualsThanTest ) ;
-            //suite.addTestSuite( ElseIfGreaterThanTest ) ;
-            //suite.addTestSuite( ElseIfLessOrEqualsThanTest ) ;
-            //suite.addTestSuite( ElseIfLessThanTest ) ;
+            suite.addTestSuite( ElseIfGreaterOrEqualsThanTest ) ;
+            suite.addTestSuite( ElseIfGreaterThanTest ) ;
+            suite.addTestSuite( ElseIfLessOrEqualsThanTest ) ;
+            suite.addTestSuite( ElseIfLessThanTest ) ;
             //suite.addTestSuite( ElseIfNullTest ) ;
             //suite.addTestSuite( ElseIfTrueTest ) ;
             //suite.addTestSuite( ElseIfZeroTest ) ;
