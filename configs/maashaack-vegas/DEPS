@@ -14,6 +14,9 @@ deps = {
          Var("root") + "/libraries/eden"          : "https://edenrr.googlecode.com/svn/as3/trunk",
          
          Var("root") + "/src/core"                : Var("repo") + "/packages/core/trunk/src/core",
+         
+         Var("root") + "/library/eden"            : "http://edenrr.googlecode.com/svn/as3/trunk/src/library/eden",
+         
          Var("root") + "/src/system"              : Var("repo") + "/packages/system/trunk/src/system",
          Var("root") + "/src/system/broadcasters" : Var("repo") + "/packages/system_broadcasters/trunk/src/system/broadcasters",
          Var("root") + "/src/system/cli"          : Var("repo") + "/packages/system_cli/trunk/src/system/cli",
@@ -39,6 +42,7 @@ deps = {
          Var("root") + "/src/system/signals"      : Var("repo") + "/packages/system_signals/trunk/src/system/signals",
          Var("root") + "/src/system/terminals"    : Var("repo") + "/packages/system_terminals/trunk/src/system/terminals",
          Var("root") + "/src/system/text"         : Var("repo") + "/packages/system_text/trunk/src/system/text",
+         
          Var("root") + "/src/graphics"            : Var("repo") + "/packages/graphics/trunk/src/graphics",
          
          Var("root") + "/pixelbender"             : Var("repo") + "/packages/graphics/trunk/pixelbender",
