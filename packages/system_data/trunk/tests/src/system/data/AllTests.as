@@ -78,6 +78,7 @@ package system.data
             suite.addTestSuite(StackTest) ;
             suite.addTestSuite(TypeableTest) ;
             suite.addTestSuite(ValidatorTest) ;
+            suite.addTestSuite(ValueObjectTest) ;
             suite.addTestSuite(WeakReferenceTest) ;
             
             // arrays
