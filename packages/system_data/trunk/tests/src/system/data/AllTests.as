@@ -37,7 +37,7 @@ package system.data
 {
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
-    
+
     import system.data.arrays.AllTests;
     import system.data.bags.AllTests;
     import system.data.collections.AllTests;
@@ -75,6 +75,7 @@ package system.data
             suite.addTestSuite(ProxyReferenceTest) ;
             suite.addTestSuite(QueueTest) ;
             suite.addTestSuite(SetTest) ;
+            suite.addTestSuite(SimpleValueObjectTest) ;
             suite.addTestSuite(StackTest) ;
             suite.addTestSuite(TypeableTest) ;
             suite.addTestSuite(ValidatorTest) ;
