@@ -64,28 +64,29 @@
     
     <!-- system.data -->
     
-    <component id="system.data:Bag"             class="system.data.Bag" />
-    <component id="system.data:Boundable"       class="system.data.Boundable" />
-    <component id="system.data:Collection"      class="system.data.Collection" />
-    <component id="system.data:Data"            class="system.data.Data" />
-    <component id="system.data:Entry"           class="system.data.Entry" />
-    <component id="system.data:Identifiable"    class="system.data.Identifiable" />
-    <component id="system.data:Iterable"        class="system.data.Iterable" />
-    <component id="system.data:Iterator"        class="system.data.Iterator" />
-    <component id="system.data:List"            class="system.data.List" />
-    <component id="system.data:ListIterable"    class="system.data.ListIterable" />
-    <component id="system.data:ListIterator"    class="system.data.ListIterator" />
-    <component id="system.data:Map"             class="system.data.Map" />
-    <component id="system.data:MultiMap"        class="system.data.MultiMap" />
-    <component id="system.data:OrderedIterator" class="system.data.OrderedIterator" />
-    <component id="system.data:ProxyReference"  class="system.data.ProxyReference" />
-    <component id="system.data:Queue"           class="system.data.Queue" />
-    <component id="system.data:Set"             class="system.data.Set" />
-    <component id="system.data:Stack"           class="system.data.Stack" />
-    <component id="system.data:Typeable"        class="system.data.Typeable" />
-    <component id="system.data:Validator"       class="system.data.Validator" />
-    <component id="system.data:ValueObject"     class="system.data.ValueObject" />
-    <component id="system.data:WeakReference"   class="system.data.WeakReference" />
+    <component id="system.data:Bag"               class="system.data.Bag" />
+    <component id="system.data:Boundable"         class="system.data.Boundable" />
+    <component id="system.data:Collection"        class="system.data.Collection" />
+    <component id="system.data:Data"              class="system.data.Data" />
+    <component id="system.data:Entry"             class="system.data.Entry" />
+    <component id="system.data:Identifiable"      class="system.data.Identifiable" />
+    <component id="system.data:Iterable"          class="system.data.Iterable" />
+    <component id="system.data:Iterator"          class="system.data.Iterator" />
+    <component id="system.data:List"              class="system.data.List" />
+    <component id="system.data:ListIterable"      class="system.data.ListIterable" />
+    <component id="system.data:ListIterator"      class="system.data.ListIterator" />
+    <component id="system.data:Map"               class="system.data.Map" />
+    <component id="system.data:MultiMap"          class="system.data.MultiMap" />
+    <component id="system.data:OrderedIterator"   class="system.data.OrderedIterator" />
+    <component id="system.data:ProxyReference"    class="system.data.ProxyReference" />
+    <component id="system.data:Queue"             class="system.data.Queue" />
+    <component id="system.data:Set"               class="system.data.Set" />
+    <component id="system.data:SimpleValueObject" class="system.data.SimpleValueObject" />
+    <component id="system.data:Stack"             class="system.data.Stack" />
+    <component id="system.data:Typeable"          class="system.data.Typeable" />
+    <component id="system.data:Validator"         class="system.data.Validator" />
+    <component id="system.data:ValueObject"       class="system.data.ValueObject" />
+    <component id="system.data:WeakReference"     class="system.data.WeakReference" />
     
     <!-- system.data.arrays -->
     
