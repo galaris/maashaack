@@ -231,37 +231,38 @@
     
     <!-- graphics.geom -->
     
-    <component id="graphics.geom:AspectRatio"    class="graphics.geom.AspectRatio" />
-    <component id="graphics.geom:Beziers"        class="graphics.geom.Beziers" />    
-    <component id="graphics.geom:Dimension"      class="graphics.geom.Dimension" />
-    <component id="graphics.geom:EdgeMetrics"    class="graphics.geom.EdgeMetrics" />
-    <component id="graphics.geom:Geometry"       class="graphics.geom.Geometry" />
-    <component id="graphics.geom:GradientMatrix" class="graphics.geom.GradientMatrix" />
-    <component id="graphics.geom:Hexagon"        class="graphics.geom.Hexagon" />
-    <component id="graphics.geom:Line"           class="graphics.geom.Line" />
-    <component id="graphics.geom:Lines"          class="graphics.geom.Lines" />
-    <component id="graphics.geom:Matrix2"        class="graphics.geom.Matrix2" />
-    <component id="graphics.geom:Matrix4"        class="graphics.geom.Matrix4" />
-    <component id="graphics.geom:MatrixN"        class="graphics.geom.MatrixN" />
-    <component id="graphics.geom:Matrixs"        class="graphics.geom.Matrixs" />
-    <component id="graphics.geom:Matrixs4"       class="graphics.geom.Matrixs4" />
-    <component id="graphics.geom:Metaball"       class="graphics.geom.Metaball" />
-    <component id="graphics.geom:Plane"          class="graphics.geom.Plane" />
-    <component id="graphics.geom:Planes"         class="graphics.geom.Planes" />
-    <component id="graphics.geom:Polar"          class="graphics.geom.Polar" />
-    <component id="graphics.geom:Quaternion"     class="graphics.geom.Quaternion" />
-    <component id="graphics.geom:Quaternions"    class="graphics.geom.Quaternions" />
-    <component id="graphics.geom:Ray"            class="graphics.geom.Ray" />
-    <component id="graphics.geom:Rectangles"     class="graphics.geom.Rectangles" />
-    <component id="graphics.geom:RegularPolygon" class="graphics.geom.RegularPolygon" />
-    <component id="graphics.geom:Ring"           class="graphics.geom.Ring" />
-    <component id="graphics.geom:UV"             class="graphics.geom.UV" />
-    <component id="graphics.geom:UVW"            class="graphics.geom.UVW" />
-    <component id="graphics.geom:Vector2"        class="graphics.geom.Vector2" />
-    <component id="graphics.geom:Vector3"        class="graphics.geom.Vector3" />
-    <component id="graphics.geom:Vector4"        class="graphics.geom.Vector4" />
-    <component id="graphics.geom:Vectors4"       class="graphics.geom.Vectors4" />
-    <component id="graphics.geom:Vertex"         class="graphics.geom.Vertex" />
+    <component id="graphics.geom:AspectRatio"     class="graphics.geom.AspectRatio" />
+    <component id="graphics.geom:Beziers"         class="graphics.geom.Beziers" />    
+    <component id="graphics.geom:Dimension"       class="graphics.geom.Dimension" />
+    <component id="graphics.geom:EdgeMetrics"     class="graphics.geom.EdgeMetrics" />
+    <component id="graphics.geom:Geometry"        class="graphics.geom.Geometry" />
+    <component id="graphics.geom:GradientMatrix"  class="graphics.geom.GradientMatrix" />
+    <component id="graphics.geom:Hexagon"         class="graphics.geom.Hexagon" />
+    <component id="graphics.geom:Line"            class="graphics.geom.Line" />
+    <component id="graphics.geom:Lines"           class="graphics.geom.Lines" />
+    <component id="graphics.geom:Matrix2"         class="graphics.geom.Matrix2" />
+    <component id="graphics.geom:Matrix4"         class="graphics.geom.Matrix4" />
+    <component id="graphics.geom:MatrixN"         class="graphics.geom.MatrixN" />
+    <component id="graphics.geom:Matrixs"         class="graphics.geom.Matrixs" />
+    <component id="graphics.geom:Matrixs4"        class="graphics.geom.Matrixs4" />
+    <component id="graphics.geom:MatrixTransform" class="graphics.geom.MatrixTransform" />
+    <component id="graphics.geom:Metaball"        class="graphics.geom.Metaball" />
+    <component id="graphics.geom:Plane"           class="graphics.geom.Plane" />
+    <component id="graphics.geom:Planes"          class="graphics.geom.Planes" />
+    <component id="graphics.geom:Polar"           class="graphics.geom.Polar" />
+    <component id="graphics.geom:Quaternion"      class="graphics.geom.Quaternion" />
+    <component id="graphics.geom:Quaternions"     class="graphics.geom.Quaternions" />
+    <component id="graphics.geom:Ray"             class="graphics.geom.Ray" />
+    <component id="graphics.geom:Rectangles"      class="graphics.geom.Rectangles" />
+    <component id="graphics.geom:RegularPolygon " class="graphics.geom.RegularPolygon" />
+    <component id="graphics.geom:Ring"            class="graphics.geom.Ring" />
+    <component id="graphics.geom:UV"              class="graphics.geom.UV" />
+    <component id="graphics.geom:UVW"             class="graphics.geom.UVW" />
+    <component id="graphics.geom:Vector2"         class="graphics.geom.Vector2" />
+    <component id="graphics.geom:Vector3"         class="graphics.geom.Vector3" />
+    <component id="graphics.geom:Vector4"         class="graphics.geom.Vector4" />
+    <component id="graphics.geom:Vectors4"        class="graphics.geom.Vectors4" />
+    <component id="graphics.geom:Vertex"          class="graphics.geom.Vertex" />
     
     <!-- graphics.layouts -->
     
