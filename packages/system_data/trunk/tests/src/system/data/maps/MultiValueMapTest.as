@@ -58,15 +58,14 @@ package system.data.maps
         {
             map = new MultiValueMap () ;
         }
-
+        
         public function tearDown():void
         {
             map = null ;
-        }           
+        }
         
         public function testConstructor():void
         {
-            
             var init:Map = new HashMap() ;
             init.put( "key1" , "value1" ) ;
             
@@ -80,9 +79,8 @@ package system.data.maps
                "{key1:{value1}}" ,
                "2 - The MultiValueMap constructor failed." 
             );
-            
         }
-
+        
         public function testConstructorWithFactory():void
         {
             
@@ -101,13 +99,13 @@ package system.data.maps
             );
             
         }
-
+        
         public function testInterface():void
         {
             assertTrue( map is MultiMap , "1 - The MultiValueMap must implement the MultiMap interface." ) ;
             assertTrue( map is Map      , "2 - The MultiValueMap must implement the Map interface." ) ;
         }
-
+        
         public function testinternalBuildClass():void
         {
             var map:MultiValueMap = new MultiValueMap() ;
@@ -123,7 +121,7 @@ package system.data.maps
             map.internalBuildClass = Array ;
             assertEquals( map.internalBuildClass , ArrayCollection , "04 - internalBuildClass failed" ) ;
         }
-
+        
         public function testClear():void 
         {
             map.put("key1" , "value1") ;
@@ -146,7 +144,7 @@ package system.data.maps
             assertEquals( clone.size() , 1 , "03 - The MultiValueMap clone method failed.") ;
             
         }
-
+        
         public function testContainsKey():void 
         {
             var o:Object = {} ;
@@ -223,8 +221,8 @@ package system.data.maps
             assertNull   ( map.getCollection( "key3" ) , "03 - The MultiValueMap getCollection method failed." ) ;
                         
             map.clear() ; 
-        }        
-
+        }
+        
         public function testGetKeys():void 
         {
             map.put( "key1" , "hello"   ) ;
@@ -234,10 +232,10 @@ package system.data.maps
             
             assertNotNull ( ar  , "01 - The MultiValueMap getKeys method failed." ) ;
             assertEquals  ( ar.length , 2  , "02 - The MultiValueMap getKeys method failed." ) ;
-                        
+            
             map.clear() ; 
         }
-    
+        
         public function testGetValues():void 
         {
             map.put( "key1" , "A1"   ) ;
@@ -249,10 +247,10 @@ package system.data.maps
             
             assertNotNull ( ar  , "01 - The MultiValueMap getValues method failed." ) ;
             assertEquals  ( ar.length , 4  , "02 - The MultiValueMap getValues method failed." ) ;
-
+            
             map.clear() ; 
         }
-
+        
         public function testIsEmpty():void 
         {
             map.put("key1" , "value1") ;
@@ -294,34 +292,32 @@ package system.data.maps
                         
             it = map.iteratorByKey( null ) ;
             assertNull( it , "2 - The MultiValueMap iteratorByKey method failed." ) ;
-
+            
             it = map.iteratorByKey( "key3" ) ;
             assertNull( it , "3 - The MultiValueMap iteratorByKey method failed." ) ;
-
+            
             it = map.iteratorByKey( "key1" ) ;
-            assertNotNull( it , "4-1 - The MultiValueMap iteratorByKey method failed." ) ;            
+            assertNotNull( it , "4-1 - The MultiValueMap iteratorByKey method failed." ) ;
             assertTrue( it is ArrayIterator , "4-2 - The MultiValueMap iteratorByKey method failed." ) ;
             assertTrue( it.hasNext() , "4-3 - The MultiValueMap iteratorByKey method failed." ) ;
             
-            map.clear() ;            
+            map.clear() ;
             
         }
         
         public function testKeyIterator():void 
         {
-         
             map.put("key1" , "value1") ;
             
             var it:Iterator ;
             
             it = map.keyIterator() ;
-            assertNotNull( it , "1 - The MultiValueMap keyIterator method failed." ) ;            
+            assertNotNull( it , "1 - The MultiValueMap keyIterator method failed." ) ;
             assertTrue( it is ArrayIterator , "2 - The MultiValueMap keyIterator method failed." ) ;
             assertTrue( it.hasNext() , "3 - The MultiValueMap keyIterator method failed." ) ;
             assertEquals( it.next() , "key1" , "4 - The MultiValueMap keyIterator method failed." ) ;
             
-            map.clear() ;         
-                
+            map.clear() ;
         }
          
         public function testPut():void
@@ -336,11 +332,10 @@ package system.data.maps
             assertEquals ( map.size() , 2 , "3-2 - The MultiValueMap size method failed." )  ;
             
             map.clear() ;
-        }   
+        }
         
         public function testPutAll():void
         {
-         
             var am1:ArrayMap = new ArrayMap( [ "key1" , "key2" ] , ["value1" , "value2" ] ) ;
             var am2:ArrayMap = new ArrayMap( [ "key1" ]          , [ new ArrayCollection( [ "value3" ] ) ] ) ;
             
@@ -355,21 +350,18 @@ package system.data.maps
             
             assertEquals( mm.size()      , 2 , "2-1 - The MultiValueMap putAll method failed." ) ;
             assertEquals( mm.totalSize() , 3 , "2-2 - The MultiValueMap putAll method failed." ) ;
-            
         }
         
         public function testPutCollection():void 
         {
-            
             map.putCollection( "key1" , new ArrayCollection(["value1", "value2"])) ;
             map.putCollection( "key1" , new ArrayCollection(["value3", "value4"])) ;
             map.putCollection( "key2" , new ArrayCollection(["value5"])) ;
             
             assertEquals( map.size()      , 2 , "1 - The MultiValueMap putCollection method failed." ) ;
-            assertEquals( map.totalSize() , 5 , "2 - The MultiValueMap putCollection method failed." ) ;            
+            assertEquals( map.totalSize() , 5 , "2 - The MultiValueMap putCollection method failed." ) ;
             
             map.clear() ;
-            
         }
         
         public function testRemove():void
@@ -394,12 +386,12 @@ package system.data.maps
             
             assertTrue  ( map.removeByKey("key1" , "value1" ) , "1 - The MultiValueMap removeByKey method failed." ) ;
             assertFalse ( map.removeByKey("key1" , "value5" ) , "2 - The MultiValueMap removeByKey method failed." ) ;
-                        
+            
             assertEquals( map.totalSize() , 2 ,  "3 - The MultiValueMap removeByKey method failed.") ;
-                        
+            
             map.clear() ;
         }
-
+        
         public function testSize():void
         {
             map.put("key1" , "value1") ;
@@ -431,7 +423,7 @@ package system.data.maps
             map.clear() ;    
             assertEquals( map.toString() , "{}" , "2 - The MultiValueMap toString method failed.") ;
         }
-                
+        
         public function testTotalSize():void 
         {
             map.put("key1" , "value1") ;
@@ -450,13 +442,12 @@ package system.data.maps
             assertTrue( c is ArrayCollection , "2 - The MultiValueMap values method failed.") ;
             assertEquals( c.size() , 1 , "3 - The MultiValueMap values method failed.") ;
             assertEquals( (c as ArrayCollection).toString() , "{value1}" , "3 - The MultiValueMap values method failed.") ;
-            map.clear() ;            
+            map.clear() ;
         }
-            
+        
         public function testValueIterator():void 
         {
-
-            // ArrayIterator of all collections of values            
+            // ArrayIterator of all collections of values
             
             map.put("key1" , "value1") ;
             map.put("key1" , "value2") ;
