@@ -314,7 +314,7 @@
     <component id="system.logic:ElseIfGreaterOrEqualsThan" class="system.logic.ElseIfGreaterOrEqualsThan" />
     <component id="system.logic:ElseIfGreaterThan"         class="system.logic.ElseIfGreaterThan"         />
     <component id="system.logic:ElseIfLessOrEqualsThan"    class="system.logic.ElseIfLessOrEqualsThan"    />
-    <component id="system.logic:ElseIfLessThan"            class="system.logic.IfLessThan"                />
+    <component id="system.logic:ElseIfLessThan"            class="system.logic.ElseIfLessThan"            />
     <component id="system.logic:ElseIfNull"                class="system.logic.ElseIfNull"                />
     <component id="system.logic:ElseIfTrue"                class="system.logic.ElseIfTrue"                />
     <component id="system.logic:ElseIfZero"                class="system.logic.ElseIfZero"                />
