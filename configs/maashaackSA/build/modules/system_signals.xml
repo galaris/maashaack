@@ -14,7 +14,7 @@
         
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/system.signals.swc" todir="libs/swc" overwrite="true" />
-        <!--<copy file="${path}/bin-release/system.signals.abc" todir="libs/abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/system.signals.abc" todir="libs/abc" overwrite="true" />
         
         <!-- sync with other projects 
         <copy file="${path}/bin-release/system.signals.swc" todir="libraries/astuce/lib-swc" overwrite="true" />
