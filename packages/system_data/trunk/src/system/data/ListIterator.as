@@ -35,8 +35,6 @@
 
 package system.data
 {
-    import system.data.OrderedIterator;
-    
     /**
      * Defines an iterator that operates over an ordered list. This iterator allows both forward and reverse iteration through the list.
      */
