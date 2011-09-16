@@ -192,6 +192,6 @@ package system.data.sets
         /**
          * @private
          */
-        private static const PRESENT:Object = new Object() ;
+        private static const PRESENT:Boolean = true ;
     }
 }
