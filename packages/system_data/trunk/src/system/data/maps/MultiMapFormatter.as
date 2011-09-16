@@ -35,13 +35,13 @@
 
 package system.data.maps
 {
-    import system.data.Iterator;    import system.data.MultiMap;    import system.formatters.Formattable;
+    import system.data.MultiMap;
+    import system.formatters.Formattable;
         /**
      * Converts a MultiMap to a custom string representation.
      */
     public class MultiMapFormatter implements Formattable 
     {
-            
         /**
          * Creates a new MultiMapFormatter instance.
          */
@@ -49,11 +49,6 @@ package system.data.maps
         {
             //  
         }
-        
-        /**
-         * The singleton reference of the MultiMapFormatter class.
-         */
-        public static const instance:MultiMapFormatter = new MultiMapFormatter() ;
         
         /**
          * Formats the specified value.
@@ -68,14 +63,17 @@ package system.data.maps
                 return "" ;
             }
             var r:String = "{";
-            var vIterator:Iterator = m.valueIterator() ;
-            var kIterator:Iterator = m.keyIterator() ;
-            while( kIterator.hasNext() ) 
+            var keys:Array = m.getKeys() ;
+            var len:uint = keys.length ;
+            if ( len > 0 )
             {
-                r += kIterator.next() + ":" + vIterator.next() ;
-                if ( kIterator.hasNext() ) 
+                for (var i:int ; i<len ; i++ )
                 {
-                    r += "," ;
+                    r += keys[i] + ":" + (m as MultiValueMap).getCollection(keys[i]) ;
+                    if( i < len-1 )
+                    {
+                        r += "," ;
+                    }
                 }
             }
             r += "}" ;
