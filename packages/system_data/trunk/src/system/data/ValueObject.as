@@ -35,8 +35,6 @@
 
 package system.data
 {
-    import system.data.Identifiable;
-    
     /**
      * Defines a value object. The value object are use for example in the models or to exchange datas between a client and a server.
      */
