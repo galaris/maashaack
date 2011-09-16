@@ -37,35 +37,44 @@ package system.data.maps
 {
     import library.ASTUce.framework.TestCase;
 
+    import system.data.Map;
+    import system.data.MultiMap;
+    
     public class MultiMapFormatterTest extends TestCase 
     {
-
         public function MultiMapFormatterTest( name:String = "" )
         {
             super( name );
         }
         
-        public function testFormat():void
+        public function testFormatEmpty():void
+        {
+            var result:String = multiformatter.format() ;
+            assertEquals(result, "", "01") ;
+        }
+        
+        public function testFormatEmptyMultiValueMap():void
+        {
+            var result:String = multiformatter.format(new MultiValueMap()) ;
+            assertEquals(result, "{}" , "02") ;
+        }
+        
+        public function testFormatMultiValueMap():void
         {
             var result:String ;
             
-            result = MultiMapFormatter.instance.format() ;
-            assertEquals(result, "", "1 - The MultiMapFormatter format method failed, must return a \"\" if the method has 0 argument.") ;
+            var map:Map ;
+            var mmap:MultiMap ;
             
-            result = MultiMapFormatter.instance.format(new MultiValueMap()) ;   
-            assertEquals(result, "{}" , "2 - The MultiMapFormatter format method failed with an empty Map.") ;
+            map = new HashMap(["key1"], ["value1"]) ;
+            mmap = new MultiValueMap( map ) ;
+            result = multiformatter.format( mmap ) ;
+            assertEquals(result, "{key1:{value1}}" , "03") ;
             
-            result = MultiMapFormatter.instance.format(new MultiValueMap(new HashMap(["key1"], ["value1"]))) ;   
-            assertEquals(result, "{key1:{value1}}" , "3 - The MultiMapFormatter format method failed with a Map whith one entry inside.") ;
-            
-            result = MultiMapFormatter.instance.format(new MultiValueMap(new HashMap(["key1", "key2"], ["value1", "value2"]))) ;   
-            assertTrue
-            (
-                result == "{key1:{value1},key2:{value2}}" || "{key2:{value2},key1:{value1}}" , 
-                "4 - The MultiMapFormatter format method failed with a Map whith two entries inside."
-            ) ;
-            
-        }         
-        
+            map = new HashMap(["key1", "key2"], ["value1", "value2"]) ;
+            mmap = new MultiValueMap( map ) ;
+            result = multiformatter.format( mmap ) ;
+            assertTrue( result == "{key1:{value1},key2:{value2}}" || "{key2:{value2},key1:{value1}}" , "04" ) ;
+        }
     }
 }
