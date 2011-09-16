@@ -54,11 +54,7 @@ package system.data.iterators
             suite.addTestSuite(PageByPageIteratorTest) ;
             suite.addTestSuite(ProtectedIteratorTest) ;
             suite.addTestSuite(StringIteratorTest) ;
-            
-//            API::FP_10_0
-//            {
-                suite.addTestSuite(VectorIteratorTest) ;
-//            }
+            suite.addTestSuite(VectorIteratorTest) ;
             
             return suite;
         }
