@@ -181,7 +181,7 @@ package system.data.collections
          */        
         public function clone():*
         {
-            return new ArrayCollection(toArray()) ;
+            return new ArrayCollection( toArray() ) ;
         }
         
         /**
