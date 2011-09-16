@@ -42,12 +42,12 @@ package system.data.sets
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack data sets tests");
-
+            
             suite.addTestSuite( CoreSetTest ) ;
             suite.addTestSuite( ArraySetTest ) ;
             suite.addTestSuite( HashSetTest ) ;
             suite.addTestSuite( TypedSetTest ) ;
-
+            
             return suite;
         }
     }
