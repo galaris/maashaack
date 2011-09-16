@@ -58,7 +58,7 @@ package system.data.collections
         {
             var c:ArrayCollection = new ArrayCollection() ;
             
-            assertNotNull(c, "01-01 - ArrayCollection constructor failed.") ;
+            assertNotNull( c, "01-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( c.toArray(), [], "01-02 - ArrayCollection constructor failed.") ;
             
             // initialize with an Array
@@ -141,10 +141,10 @@ package system.data.collections
             var c2:ArrayCollection = new ArrayCollection([2,3]) ;
             var c3:ArrayCollection = new ArrayCollection() ;
             
-            assertTrue( c1.containsAll(c2) , "01 - ArrayCollection containsAll failed.") ;
-            assertTrue( c1.containsAll(c3) , "02 - ArrayCollection containsAll failed.") ;
+            assertTrue( c1.containsAll(c2) , "01") ;
+            assertTrue( c1.containsAll(c3) , "02") ;
             
-            assertFalse( c2.containsAll(c1) , "03 - ArrayCollection containsAll failed.") ;
+            assertFalse( c2.containsAll(c1) , "03") ;
         }
         
         public function testEquals():void
@@ -154,29 +154,29 @@ package system.data.collections
             var c3:ArrayCollection = new ArrayCollection([2,3]) ;
             var c4:ArrayCollection = new ArrayCollection([5,6,7,8]) ;
             
-            assertTrue  ( c1.equals(c1) , "01-01 - ArrayCollection equals failed." ) ;
-            assertTrue  ( c1.equals(c2) , "01-02 - ArrayCollection equals failed." ) ;
-            assertFalse ( c1.equals(c3) , "01-03 - ArrayCollection equals failed." ) ;
-            assertFalse ( c1.equals(c4) , "01-04 - ArrayCollection equals failed." ) ; // same size
+            assertTrue  ( c1.equals(c1) , "#01-01" ) ;
+            assertTrue  ( c1.equals(c2) , "#01-02" ) ;
+            assertFalse ( c1.equals(c3) , "#01-03" ) ;
+            assertFalse ( c1.equals(c4) , "#01-04" ) ; // same size
             
-            assertTrue  ( c2.equals(c1) , "02-01 - ArrayCollection equals failed." ) ;
-            assertTrue  ( c2.equals(c2) , "02-02 - ArrayCollection equals failed." ) ;
-            assertFalse ( c2.equals(c3) , "02-03 - ArrayCollection equals failed." ) ;
+            assertTrue  ( c2.equals(c1) , "#02-01" ) ;
+            assertTrue  ( c2.equals(c2) , "#02-02" ) ;
+            assertFalse ( c2.equals(c3) , "#02-03" ) ;
             
-            assertFalse ( c3.equals(c1) , "03-01 - ArrayCollection equals failed." ) ;
-            assertFalse ( c3.equals(c2) , "03-02 - ArrayCollection equals failed." ) ;
-            assertTrue  ( c3.equals(c3) , "03-03 - ArrayCollection equals failed." ) ;
+            assertFalse ( c3.equals(c1) , "#03-01" ) ;
+            assertFalse ( c3.equals(c2) , "#03-02" ) ;
+            assertTrue  ( c3.equals(c3) , "#03-03" ) ;
             
             var s:HashSet = new HashSet([1,2,3,4]) ;
-            assertFalse( c1.equals(s) , "04 - ArrayCollection equals failed." ) ;
+            assertFalse( c1.equals(s) , "#04" ) ;
         }
         
         public function testGet():void
         {
             var co:ArrayCollection = new ArrayCollection() ;
             co.add("test") ;
-            assertEquals( co.get(0) , "test" ,  "01 - ArrayCollection get failed.") ;
-            assertUndefined( co.get(1)       ,  "02 - ArrayCollection get failed." ) ;
+            assertEquals( co.get(0) , "test" ,  "#01") ;
+            assertUndefined( co.get(1)       ,  "#02" ) ;
         }
         
         public function testIndexOf():void
@@ -187,26 +187,26 @@ package system.data.collections
             co.add("item2") ;
             co.add("item3") ;
             
-            assertEquals( co.indexOf("item4") , -1 ,  "01 - ArrayCollection indexOf failed.") ;
-            assertEquals( co.indexOf("item1") , 0  ,  "02 - ArrayCollection indexOf failed.") ;
-            assertEquals( co.indexOf("item3") , 2  ,  "03 - ArrayCollection indexOf failed.") ;
+            assertEquals( co.indexOf("item4") , -1 ,  "#01") ;
+            assertEquals( co.indexOf("item1") , 0  ,  "#02") ;
+            assertEquals( co.indexOf("item3") , 2  ,  "#03") ;
             
-            assertEquals( co.indexOf("item3", 1) , 2  , "04 - ArrayCollection indexOf failed.") ;
+            assertEquals( co.indexOf("item3", 1) , 2  , "#04") ;
         }
         
         public function testIsEmpty():void
         {
             var co:ArrayCollection = new ArrayCollection() ;
             
-            assertTrue( co.isEmpty() , "01 - ArrayCollection isEmpty failed.") ;
+            assertTrue( co.isEmpty() , "#01") ;
             
             co.add("test") ;
             
-            assertFalse( co.isEmpty() , "02 - ArrayCollection isEmpty failed.") ;
+            assertFalse( co.isEmpty() , "#02") ;
             
             co.remove("test") ;
             
-            assertTrue( co.isEmpty() , "03 - ArrayCollection isEmpty failed.") ;
+            assertTrue( co.isEmpty() , "#03") ;
         }
         
         public function testIterator():void
@@ -273,8 +273,8 @@ package system.data.collections
             c = new ArrayCollection() ;
             a = c.toArray() ;
             
-            assertNotNull( a , "01-02 - ArrayCollection toArray failed.") ;
-            ArrayAssert.assertEquals( a , [], "01-02 - ArrayCollection toArray failed.") ;
+            assertNotNull( a , "#01-02") ;
+            ArrayAssert.assertEquals( a , [], "#01-02") ;
             
             c.add(2) ;
             c.add(3) ;
@@ -282,8 +282,8 @@ package system.data.collections
             
             a = c.toArray() ;
             
-            assertNotNull( a , "02-02 - ArrayCollection constructor failed.") ;
-            ArrayAssert.assertEquals( a , [2,3,4], "02-02 - ArrayCollection constructor failed.") ;
+            assertNotNull( a , "#02-02") ;
+            ArrayAssert.assertEquals( a , [2,3,4], "#02-02") ;
         }
         
         public function testToSource():void
@@ -292,17 +292,17 @@ package system.data.collections
             var ar:Array = ["item1", "item2"] ;
             
             co = new ArrayCollection() ;
-            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection()" , "01 - ArrayCollection toSource failed") ;
+            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection()" , "#01") ;
             
             co = new ArrayCollection( ar ) ;
-            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection([\"item1\",\"item2\"])" , "02 - ArrayCollection toSource failed") ;
+            assertEquals(co.toSource() , "new system.data.collections.ArrayCollection([\"item1\",\"item2\"])" , "#02") ;
         }
         
         public function testToString():void
         {
             var ar:Array = ["item1", "item2", "item3", "item4"] ;
             var co:ArrayCollection = new ArrayCollection( ar ) ;
-            assertEquals(co.toString() , "{item1,item2,item3,item4}", "ArrayCollection toString failed") ;
+            assertEquals(co.toString() , "{item1,item2,item3,item4}") ;
         }
     }
 }
