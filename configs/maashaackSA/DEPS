@@ -32,7 +32,7 @@ deps = {
          Var("root") + "/packages/system_signals"      : Var("repo") + "/packages/system_signals/trunk",
          Var("root") + "/packages/system_terminals"    : Var("repo") + "/packages/system_terminals/trunk",
          Var("root") + "/packages/system_text"         : Var("repo") + "/packages/system_text/trunk",
-         Var("root") + "/packages/graphics"            : Var("repo") + "/packages/system_graphics/trunk",
+         Var("root") + "/packages/graphics"            : Var("repo") + "/packages/graphics/trunk",
          
          Var("root") + "/libraries/astuce"        : "https://astuce.googlecode.com/svn/as3/trunk",
          Var("root") + "/libraries/eden"          : "https://edenrr.googlecode.com/svn/as3/trunk",
