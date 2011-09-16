@@ -104,6 +104,7 @@
     <component id="core.maths:interpolate"      class="core.maths.interpolate"      />
     <component id="core.maths:isEven"           class="core.maths.isEven"           />
     <component id="core.maths:isOdd"            class="core.maths.isOdd"            />
+    <component id="core.maths:LAMBDA"           class="core.maths.LAMBDA"           />
     <component id="core.maths:lerp"             class="core.maths.lerp"             />
     <component id="core.maths:log10"            class="core.maths.log10"            />
     <component id="core.maths:logN"             class="core.maths.logN"             />
