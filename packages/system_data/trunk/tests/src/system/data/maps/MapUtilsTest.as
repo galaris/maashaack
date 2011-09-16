@@ -56,10 +56,10 @@ package system.data.maps
             map.put("key3" , "123" ) ;
             map.put("key4" , "123a" ) ;
             
-            assertEquals( MapUtils.getNumber(map, "key1") , 5   , "01 - MapUtils.getNumber failed" ) ;
-            assertEquals( MapUtils.getNumber(map, "key2") , NaN , "02 - MapUtils.getNumber failed" ) ;
-            assertEquals( MapUtils.getNumber(map, "key3") , 123 , "03 - MapUtils.getNumber failed" ) ;
-            assertEquals( MapUtils.getNumber(map, "key4") , 123 , "04 - MapUtils.getNumber failed" ) ;
+            assertEquals( MapUtils.getNumber(map, "key1") , 5   , "01" ) ;
+            assertEquals( MapUtils.getNumber(map, "key2") , NaN , "02" ) ;
+            assertEquals( MapUtils.getNumber(map, "key3") , 123 , "03" ) ;
+            assertEquals( MapUtils.getNumber(map, "key4") , 123 , "04" ) ;
         }
 
     }
