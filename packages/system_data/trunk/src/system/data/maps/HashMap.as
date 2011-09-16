@@ -238,15 +238,15 @@ package system.data.maps
         /**
          * Associates the specified value with the specified key in this map.
          */
-        public function put(key:*, value:*):*
+        public function put( key:*, value:* ):*
         {
             var r:* = null ;
-            if ( containsKey( key ) )
+            if ( _keys[ key ] !== undefined )
             {
                 r = _keys[ key ] ;
                 remove( key );
             }
-            var count:uint   = _values[ value ] ;
+            var count:uint = uint(_values[ value ]) ;
             _values[ value ] = (count > 0) ? count+1 : 1 ;
             _size++ ;
             _keys[ key ] = value ;
@@ -272,14 +272,13 @@ package system.data.maps
          * @param o The key whose mapping is to be removed from the map.
          * @return previous value associated with specified key, or null if there was no mapping for key. A null return can also indicate that the map previously associated null with the specified key.
          */
-        public function remove(o:*):*
+        public function remove( o:* ):*
         {
-            var key:* = o ;
             var value:* ;
-            if ( containsKey( key ) ) 
+            if ( containsKey( o ) ) 
             {
                 _size -- ;
-                value = _keys[ key ];
+                value = _keys[ o ];
                 var count:uint = _values[ value ];
                 if (count > 1)
                 {
@@ -289,7 +288,7 @@ package system.data.maps
                 {
                     delete _values[ value ];
                 }
-                delete _keys[ key ] ;
+                delete _keys[ o ] ;
                 return value ;
             }
             else 
@@ -328,7 +327,7 @@ package system.data.maps
         /**
          * @private
          */
-        private var _keys:* ;
+        private var _keys:Dictionary ;
         
         /**
          * @private
@@ -338,6 +337,6 @@ package system.data.maps
         /**
          * @private
          */
-        private var _values:* ;
+        private var _values:Dictionary ;
     }
 }
