@@ -139,6 +139,7 @@
     <component id="system.data.maps:MapEntry"          class="system.data.maps.MapEntry"          />
     <component id="system.data.maps:MapFormatter"      class="system.data.maps.MapFormatter"      />
     <component id="system.data.maps:MapUtils"          class="system.data.maps.MapUtils"          />
+    <component id="system.data.maps:multiformatter"    class="system.data.maps.multiformatter"    />
     <component id="system.data.maps:MultiMapFormatter" class="system.data.maps.MultiMapFormatter" />
     <component id="system.data.maps:MultiSetMap"       class="system.data.maps.MultiSetMap"       />
     <component id="system.data.maps:MultiValueMap"     class="system.data.maps.MultiValueMap"     />
