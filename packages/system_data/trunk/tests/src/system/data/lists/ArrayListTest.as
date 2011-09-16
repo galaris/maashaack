@@ -61,7 +61,7 @@ package system.data.lists
             ArrayAssert.assertEquals( list.toArray(), [], "01-02 - ArrayList constructor failed.") ;
             
             // initialize with an Array
-                        
+            
             list = new ArrayList([2,3,4]) ; 
             assertNotNull(list, "02-01 - ArrayCollection constructor failed.") ;
             ArrayAssert.assertEquals( list.toArray(), [2,3,4], "02-02 - ArrayList constructor failed.") ;

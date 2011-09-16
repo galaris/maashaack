@@ -36,7 +36,7 @@
 package system.data.lists
 {
     import library.ASTUce.framework.*;
-
+    
     public class AllTests
     {
         public static function suite():Test
@@ -47,7 +47,7 @@ package system.data.lists
             suite.addTestSuite( LinkedListTest ) ;
             suite.addTestSuite( LinkedListEntryTest ) ;
             suite.addTestSuite( SortedArrayListTest ) ;
-                
+            
             return suite;
         }
     }
