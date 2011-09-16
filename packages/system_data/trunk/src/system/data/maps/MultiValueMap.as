@@ -77,12 +77,12 @@ package system.data.maps
          * @param map Optional Map reference to initialize and fill this MultiMap.
          * @param factory Optional Map reference to create the internal Map of the MultiValueMap
          */
-        public function MultiValueMap( map:Map = null , factory:* = null )
+        public function MultiValueMap( map:Map = null , factory:Map = null )
         {
-            _map = ( factory != null && factory is Map ) ? factory as Map : new HashMap() ;
-            if (map != null && map.size() > 0 ) 
+            _map = factory || new HashMap() ;
+            if ( map && map.size() > 0 ) 
             {
-                putAll( map.clone() ) ;
+                putAll( map ) ;
             }
         }
         
@@ -415,14 +415,14 @@ package system.data.maps
          * @param key the key to store against.
          * @param value the value to add to the collection at the key.
          * @return the value added if the map changed and null if the map did not change.
-         */        
+         */
         public function put( key:*, value:* ):*
         {
-            if ( !containsKey(key) ) 
+            if ( !_map.containsKey( key ) ) 
             {
                 _map.put( key , createCollection() ) ;
             }
-            var c:Collection = _map.get( key ) ;
+            var c:Collection = _map.get( key ) as Collection ;
             var b:Boolean = c.add( value ) ;
             return b ? value : null ;
         }
@@ -609,7 +609,7 @@ package system.data.maps
          */
         public function toString():String 
         {
-            return MultiMapFormatter.instance.format(this) ;
+            return multiformatter.format(this) ;
         }
         
         /**
@@ -636,9 +636,7 @@ package system.data.maps
             var it:Iterator = _map.iterator() ;
             while (it.hasNext()) 
             {
-                var c:Collection = it.next() ;
-                var s:int        = c.size() ;
-                result += s ;
+                result += (it.next() as Collection).size() ;
             }
             return result ;
         }
