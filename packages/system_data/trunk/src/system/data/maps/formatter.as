@@ -35,7 +35,6 @@
 
 package system.data.maps
 {
-
     /**
      * This singleton format a Map to a custom string representation.
      */
