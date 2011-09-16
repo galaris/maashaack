@@ -48,11 +48,10 @@ package system.data.sets
     import system.data.Set;
     import system.data.collections.ArrayCollection;
     import system.data.iterators.ArrayIterator;
-    import system.data.maps.ArrayMap;    
-
+    import system.data.maps.ArrayMap;
+    
     public class CoreSetTest extends TestCase 
     {
-
         public function CoreSetTest(name:String = "")
         {
             super( name );
@@ -64,11 +63,11 @@ package system.data.sets
         {
             map = new ArrayMap() ;
         }
-
+        
         public function tearDown():void
         {
             map = null ;
-        }           
+        }
         
         public function testConstructor():void
         {
@@ -78,45 +77,44 @@ package system.data.sets
             try
             {
                 s = new CoreSet( null ) ;
-                fail( "00-01 - CoreSet constructor failed." ) ;
+                fail( "00-01" ) ;
             }
             catch( e:Error )
             {
-                assertTrue( e is ArgumentError , "01-01 - CoreSet constructor failed." ) ;
-                assertEquals( e.message , "CoreSet constructor failed, the internal Map not must be null." , "01-01 - CoreSet constructor failed." ) ;
+                assertTrue( e is ArgumentError , "01-01" ) ;
+                assertEquals( e.message , "CoreSet constructor failed, the internal Map not must be null." , "01-01" ) ;
             }
             
             s = new CoreSet( map.clone() ) ;
             
-            assertNotNull(s, "01-01 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( s.toArray(), [], "01-02 - CoreSet constructor failed.") ;
+            assertNotNull(s, "01-01") ;
+            ArrayAssert.assertEquals( s.toArray(), [], "01-02") ;
             
             // initialize with an Array
                         
             var s1:CoreSet = new CoreSet( map.clone() , [2,3,4]) ; 
-            assertNotNull(s1, "02-01 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( s1.toArray(), [2,3,4], "02-02 - CoreSet constructor failed.") ;
+            assertNotNull(s1, "02-01") ;
+            ArrayAssert.assertEquals( s1.toArray(), [2,3,4], "02-02") ;
             
             // initialize with a Collection
             
             var s2:CoreSet ;
             
             s2 = new CoreSet( map.clone() , s1) ; 
-            assertNotNull(s2, "03-01 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( s2.toArray(), [2,3,4], "03-02 - CoreSet constructor failed.") ;
+            assertNotNull(s2, "03-01") ;
+            ArrayAssert.assertEquals( s2.toArray(), [2,3,4], "03-02") ;
             
             // initialize with an Iterable object
             
             s2 = new CoreSet( map.clone() , new ArrayMap(["key1","key2"], ["value1","value2"]) as Iterable ) ; 
-            assertNotNull(s2, "04-01 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( s2.toArray(), ["value1","value2"], "04-02 - CoreSet constructor failed.") ;
-                        
+            assertNotNull(s2, "04-01") ;
+            ArrayAssert.assertEquals( s2.toArray(), ["value1","value2"], "04-02") ;
             
             // duplicate entries
             
             var co3:CoreSet = new CoreSet( map.clone() , [1,1,2,3,4,4,5,5,5]) ; 
-            assertNotNull(co3, "05-01 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( co3.toArray(), [1,2,3,4,5], "05-02 - CoreSet constructor failed.") ;
+            assertNotNull(co3, "05-01") ;
+            ArrayAssert.assertEquals( co3.toArray(), [1,2,3,4,5], "05-02") ;
         }
         
         public function testInterface():void
@@ -249,14 +247,13 @@ package system.data.sets
         public function testSize():void 
         {
             var s:CoreSet = new CoreSet( map.clone() ) ;
-            assertEquals( s.size() , 0 ,  "01 - CoreSet size failed.") ;                    
+            assertEquals( s.size() , 0 ,  "01 - CoreSet size failed.") ;
             s.add("test") ;
-            assertEquals( s.size() , 1 ,  "02 - CoreSet size failed.") ;      
+            assertEquals( s.size() , 1 ,  "02 - CoreSet size failed.") ;
         }
     
         public function testToArray():void 
         {
-            
             var s:CoreSet ;
             var a:Array ;
             
@@ -266,7 +263,7 @@ package system.data.sets
             a = s.toArray() ;
             
             assertNotNull( a , "01-02 - CoreSet toArray failed.") ;
-            ArrayAssert.assertEquals( a , [], "01-02 - CoreSet toArray failed.") ;            
+            ArrayAssert.assertEquals( a , [], "01-02 - CoreSet toArray failed.") ;
             
             s.add(2) ;
             s.add(3) ;
@@ -274,9 +271,8 @@ package system.data.sets
             
             a = s.toArray() ;
             
-            assertNotNull( a , "02-02 - CoreSet constructor failed.") ;
-            ArrayAssert.assertEquals( a , [2,3,4], "02-02 - CoreSet constructor failed.") ;            
-            
+            assertNotNull( a , "02-02") ;
+            ArrayAssert.assertEquals( a , [2,3,4], "02-02") ;
         }
 
         public function testToSource():void
