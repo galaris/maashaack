@@ -37,10 +37,7 @@ package system.data.maps
 {
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
-
-    import system.Environment;
-    import system.hosts.HostID;
-
+    
     public class AllTests
     {
         public static function suite():Test
@@ -52,14 +49,12 @@ package system.data.maps
             suite.addTestSuite( MapEntryTest          ) ;
             suite.addTestSuite( MapFormatterTest      ) ;
             suite.addTestSuite( MapUtilsTest          ) ;
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( MultiSetMapTest   ) ;
-                suite.addTestSuite( MultiValueMapTest ) ;
-            }
-            suite.addTestSuite( MultiMapFormatterTest ) ;
             suite.addTestSuite( SortedArrayMapTest    ) ;
             suite.addTestSuite( TypedMapTest          ) ;
+            
+            suite.addTestSuite( MultiValueMapTest     ) ;
+            suite.addTestSuite( MultiMapFormatterTest ) ;
+            suite.addTestSuite( MultiSetMapTest       ) ;
             
             return suite;
         }
