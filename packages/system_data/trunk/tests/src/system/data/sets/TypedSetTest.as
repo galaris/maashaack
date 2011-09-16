@@ -42,11 +42,10 @@ package system.data.sets
     import system.data.Iterator;
     import system.data.Set;
     import system.data.Typeable;
-    import system.data.Validator;    
-
+    import system.data.Validator;
+    
     public class TypedSetTest extends TestCase 
     {
-
         public function TypedSetTest(name:String = "")
         {
             super( name );
@@ -68,10 +67,10 @@ package system.data.sets
                         
             tc = new TypedSet( String, se ) ;
             assertEquals( tc.type , String , "01 - TypedSet constructor failed with a specific type argument in this constructor.") ;
-
+            
             tc = new TypedSet( null , se ) ;
             assertNull( tc.type , "02 - TypedSet constructor failed with a specific type argument in this constructor.") ;
-
+            
             tc = new TypedSet( [] , se ) ; // 
             assertNull( tc.type , "03 - TypedSet constructor failed with a specific type argument in this constructor, other type, must use a Class or a Function value.") ;
         }
@@ -79,7 +78,7 @@ package system.data.sets
         public function testConstructorCollectionArgument():void
         {
             var se:Set = new ArraySet() ;
-            var tc:TypedSet ;            
+            var tc:TypedSet ;
             
             // 01 - test "collection" argument is null
             try
@@ -91,8 +90,8 @@ package system.data.sets
             {
                 assertTrue( e is ArgumentError , "01-02 - TypedSet constructor failed." ) ;
                 assertEquals( e.message , "The passed-in 'collection' argument not must be 'null' or 'undefined'.", "01-03 - TypedSet constructor failed." ) ;
-            }            
-                        
+            }
+            
             // 02 - basic test with a no empty Collection
             
             se.add("item1") ;
@@ -130,7 +129,7 @@ package system.data.sets
         }
         
         // test methods and attributes
-
+        
         public function testType():void
         {
             var se:Set = new ArraySet() ;
@@ -146,11 +145,10 @@ package system.data.sets
             assertEquals( tc.type , clazz , "03 - The TypedSet type property failed." ) ;
             
             tc.type = null ;
-            assertNull( tc.type , "04 - The TypedSet type property failed." ) ;            
-
-            tc.type = 2 ;
-            assertNull( tc.type , "05 - The TypedSet type property failed." ) ;    
+            assertNull( tc.type , "04 - The TypedSet type property failed." ) ;
             
+            tc.type = 2 ;
+            assertNull( tc.type , "05 - The TypedSet type property failed." ) ;
         }
         
         public function testAdd():void
@@ -165,7 +163,7 @@ package system.data.sets
             try
             {
                 tc.add(3) ;
-                fail("02-01 - The TypedSet add method failed.") ;    
+                fail("02-01 - The TypedSet add method failed.") ;
             }
             catch( e:Error )
             {
@@ -180,7 +178,7 @@ package system.data.sets
             var tc:TypedSet = new TypedSet( String , se ) ;
             tc.clear() ;
             assertEquals( tc.size() , 0 , "The TypedSet clear method failed." ) ;
-        }        
+        }
         
         public function testClone():void
         {
@@ -195,14 +193,14 @@ package system.data.sets
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertEquals( tc.get(0) , "item1" , "The TypedSet get method failed." ) ;        
+            assertEquals( tc.get(0) , "item1" , "The TypedSet get method failed." ) ;
         }
-
+        
         public function testIndexOf():void
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertEquals( tc.indexOf("item2") , 1 , "01 - The TypedSet indexOf method failed." ) ;     
+            assertEquals( tc.indexOf("item2") , 1 , "01 - The TypedSet indexOf method failed." ) ;
             assertEquals( tc.indexOf("item4") , -1 , "02 - The TypedSet indexOf method failed." ) ;
         } 
         
@@ -210,7 +208,7 @@ package system.data.sets
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertFalse(tc.isEmpty() , "01 - The TypedSet isEmpty method failed." ) ;     
+            assertFalse(tc.isEmpty() , "01 - The TypedSet isEmpty method failed." ) ;
             tc.clear() ;
             assertTrue(tc.isEmpty() , "02 - The TypedSet isEmpty method failed." ) ;
         } 
@@ -220,7 +218,7 @@ package system.data.sets
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
             var it:Iterator = tc.iterator() ;
-            assertNotNull( it, "The TypedSet iterator method failed." ) ;     
+            assertNotNull( it, "The TypedSet iterator method failed." ) ;
         }          
         
         public function testRemove():void
@@ -228,7 +226,7 @@ package system.data.sets
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
             
-            assertTrue( tc.remove("item1"), "The TypedSet remove method failed." ) ;     
+            assertTrue( tc.remove("item1"), "The TypedSet remove method failed." ) ;
             assertFalse( tc.remove("item4"), "The TypedSet remove method failed." ) ;
         } 
         
@@ -236,7 +234,7 @@ package system.data.sets
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertEquals( tc.size() , se.size() , "The TypedSet size method failed." ) ;     
+            assertEquals( tc.size() , se.size() , "The TypedSet size method failed." ) ;
         } 
         
         public function testSupports():void
@@ -260,14 +258,14 @@ package system.data.sets
             var tc:TypedSet = new TypedSet( String , se ) ;
             assertEquals( tc.toSource() , 'new system.data.sets.TypedSet(String,new system.data.sets.ArraySet(["item1","item2"]))' , "The TypedSet toSource method failed." ) ;     
         }
-
+        
         public function testToString():void
         {
             var se:ArraySet = new ArraySet(["item1", "item2"]) ;
             var tc:TypedSet = new TypedSet( String , se ) ;
-            assertEquals( tc.toString() , se.toString() , "The TypedSet toString method failed." ) ;     
+            assertEquals( tc.toString() , se.toString() , "The TypedSet toString method failed." ) ;
         }
-                
+        
         public function testValidate():void
         {
             var se:Set = new ArraySet(["item1", "item2"]) ;
@@ -275,7 +273,7 @@ package system.data.sets
             
             try
             {
-                tc.validate( "hello" ) ;         
+                tc.validate( "hello" ) ;
             }
             catch( e:Error )
             {
@@ -293,8 +291,6 @@ package system.data.sets
                 assertEquals( e.message , "TypedSet.validate(1) is mismatch." , "03-02 - the validate method must throw a TypeError.") ;
             }
             
-        }        
-           
-
+        }
     }
 }
