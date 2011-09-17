@@ -8,8 +8,146 @@ Because we deal with a lot of packages, libraries, tools and platform libraries<
 we defined a way to build them all in sequence
   * to be able to order them (eg. build *A* before *B*)
   * to be able to sync' them (eg. copy *A* into *B* libs)
-  * to be able to distribute them (eg. copy *A* binaries in dist folder or into a zip file)
   * to be able to tag them (eg. build *A*, *B*, *C* and tag them "beta 1")
+  * to be able to distribute them (eg. copy *A* binaries in dist folder or into a zip file)
+
+All this is automated and save us a lot of time.
+
+<br>
+<br>
+
+== Important files ==
+
+*build.xml* is where all the logic is, that's the *metabuild* file or the main entry point if you prefer.
+
+*meta.xml* are the project (or module) builds meant to be called by *build.xml*.
+
+<br>
+
+The Metabuild geta all its configuration from the `build` folder
+
+*compile.properties* define which projects to compile and in which order.
+
+*common.properties* contains the default settings
+
+*version.properties* contains the version information for the metabuild
+
+the `macros` folder contains ant macrodef
+
+the `tasks` folder contains reusable tasks (also macrodef)
+
+and the `modules` folder contains each projects configurations
+
+<br>
+<br>
+
+== How does it works ? ==
+
+You run *build.xml*
+
+all the macros, tasks, modules, etc. are loaded
+
+after we load either *common.properties* or *user.properties* to configure the build
+
+then a build tag is created based on *version.properties*, for ex: tag *1A099*
+
+then we load *compile.properties* to know which projects to compile
+
+then we loop in those different projects and call their respective `/build/modules/NAME.xml`<br>
+(NAME being the current project name)
+
+which then call the respective `/CATEGORY/NAME/meta.xml` (CATEGORY being one of packages, libraries, tools or platform)
+
+and done.
 
 
-== Details ==
+<br>
+<br>
+
+== How to add a project to the metabuild ==
+
+Before doing anything in the metabuild itself be sure that your project follow the [ProjectStructure project structure]<br>
+and that the local [Build] follow the organisation of defining both a *build.xml* and a *meta.xml* (as well as a *build.properties*).
+
+<br>
+
+Now, you first need to edit the *DEPS* of the *solution* and be sure you project is checked out.
+
+with maashaackSA for ex:
+{{{
+Var("root") + "/packages/system_terminals"    : Var("repo") + "/packages/system_terminals/trunk",
+}}}
+
+After doing a `gclient sync` or `gclient update`<br>
+the you will need to add your project to the *compile.properties*
+{{{
+system_terminals.name = system_terminals
+system_terminals.path = packages
+}}}
+
+here *name* is the file system name of the project<br>
+and *path* is the category where the project reside.
+
+Remember that *compile.properties* decide in which order projects are compiled<br>
+for example:
+{{{
+core.name = core
+core.path = packages
+
+system_terminals.name = system_terminals
+system_terminals.path = packages
+
+astuce.name = astuce
+astuce.path = libraries
+}}}
+
+here *system.terminals* will be compile after the *core* project but before the *astuce* project.
+
+<br>
+
+Now you need to go into `build/modules/` and create an XML file to configure how the project is compiled
+
+For example with *system.terminals* we create `build/modules/system_terminals.xml`
+
+you need to edit the name of the target
+{{{
+<target name="compile-system_terminals">
+}}}
+
+then you need to configure which properties are passed to the build
+{{{
+<ant antfile="${path}/meta.xml" target="main" inheritAll="false">
+  <property name="FLEX_HOME" value="${FLEX_HOME}" />
+  <property name="TODAY" value="${TODAY}" />
+  <property name="local.flashplayerversion" value="${local.flashplayerversion}" />
+  <property file="${path}/build/build.properties"/>
+</ant>
+}}}
+
+`${path}/meta.xml` will always be the same, but in very exceptional case could be changed.
+
+You need to pass the minimum properties required by the *meta.xml*
+  * FLEX_HOME
+  * TODAY
+  * local.flashplayerversion
+
+and also the respective *build.properties* for the project
+which will always be `${path}/build/build.properties` (but again can be changed for exceptional case)
+
+After that, you will need to configure if your project is deployed (or not) in the *dist* folder
+{{{
+<copy file="${path}/bin-release/system.terminals.swc" todir="libs/swc" overwrite="true" />
+<copy file="${path}/bin-release/system.terminals.abc" todir="libs/abc" overwrite="true" />
+}}}
+here want to distribute both a SWC and an ABC of the package.
+
+And finally you need to indicate if the currently compiled project need to be copied in other projects dependencies
+{{{
+<copy file="${path}/bin-release/system.terminals.swc" todir="libraries/astuce/lib-swc" overwrite="true" />
+<copy file="${path}/bin-release/system.terminals.abc" todir="libraries/astuce/lib-abc" overwrite="true" />
+}}}
+here we want to copy the newly compiled binaries to the *astuce* project.
+
+<br>
+
+Voila, from there your project is integrated in the metabuild and will be compiled/copied/sync'ed/etc. each time the metabuild run.
