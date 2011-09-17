@@ -1,4 +1,4 @@
-#summary How to use the MetaBuild.
+#summary Everything about the MetaBuild.
 
 == Introduction ==
 
