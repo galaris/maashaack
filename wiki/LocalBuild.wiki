@@ -9,6 +9,236 @@ There are 3 files in total
   * the *build.properties* that configure the project
   * the *meta.xml* that actually do the build
 
-All those files are organised based on the project structure.
+All those files follow the convention of the [ProjectStructure projects structure].
 
-== Details ==
+== How to create a local build ? ==
+
+The goal is to stay simple and minimalist, consider this setup to build the essential
+  * a SWF
+  * a SWC
+  * an ABC
+  * generate the documentation
+
+nothing less, nothing more<br>
+no packaging into a zip, no deployment into a folder, no copying into another project, etc.
+
+<br>
+
+To get started, you need to create a *build.properties* in the `build` folder
+
+for example here the one for the project *system.terminals*
+{{{
+ASC      = build/abc/asc.jar
+builtin  = build/abc/builtin.abc
+toplevel = build/abc/toplevel.abc
+avmglue  = build/abc/avmglue.abc
+core     = lib-abc/core.abc
+
+release.dir = bin-release
+
+project.name      = system.terminals
+project.src       = src
+project.lib-swc   = lib-swc
+project.as        = ${project.name}.as
+project.swc       = ${project.name}.swc
+project.abc       = ${project.name}.abc
+project.namespace = http://maashaack.googlecode.com/2011/system/terminals
+project.manifest  = build/manifest.xml
+project.publisher = maashaack
+project.creator   = Firstname Lastname
+}}}
+
+By convention, we will always
+  * release in the `bin-release` folder
+  * build from the `src` folder
+  * have SWC libraries in the `lib-swc` folder
+  * have ABC libraries in the `lib-abc` folder
+  * etc.
+
+The only variables should be the *name* of the project, its *namespace* and the *project.creator*.
+
+<br>
+
+The *build.xml* is pretty generic
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="system.terminals-SA" default="main" basedir=".">
+    <target name="define">
+        <property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/4.5.0" />
+        <property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/4.5.0" />
+        <property name="local.flashplayerversion" value="10.2" />
+        <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
+            <os family="mac" />
+        </condition>
+        <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
+            <os family="windows" />
+        </condition>
+        <property file="build/build.properties"/>
+        <tstamp>
+            <format property="TODAY" pattern="dd MMMM yyyy" />
+        </tstamp>
+        <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+    </target>
+    
+    <target name="clean" depends="define">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <import file="meta.xml" />
+</project>
+}}}
+
+You could almost copy this file from projects to projects and it will almost always stay the same.
+
+The main things to edit are the project name, eg. "system.terminals-SA"<br>
+and maybe some properties (it can vary depending on the project<br>
+for example a *library* would probably define a *version.properties* on top of the *build.properties*.
+
+<br>
+And to finish the *meta.xml* where all the work is done.
+
+Don't underestimate this file, it has to work locally but also when called by the [MetaBuild].
+
+here the basic structure
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="system.terminals" default="main" basedir=".">
+    
+    <target name="clean">
+    </target>
+    
+    <target name="before">
+    </target>
+    
+    <target name="main" depends="clean,before,build-abc,build-swc,after">
+    </target>
+    
+    <target name="build-abc">
+    </target>
+    
+    <target name="build-swc">
+    </target>
+    
+    <target name="after">
+    </target>
+    
+</project>
+}}}
+
+Here again the main thing to edit is the project name, eg. "system.terminals"
+
+For the rest, the important thing to understand is the order of execution of the different targets<br>
+first we *clean*, then we do the *before*, we do all the *build-something* then we end up with the *after*.
+
+Again by convention we'll try to name those target the same way between different projects
+  * *build-swf* build a SWF file (to use with Flash/AIR)
+  * *build-swc* build a SWC file (to use with Flash/AIR)
+  * *build-abc* build an ABC file (to use with redtamarin)
+  * *build-doc* generate the documentation (in general with ASDoc)
+
+you can also have optional targets
+  * *build-swf-test* build a SWF of the unit tests
+  * *build-swc-test* build a SWC of the unit tests
+  * *build-abc-test* build an ABC of the unit tests
+  * *build-swc-SA* build a standalone SWC (eg. combining all the dependencies from `lib-swc`)
+  * *build-exe* build an executable
+  * etc.
+
+<br>
+<br>
+
+== Optional files ==
+
+The *manifest.xml* file<br>
+this file is needed (or preferred) when you build an SWC<br>
+also in *build.properties* the following
+  * *project.manifest* the manifest file
+  * *project.namespace*  the namespace
+and in the *src* folder
+  * *Library.as* shim to declare the SWC ID and associate an icon
+  * *projectname.png* the icon for the SWC
+
+here some examples from the *system.terminals* project
+
+from *build.properties*
+{{{
+project.namespace = http://maashaack.googlecode.com/2011/system/terminals
+project.manifest  = build/manifest.xml
+}}}
+
+*manifest.xml*
+{{{
+<?xml version="1.0" encoding="utf-8"?>
+
+<componentPackage>
+    <component id="system.terminals" class="Library" />
+</componentPackage>
+}}}
+
+*Library.as*
+{{{
+package
+{
+    import flash.display.Sprite;
+    
+    [ExcludeClass]
+    [IconFile("system.terminals.png")]
+    public class Library extends Sprite
+    {
+        public function Library()
+        {
+            super();
+        }
+        
+    }
+}
+}}}
+
+
+<br>
+<br>
+
+The *config.xml* file<br>
+this file is used to configure the compiler with [conditional compilation] constants.
+
+from the *system.terminals* project<br>
+*config.xml*
+{{{
+<?xml version="1.0"?>
+<flex-config>
+    <compiler>
+        <define append="true"> 
+            <name>API::FLASH</name> 
+            <value>true</value> 
+        </define> 
+        <define append="true"> 
+            <name>API::REDTAMARIN</name> 
+            <value>false</value> 
+        </define> 
+   </compiler>
+</flex-config>
+}}}
+
+Also, when you are in a case where you;re compiling both an ABC and a SWC,<br>
+you will have to define those *CC* manually in the *build-abc* target
+
+from the *system.terminals* project<br>
+in *meta.xml*, the *build-abc* target
+{{{
+    <target name="build-abc">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${core} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+    </target>
+}}}
