@@ -1,5 +1,32 @@
 #summary get the code.
 
+== Introduction ==
+
+We work on *maashaack* for many years, and now we come to a point<br>
+where we had to reorganize the code to allow the project to evolve.
+
+If at the beginning we were planing just an application framework,<br>
+now we are dealing with the organisation of an application framework<br>
+but also the organisation of libraries, tools and platform libraries.
+
+That means only using Subversion and only using one repository is not enough, we need more.
+
+After different personal experiences (at work and with big commercial projects),<br>
+a lot of discussions about code dependencies, organisations, builds, etc.<br>
+and about one full year of numerous tests and experiments<br>
+we think we came up with a "system" that works.
+
+In summary, we copied (more or less) what Google did with Chrome (and Chromium)<br>
+and now we have *solutions* of code that you can check out with *gclient*.
+
+Those solutions are much more simple that what Google Chrome does,<br>
+we have only one *DEPS* file at the root of a *config* which is used to create a solution.
+
+By default we have two main solutions:
+  * maashaack<br>the fusion of all the sources in one single project
+  * maashaackSA<br>each project considered as standalone module<br>and organised in numerous projects
+
+
 == New ==
 
 You will need the [gclient] tool.
