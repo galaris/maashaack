@@ -23,25 +23,162 @@ Those solutions are much more simple that what Google Chrome does,<br>
 we have only one *DEPS* file at the root of a *config* which is used to create a solution.
 
 By default we have two main solutions:
-  * maashaack<br>the fusion of all the sources in one single project
-  * maashaackSA<br>each project considered as standalone module<br>and organised in numerous projects
+  * *maashaack*<br>the fusion of all the sources in one single project
+  * *maashaackSA*<br>each project considered as standalone module<br>and organised in numerous projects
 
+By extension, we can also create custom solutions to either<br>
+work with other open source or commercial projects.
+
+What does it change for you if that to checkout the code<br>
+you will have to use gclient on top of subversion,<br>
+but this bring a lot of advantages:
+  * isolating projects as *modules* allow us to focus more on the module itself
+    * better code quality
+    * more unit tests
+    * better documentation
+    * more modules as now we can start something new in about a week-end
+  * categories for those modules
+    * packages
+    * libraries
+    * tools
+    * platform libraries
+  * better integration with http://code.google.com/p/redtamarin/ redtamarin]
+    * most of the maashaack code will be reusable there
+    * some code will be specialized to run with redtamarin
+    * AS3 server side stuff
+  * the freedom of choice
+    * we try to setup a well tested and organised framework<br>but you may want to use only parts of it
+    * this new modular architecture will allow you to pick only what you need/want
+    * we hope it will help people to either contribute to existing modules or create new ones
 
 == New ==
 
 You will need the [gclient] tool.
 
-If you want to work with all the projects fused in a *src* folder
+*maashaack*<br>
+If you want to work with all the projects fused in one *src* folder
 {{{
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaack
 $gclient update
 }}}
 
+You will obtain this code structure
+{{{
+.
+`-- maashaack
+    |-- DEPS
+    |-- build
+    |   |-- build.properties
+    |   |-- config.xml
+    |   `-- manifest.xml
+    |-- build.xml
+    |-- changelog.txt
+    |-- license.txt
+    |-- meta.xml
+    `-- src
+        |-- Library.as
+        |-- core
+        |   `-- ...
+        |-- diagnostics.as
+        |-- graphics
+        |   `-- ...
+        |-- maashaack.as
+        |-- maashaack.png
+        |-- system
+        |   |-- ...
+        |   `-- version.properties
+        `-- testrunner.as
+}}}
+
+From there you will be able to build *maashaack.swc*, *maashaack-debug.swc*, etc.<br>
+all the source code combined in one SWC with some options<br>
+for example: *maashaack-debug.swc* could contain debug logs.
+
+<br>
+<br>
+
+*maashaackSA*<br>
 If you want to work on each projects independently (SA: Stand Alone)
 {{{
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaackSA
 $gclient update
 }}}
+
+You will obtain this code structure
+{{{
+.
+`-- maashaackSA
+    |-- DEPS
+    |-- build
+    |   |-- ant
+    |   |-- common.properties
+    |   |-- compile.properties
+    |   |-- macros
+    |   |-- modules
+    |   |-- tasks
+    |   |-- user.properties
+    |   |-- user.tmp
+    |   `-- version.properties
+    |-- build.xml
+    |-- changelog.txt
+    |-- libraries
+    |   |-- astuce
+    |   |-- cgilib
+    |   |-- eden
+    |   |-- httplib
+    |   |-- logd
+    |   |-- mimelib
+    |   `-- v8benchmark
+    |-- libs
+    |   |-- abc
+    |   `-- swc
+    |-- license.txt
+    |-- metabuild
+    |-- packages
+    |   |-- core
+    |   |-- graphics
+    |   |-- system
+    |   |-- system_broadcasters
+    |   |-- system_cli
+    |   |-- system_comparators
+    |   |-- system_data
+    |   |-- system_diagnostics
+    |   |-- system_errors
+    |   |-- system_evaluators
+    |   |-- system_events
+    |   |-- system_formatters
+    |   |-- system_hosts
+    |   |-- system_io
+    |   |-- system_ioc
+    |   |-- system_logging
+    |   |-- system_logic
+    |   |-- system_models
+    |   |-- system_network
+    |   |-- system_numeric
+    |   |-- system_process
+    |   |-- system_reflection
+    |   |-- system_remoting
+    |   |-- system_rules
+    |   |-- system_signals
+    |   |-- system_terminals
+    |   `-- system_text
+    |-- platform
+    |   |-- avmglue
+    |   |-- clib
+    |   |-- shell
+    |   `-- temp
+    `-- tools
+        |-- build-abc
+        |-- swc2abc
+        `-- swfinfo
+}}}
+
+From there you will be able to build *core.swc*, *system.terminals.swc*, etc.<br>
+each projects compiled to its own SWC<br>
+`packages/core` produce *core.swc*<br>
+`packages/system_terminals` produce *system.terminals.swc*<br>
+etc.
+
 
 
 If you need to work on boths (developers/commiters)<br>
