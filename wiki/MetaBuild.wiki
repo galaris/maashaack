@@ -151,3 +151,84 @@ here we want to copy the newly compiled binaries to the *astuce* project.
 <br>
 
 Voila, from there your project is integrated in the metabuild and will be compiled/copied/sync'ed/etc. each time the metabuild run.
+
+<br>
+<br>
+
+== Problem with Subversion password  ==
+
+If the metabuild get stuck with
+{{{
+Password for 'zwetan':       [svn] Authentication realm:
+<https://maashaack.googlecode.com:443> Google Code Subversion Repository
+}}}
+
+just paste your SVN password and type ENTER
+
+you may have to do that more than once
+(but once done the system should remember your log/pwd afterwards)
+
+<br>
+<br>
+
+== Problem with Ant addons ==
+
+if the metabuild fail with "FTP task not found" or other error related to an Ant addon.
+
+you need to do a full install of *Apache Ant 1.8.2*<br>
+download it here http://ant.apache.org/bindownload.cgi
+
+copy it to your share folder
+{{{
+$ sudo cp -R apache-ant-1.8.2 /usr/share/java/apache-ant-1.8.2
+}}}
+
+replace the symlink
+{{{
+$ cd /usr/share
+$ sudo mv ant ant-old
+$ sudo ln -s java/apache-ant-1.8.2 ant
+}}}
+
+install the Ant addons
+{{{
+$ cd /usr/share/java/apache-ant-1.8.2
+$ sudo ant =f fetch.xml -Ddest=system
+}}}
+
+<br>
+<br>
+
+== Problem with Ant memory ==
+
+If you end up with a memory error<br>
+for ex:
+{{{
+/OpenSource/maashaackSA/build/modules/astuce.xml:8: The following error
+occurred while executing this line:
+/OpenSource/maashaackSA/libraries/astuce/meta.xml:99:
+java.lang.OutOfMemoryError: PermGen space
+}}}
+
+You will need to add more memory to Ant
+
+Under OS X / Linux, edit your *.profile* file 
+{{{
+$ cd ~
+$ sudo pico .profile
+}}}
+
+and add the following lines
+{{{
+export ANT_HOME=/usr/share/ant/
+export ANT_OPTS="-Xms512m -Xmx2048m"
+}}}
+
+I use those settings for ex
+{{{
+export ANT_HOME=/usr/share/ant/
+export ANT_OPTS="-Xms1024m -Xmx4096m -XX:MaxPermSize=512m"
+}}}
+
+Under Windows, you will have to set the ANT_OPTS environment variable in the appropriate<br>
+"My Computer" properties dialog box (winXP), "Computer" properties (Vista).
