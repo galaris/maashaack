@@ -30,6 +30,7 @@
    * [Tools101 Get the tools]
    * [Contributors HOWTO contribute]
    * [Build HOWTO Build]
+     * [LocalBuild The local build]
      * [MetaBuild The MetaBuild]
    * [ConditionalCompilation Conditional Compilation]
    * [ProjectStructure projects structure]
