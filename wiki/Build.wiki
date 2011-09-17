@@ -2,7 +2,57 @@
 
 == Introduction ==
 
+Before you build you need a fair good understanding of the [ProjectStructure projects structure].
 
+All our builds use Ant.
 
+We have different types of build
+  * local build, from within the project
+  * [MetaBuild], a build driving other builds
 
-== Details ==
+== Building a single project ==
+
+Select the category (either `packages`, `libraries`, `tools` or `platform`)<br>
+and select a project name.
+
+Go into the root folder of this project<br>
+for ex: `../packages/core`
+
+Run the local build<br>
+{{{
+$ ant
+}}}
+or
+{{{
+$ ant -f build.xml
+}}}
+
+You will get the result of the build in the `bin-release` folder.
+
+*build defaults*
+
+A local build will expect a path for a Flex SDK<br>
+our default build.xml use
+{{{
+<property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/4.5.0" />
+<property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/4.5.0" />
+}}}
+
+*build options*
+
+By default, with a local build we always build the documentation (with ASDoc)<br>
+but you can desactivate it like that
+{{{
+ant -Dbuild.nodocumentation=true
+}}}
+
+*custom local build*
+
+If you're not happy with some defaults or you have special needs<br>
+just copy *build.xml* to say *build-custom.xml*<br>
+and edit accordingly
+
+for ex:
+{{{
+<property name="FLEX_HOME_MAC" value="/dev_stuff/Adobe/Flex_sdks_4.5.0" />
+}}}
