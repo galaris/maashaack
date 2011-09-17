@@ -24,10 +24,13 @@ $mv solutions.txt .gclient
 $gclient update
 }}}
 
+<br>
+<br>
+
 == Old ==
 
 {{{
 $svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
 }}}
 
-<font color="red">Deprecated, we keep it only because some applications still use this SVN path with svn:external, but we don;t update it anymore.</font><br>
+<font color="red">Deprecated, we keep it only because some applications still use this SVN path with svn:external, but we don't update it anymore.</font><br>
