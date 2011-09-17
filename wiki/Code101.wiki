@@ -6,7 +6,7 @@
 $svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
 }}}
 
-<font color="red" size="bold">not implemented</font><br>
+<font color="red" size="14">not supported anymore</font><br>
 
 == New ==
 
