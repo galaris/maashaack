@@ -2,5 +2,14 @@
 
 == Introduction ==
 
+What we call a *MetaBuild* is simply an Ant build that drives other ant builds.
+
+Because we deal with a lot of packages, libraries, tools and platform libraries<br>
+we defined a way to build them all in sequence
+  * to be able to order them (eg. build *A* before *B*)
+  * to be able to sync' them (eg. copy *A* into *B* libs)
+  * to be able to distribute them (eg. copy *A* binaries in dist folder or into a zip file)
+  * to be able to tag them (eg. build *A*, *B*, *C* and tag them "beta 1")
+
 
 == Details ==
