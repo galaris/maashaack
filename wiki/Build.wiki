@@ -98,7 +98,7 @@ If you are the owner of a module/project, edit the *project.creator* property.
 
 == Building a solution ==
 
-For now we have only two solutions: *maashaack* and *maashaackSA*.
+For now we have only two solutions: *maashaack* and *maashaackSA* (see [Code101 Get the Code]).
 
 The difference with a single project is that a solution can build more than one project<br>
 and for advanced case like *maashaackSA* we use what we call a [MetaBuild].
