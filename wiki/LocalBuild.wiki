@@ -201,7 +201,7 @@ package
 <br>
 
 The *config.xml* file<br>
-this file is used to configure the compiler with [conditional compilation] constants.
+this file is used to configure the compiler with [ConditionalCompilation conditional compilation] constants.
 
 from the *system.terminals* project<br>
 *config.xml*
@@ -221,7 +221,7 @@ from the *system.terminals* project<br>
 </flex-config>
 }}}
 
-Also, when you are in a case where you;re compiling both an ABC and a SWC,<br>
+Also, when you are in a case where you're compiling both an ABC and a SWC,<br>
 you will have to define those *CC* manually in the *build-abc* target
 
 from the *system.terminals* project<br>
