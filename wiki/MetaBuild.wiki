@@ -24,7 +24,7 @@ All this is automated and save us a lot of time.
 
 <br>
 
-The Metabuild geta all its configuration from the `build` folder
+The Metabuild gets all its configuration from the `build` folder
 
 *compile.properties* define which projects to compile and in which order.
 
