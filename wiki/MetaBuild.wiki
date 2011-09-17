@@ -64,7 +64,7 @@ and done.
 <br>
 <br>
 
-== How to add a project to the metabuild ==
+== How to add a project to the metabuild ? ==
 
 Before doing anything in the metabuild itself be sure that your project follow the [ProjectStructure project structure]<br>
 and that the local [Build] follow the organisation of defining both a *build.xml* and a *meta.xml* (as well as a *build.properties*).
