@@ -46,6 +46,7 @@ project structure
       |   |_ etc.
       |
       |_ (lib)
+      |_ (lib-abc)
       |_ (lib-swc)
       |_ src
       |_ tests
@@ -67,6 +68,7 @@ project structure
     * etc.
     * choose your own organization<br>all your project logos, images etc. goes there
  * *lib* source code libraries (`*.as`)
+ * *lib-abc* compiled libraries (`*.abc`)
  * *lib-swc* compiled libraries (`*.swc`)
  * *src* source code of the current project
  * *tests* general tests and unit tests
