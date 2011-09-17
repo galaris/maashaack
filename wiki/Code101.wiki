@@ -1,13 +1,5 @@
 #summary get the code.
 
-== Old ==
-
-{{{
-$svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
-}}}
-
-<font color="red" size="10">not supported anymore</font><br>
-
 == New ==
 
 You will need the [gclient] tool.
@@ -31,3 +23,11 @@ copy `https://maashaack.googlecode.com/svn/configs/solutions.txt`
 $mv solutions.txt .gclient
 $gclient update
 }}}
+
+== Old ==
+
+{{{
+$svn checkout http://maashaack.googlecode.com/svn/trunk/AS3 maashaack
+}}}
+
+<font color="red">Deprecated, we keep it only because some applications still use this SVN path with svn:external, but we don;t update it anymore.</font><br>
