@@ -7,7 +7,7 @@ Before you build you need a fair good understanding of the [ProjectStructure pro
 All our builds use Ant.
 
 We have different types of build
-  * local build, from within the project
+  * [LocalBuild local build], from within the project
   * [MetaBuild], a build driving other builds
 
 == Building a single project ==
