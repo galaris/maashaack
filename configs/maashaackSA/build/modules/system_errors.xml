@@ -16,6 +16,11 @@
         <copy file="${path}/bin-release/system.errors.swc" todir="libs/swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.errors.abc" todir="libs/abc" overwrite="true" />-->
         
+        <!-- sync with other projects 
+        <copy file="${path}/bin-release/system.errors.swc" todir="libraries/astuce/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.errors.abc" todir="libraries/astuce/lib-abc" overwrite="true" />
+        -->
+        
     </target>
     
 </project>
