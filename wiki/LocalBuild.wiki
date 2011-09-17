@@ -1,6 +1,14 @@
-#summary The local build.
+#summary Everything about the local build.
 
 == Introduction ==
 
+A local build is really a very basic and simple Ant build.
+
+There are 3 files in total
+  * the *build.xml* in the project
+  * the *build.properties* that configure the project
+  * the *meta.xml* that actually do the build
+
+All those files are organised based on the project structure.
 
 == Details ==
