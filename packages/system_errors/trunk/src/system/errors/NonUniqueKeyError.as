@@ -35,8 +35,6 @@
 
 package system.errors 
 {
-    import core.strings.fastformat;
-    
     /**
      * The error throws when a key is non unique.
      */
@@ -49,7 +47,7 @@ package system.errors
          */
         public function NonUniqueKeyError( key:String = null , id:int = 0 )
         {
-            super( fastformat( string , key ) , id );
+            super( string + "'" + key + "'" , id );
             this.name = "NonUniqueKeyError" ;
             this.key  = key ;
         }
@@ -62,6 +60,6 @@ package system.errors
         /**
          * The localizable or changeable expression to defines the pattern of the error message.
          */
-        public var string:String = "attempting to insert '{0}'" ;
+        public var string:String = "attempting to insert " ;
     }
 }
