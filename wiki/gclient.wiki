@@ -45,3 +45,58 @@ $ cd ~
 $ unzip gclient-0.3.4.zip
 $ ln -s gclient-0.3.4/gclient.py gclient
 }}}
+
+== usage ==
+{{{
+
+Usage: gclient <subcommand> [options] [--] [SCM options/args...]
+a wrapper for managing a set of svn client modules and/or git repositories.
+Version 0.3.4
+
+subcommands:
+   cleanup
+   config
+   diff
+   export
+   pack
+   revert
+   status
+   sync
+   update
+   runhooks
+   revinfo
+
+Options and extra arguments can be passed to invoked SCM commands by
+appending them to the command line.  Note that if the first such
+appended option starts with a dash (-) then the options must be
+preceded by -- to distinguish them from gclient options.
+
+For additional help on a subcommand or examples of usage, try
+   gclient help <subcommand>
+   gclient help files
+
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  --force               (update/sync only) force update even for modules which
+                        haven't changed
+  --nohooks             (update/sync/revert only) prevent the hooks from
+                        running
+  --revision=REV        (update/sync only) sync to a specific revision, can be
+                        used multiple times for each solution, e.g.
+                        --revision=src@123, --revision=internal@32
+  --deps=OS_LIST        (update/sync only) sync deps for the specified (comma-
+                        separated) platform(s); 'all' will sync all platforms
+  --spec=SPEC           (config only) create a gclient file containing the
+                        provided string
+  -v, --verbose         produce additional output for diagnostics
+  --manually_grab_svn_rev
+                        Skip svn up whenever possible by requesting actual
+                        HEAD revision from the repository
+  --head                skips any safesync_urls specified in configured
+                        solutions
+  --delete_unversioned_trees
+                        on update, delete any unexpected unversioned trees
+                        that are in the checkout
+}}}
