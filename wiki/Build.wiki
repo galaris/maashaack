@@ -92,3 +92,46 @@ project.creator   = Firstname Lastname
 Things are pretty straightforward and simple.
 
 If you are the owner of a module/project, edit the *project.creator* property.
+
+<br>
+<br>
+
+== Building a solution ==
+
+For now we have only two solutions: *maashaack* and *maashaackSA*.
+
+The difference with a single project is that a solution can build more than one project<br>
+and for advanced case like *maashaackSA* we use what we call a [MetaBuild].
+
+In either case, things would be already setup in advance and to build a solution
+you just need to
+
+Run the solution build from the root<br>
+{{{
+$ ant
+}}}
+or
+{{{
+$ ant -f build.xml
+}}}
+
+*build options*
+
+By default, a solution build use the file `build/common.properties`.
+
+To override this file,<br>
+you will need to copy `build/user.tmp` to `build/user.properties`<br>
+and change your personal settings in *user.properties*.
+
+for example:<br>
+*common.properties*
+{{{
+local.flashplayerversion = 10.2
+build.showoptions = true
+}}}
+
+*user.properties*
+{{{
+local.flashplayerversion = 10.3
+build.showoptions = false
+}}}
