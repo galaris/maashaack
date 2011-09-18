@@ -351,7 +351,7 @@ include "system/terminals/TraceConsole.as";
 few problems you may encounter:
 
 If Flash Builder show you a warning or an error,<br>
-be sure that the `${project.as}` is not included in the "ActionScript Applications".
+be sure that the `${project.as}` is not included in the "!ActionScript Applications".
 
 If you also generating the documentation with ASDoc,<br>
 be sure to ignore the `${project.as}` file
