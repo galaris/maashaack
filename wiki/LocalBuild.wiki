@@ -303,3 +303,58 @@ for ex:
     |-- core.abc
     `-- logd.abc
 }}}
+
+you will need also to define some properties in *build.properties*
+{{{
+ASC      = build/abc/asc.jar
+builtin  = build/abc/builtin.abc
+toplevel = build/abc/toplevel.abc
+avmglue  = build/abc/avmglue.abc
+}}}
+
+and if you added more ABC files in `lib-abc` also add them
+{{{
+core     = lib-abc/core.abc
+logd     = lib-abc/logd.abc
+}}}
+
+Then you will need to define the target *build-abc*
+{{{
+    <target name="build-abc">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${core} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+    </target>
+}}}
+
+Finally you need to declare an AS file to do all the includes for your ABC library
+
+from the *system.terminals* project<br>
+in `src/system.terminals.as`
+{{{
+include "system/terminals/console.as";
+include "system/terminals/InteractiveConsole.as";
+include "system/terminals/TraceConsole.as";
+}}}
+
+<br>
+
+few problems you may encounter:
+
+If Flash Builder show you a warning or an error,<br>
+be sure that the `${project.as}` is not included in the "ActionScript Applications".
+
+If you also generating the documentation with ASDoc,<br>
+be sure to ignore the `${project.as}` file
+{{{
+<exclude-sources path-element="${basedir}/${project.src}/${project.as}" />
+}}}
