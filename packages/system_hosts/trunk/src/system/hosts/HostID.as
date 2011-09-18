@@ -35,32 +35,31 @@
 
 package system.hosts
 {
-    import system.Enum;    
-
+    import system.Enum;
+    
     /**
      * This static enumeration class defines all host identifiers.
      */
     public class HostID extends Enum
     {
-
         /**
          * Creates a new HostID instance.
-         */   
+         */
         public function HostID( value:int, name:String )
         {
             super( value, name );
         }
-
+        
         /**
          * The 'Unknow' host id constant.
          */
         public static const Unknown:HostID = new HostID( 0, "Unknown" );
-
+        
         /**
          * The 'Flash' host id constant.
          */
         public static const Flash:HostID = new HostID( 1, "Flash" );
-
+        
         /**
          * The 'Air' host id constant.
          */
@@ -73,7 +72,5 @@ package system.hosts
         
         public static const Tamarin:HostID    = new HostID( 3, "Tamarin" );
         public static const RedTamarin:HostID = new HostID( 4, "RedTamarin" );
-        
     }
 }
-

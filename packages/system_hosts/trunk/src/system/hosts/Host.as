@@ -43,12 +43,11 @@ package system.hosts
      */
     public class Host
     {
-        
         /**
          * @private
          */
         private var _id:HostID;
-
+        
         /**
          * @private
          */
@@ -100,4 +99,3 @@ package system.hosts
         }
     }
 }
-
