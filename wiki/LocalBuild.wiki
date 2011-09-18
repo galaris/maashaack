@@ -242,3 +242,64 @@ in *meta.xml*, the *build-abc* target
         <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
     </target>
 }}}
+
+<br>
+<br>
+
+== Building ABC files ==
+
+If you want your project to run under redtamarin you will need to build one or more [http://code.google.com/p/redtamarin/wiki/ABC ABC] file(s).
+
+From the project *build-abc* (in tools) get the file *build-abc_ext.txt* (see it [http://code.google.com/p/maashaack/source/browse/tools/build-abc/trunk/build-abc_ext.txt here])
+
+*build-abc_ext.txt*
+{{{
+abc http://maashaack.googlecode.com/svn/tools/build-abc/trunk/src
+}}}
+
+and follow the [http://code.google.com/p/maashaack/source/browse/tools/build-abc/trunk/readme.txt readme.txt]
+{{{
+copy the file "build-abc_ext.txt" to your build directory
+--------
+$ cd build
+$ svn ps svn:externals . -F build-abc_ext.txt
+property 'svn:externals' set on '.'
+--------
+}}}
+
+your project structure will look like that
+{{{
+.
+|-- build
+|   |-- abc
+|   |   |-- asc.jar
+|   |   |-- avmglue.abc
+|   |   |-- builtin.abc
+|   |   `-- toplevel.abc
+|   |-- build.properties
+|   |-- config.xml
+|   `-- manifest.xml
+|-- build.xml
+|-- changelog.txt
+|-- docs
+|   `-- ...
+|-- license.txt
+|-- meta.xml
+`-- src
+    `-- ...
+}}}
+
+under `build/abc/` from the *build-abc* project you will get
+  * *asc.jar* ASC is the [http://code.google.com/p/redtamarin/wiki/ASC ActionScript Compiler]
+  * *builtin.abc* this is the library containing Array, Object, Boolean, etc. eg. the builtin classes
+  * *toplevel.abc* this is the library containing the redtamarin shell classes (eg. FileSystem, Socket, etc.)
+  * *avmglue.abc* this is the library containing the Flash Player classes defintion (eg. Sprite, getTimer, etc.)
+
+if you need other ABC libraries you can add them in the `lib-abc` folder<br>
+for ex:
+{{{
+.
+ -- lib-abc
+    |-- core.abc
+    `-- logd.abc
+}}}
