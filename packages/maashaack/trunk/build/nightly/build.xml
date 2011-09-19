@@ -26,21 +26,28 @@
         </else>
     </if>
     
-    <target name="main" depends="clean,copy" description="Creates the nightly build."/>
+    <target name="main" depends="copy-sources,copy-tests" description="Creates the nightly build."/>
     
-    <target name="clean">
-        <delete dir="${output}" />
-        <mkdir  dir="${output}" />
-    </target>
-    
-    <target name="copy">
-        <copy todir="${output}">
-            <fileset dir="${sources}" />
+    <target name="copy-sources">
+        <delete dir="${output-sources}" />
+        <mkdir  dir="${output-sources}" />
+        <copy todir="${output-sources}">
+            <fileset dir="${input-sources}" />
         </copy>
         <delete includeemptydirs="true">
-            <fileset dir="${output}" includes="**/.svn" defaultexcludes="false"/>
+            <fileset dir="${output-sources}" includes="**/.svn" defaultexcludes="false"/>
         </delete>
     </target>
-	
+    <target name="copy-tests">
+        <delete dir="${output-tests}" />
+        <mkdir  dir="${output-tests}" />
+        <copy todir="${output-tests}">
+            <fileset dir="${input-tests}" />
+        </copy>
+        <delete includeemptydirs="true">
+            <fileset dir="${output-tests}" includes="**/.svn" defaultexcludes="false"/>
+        </delete>
+    </target>
+
 </project>
 
