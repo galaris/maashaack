@@ -41,7 +41,7 @@ package system.logging
     /**
      * Static class containing constants for use in the level property.
      */
-    public class LoggerLevel extends Enum implements Equatable
+    public final class LoggerLevel extends Enum implements Equatable
     {
         /**
          * Creates a new LoggerLevel instance.
