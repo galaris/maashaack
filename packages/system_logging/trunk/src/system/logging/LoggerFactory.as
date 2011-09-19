@@ -36,16 +36,16 @@
 package system.logging 
 {
     import core.strings.indexOfAny;
-
-    import system.data.Iterator;
-    import system.data.maps.HashMap;
+    
     import system.errors.InvalidChannelError;
+    
+    import flash.utils.Dictionary;
     
     /**
      * This factory provides pseudo-hierarchical logging capabilities with multiple format and output options.
      * <p>This class in an internal class in the package system.logging you can use the Log singleton to deploy all the loggers in your application.</p>
      */
-    public class LoggerFactory 
+    public final class LoggerFactory 
     {
         /**
          * Creates a new LoggerFactory instance.
@@ -65,16 +65,12 @@ package system.logging
             if( target )
             {
                 var filters:Array = target.filters ;
-                var it:Iterator   = _loggers.iterator() ;
-                var log:Logger;
                 var channel:String ;
-                while ( it.hasNext() )
+                for ( channel in _loggers )
                 {
-                    log     = it.next() as Logger ;
-                    channel = it.key() ;
                     if( _channelMatchInFilterList( channel, filters ) )
                     {
-                        target.addLogger( log ) ;
+                        target.addLogger( _loggers[channel] as Logger ) ;
                     }
                 }
                 _targets.push( target );
@@ -96,8 +92,8 @@ package system.logging
          */
         public function flush():void
         {
-            _loggers.clear() ;
-            _targets     = [] ;
+            _loggers = new Dictionary() ;
+            _targets = new Vector.<LoggerTarget>() ;
             _targetLevel = LoggerLevel.NONE ;
         }
         
@@ -114,11 +110,11 @@ package system.logging
         public function getLogger( channel:String ):Logger
         {
             _checkChannel( channel ) ;
-            var result:Logger = _loggers.get( channel ) as Logger ;
+            var result:Logger = _loggers[channel] as Logger ;
             if( result == null )
             {
                 result = new Logger( channel ) ;
-                _loggers.put( channel , result ) ;
+                _loggers[channel] = result ;
             }
             var target:LoggerTarget ;
             var len:int = _targets.length ;
@@ -215,16 +211,12 @@ package system.logging
         {
             if( target )
             {
-                var log:Logger ;
                 var filters:Array = target.filters;
-                var it:Iterator   = _loggers.iterator() ;
-                while (it.hasNext())
+                for ( var channel:String in _loggers )
                 {
-                    log = it.next() as Logger ;
-                    var c:String = it.key() ;
-                    if( _channelMatchInFilterList( c, filters ) )
+                    if( _channelMatchInFilterList( channel, filters ) )
                     {
-                        target.removeLogger( log );
+                        target.removeLogger( _loggers[channel] as Logger );
                     }
                 }
                 var len:int = _targets.length ;
@@ -247,17 +239,19 @@ package system.logging
         /**
          * @private
          */
-        private var _loggers:HashMap = new HashMap() ;
+        private var _loggers:Dictionary = new Dictionary(true) ;
         
         /**
          * The most verbose supported log level among registered targets.
+         * @private
          */
         private var _targetLevel:LoggerLevel = LoggerLevel.NONE ;
         
         /**
          * Array of targets that should be searched any time a new logger is created.
+         * @private
          */
-        private var _targets:Array = [];
+        private var _targets:Vector.<LoggerTarget> = new Vector.<LoggerTarget>() ;
         
         /**
          * This method checks that the specified category matches any of the filter expressions provided in the <code class="prettyprint">filters</code> Array.
@@ -265,11 +259,11 @@ package system.logging
          * @param filters A list of Strings to check category against.
          * @return <code class="prettyprint">true</code> if the specified category matches any of the filter expressions found in the filters list, <code class="prettyprint">false</code> otherwise.
          */
-        private function _channelMatchInFilterList( channel:String , filters:Array):Boolean
+        private function _channelMatchInFilterList( channel:String , filters:Array ):Boolean
         {
             var filter:String;
             var index:int = -1;
-            var len:int   = filters.length ;
+            var len:int = filters.length ;
             for( var i:int ; i<len ; i++ )
             {
                 filter = filters[i] ;
@@ -309,15 +303,15 @@ package system.logging
          */
         private function _resetTargetLevel():void
         {
-            var t:LoggerTarget ;
+            var target:LoggerTarget ;
             var min:LoggerLevel = LoggerLevel.NONE ;
             var len:int = _targets.length ;
             for ( var i:int ; i < len ; i++ )
             {
-                t = _targets[i] as LoggerTarget ;
-                if ( ( min == LoggerLevel.NONE ) || ( int( t.level ) < int(min) ) )
+                target = _targets[i] ;
+                if ( ( min == LoggerLevel.NONE ) || ( int( target.level ) < int(min) ) )
                 {
-                    min = t.level ;
+                    min = target.level ;
                 }
             }
             _targetLevel = min ;
