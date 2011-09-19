@@ -72,24 +72,64 @@ package system.logging
         
         public function testFactory():void
         {
-            assertEquals( target.factory , Log , "01 - The factory property failed.") ;
+            assertEquals( target.factory , Log , "#01") ;
+            
             var factory:LoggerFactory = new LoggerFactory() ;
             target.factory = factory ;
-            assertEquals( target.factory , factory , "02 - The factory property failed.") ;
+            
+            assertEquals( target.factory , factory , "#02") ;
         }
         
         public function testFilters():void
         {
-            ArrayAssert.assertEquals( target.filters , ["*"] , "01 - filters property failed.") ;
+            ArrayAssert.assertEquals( target.filters , ["*"] , "#01") ;
             
             target.filters = ["test" , "test" ] ;
-            ArrayAssert.assertEquals( target.filters , ["test"] , "02 - filters property failed.") ;
+            ArrayAssert.assertEquals( target.filters , ["test"] , "#02") ;
             
             target.filters = ["test", "system.*"] ;
-            ArrayAssert.assertEquals( target.filters , ["test", "system.*"] , "03 - filters property failed.") ;
+            assertTrue( target.filters.indexOf("test") > -1 , "#03-01") ;
+            assertTrue( target.filters.indexOf("system.*") > -1 , "#03-02") ;
             
             target.filters = null ;
-            ArrayAssert.assertEquals( target.filters , ["*"] , "04 - filters property failed.") ;
+            ArrayAssert.assertEquals( target.filters , ["*"] , "#04") ;
+        }
+        
+        public function testAddFilter():void
+        {
+            var filters:Array ;
+            
+            filters = target.filters ;
+            
+            assertTrue( filters.indexOf("*") > -1 , "#01") ;
+            
+            assertTrue( target.addFilter("test1") , "#02-01" ) ;
+            assertTrue( target.addFilter("test2") , "#02-02" ) ;
+            
+            filters = target.filters ;
+            
+            assertTrue( filters.indexOf("*") > -1     , "#03-01") ;
+            assertTrue( filters.indexOf("test1") > -1 , "#03-02") ;
+            assertTrue( filters.indexOf("test2") > -1 , "#03-03") ;
+            
+            assertTrue( filters.indexOf("unknow") == -1 , "#04") ;
+            
+            assertFalse( target.addFilter("test1") , "#05" ) ;
+        }
+        
+        public function testRemoveFilter():void
+        {
+            var filters:Array ;
+            
+            filters = target.filters ;
+            
+            assertTrue( filters.indexOf("*") > -1 , "#01") ;
+            
+            assertTrue( target.removeFilter("*") , "#02" ) ;
+            
+            filters = target.filters ;
+            
+            assertTrue( filters.indexOf("*") == -1 , "#03") ;
         }
         
         public function testFiltersWithNullFilter():void
