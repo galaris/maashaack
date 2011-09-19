@@ -35,7 +35,6 @@
 
 package system.process
 {
-
     /**
      * Defines the interface for an object that is resetable
      */

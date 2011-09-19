@@ -38,7 +38,7 @@ package system.process
     import system.URI;
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     import flash.events.ErrorEvent;
     import flash.events.Event;
     import flash.events.HTTPStatusEvent;

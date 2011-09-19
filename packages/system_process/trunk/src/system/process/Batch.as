@@ -36,12 +36,12 @@ package system.process
 {
     import core.dump;
     import core.reflect.getClassPath;
-
+    
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.collections.formatter;
     import system.data.iterators.VectorIterator;
-
+    
     /**
      * A batch is a collection of <code class="prettyprint">Action</code> objects. 
      * All <code class="prettyprint">Action</code> objects are processed as a single unit.
