@@ -34,10 +34,13 @@
     <target name="doc" depends="clean">
         <exec executable="${asdoc}" failonerror="true" >
             
-            <arg line='-source-path ${asdoc.source.path}'/>
+            <arg line='-external-library-path+=${asdoc.library.eden}'/>
+            
+            <arg line='-source-path+=${asdoc.source.path}'/>
             
             <arg line='-define+=API::FLASH,true' />
             <arg line='-define+=API::REDTAMARIN,false' />
+            <arg line='-define+=LOG::P,false' />
             
             <arg line='${asdoc.options}' />
             
