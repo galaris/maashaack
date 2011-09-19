@@ -71,7 +71,7 @@ package system.errors
         public function testString():void
         {
             var e:NonUniqueKeyError = new NonUniqueKeyError("key") ;
-            assertEquals( e.string , "attempting to insert '{0}'"  , "NonUniqueKeyError message property failed.") ;
+            assertEquals( e.string , "attempting to insert "  , "NonUniqueKeyError message property failed.") ;
         }
     }
 }
