@@ -40,7 +40,7 @@ package system.logging
     /**
      * API for sending log output.
      */
-    public class Logger extends Signal
+    public final class Logger extends Signal
     {
         /**
          * Creates a new Logger instance.
