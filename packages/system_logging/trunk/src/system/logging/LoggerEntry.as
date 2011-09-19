@@ -40,7 +40,7 @@ package system.logging
      * The loging system dispatches a single message each time a process requests information be logged.
      * This entry can be captured by any object for storage or formatting.
      */
-    public class LoggerEntry
+    public final class LoggerEntry
     {
         /**
          * Creates a new LoggerEntry.
