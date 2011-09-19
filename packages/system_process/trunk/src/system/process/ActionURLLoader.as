@@ -35,8 +35,8 @@
 
 package system.process 
 {
-    import system.numeric.Range;
-    
+    import core.maths.clamp;
+
     import flash.events.Event;
     import flash.events.IEventDispatcher;
     import flash.net.URLLoader;
@@ -98,7 +98,12 @@ package system.process
         /**
          * The range of the max depth value.
          */
-        public static var MAX_DEPTH_RANGE:Range = new Range(1, 100) ;
+        public static var MAX_DEPTH:uint = 100 ;
+        
+        /**
+         * The range of the min depth value.
+         */
+        public static var MIN_DEPTH:uint = 1 ;
         
         /**
          * The space string use to format the debugs.
@@ -182,7 +187,7 @@ package system.process
          */
         public function set maxDepth( value:uint ):void
         {
-            _maxDepth = MAX_DEPTH_RANGE.clamp(value) ;
+            _maxDepth = uint( clamp( value , MIN_DEPTH , MAX_DEPTH ) ) ;
         }
         
         /**
