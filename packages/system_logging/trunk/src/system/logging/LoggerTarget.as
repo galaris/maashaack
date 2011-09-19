@@ -35,12 +35,12 @@
 
 package system.logging
 {
-    import core.strings.format;
+    import core.strings.fastformat;
     
-    import system.data.Set;
-    import system.data.sets.ArraySet;
     import system.errors.InvalidFilterError;
     import system.signals.Receiver;
+    
+    import flash.utils.Dictionary;
     
     /**
      * This class provides the basic functionality required by the logging framework for a logger target implementation. 
@@ -53,14 +53,10 @@ package system.logging
          */
         public function LoggerTarget()
         {
-            /* note:
-               I had problem with the unit tests no passing
-               when the Log is assigned directly to the property
-               when we assign the default in the ctor all the unit tests pass
-            */
-            _factory = Log;
-            _filters = new ArraySet( ["*"] );
-            _level   = LoggerLevel.ALL;
+            _factory        = Log;
+            _level          = LoggerLevel.ALL;
+            _filters        = new Dictionary() ;
+            _filters[ "*" ] = PRESENT ;
         }
         
         /**
@@ -89,7 +85,12 @@ package system.logging
          */
         public function get filters():Array
         {
-            return _filters.toArray() ;
+            var result:Array = [] ;
+            for ( var filter:String in _filters )
+            {
+                result.push( filter ) ;
+            }
+            return result ;
         }
         
         /**
@@ -97,17 +98,18 @@ package system.logging
          */
         public function set filters( value:Array ):void
         {
-            if ( value != null && value.length > 0 )
+            var filter:String ;
+            
+            if ( value && value.length > 0 )
             {
-                var len:int = value.length ;
-                for ( var i:int ; i<len ; i++ )
+                for each ( filter in value )
                 {
-                    _checkFilter( value[i] as String ) ;
+                    _checkFilter( filter ) ;
                 }
             }
             else
             {
-                value = ["*"] ;
+                value = [ "*" ] ;
             }
             
             if ( _count > 0 )
@@ -115,7 +117,13 @@ package system.logging
                 _factory.removeTarget( this ) ;
             }
             
-            _filters = new ArraySet( value ) ;
+            _filters = new Dictionary() ;
+            
+            for each ( filter in value )
+            {
+                _filters[ filter ] = PRESENT ;
+            }
+            
             if ( _count > 0 )
             {
                 _factory.addTarget( this ) ;
@@ -146,8 +154,16 @@ package system.logging
          */
         public function addFilter( channel:String ):Boolean 
         {
-            _checkFilter( channel ) ;
-            return _filters.add( channel ) ;
+            if ( channel && channel != "" && _filters[channel] != PRESENT )
+            {
+                _checkFilter( channel ) ;
+                _filters[channel] = PRESENT ;
+                return true ;
+            }
+            else
+            {
+                return false ;
+            }
         }
         
         /**
@@ -156,7 +172,7 @@ package system.logging
          */
         public function addLogger( logger:Logger ):void 
         {
-            if ( logger != null )
+            if ( logger )
             {
                 _count++ ;
                 logger.connect( this ) ;
@@ -200,7 +216,15 @@ package system.logging
          */
         public function removeFilter( channel:String ):Boolean
         {
-            return _filters.remove( channel ) ;
+            if ( channel && channel != "" && _filters[channel] == PRESENT )
+            {
+                delete _filters[channel] ;
+                return true ;
+            }
+            else
+            {
+                return false ;
+            }
         }
         
         /**
@@ -230,12 +254,17 @@ package system.logging
         /**
          * @private
          */
-        private var _filters:Set;
+        private var _filters:Dictionary;
         
         /**
          * @private
          */
         private var _level:LoggerLevel;
+        
+        /**
+         * @private
+         */
+        private static const PRESENT:Boolean = true ;
         
         /**
          * @private
@@ -249,13 +278,13 @@ package system.logging
             
             if ( _factory.hasIllegalCharacters(filter) )
             {
-                 throw new InvalidFilterError( format( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
+                 throw new InvalidFilterError( fastformat( LoggerStrings.ERROR_FILTER , filter ) + LoggerStrings.CHARS_INVALID ) ;
             }
             
             var index:int = filter.indexOf("*") ;
             if ((index >= 0) && (index != (filter.length -1)))
             {
-                throw new InvalidFilterError( format( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
+                throw new InvalidFilterError( fastformat( LoggerStrings.ERROR_FILTER , filter) + LoggerStrings.CHAR_PLACEMENT ) ;
             }
         }
     }
