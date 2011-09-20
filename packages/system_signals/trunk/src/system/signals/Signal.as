@@ -92,35 +92,13 @@ package system.signals
                 return ;
             }
             checkValues( values ) ;
-            var i:int ;
-            var l:int = receivers.length ;
-            var r:Array = [] ;
-            var v:Vector.<SignalEntry> = receivers.slice() ;
-            var e:SignalEntry ;
-            for ( i = 0 ; i < l ; i++ ) 
+            for each( var e:SignalEntry in receivers ) 
             {
-                e = v[i] as SignalEntry ;
                 if ( e.auto )
                 {
-                    r[ r.length ] = e  ;
+                    receivers.splice( receivers.indexOf(e) , 1 ) ;
                 }
-            }
-            if ( r.length > 0 )
-            {
-                l = r.length ;
-                while( --l > -1 )
-                {
-                    i = receivers.indexOf( r[l] ) ;
-                    if ( i > -1 )
-                    {
-                        receivers.splice( i , 1 ) ;
-                    }
-                }
-            }
-            l = v.length ;
-            for ( i = 0 ; i<l ; i++ ) 
-            {
-                (v[i] as SignalEntry).receiver.apply( null , values ) ;
+                e.receiver.apply( null , values ) ;
             }
         }
     }
