@@ -206,13 +206,14 @@
                 <propertycopy name="project.mod" from="module.${project.name}.mod" override="true" />
                 <propertycopy name="project.alt" from="module.${project.name}.alt" override="true" />
                 <var name="project.fullpath" value="${project.path}/${project.mod}"/>
+                <!--
                 <echo message="project.id = @{project.id}"/>
                 <echo message="project.name = ${project.name}"/>
                 <echo message="project.path = ${project.path}"/>
                 <echo message="project.mod = ${project.mod}"/>
                 <echo message="project.alt = ${project.alt}"/>
                 <echo message="project.fullpath = ${project.fullpath}"/>
-
+                 -->
                 <echo message="Compile module [${project.mod}] in [${project.path}]" />
                 
                 <!-- call module build -->
