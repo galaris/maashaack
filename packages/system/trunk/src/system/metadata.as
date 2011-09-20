@@ -35,21 +35,110 @@
 
 package system
 {
+    import core.strings.format;
+    
+    import system.terminals.console;
+    
     /**
-     * stores static metadata about the project
+     * Stores static metadata about the project
      */
     public class metadata
     {
-        public static var name:String = "x4a";
+        /** Name of the project. */
+        public static var name:String = "maashaack";
         
-        public static var fullname:String = "maashaack framework";
+        /** Code Name of the project. */
+        public static var codename:String = "x4a";
         
+        /** Full name of the project. */
+        public static var fullname:String = "maashaack application framework";
+        
+        /** Version of the project. */
         public static var version:Version = new Version();
-        
         /*FDT_IGNORE*/
-        include "version.properties"
+        include "version.properties";
         /*FDT_IGNORE*/
-         
         version.revision = parseInt( "$Rev: 603 $".split( " " )[1] );
+        
+        /** Copyright of the project. */
+        public static var copyright:String = "Copyright © 2006-2011 Zwetan Kjukov and Marc Alcaraz, All right reserved.";
+        
+        /** Origin of the project. */
+        public static var origin:String = "Made in the EU.";
+        
+        /**
+        * Prints the informations of the framework.
+        * 
+        * @param verbose (optional) display more informations, default is <code>false</code>
+        * @param showConfig (optional) display the pretty printing of the config object, default is <code>false</code>
+        */
+        public static function about( verbose:Boolean = false, showConfig:Boolean = false ):void
+        {
+            console.writeLine( info( verbose, showConfig ) );
+        }
+        
+        /**
+        * Returns the informations of the framework.
+        * 
+        * @param verbose (optional) add more informations, default is <code>false</code>
+        * @param showConfig (optional) add the pretty printing of the config object, default is <code>false</code>
+        */
+        public static function info( verbose:Boolean = false, showConfig:Boolean = false ):String
+        {
+            var CRLF:String = "\n";
+            
+            var str:String = "";
+                if( !verbose && config.verbose )
+                {
+                    verbose = true;
+                }
+                
+                if( verbose ) {
+                str += "{sep}{crlf}";
+                str += "{name}: {fullname} v{version}{crlf}";
+                str += "Host: {host}{isdebug}{crlf}";
+                str += "Operating System: {os}{crlf}";
+                str += "{copyright}{crlf}";
+                str += "{origin}{crlf}";
+                str += "{sep}";
+                } else {
+                str += "{name} v{version}";
+                }
+                
+                if( showConfig ) {
+                str += "{crlf}config:";
+                str += "{config}{crlf}";
+                str += "{sep}";
+                }
+                
+            return format( str,
+                           {
+                           sep: strings.separator,
+                           crlf: CRLF,
+                           name: metadata.name,
+                           fullname: metadata.fullname,
+                           version: metadata.version,
+                           host: Environment.host,
+                           isdebug: Environment.isDebug( ) ? " (debug)" : "",
+                           os: Environment.os,
+                           copyright: metadata.copyright,
+                           origin: metadata.origin,
+                           config: config.toSource()
+                           }
+                        );
+        }
+        
+        /**
+         * Stores the configuration options of the framework.
+         */
+        public static var config:SystemConfigurator = new SystemConfigurator( {
+                                                                              verbose: false
+                                                                              } );
+        
+        /**
+         * Stores the string resources of the framework. 
+         */
+        public static var strings:SystemStrings = new SystemStrings();
+        
     }
 }
