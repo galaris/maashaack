@@ -406,6 +406,19 @@ package system
         private static var _alphabetics:Array;
         private static var _alphabeticsUpper:Array;
         
+        private static function _splitToChars( str:String, modifier:String = "toString" ):Array
+        {
+            var arr:Array = [];
+            var i:int;
+            var l:int = str.length ;
+            for( i=0 ; i<l ; i++ )
+            {
+                arr.push( new Char( String( str[modifier]() ) , i ) );
+            }
+            
+            return arr;
+        }
+        
         /**
         * The Array representation of all ASCII alphabetics characters
         */
@@ -416,7 +429,7 @@ package system
                 return _alphabetics;
             }
             
-            _alphabetics = Strings.splitToChars( _alphabetic );
+            _alphabetics = _splitToChars( _alphabetic );
             
             return _alphabetics;
         }
@@ -431,7 +444,7 @@ package system
                 return _alphabeticsUpper;
             }
             
-            _alphabeticsUpper = Strings.splitToChars( _alphabetic, "toUpperCase" );
+            _alphabeticsUpper = _splitToChars( _alphabetic, "toUpperCase" );
             
             return _alphabeticsUpper;
         }
