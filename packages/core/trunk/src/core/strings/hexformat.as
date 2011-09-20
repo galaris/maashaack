@@ -51,6 +51,11 @@ package core.strings
     public function hexformat( bytes:ByteArray, start:uint = 0, end:int = -1,
                                every:uint = 2, separator:String = " ", width:uint = 80, header:String = "" ):String
     {
+        if ( bytes == null )
+        {
+            return "" ;
+        }
+        
         if( end == -1 ) { end = bytes.length; }
         
         var stream:String   = "";
