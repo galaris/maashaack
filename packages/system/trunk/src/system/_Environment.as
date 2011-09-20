@@ -35,14 +35,6 @@
 
 package system
 {
-    import core.strings.indexOfAny;
-    import core.strings.trimStart;
-
-    import system.hosts.Host;
-    import system.hosts.HostID;
-    import system.hosts.OperatingSystem;
-    import system.hosts.PlatformID;
-
     import flash.system.Capabilities;
     
     /**
@@ -50,8 +42,8 @@ package system
      */
     public class _Environment
     {
-        private var _host:Host = null;
-        private var _os:OperatingSystem = null;
+        private var _host:String = "";
+        private var _os:String   = "";
         
         /**
          * Creates a new _Environment instance.
@@ -66,129 +58,42 @@ package system
             */
         }
         
-        /**
-         * @private
-         */
-        private function _getHostID():HostID
-        {
-            var runtime:String = Capabilities.playerType;
-            
-            switch( runtime )
-            {
-                case "ActiveX"    :
-                case "External"   :
-                case "PlugIn"     :
-                case "StandAlone" :
-                {
-                    return HostID.Flash;
-                }
-                
-                case "Desktop":
-                {
-                    return HostID.Air;
-                }
-                
-                case "RedTamarin":
-                {
-                    return HostID.RedTamarin;
-                }
-                
-                case "AVMPlus":
-                {
-                    return HostID.Tamarin;
-                }
-            }
-            
-            return HostID.Unknown;
-        }
         
         /**
-         * @private
+         * Returns the Host reference of the current client application.
+         * @return the Host reference of the current client application.
          */
-        private function _getHostVersion():Version
-        {
-            /* note:
-            WIN 9,0,0,0    // Flash Player 9 for Windows
-            MAC 7,0,25,0   // Flash Player 7 for Macintosh
-            UNIX 5,0,55,0  // Flash Player 5 for UNIX
-            */
-            var str:String = trimStart( Capabilities.version, "WINMACUNIX ".split( "" ) );
-                str = str.split( "," ).join( "." );
-            
-            return Version.fromString( str );
-        }
-        
-        /**
-         * @private
-         */
-        private function _getPlatformID():PlatformID
-        {
-            var platform:String = Capabilities.os;
-            if( indexOfAny( platform, ["Windows","WIN","win32"] ) > -1 )
-            {
-                return PlatformID.Windows;
-            }
-            else if( indexOfAny( platform, ["Macintosh","MAC","Mac OS","MacOS"] ) > -1 )
-            {
-                return PlatformID.Macintosh;
-            }
-            else if( indexOfAny( platform, ["Linux","UNIX","unix"] ) > -1 )
-            {
-                return PlatformID.Unix;
-            }
-            else if( indexOfAny( platform, ["arm"] ) > -1 )
-            {
-                return PlatformID.Arm;
-            }
-            else if( indexOfAny( platform, ["web"] ) > -1 )
-            {
-                return PlatformID.Web;
-            }
-            return PlatformID.Unknown;
-        }
-        
-        /**
-         * Returns the Host reference of the client application.
-         * @return the Host reference of the client application.
-         */
-        public function get host():Host
+        public function get host():String
         {
             if( _host )
             {
                 return _host;
             }
             
-            var _id:HostID   = _getHostID();
-            var _ver:Version = _getHostVersion();
-            
-            _host = new Host( _id, _ver );
+            _host = Capabilities.playerType + " " + Capabilities.version.split( "," ).join( "." );
             
             return _host;
         }
         
         /**
-         * Returns the os OperatingSystem value of the current client application.
-         * @return the os OperatingSystem value of the current client application.
+         * Returns the Operating System of the current client application.
+         * @return the Operating System of the current client application.
          */
-        public function get os():OperatingSystem
+        public function get os():String
         {
             if( _os )
             {
                 return _os;
             }
             
-            var p:PlatformID = _getPlatformID();
-            var v:Version    = new Version(); // 0.0.0.0 till we can get more detailled system infos
-            var s:String     = Capabilities.os;
-            
-            if( p == PlatformID.Web )
-            {
-                v = new Version( 2, 0 ); //still silly =)
-            }
-            
-            _os = new OperatingSystem( p, v, s );
+            _os = Capabilities.os;
             
             return _os;
+        }
+        
+        public function isDebug():Boolean
+        {
+            return Capabilities.isDebugger;
         }
         
         /**
