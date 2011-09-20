@@ -190,7 +190,7 @@
                           match="module\.([^\.]*)\.name"
                           select="\0"
                           casesensitive="true" />
-
+        
         <!-- sorts module by order they appear in the file -->
         <sortlist property="compile.sorted"
                   value="${compile.list}"
@@ -203,13 +203,29 @@
             <sequential>
                 <propertycopy name="project.name" from="@{project.id}" override="true" />
                 <propertycopy name="project.path" from="module.${project.name}.path" override="true" />
-                <var name="project.fullpath" value="${project.path}/${project.name}"/>
+                <propertycopy name="project.mod" from="module.${project.name}.mod" override="true" />
+                <propertycopy name="project.alt" from="module.${project.name}.alt" override="true" />
+                <var name="project.fullpath" value="${project.path}/${project.mod}"/>
+                <echo message="project.id = @{project.id}"/>
+                <echo message="project.name = ${project.name}"/>
+                <echo message="project.path = ${project.path}"/>
+                <echo message="project.mod = ${project.mod}"/>
+                <echo message="project.alt = ${project.alt}"/>
+                <echo message="project.fullpath = ${project.fullpath}"/>
 
-                <echo message="Compile module [${project.name}] in [${project.path}]" />
+                <echo message="Compile module [${project.mod}] in [${project.path}]" />
                 
                 <!-- call module build -->
-                <ant antfile="build/modules/${project.name}.xml" target="compile-${project.name}" inheritAll="true" />
-
+                <if>
+                    <equals arg1="${project.alt}" arg2=""/>
+                <then>
+                    <ant antfile="build/modules/${project.mod}.xml" target="compile-${project.mod}" inheritAll="true" />
+                </then>
+                <else>
+                    <ant antfile="build/modules/${project.alt}.xml" target="compile-${project.alt}" inheritAll="true" />
+                </else>
+                </if>
+                
                 <!-- update the lib-swc folder -->
                 <if>
                     <and>
