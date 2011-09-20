@@ -54,6 +54,7 @@ package core.strings
             suite.addTestSuite( fastformatTest           ) ;
             suite.addTestSuite( formatTest               ) ;
             suite.addTestSuite( formatTest               ) ;
+            suite.addTestSuite( hexformatTest            ) ;
             suite.addTestSuite( hyphenateTest            ) ;
             suite.addTestSuite( insertTest               ) ;
             suite.addTestSuite( lastIndexOfAnyTest       ) ;
