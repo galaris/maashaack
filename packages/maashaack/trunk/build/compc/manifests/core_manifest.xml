@@ -144,30 +144,32 @@
     
     <!-- core.strings -->
     
-    <component id="core.strings:camelCase"            class="core.strings.camelCase"           />
-    <component id="core.strings:capitalize"           class="core.strings.capitalize"          />
-    <component id="core.strings:center"               class="core.strings.center"              />
-    <component id="core.strings:clean"                class="core.strings.clean"               />
-    <component id="core.strings:compare"              class="core.strings.compare"             />
-    <component id="core.strings:endsWith"             class="core.strings.endsWith"            />
-    <component id="core.strings:fastformat"           class="core.strings.fastformat"          />
-    <component id="core.strings:format"               class="core.strings.format"              />
-    <component id="core.strings:hyphenate"            class="core.strings.hyphenate"           />
-    <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"          />
-    <component id="core.strings:insert"               class="core.strings.insert"              />
-    <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"      />
-    <component id="core.strings:lineTerminatorChars"  class="core.strings.lineTerminatorChars" />
-    <component id="core.strings:pad"                  class="core.strings.pad"                 />
-    <component id="core.strings:padLeft"              class="core.strings.padLeft"             />
-    <component id="core.strings:padRight"             class="core.strings.padRight"            />
-    <component id="core.strings:repeat"               class="core.strings.repeat"              />
-    <component id="core.strings:startsWith"           class="core.strings.startsWith"          />
-    <component id="core.strings:trim"                 class="core.strings.trim"                />
-    <component id="core.strings:trimEnd"              class="core.strings.trimEnd"             />
-    <component id="core.strings:trimStart"            class="core.strings.trimStart"           />
-    <component id="core.strings:userAgent"            class="core.strings.userAgent"           />
-    <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"     />
-    <component id="core.strings:WildExp"              class="core.strings.WildExp"             />
+    <component id="core.strings:bytesToHumanReadable" class="core.strings.bytesToHumanReadable" />
+    <component id="core.strings:camelCase"            class="core.strings.camelCase"            />
+    <component id="core.strings:capitalize"           class="core.strings.capitalize"           />
+    <component id="core.strings:center"               class="core.strings.center"               />
+    <component id="core.strings:clean"                class="core.strings.clean"                />
+    <component id="core.strings:compare"              class="core.strings.compare"              />
+    <component id="core.strings:endsWith"             class="core.strings.endsWith"             />
+    <component id="core.strings:fastformat"           class="core.strings.fastformat"           />
+    <component id="core.strings:format"               class="core.strings.format"               />
+    <component id="core.strings:hexformat"            class="core.strings.hexformat"            />
+    <component id="core.strings:hyphenate"            class="core.strings.hyphenate"            />
+    <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"           />
+    <component id="core.strings:insert"               class="core.strings.insert"               />
+    <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"       />
+    <component id="core.strings:lineTerminatorChars"  class="core.strings.lineTerminatorChars"  />
+    <component id="core.strings:pad"                  class="core.strings.pad"                  />
+    <component id="core.strings:padLeft"              class="core.strings.padLeft"              />
+    <component id="core.strings:padRight"             class="core.strings.padRight"             />
+    <component id="core.strings:repeat"               class="core.strings.repeat"               />
+    <component id="core.strings:startsWith"           class="core.strings.startsWith"           />
+    <component id="core.strings:trim"                 class="core.strings.trim"                 />
+    <component id="core.strings:trimEnd"              class="core.strings.trimEnd"              />
+    <component id="core.strings:trimStart"            class="core.strings.trimStart"            />
+    <component id="core.strings:userAgent"            class="core.strings.userAgent"            />
+    <component id="core.strings:whiteSpaceChars"      class="core.strings.whiteSpaceChars"      />
+    <component id="core.strings:WildExp"              class="core.strings.WildExp"              />
     
     <!-- core.vectors -->
     
