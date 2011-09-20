@@ -81,27 +81,77 @@ Var("root") + "/packages/system_terminals"    : Var("repo") + "/packages/system_
 After doing a `gclient sync` or `gclient update`<br>
 the you will need to add your project to the *compile.properties*
 {{{
-system_terminals.name = system_terminals
-system_terminals.path = packages
+system_terminals1.name = system_terminals1
+system_terminals1.path = packages
+system_terminals1.mod = system_terminals
+system_terminals1.alt
 }}}
 
-here *name* is the file system name of the project<br>
-and *path* is the category where the project reside.
+here pay attention
+ * *name* is the id of the project
+ * *path* is the category where the project reside
+ * *mod* is the the file system name of the project and the default target name of the compile
+ * *alt* is an alternate target to compile
+
+that means we call `build/modules/MOD.xml` in the directory `PATH/MOD`<br>
+if *alt* were defined<br>
+we would call `build/modules/ALT.xml` in the directory `PATH/MOD`
+
 
 Remember that *compile.properties* decide in which order projects are compiled<br>
 for example:
 {{{
-core.name = core
-core.path = packages
+core1.name = core1
+core1.path = packages
+core1.mod = core
+core1.alt
 
-system_terminals.name = system_terminals
-system_terminals.path = packages
+system_terminals1.name = system_terminals1
+system_terminals1.path = packages
+system_terminals1.mod = system_terminals
+system_terminals1.alt
 
-astuce.name = astuce
-astuce.path = libraries
+astuce1.name = astuce1
+astuce1.path = libraries
+astuce1.mod = astuce
+astuce1.alt
 }}}
 
-here *system.terminals* will be compile after the *core* project but before the *astuce* project.
+here *system.terminals* will be compiled after the *core* project but before the *astuce* project.
+
+<br>
+In special case, where you need the same project to be compiled more than once use *alt*
+
+{{{
+core1.name = core1
+core1.path = packages
+core1.mod = core
+core1.alt
+
+system_terminals1.name = system_terminals1
+system_terminals1.path = packages
+system_terminals1.mod = system_terminals
+system_terminals1.alt
+
+astuce1.name = astuce1
+astuce1.path = libraries
+astuce1.mod = astuce
+astuce1.alt
+
+core2.name = core2
+core2.path = packages
+core2.mod = core
+core2.alt = special
+}}}
+
+here *core* will be compiled first with the default compile target *core*<br>
+then *system.terminals* get compiled<br>
+then *astuce* compile too<br>
+and you compile again *core* but this time with the alternative target *special*
+
+As it is you can compile  and recompile a project many many times<br>
+provided that each time you change the id (core1, core2, core3, core4, etc.)<br>
+and provide an *alt* target with a different name
 
 <br>
 
