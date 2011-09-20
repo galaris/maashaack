@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="system-SA" default="main" basedir=".">
+<project name="system-common-SA" default="main" basedir=".">
     
     <target name="define">
         
@@ -31,6 +31,6 @@
         <delete dir="${basedir}/${release.dir}" />
     </target>
     
-    <import file="meta.xml" />
+    <import file="meta-common.xml" />
     
 </project>

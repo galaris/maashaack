@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="system" default="main" basedir=".">
+    
+    <target name="clean">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="before">
+        <mkdir dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="main" depends="clean,before,build-abc,build-swc,after">
+        
+    </target>
+    
+    <target name="build-abc">
+        
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue} -import ${core} -import ${common} -import ${system.terminals} -import ${eden} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        
+    </target>
+    
+    <target name="build-swc">
+        <compc
+            output="${basedir}/${release.dir}/${project.swc}"
+            target-player="${local.flashplayerversion}"
+        >
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+            <load-config filename="${basedir}/build/config.xml"/>
+            <strict>true</strict>
+            <optimize>true</optimize>
+            <warnings>true</warnings>
+            <verbose-stacktraces>true</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+            <library-path dir="${basedir}/${project.lib-swc}/" append="true">
+               <include name="core.swc"/>
+               <include name="common.swc"/>
+               <include name="system.terminals.swc"/>
+               <include name="eden.swc"/>
+            </library-path>
+            <source-path path-element="${basedir}/${project.src}" />
+            <!-- <include-sources dir="${basedir}/${project.src}/system" includes="**/*.as" /> -->
+            <include-sources dir="${basedir}/${project.src}/system">
+                <include name="Library.as"/>
+                
+                <include name="system/_Environment.as"/>
+
+                <include name="system/Arrays.as"/>
+                <include name="system/ByteArrays.as"/>
+                <include name="system/Char.as"/>
+                <include name="system/Configurator.as"/>
+                <include name="system/Enum.as"/>
+                <include name="system/Objects.as"/>
+                <include name="system/Reflection.as"/>
+                <include name="system/SystemConfigurator.as"/>
+                <include name="system/SystemStrings.as"/>
+                <include name="system/URI.as"/>
+                <include name="system/Version.as"/>
+
+                <include name="system/metadata.as"/>
+                <include name="system/eden.as"/>
+                <include name="system/Environment.as"/>
+            </include-sources>
+            <metadata date="${TODAY}" title="${project.name}">
+                <publisher name="${project.publisher}" />
+                <creator name="${project.creator1}" />
+                <creator name="${project.creator2}" />
+            </metadata>
+        </compc>
+    </target>
+    
+    <target name="after">
+        
+    </target>
+    
+</project>
