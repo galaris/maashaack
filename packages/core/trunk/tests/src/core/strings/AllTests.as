@@ -44,30 +44,31 @@ package core.strings
         {
             var suite:TestSuite = new TestSuite("core.strings package tests");
             
-            suite.addTestSuite( camelCaseTest           ) ;
-            suite.addTestSuite( capitalizeTest          ) ;
-            suite.addTestSuite( centerTest              ) ;
-            suite.addTestSuite( cleanTest               ) ;
-            suite.addTestSuite( compareTest             ) ;
-            suite.addTestSuite( endsWithTest            ) ;
-            suite.addTestSuite( fastformatTest          ) ;
-            suite.addTestSuite( formatTest              ) ;
-            suite.addTestSuite( formatTest              ) ;
-            suite.addTestSuite( hyphenateTest           ) ;
-            suite.addTestSuite( insertTest              ) ;
-            suite.addTestSuite( lastIndexOfAnyTest      ) ;
-            suite.addTestSuite( lineTerminatorCharsTest ) ;
-            suite.addTestSuite( padTest                 ) ;            suite.addTestSuite( padLeftTest             ) ;
-            suite.addTestSuite( padRightTest            ) ;            suite.addTestSuite( repeatTest              ) ;
-            suite.addTestSuite( startsWithTest          ) ;
-            suite.addTestSuite( trimTest                ) ;
-            suite.addTestSuite( trimEndTest             ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( trimStartTest           ) ;
-            suite.addTestSuite( userAgentTest           ) ;
-            suite.addTestSuite( whiteSpaceCharsTest     ) ;
-            suite.addTestSuite( WildExpTest             ) ;
-            
+            suite.addTestSuite( bytesToHumanReadableTest ) ;
+            suite.addTestSuite( camelCaseTest            ) ;
+            suite.addTestSuite( capitalizeTest           ) ;
+            suite.addTestSuite( centerTest               ) ;
+            suite.addTestSuite( cleanTest                ) ;
+            suite.addTestSuite( compareTest              ) ;
+            suite.addTestSuite( endsWithTest             ) ;
+            suite.addTestSuite( fastformatTest           ) ;
+            suite.addTestSuite( formatTest               ) ;
+            suite.addTestSuite( formatTest               ) ;
+            suite.addTestSuite( hyphenateTest            ) ;
+            suite.addTestSuite( insertTest               ) ;
+            suite.addTestSuite( lastIndexOfAnyTest       ) ;
+            suite.addTestSuite( lineTerminatorCharsTest  ) ;
+            suite.addTestSuite( padTest                  ) ;            suite.addTestSuite( padLeftTest              ) ;
+            suite.addTestSuite( padRightTest             ) ;            suite.addTestSuite( repeatTest               ) ;
+            suite.addTestSuite( startsWithTest           ) ;
+            suite.addTestSuite( trimTest                 ) ;
+            suite.addTestSuite( trimEndTest              ) ;
+            suite.addTestSuite( trimStartTest            ) ;
+            suite.addTestSuite( trimStartTest            ) ;
+            suite.addTestSuite( userAgentTest            ) ;
+            suite.addTestSuite( whiteSpaceCharsTest      ) ;
+            suite.addTestSuite( WildExpTest              ) ;
+             
             return suite;
         }
     }
