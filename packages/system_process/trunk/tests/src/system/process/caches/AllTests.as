@@ -37,22 +37,15 @@ package system.process.caches
 {
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
-
-    import system.Environment;
-    import system.hosts.HostID;
-
+    
     public class AllTests
     {
-
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("system process cache tests");
             
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( AttributeTest ) ;
-                suite.addTestSuite( MethodTest ) ;
-            }
+            suite.addTestSuite( AttributeTest ) ;
+            suite.addTestSuite( MethodTest ) ;
             
             return suite;
         }
