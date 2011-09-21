@@ -35,9 +35,9 @@
 
 package system.data.bags 
 {
+    import system.Formattable;
     import system.data.Bag;
     import system.data.Iterator;
-    import system.formatters.Formattable;
     
     /**
      * Converts a Bag to a custom string representation.
