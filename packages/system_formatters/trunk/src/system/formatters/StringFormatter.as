@@ -39,6 +39,7 @@ package system.formatters
     import core.strings.padLeft;
     import core.strings.padRight;
     
+    import system.Formattable;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MultiEvaluator;
     
