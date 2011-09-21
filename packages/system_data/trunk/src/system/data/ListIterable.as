@@ -37,7 +37,7 @@ package system.data
 {
     /**
      * Implementing this interface allows a List to be iterable.
-     */    
+     */
     public interface ListIterable
     {
         /**
