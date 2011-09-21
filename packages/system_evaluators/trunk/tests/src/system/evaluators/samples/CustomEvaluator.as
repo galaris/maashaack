@@ -35,14 +35,13 @@
 
 package system.evaluators.samples 
 {
-    import system.evaluators.Evaluable;    
-
+    import system.Evaluable;
+    
     /**
      * A custom evaluator in the unit tests.
      */
     public class CustomEvaluator implements Evaluable 
     {
-
         public function eval(o:*):*
         {
             return o.toString() ;
