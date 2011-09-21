@@ -35,8 +35,6 @@
 
 package system.ioc
 {
-    import system.ioc.ObjectFactory ;
-    
     /**
      * The IoC factory singleton reference.
      */
