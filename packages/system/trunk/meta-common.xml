@@ -43,11 +43,11 @@
             <warnings>true</warnings>
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
-        	<!--
+            <!--
             <library-path dir="${basedir}/${project.lib-swc}/" append="true">
                <include name="core.swc"/>
             </library-path>
-        	 -->
+             -->
             <source-path path-element="${basedir}/${project.src}" />
             <include-sources dir="${basedir}/${project.src}/system">
                 <include name="Library.as"/>
@@ -61,6 +61,8 @@
                 <include name="Comparable.as"/>
                 <include name="Comparator.as"/>
                 <include name="Equatable.as"/>
+                <include name="Evaluable.as"/>
+                <include name="Formattable.as"/>
                 <include name="Serializable.as"/>
                 <include name="Serializer.as"/>
                 <include name="Sortable.as"/>
