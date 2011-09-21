@@ -41,6 +41,8 @@ package system.evaluators
     import core.chars.isOperator;
     import core.strings.endsWith;
     
+    import system.Evaluable;
+    
     /**
      * Evaluates mathematical string expressions.
      * <p><b>The MathEvaluator implementation</b>, support all of the following :</p>
