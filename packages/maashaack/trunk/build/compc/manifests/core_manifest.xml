@@ -140,6 +140,7 @@
     <component id="core.reflect:getDefinitionByName" class="core.reflect.getDefinitionByName" />
     <component id="core.reflect:hasClassByName"      class="core.reflect.hasClassByName"      />
     <component id="core.reflect:hasDefinitionByName" class="core.reflect.hasDefinitionByName" />
+    <component id="core.reflect:hasInterface"        class="core.reflect.hasInterface"        />
     <component id="core.reflect:invoke"              class="core.reflect.invoke"              />
     
     <!-- core.strings -->
