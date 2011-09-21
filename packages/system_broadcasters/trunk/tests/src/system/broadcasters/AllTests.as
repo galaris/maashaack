@@ -37,22 +37,18 @@ package system.broadcasters
 {
     import library.ASTUce.framework.*;
     
-    import system.Environment;
-    import system.hosts.HostID;
-    
     public class AllTests
     {
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack broadcaster API unit tests.");
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( BroadcasterTest ) ;
-                suite.addTestSuite( CoreBroadcasterTest ) ;
-                suite.addTestSuite( FastDispatcherTest ) ;
-                suite.addTestSuite( InternalBroadcasterTest ) ;
-                suite.addTestSuite( MessageBroadcasterTest ) ;
-            }
+            
+            suite.addTestSuite( BroadcasterTest ) ;
+            suite.addTestSuite( CoreBroadcasterTest ) ;
+            suite.addTestSuite( FastDispatcherTest ) ;
+            suite.addTestSuite( InternalBroadcasterTest ) ;
+            suite.addTestSuite( MessageBroadcasterTest ) ;
+            
             return suite;
         }
     }
