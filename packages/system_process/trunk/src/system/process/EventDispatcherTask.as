@@ -92,13 +92,13 @@ package system.process
          * Creates a new EventDispatcherTask instance.
          * @param dispatcher The EventDispatcher reference.
          * @param event The event to dispatch.
-         * @param verbose Switch the verbose mode of the task.
+         * @param throwable Indicates if the task throw errors.
          */
-        public function EventDispatcherTask( dispatcher:EventDispatcher = null , event:* = null , verbose:Boolean = false )
+        public function EventDispatcherTask( dispatcher:EventDispatcher = null , event:* = null , throwable:Boolean = false )
         {
             this.dispatcher = dispatcher ;
             this.event      = event ;
-            this.verbose    = verbose ;
+            this.throwable  = throwable ;
         }
         
         /**
@@ -114,7 +114,7 @@ package system.process
         /**
          * Switch the verbose mode of the task.
          */
-        public var verbose:Boolean ;
+        public var throwable:Boolean ;
         
         /**
          * Returns a shallow copy of this object.
@@ -122,7 +122,7 @@ package system.process
          */
         public override function clone():*
         {
-            return new EventDispatcherTask( dispatcher , event , verbose ) ;
+            return new EventDispatcherTask( dispatcher , event , throwable ) ;
         }
         
         /**
@@ -137,14 +137,14 @@ package system.process
                 {
                     dispatcher.dispatchEvent( event ) ;
                 }
-                else if ( verbose )
+                else if ( throwable )
                 {
-                    logger.warn(this + " failed, the event reference not must be null.") ;
+                    throw new Error(this + " failed, the event reference not must be null.") ;
                 }
             }
-            else if ( verbose )
+            else if ( throwable )
             {
-                logger.warn(this + " failed, the dispatcher reference not must be null.") ;
+                throw new Error(this + " failed, the dispatcher reference not must be null.") ;
             }
             notifyFinished() ;
         }
