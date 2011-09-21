@@ -37,9 +37,9 @@ package system.formatters
 {
     import library.ASTUce.framework.TestCase;
     
-    import system.Reflection;
+    import system.Formattable;
     
-    import flash.utils.Dictionary ;
+    import flash.utils.Dictionary;
     
     public class ExpressionFormatterTest extends TestCase 
     {
@@ -70,11 +70,6 @@ package system.formatters
         public function testInherit():void
         {
             assertTrue(formatter is Dictionary, "The ExpressionFormatter must extends the Dictionary class.") ;
-        }
-        
-        public function testIsDynamic():void
-        {
-            assertTrue( Reflection.getClassInfo(formatter).isDynamic(), "The ExpressionFormatter must be dynamic.") ;
         }
         
         public function testInterfaces():void
