@@ -35,7 +35,7 @@
 
 package system.evaluators 
 {
-    import system.evaluators.Evaluable;
+    import system.Evaluable;
     
     /**
      * Evaluates a type string expression and return the property value who corresponding in the target object specified in this evaluator.
