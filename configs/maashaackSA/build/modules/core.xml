@@ -26,7 +26,14 @@
         <copy file="${path}/bin-release/core.swc" todir="packages/system_terminals/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_terminals/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_numeric/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system_numeric/lib-abc" overwrite="true" />
+            
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_formatters/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/core.abc" todir="packages/system_formatters/lib-abc" overwrite="true" />-->
+        
         <copy file="${path}/bin-release/core.swc" todir="packages/system_logging/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/core.abc" todir="packages/system_logging/lib-abc" overwrite="true" />-->
         
     </target>
     

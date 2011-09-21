@@ -11,7 +11,7 @@
             <property name="local.flashplayerversion" value="${local.flashplayerversion}" />
             <property file="${path}/build/build.properties"/>
         </ant>
-
+        
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/common.swc" todir="libs/swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="libs/abc" overwrite="true" />
@@ -19,6 +19,9 @@
         <!-- sync with other projects -->
         <copy file="${path}/bin-release/common.swc" todir="packages/system_hosts/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_hosts/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/common.swc" todir="packages/system_numeric/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/common.abc" todir="packages/system_numeric/lib-abc" overwrite="true" />
         
     </target>
     
