@@ -37,11 +37,11 @@ package examples
 {
     import examples.core.Appointment;
     import examples.factory.AppointmentFactory;
-    
-    import system.evaluators.DateEvaluator;
+
+    import system.date.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.ioc.ObjectFactory;
-    
+
     import flash.display.Sprite;
     
     /**
@@ -138,8 +138,8 @@ package examples
                         value      : "new Date(2007,11,5,10,22,33)" , 
                         evaluators : 
                         [ 
-                            new system.evaluators.EdenEvaluator(false) , 
-                            new system.evaluators.DateEvaluator()
+                            new EdenEvaluator(false) , 
+                            new DateEvaluator()
                         ]
                     }
                 ]
@@ -162,7 +162,7 @@ package examples
                         evaluators : 
                         [ 
                             "eden" , 
-                            new system.evaluators.DateEvaluator()
+                            new DateEvaluator()
                         ]
                     }
                 ] 
