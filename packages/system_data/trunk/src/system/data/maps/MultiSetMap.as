@@ -35,15 +35,15 @@
 
 package system.data.maps
 {
-    import system.Reflection;
+    import core.reflect.hasInterface;
+    
     import system.data.Collection;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.Set;
-    import system.data.maps.MultiValueMap;
     import system.data.sets.HashSet;
     import system.hack;
-
+    
     /**
      * The MultiSetMap is a MutltiMap that contains no duplicate elements in a specified key.
      * <p><b>Example :</b></p>
@@ -141,7 +141,7 @@ package system.data.maps
          */
         public override function set internalBuildClass( clazz:Class ):void
         {
-            _internalBuildClass = Reflection.getClassInfo(clazz).hasInterface(Set) ? clazz : HashSet ;
+            _internalBuildClass = hasInterface(clazz,Set) ? clazz : HashSet ;
         }
         
         /**
@@ -236,7 +236,7 @@ package system.data.maps
             _map.get( key ).add( value ) ; // TODO fix the null value 
             return internalSet.add(value) ;
         }
-
+        
         /**
          * Adds a collection of values to the collection associated with the specified key.
          */
@@ -277,7 +277,7 @@ package system.data.maps
             }
             else 
             {
-                return false ;    
+                return false ;
             }
         }
            
