@@ -23,6 +23,9 @@
         <copy file="${path}/bin-release/common.swc" todir="packages/system_numeric/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_numeric/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/common.swc" todir="packages/system_logging/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/common.abc" todir="packages/system_logging/lib-abc" overwrite="true" />-->
+        
     </target>
     
 </project>
