@@ -36,7 +36,7 @@ package system.ioc
 {
     import library.ASTUce.framework.TestCase;
 
-    import system.evaluators.DateEvaluator;
+    import system.date.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.ioc.samples.Appointment;
     import system.ioc.samples.Civility;
@@ -425,8 +425,8 @@ package system.ioc
                             value      : "new Date(2007,11,5,10,22,33)" , 
                             evaluators : 
                             [ 
-                                new system.evaluators.EdenEvaluator(false) , 
-                                new system.evaluators.DateEvaluator()
+                                new EdenEvaluator(false) , 
+                                new DateEvaluator()
                             ]
                         }
                     ]
@@ -449,7 +449,7 @@ package system.ioc
                             evaluators : 
                             [ 
                                 "eden" , 
-                                new system.evaluators.DateEvaluator()
+                                new DateEvaluator()
                             ]
                         }
                     ] 
