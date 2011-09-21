@@ -35,8 +35,8 @@
 
 package system.data.collections 
 {
+    import system.Formattable;
     import system.data.Collection;
-    import system.formatters.Formattable;
     
     /**
      * Converts a Collection to a custom string representation.
