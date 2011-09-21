@@ -10,7 +10,7 @@
         <mkdir dir="${basedir}/${release.dir}" />
     </target>
     
-    <target name="main" depends="clean,before,build-swc,after">
+    <target name="main" depends="clean,before,build-abc,build-swc,after">
         
     </target>
     
