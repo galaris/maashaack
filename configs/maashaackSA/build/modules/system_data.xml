@@ -14,7 +14,7 @@
         
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/system.data.swc" todir="libs/swc" overwrite="true" />
-        <!--<copy file="${path}/bin-release/system.data.abc" todir="libs/abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/system.data.abc" todir="libs/abc" overwrite="true" />
         
         <!-- sync with other projects--> 
         

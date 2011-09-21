@@ -11,7 +11,7 @@
             <property name="local.flashplayerversion" value="${local.flashplayerversion}" />
             <property file="${path}/build/build.properties"/>
         </ant>
-
+        
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/system.terminals.swc" todir="libs/swc" overwrite="true" />
         <copy file="${path}/bin-release/system.terminals.abc" todir="libs/abc" overwrite="true" />
