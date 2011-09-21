@@ -36,7 +36,8 @@
 package system.formatters 
 {
     import library.ASTUce.framework.TestCase;
-
+    
+    import system.Formattable;
     import system.evaluators.DateEvaluator;
     import system.evaluators.EdenEvaluator;
     import system.evaluators.MathEvaluator;
