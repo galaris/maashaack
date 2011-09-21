@@ -35,6 +35,8 @@
 
 package graphics.display
 {
+    import graphics.logger;
+    
     /**
      * Warning method in the graphics.display package.
      */
