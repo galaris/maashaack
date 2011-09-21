@@ -37,9 +37,6 @@ package system.process
 {
     import library.ASTUce.framework.TestCase;
     
-    import system.Reflection;
-    import system.logging.Loggable;
-    import system.logging.Logger;
     import system.process.mocks.MockTaskReceiver;
     
     public class TaskTest extends TestCase
@@ -79,43 +76,35 @@ package system.process
         {
             assertTrue( task is Action   ) ;
             assertTrue( task is Lockable ) ;
-            assertTrue( task is Loggable ) ;
-        }
-        
-        public function testLogger():void
-        {
-            var logger:Logger = task.logger ;
-            assertNotNull( logger , "01 - The logger property of the Task class failed." ) ;
-            assertEquals( logger.channel , Reflection.getClassPath( task ) , "02 - The logger property of the Task class failed." ) ;
         }
         
         public function testClone():void
         {
             var clone:Task = task.clone() as Task ;
-            assertNotNull( clone , "01 - Task clone() failed." ) ;
-            assertFalse( clone == task  , "02 - Task clone() failed." ) ;
+            assertNotNull( clone , "01" ) ;
+            assertFalse( clone == task  , "02" ) ;
         }
         
         public function testRunning():void
         {
-            assertFalse( task.running  , "Action running failed, default property value must be false." ) ;
+            assertFalse( task.running  ) ;
         }
         
         public function testNotifyFinished():void
         {
             task.notifyFinished() ;
-            assertTrue( mockReceiver.finishCalled , "Action notifyFinished failed, the finishIt signal must emit." ) ;
+            assertTrue( mockReceiver.finishCalled ) ;
         }
         
         public function testNotifyStarted():void
         {
             task.notifyStarted() ;
-            assertTrue( mockReceiver.startCalled , "Action notifyStarted failed, the startIt signal must emit." ) ;
+            assertTrue( mockReceiver.startCalled ) ;
         }
         
         public function testRun():void
         {
-            assertTrue( "run" in task , "Action run 01 method exist." ) ;
+            assertTrue( "run" in task ) ;
         }
     }
 }
