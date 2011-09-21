@@ -35,7 +35,7 @@
 
 package system.formatters.samples 
 {
-    import system.formatters.Formattable;
+    import system.Formattable;
     
     /**
      * The basic implementation of the Formattable interface.
