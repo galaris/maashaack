@@ -35,9 +35,9 @@
 
 package system.data.iterators 
 {
+    import system.Formattable;
     import system.data.Iterable;
     import system.data.Iterator;
-    import system.formatters.Formattable;
     
     /**
      * Converts an Iterable object to a custom string representation.
