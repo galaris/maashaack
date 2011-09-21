@@ -76,15 +76,15 @@ package graphics.display
      *             
      *             timeline.defaultIndex = 4 ; // by default stop the MovieClip in the frame index 4.
      *             
-     *             timeline.addEventListener( ActionEvent.FINISH , finish ) ;
-     *             timeline.addEventListener( ActionEvent.RESUME , resume ) ;
-     *             timeline.addEventListener( ActionEvent.START  , start  ) ;
+     *             timeline.finishIt.connect( finish ) ;
+     *             timeline.resumeIt.connect( resume ) ;
+     *             timeline.startIt.connect( start ) ;
      *         }
      *         
      *         protected var movieclip:MovieClip ;
      *         protected var timeline:TimelineTransition ;
      *         
-     *         protected function finish( e:ActionEvent ):void
+     *         protected function finish( action:Action ):void
      *         {
      *             trace( "finish" ) ;
      *         }
@@ -134,12 +134,12 @@ package graphics.display
      *             }
      *         }
      *         
-     *         protected function resume( e:ActionEvent ):void
+     *         protected function resume( action:Action ):void
      *         {
      *             trace( "resume" ) ;
      *         }
      *         
-     *         protected function start( e:ActionEvent ):void
+     *         protected function start( action:Action ):void
      *         {
      *             trace( "start" ) ;
      *         }
@@ -208,6 +208,15 @@ package graphics.display
                 _target.gotoAndStop( _defaultIndex ) ;
             }
         }
+        
+        /**
+         * Specifies whether errors encountered by the object are reported to the application.
+         * When enableErrorChecking is <code>true</code> methods are synchronous and can throw errors.
+         * When enableErrorChecking is <code>false</code>, the default, the methods are asynchronous and errors are not reported.
+         * Enabling error checking reduces parsing performance.
+         * You should only enable error checking when debugging.
+         */
+        public var enableErrorChecking:Boolean;
         
         /**
          * Indicates the finish index.
@@ -350,8 +359,9 @@ package graphics.display
                     _script.clear() ;
                 }
                 
-                _script         = new TimelineScript( _target ) ;
-                _script.verbose = verbose ;
+                _script                     = new TimelineScript( _target ) ;
+                _script.enableErrorChecking = enableErrorChecking ;
+                _script.verbose             = verbose ;
                 
                 // fix finish index
                 
@@ -394,7 +404,7 @@ package graphics.display
             {
                 if ( verbose )
                 {
-                    logger.warn(this + " run failed, the target reference not must be null." ) ; 
+                    warn(this + " run failed, the target reference not must be null." , verbose , enableErrorChecking ) ; 
                 }
                 notifyFinished() ;
             }
