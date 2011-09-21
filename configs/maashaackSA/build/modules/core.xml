@@ -35,6 +35,9 @@
         <copy file="${path}/bin-release/core.swc" todir="packages/system_process/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_process/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_events/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system_events/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/core.swc" todir="packages/system_formatters/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/core.abc" todir="packages/system_formatters/lib-abc" overwrite="true" />-->
         
