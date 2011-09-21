@@ -47,7 +47,6 @@ package system.formatters
         {
             var suite:TestSuite = new TestSuite( "Formatters tests" );
             
-            suite.addTestSuite( DateFormatterTest ) ;
             suite.addTestSuite( ExpressionFormatterTest ) ;
             suite.addTestSuite( FormattableTest ) ;            suite.addTestSuite( StringFormatterTest ) ;
             
