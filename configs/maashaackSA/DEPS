@@ -12,6 +12,7 @@ deps = {
          Var("root") + "/packages/system_cli"          : Var("repo") + "/packages/system_cli/trunk",
          Var("root") + "/packages/system_comparators"  : Var("repo") + "/packages/system_comparators/trunk",
          Var("root") + "/packages/system_data"         : Var("repo") + "/packages/system_data/trunk",
+         Var("root") + "/packages/system_date"         : Var("repo") + "/packages/system_date/trunk",
          Var("root") + "/packages/system_diagnostics"  : Var("repo") + "/packages/system_diagnostics/trunk",
          Var("root") + "/packages/system_errors"       : Var("repo") + "/packages/system_errors/trunk",
          Var("root") + "/packages/system_evaluators"   : Var("repo") + "/packages/system_evaluators/trunk",
