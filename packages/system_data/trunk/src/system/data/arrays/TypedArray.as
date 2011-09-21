@@ -33,14 +33,15 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.data.arrays {
-	import core.dump;
-	import core.reflect.getClassName;
-	import core.reflect.getClassPath;
-
-	import system.data.Typeable;
-	import system.data.Validator;
-
+package system.data.arrays 
+{
+    import core.dump;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+    
+    import system.data.Typeable;
+    import system.data.Validator;
+    
     /**
      * <code class="prettyprint">TypedArray</code> acts like a normal array but assures that only objects of a specific type are added to the array.
      * <p><b>Example :</b></p>
