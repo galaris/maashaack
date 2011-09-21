@@ -35,8 +35,9 @@
 
 package system.evaluators
 {
+    import library.eden.EdenSerializer;
+    
     import system.Evaluable;
-    import system.eden;
     
     /**
      * Evaluates an eden expression.
@@ -62,20 +63,26 @@ package system.evaluators
          * Creates a new EdenEvaluator instance.
          * @param serialized This Boolean flag indicates if the object must be evaluates with a final serialized or not value.
          */
-        public function EdenEvaluator( serialized:Boolean = true )
+        public function EdenEvaluator( serialized:Boolean = true , serializer:EdenSerializer = null )
         {
             _serialized = serialized;
+            this.serializer = serializer || new EdenSerializer() ;
         }
+        
+        /**
+         * The serializer reference.
+         */
+        public var serializer:EdenSerializer ;
         
         /**
          * Evaluates the specified object.
          */
         public function eval( o:* ):*
         {
-            var result:* = eden.deserialize( o ) ;
+            var result:* = serializer.deserialize( o ) ;
             if( _serialized )
             {
-                return eden.serialize( result ) ;
+                return serializer.serialize( result ) ;
             }
             else
             {
