@@ -35,18 +35,13 @@
 
 package system.process 
 {
-    import core.reflect.getClassPath;
-    
-    import system.logging.Log;
-    import system.logging.Loggable;
-    import system.logging.Logger;
     import system.signals.Signal;
     import system.signals.Signaler;
     
     /**
      * A simple representation of the <code class="prettyprint">Action</code> interface.
      */
-    public class Task implements Action, Lockable, Loggable
+    public class Task implements Action, Lockable
     {
         /**
          * Creates a new Task instance.
@@ -54,7 +49,6 @@ package system.process
         public function Task() 
         {
             _phase  = TaskPhase.INACTIVE ;
-            _logger = Log.getLogger( getClassPath(this, true) ) ;
         }
         
         /**
@@ -71,22 +65,6 @@ package system.process
         public function set finishIt( signal:Signaler ):void
         {
             _finishIt = signal || new Signal() ;
-        }
-        
-        /**
-         * Determinates the internal <code class="prettyprint">Logger</code> reference of this <code class="prettyprint">Loggable</code> object.
-         */
-        public function get logger():Logger
-        {
-            return _logger ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set logger( log:Logger ):void
-        {
-            _logger = log || Log.getLogger( getClassPath(this, true) ) ;
         }
         
         /**
@@ -211,11 +189,6 @@ package system.process
          * @private
          */
         protected var _isRunning:Boolean ;
-        
-        /**
-         * @private
-         */
-        private var _logger:Logger ;
         
         /**
          * @private
