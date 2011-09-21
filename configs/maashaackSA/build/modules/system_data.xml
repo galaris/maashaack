@@ -19,8 +19,10 @@
         <!-- sync with other projects--> 
         
         <copy file="${path}/bin-release/system.data.swc" todir="packages/system_process/lib-swc" overwrite="true" />
-        <!--<copy file="${path}/bin-release/system.data.abc" todir="packages/system_data/lib-abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/system.data.abc" todir="packages/system_process/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.data.swc" todir="packages/system_events/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.data.abc" todir="packages/system_events/lib-abc" overwrite="true" />
     </target>
     
 </project>
