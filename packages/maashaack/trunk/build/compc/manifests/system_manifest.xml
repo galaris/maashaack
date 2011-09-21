@@ -171,6 +171,11 @@
     <component id="system.data.trees:TrieAverage" class="system.data.trees.TrieAverage" />
     <component id="system.data.trees:TrieEntry"   class="system.data.trees.TrieEntry" />
     
+    <!-- system.date -->
+    
+    <component id="system.evaluators:DateEvaluator" class="system.evaluators.DateEvaluator" />
+    <component id="system.formatters:DateFormatter" class="system.formatters.DateFormatter" />
+    
     <!-- system.diagnostics -->
     
     <component id="system.diagnostics:TextFieldConsole" class="system.diagnostics.TextFieldConsole" />
@@ -186,7 +191,6 @@
     
     <!-- system.evaluators -->
     
-    <component id="system.evaluators:DateEvaluator"     class="system.evaluators.DateEvaluator"     />
     <component id="system.evaluators:EdenEvaluator"     class="system.evaluators.EdenEvaluator"     />
     <component id="system.evaluators:MathEvaluator"     class="system.evaluators.MathEvaluator"     />
     <component id="system.evaluators:MultiEvaluator"    class="system.evaluators.MultiEvaluator"    />
@@ -215,7 +219,6 @@
     
     <!-- system.formatters -->
     
-    <component id="system.formatters:DateFormatter"       class="system.formatters.DateFormatter" />
     <component id="system.formatters:ExpressionFormatter" class="system.formatters.ExpressionFormatter" />
     <component id="system.formatters:StringFormatter"     class="system.formatters.StringFormatter" />
     
@@ -226,11 +229,6 @@
     <component id="system.hosts:OperatingSystem" class="system.hosts.OperatingSystem" />
     <component id="system.hosts:PlatformID"      class="system.hosts.PlatformID"      />
         
-    <!-- system.io -->
-    
-    <component id="system.io:Readable"  class="system.io.Readable"  />
-    <component id="system.io:Writeable" class="system.io.Writeable" />
-    
     <!-- system.ioc -->
     
     <component id="system.ioc:factory"                    class="system.ioc.factory"                    />
