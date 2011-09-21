@@ -15,6 +15,8 @@
     <component id="system:Enum"               class="system.Enum"               />
     <component id="system:Environment"        class="system.Environment"        />
     <component id="system:Equatable"          class="system.Equatable"          />
+    <component id="system:Evaluable"          class="system.Evaluable"          />
+    <component id="system:Formattable"        class="system.Formattable"        />
     <component id="system:experimental"       class="system.experimental"       />
     <component id="system:hack"               class="system.hack"               />
     <component id="system:Library"            class="system.Library"            />
@@ -186,7 +188,6 @@
     
     <component id="system.evaluators:DateEvaluator"     class="system.evaluators.DateEvaluator"     />
     <component id="system.evaluators:EdenEvaluator"     class="system.evaluators.EdenEvaluator"     />
-    <component id="system.evaluators:Evaluable"         class="system.evaluators.Evaluable"         />
     <component id="system.evaluators:MathEvaluator"     class="system.evaluators.MathEvaluator"     />
     <component id="system.evaluators:MultiEvaluator"    class="system.evaluators.MultiEvaluator"    />
     <component id="system.evaluators:PropertyEvaluator" class="system.evaluators.PropertyEvaluator" />
@@ -216,7 +217,6 @@
     
     <component id="system.formatters:DateFormatter"       class="system.formatters.DateFormatter" />
     <component id="system.formatters:ExpressionFormatter" class="system.formatters.ExpressionFormatter" />
-    <component id="system.formatters:Formattable"         class="system.formatters.Formattable"   />
     <component id="system.formatters:StringFormatter"     class="system.formatters.StringFormatter" />
     
     <!-- system.hosts -->
