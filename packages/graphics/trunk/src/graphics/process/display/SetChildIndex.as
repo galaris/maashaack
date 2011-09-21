@@ -64,6 +64,15 @@ package graphics.process.display
         public var child:DisplayObject ;
         
         /**
+         * Specifies whether errors encountered by the object are reported to the application.
+         * When enableErrorChecking is <code>true</code> methods are synchronous and can throw errors.
+         * When enableErrorChecking is <code>false</code>, the default, the methods are asynchronous and errors are not reported.
+         * Enabling error checking reduces parsing performance.
+         * You should only enable error checking when debugging.
+         */
+        public var enableErrorChecking:Boolean;
+        
+        /**
          * The resulting index number for the child display object.
          */
         public var index:uint ;
@@ -72,6 +81,11 @@ package graphics.process.display
          * The DisplayObjectContainer reference.
          */
         public var target:DisplayObjectContainer ;
+        
+        /**
+         * Specifies the verbose mode.
+         */
+        public var verbose:Boolean ;
         
         /**
          * Returns a shallow copy of this object.
@@ -94,7 +108,7 @@ package graphics.process.display
             }
             catch( e:Error )
             {
-                logger.warn(this + " run failed with the target:" + target + " and the child:" + child + " at the index:" + index + ", " + e.toString() ) ;
+                warn(this + " run failed with the target:" + target + " and the child:" + child + " at the index:" + index + ", " + e.toString() , verbose, enableErrorChecking ) ;
             }
             notifyFinished() ;
         }
