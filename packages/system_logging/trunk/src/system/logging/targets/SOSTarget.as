@@ -36,7 +36,7 @@
 package system.logging.targets 
 {
     import core.strings.fastformat;
-
+    
     import system.logging.LoggerLevel;
     
     /**
