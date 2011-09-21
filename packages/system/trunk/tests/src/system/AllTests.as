@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system
 {
     import library.ASTUce.framework.*;
-    
+
     import system.broadcasters.AllTests;
     import system.cli.AllTests;
     import system.comparators.AllTests;
@@ -69,8 +69,6 @@ package system
             
             /* core framework */
             
-            //core2
-            suite.addTestSuite( StringsTest );
             suite.addTestSuite( ObjectsTest );
             suite.addTestSuite( ArraysTest );
             suite.addTestSuite( CharTest );
