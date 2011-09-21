@@ -4,14 +4,12 @@
         
     <!-- system -->
     
-    <component id="system:about"              class="system.about"              />
     <component id="system:Arrays"             class="system.Arrays"             />
     <component id="system:ByteArrays"         class="system.ByteArrays"         />
     <component id="Char"                      class="system.Char"               />
     <component id="system:Cloneable"          class="system.Cloneable"          />
     <component id="system:Comparable"         class="system.Comparable"         />
     <component id="system:Comparator"         class="system.Comparator"         />
-    <component id="system:config"             class="system.config"             />
     <component id="system:Configurator"       class="system.Configurator"       />
     <component id="system:eden"               class="system.eden"               />
     <component id="system:Enum"               class="system.Enum"               />
@@ -19,7 +17,6 @@
     <component id="system:Equatable"          class="system.Equatable"          />
     <component id="system:experimental"       class="system.experimental"       />
     <component id="system:hack"               class="system.hack"               />
-    <component id="system:info"               class="system.info"               />
     <component id="system:Library"            class="system.Library"            />
     <component id="system:metadata"           class="system.metadata"           />
     <component id="system:Objects"            class="system.Objects"            />
@@ -29,8 +26,8 @@
     <component id="system:Serializer"         class="system.Serializer"         />
     <component id="system:Sortable"           class="system.Sortable"           />
     <component id="system:standard"           class="system.standard"           />
-    <component id="system:Strings"            class="system.Strings"            />
     <component id="system:SystemConfigurator" class="system.SystemConfigurator" />
+    <component id="system:SystemStrings"      class="system.SystemStrings"      />
     <component id="system:URI"                class="system.URI"                />
     <component id="system:Version"            class="system.Version"            />
     
