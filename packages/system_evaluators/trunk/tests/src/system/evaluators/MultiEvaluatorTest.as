@@ -37,6 +37,7 @@ package system.evaluators
 {
     import library.ASTUce.framework.TestCase;
     
+    import system.Evaluable;
     import system.evaluators.samples.CustomEvaluator;
     
     /**
