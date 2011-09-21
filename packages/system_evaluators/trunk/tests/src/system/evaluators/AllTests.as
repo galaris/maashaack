@@ -35,22 +35,20 @@
 
 package system.evaluators
 {
-    import library.ASTUce.framework.*;            
-
+    import library.ASTUce.framework.*;
+    
     public class AllTests
     {
-        
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Evaluators tests");
-
-            suite.addTestSuite(DateEvaluatorTest) ;            
+            
             suite.addTestSuite(MathEvaluatorTest) ;
             suite.addTestSuite(EdenEvaluatorTest) ;
             suite.addTestSuite(MultiEvaluatorTest) ;
-            suite.addTestSuite(PropertyEvaluatorTest) ;  
+            suite.addTestSuite(PropertyEvaluatorTest) ; 
             suite.addTestSuite(RomanEvaluatorTest) ;
-                      
+            
             return suite;
         }
     }
