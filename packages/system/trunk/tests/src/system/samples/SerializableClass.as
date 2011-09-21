@@ -35,28 +35,26 @@
 
 package system.samples
 {
-    import system.eden;
+    import core.dump;
+    import core.strings.fastformat;
     import system.Serializable;
-    import system.Strings;    
-
+    
     public class SerializableClass implements Serializable
     {
-
         public var a:String;
-
+        
         public var b:String;
-
+        
         public function SerializableClass( a:String, b:String )
         {
             this.a = a;
             this.b = b;
         }
-
+        
         public function toSource( indent:int = 0 ):String
         {
-            var mask:String = "new Serializable( {a}, {b} );";
-            var str:String = Strings.format(mask, {a:eden.serialize(a), b:eden.serialize(b)});
-            return str;
+            var mask:String = "new Serializable( {0}, {1} );";
+            return fastformat(mask, dump(a), dump(b)) ;
         }
     }
 }
