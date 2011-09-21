@@ -37,7 +37,7 @@ package system.ioc.evaluators
     import library.ASTUce.framework.TestCase;
 
     import system.data.maps.HashMap;
-    import system.evaluators.Evaluable;
+    import system.Evaluable;
     import system.ioc.ObjectConfig;
     import system.ioc.TypePolicy;
     
