@@ -35,11 +35,11 @@
 
 package graphics.display 
 {
-    import flash.display.FrameLabel;
-    import flash.display.MovieClip;
-    import graphics.logger;
     import system.data.Iterator;
     import system.data.maps.HashMap;
+    
+    import flash.display.FrameLabel;
+    import flash.display.MovieClip;
     
     /**
      * The TimeLineScript class use composition to register script function over MovieClip timelines.
@@ -154,6 +154,15 @@ package graphics.display
         public var autoStop:Boolean ;
         
         /**
+         * Specifies whether errors encountered by the object are reported to the application.
+         * When enableErrorChecking is <code>true</code> methods are synchronous and can throw errors.
+         * When enableErrorChecking is <code>false</code>, the default, the methods are asynchronous and errors are not reported.
+         * Enabling error checking reduces parsing performance.
+         * You should only enable error checking when debugging.
+         */
+        public var enableErrorChecking:Boolean;
+        
+        /**
          * Indicates the target reference of this iterator.
          */
         public function get target():MovieClip
@@ -232,10 +241,7 @@ package graphics.display
             }
             catch( e:Error )
             {
-                if ( verbose )
-                {
-                    logger.warn( this + " contains failed, " + e.message ) ;
-                }
+                warn( this + " contains failed, " + e.message , verbose , enableErrorChecking ) ;
             }
             return false ;
         }
@@ -293,10 +299,7 @@ package graphics.display
             }
             catch( e:Error )
             {
-                if ( verbose )
-                { 
-                    logger.warn( this + " put failed, " + e.message ) ;
-                }
+                warn( this + " put failed, " + e.message , verbose , enableErrorChecking ) ;
             }
             return false ;
         }
@@ -333,10 +336,7 @@ package graphics.display
             }
             catch( e:Error )
             {
-                if ( verbose )
-                {
-                    logger.warn( this + " remove failed, " + e.message ) ;
-                }
+                warn( this + " remove failed, " + e.message , verbose , enableErrorChecking ) ;
             }
         }
         
@@ -371,10 +371,7 @@ package graphics.display
             }
             catch( e:Error )
             {
-                if ( verbose )
-                {
-                    logger.warn( this + " resolve failed, " + e.message ) ;
-                }
+                warn( this + " resolve failed, " + e.message , verbose , enableErrorChecking ) ;
             }
             return -1 ;
         } 
