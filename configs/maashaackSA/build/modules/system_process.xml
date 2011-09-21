@@ -20,6 +20,9 @@
         <copy file="${path}/bin-release/system.process.swc" todir="packages/system_events/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/system_events/lib-abc" overwrite="true" />-->
         
+        <copy file="${path}/bin-release/system.process.swc" todir="packages/system_logging/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/system_logging/lib-abc" overwrite="true" />-->
+        
     </target>
     
 </project>
