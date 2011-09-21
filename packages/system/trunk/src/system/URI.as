@@ -718,7 +718,7 @@ package system
                 {
                     _parseUnixAbsoluteFilePath( str );
                 }
-                else if( Strings.startsWith( str, "\\\\" ) )
+                else if( startsWith( str, "\\\\" ) )
                 {
                     _parseWindowsUNC( str );
                 }
