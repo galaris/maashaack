@@ -37,34 +37,30 @@ package system.events
 {
     import library.ASTUce.framework.*;
     
-    import system.Environment;
-    import system.hosts.HostID;
-    
     public class AllTests
     {
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack events model based W3C dom 2/3 tests");
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( ActionEventTest ) ;
-                suite.addTestSuite( ArrayEventTest ) ;
-                suite.addTestSuite( BasicEventTest ) ;
-                suite.addTestSuite( BooleanEventTest ) ;
-                suite.addTestSuite( CommandTest ) ;
-                suite.addTestSuite( CoreEventDispatcherTest ) ;
-                suite.addTestSuite( DateEventTest ) ;
-                suite.addTestSuite( DelegateTest ) ;
-                suite.addTestSuite( DynamicEventTest ) ;
-                suite.addTestSuite( EventDispatcherTest ) ;
-                suite.addTestSuite( EventListenerTest ) ;
-                suite.addTestSuite( EventListenerBatchTest ) ;
-                suite.addTestSuite( FrontControllerTest ) ;
-                suite.addTestSuite( IEventDispatcherTest ) ;
-                suite.addTestSuite( InternalDispatcherTest ) ;
-                suite.addTestSuite( NumberEventTest ) ;
-                suite.addTestSuite( StringEventTest ) ;
-            }
+            
+            suite.addTestSuite( ActionEventTest ) ;
+            suite.addTestSuite( ArrayEventTest ) ;
+            suite.addTestSuite( BasicEventTest ) ;
+            suite.addTestSuite( BooleanEventTest ) ;
+            suite.addTestSuite( CommandTest ) ;
+            suite.addTestSuite( CoreEventDispatcherTest ) ;
+            suite.addTestSuite( DateEventTest ) ;
+            suite.addTestSuite( DelegateTest ) ;
+            suite.addTestSuite( DynamicEventTest ) ;
+            suite.addTestSuite( EventDispatcherTest ) ;
+            suite.addTestSuite( EventListenerTest ) ;
+            suite.addTestSuite( EventListenerBatchTest ) ;
+            suite.addTestSuite( FrontControllerTest ) ;
+            suite.addTestSuite( IEventDispatcherTest ) ;
+            suite.addTestSuite( InternalDispatcherTest ) ;
+            suite.addTestSuite( NumberEventTest ) ;
+            suite.addTestSuite( StringEventTest ) ;
+            
             return suite;
         }
     }
