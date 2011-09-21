@@ -37,22 +37,17 @@ package system.signals
 {
     import library.ASTUce.framework.*;
     
-    import system.Environment;
-    import system.hosts.HostID;
-    
     public class AllTests
     {
         public static function suite():Test
         {
             var suite:TestSuite = new TestSuite("Maashaack signals tests");
             
-            if( Environment.host.id != HostID.RedTamarin )
-            {
-                suite.addTestSuite( SignalTest ) ;
-                suite.addTestSuite( InternalSignalTest ) ;
-                suite.addTestSuite( ReceiverTest ) ;
-                suite.addTestSuite( SignalerTest ) ;
-            }
+            suite.addTestSuite( SignalTest ) ;
+            suite.addTestSuite( InternalSignalTest ) ;
+            suite.addTestSuite( ReceiverTest ) ;
+            suite.addTestSuite( SignalerTest ) ;
+            
             return suite;
         }
     }
