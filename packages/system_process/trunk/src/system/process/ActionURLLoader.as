@@ -244,6 +244,14 @@ package system.process
         }
         
         /**
+         * Optional log function (override it to customize your logs).
+         */
+        public function log( message:String ):void
+        {
+            trace( message ) ;
+        }
+        
+        /**
          * Override this method. Parse your datas when loading is complete.
          */
         public function parse():void
@@ -298,7 +306,7 @@ package system.process
             for ( var prop:String in o ) 
             {
                 var value:* = o[prop] ;
-                logger.info( _getSpace( depth-1 ) + " + " + prop + " : " + value ) ;
+                log( _getSpace( depth-1 ) + " + " + prop + " : " + value ) ;
                 if ( value is Object && (isCollapse == true) && (depth <= maxDepth) )
                 {
                     _enumerate( value , depth + 1 ) ;
