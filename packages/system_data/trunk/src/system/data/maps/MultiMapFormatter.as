@@ -35,8 +35,8 @@
 
 package system.data.maps
 {
+    import system.Formattable;
     import system.data.MultiMap;
-    import system.formatters.Formattable;
         /**
      * Converts a MultiMap to a custom string representation.
      */
