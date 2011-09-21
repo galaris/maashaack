@@ -25,7 +25,7 @@
             <arg line="-AS3 -strict -optimize"/>
             <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
             <arg line="-import ${builtin} -import ${toplevel}" />
-            <arg line="-import ${core} -import ${common} -import ${errors} ${signals} src/${project.as}"/>
+            <arg line="-import ${core} -import ${eden} -import ${common} ${numeric} src/${project.as}"/>
         </java>
         
         <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
