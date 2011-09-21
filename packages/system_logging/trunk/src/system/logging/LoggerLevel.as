@@ -35,12 +35,10 @@
 
 package system.logging
 {
-    import system.Equatable;
-    
     /**
      * Static class containing constants for use in the level property.
      */
-    public final class LoggerLevel implements Equatable
+    public final class LoggerLevel
     {
         /**
          * Creates a new LoggerLevel instance.
