@@ -1,0 +1,25 @@
+<project>
+    
+    <target name="compile-system_logging">
+        
+        <propertycopy name="path" from="project.fullpath" override="true"/>
+        
+        <!-- build -->
+        <ant antfile="${path}/meta.xml" target="main" inheritAll="false">
+            <property name="FLEX_HOME" value="${FLEX_HOME}" />
+            <property name="TODAY" value="${TODAY}" />
+            <property name="local.flashplayerversion" value="${local.flashplayerversion}" />
+            <property file="${path}/build/build.properties"/>
+        </ant>
+        
+        <!-- deploy to libs -->
+        <copy file="${path}/bin-release/system.logging.swc" todir="libs/swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.logging.abc" todir="libs/abc" overwrite="true" />-->
+        
+        <!-- sync with other projects--> 
+        <!--<copy file="${path}/bin-release/system.logging.swc" todir="packages/system_logging/lib-swc" overwrite="true" />-->
+        <!--<copy file="${path}/bin-release/system.logging.abc" todir="packages/system_logging/lib-abc" overwrite="true" />-->
+        
+    </target>
+    
+</project>
