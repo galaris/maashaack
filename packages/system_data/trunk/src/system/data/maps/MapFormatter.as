@@ -35,10 +35,10 @@
 
 package system.data.maps
 {
+    import system.Formattable;
     import system.data.Iterator;
     import system.data.Map;
     import system.data.iterators.ArrayIterator;
-    import system.formatters.Formattable;
     
     /**
      * Converts a Map to a custom string representation.
