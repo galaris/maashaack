@@ -59,6 +59,20 @@ package graphics.process.display
         public var display:DisplayObject ;
         
         /**
+         * Specifies whether errors encountered by the object are reported to the application.
+         * When enableErrorChecking is <code>true</code> methods are synchronous and can throw errors.
+         * When enableErrorChecking is <code>false</code>, the default, the methods are asynchronous and errors are not reported.
+         * Enabling error checking reduces parsing performance.
+         * You should only enable error checking when debugging.
+         */
+        public var enableErrorChecking:Boolean;
+        
+        /**
+         * Specifies the verbose mode.
+         */
+        public var verbose:Boolean ;
+        
+        /**
          * Returns a shallow copy of this object.
          * @return a shallow copy of this object.
          */
@@ -79,7 +93,7 @@ package graphics.process.display
             }
             catch( e:Error )
             {
-                logger.warn(this + " run failed, " + e.toString() ) ;
+                warn(this + " run failed, " + e.message , verbose , enableErrorChecking ) ;
             }
             notifyFinished() ;
         }
