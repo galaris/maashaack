@@ -36,7 +36,9 @@
 package system.evaluators 
 {
     import library.ASTUce.framework.TestCase;
-
+    
+    import system.Evaluable;
+    
     /**
      * The RomanEvaluatorTest test case.
      */
