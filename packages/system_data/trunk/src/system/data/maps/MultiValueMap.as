@@ -37,8 +37,8 @@ package system.data.maps
 {
     import core.dump;
     import core.reflect.getClassPath;
-
-    import system.Reflection;
+    import core.reflect.hasInterface;
+    
     import system.data.Collection;
     import system.data.Iterable;
     import system.data.Iterator;
@@ -104,7 +104,7 @@ package system.data.maps
          */
         public function set internalBuildClass( clazz:Class ):void
         {
-            _internalBuildClass = Reflection.getClassInfo(clazz).hasInterface(Collection) ? clazz : ArrayCollection ;
+            _internalBuildClass = hasInterface(clazz,Collection) ? clazz : ArrayCollection ;
         }
         
         /**
