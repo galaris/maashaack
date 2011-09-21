@@ -36,7 +36,9 @@
 package system.formatters 
 {
     import core.strings.format;
-
+    
+    import system.Formattable;
+    
     import flash.utils.Dictionary;
     
     /**
