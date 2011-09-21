@@ -35,7 +35,6 @@
 
 package system.process 
 {
-    import system.URI;
     import system.signals.Signal;
     import system.signals.Signaler;
     
@@ -481,22 +480,22 @@ package system.process
         
         ///////////
         
-        /**
-         * Resolves the request of the loader with the cache query parameter if the cache attribute is true.
-         */
-        protected function resolveRequest():void
-        {
-            if ( _request && _request.url )
-            {
-                var uri:URI = new URI( _request.url ) ; // FIXME bug here with the relative uris !!!!
-                uri.setParameterValue
-                ( 
-                    cacheParameterName || DEFAULT_CACHE_PARAMETER , 
-                    cache ? ( Math.random() * (new Date()).valueOf() ) : undefined 
-                ) ;
-                _request.url = uri.toString() ;
-            }
-        }
+//        /**
+//         * Resolves the request of the loader with the cache query parameter if the cache attribute is true.
+//         */
+//        protected function resolveRequest():void
+//        {
+//            if ( _request && _request.url )
+//            {
+//                var uri:URI = new URI( _request.url ) ; // FIXME bug here with the relative uris !!!!
+//                uri.setParameterValue
+//                ( 
+//                    cacheParameterName || DEFAULT_CACHE_PARAMETER , 
+//                    cache ? ( Math.random() * (new Date()).valueOf() ) : undefined 
+//                ) ;
+//                _request.url = uri.toString() ;
+//            }
+//        }
         
         ///////////
         
