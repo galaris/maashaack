@@ -35,22 +35,22 @@
 
 package system.logging
 {
-    import system.Enum;
     import system.Equatable;
     
     /**
      * Static class containing constants for use in the level property.
      */
-    public final class LoggerLevel extends Enum implements Equatable
+    public final class LoggerLevel implements Equatable
     {
         /**
          * Creates a new LoggerLevel instance.
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
          */
-        public function LoggerLevel( value:int , name:String )
+        public function LoggerLevel( value:int = 0 , name:String = "" )
         {
-            super( value , name ) ;
+            _value = value ;
+            _name  = name  ;
         }
         
         /**
@@ -161,5 +161,42 @@ package system.logging
             var levels:Array = [ ALL, DEBUG, ERROR, FATAL, INFO, NONE, WARN , WTF ] ;
             return levels.indexOf( level ) > -1 ;
         }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return  "LoggerLevel." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
+        }
+        
+        /**
+         * @private
+         */
+        private var _name:String ;
+        
+        /**
+         * @private
+         */
+        private var _value:int ;
     }
 }
