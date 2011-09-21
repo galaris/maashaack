@@ -35,6 +35,9 @@
 
 package core.reflect
 {
+    import flash.utils.describeType;
+    import flash.utils.getQualifiedClassName;
+    
     /**
      * Indicates if the specified class implements all interfaces passed-in arguments.
      * <p><b>Example :</b></p>
