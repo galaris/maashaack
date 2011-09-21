@@ -18,7 +18,6 @@ deps = {
          Var("root") + "/packages/system_events"       : Var("repo") + "/packages/system_events/trunk",
          Var("root") + "/packages/system_formatters"   : Var("repo") + "/packages/system_formatters/trunk",
          Var("root") + "/packages/system_hosts"        : Var("repo") + "/packages/system_hosts/trunk",
-         Var("root") + "/packages/system_io"           : Var("repo") + "/packages/system_io/trunk",
          Var("root") + "/packages/system_ioc"          : Var("repo") + "/packages/system_ioc/trunk",
          Var("root") + "/packages/system_logging"      : Var("repo") + "/packages/system_logging/trunk",
          Var("root") + "/packages/system_logic"        : Var("repo") + "/packages/system_logic/trunk",
