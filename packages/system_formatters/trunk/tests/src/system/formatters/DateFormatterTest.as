@@ -38,6 +38,7 @@ package system.formatters
     import library.ASTUce.framework.ArrayAssert;
     import library.ASTUce.framework.TestCase;
     
+    import system.Formattable;
     import system.numeric.Range;
     
     public class DateFormatterTest extends TestCase 
