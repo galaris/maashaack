@@ -35,7 +35,8 @@
 
 package system.ioc.samples
 {
-    import system.Strings;
+    import core.strings.fastformat;
+
     import system.signals.Receiver;
     
     public class Messenger implements Receiver 
@@ -51,12 +52,12 @@ package system.ioc.samples
         {
             var name:String    = values[0] as String ;
             var message:String = values[1] as String ;
-            trace( "receive : " + Strings.format( pattern , name , message ) ) ;
+            trace( "receive : " + fastformat( pattern , name , message ) ) ;
         }
         
         public function write( name:String = "" , message:String = "" ):void
         {
-            trace( "write : " + Strings.format( pattern , name , message ) ) ;
+            trace( "write : " + fastformat( pattern , name , message ) ) ;
         }
     }
 }
