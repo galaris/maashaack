@@ -35,10 +35,11 @@
 
 package system.diagnostics
 {
-    import system.Strings;
+    import core.strings.startsWith;
+    
     import system.terminals.InteractiveConsole;
     import system.terminals.console;
-
+    
     import flash.system.Capabilities;
     import flash.system.System;
     import flash.trace.Trace;
@@ -64,7 +65,7 @@ package system.diagnostics
          */
         private function _filterBuiltin( str:String, beginWith:String, replaceWith:String ):String
         {
-            if( Strings.startsWith( str, beginWith ) )
+            if( startsWith( str, beginWith ) )
             {
                 str = str.split( beginWith ).join( replaceWith );
             }
