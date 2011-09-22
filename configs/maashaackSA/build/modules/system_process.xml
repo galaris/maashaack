@@ -35,6 +35,9 @@
         <copy file="${path}/bin-release/system.process.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/system_logic/lib-abc" overwrite="true" />-->
         
+        <copy file="${path}/bin-release/system.process.swc" todir="packages/system_models/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/system_models/lib-abc" overwrite="true" />-->
+        
     </target>
     
 </project>
