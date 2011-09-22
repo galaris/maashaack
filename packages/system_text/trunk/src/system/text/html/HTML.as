@@ -35,8 +35,6 @@
 
 package system.text.html
 {
-    import system.text.html.Entities;
-
     /**
      * The HTML tool class.
      */
