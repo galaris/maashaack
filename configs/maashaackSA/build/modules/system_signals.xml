@@ -30,6 +30,9 @@
         <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_ioc/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_logic/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_models/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_models/lib-abc" overwrite="true" />
         
