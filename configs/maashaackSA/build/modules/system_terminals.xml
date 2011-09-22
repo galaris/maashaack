@@ -20,6 +20,9 @@
         <copy file="${path}/bin-release/system.terminals.swc" todir="libraries/astuce/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.terminals.abc" todir="libraries/astuce/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.terminals.swc" todir="packages/system_diagnostics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.terminals.abc" todir="packages/system_diagnostics/lib-abc" overwrite="true" />
+        
     </target>
     
 </project>
