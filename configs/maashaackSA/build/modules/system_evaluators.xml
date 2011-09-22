@@ -22,6 +22,9 @@
         
         <copy file="${path}/bin-release/system.evaluators.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.evaluators.abc" todir="packages/system_ioc/lib-abc" overwrite="true" />-->
+        
+        <copy file="${path}/bin-release/system.evaluators.swc" todir="packages/system_date/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.evaluators.abc" todir="packages/system_date/lib-abc" overwrite="true" />-->
     </target>
     
 </project>
