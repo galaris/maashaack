@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="system.terminals-SA" default="main" basedir=".">
+<project name="system.numeric-SA" default="main" basedir=".">
     
     <target name="define">
         
