@@ -35,13 +35,21 @@
 
 package system.cli
 {
-    import system.Enum;
-    
     /**
      * Enumerates the different switch states.
      */
-    public class SwitchStatus extends Enum
+    public final class SwitchStatus
     {
+        /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
         /**
          * Creates a new SwitchStatus instance.
          * @param value The value of the enumeration.
@@ -49,7 +57,35 @@ package system.cli
          */
         public function SwitchStatus( value:int, name:String )
         {
-            super( value, name );
+            _value = value ;
+            _name  = name ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.cli.SwitchStatus." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**
