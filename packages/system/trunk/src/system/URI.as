@@ -39,10 +39,9 @@ package system
     import core.strings.startsWith;
     import core.strings.trimStart;
     
-    import system.data.Iterator;
-    import system.data.Map;
-    import system.data.maps.ArrayMap;
     import system.network.URIScheme;
+    
+    import flash.utils.Dictionary;
     
     /**
      * The "Uniform Resource Identifier" class.
@@ -269,15 +268,15 @@ package system
          */
         public function getParameter( name:String ):*
         {
-            return _queries.get( name ) ;
+            return _queries[ name ] ;
         }
         
         /**
-         * Indicates the Map used in the URI to set the parameters of the query.
+         * Returns the Dictionary reference used in the URI to set the parameters of the query.
          */
-        public function getQueryMap():Map
+        public function getQueries():Dictionary
         {
-            return _queries as Map ;
+            return _queries ;
         }
         
         /**
@@ -293,7 +292,7 @@ package system
          */
         public function hasParameter( name:String ):Boolean
         {
-            return _queries.containsKey( name ) ;
+            return _queries[ name ] != undefined ;
         }
         
         /**
@@ -469,7 +468,7 @@ package system
             var i:int;
             var j:int;
             var subdomain:String;
-            for( i=0; i<subdomains.length; i++ )
+            for( i=0; i< subdomains.length ; i++ )
             {
                 subdomain = subdomains[i];
                 
@@ -506,25 +505,24 @@ package system
         }
         
         /**
-         * Removes all the parameters in the query.
-         */
-        public function removeAllParameters():void
-        {
-            if ( _queries.size() > 0 )
-            {
-                _queryChange = true ,
-                _queries.clear() ;
-            }
-        }
-        
-        /**
          * Removes the named query parameter.
-         * @param name The parameter to remove.
+         * @param name The parameter to remove or null to remove all parameters in the URI object.
          */
-        public function removeParameter( name:String ):void
+        public function removeParameter( name:String = null ):void
         {
-            _queryChange = true ,
-            _queries.remove( name ) ;
+            _queryChange = true ;
+            if ( name == null || name == "" )
+            {
+                var value:* ;
+                for each( value in _queries )
+                {
+                    _queries = new Dictionary() ; return ;
+                }
+            }
+            else
+            {
+                delete _queries[name] ;
+            }
         }
         
         /**
@@ -535,13 +533,13 @@ package system
         public function setParameterValue( name:String , value:* ):void
         {
             _queryChange = true ;
-            if ( value === undefined && _queries.containsKey(name) )
+            if ( value === undefined && _queries[name] )
             {
-                _queries.remove( name ) ;
+                delete _queries[name] ;
             }
             else
             { 
-                _queries.put( name , value ) ;
+                _queries[name] = value ;
             }
         }
         
@@ -616,7 +614,7 @@ package system
          * The Map of all parameters to set the query. We use an ArrayMap to keep the order of the parameters.
          * @private
          */
-        private var _queries:ArrayMap = new ArrayMap() ;
+        private var _queries:Dictionary = new Dictionary() ;
         
         /**
          * The full query string without the ? character.
@@ -641,6 +639,7 @@ package system
             _unixFilePath = true;
             
             this.scheme = URIScheme.FILE.scheme;
+            
             _port     = -1;
             _fragment = "";
             _query    = "";
@@ -859,22 +858,24 @@ package system
          */
         private function _parseQuery( query:String ):void
         {
-            _queries.clear() ;
+            _queries     = new Dictionary() ;
             _queryChange = true  ;
             _hasQuery    = false ;
             if( query && query.length > 0 )
             {
                 var p:Array ;
+                var i:uint ;
                 var q:Array = query.split( "&" ) ;
                 for each( var param:String in q )
                 {
                     p = param.split( "=" ) ;
                     if ( p.length == 2 )
                     {
-                        _queries.put( p[0] as String , p[1] as String ) ;
+                        _queries[ p[0] as String ] = p[1] as String ;
+                        i++ ;
                     }
                 }
-                _hasQuery = _queries.size() > 0 ;
+                _hasQuery = i > 0 ;
             }
             _resolveQuery() ;
         }
@@ -886,22 +887,23 @@ package system
         {
             _queryChange = false ;
             _query       = "" ;
-            var l:int    = _queries.size() ;
-            _hasQuery = l > 0 ;
+            
+            var query:String ;
+            var count:uint ;
+            
+            for ( query in _queries )
+            {
+                _query += query + "=" + _queries[query] ;
+                count ++ ;
+            }
+            
+            _hasQuery = count > 0 ;
+            
             if ( _hasQuery )
             {
-                var v:* ;
-                var k:String ;
-                var it:Iterator = _queries.iterator() ;
-                while( it.hasNext() )
+                if ( _query.lastIndexOf("&") == ( _query.length - 1 ) )
                 {
-                    v = it.next() ;
-                    k = it.key() ;
-                    _query += k + "=" + v ;
-                    if ( it.hasNext() )
-                    {
-                        _query += "&" ;
-                    }
+                    _query = _query.slice(0, -1) ;
                 }
             }
         }
