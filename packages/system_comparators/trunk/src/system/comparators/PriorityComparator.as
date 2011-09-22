@@ -37,7 +37,7 @@ package system.comparators
 {
     import system.Comparator;
     import system.process.Priority;
-
+    
     /**
      * This comparator compare two Priority objects and use the priority property of this Priority objects.
      */
