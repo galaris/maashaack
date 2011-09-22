@@ -16,9 +16,8 @@
         <copy file="${path}/bin-release/system.swc" todir="libs/swc" overwrite="true" />
         <copy file="${path}/bin-release/system.abc" todir="libs/abc" overwrite="true" />
         
-        <!-- sync with other projects -->
-        
-        
+        <copy file="${path}/bin-release/system.swc" todir="packages/system_hosts/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.abc" todir="packages/system_hosts/lib-abc" overwrite="true" />
     </target>
     
 </project>
