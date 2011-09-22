@@ -55,7 +55,7 @@
                 <include name="Library.as"/>
                 
                 <include name="system/_Environment.as"/>
-
+                
                 <include name="system/Arrays.as"/>
                 <include name="system/ByteArrays.as"/>
                 <include name="system/Char.as"/>
@@ -66,8 +66,7 @@
                 <include name="system/SystemConfigurator.as"/>
                 <include name="system/SystemStrings.as"/>
                 <include name="system/URI.as"/>
-                <include name="system/Version.as"/>
-
+                
                 <include name="system/metadata.as"/>
                 <include name="system/eden.as"/>
                 <include name="system/Environment.as"/>
