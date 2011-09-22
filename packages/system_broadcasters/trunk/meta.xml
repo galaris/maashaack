@@ -48,12 +48,12 @@
             <warnings>true</warnings>
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
-            <library-path dir="${basedir}/${project.lib-swc}/" append="true">
+            <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                 <include name="core.swc"/>
                 <include name="common.swc"/>
                 <include name="system.process.swc"/>
                 <include name="system.events.swc"/>
-            </library-path>
+            </external-library-path>
             <source-path path-element="${basedir}/${project.src}" />
             <include-sources dir="${basedir}/${project.src}/system/broadcasters" includes="**/*.as" />
             <metadata date="${TODAY}" title="${project.name}">
