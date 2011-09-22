@@ -24,6 +24,9 @@
         <copy file="${path}/bin-release/system.data.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.data.abc" todir="packages/system_ioc/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.data.swc" todir="packages/system_loggic/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.data.abc" todir="packages/system_loggic/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/system.data.swc" todir="packages/system_models/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.data.abc" todir="packages/system_models/lib-abc" overwrite="true" />
         
