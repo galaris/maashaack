@@ -50,7 +50,7 @@
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_logic/lib-abc" overwrite="true" />
-    	
+        
         <copy file="${path}/bin-release/common.swc" todir="packages/system_date/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_date/lib-abc" overwrite="true" />
         
