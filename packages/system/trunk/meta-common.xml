@@ -67,7 +67,6 @@
                 <include name="Serializer.as"/>
                 <include name="Sortable.as"/>
                 
-                <include name="system/Version.as"/>
             </include-sources>
             <metadata date="${TODAY}" title="${project.name}">
                 <publisher name="${project.publisher}" />

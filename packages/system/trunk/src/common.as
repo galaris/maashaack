@@ -49,6 +49,3 @@ include "system/Formattable.as";
 include "system/Serializable.as";
 include "system/Serializer.as";
 include "system/Sortable.as";
-
-/*classes*/
-include "system/Version.as";

@@ -47,6 +47,7 @@ include "system/Objects.as";
 include "system/SystemConfigurator.as";
 include "system/SystemStrings.as";
 //include "system/URI.as"; //need package system.data build first
+include "system/Version.as";
 
 /*variables*/
 include "system/metadata.as";

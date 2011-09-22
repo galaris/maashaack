@@ -66,11 +66,12 @@
                 <include name="system/SystemConfigurator.as"/>
                 <include name="system/SystemStrings.as"/>
                 <include name="system/URI.as"/>
+                <include name="system/Version.as"/>
                 
                 <include name="system/metadata.as"/>
                 <include name="system/eden.as"/>
                 <include name="system/Environment.as"/>
-                <include name="system/Version.as"/>
+                
             </include-sources>
             <metadata date="${TODAY}" title="${project.name}">
                 <publisher name="${project.publisher}" />
