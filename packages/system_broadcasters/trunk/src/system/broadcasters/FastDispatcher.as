@@ -36,9 +36,9 @@
 package system.broadcasters 
 {
     import system.events.BasicEvent;
-
+    
     import flash.events.Event;
-
+    
     /**
      * This class provides a fast event dispatcher based "Observer" event model (like ASBroadcaster in AS1) but used <code>Event</code> object to dispatch the message to the listeners.
      * <p><b>Example :</b></p>

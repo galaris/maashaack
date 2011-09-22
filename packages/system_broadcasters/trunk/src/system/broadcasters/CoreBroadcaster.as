@@ -36,7 +36,7 @@
 package system.broadcasters 
 {
     import system.process.Lockable;
-
+    
     /**
      * This basic class is used to create concrete <code class="prettyprint">Broadcaster</code> implementations. 
      * This class used composition with an internal <code class="prettyprint">Broadcaster</code> object, by default a MessageBroadcaster reference.
