@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="system.text" default="main" basedir=".">
+    
+    <target name="clean">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="before">
+        <mkdir dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="main" depends="clean,before,build-abc,build-swc,after">
+        
+    </target>
+    
+    <target name="build-abc">
+        
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
+            <arg line="-import ${builtin} -import ${toplevel} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        
+    </target>
+    
+    <target name="build-swc">
+        <!-- 
+            generate a SWC component
+            this SWC is compatible Flash CS3/CS4 and Flex 3/4
+         -->
+        <compc
+            output="${basedir}/${release.dir}/${project.swc}"
+            target-player="${local.flashplayerversion}"
+        >
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+            <load-config filename="${basedir}/build/config.xml"/>
+            <namespace uri="${project.namespace}" manifest="${basedir}/${project.manifest}" />
+            <include-namespaces uri="${project.namespace}" />
+            <strict>true</strict>
+            <optimize>true</optimize>
+            <warnings>true</warnings>
+            <verbose-stacktraces>false</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+            <library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                <!--<include name="core.swc"/>-->
+            </library-path>
+            <source-path path-element="${basedir}/${project.src}" />
+            <include-sources dir="${basedir}/${project.src}/system/text" includes="**/*.as" />
+            <metadata date="${TODAY}" title="${project.name}">
+                <publisher name="${project.publisher}" />
+                <creator name="${project.creator}" />
+            </metadata>
+        </compc>
+    </target>
+    
+    <target name="after">
+        
+    </target>
+    
+</project>
