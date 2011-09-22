@@ -24,7 +24,8 @@
         >
             <arg line="-AS3 -strict -optimize"/>
             <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
-            <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue} -import ${core} -import ${common} -import ${system.terminals} -import ${eden} src/${project.as}"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue}"/>
+            <arg line="-import ${core} -import ${common} -import ${system.network} -import ${system.terminals} -import ${eden} src/${project.as}"/>
         </java>
         
         <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
@@ -46,6 +47,7 @@
             <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                <include name="core.swc"/>
                <include name="common.swc"/>
+               <include name="system.network.swc"/>
                <include name="system.terminals.swc"/>
                <include name="eden.swc"/>
             </external-library-path>
@@ -65,7 +67,7 @@
                 <!-- <include name="Reflection.as"/> -->
                 <include name="SystemConfigurator.as"/>
                 <include name="SystemStrings.as"/>
-                <!-- <include name="URI.as"/> -->
+                <include name="URI.as"/>
                 <include name="Version.as"/>
                 
                 <include name="metadata.as"/>
