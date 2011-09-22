@@ -27,7 +27,6 @@ deps = {
          Var("root") + "/src/system/events"       : Var("repo") + "/packages/system_events/trunk/src/system/events",
          Var("root") + "/src/system/formatters"   : Var("repo") + "/packages/system_formatters/trunk/src/system/formatters",
          Var("root") + "/src/system/hosts"        : Var("repo") + "/packages/system_hosts/trunk/src/system/hosts",
-         Var("root") + "/src/system/io"           : Var("repo") + "/packages/system_io/trunk/src/system/io",
          Var("root") + "/src/system/ioc"          : Var("repo") + "/packages/system_ioc/trunk/src/system/ioc",
          Var("root") + "/src/system/logging"      : Var("repo") + "/packages/system_logging/trunk/src/system/logging",
          Var("root") + "/src/system/logic"        : Var("repo") + "/packages/system_logic/trunk/src/system/logic",
