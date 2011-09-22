@@ -37,4 +37,4 @@ include "system/hosts/HostID.as";
 include "system/hosts/PlatformID.as";
 
 include "system/hosts/Host.as";
-include "system/hosts/Platform.as";
+include "system/hosts/OperatingSystem.as";
