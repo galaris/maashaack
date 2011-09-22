@@ -35,5 +35,5 @@
 
 /////// system.data
 
-include "system/cli/_VirtualMachine.as";
-include "system/cli/VirtualMachine.as";
+include "system/diagnostics/_VirtualMachine.as";
+include "system/diagnostics/VirtualMachine.as";
