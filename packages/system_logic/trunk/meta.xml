@@ -51,6 +51,7 @@
             <compute-digest>false</compute-digest>
             <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                 <include name="core.swc"/>
+                <include name="common.swc"/>
                 <include name="system.rules.swc"/>
                 <include name="system.process.swc"/>
             </external-library-path>
