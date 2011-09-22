@@ -37,7 +37,6 @@ package system
 {
     import library.ASTUce.framework.TestCase;
 
-    import system.data.Map;
     import system.network.URIScheme;
 
     public class URITest extends TestCase
@@ -482,8 +481,7 @@ package system
             var u:URI ;
             s =  "http://www.ics.uci.edu/?a=1&b=2";
             u = new URI( s );
-            var m:Map = u.getQueryMap() ;
-            assertNotNull( m ) ;
+            assertNotNull( u.getQueries()) ;
         }
         
         public function testGetParameter():void
@@ -558,7 +556,7 @@ package system
             var u:URI ;
             s =  "http://www.ics.uci.edu/?a=1&b=2";
             u = new URI( s );
-            u.removeAllParameters() ;
+            u.removeParameter( null ) ;
             assertEquals( u.query , "" ) ;
             assertFalse( u.hasQuery() ) ;
         }
