@@ -52,6 +52,9 @@
         
         <copy file="${path}/bin-release/core.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_ioc/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system_logic/lib-abc" overwrite="true" />
     </target>
     
 </project>
