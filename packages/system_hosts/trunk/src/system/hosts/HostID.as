@@ -35,19 +35,57 @@
 
 package system.hosts
 {
-    import system.Enum;
-    
     /**
      * This static enumeration class defines all host identifiers.
      */
-    public class HostID extends Enum
+    public final class HostID
     {
         /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
+        /**
          * Creates a new HostID instance.
+         * @param value The value of the enumeration.
+         * @param name The name key of the enumeration.
          */
         public function HostID( value:int, name:String )
         {
-            super( value, name );
+            _value = value ;
+            _name  = name  ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.hosts.HostID." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**

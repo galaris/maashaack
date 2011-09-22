@@ -35,13 +35,21 @@
 
 package system.hosts
 {
-    import system.Enum;
-    
     /**
      * This enumeration defines the sort of plateforms used in your application. 
      */
-    public class PlatformID extends Enum
+    public final class PlatformID
     {
+        /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
         /**
          * Creates a new PlatformID instance.
          * @param value The value of the enumeration.
@@ -49,7 +57,35 @@ package system.hosts
          */
         public function PlatformID( value:int, name:String )
         {
-            super( value, name );
+            _value = value ;
+            _name  = name  ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.hosts.PlatformID." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**
