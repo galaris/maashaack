@@ -38,7 +38,7 @@ include "system/rules/Rule.as";
 include "system/rules/And.as";
 include "system/rules/BooleanRule.as";
 include "system/rules/DivBy.as";
-include "system/rules/EmptryString.as";
+include "system/rules/EmptyString.as";
 include "system/rules/Equals.as";
 include "system/rules/Even.as";
 include "system/rules/False.as";
