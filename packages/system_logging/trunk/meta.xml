@@ -50,13 +50,13 @@
             <warnings>true</warnings>
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
-            <library-path dir="${basedir}/${project.lib-swc}/" append="true">
+            <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                 <include name="core.swc"/>
                 <include name="common.swc"/>
                 <include name="system.errors.swc"/>
                 <include name="system.signals.swc"/>
                 <include name="system.process.swc"/>
-            </library-path>
+            </external-library-path>
             <source-path path-element="${basedir}/${project.src}" />
             <include-sources dir="${basedir}/${project.src}/system/logging" includes="**/*.as" />
             <metadata date="${TODAY}" title="${project.name}">
