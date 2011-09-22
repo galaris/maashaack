@@ -17,14 +17,15 @@
         <copy file="${path}/bin-release/common.abc" todir="libs/abc" overwrite="true" />
         
         <!-- sync with other projects -->
-        <copy file="${path}/bin-release/common.swc" todir="packages/system_hosts/lib-swc" overwrite="true" />
-        <copy file="${path}/bin-release/common.abc" todir="packages/system_hosts/lib-abc" overwrite="true" />
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_numeric/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_numeric/lib-abc" overwrite="true" />
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_data/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_data/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/common.swc" todir="packages/system_hosts/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/common.abc" todir="packages/system_hosts/lib-abc" overwrite="true" />
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_process/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_process/lib-abc" overwrite="true" />
