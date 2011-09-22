@@ -23,6 +23,8 @@
         <copy file="${path}/bin-release/system.numeric.swc" todir="packages/system_formatters/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.numeric.abc" todir="packages/system_formatters/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.numeric.swc" todir="packages/system_date/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.numeric.abc" todir="packages/system_date/lib-abc" overwrite="true" />
     </target>
     
 </project>
