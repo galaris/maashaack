@@ -35,6 +35,9 @@
         
         <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_process/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_process/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />
     </target>
     
 </project>

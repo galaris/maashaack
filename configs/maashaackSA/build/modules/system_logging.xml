@@ -20,6 +20,8 @@
         <copy file="${path}/bin-release/system.logging.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.logging.abc" todir="packages/system_ioc/lib-abc" overwrite="true" />-->
         
+        <copy file="${path}/bin-release/system.logging.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.logging.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />-->
     </target>
     
 </project>

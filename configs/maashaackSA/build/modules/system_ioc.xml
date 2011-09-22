@@ -14,11 +14,11 @@
         
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/system.ioc.swc" todir="libs/swc" overwrite="true" />
-    	<!--<copy file="${path}/bin-release/system.ioc.abc" todir="libs/abc" overwrite="true" />-->
+        <!--<copy file="${path}/bin-release/system.ioc.abc" todir="libs/abc" overwrite="true" />-->
         
         <!-- sync with other projects--> 
-        <!--<copy file="${path}/bin-release/system.ioc.swc" todir="packages/system_data/lib-swc" overwrite="true" />-->
-        <!--<copy file="${path}/bin-release/system.ioc.abc" todir="packages/system_data/lib-abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/system.ioc.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.ioc.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />-->
         
     </target>
     
