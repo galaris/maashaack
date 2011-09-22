@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -47,7 +47,6 @@ include "system/Objects.as";
 include "system/SystemConfigurator.as";
 include "system/SystemStrings.as";
 //include "system/URI.as"; //need package system.data build first
-include "system/Version.as";
 
 /*variables*/
 include "system/metadata.as";

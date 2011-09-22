@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -44,7 +44,11 @@ include "system/Cloneable.as";
 include "system/Comparable.as";
 include "system/Comparator.as";
 include "system/Equatable.as";
+include "system/Evaluable.as";
+include "system/Formattable.as";
 include "system/Serializable.as";
 include "system/Serializer.as";
 include "system/Sortable.as";
 
+/*classes*/
+include "system/Version.as";
