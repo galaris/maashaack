@@ -166,7 +166,7 @@ package system.logging
          */
         public function toSource( indent:int = 0 ):String
         {
-            return  "LoggerLevel." + _name ;
+            return  "system.logging.LoggerLevel." + _name ;
         }
         
         /**
