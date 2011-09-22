@@ -35,8 +35,9 @@
 
 package system.hosts
 {
-    import flash.system.Capabilities;
     import system.Version;
+    
+    import flash.system.Capabilities;
     
     /**
      * The Host class.
@@ -57,7 +58,7 @@ package system.hosts
          * Creates a new Host instance.
          * @param id The HostID of this host.
          * @param version The Version of this host.
-         */        
+         */
         public function Host( id:HostID, version:Version )
         {
             _id = id;
