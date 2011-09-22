@@ -26,6 +26,9 @@
         
         <copy file="${path}/bin-release/system.errors.swc" todir="packages/system_models/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.errors.abc" todir="packages/system_models/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/system.errors.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.errors.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />
     </target>
     
 </project>
