@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="system.ioc-SA" default="main" basedir=".">
+    
+    <target name="define">
+        
+        <property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/4.5.0" />
+        <property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/4.5.0" />
+        
+        <property name="local.flashplayerversion" value="10.2" />
+        
+        <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
+            <os family="mac" />
+        </condition>
+        
+        <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
+            <os family="windows" />
+        </condition>
+        
+        <property file="build/build.properties"/>
+        
+        <tstamp>
+            <format property="TODAY" pattern="dd MMMM yyyy" />
+        </tstamp>
+        
+        <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+        
+    </target>
+    
+    <target name="clean" depends="define">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <import file="meta.xml" />
+    
+</project>
