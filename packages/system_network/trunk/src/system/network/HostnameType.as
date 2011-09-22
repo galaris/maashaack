@@ -35,13 +35,21 @@
 
 package system.network
 {
-    import system.Enum;
-    
     /**
      * The enumeration class of all host name types.
      */
-    public class HostnameType extends Enum
+    public final class HostnameType
     {
+        /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
         /**
          * Creates a new HostnameType instance.
          * @param value The value of the enumeration.
@@ -49,7 +57,35 @@ package system.network
          */
         public function HostnameType(value:int=0, name:String="")
         {
-            super(value, name);
+            _value = value ;
+            _name  = name  ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.network.HostnameType." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**
