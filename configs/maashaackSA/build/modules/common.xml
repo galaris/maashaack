@@ -32,8 +32,11 @@
         <copy file="${path}/bin-release/common.swc" todir="packages/system_events/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_events/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/common.swc" todir="packages/system_comparators/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/common.abc" todir="packages/system_comparators/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/common.swc" todir="packages/system_logging/lib-swc" overwrite="true" />
-        <!--<copy file="${path}/bin-release/common.abc" todir="packages/system_logging/lib-abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/common.abc" todir="packages/system_logging/lib-abc" overwrite="true" />
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_evaluators/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_evaluators/lib-abc" overwrite="true" />
