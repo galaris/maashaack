@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2011
+  Portions created by the Initial Developers are Copyright (C) 2006-2009
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -33,10 +33,25 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.diagnostics
+package
 {
+    import flash.display.Sprite;
+    
     /**
-     * The VirtualMachine singleton instance.
+     * The basic framework Library to be included in the SWC.
+     * <p>
+     * <b>Note:</b> This class is not a component, it's just a shim
+     * that allow to declare the SWC manifest and associate an icon file.
+     * </p>
      */
-    public const VirtualMachine:_VirtualMachine = new _VirtualMachine();
+    [ExcludeClass]
+    [IconFile("system.diagnostics.png")]
+    public class Library extends Sprite
+    {
+        public function Library()
+        {
+            super();
+        }
+        
+    }
 }

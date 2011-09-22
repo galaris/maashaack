@@ -33,10 +33,7 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package system.diagnostics
-{
-    /**
-     * The VirtualMachine singleton instance.
-     */
-    public const VirtualMachine:_VirtualMachine = new _VirtualMachine();
-}
+/////// system.data
+
+include "system/cli/_VirtualMachine.as";
+include "system/cli/VirtualMachine.as";
