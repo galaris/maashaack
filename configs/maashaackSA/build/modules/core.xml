@@ -62,6 +62,9 @@
         <copy file="${path}/bin-release/core.swc" todir="packages/system_models/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_models/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/core.swc" todir="packages/system_reflection/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system_reflection/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/core.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />
     </target>
