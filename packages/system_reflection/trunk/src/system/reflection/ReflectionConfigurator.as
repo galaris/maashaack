@@ -35,9 +35,7 @@
 
 package system.reflection
 {
-    import system.Configurator;
-
-    public class ReflectionConfigurator extends Configurator
+    public dynamic class ReflectionConfigurator
     {
         /**
          * Creates a new ReflectionConfigurator instance.
@@ -45,7 +43,10 @@ package system.reflection
          */
         public function ReflectionConfigurator( config:Object )
         {
-            super( config );
+            for( var member:String in config )
+            {
+                this[member] = config[member] ;
+            }
         }
         
         /**
@@ -54,18 +55,7 @@ package system.reflection
          * <p>With <code class="prettyprint">normalizePath = false</code> you obtain <code class="prettyprint">"system.reflection::ClassInfoTest"</code>
          * and with <code class="prettyprint">normalizePath=true</code> you obtain <code class="prettyprint">"system.reflection.ClassInfoTest"</code>.</p>
          */
-        public function get normalizePath():Boolean
-        {
-            return _config.normalizePath;
-        }
-        
-        /**
-         * @private
-         */
-        public function set normalizePath( value:Boolean ):void
-        {
-            _config.normalizePath = value;
-        }
+        public var normalizePath:Boolean ;
     }
 }
 
