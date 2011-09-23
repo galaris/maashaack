@@ -38,18 +38,19 @@ package core.reflect
     import flash.utils.describeType;
     
     /**
-     * Indicates if the specified object is dynamic.
+     * Indicates if the specified object is static.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import core.reflect.isDynamic ;
-     * trace( isDynamic( Object ) ) ; // true
+     * import core.reflect.isStatic ;
+     * trace( isStatic( Math ) ) ; // true
+     * trace( isStatic( "hello" ) ) ; // false
      * </pre>
      * @param clazz The class to check.
      * @param ...interfaces All the interfaces to search in the current class reference.
      * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
      */
-    public const isDynamic:Function = function( o:* ):Boolean
+    public const isStatic:Function = function( o:* ):Boolean
     {
-        return describeType(o).@isDynamic == "true" ;
+        return describeType( o ).@isStatic == "true" ;
     };
 }

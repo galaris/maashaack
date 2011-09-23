@@ -38,7 +38,7 @@ package core.reflect
     import flash.utils.describeType;
     
     /**
-     * Indicates if the specified class implements all interfaces passed-in arguments.
+     * Indicates if the specified object is final.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.reflect.isFinal ;
