@@ -37,9 +37,9 @@ package graphics.geom
 {
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
     import flash.geom.Rectangle;
-
+    import graphics.Geometry;
+    
     /**
      * The <code class="prettyprint">Dimension</code> class encapsulates the width and height of an object.
      */
