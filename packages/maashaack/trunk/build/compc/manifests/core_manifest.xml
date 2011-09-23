@@ -142,6 +142,10 @@
     <component id="core.reflect:hasDefinitionByName" class="core.reflect.hasDefinitionByName" />
     <component id="core.reflect:hasInterface"        class="core.reflect.hasInterface"        />
     <component id="core.reflect:invoke"              class="core.reflect.invoke"              />
+    <component id="core.reflect:isDynamic"           class="core.reflect.isDynamic"           />
+    <component id="core.reflect:isFinal"             class="core.reflect.isFinal"             />
+    <component id="core.reflect:isInstance"          class="core.reflect.isInstance"          />
+    <component id="core.reflect:isStatic"            class="core.reflect.isStatic"            />
     
     <!-- core.strings -->
     
