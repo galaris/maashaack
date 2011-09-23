@@ -349,6 +349,8 @@
     
     <!-- system.numeric -->
     
+    <component id="system.numeric:Factor"      class="system.numeric.Factor"      />
+    <component id="system.numeric:Prime"       class="system.numeric.Prime"       />
     <component id="system.numeric:PRNG"        class="system.numeric.PRNG"        />
     <component id="system.numeric:Range"       class="system.numeric.Range"       />
     <component id="system.numeric:RomanNumber" class="system.numeric.RomanNumber" />

@@ -16,6 +16,7 @@
     <component id="graphics:FillGradientStyle" class="graphics.FillGradientStyle" />
     <component id="graphics:FillShaderStyle"   class="graphics.FillShaderStyle" />
     <component id="graphics:FillStyle"         class="graphics.FillStyle" />
+    <component id="graphics:Geometry"          class="graphics.Geometry" />
     <component id="graphics:GradientStyle"     class="graphics.GradientStyle" />
     <component id="graphics:IFillStyle"        class="graphics.IFillStyle" />
     <component id="graphics:ILineStyle"        class="graphics.ILineStyle" />
@@ -235,7 +236,6 @@
     <component id="graphics.geom:Beziers"         class="graphics.geom.Beziers" />    
     <component id="graphics.geom:Dimension"       class="graphics.geom.Dimension" />
     <component id="graphics.geom:EdgeMetrics"     class="graphics.geom.EdgeMetrics" />
-    <component id="graphics.geom:Geometry"        class="graphics.geom.Geometry" />
     <component id="graphics.geom:GradientMatrix"  class="graphics.geom.GradientMatrix" />
     <component id="graphics.geom:Hexagon"         class="graphics.geom.Hexagon" />
     <component id="graphics.geom:Line"            class="graphics.geom.Line" />
@@ -274,8 +274,7 @@
     
     <!-- graphics.numeric -->
     
-    <component id="graphics.numeric:Factor"     class="graphics.numeric.Factor" />
-    <component id="graphics.numeric:Prime"      class="graphics.numeric.Prime" />
+
     
     <!-- graphics.process.display -->
     
