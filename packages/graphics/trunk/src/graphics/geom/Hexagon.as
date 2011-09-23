@@ -36,9 +36,9 @@
 package graphics.geom 
 {
     import core.maths.round;
-
+    import graphics.Geometry;
     import system.hack;
-
+    
     /**
      * A regular hexagon is a six-sided regular polygon.
      */
