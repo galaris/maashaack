@@ -40,12 +40,11 @@ package system.reflection
     import system.Reflection;
     
     public class TypeInfoTest extends TestCase
-        {
-        
+    {
         public function TypeInfoTest( name:String="" )
-            {
+        {
             super(name);
-            }
+        }
         
         public function testCanConvertTo():void
             {

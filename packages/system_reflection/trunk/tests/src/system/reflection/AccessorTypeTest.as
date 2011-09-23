@@ -36,9 +36,7 @@
 package system.reflection 
 {
     import library.ASTUce.framework.TestCase;
-
-    import system.Enum;
-
+    
     public class AccessorTypeTest extends TestCase 
     {
         public function AccessorTypeTest(name:String = "")
@@ -54,27 +52,21 @@ package system.reflection
             assertEquals( int(at)    , 10      , "03 - AccessorType constructor failed.") ;
         }
         
-        public function testInherit():void
-        {
-            var mt:AccessorType = new AccessorType(10,"hello") ;
-            assertTrue( mt is Enum , "AccessorType must extends the Enum class.") ;
-        }
-        
         public function testReadOnly():void
         {
-            assertEquals( String(AccessorType.readOnly) , "readonly" , "01 - AccessorType.readOnly failed.") ;
+            assertEquals( String(AccessorType.readOnly) , "readOnly" , "01 - AccessorType.readOnly failed.") ;
             assertEquals( int(AccessorType.readOnly)    , 1          , "02 - AccessorType.readOnly failed.") ;
         }
         
         public function testWriteOnly():void
         {
-            assertEquals( String(AccessorType.writeOnly) , "writeonly" , "01 - AccessorType.writeOnly failed.") ;
+            assertEquals( String(AccessorType.writeOnly) , "writeOnly" , "01 - AccessorType.writeOnly failed.") ;
             assertEquals( int(AccessorType.writeOnly)    , 2           , "02 - AccessorType.writeOnly failed.") ;
         }
         
         public function testReadWrite():void
         {
-            assertEquals( String(AccessorType.readWrite) , "readwrite" , "01 - AccessorType.readWrite failed.") ;
+            assertEquals( String(AccessorType.readWrite) , "readWrite" , "01 - AccessorType.readWrite failed.") ;
             assertEquals( int(AccessorType.readWrite)    , 3           , "02 - AccessorType.readWrite failed.") ;
         }
     }

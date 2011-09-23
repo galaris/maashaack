@@ -37,8 +37,6 @@ package system.reflection
 {
     import library.ASTUce.framework.TestCase;
     
-    import system.Enum;
-    
     public class MemberTypeTest extends TestCase 
     {
         public function MemberTypeTest(name:String = "")
@@ -52,12 +50,6 @@ package system.reflection
             assertNotNull( mt                  , "01 - MemberType constructor failed.") ;
             assertEquals( String(mt) , "hello" , "02 - MemberType constructor failed.") ;
             assertEquals( int(mt)    , 10      , "03 - MemberType constructor failed.") ;
-        }
-        
-        public function testInherit():void
-        {
-            var mt:MemberType = new MemberType(10,"hello") ;
-            assertTrue( mt is Enum , "MemberType must extends the Enum class.") ;
         }
         
         public function testVariable():void
