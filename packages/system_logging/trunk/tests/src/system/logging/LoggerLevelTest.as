@@ -37,8 +37,6 @@ package system.logging
 {
     import library.ASTUce.framework.TestCase;
     
-    import system.Enum;
-    
     public class LoggerLevelTest extends TestCase 
     {
         public function LoggerLevelTest( name:String = "" )
@@ -57,12 +55,6 @@ package system.logging
         public function testDEFAULT_LEVEL_STRING():void
         {
             assertEquals( LoggerLevel.DEFAULT_LEVEL_STRING  , "UNKNOWN" , "DEFAULT_LEVEL_STRING static property failed.") ;
-        }
-        
-        public function testInherit():void
-        {
-            var enum:LoggerLevel = new LoggerLevel(999999 , "test") ;
-            assertTrue( enum is Enum , "Must inherit the Enum class.") ;
         }
         
         public function testNONE():void
