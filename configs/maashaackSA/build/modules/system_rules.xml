@@ -13,8 +13,8 @@
         </ant>
         
         <!-- deploy to libs -->
-        <copy file="${path}/bin-release/system.rules.swc" todir="libs/swc" overwrite="true" />
-        <copy file="${path}/bin-release/system.rules.abc" todir="libs/abc" overwrite="true" />
+        <copy file="${path}/bin-release/system.rules.swc" todir="libs/swc/packages" overwrite="true" />
+        <copy file="${path}/bin-release/system.rules.abc" todir="libs/abc/packages" overwrite="true" />
         
         <!-- sync with other projects--> 
         

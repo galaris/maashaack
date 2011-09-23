@@ -13,12 +13,8 @@
         </ant>
         
         <!-- deploy to libs -->
-        <copy file="${path}/bin-release/system.broadcasters.swc" todir="libs/swc" overwrite="true" />
-        <!--<copy file="${path}/bin-release/system.broadcasters.abc" todir="libs/abc" overwrite="true" />-->
-        
-        <!-- sync with other projects--> 
-        <!--<copy file="${path}/bin-release/system.broadcasters.swc" todir="packages/system_data/lib-swc" overwrite="true" />-->
-        <!--<copy file="${path}/bin-release/system.broadcasters.abc" todir="packages/system_data/lib-abc" overwrite="true" />-->
+        <copy file="${path}/bin-release/system.broadcasters.swc" todir="libs/swc/packages" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.broadcasters.abc" todir="libs/abc/packages" overwrite="true" />-->
         
     </target>
     

@@ -15,8 +15,8 @@
         </ant>
 
         <!-- deploy to libs -->
-        <copy file="${path}/bin-release/astuce.swc" todir="libs/swc" overwrite="true" />
-        <copy file="${path}/bin-release/astuce.abc" todir="libs/abc" overwrite="true" />
+        <copy file="${path}/bin-release/astuce.swc" todir="libs/swc/libraries" overwrite="true" />
+        <copy file="${path}/bin-release/astuce.abc" todir="libs/abc/libraries" overwrite="true" />
         <copy file="${path}/bin-release/astuce-test.abc" todir="libs/abc" overwrite="true" />
         
         <!-- sync with other projects -->
