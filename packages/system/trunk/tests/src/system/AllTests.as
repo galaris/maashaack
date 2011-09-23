@@ -42,6 +42,7 @@ package system
     import system.cli.AllTests;
     import system.comparators.AllTests;
     import system.data.AllTests;
+    import system.date.AllTests;
     import system.errors.AllTests;
     import system.evaluators.AllTests;
     import system.events.AllTests;
@@ -90,6 +91,7 @@ package system
             /* packages */
             
             suite.addTest( system.data.AllTests.suite() );
+            suite.addTest( system.date.AllTests.suite() );
             suite.addTest( system.reflection.AllTests.suite() );
             suite.addTest( system.rules.AllTests.suite() );
             suite.addTest( system.broadcasters.AllTests.suite() );
