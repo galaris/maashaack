@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="maashaack" default="main" basedir=".">
+<project name="maashaack-SA" default="main" basedir=".">
     
     <target name="define">
         
