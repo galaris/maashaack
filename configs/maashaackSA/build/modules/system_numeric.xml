@@ -25,6 +25,9 @@
         
         <copy file="${path}/bin-release/system.numeric.swc" todir="packages/system_date/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.numeric.abc" todir="packages/system_date/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/system.numeric.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.numeric.abc" todir="packages/graphics/lib-abc" overwrite="true" />
     </target>
     
 </project>
