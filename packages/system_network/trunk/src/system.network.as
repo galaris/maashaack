@@ -34,4 +34,5 @@
 */
 
 include "system/network/HostnameType.as";
+include "system/network/URIQuery.as";
 include "system/network/URIScheme.as";
