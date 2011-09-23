@@ -50,6 +50,6 @@ package core.reflect
      */
     public const isDynamic:Function = function( o:* ):Boolean
     {
-        return describeType(o).@isDynamic ;
+        return describeType(o).@isDynamic == "true" ;
     };
 }
