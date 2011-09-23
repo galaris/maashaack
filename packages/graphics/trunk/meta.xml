@@ -56,6 +56,7 @@
                 <include name="system.data.swc"/>
                 <include name="system.events.swc"/>
                 <include name="system.logging.swc"/>
+                <include name="system.numeric.swc"/>
                 <include name="system.process.swc"/>
                 <include name="system.signals.swc"/>
                 <include name="system.swc"/>
