@@ -38,7 +38,7 @@ package graphics.geom
     import core.maths.gcd;
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
+    import graphics.Geometry;
     import system.process.Lockable;
 
     /**
