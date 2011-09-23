@@ -36,14 +36,14 @@
             
             <source-path path-element="${basedir}/${project.src}" />
             
-            <include-sources dir="${basedir}/${project.src}/maashaack" includes="**/*.as" />
+            <include-sources dir="${basedir}/${project.src}" includes="**/*.as" />
             
-            <library-path dir="../libs/swc/packages/" includes="**/*.swc" append="true"/>
-            <library-path dir="../libs/swc/libraries/" append="true">
+            <include-libraries dir="../../libs/swc/packages/" includes="**/*.swc" append="true"/>
+            <include-libraries dir="../../libs/swc/libraries/" append="true">
                   <include name="logd.swc"/>
                   <include name="eden.swc"/>
                   <include name="astuce.swc"/>
-            </library-path>
+            </include-libraries>
             
             <metadata date="${TODAY}" title="${project.name}">
                 <publisher name="${project.publisher}" />
