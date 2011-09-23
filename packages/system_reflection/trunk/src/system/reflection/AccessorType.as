@@ -35,13 +35,21 @@
 
 package system.reflection
 {
-    import system.Enum;
-    
     /**
      * This enumeration contains all accessor types.
      */
-    public class AccessorType extends Enum
+    public final class AccessorType
     {
+        /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
         /**
          * Creates a new AccessorType instance.
          * @param value The value of the enumeration.
@@ -49,23 +57,51 @@ package system.reflection
          */
         public function AccessorType( value:int, name:String )
         {
-            super( value, name );
+            _value = value ;
+            _name  = name  ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.reflection.AccessorType." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**
          * Determinates the "readOnly" accessor type value.
          */
-        public static const readOnly:AccessorType = new AccessorType( 1, "readonly" ) ;
+        public static const readOnly:AccessorType = new AccessorType( 1, "readOnly" ) ;
         
         /**
          * Determinates the "writeOnly" accessor type value.
          */
-        public static const writeOnly:AccessorType = new AccessorType( 2, "writeonly" ) ;
+        public static const writeOnly:AccessorType = new AccessorType( 2, "writeOnly" ) ;
         
         /**
          * Determinates the "readWrite" accessor type value.
          */
-        public static const readWrite:AccessorType = new AccessorType( 3, "readwrite" ) ;
+        public static const readWrite:AccessorType = new AccessorType( 3, "readWrite" ) ;
     }
 }
 

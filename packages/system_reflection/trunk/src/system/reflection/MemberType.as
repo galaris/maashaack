@@ -35,13 +35,21 @@
 
 package system.reflection
 {
-    import system.Enum;
-    
     /**
      * The member type enumeration class.
      */
-    public class MemberType extends Enum
+    public final class MemberType
     {
+        /**
+         * @private
+         */
+        protected var _name:String ;
+        
+        /**
+         * @private
+         */
+        protected var _value:int ;
+        
         /**
          * Creates a new MemberType instance.
          * @param value The value of the enumeration.
@@ -49,7 +57,35 @@ package system.reflection
          */
         public function MemberType( value:int = 0, name:String = "" )
         {
-            super( value, name );
+            _value = value ;
+            _name  = name  ;
+        }
+        
+        /**
+         * Returns the source code String representation of the object.
+         * @return the source code String representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String
+        {
+            return "system.reflection.MemberType." + _name ;
+        }
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return _name;
+        }
+        
+        /**
+         * Returns the primitive value of the object.
+         * @return the primitive value of the object.
+         */
+        public function valueOf():int
+        {
+            return _value;
         }
         
         /**
