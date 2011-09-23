@@ -37,7 +37,8 @@ package graphics.geom
 {
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
+    import graphics.Geometry;
+    
     /**
      * The EdgeMetrics class specifies the thickness, in pixels, of the four edge regions around a visual component.
      */
