@@ -38,20 +38,20 @@ package core.reflect
     import flash.utils.describeType;
     
     /**
-     * Indicates if the specified object is final.
+     * Indicates if the specified object is an instance.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import core.reflect.isFinal ;
-     * trace( isFinal( new Object() ) ) ; // false
-     * trace( isFinal( new URIError() ) ) ; // false
-     * trace( isFinal( new String() ) ) ; // true
+     * import core.reflect.isInstance ;
+     * trace( isInstance( "hello" ) ) ; // true
+     * trace( isInstance( {a:0} ) ) ; // true
+     * trace( isInstance( Object ) ) ; // false
      * </pre>
      * @param clazz The class to check.
      * @param ...interfaces All the interfaces to search in the current class reference.
      * @return <code class="prettyprint">true</code> if the class has the specified interfaces.
      */
-    public const isFinal:Function = function( o:* ):Boolean
+    public const isInstance:Function = function( o:* ):Boolean
     {
-        return describeType( o ).@isFinal == "true" ;
+        return describeType( o ).@base != "Class" ;
     };
 }
