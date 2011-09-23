@@ -43,7 +43,6 @@ package graphics
      */
     public class FillGradientStyle extends GradientStyle implements IFillStyle
     {
-        
         /**
          * Creates a new FillGradientStyle instance.
          * @param type A value from the GradientType class that specifies which gradient type to use : GradientType.LINEAR or GradientType.RADIAL.

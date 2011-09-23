@@ -35,20 +35,17 @@
 
 package graphics 
 {
-    import graphics.geom.Matrixs;
-
-    import system.eden;
-
+    import core.dump;
+    
     import flash.display.BitmapData;
     import flash.display.Graphics;
     import flash.geom.Matrix;
-
+    
     /**
      * Defines the fill style of the vector shapes. See the flash.display.graphics.beginBitmapFill method.
      */
     public class FillBitmapStyle implements IFillStyle
     {
-        
         /**
          * Creates a new FillBitmapStyle instance.
          * @param bitmap A transparent or opaque bitmap image that contains the bits to be displayed.
@@ -128,10 +125,18 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
+            var m:String = (matrix == null) ? "null" : "new flash.geom.Matrix("
+                           + String( matrix.a )  + "," 
+                           + String( matrix.b )  + "," 
+                           + String( matrix.c )  + "," 
+                           + String( matrix.d )  + "," 
+                           + String( matrix.tx ) + ","
+                           + String( matrix.ty ) 
+                           + ")" ;
             var source:String = "new graphics.FillBitmapStyle(null,"
-                              + Matrixs.toSource( matrix ) + ","
-                              + eden.serialize( repeat ) + ","
-                              + eden.serialize( smooth ) 
+                              + m + ","
+                              + dump( repeat ) + ","
+                              + dump( smooth ) 
                               + ")" ;
             return source ;
         }
