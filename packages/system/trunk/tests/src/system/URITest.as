@@ -37,6 +37,7 @@ package system
 {
     import library.ASTUce.framework.TestCase;
 
+    import system.network.URIQuery;
     import system.network.URIScheme;
 
     public class URITest extends TestCase
@@ -475,13 +476,13 @@ package system
             assertEquals( u.query , "a=1" ) ;
         }
         
-        public function testGetQueryMap():void
+        public function testGetURIQuery():void
         {
             var s:String ;
             var u:URI ;
             s =  "http://www.ics.uci.edu/?a=1&b=2";
             u = new URI( s );
-            assertNotNull( u.getQueries()) ;
+            assertNotNull( u.getURIQuery() as URIQuery ) ;
         }
         
         public function testGetParameter():void
@@ -576,14 +577,15 @@ package system
         {
             var s:String ;
             var u:URI ;
+            
             s =  "http://www.ics.uci.edu/?a=1&b=2";
             u = new URI( s );
             u.setParameterValue("a", 0 ) ;
+            
             assertEquals( u.query , "a=0&b=2" ) ;
+            
             u.setParameterValue("c", "3" ) ;
             assertEquals( u.query , "a=0&b=2&c=3" ) ;
-            u.setParameterValue("c", undefined ) ;
-            assertEquals( u.query , "a=0&b=2" ) ;
         }
         
         public function testSetParameterValueWithUndefinedValue():void
