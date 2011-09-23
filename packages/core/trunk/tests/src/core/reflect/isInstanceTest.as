@@ -33,32 +33,24 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.reflect
+package core.reflect 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import library.ASTUce.framework.TestCase;
+
+    public class isInstanceTest extends TestCase 
     {
-        public static function suite():Test
+        public function isInstanceTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.reflect package tests");
+            super(name);
+        }
+        
+        public function testIsInstance():void
+        {
+            assertTrue( isInstance( "hello" ) , "#1-1" ) ;
+            assertFalse( isInstance( String ) , "#1-2" ) ;
             
-            suite.addTestSuite( getClassByNameTest ) ;            suite.addTestSuite( getClassMethodsTest ) ;
-            suite.addTestSuite( getClassNameTest ) ;
-            suite.addTestSuite( getClassPackageTest ) ;
-            suite.addTestSuite( getClassPathTest ) ;
-            suite.addTestSuite( getDefinitionByNameTest ) ;
-            suite.addTestSuite( hasClassByNameTest ) ;
-            suite.addTestSuite( hasDefinitionByNameTest ) ;
-            suite.addTestSuite( isDynamicTest ) ;
-            suite.addTestSuite( isFinalTest ) ;
-            suite.addTestSuite( isInstanceTest ) ;
-            suite.addTestSuite( isStaticTest ) ;
-            
-            suite.addTestSuite( invokeTest ) ;
-            
-            return suite;
+            assertTrue( isInstance( {a:0} ) , "#2-1" ) ;
+            assertFalse( isInstance( Object ) , "#2-2" ) ;
         }
     }
 }
