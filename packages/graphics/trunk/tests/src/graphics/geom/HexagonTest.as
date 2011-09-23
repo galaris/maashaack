@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -35,9 +35,11 @@
 
 package graphics.geom 
 {
-    import library.ASTUce.framework.TestCase;
-
     import core.maths.round;
+
+    import graphics.Geometry;
+
+    import library.ASTUce.framework.TestCase;
 
     public class HexagonTest extends TestCase
     {

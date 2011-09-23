@@ -36,8 +36,6 @@ package graphics
 {
     import library.ASTUce.framework.TestCase;
     
-    import graphics.geom.Geometry;
-    
     import flash.display.BitmapData;
     import flash.geom.Matrix;
     

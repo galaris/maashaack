@@ -37,8 +37,6 @@ package graphics
 {
     import library.ASTUce.framework.TestCase;
     
-    import graphics.geom.Geometry;
-    
     public class FillStyleTest extends TestCase 
     {
         public function FillStyleTest(name:String = "")

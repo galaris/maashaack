@@ -35,6 +35,8 @@
 
 package graphics.geom 
 {
+    import graphics.Geometry;
+
     import library.ASTUce.framework.TestCase;
 
     import flash.geom.Rectangle;

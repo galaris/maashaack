@@ -37,8 +37,6 @@ package graphics
     import library.ASTUce.framework.ArrayAssert;
     import library.ASTUce.framework.TestCase;
     
-    import graphics.geom.Geometry;
-    
     import flash.display.GradientType;
     import flash.display.InterpolationMethod;
     import flash.display.SpreadMethod;
