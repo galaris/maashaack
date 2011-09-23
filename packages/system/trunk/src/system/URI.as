@@ -893,7 +893,7 @@ package system
             
             for ( query in _queries )
             {
-                _query += query + "=" + _queries[query] ;
+                _query += query + "=" + _queries[query] + "&"; 
                 count ++ ;
             }
             
