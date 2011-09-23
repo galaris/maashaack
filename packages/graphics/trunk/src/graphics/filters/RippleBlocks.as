@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/RippleBlocks.pbj", mimeType="application/octet-stream")]
+    [Embed("RippleBlocks.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender RippleBlocks effect to initialize a Shader in the RippleBlocksFilter class.

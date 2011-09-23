@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/Sharpen.pbj", mimeType="application/octet-stream")]
+    [Embed("Sharpen.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Sharpen effect to initialize a Shader in the SharpenFilter class.

@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/RippleCrossing.pbj", mimeType="application/octet-stream")]
+    [Embed("RippleCrossing.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender RippleCrossing effect to initialize a Shader in the RippleCrossingFilter class.

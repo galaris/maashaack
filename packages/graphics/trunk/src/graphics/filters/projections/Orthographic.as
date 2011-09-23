@@ -37,7 +37,7 @@ package graphics.filters.projections
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../../pixelbender/pbj/projections/Orthographic.pbj", mimeType="application/octet-stream")]
+    [Embed("Orthographic.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Orthographic effect to initialize a Shader with it.

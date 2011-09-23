@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/Magnify.pbj", mimeType="application/octet-stream")]
+    [Embed("Magnify.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Magnify effect to initialize a Shader in the MagnifyFilter class.

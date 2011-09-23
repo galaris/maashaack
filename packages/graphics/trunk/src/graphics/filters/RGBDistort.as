@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/RGBDistort.pbj", mimeType="application/octet-stream")]
+    [Embed("RGBDistort.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender RGBDistort effect to initialize a Shader in the RGBDistortFilter class.

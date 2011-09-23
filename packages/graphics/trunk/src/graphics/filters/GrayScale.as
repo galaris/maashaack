@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/GrayScale.pbj", mimeType="application/octet-stream")]
+    [Embed("GrayScale.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender GrayScale effect to initialize a Shader in the GrayScaleFilter class.

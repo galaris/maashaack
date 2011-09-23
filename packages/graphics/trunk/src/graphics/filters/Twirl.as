@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/Twirl.pbj", mimeType="application/octet-stream")]
+    [Embed("Twirl.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Twirl effect to initialize a Shader in the TwirlFilter class.

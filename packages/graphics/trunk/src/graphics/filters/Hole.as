@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/Hole.pbj", mimeType="application/octet-stream")]
+    [Embed("Hole.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Hole effect to initialize a Shader in the HoleFilter class.

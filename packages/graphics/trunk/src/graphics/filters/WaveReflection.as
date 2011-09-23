@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/WaveReflection.pbj", mimeType="application/octet-stream")]
+    [Embed("WaveReflection.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender WaveReflection effect to initialize a Shader in the WaveReflectionFilter class.

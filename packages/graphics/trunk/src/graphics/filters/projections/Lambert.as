@@ -37,7 +37,7 @@ package graphics.filters.projections
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../../pixelbender/pbj/projections/Lambert.pbj", mimeType="application/octet-stream")]
+    [Embed("Lambert.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Lambert effect to initialize a Shader with it.

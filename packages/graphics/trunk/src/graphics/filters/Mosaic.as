@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/Mosaic.pbj", mimeType="application/octet-stream")]
+    [Embed("Mosaic.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Mosaic effect to initialize a Shader in the MosaicFilter class.

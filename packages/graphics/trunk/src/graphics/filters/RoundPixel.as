@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
 
-    [Embed("../../../pixelbender/pbj/RoundPixel.pbj", mimeType="application/octet-stream")]
+    [Embed("RoundPixel.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender RoundPixel effect to initialize a Shader in the RoundPixelFilter class.

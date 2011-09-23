@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/AlphaMatte.pbj", mimeType="application/octet-stream")]
+    [Embed("AlphaMatte.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender AlphaMatte effect to initialize a Shader with it.

@@ -37,7 +37,7 @@ package graphics.filters.projections
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../../pixelbender/pbj/projections/Stereographic.pbj", mimeType="application/octet-stream")]
+    [Embed("Stereographic.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Stereographic effect to initialize a Shader with it.

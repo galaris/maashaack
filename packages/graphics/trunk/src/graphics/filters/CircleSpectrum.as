@@ -37,7 +37,7 @@ package graphics.filters
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../pixelbender/pbj/CircleSpectrum.pbj", mimeType="application/octet-stream")]
+    [Embed("CircleSpectrum.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender CircleSpectrum effect to initialize a Shader in the CircleSpectrumFilter class.

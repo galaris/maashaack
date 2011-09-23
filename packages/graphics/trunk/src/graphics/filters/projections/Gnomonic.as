@@ -37,7 +37,7 @@ package graphics.filters.projections
 {
     import flash.utils.ByteArray;
     
-    [Embed("../../../../pixelbender/pbj/projections/Gnomonic.pbj", mimeType="application/octet-stream")]
+    [Embed("Gnomonic.pbj", mimeType="application/octet-stream")]
     
     /**
      * The byteCode of the pixelbender Gnomonic effect to initialize a Shader with it.
