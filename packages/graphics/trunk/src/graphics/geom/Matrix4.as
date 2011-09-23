@@ -39,6 +39,7 @@ package graphics.geom
     import core.maths.clamp;
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
+    import graphics.Geometry;
 
     /**
      * Matrix with 4 rows and 4 columns.

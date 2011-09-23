@@ -38,6 +38,7 @@ package graphics.geom
     import core.dump;
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
+    import graphics.Geometry;
 
     /**
      * Defines a <code class="prettyprint">Matrix</code> with n rows and n columns.
