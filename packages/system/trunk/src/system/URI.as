@@ -39,9 +39,8 @@ package system
     import core.strings.startsWith;
     import core.strings.trimStart;
     
+    import system.network.URIQuery;
     import system.network.URIScheme;
-    
-    import flash.utils.Dictionary;
     
     /**
      * The "Uniform Resource Identifier" class.
@@ -197,11 +196,7 @@ package system
          */
         public function get query():String
         {
-            if ( _queryChange )
-            {
-                _resolveQuery() ;
-            }
-            return _query ;
+            return _query.toString() ;
         }
         
         /**
@@ -209,7 +204,7 @@ package system
          */
         public function set query( source:String ):void
         {
-            _parseQuery( source ) ;
+            _query.query = source ;
         }
         
         /**
@@ -268,15 +263,15 @@ package system
          */
         public function getParameter( name:String ):*
         {
-            return _queries[ name ] ;
+            return _query.get( name ) ;
         }
         
         /**
          * Returns the Dictionary reference used in the URI to set the parameters of the query.
          */
-        public function getQueries():Dictionary
+        public function getURIQuery():URIQuery
         {
-            return _queries ;
+            return _query ;
         }
         
         /**
@@ -292,7 +287,7 @@ package system
          */
         public function hasParameter( name:String ):Boolean
         {
-            return _queries[ name ] != undefined ;
+            return _query.get( name ) != undefined ;
         }
         
         /**
@@ -300,7 +295,7 @@ package system
          */
         public function hasQuery():Boolean
         {
-            return _hasQuery ;
+            return _query.hasQuery() ;
         }
         
         /**
@@ -510,19 +505,7 @@ package system
          */
         public function removeParameter( name:String = null ):void
         {
-            _queryChange = true ;
-            if ( name == null || name == "" )
-            {
-                var value:* ;
-                for each( value in _queries )
-                {
-                    _queries = new Dictionary() ; return ;
-                }
-            }
-            else
-            {
-                delete _queries[name] ;
-            }
+            _query.remove( name ) ;
         }
         
         /**
@@ -532,14 +515,13 @@ package system
          */
         public function setParameterValue( name:String , value:* ):void
         {
-            _queryChange = true ;
-            if ( value === undefined && _queries[name] )
+            if ( value == undefined )
             {
-                delete _queries[name] ;
+                removeParameter( name ) ;
             }
             else
-            { 
-                _queries[name] = value ;
+            {
+                _query.put( name , value ) ;
             }
         }
         
@@ -569,7 +551,7 @@ package system
             
             str += path;
             
-            if( (!greedy && _hasQuery) || query )
+            if( (!greedy && _query.hasQuery()) || query )
             {
                 str += "?" + query;
             }
@@ -603,7 +585,6 @@ package system
         private var _backslash:RegExp = /\\/g ;
         private var _fragment:String = "" ;
         private var _hasFragment:Boolean ;
-        private var _hasQuery:Boolean ;
         private var _host:String     = "" ;
         private var _username:String = "" ;
         private var _password:String = "" ;
@@ -611,20 +592,9 @@ package system
         private var _port:int        = -1 ;
         
         /**
-         * The Map of all parameters to set the query. We use an ArrayMap to keep the order of the parameters.
-         * @private
-         */
-        private var _queries:Dictionary = new Dictionary() ;
-        
-        /**
          * The full query string without the ? character.
          */
-        private var _query:String = "" ;
-        
-        /**
-         * Indicates if the query must change.
-         */
-        private var _queryChange:Boolean ;
+        private var _query:URIQuery = new URIQuery() ;
         
         private var _scheme:String   = "" ;
         private var _source:String = "";
@@ -642,9 +612,10 @@ package system
             
             _port     = -1;
             _fragment = "";
-            _query    = "";
             _host     = "";
             _path     = "";
+            
+            _query.remove() ;
             
             if( startsWith( str, "//" ) )
             {
@@ -669,11 +640,13 @@ package system
                 throw new SyntaxError( "Relative file path is not allowed." );
             }
             this.scheme = URIScheme.FILE.scheme;
+            
             _port     = -1 ;
             _fragment = "" ;
-            _query    = "" ;
             _host     = "" ;
             _path     = "/"+str.replace( _backslash , "/" );
+            
+            _query.remove() ;
         }
         
         /**
@@ -684,9 +657,11 @@ package system
             _UNC = true;
             
             this.scheme = URIScheme.FILE.scheme;
+            
             _port     = -1 ;
             _fragment = "" ;
-            _query    = "" ;
+            
+            _query.remove() ;
             
             str = trimStart( str, ["\\"] );
             var pos:int = str.indexOf( "\\" );
@@ -840,7 +815,7 @@ package system
             // query
             if( results[6] && startsWith( results[6], "?" ) )
             {
-                _parseQuery( results[7] as String ) ;
+                _query.parse( results[7] as String ) ;
             }
             
             // fragment
@@ -851,61 +826,6 @@ package system
                 _hasFragment = true;
             }
             
-        }
-        
-        /**
-         * @private
-         */
-        private function _parseQuery( query:String ):void
-        {
-            _queries     = new Dictionary() ;
-            _queryChange = true  ;
-            _hasQuery    = false ;
-            if( query && query.length > 0 )
-            {
-                var p:Array ;
-                var i:uint ;
-                var q:Array = query.split( "&" ) ;
-                for each( var param:String in q )
-                {
-                    p = param.split( "=" ) ;
-                    if ( p.length == 2 )
-                    {
-                        _queries[ p[0] as String ] = p[1] as String ;
-                        i++ ;
-                    }
-                }
-                _hasQuery = i > 0 ;
-            }
-            _resolveQuery() ;
-        }
-        
-        /**
-         * @private
-         */
-        private function _resolveQuery():void
-        {
-            _queryChange = false ;
-            _query       = "" ;
-            
-            var query:String ;
-            var count:uint ;
-            
-            for ( query in _queries )
-            {
-                _query += query + "=" + _queries[query] + "&"; 
-                count ++ ;
-            }
-            
-            _hasQuery = count > 0 ;
-            
-            if ( _hasQuery )
-            {
-                if ( _query.lastIndexOf("&") == ( _query.length - 1 ) )
-                {
-                    _query = _query.slice(0, -1) ;
-                }
-            }
         }
     }
 }
