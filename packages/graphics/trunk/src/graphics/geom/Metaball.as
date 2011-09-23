@@ -36,9 +36,9 @@
 package graphics.geom
 {
     import core.dump;
-
+    import graphics.Geometry;
     import system.hack;
-
+    
     /**
      * Metaballs are, in computer graphics, organic-looking n-dimensional objects. 
      * The technique for rendering metaballs was invented by Jim Blinn in the early 1980s.

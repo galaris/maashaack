@@ -35,6 +35,8 @@
 
 package graphics.geom
 {
+    import graphics.Geometry;
+    
     /**
      * This means half of a line, it is infinite in one direction, but ends at a certain point in the other direction.
      * In Euclidean geometry, a ray (or half-line) given two distinct points A (the origin) and B on the ray, is the set of points C on the line containing points A and B such that A is not strictly between C and B. 

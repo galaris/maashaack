@@ -38,6 +38,7 @@ package graphics.geom
     import core.dump;
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
+    import graphics.Geometry;
     
     /**
      * Defines a flat ring or disk within three dimensional space that is specified via the ring's center point, an up vector, an inner radius, and an outer radius.

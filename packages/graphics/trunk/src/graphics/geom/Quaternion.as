@@ -38,6 +38,7 @@ package graphics.geom
     import core.maths.DEG2RAD;
     import core.maths.EPSILON;
     import core.maths.RAD2DEG;
+    import graphics.Geometry;
     
     /**
      * Quaternions are hypercomplex numbers used to represent spatial rotations in three dimensions. 

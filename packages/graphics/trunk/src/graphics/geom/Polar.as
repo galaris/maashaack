@@ -36,6 +36,7 @@
 package graphics.geom 
 {
     import core.reflect.getClassPath;
+    import graphics.Geometry;
     
     /**
      * The polar coordinate system is a two-dimensional coordinate system in which each point on a plane is determined by a distance from a fixed point and an angle from a fixed direction.

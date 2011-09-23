@@ -37,7 +37,8 @@ package graphics.geom
 {
     import core.reflect.getClassName;
     import core.reflect.getClassPath;
-
+    import graphics.Geometry;
+    
     /**
      * Plane representation is a two-dimensional doubly ruled surface in a 3D space. 
      * Used maily to represent the frustrum planes of the camera.

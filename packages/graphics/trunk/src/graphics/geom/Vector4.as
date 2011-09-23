@@ -35,6 +35,8 @@
 
 package graphics.geom 
 {
+    import graphics.Geometry;
+    
     /**
      * Represents a vector in a 3D world with the coordinates x, y, z and w.
      */

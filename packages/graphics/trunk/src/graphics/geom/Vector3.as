@@ -37,6 +37,7 @@ package graphics.geom
 {
     import core.maths.cosD;
     import core.maths.sinD;
+    import graphics.Geometry;
 
     /**
      * Represents a vector in a 3D world with the coordinates x, y and z.

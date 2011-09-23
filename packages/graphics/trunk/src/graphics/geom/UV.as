@@ -36,6 +36,7 @@
 package graphics.geom 
 {
     import core.reflect.getClassPath;
+    import graphics.Geometry;
 
     /**
      * UV mapping is the 3D modeling process of making a 2D image representation of a 3D model. 
