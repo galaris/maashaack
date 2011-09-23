@@ -36,6 +36,7 @@
 package graphics.geom 
 {
     import core.reflect.getClassPath;
+    import graphics.Geometry;
 
     /**
      * Defines a linear equation of the form : <code class="prettyprint"> ax + by = c</code> with fixed real coefficients a, b and c such that a and b are not both zero.
