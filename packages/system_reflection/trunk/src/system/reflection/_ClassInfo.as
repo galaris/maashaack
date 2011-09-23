@@ -35,10 +35,10 @@
 
 package system.reflection
 {
-    import system.Reflection;
+    import core.reflect.getClassByName;
     
-    import flash.utils.describeType ;
-    import flash.utils.getQualifiedClassName ;
+    import flash.utils.describeType;
+    import flash.utils.getQualifiedClassName;
     
     [ExcludeClass]
     
@@ -367,7 +367,7 @@ package system.reflection
             
             if( path != "" )
             {
-                c = Reflection.getClassByName( path );
+                c = getClassByName( path );
                 return new _ClassInfo( c, filter );
             }
             else
