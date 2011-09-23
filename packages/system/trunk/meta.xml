@@ -48,6 +48,7 @@
                <include name="core.swc"/>
                <include name="common.swc"/>
                <include name="system.network.swc"/>
+               <include name="system.reflection.swc"/>
                <include name="system.terminals.swc"/>
                <include name="eden.swc"/>
             </external-library-path>
@@ -64,7 +65,7 @@
                 <include name="Configurator.as"/>
                 <include name="Enum.as"/>
                 <include name="Objects.as"/>
-                <!-- <include name="Reflection.as"/> -->
+                <include name="Reflection.as"/>
                 <include name="SystemConfigurator.as"/>
                 <include name="SystemStrings.as"/>
                 <include name="URI.as"/>
