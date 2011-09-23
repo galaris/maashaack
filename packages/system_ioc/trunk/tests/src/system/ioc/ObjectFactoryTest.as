@@ -409,7 +409,7 @@ package system.ioc
                 ,
                 {
                     id        : "date" ,
-                    type      : "system.evaluators.DateEvaluator" ,
+                    type      : "system.date.DateEvaluator" ,
                     singleton : true 
                 }
                 ,
