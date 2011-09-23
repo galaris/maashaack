@@ -37,11 +37,9 @@ package graphics
 {
     import core.dump;
     import core.reflect.getClassPath;
-
-    import graphics.geom.Matrixs;
-
+    
     import flash.geom.Matrix;
-
+    
     /**
      * Defines the basic core style to defines the LineGradientStyle and the fillGradientStyle class.
      */
@@ -126,12 +124,20 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
+            var m:String = (matrix == null) ? "null" : "new flash.geom.Matrix("
+                           + String( matrix.a )  + "," 
+                           + String( matrix.b )  + "," 
+                           + String( matrix.c )  + "," 
+                           + String( matrix.d )  + "," 
+                           + String( matrix.tx ) + ","
+                           + String( matrix.ty ) 
+                           + ")" ;
             var source:String = "new " + getClassPath(this,true) + "("
                               + dump( type )   + "," 
                               + dump( colors ) + "," 
                               + dump( alphas ) + "," 
                               + dump( ratios ) + "," 
-                              + Matrixs.toSource( matrix ) + ","
+                              + m + ","
                               + dump( spreadMethod ) + ","
                               + dump( interpolationMethod ) + ","
                               + dump( focalPointRatio )
