@@ -35,8 +35,6 @@
 
 package graphics 
 {
-    import graphics.geom.Geometry;
-    
     import flash.display.Graphics;
     
     /**
