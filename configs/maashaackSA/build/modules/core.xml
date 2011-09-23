@@ -67,6 +67,9 @@
         
         <copy file="${path}/bin-release/core.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/core.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/graphics/lib-abc" overwrite="true" />
     </target>
     
 </project>

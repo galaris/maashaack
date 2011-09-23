@@ -40,6 +40,9 @@
         
         <copy file="${path}/bin-release/system.process.swc" todir="packages/system_remoting/lib-swc" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/system_remoting/lib-abc" overwrite="true" />-->
+        
+        <copy file="${path}/bin-release/system.process.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.process.abc" todir="packages/graphics/lib-abc" overwrite="true" />-->
     </target>
     
 </project>

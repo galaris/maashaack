@@ -62,6 +62,9 @@
         
         <copy file="${path}/bin-release/common.swc" todir="packages/system_rules/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_rules/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/common.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/common.abc" todir="packages/graphics/lib-abc" overwrite="true" />
     </target>
     
 </project>

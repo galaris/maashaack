@@ -18,6 +18,9 @@
         
         <copy file="${path}/bin-release/system.swc" todir="packages/system_hosts/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.abc" todir="packages/system_hosts/lib-abc" overwrite="true" />
+        
+        <copy file="${path}/bin-release/system.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.abc" todir="packages/graphics/lib-abc" overwrite="true" />
     </target>
     
 </project>

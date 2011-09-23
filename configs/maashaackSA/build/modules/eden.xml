@@ -22,6 +22,8 @@
         <copy file="${path}/bin-release/eden.swc" todir="packages/system_evaluators/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/eden.abc" todir="packages/system_evaluators/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/eden.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/eden.abc" todir="packages/graphics/lib-abc" overwrite="true" />
     </target>
     
 </project>
