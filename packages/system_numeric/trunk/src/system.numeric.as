@@ -33,6 +33,8 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
+include "system/numeric/Factor.as";
+include "system/numeric/Prime.as";
 include "system/numeric/PRNG.as";
 include "system/numeric/Range.as";
 include "system/numeric/RomanNumber.as";
