@@ -173,8 +173,8 @@
     
     <!-- system.date -->
     
-    <component id="system.evaluators:DateEvaluator" class="system.evaluators.DateEvaluator" />
-    <component id="system.formatters:DateFormatter" class="system.formatters.DateFormatter" />
+    <component id="system.date:DateEvaluator" class="system.date.DateEvaluator" />
+    <component id="system.date:DateFormatter" class="system.date.DateFormatter" />
     
     <!-- system.diagnostics -->
     
