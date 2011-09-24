@@ -8,6 +8,7 @@ which have the only purpose to provide portable<br>
 cross-platform and standard packages.
 
 The *maashaack application framework*<br>
+(codename *x4a* eg. "anything for ActionScript")<br>
 is a set of different modular projects assembled together<br>
 to produce a coherent set of AS3 classes, packages and libraries<br>
 which represent our ideal of "programming in the large".
