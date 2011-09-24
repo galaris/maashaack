@@ -24,24 +24,29 @@ and try to seriously kick some butts (and ours first).
 
 === what's happening now ===
 
-  * we're using [http://code.google.com/p/gclient/ gclient]
-    * goal: remove svn::external and replace with gclient DEPS to organize multi-projects into one
-    * goal: remove svn::external and replace with SWC for library dependencies
-    * goal: be able to have different solutions reusing the same different projects (ex: maashaack vs maashaackSA)
-    * goal: be able to sync with different SCM (svn and git)
-  * we're splitin' a big framework into independent projects
-    * goal: every project have its own branches/tags/trunk
-    * goal: projects can be local to the maashaack repo or external (any other svn or git repo)
-    * goal: every project can build independently (ant, mxmlc, asdoc, etc.)
-    * goal: every project produce an independent SWC and/or SWF and/or ABC
-  * refactor of important libraries to remove/reorganize dependencies
-
 === what's coming next ===
 
-  * smaller releases, instead of v0.1 then 0.2 which last about 6 months, expect 0.2.1, 0.2.2, etc. which we gonan try to fit in 1 month or less
-  * avoid to depend on svn::external on the trunk, basically only us the commiters need that as we jungle with different projets at the same time, so each build (like 0.2.1) will have SWC and ABC frozen
-  * ~~maybe~~ use [http://code.google.com/p/gclient/ gclient] to organize the different projects from the SVN
-  * upgrade from Flex SDK 3.x to Flex SDK 4.x, different reasons for that but mainly the improved command-line tools like mxmlc, asdoc, etc.
-  * ~~ditch Flash Player 9 for Flash Player 10 only, FP10 is at more than 80% spread and we want the most optimized code possible and only FP10 can use the `Vector` class~~
-  * we will support both Flash Player 9 and Flash Player 10 via conditional compilation and generating 2 different SWC, but now we will not support anymore compiling from Flash CS3 (as this IDE does not support CC)
-  * ~~maybe~~ conditional compilation in some part of the code instead of namespaces (see ConditionalCompilation)
+=== what's have been done ===
+
+  * we now mainly use [gclient gclient] to define solutions, see [http://code.google.com/p/maashaack/wiki/Code101#Introduction introduction].
+  * we now use Flex SDK 4.5.1
+  * we now target Flash Player 10.3 and AIR 2.7 (easy to backport if needed)
+  * from now on we will always target the last stable version of Flash Player, AIR and redtamarin.
+  * we removed any unnecessary svn::external and replaced by gclient DEPS
+  * wer replaced svn::externals by SWC files in lib-swc for libraries dependencies
+  * we now have 2 main solutions: maashaack and maashaackSA, again see [http://code.google.com/p/maashaack/wiki/Code101#Introduction introduction].
+  * we can sync different SVN path from one or more SVN repositories (we decided to not use GIT)
+  * we have splitted the maashaack framework packages in small independent projects (see [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages /packages]).
+  * every project (or modules) have its own branches/tags/trunk
+  * any projects can be local to the maashaack SVN repo or external (any other SVN repo)
+  * every projects produce an independent SWC and/or SWF and/or ABC
+  * every projects can build independently with a [LocalBuild local build].
+  * every projects can be build by the [MetaBuild metabuild] from the solution maashaackSA.
+  * we use conditional compilation in some part of the code instead of namespaces, see [ConditionalCompilation].
+  * library eden cleaned and refactored, hosted on its own SVN repo.
+  * library astuce cleaned and refactored, hosted on its own SVN repo (phase1, need a phase2)
+  * all maashaack packages have been cleaned and standardised on the [ProjectStructure project structure] and a [LocalBuild local build]
+  * all unit tests are passing (1700+)
+  * all freshly compiled and current files can be found in [http://code.google.com/p/maashaack/source/browse/#svn%2Flibs%2Ftrunk /libs/trunk].
+  * we now save an history of our builds with a unique tag see [http://code.google.com/p/maashaack/source/browse/#svn%2Flibs%2Ftags /libs/tags].
+  * not all tags will be saved forever, we will only save tags that are considered stable.
