@@ -37,4 +37,10 @@ Instead of having one big project that contains-all end-all, we gonna split it<b
 in smaller independent projects, that you can start in a week-end, finnish in few weeks<br>
 and glue them all together in a framework.
 
-TODO
+And this is done !!
+
+check this small post about [https://plus.google.com/117271975527324598054/posts/WQGMmwMj3Bi Framework and Modularity]
+
+We are here, we are modular now :)
+
+See an [Code101#Introduction introduction] to the new structure.
