@@ -55,7 +55,7 @@ but this bring a lot of advantages:
 
 You will need the [gclient] tool.
 
-*maashaack*<br>
+=== maashaack ===
 If you want to work with all the projects fused in one *src* folder
 {{{
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaack
