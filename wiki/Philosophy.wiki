@@ -27,7 +27,7 @@ not thinking about forward compatiblity do you ?
  meaning reusable code in the large, as a rule of thumb any general algorithm,
  classes, utils, whatever... that can be synthetized to pure AS3 code without depending
  on any Flash player, AIR player API, would simply fall back in a general code repository,
- which is [ES4a].
+ which is ~~ES4a~~ *x4a* (codename of [maashaack]).
 
  * rule #3
  don't force rules into the language, AS3 is like the tip of the ES4 iceberg,
@@ -43,6 +43,6 @@ not thinking about forward compatiblity do you ?
 == Current State ==
 
  * we write AS3 based applications
- * the general part of these applications are isolated and refactored into [ES4a]
- * as soon as ES4 will be official and implemented in at least 2 environments
- (JS2 in Firefox and AS4 in Flash Player for example) then refactor again.
+ * the general part of these applications are isolated and refactored into x4a.
+ * ~~as soon as ES4 will be official and implemented in at least 2 environments
+ (JS2 in Firefox and AS4 in Flash Player for example) then refactor again.~~ this sadly will never happen.
