@@ -43,4 +43,7 @@ check this small post about [https://plus.google.com/117271975527324598054/posts
 
 We are here, we are modular now :)
 
-See an [Code101#Introduction introduction] to the new structure.
+See an [Code101#Introduction introduction] to the new structure.<br>
+Look here to understand a [ProjectStructure project structure].<br>
+Choose your style: [Code101#maashaack maashaack] (all in one) or [Code101#maashaackSA maashaackSA] (split in categories).<br>
+And [Build] either [LocalBuild locally] or [MetaBuild globally].
