@@ -21,13 +21,25 @@ here you can read "application framework" as<br>
 
 == Portability ==
 
+main targets
+ * Flash Player 10.3
+ * AIR 2.7
+ * [http://code.google.com/p/redtamarin/ redtamarin] 0.3.2
+
+not supported but possible to backport
  * Flash Player 9
  * Flash Player 10
  * Flash Player 10.1
+ * Flash Player 10.2
  * AIR 1.0
  * AIR 1.5
- * [http://www.adobe.com/products/air/ AIR 2.0] ~~Apollo~~
- * [http://code.google.com/p/redtamarin/ redtamarin]
+ * AIR 2.0
+ * AIR 2.5
+ * AIR 2.6
+ * redtamarin 0.2.5
+ * redtamarin 0.3.0
+ * redtamarin 0.3.1
+
 
 == Details ==
 
@@ -35,8 +47,8 @@ Inspired by such projects as Mono, Python, Ruby, etc.
 the goal here is to provide a set of libraries that
 are made right from the start portable in the AS3 world.
 
-The focus is on the AS3 language, APIs available in
-Flash 9, AIR ~~Apollo~~, !ActionScript 3 or any other AS3 host.
+The focus is on the AS3 language, APIs available for
+the Flash Player, AIR, redtamarin or any other AS3 host.
 
 see the [Documentation]
 
