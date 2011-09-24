@@ -97,7 +97,7 @@ for example: *maashaack-debug.swc* could contain debug logs.
 <br>
 <br>
 
-*maashaackSA*<br>
+=== maashaackSA ===
 If you want to work on each projects independently (SA: Stand Alone)
 {{{
 $gclient config https://maashaack.googlecode.com/svn/configs/maashaackSA
