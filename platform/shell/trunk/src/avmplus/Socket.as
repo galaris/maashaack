@@ -66,6 +66,63 @@ package avmplus
         static private const _MIN_BUFFER:uint = 2;
 
         /**
+         * Indicates if sockets are supported by the system.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public native static function isSupported():Boolean;
+
+        /**
+         * Returns the error message string from a socket error number.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public static function getErrorMessage( e:int ):String
+        {
+            /* note:
+               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
+               
+               --
+               errno vs. WSAGetLastError()
+               WSAGetLastError() is essentially the same thing as Unix’s errno global variable.
+               The error constants and their values are different; there’s a table in the Winsock spec
+               where it lists all the error constants, one column of which shows the equivalent BSD error
+               constant for a given Winsock error constant.
+               Usually the difference is just the addition of "WSA" to the beginning of the constant name
+               for the Winsock versions. (E.g. WSAEINTR is the Winsock version of BSD’s EINTR error constant.)
+               
+               Another thing to keep in mind is that, although the perror() call exists in most Windows compilers' run-time libraries,
+               it doesn’t work for Winsock calls. (This is a consequence of Winsock not returning its error codes in the errno variable.)
+               --
+               
+               here because we use strerror() to return the error string, we make a special branching
+               when we are under Windows as strerror() is also dependant on errno.
+            */
+            var message:String;
+            
+            if( OperatingSystem.name == "Win32" )
+            {
+                message = _winstrerror( e );
+            }
+            else
+            {
+                message = strerror( e );
+            }
+            
+            return message;
+        }
+
+        /**
+         * The socket version.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public native static function get version():String;
+
+        /**
          * The last socket error.
          * 
          * @productversion redtamarin 0.3
@@ -184,7 +241,7 @@ package avmplus
             _child     = false;
         }
         
-        private function _winstrerror( e:int ):String
+        private static function _winstrerror( e:int ):String
         {
             /* note:
                see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
@@ -198,11 +255,7 @@ package avmplus
                #define EAGAIN and EWOULDBLOCK to the same value, so you may want to get into the habit of
                using EWOULDBLOCK instead of EAGAIN under Unix, to make transitions to and from Winsock easier.
                --
-               
-               Here we decided to do the opposite,
-               under WIN32 when we catch EWOULDBLOCK, we throw an EAGAIN instead
             */
-            if( e == EWOULDBLOCK ) { e = EAGAIN;}
             
             switch( e )
             {
@@ -224,52 +277,14 @@ package avmplus
                 case ECONNREFUSED: return "Connection refused";
                 
                 default:
-                return strerror(e);;
+                return strerror( e );
             }
         }
         
         //was: throw new Error( strerror( lastError ), lastError );
         private function _throwSocketError( e:int ):void
         {
-            /* note:
-               In some special cases the socket could try to throw an error
-               (while in a loop for recv()/send() etc.)
-               when in fact there is no errors
-               eg. Socket.lastError == 0 meaning "No error"
-               
-               if that happen we do nothing.
-            */
-            if( e == 0 ) { return; }
-            
-            var message:String;
-            
-            /* note:
-               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
-               
-               --
-               errno vs. WSAGetLastError()
-               WSAGetLastError() is essentially the same thing as Unix’s errno global variable.
-               The error constants and their values are different; there’s a table in the Winsock spec
-               where it lists all the error constants, one column of which shows the equivalent BSD error
-               constant for a given Winsock error constant.
-               Usually the difference is just the addition of "WSA" to the beginning of the constant name
-               for the Winsock versions. (E.g. WSAEINTR is the Winsock version of BSD’s EINTR error constant.)
-               
-               Another thing to keep in mind is that, although the perror() call exists in most Windows compilers' run-time libraries,
-               it doesn’t work for Winsock calls. (This is a consequence of Winsock not returning its error codes in the errno variable.)
-               --
-               
-               here because we use strerror() to return the error string, we make a special branching
-               when we are under Windows as strerror() is also dependant on errno.
-            */
-            if( OperatingSystem.name == "Win32" )
-            {
-                message = _winstrerror(e);
-            }
-            else
-            {
-                message = strerror(e);
-            }
+            var message:String = getErrorMessage( e );
             
             var cerr:Error = new Error( message, e );
                 cerr.name  = "SocketError";
@@ -292,40 +307,6 @@ package avmplus
             throw re;
         }
 
-        private function _recvError():void
-        {
-            var e:int = lastError;
-
-            /* note:
-               see http://tangentsoft.net/wskfaq/articles/bsd-compatibility.html
-               
-               --
-               Detecting a Dropped Connection
-               Under BSD Unixes, if the remote peer closes its connection and your
-               program is blocking on recv(), you will get a 0 back from recv().
-               
-               Winsock behaves the same way, except that it can also return -1,
-               with WSAGetLastError() returning WSAECONNRESET, WSAECONNABORTED or WSAESHUTDOWN,
-               to signal the detectable flavors of abnormal disconnections.
-               --
-            */
-            if( OperatingSystem.name == "Win32" )
-            {
-                if( (e == ECONNRESET) || (e == ECONNABORTED) || (e == ESHUTDOWN) )
-                {
-                    _remoteClose();
-                }
-                else
-                {
-                    _throwSocketError( e );
-                }
-            }
-            else
-            {
-                _throwSocketError( e );
-            }
-        }
-
         private function _onConnect():void
         {
             _connected = true;
@@ -333,7 +314,7 @@ package avmplus
             if( _child )
             {
                 _peer  = getsockname( descriptor );
-                _local = getpeername( descriptor );            
+                _local = getpeername( descriptor );
             }
             else
             {
@@ -383,7 +364,7 @@ package avmplus
                     this.record( "another problem occured = " + lastError + " : " + strerror( lastError ) );
                 }
             }
-
+            
             _reset();
         }
 
@@ -651,7 +632,7 @@ package avmplus
                 bytes.writeByte(0); //we want null terminated!
                 bytes.position = 0;
             
-            if( _send( bytes, flags ) == -1 )
+            if( _send( bytes, flags ) <= -1 )
             {
                 _throwSocketError( lastError );
             }
@@ -672,7 +653,7 @@ package avmplus
             data.writeByte(0); //we want null terminated!
             data.position = 0;
             
-            if( _send( data, flags ) == -1 )
+            if( _send( data, flags ) <= -1 )
             {
                 _throwSocketError( lastError );
             }
@@ -693,7 +674,7 @@ package avmplus
                 bytes.writeByte(0); //we want null terminated!
                 bytes.position = 0;
             
-            if( _sendTo( host, String(port), bytes, flags ) == -1 )
+            if( _sendTo( host, String(port), bytes, flags ) <= -1 )
             {
                 _throwSocketError( lastError );
             }
@@ -715,7 +696,7 @@ package avmplus
             data.writeByte(0); //we want null terminated!
             data.position = 0;
             
-            if( _sendTo( host, String(port), data, flags ) == -1 )
+            if( _sendTo( host, String(port), data, flags ) <= -1 )
             {
                 _throwSocketError( lastError );
             }
@@ -743,7 +724,7 @@ package avmplus
             
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _recvError(); }
+            if( result <= -1 ) { _throwSocketError( lastError ); }
 
             var _buffer:ByteArray = _getBuffer();
                 _buffer.position = 0;
@@ -800,7 +781,7 @@ package avmplus
                    is not very efficient and could generate a
                    "signal EXC_BAD_ACCESS, Could not access memory"
 
-                   so we rever to the "old" way of checking the length of the buffer
+                   so we revert to the "old" way of checking the length of the buffer
                 */
                 //if( !readable ) { run = false; }
                 if( part.length < buffer ) { run = false; }
@@ -828,7 +809,7 @@ package avmplus
             
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _recvError(); }
+            if( result <= -1 ) { _throwSocketError( lastError ); }
             
             data = _getBuffer();
             data.position = 0;
@@ -885,7 +866,7 @@ package avmplus
 
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _recvError(); }
+            if( result <= -1 ) { _throwSocketError( lastError ); }
             
             var _buffer:ByteArray = _getBuffer();
                 _buffer.position = 0;
@@ -910,7 +891,7 @@ package avmplus
 
             if( result == 0 ) { _remoteClose(); }
 
-            if( result == -1 ) { _recvError(); }
+            if( result <= -1 ) { _throwSocketError( lastError ); }
             
             data = _getBuffer();
             data.position = 0;
