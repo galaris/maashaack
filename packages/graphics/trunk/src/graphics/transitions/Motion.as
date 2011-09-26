@@ -214,7 +214,6 @@ package graphics.transitions
                 if (looping) 
                 {
                     rewind (t - _duration);
-                    update();
                     notifyLooped() ;
                 }
                 else 
@@ -231,7 +230,6 @@ package graphics.transitions
             else if (t<0) 
             {
                 rewind() ;
-                update() ;
             }
             else 
             {
