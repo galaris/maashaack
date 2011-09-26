@@ -47,7 +47,7 @@ package graphics.transitions
          */
         public function Motion()
         {
-            //
+            setTimer( _frameTimer ) ;
         }
         
         /**
@@ -81,13 +81,26 @@ package graphics.transitions
          */
         public function set fps( n:Number ):void 
         {
-            var tmp:Boolean = running ;
-            if ( _timer != null )
+            var flag:Boolean = running ;
+            
+            if ( _timer )
             {
                 _timer.stop() ;
             }
+            
             _fps = n ;
-            if (  _timer != null && tmp ) 
+            
+            if ( isNaN(_fps) ) 
+            {
+                setTimer( _frameTimer ) ;
+            }
+            else 
+            {
+                _intervalTimer.delay = 1000 / _fps ;
+                setTimer( _intervalTimer ) ;
+            }
+            
+            if ( _timer && flag ) 
             {
                 _timer.start() ;
             }
@@ -251,14 +264,6 @@ package graphics.transitions
          */
         public function startInterval():void 
         {
-            if (_fps) 
-            {
-                setTimer( new Timer( 1000 / _fps ) ) ;
-            }
-            else 
-            {
-                setTimer( new FrameTimer() ) ;
-            }
             _timer.start() ; 
             setRunning(true) ;
         }
@@ -306,14 +311,14 @@ package graphics.transitions
          */
         protected function setTimer( timer:ITimer ):void 
         {
-            if ( _timer != null ) 
+            if ( _timer ) 
             {
                 _timer.stop();
                 _timer.timer.disconnect( nextFrame ) ;
                 _timer = null ;
             }
             _timer = timer ;
-            if( _timer != null )
+            if( _timer )
             {
                 _timer.timer.connect( nextFrame ) ;
             }
@@ -323,6 +328,16 @@ package graphics.transitions
          * @private
          */
         protected var _duration:Number ;
+        
+        /**
+         * @private
+         */
+        protected static const _frameTimer:FrameTimer = new FrameTimer() ;
+        
+        /**
+         * @private
+         */
+        protected const _intervalTimer:Timer = new Timer(0) ;
         
         /**
          * @private
