@@ -60,14 +60,14 @@ package core.strings
             
             byteArray.writeUTFBytes("hello world !!") ;
             
-            result = <![CDATA[68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 21 ]]>;
+            result = <![CDATA[68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 21]]>;
             
             assertEquals( result , hexformat( byteArray ) , "#1" ) ;
             
             byteArray.writeUTFBytes("hello world !! hello world !!") ;
             
             result = <![CDATA[68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 21 68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 
-21 20 68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 21 ]]>;
+21 20 68 65 6c 6c 6f 20 77 6f 72 6c 64 20 21 21]]>;
             
             assertEquals( result , hexformat( byteArray ) , "#1" ) ;
         }
