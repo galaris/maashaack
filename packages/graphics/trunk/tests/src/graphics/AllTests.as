@@ -46,6 +46,7 @@ package graphics
     import graphics.layouts.AllTests;
     import graphics.process.AllTests;
     import graphics.transitions.AllTests;
+    import graphics.uikit.AllTests;
     
     /**
      * TestSuite that runs all the Maashaack graphics tests
@@ -92,6 +93,7 @@ package graphics
             suite.addTest( graphics.layouts.AllTests.suite() );
             suite.addTest( graphics.process.AllTests.suite() );
             suite.addTest( graphics.transitions.AllTests.suite() );
+            suite.addTest( graphics.uikit.AllTests.suite() );
             
             return suite;
         }
