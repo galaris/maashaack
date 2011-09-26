@@ -58,6 +58,10 @@ include "core/arrays/repeat.as";
 include "core/arrays/shuffle.as";
 include "core/arrays/spliceInto.as";
 
+//core.bytearrays.*
+include "core/bytearrays/copy.as";
+include "core/bytearrays/equals.as";
+
 //core.chars.*
 include "core/chars/isAlpha.as";
 include "core/chars/isASCII.as";
@@ -68,6 +72,9 @@ include "core/chars/isOctalDigit.as";
 include "core/chars/isOperator.as";
 include "core/chars/isUnicode.as";
 include "core/chars/isUpper.as";
+
+//core.data.*
+include "core/data/aliases.as";
 
 //core.functors.*
 include "core/functors/aop.as";
@@ -144,6 +151,7 @@ include "core/maths/tanD.as";
 include "core/maths/tanH.as";
 
 //core.objects.*
+include "core/objects/fuse.as";
 include "core/objects/getMembers.as";
 include "core/objects/merge.as";
 
@@ -156,9 +164,15 @@ include "core/reflect/getClassPath.as";
 include "core/reflect/getDefinitionByName.as";
 include "core/reflect/hasClassByName.as";
 include "core/reflect/hasDefinitionByName.as";
+include "core/reflect/hasInterface.as";
 include "core/reflect/invoke.as";
+include "core/reflect/isDynamic.as";
+include "core/reflect/isFinal.as";
+include "core/reflect/isInstance.as";
+include "core/reflect/isStatic.as";
 
 //core.strings.*
+include "core/strings/bytesToHumanReadable.as";
 include "core/strings/camelCase.as";
 include "core/strings/capitalize.as";
 include "core/strings/center.as";
@@ -167,6 +181,7 @@ include "core/strings/compare.as";
 include "core/strings/endsWith.as";
 include "core/strings/fastformat.as";
 include "core/strings/format.as";
+include "core/strings/hexformat.as";
 include "core/strings/hyphenate.as";
 include "core/strings/indexOfAny.as";
 include "core/strings/insert.as";
