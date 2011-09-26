@@ -36,6 +36,7 @@
 package core
 {
     import core.arrays.AllTests;
+    import core.bytearrays.AllTests;
     import core.chars.AllTests;
     import core.data.AllTests;
     import core.functors.AllTests;
@@ -66,6 +67,7 @@ package core
             suite.addTestSuite( dumpTest );
             
             suite.addTest( core.arrays.AllTests.suite() );
+            suite.addTest( core.bytearrays.AllTests.suite() );
             suite.addTest( core.chars.AllTests.suite() );
             suite.addTest( core.data.AllTests.suite() );
             suite.addTest( core.functors.AllTests.suite() );
