@@ -88,6 +88,11 @@ package core.strings
             total += every;
         }
         
+        if ( formated.lastIndexOf( separator ) == formated.length -1 )
+        {
+            formated = formated.slice(0,formated.length-1) ;
+        }
+        
         return formated;
     }
 }
