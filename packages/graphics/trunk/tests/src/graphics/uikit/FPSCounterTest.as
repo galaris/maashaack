@@ -33,15 +33,14 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.transitions 
+package graphics.uikit 
 {
     import library.ASTUce.framework.TestCase;
-    
+
     import system.process.Resetable;
     import system.process.Startable;
     import system.process.Stoppable;
     import system.process.Task;
-    import system.signals.Signaler;
     
     public class FPSCounterTest extends TestCase 
     {
@@ -75,9 +74,9 @@ package graphics.transitions
         
         public function testInterface():void
         {
-            assertTrue( frame is Resetable ) ;
-            assertTrue( frame is Startable ) ;
-            assertTrue( frame is Stoppable ) ;
+            assertTrue( counter is Resetable ) ;
+            assertTrue( counter is Startable ) ;
+            assertTrue( counter is Stoppable ) ;
         }
     }
 }

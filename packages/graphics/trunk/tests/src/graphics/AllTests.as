@@ -35,8 +35,6 @@
 
 package graphics
 {
-    import library.ASTUce.framework.*;
-
     import graphics.colors.AllTests;
     import graphics.display.AllTests;
     import graphics.drawing.AllTests;
@@ -47,6 +45,8 @@ package graphics
     import graphics.process.AllTests;
     import graphics.transitions.AllTests;
     import graphics.uikit.AllTests;
+    
+    import library.ASTUce.framework.*;
     
     /**
      * TestSuite that runs all the Maashaack graphics tests
