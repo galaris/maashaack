@@ -44,6 +44,8 @@ package avmplus
     import flash.utils.ByteArray;
     import avmplus.profiles.Profile;
 
+    internal namespace hack_sys = "http://code.google.com/p/redtamarin/2011/hack/system" ;
+
     /**
      * The System class
      * Represents the currently running application and the avmshell runtime.
@@ -149,6 +151,8 @@ package avmplus
                 _profile = new defaultProfile();
                 return _profile;
             }
+
+            return null;
         }
 
         /**
@@ -161,6 +165,31 @@ package avmplus
         {
             _profile = value;
         }
+
+        /**
+         * Standard Output.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public static var stdout:StandardStream = new StandardStreamOut();
+
+        /**
+         * Standard Error.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public static var stderr:StandardStream = new StandardStreamErr();
+
+        /**
+         * Standard Input.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        public static var stdin:StandardStream = new StandardStreamIn();
+
         
         /**
          * Returns the program filename.
@@ -389,26 +418,15 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function get stdinLength():Number;
-
+        hack_sys native static function getStdinLength():Number;
+        
         /**
-         * Indicates if stdin buffer is empty or not.
+         * Reads the length of <code>bytes</code> from stdin.
          * 
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public static function isStdinEmpty():Boolean
-        {
-            return System.stdinLength == 0;
-        }
-
-        /**
-         * Reads the length of <ocde>bytes</code> from stdin.
-         * 
-         * @productversion redtamarin 0.3
-         * @since 0.3.0
-         */
-        public native static function stdinRead( length:uint ):ByteArray;
+        hack_sys native static function stdinRead( length:uint ):ByteArray;
 
         /**
          * Reads the stdin till EOF is reached.
@@ -416,15 +434,23 @@ package avmplus
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function stdinReadAll():ByteArray;
+        hack_sys native static function stdinReadAll():ByteArray;
 
         /**
-         * 
+         * Writes bytes to the stdout.
          * 
          * @productversion redtamarin 0.3
          * @since 0.3.0
          */
-        public native static function stdoutWrite( bytes:ByteArray ):void;
+        hack_sys native static function stdoutWrite( bytes:ByteArray ):void;
+
+        /**
+         * Writes bytes to the stderr.
+         * 
+         * @productversion redtamarin 0.3
+         * @since 0.3.2
+         */
+        hack_sys native static function stderrWrite( bytes:ByteArray ):void;
 
         /**
          * Enters debugger.
