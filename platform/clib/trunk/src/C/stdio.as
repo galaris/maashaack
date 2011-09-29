@@ -61,9 +61,18 @@ package C.stdio
            we moved the definition here (as we don't plan to create a C.limits.* package)
         */
         public native static function get PATH_MAX():int;
+
+        public native static function get NONBLOCKING_DISABLE():int;
+        public native static function get NONBLOCKING_ENABLE():int;
+
+        public native static function get O_TEXT():int;
+        public native static function get O_BINARY():int;
         
         public native static function remove( filename:String ):int;                 //int remove ( const char * filename );
         public native static function rename( oldname:String, newname:String ):int;  //int rename ( const char * oldname, const char * newname );
+        public native static function con_stream_mode( state:int ):void;             //void con_stream_mode( int state );
+        public native static function con_trans_mode( state:int ):void;              //void setmode( int state );
+        public native static function kbhit():int;                                   //int kbhit( void );
     }
 
     /** Maximum size in bytes of the longest filename string that the implementation guarantees can be opened.
@@ -77,6 +86,32 @@ package C.stdio
      * @since 0.3.0
      */
     public const PATH_MAX:int     = __stdio.PATH_MAX;
+
+
+    /** Disable the non-blocking console mode.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const NONBLOCKING_DISABLE:int   = __stdio.NONBLOCKING_DISABLE;
+
+    /** Enable the non-blocking console mode.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const NONBLOCKING_ENABLE:int    = __stdio.NONBLOCKING_ENABLE;
+
+
+    /** To put console in text mode.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const O_TEXT:int                = __stdio.O_TEXT;
+
+    /** To put console in binary mode.
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public const O_BINARY:int              = __stdio.O_BINARY;
 
 
     /**
@@ -106,6 +141,38 @@ package C.stdio
     {
         return __stdio.rename( oldname, newname );
     }
-    
+
+    /**
+     * Change the console stream mode to blocking or non-blocking.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public function con_stream_mode( state:int ):void
+    {
+        return __stdio.con_stream_mode( state );
+    }
+
+    /**
+     * Change the console translation mode to binary or text.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public function con_trans_mode( state:int ):void
+    {
+        return __stdio.con_trans_mode( state );
+    }
+
+    /**
+     * Checks the console for keyboard input.
+     * 
+     * @productversion redtamarin 0.3
+     * @since 0.3.2
+     */
+    public function kbhit():int
+    {
+        return __stdio.kbhit();
+    }
     
 }
