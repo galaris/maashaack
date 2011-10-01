@@ -141,7 +141,7 @@ package avmplus
         /*Debian*/       "/etc/debian_version"
         ]
 
-        private function _setDefaultLinuxRelease():void
+        private static function _setDefaultLinuxRelease():void
         {
             _linuxDistribID          = name;
             _linuxDistribRelease     = release;
