@@ -48,6 +48,9 @@ deps = {
          Var("root") + "/platform/clib"           : Var("repo") + "/platform/clib/trunk",
          
          Var("root") + "/tools/build-abc"         : Var("repo") + "/tools/build-abc/trunk",
+         Var("root") + "/tools/abcdump"           : Var("repo") + "/tools/abcdump/trunk",
+         Var("root") + "/tools/swfmake"           : Var("repo") + "/tools/swfmake/trunk",
+         Var("root") + "/tools/createprojector"   : Var("repo") + "/tools/createprojector/trunk",
          Var("root") + "/tools/swfinfo"           : Var("repo") + "/tools/swfinfo/trunk",
          Var("root") + "/tools/swc2abc"           : Var("repo") + "/tools/swc2abc/trunk",
          Var("root") + "/tools/astuce"            : "https://astuce.googlecode.com/svn/cli/trunk",
