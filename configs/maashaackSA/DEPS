@@ -50,4 +50,5 @@ deps = {
          Var("root") + "/tools/build-abc"         : Var("repo") + "/tools/build-abc/trunk",
          Var("root") + "/tools/swfinfo"           : Var("repo") + "/tools/swfinfo/trunk",
          Var("root") + "/tools/swc2abc"           : Var("repo") + "/tools/swc2abc/trunk",
+         Var("root") + "/tools/astuce"            : "https://astuce.googlecode.com/svn/cli/trunk",
        }
