@@ -44,6 +44,7 @@ package system.models.maps
             var suite:TestSuite = new TestSuite( "system.models.maps package" );
             
             suite.addTestSuite( MapModelTest ) ;
+            suite.addTestSuite( InitMapModelTest ) ;
             suite.addTestSuite( IndexedMapModelTest ) ;
             suite.addTestSuite( OrderedMapModelTest ) ;
             
