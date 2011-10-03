@@ -137,11 +137,6 @@ package system.models.maps
          * Indicates if index attribute loop when this value is out of the range (between 0 and the size()-1).
          */
         public var looping:Boolean ;
-
-        /**
-         * Indicates if the next and previous method loops when the internal ordered iterator can find a next or previous value object.
-         */
-        public var loop:Boolean = true ;
         
         /**
          * Clear the model.

@@ -34,7 +34,6 @@
 */
 package system.models.maps
 {
-    import system.data.ValueObject;
     import system.models.logger;
     import system.process.Task;
     
@@ -46,10 +45,15 @@ package system.models.maps
         /**
          * Creates a new InitMapModel instance.
          * @param datas The Array representation of all ValueObject to insert in the map model.
+         * @param model The model reference to initialize.
          */
-        public function InitMapModel( datas:Array = null )
+        public function InitMapModel( datas:Array = null , model:MapModel = null , autoClear:Boolean = false , autoSelect:Boolean = false , verbose:Boolean = false )
         {
-            this.datas = datas ;
+            this.datas      = datas ;
+            this.model      = model ;
+            this.autoClear  = autoClear ;
+            this.autoSelect = autoSelect ;
+            this.verbose    = verbose ;
         }
         
         /**
@@ -78,7 +82,7 @@ package system.models.maps
         public var first:* ;
         
         /**
-         * The model reference.
+         * The model reference to initialize.
          */
         public var model:MapModel ;
         
@@ -88,10 +92,10 @@ package system.models.maps
         public var verbose:Boolean ;
         
         /**
-         * Transforms the passed-in value in ValueObject. 
+         * Transforms the passed-in value. 
          * This method is used in the run() method to filter all elements in the datas array.
          */
-        public function filterValueObject( value:* ):*
+        public function filterEntry( value:* ):*
         {
             return value ;
         }
@@ -141,17 +145,17 @@ package system.models.maps
                 notifyFinished() ;
                 return ;
             } 
-            var vo:ValueObject ;
+            var entry:Object ;
             var size:int = datas.length ;
             for( var i:int ; i < size ; i++ )
             {
                 try
                 {
-                    vo = filterValueObject( datas[i] ) ; 
-                    model.add( vo ) ;
-                    if ( first == null && vo != null )
+                    entry = filterEntry( datas[i] ) ; 
+                    model.add( entry ) ;
+                    if ( first == null && entry != null )
                     {
-                        first = vo ;
+                        first = entry ;
                     }
                 }
                 catch( er:Error )
@@ -161,13 +165,13 @@ package system.models.maps
             }
             if ( first != null && autoSelect )
             {
-                if ( first is ValueObject )
-                {
-                    model.current = first ;
-                }
-                else if ( model.containsKey( first ) )
+                if ( model.containsKey( first ) )
                 {
                     model.current = model.get( first ) ;
+                }
+                else
+                {
+                    model.current = first ;
                 }
                 if ( cleanFirst )
                 {
