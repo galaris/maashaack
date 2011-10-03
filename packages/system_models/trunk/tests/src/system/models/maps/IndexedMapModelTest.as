@@ -31,23 +31,54 @@
   and other provisions required by the LGPL or the GPL. If you do not delete
   the provisions above, a recipient may use your version of this file under
   the terms of any one of the MPL, the GPL or the LGPL.
-*/
-package system.models.maps
+ */
+package system.models.maps 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
-    
-    public class AllTests
+    import library.ASTUce.framework.TestCase;
+
+    import system.data.maps.ArrayMap;
+
+    public class IndexedMapModelTest extends TestCase 
     {
-        public static function suite():Test
+        public function IndexedMapModelTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite( "system.models.maps package" );
-            
-            suite.addTestSuite( MapModelTest ) ;
-            suite.addTestSuite( IndexedMapModelTest ) ;
-            suite.addTestSuite( OrderedMapModelTest ) ;
-            
-            return suite;
+            super( name );
         }
-	}
+        
+        public var model:IndexedMapModel ;
+        
+        public function setUp():void
+        {
+            model = new IndexedMapModel() ;
+        }
+        
+        public function tearDown():void
+        {
+            model = null ;
+        }
+        
+        public function testConstructor():void
+        {
+            assertNotNull( model ) ;
+            assertTrue( model.getMap() is ArrayMap ) ;
+        }
+        
+        public function testConstructorWithKey():void
+        {
+            model = new IndexedMapModel( "key" ) ;
+            assertEquals( "key" , model.primaryKey ) ;
+        }
+        
+        public function testInherit():void
+        {
+            assertTrue( model is MapModel ) ;
+        }
+        
+        public function testLooping():void
+        {
+            assertFalse( model.looping , "#1" ) ;
+            model.looping = true ;
+            assertTrue( model.looping , "#2" ) ; 
+        }
+    }
 }
