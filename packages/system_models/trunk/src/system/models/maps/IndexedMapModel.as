@@ -43,8 +43,7 @@ package system.models.maps
     import flash.errors.IllegalOperationError;
     
     /**
-     * This map model object is ordered with a previous and next methods inside.
-     * 
+     * This map model object is indexed with a numeric index value.
      * @example Example
      * <listing version="3.0">
      * <code class="prettyprint">
@@ -67,8 +66,8 @@ package system.models.maps
         
         
         /**
-         * Sets the current <code class="prettyprint">ValueObject</code> selected in this model.
-         * @throws ArgumentError If the passed-in ValueObject parameter is not register in the model.
+         * Sets the current entry selected in this model.
+         * @throws ArgumentError If the passed-in object parameter is not register in the model.
          */
         public override function set current( o:* ):void
         {
@@ -170,8 +169,8 @@ package system.models.maps
         }
         
         /**
-         * Sets the internal map of this model (default use a new system.data.maps.HashMap instance).
-         * @throws IllegalOperationError The OrderedMapModel class fix the internal map with an ArrayMap instance only, you can't change it.
+         * Not available in the IndexedMapModel instances.
+         * @throws IllegalOperationError The IndexedMapModel class fix the internal map with an ArrayMap instance only, you can't change it.
          */
         public override function setMap( map:Map ):void
         {
