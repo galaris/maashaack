@@ -4,7 +4,9 @@ vars = {
        }
 
 deps = {
-         Var("root") + "/libs"                    : Var("repo") + "/libs/trunk",
+         Var("root") + "/libs"                         : Var("repo") + "/libs/trunk",
+
+         Var("root") + "/runtimes/redtamarin"          : "http://redtamarin.googlecode.com/svn/dist/tags/0.3.2",
          
          Var("root") + "/packages/core"                : Var("repo") + "/packages/core/trunk",
          Var("root") + "/packages/system"              : Var("repo") + "/packages/system/trunk",
