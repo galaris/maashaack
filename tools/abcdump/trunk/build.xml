@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="core-SA" default="main" basedir=".">
+    
+    <target name="define">
+        
+        <property file="build/build.properties"/>
+        
+    </target>
+    
+    <target name="clean" depends="define">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <import file="meta.xml" />
+    
+</project>

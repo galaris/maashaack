@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="core" default="main" basedir=".">
+    
+    <target name="clean">
+        <delete dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="before">
+        <mkdir dir="${basedir}/${release.dir}" />
+    </target>
+    
+    <target name="main" depends="clean,before,build-nix,build-osx,build-osx105,build-win,after">
+        
+    </target>
+    
+    <target name="build-nix">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-import ${builtin} -import ${toplevel} -exe ${redshell.nix} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.name}.exe" tofile="${basedir}/${release.dir}/nix/${project.name}" />
+        <chmod file="${basedir}/${release.dir}/nix/${project.name}" perm="+x"/>
+    </target>
+    
+    <target name="build-osx">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-import ${builtin} -import ${toplevel} -exe ${redshell.osx} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.name}.exe" tofile="${basedir}/${release.dir}/osx/${project.name}" />
+        <chmod file="${basedir}/${release.dir}/osx/${project.name}" perm="+x"/>
+    </target>
+    
+    <target name="build-osx105">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-import ${builtin} -import ${toplevel} -exe ${redshell.osx105} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.name}.exe" tofile="${basedir}/${release.dir}/osx105/${project.name}" />
+        <chmod file="${basedir}/${release.dir}/osx105/${project.name}" perm="+x"/>
+    </target>
+    
+    <target name="build-win">
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize"/>
+            <arg line="-import ${builtin} -import ${toplevel} -exe ${redshell.win} src/${project.as}"/>
+        </java>
+        
+        <move file="${basedir}/src/${project.name}.exe" tofile="${basedir}/${release.dir}/win/${project.name}.exe" />
+    </target>
+    
+    <target name="after">
+    	<delete file="${basedir}/src/${project.name}.abc"/>
+    </target>
+    
+</project>
