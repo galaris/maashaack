@@ -47,7 +47,7 @@ package graphics.transitions
          */
         public function Motion()
         {
-            setTimer( _frameTimer ) ;
+            setTimer( new FrameTimer() ) ;
         }
         
         /**
@@ -81,26 +81,21 @@ package graphics.transitions
          */
         public function set fps( n:Number ):void 
         {
-            var flag:Boolean = running ;
-            
-            if ( _timer )
+            var tmp:Boolean = running ;
+            if ( _timer != null )
             {
                 _timer.stop() ;
             }
-            
             _fps = n ;
-            
-            if ( isNaN(_fps) ) 
+            if (_fps) 
             {
-                setTimer( _frameTimer ) ;
+                setTimer( new Timer( 1000 / _fps ) ) ;
             }
             else 
             {
-                _intervalTimer.delay = 1000 / _fps ;
-                setTimer( _intervalTimer ) ;
+                setTimer( new FrameTimer() ) ;
             }
-            
-            if ( _timer && flag ) 
+            if (  _timer != null && tmp ) 
             {
                 _timer.start() ;
             }
@@ -311,14 +306,14 @@ package graphics.transitions
          */
         protected function setTimer( timer:ITimer ):void 
         {
-            if ( _timer ) 
+            if ( _timer != null ) 
             {
                 _timer.stop();
                 _timer.timer.disconnect( nextFrame ) ;
                 _timer = null ;
             }
-            _timer = timer ;
-            if( _timer )
+            _timer = timer || new FrameTimer() ;
+            if( _timer != null )
             {
                 _timer.timer.connect( nextFrame ) ;
             }
@@ -328,16 +323,6 @@ package graphics.transitions
          * @private
          */
         protected var _duration:Number ;
-        
-        /**
-         * @private
-         */
-        protected static const _frameTimer:FrameTimer = new FrameTimer() ;
-        
-        /**
-         * @private
-         */
-        protected const _intervalTimer:Timer = new Timer(0) ;
         
         /**
          * @private
