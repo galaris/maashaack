@@ -15,6 +15,8 @@ small, fast and without any dependencies.
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Flibraries%2Flogd%2Ftrunk /libraries/logd/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/libraries/logd/trunk logd-read-only` ||
 
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+
 <br>
 <br>
 
