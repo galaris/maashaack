@@ -17,10 +17,9 @@
 
 <br>
 <br>
-
 *notes:*<br>
   * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
-  * Linux binary is compiled for Ubuntu, but shoudl work with CentOS, etc.
+  * Linux binary is compiled for Ubuntu, but should work with Debian, CentOS, etc.
 <br>
 <br>
 <br>
