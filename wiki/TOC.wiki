@@ -97,6 +97,7 @@
       * [avmglue avmglue]
  * [Tools Tools]
    * maashaack
+      * [abcdump abcdump]
       * [swfinfo swfinfo]
       * [swc2abc swc2abc]
       * [flashdoc flashdoc]
