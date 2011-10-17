@@ -15,6 +15,9 @@
 <a href="http://maashaack.googlecode.com/svn/libs/trunk/exe/osx105/abcdump"><img src="http://maashaack.googlecode.com/svn/gfx/osx105.png" align="left"/></a>
 <a href="http://maashaack.googlecode.com/svn/libs/trunk/exe/nix/abcdump"><img src="http://maashaack.googlecode.com/svn/gfx/nix.png" align="left"/></a>
 
+<br>
+<br>
+
 *notes:*<br>
   * OS X and Linux file probably require to be chmoded<br>`$ chmod +x swfinfo`
   * Linux binary is compiled for Ubuntu, but shoudl work with CentOS, etc.
