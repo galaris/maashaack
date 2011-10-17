@@ -33,7 +33,7 @@ The tool will allow you to display the contents of abc and swf files in a lot of
 
 = Installation =
 
-This is a command line tool so install accordingly.
+Depends of your preferences.
 
 ----
 = Documentation =
