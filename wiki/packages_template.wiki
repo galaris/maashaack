@@ -17,6 +17,17 @@
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2FNAME%2Ftrunk /packages/NAME/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/NAME/trunk NAME-read-only` ||
 
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/win.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/osx.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/osx105.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/nix.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/zip.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/air.png" align="left"/></a>
+
+<br>
+<br>
 <br>
 <br>
 
