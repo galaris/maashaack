@@ -35,8 +35,8 @@
 
 package graphics.layouts 
 {
+    import system.process.Action;
     import system.process.Lockable;
-    import system.process.Runnable;
     import system.signals.Signaler;
     
     import flash.display.DisplayObjectContainer;
@@ -45,7 +45,7 @@ package graphics.layouts
     /**
      * This interface defines the basic implementation of the layout engine.
      */
-    public interface Layout extends Lockable, Runnable
+    public interface Layout extends Action, Lockable
     {
         /**
          * The alignement of the layout.
@@ -82,13 +82,11 @@ package graphics.layouts
          * The signal invoked when the render method is called.
          */
         function get renderer():Signaler ;
-        function set renderer( signal:Signaler ):void ;
         
         /**
          * The signal invoked when the update method is called.
          */
-        function get udpater():Signaler ;
-        function set udpater( signal:Signaler ):void ;
+        function get updater():Signaler ;
         
         /**
          * Calculates the default sizes and minimum and maximum values. 
