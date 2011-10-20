@@ -165,10 +165,8 @@ package graphics.display
                 _scope = this ;
             }
             
-            _pen  = new RoundedComplexRectanglePen( this ) ;
-            _real = new Rectangle() ;
+            _pen = new RoundedComplexRectanglePen( this ) ;
             
-            ___timer___ = new FrameTimer(24, 1) ;
             ___timer___.timer.connect( redraw ) ;
             
             ///////////
@@ -914,7 +912,7 @@ package graphics.display
         /**
          * @private
          */
-        hack var _real:Rectangle ;
+        hack const _real:Rectangle = new Rectangle();
         
         /**
          * The scope of the active display list of this container.
@@ -925,7 +923,7 @@ package graphics.display
         /**
          * @private
          */
-        hack var ___timer___:FrameTimer ;
+        hack const ___timer___:FrameTimer = new FrameTimer(24, 1) ;
         
         /**
          * @private
