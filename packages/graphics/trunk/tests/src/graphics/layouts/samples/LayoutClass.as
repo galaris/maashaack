@@ -69,14 +69,14 @@
             _renderer = signal ;
         }
         
-        public function set udpater(signal:Signaler):void
+        public function get updater():Signaler
         {
-            _updater = signal ;
+            return _updater ;
         }
         
-        public function get udpater():Signaler
+        public function set updater(signal:Signaler):void
         {
-            return _updater;
+            _updater = signal ;
         }
         
         public function isLocked():Boolean
@@ -125,5 +125,45 @@
         private var _renderer:Signaler ;
         
         private var _updater:Signaler ;
+
+        public function get finishIt():Signaler
+        {
+            return null;
+        }
+
+        public function set finishIt(signal:Signaler):void
+        {
+        }
+
+        public function get phase():String
+        {
+            return "";
+        }
+
+        public function get running():Boolean
+        {
+            return false;
+        }
+
+        public function get startIt():Signaler
+        {
+            return null;
+        }
+
+        public function set startIt(signal:Signaler):void
+        {
+        }
+
+        public function notifyFinished():void
+        {
+        }
+
+        public function notifyStarted():void
+        {
+        }
+
+        public function clone():*
+        {
+        }
     }
 }
