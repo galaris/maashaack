@@ -782,11 +782,13 @@ package graphics.display
             }
         }
         
+        //////////
+        
         /**
          * This method is invoked after the draw() method in the update() method.
          * Overrides this method.
          */
-        public function viewChanged():void
+        protected function viewChanged():void
         {
             // overrides
         }
@@ -795,7 +797,7 @@ package graphics.display
          * Invoked when the enabled property of the component change.
          * Overrides this method.
          */
-        public function viewEnabled():void 
+        protected function viewEnabled():void 
         {
             // overrides
         }
@@ -804,7 +806,7 @@ package graphics.display
          * Invoked when the component is resized.
          * Overrides this method.
          */
-        public function viewResize():void 
+        protected function viewResize():void 
         {
             // overrides
         }
