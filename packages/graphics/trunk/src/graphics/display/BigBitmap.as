@@ -35,12 +35,9 @@
 
 package graphics.display 
 {
-    import system.process.Lockable;
-    
     import flash.display.Bitmap;
     import flash.display.BitmapData;
     import flash.display.IBitmapDrawable;
-    import flash.display.Sprite;
     import flash.geom.ColorTransform;
     import flash.geom.Matrix;
     import flash.geom.Point;
@@ -49,7 +46,7 @@ package graphics.display
     /**
      * Creates a BigBitmap object with a specified width and height. This bitmap can specify a width and a height values greater than the defaults.
      */
-    public class BigBitmap extends Sprite implements Lockable
+    public class BigBitmap extends MovableObjectBlock
     {
         /**
          * Creates a new BigBitmap instance.
@@ -186,28 +183,21 @@ package graphics.display
             }
             return 0;
         }
-        /**
-         * Returns <code class="prettyprint">true</code> if the object is locked.
-         * @return <code class="prettyprint">true</code> if the object is locked.
-         */
-        public function isLocked():Boolean
-        {
-            return _locked ;
-        }
         
         /**
          * Locks an image so that any objects that reference the BitmapData object, such as Bitmap objects, are not updated when this BitmapData object changes. 
          * To improve performance, use this method along with the unlock() method before and after numerous calls to the setPixel() or setPixel32() method.
          */
-        public function lock():void
+        public override function lock():void
         {
-            _locked = true ;
-            var l:int = _bitmaps.length ;
-            for( var i:int ; i < l ; i++ )
+            if( _locked == 0 )
             {
-                var bmp:Bitmap = _bitmaps[i] as Bitmap;
-                bmp.bitmapData.lock();
+                for each( var bmp:Bitmap in _bitmaps )
+                {
+                    bmp.bitmapData.lock();
+                }
             }
+            super.lock() ;
         }
         
         /**
@@ -364,16 +354,16 @@ package graphics.display
         /**
          * Unlocks an image so that any objects that reference the BitmapData object, such as Bitmap objects, are updated when this BitmapData object changes.
          */
-        public function unlock():void
+        public override function unlock():void
         {
-            var bmp:Bitmap ;
-            var l:int = _bitmaps.length ;
-            for( var i:int ; i < l ; i++ )
+            super.unlock() ;
+            if( _locked == 0 )
             {
-                bmp = _bitmaps[i] as Bitmap;
-                bmp.bitmapData.unlock();
+                for each( var bmp:Bitmap in _bitmaps )
+                {
+                    bmp.bitmapData.unlock();
+                }
             }
-            _locked = false ;
         }
         
         /**
@@ -390,11 +380,6 @@ package graphics.display
          * @private
          */
         private var _height:Number;
-        
-        /**
-         * @private
-         */
-        private var _locked:Boolean;
         
         /**
          * @private
