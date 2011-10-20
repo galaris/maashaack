@@ -35,7 +35,7 @@
 
 package graphics 
 {
-    import system.eden;
+    import core.dump;
 
     import flash.display.Graphics;
 
@@ -181,14 +181,14 @@ package graphics
         public function toSource(indent:int = 0):String
         {
             var source:String = "new graphics.LineStyle("
-                              + eden.serialize( thickness )    + "," 
-                              + eden.serialize( color )        + "," 
-                              + eden.serialize( alpha )        + "," 
-                              + eden.serialize( pixelHinting ) + "," 
-                              + eden.serialize( scaleMode )    + "," 
-                              + eden.serialize( caps )         + ","
-                              + eden.serialize( joints )       + ","
-                              + eden.serialize( miterLimit )   
+                              + dump( thickness )    + "," 
+                              + dump( color )        + "," 
+                              + dump( alpha )        + "," 
+                              + dump( pixelHinting ) + "," 
+                              + dump( scaleMode )    + "," 
+                              + dump( caps )         + ","
+                              + dump( joints )       + ","
+                              + dump( miterLimit )   
                               + ")" ;
             return source ;
         }

@@ -35,8 +35,6 @@
 
 package graphics 
 {
-    import graphics.geom.Matrixs;
-    
     import flash.display.Graphics;
     import flash.display.Shader;
     import flash.geom.Matrix;
@@ -108,10 +106,15 @@ package graphics
          */
         public function toSource(indent:int = 0):String
         {
-            var source:String = "new graphics.LineShaderStyle(null,"
-                              + Matrixs.toSource( matrix ) 
-                              + ")" ;
-            return source ;
+            var m:String = (matrix == null) ? "null" : "new flash.geom.Matrix("
+                           + String( matrix.a )  + "," 
+                           + String( matrix.b )  + "," 
+                           + String( matrix.c )  + "," 
+                           + String( matrix.d )  + "," 
+                           + String( matrix.tx ) + ","
+                           + String( matrix.ty ) 
+                           + ")" ;
+            return "new graphics.LineShaderStyle(null," + m + ")" ;
         }
     }
 }
