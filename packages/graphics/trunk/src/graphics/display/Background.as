@@ -37,26 +37,24 @@ package graphics.display
 {
     import core.maths.clamp;
     import core.maths.degreesToRadians;
-    
+    import flash.display.DisplayObjectContainer;
+    import flash.events.Event;
+    import flash.geom.Matrix;
+    import flash.geom.Point;
+    import flash.geom.Rectangle;
     import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
     import graphics.FillGradientStyle;
     import graphics.IFillStyle;
     import graphics.ILineStyle;
+    import graphics.Measurable;
     import graphics.drawing.IPen;
     import graphics.drawing.RectanglePen;
     import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.layouts.Layout;
     import graphics.transitions.FrameTimer;
-    
     import system.hack;
-    
-    import flash.display.DisplayObjectContainer;
-    import flash.events.Event;
-    import flash.geom.Matrix;
-    import flash.geom.Point;
-    import flash.geom.Rectangle;
     
     /**
      * This display is used to create a background in your application or in an other display of the application.
@@ -143,7 +141,7 @@ package graphics.display
      * stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
      * </pre>
      */
-    public class Background extends MovableObjectBlock implements Directionable, Drawable
+    public class Background extends Sprite implements Directionable, Drawable, Measurable
     {
         use namespace hack ;
         
@@ -237,9 +235,9 @@ package graphics.display
         /**
          * @private
          */
-        public function set bottomLeftRadius( n:Number ):void
+        public function set bottomLeftRadius( value:Number ):void
         {
-            _bottomLeftRadius = n > 0 ? n : 0 ;
+            _bottomLeftRadius = value > 0 ? value : 0 ;
             update() ;
         }
         
@@ -254,9 +252,9 @@ package graphics.display
         /**
          * @private
          */
-        public function set bottomRightRadius( n:Number ):void
+        public function set bottomRightRadius( value:Number ):void
         {
-            _bottomRightRadius = n > 0 ? n : 0 ;
+            _bottomRightRadius = value > 0 ? value : 0 ;
             update() ;
         }
         
@@ -357,16 +355,16 @@ package graphics.display
          */
         public function get h():Number 
         {
-            var n:Number = ( _fullscreen && (stage != null) && (_direction != Direction.HORIZONTAL) ) ? stage.stageHeight : _h ;
-            return clamp( n , _minHeight, _maxHeight) ;
+            var value:Number = ( _fullscreen && (stage != null) && (_direction != Direction.HORIZONTAL) ) ? stage.stageHeight : _h ;
+            return clamp( value , _minHeight, _maxHeight) ;
         }
         
         /**
          * @private
          */
-        public function set h( n:Number ):void 
+        public function set h( value:Number ):void 
         {
-            _h = clamp( n , _minHeight, _maxHeight ) ;
+            _h = clamp( value , _minHeight, _maxHeight ) ;
             update() ;
             notifyResized() ;
         }
@@ -430,48 +428,6 @@ package graphics.display
         }
         
         /**
-         * This property defined the mimimun height of this display (This value is >= 0).
-         */
-        public function get minHeight():Number
-        {
-        	return _minHeight ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set minHeight( n:Number ):void
-        {
-            _minHeight = n > 0 ? n : 0 ;
-            if ( _minHeight > _maxHeight )
-            {
-                _minHeight = _maxHeight ;
-            }
-            update() ;
-        }
-        
-        /**
-         * This property defined the mimimun width of this display (This value is >= 0).
-         */
-        public function get minWidth():Number
-        {
-            return _minWidth ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set minWidth( n:Number ):void
-        {
-            _minWidth = n > 0 ? n : 0 ;
-            if ( _minWidth > _maxWidth )
-            {
-            	_minWidth = _maxWidth ;
-            }
-            update() ;
-        }
-        
-        /**
          * This property defined the maximum height of this display.
          */
         public function get maxHeight():Number
@@ -482,9 +438,9 @@ package graphics.display
         /**
          * @private
          */
-        public function set maxHeight( n:Number ):void
+        public function set maxHeight( value:Number ):void
         {
-            _maxHeight = n ;
+            _maxHeight = value ;
             if ( _maxHeight < _minHeight )
             {
                 _maxHeight = _minHeight ;
@@ -503,12 +459,54 @@ package graphics.display
         /**
          * @private
          */
-        public function set maxWidth( n:Number ):void
+        public function set maxWidth( value:Number ):void
         {
-            _maxWidth = n ;
+            _maxWidth = value ;
             if ( _maxWidth < _minWidth )
             {
                 _maxWidth = _minWidth ;
+            }
+            update() ;
+        }
+        
+        /**
+         * This property defined the mimimun height of this display (This value is >= 0).
+         */
+        public function get minHeight():Number
+        {
+        	return _minHeight ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set minHeight( value:Number ):void
+        {
+            _minHeight = value > 0 ? value : 0 ;
+            if ( _minHeight > _maxHeight )
+            {
+                _minHeight = _maxHeight ;
+            }
+            update() ;
+        }
+        
+        /**
+         * This property defined the mimimun width of this display (This value is >= 0).
+         */
+        public function get minWidth():Number
+        {
+            return _minWidth ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set minWidth( value:Number ):void
+        {
+            _minWidth = value > 0 ? value : 0 ;
+            if ( _minWidth > _maxWidth )
+            {
+            	_minWidth = _maxWidth ;
             }
             update() ;
         }
@@ -533,9 +531,9 @@ package graphics.display
         /**
          * @private
          */
-        public function set topLeftRadius( n:Number ):void
+        public function set topLeftRadius( value:Number ):void
         {
-            _topLeftRadius = n > 0 ? n : 0 ;
+            _topLeftRadius = value > 0 ? value : 0 ;
             update() ;
         }
         
@@ -550,9 +548,9 @@ package graphics.display
         /**
          * @private
          */
-        public function set topRightRadius( n:Number ):void
+        public function set topRightRadius( value:Number ):void
         {
-            _topRightRadius = n > 0 ? n : 0 ;
+            _topRightRadius = value > 0 ? value : 0 ;
             update() ;
         }
         
@@ -566,16 +564,16 @@ package graphics.display
          */
         public function get w():Number 
         {
-            var n:Number = ( _fullscreen && (stage != null) && (_direction != Direction.VERTICAL) ) ? stage.stageWidth : _w ;
-            return clamp( n , _minWidth, _maxWidth ) ;
+            var value:Number = ( _fullscreen && (stage != null) && (_direction != Direction.VERTICAL) ) ? stage.stageWidth : _w ;
+            return clamp( value , _minWidth, _maxWidth ) ;
         }
         
         /**
          * @private
          */
-        public function set w( n:Number ):void 
+        public function set w( value:Number ):void 
         {
-            _w = clamp( n , _minWidth, _maxWidth ) ;
+            _w = clamp( value , _minWidth, _maxWidth ) ;
             update() ;
             notifyResized() ;
         }
@@ -718,12 +716,12 @@ package graphics.display
         /**
          * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
          */
-        public function setCornerRadius( n:Number ):void
+        public function setCornerRadius( value:Number ):void
         {
             _bottomLeftRadius  = 
             _bottomRightRadius = 
             _topLeftRadius     = 
-            _topRightRadius    = n > 0 ? n : 0 ;
+            _topRightRadius    = value > 0 ? value : 0 ;
             update() ;
         }
         

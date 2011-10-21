@@ -41,14 +41,14 @@ package graphics.display
     import flash.events.Event;
     
     /**
-     * The Movable Object Block (MOB) defines an advanced Lockable Sprite object.
+     * The graphics.display.Sprite defines an advanced Lockable Sprite object.
      */
-    public class MovableObjectBlock extends Sprite implements Lockable
+    public class Sprite extends flash.display.Sprite implements Lockable
     {
         /**
-         * Creates a new MovableObjectBlock instance.
+         * Creates a new Sprite instance.
          */
-        public function MovableObjectBlock()
+        public function Sprite()
         {
             addEventListener( Event.ADDED_TO_STAGE     , addedToStage     ) ;
             addEventListener( Event.REMOVED_FROM_STAGE , removedFromStage ) ;
