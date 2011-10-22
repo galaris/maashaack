@@ -58,7 +58,6 @@ package graphics.layouts
          * The rectangle that defines the area of the layout.
          */
         function get bounds():Rectangle ;
-        function set bounds( area:Rectangle ):void ;
         
         /**
          * Indicates the container reference to change with the layout.
@@ -70,13 +69,11 @@ package graphics.layouts
          * The default height of the layout, in pixels.
          */
         function get measuredHeight():Number ;
-        function set measuredHeight( value:Number ):void ;
         
         /**
          * The default width of the layout, in pixels.
          */
         function get measuredWidth():Number ;
-        function set measuredWidth( value:Number ):void ;
         
         /**
          * The signal invoked when the render method is called.
