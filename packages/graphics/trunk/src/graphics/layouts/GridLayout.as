@@ -36,18 +36,17 @@
 package graphics.layouts 
 {
     import core.maths.replaceNaN;
-
+    
     import graphics.Align;
     import graphics.Direction;
     import graphics.DirectionOrder;
     import graphics.Orientation;
-
+    
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
-
+    
     /**
      * The Grid layout lays out a container's children in a rectangular grid. The container is divided into equal-sized rectangles, and one child is placed in each rectangle.
-     * 
      */
     public class GridLayout extends BoxLayout
     {
@@ -55,15 +54,14 @@ package graphics.layouts
          * Creates a new GridLayout instance.
          * @param container The container to layout.
          * @param init An object that contains properties with which to populate the newly layout object. If init is not an object, it is ignored.
-         * @param auto This boolean indicates if the layout is auto running or not (default false).
          */
-        public function GridLayout( container:DisplayObjectContainer = null , init:Object = null , auto:Boolean = false )
+        public function GridLayout( container:DisplayObjectContainer = null , init:Object = null )
         {
-            super(container, init, auto);
+            super( container , init );
         }
         
         /**
-         * Determinates the number of columns in the grid layout if the direction of this container is Direction.HORIZONTAL.
+         * Determinates the number of columns in the grid layout if the direction of this layout is Direction.HORIZONTAL.
          * @see graphics.Direction
          */
         public function get columns():uint 
@@ -76,11 +74,11 @@ package graphics.layouts
          */
         public function set columns( value:uint ):void 
         {
-            _columns = value ;
+            _columns = value > 1 ? value : 1 ;
         }
 
         /**
-         * Determinates the number of lines in the matrix layout if the direction of this container is Direction.VERTICAL.
+         * Determinates the number of lines in the grid layout if the direction of this layout is Direction.VERTICAL.
          * @see graphics.Direction
          */
         public function get lines():uint 
@@ -93,7 +91,7 @@ package graphics.layouts
          */
         public function set lines( value:uint ):void 
         {
-            _lines = value ;
+            _lines = value > 1 ? value : 1 ;
         }
         
         /**
@@ -122,51 +120,44 @@ package graphics.layouts
         public override function measure():void
         {
             _bounds.setEmpty() ;
-            if ( _container && _container.numChildren > 0 )
+            
+            if ( _children.length > 0 )
             {
-                var d:DisplayObject ;
+                var entry:LayoutEntry ;
+                var child:DisplayObject ;
+                
                 var i:int ;
                 
-                var isHorizontal:Boolean = direction == Direction.HORIZONTAL ;
-                
-                var children:Vector.<DisplayObject> = new Vector.<DisplayObject>( l ) ;
-                
-                var length:int = _container.numChildren ;
-                
-                for ( i = 0 ; i < length ; i++ ) 
-                {
-                    children[i] = _container.getChildAt(i) ;
-                }
-                
-                if ( _order == DirectionOrder.REVERSE )
-                {
-                    children.reverse() ;
-                }
+                var hor:Boolean = _direction == Direction.HORIZONTAL ;
                 
                 var w:Number = 0 ;
                 var h:Number = 0 ;
-                var c:Number = isHorizontal ? _columns : 0 ;
-                var l:Number = isHorizontal ? 0        : _lines ; 
+                var c:Number = hor ? _columns : 0 ;
+                var l:Number = hor ? 0        : _lines ; 
                 
-                for ( i = 0 ; i<length ; i++ ) 
+                for each ( entry in _children ) 
                 {
-                    d = children[i] ;
-                    w = Math.max( d[propWidth]  , w ) ;
-                    h = Math.max( d[propHeight] , h ) ;
-                    if ( isHorizontal )
+                    child = entry.child ;
+                    
+                    w = Math.max( child[propWidth]  , w ) ;
+                    h = Math.max( child[propHeight] , h ) ;
+                    
+                    if ( hor ) 
                     {
-                        if ( i%_columns == 0 )
+                        if( i%_columns == 0 ) 
                         {
                             l++;
-                        } 
+                        }
                     }
                     else
                     {
-                        if ( i%_lines == 0 )
+                        if ( i%_lines == 0 ) 
                         {
                             c++ ;
-                        } 
+                        }
                     }
+                    
+                    i++ ;
                 }
                 
                 _bounds.width  += c * ( w  + _horizontalGap ) ;
@@ -226,51 +217,57 @@ package graphics.layouts
          */
         public override function render():void
         {
-            if ( _container && _container.numChildren > 0 )
+            if ( _children.length > 0 )
             {
-                if ( ( _lines > 1 && direction == Direction.VERTICAL) || ( _columns > 1 && direction == Direction.HORIZONTAL ) )
+                if ( ( _lines > 1 && _direction == Direction.VERTICAL) || ( _columns > 1 && _direction == Direction.HORIZONTAL ) )
                 {
-                    var left:Number = replaceNaN(_padding.left) ;
-                    var top:Number  = replaceNaN(_padding.top) ;
+                    const left:Number = replaceNaN(_padding.left) ;
+                    const top:Number  = replaceNaN(_padding.top) ;
                     
-                    var d:DisplayObject ;
+                    var child:DisplayObject ;
+                    
                     var c:Number ;
-                    var i:int ;
                     var l:Number ;
                     
-                    var len:int = _container.numChildren ;
+                    var i:int ;
                     
-                    var isHorizontal:Boolean = direction == Direction.HORIZONTAL ;
+                    var hor:Boolean = _direction == Direction.HORIZONTAL ;
                     
-                    var children:Vector.<DisplayObject> = new Vector.<DisplayObject>( l ) ;
-                    
-                    for ( i = 0 ; i < len ; i++ ) 
+                    if ( _order == DirectionOrder.REVERSE )
                     {
-                        children[i] = _container.getChildAt(i) ;
+                        _children.reverse() ;
+                    }
+                    
+                    for each( var entry:LayoutEntry in _children ) 
+                    {
+                        child = entry.child ;
+                        
+                        c = hor ? ( i%_columns ) : Math.floor( i/_lines ) ;
+                        l = hor ? Math.floor( i/_columns ) : ( i%_lines ) ;
+                        
+                        entry.tx = left + c * ( child[propWidth]  + _horizontalGap ) ;
+                        entry.ty = top  + l * ( child[propHeight] + _verticalGap   ) ;
+                        
+                        if ( isRightToLeft() )
+                        {
+                            entry.tx *= -1 ;
+                            entry.tx += _bounds.width - child[propWidth] ;
+                        }
+                        
+                        if ( isBottomToTop() )
+                        {
+                            entry.ty *= -1 ;
+                            entry.ty += _bounds.height - child[propHeight] ;
+                        }
+                        
+                        i++ ;
                     }
                     
                     if ( _order == DirectionOrder.REVERSE )
                     {
-                        children.reverse() ;
+                        _children.reverse() ;
                     }
-                    
-                    for ( i = 0 ; i<len ; i++ ) 
-                    {
-                        d = children[i] ;
-                        c = isHorizontal ? ( i%_columns ) : Math.floor( i/_lines ) ;
-                        l = isHorizontal ? Math.floor( i/_columns ) : ( i%_lines ) ;
-                        d[propX] = left + c * ( d[propWidth]  + _horizontalGap ) ;
-                        d[propY] = top  + l * ( d[propHeight] + _verticalGap   ) ;
-                        
-                        if ( isRightToLeft() )
-                        {
-                            d[propX] *= -1 ;
-                        }
-                        if ( isBottomToTop() )
-                        {
-                            d[propY] *= -1 ;
-                        }
-                    }
+                    _renderer.emit( this ) ;
                 }
                 else
                 {
@@ -284,39 +281,27 @@ package graphics.layouts
          */
         public override function update():void
         {
-            super.update() ;
-            if ( _container && _container.numChildren > 0 )
+            if ( _children.length > 0 )
             {
-                var d:DisplayObject ;
-                var i:int ;
-                var l:int = _container.numChildren ;
-                for ( i = 0  ; i < l ; i++ ) 
+                var entry:LayoutEntry ;
+                for each ( entry in _children ) 
                 {
-                    d = _container.getChildAt(i) ;
-                    if( d )
-                    {
-                        if ( isRightToLeft() )
-                        {
-                            d[propX] += _bounds.width - d[propWidth] ;
-                        }
-                        if ( isBottomToTop() )
-                        {
-                            d[propY] += _bounds.height - d[propHeight] ;
-                        }
-                    }
+                    entry.set() ;
                 }
             }
+            _updater.emit( this ) ;
+            notifyFinished() ;
         }
         
         /**
          * @private
          */
-        protected var _columns:int ; 
+        protected var _columns:int = 1 ; 
         
         /**
          * @private
          */
-        protected var _lines:int ;
+        protected var _lines:int = 1 ;
         
         /**
          * @private
