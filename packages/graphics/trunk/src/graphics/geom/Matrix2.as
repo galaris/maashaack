@@ -378,11 +378,11 @@ package graphics.geom
          * Returns the Object representation of this object.
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
+         * import core.dump ;
          * import graphics.geom.Matrix2 ;
-         * import system.eden ;
          * var m:Matrix2 = new Matrix2( 1, 2, 3, 4 ) ;
          * var o:Object = m.toObject() ;
-         * trace( m + " toObject() : " + eden.serialize(o) ) ;
+         * trace( m + " toObject() : " + dump(o) ) ;
          * </pre>
          * @return the Object representation of this object.
          */
@@ -399,7 +399,6 @@ package graphics.geom
          * <p><b>Example :</b></p>
          * <pre class="prettyprint">
          * import graphics.geom.Matrix2 ;
-         * import system.eden ;
          * var m:Matrix2 = new Matrix2( 1, 2, 3, 4 ) ;
          * trace( m + " toSource() : " + m.toSource() ) ; // new graphics.geom.Matrix2(1,2,3,4)
          * </pre>
