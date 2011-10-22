@@ -46,7 +46,7 @@ package graphics.display
     /**
      * Creates a BigBitmap object with a specified width and height. This bitmap can specify a width and a height values greater than the defaults.
      */
-    public class BigBitmap extends Sprite
+    public class BigBitmap extends MOB
     {
         /**
          * Creates a new BigBitmap instance.

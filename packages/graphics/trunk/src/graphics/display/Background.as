@@ -141,7 +141,7 @@ package graphics.display
      * stage.addEventListener( KeyboardEvent.KEY_DOWN , keyDown ) ;
      * </pre>
      */
-    public class Background extends Sprite implements Directionable, Drawable, Measurable
+    public class Background extends MOB implements Directionable, Drawable, Measurable
     {
         use namespace hack ;
         
