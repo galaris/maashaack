@@ -47,17 +47,16 @@ package graphics.layouts
     /**
      * This layout display all the childs elements in a specific DisplayObjectContainer with a circle trigonometric algorithm.
      */
-    public class CircleLayout extends CoreLayout 
+    public class CircleLayout extends LayoutContainer 
     {
         /**
          * Creates a new CircleLayout instance.
          * @param container The container to layout.
          * @param init An object that contains properties with which to populate the newly layout object. If init is not an object, it is ignored.
-         * @param auto This boolean indicates if the layout is auto running or not (default false).
          */
-        public function CircleLayout( container:DisplayObjectContainer = null , init:Object = null , auto:Boolean = false  )
+        public function CircleLayout( container:DisplayObjectContainer = null , init:Object = null )
         {
-            super( container , init , auto ) ;
+            super( container , init ) ;
         }
         
         /**
@@ -149,36 +148,35 @@ package graphics.layouts
          */
         public override function measure():void
         {
-            _bounds.height = 2*radius ;
-            _bounds.width  = 2*radius ;
+            _bounds.width = _bounds.height = 2 * _radius ;
             if ( _align == Align.BOTTOM ) 
             {
-                _bounds.x = -radius ;
-                _bounds.y = -2*radius ;
+                _bounds.x = -_radius ;
+                _bounds.y = -2*_radius ;
             }
             else if ( _align == Align.BOTTOM_LEFT ) 
             {
                 _bounds.x = 0 ;
-                _bounds.y = -2*radius ;
+                _bounds.y = -2*_radius ;
             }
             else if (_align == Align.BOTTOM_RIGHT) 
             {
-                _bounds.x = -2*radius ;
-                _bounds.y = -2*radius ;
+                _bounds.x = -2*_radius ;
+                _bounds.y = -2*_radius ;
             }
             else if (_align == Align.LEFT) 
             {
                 _bounds.x = 0 ;
-                _bounds.y = -radius ;
+                _bounds.y = -_radius ;
             }
             else if (_align ==  Align.RIGHT) 
             {
-                _bounds.x = -2*radius ;
-                _bounds.y = -radius ;
+                _bounds.x = -2*_radius ;
+                _bounds.y = -_radius ;
             }
             else if (_align == Align.TOP) 
             {
-                _bounds.x = -radius ;
+                _bounds.x = -_radius ;
                 _bounds.y = 0 ;
             }
             else if( _align == Align.TOP_LEFT )
@@ -188,13 +186,13 @@ package graphics.layouts
             }
             else if (_align == Align.TOP_RIGHT) 
             {
-                _bounds.x = -2*radius ;
+                _bounds.x = -2*_radius ;
                 _bounds.y = 0 ;
             }
             else // Align.CENTER
             {
-                _bounds.x = -radius ;
-                _bounds.y = -radius ;
+                _bounds.x = -_radius ;
+                _bounds.y = -_radius ;
             }
         }
         
@@ -203,21 +201,35 @@ package graphics.layouts
          */
         public override function render():void
         {
-            if ( _container && _container.numChildren > 0 )
+            if ( _children.length > 0 )
             {
+                var i:int ;
                 var child:DisplayObject ;
-                var l:Number = _container.numChildren ;
-                for ( var i:int ; i<l ; i++ ) 
+                for each( var entry:LayoutEntry in _children ) 
                 {
-                    child    = _container.getChildAt(i) ;
-                    child.x  = _radius * Math.cos( _startAngle - _pi1 + i * _pi2 / _childCount  )  ;
+                    child    = entry.child ;
+                    
+                    child.x  = _radius * Math.cos( _startAngle - _pi1 + i * _pi2 / _childCount  ) + _bounds.x + _radius ;
                     child.y  = _radius * Math.sin( _startAngle - _pi1 + i * _pi2 / _childCount  )  ;
-                    if ( _childOrientation )
+                    
+                    if( _childOrientation )
                     {
                         child.rotation = atan2D( child.y , child.x ) + _childAngle ;
                     }
+                    else
+                    {
+                        child.rotation = 0 ;
+                        child.x -= child.width/2 ;
+                        child.y -= child.height/2 ;
+                    }
+                    
+                    child.x += _bounds.x + _radius ;
+                    child.y += _bounds.y + _radius ;
+                    
+                    i++ ;
                 }
             }
+            _renderer.emit(this) ;
         }
         
         /**
@@ -225,23 +237,12 @@ package graphics.layouts
          */
         public override function update():void
         {
-            if ( _container && _container.numChildren > 0 )
+            if ( _children.length > 0 )
             {
-                var i:int ;
-                var d:DisplayObject ;
-                var l:int    = _container.numChildren ;
-                var x:Number = _bounds.x + radius ;
-                var y:Number = _bounds.y + radius ;
-                for ( i = 0  ; i < l ; i++ ) 
-                {
-                    d = _container.getChildAt(i) ;
-                    if( d )
-                    {
-                        d.x += x ;
-                        d.y += y ;
-                    }
-                }
+                
             }
+            _updater.emit(this);
+            notifyFinished() ;
         }
         
         /**
