@@ -102,13 +102,27 @@ package graphics.layouts
             
             var change:Number;
             
-            if( Math.abs( change = tx - x ) > EPSILON )
+            /////////
+            
+            change = tx - x ;
+            if ( change < 0 )  
+            {
+                change = -change ;
+            }
+            if( change > EPSILON )
             {
                 complete = false;
             }
             x += change * EASE_MULT_X ;
             
-            if( Math.abs( change = ty - y ) > EPSILON )
+            /////////
+            
+            change = ty - y ;
+            if ( change < 0 )  
+            {
+                change = -change ;
+            }
+            if( change > EPSILON )
             {
                 complete = false;
             }
