@@ -221,22 +221,20 @@ package graphics.layouts
             {
                 if ( ( _lines > 1 && _direction == Direction.VERTICAL) || ( _columns > 1 && _direction == Direction.HORIZONTAL ) )
                 {
-                    const left:Number = replaceNaN(_padding.left) ;
-                    const top:Number  = replaceNaN(_padding.top) ;
-                    
-                    var child:DisplayObject ;
-                    
-                    var c:Number ;
-                    var l:Number ;
-                    
-                    var i:int ;
-                    
-                    var hor:Boolean = _direction == Direction.HORIZONTAL ;
-                    
                     if ( _order == DirectionOrder.REVERSE )
                     {
                         _children.reverse() ;
                     }
+                    
+                    const left:Number = replaceNaN(_padding.left) ;
+                    const top:Number  = replaceNaN(_padding.top) ;
+                    const hor:Boolean = _direction == Direction.HORIZONTAL ;
+                    
+                    var child:DisplayObject ;
+                    
+                    var i:int ;
+                    var c:Number ;
+                    var l:Number ;
                     
                     for each( var entry:LayoutEntry in _children ) 
                     {
@@ -267,6 +265,9 @@ package graphics.layouts
                     {
                         _children.reverse() ;
                     }
+                    
+                    arrange() ;
+                    
                     _renderer.emit( this ) ;
                 }
                 else
@@ -274,23 +275,6 @@ package graphics.layouts
                     super.render() ;
                 }
             }
-        }
-        
-        /**
-         * This method is invoked when the rendering is finished to finalize the it after the measure invokation.
-         */
-        public override function update():void
-        {
-            if ( _children.length > 0 )
-            {
-                var entry:LayoutEntry ;
-                for each ( entry in _children ) 
-                {
-                    entry.set() ;
-                }
-            }
-            _updater.emit( this ) ;
-            notifyFinished() ;
         }
         
         /**

@@ -437,7 +437,29 @@ package graphics.layouts
         {
             return _bounds ;
         }
-
+        
+        /**
+         * Indicates if the layout buffer mode "auto" or "normal" (default "auto"). 
+         * The "auto" buffer mode indicates the layout auto-initialize this internal buffer when the run method is invoked with the children of the container.
+         * @see graphics.layouts.LayoutMode
+         */
+        public function get bufferMode():String
+        {
+            return _bufferMode ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set bufferMode( value:String ):void
+        {
+            if( _bufferMode == value )
+            {
+                return ;
+            }
+            _bufferMode = value == LayoutBufferMode.AUTO ? LayoutBufferMode.AUTO : LayoutBufferMode.NORMAL ;
+            run() ;
+        }
         
         /**
          * Indicates the container reference to change with the layout.
@@ -485,29 +507,6 @@ package graphics.layouts
         public function get updater():Signaler
         {
             return _updater ;
-        }
-        
-        /**
-         * Indicates if the layout buffer mode "auto" or "normal" (default "auto"). 
-         * The "auto" buffer mode indicates the layout auto-initialize this internal buffer when the run method is invoked with the children of the container.
-         * @see graphics.layouts.LayoutMode
-         */
-        public function get bufferMode():String
-        {
-            return _bufferMode ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set bufferMode( value:String ):void
-        {
-            if( _bufferMode == value )
-            {
-                return ;
-            }
-            _bufferMode = value ;
-            run() ;
         }
         
         /**
