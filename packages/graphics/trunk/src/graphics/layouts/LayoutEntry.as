@@ -35,8 +35,6 @@
 
 package graphics.layouts
 {
-    import core.maths.EPSILON;
-    
     import flash.display.DisplayObject;
     
     /**
@@ -56,16 +54,6 @@ package graphics.layouts
             this.x     = child.x ;
             this.y     = child.y ;
         }
-        
-        /**
-         * The easing x value.
-         */
-        public static var EASE_MULT_X:Number = .26;
-        
-        /**
-         * The easing y value.
-         */
-        public static var EASE_MULT_Y:Number = .26;
         
         /**
          * The child reference of this entry.
@@ -91,66 +79,5 @@ package graphics.layouts
          * The delta y property of the entry.
          */
         public var ty:Number ;
-        
-        /**
-         * Set the new easing state of this DisplayObject child reference register in this entry.
-         * @return true if the easing transition is complete.
-         */
-        public function easeSet():Boolean
-        {
-            var complete:Boolean = true ;
-            
-            var change:Number;
-            
-            /////////
-            
-            change = tx - x ;
-            if ( change < 0 )  
-            {
-                change = -change ;
-            }
-            if( change > EPSILON )
-            {
-                complete = false;
-            }
-            x += change * EASE_MULT_X ;
-            
-            /////////
-            
-            change = ty - y ;
-            if ( change < 0 )  
-            {
-                change = -change ;
-            }
-            if( change > EPSILON )
-            {
-                complete = false;
-            }
-            y += change * EASE_MULT_Y ;
-            
-            ///////
-            
-            if ( child )
-            {
-                child.x = x ;
-                child.y = y ;
-            }
-            
-            ///////
-            
-            return complete;
-        }
-        
-        /**
-         * Transforms the DisplayObject child reference with the current position defines with the layout entry.
-         */
-        public function set(): void
-        {
-            x = tx ; y = ty ;
-            if ( child )
-            {
-                child.x = x ; child.y = y ;
-            }
-        }
     }
 }
