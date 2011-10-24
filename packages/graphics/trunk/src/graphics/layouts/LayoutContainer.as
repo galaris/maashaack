@@ -36,11 +36,11 @@
 package graphics.layouts 
 {
     import graphics.Align;
-
+    
     import system.process.Task;
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.geom.Rectangle;
@@ -132,6 +132,103 @@ package graphics.layouts
                 }
                 unlock() ;
             }
+        }
+        
+        ////////////
+        
+        /**
+         * The alignement of the layout.
+         * @see graphics.Align
+         */
+        public function get align():uint
+        {
+            return _align ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set align( value:uint ):void
+        {
+            _align = value ;
+        }
+        
+        /**
+         * A rectangle that defines the current visible area of the layout.
+         */
+        public function get bounds():Rectangle
+        {
+            return _bounds ;
+        }
+        
+        /**
+         * Indicates if the layout buffer mode "auto" or "normal" (default "auto"). 
+         * The "auto" buffer mode indicates the layout auto-initialize this internal buffer when the run method is invoked with the children of the container.
+         * @see graphics.layouts.LayoutMode
+         */
+        public function get bufferMode():String
+        {
+            return _bufferMode ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set bufferMode( value:String ):void
+        {
+            if( _bufferMode == value )
+            {
+                return ;
+            }
+            _bufferMode = value == LayoutBufferMode.AUTO ? LayoutBufferMode.AUTO : LayoutBufferMode.NORMAL ;
+        }
+        
+        /**
+         * Indicates the container reference to change with the layout.
+         */
+        public function get container():DisplayObjectContainer
+        {
+            return _container ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set container( container:DisplayObjectContainer ):void
+        {
+            _container = container ;
+        }
+        
+        /**
+         * The default height of the component, in pixels.
+         */
+        public function get measuredHeight():Number
+        {
+            return _bounds.height ;
+        }
+        
+        /**
+         * The default width of the component, in pixels.
+         */
+        public function get measuredWidth():Number
+        {
+            return _bounds.width ;
+        }
+        
+        /**
+         * This signal emit before the rendering is started.
+         */
+        public function get renderer():Signaler
+        {
+            return _renderer ;
+        }
+        
+        /**
+         * This signal emit when the rendering is finished.
+         */
+        public function get updater():Signaler
+        {
+            return _updater ;
         }
         
         ////////////
@@ -412,101 +509,6 @@ package graphics.layouts
         }
         
         ////////////
-        
-        /**
-         * The alignement of the layout.
-         * @see graphics.Align
-         */
-        public function get align():uint
-        {
-            return _align ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set align( value:uint ):void
-        {
-            _align = value ;
-        }
-        
-        /**
-         * A rectangle that defines the current visible area of the layout.
-         */
-        public function get bounds():Rectangle
-        {
-            return _bounds ;
-        }
-        
-        /**
-         * Indicates if the layout buffer mode "auto" or "normal" (default "auto"). 
-         * The "auto" buffer mode indicates the layout auto-initialize this internal buffer when the run method is invoked with the children of the container.
-         * @see graphics.layouts.LayoutMode
-         */
-        public function get bufferMode():String
-        {
-            return _bufferMode ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set bufferMode( value:String ):void
-        {
-            if( _bufferMode == value )
-            {
-                return ;
-            }
-            _bufferMode = value == LayoutBufferMode.AUTO ? LayoutBufferMode.AUTO : LayoutBufferMode.NORMAL ;
-        }
-        
-        /**
-         * Indicates the container reference to change with the layout.
-         */
-        public function get container():DisplayObjectContainer
-        {
-            return _container ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set container( container:DisplayObjectContainer ):void
-        {
-            _container = container ;
-        }
-        
-        /**
-         * The default height of the component, in pixels.
-         */
-        public function get measuredHeight():Number
-        {
-            return _bounds.height ;
-        }
-        
-        /**
-         * The default width of the component, in pixels.
-         */
-        public function get measuredWidth():Number
-        {
-            return _bounds.width ;
-        }
-        
-        /**
-         * This signal emit before the rendering is started.
-         */
-        public function get renderer():Signaler
-        {
-            return _renderer ;
-        }
-        
-        /**
-         * This signal emit when the rendering is finished.
-         */
-        public function get updater():Signaler
-        {
-            return _updater ;
-        }
         
         /**
          * Returns <code class="prettyprint">true</code> if the object is locked.
