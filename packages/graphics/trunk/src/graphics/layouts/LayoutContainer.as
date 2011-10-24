@@ -458,7 +458,6 @@ package graphics.layouts
                 return ;
             }
             _bufferMode = value == LayoutBufferMode.AUTO ? LayoutBufferMode.AUTO : LayoutBufferMode.NORMAL ;
-            run() ;
         }
         
         /**
