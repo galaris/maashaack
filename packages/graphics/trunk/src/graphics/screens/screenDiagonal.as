@@ -42,5 +42,5 @@ package graphics.screens
     /**
      * Constants defining the diagonal measure in pixels of the screen.
      */
-    public const screenSize:Number = hypothenuse( Capabilities.screenResolutionX , Capabilities.screenResolutionY ) ;
+    public const screenDiagonal:Number = hypothenuse( Capabilities.screenResolutionX , Capabilities.screenResolutionY ) ;
 }
