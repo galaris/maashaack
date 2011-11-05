@@ -153,5 +153,43 @@ package graphics.screens
          * The Widescreen Ultra eXtended Graphics Array (16:9) resolution - width x height : 1920x1200
          */
         public static const WUXGA:Resolution = new Resolution( 1920 , 1200 ) ;
+        
+        /////// Quad-extended Graphics Array
+        
+        /**
+         * The Quad Wide eXtended Graphics Array (16:9) resolution - width x height : 2048x1152
+         */
+        public static const QWXGA:Resolution = new Resolution( 2048 , 1152 ) ;
+        
+        /**
+         * The Quad EXtended Graphics Array (4:3) resolution - width x height : 2048x1536
+         */
+        public static const QXGA:Resolution = new Resolution( 2048 , 1536 ) ;
+        
+        /**
+         * The Wide Quad eXtended Graphics Array (16:10) resolution - width x height : 2560x1600
+         */
+        public static const WQXGA:Resolution = new Resolution( 2560 , 1600 ) ;
+        
+        /**
+         * The Quad Super eXtended Graphics Array (5:4) resolution - width x height : 2560x2048
+         */
+        public static const QSXGA:Resolution = new Resolution( 2560 , 2048 ) ;
+        
+        /**
+         * The Wide Quad Super eXtended Graphics Array (25:16) resolution - width x height : 3200x2048
+         */
+        public static const WQSXGA:Resolution = new Resolution( 3200 , 2048 ) ;
+        
+        /**
+         * The Quad Ultra Extended Graphics Array (4:3) resolution - width x height : 3200x2400
+         */
+        public static const QUXGA:Resolution = new Resolution( 3200 , 2400 ) ;
+        
+        /**
+         * The Wide Quad Ultra Extended Graphics Array (16:10) resolution - width x height : 3840x2400
+         */
+        public static const WQUXGA:Resolution = new Resolution( 3840 , 2400 ) ;
+
     }
 }
