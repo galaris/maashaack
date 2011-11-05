@@ -152,6 +152,6 @@ package graphics.screens
         /**
          * The Widescreen Ultra eXtended Graphics Array (16:9) resolution - width x height : 1920x1200
          */
-        public static const WUXGA:Resolution = new Resolution( 1600 , 1200 ) ;
+        public static const WUXGA:Resolution = new Resolution( 1920 , 1200 ) ;
     }
 }
