@@ -54,7 +54,7 @@ package graphics.screens
         }
         
         /**
-         * Resources for low-density (ldpi) screens (~120dpi).
+         * Resources for low-density (ldpi) screens (~120dpi). (Scaling ratio 0.75x.)
          */
         public static const ldpi:ScreenDensity = new ScreenDensity( 120 , "ldpi" ) ;
         
@@ -64,12 +64,12 @@ package graphics.screens
         public static const mdpi:ScreenDensity = new ScreenDensity( 160 , "mdpi" ) ;
         
         /**
-         * Resources for high-density (hdpi) screens (~240dpi).
+         * Resources for high-density (hdpi) screens (~240dpi). (Scaling ratio 1.5x.)
          */
         public static const hdpi:ScreenDensity = new ScreenDensity( 240 , "hdpi" ) ;
         
         /**
-         * Resources for extra high-density (xhdpi) screens (~320dpi).
+         * Resources for extra high-density (xhdpi) screens (~320dpi). (Scaling ratio 2.0x.)
          */
         public static const xhdpi:ScreenDensity = new ScreenDensity( 320 , "xhdpi" ) ;
         
@@ -84,6 +84,36 @@ package graphics.screens
          * Resources for screens somewhere between mdpi and hdpi; approximately 213 dpi.
          */
         public static const tvdpi:ScreenDensity = new ScreenDensity( 213 , "tvdpi" ) ;
+        
+        /**
+         * Matches the specified DPI value to a <code>ScreenDensity</code> value.
+         *  @param dpi The DPI value.  
+         *  @return The corresponding <code>ScreenDensity</code> value.
+         */
+        public static function getPreferredScreenDensity( dpi:int ):ScreenDensity
+        {
+            if ( dpi <= 140 )
+            {
+                return ldpi ;
+            }
+            
+            if ( dpi <= 180 )
+            {
+                return mdpi ;
+            }
+            
+            if ( dpi <= 280 )
+            {
+                return hdpi ;
+            }
+            
+            if ( dpi <= 340 )
+            {
+                return xhdpi ;
+            }
+            
+            return nodpi ;
+        }
         
         /**
          * Returns the source code String representation of the object.
