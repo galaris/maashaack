@@ -39,8 +39,8 @@ package graphics.screens
     
     /**
      * Defines the runtime DPI of the current device by mapping its 
-     * <code>flash.system.Capabilities.screenDPI</code> to one of several DPI values in <code>graphics.screens.ScreenDensity</code>.
+     * <code>flash.system.Capabilities.screenDPI</code> to one of several DPI values in <code>graphics.screens.Density</code>.
      *  Uses this constant to calculate the current DPI value when an Application authored for a specific DPI is adapted to the current one through scaling.
      */
-    public const runtimeDPI:ScreenDensity = ScreenDensity.getPreferredScreenDensity( Capabilities.screenDPI ) ;
+    public const runtimeDPI:Density = Density.getPreferredDensity( Capabilities.screenDPI ) ;
 }

@@ -41,7 +41,7 @@ package graphics.screens
      * The enumeration of all standard display resolutions. 
      * More information about <a href="http://en.wikipedia.org/wiki/Display_resolution">Display Resolution in Wikipedia</a>.
      */
-    public class Resolution extends AspectRatio
+    public final class Resolution extends AspectRatio
     {
         /**
          * Creates a new Resolution instance.
