@@ -35,6 +35,8 @@
 
 package graphics.display
 {
+    import graphics.transitions.FrameTimer;
+
     import system.process.Lockable;
 
     import flash.display.Sprite;
@@ -50,8 +52,25 @@ package graphics.display
          */
         public function MOB()
         {
-            addEventListener( Event.ADDED_TO_STAGE     , addedToStage     ) ;
+            addEventListener( Event.ADDED_TO_STAGE     , _addedToStage    ) ;
             addEventListener( Event.REMOVED_FROM_STAGE , removedFromStage ) ;
+        }
+        
+        /**
+         * Launch an event with a delayed interval.
+         */
+        public function doLater():void 
+        {
+            if ( isLocked() ) 
+            {
+                return ;
+            }
+            if( ___timer___.timer.connected() )
+            {
+                ___timer___.timer.disconnect( redraw ) ;
+            }
+            ___timer___.timer.connect( redraw , 0 , true ) ;
+            ___timer___.start() ;
         }
         
         /**
@@ -87,6 +106,19 @@ package graphics.display
         }
         
         /**
+         * Update the display.
+         */
+        public function update():void 
+        {
+            
+        }
+        
+        /**
+         * @private
+         */
+        protected var _changed:Boolean ;
+        
+        /**
          * @private
          */ 
         protected var _locked:uint ;
@@ -100,11 +132,73 @@ package graphics.display
         }
         
         /**
+         * Defines a change in the sprite and invalidate the stage rendering. 
+         */
+        protected function change():void
+        {
+            _changed = true;
+            invalidate();
+        }
+        
+        /**
+         * Invalidate the Stage reference of the sprite.
+         */
+        protected function invalidate():void 
+        {
+            if ( stage ) 
+            {
+                stage.invalidate() ;
+            }
+        }
+        
+        /**
          * Invoked when the sprite is removed from the stage.
          */
         protected function removedFromStage( e:Event = null ):void
         {
             //
+        }
+        
+        /**
+         * Redraws the sprite.
+         */
+        protected function redraw():void 
+        {
+            if( ___timer___.running )
+            {
+                ___timer___.stop() ;
+            }
+            update() ;
+        }
+        
+        /**
+         * Invoked when the stage is rendering.
+         */
+        protected function renderStage( e:Event ):void
+        {
+            if ( _changed ) 
+            {
+                redraw() ;
+            }
+        }
+        
+        
+        /**
+         * @private
+         */
+        private const ___timer___:FrameTimer = new FrameTimer(24, 1) ;
+        
+        /**
+         * Invoked when the sprite is added to the stage.
+         */
+        private function _addedToStage( e:Event = null ):void
+        {
+            addedToStage( e ) ;
+            stage.addEventListener(Event.RENDER, renderStage );
+            if ( _changed && stage ) 
+            {
+                stage.invalidate() ;
+            }
         }
     }
 }
