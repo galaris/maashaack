@@ -110,7 +110,10 @@ package graphics.display
          */
         public function update():void 
         {
-            
+            _changed = false ; 
+            // override this method and not forget
+            // to switch the _changed protected property
+            // with the false value
         }
         
         /**
