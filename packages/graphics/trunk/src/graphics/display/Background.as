@@ -37,11 +37,7 @@ package graphics.display
 {
     import core.maths.clamp;
     import core.maths.degreesToRadians;
-    import flash.display.DisplayObjectContainer;
-    import flash.events.Event;
-    import flash.geom.Matrix;
-    import flash.geom.Point;
-    import flash.geom.Rectangle;
+    
     import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
@@ -53,8 +49,14 @@ package graphics.display
     import graphics.drawing.RectanglePen;
     import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.layouts.Layout;
-    import graphics.transitions.FrameTimer;
+    
     import system.hack;
+    
+    import flash.display.DisplayObjectContainer;
+    import flash.events.Event;
+    import flash.geom.Matrix;
+    import flash.geom.Point;
+    import flash.geom.Rectangle;
     
     /**
      * This display is used to create a background in your application or in an other display of the application.
@@ -164,8 +166,6 @@ package graphics.display
             }
             
             _pen = new RoundedComplexRectanglePen( this ) ;
-            
-            ___timer___.timer.connect( redraw ) ;
             
             ///////////
             
@@ -625,18 +625,6 @@ package graphics.display
         }
         
         /**
-         * Launch an event with a delayed interval.
-         */
-        public function doLater():void 
-        {
-            if ( isLocked() ) 
-            {
-                return ;
-            }
-            ___timer___.start() ;
-        }
-        
-        /**
          * Initialize the canvas.
          * @param init An object that contains properties with which to populate the newly instance. If init is not an object, it is ignored.
          */
@@ -752,7 +740,7 @@ package graphics.display
         /**
          * Update the display.
          */
-        public function update():void 
+        public override function update():void 
         {
             if ( isLocked() ) 
             {
@@ -923,11 +911,6 @@ package graphics.display
         /**
          * @private
          */
-        hack const ___timer___:FrameTimer = new FrameTimer(24, 1) ;
-        
-        /**
-         * @private
-         */
         hack var _topLeftRadius:Number = 0 ;
         
         /**
@@ -943,7 +926,7 @@ package graphics.display
         /**
          * Invoked when the display is removed from the stage to enable the autoSize mode.
          */
-        hack function addedToStageResize( e:Event = null ):void
+        protected function addedToStageResize( e:Event = null ):void
         {
             if ( stage && _autoSize )
             {
@@ -955,21 +938,12 @@ package graphics.display
         /**
          * Invoked when the display is removed from the stage to disable the autoSize mode.
          */
-        hack function removedFromStageResize( e:Event = null ):void
+        protected function removedFromStageResize( e:Event = null ):void
         {
             if ( stage && _autoSize )
             {
                 stage.removeEventListener( Event.RESIZE , resize ) ;
             }
         } 
-        
-        /**
-         * Redraws the component.
-         */
-        hack function redraw():void 
-        {
-            ___timer___.stop() ;
-            update() ;
-        }
     }
 }
