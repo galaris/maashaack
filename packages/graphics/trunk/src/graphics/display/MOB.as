@@ -137,14 +137,6 @@ package graphics.display
         protected function change():void
         {
             _changed = true;
-            invalidate();
-        }
-        
-        /**
-         * Invalidate the Stage reference of the sprite.
-         */
-        protected function invalidate():void 
-        {
             if ( stage ) 
             {
                 stage.invalidate() ;
@@ -181,7 +173,6 @@ package graphics.display
                 redraw() ;
             }
         }
-        
         
         /**
          * @private
