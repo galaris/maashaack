@@ -584,12 +584,15 @@ package graphics.display
          */
         public function draw( ...arguments:Array ):void
         {
-            _real.width  = isNaN(arguments[0]) ? this.w : arguments[0] ;
-            _real.height = isNaN(arguments[1]) ? this.h : arguments[1] ;
-            _real.x      = isNaN(arguments[2]) ?      0 : arguments[2] ;
-            _real.y      = isNaN(arguments[3]) ?      0 : arguments[3] ;
+            if( _real )
+            {
+                _real.width  = isNaN(arguments[0]) ? this.w : arguments[0] ;
+                _real.height = isNaN(arguments[1]) ? this.h : arguments[1] ;
+                _real.x      = isNaN(arguments[2]) ?      0 : arguments[2] ;
+                _real.y      = isNaN(arguments[3]) ?      0 : arguments[3] ;
+            }
             
-            if ( fill is FillGradientStyle )
+            if ( _fillStyle is FillGradientStyle )
             {
                 var matrix:Matrix ;
                 if( gradientMatrix )
@@ -612,15 +615,18 @@ package graphics.display
                         matrix.translate( gradientTranslation.x , gradientTranslation.y ) ;
                     }
                 }
-                ( fill as FillGradientStyle ).matrix = matrix ;
+                ( _fillStyle as FillGradientStyle ).matrix = matrix ;
             }
             
-            _pen.draw( _real.x , _real.y , _real.width , _real.height , _topLeftRadius , _topRightRadius , _bottomLeftRadius , _bottomRightRadius , _align ) ;
-            
-            if( _pen is RectanglePen )
+            if( _pen )
             {
-                _real.x = (_pen as RectanglePen)._x ;
-                _real.y = (_pen as RectanglePen)._y ;
+                _pen.draw( _real.x , _real.y , _real.width , _real.height , _topLeftRadius , _topRightRadius , _bottomLeftRadius , _bottomRightRadius , _align ) ;
+                
+                if( _pen is RectanglePen )
+                {
+                    _real.x = (_pen as RectanglePen)._x ;
+                    _real.y = (_pen as RectanglePen)._y ;
+                }
             }
         }
         
