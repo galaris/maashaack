@@ -59,6 +59,7 @@ package graphics.display
             suite.addTestSuite( TimelineInspectorTest ) ;
             suite.addTestSuite( TimelineIteratorTest ) ;
             suite.addTestSuite( TimelineScriptTest ) ;
+            suite.addTestSuite( TimelineTransitionTest ) ;
             
             return suite;
         }
