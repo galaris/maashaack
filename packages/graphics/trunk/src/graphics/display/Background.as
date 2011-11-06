@@ -754,6 +754,7 @@ package graphics.display
             }
             draw() ;
             viewChanged() ;
+            _changed = false ;
         }
         
         /**
