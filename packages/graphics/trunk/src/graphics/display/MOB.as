@@ -36,9 +36,9 @@
 package graphics.display
 {
     import graphics.transitions.FrameTimer;
-
+    
     import system.process.Lockable;
-
+    
     import flash.display.Sprite;
     import flash.events.Event;
     
