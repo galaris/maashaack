@@ -24,7 +24,7 @@
         >
             <arg line="-AS3 -strict -optimize"/>
             <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
-            <arg line="-import ${builtin} -import ${toplevel} -import ${common} -import ${system.numeric} src/${project.as}"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${core} -import ${common} -import ${system.numeric} src/${project.as}"/>
         </java>
         
         <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
@@ -50,6 +50,7 @@
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
             <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                <include name="core.swc"/>
                 <include name="common.swc"/>
                 <include name="system.numeric.swc"/>
             </external-library-path>
