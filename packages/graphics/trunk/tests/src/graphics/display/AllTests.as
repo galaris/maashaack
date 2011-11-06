@@ -44,13 +44,13 @@ package graphics.display
         {
             var suite:TestSuite = new TestSuite("graphics.display package tests");
             
-            suite.addTestSuite( BigBitmapTest ) ;
-            
             suite.addTestSuite( DisplayObjectContainersTest ) ;
             suite.addTestSuite( DisplayObjectsTest ) ;
             
             suite.addTestSuite( MOBTest ) ;
+            suite.addTestSuite( BackgroundTest ) ;
             
+            suite.addTestSuite( BigBitmapTest ) ;
             suite.addTestSuite( PatternTest ) ;
             suite.addTestSuite( PerlinNoiseTest ) ;
             suite.addTestSuite( ReflectionBitmapDataTest ) ;
