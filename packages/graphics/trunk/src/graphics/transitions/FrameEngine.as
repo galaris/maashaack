@@ -40,13 +40,34 @@ package graphics.transitions
     import system.process.Task;
     import system.signals.Signal;
     import system.signals.Signaler;
-
+    
     import flash.display.Shape;
     import flash.events.Event;
     
     /**
-     * A virtual Frame interval engine with a onEnterFrame event. 
+     * A virtual Frame interval engine with a enterFrame event. 
      * The use can register object listeners to receive by default the Event.ENTER_FRAME event.
+     * <p><b>Example:</b></p>
+     * <pre class="prettyprint">
+     * import graphics.transitions.FrameEngine ;
+     * 
+     * var loop:uint ;
+     * 
+     * var tick:Function = function():void
+     * {
+     *     trace("loop " + loop++ ) ;
+     *     if( loop > 100 )
+     *     {
+     *         engine.stop() ;
+     *     }
+     * }
+     * 
+     * var engine:FrameEngine = new FrameEngine() ;
+     * 
+     * engine.enterFrame.connect( tick ) ;
+     * 
+     * engine.start() ;
+     * </pre>
      */
     public class FrameEngine extends Task implements Startable, Stoppable
     {
@@ -80,7 +101,7 @@ package graphics.transitions
          */
         public override function run( ...arguments:Array ):void 
         {
-            if( !running )
+            if( !_isRunning )
             {
                 notifyStarted() ;
                 _engine.addEventListener( Event.ENTER_FRAME, __enterFrame__ );
@@ -100,7 +121,7 @@ package graphics.transitions
          */
         public function stop():void
         {
-            if( running )
+            if( _isRunning )
             {
                 _engine.removeEventListener( Event.ENTER_FRAME, __enterFrame__ );
                 notifyFinished() ;
@@ -123,6 +144,6 @@ package graphics.transitions
         /**
          * @private
          */
-        private static var _engine:Shape = new Shape() ;
+        private static const _engine:Shape = new Shape() ;
     }
 }
