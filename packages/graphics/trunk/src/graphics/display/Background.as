@@ -754,8 +754,6 @@ package graphics.display
             }
             if ( _layout )
             {
-                _layout.container = scope ;
-                _layout.align     = _align  ;
                 _layout.run() ;
             }
             draw() ;
