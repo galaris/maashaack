@@ -35,22 +35,30 @@
 
 package graphics.screens
 {
-    import flash.system.Capabilities;
-    
     /**
-     * Defines the runtime DPI of the current device by mapping its 
-     * <code>flash.system.Capabilities.screenDPI</code> to one of several DPI values in <code>graphics.screens.Density</code>.
-     *  Uses this constant to calculate the current DPI value when an Application authored for a specific DPI is adapted to the current one through scaling. 
-     *  <p><b>Example :</b></p>
-     *  <pre class="prettyprint">
-     *  import graphics.screens.* ;
-     *  
-     *  trace( "runtimeDPI  : " + runtimeDPI + " - " + runtimeDPI.valueOf() + " - " + runtimeDPI.density ) ;
-     *  
-     *  trace( "aspectRatio : " + aspectRatio ) ;
-     *  trace( "diagonal    : " + diagonal ) ;
-     *  trace( "orientation : " + orientation ) ;
-     *  </pre>
+     * The enumeration of all standard display resolutions. 
+     * More information about <a href="http://en.wikipedia.org/wiki/Display_resolution">Display Resolution in Wikipedia</a>.
      */
-    public const runtimeDPI:ScreenDensity = ScreenDensity.getPreferredDensity( Capabilities.screenDPI ) ;
+    public final class ScreenSize
+    {
+        /**
+         * The "xlarge" screens are at least 960dp x 720dp.
+         */
+        public static const xlarge:String = "xlarge" ;
+        
+        /**
+         * The "large" screens are at least 640dp x 480dp.
+         */
+        public static const large:String = "large" ;
+        
+        /**
+         * The "normal" screens are at least 470dp x 320dp.
+         */
+        public static const normal:String = "normal" ;
+        
+        /**
+         * The "small" screens are at least 426dp x 320dp.
+         */
+        public static const small:String = "small" ;
+    }
 }

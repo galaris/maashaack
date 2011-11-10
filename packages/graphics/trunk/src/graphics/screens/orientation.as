@@ -40,7 +40,9 @@ package graphics.screens
      * @see graphics.display#screenAspectRatio
      * @see flash.display#StageAspectRatio
      */
-    public const screenOrientation:String = screenAspectRatio.width > screenAspectRatio.height 
-                                          ? "landscape" 
-                                          : "portrait" ;
+    public const orientation:String = aspectRatio.width == aspectRatio.height
+                                       ? ScreenOrientation.square
+                                       : (aspectRatio.width > aspectRatio.height  
+                                         ? ScreenOrientation.landscape  
+                                         : ScreenOrientation.portrait ) ;
 }

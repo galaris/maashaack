@@ -35,22 +35,12 @@
 
 package graphics.screens
 {
+    import core.maths.hypothenuse;
+    
     import flash.system.Capabilities;
     
     /**
-     * Defines the runtime DPI of the current device by mapping its 
-     * <code>flash.system.Capabilities.screenDPI</code> to one of several DPI values in <code>graphics.screens.Density</code>.
-     *  Uses this constant to calculate the current DPI value when an Application authored for a specific DPI is adapted to the current one through scaling. 
-     *  <p><b>Example :</b></p>
-     *  <pre class="prettyprint">
-     *  import graphics.screens.* ;
-     *  
-     *  trace( "runtimeDPI  : " + runtimeDPI + " - " + runtimeDPI.valueOf() + " - " + runtimeDPI.density ) ;
-     *  
-     *  trace( "aspectRatio : " + aspectRatio ) ;
-     *  trace( "diagonal    : " + diagonal ) ;
-     *  trace( "orientation : " + orientation ) ;
-     *  </pre>
+     * Constants defining the diagonal measure in pixels of the screen.
      */
-    public const runtimeDPI:ScreenDensity = ScreenDensity.getPreferredDensity( Capabilities.screenDPI ) ;
+    public const diagonal:Number = hypothenuse( Capabilities.screenResolutionX , Capabilities.screenResolutionY ) ;
 }

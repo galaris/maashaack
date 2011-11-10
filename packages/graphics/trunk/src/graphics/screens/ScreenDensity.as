@@ -40,57 +40,59 @@ package graphics.screens
     /**
      * The enumeration of the quantity of pixels within a physical area of the screen ; usually referred to as dpi (dots per inch).
      */
-    public final class Density
+    public final class ScreenDensity
     {
         /**
-         * Creates a new Density instance.
+         * Creates a new ScreenDensity instance.
          * @param value The value of the enumeration.
          * @param name The name key of the enumeration.
+         * @param density The ratio of this screen density.
          */
-        public function Density( value:int = 0 , name:String = "" )
+        public function ScreenDensity( value:int = 0 , name:String = "" , density:Number = 0.0 )
         {
-            _value = value ;
-            _name  = name  ;
+            _value   = value ;
+            _name    = name  ;
+            _density = density ;
         }
         
         /**
          * Resources for low-density (ldpi) screens (~120dpi). (Scaling ratio 0.75x.)
          */
-        public static const ldpi:Density = new Density( 120 , "ldpi" ) ;
+        public static const ldpi:ScreenDensity = new ScreenDensity( 120 , "ldpi" , 0.75 ) ;
         
         /**
          * Resources for medium-density (mdpi) screens (~160dpi). (This is the baseline density.)
          */
-        public static const mdpi:Density = new Density( 160 , "mdpi" ) ;
+        public static const mdpi:ScreenDensity = new ScreenDensity( 160 , "mdpi" , 1.0 ) ;
         
         /**
          * Resources for high-density (hdpi) screens (~240dpi). (Scaling ratio 1.5x.)
          */
-        public static const hdpi:Density = new Density( 240 , "hdpi" ) ;
+        public static const hdpi:ScreenDensity = new ScreenDensity( 240 , "hdpi" , 1.5 ) ;
         
         /**
          * Resources for extra high-density (xhdpi) screens (~320dpi). (Scaling ratio 2.0x.)
          */
-        public static const xhdpi:Density = new Density( 320 , "xhdpi" ) ;
+        public static const xhdpi:ScreenDensity = new ScreenDensity( 320 , "xhdpi" , 2.0 ) ;
         
         /**
          * Resources for all densities. 
          * These are density-independent resources. 
          * The system does not scale resources tagged with this qualifier, regardless of the current screen's density.
          */
-        public static const nodpi:Density = new Density( 0 , "nodpi" ) ;
+        public static const nodpi:ScreenDensity = new ScreenDensity( 0 , "nodpi" , 0.0 ) ;
         
         /**
          * Resources for screens somewhere between mdpi and hdpi; approximately 213 dpi.
          */
-        public static const tvdpi:Density = new Density( 213 , "tvdpi" ) ;
+        public static const tvdpi:ScreenDensity = new ScreenDensity( 213 , "tvdpi" , 1.2 ) ;
         
         /**
          * Matches the specified DPI value to a <code>Density</code> value.
          *  @param dpi The DPI value.  
          *  @return The corresponding <code>Density</code> value.
          */
-        public static function getPreferredDensity( dpi:int ):Density
+        public static function getPreferredDensity( dpi:int ):ScreenDensity
         {
             if ( dpi <= 140 )
             {
@@ -113,6 +115,14 @@ package graphics.screens
             }
             
             return nodpi ;
+        }
+        
+        /**
+         * The ratio of the screen density.
+         */
+        public function get density():Number
+        {
+            return _density ;
         }
         
         /**
@@ -146,6 +156,11 @@ package graphics.screens
         {
             return _value;
         }
+        
+        /**
+         * @private
+         */
+        protected var _density:Number ;
         
         /**
          * @private

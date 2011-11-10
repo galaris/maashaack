@@ -42,5 +42,5 @@ package graphics.screens
     /**
      * Constants defining the screen default aspect ratio based on the Capabilities.screenResolutionX and Capabilities.screenResolutionY properties.
      */
-    public const screenAspectRatio:AspectRatio = new AspectRatio( Capabilities.screenResolutionX , Capabilities.screenResolutionY , true ) ;
+    public const aspectRatio:AspectRatio = new AspectRatio( Capabilities.screenResolutionX , Capabilities.screenResolutionY , true ) ;
 }

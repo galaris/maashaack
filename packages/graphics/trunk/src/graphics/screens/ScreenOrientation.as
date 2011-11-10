@@ -35,12 +35,24 @@
 
 package graphics.screens
 {
-    import core.maths.hypothenuse;
-    
-    import flash.system.Capabilities;
-    
     /**
-     * Constants defining the diagonal measure in pixels of the screen.
+     * The orientation of the screen from the user's point of view. This is either landscape or portrait, meaning that the screen's aspect ratio is either wide or tall, respectively. Be aware that not only do different devices operate in different orientations by default, but the orientation can change at runtime when the user rotates the device.
      */
-    public const screenDiagonal:Number = hypothenuse( Capabilities.screenResolutionX , Capabilities.screenResolutionY ) ;
+    public final class ScreenOrientation
+    {
+        /**
+         * The "landscape" screen orientation.
+         */
+        public static const landscape:String = "landscape" ;
+        
+        /**
+         * The "portrait" screen orientation.
+         */
+        public static const portrait:String = "portrait" ;
+        
+        /**
+         * The "square" screen orientation when the aspectratio is 1:1.
+         */
+        public static const square:String = "square" ;
+    }
 }
