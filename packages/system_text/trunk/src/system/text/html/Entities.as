@@ -67,7 +67,7 @@ package system.text.html
         /**
          * @private
          */
-        private static var _fastSearch:Dictionary = new Dictionary() ;
+        private static const _fastSearch:Dictionary = new Dictionary() ;
         
         /**
          * Inserts a new Entity element in the entities definitions.
