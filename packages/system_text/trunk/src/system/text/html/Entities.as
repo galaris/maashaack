@@ -37,7 +37,7 @@ the terms of any one of the MPL, the GPL or the LGPL.
 package system.text.html
 {
     import flash.utils.Dictionary;
-
+    
     /**
      * The HTML entities tool class.
      * <p><b>Example :</b></p>
@@ -62,7 +62,7 @@ package system.text.html
         /**
          * @private
          */
-        private static var _e:Array = [];
+        private static var _e:Vector.<Entity> = new Vector.<Entity>() ;
         
         /**
          * @private
@@ -79,7 +79,7 @@ package system.text.html
          */
         public static function add( entity:Entity ):void
         {
-            _e.push(entity);
+            _e.push( entity );
         } 
         
         /**
@@ -338,15 +338,15 @@ package system.text.html
 //        }
         
         /*  
-
-         Special characters for HTML : http://www.w3.org/TR/REC-html40/sgml/entities.html
+        
+        Special characters for HTML : http://www.w3.org/TR/REC-html40/sgml/entities.html
          
-         The character entity references in this section are for escaping markup-significant characters (these are the same as those in HTML 2.0 and 3.2), for denoting spaces and dashes. 
-         Other characters in this section apply to internationalization issues such as the disambiguation of bidirectional text (see the section on bidirectional text for details).
-
-         Entities have also been added for the remaining characters occurring in CP-1252 which do not occur in the HTMLlat1 or HTMLsymbol entity sets. These all occur in the 128 to 159 range within the CP-1252 charset. These entities permit the characters to be denoted in a platform-independent manner.
-
-         To support these entities, user agents may support full [ISO10646] or use other means. Display of glyphs for these characters may be obtained by being able to display the relevant [ISO10646] characters or by other means, such as internally mapping the listed entities, numeric character references, and characters to the appropriate position in some font that contains the requisite glyphs.
+        The character entity references in this section are for escaping markup-significant characters (these are the same as those in HTML 2.0 and 3.2), for denoting spaces and dashes. 
+        Other characters in this section apply to internationalization issues such as the disambiguation of bidirectional text (see the section on bidirectional text for details).
+        
+        Entities have also been added for the remaining characters occurring in CP-1252 which do not occur in the HTMLlat1 or HTMLsymbol entity sets. These all occur in the 128 to 159 range within the CP-1252 charset. These entities permit the characters to be denoted in a platform-independent manner.
+        
+        To support these entities, user agents may support full [ISO10646] or use other means. Display of glyphs for these characters may be obtained by being able to display the relevant [ISO10646] characters or by other means, such as internally mapping the listed entities, numeric character references, and characters to the appropriate position in some font that contains the requisite glyphs.
        
         */
         
@@ -359,7 +359,7 @@ package system.text.html
         
         // Latin Extended-A
         
-        add(new Entity("\u0152", "OElig", 338)) ; // latin capital ligature OE, U+0152 ISOlat2       
+        add(new Entity("\u0152", "OElig", 338)) ; // latin capital ligature OE, U+0152 ISOlat2
         add(new Entity("\u0153", "oelig", 339)) ; // latin small ligature oe, U+0153 ISOlat2
         
         // Ligature is a misnomer, this is a separate character in some languages
@@ -375,32 +375,76 @@ package system.text.html
         
         // General Punctuation
         
-        add(new Entity("\u2002", "ensp", 8194)) ; // en space, U+2002 ISOpub
-        add(new Entity("\u2003", "emsp", 8195)) ; // em space, U+2003 ISOpub
-        add(new Entity("\u2009", "thinsp", 8201)) ; // thin space, U+2009 ISOpub
-        add(new Entity("\u200C", "zwnj", 8204)) ; // zero width non-joiner, U+200C NEW RFC 2070
-        add(new Entity("\u200D", "zwj", 8205)) ; // zero width joiner, U+200D NEW RFC 2070
-        add(new Entity("\u200E", "lrm", 8206)) ; // left-to-right mark, U+200E NEW RFC 2070
-        add(new Entity("\u200F", "rlm", 8207)) ; // right-to-left mark, U+200F NEW RFC 2070
-        add(new Entity("\u2013", "ndash", 8211)) ; // en dash, U+2013 ISOpub
-        add(new Entity("\u2014", "mdash", 8212)) ; // em dash, U+2014 ISOpub
-        add(new Entity("\u2018", "lsquo", 8216)) ; // left single quotation mark, U+2018 ISOnum 
-        add(new Entity("\u2019", "rsquo", 8217)) ; // right single quotation mark, U+2019 ISOnum
-        add(new Entity("\u201A", "sbquo", 8218)) ; // single low-9 quotation mark, U+201A NEW
-        add(new Entity("\u201C", "ldquo", 8220)) ; // left double quotation mark,U+201C ISOnum
-        add(new Entity("\u201D", "rdquo", 8221)) ; // right double quotation mark,U+201D ISOnum 
-        add(new Entity("\u201E", "bdquo", 8222)) ; // double low-9 quotation mark, U+201E NEW 
-        add(new Entity("\u2020", "dagger", 8224)) ; // dagger, U+2020 ISOpub 
-        add(new Entity("\u2021", "Dagger", 8225)) ; // double dagger, U+2021 ISOpub 
-        add(new Entity("\u2030", "permil", 8240)) ; // per mille sign, U+2030 ISOtech
-        add(new Entity("\u2039", "lsaquo", 8249)) ; // single left-pointing angle quotation mark, U+2039 ISO proposed
-                                 
+        add(new Entity("\u2002", "ensp"   , 8194)) ; // en space, U+2002 ISOpub
+        add(new Entity("\u2003", "emsp"   , 8195)) ; // em space, U+2003 ISOpub
+        add(new Entity("\u2009", "thinsp" , 8201)) ; // thin space, U+2009 ISOpub
+        add(new Entity("\u200C", "zwnj"   , 8204)) ; // zero width non-joiner, U+200C NEW RFC 2070
+        add(new Entity("\u200D", "zwj"    , 8205)) ; // zero width joiner, U+200D NEW RFC 2070
+        add(new Entity("\u200E", "lrm"    , 8206)) ; // left-to-right mark, U+200E NEW RFC 2070
+        add(new Entity("\u200F", "rlm"    , 8207)) ; // right-to-left mark, U+200F NEW RFC 2070
+        add(new Entity("\u2013", "ndash"  , 8211)) ; // en dash, U+2013 ISOpub
+        add(new Entity("\u2014", "mdash"  , 8212)) ; // em dash, U+2014 ISOpub
+        add(new Entity("\u2018", "lsquo"  , 8216)) ; // left single quotation mark, U+2018 ISOnum 
+        add(new Entity("\u2019", "rsquo"  , 8217)) ; // right single quotation mark, U+2019 ISOnum
+        add(new Entity("\u201A", "sbquo"  , 8218)) ; // single low-9 quotation mark, U+201A NEW
+        add(new Entity("\u201C", "ldquo"  , 8220)) ; // left double quotation mark,U+201C ISOnum
+        add(new Entity("\u201D", "rdquo"  , 8221)) ; // right double quotation mark,U+201D ISOnum 
+        add(new Entity("\u201E", "bdquo"  , 8222)) ; // double low-9 quotation mark, U+201E NEW 
+        add(new Entity("\u2020", "dagger" , 8224)) ; // dagger, U+2020 ISOpub 
+        add(new Entity("\u2021", "Dagger" , 8225)) ; // double dagger, U+2021 ISOpub 
+        add(new Entity("\u2030", "permil" , 8240)) ; // per mille sign, U+2030 ISOtech
+        add(new Entity("\u2039", "lsaquo" , 8249)) ; // single left-pointing angle quotation mark, U+2039 ISO proposed
+        
         // lsaquo is proposed but not yet ISO standardized
         
-        add(new Entity("\u8250", "rsaquo", 8250)) ; // single right-pointing angle quotation mark, U+203A ISO proposed     
+        add(new Entity("\u8250", "rsaquo", 8250)) ; // single right-pointing angle quotation mark, U+203A ISO proposed
         
         // rsaquo is proposed but not yet ISO standardized
         
-        add(new Entity("€", "euro", 8364)) ; // euro sign, U+20AC NEW           
+        add(new Entity("€", "euro", 8364)) ; // euro sign, U+20AC NEW
+        
+        // Mathematical, Symbolic, and Special characters for HTML  (http://www.w3schools.com/tags/ref_symbols.asp)
+        
+        // Mathematical Operators
+        
+        add(new Entity("∀", "forall" , 8704)) ; // for all
+        add(new Entity("∂", "part"   , 8706)) ; // partial differential
+        add(new Entity("∃", "exist"  , 8707)) ; // there exists
+        add(new Entity("∅", "exist"  , 8709)) ; // empty set = null set = diameter
+        add(new Entity("∇", "nabla"  , 8709)) ; // nabla = backward difference
+        add(new Entity("∈", "isin"   , 8712)) ; // element of
+        add(new Entity("∉", "notin"  , 8713)) ; // not an element of
+        add(new Entity("∋", "ni"     , 8715)) ; // contains as member
+        add(new Entity("∏", "prod"   , 8719)) ; // n-ary product = product sign
+        add(new Entity("∑", "sum"    , 8721)) ; // n-ary sumation
+        add(new Entity("−", "minus"  , 8722)) ; // minus sign
+        add(new Entity("∗", "lowast" , 8727)) ; // lowast
+        add(new Entity("√", "radic"  , 8730)) ; // square root = radical sign
+        add(new Entity("∝", "prop"   , 8733)) ; // proportional to
+        add(new Entity("∞", "infin"  , 8734)) ; // infinity
+        add(new Entity("∠", "ang"    , 8736)) ; // angle
+        add(new Entity("∧", "and"    , 8743)) ; // logical and = wedge
+        add(new Entity("∨", "or"     , 8744)) ; // logical or = vee
+        add(new Entity("∩", "cap"    , 8745)) ; // intersection = cap
+        add(new Entity("∪", "cup"    , 8746)) ; // union = cup
+        add(new Entity("∫", "int"    , 8747)) ; // integral
+        add(new Entity("∴", "there4" , 8756)) ; // therefore
+        add(new Entity("∼", "sim"    , 8764)) ; // tilde operator = varies with = similar to
+        add(new Entity("≅", "cong"   , 8773)) ; // congruent to = approximately equal to
+        add(new Entity("≈", "asymp"  , 8776)) ; // almost equal to = asymptotic to
+        add(new Entity("≠", "ne"     , 8800)) ; // not equal to
+        add(new Entity("≡", "equiv"  , 8801)) ; // identical to
+        add(new Entity("≤", "le"     , 8804)) ; // less-than or equal to
+        add(new Entity("≥", "ge"     , 8805)) ; // greater-than or equal to
+        add(new Entity("⊂", "sub"    , 8834)) ; // subset of
+        add(new Entity("⊃", "sup"    , 8835)) ; // superset of
+        add(new Entity("⊄", "nsub"   , 8836)) ; // not subset of
+        add(new Entity("⊆", "sube"   , 8838)) ; // subset or equal
+        add(new Entity("⊇", "supe"   , 8839)) ; // superset or equal
+        add(new Entity("⊕", "oplus"  , 8853)) ; // circled plus = direct sum
+        add(new Entity("⊗", "otimes" , 8855)) ; // circled times = vector product
+        add(new Entity("⊥", "perp"   , 8869)) ; // up tack = orthogonal to = perpendicular
+        add(new Entity("⋅",  "sdot"  , 8901)) ; // dot operator
+        
     }
 }
