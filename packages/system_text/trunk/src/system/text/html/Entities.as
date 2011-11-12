@@ -60,11 +60,6 @@ package system.text.html
     public class Entities
     {
         /**
-         * Indicates if the class support ISO-8859-15.
-         */
-        public static var support_ISO_8859_15:Boolean ;
-        
-        /**
          * @private
          */
         private static const _entities:Vector.<Entity> = new Vector.<Entity>() ;
@@ -161,6 +156,7 @@ package system.text.html
             {
                 if( _entities[i].char == char )
                 {
+                    _fastSearch[ char ] = i;
                     return _entities[i].toString();
                 }
             }
@@ -188,6 +184,7 @@ package system.text.html
             {
                 if( _entities[i].toString() == name )
                 {
+                    _fastSearch[ name ] = i ;
                     return _entities[i].valueOf();
                 }
             }
@@ -196,7 +193,7 @@ package system.text.html
         
         //ASCII Entities
         
-        add("\"", "quot", 34) ; // quotation mark 
+        add("\"", "quot", 34) ; // quotation mark = APL quote
         add("&", "amp", 38) ; // ampersand
         add("\'", "apos", 39) ; // apostrophe
         add("<", "lt", 60) ; // less-than sign 
@@ -301,46 +298,28 @@ package system.text.html
         add("ý", "yacute", 253) ; // small y, acute accent
         add("þ", "thorn", 254) ; // small thorn, Icelandic
         add("ÿ", "yuml", 255) ; // small y, umlaut mark
+       
+        /*
+        ISO 8859-15 Symbol Entities see http://fr.wikipedia.org/wiki/ISO_8859-15
+           
+        when the option support_ISO_8859_15 is true
+        the following table will be used
+           
+        Position 0xA4 0xA6 0xA8 0xB4 0xB8 0xBC 0xBD 0xBE
+        8859-1      ¤    ¦    ¨    ´    ¸    ¼    ½    ¾
+        8859-15     €    Š    š    Ž    ž    Œ    œ    Ÿ
+        */
         
-//       ISO 8859-15 Symbol Entities
-//           see http://fr.wikipedia.org/wiki/ISO_8859-15
-//           
-//           when the option support_ISO_8859_15 is true
-//           the following table will be used
-//           
-//           Position 0xA4 0xA6 0xA8 0xB4 0xB8 0xBC 0xBD 0xBE
-//           8859-1      ¤    ¦    ¨    ´    ¸    ¼    ½    ¾
-//           8859-15     €    Š    š    Ž    ž    Œ    œ    Ÿ
-//      
-//        if( Entities.support_ISO_8859_15 )
-//        {
-//            // TODO:
-//            //   either we can switch
-//            //   but in theory we could use both 8859-1 and 8859-15
-//            //   as we have only findByChar and findByName methods
-//            //   
-//            //   need to be unit tested to be 100% sure
-//        }
-//        else
-//        {
-//            add("¤", "curren", 164) ; 
-//            // currency sign
-//            add("¦", "brvbar", 166) ; 
-//            // broken vertical bar
-//            add("¨", "uml", 168) ; 
-//            // spacing diaresis
-//            add("´", "acute", 180) ; 
-//            // spacing acute
-//            add("¸", "cedil", 184) ; 
-//            // spacing cedilla
-//            add("¼", "frac14", 188) ; 
-//            // fraction 1/4
-//            add("½", "frac12", 189) ; 
-//            // fraction 1/2 
-//            add("¾", "frac34", 190) ; // fraction 3/4
-//        }
+        add("¤", "curren" , 164) ; // general currency sign 
+        add("¦", "brvbar" , 166) ; // broken vertical bar
+        add("¨", "uml"    , 168) ; // spacing diaresis
+        add("´", "acute"  , 180) ; // spacing acute
+        add("¸", "cedil"  , 184) ; // spacing cedilla
+        add("¼", "frac14" , 188) ; // fraction 1/4
+        add("½", "frac12" , 189) ; // fraction 1/2 
+        add("¾", "frac34" , 190) ; // fraction 3/4
         
-        /*  
+        /*
         
         Special characters for HTML : http://www.w3.org/TR/REC-html40/sgml/entities.html
          
@@ -374,7 +353,7 @@ package system.text.html
         // Spacing Modifier Letters
         
         add("\u02C6", "circ"  , 710) ; // modifier letter circumflex accent, U+02C6 ISOpub
-        add("\u02DC", "tilde" , 732) ; // small tilde, U+02DC ISOdia       
+        add("\u02DC", "tilde" , 732) ; // small tilde, U+02DC ISOdia
         
         // General Punctuation
         
@@ -406,7 +385,9 @@ package system.text.html
         
         add("€", "euro", 8364) ; // euro sign, U+20AC NEW
         
-        // Mathematical, Symbolic, and Special characters for HTML  (http://www.w3schools.com/tags/ref_symbols.asp)
+        // Mathematical, Symbolic, and Special characters for HTML  
+        // http://www.w3schools.com/tags/ref_symbols.asp
+        // http://htmlhelp.com/reference/html40/entities/symbols.html
         
         // Mathematical Operators
         
@@ -506,5 +487,58 @@ package system.text.html
         add("ϒ",  "upsih"    , 978) ; // upsilon with hook symbol
         add("ϖ",  "piv"     , 982) ; // pi symbol
         
+        // Latin Extended-B
+        
+        add("ƒ",  "fnof" , 402) ; //  latin small f with hook = function = florin
+        
+        // Geometric Shapes
+        
+        add("◊",  "loz" , 9674) ; // lozenge
+        
+        // Miscellaneous Symbols
+        
+        add("♠",  "spades" , 9824) ; // black spade suit
+        add("♣",  "clubs"  , 9827) ; //  black club suit = shamrock
+        add("♥",  "hearts" , 9829) ; //  black heart suit = valentine
+        
+        // Miscellaneous Technical
+        
+        add("⌈",  "lceil"  , 8968) ; // left ceiling = apl upstile
+        add("⌉",  "rceil"  , 8969) ; // right ceiling
+        add("⌊",  "lfloor" , 8970) ; // left floor = apl downstile
+        add("⌋",  "rfloor" , 8971) ; // right floor
+        add("⟨",  "lang"   , 9001) ; // left-pointing angle bracket
+        add("⟩",  "rang"   , 9002) ; // right-pointing angle bracket
+        
+        // General Punctuation
+        
+        add("•", "bull"   , 8226) ; // bullet = black small circle
+        add("…", "hellip" , 8230) ; // horizontal ellipsis = three dot leader
+        add("′", "prime"  , 8242) ; // prime = minutes = feet
+        add("″", "Prime"  , 8243) ; // double prime = seconds = inches
+        add("‾", "oline"  , 8254) ; // overline = spacing overscore
+        add("⁄", "frasl"  , 8260) ; // fraction slash
+        
+        // Letterlike Symbols
+        
+        add("℘", "weierp"  , 8472) ; // script capital P = power set = Weierstrass p
+        add("ℑ", "image"   , 8465) ; // blackletter capital I = imaginary part
+        add("ℜ", "real"    , 8476) ; // blackletter capital R = real part symbol
+        add("™", "trade"   , 8482) ; // trade mark sign
+        add("ℵ", "alefsym" , 8501) ; // alef symbol = first transfinite cardinal
+        
+        // Arrows
+        
+        add("←", "larr" , 8592) ; // leftwards arrow
+        add("↑", "uarr"  , 8593) ; // upwards arrow
+        add("→", "rarr"  , 8594) ; // rightwards arrow
+        add("↓", "darr"  , 8595) ; // downwards arrow
+        add("↔", "harr"  , 8596) ; // left right arrow
+        add("↵", "crarr" , 8629) ; // downwards arrow with corner leftwards = carriage return
+        add("⇐", "lArr"  , 8656) ; // leftwards double arrow
+        add("⇑", "uArr"  , 8657) ; // upwards double arrow
+        add("⇒", "rArr"  , 8658) ; // rightwards double arrow
+        add("⇓", "dArr"  , 8659) ; // downwards double arrow
+        add("⇔", "hArr"  , 8660) ; // left right double arrow
     }
 }
