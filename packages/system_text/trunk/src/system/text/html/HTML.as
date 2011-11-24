@@ -129,8 +129,10 @@ package system.text.html
             var text:String = "";
             var c:String;
             var ent:String;
-            var l:uint = html.length ;
-            for( var i:uint = 0 ; i < l ; i++ )
+            
+            var len:uint = html.length ;
+            
+            for( var i:uint = 0 ; i < len ; i++ )
             {
                 c = html.charAt( i );
                 
@@ -144,6 +146,11 @@ package system.text.html
                         c = html.charAt( i );
                         ent += c;
                         i++;
+                        
+                        if ( i == len ) // the ";" is not found
+                        {
+                            return text ;
+                        }
                     }
                     
                     text += Entities.fromName( ent );
