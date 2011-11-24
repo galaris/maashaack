@@ -143,14 +143,13 @@ package system.text.html
                     
                     while( c != ";" )
                     {
-                        c = html.charAt( i );
-                        ent += c;
-                        i++;
-                        
                         if ( i == len ) // the ";" is not found
                         {
                             return text ;
                         }
+                        c = html.charAt( i );
+                        ent += c;
+                        i++;
                     }
                     
                     text += Entities.fromName( ent );
