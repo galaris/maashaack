@@ -38,9 +38,10 @@ package graphics.layouts
     import core.maths.atan2D;
     import core.maths.degreesToRadians;
     import core.maths.radiansToDegrees;
-    
+
     import graphics.Align;
-    
+    import graphics.Measurable;
+
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     
@@ -219,8 +220,8 @@ package graphics.layouts
                     else
                     {
                         child.rotation = 0 ;
-                        child.x -= child.width/2 ;
-                        child.y -= child.height/2 ;
+                        child.x -= ( (child is Measurable) ? (child as Measurable).w : child.width  ) * .5 ;
+                        child.y -= ( (child is Measurable) ? (child as Measurable).h : child.height ) * .5 ;
                     }
                     
                     child.x += _bounds.x + _radius ;
