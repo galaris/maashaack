@@ -35,11 +35,10 @@
 
 package graphics.layouts 
 {
-    import core.maths.replaceNaN;
-    
     import graphics.Align;
     import graphics.Direction;
     import graphics.DirectionOrder;
+    import graphics.Measurable;
     import graphics.Orientation;
     
     import flash.display.DisplayObject;
@@ -128,7 +127,7 @@ package graphics.layouts
                 
                 var i:int ;
                 
-                var hor:Boolean = _direction == Direction.HORIZONTAL ;
+                const hor:Boolean = _direction == Direction.HORIZONTAL ;
                 
                 var w:Number = 0 ;
                 var h:Number = 0 ;
@@ -139,8 +138,8 @@ package graphics.layouts
                 {
                     child = entry.child ;
                     
-                    w = Math.max( child[propWidth]  , w ) ;
-                    h = Math.max( child[propHeight] , h ) ;
+                    w = Math.max( child[ (child is Measurable) ? "w" : propWidth  ]  , w ) ;
+                    h = Math.max( child[ (child is Measurable) ? "h" : propHeight ] , h ) ;
                     
                     if ( hor ) 
                     {
@@ -166,8 +165,8 @@ package graphics.layouts
                 _bounds.width  -= _horizontalGap ;
                 _bounds.height -= _verticalGap ;
                 
-                _bounds.width  += replaceNaN( _padding.horizontal ) ; 
-                _bounds.height += replaceNaN( _padding.vertical   ) ;
+                _bounds.width  += _padding.horizontal ; 
+                _bounds.height += _padding.vertical   ;
                 
                 if (_align == Align.CENTER) 
                 {
@@ -226,8 +225,8 @@ package graphics.layouts
                         _children.reverse() ;
                     }
                     
-                    const left:Number = replaceNaN(_padding.left) ;
-                    const top:Number  = replaceNaN(_padding.top) ;
+                    const left:Number = _padding.left ;
+                    const top:Number  = _padding.top ;
                     const hor:Boolean = _direction == Direction.HORIZONTAL ;
                     
                     var child:DisplayObject ;
@@ -236,26 +235,32 @@ package graphics.layouts
                     var c:Number ;
                     var l:Number ;
                     
+                    var pw:String ;
+                    var ph:String ;
+                    
                     for each( var entry:LayoutEntry in _children ) 
                     {
                         child = entry.child ;
                         
+                        pw = (child is Measurable) ? "w" : propWidth  ;
+                        ph = (child is Measurable) ? "h" : propHeight ;
+                        
                         c = hor ? ( i%_columns ) : Math.floor( i/_lines ) ;
                         l = hor ? Math.floor( i/_columns ) : ( i%_lines ) ;
                         
-                        entry.tx = left + c * ( child[propWidth]  + _horizontalGap ) ;
-                        entry.ty = top  + l * ( child[propHeight] + _verticalGap   ) ;
+                        entry.tx = left + c * ( child[ pw ] + _horizontalGap ) ;
+                        entry.ty = top  + l * ( child[ ph ] + _verticalGap   ) ;
                         
                         if ( isRightToLeft() )
                         {
                             entry.tx *= -1 ;
-                            entry.tx += _bounds.width - child[propWidth] ;
+                            entry.tx += _bounds.width - child[pw] ;
                         }
                         
                         if ( isBottomToTop() )
                         {
                             entry.ty *= -1 ;
-                            entry.ty += _bounds.height - child[propHeight] ;
+                            entry.ty += _bounds.height - child[ph] ;
                         }
                         
                         i++ ;
