@@ -1,4 +1,4 @@
-﻿/*
+/*
 
   The contents of this file are subject to the Mozilla Public License Version
   1.1 (the "License"); you may not use this file except in compliance with
@@ -38,6 +38,7 @@ package examples
     import graphics.Direction;
     import graphics.FillGradientStyle;
     import graphics.FillStyle;
+    import graphics.LineStyle;
     import graphics.display.Background;
     
     import flash.display.GradientType;
@@ -59,17 +60,39 @@ package examples
             
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown) ;
             
-            background         = new Background() ;
-            background.fill    = new FillStyle(0xD97BD0, 1) ;
-            background.w       = 400 ;
-            background.h       = 300 ;
+            background      = new Background() ;
+            background.fill = new FillStyle(0xD97BD0, 1) ;
+            background.w    = 400 ;
+            background.h    = 300 ;
             
+            ///////
+            
+            /*
+            background.borderMode  = Background.DASHED ;
+            background.line        = new LineStyle(2, 0xFFFFFF, 1) ;            
+            background.dashLength  = 6 ;
+            background.dashSpacing = 6 ;            
+            */
+            
+            ///////
+            
+            /*
+            background.borderMode        = Background.ROUNDED ;
+            background.bottomLeftRadius  = 12 ;
+            background.bottomRightRadius = 12 ;
+            background.topLeftRadius     = 12 ;
+            background.topLeftRadius     = 12 ;
+            background.topRightRadius    = 12 ;
+            */
+            
+            ///////
+                        
             addChild( background ) ;
             
             // little tests
             // background.minWidth = 600 ;
             // background.maxWidth = 250 ;
-            // background.line = new LineStyle(2, 0xFFFFFF, 1) ;
+
         }
         
         protected var background:Background ;
