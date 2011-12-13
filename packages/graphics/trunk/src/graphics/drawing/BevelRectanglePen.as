@@ -55,7 +55,7 @@ package graphics.drawing
          * @param vBevel (optional) The vBevel value who defined the vertical bevel level of all corners in this BevelRectangle pen.
          * @param align (optional) The align value of the pen.
          */
-        public function BevelRectanglePen(graphic:*, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, hBevel:Number=0, vBevel:Number = 0 , align:uint = 10)
+        public function BevelRectanglePen( graphic:* = null , x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, hBevel:Number=0, vBevel:Number = 0 , align:uint = 10)
         {
             super( graphic );
             setPen( x, y, width, height, hBevel, vBevel , align ) ;
