@@ -71,7 +71,7 @@ package graphics.drawing
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
          * @param data An Array to fill of x/y points the model of the canvas.
          */
-        public function Canvas( graphic:* , data:Array = null )
+        public function Canvas( graphic:* = null , data:Array = null )
         {
             super( graphic );
             this.data = data ;
