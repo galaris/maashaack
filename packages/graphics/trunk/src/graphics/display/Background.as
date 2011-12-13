@@ -37,7 +37,7 @@ package graphics.display
 {
     import core.maths.clamp;
     import core.maths.degreesToRadians;
-    
+
     import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
@@ -45,13 +45,13 @@ package graphics.display
     import graphics.IFillStyle;
     import graphics.ILineStyle;
     import graphics.Measurable;
-    import graphics.drawing.IPen;
+    import graphics.drawing.DashRectanglePen;
     import graphics.drawing.RectanglePen;
     import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.layouts.Layout;
-    
+
     import system.hack;
-    
+
     import flash.display.DisplayObjectContainer;
     import flash.events.Event;
     import flash.geom.Matrix;
@@ -165,7 +165,9 @@ package graphics.display
                 _scope = this ;
             }
             
-            _pen = new RoundedComplexRectanglePen( this ) ;
+            ///////////
+            
+            initializePen() ;
             
             ///////////
             
@@ -173,6 +175,21 @@ package graphics.display
             
             ///////////
         }
+        
+        /**
+         * Defines the "dashed" mode of the background border.
+         */
+        public static const DASHED:String = "dashed" ;
+        
+        /**
+         * Defines the "normal" mode of the background border.
+         */
+        public static const NORMAL:String = "normal" ;
+        
+        /**
+         * Defines the "rouded" mode of the background border.
+         */
+        public static const ROUNDED:String = "rounded" ;
         
         /**
          * The alignement of the background.
@@ -225,6 +242,43 @@ package graphics.display
         }
         
         /**
+         * The border mode of the background : rounded, dashed, normal
+         */
+        public function get borderMode():String
+        {
+            return _borderMode ;
+        }
+        
+        /**
+         * The border mode of the background : "rounded", "dashed", "normal" (default).
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.display.Background ;
+         * 
+         * var background:Background = new Background() ;
+         * 
+         * background.borderMode = Background.NORMAL ;
+         * 
+         * background.borderMode = Background.DASHED ;
+         * background.dashLength  = 6 ;
+         * background.dashSpacing = 6 ;
+         * 
+         * background.borderMode = Background.ROUNDED ;
+         * background.bottomLeftRadius  = 12 ;
+         * background.bottomRightRadius = 12 ;
+         * background.topLeftRadius     = 12 ;
+         * background.topLeftRadius     = 12 ;
+         * background.topRightRadius    = 12 ;
+         * </pre>
+         */
+        public function set borderMode( value:String ):void
+        {
+            _borderMode = ( _borderModes.indexOf( value ) > -1 ) ? value : ROUNDED ;
+            initializePen() ;
+            update() ;
+        }
+        
+        /**
          * The radius of the bottom-left corner, in pixels.
          */
         public function get bottomLeftRadius():Number
@@ -255,6 +309,52 @@ package graphics.display
         public function set bottomRightRadius( value:Number ):void
         {
             _bottomRightRadius = value > 0 ? value : 0 ;
+            update() ;
+        }
+        
+        /**
+         * Determinates the length of a dash in the line. 
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * background.borderMode  = Background.DASHED ;
+         * background.dashLength  = 6 ;
+         * background.dashSpacing = 6 ;   
+         * </pre>
+         */
+        public function get dashLength():Number 
+        {
+            return _dashLength ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set dashLength( value:Number):void 
+        {
+            _dashLength = value > 0 ? value : 0 ;
+            update() ;
+        }
+        
+        /**
+         * Determinates the spacing value between two dashs in this line. 
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * background.borderMode  = Background.DASHED ;
+         * background.dashLength  = 6 ;
+         * background.dashSpacing = 6 ;   
+         * </pre>
+         */
+        public function get dashSpacing():Number 
+        {
+            return _dashSpacing ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set dashSpacing( value:Number ):void 
+        {
+            _dashSpacing = value > 0 ? value : 0 ;
             update() ;
         }
         
@@ -620,13 +720,9 @@ package graphics.display
             
             if( _pen )
             {
-                _pen.draw( _real.x , _real.y , _real.width , _real.height , _topLeftRadius , _topRightRadius , _bottomLeftRadius , _bottomRightRadius , _align ) ;
-                
-                if( _pen is RectanglePen )
-                {
-                    _real.x = (_pen as RectanglePen)._x ;
-                    _real.y = (_pen as RectanglePen)._y ;
-                }
+                drawing() ;
+                _real.x = _pen._x ;
+                _real.y = _pen._y ;
             }
         }
         
@@ -776,6 +872,49 @@ package graphics.display
         //////////
         
         /**
+         * Invoked to draw with the internal pen.
+         */
+        protected function drawing():void
+        {
+            if( _pen is RoundedComplexRectanglePen )
+            {
+                _pen.draw( _real.x , _real.y , _real.width , _real.height , _topLeftRadius , _topRightRadius , _bottomLeftRadius , _bottomRightRadius , _align ) ;
+            }
+            else if( _pen is DashRectanglePen )
+            {
+                _pen.draw( _real.x , _real.y , _real.width , _real.height , _align , _dashLength , _dashSpacing ) ;
+            }
+            else
+            {
+                _pen.draw( _real.x , _real.y , _real.width , _real.height , _align ) ;
+            }
+        }
+        
+        /**
+         * Invoked in the constructor to initialize the RectanglePen reference in the background. 
+         * Overrides this method to change the pen strategy.
+         */
+        protected function initializePen():void
+        {
+            if( _borderMode == ROUNDED )
+            {
+                _pen = new RoundedComplexRectanglePen( this ) ;
+            }
+            else if( _borderMode == DASHED )
+            {
+                _pen = new DashRectanglePen( this ) ;
+            }
+            else 
+            {
+                _pen = new RectanglePen( this ) ;
+            }
+            _pen.fill = _fillStyle ;
+            _pen.line = _lineStyle ;
+        }
+        
+        //////////
+        
+        /**
          * This method is invoked after the draw() method in the update() method.
          * Overrides this method.
          */
@@ -835,12 +974,32 @@ package graphics.display
         /**
          * @private
          */
+        hack var _borderMode:String = NORMAL ;
+        
+        /**
+         * @private
+         */
+        hack const _borderModes:Vector.<String> = Vector.<String>([ DASHED , NORMAL , ROUNDED ]) ;
+        
+        /**
+         * @private
+         */
         hack var _bottomLeftRadius:Number = 0 ;
         
         /**
          * @private
          */
         hack var _bottomRightRadius:Number = 0 ;
+        
+        /**
+         * @private
+         */
+        hack var _dashLength:Number = 4 ;
+        
+        /**
+         * @private
+         */
+        hack var _dashSpacing:Number = 4 ;
         
         /**
          * @private
@@ -900,7 +1059,7 @@ package graphics.display
         /**
          * @private
          */
-        hack var _pen:IPen ;
+        hack var _pen:RectanglePen ;
         
         /**
          * @private
