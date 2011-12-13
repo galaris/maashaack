@@ -51,7 +51,7 @@ package graphics.drawing
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
          * @param ...arguments An array of flash.geom.Point or graphics.geom.Vector2 objects or an argument serie of point objects. 
          */
-        public function FreePolygonPen( graphic:* , ...arguments:Array )
+        public function FreePolygonPen( graphic:* = null , ...arguments:Array )
         {
             super( graphic ) ;
             if ( arguments.length > 0 )
