@@ -75,7 +75,7 @@ package graphics.drawing
          * @param length The length of the dashs.
          * @param spacing The spacing between two dashs.
          */
-        public function DashLinePen(graphic:*, start:* = null, end:* = null , length:Number = 2 , spacing:Number = 2 )
+        public function DashLinePen( graphic:* = null , start:* = null, end:* = null , length:Number = 2 , spacing:Number = 2 )
         {
             super( graphic );
             setPen( start, end, length, spacing ) ;
