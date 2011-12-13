@@ -137,7 +137,7 @@ package graphics.drawing
          * @param angle (optional) The starting angle in degrees. (defaults to 0) 
          * @param align (optional) The Align value to align the shape.
          */
-        public function StarPen( graphic:* , x:Number=0, y:Number=0 , points:uint=5 , innerRadius:Number = 20 , outerRadius:Number = 40 , angle:Number = 20 , align:uint = 10  )
+        public function StarPen( graphic:* = null , x:Number=0, y:Number=0 , points:uint=5 , innerRadius:Number = 20 , outerRadius:Number = 40 , angle:Number = 20 , align:uint = 10  )
         {
             super( graphic ) ;
             setPen( x, y, points, innerRadius, outerRadius, angle, align ) ;
