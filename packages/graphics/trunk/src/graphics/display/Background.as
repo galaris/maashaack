@@ -312,6 +312,19 @@ package graphics.display
             update() ;
         }
         
+        
+        /**
+         * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
+         */
+        public function set cornerRadius( value:Number ):void
+        {
+            _bottomLeftRadius  = 
+            _bottomRightRadius = 
+            _topLeftRadius     = 
+            _topRightRadius    = value > 0 ? value : 0 ;
+            update() ;
+        }
+        
         /**
          * Determinates the length of a dash in the line. 
          * <p><b>Example :</b></p>
@@ -800,18 +813,6 @@ package graphics.display
          */
         public function resize( e:Event = null ):void
         {
-            update() ;
-        }
-        
-        /**
-         * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
-         */
-        public function setCornerRadius( value:Number ):void
-        {
-            _bottomLeftRadius  = 
-            _bottomRightRadius = 
-            _topLeftRadius     = 
-            _topRightRadius    = value > 0 ? value : 0 ;
             update() ;
         }
         
