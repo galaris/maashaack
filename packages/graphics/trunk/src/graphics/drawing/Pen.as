@@ -300,7 +300,7 @@ package graphics.drawing
         /**
          * @private
          */
-        private var _fillStyle:IFillStyle ;
+        protected var _fillStyle:IFillStyle ;
         
         /**
          * @private
@@ -310,6 +310,6 @@ package graphics.drawing
         /**
          * @private
          */
-        private var _lineStyle:ILineStyle ;
+        protected var _lineStyle:ILineStyle ;
     }
 }
