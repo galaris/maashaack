@@ -132,7 +132,7 @@ package graphics.drawing
          * @param angle (optional) The starting angle in degrees. (defaults to 0) 
          * @param align (optional) The Align value to align the shape.
          */
-        public function PolygonPen( graphic:* , x:Number = 0 , y:Number = 0 , sides:uint = 6 , radius:Number = 20 , angle:Number = 0 , align:uint = 1 )
+        public function PolygonPen( graphic:* = null , x:Number = 0 , y:Number = 0 , sides:uint = 6 , radius:Number = 20 , angle:Number = 0 , align:uint = 1 )
         {
             super( graphic ) ;
             setPen(x,y,sides,radius,angle,align) ;
