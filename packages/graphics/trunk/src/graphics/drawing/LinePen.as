@@ -68,7 +68,6 @@ package graphics.drawing
      */
    	public dynamic class LinePen extends Pen 
     {
-
         /**
          * Creates a new LinePen instance.
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
