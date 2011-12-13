@@ -87,7 +87,7 @@ package graphics.drawing
          * @param page2 The second page bitmap (left-top aligned).
          * @param ...rest All the optionals arguments to fill the setPen() method (see this method to defines all optional arguments)
          */
-        public function PageFlipPen( graphic:* , page1:BitmapData, page2:BitmapData , ...rest:Array ):void 
+        public function PageFlipPen( graphic:* = null, page1:BitmapData = null , page2:BitmapData = null , ...rest:Array ):void 
         {
             super( graphic ) ;
             _page1 = page1 ;
