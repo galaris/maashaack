@@ -195,7 +195,7 @@ package graphics.display
          */
         public function get align():uint
         {
-        	return _align ;
+            return _align ;
         }
         
         /**
@@ -590,7 +590,7 @@ package graphics.display
          */
         public function get minHeight():Number
         {
-        	return _minHeight ;
+            return _minHeight ;
         }
         
         /**
@@ -622,7 +622,7 @@ package graphics.display
             _minWidth = value > 0 ? value : 0 ;
             if ( _minWidth > _maxWidth )
             {
-            	_minWidth = _maxWidth ;
+                _minWidth = _maxWidth ;
             }
             update() ;
         }
@@ -904,58 +904,6 @@ package graphics.display
         //////////
         
         /**
-         * Refresh the real area Rectangle of the background with the current alignement.
-         */
-        protected function fixArea():void
-        {
-            // initialize
-            
-            _real.width  = w ;
-            _real.height = h ;
-            _real.x      = 0 ;
-            _real.y      = 0 ;
-            
-            // update
-            
-            if( align == Align.BOTTOM ) 
-            {
-                _real.x -= _real.width / 2 ;
-                _real.y -= _real.height ;
-            }
-            else if ( align == Align.BOTTOM_LEFT )
-            {
-                _real.y -= _real.height ;
-            }
-            else if ( align == Align.BOTTOM_RIGHT )
-            {
-                _real.x -= _real.width ;
-                _real.y -= _real.height ;
-            }
-            else if ( align == Align.CENTER )
-            {
-                _real.x -= _real.width / 2 ;
-                _real.y -= _real.height / 2 ;
-            }
-            else if ( align == Align.LEFT )
-            {
-                _real.y -= _real.height / 2 ;
-            }
-            else if ( align == Align.RIGHT )
-            {
-                _real.x -= _real.width ;
-                _real.y -= _real.height / 2 ;
-            }
-            else if ( align == Align.TOP )
-            {
-                _real.x -= _real.width / 2 ;
-            }
-            else if ( align == Align.TOP_RIGHT )
-            {
-                _real.x -= _real.width ;
-            }
-        }
-        
-        /**
          * Invoked in the constructor to initialize the RectanglePen reference in the background. 
          * Overrides this method to change the pen strategy.
          */
@@ -1032,6 +980,31 @@ package graphics.display
         protected function updateLayout( layout:Layout = null ):void
         {
             //
+        }
+        
+        //////////
+        
+        /**
+         * Invoked when the display is removed from the stage to enable the autoSize mode.
+         */
+        protected function addedToStageResize( e:Event = null ):void
+        {
+            if ( stage && _autoSize )
+            {
+                stage.addEventListener( Event.RESIZE , resize ) ;
+                resize() ;
+            }
+        }
+         
+        /**
+         * Invoked when the display is removed from the stage to disable the autoSize mode.
+         */
+        protected function removedFromStageResize( e:Event = null ):void
+        {
+            if ( stage && _autoSize )
+            {
+                stage.removeEventListener( Event.RESIZE , resize ) ;
+            }
         }
         
         //////////
@@ -1163,26 +1136,55 @@ package graphics.display
         hack var _w:Number = 0 ;
         
         /**
-         * Invoked when the display is removed from the stage to enable the autoSize mode.
+         * Refresh the real area Rectangle of the background with the current alignement.
          */
-        protected function addedToStageResize( e:Event = null ):void
+        hack function fixArea():void
         {
-            if ( stage && _autoSize )
+            // initialize
+            
+            _real.width  = w ;
+            _real.height = h ;
+            _real.x      = 0 ;
+            _real.y      = 0 ;
+            
+            // update
+            
+            if( align == Align.BOTTOM ) 
             {
-                stage.addEventListener( Event.RESIZE , resize ) ;
-                resize() ;
+                _real.x -= _real.width / 2 ;
+                _real.y -= _real.height ;
+            }
+            else if ( align == Align.BOTTOM_LEFT )
+            {
+                _real.y -= _real.height ;
+            }
+            else if ( align == Align.BOTTOM_RIGHT )
+            {
+                _real.x -= _real.width ;
+                _real.y -= _real.height ;
+            }
+            else if ( align == Align.CENTER )
+            {
+                _real.x -= _real.width / 2 ;
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.LEFT )
+            {
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.RIGHT )
+            {
+                _real.x -= _real.width ;
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.TOP )
+            {
+                _real.x -= _real.width / 2 ;
+            }
+            else if ( align == Align.TOP_RIGHT )
+            {
+                _real.x -= _real.width ;
             }
         }
-         
-        /**
-         * Invoked when the display is removed from the stage to disable the autoSize mode.
-         */
-        protected function removedFromStageResize( e:Event = null ):void
-        {
-            if ( stage && _autoSize )
-            {
-                stage.removeEventListener( Event.RESIZE , resize ) ;
-            }
-        } 
     }
 }
