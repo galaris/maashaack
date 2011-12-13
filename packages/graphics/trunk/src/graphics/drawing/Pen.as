@@ -87,23 +87,23 @@ package graphics.drawing
         /**
          * @private
          */
-        public function set graphics( graphics:* ):void
+        public function set graphics( value:* ):void
         {
             if ( _graphics != null )
             {
                 _graphics.clear() ;
             }
-            if ( graphics is Graphics )
+            if ( value is Graphics )
             {
-                _graphics = graphics ;
+                _graphics = value ;
             }
-            else if ( graphics is Shape )
+            else if ( value is Shape )
             {
-                _graphics = ( graphics as Shape ).graphics ;
+                _graphics = ( value as Shape ).graphics ;
             }
-            else if ( graphics is Sprite )
+            else if ( value is Sprite )
             {
-                _graphics = ( graphics as Sprite ).graphics ;
+                _graphics = ( value as Sprite ).graphics ;
             }
             else
             {
