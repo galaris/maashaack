@@ -312,7 +312,6 @@ package graphics.display
             update() ;
         }
         
-        
         /**
          * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
          */
