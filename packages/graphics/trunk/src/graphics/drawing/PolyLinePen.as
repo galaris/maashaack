@@ -74,7 +74,7 @@ package graphics.drawing
          * @param graphic The Graphics reference to control with this helper. You can passed-in a Shape or Sprite/MovieClip reference in argument.
          * @param data The array representation of the model of this polyline
          */
-        public function PolyLinePen( graphic:* , data:Array = null )
+        public function PolyLinePen( graphic:* = null , data:Array = null )
         {
             super( graphic );
             this.data = data ;
