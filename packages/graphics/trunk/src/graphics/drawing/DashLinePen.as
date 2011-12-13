@@ -114,7 +114,7 @@ package graphics.drawing
         {
             return _spacing ;
         }
-    
+        
         /**
          * @private
          */
@@ -128,7 +128,6 @@ package graphics.drawing
          */
         public override function drawShape():void
         {
-            
             if ( start.equals( end ) )
             {
                 return ;
@@ -157,7 +156,7 @@ package graphics.drawing
             
             for (var i:Number = 0; i < nbSegs; i++) 
             {
-                graphics.moveTo( __x, __y ) ;
+                _graphics.moveTo( __x, __y ) ;
                 _lineRadiansTo ( _length ) ;
                 __x += dx ;
                 __y += dy ;
@@ -176,7 +175,6 @@ package graphics.drawing
             }
             
             _graphics.moveTo(end.x, end.y);
-            
         }
         
         /**
@@ -195,28 +193,28 @@ package graphics.drawing
             {
                 spacing = args[3] ;
             }
-        }    
+        }
         
         /**
          * @private
          */
         private var _length:Number = 2 ;
-
+        
         /**
          * @private
          */
         private var _radians:Number ; 
-
+        
         /**
          * @private
          */
         private var _spacing:Number = 2 ;
-
+        
         /**
          * @private
          */
         private var __x:Number ;
-
+        
         /**
          * @private
          */
