@@ -50,7 +50,7 @@ package graphics.drawing
          * @param radius (optional) The radius of the circle (in pixels). 
          * @param align (optional) The Align value to align the shape.
          */
-        public function CirclePen( graphic:* , ...arguments:Array )
+        public function CirclePen( graphic:* = null , ...arguments:Array )
         {
             super( graphic ) ;
             if ( arguments.length > 1 ) 
