@@ -74,7 +74,7 @@ package graphics.drawing
          * @param start The default start Vector object.
          * @param end The default end Vector object.
          */
-        public function LinePen( graphic:* , start:* = null , end:* = null )
+        public function LinePen( graphic:* = null , start:* = null , end:* = null )
         {
             super( graphic );
             setPen( end , start ) ;
