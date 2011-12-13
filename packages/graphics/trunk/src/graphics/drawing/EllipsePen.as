@@ -51,7 +51,7 @@ package graphics.drawing
          * @param height (optional) The height of the ellipse (in pixels). 
          * @param align  (optional) The Align value to align the shape.
          */
-        public function EllipsePen( graphic:* , ...arguments:Array )
+        public function EllipsePen( graphic:* = null , ...arguments:Array )
         {
             super( graphic );
             if ( arguments.length > 1 ) 
