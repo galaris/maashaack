@@ -79,7 +79,7 @@ package graphics.drawing
          * @param height (optional) The height of the pen. (default 0)
          * @param align (optional) The align value of the pen. (default Align.TOP_LEFT)
          */
-        public function RectanglePen( graphic:* , x:Number = 0 , y:Number = 0 , width:Number = 0 , height:Number = 0 , align:uint = 10 )
+        public function RectanglePen( graphic:* = null , x:Number = 0 , y:Number = 0 , width:Number = 0 , height:Number = 0 , align:uint = 10 )
         {
             super( graphic );
             setPen( x, y, width, height , align ) ;
