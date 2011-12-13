@@ -38,6 +38,7 @@ package graphics.display
     import core.maths.clamp;
     import core.maths.degreesToRadians;
 
+    import graphics.Align;
     import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
@@ -80,18 +81,15 @@ package graphics.display
      * 
      * area.lock() ; // lock the update method
      * 
-     * // area.topLeftRadius = 15 ;
-     * // area.bottomLeftRadius = 15 ;
-     * 
      * area.fill = new FillStyle( 0xD97BD0  ) ;
-     * // area.line = new LineStyle( 2, 0xFFFFFF ) ;
+     * area.line = new LineStyle( 2, 0xFFFFFF ) ;
+     * 
      * area.w    = 400 ;
      * area.h    = 300 ;
      * 
      * area.unlock() ; // unlock the update method
-     * area.update() ; // force update
      * 
-     * // area.setSize( 740, 400 ) ;
+     * area.update() ; // force update
      * 
      * addChild( area ) ;
      * 
@@ -257,10 +255,15 @@ package graphics.display
          * 
          * var background:Background = new Background() ;
          * 
+         * background.x = 20 ;
+         * background.y = 20 ;
+         * 
+         * background.setSize(500,400) ;
+         * 
          * background.borderMode = Background.NORMAL ;
          * 
          * background.borderMode = Background.DASHED ;
-         * background.dashLength  = 6 ;
+         * background.dashLength  = 8 ;
          * background.dashSpacing = 6 ;
          * 
          * background.borderMode = Background.ROUNDED ;
@@ -269,6 +272,7 @@ package graphics.display
          * background.topLeftRadius     = 12 ;
          * background.topLeftRadius     = 12 ;
          * background.topRightRadius    = 12 ;
+         * background.cornerRadius      = 8  ;
          * </pre>
          */
         public function set borderMode( value:String ):void
@@ -423,7 +427,7 @@ package graphics.display
         public function set fill( style:IFillStyle ):void
         {
             _fillStyle = style ;
-            if( _pen != null )
+            if( _pen )
             {
                 _pen.fill = _fillStyle ;
             }
@@ -431,7 +435,7 @@ package graphics.display
         }
         
         /**
-         * Indicates if the canvas is in the fullscreen mode(use Stage.stageWidth and Stage.stageHeight to resize).
+         * Indicates if the canvas is in the fullscreen mode (use Stage.stageWidth and Stage.stageHeight to resize).
          */
         public function get fullscreen():Boolean
         {
@@ -532,7 +536,7 @@ package graphics.display
         public function set line( style:ILineStyle ):void
         {
             _lineStyle = style ;
-            if( _pen != null )
+            if( _pen )
             {
                 _pen.line = style ;
             }
@@ -624,6 +628,22 @@ package graphics.display
         }
         
         /**
+         * The internal RectanglePen reference of this background display to draw inside.
+         */
+        public function get pen():RectanglePen
+        {
+            return _pen ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set pen( pen:RectanglePen ):void
+        {
+            initializePen( pen ) ;
+        }
+        
+        /**
          * Returns the real scope reference of this component.
          * @return the real scope reference of this component.
          */
@@ -694,19 +714,18 @@ package graphics.display
          * Draw the display.
          * @param arguments The optional arguments to draw the background. With the signature : ( w:Number , h:Number, offsetX:Number, offsetY:Number )
          */
-        public function draw( ...arguments:Array ):void
+        public function draw( ...args:Array ):void
         {
-            if( _real )
-            {
-                _real.width  = isNaN(arguments[0]) ? this.w : arguments[0] ;
-                _real.height = isNaN(arguments[1]) ? this.h : arguments[1] ;
-                _real.x      = isNaN(arguments[2]) ?      0 : arguments[2] ;
-                _real.y      = isNaN(arguments[3]) ?      0 : arguments[3] ;
-            }
+            // align
+            
+            fixArea() ;
+            
+            // gradient
             
             if ( _fillStyle is FillGradientStyle )
             {
                 var matrix:Matrix ;
+                
                 if( gradientMatrix )
                 {
                     matrix = gradientMatrix ;
@@ -727,14 +746,27 @@ package graphics.display
                         matrix.translate( gradientTranslation.x , gradientTranslation.y ) ;
                     }
                 }
+                
                 ( _fillStyle as FillGradientStyle ).matrix = matrix ;
             }
             
+            // draw
+            
             if( _pen )
             {
-                drawing() ;
-                _real.x = _pen._x ;
-                _real.y = _pen._y ;
+                if( _pen is RoundedComplexRectanglePen )
+                {
+                    _pen._topLeftRadius     = _topLeftRadius ;
+                    _pen._topRightRadius    = _topRightRadius ;
+                    _pen._bottomLeftRadius  = _bottomLeftRadius ;
+                    _pen._bottomRightRadius = _topLeftRadius ;
+                }
+                else if( _pen is DashRectanglePen )
+                {
+                    _pen.length  = _dashLength  ;
+                    _pen.spacing = _dashSpacing ;
+                }
+                _pen.draw( _real.x , _real.y , _real.width , _real.height ) ;
             }
         }
         
@@ -872,21 +904,54 @@ package graphics.display
         //////////
         
         /**
-         * Invoked to draw with the internal pen.
+         * Refresh the real area Rectangle of the background with the current alignement.
          */
-        protected function drawing():void
+        protected function fixArea():void
         {
-            if( _pen is RoundedComplexRectanglePen )
+            // initialize
+            
+            _real.width  = w ;
+            _real.height = h ;
+            _real.x      = 0 ;
+            _real.y      = 0 ;
+            
+            // update
+            
+            if( align == Align.BOTTOM ) 
             {
-                _pen.draw( _real.x , _real.y , _real.width , _real.height , _topLeftRadius , _topRightRadius , _bottomLeftRadius , _bottomRightRadius , _align ) ;
+                _real.x -= _real.width / 2 ;
+                _real.y -= _real.height ;
             }
-            else if( _pen is DashRectanglePen )
+            else if ( align == Align.BOTTOM_LEFT )
             {
-                _pen.draw( _real.x , _real.y , _real.width , _real.height , _align , _dashLength , _dashSpacing ) ;
+                _real.y -= _real.height ;
             }
-            else
+            else if ( align == Align.BOTTOM_RIGHT )
             {
-                _pen.draw( _real.x , _real.y , _real.width , _real.height , _align ) ;
+                _real.x -= _real.width ;
+                _real.y -= _real.height ;
+            }
+            else if ( align == Align.CENTER )
+            {
+                _real.x -= _real.width / 2 ;
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.LEFT )
+            {
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.RIGHT )
+            {
+                _real.x -= _real.width ;
+                _real.y -= _real.height / 2 ;
+            }
+            else if ( align == Align.TOP )
+            {
+                _real.x -= _real.width / 2 ;
+            }
+            else if ( align == Align.TOP_RIGHT )
+            {
+                _real.x -= _real.width ;
             }
         }
         
@@ -894,22 +959,32 @@ package graphics.display
          * Invoked in the constructor to initialize the RectanglePen reference in the background. 
          * Overrides this method to change the pen strategy.
          */
-        protected function initializePen():void
+        protected function initializePen( pen:RectanglePen = null ):RectanglePen
         {
-            if( _borderMode == ROUNDED )
+            if( pen )
             {
-                _pen = new RoundedComplexRectanglePen( this ) ;
+                _pen = pen ;
             }
-            else if( _borderMode == DASHED )
+            else
             {
-                _pen = new DashRectanglePen( this ) ;
+                if( _borderMode == ROUNDED )
+                {
+                    _pen = new RoundedComplexRectanglePen( this ) ;
+                }
+                else if( _borderMode == DASHED )
+                {
+                    _pen = new DashRectanglePen( this ) ;
+                }
+                else 
+                {
+                    _pen = new RectanglePen( this ) ;
+                }
             }
-            else 
-            {
-                _pen = new RectanglePen( this ) ;
-            }
+            
             _pen.fill = _fillStyle ;
             _pen.line = _lineStyle ;
+            
+            return _pen ;
         }
         
         //////////
@@ -941,7 +1016,7 @@ package graphics.display
             // overrides
         }
         
-        //////////
+        ////////// layout receivers
         
         /**
          * Receives a message when the layout emit when is rendered.
