@@ -81,7 +81,7 @@ package graphics.drawing
          * @param ellipseHeight (optional) Optional; if no value is specified, the default value matches that provided for the ellipseWidth parameter. 
          * @param align (optional) The align value of the pen. (default Align.TOP_LEFT)
          */
-        public function RoundedRectanglePen(graphic:*, x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, ellipseWidth:Number=0 , ellipseHeight:Number=NaN , align:uint = 10)
+        public function RoundedRectanglePen( graphic:* = null , x:Number = 0, y:Number = 0, width:Number = 0, height:Number = 0, ellipseWidth:Number=0 , ellipseHeight:Number=NaN , align:uint = 10)
         {
             super( graphic );
             setPen(  x, y, width, height, ellipseWidth, ellipseHeight, align ) ; 
