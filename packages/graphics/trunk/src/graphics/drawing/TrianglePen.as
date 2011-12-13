@@ -180,7 +180,7 @@ package graphics.drawing
          * @param x The x barycentre position of the triangle shape.
          * @param y The y barycentre position of the triangle shape.
          */
-        public function TrianglePen( graphic:* , ab:Number = 0 , ac:Number = 0, angle:Number = 360, rotation:Number = 0 , x:Number = 0 , y:Number = 0  )
+        public function TrianglePen( graphic:* = null , ab:Number = 0 , ac:Number = 0, angle:Number = 360, rotation:Number = 0 , x:Number = 0 , y:Number = 0  )
         {
             super( graphic );
             setPen( ab, ac, angle, rotation, x, y ) ;
