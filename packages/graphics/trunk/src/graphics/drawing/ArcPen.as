@@ -59,7 +59,7 @@ package graphics.drawing
          * @param type (optional) The ArcType of the pen. (default ArcType.PIE)
          * @param align (optional) The align value of the pen. (default Align.TOP_LEFT)
          */
-        public function ArcPen( graphic:* , angle:Number = 360, radius:Number = 100 , x:Number = 0 , y:Number = 0 , startAngle:Number = 0, yRadius:Number = NaN , type:String = "pie", align:uint = 10  )
+        public function ArcPen( graphic:* = null , angle:Number = 360, radius:Number = 100 , x:Number = 0 , y:Number = 0 , startAngle:Number = 0, yRadius:Number = NaN , type:String = "pie", align:uint = 10  )
         {
             super( graphic ) ;
             setPen( angle , radius , x , y , startAngle , yRadius , type , align ) ;
