@@ -133,7 +133,7 @@ package graphics.drawing
          * @param holeRadius (optional) size of hole. Default = innerRadius/3.
          * @param align (optional) The Align value to align the shape.
          */
-        public function GearPen( graphic:* , x:Number=0, y:Number=0 , points:uint=5 , innerRadius:Number = 30 , outerRadius:Number = 40 , angle:Number = 0, holeSides:uint = 3 , holeRadius:Number=NaN, align:uint = 10  )
+        public function GearPen( graphic:* = null , x:Number=0, y:Number=0 , points:uint=5 , innerRadius:Number = 30 , outerRadius:Number = 40 , angle:Number = 0, holeSides:uint = 3 , holeRadius:Number=NaN, align:uint = 10  )
         {
             super( graphic ) ;
             setPen( x , y , points , innerRadius , outerRadius , angle , holeSides , holeRadius , align ) ;
