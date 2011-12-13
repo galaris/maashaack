@@ -118,7 +118,7 @@ package graphics.drawing
          * @param hPrecision The horizontal precision value (default 2).
          * @param vPrecision The vertical precision value (default 2).
          */
-        public function DistortPen( graphic:* , width:Number = 0, height:Number = 0, hPrecision:uint = 2, vPrecision:uint = 2 , bitmapData:BitmapData = null ):void 
+        public function DistortPen( graphic:* = null , width:Number = 0, height:Number = 0, hPrecision:uint = 2, vPrecision:uint = 2 , bitmapData:BitmapData = null ):void 
         {
             super( graphic ) ;
             _bitmapData = bitmapData ;
