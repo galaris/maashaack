@@ -74,7 +74,7 @@ package graphics.display
         use namespace hack ;
         
         /**
-         * Creates a new Background instance.
+         * Creates a new RoundedBackground instance.
          * @param init An object that contains properties with which to populate the newly instance. If init is not an object, it is ignored.
          */
         public function RoundedBackground( init:Object = null )
