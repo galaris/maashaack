@@ -204,7 +204,7 @@ package graphics.drawing
         public function set bottomRightRadius( value:Number ):void
         {
             _bottomRightRadius = isNaN(value) ? 0 : value ;
-        }      
+        }
         
         /**
          * The global corner radius corner, in pixels. 
