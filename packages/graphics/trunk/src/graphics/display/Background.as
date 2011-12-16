@@ -46,9 +46,7 @@ package graphics.display
     import graphics.IFillStyle;
     import graphics.ILineStyle;
     import graphics.Measurable;
-    import graphics.drawing.DashRectanglePen;
     import graphics.drawing.RectanglePen;
-    import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.layouts.Layout;
 
     import system.hack;
@@ -148,8 +146,9 @@ package graphics.display
         /**
          * Creates a new Background instance.
          * @param init An object that contains properties with which to populate the newly instance. If init is not an object, it is ignored.
+         * @param pen An optional RectanglePen reference to use to draw the background area.
          */
-        public function Background( init:Object = null )
+        public function Background( init:Object = null , pen:RectanglePen = null )
         {
             ///////////
             
@@ -165,7 +164,7 @@ package graphics.display
             
             ///////////
             
-            initializePen() ;
+            initializePen( pen ) ;
             
             ///////////
             
@@ -237,141 +236,6 @@ package graphics.display
                     stage.removeEventListener( Event.RESIZE , resize ) ;
                 }
             }
-        }
-        
-        /**
-         * The border mode of the background : rounded, dashed, normal
-         */
-        public function get borderMode():String
-        {
-            return _borderMode ;
-        }
-        
-        /**
-         * The border mode of the background : "rounded", "dashed", "normal" (default).
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import graphics.display.Background ;
-         * 
-         * var background:Background = new Background() ;
-         * 
-         * background.x = 20 ;
-         * background.y = 20 ;
-         * 
-         * background.setSize(500,400) ;
-         * 
-         * background.borderMode = Background.NORMAL ;
-         * 
-         * background.borderMode = Background.DASHED ;
-         * background.dashLength  = 8 ;
-         * background.dashSpacing = 6 ;
-         * 
-         * background.borderMode = Background.ROUNDED ;
-         * background.bottomLeftRadius  = 12 ;
-         * background.bottomRightRadius = 12 ;
-         * background.topLeftRadius     = 12 ;
-         * background.topLeftRadius     = 12 ;
-         * background.topRightRadius    = 12 ;
-         * background.cornerRadius      = 8  ;
-         * </pre>
-         */
-        public function set borderMode( value:String ):void
-        {
-            _borderMode = ( _borderModes.indexOf( value ) > -1 ) ? value : ROUNDED ;
-            initializePen() ;
-            update() ;
-        }
-        
-        /**
-         * The radius of the bottom-left corner, in pixels.
-         */
-        public function get bottomLeftRadius():Number
-        {
-            return _bottomLeftRadius ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set bottomLeftRadius( value:Number ):void
-        {
-            _bottomLeftRadius = value > 0 ? value : 0 ;
-            update() ;
-        }
-        
-        /**
-         * The radius of the bottom-right corner, in pixels.
-         */
-        public function get bottomRightRadius():Number
-        {
-            return _bottomRightRadius ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set bottomRightRadius( value:Number ):void
-        {
-            _bottomRightRadius = value > 0 ? value : 0 ;
-            update() ;
-        }
-        
-        /**
-         * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
-         */
-        public function set cornerRadius( value:Number ):void
-        {
-            _bottomLeftRadius  = 
-            _bottomRightRadius = 
-            _topLeftRadius     = 
-            _topRightRadius    = value > 0 ? value : 0 ;
-            update() ;
-        }
-        
-        /**
-         * Determinates the length of a dash in the line. 
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * background.borderMode  = Background.DASHED ;
-         * background.dashLength  = 6 ;
-         * background.dashSpacing = 6 ;   
-         * </pre>
-         */
-        public function get dashLength():Number 
-        {
-            return _dashLength ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set dashLength( value:Number):void 
-        {
-            _dashLength = value > 0 ? value : 0 ;
-            update() ;
-        }
-        
-        /**
-         * Determinates the spacing value between two dashs in this line. 
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * background.borderMode  = Background.DASHED ;
-         * background.dashLength  = 6 ;
-         * background.dashSpacing = 6 ;   
-         * </pre>
-         */
-        public function get dashSpacing():Number 
-        {
-            return _dashSpacing ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set dashSpacing( value:Number ):void 
-        {
-            _dashSpacing = value > 0 ? value : 0 ;
-            update() ;
         }
         
         /**
@@ -629,6 +493,50 @@ package graphics.display
         
         /**
          * The internal RectanglePen reference of this background display to draw inside.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.Border ;
+         * import graphics.FillStyle ;
+         * import graphics.LineStyle ;
+         * 
+         * import graphics.display.Background ;
+         * import graphics.drawing.DashRectanglePen ;
+         * import graphics.geom.EdgeMetrics ;
+         * 
+         * import flash.display.StageAlign ;
+         * import flash.display.StageScaleMode ;
+         * 
+         * stage.align     = StageAlign.TOP_LEFT ;
+         * stage.scaleMode = StageScaleMode.NO_SCALE ;
+         * 
+         * var pen:DashRectanglePen = new DashRectanglePen() ;
+         * 
+         * pen.length  = 8 ;
+         * pen.spacing = 6 ;
+         * 
+         * pen.overage = new EdgeMetrics( 8 , 8 , 8 , 8 ) ;
+         * pen.border  = new Border( Border.LEFT | Border.TOP | Border.RIGHT ) ;
+         * 
+         * var area:Background = new Background() ;
+         * 
+         * area.lock() ; // lock the update method
+         * 
+         * area.fill = new FillStyle( 0xD97BD0  ) ;
+         * area.line = new LineStyle( 2, 0xFFFFFF ) ;
+         * 
+         * area.x = 25 ;
+         * area.y = 25 ;
+         * area.w = 400 ;
+         * area.h = 300 ;
+         * 
+         * area.pen = pen ;
+         * 
+         * area.unlock() ; // unlock the update method
+         * 
+         * area.update() ; // force update
+         * 
+         * addChild( area ) ;
+         * </pre>
          */
         public function get pen():RectanglePen
         {
@@ -650,40 +558,6 @@ package graphics.display
         public function get scope():DisplayObjectContainer
         {
             return _scope ;
-        }
-        
-        /**
-         * The radius of the upper-left corner, in pixels.
-         */
-        public function get topLeftRadius():Number
-        {
-            return _topLeftRadius ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set topLeftRadius( value:Number ):void
-        {
-            _topLeftRadius = value > 0 ? value : 0 ;
-            update() ;
-        }
-        
-        /**
-         * The radius of the upper-right corner, in pixels. 
-         */
-        public function get topRightRadius():Number
-        {
-            return _topRightRadius ;
-        }
-        
-        /**
-         * @private
-         */
-        public function set topRightRadius( value:Number ):void
-        {
-            _topRightRadius = value > 0 ? value : 0 ;
-            update() ;
         }
         
         /**
@@ -754,18 +628,6 @@ package graphics.display
             
             if( _pen )
             {
-                if( _pen is RoundedComplexRectanglePen )
-                {
-                    _pen._topLeftRadius     = _topLeftRadius ;
-                    _pen._topRightRadius    = _topRightRadius ;
-                    _pen._bottomLeftRadius  = _bottomLeftRadius ;
-                    _pen._bottomRightRadius = _topLeftRadius ;
-                }
-                else if( _pen is DashRectanglePen )
-                {
-                    _pen.length  = _dashLength  ;
-                    _pen.spacing = _dashSpacing ;
-                }
                 _pen.draw( _real.x , _real.y , _real.width , _real.height ) ;
             }
         }
@@ -909,29 +771,10 @@ package graphics.display
          */
         protected function initializePen( pen:RectanglePen = null ):RectanglePen
         {
-            if( pen )
-            {
-                _pen = pen ;
-            }
-            else
-            {
-                if( _borderMode == ROUNDED )
-                {
-                    _pen = new RoundedComplexRectanglePen( this ) ;
-                }
-                else if( _borderMode == DASHED )
-                {
-                    _pen = new DashRectanglePen( this ) ;
-                }
-                else 
-                {
-                    _pen = new RectanglePen( this ) ;
-                }
-            }
-            
+            _pen = pen || new RectanglePen() ;
+            _pen.graphics = this ;
             _pen.fill = _fillStyle ;
             _pen.line = _lineStyle ;
-            
             return _pen ;
         }
         
@@ -1022,36 +865,6 @@ package graphics.display
         /**
          * @private
          */
-        hack var _borderMode:String = NORMAL ;
-        
-        /**
-         * @private
-         */
-        hack const _borderModes:Vector.<String> = Vector.<String>([ DASHED , NORMAL , ROUNDED ]) ;
-        
-        /**
-         * @private
-         */
-        hack var _bottomLeftRadius:Number = 0 ;
-        
-        /**
-         * @private
-         */
-        hack var _bottomRightRadius:Number = 0 ;
-        
-        /**
-         * @private
-         */
-        hack var _dashLength:Number = 4 ;
-        
-        /**
-         * @private
-         */
-        hack var _dashSpacing:Number = 4 ;
-        
-        /**
-         * @private
-         */
         hack var _direction:String ;
         
         /**
@@ -1119,16 +932,6 @@ package graphics.display
          * @private
          */
         hack var _scope:DisplayObjectContainer ;
-        
-        /**
-         * @private
-         */
-        hack var _topLeftRadius:Number = 0 ;
-        
-        /**
-         * @private
-         */
-        hack var _topRightRadius:Number = 0 ;
         
         /**
          * @private
