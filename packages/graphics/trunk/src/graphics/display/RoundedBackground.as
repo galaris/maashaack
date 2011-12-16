@@ -123,7 +123,7 @@ package graphics.display
         }
         
         /**
-         * The corner radius of the background.
+         * The corner radius of all corners of the background, in pixels.
          */
         public function get cornerRadius():Number
         {
@@ -131,7 +131,7 @@ package graphics.display
         }
         
         /**
-         * Defines all corner radius of the background (upper-left, upper-right, bottom-left and bottom-right). 
+         * @private 
          */
         public function set cornerRadius( value:Number ):void
         {
