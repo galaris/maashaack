@@ -38,7 +38,9 @@ package graphics.display
     import flash.display.BitmapData;
     import flash.display.DisplayObject;
     import flash.display.IBitmapDrawable;
+    import flash.geom.ColorTransform;
     import flash.geom.Matrix;
+    import flash.geom.Rectangle;
     
     /**
      * Creates a mirror of a specific IBitmapDrawable object. This mirror effect can be horizontal, vertical or both.
@@ -52,8 +54,12 @@ package graphics.display
          * @param vertical  Indicates if the mirror effect transform the vertical view of the bitmap.
          * @param transparent Specifies whether the bitmap image supports per-pixel transparency. The default value is true (transparent). To create a fully transparent bitmap, set the value of the transparent parameter to true and the value of the fillColor parameter to 0x00000000 (or to 0). Setting the transparent property to false can result in minor improvements in rendering performance.
          * @param fillColor A 32-bit ARGB color value that you use to fill the bitmap image area. The default value is 0xFFFFFFFF (solid white).
+         * @param colorTransform (default = null) — A ColorTransform object that you use to adjust the color values of the bitmap. If no object is supplied, the bitmap image's colors are not transformed. If you must pass this parameter but you do not want to transform the image, set this parameter to a ColorTransform object created with the default new ColorTransform() constructor.
+         * @param blendMode (default = null) — A string value, from the flash.display.BlendMode class, specifying the blend mode to be applied to the resulting bitmap.
+         * @param clipRect (default = null) — A Rectangle object that defines the area of the source object to draw. If you do not supply this value, no clipping occurs and the entire source object is drawn.
+         * @param smoothing (default = false) — A Boolean value that determines whether a BitmapData object is smoothed when scaled or rotated, due to a scaling or rotation in the matrix parameter. The smoothing parameter only applies if the source parameter is a BitmapData object. With smoothing set to false, the rotated or scaled BitmapData image can appear pixelated or jagged. For example, the following two images use the same BitmapData object for the source parameter, but the smoothing parameter is set to true on the left and false on the right:
          */
-        public function MirrorBitmapData( bitmap:IBitmapDrawable , horizontal:Boolean = true , vertical:Boolean = true , transparent:Boolean = true, fillColor:uint = 4.294967295E9 )
+        public function MirrorBitmapData( bitmap:IBitmapDrawable , horizontal:Boolean = true , vertical:Boolean = true , transparent:Boolean = true, fillColor:uint = 4.294967295E9 , colorTransform:ColorTransform = null, blendMode:String = null, clipRect:Rectangle = null, smoothing:Boolean = false )
         {
             const w:Number =  bitmap["width"]  ;
             const h:Number =  bitmap["height"] ;
@@ -73,8 +79,10 @@ package graphics.display
                     0, 
                     vertical   ? -scaleY : scaleY , 
                     horizontal ? w : 0 , 
-                    vertical   ? h : 0  
-                ) 
+                    vertical   ? h : 0 
+                )
+                ,
+                colorTransform, blendMode , clipRect , smoothing
             ) ;
         }
     }
