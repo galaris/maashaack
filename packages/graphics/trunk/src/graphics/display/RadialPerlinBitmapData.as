@@ -44,18 +44,6 @@ package graphics.display
      */
     public class RadialPerlinBitmapData extends BitmapData
     {
-        private var _perlin:BitmapData ; // normal perlin bitmap
-        private var _radius:uint; // radius of the bitmap
-        private var _perlinWidth:uint; // width of the perlin bitmap
-        private var _numOctaves:uint; // number of octaves in the perlin noise
-        private var _randomSeed:uint; // seed for the perlin noise
-        private var _fractalNoise:Boolean; // fractal noise state for the perlin noise
-        private var _channelOptions:uint; // channel options for the perlin noise
-        private var _grayScale:Boolean; // grayscale setting for the perlin noise
-        private var _fadeEdge:Boolean; // to fade the image towards the edge or not
-        
-        private static const PI_2:Number = Math.PI * 2 ; // constant for speed
-        
         /**
          * The constructor creates a Radialperlin effect.
          * 
@@ -147,9 +135,17 @@ package graphics.display
             }
         }
         
-        /**
-         * @private
-         */
+        private var _perlin:BitmapData ; // normal perlin bitmap
+        private var _radius:uint; // radius of the bitmap
         private var _offset:Point = new Point();
+        private var _perlinWidth:uint; // width of the perlin bitmap
+        private var _numOctaves:uint; // number of octaves in the perlin noise
+        private var _randomSeed:uint; // seed for the perlin noise
+        private var _fractalNoise:Boolean; // fractal noise state for the perlin noise
+        private var _channelOptions:uint; // channel options for the perlin noise
+        private var _grayScale:Boolean; // grayscale setting for the perlin noise
+        private var _fadeEdge:Boolean; // to fade the image towards the edge or not
+        
+        private static const PI_2:Number = Math.PI * 2 ; // constant for speed
     }
 }
