@@ -71,16 +71,24 @@ package system.models.maps
          */
         public override function set current( o:* ):void
         {
-            var m:ArrayMap = getMap() as ArrayMap ;
-            var i:int      = m.indexOfValue( o ) ;
-            if ( i > -1 )
+            if( o == null )
             {
-                _index = i ;
-                super.current = o ;
+                _index = -1 ;
+                super.current = null ;
             }
             else
             {
-                throw new ArgumentError( this + " current=" + o + " failed, the entry object must be register in the model to be selected") ;
+                var m:ArrayMap = getMap() as ArrayMap ;
+                var i:int      = m.indexOfValue( o ) ;
+                if ( i > -1 )
+                {
+                    _index = i ;
+                    super.current = o ;
+                }
+                else
+                {
+                    throw new ArgumentError( this + " current=" + o + " failed, the entry object must be register in the model to be selected") ;
+                }
             }
         }
         
