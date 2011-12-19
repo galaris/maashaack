@@ -94,15 +94,23 @@ package system.models
             {
                 return ;
             }
-            if ( _current != null )
-            {
-                notifyBeforeChange( _current ) ;
-                _current = null ;
-            }
-            if ( o != null )
+            
+            if( o )
             {
                 validate( o ) ;
-                _current = o ;
+            }
+            
+            const old:* = _current ;
+            
+            _current = o ;
+            
+            if ( old != null )
+            {
+                notifyBeforeChange( old ) ;
+            }
+            
+            if ( _current != null )
+            {
                 notifyChange( _current );
             }
         }
