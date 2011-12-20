@@ -40,6 +40,33 @@ package system.models
     
     /**
      * This model can keep an object in memory and emit messages if this object is changing.
+     * @example Example
+     * <listing version="3.0">
+     * <code class="prettyprint">
+     * import system.models.ChangeModel ;
+     * 
+     * var beforeChanged:Function = function( value:* , model:ChangeModel ):void
+     * {
+     *     trace( "before old:" + value + " current:" + model.current ) ;
+     * }
+     * 
+     * var changed:Function = function( value:* , model:ChangeModel ):void
+     * {
+     *     trace( "change current:" + value ) ;
+     * }
+     * 
+     * var model:ChangeModel = new ChangeModel() ;
+     * 
+     * model.beforeChanged.connect( beforeChanged ) ;
+     * model.changed.connect( changed ) ;
+     * 
+     * model.current = "hello" ;
+     * model.current = "world" ;
+     * model.current = null ;
+     * }
+     * </code>
+     * </listing>
+     * </p>
      */
     public class ChangeModel extends KernelModel 
     {
