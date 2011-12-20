@@ -16,7 +16,7 @@
         <copy file="${path}/bin-release/system.logic.swc" todir="libs/swc/packages" overwrite="true" />
         
         <copy file="${path}/bin-release/system.logic.swc" todir="packages/graphics/lib-swc" overwrite="true" />
-        <copy file="${path}/bin-release/system.logic.abc" todir="packages/graphics/lib-abc" overwrite="true" />
+        <!--<copy file="${path}/bin-release/system.logic.abc" todir="packages/graphics/lib-abc" overwrite="true" />-->
         
     </target>
     
