@@ -20,6 +20,9 @@
         
         <copy file="${path}/bin-release/system.rules.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.rules.abc" todir="packages/system_logic/lib-abc" overwrite="true" />
+            
+        <copy file="${path}/bin-release/system.rules.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.rules.abc" todir="packages/graphics/lib-abc" overwrite="true" />
         
     </target>
     
