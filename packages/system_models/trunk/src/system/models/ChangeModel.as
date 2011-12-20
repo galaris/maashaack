@@ -66,7 +66,6 @@ package system.models
      * }
      * </code>
      * </listing>
-     * </p>
      */
     public class ChangeModel extends KernelModel 
     {
