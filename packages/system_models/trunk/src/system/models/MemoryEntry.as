@@ -34,7 +34,6 @@
 */
 package system.models 
 {
-    
     /**
      * Internal class in the <code class="prettyprint">MemoryModel</code> class to defined all entries in the list and the links betweens alls.
      */
