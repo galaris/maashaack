@@ -24,7 +24,7 @@
         >
             <arg line="-AS3 -strict -optimize"/>
             <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
-            <arg line="-import ${builtin} -import ${toplevel} -import ${core} -import ${system.data} -import ${system.ioc} -import ${system.logging} -import ${system.process} -import ${system.signals} src/${project.as}"/>
+            <arg line="-import ${builtin} -import ${toplevel} -import ${core} -import ${system.data} -import ${system.ioc} -import ${system.logging} -import ${system.process} -import ${system.logic} -import ${system.rules} -import ${system.signals} src/${project.as}"/>
         </java>
         
         <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
@@ -56,8 +56,10 @@
                 <include name="system.data.swc"/>
                 <include name="system.events.swc"/>
                 <include name="system.logging.swc"/>
+                <include name="system.logic.swc"/>
                 <include name="system.numeric.swc"/>
                 <include name="system.process.swc"/>
+                <include name="system.rules.swc"/>
                 <include name="system.signals.swc"/>
                 <include name="system.swc"/>
             </external-library-path>
