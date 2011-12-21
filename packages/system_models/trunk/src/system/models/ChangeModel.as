@@ -63,7 +63,6 @@ package system.models
      * model.current = "hello" ;
      * model.current = "world" ;
      * model.current = null ;
-     * }
      * </code>
      * </listing>
      */
