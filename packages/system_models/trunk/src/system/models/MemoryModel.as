@@ -44,11 +44,6 @@ package system.models
      * <code class="prettyprint">
      * import system.models.MemoryModel ;
      * 
-     * var before:Function = function( value:* , model:MemoryModel ):void
-     * {
-     *     trace( "before old:" + value + " current:" + model.current ) ;
-     * }
-     * 
      * var change:Function = function( value:* , model:MemoryModel ):void
      * {
      *     trace( "change current:" + value  + " length:" + model.length ) ;
@@ -63,7 +58,6 @@ package system.models
      * 
      * // model.enableErrorChecking = true ;
      * 
-     * //model.beforeChanged.connect( before ) ;
      * model.changed.connect( change ) ;
      * model.cleared.connect( clear ) ;
      * 
@@ -74,6 +68,8 @@ package system.models
      * 
      * model.back() ;
      * model.home() ;
+     * 
+     * model.clear() ;
      * </code>
      * </listing>
      */
