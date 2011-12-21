@@ -166,6 +166,28 @@ package system.models
         }
         
         /**
+         * Clear the model.
+         */
+        public override function clear():void
+        {
+            if( size > 0 )
+            {
+                var e:MemoryEntry = header.next;
+                var next:MemoryEntry ;
+                while ( e != header ) 
+                {
+                    next = e.next ;
+                    e.next = e.previous = null ;
+                    e.element = null ;
+                    e = next ;
+                }
+                header.next = header.previous = header ;
+                size = 0 ;
+            }
+            super.clear() ;
+        }
+        
+        /**
          * Go home in the memory, select the first element in the memory and remove all other elements. This method work only if the memory length is greater than 1.
          */
         public function home():*
@@ -206,28 +228,6 @@ package system.models
                     return null ;
                 }
             }
-        }
-        
-        /**
-         * Clear the model.
-         */
-        public override function clear():void
-        {
-            if( size > 0 )
-            {
-                var e:MemoryEntry = header.next;
-                var next:MemoryEntry ;
-                while ( e != header ) 
-                {
-                    next = e.next ;
-                    e.next = e.previous = null ;
-                    e.element = null ;
-                    e = next ;
-                }
-                header.next = header.previous = header ;
-                size = 0 ;
-            }
-            super.clear() ;
         }
         
         /**
