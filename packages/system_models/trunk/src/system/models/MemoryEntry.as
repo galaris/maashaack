@@ -41,9 +41,9 @@ package system.models
     {
         /**
          * Creates a new MemoryEntry instance.
-         * @param element the value of the entry in the LinkedList
-         * @param the next LinkedListEntry of this entry.
-         * @param the previous LinkedListEntry of this entry.
+         * @param element the value of the entry.
+         * @param the next MemoryEntry reference of this entry.
+         * @param the previous MemoryEntry reference of this entry.
          */
         public function MemoryEntry( element:* = null , next:MemoryEntry = null , previous:MemoryEntry = null )
         {
