@@ -49,6 +49,7 @@ package system.models
             
             suite.addTestSuite( ChangeModelTest ) ;
             suite.addTestSuite( KernelModelTest ) ;
+            suite.addTestSuite( MemoryEntryTest ) ;
             suite.addTestSuite( MemoryModelTest ) ;
             
             suite.addTest( system.models.maps.AllTests.suite() );
