@@ -64,7 +64,7 @@ package system.models
         
         public function testInherit():void
         {
-            assertTrue( model is KernelModel ) ;
+            assertTrue( model is ChangeModel ) ;
         }
         
         public function testBeforeChanged():void
