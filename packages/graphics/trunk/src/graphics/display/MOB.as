@@ -185,7 +185,7 @@ package graphics.display
          */
         protected function addedToStage( e:Event = null ):void
         {
-            //
+            // override
         }
         
         /**
@@ -205,7 +205,7 @@ package graphics.display
          */
         protected function removedFromStage( e:Event = null ):void
         {
-            //
+            // override
         }
         
         /**
