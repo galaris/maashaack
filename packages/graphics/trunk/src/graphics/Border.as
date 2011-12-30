@@ -30,7 +30,7 @@
          * Creates a new Border instance.
          * @param value The value of the border (default LEFT | TOP | RIGHT | BOTTOM = 30)
          */
-        public function Border( value:int = 30  )
+        public function Border( value:int = 30 )
         {
             this.value = value ;
         }
