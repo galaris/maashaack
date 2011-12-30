@@ -779,7 +779,9 @@ package graphics.display
             {
                 _layout.run() ;
             }
+            
             draw() ;
+            
             viewChanged() ;
             
             altered = false ;
