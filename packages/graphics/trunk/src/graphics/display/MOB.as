@@ -38,6 +38,8 @@ package graphics.display
     import graphics.transitions.FrameTimer;
     
     import system.process.Lockable;
+    import system.signals.Signal;
+    import system.signals.Signaler;
     
     import flash.display.Sprite;
     import flash.events.Event;
@@ -52,8 +54,24 @@ package graphics.display
          */
         public function MOB()
         {
-            addEventListener( Event.ADDED_TO_STAGE     , _addedToStage    ) ;
-            addEventListener( Event.REMOVED_FROM_STAGE , removedFromStage ) ;
+            addEventListener( Event.ADDED_TO_STAGE     , _addedToStage     ) ;
+            addEventListener( Event.REMOVED_FROM_STAGE , _removedFromStage ) ;
+        }
+        
+        /**
+         * This signal emit before the rendering is started.
+         */
+        public function get renderer():Signaler
+        {
+            return _renderer ;
+        }
+        
+        /**
+         * This signal emit after the rendering is finished.
+         */
+        public function get updater():Signaler
+        {
+            return _updater ;
         }
         
         /**
@@ -102,29 +120,39 @@ package graphics.display
          */
         public function unlock():void
         {
-            _locked = Math.max( _locked - 1  , 0 ) ;
+            _locked = (--_locked > 0 ) ? _locked : 0 ;
         }
         
         /**
-         * Update the display.
+         * Update the sprite.
          */
         public function update():void 
         {
-            _changed = false ; 
-            // override this method and not forget
-            // to switch the _changed protected property
-            // with the false value
+            _renderer.emit(this) ;
+            altered = false ; // overrides this method and not forget to switch the altered protected property with the false value. 
+            _updater.emit(this) ;
         }
         
         /**
+         * Indicates if the display is altered and must be invalidate.
          * @private
          */
-        protected var _changed:Boolean ;
+        protected var altered:Boolean ;
         
         /**
          * @private
          */ 
         protected var _locked:uint ;
+        
+        /**
+         * @private
+         */
+        protected const _renderer:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected const _updater:Signaler = new Signal() ;
         
         /**
          * Invoked when the sprite is added to the stage.
@@ -139,7 +167,7 @@ package graphics.display
          */
         protected function change():void
         {
-            _changed = true;
+            altered = true;
             if ( stage ) 
             {
                 stage.invalidate() ;
@@ -169,9 +197,9 @@ package graphics.display
         /**
          * Invoked when the stage is rendering.
          */
-        protected function renderStage( e:Event ):void
+        protected function renderStage( e:Event = null ):void
         {
-            if ( _changed ) 
+            if ( altered ) 
             {
                 redraw() ;
             }
@@ -187,12 +215,21 @@ package graphics.display
          */
         private function _addedToStage( e:Event = null ):void
         {
+            stage.addEventListener( Event.RENDER, renderStage, false, 0, true );
             addedToStage( e ) ;
-            stage.addEventListener(Event.RENDER, renderStage );
-            if ( _changed && stage ) 
+            if ( altered && stage ) 
             {
                 stage.invalidate() ;
             }
+        }
+        
+        /**
+         * Invoked when the sprite is removed from the stage.
+         */
+        protected function _removedFromStage( e:Event = null ):void
+        {
+            stage.removeEventListener( Event.RENDER, renderStage, false);
+            removedFromStage( e ) ;
         }
     }
 }
