@@ -235,6 +235,7 @@ package graphics.layouts
         
         /**
          * Returns a list of all display objects register in the layout buffer.
+         * @return a list of all display objects register in the layout buffer.
          */
         public function get children():Vector.<DisplayObject>
         {
@@ -247,7 +248,8 @@ package graphics.layouts
         }
         
         /**
-         * Returns the number of children of this object.
+         * Indicates the number of children of this object.
+         * @return the number of children of this object.
          */
         public function get numChildren():int
         {
@@ -367,9 +369,9 @@ package graphics.layouts
         
         /**
          * Initialize the layout container with the specific DisplayObject elements. This method flush the layout container and remove all old elements register in the collection before initialize it.
-         * @param children an Array or Vector of DisplayObject references or a DisplayObjectContainer.
+         * @param children an Array or Vector of DisplayObject references or a DisplayObjectContainer. If this argument is null the layout is only flushed.
          */
-        public function initialize( children:* ):void
+        public function initialize( children:* = null ):void
         {
             _children.length = 0 ;
             if( children == null )
