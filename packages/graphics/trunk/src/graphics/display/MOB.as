@@ -252,9 +252,9 @@ package graphics.display
         /**
          * Invoked when the sprite is removed from the stage.
          */
-        protected function _removedFromStage( e:Event = null ):void
+        private function _removedFromStage( e:Event = null ):void
         {
-            stage.removeEventListener( Event.RENDER, renderStage, false);
+            stage.removeEventListener( Event.RENDER, renderStage, false );
             removedFromStage( e ) ;
         }
     }
