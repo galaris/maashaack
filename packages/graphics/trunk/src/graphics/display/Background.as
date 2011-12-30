@@ -48,11 +48,9 @@ package graphics.display
     import graphics.Measurable;
     import graphics.drawing.RectanglePen;
     import graphics.layouts.Layout;
-
+    
     import system.hack;
-    import system.signals.Signal;
-    import system.signals.Signaler;
-
+    
     import flash.display.DisplayObjectContainer;
     import flash.events.Event;
     import flash.geom.Matrix;
@@ -721,7 +719,7 @@ package graphics.display
         public function notifyResized():void 
         {
             viewResize() ;
-            _resizer.emit( this ) ;
+            _resized.emit( this ) ;
         }
         
         /**
@@ -949,11 +947,6 @@ package graphics.display
          * @private
          */
         hack const _real:Rectangle = new Rectangle();
-        
-        /**
-         * @private
-         */
-        hack const _resizer:Signaler = new Signal() ;
         
         /**
          * The scope of the active display list of this container.
