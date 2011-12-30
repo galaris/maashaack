@@ -109,7 +109,7 @@ package graphics.geom
         public function AspectRatio( width:int=0 , height:int=0 , lock:Boolean=false )
         {
             super( width , height ) ;
-            _lock = lock ;
+            _locked = lock ;
         }
         
         /**
@@ -128,7 +128,7 @@ package graphics.geom
         public override function set height( n:Number ):void
         {
             _h = int(n) ;
-            if ( _lock )
+            if ( _locked )
             {
                 _w = int(_h * _aspW / _aspH ) ;
             }
@@ -149,7 +149,7 @@ package graphics.geom
         public override function set width( n:Number ):void
         {
             _w = int(n) ;
-            if ( _lock )
+            if ( _locked )
             {
                 _h = int(_w * _aspH / _aspW ) ;
             }
@@ -197,7 +197,7 @@ package graphics.geom
          */
         public function isLocked():Boolean
         {
-            return _lock ;
+            return _locked ;
         }
         
         /**
@@ -205,7 +205,7 @@ package graphics.geom
          */
         public function lock():void
         {
-            _lock = true ;
+            _locked = true ;
         }
         
         /**
@@ -213,7 +213,7 @@ package graphics.geom
          */
         public function unlock():void
         {
-            _lock = false ;
+            _locked = false ;
         }
         
         /**
@@ -222,7 +222,7 @@ package graphics.geom
          */
         public override function toSource( indent:int = 0 ):String  
         {
-            return "new " + getClassPath(this, true) + "(" + width.toString() + "," + height.toString() + "," + (_lock ? "true" : "false") + ")" ;
+            return "new " + getClassPath(this, true) + "(" + width.toString() + "," + height.toString() + "," + (_locked ? "true" : "false") + ")" ;
         }
         
         /**
@@ -260,7 +260,7 @@ package graphics.geom
         /**
          * @private
          */
-        private var _lock:Boolean ;
+        private var _locked:Boolean ;
         
         /**
          * @private
