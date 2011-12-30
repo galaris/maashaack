@@ -36,7 +36,7 @@
 package graphics 
 {
     /**
-     * The most common relative directions are horizontal, vertical, left, right, forward, backward, up, and down.
+     * The most common relative directions are horizontal, vertical, both, left, right, forward, backward, none, up, and down.
      */
     public final class Direction 
     {
@@ -56,7 +56,7 @@ package graphics
         public static const DOWN:String = "down" ;
         
         /**
-         * Specifies the "forward" value to change the orientation of a Display or a component.
+         * Specifies the "forward" value to change the direction or scrolling of a Display or a component.
          */
         public static const FORWARD:String = "forward" ;
         
@@ -69,6 +69,11 @@ package graphics
          * Specifies the "left" value to change the orientation of a Display or a component.
          */
         public static const LEFT:String = "left" ;
+        
+        /**
+         * Specifies the "none" value to represent no scrolling or an object without direction.
+         */
+        public static const NONE:String = "none" ;
         
         /**
          * Specifies the "right" value to change the orientation of a Display or a component.
