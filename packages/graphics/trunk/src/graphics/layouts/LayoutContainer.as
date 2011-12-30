@@ -516,7 +516,7 @@ package graphics.layouts
          */
         public override function isLocked():Boolean 
         {
-            return _lock > 0 ;
+            return _locked > 0 ;
         }
         
         /**
@@ -524,7 +524,7 @@ package graphics.layouts
          */
         public override function lock():void 
         {
-            _lock ++ ;
+            _locked++ ;
         }
         
         /**
@@ -549,7 +549,7 @@ package graphics.layouts
          */
         public function resetLock():void 
         {
-            _lock = 0 ;
+            _locked = 0 ;
         }
         
         /**
@@ -579,7 +579,7 @@ package graphics.layouts
          */
         public override function unlock():void 
         {
-            _lock = Math.max( _lock - 1 , 0 ) ;
+            _locked = (--_locked > 0 ) ? _locked : 0 ;
         }
         
         /**
@@ -619,7 +619,7 @@ package graphics.layouts
         /**
          * @private
          */ 
-        protected var _lock:uint ;
+        protected var _locked:uint ;
         
         /**
          * @private
