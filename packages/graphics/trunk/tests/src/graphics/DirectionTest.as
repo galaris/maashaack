@@ -49,6 +49,11 @@ package graphics
             assertEquals( Direction.BACKWARD , "backward" , "Direction.BACKWARD constant failed.") ;
         }
         
+        public function testBOTH():void
+        {
+            assertEquals( Direction.BOTH , "both" , "Direction.BOTH constant failed.") ;
+        }
+        
         public function testDOWN():void
         {
             assertEquals( Direction.DOWN , "down" , "Direction.DOWN constant failed.") ;
@@ -67,6 +72,11 @@ package graphics
         public function testLEFT():void
         {
             assertEquals( Direction.LEFT , "left" , "Direction.LEFT constant failed.") ;
+        }
+        
+        public function testNONE():void
+        {
+            assertEquals( Direction.NONE , "none" , "Direction.NONE constant failed.") ;
         }
         
         public function testRIGHT():void
