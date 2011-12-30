@@ -50,6 +50,8 @@ package graphics.display
     import graphics.layouts.Layout;
 
     import system.hack;
+    import system.signals.Signal;
+    import system.signals.Signaler;
 
     import flash.display.DisplayObjectContainer;
     import flash.events.Event;
@@ -147,8 +149,9 @@ package graphics.display
          * Creates a new Background instance.
          * @param init An object that contains properties with which to populate the newly instance. If init is not an object, it is ignored.
          * @param pen An optional RectanglePen reference to use to draw the background area.
+         * @param locked An optional boolean to defines if the constructor must be locked, the update method is not invoked in the constructor if this flag is true.
          */
-        public function Background( init:Object = null , pen:RectanglePen = null )
+        public function Background( init:Object = null , pen:RectanglePen = null , locked:Boolean = false )
         {
             ///////////
             
@@ -168,25 +171,20 @@ package graphics.display
             
             ///////////
             
+            if( locked )
+            {
+                lock() ;
+            }
+            
             initialize( init ) ;
+            
+            if( locked )
+            {
+                unlock() ;
+            }
             
             ///////////
         }
-        
-        /**
-         * Defines the "dashed" mode of the background border.
-         */
-        public static const DASHED:String = "dashed" ;
-        
-        /**
-         * Defines the "normal" mode of the background border.
-         */
-        public static const NORMAL:String = "normal" ;
-        
-        /**
-         * Defines the "rouded" mode of the background border.
-         */
-        public static const ROUNDED:String = "rounded" ;
         
         /**
          * The alignement of the background.
@@ -203,7 +201,10 @@ package graphics.display
         public function set align( value:uint ):void
         {
             _align = value ;
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -224,17 +225,17 @@ package graphics.display
                 return ;
             }
             _autoSize = b ;
-            if ( stage != null )
+            if ( stage )
             {
+                if( stage.hasEventListener( Event.RESIZE ) )
+                {
+                    stage.removeEventListener( Event.RESIZE , resize , false ) ;
+                }
                 if ( _autoSize )
                 {
-                    stage.addEventListener( Event.RESIZE , resize ) ;
+                    stage.addEventListener( Event.RESIZE , resize , false , 0 , true ) ;
                     resize() ;
                 } 
-                else
-                {
-                    stage.removeEventListener( Event.RESIZE , resize ) ;
-                }
             }
         }
         
@@ -253,7 +254,10 @@ package graphics.display
         public function set direction( value:String ):void
         {
             _direction = (value == Direction.VERTICAL || value == Direction.HORIZONTAL ) ? value : null ;
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -295,7 +299,10 @@ package graphics.display
             {
                 _pen.fill = _fillStyle ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -312,7 +319,10 @@ package graphics.display
         public function set fullscreen( b:Boolean ):void
         {
             _fullscreen = b ;
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -345,7 +355,10 @@ package graphics.display
         public function set h( value:Number ):void 
         {
             _h = clamp( value , _minHeight, _maxHeight ) ;
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
             notifyResized() ;
         }
         
@@ -383,7 +396,10 @@ package graphics.display
                     _layout.unlock() ;
                 }
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -404,7 +420,10 @@ package graphics.display
             {
                 _pen.line = style ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -425,7 +444,10 @@ package graphics.display
             {
                 _maxHeight = _minHeight ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -446,7 +468,10 @@ package graphics.display
             {
                 _maxWidth = _minWidth ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -467,7 +492,10 @@ package graphics.display
             {
                 _minHeight = _maxHeight ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -488,7 +516,10 @@ package graphics.display
             {
                 _minWidth = _maxWidth ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -580,13 +611,15 @@ package graphics.display
         public function set w( value:Number ):void 
         {
             _w = clamp( value , _minWidth, _maxWidth ) ;
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
             notifyResized() ;
         }
         
         /**
          * Draw the display.
-         * @param arguments The optional arguments to draw the background. With the signature : ( w:Number , h:Number, offsetX:Number, offsetY:Number )
          */
         public function draw( ...args:Array ):void
         {
@@ -647,7 +680,10 @@ package graphics.display
                 }
                 unlock() ;
             }
-            update() ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
         }
         
         /**
@@ -655,7 +691,7 @@ package graphics.display
          */
         public override function lock():void 
         {
-            super.lock() ;
+            _locked ++ ;
             if ( _layout )
             {
                 _layout.lock() ;
@@ -685,7 +721,7 @@ package graphics.display
         public function notifyResized():void 
         {
             viewResize() ;
-            dispatchEvent( new Event( Event.RESIZE ) ) ;
+            _resizer.emit( this ) ;
         }
         
         /**
@@ -702,21 +738,16 @@ package graphics.display
         }
         
         /**
-         * Resize and update the background.
-         */
-        public function resize( e:Event = null ):void
-        {
-            update() ;
-        }
-        
-        /**
          * Sets the virtual width (w) and height (h) values of the component.
          */
         public function setSize( w:Number, h:Number ):void
         {
             _w = isNaN(w) ? 0 : clamp( w , _minWidth, _maxWidth) ; 
-            _h = isNaN(h) ? 0 : clamp( h , _minHeight, _maxHeight) ; 
-            update() ;
+            _h = isNaN(h) ? 0 : clamp( h , _minHeight, _maxHeight) ;
+            if ( _locked == 0 ) 
+            {
+                update() ;
+            }
             notifyResized() ;
         }
         
@@ -725,30 +756,35 @@ package graphics.display
          */
         public override function unlock():void 
         {
-            super.unlock() ;
+            _locked = (--_locked > 0 ) ? _locked : 0 ;
             if ( _layout )
             {
                 _layout.unlock() ;
             }
         }
         
-        
         /**
          * Update the display.
          */
         public override function update():void 
         {
-            if ( isLocked() ) 
+            if ( _locked > 0 ) 
             {
                 return ;
             }
+            
+            _renderer.emit(this) ;
+            
             if ( _layout )
             {
                 _layout.run() ;
             }
             draw() ;
             viewChanged() ;
-            _changed = false ;
+            
+            altered = false ;
+            
+            _updater.emit(this) ;
         }
         
         /**
@@ -766,16 +802,44 @@ package graphics.display
         //////////
         
         /**
-         * Invoked in the constructor to initialize the RectanglePen reference in the background. 
-         * Overrides this method to change the pen strategy.
+         * Receives a message when the layout emit when is rendered.
          */
-        protected function initializePen( pen:RectanglePen = null ):RectanglePen
+        protected function renderLayout( layout:Layout = null ):void
         {
-            _pen = pen || new RectanglePen() ;
-            _pen.graphics = this ;
-            _pen.fill = _fillStyle ;
-            _pen.line = _lineStyle ;
-            return _pen ;
+            //
+        }
+        
+        /**
+         * Receives a message when the layout emit when is updated.
+         */
+        protected function updateLayout( layout:Layout = null ):void
+        {
+            //
+        }
+        
+        //////////
+        
+        /**
+         * Invoked when the display is removed from the stage to enable the autoSize mode.
+         */
+        protected function addedToStageResize( e:Event = null ):void
+        {
+            if ( stage && _autoSize )
+            {
+                stage.addEventListener( Event.RESIZE , resize , false , 0 , true ) ;
+                resize() ;
+            }
+        }
+         
+        /**
+         * Invoked when the display is removed from the stage to disable the autoSize mode.
+         */
+        protected function removedFromStageResize( e:Event = null ):void
+        {
+            if ( stage && _autoSize )
+            {
+                stage.removeEventListener( Event.RESIZE , resize , false ) ;
+            }
         }
         
         //////////
@@ -807,55 +871,12 @@ package graphics.display
             // overrides
         }
         
-        ////////// layout receivers
-        
-        /**
-         * Receives a message when the layout emit when is rendered.
-         */
-        protected function renderLayout( layout:Layout = null ):void
-        {
-            //
-        }
-        
-        /**
-         * Receives a message when the layout emit when is updated.
-         */
-        protected function updateLayout( layout:Layout = null ):void
-        {
-            //
-        }
-        
-        //////////
-        
-        /**
-         * Invoked when the display is removed from the stage to enable the autoSize mode.
-         */
-        protected function addedToStageResize( e:Event = null ):void
-        {
-            if ( stage && _autoSize )
-            {
-                stage.addEventListener( Event.RESIZE , resize ) ;
-                resize() ;
-            }
-        }
-         
-        /**
-         * Invoked when the display is removed from the stage to disable the autoSize mode.
-         */
-        protected function removedFromStageResize( e:Event = null ):void
-        {
-            if ( stage && _autoSize )
-            {
-                stage.removeEventListener( Event.RESIZE , resize ) ;
-            }
-        }
-        
         //////////
         
         /**
          * @private
          */
-        hack var _align:uint = 10 ;
+        hack var _align:uint = 10 ; // top left
         
         /**
          * @private
@@ -928,6 +949,11 @@ package graphics.display
         hack const _real:Rectangle = new Rectangle();
         
         /**
+         * @private
+         */
+        hack const _resizer:Signaler = new Signal() ;
+        
+        /**
          * The scope of the active display list of this container.
          * @private
          */
@@ -941,7 +967,7 @@ package graphics.display
         /**
          * Refresh the real area Rectangle of the background with the current alignement.
          */
-        hack function fixArea():void
+        hack function fixArea():Rectangle
         {
             // initialize
             
@@ -988,6 +1014,31 @@ package graphics.display
             {
                 _real.x -= _real.width ;
             }
+            
+            // result
+            
+            return _real ;
+        }
+        
+        /**
+         * Invoked in the constructor to initialize the RectanglePen reference in the background. 
+         */
+        hack function initializePen( pen:RectanglePen = null ):RectanglePen
+        {
+            _pen = pen || new RectanglePen() ;
+            _pen.graphics = this ;
+            _pen.fill = _fillStyle ;
+            _pen.line = _lineStyle ;
+            return _pen ;
+        }
+        
+        /**
+         * Resize and update the background.
+         */
+        hack function resize( e:Event = null ):void
+        {
+            update() ;
+            notifyResized() ;
         }
     }
 }
