@@ -46,6 +46,11 @@ package graphics
         public static const BACKWARD:String = "backward" ;
         
         /**
+         * Specifies the "both" value to represent both horizontal and vertical scrolling.
+         */
+        public static const BOTH:String = "both" ;
+        
+        /**
          * Specifies the "down" value to change the orientation of a Display or a component.
          */
         public static const DOWN:String = "down" ;
