@@ -59,11 +59,27 @@ package graphics.display
         }
         
         /**
+         * This signal emit when the sprite is changed.
+         */
+        public function get changed():Signaler
+        {
+            return _changed ;
+        }
+        
+        /**
          * This signal emit before the rendering is started.
          */
         public function get renderer():Signaler
         {
             return _renderer ;
+        }
+        
+        /**
+         * This signal emit when the sprite is resized.
+         */
+        public function get resized():Signaler
+        {
+            return _resized ;
         }
         
         /**
@@ -141,6 +157,11 @@ package graphics.display
         
         /**
          * @private
+         */
+        protected const _changed:Signaler = new Signal() ;
+        
+        /**
+         * @private
          */ 
         protected var _locked:uint ;
         
@@ -148,6 +169,11 @@ package graphics.display
          * @private
          */
         protected const _renderer:Signaler = new Signal() ;
+        
+        /**
+         * @private
+         */
+        protected const _resized:Signaler = new Signal() ;
         
         /**
          * @private
