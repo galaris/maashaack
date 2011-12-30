@@ -38,6 +38,7 @@ package graphics.display
     import library.ASTUce.framework.TestCase;
 
     import system.process.Lockable;
+    import system.signals.Signaler;
 
     public class MOBTest extends TestCase 
     {
@@ -66,6 +67,26 @@ package graphics.display
         public function testInterface():void
         {
             assertTrue( mob is Lockable ) ;
+        }
+        
+        public function testChanged():void
+        {
+            assertNotNull( mob.changed as Signaler ) ;
+        }
+        
+        public function testRenderer():void
+        {
+            assertNotNull( mob.renderer as Signaler ) ;
+        }
+        
+        public function testResized():void
+        {
+            assertNotNull( mob.resized as Signaler ) ;
+        }
+        
+        public function testUpdater():void
+        {
+            assertNotNull( mob.updater as Signaler ) ;
         }
     }
 }
