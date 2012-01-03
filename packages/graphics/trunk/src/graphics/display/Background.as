@@ -153,8 +153,7 @@ package graphics.display
         {
             ///////////
             
-            addEventListener( Event.ADDED_TO_STAGE      , addedToStageResize     , false , 9999 ) ;
-            addEventListener( Event.REMOVED_FROM_STAGE  , removedFromStageResize , false , 9999 ) ;
+            addEventListener( Event.ADDED_TO_STAGE , addedToStageResize , false , 9999 ) ;
             
             ///////////
             
@@ -824,18 +823,22 @@ package graphics.display
          */
         protected function addedToStageResize( e:Event = null ):void
         {
+            removeEventListener( Event.ADDED_TO_STAGE  , addedToStageResize , false ) ;
+            addEventListener( Event.REMOVED_FROM_STAGE  , removedFromStageResize , false , 9999 ) ;
             if ( stage && _autoSize )
             {
                 stage.addEventListener( Event.RESIZE , resize , false , 0 , true ) ;
                 resize() ;
             }
         }
-         
+        
         /**
          * Invoked when the display is removed from the stage to disable the autoSize mode.
          */
         protected function removedFromStageResize( e:Event = null ):void
         {
+            removeEventListener( Event.REMOVED_FROM_STAGE  , removedFromStageResize , false ) ;
+            addEventListener( Event.ADDED_TO_STAGE  , addedToStageResize , false , 9999 ) ;
             if ( stage && _autoSize )
             {
                 stage.removeEventListener( Event.RESIZE , resize , false ) ;
