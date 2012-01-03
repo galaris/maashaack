@@ -54,8 +54,7 @@ package graphics.display
          */
         public function MOB()
         {
-            addEventListener( Event.ADDED_TO_STAGE     , _addedToStage     ) ;
-            addEventListener( Event.REMOVED_FROM_STAGE , _removedFromStage ) ;
+            addEventListener( Event.ADDED_TO_STAGE , _addedToStage , false , 999 ) ;
         }
         
         /**
@@ -241,8 +240,12 @@ package graphics.display
          */
         private function _addedToStage( e:Event = null ):void
         {
+            removeEventListener( Event.ADDED_TO_STAGE , _addedToStage , false ) ;
+            addEventListener( Event.REMOVED_FROM_STAGE , _removedFromStage , false , 999 ) ;
+            
             stage.addEventListener( Event.RENDER, renderStage, false, 0, true );
             addedToStage( e ) ;
+            
             if ( altered && stage ) 
             {
                 stage.invalidate() ;
@@ -254,6 +257,9 @@ package graphics.display
          */
         private function _removedFromStage( e:Event = null ):void
         {
+            addEventListener( Event.ADDED_TO_STAGE , _addedToStage , false , 999 ) ;
+            removeEventListener( Event.REMOVED_FROM_STAGE , _removedFromStage , false ) ;
+            
             stage.removeEventListener( Event.RENDER, renderStage, false );
             removedFromStage( e ) ;
         }
