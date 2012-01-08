@@ -35,12 +35,16 @@
 
 package graphics.display 
 {
+    import graphics.drawing.RoundedComplexRectanglePen;
     import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
     import graphics.Measurable;
+    import graphics.drawing.RectanglePen;
 
     import library.ASTUce.framework.TestCase;
+
+    import flash.display.Sprite;
     
     public class BackgroundTest extends TestCase 
     {
@@ -122,6 +126,31 @@ package graphics.display
             background.w = 100 ;
             
             assertEquals( 100 , background.w , "#2" ) ;
+        }
+        
+        public function testPen():void
+        {
+            assertTrue( background.pen is RectanglePen , "#1" ) ;
+            
+            var pen:RoundedComplexRectanglePen = new RoundedComplexRectanglePen() ;
+            background.pen = pen ;
+            assertEquals( pen, background.pen , "#2" ) ;
+            
+            background.pen = null ;
+            assertTrue( background.pen is RectanglePen , "#3" ) ;
+        }
+        
+        public function testScope():void
+        {
+            assertEquals( background, background.scope , "#1" ) ;
+            
+            var container:Sprite = new Sprite() ;
+            background.scope = container ;
+            assertEquals( container, background.scope , "#2" ) ;
+            
+            background.scope = null ;
+            
+            assertEquals( background, background.scope , "#3" ) ;
         }
         
         public function testSetSize():void
