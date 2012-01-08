@@ -35,10 +35,11 @@
 
 package graphics.display 
 {
+    import graphics.Direction;
     import graphics.Directionable;
     import graphics.Drawable;
     import graphics.Measurable;
-    
+
     import library.ASTUce.framework.TestCase;
     
     public class BackgroundTest extends TestCase 
@@ -75,6 +76,60 @@ package graphics.display
             assertTrue( background is Directionable , "#1" ) ;
             assertTrue( background is Drawable , "#2" ) ;
             assertTrue( background is Measurable , "#3" ) ;
+        }
+        
+        public function testDirection():void
+        {
+            assertNull( background.direction , "#1" ) ;
+            
+            background.direction = Direction.VERTICAL ;
+            assertEquals( Direction.VERTICAL , background.direction , "#2" ) ;
+            
+            background.direction = Direction.HORIZONTAL ;
+            assertEquals( Direction.HORIZONTAL , background.direction , "#3" ) ;
+            
+            background.direction = "unknow" ;
+            assertNull( background.direction , "#4" ) ;
+            
+            background.direction = null ;
+            assertNull( background.direction , "#5" ) ;
+        }
+        
+        public function testFullscreen():void
+        {
+            assertFalse( background.fullscreen , "#1" ) ;
+            
+            background.fullscreen = true ;
+            assertTrue( background.fullscreen , "#2" ) ;
+            
+            background.fullscreen = false ;
+            assertFalse( background.fullscreen , "#3" ) ;
+        }
+        
+        public function testH():void
+        {
+            assertEquals( 0 , background.h , "#1" ) ;
+            
+            background.h = 100 ;
+            
+            assertEquals( 100 , background.h , "#2" ) ;
+        }
+        
+        public function testW():void
+        {
+            assertEquals( 0 , background.w , "#1" ) ;
+            
+            background.w = 100 ;
+            
+            assertEquals( 100 , background.w , "#2" ) ;
+        }
+        
+        public function testSetSize():void
+        {
+            background.setSize( 100 , 200 ) ;
+            
+            assertEquals( 100 , background.w , "#1" ) ;
+            assertEquals( 200 , background.h , "#2" ) ;
         }
     }
 }
