@@ -221,23 +221,24 @@ package graphics.display
             {
                 return ;
             }
+            
+            if( stage && stage.hasEventListener( Event.RESIZE ) )
+            {
+                stage.removeEventListener( Event.RESIZE , resize , false ) ;
+            }
             _autoSize = b ;
             if ( stage )
             {
-                if( stage.hasEventListener( Event.RESIZE ) )
-                {
-                    stage.removeEventListener( Event.RESIZE , resize , false ) ;
-                }
                 if ( _autoSize )
                 {
                     stage.addEventListener( Event.RESIZE , resize , false , 0 , true ) ;
                     resize() ;
-                } 
+                }
             }
         }
         
         /**
-         * Indicates the direction value of the background when the display is in this "full" mode (default value is null).
+         * Indicates the direction value of the background when the display is define with the "fullscreen" mode (default value is null).
          * @see graphics.Direction
          */
         public function get direction():String
@@ -271,11 +272,10 @@ package graphics.display
         public function set enabled( value:Boolean ):void 
         {
             _enabled = value ;
-            if ( _locked > 0 ) 
+            if ( _locked == 0 ) 
             {
-                return ;
+                viewEnabled() ;
             }
-            viewEnabled() ;
         }
         
         /**
@@ -580,12 +580,24 @@ package graphics.display
         }
         
         /**
-         * Returns the real scope reference of this component.
-         * @return the real scope reference of this component.
+         * Determinates the scope of the container. 
+         * By default the scope is the container itself but can target any other DisplayObject reference.
          */
         public function get scope():DisplayObjectContainer
         {
             return _scope ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set scope( scope:DisplayObjectContainer ):void
+        {
+            _scope = scope || this ; 
+            if ( _layout )
+            {
+                _layout.container = _scope ;
+            }
         }
         
         /**
@@ -722,19 +734,6 @@ package graphics.display
         }
         
         /**
-         * Registers the view of this component. The scope view can be the current DisplayObjectContainer or a child inside it.
-         */
-        public function registerView( scope:DisplayObjectContainer = null ):DisplayObjectContainer
-        {
-            _scope = ( scope == null || scope == this ) ? this : scope ;
-            if ( _layout )
-            {
-                _layout.container = _scope ;
-            }
-            return _scope ;
-        }
-        
-        /**
          * Sets the virtual width (w) and height (h) values of the component.
          */
         public function setSize( w:Number, h:Number ):void
@@ -786,18 +785,6 @@ package graphics.display
             _updater.emit(this) ;
         }
         
-        /**
-         * Unregisters the view of this component.
-         */
-        public function unregisterView():void
-        {
-            _scope = this ;
-            if ( _layout )
-            {
-                _layout.container = this ;
-            }
-        }
-        
         //////////
         
         /**
@@ -823,8 +810,8 @@ package graphics.display
          */
         protected function addedToStageResize( e:Event = null ):void
         {
-            removeEventListener( Event.ADDED_TO_STAGE  , addedToStageResize , false ) ;
-            addEventListener( Event.REMOVED_FROM_STAGE  , removedFromStageResize , false , 9999 ) ;
+            removeEventListener( Event.ADDED_TO_STAGE , addedToStageResize , false ) ;
+            addEventListener( Event.REMOVED_FROM_STAGE , removedFromStageResize , false , 9999 ) ;
             if ( stage && _autoSize )
             {
                 stage.addEventListener( Event.RESIZE , resize , false , 0 , true ) ;
@@ -837,8 +824,8 @@ package graphics.display
          */
         protected function removedFromStageResize( e:Event = null ):void
         {
-            removeEventListener( Event.REMOVED_FROM_STAGE  , removedFromStageResize , false ) ;
-            addEventListener( Event.ADDED_TO_STAGE  , addedToStageResize , false , 9999 ) ;
+            removeEventListener( Event.REMOVED_FROM_STAGE , removedFromStageResize , false ) ;
+            addEventListener( Event.ADDED_TO_STAGE , addedToStageResize , false , 9999 ) ;
             if ( stage && _autoSize )
             {
                 stage.removeEventListener( Event.RESIZE , resize , false ) ;
