@@ -81,6 +81,7 @@ package graphics
             suite.addTestSuite( LineShaderStyleTest   ) ;
             suite.addTestSuite( LineStyleTest         ) ;
             suite.addTestSuite( OrientationTest       ) ;
+            suite.addTestSuite( PositionTest          ) ;
             
             //// test sub packages
             
