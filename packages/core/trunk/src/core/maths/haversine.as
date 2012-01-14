@@ -42,8 +42,8 @@ package core.maths
      * <pre class="prettyprint">
      * import core.maths.haversine ;
      * 
-     * var position1:Point = new Point(37.422045, -122.084347) ; // Google HQ
-     * var position2:Point = new Point(37.77493, -122.419416) ; // San Francisco, CA
+     * var position1:Point = new Point( 37.422045 , -122.084347 ) ; // Google HQ
+     * var position2:Point = new Point( 37.77493  , -122.419416 ) ; // San Francisco, CA
      * 
      * trace( haversine( position1.x , position1.y , position2.x , position2.y ) ) ; // 49 103.007 meters
      * </pre>
@@ -51,18 +51,18 @@ package core.maths
      * @param longitude1 The first longitude coordinate.
      * @param latitude2 The second latitude coordinate.
      * @param longitude2 The second longitude coordinate.
+     * @param radius The optional radius of the sphere (by default the function use the earth's radius, mean radius = 6,371km) .
      * @return The distance between two points on a sphere from their longitudes and latitudes.
+     * @see core.maths.EARTH_RADIUS_IN_METERS
      */
-    public function haversine( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number ):Number
+    public function haversine( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number , radius:Number = 6371000 ):Number
     {
-        const earthRadius:Number = 3958.75 ;
-        
         var dLat:Number = ( latitude2  - latitude1  ) * DEG2RAD;
         var dLng:Number = ( longitude2 - longitude1 ) * DEG2RAD;
         
         var a:Number = Math.sin( dLat * .5 ) * Math.sin( dLat * .5 ) + Math.cos( latitude1 * DEG2RAD ) * Math.cos( latitude2 * DEG2RAD ) * Math.sin( dLng/2 ) * Math.sin( dLng/2 );
         var c:Number = 2 * Math.atan2( Math.sqrt(a) , Math.sqrt(1-a) );
         
-        return Number( ( c * EARTH_RADIUS_IN_METERS ).toFixed(3) ) ;
+        return Number( ( c * radius ).toFixed(3) ) ;
     }
 }
