@@ -49,6 +49,7 @@ package core.maths
             suite.addTestSuite( DEG2RADTest ) ;
             suite.addTestSuite( EPSILONTest ) ;
             suite.addTestSuite( LAMBDATest  ) ;
+            suite.addTestSuite( MILE_TO_METERTest ) ;
             suite.addTestSuite( PHITest     ) ;
             suite.addTestSuite( RAD2DEGTest ) ;
             
