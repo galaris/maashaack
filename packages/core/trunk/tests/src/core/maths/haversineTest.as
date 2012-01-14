@@ -48,9 +48,9 @@ package core.maths
         {
             assertEquals( 0 , haversine( 0 , 0 , 0 , 0 ) , "#1" ) ;
             
-            assertEquals(  335.143 , haversine( 43.303598 , 5.390104 , 43.304476 , 5.394067 ) , "#2" ) ;
-            assertEquals(  229.307 , haversine( 43.303598 , 5.390104 , 43.303398 , 5.392925 ) , "#3" ) ;
-            assertEquals( 1455.797 , haversine( 43.303598 , 5.390104 , 43.295719 , 5.375732 ) , "#4" ) ;
+            assertEquals(  335.215 , haversine( 43.303598 , 5.390104 , 43.304476 , 5.394067 ) , "#2" ) ;
+            assertEquals(  229.356 , haversine( 43.303598 , 5.390104 , 43.303398 , 5.392925 ) , "#3" ) ;
+            assertEquals( 1456.110 , haversine( 43.303598 , 5.390104 , 43.295719 , 5.375732 ) , "#4" ) ;
         }
     }
 }
