@@ -36,7 +36,17 @@
 package core.maths
 {
     /**
-     * The haversine formula is an equation important in navigation, giving great-circle distances between two points on a sphere from their longitudes and latitudes.
+     * The haversine formula is an equation important in navigation, giving great-circle distances between two points on a sphere from 
+     * their longitudes and latitudes.This algorithm is way faster than the Vincenty Formula but less accurate.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.maths.haversine ;
+     * 
+     * var position1:Point = new Point(37.422045, -122.084347) ; // Google HQ
+     * var position2:Point = new Point(37.77493, -122.419416) ; // San Francisco, CA
+     * 
+     * trace( haversine( position1.x , position1.y , position2.x , position2.y ) ) ; // 49 103.007 meters
+     * </pre>
      * @param latitude1 The first latitude coordinate.
      * @param longitude1 The first longitude coordinate.
      * @param latitude2 The second latitude coordinate.
