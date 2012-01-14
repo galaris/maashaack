@@ -37,15 +37,15 @@ package core.maths
 {
     import library.ASTUce.framework.TestCase;
 
-    public class EARTH_RADIUSTest extends TestCase 
+    public class EARTH_RADIUS_IN_RADIUS_Test extends TestCase 
     {
-        public function EARTH_RADIUSTest(name:String = "")
+        public function EARTH_RADIUS_IN_RADIUS_Test(name:String = "")
         {
             super(name);
         }
         
         public function testEARTH_RADIUS():void
         {
-            assertEquals( 6371000 , EARTH_RADIUS ) ;        }
+            assertEquals( 6371000 , EARTH_RADIUS_IN_METERS ) ;        }
     }
 }

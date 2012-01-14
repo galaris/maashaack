@@ -47,7 +47,7 @@ package core.maths
             // const
             
             suite.addTestSuite( DEG2RADTest ) ;
-            suite.addTestSuite( EARTH_RADIUSTest ) ;
+            suite.addTestSuite( EARTH_RADIUS_IN_RADIUS_Test ) ;
             suite.addTestSuite( EPSILONTest ) ;
             suite.addTestSuite( LAMBDATest  ) ;
             suite.addTestSuite( MILE_TO_METERTest ) ;
