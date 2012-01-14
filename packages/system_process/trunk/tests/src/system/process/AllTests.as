@@ -37,7 +37,7 @@ package system.process
 {
     import library.ASTUce.framework.Test;
     import library.ASTUce.framework.TestSuite;
-    
+
     import system.process.caches.AllTests;
     
     public class AllTests
@@ -63,18 +63,25 @@ package system.process
             suite.addTestSuite( CountDownTest ) ;
             suite.addTestSuite( DelayedTaskTest ) ;
             suite.addTestSuite( InitializerTest ) ;
+            suite.addTestSuite( LockTest );
             suite.addTestSuite( LockableTest  );
             suite.addTestSuite( PauseTest ) ;
             suite.addTestSuite( PriorityTest ) ;
+            suite.addTestSuite( ResetTest ) ;
             suite.addTestSuite( ResetableTest ) ;
+            suite.addTestSuite( ResumeTest ) ;
             suite.addTestSuite( ResumableTest ) ;
-            suite.addTestSuite( RunnableTest  ) ;
+            suite.addTestSuite( RunTest ) ;
+            suite.addTestSuite( RunnableTest ) ;
+            suite.addTestSuite( StartTest ) ;
             suite.addTestSuite( StartableTest ) ;
+            suite.addTestSuite( StopTest ) ;
             suite.addTestSuite( StoppableTest ) ;
             suite.addTestSuite( TaskTest ) ;
             suite.addTestSuite( TaskGroupTest ) ;
             suite.addTestSuite( TaskPhaseTest ) ;
             suite.addTestSuite( TimeoutPolicyTest ) ;
+            suite.addTestSuite( UnlockTest );
             
             return suite;
         }
