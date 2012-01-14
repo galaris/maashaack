@@ -35,8 +35,8 @@
 
 package core.maths
 {
-   /**
-    * This constant change mile distance to meter : 1 mile = 1609 m.
-    */
-    public const MILE_TO_METER:Number = 1609;
+    /**
+     * This constant change mile distance to meter : 1 mile = 1609 m.
+     */
+    public const MILE_TO_METER:uint = 1609;
 }
