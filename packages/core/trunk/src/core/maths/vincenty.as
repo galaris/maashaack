@@ -36,7 +36,17 @@
 package core.maths
 {
     /**
-     * Calculates geodesic distance in meter between two points specified by latitude and longitude (in numeric degrees) using the Vincenty inverse formula for ellipsoids.
+     * Calculates geodesic distance in meter between two points specified by latitude and longitude (in numeric degrees) 
+     * using the Vincenty inverse formula for ellipsoids. This algorithm is slow but very accurate (down to 0.5 mm).
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import core.maths.vincenty ;
+     * 
+     * var position1:Point = new Point(37.422045, -122.084347) ; // Google HQ
+     * var position2:Point = new Point(37.77493, -122.419416) ; // San Francisco, CA
+     * 
+     * trace( vincenty( position1.x , position1.y , position2.x , position2.y ) ) ; // 49 087.066 meters
+     * </pre>
      * @param latitude1 The first latitude coordinate.
      * @param longitude1 The first longitude coordinate.
      * @param latitude2 The second latitude coordinate.
