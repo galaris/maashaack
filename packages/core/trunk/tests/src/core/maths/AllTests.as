@@ -76,6 +76,7 @@ package core.maths
             suite.addTestSuite( fixAngleTest         ) ;
             suite.addTestSuite( floorTest            ) ;
             suite.addTestSuite( gcdTest              ) ;
+            suite.addTestSuite( haversineTest        ) ;
             suite.addTestSuite( hermiteTest          ) ;
             suite.addTestSuite( hypothenuseTest      ) ;
             suite.addTestSuite( interpolateTest      ) ;
@@ -96,6 +97,7 @@ package core.maths
             suite.addTestSuite( signTest             ) ;
             suite.addTestSuite( tanDTest             ) ;
             suite.addTestSuite( tanHTest             ) ;
+            suite.addTestSuite( vincentyTest         ) ;
             
             return suite;
         }
