@@ -50,9 +50,9 @@ package core.maths
         var dLat:Number = ( latitude2  - latitude1  ) * DEG2RAD;
         var dLng:Number = ( longitude2 - longitude1 ) * DEG2RAD;
         
-        var a:Number = Math.sin( dLat/2 ) * Math.sin( dLat/2 ) + Math.cos( latitude1 * DEG2RAD ) * Math.cos( latitude2 * DEG2RAD ) * Math.sin( dLng/2 ) * Math.sin( dLng/2 );
+        var a:Number = Math.sin( dLat * .5 ) * Math.sin( dLat * .5 ) + Math.cos( latitude1 * DEG2RAD ) * Math.cos( latitude2 * DEG2RAD ) * Math.sin( dLng/2 ) * Math.sin( dLng/2 );
         var c:Number = 2 * Math.atan2( Math.sqrt(a) , Math.sqrt(1-a) );
         
-        return Number( ( c * EARTH_RADIUS ).toFixed(3) ) ;
+        return Number( ( c * EARTH_RADIUS_IN_METERS ).toFixed(3) ) ;
     }
 }

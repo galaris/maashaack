@@ -38,5 +38,5 @@ package core.maths
     /**
      * This constant defines the radius of the earth in meter ( 6371 km ).
      */
-    public const EARTH_RADIUS:Number = 6371000 ;
+    public const EARTH_RADIUS_IN_METERS:Number = 6371000 ;
 }
