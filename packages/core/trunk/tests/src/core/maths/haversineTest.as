@@ -52,5 +52,14 @@ package core.maths
             assertEquals(  229.356 , haversine( 43.303598 , 5.390104 , 43.303398 , 5.392925 ) , "#3" ) ;
             assertEquals( 1456.110 , haversine( 43.303598 , 5.390104 , 43.295719 , 5.375732 ) , "#4" ) ;
         }
+        
+        public function testHaversineNaN():void
+        {
+            assertEquals(  0 , haversine( NaN , NaN , NaN , NaN ) , "#0" ) ;
+            assertEquals(  0 , haversine( NaN , 5.390104 , 43.304476 , 5.394067 ) , "#1" ) ;
+            assertEquals(  0 , haversine( 43.303598 , NaN , 43.304476 , 5.394067 ) , "#2" ) ;
+            assertEquals(  0 , haversine( 43.303598 , 5.390104 , NaN , 5.394067 ) , "#3" ) ;
+            assertEquals(  0 , haversine( 43.303598 , 5.390104 , 43.304476 , NaN ) , "#4" ) ;
+        }
     }
 }
