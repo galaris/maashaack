@@ -963,39 +963,39 @@ package graphics.display
             
             // update
             
-            if( align == Align.BOTTOM ) 
+            if( _align == Align.BOTTOM ) 
             {
                 _real.x -= _real.width / 2 ;
                 _real.y -= _real.height ;
             }
-            else if ( align == Align.BOTTOM_LEFT )
+            else if ( _align == Align.BOTTOM_LEFT )
             {
                 _real.y -= _real.height ;
             }
-            else if ( align == Align.BOTTOM_RIGHT )
+            else if ( _align == Align.BOTTOM_RIGHT )
             {
                 _real.x -= _real.width ;
                 _real.y -= _real.height ;
             }
-            else if ( align == Align.CENTER )
+            else if ( _align == Align.CENTER )
             {
                 _real.x -= _real.width / 2 ;
                 _real.y -= _real.height / 2 ;
             }
-            else if ( align == Align.LEFT )
+            else if ( _align == Align.LEFT )
             {
                 _real.y -= _real.height / 2 ;
             }
-            else if ( align == Align.RIGHT )
+            else if ( _align == Align.RIGHT )
             {
                 _real.x -= _real.width ;
                 _real.y -= _real.height / 2 ;
             }
-            else if ( align == Align.TOP )
+            else if ( _align == Align.TOP )
             {
                 _real.x -= _real.width / 2 ;
             }
-            else if ( align == Align.TOP_RIGHT )
+            else if ( _align == Align.TOP_RIGHT )
             {
                 _real.x -= _real.width ;
             }
