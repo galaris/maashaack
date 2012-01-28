@@ -42,6 +42,7 @@ package graphics.text
         {
             var suite:TestSuite = new TestSuite("graphics.text package tests");
             
+            suite.addTestSuite( mergeStyleSheetTest ) ;
             suite.addTestSuite( StyleSheetByteArrayTest ) ;
             
             return suite;
