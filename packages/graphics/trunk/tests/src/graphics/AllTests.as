@@ -43,9 +43,10 @@ package graphics
     import graphics.geom.AllTests;
     import graphics.layouts.AllTests;
     import graphics.process.AllTests;
+    import graphics.text.AllTests;
     import graphics.transitions.AllTests;
     import graphics.uikit.AllTests;
-    
+
     import library.ASTUce.framework.*;
     
     /**
@@ -93,6 +94,7 @@ package graphics
             suite.addTest( graphics.geom.AllTests.suite()    );
             suite.addTest( graphics.layouts.AllTests.suite() );
             suite.addTest( graphics.process.AllTests.suite() );
+            suite.addTest( graphics.text.AllTests.suite() );
             suite.addTest( graphics.transitions.AllTests.suite() );
             suite.addTest( graphics.uikit.AllTests.suite() );
             
