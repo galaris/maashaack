@@ -38,7 +38,7 @@
         <uri>http://code.google.com/p/eden/2011</uri>
     </include-namespaces>
     
-    <target-player>10.3</target-player>
+    <target-player>11.1</target-player>
     
     <directory>false</directory>
     
