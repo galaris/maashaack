@@ -39,7 +39,24 @@ package graphics.text
     import flash.utils.ByteArray;
     
     /**
-     * This class transform a ByteArray in this StyleSheet representation.
+     * This class transform a ByteArray in this StyleSheet representation. 
+     * <p>Extends this class in your custom stylesheet byteArray and embed a css file inside.</p>
+     * <p><b>Example :</b></p>
+     * <pre>
+     * package samples
+     * {
+     *     import graphics.text.StyleSheetByteArray;
+     *     
+     *     [Embed(source="MyStyle.css", mimeType="application/octet-stream")]
+     *     public class MyStyle extends StyleSheetByteArray
+     *     {
+     *         public function MyStyle()
+     *         {
+     *         }
+     *     }
+     * }
+     * </pre>
+     * <p><b>Note:</b> The MyStyle.css is a stylesheet file in the same folder of the MyStyle AS3 class.</p>
      */
     public class StyleSheetByteArray extends ByteArray
     {
