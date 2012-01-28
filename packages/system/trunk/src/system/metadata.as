@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2011
+  Portions created by the Initial Developers are Copyright (C) 2006-2012
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -61,7 +61,7 @@ package system
         version.revision = parseInt( "$Rev: 603 $".split( " " )[1] );
         
         /** Copyright of the project. */
-        public static var copyright:String = "Copyright © 2006-2011 Zwetan Kjukov and Marc Alcaraz, All right reserved.";
+        public static var copyright:String = "Copyright © 2006-2012 Zwetan Kjukov and Marc Alcaraz, All right reserved.";
         
         /** Origin of the project. */
         public static var origin:String = "Made in the EU.";
