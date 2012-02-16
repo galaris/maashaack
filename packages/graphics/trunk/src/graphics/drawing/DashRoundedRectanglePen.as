@@ -190,50 +190,74 @@ package graphics.drawing
             var bl:Number = corner.bl ? ( isNaN(_cornerRadius) ? _bottomLeftRadius  : _cornerRadius ) : 0 ; 
             var br:Number = corner.br ? ( isNaN(_cornerRadius) ? _bottomRightRadius : _cornerRadius ) : 0 ;
             
-            _dashline.moveTo( _x , _y + tl ) ; 
+            _graphics.clear() ;
             
-            if( bl == 0 )
+            if ( _fillStyle )
             {
-                _dashline.lineTo( _x , _y + height ) ;
-            }
-            else
-            {
-                _dashline.lineTo( _x , _y + height - bl ) ;
-                _dashline.curveTo( _x , _y + ( height - bl ) + bl * inv1 , _x + inv2 * bl , _y + height - inv2 *bl ) ;
-                _dashline.curveTo( _x + bl - bl * inv1 , _y + height , _x + bl , _y + height ) ;
-            }
-            
-            if( br == 0 )
-            {
-                _dashline.lineTo( _x + width , _y + height ) ;
-            }
-            else
-            {
-                _dashline.lineTo( _x + width - br , _y + height ) ;
-                _dashline.curveTo( _x + ( width - br ) + br * inv1 , _y + height , _x + width - inv2 * br , _y + height - inv2 * br ) ;
-                _dashline.curveTo( _x + width , _y + ( height - br ) + br * inv1 , _x + width , _y + height -br ) ;
+                _fillStyle.apply( _graphics ) ;
+                _graphics.drawRoundRectComplex
+                ( 
+                    _x     , 
+                    _y     , 
+                    width  , 
+                    height , 
+                    corner.tl ? ( isNaN(_cornerRadius) ? _topLeftRadius     : _cornerRadius ) : 0 , 
+                    corner.tr ? ( isNaN(_cornerRadius) ? _topRightRadius    : _cornerRadius ) : 0 , 
+                    corner.bl ? ( isNaN(_cornerRadius) ? _bottomLeftRadius  : _cornerRadius ) : 0 , 
+                    corner.br ? ( isNaN(_cornerRadius) ? _bottomRightRadius : _cornerRadius ) : 0
+                ) ;
+                _graphics.endFill() ;
             }
             
-            if( tr == 0 )
+            if ( _lineStyle )
             {
-                _dashline.lineTo( _x + width , _y ) ;
-            }
-            else
-            {
-                _dashline.lineTo( _x + width , _y + tr ) ;
-                _dashline.curveTo( _x + width , _y + tr - tr * inv1 , _x + width - inv2 * tr , _y + inv2 *tr ) ;
-                _dashline.curveTo( _x + ( width - tr ) + tr * inv1 , _y , _x + width - tr , _y ) ;
-            }
-            
-            if( tl == 0 )
-            {
-                _dashline.lineTo( _x , _y ) ;
-            }
-            else
-            {
-                _dashline.lineTo( _x + tl , _y ) ;
-                _dashline.curveTo( _x + tl - tl * inv1 , _y , _x + inv2 * tl , _y + inv2 * tl ) ;
-                _dashline.curveTo( _x , _y + tl - tl * inv1 , _x , _y + tl );
+                _lineStyle.apply( _graphics ) ;
+                
+                _dashline.moveTo( _x , _y + tl ) ; 
+                
+                if( bl == 0 )
+                {
+                    _dashline.lineTo( _x , _y + height ) ;
+                }
+                else
+                {
+                    _dashline.lineTo( _x , _y + height - bl ) ;
+                    _dashline.curveTo( _x , _y + ( height - bl ) + bl * inv1 , _x + inv2 * bl , _y + height - inv2 *bl ) ;
+                    _dashline.curveTo( _x + bl - bl * inv1 , _y + height , _x + bl , _y + height ) ;
+                }
+                
+                if( br == 0 )
+                {
+                    _dashline.lineTo( _x + width , _y + height ) ;
+                }
+                else
+                {
+                    _dashline.lineTo( _x + width - br , _y + height ) ;
+                    _dashline.curveTo( _x + ( width - br ) + br * inv1 , _y + height , _x + width - inv2 * br , _y + height - inv2 * br ) ;
+                    _dashline.curveTo( _x + width , _y + ( height - br ) + br * inv1 , _x + width , _y + height -br ) ;
+                }
+                
+                if( tr == 0 )
+                {
+                    _dashline.lineTo( _x + width , _y ) ;
+                }
+                else
+                {
+                    _dashline.lineTo( _x + width , _y + tr ) ;
+                    _dashline.curveTo( _x + width , _y + tr - tr * inv1 , _x + width - inv2 * tr , _y + inv2 *tr ) ;
+                    _dashline.curveTo( _x + ( width - tr ) + tr * inv1 , _y , _x + width - tr , _y ) ;
+                }
+                
+                if( tl == 0 )
+                {
+                    _dashline.lineTo( _x , _y ) ;
+                }
+                else
+                {
+                    _dashline.lineTo( _x + tl , _y ) ;
+                    _dashline.curveTo( _x + tl - tl * inv1 , _y , _x + inv2 * tl , _y + inv2 * tl ) ;
+                    _dashline.curveTo( _x , _y + tl - tl * inv1 , _x , _y + tl );
+                }
             }
         }
         
