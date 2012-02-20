@@ -89,6 +89,7 @@ package core.maths
             suite.addTestSuite( logNTest             ) ;
             suite.addTestSuite( mapTest              ) ;
             suite.addTestSuite( moduloTest           ) ;
+            suite.addTestSuite( nearlyEqualsTest     ) ;
             suite.addTestSuite( normalizeTest        ) ;
             suite.addTestSuite( percentageTest       ) ;
             suite.addTestSuite( radiansToDegreesTest ) ;
