@@ -33,28 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.arrays
+package core.arrays 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import library.ASTUce.framework.ArrayAssert;
+    import library.ASTUce.framework.TestCase;
+    
+    public class rotateTest extends TestCase 
     {
-        public static function suite():Test
+        public function rotateTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.arrays package tests");
+            super( name );
+        }
+        
+        public function testRotate():void
+        {
+            var array:Array = ["l","o","v","e"] ;
             
-            suite.addTestSuite( containsTest    ) ;
-            suite.addTestSuite( initializeTest  ) ;
-            suite.addTestSuite( pierceTest      ) ;
-            suite.addTestSuite( reduceTest      ) ;
-            suite.addTestSuite( reduceRightTest ) ;
-            suite.addTestSuite( repeatTest      ) ;
-            suite.addTestSuite( rotateTest      ) ;
-            suite.addTestSuite( shuffleTest     ) ;
-            suite.addTestSuite( spliceIntoTest  ) ;
-            
-            return suite;
+            ArrayAssert.assertEquals( rotate( array ,  1 ) , ["e","l","o","v"] , "#1" ) ;
+            ArrayAssert.assertEquals( rotate( array , -1 ) , ["l","o","v","e"] , "#2" ) ;
+            ArrayAssert.assertEquals( rotate( array , -1 ) , ["o","v","e","l"] , "#3" ) ;
+            ArrayAssert.assertEquals( rotate( array ,  3 ) , ["v","e","l","o"] , "#4" ) ;
+        }
+        
+        public function testRotateNull():void
+        {
+            assertNull( rotate( null ) , "#1" ) ;
         }
     }
 }
