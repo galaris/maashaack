@@ -16,7 +16,7 @@ The Original Code is [maashaack framework].
   
 The Initial Developers of the Original Code are
 Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-Portions created by the Initial Developers are Copyright (C) 2006-2011
+Portions created by the Initial Developers are Copyright (C) 2006-2012
 the Initial Developers. All Rights Reserved.
   
 Contributor(s):
