@@ -68,5 +68,12 @@ package core.chars
                 assertFalse( isHexDigit(nonhexdigit[i] ), nonhexdigit[i] + " is HexDigit");
             }
         }
+        
+        public function testHexDigitIndex():void
+        {
+            assertFalse( isHexDigit( "ZFK" , 0 ) , "#1" ) ;
+            assertTrue( isHexDigit(  "ZFK" , 1 ) , "#2" ) ;
+            assertFalse( isHexDigit( "ZFK" , 2 ) , "#3" ) ;
+        }
     }
 }
