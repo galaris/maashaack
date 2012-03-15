@@ -55,6 +55,7 @@ include "core/arrays/pierce.as";
 include "core/arrays/reduce.as";
 include "core/arrays/reduceRight.as";
 include "core/arrays/repeat.as";
+include "core/arrays/rotate.as";
 include "core/arrays/shuffle.as";
 include "core/arrays/spliceInto.as";
 
@@ -64,7 +65,9 @@ include "core/bytearrays/equals.as";
 
 //core.chars.*
 include "core/chars/isAlpha.as";
+include "core/chars/isAlphaOrDigit.as";
 include "core/chars/isASCII.as";
+include "core/chars/isContained.as";
 include "core/chars/isDigit.as";
 include "core/chars/isHexDigit.as";
 include "core/chars/isLower.as";
@@ -72,6 +75,8 @@ include "core/chars/isOctalDigit.as";
 include "core/chars/isOperator.as";
 include "core/chars/isUnicode.as";
 include "core/chars/isUpper.as";
+include "core/chars/isWhiteSpace.as";
+include "core/chars/whiteSpaces.as";
 
 //core.data.*
 include "core/data/aliases.as";
@@ -121,10 +126,13 @@ include "core/maths/DEG2RAD.as";
 include "core/maths/degreesToRadians.as";
 include "core/maths/distance.as";
 include "core/maths/distanceByObject.as";
+include "core/maths/EARTH_RADIUS_IN_METERS.as";
 include "core/maths/EPSILON.as";
+include "core/maths/fibonacci.as";
 include "core/maths/fixAngle.as";
 include "core/maths/floor.as";
 include "core/maths/gcd.as";
+include "core/maths/haversine.as";
 include "core/maths/hermite.as";
 include "core/maths/hypothenuse.as";
 include "core/maths/interpolate.as";
@@ -135,6 +143,9 @@ include "core/maths/lerp.as";
 include "core/maths/log10.as";
 include "core/maths/logN.as";
 include "core/maths/map.as";
+include "core/maths/MILE_TO_METER.as";
+include "core/maths/modulo.as";
+include "core/maths/nearlyEquals.as";
 include "core/maths/normalize.as";
 include "core/maths/percentage.as";
 include "core/maths/PHI.as";
@@ -149,6 +160,7 @@ include "core/maths/sinerp.as";
 include "core/maths/sinH.as";
 include "core/maths/tanD.as";
 include "core/maths/tanH.as";
+include "core/maths/vicenty.as";
 
 //core.objects.*
 include "core/objects/fuse.as";
@@ -196,7 +208,7 @@ include "core/strings/trim.as";
 include "core/strings/trimEnd.as";
 include "core/strings/trimStart.as";
 //include "core/strings/userAgent.as"; //for redtamarin we use avmplus.userAgent in avmglue
-include "core/strings/whiteSpaceChars.as";
+include "core/strings/whiteSpaces.as";
 include "core/strings/WildExp.as";
 
 //core.vectors.*
