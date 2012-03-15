@@ -36,9 +36,9 @@ the terms of any one of the MPL, the GPL or the LGPL.
 
 package system
 {
-    import library.ASTUce.framework.TestCase;
+    import core.chars.whiteSpaces;
 
-    import core.strings.whiteSpaceChars;
+    import library.ASTUce.framework.TestCase;
 
     public class CharTest extends TestCase
     {
@@ -92,7 +92,6 @@ package system
                 assertTrue( new Char( str, i ).isControl() );
                 assertTrue( Char.isControl( str, i ) );
             }
-            
         }
         
         public function testIsDigit():void
@@ -104,7 +103,6 @@ package system
                 assertTrue( new Char( str, i ).isDigit() );
                 assertTrue( Char.isDigit( str, i ) );
             }
-            
         }
         
         public function testIsHexDigit():void
@@ -186,7 +184,7 @@ package system
         
         public function testIsWhiteSpace():void
         {
-            var str:String = whiteSpaceChars.join("");
+            var str:String = whiteSpaces.join("");
             for( var i:int = 0; i < str.length; i++ )
             {
                 assertTrue( new Char( str, i ).isWhiteSpace() );
