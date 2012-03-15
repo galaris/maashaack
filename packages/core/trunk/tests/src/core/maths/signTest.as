@@ -55,7 +55,7 @@ package core.maths
             assertEquals( result , -1 , "sign(-10) failed" ) ;
             
             result = sign( 0 ) ;
-            assertEquals( result , 1 , "sign(0) failed" ) ;
+            assertEquals( result , 0 , "sign(0) failed" ) ;
             
             try
             {
