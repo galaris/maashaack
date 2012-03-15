@@ -48,7 +48,7 @@ package core.strings
      * <li><a href="http://www.fileformat.info/info/unicode/char/2060/index.htm">http://www.fileformat.info/info/unicode/char/2060/index.htm</a></li>
      * </ul>
      */
-    public const whiteSpaceChars:Array = 
+    public const whiteSpaces:Array = 
     [ 
         "\u0009" /*Horizontal tab*/ ,
         "\u000A" /*Line feed or New line*/,

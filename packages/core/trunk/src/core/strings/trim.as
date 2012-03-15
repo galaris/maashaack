@@ -52,7 +52,7 @@ package core.strings
     {
         if( chars == null )
         {
-            chars = whiteSpaceChars ;
+            chars = whiteSpaces ;
         }
         if ( source == null || source == "" )
         {

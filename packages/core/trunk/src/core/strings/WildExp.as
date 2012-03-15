@@ -260,12 +260,12 @@ package core.strings
             }
             if( _multiword ) 
             {
-                l = whiteSpaceChars.length ;
+                l = whiteSpaces.length ;
                 for( i = 0 ; i < l ; i++ ) 
                 {
-                    if( str.indexOf( whiteSpaceChars[i] ) > -1 ) 
+                    if( str.indexOf( whiteSpaces[i] ) > -1 ) 
                     {
-                        str = replace(str, whiteSpaceChars[i], ORC ) ;
+                        str = replace(str, whiteSpaces[i], ORC ) ;
                     }
                 }
             }
