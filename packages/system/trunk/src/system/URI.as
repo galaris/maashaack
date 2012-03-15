@@ -35,10 +35,11 @@
 
 package system
 {
+    import core.dump;
     import core.strings.endsWith;
     import core.strings.startsWith;
     import core.strings.trimStart;
-    
+
     import system.network.URIQuery;
     import system.network.URIScheme;
     
@@ -80,6 +81,47 @@ package system
                 _parse( _source ) ;
             }
         }
+        
+        /////////////////////////////////////////////////
+        
+//        private var _generalDelimiters:String = ":/?#[]@";
+//        private var _opaque:Boolean       ;
+//        private var _reserved:String          = _generalDelimiters+_subDelimiters;
+//        private var _subDelimiters:String     = "!$&'()*+,;=";
+//        private var _unreserved:String        = "-._~";
+        
+        private var _backslash:RegExp = /\\/g ;
+        
+        private var _fragment:String = "" ;
+        
+        private var _hasFragment:Boolean ;
+        
+        private var _host:String     = "" ;
+        
+        private var _username:String = "" ;
+        
+        private var _password:String = "" ;
+        
+        private var _path:String     = "" ;
+        
+        private var _port:int        = -1 ;
+        
+        /**
+         * The full query string without the ? character.
+         */
+        private var _query:URIQuery = new URIQuery() ;
+        
+//        private var _relative:Boolean ;
+        
+        private var _scheme:String   = "" ;
+        
+        private var _source:String = "";
+        
+        private var _UNC:Boolean;
+        
+        private var _unixFilePath:Boolean ;
+        
+        /////////////////////////////////////////////////
         
         /**
          * Allows to alter the tring representation of the URI
@@ -256,6 +298,8 @@ package system
             return str;
         }
         
+        /////////////////////////////////////////////////
+        
         /**
          * Returns the first value for a given cgi parameter or undefined if the given parameter name does not appear in the query string.
          * @param name The parameter to get values for.
@@ -268,6 +312,7 @@ package system
         
         /**
          * Returns the Dictionary reference used in the URI to set the parameters of the query.
+         * @return the Dictionary reference used in the URI to set the parameters of the query.
          */
         public function getURIQuery():URIQuery
         {
@@ -463,7 +508,7 @@ package system
             var i:int;
             var j:int;
             var subdomain:String;
-            for( i=0; i< subdomains.length ; i++ )
+            for( i = 0 ; i< subdomains.length ; i++ )
             {
                 subdomain = subdomains[i];
                 
@@ -573,34 +618,6 @@ package system
             return toString();
         }
         
-        /////////////////////////////////////////////////
-        
-//        private var _generalDelimiters:String = ":/?#[]@";
-//        private var _opaque:Boolean       ;
-//        private var _relative:Boolean     ;
-//        private var _reserved:String          = _generalDelimiters+_subDelimiters;
-//        private var _subDelimiters:String     = "!$&'()*+,;=";
-//        private var _unreserved:String        = "-._~";
-        
-        private var _backslash:RegExp = /\\/g ;
-        private var _fragment:String = "" ;
-        private var _hasFragment:Boolean ;
-        private var _host:String     = "" ;
-        private var _username:String = "" ;
-        private var _password:String = "" ;
-        private var _path:String     = "" ;
-        private var _port:int        = -1 ;
-        
-        /**
-         * The full query string without the ? character.
-         */
-        private var _query:URIQuery = new URIQuery() ;
-        
-        private var _scheme:String   = "" ;
-        private var _source:String = "";
-        private var _UNC:Boolean          ;
-        private var _unixFilePath:Boolean ;
-        
         /**
          * @private
          */
@@ -691,17 +708,17 @@ package system
                 if( str.charAt( 0 ) == "/" )
                 {
                     _parseUnixAbsoluteFilePath( str );
+                    return;
                 }
                 else if( startsWith( str, "\\\\" ) )
                 {
                     _parseWindowsUNC( str );
+                    return;
                 }
                 else
                 {
-                    throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
+                    //throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
                 }
-                
-                return;
             }
             else if( pos == 1 )
             {
@@ -713,7 +730,7 @@ package system
                 return ;
             }
             
-            /* from RFC
+            /* from RFC 3986
                  ^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?
             */
             var pattern:RegExp = new RegExp( "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)([\?]([^#]*))?(#(.*))?" , null );
@@ -729,6 +746,8 @@ package system
 //            trace( "$8: " + results[8] ); //raw fragment
 //            trace( "$9: " + results[9] ); //fragment
             
+            trace( dump(results) ) ;
+            
             /////// scheme
             
             if( results[1] && results[2] && endsWith( results[1], ":" ) )
@@ -742,6 +761,7 @@ package system
             
             
             /////// authority
+            
             if( results[3] && startsWith( results[3], "//" ) )
             {
                 var authority:String = results[4];
@@ -774,6 +794,7 @@ package system
                 }
                 
                 /////// port
+                
                 if( host.indexOf( ":" ) > -1 )
                 {
                     var port:String = host.split( ":" )[1];
@@ -807,12 +828,14 @@ package system
 //            }
             
             // path
+            
             if( results[5] )
             {
                 this.path = results[5];
             }
             
             // query
+            
             if( results[6] && startsWith( results[6], "?" ) )
             {
                 _query.parse( results[7] as String ) ;
