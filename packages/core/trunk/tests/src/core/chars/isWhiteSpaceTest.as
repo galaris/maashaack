@@ -35,8 +35,6 @@
 
 package core.chars 
 {
-    import core.strings.whiteSpaceChars;
-
     import library.ASTUce.framework.TestCase;
     
     public class isWhiteSpaceTest extends TestCase 
@@ -48,7 +46,7 @@ package core.chars
         
         public function testWhiteSpace():void
         {
-            for each( var char:String in whiteSpaceChars )
+            for each( var char:String in whiteSpaces )
             {
                 assertTrue( isWhiteSpace( char ) , "#1 " + char + " is not white space ?");
             }
