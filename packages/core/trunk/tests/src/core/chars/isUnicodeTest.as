@@ -67,5 +67,12 @@ package core.chars
                 assertFalse( isUnicode(nonunicode[i]), nonunicode[i] + " is Unicode");
             }
         }
+        
+        public function testUnicodeIndex():void
+        {
+            assertFalse( isUnicode( "1♥2" , 0 ) , "#1" ) ;
+            assertTrue( isUnicode(  "1♥2" , 1 ) , "#2" ) ;
+            assertFalse( isUnicode( "1♥2" , 2 ) , "#3" ) ;
+        }
     }
 }
