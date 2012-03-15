@@ -80,5 +80,12 @@ package core.chars
                 assertFalse( isLower(nonalpha[i]), nonalpha[i] + " is lowercase") ;
             }
         }
+        
+        public function testLowerIndex():void
+        {
+            assertFalse( isLower( "HhH" , 0 ) , "#1" ) ;
+            assertTrue( isLower(  "HhH" , 1 ) , "#2" ) ;
+            assertFalse( isLower( "HhH" , 2 ) , "#3" ) ;
+        }
     }
 }
