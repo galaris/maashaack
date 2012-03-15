@@ -35,8 +35,8 @@
 
 package system
 {
-    import core.strings.whiteSpaceChars;
-
+    import core.chars.whiteSpaces;
+    
     /**
      * The Char class.
      * <p><b>Note:</b> Very basic implementation for now based on ASCII and so <a href='http://www.ietf.org/rfc/rfc20.txt'>http://www.ietf.org/rfc/rfc20.txt</a>
@@ -739,7 +739,7 @@ package system
                we should refactore Strings
                to separate white spaces, separatores, etc.
             */
-            var ws:Array = whiteSpaceChars;
+            var ws:Array = whiteSpaces;
             var l:int    = ws.length;
             for( var i:int ; i < l ; i++ )
             {
