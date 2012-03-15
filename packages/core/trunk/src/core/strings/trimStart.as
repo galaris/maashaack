@@ -39,13 +39,13 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.trimStart ;
-     * import core.strings.whiteSpaceChars ;
+     * import core.strings.whiteSpaces ;
      * 
-     * trace( trimStart("---hello world---" , ["-"].concat(whiteSpaceChars) ) ); // hello world---
+     * trace( trimStart("---hello world---" , ["-"].concat(whiteSpaces) ) ); // hello world---
      * </pre>
      * 
      * @param source The string to trim.
-     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaces</code> array is used.
      * 
      * @return The new trimed string.
      */

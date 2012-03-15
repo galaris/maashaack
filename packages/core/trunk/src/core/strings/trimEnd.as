@@ -39,11 +39,11 @@ package core.strings
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.strings.trimEnd ;
-     * import core.strings.whiteSpaceChars ;
-     * trace( trimEnd("---hello world---" , ["-"].concat( whiteSpaceChars) ) ); // ---hello world
+     * import core.strings.whiteSpaces ;
+     * trace( trimEnd("---hello world---" , ["-"].concat( whiteSpaces ) ) ); // ---hello world
      * </pre>
      * @param source The string to trim.
-     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaces</code> array is used.
      * @return The new trimed string.
      */
     public const trimEnd:Function = function( source:String , chars:Array = null ):String

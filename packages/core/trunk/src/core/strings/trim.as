@@ -45,7 +45,7 @@ package core.strings
      * </pre>
      * 
      * @param source The string to trim.
-     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaceChars</code> array is used.
+     * @param chars The optional Array of characters to trim. If this argument is null the <code class="prettyprint">core.strings.whiteSpaces</code> array is used.
      * @return The new trimed string.
      */
     public const trim:Function = function( source:String , chars:Array = null ):String
