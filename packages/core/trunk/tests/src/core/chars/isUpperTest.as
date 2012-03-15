@@ -80,5 +80,12 @@ package core.chars
                 assertFalse( isUpper(nonalpha[i]), nonalpha[i] + " is uppercase") ;
             }
         }
+        
+        public function testUpperIndex():void
+        {
+            assertFalse( isUpper( "hHh" , 0 ) , "#1" ) ;
+            assertTrue( isUpper(  "hHh" , 1 ) , "#2" ) ;
+            assertFalse( isUpper( "hHh" , 2 ) , "#3" ) ;
+        }
     }
 }
