@@ -36,24 +36,24 @@ package core.strings
 {
     import library.ASTUce.framework.TestCase;
     
-    public class lineTerminatorCharsTest extends TestCase 
+    public class lineTerminatorsTest extends TestCase 
     {
-        public function lineTerminatorCharsTest(name:String = "")
+        public function lineTerminatorsTest(name:String = "")
         {
             super(name);
         }
         
         public function testLineTerminatorCharsLength():void
         {
-            assertEquals( 4 , lineTerminatorChars.length , "The length of the lineTerminatorChars array is not good.") ;
+            assertEquals( 4 , lineTerminators.length , "The length of the lineTerminatorChars array is not good.") ;
         }
         
         public function testLineTerminatorCharsContent():void
         {
-            assertTrue( lineTerminatorChars.indexOf("\u000A") > -1 ) ;
-            assertTrue( lineTerminatorChars.indexOf("\u000D") > -1 ) ;
-            assertTrue( lineTerminatorChars.indexOf("\u2028") > -1 ) ;
-            assertTrue( lineTerminatorChars.indexOf("\u2929") > -1 ) ;
+            assertTrue( lineTerminators.indexOf("\u000A") > -1 ) ;
+            assertTrue( lineTerminators.indexOf("\u000D") > -1 ) ;
+            assertTrue( lineTerminators.indexOf("\u2028") > -1 ) ;
+            assertTrue( lineTerminators.indexOf("\u2929") > -1 ) ;
         }
     }
 }

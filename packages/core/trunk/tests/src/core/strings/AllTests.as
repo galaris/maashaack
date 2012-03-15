@@ -58,7 +58,7 @@ package core.strings
             suite.addTestSuite( hyphenateTest            ) ;
             suite.addTestSuite( insertTest               ) ;
             suite.addTestSuite( lastIndexOfAnyTest       ) ;
-            suite.addTestSuite( lineTerminatorCharsTest  ) ;
+            suite.addTestSuite( lineTerminatorsTest  ) ;
             suite.addTestSuite( padTest                  ) ;            suite.addTestSuite( padLeftTest              ) ;
             suite.addTestSuite( padRightTest             ) ;            suite.addTestSuite( repeatTest               ) ;
             suite.addTestSuite( startsWithTest           ) ;
