@@ -249,12 +249,12 @@ package core.strings
                 {
                     str = replace(str, CRLF, ORC ) ;
                 }
-                l = lineTerminatorChars.length ;
+                l = lineTerminators.length ;
                 for( i = 0 ; i < l ; i++ ) 
                 {
-                    if( str.indexOf( lineTerminatorChars[i] ) > -1 ) 
+                    if( str.indexOf( lineTerminators[i] ) > -1 ) 
                     {
-                        str = replace(str, lineTerminatorChars[i], ORC ) ;
+                        str = replace(str, lineTerminators[i], ORC ) ;
                     }
                 }
             }

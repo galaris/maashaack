@@ -43,7 +43,7 @@ package core.strings
      * Line terminators also affect the process of automatic semicolon insertion.
      * <p>ECMAScript specification.</p>
      */
-    public const lineTerminatorChars:Array = 
+    public const lineTerminators:Array = 
     [ 
         "\u000A" /*LF : Line Feed*/ ,
         "\u000D" /*CR : Carriage Return*/,
