@@ -33,31 +33,22 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class isContainedTest extends TestCase 
     {
-        public static function suite():Test
+        public function isContainedTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
-            
-            suite.addTestSuite( isAlphaTest        ) ;
-            suite.addTestSuite( isAlphaOrDigitTest ) ;
-            suite.addTestSuite( isASCIITest        ) ;
-            suite.addTestSuite( isContainedTest    ) ;
-            suite.addTestSuite( isDigitTest        ) ;
-            suite.addTestSuite( isHexDigitTest     ) ;
-            suite.addTestSuite( isLowerTest        ) ;
-            suite.addTestSuite( isOctalDigitTest   ) ;
-            suite.addTestSuite( isOperatorTest     ) ;
-            suite.addTestSuite( isUnicodeTest      ) ;
-            suite.addTestSuite( isUpperTest        ) ;
-            suite.addTestSuite( isWhiteSpaceTest   ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testDigit():void
+        {
+            assertTrue( isContained( "-" , 0 , "-_" ) , "#1" ) ;
+            assertTrue( isContained( "_" , 0 , "-_" ) , "#2" ) ;
+            assertFalse( isContained( "+" , 0 , "-_" ) , "#3" ) ;
         }
     }
 }
