@@ -160,7 +160,7 @@ include "core/maths/sinerp.as";
 include "core/maths/sinH.as";
 include "core/maths/tanD.as";
 include "core/maths/tanH.as";
-include "core/maths/vicenty.as";
+include "core/maths/vincenty.as";
 
 //core.objects.*
 include "core/objects/fuse.as";
