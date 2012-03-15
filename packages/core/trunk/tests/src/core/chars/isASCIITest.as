@@ -67,5 +67,11 @@ package core.chars
                 assertFalse( isASCII(nonascii[i]), nonascii[i] + " is ASCII");
             }
         }
+        public function testASCIIIndex():void
+        {
+            assertFalse( isASCII( "αhβ" , 0 ) , "#1" ) ;
+            assertTrue(  isASCII( "αhβ" , 1 ) , "#2" ) ;
+            assertFalse( isASCII( "αhβ" , 2 ) , "#3" ) ;
+        }
     }
 }
