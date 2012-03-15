@@ -49,8 +49,8 @@ package core.strings
             assertEquals("hello", trimStart("   hello"));
             assertEquals("hello", trimStart("  \n  \t   \r hello"));
             assertEquals("hello world---", trimStart("---hello world---", ["-"]));
-            assertEquals("hello world---", trimStart("---hello world---", whiteSpaceChars.concat("-")));
-            assertEquals("hello world---", trimStart("--  -----  \r\n---\t-- ---hello world---", whiteSpaceChars.concat("-")));
+            assertEquals("hello world---", trimStart("---hello world---", whiteSpaces.concat("-")));
+            assertEquals("hello world---", trimStart("--  -----  \r\n---\t-- ---hello world---", whiteSpaces.concat("-")));
         }
     }
 }

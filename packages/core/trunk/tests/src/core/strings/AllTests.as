@@ -67,7 +67,7 @@ package core.strings
             suite.addTestSuite( trimStartTest            ) ;
             suite.addTestSuite( trimStartTest            ) ;
             suite.addTestSuite( userAgentTest            ) ;
-            suite.addTestSuite( whiteSpaceCharsTest      ) ;
+            suite.addTestSuite( whiteSpacesTest          ) ;
             suite.addTestSuite( WildExpTest              ) ;
              
             return suite;
