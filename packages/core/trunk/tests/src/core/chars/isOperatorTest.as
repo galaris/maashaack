@@ -56,5 +56,12 @@ package core.chars
                 assertTrue( isOperator(operators[i]), operators[i] + " is not an operator digit.");
             }
         }
+        
+        public function testIsOperatorIndex():void
+        {
+            assertFalse( isOperator( "1*2" , 0 ) , "#1" ) ;
+            assertTrue( isOperator(  "1*2" , 1 ) , "#2" ) ;
+            assertFalse( isOperator( "1*2" , 2 ) , "#3" ) ;
+        }
     }
 }
