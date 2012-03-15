@@ -37,7 +37,7 @@ package core.maths
 {
     
     /**
-     * Returns 1 if the value is positive or -1.
+     * Returns 0 if the value is 0, 1 if the value is positive or -1.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.maths.sign ;
@@ -51,10 +51,10 @@ package core.maths
      * trace ("n : " + n) ; // 1
      * 
      * n = sign(0) ;
-     * trace ("n : " + n) ; // 1
+     * trace ("n : " + n) ; // 0
      * </pre>
      * @param n the number to defined this sign.
-     * @return 1 if the value is positive or -1.
+     * @return 1 if the value is positive or -1, or 0 if the value is 0.
      * @throws RangeError if the passed-in value is NaN.
      */
     public const sign:Function = function( n:Number ):Number 
@@ -63,6 +63,13 @@ package core.maths
         {
             throw new RangeError( "core.maths.sign failed, the passed-in value not must be NaN and must be a Number between Math.MAX_VALUE and Math.MIN_VALUE." ) ;
         }
-        return ( n < 0 ) ? - 1 : 1 ;
+        else if( n == 0 ) 
+        {
+            return 0 ;
+        }
+        else
+        {
+            return ( n < 0 ) ? - 1 : 1 ;
+        }
     };
 }
