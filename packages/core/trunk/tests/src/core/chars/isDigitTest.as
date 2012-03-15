@@ -63,5 +63,12 @@ package core.chars
                 assertFalse( isDigit( nondigit[i] ), nondigit[i] + " is Digit");
             }
         }
+        
+        public function testDigitIndex():void
+        {
+            assertFalse( isDigit( "a1b" , 0 ) , "#1" ) ;
+            assertTrue( isDigit(  "a1b" , 1 ) , "#2" ) ;
+            assertFalse( isDigit( "a1b" , 2 ) , "#3" ) ;
+        }
     }
 }
