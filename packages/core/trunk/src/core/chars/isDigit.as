@@ -37,9 +37,15 @@ package core.chars
 {
     /**
      * Indicates if the specified character is a digit.
+     * @param c The expression to evaluate.
+     * @param index The optional index to evaluate a specific character in the passed-in expression.
      */
-    public const isDigit:Function = function( c:String ):Boolean
+    public function isDigit( c:String , index:uint = 0 ):Boolean
     {
-         return ("0" <= c) && (c <= "9") ;
-    };
+        if( index > 0 )
+        {
+            c = c.charAt( index ) ;
+        }
+        return ("0" <= c) && (c <= "9") ;
+    }
 }
