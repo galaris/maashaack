@@ -76,5 +76,12 @@ package core.chars
                 assertFalse( isAlpha(nonalpha[i]), nonalpha[i] + " is Alpha") ;
             }
         }
+        
+        public function testAlphaIndex():void
+        {
+            assertFalse( isAlpha( "1h2" , 0 ) , "#1" ) ;
+            assertTrue( isAlpha(  "1h2" , 1 ) , "#2" ) ;
+            assertFalse( isAlpha( "1h2" , 2 ) , "#3" ) ;
+        }
     }
 }
