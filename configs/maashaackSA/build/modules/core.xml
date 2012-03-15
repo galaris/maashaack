@@ -23,6 +23,9 @@
         <copy file="${path}/bin-release/core.swc" todir="libraries/eden/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="libraries/eden/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/core.swc" todir="packages/system/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.abc" todir="packages/system/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/core.swc" todir="packages/system_terminals/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="packages/system_terminals/lib-abc" overwrite="true" />
         

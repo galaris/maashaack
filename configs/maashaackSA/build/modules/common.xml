@@ -21,6 +21,9 @@
         <copy file="${path}/bin-release/common.swc" todir="packages/system_numeric/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_numeric/lib-abc" overwrite="true" />
         
+        <copy file="${path}/bin-release/common.swc" todir="packages/system/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/common.abc" todir="packages/system/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/common.swc" todir="packages/system_data/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/common.abc" todir="packages/system_data/lib-abc" overwrite="true" />
         

@@ -19,6 +19,9 @@
         <copy file="${path}/bin-release/eden.abc" todir="libs/abc/libraries" overwrite="true" />
         
         <!-- sync with other projects -->
+        <copy file="${path}/bin-release/eden.swc" todir="packages/system/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/eden.abc" todir="packages/system/lib-abc" overwrite="true" />
+        
         <copy file="${path}/bin-release/eden.swc" todir="packages/system_evaluators/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/eden.abc" todir="packages/system_evaluators/lib-abc" overwrite="true" />
         
