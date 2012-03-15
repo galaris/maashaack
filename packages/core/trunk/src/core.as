@@ -198,7 +198,7 @@ include "core/strings/hyphenate.as";
 include "core/strings/indexOfAny.as";
 include "core/strings/insert.as";
 include "core/strings/lastIndexOfAny.as";
-include "core/strings/lineTerminatorChars.as";
+include "core/strings/lineTerminators.as";
 include "core/strings/pad.as";
 include "core/strings/padLeft.as";
 include "core/strings/padRight.as";
