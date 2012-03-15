@@ -35,13 +35,11 @@
 
 package core.chars
 {
-    import core.strings.whiteSpaceChars;
-    
     /**
      * Indicates if the character is white space.
      * @param c The expression to evaluate.
      * @param index The optional index to evaluate a specific character in the passed-in expression.
-     * @return True if the passed-in string value is a white space defines in the core.strings.whiteSpaceChars collection.
+     * @return True if the passed-in string value is a white space defines in the core.chars.whiteSpaces collection.
      */
     public function isWhiteSpace( c:String , index:uint = 0 ):Boolean
     {
@@ -49,13 +47,15 @@ package core.chars
         {
             c = c.charAt( index ) ;
         }
-        for each( var char:String in whiteSpaceChars )
+        
+        for each( var char:String in whiteSpaces )
         {
             if( c == char )
             {
                 return true;
             }
         }
+        
         return false ;
     }
 }
