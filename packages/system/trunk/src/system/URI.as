@@ -35,7 +35,6 @@
 
 package system
 {
-    import core.dump;
     import core.strings.endsWith;
     import core.strings.startsWith;
     import core.strings.trimStart;
@@ -745,8 +744,6 @@ package system
 //            trace( "$7: " + results[7] ); //query
 //            trace( "$8: " + results[8] ); //raw fragment
 //            trace( "$9: " + results[9] ); //fragment
-            
-            trace( dump(results) ) ;
             
             /////// scheme
             
