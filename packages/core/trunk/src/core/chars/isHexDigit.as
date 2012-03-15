@@ -36,9 +36,10 @@
 package core.chars
 {
     /**
-     * Indicates if the specified character is a hexadecimal digit.
+     * Indicates if the specified character is an hexadecimal digit.
      * @param c The expression to evaluate.
      * @param index The optional index to evaluate a specific character in the passed-in expression.
+     * @return True if the specified character is an hexadecimal digit.
      */
     public function isHexDigit( c:String , index:uint = 0 ):Boolean
     {
