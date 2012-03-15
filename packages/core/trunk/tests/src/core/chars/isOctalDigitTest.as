@@ -63,5 +63,12 @@ package core.chars
                 assertFalse( isOctalDigit( nondigit[i] ), nondigit[i] + " is Digit");
             }
         }
+        
+        public function testIsOctalDigitIndex():void
+        {
+            assertFalse( isOctalDigit( "h78" , 0 ) , "#1" ) ;
+            assertTrue( isOctalDigit(  "h78" , 1 ) , "#2" ) ;
+            assertFalse( isOctalDigit( "h78" , 2 ) , "#3" ) ;
+        }
     }
 }
