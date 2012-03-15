@@ -44,15 +44,17 @@ package core.chars
         {
             var suite:TestSuite = new TestSuite("core.chars package tests");
             
-            suite.addTestSuite( isAlphaTest      ) ;
-            suite.addTestSuite( isASCIITest      ) ;
-            suite.addTestSuite( isDigitTest      ) ;
-            suite.addTestSuite( isHexDigitTest   ) ;
-            suite.addTestSuite( isLowerTest      ) ;
-            suite.addTestSuite( isOctalDigitTest ) ;
-            suite.addTestSuite( isOperatorTest   ) ;
-            suite.addTestSuite( isUnicodeTest    ) ;
-            suite.addTestSuite( isUpperTest      ) ;
+            suite.addTestSuite( isAlphaTest        ) ;
+            suite.addTestSuite( isAlphaOrDigitTest ) ;
+            suite.addTestSuite( isASCIITest        ) ;
+            suite.addTestSuite( isDigitTest        ) ;
+            suite.addTestSuite( isHexDigitTest     ) ;
+            suite.addTestSuite( isLowerTest        ) ;
+            suite.addTestSuite( isOctalDigitTest   ) ;
+            suite.addTestSuite( isOperatorTest     ) ;
+            suite.addTestSuite( isUnicodeTest      ) ;
+            suite.addTestSuite( isUpperTest        ) ;
+            suite.addTestSuite( isWhiteSpaceTest   ) ;
             
             return suite;
         }
