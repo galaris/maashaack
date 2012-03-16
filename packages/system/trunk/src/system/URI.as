@@ -109,12 +109,9 @@ package system
         
         private var _port:int        = -1 ;
         
-        /**
-         * The full query string without the ? character.
-         */
         private var _query:URIQuery = new URIQuery() ;
         
-//        private var _relative:Boolean ;
+        private var _relative:Boolean ;
         
         private var _scheme:String   = "" ;
         
@@ -703,6 +700,8 @@ package system
          */
         private function _parse( str:String ):void
         {
+            _relative = false ;
+            
             var pos:int = str.indexOf( ":" );
             if( pos < 0 )
             {
@@ -719,16 +718,23 @@ package system
                 else
                 {
                     //throw new SyntaxError( "URI scheme was not recognized, nor input string is not recognized as an absolute file path." );
+                    _relative = true ;
                 }
             }
             else if( pos == 1 )
             {
-                if( !core.chars.isAlpha( str, 0 ) )
+                if( !core.chars.isAlpha( str , 0 ) )
                 {
                     throw new SyntaxError( "URI scheme must start with alphabet character." );
                 }
+                
                 _parseWindowsAbsoluteFilePath( str );
+                
                 return ;
+            }
+            else
+            {
+                _relative = true ;
             }
             
             /* from RFC 3986
