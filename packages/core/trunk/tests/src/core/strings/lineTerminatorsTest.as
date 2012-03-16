@@ -45,7 +45,7 @@ package core.strings
         
         public function testLineTerminatorCharsLength():void
         {
-            assertEquals( 4 , lineTerminators.length , "The length of the lineTerminatorChars array is not good.") ;
+            assertEquals( 4 , lineTerminators.length , "The length of the lineTerminators array is not good.") ;
         }
         
         public function testLineTerminatorCharsContent():void
