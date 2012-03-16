@@ -163,7 +163,7 @@
     <component id="core.strings:indexOfAny"           class="core.strings.indexOfAny"           />
     <component id="core.strings:insert"               class="core.strings.insert"               />
     <component id="core.strings:lastIndexOfAny"       class="core.strings.lastIndexOfAny"       />
-    <component id="core.strings:lineTerminatorChars"  class="core.strings.lineTerminatorChars"  />
+    <component id="core.strings:lineTerminator"       class="core.strings.lineTerminators"      />
     <component id="core.strings:pad"                  class="core.strings.pad"                  />
     <component id="core.strings:padLeft"              class="core.strings.padLeft"              />
     <component id="core.strings:padRight"             class="core.strings.padRight"             />
