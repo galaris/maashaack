@@ -139,18 +139,17 @@ package core
                 if( str.charAt( 0 ) == "/" )
                 {
                     _parseUnixAbsoluteFilePath( str );
+                    return;
                 }
                 else if( str.substr(0,2) == "\\\\" )
                 {
                     _parseWindowsUNC( str );
+                    return;
                 }
-                
-                return;
             }
             else if( pos == 1 )
             {
                 _parseWindowsAbsoluteFilePath( str );
-                
                 return;
             }
             
