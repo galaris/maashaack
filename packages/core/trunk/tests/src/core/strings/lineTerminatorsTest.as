@@ -43,12 +43,12 @@ package core.strings
             super(name);
         }
         
-        public function testLineTerminatorCharsLength():void
+        public function testLineTerminatorsLength():void
         {
             assertEquals( 4 , lineTerminators.length , "The length of the lineTerminators array is not good.") ;
         }
         
-        public function testLineTerminatorCharsContent():void
+        public function testLineTerminatorsContent():void
         {
             assertTrue( lineTerminators.indexOf("\u000A") > -1 ) ;
             assertTrue( lineTerminators.indexOf("\u000D") > -1 ) ;
