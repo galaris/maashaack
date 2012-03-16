@@ -6,12 +6,9 @@ vars = {
 deps = {        
          Var("root") + "/build"               : Var("repo") + "/packages/maashaack/trunk/build",
          
-         Var("root") + "/libs"                : Var("repo") + "/packages/maashaack/trunk/libs",
+         Var("root") + "/libs"                : Var("repo") + "/libs/trunk/swc",
          
          Var("root") + "/dependencies/ASTUce" : Var("repo") + "/branches/maashaack_ekameleon/trunk/dependencies/ASTUce",
-         
-         Var("root") + "/libraries/astuce"        : "https://astuce.googlecode.com/svn/as3/trunk",
-         Var("root") + "/libraries/eden"          : "https://edenrr.googlecode.com/svn/as3/trunk",
          
          Var("root") + "/src/core"                : Var("repo") + "/packages/core/trunk/src/core",
          
