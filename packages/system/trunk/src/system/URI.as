@@ -35,6 +35,10 @@
 
 package system
 {
+    import core.chars.isAlpha;
+    import core.chars.isAlphaOrDigit;
+    import core.chars.isContained;
+    import core.chars.isDigit;
     import core.strings.endsWith;
     import core.strings.startsWith;
     import core.strings.trimStart;
@@ -393,7 +397,7 @@ package system
                 return false;
             }
             
-            if( !Char.isLetter( str, 0 ) )
+            if( !core.chars.isAlpha( str, 0 ) )
             {
                 return false;
             }
@@ -402,7 +406,7 @@ package system
             
             for( var i:int = 1; i<l; i++ )
             {
-                if( !Char.isLetterOrDigit( str, i ) && !Char.isContained( str, i, ".+-" ) )
+                if( !core.chars.isAlphaOrDigit( str, i ) && !core.chars.isContained( str, i, ".+-" ) )
                 {
                     return false;
                 }
@@ -441,7 +445,7 @@ package system
                 
                 for( j = 0; j<block.length; j++ )
                 {
-                    if( !Char.isDigit( block, j ) )
+                    if( !core.chars.isDigit( block, j ) )
                     {
                         return false;
                     }
@@ -516,16 +520,14 @@ package system
                     return false;
                 }
                 
-                if( !Char.isLetter( subdomain, 0 ) ||
-                    !Char.isLetterOrDigit( subdomain, subdomain.length-1 ) )
+                if( !core.chars.isAlpha( subdomain, 0 ) || !core.chars.isAlphaOrDigit( subdomain, subdomain.length-1 ) )
                 {
                     return false;
                 }
                 
                 for( j=1; j<subdomain.length-1; j++ )
                 {
-                    if( !Char.isLetterOrDigit( subdomain, j ) &&
-                        !Char.isContained( subdomain, j, "-_" ) )
+                    if( !core.chars.isAlphaOrDigit( subdomain, j ) && !core.chars.isContained( subdomain, j, "-_" ) )
                     {
                         return false;
                     }
@@ -721,7 +723,7 @@ package system
             }
             else if( pos == 1 )
             {
-                if( !Char.isLetter( str, 0 ) )
+                if( !core.chars.isAlpha( str, 0 ) )
                 {
                     throw new SyntaxError( "URI scheme must start with alphabet character." );
                 }
@@ -798,9 +800,9 @@ package system
                     var i:int;
                     var validPort:Boolean = true;
                     
-                    for( i=0; i<port.length; i++ )
+                    for( i = 0 ; i < port.length ; i++ )
                     {
-                        if( !Char.isDigit( port, i ) )
+                        if( !core.chars.isDigit( port, i ) )
                         {
                             validPort = false;
                         }
