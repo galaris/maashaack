@@ -38,8 +38,8 @@ package core.chars
     /**
      * The collection representation of all ASCII symbols characters.
      */
-    public const symbols:Array = 
-    [ 
+    public const symbols:Vector.<String> = Vector.<String>
+    ([ 
         " "  , // The "space" unicode character
         "!"  , // The "!" unicode character
         "\"" , // The quotation marks
@@ -73,5 +73,5 @@ package core.chars
         "|"  , // The pipe (vertical line) "|" unicode character
         "}"  , // The closing brace "}" unicode character
         "~"  , // The tilde "~" pr "-" overline, general accent unicode character
-    ];
+    ]);
 }
