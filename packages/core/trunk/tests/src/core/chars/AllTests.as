@@ -56,6 +56,7 @@ package core.chars
             suite.addTestSuite( isUnicodeTest      ) ;
             suite.addTestSuite( isUpperTest        ) ;
             suite.addTestSuite( isWhiteSpaceTest   ) ;
+            suite.addTestSuite( symbolsTest        ) ;
             suite.addTestSuite( whiteSpacesTest    ) ;
             
             return suite;
