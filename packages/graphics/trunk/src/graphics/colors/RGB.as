@@ -185,6 +185,30 @@ package graphics.colors
         }
         
         /**
+         * Calculates the distance between two color number values.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import graphics.colors.RGB ;
+         * 
+         * var rgb:RGB = RGB.fromNumber( 0xFFFFFF ) ;
+         * 
+         * trace( rgb.distance( RGB.fromNumber( 0x000000 ) ) ) ; // 195075
+         * trace( rgb.distance( RGB.fromNumber( 0xFFEEFF ) ) ) ; // 289
+         * trace( rgb.distance( RGB.fromNumber( 0xFFFFFF ) ) ) ; // 0
+         * 
+         * rgb = RGB.fromNumber( 0xFF0000 ) ;
+         * 
+         * trace( rgb.distance( RGB.fromNumber( 0xFF0000 ) ) ) ; // 0
+         * </pre>
+         */
+        public function distance( rgb:RGB ):Number
+        {
+            return   Math.pow( _red   - rgb._red   , 2 ) 
+                   + Math.pow( _green - rgb._green , 2 ) 
+                   + Math.pow( _blue  - rgb._blue  , 2 ) ;
+        }
+        
+        /**
          * Compares the specified object with this object for equality.
          * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
          */
