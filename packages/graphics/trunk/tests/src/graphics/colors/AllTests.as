@@ -89,6 +89,7 @@ package graphics.colors
             suite.addTestSuite( Yxy2XYZTest ) ;
             
             suite.addTestSuite( distanceTest ) ; 
+            suite.addTestSuite( equalsTest ) ; 
             
             return suite;
         }
