@@ -188,6 +188,14 @@ package graphics.colors
             assertEquals(rgb.b , 255 , "02-03 - difference() failed.") ;
         }
         
+        public function testDistance():void
+        {
+            assertEquals( 195075 , RGB.fromNumber(0xFFFFFF).distance( RGB.fromNumber(0x000000) ) , "#1" ) ; // 195075
+            assertEquals( 289    , RGB.fromNumber(0xFFFFFF).distance( RGB.fromNumber(0xFFEEFF) ) , "#2" ) ; // 289
+            assertEquals( 0      , RGB.fromNumber(0xFF0000).distance( RGB.fromNumber(0xFF0000) ) , "#3" ) ; // 0
+            assertEquals( 0      , RGB.fromNumber(0xFFFFFF).distance( RGB.fromNumber(0xFFFFFF) ) , "#4" ) ; // 0
+        }
+        
         public function testFromNumber():void 
         {
            var rgb:RGB = new RGB() ;
