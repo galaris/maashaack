@@ -37,6 +37,15 @@ package graphics.colors
 {
     /**
      * Calculates the distance between two color number values.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import graphics.colors.distance ;
+     * 
+     * trace( distance( 0xFFFFFF , 0x000000 ) ) ; // 195075
+     * trace( distance( 0xFFFFFF , 0xFFEEFF ) ) ; // 289
+     * trace( distance( 0xFF0000 , 0xFF0000 ) ) ; // 0
+     * trace( distance( 0xFFFFFF , 0xFFFFFF ) ) ; // 0
+     * </pre>
      */
     public function distance( color1:uint , color2:uint ):Number
     {
