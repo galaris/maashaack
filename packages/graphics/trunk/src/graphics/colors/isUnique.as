@@ -60,6 +60,11 @@ package graphics.colors
      */
     public function isUnique( color:uint , colors:Vector.<uint> , tolerance:Number = 0.01 ):Boolean
     {
+        if( colors == null || colors.length == 0 )
+        {
+            return true ;
+        }
+        
         tolerance = tolerance * ( 255 * 255 * 3 ) << 0 ;
         
         var distance:Number ;
