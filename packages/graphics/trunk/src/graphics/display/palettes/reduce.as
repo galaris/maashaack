@@ -36,6 +36,7 @@
 package graphics.display.palettes
 {
     import flash.display.BitmapData;
+    import flash.geom.Point;
     
     /**
      * Reduces the number of colors in palette of the BitmapData source. 
