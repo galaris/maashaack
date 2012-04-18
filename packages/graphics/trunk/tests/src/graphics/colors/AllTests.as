@@ -91,6 +91,7 @@ package graphics.colors
             suite.addTestSuite( distanceTest ) ; 
             suite.addTestSuite( equalsTest ) ;
             suite.addTestSuite( isUniqueTest ) ;
+            suite.addTestSuite( uniqueColorsTest ) ;
             
             return suite;
         }
