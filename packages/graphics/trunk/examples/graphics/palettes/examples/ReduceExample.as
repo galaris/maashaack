@@ -35,7 +35,7 @@
 
 package examples 
 {
-    import graphics.display.palettes.average;
+    import graphics.display.palettes.averageColors;
     import graphics.display.palettes.reduce;
 
     import flash.display.Sprite;
@@ -54,11 +54,11 @@ package examples
             girl.x = 20 ;
             girl.y = 20 ;
             
-            trace( "average : " + average( girl.bitmapData ) ) ;
+            trace( "averages : " + averageColors( girl.bitmapData , 16 ) ) ;
             
             reduce( girl.bitmapData , 8 ) ;
             
-            trace( "average : " + average( girl.bitmapData ) ) ;
+            trace( "averages : " + averageColors( girl.bitmapData , 16 ) ) ;
             
             addChild( girl ) ;
         }
