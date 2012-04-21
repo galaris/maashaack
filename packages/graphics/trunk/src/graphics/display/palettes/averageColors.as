@@ -53,7 +53,7 @@ package graphics.display.palettes
         var y:int ;
         
         var averages:Vector.<uint> = new Vector.<uint>();
-        var columns:int = Math.round( Math.sqrt( colours ) );
+        var columns:int = Math.round( Math.sqrt( colors ) );
         
         var w:int = Math.round( source.width  / columns );
         var h:int = Math.round( source.height / columns );
@@ -65,15 +65,17 @@ package graphics.display.palettes
         rect.width  = w ;
         rect.height = h ;
         
-        for (var i:int ; i < colours ; i++ ) 
+        for (var i:int ; i < colors ; i++ ) 
         {
             rect.x = x ;
             rect.y = y ;
             
             box = new BitmapData( w , h , false ) ;
+            
             box.copyPixels( source , rect , origin );
             
-            averages.push( averageColour( box ) );
+            averages.push( average( box ) );
+            
             box.dispose();
             
             col = i % columns;
