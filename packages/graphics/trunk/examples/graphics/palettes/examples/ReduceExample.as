@@ -35,7 +35,7 @@
 
 package examples 
 {
-    import graphics.display.palettes.orderColors;
+    import graphics.display.palettes.extract;
     import graphics.display.palettes.reduce;
 
     import flash.display.Sprite;
@@ -54,9 +54,7 @@ package examples
             girl.x = 20 ;
             girl.y = 20 ;
             
-            trace( "orderColors : " + orderColors( girl.bitmapData ) ) ;
-            
-            reduce( girl.bitmapData , 8 ) ;
+            reduce( girl.bitmapData , 16 ) ;
             
             addChild( girl ) ;
         }
