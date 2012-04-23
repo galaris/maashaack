@@ -65,7 +65,7 @@ package examples
             
             ////////
             
-            canvas.bitmapData = new Girl().bitmapData ;
+            canvas.bitmapData = new Joconde().bitmapData ;
             
             addChild( canvas ) ;
             addChild( container ) ;
@@ -98,7 +98,7 @@ package examples
             
             var color:uint ;
             
-            var palette:Vector.<uint> = extract( canvas.bitmapData , 64 , 0.01 ) ;
+            var palette:Vector.<uint> = extract( canvas.bitmapData , 24 , 0.005 ) ;
             
             var row:int;
             var col:int;
