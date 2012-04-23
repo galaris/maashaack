@@ -38,7 +38,7 @@ package graphics.display.palettes
     /**
      * Sorts two ColorEntry objects by count.
      */
-    protected function sortColorEntryByCount( c1:ColorEntry, c2:ColorEntry ):int
+    internal function sortColorEntryByCount( c1:ColorEntry, c2:ColorEntry ):int
     {
         if ( c1.count > c2.count ) 
         {
