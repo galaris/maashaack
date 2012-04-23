@@ -58,5 +58,14 @@ package graphics.display.palettes
          * The number of entry with the specific color.
          */
         public var count:uint ;
+        
+        /**
+         * Returns the String representation of the object.
+         * @return the String representation of the object.
+         */
+        public function toString():String
+        {
+            return "[ColorEntry color:" + color + " count:" + count + "]" ;
+        }
     }
 }
