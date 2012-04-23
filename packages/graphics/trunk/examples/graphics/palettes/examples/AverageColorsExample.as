@@ -108,7 +108,7 @@ package examples
             
             for each( color in palette ) 
             {
-                trace( '0x' + color.toString(16) );
+                trace( '0x' + color.toString(16).toUpperCase() );
                 
                 box = new Shape();
                 
