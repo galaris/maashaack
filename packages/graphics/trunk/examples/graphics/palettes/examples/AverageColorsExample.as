@@ -35,7 +35,7 @@
 
 package examples 
 {
-    import graphics.display.palettes.extract;
+    import graphics.display.palettes.averageColors;
     
     import flash.display.Bitmap;
     import flash.display.Shape;
@@ -43,9 +43,9 @@ package examples
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     
-    public class ExtractExample extends Sprite 
+    public class AverageColorsExample extends Sprite 
     {
-        public function ExtractExample()
+        public function AverageColorsExample()
         {
             ////////
             
@@ -98,7 +98,7 @@ package examples
             
             var color:uint ;
             
-            var palette:Vector.<uint> = extract( canvas.bitmapData , 100 , 0.005 ) ;
+            var palette:Vector.<uint> = averageColors( canvas.bitmapData , 64 ) ;
             
             var row:int;
             var col:int;
