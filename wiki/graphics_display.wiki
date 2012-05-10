@@ -7,7 +7,7 @@
 
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `graphics.display.*` || FP_10_2 || n/a  || [core] [system] [graphics] || no || 0.3.1 ||
+|| `graphics.display.*` || FP_10_2 || n/a  || [core] [system] [graphics] || yes || no ||
 
 <br>
 <br>
