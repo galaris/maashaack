@@ -47,9 +47,9 @@ package examples
     import flash.display.StageScaleMode;
     import flash.events.KeyboardEvent;
     import flash.ui.Keyboard;
-
+    
     /**
-     * Example with the vegas.display.Background class.
+     * Example with the graphics.display.Background class.
      */
     public class BackgroundExample extends Sprite 
     {
@@ -69,9 +69,9 @@ package examples
             
             /*
             background.borderMode  = Background.DASHED ;
-            background.line        = new LineStyle(2, 0xFFFFFF, 1) ;            
+            background.line        = new LineStyle(2, 0xFFFFFF, 1) ;
             background.dashLength  = 6 ;
-            background.dashSpacing = 6 ;            
+            background.dashSpacing = 6 ;
             */
             
             ///////
@@ -92,7 +92,6 @@ package examples
             // little tests
             // background.minWidth = 600 ;
             // background.maxWidth = 250 ;
-
         }
         
         protected var background:Background ;
