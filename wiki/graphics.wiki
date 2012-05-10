@@ -11,7 +11,7 @@
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
 || `graphics.display.*` || FP_10_2 || n/a  || [core] [system] [graphics] || no || 0.3.1 ||
 
-|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_terminals%2Ftags /packages/system_terminals/trunk] ||
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fgraphics%2Ftrunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/graphics/trunk graphics-display-read-only` ||
 
 <br>
