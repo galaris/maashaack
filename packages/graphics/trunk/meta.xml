@@ -32,10 +32,6 @@
     </target>
     
     <target name="build-swc">
-        <!-- 
-            generate a SWC component
-            this SWC is compatible Flash CS3/CS4 and Flex 3/4
-         -->
         <compc
             output="${basedir}/${release.dir}/${project.swc}"
             target-player="${local.flashplayerversion}"
@@ -50,6 +46,7 @@
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
             <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                <include name="${FLEX_HOME}/libs/air/airglobal.swc"/>
                 <include name="core.swc"/>
                 <include name="eden.swc"/>
                 <include name="common.swc"/>
