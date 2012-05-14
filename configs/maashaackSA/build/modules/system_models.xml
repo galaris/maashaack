@@ -15,6 +15,11 @@
         <!-- deploy to libs -->
         <copy file="${path}/bin-release/system.models.swc" todir="libs/swc/packages" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.models.abc" todir="libs/abc/packages" overwrite="true" />-->
+        
+        <!-- sync with other projects--> 
+        
+        <copy file="${path}/bin-release/system.models.swc" todir="packages/graphics/lib-swc" overwrite="true" />
+        
     </target>
     
 </project>
