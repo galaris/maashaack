@@ -60,9 +60,10 @@ package graphics.filters
             suite.addTestSuite( RippleCrossingTest ) ;
             suite.addTestSuite( RoundPixelTest ) ;
             suite.addTestSuite( SharpenTest ) ;
-            suite.addTestSuite( TwirlTest ) ;            suite.addTestSuite( WaveReflectionTest ) ;
-            
+            suite.addTestSuite( TwirlTest ) ;
+            suite.addTestSuite( WaveReflectionTest ) ;            
             suite.addTestSuite( CircleSpectrumFilterTest ) ;
+            suite.addTestSuite( DonutFilterTest ) ;
             suite.addTestSuite( FiltersTest ) ;
             suite.addTestSuite( GrayScaleFilterTest ) ;
             suite.addTestSuite( HalftoneFilterTest ) ;            suite.addTestSuite( HoleFilterTest ) ;
