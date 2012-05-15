@@ -61,9 +61,9 @@ package graphics.filters
          */
         public function get color():Number
         {
-            _color.r = shader.data.color.value[0] ;
-            _color.g = shader.data.color.value[1] ;
-            _color.b = shader.data.color.value[2] ;
+            _color.r = shader.data.color.value[0] * 0xFF ;
+            _color.g = shader.data.color.value[1] * 0xFF ;
+            _color.b = shader.data.color.value[2] * 0xFF ;
             _color.a = shader.data.color.value[3] ;
             return _color.valueOf() ;
         }
@@ -74,7 +74,10 @@ package graphics.filters
         public function set color( value:Number ):void
         {
             _color.fromNumber( value ) ;
-            shader.data.count.value[0] = _color.valueOf() ;
+            shader.data.color.value[0] = _color.r / 0xFF ;
+            shader.data.color.value[1] = _color.g / 0xFF ;
+            shader.data.color.value[2] = _color.b / 0xFF ;
+            shader.data.color.value[3] = _color.a ;
         }
         
         /**
