@@ -35,6 +35,8 @@
 
 package graphics.filters 
 {
+    import graphics.colors.RGBA;
+
     import flash.display.Shader;
     import flash.filters.BitmapFilter;
 
@@ -55,6 +57,27 @@ package graphics.filters
         }
         
         /**
+         * The decimal RGBA color value parameter (ex : 0xFFFF0000 )  
+         */
+        public function get color():Number
+        {
+            _color.r = shader.data.color.value[0] ;
+            _color.g = shader.data.color.value[1] ;
+            _color.b = shader.data.color.value[2] ;
+            _color.a = shader.data.color.value[3] ;
+            return _color.valueOf() ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set color( value:Number ):void
+        {
+            _color.fromNumber( value ) ;
+            shader.data.count.value[0] = _color.valueOf() ;
+        }
+        
+        /**
          * The number of elements between 0 and 100 (default 5).
          */
         public function get count():Number
@@ -71,6 +94,70 @@ package graphics.filters
         }
         
         /**
+         * The height parameter of the donuts.
+         */
+        public function get height():Number
+        {
+            return shader.data.height.value[0] ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set height( value:Number ):void
+        {
+            shader.data.height.value[0] = value ;
+        }
+        
+        /**
+         * The max ratio value between 0 and 1 (default 0.45).
+         */
+        public function get max():Number
+        {
+            return shader.data.max.value[0] ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set max( value:Number ):void
+        {
+            shader.data.max.value[0] = value ;
+        }
+        
+        /**
+         * The min ratio value between 0 and 1 (default 0.25).
+         */
+        public function get min():Number
+        {
+            return shader.data.min.value[0] ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set min( value:Number ):void
+        {
+            shader.data.min.value[0] = value ;
+        }
+        
+        /**
+         * The width parameter of the donuts.
+         */
+        public function get width():Number
+        {
+            return shader.data.width.value[0] ;
+        }
+        
+        /**
+         * @private
+         */
+        public function set width( value:Number ):void
+        {
+            shader.data.width.value[0] = value ;
+        }
+        
+        /**
          * Returns a shallow copy of the object.
          * @return a shallow copy of the object.
          */
@@ -78,5 +165,10 @@ package graphics.filters
         {
             return new DonutFilter( shader ) ;
         }
+        
+        /**
+         * @private
+         */
+        private const _color:RGBA = new RGBA() ;
     }
 }
