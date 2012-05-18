@@ -96,5 +96,20 @@ package graphics.filters
             assertEquals( clone.shader , filter.shader , "#2" ) ;
             assertEquals( clone.count   , filter.count , "#3" ) ;
         }
+        
+        public function testColor():void
+        {
+            filter = new DonutFilter( ) ;
+            assertEquals( 0xFF333333 , filter.color , "#1" ) ; // default
+            
+            filter.color = 0x7F7F7F7F ;
+            assertEquals( 0x7F7F7F7F , filter.color , "#2" ) ;
+            
+            filter.color = 0x00000000 ;
+            assertEquals( 0x00000000 , filter.color , "#3" ) ;
+            
+            filter.color = 0x7FFFFFFFF ;
+            assertEquals( 0xFFFFFFFF , filter.color , "#4" ) ;
+        }
     }
 }
