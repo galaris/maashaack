@@ -75,14 +75,6 @@ package system.numeric
         }
         
         /**
-         * Calculates total fibonacci levels in 'n'.
-          */
-        public static function fibonacci( n:Number ):Number 
-        {
-            return Math.round((Math.pow((1+Math.sqrt(5))/2,n)-Math.pow((1-Math.sqrt(5))/2,n))/Math.sqrt(5));
-        }
-        
-        /**
          * Extends the domain of the factorial function by calculating the factorial of decimal numbers.
          */
         public static function gammaApprox(n:Number):Number 
