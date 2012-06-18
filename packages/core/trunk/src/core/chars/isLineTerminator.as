@@ -47,7 +47,7 @@ package core.chars
      * @see ECMA-262 spec 7.3 (PDF p24/188)
      * @param c The expression to evaluate.
      * @param index The optional index to evaluate a specific character in the passed-in expression.
-     * @return True if the passed-in string value is a white space defines in the core.chars.whiteSpaces collection.
+     * @return True if the passed-in string value is a line terminator defines in the core.chars.lineTerminators collection.
      */
     public function isLineTerminator( c:String , index:uint = 0 ):Boolean
     {
