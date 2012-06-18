@@ -33,35 +33,31 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class isLineTerminatorTest extends TestCase 
     {
-        public static function suite():Test
+        public function isLineTerminatorTest( name:String = "" )
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
-            
-            suite.addTestSuite( isAlphaTest          ) ;
-            suite.addTestSuite( isAlphaOrDigitTest   ) ;
-            suite.addTestSuite( isASCIITest          ) ;
-            suite.addTestSuite( isContainedTest      ) ;
-            suite.addTestSuite( isDigitTest          ) ;
-            suite.addTestSuite( isHexDigitTest       ) ;
-            suite.addTestSuite( isLineTerminatorTest ) ;
-            suite.addTestSuite( isLowerTest          ) ;
-            suite.addTestSuite( isOctalDigitTest     ) ;
-            suite.addTestSuite( isOperatorTest       ) ;
-            suite.addTestSuite( isUnicodeTest        ) ;
-            suite.addTestSuite( isUpperTest          ) ;
-            suite.addTestSuite( isSymbolTest         ) ;
-            suite.addTestSuite( isWhiteSpaceTest     ) ;
-            suite.addTestSuite( symbolsTest          ) ;
-            suite.addTestSuite( whiteSpacesTest      ) ;
-            
-            return suite;
+            super(name);
+        }
+        
+        public function testIsLineTerminators():void
+        {
+            for each( var char:String in lineTerminators )
+            {
+                assertTrue( isLineTerminator( char ) , "#1 " + char + " is not a line terminator ?");
+            }
+            assertFalse( isLineTerminator( "a" ) , "#2" );
+        }
+        
+        public function testIsLineTerminatorIndex():void
+        {
+            assertFalse( isLineTerminator( "a b" , 0 ) , "#1" ) ;
+            assertTrue( isLineTerminator(  "a\rb" , 1 ) , "#2" ) ;
+            assertFalse( isLineTerminator( "a b" , 2 ) , "#3" ) ;
         }
     }
 }
