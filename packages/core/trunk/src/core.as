@@ -64,19 +64,25 @@ include "core/bytearrays/copy.as";
 include "core/bytearrays/equals.as";
 
 //core.chars.*
+include "core/chars/lineTerminators.as";
+include "core/chars/symbols.as";
+include "core/chars/whiteSpaces.as";
+
 include "core/chars/isAlpha.as";
 include "core/chars/isAlphaOrDigit.as";
 include "core/chars/isASCII.as";
 include "core/chars/isContained.as";
 include "core/chars/isDigit.as";
 include "core/chars/isHexDigit.as";
+include "core/chars/isIdentifierStart.as";
+include "core/chars/isLineTerminator.as";
 include "core/chars/isLower.as";
 include "core/chars/isOctalDigit.as";
 include "core/chars/isOperator.as";
+include "core/chars/isSymbol.as";
 include "core/chars/isUnicode.as";
 include "core/chars/isUpper.as";
 include "core/chars/isWhiteSpace.as";
-include "core/chars/whiteSpaces.as";
 
 //core.data.*
 include "core/data/aliases.as";
