@@ -33,36 +33,52 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package core.chars
+package core.chars 
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
+    import library.ASTUce.framework.TestCase;
     
-    public class AllTests
+    public class isIdentifierStartTest extends TestCase 
     {
-        public static function suite():Test
+        public function isIdentifierStartTest(name:String = "")
         {
-            var suite:TestSuite = new TestSuite("core.chars package tests");
+            super(name);
+        }
+        
+        public function testIsIdentifierStart():void
+        {
+            var i:int ;
             
-            suite.addTestSuite( isAlphaTest           ) ;
-            suite.addTestSuite( isAlphaOrDigitTest    ) ;
-            suite.addTestSuite( isASCIITest           ) ;
-            suite.addTestSuite( isContainedTest       ) ;
-            suite.addTestSuite( isDigitTest           ) ;
-            suite.addTestSuite( isHexDigitTest        ) ;
-            suite.addTestSuite( isIdentifierStartTest ) ;
-            suite.addTestSuite( isLineTerminatorTest  ) ;
-            suite.addTestSuite( isLowerTest           ) ;
-            suite.addTestSuite( isOctalDigitTest      ) ;
-            suite.addTestSuite( isOperatorTest        ) ;
-            suite.addTestSuite( isUnicodeTest         ) ;
-            suite.addTestSuite( isUpperTest           ) ;
-            suite.addTestSuite( isSymbolTest          ) ;
-            suite.addTestSuite( isWhiteSpaceTest      ) ;
-            suite.addTestSuite( symbolsTest           ) ;
-            suite.addTestSuite( whiteSpacesTest       ) ;
+            var identifierStart:String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_$";
             
-            return suite;
+            var chars:Array ;
+            
+            chars = identifierStart.split("") ;
+            
+            for( i = 0 ; i < chars.length ; i++ )
+            {
+                assertTrue( isIdentifierStart(chars[i]), chars[i] + " is not a start identifier.");
+            }
+            
+            //////
+            
+            var digit:String   = "0123456789";
+            var greek:String   = "αβγδεζηθικλμνξοπ";
+            var special:String = "&~#\"\'{([-|`\\^@)]=+¨^¤%*,?;.:/!§<>ª¹²³";
+            
+            var nonIdentifierStart:String = digit + greek + special ;
+            
+            chars = nonIdentifierStart.split("") ;
+            
+            for( i = 0 ; i < chars.length ; i++ )
+            {
+                assertFalse( isIdentifierStart(chars[i]), chars[i] + " is a start identifier.");
+            }
+        }
+        public function testIsIdentifierStartIndex():void
+        {
+            assertFalse( isIdentifierStart( "é_β" , 0 ) , "#1" ) ;
+            assertTrue(  isIdentifierStart( "é_β" , 1 ) , "#2" ) ;
+            assertFalse( isIdentifierStart( "é_β" , 2 ) , "#3" ) ;
         }
     }
 }
