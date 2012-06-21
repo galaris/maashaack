@@ -36,7 +36,7 @@
 package core.chars
 {
     /**
-     * Inidcates if the specified character is a line terminator.
+     * Indicates if the specified character is a line terminator.
      * <p>Note: line terminators</p>
      * <pre class="prettyprint">
      * "\n" - u000A - LF : Line Feed
