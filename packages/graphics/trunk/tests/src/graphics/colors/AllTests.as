@@ -90,6 +90,7 @@ package graphics.colors
             
             suite.addTestSuite( distanceTest ) ; 
             suite.addTestSuite( equalsTest ) ;
+            suite.addTestSuite( fadeTest ) ; 
             suite.addTestSuite( isUniqueTest ) ;
             suite.addTestSuite( uniqueColorsTest ) ;
             
