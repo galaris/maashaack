@@ -80,9 +80,9 @@ package graphics.colors
         var g:uint = color1 >> 8 & 0xFF;
         var b:uint = color1 & 0xFF;
         
-        r += ( ( color2 >> 16      ) -r ) * ratio ;
-        g += ( ( color2 >> 8 & 0xFF) -g ) * ratio ;
-        b += ( ( color2      & 0xFF) -b ) * ratio ;
+        r += ( ( color2 >> 16       ) -r ) * ratio ;
+        g += ( ( color2 >> 8 & 0xFF ) -g ) * ratio ;
+        b += ( ( color2      & 0xFF ) -b ) * ratio ;
         
         return r<<16 | g<<8 | b ;
     }
