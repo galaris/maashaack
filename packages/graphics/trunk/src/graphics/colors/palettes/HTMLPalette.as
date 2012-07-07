@@ -186,6 +186,40 @@ package graphics.colors.palettes
         }
         
         /**
+         * Returns a generic basic Array of the palette. 
+         * All entries in the Array are a basic generic object.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import core.dump ;
+         * import graphics.colors.palettes.HTMLPalette ;
+         * 
+         * var palette:HTMLPalette = new HTMLPalette() ;
+         * 
+         * trace( "colors : " + dump(palette.toArray() ) ) ;
+         * </pre>
+         */
+        public function toArray():Array
+        {
+            var rgb:RGB ;
+            var array:Array = [] ;
+            var names:Vector.<String> = this.names ;
+            for each( var name:String in names )
+            {
+                rgb = this[name] as RGB ;
+                if( rgb )
+                {
+                    array.push
+                    ({ 
+                        name  : name , 
+                        value : rgb.valueOf() , 
+                        hex   : rgb.toHexString("#") 
+                    }) ;
+                }
+            }
+            return array ;
+        }
+        
+        /**
          * @private
          */
         private const _colors:Vector.<RGB> = Vector.<RGB>
