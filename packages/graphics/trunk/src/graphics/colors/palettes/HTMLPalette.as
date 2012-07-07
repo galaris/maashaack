@@ -49,6 +49,89 @@ package graphics.colors.palettes
         {
             
         }
+        //////////////////
+        
+        /**
+         * The html 'aqua' color constant.
+         */
+        public const aqua:RGB = RGB.fromNumber(0x00FFFF) ;
+        
+        /**
+         * The html 'black' color constant.
+         */
+        public const black:RGB = RGB.fromNumber(0x000000) ;
+        
+        /**
+         * The html 'blue' color constant.
+         */
+        public const blue:RGB = RGB.fromNumber(0x0000FF) ;
+        
+        /**
+         * The html 'fuchsia' color constant.
+         */
+        public const fuchsia:RGB = RGB.fromNumber(0xFF00FF) ;
+        
+        /**
+         * The html 'gray' color constant.
+         */
+        public const gray:RGB = RGB.fromNumber(0x808080) ;
+        
+        /**
+         * The html 'green' color constant.
+         */
+        public const green:RGB = RGB.fromNumber(0x008000) ;
+        
+        /**
+         * The html 'lime' color constant.
+         */
+        public const lime:RGB = RGB.fromNumber(0x00FF00) ;
+        
+        /**
+         * The html 'olive' color constant.
+         */
+        public const olive:RGB = RGB.fromNumber(0x808000) ;
+        
+        /**
+         * The html 'maroon' color constant.
+         */
+        public const maroon:RGB = RGB.fromNumber(0x800000) ;
+        
+        /**
+         * The html 'navy' color constant.
+         */
+        public const navy:RGB = RGB.fromNumber(0x000080) ;
+        
+        /**
+         * The html 'purple' color constant.
+         */
+        public const purple:RGB = RGB.fromNumber(0x800080) ;
+        
+        /**
+         * The html 'red' color constant.
+         */
+        public const red:RGB = RGB.fromNumber(0xFF0000) ;
+        
+        /**
+         * The html 'silver' color constant.
+         */
+        public const silver:RGB = RGB.fromNumber(0xC0C0C0) ;
+        
+        /**
+         * The html 'teal' color constant.
+         */
+        public const teal:RGB = RGB.fromNumber(0x008080) ;
+        
+        /**
+         * The html 'white' color constant.
+         */
+        public const white:RGB = RGB.fromNumber(0xFFFFFF) ;
+        
+        /**
+         * The html 'yellow' color constant.
+         */
+        public const yellow:RGB = RGB.fromNumber(0xFFFF00) ;
+        
+        //////////////////
         
         /**
          * Fills out the supplied color collection with the colors from the internal color table. 
@@ -91,90 +174,6 @@ package graphics.colors.palettes
         {
             return false ;
         }
-        
-        //////////////////
-        
-        /**
-         * The html 'aqua' color  reference.
-         */
-        public const aqua:RGB = RGB.fromNumber(0x00FFFF) ;
-        
-        /**
-         * The html 'black' color  reference.
-         */
-        public const black:RGB = RGB.fromNumber(0x000000) ;
-        
-        /**
-         * The html 'blue' color  reference.
-         */
-        public const blue:RGB = RGB.fromNumber(0x0000FF) ;
-        
-        /**
-         * The html 'fuchsia' color  reference.
-         */
-        public const fuchsia:RGB = RGB.fromNumber(0xFF00FF) ;
-        
-        /**
-         * The html 'gray' color  reference.
-         */
-        public const gray:RGB = RGB.fromNumber(0x808080) ;
-        
-        /**
-         * The html 'green' color  reference.
-         */
-        public const green:RGB = RGB.fromNumber(0x008000) ;
-        
-        /**
-         * The html 'lime' color  reference.
-         */
-        public const lime:RGB = RGB.fromNumber(0x00FF00) ;
-        
-        /**
-         * The html 'olive' color  reference.
-         */
-        public const olive:RGB = RGB.fromNumber(0x808000) ;
-        
-        /**
-         * The html 'maroon' color  reference.
-         */
-        public const maroon:RGB = RGB.fromNumber(0x800000) ;
-        
-        /**
-         * The html 'navy' color  reference.
-         */
-        public const navy:RGB = RGB.fromNumber(0x000080) ;
-        
-        /**
-         * The html 'purple' color  reference.
-         */
-        public const purple:RGB = RGB.fromNumber(0x800080) ;
-        
-        /**
-         * The html 'red' color  reference.
-         */
-        public const red:RGB = RGB.fromNumber(0xFF0000) ;
-        
-        /**
-         * The html 'silver' color  reference.
-         */
-        public const silver:RGB = RGB.fromNumber(0xC0C0C0) ;
-        
-        /**
-         * The html 'teal' color  reference.
-         */
-        public const teal:RGB = RGB.fromNumber(0x008080) ;
-        
-        /**
-         * The html 'white' color  reference.
-         */
-        public const white:RGB = RGB.fromNumber(0xFFFFFF) ;
-        
-        /**
-         * The html 'yellow' color  reference.
-         */
-        public const yellow:RGB = RGB.fromNumber(0xFFFF00) ;
-        
-        //////////////////
         
         /**
          * @private
