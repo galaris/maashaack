@@ -39,6 +39,16 @@ package graphics.colors.palettes
     
     /**
      * Collection of all basic HTML colors.
+     * <p><b>Example :</b></p>
+     * <pre class="prettyprint">
+     * import graphics.colors.palettes.HTMLPalette ;
+     * 
+     * var palette:HTMLPalette = new HTMLPalette() ;
+     * 
+     * trace( "length : " + palette.length ) ;
+     * trace( "names  : " + palette.names  ) ;
+     * trace( "colors : " + palette.colors ) ;
+     * </pre>
      */
     public class HTMLPalette implements Palette
     {
