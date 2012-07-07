@@ -56,7 +56,7 @@ package graphics.colors.palettes
          */
         public function get colors():Vector.<RGB>
         {
-            var result:Vector.<RGB> = new Vector.<RGB>( _colors.length , true ) ;
+            var result:Vector.<RGB> = new Vector.<RGB>() ;
             for each( var color:RGB in _colors )
             {
                 result.push( color ) ;
@@ -70,6 +70,18 @@ package graphics.colors.palettes
         public function get length():uint
         {
             return _colors.length ;
+        }
+        
+        /**
+         * Returns the list of all html color names.
+         */
+        public function get names():Vector.<String>
+        {
+            return Vector.<String>
+            ([
+                "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", 
+                "navy", "olive", "purple", "red", "silver", "teal", "white", "yellow"
+            ]) ;
         }
         
         /**
