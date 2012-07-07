@@ -169,8 +169,7 @@ package graphics.colors.palettes
          */
         private const _colors:Vector.<RGB> = Vector.RGB
         ([
-            aqua, black, blue, fuchsia, gray, green, lime, maroon, 
-            navy, olive, purple, red, silver, teal, white, yellow
+            aqua, black, blue, fuchsia, gray, green, lime, maroon, navy, olive, purple, red, silver, teal, white, yellow
         ]);
     }
 }
