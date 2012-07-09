@@ -59,6 +59,7 @@ package graphics.colors.palettes
         {
             
         }
+        
         //////////////////
         
         /**
