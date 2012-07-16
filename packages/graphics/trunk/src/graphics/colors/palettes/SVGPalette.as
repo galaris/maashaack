@@ -998,6 +998,7 @@ package graphics.colors.palettes
          * 
          * trace( "colors : " + dump(palette.toArray() ) ) ;
          * </pre>
+         * @return a generic basic Array of the palette. 
          */
         public function toArray():Array
         {
