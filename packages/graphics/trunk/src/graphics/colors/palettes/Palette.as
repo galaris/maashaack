@@ -57,5 +57,11 @@ package graphics.colors.palettes
          * Indicates whether the palette contains an alpha transparent color.
          */
         function hasAlpha():Boolean ;
+        
+        /**
+         * Returns a generic basic Array of the palette.
+         * @return a generic basic Array of the palette.
+         */
+        function toArray():Array
     }
 }
