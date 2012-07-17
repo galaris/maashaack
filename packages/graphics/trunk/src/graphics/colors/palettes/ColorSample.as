@@ -64,7 +64,7 @@ package graphics.colors.palettes
         public var rgb:RGB ;
         
         /**
-         * Returns the generic object of the color sample.
+         * Returns the generic object of the color sample : <code class="prettyprint">{ name:String, color:uint, rgb:String , hex:String }</code>.
          * @return the generic object of the color sample.
          */
         public function toObject():Object
