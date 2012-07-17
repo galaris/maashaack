@@ -805,12 +805,12 @@ package graphics.colors.palettes
          */
         public function get colors():Vector.<RGB>
         {
-            var result:Vector.<RGB> = new Vector.<RGB>() ;
-            for each( var item:ColorSample in _colors )
+            var vector:Vector.<RGB> = new Vector.<RGB>() ;
+            for each( var sample:ColorSample in _colors )
             {
-                result.push( item.rgb ) ;
+                vector.push( sample.rgb ) ;
             }
-            return result ;
+            return vector ;
         }
         
         /**
@@ -826,12 +826,12 @@ package graphics.colors.palettes
          */
         public function get names():Vector.<String>
         {
-            var result:Vector.<String> = new Vector.<String>() ;
-            for each( var item:Object in _colors )
+            var vector:Vector.<String> = new Vector.<String>() ;
+            for each( var sample:ColorSample in _colors )
             {
-                result.push( item.name ) ;
+                vector.push( sample.name ) ;
             }
-            return result ;
+            return vector ;
         }
         
         /**
@@ -859,9 +859,9 @@ package graphics.colors.palettes
         public function toArray():Array
         {
             var array:Array = [] ;
-            for each( var item:ColorSample in _colors )
+            for each( var sample:ColorSample in _colors )
             {
-                array.push( item.toObject() ) ;
+                array.push( sample.toObject() ) ;
             }
             return array ;
         }
