@@ -143,6 +143,31 @@ package graphics.colors.palettes
         public const blueViolet:RGB = RGB.fromNumber( 0x7366BD ) ;
         
         /**
+         * The crayola 'Blush' color constant.
+         */
+        public const blush:RGB = RGB.fromNumber( 0xDE5D83 ) ;
+        
+        /**
+         * The crayola 'Brick Red' color constant.
+         */
+        public const brickRed:RGB = RGB.fromNumber( 0xCB4154 ) ;
+        
+        /**
+         * The crayola 'Brown' color constant.
+         */
+        public const brown:RGB = RGB.fromNumber( 0xCB4674D ) ;
+        
+        /**
+         * The crayola 'Burnt Orange' color constant.
+         */
+        public const burntOrange:RGB = RGB.fromNumber( 0xFF7F49 ) ;
+        
+        /**
+         * The crayola 'Burnt Sienna' color constant.
+         */
+        public const burntSienna:RGB = RGB.fromNumber( 0xEA7E5D ) ;
+        
+        /**
          * @private
          */
         private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
@@ -162,7 +187,12 @@ package graphics.colors.palettes
             new ColorSample( "blueBell"        , blueBell        ) , 
             new ColorSample( "blueGray"        , blueGray        ) , 
             new ColorSample( "blueGreen"       , blueGreen       ) , 
-            new ColorSample( "blueViolet"      , blueViolet      ) 
+            new ColorSample( "blueViolet"      , blueViolet      ) , 
+            new ColorSample( "blush"           , blush           ) , 
+            new ColorSample( "brickRed"        , brickRed        ) , 
+            new ColorSample( "brown"           , brown           ) , 
+            new ColorSample( "burntOrange"     , burntOrange     ) , // #020
+            new ColorSample( "burntSienna"     , burntSienna     ) 
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
         
