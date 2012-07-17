@@ -62,5 +62,21 @@ package graphics.colors.palettes
          * The rgb color reference of the color.
          */
         public var rgb:RGB ;
+        
+        /**
+         * Returns the generic object of the color sample.
+         * @return the generic object of the color sample.
+         */
+        public function toObject():Object
+        {
+            var object:Object = { name : name } ;
+            if( rgb )
+            {
+                object.color = rgb.valueOf() ;
+                object.rgb   = rgb.r + "," + rgb.g + "," + rgb.b ;
+                object.hex   = rgb.toHexString("#") ;
+            }
+            return object ;
+        }
     }
 }
