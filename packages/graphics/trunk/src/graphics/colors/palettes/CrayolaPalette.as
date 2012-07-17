@@ -162,7 +162,7 @@ package graphics.colors.palettes
             new ColorSample( "blueBell"        , blueBell        ) , 
             new ColorSample( "blueGray"        , blueGray        ) , 
             new ColorSample( "blueGreen"       , blueGreen       ) , 
-            new ColorSample( "blueGreen"       , blueGreen       ) 
+            new ColorSample( "blueViolet"      , blueViolet      ) 
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
         
