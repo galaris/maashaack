@@ -150,12 +150,12 @@ package graphics.colors.palettes
          */
         public function get colors():Vector.<RGB>
         {
-            var result:Vector.<RGB> = new Vector.<RGB>() ;
-            for each( var color:RGB in _colors )
+            var vector:Vector.<RGB> = new Vector.<RGB>() ;
+            for each( var sample:ColorSample in _colors )
             {
-                result.push( color ) ;
+                vector.push( sample.rgb ) ;
             }
-            return result ;
+            return vector ;
         }
         
         /**
@@ -171,11 +171,12 @@ package graphics.colors.palettes
          */
         public function get names():Vector.<String>
         {
-            return Vector.<String>
-            ([
-                "aqua", "black", "blue", "fuchsia", "gray", "green", "lime", "maroon", 
-                "navy", "olive", "purple", "red", "silver", "teal", "white", "yellow"
-            ]) ;
+            var vector:Vector.<String> = new Vector.<String>() ;
+            for each( var item:Object in _colors )
+            {
+                vector.push( item.name ) ;
+            }
+            return vector ;
         }
         
         /**
@@ -202,21 +203,10 @@ package graphics.colors.palettes
          */
         public function toArray():Array
         {
-            var rgb:RGB ;
             var array:Array = [] ;
-            var names:Vector.<String> = this.names ;
-            for each( var name:String in names )
+            for each( var sample:ColorSample in _colors )
             {
-                rgb = this[name] as RGB ;
-                if( rgb )
-                {
-                    array.push
-                    ({ 
-                        name  : name , 
-                        value : rgb.valueOf() , 
-                        hex   : rgb.toHexString("#") 
-                    }) ;
-                }
+                array.push( sample.toObject() ) ;
             }
             return array ;
         }
@@ -224,10 +214,24 @@ package graphics.colors.palettes
         /**
          * @private
          */
-        private const _colors:Vector.<RGB> = Vector.<RGB>
+        private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
         ([
-            aqua, black, blue, fuchsia, gray, green, lime, maroon, 
-            navy, olive, purple, red, silver, teal, white, yellow
+            new ColorSample( "aqua"   , aqua    ) ,
+            new ColorSample( "black"  , black   ) ,
+            new ColorSample( "blue"   , black   ) , 
+            new ColorSample( "fuchsia", fuchsia ) , 
+            new ColorSample( "gray"   , gray    ) ,
+            new ColorSample( "green"  , green   ) ,
+            new ColorSample( "lime"   , lime    ) ,
+            new ColorSample( "maroon" , maroon  ) ,
+            new ColorSample( "navy"   , navy    ) ,
+            new ColorSample( "olive"  , olive   ) ,
+            new ColorSample( "purple" , purple  ) ,
+            new ColorSample( "red"    , red     ) ,
+            new ColorSample( "silver" , silver  ) ,
+            new ColorSample( "teal"   , teal    ) ,
+            new ColorSample( "white"  , white   ) ,
+            new ColorSample( "yellow" , yellow  )
         ]);
     }
 }
