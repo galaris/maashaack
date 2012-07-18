@@ -218,41 +218,138 @@ package graphics.colors.palettes
         public const cottonCandy:RGB = RGB.fromNumber( 0xFFBCD9 ) ;
         
         /**
+         * The crayola 'Dandelion' color constant.
+         */
+        public const dandelion:RGB = RGB.fromNumber( 0xFDDB6D ) ;
+        
+        /**
+         * The crayola 'Denim' color constant.
+         */
+        public const denim:RGB = RGB.fromNumber( 0x2B6CC4 ) ;
+        
+        /**
+         * The crayola 'Desert Sand' color constant.
+         */
+        public const desertSand:RGB = RGB.fromNumber( 0xEFCDB8 ) ;
+        
+        /**
+         * The crayola 'Eggplant Sand' color constant.
+         */
+        public const eggplant:RGB = RGB.fromNumber( 0x6E5160 ) ;
+        
+        /**
+         * The crayola 'Electric Lime' color constant.
+         */
+        public const electricLime:RGB = RGB.fromNumber( 0xCEFF1D ) ;
+        
+        /**
+         * The crayola 'Fern' color constant.
+         */
+        public const fern:RGB = RGB.fromNumber( 0x71BC78 ) ;
+        
+        /**
+         * The crayola 'Forest Green' color constant.
+         */
+        public const forestGreen:RGB = RGB.fromNumber( 0x6DAE81 ) ;
+        
+        /**
+         * The crayola 'Fuchsia Green' color constant.
+         */
+        public const fuchsia:RGB = RGB.fromNumber( 0xC364C5 ) ;
+        
+        /**
+         * The crayola 'Fuzzy Wuzzy' color constant.
+         */
+        public const fuzzyWuzzy:RGB = RGB.fromNumber( 0xCC6666 ) ;
+        
+        /**
+         * The crayola 'Gold' color constant.
+         */
+        public const gold:RGB = RGB.fromNumber( 0xE7C697 ) ;
+        
+        /**
+         * The crayola 'Goldenrod' color constant.
+         */
+        public const goldenrod:RGB = RGB.fromNumber( 0xFCD975 ) ;
+        
+        /**
+         * The crayola 'Granny Smith Apple' color constant.
+         */
+        public const grannySmithApple:RGB = RGB.fromNumber( 0xA8E4A0 ) ;
+        
+        /**
+         * The crayola 'Gray' color constant.
+         */
+        public const gray:RGB = RGB.fromNumber( 0x95918C ) ;
+        
+        /**
+         * The crayola 'Green' color constant.
+         */
+        public const green:RGB = RGB.fromNumber( 0x1CAC78 ) ;
+        
+        /**
+         * The crayola 'Green Blue' color constant.
+         */
+        public const greenBlue:RGB = RGB.fromNumber( 0x1164B4 ) ;
+        
+        /**
+         * The crayola 'Green Yellow' color constant.
+         */
+        public const greenYellow:RGB = RGB.fromNumber( 0xF0E891 ) ;
+        
+        /**
          * @private
          */
         private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
         ([
-            new ColorSample( "almond"          , almond          ) , // #001
-            new ColorSample( "antiqueBrass"    , antiqueBrass    ) , 
-            new ColorSample( "apricot"         , apricot         ) , 
-            new ColorSample( "aquamarine"      , aquamarine      ) , 
-            new ColorSample( "asparagus"       , asparagus       ) , 
-            new ColorSample( "atomicTangerine" , atomicTangerine ) , 
-            new ColorSample( "bananaMania"     , bananaMania     ) , 
-            new ColorSample( "beaver"          , beaver          ) , 
-            new ColorSample( "bittersweet"     , bittersweet     ) , 
-            new ColorSample( "black"           , black           ) , // #010
-            new ColorSample( "blizzardBlue"    , blizzardBlue    ) , 
-            new ColorSample( "blue"            , blue            ) , 
-            new ColorSample( "blueBell"        , blueBell        ) , 
-            new ColorSample( "blueGray"        , blueGray        ) , 
-            new ColorSample( "blueGreen"       , blueGreen       ) , 
-            new ColorSample( "blueViolet"      , blueViolet      ) , 
-            new ColorSample( "blush"           , blush           ) , 
-            new ColorSample( "brickRed"        , brickRed        ) , 
-            new ColorSample( "brown"           , brown           ) , 
-            new ColorSample( "burntOrange"     , burntOrange     ) , // #020
-            new ColorSample( "burntSienna"     , burntSienna     ) ,
-            new ColorSample( "cadetBlue"       , cadetBlue       ) ,
-            new ColorSample( "canary"          , canary          ) ,
-            new ColorSample( "caribbeanGreen"  , caribbeanGreen  ) ,
-            new ColorSample( "carnationPink"   , carnationPink   ) ,
-            new ColorSample( "cerise"          , cerise          ) ,
-            new ColorSample( "cerulean"        , cerulean        ) ,
-            new ColorSample( "chestnut"        , chestnut        ) ,
-            new ColorSample( "copper"          , copper          ) ,
-            new ColorSample( "cornflower"      , cornflower      ) , // #030
-            new ColorSample( "cottonCandy"     , cottonCandy     ) ,
+            new ColorSample( "almond"           , almond           ) , // #001
+            new ColorSample( "antiqueBrass"     , antiqueBrass     ) , 
+            new ColorSample( "apricot"          , apricot          ) , 
+            new ColorSample( "aquamarine"       , aquamarine       ) , 
+            new ColorSample( "asparagus"        , asparagus        ) , 
+            new ColorSample( "atomicTangerine"  , atomicTangerine  ) , 
+            new ColorSample( "bananaMania"      , bananaMania      ) , 
+            new ColorSample( "beaver"           , beaver           ) , 
+            new ColorSample( "bittersweet"      , bittersweet      ) , 
+            new ColorSample( "black"            , black            ) , // #010
+            new ColorSample( "blizzardBlue"     , blizzardBlue     ) , 
+            new ColorSample( "blue"             , blue             ) , 
+            new ColorSample( "blueBell"         , blueBell         ) , 
+            new ColorSample( "blueGray"         , blueGray         ) , 
+            new ColorSample( "blueGreen"        , blueGreen        ) , 
+            new ColorSample( "blueViolet"       , blueViolet       ) , 
+            new ColorSample( "blush"            , blush            ) , 
+            new ColorSample( "brickRed"         , brickRed         ) , 
+            new ColorSample( "brown"            , brown            ) , 
+            new ColorSample( "burntOrange"      , burntOrange      ) , // #020
+            new ColorSample( "burntSienna"      , burntSienna      ) , 
+            new ColorSample( "cadetBlue"        , cadetBlue        ) , 
+            new ColorSample( "canary"           , canary           ) , 
+            new ColorSample( "caribbeanGreen"   , caribbeanGreen   ) , 
+            new ColorSample( "carnationPink"    , carnationPink    ) , 
+            new ColorSample( "cerise"           , cerise           ) , 
+            new ColorSample( "cerulean"         , cerulean         ) , 
+            new ColorSample( "chestnut"         , chestnut         ) , 
+            new ColorSample( "copper"           , copper           ) , 
+            new ColorSample( "cornflower"       , cornflower       ) , // #030
+            new ColorSample( "cottonCandy"      , cottonCandy      ) , 
+            new ColorSample( "dandelion"        , dandelion        ) , 
+            new ColorSample( "denim"            , denim            ) , 
+            new ColorSample( "desertSand"       , desertSand       ) , 
+            new ColorSample( "eggplant"         , eggplant         ) , 
+            new ColorSample( "electricLime"     , electricLime     ) , 
+            new ColorSample( "fern"             , fern             )  ,
+            new ColorSample( "forestGreen"      , forestGreen      ) , 
+            new ColorSample( "fuchsia"          , fuchsia          ) , 
+            new ColorSample( "fuzzyWuzzy"       , fuzzyWuzzy       ) , // #040
+            new ColorSample( "gold"             , gold             ) , 
+            new ColorSample( "goldenrod"        , goldenrod        ) , 
+            new ColorSample( "grannySmithApple" , grannySmithApple ) , 
+            new ColorSample( "gray"             , gray             ) , 
+            new ColorSample( "green"            , green            ) , 
+            new ColorSample( "greenBlue"        , greenBlue        ) , 
+            new ColorSample( "greenYellow"      , greenYellow      ) , 
+             
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
         
