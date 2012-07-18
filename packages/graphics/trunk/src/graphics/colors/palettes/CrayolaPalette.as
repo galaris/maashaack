@@ -168,6 +168,56 @@ package graphics.colors.palettes
         public const burntSienna:RGB = RGB.fromNumber( 0xEA7E5D ) ;
         
         /**
+         * The crayola 'Cadet Blue' color constant.
+         */
+        public const cadetBlue:RGB = RGB.fromNumber( 0xB0B7C6 ) ;
+        
+        /**
+         * The crayola 'Canary' color constant.
+         */
+        public const canary:RGB = RGB.fromNumber( 0xFFFF99 ) ;
+        
+        /**
+         * The crayola 'Caribbean Green' color constant.
+         */
+        public const caribbeanGreen:RGB = RGB.fromNumber( 0x1CD3A2 ) ;
+        
+        /**
+         * The crayola 'Carnation Pink' color constant.
+         */
+        public const carnationPink:RGB = RGB.fromNumber( 0xFFAACC ) ;
+        
+        /**
+         * The crayola 'Cerise' color constant.
+         */
+        public const cerise:RGB = RGB.fromNumber( 0xDD4492 ) ;
+        
+        /**
+         * The crayola 'Cerulean' color constant.
+         */
+        public const cerulean:RGB = RGB.fromNumber( 0x1DACD6 ) ;
+        
+        /**
+         * The crayola 'Chestnut' color constant.
+         */
+        public const chestnut:RGB = RGB.fromNumber( 0xBC5D58 ) ;
+        
+        /**
+         * The crayola 'Copper' color constant.
+         */
+        public const copper:RGB = RGB.fromNumber( 0xDD9475 ) ;
+        
+        /**
+         * The crayola 'Cornflower' color constant.
+         */
+        public const cornflower:RGB = RGB.fromNumber( 0x9ACEEB ) ;
+        
+        /**
+         * The crayola 'Cotton Candy' color constant.
+         */
+        public const cottonCandy:RGB = RGB.fromNumber( 0xFFBCD9 ) ;
+        
+        /**
          * @private
          */
         private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
@@ -192,7 +242,17 @@ package graphics.colors.palettes
             new ColorSample( "brickRed"        , brickRed        ) , 
             new ColorSample( "brown"           , brown           ) , 
             new ColorSample( "burntOrange"     , burntOrange     ) , // #020
-            new ColorSample( "burntSienna"     , burntSienna     ) 
+            new ColorSample( "burntSienna"     , burntSienna     ) ,
+            new ColorSample( "cadetBlue"       , cadetBlue       ) ,
+            new ColorSample( "canary"          , canary          ) ,
+            new ColorSample( "caribbeanGreen"  , caribbeanGreen  ) ,
+            new ColorSample( "carnationPink"   , carnationPink   ) ,
+            new ColorSample( "cerise"          , cerise          ) ,
+            new ColorSample( "cerulean"        , cerulean        ) ,
+            new ColorSample( "chestnut"        , chestnut        ) ,
+            new ColorSample( "copper"          , copper          ) ,
+            new ColorSample( "cornflower"      , cornflower      ) , // #030
+            new ColorSample( "cottonCandy"     , cottonCandy     ) ,
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
         
