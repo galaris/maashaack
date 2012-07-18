@@ -757,7 +757,78 @@ package graphics.colors.palettes
          * The crayola 'Grass Green' color constant. 
          */
         public const grassGreen:RGB = RGB.fromNumber( 0x458B00 ) ;
-                  
+        
+        //////////////////
+        
+        /**
+         * Fills out the supplied color collection with the colors from the internal color table. 
+         * The color collection should be sized according to the return results from the length property.
+         */
+        public function get colors():Vector.<RGB>
+        {
+            var vector:Vector.<RGB> = new Vector.<RGB>() ;
+            for each( var sample:ColorSample in _colors )
+            {
+                vector.push( sample.rgb ) ;
+            }
+            return vector ;
+        }
+        
+        /**
+         * Retrieves the number of colors in the color table.
+         */
+        public function get length():uint
+        {
+            return _colors.length ;
+        }
+        
+        /**
+         * Returns the list of all html color names.
+         */
+        public function get names():Vector.<String>
+        {
+            var vector:Vector.<String> = new Vector.<String>() ;
+            for each( var item:Object in _colors )
+            {
+                vector.push( item.name ) ;
+            }
+            return vector ;
+        }
+        
+        /**
+         * Indicates whether the palette contains an alpha transparent color.
+         */
+        public function hasAlpha():Boolean
+        {
+            return false ;
+        }
+        
+        /**
+         * Returns a generic basic Array of the palette. 
+         * All entries in the Array are a basic generic object.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import core.dump ;
+         * import graphics.colors.palettes.HTMLPalette ;
+         * 
+         * var palette:HTMLPalette = new HTMLPalette() ;
+         * 
+         * trace( "colors : " + dump(palette.toArray() ) ) ;
+         * </pre>
+         * @return a generic basic Array of the palette. 
+         */
+        public function toArray():Array
+        {
+            var array:Array = [] ;
+            for each( var sample:ColorSample in _colors )
+            {
+                array.push( sample.toObject() ) ;
+            }
+            return array ;
+        }
+        
+        //////////////////
+        
         /**
          * All main Crayola colors based on http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors.
          * @private
@@ -899,75 +970,6 @@ package graphics.colors.palettes
             new ColorSample( "Yellow Orange"             , yellowOrange           ) , 
             new ColorSample( "Grass Green"               , grassGreen             ) 
         ]);
-        
-        //////////////////
-        
-        /**
-         * Fills out the supplied color collection with the colors from the internal color table. 
-         * The color collection should be sized according to the return results from the length property.
-         */
-        public function get colors():Vector.<RGB>
-        {
-            var vector:Vector.<RGB> = new Vector.<RGB>() ;
-            for each( var sample:ColorSample in _colors )
-            {
-                vector.push( sample.rgb ) ;
-            }
-            return vector ;
-        }
-        
-        /**
-         * Retrieves the number of colors in the color table.
-         */
-        public function get length():uint
-        {
-            return _colors.length ;
-        }
-        
-        /**
-         * Returns the list of all html color names.
-         */
-        public function get names():Vector.<String>
-        {
-            var vector:Vector.<String> = new Vector.<String>() ;
-            for each( var item:Object in _colors )
-            {
-                vector.push( item.name ) ;
-            }
-            return vector ;
-        }
-        
-        /**
-         * Indicates whether the palette contains an alpha transparent color.
-         */
-        public function hasAlpha():Boolean
-        {
-            return false ;
-        }
-        
-        /**
-         * Returns a generic basic Array of the palette. 
-         * All entries in the Array are a basic generic object.
-         * <p><b>Example :</b></p>
-         * <pre class="prettyprint">
-         * import core.dump ;
-         * import graphics.colors.palettes.HTMLPalette ;
-         * 
-         * var palette:HTMLPalette = new HTMLPalette() ;
-         * 
-         * trace( "colors : " + dump(palette.toArray() ) ) ;
-         * </pre>
-         * @return a generic basic Array of the palette. 
-         */
-        public function toArray():Array
-        {
-            var array:Array = [] ;
-            for each( var sample:ColorSample in _colors )
-            {
-                array.push( sample.toObject() ) ;
-            }
-            return array ;
-        }
     }
 }
    
