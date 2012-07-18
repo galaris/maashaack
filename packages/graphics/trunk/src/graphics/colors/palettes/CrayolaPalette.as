@@ -578,11 +578,13 @@ package graphics.colors.palettes
         
         /**
          * The crayola 'Scarlet' color constant. 
+         * Renamed from "Torch Red" in 2000.
          */
         public const scarlet:RGB = RGB.fromNumber( 0xFC2847 ) ;
         
         /**
          * The crayola 'Screamin' Green' color constant. 
+         * Renamed from "Ultra Green" in 1990. Fluorescent.
          */
         public const screaminGreen:RGB = RGB.fromNumber( 0x76FF7A ) ;
         
@@ -608,11 +610,13 @@ package graphics.colors.palettes
         
         /**
          * The crayola 'Shocking Pink' Green' color constant. 
+         * Renamed from "Ultra Pink" in 1990. Fluorescent.
          */
         public const shockingPink:RGB = RGB.fromNumber( 0xFB7EFD ) ;
         
         /**
          * The crayola 'Silver' Green' color constant. 
+         * Metallic.
          */
         public const silver:RGB = RGB.fromNumber( 0xCDC5C2 ) ;
         
@@ -628,6 +632,7 @@ package graphics.colors.palettes
         
         /**
          * The crayola 'Sunglow' color constant. 
+         * Fluorescent. 
          */
         public const sunglow:RGB = RGB.fromNumber( 0xFFCF48 ) ;
         
@@ -635,6 +640,52 @@ package graphics.colors.palettes
          * The crayola 'Sunset Orange' color constant. 
          */
         public const sunsetOrange:RGB = RGB.fromNumber( 0xFD5E53 ) ;
+        
+        /**
+         * The crayola 'Tan' color constant. 
+         */
+        public const tan:RGB = RGB.fromNumber( 0xFAA76C ) ;
+        
+        /**
+         * The crayola 'Teal Blue' color constant. 
+         */
+        public const tealBlue:RGB = RGB.fromNumber( 0x18A7B5 ) ;
+        
+        /**
+         * The crayola 'Thistle' color constant. 
+         */
+        public const thistle:RGB = RGB.fromNumber( 0xEBC7DF ) ;
+        
+        /**
+         * The crayola 'Tickle Me Pink' color constant. 
+         */
+        public const tickleMePink:RGB = RGB.fromNumber( 0xFC89AC ) ;
+        
+        /**
+         * The crayola 'Timberwolf' color constant. 
+         */
+        public const timberwolf:RGB = RGB.fromNumber( 0xDBD7D2 ) ;
+        
+        /**
+         * The crayola 'Tropical Rain Forest' color constant. 
+         */
+        public const tropicalRainForest:RGB = RGB.fromNumber( 0x17806D ) ;
+        
+        /**
+         * The crayola 'Tumbleweed' color constant. 
+         */
+        public const tumbleweed:RGB = RGB.fromNumber( 0xDEAA88 ) ;
+        
+        /**
+         * The crayola 'Turquoise Blue' color constant. 
+         */
+        public const turquoiseBlue:RGB = RGB.fromNumber( 0x77DDE7 ) ;
+        
+        /**
+         * The crayola 'Unmellow Yellow' color constant. 
+         * Fluorescent.
+         */
+        public const unmellowYellow:RGB = RGB.fromNumber( 0xFFFF66 ) ;
         
         /**
          * @private
@@ -751,7 +802,16 @@ package graphics.colors.palettes
             new ColorSample( "Sky Blue"                  , skyBlue                ) , 
             new ColorSample( "Spring Green"              , springGreen            ) , 
             new ColorSample( "Sunglow"                   , sunglow                ) , // #110
-            new ColorSample( "Sunset Orange"             , sunsetOrange           ) 
+            new ColorSample( "Sunset Orange"             , sunsetOrange           ) , 
+            new ColorSample( "Tan"                       , tan                    ) , 
+            new ColorSample( "Teal Blue"                 , tealBlue               ) , 
+            new ColorSample( "Thistle"                   , thistle                ) , 
+            new ColorSample( "Tickle Me Pink"            , tickleMePink           ) , 
+            new ColorSample( "Timberwolf"                , timberwolf             ) , 
+            new ColorSample( "Tropical Rain Forest"      , tropicalRainForest     ) , 
+            new ColorSample( "Tumbleweed"                , tumbleweed             ) , 
+            new ColorSample( "Turquoise Blue"            , turquoiseBlue          ) , 
+            new ColorSample( "Unmellow Yellow"           , unmellowYellow         )   // #120
             
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
