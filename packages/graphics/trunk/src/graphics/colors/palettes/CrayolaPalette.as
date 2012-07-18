@@ -68,7 +68,8 @@ package graphics.colors.palettes
         public const almond:RGB = RGB.fromNumber( 0xEFDECD ) ;
         
         /**
-         * The crayola 'Antique Brass' color constant.
+         * The crayola 'Antique Brass' color constant. 
+         * Metallic.
          */
         public const antiqueBrass:RGB = RGB.fromNumber( 0xCD9575 ) ;
         
@@ -88,7 +89,8 @@ package graphics.colors.palettes
         public const asparagus:RGB = RGB.fromNumber( 0x87A96B ) ;
         
         /**
-         * The crayola 'Atomic Tangerine' color constant.
+         * The crayola 'Atomic Tangerine' color constant. 
+         *  Renamed from "Ultra Yellow" in 1990. Fluorescent.
          */
         public const atomicTangerine:RGB = RGB.fromNumber( 0xFFA474 ) ;
         
@@ -113,7 +115,8 @@ package graphics.colors.palettes
         public const black:RGB = RGB.fromNumber( 0x000000 ) ;
         
         /**
-         * The crayola 'Blizzard Blue' color constant.
+         * The crayola 'Blizzard Blue' color constant. 
+         * Renamed from "Ultra Blue" in 1990. Fluorescent.
          */
         public const blizzardBlue:RGB = RGB.fromNumber( 0xACE5EE ) ;
         
@@ -143,7 +146,8 @@ package graphics.colors.palettes
         public const blueViolet:RGB = RGB.fromNumber( 0x7366BD ) ;
         
         /**
-         * The crayola 'Blush' color constant.
+         * The crayola 'Blush' color constant. 
+         * Renamed from "Cranberry" in 2000.
          */
         public const blush:RGB = RGB.fromNumber( 0xDE5D83 ) ;
         
@@ -198,12 +202,14 @@ package graphics.colors.palettes
         public const cerulean:RGB = RGB.fromNumber( 0x1DACD6 ) ;
         
         /**
-         * The crayola 'Chestnut' color constant.
+         * The crayola 'Chestnut' color constant. 
+         * Renamed from "Indian Red" in 1999.
          */
         public const chestnut:RGB = RGB.fromNumber( 0xBC5D58 ) ;
         
         /**
-         * The crayola 'Copper' color constant.
+         * The crayola 'Copper' color constant. 
+         * Metallic.
          */
         public const copper:RGB = RGB.fromNumber( 0xDD9475 ) ;
         
@@ -238,7 +244,8 @@ package graphics.colors.palettes
         public const eggplant:RGB = RGB.fromNumber( 0x6E5160 ) ;
         
         /**
-         * The crayola 'Electric Lime' color constant.
+         * The crayola 'Electric Lime' color constant. 
+         * Fluorescent.
          */
         public const electricLime:RGB = RGB.fromNumber( 0xCEFF1D ) ;
         
@@ -263,7 +270,8 @@ package graphics.colors.palettes
         public const fuzzyWuzzy:RGB = RGB.fromNumber( 0xCC6666 ) ;
         
         /**
-         * The crayola 'Gold' color constant.
+         * The crayola 'Gold' color constant. 
+         * Metallic.
          */
         public const gold:RGB = RGB.fromNumber( 0xE7C697 ) ;
         
@@ -296,6 +304,48 @@ package graphics.colors.palettes
          * The crayola 'Green Yellow' color constant.
          */
         public const greenYellow:RGB = RGB.fromNumber( 0xF0E891 ) ;
+        
+        /**
+         * The crayola 'Hot Magenta' color constant. 
+         * Fluorescent.
+         */
+        public const hotMagenta:RGB = RGB.fromNumber( 0xFF1DCE ) ;
+        
+        /**
+         * The crayola 'Inchworm' color constant.
+         */
+        public const inchworm:RGB = RGB.fromNumber( 0xB2EC5D ) ;
+        
+        /**
+         * The crayola 'Indigo' color constant.
+         */
+        public const indigo:RGB = RGB.fromNumber( 0x5D76CB ) ;
+        
+        /**
+         * The crayola 'Jazzberry Jam' color constant.
+         */
+        public const jazzberryJam:RGB = RGB.fromNumber( 0xCA3767 ) ;
+        
+        /**
+         * The crayola 'Jungle Green' color constant.
+         */
+        public const jungleGreen:RGB = RGB.fromNumber( 0x3BB08F ) ;
+        
+        /**
+         * The crayola 'Laser Lemon' color constant.
+         * Renamed from "Chartreuse" in 1990. Fluorescent.
+         */
+        public const laserLemon:RGB = RGB.fromNumber( 0xFEFE22 ) ;
+        
+        /**
+         * The crayola 'Lavender' color constant.
+         */
+        public const lavender:RGB = RGB.fromNumber( 0xFCB4D5 ) ;
+        
+        /**
+         * The crayola 'Lemon Yellow' color constant.
+         */
+        public const lemonYellow:RGB = RGB.fromNumber( 0xFFF44F ) ;
         
         /**
          * @private
@@ -349,6 +399,14 @@ package graphics.colors.palettes
             new ColorSample( "green"            , green            ) , 
             new ColorSample( "greenBlue"        , greenBlue        ) , 
             new ColorSample( "greenYellow"      , greenYellow      ) , 
+            new ColorSample( "hotMagenta"       , hotMagenta       ) , 
+            new ColorSample( "inchworm"         , inchworm         ) , 
+            new ColorSample( "indigo"           , indigo           ) , // #050
+            new ColorSample( "jazzberryJam"     , jazzberryJam     ) , 
+            new ColorSample( "jungleGreen"      , jungleGreen      ) , 
+            new ColorSample( "laserLemon"       , laserLemon       ) , 
+            new ColorSample( "lavender"         , lavender         ) , 
+            new ColorSample( "lemonYellow"      , lemonYellow      ) , 
              
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
