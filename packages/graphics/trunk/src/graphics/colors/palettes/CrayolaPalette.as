@@ -43,7 +43,7 @@ package graphics.colors.palettes
      * <pre class="prettyprint">
      * import graphics.colors.palettes.CrayolaPalette ;
      * 
-     * var palette:HTMLPalette = new CrayolaPalette() ;
+     * var palette:CrayolaPalette = new CrayolaPalette() ;
      * 
      * trace( "length : " + palette.length ) ;
      * trace( "names  : " + palette.names  ) ;
@@ -688,6 +688,78 @@ package graphics.colors.palettes
         public const unmellowYellow:RGB = RGB.fromNumber( 0xFFFF66 ) ;
         
         /**
+         * The crayola 'Violet (Purple)' color constant. 
+         */
+        public const violet:RGB = RGB.fromNumber( 0x926EAE ) ;
+        
+        /**
+         * The crayola 'Violet Blue' color constant. 
+         */
+        public const violetBlue:RGB = RGB.fromNumber( 0x324AB2 ) ;
+        
+        /**
+         * The crayola 'Violet Red' color constant. 
+         */
+        public const violetRed:RGB = RGB.fromNumber( 0xF75394 ) ;
+        
+        /**
+         * The crayola 'Vivid Tangerine' color constant. 
+         */
+        public const vividTangerine:RGB = RGB.fromNumber( 0xFFA089 ) ;
+        
+        /**
+         * The crayola 'Vivid Violet' color constant. 
+         */
+        public const vividViolet:RGB = RGB.fromNumber( 0x8F509D ) ;
+        
+        /**
+         * The crayola 'White' color constant. 
+         */
+        public const white:RGB = RGB.fromNumber( 0xFFFFFF ) ;
+        
+        /**
+         * The crayola 'Wild Blue Yonder' color constant. 
+         */
+        public const wildBlueYonder:RGB = RGB.fromNumber( 0xA2ADD0 ) ;
+        
+        /**
+         * The crayola 'Wild Strawberry' color constant. 
+         */
+        public const wildStrawberry:RGB = RGB.fromNumber( 0xFF43A4 ) ;
+        
+        /**
+         * The crayola 'Wild Watermelon' color constant. 
+         * Renamed from "Ultra Red" in 1990. Fluorescent.
+         */
+        public const wildWatermelon:RGB = RGB.fromNumber( 0xFC6C85 ) ;
+        
+        /**
+         * The crayola 'Wisteria' color constant. 
+         */
+        public const wisteria:RGB = RGB.fromNumber( 0xCDA4DE ) ;
+        
+        /**
+         * The crayola 'Yellow' color constant. 
+         */
+        public const yellow:RGB = RGB.fromNumber( 0xFCE883 ) ;
+        
+        /**
+         * The crayola 'Yellow Green' color constant. 
+         */
+        public const yellowGreen:RGB = RGB.fromNumber( 0xC5E384 ) ;
+        
+        /**
+         * The crayola 'Yellow Orange' color constant. 
+         */
+        public const yellowOrange:RGB = RGB.fromNumber( 0xFFAE42 ) ;
+        
+        /**
+         * The crayola 'Grass Green' color constant. 
+         */
+        public const grassGreen:RGB = RGB.fromNumber( 0x458B00 ) ;
+                  
+        /**
+         * All main Crayola colors based on http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors.
          * @private
          */
         private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
@@ -811,9 +883,21 @@ package graphics.colors.palettes
             new ColorSample( "Tropical Rain Forest"      , tropicalRainForest     ) , 
             new ColorSample( "Tumbleweed"                , tumbleweed             ) , 
             new ColorSample( "Turquoise Blue"            , turquoiseBlue          ) , 
-            new ColorSample( "Unmellow Yellow"           , unmellowYellow         )   // #120
-            
-            // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
+            new ColorSample( "Unmellow Yellow"           , unmellowYellow         ) , // #120
+            new ColorSample( "Violet (Purple)"           , violet                 ) , 
+            new ColorSample( "Violet Blue"               , violetBlue             ) , 
+            new ColorSample( "Violet Red"                , violetRed              ) , 
+            new ColorSample( "Vivid Tangerine"           , vividTangerine         ) , 
+            new ColorSample( "Vivid Violet"              , vividViolet            ) , 
+            new ColorSample( "White"                     , white                  ) , 
+            new ColorSample( "Wild Blue Yonder"          , wildBlueYonder         ) , 
+            new ColorSample( "Wild Strawberry"           , wildStrawberry         ) , 
+            new ColorSample( "Wild Watermelon"           , wildWatermelon         ) , 
+            new ColorSample( "Wisteria"                  , wisteria               ) , // #130
+            new ColorSample( "Yellow"                    , yellow                 ) , 
+            new ColorSample( "Yellow Green"              , yellowGreen            ) , 
+            new ColorSample( "Yellow Orange"             , yellowOrange           ) , 
+            new ColorSample( "Grass Green"               , grassGreen             ) 
         ]);
         
         //////////////////
