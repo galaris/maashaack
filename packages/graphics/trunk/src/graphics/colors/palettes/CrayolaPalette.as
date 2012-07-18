@@ -572,6 +572,71 @@ package graphics.colors.palettes
         public const royalPurple:RGB = RGB.fromNumber( 0x7851A9 ) ;
         
         /**
+         * The crayola 'Salmon' color constant. 
+         */
+        public const salmon:RGB = RGB.fromNumber( 0xFF9BAA ) ;
+        
+        /**
+         * The crayola 'Scarlet' color constant. 
+         */
+        public const scarlet:RGB = RGB.fromNumber( 0xFC2847 ) ;
+        
+        /**
+         * The crayola 'Screamin' Green' color constant. 
+         */
+        public const screaminGreen:RGB = RGB.fromNumber( 0x76FF7A ) ;
+        
+        /**
+         * The crayola 'Sea Green' Green' color constant. 
+         */
+        public const seaGreen:RGB = RGB.fromNumber( 0x9FE2BF ) ;
+        
+        /**
+         * The crayola 'Sepia' Green' color constant. 
+         */
+        public const sepia:RGB = RGB.fromNumber( 0xA5694F ) ;
+        
+        /**
+         * The crayola 'Shadow' Green' color constant. 
+         */
+        public const shadow:RGB = RGB.fromNumber( 0x8A795D ) ;
+        
+        /**
+         * The crayola 'Shamrock' Green' color constant. 
+         */
+        public const shamrock:RGB = RGB.fromNumber( 0x45CEA2 ) ;
+        
+        /**
+         * The crayola 'Shocking Pink' Green' color constant. 
+         */
+        public const shockingPink:RGB = RGB.fromNumber( 0xFB7EFD ) ;
+        
+        /**
+         * The crayola 'Silver' Green' color constant. 
+         */
+        public const silver:RGB = RGB.fromNumber( 0xCDC5C2 ) ;
+        
+        /**
+         * The crayola 'Sky Blue' Green' color constant. 
+         */
+        public const skyBlue:RGB = RGB.fromNumber( 0x80DAEB ) ;
+        
+        /**
+         * The crayola 'Spring Green' Green' color constant. 
+         */
+        public const springGreen:RGB = RGB.fromNumber( 0xECEABE ) ;
+        
+        /**
+         * The crayola 'Sunglow' color constant. 
+         */
+        public const sunglow:RGB = RGB.fromNumber( 0xFFCF48 ) ;
+        
+        /**
+         * The crayola 'Sunset Orange' color constant. 
+         */
+        public const sunsetOrange:RGB = RGB.fromNumber( 0xFD5E53 ) ;
+        
+        /**
          * @private
          */
         private const _colors:Vector.<ColorSample> = Vector.<ColorSample>
@@ -673,7 +738,20 @@ package graphics.colors.palettes
             new ColorSample( "Red Orange"                , redOrange              ) , 
             new ColorSample( "Red Violet"                , redViolet              ) , 
             new ColorSample( "Robin's Egg Blue"          , robinsEggBlue          ) , 
-            new ColorSample( "Royal Purple"              , royalPurple            ) 
+            new ColorSample( "Royal Purple"              , royalPurple            ) , 
+            new ColorSample( "Salmon"                    , salmon                 ) , 
+            new ColorSample( "Scarlet"                   , scarlet                ) , // #100
+            new ColorSample( "Screamin' Green"           , screaminGreen          ) , 
+            new ColorSample( "Sea Green"                 , seaGreen               ) , 
+            new ColorSample( "Sepia"                     , sepia                  ) , 
+            new ColorSample( "Shadow"                    , shadow                 ) , 
+            new ColorSample( "Shamrock"                  , shamrock               ) , 
+            new ColorSample( "Shocking Pink"             , shockingPink           ) , 
+            new ColorSample( "Silver"                    , silver                 ) , 
+            new ColorSample( "Sky Blue"                  , skyBlue                ) , 
+            new ColorSample( "Spring Green"              , springGreen            ) , 
+            new ColorSample( "Sunglow"                   , sunglow                ) , // #110
+            new ColorSample( "Sunset Orange"             , sunsetOrange           ) 
             
             // TODO in progress with http://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors
         ]);
