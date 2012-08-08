@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="avmglue" default="main" basedir=".">
+
+    <target name="clean">
+    </target>
+
+    <target name="before" depends="define-constants,define-tasks">
+        <mkdir dir="bin-release"/>
+    </target>
+
+    <target name="define-tasks">
+        <taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+    </target>
+
+    <target name="define-constants">
+        
+        <property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/3.4.0" />
+        <property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/3.4.0" />
+
+        <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
+            <os family="mac" />
+        </condition>
+        
+        <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
+            <os family="windows" />
+        </condition>
+
+        <tstamp>
+            <format property="TODAY" pattern="dd MMMM yyyy" />
+        </tstamp>
+        
+        <property file="build/build.properties"/>
+        
+        <property file="build/version.properties" prefix="projects.avmglue." />
+
+        <exec executable="svnversion" outputproperty="subversion_revision"> 
+            <arg line="-n ${basedir}"/> 
+        </exec> 
+        <script language="javascript"> 
+        var revision  = String( project.getProperty("subversion_revision") );
+        if( revision.charAt(revision.length-1) == "M" )
+        {
+            revision = revision.substr(0, revision.length-1)
+        }
+        if( revision.indexOf(":") > -1 )
+        {
+            revision = revision.split(":")[1];
+        }
+        project.setNewProperty("svn.info.rev", revision);
+        </script>
+        <property name="projects.avmglue.version.revision" value="${svn.info.rev}"/>
+        <property name="projects.avmglue.version" value="${projects.avmglue.version.major}.${projects.avmglue.version.minor}.${projects.avmglue.version.build}.${projects.avmglue.version.revision}" />
+        <echo message="Building avmglue v${projects.avmglue.version}"/>
+        
+    </target>
+
+    <target name="main" depends="clean,before,build,after">
+    </target>
+
+    <target name="after">
+        <property name="RELEASE_ZIP" value="avmglue_${projects.avmglue.version}.zip"/>
+        <zip basedir="bin-release" destfile="bin-release/${RELEASE_ZIP}" />
+    </target>
+
+    <target name="build" depends="build-abc,build-abc-mock,build-component,build-component-mock">
+    </target>
+
+    <target name="build-abc">
+        
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize -config CFG::dbg=false -config API::REDTAMARIN=true -config API::MOCK=false -import ${builtin} -import ${toplevel} src/avmglue.as"/>
+        </java>
+        
+        <move file="src/avmglue.abc" todir="bin-release" />
+        
+    </target>
+    
+    <target name="build-abc-mock">
+        
+        <java
+            dir="${basedir}"
+            jar="${ASC}"
+            fork="true"
+            failonerror="true"
+        >
+            <arg line="-AS3 -strict -optimize -config CFG::dbg=false -config API::REDTAMARIN=false -config API::MOCK=true -import ${builtin} -import ${toplevel} src/avmglue.as"/>
+        </java>
+        
+        <move file="src/avmglue.abc" tofile="bin-release/avmglue_m.abc" />
+        
+    </target>
+    
+    <target name="build-component">
+        <compc
+            output="bin-release/avmglue.swc"
+            target-player="9.0"
+        >
+            <load-config>build/flex-config.xml</load-config>
+            <define name="CFG::dbg"  value="false" />
+            <define name="API::REDTAMARIN" value="true" />
+            <define name="API::MOCK" value="false" />
+            <strict>false</strict>
+            <optimize>true</optimize>
+            <warnings>false</warnings>
+            <verbose-stacktraces>true</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+
+            <external-library-path dir="lib-swc">
+               <include name="redtamarin.swc"/>
+            </external-library-path>
+            
+            <include-sources dir="src" includes="avmglue.as" />
+            
+            <metadata date="${TODAY}" title="avmglue">
+                <publisher name="${project.publisher}" />
+                <creator name="${project.creator}" />
+            </metadata>
+        </compc>
+    </target>
+    
+    <target name="build-component-mock">
+        <compc
+            output="bin-release/avmglue_m.swc"
+            target-player="9.0"
+        >
+            <load-config>build/flex-config.xml</load-config>
+            <define name="CFG::dbg"  value="false" />
+            <define name="API::REDTAMARIN" value="false" />
+            <define name="API::MOCK" value="true" />
+            <strict>false</strict>
+            <optimize>true</optimize>
+            <warnings>false</warnings>
+            <verbose-stacktraces>true</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+
+            <external-library-path dir="lib-swc">
+               <include name="redtamarin.swc"/>
+            </external-library-path>
+            
+            <include-sources dir="src" includes="avmglue.as" />
+            
+            <metadata date="${TODAY}" title="avmglue">
+                <publisher name="${project.publisher}" />
+                <creator name="${project.creator}" />
+            </metadata>
+        </compc>
+    </target>
+
+
+</project>
