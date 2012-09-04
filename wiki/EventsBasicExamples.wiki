@@ -3,6 +3,10 @@
 
 = Basic Example (real-life example) =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /> </a>   
+
+<g:plusone size="medium"></g:plusone>
+
 I need to use a typical use case.
 
 Imagine, you have an authentication mechanism in your application, which could be implemented like this :
