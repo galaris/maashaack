@@ -3,6 +3,8 @@
 
 = Inversion of Control - Definitions =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
+
 == Dependency Injection ==
 
 The *Dependency Injection* (DI) refer to the process of supplying code in an existing application. Classes are not responsible in the instantiation of the other classes they need. Objects are *injected* when the instance is initialised.
