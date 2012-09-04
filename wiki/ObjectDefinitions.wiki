@@ -3,6 +3,10 @@
 
 = Object Definitions =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a> author : Marc ALCARAZ ([https://code.google.com/u/109962507657971592081/ ekameleon])
+
+<g:plusone size="medium"></g:plusone>
+
 The *IoC* container is initialized with object definitions that are "operating instructions" for creating objects in an application. They also define dependency relationships that can have objects and classes with each other.
 
 The *object definitions* are represented by objects that implement the interface *system.ioc.IObjectDefinition*, this interface is implemented by the class *!ObjectDefinition*.
