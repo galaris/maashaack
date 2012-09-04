@@ -3,6 +3,10 @@
 
 = !LifeCycle of the objects =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a> author : Marc ALCARAZ ([https://code.google.com/u/109962507657971592081/ ekameleon])
+
+<g:plusone size="medium"></g:plusone>
+
 || *identify* || Can identify some Identifiable objects by assigning them automatically the id value of the object definition. ||
 || *lock* || Active the lock process during the initialization of an object created by the factory. The object implements the system.process.Lockable interface. ||
 || *init* || Indicates the name of the method to call to finish to initialize the object. ||
