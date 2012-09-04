@@ -3,6 +3,10 @@
 
 = Design pattern !FrontController based on the W3C event propagation =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /> </a>   
+
+<g:plusone size="medium"></g:plusone>
+
 == Generality ==
 
 The *front controller* design pattern defines a single *system.events.!EventDispatcher* object that is responsible for processing application requests.
