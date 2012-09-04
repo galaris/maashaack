@@ -3,6 +3,8 @@
 
 = AMF and remoting services =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/uk/deed.fr"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
+
 Defines in the [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_remoting%2Ftrunk system.remoting package] you can find all tools to exchange data with the *AMF* protocol between your *ActionScript* clients and multi-platform servers.
 
 [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_remoting%2Ftrunk http://maashaack.googlecode.com/svn/gfx/framework/packages/system.remoting.png]
