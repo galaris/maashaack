@@ -1,6 +1,12 @@
 #summary using EventListeners.
 #labels Documentation,Documentation-events
 
+= EventListeners =
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /> </a>   
+
+<g:plusone size="medium"></g:plusone>
+
 == Priority ==
 
 When you register an event listener with the *addEventListener* or the *registerEventListener* method of the *system.events.!EventDispatcher* class you can apply a priority over your event listener.
