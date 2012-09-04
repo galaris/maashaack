@@ -1,7 +1,11 @@
 #summary Delegate your event listener
 #labels Documentation-events,Documentation
 
-= The Delegate event listener =
+= Delegate the event listeners =
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /> </a>   
+
+<g:plusone size="medium"></g:plusone>
 
 The *Delegate* class is an event listener, that is included in the system.events.*  distribution. 
 
