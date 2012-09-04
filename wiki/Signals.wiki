@@ -1,6 +1,8 @@
 #summary signals and receivers (slots)
 #labels Documentation-events,Documentation,Framework
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/2.0/uk/deed.fr"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
+
 = Signalers & Receivers =
 
 == Generality ==
