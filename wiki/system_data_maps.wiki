@@ -24,7 +24,7 @@ The *system.data.Map* interface defines a group of basic methods :
 
 *The insert and change methods*
 
-|| put(key:*,value:*) || Associates the specified value with the specified key in the map. ||
+|| put( key:`*` , value:`*`) || Associates the specified value with the specified key in the map. ||
 || putAll( m:Map ) || Copies all of the mappings from the specified map to the map. ||
 
 *The remove methods*
