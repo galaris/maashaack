@@ -3,6 +3,10 @@
 
 = Basic attributes to create an object definition =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a> author : Marc ALCARAZ ([https://code.google.com/u/109962507657971592081/ ekameleon])
+
+<g:plusone size="medium"></g:plusone>
+
 || *id* (required) || The unique identifier of the object definition. This identifier is a key used to find the reference of the corresponding object in the IoC container. ||
 || *type* (required) || The full name of the type(class) of the object created and returned by the factory. ||
 || *arguments* || A list (Array) of all the arguments in the constructor of the class or also in the methods invoked to initialize the new object. ||
