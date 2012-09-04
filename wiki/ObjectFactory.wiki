@@ -3,6 +3,10 @@
 
 = The lightweight container =
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a> author : Marc ALCARAZ ([https://code.google.com/u/109962507657971592081/ ekameleon])
+
+<g:plusone size="medium"></g:plusone>
+
 == 1 - The !ObjectDefinitionContainer class ==
 
 The *system.ioc* package contains all important classes and interfaces to deploy the inversion of control pattern in your applications. The *system.ioc* package is dependent on the *core* and *system* packages.
