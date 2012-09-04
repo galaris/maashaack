@@ -1,6 +1,12 @@
 #summary EventDispatcher factory.
 #labels Documentation,Documentation-events
 
+= EventDispatcher factory =
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /> </a>   
+
+<g:plusone size="medium"></g:plusone>
+
 == Multi-core !EventDispatcher factory ==
 
 You can create instances of the *system.events.!EventDispatcher* class with the *new* key words, but you can creates statically singleton references of the class with the static method *getInstance()*.
