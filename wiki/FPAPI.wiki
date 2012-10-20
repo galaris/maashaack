@@ -23,6 +23,13 @@ Here how the *FPAPI* versioning works:
   * a change of API version can introduce languages features, SWF features, etc.
   * refer to the table bellow to see which is compatible with what
 
+Our advice is when you start to implement something
+simply base it on the current stable *FPAPI*.
+
+If you need backward compatibility with earlier version,
+then use [ConditionalCompilation condition compilation]
+and works your way back in the code.
+
 === API Reference Table ===
 
 || *SWF version* || *Flash Player* || *AIR / AIR SDK* || *Flex SDK* ||
@@ -43,10 +50,9 @@ Here how the *FPAPI* versioning works:
 || SWF15 || 11.2.0 || 3.2.0 || n/a ||
 || SWF16 || 11.3.0 || 3.3.0 || n/a ||
 || *SWF17* || *11.4.0* || *3.4.0* || *n/a* ||
-|| SWF18 || 11.5.0 || 3.5.0 || n/a ||
+|| SWF18 || 11.5.0 || 3.5.0 || n/a || (beta) ||
 
 *note:*
-
   * after Flash Player 10.2, SWF version got incremented for each dot release
   * SWF version is the minimum SWF version supported in the Flex SDK
   * AIR SDK is the version provided by default in the Flex SDK
@@ -55,7 +61,14 @@ Here how the *FPAPI* versioning works:
 
 === Examples ===
 
+If your class depends on *FPAPI* *FP_10_2* (Flash Player 10.2)
+  * it will also works with *AIR_2_6* (AIR 2.6)
+  * and any successive version of Flash Player (10.3, 11, 11.1, etc.)
+  * and any successive version of AIR (2.7, 3.0, 3.1, etc.)
 
+if your class depends on *FPAPI* *AIR_3_3* (AIR 3.3)
+  * it will not work with *FP_11_3* (Flash Player 11.3)
+  * it will work with any successive version of AIR (3.4, 3.5, etc.)
 
 
 ----
