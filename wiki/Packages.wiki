@@ -69,11 +69,12 @@ and library related stuff are in *libraries*, etc.
 
 The following describe the different *root* packages and their scope.
 
-*core* - classes and functions utilities
-*system* - the maashaack application framework
-*graphics* - an extension to the framework
-*library* - a container for libraries
+*core* - classes and functions utilities<br>
+*system* - the maashaack application framework<br>
+*graphics* - an extension to the framework<br>
+*library* - a container for libraries<br>
 
+and that's about it
 
 = Our Primary Goal =
 
@@ -108,4 +109,3 @@ package
 see the naming for the imports ?
 
 it stays simple, clean and easy to use and we like that a lot.
-
