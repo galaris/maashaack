@@ -1,4 +1,4 @@
-#summary One-sentence packages in Maashaack
+#summary packages in Maashaack
 
 = Packages =
 
