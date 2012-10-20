@@ -1,0 +1,37 @@
+#summary about the Flash Platform API.
+
+== Introduction ==
+
+*FPAPI* stands for the *Flash Platform API*.
+
+It allows us to refer to the *Flash Player API* (FP API)
+and/or the *Adobe Integrated Runtime API* (AIR API)
+in our/your usage of the AS3 language.
+
+We will mention the *FPAPI* mainly to inform with
+which version of Flash and/or AIR a particular
+package or library or tool etc. can works.
+
+
+== Details ==
+
+Here how the *FPAPI* versioning works:
+
+  * anything starting with *FP_* works with the *Flash Player*[BR]and will also work with AIR
+  * anything starting with *AIR_* works with the *Adobe Integrated Runtime*[BR]but will not work with the Flash player
+  * a change of API version can introduce languages features, SWF features, etc.
+  * refer to the table bellow to see which is compatible with what
+
+=== API Reference Table ===
+
+|| *SWF version* || *Flash Player* || *AIR / AIR SDK* || *Flex SDK* ||
+|| SWF9 || 9.0.0 || 1.0.0 || 3.0.0 ||
+
+
+----
+=== Ressources ===
+
+*links:*
+ * [http://hg.mozilla.org/tamarin-redux/raw-file/f5191c18b0e4/doc/apiversioning.html API Versioning in AVM] (tamarin-redux)
+ * [http://hg.mozilla.org/tamarin-redux/file/f5191c18b0e4/core/api-versions.as api-versions.as] (tamarin-redux)
+ * [http://hg.mozilla.org/tamarin-redux/file/f5191c18b0e4/core/api-versions.xml api-versions.xml] (tamarin-redux)
