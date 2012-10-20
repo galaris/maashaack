@@ -52,7 +52,7 @@
        * [EventsListeners using EventListeners]
        * [EventsFrontController the Design Pattern FrontController]
        * [EventsDelegate Delegate event listener]
-     * [Signals Signalers and Receivers]
+     * [SignalersAndReceivers Signals & Receivers]
      * [CommandAndTask Command and task engine]
      * [ConditionalTask The Conditional Task Engine]
      * [InversionOfControl Inversion of Control (IoC)]
@@ -153,18 +153,29 @@
          * [graphics_display display]
  * [Libraries Libraries]
    * maashaack
+      * [cgilib cgilib]
+      * [httplib httplib]
+      * [logd logd]
+      * [mimelib mimelib]
+   * integrated
       * [ASTUce ASTUce]
       * [edenRR edenRR]
-      * [logd logd]
+   * external
+      * [gaforflash gaforflash]
  * [Platform Platform]
    * maashaack
      * [avmglue avmglue]
+     * [clib clib]
+     * [shell shell]
  * [Tools Tools]
    * maashaack
      * [abcdump abcdump]
-     * [swfinfo swfinfo]
-     * [swc2abc swc2abc]
+     * [build-abc build-abc]
+     * [createprojector createprojector]
      * [flashdoc flashdoc]
+     * [swc2abc swc2abc]
+     * [swfinfo swfinfo]
+     * [swfmake swfmake]
      * [soldump soldump]    
    * general
      * [gclient gclient]
