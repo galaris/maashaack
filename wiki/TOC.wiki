@@ -63,6 +63,7 @@
    * [packages_template {template}]
    * maashaack
       * [core core]
+        * [core_arrays arrays]
       * [system system]
          * [system_broadcasters broadcasters]
          * [system_cli cli]
