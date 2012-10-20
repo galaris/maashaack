@@ -56,7 +56,7 @@ signaler --> emit( message, ...args ) --> receiver
 dispatcher --> dispatch( event object ) --> listener
 
   (origin) --> -- capture -----> (target) ----.
-    ^                                |
+    ^                                     |
     `--  (node) <-- (node) <--  bubbling <---'
 }}}
 
