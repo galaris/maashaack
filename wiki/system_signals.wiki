@@ -2,14 +2,14 @@
 
 = About =
 
-*system.signals* is etc.
+*system.signals* is slot messaging library using function callbacks instead of events.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
 
 <g:plusone size="medium"></g:plusone>
 
-|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `system.signals.*` || FP_11_0 || n/a || n/a || yes || yes ||
+|| *package* || *FPAPI* || *CC* || *dependencies* || *unit tests* || *cross-platform* || *redtamarin* ||
+|| `system.signals.*` || FP_9_0 || n/a || n/a || yes || yes || yes ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk /packages/signals/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_signals/trunk system.signals-read-only` ||
@@ -18,21 +18,20 @@
 <a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/packages/system.signals.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
 
 
-<br>
-<br>
-<br>
-<br>
-
 = Introduction =
 
-Description of the purpose of this package.
+
 
 = Details =
 
-More details on why this package exist.
+
 
 ----
 = Documentation =
+
+ * [SignalsVsEvents Signals vs Events]
+ * [SignalersAndReceivers Signals & Receivers]
+
 
  * links to other wiki pages
  * links to google doc
@@ -45,7 +44,4 @@ More details on why this package exist.
 
 Some examples and usages of this package.
 
-
-
-
-[Signals Signals & Receivers]
+[http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk%2Fexamples code examples]
