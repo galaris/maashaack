@@ -7,7 +7,7 @@
 We do not believe in the classic `com.companyName.productName`<br>
 convention to apply to a general framework naming system.
 
-Long time ago (AS2 times) someone tried to create the "ActionScript Standard Library" (ASL)<br>
+Long time ago (AS2 times) someone tried to create the "!ActionScript Standard Library" (ASL)<br>
 but that's not what we are trying to do (a standard library).
 
 Some other people use `org.osflash.libraryName` but considering the state of osflash,<br>
