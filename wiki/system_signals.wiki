@@ -9,7 +9,7 @@
 <g:plusone size="medium"></g:plusone>
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `system.signals.*` || FP_11 || n/a || n/a || yes || yes ||
+|| `system.signals.*` || FP_11_0 || n/a || n/a || yes || yes ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsignals%2Ftrunk /packages/signals/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/signals/trunk system.signals-read-only` ||
