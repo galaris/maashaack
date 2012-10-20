@@ -103,7 +103,7 @@
            * [system_SerializableInterface Serializable]
            * [system_SerializerInterface Serializer]
            * [system_SortableInterface Sortable]
-         * NameSpaces
+         * !NameSpaces
            * [system_experimentalNameSpace experimental]
            * [system_hackNameSpace hack]
            * [system_optimizedNameSpace optimized]
