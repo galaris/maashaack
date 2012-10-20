@@ -23,7 +23,7 @@ Some more details.
   etc.
 </pre>
 
-
+----
 === Ressources ===
 <wiki:comment>
 provide links to web pages or documents etc.
