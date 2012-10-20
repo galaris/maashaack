@@ -57,7 +57,7 @@ So we kept things simple, with those few features:
   * a message is synchronous<br>(events are asynchronous)
   * a message is like a function
   * a message can be of any number of arguments
-  * a message can have its number of arguments restricted<br/>(eg. you can send only 2 args)
+  * a message can have its number of arguments restricted<br>(eg. you can send only 2 args)
   * a message can be typed<br>(eg. 1st arg need to be a string, 2nd arg need to a int, etc.)
 
 Also, signals compared to events
