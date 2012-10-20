@@ -1,0 +1,44 @@
+#summary about NAME.
+
+== Introduction ==
+<wiki:comment>
+one paragraph description/introduction of
+what is NAME
+</wiki:comment>
+
+An introduction to NAME.
+
+
+== Details ==
+<wiki:comment>
+Gives more details.
+</wiki:comment>
+
+Some more details.
+
+<pre>
+  some extracts of another page / web site
+  or quotes
+  or copy of a doc
+  etc.
+</pre>
+
+
+=== Ressources ===
+<wiki:comment>
+provide links to web pages or documents etc.
+to either refer the source this wiki page is based on
+or to gives more info to the reader
+(that we dont't necessary want to write on the wiki)
+</wiki:comment>
+
+*links:*
+ * [http://www.google.com link1] (Source)
+ * [http://www.google.com link2] (Source)
+ * [http://www.google.com link3] (Source)
+
+*documents:*
+ * (PDF) [http://www.google.com/bogus.pdf Title] by Author (Source)
+ * (gdoc) [http://www.google.com Title] by Author (Source)
+ * [http://www.google.com Article] by Author (Source)
+ * [http://www.google.com Blog Post] by Author (Source)
