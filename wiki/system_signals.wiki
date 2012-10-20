@@ -8,12 +8,14 @@
 
 <g:plusone size="medium"></g:plusone>
 
-|| *package* || *FPAPI* || *CC* || *dependencies* || *unit tests* || *cross-platform* || *redtamarin* ||
-|| `system.signals.*` || FP_10_0 || n/a || n/a || yes || yes || yes ||
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `system.signals.*` || FP_10_0 || n/a || n/a || yes || yes ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk /packages/signals/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_signals/trunk system.signals-read-only` ||
-|| *download* || <a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/packages/system.signals.swc"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a> <a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/packages/system.signals.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a> ||
+
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/packages/system.signals.swc"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/packages/system.signals.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
 
 <br/>
 <br/>
