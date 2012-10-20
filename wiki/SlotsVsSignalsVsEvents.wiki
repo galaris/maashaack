@@ -1,0 +1,74 @@
+#summary Slots vs Signals vs Events.
+
+== Introduction ==
+
+Here we explain all the little differences between<br>
+what we consider *slots*, *signals* and *events*.
+
+Basically it is all about transferring messages between objects,<br>
+and yes you can do it in a lot of different ways.
+
+Are we asynchronous or synchronous ?<br>
+Do we communicate with a user interface ?<br>
+How fast can we go ?<br>
+How many listeners can we reach ?<br>
+etc.
+
+Just few questions you could ask yourself when<br>
+it come to "message programming".
+
+== Details ==
+
+First, we are talking about AS3 and so we need to state<br>
+that functions are first class objects: you can pass them as arguments.
+
+=== Function Callback ===
+
+Nothing new, since AS1 you can do that.
+
+TODO
+
+=== Slots ===
+
+Same, since AS1 we can use that, remember the *ASBroadcaster* class.<br>
+Very similar to the function callback, but the "nuance" is that the message is the function name to call.
+
+{{{
+Object --> broadcast( message, ...args ) --> targets
+}}}
+ * you have a list of targets
+ * the `message` is a function name
+ * you loop trough the list<br>and call the function in the scope of each target<br>passing a serie of arguments
+
+=== Signals ===
+
+Similar to the function callback and the slot, but the difference is<br>
+that 
+
+{{{
+signaler --> emit( message, ...args ) --> receiver
+}}}
+
+
+=== Events ===
+
+{{{
+dispatcher --> dispatch( event object ) --> listener
+
+  (origin) --> -- capture -----> (target) ----.
+    ^                                                                 |
+    `--  (node) <-- (node) <--  bubbling <---'
+}}}
+
+----
+=== Ressources ===
+
+*links:*
+ * [http://en.wikipedia.org/wiki/Callback_(computer_programming) Callback] (Wikipedia)
+ * [http://en.wikipedia.org/wiki/Signal_programming Signal programming] (Wikipedia)
+ * [http://en.wikipedia.org/wiki/Event-driven_programming Event-driven programming] (Wikipedia)
+ * [http://en.wikipedia.org/wiki/Signal_(computing) Unix Signal] (Wikipedia)
+ * [http://en.wikipedia.org/wiki/Signals_and_slots Signals and Slots] (Wikipedia)
+ * [http://qt-project.org/doc/qt-4.8/signalsandslots.html Signals & Slots] (QT)
+ * [http://python-gtk-3-tutorial.readthedocs.org/en/latest/basics.html Main loop and Signals] (Python GTK+ 3 Tutorial)
+ * [http://www.javaworld.com/javaworld/javatips/jw-javatip10.html Implement callback routines in Java] (javaworld)
