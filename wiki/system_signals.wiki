@@ -60,9 +60,9 @@ So we kept things simple, with those few features:
   * a message can be typed<br/>(eg. 1st arg need to be a string, 2nd arg need to a int, etc.)
 
 Also, signals compared to events
-  * a `Receiver` can be defined by a single function reference<br/>or<br/>implements the interface `Receiver`.
-  * a `Receiver` subscribe to real objects,<br/>not to string-based channels.
-  * event string constants are no longer needed
+ * a `Receiver` can be defined by a single function reference<br/>or<br/>implements the interface `Receiver`.
+ * a `Receiver` subscribe to real objects,<br/>not to string-based channels.
+ * event string constants are no longer needed
 
 Follow the documentation links bellow for more details.
 
