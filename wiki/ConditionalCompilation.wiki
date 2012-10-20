@@ -120,20 +120,27 @@ As a general rule we will always use upper case.
 
 For code targeting the Flash Player and AIR current version.
 
+By default, we will always assume the current stable version of the Flash Player.
+
 If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::FP_{major}_{minor}`.
 
 for ex: *API::FP_9_0*
 
+see [FPAPI]
 
 === API::AIR ===
 
 For code targeting AIR but not supporting the Flash Player.
 
+By default, we will always assume the current stable version of AIR.
+
 If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::AIR_{major}_{minor}`.
 
 for ex: *API::AIR_1_5*
+
+see [FPAPI]
 
 
 === API::REDTAMARIN ===
@@ -144,7 +151,6 @@ If for some VERY RARE reasons we wanted to support a particular version<br>
 we would use `API::RT_{major}_{minor}_{build}`.
 
 for ex: *API::RT_0_3_1*
-
 
 === API::MOCK ===
 
