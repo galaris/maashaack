@@ -17,8 +17,9 @@ package or library or tool etc. can works.
 
 Here how the *FPAPI* versioning works:
 
-  * anything starting with *FP_* works with the *Flash Player*[BR]and will also work with AIR
-  * anything starting with *AIR_* works with the *Adobe Integrated Runtime*[BR]but will not work with the Flash player
+  * anything starting with *FP_* works with the *Flash Player*<br/>and will also work with AIR
+  * anything starting with *AIR_* works with the *Adobe Integrated Runtime*<br/>but will not necessary work with the Flash player
+  * if no *FPAPI* is mentioned we default to *FP_9_0*
   * a change of API version can introduce languages features, SWF features, etc.
   * refer to the table bellow to see which is compatible with what
 
@@ -26,6 +27,35 @@ Here how the *FPAPI* versioning works:
 
 || *SWF version* || *Flash Player* || *AIR / AIR SDK* || *Flex SDK* ||
 || SWF9 || 9.0.0 || 1.0.0 || 3.0.0 ||
+|| SWF9 || 9.0.0 || 1.1.0 || 3.1.0 ||
+|| SWF9 || 9.0.0 || 1.5.0 || 3.2.0 ||
+|| SWF9 || 9.0.0 || 1.5.0 || 3.3.0 ||
+|| SWF9 || 9.0.0 || 1.5.2 || 3.4.0 ||
+|| SWF9 || 9.0.0 || 1.5.3 || 3.5.0 ||
+|| SWF9 || 9.0.0 || 1.5.3 || 3.6.0 ||
+|| SWF10 || 10.0.0 || 1.5.3 || 4.0.0 ||
+|| SWF10 || 10.0.0 / 10.1.0 || 2.0.2 || 4.1.0 ||
+|| SWF11 || 10.2.0 || 2.6.0 || 4.5.0 ||
+|| SWF11 || 10.2.0 || 2.6.0 || 4.5.1 ||
+|| SWF12 || 10.3.0 || 2.7.0 || n/a ||
+|| SWF13 || 11.0.0 || 3.0.0 || n/a ||
+|| SWF14 || 11.1.0 || 3.1.0 || 4.6.0 ||
+|| SWF15 || 11.2.0 || 3.2.0 || n/a ||
+|| SWF16 || 11.3.0 || 3.3.0 || n/a ||
+|| *SWF17* || *11.4.0* || *3.4.0* || *n/a* ||
+|| SWF18 || 11.5.0 || 3.5.0 || n/a ||
+
+*note:*
+
+  * after Flash Player 10.2, SWF version got incremented for each dot release
+  * SWF version is the minimum SWF version supported in the Flex SDK
+  * AIR SDK is the version provided by default in the Flex SDK
+  * bold is the last stable version
+  * version after last stable is current beta
+
+=== Examples ===
+
+
 
 
 ----
