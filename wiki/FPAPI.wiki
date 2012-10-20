@@ -50,7 +50,7 @@ and works your way back in the code.
 || SWF15 || 11.2.0 || 3.2.0 || n/a ||
 || SWF16 || 11.3.0 || 3.3.0 || n/a ||
 || *SWF17* || *11.4.0* || *3.4.0* || *n/a* ||
-|| SWF18 || 11.5.0 || 3.5.0 || n/a || (beta)
+|| SWF18 || 11.5.0 || 3.5.0 || n/a ||
 
 *note:*
   * after Flash Player 10.2, SWF version got incremented for each dot release
