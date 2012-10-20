@@ -2,14 +2,14 @@
 
 = About =
 
-*system.signals* is slot messaging library using function callbacks instead of events.
+*system.signals* is a messaging library using function callbacks instead of events.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
 
 <g:plusone size="medium"></g:plusone>
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *unit tests* || *cross-platform* || *redtamarin* ||
-|| `system.signals.*` || FP_9_0 || n/a || n/a || yes || yes || yes ||
+|| `system.signals.*` || FP_10_0 || n/a || n/a || yes || yes || yes ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk /packages/signals/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/system_signals/trunk system.signals-read-only` ||
@@ -22,28 +22,63 @@
 
 = Introduction =
 
+With AS3, the Flash Player and AIR uses by default events,
+they are based on the W3C (couple of things missing) and are good
+to hooks different interactions in your UI.
 
+But sometimes you need to pass messages around objects
+that are not part of your UI and there events can be slower
+and/or use a bit too more ressources.
+
+For those cases, we can replace events by signals.
+
+To understand all the differences see [SlotsVsSignalsVsEvents Slots vs Signals vs Events].
 
 = Details =
 
+Even if you could ignore this library and hook your messages directly using functions,
+we felt all this needed a bit of structure, hence come this signals lib.
 
+Note that his lib has nothing to do with that other lib [https://github.com/robertpenner/as3-signals/ as3 signals],
+let's just say we don't see eye to eye and we preferred to go our own way.
+
+We felt a signal library needed to do only one thing and one thing well: use functions to pass messages between objects.
+
+And basically the signals lib is a lightweight implementation of the [http://en.wikipedia.org/wiki/Observer_pattern Observer pattern].
+
+So we kept things simple, with those few features:
+  * a `Signaler` emits messages
+  * a `Receiver` receives messages
+  * a `Signaler` connect and disconnect with one or more `Receiver`
+  * a `Signaler` can disconnect a specific or all `Receiver`
+  * a `Receiver` can be automatically disconnected
+  * a `Receiver` can be prioritized against other receivers<br/>(eg. receiverX can receive a message before receiverY)
+  * a message is synchronous<br/>(events are asynchronous)
+  * a message is like a function
+  * a message can be of any number of arguments
+  * a message can have its number of arguments restricted<br/>(eg. you can send only 2 args)
+  * a message can be typed<br/>(eg. 1st arg need to be a string, 2nd arg need to a int, etc.)
+
+Also, signals compared to events
+  * a `Receiver` can be defined by a single function reference<br/>or<br/>implements the interface `Receiver`.
+  * a `Receiver` subscribe to real objects,<br/>not to string-based channels.
+  * event string constants are no longer needed
+
+Follow the documentation links bellow for more details.
 
 ----
 = Documentation =
 
- * [SignalsVsEvents Signals vs Events]
+ * [SlotsVsSignalsVsEvents Slots vs Signals vs Events]
  * [SignalersAndReceivers Signals & Receivers]
-
-
- * links to other wiki pages
- * links to google doc
- * inline documentation (wiki)
- * inline asdoc HTML
 
 ----
 
 = Usages =
 
 Some examples and usages of this package.
-
-[http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk%2Fexamples code examples]
+ * [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsystem_signals%2Ftrunk%2Fexamples code examples]
+ * [http://maashaack.googlecode.com/svn/packages/system_signals/trunk/examples/system/signals/examples/Signal01Example.as example 1] (source code)
+ * [http://maashaack.googlecode.com/svn/packages/system_signals/trunk/examples/system/signals/examples/Signal02Example.as example 2] (source code)
+ * [http://maashaack.googlecode.com/svn/packages/system_signals/trunk/examples/system/signals/examples/MessengerExample.as messenger example] (source code)
+ * [http://maashaack.googlecode.com/svn/packages/system_signals/trunk/examples/system/signals/examples/SignalButtonExample.as button example] (source code)
