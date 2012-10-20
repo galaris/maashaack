@@ -2,6 +2,14 @@
 
 = Introduction =
 
+When you name something you should name it well,<br>
+so it is easy to use, write and remember.
+
+If you want an apple you ask "Can I have an apple ?"<br>
+not "can I have this colored round shaped fruit ?"<br>
+that's the best way to end up with an orange.
+
+
 == About naming packages ==
 
 We do not believe in the classic `com.companyName.productName`<br>
@@ -17,19 +25,60 @@ even if we are pro open source we don't think our code belong in this naming.
 (we don't take ourselves seriously but we *DO* take code seriously)<br>
 so we didn't feel either to use `org.maashaack.framework`.
 
+historically it went like that
+<pre>
+  a: man I wish I had a Java or .NET framework for AS3
+  b: me too
+  a: I don't get why Adobe does not provide one
+  b: they are busy with Flex :)
+  a: but Flex is not pure AS3
+  b: true
+  a: we should write one
+  b: a framework ?
+  a: yes
+  b: I'm already too busy with my own projects
+  a: me too
+  b: and it would take too much time
+  a: yeah it would be a massive hack
+  b: we could merge our projects for a start
+  a: yes let's do that!
+</pre>
+
 In some cases, we could reuse the package *flash.something*<br>
-but we are afraid that maybe Adobe will make us change it.
+but we are afraid that maybe Adobe's lawyer will make us change it.<br>
 (they did it by telling *flashobject* to change their name, see [http://code.google.com/p/swfobject/wiki/history swfobject history])
 
+We kind of liked how Python name their libraries,<br>
+but `sys` feel a bit too short to us.
+
+So, we are not a company, we don't want `org.maashaack.something` as<br>
+it's too long to type and we can't bother to buy this domain name<br>
+and we want things to be simple and easy to use.
+
+So we decided to use a main package named *system*.
+
+
+== About the other packages ==
+
+We kept it simple too, core basic stuff are in the package *core*<br>
+graphic related stuff are in the package *graphics*<br>
+and library related stuff are in *libraries*, etc.
 
 
 = Details =
 
 The following describe the different *root* packages and their scope.
 
-= Goal =
+*core* - classes and functions utilities
+*system* - the maashaack application framework
+*graphics* - an extension to the framework
+*library* - a container for libraries
+
+
+= Our Primary Goal =
 
 here an example of what we try to achieve in a day to day code usage
+
 {{{
 package
 {
@@ -55,3 +104,8 @@ package
     
 }
 }}}
+
+see the naming for the imports ?
+
+it stays simple, clean and easy to use and we like that a lot.
+
