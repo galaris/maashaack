@@ -5,22 +5,18 @@
 *system.signals* is etc.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
+
 <g:plusone size="medium"></g:plusone>
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `system.NAME.*` || FP_10_2|| n/a || n/a || yes || no ||
+|| `system.signals.*` || FP_11 || n/a || n/a || yes || yes ||
 
-|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2FNAME%2Ftrunk /packages/NAME/trunk] ||
-|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/NAME/trunk NAME-read-only` ||
+|| *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fsignals%2Ftrunk /packages/signals/trunk] ||
+|| *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/signals/trunk system.signals-read-only` ||
 
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/win.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/osx.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/osx105.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/nix.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/zip.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/air.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/packages/system.signals.swc"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/packages/system.signals.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
+
 
 <br>
 <br>
