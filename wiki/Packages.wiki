@@ -1,11 +1,33 @@
 #summary packages in Maashaack
 
-= Packages =
+= Introduction =
 
-We do not believe the classic `com/org/net + company name + product name`<br>
-apply to a general framework naming system.
+== About naming packages ==
+
+We do not believe in the classic `com.companyName.productName`<br>
+convention to apply to a general framework naming system.
+
+Long time ago (AS2 times) someone tried to create the "ActionScript Standard Library" (ASL)<br>
+but that's not what we are trying to do (a standard library).
+
+Some other people use `org.osflash.libraryName` but considering the state of osflash,<br>
+even if we are pro open source we don't think our code belong in this naming.
+
+*maashaack* is merely a pun or a joke as a name<br>
+(we don't take ourselves seriously but we *DO* take code seriously)<br>
+so we didn;t feel either to use `org.maashaack.framework`.
+
+In some cases, we could reuse the package *flash.something*<br>
+but we are afraid that maybe Adobe will make us change it.
+(they did it by telling *flashobject* to change their name, see [http://code.google.com/p/swfobject/wiki/history swfobject history])
+
+
+
+= Details =
 
 The following describe the different *root* packages and their scope.
+
+= Goal =
 
 here an example of what we try to achieve in a day to day code usage
 {{{
