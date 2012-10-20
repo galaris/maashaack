@@ -28,25 +28,70 @@ Nothing new, since AS1 you can do that.
 
 TODO
 
+{{{
+//convention
+someInstance.onNotify = function( arg1, arg2 ) { .... }
+}}}
+
+
 === Slots ===
 
 Same, since AS1 we can use that, remember the *ASBroadcaster* class.<br>
-Very similar to the function callback, but the "nuance" is that the message is the function name to call.
+Very similar to the function callback, ... TODO
 
 {{{
-Object --> broadcast( message, ...args ) --> targets
+source --> broadcast( message, ...args ) --> target
 }}}
  * you have a list of targets
  * the `message` is a function name
  * you loop trough the list<br>and call the function in the scope of each target<br>passing a serie of arguments
 
+{{{
+//convention
+otherInstance.notify = function( arg1, arg2 ):void
+{
+  //...
+}
+
+someInstance.addListener( otherInstance );
+
+someInstance.broadcast( "notify", arg1, arg2 );
+}}}
+
+
 === Signals ===
 
-Similar to the function callback and the slot, but the difference is<br>
-that 
+Similar to the function callback and the slot, ... TODO
 
 {{{
 signaler --> emit( message, ...args ) --> receiver
+}}}
+
+{{{
+//convention
+//otherInstance implements Receiver
+
+otherInstance.receive( ...values:Array ):void
+{
+    onNotify( values[0], values[1] );
+}
+
+otherInstance.onNotify = function( arg1, arg2 ):void
+{
+  //...
+}
+
+otherFunction = function( arg1, arg2 )
+{
+  //...
+}
+
+someInstance.notified = new Signal();
+
+someInstance.notified.connect( otherInstance );
+someInstance.notified.connect( otherFunction );
+
+someInstance.notified.emit( arg1, arg2 );
 }}}
 
 
@@ -58,6 +103,19 @@ dispatcher --> dispatch( event object ) --> listener
   (origin) --> -- capture -----> (target) ---.
     ^                                        |
     `--  (node) <-- (node) <--  bubbling <---'
+}}}
+
+{{{
+//convention
+
+someInstance.onNotify = function( event:EventType ):void
+{
+  //...
+}
+
+someInstance.addEventListener( EventString, onNotify );
+
+otherInstance.dispatchEvent( new EventType( EventString, arg1, arg2 ) );
 }}}
 
 ----
