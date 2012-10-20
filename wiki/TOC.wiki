@@ -38,6 +38,7 @@
    * [Doc HOWTO Document]
    * [Roadmap Roadmap]
  * [Documentation Documentation]
+   * [documentation_template {template}]
    * [OverView Overview]
    * ASDoc
      * [frameworkDocumentation maashaack framework]
