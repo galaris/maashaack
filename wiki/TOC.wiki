@@ -41,6 +41,7 @@
    * [OverView Overview]
    * ASDoc
      * [frameworkDocumentation maashaack framework]
+   * [FPAPI FPAPI]
    * [Errors errors]
    * [Events events]
      * [EventsIntroduction introduction]
