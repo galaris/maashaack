@@ -8,7 +8,7 @@
 
 == Generality ==
 
-The "*signal engine*" include in the package *system.signals* is a very easy *!ActionScript 3* messaging tools.
+The "*signal engine*" include in the package [system_signals *system.signals*] is a very easy *!ActionScript 3* messaging tools.
 
 With the *Signaler* interface we can define objects who communicates by signals and can be use to create a light-weight implementation of the Observer pattern. A signal emit simple values with its own array of receivers (slots). This values can be strongly-typed with an internal checking process.
 
