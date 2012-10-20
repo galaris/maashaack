@@ -8,19 +8,19 @@
 
 == Generality ==
 
-The "*signal engine*" include in the package [system_signals *system.signals*] is a very easy *!ActionScript 3* messaging tools.
+The "*signal engine*" implemented in the package [system_signals system.signals] is a very easy *!ActionScript 3* messaging tools.
 
 With the *Signaler* interface we can define objects who communicates by signals and can be use to create a light-weight implementation of the Observer pattern. A signal emit simple values with its own array of receivers (slots). This values can be strongly-typed with an internal checking process.
 
-Receivers can be defines with a simple function reference or a custom object who implements the interface system.signals.Receiver .
+Receivers can be defined with a simple function reference or a custom object which implements the interface `system.signals.Receiver`.
 
 Receivers subscribe to real objects, not to string-based channels. Event string constants are no longer needed like *W3C DOM 2/3 event model*.
 
 == Interfaces ==
 
-The system.signals package contains two interfaces : *Signaler* and *Receiver*.
+The `system.signals` package contains two interfaces : *Signaler* and *Receiver*.
 
-The Signaler interface is simple but contains all important methods to deploy your signals.
+The `Signaler` interface is simple but contains all important methods to deploy your signals.
 
 {{{
     package system.signals
@@ -68,7 +68,8 @@ The Signaler interface is simple but contains all important methods to deploy yo
     }
 }}}
 
-The *Receiver* interface is optional and can be use to defines a basic slot connected with Signaler objects with the connect() method (only the receive method is connected with the signal not the Receiver reference).
+The *Receiver* interface is optional and can be used to defines a basic slot connected with Signaler objects using the connect() method<br/>
+(note: only the receive method is connected with the signal, not the Receiver reference).
 
 {{{
     package system.signals
