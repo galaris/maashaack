@@ -90,7 +90,7 @@ TODO
 == Create a test class ==
 
 If you want to test a class named *Money*<br>
-create a test class named *TestMoney* which extends the class *TestCase*
+create a test class named *!MoneyTest* which extends the class *TestCase*
 
 and for each tests, write a public method starting with "test"
 
