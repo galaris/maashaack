@@ -175,7 +175,7 @@ You can also use special methods *setUp* (run before each test) and *tearDown* (
 
 == Create a test suite ==
 
-A suite is simply a group of test classes, by convention you will create<br>those suite inside an *AllTests* class
+A suite is simply a group of test classes, by convention you will create<br>those suite inside an *!AllTests* class
 
 {{{
 package library.ASTUce.samples
