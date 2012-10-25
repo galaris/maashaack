@@ -6,7 +6,7 @@
 *ASTUce* is a unit tests framework inspired by the [http://www.xprogramming.com/software.htm xUnit architecture].
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `library.ASTUce.*` || FP_9_0 || n/a || [core]<br>[logd]<br>[system_terminals system.terminals] || yes || 0.3.1 ||
+|| `library.ASTUce.*` || FP_9_0 || n/a || [core]<br>[logd]<br>[system_terminals system.terminals] || yes || TBD ||
 
 || *browse* || [http://code.google.com/p/astuce/source/browse/#svn%2Fas3%2Ftrunk /as3/trunk] (external site)||
 || *checkout* || `svn checkout http://astuce.googlecode.com/svn/as3/trunk astuce-read-only` ||
