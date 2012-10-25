@@ -1,4 +1,4 @@
-#summary ASTUce library (unit tests framework).
+#summary ASTUce library (a JUnit clone for AS3).
 #labels Introduction
 
 = About =
@@ -6,7 +6,7 @@
 *ASTUce* is a unit tests framework inspired by the [http://www.xprogramming.com/software.htm xUnit architecture].
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `library.ASTUce.*` || FP_9_0 || n/a || [core]<br>[logd]<br>[system_terminals system.terminals] || yes || TBD ||
+|| `library.ASTUce.*` || FP_9_0 || n/a || [core]<br>[logd]<br>[system_terminals system.terminals] || yes || 0.3.2<br>(a tool is in prep) ||
 
 || *browse* || [http://code.google.com/p/astuce/source/browse/#svn%2Fas3%2Ftrunk /as3/trunk] (external site)||
 || *checkout* || `svn checkout http://astuce.googlecode.com/svn/as3/trunk astuce-read-only` ||
@@ -21,3 +21,201 @@
 <br>
 
 = Introduction =
+
+This project started as a port from JUnit 3.8.1 to make an AS1/JS xUnit framework<br>
+so any ECMA-262 compliant hosts could run unit tests.
+
+Then it evolved to AS2,  AS3 and when AS4 will come it will evolve again.
+
+People could ask why another AS3 unit tests framework when there is asunit and flexunit,
+it simple as: we do things differently and technically we were pre-existing those other
+frameworks so we see no reason to kill the project wether we are popular or not.
+
+<br>
+<br>
+
+= Details =
+
+Here the few things we do differently but are very important to us:
+  * this framework is meant to run tests as fast as possible
+  * we run synchronous on purpose
+  * we don't use events on purpose
+  * we don't want a GUI on purpose
+  * we want to run on the command line
+
+If your tests take to long to run you will either just run a part of it
+or not run them at all, our logic is if those tests run fast then the developers
+will have a tendency to run them all the time.
+
+We will favour mock objects, fake objects, to be able to run synchronously
+and without using events, and/or waiting for something to happen so the
+test can run.
+
+First, it is very hard 9and sometimes impossible) to generate certain type
+of events or errors or edge case unless you force them with a mock or a fake object.
+
+Second, as soon as you are async you could end up waiting for too long.
+
+Third, as our main goal is to run those tests on the command line by using
+[http://code.google.com/p/redtamarin redtamarin], we want to avoid events to make things simpler to integrate (as Tamarin does not support events).
+
+Ideally, as we build our code with Ant,<br>
+we also want to build and run our tests with Ant
+
+it looks something like that
+{{{
+<exec executable="./ASTUce" failonerror="true">
+    <arg line="-s" />
+    <arg line="-l:my-tests.swf" />
+    <arg line="my.package.AllTests" />
+</exec>
+}}}
+
+See the [http://code.google.com/p/gaforflash gaforflash] project ( [http://code.google.com/p/gaforflash/issues/detail?id=40 40] and [http://code.google.com/p/gaforflash/issues/detail?id=41 41] ) for some real world example of unit tests
+being run within an ant build.
+
+<br>
+<br>
+
+----
+= Documentation =
+
+TODO
+<br>
+<br>
+
+----
+= Usages =
+
+== Create a test class ==
+
+If you want to test a class named *Money*<br>
+create a test class named *TestMoney* which extends the class *TestCase*
+
+and for each tests, write a public method starting with "test"
+
+{{{
+package library.ASTUce.samples.money
+{
+    import library.ASTUce.framework.TestCase;
+    
+    [ExcludeClass]
+    public class MoneyTest extends TestCase
+    {
+        
+        private var _12eu:Money;
+        private var _14eu:Money;
+        private var _7usd:Money;
+        private var _21usd:Money;
+        
+        private var _MB1:IMoney;
+        private var _MB2:IMoney;
+        
+        public function MoneyTest( name:String = "" )
+        {
+            super( name );
+        }
+        
+        public function setUp():void
+        {
+            _12eu  = new Money( 12, "€" );
+            _14eu  = new Money( 14, "€" );
+            _7usd  = new Money(  7, "$" );
+            _21usd = new Money( 21, "$" );
+            
+            _MB1 = MoneyBag.create( _12eu, _7usd );
+            _MB2 = MoneyBag.create( _14eu, _21usd );
+        }
+        
+        public function testIsZero():void
+        {
+            assertTrue( _MB1.subtract( _MB1 ).isZero() );
+            assertTrue( MoneyBag.create( new Money(0,"€"), new Money(0,"$") ).isZero() );
+        }
+        
+        public function testBagNotEquals():void
+        {
+            var bag:IMoney = MoneyBag.create( _12eu, _7usd );
+            assertFalse( bag.equals( new Money(12,"¥").add( _7usd ) ) );
+        }
+        
+        public function testMoneyBagEquals():void
+        {
+            assertTrue( !_MB1.equals( null ) );
+            assertEquals( _MB1, _MB1 );
+            
+            var equal:IMoney = MoneyBag.create( new Money(12,"€"), new Money(7,"$") );
+            assertTrue(  _MB1.equals( equal ) );
+            assertTrue( !_MB1.equals( _12eu ) );
+            assertTrue( !_12eu.equals( _MB1 ) );
+            assertTrue( !_MB1.equals( _MB2 ) );
+        }
+        
+        public function testMoneyEquals():void
+        {
+            assertTrue( !_12eu.equals( null ) );
+            
+            var equalMoney:Money = new Money( 12, "€" );
+            assertEquals( _12eu, _12eu );
+            assertEquals( _12eu, equalMoney );
+        }
+        
+        public function testPrint():void
+        {
+            assertEquals( "[12€]", _12eu.toString() );
+        }
+    }
+    
+}
+}}}
+
+You can also use special methods *setUp* (run before each test) and *tearDown* (run after each test).
+
+<br>
+
+== Create a test suite ==
+
+A suite is simply a group of test classes, by convention you will create<br>those suite inside an *AllTests* class
+
+{{{
+package library.ASTUce.samples
+{
+    import library.ASTUce.framework.Test;
+    import library.ASTUce.framework.TestSuite;
+    import library.ASTUce.Runner;
+    import library.ASTUce.samples.money.MoneyTest;
+    
+    /**
+     * TestSuite that runs all the sample tests
+     */
+    [ExcludeClass]
+    public class AllTests
+    {
+        public function AllTests()
+        {
+        }
+        
+        public static function main( ...args ):void
+        {
+            Runner.run( suite() );
+        }
+        
+        public static function suite():Test
+        {
+            var suite:TestSuite = new TestSuite( "All ASTUce sample tests" );
+            
+            suite.addTest( ArrayTest.suite() );
+            
+            suite.addTestSuite( MoneyTest );
+            
+            return suite;
+        }
+    }
+}
+}}}
+
+
+The framework will look for the static method *suite*, if found it will use it,<br>
+if not it will create the test suite by code reflection.
+
+<br>
