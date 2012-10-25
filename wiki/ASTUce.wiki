@@ -1,13 +1,23 @@
-#summary unit tests framework library.
+#summary ASTUce library (unit tests framework).
 #labels Introduction
 
-== Introduction ==
+= About =
 
-TODO
+*ASTUce* is a unit tests framework inspired by the [http://www.xprogramming.com/software.htm xUnit architecture].
 
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `library.ASTUce.*` || FP_9_0 || n/a || [core]<br>[logd]<br>[system_terminals system.terminals] || yes || 0.3.1 ||
 
-== Details ==
+|| *browse* || [http://code.google.com/p/astuce/source/browse/#svn%2Fas3%2Ftrunk /as3/trunk] (external site)||
+|| *checkout* || `svn checkout http://astuce.googlecode.com/svn/as3/trunk astuce-read-only` ||
 
-TODO
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/libraries/astuce.swc"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/libraries/astuce.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/libraries/astuce-test.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
 
-~~we may also inject this project into maashaack, not sure yet.~~
+<br>
+<br>
+<br>
+<br>
+
+= Introduction =
