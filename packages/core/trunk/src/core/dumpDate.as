@@ -37,15 +37,16 @@ package core
 {
     /**
      * Dumps a string representation of any Date reference.
-     * @param data an Date reference to transform.
+     * @param date a Date reference to transform.
+     * @param timestamp option to
      * @return The dump string representation of any Data reference.
      */
     public const dumpDate:Function = function( date:Date , timestamp:Boolean = false ):String
     {
         var data:Array;
-        if ( timestamp )
+        if( timestamp )
         {
-            return "new Date(" + String( date.valueOf() ) + ")";
+            return "new Date(" + date.valueOf() + ")";
         }
         else
         {
