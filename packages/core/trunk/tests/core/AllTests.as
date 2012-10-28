@@ -40,6 +40,7 @@ package core
     import core.chars.AllTests;
     import core.data.AllTests;
     import core.functors.AllTests;
+    import core.hash.AllTests;
     import core.html.AllTests;
     import core.maths.AllTests;
     import core.objects.AllTests;
@@ -71,6 +72,7 @@ package core
             suite.addTest( core.chars.AllTests.suite() );
             suite.addTest( core.data.AllTests.suite() );
             suite.addTest( core.functors.AllTests.suite() );
+            suite.addTest( core.hash.AllTests.suite() );
             suite.addTest( core.html.AllTests.suite() );
             suite.addTest( core.maths.AllTests.suite() );
             suite.addTest( core.objects.AllTests.suite() );
