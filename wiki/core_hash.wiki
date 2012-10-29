@@ -135,6 +135,11 @@ Non-cryptographic hash functions
   * [http://reveng.sourceforge.net/crc-catalogue/ Catalogue of parametrised CRC algorithms] (SourceForge)
   * [http://code.google.com/p/classless-hasher/wiki/ProvidedAlgorithms classless-hasher provided algorithms] (Google Code)
 
+== TODO ==
+  * implement CRC functions
+  * implement Checksum functions
+  * build the command line utilities
+
 ----
 
 = Usages =
