@@ -1,4 +1,4 @@
-package library.cgi
+﻿package library.cgi
 {
     public interface Gateway
     {

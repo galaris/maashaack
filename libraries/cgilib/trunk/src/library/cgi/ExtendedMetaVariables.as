@@ -1,4 +1,4 @@
-package library.cgi
+﻿package library.cgi
 {
     import C.stdlib.getenv;
     
