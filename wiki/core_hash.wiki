@@ -19,9 +19,96 @@
   are called hash values, hash codes, hash sums, checksums or simply hashes.
 </pre>
 
+Here we provide AS3 implementations of most common hash functions.
+
+Those have been verified and tested with their C implementation counterpart.
+
+We focus mainly on 32 bits or less digests.
+
+
 = Details =
 
-List of algorithms
+Hashes can be used in a lot of different way, wether you want a checksum,
+a CRC or just a simple hash.
+
+From implementing a !HashMap, or build a cache of files, we thought
+those functions were a good candidate to insert in a *core* package.
+
+Every implementations have the same strategy
+  * we take a ByteArray as an input<br>so you can hash strings, binaries etc.
+  * we apply the algorithm on each byte
+
+We don't do that
+{{{
+function hash( value:String ):uint
+{
+    var len:uint = value.length;
+    var i:uint;
+    var c:uint;
+
+    for( i = 0; i < len; i++ )
+    {
+        c = value.charCodeAt( i );
+        //...
+    }
+    //...
+}
+}}}
+  * limited to strings
+  * does not make sens to use `charCodeAt` on a binary
+
+Instead we're doing this
+{{{
+function hash( bytes:ByteArray ):uint
+{
+    var len:uint = bytes.length;
+    bytes.position = 0
+    var i:uint;
+    var c:uint;
+
+    for( i = 0; i < len; i++ )
+    {
+        c = bytes[ i ];
+        //...
+    }
+    //...
+}
+}}}
+  * everything is considered as a serie of bytes
+  * we hash each byte
+  * allows to hash anything: strings, AMF packet, !ByteArrays, files, etc.
+
+Some implementations can provide a `seed` parameter<br>
+see [http://code.google.com/p/maashaack/source/browse/packages/core/trunk/src/core/hash/bkdr.as#51 BKDR implementation].
+
+We will not deal with cryptographic hash function in this package<br>
+because those generate digests of 128 bits or more and require<br>
+implementing special classes like !BigInteger, !BigNumber, etc.
+
+Using redtamarin we will provide an executable for each hash functions
+{{{
+$ ./elf-hash myfile.bin
+18131988
+
+$ ./elf-hash -h myfile.bin
+0x0114ac14
+}}}
+TODO
+
+----
+= Documentation =
+
+== List of algorithms ==
+
+Cyclic redundancy checks (TODO)
+|| *name* || *digest size* || *description* ||
+||  ||  ||
+
+Checksums (TODO)
+|| *name* || *digest size* || *description* ||
+||  ||  ||
+
+Non-cryptographic hash functions
 || *name* || *digest size* || *description* ||
 || ap || 32bits || Arash Partow hash function ||
 || bkdr || 32bits || Brian Kernighan and Dennis Ritchie hash function ||
@@ -35,13 +122,14 @@ List of algorithms
 || rs || 32bits || Robert Sedgwicks hash function ||
 || sdbm || 32bits || open source SDBM project hash function ||
 
-
-----
-= Documentation =
-
+== Ressources ==
   * [http://en.wikipedia.org/wiki/Hash_function Hash function] (Wikipedia)
+  * [http://en.wikipedia.org/wiki/Checksum Checksums] (Wikipedia)
+  * [http://en.wikipedia.org/wiki/Cyclic_redundancy_check Cyclic redundancy check] (Wikipedia)
   * [http://en.wikipedia.org/wiki/List_of_hash_functions List of hash functions] (Wikipedia)
   * [http://www.partow.net/programming/hashfunctions/index.html General Purpose Hash Function Algorithms] (Arash Partow)
+  * [http://reveng.sourceforge.net/crc-catalogue/ Catalogue of parametrised CRC algorithms] (SourceForge)
+  * [http://code.google.com/p/classless-hasher/wiki/ProvidedAlgorithms classless-hasher provided algorithms] (Google Code)
 
 ----
 
@@ -49,6 +137,7 @@ List of algorithms
 
 == Hashing strings ==
 
+Simply writes UTF-8 into a bytearray and hash it
 {{{
 import core.hash.elf;
 import core.strings.padLeft;
@@ -67,6 +156,47 @@ trace( "32bits hex = 0x" + padLeft( hash.toString( 16 ), 8, "0" ) ); //32bits he
 
 <br>
 
-== Hashing unicode strings ==
+== Hashing non-ASCII strings ==
+
+If you need to hash non-ASCII strings you should pay attention with the difference
+between Unicode and UTF-8.
+
+When converting non-ASCII to Unicode you will end up with 2 bytes<br>
+for ex: *ざ* gives in Unicode `0x3056`
+
+When converting non-ASCII to UTF-8 you will end up with variable bytes length<br>
+for ex: *ざ* gives in UTF-8 `0xE38196` (3 bytes)
+
+The same string "ざづぜげ" will not generate the same hash, see bellow.
+
+{{{
+//UTF-8
+var bytes1:ByteArray = new ByteArray();
+      bytes1.writeMultiByte( "ざづぜげ", "UTF-8" );
+
+var hash1:uint = elf( bytes );
+
+trace( "ELF hash = " + hash1 ); //218292322
+trace( "32bits hex = 0x" + padLeft( hash1.toString( 16 ), 8, "0" ) ); //32bits hex = 0x0d02e062
+
+//Unicode
+var bytes2:ByteArray = new ByteArray();
+      bytes2.writeMultiByte( "ざづぜげ", "unicodeFFFE" );
+
+var hash2:uint = elf( bytes );
+
+trace( "ELF hash = " + hash2 ); //157834242
+trace( "32bits hex = 0x" + padLeft( hash2.toString( 16 ), 8, "0" ) ); //32bits hex = 0x09685c02
+}}}
+
+Also<br>
+`bytes.writeUTFBytes( "ざづぜげ" );`<br>
+is the same as<br>
+`bytes.writeMultiByte( "ざづぜげ", "UTF-8" );`
+
+<br>
 
 == Hashing binaries, bytes, files ==
+
+
+<br>
