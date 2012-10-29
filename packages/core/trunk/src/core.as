@@ -91,6 +91,19 @@ include "core/data/aliases.as";
 include "core/functors/aop.as";
 include "core/functors/bind.as";
 
+//core.hash.*
+include "core/hash/ap.as";
+include "core/hash/bkdr.as";
+include "core/hash/brp.as";
+include "core/hash/dek.as";
+include "core/hash/djb.as";
+include "core/hash/elf.as";
+include "core/hash/fnv.as";
+include "core/hash/js.as";
+include "core/hash/pjw.as";
+include "core/hash/rs.as";
+include "core/hash/sdbm.as";
+
 //core.html.*
 include "core/html/anchor.as";
 include "core/html/big.as";
