@@ -4,6 +4,10 @@
 
 *core.hash* contains hashing utility functions.
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
+
+<g:plusone size="medium"></g:plusone>
+
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
 || `core.hash.*` || FP_10_0<br>FP_9_0 || n/a || n/a || yes || 0.3.1 ||
 
