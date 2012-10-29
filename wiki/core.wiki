@@ -4,14 +4,19 @@
 
 *core* is specialized in classes and functions utilities that are highly reusable without creating any dependencies.
 
-<a href="http://maashaack.googlecode.com"><img src="http://maashaack.googlecode.com/svn/gfx/download.png" align="left"/></a>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/2.0/uk/88x31.png" /></a>
 
+<g:plusone size="medium"></g:plusone>
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
 || `core.*` || FP_10_2|| n/a || n/a || yes || 0.3.1 ||
 
 || *browse* || [http://code.google.com/p/maashaack/source/browse/#svn%2Fpackages%2Fcore%2Ftrunk /packages/core/trunk] ||
 || *checkout* || `svn checkout http://maashaack.googlecode.com/svn/packages/core/trunk core-read-only` ||
+
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/swc/packages/core.swc"><img src="http://maashaack.googlecode.com/svn/gfx/swc.png" align="left"/></a>
+<a href="http://maashaack.googlecode.com/svn/libs/trunk/abc/packages/core.abc"><img src="http://maashaack.googlecode.com/svn/gfx/abc.png" align="left"/></a>
+
 
 <br>
 <br>
@@ -27,6 +32,7 @@ core
   |_ chars
   |_ data
   |_ functors
+  |_ hash
   |_ html
   |_ maths
   |_ objects
