@@ -71,6 +71,7 @@
         * [core_chars chars]
         * [core_data data]
         * [core_functors functors]
+        * [core_hash hash]
         * [core_html html]
         * [core_maths maths]
         * [core_objects objects]
