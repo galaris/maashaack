@@ -1,0 +1,57 @@
+#summary core.hash package.
+
+= About =
+
+*core.hash* contains hashing utility functions.
+
+|| *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
+|| `core.hash.*` || FP_10_0|| n/a || n/a || yes || 0.3.1 ||
+
+<br>
+<br>
+
+= Introduction =
+
+<pre>
+  A hash function is any algorithm or subroutine that maps large data sets of variable length,
+  called keys, to smaller data sets of a fixed length. For example, a person's name, having a
+  variable length, could be hashed to a single integer. The values returned by a hash function
+  are called hash values, hash codes, hash sums, checksums or simply hashes.
+</pre>
+
+= Details =
+
+----
+= Documentation =
+
+  * [http://en.wikipedia.org/wiki/Hash_function Hash function] (Wikipedia)
+  * [http://en.wikipedia.org/wiki/List_of_hash_functions List of hash functions] (Wikipedia)
+  * [http://www.partow.net/programming/hashfunctions/index.html General Purpose Hash Function Algorithms] (Arash Partow)
+
+----
+
+= Usages =
+
+== Hashing strings ==
+
+{{{
+import core.hash.elf;
+import core.strings.padLeft;
+
+import flash.utils.ByteArray;
+
+var bytes:ByteArray = new ByteArray();
+      bytes.writeUTFBytes( "hello world" );
+
+var hash:uint = elf( bytes );
+
+trace( "ELF hash = " + hash ); //18131988
+trace( "hex = " + hash.toString( 16 ) ); //hex = 114ac14
+trace( "32bits hex = 0x" + padLeft( hash.toString( 16 ), 8, "0" ) ); //32bits hex = 0x0114ac14
+}}}
+
+<br>
+
+== Hashing unicode strings ==
+
+== Hashing binaries, bytes, files ==
