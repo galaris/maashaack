@@ -50,7 +50,6 @@ package core.hash
      */
     public const bkdr:Function = function( bytes:ByteArray, seed:uint = 131 ):uint
     {
-        var seed:uint = seed; // 31 131 1313 13131 131313 etc.
         var hash:uint;
         
         var i:uint;
