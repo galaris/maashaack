@@ -43,7 +43,7 @@ deps = {
          
          Var("root") + "/tests/src" : Var("repo") + "/branches/maashaack_ekameleon/trunk/tests/src",
          
-         Var("root") + "/tests/src/core"                : Var("repo") + "/packages/core/trunk/tests/src/core",
+         Var("root") + "/tests/src/core"                : Var("repo") + "/packages/core/trunk/tests/core",
          Var("root") + "/tests/src/system"              : Var("repo") + "/packages/system/trunk/tests/src/system",
          Var("root") + "/tests/src/system/samples"      : Var("repo") + "/packages/system/trunk/tests/src/system/samples",
          Var("root") + "/tests/src/system/broadcasters" : Var("repo") + "/packages/system_broadcasters/trunk/tests/src/system/broadcasters",
