@@ -5,7 +5,7 @@
 *core.hash* contains hashing utility functions.
 
 || *package* || *FPAPI* || *CC* || *dependencies* || *cross-platform* || *redtamarin* ||
-|| `core.hash.*` || FP_10_0|| n/a || n/a || yes || 0.3.1 ||
+|| `core.hash.*` || FP_10_0<br>FP_9_0 || n/a || n/a || yes || 0.3.1 ||
 
 <br>
 <br>
@@ -35,7 +35,7 @@ From implementing a !HashMap, or build a cache of files, we thought
 those functions were a good candidate to insert in a *core* package.
 
 Every implementations have the same strategy
-  * we take a ByteArray as an input<br>so you can hash strings, binaries etc.
+  * we take a !ByteArray as an input<br>so you can hash strings, binaries etc.
   * we apply the algorithm on each byte
 
 We don't do that
@@ -198,5 +198,19 @@ is the same as<br>
 
 == Hashing binaries, bytes, files ==
 
+Here an example using *File* and *!FileStream* in AIR
+{{{
+var bytes:ByteArray = new ByteArray();
 
+var file:File = File.desktopDirectory.resolvePath( "archive.zip" );
+var stream:FileStream = new FileStream();
+     stream.open( file, FileMode.READ );
+     stream.readBytes( bytes );
+     stream.close();
+
+var hash:uint = elf( bytes );
+
+trace( "ELF hash = " + hash );
+trace( "32bits hex = 0x" + padLeft( hash.toString( 16 ), 8, "0" ) );
+}}}
 <br>
