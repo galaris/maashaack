@@ -21,6 +21,21 @@
 
 = Details =
 
+List of algorithms
+|| *name* || *digest size* || *description* ||
+|| ap || 32bits || Arash Partow hash function ||
+|| bkdr || 32bits || Brian Kernighan and Dennis Ritchie hash function ||
+|| brp || 32bits || Bruno R. Preiss hash function ||
+|| dek || 32bits || Donald E. Knuth hash function ||
+|| djb || 32bits || Professor Daniel J. Bernstein hash function ||
+|| elf || 32bits || ELF hash function ||
+|| fnv || 32bits || Fowler–Noll–Vo hash function ||
+|| js || 32bits || Justin Sobel hash function ||
+|| pjw || 32bits || Peter J. Weinberger hash function ||
+|| rs || 32bits || Robert Sedgwicks hash function ||
+|| sdbm || 32bits || open source SDBM project hash function ||
+
+
 ----
 = Documentation =
 
