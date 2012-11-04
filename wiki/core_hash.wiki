@@ -132,7 +132,7 @@ Non-cryptographic hash functions
   * [http://en.wikipedia.org/wiki/Cyclic_redundancy_check Cyclic redundancy check] (Wikipedia)
   * [http://en.wikipedia.org/wiki/List_of_hash_functions List of hash functions] (Wikipedia)
   * [http://www.partow.net/programming/hashfunctions/index.html General Purpose Hash Function Algorithms] (Arash Partow)
-  * [http://home.comcast.net/~bretm/hash/ Hash functions excplained] (Bret Mulvey) (note: I made up the title)
+  * [http://home.comcast.net/~bretm/hash/ Pluto Scarab — Hash Functions] (Bret Mulvey) (note: very good explanation of hash functions)
   * [http://reveng.sourceforge.net/crc-catalogue/ Catalogue of parametrised CRC algorithms] (!SourceForge)
   * [http://code.google.com/p/classless-hasher/wiki/ProvidedAlgorithms classless-hasher provided algorithms] (Google Code)
 
