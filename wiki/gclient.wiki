@@ -34,17 +34,17 @@ It is easier for us to maintain different small projects that get assembled in a
 
 == installation ==
 
- * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.6.4.zip gclient-0.6.4]
- * unzip in a folder
- * create a symlink
-
-note: under Windows, we support only [http://www.cygwin.com/ cygwin]
-
 if you add a previous gclient installed
 {{{
 $ cd ~
 $ mv gclient gclient.old
 }}}
+
+ * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.6.4.zip gclient-0.6.4]
+ * unzip in a folder
+ * create a symlink
+
+note: under Windows, we support only [http://www.cygwin.com/ cygwin]
 
 {{{
 $ cd ~
