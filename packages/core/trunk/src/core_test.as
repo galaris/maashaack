@@ -36,10 +36,12 @@
 package
 {
     import core.*;
+    import core.hash.elf;
     import core.reflect.*;
     import core.strings.*;
     
     import flash.display.Sprite;
+    import flash.utils.ByteArray;
 
     [SWF(width="400", height="400", backgroundColor="0xffffff", frameRate="24", pageTitle="core", scriptRecursionLimit="1000", scriptTimeLimit="60")]
     public class core_test extends Sprite
@@ -198,6 +200,33 @@ package
             trace( getClassMethods( one_obj ) );
             trace( getClassMethods( one_obj, true ) );
             //trace( describeType( one_obj ) );
+            
+            //hash string
+            var bytes:ByteArray = new ByteArray();
+                bytes.writeUTFBytes( "hello world" );
+            
+            var hash:uint = elf( bytes );
+            trace( "ELF hash = " + hash );
+            trace( "hex = " + hash.toString( 16 ) );
+            trace( "32bits hex = 0x" + padLeft( hash.toString( 16 ), 8, "0" ) );
+            
+            //hash string UTF-8
+            var bytes1:ByteArray = new ByteArray();
+                bytes1.writeMultiByte( "ざづぜげ", "UTF-8" );
+            
+            var hash1:uint = elf( bytes1 );
+            
+            trace( "ELF hash = " + hash1 );
+            trace( "32bits hex = 0x" + padLeft( hash1.toString( 16 ), 8, "0" ) );
+            
+            //hash string Unicode
+            var bytes2:ByteArray = new ByteArray();
+                bytes2.writeMultiByte( "ざづぜげ", "unicodeFFFE" );
+            
+            var hash2:uint = elf( bytes2 );
+            
+            trace( "ELF hash = " + hash2 );
+            trace( "32bits hex = 0x" + padLeft( hash2.toString( 16 ), 8, "0" ) );
             
         }
 
