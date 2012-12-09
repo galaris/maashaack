@@ -1,6 +1,9 @@
 * 0.3.0
 - new code organisation in modules
 - metabuild
+- added a runtimes folder to store redtamarin executables
+- now libs/ have an exe subfolder to distrib binaries
+- metabuild now alos build binaries from tools projects
 
 * 0.2.0
 - big refactor
