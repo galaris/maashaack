@@ -34,69 +34,57 @@ It is easier for us to maintain different small projects that get assembled in a
 
 == installation ==
 
- * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.3.4.zip gclient-0.3.4]
+ * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.6.4.zip gclient-0.6.4]
  * unzip in a folder
  * create a symlink
 
 note: under Windows, we support only [http://www.cygwin.com/ cygwin]
 
+if you add a previous gclient installed
 {{{
 $ cd ~
-$ unzip gclient-0.3.4.zip
-$ ln -s gclient-0.3.4/gclient.py gclient
+$ mv gclient gclient.old
+}}}
+
+{{{
+$ cd ~
+$ unzip gclient-0.6.4.zip
+$ ln -s gclient-0.6.4/gclient.py gclient
 }}}
 
 == usage ==
 {{{
+Usage: gclient <command> [options] 
 
-Usage: gclient <subcommand> [options] [--] [SCM options/args...]
-a wrapper for managing a set of svn client modules and/or git repositories.
-Version 0.3.4
+Commands are:
+  cleanup    Cleans up all working copies.
+  config     Create a .gclient file in the current directory.
+  diff       Displays local diff for every dependencies.
+  fetch      Fetches upstream commits for all modules.
+  grep       Greps through git repos managed by gclient.
+  help       Prints list of commands or help for a specific command.
+  hookinfo   Output the hooks that would be run by `gclient runhooks`
+  pack       Generate a patch which can be applied at the root of the tree.
+  recurse    Operates on all the entries.
+  revert     Revert all modifications in every dependencies.
+  revinfo    Output revision info mapping for the client and its dependencies.
+  runhooks   Runs hooks for files that have been modified in the local working copy.
+  status     Show modification status for every dependencies.
+  sync       Checkout/update all modules.
+  update     Alias for the sync command. Deprecated.
 
-subcommands:
-   cleanup
-   config
-   diff
-   export
-   pack
-   revert
-   status
-   sync
-   update
-   runhooks
-   revinfo
-
-Options and extra arguments can be passed to invoked SCM commands by
-appending them to the command line.  Note that if the first such
-appended option starts with a dash (-) then the options must be
-preceded by -- to distinguish them from gclient options.
-
-For additional help on a subcommand or examples of usage, try
-   gclient help <subcommand>
-   gclient help files
-
+Prints list of commands or help for a specific command.
 
 Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
-  --force               (update/sync only) force update even for modules which
-                        haven't changed
-  --nohooks             (update/sync/revert only) prevent the hooks from
-                        running
-  --revision=REV        (update/sync only) sync to a specific revision, can be
-                        used multiple times for each solution, e.g.
-                        --revision=src@123, --revision=internal@32
-  --deps=OS_LIST        (update/sync only) sync deps for the specified (comma-
-                        separated) platform(s); 'all' will sync all platforms
-  --spec=SPEC           (config only) create a gclient file containing the
-                        provided string
-  -v, --verbose         produce additional output for diagnostics
-  --manually_grab_svn_rev
-                        Skip svn up whenever possible by requesting actual
-                        HEAD revision from the repository
-  --head                skips any safesync_urls specified in configured
-                        solutions
-  --delete_unversioned_trees
-                        on update, delete any unexpected unversioned trees
-                        that are in the checkout
+  -j JOBS, --jobs=JOBS  Specify how many SCM commands can run in parallel;
+                        defaults to number of cpu cores (8)
+  -v, --verbose         Produces additional output for diagnostics. Can be
+                        used up to three times for more logging info.
+  --gclientfile=CONFIG_FILENAME
+                        Specify an alternate .gclient file
+  --spec=SPEC           create a gclient file containing the provided string.
+                        Due to Cygwin/Python brokenness, it probably can't
+                        contain any newlines.
 }}}
