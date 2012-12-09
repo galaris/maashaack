@@ -265,6 +265,7 @@
         <then>
             <svn-add path="${basedir}/libs/swc/" force="true"/>
             <svn-add path="${basedir}/libs/abc/" force="true"/>
+            <svn-add path="${basedir}/libs/exe/" force="true"/>
             <svn-commit path="${basedir}/libs" message="MetaBuild ${MetaBuild.version.tag} - update current libs"/>
             <libs-create-tag tag="${MetaBuild.version.tag}" message="MetaBuild ${MetaBuild.version.tag} - tag maashaack libs [${MetaBuild.version.tag}]"/>
         </then>
