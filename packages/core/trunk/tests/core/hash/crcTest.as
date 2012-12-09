@@ -35,19 +35,49 @@
 
 package core.hash
 {
-    import library.ASTUce.framework.Test;
-    import library.ASTUce.framework.TestSuite;
-
-    public class AllTests
+    import flash.utils.ByteArray;
+    
+    import library.ASTUce.framework.TestCase;
+    
+    public class crcTest extends TestCase
     {
-        public static function suite():Test
+        private var _str0:String = "123456789";
+        
+        private var _key0:ByteArray;
+        
+        public function crcTest( name:String = "" )
         {
-            var suite:TestSuite = new TestSuite( "core.hash package tests" );
-            
-                suite.addTestSuite( hashTest );
-                suite.addTestSuite( crcTest );
-            
-            return suite;
+            super( name );
         }
+        
+        public function setUp():void
+        {
+            _key0 = new ByteArray();
+            _key0.writeMultiByte( _str0, "UTF-8" );
+        }
+        
+        public function tearDown():void
+        {
+            _key0 = null;
+        }
+        
+        public function testCRC32():void
+        {
+            var crc:crc32 = new crc32();
+                crc.update( _key0 );
+            
+            assertEquals( 0xcbf43926 ,  crc.valueOf() );
+            assertEquals(  "cbf43926" , crc.toString() );
+        }
+        
+        public function testCRC32_BZIP2():void
+        {
+            var crc:crc32_bzip2 = new crc32_bzip2();
+                crc.update( _key0 );
+            
+            assertEquals( 0x87315576 ,  crc.valueOf() );
+            assertEquals(  "87315576" , crc.toString() );
+        }
+        
     }
 }
