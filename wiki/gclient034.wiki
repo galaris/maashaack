@@ -1,14 +1,102 @@
-#summary One-sentence summary of this page.
+#summary the gclient tool.
 
-= Introduction =
+== Introduction ==
 
-Add your content here.
+gclient (or google client) is a set of wrapper scripts for checking out and updating source code from multiple SCM repository locations.
 
-test
+The project started here [http://code.google.com/p/gclient/ http://code.google.com/p/gclient/]<br>
+but is now integrated in the Chromium [http://dev.chromium.org/developers/how-tos/depottools depot_tools].
 
-= Details =
+On the [http://www.chromium.org/developers/how-tos/depottools/gclient depot_tools/gclient] page you can find more informations.
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+{{{
+    gclient was originally developed for internal use by the Google Chrome team,
+    to coordinate pieces of code from different SCM repositories during the development process.
+    The sources are included inside depot_tools.  
+}}}
+
+== informations ==
+
+We use *gclient* on top of *svn* for all of our projects.
+
+See [Organization#if_you_are_a_Committer] for the greedy details.
+
+In short, we replace all the `svn:externals` by `DEPS` file and use gclient to sync and update, for the commits we simply navigate into each project directory and do a `svn commit` there.
+
+*Why are we doing that ?*<br>
+It is easier for us to maintain different small projects that get assembled in a big directory structure than to maintain a huge monolithic project.
+
+*What are the advantages of `DEPS` files ?*<br>
+ * It is really like a `svn:externals` but with the difference that it is a file instead of a svn property, so for us it is clearer to see the mapping of directories in those `DEPS` files.
+ * it allow us from the same sources to assemble different structure of projects, see [http://code.google.com/p/maashaack/source/browse/#svn/configs/maashaack maashaack] and [http://code.google.com/p/maashaack/source/browse/#svn/configs/maashaackSA maashaackSA].
+ * it allows to have a parent/child relationship between projects.
+
+
+== installation ==
+
+ * download the archive [http://code.google.com/p/maashaack/downloads/detail?name=gclient-0.3.4.zip gclient-0.3.4]
+ * unzip in a folder
+ * create a symlink
+
+note: under Windows, we support only [http://www.cygwin.com/ cygwin]
+
+{{{
+$ cd ~
+$ unzip gclient-0.3.4.zip
+$ ln -s gclient-0.3.4/gclient.py gclient
+}}}
+
+== usage ==
+{{{
+
+Usage: gclient <subcommand> [options] [--] [SCM options/args...]
+a wrapper for managing a set of svn client modules and/or git repositories.
+Version 0.3.4
+
+subcommands:
+   cleanup
+   config
+   diff
+   export
+   pack
+   revert
+   status
+   sync
+   update
+   runhooks
+   revinfo
+
+Options and extra arguments can be passed to invoked SCM commands by
+appending them to the command line.  Note that if the first such
+appended option starts with a dash (-) then the options must be
+preceded by -- to distinguish them from gclient options.
+
+For additional help on a subcommand or examples of usage, try
+   gclient help <subcommand>
+   gclient help files
+
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  --force               (update/sync only) force update even for modules which
+                        haven't changed
+  --nohooks             (update/sync/revert only) prevent the hooks from
+                        running
+  --revision=REV        (update/sync only) sync to a specific revision, can be
+                        used multiple times for each solution, e.g.
+                        --revision=src@123, --revision=internal@32
+  --deps=OS_LIST        (update/sync only) sync deps for the specified (comma-
+                        separated) platform(s); 'all' will sync all platforms
+  --spec=SPEC           (config only) create a gclient file containing the
+                        provided string
+  -v, --verbose         produce additional output for diagnostics
+  --manually_grab_svn_rev
+                        Skip svn up whenever possible by requesting actual
+                        HEAD revision from the repository
+  --head                skips any safesync_urls specified in configured
+                        solutions
+  --delete_unversioned_trees
+                        on update, delete any unexpected unversioned trees
+                        that are in the checkout
+}}}
