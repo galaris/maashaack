@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,7 +39,7 @@ package graphics.colors
      * Returns the blue part (value between 0 and 255) of an (A)RGB color.
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import graphics.colors.getGreen ;
+     * import graphics.colors.getBlue ;
      * 
      * trace( getBlue( 0x0000FF ) ) ; // 255
      * trace( getBlue( 0x0000FF ) ) ; // 255
