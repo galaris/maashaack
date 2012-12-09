@@ -1,0 +1,22 @@
+<project>
+    
+    <target name="compile-abcdump">
+        
+        <propertycopy name="path" from="project.fullpath" override="true"/>
+        
+        <!-- build -->
+        <ant antfile="${path}/meta.xml" target="main" inheritAll="false">
+            <property file="${path}/build/build.properties"/>
+        </ant>
+        
+        <!-- deploy to libs -->
+        <copy file="${path}/bin-release/nix/abcdump"     todir="libs/exe/nix" overwrite="true" />
+        <copy file="${path}/bin-release/osx/abcdump"     todir="libs/exe/osx" overwrite="true" />
+        <copy file="${path}/bin-release/osx105/abcdump"  todir="libs/exe/osx105" overwrite="true" />
+        <copy file="${path}/bin-release/win/abcdump.exe" todir="libs/exe/win" overwrite="true" />
+        
+        <!-- sync with other projects -->
+        
+    </target>
+    
+</project>
