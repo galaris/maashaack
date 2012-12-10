@@ -4,10 +4,23 @@
     
     <target name="define">
         
-        <property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/4.5.0" />
-        <property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/4.5.0" />
+        <taskdef resource="net/sf/antcontrib/antlib.xml">
+            <classpath >
+                <fileset dir="build/ant/" includes="ant-contrib-1.0b3.jar"/>
+            </classpath>
+        </taskdef>
+        <echo message="ant-contrib tasks defined" />
         
-        <property name="local.flashplayerversion" value="10.2" />
+        <available file="build/user.properties" type="file" property="found.userprops" />
+        <if>
+            <equals arg1="${found.userprops}" arg2="true"/>
+        <then>
+            <property file="build/user.properties"/>
+        </then>
+        <else>
+            <property file="build/buils.properties"/>
+        </else>
+        </if>
         
         <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
             <os family="mac" />
@@ -16,8 +29,6 @@
         <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
             <os family="windows" />
         </condition>
-        
-        <property file="build/build.properties"/>
         
         <tstamp>
             <format property="TODAY" pattern="dd MMMM yyyy" />

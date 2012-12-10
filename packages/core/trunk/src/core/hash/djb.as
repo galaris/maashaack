@@ -59,5 +59,5 @@ package core.hash
         }
         
         return hash;
-    }
+    };
 }

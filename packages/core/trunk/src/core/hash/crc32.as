@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -75,8 +75,8 @@ package core.hash
         
         private static var _poly:uint = 0xedb88320; // reverse polynomial
         
-        private var _init:uint        = 0xffffffff; // initial contents of LFBSR
-        private var _out:uint         = 0xffffffff; // bits mask
+        private var _initial:uint = 0xffffffff; // initial contents of LFBSR
+        private var _out:uint     = 0xffffffff; // bits mask
         
         // ---- CONFIG ----
         
@@ -89,7 +89,7 @@ package core.hash
          */
         public function crc32()
         {
-            _crc = _init;
+            _crc = _initial;
         }
         
         /**

@@ -45,7 +45,7 @@ package core.hash
     public const rs:Function = function( bytes:ByteArray ):uint
     {
         var b:uint    = 0x5C6B7; //378551
-        var a:uint    =  0xF8C9; //63689
+        var a:uint    = 0xF8C9; //63689
         var hash:uint = 0;
         
         var i:uint;
@@ -60,5 +60,5 @@ package core.hash
         }
         
         return hash;
-    }
+    };
 }
