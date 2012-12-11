@@ -1,6 +1,6 @@
 <project>
     
-    <target name="compile-maashaack">
+    <target name="compile-molecule">
         
         <propertycopy name="path" from="project.fullpath" override="true"/>
         
