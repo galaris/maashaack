@@ -43,6 +43,9 @@
                   <include name="logd.swc"/>
                   <include name="eden.swc"/>
                   <include name="astuce.swc"/>
+                  <include name="ax.swc"/>
+                  <include name="fx.swc"/>
+                  <include name="molecule.swc"/>
             </include-libraries>
             
             <metadata date="${TODAY}" title="${project.name}">
