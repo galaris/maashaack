@@ -19,6 +19,7 @@
         <!-- sync with other projects--> 
         
         <copy file="${path}/bin-release/system.models.swc" todir="libraries/ax/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.models.swc" todir="libraries/fx/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/system.models.swc" todir="packages/graphics/lib-swc" overwrite="true" />
         
