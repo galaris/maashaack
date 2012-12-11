@@ -18,6 +18,8 @@
         
         <!-- sync with other projects--> 
         
+        <copy file="${path}/bin-release/system.rules.swc" todir="libraries/ax/lib-swc" overwrite="true" />
+        
         <copy file="${path}/bin-release/system.rules.swc" todir="packages/system_logic/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.rules.abc" todir="packages/system_logic/lib-abc" overwrite="true" />
             

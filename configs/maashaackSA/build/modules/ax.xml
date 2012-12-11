@@ -1,6 +1,6 @@
 <project>
     
-    <target name="compile-system_logic">
+    <target name="compile-ax">
         
         <propertycopy name="path" from="project.fullpath" override="true"/>
         
@@ -13,13 +13,7 @@
         </ant>
         
         <!-- deploy to libs -->
-        
-        <copy file="${path}/bin-release/system.logic.swc" todir="libraries/ax/lib-swc" overwrite="true" />
-        
-        <copy file="${path}/bin-release/system.logic.swc" todir="libs/swc/packages" overwrite="true" />
-        
-        <copy file="${path}/bin-release/system.logic.swc" todir="packages/graphics/lib-swc" overwrite="true" />
-        
+       
     </target>
     
 </project>

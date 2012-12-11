@@ -13,10 +13,12 @@
         </ant>
         
         <!-- deploy to libs -->
+        
         <copy file="${path}/bin-release/graphics.swc" todir="libs/swc/packages" overwrite="true" />
-        <!--<copy file="${path}/bin-release/graphics.abc" todir="libs/abc/packages" overwrite="true" />-->
         
         <!-- sync with other projects -->
+        
+        <copy file="${path}/bin-release/common.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         
     </target>
     
