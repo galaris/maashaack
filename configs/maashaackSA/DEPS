@@ -3,8 +3,7 @@ vars = {
          "root" : "maashaackSA",
        }
 
-deps = 
-{
+deps = {
          Var("root") + "/libs"                         : Var("repo") + "/libs/trunk",
 
          Var("root") + "/runtimes/redtamarin"          : "http://redtamarin.googlecode.com/svn/dist/tags/0.3.2",
@@ -39,17 +38,17 @@ deps =
          
          Var("root") + "/packages/maashaack"           : Var("repo") + "/packages/maashaack/trunk",
          
-         Var("root") + "/libraries/ax"            : "https://maashaack-library-ax.googlecode.com/svn/trunk",
-         Var("root") + "/libraries/fx"            : "https://maashaack-library-fx.googlecode.com/svn/trunk",
-         
          Var("root") + "/libraries/astuce"        : "https://astuce.googlecode.com/svn/as3/trunk",
          Var("root") + "/libraries/eden"          : "https://edenrr.googlecode.com/svn/as3/trunk",
-         Var("root") + "/libraries/molecule"      : "https://molecule.googlecode.com/svn/trunk/",
          
          Var("root") + "/libraries/logd"          : Var("repo") + "/libraries/logd/trunk",
          Var("root") + "/libraries/httplib"       : Var("repo") + "/libraries/httplib/trunk",
          Var("root") + "/libraries/mimelib"       : Var("repo") + "/libraries/mimelib/trunk",
          Var("root") + "/libraries/cgilib"        : Var("repo") + "/libraries/cgilib/trunk",
+         
+         Var("root") + "/libraries/ax"            : "https://maashaack-library-ax.googlecode.com/svn/trunk",
+         Var("root") + "/libraries/fx"            : "https://maashaack-library-fx.googlecode.com/svn/trunk",
+         Var("root") + "/libraries/molecule"      : "https://molecule.googlecode.com/svn/trunk",
          
          Var("root") + "/platform/shell"          : Var("repo") + "/platform/shell/trunk",
          Var("root") + "/platform/avmglue"        : Var("repo") + "/platform/avmglue/trunk",
@@ -61,5 +60,5 @@ deps =
          Var("root") + "/tools/createprojector"   : Var("repo") + "/tools/createprojector/trunk",
          Var("root") + "/tools/swfinfo"           : Var("repo") + "/tools/swfinfo/trunk",
          Var("root") + "/tools/swc2abc"           : Var("repo") + "/tools/swc2abc/trunk",
-         Var("root") + "/tools/astuce"            : "https://astuce.googlecode.com/svn/cli/trunk",
-       }
+         Var("root") + "/tools/astuce"            : "https://astuce.googlecode.com/svn/cli/trunk"
+    }
