@@ -20,6 +20,7 @@
         
         <copy file="${path}/bin-release/system.signals.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.signals.swc" todir="libraries/fx/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.signals.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/system.signals.swc" todir="packages/system_data/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.signals.abc" todir="packages/system_data/lib-abc" overwrite="true" />

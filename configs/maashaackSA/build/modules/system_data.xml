@@ -20,6 +20,7 @@
         
         <copy file="${path}/bin-release/system.data.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.data.swc" todir="libraries/fx/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.data.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/system.data.swc" todir="packages/system_events/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.data.abc" todir="packages/system_events/lib-abc" overwrite="true" />

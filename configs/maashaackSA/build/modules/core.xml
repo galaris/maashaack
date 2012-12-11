@@ -21,6 +21,7 @@
         <copy file="${path}/bin-release/core.abc" todir="libraries/astuce/lib-abc" overwrite="true" />
         
         <copy file="${path}/bin-release/core.swc" todir="libraries/ax/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/core.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/core.swc" todir="libraries/eden/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/core.abc" todir="libraries/eden/lib-abc" overwrite="true" />

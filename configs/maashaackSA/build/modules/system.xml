@@ -16,6 +16,8 @@
         
         <copy file="${path}/bin-release/system.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         
+        <copy file="${path}/bin-release/system.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
+        
         <copy file="${path}/bin-release/system.swc" todir="libs/swc/packages" overwrite="true" />
         <copy file="${path}/bin-release/system.abc" todir="libs/abc/packages" overwrite="true" />
         

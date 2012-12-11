@@ -16,6 +16,7 @@
         
         <copy file="${path}/bin-release/system.process.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.process.swc" todir="libraries/fx/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.process.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/system.process.swc" todir="libs/swc/packages" overwrite="true" />
         <!--<copy file="${path}/bin-release/system.process.abc" todir="libs/abc/packages" overwrite="true" />-->

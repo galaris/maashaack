@@ -20,6 +20,7 @@
         
         <copy file="${path}/bin-release/system.logging.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         <copy file="${path}/bin-release/system.logging.swc" todir="libraries/fx/lib-swc" overwrite="true" />
+        <copy file="${path}/bin-release/system.logging.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
         
         <copy file="${path}/bin-release/system.logging.swc" todir="packages/system_ioc/lib-swc" overwrite="true" />
         

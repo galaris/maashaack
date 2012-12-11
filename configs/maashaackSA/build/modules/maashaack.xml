@@ -19,8 +19,6 @@
         
         <!-- sync with other projects -->
         
-        <copy file="${path}/bin-release/maashaack.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
-        
     </target>
     
 </project>
