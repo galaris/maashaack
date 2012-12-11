@@ -47,10 +47,6 @@ package graphics.display
             suite.addTestSuite( DisplayObjectContainersTest ) ;
             suite.addTestSuite( DisplayObjectsTest ) ;
             
-            suite.addTestSuite( MOBTest ) ;
-            suite.addTestSuite( BackgroundTest ) ;
-            
-            suite.addTestSuite( BigBitmapTest ) ;
             suite.addTestSuite( PatternTest ) ;
             suite.addTestSuite( PerlinNoiseTest ) ;
             suite.addTestSuite( ReflectionBitmapDataTest ) ;
