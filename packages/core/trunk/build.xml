@@ -18,7 +18,7 @@
             <property file="build/user.properties"/>
         </then>
         <else>
-            <property file="build/buils.properties"/>
+            <property file="build/build.properties"/>
         </else>
         </if>
         
