@@ -20,6 +20,8 @@
         
         <copy file="${path}/bin-release/graphics.swc" todir="libraries/ax/lib-swc" overwrite="true" />
         
+        <copy file="${path}/bin-release/graphics.swc" todir="libraries/molecule/lib-swc" overwrite="true" />
+        
     </target>
     
 </project>
