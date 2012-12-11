@@ -1,6 +1,6 @@
 <project>
     
-    <target name="compile-ax">
+    <target name="compile-maashaack">
         
         <propertycopy name="path" from="project.fullpath" override="true"/>
         
@@ -13,8 +13,9 @@
         </ant>
         
         <!-- deploy to libs -->
-        <copy file="${path}/bin-release/ax.swc" todir="libs/swc/libraries" overwrite="true" />
-       
+        
+        <copy file="${path}/bin-release/molecule.swc" todir="libs/swc/libraries" overwrite="true" />
+        
     </target>
     
 </project>

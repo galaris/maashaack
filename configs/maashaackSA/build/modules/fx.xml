@@ -13,6 +13,7 @@
         </ant>
         
         <!-- deploy to libs -->
+        <copy file="${path}/bin-release/fx.swc" todir="libs/swc/libraries" overwrite="true" />
        
     </target>
     
