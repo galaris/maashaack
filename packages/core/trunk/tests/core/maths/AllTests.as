@@ -91,6 +91,7 @@ package core.maths
             suite.addTestSuite( log10Test            ) ;
             suite.addTestSuite( logNTest             ) ;
             suite.addTestSuite( mapTest              ) ;
+            suite.addTestSuite( midPointTest         ) ;
             suite.addTestSuite( moduloTest           ) ;
             suite.addTestSuite( nearlyEqualsTest     ) ;
             suite.addTestSuite( normalizeTest        ) ;
