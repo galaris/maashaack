@@ -60,7 +60,7 @@ package core.maths
         var dLng:Number = ( longitude2 - longitude1 ) * DEG2RAD ;
         
         var y:Number = Math.sin( dLng ) * Math.cos( latitude2 ) ;
-        var x:Number = Math.cos( latitude1 )*Math.sin( latitude2 ) - Math.sin( latitude1 ) * Math.cos( latitude2 ) * Math.cos( dLng ) ;
+        var x:Number = Math.cos( latitude1 ) * Math.sin( latitude2 ) - Math.sin( latitude1 ) * Math.cos( latitude2 ) * Math.cos( dLng ) ;
         
         return ((Math.atan2(y, x)) * RAD2DEG + 180) % 360 ;
     }

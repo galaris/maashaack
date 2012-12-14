@@ -39,12 +39,12 @@ package core.maths
      * Calculates the initial bearing (sometimes referred to as forward azimuth) which if followed in a straight line along a great-circle arc will take you from the start point to the end point (in degrees).
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
-     * import core.maths.bearingTo ;
+     * import core.maths.bearing ;
      * 
      * var position1:Point = new Point( 37.422045 , -122.084347 ) ; // Google HQ
      * var position2:Point = new Point( 37.77493  , -122.419416 ) ; // San Francisco, CA
      * 
-     * trace( bearingTo( position1.x , position1.y , position2.x , position2.y ) ) ; // 323.1477743368166
+     * trace( bearing( position1.x , position1.y , position2.x , position2.y ) ) ; // 323.1477743368166
      * </pre>
      * @param latitude1 The first latitude coordinate.
      * @param longitude1 The first longitude coordinate.
@@ -52,7 +52,7 @@ package core.maths
      * @param longitude2 The second longitude coordinate.
      * @return The bearing in degrees from North.
      */
-    public function bearingTo( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number ):Number
+    public function bearing( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number ):Number
     {
         latitude1 = latitude1 * DEG2RAD ;
         latitude2 = latitude2 * DEG2RAD ;
