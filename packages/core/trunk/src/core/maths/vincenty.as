@@ -37,7 +37,8 @@ package core.maths
 {
     /**
      * Calculates geodesic distance in meter between two points specified by latitude and longitude (in numeric degrees) 
-     * using the Vincenty inverse formula for ellipsoids. This algorithm is slow but very accurate (down to 0.5 mm).
+     * using the Vincenty inverse formula for ellipsoids. This algorithm is slow but very accurate (down to 0.5 mm). 
+     * <p>See the original reference about this formula : <a href="http://www.ngs.noaa.gov/PUBS_LIB/inverse.pdf">Direct and Inverse Solutions of Geodesics on the Ellipsoid with application of nested equations</a>.</p>
      * <p><b>Example :</b></p>
      * <pre class="prettyprint">
      * import core.maths.vincenty ;
@@ -55,11 +56,13 @@ package core.maths
      */
     public function vincenty( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number ):Number
     {
+        // World Geodetic System (WGS-84 ellipsoid parameters)
+        
         const a:Number = 6378137;
         const b:Number = 6356752.3142 ;
-        const f:Number = 1 / 298.257223563 ; // WGS-84 ellipsoid params
+        const f:Number = 1 / 298.257223563 ;
         
-        // WGS-84 ellipsiod
+        // Algorithm
         
         var L:Number = (longitude2 - longitude1) * DEG2RAD;
         
