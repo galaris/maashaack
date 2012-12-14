@@ -60,13 +60,11 @@ package core.maths
      */
     public function midPoint( latitude1:Number, longitude1:Number, latitude2:Number, longitude2:Number ):Point
     {
+        var dLng:Number = ( longitude2 - longitude1 ) * DEG2RAD ;
+        
         latitude1  = latitude1  * DEG2RAD ;
         longitude1 = longitude1 * DEG2RAD ;
-        
         latitude2  = latitude2  * DEG2RAD ;
-        longitude2 = longitude2 * DEG2RAD ;
-        
-        var dLng:Number = ( longitude2 - longitude1 ) ;
         
         var bx:Number = Math.cos( latitude2 ) * Math.cos( dLng );
         var by:Number = Math.cos( latitude2 ) * Math.sin( dLng ) ;
