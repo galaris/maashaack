@@ -44,13 +44,13 @@ package core.maths
      * <pre class="prettyprint">
      * import core.maths.midPoint ;
      * 
-     * var position1:Point = new Point( 37.422045 , -122.084347 ) ; // Google HQ
-     * var position2:Point = new Point( 37.77493  , -122.419416 ) ; // San Francisco, CA
+     * var pos1:Point = new Point( 34.122222 , 118.4111111 ) ; // LA
+     * var pos2:Point = new Point( 40.66972222  , 73.94388889 ) ; // NYC
      * 
-     * var position3:Point = midPoint( position1.x , position1.y , position2.x , position2.y ) ;
-     *  
-     * trace( "midpoint latitude:" + position3.x + " longitude:" + position3.y ) ; 
-     * // midpoint latitude:61.57498891662033 longitude:-175.29648538075753
+     * var result:Point = midPoint( pos1.x , pos1.y , pos2.x , pos2.y )  ;
+     * 
+     * trace( "midpt latitude:" + result.x + " longitude:" + result.y ) ;
+     * // midpt latitude:39.547078603870254 longitude:97.2015133919303
      * </pre>
      * @param latitude1 The first latitude coordinate.
      * @param longitude1 The first longitude coordinate.
@@ -62,12 +62,14 @@ package core.maths
     {
         latitude1  = latitude1  * DEG2RAD ;
         longitude1 = longitude1 * DEG2RAD ;
-        latitude2  = latitude2  * DEG2RAD ;
         
-        var dLng:Number = ( longitude2 - longitude1 ) * DEG2RAD ;
+        latitude2  = latitude2  * DEG2RAD ;
+        longitude2 = longitude2 * DEG2RAD ;
+        
+        var dLng:Number = ( longitude2 - longitude1 ) ;
         
         var bx:Number = Math.cos( latitude2 ) * Math.cos( dLng );
-        var by:Number = Math.sin( latitude2 ) * Math.sin( dLng ) ;
+        var by:Number = Math.cos( latitude2 ) * Math.sin( dLng ) ;
         
         var point:Point = new Point() ;
         
