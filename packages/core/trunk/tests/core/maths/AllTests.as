@@ -65,6 +65,7 @@ package core.maths
             suite.addTestSuite( atanDTest            ) ;
             suite.addTestSuite( atan2DTest           ) ;
             suite.addTestSuite( atanHTest            ) ;
+            suite.addTestSuite( bearingTest          ) ;
             suite.addTestSuite( berpTest             ) ;
             suite.addTestSuite( bounceTest           ) ;
             suite.addTestSuite( ceilTest             ) ;            suite.addTestSuite( clampTest            ) ;
@@ -76,6 +77,7 @@ package core.maths
             suite.addTestSuite( distanceTest         ) ;
             suite.addTestSuite( distanceByObjectTest ) ;
             suite.addTestSuite( fibonacciTest        ) ;
+            suite.addTestSuite( finalBearingTest     ) ;
             suite.addTestSuite( fixAngleTest         ) ;
             suite.addTestSuite( floorTest            ) ;
             suite.addTestSuite( gcdTest              ) ;
