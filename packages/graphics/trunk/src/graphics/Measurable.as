@@ -77,7 +77,12 @@ package graphics
         function set w( value:Number ):void ; 
         
         /**
-         * Sets the virtual width (w) and height (h) values of the component.
+         * Sets the preferred width (w) and height (h) values of the display.
+         */
+        function setPreferredSize( w:Number, h:Number ):void
+        
+        /**
+         * Sets the width and height values of the component.
          */
         function setSize( w:Number , h:Number ):void
     }

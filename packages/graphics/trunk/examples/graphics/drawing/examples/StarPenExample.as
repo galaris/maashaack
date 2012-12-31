@@ -58,6 +58,7 @@ package examples
             pen       = new StarPen( shape ) ;
             pen.align = Align.CENTER ;
             pen.fill  = new FillStyle( 0xEBD936 , 1 ) ;
+            
             pen.draw() ;
             
             addChild( shape ) ;
