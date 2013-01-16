@@ -91,7 +91,7 @@ package examples
             
             trace( "> finish : " +  app.scheduledEnd   ) ; 
             //output: > finish : 30.07.2008 16:30:00
-                    
+            
             trace( "---- test evaluators in static factory method strategy" ) ;
             
             app = factory.getObject("appointment_04") as Appointment ;
