@@ -49,8 +49,9 @@ and works your way back in the code.
 || SWF14 || 11.1.0 || 3.1.0 || 4.6.0 ||
 || SWF15 || 11.2.0 || 3.2.0 || n/a ||
 || SWF16 || 11.3.0 || 3.3.0 || n/a ||
-|| *SWF17* || *11.4.0* || *3.4.0* || *n/a* ||
-|| SWF18 || 11.5.0 || 3.5.0 || n/a ||
+|| SWF17 || 11.4.0 || 3.4.0 || n/a ||
+|| *SWF18* || *11.5.0* || *3.5.0* || *n/a* ||
+|| SWF19 || 11.6.0 || 3.6.0 || n/a ||
 
 *note:*
   * after Flash Player 10.2, SWF version got incremented for each dot release
@@ -75,6 +76,7 @@ if your class depends on *FPAPI* *AIR_3_3* (AIR 3.3)
 === Ressources ===
 
 *links:*
+ * [http://blogs.adobe.com/airodynamics/2011/08/16/versioning-in-flash-runtime-swf-version/ Versioning in Flash Runtime] (Adobe)
  * [http://hg.mozilla.org/tamarin-redux/raw-file/f5191c18b0e4/doc/apiversioning.html API Versioning in AVM] (tamarin-redux)
  * [http://hg.mozilla.org/tamarin-redux/file/f5191c18b0e4/core/api-versions.as api-versions.as] (tamarin-redux)
  * [http://hg.mozilla.org/tamarin-redux/file/f5191c18b0e4/core/api-versions.xml api-versions.xml] (tamarin-redux)
