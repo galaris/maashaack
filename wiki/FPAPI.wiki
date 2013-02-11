@@ -27,7 +27,7 @@ Our advice is when you start to implement something
 simply base it on the current stable *FPAPI*.
 
 If you need backward compatibility with earlier version,
-then use [ConditionalCompilation condition compilation]
+then use [ConditionalCompilation conditional compilation]
 and works your way back in the code.
 
 === API Reference Table ===
