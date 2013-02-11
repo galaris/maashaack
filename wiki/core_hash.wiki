@@ -148,7 +148,7 @@ Cyclic redundancy checks
 || crc32_k || 32bits || big || CRC-32K ||
 
 *notes:*
- * we implemented only 8, 16 and 32bits<br>we discarded 4, 24, etc. or any CRC generating more than 32bits.
+ * based on [http://reveng.sourceforge.net/crc-catalogue/all.htm Catalogue of parametrised CRC algorithms]<br>we implemented only 8, 16 and 32bits<br>and discarded others or any CRC generating more than 32bits hash.
  * big endian means Msbit-first (Most significant bit first)
  * little endian means Lsbit-first (Least significant bit first)
  * see [http://en.wikipedia.org/wiki/Computation_of_CRC#Bit_ordering_.28Endianness.29 Computation of CRC - Bit ordering - Endianness]
