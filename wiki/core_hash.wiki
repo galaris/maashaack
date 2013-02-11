@@ -86,15 +86,15 @@ Some implementations can provide a `seed` parameter<br>
 see [http://code.google.com/p/maashaack/source/browse/packages/core/trunk/src/core/hash/bkdr.as#51 BKDR implementation].
 
 We will not deal with cryptographic hash function in this package<br>
-because those generate digests of 128 bits or more and require<br>
+because those can generate digests of 128 bits or more and require<br>
 implementing special classes like !BigInteger, !BigNumber, etc.
 
-Using redtamarin we will provide an executable for each hash functions
+Using redtamarin we will provide one executable that can use any hash functions
 {{{
-$ ./elf-hash myfile.bin
+$ ./hash -u elf myfile.bin
 18131988
 
-$ ./elf-hash -h myfile.bin
+$ ./hash -u elf -h myfile.bin
 0x0114ac14
 }}}
 TODO
@@ -105,12 +105,28 @@ TODO
 == List of algorithms ==
 
 Cyclic redundancy checks (TODO)
-|| *name* || *digest size* || *description* ||
-||  ||  ||
+|| *name* || *digest size* || *endianness* || *names, aliases* ||
+|| crc8 || 8bits || big || CRC-8 ||
+|| crc8_itu || 8bits || big || CRC-8/ITU ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  || 8bits || little ||  ||
+||  ||  || ||
+||  ||  || ||
+*notes:*
+ * we implemented only 8, 16 and 32bits<br>we discarded 4, 24, etc. or any CRC generating more than 32bits.
+ * big endian means Msbit-first (Most significant bit first)
+ * little endian means Lsbit-first (Least significant bit first)
+ * see [http://en.wikipedia.org/wiki/Computation_of_CRC#Bit_ordering_.28Endianness.29 Computation of CRC - Bit ordering - Endianness]
 
-Checksums (TODO)
+Checksums (TODO, ex: MD2, MD4, MD5, SHA-1, SHA-256, etc.)
 || *name* || *digest size* || *description* ||
-||  ||  ||
+||  ||  || ||
 
 Non-cryptographic hash functions
 || *name* || *digest size* || *description* ||
@@ -137,7 +153,6 @@ Non-cryptographic hash functions
   * [http://code.google.com/p/classless-hasher/wiki/ProvidedAlgorithms classless-hasher provided algorithms] (Google Code)
 
 == TODO ==
-  * implement CRC functions
   * implement Checksum functions
   * build the command line utilities
 
