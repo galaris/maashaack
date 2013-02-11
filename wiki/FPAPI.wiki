@@ -80,6 +80,7 @@ if your class depends on *FPAPI* *AIR_3_3* (AIR 3.3)
 === Ressources ===
 
 *links:*
+ * [http://www.adobe.com/devnet/articles/flashplayer-air-feature-list.html Flash Player and Adobe AIR feature list] (Adobe)
  * [http://blogs.adobe.com/airodynamics/2011/08/16/versioning-in-flash-runtime-swf-version/ Versioning in Flash Runtime] (Adobe)
  * [http://hg.mozilla.org/tamarin-redux/raw-file/f5191c18b0e4/doc/apiversioning.html API Versioning in AVM] (tamarin-redux)
  * [http://hg.mozilla.org/tamarin-redux/file/f5191c18b0e4/core/api-versions.as api-versions.as] (tamarin-redux)
