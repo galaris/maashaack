@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,10 +39,10 @@ package core.hash
     import flash.utils.Endian;
     
     /**
-     * A class to compute the CRC-32 checksum of a data stream.
-     * Other names: CRC-32/ADCCP, PKZIP
+     * A class to compute the CRC-32C checksum of a data stream.
+     * Other names: CRC-32/ISCSI, CRC-32/CASTAGNOLI
      */
-    public final class crc32
+    public final class crc32_c
     {
         
         private static var lookup:Vector.<uint> = make_crc_table();
@@ -77,7 +77,7 @@ package core.hash
         
         // ---- CONFIG ----
         
-        private static var _poly:uint = 0xedb88320;
+        private static var _poly:uint = 0x82f63b78;
         private static var _init:uint = 0xffffffff;
         
         // ---- CONFIG ----
@@ -89,7 +89,7 @@ package core.hash
         /**
          * Creates a CRC-32 object. 
          */
-        public function crc32()
+        public function crc32_c()
         {
             _length = 0xffffffff;
             _endian = Endian.LITTLE_ENDIAN;

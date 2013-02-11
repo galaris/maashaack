@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2012
+  Portions created by the Initial Developers are Copyright (C) 2006-2013
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -36,66 +36,79 @@
 package core.hash
 {
     import flash.utils.ByteArray;
+    import flash.utils.Endian;
     
     /**
      * A class to compute the CRC-32/BZIP2 checksum of a data stream.
      * Other names: CRC-32/AAL5, CRC-32/DECT-B, B-CRC-32.
      */
-    //width=32 poly=0x04c11db7 init=0xffffffff refin=true refout=true xorout=0xffffffff check=0xcbf43926 name="CRC-32"
-    //width=32 poly=0x04c11db7 init=0xffffffff refin=false refout=false xorout=0xffffffff check=0xfc891918 name="CRC-32/BZIP2"
-    //width=32 poly=0x04c11db7 init=0xffffffff refin=true refout=true xorout=0x00000000 check=0x340bc6d9 name="JAMCRC"
-    //width=32 poly=0xa833982b init=0xffffffff refin=true refout=true xorout=0xffffffff check=0x87315576 name="CRC-32D"
     public final class crc32_bzip2
     {
         
-        private static var lookup:Vector.<uint>;
+        private static var lookup:Vector.<uint> = make_crc_table();
         
-        private static function make_crc_table():void
+        private static function make_crc_table():Vector.<uint>
         {
-            lookup = new Vector.<uint>();
+            var table:Vector.<uint> = new Vector.<uint>();
             
             var c:uint;
             var i:uint;
             var j:uint;
             
-            for( i = 0; i <= 0xFF; i++ )
+            for( i = 0; i < 256; i++ )
             {
-                c = i;
+                c = i << 24;
                 for( j = 0; j < 8; j++ )
                 {
-                    if( (c & 1) != 0 )
+                    if( (c & 0x80000000) != 0 )
                     {
-                        c = uint( _poly ^ ( c >>> 1 ) );
+                        c = (c << 1) ^ _poly;
                     }
                     else
                     {
-                        c = uint( c >>> 1 );
+                        c <<= 1;
                     }
                 }
-                lookup[i] = c;
+                table[i] = c;
             }
+            
+            return table;
         }
         
         // ---- CONFIG ----
         
-        private static var _poly:uint = 0xa833982b; // reverse polynomial
-        
-        private var _initial:uint = 0xffffffff; // initial contents of LFBSR
-        private var _out:uint     = 0xffffffff; // bits mask
+        private static var _poly:uint = 0x04c11db7;
+        private static var _init:uint = 0xffffffff;
         
         // ---- CONFIG ----
         
         private var _crc:uint;
-        
-        make_crc_table();
+        private var _length:uint;
+        private var _endian:String;
         
         /**
          * Creates a CRC-32 object. 
          */
         public function crc32_bzip2()
         {
-            _crc = _initial;
+            _length = 0xffffffff;
+            _endian = Endian.BIG_ENDIAN;
+            reset();
         }
+        
+        /**
+         * Returns the byte order for the CRC;
+         * either Endian.BIG_ENDIAN for "Most significant bit first"
+         * or Endian.LITTLE_ENDIAN for "Least significant bit first".
+         * 
+         * see: http://en.wikipedia.org/wiki/Computation_of_CRC#Bit_ordering_.28Endianness.29
+         */
+        public function get endian():String { return _endian; }
+        
+        /**
+         * Returns the length the CRC;
+         */
+        public function get length():uint { return _length; }
         
         /**
          * Updates the CRC-32 with a specified array of bytes.
@@ -112,14 +125,15 @@ package core.hash
             
             var i:uint;
             var c:uint;
-            var crc:uint = ~_crc;
+            var crc:uint = _length & (_crc);
+            
             for( i = offset; i < length; i++ )
             {
                 c   = uint( bytes[ i ] );
-                crc = uint( lookup[ uint(crc ^ c) & 0xff ] ^ uint(crc >>> 8) );
+                crc = (crc << 8) ^ lookup[ ((crc >> 24) ^ c) & 0xff ];
             }
             
-            _crc = uint( _crc ^ crc );
+            _crc = ~crc;
         }
         
         /**
@@ -127,7 +141,7 @@ package core.hash
          */
         public function reset():void
         {
-            _crc = 0;
+            _crc = _init;
         }
         
         /**
@@ -137,7 +151,7 @@ package core.hash
          */
         public function valueOf():uint
         {
-            return _crc & _out;
+            return _crc;
         }
         
         /**

@@ -1,4 +1,4 @@
-﻿/*
+/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -39,10 +39,10 @@ package core.hash
     import flash.utils.Endian;
     
     /**
-     * A class to compute the CRC-32 checksum of a data stream.
-     * Other names: CRC-32/ADCCP, PKZIP
+     * A class to compute the CRC-32/POSIX checksum of a data stream.
+     * Other names: CKSUM
      */
-    public final class crc32
+    public final class crc32_posix
     {
         
         private static var lookup:Vector.<uint> = make_crc_table();
@@ -55,18 +55,18 @@ package core.hash
             var i:uint;
             var j:uint;
             
-            for( i=0; i < 256; i++ )
+            for( i = 0; i < 256; i++ )
             {
-                c = i;
-                for( j=0; j < 8; j++ )
+                c = i << 24;
+                for( j = 0; j < 8; j++ )
                 {
-                    if( (c & 0x00000001) != 0 )
+                    if( (c & 0x80000000) != 0 )
                     {
-                        c = (c >>> 1) ^ _poly;
+                        c = (c << 1) ^ _poly;
                     }
                     else
                     {
-                        c = (c >>> 1);
+                        c <<= 1;
                     }
                 }
                 table[i] = c;
@@ -77,8 +77,8 @@ package core.hash
         
         // ---- CONFIG ----
         
-        private static var _poly:uint = 0xedb88320;
-        private static var _init:uint = 0xffffffff;
+        private static var _poly:uint = 0x04c11db7;
+        private static var _init:uint = 0x00000000;
         
         // ---- CONFIG ----
         
@@ -89,10 +89,10 @@ package core.hash
         /**
          * Creates a CRC-32 object. 
          */
-        public function crc32()
+        public function crc32_posix()
         {
             _length = 0xffffffff;
-            _endian = Endian.LITTLE_ENDIAN;
+            _endian = Endian.BIG_ENDIAN;
             reset();
         }
         
@@ -130,7 +130,7 @@ package core.hash
             for( i = offset; i < length; i++ )
             {
                 c    = uint( bytes[ i ] );
-                crc  = (crc >>> 8) ^ lookup[(crc ^ c) & 0xff];
+                crc = (crc << 8) ^ lookup[ ((crc >> 24) ^ c) & 0xff ];
             }
             
             _crc = ~crc;
