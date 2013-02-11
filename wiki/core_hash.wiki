@@ -117,19 +117,26 @@ Cyclic redundancy checks
 || crc8_rohc || 8bits || little || CRC-8/ROHC ||
 || crc8_darc || 8bits || little || CRC-8/DARC ||
 || crc16 || 16bits || little || CRC-16, ARC, CRC-IBM, CRC-16/ARC, CRC-16/LHA ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
-||  || 16bits || little ||  ||
+|| crc16_buypass || 16bits || big || CRC-16/BUYPASS, CRC-16/VERIFONE ||
+|| crc16_dds10 || 16bits || big || CRC-16/DDS-110 ||
+|| crc16_en13757 || 16bits || big || CRC-16/EN-13757 ||
+|| crc16_teledisk || 16bits || big || CRC-16/TELEDISK ||
+|| modbus || 16bits || little || MODBUS ||
+|| crc16_maxim || 16bits || little || CRC-16/MAXIM ||
+|| crc16_usb || 16bits || little || CRC-16/USB ||
+|| crc16_t10dif || 16bits || big || CRC-16/T10-DIF ||
+|| crc16_dect_x || 16bits || big || CRC-16/DECT-X, X-CRC-16 ||
+|| crc16_dect_r || 16bits || big || CRC-16/DECT-R, R-CRC-16 ||
+|| crc16_dnp || 16bits || little || CRC-16/DNP ||
+|| xmodem || 16bits || big || XMODEM, ZMODEM, CRC-16/ACORN ||
+|| crc16_ccitt_false || 16bits || big || CRC-16/CCITT-FALSE, CRC-16/CCITT-FFFF ||
+|| crc16_aug_ccitt || 16bits || big || CRC-16/AUG-CCITT, CRC-16/SPI-FUJITSU ||
+|| crc16_genibus || 16bits || big || CRC-16/GENIBUS, CRC-16/EPC, CRC-16/I-CODE, CRC-16/DARC ||
+|| kermit || 16bits || little || KERMIT, CRC-16/CCITT, CRC-16/CCITT-TRUE, CRC-CCITT ||
+|| x25 || 16bits || little || X-25, CRC-16/IBM-SDLC, CRC-16/ISO-HDLC, CRC-B ||
+|| crc16_mcrf4xx || 16bits || little || CRC-16/MCRF4XX ||
+|| crc16_riello || 16bits || little || CRC-16/RIELLO ||
+||  || 32bits || little ||  ||
 ||  ||  || || ||
 ||  ||  || || ||
 
