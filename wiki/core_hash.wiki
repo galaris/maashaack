@@ -136,9 +136,16 @@ Cyclic redundancy checks
 || x25 || 16bits || little || X-25, CRC-16/IBM-SDLC, CRC-16/ISO-HDLC, CRC-B ||
 || crc16_mcrf4xx || 16bits || little || CRC-16/MCRF4XX ||
 || crc16_riello || 16bits || little || CRC-16/RIELLO ||
-||  || 32bits || little ||  ||
-||  ||  || || ||
-||  ||  || || ||
+|| crc32 || 32bits || little || CRC-32, CRC-32/ADCCP, PKZIP ||
+|| crc32_bzip2 || 32bits || big || CRC-32/BZIP2, CRC-32/AAL5, CRC-32/DECT-B, B-CRC-32 ||
+|| crc32_c || 32bits || little || CRC-32C, CRC-32/ISCSI, CRC-32/CASTAGNOLI ||
+|| crc32_d || 32bits || little || CRC-32D ||
+|| crc32_mpeg2 || 32bits || big || CRC-32/MPEG-2 ||
+|| crc32_posix || 32bits || big || CRC-32/POSIX, CKSUM ||
+|| crc32_q || 32bits || big || CRC-32Q ||
+|| jamcrc || 32bits || little || JAMCRC ||
+|| xfer || 32bits || big || XFER ||
+|| crc32_k || 32bits || big || CRC-32K ||
 
 *notes:*
  * we implemented only 8, 16 and 32bits<br>we discarded 4, 24, etc. or any CRC generating more than 32bits.
