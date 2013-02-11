@@ -109,13 +109,27 @@ Cyclic redundancy checks
 || crc8 || 8bits || big || CRC-8 ||
 || crc8_itu || 8bits || big || CRC-8/ITU ||
 || crc8_atm || 8bits || big || CRC-8/ATM ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
+|| crc8_ccitt || 8bits || big || CRC-8/CCITT ||
+|| crc8_maxim || 8bits || little || CRC-8/MAXIM, DOW-CRC ||
+|| crc8_icode || 8bits || big || CRC-8/I-CODE ||
+|| crc8_j1850 || 8bits || big || CRC-8/J1850 ||
+|| crc8_wcdma || 8bits || little || CRC-8/WCDMA ||
+|| crc8_rohc || 8bits || little || CRC-8/ROHC ||
+|| crc8_darc || 8bits || little || CRC-8/DARC ||
+|| crc16 || 16bits || little || CRC-16, ARC, CRC-IBM, CRC-16/ARC, CRC-16/LHA ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
+||  || 16bits || little ||  ||
 ||  ||  || || ||
 ||  ||  || || ||
 
@@ -125,9 +139,13 @@ Cyclic redundancy checks
  * little endian means Lsbit-first (Least significant bit first)
  * see [http://en.wikipedia.org/wiki/Computation_of_CRC#Bit_ordering_.28Endianness.29 Computation of CRC - Bit ordering - Endianness]
 
+<br>
+
 Checksums (TODO, ex: MD2, MD4, MD5, SHA-1, SHA-256, etc.)
 || *name* || *digest size* || *description* ||
 ||  ||  || ||
+
+<br>
 
 Non-cryptographic hash functions
 || *name* || *digest size* || *description* ||
