@@ -104,10 +104,11 @@ TODO
 
 == List of algorithms ==
 
-Cyclic redundancy checks (TODO)
+Cyclic redundancy checks
 || *name* || *digest size* || *endianness* || *names, aliases* ||
 || crc8 || 8bits || big || CRC-8 ||
 || crc8_itu || 8bits || big || CRC-8/ITU ||
+|| crc8_atm || 8bits || big || CRC-8/ATM ||
 ||  || 8bits || little ||  ||
 ||  || 8bits || little ||  ||
 ||  || 8bits || little ||  ||
@@ -115,9 +116,9 @@ Cyclic redundancy checks (TODO)
 ||  || 8bits || little ||  ||
 ||  || 8bits || little ||  ||
 ||  || 8bits || little ||  ||
-||  || 8bits || little ||  ||
-||  ||  || ||
-||  ||  || ||
+||  ||  || || ||
+||  ||  || || ||
+
 *notes:*
  * we implemented only 8, 16 and 32bits<br>we discarded 4, 24, etc. or any CRC generating more than 32bits.
  * big endian means Msbit-first (Most significant bit first)
