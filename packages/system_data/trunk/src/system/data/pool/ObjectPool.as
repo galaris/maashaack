@@ -52,7 +52,7 @@ package system.data.pool
      * 
      * pool.allocate( 10 , MyClass , ["hello label"] ) ;
      * 
-     * pool.initialize("init", ["arg1", "arg2"]) ;
+     * pool.apply( "init", ["arg1", "arg2"] ) ;
      * 
      * var activeObjects:Array = [] ;
      * 
@@ -131,10 +131,12 @@ package system.data.pool
         /**
          * Creates a new ObjectPool instance.
          * @param grow Indicates if the pool of objects is auto growing when a new user is called with the "object" property.
+         * @param builder the builder responsible for creating all pool objects. 
          */
-        public function ObjectPool( growing:Boolean = false )
+        public function ObjectPool( growing:Boolean = false , builder:ObjectPoolBuilder = null )
         {
             this.growing = growing ;
+            this.builder = builder ;
         }
         
         /**
@@ -210,7 +212,7 @@ package system.data.pool
             _initSize = _currSize = size;
             
             _head      = _tail = new ObjectPoolNode();
-            _head.data = builder.build.apply(builder, this.parameters) ;
+            _head.data = builder.build.apply( builder , this.parameters ) ;
             
             var n:ObjectPoolNode;
             
@@ -224,6 +226,28 @@ package system.data.pool
             
             _empty     = _allocate = _head ;
             _tail.next = _head;
+        }
+        
+        /**
+         * Helper method for applying a function to all objects in the pool.
+         * @param name The name of the method invoked to initialize all objects in the pool.
+         * @param args The Array representation of all arguments of the init method.
+         */
+        public function apply( name:String , args:Array ):void
+        {
+            var n:ObjectPoolNode = _head ;
+            while (n)
+            {
+                if ( name in n.data && n.data[ name ] is Function )
+                {
+                    n.data[ name ].apply( n.data, args ) ;
+                }
+                if ( n == _tail ) 
+                {
+                    break ;
+                }
+                n = n.next ; 
+            }
         }
         
         /**
@@ -387,24 +411,26 @@ package system.data.pool
         }
         
         /**
-         * Helper method for applying a function to all objects in the pool.
-         * @param name The name of the method invoked to initialize all objects in the pool.
-         * @param args The Array representation of all arguments of the init method.
+         * Initialize all objects in the pool with a generic object.
+         * @param init The generic object to enumerate to initialize all objects in the pool factory.
          */
-        public function initialize( name:String , args:Array):void
+        public function initialize( init:Object ):void
         {
-            var n:ObjectPoolNode = _head ;
-            while (n)
+            if( init )
             {
-                if ( name in n.data && n.data[ name ] is Function )
+                var node:ObjectPoolNode = _head ;
+                while ( node )
                 {
-                    n.data[ name ].apply( n.data, args ) ;
+                    for( var prop:String in init )
+                    {
+                        node.data[ prop ] = init[prop] ;
+                    }
+                    if ( node == _tail ) 
+                    {
+                        break ;
+                    }
+                    node = node.next ; 
                 }
-                if ( n == _tail ) 
-                {
-                    break ;
-                }
-                n = n.next ; 
             }
         }
         
