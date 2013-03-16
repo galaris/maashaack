@@ -1,4 +1,4 @@
-/*
+﻿/*
   Version: MPL 1.1/GPL 2.0/LGPL 2.1
  
   The contents of this file are subject to the Mozilla Public License Version
@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2012
+  Portions created by the Initial Developers are Copyright (C) 2006-2013
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
