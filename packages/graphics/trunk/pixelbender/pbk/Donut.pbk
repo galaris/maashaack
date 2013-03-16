@@ -15,7 +15,7 @@
   
   The Initial Developers of the Original Code are
   Zwetan Kjukov <zwetan@gmail.com> and Marc Alcaraz <ekameleon@gmail.com>.
-  Portions created by the Initial Developers are Copyright (C) 2006-2011
+  Portions created by the Initial Developers are Copyright (C) 2006-2013
   the Initial Developers. All Rights Reserved.
   
   Contributor(s):
@@ -44,40 +44,40 @@ kernel Donut
 >
 
 {
-	parameter float count
-	<
-		minValue: 1.0;
-		maxValue: 100.0;
-		defaultValue: 5.0;
-	>;
+    parameter float count
+    <
+        minValue: 1.0;
+        maxValue: 100.0;
+        defaultValue: 5.0;
+    >;
 
-	parameter float min
-	<
-		minValue: 0.0;
-		maxValue: 1.0;
-		defaultValue: 0.25;
-	>;
+    parameter float min
+    <
+        minValue: 0.0;
+        maxValue: 1.0;
+        defaultValue: 0.25;
+    >;
 
-	parameter float max
-	<
-		minValue: 0.0;
-		maxValue: 1.0;
-		defaultValue: 0.45;
-	>;
+    parameter float max
+    <
+        minValue: 0.0;
+        maxValue: 1.0;
+        defaultValue: 0.45;
+    >;
 
-	parameter float width
-	<
-		minValue: 1.0;
-		maxValue: 1000.0;
-		defaultValue: 100.0;
-	>;
+    parameter float width
+    <
+        minValue: 1.0;
+        maxValue: 1000.0;
+        defaultValue: 100.0;
+    >;
 
-	parameter float height
-	<
-		minValue: 1.0;
-		maxValue: 1000.0;
-		defaultValue: 100.0;
-	>;
+    parameter float height
+    <
+        minValue: 1.0;
+        maxValue: 1000.0;
+        defaultValue: 100.0;
+    >;
 
     parameter pixel4 color
     <
@@ -86,35 +86,35 @@ kernel Donut
         defaultValue : float4( 0.2 , 0.2 , 0.2 , 1.0 );
     >;
 
-	input image4 source ;
+    input image4 source ;
 
-	output pixel4 result ;
+    output pixel4 result ;
 
-	void evaluatePixel()
-	{
+    void evaluatePixel()
+    {
         float2 pixel = outCoord();
         
         float num = count / 5.0 ;
         
-		float size = 1.0 / num ;
+        float size = 1.0 / num ;
                 
         pixel.x = pixel.x / width  ;
         pixel.y = pixel.y / height ;
 
-   		float2 position = floor( pixel * num ) ;
-   		float2 center   = position * size + size * 0.5;
-		float  distance = length( pixel - center ) * num ;
+           float2 position = floor( pixel * num ) ;
+           float2 center   = position * size + size * 0.5;
+        float  distance = length( pixel - center ) * num ;
 
-   		if( distance < min || distance > max )
-   		{
+           if( distance < min || distance > max )
+           {
             result = color ;
-   		}
-		else
-		{
+           }
+        else
+        {
             center.x = center.x * width  ;
             center.y = center.y * height ;
             
             result = sampleNearest( source , center );
-		}
-	}
+        }
+    }
 }
