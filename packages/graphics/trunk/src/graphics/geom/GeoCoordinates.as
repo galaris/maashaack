@@ -33,12 +33,16 @@
   the terms of any one of the MPL, the GPL or the LGPL.
 */
 
-package graphics.geom
+package graphics.geom 
 {
+    import graphics.Geometry;
+    import core.reflect.getClassName;
+    import core.reflect.getClassPath;
+    
     /**
      * The geographic coordinates of a place or event, based on the standard ontology defines by <a href="http://schema.org/GeoCoordinates">http://schema.org/GeoCoordinates</a>.
      */
-    public class GeoCoordinates
+    public class GeoCoordinates implements Geometry
     {
         /**
          * Creates a new GeoCoordinates instance.
@@ -67,5 +71,60 @@ package graphics.geom
          * The longitude of a location. For example -122.08585.
          */
         public var longitude:Number ;
+        
+        /**
+         * Returns a shallow copy of this instance.
+         * @return a shallow copy of this instance.
+         */
+        public function clone():*
+        {
+            return new GeoCoordinates(latitude, longitude, elevation) ;
+        }
+        
+        /**
+         * Compares the specified object with this object for equality.
+         * @return <code class="prettyprint">true</code> if the the specified object is equal with this object.
+         */
+        public function equals( o:* ):Boolean
+        {
+            if ( o is GeoCoordinates )
+            {
+                return (o as GeoCoordinates).latitude  == latitude
+                    && (o as GeoCoordinates).longitude == longitude 
+                    && (o as GeoCoordinates).elevation == elevation ;
+            }
+            else
+            {
+                return false ;
+            }
+        }
+        
+        /**
+         * Returns the Object representation of this object.
+         * @return the Object representation of this object.
+         */
+        public function toObject():Object 
+        {
+            return { latitude:latitude , longitude:longitude , elevation:elevation } ;
+        }
+        
+        /**
+         * Returns the source code string representation of the object.
+         * @return the source code string representation of the object.
+         */
+        public function toSource( indent:int = 0 ):String  
+        {
+            return "new " + getClassPath(this, true) + "(" + latitude.toString() + "," + longitude.toString() + "," + elevation.toString() + ")" ;
+        }
+        
+        /**
+         * Returns the string representation of this instance.
+         * @param verbose Indicates if the string expression display the elevation value.
+         * @return the string representation of this instance.
+         */
+        public function toString( verbose:Boolean = false ):String 
+        {
+            return "[" + getClassName(this) + " latitude:" + latitude + " longitude:" + longitude + ( verbose ? " elevation:" + elevation : "" ) + "]" ;
+        }
     }
 }
