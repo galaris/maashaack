@@ -135,7 +135,7 @@ package graphics.geom
         {
             if ( o is Dimension )
             {
-                return (o as Dimension).width == width && (o as Dimension).height ;
+                return (o as Dimension).width == width && (o as Dimension).height == height ;
             }
             else
             {
@@ -177,7 +177,7 @@ package graphics.geom
         
         /**
          * Returns the Object representation of this object.
-          * @return the Object representation of this object.
+         * @return the Object representation of this object.
          */
         public function toObject():Object 
         {
