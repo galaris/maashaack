@@ -51,12 +51,14 @@ and works your way back in the code.
 || SWF16 || 11.3.0 || Cyril || 08/06/2012 || 3.3.0 || 08/06/2012 || n/a ||
 || SWF17 || 11.4.0 || Dolores || 21/08/2012 || 3.4.0 || 21/08/2012 || n/a ||
 || SWF18 || 11.5.0 || Ellis || 26/11/2012 || 3.5.0 || 26/11/2012 || n/a ||
-|| *SWF19* || *11.6.0* || *Folsom* || *12/02/2013* || *3.6.0* || *12/02/2013* || *n/a* ||
-|| SWF20 || 11.7.0 || Geary || Q2 2013? || 3.7.0 || Q2 2013? || n/a ||
+|| SWF19 || 11.6.0 || Folsom || 12/02/2013 || 3.6.0 || 12/02/2013 || n/a ||
+|| *SWF20* || *11.7.0* || *Geary* || *09/04/2013* || *3.7.0* || *09/04/2013* || *n/a* ||
+|| SWF21 || 11.8.0 || Harrison || Q3 2013? || 3.8.0 || Q3 2013? || n/a ||
 
 
 *note:*
   * after Flash Player 10.2, SWF version got incremented for each dot release
+  * since AIR SDK 3.6 you have 2 versions of the SDK, one with ASC2, one with ASC that can be merged with the Flex SDK
   * SWF version is the minimum SWF version supported in the Flex SDK
   * AIR SDK is the version provided by default in the Flex SDK
   * bold is the last stable version
