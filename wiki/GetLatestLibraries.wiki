@@ -1,0 +1,93 @@
+#summary Get the Latest Libraries.
+
+== Introduction ==
+
+Each time we update, add, change or build the maashaack libraries,
+we save them in a repository path.
+
+Those are called the *latest* libraries.<br>
+(later we will add nighty build libraries)
+
+
+== Details ==
+
+simply use *svn*
+{{{
+svn co http://maashaack.googlecode.com/svn/libs/trunk maashaack-latest
+}}}
+
+form there you will get this directory tree
+{{{
+.
+├── abc
+│   ├── libraries
+│   │   ├── astuce-test.abc
+│   │   ├── astuce.abc
+│   │   ├── eden.abc
+│   │   └── logd.abc
+│   └── packages
+│       ├── common.abc
+│       ├── core.abc
+│       ├── system.abc
+│       ├── system.cli.abc
+│       ├── system.data.abc
+│       ├── system.date.abc
+│       ├── system.errors.abc
+│       ├── system.network.abc
+│       ├── system.numeric.abc
+│       ├── system.rules.abc
+│       ├── system.signals.abc
+│       ├── system.terminals.abc
+│       └── system.text.abc
+├── exe
+│   ├── nix
+│   │   └── abcdump
+│   ├── osx
+│   │   └── abcdump
+│   ├── osx105
+│   │   └── abcdump
+│   └── win
+│       └── abcdump.exe
+└── swc
+    ├── libraries
+    │   ├── astuce.swc
+    │   ├── ax.swc
+    │   ├── eden.swc
+    │   ├── fx.swc
+    │   ├── logd.swc
+    │   └── molecule.swc
+    ├── maashaack.swc
+    └── packages
+        ├── common.swc
+        ├── core.swc
+        ├── graphics.swc
+        ├── system.broadcasters.swc
+        ├── system.cli.swc
+        ├── system.comparators.swc
+        ├── system.data.swc
+        ├── system.date.swc
+        ├── system.diagnostics.swc
+        ├── system.errors.swc
+        ├── system.evaluators.swc
+        ├── system.events.swc
+        ├── system.formatters.swc
+        ├── system.hosts.swc
+        ├── system.ioc.swc
+        ├── system.logging.swc
+        ├── system.logic.swc
+        ├── system.models.swc
+        ├── system.network.swc
+        ├── system.numeric.swc
+        ├── system.process.swc
+        ├── system.reflection.swc
+        ├── system.remoting.swc
+        ├── system.rules.swc
+        ├── system.signals.swc
+        ├── system.swc
+        ├── system.terminals.swc
+        └── system.text.swc
+}}}
+
+those are the latest compiled binaries<br>
+wether it is a SWC, an ABC, or an EXEcutable<br>
+it's all there
