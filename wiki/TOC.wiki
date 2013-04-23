@@ -18,6 +18,7 @@
    * [ApplicationDomain ApplicationDomain]
  * [Users Working with maashaack]
    * [GettingStarted Getting Started]
+   * [GetLatestLibraries HOWTO Get the Latest Libraries]
    * [Configuration HOWTO Configure]
    * [Serialization HOWTO use serialization]
  * [Coders Programming maashaack]
