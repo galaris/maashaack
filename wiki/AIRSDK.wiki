@@ -11,6 +11,12 @@ applications and games across devices and platforms (Windows, Mac, iOS, Android)
 
 == Details ==
 
+AIR SDK and Compiler includes:
+  * Framework for Adobe AIR APIs
+  * ActionScript Compiler 1.0 or 2.0
+  * Template for the Adobe AIR application install badge
+  * Command-line Adobe AIR Debug Launcher (ADL)
+  * Command-line Adobe AIR Developer Tool (ADT)
 
 
 === Getting the AIR SDK ===
@@ -48,8 +54,8 @@ and the same for the classic SDK (which is older and so can be downloaded for ol
 
 *links:*
  * [http://www.adobe.com/devnet/air/air-sdk-download.html Download Adobe AIR SDK] (Adobe)
- * 
- * 
+ * [http://blogs.adobe.com/airodynamics/ Adobe AIR on Mobile Blog] (Adobe)
+ * [http://helpx.adobe.com/x-productkb/multi/how-overlay-air-sdk-flex-sdk.html How to Overlay the AIR SDK for Use With the Flex SDK]
  * 
  * 
  * 
