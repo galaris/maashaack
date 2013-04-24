@@ -44,6 +44,8 @@
    * ASDoc
      * [frameworkDocumentation maashaack framework]
    * [FPAPI FPAPI]
+   * [FLEXSDK Flex SDK]
+   * [AIRSDK AIR SDK]
    * working with
      * [Errors errors]
      * [Events events]
