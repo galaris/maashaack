@@ -69,9 +69,6 @@ and the same for the classic SDK (which is older and so can be downloaded for ol
 
 *links:*
  * [http://www.adobe.com/devnet/air/air-sdk-download.html Download Adobe AIR SDK] (Adobe)
+ * [http://help.adobe.com/en_US/air/build/index.html Adobe AIR] (Adobe Documentation)
  * [http://blogs.adobe.com/airodynamics/ Adobe AIR on Mobile Blog] (Adobe)
  * [http://helpx.adobe.com/x-productkb/multi/how-overlay-air-sdk-flex-sdk.html How to Overlay the AIR SDK for Use With the Flex SDK]
- * 
- * 
- * 
- * 
