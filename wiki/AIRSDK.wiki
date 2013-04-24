@@ -18,6 +18,21 @@ AIR SDK and Compiler includes:
   * Command-line Adobe AIR Debug Launcher (ADL)
   * Command-line Adobe AIR Developer Tool (ADT)
 
+AIR allows AS3 developers to [http://blogs.adobe.com/simplicity/2011/07/build-better-apps.html Use a Cross-Platform Runtime to Build Better Apps]
+<pre>
+The inherent advantage of using a cross-platform runtime, such as AIR, to develop applications
+is typically understood to be the boost in productivity that’s achieved by reducing the amount
+of per-platform work that’s required. While it’s true this is a potential advantage, it’s generally
+discussed with an implicit assumption that the developer is interested in reducing the development cost.
+
+Suppose, for moment, that this is not the case. If you spend just as much on development as you did before
+and use a cross-platform runtime, then what happens? You build better apps.
+
+The key is to take all the time you saving writing code once and apply the savings elsewhere in your application.
+That could be to additional features. Or it could be a better experience: improved responsiveness, more intuitive UI,
+lower memory use. No matter how you spend this savings, you build a better app.
+</pre>
+
 
 === Getting the AIR SDK ===
 
