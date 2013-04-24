@@ -13,7 +13,7 @@ applications and games across devices and platforms (Windows, Mac, iOS, Android)
 
 AIR SDK and Compiler includes:
   * Framework for Adobe AIR APIs
-  * ActionScript Compiler 1.0 or 2.0
+  * !ActionScript Compiler 1.0 or 2.0
   * Template for the Adobe AIR application install badge
   * Command-line Adobe AIR Debug Launcher (ADL)
   * Command-line Adobe AIR Developer Tool (ADT)
