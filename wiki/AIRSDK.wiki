@@ -25,24 +25,18 @@ one that use the legacy [https://code.google.com/p/redtamarin/wiki/ASC ASC 1.0] 
 
 here the URL logic to download them
 
-  * get the *latest* AIR SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*latest*/AIRSDK_Compiler.tbz2]
-
-http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2
-http://airdownload.adobe.com/air/mac/download/3.6/AIRSDK_Compiler.tbz2
-http://airdownload.adobe.com/air/mac/download/3.7/AIRSDK_Compiler.tbz2
-
-http://airdownload.adobe.com/air/win/download/latest/AIRSDK_Compiler.zip
-http://airdownload.adobe.com/air/win/download/3.6/AIRSDK_Compiler.zip
-http://airdownload.adobe.com/air/win/download/3.7/AIRSDK_Compiler.zip
+  * get the *latest* AIR SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*latest*/AIRSDK_Compiler.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/latest/AIRSDK_Compiler.zip airdownload.adobe.com/air/win/download/*latest*/AIRSDK_Compiler.zip]
+  * get AIR *3.7* SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.7/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*3.7*/AIRSDK_Compiler.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.7/AIRSDK_Compiler.zip airdownload.adobe.com/air/win/download/*3.7*/AIRSDK_Compiler.zip]
+  * get AIR *3.6* SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.6/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*3.6*/AIRSDK_Compiler.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.6/AIRSDK_Compiler.zip airdownload.adobe.com/air/win/download/*3.6*/AIRSDK_Compiler.zip]
+  * etc.
 
 
-http://airdownload.adobe.com/air/mac/download/latest/AdobeAIRSDK.tbz2
-http://airdownload.adobe.com/air/mac/download/3.6/AdobeAIRSDK.tbz2
-http://airdownload.adobe.com/air/mac/download/3.7/AdobeAIRSDK.tbz2
-
-http://airdownload.adobe.com/air/win/download/latest/AdobeAIRSDK.zip
-http://airdownload.adobe.com/air/win/download/3.6/AdobeAIRSDK.zip
-http://airdownload.adobe.com/air/win/download/3.7/AdobeAIRSDK.zip
+  * get the *latest* AIR SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*latest*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/latest/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*latest*/AdobeAIRSDK.zip]
+  * get AIR *3.7* SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.7/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*3.7*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.7/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*3.7*/AdobeAIRSDK.zip]
+  * get AIR *3.6* SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.6/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*3.6*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.6/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*3.6*/AdobeAIRSDK.zip]
+  * ...
+  * get AIR *3.0* SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.0/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*3.0*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.0/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*3.0*/AdobeAIRSDK.zip]
+  * etc.
 
 ----
 === Ressources ===
