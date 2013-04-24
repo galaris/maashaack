@@ -2,7 +2,11 @@
 
 == Introduction ==
 
-
+<pre>
+Adobe® AIR® SDK & Compiler provides developers with a consistent
+and flexible development environment for the delivery of out-of-browser
+applications and games across devices and platforms (Windows, Mac, iOS, Android)
+</pre>
 
 
 == Details ==
@@ -41,3 +45,12 @@ and the same for the classic SDK (which is older and so can be downloaded for ol
 
 ----
 === Ressources ===
+
+*links:*
+ * [http://www.adobe.com/devnet/air/air-sdk-download.html Download Adobe AIR SDK] (Adobe)
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
