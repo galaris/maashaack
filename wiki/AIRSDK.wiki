@@ -30,6 +30,7 @@ here the URL logic to download them
   * get AIR *3.6* SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.6/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*3.6*/AIRSDK_Compiler.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.6/AIRSDK_Compiler.zip airdownload.adobe.com/air/win/download/*3.6*/AIRSDK_Compiler.zip]
   * etc.
 
+and the same for the classic SDK (which is older and so can be downloaded for older version than 3.6)
 
   * get the *latest* AIR SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*latest*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/latest/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*latest*/AdobeAIRSDK.zip]
   * get AIR *3.7* SDK to merge with Flex SDK<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/3.7/AdobeAIRSDK.tbz2 airdownload.adobe.com/air/mac/download/*3.7*/AdobeAIRSDK.tbz2]<br>Windows : [http://airdownload.adobe.com/air/win/download/3.7/AdobeAIRSDK.zip airdownload.adobe.com/air/win/download/*3.7*/AdobeAIRSDK.zip]
