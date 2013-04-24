@@ -1,0 +1,45 @@
+#summary about the AIR SDK.
+
+== Introduction ==
+
+
+
+
+== Details ==
+
+
+
+=== Getting the AIR SDK ===
+
+The "no brainer" version is to go on the [http://www.adobe.com/devnet/air/air-sdk-download.html Download Adobe AIR SDK] page<br>
+and then click the yellow button (mac or win).
+
+but wait...
+
+there are *TWO* AIR SDK
+
+one that come with [https://code.google.com/p/redtamarin/wiki/ASC2 ASC 2.0] but *CAN NOT BE MERGED* with the Flex SDK
+
+one that use the legacy [https://code.google.com/p/redtamarin/wiki/ASC ASC 1.0] and *CAN BE MERGED* with the [FLEXSDK Flex SDK]
+
+
+
+http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2
+http://airdownload.adobe.com/air/mac/download/3.6/AIRSDK_Compiler.tbz2
+http://airdownload.adobe.com/air/mac/download/3.7/AIRSDK_Compiler.tbz2
+
+http://airdownload.adobe.com/air/win/download/latest/AIRSDK_Compiler.zip
+http://airdownload.adobe.com/air/win/download/3.6/AIRSDK_Compiler.zip
+http://airdownload.adobe.com/air/win/download/3.7/AIRSDK_Compiler.zip
+
+
+http://airdownload.adobe.com/air/mac/download/latest/AdobeAIRSDK.tbz2
+http://airdownload.adobe.com/air/mac/download/3.6/AdobeAIRSDK.tbz2
+http://airdownload.adobe.com/air/mac/download/3.7/AdobeAIRSDK.tbz2
+
+http://airdownload.adobe.com/air/win/download/latest/AdobeAIRSDK.zip
+http://airdownload.adobe.com/air/win/download/3.6/AdobeAIRSDK.zip
+http://airdownload.adobe.com/air/win/download/3.7/AdobeAIRSDK.zip
+
+----
+=== Ressources ===
