@@ -25,7 +25,7 @@ one that use the legacy [https://code.google.com/p/redtamarin/wiki/ASC ASC 1.0] 
 
 here the URL logic to download them
 
-  * get the *latest* AIR SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2 http://airdownload.adobe.com/air/mac/download/*latest*/AIRSDK_Compiler.tbz2]
+  * get the *latest* AIR SDK with ASC 2.0<br>Mac OS X : [http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2 airdownload.adobe.com/air/mac/download/*latest*/AIRSDK_Compiler.tbz2]
 
 http://airdownload.adobe.com/air/mac/download/latest/AIRSDK_Compiler.tbz2
 http://airdownload.adobe.com/air/mac/download/3.6/AIRSDK_Compiler.tbz2
