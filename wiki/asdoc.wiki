@@ -53,12 +53,11 @@ public class MyClass extends Sprite
 || `<br/>` || adds a line break || most times using another `<p>` is best  ||
 || `<ul>, <li>` || create a list ||  ||
 || `<table><th><tr><td>` || create a table ||  ||
-|| `<img>` || insert an image || relative path sucks with asdoc ||
+|| `<img src="...">` || insert an image || relative path sucks with asdoc ||
 || `<code>` || apply monospace formating ||  ||
 || `<strong>, <b>` || bold text || `<b>` is best ||
 || `<em>, <i>` || italic text|| `<i>` is best ||
-|| `<p>` || starts a new paragraph ||  ||
-|| `<p>` || starts a new paragraph ||  ||
+|| `<a href="...">` || create a link ||  ||
 
 == Using asdoc in maashaack ==
 
