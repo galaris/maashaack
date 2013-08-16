@@ -36,8 +36,29 @@ public class MyClass extends Sprite
 || `>` || `&gt;` || ||
 || `&` || `&#38;` || do not use `&amp;` ||
 || `*` || `&#42;` || ||
+|| `?` || `&#x2014;` || Em dash ||
+|| `™` || `&#x99;` || Trademark symbol ||
+|| ` ` || `&#xA0;` || Nonbreaking space ||
+|| `®` || `&#xAE;` || Registered trademark symbol ||
+|| `?` || `&#xB0;` || Degree symbol ||
+|| `@` || `&#64;` || ||
 
-
+*HTML tags*
+|| *asdoc tag* || *description* || comment ||
+|| `<p>` || starts a new paragraph ||  ||
+|| `<p class="hide">` || hides text from the doc output ||  ||
+|| `<listing>` || program listing ||  ||
+|| `<listing version="3.0">` || program listing for AS3 ||  ||
+|| `<pre>` || formats text in monospace ||  ||
+|| `<br/>` || adds a line break || most times using another `<p>` is best  ||
+|| `<ul>, <li>` || create a list ||  ||
+|| `<table><th><tr><td>` || create a table ||  ||
+|| `<img>` || insert an image || relative path sucks with asdoc ||
+|| `<code>` || apply monospace formating ||  ||
+|| `<strong>, <b>` || bold text || `<b>` is best ||
+|| `<em>, <i>` || italic text|| `<i>` is best ||
+|| `<p>` || starts a new paragraph ||  ||
+|| `<p>` || starts a new paragraph ||  ||
 
 == Using asdoc in maashaack ==
 
