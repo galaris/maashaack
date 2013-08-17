@@ -59,6 +59,21 @@ public class MyClass extends Sprite
 || `<em>, <i>` || italic text|| `<i>` is best ||
 || `<a href="...">` || create a link ||  ||
 
+*@see tag*
+|| *tag usage* || *description* || comment ||
+|| `@see "some text"` || text string ||  ||
+|| `@see http://www.google.com` || external web site ||  ||
+|| `@see page.html` || local HTML page ||  ||
+|| `@see SomeClass` || class in same package ||  ||
+|| `@see flash.display.TextField` || class in different package ||  ||
+|| `@see String` || top level class ||  ||
+|| `@see String#charCodeAt()` || method in top level class ||  ||
+|| `@see #someMethod()` || method in same class of see tag ||  ||
+|| `@see flash.util.#clearInterval()` || package level function ||  ||
+|| `@see flash.ui.ContextMenu#customItems` || property in class in different package ||  ||
+
+
+
 == Using asdoc in maashaack ==
 
 align vertically the `*` in the comments
