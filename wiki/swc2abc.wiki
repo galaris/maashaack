@@ -1,5 +1,7 @@
 #summary Utility to extract the ABC from a SWC file.
 
+<font color="red">deprecated - you will find this tool distributed under the !RedTamarin SDK</font>
+
 == Introduction ==
 
 *swc2abc* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
