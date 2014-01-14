@@ -1,6 +1,6 @@
 #summary abcdump.
 
-<font size="10" color="red">deprecated - you will find this tool distributed under the RedTamarin SDK</font>
+<font color="red">deprecated - you will find this tool distributed under the !RedTamarin SDK</font>
 
 = About =
 
