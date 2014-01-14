@@ -1,5 +1,7 @@
 #summary the flashdoc command-line tool.
 
+<font color="red">deprecated - you will find this tool distributed under the !RedTamarin SDK</font>
+
 == Introduction ==
 
 *flashdoc* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin].
