@@ -1,5 +1,7 @@
 #summary abcdump.
 
+<font size="14" color="red">deprecated - you will find this tool distributed under the RedTamarin SDK</font>
+
 = About =
 
 *abcdump* is a tool originating from [http://hg.mozilla.org/tamarin-redux/file/2d410bbd0312/utils/abcdump.as Tamarin utils] that allow to display the contents of abc or swf files.
