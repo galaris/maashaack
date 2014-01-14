@@ -1,5 +1,7 @@
 #summary Utility to get in depth informations from a SWF file.
 
+<font color="red">deprecated - you will find this tool distributed under the !RedTamarin SDK</font>
+
 = About =
 
 *swfinfo* is a command-line tool made with [http://code.google.com/p/redtamarin/ redtamarin]
