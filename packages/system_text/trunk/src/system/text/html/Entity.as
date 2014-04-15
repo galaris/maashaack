@@ -63,11 +63,11 @@ package system.text.html
          */
         public function Entity( char:String, name:String, number:int )
         {
-            this.char = char   ;
-            this.name = name   ;
+            this.char   = char   ;
+            this.name   = name   ;
             this.number = number ;
         }
-        
+
         /**
          * Returns the 'entity number' string representation of the entity.
          * @return the 'entity number' string representation of the entity.

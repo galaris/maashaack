@@ -79,7 +79,7 @@ package system.text.html
         {
             _entities.push( new Entity( char , name , number ) );
         } 
-        
+
         /**
          * Finds the entity by character.
          * <p><b>Example :</b></p>
@@ -127,7 +127,7 @@ package system.text.html
             var l:int = _entities.length ;
             for( var i:int ; i < l ; i++ )
             {
-                if( _entities[i].toString() == name )
+                if( _entities[i].toString() == name || _entities[i].toNumber() == name )
                 {
                     _fastSearch[ name ] = i ;
                     return true ;
@@ -163,6 +163,34 @@ package system.text.html
             return "" ;
         }
         
+        /**
+         * Returns the character determinates by the name in argument.
+         * <p><b>Example :</b></p>
+         * <pre class="prettyprint">
+         * import system.text.html.Entities ;
+         * var from:String = Entities.from("&#38;euro&#xA0;") ;
+         * trace( from ) ;  // €
+         * </pre>
+         * @return the character determinates by the name in argument.
+         */
+        public static function from( value:String ):String
+        {
+            if( _fastSearch[ value ] )
+            {
+                return _entities[ _fastSearch[ value ] ].valueOf();
+            }
+            var l:int = _entities.length ;   
+            for( var i:int = 0; i < l; i++ )
+            {
+                if( _entities[i].toString() == value || _entities[i].toNumber() == value )
+                {
+                    _fastSearch[ value ] = i ;
+                    return _entities[i].valueOf();
+                }
+            }
+            return "";
+        }
+
         /**
          * Returns the character determinates by the name in argument.
          * <p><b>Example :</b></p>

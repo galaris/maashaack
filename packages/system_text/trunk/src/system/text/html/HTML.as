@@ -152,7 +152,7 @@ package system.text.html
                         i++;
                     }
                     
-                    text += Entities.fromName( ent );
+                    text += Entities.from( ent );
                     i--;
                     continue;
                 }
