@@ -1,3 +1,2 @@
 core https://maashaack.googlecode.com/svn/packages/core/trunk
 system https://maashaack.googlecode.com/svn/packages/system/trunk
-maashaack https://maashaack.googlecode.com/svn/packages/maashaack/trunk
