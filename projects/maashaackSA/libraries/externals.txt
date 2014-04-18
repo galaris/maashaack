@@ -1,0 +1,9 @@
+astuce https://astuce.googlecode.com/svn/as3/trunk
+eden https://edenrr.googlecode.com/svn/as3/trunk
+logd https://maashaack.googlecode.com/svn/libraries/logd/trunk
+httplib https://maashaack.googlecode.com/svn/libraries/httplib/trunk
+mimelib https://maashaack.googlecode.com/svn/libraries/mimelib/trunk
+cgilib https://maashaack.googlecode.com/svn/libraries/cgilib/trunk
+ax https://maashaack-library-ax.googlecode.com/svn/trunk
+fx https://maashaack-library-fx.googlecode.com/svn/trunk
+molecule https://molecule.googlecode.com/svn/trunk
