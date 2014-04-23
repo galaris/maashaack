@@ -177,6 +177,13 @@
 
     <target name="tag">
 
+        <if>
+            <equals arg1="${build.publish}" arg2="true"/>
+        <then>
+            <svn-update path="${basedir}/build" />
+        </then>
+        </if>
+
     	<property file="build/version.properties" prefix="previous." />
     	
         <if>
@@ -230,6 +237,13 @@
         <property name="metabuild.version.shortnumberclean" value="${metabuild.version.major}.${metabuild.version.minor}" />
         <delete file="build/tmp.properties"/>
 
+        <if>
+            <equals arg1="${build.publish}" arg2="true"/>
+        <then>
+            <svn-commit path="${basedir}/build/version.properties" message="MetaBuild ${metabuild.version.tag} - update version properties"/>
+        </then>
+        </if>
+
     </target>
 
 
@@ -237,9 +251,25 @@
     </target>
 
     <target name="after">
+
+        <if>
+            <and>
+                <equals arg1="${build.publish}" arg2="true"/>
+                <equals arg1="${build.updatelibs}" arg2="true"/>
+            </and>
+        <then>
+            <svn-add path="${basedir}/libs/swc/" force="true"/>
+            <!-- <svn-add path="${basedir}/libs/abc/" force="true"/> -->
+            <!-- <svn-add path="${basedir}/libs/exe/" force="true"/> -->
+            <svn-commit path="${basedir}/${metabuild.libs-pool}" message="MetaBuild ${metabuild.version.tag} - update current libs"/>
+            <libs-create-tag tag="${metabuild.version.tag}" message="MetaBuild ${metabuild.version.tag} - tag maashaack libs [${metabuild.version.tag}]"/>
+        </then>
+        </if>
+
         <echo message="${build.separator}"/>
         <echo message="build ${metabuild.desc} done"/>
         <echo message="${build.separator}"/>
+
     </target>
 
 	<target name="header">
