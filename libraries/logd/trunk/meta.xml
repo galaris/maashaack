@@ -1,33 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="logd" default="main" basedir=".">
+<project name="logd" default="main" basedir="."
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
     
     <target name="clean">
         <delete dir="${basedir}/${release.dir}" />
+        <delete dir="${basedir}/${deploy.dir}" />
+        <delete dir="${basedir}/${docs.dir}" />
     </target>
     
     <target name="before">
         <mkdir dir="${basedir}/${release.dir}" />
+        <mkdir dir="${basedir}/${deploy.dir}" />
+        <mkdir dir="${basedir}/${asdoc.output}" />
+
+        <!-- debug -->
+        <echo message="properties:" level="verbose" />
+        <echo message="            FLEX_HOME = ${FLEX_HOME}" level="verbose" />
+        <echo message="                TODAY = ${TODAY}" level="verbose" />
+        <echo message=" flash player version = ${local.flashplayerversion}" level="verbose" />
+        <echo message="          swf version = ${local.swfversion}" level="verbose" />
+        <echo message="               no zip = ${build.nozip}" level="verbose" />
+        <echo message="     no documentation = ${build.nodoc}" level="verbose" />
+        <echo message="               no abc = ${build.noabc}" level="verbose" />
+        <echo message="              fat swc = ${build.fatswc}" level="verbose" />
+        <echo message="" level="verbose" />
+
+        <echo message="versions:" level="verbose" />
+        <echo message="  major = ${version.major}" level="verbose" />
+        <echo message="  minor = ${version.minor}" level="verbose" />
+        <echo message="  build = ${version.build}" level="verbose" />
+        <echo message=" number = ${project.version}" level="verbose" />
+        <echo message="" level="verbose" />
+
+        <echo if:true="${build.nozip}" message="no zip is TRUE" level="verbose" />
+        <echo unless:true="${build.nozip}" message="no zip is FALSE" level="verbose" />
+        <echo if:true="${build.nodoc}" message="no doc is TRUE" level="verbose" />
+        <echo unless:true="${build.nodoc}" message="no doc is FALSE" level="verbose" />
+        <echo if:true="${build.noabc}" message="no abc is TRUE" level="verbose" />
+        <echo unless:true="${build.noabc}" message="no abc is FALSE" level="verbose" />
+        <echo if:true="${build.fatswc}" message="fat swc is TRUE" level="verbose" />
+        <echo unless:true="${build.fatswc}" message="fat swc is FALSE" level="verbose" />
+
     </target>
     
-    <target name="main" depends="clean,before,build-abc,build-swc,after">
+    <target name="main" depends="clean,before,build-abc,build-swc,build-swc-SA,build-doc,build-zip,after">
         
     </target>
     
     <target name="build-abc">
         
-        <java
-            dir="${basedir}"
-            jar="${ASC}"
-            fork="true"
-            failonerror="true"
-        >
-            <arg line="-AS3 -strict -optimize"/>
-            <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue}"/>
-            <arg line="src/${project.as}"/>
-        </java>
-        
-        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        <sequential unless:true="${build.noabc}">
+            <!-- DO NOT USE - Will change with RedTamarin SDK -->
+            <java
+                dir="${basedir}"
+                jar="${ASC}"
+                fork="true"
+                failonerror="true"
+            >
+                <arg line="-AS3 -strict -optimize"/>
+                <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue}"/>
+                <arg line="src/${project.as}"/>
+            </java>
+            
+            <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        </sequential>
 
     </target>
     
@@ -36,7 +74,10 @@
         <compc
             output="${basedir}/${release.dir}/${project.swc}"
             target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
         >
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+            <load-config filename="${basedir}/build/config.xml" append="true" />
             <namespace uri="${project.namespace}" manifest="${basedir}/${project.manifest}" />
             <include-namespaces uri="${project.namespace}" />
             <strict>true</strict>
@@ -44,6 +85,11 @@
             <warnings>true</warnings>
             <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
+            <!--
+            <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                <include name="something.swc"/>
+            </external-library-path>
+             -->
             <source-path path-element="${basedir}/${project.src}" />
             <include-sources dir="${basedir}/${project.src}/core" includes="**/*.as" />
             <metadata date="${TODAY}" title="${project.name}">
@@ -54,6 +100,135 @@
         
     </target>
     
+    <target name="build-swc-SA">
+        
+        <compc
+            output="${basedir}/${release.dir}/${project.swc-SA}"
+            target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
+        >
+            <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml" />
+            <load-config filename="${basedir}/build/config.xml" append="true" />
+            <namespace uri="${project.namespace}" manifest="${basedir}/${project.manifest}" />
+            <include-namespaces uri="${project.namespace}" />
+            <strict>true</strict>
+            <optimize>true</optimize>
+            <warnings>true</warnings>
+            <verbose-stacktraces>false</verbose-stacktraces>
+            <compute-digest>false</compute-digest>
+            <!--
+            <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                <include name="something.swc"/>
+            </external-library-path>
+             -->
+            <source-path path-element="${basedir}/${project.src}" />
+            <include-sources dir="${basedir}/${project.src}/core" includes="**/*.as" />
+            <metadata date="${TODAY}" title="${project.name}">
+                <publisher name="${project.publisher}" />
+                <creator name="${project.creator}" />
+            </metadata>
+        </compc>
+        
+    </target>
+
+    <target name="build-doc">
+
+        <sequential unless:true="${build.nodoc}">
+
+            <!--         templates-path="${basedir}/${asdoc.template}" -->
+            <asdoc
+            output="${basedir}/${asdoc.output}"
+            target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
+            main-title="${asdoc.main.title}"
+            footer="${asdoc.footer}"
+            window-title="${asdoc.window.title}"
+            left-frameset-width="300"
+            failonerror="true"
+            keep-xml="true"
+            >
+                <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+                <load-config filename="${basedir}/build/config.xml" append="true" />
+                <verbose-stacktraces>true</verbose-stacktraces>
+                <doc-sources path-element="${basedir}/${project.src}"/>
+                <source-path path-element="${basedir}/${project.src}" />
+                <!--
+                <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                    <include name="something.swc"/>
+                </external-library-path>
+                 -->
+                <exclude-sources path-element="${basedir}/${project.src}/logd.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/logd_test.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/logd_trace.as" />
+            </asdoc>
+
+            <sequential if:true="${build.fatswc}">
+                
+                <!-- update swc with asdoc xml -->
+                <zip destfile="${basedir}/${release.dir}/${project.swc}" update="true">
+                    <zipfileset dir="${basedir}/${asdoc.output}/tempdita" prefix="docs">
+                        <include name="*.xml" />
+                        <include name="*.dita" />
+                        <exclude name="ASDoc_Config.xml" />
+                        <exclude name="overviews.xml" />
+                    </zipfileset>
+                </zip>
+
+                <!-- update swc-SA with asdoc xml -->
+                <zip destfile="${basedir}/${release.dir}/${project.swc-SA}" update="true">
+                    <zipfileset dir="${basedir}/${asdoc.output}/tempdita" prefix="docs">
+                        <include name="*.xml" />
+                        <include name="*.dita" />
+                        <exclude name="ASDoc_Config.xml" />
+                        <exclude name="overviews.xml" />
+                    </zipfileset>
+                </zip>
+            </sequential>
+
+            <delete dir="${basedir}/${asdoc.output}/tempdita" />
+
+        </sequential>
+
+    </target>
+
+    <target name="build-zip">
+
+        <sequential unless:true="${build.nozip}">
+
+            <!-- generate documentation.zip -->
+            <zip destfile="${basedir}/${release.dir}/documentation.zip"
+                 basedir="${basedir}/${asdoc.output}"
+                 unless:true="${build.nodoc}" />
+
+            <!-- copy all files to deploy dir -->
+            <copy todir="${basedir}/${deploy.dir}">
+                <fileset dir="${basedir}">
+                    <include name="*.txt" />
+                    <include name="*.md" />
+                </fileset>
+                <fileset dir="${basedir}/${release.dir}">
+                    <include name="*.swc" />
+                    <include name="*.abc" />
+                </fileset>
+                <file file="${basedir}/${release.dir}/documentation.zip" unless:true="${build.nodoc}" />
+            </copy>
+
+            <!-- zip all files -->
+            <zip destfile="${basedir}/${deploy.dir}/${project.name}-${project.version}.zip"
+                 basedir="${basedir}/${deploy.dir}" />
+
+            <!-- delete all files except the zip -->
+            <delete includeemptydirs="true">
+                <fileset dir="${basedir}/${deploy.dir}">
+                    <include name="**/*"/>
+                    <exclude name="${project.name}-${project.version}.zip"/>
+                </fileset>
+            </delete>
+
+        </sequential>
+
+    </target>
+
     <target name="after">
         
     </target>

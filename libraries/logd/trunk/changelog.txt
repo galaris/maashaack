@@ -1,0 +1,4 @@
+* 0.1.0
+  - refactored all builds
+  - now we use svn 1.8.8
+  - now we use ant 1.9.3
