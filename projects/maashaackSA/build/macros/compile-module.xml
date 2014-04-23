@@ -104,6 +104,35 @@
             </then>
             </if>
 
+
+            <!-- update the lib-swc folder -->
+            <if>
+                <and>
+                    <equals arg1="${build.publish}" arg2="true"/>
+                    <equals arg1="${build.updatedependencies}" arg2="true"/>
+                    <available file="@{path}/lib-swc" type="dir"/>
+                </and>
+            <then>
+                <svn-commit path="${basedir}/@{path}/lib-swc" message="MetaBuild ${metabuild.version.tag} - @{name} update SWC dependencies"/>
+                <echo message="@{name} update SWC dependencies in /lib-swc"/>
+            </then>
+            </if>
+
+            <!-- update the lib-abc folder -->
+            <if>
+                <and>
+                    <equals arg1="${build.publish}" arg2="true"/>
+                    <equals arg1="${build.updatedependencies}" arg2="true"/>
+                    <available file="@{path}/lib-abc" type="dir"/>
+                </and>
+            <then>
+                <svn-commit path="${basedir}/@{path}/lib-abc" message="MetaBuild ${metabuild.version.tag} - @{name} update ABC dependencies"/>
+                <echo message="@{name} update ABC dependencies in /lib-abc"/>
+            </then>
+            </if>
+
+
+
             <if>
                 <not>
                 <available file="@{path}/@{builder}" type="file"/>
