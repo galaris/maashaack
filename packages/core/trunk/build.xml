@@ -4,23 +4,19 @@
     
     <target name="define">
         
-        <taskdef resource="net/sf/antcontrib/antlib.xml">
-            <classpath >
-                <fileset dir="build/ant/" includes="ant-contrib-1.0b3.jar"/>
-            </classpath>
-        </taskdef>
-        <echo message="ant-contrib tasks defined" />
+        <!-- override -->
+        <property file="user.properties"/>
+
+        <!-- config -->
+        <property name="FLEX_HOME_MAC" value="/OpenSource/Flex/sdks/4.6.0_AIR_13" />
+        <property name="FLEX_HOME_WIN" value="c:/OpenSource/Flex/sdks/4.6.0_AIR_13" />
         
-        <available file="build/user.properties" type="file" property="found.userprops" />
-        <if>
-            <equals arg1="${found.userprops}" arg2="true"/>
-        <then>
-            <property file="build/user.properties"/>
-        </then>
-        <else>
-            <property file="build/build.properties"/>
-        </else>
-        </if>
+        <property name="local.flashplayerversion" value="11.7" />
+        <property name="local.swfversion" value="20" />
+        <property name="build.nozip" value="true" />
+        <property name="build.nodoc" value="true" />
+        <property name="build.noabc" value="true" />
+        <property name="build.fatswc" value="false" />
         
         <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
             <os family="mac" />
@@ -29,6 +25,8 @@
         <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
             <os family="windows" />
         </condition>
+        
+        <property file="build/build.properties"/>
         
         <tstamp>
             <format property="TODAY" pattern="dd MMMM yyyy" />
@@ -40,6 +38,8 @@
     
     <target name="clean" depends="define">
         <delete dir="${basedir}/${release.dir}" />
+        <delete dir="${basedir}/${deploy.dir}" />
+        <delete dir="${basedir}/${docs.dir}" />
     </target>
     
     <import file="meta.xml" />

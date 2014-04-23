@@ -38,7 +38,7 @@ package core.hash
     import flash.utils.ByteArray;
     
     /**
-     * Peter J. Weinberger (of AT&T Bell Labs) hash function.
+     * Peter J. Weinberger (of AT&#38;T Bell Labs) hash function.
      * The book Compilers (Principles, Techniques and Tools) by Aho, Sethi and Ulman,
      * recommends the use of hash functions that employ the hashing methodology
      * found in this particular algorithm.
