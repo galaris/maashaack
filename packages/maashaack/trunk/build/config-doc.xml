@@ -7,7 +7,7 @@
         -->
         <define append="true"> 
             <name>LOG::P</name> 
-            <value>false</value> 
+            <value>true</value> 
         </define>
         <define append="true"> 
             <name>API::FLASH</name> 
