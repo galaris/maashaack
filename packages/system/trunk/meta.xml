@@ -1,48 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="system" default="main" basedir=".">
+<project name="system" default="main" basedir="."
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
     
     <target name="clean">
         <delete dir="${basedir}/${release.dir}" />
+        <delete dir="${basedir}/${deploy.dir}" />
+        <delete dir="${basedir}/${docs.dir}" />
     </target>
     
     <target name="before">
         <mkdir dir="${basedir}/${release.dir}" />
+        <mkdir dir="${basedir}/${deploy.dir}" />
+        <mkdir dir="${basedir}/${asdoc.output}" />
+
+        <!-- debug -->
+        <echo message="properties:" level="verbose" />
+        <echo message="            FLEX_HOME = ${FLEX_HOME}" level="verbose" />
+        <echo message="                TODAY = ${TODAY}" level="verbose" />
+        <echo message=" flash player version = ${local.flashplayerversion}" level="verbose" />
+        <echo message="          swf version = ${local.swfversion}" level="verbose" />
+        <echo message="               no zip = ${build.nozip}" level="verbose" />
+        <echo message="     no documentation = ${build.nodoc}" level="verbose" />
+        <echo message="               no abc = ${build.noabc}" level="verbose" />
+        <echo message="              fat swc = ${build.fatswc}" level="verbose" />
+        <echo message="" level="verbose" />
+
+        <echo if:true="${build.nozip}" message="no zip is TRUE" level="verbose" />
+        <echo unless:true="${build.nozip}" message="no zip is FALSE" level="verbose" />
+        <echo if:true="${build.nodoc}" message="no doc is TRUE" level="verbose" />
+        <echo unless:true="${build.nodoc}" message="no doc is FALSE" level="verbose" />
+        <echo if:true="${build.noabc}" message="no abc is TRUE" level="verbose" />
+        <echo unless:true="${build.noabc}" message="no abc is FALSE" level="verbose" />
+        <echo if:true="${build.fatswc}" message="fat swc is TRUE" level="verbose" />
+        <echo unless:true="${build.fatswc}" message="fat swc is FALSE" level="verbose" />
+
     </target>
     
-    <target name="main" depends="clean,before,build-abc,build-swc,after">
+    <target name="main" depends="clean,before,build-abc,build-swc,build-doc,after">
         
     </target>
     
     <target name="build-abc">
         
-        <java
-            dir="${basedir}"
-            jar="${ASC}"
-            fork="true"
-            failonerror="true"
-        >
-            <arg line="-AS3 -strict -optimize"/>
-            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
-            <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue}"/>
-            <arg line="-import ${core} -import ${common} -import ${system.network} -import ${system.terminals} -import ${eden} src/${project.as}"/>
-        </java>
-        
-        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        <sequential unless:true="${build.noabc}">
+            <!-- DO NOT USE - Will change with RedTamarin SDK -->
+            <java
+                dir="${basedir}"
+                jar="${ASC}"
+                fork="true"
+                failonerror="true"
+            >
+                <arg line="-AS3 -strict -optimize"/>
+                <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
+                <arg line="-import ${builtin} -import ${toplevel} -import ${avmglue}"/>
+                <arg line="-import ${core} -import ${common} -import ${system.network} -import ${system.terminals} -import ${eden} src/${project.as}"/>
+            </java>
+            
+            <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        </sequential>
         
     </target>
     
     <target name="build-swc">
+
         <compc
             output="${basedir}/${release.dir}/${project.swc}"
             target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
         >
             <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
-            <load-config filename="${basedir}/build/config.xml"/>
+            <load-config filename="${basedir}/build/config.xml" append="true" />
             <strict>true</strict>
             <optimize>true</optimize>
             <warnings>true</warnings>
-            <verbose-stacktraces>true</verbose-stacktraces>
+            <verbose-stacktraces>false</verbose-stacktraces>
             <compute-digest>false</compute-digest>
             <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                <include name="core.swc"/>
@@ -50,6 +83,8 @@
                <include name="system.network.swc"/>
                <include name="system.reflection.swc"/>
                <include name="system.terminals.swc"/>
+            </external-library-path>
+            <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
                <include name="eden.swc"/>
             </external-library-path>
             <source-path path-element="${basedir}/${project.src}" />
@@ -84,6 +119,77 @@
         </compc>
     </target>
     
+    <target name="build-doc">
+
+        <sequential unless:true="${build.nodoc}">
+
+            <!--         templates-path="${basedir}/${asdoc.template}" -->
+            <asdoc
+            output="${basedir}/${asdoc.output}"
+            target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
+            failonerror="true"
+            keep-xml="true"
+            skip-xsl="true"
+            >
+                <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+                <load-config filename="${basedir}/build/config.xml" append="true" />
+                <verbose-stacktraces>true</verbose-stacktraces>
+                <doc-sources path-element="${basedir}/${project.src}/system"/>
+                <source-path path-element="${basedir}/${project.src}" />
+                <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                   <include name="core.swc"/>
+                   <include name="common.swc"/>
+                   <include name="system.network.swc"/>
+                   <include name="system.reflection.swc"/>
+                   <include name="system.terminals.swc"/>
+                </external-library-path>
+                <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                   <include name="eden.swc"/>
+                </external-library-path>
+                <exclude-sources path-element="${basedir}/${project.src}/system/LibraryCommon.as" />
+
+                <exclude-sources path-element="${basedir}/${project.src}/system/hack.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/optimized.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/standard.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/experimental.as" />
+
+                <exclude-sources path-element="${basedir}/${project.src}/system/Cloneable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Comparable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Comparator.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Equatable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Evaluable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Formattable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Serializable.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Serializer.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system/Sortable.as" />
+                
+                <exclude-sources path-element="${basedir}/${project.src}/common.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system.as" />
+                <exclude-sources path-element="${basedir}/${project.src}/system_test.as" />
+                <packages.package name="system" description="system" />
+            </asdoc>
+
+            <sequential if:true="${build.fatswc}">
+                
+                <!-- update swc with asdoc xml -->
+                <zip destfile="${basedir}/${release.dir}/${project.swc}" update="true">
+                    <zipfileset dir="${basedir}/${asdoc.output}/tempdita" prefix="docs">
+                        <include name="*.xml" />
+                        <include name="*.dita" />
+                        <exclude name="ASDoc_Config.xml" />
+                        <exclude name="overviews.xml" />
+                    </zipfileset>
+                </zip>
+
+            </sequential>
+
+            <!-- <delete dir="${basedir}/${asdoc.output}/tempdita" /> -->
+
+        </sequential>
+
+    </target>
+
     <target name="after">
         
     </target>
