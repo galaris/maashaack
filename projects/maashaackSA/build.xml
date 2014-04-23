@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  documentation and usage here
+  https://code.google.com/p/redtamarin/wiki/Build
+ -->
+
+ <project name="maashaack-metabuild" default="main" basedir="."
+ 	xmlns:if="ant:if"
+ 	xmlns:unless="ant:unless" >
+
+    <!-- All Tasks -->
+    <import file="build/tasks/define-pre-tasks.xml" />
+    <import file="build/tasks/define-post-tasks.xml" />
+
+    <!-- All Macros -->
+    <import file="build/macros/svn-update.xml" />
+    <import file="build/macros/svn-add.xml" />
+    <import file="build/macros/svn-commit.xml" />
+
+    <import file="build/macros/compile-module.xml" />
+    <import file="build/macros/compile-module-if.xml" />
+    <import file="build/macros/fetch-local-dependencies.xml" />
+    <import file="build/macros/fetch-local-libraries.xml" />
+    <import file="build/macros/fetch-external-libraries.xml" />
+    <import file="build/macros/libs-create-tag.xml" />
+
+
+    <target name="flag">
+    <echo>
+           _____           __         __________      .__.__       .___
+          /     \   ____ _/  |______  \______   \__ __|__|  |    __| _/
+         /  \ /  \_/ __ \\   __\__  \  |    |  _/  |  \  |  |   / __ | 
+        /    Y    \  ___/ |  |  / __ \_|    |   \  |  /  |  |__/ /_/ | 
+        \____|__  /\___  >|__| (____  /|______  /____/|__|____/\____ | 
+                \/     \/           \/        \/                    \/ 
+    </echo>
+    </target>
+
+    <target name="clean">
+    </target>
+
+    <target name="define-constants">
+    	
+    	<!-- override -->
+        <property file="user.properties"/>
+
+        <!-- config -->
+        <property file="build/common.properties"/>
+
+        <!-- timestamp of the metabuild -->
+        <tstamp>
+            <format property="TODAY" pattern="dd MMMM yyyy" />
+        </tstamp>
+
+       <!-- FLEX_HOME -->
+        <condition property="FLEX_HOME" value="${FLEX_HOME_MAC}">
+            <os family="mac"/>
+        </condition>
+
+        <condition property="FLEX_HOME" value="${FLEX_HOME_NIX}">
+            <os family="unix"/>
+        </condition>
+        
+        <condition property="FLEX_HOME" value="${FLEX_HOME_WIN}">
+            <os family="windows" />
+        </condition>
+
+       <!-- SHELL -->
+        <condition property="SHELL" value="${SHELL_MAC}">
+            <os family="mac"/>
+        </condition>
+
+        <condition property="SHELL" value="${SHELL_NIX}">
+            <os family="unix"/>
+        </condition>
+        
+        <condition property="SHELL" value="${SHELL_WIN}">
+            <os family="windows" />
+        </condition>
+
+       <!-- SEPARATOR -->
+        <condition property="SEPARATOR" value="${SEPARATOR_MAC}">
+            <os family="mac"/>
+        </condition>
+
+        <condition property="SEPARATOR" value="${SEPARATOR_NIX}">
+            <os family="unix"/>
+        </condition>
+        
+        <condition property="SEPARATOR" value="${SEPARATOR_WIN}">
+            <os family="windows" />
+        </condition>
+
+        
+        <if>
+            <not>
+            <available file="${FLEX_HOME}" type="dir"/>
+            </not>
+            <then>
+                <property name="local.found.flex" value="false"/>
+            </then>
+            <else>
+                <property name="local.found.flex" value="true"/>
+            </else>
+        </if>
+
+    </target>
+
+
+    <target name="before" depends="task-define-pre-tasks,define-constants,task-define-post-tasks">
+    </target>
+
+    <target name="check">
+
+        <if>
+            <not>
+            <available file="${metabuild.release}" type="dir"/>
+            </not>
+            <then>
+                <mkdir dir="${metabuild.release}"/>
+            </then>
+        </if>
+
+        <if>
+            <not>
+            <available file="${metabuild.deploy}" type="dir"/>
+            </not>
+            <then>
+                <mkdir dir="${metabuild.deploy}"/>
+            </then>
+        </if>
+
+        <if>
+            <and>
+            <equals arg1="${build.packages}" arg2="true"/>
+            <equals arg1="${local.found.flex}" arg2="false"/>
+            </and>
+            <then>
+                <fail message="to build the packages we need a Flex SDK"/>
+            </then>
+        </if>
+
+        <if>
+            <and>
+            <equals arg1="${build.libraries}" arg2="true"/>
+            <equals arg1="${local.found.flex}" arg2="false"/>
+            </and>
+            <then>
+                <fail message="to build the libraries we need a Flex SDK"/>
+            </then>
+        </if>
+
+        <if>
+            <and>
+            <equals arg1="${build.tools}" arg2="true"/>
+            <equals arg1="${local.found.flex}" arg2="false"/>
+            </and>
+            <then>
+                <fail message="to build the tools we need a Flex SDK"/>
+            </then>
+        </if>
+
+        <if>
+            <and>
+            <equals arg1="${build.documentation}" arg2="true"/>
+            <equals arg1="${local.found.flex}" arg2="false"/>
+            </and>
+            <then>
+                <fail message="to generate the documentation we need a Flex SDK"/>
+            </then>
+        </if>
+
+    </target>
+
+    <target name="tag">
+
+    	<property file="build/version.properties" prefix="previous." />
+    	
+        <if>
+            <equals arg1="${previous.version.build}" arg2="999" />
+        <then>
+            <propertyfile file="build/version.properties">
+                <entry key="version.build" type="int" value="0" pattern="000"/>
+            </propertyfile>
+            <script language="javascript">
+            numeric = Number( project.getProperty("previous.version.serie") );
+            letter  = String( project.getProperty("previous.version.cycle") );
+            if( letter == "Z" )
+            {
+                letter = "A";
+                numeric++;
+            }
+            else
+            {
+                letter = String.fromCharCode( letter.charCodeAt(0)+1 );
+            }
+            project.setNewProperty("current.serie", numeric);
+            project.setNewProperty("current.cycle", letter);
+            </script>
+            <propertyfile file="build/version.properties">
+                <entry key="version.serie" type="int" value="${current.serie}"/>
+                <entry key="version.cycle" type="string" value="${current.cycle}"/>
+            </propertyfile>
+        </then>
+        <else>
+            <propertyfile file="build/version.properties">
+                <entry key="version.build" type="int" operation="+" default="0" pattern="000"/>
+            </propertyfile>
+        </else>
+        </if>
+
+        <!-- remove comments -->
+        <replaceregexp file="build/version.properties" match="#.*" replace="" />
+        <!-- remove blank lines -->
+        <replaceregexp file="build/version.properties" match="(\r?\n)\s*\r?\n" flags="g" replace="\1" />
+        
+        <property file="build/version.properties" prefix="metabuild." />
+        <property name="metabuild.version.tag" value="${metabuild.version.serie}${metabuild.version.cycle}${metabuild.version.build}" />
+        <property name="metabuild.version.number" value="${metabuild.version.major}.${metabuild.version.minor}.${metabuild.version.build}" />
+        
+        <propertyfile file="build/tmp.properties">
+            <entry key="version.buildclean" type="int" operation="=" value="${metabuild.version.build}"/>
+        </propertyfile>
+        <property file="build/tmp.properties" prefix="metabuild." />
+        
+        <property name="metabuild.version.numberclean" value="${metabuild.version.major}.${metabuild.version.minor}.${metabuild.version.buildclean}" />
+        <property name="metabuild.version.shortnumberclean" value="${metabuild.version.major}.${metabuild.version.minor}" />
+        <delete file="build/tmp.properties"/>
+
+    </target>
+
+
+    <target name="main" depends="clean,before,check,tag,compile,after">
+    </target>
+
+    <target name="after">
+        <echo message="${build.separator}"/>
+        <echo message="build ${metabuild.desc} done"/>
+        <echo message="${build.separator}"/>
+    </target>
+
+	<target name="header">
+
+		<echo message="Build version [${metabuild.version.shortnumberclean}] tag [${metabuild.version.tag}]"/>
+
+		<property name="metabuild.desc" value="${metabuild.name}-${metabuild.version.shortnumberclean}-${metabuild.label}[${metabuild.version.tag}]" />
+        <property name="doc.footer" value="${metabuild.name} v${metabuild.version.shortnumberclean} ${metabuild.label} [${metabuild.version.tag}]" />
+
+        <if>
+            <equals arg1="${build.showoptions}" arg2="true"/>
+        <then>
+            <echo message="properties:"/>
+            <echo message="            name = ${metabuild.name}"/>
+            <echo message="     description = ${metabuild.desc}"/>
+            <echo message="           label = ${metabuild.label}"/>
+            <echo message="         release = ${metabuild.release}"/>
+            <echo message="          deploy = ${metabuild.deploy}"/>
+            <echo message="doc window title = ${doc.window-title}"/>
+            <echo message="  doc main title = ${doc.main-title}"/>
+            <echo message="      doc footer = ${doc.footer}"/>
+			<echo message=""/>
+
+            <echo message="versioning:"/>
+            <echo message="             major = ${metabuild.version.major}"/>
+            <echo message="             minor = ${metabuild.version.minor}"/>
+            <echo message="             build = ${metabuild.version.build}"/>
+            <echo message="             cycle = ${metabuild.version.cycle}"/>
+            <echo message="             serie = ${metabuild.version.serie}"/>
+            <echo message="               tag = ${metabuild.version.tag}"/>
+            <echo message="            number = ${metabuild.version.number}"/>
+            <echo message="      number clean = ${metabuild.version.numberclean}"/>
+            <echo message="short number clean = ${metabuild.version.shortnumberclean}"/>
+            <echo message="       build clean = ${metabuild.version.buildclean}"/>
+            <echo message=""/>
+
+            <echo message="options:"/>
+            <echo message="           Flex SDK = ${FLEX_HOME}"/>
+            <echo message="              today = ${TODAY}"/>
+            <echo message="              shell = ${SHELL}"/>
+            <echo message="          separator = ${SEPARATOR}"/>
+            <echo message="            publish = ${build.publish}"/>
+            <echo message="update dependencies = ${build.updatedependencies}"/>
+            <echo message="        update libs = ${build.updatelibs}"/>
+            <echo message="             no zip = ${build.nozip}"/>
+            <echo message="   no documentation = ${build.nodoc}"/>
+            <echo message="             no abc = ${build.noabc}"/>
+            <echo message="           fat swc = ${build.fatswc}"/>
+            <echo message=""/>
+
+            <echo message="building:"/>
+            <echo message=""/>
+
+            <echo message="       packages = ${build.packages}"/>
+            <echo message="       ----------"/>
+            <echo message="               |_ options = "/>
+            <echo message=""/>
+
+            <echo message="      libraries = ${build.libraries}"/>
+            <echo message="      -----------"/>
+            <echo message="               |_ options = "/>
+            <echo message=""/>
+
+            <echo message="          tools = ${build.tools}"/>
+            <echo message="          -------"/>
+            <echo message="               |_ options = "/>
+            <echo message=""/>
+
+            <echo message="  documentation = ${build.documentation}"/>
+            <echo message="  ---------------"/>
+            <echo message="               |_ cleanDocumentation = ${build.cleanDocumentation}"/>
+
+            <echo message=""/>
+        </then>
+        </if>
+        <echo message="${build.separator}"/>
+
+    </target>
+
+    <target name="compile" depends="flag,header">
+
+        <if>
+            <equals arg1="${build.packages}" arg2="true"/>
+        <then>
+            <antcall target="compile-packages-task"/>
+        </then>
+        </if>
+
+        <if>
+            <equals arg1="${build.libraries}" arg2="true"/>
+        <then>
+            <antcall target="compile-libraries-task"/>
+        </then>
+        </if>
+
+        <if>
+            <equals arg1="${build.tools}" arg2="true"/>
+        <then>
+            <antcall target="compile-tools-task"/>
+        </then>
+        </if>
+
+        <if>
+            <equals arg1="${build.documentation}" arg2="true"/>
+        <then>
+            <antcall target="compile-documentation-task"/>
+        </then>
+        </if>
+
+    </target>
+
+
+    <target name="compile-packages-task">
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="core" path="packages/core"
+                           flashplayerversion="10.0"
+                           swfversion="10" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.cli" path="packages/system_cli" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.terminals" path="packages/system_terminals"
+                           dependencies="core" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.signals" path="packages/system_signals"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.errors" path="packages/system_errors" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="common" path="packages/system"
+                           builder="meta-common.xml" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.numeric" path="packages/system_numeric"
+                           dependencies="core,common" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.data" path="packages/system_data"
+                           dependencies="core,common,system.errors,system.signals"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.process" path="packages/system_process"
+                           dependencies="core,common,system.signals,system.data"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.events" path="packages/system_events"
+                           dependencies="core,common,system.signals,system.data,system.process"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.logging" path="packages/system_logging"
+                           dependencies="core,common,system.errors,system.signals,system.process"
+                           flashplayerversion="10.0" />
+        
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.evaluators" path="packages/system_evaluators"
+                           dependencies="core,common,system.numeric"
+                           libraries="eden" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.formatters" path="packages/system_formatters"
+                           dependencies="core,common,system.numeric,system.evaluators" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.broadcasters" path="packages/system_broadcasters"
+                           dependencies="system.events,system.process"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.comparators" path="packages/system_comparators"
+                           dependencies="core,common,system.process" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.diagnostics" path="packages/system_diagnostics"
+                           dependencies="core,system.terminals" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.ioc" path="packages/system_ioc"
+                           dependencies="core,common,system.signals,system.data,system.evaluators,system.events,system.formatters,system.logging,system.process" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.text" path="packages/system_text"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.date" path="packages/system_date"
+                           dependencies="core,common,system.numeric" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.rules" path="packages/system_rules"
+                           dependencies="common"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.logic" path="packages/system_logic"
+                           dependencies="core,common,system.rules,system.process,system.signals"
+                           flashplayerversion="10.0" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.models" path="packages/system_models"
+                           dependencies="core,common,system.data,system.errors,system.process,system.signals,system.logging" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.network" path="packages/system_network" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.reflection" path="packages/system_reflection"
+                           dependencies="core" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.remoting" path="packages/system_remoting"
+                           dependencies="core,common,system.data,system.ioc,system.logging,system.process,system.signals" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system" path="packages/system"
+                           dependencies="core,common,system.network,system.reflection,system.terminals"
+                           libraries="eden" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="system.hosts" path="packages/system_hosts"
+                           dependencies="common,system" />
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="graphics" path="packages/graphics"
+                           dependencies="core,common,system,system.data,system.events,system.logging,system.logic,system.models,system.numeric,system.process,system.rules,system.signals"
+                           libraries="eden"
+                           flashplayerversion="10.0" />
+
+        <!-- 
+        ATTENTION:
+        the package 'maashaack' is a special package
+        when found it sets the value isrootpackage=true
+        its build reuse the maashaack-SA version numbers
+
+        the maashaack.swc generated merge all the packages
+        it DOES NOT merge the libraries
+		 -->
+
+        <compile-module-if run="${build.compile-packages-default}"
+                           name="maashaack" path="packages/maashaack"
+                           dependencies="core,common,system,system.broadcasters,system.cli,system.comparators,system.data,system.date,system.diagnostics,system.errors,system.evaluators,system.events,system.formatters,system.hosts,system.ioc,system.logging,system.logic,system.models,system.network,system.numeric,system.process,system.reflection,system.remoting,system.rules,system.signals,system.terminals,system.text,graphics"
+                           libraries="logd,eden,astuce,ax,fx,molecule"
+                           flashplayerversion="11.7"
+                           swfversion="20" />
+
+
+    </target>
+
+    <target name="compile-libraries-task">
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="logd" path="libraries/logd"
+                           versionfile="/src/version.properties"
+                           libraries="astuce"
+                           flashplayerversion="9.0"
+                           swfversion="9" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="astuce" path="libraries/astuce"
+                           versionfile="/src/library/ASTUce/version.properties"
+                           dependencies="core,system.terminals"
+                           libraries="logd"
+                           flashplayerversion="9.0"
+                           swfversion="9" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="eden" path="libraries/eden"
+                           versionfile="/src/library/eden/version.properties"
+                           dependencies="core"
+                           libraries="logd,astuce"
+                           flashplayerversion="9.0"
+                           swfversion="9" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="ax" path="libraries/ax"
+                           versionfile="/src/air/version.properties"
+                           dependencies="core,common,system.process,system.data,system.signals,graphics"
+                           libraries="astuce"
+                           flashplayerversion="11.7"
+                           swfversion="20" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="fx" path="libraries/fx"
+                           versionfile="/src/flash/version.properties"
+                           dependencies="core,common,system.data,system.errors,system.logging,system.models,system.process,system.signals"
+                           libraries="astuce"
+                           flashplayerversion="11.7"
+                           swfversion="20" />
+
+        <!-- <compile-module-if run="${build.compile-libraries-default}"
+                           name="cgilib" path="libraries/cgilib"
+                           libraries="astuce"
+                           flashplayerversion="9.0"
+                           swfversion="9" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="mimelib" path="libraries/mimelib"
+                           libraries="astuce"
+                           flashplayerversion="9.0"
+                           swfversion="9" />
+
+        <compile-module-if run="${build.compile-libraries-default}"
+                           name="httplib" path="libraries/httplib"
+                           libraries="astuce"
+                           flashplayerversion="9.0"
+                           swfversion="9" /> -->
+
+        <compile-module-if run="true"
+                           name="molecule" path="libraries/molecule"
+                           versionfile="/src/molecule/version.properties"
+                           dependencies="core,common,system,system.data,system.events,system.ioc,system.logging,system.logic,system.models,system.numeric,system.process,system.rules,system.signals,graphics"
+                           libraries="eden,astuce,ax,fx"
+                           extlibraries="starling"
+                           flashplayerversion="11.7"
+                           swfversion="20" />
+
+    </target>
+
+    <target name="compile-tools-task">
+    	<echo message="we don't compile tools for now" />
+    </target>
+
+    <target name="compile-documentation-task">
+    	<echo message="we don't compile documentation for now" />
+    </target>
+
+
+
+
+</project>

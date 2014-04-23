@@ -1,0 +1,1 @@
+libs https://maashaack.googlecode.com/svn/libs/trunk/

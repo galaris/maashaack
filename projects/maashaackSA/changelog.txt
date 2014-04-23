@@ -1,0 +1,41 @@
+* 0.4.0
+- now our minimum Ant version is 1.9.1
+- now our minimum Subversion version is 1.8.8
+- new build system using subversion only, no more gclient
+- we don't build the category "platform" anymore
+  everything has been moved to the redtamarin project
+- new options to exclude categories from build: either packages, libraries and/or tools
+- added FTP credentials in planing to publish to FTP
+  (eg. you can not host downloads anymore on google code)
+- we try to support Linux builds (experimental, could be removed)
+- deleted all tags except 1A443
+  libs/tags/1A443 is the latest tag containing *.abc and *.exe files
+  for a short period of time we will focus only on SWC
+  then we will reintegrate ABC and EXE files
+- we now use the macro <compile-module> to build all the modules
+  options are:
+  name=string
+  path=string
+  flashplayerversion=9.0
+  swfversion=""
+  dependencies=""
+  libraries=""
+  builder=meta.xml
+  versionfile=""
+- to keep each module optional we use also <compile-module-if>
+  options are:
+  run=boolean
+- the build reckonise a special package named "maashaack" as the root package
+  when found the rules change as little
+-
+
+* 0.3.0
+- new code organisation in modules
+- metabuild
+- added a runtimes folder to store redtamarin executables
+- now libs/ have an exe subfolder to distrib binaries
+- metabuild now alos build binaries from tools projects
+
+* 0.2.0
+- big refactor
+
