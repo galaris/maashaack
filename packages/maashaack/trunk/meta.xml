@@ -211,42 +211,42 @@
                 <source-path path-element="${basedir}/${project.src}" />
                 
                 <!-- we want to MERGE all maashaack packages -->
-                <doc-sources path-element="../core/src/core" />
-                <doc-sources path-element="../system/src/system" />
-                <doc-sources path-element="../system_broadcasters/src/system/broadcasters" />
-                <doc-sources path-element="../system_cli/src/system/cli" />
-                <doc-sources path-element="../system_comparators/src/system/comparators" />
-                <doc-sources path-element="../system_data/src/system/data" />
-                <doc-sources path-element="../system_date/src/system/date" />
-                <doc-sources path-element="../system_diagnostics/src/system/diagnostics" />
-                <doc-sources path-element="../system_errors/src/system/errors" />
-                <doc-sources path-element="../system_evaluators/src/system/evaluators" />
-                <doc-sources path-element="../system_events/src/system/events" />
-                <doc-sources path-element="../system_formatters/src/system/formatters" />
-                <doc-sources path-element="../system_hosts/src/system/hosts" />
-                <doc-sources path-element="../system_ioc/src/system/ioc" />
-                <doc-sources path-element="../system_logging/src/system/logging" />
-                <doc-sources path-element="../system_logic/src/system/logic" />
-                <doc-sources path-element="../system_models/src/system/models" />
-                <doc-sources path-element="../system_network/src/system/network" />
-                <doc-sources path-element="../system_numeric/src/system/numeric" />
-                <doc-sources path-element="../system_process/src/system/process" />
-                <doc-sources path-element="../system_reflection/src/system/reflection" />
-                <doc-sources path-element="../system_remoting/src/system/remoting" />
-                <doc-sources path-element="../system_rules/src/system/rules" />
-                <doc-sources path-element="../system_signals/src/system/signals" />
-                <doc-sources path-element="../system_terminals/src/system/terminals" />
-                <doc-sources path-element="../system_text/src/system/text" />
-                <doc-sources path-element="../graphics/src/graphics" />
+                <doc-sources path-element="${basedir}/../core/src/core" />
+                <doc-sources path-element="${basedir}/../system/src/system" />
+                <doc-sources path-element="${basedir}/../system_broadcasters/src/system/broadcasters" />
+                <doc-sources path-element="${basedir}/../system_cli/src/system/cli" />
+                <doc-sources path-element="${basedir}/../system_comparators/src/system/comparators" />
+                <doc-sources path-element="${basedir}/../system_data/src/system/data" />
+                <doc-sources path-element="${basedir}/../system_date/src/system/date" />
+                <doc-sources path-element="${basedir}/../system_diagnostics/src/system/diagnostics" />
+                <doc-sources path-element="${basedir}/../system_errors/src/system/errors" />
+                <doc-sources path-element="${basedir}/../system_evaluators/src/system/evaluators" />
+                <doc-sources path-element="${basedir}/../system_events/src/system/events" />
+                <doc-sources path-element="${basedir}/../system_formatters/src/system/formatters" />
+                <doc-sources path-element="${basedir}/../system_hosts/src/system/hosts" />
+                <doc-sources path-element="${basedir}/../system_ioc/src/system/ioc" />
+                <doc-sources path-element="${basedir}/../system_logging/src/system/logging" />
+                <doc-sources path-element="${basedir}/../system_logic/src/system/logic" />
+                <doc-sources path-element="${basedir}/../system_models/src/system/models" />
+                <doc-sources path-element="${basedir}/../system_network/src/system/network" />
+                <doc-sources path-element="${basedir}/../system_numeric/src/system/numeric" />
+                <doc-sources path-element="${basedir}/../system_process/src/system/process" />
+                <doc-sources path-element="${basedir}/../system_reflection/src/system/reflection" />
+                <doc-sources path-element="${basedir}/../system_remoting/src/system/remoting" />
+                <doc-sources path-element="${basedir}/../system_rules/src/system/rules" />
+                <doc-sources path-element="${basedir}/../system_signals/src/system/signals" />
+                <doc-sources path-element="${basedir}/../system_terminals/src/system/terminals" />
+                <doc-sources path-element="${basedir}/../system_text/src/system/text" />
+                <doc-sources path-element="${basedir}/../graphics/src/graphics" />
 
                 <!-- SPECIAL CASE -->
-                <doc-sources path-element="../../libraries/logd/src/core/_logger.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/assert.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/log.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/Logger.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/_logger.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/assert.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/log.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/Logger.as" />
 
                 <!-- SPECIAL CASE -->
-                <doc-sources path-element="../../libraries/eden/src/library/eden" />
+                <doc-sources path-element="${basedir}/../../libraries/eden/src/library/eden" />
                 <!-- <doc-sources path-element="../../libraries/ax/src/air" /> -->
                 <!-- <doc-sources path-element="../../libraries/fx/src/flash" /> -->
                 
@@ -296,50 +296,50 @@
                 <source-path path-element="${basedir}/${project.src}" />
                 
                 <!-- we want to MERGE all maashaack packages -->
-                <doc-sources path-element="../core/src/core" />
-                <doc-sources path-element="../system/src/system" />
-                <doc-sources path-element="../system_broadcasters/src/system/broadcasters" />
-                <doc-sources path-element="../system_cli/src/system/cli" />
-                <doc-sources path-element="../system_comparators/src/system/comparators" />
-                <doc-sources path-element="../system_data/src/system/data" />
-                <doc-sources path-element="../system_date/src/system/date" />
-                <doc-sources path-element="../system_diagnostics/src/system/diagnostics" />
-                <doc-sources path-element="../system_errors/src/system/errors" />
-                <doc-sources path-element="../system_evaluators/src/system/evaluators" />
-                <doc-sources path-element="../system_events/src/system/events" />
-                <doc-sources path-element="../system_formatters/src/system/formatters" />
-                <doc-sources path-element="../system_hosts/src/system/hosts" />
-                <doc-sources path-element="../system_ioc/src/system/ioc" />
-                <doc-sources path-element="../system_logging/src/system/logging" />
-                <doc-sources path-element="../system_logic/src/system/logic" />
-                <doc-sources path-element="../system_models/src/system/models" />
-                <doc-sources path-element="../system_network/src/system/network" />
-                <doc-sources path-element="../system_numeric/src/system/numeric" />
-                <doc-sources path-element="../system_process/src/system/process" />
-                <doc-sources path-element="../system_reflection/src/system/reflection" />
-                <doc-sources path-element="../system_remoting/src/system/remoting" />
-                <doc-sources path-element="../system_rules/src/system/rules" />
-                <doc-sources path-element="../system_signals/src/system/signals" />
-                <doc-sources path-element="../system_terminals/src/system/terminals" />
-                <doc-sources path-element="../system_text/src/system/text" />
-                <doc-sources path-element="../graphics/src/graphics" />
+                <doc-sources path-element="${basedir}/../core/src/core" />
+                <doc-sources path-element="${basedir}/../system/src/system" />
+                <doc-sources path-element="${basedir}/../system_broadcasters/src/system/broadcasters" />
+                <doc-sources path-element="${basedir}/../system_cli/src/system/cli" />
+                <doc-sources path-element="${basedir}/../system_comparators/src/system/comparators" />
+                <doc-sources path-element="${basedir}/../system_data/src/system/data" />
+                <doc-sources path-element="${basedir}/../system_date/src/system/date" />
+                <doc-sources path-element="${basedir}/../system_diagnostics/src/system/diagnostics" />
+                <doc-sources path-element="${basedir}/../system_errors/src/system/errors" />
+                <doc-sources path-element="${basedir}/../system_evaluators/src/system/evaluators" />
+                <doc-sources path-element="${basedir}/../system_events/src/system/events" />
+                <doc-sources path-element="${basedir}/../system_formatters/src/system/formatters" />
+                <doc-sources path-element="${basedir}/../system_hosts/src/system/hosts" />
+                <doc-sources path-element="${basedir}/../system_ioc/src/system/ioc" />
+                <doc-sources path-element="${basedir}/../system_logging/src/system/logging" />
+                <doc-sources path-element="${basedir}/../system_logic/src/system/logic" />
+                <doc-sources path-element="${basedir}/../system_models/src/system/models" />
+                <doc-sources path-element="${basedir}/../system_network/src/system/network" />
+                <doc-sources path-element="${basedir}/../system_numeric/src/system/numeric" />
+                <doc-sources path-element="${basedir}/../system_process/src/system/process" />
+                <doc-sources path-element="${basedir}/../system_reflection/src/system/reflection" />
+                <doc-sources path-element="${basedir}/../system_remoting/src/system/remoting" />
+                <doc-sources path-element="${basedir}/../system_rules/src/system/rules" />
+                <doc-sources path-element="${basedir}/../system_signals/src/system/signals" />
+                <doc-sources path-element="${basedir}/../system_terminals/src/system/terminals" />
+                <doc-sources path-element="${basedir}/../system_text/src/system/text" />
+                <doc-sources path-element="${basedir}/../graphics/src/graphics" />
 
                 <!-- SPECIAL CASE -->
-                <doc-sources path-element="../../libraries/logd/src/core/_logger.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/assert.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/log.as" />
-                <doc-sources path-element="../../libraries/logd/src/core/Logger.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/_logger.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/assert.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/log.as" />
+                <doc-sources path-element="${basedir}/../../libraries/logd/src/core/Logger.as" />
 
                 <!-- SPECIAL CASE -->
-                <doc-sources path-element="../../libraries/eden/src/library/eden" />
+                <doc-sources path-element="${basedir}/../../libraries/eden/src/library/eden" />
 
-                <doc-sources path-element="../../libraries/astuce/src/library/ASTUce" />
+                <doc-sources path-element="${basedir}/../../libraries/astuce/src/library/ASTUce" />
 
-                <doc-sources path-element="../../libraries/ax/src/air" />
-                <doc-sources path-element="../../libraries/fx/src/flash" />
-                <doc-sources path-element="../../libraries/molecule/src/molecule" />
+                <doc-sources path-element="${basedir}/../../libraries/ax/src/air" />
+                <doc-sources path-element="${basedir}/../../libraries/fx/src/flash" />
+                <doc-sources path-element="${basedir}/../../libraries/molecule/src/molecule" />
                 
-                <external-library-path dir="../../libraries/molecule/lib-swc/" append="true">
+                <external-library-path dir="${basedir}/../../libraries/molecule/lib-swc/" append="true">
                     <include name="starling.swc"/>
                 </external-library-path>
             </asdoc>
