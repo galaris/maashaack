@@ -42,6 +42,7 @@
                 <var name="local.isrootpackage" value="false"/>
             </else>
             </if>
+            <echo message="local.isrootpackage = ${local.isrootpackage}" level="verbose" />
 
             <if>
                 <not>
@@ -54,6 +55,7 @@
                 <var name="local.found.versionfile" value="false"/>
             </else>
             </if>
+            <echo message="local.found.versionfile = ${local.found.versionfile}" level="verbose" />
 
             <if>
                 <not>
@@ -66,6 +68,7 @@
                 <var name="local.found.swfversion" value="false"/>
             </else>
             </if>
+            <echo message="local.found.swfversion = ${local.found.swfversion}" level="verbose" />
 
 
             <!-- if dependencies are not empty, do a loop for all of them -->
@@ -161,10 +164,10 @@
                     <property name="build.nodoc" value="${build.nodoc}" />
                     <property name="build.noabc" value="${build.noabc}" />
                     <property name="build.fatswc" value="${build.fatswc}" />
-                    <property file="@{path}/build/build.properties"/>
                     <property file="@{path}@{versionfile}" if:true="${local.found.versionfile}" />
                     <property file="build/version.properties" if:true="${local.isrootpackage}" />
                     <property name="version.number" value="${metabuild.version.number}" if:true="${local.isrootpackage}" />
+                    <property file="@{path}/build/build.properties"/>
                 </ant>
 
             </then>
