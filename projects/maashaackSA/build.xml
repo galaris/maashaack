@@ -38,6 +38,8 @@
     </target>
 
     <target name="clean">
+        <delete dir="${basedir}/bin-release" />
+        <delete dir="${basedir}/bin-deploy" />
     </target>
 
     <target name="define-constants">
