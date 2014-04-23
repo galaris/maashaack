@@ -39,12 +39,12 @@ package graphics.display.palettes
     import flash.utils.Dictionary;
     
     /**
-     * Generates a Vector.<ColorEntry> representing each colour present in an image. Each object has a 'color' and a 'count' property.
+     * Generates a Vector.&lt;ColorEntry&gt; representing each colour present in an image. Each object has a 'color' and a 'count' property.
      * @param source The BitmapData to analyse.
      * @param sort Whether to sort results by their count.
      * @param order If sort is true, results will be sorted in this order.
      * @param preprocess Indicates if the image reduce this number of colors (64 colors only).
-     * @return The Vector.<ColorEntry> of colors defines by the BitmapData object.
+     * @return The Vector.&lt;ColorEntry&gt; of colors defines by the BitmapData object.
      */
     public function indexColors( source:BitmapData, sort:Boolean = true, order:uint = Array.DESCENDING , preprocess:Boolean = true ):Vector.<ColorEntry>
     {

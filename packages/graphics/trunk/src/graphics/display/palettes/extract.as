@@ -44,7 +44,7 @@ package graphics.display.palettes
      * @param source The image to process.
      * @param maximum The maximum number of colours.
      * @param tolerance The tolerance of the algorythm.
-     * @return The Vector.<uint> of most common colors in the BitmapData object.
+     * @return The Vector.&lt;uint&gt; of most common colors in the BitmapData object.
      */
     public function extract( source:BitmapData, maximum:int = 16, tolerance:Number = 0.01 ):Vector.<uint>
     {

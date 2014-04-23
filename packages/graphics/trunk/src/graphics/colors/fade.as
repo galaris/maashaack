@@ -58,7 +58,7 @@ package graphics.colors
      * var ratio:Number ;
      * var color:uint ;
      * 
-     * for( var i:int = 0 ; i < 10 ; i++ )
+     * for( var i:int = 0 ; i &lt; 10 ; i++ )
      * {
      *     ratio = i/9;
      *     color = fade(start, end, ratio) ;

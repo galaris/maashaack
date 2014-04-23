@@ -42,7 +42,7 @@ package graphics.display.palettes
     /**
      * Calculates the average color of the specified BitmapData Object.
      * @param source The BitmapData to analyse.
-     * @return The Vector.<uint> of average colors defines by the BitmapData object.
+     * @return The Vector.&lt;uint&gt; of average colors defines by the BitmapData object.
      */
     public function averageColors( source:BitmapData , colors:uint ):Vector.<uint>
     {

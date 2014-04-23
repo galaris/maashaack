@@ -38,10 +38,10 @@ package graphics.display.palettes
     import flash.display.BitmapData;
     
     /**
-     * Generates an orderer Vector.<uint> representing each colour present in an image.
+     * Generates an orderer Vector.&lt;uint&gt; representing each colour present in an image.
      * @param source The BitmapData to analyse.
      * @param order If sort is true, results will be sorted in this order.
-     * @return The orderer Vector.<uint> of colors defines by the BitmapData object.
+     * @return The orderer Vector.&lt;uint&gt; of colors defines by the BitmapData object.
      */
     public function orderColors( source:BitmapData, order:uint = Array.DESCENDING ):Vector.<uint>
     {

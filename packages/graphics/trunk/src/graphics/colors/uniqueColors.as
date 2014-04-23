@@ -41,7 +41,7 @@ package graphics.colors
      * <pre class="prettyprint">
      * import graphics.colors.uniqueColors ;
      * 
-     * var colors:Vector.<uint> = Vector.<uint>([0xFFFFFF,0xFFFFFE,0xFF0000,0xFFFFFF,0x000000,0xFF0000,0xFFFFFD]);
+     * var colors:Vector.&lt;uint&gt; = Vector.&lt;uint&gt;([0xFFFFFF,0xFFFFFE,0xFF0000,0xFFFFFF,0x000000,0xFF0000,0xFFFFFD]);
      * 
      * trace( colors ) ; // 16777215,16777214,16711680,16777215,0,16711680,16777213
      * 
