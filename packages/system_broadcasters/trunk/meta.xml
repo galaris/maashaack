@@ -1,46 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="system.broadcasters" default="main" basedir=".">
+<project name="system.broadcasters" default="main" basedir="."
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
     
     <target name="clean">
         <delete dir="${basedir}/${release.dir}" />
+        <delete dir="${basedir}/${deploy.dir}" />
+        <delete dir="${basedir}/${docs.dir}" />
     </target>
     
     <target name="before">
         <mkdir dir="${basedir}/${release.dir}" />
+        <mkdir dir="${basedir}/${deploy.dir}" />
+        <mkdir dir="${basedir}/${asdoc.output}" />
+
+        <!-- debug -->
+        <echo message="properties:" level="verbose" />
+        <echo message="            FLEX_HOME = ${FLEX_HOME}" level="verbose" />
+        <echo message="                TODAY = ${TODAY}" level="verbose" />
+        <echo message=" flash player version = ${local.flashplayerversion}" level="verbose" />
+        <echo message="          swf version = ${local.swfversion}" level="verbose" />
+        <echo message="               no zip = ${build.nozip}" level="verbose" />
+        <echo message="     no documentation = ${build.nodoc}" level="verbose" />
+        <echo message="               no abc = ${build.noabc}" level="verbose" />
+        <echo message="              fat swc = ${build.fatswc}" level="verbose" />
+        <echo message="" level="verbose" />
+
+        <echo if:true="${build.nozip}" message="no zip is TRUE" level="verbose" />
+        <echo unless:true="${build.nozip}" message="no zip is FALSE" level="verbose" />
+        <echo if:true="${build.nodoc}" message="no doc is TRUE" level="verbose" />
+        <echo unless:true="${build.nodoc}" message="no doc is FALSE" level="verbose" />
+        <echo if:true="${build.noabc}" message="no abc is TRUE" level="verbose" />
+        <echo unless:true="${build.noabc}" message="no abc is FALSE" level="verbose" />
+        <echo if:true="${build.fatswc}" message="fat swc is TRUE" level="verbose" />
+        <echo unless:true="${build.fatswc}" message="fat swc is FALSE" level="verbose" />
+
     </target>
     
-    <target name="main" depends="clean,before,build-swc,after"/>
+    <target name="main" depends="clean,before,build-abc,build-swc,build-doc,after"/>
     
     <target name="build-abc">
         
-        <java
-            dir="${basedir}"
-            jar="${ASC}"
-            fork="true"
-            failonerror="true"
-        >
-            <arg line="-AS3 -strict -optimize"/>
-            <arg line="-config API::REDTAMARIN=true -config API::FLASH=false"/>
-            <arg line="-import ${builtin} -import ${toplevel}" />
-            <arg line="-import ${core} -import ${eden} -import ${common} -import ${system.numeric} src/${project.as}"/>
-        </java>
-        
-        <move file="${basedir}/src/${project.abc}" todir="${basedir}/${release.dir}" />
+        <sequential unless:true="${build.noabc}">
+            <!-- DO NOT USE - Will change with RedTamarin SDK -->
+            <echo message="no ABC to build" />
+        </sequential>
         
     </target>
     
     <target name="build-swc">
-        <!-- 
-            generate a SWC component
-            this SWC is compatible Flash CS3/CS4 and Flex 3/4
-         -->
+        
         <compc
             output="${basedir}/${release.dir}/${project.swc}"
             target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
         >
             <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
-            <load-config filename="${basedir}/build/config.xml"/>
+            <load-config filename="${basedir}/build/config.xml" append="true" />
             <namespace uri="${project.namespace}" manifest="${basedir}/${project.manifest}" />
             <include-namespaces uri="${project.namespace}" />
             <strict>true</strict>
@@ -61,6 +78,55 @@
                 <creator name="${project.creator}" />
             </metadata>
         </compc>
+
+    </target>
+
+    <target name="build-doc">
+
+        <sequential unless:true="${build.nodoc}">
+
+            <!--         templates-path="${basedir}/${asdoc.template}" -->
+            <asdoc
+            output="${basedir}/${asdoc.output}"
+            target-player="${local.flashplayerversion}"
+            swf-version="${local.swfversion}"
+            failonerror="true"
+            keep-xml="true"
+            skip-xsl="true"
+            >
+                <load-config filename="${FLEX_HOME}/frameworks/flex-config.xml"/>
+                <load-config filename="${basedir}/build/config.xml" append="true" />
+                <verbose-stacktraces>true</verbose-stacktraces>
+                <doc-sources path-element="${basedir}/${project.src}/system/broadcasters"/>
+                <source-path path-element="${basedir}/${project.src}" />
+                <external-library-path dir="${basedir}/${project.lib-swc}/" append="true">
+                    <include name="core.swc"/>
+                    <include name="common.swc"/>
+                    <include name="system.process.swc"/>
+                    <include name="system.events.swc"/>
+                </external-library-path>
+                <exclude-sources path-element="${basedir}/${project.src}/system.broadcasters.as" />
+                <packages.package name="system.broadcasters" description="system.broadcasters" />
+            </asdoc>
+
+            <sequential if:true="${build.fatswc}">
+                
+                <!-- update swc with asdoc xml -->
+                <zip destfile="${basedir}/${release.dir}/${project.swc}" update="true">
+                    <zipfileset dir="${basedir}/${asdoc.output}/tempdita" prefix="docs">
+                        <include name="*.xml" />
+                        <include name="*.dita" />
+                        <exclude name="ASDoc_Config.xml" />
+                        <exclude name="overviews.xml" />
+                    </zipfileset>
+                </zip>
+
+            </sequential>
+
+            <!-- <delete dir="${basedir}/${asdoc.output}/tempdita" /> -->
+
+        </sequential>
+
     </target>
     
     <target name="after">
