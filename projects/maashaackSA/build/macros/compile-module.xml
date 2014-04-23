@@ -1,0 +1,277 @@
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
+    
+    <macrodef name="compile-module">
+        <attribute name="name"/>
+        <attribute name="path"/>
+        <attribute name="flashplayerversion" default="9.0"/>
+        <attribute name="swfversion" default="9"/>
+        <attribute name="dependencies" default=""/>
+        <attribute name="libraries" default=""/>
+        <attribute name="extlibraries" default=""/>
+        <attribute name="builder" default="meta.xml"/>
+        <attribute name="versionfile" default=""/>
+
+        <sequential>
+            <!-- banner -->
+            <echo message="${build.separator}"/>
+            <exec executable="figlet">
+                <arg value="@{name}"/>
+            </exec>
+
+
+            <!-- define category based on the path, either: packages, libraries or tools -->
+            <propertyregex
+              property="category"
+              override="true"
+              input="@{path}"
+              regexp="^\w+"
+              select="\0"
+              global="true"
+              casesensitive="false"
+              defaultValue="unknown" />
+
+            <if>
+                <equals arg1="@{name}" arg2="${build.rootpackage}"/>
+            <then>
+                <var name="local.isrootpackage" value="true"/>
+            </then>
+            <else>
+                <var name="local.isrootpackage" value="false"/>
+            </else>
+            </if>
+
+            <if>
+                <not>
+                <equals arg1="@{versionfile}" arg2=""/>
+                </not>
+            <then>
+                <var name="local.found.versionfile" value="true"/>
+            </then>
+            <else>
+                <var name="local.found.versionfile" value="false"/>
+            </else>
+            </if>
+
+            <if>
+                <not>
+                <equals arg1="@{swfversion}" arg2=""/>
+                </not>
+            <then>
+                <var name="local.found.swfversion" value="true"/>
+            </then>
+            <else>
+                <var name="local.found.swfversion" value="false"/>
+            </else>
+            </if>
+
+
+            <!-- if dependencies are not empty, do a loop for all of them -->
+            <if>
+                <not>
+                <equals arg1="@{dependencies}" arg2=""/>
+                </not>
+            <then>
+
+                <fetch-local-dependencies path="@{path}" dependencies="@{dependencies}" />
+
+            </then>
+            </if>
+
+            <!-- if libraries are not empty, do a loop for all of them -->
+            <if>
+                <not>
+                <equals arg1="@{libraries}" arg2=""/>
+                </not>
+            <then>
+
+                <fetch-local-libraries path="@{path}" libraries="@{libraries}" />
+
+            </then>
+            </if>
+
+            <!-- if external libraries are not empty, do a loop for all of them -->
+            <if>
+                <not>
+                <equals arg1="@{extlibraries}" arg2=""/>
+                </not>
+            <then>
+
+                <fetch-external-libraries path="@{path}" extlibraries="@{extlibraries}" />
+
+            </then>
+            </if>
+
+            <if>
+                <not>
+                <available file="@{path}/@{builder}" type="file"/>
+                </not>
+            <then>
+                <fail message="Can not build ${category} module [@{name}] without a builder file '@{path}/@{builder}'"/>
+            </then>
+            </if>
+
+            <!-- if the path dir exists andthe path is not empty -->
+            <if>
+                <and>
+                <available file="@{path}" type="dir"/>
+                <not><equals arg1="@{path}" arg2=""/></not>
+                </and>
+            <then>
+                <echo message="Compile ${category} module [@{name}], from path [@{path}]" />
+
+                <ant antfile="@{path}/@{builder}" target="main" inheritAll="false">
+                    <property name="FLEX_HOME" value="${FLEX_HOME}" />
+                    <property name="TODAY" value="${TODAY}" />
+                    <property name="local.flashplayerversion" value="@{flashplayerversion}" />
+                    <property name="local.swfversion" value="@{swfversion}" />
+                    <!-- <property name="local.swfversion" value="@{swfversion}" if:true="${local.found.swfversion}" /> -->
+                    <property name="build.nozip" value="${build.nozip}" />
+                    <property name="build.nodoc" value="${build.nodoc}" />
+                    <property name="build.noabc" value="${build.noabc}" />
+                    <property name="build.fatswc" value="${build.fatswc}" />
+                    <property file="@{path}/build/build.properties"/>
+                    <property file="@{path}@{versionfile}" if:true="${local.found.versionfile}" />
+                    <property file="build/version.properties" if:true="${local.isrootpackage}" />
+                    <property name="version.number" value="${metabuild.version.number}" if:true="${local.isrootpackage}" />
+                </ant>
+
+            </then>
+            <else>
+                <fail message="${category} module [@{name}] not found, path was '@{path}'"/>
+            </else>
+            </if>
+
+
+            <!-- if we are in packages and are the root package -->
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.swc" type="file"/>
+                <equals arg1="${category}" arg2="packages"/>
+                <equals arg1="@{name}" arg2="${build.rootpackage}"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.swc"
+                      todir="${metabuild.libs-pool}/swc" overwrite="true" />
+
+            </then>
+            </if>
+
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.abc" type="file"/>
+                <equals arg1="${category}" arg2="packages"/>
+                <equals arg1="@{name}" arg2="${build.rootpackage}"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.abc"
+                      todir="${metabuild.libs-pool}/abc" overwrite="true" />
+
+            </then>
+            </if>          
+
+            <!-- if we are in packages -->
+            <!-- if the libs dir exists and there is a SWC in bin-release, then copy it -->
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.swc" type="file"/>
+                <equals arg1="${category}" arg2="packages"/>
+                <not><equals arg1="@{name}" arg2="${build.rootpackage}"/></not>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.swc"
+                      todir="${metabuild.libs-pool}/swc/packages" overwrite="true" />
+
+            </then>
+            </if>
+
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.abc" type="file"/>
+                <equals arg1="${category}" arg2="packages"/>
+                <not><equals arg1="@{name}" arg2="${build.rootpackage}"/></not>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.abc"
+                      todir="${metabuild.libs-pool}/abc/packages" overwrite="true" />
+
+            </then>
+            </if>
+            
+            <!-- if we are in packages and are a SA (Stand ALone) package -->
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}-SA.swc" type="file"/>
+                <equals arg1="${category}" arg2="packages"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}-SA.swc"
+                      todir="${metabuild.libs-pool}/swc" overwrite="true" />
+
+            </then>
+            </if>
+
+            <!-- if we are in libraries -->
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.swc" type="file"/>
+                <equals arg1="${category}" arg2="libraries"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.swc"
+                      todir="${metabuild.libs-pool}/swc/libraries" overwrite="true" />
+
+            </then>
+            </if>
+
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}.abc" type="file"/>
+                <equals arg1="${category}" arg2="libraries"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}.abc"
+                      todir="${metabuild.libs-pool}/abc/libraries" overwrite="true" />
+
+            </then>
+            </if>
+
+            <!-- if we are in libraries and are a SA (Stand ALone) package -->
+            <if>
+                <and>
+                <available file="${metabuild.libs-pool}" type="dir"/>
+                <available file="@{path}/bin-release/@{name}-SA.swc" type="file"/>
+                <equals arg1="${category}" arg2="libraries"/>
+                </and>
+            <then>
+
+                <copy file="@{path}/bin-release/@{name}-SA.swc"
+                      todir="${metabuild.libs-pool}/swc" overwrite="true" />
+
+            </then>
+            </if>
+
+            <!-- if we are in tools -->
+
+
+            <!-- end -->
+        </sequential>
+    </macrodef>
+    
+</project>

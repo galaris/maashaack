@@ -1,0 +1,62 @@
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
+    
+    <macrodef name="fetch-local-dependencies">
+        <attribute name="path"/>
+        <attribute name="dependencies" default=""/>
+
+        <sequential>        
+            <echo message="${build.halfseparator}"/>
+            <echo message="fetch local dependencies"/>
+            <echo message="${build.halfseparator}"/>
+
+            <for list="@{dependencies}" param="dependency">
+                <sequential>
+                    <echo>dependency @{dependency}</echo>
+
+                    <if>
+                        <and>
+                            <equals arg1="${build.fetchdependencies}" arg2="true"/>
+                            <available file="${metabuild.libs-pool}/swc/packages/@{dependency}.swc" type="file"/>
+                        </and>
+                    <then>
+
+                        <copy file="${metabuild.libs-pool}/swc/packages/@{dependency}.swc"
+                              todir="@{path}/lib-swc" overwrite="true" />
+                        <echo message="updated!"/>
+
+                    </then>
+                    <else>
+                        <echo if:true="${build.fetchdependencies}" message="Could not refresh @{dependency}.swc from '${metabuild.libs-pool}/swc/packages/'"/>
+                    </else>
+                    </if>
+
+                    <if>
+                        <and>
+                            <equals arg1="${build.noabc}" arg2="false"/>
+                            <equals arg1="${build.fetchdependencies}" arg2="true"/>
+                            <available file="${metabuild.libs-pool}/abc/packages/@{dependency}.abc" type="file"/>
+                        </and>
+                    <then>
+
+                        <copy file="${metabuild.libs-pool}/abc/packages/@{dependency}.abc"
+                              todir="@{path}/lib-abc" overwrite="true" />
+                        <echo message="updated!"/>
+
+                    </then>
+                    <else>
+                        <echo if:true="${build.fetchdependencies}" unless:true="${build.noabc}"  message="Could not refresh @{dependency}.abc from '${metabuild.libs-pool}/abc/packages/'"/>
+                    </else>
+                    </if>
+
+                    <echo message="${build.halfseparator}"/>
+                </sequential>
+            </for>
+ 
+            <!-- end -->
+        </sequential>
+    </macrodef>
+    
+</project>

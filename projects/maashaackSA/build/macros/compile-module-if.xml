@@ -1,0 +1,44 @@
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
+    
+    <macrodef name="compile-module-if">
+        <attribute name="name"/>
+        <attribute name="path"/>
+        <attribute name="run" default="true"/>
+        <attribute name="flashplayerversion" default="9.0"/>
+        <attribute name="swfversion" default="9"/>
+        <attribute name="dependencies" default=""/>
+        <attribute name="libraries" default=""/>
+        <attribute name="extlibraries" default=""/>
+        <attribute name="builder" default="meta.xml"/>
+        <attribute name="versionfile" default=""/>
+
+        <sequential>        
+
+            <if>
+                <equals arg1="@{run}" arg2="true"/>
+            <then>
+                <compile-module
+                    name="@{name}"
+                    path="@{path}"
+                    flashplayerversion="@{flashplayerversion}"
+                    swfversion="@{swfversion}"
+                    dependencies="@{dependencies}"
+                    libraries="@{libraries}"
+                    extlibraries="@{extlibraries}"
+                    builder="@{builder}"
+                    versionfile="@{versionfile}"
+                />
+            </then>
+            <else>
+                <echo message="module @{name} is disabled" />
+            </else>
+            </if>
+ 
+            <!-- end -->
+        </sequential>
+    </macrodef>
+    
+</project>

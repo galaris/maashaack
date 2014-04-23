@@ -1,0 +1,26 @@
+
+<project>
+    
+    <macrodef name="svn-add">
+        <attribute name="path"/>
+        <attribute name="force" default="false"/>
+        
+        <sequential>
+            <if>
+                <equals arg1="@{force}" arg2="true"/>
+            <then>
+                <exec executable="svn" taskname="svn" failonerror="true">
+                    <arg line="add @{path} --force"/>
+                </exec>
+            </then>
+            <else>
+                <exec executable="svn" taskname="svn" failonerror="true">
+                    <arg line="add @{path}"/>
+                </exec>
+            </else>
+            </if>
+            
+        </sequential>
+    </macrodef>
+    
+</project>

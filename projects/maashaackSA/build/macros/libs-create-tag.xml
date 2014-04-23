@@ -1,0 +1,15 @@
+
+<project>
+    
+    <macrodef name="libs-create-tag">
+        <attribute name="tag"/>
+        <attribute name="message"/>
+        
+        <sequential>
+            <exec executable="svn" taskname="svn" failonerror="true">
+                <arg line="copy https://maashaack.googlecode.com/svn/libs/trunk/ https://maashaack.googlecode.com/svn/libs/tags/@{tag} -m '@{message}'"/>
+            </exec>
+        </sequential>
+    </macrodef>
+    
+</project>

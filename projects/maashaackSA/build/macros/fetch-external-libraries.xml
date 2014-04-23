@@ -1,0 +1,27 @@
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
+    
+    <macrodef name="fetch-external-libraries">
+        <attribute name="path"/>
+        <attribute name="extlibraries" default=""/>
+
+        <sequential>        
+            <echo message="${build.halfseparator}"/>
+            <echo message="fetch external libraries (not implemented)"/>
+            <echo message="${build.halfseparator}"/>
+
+                <for list="@{extlibraries}" param="extlibrary">
+                    <sequential>
+                        <echo>external library @{extlibrary}</echo>
+
+                        <echo message="${build.halfseparator}"/>
+                    </sequential>
+                </for>
+ 
+            <!-- end -->
+        </sequential>
+    </macrodef>
+    
+</project>

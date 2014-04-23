@@ -1,0 +1,62 @@
+
+<project
+    xmlns:if="ant:if"
+    xmlns:unless="ant:unless" >
+    
+    <macrodef name="fetch-local-libraries">
+        <attribute name="path"/>
+        <attribute name="libraries" default=""/>
+
+        <sequential>        
+            <echo message="${build.halfseparator}"/>
+            <echo message="fetch local libraries"/>
+            <echo message="${build.halfseparator}"/>
+
+                <for list="@{libraries}" param="library">
+                    <sequential>
+                        <echo>library @{library}</echo>
+
+                        <if>
+                            <and>
+                                <equals arg1="${build.fetchlibraries}" arg2="true"/>
+                                <available file="${metabuild.libs-pool}/swc/libraries/@{library}.swc" type="file"/>
+                            </and>
+                        <then>
+
+                            <copy file="${metabuild.libs-pool}/swc/libraries/@{library}.swc"
+                                  todir="@{path}/lib-swc" overwrite="true" />
+                            <echo message="updated!"/>
+
+                        </then>
+                        <else>
+                            <echo if:true="${build.fetchlibraries}" message="Could not refresh @{library}.swc from '${metabuild.libs-pool}/swc/libraries/'"/>
+                        </else>
+                        </if>
+
+                        <if>
+                            <and>
+                                <equals arg1="${build.noabc}" arg2="false"/>
+                                <equals arg1="${build.fetchlibraries}" arg2="true"/>
+                                <available file="${metabuild.libs-pool}/abc/libraries/@{library}.abc" type="file"/>
+                            </and>
+                        <then>
+
+                            <copy file="${metabuild.libs-pool}/abc/libraries/@{library}.abc"
+                                  todir="@{path}/lib-abc" overwrite="true" />
+                            <echo message="updated!"/>
+
+                        </then>
+                        <else>
+                            <echo if:true="${build.fetchlibraries}" unless:true="${build.noabc}"  message="Could not refresh @{library}.abc from '${metabuild.libs-pool}/abc/libraries/'"/>
+                        </else>
+                        </if>
+
+                        <echo message="${build.halfseparator}"/>
+                    </sequential>
+                </for>
+ 
+            <!-- end -->
+        </sequential>
+    </macrodef>
+    
+</project>
