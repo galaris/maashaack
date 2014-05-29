@@ -44,6 +44,11 @@ package system.models
      * <code class="prettyprint">
      * import system.models.MemoryModel ;
      * 
+     * var before:Function = function( value:* , model:MemoryModel ):void
+     * {
+     *     trace( "before current:" + value  + " length:" + model.length ) ;
+     * }
+     * 
      * var change:Function = function( value:* , model:MemoryModel ):void
      * {
      *     trace( "change current:" + value  + " length:" + model.length ) ;
@@ -51,23 +56,39 @@ package system.models
      * 
      * var clear:Function = function( model:MemoryModel ):void
      * {
-     *     trace( "clear length:" + model.length) ;
+     *     trace( "clear length:" + model.length ) ;
      * }
      * 
      * var model:MemoryModel = new MemoryModel() ;
      * 
      * // model.enableErrorChecking = true ;
      * 
+     * model.current = "home" ;
+     * model.current = "near" ;
+     * model.current = "search" ;
+     * model.current = "place" ;
+     * model.current = "events" ;
+     * model.current = "map" ;
+     * model.current = "test" ;
+     * 
+     * trace( "model size:" + model.length ) ;
+     * 
+     * model.beforeChanged.connect( before ) ;
      * model.changed.connect( change ) ;
      * model.cleared.connect( clear ) ;
      * 
-     * model.current = "value1" ;
-     * model.current = "value2" ;
-     * model.current = "value3" ;
-     * model.current = "value4" ;
-     * 
+     * trace( "-- back" ) ;
      * model.back() ;
+     * 
+     * trace( "-- backTo" ) ;
+     * 
+     * trace( "remove : " + model.backTo( 2 ) ) ;
+     * 
+     * trace( "-- home" ) ;
+     * 
      * model.home() ;
+     * 
+     * trace( "--" ) ;
      * 
      * model.clear() ;
      * </code>
@@ -114,20 +135,16 @@ package system.models
             
             const old:* = _current ;
             
+            if ( old )
+            {
+                notifyBeforeChange( old ) ;
+            }
+
             _current = o ;
             
             if( _current )
             {
                 add( _current ) ;
-            }
-            
-            if ( old )
-            {
-                notifyBeforeChange( old ) ;
-            }
-            
-            if ( _current )
-            {
                 notifyChange( _current );
             }
         }
@@ -148,14 +165,16 @@ package system.models
          */
         public function back():*
         {
-            const old:* = removeLast() ;
-            
-            _current = last() ;
-            
+            const old:* = last() ;
+
             if ( old != null )
             {
                 notifyBeforeChange( old ) ;
             }
+
+            removeLast() ;
+            
+            _current = last() ;           
             
             if ( _current != null )
             {
@@ -163,6 +182,69 @@ package system.models
             }
             
             return old ;
+        }
+        
+        /**
+         * Go back in the memory and removes the all the element in the memory model to a specific position.
+         * @param pos The position to back in memory.
+         * @return The Array representation of all removed element in memory.
+         */
+        public function backTo( pos:uint = 1 ):*
+        {
+            if( pos < 1 )
+            {
+                pos = 1 ;
+            }
+            if( size > 1 )
+            {
+                if( pos < size )
+                {
+                    var oldies:Array = [] ;
+                    var old:* ;
+                    
+                    while( pos != size )
+                    {
+                        old = last() ;
+                        if ( old != null )
+                        {
+                            notifyBeforeChange( old ) ;
+                        }
+                        oldies.push( old ) ;
+                        removeLast() ;
+                    }
+                    
+                    _current = last() ;
+
+                    if ( _current != null )
+                    {
+                        notifyChange( _current );
+                    }
+                    
+                    return oldies.length > 0 ? oldies : null ;
+                }
+                else
+                {
+                    if( enableErrorChecking )
+                    {
+                        throw new NoSuchElementError( this + " backTo failed, the length of the memory model must be greater than 1 element.");
+                    }
+                    else
+                    {
+                        return null ;
+                    }
+                }
+            }
+            else
+            {
+                if( enableErrorChecking )
+                {
+                    throw new NoSuchElementError( this + " backTo failed, the length of the memory model must be greater than 1 element.");
+                }
+                else
+                {
+                    return null ;
+                }
+            }
         }
         
         /**
@@ -196,6 +278,11 @@ package system.models
             {
                 var old:* = header.previous.element ;
                 
+                if ( old != null )
+                {
+                    notifyBeforeChange( old ) ;
+                }
+
                 var top:MemoryEntry = header.next ;
                 
                 while( header.previous != top )
@@ -204,11 +291,6 @@ package system.models
                 }
                 
                 _current = last() ;
-                
-                if ( old != null )
-                {
-                    notifyBeforeChange( old ) ;
-                }
                 
                 if ( _current != null )
                 {
@@ -302,7 +384,7 @@ package system.models
          */
         protected function last():*
         {
-            if (size == 0 )
+            if ( size == 0 )
             {
                 if( enableErrorChecking )
                 {
