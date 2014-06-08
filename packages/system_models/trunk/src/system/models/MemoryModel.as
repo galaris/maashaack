@@ -139,7 +139,7 @@ package system.models
             {
                 notifyBeforeChange( old ) ;
             }
-
+            
             _current = o ;
             
             if( _current )
@@ -149,6 +149,14 @@ package system.models
             }
         }
         
+        /**
+         * Indicates in the beforeChange signal if the model is reduced (use the back or the backTo method). 
+         * This property is true only before the change of the new position in the model.
+         */
+        public function get reduced():Boolean
+        {
+            return _reduced ;
+        }
         
         /**
          * Returns the number of elements in memory.
@@ -166,15 +174,19 @@ package system.models
         public function back():*
         {
             const old:* = last() ;
-
+            
+            _reduced = true ;
+            
             if ( old != null )
             {
                 notifyBeforeChange( old ) ;
             }
-
+            
+            _reduced = false ;
+            
             removeLast() ;
             
-            _current = last() ;           
+            _current = last() ;
             
             if ( _current != null )
             {
@@ -199,6 +211,8 @@ package system.models
             {
                 if( pos < size )
                 {
+                    _reduced = true ;
+                    
                     var oldies:Array = [] ;
                     var old:* ;
                     
@@ -213,8 +227,10 @@ package system.models
                         removeLast() ;
                     }
                     
+                    _reduced = false ;
+                    
                     _current = last() ;
-
+                    
                     if ( _current != null )
                     {
                         notifyChange( _current );
@@ -282,7 +298,7 @@ package system.models
                 {
                     notifyBeforeChange( old ) ;
                 }
-
+                
                 var top:MemoryEntry = header.next ;
                 
                 while( header.previous != top )
@@ -327,6 +343,11 @@ package system.models
         protected var header:MemoryEntry ;
         
         /**
+         * @private
+         */
+        protected var _reduced:Boolean ;
+        
+        /**
          * The internal size of the list.
          */
         protected var size:uint ;
@@ -360,7 +381,11 @@ package system.models
          */
         protected function first():*
         {
-            if (size == 0 )
+            if (size > 0 )
+            {
+                return header.next.element ;
+            }
+            else
             {
                 if( enableErrorChecking )
                 {
@@ -371,10 +396,6 @@ package system.models
                     return null ;
                 }
             }
-            else
-            {
-                return header.next.element ;
-            }
         }
         
         /**
@@ -384,7 +405,11 @@ package system.models
          */
         protected function last():*
         {
-            if ( size == 0 )
+            if ( size > 0 )
+            {
+                return header.previous.element ;
+            }
+            else
             {
                 if( enableErrorChecking )
                 {
@@ -394,10 +419,6 @@ package system.models
                 {
                     return null ;
                 }
-            }
-            else
-            {
-                return header.previous.element ;
             }
         }
         
@@ -417,6 +438,7 @@ package system.models
                     return null ;
                 }
             }
+            
             var result:* = entry.element ;
             
             entry.previous.next = entry.next ;
