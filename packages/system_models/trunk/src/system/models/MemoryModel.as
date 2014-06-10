@@ -284,6 +284,30 @@ package system.models
         }
         
         /**
+         * Returns the first element in memory.
+         * @return the first element in this list.
+         * @throws NoSuchElementError if this list is empty.
+         */
+        public function first():*
+        {
+            if (size > 0 )
+            {
+                return header.next.element ;
+            }
+            else
+            {
+                if( enableErrorChecking )
+                {
+                    throw new NoSuchElementError( this + " first method failed, the memory is empty.") ;
+                }
+                else
+                {
+                    return null ;
+                }
+            }
+        }
+
+        /**
          * Go home in the memory, select the first element in the memory and remove all other elements. This method work only if the memory length is greater than 1.
          */
         public function home():*
@@ -336,6 +360,30 @@ package system.models
         }
         
         /**
+         * Returns the last element in memory.
+         * @return the last element in this list.
+         * @throws NoSuchElementError if this list is empty.
+         */
+        public function last():*
+        {
+            if ( size > 0 )
+            {
+                return header.previous.element ;
+            }
+            else
+            {
+                if( enableErrorChecking )
+                {
+                    throw new NoSuchElementError( this + " last method failed, the memory is empty.") ;
+                }
+                else
+                {
+                    return null ;
+                }
+            }
+        }
+        
+        /**
          * The internal header of this memory model.
          */
         protected var header:MemoryEntry ;
@@ -370,54 +418,6 @@ package system.models
             e.next.previous = e ;
             size ++ ;
             return e ;
-        }
-        
-        /**
-         * Returns the first element in memory.
-         * @return the first element in this list.
-         * @throws NoSuchElementError if this list is empty.
-         */
-        protected function first():*
-        {
-            if (size > 0 )
-            {
-                return header.next.element ;
-            }
-            else
-            {
-                if( enableErrorChecking )
-                {
-                    throw new NoSuchElementError( this + " first method failed, the memory is empty.") ;
-                }
-                else
-                {
-                    return null ;
-                }
-            }
-        }
-        
-        /**
-         * Returns the last element in memory.
-         * @return the last element in this list.
-         * @throws NoSuchElementError if this list is empty.
-         */
-        protected function last():*
-        {
-            if ( size > 0 )
-            {
-                return header.previous.element ;
-            }
-            else
-            {
-                if( enableErrorChecking )
-                {
-                    throw new NoSuchElementError( this + " last method failed, the memory is empty.") ;
-                }
-                else
-                {
-                    return null ;
-                }
-            }
         }
         
         /**
