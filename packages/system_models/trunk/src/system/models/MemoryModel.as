@@ -213,17 +213,15 @@ package system.models
                 {
                     _reduced = true ;
                     
-                    var oldies:Array = [] ;
-                    var old:* ;
+                    var old:* = last() ;
                     
+                    if ( old )
+                    {
+                        notifyBeforeChange( old ) ;
+                    }
+
                     while( pos != size )
                     {
-                        old = last() ;
-                        if ( old != null )
-                        {
-                            notifyBeforeChange( old ) ;
-                        }
-                        oldies.push( old ) ;
                         removeLast() ;
                     }
                     
@@ -236,13 +234,13 @@ package system.models
                         notifyChange( _current );
                     }
                     
-                    return oldies.length > 0 ? oldies : null ;
+                    return old ;
                 }
                 else
                 {
                     if( enableErrorChecking )
                     {
-                        throw new NoSuchElementError( this + " backTo failed, the length of the memory model must be greater than 1 element.");
+                        throw new RangeError( this + " backTo failed, the passed-in index '" + pos + "' is out of bounds (" + size + "." ) ;
                     }
                     else
                     {
