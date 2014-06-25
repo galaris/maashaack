@@ -209,7 +209,7 @@ package system.models.maps
          */
         public function get updated():Signaler
         {
-            return _removed ;
+            return _updated ;
         }
         
         /**
