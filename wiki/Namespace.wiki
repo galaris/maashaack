@@ -354,6 +354,26 @@ including the public namespace.
 
 No hack here, you just use your language to the fullest.
 
+=== Code reflection ===
+
+{{{
+package test
+{
+	public class ClassA
+	{
+                public function ClassA()
+		{
+		
+		    var ns:NameSpace = new NameSpace( "flash.utils" );
+		    var c:Class = ns::["ByteArray"];
+		
+		    var ba:* = new c();
+		}
+	}
+}
+}}}
+
+
 TODO (more to come)
 
  * customize MovieClip trick
