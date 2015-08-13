@@ -34,6 +34,24 @@ lower memory use. No matter how you spend this savings, you build a better app.
 </pre>
 
 
+=== Getting the AIR Runtime ===
+
+latest URL
+{{{
+https://get.adobe.com/air/
+https://get.adobe.com/air/otherversions/
+}}}
+
+versioned download
+{{{
+OSX
+http://airdownload.adobe.com/air/mac/download/18.0/AdobeAIR.dmg
+
+WIN
+http://airdownload.adobe.com/air/win/download/18.0/AdobeAIRInstaller.exe
+}}}
+
+
 === Getting the AIR SDK ===
 
 The "no brainer" version is to go on the [http://www.adobe.com/devnet/air/air-sdk-download.html Download Adobe AIR SDK] page<br>
