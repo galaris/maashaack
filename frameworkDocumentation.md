@@ -1,0 +1,1 @@
+&lt;wiki:gadget url="http://maashaack.googlecode.com/svn/gadgets/reference\_maashaack.xml" width="860" height="800" border="0" /&gt;
